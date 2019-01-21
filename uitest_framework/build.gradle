@@ -1,0 +1,66 @@
+apply plugin: 'com.android.library'
+
+apply plugin: 'maven'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion Integer.parseInt(pTargetSdkVersion)
+    buildToolsVersion pBuildToolsVersion
+
+
+    defaultConfig {
+        minSdkVersion pMinSdkVersion
+        targetSdkVersion pTargetSdkVersion
+        versionName "$pUiFrameworkMajor.$pUiFrameworkMinor.$pUiFrameworkBuild"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation "com.android.support:design:${pAndroidSupportVersion}"
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestImplementation 'com.agoda.kakao:kakao:1.4.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.uiautomator:uiautomator-v18:2.1.3'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}
+
+
+if (pPublish.toBoolean()) {
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                repository(url: "") {
+                    
+                }
+                pom.groupId = 'com.kaspersky.components'
+                pom.artifactId = ''
+                pom.version = ""
+            }
+        }
+    }
+    uploadArchives.dependsOn assemble
+} else {
+    Task uploadArchives
+}
+repositories {
+    mavenCentral()
+}
