@@ -1,5 +1,6 @@
 package com.kaspersky.uitest_framework
 
+import android.annotation.SuppressLint
 import android.annotation.TargetApi
 import android.app.UiAutomation
 import android.content.Context
@@ -82,6 +83,7 @@ fun enableAccessibility() {
 }
 
 
+@SuppressLint("WifiManagerLeak")
 fun setWiFiState(enable: Boolean) {
     val wifiManager = InstrumentationRegistry.getTargetContext().getSystemService(Context.WIFI_SERVICE) as WifiManager
     wifiManager.isWifiEnabled = enable
