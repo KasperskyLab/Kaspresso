@@ -1,8 +1,10 @@
 package com.kaspersky.uitest_framework
 
+import android.annotation.TargetApi
 import android.app.UiAutomation
 import android.content.Context
 import android.net.wifi.WifiManager
+import android.os.Build
 import android.support.test.InstrumentationRegistry
 import android.support.test.espresso.DataInteraction
 import android.view.View
@@ -66,6 +68,7 @@ fun clickOnPermissionDialog(clickCount: Int = 1) {
     }
 }
 
+@TargetApi(Build.VERSION_CODES.N)
 fun enableAccessibility() {
     val packageName = "com.kms.free"
     val className = "com.kaspersky.components.accessibility.KasperskyAccessibility"
@@ -77,6 +80,7 @@ fun enableAccessibility() {
         .close()
 
 }
+
 
 fun setWiFiState(enable: Boolean) {
     val wifiManager = InstrumentationRegistry.getTargetContext().getSystemService(Context.WIFI_SERVICE) as WifiManager
