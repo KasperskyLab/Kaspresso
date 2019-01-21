@@ -91,7 +91,7 @@ fun setWiFiState(enable: Boolean) {
 
 fun setWiFiAndMobileState(b: Boolean) {
     setWiFiState(b)
-    ServerClass.sTestSingleton.makeAdbRequest("shell svc data ${ if (b) {
+    ServerClass.makeAdbRequest("shell svc data ${ if (b) {
         Thread.sleep(5000)
         "enable"
     } else "disable" }")
@@ -105,7 +105,7 @@ fun silentlyRunAdbCommand(array: List<String>) {
         count -= 1
     }
     for (str in array) {
-        ServerClass.sTestSingleton.makeAdbRequest(str)
+        ServerClass.makeAdbRequest(str)
     }
     setWiFiState(enable = false)
 }

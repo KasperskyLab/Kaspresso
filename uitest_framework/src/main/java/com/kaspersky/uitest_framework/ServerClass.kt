@@ -4,15 +4,11 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import java.io.IOException
 
-class ServerClass {
+object ServerClass {
 
-    companion object {
-        var sTestSingleton = ServerClass()
-    }
+    private var testServer: ServerInterface
 
-    private lateinit var testServer: ServerInterface
-
-    private fun ServerClass() {
+    init {
         val httpClient = OkHttpClient.Builder()
         // add your other interceptors …
 
