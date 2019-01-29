@@ -54,17 +54,21 @@ fun KBaseView<Any>.isVisibleWithWait(timeout: Int = 10) {
 }
 
 
-
 fun clickOnPermissionDialog(clickCount: Int = 1) {
-    val GRANT_BUTTON_INDEX = 1
-    val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
-    val allowPermissions = device.findObject(UiSelector()
-        .clickable(true)
-        .checkable(false)
-        .index(GRANT_BUTTON_INDEX))
-    if (allowPermissions.exists()) {
-        repeat(clickCount) {
-            allowPermissions.click()
+    val PERMISSIONS_DIALOG_ALLOW_ID = "com.android.packageinstaller:id/permission_allow_button"
+
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
+        val allowPermissions = device.findObject(
+            UiSelector()
+                .clickable(true)
+                .checkable(false)
+                .resourceId(PERMISSIONS_DIALOG_ALLOW_ID)
+        )
+        if (allowPermissions.exists()) {
+            repeat(clickCount) {
+                allowPermissions.click()
+            }
         }
     }
 }
