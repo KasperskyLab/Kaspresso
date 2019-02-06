@@ -2,6 +2,7 @@ package com.kaspersky.uitest_framework
 
 import android.annotation.SuppressLint
 import android.annotation.TargetApi
+import android.app.Activity
 import android.app.UiAutomation
 import android.content.Context
 import android.net.wifi.WifiManager
@@ -14,6 +15,8 @@ import android.support.test.espresso.action.Press
 import android.support.test.espresso.assertion.ViewAssertions
 import android.support.test.espresso.matcher.ViewMatchers
 import android.support.test.espresso.matcher.ViewMatchers.isAssignableFrom
+import android.support.test.runner.lifecycle.ActivityLifecycleMonitorRegistry
+import android.support.test.runner.lifecycle.Stage
 import android.support.test.uiautomator.UiDevice
 import android.support.test.uiautomator.UiSelector
 import android.view.View
@@ -21,6 +24,7 @@ import android.widget.TextView
 import com.agoda.kakao.*
 import com.kaspersky.uitest_framework.matcher.CanScrollMatcher
 import com.kaspersky.uitest_framework.matcher.ScrollDirection
+import com.squareup.spoon.Spoon
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers
 
