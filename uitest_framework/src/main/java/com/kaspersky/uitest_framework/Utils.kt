@@ -24,6 +24,25 @@ import com.kaspersky.uitest_framework.matcher.ScrollDirection
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers
 
+fun makeScreenshot() {
+    val activityInstance = getActivityInstance()
+    if (activityInstance != null) {
+        Spoon.screenshot(activityInstance, "screen")
+    }
+}
+
+fun getActivityInstance(): Activity? {
+    var currentActivity: Activity? = null
+    InstrumentationRegistry.getInstrumentation().runOnMainSync {
+        val resumedActivities = ActivityLifecycleMonitorRegistry.getInstance().getActivitiesInStage(Stage.RESUMED)
+        for (act in resumedActivities) {
+            currentActivity = act
+            break
+        }
+    }
+    return currentActivity
+}
+
 fun KBaseView<Any>.clickWithWait(timeout: Int = 25) {
     var bool = true
     var tryCount = timeout
@@ -34,11 +53,13 @@ fun KBaseView<Any>.clickWithWait(timeout: Int = 25) {
             bool = false
         } catch (e: Exception) {
             if (tryCount <= 0) {
+                makeScreenshot()
                 throw e
             }
             Thread.sleep(500)
         }
     }
+    makeScreenshot()
 }
 
 fun KBaseView<Any>.isVisibleWithWait(timeout: Int = 10) {
@@ -51,12 +72,13 @@ fun KBaseView<Any>.isVisibleWithWait(timeout: Int = 10) {
             bool = false
         } catch (e: Exception) {
             if (tryCount <= 0) {
+                makeScreenshot()
                 throw e
             }
             Thread.sleep(500)
         }
     }
-
+    makeScreenshot()
 }
 
 
