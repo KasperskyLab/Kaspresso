@@ -59,6 +59,23 @@ fun KBaseView<Any>.isVisibleWithWait(timeout: Int = 10) {
 
 }
 
+fun BaseActions.clickWithWait(timeout: Int = 25) {
+    var bool = true
+    var tryCount = timeout
+    while (bool && tryCount > 0) {
+        try {
+            tryCount -= 1
+            click()
+            bool = false
+        } catch (e: Exception) {
+            if (tryCount <= 0) {
+                throw e
+            }
+            Thread.sleep(500)
+        }
+    }
+}
+
 
 fun clickOnPermissionDialog(clickCount: Int = 1) {
     val PERMISSIONS_DIALOG_ALLOW_ID = "com.android.packageinstaller:id/permission_allow_button"
