@@ -36,6 +36,10 @@ fun BaseActions.clickWithWait(timeout: Int = 25) {
     safeWrapTestMethod({ click() }, timeout)
 }
 
+fun TextViewAssertions.hasTextWithWait(text: String, timeout: Int = 25) {
+    safeWrapTestMethod({ hasText(text) }, timeout)
+}
+
 private fun safeWrapTestMethod(method: () -> Unit, timeout: Int) {
     var bool = true
     var tryCount = timeout
