@@ -25,47 +25,24 @@ import org.hamcrest.Matcher
 import org.hamcrest.Matchers
 
 fun KBaseView<Any>.clickWithWait(timeout: Int = 25) {
-    var bool = true
-    var tryCount = timeout
-    while (bool && tryCount > 0) {
-        try {
-            tryCount -= 1
-            click()
-            bool = false
-        } catch (e: Exception) {
-            if (tryCount <= 0) {
-                throw e
-            }
-            Thread.sleep(500)
-        }
-    }
+    safeWrapTestMethod({ click() }, timeout)
 }
 
 fun KBaseView<Any>.isVisibleWithWait(timeout: Int = 10) {
-    var bool = true
-    var tryCount = timeout
-    while (bool && tryCount > 0) {
-        try {
-            tryCount -= 1
-            isVisible()
-            bool = false
-        } catch (e: Exception) {
-            if (tryCount <= 0) {
-                throw e
-            }
-            Thread.sleep(500)
-        }
-    }
-
+    safeWrapTestMethod({ isVisible() }, timeout)
 }
 
 fun BaseActions.clickWithWait(timeout: Int = 25) {
+    safeWrapTestMethod({ click() }, timeout)
+}
+
+private fun safeWrapTestMethod(method: () -> Unit, timeout: Int) {
     var bool = true
     var tryCount = timeout
     while (bool && tryCount > 0) {
         try {
             tryCount -= 1
-            click()
+            method()
             bool = false
         } catch (e: Exception) {
             if (tryCount <= 0) {
