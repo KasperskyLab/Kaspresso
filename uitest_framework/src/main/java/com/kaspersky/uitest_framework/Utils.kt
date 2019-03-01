@@ -2,69 +2,102 @@ package com.kaspersky.uitest_framework
 
 import android.annotation.SuppressLint
 import android.annotation.TargetApi
+import android.app.Activity
 import android.app.UiAutomation
 import android.content.Context
 import android.net.wifi.WifiManager
 import android.os.Build
 import android.support.test.InstrumentationRegistry
-import android.support.test.espresso.DataInteraction
-import android.view.View
-import com.agoda.kakao.*
-import org.hamcrest.Matcher
-import android.support.test.espresso.UiController
-import android.support.test.espresso.ViewAction
+import android.support.test.espresso.*
+import android.support.test.espresso.action.GeneralLocation
+import android.support.test.espresso.action.GeneralSwipeAction
+import android.support.test.espresso.action.Press
+import android.support.test.espresso.assertion.ViewAssertions
+import android.support.test.espresso.matcher.ViewMatchers
 import android.support.test.espresso.matcher.ViewMatchers.isAssignableFrom
+import android.support.test.runner.lifecycle.ActivityLifecycleMonitorRegistry
+import android.support.test.runner.lifecycle.Stage
 import android.support.test.uiautomator.UiDevice
 import android.support.test.uiautomator.UiSelector
+import android.view.View
 import android.widget.TextView
+import com.agoda.kakao.*
+import com.kaspersky.uitest_framework.matcher.CanScrollMatcher
+import com.kaspersky.uitest_framework.matcher.ScrollDirection
+import com.squareup.spoon.Spoon
+import org.hamcrest.Matcher
+import org.hamcrest.Matchers
 
-fun KBaseView<Any>.clickWithWait(timeout: Int = 25) {
-    var bool = true
-    var tryCount = timeout
-    while (bool && tryCount > 0) {
-        try {
-            tryCount -= 1
-            click()
-            bool = false
-        } catch (e: Exception) {
-            if (tryCount <= 0) {
-                throw e
-            }
-            Thread.sleep(500)
+fun makeScreenshot() {
+    val activityInstance = getActivityInstance()
+    if (activityInstance != null) {
+        Spoon.screenshot(activityInstance, "screen")
+    }
+}
+
+fun getActivityInstance(): Activity? {
+    var currentActivity: Activity? = null
+    InstrumentationRegistry.getInstrumentation().runOnMainSync {
+        val resumedActivities = ActivityLifecycleMonitorRegistry.getInstance().getActivitiesInStage(Stage.RESUMED)
+        for (act in resumedActivities) {
+            currentActivity = act
+            break
         }
     }
+    return currentActivity
+}
+
+fun KBaseView<Any>.clickWithWait(timeout: Int = 25) {
+    safeWrapTestMethod({ click() }, timeout)
 }
 
 fun KBaseView<Any>.isVisibleWithWait(timeout: Int = 10) {
+    safeWrapTestMethod({ isVisible() }, timeout)
+}
+
+fun BaseActions.clickWithWait(timeout: Int = 25) {
+    safeWrapTestMethod({ click() }, timeout)
+}
+
+fun TextViewAssertions.hasTextWithWait(text: String, timeout: Int = 25) {
+    safeWrapTestMethod({ hasText(text) }, timeout)
+}
+
+private fun safeWrapTestMethod(method: () -> Unit, timeout: Int) {
     var bool = true
     var tryCount = timeout
     while (bool && tryCount > 0) {
         try {
             tryCount -= 1
-            isVisible()
+            method()
             bool = false
         } catch (e: Exception) {
             if (tryCount <= 0) {
+                makeScreenshot()
                 throw e
             }
             Thread.sleep(500)
         }
     }
-
+//    makeScreenshot()
 }
 
 
-
 fun clickOnPermissionDialog(clickCount: Int = 1) {
-    val GRANT_BUTTON_INDEX = 1
-    val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
-    val allowPermissions = device.findObject(UiSelector()
-        .clickable(true)
-        .checkable(false)
-        .index(GRANT_BUTTON_INDEX))
-    if (allowPermissions.exists()) {
-        repeat(clickCount) {
-            allowPermissions.click()
+    val PERMISSIONS_DIALOG_ALLOW_ID = "com.android.packageinstaller:id/permission_allow_button"
+
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
+        val allowPermissions = device.findObject(
+            UiSelector()
+                .clickable(true)
+                .checkable(false)
+                .resourceId(PERMISSIONS_DIALOG_ALLOW_ID)
+        )
+        if (allowPermissions.exists()) {
+            repeat(clickCount) {
+                allowPermissions.click()
+            }
         }
     }
 }
@@ -91,15 +124,17 @@ fun setWiFiState(enable: Boolean) {
 
 fun setWiFiAndMobileState(b: Boolean) {
     setWiFiState(b)
-    ServerClass.makeAdbRequest("shell svc data ${ if (b) {
-        Thread.sleep(5000)
-        "enable"
-    } else "disable" }")
+    ServerClass.makeAdbRequest(
+        "shell svc data ${if (b) {
+            Thread.sleep(5000)
+            "enable"
+        } else "disable"}"
+    )
 }
 
 fun silentlyRunAdbCommand(array: List<String>) {
     setWiFiState(enable = true)
-    var count = 50
+    var count = 20
     while (count != 0) {
         Thread.sleep(200)
         count -= 1
@@ -110,15 +145,17 @@ fun silentlyRunAdbCommand(array: List<String>) {
     setWiFiState(enable = false)
 }
 
-fun TextViewActions.getText() : String {
+fun TextViewActions.getText(): String {
     var stringHolder = "_"
     view.perform(object : ViewAction {
         override fun getConstraints(): Matcher<View> {
             return isAssignableFrom(TextView::class.java)
         }
+
         override fun getDescription(): String {
             return "getting text from a TextView"
         }
+
         override fun perform(uiController: UiController?, view: View?) {
             val tv = view as TextView
             stringHolder = tv.text.toString()
@@ -155,3 +192,86 @@ class KSwitch : KBaseView<KSwitch>, CheckableActions {
     constructor(parent: Matcher<View>, function: ViewBuilder.() -> Unit) : super(parent, function)
     constructor(parent: DataInteraction, function: ViewBuilder.() -> Unit) : super(parent, function)
 }
+
+/**
+ * Perform scroll actions to find view, that matches input builder
+ * @return view interaction for next interaction
+ */
+fun BaseActions.scrollToView(
+    direction: ScrollDirection = ScrollDirection.Up,
+    childBuilder: ViewBuilder.() -> Unit
+): ViewInteraction {
+    return scrollToView(
+        direction,
+        ViewBuilder().apply(childBuilder).getViewMatcher()
+    )
+}
+
+/**
+ * Scroll to find view, that matches input matcher
+ * @return view interaction for next interaction
+ */
+fun BaseActions.scrollToView(direction: ScrollDirection = ScrollDirection.Up, matcher: Matcher<View>): ViewInteraction {
+    while (true) {
+        try {
+            return Espresso.onView(matcher).check(
+                ViewAssertions.matches(ViewMatchers.isDisplayingAtLeast(90))
+            )
+        } catch (throwable: Throwable) {
+            view.check(ViewAssertions.matches(CanScrollMatcher(direction)))
+            val endCoordinates = when (direction) {
+                ScrollDirection.Up -> GeneralLocation.TOP_CENTER
+                ScrollDirection.Down -> GeneralLocation.BOTTOM_CENTER
+            }
+            val swipeBottom = GeneralSwipeAction(
+                PreciseSwipe,
+                GeneralLocation.CENTER,
+                endCoordinates,
+                Press.FINGER
+            )
+            act { swipeBottom }
+            //Wait for scroll end
+            Thread.sleep(1000L)
+        }
+    }
+}
+
+/**
+ * Scroll to find child view
+ * @return recycler view item of some registered type
+ */
+inline fun <reified T : KRecyclerItem<*>> KRecyclerView.scrollToChild(
+    direction: ScrollDirection = ScrollDirection.Up,
+    childMatcher: Matcher<View>
+): T {
+    val provideItem = itemTypes.getOrElse(T::class) {
+        throw IllegalStateException("${T::class.java.simpleName} did not register to KRecyclerView")
+    }.provideItem
+    scrollToView(
+        direction,
+        Matchers.allOf(
+            ViewMatchers.withParent(matcher),
+            childMatcher
+        )
+    )
+    return provideItem(ItemMatcher(matcher, childMatcher)) as T
+
+}
+
+
+/**
+ * Scroll to find child view
+ * @return recycler view item of some registered type
+ */
+inline fun <reified T : KRecyclerItem<*>> KRecyclerView.scrollToChild(
+    direction: ScrollDirection = ScrollDirection.Up,
+    childBuilder: ViewBuilder.() -> Unit
+): T {
+    val childMatcher = ViewBuilder().apply(childBuilder).getViewMatcher()
+    return scrollToChild(direction, childMatcher)
+
+}
+
+
+
+
