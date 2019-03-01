@@ -1,0 +1,3 @@
+package com.kaspersky.uitest_framework
+
+interface ScreensStorage

@@ -1,0 +1,3 @@
+package com.kaspersky.uitest_framework.pageobjects
+
+interface PageObject
