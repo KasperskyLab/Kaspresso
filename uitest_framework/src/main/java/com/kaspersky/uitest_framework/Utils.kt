@@ -79,7 +79,7 @@ private fun safeWrapTestMethod(method: () -> Unit, timeout: Int) {
             Thread.sleep(500)
         }
     }
-    makeScreenshot()
+//    makeScreenshot()
 }
 
 
@@ -134,7 +134,7 @@ fun setWiFiAndMobileState(b: Boolean) {
 
 fun silentlyRunAdbCommand(array: List<String>) {
     setWiFiState(enable = true)
-    var count = 50
+    var count = 20
     while (count != 0) {
         Thread.sleep(200)
         count -= 1
