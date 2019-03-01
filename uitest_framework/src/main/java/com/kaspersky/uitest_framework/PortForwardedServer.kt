@@ -9,10 +9,10 @@ object PortForwardedServer: ChatListener {
 
     private val chatConnection = P2PChatConnection.server(8500)
 
-    private val bgExecutor = Executors.newCachedThreadPool()
+    private val bgExecutor = Executors.newSingleThreadExecutor()
 
     fun sendCommand(command: String) {
-        chatConnection.connect(this)
+        bgExecutor.submit { chatConnection.connect(this) }
 
         val message = ChatMessage(System.currentTimeMillis(), command, true)
         bgExecutor.submit { chatConnection.sendMessage(message) }
