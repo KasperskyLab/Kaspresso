@@ -1,1 +1,1 @@
-include ':app', ':uitest_framework'
+include ':app', ':uitest_framework', ':desktop_app', ':command_handler', ':connector'
