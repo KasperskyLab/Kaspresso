@@ -23,7 +23,7 @@ object PortForwardedServer: ChatListener {
     }
 
     override fun onMessageSend(outcomeMessage: ChatMessage) {
-        chatConnection.disconnect()
+        bgExecutor.submit { chatConnection.disconnect() }
     }
 
     override fun onConnectionChanged(connected: Boolean) {
