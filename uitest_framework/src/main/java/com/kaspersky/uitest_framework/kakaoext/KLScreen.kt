@@ -1,4 +1,4 @@
-package com.kaspersky.uitest_framework.screens
+package com.kaspersky.uitest_framework.kakaoext
 
 import android.support.test.espresso.Espresso
 import android.support.test.espresso.ViewInteraction
@@ -6,9 +6,13 @@ import android.support.test.espresso.matcher.ViewMatchers
 import com.agoda.kakao.ScreenActions
 import com.agoda.kakao.ScreenMarker
 
+/**
+ * Created by egor.kurnikov on 01.03.2019
+ */
+
 @Suppress("UNCHECKED_CAST")
 @ScreenMarker
-abstract class KScreen<out T: KScreen<T>>: ScreenActions {
+abstract class KLScreen<out T: KLScreen<T>>: ScreenActions {
 
     abstract val layoutId: Int?
 

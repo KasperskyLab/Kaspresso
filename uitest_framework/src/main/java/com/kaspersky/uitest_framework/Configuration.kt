@@ -2,36 +2,30 @@ package com.kaspersky.uitest_framework
 
 import android.support.test.espresso.NoMatchingViewException
 import android.support.test.espresso.PerformException
-import java.util.concurrent.TimeUnit
+import com.kaspersky.uitest_framework.interception.ViewActionInterceptor
+import com.kaspersky.uitest_framework.interception.ViewAssertionInterceptor
+import com.kaspersky.uitest_framework.logger.DefaultUiTestLogger
+import com.kaspersky.uitest_framework.logger.UiTestLogger
+
+/**
+ * Created by egor.kurnikov on 01.03.2019
+ */
 
 object Configuration {
 
-    const val MAX_LAUNCH_TIME_MS = 10000L
+    val logger: UiTestLogger = DefaultUiTestLogger
 
-//    /**
-//     * global registry for [ActionInterceptor]'s
-//     */
-//    val actionInterceptors = mutableListOf<ActionInterceptor>()
-//
-//    /**
-//     * global registry for [AssertionInterceptor]'s
-//     */
-//    val assertionInterceptors = mutableListOf<AssertionInterceptor>()
+    val viewActionInterceptors: List<ViewActionInterceptor> = mutableListOf()
 
-    /**
-     * Changing this value will affect all subsequent actions/checks wait frequency
-     */
-    var waiterFrequencyMs: Long = 50L
+    val viewAssertionInterceptors: List<ViewAssertionInterceptor> = mutableListOf()
 
-    /**
-     * Changing this value will affect all subsequent actions/checks wait timeout
-     */
-    var waiterTimeoutMs: Long = TimeUnit.SECONDS.toMillis(2)
+    val enableFlakySafety: Boolean = true
 
-    /**
-     * Exceptions to be waited for; any unregistered exceptions will be propagated
-     */
-    var waiterAllowedExceptions = setOf(
+    const val attemptsTimeoutMs: Long = 2_000L
+
+    const val attemptsFrequencyMs: Long = 500L
+
+    val allowedExceptionsForAttempt: Set<Class<out Throwable>> = setOf(
             PerformException::class.java,
             NoMatchingViewException::class.java,
             AssertionError::class.java,

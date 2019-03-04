@@ -14,11 +14,21 @@ import android.support.test.runner.lifecycle.ActivityLifecycleMonitorRegistry
 import android.support.test.runner.lifecycle.Stage
 import android.support.test.uiautomator.*
 import com.agoda.kakao.KView
-import com.kaspersky.uitest_framework.viewactions.OrientationChangeAction
+import com.kaspersky.uitest_framework.attempt.attempt
+import com.kaspersky.uitest_framework.kakaoext.KLKeyboard
+import com.kaspersky.uitest_framework.util.CHROME_PACKAGE_NAME
+import com.kaspersky.uitest_framework.util.MAX_LAUNCH_TIME_MS
+import com.kaspersky.uitest_framework.util.PERMISSION_ALLOW_BUTTON_ID
+import com.kaspersky.uitest_framework.util.PERMISSION_DENY_BUTTON_ID
+import com.kaspersky.uitest_framework.espressoext.viewactions.OrientationChangeAction
 import junit.framework.Assert.assertTrue
 import org.hamcrest.CoreMatchers
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Assert
+
+/**
+ * Created by egor.kurnikov on 01.03.2019
+ */
 
 object Device {
 
@@ -30,11 +40,11 @@ object Device {
     private val rootElement: KView
         get() = KView { ViewMatchers.isRoot() }
 
-//    val keyboard = KeyboardElement()
+    val keyboard = KLKeyboard()
 
-    fun rotate() = waitFor { OrientationChangeAction.toggle(getResumedActivity()) }
+    fun rotate() = attempt { OrientationChangeAction.toggle(getResumedActivity()) }
 
-    fun handlePermissionReqiest(shouldAllowPermissions: Boolean) {
+    fun handlePermissionRequest(shouldAllowPermissions: Boolean) {
         try {
             val btnSelector = UiSelector()
                     .clickable(true)
@@ -57,7 +67,7 @@ object Device {
     }
 
     fun waitForLauncher(
-            timeout: Long = Configuration.MAX_LAUNCH_TIME_MS,
+            timeout: Long = MAX_LAUNCH_TIME_MS,
             launcherPackageName: String = mDevice.launcherPackageName
     ) {
         assertThat(mDevice.launcherPackageName, CoreMatchers.notNullValue())
@@ -66,7 +76,7 @@ object Device {
     }
 
     fun waitForAppLaunchAndReady(
-            timeout: Long = Configuration.MAX_LAUNCH_TIME_MS,
+            timeout: Long = MAX_LAUNCH_TIME_MS,
             packageName: String = context.packageName
     ) {
         assertTrue(wait(Until.hasObject(By.pkg(packageName).depth(0)), timeout))
