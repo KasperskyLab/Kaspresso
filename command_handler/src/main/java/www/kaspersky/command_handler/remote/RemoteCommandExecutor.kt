@@ -82,12 +82,14 @@ class RemoteCommandExecutor private constructor(
     override fun disconnect() {
         if (!connected) return
         connected = false
-        socket.close()
+        println("$connectAsServer")
+        if (connectAsServer) {
+            socket.close()
+        }
     }
 
     private fun startListenerThread() {
-        val thread = object : Thread() {
-            override fun run() {
+        val thread = Thread {
                 try {
                     println("Listen thread started!")
                     while (connected) {
@@ -100,10 +102,8 @@ class RemoteCommandExecutor private constructor(
                         }
                     }
                 } catch (e: Exception) {
-                    onListenThreadException(e)
+                    //
                 }
-
-            }
         }
         thread.start()
     }
@@ -162,9 +162,9 @@ class RemoteCommandExecutor private constructor(
 
     @Throws(IOException::class)
     private fun connectAsServer() {
+        println("connectAsServer()")
         val serverSocket = ServerSocket(port)
         socket = serverSocket.accept()
-        println("Connected as server. Creating streams...")
         createStreams(socket)
         startListenerThread()
     }
@@ -172,7 +172,6 @@ class RemoteCommandExecutor private constructor(
     @Throws(IOException::class)
     private fun connectAsClient() {
         socket = Socket(ip, port)
-        println("Connected as client. Creating streams...")
         createStreams(socket)
         startListenerThread()
     }

@@ -7,9 +7,23 @@ import java.util.concurrent.Executors
 
 object PortForwardedServer: ChatListener {
 
+    private const val DISCONNECT_MESSAGE = "disconnect"
+
     private val chatConnection = P2PChatConnection.server(8500)
 
     private val bgExecutor = Executors.newSingleThreadExecutor()
+
+    fun startServer() {
+        bgExecutor.submit { chatConnection.connect(this) }
+    }
+
+    fun stopServer() {
+        bgExecutor.submit {
+            val message = ChatMessage(System.currentTimeMillis(), DISCONNECT_MESSAGE, true)
+            chatConnection.sendMessage(message)
+            chatConnection.disconnect()
+        }
+    }
 
     fun sendCommand(command: String) {
         bgExecutor.submit { chatConnection.connect(this) }

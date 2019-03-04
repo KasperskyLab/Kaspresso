@@ -38,9 +38,9 @@ class P2PChatConnection {
 
     @Throws(IOException::class)
     fun disconnect() {
-        remoteCommandExecutor.disconnect()
-        chatCommandHandler.chatListener!!.onConnectionChanged(false)
+        chatCommandHandler.chatListener?.onConnectionChanged(false)
         chatCommandHandler.chatListener = null
+        remoteCommandExecutor.disconnect()
     }
 
     fun isConnected() = remoteCommandExecutor.isConnected()

