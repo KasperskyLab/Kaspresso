@@ -48,7 +48,6 @@ class RemoteCommandExecutor private constructor(
 
     @Throws(IOException::class)
     override fun connect() {
-        println("Try to connect : 'asServer' = $connectAsServer")
         if (connectAsServer) {
             connectAsServer()
         } else {
