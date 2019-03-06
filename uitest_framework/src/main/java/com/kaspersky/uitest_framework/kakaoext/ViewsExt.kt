@@ -1,31 +1,36 @@
 package com.kaspersky.uitest_framework.kakaoext
 
-import android.support.test.espresso.UiController
-import android.support.test.espresso.ViewAction
-import android.support.test.espresso.matcher.ViewMatchers.isAssignableFrom
-import android.view.View
-import android.widget.TextView
-import com.kaspersky.uitest_framework.kakao.TextViewActions
+import com.kaspersky.uitest_framework.Configuration
+import com.kaspersky.uitest_framework.device.Device
+import com.kaspersky.uitest_framework.kakao.KBaseView
+import java.util.concurrent.TimeUnit
 
 /**
- * Created by egor.kurnikov on 04.03.2019
+ * Created by egor.kurnikov on 06.03.2019
  */
 
-fun TextViewActions.getText() : String {
+fun <T : KBaseView<Any>> T.attempt(
+        timeoutMs: Long = Configuration.attemptsTimeoutMs,
+        attemptsFrequencyMs: Long = Configuration.attemptsFrequencyMs,
+        allowedExceptions: Set<Class<out Throwable>> = Configuration.allowedExceptionsForAttempt,
+        action: T.() -> Unit
+) {
+    Device.attempt(
+            timeoutMs,
+            attemptsFrequencyMs,
+            allowedExceptions
+    ) {
+        action.invoke(this)
+    }
+}
 
-    var stringHolder = "_"
-
-    view.perform(object : ViewAction {
-
-        override fun getConstraints() = isAssignableFrom(TextView::class.java)
-
-        override fun getDescription() = "getting text from a TextView"
-
-        override fun perform(uiController: UiController?, view: View?) {
-            val tv = view as TextView
-            stringHolder = tv.text.toString()
-        }
-    })
-
-    return stringHolder
+fun <T : KBaseView<Any>> T.attempt(
+        timeoutSec: Long,
+        action: T.() -> Unit
+) {
+    Device.attempt(
+            TimeUnit.SECONDS.toMillis(timeoutSec)
+    ) {
+        action.invoke(this)
+    }
 }

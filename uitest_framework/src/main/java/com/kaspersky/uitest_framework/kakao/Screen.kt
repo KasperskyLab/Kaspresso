@@ -1,20 +1,17 @@
-package com.kaspersky.uitest_framework.kakaoext
+package com.kaspersky.uitest_framework.kakao
 
 import android.support.test.espresso.Espresso
 import android.support.test.espresso.matcher.ViewMatchers
 import com.agoda.kakao.ScreenMarker
-import com.kaspersky.uitest_framework.kakao.ScreenActions
 import com.kaspersky.uitest_framework.kakao.dispatchers.ViewDispatcher
 
 /**
- * Created by egor.kurnikov on 01.03.2019
+ * Created by egor.kurnikov on 05.03.2019
  */
 
 @Suppress("UNCHECKED_CAST")
 @ScreenMarker
-abstract class KLScreen<out T: KLScreen<T>>: ScreenActions {
-
-    abstract val layoutId: Int?
+abstract class Screen<out T: Screen<T>>: ScreenActions {
 
     override val view: ViewDispatcher = ViewDispatcher(Espresso.onView(ViewMatchers.isRoot()))
 

@@ -21,7 +21,5 @@ abstract class TestCase{
         actions.invoke()
     }
 
-    open fun before() {}
-
-    open fun after() {}
+    interface ScreensStorage
 }

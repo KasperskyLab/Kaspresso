@@ -36,10 +36,6 @@ import kotlin.reflect.KClass
 open class KBaseView<out T> : BaseActions, BaseAssertions {
     override val view: ViewDispatcher
 
-    protected constructor(view: ViewDispatcher) {
-        this.view = view
-    }
-
     /**
      * Constructs view class with view interaction from given ViewBuilder
      *

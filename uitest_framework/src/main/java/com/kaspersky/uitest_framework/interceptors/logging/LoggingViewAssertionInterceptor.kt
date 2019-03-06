@@ -1,10 +1,10 @@
-package com.kaspersky.uitest_framework.interception.logging
+package com.kaspersky.uitest_framework.interceptors.logging
 
 import android.support.test.espresso.NoMatchingViewException
 import android.support.test.espresso.ViewAssertion
 import android.support.test.espresso.assertion.describe
 import android.view.View
-import com.kaspersky.uitest_framework.interception.ViewAssertionInterceptor
+import com.kaspersky.uitest_framework.kakao.interceptors.ViewAssertionInterceptor
 import com.kaspersky.uitest_framework.logger.UiTestLogger
 import com.kaspersky.uitest_framework.util.describe
 

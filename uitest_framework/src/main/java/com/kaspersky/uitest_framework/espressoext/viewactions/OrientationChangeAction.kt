@@ -20,13 +20,14 @@ class OrientationChangeAction(
 
     companion object {
 
-        fun toggle(activity: Activity): ViewAction = OrientationChangeAction(activity)
+        fun toggle(activity: Activity): ViewAction =
+                OrientationChangeAction(activity)
 
-//        fun orientationLandscape(): ViewAction =
-//                OrientationChangeAction(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE)
-//
-//        fun orientationPortrait(): ViewAction =
-//                OrientationChangeAction(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
+        fun orientationLandscape(activity: Activity): ViewAction =
+                OrientationChangeAction(activity, ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE)
+
+        fun orientationPortrait(activity: Activity): ViewAction =
+                OrientationChangeAction(activity, ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
     }
 
     override fun getConstraints(): Matcher<View> = ViewMatchers.isRoot()
@@ -53,9 +54,16 @@ class OrientationChangeAction(
         val currentOrientation = activity.resources.configuration.orientation
 
         return when (currentOrientation) {
-            Configuration.ORIENTATION_PORTRAIT -> ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
-            Configuration.ORIENTATION_LANDSCAPE -> ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
-            else -> throw IllegalStateException("illegal orientation: $currentOrientation")
+
+            Configuration.ORIENTATION_PORTRAIT -> {
+                ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+            }
+            Configuration.ORIENTATION_LANDSCAPE -> {
+                ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+            }
+            else -> {
+                throw IllegalStateException("illegal orientation: $currentOrientation")
+            }
         }
     }
 }
