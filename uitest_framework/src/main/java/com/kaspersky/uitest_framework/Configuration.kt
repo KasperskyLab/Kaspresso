@@ -5,7 +5,7 @@ import android.support.test.espresso.PerformException
 import com.kaspersky.uitest_framework.interceptors.flakysafety.FlakySafeExecutingInterceptor
 import com.kaspersky.uitest_framework.interceptors.logging.LoggingViewActionInterceptor
 import com.kaspersky.uitest_framework.interceptors.logging.LoggingViewAssertionInterceptor
-import com.kaspersky.uitest_framework.kakao.InterceptorsHolder
+import com.kaspersky.uitest_framework.kakao.interceptors.InterceptorsHolder
 import com.kaspersky.uitest_framework.logger.DefaultUiTestLogger
 import com.kaspersky.uitest_framework.logger.UiTestLogger
 

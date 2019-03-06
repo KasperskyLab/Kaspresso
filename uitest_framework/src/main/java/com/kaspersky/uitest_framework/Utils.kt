@@ -7,9 +7,7 @@ import android.content.Context
 import android.net.wifi.WifiManager
 import android.os.Build
 import android.support.test.InstrumentationRegistry
-import android.support.test.espresso.DataInteraction
 import android.view.View
-import com.agoda.kakao.*
 import org.hamcrest.Matcher
 import android.support.test.espresso.UiController
 import android.support.test.espresso.ViewAction
@@ -17,6 +15,11 @@ import android.support.test.espresso.matcher.ViewMatchers.isAssignableFrom
 import android.support.test.uiautomator.UiDevice
 import android.support.test.uiautomator.UiSelector
 import android.widget.TextView
+import com.kaspersky.uitest_framework.kakao.check.CheckableActions
+import com.kaspersky.uitest_framework.kakao.common.builders.ViewBuilder
+import com.kaspersky.uitest_framework.kakao.common.views.KBaseView
+import com.kaspersky.uitest_framework.kakao.dispatchers.DataDispatcher
+import com.kaspersky.uitest_framework.kakao.text.TextViewActions
 
 fun KBaseView<Any>.clickWithWait(timeout: Int = 25) {
     var bool = true
@@ -157,5 +160,5 @@ fun TextViewActions.getText() : String {
 class KSwitch : KBaseView<KSwitch>, CheckableActions {
     constructor(function: ViewBuilder.() -> Unit) : super(function)
     constructor(parent: Matcher<View>, function: ViewBuilder.() -> Unit) : super(parent, function)
-    constructor(parent: DataInteraction, function: ViewBuilder.() -> Unit) : super(parent, function)
+    constructor(parent: DataDispatcher, function: ViewBuilder.() -> Unit) : super(parent, function)
 }

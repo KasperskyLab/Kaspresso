@@ -1,4 +1,4 @@
-package com.kaspersky.uitest_framework.kakao
+package com.kaspersky.uitest_framework.kakao.interceptors
 
 import com.kaspersky.uitest_framework.kakao.interceptors.*
 

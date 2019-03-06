@@ -4,7 +4,7 @@ import android.support.annotation.CheckResult
 import android.support.test.espresso.DataInteraction
 import android.support.test.espresso.ViewAssertion
 import android.view.View
-import com.kaspersky.uitest_framework.kakao.InterceptorsHolder
+import com.kaspersky.uitest_framework.kakao.interceptors.InterceptorsHolder
 import com.kaspersky.uitest_framework.kakao.proxy.MatcherProxy
 import org.hamcrest.Matcher
 import javax.annotation.CheckReturnValue

@@ -2,7 +2,7 @@ package com.kaspersky.uitest_framework.kakaoext
 
 import com.kaspersky.uitest_framework.Configuration
 import com.kaspersky.uitest_framework.device.Device
-import com.kaspersky.uitest_framework.kakao.KBaseView
+import com.kaspersky.uitest_framework.kakao.common.views.KBaseView
 import java.util.concurrent.TimeUnit
 
 /**

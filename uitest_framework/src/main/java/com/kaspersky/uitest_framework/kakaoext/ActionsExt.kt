@@ -5,7 +5,7 @@ import android.support.test.espresso.ViewAction
 import android.support.test.espresso.matcher.ViewMatchers.isAssignableFrom
 import android.view.View
 import android.widget.TextView
-import com.kaspersky.uitest_framework.kakao.TextViewActions
+import com.kaspersky.uitest_framework.kakao.text.TextViewActions
 
 /**
  * Created by egor.kurnikov on 04.03.2019

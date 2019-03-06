@@ -5,13 +5,13 @@ import android.support.test.InstrumentationRegistry
 import android.support.test.espresso.Espresso
 import android.support.test.espresso.matcher.ViewMatchers
 import android.support.test.uiautomator.*
-import com.agoda.kakao.KView
 import com.kaspersky.uitest_framework.Configuration
 import com.kaspersky.uitest_framework.kakaoext.KLKeyboard
 import com.kaspersky.uitest_framework.util.PERMISSION_ALLOW_BUTTON_ID
 import com.kaspersky.uitest_framework.util.PERMISSION_DENY_BUTTON_ID
 import com.kaspersky.uitest_framework.espressoext.viewactions.OrientationChangeAction
-import com.kaspersky.uitest_framework.kakao.InterceptorsHolder
+import com.kaspersky.uitest_framework.kakao.interceptors.InterceptorsHolder
+import com.kaspersky.uitest_framework.kakao.common.views.KView
 import com.kaspersky.uitest_framework.kakao.dispatchers.ViewDispatcher
 import com.kaspersky.uitest_framework.kakao.proxy.ViewActionProxy
 

@@ -39,7 +39,7 @@ dependencies {
     implementation 'com.android.support.test.espresso:espresso-contrib:3.0.2'
     implementation 'com.android.support.test.espresso:espresso-web:3.0.2'
     implementation 'com.android.support.test.espresso:espresso-intents:3.0.2'
-    implementation 'com.agoda.kakao:kakao:1.4.0'
+//    implementation 'com.agoda.kakao:kakao:2.0.0'
     implementation 'com.squareup.retrofit2:retrofit:2.5.0'
     implementation 'com.android.support.test:runner:1.0.2'
     implementation 'com.android.support.test.uiautomator:uiautomator-v18:2.1.3'

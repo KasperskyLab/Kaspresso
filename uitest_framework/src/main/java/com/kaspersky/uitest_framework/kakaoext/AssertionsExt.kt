@@ -1,6 +1,6 @@
 package com.kaspersky.uitest_framework.kakaoext
 
-import com.kaspersky.uitest_framework.kakao.BaseAssertions
+import com.kaspersky.uitest_framework.kakao.common.assertions.BaseAssertions
 import java.lang.Exception
 
 /**

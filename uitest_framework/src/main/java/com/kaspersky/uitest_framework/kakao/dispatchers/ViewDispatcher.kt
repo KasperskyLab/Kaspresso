@@ -2,7 +2,7 @@ package com.kaspersky.uitest_framework.kakao.dispatchers
 
 import android.support.test.espresso.*
 import android.view.View
-import com.kaspersky.uitest_framework.kakao.InterceptorsHolder
+import com.kaspersky.uitest_framework.kakao.interceptors.InterceptorsHolder
 import com.kaspersky.uitest_framework.kakao.proxy.FailureHandlerProxy
 import com.kaspersky.uitest_framework.kakao.proxy.MatcherProxy
 import com.kaspersky.uitest_framework.kakao.proxy.ViewActionProxy
