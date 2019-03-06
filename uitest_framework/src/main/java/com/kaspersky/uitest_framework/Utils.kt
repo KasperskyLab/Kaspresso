@@ -63,14 +63,18 @@ fun TextViewAssertions.hasTextWithWait(text: String, timeout: Int = 25) {
     safeWrapTestMethod({ hasText(text) }, timeout)
 }
 
+fun TextViewAssertions.containsTextWithWait(text: String, timeout: Int = 25) {
+    safeWrapTestMethod({ containsText(text) }, timeout)
+}
+
 private fun safeWrapTestMethod(method: () -> Unit, timeout: Int) {
-    var bool = true
+    var succeed = false
     var tryCount = timeout
-    while (bool && tryCount > 0) {
+    while (!succeed && tryCount > 0) {
         try {
             tryCount -= 1
             method()
-            bool = false
+            succeed = true
         } catch (e: Exception) {
             if (tryCount <= 0) {
                 makeScreenshot()
@@ -115,6 +119,15 @@ fun enableAccessibility() {
 
 }
 
+@TargetApi(Build.VERSION_CODES.N)
+fun disableAccessibility() {
+    val string = "enabled_accessibility_services"
+    val cmd = "settings put secure $string ' '"
+    InstrumentationRegistry.getInstrumentation()
+        .getUiAutomation(UiAutomation.FLAG_DONT_SUPPRESS_ACCESSIBILITY_SERVICES)
+        .executeShellCommand(cmd)
+        .close()
+}
 
 @SuppressLint("WifiManagerLeak")
 fun setWiFiState(enable: Boolean) {
