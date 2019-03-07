@@ -3,10 +3,6 @@ package com.kaspersky.uitest_framework.testcase
 import com.kaspersky.uitest_framework.Configuration
 import com.kaspersky.uitest_framework.logger.UiTestLogger
 
-/**
- * Created by egor.kurnikov on 03.03.2019
- */
-
 abstract class TestCase{
 
     private val logger: UiTestLogger = Configuration.logger

@@ -6,8 +6,8 @@ import android.view.View
 import android.support.test.espresso.Root
 import android.support.test.espresso.assertion.ViewAssertions
 import android.support.test.espresso.matcher.RootMatchers
-import com.kaspersky.uitest_framework.kakao.dispatchers.DataDispatcher
-import com.kaspersky.uitest_framework.kakao.dispatchers.ViewDispatcher
+import com.kaspersky.uitest_framework.kakao.delegates.DataInteractionDelegate
+import com.kaspersky.uitest_framework.kakao.delegates.ViewInteractionDelegate
 import com.kaspersky.uitest_framework.kakao.common.KakaoDslMarker
 import com.kaspersky.uitest_framework.kakao.common.actions.BaseActions
 import com.kaspersky.uitest_framework.kakao.common.assertions.BaseAssertions
@@ -27,7 +27,7 @@ import org.hamcrest.Matchers
 @Suppress("UNCHECKED_CAST")
 @KakaoDslMarker
 open class KBaseView<out T> : BaseActions, BaseAssertions {
-    override val view: ViewDispatcher
+    override val view: ViewInteractionDelegate
     override var root: Matcher<Root> = RootMatchers.DEFAULT
 
     /**
@@ -57,12 +57,12 @@ open class KBaseView<out T> : BaseActions, BaseAssertions {
     /**
      * Constructs view class with parent and view interaction from given ViewBuilder
      *
-     * @param parent DataDispatcher that will be used as parent to ViewBuilder
+     * @param parent DataInteractionDelegate that will be used as parent to ViewBuilder
      * @param function ViewBuilder which will result in view's interaction
      *
      * @see ViewBuilder
      */
-    constructor(parent: DataDispatcher, function: ViewBuilder.() -> Unit) {
+    constructor(parent: DataInteractionDelegate, function: ViewBuilder.() -> Unit) {
         view = parent.onChildView(ViewBuilder().apply(function).getViewMatcher())
                 .check(ViewAssertions.matches(Matchers.anything()))
     }

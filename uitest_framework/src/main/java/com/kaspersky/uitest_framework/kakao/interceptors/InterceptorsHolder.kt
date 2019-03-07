@@ -1,11 +1,5 @@
 package com.kaspersky.uitest_framework.kakao.interceptors
 
-import com.kaspersky.uitest_framework.kakao.interceptors.*
-
-/**
- * Created by egor.kurnikov on 06.03.2019
- */
-
 object InterceptorsHolder {
 
     val viewActionInterceptors: ArrayList<ViewActionInterceptor> = arrayListOf()

@@ -18,7 +18,7 @@ import android.widget.TextView
 import com.kaspersky.uitest_framework.kakao.check.CheckableActions
 import com.kaspersky.uitest_framework.kakao.common.builders.ViewBuilder
 import com.kaspersky.uitest_framework.kakao.common.views.KBaseView
-import com.kaspersky.uitest_framework.kakao.dispatchers.DataDispatcher
+import com.kaspersky.uitest_framework.kakao.delegates.DataInteractionDelegate
 import com.kaspersky.uitest_framework.kakao.text.TextViewActions
 
 fun KBaseView<Any>.clickWithWait(timeout: Int = 25) {
@@ -55,7 +55,6 @@ fun KBaseView<Any>.isVisibleWithWait(timeout: Int = 10) {
     }
 
 }
-
 
 fun clickOnPermissionDialog(clickCount: Int = 1) {
     val PERMISSIONS_DIALOG_ALLOW_ID = "com.android.packageinstaller:id/permission_allow_button"
@@ -160,5 +159,5 @@ fun TextViewActions.getText() : String {
 class KSwitch : KBaseView<KSwitch>, CheckableActions {
     constructor(function: ViewBuilder.() -> Unit) : super(function)
     constructor(parent: Matcher<View>, function: ViewBuilder.() -> Unit) : super(parent, function)
-    constructor(parent: DataDispatcher, function: ViewBuilder.() -> Unit) : super(parent, function)
+    constructor(parent: DataInteractionDelegate, function: ViewBuilder.() -> Unit) : super(parent, function)
 }

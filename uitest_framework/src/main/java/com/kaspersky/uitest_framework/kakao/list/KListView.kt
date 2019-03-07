@@ -6,8 +6,8 @@ import android.view.View
 import android.support.test.espresso.Espresso
 import android.support.test.espresso.Root
 import android.support.test.espresso.matcher.RootMatchers
-import com.kaspersky.uitest_framework.kakao.dispatchers.DataDispatcher
-import com.kaspersky.uitest_framework.kakao.dispatchers.ViewDispatcher
+import com.kaspersky.uitest_framework.kakao.delegates.DataInteractionDelegate
+import com.kaspersky.uitest_framework.kakao.delegates.ViewInteractionDelegate
 import com.kaspersky.uitest_framework.kakao.common.KakaoDslMarker
 import com.kaspersky.uitest_framework.kakao.common.assertions.BaseAssertions
 import com.kaspersky.uitest_framework.kakao.common.builders.ViewBuilder
@@ -29,7 +29,7 @@ class KListView : ScrollViewActions, BaseAssertions, ListViewAdapterAssertions {
     val matcher: Matcher<View>
     val itemTypes: Map<KClass<out KAdapterItem<*>>, KAdapterItemType<KAdapterItem<*>>>
 
-    override val view: ViewDispatcher
+    override val view: ViewInteractionDelegate
     override var root: Matcher<Root> = RootMatchers.DEFAULT
 
     /**
@@ -65,16 +65,16 @@ class KListView : ScrollViewActions, BaseAssertions, ListViewAdapterAssertions {
     /**
      * Constructs view class with parent and view interaction from given ViewBuilder
      *
-     * @param parent DataDispatcher that will be used as parent to ViewBuilder
+     * @param parent DataInteractionDelegate that will be used as parent to ViewBuilder
      * @param builder ViewBuilder which will result in view's interaction
      * @param itemTypeBuilder Lambda with receiver where you pass your item providers
      *
      * @see ViewBuilder
      */
     @Suppress("UNCHECKED_CAST")
-    constructor(parent: DataDispatcher, builder: ViewBuilder.() -> Unit,
+    constructor(parent: DataInteractionDelegate, builder: ViewBuilder.() -> Unit,
                 itemTypeBuilder: KAdapterItemTypeBuilder.() -> Unit) {
-        val makeTargetMatcher = DataDispatcher::class.java.getDeclaredMethod("makeTargetMatcher")
+        val makeTargetMatcher = DataInteractionDelegate::class.java.getDeclaredMethod("makeTargetMatcher")
         val parentMatcher = makeTargetMatcher.invoke(parent)
 
         val vb = ViewBuilder().apply {
@@ -104,7 +104,7 @@ class KListView : ScrollViewActions, BaseAssertions, ListViewAdapterAssertions {
                 .inAdapterView(matcher)
                 .atPosition(position)
 
-        function(provideItem(DataDispatcher(interaction)) as T)
+        function(provideItem(DataInteractionDelegate(interaction)) as T)
     }
 
     /**
@@ -155,7 +155,7 @@ class KListView : ScrollViewActions, BaseAssertions, ListViewAdapterAssertions {
                 .inRoot(root)
                 .inAdapterView(matcher)
 
-        return provideItem(DataDispatcher(interaction)) as T
+        return provideItem(DataInteractionDelegate(interaction)) as T
     }
 
     /**

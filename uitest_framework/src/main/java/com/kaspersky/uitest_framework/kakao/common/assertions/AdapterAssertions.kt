@@ -2,7 +2,7 @@
 
 package com.kaspersky.uitest_framework.kakao.common.assertions
 
-import com.kaspersky.uitest_framework.kakao.dispatchers.ViewDispatcher
+import com.kaspersky.uitest_framework.kakao.delegates.ViewInteractionDelegate
 
 /**
  * Provides assertions for view with adapters
@@ -10,5 +10,5 @@ import com.kaspersky.uitest_framework.kakao.dispatchers.ViewDispatcher
  * @see RecyclerAdapterAssertions
  */
 interface AdapterAssertions {
-    val view: ViewDispatcher
+    val view: ViewInteractionDelegate
 }

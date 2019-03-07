@@ -9,10 +9,6 @@ import android.support.test.runner.lifecycle.Stage
 import org.hamcrest.CoreMatchers
 import org.junit.Assert
 
-/**
- * Created by egor.kurnikov on 06.03.2019
- */
-
 class ActivitiesManager {
 
     val isMainThread: Boolean

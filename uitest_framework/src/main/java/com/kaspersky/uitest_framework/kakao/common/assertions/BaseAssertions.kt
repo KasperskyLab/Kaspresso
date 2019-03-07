@@ -7,7 +7,7 @@ import android.support.test.espresso.Root
 import android.support.test.espresso.ViewAssertion
 import android.support.test.espresso.assertion.ViewAssertions
 import android.support.test.espresso.matcher.ViewMatchers
-import com.kaspersky.uitest_framework.kakao.dispatchers.ViewDispatcher
+import com.kaspersky.uitest_framework.kakao.delegates.ViewInteractionDelegate
 import com.kaspersky.uitest_framework.kakao.common.builders.RootBuilder
 import com.kaspersky.uitest_framework.kakao.common.builders.ViewBuilder
 import com.kaspersky.uitest_framework.kakao.common.matchers.BackgroundColorMatcher
@@ -26,7 +26,7 @@ import org.hamcrest.Matchers
  * @see ImageViewAssertions
  */
 interface BaseAssertions {
-    val view: ViewDispatcher
+    val view: ViewInteractionDelegate
     var root: Matcher<Root>
 
     /**

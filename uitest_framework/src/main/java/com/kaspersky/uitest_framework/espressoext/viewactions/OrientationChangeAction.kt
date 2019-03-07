@@ -9,10 +9,6 @@ import android.support.test.espresso.matcher.ViewMatchers
 import android.view.View
 import org.hamcrest.Matcher
 
-/**
- * Created by egor.kurnikov on 01.03.2019
- */
-
 class OrientationChangeAction(
         private val activity: Activity,
         private val orientation: Int? = null

@@ -13,10 +13,6 @@ import junit.framework.Assert
 import org.hamcrest.CoreMatchers
 import org.hamcrest.MatcherAssert
 
-/**
- * Created by egor.kurnikov on 06.03.2019
- */
-
 class AppsManager(
     private val device: UiDevice,
     private val contextGetter: () -> Context

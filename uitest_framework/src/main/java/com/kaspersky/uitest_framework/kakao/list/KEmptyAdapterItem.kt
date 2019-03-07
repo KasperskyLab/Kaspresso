@@ -2,7 +2,7 @@
 
 package com.kaspersky.uitest_framework.kakao.list
 
-import com.kaspersky.uitest_framework.kakao.dispatchers.DataDispatcher
+import com.kaspersky.uitest_framework.kakao.delegates.DataInteractionDelegate
 
 /**
  * Empty implementation of KAdapterItem
@@ -12,4 +12,4 @@ import com.kaspersky.uitest_framework.kakao.dispatchers.DataDispatcher
  * @param parent Matcher of the root view of adapter item
  * @see KAdapterItem
  */
-class KEmptyAdapterItem(parent: DataDispatcher) : KAdapterItem<KEmptyAdapterItem>(parent)
+class KEmptyAdapterItem(parent: DataInteractionDelegate) : KAdapterItem<KEmptyAdapterItem>(parent)

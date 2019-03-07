@@ -10,7 +10,7 @@ import android.support.annotation.DrawableRes
 import android.support.annotation.StringRes
 import android.support.test.espresso.Espresso
 import android.support.test.espresso.matcher.ViewMatchers
-import com.kaspersky.uitest_framework.kakao.dispatchers.ViewDispatcher
+import com.kaspersky.uitest_framework.kakao.delegates.ViewInteractionDelegate
 import com.kaspersky.uitest_framework.kakao.common.KakaoDslMarker
 import com.kaspersky.uitest_framework.kakao.common.matchers.*
 import org.hamcrest.CoreMatchers
@@ -389,11 +389,11 @@ class ViewBuilder {
     /**
      * Returns view dispatcher based on all given matchers
      *
-     * @return ViewDispatcher
+     * @return ViewInteractionDelegate
      */
-    fun getViewDispatcher(): ViewDispatcher {
+    fun getViewDispatcher(): ViewInteractionDelegate {
         check(viewMatchers.isNotEmpty()) { "No matchers inside InteractionBuilder" }
-        return ViewDispatcher(Espresso.onView(AllOf.allOf(viewMatchers)))
+        return ViewInteractionDelegate(Espresso.onView(AllOf.allOf(viewMatchers)))
     }
 
     /**

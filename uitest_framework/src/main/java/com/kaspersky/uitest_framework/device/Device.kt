@@ -12,20 +12,16 @@ import com.kaspersky.uitest_framework.util.PERMISSION_DENY_BUTTON_ID
 import com.kaspersky.uitest_framework.espressoext.viewactions.OrientationChangeAction
 import com.kaspersky.uitest_framework.kakao.interceptors.InterceptorsHolder
 import com.kaspersky.uitest_framework.kakao.common.views.KView
-import com.kaspersky.uitest_framework.kakao.dispatchers.ViewDispatcher
+import com.kaspersky.uitest_framework.kakao.delegates.ViewInteractionDelegate
 import com.kaspersky.uitest_framework.kakao.proxy.ViewActionProxy
-
-/**
- * Created by egor.kurnikov on 01.03.2019
- */
 
 object Device {
 
     private val uiDevice: UiDevice =
             UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
 
-    private val dispatcher: ViewDispatcher
-        get() = ViewDispatcher(Espresso.onView(ViewMatchers.isRoot()))
+    private val interactionDelegate: ViewInteractionDelegate
+        get() = ViewInteractionDelegate(Espresso.onView(ViewMatchers.isRoot()))
 
     private val rootElement: KView
         get() = KView { ViewMatchers.isRoot() }
@@ -45,7 +41,7 @@ object Device {
                 InterceptorsHolder.executingInterceptor
         )
 
-        dispatcher.perform(viewActionProxy)
+        interactionDelegate.perform(viewActionProxy)
     }
 
     fun handlePermissionRequest(shouldAllowPermissions: Boolean) {
@@ -88,39 +84,4 @@ object Device {
     fun findWithText(text: String): UiObject = find(UiSelector().text(text))
 
     fun isSdkVersionHigherThan(version: Int): Boolean = Build.VERSION.SDK_INT >= version
-
-    fun attempt(
-            timeoutMs: Long = Configuration.attemptsTimeoutMs,
-            attemptsFrequencyMs: Long = Configuration.attemptsFrequencyMs,
-            allowedExceptions: Set<Class<out Throwable>> = Configuration.allowedExceptionsForAttempt,
-            action: () -> Unit
-    ) {
-        var timer = 0L
-        var caughtAllowedException: Throwable
-
-        val startTime = System.currentTimeMillis()
-
-        do {
-            try {
-                action.invoke()
-                return
-            } catch (e: Throwable) {
-                val isExceptionAllowed =
-                        allowedExceptions.find { it.isAssignableFrom(e.javaClass) } != null
-
-                when {
-                    isExceptionAllowed -> {
-                        Thread.sleep(attemptsFrequencyMs)
-                        timer += attemptsFrequencyMs
-                        caughtAllowedException = e
-                    }
-                    else -> {
-                        throw e
-                    }
-                }
-            }
-        } while (timer <= timeoutMs && System.currentTimeMillis() - startTime <= timeoutMs)
-
-        throw caughtAllowedException
-    }
 }

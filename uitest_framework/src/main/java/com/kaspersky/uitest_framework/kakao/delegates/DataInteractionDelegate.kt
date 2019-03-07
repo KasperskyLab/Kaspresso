@@ -1,4 +1,4 @@
-package com.kaspersky.uitest_framework.kakao.dispatchers
+package com.kaspersky.uitest_framework.kakao.delegates
 
 import android.support.annotation.CheckResult
 import android.support.test.espresso.DataInteraction
@@ -9,16 +9,12 @@ import com.kaspersky.uitest_framework.kakao.proxy.MatcherProxy
 import org.hamcrest.Matcher
 import javax.annotation.CheckReturnValue
 
-/**
- * Created by egor.kurnikov on 04.03.2019
- */
-
-open class DataDispatcher(
+open class DataInteractionDelegate(
         private val dataInteraction: DataInteraction
 ) {
     @CheckResult
     @CheckReturnValue
-    open fun onChildView(childMatcher: Matcher<View>): DataDispatcher {
+    open fun onChildView(childMatcher: Matcher<View>): DataInteractionDelegate {
 
         val matcherProxy = MatcherProxy<View>(
                 childMatcher,
@@ -30,7 +26,7 @@ open class DataDispatcher(
         return this
     }
 
-    open fun check(assertion: ViewAssertion): ViewDispatcher {
-        return ViewDispatcher(dataInteraction.check(assertion))
+    open fun check(assertion: ViewAssertion): ViewInteractionDelegate {
+        return ViewInteractionDelegate(dataInteraction.check(assertion))
     }
 }

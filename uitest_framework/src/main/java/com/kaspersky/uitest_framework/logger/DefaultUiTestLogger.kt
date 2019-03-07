@@ -2,10 +2,6 @@ package com.kaspersky.uitest_framework.logger
 
 import android.util.Log
 
-/**
- * Created by egor.kurnikov on 03.03.2019
- */
-
 object DefaultUiTestLogger: UiTestLogger {
 
     private const val DEFAULT_TAG: String = "UI_TESTING"

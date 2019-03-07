@@ -1,9 +1,5 @@
 package com.kaspersky.uitest_framework.util
 
-/**
- * Created by egor.kurnikov on 01.03.2019
- */
-
 const val PACKAGE_INSTALLER_PACKAGE_NAME = "com.android.packageinstaller"
 
 const val PERMISSION_DENY_BUTTON_ID = "$PACKAGE_INSTALLER_PACKAGE_NAME:id/permission_deny_button"

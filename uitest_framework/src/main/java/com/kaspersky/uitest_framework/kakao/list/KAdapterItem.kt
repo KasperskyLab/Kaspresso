@@ -4,7 +4,7 @@ package com.kaspersky.uitest_framework.kakao.list
 
 import android.support.test.espresso.assertion.ViewAssertions
 import android.support.test.espresso.matcher.RootMatchers
-import com.kaspersky.uitest_framework.kakao.dispatchers.DataDispatcher
+import com.kaspersky.uitest_framework.kakao.delegates.DataInteractionDelegate
 import com.kaspersky.uitest_framework.kakao.common.KakaoDslMarker
 import com.kaspersky.uitest_framework.kakao.common.actions.BaseActions
 import com.kaspersky.uitest_framework.kakao.common.assertions.BaseAssertions
@@ -22,7 +22,7 @@ import org.hamcrest.Matchers
  */
 @Suppress("UNCHECKED_CAST")
 @KakaoDslMarker
-open class KAdapterItem<out T>(interaction: DataDispatcher) : BaseActions, BaseAssertions {
+open class KAdapterItem<out T>(interaction: DataInteractionDelegate) : BaseActions, BaseAssertions {
     override val view = interaction.check(ViewAssertions.matches(Matchers.anything()))
     override var root = RootMatchers.DEFAULT
 

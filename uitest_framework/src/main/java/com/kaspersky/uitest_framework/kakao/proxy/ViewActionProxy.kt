@@ -7,10 +7,6 @@ import com.kaspersky.uitest_framework.kakao.interceptors.ExecutingInterceptor
 import com.kaspersky.uitest_framework.kakao.interceptors.ViewActionInterceptor
 import org.hamcrest.Matcher
 
-/**
- * Created by egor.kurnikov on 03.03.2019
- */
-
 class ViewActionProxy(
         private val viewAction: ViewAction,
         private val interceptors: List<ViewActionInterceptor>,

@@ -5,10 +5,6 @@ import org.hamcrest.BaseMatcher
 import org.hamcrest.Description
 import org.hamcrest.Matcher
 
-/**
- * Created by egor.kurnikov on 06.03.2019
- */
-
 //TODO finish me
 class MatcherProxy<T>(
         private val matcher: Matcher<*>,

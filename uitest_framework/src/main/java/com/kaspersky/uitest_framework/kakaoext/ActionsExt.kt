@@ -7,10 +7,6 @@ import android.view.View
 import android.widget.TextView
 import com.kaspersky.uitest_framework.kakao.text.TextViewActions
 
-/**
- * Created by egor.kurnikov on 04.03.2019
- */
-
 fun TextViewActions.getText() : String {
 
     var stringHolder = "_"

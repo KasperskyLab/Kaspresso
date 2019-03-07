@@ -7,7 +7,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.support.test.espresso.ViewAction
 import android.support.test.espresso.action.*
-import com.kaspersky.uitest_framework.kakao.dispatchers.ViewDispatcher
+import com.kaspersky.uitest_framework.kakao.delegates.ViewInteractionDelegate
 import com.kaspersky.uitest_framework.kakao.common.builders.ViewBuilder
 import org.hamcrest.Matcher
 
@@ -22,7 +22,7 @@ import org.hamcrest.Matcher
  * @see CheckableActions
  */
 interface BaseActions {
-    val view: ViewDispatcher
+    val view: ViewInteractionDelegate
 
     /**
      * Performs click on view

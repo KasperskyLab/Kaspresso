@@ -4,10 +4,6 @@ import android.content.res.Resources
 import android.view.View
 import android.widget.TextView
 
-/**
- * Created by egor.kurnikov on 03.03.2019
- */
-
 fun View?.describe(): String {
 
     if (this == null) return "null"

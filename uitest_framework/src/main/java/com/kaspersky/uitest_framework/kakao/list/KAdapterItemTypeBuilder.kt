@@ -2,7 +2,7 @@
 
 package com.kaspersky.uitest_framework.kakao.list
 
-import com.kaspersky.uitest_framework.kakao.dispatchers.DataDispatcher
+import com.kaspersky.uitest_framework.kakao.delegates.DataInteractionDelegate
 import com.kaspersky.uitest_framework.kakao.common.KakaoDslMarker
 import kotlin.reflect.KClass
 
@@ -34,7 +34,7 @@ class KAdapterItemTypeBuilder {
      *
      * @param provideItem Function that takes data interaction of list view and returns instance of item view
      */
-    inline fun <reified T : KAdapterItem<*>> itemType(noinline provideItem: (DataDispatcher) -> T) {
+    inline fun <reified T : KAdapterItem<*>> itemType(noinline provideItem: (DataInteractionDelegate) -> T) {
         itemTypes.put(T::class, KAdapterItemType(provideItem))
     }
 }

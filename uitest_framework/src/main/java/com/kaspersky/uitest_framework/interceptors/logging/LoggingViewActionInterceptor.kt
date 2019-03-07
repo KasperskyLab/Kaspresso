@@ -6,10 +6,6 @@ import com.kaspersky.uitest_framework.kakao.interceptors.ViewActionInterceptor
 import com.kaspersky.uitest_framework.logger.UiTestLogger
 import com.kaspersky.uitest_framework.util.describe
 
-/**
- * Created by egor.kurnikov on 03.03.2019
- */
-
 class LoggingViewActionInterceptor(
         private val uiTestLogger: UiTestLogger
 ) : ViewActionInterceptor {

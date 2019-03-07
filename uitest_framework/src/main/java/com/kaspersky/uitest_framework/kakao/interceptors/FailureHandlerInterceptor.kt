@@ -4,10 +4,6 @@ import android.support.test.espresso.FailureHandler
 import android.view.View
 import org.hamcrest.Matcher
 
-/**
- * Created by egor.kurnikov on 06.03.2019
- */
-
 interface FailureHandlerInterceptor {
 
     fun intercept(

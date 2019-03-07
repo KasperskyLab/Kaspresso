@@ -1,13 +1,8 @@
 package com.kaspersky.uitest_framework.kakaoext
 
 import com.kaspersky.uitest_framework.Configuration
-import com.kaspersky.uitest_framework.device.Device
 import com.kaspersky.uitest_framework.kakao.common.views.KBaseView
 import java.util.concurrent.TimeUnit
-
-/**
- * Created by egor.kurnikov on 06.03.2019
- */
 
 fun <T : KBaseView<Any>> T.attempt(
         timeoutMs: Long = Configuration.attemptsTimeoutMs,
@@ -15,7 +10,7 @@ fun <T : KBaseView<Any>> T.attempt(
         allowedExceptions: Set<Class<out Throwable>> = Configuration.allowedExceptionsForAttempt,
         action: T.() -> Unit
 ) {
-    Device.attempt(
+    com.kaspersky.uitest_framework.attempting.attempt(
             timeoutMs,
             attemptsFrequencyMs,
             allowedExceptions
@@ -28,7 +23,7 @@ fun <T : KBaseView<Any>> T.attempt(
         timeoutSec: Long,
         action: T.() -> Unit
 ) {
-    Device.attempt(
+    com.kaspersky.uitest_framework.attempting.attempt(
             TimeUnit.SECONDS.toMillis(timeoutSec)
     ) {
         action.invoke(this)

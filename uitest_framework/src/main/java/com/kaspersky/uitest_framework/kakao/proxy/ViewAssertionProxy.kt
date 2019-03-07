@@ -6,10 +6,6 @@ import android.view.View
 import com.kaspersky.uitest_framework.kakao.interceptors.ExecutingInterceptor
 import com.kaspersky.uitest_framework.kakao.interceptors.ViewAssertionInterceptor
 
-/**
- * Created by egor.kurnikov on 03.03.2019
- */
-
 class ViewAssertionProxy(
         private val viewAssertion: ViewAssertion,
         private val interceptors: List<ViewAssertionInterceptor>,

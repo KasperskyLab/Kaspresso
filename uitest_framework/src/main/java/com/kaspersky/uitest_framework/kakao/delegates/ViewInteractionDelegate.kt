@@ -1,4 +1,4 @@
-package com.kaspersky.uitest_framework.kakao.dispatchers
+package com.kaspersky.uitest_framework.kakao.delegates
 
 import android.support.test.espresso.*
 import android.view.View
@@ -9,14 +9,10 @@ import com.kaspersky.uitest_framework.kakao.proxy.ViewActionProxy
 import com.kaspersky.uitest_framework.kakao.proxy.ViewAssertionProxy
 import org.hamcrest.Matcher
 
-/**
- * Created by egor.kurnikov on 04.03.2019
- */
-
-open class ViewDispatcher(
+open class ViewInteractionDelegate(
         private val viewInteraction: ViewInteraction
 ) {
-    open fun perform(viewAction: ViewAction): ViewDispatcher {
+    open fun perform(viewAction: ViewAction): ViewInteractionDelegate {
 
         val viewActionProxy = ViewActionProxy(
                 viewAction,
@@ -29,7 +25,7 @@ open class ViewDispatcher(
         return this
     }
 
-    open fun check(viewAssertion: ViewAssertion): ViewDispatcher {
+    open fun check(viewAssertion: ViewAssertion): ViewInteractionDelegate {
 
         val viewAssertionProxy = ViewAssertionProxy(
                 viewAssertion,
@@ -42,7 +38,7 @@ open class ViewDispatcher(
         return this
     }
 
-    open fun check(function: (View, NoMatchingViewException) -> Unit): ViewDispatcher {
+    open fun check(function: (View, NoMatchingViewException) -> Unit): ViewInteractionDelegate {
 
         val viewAssertionProxy = ViewAssertionProxy(
                 ViewAssertion(function),
@@ -55,7 +51,7 @@ open class ViewDispatcher(
         return this
     }
 
-    open fun withFailureHandler(function: (Throwable, Matcher<View>) -> Unit): ViewDispatcher {
+    open fun withFailureHandler(function: (Throwable, Matcher<View>) -> Unit): ViewInteractionDelegate {
 
         val failureHandlerProxy = FailureHandlerProxy(
                 FailureHandler(function),
@@ -67,7 +63,7 @@ open class ViewDispatcher(
         return this
     }
 
-    open fun inRoot(rootMatcher: Matcher<Root>): ViewDispatcher {
+    open fun inRoot(rootMatcher: Matcher<Root>): ViewInteractionDelegate {
 
         val matherProxy = MatcherProxy<Root>(
                 rootMatcher,

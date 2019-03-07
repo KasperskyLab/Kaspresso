@@ -4,17 +4,17 @@ package com.kaspersky.uitest_framework.kakao.screen
 
 import android.support.test.espresso.action.EspressoKey
 import android.support.test.espresso.action.ViewActions
-import com.kaspersky.uitest_framework.kakao.dispatchers.ViewDispatcher
+import com.kaspersky.uitest_framework.kakao.delegates.ViewInteractionDelegate
 
 /**
  * Interface with common actions for all screens
  *
  * Provides basic actions that can be performed on each and every screen
  *
- * @property view ViewDispatcher on which all actions are performed (root view by default)
+ * @property view ViewInteractionDelegate on which all actions are performed (root view by default)
  */
 interface ScreenActions {
-    val view: ViewDispatcher
+    val view: ViewInteractionDelegate
 
     /**
      * Performs click on device's back button

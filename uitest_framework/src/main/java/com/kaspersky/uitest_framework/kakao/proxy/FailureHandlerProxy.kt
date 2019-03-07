@@ -5,10 +5,6 @@ import android.view.View
 import com.kaspersky.uitest_framework.kakao.interceptors.FailureHandlerInterceptor
 import org.hamcrest.Matcher
 
-/**
- * Created by egor.kurnikov on 06.03.2019
- */
-
 class FailureHandlerProxy(
         private val failureHandler: FailureHandler,
         private val interceptors: List<FailureHandlerInterceptor>
