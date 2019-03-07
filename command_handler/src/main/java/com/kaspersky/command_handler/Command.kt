@@ -1,4 +1,4 @@
-package www.kaspersky.command_handler
+package com.kaspersky.command_handler
 
 import java.io.Serializable
 

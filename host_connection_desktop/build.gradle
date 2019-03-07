@@ -4,10 +4,11 @@ apply plugin: 'application'
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    compile project(":connector")
+    compile project(":command_handler")
+    compile project(":host_connection_contract")
 }
 
-mainClassName = "www.kaspersky.desktop_app.MainKt"
+mainClassName = "com.kaspersky.uitest_framework.hostconnection.HostConnectionClientKt"
 sourceCompatibility = "7"
 targetCompatibility = "7"
 
@@ -25,9 +26,9 @@ repositories {
 }
 
 task fatJar(type: Jar) {
-    baseName = 'HostServer'
+    baseName = 'HostConnectionClient'
     with jar
-    manifest { attributes 'Main-Class': 'www.kaspersky.desktop_app.MainKt' }
+    manifest { attributes 'Main-Class': 'com.kaspersky.uitest_framework.hostconnection.HostConnectionClientKt' }
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
 }
 project.tasks["fatJar"].dependsOn(assemble)

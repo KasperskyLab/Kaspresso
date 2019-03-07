@@ -1,6 +1,6 @@
-package www.kaspersky.command_handler.remote
+package com.kaspersky.command_handler.remote
 
-import www.kaspersky.command_handler.ICommandExecutor
+import com.kaspersky.command_handler.ICommandExecutor
 import java.io.IOException
 
 interface IRemoteCommandExecutor : ICommandExecutor {
