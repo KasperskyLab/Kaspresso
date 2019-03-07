@@ -4,8 +4,8 @@ package com.kaspersky.uitest_framework.kakao.web
 
 import android.support.test.espresso.web.model.Atom
 import android.support.test.espresso.web.model.ElementReference
-import android.support.test.espresso.web.sugar.Web
 import android.support.test.espresso.web.webdriver.DriverAtoms
+import com.kaspersky.uitest_framework.kakao.delegates.WebInteractionDelegate
 
 /**
  * Provides action for interacting with WebViews
@@ -13,7 +13,7 @@ import android.support.test.espresso.web.webdriver.DriverAtoms
  * @see WebView
  */
 interface WebActions {
-    val web: Web.WebInteraction<*>
+    val web: WebInteractionDelegate
     val ref: Atom<ElementReference>
 
     /**

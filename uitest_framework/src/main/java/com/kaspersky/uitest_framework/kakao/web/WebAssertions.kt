@@ -5,8 +5,8 @@ package com.kaspersky.uitest_framework.kakao.web
 import android.support.test.espresso.web.assertion.WebViewAssertions
 import android.support.test.espresso.web.model.Atom
 import android.support.test.espresso.web.model.ElementReference
-import android.support.test.espresso.web.sugar.Web
 import android.support.test.espresso.web.webdriver.DriverAtoms
+import com.kaspersky.uitest_framework.kakao.delegates.WebInteractionDelegate
 import org.hamcrest.CoreMatchers
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers
@@ -15,7 +15,7 @@ import org.hamcrest.Matchers
  * Interface that provides assertions for WebViews
  */
 interface WebAssertions {
-    val web: Web.WebInteraction<*>
+    val web: WebInteractionDelegate
     val ref: Atom<ElementReference>
 
     /**
@@ -44,7 +44,6 @@ interface WebAssertions {
      * @param matcher Matcher that matches given value
      */
     fun <T> matches(value: Atom<T>, matcher: Matcher<T>) {
-        web.withElement(ref)
-                .check(WebViewAssertions.webMatches(value, matcher))
+        web.withElement(ref).check(WebViewAssertions.webMatches(value, matcher), value, matcher)
     }
 }

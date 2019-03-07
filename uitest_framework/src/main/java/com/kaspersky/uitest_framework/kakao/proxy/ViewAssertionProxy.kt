@@ -14,9 +14,7 @@ class ViewAssertionProxy(
 
     override fun check(view: View?, noViewFoundException: NoMatchingViewException?) {
 
-        interceptors.forEach { viewAssertionInterceptor ->
-            viewAssertionInterceptor.intercept(viewAssertion, view, noViewFoundException)
-        }
+        interceptors.forEach { it.intercept(viewAssertion, view, noViewFoundException) }
 
         val assertionToExecute = { viewAssertion.check(view, noViewFoundException) }
 

@@ -51,7 +51,9 @@ open class ViewInteractionDelegate(
         return this
     }
 
-    open fun withFailureHandler(function: (Throwable, Matcher<View>) -> Unit): ViewInteractionDelegate {
+    open fun withFailureHandler(
+            function: (Throwable, Matcher<View>) -> Unit
+    ): ViewInteractionDelegate {
 
         val failureHandlerProxy = FailureHandlerProxy(
                 FailureHandler(function),
