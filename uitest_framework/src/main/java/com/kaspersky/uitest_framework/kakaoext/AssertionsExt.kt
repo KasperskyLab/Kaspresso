@@ -1,22 +1,25 @@
 package com.kaspersky.uitest_framework.kakaoext
 
+import com.kaspersky.uitest_framework.Configuration
 import com.kaspersky.uitest_framework.kakao.common.assertions.BaseAssertions
-import java.lang.Exception
 
-fun BaseAssertions.check(
-        vararg asserts: BaseAssertions.() -> Unit
+fun <T : BaseAssertions> T.compositeCheck(
+        vararg asserts: T.() -> Unit
 ): Boolean {
-
-    var successfully = false
 
     asserts.forEach { assert ->
         try {
             assert.invoke(this)
-            successfully = true
-        } catch (e: Exception) {
-            //
+
+            Configuration.logger.i("Composite check successfully passed")
+
+            return true
+        } catch (e: Throwable) {
+            Configuration.logger.i("One part of composite check failed: ${assert::class.java}")
         }
     }
 
-    return successfully
+    Configuration.logger.i("Composite check totally failed")
+
+    return false
 }

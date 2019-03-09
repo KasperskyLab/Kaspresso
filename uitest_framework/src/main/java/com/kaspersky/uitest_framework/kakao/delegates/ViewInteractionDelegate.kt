@@ -3,8 +3,6 @@ package com.kaspersky.uitest_framework.kakao.delegates
 import android.support.test.espresso.*
 import android.view.View
 import com.kaspersky.uitest_framework.kakao.interceptors.InterceptorsHolder
-import com.kaspersky.uitest_framework.kakao.proxy.FailureHandlerProxy
-import com.kaspersky.uitest_framework.kakao.proxy.MatcherProxy
 import com.kaspersky.uitest_framework.kakao.proxy.ViewActionProxy
 import com.kaspersky.uitest_framework.kakao.proxy.ViewAssertionProxy
 import org.hamcrest.Matcher
@@ -12,41 +10,46 @@ import org.hamcrest.Matcher
 open class ViewInteractionDelegate(
         private val viewInteraction: ViewInteraction
 ) {
+    private var isCustomFailureHandlerSet = false
+
     open fun perform(viewAction: ViewAction): ViewInteractionDelegate {
+
+        setFailureHandlerIfNecessary()
 
         val viewActionProxy = ViewActionProxy(
                 viewAction,
-                InterceptorsHolder.viewActionInterceptors,
-                InterceptorsHolder.executingInterceptor
+                InterceptorsHolder.viewActionInterceptors
         )
 
-        viewInteraction.perform(viewActionProxy)
+        execute { viewInteraction.perform(viewActionProxy) }
 
         return this
     }
 
     open fun check(viewAssertion: ViewAssertion): ViewInteractionDelegate {
 
+        setFailureHandlerIfNecessary()
+
         val viewAssertionProxy = ViewAssertionProxy(
                 viewAssertion,
-                InterceptorsHolder.viewAssertionInterceptors,
-                InterceptorsHolder.executingInterceptor
+                InterceptorsHolder.viewAssertionInterceptors
         )
 
-        viewInteraction.check(viewAssertionProxy)
+        execute { viewInteraction.check(viewAssertionProxy) }
 
         return this
     }
 
     open fun check(function: (View, NoMatchingViewException) -> Unit): ViewInteractionDelegate {
 
+        setFailureHandlerIfNecessary()
+
         val viewAssertionProxy = ViewAssertionProxy(
                 ViewAssertion(function),
-                InterceptorsHolder.viewAssertionInterceptors,
-                InterceptorsHolder.executingInterceptor
+                InterceptorsHolder.viewAssertionInterceptors
         )
 
-        viewInteraction.check(viewAssertionProxy)
+        execute { viewInteraction.check(viewAssertionProxy) }
 
         return this
     }
@@ -55,25 +58,35 @@ open class ViewInteractionDelegate(
             function: (Throwable, Matcher<View>) -> Unit
     ): ViewInteractionDelegate {
 
-        val failureHandlerProxy = FailureHandlerProxy(
-                FailureHandler(function),
-                InterceptorsHolder.failureHandlerInterceptors
-        )
+        isCustomFailureHandlerSet = true
 
-        viewInteraction.withFailureHandler(failureHandlerProxy)
+        viewInteraction.withFailureHandler(function)
 
         return this
     }
 
     open fun inRoot(rootMatcher: Matcher<Root>): ViewInteractionDelegate {
 
-        val matherProxy = MatcherProxy<Root>(
-                rootMatcher,
-                InterceptorsHolder.matcherInterceptors
-        )
+        setFailureHandlerIfNecessary()
 
-        viewInteraction.inRoot(matherProxy)
+        viewInteraction.inRoot(rootMatcher)
 
         return this
+    }
+
+    private fun setFailureHandlerIfNecessary() {
+
+        InterceptorsHolder.failureInterceptor?.let { failureInterceptor ->
+            if (!isCustomFailureHandlerSet) {
+                withFailureHandler(failureInterceptor::interceptAndThrow)
+            }
+        }
+    }
+
+    private fun execute(executable: () -> ViewInteraction): ViewInteraction {
+
+        return InterceptorsHolder.executingInterceptor
+                ?.interceptAndExecute { executable.invoke() }
+                ?: executable.invoke()
     }
 }

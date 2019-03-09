@@ -6,10 +6,14 @@ import android.support.test.InstrumentationRegistry
 import android.support.test.internal.runner.junit4.statement.UiThreadStatement
 import android.support.test.runner.lifecycle.ActivityLifecycleMonitorRegistry
 import android.support.test.runner.lifecycle.Stage
+import com.kaspersky.uitest_framework.Configuration
+import com.kaspersky.uitest_framework.logger.UiTestLogger
 import org.hamcrest.CoreMatchers
 import org.junit.Assert
 
 class ActivitiesManager {
+
+    val logger: UiTestLogger = Configuration.logger
 
     val isMainThread: Boolean
         get() = Looper.myLooper() == Looper.getMainLooper()
@@ -24,7 +28,7 @@ class ActivitiesManager {
         }
     }
 
-    fun getResumedActivity(): Activity {
+    fun getResumedActivity(): Activity? {
 
         var resumedActivity: Activity? = null
 
@@ -43,6 +47,8 @@ class ActivitiesManager {
             InstrumentationRegistry.getInstrumentation().runOnMainSync(findResumedActivity)
         }
 
-        return resumedActivity ?: throw IllegalStateException("Resumed activity not found")
+        resumedActivity ?: logger.e("No resumed activity found")
+
+        return resumedActivity
     }
 }

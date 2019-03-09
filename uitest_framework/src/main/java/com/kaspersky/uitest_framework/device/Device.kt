@@ -1,5 +1,6 @@
 package com.kaspersky.uitest_framework.device
 
+import android.content.Context
 import android.os.Build
 import android.support.test.InstrumentationRegistry
 import android.support.test.espresso.Espresso
@@ -10,10 +11,10 @@ import com.kaspersky.uitest_framework.kakaoext.KLKeyboard
 import com.kaspersky.uitest_framework.util.PERMISSION_ALLOW_BUTTON_ID
 import com.kaspersky.uitest_framework.util.PERMISSION_DENY_BUTTON_ID
 import com.kaspersky.uitest_framework.espressoext.viewactions.OrientationChangeAction
-import com.kaspersky.uitest_framework.kakao.interceptors.InterceptorsHolder
 import com.kaspersky.uitest_framework.kakao.common.views.KView
 import com.kaspersky.uitest_framework.kakao.delegates.ViewInteractionDelegate
-import com.kaspersky.uitest_framework.kakao.proxy.ViewActionProxy
+import com.kaspersky.uitest_framework.logger.UiTestLogger
+import com.kaspersky.uitest_framework.util.getStackTraceAsString
 
 object Device {
 
@@ -26,22 +27,23 @@ object Device {
     private val rootElement: KView
         get() = KView { ViewMatchers.isRoot() }
 
-    val appsManager: AppsManager =
-            AppsManager(uiDevice) { InstrumentationRegistry.getInstrumentation().context }
+    val logger: UiTestLogger = Configuration.logger
+
+    val context: Context
+        get() = InstrumentationRegistry.getInstrumentation().context
+
+    val appsManager: AppsManager = AppsManager(uiDevice) { context }
 
     val activitiesManager: ActivitiesManager = ActivitiesManager()
 
     val keyboard = KLKeyboard()
 
     fun rotate() {
+        val resumedActivity = activitiesManager.getResumedActivity() ?: return
 
-        val viewActionProxy = ViewActionProxy(
-                OrientationChangeAction.toggle(activitiesManager.getResumedActivity()),
-                InterceptorsHolder.viewActionInterceptors,
-                InterceptorsHolder.executingInterceptor
+        interactionDelegate.perform(
+                OrientationChangeAction.toggle(resumedActivity)
         )
-
-        interactionDelegate.perform(viewActionProxy)
     }
 
     fun handlePermissionRequest(shouldAllowPermissions: Boolean) {
@@ -62,7 +64,10 @@ object Device {
                 btn.click()
             }
         } catch (e: UiObjectNotFoundException) {
-            Configuration.logger.e("There are no permissions dialog to interact with.")
+            logger.e("There are no permissions dialog to interact with.")
+        } catch (e: Throwable) {
+            logger.e(e.getStackTraceAsString())
+            throw e
         }
     }
 

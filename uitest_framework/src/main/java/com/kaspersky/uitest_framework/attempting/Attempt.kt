@@ -1,13 +1,14 @@
 package com.kaspersky.uitest_framework.attempting
 
 import com.kaspersky.uitest_framework.Configuration
+import com.kaspersky.uitest_framework.util.getStackTraceAsString
 
-fun attempt(
+fun <T> attempt(
         timeoutMs: Long = Configuration.attemptsTimeoutMs,
         attemptsFrequencyMs: Long = Configuration.attemptsFrequencyMs,
         allowedExceptions: Set<Class<out Throwable>> = Configuration.allowedExceptionsForAttempt,
-        action: () -> Unit
-) {
+        action: () -> T
+): T {
     var timer = 0L
     var caughtAllowedException: Throwable
 
@@ -15,8 +16,7 @@ fun attempt(
 
     do {
         try {
-            action.invoke()
-            return
+            return action.invoke()
         } catch (e: Throwable) {
             val isExceptionAllowed =
                     allowedExceptions.find { it.isAssignableFrom(e.javaClass) } != null
@@ -33,6 +33,13 @@ fun attempt(
             }
         }
     } while (timer <= timeoutMs && System.currentTimeMillis() - startTime <= timeoutMs)
+
+    Configuration.logger.e(
+            "All attempts to interact for $timeoutMs ms totally failed " +
+                    "because of ${caughtAllowedException::class.simpleName}"
+    )
+
+    Configuration.logger.e(caughtAllowedException.getStackTraceAsString())
 
     throw caughtAllowedException
 }

@@ -8,16 +8,13 @@ import com.kaspersky.uitest_framework.kakao.interceptors.ViewAssertionIntercepto
 
 class ViewAssertionProxy(
         private val viewAssertion: ViewAssertion,
-        private val interceptors: List<ViewAssertionInterceptor>,
-        private val executingInterceptor: ExecutingInterceptor?
+        private val interceptors: List<ViewAssertionInterceptor>
 ) : ViewAssertion {
 
     override fun check(view: View?, noViewFoundException: NoMatchingViewException?) {
 
         interceptors.forEach { it.intercept(viewAssertion, view, noViewFoundException) }
 
-        val assertionToExecute = { viewAssertion.check(view, noViewFoundException) }
-
-        executingInterceptor?.interceptAndExecute(assertionToExecute) ?: assertionToExecute.invoke()
+        viewAssertion.check(view, noViewFoundException)
     }
 }

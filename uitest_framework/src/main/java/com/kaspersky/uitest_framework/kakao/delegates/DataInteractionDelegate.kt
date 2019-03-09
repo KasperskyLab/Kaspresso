@@ -3,9 +3,9 @@ package com.kaspersky.uitest_framework.kakao.delegates
 import android.support.annotation.CheckResult
 import android.support.test.espresso.DataInteraction
 import android.support.test.espresso.ViewAssertion
+import android.support.test.espresso.ViewInteraction
 import android.view.View
 import com.kaspersky.uitest_framework.kakao.interceptors.InterceptorsHolder
-import com.kaspersky.uitest_framework.kakao.proxy.MatcherProxy
 import com.kaspersky.uitest_framework.kakao.proxy.ViewAssertionProxy
 import org.hamcrest.Matcher
 import javax.annotation.CheckReturnValue
@@ -16,14 +16,7 @@ open class DataInteractionDelegate(
     @CheckResult
     @CheckReturnValue
     open fun onChildView(childMatcher: Matcher<View>): DataInteractionDelegate {
-
-        val matcherProxy = MatcherProxy<View>(
-                childMatcher,
-                InterceptorsHolder.matcherInterceptors
-        )
-
-        dataInteraction.onChildView(matcherProxy)
-
+        dataInteraction.onChildView(childMatcher)
         return this
     }
 
@@ -31,10 +24,18 @@ open class DataInteractionDelegate(
 
         val viewAssertionProxy = ViewAssertionProxy(
                 viewAssertion,
-                InterceptorsHolder.viewAssertionInterceptors,
-                InterceptorsHolder.executingInterceptor
+                InterceptorsHolder.viewAssertionInterceptors
         )
 
-        return ViewInteractionDelegate(dataInteraction.check(viewAssertionProxy))
+        return ViewInteractionDelegate(
+                execute { dataInteraction.check(viewAssertionProxy) }
+        )
+    }
+
+    private fun execute(executable: () -> ViewInteraction): ViewInteraction {
+
+        return InterceptorsHolder.executingInterceptor
+                ?.interceptAndExecute { executable.invoke() }
+                ?: executable.invoke()
     }
 }

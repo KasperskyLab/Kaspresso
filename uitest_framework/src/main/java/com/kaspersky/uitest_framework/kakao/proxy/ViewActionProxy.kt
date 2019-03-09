@@ -3,14 +3,12 @@ package com.kaspersky.uitest_framework.kakao.proxy
 import android.support.test.espresso.UiController
 import android.support.test.espresso.ViewAction
 import android.view.View
-import com.kaspersky.uitest_framework.kakao.interceptors.ExecutingInterceptor
 import com.kaspersky.uitest_framework.kakao.interceptors.ViewActionInterceptor
 import org.hamcrest.Matcher
 
 class ViewActionProxy(
         private val viewAction: ViewAction,
-        private val interceptors: List<ViewActionInterceptor>,
-        private val executingInterceptor: ExecutingInterceptor?
+        private val interceptors: List<ViewActionInterceptor>
 ) : ViewAction {
 
     override fun getDescription(): String = viewAction.description
@@ -19,12 +17,8 @@ class ViewActionProxy(
 
     override fun perform(uiController: UiController, view: View) {
 
-        interceptors.forEach { viewActionInterceptor ->
-            viewActionInterceptor.intercept(viewAction, view)
-        }
+        interceptors.forEach { it.intercept(viewAction, view) }
 
-        val actionToExecute = { viewAction.perform(uiController, view) }
-
-        executingInterceptor?.interceptAndExecute(actionToExecute) ?: actionToExecute.invoke()
+        viewAction.perform(uiController, view)
     }
 }

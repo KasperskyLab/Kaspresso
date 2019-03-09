@@ -27,7 +27,9 @@ open class WebInteractionDelegate(
                 InterceptorsHolder.atomInterceptors
         )
 
-        return WebInteractionDelegate(webInteraction.perform(webActionProxy))
+        return WebInteractionDelegate(
+                execute { webInteraction.perform(webActionProxy) }
+        )
     }
 
     open fun <E> check(
@@ -40,10 +42,18 @@ open class WebInteractionDelegate(
                 webAssertion,
                 atom,
                 matcher,
-                InterceptorsHolder.webAssertionInterceptors,
-                InterceptorsHolder.executingInterceptor
+                InterceptorsHolder.webAssertionInterceptors
         )
 
-        return WebInteractionDelegate(webInteraction.check(webAssertionProxy))
+        return WebInteractionDelegate(
+                execute { webInteraction.check(webAssertionProxy) }
+        )
+    }
+
+    private fun execute(executable: () -> Web.WebInteraction<*>): Web.WebInteraction<*> {
+
+        return InterceptorsHolder.executingInterceptor
+                ?.interceptAndExecuteWeb { executable.invoke() }
+                ?: executable.invoke()
     }
 }

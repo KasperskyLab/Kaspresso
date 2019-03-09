@@ -10,9 +10,7 @@ object InterceptorsHolder {
 
     val webAssertionInterceptors: ArrayList<WebAssertionInterceptor> = arrayListOf()
 
-    val failureHandlerInterceptors: ArrayList<FailureHandlerInterceptor> = arrayListOf()
-
-    val matcherInterceptors: ArrayList<MatcherInterceptor> = arrayListOf()
-
     var executingInterceptor: ExecutingInterceptor? = null
+
+    var failureInterceptor: FailureInterceptor? = null
 }

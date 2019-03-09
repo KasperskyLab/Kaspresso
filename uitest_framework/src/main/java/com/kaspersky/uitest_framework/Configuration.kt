@@ -16,7 +16,6 @@ object Configuration {
     val allowedExceptionsForAttempt: Set<Class<out Throwable>> = setOf(
             PerformException::class.java,
             NoMatchingViewException::class.java,
-            AssertionError::class.java,
-            PerformException::class.java
+            AssertionError::class.java
     )
 }
