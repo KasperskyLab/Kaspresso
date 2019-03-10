@@ -20,6 +20,9 @@ class RemoteCommandExecutor private constructor(
 
     companion object {
 
+        @Volatile
+        var socketConnected: Boolean = false
+
         @Suppress("UNUSED")
         fun server(port: Int, remoteCommandExecutor: ICommandExecutor) =
             RemoteCommandExecutor(null, port, remoteCommandExecutor, true)
@@ -38,8 +41,6 @@ class RemoteCommandExecutor private constructor(
     private lateinit var socket: Socket
     private lateinit var inputStream: ObjectInputStream
     private lateinit var outputStream: ObjectOutputStream
-    @Volatile
-    private var socketConnected: Boolean = false
 
     override fun isConnected(): Boolean = socketConnected
 
@@ -108,7 +109,9 @@ class RemoteCommandExecutor private constructor(
             if (!socketConnected) {
                 return
             } else {
-                throw e
+                disconnect()
+                return
+                //throw e
             }
         }
         when (obj) {
