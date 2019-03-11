@@ -1,13 +1,18 @@
-package www.kaspersky.command_handler.local
+package com.kaspersky.command_handler.local
 
-import www.kaspersky.command_handler.Command
-import www.kaspersky.command_handler.ICommandExecutor
-import www.kaspersky.command_handler.ICommandHandler
-import java.util.ArrayList
+import com.kaspersky.command_handler.Command
+import com.kaspersky.command_handler.ICommandExecutor
+import com.kaspersky.command_handler.ICommandHandler
+import java.util.*
 
-class LocalCommandExecutor : ICommandExecutor {
+class LocalCommandExecutor(vararg handlers: ICommandHandler) : ICommandExecutor {
 
     private val mHandlers = ArrayList<ICommandHandler>()
+
+    init {
+        mHandlers.addAll(handlers)
+    }
+
 
     @Throws(Exception::class)
     override fun <T> execute(command: Command<T>): T {

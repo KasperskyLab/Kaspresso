@@ -1,11 +1,8 @@
-package www.kaspersky.command_handler.remote
+package com.kaspersky.command_handler.remote
 
-import www.kaspersky.command_handler.Command
-import www.kaspersky.command_handler.ICommandExecutor
-import java.io.IOException
-import java.io.ObjectInputStream
-import java.io.ObjectOutputStream
-import java.io.Serializable
+import com.kaspersky.command_handler.Command
+import com.kaspersky.command_handler.ICommandExecutor
+import java.io.*
 import java.net.ServerSocket
 import java.net.Socket
 import java.util.concurrent.*
@@ -19,7 +16,6 @@ class RemoteCommandExecutor private constructor(
 ) : IRemoteCommandExecutor {
 
     companion object {
-
         @Suppress("UNUSED")
         fun server(port: Int, remoteCommandExecutor: ICommandExecutor) =
             RemoteCommandExecutor(null, port, remoteCommandExecutor, true)
@@ -32,19 +28,16 @@ class RemoteCommandExecutor private constructor(
 
     private val commandTimeoutMin = TimeUnit.MINUTES.toSeconds(3)
     private val receiversMap = ConcurrentHashMap<Long, CommandResultReceiver>()
-    private val executor = Executors.newCachedThreadPool()
+    private val bgExecutor = Executors.newCachedThreadPool()
     private val currentId = AtomicLong()
 
     private lateinit var socket: Socket
     private lateinit var inputStream: ObjectInputStream
     private lateinit var outputStream: ObjectOutputStream
     @Volatile
-    private var connected: Boolean = false
+    var socketConnected: Boolean = false
 
-    private val uuid: Long
-        get() = currentId.incrementAndGet()
-
-    override fun isConnected(): Boolean = connected
+    override fun isConnected(): Boolean = socketConnected
 
     @Throws(IOException::class)
     override fun connect() {
@@ -53,17 +46,34 @@ class RemoteCommandExecutor private constructor(
         } else {
             connectAsClient()
         }
-        connected = true
+        socketConnected = true
     }
 
+    @Suppress("UNUSED")
+    @Throws(IOException::class)
+    override fun disconnect() {
+        if (!socketConnected) return
+        println("disconnect stated")
+        socketConnected = false
+        if (connectAsServer) {
+            sendCommand(ForceDisconnectCommand(), currentId.incrementAndGet())
+        }
+        receiversMap.forEach {
+            val result = ResultMessage.Error(it.key, IOException("'disconnect' has been called"))
+            it.value.setResult(result)
+        }
+        receiversMap.clear()
+        socket.close()
+        println("disconnect finished")
+    }
 
     @Suppress("UNCHECKED_CAST")
     @Throws(Exception::class)
     override fun <T> execute(command: Command<T>): T {
-        val id = uuid
+        val id = currentId.incrementAndGet()
         val receiver = CommandResultReceiver()
         receiversMap[id] = receiver
-        executor.execute { sendCommand(command, id) }
+        bgExecutor.execute { sendCommand(command, id) }
         val msg = receiver.waitResult(commandTimeoutMin, TimeUnit.SECONDS)
         receiversMap.remove(id)
         if (msg == null) {
@@ -74,71 +84,74 @@ class RemoteCommandExecutor private constructor(
                 is ResultMessage.Error -> throw msg.exception
             }
         }
-
     }
 
-    @Suppress("UNUSED")
-    @Throws(IOException::class)
-    override fun disconnect() {
-        if (!connected) return
-        connected = false
-        println("$connectAsServer")
-        if (connectAsServer) {
-            socket.close()
-        }
-    }
-
-    private fun startListenerThread() {
+    private fun startCommandListenThread() {
         val thread = Thread {
-                try {
-                    println("Listen thread started!")
-                    while (connected) {
-                        val recvd = inputStream.readObject()
-                        if (recvd is ExecuteMsg<*>) {
-                            processCommand(recvd.command, recvd.id)
-                        }
-                        if (recvd is ResultMessage) {
-                            deliverResult(recvd)
-                        }
-                    }
-                } catch (e: Exception) {
-                    //
-                }
+            println("Command listen thread started!")
+            while (socketConnected) {
+                peekNextMessage()
+            }
         }
         thread.start()
     }
 
-    private fun onListenThreadException(e: Exception) {
-        if (connected) {
-            throw RuntimeException("Unexpected exception on listen thread", e)
+    private fun peekNextMessage() {
+        lateinit var obj: Any
+        try {
+            obj = inputStream.readObject()
+        } catch (e: Exception) {
+            if (!socketConnected) {
+                return
+            } else {
+                println("Probably server disconnected")
+                disconnect()
+                return
+                //throw e
+            }
+        }
+        when (obj) {
+            is ExecuteMsg<*> -> processCommand(obj.command, obj.id)
+            is ResultMessage -> deliverResult(obj)
+            else -> throw IllegalStateException("Unknown received object: $obj")
         }
     }
 
     @Throws(IOException::class)
     private fun createStreams(socket: Socket) {
-        outputStream = ObjectOutputStream(socket.getOutputStream())
-        inputStream = ObjectInputStream(socket.getInputStream())
-        println("Streams are created!")
+        while (true)
+            try {
+                outputStream = ObjectOutputStream(socket.getOutputStream())
+                inputStream = ObjectInputStream(socket.getInputStream())
+                println("IO streams created")
+                break
+            }
+            catch (e: EOFException) {
+                //
+            }
     }
 
     private fun processCommand(command: Command<*>, id: Long) {
-        executor.execute {
+        if (command is ForceDisconnectCommand) {
+            disconnect()
+        }
+        bgExecutor.execute {
             try {
                 val result = commandExecutor.execute(command)
-                sendResultMsg(ResultMessage.Success(id, result!!))
+                sendResultMessage(ResultMessage.Success(id, result!!))
             } catch (e: Exception) {
-                sendResultMsg(ResultMessage.Error(id, e))
+                if (socketConnected) {
+                    sendResultMessage(ResultMessage.Error(id, e))
+                }
             }
         }
     }
 
     private fun deliverResult(resultMessage: ResultMessage) {
-        val id = resultMessage.id
-        val resultReceiver = receiversMap[id]
-        resultReceiver?.setResult(resultMessage)
+        receiversMap[resultMessage.id]?.setResult(resultMessage)
     }
 
-    private fun sendResultMsg(resultMessage: ResultMessage) {
+    private fun sendResultMessage(resultMessage: ResultMessage) {
         sendObject(resultMessage)
     }
 
@@ -148,9 +161,6 @@ class RemoteCommandExecutor private constructor(
     }
 
     private fun sendObject(`object`: Any) {
-        if (!connected) {
-            throw IllegalStateException("Not connected")
-        }
         try {
             outputStream.writeObject(`object`)
             outputStream.flush()
@@ -162,18 +172,20 @@ class RemoteCommandExecutor private constructor(
 
     @Throws(IOException::class)
     private fun connectAsServer() {
-        println("connectAsServer()")
+        println("connect as server...started")
         val serverSocket = ServerSocket(port)
         socket = serverSocket.accept()
         createStreams(socket)
-        startListenerThread()
+        startCommandListenThread()
+        println("connect as client...finished")
     }
 
     @Throws(IOException::class)
     private fun connectAsClient() {
         socket = Socket(ip, port)
         createStreams(socket)
-        startListenerThread()
+        startCommandListenThread()
+        println("connect as client...finished")
     }
 }
 
@@ -205,3 +217,5 @@ private sealed class ResultMessage : Serializable {
 }
 
 private data class ExecuteMsg<T>(val command: Command<T>, val id: Long) : Serializable
+
+private class ForceDisconnectCommand : Command<Unit>()
