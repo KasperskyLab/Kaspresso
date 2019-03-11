@@ -8,11 +8,13 @@ import com.kaspersky.uitest_framework.kakao.screen.ScreenActions
 
 @Suppress("UNCHECKED_CAST")
 @KakaoDslMarker
-abstract class KLScreen<out T: KLScreen<T>>: ScreenActions {
+abstract class ExtScreen<out T: ExtScreen<T>>: ScreenActions {
 
     abstract val layoutId: Int?
 
-    override val view: ViewInteractionDelegate = ViewInteractionDelegate(Espresso.onView(ViewMatchers.isRoot()))
+    abstract val viewClass: Class<out Any>?
+
+    override val view = ViewInteractionDelegate(Espresso.onView(ViewMatchers.isRoot()))
 
     operator fun invoke(function: T.() -> Unit) = function.invoke(this as T)
 }

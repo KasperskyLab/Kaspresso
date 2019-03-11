@@ -7,8 +7,6 @@ import android.support.test.uiautomator.By
 import android.support.test.uiautomator.UiDevice
 import android.support.test.uiautomator.UiSelector
 import android.support.test.uiautomator.Until
-import com.kaspersky.uitest_framework.util.CHROME_PACKAGE_NAME
-import com.kaspersky.uitest_framework.util.MAX_LAUNCH_TIME_MS
 import junit.framework.Assert
 import org.hamcrest.CoreMatchers
 import org.hamcrest.MatcherAssert
@@ -86,3 +84,7 @@ class AppsManager(
         Runtime.getRuntime().exec(arrayOf("am", "force-stop", packageName))
     }
 }
+
+private const val CHROME_PACKAGE_NAME = "com.android.chrome"
+
+private const val MAX_LAUNCH_TIME_MS = 10_000L

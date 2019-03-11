@@ -13,9 +13,9 @@ import org.junit.Assert
 
 class ActivitiesManager {
 
-    val logger: UiTestLogger = Configuration.logger
+    private val logger: UiTestLogger = Configuration.logger
 
-    val isMainThread: Boolean
+    private val isMainThread: Boolean
         get() = Looper.myLooper() == Looper.getMainLooper()
 
     inline fun <reified T : Activity> assertCurrentActivity() {

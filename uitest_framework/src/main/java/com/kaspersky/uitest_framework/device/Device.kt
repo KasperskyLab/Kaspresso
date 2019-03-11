@@ -1,5 +1,7 @@
 package com.kaspersky.uitest_framework.device
 
+import android.annotation.TargetApi
+import android.app.UiAutomation
 import android.content.Context
 import android.os.Build
 import android.support.test.InstrumentationRegistry
@@ -7,9 +9,6 @@ import android.support.test.espresso.Espresso
 import android.support.test.espresso.matcher.ViewMatchers
 import android.support.test.uiautomator.*
 import com.kaspersky.uitest_framework.Configuration
-import com.kaspersky.uitest_framework.kakaoext.KLKeyboard
-import com.kaspersky.uitest_framework.util.PERMISSION_ALLOW_BUTTON_ID
-import com.kaspersky.uitest_framework.util.PERMISSION_DENY_BUTTON_ID
 import com.kaspersky.uitest_framework.espressoext.viewactions.OrientationChangeAction
 import com.kaspersky.uitest_framework.kakao.common.views.KView
 import com.kaspersky.uitest_framework.kakao.delegates.ViewInteractionDelegate
@@ -17,6 +16,14 @@ import com.kaspersky.uitest_framework.logger.UiTestLogger
 import com.kaspersky.uitest_framework.util.getStackTraceAsString
 
 object Device {
+
+    private const val PACKAGE_INSTALLER_PACKAGE_NAME = "com.android.packageinstaller"
+
+    private const val PERMISSION_DENY_BUTTON_ID =
+            "$PACKAGE_INSTALLER_PACKAGE_NAME:id/permission_deny_button"
+
+    private const val PERMISSION_ALLOW_BUTTON_ID =
+            "$PACKAGE_INSTALLER_PACKAGE_NAME:id/permission_allow_button"
 
     private val uiDevice: UiDevice =
             UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
@@ -27,7 +34,7 @@ object Device {
     private val rootElement: KView
         get() = KView { ViewMatchers.isRoot() }
 
-    val logger: UiTestLogger = Configuration.logger
+    private val logger: UiTestLogger = Configuration.logger
 
     val context: Context
         get() = InstrumentationRegistry.getInstrumentation().context
@@ -35,8 +42,6 @@ object Device {
     val appsManager: AppsManager = AppsManager(uiDevice) { context }
 
     val activitiesManager: ActivitiesManager = ActivitiesManager()
-
-    val keyboard = KLKeyboard()
 
     fun rotate() {
         val resumedActivity = activitiesManager.getResumedActivity() ?: return
@@ -89,4 +94,19 @@ object Device {
     fun findWithText(text: String): UiObject = find(UiSelector().text(text))
 
     fun isSdkVersionHigherThan(version: Int): Boolean = Build.VERSION.SDK_INT >= version
+
+    @TargetApi(Build.VERSION_CODES.N)
+    fun enableAccessibility() {
+
+        val packageName = "com.kms.free"
+        val className = "com.kaspersky.components.accessibility.KasperskyAccessibility"
+        val string = "enabled_accessibility_services"
+        val cmd = "settings put secure $string $packageName/$className"
+
+        InstrumentationRegistry.getInstrumentation()
+                .getUiAutomation(UiAutomation.FLAG_DONT_SUPPRESS_ACCESSIBILITY_SERVICES)
+                .executeShellCommand(cmd)
+                .close()
+
+    }
 }

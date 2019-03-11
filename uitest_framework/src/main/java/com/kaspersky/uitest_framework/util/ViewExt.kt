@@ -1,6 +1,7 @@
 package com.kaspersky.uitest_framework.util
 
 import android.content.res.Resources
+import android.support.test.espresso.matcher.ViewMatchers.isDisplayingAtLeast
 import android.view.View
 import android.widget.TextView
 
@@ -33,3 +34,9 @@ fun View?.describe(): String {
 
     return "${this::class.java.simpleName}($builder)"
 }
+
+fun View.isDisplayed(): Boolean {
+    return isDisplayingAtLeast(VIEW_DISPLAY_THRESHOLD_PERCENT).matches(this)
+}
+
+private const val VIEW_DISPLAY_THRESHOLD_PERCENT = 90
