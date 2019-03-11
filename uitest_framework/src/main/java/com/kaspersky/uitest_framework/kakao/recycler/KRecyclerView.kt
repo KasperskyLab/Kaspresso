@@ -46,7 +46,7 @@ class KRecyclerView : RecyclerActions, BaseAssertions, RecyclerAdapterAssertions
     constructor(builder: ViewBuilder.() -> Unit, itemTypeBuilder: KRecyclerItemTypeBuilder.() -> Unit) {
         val vb = ViewBuilder().apply(builder)
         matcher = vb.getViewMatcher()
-        view = vb.getViewDispatcher()
+        view = vb.getViewInteractionDelegate()
         itemTypes = KRecyclerItemTypeBuilder().apply(itemTypeBuilder).itemTypes
     }
 
@@ -86,7 +86,7 @@ class KRecyclerView : RecyclerActions, BaseAssertions, RecyclerAdapterAssertions
         }
 
         matcher = vb.getViewMatcher()
-        view = vb.getViewDispatcher()
+        view = vb.getViewInteractionDelegate()
         itemTypes = KRecyclerItemTypeBuilder().apply(itemTypeBuilder).itemTypes
     }
 

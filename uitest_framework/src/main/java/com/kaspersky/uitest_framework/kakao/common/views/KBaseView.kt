@@ -38,7 +38,7 @@ open class KBaseView<out T> : BaseActions, BaseAssertions {
      * @see ViewBuilder
      */
     constructor(function: ViewBuilder.() -> Unit) {
-        view = ViewBuilder().apply(function).getViewDispatcher()
+        view = ViewBuilder().apply(function).getViewInteractionDelegate()
     }
 
     /**

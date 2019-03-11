@@ -3,7 +3,7 @@ package com.kaspersky.uitest_framework.interceptors.flakysafety
 import android.support.test.espresso.ViewInteraction
 import android.support.test.espresso.web.sugar.Web
 import com.kaspersky.uitest_framework.attempting.attempt
-import com.kaspersky.uitest_framework.kakao.interceptors.ExecutingInterceptor
+import com.kaspersky.uitest_framework.interceptors.ExecutingInterceptor
 
 class FlakySafeExecutingInterceptor : ExecutingInterceptor {
 

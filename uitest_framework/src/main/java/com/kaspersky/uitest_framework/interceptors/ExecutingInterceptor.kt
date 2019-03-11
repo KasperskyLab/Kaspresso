@@ -1,4 +1,4 @@
-package com.kaspersky.uitest_framework.kakao.interceptors
+package com.kaspersky.uitest_framework.interceptors
 
 import android.support.test.espresso.ViewInteraction
 import android.support.test.espresso.web.sugar.Web

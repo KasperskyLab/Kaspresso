@@ -11,6 +11,7 @@ import android.support.test.uiautomator.*
 import com.kaspersky.uitest_framework.Configuration
 import com.kaspersky.uitest_framework.espressoext.viewactions.OrientationChangeAction
 import com.kaspersky.uitest_framework.kakao.common.views.KView
+import com.kaspersky.uitest_framework.kakao.configuration.DelegatesFactory
 import com.kaspersky.uitest_framework.kakao.delegates.ViewInteractionDelegate
 import com.kaspersky.uitest_framework.logger.UiTestLogger
 import com.kaspersky.uitest_framework.util.getStackTraceAsString
@@ -29,7 +30,11 @@ object Device {
             UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
 
     private val interactionDelegate: ViewInteractionDelegate
-        get() = ViewInteractionDelegate(Espresso.onView(ViewMatchers.isRoot()))
+        get() {
+            return DelegatesFactory.createViewInteractionDelegate(
+                    Espresso.onView(ViewMatchers.isRoot())
+            )
+        }
 
     private val rootElement: KView
         get() = KView { ViewMatchers.isRoot() }
@@ -87,7 +92,10 @@ object Device {
 
     fun pressHome(): Boolean = uiDevice.pressHome()
 
-    fun <T> wait(condition: SearchCondition<T>, timeout: Long): T = uiDevice.wait(condition, timeout)
+    fun <T> wait(
+            condition: SearchCondition<T>,
+            timeout: Long
+    ): T = uiDevice.wait(condition, timeout)
 
     fun find(selector: UiSelector): UiObject = uiDevice.findObject(selector)
 

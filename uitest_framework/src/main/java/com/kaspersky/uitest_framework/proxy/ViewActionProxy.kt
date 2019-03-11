@@ -1,9 +1,9 @@
-package com.kaspersky.uitest_framework.kakao.proxy
+package com.kaspersky.uitest_framework.proxy
 
 import android.support.test.espresso.UiController
 import android.support.test.espresso.ViewAction
 import android.view.View
-import com.kaspersky.uitest_framework.kakao.interceptors.ViewActionInterceptor
+import com.kaspersky.uitest_framework.interceptors.ViewActionInterceptor
 import org.hamcrest.Matcher
 
 class ViewActionProxy(

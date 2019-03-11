@@ -8,6 +8,7 @@ import android.support.test.espresso.UiController
 import android.support.test.espresso.ViewAction
 import android.support.test.espresso.matcher.ViewMatchers
 import com.kaspersky.uitest_framework.kakao.common.KakaoDslMarker
+import com.kaspersky.uitest_framework.kakao.configuration.DelegatesFactory
 import com.kaspersky.uitest_framework.kakao.delegates.ViewInteractionDelegate
 
 /**
@@ -23,7 +24,9 @@ import com.kaspersky.uitest_framework.kakao.delegates.ViewInteractionDelegate
 @Suppress("UNCHECKED_CAST")
 @KakaoDslMarker
 open class Screen<out T: Screen<T>>: ScreenActions {
-    override val view: ViewInteractionDelegate = ViewInteractionDelegate(Espresso.onView(ViewMatchers.isRoot()))
+    override val view: ViewInteractionDelegate =
+            DelegatesFactory.createViewInteractionDelegate(Espresso.onView(ViewMatchers.isRoot()))
+
     operator fun invoke(function: T.() -> Unit) = function.invoke(this as T)
 
     companion object {

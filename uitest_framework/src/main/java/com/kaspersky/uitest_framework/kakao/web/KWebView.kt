@@ -5,6 +5,7 @@ package com.kaspersky.uitest_framework.kakao.web
 import android.support.test.espresso.web.sugar.Web
 import com.kaspersky.uitest_framework.kakao.common.KakaoDslMarker
 import com.kaspersky.uitest_framework.kakao.common.builders.ViewBuilder
+import com.kaspersky.uitest_framework.kakao.configuration.DelegatesFactory
 import com.kaspersky.uitest_framework.kakao.delegates.WebInteractionDelegate
 
 /**
@@ -15,7 +16,7 @@ import com.kaspersky.uitest_framework.kakao.delegates.WebInteractionDelegate
 @KakaoDslMarker
 open class KWebView(matcher: (ViewBuilder.() -> Unit)? = null) {
 
-    private val web: WebInteractionDelegate = WebInteractionDelegate(
+    private val web: WebInteractionDelegate = DelegatesFactory.createWebInteractionDelegate(
             if (matcher != null) {
                 Web.onWebView(ViewBuilder().apply(matcher).getViewMatcher())
             } else {

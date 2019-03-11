@@ -3,7 +3,7 @@ package com.kaspersky.uitest_framework.interceptors.logging
 import android.support.test.espresso.PerformException
 import android.view.View
 import com.kaspersky.uitest_framework.espressoext.matchers.describe
-import com.kaspersky.uitest_framework.kakao.interceptors.FailureInterceptor
+import com.kaspersky.uitest_framework.interceptors.FailureInterceptor
 import com.kaspersky.uitest_framework.logger.UiTestLogger
 import junit.framework.AssertionFailedError
 import org.hamcrest.Matcher

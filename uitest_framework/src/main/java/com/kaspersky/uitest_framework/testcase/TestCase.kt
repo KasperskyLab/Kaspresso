@@ -6,7 +6,7 @@ import com.kaspersky.uitest_framework.logger.UiTestLogger
 
 abstract class TestCase{
 
-    private val logger: UiTestLogger = Configuration.logger
+    protected val logger: UiTestLogger = Configuration.logger
 
     protected fun precondition(description: String, actions: () -> Unit) {
         logger.i(description)

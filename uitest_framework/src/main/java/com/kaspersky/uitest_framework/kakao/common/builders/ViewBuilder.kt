@@ -13,6 +13,7 @@ import android.support.test.espresso.matcher.ViewMatchers
 import com.kaspersky.uitest_framework.kakao.delegates.ViewInteractionDelegate
 import com.kaspersky.uitest_framework.kakao.common.KakaoDslMarker
 import com.kaspersky.uitest_framework.kakao.common.matchers.*
+import com.kaspersky.uitest_framework.kakao.configuration.DelegatesFactory
 import org.hamcrest.CoreMatchers
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers
@@ -391,9 +392,11 @@ class ViewBuilder {
      *
      * @return ViewInteractionDelegate
      */
-    fun getViewDispatcher(): ViewInteractionDelegate {
+    fun getViewInteractionDelegate(): ViewInteractionDelegate {
         check(viewMatchers.isNotEmpty()) { "No matchers inside InteractionBuilder" }
-        return ViewInteractionDelegate(Espresso.onView(AllOf.allOf(viewMatchers)))
+        return DelegatesFactory.createViewInteractionDelegate(
+                Espresso.onView(AllOf.allOf(viewMatchers))
+        )
     }
 
     /**

@@ -1,10 +1,9 @@
-package com.kaspersky.uitest_framework.kakao.proxy
+package com.kaspersky.uitest_framework.proxy
 
 import android.support.test.espresso.NoMatchingViewException
 import android.support.test.espresso.ViewAssertion
 import android.view.View
-import com.kaspersky.uitest_framework.kakao.interceptors.ExecutingInterceptor
-import com.kaspersky.uitest_framework.kakao.interceptors.ViewAssertionInterceptor
+import com.kaspersky.uitest_framework.interceptors.ViewAssertionInterceptor
 
 class ViewAssertionProxy(
         private val viewAssertion: ViewAssertion,

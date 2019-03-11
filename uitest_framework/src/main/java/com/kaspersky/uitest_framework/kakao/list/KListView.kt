@@ -11,6 +11,7 @@ import com.kaspersky.uitest_framework.kakao.delegates.ViewInteractionDelegate
 import com.kaspersky.uitest_framework.kakao.common.KakaoDslMarker
 import com.kaspersky.uitest_framework.kakao.common.assertions.BaseAssertions
 import com.kaspersky.uitest_framework.kakao.common.builders.ViewBuilder
+import com.kaspersky.uitest_framework.kakao.configuration.DelegatesFactory
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers
 import kotlin.reflect.KClass
@@ -43,7 +44,7 @@ class KListView : ScrollViewActions, BaseAssertions, ListViewAdapterAssertions {
     constructor(builder: ViewBuilder.() -> Unit, itemTypeBuilder: KAdapterItemTypeBuilder.() -> Unit) {
         val vb = ViewBuilder().apply(builder)
         matcher = vb.getViewMatcher()
-        view = vb.getViewDispatcher()
+        view = vb.getViewInteractionDelegate()
         itemTypes = KAdapterItemTypeBuilder().apply(itemTypeBuilder).itemTypes
     }
 
@@ -83,7 +84,7 @@ class KListView : ScrollViewActions, BaseAssertions, ListViewAdapterAssertions {
         }
 
         matcher = vb.getViewMatcher()
-        view = vb.getViewDispatcher()
+        view = vb.getViewInteractionDelegate()
         itemTypes = KAdapterItemTypeBuilder().apply(itemTypeBuilder).itemTypes
     }
 
@@ -104,7 +105,7 @@ class KListView : ScrollViewActions, BaseAssertions, ListViewAdapterAssertions {
                 .inAdapterView(matcher)
                 .atPosition(position)
 
-        function(provideItem(DataInteractionDelegate(interaction)) as T)
+        function(provideItem(DelegatesFactory.createDataInteractionDelegate(interaction)) as T)
     }
 
     /**
@@ -155,7 +156,7 @@ class KListView : ScrollViewActions, BaseAssertions, ListViewAdapterAssertions {
                 .inRoot(root)
                 .inAdapterView(matcher)
 
-        return provideItem(DataInteractionDelegate(interaction)) as T
+        return provideItem(DelegatesFactory.createDataInteractionDelegate(interaction)) as T
     }
 
     /**
