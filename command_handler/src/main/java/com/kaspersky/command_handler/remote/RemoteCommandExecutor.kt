@@ -2,10 +2,7 @@ package com.kaspersky.command_handler.remote
 
 import com.kaspersky.command_handler.Command
 import com.kaspersky.command_handler.ICommandExecutor
-import java.io.IOException
-import java.io.ObjectInputStream
-import java.io.ObjectOutputStream
-import java.io.Serializable
+import java.io.*
 import java.net.ServerSocket
 import java.net.Socket
 import java.util.concurrent.*
@@ -19,10 +16,6 @@ class RemoteCommandExecutor private constructor(
 ) : IRemoteCommandExecutor {
 
     companion object {
-
-        @Volatile
-        var socketConnected: Boolean = false
-
         @Suppress("UNUSED")
         fun server(port: Int, remoteCommandExecutor: ICommandExecutor) =
             RemoteCommandExecutor(null, port, remoteCommandExecutor, true)
@@ -41,6 +34,8 @@ class RemoteCommandExecutor private constructor(
     private lateinit var socket: Socket
     private lateinit var inputStream: ObjectInputStream
     private lateinit var outputStream: ObjectOutputStream
+    @Volatile
+    var socketConnected: Boolean = false
 
     override fun isConnected(): Boolean = socketConnected
 
@@ -109,6 +104,7 @@ class RemoteCommandExecutor private constructor(
             if (!socketConnected) {
                 return
             } else {
+                println("Probably server disconnected")
                 disconnect()
                 return
                 //throw e
@@ -123,9 +119,16 @@ class RemoteCommandExecutor private constructor(
 
     @Throws(IOException::class)
     private fun createStreams(socket: Socket) {
-        outputStream = ObjectOutputStream(socket.getOutputStream())
-        inputStream = ObjectInputStream(socket.getInputStream())
-        println("IO streams created")
+        while (true)
+            try {
+                outputStream = ObjectOutputStream(socket.getOutputStream())
+                inputStream = ObjectInputStream(socket.getInputStream())
+                println("IO streams created")
+                break
+            }
+            catch (e: EOFException) {
+                //
+            }
     }
 
     private fun processCommand(command: Command<*>, id: Long) {
@@ -179,7 +182,6 @@ class RemoteCommandExecutor private constructor(
 
     @Throws(IOException::class)
     private fun connectAsClient() {
-        println("connect as client...started")
         socket = Socket(ip, port)
         createStreams(socket)
         startCommandListenThread()

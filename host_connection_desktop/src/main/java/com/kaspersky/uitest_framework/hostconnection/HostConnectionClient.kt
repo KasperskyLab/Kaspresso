@@ -5,20 +5,12 @@ import com.kaspersky.command_handler.ICommandHandler
 import com.kaspersky.command_handler.local.LocalCommandExecutor
 import com.kaspersky.command_handler.remote.RemoteCommandExecutor
 import java.net.SocketException
+import java.util.concurrent.TimeUnit
 
 
 fun main(args: Array<String>) {
     HostConnectionClient.executeCmdCommand("adb forward tcp:${HostConnectionClient.CLIENT_PORT} tcp:$PORT")
-    while (true) {
-        try {
-            if (!RemoteCommandExecutor.socketConnected) {
-                HostConnectionClient.connectSync()
-            }
-        } catch (e: SocketException) {
-            //
-        }
-        Thread.sleep(500)
-    }
+    HostConnectionClient.connectSync()
 }
 
 private object HostConnectionClient : ICommandHandler {
@@ -31,7 +23,17 @@ private object HostConnectionClient : ICommandHandler {
     )
 
     fun connectSync() {
-        remoteCommandExecutor.connect()
+        println("connect as client...started")
+        while (true) {
+            try {
+                if (!remoteCommandExecutor.isConnected()) {
+                    remoteCommandExecutor.connect()
+                }
+            } catch (e: SocketException) {
+                //
+            }
+            Thread.sleep(400)
+        }
     }
 
     fun disconnectSync() {
@@ -39,9 +41,13 @@ private object HostConnectionClient : ICommandHandler {
     }
 
     fun executeCmdCommand(command: String): String {
+        println("Now executing: $command")
         val process = Runtime.getRuntime().exec(command)
         val resultMsg = process.inputStream.bufferedReader().readText()
+        process.waitFor(20, TimeUnit.SECONDS)
+        println("returned: $resultMsg")
         if (process.exitValue() != 0) {
+            println(process.errorStream)
             throw CmdException(resultMsg)
         } else {
             return resultMsg
