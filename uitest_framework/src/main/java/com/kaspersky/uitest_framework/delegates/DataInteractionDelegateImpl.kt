@@ -5,9 +5,9 @@ import android.support.test.espresso.DataInteraction
 import android.support.test.espresso.ViewAssertion
 import android.support.test.espresso.ViewInteraction
 import android.view.View
+import com.kaspersky.uitest_framework.Configuration
 import com.kaspersky.uitest_framework.kakao.delegates.DataInteractionDelegate
 import com.kaspersky.uitest_framework.kakao.delegates.ViewInteractionDelegate
-import com.kaspersky.uitest_framework.interceptors.InterceptorsHolder
 import com.kaspersky.uitest_framework.proxy.ViewAssertionProxy
 import org.hamcrest.Matcher
 import javax.annotation.CheckReturnValue
@@ -27,7 +27,7 @@ open class DataInteractionDelegateImpl(
 
         val viewAssertionProxy = ViewAssertionProxy(
                 viewAssertion,
-                InterceptorsHolder.viewAssertionInterceptors
+                Configuration.viewAssertionInterceptors
         )
 
         return ViewInteractionDelegateImpl(
@@ -37,7 +37,7 @@ open class DataInteractionDelegateImpl(
 
     private fun execute(executable: () -> ViewInteraction): ViewInteraction {
 
-        return InterceptorsHolder.executingInterceptor
+        return Configuration.executingInterceptor
                 ?.interceptAndExecute { executable.invoke() }
                 ?: executable.invoke()
     }

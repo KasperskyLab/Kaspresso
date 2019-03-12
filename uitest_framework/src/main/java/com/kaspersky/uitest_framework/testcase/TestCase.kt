@@ -4,9 +4,17 @@ import com.kaspersky.uitest_framework.device.ScreenshotManager
 import com.kaspersky.uitest_framework.Configuration
 import com.kaspersky.uitest_framework.logger.UiTestLogger
 
-abstract class TestCase{
-
+abstract class TestCase<out T: TestCase.ScreensStorage>(
+        protected val screens: T,
+        configBuilder: Configuration.Builder = Configuration.Builder().default()
+) {
     protected val logger: UiTestLogger = Configuration.logger
+
+    private var stepCounter = 0
+
+    init {
+        configBuilder.commit()
+    }
 
     protected fun precondition(description: String, actions: () -> Unit) {
         logger.i(description)
@@ -19,7 +27,7 @@ abstract class TestCase{
 
         actions.invoke()
 
-        val screenshotTag = description.replace(" ", "_")
+        val screenshotTag = "${this::class.simpleName}_step_${++stepCounter}"
         ScreenshotManager.makeScreenshotIfPossible(screenshotTag)
     }
 

@@ -1,41 +1,223 @@
 package com.kaspersky.uitest_framework
 
+import android.support.test.espresso.DataInteraction
 import android.support.test.espresso.NoMatchingViewException
 import android.support.test.espresso.PerformException
+import android.support.test.espresso.ViewInteraction
+import android.support.test.espresso.web.sugar.Web
 import com.kaspersky.uitest_framework.delegates.DataInteractionDelegateImpl
 import com.kaspersky.uitest_framework.delegates.ViewInteractionDelegateImpl
 import com.kaspersky.uitest_framework.delegates.WebInteractionDelegateImpl
-import com.kaspersky.uitest_framework.interceptors.InterceptorsHolder
-import com.kaspersky.uitest_framework.interceptors.flakysafety.FlakySafeExecutingInterceptor
-import com.kaspersky.uitest_framework.interceptors.logging.LoggingFailureInterceptor
-import com.kaspersky.uitest_framework.interceptors.logging.LoggingViewActionInterceptor
-import com.kaspersky.uitest_framework.interceptors.logging.LoggingViewAssertionInterceptor
-import com.kaspersky.uitest_framework.kakao.configuration.Configuration
+import com.kaspersky.uitest_framework.interceptors.*
+import com.kaspersky.uitest_framework.interceptors.impl.flakysafety.FlakySafeExecutingInterceptor
+import com.kaspersky.uitest_framework.interceptors.impl.logging.LoggingFailureInterceptor
+import com.kaspersky.uitest_framework.interceptors.impl.logging.LoggingViewActionInterceptor
+import com.kaspersky.uitest_framework.interceptors.impl.logging.LoggingViewAssertionInterceptor
+import com.kaspersky.uitest_framework.kakao.delegates.DataInteractionDelegate
+import com.kaspersky.uitest_framework.kakao.delegates.ViewInteractionDelegate
+import com.kaspersky.uitest_framework.kakao.delegates.WebInteractionDelegate
+import com.kaspersky.uitest_framework.kakao.delegates.factory.DelegatesFactory
 import com.kaspersky.uitest_framework.logger.DefaultUiTestLogger
 import com.kaspersky.uitest_framework.logger.UiTestLogger
 
 object Configuration {
 
-    val logger: UiTestLogger = DefaultUiTestLogger
+    internal var logger: UiTestLogger = DefaultUiTestLogger
 
-    const val attemptsTimeoutMs: Long = 2_000L
+    internal var attemptsTimeoutMs: Long = 2_000L
 
-    const val attemptsFrequencyMs: Long = 500L
+    internal var attemptsFrequencyMs: Long = 500L
 
-    val allowedExceptionsForAttempt: Set<Class<out Throwable>> = setOf(
+    internal var allowedExceptionsForAttempt: MutableSet<Class<out Throwable>> = mutableSetOf(
             PerformException::class.java,
             NoMatchingViewException::class.java,
             AssertionError::class.java
     )
 
-    init {
-        Configuration.viewInteractionDelegateFactory = { ViewInteractionDelegateImpl(it) }
-        Configuration.dataInteractionDelegateFactory = { DataInteractionDelegateImpl(it) }
-        Configuration.webInteractionDelegateFactory = { WebInteractionDelegateImpl(it) }
+    internal var viewActionInterceptors: ArrayList<ViewActionInterceptor> = arrayListOf()
 
-        InterceptorsHolder.viewActionInterceptors += LoggingViewActionInterceptor(logger)
-        InterceptorsHolder.viewAssertionInterceptors += LoggingViewAssertionInterceptor(logger)
-        InterceptorsHolder.executingInterceptor = FlakySafeExecutingInterceptor()
-        InterceptorsHolder.failureInterceptor = LoggingFailureInterceptor(logger)
+    internal var viewAssertionInterceptors: ArrayList<ViewAssertionInterceptor> = arrayListOf()
+
+    internal var atomInterceptors: ArrayList<AtomInterceptor> = arrayListOf()
+
+    internal var webAssertionInterceptors: ArrayList<WebAssertionInterceptor> = arrayListOf()
+
+    internal var executingInterceptor: ExecutingInterceptor? = null
+
+    internal var failureInterceptor: FailureInterceptor? = null
+
+    class Builder {
+
+        private var logger: UiTestLogger = DefaultUiTestLogger
+
+        private var attemptsTimeoutMs: Long = 2_000L
+
+        private var attemptsFrequencyMs: Long = 500L
+
+        private var allowedExceptionsForAttempt: MutableSet<Class<out Throwable>> = mutableSetOf(
+                PerformException::class.java,
+                NoMatchingViewException::class.java,
+                AssertionError::class.java
+        )
+
+        private var viewInteractionDelegateFactory:
+                ((ViewInteraction) -> ViewInteractionDelegate)? = null
+
+        private var dataInteractionDelegateFactory:
+                ((DataInteraction) -> DataInteractionDelegate)? = null
+
+        private var webInteractionDelegateFactory:
+                ((Web.WebInteraction<*>) -> WebInteractionDelegate)? = null
+
+        private var viewActionInterceptors: ArrayList<ViewActionInterceptor> = arrayListOf()
+
+        private var viewAssertionInterceptors: ArrayList<ViewAssertionInterceptor> = arrayListOf()
+
+        private var atomInterceptors: ArrayList<AtomInterceptor> = arrayListOf()
+
+        private var webAssertionInterceptors: ArrayList<WebAssertionInterceptor> = arrayListOf()
+
+        private var executingInterceptor: ExecutingInterceptor? = null
+
+        private var failureInterceptor: FailureInterceptor? = null
+
+        fun setLogger(logger: UiTestLogger): Builder {
+            this.logger = logger
+            return this
+        }
+
+        fun setAttemptsTimeout(timeoutMs: Long): Builder {
+            attemptsTimeoutMs = timeoutMs
+            return this
+        }
+
+        fun setAttemptsFrequency(frequencyMs: Long): Builder {
+            attemptsFrequencyMs = frequencyMs
+            return this
+        }
+
+        fun addAllowedExceptionForAttempt(
+                exception: Class<out Throwable>
+        ): Builder {
+            allowedExceptionsForAttempt.add(exception)
+            return this
+        }
+
+        fun setViewInteractionDelegateFactory(
+                factory: (ViewInteraction) -> ViewInteractionDelegate
+        ): Builder {
+            viewInteractionDelegateFactory = factory
+            return this
+        }
+
+        fun setDataInteractionDelegateFactory(
+                factory: (DataInteraction) -> DataInteractionDelegate
+        ): Builder {
+            dataInteractionDelegateFactory = factory
+            return this
+        }
+
+        fun setWebInteractionDelegateFactory(
+                factory: (Web.WebInteraction<*>) -> WebInteractionDelegate
+        ): Builder {
+            webInteractionDelegateFactory = factory
+            return this
+        }
+
+        fun addViewActionInterceptor(
+                viewActionInterceptor: ViewActionInterceptor
+        ): Builder {
+            viewActionInterceptors.add(viewActionInterceptor)
+            return this
+        }
+
+        fun addViewAssertionInterceptor(
+                viewAssertionInterceptor: ViewAssertionInterceptor
+        ): Builder {
+            viewAssertionInterceptors.add(viewAssertionInterceptor)
+            return this
+        }
+
+        fun addAtomInterceptor(
+                atomInterceptor: AtomInterceptor
+        ): Builder {
+            atomInterceptors.add(atomInterceptor)
+            return this
+        }
+
+        fun addWebAssertionInterceptor(
+                webAssertionInterceptor: WebAssertionInterceptor
+        ): Builder {
+            webAssertionInterceptors.add(webAssertionInterceptor)
+            return this
+        }
+
+        fun setExecutingInterceptor(
+                executingInterceptor: ExecutingInterceptor
+        ): Builder {
+            this.executingInterceptor = executingInterceptor
+            return this
+        }
+
+        fun setFailureInterceptor(
+                failureInterceptor: FailureInterceptor
+        ): Builder {
+            this.failureInterceptor = failureInterceptor
+            return this
+        }
+
+        fun default(): Builder {
+
+            logger = DefaultUiTestLogger
+            attemptsTimeoutMs = 2_000L
+            attemptsFrequencyMs = 500L
+
+            allowedExceptionsForAttempt = mutableSetOf(
+                    PerformException::class.java,
+                    NoMatchingViewException::class.java,
+                    AssertionError::class.java
+            )
+
+            viewInteractionDelegateFactory = { ViewInteractionDelegateImpl(it) }
+            dataInteractionDelegateFactory = { DataInteractionDelegateImpl(it) }
+            webInteractionDelegateFactory = { WebInteractionDelegateImpl(it) }
+
+            viewActionInterceptors = arrayListOf(LoggingViewActionInterceptor(logger))
+            viewAssertionInterceptors = arrayListOf(LoggingViewAssertionInterceptor(logger))
+            atomInterceptors = arrayListOf()
+            webAssertionInterceptors = arrayListOf()
+
+            executingInterceptor = FlakySafeExecutingInterceptor()
+            failureInterceptor = LoggingFailureInterceptor(logger)
+
+            return this
+        }
+
+        internal fun commit() {
+
+            Configuration.logger = logger
+            Configuration.attemptsTimeoutMs = attemptsTimeoutMs
+            Configuration.attemptsFrequencyMs = attemptsFrequencyMs
+
+            Configuration.allowedExceptionsForAttempt = allowedExceptionsForAttempt
+
+            viewInteractionDelegateFactory?.let {
+                DelegatesFactory.viewInteractionDelegateFactory = it
+            }
+            dataInteractionDelegateFactory?.let {
+                DelegatesFactory.dataInteractionDelegateFactory = it
+            }
+            webInteractionDelegateFactory?.let {
+                DelegatesFactory.webInteractionDelegateFactory = it
+            }
+
+            Configuration.viewActionInterceptors = viewActionInterceptors
+            Configuration.viewAssertionInterceptors = viewAssertionInterceptors
+            Configuration.atomInterceptors = atomInterceptors
+            Configuration.webAssertionInterceptors = webAssertionInterceptors
+
+            Configuration.executingInterceptor = executingInterceptor
+            Configuration.failureInterceptor = failureInterceptor
+        }
     }
 }

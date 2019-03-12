@@ -1,8 +1,10 @@
 package com.kaspersky.uitest_framework.device
 
+import android.annotation.SuppressLint
 import android.annotation.TargetApi
 import android.app.UiAutomation
 import android.content.Context
+import android.net.wifi.WifiManager
 import android.os.Build
 import android.support.test.InstrumentationRegistry
 import android.support.test.espresso.Espresso
@@ -11,7 +13,7 @@ import android.support.test.uiautomator.*
 import com.kaspersky.uitest_framework.Configuration
 import com.kaspersky.uitest_framework.espressoext.viewactions.OrientationChangeAction
 import com.kaspersky.uitest_framework.kakao.common.views.KView
-import com.kaspersky.uitest_framework.kakao.configuration.DelegatesFactory
+import com.kaspersky.uitest_framework.kakao.delegates.factory.DelegatesFactory
 import com.kaspersky.uitest_framework.kakao.delegates.ViewInteractionDelegate
 import com.kaspersky.uitest_framework.logger.UiTestLogger
 import com.kaspersky.uitest_framework.util.getStackTraceAsString
@@ -31,7 +33,7 @@ object Device {
 
     private val interactionDelegate: ViewInteractionDelegate
         get() {
-            return DelegatesFactory.createViewInteractionDelegate(
+            return DelegatesFactory.viewInteractionDelegateFactory.invoke(
                     Espresso.onView(ViewMatchers.isRoot())
             )
         }
@@ -54,6 +56,37 @@ object Device {
         interactionDelegate.perform(
                 OrientationChangeAction.toggle(resumedActivity)
         )
+    }
+
+    @TargetApi(Build.VERSION_CODES.N)
+    fun enableAccessibility() {
+
+        val packageName = "com.kms.free"
+        val className = "com.kaspersky.components.accessibility.KasperskyAccessibility"
+        val string = "enabled_accessibility_services"
+        val cmd = "settings put secure $string $packageName/$className"
+
+        InstrumentationRegistry.getInstrumentation()
+                .getUiAutomation(UiAutomation.FLAG_DONT_SUPPRESS_ACCESSIBILITY_SERVICES)
+                .executeShellCommand(cmd)
+                .close()
+
+    }
+
+    @SuppressLint("WifiManagerLeak")
+    fun toggleWiFi(enable: Boolean) {
+
+        val wifiManager =
+                if (isSdkVersionHigherThan(Build.VERSION_CODES.N)) {
+                    InstrumentationRegistry.getTargetContext()
+                            .getSystemService(Context.WIFI_SERVICE) as WifiManager
+                } else {
+                    InstrumentationRegistry.getTargetContext()
+                            .applicationContext
+                            .getSystemService(Context.WIFI_SERVICE) as WifiManager
+                }
+
+        wifiManager.isWifiEnabled = enable
     }
 
     fun handlePermissionRequest(shouldAllowPermissions: Boolean) {
@@ -102,19 +135,4 @@ object Device {
     fun findWithText(text: String): UiObject = find(UiSelector().text(text))
 
     fun isSdkVersionHigherThan(version: Int): Boolean = Build.VERSION.SDK_INT >= version
-
-    @TargetApi(Build.VERSION_CODES.N)
-    fun enableAccessibility() {
-
-        val packageName = "com.kms.free"
-        val className = "com.kaspersky.components.accessibility.KasperskyAccessibility"
-        val string = "enabled_accessibility_services"
-        val cmd = "settings put secure $string $packageName/$className"
-
-        InstrumentationRegistry.getInstrumentation()
-                .getUiAutomation(UiAutomation.FLAG_DONT_SUPPRESS_ACCESSIBILITY_SERVICES)
-                .executeShellCommand(cmd)
-                .close()
-
-    }
 }

@@ -1,4 +1,4 @@
-package com.kaspersky.uitest_framework.interceptors.flakysafety
+package com.kaspersky.uitest_framework.interceptors.impl.flakysafety
 
 import android.support.test.espresso.ViewInteraction
 import android.support.test.espresso.web.sugar.Web

@@ -2,8 +2,8 @@ package com.kaspersky.uitest_framework.delegates
 
 import android.support.test.espresso.*
 import android.view.View
+import com.kaspersky.uitest_framework.Configuration
 import com.kaspersky.uitest_framework.kakao.delegates.ViewInteractionDelegate
-import com.kaspersky.uitest_framework.interceptors.InterceptorsHolder
 import com.kaspersky.uitest_framework.proxy.ViewActionProxy
 import com.kaspersky.uitest_framework.proxy.ViewAssertionProxy
 import org.hamcrest.Matcher
@@ -18,7 +18,7 @@ open class ViewInteractionDelegateImpl(
 
         val viewActionProxy = ViewActionProxy(
                 viewAction,
-                InterceptorsHolder.viewActionInterceptors
+                Configuration.viewActionInterceptors
         )
 
         execute { viewInteraction.perform(viewActionProxy) }
@@ -30,7 +30,7 @@ open class ViewInteractionDelegateImpl(
 
         val viewAssertionProxy = ViewAssertionProxy(
                 viewAssertion,
-                InterceptorsHolder.viewAssertionInterceptors
+                Configuration.viewAssertionInterceptors
         )
 
         execute { viewInteraction.check(viewAssertionProxy) }
@@ -38,11 +38,13 @@ open class ViewInteractionDelegateImpl(
         return this
     }
 
-    override fun check(function: (View, NoMatchingViewException) -> Unit): ViewInteractionDelegate {
+    override fun check(
+            function: (View, NoMatchingViewException) -> Unit
+    ): ViewInteractionDelegate {
 
         val viewAssertionProxy = ViewAssertionProxy(
                 ViewAssertion(function),
-                InterceptorsHolder.viewAssertionInterceptors
+                Configuration.viewAssertionInterceptors
         )
 
         execute { viewInteraction.check(viewAssertionProxy) }
@@ -74,14 +76,14 @@ open class ViewInteractionDelegateImpl(
 
         setFailureHandlerIfNecessary()
 
-        return InterceptorsHolder.executingInterceptor
+        return Configuration.executingInterceptor
                 ?.interceptAndExecute { executable.invoke() }
                 ?: executable.invoke()
     }
 
     private fun setFailureHandlerIfNecessary() {
 
-        InterceptorsHolder.failureInterceptor?.let { failureInterceptor ->
+        Configuration.failureInterceptor?.let { failureInterceptor ->
             if (!isCustomFailureHandlerSet) {
                 withFailureHandler(failureInterceptor::interceptAndThrow)
             }

@@ -11,7 +11,7 @@ import com.kaspersky.uitest_framework.kakao.delegates.ViewInteractionDelegate
 import com.kaspersky.uitest_framework.kakao.common.KakaoDslMarker
 import com.kaspersky.uitest_framework.kakao.common.assertions.BaseAssertions
 import com.kaspersky.uitest_framework.kakao.common.builders.ViewBuilder
-import com.kaspersky.uitest_framework.kakao.configuration.DelegatesFactory
+import com.kaspersky.uitest_framework.kakao.delegates.factory.DelegatesFactory
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers
 import kotlin.reflect.KClass
@@ -105,7 +105,10 @@ class KListView : ScrollViewActions, BaseAssertions, ListViewAdapterAssertions {
                 .inAdapterView(matcher)
                 .atPosition(position)
 
-        function(provideItem(DelegatesFactory.createDataInteractionDelegate(interaction)) as T)
+        val interactionDelegate =
+                DelegatesFactory.dataInteractionDelegateFactory.invoke(interaction)
+
+        function(provideItem(interactionDelegate) as T)
     }
 
     /**
@@ -156,7 +159,10 @@ class KListView : ScrollViewActions, BaseAssertions, ListViewAdapterAssertions {
                 .inRoot(root)
                 .inAdapterView(matcher)
 
-        return provideItem(DelegatesFactory.createDataInteractionDelegate(interaction)) as T
+        val interactionDelegate =
+                DelegatesFactory.dataInteractionDelegateFactory.invoke(interaction)
+
+        return provideItem(interactionDelegate) as T
     }
 
     /**

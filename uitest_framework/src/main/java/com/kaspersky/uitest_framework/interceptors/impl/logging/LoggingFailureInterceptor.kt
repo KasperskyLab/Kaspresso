@@ -1,4 +1,4 @@
-package com.kaspersky.uitest_framework.interceptors.logging
+package com.kaspersky.uitest_framework.interceptors.impl.logging
 
 import android.support.test.espresso.PerformException
 import android.view.View
@@ -10,23 +10,21 @@ import org.hamcrest.Matcher
 
 class LoggingFailureInterceptor(
         private val uiTestLogger: UiTestLogger
-): FailureInterceptor {
+) : FailureInterceptor {
 
-    override fun interceptAndThrow(error: Throwable?, viewMatcher: Matcher<View>?) {
+    override fun interceptAndThrow(error: Throwable, viewMatcher: Matcher<View>) {
 
-        error?.let { e ->
-            uiTestLogger.e(
-                    "Failed to interact with view matching: ${viewMatcher?.describe()} " +
-                    "because of ${error::class.simpleName}"
-            )
+        uiTestLogger.e(
+                "Failed to interact with view matching: ${viewMatcher.describe()} " +
+                        "because of ${error::class.simpleName}"
+        )
 
-            throw getSelfDescribedError(e, viewMatcher)
-        }
+        throw getSelfDescribedError(error, viewMatcher)
     }
 
     private fun getSelfDescribedError(
             error: Throwable,
-            viewMatcher: Matcher<View>?
+            viewMatcher: Matcher<View>
     ): Throwable {
 
         var error = error

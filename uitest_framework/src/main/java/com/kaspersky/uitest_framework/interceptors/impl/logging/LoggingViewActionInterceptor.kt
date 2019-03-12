@@ -1,4 +1,4 @@
-package com.kaspersky.uitest_framework.interceptors.logging
+package com.kaspersky.uitest_framework.interceptors.impl.logging
 
 import android.support.test.espresso.ViewAction
 import android.view.View
