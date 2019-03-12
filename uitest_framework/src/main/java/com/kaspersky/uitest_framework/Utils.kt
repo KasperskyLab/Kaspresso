@@ -75,7 +75,7 @@ private fun safeWrapTestMethod(method: () -> Unit, timeout: Int) {
             tryCount -= 1
             method()
             succeed = true
-        } catch (e: Exception) {
+        } catch (e: Throwable) {
             if (tryCount <= 0) {
                 makeScreenshot()
                 throw e
@@ -282,7 +282,6 @@ inline fun <reified T : KRecyclerItem<*>> KRecyclerView.scrollToChild(
 ): T {
     val childMatcher = ViewBuilder().apply(childBuilder).getViewMatcher()
     return scrollToChild(direction, childMatcher)
-
 }
 
 
