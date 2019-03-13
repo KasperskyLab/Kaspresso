@@ -1,1 +1,1 @@
-include ':app', ':uitest_framework'
+include ':uitest_framework'
