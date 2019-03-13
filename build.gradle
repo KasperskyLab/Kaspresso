@@ -22,6 +22,16 @@ allprojects {
         google()
         jcenter()
     }
+    configurations.all {
+        resolutionStrategy {
+            eachDependency { DependencyResolveDetails details ->
+                if (details.requested.group == 'com.android.support'
+                        && !details.requested.name.startsWith('multidex')) {
+                    details.useVersion pAndroidSupportVersion
+                }
+            }
+        }
+    }
 }
 
 task clean(type: Delete) {
