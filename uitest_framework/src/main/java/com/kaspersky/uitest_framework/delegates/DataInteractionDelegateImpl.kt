@@ -5,7 +5,7 @@ import android.support.test.espresso.DataInteraction
 import android.support.test.espresso.ViewAssertion
 import android.support.test.espresso.ViewInteraction
 import android.view.View
-import com.kaspersky.uitest_framework.configuration.InterceptorConfigurator
+import com.kaspersky.uitest_framework.configurator.Configurator
 import com.agoda.kakao.delegates.DataInteractionDelegate
 import com.agoda.kakao.delegates.ViewInteractionDelegate
 import com.kaspersky.uitest_framework.proxy.ViewAssertionProxy
@@ -27,7 +27,7 @@ open class DataInteractionDelegateImpl(
 
         val viewAssertionProxy = ViewAssertionProxy(
                 viewAssertion,
-                InterceptorConfigurator.viewAssertionInterceptors
+                Configurator.viewAssertionInterceptors
         )
 
         return ViewInteractionDelegateImpl(
@@ -37,7 +37,7 @@ open class DataInteractionDelegateImpl(
 
     private fun execute(executable: () -> ViewInteraction): ViewInteraction {
 
-        return InterceptorConfigurator.executingInterceptor
+        return Configurator.executingInterceptor
                 ?.interceptAndExecute { executable.invoke() }
                 ?: executable.invoke()
     }

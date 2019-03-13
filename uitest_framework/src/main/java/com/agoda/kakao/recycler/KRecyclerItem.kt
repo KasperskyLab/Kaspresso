@@ -8,7 +8,7 @@ import android.support.test.espresso.matcher.RootMatchers
 import com.agoda.kakao.common.KakaoDslMarker
 import com.agoda.kakao.common.actions.BaseActions
 import com.agoda.kakao.common.assertions.BaseAssertions
-import com.agoda.kakao.configuration.Configurator
+import com.agoda.kakao.configurator.KakaoConfigurator
 import org.hamcrest.Matcher
 
 /**
@@ -24,9 +24,7 @@ import org.hamcrest.Matcher
 @Suppress("UNCHECKED_CAST")
 @KakaoDslMarker
 open class KRecyclerItem<out T>(matcher: Matcher<View>) : BaseActions, BaseAssertions {
-    override val view = Configurator.viewInteractionDelegateFactory.invoke(
-            Espresso.onView(matcher)
-    )
+    override val view = KakaoConfigurator.createViewInteractionDelegate(Espresso.onView(matcher))
     override var root = RootMatchers.DEFAULT
 
     /**

@@ -4,7 +4,7 @@ import android.support.test.espresso.web.assertion.WebAssertion
 import android.support.test.espresso.web.model.Atom
 import android.support.test.espresso.web.model.ElementReference
 import android.support.test.espresso.web.sugar.Web
-import com.agoda.kakao.configuration.Configurator
+import com.agoda.kakao.configurator.KakaoConfigurator
 import com.agoda.kakao.delegates.WebInteractionDelegate
 import org.hamcrest.Matcher
 
@@ -13,13 +13,13 @@ class WebInteractionDelegateEmptyImpl internal constructor(
 ): WebInteractionDelegate {
 
     override fun withElement(ref: Atom<ElementReference>): WebInteractionDelegate {
-        return Configurator.webInteractionDelegateFactory.invoke(
+        return KakaoConfigurator.createWebInteractionDelegate(
                 webInteraction.withElement(ref)
         )
     }
 
     override fun perform(webAction: Atom<*>): WebInteractionDelegate {
-        return Configurator.webInteractionDelegateFactory.invoke(
+        return KakaoConfigurator.createWebInteractionDelegate(
                 webInteraction.perform(webAction)
         )
     }
@@ -29,7 +29,7 @@ class WebInteractionDelegateEmptyImpl internal constructor(
             atom: Atom<E>,
             matcher: Matcher<E>
     ): WebInteractionDelegate {
-        return Configurator.webInteractionDelegateFactory.invoke(
+        return KakaoConfigurator.createWebInteractionDelegate(
                 webInteraction.check(webAssertion)
         )
     }

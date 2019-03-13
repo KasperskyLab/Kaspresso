@@ -7,7 +7,7 @@ import android.support.test.espresso.web.model.Atom
 import com.kaspersky.uitest_framework.proxy.AtomProxy
 import android.support.test.espresso.web.model.ElementReference
 import android.support.test.espresso.web.sugar.Web
-import com.kaspersky.uitest_framework.configuration.InterceptorConfigurator
+import com.kaspersky.uitest_framework.configurator.Configurator
 import com.agoda.kakao.delegates.WebInteractionDelegate
 import org.hamcrest.Matcher
 import javax.annotation.CheckReturnValue
@@ -26,7 +26,7 @@ open class WebInteractionDelegateImpl(
 
         val webActionProxy = AtomProxy(
                 webAction,
-                InterceptorConfigurator.atomInterceptors
+                Configurator.atomInterceptors
         )
 
         return WebInteractionDelegateImpl(
@@ -44,7 +44,7 @@ open class WebInteractionDelegateImpl(
                 webAssertion,
                 atom,
                 matcher,
-                InterceptorConfigurator.webAssertionInterceptors
+                Configurator.webAssertionInterceptors
         )
 
         return WebInteractionDelegateImpl(
@@ -54,7 +54,7 @@ open class WebInteractionDelegateImpl(
 
     private fun execute(executable: () -> Web.WebInteraction<*>): Web.WebInteraction<*> {
 
-        return InterceptorConfigurator.executingInterceptor
+        return Configurator.executingInterceptor
                 ?.interceptAndExecuteWeb { executable.invoke() }
                 ?: executable.invoke()
     }

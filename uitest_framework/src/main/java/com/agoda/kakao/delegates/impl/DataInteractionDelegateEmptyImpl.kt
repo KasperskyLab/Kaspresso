@@ -3,7 +3,7 @@ package com.agoda.kakao.delegates.impl
 import android.support.test.espresso.DataInteraction
 import android.support.test.espresso.ViewAssertion
 import android.view.View
-import com.agoda.kakao.configuration.Configurator
+import com.agoda.kakao.configurator.KakaoConfigurator
 import com.agoda.kakao.delegates.DataInteractionDelegate
 import com.agoda.kakao.delegates.ViewInteractionDelegate
 
@@ -19,7 +19,7 @@ class DataInteractionDelegateEmptyImpl internal constructor(
     }
 
     override fun check(viewAssertion: ViewAssertion): ViewInteractionDelegate {
-        return Configurator.viewInteractionDelegateFactory.invoke(
+        return KakaoConfigurator.createViewInteractionDelegate(
                 dataInteraction.check(viewAssertion)
         )
     }

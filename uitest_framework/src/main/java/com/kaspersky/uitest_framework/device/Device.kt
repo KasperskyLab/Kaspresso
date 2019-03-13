@@ -10,10 +10,10 @@ import android.support.test.InstrumentationRegistry
 import android.support.test.espresso.Espresso
 import android.support.test.espresso.matcher.ViewMatchers
 import android.support.test.uiautomator.*
-import com.kaspersky.uitest_framework.configuration.InterceptorConfigurator
+import com.kaspersky.uitest_framework.configurator.Configurator
 import com.kaspersky.uitest_framework.espressoext.viewactions.OrientationChangeAction
 import com.agoda.kakao.common.views.KView
-import com.agoda.kakao.configuration.Configurator
+import com.agoda.kakao.configurator.KakaoConfigurator
 import com.agoda.kakao.delegates.ViewInteractionDelegate
 import com.kaspersky.uitest_framework.logger.UiTestLogger
 import com.kaspersky.uitest_framework.util.getStackTraceAsString
@@ -33,7 +33,7 @@ object Device {
 
     private val interactionDelegate: ViewInteractionDelegate
         get() {
-            return Configurator.viewInteractionDelegateFactory.invoke(
+            return KakaoConfigurator.createViewInteractionDelegate(
                     Espresso.onView(ViewMatchers.isRoot())
             )
         }
@@ -41,7 +41,7 @@ object Device {
     private val rootElement: KView
         get() = KView { ViewMatchers.isRoot() }
 
-    private val logger: UiTestLogger = InterceptorConfigurator.logger
+    private val logger: UiTestLogger = Configurator.logger
 
     val context: Context
         get() = InstrumentationRegistry.getInstrumentation().context

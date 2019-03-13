@@ -5,7 +5,7 @@ package com.agoda.kakao.web
 import android.support.test.espresso.web.sugar.Web
 import com.agoda.kakao.common.KakaoDslMarker
 import com.agoda.kakao.common.builders.ViewBuilder
-import com.agoda.kakao.configuration.Configurator
+import com.agoda.kakao.configurator.KakaoConfigurator
 import com.agoda.kakao.delegates.WebInteractionDelegate
 
 /**
@@ -16,7 +16,7 @@ import com.agoda.kakao.delegates.WebInteractionDelegate
 @KakaoDslMarker
 open class KWebView(matcher: (ViewBuilder.() -> Unit)? = null) {
 
-    private val web: WebInteractionDelegate = Configurator.webInteractionDelegateFactory.invoke(
+    private val web: WebInteractionDelegate = KakaoConfigurator.createWebInteractionDelegate(
             if (matcher != null) {
                 Web.onWebView(ViewBuilder().apply(matcher).getViewMatcher())
             } else {

@@ -2,7 +2,7 @@ package com.kaspersky.uitest_framework.delegates
 
 import android.support.test.espresso.*
 import android.view.View
-import com.kaspersky.uitest_framework.configuration.InterceptorConfigurator
+import com.kaspersky.uitest_framework.configurator.Configurator
 import com.agoda.kakao.delegates.ViewInteractionDelegate
 import com.kaspersky.uitest_framework.proxy.ViewActionProxy
 import com.kaspersky.uitest_framework.proxy.ViewAssertionProxy
@@ -18,7 +18,7 @@ open class ViewInteractionDelegateImpl(
 
         val viewActionProxy = ViewActionProxy(
                 viewAction,
-                InterceptorConfigurator.viewActionInterceptors
+                Configurator.viewActionInterceptors
         )
 
         execute { viewInteraction.perform(viewActionProxy) }
@@ -30,7 +30,7 @@ open class ViewInteractionDelegateImpl(
 
         val viewAssertionProxy = ViewAssertionProxy(
                 viewAssertion,
-                InterceptorConfigurator.viewAssertionInterceptors
+                Configurator.viewAssertionInterceptors
         )
 
         execute { viewInteraction.check(viewAssertionProxy) }
@@ -44,7 +44,7 @@ open class ViewInteractionDelegateImpl(
 
         val viewAssertionProxy = ViewAssertionProxy(
                 ViewAssertion(function),
-                InterceptorConfigurator.viewAssertionInterceptors
+                Configurator.viewAssertionInterceptors
         )
 
         execute { viewInteraction.check(viewAssertionProxy) }
@@ -76,14 +76,14 @@ open class ViewInteractionDelegateImpl(
 
         setFailureHandlerIfNecessary()
 
-        return InterceptorConfigurator.executingInterceptor
+        return Configurator.executingInterceptor
                 ?.interceptAndExecute { executable.invoke() }
                 ?: executable.invoke()
     }
 
     private fun setFailureHandlerIfNecessary() {
 
-        InterceptorConfigurator.failureInterceptor?.let { failureInterceptor ->
+        Configurator.failureInterceptor?.let { failureInterceptor ->
             if (!isCustomFailureHandlerSet) {
                 withFailureHandler(failureInterceptor::interceptAndThrow)
             }

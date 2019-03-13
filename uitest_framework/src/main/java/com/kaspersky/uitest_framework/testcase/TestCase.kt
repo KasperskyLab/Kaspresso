@@ -1,18 +1,18 @@
 package com.kaspersky.uitest_framework.testcase
 
 import com.kaspersky.uitest_framework.device.ScreenshotManager
-import com.kaspersky.uitest_framework.configuration.InterceptorConfigurator
+import com.kaspersky.uitest_framework.configurator.Configurator
 import com.kaspersky.uitest_framework.logger.UiTestLogger
 
-abstract class TestCase {
-    protected val logger: UiTestLogger = InterceptorConfigurator.logger
+abstract class TestCase(
+        configBuilder: Configurator.Builder = Configurator.Builder().default()
+) {
+    protected val logger: UiTestLogger = Configurator.logger
 
     private var stepCounter = 0
 
     init {
-        InterceptorConfigurator.setupConfigs(
-            InterceptorConfigurator.Settings().setupFromDefault()
-        )
+        configBuilder.commit()
     }
 
     protected fun precondition(description: String, actions: () -> Unit) {

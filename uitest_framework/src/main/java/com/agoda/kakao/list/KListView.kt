@@ -11,7 +11,7 @@ import com.agoda.kakao.delegates.ViewInteractionDelegate
 import com.agoda.kakao.common.KakaoDslMarker
 import com.agoda.kakao.common.assertions.BaseAssertions
 import com.agoda.kakao.common.builders.ViewBuilder
-import com.agoda.kakao.configuration.Configurator
+import com.agoda.kakao.configurator.KakaoConfigurator
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers
 import kotlin.reflect.KClass
@@ -105,8 +105,7 @@ class KListView : ScrollViewActions, BaseAssertions, ListViewAdapterAssertions {
                 .inAdapterView(matcher)
                 .atPosition(position)
 
-        val interactionDelegate =
-            Configurator.dataInteractionDelegateFactory.invoke(interaction)
+        val interactionDelegate = KakaoConfigurator.createDataInteractionDelegate(interaction)
 
         function(provideItem(interactionDelegate) as T)
     }
@@ -159,8 +158,7 @@ class KListView : ScrollViewActions, BaseAssertions, ListViewAdapterAssertions {
                 .inRoot(root)
                 .inAdapterView(matcher)
 
-        val interactionDelegate =
-            Configurator.dataInteractionDelegateFactory.invoke(interaction)
+        val interactionDelegate = KakaoConfigurator.createDataInteractionDelegate(interaction)
 
         return provideItem(interactionDelegate) as T
     }
