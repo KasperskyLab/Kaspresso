@@ -3,7 +3,7 @@ package com.kaspersky.uitest_framework.delegates
 import android.support.test.espresso.*
 import android.view.View
 import com.kaspersky.uitest_framework.configuration.InterceptorConfigurator
-import com.kaspersky.uitest_framework.kakao.delegates.ViewInteractionDelegate
+import com.agoda.kakao.delegates.ViewInteractionDelegate
 import com.kaspersky.uitest_framework.proxy.ViewActionProxy
 import com.kaspersky.uitest_framework.proxy.ViewAssertionProxy
 import org.hamcrest.Matcher

@@ -10,7 +10,7 @@ import com.kaspersky.uitest_framework.interceptors.impl.flakysafety.FlakySafeExe
 import com.kaspersky.uitest_framework.interceptors.impl.logging.LoggingFailureInterceptor
 import com.kaspersky.uitest_framework.interceptors.impl.logging.LoggingViewActionInterceptor
 import com.kaspersky.uitest_framework.interceptors.impl.logging.LoggingViewAssertionInterceptor
-import com.kaspersky.uitest_framework.kakao.configuration.Configurator
+import com.agoda.kakao.configuration.Configurator
 import com.kaspersky.uitest_framework.logger.DefaultUiTestLogger
 import com.kaspersky.uitest_framework.logger.UiTestLogger
 

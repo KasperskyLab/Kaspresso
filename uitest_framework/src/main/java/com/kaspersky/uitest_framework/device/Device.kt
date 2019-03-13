@@ -12,9 +12,9 @@ import android.support.test.espresso.matcher.ViewMatchers
 import android.support.test.uiautomator.*
 import com.kaspersky.uitest_framework.configuration.InterceptorConfigurator
 import com.kaspersky.uitest_framework.espressoext.viewactions.OrientationChangeAction
-import com.kaspersky.uitest_framework.kakao.common.views.KView
-import com.kaspersky.uitest_framework.kakao.configuration.Configurator
-import com.kaspersky.uitest_framework.kakao.delegates.ViewInteractionDelegate
+import com.agoda.kakao.common.views.KView
+import com.agoda.kakao.configuration.Configurator
+import com.agoda.kakao.delegates.ViewInteractionDelegate
 import com.kaspersky.uitest_framework.logger.UiTestLogger
 import com.kaspersky.uitest_framework.util.getStackTraceAsString
 

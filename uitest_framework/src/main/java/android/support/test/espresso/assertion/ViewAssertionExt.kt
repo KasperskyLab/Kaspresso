@@ -1,7 +1,7 @@
 package android.support.test.espresso.assertion
 
 import android.support.test.espresso.ViewAssertion
-import com.kaspersky.uitest_framework.util.AppendableDescription
+import org.hamcrest.StringDescription
 
 fun ViewAssertion?.describe(): String {
 
@@ -10,7 +10,7 @@ fun ViewAssertion?.describe(): String {
     val builder = StringBuilder("Check ")
 
     if (this is ViewAssertions.MatchesViewAssertion) {
-        this.viewMatcher.describeTo(AppendableDescription(builder))
+        this.viewMatcher.describeTo(StringDescription(builder))
     } else {
         builder.append(this::class.java.simpleName)
     }

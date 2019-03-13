@@ -1,10 +1,10 @@
 package com.kaspersky.uitest_framework.kakaoext
 
 import android.view.View
-import com.kaspersky.uitest_framework.kakao.check.CheckableActions
-import com.kaspersky.uitest_framework.kakao.common.builders.ViewBuilder
-import com.kaspersky.uitest_framework.kakao.common.views.KBaseView
-import com.kaspersky.uitest_framework.kakao.delegates.DataInteractionDelegate
+import com.agoda.kakao.check.CheckableActions
+import com.agoda.kakao.common.builders.ViewBuilder
+import com.agoda.kakao.common.views.KBaseView
+import com.agoda.kakao.delegates.DataInteractionDelegate
 import org.hamcrest.Matcher
 
 class KSwitch : KBaseView<KSwitch>, CheckableActions {

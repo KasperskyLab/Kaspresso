@@ -8,7 +8,7 @@ import com.kaspersky.uitest_framework.proxy.AtomProxy
 import android.support.test.espresso.web.model.ElementReference
 import android.support.test.espresso.web.sugar.Web
 import com.kaspersky.uitest_framework.configuration.InterceptorConfigurator
-import com.kaspersky.uitest_framework.kakao.delegates.WebInteractionDelegate
+import com.agoda.kakao.delegates.WebInteractionDelegate
 import org.hamcrest.Matcher
 import javax.annotation.CheckReturnValue
 

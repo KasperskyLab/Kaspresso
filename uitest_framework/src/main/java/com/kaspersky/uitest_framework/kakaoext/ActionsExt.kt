@@ -5,7 +5,7 @@ import android.support.test.espresso.ViewAction
 import android.support.test.espresso.matcher.ViewMatchers.isAssignableFrom
 import android.view.View
 import android.widget.TextView
-import com.kaspersky.uitest_framework.kakao.text.TextViewActions
+import com.agoda.kakao.text.TextViewActions
 
 fun TextViewActions.getText() : String {
 

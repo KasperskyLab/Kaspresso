@@ -5,9 +5,9 @@ import android.support.test.espresso.UiController
 import android.support.test.espresso.ViewAction
 import android.support.test.espresso.matcher.ViewMatchers
 import android.view.View
-import com.kaspersky.uitest_framework.kakao.common.KakaoDslMarker
-import com.kaspersky.uitest_framework.kakao.configuration.Configurator
-import com.kaspersky.uitest_framework.kakao.screen.ScreenActions
+import com.agoda.kakao.common.KakaoDslMarker
+import com.agoda.kakao.configuration.Configurator
+import com.agoda.kakao.screen.ScreenActions
 
 @Suppress("UNCHECKED_CAST")
 @KakaoDslMarker

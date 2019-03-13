@@ -6,8 +6,8 @@ import android.support.test.espresso.ViewAssertion
 import android.support.test.espresso.ViewInteraction
 import android.view.View
 import com.kaspersky.uitest_framework.configuration.InterceptorConfigurator
-import com.kaspersky.uitest_framework.kakao.delegates.DataInteractionDelegate
-import com.kaspersky.uitest_framework.kakao.delegates.ViewInteractionDelegate
+import com.agoda.kakao.delegates.DataInteractionDelegate
+import com.agoda.kakao.delegates.ViewInteractionDelegate
 import com.kaspersky.uitest_framework.proxy.ViewAssertionProxy
 import org.hamcrest.Matcher
 import javax.annotation.CheckReturnValue

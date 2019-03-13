@@ -1,8 +1,8 @@
 package com.kaspersky.uitest_framework.espressoext.matchers
 
 import android.view.View
-import com.kaspersky.uitest_framework.util.AppendableDescription
 import org.hamcrest.Matcher
+import org.hamcrest.StringDescription
 
 fun Matcher<View>?.describe(): String {
 
@@ -10,7 +10,7 @@ fun Matcher<View>?.describe(): String {
 
     val builder = StringBuilder()
 
-    this.describeTo(AppendableDescription(builder))
+    this.describeTo(StringDescription(builder))
 
     return builder.toString()
 }

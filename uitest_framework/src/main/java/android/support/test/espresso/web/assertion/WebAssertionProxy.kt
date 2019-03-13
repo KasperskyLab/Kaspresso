@@ -3,8 +3,8 @@ package android.support.test.espresso.web.assertion
 import android.support.test.espresso.web.model.Atom
 import android.webkit.WebView
 import com.kaspersky.uitest_framework.interceptors.WebAssertionInterceptor
-import com.kaspersky.uitest_framework.util.AppendableDescription
 import org.hamcrest.Matcher
+import org.hamcrest.StringDescription
 
 class WebAssertionProxy<E>(
         private val webAssertion: WebAssertion<E>,
@@ -24,7 +24,7 @@ class WebAssertionProxy<E>(
 
         val builder = StringBuilder("Web check ")
 
-        matcher.describeTo(AppendableDescription(builder))
+        matcher.describeTo(StringDescription(builder))
 
         return builder.toString()
     }

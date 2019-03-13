@@ -1,7 +1,7 @@
 package com.kaspersky.uitest_framework.kakaoext
 
 import com.kaspersky.uitest_framework.configuration.InterceptorConfigurator
-import com.kaspersky.uitest_framework.kakao.common.views.KBaseView
+import com.agoda.kakao.common.views.KBaseView
 import java.util.concurrent.TimeUnit
 
 fun <T : KBaseView<Any>> T.attempt(
