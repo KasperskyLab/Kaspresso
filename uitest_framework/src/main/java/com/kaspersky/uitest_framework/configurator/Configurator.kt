@@ -202,13 +202,13 @@ object Configurator {
             Configurator.allowedExceptionsForAttempt = allowedExceptionsForAttempt
 
             viewInteractionDelegateFactory?.let {
-                KakaoConfigurator.setViewInteractionDelegateFactory(it)
+                KakaoConfigurator.initViewInteractionDelegateFactory(it)
             }
             dataInteractionDelegateFactory?.let {
-                KakaoConfigurator.setDataInteractionDelegateFactory(it)
+                KakaoConfigurator.initDataInteractionDelegateFactory(it)
             }
             webInteractionDelegateFactory?.let {
-                KakaoConfigurator.setWebInteractionDelegateFactory(it)
+                KakaoConfigurator.initWebInteractionDelegateFactory(it)
             }
 
             Configurator.viewActionInterceptors = viewActionInterceptors

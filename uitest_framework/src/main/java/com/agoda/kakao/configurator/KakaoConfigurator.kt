@@ -9,34 +9,44 @@ import com.agoda.kakao.delegates.WebInteractionDelegate
 import com.agoda.kakao.delegates.impl.DataInteractionDelegateEmptyImpl
 import com.agoda.kakao.delegates.impl.ViewInteractionDelegateEmptyImpl
 import com.agoda.kakao.delegates.impl.WebInteractionDelegateEmptyImpl
+import java.lang.RuntimeException
 
 object KakaoConfigurator {
 
-     private var viewInteractionDelegateFactory:
+    private var viewInteractionDelegateFactory:
             ((ViewInteraction) -> ViewInteractionDelegate)? = null
 
-     private var dataInteractionDelegateFactory:
+    private var dataInteractionDelegateFactory:
             ((DataInteraction) -> DataInteractionDelegate)? = null
 
-     private var webInteractionDelegateFactory:
+    private var webInteractionDelegateFactory:
             ((Web.WebInteraction<*>) -> WebInteractionDelegate)? = null
 
-    fun setViewInteractionDelegateFactory(
+    @Throws(RuntimeException::class)
+    fun initViewInteractionDelegateFactory(
             factory: (ViewInteraction) -> ViewInteractionDelegate
     ) {
-        viewInteractionDelegateFactory ?: let { viewInteractionDelegateFactory = factory }
+        viewInteractionDelegateFactory?.let {
+            throw RuntimeException("Trying to re-init view interaction delegate factory")
+        } ?: let { viewInteractionDelegateFactory = factory }
     }
 
-    fun setDataInteractionDelegateFactory(
+    @Throws(RuntimeException::class)
+    fun initDataInteractionDelegateFactory(
             factory: (DataInteraction) -> DataInteractionDelegate
     ) {
-        dataInteractionDelegateFactory ?: let { dataInteractionDelegateFactory = factory }
+        dataInteractionDelegateFactory?.let {
+            throw RuntimeException("Trying to re-init data interaction delegate factory")
+        } ?: let { dataInteractionDelegateFactory = factory }
     }
 
-    fun setWebInteractionDelegateFactory(
+    @Throws(RuntimeException::class)
+    fun initWebInteractionDelegateFactory(
             factory: (Web.WebInteraction<*>) -> WebInteractionDelegate
     ) {
-        webInteractionDelegateFactory ?: let { webInteractionDelegateFactory = factory }
+        webInteractionDelegateFactory?.let {
+            throw RuntimeException("Trying to re-init web interaction delegate factory")
+        } ?: let { webInteractionDelegateFactory = factory }
     }
 
     fun createViewInteractionDelegate(
