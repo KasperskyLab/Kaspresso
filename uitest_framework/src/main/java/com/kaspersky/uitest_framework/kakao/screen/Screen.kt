@@ -8,7 +8,7 @@ import android.support.test.espresso.UiController
 import android.support.test.espresso.ViewAction
 import android.support.test.espresso.matcher.ViewMatchers
 import com.kaspersky.uitest_framework.kakao.common.KakaoDslMarker
-import com.kaspersky.uitest_framework.kakao.delegates.factory.DelegatesFactory
+import com.kaspersky.uitest_framework.kakao.configuration.Configurator
 import com.kaspersky.uitest_framework.kakao.delegates.ViewInteractionDelegate
 
 /**
@@ -25,7 +25,7 @@ import com.kaspersky.uitest_framework.kakao.delegates.ViewInteractionDelegate
 @KakaoDslMarker
 open class Screen<out T: Screen<T>>: ScreenActions {
     override val view: ViewInteractionDelegate =
-            DelegatesFactory.viewInteractionDelegateFactory.invoke(
+        Configurator.viewInteractionDelegateFactory.invoke(
                     Espresso.onView(ViewMatchers.isRoot())
             )
 

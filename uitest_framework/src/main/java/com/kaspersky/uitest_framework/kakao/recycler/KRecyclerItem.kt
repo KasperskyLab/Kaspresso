@@ -8,7 +8,7 @@ import android.support.test.espresso.matcher.RootMatchers
 import com.kaspersky.uitest_framework.kakao.common.KakaoDslMarker
 import com.kaspersky.uitest_framework.kakao.common.actions.BaseActions
 import com.kaspersky.uitest_framework.kakao.common.assertions.BaseAssertions
-import com.kaspersky.uitest_framework.kakao.delegates.factory.DelegatesFactory
+import com.kaspersky.uitest_framework.kakao.configuration.Configurator
 import org.hamcrest.Matcher
 
 /**
@@ -24,7 +24,7 @@ import org.hamcrest.Matcher
 @Suppress("UNCHECKED_CAST")
 @KakaoDslMarker
 open class KRecyclerItem<out T>(matcher: Matcher<View>) : BaseActions, BaseAssertions {
-    override val view = DelegatesFactory.viewInteractionDelegateFactory.invoke(
+    override val view = Configurator.viewInteractionDelegateFactory.invoke(
             Espresso.onView(matcher)
     )
     override var root = RootMatchers.DEFAULT

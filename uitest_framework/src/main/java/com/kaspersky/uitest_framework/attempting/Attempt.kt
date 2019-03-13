@@ -1,14 +1,14 @@
 package com.kaspersky.uitest_framework.attempting
 
 import com.kaspersky.uitest_framework.device.ScreenshotManager
-import com.kaspersky.uitest_framework.Configuration
+import com.kaspersky.uitest_framework.configuration.InterceptorConfigurator
 import com.kaspersky.uitest_framework.util.getStackTraceAsString
 
 fun <T> attempt(
-        timeoutMs: Long = Configuration.attemptsTimeoutMs,
-        attemptsFrequencyMs: Long = Configuration.attemptsFrequencyMs,
-        allowedExceptions: Set<Class<out Throwable>> = Configuration.allowedExceptionsForAttempt,
-        action: () -> T
+    timeoutMs: Long = InterceptorConfigurator.attemptsTimeoutMs,
+    attemptsFrequencyMs: Long = InterceptorConfigurator.attemptsFrequencyMs,
+    allowedExceptions: Set<Class<out Throwable>> = InterceptorConfigurator.allowedExceptionsForAttempt,
+    action: () -> T
 ): T {
     var timer = 0L
     var caughtAllowedException: Throwable
@@ -39,12 +39,12 @@ fun <T> attempt(
             "Interaction_failure_${caughtAllowedException::class.simpleName}"
     )
 
-    Configuration.logger.e(
+    InterceptorConfigurator.logger.e(
             "All attempts to interact for $timeoutMs ms totally failed " +
                     "because of ${caughtAllowedException::class.simpleName}"
     )
 
-    Configuration.logger.e(caughtAllowedException.getStackTraceAsString())
+    InterceptorConfigurator.logger.e(caughtAllowedException.getStackTraceAsString())
 
     throw caughtAllowedException
 }

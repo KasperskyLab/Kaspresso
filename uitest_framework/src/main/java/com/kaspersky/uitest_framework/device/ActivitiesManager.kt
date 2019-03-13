@@ -6,14 +6,14 @@ import android.support.test.InstrumentationRegistry
 import android.support.test.internal.runner.junit4.statement.UiThreadStatement
 import android.support.test.runner.lifecycle.ActivityLifecycleMonitorRegistry
 import android.support.test.runner.lifecycle.Stage
-import com.kaspersky.uitest_framework.Configuration
+import com.kaspersky.uitest_framework.configuration.InterceptorConfigurator
 import com.kaspersky.uitest_framework.logger.UiTestLogger
 import org.hamcrest.CoreMatchers
 import org.junit.Assert
 
 class ActivitiesManager {
 
-    private val logger: UiTestLogger = Configuration.logger
+    private val logger: UiTestLogger = InterceptorConfigurator.logger
 
     private val isMainThread: Boolean
         get() = Looper.myLooper() == Looper.getMainLooper()

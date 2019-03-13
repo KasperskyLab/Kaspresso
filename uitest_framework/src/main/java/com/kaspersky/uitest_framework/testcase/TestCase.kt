@@ -1,19 +1,18 @@
 package com.kaspersky.uitest_framework.testcase
 
 import com.kaspersky.uitest_framework.device.ScreenshotManager
-import com.kaspersky.uitest_framework.Configuration
+import com.kaspersky.uitest_framework.configuration.InterceptorConfigurator
 import com.kaspersky.uitest_framework.logger.UiTestLogger
 
-abstract class TestCase<out T: TestCase.ScreensStorage>(
-        protected val screens: T,
-        configBuilder: Configuration.Builder = Configuration.Builder().default()
-) {
-    protected val logger: UiTestLogger = Configuration.logger
+abstract class TestCase {
+    protected val logger: UiTestLogger = InterceptorConfigurator.logger
 
     private var stepCounter = 0
 
     init {
-        configBuilder.commit()
+        InterceptorConfigurator.setupConfigs(
+            InterceptorConfigurator.Settings().setupFromDefault()
+        )
     }
 
     protected fun precondition(description: String, actions: () -> Unit) {
@@ -31,5 +30,4 @@ abstract class TestCase<out T: TestCase.ScreensStorage>(
         ScreenshotManager.makeScreenshotIfPossible(screenshotTag)
     }
 
-    interface ScreensStorage
 }

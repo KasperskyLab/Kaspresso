@@ -1,6 +1,6 @@
 package com.kaspersky.uitest_framework.kakaoext
 
-import com.kaspersky.uitest_framework.Configuration
+import com.kaspersky.uitest_framework.configuration.InterceptorConfigurator
 import com.kaspersky.uitest_framework.kakao.common.assertions.BaseAssertions
 
 fun <T : BaseAssertions> T.compositeCheck(
@@ -12,7 +12,7 @@ fun <T : BaseAssertions> T.compositeCheck(
         try {
             assert.invoke(this)
 
-            Configuration.logger.i(
+            InterceptorConfigurator.logger.i(
                     "Composite check successfully passed. Passed check: ${assert.methodName}"
             )
 
@@ -20,13 +20,13 @@ fun <T : BaseAssertions> T.compositeCheck(
         } catch (e: Throwable) {
             cachedThrowable = e
 
-            Configuration.logger.i(
+            InterceptorConfigurator.logger.i(
                     "One part of composite check failed: ${assert.methodName}"
             )
         }
     }
 
-    Configuration.logger.i("Composite check totally failed")
+    InterceptorConfigurator.logger.i("Composite check totally failed")
 
     throw cachedThrowable!!
 }
@@ -39,19 +39,19 @@ fun <T : BaseAssertions> T.safeCompositeCheck(
         try {
             assert.invoke(this)
 
-            Configuration.logger.i(
+            InterceptorConfigurator.logger.i(
                     "Composite check successfully passed. Passed check: ${assert.methodName}"
             )
 
             return true
         } catch (e: Throwable) {
-            Configuration.logger.i(
+            InterceptorConfigurator.logger.i(
                     "One part of composite check failed: ${assert.methodName}"
             )
         }
     }
 
-    Configuration.logger.i("Composite check totally failed")
+    InterceptorConfigurator.logger.i("Composite check totally failed")
 
     return false
 }

@@ -6,7 +6,7 @@ import android.support.test.espresso.ViewAction
 import android.support.test.espresso.matcher.ViewMatchers
 import android.view.View
 import com.kaspersky.uitest_framework.kakao.common.KakaoDslMarker
-import com.kaspersky.uitest_framework.kakao.delegates.factory.DelegatesFactory
+import com.kaspersky.uitest_framework.kakao.configuration.Configurator
 import com.kaspersky.uitest_framework.kakao.screen.ScreenActions
 
 @Suppress("UNCHECKED_CAST")
@@ -17,7 +17,7 @@ abstract class ExtScreen<out T: ExtScreen<T>>: ScreenActions {
 
     abstract val viewClass: Class<out Any>?
 
-    override val view = DelegatesFactory.viewInteractionDelegateFactory.invoke(
+    override val view = Configurator.viewInteractionDelegateFactory.invoke(
             Espresso.onView(ViewMatchers.isRoot())
     )
 

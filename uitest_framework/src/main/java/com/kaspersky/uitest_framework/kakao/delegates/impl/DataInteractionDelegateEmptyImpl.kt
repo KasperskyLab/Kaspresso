@@ -3,13 +3,13 @@ package com.kaspersky.uitest_framework.kakao.delegates.impl
 import android.support.test.espresso.DataInteraction
 import android.support.test.espresso.ViewAssertion
 import android.view.View
-import com.kaspersky.uitest_framework.kakao.delegates.factory.DelegatesFactory
+import com.kaspersky.uitest_framework.kakao.configuration.Configurator
 import com.kaspersky.uitest_framework.kakao.delegates.DataInteractionDelegate
 import com.kaspersky.uitest_framework.kakao.delegates.ViewInteractionDelegate
 
 import org.hamcrest.Matcher
 
-class DataInteractionDelegateImpl internal constructor(
+class DataInteractionDelegateEmptyImpl internal constructor(
         override val dataInteraction: DataInteraction
 ): DataInteractionDelegate {
 
@@ -19,7 +19,7 @@ class DataInteractionDelegateImpl internal constructor(
     }
 
     override fun check(viewAssertion: ViewAssertion): ViewInteractionDelegate {
-        return DelegatesFactory.viewInteractionDelegateFactory.invoke(
+        return Configurator.viewInteractionDelegateFactory.invoke(
                 dataInteraction.check(viewAssertion)
         )
     }

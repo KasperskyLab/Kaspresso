@@ -5,7 +5,7 @@ import android.view.View
 import com.kaspersky.uitest_framework.kakao.delegates.ViewInteractionDelegate
 import org.hamcrest.Matcher
 
-class ViewInteractionDelegateImpl internal constructor(
+class ViewInteractionDelegateEmptyImpl internal constructor(
         override val viewInteraction: ViewInteraction
 ): ViewInteractionDelegate {
 
