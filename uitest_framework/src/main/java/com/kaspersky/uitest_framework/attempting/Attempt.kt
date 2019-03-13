@@ -1,6 +1,5 @@
 package com.kaspersky.uitest_framework.attempting
 
-import com.kaspersky.uitest_framework.device.ScreenshotManager
 import com.kaspersky.uitest_framework.configurator.Configurator
 import com.kaspersky.uitest_framework.util.getStackTraceAsString
 
@@ -34,10 +33,6 @@ fun <T> attempt(
             }
         }
     } while (timer <= timeoutMs && System.currentTimeMillis() - startTime <= timeoutMs)
-
-    ScreenshotManager.makeScreenshotIfPossible(
-            "Interaction_failure_${caughtAllowedException::class.simpleName}"
-    )
 
     Configurator.logger.e(
             "All attempts to interact for $timeoutMs ms totally failed " +

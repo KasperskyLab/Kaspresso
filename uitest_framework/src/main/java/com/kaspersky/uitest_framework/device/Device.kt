@@ -28,7 +28,7 @@ object Device {
     private const val PERMISSION_ALLOW_BUTTON_ID =
             "$PACKAGE_INSTALLER_PACKAGE_NAME:id/permission_allow_button"
 
-    private val uiDevice: UiDevice =
+    val uiDevice: UiDevice =
             UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
 
     private val interactionDelegate: ViewInteractionDelegate
@@ -37,9 +37,6 @@ object Device {
                     Espresso.onView(ViewMatchers.isRoot())
             )
         }
-
-    private val rootElement: KView
-        get() = KView { ViewMatchers.isRoot() }
 
     private val logger: UiTestLogger = Configurator.logger
 
@@ -58,6 +55,9 @@ object Device {
         )
     }
 
+    /**
+     * Available since api 24
+     */
     @TargetApi(Build.VERSION_CODES.N)
     fun enableAccessibility() {
 
@@ -101,7 +101,7 @@ object Device {
                                 PERMISSION_DENY_BUTTON_ID
                     )
 
-            val btn = find(btnSelector)
+            val btn = uiDevice.findObject(btnSelector)
 
             if (btn.exists()) {
                 btn.click()
@@ -124,15 +124,6 @@ object Device {
     }
 
     fun pressHome(): Boolean = uiDevice.pressHome()
-
-    fun <T> wait(
-            condition: SearchCondition<T>,
-            timeout: Long
-    ): T = uiDevice.wait(condition, timeout)
-
-    fun find(selector: UiSelector): UiObject = uiDevice.findObject(selector)
-
-    fun findWithText(text: String): UiObject = find(UiSelector().text(text))
 
     fun isSdkVersionHigherThan(version: Int): Boolean = Build.VERSION.SDK_INT >= version
 }

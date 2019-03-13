@@ -24,10 +24,18 @@ abstract class TestCase(
         logger.i("___________________________________________________________________________")
         logger.i("TEST STEP: $description")
 
-        actions.invoke()
-
         val screenshotTag = "${this::class.simpleName}_step_${++stepCounter}"
-        ScreenshotManager.makeScreenshotIfPossible(screenshotTag)
+
+        try {
+            actions.invoke()
+            ScreenshotManager.makeScreenshotIfPossible(screenshotTag)
+        } catch (e: Throwable) {
+            ScreenshotManager.makeScreenshotIfPossible(
+                    "${screenshotTag}_failure_${e::class.simpleName}"
+            )
+
+            throw e
+        }
     }
 
 }
