@@ -19,7 +19,6 @@ class ActivitiesManager {
         get() = Looper.myLooper() == Looper.getMainLooper()
 
     inline fun <reified T : Activity> assertCurrentActivity() {
-
         UiThreadStatement.runOnUiThread {
             Assert.assertThat(
                     getResumedActivity(),
@@ -29,7 +28,6 @@ class ActivitiesManager {
     }
 
     fun getResumedActivity(): Activity? {
-
         var resumedActivity: Activity? = null
 
         val findResumedActivity = {

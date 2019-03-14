@@ -48,7 +48,6 @@ class AppsManager(
     fun openUrlInChrome(url: String) = launchApp(CHROME_PACKAGE_NAME, Uri.parse(url))
 
     fun launchApp(packageName: String, data: Uri? = null) {
-
         val intent = context.packageManager
                 .getLaunchIntentForPackage(packageName)
                 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
@@ -63,11 +62,9 @@ class AppsManager(
     }
 
     fun openRecentApp(contentDescription: String) {
-
         device.pressRecentApps()
 
         val appSelector = UiSelector().descriptionContains(contentDescription)
-
         val recentApp = device.findObject(appSelector)
 
         Thread.sleep(1_000)
@@ -80,7 +77,6 @@ class AppsManager(
     }
 
     fun killApp(packageName: String = context.packageName) {
-
         Runtime.getRuntime().exec(arrayOf("am", "force-stop", packageName))
     }
 }
