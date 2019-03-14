@@ -13,7 +13,7 @@ import org.hamcrest.Matcher
 import javax.annotation.CheckReturnValue
 
 open class DataInteractionDelegateImpl(
-        override val dataInteraction: DataInteraction
+        private val dataInteraction: DataInteraction
 ): DataInteractionDelegate {
 
     @CheckResult

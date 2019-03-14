@@ -9,8 +9,6 @@ import javax.annotation.CheckReturnValue
 
 interface DataInteractionDelegate {
 
-    val dataInteraction: DataInteraction
-
     @CheckResult
     @CheckReturnValue
     fun onChildView(childMatcher: Matcher<View>): DataInteractionDelegate

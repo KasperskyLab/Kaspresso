@@ -12,7 +12,6 @@ import android.support.test.espresso.matcher.ViewMatchers
 import android.support.test.uiautomator.*
 import com.kaspersky.uitest_framework.configurator.Configurator
 import com.kaspersky.uitest_framework.espressoext.viewactions.OrientationChangeAction
-import com.agoda.kakao.common.views.KView
 import com.agoda.kakao.configurator.KakaoConfigurator
 import com.agoda.kakao.delegates.ViewInteractionDelegate
 import com.kaspersky.uitest_framework.logger.UiTestLogger
@@ -59,10 +58,7 @@ object Device {
      * Available since api 24
      */
     @TargetApi(Build.VERSION_CODES.N)
-    fun enableAccessibility() {
-
-        val packageName = "com.kms.free"
-        val className = "com.kaspersky.components.accessibility.KasperskyAccessibility"
+    fun enableAccessibility(packageName: String, className: String) {
         val string = "enabled_accessibility_services"
         val cmd = "settings put secure $string $packageName/$className"
 
@@ -70,7 +66,20 @@ object Device {
                 .getUiAutomation(UiAutomation.FLAG_DONT_SUPPRESS_ACCESSIBILITY_SERVICES)
                 .executeShellCommand(cmd)
                 .close()
+    }
 
+    /**
+     * Available since api 24
+     */
+    @TargetApi(Build.VERSION_CODES.N)
+    fun disableAccessibility() {
+        val string = "enabled_accessibility_services"
+        val cmd = "settings put secure $string ' '"
+
+        InstrumentationRegistry.getInstrumentation()
+                .getUiAutomation(UiAutomation.FLAG_DONT_SUPPRESS_ACCESSIBILITY_SERVICES)
+                .executeShellCommand(cmd)
+                .close()
     }
 
     @SuppressLint("WifiManagerLeak")

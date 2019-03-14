@@ -10,8 +10,6 @@ import javax.annotation.CheckReturnValue
 
 interface WebInteractionDelegate {
 
-    val webInteraction: Web.WebInteraction<*>
-
     @CheckResult
     @CheckReturnValue
     fun withElement(ref: Atom<ElementReference>): WebInteractionDelegate

@@ -6,7 +6,7 @@ import com.agoda.kakao.delegates.ViewInteractionDelegate
 import org.hamcrest.Matcher
 
 class ViewInteractionDelegateEmptyImpl internal constructor(
-        override val viewInteraction: ViewInteraction
+        private val viewInteraction: ViewInteraction
 ): ViewInteractionDelegate {
 
     override fun perform(viewAction: ViewAction): ViewInteractionDelegate {

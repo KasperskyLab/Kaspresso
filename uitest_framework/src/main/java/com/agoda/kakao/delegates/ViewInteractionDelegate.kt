@@ -6,8 +6,6 @@ import org.hamcrest.Matcher
 
 interface ViewInteractionDelegate {
 
-    val viewInteraction: ViewInteraction
-
     fun perform(viewAction: ViewAction): ViewInteractionDelegate
 
     fun check(viewAssertion: ViewAssertion): ViewInteractionDelegate

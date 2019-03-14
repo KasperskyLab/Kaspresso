@@ -13,7 +13,7 @@ import org.hamcrest.Matcher
 import javax.annotation.CheckReturnValue
 
 open class WebInteractionDelegateImpl(
-        override val webInteraction: Web.WebInteraction<*>
+        private val webInteraction: Web.WebInteraction<*>
 ): WebInteractionDelegate {
 
     @CheckResult

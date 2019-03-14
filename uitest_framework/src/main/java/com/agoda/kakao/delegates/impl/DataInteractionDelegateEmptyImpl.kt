@@ -10,7 +10,7 @@ import com.agoda.kakao.delegates.ViewInteractionDelegate
 import org.hamcrest.Matcher
 
 class DataInteractionDelegateEmptyImpl internal constructor(
-        override val dataInteraction: DataInteraction
+        private val dataInteraction: DataInteraction
 ): DataInteractionDelegate {
 
     override fun onChildView(childMatcher: Matcher<View>): DataInteractionDelegate {

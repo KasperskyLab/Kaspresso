@@ -1,10 +1,7 @@
 package com.kaspersky.uitest_framework.configurator
 
-import android.support.test.espresso.DataInteraction
 import android.support.test.espresso.NoMatchingViewException
 import android.support.test.espresso.PerformException
-import android.support.test.espresso.ViewInteraction
-import android.support.test.espresso.web.sugar.Web
 import com.kaspersky.uitest_framework.delegates.DataInteractionDelegateImpl
 import com.kaspersky.uitest_framework.delegates.ViewInteractionDelegateImpl
 import com.kaspersky.uitest_framework.delegates.WebInteractionDelegateImpl
@@ -14,9 +11,6 @@ import com.kaspersky.uitest_framework.interceptors.impl.logging.LoggingFailureIn
 import com.kaspersky.uitest_framework.interceptors.impl.logging.LoggingViewActionInterceptor
 import com.kaspersky.uitest_framework.interceptors.impl.logging.LoggingViewAssertionInterceptor
 import com.agoda.kakao.configurator.KakaoConfigurator
-import com.agoda.kakao.delegates.DataInteractionDelegate
-import com.agoda.kakao.delegates.ViewInteractionDelegate
-import com.agoda.kakao.delegates.WebInteractionDelegate
 import com.kaspersky.uitest_framework.logger.DefaultUiTestLogger
 import com.kaspersky.uitest_framework.logger.UiTestLogger
 import java.lang.IllegalArgumentException
@@ -61,16 +55,17 @@ object Configurator {
                 AssertionError::class.java
         )
 
-        private var viewInteractionDelegateFactory:
-                ((ViewInteraction) -> ViewInteractionDelegate)? = null
+        private var viewActionInterceptors: ArrayList<ViewActionInterceptor> = arrayListOf()
 
-        private var dataInteractionDelegateFactory:
-                ((DataInteraction) -> DataInteractionDelegate)? = null
+        private var viewAssertionInterceptors: ArrayList<ViewAssertionInterceptor> = arrayListOf()
 
-        private var webInteractionDelegateFactory:
-                ((Web.WebInteraction<*>) -> WebInteractionDelegate)? = null
+        private var atomInterceptors: ArrayList<AtomInterceptor> = arrayListOf()
 
-        private var interceptorsPack: InterceptorsPack? = null
+        private var webAssertionInterceptors: ArrayList<WebAssertionInterceptor> = arrayListOf()
+
+        private var executingInterceptor: ExecutingInterceptor? = null
+
+        private var failureInterceptor: FailureInterceptor? = null
 
         fun setLogger(logger: UiTestLogger): Builder {
             this.logger = logger
@@ -94,72 +89,45 @@ object Configurator {
             return this
         }
 
-        fun setViewInteractionDelegateFactory(
-                factory: (ViewInteraction) -> ViewInteractionDelegate
-        ): Builder {
-            viewInteractionDelegateFactory = factory
-            return this
-        }
-
-        fun setDataInteractionDelegateFactory(
-                factory: (DataInteraction) -> DataInteractionDelegate
-        ): Builder {
-            dataInteractionDelegateFactory = factory
-            return this
-        }
-
-        fun setWebInteractionDelegateFactory(
-                factory: (Web.WebInteraction<*>) -> WebInteractionDelegate
-        ): Builder {
-            webInteractionDelegateFactory = factory
-            return this
-        }
-
         fun addViewActionInterceptor(
                 viewActionInterceptor: ViewActionInterceptor
         ): Builder {
-            createInterceptorsPackIfNull()
-            interceptorsPack!!.viewActionInterceptors.add(viewActionInterceptor)
+            viewActionInterceptors.add(viewActionInterceptor)
             return this
         }
 
         fun addViewAssertionInterceptor(
                 viewAssertionInterceptor: ViewAssertionInterceptor
         ): Builder {
-            createInterceptorsPackIfNull()
-            interceptorsPack!!.viewAssertionInterceptors.add(viewAssertionInterceptor)
+            viewAssertionInterceptors.add(viewAssertionInterceptor)
             return this
         }
 
         fun addAtomInterceptor(
                 atomInterceptor: AtomInterceptor
         ): Builder {
-            createInterceptorsPackIfNull()
-            interceptorsPack!!.atomInterceptors.add(atomInterceptor)
+            atomInterceptors.add(atomInterceptor)
             return this
         }
 
         fun addWebAssertionInterceptor(
                 webAssertionInterceptor: WebAssertionInterceptor
         ): Builder {
-            createInterceptorsPackIfNull()
-            interceptorsPack!!.webAssertionInterceptors.add(webAssertionInterceptor)
+            webAssertionInterceptors.add(webAssertionInterceptor)
             return this
         }
 
         fun setExecutingInterceptor(
                 executingInterceptor: ExecutingInterceptor
         ): Builder {
-            createInterceptorsPackIfNull()
-            interceptorsPack!!.executingInterceptor = executingInterceptor
+            this.executingInterceptor = executingInterceptor
             return this
         }
 
         fun setFailureInterceptor(
                 failureInterceptor: FailureInterceptor
         ): Builder {
-            createInterceptorsPackIfNull()
-            interceptorsPack!!.failureInterceptor = failureInterceptor
+            this.failureInterceptor = failureInterceptor
             return this
         }
 
@@ -175,23 +143,13 @@ object Configurator {
                     AssertionError::class.java
             )
 
-            viewInteractionDelegateFactory = { ViewInteractionDelegateImpl(it) }
-            dataInteractionDelegateFactory = { DataInteractionDelegateImpl(it) }
-            webInteractionDelegateFactory = { WebInteractionDelegateImpl(it) }
+            viewActionInterceptors = arrayListOf(LoggingViewActionInterceptor(logger))
+            viewAssertionInterceptors = arrayListOf(LoggingViewAssertionInterceptor(logger))
+            atomInterceptors = arrayListOf()
+            webAssertionInterceptors = arrayListOf()
 
-            interceptorsPack = InterceptorsPack()
-
-            interceptorsPack!!.viewActionInterceptors = arrayListOf(
-                    LoggingViewActionInterceptor(logger)
-            )
-            interceptorsPack!!.viewAssertionInterceptors = arrayListOf(
-                    LoggingViewAssertionInterceptor(logger)
-            )
-            interceptorsPack!!.atomInterceptors = arrayListOf()
-            interceptorsPack!!.webAssertionInterceptors = arrayListOf()
-
-            interceptorsPack!!.executingInterceptor = FlakySafeExecutingInterceptor()
-            interceptorsPack!!.failureInterceptor = LoggingFailureInterceptor(logger)
+            executingInterceptor = FlakySafeExecutingInterceptor()
+            failureInterceptor = LoggingFailureInterceptor(logger)
 
             return this
         }
@@ -199,59 +157,25 @@ object Configurator {
         @Throws(IllegalArgumentException::class)
         internal fun commit() {
 
+            with(KakaoConfigurator) {
+                initViewInteractionDelegateFactory { ViewInteractionDelegateImpl(it) }
+                initDataInteractionDelegateFactory { DataInteractionDelegateImpl(it) }
+                initWebInteractionDelegateFactory { WebInteractionDelegateImpl(it) }
+            }
+
             Configurator.logger = logger
             Configurator.attemptsTimeoutMs = attemptsTimeoutMs
             Configurator.attemptsFrequencyMs = attemptsFrequencyMs
 
             Configurator.allowedExceptionsForAttempt = allowedExceptionsForAttempt
 
-            var allowAddInterceptors = false
+            Configurator.viewActionInterceptors = viewActionInterceptors
+            Configurator.viewAssertionInterceptors = viewAssertionInterceptors
+            Configurator.atomInterceptors = atomInterceptors
+            Configurator.webAssertionInterceptors = webAssertionInterceptors
 
-            viewInteractionDelegateFactory?.let {
-                KakaoConfigurator.initViewInteractionDelegateFactory(it)
-                allowAddInterceptors = true
-            }
-            dataInteractionDelegateFactory?.let {
-                KakaoConfigurator.initDataInteractionDelegateFactory(it)
-                allowAddInterceptors = true
-            }
-            webInteractionDelegateFactory?.let {
-                KakaoConfigurator.initWebInteractionDelegateFactory(it)
-                allowAddInterceptors = true
-            }
-
-            if (!allowAddInterceptors && interceptorsPack != null) {
-                throw IllegalArgumentException("No interaction delegates set to run interceptors")
-            }
-
-            Configurator.viewActionInterceptors = interceptorsPack!!.viewActionInterceptors
-            Configurator.viewAssertionInterceptors = interceptorsPack!!.viewAssertionInterceptors
-            Configurator.atomInterceptors = interceptorsPack!!.atomInterceptors
-            Configurator.webAssertionInterceptors = interceptorsPack!!.webAssertionInterceptors
-
-            Configurator.executingInterceptor = interceptorsPack!!.executingInterceptor
-            Configurator.failureInterceptor = interceptorsPack!!.failureInterceptor
-        }
-
-        private fun createInterceptorsPackIfNull() {
-            if (interceptorsPack == null) {
-                interceptorsPack = InterceptorsPack()
-            }
-        }
-
-        private class InterceptorsPack {
-
-            var viewActionInterceptors: ArrayList<ViewActionInterceptor> = arrayListOf()
-
-            var viewAssertionInterceptors: ArrayList<ViewAssertionInterceptor> = arrayListOf()
-
-            var atomInterceptors: ArrayList<AtomInterceptor> = arrayListOf()
-
-            var webAssertionInterceptors: ArrayList<WebAssertionInterceptor> = arrayListOf()
-
-            var executingInterceptor: ExecutingInterceptor? = null
-
-            var failureInterceptor: FailureInterceptor? = null
+            Configurator.executingInterceptor = executingInterceptor
+            Configurator.failureInterceptor = failureInterceptor
         }
     }
 }

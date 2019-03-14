@@ -9,7 +9,7 @@ import com.agoda.kakao.delegates.WebInteractionDelegate
 import org.hamcrest.Matcher
 
 class WebInteractionDelegateEmptyImpl internal constructor(
-        override val webInteraction: Web.WebInteraction<*>
+        private val webInteraction: Web.WebInteraction<*>
 ): WebInteractionDelegate {
 
     override fun withElement(ref: Atom<ElementReference>): WebInteractionDelegate {

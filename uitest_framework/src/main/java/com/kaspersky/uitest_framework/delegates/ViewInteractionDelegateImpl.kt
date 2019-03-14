@@ -9,7 +9,7 @@ import com.kaspersky.uitest_framework.proxy.ViewAssertionProxy
 import org.hamcrest.Matcher
 
 open class ViewInteractionDelegateImpl(
-        override val viewInteraction: ViewInteraction
+        private val viewInteraction: ViewInteraction
 ): ViewInteractionDelegate {
 
     private var isCustomFailureHandlerSet = false
