@@ -1,7 +1,7 @@
 package com.kaspersky.uitest_framework.interceptors
 
-import android.support.test.espresso.ViewAction
 import android.view.View
+import android.support.test.espresso.ViewAction
 
 interface ViewActionInterceptor {
 

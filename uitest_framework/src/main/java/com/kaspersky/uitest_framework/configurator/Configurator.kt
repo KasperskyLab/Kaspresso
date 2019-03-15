@@ -2,15 +2,15 @@ package com.kaspersky.uitest_framework.configurator
 
 import android.support.test.espresso.NoMatchingViewException
 import android.support.test.espresso.PerformException
-import com.kaspersky.uitest_framework.delegates.DataInteractionDelegateImpl
-import com.kaspersky.uitest_framework.delegates.ViewInteractionDelegateImpl
-import com.kaspersky.uitest_framework.delegates.WebInteractionDelegateImpl
 import com.kaspersky.uitest_framework.interceptors.*
 import com.kaspersky.uitest_framework.interceptors.impl.flakysafety.FlakySafeExecutingInterceptor
 import com.kaspersky.uitest_framework.interceptors.impl.logging.LoggingFailureInterceptor
 import com.kaspersky.uitest_framework.interceptors.impl.logging.LoggingViewActionInterceptor
 import com.kaspersky.uitest_framework.interceptors.impl.logging.LoggingViewAssertionInterceptor
 import com.agoda.kakao.configurator.KakaoConfigurator
+import com.kaspersky.uitest_framework.delegates.DataInteractionDelegateImpl
+import com.kaspersky.uitest_framework.delegates.ViewInteractionDelegateImpl
+import com.kaspersky.uitest_framework.delegates.WebInteractionDelegateImpl
 import com.kaspersky.uitest_framework.logger.DefaultUiTestLogger
 import com.kaspersky.uitest_framework.logger.UiTestLogger
 import java.lang.IllegalArgumentException
@@ -24,9 +24,9 @@ object Configurator {
     internal var attemptsFrequencyMs: Long = 500L
 
     internal var allowedExceptionsForAttempt: MutableSet<Class<out Throwable>> = mutableSetOf(
-            PerformException::class.java,
-            NoMatchingViewException::class.java,
-            AssertionError::class.java
+        PerformException::class.java,
+        NoMatchingViewException::class.java,
+        AssertionError::class.java
     )
 
     internal var viewActionInterceptors: ArrayList<ViewActionInterceptor> = arrayListOf()
@@ -50,9 +50,9 @@ object Configurator {
         private var attemptsFrequencyMs: Long = 500L
 
         private var allowedExceptionsForAttempt: MutableSet<Class<out Throwable>> = mutableSetOf(
-                PerformException::class.java,
-                NoMatchingViewException::class.java,
-                AssertionError::class.java
+            PerformException::class.java,
+            NoMatchingViewException::class.java,
+            AssertionError::class.java
         )
 
         private var viewActionInterceptors: ArrayList<ViewActionInterceptor> = arrayListOf()
@@ -83,49 +83,49 @@ object Configurator {
         }
 
         fun addAllowedExceptionForAttempt(
-                exception: Class<out Throwable>
+            exception: Class<out Throwable>
         ): Builder {
             allowedExceptionsForAttempt.add(exception)
             return this
         }
 
         fun addViewActionInterceptor(
-                viewActionInterceptor: ViewActionInterceptor
+            viewActionInterceptor: ViewActionInterceptor
         ): Builder {
             viewActionInterceptors.add(viewActionInterceptor)
             return this
         }
 
         fun addViewAssertionInterceptor(
-                viewAssertionInterceptor: ViewAssertionInterceptor
+            viewAssertionInterceptor: ViewAssertionInterceptor
         ): Builder {
             viewAssertionInterceptors.add(viewAssertionInterceptor)
             return this
         }
 
         fun addAtomInterceptor(
-                atomInterceptor: AtomInterceptor
+            atomInterceptor: AtomInterceptor
         ): Builder {
             atomInterceptors.add(atomInterceptor)
             return this
         }
 
         fun addWebAssertionInterceptor(
-                webAssertionInterceptor: WebAssertionInterceptor
+            webAssertionInterceptor: WebAssertionInterceptor
         ): Builder {
             webAssertionInterceptors.add(webAssertionInterceptor)
             return this
         }
 
         fun setExecutingInterceptor(
-                executingInterceptor: ExecutingInterceptor
+            executingInterceptor: ExecutingInterceptor
         ): Builder {
             this.executingInterceptor = executingInterceptor
             return this
         }
 
         fun setFailureInterceptor(
-                failureInterceptor: FailureInterceptor
+            failureInterceptor: FailureInterceptor
         ): Builder {
             this.failureInterceptor = failureInterceptor
             return this
@@ -138,9 +138,9 @@ object Configurator {
             attemptsFrequencyMs = 500L
 
             allowedExceptionsForAttempt = mutableSetOf(
-                    PerformException::class.java,
-                    NoMatchingViewException::class.java,
-                    AssertionError::class.java
+                PerformException::class.java,
+                NoMatchingViewException::class.java,
+                AssertionError::class.java
             )
 
             viewActionInterceptors = arrayListOf(LoggingViewActionInterceptor(logger))

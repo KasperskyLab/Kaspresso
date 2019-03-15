@@ -4,7 +4,7 @@ import com.kaspersky.uitest_framework.configurator.Configurator
 import com.agoda.kakao.common.assertions.BaseAssertions
 
 fun <T : BaseAssertions> T.compositeCheck(
-        vararg asserts: T.() -> Unit
+    vararg asserts: T.() -> Unit
 ) {
     var cachedThrowable: Throwable? = null
 
@@ -13,7 +13,7 @@ fun <T : BaseAssertions> T.compositeCheck(
             assert.invoke(this)
 
             Configurator.logger.i(
-                    "Composite check successfully passed. Passed check: ${assert.methodName}"
+                "Composite check successfully passed. Passed check: ${assert.methodName}"
             )
 
             return
@@ -21,7 +21,7 @@ fun <T : BaseAssertions> T.compositeCheck(
             cachedThrowable = e
 
             Configurator.logger.i(
-                    "One part of composite check failed: ${assert.methodName}"
+                "One part of composite check failed: ${assert.methodName}"
             )
         }
     }
@@ -32,7 +32,7 @@ fun <T : BaseAssertions> T.compositeCheck(
 }
 
 fun <T : BaseAssertions> T.safeCompositeCheck(
-        vararg asserts: T.() -> Unit
+    vararg asserts: T.() -> Unit
 ): Boolean {
 
     asserts.forEach { assert ->
@@ -40,13 +40,13 @@ fun <T : BaseAssertions> T.safeCompositeCheck(
             assert.invoke(this)
 
             Configurator.logger.i(
-                    "Composite check successfully passed. Passed check: ${assert.methodName}"
+                "Composite check successfully passed. Passed check: ${assert.methodName}"
             )
 
             return true
         } catch (e: Throwable) {
             Configurator.logger.i(
-                    "One part of composite check failed: ${assert.methodName}"
+                "One part of composite check failed: ${assert.methodName}"
             )
         }
     }

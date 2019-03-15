@@ -1,13 +1,13 @@
 package com.kaspersky.uitest_framework.kakaoext
 
-import android.support.test.espresso.UiController
 import android.support.test.espresso.ViewAction
-import android.support.test.espresso.matcher.ViewMatchers.isAssignableFrom
 import android.view.View
 import android.widget.TextView
+import android.support.test.espresso.UiController
+import android.support.test.espresso.matcher.ViewMatchers.isAssignableFrom
 import com.agoda.kakao.text.TextViewActions
 
-fun TextViewActions.getText() : String {
+fun TextViewActions.getText(): String {
 
     var stringHolder = "_"
 

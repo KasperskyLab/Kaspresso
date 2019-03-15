@@ -1,9 +1,9 @@
 package com.kaspersky.uitest_framework.util
 
 import android.content.res.Resources
-import android.support.test.espresso.matcher.ViewMatchers.isDisplayingAtLeast
 import android.view.View
 import android.widget.TextView
+import android.support.test.espresso.matcher.ViewMatchers.isDisplayingAtLeast
 
 fun View?.describe(): String {
 

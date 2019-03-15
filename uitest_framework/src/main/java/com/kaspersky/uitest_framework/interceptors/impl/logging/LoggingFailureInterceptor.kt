@@ -1,7 +1,7 @@
 package com.kaspersky.uitest_framework.interceptors.impl.logging
 
-import android.support.test.espresso.PerformException
 import android.view.View
+import android.support.test.espresso.PerformException
 import com.kaspersky.uitest_framework.espressoext.matchers.describe
 import com.kaspersky.uitest_framework.interceptors.FailureInterceptor
 import com.kaspersky.uitest_framework.logger.UiTestLogger
@@ -9,22 +9,22 @@ import junit.framework.AssertionFailedError
 import org.hamcrest.Matcher
 
 class LoggingFailureInterceptor(
-        private val uiTestLogger: UiTestLogger
+    private val uiTestLogger: UiTestLogger
 ) : FailureInterceptor {
 
     override fun interceptAndThrow(error: Throwable, viewMatcher: Matcher<View>) {
 
         uiTestLogger.e(
-                "Failed to interact with view matching: ${viewMatcher.describe()} " +
-                        "because of ${error::class.simpleName}"
+            "Failed to interact with view matching: ${viewMatcher.describe()} " +
+                    "because of ${error::class.simpleName}"
         )
 
         throw getSelfDescribedError(error, viewMatcher)
     }
 
     private fun getSelfDescribedError(
-            error: Throwable,
-            viewMatcher: Matcher<View>
+        error: Throwable,
+        viewMatcher: Matcher<View>
     ): Throwable {
 
         var error = error
@@ -35,9 +35,9 @@ class LoggingFailureInterceptor(
             sb.append(viewMatcher.toString())
 
             error = PerformException.Builder()
-                    .from(error)
-                    .withViewDescription(sb.toString())
-                    .build()
+                .from(error)
+                .withViewDescription(sb.toString())
+                .build()
         }
 
         if (error is AssertionError) {
