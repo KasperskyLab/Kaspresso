@@ -58,7 +58,10 @@ object Device {
      * Available since api 24
      */
     @TargetApi(Build.VERSION_CODES.N)
-    fun enableAccessibility(packageName: String, className: String) {
+    fun enableAccessibility(
+            packageName: String,
+            className: String = "com.kaspersky.components.accessibility.KasperskyAccessibility"
+    ) {
         val string = "enabled_accessibility_services"
         val cmd = "settings put secure $string $packageName/$className"
 
@@ -84,7 +87,6 @@ object Device {
 
     @SuppressLint("WifiManagerLeak")
     fun toggleWiFi(enable: Boolean) {
-
         val wifiManager =
                 if (isSdkVersionHigherThan(Build.VERSION_CODES.N)) {
                     InstrumentationRegistry.getTargetContext()
@@ -124,7 +126,6 @@ object Device {
     }
 
     fun pressBack(failTestIfAppUnderTestClosed: Boolean = false) {
-
         if (failTestIfAppUnderTestClosed) {
             Espresso.pressBack()
         } else {
