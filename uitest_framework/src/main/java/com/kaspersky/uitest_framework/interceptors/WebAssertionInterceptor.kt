@@ -6,8 +6,8 @@ import android.webkit.WebView
 interface WebAssertionInterceptor {
 
     fun intercept(
-            webAssertionProxy: WebAssertionProxy<*>,
-            view: WebView?,
-            result: Any
+        webAssertionProxy: WebAssertionProxy<*>,
+        view: WebView?,
+        result: Any
     )
 }

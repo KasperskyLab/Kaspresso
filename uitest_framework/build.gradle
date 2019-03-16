@@ -25,19 +25,24 @@ android {
 }
 
 dependencies {
+    implementation project(':kakao')
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
     implementation "org.jetbrains.kotlin:kotlin-reflect:$versions.kotlin"
-    implementation "com.android.support:design:$versions.androidSupport"
+
     testImplementation "junit:junit:$versions.junit"
-    implementation "com.squareup.retrofit2:retrofit:$versions.retrofit"
+
+    implementation "com.android.support:design:$versions.androidSupport"
     implementation "com.android.support.test:runner:$versions.runner"
     implementation "com.android.support.test.espresso:espresso-web:$versions.espresso"
     implementation "com.android.support.test.espresso:espresso-core:$versions.espresso"
     implementation "com.android.support.test.espresso:espresso-contrib:$versions.espresso"
     implementation "com.android.support.test.espresso:espresso-intents:$versions.espresso"
     implementation "com.android.support.test.uiautomator:uiautomator-v18:$versions.uiautomator"
+
+    implementation "com.squareup.retrofit2:retrofit:$versions.retrofit"
     implementation "com.squareup.spoon:spoon-client:$versions.spoon"
 }
 

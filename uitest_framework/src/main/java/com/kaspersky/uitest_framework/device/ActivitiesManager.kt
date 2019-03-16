@@ -21,8 +21,8 @@ class ActivitiesManager {
     inline fun <reified T : Activity> assertCurrentActivity() {
         UiThreadStatement.runOnUiThread {
             Assert.assertThat(
-                    getResumedActivity(),
-                    CoreMatchers.instanceOf(T::class.java)
+                getResumedActivity(),
+                CoreMatchers.instanceOf(T::class.java)
             )
         }
     }
@@ -32,7 +32,7 @@ class ActivitiesManager {
 
         val findResumedActivity = {
             val resumedActivities = ActivityLifecycleMonitorRegistry.getInstance()
-                    .getActivitiesInStage(Stage.RESUMED)
+                .getActivitiesInStage(Stage.RESUMED)
 
             if (resumedActivities.iterator().hasNext()) {
                 resumedActivity = resumedActivities.iterator().next()

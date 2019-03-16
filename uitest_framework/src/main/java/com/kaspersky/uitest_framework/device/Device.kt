@@ -7,9 +7,9 @@ import android.content.Context
 import android.net.wifi.WifiManager
 import android.os.Build
 import android.support.test.InstrumentationRegistry
+import android.support.test.uiautomator.*
 import android.support.test.espresso.Espresso
 import android.support.test.espresso.matcher.ViewMatchers
-import android.support.test.uiautomator.*
 import com.kaspersky.uitest_framework.configurator.Configurator
 import com.kaspersky.uitest_framework.espressoext.viewactions.OrientationChangeAction
 import com.agoda.kakao.configurator.KakaoConfigurator
@@ -22,18 +22,18 @@ object Device {
     private const val PACKAGE_INSTALLER_PACKAGE_NAME = "com.android.packageinstaller"
 
     private const val PERMISSION_DENY_BUTTON_ID =
-            "$PACKAGE_INSTALLER_PACKAGE_NAME:id/permission_deny_button"
+        "$PACKAGE_INSTALLER_PACKAGE_NAME:id/permission_deny_button"
 
     private const val PERMISSION_ALLOW_BUTTON_ID =
-            "$PACKAGE_INSTALLER_PACKAGE_NAME:id/permission_allow_button"
+        "$PACKAGE_INSTALLER_PACKAGE_NAME:id/permission_allow_button"
 
     val uiDevice: UiDevice =
-            UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
+        UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
 
     private val interactionDelegate: ViewInteractionDelegate
         get() {
             return KakaoConfigurator.createViewInteractionDelegate(
-                    Espresso.onView(ViewMatchers.isRoot())
+                Espresso.onView(ViewMatchers.isRoot())
             )
         }
 
@@ -50,7 +50,7 @@ object Device {
         val resumedActivity = activitiesManager.getResumedActivity() ?: return
 
         interactionDelegate.perform(
-                OrientationChangeAction.toggle(resumedActivity)
+            OrientationChangeAction.toggle(resumedActivity)
         )
     }
 
@@ -59,16 +59,16 @@ object Device {
      */
     @TargetApi(Build.VERSION_CODES.N)
     fun enableAccessibility(
-            packageName: String,
-            className: String = "com.kaspersky.components.accessibility.KasperskyAccessibility"
+        packageName: String,
+        className: String = "com.kaspersky.components.accessibility.KasperskyAccessibility"
     ) {
         val string = "enabled_accessibility_services"
         val cmd = "settings put secure $string $packageName/$className"
 
         InstrumentationRegistry.getInstrumentation()
-                .getUiAutomation(UiAutomation.FLAG_DONT_SUPPRESS_ACCESSIBILITY_SERVICES)
-                .executeShellCommand(cmd)
-                .close()
+            .getUiAutomation(UiAutomation.FLAG_DONT_SUPPRESS_ACCESSIBILITY_SERVICES)
+            .executeShellCommand(cmd)
+            .close()
     }
 
     /**
@@ -80,22 +80,22 @@ object Device {
         val cmd = "settings put secure $string ' '"
 
         InstrumentationRegistry.getInstrumentation()
-                .getUiAutomation(UiAutomation.FLAG_DONT_SUPPRESS_ACCESSIBILITY_SERVICES)
-                .executeShellCommand(cmd)
-                .close()
+            .getUiAutomation(UiAutomation.FLAG_DONT_SUPPRESS_ACCESSIBILITY_SERVICES)
+            .executeShellCommand(cmd)
+            .close()
     }
 
     @SuppressLint("WifiManagerLeak")
     fun toggleWiFi(enable: Boolean) {
         val wifiManager =
-                if (isSdkVersionHigherThan(Build.VERSION_CODES.N)) {
-                    InstrumentationRegistry.getTargetContext()
-                            .getSystemService(Context.WIFI_SERVICE) as WifiManager
-                } else {
-                    InstrumentationRegistry.getTargetContext()
-                            .applicationContext
-                            .getSystemService(Context.WIFI_SERVICE) as WifiManager
-                }
+            if (isSdkVersionHigherThan(Build.VERSION_CODES.N)) {
+                InstrumentationRegistry.getTargetContext()
+                    .getSystemService(Context.WIFI_SERVICE) as WifiManager
+            } else {
+                InstrumentationRegistry.getTargetContext()
+                    .applicationContext
+                    .getSystemService(Context.WIFI_SERVICE) as WifiManager
+            }
 
         wifiManager.isWifiEnabled = enable
     }
@@ -103,14 +103,14 @@ object Device {
     fun handlePermissionRequest(shouldAllowPermissions: Boolean) {
         try {
             val btnSelector = UiSelector()
-                    .clickable(true)
-                    .checkable(false)
-                    .resourceId(
-                            if (shouldAllowPermissions)
-                                PERMISSION_ALLOW_BUTTON_ID
-                            else
-                                PERMISSION_DENY_BUTTON_ID
-                    )
+                .clickable(true)
+                .checkable(false)
+                .resourceId(
+                    if (shouldAllowPermissions)
+                        PERMISSION_ALLOW_BUTTON_ID
+                    else
+                        PERMISSION_DENY_BUTTON_ID
+                )
 
             val btn = uiDevice.findObject(btnSelector)
 
