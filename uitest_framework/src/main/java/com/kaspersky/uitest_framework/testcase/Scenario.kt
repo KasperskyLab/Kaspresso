@@ -13,16 +13,11 @@ abstract class Scenario {
 
     private var stepCounter = 0
 
-    protected fun precondition(description: String, actions: () -> Unit) {
-        logger.i(description)
-        actions.invoke()
-    }
-
-    protected fun step(description: String, actions: () -> Unit) {
+    protected fun sceneStep(description: String, actions: () -> Unit) {
         logger.i("___________________________________________________________________________")
-        logger.i("TEST STEP: $description")
+        logger.i("TEST SCENE_STEP: $description")
 
-        val screenshotTag = "${this::class.simpleName}_step_${++stepCounter}"
+        val screenshotTag = "${this::class.simpleName}_scene_step_${++stepCounter}"
 
         try {
             actions.invoke()
