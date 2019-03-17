@@ -7,16 +7,16 @@ import com.kaspersky.uitest_framework.logger.UiTestLogger
 import com.kaspersky.uitest_framework.util.describe
 
 class LoggingWebAssertionInterceptor(
-        private val uiTestLogger: UiTestLogger
-): WebAssertionInterceptor {
+    private val uiTestLogger: UiTestLogger
+) : WebAssertionInterceptor {
 
     override fun intercept(
-            webAssertionProxy: WebAssertionProxy<*>,
-            view: WebView?,
-            result: Any
+        webAssertionProxy: WebAssertionProxy<*>,
+        view: WebView?,
+        result: Any
     ) {
         uiTestLogger.i(
-                "${webAssertionProxy.describe()} on ${view.describe()} with result $result"
+            "${webAssertionProxy.describe()} on ${view.describe()} with result $result"
         )
     }
 }

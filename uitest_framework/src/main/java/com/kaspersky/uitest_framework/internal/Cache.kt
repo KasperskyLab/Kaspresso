@@ -8,31 +8,31 @@ import java.io.File
 import java.util.*
 
 internal class Cache(
-        private val contextGetter: () -> Context
+    private val contextGetter: () -> Context
 ) {
     fun clear() {
         val cacheDir = contextGetter.invoke().cacheDir
         if (cacheDir.list() != null) {
             attempt(
-                    timeoutMs = DELETE_TIMEOUT_MS,
-                    attemptsFrequencyMs = DELETE_FREQUENCY_MS
+                timeoutMs = DELETE_TIMEOUT_MS,
+                attemptsFrequencyMs = DELETE_FREQUENCY_MS
             ) {
                 Assert.assertThat(
-                        "Can't delete ${cacheDir.path}",
-                        deleteRecursive(cacheDir),
-                        Matchers.`is`(true)
+                    "Can't delete ${cacheDir.path}",
+                    deleteRecursive(cacheDir),
+                    Matchers.`is`(true)
                 )
             }
         }
     }
 
     private fun deleteRecursive(
-            directory: File,
-            vararg excludes: String
+        directory: File,
+        vararg excludes: String
     ): Boolean {
 
         if (excludes.isNotEmpty() &&
-                Arrays.asList(*excludes).contains(directory.name)
+            Arrays.asList(*excludes).contains(directory.name)
         ) {
             return true
         }
@@ -40,13 +40,13 @@ internal class Cache(
         if (directory.isDirectory) {
             directory.list()?.forEach { content ->
                 attempt(
-                        timeoutMs = DELETE_TIMEOUT_MS,
-                        attemptsFrequencyMs = DELETE_FREQUENCY_MS
+                    timeoutMs = DELETE_TIMEOUT_MS,
+                    attemptsFrequencyMs = DELETE_FREQUENCY_MS
                 ) {
                     Assert.assertThat(
-                            "Can't delete file $content in ${directory.path}",
-                            deleteRecursive(File(directory, content), *excludes),
-                            Matchers.`is`(true)
+                        "Can't delete file $content in ${directory.path}",
+                        deleteRecursive(File(directory, content), *excludes),
+                        Matchers.`is`(true)
                     )
                 }
             }

@@ -1,10 +1,10 @@
 package com.kaspersky.uitest_framework.delegates
 
+import android.view.View
 import android.support.annotation.CheckResult
 import android.support.test.espresso.DataInteraction
 import android.support.test.espresso.ViewAssertion
 import android.support.test.espresso.ViewInteraction
-import android.view.View
 import com.kaspersky.uitest_framework.configurator.Configurator
 import com.agoda.kakao.delegates.DataInteractionDelegate
 import com.agoda.kakao.delegates.ViewInteractionDelegate
@@ -13,8 +13,8 @@ import org.hamcrest.Matcher
 import javax.annotation.CheckReturnValue
 
 open class DataInteractionDelegateImpl(
-        private val dataInteraction: DataInteraction
-): DataInteractionDelegate {
+    private val dataInteraction: DataInteraction
+) : DataInteractionDelegate {
 
     @CheckResult
     @CheckReturnValue
@@ -26,19 +26,19 @@ open class DataInteractionDelegateImpl(
     override fun check(viewAssertion: ViewAssertion): ViewInteractionDelegate {
 
         val viewAssertionProxy = ViewAssertionProxy(
-                viewAssertion,
-                Configurator.viewAssertionInterceptors
+            viewAssertion,
+            Configurator.viewAssertionInterceptors
         )
 
         return ViewInteractionDelegateImpl(
-                execute { dataInteraction.check(viewAssertionProxy) }
+            execute { dataInteraction.check(viewAssertionProxy) }
         )
     }
 
     private fun execute(executable: () -> ViewInteraction): ViewInteraction {
 
         return Configurator.executingInterceptor
-                ?.interceptAndExecute { executable.invoke() }
-                ?: executable.invoke()
+            ?.interceptAndExecute { executable.invoke() }
+            ?: executable.invoke()
     }
 }

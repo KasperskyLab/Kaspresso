@@ -5,7 +5,7 @@ import org.hamcrest.Matchers
 import org.junit.Assert
 
 internal class SQLiteDB(
-        private val contextGetter: () -> Context
+    private val contextGetter: () -> Context
 ) {
     /**
      * Only works if all database connections are closed.
@@ -22,9 +22,9 @@ internal class SQLiteDB(
             val exists = databasePath.exists()
 
             Assert.assertThat(
-                    "db exist not anymore at $databasePath",
-                    exists,
-                    Matchers.`is`(false)
+                "db exist not anymore at $databasePath",
+                exists,
+                Matchers.`is`(false)
             )
         }
     }

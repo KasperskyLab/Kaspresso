@@ -1,14 +1,14 @@
 package com.kaspersky.uitest_framework.proxy
 
+import android.view.View
 import android.support.test.espresso.UiController
 import android.support.test.espresso.ViewAction
-import android.view.View
 import com.kaspersky.uitest_framework.interceptors.ViewActionInterceptor
 import org.hamcrest.Matcher
 
 class ViewActionProxy(
-        private val viewAction: ViewAction,
-        private val interceptors: List<ViewActionInterceptor>
+    private val viewAction: ViewAction,
+    private val interceptors: List<ViewActionInterceptor>
 ) : ViewAction {
 
     override fun getDescription(): String = viewAction.description

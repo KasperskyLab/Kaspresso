@@ -8,10 +8,10 @@ import com.kaspersky.uitest_framework.interceptors.ExecutingInterceptor
 class FlakySafeExecutingInterceptor : ExecutingInterceptor {
 
     override fun interceptAndExecute(
-            function: () -> ViewInteraction
+        function: () -> ViewInteraction
     ): ViewInteraction = attempt { function.invoke() }
 
     override fun interceptAndExecuteWeb(
-            function: () -> Web.WebInteraction<*>
+        function: () -> Web.WebInteraction<*>
     ): Web.WebInteraction<*> = attempt { function.invoke() }
 }

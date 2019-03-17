@@ -1,7 +1,7 @@
 package com.kaspersky.uitest_framework.delegates
 
-import android.support.test.espresso.*
 import android.view.View
+import android.support.test.espresso.*
 import com.kaspersky.uitest_framework.configurator.Configurator
 import com.agoda.kakao.delegates.ViewInteractionDelegate
 import com.kaspersky.uitest_framework.proxy.ViewActionProxy
@@ -9,16 +9,16 @@ import com.kaspersky.uitest_framework.proxy.ViewAssertionProxy
 import org.hamcrest.Matcher
 
 open class ViewInteractionDelegateImpl(
-        private val viewInteraction: ViewInteraction
-): ViewInteractionDelegate {
+    private val viewInteraction: ViewInteraction
+) : ViewInteractionDelegate {
 
     private var isCustomFailureHandlerSet = false
 
     override fun perform(viewAction: ViewAction): ViewInteractionDelegate {
 
         val viewActionProxy = ViewActionProxy(
-                viewAction,
-                Configurator.viewActionInterceptors
+            viewAction,
+            Configurator.viewActionInterceptors
         )
 
         execute { viewInteraction.perform(viewActionProxy) }
@@ -29,8 +29,8 @@ open class ViewInteractionDelegateImpl(
     override fun check(viewAssertion: ViewAssertion): ViewInteractionDelegate {
 
         val viewAssertionProxy = ViewAssertionProxy(
-                viewAssertion,
-                Configurator.viewAssertionInterceptors
+            viewAssertion,
+            Configurator.viewAssertionInterceptors
         )
 
         execute { viewInteraction.check(viewAssertionProxy) }
@@ -39,12 +39,12 @@ open class ViewInteractionDelegateImpl(
     }
 
     override fun check(
-            function: (View, NoMatchingViewException) -> Unit
+        function: (View, NoMatchingViewException) -> Unit
     ): ViewInteractionDelegate {
 
         val viewAssertionProxy = ViewAssertionProxy(
-                ViewAssertion(function),
-                Configurator.viewAssertionInterceptors
+            ViewAssertion(function),
+            Configurator.viewAssertionInterceptors
         )
 
         execute { viewInteraction.check(viewAssertionProxy) }
@@ -53,7 +53,7 @@ open class ViewInteractionDelegateImpl(
     }
 
     override fun withFailureHandler(
-            function: (Throwable, Matcher<View>) -> Unit
+        function: (Throwable, Matcher<View>) -> Unit
     ): ViewInteractionDelegate {
 
         isCustomFailureHandlerSet = true
@@ -77,8 +77,8 @@ open class ViewInteractionDelegateImpl(
         setFailureHandlerIfNecessary()
 
         return Configurator.executingInterceptor
-                ?.interceptAndExecute { executable.invoke() }
-                ?: executable.invoke()
+            ?.interceptAndExecute { executable.invoke() }
+            ?: executable.invoke()
     }
 
     private fun setFailureHandlerIfNecessary() {

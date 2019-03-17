@@ -3,27 +3,27 @@ package com.kaspersky.uitest_framework.espressoext.viewactions
 import android.app.Activity
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
+import android.view.View
 import android.support.test.espresso.UiController
 import android.support.test.espresso.ViewAction
 import android.support.test.espresso.matcher.ViewMatchers
-import android.view.View
 import org.hamcrest.Matcher
 
 class OrientationChangeAction(
-        private val activity: Activity,
-        private val orientation: Int? = null
+    private val activity: Activity,
+    private val orientation: Int? = null
 ) : ViewAction {
 
     companion object {
 
         fun toggle(activity: Activity): ViewAction =
-                OrientationChangeAction(activity)
+            OrientationChangeAction(activity)
 
         fun orientationLandscape(activity: Activity): ViewAction =
-                OrientationChangeAction(activity, ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE)
+            OrientationChangeAction(activity, ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE)
 
         fun orientationPortrait(activity: Activity): ViewAction =
-                OrientationChangeAction(activity, ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
+            OrientationChangeAction(activity, ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
     }
 
     override fun getConstraints(): Matcher<View> = ViewMatchers.isRoot()

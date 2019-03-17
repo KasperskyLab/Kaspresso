@@ -19,29 +19,29 @@ class AppsManager(
         get() = contextGetter.invoke()
 
     fun waitForLauncher(
-            timeout: Long = MAX_LAUNCH_TIME_MS,
-            launcherPackageName: String = device.launcherPackageName
+        timeout: Long = MAX_LAUNCH_TIME_MS,
+        launcherPackageName: String = device.launcherPackageName
     ) {
         MatcherAssert.assertThat(
-                device.launcherPackageName,
-                CoreMatchers.notNullValue()
+            device.launcherPackageName,
+            CoreMatchers.notNullValue()
         )
 
         val condition = Until.hasObject(By.pkg(launcherPackageName).depth(0))
 
         Assert.assertTrue(
-                device.wait(condition, timeout)
+            device.wait(condition, timeout)
         )
     }
 
     fun waitForAppLaunchAndReady(
-            timeout: Long = MAX_LAUNCH_TIME_MS,
-            packageName: String = context.packageName
+        timeout: Long = MAX_LAUNCH_TIME_MS,
+        packageName: String = context.packageName
     ) {
         val condition = Until.hasObject(By.pkg(packageName).depth(0))
 
         Assert.assertTrue(
-                device.wait(condition, timeout)
+            device.wait(condition, timeout)
         )
     }
 
@@ -49,8 +49,8 @@ class AppsManager(
 
     fun launchApp(packageName: String, data: Uri? = null) {
         val intent = context.packageManager
-                .getLaunchIntentForPackage(packageName)
-                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            .getLaunchIntentForPackage(packageName)
+            .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
 
         data?.let { intent.data = it }
 

@@ -6,9 +6,9 @@ import android.support.test.espresso.web.model.Evaluation
 import com.kaspersky.uitest_framework.interceptors.AtomInterceptor
 
 class AtomProxy<R>(
-        private val atom: Atom<R>,
-        private val interceptors: List<AtomInterceptor>
-): Atom<R> {
+    private val atom: Atom<R>,
+    private val interceptors: List<AtomInterceptor>
+) : Atom<R> {
 
     override fun getArguments(elementContext: ElementReference?): MutableList<Any> {
         return atom.getArguments(elementContext)

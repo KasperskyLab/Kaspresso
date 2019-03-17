@@ -1,24 +1,24 @@
 package com.kaspersky.uitest_framework.kakaoext
 
+import android.view.View
 import android.support.test.espresso.Espresso
 import android.support.test.espresso.UiController
 import android.support.test.espresso.ViewAction
 import android.support.test.espresso.matcher.ViewMatchers
-import android.view.View
 import com.agoda.kakao.common.KakaoDslMarker
 import com.agoda.kakao.configurator.KakaoConfigurator
 import com.agoda.kakao.screen.ScreenActions
 
 @Suppress("UNCHECKED_CAST")
 @KakaoDslMarker
-abstract class ExtScreen<out T: ExtScreen<T>>: ScreenActions {
+abstract class ExtScreen<out T : ExtScreen<T>> : ScreenActions {
 
     abstract val layoutId: Int?
 
     abstract val viewClass: Class<out Any>?
 
     override val view = KakaoConfigurator.createViewInteractionDelegate(
-            Espresso.onView(ViewMatchers.isRoot())
+        Espresso.onView(ViewMatchers.isRoot())
     )
 
     operator fun invoke(function: T.() -> Unit) = function.invoke(this as T)
@@ -42,6 +42,6 @@ abstract class ExtScreen<out T: ExtScreen<T>>: ScreenActions {
         }
 
         inline fun <reified T : ExtScreen<T>> onScreen(function: T.() -> Unit): T =
-                T::class.java.newInstance().apply { function.invoke(this) }
+            T::class.java.newInstance().apply { function.invoke(this) }
     }
 }
