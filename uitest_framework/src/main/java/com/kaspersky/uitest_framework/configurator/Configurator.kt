@@ -15,6 +15,9 @@ import com.kaspersky.uitest_framework.logger.DefaultUiTestLogger
 import com.kaspersky.uitest_framework.logger.UiTestLogger
 import java.lang.IllegalArgumentException
 
+/**
+ * Object that keeps all settings.
+*/
 object Configurator {
 
     internal var logger: UiTestLogger = DefaultUiTestLogger
@@ -43,6 +46,9 @@ object Configurator {
 
     fun build(block: Builder.() -> Unit) = Builder().apply { block.invoke(this) }
 
+    /**
+     * The right way to change [Configurator] settings is to use [Builder].
+     */
     class Builder {
 
         var logger: UiTestLogger = DefaultUiTestLogger
@@ -69,6 +75,9 @@ object Configurator {
 
         var failureInterceptor: FailureInterceptor? = null
 
+        /**
+         * Puts the default settings pack to [Builder].
+         */
         fun default(): Builder {
             logger = DefaultUiTestLogger
             attemptsTimeoutMs = 2_000L
@@ -91,6 +100,10 @@ object Configurator {
             return this
         }
 
+        /**
+         * Terminating method to apply built [Configurator] settings. Can be called only inside the framework package.
+         * Actually called when the base [com.kaspersky.uitest_framework.testcase.TestCase] class is constructed.
+         */
         @Throws(IllegalArgumentException::class)
         internal fun commit() {
             with(KakaoConfigurator) {

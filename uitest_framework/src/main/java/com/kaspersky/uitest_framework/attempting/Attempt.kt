@@ -3,6 +3,14 @@ package com.kaspersky.uitest_framework.attempting
 import com.kaspersky.uitest_framework.configurator.Configurator
 import com.kaspersky.uitest_framework.util.getStackTraceAsString
 
+/**
+ * Makes several attempts to invoke an action.
+ *
+ * @param timeoutMs the timeout for all attempts in milliseconds.
+ * @param attemptsFrequencyMs the frequency of attempts in milliseconds.
+ * @param allowedExceptions exceptions that doesn't stop attempts.
+ * @param action the action that is attempted to be invoked.
+ */
 fun <T> attempt(
     timeoutMs: Long = Configurator.attemptsTimeoutMs,
     attemptsFrequencyMs: Long = Configurator.attemptsFrequencyMs,
