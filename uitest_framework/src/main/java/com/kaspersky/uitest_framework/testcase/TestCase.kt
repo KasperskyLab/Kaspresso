@@ -11,7 +11,7 @@ import com.kaspersky.uitest_framework.logger.UiTestLogger
  *  caused by re-initialization of the configurator, use [Scenario] instead
  */
 abstract class TestCase(
-    configBuilder: Configurator.Builder = Configurator.Builder().default()
+    configBuilder: Configurator.Builder = Configurator.build { default() }
 ) {
     protected val logger: UiTestLogger = Configurator.logger
 
@@ -36,9 +36,7 @@ abstract class TestCase(
             actions.invoke()
             ScreenshotManager.makeScreenshotIfPossible(screenshotTag)
         } catch (e: Throwable) {
-            ScreenshotManager.makeScreenshotIfPossible(
-                "${screenshotTag}_failure_${e::class.simpleName}"
-            )
+            ScreenshotManager.makeScreenshotIfPossible("${screenshotTag}_failure_${e::class.simpleName}")
 
             throw e
         }

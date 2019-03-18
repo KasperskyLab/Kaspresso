@@ -41,98 +41,35 @@ object Configurator {
 
     internal var failureInterceptor: FailureInterceptor? = null
 
+    fun build(block: Builder.() -> Unit) = Builder().apply { block.invoke(this) }
+
     class Builder {
 
-        private var logger: UiTestLogger = DefaultUiTestLogger
+        var logger: UiTestLogger = DefaultUiTestLogger
 
-        private var attemptsTimeoutMs: Long = 2_000L
+        var attemptsTimeoutMs: Long = 2_000L
 
-        private var attemptsFrequencyMs: Long = 500L
+        var attemptsFrequencyMs: Long = 500L
 
-        private var allowedExceptionsForAttempt: MutableSet<Class<out Throwable>> = mutableSetOf(
+        var allowedExceptionsForAttempt: MutableSet<Class<out Throwable>> = mutableSetOf(
             PerformException::class.java,
             NoMatchingViewException::class.java,
             AssertionError::class.java
         )
 
-        private var viewActionInterceptors: ArrayList<ViewActionInterceptor> = arrayListOf()
+        var viewActionInterceptors: ArrayList<ViewActionInterceptor> = arrayListOf()
 
-        private var viewAssertionInterceptors: ArrayList<ViewAssertionInterceptor> = arrayListOf()
+        var viewAssertionInterceptors: ArrayList<ViewAssertionInterceptor> = arrayListOf()
 
-        private var atomInterceptors: ArrayList<AtomInterceptor> = arrayListOf()
+        var atomInterceptors: ArrayList<AtomInterceptor> = arrayListOf()
 
-        private var webAssertionInterceptors: ArrayList<WebAssertionInterceptor> = arrayListOf()
+        var webAssertionInterceptors: ArrayList<WebAssertionInterceptor> = arrayListOf()
 
-        private var executingInterceptor: ExecutingInterceptor? = null
+        var executingInterceptor: ExecutingInterceptor? = null
 
-        private var failureInterceptor: FailureInterceptor? = null
-
-        fun setLogger(logger: UiTestLogger): Builder {
-            this.logger = logger
-            return this
-        }
-
-        fun setAttemptsTimeout(timeoutMs: Long): Builder {
-            attemptsTimeoutMs = timeoutMs
-            return this
-        }
-
-        fun setAttemptsFrequency(frequencyMs: Long): Builder {
-            attemptsFrequencyMs = frequencyMs
-            return this
-        }
-
-        fun addAllowedExceptionForAttempt(
-            exception: Class<out Throwable>
-        ): Builder {
-            allowedExceptionsForAttempt.add(exception)
-            return this
-        }
-
-        fun addViewActionInterceptor(
-            viewActionInterceptor: ViewActionInterceptor
-        ): Builder {
-            viewActionInterceptors.add(viewActionInterceptor)
-            return this
-        }
-
-        fun addViewAssertionInterceptor(
-            viewAssertionInterceptor: ViewAssertionInterceptor
-        ): Builder {
-            viewAssertionInterceptors.add(viewAssertionInterceptor)
-            return this
-        }
-
-        fun addAtomInterceptor(
-            atomInterceptor: AtomInterceptor
-        ): Builder {
-            atomInterceptors.add(atomInterceptor)
-            return this
-        }
-
-        fun addWebAssertionInterceptor(
-            webAssertionInterceptor: WebAssertionInterceptor
-        ): Builder {
-            webAssertionInterceptors.add(webAssertionInterceptor)
-            return this
-        }
-
-        fun setExecutingInterceptor(
-            executingInterceptor: ExecutingInterceptor
-        ): Builder {
-            this.executingInterceptor = executingInterceptor
-            return this
-        }
-
-        fun setFailureInterceptor(
-            failureInterceptor: FailureInterceptor
-        ): Builder {
-            this.failureInterceptor = failureInterceptor
-            return this
-        }
+        var failureInterceptor: FailureInterceptor? = null
 
         fun default(): Builder {
-
             logger = DefaultUiTestLogger
             attemptsTimeoutMs = 2_000L
             attemptsFrequencyMs = 500L
@@ -156,7 +93,6 @@ object Configurator {
 
         @Throws(IllegalArgumentException::class)
         internal fun commit() {
-
             with(KakaoConfigurator) {
                 initViewInteractionDelegateFactory { ViewInteractionDelegateImpl(it) }
                 initDataInteractionDelegateFactory { DataInteractionDelegateImpl(it) }
