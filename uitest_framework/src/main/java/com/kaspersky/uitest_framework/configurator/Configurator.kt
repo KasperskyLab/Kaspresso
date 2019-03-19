@@ -2,18 +2,19 @@ package com.kaspersky.uitest_framework.configurator
 
 import android.support.test.espresso.NoMatchingViewException
 import android.support.test.espresso.PerformException
+import com.agoda.kakao.configurator.KakaoConfigurator
+import com.kaspersky.uitest_framework.delegates.DataInteractionDelegateImpl
+import com.kaspersky.uitest_framework.delegates.ViewInteractionDelegateImpl
+import com.kaspersky.uitest_framework.delegates.WebInteractionDelegateImpl
 import com.kaspersky.uitest_framework.interceptors.*
 import com.kaspersky.uitest_framework.interceptors.impl.flakysafety.FlakySafeExecutingInterceptor
 import com.kaspersky.uitest_framework.interceptors.impl.logging.LoggingFailureInterceptor
 import com.kaspersky.uitest_framework.interceptors.impl.logging.LoggingViewActionInterceptor
 import com.kaspersky.uitest_framework.interceptors.impl.logging.LoggingViewAssertionInterceptor
-import com.agoda.kakao.configurator.KakaoConfigurator
-import com.kaspersky.uitest_framework.delegates.DataInteractionDelegateImpl
-import com.kaspersky.uitest_framework.delegates.ViewInteractionDelegateImpl
-import com.kaspersky.uitest_framework.delegates.WebInteractionDelegateImpl
 import com.kaspersky.uitest_framework.logger.DefaultUiTestLogger
 import com.kaspersky.uitest_framework.logger.UiTestLogger
-import java.lang.IllegalArgumentException
+import com.kaspersky.uitest_framework.server.DefaultAdbServer
+import com.kaspersky.uitest_framework.server.ServerInterface
 
 object Configurator {
 
@@ -41,7 +42,7 @@ object Configurator {
 
     internal var failureInterceptor: FailureInterceptor? = null
 
-    fun build(block: Builder.() -> Unit) = Builder().apply { block.invoke(this) }
+    internal var serverInterface: ServerInterface = DefaultAdbServer
 
     class Builder {
 
@@ -69,27 +70,7 @@ object Configurator {
 
         var failureInterceptor: FailureInterceptor? = null
 
-        fun default(): Builder {
-            logger = DefaultUiTestLogger
-            attemptsTimeoutMs = 2_000L
-            attemptsFrequencyMs = 500L
-
-            allowedExceptionsForAttempt = mutableSetOf(
-                PerformException::class.java,
-                NoMatchingViewException::class.java,
-                AssertionError::class.java
-            )
-
-            viewActionInterceptors = arrayListOf(LoggingViewActionInterceptor(logger))
-            viewAssertionInterceptors = arrayListOf(LoggingViewAssertionInterceptor(logger))
-            atomInterceptors = arrayListOf()
-            webAssertionInterceptors = arrayListOf()
-
-            executingInterceptor = FlakySafeExecutingInterceptor()
-            failureInterceptor = LoggingFailureInterceptor(logger)
-
-            return this
-        }
+        var serverInterface: ServerInterface = DefaultAdbServer
 
         @Throws(IllegalArgumentException::class)
         internal fun commit() {
@@ -112,6 +93,18 @@ object Configurator {
 
             Configurator.executingInterceptor = executingInterceptor
             Configurator.failureInterceptor = failureInterceptor
+
+            Configurator.serverInterface = serverInterface
+        }
+
+        companion object {
+
+            fun default(): Builder = Builder().apply {
+                viewActionInterceptors = arrayListOf(LoggingViewActionInterceptor(logger))
+                viewAssertionInterceptors = arrayListOf(LoggingViewAssertionInterceptor(logger))
+                executingInterceptor = FlakySafeExecutingInterceptor()
+                failureInterceptor = LoggingFailureInterceptor(logger)
+            }
         }
     }
 }

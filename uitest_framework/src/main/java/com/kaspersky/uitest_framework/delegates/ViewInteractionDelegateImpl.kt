@@ -39,7 +39,7 @@ open class ViewInteractionDelegateImpl(
     }
 
     override fun check(
-        function: (View, NoMatchingViewException) -> Unit
+        function: (View, NoMatchingViewException?) -> Unit
     ): ViewInteractionDelegate {
 
         val viewAssertionProxy = ViewAssertionProxy(
