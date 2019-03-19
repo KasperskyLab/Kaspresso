@@ -1,1 +1,1 @@
-include ':uitest_framework', ':kakao'
+include ':kaspresso', ':kakao'
