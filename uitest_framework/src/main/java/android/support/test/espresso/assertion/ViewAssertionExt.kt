@@ -4,7 +4,7 @@ import android.support.test.espresso.ViewAssertion
 import org.hamcrest.StringDescription
 
 /**
- * @return a string description of [ViewAssertion].
+ * @return a [String] description of [ViewAssertion].
  */
 fun ViewAssertion?.describe(): String {
 

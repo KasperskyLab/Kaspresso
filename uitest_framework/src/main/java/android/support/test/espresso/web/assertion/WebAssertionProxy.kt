@@ -6,9 +6,7 @@ import com.kaspersky.uitest_framework.interceptors.WebAssertionInterceptor
 import org.hamcrest.Matcher
 import org.hamcrest.StringDescription
 
-/**
- * Proxy-wrapper of [WebAssertion] for interceptors calls.
- */
+
 class WebAssertionProxy<E>(
     private val webAssertion: WebAssertion<E>,
     atom: Atom<E>,
@@ -17,8 +15,8 @@ class WebAssertionProxy<E>(
 ) : WebAssertion<E>(atom) {
 
     /**
-     * Calls interceptors before wrapped [webAssertion]'s [WebViewAssertions.ResultCheckingWebAssertion.checkResult]
-     * call.
+     * Calls interceptors before [WebViewAssertions.ResultCheckingWebAssertion.checkResult] on wrapped [webAssertion] is
+     * called.
      *
      * @param view the WebView that the Atom was evaluated on.
      * @param result the result of atom evaluation.

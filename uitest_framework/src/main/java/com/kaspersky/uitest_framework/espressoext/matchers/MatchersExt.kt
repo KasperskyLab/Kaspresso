@@ -5,7 +5,7 @@ import org.hamcrest.Matcher
 import org.hamcrest.StringDescription
 
 /**
- * @return a string description of [Matcher]
+ * @return a [String] description of [Matcher].
  */
 fun Matcher<View>?.describe(): String {
 

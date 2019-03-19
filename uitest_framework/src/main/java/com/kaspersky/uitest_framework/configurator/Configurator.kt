@@ -20,34 +20,76 @@ import java.lang.IllegalArgumentException
 */
 object Configurator {
 
+    /**
+     * Just implementation of [UiTestLogger].
+     */
     internal var logger: UiTestLogger = DefaultUiTestLogger
 
+    /**
+     * The timeout for all action attempts in milliseconds.
+     */
     internal var attemptsTimeoutMs: Long = 2_000L
 
+    /**
+     * The frequency of action attempts in milliseconds.
+     */
     internal var attemptsFrequencyMs: Long = 500L
 
+    /**
+     * Exceptions that doesn't stop attempts.
+     */
     internal var allowedExceptionsForAttempt: MutableSet<Class<out Throwable>> = mutableSetOf(
         PerformException::class.java,
         NoMatchingViewException::class.java,
         AssertionError::class.java
     )
 
+    /**
+     * Interceptors that are called by [com.kaspersky.uitest_framework.proxy.ViewActionProxy] before actually
+     * [android.support.test.espresso.ViewAction.perform] call.
+     */
     internal var viewActionInterceptors: ArrayList<ViewActionInterceptor> = arrayListOf()
 
+    /**
+     * Interceptors that are called by [com.kaspersky.uitest_framework.proxy.ViewAssertionProxy] before actually
+     * [android.support.test.espresso.ViewAssertion.check] call.
+     */
     internal var viewAssertionInterceptors: ArrayList<ViewAssertionInterceptor> = arrayListOf()
 
+    /**
+     * Interceptors that are called by [com.kaspersky.uitest_framework.proxy.AtomProxy] before actually
+     * [android.support.test.espresso.web.model.Atom.transform] call.
+     */
     internal var atomInterceptors: ArrayList<AtomInterceptor> = arrayListOf()
 
+    /**
+     * Interceptors that are called by [android.support.test.espresso.web.assertion.WebAssertionProxy] before actually
+     * [android.support.test.espresso.web.assertion.WebAssertion.checkResult] call.
+     */
     internal var webAssertionInterceptors: ArrayList<WebAssertionInterceptor> = arrayListOf()
 
+    /**
+     * Interceptor that actually manages the execution of actions or assertions. For example,
+     * [FlakySafeExecutingInterceptor] performs multiple attempting to execute an action or assertion.
+     */
     internal var executingInterceptor: ExecutingInterceptor? = null
 
+    /**
+     * Interceptor that is called on failures. It's [FailureInterceptor.interceptAndThrow] method is being provided as a
+     * [android.support.test.espresso.FailureHandler].
+     */
     internal var failureInterceptor: FailureInterceptor? = null
 
+    /**
+     * Creates [Builder] instance and applies a block of setting to it.
+     *
+     * @param block a block of settings to be applied to [Builder]
+     * @return configured [Builder] ready to me committed.
+     */
     fun build(block: Builder.() -> Unit) = Builder().apply { block.invoke(this) }
 
     /**
-     * The right way to change [Configurator] settings is to use [Builder].
+     * Class for [Configurator] initialization. The right way to change [Configurator] settings is to use [Builder].
      */
     class Builder {
 
@@ -77,6 +119,8 @@ object Configurator {
 
         /**
          * Puts the default settings pack to [Builder].
+         *
+         * @return an existing instance of [Builder].
          */
         fun default(): Builder {
             logger = DefaultUiTestLogger
@@ -101,7 +145,7 @@ object Configurator {
         }
 
         /**
-         * Terminating method to apply built [Configurator] settings. Can be called only inside the framework package.
+         * Terminating method to commit built [Configurator] settings. Can be called only inside the framework package.
          * Actually called when the base [com.kaspersky.uitest_framework.testcase.TestCase] class is constructed.
          */
         @Throws(IllegalArgumentException::class)

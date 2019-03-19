@@ -10,6 +10,7 @@ import com.kaspersky.uitest_framework.util.getStackTraceAsString
  * @param attemptsFrequencyMs the frequency of attempts in milliseconds.
  * @param allowedExceptions exceptions that doesn't stop attempts.
  * @param action the action that is attempted to be invoked.
+ * @return [T] as it is a result of [action] invocation.
  */
 fun <T> attempt(
     timeoutMs: Long = Configurator.attemptsTimeoutMs,

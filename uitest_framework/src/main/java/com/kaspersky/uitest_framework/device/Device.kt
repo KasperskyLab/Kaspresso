@@ -18,7 +18,7 @@ import com.kaspersky.uitest_framework.logger.UiTestLogger
 import com.kaspersky.uitest_framework.util.getStackTraceAsString
 
 /**
- * A facade that encapsulates all out-of-AppScreen work.
+ * A facade that encapsulates all the work outside the screens.
  */
 object Device {
 
@@ -62,6 +62,9 @@ object Device {
 
     /**
      * Enables accessibility. Available since api 24.
+     *
+     * @param packageName a package name of an accessibility service
+     * @param className a class name of an accessibility service
      */
     @TargetApi(Build.VERSION_CODES.N)
     fun enableAccessibility(
@@ -93,6 +96,8 @@ object Device {
 
     /**
      * Toggles WiFi state.
+     *
+     * @param enable if is set to true WiFi will be enabled, otherwise will be disabled.
      */
     @SuppressLint("WifiManagerLeak")
     fun toggleWiFi(enable: Boolean) {
@@ -111,6 +116,8 @@ object Device {
 
     /**
      * Passes the permission-requesting system dialog.
+     *
+     * @param shouldAllowPermissions if set to true permissions will be allowed, otherwise will not.
      */
     fun handlePermissionRequest(shouldAllowPermissions: Boolean) {
         try {
@@ -139,6 +146,9 @@ object Device {
 
     /**
      * Presses back button on the device.
+     *
+     * @param failTestIfAppUnderTestClosed if set to true, an exception will be thrown when Espresso navigates
+     * outside the application or process under test.
      */
     fun pressBack(failTestIfAppUnderTestClosed: Boolean = false) {
         if (failTestIfAppUnderTestClosed) {
@@ -150,6 +160,8 @@ object Device {
 
     /**
      * Presses home button on the device.
+     *
+     * @return true if successful, else return false
      */
     fun pressHome(): Boolean = uiDevice.pressHome()
 

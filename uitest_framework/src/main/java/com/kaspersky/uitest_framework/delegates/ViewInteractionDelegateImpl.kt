@@ -2,7 +2,6 @@ package com.kaspersky.uitest_framework.delegates
 
 import android.view.View
 import android.support.test.espresso.*
-import com.agoda.kakao.delegates.DataInteractionDelegate
 import com.kaspersky.uitest_framework.configurator.Configurator
 import com.agoda.kakao.delegates.ViewInteractionDelegate
 import com.kaspersky.uitest_framework.proxy.ViewActionProxy
