@@ -16,7 +16,7 @@ class LoggingFailureInterceptor(
 
         uiTestLogger.e(
             "Failed to interact with view matching: ${viewMatcher.describe()} " +
-                    "because of ${error::class.simpleName}"
+                    "because of ${error.javaClass.simpleName}"
         )
 
         throw getSelfDescribedError(error, viewMatcher)
