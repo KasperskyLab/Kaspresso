@@ -1,4 +1,4 @@
-package com.kaspersky.uitest_framework.server
+package com.kaspersky.kaspresso.server
 
 interface ServerInterface {
 

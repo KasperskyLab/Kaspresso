@@ -41,5 +41,4 @@ abstract class TestCase(
             throw e
         }
     }
-
 }

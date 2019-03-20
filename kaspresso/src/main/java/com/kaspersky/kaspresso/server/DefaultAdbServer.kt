@@ -1,4 +1,4 @@
-package com.kaspersky.uitest_framework.server
+package com.kaspersky.kaspresso.server
 
 import com.kaspersky.test_server_mobile.HostConnection
 
