@@ -11,7 +11,7 @@ android {
     defaultConfig {
         minSdkVersion versions.minSdk
         targetSdkVersion versions.targetSdk
-        versionName "$pUiFrameworkMajor.$pUiFrameworkMinor.$pUiFrameworkBuild"
+        versionName "$pKaspressoMajor.$pKaspressoMinor.$pKaspressoBuild"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
