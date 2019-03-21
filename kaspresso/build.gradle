@@ -30,8 +30,6 @@ android {
 }
 
 dependencies {
-    implementation project(':kakao')
-
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
@@ -49,6 +47,7 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:$versions.retrofit"
     implementation "com.squareup.spoon:spoon-client:$versions.spoon"
 
+    implementation "com.kaspersky.components:klkakao:$versions.klkakao"
     implementation "com.kaspersky.components:test-server:$versions.server"
 }
 
