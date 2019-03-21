@@ -1,0 +1,105 @@
+package com.kaspersky.kaspresso.device.apps
+
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
+import android.support.test.InstrumentationRegistry
+import android.support.test.uiautomator.By
+import android.support.test.uiautomator.UiDevice
+import android.support.test.uiautomator.UiSelector
+import android.support.test.uiautomator.Until
+import com.kaspersky.kaspresso.configurator.Configurator
+import com.kaspersky.kaspresso.device.server.AdbServer
+import junit.framework.Assert
+import org.hamcrest.CoreMatchers
+import org.hamcrest.MatcherAssert
+
+object AppsManagerImpl : AppsManager {
+
+    private val context: Context
+        get() = InstrumentationRegistry.getInstrumentation().context
+
+    private val uiDevice: UiDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
+
+    private val adbServer: AdbServer = Configurator.adbServer
+
+    override val targetAppLauncherPackageName: String = uiDevice.launcherPackageName
+
+    override val targetAppPackageName: String = context.packageName
+
+    /**
+     *  Installs an app thorough ADB.
+     *
+     *  @param apkPath path to an apk to be installed. The apk is hosted on the test server.
+     */
+    override fun installApp(apkPath: String) {
+        adbServer.performAdb("install $apkPath")
+    }
+
+    /**
+     *  Uninstalls an app thorough ADB.
+     *
+     *  @param pkg android package name of an app to be deleted.
+     */
+    override fun uninstallApp(packageName: String) {
+        adbServer.performAdb("uninstall $packageName")
+    }
+
+    override fun waitForLauncher(timeout: Long, launcherPackageName: String) {
+        MatcherAssert.assertThat(
+            uiDevice.launcherPackageName,
+            CoreMatchers.notNullValue()
+        )
+
+        val condition = Until.hasObject(By.pkg(launcherPackageName).depth(0))
+
+        Assert.assertTrue(
+            uiDevice.wait(condition, timeout)
+        )
+    }
+
+    override fun waitForAppLaunchAndReady(timeout: Long, packageName: String) {
+        val condition = Until.hasObject(By.pkg(packageName).depth(0))
+
+        Assert.assertTrue(
+            uiDevice.wait(condition, timeout)
+        )
+    }
+
+    override fun openUrlInChrome(url: String) = launchApp(CHROME_PACKAGE_NAME, Uri.parse(url))
+
+    override fun launchApp(packageName: String, data: Uri?) {
+        val intent = context.packageManager
+            .getLaunchIntentForPackage(packageName)
+            .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+
+        data?.let { intent.data = it }
+
+        context.startActivity(intent)
+
+        val condition = Until.hasObject(By.pkg(packageName).depth(0))
+
+        uiDevice.wait(condition, 5_000)
+    }
+
+    override fun openRecentApp(contentDescription: String) {
+        uiDevice.pressRecentApps()
+
+        val appSelector = UiSelector().descriptionContains(contentDescription)
+        val recentApp = uiDevice.findObject(appSelector)
+
+        Thread.sleep(1_000)
+
+        if (recentApp.exists()) {
+            recentApp.click()
+        }
+
+        Thread.sleep(1_000)
+    }
+
+    override fun killApp(packageName: String) {
+        Runtime.getRuntime().exec(arrayOf("am", "force-stop", packageName))
+    }
+}
+
+private const val CHROME_PACKAGE_NAME = "com.android.chrome"
