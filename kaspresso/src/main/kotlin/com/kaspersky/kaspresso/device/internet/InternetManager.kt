@@ -1,5 +1,8 @@
 package com.kaspersky.kaspresso.device.internet
 
+/**
+ * An interface to work with internet settings.
+ */
 interface InternetManager {
 
     /**

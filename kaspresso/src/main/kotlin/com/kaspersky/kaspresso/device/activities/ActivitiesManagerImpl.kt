@@ -11,13 +11,24 @@ import com.kaspersky.kaspresso.logger.UiTestLogger
 import org.hamcrest.CoreMatchers
 import org.junit.Assert
 
+/**
+ * Default implementation of ActivitiesManager interface.
+ */
 object ActivitiesManagerImpl : ActivitiesManager {
 
     private val logger: UiTestLogger = Configurator.logger
 
+    /**
+     * Checks if this is a main thread.
+     */
     private val isMainThread: Boolean
         get() = Looper.myLooper() == Looper.getMainLooper()
 
+    /**
+     * Finds and returns resumed activity if it exists, otherwise logs error.
+     *
+     * @return nullable resumed activity
+     */
     override fun getResumedActivity(): Activity? {
         var resumedActivity: Activity? = null
 
@@ -41,6 +52,9 @@ object ActivitiesManagerImpl : ActivitiesManager {
         return resumedActivity
     }
 
+    /**
+     * Checks if passed activity is resumed.
+     */
     override fun isCurrentActivity(clazz: Class<out Activity>) {
         UiThreadStatement.runOnUiThread {
             Assert.assertThat(

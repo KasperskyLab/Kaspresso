@@ -9,12 +9,21 @@ import com.kaspersky.klkakao.common.KakaoDslMarker
 import com.kaspersky.klkakao.configurator.KakaoConfigurator
 import com.kaspersky.klkakao.screen.ScreenActions
 
+/**
+ * An extension of [com.kaspersky.klkakao.screen.Screen].
+ */
 @Suppress("UNCHECKED_CAST")
 @KakaoDslMarker
 abstract class KScreen<out T : KScreen<T>> : ScreenActions {
 
+    /**
+     * The layout id with which the screen is associated.
+     */
     abstract val layoutId: Int?
 
+    /**
+     * The view class with which the screen is associated.
+     */
     abstract val viewClass: Class<out Any>?
 
     override val view = KakaoConfigurator.createViewInteractionDelegate(

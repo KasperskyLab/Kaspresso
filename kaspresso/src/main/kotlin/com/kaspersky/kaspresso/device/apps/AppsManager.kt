@@ -2,6 +2,9 @@ package com.kaspersky.kaspresso.device.apps
 
 import android.net.Uri
 
+/**
+ * An interface to work with installer, launcher and package manager.
+ */
 interface AppsManager {
 
     val targetAppLauncherPackageName: String
@@ -10,14 +13,14 @@ interface AppsManager {
     /**
      *  Installs an app thorough ADB.
      *
-     *  @param apkPath path to an apk to be installed. The apk is hosted on the test server.
+     *  @param apkPath a path to an apk to be installed. The apk is hosted on the test server.
      */
     fun installApp(apkPath: String)
 
     /**
      *  Uninstalls an app thorough ADB.
      *
-     *  @param pkg android package name of an app to be deleted.
+     *  @param packageName an android package name of an app to be deleted.
      */
     fun uninstallApp(packageName: String)
 
@@ -37,9 +40,7 @@ interface AppsManager {
 
     fun openRecentApp(contentDescription: String)
 
-    fun killApp(
-        packageName: String = targetAppPackageName
-    )
+    fun killApp(packageName: String = targetAppPackageName)
 }
 
 private const val MAX_LAUNCH_TIME_MS = 10_000L

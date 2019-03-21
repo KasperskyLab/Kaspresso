@@ -7,11 +7,18 @@ import org.junit.Assert
 import java.io.File
 import java.util.*
 
+/**
+ * Encapsulates all work with cache.
+ */
 internal class Cache(
     private val contextGetter: () -> Context
 ) {
+    /**
+     * Attempts to recursively clear cache directory.
+     */
     fun clear() {
         val cacheDir = contextGetter.invoke().cacheDir
+
         if (cacheDir.list() != null) {
             attempt(
                 timeoutMs = DELETE_TIMEOUT_MS,
@@ -26,11 +33,16 @@ internal class Cache(
         }
     }
 
+    /**
+     * Attempts to recursively clear the directory.
+     *
+     * @param directory a directory to clear.
+     * @param excludes subdirectories that must not be cleared.
+     */
     private fun deleteRecursive(
         directory: File,
         vararg excludes: String
     ): Boolean {
-
         if (excludes.isNotEmpty() &&
             Arrays.asList(*excludes).contains(directory.name)
         ) {

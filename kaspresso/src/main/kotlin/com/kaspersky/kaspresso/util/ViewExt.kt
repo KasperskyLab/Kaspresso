@@ -5,8 +5,10 @@ import android.view.View
 import android.widget.TextView
 import android.support.test.espresso.matcher.ViewMatchers.isDisplayingAtLeast
 
+/**
+ * @return a [String] description of the [View]
+ */
 fun View?.describe(): String {
-
     if (this == null) return "null"
 
     val builder = StringBuilder()
@@ -22,7 +24,6 @@ fun View?.describe(): String {
     }
 
     if (this is TextView) {
-
         if (!text.isNullOrBlank()) {
             builder.append("text=$text;")
         }
@@ -35,6 +36,9 @@ fun View?.describe(): String {
     return "${this::class.java.simpleName}($builder)"
 }
 
+/**
+ * @return true if [View] is displayed, otherwise - false.
+ */
 fun View.isDisplayed(): Boolean {
     return isDisplayingAtLeast(VIEW_DISPLAY_THRESHOLD_PERCENT).matches(this)
 }

@@ -17,6 +17,9 @@ import org.hamcrest.Matcher
 import org.hamcrest.Matchers.allOf
 import org.hamcrest.Matchers.anyOf
 
+/**
+ * An implementation of scroll action.
+ */
 class ScrollIfPossibleAction : ViewAction {
 
     private val scrollableContainerMatcher = anyOf(
@@ -35,7 +38,6 @@ class ScrollIfPossibleAction : ViewAction {
     override fun getDescription(): String = "scroll to"
 
     override fun perform(uiController: UiController, view: View) {
-
         if (view.isDisplayed()) {
             return
         }
@@ -53,7 +55,6 @@ class ScrollIfPossibleAction : ViewAction {
         uiController.loopMainThreadUntilIdle()
 
         if (!view.isDisplayed()) {
-
             throw PerformException.Builder()
                 .withActionDescription(description)
                 .withViewDescription(HumanReadables.describe(view))

@@ -26,6 +26,9 @@ import com.kaspersky.kaspresso.device.server.AdbServer
 import com.kaspersky.kaspresso.logger.UiTestLoggerImpl
 import com.kaspersky.klkakao.configurator.KakaoConfigurator
 
+/**
+ * An object that keeps all settings.
+ */
 object Configurator {
 
     private const val DEFAULT_ATTEMPTS_TIMEOUT_MS: Long = 2_000L
@@ -34,38 +37,113 @@ object Configurator {
     private const val DEFAULT_INNER_LOGGER_TAG: String = "UI_TESTING"
     private const val DEFAULT_OUTER_LOGGER_TAG: String = "UI_TESTING_SPECIAL"
 
+    /**
+     * A timeout for all action attempts in milliseconds.
+     */
     internal var attemptsTimeoutMs: Long = DEFAULT_ATTEMPTS_TIMEOUT_MS
+
+    /**
+     * A frequency of action attempts in milliseconds.
+     */
     internal var attemptsFrequencyMs: Long = DEFAULT_ATTEMPTS_FREQUENCY_MS
 
+    /**
+     * An implementation of [UiTestLogger] for inner framework usage. Not accessible from outside.
+     */
     internal var logger: UiTestLogger = UiTestLoggerImpl(DEFAULT_INNER_LOGGER_TAG)
-    internal var outerLogger: UiTestLogger = UiTestLoggerImpl(DEFAULT_OUTER_LOGGER_TAG)
 
+    /**
+     * An implementation of [UiTestLogger] for external usage.
+     */
+    internal var externalLogger: UiTestLogger = UiTestLoggerImpl(DEFAULT_OUTER_LOGGER_TAG)
+
+    /**
+     * An interface of applications manager.
+     */
     internal var appsManager: AppsManager = AppsManagerImpl
+
+    /**
+     * An interface of activities manager.
+     */
     internal var activitiesManager: ActivitiesManager = ActivitiesManagerImpl
+
+    /**
+     * An interface of files manager.
+     */
     internal var filesManager: FilesManager = FilesManagerImpl
+
+    /**
+     * An interface of internet manager.
+     */
     internal var internetManager: InternetManager = InternetManagerImpl
+
+    /**
+     * An interface of screenshots manager.
+     */
     internal var screenshotsManager: ScreenshotsManager = ScreenshotsManagerImpl
 
+    /**
+     * An interface of adb server.
+     */
     internal var adbServer: AdbServer = AdbServerImpl
 
+    /**
+     * Exceptions that doesn't stop attempts.
+     */
     internal var allowedExceptionsForAttempt: MutableSet<Class<out Throwable>> = mutableSetOf(
         PerformException::class.java,
         NoMatchingViewException::class.java,
         AssertionError::class.java
     )
 
+    /**
+     * Interceptors that are called by [com.kaspersky.uitest_framework.proxy.ViewActionProxy] before actually
+     * [android.support.test.espresso.ViewAction.perform] call.
+     */
     internal var viewActionInterceptors: ArrayList<ViewActionInterceptor> = arrayListOf()
+
+    /**
+     * Interceptors that are called by [com.kaspersky.uitest_framework.proxy.ViewAssertionProxy] before actually
+     * [android.support.test.espresso.ViewAssertion.check] call.
+     */
     internal var viewAssertionInterceptors: ArrayList<ViewAssertionInterceptor> = arrayListOf()
+
+    /**
+     * Interceptors that are called by [com.kaspersky.uitest_framework.proxy.AtomProxy] before actually
+     * [android.support.test.espresso.web.model.Atom.transform] call.
+     */
     internal var atomInterceptors: ArrayList<AtomInterceptor> = arrayListOf()
+
+    /**
+     * Interceptors that are called by [android.support.test.espresso.web.assertion.WebAssertionProxy] before actually
+     * [android.support.test.espresso.web.assertion.WebAssertion.checkResult] call.
+     */
     internal var webAssertionInterceptors: ArrayList<WebAssertionInterceptor> = arrayListOf()
 
+    /**
+     * An interceptor that actually manages the execution of actions or assertions. For example,
+     * [FlakySafeExecutingInterceptor] performs multiple attempting to execute an action or assertion.
+     */
     internal var executingInterceptor: ExecutingInterceptor? = null
+
+    /**
+     * An interceptor that is called on failures. It's [FailureInterceptor.interceptAndThrow] method is being provided
+     * as a [android.support.test.espresso.FailureHandler].
+     */
     internal var failureInterceptor: FailureInterceptor? = null
 
+    /**
+     * A class for [Configurator] initialization. The right way to change [Configurator] settings is to use [Builder].
+     */
     class Builder {
 
         companion object {
 
+            /**
+             * Puts the default settings pack to [Builder].
+             *
+             * @return an existing instance of [Builder].
+             */
             fun default(): Builder {
                 return Builder().apply {
                     viewActionInterceptors = arrayListOf(LoggingViewActionInterceptor(logger))
@@ -80,7 +158,7 @@ object Configurator {
         var attemptsFrequencyMs: Long = DEFAULT_ATTEMPTS_FREQUENCY_MS
 
         var logger: UiTestLogger = UiTestLoggerImpl(DEFAULT_INNER_LOGGER_TAG)
-        var outerLogger: UiTestLogger = UiTestLoggerImpl(DEFAULT_OUTER_LOGGER_TAG)
+        var externalLogger: UiTestLogger = UiTestLoggerImpl(DEFAULT_OUTER_LOGGER_TAG)
 
         var appsManager: AppsManager = AppsManagerImpl
         var activitiesManager: ActivitiesManager = ActivitiesManagerImpl
@@ -104,6 +182,11 @@ object Configurator {
         var executingInterceptor: ExecutingInterceptor? = null
         var failureInterceptor: FailureInterceptor? = null
 
+        /**
+         * Terminating method to commit built [Configurator] settings. Can be called only inside the framework
+         * package. Actually called when the base [com.kaspersky.uitest_framework.testcase.TestCase] class is
+         * constructed.
+         */
         @Throws(IllegalArgumentException::class)
         internal fun commit() {
             with(KakaoConfigurator) {
@@ -116,7 +199,7 @@ object Configurator {
             Configurator.attemptsFrequencyMs = attemptsFrequencyMs
 
             Configurator.logger = logger
-            Configurator.outerLogger = outerLogger
+            Configurator.externalLogger = externalLogger
 
             Configurator.appsManager = appsManager
             Configurator.activitiesManager = activitiesManager

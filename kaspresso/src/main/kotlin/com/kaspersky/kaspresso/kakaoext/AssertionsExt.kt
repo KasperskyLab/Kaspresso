@@ -4,6 +4,11 @@ import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.klkakao.common.assertions.BaseAssertions
 
+/**
+ * A multiple assertion.
+ * If at least one of assertions passes, [compositeCheck] is passed.
+ * If no one of assertions passes, [compositeCheck] is failed.
+ */
 fun <T : BaseAssertions> T.compositeCheck(
     vararg asserts: T.() -> Unit
 ) {
@@ -26,10 +31,16 @@ fun <T : BaseAssertions> T.compositeCheck(
     throw cachedThrowable!!
 }
 
+/**
+ * A safe multiple assertion.
+ * If at least one of assertions passes, [safeCompositeCheck] is passed and true is returned.
+ * If no one of assertions passes, [safeCompositeCheck] is failed and false is returned.
+ *
+ * @return true if check is successful, otherwise - false.
+ */
 fun <T : BaseAssertions> T.safeCompositeCheck(
     vararg asserts: T.() -> Unit
 ): Boolean {
-
     val logger: UiTestLogger = Configurator.logger
 
     asserts.forEach { assert ->

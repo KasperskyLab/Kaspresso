@@ -18,15 +18,29 @@ abstract class TestCase(
 
     private var stepCounter = 0
 
+    /**
+     * Finishes building of Configurator. Passing configBuilder to base [TestCase]'s constructor is the only way for
+     * project-wide TestCase to tune Configurator.
+     */
     init {
         configBuilder.commit()
     }
 
+    /**
+     * A step preparing test case's initial app state.
+     */
     protected fun precondition(description: String, actions: () -> Unit) {
         logger.i(description)
         actions.invoke()
     }
 
+    /**
+     * A step of test case, something that changes the app state. Makes screenshot after the action successfully invoked,
+     * or if an exception is caught.
+     *
+     * @param description the description of a step.
+     * @param actions an action to invoke.
+     */
     protected fun step(description: String, actions: () -> Unit) {
         logger.i("___________________________________________________________________________")
         logger.i("TEST STEP: $description")

@@ -5,6 +5,9 @@ import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.klkakao.common.views.KBaseView
 import java.util.concurrent.TimeUnit
 
+/**
+ * Provides an [com.kaspersky.kaspresso.attempting.attempt] method as an extension of [KBaseView].
+ */
 fun <T : KBaseView<Any>> T.attempt(
     timeoutMs: Long = Configurator.attemptsTimeoutMs,
     attemptsFrequencyMs: Long = Configurator.attemptsFrequencyMs,
@@ -22,6 +25,9 @@ fun <T : KBaseView<Any>> T.attempt(
     }
 }
 
+/**
+ * Provides a simplified [com.kaspersky.kaspresso.attempting.attempt] method as an extension of [KBaseView].
+ */
 fun <T : KBaseView<Any>> T.attempt(
     timeoutSec: Long,
     action: T.() -> Unit

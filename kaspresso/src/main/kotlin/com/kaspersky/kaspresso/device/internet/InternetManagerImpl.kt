@@ -9,6 +9,9 @@ import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.device.Device.isSdkVersionHigherThan
 import com.kaspersky.kaspresso.device.server.AdbServer
 
+/**
+ * Default implementation of InternetManager interface.
+ */
 object InternetManagerImpl: InternetManager {
 
     private val targetContext: Context
@@ -30,6 +33,9 @@ object InternetManagerImpl: InternetManager {
         adbServer.performAdb("shell svc data disable", "shell svc wifi disable")
     }
 
+    /**
+     * Toggles only wi-fi. Note: it works only if flight mode is off.
+     */
     @SuppressLint("WifiManagerLeak")
     override fun toggleWiFi(enable: Boolean) {
         val wifiManager =

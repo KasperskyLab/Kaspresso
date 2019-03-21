@@ -5,7 +5,7 @@ import com.kaspersky.kaspresso.device.screenshots.ScreenshotsManager
 import com.kaspersky.kaspresso.logger.UiTestLogger
 
 /**
- *  Abstract class for all scenarios.
+ *  An abstract class for all scenarios.
  */
 abstract class Scenario {
 
@@ -14,6 +14,12 @@ abstract class Scenario {
 
     private var stepCounter = 0
 
+    /**
+     * A step of scenario. Makes screenshot after the action successfully invoked, or if an exception is caught.
+     *
+     * @param description the description of a step.
+     * @param actions an action to invoke.
+     */
     protected fun sceneStep(description: String, actions: () -> Unit) {
         logger.i("___________________________________________________________________________")
         logger.i("TEST SCENE_STEP: $description")

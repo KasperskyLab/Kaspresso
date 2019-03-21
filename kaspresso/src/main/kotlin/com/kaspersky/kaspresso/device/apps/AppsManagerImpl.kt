@@ -10,16 +10,22 @@ import android.support.test.uiautomator.UiSelector
 import android.support.test.uiautomator.Until
 import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.device.server.AdbServer
+import com.kaspersky.kaspresso.logger.UiTestLogger
 import junit.framework.Assert
 import org.hamcrest.CoreMatchers
 import org.hamcrest.MatcherAssert
 
+/**
+ * Default implementation of AppsManager interface.
+ */
 object AppsManagerImpl : AppsManager {
 
     private val context: Context
         get() = InstrumentationRegistry.getInstrumentation().context
 
     private val uiDevice: UiDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
+
+    private val logger: UiTestLogger = Configurator.logger
 
     private val adbServer: AdbServer = Configurator.adbServer
 
@@ -30,7 +36,7 @@ object AppsManagerImpl : AppsManager {
     /**
      *  Installs an app thorough ADB.
      *
-     *  @param apkPath path to an apk to be installed. The apk is hosted on the test server.
+     *  @param apkPath a path to an apk to be installed. The apk is hosted on the test server.
      */
     override fun installApp(apkPath: String) {
         adbServer.performAdb("install $apkPath")
@@ -39,7 +45,7 @@ object AppsManagerImpl : AppsManager {
     /**
      *  Uninstalls an app thorough ADB.
      *
-     *  @param pkg android package name of an app to be deleted.
+     *  @param packageName an android package name of an app to be deleted.
      */
     override fun uninstallApp(packageName: String) {
         adbServer.performAdb("uninstall $packageName")
@@ -70,10 +76,15 @@ object AppsManagerImpl : AppsManager {
 
     override fun launchApp(packageName: String, data: Uri?) {
         val intent = context.packageManager
-            .getLaunchIntentForPackage(packageName)
-            .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            ?.getLaunchIntentForPackage(packageName)
+            ?.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
 
-        data?.let { intent.data = it }
+        intent ?: apply {
+            logger.e("Can not build an intent to launch app for: $packageName")
+            return
+        }
+
+        data?.let { intent!!.data = it }
 
         context.startActivity(intent)
 

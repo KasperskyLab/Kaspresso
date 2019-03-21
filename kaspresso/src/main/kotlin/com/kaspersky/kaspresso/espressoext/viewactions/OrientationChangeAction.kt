@@ -9,6 +9,9 @@ import android.support.test.espresso.ViewAction
 import android.support.test.espresso.matcher.ViewMatchers
 import org.hamcrest.Matcher
 
+/**
+ * An implementation of device's orientation change.
+ */
 class OrientationChangeAction(
     private val activity: Activity,
     private val orientation: Int? = null
@@ -29,7 +32,6 @@ class OrientationChangeAction(
     override fun getConstraints(): Matcher<View> = ViewMatchers.isRoot()
 
     override fun getDescription(): String {
-
         return when (orientation) {
             null -> "toggle orientation"
             else -> "change orientation to $orientation"
@@ -37,20 +39,15 @@ class OrientationChangeAction(
     }
 
     override fun perform(uiController: UiController, view: View) {
-
         uiController.loopMainThreadUntilIdle()
-
         activity.requestedOrientation = orientation ?: decideOrientationToToggle(activity)
-
         uiController.loopMainThreadUntilIdle()
     }
 
     private fun decideOrientationToToggle(activity: Activity): Int {
-
         val currentOrientation = activity.resources.configuration.orientation
 
         return when (currentOrientation) {
-
             Configuration.ORIENTATION_PORTRAIT -> {
                 ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
             }
