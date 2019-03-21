@@ -10,8 +10,6 @@ import android.support.test.espresso.Espresso
 import android.support.test.espresso.matcher.ViewMatchers
 import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.espressoext.viewactions.OrientationChangeAction
-import com.agoda.kakao.configurator.KakaoConfigurator
-import com.agoda.kakao.delegates.ViewInteractionDelegate
 import com.kaspersky.kaspresso.device.activities.ActivitiesManager
 import com.kaspersky.kaspresso.device.files.FilesManager
 import com.kaspersky.kaspresso.device.internet.InternetManager
@@ -19,6 +17,8 @@ import com.kaspersky.kaspresso.device.apps.AppsManager
 import com.kaspersky.kaspresso.device.screenshots.ScreenshotsManager
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.util.getStackTraceAsString
+import com.kaspersky.klkakao.configurator.KakaoConfigurator
+import com.kaspersky.klkakao.delegates.ViewInteractionDelegate
 
 object Device {
 

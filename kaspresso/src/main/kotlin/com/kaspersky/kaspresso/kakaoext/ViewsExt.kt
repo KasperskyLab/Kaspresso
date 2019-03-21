@@ -1,8 +1,8 @@
 package com.kaspersky.kaspresso.kakaoext
 
 import com.kaspersky.kaspresso.configurator.Configurator
-import com.agoda.kakao.common.views.KBaseView
 import com.kaspersky.kaspresso.logger.UiTestLogger
+import com.kaspersky.klkakao.common.views.KBaseView
 import java.util.concurrent.TimeUnit
 
 fun <T : KBaseView<Any>> T.attempt(

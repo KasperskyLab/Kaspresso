@@ -8,7 +8,7 @@ import android.support.test.espresso.web.model.Atom
 import android.support.test.espresso.web.model.ElementReference
 import android.support.test.espresso.web.sugar.Web
 import com.kaspersky.kaspresso.configurator.Configurator
-import com.agoda.kakao.delegates.WebInteractionDelegate
+import com.kaspersky.klkakao.delegates.WebInteractionDelegate
 import org.hamcrest.Matcher
 import javax.annotation.CheckReturnValue
 

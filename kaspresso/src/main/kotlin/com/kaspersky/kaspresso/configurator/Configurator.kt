@@ -2,7 +2,6 @@ package com.kaspersky.kaspresso.configurator
 
 import android.support.test.espresso.NoMatchingViewException
 import android.support.test.espresso.PerformException
-import com.agoda.kakao.configurator.KakaoConfigurator
 import com.kaspersky.kaspresso.delegates.DataInteractionDelegateImpl
 import com.kaspersky.kaspresso.delegates.ViewInteractionDelegateImpl
 import com.kaspersky.kaspresso.delegates.WebInteractionDelegateImpl
@@ -25,6 +24,7 @@ import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.device.server.AdbServerImpl
 import com.kaspersky.kaspresso.device.server.AdbServer
 import com.kaspersky.kaspresso.logger.UiTestLoggerImpl
+import com.kaspersky.klkakao.configurator.KakaoConfigurator
 
 object Configurator {
 
