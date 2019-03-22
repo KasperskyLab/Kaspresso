@@ -5,13 +5,12 @@ import android.content.Context
 import android.net.wifi.WifiManager
 import android.os.Build
 import android.support.test.InstrumentationRegistry
-import com.kaspersky.kaspresso.device.Device.isSdkVersionHigherThan
 import com.kaspersky.kaspresso.device.server.AdbServer
 
 /**
- * Default implementation of InternetManager interface.
+ * Default implementation of Internet interface.
  */
-object InternetManagerImpl: InternetManager {
+object InternetImpl: Internet {
 
     private val targetContext: Context
         get() = InstrumentationRegistry.getTargetContext()
@@ -19,14 +18,14 @@ object InternetManagerImpl: InternetManager {
     /**
      *  Enables wi-fi and mobile data using adb.
      */
-    override fun enableInternet() {
+    override fun enable() {
         AdbServer.performAdb("shell svc data enable", "shell svc wifi enable")
     }
 
     /**
      *  Disables wi-fi and mobile data using adb.
      */
-    override fun disableInternet() {
+    override fun disable() {
         AdbServer.performAdb("shell svc data disable", "shell svc wifi disable")
     }
 
@@ -44,4 +43,9 @@ object InternetManagerImpl: InternetManager {
 
         wifiManager.isWifiEnabled = enable
     }
+
+    /**
+     * Wraps an SDK version checks.
+     */
+    private fun isSdkVersionHigherThan(version: Int): Boolean = Build.VERSION.SDK_INT >= version
 }

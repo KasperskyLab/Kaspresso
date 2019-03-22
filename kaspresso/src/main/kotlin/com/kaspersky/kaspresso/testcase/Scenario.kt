@@ -1,7 +1,7 @@
 package com.kaspersky.kaspresso.testcase
 
 import com.kaspersky.kaspresso.configurator.Configurator
-import com.kaspersky.kaspresso.device.screenshots.ScreenshotsManager
+import com.kaspersky.kaspresso.device.screenshots.Screenshots
 import com.kaspersky.kaspresso.logger.UiTestLogger
 
 /**
@@ -10,7 +10,7 @@ import com.kaspersky.kaspresso.logger.UiTestLogger
 abstract class Scenario {
 
     protected val logger: UiTestLogger = Configurator.logger
-    protected val screenshotsManager: ScreenshotsManager = Configurator.screenshotsManager
+    protected val screenshots: Screenshots = Configurator.screenshots
 
     private var stepCounter = 0
 
@@ -28,9 +28,9 @@ abstract class Scenario {
 
         try {
             actions.invoke()
-            screenshotsManager.makeScreenshotIfPossible(screenshotTag)
+            screenshots.makeIfPossible(screenshotTag)
         } catch (e: Throwable) {
-            screenshotsManager.makeScreenshotIfPossible("${screenshotTag}_failure_${e.javaClass.simpleName}")
+            screenshots.makeIfPossible("${screenshotTag}_failure_${e.javaClass.simpleName}")
             throw e
         }
     }

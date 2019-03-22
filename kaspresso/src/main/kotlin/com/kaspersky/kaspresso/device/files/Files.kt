@@ -1,9 +1,9 @@
 package com.kaspersky.kaspresso.device.files
 
 /**
- * An interface to work with file system.
+ * An interface to work with file permissions.
  */
-interface FilesManager {
+interface Files {
 
     /**
      *  Performs adb push.

@@ -6,17 +6,17 @@ import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.squareup.spoon.Spoon
 
 /**
- * Default implementation of ScreenshotsManager interface.
+ * Default implementation of Screenshots interface.
  */
-object ScreenshotsManagerImpl: ScreenshotsManager {
+object ScreenshotsImpl: Screenshots {
 
     private val logger: UiTestLogger = Configurator.logger
 
     /**
      * Makes screenshot if it is possible, otherwise loggs the error.
      */
-    override fun makeScreenshotIfPossible(tag: String) {
-        val resumedActivity = Device.activitiesManager.getResumedActivity() ?: return
+    override fun makeIfPossible(tag: String) {
+        val resumedActivity = Device.activities.getResumed() ?: return
 
         try {
             Spoon.screenshot(resumedActivity, tag)

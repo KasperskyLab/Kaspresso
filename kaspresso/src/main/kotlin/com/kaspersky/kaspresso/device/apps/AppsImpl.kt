@@ -16,9 +16,11 @@ import org.hamcrest.CoreMatchers
 import org.hamcrest.MatcherAssert
 
 /**
- * Default implementation of AppsManager interface.
+ * Default implementation of Apps interface.
  */
-object AppsManagerImpl : AppsManager {
+object AppsImpl : Apps {
+
+    private const val CHROME_PACKAGE_NAME = "com.android.chrome"
 
     private val context: Context
         get() = InstrumentationRegistry.getInstrumentation().context
@@ -32,20 +34,20 @@ object AppsManagerImpl : AppsManager {
     override val targetAppPackageName: String = context.packageName
 
     /**
-     *  Installs an app thorough ADB.
+     *  Installs an app via ADB.
      *
      *  @param apkPath a path to an apk to be installed. The apk is hosted on the test server.
      */
-    override fun installApp(apkPath: String) {
+    override fun install(apkPath: String) {
         AdbServer.performAdb("install $apkPath")
     }
 
     /**
-     *  Uninstalls an app thorough ADB.
+     *  Uninstalls an app via ADB.
      *
      *  @param packageName an android package name of an app to be deleted.
      */
-    override fun uninstallApp(packageName: String) {
+    override fun uninstall(packageName: String) {
         AdbServer.performAdb("uninstall $packageName")
     }
 
@@ -70,9 +72,9 @@ object AppsManagerImpl : AppsManager {
         )
     }
 
-    override fun openUrlInChrome(url: String) = launchApp(CHROME_PACKAGE_NAME, Uri.parse(url))
+    override fun openUrlInChrome(url: String) = launch(CHROME_PACKAGE_NAME, Uri.parse(url))
 
-    override fun launchApp(packageName: String, data: Uri?) {
+    override fun launch(packageName: String, data: Uri?) {
         val intent = context.packageManager
             ?.getLaunchIntentForPackage(packageName)
             ?.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
@@ -91,7 +93,7 @@ object AppsManagerImpl : AppsManager {
         uiDevice.wait(condition, 5_000)
     }
 
-    override fun openRecentApp(contentDescription: String) {
+    override fun openRecent(contentDescription: String) {
         uiDevice.pressRecentApps()
 
         val appSelector = UiSelector().descriptionContains(contentDescription)
@@ -106,9 +108,7 @@ object AppsManagerImpl : AppsManager {
         Thread.sleep(1_000)
     }
 
-    override fun killApp(packageName: String) {
+    override fun kill(packageName: String) {
         Runtime.getRuntime().exec(arrayOf("am", "force-stop", packageName))
     }
 }
-
-private const val CHROME_PACKAGE_NAME = "com.android.chrome"

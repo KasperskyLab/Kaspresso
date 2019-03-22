@@ -5,17 +5,17 @@ import android.app.Activity
 /**
  * An interface to work with activities.
  */
-interface ActivitiesManager {
+interface Activities {
 
     /**
      * Finds and returns resumed activity if it exists.
      *
      * @return nullable resumed activity
      */
-    fun getResumedActivity(): Activity?
+    fun getResumed(): Activity?
 
     /**
      * Checks if passed activity is resumed.
      */
-    fun isCurrentActivity(clazz: Class<out Activity>)
+    fun isCurrent(clazz: Class<out Activity>)
 }

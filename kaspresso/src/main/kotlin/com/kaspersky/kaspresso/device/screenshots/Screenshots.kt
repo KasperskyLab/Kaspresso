@@ -3,10 +3,10 @@ package com.kaspersky.kaspresso.device.screenshots
 /**
  * An interface to make screenshots.
  */
-interface ScreenshotsManager {
+interface Screenshots {
 
     /**
      * Makes screenshot if it is possible.
      */
-    fun makeScreenshotIfPossible(tag: String)
+    fun makeIfPossible(tag: String)
 }

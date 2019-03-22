@@ -5,16 +5,22 @@ import android.support.test.espresso.PerformException
 import com.kaspersky.kaspresso.delegates.DataInteractionDelegateImpl
 import com.kaspersky.kaspresso.delegates.ViewInteractionDelegateImpl
 import com.kaspersky.kaspresso.delegates.WebInteractionDelegateImpl
-import com.kaspersky.kaspresso.device.activities.ActivitiesManager
-import com.kaspersky.kaspresso.device.activities.ActivitiesManagerImpl
-import com.kaspersky.kaspresso.device.files.FilesManager
-import com.kaspersky.kaspresso.device.files.FilesManagerImpl
-import com.kaspersky.kaspresso.device.internet.InternetManager
-import com.kaspersky.kaspresso.device.internet.InternetManagerImpl
-import com.kaspersky.kaspresso.device.apps.AppsManager
-import com.kaspersky.kaspresso.device.apps.AppsManagerImpl
-import com.kaspersky.kaspresso.device.screenshots.ScreenshotsManager
-import com.kaspersky.kaspresso.device.screenshots.ScreenshotsManagerImpl
+import com.kaspersky.kaspresso.device.accessibility.Accessibility
+import com.kaspersky.kaspresso.device.accessibility.AccessibilityImpl
+import com.kaspersky.kaspresso.device.activities.Activities
+import com.kaspersky.kaspresso.device.activities.ActivitiesImpl
+import com.kaspersky.kaspresso.device.files.Files
+import com.kaspersky.kaspresso.device.files.FilesImpl
+import com.kaspersky.kaspresso.device.internet.Internet
+import com.kaspersky.kaspresso.device.internet.InternetImpl
+import com.kaspersky.kaspresso.device.apps.Apps
+import com.kaspersky.kaspresso.device.apps.AppsImpl
+import com.kaspersky.kaspresso.device.exploit.Exploit
+import com.kaspersky.kaspresso.device.exploit.ExploitImpl
+import com.kaspersky.kaspresso.device.screenshots.Screenshots
+import com.kaspersky.kaspresso.device.screenshots.ScreenshotsImpl
+import com.kaspersky.kaspresso.device.permissions.Permissions
+import com.kaspersky.kaspresso.device.permissions.PermissionsImpl
 import com.kaspersky.kaspresso.interceptors.*
 import com.kaspersky.kaspresso.interceptors.impl.flakysafety.FlakySafeExecutingInterceptor
 import com.kaspersky.kaspresso.interceptors.impl.logging.LoggingFailureInterceptor
@@ -58,27 +64,42 @@ object Configurator {
     /**
      * An interface of applications manager.
      */
-    internal var appsManager: AppsManager = AppsManagerImpl
+    internal var apps: Apps = AppsImpl
 
     /**
      * An interface of activities manager.
      */
-    internal var activitiesManager: ActivitiesManager = ActivitiesManagerImpl
+    internal var activities: Activities = ActivitiesImpl
 
     /**
      * An interface of files manager.
      */
-    internal var filesManager: FilesManager = FilesManagerImpl
+    internal var files: Files = FilesImpl
 
     /**
      * An interface of internet manager.
      */
-    internal var internetManager: InternetManager = InternetManagerImpl
+    internal var internet: Internet = InternetImpl
 
     /**
      * An interface of screenshots manager.
      */
-    internal var screenshotsManager: ScreenshotsManager = ScreenshotsManagerImpl
+    internal var screenshots: Screenshots = ScreenshotsImpl
+
+    /**
+     * An interface of accessibility manager.
+     */
+    internal var accessibility: Accessibility = AccessibilityImpl
+
+    /**
+     * An interface of permissions manager.
+     */
+    internal var permissions: Permissions = PermissionsImpl
+
+    /**
+     * An interface of exploitation manager.
+     */
+    internal var exploit: Exploit = ExploitImpl
 
     /**
      * Exceptions that doesn't stop attempts.
@@ -153,11 +174,14 @@ object Configurator {
         var logger: UiTestLogger = UiTestLoggerImpl(DEFAULT_INNER_LOGGER_TAG)
         var externalLogger: UiTestLogger = UiTestLoggerImpl(DEFAULT_OUTER_LOGGER_TAG)
 
-        var appsManager: AppsManager = AppsManagerImpl
-        var activitiesManager: ActivitiesManager = ActivitiesManagerImpl
-        var filesManager: FilesManager = FilesManagerImpl
-        var internetManager: InternetManager = InternetManagerImpl
-        var screenshotsManager: ScreenshotsManager = ScreenshotsManagerImpl
+        var apps: Apps = AppsImpl
+        var activities: Activities = ActivitiesImpl
+        var files: Files = FilesImpl
+        var internet: Internet = InternetImpl
+        var screenshots: Screenshots = ScreenshotsImpl
+        var accessibility: Accessibility = AccessibilityImpl
+        var permissions: Permissions = PermissionsImpl
+        var exploit: Exploit = ExploitImpl
 
         var allowedExceptionsForAttempt: MutableSet<Class<out Throwable>> = mutableSetOf(
             PerformException::class.java,
@@ -192,11 +216,14 @@ object Configurator {
             Configurator.logger = logger
             Configurator.externalLogger = externalLogger
 
-            Configurator.appsManager = appsManager
-            Configurator.activitiesManager = activitiesManager
-            Configurator.filesManager = filesManager
-            Configurator.internetManager = internetManager
-            Configurator.screenshotsManager = screenshotsManager
+            Configurator.apps = apps
+            Configurator.activities = activities
+            Configurator.files = files
+            Configurator.internet = internet
+            Configurator.screenshots = screenshots
+            Configurator.accessibility = accessibility
+            Configurator.permissions = permissions
+            Configurator.exploit = exploit
 
             Configurator.allowedExceptionsForAttempt = allowedExceptionsForAttempt
 

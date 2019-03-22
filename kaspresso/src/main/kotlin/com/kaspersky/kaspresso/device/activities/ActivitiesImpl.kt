@@ -12,9 +12,9 @@ import org.hamcrest.CoreMatchers
 import org.junit.Assert
 
 /**
- * Default implementation of ActivitiesManager interface.
+ * Default implementation of Activities interface.
  */
-object ActivitiesManagerImpl : ActivitiesManager {
+object ActivitiesImpl : Activities {
 
     private val logger: UiTestLogger = Configurator.logger
 
@@ -29,7 +29,7 @@ object ActivitiesManagerImpl : ActivitiesManager {
      *
      * @return nullable resumed activity
      */
-    override fun getResumedActivity(): Activity? {
+    override fun getResumed(): Activity? {
         var resumedActivity: Activity? = null
 
         val findResumedActivity = {
@@ -55,14 +55,14 @@ object ActivitiesManagerImpl : ActivitiesManager {
     /**
      * Checks if passed activity is resumed.
      */
-    override fun isCurrentActivity(clazz: Class<out Activity>) {
+    override fun isCurrent(clazz: Class<out Activity>) {
         UiThreadStatement.runOnUiThread {
             Assert.assertThat(
-                getResumedActivity(),
+                getResumed(),
                 CoreMatchers.instanceOf(clazz)
             )
         }
     }
 
-    inline fun <reified T : Activity> assertCurrentActivity() = isCurrentActivity(T::class.java)
+    inline fun <reified T : Activity> assertCurrentActivity() = isCurrent(T::class.java)
 }

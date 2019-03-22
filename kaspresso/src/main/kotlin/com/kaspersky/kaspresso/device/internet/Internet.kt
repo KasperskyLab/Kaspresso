@@ -3,17 +3,17 @@ package com.kaspersky.kaspresso.device.internet
 /**
  * An interface to work with internet settings.
  */
-interface InternetManager {
+interface Internet {
 
     /**
      *  Enables wi-fi and mobile data using adb.
      */
-    fun enableInternet()
+    fun enable()
 
     /**
      *  Disables wi-fi and mobile data using adb.
      */
-    fun disableInternet()
+    fun disable()
 
     /**
      * Toggles only wi-fi. Note: it works only if flight mode is off.

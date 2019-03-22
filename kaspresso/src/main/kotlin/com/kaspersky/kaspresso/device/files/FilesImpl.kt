@@ -3,9 +3,9 @@ package com.kaspersky.kaspresso.device.files
 import com.kaspersky.kaspresso.device.server.AdbServer
 
 /**
- * Default implementation of FilesManager interface.
+ * Default implementation of Files interface.
  */
-object FilesManagerImpl: FilesManager {
+object FilesImpl: Files {
 
     /**
      *  Performs adb push.
