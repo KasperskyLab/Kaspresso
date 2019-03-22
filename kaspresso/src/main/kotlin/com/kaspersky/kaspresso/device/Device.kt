@@ -15,7 +15,7 @@ import com.kaspersky.kaspresso.device.screenshots.Screenshots
 import com.kaspersky.kaspresso.device.permissions.Permissions
 
 /**
- * A facade of all managers for outside the screens work.
+ * A provider of managers for all off-screen work.
  */
 object Device {
 
