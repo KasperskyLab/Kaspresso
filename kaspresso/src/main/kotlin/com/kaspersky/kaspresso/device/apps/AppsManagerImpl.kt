@@ -27,8 +27,6 @@ object AppsManagerImpl : AppsManager {
 
     private val logger: UiTestLogger = Configurator.logger
 
-    private val adbServer: AdbServer = Configurator.adbServer
-
     override val targetAppLauncherPackageName: String = uiDevice.launcherPackageName
 
     override val targetAppPackageName: String = context.packageName
@@ -39,7 +37,7 @@ object AppsManagerImpl : AppsManager {
      *  @param apkPath a path to an apk to be installed. The apk is hosted on the test server.
      */
     override fun installApp(apkPath: String) {
-        adbServer.performAdb("install $apkPath")
+        AdbServer.performAdb("install $apkPath")
     }
 
     /**
@@ -48,7 +46,7 @@ object AppsManagerImpl : AppsManager {
      *  @param packageName an android package name of an app to be deleted.
      */
     override fun uninstallApp(packageName: String) {
-        adbServer.performAdb("uninstall $packageName")
+        AdbServer.performAdb("uninstall $packageName")
     }
 
     override fun waitForLauncher(timeout: Long, launcherPackageName: String) {

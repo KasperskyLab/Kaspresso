@@ -21,8 +21,6 @@ import com.kaspersky.kaspresso.interceptors.impl.logging.LoggingFailureIntercept
 import com.kaspersky.kaspresso.interceptors.impl.logging.LoggingViewActionInterceptor
 import com.kaspersky.kaspresso.interceptors.impl.logging.LoggingViewAssertionInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
-import com.kaspersky.kaspresso.device.server.AdbServerImpl
-import com.kaspersky.kaspresso.device.server.AdbServer
 import com.kaspersky.kaspresso.logger.UiTestLoggerImpl
 import com.kaspersky.klkakao.configurator.KakaoConfigurator
 
@@ -81,11 +79,6 @@ object Configurator {
      * An interface of screenshots manager.
      */
     internal var screenshotsManager: ScreenshotsManager = ScreenshotsManagerImpl
-
-    /**
-     * An interface of adb server.
-     */
-    internal var adbServer: AdbServer = AdbServerImpl
 
     /**
      * Exceptions that doesn't stop attempts.
@@ -166,8 +159,6 @@ object Configurator {
         var internetManager: InternetManager = InternetManagerImpl
         var screenshotsManager: ScreenshotsManager = ScreenshotsManagerImpl
 
-        var adbServer: AdbServer = AdbServerImpl
-
         var allowedExceptionsForAttempt: MutableSet<Class<out Throwable>> = mutableSetOf(
             PerformException::class.java,
             NoMatchingViewException::class.java,
@@ -206,8 +197,6 @@ object Configurator {
             Configurator.filesManager = filesManager
             Configurator.internetManager = internetManager
             Configurator.screenshotsManager = screenshotsManager
-
-            Configurator.adbServer = adbServer
 
             Configurator.allowedExceptionsForAttempt = allowedExceptionsForAttempt
 

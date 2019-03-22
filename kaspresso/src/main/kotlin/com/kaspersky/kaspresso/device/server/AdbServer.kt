@@ -1,17 +1,41 @@
 package com.kaspersky.kaspresso.device.server
 
+import com.kaspersky.test_server_mobile.HostConnection
+
 /**
- * An interface to work with adb server.
+ * Encapsulates all work with adb server.
  */
-interface AdbServer {
+object AdbServer {
+
+    private val hostConnection: HostConnection by lazy {
+        HostConnection.apply {
+            start()
+        }
+    }
 
     /**
      *  Executes shell commands blocking current thread.
+     *
+     *  @param commands commands to execute.
      */
-    fun performCmd(vararg commands: String)
+    fun performCmd(vararg commands: String) {
+        performCommand(commands) { executeCmdCommand(it) }
+    }
 
     /**
      *  Performs adb commands blocking current thread.
+     *
+     *  @param commands commands to execute.
      */
-    fun performAdb(vararg commands: String)
+    fun performAdb(vararg commands: String) {
+        performCommand(commands) { executeAdbCommand(it) }
+    }
+
+    private fun performCommand(commands: Array<out String>, executor: HostConnection.(String) -> Unit) {
+        commands.forEach { cmd ->
+            hostConnection.runCatching {
+                executor(cmd)
+            }
+        }
+    }
 }
