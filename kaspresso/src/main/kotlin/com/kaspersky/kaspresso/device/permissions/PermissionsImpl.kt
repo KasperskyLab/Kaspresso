@@ -19,11 +19,21 @@ object PermissionsImpl : Permissions {
     private val logger: UiTestLogger = Configurator.logger
 
     /**
+     * Passes the permission-requesting permissions dialog and allows permissions.
+     */
+    override fun allowViaDialog() = handlePermissionRequest(shouldAllowPermissions = true)
+
+    /**
+     * Passes the permission-requesting permissions dialog and denies permissions.
+     */
+    override fun denyViaDialog() = handlePermissionRequest(shouldAllowPermissions = false)
+
+    /**
      * Passes the permission-requesting permissions dialog.
      *
      * @param shouldAllowPermissions if set to true permissions will be allowed, otherwise will not.
      */
-    override fun handlePermissionRequest(shouldAllowPermissions: Boolean) {
+    private fun handlePermissionRequest(shouldAllowPermissions: Boolean) {
         try {
             val btnSelector = UiSelector()
                 .clickable(true)

@@ -6,9 +6,12 @@ package com.kaspersky.kaspresso.device.permissions
 interface Permissions {
 
     /**
-     * Passes the permission-requesting permissions dialog.
-     *
-     * @param shouldAllowPermissions if set to true permissions will be allowed, otherwise will not.
+     * Passes the permission-requesting permissions dialog and allows permissions.
      */
-    fun handlePermissionRequest(shouldAllowPermissions: Boolean)
+    fun allowViaDialog()
+
+    /**
+     * Passes the permission-requesting permissions dialog and denies permissions.
+     */
+    fun denyViaDialog()
 }
