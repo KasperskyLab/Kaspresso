@@ -18,7 +18,7 @@ interface ViewInteractionDelegate {
 
     fun check(viewAssertion: ViewAssertion): ViewInteractionDelegate
 
-    fun check(function: (View, NoMatchingViewException) -> Unit): ViewInteractionDelegate
+    fun check(function: (View, NoMatchingViewException?) -> Unit): ViewInteractionDelegate
 
     fun withFailureHandler(function: (Throwable, Matcher<View>) -> Unit): ViewInteractionDelegate
 

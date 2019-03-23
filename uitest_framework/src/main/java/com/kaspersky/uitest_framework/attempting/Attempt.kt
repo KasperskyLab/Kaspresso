@@ -45,7 +45,7 @@ fun <T> attempt(
 
     Configurator.logger.e(
         "All attempts to interact for $timeoutMs ms totally failed " +
-                "because of ${caughtAllowedException::class.simpleName}"
+                "because of ${caughtAllowedException.javaClass.simpleName}"
     )
 
     Configurator.logger.e(caughtAllowedException.getStackTraceAsString())

@@ -23,7 +23,7 @@ class ViewInteractionDelegateEmptyImpl internal constructor(
     }
 
     override fun check(
-            function: (View, NoMatchingViewException) -> Unit
+            function: (View, NoMatchingViewException?) -> Unit
     ): ViewInteractionDelegate {
         viewInteraction.check(function)
         return this

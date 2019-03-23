@@ -17,14 +17,14 @@ abstract class Scenario {
         logger.i("___________________________________________________________________________")
         logger.i("TEST SCENE_STEP: $description")
 
-        val screenshotTag = "${this::class.simpleName}_scene_step_${++stepCounter}"
+        val screenshotTag = "${javaClass.simpleName}_scene_step_${++stepCounter}"
 
         try {
             actions.invoke()
             ScreenshotManager.makeScreenshotIfPossible(screenshotTag)
         } catch (e: Throwable) {
             ScreenshotManager.makeScreenshotIfPossible(
-                "${screenshotTag}_failure_${e::class.simpleName}"
+                "${screenshotTag}_failure_${e.javaClass.simpleName}"
             )
             throw e
         }

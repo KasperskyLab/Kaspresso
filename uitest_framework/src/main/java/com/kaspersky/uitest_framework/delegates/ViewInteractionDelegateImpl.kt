@@ -64,7 +64,7 @@ open class ViewInteractionDelegateImpl(
      * @return an existing [ViewInteractionDelegateImpl] instance.
      */
     override fun check(
-        function: (View, NoMatchingViewException) -> Unit
+        function: (View, NoMatchingViewException?) -> Unit
     ): ViewInteractionDelegate {
 
         val viewAssertionProxy = ViewAssertionProxy(

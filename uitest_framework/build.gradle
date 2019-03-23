@@ -30,7 +30,6 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
-    implementation "org.jetbrains.kotlin:kotlin-reflect:$versions.kotlin"
 
     testImplementation "junit:junit:$versions.junit"
 
@@ -44,6 +43,8 @@ dependencies {
 
     implementation "com.squareup.retrofit2:retrofit:$versions.retrofit"
     implementation "com.squareup.spoon:spoon-client:$versions.spoon"
+
+    implementation "com.kaspersky.components:test-server:$versions.server"
 }
 
 if (pPublish.toBoolean()) {
