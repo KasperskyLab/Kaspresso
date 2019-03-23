@@ -8,6 +8,9 @@ import com.agoda.kakao.configurator.KakaoConfigurator
 import com.agoda.kakao.delegates.WebInteractionDelegate
 import org.hamcrest.Matcher
 
+/**
+ * Stub implementation of [WebInteractionDelegate], repeats the [Web.WebInteraction] behavior.
+ */
 class WebInteractionDelegateEmptyImpl internal constructor(
         private val webInteraction: Web.WebInteraction<*>
 ): WebInteractionDelegate {

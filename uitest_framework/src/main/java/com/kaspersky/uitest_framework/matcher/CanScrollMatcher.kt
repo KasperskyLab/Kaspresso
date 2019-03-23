@@ -4,6 +4,9 @@ import android.view.View
 import org.hamcrest.BaseMatcher
 import org.hamcrest.Description
 
+/**
+ * An implementation of [BaseMatcher] that answers if [View] can be scrolled vertically.
+ */
 class CanScrollMatcher(private val scrollDirection: ScrollDirection) : BaseMatcher<View>() {
 
     override fun describeTo(description: Description?) {

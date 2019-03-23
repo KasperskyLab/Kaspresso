@@ -17,6 +17,9 @@ import com.agoda.kakao.delegates.ViewInteractionDelegate
 import com.kaspersky.uitest_framework.logger.UiTestLogger
 import com.kaspersky.uitest_framework.util.getStackTraceAsString
 
+/**
+ * A facade that encapsulates all the work outside the screens.
+ */
 object Device {
 
     private const val PACKAGE_INSTALLER_PACKAGE_NAME = "com.android.packageinstaller"
@@ -46,6 +49,9 @@ object Device {
 
     val activitiesManager: ActivitiesManager = ActivitiesManager()
 
+    /**
+     * Changes an orientation of device.
+     */
     fun rotate() {
         val resumedActivity = activitiesManager.getResumedActivity() ?: return
 
@@ -55,7 +61,10 @@ object Device {
     }
 
     /**
-     * Available since api 24
+     * Enables accessibility. Available since api 24.
+     *
+     * @param packageName a package name of an accessibility service
+     * @param className a class name of an accessibility service
      */
     @TargetApi(Build.VERSION_CODES.N)
     fun enableAccessibility(
@@ -72,7 +81,7 @@ object Device {
     }
 
     /**
-     * Available since api 24
+     * Enables accessibility. Available since api 24.
      */
     @TargetApi(Build.VERSION_CODES.N)
     fun disableAccessibility() {
@@ -85,6 +94,11 @@ object Device {
             .close()
     }
 
+    /**
+     * Toggles WiFi state.
+     *
+     * @param enable if is set to true WiFi will be enabled, otherwise will be disabled.
+     */
     @SuppressLint("WifiManagerLeak")
     fun toggleWiFi(enable: Boolean) {
         val wifiManager =
@@ -100,6 +114,11 @@ object Device {
         wifiManager.isWifiEnabled = enable
     }
 
+    /**
+     * Passes the permission-requesting system dialog.
+     *
+     * @param shouldAllowPermissions if set to true permissions will be allowed, otherwise will not.
+     */
     fun handlePermissionRequest(shouldAllowPermissions: Boolean) {
         try {
             val btnSelector = UiSelector()
@@ -125,6 +144,12 @@ object Device {
         }
     }
 
+    /**
+     * Presses back button on the device.
+     *
+     * @param failTestIfAppUnderTestClosed if set to true, an exception will be thrown when Espresso navigates
+     * outside the application or process under test.
+     */
     fun pressBack(failTestIfAppUnderTestClosed: Boolean = false) {
         if (failTestIfAppUnderTestClosed) {
             Espresso.pressBack()
@@ -133,7 +158,15 @@ object Device {
         }
     }
 
+    /**
+     * Presses home button on the device.
+     *
+     * @return true if successful, else return false
+     */
     fun pressHome(): Boolean = uiDevice.pressHome()
 
+    /**
+     * Wraps an SDK version checks.
+     */
     fun isSdkVersionHigherThan(version: Int): Boolean = Build.VERSION.SDK_INT >= version
 }

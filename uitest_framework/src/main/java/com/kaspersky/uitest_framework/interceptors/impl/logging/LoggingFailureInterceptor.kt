@@ -8,10 +8,19 @@ import com.kaspersky.uitest_framework.logger.UiTestLogger
 import junit.framework.AssertionFailedError
 import org.hamcrest.Matcher
 
+/**
+ * An implementation of [FailureInterceptor] that logs rich description of failure.
+ */
 class LoggingFailureInterceptor(
     private val uiTestLogger: UiTestLogger
 ) : FailureInterceptor {
 
+    /**
+     * Writes info to [uiTestLogger] and throws an exception further.
+     *
+     * @param error the reason of failure.
+     * @param viewMatcher a matcher, which corresponded to the view on which the error occurred.
+     */
     override fun interceptAndThrow(error: Throwable, viewMatcher: Matcher<View>) {
 
         uiTestLogger.e(
@@ -22,6 +31,13 @@ class LoggingFailureInterceptor(
         throw getSelfDescribedError(error, viewMatcher)
     }
 
+    /**
+     * Transforms an exception to more readable form.
+     *
+     * @param error the reason of failure.
+     * @param viewMatcher a matcher, which corresponded to the view on which the error occurred.
+     * @return transformed [error]
+     */
     private fun getSelfDescribedError(
         error: Throwable,
         viewMatcher: Matcher<View>
