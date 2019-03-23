@@ -14,6 +14,8 @@ object ScreenshotsImpl: Screenshots {
 
     /**
      * Makes screenshot if it is possible, otherwise loggs the error.
+     *
+     * @param tag a unique tag to further identify the screenshot. Must match [a-zA-Z0-9_-]+.
      */
     override fun makeIfPossible(tag: String) {
         val resumedActivity = Device.activities.getResumed() ?: return
