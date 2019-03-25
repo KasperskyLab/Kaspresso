@@ -1,4 +1,4 @@
-package com.kaspersky.kaspresso.espressoext.viewactions
+package com.kaspersky.kaspresso.viewactions.orientation
 
 import android.app.Activity
 import android.content.pm.ActivityInfo
@@ -23,10 +23,16 @@ class OrientationChangeAction(
             OrientationChangeAction(activity)
 
         fun orientationLandscape(activity: Activity): ViewAction =
-            OrientationChangeAction(activity, ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE)
+            OrientationChangeAction(
+                activity,
+                ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+            )
 
         fun orientationPortrait(activity: Activity): ViewAction =
-            OrientationChangeAction(activity, ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
+            OrientationChangeAction(
+                activity,
+                ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+            )
     }
 
     override fun getConstraints(): Matcher<View> = ViewMatchers.isRoot()

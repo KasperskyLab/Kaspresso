@@ -1,4 +1,4 @@
-package com.kaspersky.kaspresso.espressoext.matchers
+package com.kaspersky.kaspresso.extensions.espressoext
 
 import android.view.View
 import org.hamcrest.Matcher

@@ -13,6 +13,9 @@ import java.util.*
 internal class Cache(
     private val contextGetter: () -> Context
 ) {
+    private val deleteTimeoutMs = 5_000L
+    private val deleteFrequencyMs = 500L
+
     /**
      * Attempts to recursively clear cache directory.
      */
@@ -21,8 +24,8 @@ internal class Cache(
 
         if (cacheDir.list() != null) {
             attempt(
-                timeoutMs = DELETE_TIMEOUT_MS,
-                attemptsFrequencyMs = DELETE_FREQUENCY_MS
+                timeoutMs = deleteTimeoutMs,
+                attemptsFrequencyMs = deleteFrequencyMs
             ) {
                 Assert.assertThat(
                     "Can't delete ${cacheDir.path}",
@@ -52,8 +55,8 @@ internal class Cache(
         if (directory.isDirectory) {
             directory.list()?.forEach { content ->
                 attempt(
-                    timeoutMs = DELETE_TIMEOUT_MS,
-                    attemptsFrequencyMs = DELETE_FREQUENCY_MS
+                    timeoutMs = deleteTimeoutMs,
+                    attemptsFrequencyMs = deleteFrequencyMs
                 ) {
                     Assert.assertThat(
                         "Can't delete file $content in ${directory.path}",
@@ -67,7 +70,3 @@ internal class Cache(
         return directory.delete()
     }
 }
-
-private const val DELETE_TIMEOUT_MS = 5_000L
-
-private const val DELETE_FREQUENCY_MS = 500L

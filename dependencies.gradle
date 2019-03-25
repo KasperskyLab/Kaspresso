@@ -14,5 +14,5 @@ ext.versions = [
         uiautomator   : "2.1.3",
         spoon         : "1.7.1",
         klkakao       : "1.0.5",
-        server        : "1.0.20"
+        server        : "1.0.22"
 ]

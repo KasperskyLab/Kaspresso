@@ -4,7 +4,7 @@ import android.view.View
 import android.support.test.espresso.ViewAction
 import com.kaspersky.kaspresso.interceptors.ViewActionInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
-import com.kaspersky.kaspresso.util.describe
+import com.kaspersky.kaspresso.extensions.other.describe
 
 /**
  * An implementation of [ViewActionInterceptor] that logs info about [ViewAction].

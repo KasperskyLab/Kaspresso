@@ -5,7 +5,7 @@ import android.support.test.uiautomator.UiSelector
 import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.device.Device
 import com.kaspersky.kaspresso.logger.UiTestLogger
-import com.kaspersky.kaspresso.util.getStackTraceAsString
+import com.kaspersky.kaspresso.extensions.other.getStackTraceAsString
 
 /**
  * An implementation of Permissions interface.

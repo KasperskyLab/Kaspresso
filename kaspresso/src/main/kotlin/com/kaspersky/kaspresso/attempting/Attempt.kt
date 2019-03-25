@@ -2,7 +2,7 @@ package com.kaspersky.kaspresso.attempting
 
 import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.logger.UiTestLogger
-import com.kaspersky.kaspresso.util.getStackTraceAsString
+import com.kaspersky.kaspresso.extensions.other.getStackTraceAsString
 
 /**
  * Makes several attempts to invoke an action.

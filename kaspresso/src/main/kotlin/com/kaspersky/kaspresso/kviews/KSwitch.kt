@@ -1,4 +1,4 @@
-package com.kaspersky.kaspresso.kakaoext
+package com.kaspersky.kaspresso.kviews
 
 import android.view.View
 import com.kaspersky.klkakao.check.CheckableActions

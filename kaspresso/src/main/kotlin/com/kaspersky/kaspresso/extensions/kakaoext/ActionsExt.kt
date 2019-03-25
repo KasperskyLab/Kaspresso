@@ -1,4 +1,4 @@
-package com.kaspersky.kaspresso.kakaoext
+package com.kaspersky.kaspresso.extensions.kakaoext
 
 import android.support.test.espresso.ViewAction
 import android.view.View

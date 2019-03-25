@@ -1,4 +1,4 @@
-package com.kaspersky.kaspresso.matcher
+package com.kaspersky.kaspresso.matchers.canscroll
 
 import android.view.View
 import org.hamcrest.BaseMatcher

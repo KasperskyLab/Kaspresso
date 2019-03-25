@@ -1,4 +1,4 @@
-package com.kaspersky.kaspresso.espressoext.viewactions
+package com.kaspersky.kaspresso.viewactions.scroll
 
 import android.graphics.Rect
 import android.view.View
@@ -12,7 +12,7 @@ import android.support.test.espresso.matcher.ViewMatchers
 import android.support.test.espresso.matcher.ViewMatchers.*
 import android.support.test.espresso.util.HumanReadables
 import android.support.v4.widget.NestedScrollView
-import com.kaspersky.kaspresso.util.isDisplayed
+import com.kaspersky.kaspresso.extensions.other.isDisplayed
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers.allOf
 import org.hamcrest.Matchers.anyOf

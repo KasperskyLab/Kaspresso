@@ -4,7 +4,7 @@ import android.support.test.espresso.web.assertion.WebAssertionProxy
 import android.webkit.WebView
 import com.kaspersky.kaspresso.interceptors.WebAssertionInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
-import com.kaspersky.kaspresso.util.describe
+import com.kaspersky.kaspresso.extensions.other.describe
 
 /**
  * An implementation of [WebAssertionInterceptor] that logs info about

@@ -1,4 +1,4 @@
-package com.kaspersky.kaspresso.kakaoext
+package com.kaspersky.kaspresso.extensions.kakaoext
 
 import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.logger.UiTestLogger
