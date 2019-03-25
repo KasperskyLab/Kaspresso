@@ -104,7 +104,7 @@ object Configurator {
     /**
      * Exceptions that doesn't stop attempts.
      */
-    internal var allowedExceptionsForAttempt: MutableSet<Class<out Throwable>> = mutableSetOf(
+    internal var allowedExceptionsForAttempt: Set<Class<out Throwable>> = setOf(
         PerformException::class.java,
         NoMatchingViewException::class.java,
         AssertionError::class.java
@@ -114,25 +114,25 @@ object Configurator {
      * Interceptors that are called by [com.kaspersky.uitest_framework.proxy.ViewActionProxy] before actually
      * [android.support.test.espresso.ViewAction.perform] call.
      */
-    internal var viewActionInterceptors: ArrayList<ViewActionInterceptor> = arrayListOf()
+    internal var viewActionInterceptors: List<ViewActionInterceptor> = emptyList()
 
     /**
      * Interceptors that are called by [com.kaspersky.uitest_framework.proxy.ViewAssertionProxy] before actually
      * [android.support.test.espresso.ViewAssertion.check] call.
      */
-    internal var viewAssertionInterceptors: ArrayList<ViewAssertionInterceptor> = arrayListOf()
+    internal var viewAssertionInterceptors: List<ViewAssertionInterceptor> = emptyList()
 
     /**
      * Interceptors that are called by [com.kaspersky.uitest_framework.proxy.AtomProxy] before actually
      * [android.support.test.espresso.web.model.Atom.transform] call.
      */
-    internal var atomInterceptors: ArrayList<AtomInterceptor> = arrayListOf()
+    internal var atomInterceptors: List<AtomInterceptor> = emptyList()
 
     /**
      * Interceptors that are called by [android.support.test.espresso.web.assertion.WebAssertionProxy] before actually
      * [android.support.test.espresso.web.assertion.WebAssertion.checkResult] call.
      */
-    internal var webAssertionInterceptors: ArrayList<WebAssertionInterceptor> = arrayListOf()
+    internal var webAssertionInterceptors: List<WebAssertionInterceptor> = emptyList()
 
     /**
      * An interceptor that actually manages the execution of actions or assertions. For example,
@@ -160,8 +160,8 @@ object Configurator {
              */
             fun default(): Builder {
                 return Builder().apply {
-                    viewActionInterceptors = arrayListOf(LoggingViewActionInterceptor(logger))
-                    viewAssertionInterceptors = arrayListOf(LoggingViewAssertionInterceptor(logger))
+                    viewActionInterceptors = listOf(LoggingViewActionInterceptor(logger))
+                    viewAssertionInterceptors = listOf(LoggingViewAssertionInterceptor(logger))
                     executingInterceptor = FlakySafeExecutingInterceptor()
                     failureInterceptor = LoggingFailureInterceptor(logger)
                 }
@@ -183,16 +183,16 @@ object Configurator {
         var permissions: Permissions = PermissionsImpl
         var exploit: Exploit = ExploitImpl
 
-        var allowedExceptionsForAttempt: MutableSet<Class<out Throwable>> = mutableSetOf(
+        var allowedExceptionsForAttempt: Set<Class<out Throwable>> = setOf(
             PerformException::class.java,
             NoMatchingViewException::class.java,
             AssertionError::class.java
         )
 
-        var viewActionInterceptors: ArrayList<ViewActionInterceptor> = arrayListOf()
-        var viewAssertionInterceptors: ArrayList<ViewAssertionInterceptor> = arrayListOf()
-        var atomInterceptors: ArrayList<AtomInterceptor> = arrayListOf()
-        var webAssertionInterceptors: ArrayList<WebAssertionInterceptor> = arrayListOf()
+        var viewActionInterceptors: List<ViewActionInterceptor> = emptyList()
+        var viewAssertionInterceptors: List<ViewAssertionInterceptor> = emptyList()
+        var atomInterceptors: List<AtomInterceptor> = emptyList()
+        var webAssertionInterceptors: List<WebAssertionInterceptor> = emptyList()
 
         var executingInterceptor: ExecutingInterceptor? = null
         var failureInterceptor: FailureInterceptor? = null
