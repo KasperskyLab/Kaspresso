@@ -1,0 +1,74 @@
+apply plugin: 'com.android.library'
+apply plugin: 'maven'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply from: '../dependencies.gradle'
+
+android {
+    compileSdkVersion Integer.parseInt(versions.compileSdk)
+    buildToolsVersion versions.buildTools
+
+    defaultConfig {
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
+        versionName "$pKaspressoMajor.$pKaspressoMinor.$pKaspressoBuild"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        sourceSets {
+            main.java.srcDirs += 'src/main/kotlin'
+            main.res.srcDirs += 'src/main/res'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
+
+    testImplementation "junit:junit:$versions.junit"
+
+    implementation "com.android.support:design:$versions.androidSupport"
+    implementation "com.android.support.test:runner:$versions.runner"
+    implementation "com.android.support.test.espresso:espresso-web:$versions.espresso"
+    implementation "com.android.support.test.espresso:espresso-core:$versions.espresso"
+    implementation "com.android.support.test.espresso:espresso-contrib:$versions.espresso"
+    implementation "com.android.support.test.espresso:espresso-intents:$versions.espresso"
+    implementation "com.android.support.test.uiautomator:uiautomator-v18:$versions.uiautomator"
+
+    implementation "com.squareup.retrofit2:retrofit:$versions.retrofit"
+    implementation "com.squareup.spoon:spoon-client:$versions.spoon"
+
+    implementation "com.kaspersky.components:klkakao:$versions.klkakao"
+    implementation "com.kaspersky.components:test-server:$versions.server"
+}
+
+if (pPublish.toBoolean()) {
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                repository(url: "") {
+                    
+                }
+                pom.groupId = 'com.kaspersky.components'
+                pom.artifactId = ''
+                pom.version = ""
+            }
+        }
+    }
+    uploadArchives.dependsOn assemble
+} else {
+    Task uploadArchives
+}
+
+repositories {
+    mavenCentral()
+}
