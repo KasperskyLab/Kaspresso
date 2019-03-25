@@ -67,5 +67,22 @@ abstract class TestCase(
                 throw e
             }
         }
+
+        /**
+         * A repesentation of a finishing step returning [TestCase]'s app state to initial.
+         *
+         * @param description a description of a postcondition.
+         * @param actions a set of actions of a postcondition.
+         */
+        fun postcondition(description: String, actions: () -> Unit) {
+            logger.i("POSTCONDITION: $description")
+
+            try {
+                actions.invoke()
+            } catch (e: Throwable) {
+                screenshots.makeIfPossible("${label}_postcondition_failure_${e.javaClass.simpleName}")
+                throw e
+            }
+        }
     }
 }
