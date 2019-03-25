@@ -11,9 +11,6 @@ import junit.framework.Assert
 import org.hamcrest.CoreMatchers
 import org.hamcrest.MatcherAssert
 
-/**
- * Encapsulates all work with launcher and package manager.
- */
 class AppsManager(
     private val device: UiDevice,
     private val contextGetter: () -> Context

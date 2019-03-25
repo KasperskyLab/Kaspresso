@@ -8,9 +8,6 @@ import com.agoda.kakao.common.views.KBaseView
 import com.agoda.kakao.delegates.DataInteractionDelegate
 import org.hamcrest.Matcher
 
-/**
- * View with [CheckableActions] and [CheckableAssertions].
- */
 class KSwitch : KBaseView<KSwitch>, CheckableActions, CheckableAssertions {
     constructor(function: ViewBuilder.() -> Unit) : super(function)
     constructor(parent: Matcher<View>, function: ViewBuilder.() -> Unit) : super(parent, function)

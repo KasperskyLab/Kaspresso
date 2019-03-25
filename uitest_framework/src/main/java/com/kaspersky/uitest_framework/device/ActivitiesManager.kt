@@ -11,9 +11,6 @@ import com.kaspersky.uitest_framework.logger.UiTestLogger
 import org.hamcrest.CoreMatchers
 import org.junit.Assert
 
-/**
- * Encapsulates all work with activities.
- */
 class ActivitiesManager {
 
     private val logger: UiTestLogger = Configurator.logger
@@ -21,9 +18,6 @@ class ActivitiesManager {
     private val isMainThread: Boolean
         get() = Looper.myLooper() == Looper.getMainLooper()
 
-    /**
-     * Checks if passed activity is resumed.
-     */
     inline fun <reified T : Activity> assertCurrentActivity() {
         UiThreadStatement.runOnUiThread {
             Assert.assertThat(
@@ -33,11 +27,6 @@ class ActivitiesManager {
         }
     }
 
-    /**
-     * Finds and returns resumed activity if it exists, otherwise logs error.
-     *
-     * @return nullable resumed activity
-     */
     fun getResumedActivity(): Activity? {
         var resumedActivity: Activity? = null
 

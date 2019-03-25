@@ -7,9 +7,6 @@ import android.support.test.espresso.UiController
 import android.support.test.espresso.matcher.ViewMatchers.isAssignableFrom
 import com.agoda.kakao.text.TextViewActions
 
-/**
- * @return a [String] descriotion of [TextViewActions].
- */
 fun TextViewActions.getText(): String {
 
     var stringHolder = "_"

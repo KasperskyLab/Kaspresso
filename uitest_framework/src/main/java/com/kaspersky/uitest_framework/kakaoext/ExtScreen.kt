@@ -9,21 +9,12 @@ import com.agoda.kakao.common.KakaoDslMarker
 import com.agoda.kakao.configurator.KakaoConfigurator
 import com.agoda.kakao.screen.ScreenActions
 
-/**
- * An extension of [com.agoda.kakao.screen.Screen].
- */
 @Suppress("UNCHECKED_CAST")
 @KakaoDslMarker
 abstract class ExtScreen<out T : ExtScreen<T>> : ScreenActions {
 
-    /**
-     * The layout id with which the screen is associated.
-     */
     abstract val layoutId: Int?
 
-    /**
-     * The view class with which the screen is associated.
-     */
     abstract val viewClass: Class<out Any>?
 
     override val view = KakaoConfigurator.createViewInteractionDelegate(

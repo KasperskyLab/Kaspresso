@@ -9,9 +9,6 @@ import com.agoda.kakao.delegates.ViewInteractionDelegate
 
 import org.hamcrest.Matcher
 
-/**
- * Stub implementation of [DataInteractionDelegate], repeats the [DataInteraction] behavior.
- */
 class DataInteractionDelegateEmptyImpl internal constructor(
         private val dataInteraction: DataInteraction
 ): DataInteractionDelegate {

@@ -17,9 +17,6 @@ import org.hamcrest.Matcher
 import org.hamcrest.Matchers.allOf
 import org.hamcrest.Matchers.anyOf
 
-/**
- * An implementation of scroll action.
- */
 class ScrollIfPossibleAction : ViewAction {
 
     private val scrollableContainerMatcher = anyOf(

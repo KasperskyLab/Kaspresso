@@ -5,9 +5,6 @@ import android.support.test.espresso.*
 import com.agoda.kakao.delegates.ViewInteractionDelegate
 import org.hamcrest.Matcher
 
-/**
- * Stub implementation of [ViewInteractionDelegate], repeats the [ViewInteraction] behavior.
- */
 class ViewInteractionDelegateEmptyImpl internal constructor(
         private val viewInteraction: ViewInteraction
 ): ViewInteractionDelegate {

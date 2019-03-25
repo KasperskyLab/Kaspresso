@@ -4,18 +4,10 @@ import com.kaspersky.uitest_framework.configurator.Configurator
 import com.kaspersky.uitest_framework.logger.UiTestLogger
 import com.squareup.spoon.Spoon
 
-/**
- * Encapsulates all work with screenshots.
- */
 object ScreenshotManager {
 
     private val logger: UiTestLogger = Configurator.logger
 
-    /**
-     * Makes screenshot if it is possible, otherwise logs an error.
-     *
-     * @param tag a unique tag to further identify the screenshot. Must match [a-zA-Z0-9_-]+.
-     */
     fun makeScreenshotIfPossible(tag: String) {
         val resumedActivity = Device.activitiesManager.getResumedActivity() ?: return
 
