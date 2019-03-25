@@ -8,7 +8,7 @@ import com.squareup.spoon.Spoon
 /**
  * Default implementation of Screenshots interface.
  */
-object ScreenshotsImpl: Screenshots {
+class ScreenshotsImpl: Screenshots {
 
     private val logger: UiTestLogger = Configurator.logger
 

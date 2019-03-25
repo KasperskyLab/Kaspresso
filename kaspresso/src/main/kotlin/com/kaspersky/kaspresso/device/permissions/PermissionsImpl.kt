@@ -10,11 +10,11 @@ import com.kaspersky.kaspresso.util.getStackTraceAsString
 /**
  * An implementation of Permissions interface.
  */
-object PermissionsImpl : Permissions {
+class PermissionsImpl : Permissions {
 
-    private const val PACKAGE_INSTALLER_PACKAGE_NAME = "com.android.packageinstaller"
-    private const val PERMISSION_DENY_BUTTON_ID = "$PACKAGE_INSTALLER_PACKAGE_NAME:id/permission_deny_button"
-    private const val PERMISSION_ALLOW_BUTTON_ID = "$PACKAGE_INSTALLER_PACKAGE_NAME:id/permission_allow_button"
+    private val packageInstallerPackageName = "com.android.packageinstaller"
+    private val permissionDenyButtonId = "$packageInstallerPackageName:id/permission_deny_button"
+    private val permissionAllowButtonId = "$packageInstallerPackageName:id/permission_allow_button"
 
     private val logger: UiTestLogger = Configurator.logger
 
@@ -40,9 +40,9 @@ object PermissionsImpl : Permissions {
                 .checkable(false)
                 .resourceId(
                     if (shouldAllowPermissions)
-                        PERMISSION_ALLOW_BUTTON_ID
+                        permissionAllowButtonId
                     else
-                        PERMISSION_DENY_BUTTON_ID
+                        permissionDenyButtonId
                 )
 
             val btn = Device.uiDevice.findObject(btnSelector)

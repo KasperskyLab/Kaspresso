@@ -8,7 +8,7 @@ import android.support.test.InstrumentationRegistry
 /**
  * An implementation of Accessibility interface.
  */
-object AccessibilityImpl : Accessibility {
+class AccessibilityImpl : Accessibility {
 
     /**
      * Enables accessibility. Available since api 24.

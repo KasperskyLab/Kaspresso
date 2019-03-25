@@ -18,9 +18,9 @@ import org.hamcrest.MatcherAssert
 /**
  * Default implementation of Apps interface.
  */
-object AppsImpl : Apps {
+class AppsImpl : Apps {
 
-    private const val CHROME_PACKAGE_NAME = "com.android.chrome"
+    private val chromePackageName = "com.android.chrome"
 
     private val context: Context
         get() = InstrumentationRegistry.getInstrumentation().context
@@ -72,7 +72,7 @@ object AppsImpl : Apps {
         )
     }
 
-    override fun openUrlInChrome(url: String) = launch(CHROME_PACKAGE_NAME, Uri.parse(url))
+    override fun openUrlInChrome(url: String) = launch(chromePackageName, Uri.parse(url))
 
     override fun launch(packageName: String, data: Uri?) {
         val intent = context.packageManager

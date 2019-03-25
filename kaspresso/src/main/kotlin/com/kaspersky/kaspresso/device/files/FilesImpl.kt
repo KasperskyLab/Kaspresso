@@ -5,7 +5,7 @@ import com.kaspersky.kaspresso.device.server.AdbServer
 /**
  * Default implementation of Files interface.
  */
-object FilesImpl: Files {
+class FilesImpl: Files {
 
     /**
      *  Performs adb push.

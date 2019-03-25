@@ -10,7 +10,7 @@ import com.kaspersky.kaspresso.device.server.AdbServer
 /**
  * Default implementation of Internet interface.
  */
-object InternetImpl: Internet {
+class InternetImpl: Internet {
 
     private val targetContext: Context
         get() = InstrumentationRegistry.getTargetContext()

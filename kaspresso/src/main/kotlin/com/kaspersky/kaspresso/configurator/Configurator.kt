@@ -64,42 +64,42 @@ object Configurator {
     /**
      * An interface of applications manager.
      */
-    internal var apps: Apps = AppsImpl
+    internal var apps: Apps = AppsImpl()
 
     /**
      * An interface of activities manager.
      */
-    internal var activities: Activities = ActivitiesImpl
+    internal var activities: Activities = ActivitiesImpl()
 
     /**
      * An interface of files manager.
      */
-    internal var files: Files = FilesImpl
+    internal var files: Files = FilesImpl()
 
     /**
      * An interface of internet manager.
      */
-    internal var internet: Internet = InternetImpl
+    internal var internet: Internet = InternetImpl()
 
     /**
      * An interface of screenshots manager.
      */
-    internal var screenshots: Screenshots = ScreenshotsImpl
+    internal var screenshots: Screenshots = ScreenshotsImpl()
 
     /**
      * An interface of accessibility manager.
      */
-    internal var accessibility: Accessibility = AccessibilityImpl
+    internal var accessibility: Accessibility = AccessibilityImpl()
 
     /**
      * An interface of permissions manager.
      */
-    internal var permissions: Permissions = PermissionsImpl
+    internal var permissions: Permissions = PermissionsImpl()
 
     /**
      * An interface of exploitation manager.
      */
-    internal var exploit: Exploit = ExploitImpl
+    internal var exploit: Exploit = ExploitImpl()
 
     /**
      * Exceptions that doesn't stop attempts.
@@ -174,14 +174,14 @@ object Configurator {
         var logger: UiTestLogger = UiTestLoggerImpl(DEFAULT_INNER_LOGGER_TAG)
         var externalLogger: UiTestLogger = UiTestLoggerImpl(DEFAULT_OUTER_LOGGER_TAG)
 
-        var apps: Apps = AppsImpl
-        var activities: Activities = ActivitiesImpl
-        var files: Files = FilesImpl
-        var internet: Internet = InternetImpl
-        var screenshots: Screenshots = ScreenshotsImpl
-        var accessibility: Accessibility = AccessibilityImpl
-        var permissions: Permissions = PermissionsImpl
-        var exploit: Exploit = ExploitImpl
+        var apps: Apps = AppsImpl()
+        var activities: Activities = ActivitiesImpl()
+        var files: Files = FilesImpl()
+        var internet: Internet = InternetImpl()
+        var screenshots: Screenshots = ScreenshotsImpl()
+        var accessibility: Accessibility = AccessibilityImpl()
+        var permissions: Permissions = PermissionsImpl()
+        var exploit: Exploit = ExploitImpl()
 
         var allowedExceptionsForAttempt: Set<Class<out Throwable>> = setOf(
             PerformException::class.java,

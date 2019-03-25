@@ -14,7 +14,7 @@ import org.junit.Assert
 /**
  * Default implementation of Activities interface.
  */
-object ActivitiesImpl : Activities {
+class ActivitiesImpl : Activities {
 
     private val logger: UiTestLogger = Configurator.logger
 
