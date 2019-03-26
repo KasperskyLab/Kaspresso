@@ -1,17 +1,17 @@
 package com.kaspersky.kaspresso.scenarios.stepsrunners
 
-import com.kaspersky.kaspresso.device.Device
+import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.device.screenshots.Screenshots
-import com.kaspersky.kaspresso.logger.KLogger
 import com.kaspersky.kaspresso.logger.UiTestLogger
+import com.kaspersky.kaspresso.scenarios.SubCase
 
 /**
  * An implementation of [SubCase]'s steps runner.
  */
 class SubCaseStepsRunner(testCaseName: String) : StepsRunner(testCaseName) {
 
-    private val logger: UiTestLogger = KLogger
-    private val screenshots: Screenshots = Device.screenshots
+    private val logger: UiTestLogger = Configurator.logger
+    private val screenshots: Screenshots = Configurator.screenshots
     private val label = testCaseName.camelCaseToSnakeCase()
 
     /**

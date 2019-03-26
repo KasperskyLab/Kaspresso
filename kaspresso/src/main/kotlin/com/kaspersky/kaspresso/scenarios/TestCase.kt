@@ -8,10 +8,8 @@ import com.kaspersky.kaspresso.scenarios.stepsrunners.TestCaseStepsRunner
  *  parent for all actual project-wide test cases. Nesting test cases are not permitted because they may produce an
  *  exception caused by re-initialization of the [Configurator], use [Scenario] instead.
  */
-abstract class TestCase(
+abstract class TestCase (
     configBuilder: Configurator.Builder = Configurator.Builder.default()
-) : Scenario<TestCaseStepsRunner>(
-    stepsRunnerFactory = { testCaseName -> TestCaseStepsRunner(testCaseName) }
 ) {
 
     /**
@@ -20,6 +18,36 @@ abstract class TestCase(
      */
     init {
         configBuilder.commit()
+    }
+
+    protected fun beforeTest(actionsBefore: () -> Unit): BeforeTest {
+        return BeforeTest(actionsBefore)
+    }
+
+    protected inner class BeforeTest(private val actionsBefore: () -> Unit) {
+
+        fun afterTest(actionsAfter: () -> Unit): AfterTest {
+            return AfterTest(actionsBefore, actionsAfter)
+        }
+
+    }
+
+    protected inner class AfterTest(
+        private val actionsBefore: () -> Unit,
+        private val actionsAfter: () -> Unit
+    ) {
+
+        fun runSteps(steps: TestCaseStepsRunner.() -> Unit) {
+            val stepsRunner = TestCaseStepsRunner(javaClass.simpleName)
+            stepsRunner.stepsCounter = 0
+            actionsBefore.invoke()
+            try {
+                steps.invoke(stepsRunner)
+            } finally {
+                actionsAfter.invoke()
+            }
+        }
+
     }
 
 }

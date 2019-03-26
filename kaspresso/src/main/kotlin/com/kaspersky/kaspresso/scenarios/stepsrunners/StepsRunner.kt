@@ -18,11 +18,4 @@ abstract class StepsRunner(protected val testCaseName: String) {
      */
     abstract fun step(description: String, actions: () -> Unit)
 
-    /**
-     * A special method to check correct finishing of test
-     */
-    internal open fun checkAfter() {
-        // empty by default
-    }
-
 }
