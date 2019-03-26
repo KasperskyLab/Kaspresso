@@ -1,29 +1,27 @@
-package com.kaspersky.kaspresso.scenarios.stepsrunners
+package com.kaspersky.kaspresso.testcases.scenarios
 
 import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.device.screenshots.Screenshots
 import com.kaspersky.kaspresso.logger.UiTestLogger
-import com.kaspersky.kaspresso.scenarios.SubCase
 
 /**
- * An implementation of [SubCase]'s steps runner.
+ * An implementation of [Scenario] for [com.kaspersky.kaspresso.testcases.SubCase]'s usage.
  */
-class SubCaseStepsRunner(testCaseName: String) : StepsRunner(testCaseName) {
+class SubCaseScenario(title: String) : Scenario(title) {
 
     private val logger: UiTestLogger = Configurator.logger
     private val screenshots: Screenshots = Configurator.screenshots
-    private val label = testCaseName.camelCaseToSnakeCase()
 
     /**
-     * A representation of a [SubCase]'s step.
+     * A representation of a [SubCaseScenario]'s step.
      *
      * @param description a description of a step.
      * @param actions a set of actions of a step.
      */
     override fun step(description: String, actions: () -> Unit) {
-        logger.i("${label.toUpperCase()} STEP: $description")
+        logger.i("$title STEP: \"$description\"")
 
-        val screenshotTag = "${label}_step_${++stepsCounter}"
+        val screenshotTag = "${title}_step_${++stepsCounter}"
 
         try {
             actions.invoke()
@@ -33,11 +31,4 @@ class SubCaseStepsRunner(testCaseName: String) : StepsRunner(testCaseName) {
             throw e
         }
     }
-
-    /**
-     * Converts a [String] from camel case to snake case.
-     *
-     * @return a [String] in snake case.
-     */
-    private fun String.camelCaseToSnakeCase() = this.replace("([a-z])([A-Z]+)", "$1_$2")
 }

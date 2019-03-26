@@ -1,14 +1,14 @@
-package com.kaspersky.kaspresso.scenarios.stepsrunners
+package com.kaspersky.kaspresso.testcases.scenarios
 
 /**
- * An abstract class for all steps runners.
+ * An abstract class for all scenarios.
  */
-abstract class StepsRunner(protected val testCaseName: String) {
+abstract class Scenario(protected val title: String) {
 
     /**
      * A step counter to evaluate current step's tag.
      */
-    internal var stepsCounter: Int = 0
+    protected var stepsCounter: Int = 0
 
     /**
      * A representation of a [Scenario]'s step.
@@ -17,5 +17,4 @@ abstract class StepsRunner(protected val testCaseName: String) {
      * @param actions a set of actions of a step.
      */
     abstract fun step(description: String, actions: () -> Unit)
-
 }
