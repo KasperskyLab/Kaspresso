@@ -19,7 +19,7 @@ class SubCaseScenario(title: String) : Scenario(title) {
      * @param actions a set of actions of a step.
      */
     override fun step(description: String, actions: () -> Unit) {
-        logger.i("$title STEP: $description")
+        logger.i("$title STEP: \"$description\"")
 
         val screenshotTag = "${title}_step_${++stepsCounter}"
 
