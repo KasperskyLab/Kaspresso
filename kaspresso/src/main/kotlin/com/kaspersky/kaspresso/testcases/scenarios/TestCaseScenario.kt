@@ -20,7 +20,7 @@ class TestCaseScenario(title: String) : Scenario(title) {
      */
     override fun step(description: String, actions: () -> Unit) {
         logger.i("___________________________________________________________________________")
-        logger.i("TEST STEP: $description")
+        logger.i("TEST STEP: $description in $title")
 
         val screenshotTag = "${title}_step_${++stepsCounter}"
 

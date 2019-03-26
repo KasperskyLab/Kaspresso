@@ -11,7 +11,6 @@ class SubCaseScenario(title: String) : Scenario(title) {
 
     private val logger: UiTestLogger = Configurator.logger
     private val screenshots: Screenshots = Configurator.screenshots
-    private val label = title.camelCaseToSnakeCase()
 
     /**
      * A representation of a [SubCaseScenario]'s step.
@@ -20,9 +19,9 @@ class SubCaseScenario(title: String) : Scenario(title) {
      * @param actions a set of actions of a step.
      */
     override fun step(description: String, actions: () -> Unit) {
-        logger.i("${label.toUpperCase()} STEP: $description")
+        logger.i("$title STEP: $description")
 
-        val screenshotTag = "${label}_step_${++stepsCounter}"
+        val screenshotTag = "${title}_step_${++stepsCounter}"
 
         try {
             actions.invoke()
@@ -32,11 +31,4 @@ class SubCaseScenario(title: String) : Scenario(title) {
             throw e
         }
     }
-
-    /**
-     * Converts a [String] from camel case to snake case.
-     *
-     * @return a [String] in snake case.
-     */
-    private fun String.camelCaseToSnakeCase() = this.replace("([a-z])([A-Z]+)", "$1_$2")
 }
