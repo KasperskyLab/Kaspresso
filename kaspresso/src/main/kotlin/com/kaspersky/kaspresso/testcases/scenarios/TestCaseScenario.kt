@@ -1,20 +1,19 @@
-package com.kaspersky.kaspresso.scenarios.stepsrunners
+package com.kaspersky.kaspresso.testcases.scenarios
 
 import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.device.screenshots.Screenshots
 import com.kaspersky.kaspresso.logger.UiTestLogger
-import com.kaspersky.kaspresso.scenarios.TestCase
 
 /**
- * An implementation of [TestCase]'s steps runner.
+ * An implementation of [Scenario] for [com.kaspersky.kaspresso.testcases.TestCase]'s usage.
  */
-class TestCaseStepsRunner(testCaseName: String) : StepsRunner(testCaseName) {
+class TestCaseScenario(title: String) : Scenario(title) {
 
     private val logger: UiTestLogger = Configurator.logger
     private val screenshots: Screenshots = Configurator.screenshots
 
     /**
-     * A representation of a [TestCase]'s step.
+     * A representation of a [TestCaseScenario]'s step.
      *
      * @param description a description of a step.
      * @param actions a set of actions of a step.
@@ -23,7 +22,7 @@ class TestCaseStepsRunner(testCaseName: String) : StepsRunner(testCaseName) {
         logger.i("___________________________________________________________________________")
         logger.i("TEST STEP: $description")
 
-        val screenshotTag = "${testCaseName}_step_${++stepsCounter}"
+        val screenshotTag = "${title}_step_${++stepsCounter}"
 
         try {
             actions.invoke()
