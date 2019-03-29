@@ -36,7 +36,7 @@ import com.kaspersky.klkakao.configurator.KakaoConfigurator
 object Configurator {
 
     private const val DEFAULT_ATTEMPTS_TIMEOUT_MS: Long = 2_000L
-    private const val DEFAULT_ATTEMPTS_FREQUENCY_MS: Long = 500L
+    private const val DEFAULT_ATTEMPTS_INTERVAL_MS: Long = 500L
 
     private const val DEFAULT_INNER_LOGGER_TAG: String = "UI_TESTING"
     private const val DEFAULT_OUTER_LOGGER_TAG: String = "UI_TESTING_SPECIAL"
@@ -49,7 +49,7 @@ object Configurator {
     /**
      * A frequency of action attempts in milliseconds.
      */
-    internal var attemptsFrequencyMs: Long = DEFAULT_ATTEMPTS_FREQUENCY_MS
+    internal var attemptsIntervalMs: Long = DEFAULT_ATTEMPTS_INTERVAL_MS
 
     /**
      * An implementation of [UiTestLogger] for inner framework usage. Not accessible from outside.
@@ -169,7 +169,7 @@ object Configurator {
         }
 
         var attemptsTimeoutMs: Long = DEFAULT_ATTEMPTS_TIMEOUT_MS
-        var attemptsFrequencyMs: Long = DEFAULT_ATTEMPTS_FREQUENCY_MS
+        var attemptsIntervalMs: Long = DEFAULT_ATTEMPTS_INTERVAL_MS
 
         var logger: UiTestLogger = UiTestLoggerImpl(DEFAULT_INNER_LOGGER_TAG)
         var externalLogger: UiTestLogger = UiTestLoggerImpl(DEFAULT_OUTER_LOGGER_TAG)
@@ -211,7 +211,7 @@ object Configurator {
             }
 
             Configurator.attemptsTimeoutMs = attemptsTimeoutMs
-            Configurator.attemptsFrequencyMs = attemptsFrequencyMs
+            Configurator.attemptsIntervalMs = attemptsIntervalMs
 
             Configurator.logger = logger
             Configurator.externalLogger = externalLogger
