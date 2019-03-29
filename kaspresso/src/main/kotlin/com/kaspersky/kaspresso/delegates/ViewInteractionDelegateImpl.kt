@@ -17,11 +17,6 @@ open class ViewInteractionDelegateImpl(
 ) : ViewInteractionDelegate {
 
     /**
-     * A flag that indicates if custom [FailureHandler] is set.
-     */
-    private var isCustomFailureHandlerSet = false
-
-    /**
      * Creates [ViewActionProxy] instance and delegates [ViewInteraction.perform] call to it.
      *
      * @param viewAction an action to execute.
@@ -34,7 +29,6 @@ open class ViewInteractionDelegateImpl(
         )
 
         execute { viewInteraction.perform(viewActionProxy) }
-
         return this
     }
 
@@ -51,7 +45,6 @@ open class ViewInteractionDelegateImpl(
         )
 
         execute { viewInteraction.check(viewAssertionProxy) }
-
         return this
     }
 
@@ -70,7 +63,6 @@ open class ViewInteractionDelegateImpl(
         )
 
         execute { viewInteraction.check(viewAssertionProxy) }
-
         return this
     }
 
@@ -84,7 +76,6 @@ open class ViewInteractionDelegateImpl(
     override fun withFailureHandler(
         function: (Throwable, Matcher<View>) -> Unit
     ): ViewInteractionDelegate {
-        isCustomFailureHandlerSet = true
         viewInteraction.withFailureHandler(function)
         return this
     }
@@ -96,7 +87,6 @@ open class ViewInteractionDelegateImpl(
      * @return an existing [ViewInteractionDelegateImpl] instance.
      */
     override fun inRoot(rootMatcher: Matcher<Root>): ViewInteractionDelegate {
-        setFailureHandlerIfNecessary()
         viewInteraction.inRoot(rootMatcher)
         return this
     }
@@ -109,22 +99,8 @@ open class ViewInteractionDelegateImpl(
      * @return [ViewInteraction] as it is a result of executable invocation.
      */
     private fun execute(executable: () -> ViewInteraction): ViewInteraction {
-        setFailureHandlerIfNecessary()
-
         return Configurator.executingInterceptor
             ?.interceptAndExecute { executable.invoke() }
             ?: executable.invoke()
-    }
-
-    /**
-     * Sets [Configurator.failureInterceptor] as [FailureHandler] if it exists and if other custom [FailureHandler] was
-     * not set before.
-     */
-    private fun setFailureHandlerIfNecessary() {
-        Configurator.failureInterceptor?.let { failureInterceptor ->
-            if (!isCustomFailureHandlerSet) {
-                withFailureHandler(failureInterceptor::interceptAndThrow)
-            }
-        }
     }
 }

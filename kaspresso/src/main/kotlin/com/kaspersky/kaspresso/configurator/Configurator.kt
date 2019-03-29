@@ -1,5 +1,6 @@
 package com.kaspersky.kaspresso.configurator
 
+import android.support.test.espresso.Espresso
 import android.support.test.espresso.NoMatchingViewException
 import android.support.test.espresso.PerformException
 import com.kaspersky.kaspresso.delegates.DataInteractionDelegateImpl
@@ -141,12 +142,6 @@ object Configurator {
     internal var executingInterceptor: ExecutingInterceptor? = null
 
     /**
-     * An interceptor that is called on failures. It's [FailureInterceptor.interceptAndThrow] method is being provided
-     * as a [android.support.test.espresso.FailureHandler].
-     */
-    internal var failureInterceptor: FailureInterceptor? = null
-
-    /**
      * A class for [Configurator] initialization. The right way to change [Configurator] settings is to use [Builder].
      */
     class Builder {
@@ -195,6 +190,11 @@ object Configurator {
         var webAssertionInterceptors: List<WebAssertionInterceptor> = emptyList()
 
         var executingInterceptor: ExecutingInterceptor? = null
+
+        /**
+         * An interceptor that is called on failures. It's [FailureInterceptor.interceptAndThrow] method is being
+         * provide as the default [android.support.test.espresso.FailureHandler].
+         */
         var failureInterceptor: FailureInterceptor? = null
 
         /**
@@ -233,7 +233,8 @@ object Configurator {
             Configurator.webAssertionInterceptors = webAssertionInterceptors
 
             Configurator.executingInterceptor = executingInterceptor
-            Configurator.failureInterceptor = failureInterceptor
+
+            failureInterceptor?.let { Espresso.setFailureHandler(it::interceptAndThrow) }
         }
     }
 }
