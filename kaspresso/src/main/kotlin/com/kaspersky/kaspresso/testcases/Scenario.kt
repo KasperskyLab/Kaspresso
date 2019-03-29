@@ -1,25 +1,32 @@
-package com.kaspersky.kaspresso.testcases.scenarios
+package com.kaspersky.kaspresso.testcases
 
 import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.device.screenshots.Screenshots
 import com.kaspersky.kaspresso.logger.UiTestLogger
 
 /**
- * An implementation of [Scenario] for [com.kaspersky.kaspresso.testcases.SubCase]'s usage.
+ * An abstract class for all scenarios.
  */
-class SubCaseScenario(title: String) : Scenario(title) {
-
+class Scenario(
+    private val title: String,
+    private val label: (String, String) -> String
+) {
     private val logger: UiTestLogger = Configurator.logger
     private val screenshots: Screenshots = Configurator.screenshots
 
     /**
-     * A representation of a [SubCaseScenario]'s step.
+     * A step counter to evaluate current step's tag.
+     */
+    private var stepsCounter: Int = 0
+
+    /**
+     * A representation of a [Scenario]'s step.
      *
      * @param description a description of a step.
      * @param actions a set of actions of a step.
      */
-    override fun step(description: String, actions: () -> Unit) {
-        logger.i("$title STEP: \"$description\"")
+    fun step(description: String, actions: () -> Unit) {
+        logger.i(label.invoke(title, description))
 
         val screenshotTag = "${title}_step_${++stepsCounter}"
 

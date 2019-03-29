@@ -1,8 +1,7 @@
 package com.kaspersky.kaspresso.testcases
 
 import com.kaspersky.kaspresso.configurator.Configurator
-import com.kaspersky.kaspresso.testcases.scenarios.Scenario
-import com.kaspersky.kaspresso.testcases.scenarios.TestCaseScenario
+import com.kaspersky.kaspresso.testcases.runners.TestCaseRunner
 
 /**
  *  A base class for all test cases. Extend this class with a single base project-wide inheritor of [TestCase] as a
@@ -26,7 +25,7 @@ abstract class TestCase(
      *  case's steps.
      *
      * @param actionsBefore actions to invoke before test case's steps.
-     * @return [AfterTestHandler]
+     * @return a new instance of [AfterTestHandler].
      */
     protected fun beforeTest(actionsBefore: () -> Unit) = AfterTestHandler(
             TestCaseRunner(javaClass.simpleName).apply { this.actionsBefore = actionsBefore }
@@ -38,37 +37,11 @@ abstract class TestCase(
     protected class AfterTestHandler(private val runner: TestCaseRunner) {
 
         /**
-         * Puts [actionsAfter] in [TestCaseRunner] and returns it.
+         * Puts [actionsAfter] in the instance of the [TestCaseRunner] and returns it.
          *
          * @param actionsAfter actions to invoke after test case's steps.
-         * @return [TestCaseRunner]
+         * @return existing instance of [TestCaseRunner].
          */
         fun afterTest(actionsAfter: () -> Unit) = runner.apply { this.actionsAfter = actionsAfter }
-    }
-
-    /**
-     * An implementation of [ScenarioRunner] for [TestCase]'s usage.
-     */
-    protected class TestCaseRunner(
-            private val title: String
-    ) : ScenarioRunner {
-
-        internal lateinit var actionsBefore: () -> Unit
-        internal lateinit var actionsAfter: () -> Unit
-
-        /**
-         * Runs [actionsBefore], [TestCase]'s steps and then [actionsAfter]. [actionsAfter] are
-         * invoked even if [actionsBefore] or [TestCase]'s steps fail.
-         *
-         * @param steps the steps to run.
-         */
-        override fun runSteps(steps: Scenario.() -> Unit) {
-            try {
-                actionsBefore.invoke()
-                steps.invoke(TestCaseScenario(title))
-            } finally {
-                actionsAfter.invoke()
-            }
-        }
     }
 }
