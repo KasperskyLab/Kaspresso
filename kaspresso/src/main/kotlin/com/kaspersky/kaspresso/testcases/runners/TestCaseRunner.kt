@@ -8,18 +8,18 @@ import com.kaspersky.kaspresso.testcases.Scenario
  */
 class TestCaseRunner(private val title: String) : ScenarioRunner {
 
-    internal lateinit var actionsBefore: () -> Unit
-    internal lateinit var actionsAfter: () -> Unit
+    internal lateinit var beforeTestActions: () -> Unit
+    internal lateinit var afterTestActions: () -> Unit
 
     /**
-     * Runs [actionsBefore], [TestCase]'s [steps] and then [actionsAfter]. [actionsAfter] are
-     * invoked even if [actionsBefore] or [TestCase]'s [steps] fail.
+     * Runs [beforeTestActions], [TestCase]'s [steps] and then runs [afterTestActions]. [afterTestActions] are invoked
+     * even if [beforeTestActions] or [TestCase]'s [steps] fail.
      *
      * @param steps steps to run.
      */
     override fun runSteps(steps: Scenario.() -> Unit) {
         try {
-            actionsBefore.invoke()
+            beforeTestActions.invoke()
 
             steps.invoke(
                 Scenario(title) { title, description ->
@@ -28,7 +28,7 @@ class TestCaseRunner(private val title: String) : ScenarioRunner {
                 }
             )
         } finally {
-            actionsAfter.invoke()
+            afterTestActions.invoke()
         }
     }
 }

@@ -5,7 +5,7 @@ import com.kaspersky.kaspresso.device.screenshots.Screenshots
 import com.kaspersky.kaspresso.logger.UiTestLogger
 
 /**
- * An abstract class for all scenarios.
+ * A representation of a sequence of test's actions.
  */
 class Scenario(
     private val title: String,

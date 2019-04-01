@@ -9,8 +9,23 @@ import com.kaspersky.kaspresso.testcases.runners.TestCaseRunner
  *  exception caused by re-initialization of the [Configurator], use [Scenario] instead.
  */
 abstract class TestCase(
-        configBuilder: Configurator.Builder = Configurator.Builder.default()
+    configBuilder: Configurator.Builder = Configurator.Builder.default()
 ) {
+    /**
+     * An instance of a [TestCaseRunner] that executes the test with it's [BeforeTestSection] and [AfterTestSection].
+     */
+    private val runner = TestCaseRunner(javaClass.simpleName)
+
+    /**
+     * An instance of [BeforeTestSection] to specify the actions to be invoked before test.
+     */
+    private val beforeTestSection = BeforeTestSection(runner)
+
+    /**
+     * An instance of [AfterTestSection] to specify the actions to be invoked after test.
+     */
+    private val afterTestSection = AfterTestSection(runner)
+
     /**
      * Finishes building of [Configurator]. Passing [Configurator.Builder] to base [TestCase]'s constructor is the only
      * way for project-wide inheritor of [TestCase] to tune [Configurator].
@@ -20,28 +35,14 @@ abstract class TestCase(
     }
 
     /**
-     *  Creates a [TestCaseRunner] instance, puts actions to invoke before test case's steps in it,
-     *  and returns a new instance of [AfterTestHandler] to specify actions to invoke after test
-     *  case's steps.
+     * Starts the building a test, sets the [BeforeTestSection] actions and returns an existing instance of
+     * [AfterTestSection] to continue building a test.
      *
-     * @param actionsBefore actions to invoke before test case's steps.
-     * @return a new instance of [AfterTestHandler].
+     * @param actions actions to invoke in before test section.
+     * @return an existing instance of [AfterTestSection].
      */
-    protected fun beforeTest(actionsBefore: () -> Unit) = AfterTestHandler(
-            TestCaseRunner(javaClass.simpleName).apply { this.actionsBefore = actionsBefore }
-    )
-
-    /**
-     * Specifies actions to invoke after test case's steps.
-     */
-    protected class AfterTestHandler(private val runner: TestCaseRunner) {
-
-        /**
-         * Puts [actionsAfter] in the instance of the [TestCaseRunner] and returns it.
-         *
-         * @param actionsAfter actions to invoke after test case's steps.
-         * @return existing instance of [TestCaseRunner].
-         */
-        fun afterTest(actionsAfter: () -> Unit) = runner.apply { this.actionsAfter = actionsAfter }
+    protected fun beforeTest(actions: () -> Unit): AfterTestSection {
+        beforeTestSection.beforeTest(actions)
+        return afterTestSection
     }
 }
