@@ -15,8 +15,8 @@ class BeforeTestSection(private val runner: TestCaseRunner) {
      *
      * @param actions actions to be wrapped and invoked before the test.
      */
-    fun beforeTest(actions: () -> Unit) {
-        runner.apply {
+    fun beforeTest(actions: () -> Unit): AfterTestSection {
+        return AfterTestSection(runner.apply {
             beforeTestActions = {
                 val screenshots: Screenshots = Configurator.screenshots
 
@@ -27,7 +27,7 @@ class BeforeTestSection(private val runner: TestCaseRunner) {
                     throw e
                 }
             }
-        }
+        })
     }
 }
 

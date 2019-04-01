@@ -12,21 +12,6 @@ abstract class TestCase(
     configBuilder: Configurator.Builder = Configurator.Builder.default()
 ) {
     /**
-     * An instance of a [TestCaseRunner] that executes the test with it's [BeforeTestSection] and [AfterTestSection].
-     */
-    private val runner = TestCaseRunner(javaClass.simpleName)
-
-    /**
-     * An instance of [BeforeTestSection] to specify the actions to be invoked before test.
-     */
-    private val beforeTestSection = BeforeTestSection(runner)
-
-    /**
-     * An instance of [AfterTestSection] to specify the actions to be invoked after test.
-     */
-    private val afterTestSection = AfterTestSection(runner)
-
-    /**
      * Finishes building of [Configurator]. Passing [Configurator.Builder] to base [TestCase]'s constructor is the only
      * way for project-wide inheritor of [TestCase] to tune [Configurator].
      */
@@ -41,8 +26,10 @@ abstract class TestCase(
      * @param actions actions to invoke in before test section.
      * @return an existing instance of [AfterTestSection].
      */
-    protected fun beforeTest(actions: () -> Unit): AfterTestSection {
-        beforeTestSection.beforeTest(actions)
-        return afterTestSection
-    }
+    protected fun beforeTest(actions: () -> Unit) = createBeforeTestSection().beforeTest(actions)
+
+    /**
+     * Creates an instance of [BeforeTestSection] with a new instance of [TestCaseRunner] as a parameter.
+     */
+    private fun createBeforeTestSection() = BeforeTestSection(TestCaseRunner(javaClass.simpleName))
 }
