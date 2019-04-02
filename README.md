@@ -64,27 +64,29 @@ viewaction'ы и viewassertion'ы.
     }
 
 Двумя основными концепциями Какао являются:
-    1. Screen. Это некоторая интерпретация паттерна PageObject, пришедшего к нам из мира web разработки. Это класс,
-       который создается для каждого тестируемого экрана приложения, в нем мы объявляем некоторые представления наших
-       views с этого экрана, с которыми мы будем взаимодействовать во время теста.
 
-           open class MainActivityScreen : Screen<MainActivityScreen>() {
-               val content: KView = KView { withId(R.id.content) }
-               val button: KButton = KButton { withId(R.id.button) }
-               val textView: KTextView = KTextView { withId(R.id.text_view) }
-           }
+Screen. Это некоторая интерпретация паттерна PageObject, пришедшего к нам из мира web разработки. Это класс,
+который создается для каждого тестируемого экрана приложения, в нем мы объявляем некоторые представления наших
+views с этого экрана, с которыми мы будем взаимодействовать во время теста.
 
-    2. KViews. Это, собственно, и есть представления наших views, которые объявляются внутри screen'ов. Библиотека
-       предоставляет их в большом количестве (KTextView, KEditText, KButton, KRecyclerView, KWebView), но мы также можем
-       объявлять свои, что достаточно просто, ведь все KViews это просто пустые классы, которые наследуют логику
-       интерфейсов: действий (Actions) и утверждений (Assertions). (Такую крутую возможность нам предоставляет Kotlin -
-       писать реализацию в интерфейсах. Это позволяет добиться потрясающей гибкости при плоской иерархической структуре
-       наших классов).
+    class MainActivityScreen : Screen<MainActivityScreen>() {
+        val content: KView = KView { withId(R.id.content) }
+        val button: KButton = KButton { withId(R.id.button) }
+        val textView: KTextView = KTextView { withId(R.id.text_view) }
+    }
 
-           class KEditText : KBaseView<KEditText>, EditableActions, EditableAssertions {
-               constructor(function: ViewBuilder.() -> Unit) : super(function)
-               …
-           }
+
+KViews. Это, собственно, и есть представления наших views, которые объявляются внутри screen'ов. Библиотека
+предоставляет их в большом количестве (KTextView, KEditText, KButton, KRecyclerView, KWebView), но мы также можем
+объявлять свои, что достаточно просто, ведь все KViews это просто пустые классы, которые наследуют логику
+интерфейсов: действий (Actions) и утверждений (Assertions). (Такую крутую возможность нам предоставляет Kotlin -
+писать реализацию в интерфейсах. Это позволяет добиться потрясающей гибкости при плоской иерархической структуре
+наших классов).
+
+    class KEditText : KBaseView<KEditText>, EditableActions, EditableAssertions {
+        constructor(function: ViewBuilder.() -> Unit) : super(function)
+        …
+    }
 
 После декларации иерархии пользовательского интерфейса, вы можете получить прямой доступ к объекту Screen и всем
 находящимся в нем объектам KView при помощи оператора invoke и совершать различные действия или утверждения в каскадном
@@ -423,5 +425,6 @@ ExampleSubCase().run(). Однако, увлекаться вынесением 
     }
 
 Подключить Kaspresso себе в проект вы можете с помощью:
+    
     androidTestImplementation "com.kaspersky.components:kaspresso:$versions.kaspresso"
     testCompileOnly "com.kaspersky.components:klkakao:$versions.klkakao"
