@@ -9,17 +9,17 @@ Espresso это тестовый фреймворк от Google, он включ
 Espresso позволяет находить View на экране, выполнять с ними какие-то действия и проверять выполнение условий.
 Простейший тест на Espresso может выглядеть следующим образом:
 
-    @RunWith(AndroidJUnit4::class) 
-    class MainActivityTest {  
-        @Rule 
-        @JvmField 
+    @RunWith(AndroidJUnit4::class)
+    class MainActivityTest {
+        @Rule
+        @JvmField
         val rule = ActivityTestRule(MainActivity::class.java)
-     
-        @Test 
-        fun testTypeLogin() {  
-            onView(withId(R.id.login_input_ev)) 
-                .perform(typeText("MyLogin")) 
-                .check(matches(withText("MyLogin"))) 
+    
+        @Test
+        fun testTypeLogin() {
+            onView(withId(R.id.login_input_ev))
+                .perform(typeText("MyLogin"))
+                .check(matches(withText("MyLogin")))
         }
     }
 
@@ -45,22 +45,22 @@ viewaction'ы и viewassertion'ы.
 использованием фреймворка Hamcrest, а значит его синтаксис построен на иерархическом дереве матчеров. И при довольно
 глубокой вложенности матчеров код становится плохочитаемым:
 
-    @Test 
+    @Test
     fun espressoTest() {
-        onView(allOf(allOf(withId(R.id.kakao), 
-            isDescendantOfA(withId(R.id.coffee_varieties))), 
-            isDescendantOfA(withId(R.id.contentView)))) 
-            .check(matches(withEffectiveVisibility(View.VISIBLE))) 
+        onView(allOf(allOf(withId(R.id.kakao),
+            isDescendantOfA(withId(R.id.coffee_varieties))),
+            isDescendantOfA(withId(R.id.contentView))))
+            .check(matches(withEffectiveVisibility(View.VISIBLE)))
     }
 
 Для решения этой проблемы существует уже готовое решение - Kakao - простой Kotlin DSL для Android UI тестов с Espresso.
 С его помощью такая функция свернется в легко читаемую:
 
     @Test
-     fun espressoTest() {  
-        screen {  
-            kakao { isVisible() }  
-        }  
+    fun espressoTest() {
+        screen {
+            kakao { isVisible() }
+        }
     }
 
 Двумя основными концепциями Какао являются:
@@ -68,10 +68,10 @@ viewaction'ы и viewassertion'ы.
        который создается для каждого тестируемого экрана приложения, в нем мы объявляем некоторые представления наших
        views с этого экрана, с которыми мы будем взаимодействовать во время теста.
 
-           open class MainActivityScreen : Screen<MainActivityScreen>() {  
-               val content: KView = KView { withId(R.id.content) } 
-               val button: KButton = KButton { withId(R.id.button) } 
-               val textView: KTextView = KTextView { withId(R.id.text_view) } 
+           open class MainActivityScreen : Screen<MainActivityScreen>() {
+               val content: KView = KView { withId(R.id.content) }
+               val button: KButton = KButton { withId(R.id.button) }
+               val textView: KTextView = KTextView { withId(R.id.text_view) }
            }
 
     2. KViews. Это, собственно, и есть представления наших views, которые объявляются внутри screen'ов. Библиотека
@@ -81,9 +81,9 @@ viewaction'ы и viewassertion'ы.
        писать реализацию в интерфейсах. Это позволяет добиться потрясающей гибкости при плоской иерархической структуре
        наших классов).
 
-           class KEditText : KBaseView<KEditText>, EditableActions, EditableAssertions {  
-               constructor(function: ViewBuilder.() -> Unit) : super(function) 
-               … 
+           class KEditText : KBaseView<KEditText>, EditableActions, EditableAssertions {
+               constructor(function: ViewBuilder.() -> Unit) : super(function)
+               …
            }
 
 После декларации иерархии пользовательского интерфейса, вы можете получить прямой доступ к объекту Screen и всем
@@ -91,30 +91,30 @@ viewaction'ы и viewassertion'ы.
 стиле. Таким образом наш тест превращается в нечто такое:
 
     @RunWith(AndroidJUnit4::class)
-     class MainActivityTest {  
-        @Rule 
-        @JvmField 
-        val rule = ActivityTestRule(MainActivity::class.java)  
+    class MainActivityTest {
+        @Rule
+        @JvmField
+        val rule = ActivityTestRule(MainActivity::class.java)
 
-        val screen = MainActivityScreen()  
+        val screen = MainActivityScreen()
 
-        @Test 
-        fun test() {  
-            screen { 
-                content { isVisible() }  
+        @Test
+        fun test() {
+            screen {
+                content { isVisible() }
 
-                textView { 
-                    isVisible() 
-                    hasAnyText() 
-                    click() 
-                }  
+                textView {
+                    isVisible()
+                    hasAnyText()
+                    click()
+                }
 
-                button { 
-                    hasText("BUTTON") 
-                    click() 
-                } 
-            } 
-        }  
+                button {
+                    hasText("BUTTON")
+                    click()
+                }
+            }
+        } 
     }
 
 Несмотря на то, что Espresso берет на себя всю работу по взаимодействию с интерфейсом, он недостаточен для решения всех
@@ -186,20 +186,20 @@ TestCase билдер будет применен, и в object Configurator (с
 при создании базового класса TestCase.
 
     @RunWith(AndroidJUnit4::class)
-    class MyTestCase : TestCase( 
+    class MyTestCase : TestCase(
         Configurator.Builder().apply {
-            attemptsTimeoutMs = TimeUnit.SECONDS.toMillis(5)  
-            viewActionInterceptors = listOf(LoggingViewActionInterceptor(logger)) 
-            viewAssertionInterceptors = listOf(LoggingViewAssertionInterceptor(logger)) 
-            executingInterceptor = FlakySafeExecutingInterceptor() 
-            failureInterceptor = LoggingFailureInterceptor(logger) 
-        } 
+            attemptsTimeoutMs = TimeUnit.SECONDS.toMillis(5)
+            viewActionInterceptors = listOf(LoggingViewActionInterceptor(logger))
+            viewAssertionInterceptors = listOf(LoggingViewAssertionInterceptor(logger))
+            executingInterceptor = FlakySafeExecutingInterceptor()
+            failureInterceptor = LoggingFailureInterceptor(logger)
+        }
     ) {
         @Rule
-        @JvmField  
+        @JvmField
         val mActivityRule = ActivityTestRule(MainActivity::class.java)
 
-        @Test 
+        @Test
         fun test () { … }
     }
 
@@ -227,14 +227,14 @@ ViewActionProxy, который содержит в себе этот самый
 ViewActionProxy#perform, мы внесли изменения в Какао и расширили его возможности по кастомизации. Если вы используете
 настройки Конфигуратора по умолчанию, то будут использоваться логгирующие интерсепторы для всех 4 видов взаимодействия.
 
-    class ViewActionProxy( 
-        private val viewAction: ViewAction, 
-        private val interceptors: List<ViewActionInterceptor> 
+    class ViewActionProxy(
+        private val viewAction: ViewAction,
+        private val interceptors: List<ViewActionInterceptor>
     ) : ViewAction {
 
-        override fun perform(uiController: UiController, view: View) { 
-            interceptors.forEach { it.intercept(viewAction, view) } 
-            viewAction.perform(uiController, view) 
+        override fun perform(uiController: UiController, view: View) {
+            interceptors.forEach { it.intercept(viewAction, view) }
+            viewAction.perform(uiController, view)
         }
 
         …
@@ -274,15 +274,15 @@ attempt вызов любого количества любых методов K
 авторизироваться, ждет ответа от сервера, и показывает крутилку, мы в течение, например, 10 секунд можем пытаться
 дождаться появления кнопки ОК и затем нажать на нее. С голым Espresso или Какао это было бы невозможно.
 
-    class FlakySafeExecutingInterceptor : ExecutingInterceptor {  
+    class FlakySafeExecutingInterceptor : ExecutingInterceptor {
         override fun interceptAndExecute(
             function: () -> ViewInteraction
         ) : ViewInteraction {
-            attempt( 
-                timeoutMs = Configurator.attemptsTimeoutMs, 
-                intervalMs = Configurator.attemptsIntervalMs, 
-                logger = Configurator.logger, 
-                allowedExceptions = Configurator.allowedExceptionsForAttempt  
+            attempt(
+                timeoutMs = Configurator.attemptsTimeoutMs,
+                intervalMs = Configurator.attemptsIntervalMs,
+                logger = Configurator.logger,
+                allowedExceptions = Configurator.allowedExceptionsForAttempt
             ) {
                 function.invoke()
             }
@@ -314,13 +314,13 @@ attempt вызов любого количества любых методов K
 менедждеров, вы можете указать ее в Конфигураторе, и она также будет доступна вам при обращении через Device к
 соответствующему реализуемому интерфейсу.
 
-    interface Apps {  
-        fun install(apkPath: String)  
-        fun uninstall(packageName: String)  
-        fun openUrlInChrome(url: String)  
-        fun launch(packageName: String, data: Uri? = null)  
-        fun openRecent(contentDescription: String)  
-        fun kill(packageName: String = targetAppPackageName) 
+    interface Apps {
+        fun install(apkPath: String)
+        fun uninstall(packageName: String)
+        fun openUrlInChrome(url: String)
+        fun launch(packageName: String, data: Uri? = null)
+        fun openRecent(contentDescription: String)
+        fun kill(packageName: String = targetAppPackageName)
     }
 
 Для работы некоторых методов некоторых менеджеров требуется выполнение adb-команд (например при установке/удалении
@@ -332,9 +332,9 @@ attempt вызов любого количества любых методов K
 качестве сервера, а хост - клиент, и с помощью объекта AdbServer мы с девайса сообщаем хосту-клиенту какую команду мы
 хотим запустить).
 
-    object AdbServer {       
-        fun performCmd(vararg commands: String) { … }  
-        fun performAdb(vararg commands: String) { … }   
+    object AdbServer {
+        fun performCmd(vararg commands: String) { … }
+        fun performAdb(vararg commands: String) { … }
         fun performShell(vararg commands: String) { … }
     }
 
@@ -361,25 +361,26 @@ afterTest нам необходимо его включить обратно. (�
 то сколько было произведено попыток и в течение какого времени, а также можно будет посмотреть скриншоты успешно
 выполненных шагов и финальный скриншот с ошибкой.
 
-    @Test fun test() {
+    @Test
+    fun test() {
         beforeTest {
-            activityTestRule.launchActivity(null)  
-            Device.exploit.setOrientation(Orientation.Landscape) 
-        }.afterTest { 
+            activityTestRule.launchActivity(null)
+            Device.exploit.setOrientation(Orientation.Landscape)
+        }.afterTest {
             Device.exploit.setOrientation(Orientation.Portrait)
         }.runSteps {
-            step("Ввести логин") { 
+            step("Ввести логин") {
                 signInScreen {
                     emailEditText.typeText("my.email@gmail.com")
                 }
             }
-            step("Свернуть и развернуть приложение, убедиться, что логин отображается") {  
-                Device.exploit.pressHome() 
-                Device.apps.openRecent("MyApp") 
+            step("Свернуть и развернуть приложение, убедиться, что логин отображается") {
+                Device.exploit.pressHome()
+                Device.apps.openRecent("MyApp")
 
                 signInScreen {
                     emailEditText.hasText("my.email@gmail.com")
-                }  
+                }
             }
         }
     }
@@ -392,7 +393,7 @@ ExampleSubCase().run(). Однако, увлекаться вынесением 
 
     class EnterLoginSubCase(private val login: String): SubCase() {
         override val steps: Scenario.() -> Unit = {
-            step("Ввести логин") { 
+            step("Ввести логин") {
                 signInScreen {
                     emailEditText.typeText(login)
                 }
@@ -400,22 +401,23 @@ ExampleSubCase().run(). Однако, увлекаться вынесением 
         }
     }
 
-    @Test fun test() {
+    @Test
+    fun test() {
         beforeTest {
-            activityTestRule.launchActivity(null)  
-            Device.exploit.setOrientation(Orientation.Landscape) 
-        }.afterTest { 
+            activityTestRule.launchActivity(null)
+            Device.exploit.setOrientation(Orientation.Landscape)
+        }.afterTest {
             Device.exploit.setOrientation(Orientation.Portrait)
         }.runSteps {
             EnterLoginSubCase("my.email@gmail.com").run()
 
-            step("Свернуть и развернуть приложение, убедиться, что логин отображается") {  
-                Device.exploit.pressHome() 
-                Device.apps.openRecent("MyApp") 
+            step("Свернуть и развернуть приложение, убедиться, что логин отображается") {
+                Device.exploit.pressHome()
+                Device.apps.openRecent("MyApp")
 
                 signInScreen {
                     emailEditText.hasText("my.email@gmail.com")
-                }  
+                }
             }
         }
     }
