@@ -74,3 +74,67 @@ open class ProductTestCase : TestCase() {
 └─── views                          - KView для кастомных views проекта
       └─ CustomView.kt
 ```
+
+# Структура Теста
+
++ Тесты лежат в пакете ```tests```
++ Тест наследует ```ProductTestCase```
++ Если тест является авто-тестом из TFS, то в названии должен фигурировать номер тест-кейса
+  + На один тест-кейс из TFS заводится один класс с тестом 
++ Тест может содержать вспомогательные методы для повышения читабельности, которые не оперируют скринаими. 
++ Метод, в котором описаны шаги состоит из трех обязательных частей, тело которых может быть пустым:
+  + ```beforeTest```
+  + ```afterTest```
+  + ```runSteps```
++ Внутри ```runSteps``` описываются шаги, используя ```step``` 
+  + Внутри ```step``` тест оперирует с ```Screen``` или ```Scenario```
+  
+``` kotlin
+  @Test
+  fun testFeature() = 
+      beforeTest { }.afterTest { }.runSteps{ 
+          
+          step("Pass first step") {
+              //...
+              FrwScenario.run()
+          }
+          
+          step("Pass second step") {
+              FeatureScreen1 {
+                 //actions & assertions
+              }
+              FeatureScreen2 {
+                 //actions & assertions
+              }
+          }
+          //...
+      }
+```
+# Структура скринов
+
++ Скрины лежат в пакете ```screens``` и разбиты по фичам
++ Все скрины наследуются от ```KScreen```
++ Все скрины, должны переопределить необходимые свойства из ```KScreen```. В случаях, когда это невозможно, присваивается ```null```     
++ Скрины описывают конкретный экран приложения
++ Скрины могут содержать вспомогательные методы и проверки, которые не используют другие скрины
++ Скрины не должны содержать состояние
+
+```kotlin
+object FeatureScreen : KScreen<FeatureScreen> {
+
+    override val layoutId = R.layout.fragment_feature
+    override val viewClass = FeatureFragment::class.java
+    
+    val nextButton = KButton { withId(R.id.button_next) }
+    val emailText = KEditText { withId(R.id.edit_text) }
+
+    fun assertSomething() {
+        //
+    }
+    
+    fun performSomething() {
+        // 
+    }
+}   
+```
+
