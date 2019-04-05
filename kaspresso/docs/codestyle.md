@@ -18,8 +18,8 @@ open class ProductTestCase : TestCase() {
         // common before
     }
     
-    @Before
-    fun setup() {
+    @After
+    fun teardown() {
         // common after
     }
 }
@@ -30,7 +30,7 @@ open class ProductTestCase : TestCase() {
 
 ```
 .
-├─── advice
+├─ advice
 │     ├─ common
 │     │   ├─ Advice.kt              - Интерфейс для общих шагов для тестов.
 │     │   ├─ AbstractFakeAdvice.kt  - Имплементация общих шагов для интеграционного теста.
@@ -43,16 +43,16 @@ open class ProductTestCase : TestCase() {
 │         ├─ Feature2Advice.kt
 │         ├─ Feature2AdviceFake.kt
 │         └─ Feature2AdviceReal.kt
-├─── app
+├─ app
 │     ├─ di
 │     │   ├─ feature1
 │     │   └─ feature2
 │     └─ stub
 │         ├─ feature1
 │         └─ feature2
-├─── common
+├─ common
 │     └─ ProductTestCase.kt
-├─── screens
+├─ screens
 │     ├─ feature1
 │     │  ├─ FirstFeatureScreen1.kt
 │     │  └─ FirstFeatureScreen2.kt  
@@ -62,16 +62,22 @@ open class ProductTestCase : TestCase() {
 │        ├─ FrwMainScreen.kt
 │        ├─ FrwSomeStepScreen.kt
 │        └─ FrwFinishScreen.kt  
-├─── subcases   
+├─ subcases   
 │     ├─ FrwSubCase.kt              - Простое прохождение FRW.
 │     └─ FrwCustomSubCase.kt        - Прохождение FRW с дополнительными действиями.
-├─── tests
+├─ tests
 │     ├─ feature1
 │     │   ├─ Feature1_123456.kt
 │     │   └─ Feature1TestData.kt    - Аккаунты для теста и т.п.
 │     └─ feature2
 │         └─ Feature2_654321.kt
-└─── views                          - KView для кастомных views проекта
+├─ screenshot_tests                 - Скриншотилка
+│     ├─ feature1
+│     │   ├─ Screen1Screenshot.kt  
+│     │   └─ Screen2Screenshot.kt    
+│     └─ feature2
+│         └─ Screen3Screenshot.kt
+└─ views                            - KView для кастомных views проекта
       └─ CustomView.kt
 ```
 
@@ -92,7 +98,13 @@ open class ProductTestCase : TestCase() {
 ``` kotlin
   @Test
   fun testFeature() = 
-      beforeTest { }.afterTest { }.runSteps{ 
+      beforeTest {
+        // some preparing actions
+      }
+      .afterTest {
+        // some clearing actions
+      }
+      .runSteps{ 
           
           step("Pass first step") {
               //...
@@ -110,10 +122,11 @@ open class ProductTestCase : TestCase() {
           //...
       }
 ```
-# Структура скринов
+# Скрины
 
 + Скрины лежат в пакете ```screens``` и разбиты по фичам
 + Все скрины наследуются от ```KScreen```
++ ```KScreen``` имплементирует паттерн PageObject
 + Все скрины, должны переопределить необходимые свойства из ```KScreen```. В случаях, когда это невозможно, присваивается ```null```     
 + Скрины описывают конкретный экран приложения
 + Скрины могут содержать вспомогательные методы и проверки, которые не используют другие скрины
@@ -137,4 +150,3 @@ object FeatureScreen : KScreen<FeatureScreen> {
     }
 }   
 ```
-
