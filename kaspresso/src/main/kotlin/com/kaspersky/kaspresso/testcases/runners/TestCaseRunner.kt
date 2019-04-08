@@ -22,9 +22,9 @@ class TestCaseRunner(private val title: String) : ScenarioRunner {
             beforeTestActions.invoke()
 
             steps.invoke(
-                Scenario(title) { title, description ->
+                Scenario(title) { title: String, stepNumber: Int, description: String ->
                     i("___________________________________________________________________________")
-                    i("TEST STEP: \"$description\" in $title")
+                    i("TEST STEP: \"$stepNumber. $description\" in $title")
                 }
             )
         } finally {

@@ -9,7 +9,7 @@ import com.kaspersky.kaspresso.logger.UiTestLogger
  */
 class Scenario(
     private val title: String,
-    private val log: UiTestLogger.(String, String) -> Unit
+    private val log: UiTestLogger.(String, Int, String) -> Unit
 ) {
     private val logger: UiTestLogger = Configurator.logger
     private val screenshots: Screenshots = Configurator.screenshots
@@ -26,9 +26,9 @@ class Scenario(
      * @param actions a set of actions of a step.
      */
     fun step(description: String, actions: () -> Unit) {
-        log.invoke(logger, title, description)
+        log.invoke(logger, title, ++stepsCounter, description)
 
-        val screenshotTag = "${title}_step_${++stepsCounter}"
+        val screenshotTag = "${title}_step_$stepsCounter"
 
         try {
             actions.invoke()
