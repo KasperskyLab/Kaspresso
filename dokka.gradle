@@ -2,7 +2,7 @@ apply plugin: 'org.jetbrains.dokka-android'
 
 dokka {
     moduleName = 'kaspresso'
-    outputFormat = 'html'
+    outputFormat = 'gfm'
     outputDirectory = "$rootDir/docs/"
     reportUndocumented = true
 }

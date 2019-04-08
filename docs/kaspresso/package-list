@@ -1,12 +1,12 @@
-$dokka.format:html
-$dokka.linkExtension:html
-$dokka.location:android.support.test.espresso.assertion$describe(android.support.test.espresso.ViewAssertion)android.support.test.espresso.assertion/android.support.test.espresso.-view-assertion/describe.html
-$dokka.location:com.kaspersky.kaspresso.extensions.espressoext$describe(org.hamcrest.Matcher((android.view.View)))com.kaspersky.kaspresso.extensions.espressoext/org.hamcrest.-matcher/describe.html
-$dokka.location:com.kaspersky.kaspresso.extensions.kakaoext$getText(com.kaspersky.klkakao.text.TextViewActions)com.kaspersky.kaspresso.extensions.kakaoext/com.kaspersky.klkakao.text.-text-view-actions/get-text.html
-$dokka.location:com.kaspersky.kaspresso.extensions.kakaoext$methodName#kotlin.Function1((com.kaspersky.kaspresso.extensions.kakaoext.methodName.T, kotlin.Unit))com.kaspersky.kaspresso.extensions.kakaoext/kotlin.-function1/method-name.html
-$dokka.location:com.kaspersky.kaspresso.extensions.other$describe(android.view.View)com.kaspersky.kaspresso.extensions.other/android.view.-view/describe.html
-$dokka.location:com.kaspersky.kaspresso.extensions.other$getStackTraceAsString(kotlin.Throwable)com.kaspersky.kaspresso.extensions.other/kotlin.-throwable/get-stack-trace-as-string.html
-$dokka.location:com.kaspersky.kaspresso.extensions.other$isDisplayed(android.view.View)com.kaspersky.kaspresso.extensions.other/android.view.-view/is-displayed.html
+$dokka.format:gfm
+$dokka.linkExtension:md
+$dokka.location:android.support.test.espresso.assertion$describe(android.support.test.espresso.ViewAssertion)android.support.test.espresso.assertion/android.support.test.espresso.-view-assertion/describe.md
+$dokka.location:com.kaspersky.kaspresso.extensions.espressoext$describe(org.hamcrest.Matcher((android.view.View)))com.kaspersky.kaspresso.extensions.espressoext/org.hamcrest.-matcher/describe.md
+$dokka.location:com.kaspersky.kaspresso.extensions.kakaoext$getText(com.kaspersky.klkakao.text.TextViewActions)com.kaspersky.kaspresso.extensions.kakaoext/com.kaspersky.klkakao.text.-text-view-actions/get-text.md
+$dokka.location:com.kaspersky.kaspresso.extensions.kakaoext$methodName#kotlin.Function1((com.kaspersky.kaspresso.extensions.kakaoext.methodName.T, kotlin.Unit))com.kaspersky.kaspresso.extensions.kakaoext/kotlin.-function1/method-name.md
+$dokka.location:com.kaspersky.kaspresso.extensions.other$describe(android.view.View)com.kaspersky.kaspresso.extensions.other/android.view.-view/describe.md
+$dokka.location:com.kaspersky.kaspresso.extensions.other$getStackTraceAsString(kotlin.Throwable)com.kaspersky.kaspresso.extensions.other/kotlin.-throwable/get-stack-trace-as-string.md
+$dokka.location:com.kaspersky.kaspresso.extensions.other$isDisplayed(android.view.View)com.kaspersky.kaspresso.extensions.other/android.view.-view/is-displayed.md
 android.support.test.espresso.assertion
 android.support.test.espresso.web.assertion
 com.kaspersky.kaspresso.configurator
