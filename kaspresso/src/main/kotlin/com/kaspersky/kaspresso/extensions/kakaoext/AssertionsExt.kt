@@ -58,5 +58,8 @@ fun <T : BaseAssertions> T.safeCompositeCheck(
     return false
 }
 
+/**
+ * @return an actual method name.
+ */
 val <T : BaseAssertions> (T.() -> Unit).methodName: String
     get() = this::class.java.getDeclaredMethod("getName").invoke(this) as String

@@ -11,9 +11,9 @@ import android.support.test.uiautomator.Until
 import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.device.server.AdbServer
 import com.kaspersky.kaspresso.logger.UiTestLogger
-import junit.framework.Assert
 import org.hamcrest.CoreMatchers
 import org.hamcrest.MatcherAssert
+import org.junit.Assert
 
 /**
  * Default implementation of Apps interface.

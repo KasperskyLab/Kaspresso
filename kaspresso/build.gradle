@@ -3,6 +3,7 @@ apply plugin: 'maven'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply from: '../dependencies.gradle'
+apply from: '../dokka.gradle'
 
 android {
     compileSdkVersion Integer.parseInt(versions.compileSdk)
@@ -67,6 +68,21 @@ if (pPublish.toBoolean()) {
     uploadArchives.dependsOn assemble
 } else {
     Task uploadArchives
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from android.sourceSets.main.java.srcDirs
+}
+
+task javadocJar(type: Jar, dependsOn: dokka) {
+    classifier = 'javadoc'
+    from dokka.outputDirectory
+}
+
+artifacts {
+    archives javadocJar
+    archives sourcesJar
 }
 
 repositories {

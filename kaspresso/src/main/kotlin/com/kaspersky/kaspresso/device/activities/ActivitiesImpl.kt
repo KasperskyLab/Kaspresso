@@ -64,5 +64,8 @@ class ActivitiesImpl : Activities {
         }
     }
 
+    /**
+     * A form of [isCurrent] method for simplified usage.
+     */
     inline fun <reified T : Activity> assertCurrentActivity() = isCurrent(T::class.java)
 }

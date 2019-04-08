@@ -67,8 +67,7 @@ open class ViewInteractionDelegateImpl(
     }
 
     /**
-     * Calls [ViewInteraction.withFailureHandler] on wrapped [viewInteraction] and turns [isCustomFailureHandlerSet]
-     * flag on.
+     * Calls [ViewInteraction.withFailureHandler] on wrapped [viewInteraction].
      *
      * @param function a function that will be used as [FailureHandler].
      * @return an existing [ViewInteractionDelegateImpl] instance.

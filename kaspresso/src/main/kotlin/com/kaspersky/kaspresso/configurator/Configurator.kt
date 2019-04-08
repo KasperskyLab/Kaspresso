@@ -53,52 +53,60 @@ object Configurator {
     internal var attemptsIntervalMs: Long = DEFAULT_ATTEMPTS_INTERVAL_MS
 
     /**
-     * An implementation of [UiTestLogger] for inner framework usage. Not accessible from outside.
+     * Holds an implementation of [UiTestLogger] interface for inner framework usage. Not accessible from outside.
      */
     internal var logger: UiTestLogger = UiTestLoggerImpl(DEFAULT_INNER_LOGGER_TAG)
 
     /**
-     * An implementation of [UiTestLogger] for external usage.
+     * Holds an implementation of [UiTestLogger] interface for external usage.
      */
     internal var externalLogger: UiTestLogger = UiTestLoggerImpl(DEFAULT_OUTER_LOGGER_TAG)
 
     /**
-     * An interface of applications manager.
+     * Holds an implementation of [Apps] interface. If it was not specified in [Configurator.Builder], the default
+     * implementation is used.
      */
     internal var apps: Apps = AppsImpl()
 
     /**
-     * An interface of activities manager.
+     * Holds an implementation of [Activities] interface. If it was not specified in [Configurator.Builder], the default
+     * implementation is used.
      */
     internal var activities: Activities = ActivitiesImpl()
 
     /**
-     * An interface of files manager.
+     * Holds an implementation of [Files] interface. If it was not specified in [Configurator.Builder], the default
+     * implementation is used.
      */
     internal var files: Files = FilesImpl()
 
     /**
-     * An interface of internet manager.
+     * Holds an implementation of [Internet] interface. If it was not specified in [Configurator.Builder], the default
+     * implementation is used.
      */
     internal var internet: Internet = InternetImpl()
 
     /**
-     * An interface of screenshots manager.
+     * Holds an implementation of [Screenshots] interface. If it was not specified in [Configurator.Builder], the
+     * default implementation is used.
      */
     internal var screenshots: Screenshots = ScreenshotsImpl()
 
     /**
-     * An interface of accessibility manager.
+     * Holds an implementation of [Accessibility] interface. If it was not specified in [Configurator.Builder], the
+     * default implementation is used.
      */
     internal var accessibility: Accessibility = AccessibilityImpl()
 
     /**
-     * An interface of permissions manager.
+     * Holds an implementation of [Permissions] interface. If it was not specified in [Configurator.Builder], the
+     * default implementation is used.
      */
     internal var permissions: Permissions = PermissionsImpl()
 
     /**
-     * An interface of exploitation manager.
+     * Holds an implementation of [Exploit] interface. If it was not specified in [Configurator.Builder], the default
+     * implementation is used.
      */
     internal var exploit: Exploit = ExploitImpl()
 
