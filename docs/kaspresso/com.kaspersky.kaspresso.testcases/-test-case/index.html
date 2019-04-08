@@ -1,0 +1,47 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>TestCase - kaspresso</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">kaspresso</a>&nbsp;/&nbsp;<a href="../index.html">com.kaspersky.kaspresso.testcases</a>&nbsp;/&nbsp;<a href="./index.html">TestCase</a><br/>
+<br/>
+<h1>TestCase</h1>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">TestCase</span></code>
+<p>A base class for all test cases. Extend this class with a single base project-wide inheritor of <a href="./index.html">TestCase</a> as a
+parent for all actual project-wide test cases. Nesting test cases are not permitted because they may produce an
+exception caused by re-initialization of the <a href="../../com.kaspersky.kaspresso.configurator/-configurator/index.html">Configurator</a>, use <a href="../-scenario/index.html">Scenario</a> instead.</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">TestCase</span><span class="symbol">(</span><span class="identifier" id="com.kaspersky.kaspresso.testcases.TestCase$<init>(com.kaspersky.kaspresso.configurator.Configurator.Builder)/configBuilder">configBuilder</span><span class="symbol">:</span>&nbsp;<a href="../../com.kaspersky.kaspresso.configurator/-configurator/-builder/index.html"><span class="identifier">Configurator.Builder</span></a>&nbsp;<span class="symbol">=</span>&nbsp;Configurator.Builder.default()<span class="symbol">)</span></code>
+<p>A base class for all test cases. Extend this class with a single base project-wide inheritor of <a href="./index.html">TestCase</a> as a
+parent for all actual project-wide test cases. Nesting test cases are not permitted because they may produce an
+exception caused by re-initialization of the <a href="../../com.kaspersky.kaspresso.configurator/-configurator/index.html">Configurator</a>, use <a href="../-scenario/index.html">Scenario</a> instead.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="before-test.html">beforeTest</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">beforeTest</span><span class="symbol">(</span><span class="identifier" id="com.kaspersky.kaspresso.testcases.TestCase$beforeTest(kotlin.Function0((kotlin.Unit)))/actions">actions</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../-after-test-section/index.html"><span class="identifier">AfterTestSection</span></a></code>
+<p>Starts the building a test, sets the <a href="../-before-test-section/index.html">BeforeTestSection</a> actions and returns an existing instance of
+<a href="../-after-test-section/index.html">AfterTestSection</a> to continue building a test.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

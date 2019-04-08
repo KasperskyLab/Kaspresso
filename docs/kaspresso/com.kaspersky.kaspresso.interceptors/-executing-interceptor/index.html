@@ -1,0 +1,52 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>ExecutingInterceptor - kaspresso</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">kaspresso</a>&nbsp;/&nbsp;<a href="../index.html">com.kaspersky.kaspresso.interceptors</a>&nbsp;/&nbsp;<a href="./index.html">ExecutingInterceptor</a><br/>
+<br/>
+<h1>ExecutingInterceptor</h1>
+<code><span class="keyword">interface </span><span class="identifier">ExecutingInterceptor</span></code>
+<p>An interface for all executing interceptors, actually manages the execution of actions or assertions.</p>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="intercept-and-execute.html">interceptAndExecute</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">interceptAndExecute</span><span class="symbol">(</span><span class="identifier" id="com.kaspersky.kaspresso.interceptors.ExecutingInterceptor$interceptAndExecute(kotlin.Function0((android.support.test.espresso.ViewInteraction)))/function">function</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">ViewInteraction</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">ViewInteraction</span></code>
+<p>Called to do some stuff and actually execute an action or an assertion.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="intercept-and-execute-web.html">interceptAndExecuteWeb</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">interceptAndExecuteWeb</span><span class="symbol">(</span><span class="identifier" id="com.kaspersky.kaspresso.interceptors.ExecutingInterceptor$interceptAndExecuteWeb(kotlin.Function0((android.support.test.espresso.web.sugar.Web.WebInteraction((kotlin.Any)))))/function">function</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">WebInteraction</span><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">WebInteraction</span><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span></code>
+<p>Called to do some stuff and actually execute web action or web assertion.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../../com.kaspersky.kaspresso.interceptors.impl.flakysafety/-flaky-safe-executing-interceptor/index.html">FlakySafeExecutingInterceptor</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">FlakySafeExecutingInterceptor</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">ExecutingInterceptor</span></a></code>
+<p>An implementation of <a href="./index.html">ExecutingInterceptor</a> that performs multiple attempts to execute an action or an assertion to
+provide flaky safety.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

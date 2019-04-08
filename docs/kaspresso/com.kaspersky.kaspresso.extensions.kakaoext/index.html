@@ -1,0 +1,80 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>com.kaspersky.kaspresso.extensions.kakaoext - kaspresso</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">kaspresso</a>&nbsp;/&nbsp;<a href="./index.html">com.kaspersky.kaspresso.extensions.kakaoext</a><br/>
+<br/>
+<h2>Package com.kaspersky.kaspresso.extensions.kakaoext</h2>
+<h3>Extensions for External Classes</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="com.kaspersky.klkakao.text.-text-view-actions/index.html">com.kaspersky.klkakao.text.TextViewActions</a></p>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="kotlin.-function1/index.html">kotlin.Function1</a></p>
+</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="attempt.html">attempt</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">KBaseView</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">R</span><span class="symbol">&gt;</span> <a href="attempt.html#T"><span class="identifier">T</span></a><span class="symbol">.</span><span class="identifier">attempt</span><span class="symbol">(</span><span class="identifier" id="com.kaspersky.kaspresso.extensions.kakaoext$attempt(com.kaspersky.kaspresso.extensions.kakaoext.attempt.T, kotlin.Long, kotlin.Long, com.kaspersky.kaspresso.logger.UiTestLogger, kotlin.collections.Set((java.lang.Class((kotlin.Throwable)))), kotlin.Function1((com.kaspersky.kaspresso.extensions.kakaoext.attempt.T, com.kaspersky.kaspresso.extensions.kakaoext.attempt.R)))/timeoutMs">timeoutMs</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a>&nbsp;<span class="symbol">=</span>&nbsp;Configurator.attemptsTimeoutMs<span class="symbol">, </span><span class="identifier" id="com.kaspersky.kaspresso.extensions.kakaoext$attempt(com.kaspersky.kaspresso.extensions.kakaoext.attempt.T, kotlin.Long, kotlin.Long, com.kaspersky.kaspresso.logger.UiTestLogger, kotlin.collections.Set((java.lang.Class((kotlin.Throwable)))), kotlin.Function1((com.kaspersky.kaspresso.extensions.kakaoext.attempt.T, com.kaspersky.kaspresso.extensions.kakaoext.attempt.R)))/intervalMs">intervalMs</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a>&nbsp;<span class="symbol">=</span>&nbsp;Configurator.attemptsIntervalMs<span class="symbol">, </span><span class="identifier" id="com.kaspersky.kaspresso.extensions.kakaoext$attempt(com.kaspersky.kaspresso.extensions.kakaoext.attempt.T, kotlin.Long, kotlin.Long, com.kaspersky.kaspresso.logger.UiTestLogger, kotlin.collections.Set((java.lang.Class((kotlin.Throwable)))), kotlin.Function1((com.kaspersky.kaspresso.extensions.kakaoext.attempt.T, com.kaspersky.kaspresso.extensions.kakaoext.attempt.R)))/logger">logger</span><span class="symbol">:</span>&nbsp;<a href="../com.kaspersky.kaspresso.logger/-ui-test-logger/index.html"><span class="identifier">UiTestLogger</span></a>&nbsp;<span class="symbol">=</span>&nbsp;Configurator.logger<span class="symbol">, </span><span class="identifier" id="com.kaspersky.kaspresso.extensions.kakaoext$attempt(com.kaspersky.kaspresso.extensions.kakaoext.attempt.T, kotlin.Long, kotlin.Long, com.kaspersky.kaspresso.logger.UiTestLogger, kotlin.collections.Set((java.lang.Class((kotlin.Throwable)))), kotlin.Function1((com.kaspersky.kaspresso.extensions.kakaoext.attempt.T, com.kaspersky.kaspresso.extensions.kakaoext.attempt.R)))/allowedExceptions">allowedExceptions</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html"><span class="identifier">Set</span></a><span class="symbol">&lt;</span><a href="https://developer.android.com/reference/java/lang/Class.html"><span class="identifier">Class</span></a><span class="symbol">&lt;</span><span class="keyword">out</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html"><span class="identifier">Throwable</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">=</span>&nbsp;Configurator.allowedExceptionsForAttempt<span class="symbol">, </span><span class="identifier" id="com.kaspersky.kaspresso.extensions.kakaoext$attempt(com.kaspersky.kaspresso.extensions.kakaoext.attempt.T, kotlin.Long, kotlin.Long, com.kaspersky.kaspresso.logger.UiTestLogger, kotlin.collections.Set((java.lang.Class((kotlin.Throwable)))), kotlin.Function1((com.kaspersky.kaspresso.extensions.kakaoext.attempt.T, com.kaspersky.kaspresso.extensions.kakaoext.attempt.R)))/action">action</span><span class="symbol">:</span>&nbsp;<a href="attempt.html#T"><span class="identifier">T</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="attempt.html#R"><span class="identifier">R</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="attempt.html#R"><span class="identifier">R</span></a></code>
+<p>Provides an <a href="../com.kaspersky.kaspresso.flakysafety/attempt.html">com.kaspersky.kaspresso.flakysafety.attempt</a> method as an extension of <a href="#">KBaseView</a>.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">KBaseView</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">R</span><span class="symbol">&gt;</span> <a href="attempt.html#T"><span class="identifier">T</span></a><span class="symbol">.</span><span class="identifier">attempt</span><span class="symbol">(</span><span class="identifier" id="com.kaspersky.kaspresso.extensions.kakaoext$attempt(com.kaspersky.kaspresso.extensions.kakaoext.attempt.T, kotlin.Long, kotlin.Function1((com.kaspersky.kaspresso.extensions.kakaoext.attempt.T, com.kaspersky.kaspresso.extensions.kakaoext.attempt.R)))/timeoutSec">timeoutSec</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a><span class="symbol">, </span><span class="identifier" id="com.kaspersky.kaspresso.extensions.kakaoext$attempt(com.kaspersky.kaspresso.extensions.kakaoext.attempt.T, kotlin.Long, kotlin.Function1((com.kaspersky.kaspresso.extensions.kakaoext.attempt.T, com.kaspersky.kaspresso.extensions.kakaoext.attempt.R)))/action">action</span><span class="symbol">:</span>&nbsp;<a href="attempt.html#T"><span class="identifier">T</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="attempt.html#R"><span class="identifier">R</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="attempt.html#R"><span class="identifier">R</span></a></code>
+<p>Provides a simplified <a href="../com.kaspersky.kaspresso.flakysafety/attempt.html">com.kaspersky.kaspresso.flakysafety.attempt</a> method as an extension of <a href="#">KBaseView</a>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="composite-check.html">compositeCheck</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">BaseAssertions</span><span class="symbol">&gt;</span> <a href="composite-check.html#T"><span class="identifier">T</span></a><span class="symbol">.</span><span class="identifier">compositeCheck</span><span class="symbol">(</span><span class="keyword">vararg</span> <span class="identifier" id="com.kaspersky.kaspresso.extensions.kakaoext$compositeCheck(com.kaspersky.kaspresso.extensions.kakaoext.compositeCheck.T, kotlin.Array((kotlin.Function1((com.kaspersky.kaspresso.extensions.kakaoext.compositeCheck.T, kotlin.Unit)))))/asserts">asserts</span><span class="symbol">:</span>&nbsp;<a href="composite-check.html#T"><span class="identifier">T</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>A multiple assertion.
+If at least one of assertions passes, <a href="composite-check.html">compositeCheck</a> is passed.
+If no one of assertions passes, <a href="composite-check.html">compositeCheck</a> is failed.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="safe-composite-check.html">safeCompositeCheck</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">BaseAssertions</span><span class="symbol">&gt;</span> <a href="safe-composite-check.html#T"><span class="identifier">T</span></a><span class="symbol">.</span><span class="identifier">safeCompositeCheck</span><span class="symbol">(</span><span class="keyword">vararg</span> <span class="identifier" id="com.kaspersky.kaspresso.extensions.kakaoext$safeCompositeCheck(com.kaspersky.kaspresso.extensions.kakaoext.safeCompositeCheck.T, kotlin.Array((kotlin.Function1((com.kaspersky.kaspresso.extensions.kakaoext.safeCompositeCheck.T, kotlin.Unit)))))/asserts">asserts</span><span class="symbol">:</span>&nbsp;<a href="safe-composite-check.html#T"><span class="identifier">T</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code>
+<p>A safe multiple assertion.
+If at least one of assertions passes, <a href="safe-composite-check.html">safeCompositeCheck</a> is passed and true is returned.
+If no one of assertions passes, <a href="safe-composite-check.html">safeCompositeCheck</a> is failed and false is returned.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="wait.html">wait</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">KBaseView</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">R</span><span class="symbol">&gt;</span> <a href="wait.html#T"><span class="identifier">T</span></a><span class="symbol">.</span><span class="identifier">wait</span><span class="symbol">(</span><span class="identifier" id="com.kaspersky.kaspresso.extensions.kakaoext$wait(com.kaspersky.kaspresso.extensions.kakaoext.wait.T, kotlin.Long, com.kaspersky.kaspresso.logger.UiTestLogger, kotlin.Function1((com.kaspersky.kaspresso.extensions.kakaoext.wait.T, com.kaspersky.kaspresso.extensions.kakaoext.wait.R)))/timeoutMs">timeoutMs</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a>&nbsp;<span class="symbol">=</span>&nbsp;Configurator.attemptsTimeoutMs<span class="symbol">, </span><span class="identifier" id="com.kaspersky.kaspresso.extensions.kakaoext$wait(com.kaspersky.kaspresso.extensions.kakaoext.wait.T, kotlin.Long, com.kaspersky.kaspresso.logger.UiTestLogger, kotlin.Function1((com.kaspersky.kaspresso.extensions.kakaoext.wait.T, com.kaspersky.kaspresso.extensions.kakaoext.wait.R)))/logger">logger</span><span class="symbol">:</span>&nbsp;<a href="../com.kaspersky.kaspresso.logger/-ui-test-logger/index.html"><span class="identifier">UiTestLogger</span></a>&nbsp;<span class="symbol">=</span>&nbsp;Configurator.logger<span class="symbol">, </span><span class="identifier" id="com.kaspersky.kaspresso.extensions.kakaoext$wait(com.kaspersky.kaspresso.extensions.kakaoext.wait.T, kotlin.Long, com.kaspersky.kaspresso.logger.UiTestLogger, kotlin.Function1((com.kaspersky.kaspresso.extensions.kakaoext.wait.T, com.kaspersky.kaspresso.extensions.kakaoext.wait.R)))/action">action</span><span class="symbol">:</span>&nbsp;<a href="wait.html#T"><span class="identifier">T</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="wait.html#R"><span class="identifier">R</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="wait.html#R"><span class="identifier">R</span></a></code>
+<p>Provides a <a href="../com.kaspersky.kaspresso.flakysafety/wait.html">com.kaspersky.kaspresso.flakysafety.wait</a> method as an extension of <a href="#">KBaseView</a>.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">KBaseView</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">R</span><span class="symbol">&gt;</span> <a href="wait.html#T"><span class="identifier">T</span></a><span class="symbol">.</span><span class="identifier">wait</span><span class="symbol">(</span><span class="identifier" id="com.kaspersky.kaspresso.extensions.kakaoext$wait(com.kaspersky.kaspresso.extensions.kakaoext.wait.T, kotlin.Long, kotlin.Function1((com.kaspersky.kaspresso.extensions.kakaoext.wait.T, com.kaspersky.kaspresso.extensions.kakaoext.wait.R)))/timeoutSec">timeoutSec</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a><span class="symbol">, </span><span class="identifier" id="com.kaspersky.kaspresso.extensions.kakaoext$wait(com.kaspersky.kaspresso.extensions.kakaoext.wait.T, kotlin.Long, kotlin.Function1((com.kaspersky.kaspresso.extensions.kakaoext.wait.T, com.kaspersky.kaspresso.extensions.kakaoext.wait.R)))/action">action</span><span class="symbol">:</span>&nbsp;<a href="wait.html#T"><span class="identifier">T</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="wait.html#R"><span class="identifier">R</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="wait.html#R"><span class="identifier">R</span></a></code>
+<p>Provides a simplified <a href="../com.kaspersky.kaspresso.flakysafety/wait.html">com.kaspersky.kaspresso.flakysafety.wait</a> method as an extension of <a href="#">KBaseView</a>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

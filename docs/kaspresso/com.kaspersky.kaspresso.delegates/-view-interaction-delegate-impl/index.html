@@ -1,0 +1,72 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>ViewInteractionDelegateImpl - kaspresso</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">kaspresso</a>&nbsp;/&nbsp;<a href="../index.html">com.kaspersky.kaspresso.delegates</a>&nbsp;/&nbsp;<a href="./index.html">ViewInteractionDelegateImpl</a><br/>
+<br/>
+<h1>ViewInteractionDelegateImpl</h1>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">ViewInteractionDelegateImpl</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">ViewInteractionDelegate</span></code>
+<p>An implementation of <a href="#">ViewInteractionDelegate</a>, that delegates the <a href="#">ViewInteraction</a>'s interface calls
+to <a href="../../com.kaspersky.kaspresso.proxy/-view-action-proxy/index.html">ViewActionProxy</a> and <a href="../../com.kaspersky.kaspresso.proxy/-view-assertion-proxy/index.html">ViewAssertionProxy</a>.</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">ViewInteractionDelegateImpl</span><span class="symbol">(</span><span class="identifier" id="com.kaspersky.kaspresso.delegates.ViewInteractionDelegateImpl$<init>(android.support.test.espresso.ViewInteraction)/viewInteraction">viewInteraction</span><span class="symbol">:</span>&nbsp;<span class="identifier">ViewInteraction</span><span class="symbol">)</span></code>
+<p>An implementation of <a href="#">ViewInteractionDelegate</a>, that delegates the <a href="#">ViewInteraction</a>'s interface calls
+to <a href="../../com.kaspersky.kaspresso.proxy/-view-action-proxy/index.html">ViewActionProxy</a> and <a href="../../com.kaspersky.kaspresso.proxy/-view-assertion-proxy/index.html">ViewAssertionProxy</a>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="check.html">check</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">check</span><span class="symbol">(</span><span class="identifier" id="com.kaspersky.kaspresso.delegates.ViewInteractionDelegateImpl$check(android.support.test.espresso.ViewAssertion)/viewAssertion">viewAssertion</span><span class="symbol">:</span>&nbsp;<span class="identifier">ViewAssertion</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">ViewInteractionDelegate</span></code><br/>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">check</span><span class="symbol">(</span><span class="identifier" id="com.kaspersky.kaspresso.delegates.ViewInteractionDelegateImpl$check(kotlin.Function2((android.view.View, android.support.test.espresso.NoMatchingViewException, kotlin.Unit)))/function">function</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><a href="https://developer.android.com/reference/android/view/View.html"><span class="identifier">View</span></a><span class="symbol">,</span>&nbsp;<span class="identifier">NoMatchingViewException</span><span class="symbol">?</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">ViewInteractionDelegate</span></code>
+<p>Creates <a href="../../com.kaspersky.kaspresso.proxy/-view-assertion-proxy/index.html">ViewAssertionProxy</a> instance and delegates <a href="#">ViewInteraction.check</a> call to it.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="in-root.html">inRoot</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">inRoot</span><span class="symbol">(</span><span class="identifier" id="com.kaspersky.kaspresso.delegates.ViewInteractionDelegateImpl$inRoot(org.hamcrest.Matcher((android.support.test.espresso.Root)))/rootMatcher">rootMatcher</span><span class="symbol">:</span>&nbsp;<span class="identifier">Matcher</span><span class="symbol">&lt;</span><span class="identifier">Root</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">ViewInteractionDelegate</span></code>
+<p>Calls <a href="#">ViewInteraction.inRoot</a> on <a href="#">viewInteraction</a>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="perform.html">perform</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">perform</span><span class="symbol">(</span><span class="identifier" id="com.kaspersky.kaspresso.delegates.ViewInteractionDelegateImpl$perform(android.support.test.espresso.ViewAction)/viewAction">viewAction</span><span class="symbol">:</span>&nbsp;<span class="identifier">ViewAction</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">ViewInteractionDelegate</span></code>
+<p>Creates <a href="../../com.kaspersky.kaspresso.proxy/-view-action-proxy/index.html">ViewActionProxy</a> instance and delegates <a href="#">ViewInteraction.perform</a> call to it.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="with-failure-handler.html">withFailureHandler</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">withFailureHandler</span><span class="symbol">(</span><span class="identifier" id="com.kaspersky.kaspresso.delegates.ViewInteractionDelegateImpl$withFailureHandler(kotlin.Function2((kotlin.Throwable, org.hamcrest.Matcher((android.view.View)), kotlin.Unit)))/function">function</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html"><span class="identifier">Throwable</span></a><span class="symbol">,</span>&nbsp;<span class="identifier">Matcher</span><span class="symbol">&lt;</span><a href="https://developer.android.com/reference/android/view/View.html"><span class="identifier">View</span></a><span class="symbol">&gt;</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">ViewInteractionDelegate</span></code>
+<p>Calls <a href="#">ViewInteraction.withFailureHandler</a> on wrapped <a href="#">viewInteraction</a>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

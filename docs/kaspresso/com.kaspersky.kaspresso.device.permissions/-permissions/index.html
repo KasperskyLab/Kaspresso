@@ -1,0 +1,51 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>Permissions - kaspresso</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">kaspresso</a>&nbsp;/&nbsp;<a href="../index.html">com.kaspersky.kaspresso.device.permissions</a>&nbsp;/&nbsp;<a href="./index.html">Permissions</a><br/>
+<br/>
+<h1>Permissions</h1>
+<code><span class="keyword">interface </span><span class="identifier">Permissions</span></code>
+<p>An interface to work with permissions.</p>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="allow-via-dialog.html">allowViaDialog</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">allowViaDialog</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Passes the permission-requesting permissions dialog and allows permissions.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="deny-via-dialog.html">denyViaDialog</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">denyViaDialog</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Passes the permission-requesting permissions dialog and denies permissions.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../-permissions-impl/index.html">PermissionsImpl</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">PermissionsImpl</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">Permissions</span></a></code>
+<p>An implementation of Permissions interface.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

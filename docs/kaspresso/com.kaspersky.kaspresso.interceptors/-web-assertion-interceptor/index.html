@@ -1,0 +1,44 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>WebAssertionInterceptor - kaspresso</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">kaspresso</a>&nbsp;/&nbsp;<a href="../index.html">com.kaspersky.kaspresso.interceptors</a>&nbsp;/&nbsp;<a href="./index.html">WebAssertionInterceptor</a><br/>
+<br/>
+<h1>WebAssertionInterceptor</h1>
+<code><span class="keyword">interface </span><span class="identifier">WebAssertionInterceptor</span></code>
+<p>An interface for all atom interceptors, used in <a href="../../android.support.test.espresso.web.assertion/-web-assertion-proxy/index.html">WebAssertionProxy</a>.</p>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="intercept.html">intercept</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">intercept</span><span class="symbol">(</span><span class="identifier" id="com.kaspersky.kaspresso.interceptors.WebAssertionInterceptor$intercept(android.support.test.espresso.web.assertion.WebAssertionProxy((kotlin.Any)), android.webkit.WebView, kotlin.Any)/webAssertionProxy">webAssertionProxy</span><span class="symbol">:</span>&nbsp;<a href="../../android.support.test.espresso.web.assertion/-web-assertion-proxy/index.html"><span class="identifier">WebAssertionProxy</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="com.kaspersky.kaspresso.interceptors.WebAssertionInterceptor$intercept(android.support.test.espresso.web.assertion.WebAssertionProxy((kotlin.Any)), android.webkit.WebView, kotlin.Any)/view">view</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/webkit/WebView.html"><span class="identifier">WebView</span></a><span class="symbol">?</span><span class="symbol">, </span><span class="identifier" id="com.kaspersky.kaspresso.interceptors.WebAssertionInterceptor$intercept(android.support.test.espresso.web.assertion.WebAssertionProxy((kotlin.Any)), android.webkit.WebView, kotlin.Any)/result">result</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Called to do some stuff before <a href="#">android.support.test.espresso.web.assertion.WebAssertion.checkResult</a> is actually
+called.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../../com.kaspersky.kaspresso.interceptors.impl.logging/-logging-web-assertion-interceptor/index.html">LoggingWebAssertionInterceptor</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">LoggingWebAssertionInterceptor</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">WebAssertionInterceptor</span></a></code>
+<p>An implementation of <a href="./index.html">WebAssertionInterceptor</a> that logs info about
+<a href="#">android.support.test.espresso.web.assertion.WebAssertion</a>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

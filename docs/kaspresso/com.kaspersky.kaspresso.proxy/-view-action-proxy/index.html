@@ -1,0 +1,60 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>ViewActionProxy - kaspresso</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">kaspresso</a>&nbsp;/&nbsp;<a href="../index.html">com.kaspersky.kaspresso.proxy</a>&nbsp;/&nbsp;<a href="./index.html">ViewActionProxy</a><br/>
+<br/>
+<h1>ViewActionProxy</h1>
+<code><span class="keyword">class </span><span class="identifier">ViewActionProxy</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">ViewAction</span></code>
+<p>A proxy-wrapper of <a href="#">ViewAction</a> for interceptors calls.</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">ViewActionProxy</span><span class="symbol">(</span><span class="identifier" id="com.kaspersky.kaspresso.proxy.ViewActionProxy$<init>(android.support.test.espresso.ViewAction, kotlin.collections.List((com.kaspersky.kaspresso.interceptors.ViewActionInterceptor)))/viewAction">viewAction</span><span class="symbol">:</span>&nbsp;<span class="identifier">ViewAction</span><span class="symbol">, </span><span class="identifier" id="com.kaspersky.kaspresso.proxy.ViewActionProxy$<init>(android.support.test.espresso.ViewAction, kotlin.collections.List((com.kaspersky.kaspresso.interceptors.ViewActionInterceptor)))/interceptors">interceptors</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../../com.kaspersky.kaspresso.interceptors/-view-action-interceptor/index.html"><span class="identifier">ViewActionInterceptor</span></a><span class="symbol">&gt;</span><span class="symbol">)</span></code>
+<p>A proxy-wrapper of <a href="#">ViewAction</a> for interceptors calls.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="get-constraints.html">getConstraints</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">getConstraints</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Matcher</span><span class="symbol">&lt;</span><a href="https://developer.android.com/reference/android/view/View.html"><span class="identifier">View</span></a><span class="symbol">&gt;</span></code>
+<p>Simply calls <a href="#">ViewAction.getConstraints</a> on wrapped <a href="#">viewAction</a>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get-description.html">getDescription</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">getDescription</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
+<p>Simply calls <a href="#">ViewAction.getDescription</a> on wrapped <a href="#">viewAction</a>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="perform.html">perform</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">perform</span><span class="symbol">(</span><span class="identifier" id="com.kaspersky.kaspresso.proxy.ViewActionProxy$perform(android.support.test.espresso.UiController, android.view.View)/uiController">uiController</span><span class="symbol">:</span>&nbsp;<span class="identifier">UiController</span><span class="symbol">, </span><span class="identifier" id="com.kaspersky.kaspresso.proxy.ViewActionProxy$perform(android.support.test.espresso.UiController, android.view.View)/view">view</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/view/View.html"><span class="identifier">View</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Calls interceptors before <a href="#">ViewAction.perform</a> on wrapped <a href="#">viewAction</a> is called.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

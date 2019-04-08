@@ -1,0 +1,112 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>AppsImpl - kaspresso</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">kaspresso</a>&nbsp;/&nbsp;<a href="../index.html">com.kaspersky.kaspresso.device.apps</a>&nbsp;/&nbsp;<a href="./index.html">AppsImpl</a><br/>
+<br/>
+<h1>AppsImpl</h1>
+<code><span class="keyword">class </span><span class="identifier">AppsImpl</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-apps/index.html"><span class="identifier">Apps</span></a></code>
+<p>Default implementation of Apps interface.</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">AppsImpl</span><span class="symbol">(</span><span class="symbol">)</span></code>
+<p>Default implementation of Apps interface.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="target-app-launcher-package-name.html">targetAppLauncherPackageName</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">targetAppLauncherPackageName</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="target-app-package-name.html">targetAppPackageName</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">targetAppPackageName</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="install.html">install</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">install</span><span class="symbol">(</span><span class="identifier" id="com.kaspersky.kaspresso.device.apps.AppsImpl$install(kotlin.String)/apkPath">apkPath</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Installs an app via ADB.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="kill.html">kill</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">kill</span><span class="symbol">(</span><span class="identifier" id="com.kaspersky.kaspresso.device.apps.AppsImpl$kill(kotlin.String)/packageName">packageName</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="launch.html">launch</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">launch</span><span class="symbol">(</span><span class="identifier" id="com.kaspersky.kaspresso.device.apps.AppsImpl$launch(kotlin.String, android.net.Uri)/packageName">packageName</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.kaspersky.kaspresso.device.apps.AppsImpl$launch(kotlin.String, android.net.Uri)/data">data</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/net/Uri.html"><span class="identifier">Uri</span></a><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="open-recent.html">openRecent</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">openRecent</span><span class="symbol">(</span><span class="identifier" id="com.kaspersky.kaspresso.device.apps.AppsImpl$openRecent(kotlin.String)/contentDescription">contentDescription</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="open-url-in-chrome.html">openUrlInChrome</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">openUrlInChrome</span><span class="symbol">(</span><span class="identifier" id="com.kaspersky.kaspresso.device.apps.AppsImpl$openUrlInChrome(kotlin.String)/url">url</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="uninstall.html">uninstall</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">uninstall</span><span class="symbol">(</span><span class="identifier" id="com.kaspersky.kaspresso.device.apps.AppsImpl$uninstall(kotlin.String)/packageName">packageName</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Uninstalls an app via ADB.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="wait-for-app-launch-and-ready.html">waitForAppLaunchAndReady</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">waitForAppLaunchAndReady</span><span class="symbol">(</span><span class="identifier" id="com.kaspersky.kaspresso.device.apps.AppsImpl$waitForAppLaunchAndReady(kotlin.Long, kotlin.String)/timeout">timeout</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a><span class="symbol">, </span><span class="identifier" id="com.kaspersky.kaspresso.device.apps.AppsImpl$waitForAppLaunchAndReady(kotlin.Long, kotlin.String)/packageName">packageName</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="wait-for-launcher.html">waitForLauncher</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">waitForLauncher</span><span class="symbol">(</span><span class="identifier" id="com.kaspersky.kaspresso.device.apps.AppsImpl$waitForLauncher(kotlin.Long, kotlin.String)/timeout">timeout</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a><span class="symbol">, </span><span class="identifier" id="com.kaspersky.kaspresso.device.apps.AppsImpl$waitForLauncher(kotlin.Long, kotlin.String)/launcherPackageName">launcherPackageName</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

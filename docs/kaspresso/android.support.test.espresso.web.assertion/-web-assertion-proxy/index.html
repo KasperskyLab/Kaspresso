@@ -1,0 +1,50 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>WebAssertionProxy - kaspresso</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">kaspresso</a>&nbsp;/&nbsp;<a href="../index.html">android.support.test.espresso.web.assertion</a>&nbsp;/&nbsp;<a href="./index.html">WebAssertionProxy</a><br/>
+<br/>
+<h1>WebAssertionProxy</h1>
+<code><span class="keyword">class </span><span class="identifier">WebAssertionProxy</span><span class="symbol">&lt;</span><span class="identifier">E</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">WebAssertion</span><span class="symbol">&lt;</span><a href="index.html#E"><span class="identifier">E</span></a><span class="symbol">&gt;</span></code>
+<p>A proxy-wrapper of <a href="#">WebAssertion</a> for interceptors calls.</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">WebAssertionProxy</span><span class="symbol">(</span><span class="identifier" id="android.support.test.espresso.web.assertion.WebAssertionProxy$<init>(android.support.test.espresso.web.assertion.WebAssertion((android.support.test.espresso.web.assertion.WebAssertionProxy.E)), android.support.test.espresso.web.model.Atom((android.support.test.espresso.web.assertion.WebAssertionProxy.E)), org.hamcrest.Matcher((android.support.test.espresso.web.assertion.WebAssertionProxy.E)), kotlin.collections.List((com.kaspersky.kaspresso.interceptors.WebAssertionInterceptor)))/webAssertion">webAssertion</span><span class="symbol">:</span>&nbsp;<span class="identifier">WebAssertion</span><span class="symbol">&lt;</span><a href="index.html#E"><span class="identifier">E</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="android.support.test.espresso.web.assertion.WebAssertionProxy$<init>(android.support.test.espresso.web.assertion.WebAssertion((android.support.test.espresso.web.assertion.WebAssertionProxy.E)), android.support.test.espresso.web.model.Atom((android.support.test.espresso.web.assertion.WebAssertionProxy.E)), org.hamcrest.Matcher((android.support.test.espresso.web.assertion.WebAssertionProxy.E)), kotlin.collections.List((com.kaspersky.kaspresso.interceptors.WebAssertionInterceptor)))/atom">atom</span><span class="symbol">:</span>&nbsp;<span class="identifier">Atom</span><span class="symbol">&lt;</span><a href="index.html#E"><span class="identifier">E</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="android.support.test.espresso.web.assertion.WebAssertionProxy$<init>(android.support.test.espresso.web.assertion.WebAssertion((android.support.test.espresso.web.assertion.WebAssertionProxy.E)), android.support.test.espresso.web.model.Atom((android.support.test.espresso.web.assertion.WebAssertionProxy.E)), org.hamcrest.Matcher((android.support.test.espresso.web.assertion.WebAssertionProxy.E)), kotlin.collections.List((com.kaspersky.kaspresso.interceptors.WebAssertionInterceptor)))/matcher">matcher</span><span class="symbol">:</span>&nbsp;<span class="identifier">Matcher</span><span class="symbol">&lt;</span><a href="index.html#E"><span class="identifier">E</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="android.support.test.espresso.web.assertion.WebAssertionProxy$<init>(android.support.test.espresso.web.assertion.WebAssertion((android.support.test.espresso.web.assertion.WebAssertionProxy.E)), android.support.test.espresso.web.model.Atom((android.support.test.espresso.web.assertion.WebAssertionProxy.E)), org.hamcrest.Matcher((android.support.test.espresso.web.assertion.WebAssertionProxy.E)), kotlin.collections.List((com.kaspersky.kaspresso.interceptors.WebAssertionInterceptor)))/interceptors">interceptors</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../../com.kaspersky.kaspresso.interceptors/-web-assertion-interceptor/index.html"><span class="identifier">WebAssertionInterceptor</span></a><span class="symbol">&gt;</span><span class="symbol">)</span></code>
+<p>A proxy-wrapper of <a href="#">WebAssertion</a> for interceptors calls.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="check-result.html">checkResult</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">checkResult</span><span class="symbol">(</span><span class="identifier" id="android.support.test.espresso.web.assertion.WebAssertionProxy$checkResult(android.webkit.WebView, android.support.test.espresso.web.assertion.WebAssertionProxy.E)/view">view</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/webkit/WebView.html"><span class="identifier">WebView</span></a><span class="symbol">?</span><span class="symbol">, </span><span class="identifier" id="android.support.test.espresso.web.assertion.WebAssertionProxy$checkResult(android.webkit.WebView, android.support.test.espresso.web.assertion.WebAssertionProxy.E)/result">result</span><span class="symbol">:</span>&nbsp;<a href="index.html#E"><span class="identifier">E</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Calls interceptors before <a href="#">WebViewAssertions.ResultCheckingWebAssertion.checkResult</a> on wrapped <a href="#">webAssertion</a> is
+called.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="describe.html">describe</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">describe</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

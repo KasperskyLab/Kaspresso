@@ -1,0 +1,76 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>UiTestLogger - kaspresso</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">kaspresso</a>&nbsp;/&nbsp;<a href="../index.html">com.kaspersky.kaspresso.logger</a>&nbsp;/&nbsp;<a href="./index.html">UiTestLogger</a><br/>
+<br/>
+<h1>UiTestLogger</h1>
+<code><span class="keyword">interface </span><span class="identifier">UiTestLogger</span></code>
+<p>Base interface for all loggers used in Kaspresso.</p>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="d.html">d</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">d</span><span class="symbol">(</span><span class="identifier" id="com.kaspersky.kaspresso.logger.UiTestLogger$d(kotlin.String)/text">text</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Debug level of logging.</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">d</span><span class="symbol">(</span><span class="identifier" id="com.kaspersky.kaspresso.logger.UiTestLogger$d(kotlin.String, kotlin.String)/tag">tag</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.kaspersky.kaspresso.logger.UiTestLogger$d(kotlin.String, kotlin.String)/text">text</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Debug level of logging with tag.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="e.html">e</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">e</span><span class="symbol">(</span><span class="identifier" id="com.kaspersky.kaspresso.logger.UiTestLogger$e(kotlin.String)/text">text</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Error level of logging.</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">e</span><span class="symbol">(</span><span class="identifier" id="com.kaspersky.kaspresso.logger.UiTestLogger$e(kotlin.String, kotlin.String)/tag">tag</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.kaspersky.kaspresso.logger.UiTestLogger$e(kotlin.String, kotlin.String)/text">text</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Error level of logging with tag.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="i.html">i</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">i</span><span class="symbol">(</span><span class="identifier" id="com.kaspersky.kaspresso.logger.UiTestLogger$i(kotlin.String)/text">text</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Info level of logging.</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">i</span><span class="symbol">(</span><span class="identifier" id="com.kaspersky.kaspresso.logger.UiTestLogger$i(kotlin.String, kotlin.String)/tag">tag</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.kaspersky.kaspresso.logger.UiTestLogger$i(kotlin.String, kotlin.String)/text">text</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Info level of logging with tag.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../-k-logger/index.html">KLogger</a></p>
+</td>
+<td>
+<code><span class="keyword">object </span><span class="identifier">KLogger</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">UiTestLogger</span></a></code>
+<p>A singletone to provide access to external logger outside. Implements <a href="./index.html">UiTestLogger</a> interface and delegates all
+calls to wrapped implementation of <a href="./index.html">UiTestLogger</a>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="../-ui-test-logger-impl/index.html">UiTestLoggerImpl</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">UiTestLoggerImpl</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">UiTestLogger</span></a></code>
+<p>Default implementation of <a href="./index.html">UiTestLogger</a> using <a href="https://developer.android.com/reference/android/util/Log.html">android.util.Log</a>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>
