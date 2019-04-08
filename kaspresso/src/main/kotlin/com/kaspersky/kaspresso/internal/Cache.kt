@@ -1,7 +1,7 @@
 package com.kaspersky.kaspresso.internal
 
 import android.content.Context
-import com.kaspersky.kaspresso.attempting.attempt
+import com.kaspersky.kaspresso.flakysafety.attempt
 import org.hamcrest.Matchers
 import org.junit.Assert
 import java.io.File

@@ -1,4 +1,4 @@
-package com.kaspersky.kaspresso.attempting
+package com.kaspersky.kaspresso.flakysafety
 
 import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.logger.UiTestLogger
