@@ -1,0 +1,39 @@
+$dokka.format:gfm
+$dokka.linkExtension:md
+$dokka.location:android.support.test.espresso.assertion$describe(android.support.test.espresso.ViewAssertion)android.support.test.espresso.assertion/android.support.test.espresso.-view-assertion/describe.md
+$dokka.location:com.kaspersky.kaspresso.extensions.espressoext$describe(org.hamcrest.Matcher((android.view.View)))com.kaspersky.kaspresso.extensions.espressoext/org.hamcrest.-matcher/describe.md
+$dokka.location:com.kaspersky.kaspresso.extensions.kakaoext$getText(com.kaspersky.klkakao.text.TextViewActions)com.kaspersky.kaspresso.extensions.kakaoext/com.kaspersky.klkakao.text.-text-view-actions/get-text.md
+$dokka.location:com.kaspersky.kaspresso.extensions.kakaoext$methodName#kotlin.Function1((com.kaspersky.kaspresso.extensions.kakaoext.methodName.T, kotlin.Unit))com.kaspersky.kaspresso.extensions.kakaoext/kotlin.-function1/method-name.md
+$dokka.location:com.kaspersky.kaspresso.extensions.other$describe(android.view.View)com.kaspersky.kaspresso.extensions.other/android.view.-view/describe.md
+$dokka.location:com.kaspersky.kaspresso.extensions.other$getStackTraceAsString(kotlin.Throwable)com.kaspersky.kaspresso.extensions.other/kotlin.-throwable/get-stack-trace-as-string.md
+$dokka.location:com.kaspersky.kaspresso.extensions.other$isDisplayed(android.view.View)com.kaspersky.kaspresso.extensions.other/android.view.-view/is-displayed.md
+android.support.test.espresso.assertion
+android.support.test.espresso.web.assertion
+com.kaspersky.kaspresso.configurator
+com.kaspersky.kaspresso.delegates
+com.kaspersky.kaspresso.device
+com.kaspersky.kaspresso.device.accessibility
+com.kaspersky.kaspresso.device.activities
+com.kaspersky.kaspresso.device.apps
+com.kaspersky.kaspresso.device.exploit
+com.kaspersky.kaspresso.device.files
+com.kaspersky.kaspresso.device.internet
+com.kaspersky.kaspresso.device.permissions
+com.kaspersky.kaspresso.device.screenshots
+com.kaspersky.kaspresso.device.server
+com.kaspersky.kaspresso.extensions.espressoext
+com.kaspersky.kaspresso.extensions.kakaoext
+com.kaspersky.kaspresso.extensions.other
+com.kaspersky.kaspresso.extensions.spoonext
+com.kaspersky.kaspresso.flakysafety
+com.kaspersky.kaspresso.interceptors
+com.kaspersky.kaspresso.interceptors.impl.flakysafety
+com.kaspersky.kaspresso.interceptors.impl.logging
+com.kaspersky.kaspresso.kviews
+com.kaspersky.kaspresso.logger
+com.kaspersky.kaspresso.matchers.canscroll
+com.kaspersky.kaspresso.proxy
+com.kaspersky.kaspresso.testcases
+com.kaspersky.kaspresso.testcases.runners
+com.kaspersky.kaspresso.viewactions.orientation
+com.kaspersky.kaspresso.viewactions.scroll

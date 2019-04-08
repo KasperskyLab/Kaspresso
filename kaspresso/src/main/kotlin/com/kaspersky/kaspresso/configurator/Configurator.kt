@@ -1,5 +1,6 @@
 package com.kaspersky.kaspresso.configurator
 
+import android.support.test.espresso.Espresso
 import android.support.test.espresso.NoMatchingViewException
 import android.support.test.espresso.PerformException
 import com.kaspersky.kaspresso.delegates.DataInteractionDelegateImpl
@@ -36,7 +37,7 @@ import com.kaspersky.klkakao.configurator.KakaoConfigurator
 object Configurator {
 
     private const val DEFAULT_ATTEMPTS_TIMEOUT_MS: Long = 2_000L
-    private const val DEFAULT_ATTEMPTS_FREQUENCY_MS: Long = 500L
+    private const val DEFAULT_ATTEMPTS_INTERVAL_MS: Long = 500L
 
     private const val DEFAULT_INNER_LOGGER_TAG: String = "UI_TESTING"
     private const val DEFAULT_OUTER_LOGGER_TAG: String = "UI_TESTING_SPECIAL"
@@ -49,55 +50,63 @@ object Configurator {
     /**
      * A frequency of action attempts in milliseconds.
      */
-    internal var attemptsFrequencyMs: Long = DEFAULT_ATTEMPTS_FREQUENCY_MS
+    internal var attemptsIntervalMs: Long = DEFAULT_ATTEMPTS_INTERVAL_MS
 
     /**
-     * An implementation of [UiTestLogger] for inner framework usage. Not accessible from outside.
+     * Holds an implementation of [UiTestLogger] interface for inner framework usage. Not accessible from outside.
      */
     internal var logger: UiTestLogger = UiTestLoggerImpl(DEFAULT_INNER_LOGGER_TAG)
 
     /**
-     * An implementation of [UiTestLogger] for external usage.
+     * Holds an implementation of [UiTestLogger] interface for external usage.
      */
     internal var externalLogger: UiTestLogger = UiTestLoggerImpl(DEFAULT_OUTER_LOGGER_TAG)
 
     /**
-     * An interface of applications manager.
+     * Holds an implementation of [Apps] interface. If it was not specified in [Configurator.Builder], the default
+     * implementation is used.
      */
     internal var apps: Apps = AppsImpl()
 
     /**
-     * An interface of activities manager.
+     * Holds an implementation of [Activities] interface. If it was not specified in [Configurator.Builder], the default
+     * implementation is used.
      */
     internal var activities: Activities = ActivitiesImpl()
 
     /**
-     * An interface of files manager.
+     * Holds an implementation of [Files] interface. If it was not specified in [Configurator.Builder], the default
+     * implementation is used.
      */
     internal var files: Files = FilesImpl()
 
     /**
-     * An interface of internet manager.
+     * Holds an implementation of [Internet] interface. If it was not specified in [Configurator.Builder], the default
+     * implementation is used.
      */
     internal var internet: Internet = InternetImpl()
 
     /**
-     * An interface of screenshots manager.
+     * Holds an implementation of [Screenshots] interface. If it was not specified in [Configurator.Builder], the
+     * default implementation is used.
      */
     internal var screenshots: Screenshots = ScreenshotsImpl()
 
     /**
-     * An interface of accessibility manager.
+     * Holds an implementation of [Accessibility] interface. If it was not specified in [Configurator.Builder], the
+     * default implementation is used.
      */
     internal var accessibility: Accessibility = AccessibilityImpl()
 
     /**
-     * An interface of permissions manager.
+     * Holds an implementation of [Permissions] interface. If it was not specified in [Configurator.Builder], the
+     * default implementation is used.
      */
     internal var permissions: Permissions = PermissionsImpl()
 
     /**
-     * An interface of exploitation manager.
+     * Holds an implementation of [Exploit] interface. If it was not specified in [Configurator.Builder], the default
+     * implementation is used.
      */
     internal var exploit: Exploit = ExploitImpl()
 
@@ -141,12 +150,6 @@ object Configurator {
     internal var executingInterceptor: ExecutingInterceptor? = null
 
     /**
-     * An interceptor that is called on failures. It's [FailureInterceptor.interceptAndThrow] method is being provided
-     * as a [android.support.test.espresso.FailureHandler].
-     */
-    internal var failureInterceptor: FailureInterceptor? = null
-
-    /**
      * A class for [Configurator] initialization. The right way to change [Configurator] settings is to use [Builder].
      */
     class Builder {
@@ -169,7 +172,7 @@ object Configurator {
         }
 
         var attemptsTimeoutMs: Long = DEFAULT_ATTEMPTS_TIMEOUT_MS
-        var attemptsFrequencyMs: Long = DEFAULT_ATTEMPTS_FREQUENCY_MS
+        var attemptsIntervalMs: Long = DEFAULT_ATTEMPTS_INTERVAL_MS
 
         var logger: UiTestLogger = UiTestLoggerImpl(DEFAULT_INNER_LOGGER_TAG)
         var externalLogger: UiTestLogger = UiTestLoggerImpl(DEFAULT_OUTER_LOGGER_TAG)
@@ -195,6 +198,11 @@ object Configurator {
         var webAssertionInterceptors: List<WebAssertionInterceptor> = emptyList()
 
         var executingInterceptor: ExecutingInterceptor? = null
+
+        /**
+         * An interceptor that is called on failures. It's [FailureInterceptor.interceptAndThrow] method is being
+         * provide as the default [android.support.test.espresso.FailureHandler].
+         */
         var failureInterceptor: FailureInterceptor? = null
 
         /**
@@ -211,7 +219,7 @@ object Configurator {
             }
 
             Configurator.attemptsTimeoutMs = attemptsTimeoutMs
-            Configurator.attemptsFrequencyMs = attemptsFrequencyMs
+            Configurator.attemptsIntervalMs = attemptsIntervalMs
 
             Configurator.logger = logger
             Configurator.externalLogger = externalLogger
@@ -233,7 +241,8 @@ object Configurator {
             Configurator.webAssertionInterceptors = webAssertionInterceptors
 
             Configurator.executingInterceptor = executingInterceptor
-            Configurator.failureInterceptor = failureInterceptor
+
+            failureInterceptor?.let { Espresso.setFailureHandler(it::interceptAndThrow) }
         }
     }
 }

@@ -1,12 +1,16 @@
 package com.kaspersky.kaspresso.testcases
 
-import com.kaspersky.kaspresso.testcases.scenarios.Scenario
-import com.kaspersky.kaspresso.testcases.scenarios.SubCaseScenario
+import com.kaspersky.kaspresso.testcases.runners.SubCaseRunner
 
 /**
  * A base class for all subcases. A representation of some repeating scenario inside the [TestCase].
  */
-abstract class SubCase : ScenarioRunner {
+abstract class SubCase {
+
+    /**
+     * An instance of [SubCaseRunner] to run [steps] on.
+     */
+    private val runner = SubCaseRunner(javaClass.simpleName)
 
     /**
      * Steps to run. Need to be implemented in derived [SubCase].
@@ -14,15 +18,7 @@ abstract class SubCase : ScenarioRunner {
     protected abstract val steps: Scenario.() -> Unit
 
     /**
-     * Runs [steps]. Called from outside to run prepared derived [SubCase].
+     * Runs [steps] on [SubCaseRunner]. Called from outside to execute prepared derived [SubCase].
      */
-    fun run() = runSteps(steps)
-
-    /**
-     * An implementation of [ScenarioRunner]'s [runSteps] method. Called by [run] with [steps] as
-     * an argument.
-     */
-    final override fun runSteps(steps: Scenario.() -> Unit) {
-        steps.invoke(SubCaseScenario(javaClass.simpleName))
-    }
+    fun run() = runner.runSteps(steps)
 }

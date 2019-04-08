@@ -6,6 +6,7 @@ import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.device.Device
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.extensions.other.getStackTraceAsString
+import com.kaspersky.kaspresso.flakysafety.wait
 
 /**
  * An implementation of Permissions interface.
@@ -19,14 +20,14 @@ class PermissionsImpl : Permissions {
     private val logger: UiTestLogger = Configurator.logger
 
     /**
-     * Passes the permission-requesting permissions dialog and allows permissions.
+     * Waits for 1 sec, passes the permission-requesting permissions dialog and allows permissions.
      */
-    override fun allowViaDialog() = handlePermissionRequest(shouldAllowPermissions = true)
+    override fun allowViaDialog() = wait(timeoutMs = 1_000) { handlePermissionRequest(shouldAllowPermissions = true) }
 
     /**
-     * Passes the permission-requesting permissions dialog and denies permissions.
+     * Waits for 1 sec, passes the permission-requesting permissions dialog and denies permissions.
      */
-    override fun denyViaDialog() = handlePermissionRequest(shouldAllowPermissions = false)
+    override fun denyViaDialog() = wait(timeoutMs = 1_000) { handlePermissionRequest(shouldAllowPermissions = false) }
 
     /**
      * Passes the permission-requesting permissions dialog.
