@@ -7,4 +7,5 @@
 | Name | Summary |
 |---|---|
 | [android.view.View](android.view.-view/index.md) |  |
+| [java.io.File](java.io.-file/index.md) |  |
 | [kotlin.Throwable](kotlin.-throwable/index.md) |  |

@@ -19,3 +19,9 @@ exception caused by re-initialization of the [Configurator](../../com.kaspersky.
 | Name | Summary |
 |---|---|
 | [beforeTest](before-test.md) | `fun beforeTest(actions: () -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`AfterTestSection`](../-after-test-section/index.md)<br>Starts the building a test, sets the [BeforeTestSection](../-before-test-section/index.md) actions and returns an existing instance of [AfterTestSection](../-after-test-section/index.md) to continue building a test. |
+
+### Inheritors
+
+| Name | Summary |
+|---|---|
+| [DocLocScreenshotTestCase](../../com.kaspersky.kaspresso.device.screenshots.docloc/-doc-loc-screenshot-test-case/index.md) | `abstract class DocLocScreenshotTestCase : `[`TestCase`](./index.md)<br>Base class for all docloc screenshot tests. |

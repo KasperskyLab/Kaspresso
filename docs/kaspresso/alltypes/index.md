@@ -4,6 +4,7 @@
 
 | Name | Summary |
 |---|---|
+| [com.kaspersky.kaspresso.annotations.Acceptance](../com.kaspersky.kaspresso.annotations/-acceptance/index.md) |  |
 | [com.kaspersky.kaspresso.device.accessibility.Accessibility](../com.kaspersky.kaspresso.device.accessibility/-accessibility/index.md) | An interface to work with accessibility. |
 | [com.kaspersky.kaspresso.device.accessibility.AccessibilityImpl](../com.kaspersky.kaspresso.device.accessibility/-accessibility-impl/index.md) | An implementation of Accessibility interface. |
 | [com.kaspersky.kaspresso.device.activities.Activities](../com.kaspersky.kaspresso.device.activities/-activities/index.md) | An interface to work with activities. |
@@ -18,20 +19,27 @@
 | [com.kaspersky.kaspresso.matchers.canscroll.CanScrollMatcher](../com.kaspersky.kaspresso.matchers.canscroll/-can-scroll-matcher/index.md) | An implementation of [BaseMatcher](#) that answers if [View](https://developer.android.com/reference/android/view/View.html) can be scrolled vertically. |
 | [com.kaspersky.kaspresso.configurator.Configurator](../com.kaspersky.kaspresso.configurator/-configurator/index.md) | An object that keeps all settings. |
 | [com.kaspersky.kaspresso.delegates.DataInteractionDelegateImpl](../com.kaspersky.kaspresso.delegates/-data-interaction-delegate-impl/index.md) | An implementation of [DataInteractionDelegate](#), that delegates the [DataInteraction](#)'s interface calls to [ViewAssertionProxy](../com.kaspersky.kaspresso.proxy/-view-assertion-proxy/index.md). |
+| [com.kaspersky.kaspresso.annotations.Develop](../com.kaspersky.kaspresso.annotations/-develop/index.md) |  |
 | [com.kaspersky.kaspresso.device.Device](../com.kaspersky.kaspresso.device/-device/index.md) | A provider of managers for all off-screen work. |
+| [com.kaspersky.kaspresso.device.screenshots.docloc.DocLocScreenshotTestCase](../com.kaspersky.kaspresso.device.screenshots.docloc/-doc-loc-screenshot-test-case/index.md) | Base class for all docloc screenshot tests. |
+| [com.kaspersky.kaspresso.annotations.E2e](../com.kaspersky.kaspresso.annotations/-e2e/index.md) |  |
+| [com.kaspersky.kaspresso.annotations.E2eFast](../com.kaspersky.kaspresso.annotations/-e2e-fast/index.md) |  |
 | [com.kaspersky.kaspresso.interceptors.ExecutingInterceptor](../com.kaspersky.kaspresso.interceptors/-executing-interceptor/index.md) | An interface for all executing interceptors, actually manages the execution of actions or assertions. |
 | [com.kaspersky.kaspresso.device.exploit.Exploit](../com.kaspersky.kaspresso.device.exploit/-exploit/index.md) | An interface for exploitation. |
 | [com.kaspersky.kaspresso.device.exploit.ExploitImpl](../com.kaspersky.kaspresso.device.exploit/-exploit-impl/index.md) | An implementation of Exploit interface. |
 | [com.kaspersky.kaspresso.interceptors.FailureInterceptor](../com.kaspersky.kaspresso.interceptors/-failure-interceptor/index.md) | An interface for all failure interceptors, called on failures. |
+| [java.io.File](../com.kaspersky.kaspresso.extensions.other/java.io.-file/index.md) (extensions in package com.kaspersky.kaspresso.extensions.other) |  |
 | [com.kaspersky.kaspresso.device.files.Files](../com.kaspersky.kaspresso.device.files/-files/index.md) | An interface to work with file permissions. |
 | [com.kaspersky.kaspresso.device.files.FilesImpl](../com.kaspersky.kaspresso.device.files/-files-impl/index.md) | Default implementation of Files interface. |
 | [com.kaspersky.kaspresso.interceptors.impl.flakysafety.FlakySafeExecutingInterceptor](../com.kaspersky.kaspresso.interceptors.impl.flakysafety/-flaky-safe-executing-interceptor/index.md) | An implementation of [ExecutingInterceptor](../com.kaspersky.kaspresso.interceptors/-executing-interceptor/index.md) that performs multiple attempts to execute an action or an assertion to provide flaky safety. |
 | [kotlin.Function1](../com.kaspersky.kaspresso.extensions.kakaoext/kotlin.-function1/index.md) (extensions in package com.kaspersky.kaspresso.extensions.kakaoext) |  |
+| [com.kaspersky.kaspresso.annotations.Functional](../com.kaspersky.kaspresso.annotations/-functional/index.md) |  |
 | [com.kaspersky.kaspresso.device.internet.Internet](../com.kaspersky.kaspresso.device.internet/-internet/index.md) | An interface to work with internet settings. |
 | [com.kaspersky.kaspresso.device.internet.InternetImpl](../com.kaspersky.kaspresso.device.internet/-internet-impl/index.md) | Default implementation of Internet interface. |
 | [com.kaspersky.kaspresso.logger.KLogger](../com.kaspersky.kaspresso.logger/-k-logger/index.md) | A singletone to provide access to external logger outside. Implements [UiTestLogger](../com.kaspersky.kaspresso.logger/-ui-test-logger/index.md) interface and delegates all calls to wrapped implementation of [UiTestLogger](../com.kaspersky.kaspresso.logger/-ui-test-logger/index.md). |
 | [com.kaspersky.kaspresso.kviews.KScreen](../com.kaspersky.kaspresso.kviews/-k-screen/index.md) | An extension of [com.kaspersky.klkakao.screen.Screen](#). |
 | [com.kaspersky.kaspresso.kviews.KSwitch](../com.kaspersky.kaspresso.kviews/-k-switch/index.md) | View with [CheckableActions](#) and [CheckableAssertions](#). |
+| [com.kaspersky.kaspresso.rule.LocaleRule](../com.kaspersky.kaspresso.rule/-locale-rule/index.md) | Test rule to switch locales |
 | [com.kaspersky.kaspresso.interceptors.impl.logging.LoggingAtomInterceptor](../com.kaspersky.kaspresso.interceptors.impl.logging/-logging-atom-interceptor/index.md) | An implementation of [AtomInterceptor](../com.kaspersky.kaspresso.interceptors/-atom-interceptor/index.md) that logs info about web action. |
 | [com.kaspersky.kaspresso.interceptors.impl.logging.LoggingFailureInterceptor](../com.kaspersky.kaspresso.interceptors.impl.logging/-logging-failure-interceptor/index.md) | An implementation of [FailureInterceptor](../com.kaspersky.kaspresso.interceptors/-failure-interceptor/index.md) that logs rich description of failure. |
 | [com.kaspersky.kaspresso.interceptors.impl.logging.LoggingViewActionInterceptor](../com.kaspersky.kaspresso.interceptors.impl.logging/-logging-view-action-interceptor/index.md) | An implementation of [ViewActionInterceptor](../com.kaspersky.kaspresso.interceptors/-view-action-interceptor/index.md) that logs info about [ViewAction](#). |
@@ -42,8 +50,11 @@
 | [com.kaspersky.kaspresso.viewactions.orientation.OrientationChangeAction](../com.kaspersky.kaspresso.viewactions.orientation/-orientation-change-action/index.md) | An implementation of device's orientation change. |
 | [com.kaspersky.kaspresso.device.permissions.Permissions](../com.kaspersky.kaspresso.device.permissions/-permissions/index.md) | An interface to work with permissions. |
 | [com.kaspersky.kaspresso.device.permissions.PermissionsImpl](../com.kaspersky.kaspresso.device.permissions/-permissions-impl/index.md) | An implementation of Permissions interface. |
+| [com.kaspersky.kaspresso.annotations.Production](../com.kaspersky.kaspresso.annotations/-production/index.md) |  |
+| [com.kaspersky.kaspresso.annotations.Regression](../com.kaspersky.kaspresso.annotations/-regression/index.md) |  |
 | [com.kaspersky.kaspresso.testcases.Scenario](../com.kaspersky.kaspresso.testcases/-scenario/index.md) | A representation of a sequence of test's actions. |
 | [com.kaspersky.kaspresso.testcases.runners.ScenarioRunner](../com.kaspersky.kaspresso.testcases.runners/-scenario-runner/index.md) | An interface to run [Scenario](../com.kaspersky.kaspresso.testcases/-scenario/index.md)'s steps. |
+| [com.kaspersky.kaspresso.annotations.ScreenShooterTest](../com.kaspersky.kaspresso.annotations/-screen-shooter-test/index.md) |  |
 | [com.kaspersky.kaspresso.device.screenshots.Screenshots](../com.kaspersky.kaspresso.device.screenshots/-screenshots/index.md) | An interface to make screenshots. |
 | [com.kaspersky.kaspresso.device.screenshots.ScreenshotsImpl](../com.kaspersky.kaspresso.device.screenshots/-screenshots-impl/index.md) | Default implementation of Screenshots interface. |
 | [com.kaspersky.kaspresso.matchers.canscroll.ScrollDirection](../com.kaspersky.kaspresso.matchers.canscroll/-scroll-direction/index.md) |  |
@@ -52,9 +63,10 @@
 | [com.kaspersky.kaspresso.testcases.runners.SubCaseRunner](../com.kaspersky.kaspresso.testcases.runners/-sub-case-runner/index.md) | An implementation of [ScenarioRunner](../com.kaspersky.kaspresso.testcases.runners/-scenario-runner/index.md) for [SubCase](../com.kaspersky.kaspresso.testcases/-sub-case/index.md)'s usage. |
 | [com.kaspersky.kaspresso.testcases.TestCase](../com.kaspersky.kaspresso.testcases/-test-case/index.md) | A base class for all test cases. Extend this class with a single base project-wide inheritor of [TestCase](../com.kaspersky.kaspresso.testcases/-test-case/index.md) as a parent for all actual project-wide test cases. Nesting test cases are not permitted because they may produce an exception caused by re-initialization of the [Configurator](../com.kaspersky.kaspresso.configurator/-configurator/index.md), use [Scenario](../com.kaspersky.kaspresso.testcases/-scenario/index.md) instead. |
 | [com.kaspersky.kaspresso.testcases.runners.TestCaseRunner](../com.kaspersky.kaspresso.testcases.runners/-test-case-runner/index.md) | An implementation of [ScenarioRunner](../com.kaspersky.kaspresso.testcases.runners/-scenario-runner/index.md) for [TestCase](../com.kaspersky.kaspresso.testcases/-test-case/index.md)'s usage. |
+| [com.kaspersky.kaspresso.rule.TestFailRule](../com.kaspersky.kaspresso.rule/-test-fail-rule/index.md) | Test rule to capture a screenshot in case of unexpected docloc screenshot test failure |
 | [com.kaspersky.klkakao.text.TextViewActions](../com.kaspersky.kaspresso.extensions.kakaoext/com.kaspersky.klkakao.text.-text-view-actions/index.md) (extensions in package com.kaspersky.kaspresso.extensions.kakaoext) |  |
 | [kotlin.Throwable](../com.kaspersky.kaspresso.extensions.other/kotlin.-throwable/index.md) (extensions in package com.kaspersky.kaspresso.extensions.other) |  |
-| [com.kaspersky.kaspresso.extensions.spoonext.UiAutomatorSpoon](../com.kaspersky.kaspresso.extensions.spoonext/-ui-automator-spoon/index.md) | Utility class for capturing spoon-compatible screenshots by uiautomator. |
+| [com.kaspersky.kaspresso.extensions.spoonext.UiAutomatorSpoon](../com.kaspersky.kaspresso.extensions.spoonext/-ui-automator-spoon/index.md) | Class for capturing spoon-compatible screenshots by uiautomator. |
 | [com.kaspersky.kaspresso.logger.UiTestLogger](../com.kaspersky.kaspresso.logger/-ui-test-logger/index.md) | Base interface for all loggers used in Kaspresso. |
 | [com.kaspersky.kaspresso.logger.UiTestLoggerImpl](../com.kaspersky.kaspresso.logger/-ui-test-logger-impl/index.md) | Default implementation of [UiTestLogger](../com.kaspersky.kaspresso.logger/-ui-test-logger/index.md) using [android.util.Log](https://developer.android.com/reference/android/util/Log.html). |
 | [android.view.View](../com.kaspersky.kaspresso.extensions.other/android.view.-view/index.md) (extensions in package com.kaspersky.kaspresso.extensions.other) |  |

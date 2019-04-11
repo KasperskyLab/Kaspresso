@@ -7,8 +7,10 @@ $dokka.location:com.kaspersky.kaspresso.extensions.kakaoext$methodName#kotlin.Fu
 $dokka.location:com.kaspersky.kaspresso.extensions.other$describe(android.view.View)com.kaspersky.kaspresso.extensions.other/android.view.-view/describe.md
 $dokka.location:com.kaspersky.kaspresso.extensions.other$getStackTraceAsString(kotlin.Throwable)com.kaspersky.kaspresso.extensions.other/kotlin.-throwable/get-stack-trace-as-string.md
 $dokka.location:com.kaspersky.kaspresso.extensions.other$isDisplayed(android.view.View)com.kaspersky.kaspresso.extensions.other/android.view.-view/is-displayed.md
+$dokka.location:com.kaspersky.kaspresso.extensions.other$safeWrite(java.io.File, kotlin.String)com.kaspersky.kaspresso.extensions.other/java.io.-file/safe-write.md
 android.support.test.espresso.assertion
 android.support.test.espresso.web.assertion
+com.kaspersky.kaspresso.annotations
 com.kaspersky.kaspresso.configurator
 com.kaspersky.kaspresso.delegates
 com.kaspersky.kaspresso.device
@@ -20,6 +22,7 @@ com.kaspersky.kaspresso.device.files
 com.kaspersky.kaspresso.device.internet
 com.kaspersky.kaspresso.device.permissions
 com.kaspersky.kaspresso.device.screenshots
+com.kaspersky.kaspresso.device.screenshots.docloc
 com.kaspersky.kaspresso.device.server
 com.kaspersky.kaspresso.extensions.espressoext
 com.kaspersky.kaspresso.extensions.kakaoext
@@ -33,6 +36,7 @@ com.kaspersky.kaspresso.kviews
 com.kaspersky.kaspresso.logger
 com.kaspersky.kaspresso.matchers.canscroll
 com.kaspersky.kaspresso.proxy
+com.kaspersky.kaspresso.rule
 com.kaspersky.kaspresso.testcases
 com.kaspersky.kaspresso.testcases.runners
 com.kaspersky.kaspresso.viewactions.orientation

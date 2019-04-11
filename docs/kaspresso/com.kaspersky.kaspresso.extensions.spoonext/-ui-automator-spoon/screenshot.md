@@ -27,3 +27,19 @@ the traditional manner.
 **Return**
 the image file that was created
 
+`fun screenshot(name: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, screenshotDirectory: `[`File`](https://developer.android.com/reference/java/io/File.html)`): `[`File`](https://developer.android.com/reference/java/io/File.html)
+
+Takes a screenshot with the specified name. This version allows the caller to manually specify
+the output directory.  This is necessary when the screenshot is not called in
+the traditional manner.
+.
+
+### Parameters
+
+`name` - Unique name to further identify the screenshot. Must match [a-zA-Z0-9_-](#)+.
+
+`screenshotDirectory` - Output directory, which will be resolved with the [screenshotDir](#)
+
+**Return**
+the image file that was created
+
