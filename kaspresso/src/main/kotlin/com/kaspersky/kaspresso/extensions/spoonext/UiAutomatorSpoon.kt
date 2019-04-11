@@ -8,41 +8,43 @@ import android.os.Environment.getExternalStorageDirectory
 import android.support.test.InstrumentationRegistry
 import android.support.test.uiautomator.UiDevice
 import com.kaspersky.kaspresso.configurator.Configurator
-import com.kaspersky.kaspresso.extensions.spoonext.Chmod.Companion.chmodPlusR
 import com.kaspersky.kaspresso.extensions.spoonext.Chmod.Companion.chmodPlusRWX
-import java.io.*
+import java.io.File
+import java.io.IOException
 import java.util.*
 import java.util.regex.Pattern
 
 /**
- * Utility class for capturing spoon-compatible screenshots by uiautomator.
+ * Class for capturing spoon-compatible screenshots by uiautomator.
  */
-object UiAutomatorSpoon {
+class UiAutomatorSpoon(
+    private val screenshotDir: File
+) {
 
-    private const val SPOON_SCREENSHOTS = "spoon-screenshots"
-    private const val SPOON_FILES = "spoon-files"
+    companion object {
 
-    private const val NAME_SEPARATOR = "_"
+        private const val NAME_SEPARATOR = "_"
 
-    private const val TEST_CASE_CLASS_JUNIT_3 = "android.test.InstrumentationTestCase"
-    private const val TEST_CASE_METHOD_JUNIT_3 = "runMethod"
+        private const val TEST_CASE_CLASS_JUNIT_3 = "android.test.InstrumentationTestCase"
+        private const val TEST_CASE_METHOD_JUNIT_3 = "runMethod"
 
-    private const val TEST_CASE_CLASS_JUNIT_4 = "org.junit.runners.model.FrameworkMethod$1"
-    private const val TEST_CASE_METHOD_JUNIT_4 = "runReflectiveCall"
+        private const val TEST_CASE_CLASS_JUNIT_4 = "org.junit.runners.model.FrameworkMethod$1"
+        private const val TEST_CASE_METHOD_JUNIT_4 = "runReflectiveCall"
 
-    private const val TEST_CASE_CLASS_CUCUMBER_JVM = "cucumber.runtime.model.CucumberFeature"
-    private const val TEST_CASE_METHOD_CUCUMBER_JVM = "run"
+        private const val TEST_CASE_CLASS_CUCUMBER_JVM = "cucumber.runtime.model.CucumberFeature"
+        private const val TEST_CASE_METHOD_CUCUMBER_JVM = "run"
 
-    private const val EXTENSION = ".png"
-    private const val TAG = "UiAutomatorSpoon"
+        private const val EXTENSION = ".png"
+        private const val TAG = "UiAutomatorSpoon"
 
-    private val LOCK = Any()
-    private val TAG_VALIDATION = Pattern.compile("[a-zA-Z0-9_-]+")
+        private val LOCK = Any()
+        private val TAG_VALIDATION = Pattern.compile("[a-zA-Z0-9_-]+")
+    }
 
     /**
      * Holds a set of directories that have been cleared for this test.
      */
-    private val clearedOutputDirectories = HashSet<String>()
+    private val clearedOutputDirectories = HashSet<File>()
 
     private val logger by lazy { Configurator.logger }
 
@@ -74,10 +76,7 @@ object UiAutomatorSpoon {
         tag: String, testClassName: String,
         testMethodName: String
     ): File {
-        if (!TAG_VALIDATION.matcher(tag).matches()) {
-            throw IllegalArgumentException("Tag must match " + TAG_VALIDATION.pattern() + ".")
-        }
-
+        validateScreenshotTag(tag)
         try {
             val screenshotDirectory =
                 obtainScreenshotDirectory(
@@ -87,7 +86,7 @@ object UiAutomatorSpoon {
                 )
 
             val screenshotName = System.currentTimeMillis().toString() + NAME_SEPARATOR + tag + EXTENSION
-            val screenshotFile = File(screenshotDirectory, screenshotName)
+            val screenshotFile = screenshotDirectory.resolve(screenshotName)
 
             takeScreenshot(screenshotFile)
 
@@ -95,6 +94,34 @@ object UiAutomatorSpoon {
             return screenshotFile
         } catch (e: Exception) {
             throw RuntimeException("Unable to capture screenshot.", e)
+        }
+    }
+
+    /**
+     * Takes a screenshot with the specified name. This version allows the caller to manually specify
+     * the output directory.  This is necessary when the screenshot is not called in
+     * the traditional manner.
+     *.
+     * @param name Unique name to further identify the screenshot. Must match [a-zA-Z0-9_-]+.
+     * @param screenshotDirectory Output directory, which will be resolved with the [screenshotDir]
+     * @return the image file that was created
+     */
+    fun screenshot(name: String, screenshotDirectory: File): File {
+        validateScreenshotTag(name)
+        val screenshotFile = screenshotDirectory.resolve(name + EXTENSION)
+        try {
+            createDir(screenshotDirectory)
+            takeScreenshot(screenshotFile)
+            logger.d(TAG, "Captured screenshot '$name'.")
+            return screenshotFile
+        } catch (e: Exception) {
+            throw RuntimeException("Unable to capture screenshot.", e)
+        }
+    }
+
+    private fun validateScreenshotTag(tag: String) {
+        if (!TAG_VALIDATION.matcher(tag).matches()) {
+            throw IllegalArgumentException("Tag must match " + TAG_VALIDATION.pattern() + ". : $tag")
         }
     }
 
@@ -110,40 +137,9 @@ object UiAutomatorSpoon {
     ): File {
         return filesDirectory(
             context,
-            SPOON_SCREENSHOTS,
             testClassName,
             testMethodName
         )
-    }
-
-    /**
-     * Alternative to [.save]
-     * @param context Context used to access files.
-     * @param path Path to the file you want to save.
-     * @return the copy that was created.
-     */
-    @Suppress("UNUSED")
-    fun save(context: Context, path: String): File {
-        return save(context, File(path))
-    }
-
-    /**
-     * Save a file from this test run. The file will be saved under the current class & method.
-     * The file will be copied to, so make sure all the data you want have been
-     * written to the file before calling save.
-     *
-     * @param context Context used to access files.
-     * @param file The file to save.
-     * @return the copy that was created.
-     */
-    @Suppress("WEAKER_ACCESS", "UNUSED")
-    fun save(context: Context, file: File): File {
-        val testClass =
-            findTestClassTraceElement(Thread.currentThread().stackTrace)
-        val className = testClass.className.replace("[^A-Za-z0-9._-]".toRegex(), "_")
-        val methodName = testClass.methodName
-
-        return save(context, className, methodName, file)
     }
 
     /**
@@ -151,19 +147,8 @@ object UiAutomatorSpoon {
      */
     @Throws(IOException::class)
     @Suppress("UNUSED")
-    fun clearScreenshotsFolder(): Boolean =
-        clearFolder(SPOON_SCREENSHOTS)
-
-    @SuppressLint("WorldReadableFiles")
-    @Throws(IOException::class)
-    private fun clearFolder(directoryType: String): Boolean {
-        val directory: File = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            // Use external storage.
-            File(getExternalStorageDirectory(), "app_$directoryType")
-        } else {
-            // Use internal storage.
-            InstrumentationRegistry.getTargetContext().getDir(directoryType, MODE_WORLD_READABLE)
-        }
+    fun clearScreenshotsFolder(): Boolean {
+        val directory: File = getDeviceDirectory(InstrumentationRegistry.getTargetContext())
         return if (directory.exists()) {
             directory.deleteRecursively()
         } else {
@@ -171,80 +156,36 @@ object UiAutomatorSpoon {
         }
     }
 
-    private fun save(context: Context, className: String, methodName: String, file: File): File {
-        var filesDirectory: File? = null
-
-        try {
-            filesDirectory = filesDirectory(
-                context,
-                SPOON_FILES,
-                className,
-                methodName
-            )
-
-            if (!file.exists()) {
-                throw RuntimeException("Can't find any file at: $file")
-            }
-
-            val target = File(filesDirectory, file.name)
-            copy(file, target)
-
-            logger.d(TAG, "Saved $file")
-            return target
-        } catch (e: IllegalAccessException) {
-            throw RuntimeException("Unable to save file: $file")
-        } catch (e: IOException) {
-            throw RuntimeException("Couldn't copy file $file to $filesDirectory")
-        }
-    }
-
-    @Throws(IOException::class)
-    private fun copy(source: File, target: File) {
-        logger.d(TAG, "Will copy $source to $target")
-
-        target.createNewFile()
-        chmodPlusR(target)
-
-        val `is` = BufferedInputStream(FileInputStream(source))
-        val os = BufferedOutputStream(FileOutputStream(target))
-        val buffer = ByteArray(4096)
-
-        while (`is`.read(buffer) > 0) {
-            os.write(buffer)
-        }
-
-        `is`.close()
-        os.close()
-    }
-
     @SuppressLint("WorldReadableFiles")
     @Throws(IllegalAccessException::class)
     private fun filesDirectory(
-        context: Context, directoryType: String, testClassName: String,
+        context: Context, testClassName: String,
         testMethodName: String
     ): File {
-        val directory: File
-
-        if (Build.VERSION.SDK_INT >= 21) {
-            // Use external storage.
-            directory = File(getExternalStorageDirectory(), "app_$directoryType")
-        } else {
-            // Use internal storage.
-            directory = context.getDir(directoryType, MODE_WORLD_READABLE)
-        }
+        val directory: File = getDeviceDirectory(context)
 
         synchronized(LOCK) {
-            if (!clearedOutputDirectories.contains(directoryType)) {
-                deletePath(directory, false)
-                clearedOutputDirectories.add(directoryType)
+            if (!clearedOutputDirectories.contains(directory)) {
+                deletePath(directory, inclusive = false)
+                clearedOutputDirectories.add(directory)
             }
         }
 
-        val dirClass = File(directory, testClassName)
-        val dirMethod = File(dirClass, testMethodName)
+        val dirClass = directory.resolve(testClassName)
+        val dirMethod = dirClass.resolve(testMethodName)
         createDir(dirMethod)
 
         return dirMethod
+    }
+
+    private fun getDeviceDirectory(context: Context): File {
+        return if (Build.VERSION.SDK_INT >= 21) {
+            // Use external storage.
+            getExternalStorageDirectory().resolve(screenshotDir)
+        } else {
+            // Use internal storage.
+            context.getDir(screenshotDir.canonicalPath, MODE_WORLD_READABLE)
+        }
     }
 
     /**
@@ -273,7 +214,7 @@ object UiAutomatorSpoon {
             }
         }
 
-        throw IllegalArgumentException("Could not find test class!")
+        throw IllegalArgumentException("Could not find test class! Trace: ${trace.map { it.toString() }}")
     }
 
     private fun extractStackElement(trace: Array<StackTraceElement>, i: Int): StackTraceElement {
@@ -312,4 +253,4 @@ object UiAutomatorSpoon {
             path.delete()
         }
     }
-}// No instances.
+}
