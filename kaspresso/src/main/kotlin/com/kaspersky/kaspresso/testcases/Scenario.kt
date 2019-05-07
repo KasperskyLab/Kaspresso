@@ -26,11 +26,10 @@ class Scenario(
      * @param actions a set of actions of a step.
      */
     fun step(description: String, actions: () -> Unit) {
-        log.invoke(logger, title, ++stepsCounter, description)
-
         val screenshotTag = "${title}_step_$stepsCounter"
 
         try {
+            log.invoke(logger, title, ++stepsCounter, description)
             actions.invoke()
             screenshots.makeIfPossible(screenshotTag)
         } catch (e: Throwable) {

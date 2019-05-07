@@ -2,6 +2,7 @@ package com.kaspersky.kaspresso.testcases
 
 import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.device.screenshots.Screenshots
+import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.testcases.runners.TestCaseRunner
 
 /**
@@ -18,14 +19,21 @@ class AfterTestSection(private val runner: TestCaseRunner) {
      */
     fun afterTest(actions: () -> Unit): TestCaseRunner {
         return runner.apply {
-            afterTestActions = {
+            afterTestActions = { stepsPassed: Boolean ->
+                var testPassed = stepsPassed
+                val logger: UiTestLogger = Configurator.logger
                 val screenshots: Screenshots = Configurator.screenshots
 
                 try {
+                    logger.section("AFTER TEST SECTION")
                     actions.invoke()
                 } catch (e: Throwable) {
+                    testPassed = false
+                    logger.section("AFTER TEST SECTION FAILED")
                     screenshots.makeIfPossible("AfterTestSection_failure_${e.javaClass.simpleName}")
                     throw e
+                } finally {
+                    logger.section(if (testPassed) "TEST PASSED" else "TEST FAILED")
                 }
             }
         }
