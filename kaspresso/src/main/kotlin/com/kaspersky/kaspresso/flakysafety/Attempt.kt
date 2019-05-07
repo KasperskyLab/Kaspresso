@@ -21,6 +21,10 @@ fun <T> attempt(
     allowedExceptions: Set<Class<out Throwable>> = Configurator.allowedExceptionsForAttempt,
     action: () -> T
 ): T {
+    if (intervalMs >= timeoutMs) {
+        throw IllegalArgumentException("The interval of attempts should be longer than the timeout of all attempts")
+    }
+
     var caughtAllowedException: Throwable
     val startTime = System.currentTimeMillis()
 
