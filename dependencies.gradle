@@ -13,7 +13,7 @@ ext.versions = [
         espresso      : "3.0.2",
         uiautomator   : "2.1.3",
         spoon         : "1.7.1",
-        klkakao       : "1.0.8",
+        klkakao       : "1.0.10",
         server        : "1.0.22",
         dokka         : "0.9.18"
 ]
