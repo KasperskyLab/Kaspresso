@@ -351,7 +351,8 @@ UiAutomator, который позволяет проверять работу �
 java -jar HostConnectionClient.jar
 ```
 Данный джарник в уже собранном виде можно достать в проекте [Android.Autotests.SupportFiles](https://hqrndtfs.avp.ru/tfs/DefaultCollection/MobileProducts/_git/Android.Autotests.SupportFiles), 
-а конкретнее, например в проекте KISA, лежит [здесь](https://hqrndtfs.avp.ru/tfs/DefaultCollection/MobileProducts/_git/Android.Autotests.SupportFiles?path=%2FHostConnectionClient.jar&version=GBkisa).
+а конкретнее, например в проекте KISA, лежит [здесь](https://hqrndtfs.avp.ru/tfs/DefaultCollection/MobileProducts/_git/Android.Autotests.SupportFiles?path=%2FHostConnectionClient.jar&version=GBkisa). <br>
+**Берите HostConnectionClient.jar из src/main/assets**
 ##### **На стороне девайса**
 Для исполнения команд необходимо воспользоваться классом:
 ```kotlin

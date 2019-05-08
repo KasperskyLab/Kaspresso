@@ -2,7 +2,6 @@ buildscript {
     apply from : 'dependencies.gradle'
 
     repositories {
-        maven { url pInternalRepositoryUrl= }
         google()
         jcenter()
     }
@@ -16,7 +15,6 @@ buildscript {
 
 allprojects {
     repositories {
-        maven { url pInternalRepositoryUrl= }
         google()
         jcenter()
     }
