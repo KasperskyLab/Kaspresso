@@ -31,7 +31,7 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
 
@@ -47,27 +47,6 @@ dependencies {
 
     implementation "com.squareup.retrofit2:retrofit:$versions.retrofit"
     implementation "com.squareup.spoon:spoon-client:$versions.spoon"
-
-    implementation "com.kaspersky.components:klkakao:$versions.klkakao"
-    implementation "com.kaspersky.components:test-server:$versions.server"
-}
-
-if (pPublish.toBoolean()) {
-    uploadArchives {
-        repositories {
-            mavenDeployer {
-                repository(url: "") {
-                    
-                }
-                pom.groupId = 'com.kaspersky.components'
-                pom.artifactId = ''
-                pom.version = ""
-            }
-        }
-    }
-    uploadArchives.dependsOn assemble
-} else {
-    Task uploadArchives
 }
 
 task sourcesJar(type: Jar) {
@@ -83,8 +62,4 @@ task javadocJar(type: Jar, dependsOn: dokka) {
 artifacts {
     archives javadocJar
     archives sourcesJar
-}
-
-repositories {
-    mavenCentral()
 }
