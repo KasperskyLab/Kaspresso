@@ -34,4 +34,21 @@ interface UiTestLogger {
      * Error level of logging with tag.
      */
     fun e(tag: String, text: String)
+
+    /**
+     * Draws up info [i] as section block.
+     */
+    fun section(text: String) {
+        i("---------------------------------------------------------------------------")
+        i(text)
+        i("---------------------------------------------------------------------------")
+    }
+
+    /**
+     * Draws up info [i] as header block.
+     */
+    fun header(text: String) {
+        i("___________________________________________________________________________")
+        i(text)
+    }
 }

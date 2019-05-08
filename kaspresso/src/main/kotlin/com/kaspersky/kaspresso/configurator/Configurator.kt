@@ -39,8 +39,8 @@ object Configurator {
     private const val DEFAULT_ATTEMPTS_TIMEOUT_MS: Long = 2_000L
     private const val DEFAULT_ATTEMPTS_INTERVAL_MS: Long = 500L
 
-    private const val DEFAULT_INNER_LOGGER_TAG: String = "UI_TESTING"
-    private const val DEFAULT_OUTER_LOGGER_TAG: String = "UI_TESTING_SPECIAL"
+    private const val DEFAULT_INNER_LOGGER_TAG: String = "KASPRESSO"
+    private const val DEFAULT_OUTER_LOGGER_TAG: String = "KASPRESSO_SPECIAL"
 
     /**
      * A timeout for all action attempts in milliseconds.
