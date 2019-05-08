@@ -2,7 +2,9 @@ package com.kaspersky.kaspresso.testcases
 
 import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.device.screenshots.Screenshots
+import com.kaspersky.kaspresso.extensions.other.toTime
 import com.kaspersky.kaspresso.logger.UiTestLogger
+import kotlin.system.measureTimeMillis
 
 /**
  * A representation of a sequence of test's actions.
@@ -30,8 +32,10 @@ class Scenario(
 
         try {
             log.invoke(logger, title, ++stepsCounter, description)
-            actions.invoke()
+            val msTook = measureTimeMillis { actions.invoke() }
             screenshots.makeIfPossible(screenshotTag)
+            val (minutes, seconds, milliseconds) = msTook.toTime()
+            logger.i("Step took $minutes minutes, $seconds seconds and $milliseconds milliseconds.")
         } catch (e: Throwable) {
             screenshots.makeIfPossible("${screenshotTag}_failure_${e.javaClass.simpleName}")
             throw e
