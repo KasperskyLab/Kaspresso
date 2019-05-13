@@ -45,10 +45,13 @@ dependencies {
 
 
     testImplementation "junit:junit:$versions.junit"
+
     androidTestImplementation "com.android.support.test:runner:$versions.runner"
     androidTestImplementation "com.android.support.test.espresso:espresso-web:$versions.espresso"
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$versions.espresso"
     androidTestImplementation "com.android.support.test.espresso:espresso-contrib:$versions.espresso"
     androidTestImplementation "com.android.support.test.espresso:espresso-intents:$versions.espresso"
     androidTestImplementation "com.android.support.test.uiautomator:uiautomator-v18:$versions.uiautomator"
+
+    androidTestImplementation project(':kaspresso')
 }
