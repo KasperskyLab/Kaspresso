@@ -30,17 +30,15 @@ class LoggingStepInterceptor(
         stepStartMap[step] = System.currentTimeMillis()
     }
 
-    private fun stopStepTimerAndGetTime(step: Step): Triple<Long, Long, Long>? {
+    private fun stopStepTimerAndGetTime(step: Step): Triple<Long, Long, Long> {
         val stepStartTime: Long? = stepStartMap.remove(step)
 
-        stepStartTime ?: return null
+        stepStartTime ?: throw AssertionError("Step start timestamp was already removed")
 
         return (System.currentTimeMillis() - stepStartTime).toTime()
     }
 
-    private fun getTimeReport(stepTime: Triple<Long, Long, Long>?): String {
-        stepTime ?: return ""
-
+    private fun getTimeReport(stepTime: Triple<Long, Long, Long>): String {
         val (minutes, secs, millis) = stepTime
         return "It took $minutes minutes, $secs seconds and $millis millis."
     }
