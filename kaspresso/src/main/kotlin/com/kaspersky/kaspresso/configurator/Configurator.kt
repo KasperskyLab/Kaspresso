@@ -10,18 +10,18 @@ import com.kaspersky.kaspresso.device.accessibility.Accessibility
 import com.kaspersky.kaspresso.device.accessibility.AccessibilityImpl
 import com.kaspersky.kaspresso.device.activities.Activities
 import com.kaspersky.kaspresso.device.activities.ActivitiesImpl
-import com.kaspersky.kaspresso.device.files.Files
-import com.kaspersky.kaspresso.device.files.FilesImpl
-import com.kaspersky.kaspresso.device.internet.Internet
-import com.kaspersky.kaspresso.device.internet.InternetImpl
 import com.kaspersky.kaspresso.device.apps.Apps
 import com.kaspersky.kaspresso.device.apps.AppsImpl
 import com.kaspersky.kaspresso.device.exploit.Exploit
 import com.kaspersky.kaspresso.device.exploit.ExploitImpl
-import com.kaspersky.kaspresso.device.screenshots.Screenshots
-import com.kaspersky.kaspresso.device.screenshots.ScreenshotsImpl
+import com.kaspersky.kaspresso.device.files.Files
+import com.kaspersky.kaspresso.device.files.FilesImpl
+import com.kaspersky.kaspresso.device.internet.Internet
+import com.kaspersky.kaspresso.device.internet.InternetImpl
 import com.kaspersky.kaspresso.device.permissions.Permissions
 import com.kaspersky.kaspresso.device.permissions.PermissionsImpl
+import com.kaspersky.kaspresso.device.screenshots.Screenshots
+import com.kaspersky.kaspresso.device.screenshots.ScreenshotsImpl
 import com.kaspersky.kaspresso.interceptors.*
 import com.kaspersky.kaspresso.interceptors.impl.flakysafety.FlakySafeExecutingInterceptor
 import com.kaspersky.kaspresso.interceptors.impl.logging.LoggingFailureInterceptor
@@ -29,6 +29,10 @@ import com.kaspersky.kaspresso.interceptors.impl.logging.LoggingViewActionInterc
 import com.kaspersky.kaspresso.interceptors.impl.logging.LoggingViewAssertionInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.logger.UiTestLoggerImpl
+import com.kaspersky.kaspresso.testcases.Scenario
+import com.kaspersky.kaspresso.testcases.step.ConsoleLoggerInterceptor
+import com.kaspersky.kaspresso.testcases.step.ScreenshotInterceptor
+import com.kaspersky.kaspresso.testcases.step.StepInterceptor
 import com.kaspersky.klkakao.configurator.KakaoConfigurator
 
 /**
@@ -150,6 +154,12 @@ object Configurator {
     internal var executingInterceptor: ExecutingInterceptor? = null
 
     /**
+     * An interceptors set that actually manages the execution of steps [Scenario.step]. Interceptors works using
+     * decorator pattern. First interceptor wraps others
+     */
+    internal var stepInterceptors: List<StepInterceptor> = emptyList()
+
+    /**
      * A class for [Configurator] initialization. The right way to change [Configurator] settings is to use [Builder].
      */
     class Builder {
@@ -167,6 +177,10 @@ object Configurator {
                     viewAssertionInterceptors = listOf(LoggingViewAssertionInterceptor(logger))
                     executingInterceptor = FlakySafeExecutingInterceptor()
                     failureInterceptor = LoggingFailureInterceptor(logger)
+                    stepInterceptors = listOf(
+                        ConsoleLoggerInterceptor(logger),
+                        ScreenshotInterceptor()
+                    )
                 }
             }
         }
@@ -205,6 +219,7 @@ object Configurator {
          */
         var failureInterceptor: FailureInterceptor? = null
 
+        var stepInterceptors: List<StepInterceptor>? = null
         /**
          * Terminating method to commit built [Configurator] settings. Can be called only inside the framework
          * package. Actually called when the base [com.kaspersky.uitest_framework.testcase.TestCase] class is
@@ -241,6 +256,8 @@ object Configurator {
             Configurator.webAssertionInterceptors = webAssertionInterceptors
 
             Configurator.executingInterceptor = executingInterceptor
+
+            stepInterceptors?.let { Configurator.stepInterceptors = it }
 
             failureInterceptor?.let { Espresso.setFailureHandler(it::interceptAndThrow) }
         }
