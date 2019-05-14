@@ -8,8 +8,6 @@ class ScreenshotStepInterceptor(
     private val screenshots: Screenshots
 ) : StepInterceptor {
 
-    override fun interceptBefore(step: Step) = Unit
-
     override fun interceptAfterWithSuccess(step: Step) {
         screenshots.makeIfPossible(makeScreenshotTag(step))
     }

@@ -14,12 +14,16 @@ class Step(
     fun proceed() {
         interceptors.forEach { it.interceptBefore(this) }
 
+        var error: Throwable? = null
+
         try {
             action.invoke()
             interceptors.forEach { it.interceptAfterWithSuccess(this) }
-        } catch (e: Throwable) {
-            interceptors.forEach { it.interceptAfterWithError(this, e) }
-            throw e
+        } catch (throwable: Throwable) {
+            interceptors.forEach { it.interceptAfterWithError(this, throwable) }
+            throw  throwable
+        } finally {
+
         }
     }
 }
