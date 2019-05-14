@@ -23,7 +23,7 @@ class ConsoleLoggerInterceptor(private val logger: UiTestLogger) : StagesStepInt
         val msTook = System.currentTimeMillis() - stepStartTime
         val (minutes, secs, millis) = msTook.toTime()
 
-        logger.i("Step ${chain.description} Failed. It took $minutes minutes, $secs seconds and $millis millis.")
+        logger.footer("TEST STEP: \"${chain.ordinal}. ${chain.description}\" in ${chain.testClassName} FAILED. It took $minutes minutes, $secs seconds and $millis millis.")
     }
 
     override fun afterStepWithSuccess(chain: StepInterceptor.Chain) {
@@ -31,6 +31,6 @@ class ConsoleLoggerInterceptor(private val logger: UiTestLogger) : StagesStepInt
         val msTook = System.currentTimeMillis() - stepStartTime
         val (minutes, secs, millis) = msTook.toTime()
 
-        logger.i("Step ${chain.description} Success. It took $minutes minutes, $secs seconds and $millis millis.")
+        logger.footer("TEST STEP: \"${chain.ordinal}. ${chain.description}\" in ${chain.testClassName} SUCCESS. It took $minutes minutes, $secs seconds and $millis millis.")
     }
 }

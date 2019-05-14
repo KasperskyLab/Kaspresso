@@ -46,9 +46,12 @@ class OpenHomeScreenTest : TestCase() {
                 homeScreen {
                     title {
                         isVisible()
+                        //hasText("Ooops!") //Uncomment to fail test
                     }
                 }
             }
+
+            step("Just Empty Step") {}
         }
     }
 }
