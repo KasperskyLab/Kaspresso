@@ -7,19 +7,12 @@ abstract class StagesStepInterceptor : StepInterceptor {
     final override fun intercept(chain: StepInterceptor.Chain) {
         beforeStep(chain)
 
-        var error: Throwable? = null
         try {
             chain.proceed(chain.action)
-        } catch (e: Throwable) {
-            error = e
-        }
-
-        if (error == null) {
             afterStepWithSuccess(chain)
-
-        } else {
-            afterStepWithError(chain, error)
-            throw error
+        } catch (throwable: Throwable) {
+            afterStepWithError(chain, throwable)
+            throw throwable
         }
     }
 
