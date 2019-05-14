@@ -6,7 +6,9 @@ import android.support.test.rule.GrantPermissionRule
 import android.support.test.runner.AndroidJUnit4
 import com.kaspersky.kaspressample.screen.HomeScreen
 import com.kaspersky.kaspressample.screen.MainScreen
+import com.kaspersky.kaspresso.device.Device
 import com.kaspersky.kaspresso.testcases.TestCase
+import com.kaspersky.kaspresso.viewactions.orientation.Orientation
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -32,8 +34,10 @@ class OpenHomeScreenTest : TestCase() {
     @Test
     fun test() {
         beforeTest {
+            Device.exploit.setOrientation(Orientation.Landscape)
             activityTestRule.launchActivity(null)
         }.afterTest {
+            Device.exploit.setOrientation(Orientation.Portrait)
             //Nothing
         }.runSteps {
 

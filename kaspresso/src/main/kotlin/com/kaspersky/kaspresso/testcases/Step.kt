@@ -18,15 +18,13 @@ class Step(
 
         try {
             action.invoke()
-        } catch (e: Throwable) {
-            error = e
+            interceptors.forEach { it.interceptAfterWithSuccess(this) }
+        } catch (throwable: Throwable) {
+            interceptors.forEach { it.interceptAfterWithError(this, throwable) }
+            throw  throwable
+        } finally {
+
         }
 
-        if (error == null) {
-            interceptors.forEach { it.interceptAfterWithSuccess(this) }
-        } else {
-            interceptors.forEach { it.interceptAfterWithError(this, error) }
-            throw error
-        }
     }
 }

@@ -18,14 +18,17 @@ class LoggingStepInterceptor(
 
     override fun interceptAfterWithSuccess(step: Step) {
         val stepTime = stopStepTimerAndGetTime(step)
-        logger.i("SUCCESS. ${getTimeReport(stepTime)} ")
+        logger.i("TEST STEP: \"${step.ordinal}. ${step.description}\" in ${step.testClassName} finished SUCCESS. ${getTimeReport(stepTime)} ")
     }
 
     override fun interceptAfterWithError(step: Step, error: Throwable) {
         val stepTime = stopStepTimerAndGetTime(step)
-        logger.i("SUCCESS. ${getTimeReport(stepTime)} ")
+        logger.i("TEST STEP: \"${step.ordinal}. ${step.description}\" in ${step.testClassName} finished FAILED. ${getTimeReport(stepTime)} ")
     }
 
+    override fun interceptAfter(step: Step) {
+        logger.line()
+    }
     private fun startStepTimer(step: Step) {
         stepStartMap[step] = System.currentTimeMillis()
     }
