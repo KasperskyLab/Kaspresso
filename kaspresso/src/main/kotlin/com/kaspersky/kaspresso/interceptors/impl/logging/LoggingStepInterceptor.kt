@@ -13,17 +13,17 @@ class LoggingStepInterceptor(
 
     override fun interceptBefore(step: Step) {
         startStepTimer(step)
-        logger.header("TEST STEP: \"${step.ordinal}. ${step.description}\" in ${step.testClassName}")
+        logger.header(getStepHeader(step))
     }
 
     override fun interceptAfterWithSuccess(step: Step) {
         val stepTime = stopStepTimerAndGetTime(step)
-        logger.i("TEST STEP: \"${step.ordinal}. ${step.description}\" in ${step.testClassName} SUCCEED. ${getTimeReport(stepTime)} ")
+        logger.i("${getStepHeader(step)} SUCCEED. ${getTimeReport(stepTime)} ")
     }
 
     override fun interceptAfterWithError(step: Step, error: Throwable) {
         val stepTime = stopStepTimerAndGetTime(step)
-        logger.i("TEST STEP: \"${step.ordinal}. ${step.description}\" in ${step.testClassName} FAILED. ${getTimeReport(stepTime)} ")
+        logger.i("${getStepHeader(step)} FAILED. ${getTimeReport(stepTime)} ")
     }
 
     override fun interceptAfterFinally(step: Step) {
@@ -45,5 +45,9 @@ class LoggingStepInterceptor(
     private fun getTimeReport(stepTime: Triple<Long, Long, Long>): String {
         val (minutes, secs, millis) = stepTime
         return "It took $minutes minutes, $secs seconds and $millis millis."
+    }
+
+    private fun getStepHeader(step: Step): String {
+        return "TEST STEP: \"${step.ordinal}. ${step.description}\" in ${step.testClassName}"
     }
 }

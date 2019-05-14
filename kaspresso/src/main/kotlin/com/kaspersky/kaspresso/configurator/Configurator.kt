@@ -219,7 +219,7 @@ object Configurator {
          */
         var failureInterceptor: FailureInterceptor? = null
 
-        var stepInterceptors: List<StepInterceptor>? = null
+        var stepInterceptors: List<StepInterceptor> = emptyList()
         /**
          * Terminating method to commit built [Configurator] settings. Can be called only inside the framework
          * package. Actually called when the base [com.kaspersky.uitest_framework.testcase.TestCase] class is
@@ -257,9 +257,9 @@ object Configurator {
 
             Configurator.executingInterceptor = executingInterceptor
 
-            stepInterceptors?.let { Configurator.stepInterceptors = it }
-
             failureInterceptor?.let { Espresso.setFailureHandler(it::interceptAndThrow) }
+
+            Configurator.stepInterceptors = stepInterceptors
         }
     }
 }
