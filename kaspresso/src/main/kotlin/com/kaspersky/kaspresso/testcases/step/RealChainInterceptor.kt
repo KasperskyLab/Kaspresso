@@ -13,7 +13,7 @@ class RealChainInterceptor(
 
     override fun proceed(action: () -> Unit) {
         if (index >= interceptors.size)
-            throw AssertionError("index is $index, size is ${interceptors.size}")
+            throw AssertionError("Unable to provide interceptor with index $index (size is ${interceptors.size}). Check your StepInterceptor implementations")
 
         val next = RealChainInterceptor(
             description,
