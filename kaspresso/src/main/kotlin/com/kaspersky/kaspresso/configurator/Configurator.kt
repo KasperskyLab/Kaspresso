@@ -30,9 +30,9 @@ import com.kaspersky.kaspresso.interceptors.impl.logging.LoggingViewAssertionInt
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.logger.UiTestLoggerImpl
 import com.kaspersky.kaspresso.testcases.Scenario
-import com.kaspersky.kaspresso.testcases.step.ConsoleLoggerInterceptor
-import com.kaspersky.kaspresso.testcases.step.ScreenshotInterceptor
-import com.kaspersky.kaspresso.testcases.step.StepInterceptor
+import com.kaspersky.kaspresso.interceptors.impl.logging.LoggingStepInterceptor
+import com.kaspersky.kaspresso.interceptors.impl.screenshot.ScreenshotStepInterceptor
+import com.kaspersky.kaspresso.interceptors.StepInterceptor
 import com.kaspersky.klkakao.configurator.KakaoConfigurator
 
 /**
@@ -178,8 +178,8 @@ object Configurator {
                     executingInterceptor = FlakySafeExecutingInterceptor()
                     failureInterceptor = LoggingFailureInterceptor(logger)
                     stepInterceptors = listOf(
-                        ConsoleLoggerInterceptor(logger),
-                        ScreenshotInterceptor()
+                        LoggingStepInterceptor(logger),
+                        ScreenshotStepInterceptor(screenshots)
                     )
                 }
             }
