@@ -30,9 +30,9 @@ import com.kaspersky.kaspresso.interceptors.impl.logging.LoggingViewAssertionInt
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.logger.UiTestLoggerImpl
 import com.kaspersky.kaspresso.testcases.Scenario
-import com.kaspersky.kaspresso.testcases.step.ConsoleLoggerInterceptor
-import com.kaspersky.kaspresso.testcases.step.ScreenshotInterceptor
-import com.kaspersky.kaspresso.testcases.step.StepInterceptor
+import com.kaspersky.kaspresso.interceptors.impl.logging.LoggingStepInterceptor
+import com.kaspersky.kaspresso.interceptors.impl.screenshot.ScreenshotStepInterceptor
+import com.kaspersky.kaspresso.interceptors.StepInterceptor
 import com.kaspersky.klkakao.configurator.KakaoConfigurator
 
 /**
@@ -178,8 +178,8 @@ object Configurator {
                     executingInterceptor = FlakySafeExecutingInterceptor()
                     failureInterceptor = LoggingFailureInterceptor(logger)
                     stepInterceptors = listOf(
-                        ConsoleLoggerInterceptor(logger),
-                        ScreenshotInterceptor()
+                        LoggingStepInterceptor(logger),
+                        ScreenshotStepInterceptor(screenshots)
                     )
                 }
             }
@@ -219,7 +219,7 @@ object Configurator {
          */
         var failureInterceptor: FailureInterceptor? = null
 
-        var stepInterceptors: List<StepInterceptor>? = null
+        var stepInterceptors: List<StepInterceptor> = emptyList()
         /**
          * Terminating method to commit built [Configurator] settings. Can be called only inside the framework
          * package. Actually called when the base [com.kaspersky.uitest_framework.testcase.TestCase] class is
@@ -257,9 +257,9 @@ object Configurator {
 
             Configurator.executingInterceptor = executingInterceptor
 
-            stepInterceptors?.let { Configurator.stepInterceptors = it }
-
             failureInterceptor?.let { Espresso.setFailureHandler(it::interceptAndThrow) }
+
+            Configurator.stepInterceptors = stepInterceptors
         }
     }
 }

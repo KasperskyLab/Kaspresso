@@ -1,17 +1,13 @@
 package com.kaspersky.kaspresso.testcases
 
 import com.kaspersky.kaspresso.configurator.Configurator
-import com.kaspersky.kaspresso.testcases.step.ExecutionInterceptor
-import com.kaspersky.kaspresso.testcases.step.RealChainInterceptor
-import com.kaspersky.kaspresso.testcases.step.StepInterceptor
 
 /**
  * A representation of a sequence of test's actions.
  */
-class Scenario constructor(private val title: String) {
-
-    private val interceptors: List<StepInterceptor> = Configurator.stepInterceptors + ExecutionInterceptor()
-
+class Scenario(
+    private val title: String
+) {
     /**
      * A step counter to evaluate current step's tag.
      */
@@ -25,16 +21,14 @@ class Scenario constructor(private val title: String) {
      */
 
     fun step(description: String, action: () -> Unit) {
-        val realChainInterceptor = RealChainInterceptor(
+        Step(
             description = description,
             action = action,
             testClassName = title,
-            stepLevel = 0, //TODO calculate
-            stepOrderOnLevel = 0, //TODO calculate
+            level = 0, //TODO calculate
+            orderOnLevel = 0, //TODO calculate
             ordinal = ++stepsCounter,
-            index = 0,
-            interceptors = interceptors
-        )
-        realChainInterceptor.proceed(action)
+            interceptors = Configurator.stepInterceptors
+        ).proceed()
     }
 }
