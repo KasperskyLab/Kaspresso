@@ -1,9 +1,7 @@
 package com.kaspersky.kaspresso.testcases.step
 
 abstract class StagesStepInterceptor : StepInterceptor {
-
-    abstract fun beforeStep(chain: StepInterceptor.Chain)
-
+    
     final override fun intercept(chain: StepInterceptor.Chain) {
         beforeStep(chain)
 
@@ -13,10 +11,16 @@ abstract class StagesStepInterceptor : StepInterceptor {
         } catch (throwable: Throwable) {
             afterStepWithError(chain, throwable)
             throw throwable
+        } finally {
+            afterStep(chain)
         }
     }
 
-    abstract fun afterStepWithSuccess(chain: StepInterceptor.Chain)
+    open fun afterStep(chain: StepInterceptor.Chain) = Unit
 
-    abstract fun afterStepWithError(chain: StepInterceptor.Chain, error: Throwable)
+    open fun afterStepWithSuccess(chain: StepInterceptor.Chain) = Unit
+
+    open fun afterStepWithError(chain: StepInterceptor.Chain, error: Throwable) = Unit
+
+    open fun beforeStep(chain: StepInterceptor.Chain) = Unit
 }

@@ -7,9 +7,6 @@ class ScreenshotInterceptor(
     private val screenshots: Screenshots = Configurator.screenshots
 ) : StagesStepInterceptor() {
 
-
-    override fun beforeStep(chain: StepInterceptor.Chain) = Unit
-
     override fun afterStepWithSuccess(chain: StepInterceptor.Chain) {
         screenshots.makeIfPossible(makeScreenshotTag(chain))
     }
