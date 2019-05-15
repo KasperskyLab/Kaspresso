@@ -1,12 +1,9 @@
-package com.kaspersky.kaspresso.testcases.runners
-
-import com.kaspersky.kaspresso.testcases.SubCase
-import com.kaspersky.kaspresso.testcases.Scenario
+package com.kaspersky.kaspresso.testcases
 
 /**
  * An implementation of [ScenarioRunner] for [SubCase]'s usage.
  */
-class SubCaseRunner(private val title: String) : ScenarioRunner {
+class SubCaseSection(private val title: String) : ScenarioRunner {
 
     /**
      * Runs [SubCase]'s [steps]. Called by [SubCase.run] with [SubCase.steps] as an argument.

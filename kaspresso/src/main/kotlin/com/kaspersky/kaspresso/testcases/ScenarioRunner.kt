@@ -1,4 +1,4 @@
-package com.kaspersky.kaspresso.testcases.runners
+package com.kaspersky.kaspresso.testcases
 
 import com.kaspersky.kaspresso.testcases.Scenario
 

@@ -1,7 +1,6 @@
 package com.kaspersky.kaspresso.testcases
 
 import com.kaspersky.kaspresso.configurator.Configurator
-import com.kaspersky.kaspresso.testcases.runners.TestCaseRunner
 
 /**
  *  A base class for all test cases. Extend this class with a single base project-wide inheritor of [TestCase] as a
@@ -29,7 +28,13 @@ abstract class TestCase(
     protected fun beforeTest(actions: () -> Unit) = createBeforeTestSection().beforeTest(actions)
 
     /**
-     * Creates an instance of [BeforeTestSection] with a new instance of [TestCaseRunner] as a parameter.
+     * Creates an instance of [BeforeTestSection] with a new instance of [MainTestSection] as a parameter.
      */
-    private fun createBeforeTestSection() = BeforeTestSection(TestCaseRunner(javaClass.simpleName))
+    private fun createBeforeTestSection(): BeforeTestSection {
+        return BeforeTestSection(
+            TestBody
+                .builder()
+                .className(javaClass.simpleName)
+        )
+    }
 }
