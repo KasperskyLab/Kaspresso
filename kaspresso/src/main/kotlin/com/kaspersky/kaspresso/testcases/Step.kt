@@ -1,9 +1,9 @@
 package com.kaspersky.kaspresso.testcases
 
+import com.kaspersky.kaspresso.extensions.other.forEachSafely
 import com.kaspersky.kaspresso.extensions.other.invokeSafely
 import com.kaspersky.kaspresso.extensions.other.throwAll
 import com.kaspersky.kaspresso.interceptors.StepInterceptor
-import io.reactivex.exceptions.CompositeException
 
 class Step(
     val description: String,
@@ -17,9 +17,7 @@ class Step(
     fun proceed() {
         val exceptions: MutableList<Throwable> = mutableListOf()
 
-        interceptors.forEach {
-            invokeSafely(exceptions) { it.interceptBefore(this) }
-        }
+        interceptors.forEachSafely(exceptions) { it.interceptBefore(this) }
 
         try {
             action.invoke()

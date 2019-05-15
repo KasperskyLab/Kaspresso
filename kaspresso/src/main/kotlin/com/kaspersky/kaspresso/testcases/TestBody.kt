@@ -1,8 +1,8 @@
 package com.kaspersky.kaspresso.testcases
 
 import com.kaspersky.kaspresso.configurator.Configurator
-import com.kaspersky.kaspresso.device.screenshots.Screenshots
-import com.kaspersky.kaspresso.logger.UiTestLogger
+import com.kaspersky.kaspresso.interceptors.TestRunInterceptor
+import com.kaspersky.kaspresso.interceptors.impl.composite.TestRunCompositeInterceptor
 
 class TestBody(
     private val title: String,
@@ -11,18 +11,25 @@ class TestBody(
     private val mainSection: Scenario.() -> Unit
 ) {
 
+    private val exceptions: MutableList<Throwable> = mutableListOf()
+    private val testRunInterceptor: TestRunInterceptor = TestRunCompositeInterceptor(Configurator.testRunInterceptors, exceptions)
+
     companion object {
         fun builder(): Builder =
             Builder()
     }
 
     fun run() {
+        testRunInterceptor.onTestStarted(this)
         var stepsPassed = true
 
         try {
             runBeforeTestSection()
+            testRunInterceptor.onMainSectionStarted(this)
             mainSection.invoke(Scenario(title))
+            testRunInterceptor.onMainSectionFinishedSuccess(this)
         } catch (e: Throwable) {
+            testRunInterceptor.onMainSectionFinishedFailed(this, e)
             stepsPassed = false
             throw e
         } finally {
@@ -31,36 +38,30 @@ class TestBody(
     }
 
     private fun runAfterTestSection(stepsPassed: Boolean) {
-
+        testRunInterceptor.onAfterSectionStarted(this)
         var testPassed = stepsPassed
-        val logger: UiTestLogger = Configurator.logger
-        val screenshots: Screenshots = Configurator.screenshots
 
         try {
-            logger.section("AFTER TEST SECTION")
             afterTestActions.invoke()
+            testRunInterceptor.onAfterSectionFinishedSuccess(this)
         } catch (e: Throwable) {
+            testRunInterceptor.onAfterSectionFinishedFailed(this, e)
             testPassed = false
-            logger.section("AFTER TEST SECTION FAILED")
-            screenshots.makeIfPossible("AfterTestSection_failure_${e.javaClass.simpleName}")
             throw e
         } finally {
-            logger.section(if (testPassed) "TEST PASSED" else "TEST FAILED")
+            testRunInterceptor.onTestFinished(this, testPassed)
         }
     }
 
     private fun runBeforeTestSection() {
 
-        val logger: UiTestLogger = Configurator.logger
-        val screenshots: Screenshots = Configurator.screenshots
+        testRunInterceptor.onBeforeSectionStarted(this)
 
         try {
-            logger.section("BEFORE TEST SECTION")
             beforeTestActions.invoke()
-            logger.section("TEST SECTION")
+            testRunInterceptor.onBeforeSectionFinishedSuccess(this)
         } catch (e: Throwable) {
-            logger.section("BEFORE TEST SECTION FAILED")
-            screenshots.makeIfPossible("BeforeTestSection_failure_${e.javaClass.simpleName}")
+            testRunInterceptor.onBeforeSectionFinishedFailed(this, e)
             throw e
         }
     }
