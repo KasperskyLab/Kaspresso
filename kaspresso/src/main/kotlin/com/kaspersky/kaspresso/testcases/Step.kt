@@ -1,6 +1,7 @@
 package com.kaspersky.kaspresso.testcases
 
 import com.kaspersky.kaspresso.interceptors.StepInterceptor
+import io.reactivex.exceptions.CompositeException
 
 class Step(
     val description: String,
@@ -12,18 +13,36 @@ class Step(
     private val interceptors: List<StepInterceptor>
 ) {
     fun proceed() {
-        interceptors.forEach { it.interceptBefore(this) }
+        val exceptions: MutableList<Throwable> = mutableListOf()
 
-        var error: Throwable? = null
+        interceptors.forEach {
+            invokeSafely(exceptions) { it.interceptBefore(this) }
+        }
 
         try {
             action.invoke()
-            interceptors.forEach { it.interceptAfterWithSuccess(this) }
+            interceptors.forEach {
+                invokeSafely(exceptions) { it.interceptAfterWithSuccess(this) }
+                invokeSafely(exceptions) { it.interceptAfterFinally(this) }
+            }
         } catch (throwable: Throwable) {
-            interceptors.forEach { it.interceptAfterWithError(this, throwable) }
-            throw  throwable
-        } finally {
+            interceptors.forEach {
+                invokeSafely(exceptions) { it.interceptAfterWithError(this, throwable) }
+                invokeSafely(exceptions) { it.interceptAfterFinally(this) }
+            }
+            exceptions.add(throwable)
+        }
+        when (exceptions.size) {
+            1 -> throw  exceptions[0]
+            in 2..Int.MAX_VALUE -> throw CompositeException(exceptions)
+        }
+    }
 
+    private fun invokeSafely(exceptions: MutableList<Throwable>, action: () -> Unit) {
+        try {
+            action.invoke()
+        } catch (e: Throwable) {
+            exceptions.add(e)
         }
     }
 }
