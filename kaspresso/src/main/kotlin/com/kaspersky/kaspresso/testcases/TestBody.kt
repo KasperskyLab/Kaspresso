@@ -1,6 +1,7 @@
 package com.kaspersky.kaspresso.testcases
 
 import com.kaspersky.kaspresso.configurator.Configurator
+import com.kaspersky.kaspresso.extensions.other.throwAll
 import com.kaspersky.kaspresso.interceptors.TestRunInterceptor
 import com.kaspersky.kaspresso.interceptors.impl.composite.TestRunCompositeInterceptor
 
@@ -12,7 +13,8 @@ class TestBody(
 ) {
 
     private val exceptions: MutableList<Throwable> = mutableListOf()
-    private val testRunInterceptor: TestRunInterceptor = TestRunCompositeInterceptor(Configurator.testRunInterceptors, exceptions)
+    private val testRunInterceptor: TestRunInterceptor =
+        TestRunCompositeInterceptor(Configurator.testRunInterceptors, exceptions)
 
     companion object {
         fun builder(): Builder =
@@ -31,10 +33,11 @@ class TestBody(
         } catch (e: Throwable) {
             testRunInterceptor.onMainSectionFinishedFailed(this, e)
             stepsPassed = false
-            throw e
+            exceptions.add(e)
         } finally {
             runAfterTestSection(stepsPassed)
         }
+        exceptions.throwAll()
     }
 
     private fun runAfterTestSection(stepsPassed: Boolean) {
