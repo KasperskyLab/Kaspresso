@@ -1,5 +1,6 @@
 package com.kaspersky.kaspresso.extensions.other
 
+import io.reactivex.exceptions.CompositeException
 import java.io.PrintWriter
 import java.io.StringWriter
 
@@ -13,4 +14,23 @@ fun Throwable.getStackTraceAsString(): String {
     printStackTrace(pw)
 
     return sw.toString()
+}
+
+inline fun <reified T : Throwable> invokeSafely(exceptions: MutableList<T>, action: () -> Unit) {
+    try {
+        action.invoke()
+    } catch (e: Throwable) {
+        if (e is T) {
+            exceptions.add(e)
+        } else {
+            throw e
+        }
+    }
+}
+
+internal fun <T : Throwable> List<T>.throwAll() {
+    when (this.size) {
+        1 -> throw  this[0]
+        in 2..Int.MAX_VALUE -> throw CompositeException(this)
+    }
 }

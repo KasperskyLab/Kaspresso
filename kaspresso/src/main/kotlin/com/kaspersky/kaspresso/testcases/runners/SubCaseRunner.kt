@@ -14,10 +14,6 @@ class SubCaseRunner(private val title: String) : ScenarioRunner {
      * @param steps steps to run.
      */
     override fun runSteps(steps: Scenario.() -> Unit) {
-        steps.invoke(
-            Scenario(title) { title: String, stepNumber: Int, description: String ->
-                header("$title STEP: \"$stepNumber. $description\"")
-            }
-        )
+        steps.invoke(Scenario(title))
     }
 }

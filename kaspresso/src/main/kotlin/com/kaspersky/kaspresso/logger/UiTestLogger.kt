@@ -48,7 +48,22 @@ interface UiTestLogger {
      * Draws up info [i] as header block.
      */
     fun header(text: String) {
-        i("___________________________________________________________________________")
+        line()
         i(text)
+    }
+
+    /**
+     * Draws up info [i] as header block.
+     */
+    fun footer(text: String) {
+        i(text)
+        line()
+    }
+
+    /**
+     * Draws line info.
+     */
+    fun line() {
+        i("___________________________________________________________________________")
     }
 }

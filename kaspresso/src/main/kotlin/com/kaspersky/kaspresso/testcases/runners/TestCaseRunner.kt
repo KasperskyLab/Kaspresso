@@ -22,12 +22,7 @@ class TestCaseRunner(private val title: String) : ScenarioRunner {
 
         try {
             beforeTestActions.invoke()
-
-            steps.invoke(
-                    Scenario(title) { title: String, stepNumber: Int, description: String ->
-                        header("TEST STEP: \"$stepNumber. $description\" in $title")
-                    }
-            )
+            steps.invoke(Scenario(title))
         } catch (e: Throwable) {
             stepsPassed = false
             throw e
