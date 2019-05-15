@@ -1,5 +1,6 @@
 package com.kaspersky.kaspresso.testcases
 
+import com.kaspersky.kaspresso.extensions.other.invokeSafely
 import com.kaspersky.kaspresso.interceptors.StepInterceptor
 import io.reactivex.exceptions.CompositeException
 
@@ -35,14 +36,6 @@ class Step(
         when (exceptions.size) {
             1 -> throw  exceptions[0]
             in 2..Int.MAX_VALUE -> throw CompositeException(exceptions)
-        }
-    }
-
-    private inline fun invokeSafely(exceptions: MutableList<Throwable>, action: () -> Unit) {
-        try {
-            action.invoke()
-        } catch (e: Throwable) {
-            exceptions.add(e)
         }
     }
 }

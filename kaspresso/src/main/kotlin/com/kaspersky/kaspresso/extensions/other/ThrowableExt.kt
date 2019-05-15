@@ -14,3 +14,15 @@ fun Throwable.getStackTraceAsString(): String {
 
     return sw.toString()
 }
+
+inline fun <reified T : Throwable> invokeSafely(exceptions: MutableList<T>, action: () -> Unit) {
+    try {
+        action.invoke()
+    } catch (e: Throwable) {
+        if (e is T) {
+            exceptions.add(e)
+        } else {
+            throw e
+        }
+    }
+}
