@@ -13,7 +13,6 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
-
 @RunWith(AndroidJUnit4::class)
 class OpenHomeScreenTest : TestCase() {
 
@@ -38,7 +37,6 @@ class OpenHomeScreenTest : TestCase() {
             activityTestRule.launchActivity(null)
         }.afterTest {
             Device.exploit.setOrientation(Orientation.Portrait)
-            //Nothing
         }.runSteps {
 
             step("Open Home screen") {
@@ -54,7 +52,6 @@ class OpenHomeScreenTest : TestCase() {
                     }
                 }
             }
-
             step("Just Empty Step") {}
         }
     }

@@ -38,7 +38,7 @@ class Step(
         }
     }
 
-    private fun invokeSafely(exceptions: MutableList<Throwable>, action: () -> Unit) {
+    private inline fun invokeSafely(exceptions: MutableList<Throwable>, action: () -> Unit) {
         try {
             action.invoke()
         } catch (e: Throwable) {
