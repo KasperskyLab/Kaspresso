@@ -1,5 +1,6 @@
 package com.kaspersky.kaspresso.extensions.other
 
+import io.reactivex.exceptions.CompositeException
 import java.io.PrintWriter
 import java.io.StringWriter
 
@@ -24,5 +25,12 @@ inline fun <reified T : Throwable> invokeSafely(exceptions: MutableList<T>, acti
         } else {
             throw e
         }
+    }
+}
+
+internal fun <T : Throwable> List<T>.throwAll() {
+    when (this.size) {
+        1 -> throw  this[0]
+        in 2..Int.MAX_VALUE -> throw CompositeException(this)
     }
 }

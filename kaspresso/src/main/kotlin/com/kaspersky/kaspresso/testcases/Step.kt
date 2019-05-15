@@ -1,6 +1,7 @@
 package com.kaspersky.kaspresso.testcases
 
 import com.kaspersky.kaspresso.extensions.other.invokeSafely
+import com.kaspersky.kaspresso.extensions.other.throwAll
 import com.kaspersky.kaspresso.interceptors.StepInterceptor
 import io.reactivex.exceptions.CompositeException
 
@@ -33,9 +34,7 @@ class Step(
             }
             exceptions.add(throwable)
         }
-        when (exceptions.size) {
-            1 -> throw  exceptions[0]
-            in 2..Int.MAX_VALUE -> throw CompositeException(exceptions)
-        }
+
+        exceptions.throwAll()
     }
 }
