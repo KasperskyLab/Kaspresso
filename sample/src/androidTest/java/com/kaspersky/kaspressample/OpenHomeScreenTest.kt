@@ -45,8 +45,8 @@ class OpenHomeScreenTest : TestCase() {
                         click()
                     }
                 }
-
             }
+
             step("Check Home Screen") {
                 homeScreen {
                     title {
@@ -55,9 +55,12 @@ class OpenHomeScreenTest : TestCase() {
                     }
                 }
             }
+
+            stepsPack(
+                CheckHomeTitleStepsPack()
+            )
+
             step("Just Empty Step") {}
-            step(CheckHomeTitleSubCase())
         }
     }
-    
 }

@@ -29,7 +29,7 @@ import com.kaspersky.kaspresso.interceptors.impl.screenshot.ScreenshotStepInterc
 import com.kaspersky.kaspresso.interceptors.impl.screenshot.TestRunnerScreenshotInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.logger.UiTestLoggerImpl
-import com.kaspersky.kaspresso.testcases.core.StepContext
+import com.kaspersky.kaspresso.testcases.core.TestContext
 import com.kaspersky.klkakao.configurator.KakaoConfigurator
 
 /**
@@ -151,7 +151,7 @@ object Configurator {
     internal var executingInterceptor: ExecutingInterceptor? = null
 
     /**
-     * An interceptors set that actually manages the execution of steps [StepContext.step]. Interceptors works using
+     * An interceptors set that actually manages the execution of stepsPack [TestContext.step]. Interceptors works using
      * decorator pattern. First interceptor wraps others
      */
     internal var stepInterceptors: List<StepInterceptor> = emptyList()

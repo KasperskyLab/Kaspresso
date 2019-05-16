@@ -10,7 +10,7 @@ class TestBody(
     private val testInfo: TestInfo,
     private val beforeTestActions: () -> Unit,
     private val afterTestActions: () -> Unit,
-    private val mainSection: StepContext.() -> Unit
+    private val mainSection: TestContext.() -> Unit
 ) {
     private val exceptions: MutableList<Throwable> = mutableListOf()
     private val testRunInterceptor: TestRunInterceptor =
@@ -55,7 +55,7 @@ class TestBody(
     private fun runMainTestSection() {
         try {
             testRunInterceptor.onMainSectionStarted(testInfo)
-            mainSection.invoke(StepContext(testInfo))
+            mainSection.invoke(TestContext(testInfo))
             testRunInterceptor.onMainSectionFinishedSuccess(testInfo)
         } catch (e: Throwable) {
             testRunInterceptor.onMainSectionFinishedFailed(testInfo, e)
@@ -78,7 +78,7 @@ class TestBody(
         var testInfo: TestInfo? = null
         var beforeTestSection: (() -> Unit)? = null
         var afterTestSection: (() -> Unit)? = null
-        var mainTestSection: (StepContext.() -> Unit)? = null
+        var mainTestSection: (TestContext.() -> Unit)? = null
 
         fun build(): TestBody {
             if (testInfo == null || beforeTestSection == null || afterTestSection == null || mainTestSection == null)
