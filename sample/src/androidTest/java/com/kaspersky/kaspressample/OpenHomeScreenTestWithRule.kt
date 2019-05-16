@@ -7,14 +7,14 @@ import android.support.test.runner.AndroidJUnit4
 import com.kaspersky.kaspressample.screen.HomeScreen
 import com.kaspersky.kaspressample.screen.MainScreen
 import com.kaspersky.kaspresso.device.Device
-import com.kaspersky.kaspresso.testcases.TestCase
+import com.kaspersky.kaspresso.testcases.TestCaseRule
 import com.kaspersky.kaspresso.viewactions.orientation.Orientation
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class OpenHomeScreenTest : TestCase() {
+class OpenHomeScreenTestWithRule {
 
     private val mainScreen by lazy { MainScreen() }
     private val homeScreen by lazy { HomeScreen() }
@@ -30,9 +30,13 @@ class OpenHomeScreenTest : TestCase() {
     @JvmField
     val activityTestRule = ActivityTestRule(MainActivity::class.java, true, false)
 
+    @Rule
+    @JvmField
+    val testCaseRule = TestCaseRule()
+
     @Test
     fun test() {
-        beforeTest {
+        testCaseRule.beforeTest {
             Device.exploit.setOrientation(Orientation.Landscape)
             activityTestRule.launchActivity(null)
         }.afterTest {
