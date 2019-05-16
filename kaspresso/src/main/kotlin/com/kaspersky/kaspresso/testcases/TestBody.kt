@@ -6,7 +6,7 @@ import com.kaspersky.kaspresso.interceptors.TestRunInterceptor
 import com.kaspersky.kaspresso.interceptors.impl.composite.TestRunCompositeInterceptor
 
 class TestBody(
-    private val title: String,
+    private val testInfo: TestInfo,
     private val beforeTestActions: () -> Unit,
     private val afterTestActions: () -> Unit,
     private val mainSection: Scenario.() -> Unit
@@ -22,16 +22,16 @@ class TestBody(
     }
 
     fun run() {
-        testRunInterceptor.onTestStarted(this)
+        testRunInterceptor.onTestStarted(testInfo)
         var stepsPassed = true
 
         try {
             runBeforeTestSection()
-            testRunInterceptor.onMainSectionStarted(this)
-            mainSection.invoke(Scenario(title))
-            testRunInterceptor.onMainSectionFinishedSuccess(this)
+            testRunInterceptor.onMainSectionStarted(testInfo)
+            mainSection.invoke(Scenario(testInfo))
+            testRunInterceptor.onMainSectionFinishedSuccess(testInfo)
         } catch (e: Throwable) {
-            testRunInterceptor.onMainSectionFinishedFailed(this, e)
+            testRunInterceptor.onMainSectionFinishedFailed(testInfo, e)
             stepsPassed = false
             exceptions.add(e)
         } finally {
@@ -41,30 +41,30 @@ class TestBody(
     }
 
     private fun runAfterTestSection(stepsPassed: Boolean) {
-        testRunInterceptor.onAfterSectionStarted(this)
+        testRunInterceptor.onAfterSectionStarted(testInfo)
         var testPassed = stepsPassed
 
         try {
             afterTestActions.invoke()
-            testRunInterceptor.onAfterSectionFinishedSuccess(this)
+            testRunInterceptor.onAfterSectionFinishedSuccess(testInfo)
         } catch (e: Throwable) {
-            testRunInterceptor.onAfterSectionFinishedFailed(this, e)
+            testRunInterceptor.onAfterSectionFinishedFailed(testInfo, e)
             testPassed = false
             throw e
         } finally {
-            testRunInterceptor.onTestFinished(this, testPassed)
+            testRunInterceptor.onTestFinished(testInfo, testPassed)
         }
     }
 
     private fun runBeforeTestSection() {
 
-        testRunInterceptor.onBeforeSectionStarted(this)
+        testRunInterceptor.onBeforeSectionStarted(testInfo)
 
         try {
             beforeTestActions.invoke()
-            testRunInterceptor.onBeforeSectionFinishedSuccess(this)
+            testRunInterceptor.onBeforeSectionFinishedSuccess(testInfo)
         } catch (e: Throwable) {
-            testRunInterceptor.onBeforeSectionFinishedFailed(this, e)
+            testRunInterceptor.onBeforeSectionFinishedFailed(testInfo, e)
             throw e
         }
     }
@@ -101,7 +101,7 @@ class TestBody(
                 throw IllegalArgumentException("Check all section filled")
 
             return TestBody(
-                className!!,
+                TestInfo(className!!),
                 beforeTestSection!!,
                 afterTestSection!!,
                 mainSection!!

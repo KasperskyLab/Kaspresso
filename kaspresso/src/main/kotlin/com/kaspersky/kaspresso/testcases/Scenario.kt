@@ -6,7 +6,7 @@ import com.kaspersky.kaspresso.configurator.Configurator
  * A representation of a sequence of test's actions.
  */
 class Scenario(
-    private val title: String
+    private val testInfo: TestInfo
 ) {
     /**
      * A step counter to evaluate current step's tag.
@@ -25,7 +25,7 @@ class Scenario(
             action = action,
             stepInfo = StepInfo(
                 description = description,
-                testClassName = title,
+                testClassName = testInfo.testName,
                 level = 0, //TODO calculate
                 orderOnLevel = 0, //TODO calculate
                 ordinal = ++stepsCounter

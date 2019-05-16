@@ -2,31 +2,31 @@ package com.kaspersky.kaspresso.interceptors.impl.logging
 
 import com.kaspersky.kaspresso.interceptors.TestRunInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
-import com.kaspersky.kaspresso.testcases.TestBody
+import com.kaspersky.kaspresso.testcases.TestInfo
 
 class TestRunLoggerInterceptor(private val logger: UiTestLogger) : TestRunInterceptor {
 
-    override fun onBeforeSectionStarted(testBody: TestBody) {
+    override fun onBeforeSectionStarted(testInfo: TestInfo) {
         logger.section("BEFORE TEST SECTION")
     }
 
-    override fun onBeforeSectionFinishedFailed(testBody: TestBody, throwable: Throwable) {
+    override fun onBeforeSectionFinishedFailed(testInfo: TestInfo, throwable: Throwable) {
         logger.section("BEFORE TEST SECTION FAILED")
     }
 
-    override fun onMainSectionStarted(testBody: TestBody) {
+    override fun onMainSectionStarted(testInfo: TestInfo) {
         logger.section("TEST SECTION")
     }
 
-    override fun onAfterSectionStarted(testBody: TestBody) {
+    override fun onAfterSectionStarted(testInfo: TestInfo) {
         logger.section("AFTER TEST SECTION")
     }
 
-    override fun onAfterSectionFinishedFailed(testBody: TestBody, throwable: Throwable) {
+    override fun onAfterSectionFinishedFailed(testInfo: TestInfo, throwable: Throwable) {
         logger.section("AFTER TEST SECTION FAILED")
     }
 
-    override fun onTestFinished(testBody: TestBody, success: Boolean) {
+    override fun onTestFinished(testInfo: TestInfo, success: Boolean) {
         logger.section(if (success) "TEST PASSED" else "TEST FAILED")
     }
 }

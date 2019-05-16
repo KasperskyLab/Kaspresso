@@ -30,7 +30,6 @@ import com.kaspersky.kaspresso.interceptors.impl.screenshot.TestRunnerScreenshot
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.logger.UiTestLoggerImpl
 import com.kaspersky.kaspresso.testcases.Scenario
-import com.kaspersky.kaspresso.testcases.TestBody
 import com.kaspersky.klkakao.configurator.KakaoConfigurator
 
 /**
@@ -158,7 +157,7 @@ object Configurator {
     internal var stepInterceptors: List<StepInterceptor> = emptyList()
 
     /**
-     * An interceptors set that actually manages the execution of test sections [TestBody]. Interceptors works using
+     * An interceptors set that actually manages the execution of test sections [TestInfo]. Interceptors works using
      * decorator pattern. First interceptor wraps others
      */
     internal var testRunInterceptors: List<TestRunInterceptor> = emptyList()

@@ -2,54 +2,54 @@ package com.kaspersky.kaspresso.interceptors.impl.composite
 
 import com.kaspersky.kaspresso.extensions.other.forEachSafely
 import com.kaspersky.kaspresso.interceptors.TestRunInterceptor
-import com.kaspersky.kaspresso.testcases.TestBody
+import com.kaspersky.kaspresso.testcases.TestInfo
 
 
 class TestRunCompositeInterceptor(
     private val interceptors: List<TestRunInterceptor>,
     private val exceptions: MutableList<Throwable>
 ) : TestRunInterceptor {
-    override fun onTestStarted(testBody: TestBody) {
-        interceptors.forEachSafely(exceptions) { it.onTestStarted(testBody) }
+    override fun onTestStarted(testInfo: TestInfo) {
+        interceptors.forEachSafely(exceptions) { it.onTestStarted(testInfo) }
     }
 
-    override fun onBeforeSectionStarted(testBody: TestBody) {
-        interceptors.forEachSafely(exceptions) { it.onBeforeSectionStarted(testBody) }
+    override fun onBeforeSectionStarted(testInfo: TestInfo) {
+        interceptors.forEachSafely(exceptions) { it.onBeforeSectionStarted(testInfo) }
     }
 
-    override fun onBeforeSectionFinishedSuccess(testBody: TestBody) {
-        interceptors.forEachSafely(exceptions) { it.onBeforeSectionFinishedSuccess(testBody) }
+    override fun onBeforeSectionFinishedSuccess(testInfo: TestInfo) {
+        interceptors.forEachSafely(exceptions) { it.onBeforeSectionFinishedSuccess(testInfo) }
     }
 
-    override fun onBeforeSectionFinishedFailed(testBody: TestBody, throwable: Throwable) {
-        interceptors.forEachSafely(exceptions) { it.onBeforeSectionFinishedFailed(testBody, throwable) }
+    override fun onBeforeSectionFinishedFailed(testInfo: TestInfo, throwable: Throwable) {
+        interceptors.forEachSafely(exceptions) { it.onBeforeSectionFinishedFailed(testInfo, throwable) }
     }
 
-    override fun onMainSectionStarted(testBody: TestBody) {
-        interceptors.forEachSafely(exceptions) { it.onMainSectionStarted(testBody) }
+    override fun onMainSectionStarted(testInfo: TestInfo) {
+        interceptors.forEachSafely(exceptions) { it.onMainSectionStarted(testInfo) }
     }
 
-    override fun onMainSectionFinishedSuccess(testBody: TestBody) {
-        interceptors.forEachSafely(exceptions) { it.onMainSectionFinishedSuccess(testBody) }
+    override fun onMainSectionFinishedSuccess(testInfo: TestInfo) {
+        interceptors.forEachSafely(exceptions) { it.onMainSectionFinishedSuccess(testInfo) }
     }
 
-    override fun onMainSectionFinishedFailed(testBody: TestBody, throwable: Throwable) {
-        interceptors.forEachSafely(exceptions) { it.onMainSectionFinishedFailed(testBody, throwable) }
+    override fun onMainSectionFinishedFailed(testInfo: TestInfo, throwable: Throwable) {
+        interceptors.forEachSafely(exceptions) { it.onMainSectionFinishedFailed(testInfo, throwable) }
     }
 
-    override fun onAfterSectionStarted(testBody: TestBody) {
-        interceptors.forEachSafely(exceptions) { it.onAfterSectionStarted(testBody) }
+    override fun onAfterSectionStarted(testInfo: TestInfo) {
+        interceptors.forEachSafely(exceptions) { it.onAfterSectionStarted(testInfo) }
     }
 
-    override fun onAfterSectionFinishedSuccess(testBody: TestBody) {
-        interceptors.forEachSafely(exceptions) { it.onAfterSectionFinishedSuccess(testBody) }
+    override fun onAfterSectionFinishedSuccess(testInfo: TestInfo) {
+        interceptors.forEachSafely(exceptions) { it.onAfterSectionFinishedSuccess(testInfo) }
     }
 
-    override fun onAfterSectionFinishedFailed(testBody: TestBody, throwable: Throwable) {
-        interceptors.forEachSafely(exceptions) { it.onAfterSectionFinishedFailed(testBody, throwable) }
+    override fun onAfterSectionFinishedFailed(testInfo: TestInfo, throwable: Throwable) {
+        interceptors.forEachSafely(exceptions) { it.onAfterSectionFinishedFailed(testInfo, throwable) }
     }
 
-    override fun onTestFinished(testBody: TestBody, success: Boolean) {
-        interceptors.forEachSafely(exceptions) { it.onTestFinished(testBody, success) }
+    override fun onTestFinished(testInfo: TestInfo, success: Boolean) {
+        interceptors.forEachSafely(exceptions) { it.onTestFinished(testInfo, success) }
     }
 }
