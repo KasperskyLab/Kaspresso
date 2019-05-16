@@ -29,7 +29,7 @@ import com.kaspersky.kaspresso.interceptors.impl.screenshot.ScreenshotStepInterc
 import com.kaspersky.kaspresso.interceptors.impl.screenshot.TestRunnerScreenshotInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.logger.UiTestLoggerImpl
-import com.kaspersky.kaspresso.testcases.Scenario
+import com.kaspersky.kaspresso.testcases.core.Scenario
 import com.kaspersky.klkakao.configurator.KakaoConfigurator
 
 /**

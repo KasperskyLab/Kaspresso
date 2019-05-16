@@ -1,4 +1,6 @@
-package com.kaspersky.kaspresso.testcases
+package com.kaspersky.kaspresso.testcases.sections
+
+import com.kaspersky.kaspresso.testcases.core.TestBody
 
 /**
  * A representation of a set of actions to be invoked before the test.
@@ -11,5 +13,9 @@ class BeforeTestSection(private val builder: TestBody.Builder) {
      *
      * @param actions actions to be wrapped and invoked before the test.
      */
-    fun beforeTest(actions: () -> Unit) = AfterTestSection(builder.beforeSection(actions))
+    fun beforeTest(actions: () -> Unit): AfterTestSection {
+        return AfterTestSection(
+            builder.apply { beforeTestSection = actions }
+        )
+    }
 }

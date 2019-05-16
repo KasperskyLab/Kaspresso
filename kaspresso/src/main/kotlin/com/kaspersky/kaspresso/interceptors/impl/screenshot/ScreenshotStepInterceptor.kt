@@ -2,7 +2,7 @@ package com.kaspersky.kaspresso.interceptors.impl.screenshot
 
 import com.kaspersky.kaspresso.device.screenshots.Screenshots
 import com.kaspersky.kaspresso.interceptors.StepInterceptor
-import com.kaspersky.kaspresso.testcases.StepInfo
+import com.kaspersky.kaspresso.testcases.models.StepInfo
 
 class ScreenshotStepInterceptor(
     private val screenshots: Screenshots

@@ -1,6 +1,6 @@
 package com.kaspersky.kaspresso.interceptors
 
-import com.kaspersky.kaspresso.testcases.StepInfo
+import com.kaspersky.kaspresso.testcases.models.StepInfo
 
 interface StepInterceptor {
 
