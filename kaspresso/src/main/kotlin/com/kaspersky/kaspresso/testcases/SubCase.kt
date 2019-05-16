@@ -1,7 +1,6 @@
 package com.kaspersky.kaspresso.testcases
 
-import com.kaspersky.kaspresso.testcases.core.Scenario
-import com.kaspersky.kaspresso.testcases.core.TestBody
+import com.kaspersky.kaspresso.testcases.core.StepContext
 import com.kaspersky.kaspresso.testcases.models.TestInfo
 
 /**
@@ -14,17 +13,7 @@ abstract class SubCase {
     /**
      * Steps to run. Need to be implemented in derived [SubCase].
      */
-    protected abstract val steps: Scenario.() -> Unit
+    protected abstract val steps: StepContext.() -> Unit
 
-    fun run() {
-        TestBody.Builder()
-            .apply {
-                testInfo = info
-                beforeTestSection = { Unit }
-                afterTestSection = { Unit }
-                mainTestSection = { steps.invoke(Scenario(info)) }
-            }
-            .build()
-            .run()
-    }
+    fun run() = steps.invoke(StepContext(info))
 }

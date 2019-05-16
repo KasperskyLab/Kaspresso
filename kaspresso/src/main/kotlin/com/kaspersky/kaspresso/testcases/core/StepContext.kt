@@ -8,10 +8,7 @@ import com.kaspersky.kaspresso.interceptors.StepInterceptor
 import com.kaspersky.kaspresso.testcases.models.StepInfo
 import com.kaspersky.kaspresso.testcases.models.TestInfo
 
-/**
- * A representation of a sequence of test's actions.
- */
-class Scenario(
+class StepContext(
     private val testInfo: TestInfo
 ) {
     /**
@@ -22,12 +19,11 @@ class Scenario(
     private val interceptors: List<StepInterceptor> = Configurator.stepInterceptors
 
     /**
-     * A representation of a [Scenario]'s step.
+     * A representation of a [StepContext]'s step.
      *
      * @param description a description of a step.
      * @param actions a set of actions of a step.
      */
-
     fun step(description: String, action: () -> Unit) {
 
         val exceptions: MutableList<Throwable> = mutableListOf()
