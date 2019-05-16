@@ -1,6 +1,6 @@
 package com.kaspersky.kaspresso.testcases.sections
 
-import com.kaspersky.kaspresso.testcases.core.StepContext
+import com.kaspersky.kaspresso.testcases.core.TestContext
 import com.kaspersky.kaspresso.testcases.core.TestBody
 
 class MainTestSection(
@@ -13,7 +13,7 @@ class MainTestSection(
      *
      * @param steps steps to run.
      */
-    fun runSteps(steps: StepContext.() -> Unit) {
+    fun runSteps(steps: TestContext.() -> Unit) {
         runTest(
             builder
                 .apply { mainTestSection = steps }

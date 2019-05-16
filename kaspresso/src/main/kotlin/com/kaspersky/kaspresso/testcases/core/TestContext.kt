@@ -5,11 +5,11 @@ import com.kaspersky.kaspresso.extensions.other.forEachSafely
 import com.kaspersky.kaspresso.extensions.other.invokeSafely
 import com.kaspersky.kaspresso.extensions.other.throwAll
 import com.kaspersky.kaspresso.interceptors.StepInterceptor
-import com.kaspersky.kaspresso.testcases.SubCase
+import com.kaspersky.kaspresso.testcases.StepsPack
 import com.kaspersky.kaspresso.testcases.models.StepInfo
 import com.kaspersky.kaspresso.testcases.models.TestInfo
 
-class StepContext(
+class TestContext(
     private val testInfo: TestInfo
 ) {
     /**
@@ -20,7 +20,7 @@ class StepContext(
     private val interceptors: List<StepInterceptor> = Configurator.stepInterceptors
 
     /**
-     * A representation of a [StepContext]'s step.
+     * A representation of a [TestContext]'s step.
      *
      * @param description a description of a step.
      * @param actions a set of actions of a step.
@@ -56,7 +56,5 @@ class StepContext(
         exceptions.throwAll()
     }
 
-    fun step(subCase: SubCase){
-        subCase.run(this)
-    }
+    fun stepsPack(stepsPack: StepsPack) = stepsPack.invoke(this)
 }
