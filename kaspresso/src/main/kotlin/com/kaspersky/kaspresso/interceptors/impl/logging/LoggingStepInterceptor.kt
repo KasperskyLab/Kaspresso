@@ -3,39 +3,39 @@ package com.kaspersky.kaspresso.interceptors.impl.logging
 import com.kaspersky.kaspresso.extensions.other.toTime
 import com.kaspersky.kaspresso.interceptors.StepInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
-import com.kaspersky.kaspresso.testcases.Step
+import com.kaspersky.kaspresso.testcases.StepInfo
 
 class LoggingStepInterceptor(
     private val logger: UiTestLogger
 ) : StepInterceptor {
 
-    private val stepStartMap: MutableMap<Step, Long> = mutableMapOf()
+    private val stepStartMap: MutableMap<StepInfo, Long> = mutableMapOf()
 
-    override fun interceptBefore(step: Step) {
-        startStepTimer(step)
-        logger.header(getStepHeader(step))
+    override fun interceptBefore(stepInfo: StepInfo) {
+        startStepTimer(stepInfo)
+        logger.header(getStepHeader(stepInfo))
     }
 
-    override fun interceptAfterWithSuccess(step: Step) {
-        val stepTime = stopStepTimerAndGetTime(step)
-        logger.i("${getStepHeader(step)} SUCCEED. ${getTimeReport(stepTime)} ")
+    override fun interceptAfterWithSuccess(stepInfo: StepInfo) {
+        val stepTime = stopStepTimerAndGetTime(stepInfo)
+        logger.i("${getStepHeader(stepInfo)} SUCCEED. ${getTimeReport(stepTime)} ")
     }
 
-    override fun interceptAfterWithError(step: Step, error: Throwable) {
-        val stepTime = stopStepTimerAndGetTime(step)
-        logger.i("${getStepHeader(step)} FAILED. ${getTimeReport(stepTime)} ")
+    override fun interceptAfterWithError(stepInfo: StepInfo, error: Throwable) {
+        val stepTime = stopStepTimerAndGetTime(stepInfo)
+        logger.i("${getStepHeader(stepInfo)} FAILED. ${getTimeReport(stepTime)} ")
     }
 
-    override fun interceptAfterFinally(step: Step) {
+    override fun interceptAfterFinally(stepInfo: StepInfo) {
         logger.line()
     }
 
-    private fun startStepTimer(step: Step) {
-        stepStartMap[step] = System.currentTimeMillis()
+    private fun startStepTimer(stepInfo: StepInfo) {
+        stepStartMap[stepInfo] = System.currentTimeMillis()
     }
 
-    private fun stopStepTimerAndGetTime(step: Step): Triple<Long, Long, Long> {
-        val stepStartTime: Long? = stepStartMap.remove(step)
+    private fun stopStepTimerAndGetTime(stepInfo: StepInfo): Triple<Long, Long, Long> {
+        val stepStartTime: Long? = stepStartMap.remove(stepInfo)
 
         stepStartTime ?: throw AssertionError("Step start timestamp was already removed")
 
@@ -47,7 +47,7 @@ class LoggingStepInterceptor(
         return "It took $minutes minutes, $secs seconds and $millis millis."
     }
 
-    private fun getStepHeader(step: Step): String {
-        return "TEST STEP: \"${step.ordinal}. ${step.description}\" in ${step.testClassName}"
+    private fun getStepHeader(stepInfo: StepInfo): String {
+        return "TEST STEP: \"${stepInfo.ordinal}. ${stepInfo.description}\" in ${stepInfo.testClassName}"
     }
 }

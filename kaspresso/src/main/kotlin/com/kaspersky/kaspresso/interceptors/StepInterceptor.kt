@@ -1,14 +1,14 @@
 package com.kaspersky.kaspresso.interceptors
 
-import com.kaspersky.kaspresso.testcases.Step
+import com.kaspersky.kaspresso.testcases.StepInfo
 
 interface StepInterceptor {
 
-    fun interceptBefore(step: Step) = Unit
+    fun interceptBefore(stepInfo: StepInfo) = Unit
 
-    fun interceptAfterWithSuccess(step: Step) = Unit
+    fun interceptAfterWithSuccess(stepInfo: StepInfo) = Unit
 
-    fun interceptAfterWithError(step: Step, error: Throwable) = Unit
+    fun interceptAfterWithError(stepInfo: StepInfo, error: Throwable) = Unit
 
-    fun interceptAfterFinally(step: Step) = Unit
+    fun interceptAfterFinally(stepInfo: StepInfo) = Unit
 }

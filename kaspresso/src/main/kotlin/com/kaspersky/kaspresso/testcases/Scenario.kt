@@ -22,12 +22,14 @@ class Scenario(
 
     fun step(description: String, action: () -> Unit) {
         Step(
-            description = description,
             action = action,
-            testClassName = title,
-            level = 0, //TODO calculate
-            orderOnLevel = 0, //TODO calculate
-            ordinal = ++stepsCounter,
+            stepInfo = StepInfo(
+                description = description,
+                testClassName = title,
+                level = 0, //TODO calculate
+                orderOnLevel = 0, //TODO calculate
+                ordinal = ++stepsCounter
+            ),
             interceptors = Configurator.stepInterceptors
         ).proceed()
     }
