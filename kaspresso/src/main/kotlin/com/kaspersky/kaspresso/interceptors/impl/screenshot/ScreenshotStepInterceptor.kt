@@ -2,19 +2,19 @@ package com.kaspersky.kaspresso.interceptors.impl.screenshot
 
 import com.kaspersky.kaspresso.device.screenshots.Screenshots
 import com.kaspersky.kaspresso.interceptors.StepInterceptor
-import com.kaspersky.kaspresso.testcases.Step
+import com.kaspersky.kaspresso.testcases.StepInfo
 
 class ScreenshotStepInterceptor(
     private val screenshots: Screenshots
 ) : StepInterceptor {
 
-    override fun interceptAfterWithSuccess(step: Step) {
-        screenshots.makeIfPossible(makeScreenshotTag(step))
+    override fun interceptAfterWithSuccess(stepInfo: StepInfo) {
+        screenshots.makeIfPossible(makeScreenshotTag(stepInfo))
     }
 
-    override fun interceptAfterWithError(step: Step, error: Throwable) {
-        screenshots.makeIfPossible("${makeScreenshotTag(step)}_failure_${error.javaClass.simpleName}")
+    override fun interceptAfterWithError(stepInfo: StepInfo, error: Throwable) {
+        screenshots.makeIfPossible("${makeScreenshotTag(stepInfo)}_failure_${error.javaClass.simpleName}")
     }
 
-    private fun makeScreenshotTag(step: Step) = "${step.testClassName}_step_${step.ordinal}"
+    private fun makeScreenshotTag(stepInfo: StepInfo) = "${stepInfo.testClassName}_step_${stepInfo.ordinal}"
 }
