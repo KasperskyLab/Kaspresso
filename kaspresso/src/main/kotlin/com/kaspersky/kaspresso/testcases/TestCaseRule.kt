@@ -13,7 +13,10 @@ class TestCaseRule(
     override fun apply(base: Statement?, description: Description?) = object : Statement() {
         override fun evaluate() {
             configBuilder.commit()
-            base!!.evaluate()
+            base?.evaluate() ?: throw RuntimeException(
+                "It's so unbelievably! I don't know why but TestCaseRule was broken with nullable base: Statement? argument. " +
+                        "Try TestCase simple abstract class (example - OpenHomeScreenTest)"
+            )
         }
     }
 
