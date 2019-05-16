@@ -5,7 +5,7 @@ import com.kaspersky.kaspresso.extensions.other.forEachSafely
 import com.kaspersky.kaspresso.extensions.other.invokeSafely
 import com.kaspersky.kaspresso.extensions.other.throwAll
 import com.kaspersky.kaspresso.interceptors.StepInterceptor
-import com.kaspersky.kaspresso.testcases.StepsPack
+import com.kaspersky.kaspresso.testcases.Scenario
 import com.kaspersky.kaspresso.testcases.models.StepInfo
 import com.kaspersky.kaspresso.testcases.models.TestInfo
 
@@ -56,5 +56,5 @@ class TestContext(
         exceptions.throwAll()
     }
 
-    fun stepsPack(stepsPack: StepsPack) = stepsPack.invoke(this)
+    fun scenario(scenario: Scenario) = scenario.invoke(this)
 }

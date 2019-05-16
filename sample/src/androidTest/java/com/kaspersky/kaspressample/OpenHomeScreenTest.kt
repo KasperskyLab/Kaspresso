@@ -56,8 +56,8 @@ class OpenHomeScreenTest : TestCase() {
                 }
             }
 
-            stepsPack(
-                CheckHomeTitleStepsPack()
+            scenario(
+                CheckHomeTitleScenario()
             )
 
             step("Just Empty Step") {}

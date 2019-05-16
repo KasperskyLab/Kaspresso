@@ -151,7 +151,7 @@ object Configurator {
     internal var executingInterceptor: ExecutingInterceptor? = null
 
     /**
-     * An interceptors set that actually manages the execution of stepsPack [TestContext.step]. Interceptors works using
+     * An interceptors set that actually manages the execution of steps [TestContext.step]. Interceptors works using
      * decorator pattern. First interceptor wraps others
      */
     internal var stepInterceptors: List<StepInterceptor> = emptyList()

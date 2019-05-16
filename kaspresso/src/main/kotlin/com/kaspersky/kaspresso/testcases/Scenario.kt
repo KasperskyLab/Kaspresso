@@ -3,12 +3,12 @@ package com.kaspersky.kaspresso.testcases
 import com.kaspersky.kaspresso.testcases.core.TestContext
 
 /**
- * A base class for all step packs. A representation of some repeating steps inside the [TestCase].
+ * A base class for scenarios. A representation of some repeating steps inside the [TestCase].
  */
-abstract class StepsPack {
+abstract class Scenario {
 
     /**
-     * Steps to run. Need to be implemented in derived [StepsPack].
+     * Steps to run. Need to be implemented in derived [Scenario].
      */
     protected abstract val steps: TestContext.() -> Unit
 
