@@ -8,12 +8,12 @@ import com.kaspersky.kaspresso.testcases.models.TestInfo
  */
 abstract class SubCase {
 
-    private val info = TestInfo(javaClass.simpleName)
-
     /**
      * Steps to run. Need to be implemented in derived [SubCase].
      */
     protected abstract val steps: StepContext.() -> Unit
 
-    fun run() = steps.invoke(StepContext(info))
+    fun run(stepContext: StepContext){
+        steps.invoke(stepContext)
+    }
 }

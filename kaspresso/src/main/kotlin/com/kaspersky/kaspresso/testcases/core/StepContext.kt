@@ -5,6 +5,7 @@ import com.kaspersky.kaspresso.extensions.other.forEachSafely
 import com.kaspersky.kaspresso.extensions.other.invokeSafely
 import com.kaspersky.kaspresso.extensions.other.throwAll
 import com.kaspersky.kaspresso.interceptors.StepInterceptor
+import com.kaspersky.kaspresso.testcases.SubCase
 import com.kaspersky.kaspresso.testcases.models.StepInfo
 import com.kaspersky.kaspresso.testcases.models.TestInfo
 
@@ -53,5 +54,9 @@ class StepContext(
         }
 
         exceptions.throwAll()
+    }
+
+    fun step(subCase: SubCase){
+        subCase.run(this)
     }
 }
