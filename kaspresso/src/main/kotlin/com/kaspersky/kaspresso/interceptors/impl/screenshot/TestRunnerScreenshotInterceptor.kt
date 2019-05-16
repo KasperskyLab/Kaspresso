@@ -2,7 +2,7 @@ package com.kaspersky.kaspresso.interceptors.impl.screenshot
 
 import com.kaspersky.kaspresso.device.screenshots.Screenshots
 import com.kaspersky.kaspresso.interceptors.TestRunInterceptor
-import com.kaspersky.kaspresso.testcases.TestInfo
+import com.kaspersky.kaspresso.testcases.models.TestInfo
 
 class TestRunnerScreenshotInterceptor(private val screenshots: Screenshots) :
     TestRunInterceptor {
