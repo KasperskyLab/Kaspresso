@@ -55,10 +55,15 @@ class OpenHomeScreenTest : TestCase() {
                     }
                 }
             }
+            step("My Awesome Scenario") {
+                scenario(
+                    CheckHomeTitleScenario()
+                )
+                step("Just Empty SubStep") {
+                    step("Just Empty SubSubStep") {}
+                }
+            }
 
-            scenario(
-                CheckHomeTitleScenario()
-            )
 
             step("Just Empty Step") {}
         }

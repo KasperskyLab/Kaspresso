@@ -4,6 +4,6 @@ data class StepInfo(
     val description: String,
     val testClassName: String,
     val level: Int,
-    val orderOnLevel: Int,
+    val number: String,
     val ordinal: Int
 )
