@@ -81,14 +81,12 @@ class TestBody(
         var mainTestSection: (TestContext.() -> Unit)? = null
 
         fun build(): TestBody {
-            if (testInfo == null || beforeTestSection == null || afterTestSection == null || mainTestSection == null)
-                throw IllegalArgumentException("Check all section filled")
 
             return TestBody(
-                testInfo!!,
-                beforeTestSection!!,
-                afterTestSection!!,
-                mainTestSection!!
+                requireNotNull(testInfo),
+                requireNotNull(beforeTestSection),
+                requireNotNull(afterTestSection),
+                requireNotNull(mainTestSection)
             )
         }
     }
