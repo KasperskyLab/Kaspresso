@@ -1,4 +1,4 @@
-package com.kaspersky.kaspresso.testcases
+package com.kaspersky.kaspresso.testcases.models
 
 data class StepInfo(
     val description: String,

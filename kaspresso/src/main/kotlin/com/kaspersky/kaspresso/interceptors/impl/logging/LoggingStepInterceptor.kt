@@ -3,7 +3,7 @@ package com.kaspersky.kaspresso.interceptors.impl.logging
 import com.kaspersky.kaspresso.extensions.other.toTime
 import com.kaspersky.kaspresso.interceptors.StepInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
-import com.kaspersky.kaspresso.testcases.StepInfo
+import com.kaspersky.kaspresso.testcases.models.StepInfo
 
 class LoggingStepInterceptor(
     private val logger: UiTestLogger

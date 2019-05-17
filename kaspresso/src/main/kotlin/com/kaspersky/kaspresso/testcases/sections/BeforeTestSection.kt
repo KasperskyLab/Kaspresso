@@ -1,0 +1,22 @@
+package com.kaspersky.kaspresso.testcases.sections
+
+import com.kaspersky.kaspresso.testcases.core.TestBody
+
+/**
+ * A representation of a set of actions to be invoked before the test.
+ */
+class BeforeTestSection(
+    private val builder: TestBody.Builder
+) {
+    /**
+     * Wraps [actions] in a lambda, that will invoke these [actions] and make screenshot if [actions] will fail when it
+     * will be invoked itself, and sets this lambda as the [MainTestSection.beforeTestActions] to [runner].
+     *
+     * @param actions actions to be wrapped and invoked before the test.
+     */
+    fun beforeTest(actions: () -> Unit): AfterTestSection {
+        return AfterTestSection(
+            builder.apply { beforeTestSection = actions }
+        )
+    }
+}

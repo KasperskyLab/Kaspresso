@@ -24,15 +24,12 @@ import com.kaspersky.kaspresso.device.screenshots.Screenshots
 import com.kaspersky.kaspresso.device.screenshots.ScreenshotsImpl
 import com.kaspersky.kaspresso.interceptors.*
 import com.kaspersky.kaspresso.interceptors.impl.flakysafety.FlakySafeExecutingInterceptor
-import com.kaspersky.kaspresso.interceptors.impl.logging.LoggingFailureInterceptor
-import com.kaspersky.kaspresso.interceptors.impl.logging.LoggingViewActionInterceptor
-import com.kaspersky.kaspresso.interceptors.impl.logging.LoggingViewAssertionInterceptor
+import com.kaspersky.kaspresso.interceptors.impl.logging.*
+import com.kaspersky.kaspresso.interceptors.impl.screenshot.ScreenshotStepInterceptor
+import com.kaspersky.kaspresso.interceptors.impl.screenshot.TestRunnerScreenshotInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.logger.UiTestLoggerImpl
-import com.kaspersky.kaspresso.testcases.Scenario
-import com.kaspersky.kaspresso.interceptors.impl.logging.LoggingStepInterceptor
-import com.kaspersky.kaspresso.interceptors.impl.screenshot.ScreenshotStepInterceptor
-import com.kaspersky.kaspresso.interceptors.StepInterceptor
+import com.kaspersky.kaspresso.testcases.core.TestContext
 import com.kaspersky.klkakao.configurator.KakaoConfigurator
 
 /**
@@ -154,10 +151,16 @@ object Configurator {
     internal var executingInterceptor: ExecutingInterceptor? = null
 
     /**
-     * An interceptors set that actually manages the execution of steps [Scenario.step]. Interceptors works using
+     * An interceptors set that actually manages the execution of steps [TestContext.step]. Interceptors works using
      * decorator pattern. First interceptor wraps others
      */
     internal var stepInterceptors: List<StepInterceptor> = emptyList()
+
+    /**
+     * An interceptors set that actually manages the execution of test sections [TestInfo]. Interceptors works using
+     * decorator pattern. First interceptor wraps others
+     */
+    internal var testRunInterceptors: List<TestRunInterceptor> = emptyList()
 
     /**
      * A class for [Configurator] initialization. The right way to change [Configurator] settings is to use [Builder].
@@ -180,6 +183,10 @@ object Configurator {
                     stepInterceptors = listOf(
                         LoggingStepInterceptor(logger),
                         ScreenshotStepInterceptor(screenshots)
+                    )
+                    testRunInterceptors = listOf(
+                        TestRunLoggerInterceptor(logger),
+                        TestRunnerScreenshotInterceptor(screenshots)
                     )
                 }
             }
@@ -220,6 +227,8 @@ object Configurator {
         var failureInterceptor: FailureInterceptor? = null
 
         var stepInterceptors: List<StepInterceptor> = emptyList()
+
+        var testRunInterceptors: List<TestRunInterceptor> = emptyList()
         /**
          * Terminating method to commit built [Configurator] settings. Can be called only inside the framework
          * package. Actually called when the base [com.kaspersky.uitest_framework.testcase.TestCase] class is
@@ -260,6 +269,7 @@ object Configurator {
             failureInterceptor?.let { Espresso.setFailureHandler(it::interceptAndThrow) }
 
             Configurator.stepInterceptors = stepInterceptors
+            Configurator.testRunInterceptors = testRunInterceptors
         }
     }
 }

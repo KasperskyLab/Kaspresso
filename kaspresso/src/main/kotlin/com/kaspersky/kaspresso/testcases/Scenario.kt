@@ -1,36 +1,16 @@
 package com.kaspersky.kaspresso.testcases
 
-import com.kaspersky.kaspresso.configurator.Configurator
+import com.kaspersky.kaspresso.testcases.core.TestContext
 
 /**
- * A representation of a sequence of test's actions.
+ * A base class for scenarios. A representation of some repeating steps inside the [TestCase].
  */
-class Scenario(
-    private val title: String
-) {
-    /**
-     * A step counter to evaluate current step's tag.
-     */
-    private var stepsCounter: Int = 0
+abstract class Scenario {
 
     /**
-     * A representation of a [Scenario]'s step.
-     *
-     * @param description a description of a step.
-     * @param actions a set of actions of a step.
+     * Steps to run. Need to be implemented in derived [Scenario].
      */
+    protected abstract val steps: TestContext.() -> Unit
 
-    fun step(description: String, action: () -> Unit) {
-        Step(
-            action = action,
-            stepInfo = StepInfo(
-                description = description,
-                testClassName = title,
-                level = 0, //TODO calculate
-                orderOnLevel = 0, //TODO calculate
-                ordinal = ++stepsCounter
-            ),
-            interceptors = Configurator.stepInterceptors
-        ).proceed()
-    }
+    internal operator fun invoke(testContext: TestContext) = steps.invoke(testContext)
 }

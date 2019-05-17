@@ -1,7 +1,10 @@
 package com.kaspersky.kaspresso.testcases
 
 import com.kaspersky.kaspresso.configurator.Configurator
-import com.kaspersky.kaspresso.testcases.runners.TestCaseRunner
+import com.kaspersky.kaspresso.testcases.core.TestBody
+import com.kaspersky.kaspresso.testcases.models.TestInfo
+import com.kaspersky.kaspresso.testcases.sections.AfterTestSection
+import com.kaspersky.kaspresso.testcases.sections.BeforeTestSection
 
 /**
  *  A base class for all test cases. Extend this class with a single base project-wide inheritor of [TestCase] as a
@@ -11,6 +14,8 @@ import com.kaspersky.kaspresso.testcases.runners.TestCaseRunner
 abstract class TestCase(
     configBuilder: Configurator.Builder = Configurator.Builder.default()
 ) {
+    private val info = TestInfo(javaClass.simpleName)
+
     /**
      * Finishes building of [Configurator]. Passing [Configurator.Builder] to base [TestCase]'s constructor is the only
      * way for project-wide inheritor of [TestCase] to tune [Configurator].
@@ -26,10 +31,9 @@ abstract class TestCase(
      * @param actions actions to invoke in before test section.
      * @return an existing instance of [AfterTestSection].
      */
-    protected fun beforeTest(actions: () -> Unit) = createBeforeTestSection().beforeTest(actions)
-
-    /**
-     * Creates an instance of [BeforeTestSection] with a new instance of [TestCaseRunner] as a parameter.
-     */
-    private fun createBeforeTestSection() = BeforeTestSection(TestCaseRunner(javaClass.simpleName))
+    protected fun beforeTest(actions: () -> Unit): AfterTestSection {
+        return BeforeTestSection(
+            TestBody.Builder().apply { testInfo = info }
+        ).beforeTest(actions)
+    }
 }

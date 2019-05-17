@@ -39,12 +39,15 @@ class OpenHomeScreenTest : TestCase() {
             Device.exploit.setOrientation(Orientation.Portrait)
         }.runSteps {
 
-            step("Open Home screen") {
+            step("Open Home Screen") {
                 mainScreen {
                     nextButton {
                         click()
                     }
                 }
+            }
+
+            step("Check Home Screen") {
                 homeScreen {
                     title {
                         isVisible()
@@ -52,6 +55,11 @@ class OpenHomeScreenTest : TestCase() {
                     }
                 }
             }
+
+            scenario(
+                CheckHomeTitleScenario()
+            )
+
             step("Just Empty Step") {}
         }
     }
