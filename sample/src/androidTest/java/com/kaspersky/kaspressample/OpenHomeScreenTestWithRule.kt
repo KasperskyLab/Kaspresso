@@ -32,7 +32,7 @@ class OpenHomeScreenTestWithRule {
 
     @Rule
     @JvmField
-    val testCaseRule = TestCaseRule()
+    val testCaseRule = TestCaseRule(this)
 
     @Test
     fun test() {
