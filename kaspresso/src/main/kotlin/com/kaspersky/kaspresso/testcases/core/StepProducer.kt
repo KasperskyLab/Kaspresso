@@ -10,7 +10,6 @@ class StepProducer(private val testInfo: TestInfo) {
 
     private var stepsCounter: Int = 0
 
-
     fun produceStepInfo(description: String): StepInfo {
         val localCurrentStep = currentStepResult
         val step: Step
@@ -27,12 +26,12 @@ class StepProducer(private val testInfo: TestInfo) {
             localCurrentStep.subSteps.add(step)
             currentStepResult = step
         }
-        return step.stepInfo
+        return step
     }
 
     fun onStepFinished(stepInfo: StepInfo) {
         val localCurrentStepResult = currentStepResult
-        if (localCurrentStepResult?.stepInfo != stepInfo)
+        if (localCurrentStepResult != stepInfo)
             throw IllegalStateException(
                 "Unable to finish step $stepInfo cause it is not current. " +
                         "Current step is $localCurrentStepResult. All steps: $stepResultList"
@@ -45,25 +44,38 @@ class StepProducer(private val testInfo: TestInfo) {
         stepNumber: MutableList<Int>,
         parentStep: Step? = null
     ): Step {
-        val stepInfo = StepInfo(
+        return Step(
             description = description,
             testClassName = testInfo.testName,
             level = stepNumber.size,
             number = stepNumber.joinToString(separator = "."),
-            ordinal = ++stepsCounter
+            ordinal = ++stepsCounter,
+            stepNumber = stepNumber,
+            parentStep = parentStep
         )
-        return Step(stepInfo, stepNumber, parentStep)
     }
 
-    private data class Step(
-        val stepInfo: StepInfo,
+
+    private class Step(
+        override val description: String,
+        override val testClassName: String,
+        override val level: Int,
+        override val number: String,
+        override val ordinal: Int,
         val stepNumber: MutableList<Int>,
         val parentStep: Step? = null,
         val subSteps: MutableList<Step> = mutableListOf()
-    ) {
+    ) : StepInfo {
 
         override fun toString(): String {
-            return "Step(stepInfo=$stepInfo, stepNumber=$stepNumber, subSteps=$subSteps)"
+            return "Step(" +
+                    "description=$description, " +
+                    "testClassName=$testClassName, " +
+                    "level=$level, number=$number, " +
+                    "ordinal=$ordinal, " +
+                    "stepNumber=$stepNumber, " +
+                    "subSteps=$subSteps" +
+                    ")"
         }
     }
 }
