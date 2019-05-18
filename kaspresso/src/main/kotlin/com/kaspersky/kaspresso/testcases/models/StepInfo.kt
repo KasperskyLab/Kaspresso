@@ -6,4 +6,7 @@ interface StepInfo {
     val level: Int
     val number: String
     val ordinal: Int
+    val subSteps: List<StepInfo>
+    val status: StepStatus
+    val throwable: Throwable?
 }

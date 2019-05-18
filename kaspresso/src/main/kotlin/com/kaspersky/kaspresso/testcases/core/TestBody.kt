@@ -1,13 +1,13 @@
 package com.kaspersky.kaspresso.testcases.core
 
 import com.kaspersky.kaspresso.configurator.Configurator
-import com.kaspersky.kaspresso.extensions.other.throwAll
+import com.kaspersky.kaspresso.extensions.other.getException
 import com.kaspersky.kaspresso.interceptors.TestRunInterceptor
 import com.kaspersky.kaspresso.interceptors.impl.composite.TestRunCompositeInterceptor
-import com.kaspersky.kaspresso.testcases.models.TestInfo
+import com.kaspersky.kaspresso.testcases.models.InternalTestInfo
 
 class TestBody(
-    private val testInfo: TestInfo,
+    private val testInfo: InternalTestInfo,
     private val beforeTestActions: () -> Unit,
     private val afterTestActions: () -> Unit,
     private val mainSection: TestContext.() -> Unit
@@ -16,9 +16,12 @@ class TestBody(
     private val testRunInterceptor: TestRunInterceptor =
         TestRunCompositeInterceptor(Configurator.testRunInterceptors, exceptions)
 
+    private val stepManager = StepManager(testInfo)
+
     private fun runAllSections() {
         var testPassed = true
 
+        var resultException: Throwable? = null
         try {
             testRunInterceptor.onTestStarted(testInfo)
 
@@ -34,11 +37,13 @@ class TestBody(
                 testPassed = false
                 exceptions.add(e)
             } finally {
+                resultException = exceptions.getException()
+                stepManager.onTestFinished(resultException)
                 testRunInterceptor.onTestFinished(testInfo, testPassed)
             }
         }
 
-        exceptions.throwAll()
+        resultException?.let { throw it }
     }
 
     private fun runBeforeTestSection() {
@@ -55,9 +60,11 @@ class TestBody(
     private fun runMainTestSection() {
         try {
             testRunInterceptor.onMainSectionStarted(testInfo)
-            mainSection.invoke(TestContext(testInfo))
+            mainSection.invoke(TestContext(stepManager))
+            stepManager.onStepsFinished()
             testRunInterceptor.onMainSectionFinishedSuccess(testInfo)
         } catch (e: Throwable) {
+            stepManager.onStepsFinished()
             testRunInterceptor.onMainSectionFinishedFailed(testInfo, e)
             throw e
         }
@@ -75,7 +82,7 @@ class TestBody(
     }
 
     class Builder {
-        var testInfo: TestInfo? = null
+        var testResult: InternalTestInfo? = null
         var beforeTestSection: (() -> Unit)? = null
         var afterTestSection: (() -> Unit)? = null
         var mainTestSection: (TestContext.() -> Unit)? = null
@@ -83,7 +90,7 @@ class TestBody(
         fun build(): TestBody {
 
             return TestBody(
-                requireNotNull(testInfo),
+                requireNotNull(testResult),
                 requireNotNull(beforeTestSection),
                 requireNotNull(afterTestSection),
                 requireNotNull(mainTestSection)

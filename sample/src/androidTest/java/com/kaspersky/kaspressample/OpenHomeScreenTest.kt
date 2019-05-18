@@ -59,6 +59,12 @@ class OpenHomeScreenTest : TestCase() {
                 scenario(
                     CheckHomeTitleScenario()
                 )
+
+                homeScreen {
+                    title {
+                        hasText("Ooops!") //Uncomment to fail test
+                    }
+                }
                 step("Just Empty SubStep") {
                     step("Just Empty SubSubStep") {}
                 }
