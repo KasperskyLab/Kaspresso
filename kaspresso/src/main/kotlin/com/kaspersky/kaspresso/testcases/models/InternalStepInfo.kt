@@ -1,12 +1,14 @@
 package com.kaspersky.kaspresso.testcases.models
 
-class InternalStepInfo(
+internal class InternalStepInfo(
     override val description: String,
     override val testClassName: String,
     override val level: Int,
     override val number: String,
     override val ordinal: Int,
+    // position on each level of step hierarchy
     val stepNumber: MutableList<Int>,
+    // internal mutable properties to hide mutability from users
     val parentStep: InternalStepInfo? = null,
     val internalSubSteps: MutableList<InternalStepInfo> = mutableListOf(),
     var internalStatus: StepStatus = StepStatus.STARTED,

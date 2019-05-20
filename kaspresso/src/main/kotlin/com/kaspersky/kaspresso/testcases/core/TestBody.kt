@@ -61,10 +61,10 @@ class TestBody(
         try {
             testRunInterceptor.onMainSectionStarted(testInfo)
             mainSection.invoke(TestContext(stepManager))
-            stepManager.onStepsFinished()
+            stepManager.onAllStepsFinished()
             testRunInterceptor.onMainSectionFinishedSuccess(testInfo)
         } catch (e: Throwable) {
-            stepManager.onStepsFinished()
+            stepManager.onAllStepsFinished()
             testRunInterceptor.onMainSectionFinishedFailed(testInfo, e)
             throw e
         }

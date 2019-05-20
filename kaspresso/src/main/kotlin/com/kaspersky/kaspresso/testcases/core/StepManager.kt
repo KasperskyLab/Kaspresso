@@ -13,19 +13,19 @@ class StepManager(private val testResult: InternalTestInfo) : StepProducer {
 
     private var stepsCounter: Int = 0
 
-    override fun produceStepInfo(description: String): StepInfo {
+    override fun produceStep(description: String): StepInfo {
         val localCurrentStep = currentStepResult
         val step: InternalStepInfo
         if (localCurrentStep == null) {
             val stepNumber = mutableListOf(stepResultList.size + 1)
-            step = produceStep(description, stepNumber)
+            step = produceStepInternal(description, stepNumber)
             currentStepResult = step
             stepResultList.add(step)
         } else {
             val stepNumber: MutableList<Int> = mutableListOf()
             stepNumber.addAll(localCurrentStep.stepNumber)
             stepNumber.add(localCurrentStep.internalSubSteps.size + 1)
-            step = produceStep(description, stepNumber, localCurrentStep)
+            step = produceStepInternal(description, stepNumber, localCurrentStep)
             localCurrentStep.internalSubSteps.add(step)
             currentStepResult = step
         }
@@ -45,7 +45,7 @@ class StepManager(private val testResult: InternalTestInfo) : StepProducer {
         currentStepResult = localCurrentStepResult.parentStep
     }
 
-    private fun produceStep(
+    private fun produceStepInternal(
         description: String,
         stepNumber: MutableList<Int>,
         parentStep: InternalStepInfo? = null
@@ -61,7 +61,7 @@ class StepManager(private val testResult: InternalTestInfo) : StepProducer {
         )
     }
 
-    fun onStepsFinished() {
+    fun onAllStepsFinished() {
 
         var localCurrentStep = currentStepResult
         var error: Throwable? = null
@@ -86,7 +86,7 @@ class StepManager(private val testResult: InternalTestInfo) : StepProducer {
         currentStepResult = null
 
         if (testResult.internalSteps.isNotEmpty()) {
-            throw AssertionError("onStepsFinished called on already finished test")
+            throw AssertionError("onAllStepsFinished called on already finished test")
         }
         testResult.internalSteps.addAll(stepResultList)
 

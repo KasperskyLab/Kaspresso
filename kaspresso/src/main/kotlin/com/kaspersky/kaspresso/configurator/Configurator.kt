@@ -189,7 +189,7 @@ object Configurator {
                     testRunInterceptors = listOf(
                         TestRunLoggerInterceptor(logger),
                         TestRunnerScreenshotInterceptor(screenshots),
-                        BuildStepReportInterceptor(AllureReportWriter(Configurator.logger))
+                        BuildStepReportInterceptor(AllureReportWriter(logger))
                     )
                 }
             }

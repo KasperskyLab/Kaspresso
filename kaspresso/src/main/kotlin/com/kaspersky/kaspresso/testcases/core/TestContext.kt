@@ -21,7 +21,7 @@ class TestContext(private val stepProducer: StepProducer) {
 
         val exceptions: MutableList<Throwable> = mutableListOf()
 
-        val stepInfo = stepProducer.produceStepInfo(description)
+        val stepInfo = stepProducer.produceStep(description)
 
         interceptors.forEachSafely(exceptions) { it.interceptBefore(stepInfo) }
 
