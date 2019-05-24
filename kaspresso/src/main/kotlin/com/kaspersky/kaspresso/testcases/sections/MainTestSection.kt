@@ -1,11 +1,12 @@
 package com.kaspersky.kaspresso.testcases.sections
 
-import com.kaspersky.kaspresso.testcases.core.TestContext
 import com.kaspersky.kaspresso.testcases.core.TestBody
+import com.kaspersky.kaspresso.testcases.core.TestContext
+import com.kaspersky.kaspresso.testcases.core.TestRunner
 
 class MainTestSection(
     private val builder: TestBody.Builder
-) : TestBody.Runner {
+) {
 
     /**
      * Runs [beforeTestActions], [TestCase]'s [steps] and then runs [afterTestActions]. [afterTestActions] are invoked
@@ -14,10 +15,9 @@ class MainTestSection(
      * @param steps steps to run.
      */
     fun runSteps(steps: TestContext.() -> Unit) {
-        runTest(
-            builder
-                .apply { mainTestSection = steps }
-                .build()
-        )
+        val testBody = builder
+            .apply { mainTestSection = steps }
+            .build()
+        TestRunner().run(testBody)
     }
 }
