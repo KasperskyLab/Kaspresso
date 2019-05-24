@@ -6,6 +6,60 @@ import com.kaspersky.kaspresso.testcases.models.StepInfo
 import com.kaspersky.kaspresso.testcases.models.StepStatus
 
 
+/**
+ * [StepManager] produces step. To make correct numeration for sub steps(see example below) it builds step hierarchy.
+ *
+ *
+ * step("A"){
+ *   step("B")
+ *   step("C"){
+ *     step("D")
+ *   }
+ * }
+ *
+ * Steps will have numbers:
+ *
+ * A : 1
+ * B : 1.1
+ * C : 1.2
+ * D : 1.2.1
+ *
+ * Step numbers calculation algorithm:
+ *
+ * 0) Preconditions:
+ *  - [currentStepResult] is null,
+ *  - [stepsCounter] is 0. Number of steps(including sub steps)
+ *  - [stepResultList] is empty. This is container to first level steps (step without parent step)
+ *
+ * 1) While calling [produceStep]:
+ *
+ * 1.1) If [currentStepResult] is null:
+ *  - [stepsCounter] increasing by 1
+ *  - Create new step.
+ *  - Put it on the [stepResultList]
+ *  - Step number is position on [stepResultList] + 1
+ *  - Now it is a [currentStepResult]
+ *
+ * 1.2) If we already has [currentStepResult]:
+ * - [stepsCounter] increasing by 1
+ *  - Create new step
+ *  - Put it on the sub steps of [currentStepResult]
+ *  - Step number is: "${number of its parent}.${position at its parent sub steps + 1}"
+ *  - Now it is a [currentStepResult]
+ *
+ * 2) While calling [onStepFinished]
+ *  - If we trying to finish step that not a [currentStepResult] method throws [IllegalStateException] cause it is not a valid situation
+ *  - mark step as [StepStatus.SUCCESS] or [StepStatus.FAILED]. It depends on 'error' arguments value
+ *
+ * 2.1) If step has parent
+ *  - Now its parent is a [currentStepResult]
+ * 2.2 If step has no parent
+ *  - [currentStepResult] is null
+ *
+ *
+ *
+ */
+
 class StepManager(private val testResult: InternalTestInfo) : StepProducer {
     private val stepResultList: MutableList<InternalStepInfo> = mutableListOf()
 
@@ -13,6 +67,9 @@ class StepManager(private val testResult: InternalTestInfo) : StepProducer {
 
     private var stepsCounter: Int = 0
 
+    /**
+     * Produce correct step info. Only this function may produce a StepInfo!
+     */
     override fun produceStep(description: String): StepInfo {
         val localCurrentStep = currentStepResult
         val step: InternalStepInfo
@@ -32,6 +89,9 @@ class StepManager(private val testResult: InternalTestInfo) : StepProducer {
         return step
     }
 
+    /**
+     * A callback function. It should be called after every step finished.
+     */
     override fun onStepFinished(stepInfo: StepInfo, error: Throwable?) {
         val localCurrentStepResult = currentStepResult
         if (localCurrentStepResult != stepInfo)
@@ -61,6 +121,9 @@ class StepManager(private val testResult: InternalTestInfo) : StepProducer {
         )
     }
 
+    /**
+     * Calling after many test finishing. It helps correctly finish all steps to return lately an actual steps hierarchy
+     */
     fun onAllStepsFinished() {
 
         var localCurrentStep = currentStepResult
@@ -92,6 +155,9 @@ class StepManager(private val testResult: InternalTestInfo) : StepProducer {
 
     }
 
+    /**
+     * Puts final throwable to test. We may get this error after all step finish in some of interceptors.
+     */
     fun onTestFinished(throwable: Throwable? = null) {
         testResult.internalThrowable = throwable
     }
