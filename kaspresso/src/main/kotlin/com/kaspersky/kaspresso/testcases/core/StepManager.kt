@@ -67,9 +67,6 @@ class StepManager(private val testResult: InternalTestInfo) : StepProducer {
 
     private var stepsCounter: Int = 0
 
-    /**
-     * Produce correct step info. Only this function may produce a StepInfo!
-     */
     override fun produceStep(description: String): StepInfo {
         val localCurrentStep = currentStepResult
         val step: InternalStepInfo
@@ -89,9 +86,6 @@ class StepManager(private val testResult: InternalTestInfo) : StepProducer {
         return step
     }
 
-    /**
-     * A callback function. It should be called after every step finished.
-     */
     override fun onStepFinished(stepInfo: StepInfo, error: Throwable?) {
         val localCurrentStepResult = currentStepResult
         if (localCurrentStepResult != stepInfo)
