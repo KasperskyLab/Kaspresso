@@ -6,7 +6,7 @@ import com.kaspersky.kaspresso.interceptors.TestRunInterceptor
 import com.kaspersky.kaspresso.interceptors.impl.composite.TestRunCompositeInterceptor
 import com.kaspersky.kaspresso.testcases.models.TestBody
 
-class TestRunner {
+internal class TestRunner {
     fun run(testBody: TestBody) {
 
         val exceptions: MutableList<Throwable> = mutableListOf()
