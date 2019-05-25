@@ -92,7 +92,9 @@ internal class StepsProcessHandler(private val testName: String) : StepProducer 
     private fun checkState() {
         if (testPassed) {
             throw java.lang.IllegalStateException(
-                "Please create new StepsProcessHandler object because this object consists old state"
+                "Please create new StepsProcessHandler object because this object consists old state." +
+                        "Possible reason is onAllStepsFinishedAndGetResultInSteps() calling " +
+                        "was not after all test operations."
             )
         }
     }

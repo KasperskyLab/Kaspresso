@@ -82,19 +82,19 @@ internal class TestRunner {
         checkTestInfoOnFinishAllSteps(currentTestInfo)
         try {
             testRunInterceptor.onMainSectionStarted(currentTestInfo)
-            //
+
             mainSection.invoke(TestContext(stepsProcessHandler))
-            //
+
             val testResultInSteps = stepsProcessHandler.onAllStepsFinishedAndGetResultInSteps()
             val updatedTestInfo = currentTestInfo.copy(steps = testResultInSteps)
             runMainTestSectionResult = RunMainTestSectionResult(updatedTestInfo)
-            //
+
             testRunInterceptor.onMainSectionFinishedSuccess(updatedTestInfo)
         } catch (e: Throwable) {
             val testResultInSteps = stepsProcessHandler.onAllStepsFinishedAndGetResultInSteps()
             val updatedTestInfo = currentTestInfo.copy(steps = testResultInSteps)
             runMainTestSectionResult = RunMainTestSectionResult(updatedTestInfo, e)
-            //
+            
             testRunInterceptor.onMainSectionFinishedFailed(updatedTestInfo, e)
         }
         return runMainTestSectionResult
