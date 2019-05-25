@@ -25,10 +25,12 @@ import com.kaspersky.kaspresso.device.screenshots.ScreenshotsImpl
 import com.kaspersky.kaspresso.interceptors.*
 import com.kaspersky.kaspresso.interceptors.impl.flakysafety.FlakySafeExecutingInterceptor
 import com.kaspersky.kaspresso.interceptors.impl.logging.*
+import com.kaspersky.kaspresso.interceptors.impl.report.BuildStepReportInterceptor
 import com.kaspersky.kaspresso.interceptors.impl.screenshot.ScreenshotStepInterceptor
 import com.kaspersky.kaspresso.interceptors.impl.screenshot.TestRunnerScreenshotInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.logger.UiTestLoggerImpl
+import com.kaspersky.kaspresso.report.impl.AllureReportWriter
 import com.kaspersky.kaspresso.testcases.core.TestContext
 import com.kaspersky.klkakao.configurator.KakaoConfigurator
 
@@ -186,7 +188,8 @@ object Configurator {
                     )
                     testRunInterceptors = listOf(
                         TestRunLoggerInterceptor(logger),
-                        TestRunnerScreenshotInterceptor(screenshots)
+                        TestRunnerScreenshotInterceptor(screenshots),
+                        BuildStepReportInterceptor(AllureReportWriter(logger))
                     )
                 }
             }

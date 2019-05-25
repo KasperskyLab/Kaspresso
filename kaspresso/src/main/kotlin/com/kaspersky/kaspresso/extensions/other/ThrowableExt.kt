@@ -35,6 +35,14 @@ inline fun <reified ERROR : Throwable, LISTENER> Iterable<LISTENER>.forEachSafel
     forEach { invokeSafely(exceptions) { action.invoke(it) } }
 }
 
+internal fun <T : Throwable> List<T>.getException(): Throwable? {
+    return when (this.size) {
+        1 -> throw this[0]
+        in 2..Int.MAX_VALUE -> throw CompositeException(this)
+        else -> null
+    }
+}
+
 internal fun <T : Throwable> List<T>.throwAll() {
     when (this.size) {
         1 -> throw this[0]

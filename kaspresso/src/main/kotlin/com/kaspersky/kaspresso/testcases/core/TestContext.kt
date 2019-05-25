@@ -6,16 +6,8 @@ import com.kaspersky.kaspresso.extensions.other.invokeSafely
 import com.kaspersky.kaspresso.extensions.other.throwAll
 import com.kaspersky.kaspresso.interceptors.StepInterceptor
 import com.kaspersky.kaspresso.testcases.Scenario
-import com.kaspersky.kaspresso.testcases.models.StepInfo
-import com.kaspersky.kaspresso.testcases.models.TestInfo
 
-class TestContext(
-    private val testInfo: TestInfo
-) {
-    /**
-     * A step counter to evaluate current step's tag.
-     */
-    private var stepsCounter: Int = 0
+class TestContext(private val stepProducer: StepProducer) {
 
     private val interceptors: List<StepInterceptor> = Configurator.stepInterceptors
 
@@ -25,27 +17,24 @@ class TestContext(
      * @param description a description of a step.
      * @param actions a set of actions of a step.
      */
-    fun step(description: String, action: () -> Unit) {
+    fun step(description: String, actions: () -> Unit) {
 
         val exceptions: MutableList<Throwable> = mutableListOf()
 
-        val stepInfo = StepInfo(
-            description = description,
-            testClassName = testInfo.testName,
-            level = 0, //TODO calculate
-            orderOnLevel = 0, //TODO calculate
-            ordinal = ++stepsCounter
-        )
+        val stepInfo = stepProducer.produceStep(description)
 
         interceptors.forEachSafely(exceptions) { it.interceptBefore(stepInfo) }
 
         try {
-            action.invoke()
+            actions.invoke()
+            stepProducer.onStepFinished(stepInfo)
+
             interceptors.forEach {
                 invokeSafely(exceptions) { it.interceptAfterWithSuccess(stepInfo) }
                 invokeSafely(exceptions) { it.interceptAfterFinally(stepInfo) }
             }
         } catch (throwable: Throwable) {
+            stepProducer.onStepFinished(stepInfo, throwable)
             interceptors.forEach {
                 invokeSafely(exceptions) { it.interceptAfterWithError(stepInfo, throwable) }
                 invokeSafely(exceptions) { it.interceptAfterFinally(stepInfo) }

@@ -48,6 +48,6 @@ class LoggingStepInterceptor(
     }
 
     private fun getStepHeader(stepInfo: StepInfo): String {
-        return "TEST STEP: \"${stepInfo.ordinal}. ${stepInfo.description}\" in ${stepInfo.testClassName}"
+        return "TEST STEP: \"${stepInfo.number}. ${stepInfo.description}\" in ${stepInfo.testClassName}"
     }
 }

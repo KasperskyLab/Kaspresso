@@ -2,7 +2,7 @@ package com.kaspersky.kaspresso.testcases
 
 import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.testcases.core.TestBody
-import com.kaspersky.kaspresso.testcases.models.TestInfo
+import com.kaspersky.kaspresso.testcases.models.InternalTestInfo
 import com.kaspersky.kaspresso.testcases.sections.AfterTestSection
 import com.kaspersky.kaspresso.testcases.sections.BeforeTestSection
 
@@ -14,7 +14,7 @@ import com.kaspersky.kaspresso.testcases.sections.BeforeTestSection
 abstract class TestCase(
     configBuilder: Configurator.Builder = Configurator.Builder.default()
 ) {
-    private val info = TestInfo(javaClass.simpleName)
+    private val info = InternalTestInfo(javaClass.simpleName)
 
     /**
      * Finishes building of [Configurator]. Passing [Configurator.Builder] to base [TestCase]'s constructor is the only
@@ -33,7 +33,7 @@ abstract class TestCase(
      */
     protected fun beforeTest(actions: () -> Unit): AfterTestSection {
         return BeforeTestSection(
-            TestBody.Builder().apply { testInfo = info }
+            TestBody.Builder().apply { testResult = info }
         ).beforeTest(actions)
     }
 }
