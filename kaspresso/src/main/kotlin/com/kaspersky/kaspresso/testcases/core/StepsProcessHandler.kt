@@ -7,7 +7,8 @@ import com.kaspersky.kaspresso.testcases.models.StepStatus
 
 
 /**
- * [StepManager] produces step. To make correct numeration for sub steps(see example below) it builds step hierarchy.
+ * [StepsProcessHandler] produces step and manages lifecycle of step.
+ * To make correct numeration for sub steps(see example below) it builds step hierarchy.
  *
  *
  * step("A"){
@@ -60,11 +61,10 @@ import com.kaspersky.kaspresso.testcases.models.StepStatus
  *
  */
 
-internal class StepManager(private val testResult: InternalTestInfo) : StepProducer {
+internal class StepsProcessHandler(private val testResult: InternalTestInfo) : StepProducer {
+
     private val stepResultList: MutableList<InternalStepInfo> = mutableListOf()
-
     private var currentStepResult: InternalStepInfo? = null
-
     private var stepsCounter: Int = 0
 
     override fun produceStep(description: String): StepInfo {
@@ -155,5 +155,6 @@ internal class StepManager(private val testResult: InternalTestInfo) : StepProdu
     fun onTestFinished(throwable: Throwable? = null) {
         testResult.internalThrowable = throwable
     }
+
 }
 

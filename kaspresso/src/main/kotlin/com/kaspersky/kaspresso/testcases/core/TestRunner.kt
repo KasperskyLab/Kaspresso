@@ -16,7 +16,7 @@ internal class TestRunner {
                 exceptions
             )
 
-        val stepManager = StepManager(testBody.testInfo)
+        val stepsProcessHandler = StepsProcessHandler(testBody.testInfo)
 
 
         var testPassed = true
@@ -26,7 +26,7 @@ internal class TestRunner {
             testRunInterceptor.onTestStarted(testBody.testInfo)
 
             runBeforeTestSection(testBody, testRunInterceptor)
-            runMainTestSection(testBody, testRunInterceptor, stepManager)
+            runMainTestSection(testBody, testRunInterceptor, stepsProcessHandler)
         } catch (e: Throwable) {
             testPassed = false
             exceptions.add(e)
@@ -38,7 +38,7 @@ internal class TestRunner {
                 exceptions.add(e)
             } finally {
                 resultException = exceptions.getException()
-                stepManager.onTestFinished(resultException)
+                stepsProcessHandler.onTestFinished(resultException)
                 testRunInterceptor.onTestFinished(testBody.testInfo, testPassed)
             }
         }
@@ -63,7 +63,7 @@ internal class TestRunner {
     private fun runMainTestSection(
         testBody: TestBody,
         testRunInterceptor: TestRunInterceptor,
-        stepManager: StepManager
+        stepManager: StepsProcessHandler
     ) {
         try {
             testRunInterceptor.onMainSectionStarted(testBody.testInfo)
