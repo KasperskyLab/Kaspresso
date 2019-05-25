@@ -1,6 +1,6 @@
-package com.kaspersky.kaspresso.testcases.core
+package com.kaspersky.kaspresso.testcases.models
 
-import com.kaspersky.kaspresso.testcases.models.InternalTestInfo
+import com.kaspersky.kaspresso.testcases.core.TestContext
 
 class TestBody(
     val testInfo: InternalTestInfo,

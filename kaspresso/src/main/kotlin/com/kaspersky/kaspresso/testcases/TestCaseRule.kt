@@ -1,7 +1,7 @@
 package com.kaspersky.kaspresso.testcases
 
 import com.kaspersky.kaspresso.configurator.Configurator
-import com.kaspersky.kaspresso.testcases.core.TestBody
+import com.kaspersky.kaspresso.testcases.models.TestBody
 import com.kaspersky.kaspresso.testcases.models.InternalTestInfo
 import com.kaspersky.kaspresso.testcases.sections.AfterTestSection
 import com.kaspersky.kaspresso.testcases.sections.BeforeTestSection
