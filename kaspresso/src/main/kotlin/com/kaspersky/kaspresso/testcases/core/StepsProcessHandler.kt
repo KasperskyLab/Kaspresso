@@ -1,7 +1,6 @@
 package com.kaspersky.kaspresso.testcases.core
 
 import com.kaspersky.kaspresso.testcases.models.InternalStepInfo
-import com.kaspersky.kaspresso.testcases.models.InternalTestInfo
 import com.kaspersky.kaspresso.testcases.models.StepInfo
 import com.kaspersky.kaspresso.testcases.models.StepStatus
 
@@ -61,7 +60,7 @@ import com.kaspersky.kaspresso.testcases.models.StepStatus
  *
  */
 
-internal class StepsProcessHandler(private val testResult: InternalTestInfo) : StepProducer {
+internal class StepsProcessHandler(private val testName: String) : StepProducer {
 
     private val stepResultList: MutableList<InternalStepInfo> = mutableListOf()
     private var currentStepResult: InternalStepInfo? = null
@@ -106,7 +105,7 @@ internal class StepsProcessHandler(private val testResult: InternalTestInfo) : S
     ): InternalStepInfo {
         return InternalStepInfo(
             description = description,
-            testClassName = testResult.testName,
+            testClassName = testName,
             level = stepNumber.size,
             number = stepNumber.joinToString(separator = "."),
             ordinal = ++stepsCounter,
@@ -116,9 +115,11 @@ internal class StepsProcessHandler(private val testResult: InternalTestInfo) : S
     }
 
     /**
-     * Calling after many test finishing. It helps correctly finish all steps to return lately an actual steps hierarchy
+     * Calling after all test's steps finished.
+     * It helps correctly finish all steps to return lately an actual steps hierarchy
+     * @return result expressed in List of StepInfo (supports hierarchy) gotten after Test completed
      */
-    fun onAllStepsFinished() {
+    fun onAllStepsFinishedAndGetResultInSteps(): List<StepInfo> {
 
         var localCurrentStep = currentStepResult
         var error: Throwable? = null
@@ -142,18 +143,8 @@ internal class StepsProcessHandler(private val testResult: InternalTestInfo) : S
         }
         currentStepResult = null
 
-        if (testResult.internalSteps.isNotEmpty()) {
-            throw AssertionError("onAllStepsFinished called on already finished test")
-        }
-        testResult.internalSteps.addAll(stepResultList)
-
-    }
-
-    /**
-     * Puts final throwable to test. We may get this error after all step finish in some of interceptors.
-     */
-    fun onTestFinished(throwable: Throwable? = null) {
-        testResult.internalThrowable = throwable
+        // swallow copy temporary
+        return stepResultList.map { it }
     }
 
 }
