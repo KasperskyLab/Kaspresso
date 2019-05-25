@@ -70,7 +70,7 @@ internal class StepsProcessHandler(private val testName: String) : StepProducer 
     private var testPassed: Boolean = false
 
     override fun produceStep(description: String): StepInfo {
-        checkHandlerState()
+        checkState()
         val localCurrentStep = currentStepResult
         val step: InternalStepInfo
         if (localCurrentStep == null) {
@@ -89,9 +89,9 @@ internal class StepsProcessHandler(private val testName: String) : StepProducer 
         return step
     }
 
-    private fun checkHandlerState() {
+    private fun checkState() {
         if (testPassed) {
-            throw RuntimeException(
+            throw java.lang.IllegalStateException(
                 "Please create new StepsProcessHandler object because this object consists old state"
             )
         }
@@ -114,7 +114,7 @@ internal class StepsProcessHandler(private val testName: String) : StepProducer 
     }
 
     override fun onStepFinished(stepInfo: StepInfo, error: Throwable?) {
-        checkHandlerState()
+        checkState()
         val localCurrentStepResult = currentStepResult
         if (localCurrentStepResult != stepInfo)
             throw IllegalStateException(
@@ -133,7 +133,7 @@ internal class StepsProcessHandler(private val testName: String) : StepProducer 
      * @return result expressed in List of StepInfo (supports hierarchy) gotten after Test completed
      */
     fun onAllStepsFinishedAndGetResultInSteps(): List<StepInfo> {
-        checkHandlerState()
+        checkState()
 
         var localCurrentStep = currentStepResult
         var error: Throwable? = null
