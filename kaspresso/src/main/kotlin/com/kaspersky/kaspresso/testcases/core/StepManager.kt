@@ -60,7 +60,7 @@ import com.kaspersky.kaspresso.testcases.models.StepStatus
  *
  */
 
-class StepManager(private val testResult: InternalTestInfo) : StepProducer {
+internal class StepManager(private val testResult: InternalTestInfo) : StepProducer {
     private val stepResultList: MutableList<InternalStepInfo> = mutableListOf()
 
     private var currentStepResult: InternalStepInfo? = null
