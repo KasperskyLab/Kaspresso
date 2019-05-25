@@ -7,6 +7,7 @@ import com.kaspersky.kaspresso.interceptors.impl.composite.TestRunCompositeInter
 import com.kaspersky.kaspresso.testcases.models.RunMainTestSectionResult
 import com.kaspersky.kaspresso.testcases.models.TestBody
 import com.kaspersky.kaspresso.testcases.models.TestInfo
+import com.kaspersky.kaspresso.testcases.models.deepCopy
 
 internal class TestRunner {
 
@@ -23,12 +24,12 @@ internal class TestRunner {
         var resultException: Throwable? = null
 
         try {
-            testRunInterceptor.onTestStarted(currentTestInfo)
+            testRunInterceptor.onTestStarted(currentTestInfo.deepCopy())
 
-            runBeforeTestSection(currentTestInfo, testBody.beforeTestActions, testRunInterceptor)
+            runBeforeTestSection(currentTestInfo.deepCopy(), testBody.beforeTestActions, testRunInterceptor)
 
             val runMainTestSectionResult = runMainTestSection(
-                currentTestInfo,
+                currentTestInfo.deepCopy(),
                 testBody.mainSection,
                 testRunInterceptor,
                 stepsProcessHandler
@@ -40,7 +41,7 @@ internal class TestRunner {
             exceptions.add(e)
         } finally {
             try {
-                runAfterTestSection(currentTestInfo, testBody.afterTestActions, testRunInterceptor)
+                runAfterTestSection(currentTestInfo.deepCopy(), testBody.afterTestActions, testRunInterceptor)
             } catch (e: Throwable) {
                 testPassed = false
                 exceptions.add(e)
@@ -49,7 +50,7 @@ internal class TestRunner {
                 currentTestInfo = currentTestInfo.copy(
                     throwable = resultException
                 )
-                testRunInterceptor.onTestFinished(currentTestInfo, testPassed)
+                testRunInterceptor.onTestFinished(currentTestInfo.deepCopy(), testPassed)
             }
         }
 

@@ -3,6 +3,7 @@ package com.kaspersky.kaspresso.testcases.core
 import com.kaspersky.kaspresso.testcases.models.InternalStepInfo
 import com.kaspersky.kaspresso.testcases.models.StepInfo
 import com.kaspersky.kaspresso.testcases.models.StepStatus
+import java.lang.RuntimeException
 
 
 /**
@@ -66,7 +67,10 @@ internal class StepsProcessHandler(private val testName: String) : StepProducer 
     private var currentStepResult: InternalStepInfo? = null
     private var stepsCounter: Int = 0
 
+    private var testPassed: Boolean = false
+
     override fun produceStep(description: String): StepInfo {
+        checkHandlerState()
         val localCurrentStep = currentStepResult
         val step: InternalStepInfo
         if (localCurrentStep == null) {
@@ -85,17 +89,12 @@ internal class StepsProcessHandler(private val testName: String) : StepProducer 
         return step
     }
 
-    override fun onStepFinished(stepInfo: StepInfo, error: Throwable?) {
-        val localCurrentStepResult = currentStepResult
-        if (localCurrentStepResult != stepInfo)
-            throw IllegalStateException(
-                "Unable to finish step $stepInfo cause it is not current. " +
-                        "Current step is $localCurrentStepResult. All steps: $stepResultList"
+    private fun checkHandlerState() {
+        if (testPassed) {
+            throw RuntimeException(
+                "Please create new StepsProcessHandler object because this object consists old state"
             )
-
-        localCurrentStepResult.internalStatus = if (error == null) StepStatus.SUCCESS else StepStatus.FAILED
-        localCurrentStepResult.internalThrowable = error
-        currentStepResult = localCurrentStepResult.parentStep
+        }
     }
 
     private fun produceStepInternal(
@@ -114,18 +113,32 @@ internal class StepsProcessHandler(private val testName: String) : StepProducer 
         )
     }
 
+    override fun onStepFinished(stepInfo: StepInfo, error: Throwable?) {
+        checkHandlerState()
+        val localCurrentStepResult = currentStepResult
+        if (localCurrentStepResult != stepInfo)
+            throw IllegalStateException(
+                "Unable to finish step $stepInfo cause it is not current. " +
+                        "Current step is $localCurrentStepResult. All steps: $stepResultList"
+            )
+
+        localCurrentStepResult.internalStatus = if (error == null) StepStatus.SUCCESS else StepStatus.FAILED
+        localCurrentStepResult.internalThrowable = error
+        currentStepResult = localCurrentStepResult.parentStep
+    }
+
     /**
      * Calling after all test's steps finished.
      * It helps correctly finish all steps to return lately an actual steps hierarchy
      * @return result expressed in List of StepInfo (supports hierarchy) gotten after Test completed
      */
     fun onAllStepsFinishedAndGetResultInSteps(): List<StepInfo> {
+        checkHandlerState()
 
         var localCurrentStep = currentStepResult
         var error: Throwable? = null
 
         while (localCurrentStep != null) {
-
             localCurrentStep.internalStatus = StepStatus.FAILED
 
             if (error == null) {
@@ -141,9 +154,9 @@ internal class StepsProcessHandler(private val testName: String) : StepProducer 
             localCurrentStep.internalThrowable = error
             localCurrentStep = localCurrentStep.parentStep
         }
-        currentStepResult = null
 
-        // swallow copy temporary
+        testPassed = true
+        // swallow copy
         return stepResultList.map { it }
     }
 
