@@ -16,5 +16,5 @@ class ScreenshotStepInterceptor(
         screenshots.makeIfPossible("${makeScreenshotTag(stepInfo)}_failure_${error.javaClass.simpleName}")
     }
 
-    private fun makeScreenshotTag(stepInfo: StepInfo) = "${stepInfo.testClassName}_step_${stepInfo.number}"
+    private fun makeScreenshotTag(stepInfo: StepInfo) = "${stepInfo.testClassName}_step_${stepInfo.ordinal}"
 }
