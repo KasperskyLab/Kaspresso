@@ -3,6 +3,7 @@ package com.kaspersky.kaspresso.testcases.core
 import com.kaspersky.kaspresso.testcases.models.InternalStepInfo
 import com.kaspersky.kaspresso.testcases.models.StepInfo
 import com.kaspersky.kaspresso.testcases.models.StepStatus
+import java.lang.IllegalStateException
 
 
 /**
@@ -90,7 +91,7 @@ internal class StepsManager(private val testName: String) : StepProducer {
 
     private fun checkState() {
         if (testPassed) {
-            throw java.lang.IllegalStateException(
+            throw IllegalStateException(
                 "Please create new StepsProcessHandler object because this object consists old state." +
                         "Possible reason is onAllStepsFinishedAndGetResultInSteps() calling " +
                         "was not after all test operations."

@@ -17,7 +17,7 @@ internal class TestRunner {
                 Configurator.testRunInterceptors,
                 exceptions
             )
-        val stepsProcessHandler = StepsManager(testBody.testName)
+        val stepsManager = StepsManager(testBody.testName)
         var currentTestInfo = TestInfo(testBody.testName)
         var testPassed = true
         var resultException: Throwable? = null
@@ -31,7 +31,7 @@ internal class TestRunner {
                 currentTestInfo,
                 testBody.mainSection,
                 testRunInterceptor,
-                stepsProcessHandler
+                stepsManager
             )
             currentTestInfo = runMainTestSectionResult.testInfo
             runMainTestSectionResult.throwable?.let { throw it }
@@ -75,22 +75,22 @@ internal class TestRunner {
         currentTestInfo: TestInfo,
         mainSection: TestContext.() -> Unit,
         testRunInterceptor: TestRunInterceptor,
-        stepsProcessHandler: StepsManager
+        stepsManager: StepsManager
     ): RunMainTestSectionResult {
         var runMainTestSectionResult: RunMainTestSectionResult
         checkTestInfoOnFinishAllSteps(currentTestInfo)
         try {
             testRunInterceptor.onMainSectionStarted(currentTestInfo)
 
-            mainSection.invoke(TestContext(stepsProcessHandler))
+            mainSection.invoke(TestContext(stepsManager))
 
-            val testResultInSteps = stepsProcessHandler.onAllStepsFinishedAndGetResultInSteps()
+            val testResultInSteps = stepsManager.onAllStepsFinishedAndGetResultInSteps()
             val updatedTestInfo = currentTestInfo.copy(steps = testResultInSteps)
             runMainTestSectionResult = RunMainTestSectionResult(updatedTestInfo)
 
             testRunInterceptor.onMainSectionFinishedSuccess(updatedTestInfo)
         } catch (e: Throwable) {
-            val testResultInSteps = stepsProcessHandler.onAllStepsFinishedAndGetResultInSteps()
+            val testResultInSteps = stepsManager.onAllStepsFinishedAndGetResultInSteps()
             val updatedTestInfo = currentTestInfo.copy(steps = testResultInSteps)
             runMainTestSectionResult = RunMainTestSectionResult(updatedTestInfo, e)
 
