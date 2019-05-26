@@ -1,6 +1,6 @@
 package com.kaspersky.kaspresso.testcases.sections
 
-import com.kaspersky.kaspresso.testcases.core.TestBody
+import com.kaspersky.kaspresso.testcases.models.TestBody
 import com.kaspersky.kaspresso.testcases.core.TestContext
 import com.kaspersky.kaspresso.testcases.core.TestRunner
 

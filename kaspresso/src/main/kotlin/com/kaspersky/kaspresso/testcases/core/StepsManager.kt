@@ -1,13 +1,14 @@
 package com.kaspersky.kaspresso.testcases.core
 
 import com.kaspersky.kaspresso.testcases.models.InternalStepInfo
-import com.kaspersky.kaspresso.testcases.models.InternalTestInfo
 import com.kaspersky.kaspresso.testcases.models.StepInfo
 import com.kaspersky.kaspresso.testcases.models.StepStatus
+import java.lang.IllegalStateException
 
 
 /**
- * [StepManager] produces step. To make correct numeration for sub steps(see example below) it builds step hierarchy.
+ * [StepsManager] produces step and manages lifecycle of step.
+ * To make correct numeration for sub steps(see example below) it builds step hierarchy.
  *
  *
  * step("A"){
@@ -60,14 +61,16 @@ import com.kaspersky.kaspresso.testcases.models.StepStatus
  *
  */
 
-class StepManager(private val testResult: InternalTestInfo) : StepProducer {
+internal class StepsManager(private val testName: String) : StepProducer {
+
     private val stepResultList: MutableList<InternalStepInfo> = mutableListOf()
-
     private var currentStepResult: InternalStepInfo? = null
-
     private var stepsCounter: Int = 0
 
+    private var testPassed: Boolean = false
+
     override fun produceStep(description: String): StepInfo {
+        checkState()
         val localCurrentStep = currentStepResult
         val step: InternalStepInfo
         if (localCurrentStep == null) {
@@ -86,7 +89,34 @@ class StepManager(private val testResult: InternalTestInfo) : StepProducer {
         return step
     }
 
+    private fun checkState() {
+        if (testPassed) {
+            throw IllegalStateException(
+                "Please create new StepsProcessHandler object because this object consists old state." +
+                        "Possible reason is onAllStepsFinishedAndGetResultInSteps() calling " +
+                        "was not after all test operations."
+            )
+        }
+    }
+
+    private fun produceStepInternal(
+        description: String,
+        stepNumber: MutableList<Int>,
+        parentStep: InternalStepInfo? = null
+    ): InternalStepInfo {
+        return InternalStepInfo(
+            description = description,
+            testClassName = testName,
+            level = stepNumber.size,
+            number = stepNumber.joinToString(separator = "."),
+            ordinal = ++stepsCounter,
+            stepNumber = stepNumber,
+            parentStep = parentStep
+        )
+    }
+
     override fun onStepFinished(stepInfo: StepInfo, error: Throwable?) {
+        checkState()
         val localCurrentStepResult = currentStepResult
         if (localCurrentStepResult != stepInfo)
             throw IllegalStateException(
@@ -99,32 +129,18 @@ class StepManager(private val testResult: InternalTestInfo) : StepProducer {
         currentStepResult = localCurrentStepResult.parentStep
     }
 
-    private fun produceStepInternal(
-        description: String,
-        stepNumber: MutableList<Int>,
-        parentStep: InternalStepInfo? = null
-    ): InternalStepInfo {
-        return InternalStepInfo(
-            description = description,
-            testClassName = testResult.testName,
-            level = stepNumber.size,
-            number = stepNumber.joinToString(separator = "."),
-            ordinal = ++stepsCounter,
-            stepNumber = stepNumber,
-            parentStep = parentStep
-        )
-    }
-
     /**
-     * Calling after many test finishing. It helps correctly finish all steps to return lately an actual steps hierarchy
+     * Calling after all test's steps finished.
+     * It helps correctly finish all steps to return lately an actual steps hierarchy
+     * @return result expressed in List of StepInfo (supports hierarchy) gotten after Test completed
      */
-    fun onAllStepsFinished() {
+    fun onAllStepsFinishedAndGetResultInSteps(): List<StepInfo> {
+        checkState()
 
         var localCurrentStep = currentStepResult
         var error: Throwable? = null
 
         while (localCurrentStep != null) {
-
             localCurrentStep.internalStatus = StepStatus.FAILED
 
             if (error == null) {
@@ -140,20 +156,11 @@ class StepManager(private val testResult: InternalTestInfo) : StepProducer {
             localCurrentStep.internalThrowable = error
             localCurrentStep = localCurrentStep.parentStep
         }
-        currentStepResult = null
 
-        if (testResult.internalSteps.isNotEmpty()) {
-            throw AssertionError("onAllStepsFinished called on already finished test")
-        }
-        testResult.internalSteps.addAll(stepResultList)
-
+        testPassed = true
+        // swallow copy
+        return stepResultList.map { it }
     }
 
-    /**
-     * Puts final throwable to test. We may get this error after all step finish in some of interceptors.
-     */
-    fun onTestFinished(throwable: Throwable? = null) {
-        testResult.internalThrowable = throwable
-    }
 }
 

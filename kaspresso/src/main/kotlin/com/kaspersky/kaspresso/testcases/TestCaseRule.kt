@@ -1,8 +1,7 @@
 package com.kaspersky.kaspresso.testcases
 
 import com.kaspersky.kaspresso.configurator.Configurator
-import com.kaspersky.kaspresso.testcases.core.TestBody
-import com.kaspersky.kaspresso.testcases.models.InternalTestInfo
+import com.kaspersky.kaspresso.testcases.models.TestBody
 import com.kaspersky.kaspresso.testcases.sections.AfterTestSection
 import com.kaspersky.kaspresso.testcases.sections.BeforeTestSection
 import org.junit.rules.TestRule
@@ -13,7 +12,7 @@ class TestCaseRule(
     val context: Any,
     val configBuilder: Configurator.Builder = Configurator.Builder.default()
 ) : TestRule {
-    private val info = InternalTestInfo(javaClass.simpleName)
+    private val testCaseName = javaClass.simpleName
 
     override fun apply(base: Statement?, description: Description?) = object : Statement() {
         override fun evaluate() {
@@ -34,7 +33,7 @@ class TestCaseRule(
      */
     fun beforeTest(actions: () -> Unit): AfterTestSection {
         return BeforeTestSection(
-            TestBody.Builder().apply { testResult = info }
+            TestBody.Builder().apply { testName = testCaseName }
         ).beforeTest(actions)
     }
 
