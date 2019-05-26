@@ -3,11 +3,10 @@ package com.kaspersky.kaspresso.testcases.core
 import com.kaspersky.kaspresso.testcases.models.InternalStepInfo
 import com.kaspersky.kaspresso.testcases.models.StepInfo
 import com.kaspersky.kaspresso.testcases.models.StepStatus
-import java.lang.RuntimeException
 
 
 /**
- * [StepsProcessHandler] produces step and manages lifecycle of step.
+ * [StepsManager] produces step and manages lifecycle of step.
  * To make correct numeration for sub steps(see example below) it builds step hierarchy.
  *
  *
@@ -61,7 +60,7 @@ import java.lang.RuntimeException
  *
  */
 
-internal class StepsProcessHandler(private val testName: String) : StepProducer {
+internal class StepsManager(private val testName: String) : StepProducer {
 
     private val stepResultList: MutableList<InternalStepInfo> = mutableListOf()
     private var currentStepResult: InternalStepInfo? = null
