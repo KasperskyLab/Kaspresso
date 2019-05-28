@@ -5,9 +5,19 @@ import com.kaspersky.kaspresso.extensions.other.forEachSafely
 import com.kaspersky.kaspresso.extensions.other.invokeSafely
 import com.kaspersky.kaspresso.extensions.other.throwAll
 import com.kaspersky.kaspresso.interceptors.StepInterceptor
-import com.kaspersky.kaspresso.testcases.Scenario
+import com.kaspersky.kaspresso.testcases.BaseScenario
 
-class TestContext(private val stepProducer: StepProducer) {
+class TestContext<MainSectionData> constructor(
+    private val stepProducer: StepProducer,
+    private val mainSectionData: MainSectionData?
+) {
+
+    val data: MainSectionData
+        get() = mainSectionData ?: throw IllegalStateException(
+            "Unable access data. Please check you " +
+                    "have overridden provideMainDataProducer method at testcase or base test rule"
+        )
+
 
     private val interceptors: List<StepInterceptor> = Configurator.stepInterceptors
 
@@ -45,5 +55,5 @@ class TestContext(private val stepProducer: StepProducer) {
         exceptions.throwAll()
     }
 
-    fun scenario(scenario: Scenario) = scenario.invoke(this)
+    fun scenario(scenario: BaseScenario<MainSectionData>) = scenario.invoke(this)
 }

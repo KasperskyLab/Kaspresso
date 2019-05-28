@@ -5,7 +5,7 @@ import com.kaspersky.kaspresso.testcases.core.TestContext
 
 class CheckHomeTitleScenario : Scenario() {
 
-    override val steps: TestContext.() -> Unit = {
+    override val steps: TestContext<Unit>.() -> Unit = {
 
         step("Check Home Title") {}
 

@@ -4,8 +4,8 @@ import com.kaspersky.kaspresso.testcases.models.TestBody
 import com.kaspersky.kaspresso.testcases.core.TestContext
 import com.kaspersky.kaspresso.testcases.core.TestRunner
 
-class MainTestSection(
-    private val builder: TestBody.Builder
+class MainTestSection<BeforeSectionData, MainSectionData>(
+    private val builder: TestBody.Builder<BeforeSectionData, MainSectionData>
 ) {
 
     /**
@@ -14,10 +14,10 @@ class MainTestSection(
      *
      * @param steps steps to run.
      */
-    fun runSteps(steps: TestContext.() -> Unit) {
+    fun runSteps(steps: TestContext<MainSectionData>.() -> Unit) {
         val testBody = builder
             .apply { mainTestSection = steps }
             .build()
-        TestRunner().run(testBody)
+        TestRunner<BeforeSectionData, MainSectionData>().run(testBody)
     }
 }

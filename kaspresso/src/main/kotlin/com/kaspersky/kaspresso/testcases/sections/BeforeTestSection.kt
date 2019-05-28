@@ -5,8 +5,8 @@ import com.kaspersky.kaspresso.testcases.models.TestBody
 /**
  * A representation of a set of actions to be invoked before the test.
  */
-class BeforeTestSection(
-    private val builder: TestBody.Builder
+class BeforeTestSection<BeforeSectionData, MainSectionData>(
+    private val builder: TestBody.Builder<BeforeSectionData, MainSectionData>
 ) {
     /**
      * Wraps [actions] in a lambda, that will invoke these [actions] and make screenshot if [actions] will fail when it
@@ -14,7 +14,7 @@ class BeforeTestSection(
      *
      * @param actions actions to be wrapped and invoked before the test.
      */
-    fun beforeTest(actions: () -> Unit): AfterTestSection {
+    fun beforeTest(actions: () -> BeforeSectionData): AfterTestSection <BeforeSectionData, MainSectionData>{
         return AfterTestSection(
             builder.apply { beforeTestSection = actions }
         )
