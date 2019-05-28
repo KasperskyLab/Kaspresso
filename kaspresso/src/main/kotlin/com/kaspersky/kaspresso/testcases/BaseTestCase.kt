@@ -11,7 +11,8 @@ import com.kaspersky.kaspresso.testcases.sections.BeforeTestSection
  *  exception caused by re-initialization of the [Configurator], use [Scenario] instead.
  */
 abstract class BaseTestCase<BeforeSectionData, MainSectionData>(
-    configBuilder: Configurator.Builder = Configurator.Builder.default()
+    configBuilder: Configurator.Builder = Configurator.Builder.default(),
+    private val dataProducer: ((BeforeSectionData.() -> Unit) -> MainSectionData)
 ) {
     private val testCaseName = javaClass.simpleName
 
@@ -34,10 +35,8 @@ abstract class BaseTestCase<BeforeSectionData, MainSectionData>(
         return BeforeTestSection(
             TestBody.Builder<BeforeSectionData, MainSectionData>().apply {
                 testName = testCaseName
-                mainDataProducer = provideMainDataProducer()
+                mainDataProducer = dataProducer
             }
         ).beforeTest(actions)
     }
-
-    abstract fun provideMainDataProducer(): ((BeforeSectionData.() -> Unit) -> MainSectionData)
 }
