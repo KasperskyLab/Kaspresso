@@ -64,14 +64,13 @@ internal class TestRunner<BeforeSectionData, MainSectionData> {
 
     private fun runBeforeTestSection(
         currentTestInfo: TestInfo,
-        beforeTestActions: () -> BeforeSectionData,
+        beforeTestActions: BeforeSectionData.() -> Unit,
         testRunInterceptor: TestRunInterceptor,
-        mainDataProducer: ((BeforeSectionData) -> MainSectionData)?
-    ): MainSectionData? {
+        mainDataProducer: ((BeforeSectionData.() -> Unit) -> MainSectionData)
+    ): MainSectionData {
         try {
             testRunInterceptor.onBeforeSectionStarted(currentTestInfo)
-            val beforeSectionData = beforeTestActions.invoke()
-            val mainData = mainDataProducer?.invoke(beforeSectionData)
+            val mainData = mainDataProducer.invoke(beforeTestActions)
             testRunInterceptor.onBeforeSectionFinishedSuccess(currentTestInfo)
             return mainData
         } catch (e: Throwable) {
@@ -85,7 +84,7 @@ internal class TestRunner<BeforeSectionData, MainSectionData> {
         mainSection: TestContext<MainSectionData>.() -> Unit,
         testRunInterceptor: TestRunInterceptor,
         stepsManager: StepsManager,
-        mainSectionData: MainSectionData?
+        mainSectionData: MainSectionData
     ): RunMainTestSectionResult {
         var runMainTestSectionResult: RunMainTestSectionResult
         checkTestInfoOnFinishAllSteps(currentTestInfo)

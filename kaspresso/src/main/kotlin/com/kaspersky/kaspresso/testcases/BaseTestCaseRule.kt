@@ -31,7 +31,7 @@ open class BaseTestCaseRule<BeforeSectionData, MainSectionData>(
      * @param actions actions to invoke in before test section.
      * @return an existing instance of [AfterTestSection].
      */
-    fun beforeTest(actions: () -> BeforeSectionData): AfterTestSection<BeforeSectionData, MainSectionData> {
+    fun beforeTest(actions: BeforeSectionData.() -> Unit): AfterTestSection<BeforeSectionData, MainSectionData> {
         return BeforeTestSection(
             TestBody.Builder<BeforeSectionData, MainSectionData>().apply {
                 testName = testCaseName
@@ -40,5 +40,5 @@ open class BaseTestCaseRule<BeforeSectionData, MainSectionData>(
         ).beforeTest(actions)
     }
 
-    protected fun provideMainDataProducer(): ((BeforeSectionData) -> MainSectionData)? = null
+    protected fun provideMainDataProducer(): ((BeforeSectionData.() -> Unit) -> MainSectionData)? = null
 }

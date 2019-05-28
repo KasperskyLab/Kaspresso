@@ -9,16 +9,8 @@ import com.kaspersky.kaspresso.testcases.BaseScenario
 
 class TestContext<MainSectionData> constructor(
     private val stepProducer: StepProducer,
-    private val mainSectionData: MainSectionData?
-) {
-
     val data: MainSectionData
-        get() = mainSectionData ?: throw IllegalStateException(
-            "Unable access data. Please check you " +
-                    "have overridden provideMainDataProducer method at testcase or base test rule"
-        )
-
-
+) {
     private val interceptors: List<StepInterceptor> = Configurator.stepInterceptors
 
     /**

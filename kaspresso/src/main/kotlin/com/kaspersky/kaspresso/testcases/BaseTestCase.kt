@@ -30,7 +30,7 @@ abstract class BaseTestCase<BeforeSectionData, MainSectionData>(
      * @param actions actions to invoke in before test section.
      * @return an existing instance of [AfterTestSection].
      */
-    protected fun beforeTest(actions: () -> BeforeSectionData): AfterTestSection<BeforeSectionData, MainSectionData> {
+    protected fun beforeTest(actions: BeforeSectionData.() -> Unit): AfterTestSection<BeforeSectionData, MainSectionData> {
         return BeforeTestSection(
             TestBody.Builder<BeforeSectionData, MainSectionData>().apply {
                 testName = testCaseName
@@ -39,5 +39,5 @@ abstract class BaseTestCase<BeforeSectionData, MainSectionData>(
         ).beforeTest(actions)
     }
 
-    protected fun provideMainDataProducer(): ((BeforeSectionData) -> MainSectionData)? = null
+    abstract fun provideMainDataProducer(): ((BeforeSectionData.() -> Unit) -> MainSectionData)
 }
