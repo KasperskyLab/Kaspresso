@@ -7,7 +7,12 @@ import com.kaspersky.kaspresso.testcases.sections.BeforeTestSection
 import org.junit.rules.TestRule
 import org.junit.runner.Description
 import org.junit.runners.model.Statement
-
+/**
+ *  A base class for all parametrized test cases rules. 
+ *
+ *  @param BeforeSectionData data initialized in before section
+ *  @param MainSectionData data transformed from [BeforeSectionData] by special function
+ */
 open class BaseTestCaseRule<BeforeSectionData, MainSectionData>(
     val context: Any,
     val configBuilder: Configurator.Builder = Configurator.Builder.default()

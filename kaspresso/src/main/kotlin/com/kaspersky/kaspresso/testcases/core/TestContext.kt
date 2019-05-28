@@ -7,6 +7,11 @@ import com.kaspersky.kaspresso.extensions.other.throwAll
 import com.kaspersky.kaspresso.interceptors.StepInterceptor
 import com.kaspersky.kaspresso.testcases.BaseScenario
 
+/**
+ * Special class to operate with in user scenario
+ *
+ * @param MainSectionData data created in before section
+ */
 class TestContext<MainSectionData> constructor(
     private val stepProducer: StepProducer,
     val data: MainSectionData

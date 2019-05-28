@@ -9,6 +9,9 @@ import com.kaspersky.kaspresso.testcases.sections.BeforeTestSection
  *  A base class for all parametrized test cases. Extend this class with a single base project-wide inheritor of [TestCase] as a
  *  parent for all actual project-wide test cases. Nesting test cases are not permitted because they may produce an
  *  exception caused by re-initialization of the [Configurator], use [Scenario] instead.
+ *
+ *  @param BeforeSectionData data initialized in before section
+ *  @param MainSectionData data transformed from [BeforeSectionData] by special function
  */
 abstract class BaseTestCase<BeforeSectionData, MainSectionData>(
     configBuilder: Configurator.Builder = Configurator.Builder.default(),
