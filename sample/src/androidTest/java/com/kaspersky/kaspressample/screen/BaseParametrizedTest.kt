@@ -5,13 +5,16 @@ import com.kaspersky.kaspresso.testcases.BaseTestCase
 
 
 open class BaseParametrizedTest(configBuilder: Configurator.Builder = Configurator.Builder.default()) :
-    BaseTestCase<TestCaseDsl, String>(configBuilder = configBuilder, dataProducer = provideMainDataProducer()) {
+    BaseTestCase<TestCaseDsl, MutableList<String>>(
+        configBuilder = configBuilder,
+        dataProducer = provideMainDataProducer()
+    ) {
 
     companion object {
-        private fun provideMainDataProducer(): (TestCaseDsl.() -> Unit) -> String {
+        private fun provideMainDataProducer(): (TestCaseDsl.() -> Unit) -> MutableList<String> {
             return { action ->
                 val testCaseDsl = TestCaseDsl().apply(action)
-                testCaseDsl.list.joinToString(",")
+                mutableListOf(testCaseDsl.list.joinToString(","))
             }
         }
     }

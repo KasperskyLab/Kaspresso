@@ -37,10 +37,16 @@ class OpenHomeScreenParametrizedTest : BaseParametrizedTest() {
 
         }.afterTest {
             Device.exploit.setOrientation(Orientation.Portrait)
+        }.conditions {
+            add("Hello world")
         }.runSteps {
 
-            step("Open Home Screen $data") {
+
+            step("Open Home Screen") {
                 mainScreen {
+                    descriptionText{
+                        hasText(data.joinToString(" "))
+                    }
                     nextButton {
                         click()
                     }

@@ -3,4 +3,5 @@
     <string name="next">Next</string>
     <string name="home_fragment_title">Home Fragment</string>
     <string name="add_fragment_error">Already added</string>
+    <string name="main_screen_description">Main Screen</string>
 </resources>

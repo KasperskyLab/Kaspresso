@@ -7,6 +7,7 @@ class TestBody<BeforeSectionData, MainSectionData>(
     val beforeTestActions: BeforeSectionData.() -> Unit,
     val afterTestActions: () -> Unit,
     val mainSection: TestContext<MainSectionData>.() -> Unit,
+    val conditionSectionsList: List<MainSectionData.() -> Unit>,
     val mainDataProducer: ((BeforeSectionData.() -> Unit) -> MainSectionData)
 ) {
     class Builder<BeforeSectionData, MainSectionData> {
@@ -14,6 +15,7 @@ class TestBody<BeforeSectionData, MainSectionData>(
         var beforeTestSection: (BeforeSectionData.() -> Unit)? = null
         var afterTestSection: (() -> Unit)? = null
         var mainTestSection: (TestContext<MainSectionData>.() -> Unit)? = null
+        val conditionSectionsList: MutableList<MainSectionData.() -> Unit> = mutableListOf()
         var mainDataProducer: ((BeforeSectionData.() -> Unit) -> MainSectionData)? = null
 
         fun build(): TestBody<BeforeSectionData, MainSectionData> {
@@ -23,6 +25,7 @@ class TestBody<BeforeSectionData, MainSectionData>(
                 requireNotNull(beforeTestSection),
                 requireNotNull(afterTestSection),
                 requireNotNull(mainTestSection),
+                conditionSectionsList,
                 requireNotNull(mainDataProducer)
 
             )

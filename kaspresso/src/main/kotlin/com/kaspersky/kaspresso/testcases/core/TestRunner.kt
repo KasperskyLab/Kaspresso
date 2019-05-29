@@ -20,7 +20,7 @@ internal class TestRunner<BeforeSectionData, MainSectionData> {
         val stepsManager = StepsManager(testBody.testName)
         var currentTestInfo = TestInfo(testBody.testName)
         var testPassed = true
-        var resultException: Throwable? = null
+        val resultException: Throwable?
 
         try {
             testRunInterceptor.onTestStarted(currentTestInfo)
@@ -28,6 +28,7 @@ internal class TestRunner<BeforeSectionData, MainSectionData> {
             val mainSectionData = runBeforeTestSection(
                 currentTestInfo,
                 testBody.beforeTestActions,
+                testBody.conditionSectionsList,
                 testRunInterceptor,
                 testBody.mainDataProducer
             )
@@ -65,12 +66,16 @@ internal class TestRunner<BeforeSectionData, MainSectionData> {
     private fun runBeforeTestSection(
         currentTestInfo: TestInfo,
         beforeTestActions: BeforeSectionData.() -> Unit,
+        conditionSectionsList: List<MainSectionData.() -> Unit>,
         testRunInterceptor: TestRunInterceptor,
-        mainDataProducer: ((BeforeSectionData.() -> Unit) -> MainSectionData)
+        mainDataProducer: (BeforeSectionData.() -> Unit) -> MainSectionData
     ): MainSectionData {
         try {
             testRunInterceptor.onBeforeSectionStarted(currentTestInfo)
             val mainData = mainDataProducer.invoke(beforeTestActions)
+            for (conditions in conditionSectionsList) {
+                conditions.invoke(mainData)
+            }
             testRunInterceptor.onBeforeSectionFinishedSuccess(currentTestInfo)
             return mainData
         } catch (e: Throwable) {
