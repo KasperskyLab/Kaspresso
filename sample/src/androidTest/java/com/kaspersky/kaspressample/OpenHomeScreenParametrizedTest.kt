@@ -4,7 +4,6 @@ import android.Manifest
 import android.support.test.rule.ActivityTestRule
 import android.support.test.rule.GrantPermissionRule
 import android.support.test.runner.AndroidJUnit4
-import com.kaspersky.kaspressample.screen.BaseParametrizedTest
 import com.kaspersky.kaspressample.screen.MainScreen
 import com.kaspersky.kaspresso.device.Device
 import com.kaspersky.kaspresso.viewactions.orientation.Orientation
@@ -34,24 +33,22 @@ class OpenHomeScreenParametrizedTest : BaseParametrizedTest() {
             rawData(2)
             rawData(3)
             activityTestRule.launchActivity(null)
-
         }.afterTest {
             Device.exploit.setOrientation(Orientation.Portrait)
         }.conditions {
-            add("Hello world")
+            addString("Hello world")
         }.runSteps {
-
-
             step("Open Home Screen") {
                 mainScreen {
-                    descriptionText{
-                        hasText(data.joinToString(" "))
+                    descriptionText {
+                        hasText(data.list.joinToString(" "))
                     }
                     nextButton {
                         click()
                     }
                 }
             }
+            scenario(CheckHomeTitleNoParametersScenario())
         }
     }
 
