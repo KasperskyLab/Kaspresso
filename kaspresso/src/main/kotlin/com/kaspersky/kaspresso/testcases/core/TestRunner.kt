@@ -28,7 +28,8 @@ internal class TestRunner<BeforeSectionData, MainSectionData> {
             val mainSectionData = runBeforeTestSection(
                 currentTestInfo,
                 testBody.beforeTestActions,
-                testBody.conditionSectionsList,
+                testBody.initialisationSection,
+                testBody.transformationsList,
                 testRunInterceptor,
                 testBody.mainDataProducer
             )
@@ -65,16 +66,18 @@ internal class TestRunner<BeforeSectionData, MainSectionData> {
 
     private fun runBeforeTestSection(
         currentTestInfo: TestInfo,
-        beforeTestActions: BeforeSectionData.() -> Unit,
-        conditionSectionsList: List<MainSectionData.() -> Unit>,
+        beforeTestActions: () -> Unit,
+        initialisation: (BeforeSectionData.() -> Unit)?,
+        dataTransformationList: List<MainSectionData.() -> Unit>,
         testRunInterceptor: TestRunInterceptor,
-        mainDataProducer: (BeforeSectionData.() -> Unit) -> MainSectionData
+        mainDataProducer: ((BeforeSectionData.() -> Unit)?) -> MainSectionData
     ): MainSectionData {
         try {
             testRunInterceptor.onBeforeSectionStarted(currentTestInfo)
-            val mainData = mainDataProducer.invoke(beforeTestActions)
-            for (conditions in conditionSectionsList) {
-                conditions.invoke(mainData)
+            beforeTestActions.invoke()
+            val mainData = mainDataProducer.invoke(initialisation)
+            for (transformation in dataTransformationList) {
+                transformation.invoke(mainData)
             }
             testRunInterceptor.onBeforeSectionFinishedSuccess(currentTestInfo)
             return mainData

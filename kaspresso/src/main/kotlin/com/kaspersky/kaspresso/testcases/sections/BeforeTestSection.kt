@@ -14,7 +14,7 @@ class BeforeTestSection<BeforeSectionData, MainSectionData>(
      *
      * @param actions actions to be wrapped and invoked before the test.
      */
-    fun beforeTest(actions: BeforeSectionData.() -> Unit): AfterTestSection <BeforeSectionData, MainSectionData>{
+    fun beforeTest(actions: () -> Unit): AfterTestSection <BeforeSectionData, MainSectionData>{
         return AfterTestSection(
             builder.apply { beforeTestSection = actions }
         )

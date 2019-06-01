@@ -15,7 +15,7 @@ class AfterTestSection<BeforeSectionData, MainSectionData>(
      * @param actions actions to be wrapped and invoked after the test.
      * @return [runner] to continue building a test.
      */
-    fun afterTest(actions: () -> Unit): MainTestSection<BeforeSectionData, MainSectionData> {
+    fun after(actions: () -> Unit): InitialisableMainSection<BeforeSectionData, MainSectionData> {
         return MainTestSection(
             builder.apply { afterTestSection = actions }
         )

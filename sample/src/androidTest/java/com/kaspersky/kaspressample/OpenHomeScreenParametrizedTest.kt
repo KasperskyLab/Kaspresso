@@ -29,15 +29,16 @@ class OpenHomeScreenParametrizedTest : BaseParametrizedTest() {
 
     @Test
     fun test() {
-        beforeTest {
+        before {
+            activityTestRule.launchActivity(null)
+        }.after {
+            Device.exploit.setOrientation(Orientation.Portrait)
+        }.initialisation {
             rawData(2)
             rawData(3)
-            activityTestRule.launchActivity(null)
-        }.afterTest {
-            Device.exploit.setOrientation(Orientation.Portrait)
-        }.conditions {
+        }.transformation {
             addString("Hello world")
-        }.runSteps {
+        }.run {
             step("Open Home Screen") {
                 mainScreen {
                     descriptionText {

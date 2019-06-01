@@ -8,4 +8,4 @@ import com.kaspersky.kaspresso.configurator.Configurator
  *  exception caused by re-initialization of the [Configurator], use [Scenario] instead.
  */
 abstract class TestCase(configBuilder: Configurator.Builder = Configurator.Builder.default()) :
-    BaseTestCase<Unit, Unit>(configBuilder, dataProducer = { action -> action.invoke(Unit) })
+    BaseTestCase<Unit, Unit>(configBuilder, dataProducer = { action -> action?.invoke(Unit) })

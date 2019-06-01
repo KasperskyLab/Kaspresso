@@ -7,8 +7,9 @@ import com.kaspersky.kaspresso.testcases.sections.BeforeTestSection
 import org.junit.rules.TestRule
 import org.junit.runner.Description
 import org.junit.runners.model.Statement
+
 /**
- *  A base class for all parametrized test cases rules. 
+ *  A base class for all parametrized test cases rules.
  *
  *  @param BeforeSectionData data initialized in before section
  *  @param MainSectionData data transformed from [BeforeSectionData] by special function
@@ -36,7 +37,7 @@ open class BaseTestCaseRule<BeforeSectionData, MainSectionData>(
      * @param actions actions to invoke in before test section.
      * @return an existing instance of [AfterTestSection].
      */
-    fun beforeTest(actions: BeforeSectionData.() -> Unit): AfterTestSection<BeforeSectionData, MainSectionData> {
+    fun beforeTest(actions: () -> Unit): AfterTestSection<BeforeSectionData, MainSectionData> {
         return BeforeTestSection(
             TestBody.Builder<BeforeSectionData, MainSectionData>().apply {
                 testName = testCaseName
@@ -45,5 +46,6 @@ open class BaseTestCaseRule<BeforeSectionData, MainSectionData>(
         ).beforeTest(actions)
     }
 
-    protected fun provideMainDataProducer(): ((BeforeSectionData.() -> Unit) -> MainSectionData)? = null
+    @Suppress("MemberVisibilityCanBePrivate")
+    protected fun provideMainDataProducer(): (((BeforeSectionData.() -> Unit)?) -> MainSectionData)? = null
 }

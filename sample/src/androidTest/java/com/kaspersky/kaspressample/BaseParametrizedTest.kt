@@ -14,7 +14,7 @@ open class BaseParametrizedTest(configBuilder: Configurator.Builder = Configurat
     ) {
 
     companion object {
-        private fun provideMainDataProducer(): (TestCaseDsl.() -> Unit) -> TestCaseData {
+        private fun provideMainDataProducer(): ((TestCaseDsl.() -> Unit)?) -> TestCaseData {
             return { action ->
                 TestCaseDataProducer().initData(action)
             }

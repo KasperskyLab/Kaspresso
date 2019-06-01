@@ -32,12 +32,12 @@ class OpenHomeScreenTest : TestCase() {
 
     @Test
     fun test() {
-        beforeTest {
+        before {
             Device.exploit.setOrientation(Orientation.Landscape)
             activityTestRule.launchActivity(null)
-        }.afterTest {
+        }.after {
             Device.exploit.setOrientation(Orientation.Portrait)
-        }.runSteps {
+        }.run {
 
             step("Open Home Screen") {
                 mainScreen {

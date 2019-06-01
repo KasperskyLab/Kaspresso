@@ -39,9 +39,9 @@ class OpenHomeScreenTestWithRule {
         testCaseRule.beforeTest {
             Device.exploit.setOrientation(Orientation.Landscape)
             activityTestRule.launchActivity(null)
-        }.afterTest {
+        }.after {
             Device.exploit.setOrientation(Orientation.Portrait)
-        }.runSteps {
+        }.run {
 
             step("Open Home screen") {
                 mainScreen {

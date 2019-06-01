@@ -15,7 +15,7 @@ import com.kaspersky.kaspresso.testcases.sections.BeforeTestSection
  */
 abstract class BaseTestCase<BeforeSectionData, MainSectionData>(
     configBuilder: Configurator.Builder = Configurator.Builder.default(),
-    private val dataProducer: ((BeforeSectionData.() -> Unit) -> MainSectionData)
+    private val dataProducer: (((BeforeSectionData.() -> Unit)?) -> MainSectionData)
 ) {
     private val testCaseName = javaClass.simpleName
 
@@ -34,7 +34,7 @@ abstract class BaseTestCase<BeforeSectionData, MainSectionData>(
      * @param actions actions to invoke in before test section.
      * @return an existing instance of [AfterTestSection].
      */
-    protected fun beforeTest(actions: BeforeSectionData.() -> Unit): AfterTestSection<BeforeSectionData, MainSectionData> {
+    protected fun before(actions: () -> Unit): AfterTestSection<BeforeSectionData, MainSectionData> {
         return BeforeTestSection(
             TestBody.Builder<BeforeSectionData, MainSectionData>().apply {
                 testName = testCaseName
