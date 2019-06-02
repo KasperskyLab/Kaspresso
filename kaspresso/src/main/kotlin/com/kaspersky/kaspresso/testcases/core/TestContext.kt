@@ -5,10 +5,17 @@ import com.kaspersky.kaspresso.extensions.other.forEachSafely
 import com.kaspersky.kaspresso.extensions.other.invokeSafely
 import com.kaspersky.kaspresso.extensions.other.throwAll
 import com.kaspersky.kaspresso.interceptors.StepInterceptor
-import com.kaspersky.kaspresso.testcases.Scenario
+import com.kaspersky.kaspresso.testcases.BaseScenario
 
-class TestContext(private val stepProducer: StepProducer) {
-
+/**
+ * Special class to operate with in user scenario
+ *
+ * @param MainSectionData data created in before section
+ */
+class TestContext<MainSectionData> constructor(
+    private val stepProducer: StepProducer,
+    val data: MainSectionData
+) {
     private val interceptors: List<StepInterceptor> = Configurator.stepInterceptors
 
     /**
@@ -45,5 +52,5 @@ class TestContext(private val stepProducer: StepProducer) {
         exceptions.throwAll()
     }
 
-    fun scenario(scenario: Scenario) = scenario.invoke(this)
+    fun scenario(scenario: BaseScenario<MainSectionData>) = scenario.invoke(this)
 }

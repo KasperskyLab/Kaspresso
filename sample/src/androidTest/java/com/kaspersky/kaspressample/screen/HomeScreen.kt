@@ -6,6 +6,5 @@ import com.kaspersky.klkakao.text.KButton
 
 class HomeScreen : Screen<HomeScreen>() {
 
-    val title =
-        KButton { withId(R.id.fragment_home_text_view_title) }
+    val title = KButton { withId(R.id.fragment_home_text_view_title) }
 }

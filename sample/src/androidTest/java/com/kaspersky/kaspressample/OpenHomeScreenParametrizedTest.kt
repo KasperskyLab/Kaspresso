@@ -4,20 +4,17 @@ import android.Manifest
 import android.support.test.rule.ActivityTestRule
 import android.support.test.rule.GrantPermissionRule
 import android.support.test.runner.AndroidJUnit4
-import com.kaspersky.kaspressample.screen.HomeScreen
 import com.kaspersky.kaspressample.screen.MainScreen
 import com.kaspersky.kaspresso.device.Device
-import com.kaspersky.kaspresso.testcases.TestCaseRule
 import com.kaspersky.kaspresso.viewactions.orientation.Orientation
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class OpenHomeScreenTestWithRule {
+class OpenHomeScreenParametrizedTest : BaseParametrizedTest() {
 
     private val mainScreen by lazy { MainScreen() }
-    private val homeScreen by lazy { HomeScreen() }
 
     @Rule
     @JvmField
@@ -30,33 +27,29 @@ class OpenHomeScreenTestWithRule {
     @JvmField
     val activityTestRule = ActivityTestRule(MainActivity::class.java, true, false)
 
-    @Rule
-    @JvmField
-    val testCaseRule = TestCaseRule(this)
-
     @Test
     fun test() {
-        testCaseRule.beforeTest {
-            Device.exploit.setOrientation(Orientation.Landscape)
+        before {
             activityTestRule.launchActivity(null)
         }.after {
             Device.exploit.setOrientation(Orientation.Portrait)
+        }.initialisation {
+            rawData(2)
+            rawData(3)
+        }.transformation {
+            addString("Hello world")
         }.run {
-
-            step("Open Home screen") {
+            step("Open Home Screen") {
                 mainScreen {
+                    descriptionText {
+                        hasText(data.list.joinToString(" "))
+                    }
                     nextButton {
                         click()
                     }
                 }
-                homeScreen {
-                    title {
-                        isVisible()
-                        //hasText("Ooops!") //Uncomment to fail test
-                    }
-                }
             }
-            step("Just Empty Step") {}
+            scenario(CheckHomeTitleNoParametersScenario())
         }
     }
 
