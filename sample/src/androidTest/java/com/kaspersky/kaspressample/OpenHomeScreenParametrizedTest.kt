@@ -13,7 +13,7 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class OpenHomeScreenParametrizedTest : BaseParametrizedTest() {
 
-    private val mainScreen by lazy { MainScreen() }
+    private val mainScreen = MainScreen()
 
     @Rule
     @JvmField
