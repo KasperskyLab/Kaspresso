@@ -26,7 +26,7 @@ abstract class KScreen<out T : KScreen<T>> : ScreenActions {
      */
     abstract val viewClass: Class<out Any>?
 
-    override val view = InteractionDelegatesFactory.createViewInteractionDelegate(
+    override val view = InteractionDelegatesFactory().createViewInteractionDelegate(
         Espresso.onView(ViewMatchers.isRoot())
     )
 

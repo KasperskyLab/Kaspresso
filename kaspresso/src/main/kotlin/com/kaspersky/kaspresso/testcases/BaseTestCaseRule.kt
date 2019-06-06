@@ -1,12 +1,17 @@
 package com.kaspersky.kaspresso.testcases
 
 import com.kaspersky.kaspresso.configurator.Configurator
+import com.kaspersky.kaspresso.device.Device
+import com.kaspersky.kaspresso.logger.KLogger
+import com.kaspersky.kaspresso.testcases.core.BaseTestContext
 import com.kaspersky.kaspresso.testcases.models.TestBody
 import com.kaspersky.kaspresso.testcases.sections.AfterTestSection
 import com.kaspersky.kaspresso.testcases.sections.BeforeTestSection
+import com.kaspersky.klkakao.configurator.KakaoConfigurator
 import org.junit.rules.TestRule
 import org.junit.runner.Description
 import org.junit.runners.model.Statement
+import java.lang.IllegalStateException
 
 /**
  *  A base class for all parametrized test cases rules.
@@ -15,18 +20,22 @@ import org.junit.runners.model.Statement
  *  @param MainSectionData data transformed from [BeforeSectionData] by special function
  */
 open class BaseTestCaseRule<BeforeSectionData, MainSectionData>(
-    val context: Any,
-    val configBuilder: Configurator.Builder = Configurator.Builder.default()
+    private val testClassName: String,
+    private val configBuilder: Configurator.Builder = Configurator.Builder.default()
 ) : TestRule {
-    private val testCaseName = javaClass.simpleName
+
+    private val configurator: Configurator = configBuilder.commit()
 
     override fun apply(base: Statement?, description: Description?) = object : Statement() {
         override fun evaluate() {
-            configBuilder.commit()
-            base?.evaluate() ?: throw RuntimeException(
-                "It's so unbelievably! I don't know why but TestCaseRule was broken with nullable base: Statement? argument. " +
-                        "Try TestCase simple abstract class (example - OpenHomeScreenTest)"
+            base?.evaluate() ?: throw IllegalStateException(
+                "BaseTestCaseRule was broken by null base argument. Check Environment"
             )
+            with(KakaoConfigurator) {
+                initViewInteractionDelegateFactory(null)
+                initDataInteractionDelegateFactory(null)
+                initWebInteractionDelegateFactory(null)
+            }
         }
     }
 
@@ -37,10 +46,11 @@ open class BaseTestCaseRule<BeforeSectionData, MainSectionData>(
      * @param actions actions to invoke in before test section.
      * @return an existing instance of [AfterTestSection].
      */
-    fun beforeTest(actions: () -> Unit): AfterTestSection<BeforeSectionData, MainSectionData> {
+    fun before(testName: String = testClassName, actions: BaseTestContext.() -> Unit): AfterTestSection<BeforeSectionData, MainSectionData> {
         return BeforeTestSection(
+            configurator,
             TestBody.Builder<BeforeSectionData, MainSectionData>().apply {
-                testName = testCaseName
+                this.testName = testName
                 mainDataProducer = provideMainDataProducer()
             }
         ).beforeTest(actions)

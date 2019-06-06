@@ -3,7 +3,6 @@ package com.kaspersky.kaspresso.device.screenshots.docloc
 import android.Manifest
 import android.os.Environment
 import android.support.test.rule.GrantPermissionRule
-import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.device.locales.Locales
 import com.kaspersky.kaspresso.extensions.other.getAllInterfaces
 import com.kaspersky.kaspresso.reflect.proxy.UiInvocationHandler
@@ -81,17 +80,16 @@ abstract class DocLocScreenshotTestCase(
 ) : TestCase() {
 
     private lateinit var screenshotsDir: File
-
     private lateinit var screenshotCapturer: DocLocScreenshotCapturer
 
     private val clearedDirectories = mutableSetOf<File>()
-
-    private val logger = Configurator.logger
+    @PublishedApi internal val logger = configurator.logger
+    private val confLocales: Locales = Locales(configurator)
 
     @get:Rule
     val localeRule = LocaleRule(
-        locales?.let { Locales.parseLocales(it) }
-            ?: Locales.getSupportedLocales()
+        locales?.let { confLocales.parseLocales(it) }
+            ?: confLocales.getSupportedLocales()
     )
 
     @get:Rule
@@ -103,11 +101,16 @@ abstract class DocLocScreenshotTestCase(
     @Before
     fun setup() {
         screenshotsDir = Environment
-            .getExternalStoragePublicDirectory(android.os.Environment.DIRECTORY_PICTURES)
+            .getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
             .resolve(localeRule.locale.toString())
             .resolve(screenshotsDirectory)
 
-        screenshotCapturer = DocLocScreenshotCapturer(screenshotsDir)
+        screenshotCapturer = DocLocScreenshotCapturer(
+            screenshotsDir,
+            logger,
+            configurator.activities,
+            configurator.apps
+        )
 
         testFailRule.screenshotCapturer = screenshotCapturer
 
@@ -144,7 +147,7 @@ abstract class DocLocScreenshotTestCase(
         return Proxy.newProxyInstance(
             view::class.java.classLoader,
             I::class.java.getAllInterfaces(),
-            UiInvocationHandler(view as Any)
+            UiInvocationHandler(view as Any, logger)
         ) as I
     }
 
@@ -158,7 +161,7 @@ abstract class DocLocScreenshotTestCase(
         return Proxy.newProxyInstance(
             view::class.java.classLoader,
             T::class.java.getAllInterfaces(),
-            UiInvocationHandler(view as Any)
+            UiInvocationHandler(view as Any, logger)
         ) as T
     }
 

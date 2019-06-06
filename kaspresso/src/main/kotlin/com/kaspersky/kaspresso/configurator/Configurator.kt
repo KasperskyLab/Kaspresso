@@ -1,11 +1,11 @@
 package com.kaspersky.kaspresso.configurator
 
-import android.support.test.espresso.Espresso
-import android.support.test.espresso.NoMatchingViewException
-import android.support.test.espresso.PerformException
-import com.kaspersky.kaspresso.delegates.DataInteractionDelegateImpl
-import com.kaspersky.kaspresso.delegates.ViewInteractionDelegateImpl
-import com.kaspersky.kaspresso.delegates.WebInteractionDelegateImpl
+import android.support.test.InstrumentationRegistry
+import android.support.test.espresso.*
+import android.support.test.uiautomator.UiDevice
+import com.kaspersky.kaspresso.delegates.DataInteractionDelegateKaspressoImpl
+import com.kaspersky.kaspresso.delegates.ViewInteractionDelegateKaspressoImpl
+import com.kaspersky.kaspresso.delegates.WebInteractionDelegateKaspressoImpl
 import com.kaspersky.kaspresso.device.accessibility.Accessibility
 import com.kaspersky.kaspresso.device.accessibility.AccessibilityImpl
 import com.kaspersky.kaspresso.device.activities.Activities
@@ -37,13 +37,15 @@ import com.kaspersky.klkakao.configurator.KakaoConfigurator
 /**
  * An object that keeps all settings.
  */
-object Configurator {
+class Configurator {
 
-    private const val DEFAULT_ATTEMPTS_TIMEOUT_MS: Long = 2_000L
-    private const val DEFAULT_ATTEMPTS_INTERVAL_MS: Long = 500L
+    companion object {
+        internal const val DEFAULT_ATTEMPTS_TIMEOUT_MS: Long = 2_000L
+        internal const val DEFAULT_ATTEMPTS_INTERVAL_MS: Long = 500L
 
-    private const val DEFAULT_INNER_LOGGER_TAG: String = "KASPRESSO"
-    private const val DEFAULT_OUTER_LOGGER_TAG: String = "KASPRESSO_SPECIAL"
+        internal const val DEFAULT_INNER_LOGGER_TAG: String = "KASPRESSO"
+        internal const val DEFAULT_OUTER_LOGGER_TAG: String = "KASPRESSO_SPECIAL"
+    }
 
     /**
      * A timeout for all action attempts in milliseconds.
@@ -58,93 +60,89 @@ object Configurator {
     /**
      * Holds an implementation of [UiTestLogger] interface for inner framework usage. Not accessible from outside.
      */
-    internal var logger: UiTestLogger = UiTestLoggerImpl(DEFAULT_INNER_LOGGER_TAG)
+    internal lateinit var logger: UiTestLogger
 
     /**
      * Holds an implementation of [UiTestLogger] interface for external usage.
      */
-    internal var externalLogger: UiTestLogger = UiTestLoggerImpl(DEFAULT_OUTER_LOGGER_TAG)
+    internal lateinit var externalLogger: UiTestLogger
 
     /**
      * Holds an implementation of [Apps] interface. If it was not specified in [Configurator.Builder], the default
      * implementation is used.
      */
-    internal var apps: Apps = AppsImpl()
+    internal lateinit var apps: Apps
 
     /**
      * Holds an implementation of [Activities] interface. If it was not specified in [Configurator.Builder], the default
      * implementation is used.
      */
-    internal var activities: Activities = ActivitiesImpl()
+    internal lateinit var activities: Activities
 
     /**
      * Holds an implementation of [Files] interface. If it was not specified in [Configurator.Builder], the default
      * implementation is used.
      */
-    internal var files: Files = FilesImpl()
+    internal lateinit var files: Files
 
     /**
      * Holds an implementation of [Internet] interface. If it was not specified in [Configurator.Builder], the default
      * implementation is used.
      */
-    internal var internet: Internet = InternetImpl()
+    internal lateinit var internet: Internet
 
     /**
      * Holds an implementation of [Screenshots] interface. If it was not specified in [Configurator.Builder], the
      * default implementation is used.
      */
-    internal var screenshots: Screenshots = ScreenshotsImpl()
+    internal lateinit var screenshots: Screenshots
 
     /**
      * Holds an implementation of [Accessibility] interface. If it was not specified in [Configurator.Builder], the
      * default implementation is used.
      */
-    internal var accessibility: Accessibility = AccessibilityImpl()
+    internal lateinit var accessibility: Accessibility
 
     /**
      * Holds an implementation of [Permissions] interface. If it was not specified in [Configurator.Builder], the
      * default implementation is used.
      */
-    internal var permissions: Permissions = PermissionsImpl()
+    internal lateinit var permissions: Permissions
 
     /**
      * Holds an implementation of [Exploit] interface. If it was not specified in [Configurator.Builder], the default
      * implementation is used.
      */
-    internal var exploit: Exploit = ExploitImpl()
+    internal lateinit var exploit: Exploit
 
     /**
      * Exceptions that doesn't stop attempts.
      */
-    internal var allowedExceptionsForAttempt: Set<Class<out Throwable>> = setOf(
-        PerformException::class.java,
-        NoMatchingViewException::class.java,
-        AssertionError::class.java
-    )
+    internal lateinit var allowedExceptionsForAttempt: Set<Class<out Throwable>>
 
     /**
      * Interceptors that are called by [com.kaspersky.uitest_framework.proxy.ViewActionProxy] before actually
      * [android.support.test.espresso.ViewAction.perform] call.
      */
-    internal var viewActionInterceptors: List<ViewActionInterceptor> = emptyList()
+    internal lateinit var viewActionInterceptors: List<ViewActionInterceptor>
 
     /**
      * Interceptors that are called by [com.kaspersky.uitest_framework.proxy.ViewAssertionProxy] before actually
      * [android.support.test.espresso.ViewAssertion.check] call.
      */
-    internal var viewAssertionInterceptors: List<ViewAssertionInterceptor> = emptyList()
+    internal lateinit var viewAssertionInterceptors: List<ViewAssertionInterceptor>
 
     /**
      * Interceptors that are called by [com.kaspersky.uitest_framework.proxy.AtomProxy] before actually
      * [android.support.test.espresso.web.model.Atom.transform] call.
      */
-    internal var atomInterceptors: List<AtomInterceptor> = emptyList()
+    internal lateinit var atomInterceptors: List<AtomInterceptor>
 
     /**
      * Interceptors that are called by [android.support.test.espresso.web.assertion.WebAssertionProxy] before actually
      * [android.support.test.espresso.web.assertion.WebAssertion.checkResult] call.
      */
-    internal var webAssertionInterceptors: List<WebAssertionInterceptor> = emptyList()
+    internal lateinit var webAssertionInterceptors: List<WebAssertionInterceptor>
 
     /**
      * An interceptor that actually manages the execution of actions or assertions. For example,
@@ -156,13 +154,13 @@ object Configurator {
      * An interceptors set that actually manages the execution of steps [TestContext.step]. Interceptors works using
      * decorator pattern. First interceptor wraps others
      */
-    internal var stepInterceptors: List<StepInterceptor> = emptyList()
+    internal lateinit var stepInterceptors: List<StepInterceptor>
 
     /**
      * An interceptors set that actually manages the execution of test sections [TestInfo]. Interceptors works using
      * decorator pattern. First interceptor wraps others
      */
-    internal var testRunInterceptors: List<TestRunInterceptor> = emptyList()
+    internal lateinit var testRunInterceptors: List<TestRunInterceptor>
 
     /**
      * A class for [Configurator] initialization. The right way to change [Configurator] settings is to use [Builder].
@@ -176,7 +174,7 @@ object Configurator {
              *
              * @return an existing instance of [Builder].
              */
-            internal fun default(): Builder {
+            fun default(): Builder {
                 return Builder().apply {
                     viewActionInterceptors = listOf(LoggingViewActionInterceptor(logger))
                     viewAssertionInterceptors = listOf(LoggingViewAssertionInterceptor(logger))
@@ -201,14 +199,14 @@ object Configurator {
         var logger: UiTestLogger = UiTestLoggerImpl(DEFAULT_INNER_LOGGER_TAG)
         var externalLogger: UiTestLogger = UiTestLoggerImpl(DEFAULT_OUTER_LOGGER_TAG)
 
-        var apps: Apps = AppsImpl()
-        var activities: Activities = ActivitiesImpl()
+        var apps: Apps = AppsImpl(logger)
+        var activities: Activities = ActivitiesImpl(logger)
         var files: Files = FilesImpl()
         var internet: Internet = InternetImpl()
-        var screenshots: Screenshots = ScreenshotsImpl()
+        var screenshots: Screenshots = ScreenshotsImpl(logger, activities)
         var accessibility: Accessibility = AccessibilityImpl()
-        var permissions: Permissions = PermissionsImpl()
-        var exploit: Exploit = ExploitImpl()
+        var permissions: Permissions = PermissionsImpl(logger, UiDevice.getInstance(InstrumentationRegistry.getInstrumentation()))
+        var exploit: Exploit = ExploitImpl(activities, UiDevice.getInstance(InstrumentationRegistry.getInstrumentation()))
 
         var allowedExceptionsForAttempt: Set<Class<out Throwable>> = setOf(
             PerformException::class.java,
@@ -238,41 +236,54 @@ object Configurator {
          * constructed.
          */
         @Throws(IllegalArgumentException::class)
-        internal fun commit() {
-            with(KakaoConfigurator) {
-                initViewInteractionDelegateFactory { ViewInteractionDelegateImpl(it) }
-                initDataInteractionDelegateFactory { DataInteractionDelegateImpl(it) }
-                initWebInteractionDelegateFactory { WebInteractionDelegateImpl(it) }
-            }
+        internal fun commit(): Configurator {
+            val configurator = Configurator()
 
-            Configurator.attemptsTimeoutMs = attemptsTimeoutMs
-            Configurator.attemptsIntervalMs = attemptsIntervalMs
+            configurator.attemptsTimeoutMs = attemptsTimeoutMs
+            configurator.attemptsIntervalMs = attemptsIntervalMs
 
-            Configurator.logger = logger
-            Configurator.externalLogger = externalLogger
+            configurator.logger = logger
+            configurator.externalLogger = externalLogger
 
-            Configurator.apps = apps
-            Configurator.activities = activities
-            Configurator.files = files
-            Configurator.internet = internet
-            Configurator.screenshots = screenshots
-            Configurator.accessibility = accessibility
-            Configurator.permissions = permissions
-            Configurator.exploit = exploit
+            configurator.apps = apps
+            configurator.activities = activities
+            configurator.files = files
+            configurator.internet = internet
+            configurator.screenshots = screenshots
+            configurator.accessibility = accessibility
+            configurator.permissions = permissions
+            configurator.exploit = exploit
 
-            Configurator.allowedExceptionsForAttempt = allowedExceptionsForAttempt
+            configurator.allowedExceptionsForAttempt = allowedExceptionsForAttempt
 
-            Configurator.viewActionInterceptors = viewActionInterceptors
-            Configurator.viewAssertionInterceptors = viewAssertionInterceptors
-            Configurator.atomInterceptors = atomInterceptors
-            Configurator.webAssertionInterceptors = webAssertionInterceptors
+            configurator.viewActionInterceptors = viewActionInterceptors
+            configurator.viewAssertionInterceptors = viewAssertionInterceptors
+            configurator.atomInterceptors = atomInterceptors
+            configurator.webAssertionInterceptors = webAssertionInterceptors
 
-            Configurator.executingInterceptor = executingInterceptor
+            configurator.executingInterceptor = executingInterceptor
 
             failureInterceptor?.let { Espresso.setFailureHandler(it::interceptAndThrow) }
 
-            Configurator.stepInterceptors = stepInterceptors
-            Configurator.testRunInterceptors = testRunInterceptors
+            configurator.stepInterceptors = stepInterceptors
+            configurator.testRunInterceptors = testRunInterceptors
+
+            with(KakaoConfigurator) {
+                initViewInteractionDelegateFactory { ViewInteractionDelegateKaspressoImpl(it, configurator) }
+                initDataInteractionDelegateFactory {
+                        viewInteraction, dataInteraction ->
+                    DataInteractionDelegateKaspressoImpl(viewInteraction, dataInteraction, configurator)
+                }
+                initWebInteractionDelegateFactory { WebInteractionDelegateKaspressoImpl(it, configurator) }
+            }
+
+            ConfiguratorExt.allowedExceptionsForAttempt = allowedExceptionsForAttempt
+            ConfiguratorExt.attemptsIntervalMs = attemptsIntervalMs
+            ConfiguratorExt.attemptsTimeoutMs = attemptsTimeoutMs
+            ConfiguratorExt.logger = logger
+
+            return configurator
         }
     }
+
 }

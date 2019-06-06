@@ -1,6 +1,7 @@
 package com.kaspersky.kaspresso.flakysafety
 
 import com.kaspersky.kaspresso.configurator.Configurator
+import com.kaspersky.kaspresso.configurator.ConfiguratorExt
 import com.kaspersky.kaspresso.logger.UiTestLogger
 
 /**
@@ -12,8 +13,8 @@ import com.kaspersky.kaspresso.logger.UiTestLogger
  * @return [T] as it is a result of [action] invocation.
  */
 fun <T> wait(
-    timeoutMs: Long = Configurator.attemptsTimeoutMs,
-    logger: UiTestLogger = Configurator.logger,
+    timeoutMs: Long = ConfiguratorExt.attemptsTimeoutMs,
+    logger: UiTestLogger = ConfiguratorExt.logger,
     action: () -> T
 ): T {
     logger.i("Waiting for $timeoutMs ms")

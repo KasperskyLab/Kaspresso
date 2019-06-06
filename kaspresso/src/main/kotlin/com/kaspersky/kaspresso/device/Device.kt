@@ -17,7 +17,9 @@ import com.kaspersky.kaspresso.device.permissions.Permissions
 /**
  * A provider of managers for all off-screen work.
  */
-object Device {
+class Device(
+    private val configurator: Configurator
+) {
 
     /**
      * A not caching property to get [Context].
@@ -40,40 +42,40 @@ object Device {
      * Holds an implementation of [Apps] interface. If it was not specified in [Configurator.Builder], the default
      * implementation is used.
      */
-    val apps: Apps = Configurator.apps
+    val apps: Apps = configurator.apps
 
     /**
      * Holds a reference to an implementation of [Activities] interface, held by [Configurator].
      */
-    val activities: Activities = Configurator.activities
+    val activities: Activities = configurator.activities
 
     /**
      * Holds a reference to an implementation of [Files] interface, held by [Configurator].
      */
-    var files: Files = Configurator.files
+    var files: Files = configurator.files
 
     /**
      * Holds a reference to an implementation of [Internet] interface, held by [Configurator].
      */
-    var internet: Internet = Configurator.internet
+    var internet: Internet = configurator.internet
 
     /**
      * Holds a reference to an implementation of [Screenshots] interface, held by [Configurator].
      */
-    var screenshots: Screenshots = Configurator.screenshots
+    var screenshots: Screenshots = configurator.screenshots
 
     /**
      * Holds a reference to an implementation of [Accessibility] interface, held by [Configurator].
      */
-    var accessibility: Accessibility = Configurator.accessibility
+    var accessibility: Accessibility = configurator.accessibility
 
     /**
      * Holds a reference to an implementation of [Permissions] interface, held by [Configurator].
      */
-    var permissions: Permissions = Configurator.permissions
+    var permissions: Permissions = configurator.permissions
 
     /**
      * Holds a reference to an implementation of [Exploit] interface, held by [Configurator].
      */
-    var exploit: Exploit = Configurator.exploit
+    var exploit: Exploit = configurator.exploit
 }

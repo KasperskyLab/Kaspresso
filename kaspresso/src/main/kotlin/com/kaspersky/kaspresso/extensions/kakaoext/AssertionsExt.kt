@@ -1,6 +1,7 @@
 package com.kaspersky.kaspresso.extensions.kakaoext
 
 import com.kaspersky.kaspresso.configurator.Configurator
+import com.kaspersky.kaspresso.configurator.ConfiguratorExt
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.klkakao.common.assertions.BaseAssertions
 
@@ -12,7 +13,7 @@ import com.kaspersky.klkakao.common.assertions.BaseAssertions
 fun <T : BaseAssertions> T.compositeCheck(
     vararg asserts: T.() -> Unit
 ) {
-    val logger: UiTestLogger = Configurator.logger
+    val logger: UiTestLogger = ConfiguratorExt.logger
     var cachedThrowable: Throwable? = null
 
     asserts.forEach { assert ->
@@ -41,7 +42,7 @@ fun <T : BaseAssertions> T.compositeCheck(
 fun <T : BaseAssertions> T.safeCompositeCheck(
     vararg asserts: T.() -> Unit
 ): Boolean {
-    val logger: UiTestLogger = Configurator.logger
+    val logger: UiTestLogger = ConfiguratorExt.logger
 
     asserts.forEach { assert ->
         try {

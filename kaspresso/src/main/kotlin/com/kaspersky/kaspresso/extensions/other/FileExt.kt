@@ -1,6 +1,7 @@
 package com.kaspersky.kaspresso.extensions.other
 
 import com.kaspersky.kaspresso.configurator.Configurator
+import com.kaspersky.kaspresso.configurator.ConfiguratorExt
 import java.io.File
 import java.io.FileNotFoundException
 import java.io.IOException
@@ -11,7 +12,7 @@ import java.io.IOException
  *  @param data text to write.
  */
 fun File.safeWrite(data: String) {
-    val log = Configurator.logger
+    val log = ConfiguratorExt.logger
     try {
         this.writeText(data)
     } catch (e: FileNotFoundException) {

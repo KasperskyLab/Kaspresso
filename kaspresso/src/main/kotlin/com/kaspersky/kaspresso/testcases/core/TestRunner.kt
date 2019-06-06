@@ -8,13 +8,15 @@ import com.kaspersky.kaspresso.testcases.models.RunMainTestSectionResult
 import com.kaspersky.kaspresso.testcases.models.TestBody
 import com.kaspersky.kaspresso.testcases.models.TestInfo
 
-internal class TestRunner<BeforeSectionData, MainSectionData> {
+internal class TestRunner<BeforeSectionData, MainSectionData>(
+    private val configurator: Configurator
+) {
 
     fun run(testBody: TestBody<BeforeSectionData, MainSectionData>) {
         val exceptions: MutableList<Throwable> = mutableListOf()
         val testRunInterceptor: TestRunInterceptor =
             TestRunCompositeInterceptor(
-                Configurator.testRunInterceptors,
+                configurator.testRunInterceptors,
                 exceptions
             )
         val stepsManager = StepsManager(testBody.testName)
@@ -66,7 +68,7 @@ internal class TestRunner<BeforeSectionData, MainSectionData> {
 
     private fun runBeforeTestSection(
         currentTestInfo: TestInfo,
-        beforeTestActions: () -> Unit,
+        beforeTestActions: BaseTestContext.() -> Unit,
         initialisation: (BeforeSectionData.() -> Unit)?,
         dataTransformationList: List<MainSectionData.() -> Unit>,
         testRunInterceptor: TestRunInterceptor,
@@ -74,7 +76,7 @@ internal class TestRunner<BeforeSectionData, MainSectionData> {
     ): MainSectionData {
         try {
             testRunInterceptor.onBeforeSectionStarted(currentTestInfo)
-            beforeTestActions.invoke()
+            beforeTestActions.invoke(BaseTestContext(configurator))
             val mainData = mainDataProducer.invoke(initialisation)
             for (transformation in dataTransformationList) {
                 transformation.invoke(mainData)
@@ -99,7 +101,7 @@ internal class TestRunner<BeforeSectionData, MainSectionData> {
         try {
             testRunInterceptor.onMainSectionStarted(currentTestInfo)
 
-            mainSection.invoke(TestContext(stepsManager, mainSectionData))
+            mainSection.invoke(TestContext(configurator, stepsManager, mainSectionData))
 
             val testResultInSteps = stepsManager.onAllStepsFinishedAndGetResultInSteps()
             val updatedTestInfo = currentTestInfo.copy(steps = testResultInSteps)
@@ -124,12 +126,12 @@ internal class TestRunner<BeforeSectionData, MainSectionData> {
 
     private fun runAfterTestSection(
         currentTestInfo: TestInfo,
-        afterTestActions: () -> Unit,
+        afterTestActions: BaseTestContext.() -> Unit,
         testRunInterceptor: TestRunInterceptor
     ) {
         try {
             testRunInterceptor.onAfterSectionStarted(currentTestInfo)
-            afterTestActions.invoke()
+            afterTestActions.invoke(BaseTestContext(configurator))
             testRunInterceptor.onAfterSectionFinishedSuccess(currentTestInfo)
         } catch (e: Throwable) {
             testRunInterceptor.onAfterSectionFinishedFailed(currentTestInfo, e)

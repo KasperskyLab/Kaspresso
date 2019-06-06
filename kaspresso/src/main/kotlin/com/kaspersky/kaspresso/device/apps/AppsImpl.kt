@@ -18,7 +18,9 @@ import org.junit.Assert
 /**
  * Default implementation of Apps interface.
  */
-class AppsImpl : Apps {
+class AppsImpl(
+    private val logger: UiTestLogger
+) : Apps {
 
     private val chromePackageName = "com.android.chrome"
 
@@ -26,8 +28,6 @@ class AppsImpl : Apps {
         get() = InstrumentationRegistry.getInstrumentation().context
 
     private val uiDevice: UiDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
-
-    private val logger: UiTestLogger = Configurator.logger
 
     override val targetAppLauncherPackageName: String = uiDevice.launcherPackageName
 

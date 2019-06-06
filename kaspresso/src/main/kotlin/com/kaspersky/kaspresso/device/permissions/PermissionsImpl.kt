@@ -1,5 +1,6 @@
 package com.kaspersky.kaspresso.device.permissions
 
+import android.support.test.uiautomator.UiDevice
 import android.support.test.uiautomator.UiObjectNotFoundException
 import android.support.test.uiautomator.UiSelector
 import com.kaspersky.kaspresso.configurator.Configurator
@@ -11,13 +12,14 @@ import com.kaspersky.kaspresso.flakysafety.wait
 /**
  * An implementation of Permissions interface.
  */
-class PermissionsImpl : Permissions {
+class PermissionsImpl(
+    private val logger: UiTestLogger,
+    private val uiDevice: UiDevice
+) : Permissions {
 
     private val packageInstallerPackageName = "com.android.packageinstaller"
     private val permissionDenyButtonId = "$packageInstallerPackageName:id/permission_deny_button"
     private val permissionAllowButtonId = "$packageInstallerPackageName:id/permission_allow_button"
-
-    private val logger: UiTestLogger = Configurator.logger
 
     /**
      * Waits for 1 sec, passes the permission-requesting permissions dialog and allows permissions.
@@ -46,7 +48,7 @@ class PermissionsImpl : Permissions {
                         permissionDenyButtonId
                 )
 
-            val btn = Device.uiDevice.findObject(btnSelector)
+            val btn = uiDevice.findObject(btnSelector)
 
             if (btn.exists()) {
                 btn.click()

@@ -7,15 +7,17 @@ import java.util.*
 /**
  *  Utility class for handling locale parsing
  */
-internal object Locales {
+internal class Locales(
+    private val configurator: Configurator
+) {
 
-    private const val LOCALES_ARG = "localizations"
+    companion object {
+        private const val LOCALES_ARG = "localizations"
+        private const val LANGUAGE_COUNTRY_SEPARATOR = "-"
+        private const val DEFAULT_LOCALES = "en,ru"
+    }
 
-    private const val LANGUAGE_COUNTRY_SEPARATOR = "-"
-
-    private val logger = Configurator.logger
-
-    private const val DEFAULT_LOCALES = "en,ru"
+    private val logger = configurator.logger
 
     /**
      *  Returns set of supported locales for test.

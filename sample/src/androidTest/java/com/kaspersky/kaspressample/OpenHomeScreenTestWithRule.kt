@@ -32,15 +32,15 @@ class OpenHomeScreenTestWithRule {
 
     @Rule
     @JvmField
-    val testCaseRule = TestCaseRule(this)
+    val testCaseRule = TestCaseRule(javaClass.simpleName)
 
     @Test
     fun test() {
-        testCaseRule.beforeTest {
-            Device.exploit.setOrientation(Orientation.Landscape)
+        testCaseRule.before {
+            device.exploit.setOrientation(Orientation.Landscape)
             activityTestRule.launchActivity(null)
         }.after {
-            Device.exploit.setOrientation(Orientation.Portrait)
+            device.exploit.setOrientation(Orientation.Portrait)
         }.run {
 
             step("Open Home screen") {

@@ -1,6 +1,7 @@
 package com.kaspersky.kaspresso.extensions.kakaoext
 
 import com.kaspersky.kaspresso.configurator.Configurator
+import com.kaspersky.kaspresso.configurator.ConfiguratorExt
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.klkakao.common.views.KBaseView
 import java.util.concurrent.TimeUnit
@@ -9,10 +10,10 @@ import java.util.concurrent.TimeUnit
  * Provides an [com.kaspersky.kaspresso.flakysafety.attempt] method as an extension of [KBaseView].
  */
 fun <T : KBaseView<Any>, R> T.attempt(
-    timeoutMs: Long = Configurator.attemptsTimeoutMs,
-    intervalMs: Long = Configurator.attemptsIntervalMs,
-    logger: UiTestLogger = Configurator.logger,
-    allowedExceptions: Set<Class<out Throwable>> = Configurator.allowedExceptionsForAttempt,
+    timeoutMs: Long = ConfiguratorExt.attemptsTimeoutMs,
+    intervalMs: Long = ConfiguratorExt.attemptsIntervalMs,
+    logger: UiTestLogger = ConfiguratorExt.logger,
+    allowedExceptions: Set<Class<out Throwable>> = ConfiguratorExt.allowedExceptionsForAttempt,
     action: T.() -> R
 ): R {
     return com.kaspersky.kaspresso.flakysafety.attempt(
@@ -43,8 +44,8 @@ fun <T : KBaseView<Any>, R> T.attempt(
  * Provides a [com.kaspersky.kaspresso.flakysafety.wait] method as an extension of [KBaseView].
  */
 fun <T : KBaseView<Any>, R> T.wait(
-    timeoutMs: Long = Configurator.attemptsTimeoutMs,
-    logger: UiTestLogger = Configurator.logger,
+    timeoutMs: Long = ConfiguratorExt.attemptsTimeoutMs,
+    logger: UiTestLogger = ConfiguratorExt.logger,
     action: T.() -> R
 ): R {
     return com.kaspersky.kaspresso.flakysafety.wait(

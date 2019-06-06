@@ -5,14 +5,18 @@ import android.content.res.Resources
 import android.support.test.espresso.util.TreeIterables
 import android.view.View
 import android.widget.TextView
-import com.kaspersky.kaspresso.configurator.Configurator
+import com.kaspersky.kaspresso.logger.UiTestLogger
 
 /**
  *  Utility class to collect metadata from a window.
  */
-internal object ActivityMetadata {
+internal class ActivityMetadata(
+    private val logger: UiTestLogger
+) {
 
-    private const val INDEX_SEPARATOR = '_'
+    companion object {
+        private const val INDEX_SEPARATOR = '_'
+    }
 
     /**
      *  Returns a formed metadata object for a given activity, by collecting all visible [TextView] data.
@@ -64,7 +68,7 @@ internal object ActivityMetadata {
         return try {
             resources.getResourceEntryName(v.id)
         } catch (ex: Resources.NotFoundException) {
-            Configurator.logger.e("Entry ${v.id} not found for TextView with text ${v.text}")
+            logger.e("Entry ${v.id} not found for TextView with text ${v.text}")
             "[id:${Integer.toHexString(v.id)}]"
         }
     }
@@ -81,7 +85,8 @@ internal object ActivityMetadata {
 
     private fun addIndexes(groupedById: List<LocalizedString>): List<LocalizedString> {
         return groupedById.mapIndexed { index, locString ->
-            locString.copy(locValueDescription = "${locString.locValueDescription}$INDEX_SEPARATOR${index + 1}")
+            locString.copy(locValueDescription = "${locString.locValueDescription}${Companion.INDEX_SEPARATOR}${index + 1}")
         }
     }
+
 }

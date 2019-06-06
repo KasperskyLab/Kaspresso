@@ -7,8 +7,8 @@ import android.os.Build
 import android.os.Environment.getExternalStorageDirectory
 import android.support.test.InstrumentationRegistry
 import android.support.test.uiautomator.UiDevice
-import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.extensions.spoonext.Chmod.Companion.chmodPlusRWX
+import com.kaspersky.kaspresso.logger.UiTestLogger
 import java.io.File
 import java.io.IOException
 import java.util.*
@@ -18,7 +18,8 @@ import java.util.regex.Pattern
  * Class for capturing spoon-compatible screenshots by uiautomator.
  */
 class UiAutomatorSpoon(
-    private val screenshotDir: File
+    private val screenshotDir: File,
+    private val logger: UiTestLogger
 ) {
 
     companion object {
@@ -45,8 +46,6 @@ class UiAutomatorSpoon(
      * Holds a set of directories that have been cleared for this test.
      */
     private val clearedOutputDirectories = HashSet<File>()
-
-    private val logger by lazy { Configurator.logger }
 
     /**
      * Takes a screenshot with the specified tag.

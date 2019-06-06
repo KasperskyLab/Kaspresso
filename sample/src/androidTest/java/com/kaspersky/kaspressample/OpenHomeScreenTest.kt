@@ -16,8 +16,8 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class OpenHomeScreenTest : TestCase() {
 
-    private val mainScreen by lazy { MainScreen() }
-    private val homeScreen by lazy { HomeScreen() }
+    private val mainScreen = MainScreen()
+    private val homeScreen = HomeScreen()
 
     @Rule
     @JvmField
@@ -33,12 +33,11 @@ class OpenHomeScreenTest : TestCase() {
     @Test
     fun test() {
         before {
-            Device.exploit.setOrientation(Orientation.Landscape)
+            device.exploit.setOrientation(Orientation.Landscape)
             activityTestRule.launchActivity(null)
         }.after {
-            Device.exploit.setOrientation(Orientation.Portrait)
+            device.exploit.setOrientation(Orientation.Portrait)
         }.run {
-
             step("Open Home Screen") {
                 mainScreen {
                     nextButton {

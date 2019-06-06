@@ -6,9 +6,9 @@ import com.kaspersky.kaspresso.configurator.Configurator
  * A singletone to provide access to external logger outside. Implements [UiTestLogger] interface and delegates all
  * calls to wrapped implementation of [UiTestLogger].
  */
-object KLogger: UiTestLogger {
-
-    private val logger: UiTestLogger = Configurator.externalLogger
+class KLogger(
+    private val logger: UiTestLogger
+): UiTestLogger {
 
     override fun i(text: String) = logger.i(text)
     override fun d(text: String) = logger.d(text)

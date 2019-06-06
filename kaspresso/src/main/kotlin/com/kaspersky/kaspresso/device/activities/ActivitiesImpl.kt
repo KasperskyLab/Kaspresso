@@ -14,9 +14,9 @@ import org.junit.Assert
 /**
  * Default implementation of Activities interface.
  */
-class ActivitiesImpl : Activities {
-
-    private val logger: UiTestLogger = Configurator.logger
+class ActivitiesImpl(
+    private val logger: UiTestLogger
+) : Activities {
 
     /**
      * Checks if this is a main thread.

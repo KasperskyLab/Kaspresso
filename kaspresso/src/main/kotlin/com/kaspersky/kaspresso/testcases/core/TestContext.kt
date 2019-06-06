@@ -13,10 +13,11 @@ import com.kaspersky.kaspresso.testcases.BaseScenario
  * @param MainSectionData data created in before section
  */
 class TestContext<MainSectionData> constructor(
+    private val configurator: Configurator,
     private val stepProducer: StepProducer,
     val data: MainSectionData
-) {
-    private val interceptors: List<StepInterceptor> = Configurator.stepInterceptors
+) : BaseTestContext(configurator) {
+    private val interceptors: List<StepInterceptor> = configurator.stepInterceptors
 
     /**
      * A representation of a [TestContext]'s step.

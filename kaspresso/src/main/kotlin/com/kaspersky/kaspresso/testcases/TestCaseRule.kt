@@ -8,6 +8,6 @@ import com.kaspersky.kaspresso.configurator.Configurator
  *  exception caused by re-initialization of the [Configurator], use [Scenario] instead.
  */
 class TestCaseRule(
-    context: Any,
+    testClassName: String,
     configBuilder: Configurator.Builder = Configurator.Builder.default()
-) : BaseTestCaseRule<Unit, Unit>(context, configBuilder)
+) : BaseTestCaseRule<Unit, Unit>(testClassName, configBuilder)

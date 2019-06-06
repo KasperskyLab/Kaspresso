@@ -16,19 +16,20 @@ import javax.annotation.CheckReturnValue
  * An implementation of [WebInteractionDelegate], that delegates the [Web.WebInteraction]'s interface calls
  * to [AtomProxy] and [WebAssertionProxy].
  */
-open class WebInteractionDelegateImpl(
-    private val webInteraction: Web.WebInteraction<*>
+open class WebInteractionDelegateKaspressoImpl(
+    override val webInteraction: Web.WebInteraction<*>,
+    private val configurator: Configurator
 ) : WebInteractionDelegate {
 
     /**
      * Calls [Web.WebInteraction.withElement] on wrapped [webInteraction].
      *
-     * @return an new instance of [WebInteractionDelegateImpl].
+     * @return an new instance of [WebInteractionDelegateKaspressoImpl].
      */
     @CheckResult
     @CheckReturnValue
     override fun withElement(ref: Atom<ElementReference>): WebInteractionDelegate {
-        return WebInteractionDelegateImpl(webInteraction.withElement(ref))
+        return WebInteractionDelegateKaspressoImpl(webInteraction.withElement(ref), configurator)
     }
 
     /**
@@ -40,11 +41,12 @@ open class WebInteractionDelegateImpl(
     override fun perform(webAction: Atom<*>): WebInteractionDelegate {
         val webActionProxy = AtomProxy(
             webAction,
-            Configurator.atomInterceptors
+            configurator.atomInterceptors
         )
 
-        return WebInteractionDelegateImpl(
-            execute { webInteraction.perform(webActionProxy) }
+        return WebInteractionDelegateKaspressoImpl(
+            execute { webInteraction.perform(webActionProxy) },
+            configurator
         )
     }
 
@@ -65,11 +67,12 @@ open class WebInteractionDelegateImpl(
             webAssertion,
             atom,
             matcher,
-            Configurator.webAssertionInterceptors
+            configurator.webAssertionInterceptors
         )
 
-        return WebInteractionDelegateImpl(
-            execute { webInteraction.check(webAssertionProxy) }
+        return WebInteractionDelegateKaspressoImpl(
+            execute { webInteraction.check(webAssertionProxy) },
+            configurator
         )
     }
 
@@ -81,7 +84,7 @@ open class WebInteractionDelegateImpl(
      * @return [Web.WebInteraction] as it is a result of executable invocation.
      */
     private fun execute(executable: () -> Web.WebInteraction<*>): Web.WebInteraction<*> {
-        return Configurator.executingInterceptor
+        return configurator.executingInterceptor
             ?.interceptAndExecuteWeb { executable.invoke() }
             ?: executable.invoke()
     }

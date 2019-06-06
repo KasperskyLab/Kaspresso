@@ -1,11 +1,12 @@
 package com.kaspersky.kaspresso.testcases.models
 
+import com.kaspersky.kaspresso.testcases.core.BaseTestContext
 import com.kaspersky.kaspresso.testcases.core.TestContext
 
 class TestBody<BeforeSectionData, MainSectionData>(
     val testName: String,
-    val beforeTestActions: () -> Unit,
-    val afterTestActions: () -> Unit,
+    val beforeTestActions: BaseTestContext.() -> Unit,
+    val afterTestActions: BaseTestContext.() -> Unit,
     val mainSection: TestContext<MainSectionData>.() -> Unit,
     var initialisationSection: (BeforeSectionData.() -> Unit)?,
     val transformationsList: List<MainSectionData.() -> Unit>,
@@ -13,8 +14,8 @@ class TestBody<BeforeSectionData, MainSectionData>(
 ) {
     class Builder<BeforeSectionData, MainSectionData> {
         var testName: String? = null
-        var beforeTestSection: (() -> Unit)? = null
-        var afterTestSection: (() -> Unit)? = null
+        var beforeTestSection: (BaseTestContext.() -> Unit)? = null
+        var afterTestSection: (BaseTestContext.() -> Unit)? = null
         var mainTestSection: (TestContext<MainSectionData>.() -> Unit)? = null
         var initialisationSection: (BeforeSectionData.() -> Unit)? = null
         val conditionSectionsList: MutableList<MainSectionData.() -> Unit> = mutableListOf()

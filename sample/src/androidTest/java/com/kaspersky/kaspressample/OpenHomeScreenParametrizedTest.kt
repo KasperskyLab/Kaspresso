@@ -32,7 +32,7 @@ class OpenHomeScreenParametrizedTest : BaseParametrizedTest() {
         before {
             activityTestRule.launchActivity(null)
         }.after {
-            Device.exploit.setOrientation(Orientation.Portrait)
+            device.exploit.setOrientation(Orientation.Portrait)
         }.initialisation {
             rawData(2)
             rawData(3)
