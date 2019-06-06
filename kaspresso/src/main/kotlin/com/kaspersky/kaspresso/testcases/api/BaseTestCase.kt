@@ -2,11 +2,9 @@ package com.kaspersky.kaspresso.testcases.api
 
 import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.testcases.core.BaseTestContext
-import com.kaspersky.kaspresso.testcases.inner_rules.KakaoResetStateRule
 import com.kaspersky.kaspresso.testcases.models.TestBody
 import com.kaspersky.kaspresso.testcases.sections.AfterTestSection
 import com.kaspersky.kaspresso.testcases.sections.BeforeTestSection
-import org.junit.Rule
 
 /**
  *  A base class for all parametrized test cases. Extend this class with a single base project-wide inheritor of [TestCase] as a
@@ -24,10 +22,6 @@ abstract class BaseTestCase<BeforeSectionData, MainSectionData>(
     internal val configurator: Configurator = configBuilder.build()
 
     private val testCaseName = javaClass.simpleName
-
-    @Rule
-    @JvmField
-    internal val kakaoResetStateRule = KakaoResetStateRule()
 
     /**
      * Starts the building a test, sets the [BeforeTestSection] actions and returns an existing instance of

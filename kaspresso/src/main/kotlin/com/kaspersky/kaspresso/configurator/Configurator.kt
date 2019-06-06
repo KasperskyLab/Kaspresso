@@ -228,4 +228,12 @@ class Configurator(
         }
     }
 
+    internal fun reset() {
+        with(KakaoConfigurator) {
+            initViewInteractionDelegateFactory(null)
+            initDataInteractionDelegateFactory(null)
+            initWebInteractionDelegateFactory(null)
+        }
+    }
+
 }

@@ -27,11 +27,6 @@ open class BaseTestCaseRule<BeforeSectionData, MainSectionData>(
     override fun apply(base: Statement?, description: Description?) = object : Statement() {
         override fun evaluate() {
             requireNotNull(base)
-            with(KakaoConfigurator) {
-                initViewInteractionDelegateFactory(null)
-                initDataInteractionDelegateFactory(null)
-                initWebInteractionDelegateFactory(null)
-            }
         }
     }
 

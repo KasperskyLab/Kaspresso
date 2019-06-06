@@ -60,6 +60,7 @@ internal class TestRunner<BeforeSectionData, MainSectionData>(
                     throwable = resultException
                 )
                 testRunInterceptor.onTestFinished(currentTestInfo, testPassed)
+                configurator.reset()
             }
         }
 
