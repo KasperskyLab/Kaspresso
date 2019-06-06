@@ -176,7 +176,7 @@ object Configurator {
              *
              * @return an existing instance of [Builder].
              */
-            fun default(): Builder {
+            internal fun default(): Builder {
                 return Builder().apply {
                     viewActionInterceptors = listOf(LoggingViewActionInterceptor(logger))
                     viewAssertionInterceptors = listOf(LoggingViewAssertionInterceptor(logger))
