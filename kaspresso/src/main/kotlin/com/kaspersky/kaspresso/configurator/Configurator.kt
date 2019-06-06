@@ -38,8 +38,54 @@ import com.kaspersky.klkakao.configurator.KakaoConfigurator
 
 /**
  * An class that keeps all settings.
+ *
+ * @param attemptsTimeoutMs A timeout for all action attempts in milliseconds.
+ * @param attemptsIntervalMs A frequency of action attempts in milliseconds.
+ * @param logger Holds an implementation of [UiTestLogger] interface for inner framework usage. Not accessible from outside.
+ * @param externalLogger Holds an implementation of [UiTestLogger] interface for external usage.
+ * @param apps Holds an implementation of [Apps] interface. If it was not specified in [Configurator.Builder], the default implementation is used.
+ * @param activities Holds an implementation of [Activities] interface. If it was not specified in [Configurator.Builder], the default implementation is used.
+ * @param files Holds an implementation of [Files] interface. If it was not specified in [Configurator.Builder], the default implementation is used.
+ * @param internet Holds an implementation of [Internet] interface. If it was not specified in [Configurator.Builder], the default implementation is used.
+ * @param screenshots Holds an implementation of [Screenshots] interface. If it was not specified in [Configurator.Builder], the
+ * default implementation is used.
+ * @param accessibility Holds an implementation of [Accessibility] interface. If it was not specified in [Configurator.Builder], the
+ * default implementation is used.
+ * @param permissions Holds an implementation of [Permissions] interface. If it was not specified in [Configurator.Builder], the
+ * default implementation is used.
+ * @param exploit Holds an implementation of [Exploit] interface. If it was not specified in [Configurator.Builder], the default
+ * implementation is used.
+ * @param allowedExceptionsForAttempt Exceptions that doesn't stop attempts.
+ * @param viewActionInterceptors Interceptors that are called by [com.kaspersky.uitest_framework.proxy.ViewActionProxy] before actually [android.support.test.espresso.ViewAction.perform] call.
+ * @param viewAssertionInterceptors Interceptors that are called by [com.kaspersky.uitest_framework.proxy.ViewAssertionProxy] before actually [android.support.test.espresso.ViewAssertion.check] call.
+ * @param atomInterceptors Interceptors that are called by [com.kaspersky.uitest_framework.proxy.AtomProxy] before actually [android.support.test.espresso.web.model.Atom.transform] call.
+ * @param webAssertionInterceptors  Interceptors that are called by [android.support.test.espresso.web.assertion.WebAssertionProxy] before actually [android.support.test.espresso.web.assertion.WebAssertion.checkResult] call.
+ * @param executingInterceptor An interceptor that actually manages the execution of actions or assertions. For example, [FlakySafeExecutingInterceptor] performs multiple attempting to execute an action or assertion.
+ * @param stepInterceptors An interceptors set that actually manages the execution of steps [TestContext.step]. Interceptors works using decorator pattern. First interceptor wraps others
+ * @param testRunInterceptors An interceptors set that actually manages the execution of test sections [TestInfo]. Interceptors works using decorator pattern. First interceptor wraps others
  */
-class Configurator {
+class Configurator(
+    internal val attemptsTimeoutMs: Long = DEFAULT_ATTEMPTS_TIMEOUT_MS,
+    internal val attemptsIntervalMs: Long = DEFAULT_ATTEMPTS_INTERVAL_MS,
+    internal val logger: UiTestLogger,
+    internal val externalLogger: UiTestLogger,
+    internal val apps: Apps,
+    internal val activities: Activities,
+    internal val files: Files,
+    internal val internet: Internet,
+    internal val screenshots: Screenshots,
+    internal val accessibility: Accessibility,
+    internal val permissions: Permissions,
+    internal val exploit: Exploit,
+    internal val allowedExceptionsForAttempt: Set<Class<out Throwable>>,
+    internal val viewActionInterceptors: List<ViewActionInterceptor>,
+    internal val viewAssertionInterceptors: List<ViewAssertionInterceptor>,
+    internal val atomInterceptors: List<AtomInterceptor>,
+    internal val webAssertionInterceptors: List<WebAssertionInterceptor>,
+    internal val executingInterceptor: ExecutingInterceptor? = null,
+    internal val stepInterceptors: List<StepInterceptor>,
+    internal val testRunInterceptors: List<TestRunInterceptor>
+) {
 
     companion object {
         internal const val DEFAULT_ATTEMPTS_TIMEOUT_MS: Long = 2_000L
@@ -49,120 +95,6 @@ class Configurator {
         internal const val DEFAULT_OUTER_LOGGER_TAG: String = "KASPRESSO_SPECIAL"
     }
 
-    /**
-     * A timeout for all action attempts in milliseconds.
-     */
-    internal var attemptsTimeoutMs: Long = DEFAULT_ATTEMPTS_TIMEOUT_MS
-
-    /**
-     * A frequency of action attempts in milliseconds.
-     */
-    internal var attemptsIntervalMs: Long = DEFAULT_ATTEMPTS_INTERVAL_MS
-
-    /**
-     * Holds an implementation of [UiTestLogger] interface for inner framework usage. Not accessible from outside.
-     */
-    internal lateinit var logger: UiTestLogger
-
-    /**
-     * Holds an implementation of [UiTestLogger] interface for external usage.
-     */
-    internal lateinit var externalLogger: UiTestLogger
-
-    /**
-     * Holds an implementation of [Apps] interface. If it was not specified in [Configurator.Builder], the default
-     * implementation is used.
-     */
-    internal lateinit var apps: Apps
-
-    /**
-     * Holds an implementation of [Activities] interface. If it was not specified in [Configurator.Builder], the default
-     * implementation is used.
-     */
-    internal lateinit var activities: Activities
-
-    /**
-     * Holds an implementation of [Files] interface. If it was not specified in [Configurator.Builder], the default
-     * implementation is used.
-     */
-    internal lateinit var files: Files
-
-    /**
-     * Holds an implementation of [Internet] interface. If it was not specified in [Configurator.Builder], the default
-     * implementation is used.
-     */
-    internal lateinit var internet: Internet
-
-    /**
-     * Holds an implementation of [Screenshots] interface. If it was not specified in [Configurator.Builder], the
-     * default implementation is used.
-     */
-    internal lateinit var screenshots: Screenshots
-
-    /**
-     * Holds an implementation of [Accessibility] interface. If it was not specified in [Configurator.Builder], the
-     * default implementation is used.
-     */
-    internal lateinit var accessibility: Accessibility
-
-    /**
-     * Holds an implementation of [Permissions] interface. If it was not specified in [Configurator.Builder], the
-     * default implementation is used.
-     */
-    internal lateinit var permissions: Permissions
-
-    /**
-     * Holds an implementation of [Exploit] interface. If it was not specified in [Configurator.Builder], the default
-     * implementation is used.
-     */
-    internal lateinit var exploit: Exploit
-
-    /**
-     * Exceptions that doesn't stop attempts.
-     */
-    internal lateinit var allowedExceptionsForAttempt: Set<Class<out Throwable>>
-
-    /**
-     * Interceptors that are called by [com.kaspersky.uitest_framework.proxy.ViewActionProxy] before actually
-     * [android.support.test.espresso.ViewAction.perform] call.
-     */
-    internal lateinit var viewActionInterceptors: List<ViewActionInterceptor>
-
-    /**
-     * Interceptors that are called by [com.kaspersky.uitest_framework.proxy.ViewAssertionProxy] before actually
-     * [android.support.test.espresso.ViewAssertion.check] call.
-     */
-    internal lateinit var viewAssertionInterceptors: List<ViewAssertionInterceptor>
-
-    /**
-     * Interceptors that are called by [com.kaspersky.uitest_framework.proxy.AtomProxy] before actually
-     * [android.support.test.espresso.web.model.Atom.transform] call.
-     */
-    internal lateinit var atomInterceptors: List<AtomInterceptor>
-
-    /**
-     * Interceptors that are called by [android.support.test.espresso.web.assertion.WebAssertionProxy] before actually
-     * [android.support.test.espresso.web.assertion.WebAssertion.checkResult] call.
-     */
-    internal lateinit var webAssertionInterceptors: List<WebAssertionInterceptor>
-
-    /**
-     * An interceptor that actually manages the execution of actions or assertions. For example,
-     * [FlakySafeExecutingInterceptor] performs multiple attempting to execute an action or assertion.
-     */
-    internal var executingInterceptor: ExecutingInterceptor? = null
-
-    /**
-     * An interceptors set that actually manages the execution of steps [TestContext.step]. Interceptors works using
-     * decorator pattern. First interceptor wraps others
-     */
-    internal lateinit var stepInterceptors: List<StepInterceptor>
-
-    /**
-     * An interceptors set that actually manages the execution of test sections [TestInfo]. Interceptors works using
-     * decorator pattern. First interceptor wraps others
-     */
-    internal lateinit var testRunInterceptors: List<TestRunInterceptor>
 
     /**
      * A class for [Configurator] initialization. The right way to change [Configurator] settings is to use [Builder].
@@ -213,8 +145,10 @@ class Configurator {
         var internet: Internet = InternetImpl(InstrumentationRegistry.getTargetContext())
         var screenshots: Screenshots = ScreenshotsImpl(logger, activities)
         var accessibility: Accessibility = AccessibilityImpl()
-        var permissions: Permissions = PermissionsImpl(logger, UiDevice.getInstance(InstrumentationRegistry.getInstrumentation()))
-        var exploit: Exploit = ExploitImpl(activities, UiDevice.getInstance(InstrumentationRegistry.getInstrumentation()))
+        var permissions: Permissions =
+            PermissionsImpl(logger, UiDevice.getInstance(InstrumentationRegistry.getInstrumentation()))
+        var exploit: Exploit =
+            ExploitImpl(activities, UiDevice.getInstance(InstrumentationRegistry.getInstrumentation()))
 
         var allowedExceptionsForAttempt: Set<Class<out Throwable>> = setOf(
             PerformException::class.java,
@@ -245,41 +179,42 @@ class Configurator {
          */
         @Throws(IllegalArgumentException::class)
         internal fun commit(): Configurator {
-            val configurator = Configurator()
 
-            configurator.attemptsTimeoutMs = attemptsTimeoutMs
-            configurator.attemptsIntervalMs = attemptsIntervalMs
+            val configurator = Configurator(
 
-            configurator.logger = logger
-            configurator.externalLogger = externalLogger
+                attemptsTimeoutMs = attemptsTimeoutMs,
+                attemptsIntervalMs = attemptsIntervalMs,
 
-            configurator.apps = apps
-            configurator.activities = activities
-            configurator.files = files
-            configurator.internet = internet
-            configurator.screenshots = screenshots
-            configurator.accessibility = accessibility
-            configurator.permissions = permissions
-            configurator.exploit = exploit
+                logger = logger,
+                externalLogger = externalLogger,
 
-            configurator.allowedExceptionsForAttempt = allowedExceptionsForAttempt
+                apps = apps,
+                activities = activities,
+                files = files,
+                internet = internet,
+                screenshots = screenshots,
+                accessibility = accessibility,
+                permissions = permissions,
+                exploit = exploit,
 
-            configurator.viewActionInterceptors = viewActionInterceptors
-            configurator.viewAssertionInterceptors = viewAssertionInterceptors
-            configurator.atomInterceptors = atomInterceptors
-            configurator.webAssertionInterceptors = webAssertionInterceptors
+                allowedExceptionsForAttempt = allowedExceptionsForAttempt,
 
-            configurator.executingInterceptor = executingInterceptor
+                viewActionInterceptors = viewActionInterceptors,
+                viewAssertionInterceptors = viewAssertionInterceptors,
+                atomInterceptors = atomInterceptors,
+                webAssertionInterceptors = webAssertionInterceptors,
+
+                executingInterceptor = executingInterceptor,
+
+                stepInterceptors = stepInterceptors,
+                testRunInterceptors = testRunInterceptors
+            )
 
             failureInterceptor?.let { Espresso.setFailureHandler(it::interceptAndThrow) }
 
-            configurator.stepInterceptors = stepInterceptors
-            configurator.testRunInterceptors = testRunInterceptors
-
             with(KakaoConfigurator) {
                 initViewInteractionDelegateFactory { ViewInteractionDelegateKaspressoImpl(it, configurator) }
-                initDataInteractionDelegateFactory {
-                        viewInteraction, dataInteraction ->
+                initDataInteractionDelegateFactory { viewInteraction, dataInteraction ->
                     DataInteractionDelegateKaspressoImpl(viewInteraction, dataInteraction, configurator)
                 }
                 initWebInteractionDelegateFactory { WebInteractionDelegateKaspressoImpl(it, configurator) }
