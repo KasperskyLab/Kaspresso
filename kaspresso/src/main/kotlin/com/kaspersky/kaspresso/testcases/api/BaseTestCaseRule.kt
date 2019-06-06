@@ -18,7 +18,8 @@ import org.junit.runners.model.Statement
  */
 open class BaseTestCaseRule<BeforeSectionData, MainSectionData>(
     private val testClassName: String,
-    private val configBuilder: Configurator.Builder = Configurator.Builder.default()
+    private val configBuilder: Configurator.Builder = Configurator.Builder.default(),
+    private val dataProducer: (((BeforeSectionData.() -> Unit)?) -> MainSectionData)
 ) : TestRule {
 
     private val configurator: Configurator = configBuilder.commit()
@@ -48,11 +49,9 @@ open class BaseTestCaseRule<BeforeSectionData, MainSectionData>(
             configurator,
             TestBody.Builder<BeforeSectionData, MainSectionData>().apply {
                 this.testName = testName
-                mainDataProducer = provideMainDataProducer()
+                mainDataProducer = dataProducer
             }
         ).beforeTest(actions)
     }
 
-    @Suppress("MemberVisibilityCanBePrivate")
-    open protected fun provideMainDataProducer(): (((BeforeSectionData.() -> Unit)?) -> MainSectionData)? = null
 }

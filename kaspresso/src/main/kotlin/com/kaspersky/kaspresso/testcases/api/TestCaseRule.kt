@@ -10,9 +10,8 @@ import com.kaspersky.kaspresso.configurator.Configurator
 class TestCaseRule(
     testClassName: String,
     configBuilder: Configurator.Builder = Configurator.Builder.default()
-) : BaseTestCaseRule<Unit, Unit>(testClassName, configBuilder) {
-
-    override fun provideMainDataProducer():(((Unit.() -> Unit)?) -> Unit)?  =
-        { action -> action?.invoke(Unit) }
-
-}
+) : BaseTestCaseRule<Unit, Unit>(
+    testClassName = testClassName,
+    configBuilder = configBuilder,
+    dataProducer = { action -> action?.invoke(Unit) }
+)
