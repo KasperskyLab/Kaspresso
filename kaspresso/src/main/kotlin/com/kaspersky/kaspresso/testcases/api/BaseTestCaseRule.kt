@@ -54,5 +54,5 @@ open class BaseTestCaseRule<BeforeSectionData, MainSectionData>(
     }
 
     @Suppress("MemberVisibilityCanBePrivate")
-    protected fun provideMainDataProducer(): (((BeforeSectionData.() -> Unit)?) -> MainSectionData)? = null
+    open protected fun provideMainDataProducer(): (((BeforeSectionData.() -> Unit)?) -> MainSectionData)? = null
 }

@@ -15,8 +15,8 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class OpenHomeScreenTestWithRule {
 
-    private val mainScreen by lazy { MainScreen() }
-    private val homeScreen by lazy { HomeScreen() }
+    private val mainScreen = MainScreen()
+    private val homeScreen = HomeScreen()
 
     @Rule
     @JvmField
