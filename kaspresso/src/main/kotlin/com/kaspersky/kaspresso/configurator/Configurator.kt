@@ -201,10 +201,14 @@ class Configurator {
         var logger: UiTestLogger = UiTestLoggerImpl(DEFAULT_INNER_LOGGER_TAG)
         var externalLogger: UiTestLogger = UiTestLoggerImpl(DEFAULT_OUTER_LOGGER_TAG)
 
-        var apps: Apps = AppsImpl(logger)
+        var apps: Apps = AppsImpl(
+            logger,
+            InstrumentationRegistry.getInstrumentation().context,
+            UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
+        )
         var activities: Activities = ActivitiesImpl(logger)
         var files: Files = FilesImpl()
-        var internet: Internet = InternetImpl()
+        var internet: Internet = InternetImpl(InstrumentationRegistry.getTargetContext())
         var screenshots: Screenshots = ScreenshotsImpl(logger, activities)
         var accessibility: Accessibility = AccessibilityImpl()
         var permissions: Permissions = PermissionsImpl(logger, UiDevice.getInstance(InstrumentationRegistry.getInstrumentation()))

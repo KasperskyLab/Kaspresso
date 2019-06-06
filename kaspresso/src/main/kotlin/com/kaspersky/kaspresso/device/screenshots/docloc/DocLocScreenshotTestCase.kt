@@ -84,7 +84,7 @@ abstract class DocLocScreenshotTestCase(
 
     private val clearedDirectories = mutableSetOf<File>()
     @PublishedApi internal val logger = configurator.logger
-    private val confLocales: Locales = Locales(configurator)
+    private val confLocales: Locales = Locales(logger)
 
     @get:Rule
     val localeRule = LocaleRule(

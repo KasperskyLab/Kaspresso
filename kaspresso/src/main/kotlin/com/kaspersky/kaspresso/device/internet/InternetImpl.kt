@@ -4,16 +4,14 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.net.wifi.WifiManager
 import android.os.Build
-import android.support.test.InstrumentationRegistry
 import com.kaspersky.kaspresso.device.server.AdbServer
 
 /**
  * Default implementation of Internet interface.
  */
-class InternetImpl: Internet {
-
+class InternetImpl(
     private val targetContext: Context
-        get() = InstrumentationRegistry.getTargetContext()
+): Internet {
 
     /**
      *  Enables wi-fi and mobile data using adb.

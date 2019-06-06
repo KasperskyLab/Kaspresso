@@ -3,7 +3,6 @@ package com.kaspersky.kaspresso.device.apps
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.support.test.InstrumentationRegistry
 import android.support.test.uiautomator.By
 import android.support.test.uiautomator.UiDevice
 import android.support.test.uiautomator.UiSelector
@@ -18,15 +17,12 @@ import org.junit.Assert
  * Default implementation of Apps interface.
  */
 class AppsImpl(
-    private val logger: UiTestLogger
+    private val logger: UiTestLogger,
+    private val context: Context,
+    private val uiDevice: UiDevice
 ) : Apps {
 
     private val chromePackageName = "com.android.chrome"
-
-    private val context: Context
-        get() = InstrumentationRegistry.getInstrumentation().context
-
-    private val uiDevice: UiDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
 
     override val targetAppLauncherPackageName: String = uiDevice.launcherPackageName
 

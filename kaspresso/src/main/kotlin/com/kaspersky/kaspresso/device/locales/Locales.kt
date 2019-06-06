@@ -1,14 +1,14 @@
 package com.kaspersky.kaspresso.device.locales
 
 import android.support.test.InstrumentationRegistry
-import com.kaspersky.kaspresso.configurator.Configurator
+import com.kaspersky.kaspresso.logger.UiTestLogger
 import java.util.*
 
 /**
  *  Utility class for handling locale parsing
  */
 internal class Locales(
-    private val configurator: Configurator
+    private val logger: UiTestLogger
 ) {
 
     companion object {
@@ -16,8 +16,6 @@ internal class Locales(
         private const val LANGUAGE_COUNTRY_SEPARATOR = "-"
         private const val DEFAULT_LOCALES = "en,ru"
     }
-
-    private val logger = configurator.logger
 
     /**
      *  Returns set of supported locales for test.
