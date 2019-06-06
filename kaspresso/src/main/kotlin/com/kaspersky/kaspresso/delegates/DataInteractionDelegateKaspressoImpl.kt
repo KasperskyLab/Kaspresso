@@ -1,10 +1,10 @@
 package com.kaspersky.kaspresso.delegates
 
-import android.view.View
 import android.support.annotation.CheckResult
 import android.support.test.espresso.DataInteraction
 import android.support.test.espresso.ViewAssertion
 import android.support.test.espresso.ViewInteraction
+import android.view.View
 import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.proxy.ViewAssertionProxy
 import com.kaspersky.klkakao.delegates.DataInteractionDelegate

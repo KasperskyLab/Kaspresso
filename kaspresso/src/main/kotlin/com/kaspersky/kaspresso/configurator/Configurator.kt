@@ -1,7 +1,9 @@
 package com.kaspersky.kaspresso.configurator
 
 import android.support.test.InstrumentationRegistry
-import android.support.test.espresso.*
+import android.support.test.espresso.Espresso
+import android.support.test.espresso.NoMatchingViewException
+import android.support.test.espresso.PerformException
 import android.support.test.uiautomator.UiDevice
 import com.kaspersky.kaspresso.delegates.DataInteractionDelegateKaspressoImpl
 import com.kaspersky.kaspresso.delegates.ViewInteractionDelegateKaspressoImpl

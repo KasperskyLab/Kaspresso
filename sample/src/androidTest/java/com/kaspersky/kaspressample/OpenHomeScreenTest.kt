@@ -6,7 +6,6 @@ import android.support.test.rule.GrantPermissionRule
 import android.support.test.runner.AndroidJUnit4
 import com.kaspersky.kaspressample.screen.HomeScreen
 import com.kaspersky.kaspressample.screen.MainScreen
-import com.kaspersky.kaspresso.device.Device
 import com.kaspersky.kaspresso.testcases.TestCase
 import com.kaspersky.kaspresso.viewactions.orientation.Orientation
 import org.junit.Rule
@@ -61,7 +60,7 @@ class OpenHomeScreenTest : TestCase() {
 
                 homeScreen {
                     title {
-                        hasText("Ooops!") //Uncomment to fail test
+                        //hasText("Ooops!") //Uncomment to fail test
                     }
                 }
                 step("Just Empty SubStep") {

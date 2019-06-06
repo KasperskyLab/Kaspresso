@@ -1,7 +1,5 @@
 package com.kaspersky.kaspresso.logger
 
-import com.kaspersky.kaspresso.configurator.Configurator
-
 /**
  * A singletone to provide access to external logger outside. Implements [UiTestLogger] interface and delegates all
  * calls to wrapped implementation of [UiTestLogger].

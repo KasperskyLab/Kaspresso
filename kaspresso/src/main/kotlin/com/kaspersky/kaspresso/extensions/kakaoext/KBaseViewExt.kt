@@ -1,6 +1,5 @@
 package com.kaspersky.kaspresso.extensions.kakaoext
 
-import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.configurator.ConfiguratorExt
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.klkakao.common.views.KBaseView

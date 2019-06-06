@@ -1,6 +1,5 @@
 package com.kaspersky.kaspresso.flakysafety
 
-import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.configurator.ConfiguratorExt
 import com.kaspersky.kaspresso.logger.UiTestLogger
 

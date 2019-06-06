@@ -1,8 +1,6 @@
 package com.kaspersky.kaspresso.testcases
 
 import com.kaspersky.kaspresso.configurator.Configurator
-import com.kaspersky.kaspresso.device.Device
-import com.kaspersky.kaspresso.logger.KLogger
 import com.kaspersky.kaspresso.testcases.core.BaseTestContext
 import com.kaspersky.kaspresso.testcases.models.TestBody
 import com.kaspersky.kaspresso.testcases.sections.AfterTestSection
@@ -11,7 +9,6 @@ import com.kaspersky.klkakao.configurator.KakaoConfigurator
 import org.junit.rules.TestRule
 import org.junit.runner.Description
 import org.junit.runners.model.Statement
-import java.lang.IllegalStateException
 
 /**
  *  A base class for all parametrized test cases rules.

@@ -1,10 +1,10 @@
 package com.kaspersky.kaspresso.extensions.kakaoext
 
+import android.support.test.espresso.UiController
 import android.support.test.espresso.ViewAction
+import android.support.test.espresso.matcher.ViewMatchers.isAssignableFrom
 import android.view.View
 import android.widget.TextView
-import android.support.test.espresso.UiController
-import android.support.test.espresso.matcher.ViewMatchers.isAssignableFrom
 import com.kaspersky.klkakao.text.TextViewActions
 
 /**

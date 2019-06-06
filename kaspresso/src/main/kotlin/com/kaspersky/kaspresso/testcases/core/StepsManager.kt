@@ -3,7 +3,6 @@ package com.kaspersky.kaspresso.testcases.core
 import com.kaspersky.kaspresso.testcases.models.InternalStepInfo
 import com.kaspersky.kaspresso.testcases.models.StepInfo
 import com.kaspersky.kaspresso.testcases.models.StepStatus
-import java.lang.IllegalStateException
 
 
 /**

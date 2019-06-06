@@ -1,9 +1,8 @@
 package com.kaspersky.kaspresso.flakysafety
 
-import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.configurator.ConfiguratorExt
-import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.extensions.other.getStackTraceAsString
+import com.kaspersky.kaspresso.logger.UiTestLogger
 
 /**
  * Makes several attempts to invoke an action.

@@ -6,7 +6,6 @@ import android.support.test.InstrumentationRegistry
 import android.support.test.internal.runner.junit4.statement.UiThreadStatement
 import android.support.test.runner.lifecycle.ActivityLifecycleMonitorRegistry
 import android.support.test.runner.lifecycle.Stage
-import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import org.hamcrest.CoreMatchers
 import org.junit.Assert

@@ -1,7 +1,5 @@
 package com.kaspersky.kaspresso.device.screenshots
 
-import com.kaspersky.kaspresso.configurator.Configurator
-import com.kaspersky.kaspresso.device.Device
 import com.kaspersky.kaspresso.device.activities.Activities
 import com.kaspersky.kaspresso.extensions.other.getStackTraceAsString
 import com.kaspersky.kaspresso.extensions.spoonext.UiAutomatorSpoon

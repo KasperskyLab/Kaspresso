@@ -1,18 +1,17 @@
 package com.kaspersky.kaspresso.device
 
 import android.content.Context
-import android.os.Build
 import android.support.test.InstrumentationRegistry
-import android.support.test.uiautomator.*
+import android.support.test.uiautomator.UiDevice
 import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.device.accessibility.Accessibility
 import com.kaspersky.kaspresso.device.activities.Activities
-import com.kaspersky.kaspresso.device.files.Files
-import com.kaspersky.kaspresso.device.internet.Internet
 import com.kaspersky.kaspresso.device.apps.Apps
 import com.kaspersky.kaspresso.device.exploit.Exploit
-import com.kaspersky.kaspresso.device.screenshots.Screenshots
+import com.kaspersky.kaspresso.device.files.Files
+import com.kaspersky.kaspresso.device.internet.Internet
 import com.kaspersky.kaspresso.device.permissions.Permissions
+import com.kaspersky.kaspresso.device.screenshots.Screenshots
 
 /**
  * A provider of managers for all off-screen work.

@@ -4,7 +4,6 @@ import com.kaspersky.klkakao.configurator.KakaoConfigurator
 import org.junit.rules.TestRule
 import org.junit.runner.Description
 import org.junit.runners.model.Statement
-import java.lang.IllegalStateException
 
 internal class KakaoResetStateRule : TestRule {
 

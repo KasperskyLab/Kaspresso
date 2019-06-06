@@ -1,6 +1,5 @@
 package com.kaspersky.kaspresso.extensions.other
 
-import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.configurator.ConfiguratorExt
 import java.io.File
 import java.io.FileNotFoundException

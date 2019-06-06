@@ -3,11 +3,9 @@ package com.kaspersky.kaspresso.device.permissions
 import android.support.test.uiautomator.UiDevice
 import android.support.test.uiautomator.UiObjectNotFoundException
 import android.support.test.uiautomator.UiSelector
-import com.kaspersky.kaspresso.configurator.Configurator
-import com.kaspersky.kaspresso.device.Device
-import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.extensions.other.getStackTraceAsString
 import com.kaspersky.kaspresso.flakysafety.wait
+import com.kaspersky.kaspresso.logger.UiTestLogger
 
 /**
  * An implementation of Permissions interface.

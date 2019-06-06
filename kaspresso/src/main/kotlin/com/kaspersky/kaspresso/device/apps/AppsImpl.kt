@@ -8,7 +8,6 @@ import android.support.test.uiautomator.By
 import android.support.test.uiautomator.UiDevice
 import android.support.test.uiautomator.UiSelector
 import android.support.test.uiautomator.Until
-import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.device.server.AdbServer
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import org.hamcrest.CoreMatchers

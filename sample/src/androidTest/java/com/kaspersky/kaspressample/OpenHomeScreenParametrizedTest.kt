@@ -5,7 +5,6 @@ import android.support.test.rule.ActivityTestRule
 import android.support.test.rule.GrantPermissionRule
 import android.support.test.runner.AndroidJUnit4
 import com.kaspersky.kaspressample.screen.MainScreen
-import com.kaspersky.kaspresso.device.Device
 import com.kaspersky.kaspresso.viewactions.orientation.Orientation
 import org.junit.Rule
 import org.junit.Test

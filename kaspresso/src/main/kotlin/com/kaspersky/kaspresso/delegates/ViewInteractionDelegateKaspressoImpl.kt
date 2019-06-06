@@ -1,7 +1,7 @@
 package com.kaspersky.kaspresso.delegates
 
-import android.view.View
 import android.support.test.espresso.*
+import android.view.View
 import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.proxy.ViewActionProxy
 import com.kaspersky.kaspresso.proxy.ViewAssertionProxy

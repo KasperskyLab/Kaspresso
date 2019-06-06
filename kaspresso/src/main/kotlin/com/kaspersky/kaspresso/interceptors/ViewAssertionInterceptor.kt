@@ -1,8 +1,8 @@
 package com.kaspersky.kaspresso.interceptors
 
-import android.view.View
 import android.support.test.espresso.NoMatchingViewException
 import android.support.test.espresso.ViewAssertion
+import android.view.View
 
 /**
  * An interface for all view action interceptors, used in [com.kaspersky.kaspresso.proxy.ViewAssertionProxy].
