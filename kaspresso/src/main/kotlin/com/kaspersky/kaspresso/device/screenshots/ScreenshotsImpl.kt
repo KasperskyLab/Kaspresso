@@ -13,7 +13,7 @@ import java.io.File
 class ScreenshotsImpl(
     private val logger: UiTestLogger,
     private val activities: Activities
-    ) : Screenshots {
+) : Screenshots {
 
     private val uiAutomatorSpoon = UiAutomatorSpoon(File("app_spoon-screenshots"), logger)
 

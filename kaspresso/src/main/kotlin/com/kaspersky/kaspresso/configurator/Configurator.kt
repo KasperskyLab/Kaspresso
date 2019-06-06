@@ -37,7 +37,7 @@ import com.kaspersky.kaspresso.testcases.core.TestContext
 import com.kaspersky.klkakao.configurator.KakaoConfigurator
 
 /**
- * An class that keeps all settings.
+ * A class that keeps all settings.
  *
  * @param attemptsTimeoutMs A timeout for all action attempts in milliseconds.
  * @param attemptsIntervalMs A frequency of action attempts in milliseconds.
@@ -173,12 +173,11 @@ class Configurator(
 
         var testRunInterceptors: List<TestRunInterceptor> = emptyList()
         /**
-         * Terminating method to commit built [Configurator] settings. Can be called only inside the framework
+         * Terminating method to build built [Configurator] settings. Can be called only inside the framework
          * package. Actually called when the base [com.kaspersky.uitest_framework.testcase.TestCase] class is
          * constructed.
          */
-        @Throws(IllegalArgumentException::class)
-        internal fun commit(): Configurator {
+        internal fun build(): Configurator {
 
             val configurator = Configurator(
 

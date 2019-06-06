@@ -66,7 +66,7 @@ import java.lang.reflect.Proxy
  *          fun setFragment(fragment: Fragment) {
  *              val fragmentTransaction = supportFragmentManager.beginTransaction()
  *              fragmentTransaction.replace(R.id.content_container, fragment, "")
- *              fragmentTransaction.commit()
+ *              fragmentTransaction.build()
  *          }
  *      }
  *  ```

@@ -1,7 +1,7 @@
 package com.kaspersky.kaspresso.logger
 
 /**
- * A singletone to provide access to external logger outside. Implements [UiTestLogger] interface and delegates all
+ * A class to provide access to external logger outside. Implements [UiTestLogger] interface and delegates all
  * calls to wrapped implementation of [UiTestLogger].
  */
 class KLogger(

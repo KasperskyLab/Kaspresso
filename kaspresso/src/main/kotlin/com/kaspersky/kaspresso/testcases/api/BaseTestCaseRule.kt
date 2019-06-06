@@ -22,13 +22,11 @@ open class BaseTestCaseRule<BeforeSectionData, MainSectionData>(
     private val dataProducer: (((BeforeSectionData.() -> Unit)?) -> MainSectionData)
 ) : TestRule {
 
-    private val configurator: Configurator = configBuilder.commit()
+    private val configurator: Configurator = configBuilder.build()
 
     override fun apply(base: Statement?, description: Description?) = object : Statement() {
         override fun evaluate() {
-            base?.evaluate() ?: throw IllegalStateException(
-                "BaseTestCaseRule was broken by null base argument. Check Environment"
-            )
+            requireNotNull(base)
             with(KakaoConfigurator) {
                 initViewInteractionDelegateFactory(null)
                 initDataInteractionDelegateFactory(null)

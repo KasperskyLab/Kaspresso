@@ -17,11 +17,11 @@ import org.junit.Rule
  *  @param MainSectionData data transformed from [BeforeSectionData] by special function
  */
 abstract class BaseTestCase<BeforeSectionData, MainSectionData>(
-    private val configBuilder: Configurator.Builder = Configurator.Builder.default(),
+    configBuilder: Configurator.Builder = Configurator.Builder.default(),
     private val dataProducer: (((BeforeSectionData.() -> Unit)?) -> MainSectionData)
 ) {
 
-    internal val configurator: Configurator = configBuilder.commit()
+    internal val configurator: Configurator = configBuilder.build()
 
     private val testCaseName = javaClass.simpleName
 

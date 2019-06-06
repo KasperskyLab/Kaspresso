@@ -9,9 +9,7 @@ internal class KakaoResetStateRule : TestRule {
 
     override fun apply(base: Statement?, description: Description?)= object : Statement() {
         override fun evaluate() {
-            base?.evaluate() ?: throw IllegalStateException(
-                "KakaoResetStateRule was broken by null base argument. Check Environment"
-            )
+            requireNotNull(base)
             with(KakaoConfigurator) {
                 initViewInteractionDelegateFactory(null)
                 initDataInteractionDelegateFactory(null)
