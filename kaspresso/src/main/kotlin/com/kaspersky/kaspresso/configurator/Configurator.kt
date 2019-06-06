@@ -37,7 +37,7 @@ import com.kaspersky.kaspresso.testcases.core.TestContext
 import com.kaspersky.klkakao.configurator.KakaoConfigurator
 
 /**
- * An object that keeps all settings.
+ * An class that keeps all settings.
  */
 class Configurator {
 
@@ -173,6 +173,8 @@ class Configurator {
 
             /**
              * Puts the default settings pack to [Builder].
+             * Please be aware if you add some settings after [default] method. You can catch inconsistent state of the [Builder].
+             * For example if you change [logger] after [default] method than all interceptors will work with old [logger]
              *
              * @return an existing instance of [Builder].
              */
