@@ -5,7 +5,7 @@ import com.kaspersky.kaspresso.extensions.other.forEachSafely
 import com.kaspersky.kaspresso.extensions.other.invokeSafely
 import com.kaspersky.kaspresso.extensions.other.throwAll
 import com.kaspersky.kaspresso.interceptors.StepInterceptor
-import com.kaspersky.kaspresso.testcases.BaseScenario
+import com.kaspersky.kaspresso.testcases.api.BaseScenario
 
 /**
  * Special class to operate with in user scenario

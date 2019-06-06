@@ -1,4 +1,4 @@
-package com.kaspersky.kaspresso.testcases
+package com.kaspersky.kaspresso.testcases.api
 
 import com.kaspersky.kaspresso.testcases.core.TestContext
 

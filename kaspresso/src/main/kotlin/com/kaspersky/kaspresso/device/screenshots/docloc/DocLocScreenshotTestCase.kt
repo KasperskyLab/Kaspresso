@@ -8,7 +8,7 @@ import com.kaspersky.kaspresso.extensions.other.getAllInterfaces
 import com.kaspersky.kaspresso.reflect.proxy.UiInvocationHandler
 import com.kaspersky.kaspresso.rule.LocaleRule
 import com.kaspersky.kaspresso.rule.TestFailRule
-import com.kaspersky.kaspresso.testcases.TestCase
+import com.kaspersky.kaspresso.testcases.api.TestCase
 import org.junit.Before
 import org.junit.Rule
 import java.io.File

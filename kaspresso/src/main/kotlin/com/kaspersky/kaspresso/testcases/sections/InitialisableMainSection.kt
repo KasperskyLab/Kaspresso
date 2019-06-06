@@ -1,6 +1,6 @@
 package com.kaspersky.kaspresso.testcases.sections
 
-import com.kaspersky.kaspresso.testcases.BaseTestCase
+import com.kaspersky.kaspresso.testcases.api.BaseTestCase
 import com.kaspersky.kaspresso.testcases.core.TestContext
 
 
