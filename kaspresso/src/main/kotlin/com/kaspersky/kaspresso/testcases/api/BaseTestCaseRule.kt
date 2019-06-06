@@ -41,6 +41,7 @@ open class BaseTestCaseRule<BeforeSectionData, MainSectionData>(
      * Starts the building a test, sets the [BeforeTestSection] actions and returns an existing instance of
      * [AfterTestSection] to continue building a test.
      *
+     * @param testName a name of the test
      * @param actions actions to invoke in before test section.
      * @return an existing instance of [AfterTestSection].
      */
