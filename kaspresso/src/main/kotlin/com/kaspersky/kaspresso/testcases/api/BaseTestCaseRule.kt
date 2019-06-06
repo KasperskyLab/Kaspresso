@@ -27,6 +27,7 @@ open class BaseTestCaseRule<BeforeSectionData, MainSectionData>(
     override fun apply(base: Statement?, description: Description?) = object : Statement() {
         override fun evaluate() {
             requireNotNull(base)
+            base.evaluate()
         }
     }
 
