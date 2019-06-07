@@ -5,7 +5,7 @@ import com.kaspersky.kaspresso.testcases.core.BaseTestContext
 import com.kaspersky.kaspresso.testcases.models.TestBody
 import com.kaspersky.kaspresso.testcases.sections.AfterTestSection
 import com.kaspersky.kaspresso.testcases.sections.BeforeTestSection
-import com.kaspersky.klkakao.configurator.KakaoConfigurator
+import com.agoda.kakao.configurator.KakaoConfigurator
 import org.junit.rules.TestRule
 import org.junit.runner.Description
 import org.junit.runners.model.Statement

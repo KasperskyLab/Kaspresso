@@ -2,7 +2,7 @@ package com.kaspersky.kaspresso.extensions.kakaoext
 
 import com.kaspersky.kaspresso.configurator.ConfiguratorExt
 import com.kaspersky.kaspresso.logger.UiTestLogger
-import com.kaspersky.klkakao.common.assertions.BaseAssertions
+import com.agoda.kakao.common.assertions.BaseAssertions
 
 /**
  * A multiple assertion.

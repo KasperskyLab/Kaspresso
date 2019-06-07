@@ -5,7 +5,7 @@ import android.view.View
 import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.proxy.ViewActionProxy
 import com.kaspersky.kaspresso.proxy.ViewAssertionProxy
-import com.kaspersky.klkakao.delegates.ViewInteractionDelegate
+import com.agoda.kakao.delegates.ViewInteractionDelegate
 import org.hamcrest.Matcher
 
 /**

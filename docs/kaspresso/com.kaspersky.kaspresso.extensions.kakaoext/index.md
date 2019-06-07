@@ -6,7 +6,7 @@
 
 | Name | Summary |
 |---|---|
-| [com.kaspersky.klkakao.text.TextViewActions](com.kaspersky.klkakao.text.-text-view-actions/index.md) |  |
+| [com.agoda.kakao.text.TextViewActions](com.agoda.kakao.text.-text-view-actions/index.md) |  |
 | [kotlin.Function1](kotlin.-function1/index.md) |  |
 
 ### Functions

@@ -1,8 +1,8 @@
 package com.kaspersky.kaspressample.screen
 
 import com.kaspersky.kaspressample.R
-import com.kaspersky.klkakao.screen.Screen
-import com.kaspersky.klkakao.text.KButton
+import com.agoda.kakao.screen.Screen
+import com.agoda.kakao.text.KButton
 
 class HomeScreen : Screen<HomeScreen>() {
 

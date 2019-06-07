@@ -1,11 +1,11 @@
 package com.kaspersky.kaspresso.kviews
 
 import android.view.View
-import com.kaspersky.klkakao.check.CheckableActions
-import com.kaspersky.klkakao.check.CheckableAssertions
-import com.kaspersky.klkakao.common.builders.ViewBuilder
-import com.kaspersky.klkakao.common.views.KBaseView
-import com.kaspersky.klkakao.delegates.DataInteractionDelegate
+import com.agoda.kakao.check.CheckableActions
+import com.agoda.kakao.check.CheckableAssertions
+import com.agoda.kakao.common.builders.ViewBuilder
+import com.agoda.kakao.common.views.KBaseView
+import com.agoda.kakao.delegates.DataInteractionDelegate
 import org.hamcrest.Matcher
 
 /**
