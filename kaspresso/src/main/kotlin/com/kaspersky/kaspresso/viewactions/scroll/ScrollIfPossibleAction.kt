@@ -1,10 +1,6 @@
 package com.kaspersky.kaspresso.viewactions.scroll
 
 import android.graphics.Rect
-import android.view.View
-import android.widget.HorizontalScrollView
-import android.widget.ListView
-import android.widget.ScrollView
 import android.support.test.espresso.PerformException
 import android.support.test.espresso.UiController
 import android.support.test.espresso.ViewAction
@@ -12,6 +8,10 @@ import android.support.test.espresso.matcher.ViewMatchers
 import android.support.test.espresso.matcher.ViewMatchers.*
 import android.support.test.espresso.util.HumanReadables
 import android.support.v4.widget.NestedScrollView
+import android.view.View
+import android.widget.HorizontalScrollView
+import android.widget.ListView
+import android.widget.ScrollView
 import com.kaspersky.kaspresso.extensions.other.isDisplayed
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers.allOf

@@ -1,7 +1,6 @@
 package com.kaspersky.kaspresso.device.apps
 
 import android.net.Uri
-import android.os.Build
 
 /**
  * An interface to work with installer, launcher and package manager.

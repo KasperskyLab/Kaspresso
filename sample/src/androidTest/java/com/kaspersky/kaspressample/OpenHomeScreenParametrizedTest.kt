@@ -5,7 +5,6 @@ import android.support.test.rule.ActivityTestRule
 import android.support.test.rule.GrantPermissionRule
 import android.support.test.runner.AndroidJUnit4
 import com.kaspersky.kaspressample.screen.MainScreen
-import com.kaspersky.kaspresso.device.Device
 import com.kaspersky.kaspresso.viewactions.orientation.Orientation
 import org.junit.Rule
 import org.junit.Test
@@ -14,7 +13,7 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class OpenHomeScreenParametrizedTest : BaseParametrizedTest() {
 
-    private val mainScreen by lazy { MainScreen() }
+    private val mainScreen = MainScreen()
 
     @Rule
     @JvmField
@@ -32,7 +31,7 @@ class OpenHomeScreenParametrizedTest : BaseParametrizedTest() {
         before {
             activityTestRule.launchActivity(null)
         }.after {
-            Device.exploit.setOrientation(Orientation.Portrait)
+            device.exploit.setOrientation(Orientation.Portrait)
         }.initialisation {
             rawData(2)
             rawData(3)

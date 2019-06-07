@@ -1,11 +1,13 @@
 package com.kaspersky.kaspresso.testcases.sections
 
-import com.kaspersky.kaspresso.testcases.BaseTestCase
+import com.kaspersky.kaspresso.configurator.Configurator
+import com.kaspersky.kaspresso.testcases.api.BaseTestCase
 import com.kaspersky.kaspresso.testcases.core.TestContext
 import com.kaspersky.kaspresso.testcases.core.TestRunner
 import com.kaspersky.kaspresso.testcases.models.TestBody
 
 class MainTestSection<BeforeSectionData, MainSectionData>(
+    private val configurator: Configurator,
     private val builder: TestBody.Builder<BeforeSectionData, MainSectionData>
 ) : InitialisableMainSection<BeforeSectionData, MainSectionData>,
     TransformableMainSection<BeforeSectionData, MainSectionData> {
@@ -24,7 +26,7 @@ class MainTestSection<BeforeSectionData, MainSectionData>(
         val testBody = builder
             .apply { mainTestSection = steps }
             .build()
-        TestRunner<BeforeSectionData, MainSectionData>().run(testBody)
+        TestRunner<BeforeSectionData, MainSectionData>(configurator).run(testBody)
     }
 
     /**

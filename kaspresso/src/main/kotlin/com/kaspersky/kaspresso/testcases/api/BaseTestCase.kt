@@ -1,6 +1,7 @@
-package com.kaspersky.kaspresso.testcases
+package com.kaspersky.kaspresso.testcases.api
 
 import com.kaspersky.kaspresso.configurator.Configurator
+import com.kaspersky.kaspresso.testcases.core.BaseTestContext
 import com.kaspersky.kaspresso.testcases.models.TestBody
 import com.kaspersky.kaspresso.testcases.sections.AfterTestSection
 import com.kaspersky.kaspresso.testcases.sections.BeforeTestSection
@@ -17,27 +18,24 @@ abstract class BaseTestCase<BeforeSectionData, MainSectionData>(
     configBuilder: Configurator.Builder = Configurator.Builder.default(),
     private val dataProducer: (((BeforeSectionData.() -> Unit)?) -> MainSectionData)
 ) {
-    private val testCaseName = javaClass.simpleName
 
-    /**
-     * Finishes building of [Configurator]. Passing [Configurator.Builder] to base [TestCase]'s constructor is the only
-     * way for project-wide inheritor of [TestCase] to tune [Configurator].
-     */
-    init {
-        configBuilder.commit()
-    }
+    internal val configurator: Configurator = configBuilder.build()
+
+    private val testCaseName = javaClass.simpleName
 
     /**
      * Starts the building a test, sets the [BeforeTestSection] actions and returns an existing instance of
      * [AfterTestSection] to continue building a test.
      *
+     * @param testName a name of the test
      * @param actions actions to invoke in before test section.
      * @return an existing instance of [AfterTestSection].
      */
-    protected fun before(actions: () -> Unit): AfterTestSection<BeforeSectionData, MainSectionData> {
+    protected fun before(testName: String = testCaseName, actions: BaseTestContext.() -> Unit): AfterTestSection<BeforeSectionData, MainSectionData> {
         return BeforeTestSection(
+            configurator,
             TestBody.Builder<BeforeSectionData, MainSectionData>().apply {
-                testName = testCaseName
+                this.testName = testName
                 mainDataProducer = dataProducer
             }
         ).beforeTest(actions)

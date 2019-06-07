@@ -1,10 +1,10 @@
 package com.kaspersky.kaspresso.delegates
 
-import android.view.View
 import android.support.annotation.CheckResult
 import android.support.test.espresso.DataInteraction
 import android.support.test.espresso.ViewAssertion
 import android.support.test.espresso.ViewInteraction
+import android.view.View
 import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.proxy.ViewAssertionProxy
 import com.kaspersky.klkakao.delegates.DataInteractionDelegate
@@ -16,15 +16,17 @@ import javax.annotation.CheckReturnValue
  * An implementation of [DataInteractionDelegate], that delegates the [DataInteraction]'s interface calls
  * to [ViewAssertionProxy].
  */
-open class DataInteractionDelegateImpl(
-    private val dataInteraction: DataInteraction
+open class DataInteractionDelegateKaspressoImpl(
+    override val viewInteraction: ViewInteraction,
+    override val dataInteraction: DataInteraction,
+    private val configurator: Configurator
 ) : DataInteractionDelegate {
 
     /**
      * Calls [DataInteraction.onChildView] on wrapped [dataInteraction].
      *
      * @param childMatcher an childMatcher.
-     * @return an existing [DataInteractionDelegateImpl] instance.
+     * @return an existing [DataInteractionDelegateKaspressoImpl] instance.
      */
     @CheckResult
     @CheckReturnValue
@@ -37,16 +39,17 @@ open class DataInteractionDelegateImpl(
      * Creates [ViewAssertionProxy] instance and delegates [DataInteraction.check] call to it.
      *
      * @param viewAssertion an assertion to execute.
-     * @return a new instance of [DataInteractionDelegateImpl]
+     * @return a new instance of [DataInteractionDelegateKaspressoImpl]
      */
     override fun check(viewAssertion: ViewAssertion): ViewInteractionDelegate {
         val viewAssertionProxy = ViewAssertionProxy(
             viewAssertion,
-            Configurator.viewAssertionInterceptors
+            configurator.viewAssertionInterceptors
         )
 
-        return ViewInteractionDelegateImpl(
-            execute { dataInteraction.check(viewAssertionProxy) }
+        return ViewInteractionDelegateKaspressoImpl(
+            execute { dataInteraction.check(viewAssertionProxy) },
+            configurator
         )
     }
 
@@ -58,7 +61,7 @@ open class DataInteractionDelegateImpl(
      * @return [ViewInteraction] as it is a result of executable invocation.
      */
     private fun execute(executable: () -> ViewInteraction): ViewInteraction {
-        return Configurator.executingInterceptor
+        return configurator.executingInterceptor
             ?.interceptAndExecute { executable.invoke() }
             ?: executable.invoke()
     }

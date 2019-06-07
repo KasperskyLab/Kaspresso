@@ -1,8 +1,8 @@
 package com.kaspersky.kaspresso.flakysafety
 
-import com.kaspersky.kaspresso.configurator.Configurator
-import com.kaspersky.kaspresso.logger.UiTestLogger
+import com.kaspersky.kaspresso.configurator.ConfiguratorExt
 import com.kaspersky.kaspresso.extensions.other.getStackTraceAsString
+import com.kaspersky.kaspresso.logger.UiTestLogger
 
 /**
  * Makes several attempts to invoke an action.
@@ -15,10 +15,10 @@ import com.kaspersky.kaspresso.extensions.other.getStackTraceAsString
  * @return [T] as it is a result of [action] invocation.
  */
 fun <T> attempt(
-    timeoutMs: Long = Configurator.attemptsTimeoutMs,
-    intervalMs: Long = Configurator.attemptsIntervalMs,
-    logger: UiTestLogger = Configurator.logger,
-    allowedExceptions: Set<Class<out Throwable>> = Configurator.allowedExceptionsForAttempt,
+    timeoutMs: Long = ConfiguratorExt.attemptsTimeoutMs,
+    intervalMs: Long = ConfiguratorExt.attemptsIntervalMs,
+    logger: UiTestLogger = ConfiguratorExt.logger,
+    allowedExceptions: Set<Class<out Throwable>> = ConfiguratorExt.allowedExceptionsForAttempt,
     action: () -> T
 ): T {
     if (intervalMs >= timeoutMs) {

@@ -1,4 +1,4 @@
-package com.kaspersky.kaspresso.testcases
+package com.kaspersky.kaspresso.testcases.api
 
 import com.kaspersky.kaspresso.configurator.Configurator
 
@@ -7,5 +7,9 @@ import com.kaspersky.kaspresso.configurator.Configurator
  *  parent for all actual project-wide test cases. Nesting test cases are not permitted because they may produce an
  *  exception caused by re-initialization of the [Configurator], use [Scenario] instead.
  */
-abstract class TestCase(configBuilder: Configurator.Builder = Configurator.Builder.default()) :
-    BaseTestCase<Unit, Unit>(configBuilder, dataProducer = { action -> action?.invoke(Unit) })
+abstract class TestCase(
+    configBuilder: Configurator.Builder = Configurator.Builder.default()) :
+    BaseTestCase<Unit, Unit>(
+        configBuilder = configBuilder,
+        dataProducer = { action -> action?.invoke(Unit) }
+    )
