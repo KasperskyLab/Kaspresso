@@ -34,7 +34,7 @@ import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.logger.UiTestLoggerImpl
 import com.kaspersky.kaspresso.report.impl.AllureReportWriter
 import com.kaspersky.kaspresso.testcases.core.TestContext
-import com.kaspersky.klkakao.configurator.KakaoConfigurator
+import com.agoda.kakao.configurator.KakaoConfigurator
 
 /**
  * A class that keeps all settings.

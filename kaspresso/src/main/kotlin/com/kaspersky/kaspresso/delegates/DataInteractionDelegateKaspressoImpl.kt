@@ -7,8 +7,8 @@ import android.support.test.espresso.ViewInteraction
 import android.view.View
 import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.proxy.ViewAssertionProxy
-import com.kaspersky.klkakao.delegates.DataInteractionDelegate
-import com.kaspersky.klkakao.delegates.ViewInteractionDelegate
+import com.agoda.kakao.delegates.DataInteractionDelegate
+import com.agoda.kakao.delegates.ViewInteractionDelegate
 import org.hamcrest.Matcher
 import javax.annotation.CheckReturnValue
 
