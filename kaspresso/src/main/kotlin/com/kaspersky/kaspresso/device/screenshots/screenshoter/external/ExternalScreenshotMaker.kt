@@ -7,7 +7,7 @@ import android.os.Build
 import android.os.Environment.getExternalStorageDirectory
 import android.support.test.InstrumentationRegistry
 import android.support.test.uiautomator.UiDevice
-import com.kaspersky.kaspresso.device.screenshots.screenshoter.external.Chmod.Companion.chmodPlusRWX
+import com.kaspersky.kaspresso.device.screenshots.screenshoter.external.Chmod.chmodPlusRWX
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import java.io.File
 import java.io.IOException
