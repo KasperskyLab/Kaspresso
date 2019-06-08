@@ -5,7 +5,6 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.os.Looper
 import com.kaspersky.kaspresso.device.screenshots.screenshoter.ScreenshotMaker
-import com.kaspersky.kaspresso.device.screenshots.screenshoter.external.Chmod
 import java.io.BufferedOutputStream
 import java.io.File
 import java.io.FileOutputStream
@@ -43,7 +42,7 @@ internal class InternalScreenshotMaker(
 
         BufferedOutputStream(FileOutputStream(file)).use {
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, it)
-            Chmod.chmodPlusR(file)
+            file.setReadable(true, false)
         }
         bitmap.recycle()
     }

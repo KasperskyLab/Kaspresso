@@ -20,3 +20,13 @@ fun File.safeWrite(data: String) {
         log.e(e.getStackTraceAsString())
     }
 }
+
+/**
+ *  Creates a directory with all needed parent dirs, then grants RWX permissions.
+ */
+internal fun File.createDirectoryRWX() {
+    mkdirs()
+    setReadable(true, false)
+    setWritable(true, false)
+    setExecutable(true, false)
+}
