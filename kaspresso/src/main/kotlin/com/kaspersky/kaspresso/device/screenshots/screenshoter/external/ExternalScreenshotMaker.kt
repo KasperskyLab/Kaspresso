@@ -46,12 +46,12 @@ internal class ExternalScreenshotMaker(
      * @return the image file that was created
      */
     fun screenshot(tag: String): File {
-        val testClass =
-            findTestClassTraceElement(Thread.currentThread().stackTrace)
-        val className = testClass.className.replace("[^A-Za-z0-9._-]".toRegex(), "_")
-        val methodName = testClass.methodName
-
-        return screenshot(tag, className, methodName)
+        val screenshotFile = obtainScreenshotFile(
+            InstrumentationRegistry.getTargetContext().applicationContext,
+            tag
+        )
+        takeScreenshot(screenshotFile)
+        return screenshotFile
     }
 
     /**
