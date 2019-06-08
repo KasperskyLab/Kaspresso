@@ -10,7 +10,7 @@ private const val TEST_CASE_CLASS_CUCUMBER_JVM = "cucumber.runtime.model.Cucumbe
 private const val TEST_CASE_METHOD_CUCUMBER_JVM = "run"
 
 internal fun Array<StackTraceElement>.findTestClassTraceElement(): StackTraceElement {
-    return this.reversed().withIndex()
+    return this.withIndex().reversed()
         .find { (_, element) -> element.isJunit3() || element.isJunit4() || element.isCucumber() }
         ?.let { (i, _) -> extractStackElement(this, i) }
         ?: throw IllegalArgumentException("Could not find test class! Trace: ${this.map { it.toString() }}")
