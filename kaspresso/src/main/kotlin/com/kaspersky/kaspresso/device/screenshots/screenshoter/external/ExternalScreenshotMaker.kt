@@ -3,16 +3,14 @@ package com.kaspersky.kaspresso.device.screenshots.screenshoter.external
 import android.support.test.InstrumentationRegistry
 import android.support.test.uiautomator.UiDevice
 import com.kaspersky.kaspresso.device.screenshots.screenshoter.ScreenshotMaker
-import com.kaspersky.kaspresso.logger.UiTestLogger
 import java.io.File
 
 /**
  * Class for capturing spoon-compatible screenshots by uiautomator.
  */
 internal class ExternalScreenshotMaker(
-    screenshotDir: File,
-    logger: UiTestLogger
-) : ScreenshotMaker(screenshotDir, logger) {
+    screenshotDir: File
+) : ScreenshotMaker(screenshotDir) {
 
     /**
      * Takes a screenshot with the specified tag.

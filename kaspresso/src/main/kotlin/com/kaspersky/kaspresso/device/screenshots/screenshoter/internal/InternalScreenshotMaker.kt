@@ -6,7 +6,6 @@ import android.graphics.Canvas
 import android.os.Looper
 import com.kaspersky.kaspresso.device.screenshots.screenshoter.ScreenshotMaker
 import com.kaspersky.kaspresso.device.screenshots.screenshoter.external.Chmod
-import com.kaspersky.kaspresso.logger.UiTestLogger
 import java.io.BufferedOutputStream
 import java.io.File
 import java.io.FileOutputStream
@@ -14,9 +13,8 @@ import java.io.IOException
 import java.util.concurrent.CountDownLatch
 
 internal class InternalScreenshotMaker(
-    file: File,
-    logger: UiTestLogger
-) : ScreenshotMaker(file, logger) {
+    screenshotDir: File
+) : ScreenshotMaker(screenshotDir) {
 
     /**
      * Takes a screenshot with the specified tag.
@@ -65,11 +63,7 @@ internal class InternalScreenshotMaker(
             }
         }
         latch.runCatching { await() }
-            .onFailure { e ->
-                val message = "Unable to get screenshot ${file.absolutePath}"
-                logger.e(message)
-                throw RuntimeException(message, e)
-            }
+            .onFailure { e -> throw RuntimeException("Unable to get screenshot ${file.absolutePath}", e) }
     }
 
     private fun Activity.drawToBitmap(bitmap: Bitmap) {

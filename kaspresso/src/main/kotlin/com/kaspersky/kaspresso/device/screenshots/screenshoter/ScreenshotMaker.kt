@@ -4,13 +4,11 @@ import android.content.Context
 import android.os.Build
 import android.os.Environment
 import com.kaspersky.kaspresso.device.screenshots.screenshoter.external.Chmod
-import com.kaspersky.kaspresso.logger.UiTestLogger
 import java.io.File
 import java.util.*
 
 internal abstract class ScreenshotMaker(
-    protected val screenshotDir: File,
-    protected val logger: UiTestLogger
+    private val screenshotDir: File
 ) {
 
     companion object {
