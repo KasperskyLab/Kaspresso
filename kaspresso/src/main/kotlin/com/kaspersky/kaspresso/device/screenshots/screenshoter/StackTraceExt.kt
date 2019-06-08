@@ -12,7 +12,7 @@ private const val TEST_CASE_METHOD_CUCUMBER_JVM = "run"
 internal fun Array<StackTraceElement>.findTestClassTraceElement(): StackTraceElement {
     return this.withIndex().reversed()
         .find { (_, element) -> element.isJunit3() || element.isJunit4() || element.isCucumber() }
-        ?.let { (i, _) -> extractStackElement(this, i) }
+        ?.let { (i, _) -> extractStackElement(i) }
         ?: throw IllegalArgumentException("Could not find test class! Trace: ${this.map { it.toString() }}")
 }
 
@@ -28,8 +28,8 @@ private fun StackTraceElement.isCucumber(): Boolean {
     return TEST_CASE_CLASS_CUCUMBER_JVM == className && TEST_CASE_METHOD_CUCUMBER_JVM == methodName
 }
 
-private fun extractStackElement(trace: Array<StackTraceElement>, i: Int): StackTraceElement {
+private fun Array<StackTraceElement>.extractStackElement(i: Int): StackTraceElement {
     //Stacktrace length changed in M
     val testClassTraceIndex = if (Build.VERSION.SDK_INT >= 23) i - 2 else i - 3
-    return trace[testClassTraceIndex]
+    return this[testClassTraceIndex]
 }
