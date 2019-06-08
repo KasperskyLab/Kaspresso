@@ -27,8 +27,8 @@ internal class DocLocScreenshotCapturer(
 
     private val screenshotDirOnFailed = screenshotsDir.resolve("fails")
 
-    private val screenshoter = ExternalScreenshotMaker(screenshotsDir, logger)
-    private val failScreenshoter = ExternalScreenshotMaker(screenshotDirOnFailed, logger)
+    private val screenshoter = ExternalScreenshotMaker(screenshotsDir)
+    private val failScreenshoter = ExternalScreenshotMaker(screenshotDirOnFailed)
     private val activityMetadata = ActivityMetadata(logger)
 
     /**
@@ -37,7 +37,7 @@ internal class DocLocScreenshotCapturer(
      */
     fun captureScreenshot(screenshotName: String) {
         wait(SCREENSHOT_CAPTURE_DELAY_MS) {
-            screenshoter.screenshot(screenshotName, screenshotsDir)
+            screenshoter.screenshot(screenshotName)
             saveScreenshotMetadata(screenshotsDir, screenshotName)
         }
     }
@@ -48,7 +48,7 @@ internal class DocLocScreenshotCapturer(
      */
     fun captureScreenshotOnFail(screenshotName: String) {
         wait(SCREENSHOT_CAPTURE_DELAY_MS) {
-            failScreenshoter.screenshot(screenshotName, screenshotDirOnFailed)
+            failScreenshoter.screenshot(screenshotName)
         }
     }
 
