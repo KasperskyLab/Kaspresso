@@ -7,6 +7,7 @@ import android.os.Build
 import android.os.Environment.getExternalStorageDirectory
 import android.support.test.InstrumentationRegistry
 import android.support.test.uiautomator.UiDevice
+import com.kaspersky.kaspresso.device.screenshots.screenshoter.ScreenshotMaker
 import com.kaspersky.kaspresso.device.screenshots.screenshoter.external.Chmod.chmodPlusRWX
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import java.io.File
@@ -17,23 +18,14 @@ import java.util.regex.Pattern
 /**
  * Class for capturing spoon-compatible screenshots by uiautomator.
  */
-class ExternalScreenshotMaker(
-    private val screenshotDir: File,
-    private val logger: UiTestLogger
-) {
+internal class ExternalScreenshotMaker(
+    screenshotDir: File,
+    logger: UiTestLogger
+) : ScreenshotMaker(screenshotDir, logger) {
 
     companion object {
 
         private const val NAME_SEPARATOR = "_"
-
-        private const val TEST_CASE_CLASS_JUNIT_3 = "android.test.InstrumentationTestCase"
-        private const val TEST_CASE_METHOD_JUNIT_3 = "runMethod"
-
-        private const val TEST_CASE_CLASS_JUNIT_4 = "org.junit.runners.model.FrameworkMethod$1"
-        private const val TEST_CASE_METHOD_JUNIT_4 = "runReflectiveCall"
-
-        private const val TEST_CASE_CLASS_CUCUMBER_JVM = "cucumber.runtime.model.CucumberFeature"
-        private const val TEST_CASE_METHOD_CUCUMBER_JVM = "run"
 
         private const val EXTENSION = ".png"
         private const val TAG = "ExternalScreenshotMaker"
@@ -185,41 +177,6 @@ class ExternalScreenshotMaker(
             // Use internal storage.
             context.getDir(screenshotDir.canonicalPath, MODE_WORLD_READABLE)
         }
-    }
-
-    /**
-     * Returns the test class element by looking at the method InstrumentationTestCase invokes.
-     */
-    private fun findTestClassTraceElement(trace: Array<StackTraceElement>): StackTraceElement {
-        for (i in trace.indices.reversed()) {
-            val element = trace[i]
-
-            if (TEST_CASE_CLASS_JUNIT_3 == element.className //
-                && TEST_CASE_METHOD_JUNIT_3 == element.methodName
-            ) {
-                return extractStackElement(trace, i)
-            }
-
-            if (TEST_CASE_CLASS_JUNIT_4 == element.className //
-                && TEST_CASE_METHOD_JUNIT_4 == element.methodName
-            ) {
-                return extractStackElement(trace, i)
-            }
-
-            if (TEST_CASE_CLASS_CUCUMBER_JVM == element.className //
-                && TEST_CASE_METHOD_CUCUMBER_JVM == element.methodName
-            ) {
-                return extractStackElement(trace, i)
-            }
-        }
-
-        throw IllegalArgumentException("Could not find test class! Trace: ${trace.map { it.toString() }}")
-    }
-
-    private fun extractStackElement(trace: Array<StackTraceElement>, i: Int): StackTraceElement {
-        //Stacktrace length changed in M
-        val testClassTraceIndex = if (Build.VERSION.SDK_INT >= 23) i - 2 else i - 3
-        return trace[testClassTraceIndex]
     }
 
     @Throws(IllegalAccessException::class)
