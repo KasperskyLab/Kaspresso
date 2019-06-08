@@ -1,4 +1,4 @@
-package com.kaspersky.kaspresso.extensions.spoonext
+package com.kaspersky.kaspresso.device.screenshots.screenshoter.external
 
 import android.os.Build
 import java.io.File
@@ -16,10 +16,10 @@ internal abstract class Chmod {
         init {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
                 INSTANCE =
-                    Java6Chmod()
+                        Java6Chmod()
             } else {
                 INSTANCE =
-                    Java5Chmod()
+                        Java5Chmod()
             }
         }
 

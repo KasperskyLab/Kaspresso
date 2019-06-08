@@ -2,7 +2,7 @@ package com.kaspersky.kaspresso.device.screenshots
 
 import com.kaspersky.kaspresso.device.activities.Activities
 import com.kaspersky.kaspresso.extensions.other.getStackTraceAsString
-import com.kaspersky.kaspresso.extensions.spoonext.UiAutomatorSpoon
+import com.kaspersky.kaspresso.device.screenshots.screenshoter.external.ExternalScreenshotMaker
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.squareup.spoon.Spoon
 import java.io.File
@@ -15,7 +15,7 @@ class ScreenshotsImpl(
     private val activities: Activities
 ) : Screenshots {
 
-    private val uiAutomatorSpoon = UiAutomatorSpoon(File("app_spoon-screenshots"), logger)
+    private val uiAutomatorSpoon = ExternalScreenshotMaker(File("app_spoon-screenshots"), logger)
 
     /**
      * Makes screenshot if it is possible, otherwise logs the error.

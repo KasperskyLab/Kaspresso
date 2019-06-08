@@ -5,7 +5,7 @@ import com.kaspersky.kaspresso.device.activities.metadata.ActivityMetadata
 import com.kaspersky.kaspresso.device.apps.Apps
 import com.kaspersky.kaspresso.extensions.other.safeWrite
 import com.kaspersky.kaspresso.extensions.other.toXml
-import com.kaspersky.kaspresso.extensions.spoonext.UiAutomatorSpoon
+import com.kaspersky.kaspresso.device.screenshots.screenshoter.external.ExternalScreenshotMaker
 import com.kaspersky.kaspresso.flakysafety.wait
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import java.io.File
@@ -27,8 +27,8 @@ internal class DocLocScreenshotCapturer(
 
     private val screenshotDirOnFailed = screenshotsDir.resolve("fails")
 
-    private val screenshoter = UiAutomatorSpoon(screenshotsDir, logger)
-    private val failScreenshoter = UiAutomatorSpoon(screenshotDirOnFailed, logger)
+    private val screenshoter = ExternalScreenshotMaker(screenshotsDir, logger)
+    private val failScreenshoter = ExternalScreenshotMaker(screenshotDirOnFailed, logger)
     private val activityMetadata = ActivityMetadata(logger)
 
     /**

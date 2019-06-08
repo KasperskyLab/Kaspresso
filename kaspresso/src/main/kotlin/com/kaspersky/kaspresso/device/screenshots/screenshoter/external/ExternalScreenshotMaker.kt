@@ -1,4 +1,4 @@
-package com.kaspersky.kaspresso.extensions.spoonext
+package com.kaspersky.kaspresso.device.screenshots.screenshoter.external
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -7,7 +7,7 @@ import android.os.Build
 import android.os.Environment.getExternalStorageDirectory
 import android.support.test.InstrumentationRegistry
 import android.support.test.uiautomator.UiDevice
-import com.kaspersky.kaspresso.extensions.spoonext.Chmod.Companion.chmodPlusRWX
+import com.kaspersky.kaspresso.device.screenshots.screenshoter.external.Chmod.Companion.chmodPlusRWX
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import java.io.File
 import java.io.IOException
@@ -17,7 +17,7 @@ import java.util.regex.Pattern
 /**
  * Class for capturing spoon-compatible screenshots by uiautomator.
  */
-class UiAutomatorSpoon(
+class ExternalScreenshotMaker(
     private val screenshotDir: File,
     private val logger: UiTestLogger
 ) {
@@ -36,7 +36,7 @@ class UiAutomatorSpoon(
         private const val TEST_CASE_METHOD_CUCUMBER_JVM = "run"
 
         private const val EXTENSION = ".png"
-        private const val TAG = "UiAutomatorSpoon"
+        private const val TAG = "ExternalScreenshotMaker"
 
         private val LOCK = Any()
         private val TAG_VALIDATION = Pattern.compile("[a-zA-Z0-9_-]+")
