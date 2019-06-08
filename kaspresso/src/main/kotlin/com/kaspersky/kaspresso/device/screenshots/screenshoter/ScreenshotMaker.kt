@@ -12,15 +12,7 @@ internal abstract class ScreenshotMaker(
 ) {
 
     companion object {
-        private const val SPOON_SCREENSHOTS = "spoon-screenshots"
-        private const val SPOON_FILES = "spoon-files"
         private const val NAME_SEPARATOR = "_"
-        private const val TEST_CASE_CLASS_JUNIT_3 = "android.test.InstrumentationTestCase"
-        private const val TEST_CASE_METHOD_JUNIT_3 = "runMethod"
-        private const val TEST_CASE_CLASS_JUNIT_4 = "org.junit.runners.model.FrameworkMethod$1"
-        private const val TEST_CASE_METHOD_JUNIT_4 = "runReflectiveCall"
-        private const val TEST_CASE_CLASS_CUCUMBER_JVM = "cucumber.runtime.model.CucumberFeature"
-        private const val TEST_CASE_METHOD_CUCUMBER_JVM = "run"
 
         private val LOCK = Any()
         private const val EXTENSION = ".png"
@@ -31,9 +23,8 @@ internal abstract class ScreenshotMaker(
      */
     private val clearedOutputDirectories = HashSet<File>()
 
-
     fun obtainScreenshotFile(context: Context, tag: String): File {
-        val testClass = findTestClassTraceElement(Thread.currentThread().stackTrace)
+        val testClass = Thread.currentThread().stackTrace.findTestClassTraceElement()
         val className = testClass.className.replace("[^A-Za-z0-9._-]".toRegex(), NAME_SEPARATOR)
         val methodName = testClass.methodName
 
@@ -41,13 +32,6 @@ internal abstract class ScreenshotMaker(
 
         val screenshotName = System.currentTimeMillis().toString() + NAME_SEPARATOR + tag + EXTENSION
         return screenshotDirectory.resolve(screenshotName)
-    }
-
-    fun findTestClassTraceElement(trace: Array<StackTraceElement>): StackTraceElement {
-        return trace.reversed().withIndex()
-            .find { (_, element) -> element.isJunit3() || element.isJunit4() || element.isCucumber() }
-            ?.let { (i, _) -> extractStackElement(trace, i) }
-            ?: throw IllegalArgumentException("Could not find test class! Trace: ${trace.map { it.toString() }}")
     }
 
     private fun getDeviceDirectory(context: Context): File {
@@ -102,23 +86,5 @@ internal abstract class ScreenshotMaker(
         }
 
         if (inclusive) path.delete()
-    }
-
-    private fun StackTraceElement.isJunit3(): Boolean {
-        return TEST_CASE_CLASS_JUNIT_3 == className && TEST_CASE_METHOD_JUNIT_3 == methodName
-    }
-
-    private fun StackTraceElement.isJunit4(): Boolean {
-        return TEST_CASE_CLASS_JUNIT_4 == className && TEST_CASE_METHOD_JUNIT_4 == methodName
-    }
-
-    private fun StackTraceElement.isCucumber(): Boolean {
-        return TEST_CASE_CLASS_CUCUMBER_JVM == className && TEST_CASE_METHOD_CUCUMBER_JVM == methodName
-    }
-
-    private fun extractStackElement(trace: Array<StackTraceElement>, i: Int): StackTraceElement {
-        //Stacktrace length changed in M
-        val testClassTraceIndex = if (Build.VERSION.SDK_INT >= 23) i - 2 else i - 3
-        return trace[testClassTraceIndex]
     }
 }
