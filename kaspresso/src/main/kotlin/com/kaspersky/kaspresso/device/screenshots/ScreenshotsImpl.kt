@@ -1,10 +1,10 @@
 package com.kaspersky.kaspresso.device.screenshots
 
 import com.kaspersky.kaspresso.device.activities.Activities
-import com.kaspersky.kaspresso.extensions.other.getStackTraceAsString
 import com.kaspersky.kaspresso.device.screenshots.screenshoter.external.ExternalScreenshotMaker
+import com.kaspersky.kaspresso.device.screenshots.screenshoter.internal.InternalScreenshotMaker
+import com.kaspersky.kaspresso.extensions.other.getStackTraceAsString
 import com.kaspersky.kaspresso.logger.UiTestLogger
-import com.squareup.spoon.Spoon
 import java.io.File
 
 /**
@@ -15,7 +15,8 @@ class ScreenshotsImpl(
     private val activities: Activities
 ) : Screenshots {
 
-    private val uiAutomatorSpoon = ExternalScreenshotMaker(File("app_spoon-screenshots"), logger)
+    private val internalScreenshotMaker = InternalScreenshotMaker(File("app_spoon-screenshots"))
+    private val externalScreenshotMaker = ExternalScreenshotMaker(File("app_spoon-screenshots"))
 
     /**
      * Makes screenshot if it is possible, otherwise logs the error.
@@ -25,10 +26,15 @@ class ScreenshotsImpl(
     override fun makeIfPossible(tag: String) {
         val resumedActivity = activities.getResumed()
 
-        try {
-            resumedActivity?.let { Spoon.screenshot(it, tag) } ?: uiAutomatorSpoon.screenshot(tag)
-        } catch (e: Throwable) {
-            logger.e("An error while making screenshot occurred: ${e.getStackTraceAsString()}")
+        if (resumedActivity != null) {
+            runCatching {
+                internalScreenshotMaker.screenshot(resumedActivity, tag)
+            }.onSuccess {
+                return
+            }
         }
+
+        runCatching { externalScreenshotMaker.screenshot(tag) }
+            .onFailure { e -> logger.e("An error while making screenshot occurred: ${e.getStackTraceAsString()}") }
     }
 }
