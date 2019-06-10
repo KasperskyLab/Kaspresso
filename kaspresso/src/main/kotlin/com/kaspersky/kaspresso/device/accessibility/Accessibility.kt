@@ -22,7 +22,7 @@ interface Accessibility {
     )
 
     /**
-     * Enables accessibility. Available since api 24.
+     * Disables accessibility. Available since api 24.
      */
     fun disable()
 }
