@@ -31,6 +31,8 @@ class AppsImpl(
     /**
      *  Installs an app via ADB.
      *
+     *  Required Permissions: INTERNET
+     *
      *  @param apkPath a path to an apk to be installed. The apk is hosted on the test server.
      */
     override fun install(apkPath: String) {
@@ -39,6 +41,8 @@ class AppsImpl(
 
     /**
      *  Uninstalls an app via ADB.
+     *
+     *  Required Permissions: INTERNET
      *
      *  @param packageName an android package name of an app to be deleted.
      */
