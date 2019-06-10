@@ -31,7 +31,7 @@ class AccessibilityImpl : Accessibility {
     }
 
     /**
-     * Enables accessibility. Available since api 24.
+     * Disables accessibility. Available since api 24.
      */
     @TargetApi(Build.VERSION_CODES.N)
     override fun disable() {
