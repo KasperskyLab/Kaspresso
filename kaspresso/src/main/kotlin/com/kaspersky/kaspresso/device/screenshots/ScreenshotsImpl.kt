@@ -12,11 +12,12 @@ import java.io.File
  */
 class ScreenshotsImpl(
     private val logger: UiTestLogger,
-    private val activities: Activities
+    private val activities: Activities,
+    screenshotDir: File = File("screenshots")
 ) : Screenshots {
 
-    private val internalScreenshotMaker = InternalScreenshotMaker(File("app_spoon-screenshots"))
-    private val externalScreenshotMaker = ExternalScreenshotMaker(File("app_spoon-screenshots"))
+    private val internalScreenshotMaker = InternalScreenshotMaker(screenshotDir)
+    private val externalScreenshotMaker = ExternalScreenshotMaker(screenshotDir)
 
     /**
      * Makes screenshot if it is possible, otherwise logs the error.
