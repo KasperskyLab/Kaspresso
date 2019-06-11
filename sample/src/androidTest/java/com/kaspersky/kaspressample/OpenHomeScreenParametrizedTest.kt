@@ -32,10 +32,10 @@ class OpenHomeScreenParametrizedTest : BaseParametrizedTest() {
             activityTestRule.launchActivity(null)
         }.after {
             device.exploit.setOrientation(Orientation.Portrait)
-        }.initialisation {
+        }.initData {
             rawData(2)
             rawData(3)
-        }.transformation {
+        }.transformData {
             addString("Hello world")
         }.run {
             step("Open Home Screen") {
@@ -43,13 +43,14 @@ class OpenHomeScreenParametrizedTest : BaseParametrizedTest() {
                     descriptionText {
                         hasText(data.list.joinToString(" "))
                     }
+
                     nextButton {
                         click()
                     }
                 }
             }
+
             scenario(CheckHomeTitleNoParametersScenario())
         }
     }
-
 }

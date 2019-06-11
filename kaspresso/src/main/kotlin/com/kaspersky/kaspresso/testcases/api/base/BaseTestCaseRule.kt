@@ -1,11 +1,10 @@
-package com.kaspersky.kaspresso.testcases.api
+package com.kaspersky.kaspresso.testcases.api.base
 
 import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.testcases.core.BaseTestContext
 import com.kaspersky.kaspresso.testcases.models.TestBody
 import com.kaspersky.kaspresso.testcases.sections.AfterTestSection
 import com.kaspersky.kaspresso.testcases.sections.BeforeTestSection
-import com.agoda.kakao.configurator.KakaoConfigurator
 import org.junit.rules.TestRule
 import org.junit.runner.Description
 import org.junit.runners.model.Statement
@@ -13,12 +12,12 @@ import org.junit.runners.model.Statement
 /**
  *  A base class for all parametrized test cases rules.
  *
- *  @param BeforeSectionData data initialized in before section.
- *  @param MainSectionData data transformed from [BeforeSectionData] by special function.
+ *  @param InitData data initialized in before section.
+ *  @param Data data transformed from [InitData] by special function.
  */
-open class BaseTestCaseRule<BeforeSectionData, MainSectionData>(
+open class BaseTestCaseRule<InitData, Data>(
     configBuilder: Configurator.Builder = Configurator.Builder.default(),
-    private val dataProducer: (((BeforeSectionData.() -> Unit)?) -> MainSectionData),
+    private val dataProducer: (((InitData.() -> Unit)?) -> Data),
     private val testClassName: String
 ) : TestRule {
 
@@ -41,14 +40,13 @@ open class BaseTestCaseRule<BeforeSectionData, MainSectionData>(
     fun before(
         testName: String = testClassName,
         actions: BaseTestContext.() -> Unit
-    ): AfterTestSection<BeforeSectionData, MainSectionData> {
+    ): AfterTestSection<InitData, Data> {
 
-        return BeforeTestSection(
-            configurator,
-            TestBody.Builder<BeforeSectionData, MainSectionData>().apply {
-                this.testName = testName
-                mainDataProducer = dataProducer
-            }
-        ).beforeTest(actions)
+        val testBodyBuilder = TestBody.Builder<InitData, Data>().apply {
+            this.testName = testName
+            this.dataProducer = this@BaseTestCaseRule.dataProducer
+        }
+
+        return BeforeTestSection(configurator, testBodyBuilder).beforeTest(actions)
     }
 }

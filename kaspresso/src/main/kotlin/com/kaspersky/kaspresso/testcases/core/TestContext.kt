@@ -5,17 +5,17 @@ import com.kaspersky.kaspresso.extensions.other.forEachSafely
 import com.kaspersky.kaspresso.extensions.other.invokeSafely
 import com.kaspersky.kaspresso.extensions.other.throwAll
 import com.kaspersky.kaspresso.interceptors.StepInterceptor
-import com.kaspersky.kaspresso.testcases.api.BaseScenario
+import com.kaspersky.kaspresso.testcases.api.base.BaseScenario
 
 /**
  * Special class to operate with in user scenario.
  *
- * @param MainSectionData data created in before section.
+ * @param Data data created in before section.
  */
-class TestContext<MainSectionData> constructor(
+class TestContext<Data> internal constructor(
     configurator: Configurator,
-    private val stepProducer: StepProducer,
-    val data: MainSectionData
+    private val stepInfoProducer: StepInfoProducer,
+    val data: Data
 ) : BaseTestContext(configurator) {
 
     private val interceptors: List<StepInterceptor> = configurator.stepInterceptors
@@ -30,20 +30,20 @@ class TestContext<MainSectionData> constructor(
 
         val exceptions: MutableList<Throwable> = mutableListOf()
 
-        val stepInfo = stepProducer.produceStep(description)
+        val stepInfo = stepInfoProducer.produceStepInfo(description)
 
         interceptors.forEachSafely(exceptions) { it.interceptBefore(stepInfo) }
 
         try {
             actions.invoke()
-            stepProducer.onStepFinished(stepInfo)
+            stepInfoProducer.onStepFinished(stepInfo)
 
             interceptors.forEach {
                 invokeSafely(exceptions) { it.interceptAfterWithSuccess(stepInfo) }
                 invokeSafely(exceptions) { it.interceptAfterFinally(stepInfo) }
             }
         } catch (throwable: Throwable) {
-            stepProducer.onStepFinished(stepInfo, throwable)
+            stepInfoProducer.onStepFinished(stepInfo, throwable)
             interceptors.forEach {
                 invokeSafely(exceptions) { it.interceptAfterWithError(stepInfo, throwable) }
                 invokeSafely(exceptions) { it.interceptAfterFinally(stepInfo) }
@@ -54,5 +54,5 @@ class TestContext<MainSectionData> constructor(
         exceptions.throwAll()
     }
 
-    fun scenario(scenario: BaseScenario<MainSectionData>) = scenario.invoke(this)
+    fun scenario(scenario: BaseScenario<Data>) = scenario.invoke(this)
 }

@@ -4,61 +4,63 @@ import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.extensions.other.getException
 import com.kaspersky.kaspresso.interceptors.TestRunInterceptor
 import com.kaspersky.kaspresso.interceptors.impl.composite.TestRunCompositeInterceptor
-import com.kaspersky.kaspresso.testcases.models.RunMainTestSectionResult
+import com.kaspersky.kaspresso.testcases.models.MainTestSectionResult
+import com.kaspersky.kaspresso.testcases.models.StepInfo
 import com.kaspersky.kaspresso.testcases.models.TestBody
 import com.kaspersky.kaspresso.testcases.models.TestInfo
 
-internal class TestRunner<BeforeSectionData, MainSectionData>(
+internal class TestRunner<InitData, Data>(
     private val configurator: Configurator
 ) {
-    fun run(testBody: TestBody<BeforeSectionData, MainSectionData>) {
+    fun run(testBody: TestBody<InitData, Data>) {
+
         val exceptions: MutableList<Throwable> = mutableListOf()
-        val testRunInterceptor: TestRunInterceptor =
-            TestRunCompositeInterceptor(
-                configurator.testRunInterceptors,
-                exceptions
-            )
-        val stepsManager = StepsManager(testBody.testName)
-        var currentTestInfo = TestInfo(testBody.testName)
-        var testPassed = true
         val resultException: Throwable?
 
-        try {
-            testRunInterceptor.onTestStarted(currentTestInfo)
+        val testRunInterceptor: TestRunInterceptor = TestRunCompositeInterceptor(
+            configurator.testRunInterceptors,
+            exceptions
+        )
 
-            val mainSectionData = runBeforeTestSection(
-                currentTestInfo,
+        val stepsManager = StepsManager(testBody.testName)
+        var testInfo = TestInfo(testBody.testName)
+        var testPassed = true
+
+        try {
+            testRunInterceptor.onTestStarted(testInfo)
+
+            val data: Data = runBeforeTestSection(
+                testInfo,
                 testBody.beforeTestActions,
-                testBody.initialisationSection,
-                testBody.transformationsList,
+                testBody.initDataActions,
+                testBody.transformDataActionsList,
                 testRunInterceptor,
-                testBody.mainDataProducer
+                testBody.dataProducer
             )
 
-            val runMainTestSectionResult = runMainTestSection(
-                currentTestInfo,
-                testBody.mainSection,
+            val mainTestSectionResult: MainTestSectionResult = runMainTestSection(
+                testInfo,
+                testBody.steps,
                 testRunInterceptor,
                 stepsManager,
-                mainSectionData
+                data
             )
-            currentTestInfo = runMainTestSectionResult.testInfo
-            runMainTestSectionResult.throwable?.let { throw it }
+
+            testInfo = mainTestSectionResult.testInfo
+            mainTestSectionResult.throwable?.let { throw it }
         } catch (e: Throwable) {
             testPassed = false
             exceptions.add(e)
         } finally {
             try {
-                runAfterTestSection(currentTestInfo, testBody.afterTestActions, testRunInterceptor)
+                runAfterTestSection(testInfo, testBody.afterTestActions, testRunInterceptor)
             } catch (e: Throwable) {
                 testPassed = false
                 exceptions.add(e)
             } finally {
                 resultException = exceptions.getException()
-                currentTestInfo = currentTestInfo.copy(
-                    throwable = resultException
-                )
-                testRunInterceptor.onTestFinished(currentTestInfo, testPassed)
+                testInfo = testInfo.copy(throwable = resultException)
+                testRunInterceptor.onTestFinished(testInfo, testPassed)
                 configurator.reset()
             }
         }
@@ -67,84 +69,88 @@ internal class TestRunner<BeforeSectionData, MainSectionData>(
     }
 
     private fun runBeforeTestSection(
-        currentTestInfo: TestInfo,
+        testInfo: TestInfo,
         beforeTestActions: BaseTestContext.() -> Unit,
-        initialisation: (BeforeSectionData.() -> Unit)?,
-        dataTransformationList: List<MainSectionData.() -> Unit>,
+        initDataActions: (InitData.() -> Unit)?,
+        transformDataActionsList: List<Data.() -> Unit>,
         testRunInterceptor: TestRunInterceptor,
-        mainDataProducer: ((BeforeSectionData.() -> Unit)?) -> MainSectionData
-    ): MainSectionData {
+        dataProducer: ((InitData.() -> Unit)?) -> Data
+    ): Data {
 
         try {
-            testRunInterceptor.onBeforeSectionStarted(currentTestInfo)
-            beforeTestActions.invoke(BaseTestContext(configurator))
+            testRunInterceptor.onBeforeSectionStarted(testInfo)
+            beforeTestActions.invoke(
+                BaseTestContext(configurator)
+            )
 
-            val mainData = mainDataProducer.invoke(initialisation)
+            val data: Data = dataProducer.invoke(initDataActions)
 
-            for (transformation in dataTransformationList) {
-                transformation.invoke(mainData)
+            for (transformation in transformDataActionsList) {
+                transformation.invoke(data)
             }
 
-            testRunInterceptor.onBeforeSectionFinishedSuccess(currentTestInfo)
+            testRunInterceptor.onBeforeSectionFinishedSuccess(testInfo)
 
-            return mainData
+            return data
         } catch (e: Throwable) {
-            testRunInterceptor.onBeforeSectionFinishedFailed(currentTestInfo, e)
+            testRunInterceptor.onBeforeSectionFinishedFailed(testInfo, e)
             throw e
         }
     }
 
     private fun runMainTestSection(
-        currentTestInfo: TestInfo,
-        mainSection: TestContext<MainSectionData>.() -> Unit,
+        testInfo: TestInfo,
+        steps: TestContext<Data>.() -> Unit,
         testRunInterceptor: TestRunInterceptor,
         stepsManager: StepsManager,
-        mainSectionData: MainSectionData
-    ): RunMainTestSectionResult {
+        data: Data
+    ): MainTestSectionResult {
 
-        var runMainTestSectionResult: RunMainTestSectionResult
+        var mainTestSectionResult: MainTestSectionResult
 
-        checkTestInfoOnFinishAllSteps(currentTestInfo)
+        checkTestInfo(testInfo)
 
         try {
-            testRunInterceptor.onMainSectionStarted(currentTestInfo)
+            testRunInterceptor.onMainSectionStarted(testInfo)
 
-            mainSection.invoke(TestContext(configurator, stepsManager, mainSectionData))
+            steps.invoke(
+                TestContext(configurator, stepsManager, data)
+            )
 
-            val testResultInSteps = stepsManager.onAllStepsFinishedAndGetResultInSteps()
-            val updatedTestInfo = currentTestInfo.copy(steps = testResultInSteps)
-            runMainTestSectionResult = RunMainTestSectionResult(updatedTestInfo)
+            val allStepsResult: List<StepInfo> = stepsManager.getAllStepsResult()
+            val updatedTestInfo = testInfo.copy(stepInfos = allStepsResult)
+            mainTestSectionResult = MainTestSectionResult(updatedTestInfo)
 
             testRunInterceptor.onMainSectionFinishedSuccess(updatedTestInfo)
         } catch (e: Throwable) {
-            val testResultInSteps = stepsManager.onAllStepsFinishedAndGetResultInSteps()
-            val updatedTestInfo = currentTestInfo.copy(steps = testResultInSteps)
-            runMainTestSectionResult = RunMainTestSectionResult(updatedTestInfo, e)
+            val allStepsResult: List<StepInfo> = stepsManager.getAllStepsResult()
+            val updatedTestInfo = testInfo.copy(stepInfos = allStepsResult)
+            mainTestSectionResult = MainTestSectionResult(updatedTestInfo, e)
 
             testRunInterceptor.onMainSectionFinishedFailed(updatedTestInfo, e)
         }
 
-        return runMainTestSectionResult
-    }
-
-    private fun checkTestInfoOnFinishAllSteps(testInfo: TestInfo) {
-        if (testInfo.steps.isNotEmpty()) {
-            throw AssertionError("onAllStepsFinishedAndGetResultInSteps called on already finished test")
-        }
+        return mainTestSectionResult
     }
 
     private fun runAfterTestSection(
-        currentTestInfo: TestInfo,
+        testInfo: TestInfo,
         afterTestActions: BaseTestContext.() -> Unit,
         testRunInterceptor: TestRunInterceptor
     ) {
         try {
-            testRunInterceptor.onAfterSectionStarted(currentTestInfo)
+            testRunInterceptor.onAfterSectionStarted(testInfo)
             afterTestActions.invoke(BaseTestContext(configurator))
-            testRunInterceptor.onAfterSectionFinishedSuccess(currentTestInfo)
+            testRunInterceptor.onAfterSectionFinishedSuccess(testInfo)
         } catch (e: Throwable) {
-            testRunInterceptor.onAfterSectionFinishedFailed(currentTestInfo, e)
+            testRunInterceptor.onAfterSectionFinishedFailed(testInfo, e)
             throw e
+        }
+    }
+
+    private fun checkTestInfo(testInfo: TestInfo) {
+        if (testInfo.stepInfos.isNotEmpty()) {
+            throw AssertionError("getAllStepsResult called on already finished test.")
         }
     }
 }

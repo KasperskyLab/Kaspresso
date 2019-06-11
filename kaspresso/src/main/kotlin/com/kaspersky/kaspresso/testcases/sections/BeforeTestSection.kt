@@ -7,9 +7,9 @@ import com.kaspersky.kaspresso.testcases.models.TestBody
 /**
  * A representation of a set of actions to be invoked before the test.
  */
-class BeforeTestSection<BeforeSectionData, MainSectionData>(
+class BeforeTestSection<InitData, Data> internal constructor(
     private val configurator: Configurator,
-    private val builder: TestBody.Builder<BeforeSectionData, MainSectionData>
+    private val testBodyBuilder: TestBody.Builder<InitData, Data>
 ) {
     /**
      * Wraps [actions] in a lambda, that will invoke these [actions] and make screenshot if [actions] will fail when it
@@ -20,11 +20,11 @@ class BeforeTestSection<BeforeSectionData, MainSectionData>(
      */
     fun beforeTest(
         actions: BaseTestContext.() -> Unit
-    ): AfterTestSection<BeforeSectionData, MainSectionData> {
+    ): AfterTestSection<InitData, Data> {
 
         return AfterTestSection(
             configurator,
-            builder.apply { beforeTestSection = actions }
+            testBodyBuilder.apply { beforeTestActions = actions }
         )
     }
 }

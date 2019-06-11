@@ -1,62 +1,61 @@
 package com.kaspersky.kaspresso.testcases.sections
 
 import com.kaspersky.kaspresso.configurator.Configurator
-import com.kaspersky.kaspresso.testcases.api.BaseTestCase
+import com.kaspersky.kaspresso.testcases.api.base.BaseTestCase
 import com.kaspersky.kaspresso.testcases.core.TestContext
 import com.kaspersky.kaspresso.testcases.core.TestRunner
 import com.kaspersky.kaspresso.testcases.models.TestBody
 
-class MainTestSection<BeforeSectionData, MainSectionData>(
+class MainTestSection<InitData, Data> internal constructor(
     private val configurator: Configurator,
-    private val builder: TestBody.Builder<BeforeSectionData, MainSectionData>
-) : InitialisableMainSection<BeforeSectionData, MainSectionData>,
-    TransformableMainSection<BeforeSectionData, MainSectionData> {
+    private val testBodyBuilder: TestBody.Builder<InitData, Data>
+) : InitDataSection<InitData, Data>, TransformDataSection<Data> {
 
     /**
      * Runs:
      * 1) [BeforeTestSection],
-     * 2) Optional [initialisation],
-     * 3) Optional [transformation]'s sections (only if [initialisation] was called before),
+     * 2) Optional [initData],
+     * 3) Optional [transformData]'s sections (only if [initData] was called before),
      * 4) [MainTestSection]'s steps,
      * 5) [AfterTestSection]. [AfterTestSection] is invoked even if [BeforeTestSection] or [BaseTestCase]'s [steps] failed.
      *
      * @param steps steps to run.
      */
-    override fun run(steps: TestContext<MainSectionData>.() -> Unit) {
-        val testBody = builder
-            .apply { mainTestSection = steps }
-            .build()
+    override fun run(
+        steps: TestContext<Data>.() -> Unit
+    ) {
+        val testBody = testBodyBuilder.apply { this.steps = steps }.build()
 
-        TestRunner<BeforeSectionData, MainSectionData>(configurator).run(testBody)
+        TestRunner<InitData, Data>(configurator).run(testBody)
     }
 
     /**
-     * Invokes after [BeforeTestSection] and [initialisation] and before [MainTestSection].
+     * Can be invoked after [BeforeTestSection]. Running to initData test data using dsl.
      *
-     * It's possible to add multiple transformation blocks.
-     *
-     * @param steps steps to run.
-     * @return [TransformableMainSection] to continue building a test.
+     * @param actions actions to be wrapped and invoked before the test.
+     * @return [TransformDataSection] to continue building a test.
      */
-    override fun transformation(
-        steps: MainSectionData.() -> Unit
-    ): TransformableMainSection<BeforeSectionData, MainSectionData> {
+    override fun initData(
+        actions: InitData.() -> Unit
+    ): TransformDataSection<Data> {
 
-        builder.apply { conditionSectionsList.add(steps) }
+        testBodyBuilder.apply { initDataActions = actions }
         return this
     }
 
     /**
-     * Invokes after [BeforeTestSection]. Running to init test data using dsl.
+     * Can be invoked after [BeforeTestSection] and [initData] but before [MainTestSection].
      *
-     * @param actions actions to be wrapped and invoked before the test.
-     * @return [TransformableMainSection] to continue building a test.
+     * It's possible to add multiple transformData blocks.
+     *
+     * @param actions actions to run.
+     * @return [TransformDataSection] to continue building a test.
      */
-    override fun initialisation(
-        actions: BeforeSectionData.() -> Unit
-    ): TransformableMainSection<BeforeSectionData, MainSectionData> {
+    override fun transformData(
+        actions: Data.() -> Unit
+    ): TransformDataSection<Data> {
 
-        builder.apply { initialisationSection = actions }
+        testBodyBuilder.apply { transformDataActionsList.add(actions) }
         return this
     }
 }

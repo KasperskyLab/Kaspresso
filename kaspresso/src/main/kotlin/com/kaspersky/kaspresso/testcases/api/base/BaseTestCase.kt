@@ -1,4 +1,4 @@
-package com.kaspersky.kaspresso.testcases.api
+package com.kaspersky.kaspresso.testcases.api.base
 
 import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.testcases.core.BaseTestContext
@@ -9,14 +9,15 @@ import com.kaspersky.kaspresso.testcases.sections.BeforeTestSection
 /**
  *  A base class for all parametrized test cases. Extend this class with a single base project-wide inheritor of
  *  [TestCase] as a parent for all actual project-wide test cases. Nesting test cases are not permitted because they may
- *  produce an exception caused by re-initialization of the [Configurator], use [Scenario] instead.
+ *  produce an exception caused by re-initialization of the [Configurator], use
+ *  [com.kaspersky.kaspresso.testcases.api.Scenario] instead.
  *
- *  @param BeforeSectionData data initialized in before section.
- *  @param MainSectionData data transformed from [BeforeSectionData] by special function.
+ *  @param InitData data initialized in before section.
+ *  @param Data data transformed from [InitData] by special function.
  */
-abstract class BaseTestCase<BeforeSectionData, MainSectionData>(
+abstract class BaseTestCase<InitData, Data>(
     configBuilder: Configurator.Builder = Configurator.Builder.default(),
-    private val dataProducer: (((BeforeSectionData.() -> Unit)?) -> MainSectionData)
+    private val dataProducer: (((InitData.() -> Unit)?) -> Data)
 ) {
     private val testCaseName = javaClass.simpleName
 
@@ -33,14 +34,13 @@ abstract class BaseTestCase<BeforeSectionData, MainSectionData>(
     protected fun before(
         testName: String = testCaseName,
         actions: BaseTestContext.() -> Unit
-    ): AfterTestSection<BeforeSectionData, MainSectionData> {
+    ): AfterTestSection<InitData, Data> {
 
-        return BeforeTestSection(
-            configurator,
-            TestBody.Builder<BeforeSectionData, MainSectionData>().apply {
-                this.testName = testName
-                mainDataProducer = dataProducer
-            }
-        ).beforeTest(actions)
+        val testBodyBuilder = TestBody.Builder<InitData, Data>().apply {
+            this.testName = testName
+            this.dataProducer = this@BaseTestCase.dataProducer
+        }
+
+        return BeforeTestSection(configurator, testBodyBuilder).beforeTest(actions)
     }
 }

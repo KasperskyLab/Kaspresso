@@ -1,7 +1,7 @@
 package com.kaspersky.kaspresso.testcases.models
 
-data class TestInfo(
+internal data class TestInfo(
     val testName: String,
-    val steps: List<StepInfo> = listOf(),
+    val stepInfos: List<StepInfo> = listOf(),
     val throwable: Throwable? = null
 )

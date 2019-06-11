@@ -9,14 +9,14 @@ internal class InternalStepInfo(
     // position on each level of step hierarchy
     val stepNumber: MutableList<Int>,
     // internal mutable properties to hide mutability from users
-    val parentStep: InternalStepInfo? = null,
-    val internalSubSteps: MutableList<InternalStepInfo> = mutableListOf(),
+    val parentStepInfo: InternalStepInfo? = null,
+    val internalSubStepInfos: MutableList<InternalStepInfo> = mutableListOf(),
     var internalStatus: StepStatus = StepStatus.STARTED,
     var internalThrowable: Throwable? = null
 ) : StepInfo {
 
     override val subSteps: List<StepInfo>
-        get() = internalSubSteps
+        get() = internalSubStepInfos
 
     override val status: StepStatus
         get() = internalStatus
@@ -25,13 +25,13 @@ internal class InternalStepInfo(
         get() = internalThrowable
 
     override fun toString(): String {
-        return "Step(" +
+        return "StepInfo(" +
                 "description=$description, " +
                 "testClassName=$testClassName, " +
                 "level=$level, number=$number, " +
                 "ordinal=$ordinal, " +
                 "stepNumber=$stepNumber, " +
-                "subSteps=$internalSubSteps" +
+                "subSteps=$internalSubStepInfos" +
                 ")"
     }
 }

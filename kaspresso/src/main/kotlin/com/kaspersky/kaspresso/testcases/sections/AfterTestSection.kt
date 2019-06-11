@@ -7,24 +7,24 @@ import com.kaspersky.kaspresso.testcases.models.TestBody
 /**
  * A representation of a set of actions to invoke after the test.
  */
-class AfterTestSection<BeforeSectionData, MainSectionData>(
+class AfterTestSection<InitData, Data> internal constructor(
     private val configurator: Configurator,
-    private val builder: TestBody.Builder<BeforeSectionData, MainSectionData>
+    private val testBodyBuilder: TestBody.Builder<InitData, Data>
 ) {
     /**
      * Wraps [actions] in a lambda, that will invoke these [actions] and make screenshot if [actions] will fail when it
      * will be invoked itself, and sets this lambda as the [TestBody.afterTestActions].
      *
      * @param actions actions to be wrapped and invoked after the test.
-     * @return [InitialisableMainSection] to continue building a test.
+     * @return [InitDataSection] to continue building a test.
      */
     fun after(
         actions: BaseTestContext.() -> Unit
-    ): InitialisableMainSection<BeforeSectionData, MainSectionData> {
+    ): InitDataSection<InitData, Data> {
 
         return MainTestSection(
             configurator,
-            builder.apply { afterTestSection = actions }
+            testBodyBuilder.apply { afterTestActions = actions }
         )
     }
 }

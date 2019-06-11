@@ -4,7 +4,7 @@ import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.device.Device
 import com.kaspersky.kaspresso.logger.KLogger
 
-open class BaseTestContext(configurator: Configurator) {
+open class BaseTestContext internal constructor(configurator: Configurator) {
 
     val device: Device = Device(configurator)
 

@@ -1,11 +1,11 @@
 package com.kaspersky.kaspressample
 
-import com.kaspersky.kaspresso.testcases.api.BaseScenario
+import com.kaspersky.kaspresso.testcases.api.base.BaseScenario
 import com.kaspersky.kaspresso.testcases.core.TestContext
 
-class CheckHomeTitleNoParametersScenario<T> : BaseScenario<T>() {
+class CheckHomeTitleNoParametersScenario<ScenarioData> : BaseScenario<ScenarioData>() {
 
-    override val steps: TestContext<T>.() -> Unit = {
+    override val steps: TestContext<ScenarioData>.() -> Unit = {
 
         step("Check Home Title") {}
 

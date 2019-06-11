@@ -1,5 +1,6 @@
 package com.kaspersky.kaspresso.testcases.api
 
+import com.kaspersky.kaspresso.testcases.api.base.BaseScenario
 import com.kaspersky.kaspresso.testcases.core.TestContext
 
 /**

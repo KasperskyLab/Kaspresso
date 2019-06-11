@@ -1,6 +1,7 @@
 package com.kaspersky.kaspresso.testcases.api
 
 import com.kaspersky.kaspresso.configurator.Configurator
+import com.kaspersky.kaspresso.testcases.api.base.BaseTestCase
 
 /**
  *  A base class for all test cases. Extend this class with a single base project-wide inheritor of [TestCase] as a

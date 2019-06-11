@@ -3,43 +3,41 @@ package com.kaspersky.kaspresso.testcases.models
 import com.kaspersky.kaspresso.testcases.core.BaseTestContext
 import com.kaspersky.kaspresso.testcases.core.TestContext
 
-class TestBody<BeforeSectionData, MainSectionData>(
+internal class TestBody<InitData, Data>(
     val testName: String,
     val beforeTestActions: BaseTestContext.() -> Unit,
     val afterTestActions: BaseTestContext.() -> Unit,
-    val mainSection: TestContext<MainSectionData>.() -> Unit,
-    var initialisationSection: (BeforeSectionData.() -> Unit)?,
-    val transformationsList: List<MainSectionData.() -> Unit>,
-    val mainDataProducer: (((BeforeSectionData.() -> Unit)?) -> MainSectionData)
+    val steps: TestContext<Data>.() -> Unit,
+    var initDataActions: (InitData.() -> Unit)?,
+    val transformDataActionsList: List<Data.() -> Unit>,
+    val dataProducer: (((InitData.() -> Unit)?) -> Data)
 ) {
-    class Builder<BeforeSectionData, MainSectionData> {
+    internal class Builder<InitData, Data> {
         var testName: String? = null
-        var beforeTestSection: (BaseTestContext.() -> Unit)? = null
-        var afterTestSection: (BaseTestContext.() -> Unit)? = null
-        var mainTestSection: (TestContext<MainSectionData>.() -> Unit)? = null
-        var initialisationSection: (BeforeSectionData.() -> Unit)? = null
-        val conditionSectionsList: MutableList<MainSectionData.() -> Unit> = mutableListOf()
-        var mainDataProducer: (((BeforeSectionData.() -> Unit)?) -> MainSectionData)? = null
+        var beforeTestActions: (BaseTestContext.() -> Unit)? = null
+        var afterTestActions: (BaseTestContext.() -> Unit)? = null
+        var steps: (TestContext<Data>.() -> Unit)? = null
+        var initDataActions: (InitData.() -> Unit)? = null
+        val transformDataActionsList: MutableList<Data.() -> Unit> = mutableListOf()
+        var dataProducer: (((InitData.() -> Unit)?) -> Data)? = null
 
-        fun build(): TestBody<BeforeSectionData, MainSectionData> {
-
-            checkInitialisationInvariants()
+        fun build(): TestBody<InitData, Data> {
+            checkInitializationInvariants()
 
             return TestBody(
                 requireNotNull(testName),
-                requireNotNull(beforeTestSection),
-                requireNotNull(afterTestSection),
-                requireNotNull(mainTestSection),
-                initialisationSection,
-                conditionSectionsList,
-                requireNotNull(mainDataProducer)
-
+                requireNotNull(beforeTestActions),
+                requireNotNull(afterTestActions),
+                requireNotNull(steps),
+                initDataActions,
+                transformDataActionsList,
+                requireNotNull(dataProducer)
             )
         }
 
-        private fun checkInitialisationInvariants() {
-            if (conditionSectionsList.isNotEmpty() && initialisationSection == null) {
-                throw IllegalArgumentException("Initialisation section can not be empty for non empty transformation section")
+        private fun checkInitializationInvariants() {
+            if (transformDataActionsList.isNotEmpty() && initDataActions == null) {
+                throw IllegalArgumentException("Init data section can not be empty for non empty transform data section.")
             }
         }
     }
