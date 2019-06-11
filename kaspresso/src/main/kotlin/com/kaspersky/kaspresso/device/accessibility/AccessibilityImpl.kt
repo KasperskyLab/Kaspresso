@@ -17,10 +17,7 @@ class AccessibilityImpl : Accessibility {
      * @param className a class name of an accessibility service
      */
     @TargetApi(Build.VERSION_CODES.N)
-    override fun enable(
-        packageName: String,
-        className: String
-    ) {
+    override fun enable(packageName: String, className: String) {
         val string = "enabled_accessibility_services"
         val cmd = "settings put secure $string $packageName/$className"
 
