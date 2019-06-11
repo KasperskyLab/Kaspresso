@@ -3,16 +3,15 @@ package com.kaspersky.kaspresso.testcases.sections
 import com.kaspersky.kaspresso.testcases.api.BaseTestCase
 import com.kaspersky.kaspresso.testcases.core.TestContext
 
-
 interface InitialisableMainSection<BeforeSectionData, MainSectionData> {
 
     /**
      * Runs:
      * 1) [BeforeTestSection],
-     * 2) optional [initialisation]
-     * 3) optional [TransformableMainSection.transformation]s sections (only in case of [initialisation] was run before )
-     * 4) [MainTestSection]'s steps
-     * 5) [AfterTestSection]. [AfterTestSection] are invoked even if [BeforeTestSection] or [BaseTestCase]'s [steps] fail.
+     * 2) Optional [initialisation],
+     * 3) Optional [TransformableMainSection.transformation]'s sections (only if [initialisation] was called before),
+     * 4) [MainTestSection]'s steps,
+     * 5) [AfterTestSection]. [AfterTestSection] is invoked even if [BeforeTestSection] or [BaseTestCase]'s [steps] failed.
      *
      * @param steps steps to run.
      */
@@ -22,6 +21,9 @@ interface InitialisableMainSection<BeforeSectionData, MainSectionData> {
      * Invokes after [BeforeTestSection]. Running to init test data using dsl.
      *
      * @param actions actions to be wrapped and invoked before the test.
+     * @return [TransformableMainSection] to continue building a test.
      */
-    fun initialisation(actions: BeforeSectionData.() -> Unit): TransformableMainSection<BeforeSectionData, MainSectionData>
+    fun initialisation(
+        actions: BeforeSectionData.() -> Unit
+    ): TransformableMainSection<BeforeSectionData, MainSectionData>
 }

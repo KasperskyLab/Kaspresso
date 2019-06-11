@@ -4,8 +4,10 @@ import com.kaspersky.kaspresso.device.screenshots.Screenshots
 import com.kaspersky.kaspresso.interceptors.TestRunInterceptor
 import com.kaspersky.kaspresso.testcases.models.TestInfo
 
-class TestRunnerScreenshotInterceptor(private val screenshots: Screenshots) :
-    TestRunInterceptor {
+class TestRunnerScreenshotInterceptor(
+    private val screenshots: Screenshots
+) : TestRunInterceptor {
+
     override fun onAfterSectionFinishedFailed(testInfo: TestInfo, throwable: Throwable) {
         screenshots.makeIfPossible("AfterTestSection_failure_${throwable.javaClass.simpleName}")
     }

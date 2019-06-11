@@ -16,7 +16,7 @@ object AdbServer {
     /**
      *  Executes shell commands blocking current thread.
      *
-     *  Required Permissions: INTERNET
+     *  Required Permissions: INTERNET.
      *
      *  @param commands commands to execute.
      */
@@ -27,7 +27,7 @@ object AdbServer {
     /**
      *  Performs adb commands blocking current thread.
      *
-     *  Required Permissions: INTERNET
+     *  Required Permissions: INTERNET.
      *
      *  @param commands commands to execute.
      */
@@ -38,7 +38,7 @@ object AdbServer {
     /**
      *  Performs shell commands blocking current thread.
      *
-     *  Required Permissions: INTERNET
+     *  Required Permissions: INTERNET.
      *
      *  @param commands commands to execute.
      */

@@ -12,7 +12,7 @@ import java.io.File
 
 /**
  *  Class for saving and clearing docloc screenshots with metadata.
- *  @param screenshotsDir directory to save screenshots and metadata
+ *  @param screenshotsDir directory to save screenshots and metadata.
  */
 internal class DocLocScreenshotCapturer(
     private val screenshotsDir: File,
@@ -20,7 +20,6 @@ internal class DocLocScreenshotCapturer(
     private val activities: Activities,
     private val apps: Apps
 ) {
-
     companion object {
         private const val SCREENSHOT_CAPTURE_DELAY_MS: Long = 500
     }
@@ -32,7 +31,7 @@ internal class DocLocScreenshotCapturer(
     private val activityMetadata = ActivityMetadata(logger)
 
     /**
-     *  Capture screenshot and save it with metadata to [screenshotsDir]
+     *  Capture screenshot and save it with metadata to [screenshotsDir].
      *  @param screenshotName name of screenshot. Must match [a-zA-Z0-9_-]+
      */
     fun captureScreenshot(screenshotName: String) {
@@ -43,7 +42,7 @@ internal class DocLocScreenshotCapturer(
     }
 
     /**
-     *  Capture screenshot and save it to [screenshotsDir]/fails
+     *  Capture screenshot and save it to [screenshotsDir]/fails.
      *  @param screenshotName name of screenshot. Must match [a-zA-Z0-9_-]+
      */
     fun captureScreenshotOnFail(screenshotName: String) {

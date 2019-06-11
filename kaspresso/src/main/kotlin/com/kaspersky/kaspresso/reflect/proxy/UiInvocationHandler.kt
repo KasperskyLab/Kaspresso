@@ -9,7 +9,7 @@ import java.lang.reflect.Method
 import java.util.concurrent.CountDownLatch
 
 /**
- *  [InvocationHandler] for dynamic proxy which will suppress any exception thrown from the target
+ * An [InvocationHandler] for dynamic proxy which will suppress any exception thrown from the target.
  */
 @PublishedApi
 internal class UiInvocationHandler(
@@ -31,6 +31,7 @@ internal class UiInvocationHandler(
                 latch.countDown()
             }
         }
+
         latch.await()
         return result
     }

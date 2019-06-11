@@ -4,11 +4,11 @@ import com.kaspersky.kaspresso.extensions.other.forEachSafely
 import com.kaspersky.kaspresso.interceptors.TestRunInterceptor
 import com.kaspersky.kaspresso.testcases.models.TestInfo
 
-
 class TestRunCompositeInterceptor(
     private val interceptors: List<TestRunInterceptor>,
     private val exceptions: MutableList<Throwable>
 ) : TestRunInterceptor {
+
     override fun onTestStarted(testInfo: TestInfo) {
         interceptors.forEachSafely(exceptions) { it.onTestStarted(testInfo) }
     }

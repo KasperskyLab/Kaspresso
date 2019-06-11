@@ -122,7 +122,7 @@ abstract class DocLocScreenshotTestCase(
 
     /**
      *  Captures screenshot with a given [name] and saves it to
-     *  <device path for pictures>/<locale>/<screenshotsDirectory>
+     *  <device path for pictures>/<locale>/<screenshotsDirectory>.
      *
      *  @param name screenshot name. English letters, spaces, numbers and dots are allowed.
      */
@@ -132,10 +132,10 @@ abstract class DocLocScreenshotTestCase(
 
     /**
      *  Return a dynamic proxy for a given view.
-     *  [I] must be interface
+     *  [I] must be interface.
      *
-     *  @param view proxy target
-     *  @return a proxy over the given view
+     *  @param view proxy target.
+     *  @return a proxy over the given view.
      */
     inline fun <reified I : Any> getUiSafeProxy(view: I): I {
         if (!I::class.java.isInterface) {
@@ -152,10 +152,10 @@ abstract class DocLocScreenshotTestCase(
     }
 
     /**
-     *  Return a dynamic proxy over all interfaces that [view] implements
+     *  Return a dynamic proxy over all interfaces that [view] implements.
      *
-     *  @param view proxy target
-     *  @return a proxy over the given view
+     *  @param view proxy target.
+     *  @return a proxy over the given view.
      */
     inline fun <reified T : Any> getUiSafeProxyFromImplementation(view: T): Any {
         return Proxy.newProxyInstance(

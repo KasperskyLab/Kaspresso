@@ -5,7 +5,7 @@ import org.junit.rules.TestWatcher
 import org.junit.runner.Description
 
 /**
- *  Test rule to capture a screenshot in case of unexpected docloc screenshot test failure
+ *  Test rule to capture a screenshot in case of unexpected docloc screenshot test failure.
  */
 class TestFailRule internal constructor() : TestWatcher() {
 

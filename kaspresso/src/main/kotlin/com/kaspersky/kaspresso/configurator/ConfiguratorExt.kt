@@ -7,7 +7,7 @@ import com.kaspersky.kaspresso.logger.UiTestLoggerImpl
 
 /**
  * Use this object only for extensions and nothing else!
- * In other cases use [Configurator]
+ * In other cases use [Configurator].
  */
 internal object ConfiguratorExt {
 
@@ -19,5 +19,4 @@ internal object ConfiguratorExt {
         NoMatchingViewException::class.java,
         AssertionError::class.java
     )
-
 }

@@ -5,4 +5,3 @@ data class TestInfo(
     val steps: List<StepInfo> = listOf(),
     val throwable: Throwable? = null
 )
-

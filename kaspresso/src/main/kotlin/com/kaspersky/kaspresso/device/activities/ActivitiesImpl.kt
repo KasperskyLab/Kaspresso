@@ -26,7 +26,7 @@ class ActivitiesImpl(
     /**
      * Finds and returns resumed activity if it exists, otherwise logs error.
      *
-     * @return nullable resumed activity
+     * @return nullable resumed activity.
      */
     override fun getResumed(): Activity? {
         var resumedActivity: Activity? = null

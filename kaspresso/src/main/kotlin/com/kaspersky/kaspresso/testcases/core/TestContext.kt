@@ -8,15 +8,16 @@ import com.kaspersky.kaspresso.interceptors.StepInterceptor
 import com.kaspersky.kaspresso.testcases.api.BaseScenario
 
 /**
- * Special class to operate with in user scenario
+ * Special class to operate with in user scenario.
  *
- * @param MainSectionData data created in before section
+ * @param MainSectionData data created in before section.
  */
 class TestContext<MainSectionData> constructor(
-    private val configurator: Configurator,
+    configurator: Configurator,
     private val stepProducer: StepProducer,
     val data: MainSectionData
 ) : BaseTestContext(configurator) {
+
     private val interceptors: List<StepInterceptor> = configurator.stepInterceptors
 
     /**

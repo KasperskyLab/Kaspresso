@@ -21,7 +21,6 @@ class UiAutomatorSpoon(
     private val screenshotDir: File,
     private val logger: UiTestLogger
 ) {
-
     companion object {
 
         private const val NAME_SEPARATOR = "_"

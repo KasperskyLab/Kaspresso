@@ -5,7 +5,7 @@ import com.kaspersky.kaspresso.testcases.core.TestContext
 /**
  * A base class for parametrized scenarios. A representation of some repeating steps inside the [TestCase].
  *
- *  @param ScenarioData test data created in testcase before section
+ *  @param ScenarioData test data created in testcase before section.
  */
 abstract class BaseScenario<ScenarioData> {
 

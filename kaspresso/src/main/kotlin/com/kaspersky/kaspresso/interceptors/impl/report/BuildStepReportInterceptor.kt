@@ -5,11 +5,10 @@ import com.kaspersky.kaspresso.report.ReportWriter
 import com.kaspersky.kaspresso.testcases.models.TestInfo
 
 class BuildStepReportInterceptor(
-    private val allureReportWriter: ReportWriter
+    private val reportWriter: ReportWriter
 ) : TestRunInterceptor {
 
     override fun onTestFinished(testInfo: TestInfo, success: Boolean) {
-        allureReportWriter.processTestResults(testInfo)
+        reportWriter.processTestResults(testInfo)
     }
-
 }

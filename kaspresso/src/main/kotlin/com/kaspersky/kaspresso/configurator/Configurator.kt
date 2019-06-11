@@ -41,28 +41,39 @@ import com.agoda.kakao.configurator.KakaoConfigurator
  *
  * @param attemptsTimeoutMs A timeout for all action attempts in milliseconds.
  * @param attemptsIntervalMs A frequency of action attempts in milliseconds.
- * @param logger Holds an implementation of [UiTestLogger] interface for inner framework usage. Not accessible from outside.
+ * @param logger Holds an implementation of [UiTestLogger] interface for inner framework usage.
  * @param externalLogger Holds an implementation of [UiTestLogger] interface for external usage.
- * @param apps Holds an implementation of [Apps] interface. If it was not specified in [Configurator.Builder], the default implementation is used.
- * @param activities Holds an implementation of [Activities] interface. If it was not specified in [Configurator.Builder], the default implementation is used.
- * @param files Holds an implementation of [Files] interface. If it was not specified in [Configurator.Builder], the default implementation is used.
- * @param internet Holds an implementation of [Internet] interface. If it was not specified in [Configurator.Builder], the default implementation is used.
- * @param screenshots Holds an implementation of [Screenshots] interface. If it was not specified in [Configurator.Builder], the
+ * @param apps Holds an implementation of [Apps] interface. If it was not specified in [Configurator.Builder], the
  * default implementation is used.
- * @param accessibility Holds an implementation of [Accessibility] interface. If it was not specified in [Configurator.Builder], the
- * default implementation is used.
- * @param permissions Holds an implementation of [Permissions] interface. If it was not specified in [Configurator.Builder], the
- * default implementation is used.
- * @param exploit Holds an implementation of [Exploit] interface. If it was not specified in [Configurator.Builder], the default
- * implementation is used.
+ * @param activities Holds an implementation of [Activities] interface. If it was not specified in [Configurator.Builder],
+ * the default implementation is used.
+ * @param files Holds an implementation of [Files] interface. If it was not specified in [Configurator.Builder],
+ * the default implementation is used.
+ * @param internet Holds an implementation of [Internet] interface. If it was not specified in [Configurator.Builder],
+ * the default implementation is used.
+ * @param screenshots Holds an implementation of [Screenshots] interface. If it was not specified in [Configurator.Builder],
+ * the default implementation is used.
+ * @param accessibility Holds an implementation of [Accessibility] interface. If it was not specified in [Configurator.Builder],
+ * the default implementation is used.
+ * @param permissions Holds an implementation of [Permissions] interface. If it was not specified in [Configurator.Builder],
+ * the default implementation is used.
+ * @param exploit Holds an implementation of [Exploit] interface. If it was not specified in [Configurator.Builder],
+ * the default implementation is used.
  * @param allowedExceptionsForAttempt Exceptions that doesn't stop attempts.
- * @param viewActionInterceptors Interceptors that are called by [com.kaspersky.uitest_framework.proxy.ViewActionProxy] before actually [android.support.test.espresso.ViewAction.perform] call.
- * @param viewAssertionInterceptors Interceptors that are called by [com.kaspersky.uitest_framework.proxy.ViewAssertionProxy] before actually [android.support.test.espresso.ViewAssertion.check] call.
- * @param atomInterceptors Interceptors that are called by [com.kaspersky.uitest_framework.proxy.AtomProxy] before actually [android.support.test.espresso.web.model.Atom.transform] call.
- * @param webAssertionInterceptors  Interceptors that are called by [android.support.test.espresso.web.assertion.WebAssertionProxy] before actually [android.support.test.espresso.web.assertion.WebAssertion.checkResult] call.
- * @param executingInterceptor An interceptor that actually manages the execution of actions or assertions. For example, [FlakySafeExecutingInterceptor] performs multiple attempting to execute an action or assertion.
- * @param stepInterceptors An interceptors set that actually manages the execution of steps [TestContext.step]. Interceptors works using decorator pattern. First interceptor wraps others
- * @param testRunInterceptors An interceptors set that actually manages the execution of test sections [TestInfo]. Interceptors works using decorator pattern. First interceptor wraps others
+ * @param viewActionInterceptors Interceptors that are called by [com.kaspersky.kaspresso.proxy.ViewActionProxy]
+ * before actually [android.support.test.espresso.ViewAction.perform] call.
+ * @param viewAssertionInterceptors Interceptors that are called by [com.kaspersky.kaspresso.proxy.ViewAssertionProxy]
+ * before actually [android.support.test.espresso.ViewAssertion.check] call.
+ * @param atomInterceptors Interceptors that are called by [com.kaspersky.kaspresso.proxy.AtomProxy]
+ * before actually [android.support.test.espresso.web.model.Atom.transform] call.
+ * @param webAssertionInterceptors Interceptors that are called by [android.support.test.espresso.web.assertion.WebAssertionProxy]
+ * before actually [android.support.test.espresso.web.assertion.WebAssertion.checkResult] call.
+ * @param executingInterceptor An interceptor that actually manages the execution of actions or assertions. For example,
+ * [FlakySafeExecutingInterceptor] performs multiple attempting to execute an action or assertion.
+ * @param stepInterceptors An interceptors set that actually manages the execution of steps [TestContext.step].
+ * Interceptors work using decorator pattern. First interceptor wraps others.
+ * @param testRunInterceptors An interceptors set that actually manages the execution of test sections
+ * [com.kaspersky.kaspresso.testcases.models.TestInfo]. Interceptor works using decorator pattern. First interceptor wraps others.
  */
 class Configurator(
     internal val attemptsTimeoutMs: Long = DEFAULT_ATTEMPTS_TIMEOUT_MS,
@@ -86,15 +97,14 @@ class Configurator(
     internal val stepInterceptors: List<StepInterceptor>,
     internal val testRunInterceptors: List<TestRunInterceptor>
 ) {
-
     companion object {
+
         internal const val DEFAULT_ATTEMPTS_TIMEOUT_MS: Long = 2_000L
         internal const val DEFAULT_ATTEMPTS_INTERVAL_MS: Long = 500L
 
         internal const val DEFAULT_INNER_LOGGER_TAG: String = "KASPRESSO"
         internal const val DEFAULT_OUTER_LOGGER_TAG: String = "KASPRESSO_SPECIAL"
     }
-
 
     /**
      * A class for [Configurator] initialization. The right way to change [Configurator] settings is to use [Builder].
@@ -105,21 +115,26 @@ class Configurator(
 
             /**
              * Puts the default settings pack to [Builder].
-             * Please be aware if you add some settings after [default] method. You can catch inconsistent state of the [Builder].
-             * For example if you change [logger] after [default] method than all interceptors will work with old [logger]
+             * Please be aware if you add some settings after [default] method. You can catch inconsistent state of the
+             * [Builder]. For example if you change [logger] after [default] method than all interceptors will work with
+             * old [logger].
              *
              * @return an existing instance of [Builder].
              */
             fun default(): Builder {
                 return Builder().apply {
+
                     viewActionInterceptors = listOf(LoggingViewActionInterceptor(logger))
                     viewAssertionInterceptors = listOf(LoggingViewAssertionInterceptor(logger))
+
                     executingInterceptor = FlakySafeExecutingInterceptor()
                     failureInterceptor = LoggingFailureInterceptor(logger)
+
                     stepInterceptors = listOf(
                         LoggingStepInterceptor(logger),
                         ScreenshotStepInterceptor(screenshots)
                     )
+
                     testRunInterceptors = listOf(
                         TestRunLoggerInterceptor(logger),
                         TestRunnerScreenshotInterceptor(screenshots),
@@ -172,9 +187,10 @@ class Configurator(
         var stepInterceptors: List<StepInterceptor> = emptyList()
 
         var testRunInterceptors: List<TestRunInterceptor> = emptyList()
+
         /**
          * Terminating method to build built [Configurator] settings. Can be called only inside the framework
-         * package. Actually called when the base [com.kaspersky.uitest_framework.testcase.TestCase] class is
+         * package. Actually called when the base [com.kaspersky.kaspresso.testcases.api.BaseTestCase] class is
          * constructed.
          */
         internal fun build(): Configurator {
@@ -235,5 +251,4 @@ class Configurator(
             initWebInteractionDelegateFactory(null)
         }
     }
-
 }

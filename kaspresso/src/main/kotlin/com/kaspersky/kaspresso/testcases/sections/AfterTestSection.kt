@@ -13,12 +13,15 @@ class AfterTestSection<BeforeSectionData, MainSectionData>(
 ) {
     /**
      * Wraps [actions] in a lambda, that will invoke these [actions] and make screenshot if [actions] will fail when it
-     * will be invoked itself, and sets this lambda as the [MainTestSection.afterTestActions] to [runner].
+     * will be invoked itself, and sets this lambda as the [TestBody.afterTestActions].
      *
      * @param actions actions to be wrapped and invoked after the test.
-     * @return [runner] to continue building a test.
+     * @return [InitialisableMainSection] to continue building a test.
      */
-    fun after(actions: BaseTestContext.() -> Unit): InitialisableMainSection<BeforeSectionData, MainSectionData> {
+    fun after(
+        actions: BaseTestContext.() -> Unit
+    ): InitialisableMainSection<BeforeSectionData, MainSectionData> {
+
         return MainTestSection(
             configurator,
             builder.apply { afterTestSection = actions }

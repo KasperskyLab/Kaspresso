@@ -4,7 +4,9 @@ import com.kaspersky.kaspresso.interceptors.TestRunInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.testcases.models.TestInfo
 
-class TestRunLoggerInterceptor(private val logger: UiTestLogger) : TestRunInterceptor {
+class TestRunLoggerInterceptor(
+    private val logger: UiTestLogger
+) : TestRunInterceptor {
 
     override fun onBeforeSectionStarted(testInfo: TestInfo) {
         logger.section("BEFORE TEST SECTION")

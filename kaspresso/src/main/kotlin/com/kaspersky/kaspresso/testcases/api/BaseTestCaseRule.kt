@@ -13,13 +13,13 @@ import org.junit.runners.model.Statement
 /**
  *  A base class for all parametrized test cases rules.
  *
- *  @param BeforeSectionData data initialized in before section
- *  @param MainSectionData data transformed from [BeforeSectionData] by special function
+ *  @param BeforeSectionData data initialized in before section.
+ *  @param MainSectionData data transformed from [BeforeSectionData] by special function.
  */
 open class BaseTestCaseRule<BeforeSectionData, MainSectionData>(
-    private val testClassName: String,
-    private val configBuilder: Configurator.Builder = Configurator.Builder.default(),
-    private val dataProducer: (((BeforeSectionData.() -> Unit)?) -> MainSectionData)
+    configBuilder: Configurator.Builder = Configurator.Builder.default(),
+    private val dataProducer: (((BeforeSectionData.() -> Unit)?) -> MainSectionData),
+    private val testClassName: String
 ) : TestRule {
 
     private val configurator: Configurator = configBuilder.build()
@@ -34,11 +34,15 @@ open class BaseTestCaseRule<BeforeSectionData, MainSectionData>(
      * Starts the building a test, sets the [BeforeTestSection] actions and returns an existing instance of
      * [AfterTestSection] to continue building a test.
      *
-     * @param testName a name of the test
+     * @param testName a name of the test.
      * @param actions actions to invoke in before test section.
      * @return an existing instance of [AfterTestSection].
      */
-    fun before(testName: String = testClassName, actions: BaseTestContext.() -> Unit): AfterTestSection<BeforeSectionData, MainSectionData> {
+    fun before(
+        testName: String = testClassName,
+        actions: BaseTestContext.() -> Unit
+    ): AfterTestSection<BeforeSectionData, MainSectionData> {
+
         return BeforeTestSection(
             configurator,
             TestBody.Builder<BeforeSectionData, MainSectionData>().apply {
@@ -47,5 +51,4 @@ open class BaseTestCaseRule<BeforeSectionData, MainSectionData>(
             }
         ).beforeTest(actions)
     }
-
 }

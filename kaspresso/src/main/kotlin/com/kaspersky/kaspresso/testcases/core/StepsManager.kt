@@ -4,7 +4,6 @@ import com.kaspersky.kaspresso.testcases.models.InternalStepInfo
 import com.kaspersky.kaspresso.testcases.models.StepInfo
 import com.kaspersky.kaspresso.testcases.models.StepStatus
 
-
 /**
  * [StepsManager] produces step and manages lifecycle of step.
  * To make correct numeration for sub steps(see example below) it builds step hierarchy.
@@ -56,11 +55,11 @@ import com.kaspersky.kaspresso.testcases.models.StepStatus
  * 2.2 If step has no parent
  *  - [currentStepResult] is null
  *
- *
- *
  */
 
-internal class StepsManager(private val testName: String) : StepProducer {
+internal class StepsManager(
+    private val testName: String
+) : StepProducer {
 
     private val stepResultList: MutableList<InternalStepInfo> = mutableListOf()
     private var currentStepResult: InternalStepInfo? = null
@@ -72,6 +71,7 @@ internal class StepsManager(private val testName: String) : StepProducer {
         checkState()
         val localCurrentStep = currentStepResult
         val step: InternalStepInfo
+
         if (localCurrentStep == null) {
             val stepNumber = mutableListOf(stepResultList.size + 1)
             step = produceStepInternal(description, stepNumber)
@@ -85,6 +85,7 @@ internal class StepsManager(private val testName: String) : StepProducer {
             localCurrentStep.internalSubSteps.add(step)
             currentStepResult = step
         }
+
         return step
     }
 
@@ -103,6 +104,7 @@ internal class StepsManager(private val testName: String) : StepProducer {
         stepNumber: MutableList<Int>,
         parentStep: InternalStepInfo? = null
     ): InternalStepInfo {
+
         return InternalStepInfo(
             description = description,
             testClassName = testName,
@@ -117,6 +119,7 @@ internal class StepsManager(private val testName: String) : StepProducer {
     override fun onStepFinished(stepInfo: StepInfo, error: Throwable?) {
         checkState()
         val localCurrentStepResult = currentStepResult
+
         if (localCurrentStepResult != stepInfo)
             throw IllegalStateException(
                 "Unable to finish step $stepInfo cause it is not current. " +
@@ -130,8 +133,8 @@ internal class StepsManager(private val testName: String) : StepProducer {
 
     /**
      * Calling after all test's steps finished.
-     * It helps correctly finish all steps to return lately an actual steps hierarchy
-     * @return result expressed in List of StepInfo (supports hierarchy) gotten after Test completed
+     * It helps correctly finish all steps to return lately an actual steps hierarchy.
+     * @return result expressed in List of StepInfo (supports hierarchy) gotten after Test completed.
      */
     fun onAllStepsFinishedAndGetResultInSteps(): List<StepInfo> {
         checkState()
@@ -160,6 +163,4 @@ internal class StepsManager(private val testName: String) : StepProducer {
         // swallow copy
         return stepResultList.map { it }
     }
-
 }
-

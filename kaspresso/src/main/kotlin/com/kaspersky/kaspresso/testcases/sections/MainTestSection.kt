@@ -15,10 +15,10 @@ class MainTestSection<BeforeSectionData, MainSectionData>(
     /**
      * Runs:
      * 1) [BeforeTestSection],
-     * 2) optional [initialisation]
-     * 3) optional [transformation]s sections (only in case of [initialisation] was run before )
-     * 4) [MainTestSection]'s steps
-     * 5) [AfterTestSection]. [AfterTestSection] are invoked even if [BeforeTestSection] or [BaseTestCase]'s [steps] fail.
+     * 2) Optional [initialisation],
+     * 3) Optional [transformation]'s sections (only if [initialisation] was called before),
+     * 4) [MainTestSection]'s steps,
+     * 5) [AfterTestSection]. [AfterTestSection] is invoked even if [BeforeTestSection] or [BaseTestCase]'s [steps] failed.
      *
      * @param steps steps to run.
      */
@@ -26,17 +26,22 @@ class MainTestSection<BeforeSectionData, MainSectionData>(
         val testBody = builder
             .apply { mainTestSection = steps }
             .build()
+
         TestRunner<BeforeSectionData, MainSectionData>(configurator).run(testBody)
     }
 
     /**
      * Invokes after [BeforeTestSection] and [initialisation] and before [MainTestSection].
      *
-     * It's possible to add multiple transformation blocks
+     * It's possible to add multiple transformation blocks.
      *
      * @param steps steps to run.
+     * @return [TransformableMainSection] to continue building a test.
      */
-    override fun transformation(steps: MainSectionData.() -> Unit): TransformableMainSection<BeforeSectionData, MainSectionData> {
+    override fun transformation(
+        steps: MainSectionData.() -> Unit
+    ): TransformableMainSection<BeforeSectionData, MainSectionData> {
+
         builder.apply { conditionSectionsList.add(steps) }
         return this
     }
@@ -45,8 +50,12 @@ class MainTestSection<BeforeSectionData, MainSectionData>(
      * Invokes after [BeforeTestSection]. Running to init test data using dsl.
      *
      * @param actions actions to be wrapped and invoked before the test.
+     * @return [TransformableMainSection] to continue building a test.
      */
-    override fun initialisation(actions: BeforeSectionData.() -> Unit): TransformableMainSection<BeforeSectionData, MainSectionData> {
+    override fun initialisation(
+        actions: BeforeSectionData.() -> Unit
+    ): TransformableMainSection<BeforeSectionData, MainSectionData> {
+
         builder.apply { initialisationSection = actions }
         return this
     }

@@ -6,7 +6,7 @@ package com.kaspersky.kaspresso.logger
  */
 class KLogger(
     private val logger: UiTestLogger
-): UiTestLogger {
+) : UiTestLogger {
 
     override fun i(text: String) = logger.i(text)
     override fun d(text: String) = logger.d(text)

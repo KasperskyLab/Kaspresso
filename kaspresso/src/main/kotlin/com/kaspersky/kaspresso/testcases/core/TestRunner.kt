@@ -11,7 +11,6 @@ import com.kaspersky.kaspresso.testcases.models.TestInfo
 internal class TestRunner<BeforeSectionData, MainSectionData>(
     private val configurator: Configurator
 ) {
-
     fun run(testBody: TestBody<BeforeSectionData, MainSectionData>) {
         val exceptions: MutableList<Throwable> = mutableListOf()
         val testRunInterceptor: TestRunInterceptor =
@@ -75,14 +74,19 @@ internal class TestRunner<BeforeSectionData, MainSectionData>(
         testRunInterceptor: TestRunInterceptor,
         mainDataProducer: ((BeforeSectionData.() -> Unit)?) -> MainSectionData
     ): MainSectionData {
+
         try {
             testRunInterceptor.onBeforeSectionStarted(currentTestInfo)
             beforeTestActions.invoke(BaseTestContext(configurator))
+
             val mainData = mainDataProducer.invoke(initialisation)
+
             for (transformation in dataTransformationList) {
                 transformation.invoke(mainData)
             }
+
             testRunInterceptor.onBeforeSectionFinishedSuccess(currentTestInfo)
+
             return mainData
         } catch (e: Throwable) {
             testRunInterceptor.onBeforeSectionFinishedFailed(currentTestInfo, e)
@@ -97,8 +101,11 @@ internal class TestRunner<BeforeSectionData, MainSectionData>(
         stepsManager: StepsManager,
         mainSectionData: MainSectionData
     ): RunMainTestSectionResult {
+
         var runMainTestSectionResult: RunMainTestSectionResult
+
         checkTestInfoOnFinishAllSteps(currentTestInfo)
+
         try {
             testRunInterceptor.onMainSectionStarted(currentTestInfo)
 
@@ -116,6 +123,7 @@ internal class TestRunner<BeforeSectionData, MainSectionData>(
 
             testRunInterceptor.onMainSectionFinishedFailed(updatedTestInfo, e)
         }
+
         return runMainTestSectionResult
     }
 
@@ -139,5 +147,4 @@ internal class TestRunner<BeforeSectionData, MainSectionData>(
             throw e
         }
     }
-
 }

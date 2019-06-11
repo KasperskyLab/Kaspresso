@@ -17,8 +17,10 @@ internal class InternalStepInfo(
 
     override val subSteps: List<StepInfo>
         get() = internalSubSteps
+
     override val status: StepStatus
         get() = internalStatus
+
     override val throwable: Throwable?
         get() = internalThrowable
 
@@ -32,6 +34,4 @@ internal class InternalStepInfo(
                 "subSteps=$internalSubSteps" +
                 ")"
     }
-
 }
-

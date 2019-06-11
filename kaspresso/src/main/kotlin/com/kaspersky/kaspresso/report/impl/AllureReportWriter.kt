@@ -4,10 +4,12 @@ import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.report.ReportWriter
 import com.kaspersky.kaspresso.testcases.models.TestInfo
 
-class AllureReportWriter(private val uiTestLogger: UiTestLogger) : ReportWriter {
+class AllureReportWriter(
+    private val uiTestLogger: UiTestLogger
+) : ReportWriter {
 
-    override fun processTestResults(allureTestResult: TestInfo) {
+    override fun processTestResults(testInfo: TestInfo) {
         //TODO add real implementation
-        uiTestLogger.section("Allure test results: $allureTestResult")
+        uiTestLogger.section("Allure test results: $testInfo")
     }
 }
