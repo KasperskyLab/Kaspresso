@@ -4,7 +4,7 @@ import android.content.Context
 import com.kaspersky.kaspresso.extensions.other.createDirectoryRWX
 import java.io.File
 
-internal abstract class ScreenshotMaker(
+internal class ScreenshotFiles(
     private val screenshotDir: File
 ) {
 

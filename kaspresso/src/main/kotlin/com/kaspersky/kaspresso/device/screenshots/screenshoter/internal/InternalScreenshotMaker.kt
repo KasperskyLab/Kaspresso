@@ -4,7 +4,7 @@ import android.app.Activity
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.os.Looper
-import com.kaspersky.kaspresso.device.screenshots.screenshoter.ScreenshotMaker
+import com.kaspersky.kaspresso.device.screenshots.screenshoter.ScreenshotFiles
 import java.io.BufferedOutputStream
 import java.io.File
 import java.io.FileOutputStream
@@ -13,7 +13,9 @@ import java.util.concurrent.CountDownLatch
 
 internal class InternalScreenshotMaker(
     screenshotDir: File
-) : ScreenshotMaker(screenshotDir) {
+) {
+
+    private val screenshotFiles = ScreenshotFiles(screenshotDir)
 
     /**
      * Takes a screenshot with the specified tag.
@@ -22,7 +24,7 @@ internal class InternalScreenshotMaker(
      * @return the image file that was created
      */
     fun screenshot(activity: Activity, tag: String): File {
-        val screenshotFile = obtainScreenshotFile(activity, tag)
+        val screenshotFile = screenshotFiles.obtainScreenshotFile(activity, tag)
         takeScreenshot(screenshotFile, activity)
         return screenshotFile
     }
