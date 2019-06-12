@@ -23,13 +23,13 @@ class ScreenshotsImpl(
     private val externalScreenshotMaker = ExternalScreenshotMaker(screenshotFiles)
 
     /**
-     * Makes screenshot if it is possible, otherwise logs the error.
+     * Takes screenshot if it is possible, otherwise logs the error.
      *
      * Required Permissions: WRITE_EXTERNAL_STORAGE
      *
      * @param tag a unique tag to further identify the screenshot. Must match [a-zA-Z0-9_-]+.
      */
-    override fun makeIfPossible(tag: String) {
+    override fun take(tag: String) {
         val resumedActivity = activities.getResumed()
 
         if (resumedActivity != null) {
