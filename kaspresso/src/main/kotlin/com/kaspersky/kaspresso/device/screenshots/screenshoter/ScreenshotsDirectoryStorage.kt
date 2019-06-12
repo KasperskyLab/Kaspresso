@@ -6,29 +6,38 @@ import android.os.Environment
 import com.kaspersky.kaspresso.extensions.other.createDirectoryRWX
 import java.io.File
 
-object ScreenshotsDirectoryStorage {
+class ScreenshotsDirectoryStorage {
 
     private val clearedOutputDirectories = HashSet<File>()
 
-    fun obtainDirectory(
+    fun getRootScreenshotDirectory(
         context: Context,
         screenshotDir: File
     ): File {
-        val screenshotDeviceDir: File = getScreenshotRootDirectory(context, screenshotDir)
-
-        synchronized(this) {
-            if (!clearedOutputDirectories.contains(screenshotDeviceDir)) {
-                deletePath(screenshotDeviceDir, inclusive = false)
-                clearedOutputDirectories.add(screenshotDeviceDir)
-            }
+        val screenshotDeviceDir: File = getScreenshotDirectory(context, screenshotDir)
+        if (!screenshotDeviceDir.exists()) {
+            screenshotDeviceDir.createDirectoryRWX()
         }
-
-        screenshotDeviceDir.createDirectoryRWX()
-
         return screenshotDeviceDir
     }
 
-    private fun getScreenshotRootDirectory(context: Context, screenshotDir: File): File {
+    fun obtainDirectory(
+        screenshotTestDir: File
+    ): File {
+
+        if (!clearedOutputDirectories.contains(screenshotTestDir)) {
+            deletePath(screenshotTestDir, inclusive = false)
+            clearedOutputDirectories.add(screenshotTestDir)
+        }
+
+        if (!screenshotTestDir.exists()) {
+            screenshotTestDir.createDirectoryRWX()
+        }
+
+        return screenshotTestDir
+    }
+
+    private fun getScreenshotDirectory(context: Context, screenshotDir: File): File {
         return if (Build.VERSION.SDK_INT >= 21) {
             // Use external storage.
             Environment.getExternalStorageDirectory().resolve(screenshotDir)
@@ -41,7 +50,7 @@ object ScreenshotsDirectoryStorage {
     private fun deletePath(path: File, inclusive: Boolean) {
         if (path.isDirectory) {
             path.listFiles()?.run {
-                forEach { child -> deletePath(child, true) }
+                forEach { child -> deletePath(child, inclusive = true) }
             }
         }
 

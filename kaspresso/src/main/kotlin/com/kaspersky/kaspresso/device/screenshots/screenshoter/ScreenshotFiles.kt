@@ -1,7 +1,6 @@
 package com.kaspersky.kaspresso.device.screenshots.screenshoter
 
 import android.content.Context
-import com.kaspersky.kaspresso.extensions.other.createDirectoryRWX
 import java.io.File
 
 internal class ScreenshotFiles(
@@ -13,22 +12,22 @@ internal class ScreenshotFiles(
         private const val EXTENSION = ".png"
     }
 
-    fun obtainScreenshotFile(context: Context, tag: String): File {
-        val screenshotRootDirectory = ScreenshotsDirectoryStorage.obtainDirectory(context, screenshotDir)
+    private val directoryStorage = ScreenshotsDirectoryStorage()
 
-        val screenshotTestDirectory = createDirectoryForTest(screenshotRootDirectory)
+    fun obtainScreenshotFile(context: Context, tag: String): File {
+        val screenshotRootDirectory = directoryStorage.getRootScreenshotDirectory(context, screenshotDir)
+
+        val screenshotTestDirectory = directoryStorage.obtainDirectory(getDirectoryForTest(screenshotRootDirectory))
 
         val screenshotName = System.currentTimeMillis().toString() + NAME_SEPARATOR + tag + EXTENSION
         return screenshotTestDirectory.resolve(screenshotName)
     }
 
-    private fun createDirectoryForTest(screenshotRootDirectory: File): File {
+    private fun getDirectoryForTest(screenshotRootDirectory: File): File {
         val testClass = Thread.currentThread().stackTrace.findTestClassTraceElement()
         val className = testClass.className.replace("[^A-Za-z0-9._-]".toRegex(), NAME_SEPARATOR)
         val methodName = testClass.methodName
 
-        val screenshotTestDirectory = screenshotRootDirectory.resolve(className).resolve(methodName)
-        screenshotTestDirectory.createDirectoryRWX()
-        return screenshotTestDirectory
+        return screenshotRootDirectory.resolve(className).resolve(methodName)
     }
 }
