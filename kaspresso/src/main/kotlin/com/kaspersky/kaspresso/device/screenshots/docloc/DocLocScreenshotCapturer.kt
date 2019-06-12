@@ -3,6 +3,7 @@ package com.kaspersky.kaspresso.device.screenshots.docloc
 import com.kaspersky.kaspresso.device.activities.Activities
 import com.kaspersky.kaspresso.device.activities.metadata.ActivityMetadata
 import com.kaspersky.kaspresso.device.apps.Apps
+import com.kaspersky.kaspresso.device.screenshots.screenshoter.ScreenshotFiles
 import com.kaspersky.kaspresso.extensions.other.safeWrite
 import com.kaspersky.kaspresso.extensions.other.toXml
 import com.kaspersky.kaspresso.device.screenshots.screenshoter.external.ExternalScreenshotMaker
@@ -27,8 +28,8 @@ internal class DocLocScreenshotCapturer(
 
     private val screenshotDirOnFailed = screenshotsDir.resolve("fails")
 
-    private val screenshoter = ExternalScreenshotMaker(screenshotsDir)
-    private val failScreenshoter = ExternalScreenshotMaker(screenshotDirOnFailed)
+    private val screenshoter = ExternalScreenshotMaker(ScreenshotFiles(screenshotsDir))
+    private val failScreenshoter = ExternalScreenshotMaker(ScreenshotFiles(screenshotDirOnFailed))
     private val activityMetadata = ActivityMetadata(logger)
 
     /**

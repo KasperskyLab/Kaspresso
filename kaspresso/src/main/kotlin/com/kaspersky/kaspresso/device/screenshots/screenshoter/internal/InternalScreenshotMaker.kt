@@ -12,10 +12,8 @@ import java.io.IOException
 import java.util.concurrent.CountDownLatch
 
 internal class InternalScreenshotMaker(
-    screenshotDir: File
+    private val screenshotFiles: ScreenshotFiles
 ) {
-
-    private val screenshotFiles = ScreenshotFiles(screenshotDir)
 
     /**
      * Takes a screenshot with the specified tag.
@@ -24,7 +22,7 @@ internal class InternalScreenshotMaker(
      * @return the image file that was created
      */
     fun screenshot(activity: Activity, tag: String): File {
-        val screenshotFile = screenshotFiles.obtainScreenshotFile(activity, tag)
+        val screenshotFile = screenshotFiles.getScreenshotFile(activity, tag)
         takeScreenshot(screenshotFile, activity)
         return screenshotFile
     }

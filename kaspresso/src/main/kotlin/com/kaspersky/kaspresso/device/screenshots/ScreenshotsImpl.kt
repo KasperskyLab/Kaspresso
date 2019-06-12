@@ -1,6 +1,7 @@
 package com.kaspersky.kaspresso.device.screenshots
 
 import com.kaspersky.kaspresso.device.activities.Activities
+import com.kaspersky.kaspresso.device.screenshots.screenshoter.ScreenshotFiles
 import com.kaspersky.kaspresso.device.screenshots.screenshoter.external.ExternalScreenshotMaker
 import com.kaspersky.kaspresso.device.screenshots.screenshoter.internal.InternalScreenshotMaker
 import com.kaspersky.kaspresso.extensions.other.getStackTraceAsString
@@ -16,8 +17,10 @@ class ScreenshotsImpl(
     screenshotDir: File = File("screenshots")
 ) : Screenshots {
 
-    private val internalScreenshotMaker = InternalScreenshotMaker(screenshotDir)
-    private val externalScreenshotMaker = ExternalScreenshotMaker(screenshotDir)
+    private val screenshotFiles = ScreenshotFiles(screenshotDir)
+
+    private val internalScreenshotMaker = InternalScreenshotMaker(screenshotFiles)
+    private val externalScreenshotMaker = ExternalScreenshotMaker(screenshotFiles)
 
     /**
      * Makes screenshot if it is possible, otherwise logs the error.

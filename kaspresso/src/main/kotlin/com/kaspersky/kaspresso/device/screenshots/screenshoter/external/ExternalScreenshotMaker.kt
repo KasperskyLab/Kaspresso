@@ -9,10 +9,8 @@ import java.io.File
  * Class for capturing spoon-compatible screenshots by uiautomator.
  */
 internal class ExternalScreenshotMaker(
-    screenshotDir: File
+    private val screenshotFiles: ScreenshotFiles
 ) {
-
-    private val screenshotFiles = ScreenshotFiles(screenshotDir)
 
     /**
      * Takes a screenshot with the specified tag.
@@ -21,7 +19,7 @@ internal class ExternalScreenshotMaker(
      * @return the image file that was created
      */
     fun screenshot(tag: String): File {
-        val screenshotFile = screenshotFiles.obtainScreenshotFile(
+        val screenshotFile = screenshotFiles.getScreenshotFile(
             InstrumentationRegistry.getTargetContext().applicationContext,
             tag
         )

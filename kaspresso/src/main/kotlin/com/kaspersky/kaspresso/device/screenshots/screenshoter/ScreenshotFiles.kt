@@ -31,7 +31,7 @@ internal class ScreenshotFiles(
      *  @param tag a name for the screenshot
      *  @return [File] which represents a file for screenshot
      */
-    fun obtainScreenshotFile(context: Context, tag: String): File {
+    fun getScreenshotFile(context: Context, tag: String): File {
         val screenshotRootDirectory = directoryStorage.getRootScreenshotDirectory(context, screenshotDir)
 
         val screenshotTestDirectory = directoryStorage.obtainDirectory(getDirectoryForTest(screenshotRootDirectory))
