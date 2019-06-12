@@ -46,7 +46,6 @@ dependencies {
     implementation "com.android.support.test.uiautomator:uiautomator-v18:$versions.uiautomator"
 
     implementation "com.squareup.retrofit2:retrofit:$versions.retrofit"
-    implementation "com.squareup.spoon:spoon-client:$versions.spoon"
 }
 
 task sourcesJar(type: Jar) {
