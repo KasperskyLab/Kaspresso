@@ -1,9 +1,10 @@
-package com.kaspersky.kaspressample
+package com.kaspersky.kaspressample.tests.paramertized
 
 import android.Manifest
 import android.support.test.rule.ActivityTestRule
 import android.support.test.rule.GrantPermissionRule
 import android.support.test.runner.AndroidJUnit4
+import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.scenarios.CheckHomeTitleNoParametersScenario
 import com.kaspersky.kaspressample.screen.MainScreen
 import com.kaspersky.kaspresso.viewactions.orientation.Orientation
@@ -16,15 +17,13 @@ class OpenHomeScreenParametrizedTest : BaseParametrizedTest() {
 
     private val mainScreen = MainScreen()
 
-    @Rule
-    @JvmField
+    @get:Rule
     val runtimePermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
         Manifest.permission.WRITE_EXTERNAL_STORAGE,
         Manifest.permission.READ_EXTERNAL_STORAGE
     )
 
-    @Rule
-    @JvmField
+    @get:Rule
     val activityTestRule = ActivityTestRule(MainActivity::class.java, true, false)
 
     @Test
@@ -34,15 +33,35 @@ class OpenHomeScreenParametrizedTest : BaseParametrizedTest() {
         }.after {
             device.exploit.setOrientation(Orientation.Portrait)
         }.initialisation {
-            rawData(2)
-            rawData(3)
+            company {
+                name = "Microsoft"
+                city = "Redmond"
+                country = "USA"
+            }
+            company {
+                name = "Google"
+                city = "Mountain View"
+                country = "USA"
+            }
+            owner {
+                firstName = "Satya"
+                secondName = "Nadella"
+                country = "India"
+            }
+            owner {
+                firstName = "Sundar"
+                secondName = "Pichai"
+                country = "India"
+            }
         }.transformation {
-            addString("Hello world")
+            makeOwner(ownerSurname = "Nadella", companyName = "Microsoft")
+            makeOwner(ownerSurname = "Pichai", companyName = "Google")
         }.run {
             step("Open Home Screen") {
+                kLogger.i(data.companies.toString())
                 mainScreen {
                     descriptionText {
-                        hasText(data.list.joinToString(" "))
+                        hasText(data.owners.first().firstName!!) // Oops, it fails, please comment
                     }
                     nextButton {
                         click()
