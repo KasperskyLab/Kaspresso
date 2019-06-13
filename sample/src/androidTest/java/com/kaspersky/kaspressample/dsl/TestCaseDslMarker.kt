@@ -1,4 +1,4 @@
-package com.kaspersky.kaspressample.data
+package com.kaspersky.kaspressample.dsl
 
 @DslMarker
 annotation class TestCaseDslMarker

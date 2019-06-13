@@ -9,10 +9,10 @@ class TestRunnerScreenshotInterceptor(
 ) : TestRunInterceptor {
 
     override fun onAfterSectionFinishedFailed(testInfo: TestInfo, throwable: Throwable) {
-        screenshots.makeIfPossible("AfterTestSection_failure_${throwable.javaClass.simpleName}")
+        screenshots.take("AfterTestSection_failure_${throwable.javaClass.simpleName}")
     }
 
     override fun onBeforeSectionFinishedFailed(testInfo: TestInfo, throwable: Throwable) {
-        screenshots.makeIfPossible("BeforeTestSection_failure_${throwable.javaClass.simpleName}")
+        screenshots.take("BeforeTestSection_failure_${throwable.javaClass.simpleName}")
     }
 }

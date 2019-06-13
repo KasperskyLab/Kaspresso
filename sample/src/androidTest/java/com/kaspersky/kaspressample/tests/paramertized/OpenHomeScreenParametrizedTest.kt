@@ -1,9 +1,11 @@
-package com.kaspersky.kaspressample
+package com.kaspersky.kaspressample.tests.paramertized
 
 import android.Manifest
 import android.support.test.rule.ActivityTestRule
 import android.support.test.rule.GrantPermissionRule
 import android.support.test.runner.AndroidJUnit4
+import com.kaspersky.kaspressample.MainActivity
+import com.kaspersky.kaspressample.scenarios.CheckHomeTitleNoParametersScenario
 import com.kaspersky.kaspressample.screen.MainScreen
 import com.kaspersky.kaspresso.viewactions.orientation.Orientation
 import org.junit.Rule
@@ -31,15 +33,37 @@ class OpenHomeScreenParametrizedTest : BaseParametrizedTest() {
         }.after {
             device.exploit.setOrientation(Orientation.Portrait)
         }.init {
-            rawData(2)
-            rawData(3)
+            company {
+                name = "Microsoft"
+                city = "Redmond"
+                country = "USA"
+            }
+            company {
+                name = "Google"
+                city = "Mountain View"
+                country = "USA"
+            }
+            owner {
+                firstName = "Satya"
+                secondName = "Nadella"
+                country = "India"
+            }
+            owner {
+                firstName = "Sundar"
+                secondName = "Pichai"
+                country = "India"
+            }
         }.transform {
-            addString("Hello world")
+            makeOwner(ownerSurname = "Nadella", companyName = "Microsoft")
+            makeOwner(ownerSurname = "Pichai", companyName = "Google")
         }.run {
             step("Open Home Screen") {
+                kLogger.i(data.companies.toString())
+
                 mainScreen {
                     descriptionText {
-                        hasText(data.list.joinToString(" "))
+                        // Oops, it fails, please comment if you want to pass the test
+                        hasText(data.owners.first().firstName ?: "")
                     }
 
                     nextButton {

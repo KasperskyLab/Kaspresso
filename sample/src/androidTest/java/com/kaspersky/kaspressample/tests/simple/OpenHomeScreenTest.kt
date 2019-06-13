@@ -1,19 +1,21 @@
-package com.kaspersky.kaspressample
+package com.kaspersky.kaspressample.tests.simple
 
 import android.Manifest
 import android.support.test.rule.ActivityTestRule
 import android.support.test.rule.GrantPermissionRule
 import android.support.test.runner.AndroidJUnit4
+import com.kaspersky.kaspressample.scenarios.CheckHomeTitleScenario
+import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.screen.HomeScreen
 import com.kaspersky.kaspressample.screen.MainScreen
-import com.kaspersky.kaspresso.testcases.api.testcaserule.TestCaseRule
+import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import com.kaspersky.kaspresso.viewactions.orientation.Orientation
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class OpenHomeScreenTestWithRule {
+class OpenHomeScreenTest : TestCase() {
 
     private val mainScreen = MainScreen()
     private val homeScreen = HomeScreen()
@@ -27,24 +29,23 @@ class OpenHomeScreenTestWithRule {
     @get:Rule
     val activityTestRule = ActivityTestRule(MainActivity::class.java, true, false)
 
-    @get:Rule
-    val testCaseRule = TestCaseRule(javaClass.simpleName)
-
     @Test
     fun test() {
-        testCaseRule.before {
+        before {
             device.exploit.setOrientation(Orientation.Landscape)
             activityTestRule.launchActivity(null)
         }.after {
             device.exploit.setOrientation(Orientation.Portrait)
         }.run {
-
-            step("Open Home screen") {
+            step("Open Home Screen") {
                 mainScreen {
                     nextButton {
                         click()
                     }
                 }
+            }
+
+            step("Check Home Screen") {
                 homeScreen {
                     title {
                         isVisible()
@@ -52,6 +53,22 @@ class OpenHomeScreenTestWithRule {
                     }
                 }
             }
+            step("My Awesome Scenario") {
+                scenario(
+                    CheckHomeTitleScenario()
+                )
+
+                homeScreen {
+                    title {
+                        //hasText("Ooops!") //Uncomment to fail test
+                    }
+                }
+                step("Just Empty SubStep") {
+                    step("Just Empty SubSubStep") {}
+                }
+            }
+
+
             step("Just Empty Step") {}
         }
     }

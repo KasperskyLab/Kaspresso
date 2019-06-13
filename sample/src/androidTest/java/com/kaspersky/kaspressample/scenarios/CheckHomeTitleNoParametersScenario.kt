@@ -1,4 +1,4 @@
-package com.kaspersky.kaspressample
+package com.kaspersky.kaspressample.scenarios
 
 import com.kaspersky.kaspresso.testcases.api.scenario.BaseScenario
 import com.kaspersky.kaspresso.testcases.core.testcontext.TestContext
