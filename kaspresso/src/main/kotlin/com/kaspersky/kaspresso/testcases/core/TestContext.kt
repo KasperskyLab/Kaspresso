@@ -48,6 +48,7 @@ class TestContext<Data> internal constructor(
                 invokeSafely(exceptions) { it.interceptAfterWithError(stepInfo, throwable) }
                 invokeSafely(exceptions) { it.interceptAfterFinally(stepInfo) }
             }
+
             exceptions.add(throwable)
         }
 

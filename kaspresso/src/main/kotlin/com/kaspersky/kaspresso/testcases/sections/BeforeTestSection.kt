@@ -18,10 +18,7 @@ class BeforeTestSection<InitData, Data> internal constructor(
      * @param actions actions to be wrapped and invoked before the test.
      * @return [AfterTestSection] to continue building a test.
      */
-    fun beforeTest(
-        actions: BaseTestContext.() -> Unit
-    ): AfterTestSection<InitData, Data> {
-
+    fun beforeTest(actions: BaseTestContext.() -> Unit): AfterTestSection<InitData, Data> {
         return AfterTestSection(
             configurator,
             testBodyBuilder.apply { beforeTestActions = actions }

@@ -8,8 +8,8 @@ internal class TestBody<InitData, Data>(
     val beforeTestActions: BaseTestContext.() -> Unit,
     val afterTestActions: BaseTestContext.() -> Unit,
     val steps: TestContext<Data>.() -> Unit,
-    var initDataActions: (InitData.() -> Unit)?,
-    val transformDataActionsList: List<Data.() -> Unit>,
+    var initActions: (InitData.() -> Unit)?,
+    val transformActionsList: List<Data.() -> Unit>,
     val dataProducer: (((InitData.() -> Unit)?) -> Data)
 ) {
     internal class Builder<InitData, Data> {
@@ -17,8 +17,8 @@ internal class TestBody<InitData, Data>(
         var beforeTestActions: (BaseTestContext.() -> Unit)? = null
         var afterTestActions: (BaseTestContext.() -> Unit)? = null
         var steps: (TestContext<Data>.() -> Unit)? = null
-        var initDataActions: (InitData.() -> Unit)? = null
-        val transformDataActionsList: MutableList<Data.() -> Unit> = mutableListOf()
+        var initActions: (InitData.() -> Unit)? = null
+        val transformActionsList: MutableList<Data.() -> Unit> = mutableListOf()
         var dataProducer: (((InitData.() -> Unit)?) -> Data)? = null
 
         fun build(): TestBody<InitData, Data> {
@@ -29,14 +29,14 @@ internal class TestBody<InitData, Data>(
                 requireNotNull(beforeTestActions),
                 requireNotNull(afterTestActions),
                 requireNotNull(steps),
-                initDataActions,
-                transformDataActionsList,
+                initActions,
+                transformActionsList,
                 requireNotNull(dataProducer)
             )
         }
 
         private fun checkInitializationInvariants() {
-            if (transformDataActionsList.isNotEmpty() && initDataActions == null) {
+            if (transformActionsList.isNotEmpty() && initActions == null) {
                 throw IllegalArgumentException("Init data section can not be empty for non empty transform data section.")
             }
         }

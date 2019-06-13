@@ -30,10 +30,10 @@ class OpenHomeScreenParametrizedTest : BaseParametrizedTest() {
             activityTestRule.launchActivity(null)
         }.after {
             device.exploit.setOrientation(Orientation.Portrait)
-        }.initData {
+        }.init {
             rawData(2)
             rawData(3)
-        }.transformData {
+        }.transform {
             addString("Hello world")
         }.run {
             step("Open Home Screen") {

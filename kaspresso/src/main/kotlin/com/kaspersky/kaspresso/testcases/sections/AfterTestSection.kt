@@ -16,12 +16,9 @@ class AfterTestSection<InitData, Data> internal constructor(
      * will be invoked itself, and sets this lambda as the [TestBody.afterTestActions].
      *
      * @param actions actions to be wrapped and invoked after the test.
-     * @return [InitDataSection] to continue building a test.
+     * @return [InitSection] to continue building a test.
      */
-    fun after(
-        actions: BaseTestContext.() -> Unit
-    ): InitDataSection<InitData, Data> {
-
+    fun after(actions: BaseTestContext.() -> Unit): InitSection<InitData, Data> {
         return MainTestSection(
             configurator,
             testBodyBuilder.apply { afterTestActions = actions }

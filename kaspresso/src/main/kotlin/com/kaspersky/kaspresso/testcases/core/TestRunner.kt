@@ -32,8 +32,8 @@ internal class TestRunner<InitData, Data>(
             val data: Data = runBeforeTestSection(
                 testInfo,
                 testBody.beforeTestActions,
-                testBody.initDataActions,
-                testBody.transformDataActionsList,
+                testBody.initActions,
+                testBody.transformActionsList,
                 testRunInterceptor,
                 testBody.dataProducer
             )
