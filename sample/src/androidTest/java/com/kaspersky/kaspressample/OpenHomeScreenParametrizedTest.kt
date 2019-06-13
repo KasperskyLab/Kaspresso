@@ -4,6 +4,7 @@ import android.Manifest
 import android.support.test.rule.ActivityTestRule
 import android.support.test.rule.GrantPermissionRule
 import android.support.test.runner.AndroidJUnit4
+import com.kaspersky.kaspressample.scenarios.CheckHomeTitleNoParametersScenario
 import com.kaspersky.kaspressample.screen.MainScreen
 import com.kaspersky.kaspresso.viewactions.orientation.Orientation
 import org.junit.Rule
