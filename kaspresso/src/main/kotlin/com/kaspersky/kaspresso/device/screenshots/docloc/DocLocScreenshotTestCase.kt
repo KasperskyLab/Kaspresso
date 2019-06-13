@@ -98,10 +98,8 @@ abstract class DocLocScreenshotTestCase(
 
     @Before
     fun setup() {
-        screenshotsDir = Environment
-            .getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
+        screenshotsDir = screenshotsDirectory
             .resolve(localeRule.locale.toString())
-            .resolve(screenshotsDirectory)
 
         screenshotCapturer = DocLocScreenshotCapturer(
             screenshotsDir,
