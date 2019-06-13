@@ -15,8 +15,8 @@ UiAutomator, который позволяет проверять работу �
 ```kotlin
     @RunWith(AndroidJUnit4::class)
     class MainActivityTest {
-        @Rule
-        @JvmField
+
+        @get:Rule
         val rule = ActivityTestRule(MainActivity::class.java)
     
         @Test
@@ -109,8 +109,8 @@ UiAutomator, который позволяет проверять работу �
 ```kotlin
     @RunWith(AndroidJUnit4::class)
     class MainActivityTest {
-        @Rule
-        @JvmField
+
+        @get:Rule
         val rule = ActivityTestRule(MainActivity::class.java)
 
         val screen = MainActivityScreen()
@@ -217,8 +217,7 @@ UiAutomator, который позволяет проверять работу �
             failureInterceptor = LoggingFailureInterceptor(logger)
         }
     ) {
-        @Rule
-        @JvmField
+        @get:Rule
         val mActivityRule = ActivityTestRule(MainActivity::class.java)
 
         @Test

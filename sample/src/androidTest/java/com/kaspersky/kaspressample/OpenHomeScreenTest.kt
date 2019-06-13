@@ -18,15 +18,13 @@ class OpenHomeScreenTest : TestCase() {
     private val mainScreen = MainScreen()
     private val homeScreen = HomeScreen()
 
-    @Rule
-    @JvmField
+    @get:Rule
     val runtimePermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
         Manifest.permission.WRITE_EXTERNAL_STORAGE,
         Manifest.permission.READ_EXTERNAL_STORAGE
     )
 
-    @Rule
-    @JvmField
+    @get:Rule
     val activityTestRule = ActivityTestRule(MainActivity::class.java, true, false)
 
     @Test
