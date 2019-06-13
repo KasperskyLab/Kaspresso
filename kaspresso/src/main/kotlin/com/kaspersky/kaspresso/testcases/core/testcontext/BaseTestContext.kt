@@ -1,4 +1,4 @@
-package com.kaspersky.kaspresso.testcases.core
+package com.kaspersky.kaspresso.testcases.core.testcontext
 
 import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.device.Device

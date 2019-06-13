@@ -1,7 +1,7 @@
-package com.kaspersky.kaspresso.testcases.core
+package com.kaspersky.kaspresso.testcases.core.step
 
-import com.kaspersky.kaspresso.testcases.models.InternalStepInfo
-import com.kaspersky.kaspresso.testcases.models.StepInfo
+import com.kaspersky.kaspresso.testcases.models.info.InternalStepInfo
+import com.kaspersky.kaspresso.testcases.models.info.StepInfo
 import com.kaspersky.kaspresso.testcases.models.StepStatus
 
 /**

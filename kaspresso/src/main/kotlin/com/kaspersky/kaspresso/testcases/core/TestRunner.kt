@@ -4,10 +4,13 @@ import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.extensions.other.getException
 import com.kaspersky.kaspresso.interceptors.TestRunInterceptor
 import com.kaspersky.kaspresso.interceptors.impl.composite.TestRunCompositeInterceptor
+import com.kaspersky.kaspresso.testcases.core.step.StepsManager
+import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
+import com.kaspersky.kaspresso.testcases.core.testcontext.TestContext
 import com.kaspersky.kaspresso.testcases.models.MainTestSectionResult
-import com.kaspersky.kaspresso.testcases.models.StepInfo
+import com.kaspersky.kaspresso.testcases.models.info.StepInfo
 import com.kaspersky.kaspresso.testcases.models.TestBody
-import com.kaspersky.kaspresso.testcases.models.TestInfo
+import com.kaspersky.kaspresso.testcases.models.info.TestInfo
 
 internal class TestRunner<InitData, Data>(
     private val configurator: Configurator

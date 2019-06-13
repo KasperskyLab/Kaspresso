@@ -1,8 +1,8 @@
-package com.kaspersky.kaspresso.testcases.sections
+package com.kaspersky.kaspresso.testcases.core.sections
 
 import com.kaspersky.kaspresso.configurator.Configurator
-import com.kaspersky.kaspresso.testcases.api.base.BaseTestCase
-import com.kaspersky.kaspresso.testcases.core.TestContext
+import com.kaspersky.kaspresso.testcases.api.testcase.BaseTestCase
+import com.kaspersky.kaspresso.testcases.core.testcontext.TestContext
 import com.kaspersky.kaspresso.testcases.core.TestRunner
 import com.kaspersky.kaspresso.testcases.models.TestBody
 

@@ -33,7 +33,7 @@ import com.kaspersky.kaspresso.interceptors.impl.screenshot.TestRunnerScreenshot
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.logger.UiTestLoggerImpl
 import com.kaspersky.kaspresso.report.impl.AllureReportWriter
-import com.kaspersky.kaspresso.testcases.core.TestContext
+import com.kaspersky.kaspresso.testcases.core.testcontext.TestContext
 import com.agoda.kakao.configurator.KakaoConfigurator
 
 /**

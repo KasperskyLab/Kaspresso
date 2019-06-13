@@ -1,8 +1,8 @@
-package com.kaspersky.kaspresso.testcases.core
+package com.kaspersky.kaspresso.testcases.core.step
 
-import com.kaspersky.kaspresso.testcases.models.StepInfo
+import com.kaspersky.kaspresso.testcases.models.info.StepInfo
 
-interface StepInfoProducer {
+internal interface StepInfoProducer {
 
     /**
      * Produce correct step info. Only this function may produce a StepInfo!

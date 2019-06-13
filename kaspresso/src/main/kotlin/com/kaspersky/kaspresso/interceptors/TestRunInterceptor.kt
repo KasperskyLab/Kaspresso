@@ -1,6 +1,6 @@
 package com.kaspersky.kaspresso.interceptors
 
-import com.kaspersky.kaspresso.testcases.models.TestInfo
+import com.kaspersky.kaspresso.testcases.models.info.TestInfo
 
 interface TestRunInterceptor {
 

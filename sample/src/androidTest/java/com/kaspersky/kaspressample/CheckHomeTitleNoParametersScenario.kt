@@ -1,7 +1,7 @@
 package com.kaspersky.kaspressample
 
-import com.kaspersky.kaspresso.testcases.api.base.BaseScenario
-import com.kaspersky.kaspresso.testcases.core.TestContext
+import com.kaspersky.kaspresso.testcases.api.scenario.BaseScenario
+import com.kaspersky.kaspresso.testcases.core.testcontext.TestContext
 
 class CheckHomeTitleNoParametersScenario<ScenarioData> : BaseScenario<ScenarioData>() {
 

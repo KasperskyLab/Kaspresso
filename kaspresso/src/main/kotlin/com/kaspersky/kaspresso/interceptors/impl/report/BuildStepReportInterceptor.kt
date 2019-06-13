@@ -2,7 +2,7 @@ package com.kaspersky.kaspresso.interceptors.impl.report
 
 import com.kaspersky.kaspresso.interceptors.TestRunInterceptor
 import com.kaspersky.kaspresso.report.ReportWriter
-import com.kaspersky.kaspresso.testcases.models.TestInfo
+import com.kaspersky.kaspresso.testcases.models.info.TestInfo
 
 class BuildStepReportInterceptor(
     private val reportWriter: ReportWriter

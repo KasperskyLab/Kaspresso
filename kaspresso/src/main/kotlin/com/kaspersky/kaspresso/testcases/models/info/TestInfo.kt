@@ -1,6 +1,6 @@
-package com.kaspersky.kaspresso.testcases.models
+package com.kaspersky.kaspresso.testcases.models.info
 
-internal data class TestInfo(
+data class TestInfo internal constructor(
     val testName: String,
     val stepInfos: List<StepInfo> = listOf(),
     val throwable: Throwable? = null

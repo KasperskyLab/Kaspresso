@@ -1,11 +1,12 @@
-package com.kaspersky.kaspresso.testcases.core
+package com.kaspersky.kaspresso.testcases.core.testcontext
 
 import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.extensions.other.forEachSafely
 import com.kaspersky.kaspresso.extensions.other.invokeSafely
 import com.kaspersky.kaspresso.extensions.other.throwAll
 import com.kaspersky.kaspresso.interceptors.StepInterceptor
-import com.kaspersky.kaspresso.testcases.api.base.BaseScenario
+import com.kaspersky.kaspresso.testcases.api.scenario.BaseScenario
+import com.kaspersky.kaspresso.testcases.core.step.StepInfoProducer
 
 /**
  * Special class to operate with in user scenario.

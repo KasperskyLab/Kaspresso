@@ -1,7 +1,7 @@
 package com.kaspersky.kaspresso.testcases.models
 
-import com.kaspersky.kaspresso.testcases.core.BaseTestContext
-import com.kaspersky.kaspresso.testcases.core.TestContext
+import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
+import com.kaspersky.kaspresso.testcases.core.testcontext.TestContext
 
 internal class TestBody<InitData, Data>(
     val testName: String,
