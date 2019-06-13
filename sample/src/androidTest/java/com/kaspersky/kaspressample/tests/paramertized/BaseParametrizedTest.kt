@@ -19,4 +19,5 @@ open class BaseParametrizedTest(configBuilder: Configurator.Builder = Configurat
             }
         }
     }
+
 }
