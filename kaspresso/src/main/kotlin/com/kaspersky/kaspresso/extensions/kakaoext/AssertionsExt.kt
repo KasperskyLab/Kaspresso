@@ -1,8 +1,8 @@
 package com.kaspersky.kaspresso.extensions.kakaoext
 
-import com.kaspersky.kaspresso.configurator.ConfiguratorExt
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.agoda.kakao.common.assertions.BaseAssertions
+import com.kaspersky.kaspresso.configurator.Configurator
 
 /**
  * A multiple assertion.
@@ -12,7 +12,7 @@ import com.agoda.kakao.common.assertions.BaseAssertions
 fun <T : BaseAssertions> T.compositeCheck(
     vararg asserts: T.() -> Unit
 ) {
-    val logger: UiTestLogger = ConfiguratorExt.logger
+    val logger: UiTestLogger = Configurator.logger
     var cachedThrowable: Throwable? = null
 
     asserts.forEach { assert ->
@@ -41,7 +41,7 @@ fun <T : BaseAssertions> T.compositeCheck(
 fun <T : BaseAssertions> T.safeCompositeCheck(
     vararg asserts: T.() -> Unit
 ): Boolean {
-    val logger: UiTestLogger = ConfiguratorExt.logger
+    val logger: UiTestLogger = Configurator.logger
 
     asserts.forEach { assert ->
         try {

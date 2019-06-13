@@ -104,6 +104,16 @@ class Configurator(
 
         internal const val DEFAULT_INNER_LOGGER_TAG: String = "KASPRESSO"
         internal const val DEFAULT_OUTER_LOGGER_TAG: String = "KASPRESSO_SPECIAL"
+
+        var attemptsTimeoutMs: Long = DEFAULT_ATTEMPTS_TIMEOUT_MS
+        var attemptsIntervalMs: Long = DEFAULT_ATTEMPTS_INTERVAL_MS
+        var logger: UiTestLogger = UiTestLoggerImpl(DEFAULT_INNER_LOGGER_TAG)
+        var allowedExceptionsForAttempt: Set<Class<out Throwable>> =
+            setOf(
+                PerformException::class.java,
+                NoMatchingViewException::class.java,
+                AssertionError::class.java
+            )
     }
 
     /**
@@ -235,10 +245,10 @@ class Configurator(
                 initWebInteractionDelegateFactory { WebInteractionDelegateKaspressoImpl(it, configurator) }
             }
 
-            ConfiguratorExt.allowedExceptionsForAttempt = allowedExceptionsForAttempt
-            ConfiguratorExt.attemptsIntervalMs = attemptsIntervalMs
-            ConfiguratorExt.attemptsTimeoutMs = attemptsTimeoutMs
-            ConfiguratorExt.logger = logger
+            Configurator.allowedExceptionsForAttempt = allowedExceptionsForAttempt
+            Configurator.attemptsIntervalMs = attemptsIntervalMs
+            Configurator.attemptsTimeoutMs = attemptsTimeoutMs
+            Configurator.logger = logger
 
             return configurator
         }
