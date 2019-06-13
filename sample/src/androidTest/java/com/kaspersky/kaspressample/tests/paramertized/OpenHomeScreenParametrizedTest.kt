@@ -61,7 +61,8 @@ class OpenHomeScreenParametrizedTest : BaseParametrizedTest() {
                 kLogger.i(data.companies.toString())
                 mainScreen {
                     descriptionText {
-                        hasText(data.owners.first().firstName!!) // Oops, it fails, please comment
+                        // Oops, it fails, please comment if you want to pass the test
+                        hasText(data.owners.first().firstName ?: "") 
                     }
                     nextButton {
                         click()
