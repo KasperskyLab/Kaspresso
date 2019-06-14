@@ -53,10 +53,18 @@ class WebViewTest : TestCase() {
 
                     webView {
                         withElement(
+                            Locator.XPATH,
+                            "/html/body/header/section/div[1]/div/div[1]/div[2]/button[3]"
+                        ) {
+                            hasText("Зарегистрироваться")
+                        }
+
+                        withElement(
                             Locator.CLASS_NAME,
                             "btn"
                         ) {
                             containsText("Войти")
+                            web.withElement(ref).perform(DriverAtoms.getText())
                         }
 
                         // same element
@@ -64,7 +72,7 @@ class WebViewTest : TestCase() {
                             Locator.XPATH,
                             "/html/body/header/section/div[3]/div[2]/button"
                         ) {
-                            web.withElement(ref).perform(DriverAtoms.getText())
+                            hasText("Войти")
                             click()
                         }
                     }

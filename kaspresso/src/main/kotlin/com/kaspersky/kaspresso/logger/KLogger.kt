@@ -5,7 +5,8 @@ package com.kaspersky.kaspresso.logger
  * calls to wrapped implementation of [UiTestLogger].
  */
 class KLogger(
-    private val logger: UiTestLogger
+    private val logger: UiTestLogger,
+    override var startText: String? = null
 ): UiTestLogger {
 
     override fun i(text: String) = logger.i(text)

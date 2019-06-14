@@ -27,6 +27,6 @@ class LoggingWebAssertionInterceptor(
         view: WebView?,
         result: Any
     ) {
-        logger.i("${webAssertionProxy.describe()} with result=\"$result\"")
+        logger.finishI("${webAssertionProxy.describe()} with result=\"$result\"")
     }
 }

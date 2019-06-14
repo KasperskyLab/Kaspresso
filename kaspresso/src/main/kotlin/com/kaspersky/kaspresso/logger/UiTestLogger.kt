@@ -5,6 +5,8 @@ package com.kaspersky.kaspresso.logger
  */
 interface UiTestLogger {
 
+    var startText: String?
+
     /**
      * Info level of logging.
      */
@@ -65,5 +67,14 @@ interface UiTestLogger {
      */
     fun line() {
         i("___________________________________________________________________________")
+    }
+
+    fun startI(startText: String) {
+        this.startText = startText
+    }
+
+    fun finishI(finishText: String) {
+        i("${startText?.let { "$it " } ?: ""}$finishText")
+        startText = null
     }
 }

@@ -28,9 +28,9 @@ class LoggingAtomInterceptor(
         }
 
         if (isFindElementAction(atom)) {
-            logger.i("On web element with args=${lastArgs?.let { it } ?: "null"} perform$evalMessage")
+            logger.startI("On web element with args=${lastArgs?.let { it } ?: "null"} perform$evalMessage")
         } else {
-            logger.i("web action: ${getActionDescription(atom)}$evalMessage")
+            logger.finishI("web action: ${getActionDescription(atom)}$evalMessage")
         }
     }
 

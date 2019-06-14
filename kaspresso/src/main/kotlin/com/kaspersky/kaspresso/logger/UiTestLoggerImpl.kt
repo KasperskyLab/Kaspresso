@@ -6,7 +6,8 @@ import android.util.Log
  * Default implementation of [UiTestLogger] using [android.util.Log].
  */
 class UiTestLoggerImpl(
-    private val tag: String
+    private val tag: String,
+    override var startText: String? = null
 ) : UiTestLogger {
 
     override fun i(text: String) {
