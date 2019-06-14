@@ -1,7 +1,6 @@
 package com.kaspersky.kaspresso.testcases.api.testcase
 
 import android.Manifest
-import android.os.Environment
 import android.support.test.rule.GrantPermissionRule
 import com.kaspersky.kaspresso.device.locales.Locales
 import com.kaspersky.kaspresso.device.screenshots.docloc.DocLocScreenshotCapturer
@@ -82,7 +81,6 @@ abstract class DocLocScreenshotTestCase(
     private lateinit var screenshotsDir: File
     private lateinit var screenshotCapturer: DocLocScreenshotCapturer
 
-    private val clearedDirectories = mutableSetOf<File>()
     @PublishedApi internal val logger = configurator.logger
     private val confLocales: Locales = Locales(logger)
 
@@ -100,10 +98,8 @@ abstract class DocLocScreenshotTestCase(
 
     @Before
     fun setup() {
-        screenshotsDir = Environment
-            .getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
+        screenshotsDir = screenshotsDirectory
             .resolve(localeRule.locale.toString())
-            .resolve(screenshotsDirectory)
 
         screenshotCapturer = DocLocScreenshotCapturer(
             screenshotsDir,
@@ -113,11 +109,6 @@ abstract class DocLocScreenshotTestCase(
         )
 
         testFailRule.screenshotCapturer = screenshotCapturer
-
-        if (screenshotsDir !in clearedDirectories) {
-            clearedDirectories.add(screenshotsDir)
-            emptyScreenshotDir()
-        }
     }
 
     /**
@@ -163,14 +154,5 @@ abstract class DocLocScreenshotTestCase(
             T::class.java.getAllInterfaces(),
             UiInvocationHandler(view as Any, logger)
         ) as T
-    }
-
-    private fun emptyScreenshotDir() {
-        with(screenshotsDir) {
-            if (exists() && isDirectory) {
-                logger.i("Deleting $screenshotsDir")
-                deleteRecursively()
-            }
-        }
     }
 }

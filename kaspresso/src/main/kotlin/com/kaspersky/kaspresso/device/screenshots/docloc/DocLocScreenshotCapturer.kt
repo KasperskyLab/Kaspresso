@@ -37,8 +37,8 @@ internal class DocLocScreenshotCapturer(
      */
     fun captureScreenshot(screenshotName: String) {
         wait(SCREENSHOT_CAPTURE_DELAY_MS) {
-            screenshoter.screenshot(screenshotName)
-            saveScreenshotMetadata(screenshotsDir, screenshotName)
+            val screenshotFile = screenshoter.screenshot(screenshotName)
+            saveScreenshotMetadata(screenshotFile.parentFile, screenshotName)
         }
     }
 
