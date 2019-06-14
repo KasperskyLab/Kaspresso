@@ -105,10 +105,10 @@ class Configurator(
         internal const val DEFAULT_INNER_LOGGER_TAG: String = "KASPRESSO"
         internal const val DEFAULT_OUTER_LOGGER_TAG: String = "KASPRESSO_SPECIAL"
 
-        var attemptsTimeoutMs: Long = DEFAULT_ATTEMPTS_TIMEOUT_MS
-        var attemptsIntervalMs: Long = DEFAULT_ATTEMPTS_INTERVAL_MS
-        var logger: UiTestLogger = UiTestLoggerImpl(DEFAULT_INNER_LOGGER_TAG)
-        var allowedExceptionsForAttempt: Set<Class<out Throwable>> =
+        internal var attemptsTimeoutMs: Long = DEFAULT_ATTEMPTS_TIMEOUT_MS
+        internal var attemptsIntervalMs: Long = DEFAULT_ATTEMPTS_INTERVAL_MS
+        internal var logger: UiTestLogger = UiTestLoggerImpl(DEFAULT_INNER_LOGGER_TAG)
+        internal var allowedExceptionsForAttempt: Set<Class<out Throwable>> =
             setOf(
                 PerformException::class.java,
                 NoMatchingViewException::class.java,
