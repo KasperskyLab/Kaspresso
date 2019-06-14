@@ -1,5 +1,6 @@
 package com.kaspersky.kaspressample
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
@@ -27,6 +28,12 @@ class MainActivity : AppCompatActivity() {
                         .commitNow()
                 }
             }
+        }
+
+        activity_main_button_webview.setOnClickListener {
+            startActivity(
+                Intent(this, WebViewActivity::class.java)
+            )
         }
     }
 }

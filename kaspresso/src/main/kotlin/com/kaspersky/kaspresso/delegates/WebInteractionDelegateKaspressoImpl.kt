@@ -29,7 +29,15 @@ open class WebInteractionDelegateKaspressoImpl(
     @CheckResult
     @CheckReturnValue
     override fun withElement(ref: Atom<ElementReference>): WebInteractionDelegate {
-        return WebInteractionDelegateKaspressoImpl(webInteraction.withElement(ref), configurator)
+        val withElementProxy = AtomProxy(
+            ref,
+            configurator.atomInterceptors
+        )
+
+        return WebInteractionDelegateKaspressoImpl(
+            execute { webInteraction.withElement(withElementProxy) },
+            configurator
+        )
     }
 
     /**

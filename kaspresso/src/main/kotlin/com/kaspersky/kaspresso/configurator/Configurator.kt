@@ -114,8 +114,13 @@ class Configurator(
                 return Builder().apply {
                     viewActionInterceptors = listOf(LoggingViewActionInterceptor(logger))
                     viewAssertionInterceptors = listOf(LoggingViewAssertionInterceptor(logger))
+
+                    atomInterceptors = listOf(LoggingAtomInterceptor(logger))
+                    webAssertionInterceptors = listOf(LoggingWebAssertionInterceptor(logger))
+
                     executingInterceptor = FlakySafeExecutingInterceptor()
                     failureInterceptor = LoggingFailureInterceptor(logger)
+
                     stepInterceptors = listOf(
                         LoggingStepInterceptor(logger),
                         ScreenshotStepInterceptor(screenshots)

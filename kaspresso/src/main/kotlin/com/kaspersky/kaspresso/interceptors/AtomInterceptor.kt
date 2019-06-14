@@ -1,5 +1,6 @@
 package com.kaspersky.kaspresso.interceptors
 
+import android.support.test.espresso.web.model.Atom
 import android.support.test.espresso.web.model.Evaluation
 
 /**
@@ -12,5 +13,9 @@ interface AtomInterceptor {
      *
      * @param evaluation represents the results of a Javascript execution.
      */
-    fun intercept(evaluation: Evaluation?)
+    fun <R> intercept(
+        evaluation: Evaluation?,
+        atom: Atom<R>,
+        lastArgs: MutableList<Any>?
+    )
 }
