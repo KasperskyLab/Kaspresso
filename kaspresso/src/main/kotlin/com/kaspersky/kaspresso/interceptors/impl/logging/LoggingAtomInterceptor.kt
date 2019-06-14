@@ -23,15 +23,21 @@ class LoggingAtomInterceptor(
         atom: Atom<R>,
         lastArgs: MutableList<Any>?
     ) {
-        val message: String = with(evaluation) {
-            if (this != null && hasMessage()) {
-                message
-            } else {
-                "${getActionDescription(atom)}${lastArgs?.let { " with args = $it" } ?: ""}"
-            }
+        val evalMessage: String = with(evaluation) {
+            if (this != null && hasMessage()) " with message=\"$message\"" else ""
         }
 
-        logger.i("Web action: $message")
+        if (isFindElementAction(atom)) {
+            logger.i("On web element with args=${lastArgs?.let { it } ?: "null"} perform$evalMessage")
+        } else {
+            logger.i("web action: ${getActionDescription(atom)}$evalMessage")
+        }
+    }
+
+    private fun <R> isFindElementAction(atom: Atom<R>): Boolean {
+        with(WebDriverAtomScriptsProvider) {
+            return atom.script == FIND_ELEMENT_ANDROID || atom.script == FIND_ELEMENTS_ANDROID
+        }
     }
 
     private fun <R> getActionDescription(atom: Atom<R>): String {
@@ -39,14 +45,14 @@ class LoggingAtomInterceptor(
             when (atom.script) {
                 CLEAR_ANDROID -> "clear"
                 CLICK_ANDROID -> "click on element"
-                FIND_ELEMENT_ANDROID -> "find element"
-                FIND_ELEMENTS_ANDROID -> "find elements"
                 SCROLL_INTO_VIEW_ANDROID -> "scroll into view"
                 SEND_KEYS_ANDROID -> "send keys"
                 ACTIVE_ELEMENT_ANDROID -> "active element"
                 FRAME_BY_ID_OR_NAME_ANDROID -> "frame by id or name"
                 FRAME_BY_INDEX_ANDROID -> "frame by index android"
                 GET_VISIBLE_TEXT_ANDROID -> "get visible text"
+                FIND_ELEMENT_ANDROID -> "find element"
+                FIND_ELEMENTS_ANDROID -> "find elements"
                 else -> "unknown action"
             }
         }

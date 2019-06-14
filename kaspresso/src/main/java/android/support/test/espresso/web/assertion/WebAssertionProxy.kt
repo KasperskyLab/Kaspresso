@@ -32,7 +32,7 @@ class WebAssertionProxy<E>(
      * @return a string description of [WebAssertion].
      */
     fun describe(): String {
-        val builder = StringBuilder("Web assertion: ")
+        val builder = StringBuilder("web assertion: ")
         matcher.describeTo(StringDescription(builder))
         return builder.toString()
     }

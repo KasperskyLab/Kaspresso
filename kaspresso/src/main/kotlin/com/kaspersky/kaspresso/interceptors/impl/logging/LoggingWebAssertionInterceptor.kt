@@ -2,7 +2,6 @@ package com.kaspersky.kaspresso.interceptors.impl.logging
 
 import android.support.test.espresso.web.assertion.WebAssertionProxy
 import android.webkit.WebView
-import com.kaspersky.kaspresso.extensions.other.describe
 import com.kaspersky.kaspresso.interceptors.WebAssertionInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
 
@@ -28,6 +27,6 @@ class LoggingWebAssertionInterceptor(
         view: WebView?,
         result: Any
     ) {
-        logger.i("${webAssertionProxy.describe()} on ${view.describe()} with result: $result")
+        logger.i("${webAssertionProxy.describe()} with result=\"$result\"")
     }
 }
