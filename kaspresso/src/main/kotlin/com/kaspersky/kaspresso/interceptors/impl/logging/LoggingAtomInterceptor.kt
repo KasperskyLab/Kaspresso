@@ -24,13 +24,13 @@ class LoggingAtomInterceptor(
         lastArgs: MutableList<Any>?
     ) {
         val evalMessage: String = with(evaluation) {
-            if (this != null && hasMessage()) " with message=\"$message\"" else ""
+            if (this != null && hasMessage()) "with message=\"$message\"" else ""
         }
 
         if (isFindElementAction(atom)) {
-            logger.startI("On web element with args=${lastArgs?.let { it } ?: "null"} perform$evalMessage")
+            logger.startI("On web element with args=$lastArgs perform $evalMessage".trim())
         } else {
-            logger.finishI("web action: ${getActionDescription(atom)}$evalMessage")
+            logger.finishI("web action: ${getActionDescription(atom)} $evalMessage".trim())
         }
     }
 

@@ -28,7 +28,6 @@ class WebViewActivity : AppCompatActivity() {
                     return true
                 }
 
-                // Для старых устройств
                 override fun shouldOverrideUrlLoading(
                     view: WebView,
                     url: String
@@ -41,7 +40,7 @@ class WebViewActivity : AppCompatActivity() {
 
             settings.javaScriptEnabled = true
 
-            loadUrl("https://my.kaspersky.com/ru/")
+            loadUrl("https://my.kaspersky.com/en/")
         }
     }
 

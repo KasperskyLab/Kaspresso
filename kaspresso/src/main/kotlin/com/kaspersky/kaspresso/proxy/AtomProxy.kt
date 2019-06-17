@@ -22,8 +22,7 @@ class AtomProxy<R>(
      * @return a [List] of objects to pass to the script as arguments.
      */
     override fun getArguments(elementContext: ElementReference?): MutableList<Any> {
-        lastArgs = atom.getArguments(elementContext)
-        return lastArgs!!
+        return atom.getArguments(elementContext).also { lastArgs = it }
     }
 
     /**

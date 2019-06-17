@@ -9,8 +9,8 @@ import android.support.test.runner.AndroidJUnit4
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.screen.MainScreen
 import com.kaspersky.kaspressample.screen.WebViewScreen
+import com.kaspersky.kaspresso.flakysafety.wait
 import com.kaspersky.kaspresso.testcases.api.TestCase
-import com.kaspersky.klkakao.screen.Screen
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -47,23 +47,26 @@ class WebViewTest : TestCase() {
                 }
             }
 
-            step("Click \"Войти\" button") {
+            step("Click \"Sign in\" button") {
                 webViewScreen {
-                    Screen.idle(TimeUnit.SECONDS.toMillis(3))
 
                     webView {
-                        withElement(
-                            Locator.XPATH,
-                            "/html/body/header/section/div[1]/div/div[1]/div[2]/button[3]"
+                        wait(
+                            timeoutMs = TimeUnit.SECONDS.toMillis(3)
                         ) {
-                            hasText("Зарегистрироваться")
+                            withElement(
+                                Locator.XPATH,
+                                "/html/body/header/section/div[1]/div/div[1]/div[2]/button[3]"
+                            ) {
+                                hasText("Sign up")
+                            }
                         }
 
                         withElement(
                             Locator.CLASS_NAME,
                             "btn"
                         ) {
-                            containsText("Войти")
+                            containsText("Sign in")
                             web.withElement(ref).perform(DriverAtoms.getText())
                         }
 
@@ -72,7 +75,7 @@ class WebViewTest : TestCase() {
                             Locator.XPATH,
                             "/html/body/header/section/div[3]/div[2]/button"
                         ) {
-                            hasText("Войти")
+                            hasText("Sign in")
                             click()
                         }
                     }
