@@ -35,6 +35,7 @@ import com.kaspersky.kaspresso.logger.UiTestLoggerImpl
 import com.kaspersky.kaspresso.report.impl.AllureReportWriter
 import com.kaspersky.kaspresso.testcases.core.TestContext
 import com.agoda.kakao.configurator.KakaoConfigurator
+import com.kaspersky.kaspresso.logger.CachedLogger
 
 /**
  * A class that keeps all settings.
@@ -43,6 +44,7 @@ import com.agoda.kakao.configurator.KakaoConfigurator
  * @param attemptsIntervalMs A frequency of action attempts in milliseconds.
  * @param logger Holds an implementation of [UiTestLogger] interface for inner framework usage. Not accessible from outside.
  * @param externalLogger Holds an implementation of [UiTestLogger] interface for external usage.
+ * @param cachedLogger Holds an instance of [CachedLogger] for inner framework usage. Not accessible from outside.
  * @param apps Holds an implementation of [Apps] interface. If it was not specified in [Configurator.Builder], the default implementation is used.
  * @param activities Holds an implementation of [Activities] interface. If it was not specified in [Configurator.Builder], the default implementation is used.
  * @param files Holds an implementation of [Files] interface. If it was not specified in [Configurator.Builder], the default implementation is used.
@@ -69,6 +71,7 @@ class Configurator(
     internal val attemptsIntervalMs: Long = DEFAULT_ATTEMPTS_INTERVAL_MS,
     internal val logger: UiTestLogger,
     internal val externalLogger: UiTestLogger,
+    internal val cachedLogger: CachedLogger,
     internal val apps: Apps,
     internal val activities: Activities,
     internal val files: Files,
@@ -115,8 +118,8 @@ class Configurator(
                     viewActionInterceptors = listOf(LoggingViewActionInterceptor(logger))
                     viewAssertionInterceptors = listOf(LoggingViewAssertionInterceptor(logger))
 
-                    atomInterceptors = listOf(LoggingAtomInterceptor(logger))
-                    webAssertionInterceptors = listOf(LoggingWebAssertionInterceptor(logger))
+                    atomInterceptors = listOf(LoggingAtomInterceptor(cachedLogger))
+                    webAssertionInterceptors = listOf(LoggingWebAssertionInterceptor(cachedLogger))
 
                     executingInterceptor = FlakySafeExecutingInterceptor()
                     failureInterceptor = LoggingFailureInterceptor(logger)
@@ -139,6 +142,7 @@ class Configurator(
 
         var logger: UiTestLogger = UiTestLoggerImpl(DEFAULT_INNER_LOGGER_TAG)
         var externalLogger: UiTestLogger = UiTestLoggerImpl(DEFAULT_OUTER_LOGGER_TAG)
+        var cachedLogger: CachedLogger = CachedLogger(logger)
 
         var apps: Apps = AppsImpl(
             logger,
@@ -191,6 +195,7 @@ class Configurator(
 
                 logger = logger,
                 externalLogger = externalLogger,
+                cachedLogger = cachedLogger,
 
                 apps = apps,
                 activities = activities,
@@ -228,6 +233,7 @@ class Configurator(
             ConfiguratorExt.attemptsIntervalMs = attemptsIntervalMs
             ConfiguratorExt.attemptsTimeoutMs = attemptsTimeoutMs
             ConfiguratorExt.logger = logger
+            ConfiguratorExt.cachedLogger = cachedLogger
 
             return configurator
         }
