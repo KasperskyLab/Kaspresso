@@ -4,17 +4,17 @@ import android.support.test.espresso.web.model.Atom
 import android.support.test.espresso.web.model.Evaluation
 import android.support.test.espresso.web.webdriver.WebDriverAtomScriptsProvider
 import com.kaspersky.kaspresso.interceptors.AtomInterceptor
-import com.kaspersky.kaspresso.logger.CachedLogger
+import com.kaspersky.kaspresso.logger.composite.CompositeLogger
 
 /**
  * An implementation of [AtomInterceptor] that logs info about web action.
  */
 class LoggingAtomInterceptor(
-    private val cachedLogger: CachedLogger
+    private val compositeLogger: CompositeLogger
 ) : AtomInterceptor {
 
     /**
-     * Writes info to [cachedLogger].
+     * Writes info to [compositeLogger].
      *
      * @param evaluation represents the results of a Javascript execution.
      */
@@ -28,9 +28,12 @@ class LoggingAtomInterceptor(
         }
 
         if (isFindElementAction(atom)) {
-            cachedLogger.cachedInfo = "On web element with args=$lastArgs perform $evalMessage".trimEnd()
+            compositeLogger
+                .composeInfo("On web element with args=$lastArgs perform $evalMessage".trimEnd())
         } else {
-            cachedLogger.infoWithCache("web action: ${getActionDescription(atom)} $evalMessage".trimEnd())
+            compositeLogger
+                .composeInfo(" web action: ${getActionDescription(atom)} $evalMessage")
+                .logInfo()
         }
     }
 
