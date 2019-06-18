@@ -16,9 +16,7 @@ import com.kaspersky.kaspresso.device.screenshots.Screenshots
 /**
  * A provider of managers for all off-screen work.
  */
-class Device(
-    private val configurator: Configurator
-) {
+class Device(configurator: Configurator) {
 
     /**
      * A not caching property to get [Context].

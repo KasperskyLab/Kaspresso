@@ -11,12 +11,12 @@ import com.kaspersky.kaspresso.device.server.AdbServer
  */
 class InternetImpl(
     private val targetContext: Context
-): Internet {
+) : Internet {
 
     /**
      *  Enables wi-fi and mobile data using adb.
      *
-     *  Required Permissions: INTERNET
+     *  Required Permissions: INTERNET.
      */
     override fun enable() {
         AdbServer.performAdb("shell svc data enable", "shell svc wifi enable")
@@ -25,7 +25,7 @@ class InternetImpl(
     /**
      *  Disables wi-fi and mobile data using adb.
      *
-     *  Required Permissions: INTERNET
+     *  Required Permissions: INTERNET.
      */
     override fun disable() {
         AdbServer.performAdb("shell svc data disable", "shell svc wifi disable")

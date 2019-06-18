@@ -11,9 +11,11 @@ import org.junit.runners.model.Statement
 import java.util.*
 
 /**
- *  Test rule to switch locales
+ *  Test rule to switch locales.
  */
-class LocaleRule internal constructor(private val locales: Set<Locale>) : TestRule {
+class LocaleRule internal constructor(
+    private val locales: Set<Locale>
+) : TestRule {
 
     private var deviceLocale: Locale? = null
     private var currentLocale: Locale? = null
@@ -30,9 +32,12 @@ class LocaleRule internal constructor(private val locales: Set<Locale>) : TestRu
                         applyCurrentLocaleToContext(activity)
                     }
                 }
+
                 ActivityLifecycleMonitorRegistry.getInstance().addLifecycleCallback(callback)
+
                 try {
                     deviceLocale = Locale.getDefault()
+
                     for (locale in locales) {
                         currentLocale = locale
                         applyCurrentLocaleToContext(InstrumentationRegistry.getTargetContext())
@@ -43,6 +48,7 @@ class LocaleRule internal constructor(private val locales: Set<Locale>) : TestRu
                         currentLocale = deviceLocale!!
                         applyCurrentLocaleToContext(InstrumentationRegistry.getTargetContext())
                     }
+
                     ActivityLifecycleMonitorRegistry.getInstance().removeLifecycleCallback(callback)
                 }
             }
@@ -53,11 +59,13 @@ class LocaleRule internal constructor(private val locales: Set<Locale>) : TestRu
         val resources = context.resources
         Locale.setDefault(currentLocale)
         val configuration = resources.configuration
+
         if (android.os.Build.VERSION.SDK_INT > android.os.Build.VERSION_CODES.JELLY_BEAN) {
             configuration.setLocale(currentLocale)
         } else {
             configuration.locale = currentLocale
         }
+
         resources.updateConfiguration(configuration, resources.displayMetrics)
     }
 }

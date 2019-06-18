@@ -1,6 +1,6 @@
 package com.kaspersky.kaspresso.interceptors
 
-import com.kaspersky.kaspresso.testcases.models.TestInfo
+import com.kaspersky.kaspresso.testcases.models.info.TestInfo
 
 interface TestRunInterceptor {
 
@@ -10,11 +10,9 @@ interface TestRunInterceptor {
     fun onBeforeSectionFinishedSuccess(testInfo: TestInfo) = Unit
     fun onBeforeSectionFinishedFailed(testInfo: TestInfo, throwable: Throwable) = Unit
 
-
     fun onMainSectionStarted(testInfo: TestInfo) = Unit
     fun onMainSectionFinishedSuccess(testInfo: TestInfo) = Unit
     fun onMainSectionFinishedFailed(testInfo: TestInfo, throwable: Throwable) = Unit
-
 
     fun onAfterSectionStarted(testInfo: TestInfo) = Unit
     fun onAfterSectionFinishedSuccess(testInfo: TestInfo) = Unit

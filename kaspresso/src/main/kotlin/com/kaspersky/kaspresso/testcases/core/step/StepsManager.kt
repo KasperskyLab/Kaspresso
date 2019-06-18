@@ -1,9 +1,8 @@
-package com.kaspersky.kaspresso.testcases.core
+package com.kaspersky.kaspresso.testcases.core.step
 
-import com.kaspersky.kaspresso.testcases.models.InternalStepInfo
-import com.kaspersky.kaspresso.testcases.models.StepInfo
+import com.kaspersky.kaspresso.testcases.models.info.InternalStepInfo
+import com.kaspersky.kaspresso.testcases.models.info.StepInfo
 import com.kaspersky.kaspresso.testcases.models.StepStatus
-
 
 /**
  * [StepsManager] produces step and manages lifecycle of step.
@@ -31,7 +30,7 @@ import com.kaspersky.kaspresso.testcases.models.StepStatus
  *  - [stepsCounter] is 0. Number of steps(including sub steps)
  *  - [stepResultList] is empty. This is container to first level steps (step without parent step)
  *
- * 1) While calling [produceStep]:
+ * 1) While calling [produceStepInfo]:
  *
  * 1.1) If [currentStepResult] is null:
  *  - [stepsCounter] increasing by 1
@@ -56,11 +55,11 @@ import com.kaspersky.kaspresso.testcases.models.StepStatus
  * 2.2 If step has no parent
  *  - [currentStepResult] is null
  *
- *
- *
  */
 
-internal class StepsManager(private val testName: String) : StepProducer {
+internal class StepsManager(
+    private val testName: String
+) : StepInfoProducer {
 
     private val stepResultList: MutableList<InternalStepInfo> = mutableListOf()
     private var currentStepResult: InternalStepInfo? = null
@@ -68,72 +67,51 @@ internal class StepsManager(private val testName: String) : StepProducer {
 
     private var testPassed: Boolean = false
 
-    override fun produceStep(description: String): StepInfo {
+    override fun produceStepInfo(description: String): StepInfo {
         checkState()
+
         val localCurrentStep = currentStepResult
-        val step: InternalStepInfo
+        val stepInfo: InternalStepInfo
+
         if (localCurrentStep == null) {
             val stepNumber = mutableListOf(stepResultList.size + 1)
-            step = produceStepInternal(description, stepNumber)
-            currentStepResult = step
-            stepResultList.add(step)
+            stepInfo = produceInternalStepInfo(description, stepNumber)
+            currentStepResult = stepInfo
+            stepResultList.add(stepInfo)
         } else {
             val stepNumber: MutableList<Int> = mutableListOf()
             stepNumber.addAll(localCurrentStep.stepNumber)
-            stepNumber.add(localCurrentStep.internalSubSteps.size + 1)
-            step = produceStepInternal(description, stepNumber, localCurrentStep)
-            localCurrentStep.internalSubSteps.add(step)
-            currentStepResult = step
+            stepNumber.add(localCurrentStep.internalSubStepInfos.size + 1)
+            stepInfo = produceInternalStepInfo(description, stepNumber, localCurrentStep)
+            localCurrentStep.internalSubStepInfos.add(stepInfo)
+            currentStepResult = stepInfo
         }
-        return step
-    }
 
-    private fun checkState() {
-        if (testPassed) {
-            throw IllegalStateException(
-                "Please create new StepsProcessHandler object because this object consists old state." +
-                        "Possible reason is onAllStepsFinishedAndGetResultInSteps() calling " +
-                        "was not after all test operations."
-            )
-        }
-    }
-
-    private fun produceStepInternal(
-        description: String,
-        stepNumber: MutableList<Int>,
-        parentStep: InternalStepInfo? = null
-    ): InternalStepInfo {
-        return InternalStepInfo(
-            description = description,
-            testClassName = testName,
-            level = stepNumber.size,
-            number = stepNumber.joinToString(separator = "."),
-            ordinal = ++stepsCounter,
-            stepNumber = stepNumber,
-            parentStep = parentStep
-        )
+        return stepInfo
     }
 
     override fun onStepFinished(stepInfo: StepInfo, error: Throwable?) {
         checkState()
+
         val localCurrentStepResult = currentStepResult
+
         if (localCurrentStepResult != stepInfo)
             throw IllegalStateException(
                 "Unable to finish step $stepInfo cause it is not current. " +
-                        "Current step is $localCurrentStepResult. All steps: $stepResultList"
+                        "Current step is $localCurrentStepResult. All stepInfos: $stepResultList"
             )
 
         localCurrentStepResult.internalStatus = if (error == null) StepStatus.SUCCESS else StepStatus.FAILED
         localCurrentStepResult.internalThrowable = error
-        currentStepResult = localCurrentStepResult.parentStep
+        currentStepResult = localCurrentStepResult.parentStepInfo
     }
 
     /**
      * Calling after all test's steps finished.
-     * It helps correctly finish all steps to return lately an actual steps hierarchy
-     * @return result expressed in List of StepInfo (supports hierarchy) gotten after Test completed
+     * It helps correctly finish all steps to return lately an actual steps hierarchy.
+     * @return result expressed in List of StepInfo (supports hierarchy) gotten after Test completed.
      */
-    fun onAllStepsFinishedAndGetResultInSteps(): List<StepInfo> {
+    fun getAllStepsResult(): List<StepInfo> {
         checkState()
 
         var localCurrentStep = currentStepResult
@@ -144,22 +122,50 @@ internal class StepsManager(private val testName: String) : StepProducer {
 
             if (error == null) {
                 val childFailedStepResult =
-                    localCurrentStep.internalSubSteps.reversed().firstOrNull { it.internalStatus == StepStatus.FAILED }
+                    localCurrentStep.internalSubStepInfos
+                        .reversed()
+                        .firstOrNull { it.internalStatus == StepStatus.FAILED }
 
                 error = when (childFailedStepResult) {
-                    null -> IllegalStateException("Unable to find error to finish failed step $localCurrentStep. Check all steps $stepResultList")
+                    null -> IllegalStateException("Unable to find error to finish failed step $localCurrentStep. Check all stepInfos $stepResultList")
                     else -> childFailedStepResult.throwable
                 }
             }
 
             localCurrentStep.internalThrowable = error
-            localCurrentStep = localCurrentStep.parentStep
+            localCurrentStep = localCurrentStep.parentStepInfo
         }
 
         testPassed = true
+
         // swallow copy
         return stepResultList.map { it }
     }
 
-}
+    private fun checkState() {
+        if (testPassed) {
+            throw IllegalStateException(
+                "Please create new StepsProcessHandler object because this object consists old state." +
+                        "Possible reason is getAllStepsResult() calling " +
+                        "was not after all test operations."
+            )
+        }
+    }
 
+    private fun produceInternalStepInfo(
+        description: String,
+        stepNumber: MutableList<Int>,
+        parentStepInfo: InternalStepInfo? = null
+    ): InternalStepInfo {
+
+        return InternalStepInfo(
+            description = description,
+            testClassName = testName,
+            level = stepNumber.size,
+            number = stepNumber.joinToString(separator = "."),
+            ordinal = ++stepsCounter,
+            stepNumber = stepNumber,
+            parentStepInfo = parentStepInfo
+        )
+    }
+}

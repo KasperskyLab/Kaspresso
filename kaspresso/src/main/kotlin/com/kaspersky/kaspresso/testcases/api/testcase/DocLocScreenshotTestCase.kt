@@ -1,13 +1,13 @@
-package com.kaspersky.kaspresso.device.screenshots.docloc
+package com.kaspersky.kaspresso.testcases.api.testcase
 
 import android.Manifest
 import android.support.test.rule.GrantPermissionRule
 import com.kaspersky.kaspresso.device.locales.Locales
+import com.kaspersky.kaspresso.device.screenshots.docloc.DocLocScreenshotCapturer
 import com.kaspersky.kaspresso.extensions.other.getAllInterfaces
 import com.kaspersky.kaspresso.reflect.proxy.UiInvocationHandler
 import com.kaspersky.kaspresso.rule.LocaleRule
 import com.kaspersky.kaspresso.rule.TestFailRule
-import com.kaspersky.kaspresso.testcases.api.TestCase
 import org.junit.Before
 import org.junit.Rule
 import java.io.File
@@ -113,7 +113,7 @@ abstract class DocLocScreenshotTestCase(
 
     /**
      *  Captures screenshot with a given [name] and saves it to
-     *  <device path for pictures>/<locale>/<screenshotsDirectory>
+     *  <device path for pictures>/<locale>/<screenshotsDirectory>.
      *
      *  @param name screenshot name. English letters, spaces, numbers and dots are allowed.
      */
@@ -123,10 +123,10 @@ abstract class DocLocScreenshotTestCase(
 
     /**
      *  Return a dynamic proxy for a given view.
-     *  [I] must be interface
+     *  [I] must be interface.
      *
-     *  @param view proxy target
-     *  @return a proxy over the given view
+     *  @param view proxy target.
+     *  @return a proxy over the given view.
      */
     inline fun <reified I : Any> getUiSafeProxy(view: I): I {
         if (!I::class.java.isInterface) {
@@ -143,10 +143,10 @@ abstract class DocLocScreenshotTestCase(
     }
 
     /**
-     *  Return a dynamic proxy over all interfaces that [view] implements
+     *  Return a dynamic proxy over all interfaces that [view] implements.
      *
-     *  @param view proxy target
-     *  @return a proxy over the given view
+     *  @param view proxy target.
+     *  @return a proxy over the given view.
      */
     inline fun <reified T : Any> getUiSafeProxyFromImplementation(view: T): Any {
         return Proxy.newProxyInstance(

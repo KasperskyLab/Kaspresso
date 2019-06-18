@@ -9,8 +9,7 @@
 ``` kotlin
 open class ProductTestCase : TestCase() {
 
-    @Rule
-    @JvmField
+    @get:Rule
     val activityTestRule = ActivityTestRule(FirstActivity::class.java, true, false)  
         
     @Before

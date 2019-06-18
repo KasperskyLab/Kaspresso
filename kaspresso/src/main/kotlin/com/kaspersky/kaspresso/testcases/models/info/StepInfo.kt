@@ -1,4 +1,6 @@
-package com.kaspersky.kaspresso.testcases.models
+package com.kaspersky.kaspresso.testcases.models.info
+
+import com.kaspersky.kaspresso.testcases.models.StepStatus
 
 interface StepInfo {
     val description: String

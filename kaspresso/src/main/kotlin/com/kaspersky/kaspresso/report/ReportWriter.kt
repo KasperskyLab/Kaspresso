@@ -1,7 +1,8 @@
 package com.kaspersky.kaspresso.report
 
-import com.kaspersky.kaspresso.testcases.models.TestInfo
+import com.kaspersky.kaspresso.testcases.models.info.TestInfo
 
 interface ReportWriter {
-    fun processTestResults(allureTestResult: TestInfo)
+
+    fun processTestResults(testInfo: TestInfo)
 }

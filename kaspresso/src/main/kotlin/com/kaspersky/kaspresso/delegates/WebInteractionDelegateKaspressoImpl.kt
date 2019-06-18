@@ -63,6 +63,7 @@ open class WebInteractionDelegateKaspressoImpl(
         atom: Atom<E>,
         matcher: Matcher<E>
     ): WebInteractionDelegate {
+
         val webAssertionProxy = WebAssertionProxy(
             webAssertion,
             atom,
