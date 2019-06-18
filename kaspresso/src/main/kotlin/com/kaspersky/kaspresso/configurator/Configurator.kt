@@ -35,6 +35,8 @@ import com.kaspersky.kaspresso.logger.UiTestLoggerImpl
 import com.kaspersky.kaspresso.report.impl.AllureReportWriter
 import com.kaspersky.kaspresso.testcases.core.testcontext.TestContext
 import com.agoda.kakao.configurator.KakaoConfigurator
+import com.kaspersky.kaspresso.device.phone.Phone
+import com.kaspersky.kaspresso.device.phone.PhoneImpl
 
 /**
  * A class that keeps all settings.
@@ -50,6 +52,8 @@ import com.agoda.kakao.configurator.KakaoConfigurator
  * @param files Holds an implementation of [Files] interface. If it was not specified in [Configurator.Builder],
  * the default implementation is used.
  * @param internet Holds an implementation of [Internet] interface. If it was not specified in [Configurator.Builder],
+ * the default implementation is used.
+ * @param phone Holds an implementation of [Phone] interface. If it was not specified in [Configurator.Builder],
  * the default implementation is used.
  * @param screenshots Holds an implementation of [Screenshots] interface. If it was not specified in [Configurator.Builder],
  * the default implementation is used.
@@ -84,6 +88,7 @@ class Configurator(
     internal val activities: Activities,
     internal val files: Files,
     internal val internet: Internet,
+    internal val phone: Phone,
     internal val screenshots: Screenshots,
     internal val accessibility: Accessibility,
     internal val permissions: Permissions,
@@ -168,6 +173,7 @@ class Configurator(
         var activities: Activities = ActivitiesImpl(logger)
         var files: Files = FilesImpl()
         var internet: Internet = InternetImpl(InstrumentationRegistry.getTargetContext())
+        var phone: Phone = PhoneImpl()
         var screenshots: Screenshots = ScreenshotsImpl(logger, activities)
         var accessibility: Accessibility = AccessibilityImpl()
         var permissions: Permissions =
@@ -217,6 +223,7 @@ class Configurator(
                 activities = activities,
                 files = files,
                 internet = internet,
+                phone = phone,
                 screenshots = screenshots,
                 accessibility = accessibility,
                 permissions = permissions,
