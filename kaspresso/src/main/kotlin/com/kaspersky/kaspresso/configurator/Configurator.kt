@@ -35,6 +35,8 @@ import com.kaspersky.kaspresso.logger.UiTestLoggerImpl
 import com.kaspersky.kaspresso.report.impl.AllureReportWriter
 import com.kaspersky.kaspresso.testcases.core.testcontext.TestContext
 import com.agoda.kakao.configurator.KakaoConfigurator
+import com.kaspersky.kaspresso.device.keyboard.Keyboard
+import com.kaspersky.kaspresso.device.keyboard.KeyboardImpl
 import com.kaspersky.kaspresso.device.location.Location
 import com.kaspersky.kaspresso.device.location.LocationImpl
 import com.kaspersky.kaspresso.device.phone.Phone
@@ -59,7 +61,7 @@ import com.kaspersky.kaspresso.device.phone.PhoneImpl
  * the default implementation is used.
  * @param location Holds an implementation of [Location] interface. If it was not specified in [Configurator.Builder],
  * the default implementation is used.
- * @param phone Holds an implementation of [Phone] interface. If it was not specified in [Configurator.Builder],
+ * @param keyboard Holds an implementation of [Keyboard] interface. If it was not specified in [Configurator.Builder],
  * the default implementation is used.
  * @param screenshots Holds an implementation of [Screenshots] interface. If it was not specified in [Configurator.Builder],
  * the default implementation is used.
@@ -96,6 +98,7 @@ class Configurator(
     internal val internet: Internet,
     internal val phone: Phone,
     internal val location: Location,
+    internal val keyboard: Keyboard,
     internal val screenshots: Screenshots,
     internal val accessibility: Accessibility,
     internal val permissions: Permissions,
@@ -182,6 +185,7 @@ class Configurator(
         var internet: Internet = InternetImpl(InstrumentationRegistry.getTargetContext())
         var phone: Phone = PhoneImpl()
         var location: Location = LocationImpl()
+        var keyboard: Keyboard = KeyboardImpl()
         var screenshots: Screenshots = ScreenshotsImpl(logger, activities)
         var accessibility: Accessibility = AccessibilityImpl()
         var permissions: Permissions =
@@ -233,6 +237,7 @@ class Configurator(
                 internet = internet,
                 phone = phone,
                 location = location,
+                keyboard = keyboard,
                 screenshots = screenshots,
                 accessibility = accessibility,
                 permissions = permissions,
