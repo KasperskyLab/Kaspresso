@@ -3,18 +3,18 @@ package com.kaspersky.kaspresso.interceptors.impl.logging
 import android.support.test.espresso.web.assertion.WebAssertionProxy
 import android.webkit.WebView
 import com.kaspersky.kaspresso.interceptors.WebAssertionInterceptor
-import com.kaspersky.kaspresso.logger.UiTestLogger
+import com.kaspersky.kaspresso.logger.composite.CompositeLogger
 
 /**
  * An implementation of [WebAssertionInterceptor] that logs info about
  * [android.support.test.espresso.web.assertion.WebAssertion].
  */
 class LoggingWebAssertionInterceptor(
-    private val logger: UiTestLogger
+    private val compositeLogger: CompositeLogger
 ) : WebAssertionInterceptor {
 
     /**
-     * Writes info to [logger].
+     * Writes info to [compositeLogger].
      *
      * @param webAssertionProxy a proxy-wrapper of [android.support.test.espresso.web.assertion.WebAssertion] for
      *      interceptors calls.
@@ -27,6 +27,8 @@ class LoggingWebAssertionInterceptor(
         view: WebView?,
         result: Any
     ) {
-        logger.finishI("${webAssertionProxy.describe()} with result=\"$result\"")
+        compositeLogger
+            .composeInfo(" ${webAssertionProxy.describe()} with result=\"$result\"")
+            .logInfo()
     }
 }

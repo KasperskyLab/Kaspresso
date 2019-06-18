@@ -9,6 +9,7 @@ import android.support.test.runner.AndroidJUnit4
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.screen.MainScreen
 import com.kaspersky.kaspressample.screen.WebViewScreen
+import com.kaspersky.kaspresso.flakysafety.attempt
 import com.kaspersky.kaspresso.flakysafety.wait
 import com.kaspersky.kaspresso.testcases.api.TestCase
 import org.junit.Rule
@@ -51,7 +52,7 @@ class WebViewTest : TestCase() {
                 webViewScreen {
 
                     webView {
-                        wait(
+                        attempt(
                             timeoutMs = TimeUnit.SECONDS.toMillis(3)
                         ) {
                             withElement(

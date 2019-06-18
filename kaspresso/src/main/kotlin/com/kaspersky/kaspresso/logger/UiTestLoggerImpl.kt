@@ -6,8 +6,7 @@ import android.util.Log
  * Default implementation of [UiTestLogger] using [android.util.Log].
  */
 class UiTestLoggerImpl(
-    private val tag: String,
-    override var startText: String? = null
+    private val tag: String
 ) : UiTestLogger {
 
     override fun i(text: String) {
@@ -32,5 +31,37 @@ class UiTestLoggerImpl(
 
     override fun e(tag: String, text: String) {
         Log.e(tag, text)
+    }
+
+    /**
+     * Draws up info [i] as section block.
+     */
+    override fun section(text: String) {
+        i("---------------------------------------------------------------------------")
+        i(text)
+        i("---------------------------------------------------------------------------")
+    }
+
+    /**
+     * Draws up info [i] as header block.
+     */
+    override fun header(text: String) {
+        line()
+        i(text)
+    }
+
+    /**
+     * Draws up info [i] as header block.
+     */
+    override fun footer(text: String) {
+        i(text)
+        line()
+    }
+
+    /**
+     * Draws line info.
+     */
+    override fun line() {
+        i("___________________________________________________________________________")
     }
 }
