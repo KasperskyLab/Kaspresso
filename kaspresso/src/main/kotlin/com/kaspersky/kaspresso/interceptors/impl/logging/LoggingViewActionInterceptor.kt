@@ -11,7 +11,7 @@ import com.kaspersky.kaspresso.logger.UiTestLogger
  */
 class LoggingViewActionInterceptor(
     private val logger: UiTestLogger
-): ViewActionInterceptor {
+) : ViewActionInterceptor {
 
     /**
      * Writes info to [logger].

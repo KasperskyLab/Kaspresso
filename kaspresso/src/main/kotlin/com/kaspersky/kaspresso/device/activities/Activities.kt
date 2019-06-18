@@ -10,7 +10,7 @@ interface Activities {
     /**
      * Finds and returns resumed activity if it exists.
      *
-     * @return nullable resumed activity
+     * @return nullable resumed activity.
      */
     fun getResumed(): Activity?
 

@@ -13,7 +13,6 @@ import com.kaspersky.kaspresso.logger.UiTestLogger
 internal class ActivityMetadata(
     private val logger: UiTestLogger
 ) {
-
     companion object {
         private const val INDEX_SEPARATOR = '_'
     }
@@ -85,8 +84,7 @@ internal class ActivityMetadata(
 
     private fun addIndexes(groupedById: List<LocalizedString>): List<LocalizedString> {
         return groupedById.mapIndexed { index, locString ->
-            locString.copy(locValueDescription = "${locString.locValueDescription}${Companion.INDEX_SEPARATOR}${index + 1}")
+            locString.copy(locValueDescription = "${locString.locValueDescription}$INDEX_SEPARATOR${index + 1}")
         }
     }
-
 }

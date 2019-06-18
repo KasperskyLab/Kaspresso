@@ -7,7 +7,7 @@ import android.support.test.runner.AndroidJUnit4
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.screen.HomeScreen
 import com.kaspersky.kaspressample.screen.MainScreen
-import com.kaspersky.kaspresso.testcases.api.TestCaseRule
+import com.kaspersky.kaspresso.testcases.api.testcaserule.TestCaseRule
 import com.kaspersky.kaspresso.viewactions.orientation.Orientation
 import org.junit.Rule
 import org.junit.Test

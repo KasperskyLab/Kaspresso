@@ -5,12 +5,11 @@ import com.kaspersky.kaspresso.logger.UiTestLogger
 import java.util.*
 
 /**
- *  Utility class for handling locale parsing
+ *  Utility class for handling locale parsing.
  */
 internal class Locales(
     private val logger: UiTestLogger
 ) {
-
     companion object {
         private const val LOCALES_ARG = "localizations"
         private const val LANGUAGE_COUNTRY_SEPARATOR = "-"
@@ -32,7 +31,7 @@ internal class Locales(
      *  Parses comma-separated string to set of locales.
      *
      *  @param locales comma-separated string containing locales.
-     *  @return set of pares locales
+     *  @return set of pares locales.
      */
     fun parseLocales(locales: String): Set<Locale> {
         val localizationsArray = locales.replace(" ", "").split(",")

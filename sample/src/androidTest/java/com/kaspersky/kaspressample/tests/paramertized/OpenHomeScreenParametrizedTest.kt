@@ -32,7 +32,7 @@ class OpenHomeScreenParametrizedTest : BaseParametrizedTest() {
             activityTestRule.launchActivity(null)
         }.after {
             device.exploit.setOrientation(Orientation.Portrait)
-        }.initialisation {
+        }.init {
             company {
                 name = "Microsoft"
                 city = "Redmond"
@@ -53,24 +53,26 @@ class OpenHomeScreenParametrizedTest : BaseParametrizedTest() {
                 secondName = "Pichai"
                 country = "India"
             }
-        }.transformation {
+        }.transform {
             makeOwner(ownerSurname = "Nadella", companyName = "Microsoft")
             makeOwner(ownerSurname = "Pichai", companyName = "Google")
         }.run {
             step("Open Home Screen") {
                 kLogger.i(data.companies.toString())
+
                 mainScreen {
                     descriptionText {
                         // Oops, it fails, please comment if you want to pass the test
-                        hasText(data.owners.first().firstName ?: "") 
+                        hasText(data.owners.first().firstName ?: "")
                     }
+
                     nextButton {
                         click()
                     }
                 }
             }
+
             scenario(CheckHomeTitleNoParametersScenario())
         }
     }
-
 }

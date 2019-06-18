@@ -9,8 +9,7 @@
 ``` kotlin
 open class ProductTestCase : TestCase() {
 
-    @Rule
-    @JvmField
+    @get:Rule
     val activityTestRule = ActivityTestRule(FirstActivity::class.java, true, false)  
         
     @Before
@@ -133,6 +132,7 @@ open class ProductTestCase : TestCase() {
 + Скрины могут содержать !вспомогательные проверки (ассерты)!. Но данные методы должны начинаться с ключевого слова ```assert```.
 Например, ```assertDetectsCount```.
 + Скрины не должны содержать состояние
++ Скрины обязательно должны содержать указание класса реализующего этот экран (viewClass) и ID разметки(layoutId) - заполняется разработчиком
 
 ```kotlin
 object FeatureScreen : KScreen<FeatureScreen> {

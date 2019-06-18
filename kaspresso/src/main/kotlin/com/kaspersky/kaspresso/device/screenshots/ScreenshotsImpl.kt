@@ -25,7 +25,7 @@ class ScreenshotsImpl(
     /**
      * Takes screenshot if it is possible, otherwise logs the error.
      *
-     * Required Permissions: WRITE_EXTERNAL_STORAGE
+     * Required Permissions: WRITE_EXTERNAL_STORAGE.
      *
      * @param tag a unique tag to further identify the screenshot. Must match [a-zA-Z0-9_-]+.
      */

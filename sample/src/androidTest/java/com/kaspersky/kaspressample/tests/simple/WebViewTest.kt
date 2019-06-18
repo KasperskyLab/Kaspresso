@@ -10,8 +10,8 @@ import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.screen.MainScreen
 import com.kaspersky.kaspressample.screen.WebViewScreen
 import com.kaspersky.kaspresso.flakysafety.attempt
-import com.kaspersky.kaspresso.flakysafety.wait
-import com.kaspersky.kaspresso.testcases.api.TestCase
+import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
+
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith

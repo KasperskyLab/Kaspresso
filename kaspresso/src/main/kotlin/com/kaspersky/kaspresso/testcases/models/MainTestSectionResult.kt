@@ -1,6 +1,8 @@
 package com.kaspersky.kaspresso.testcases.models
 
-internal data class RunMainTestSectionResult(
+import com.kaspersky.kaspresso.testcases.models.info.TestInfo
+
+internal data class MainTestSectionResult(
     val testInfo: TestInfo,
     val throwable: Throwable? = null
 )

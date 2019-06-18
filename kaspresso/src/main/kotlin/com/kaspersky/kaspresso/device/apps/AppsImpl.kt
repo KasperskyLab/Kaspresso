@@ -22,7 +22,7 @@ class AppsImpl(
     private val uiDevice: UiDevice
 ) : Apps {
 
-    private val chromePackageName = "com.android.chrome"
+    private val chromePackageName: String = "com.android.chrome"
 
     override val targetAppLauncherPackageName: String = uiDevice.launcherPackageName
 
@@ -31,7 +31,7 @@ class AppsImpl(
     /**
      *  Installs an app via ADB.
      *
-     *  Required Permissions: INTERNET
+     *  Required Permissions: INTERNET.
      *
      *  @param apkPath a path to an apk to be installed. The apk is hosted on the test server.
      */
@@ -42,7 +42,7 @@ class AppsImpl(
     /**
      *  Uninstalls an app via ADB.
      *
-     *  Required Permissions: INTERNET
+     *  Required Permissions: INTERNET.
      *
      *  @param packageName an android package name of an app to be deleted.
      */
