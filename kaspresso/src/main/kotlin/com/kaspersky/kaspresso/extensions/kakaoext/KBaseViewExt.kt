@@ -5,11 +5,12 @@ import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.agoda.kakao.common.views.KBaseView
 
 /**
- * Provides an [com.kaspersky.kaspresso.flakysafety.attempt] method as an extension of [KBaseView].
+ * Provides [attempt] method as an extension of [KBaseView].
  */
 fun <T : KBaseView<Any>, R> T.attempt(
     timeoutMs: Long = Configurator.attemptsTimeoutMs,
     intervalMs: Long = Configurator.attemptsIntervalMs,
+    message: String? = null,
     logger: UiTestLogger = Configurator.logger,
     allowedExceptions: Set<Class<out Throwable>> = Configurator.allowedExceptionsForAttempt,
     action: T.() -> R
@@ -17,6 +18,7 @@ fun <T : KBaseView<Any>, R> T.attempt(
     return com.kaspersky.kaspresso.flakysafety.attempt(
         timeoutMs = timeoutMs,
         intervalMs = intervalMs,
+        message = message,
         logger = logger,
         allowedExceptions = allowedExceptions
     ) {
@@ -25,7 +27,7 @@ fun <T : KBaseView<Any>, R> T.attempt(
 }
 
 /**
- * Provides a [com.kaspersky.kaspresso.flakysafety.wait] method as an extension of [KBaseView].
+ * Provides [wait] method as an extension of [KBaseView].
  */
 fun <T : KBaseView<Any>, R> T.wait(
     timeoutMs: Long = Configurator.attemptsTimeoutMs,
