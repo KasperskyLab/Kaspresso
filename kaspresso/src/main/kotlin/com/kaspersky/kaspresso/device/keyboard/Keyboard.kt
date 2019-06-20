@@ -5,8 +5,8 @@ import android.view.KeyEvent
 interface Keyboard {
 
     /**
-     *  Types text char by char.
-     *  Use it only when Espresso or UiAutomator are not appropriate.
+     *  Types text char by char in the focused text field.
+     *  Use it only when Espresso or UiAutomator are not appropriate (e.g. when you are on the lock screen).
      *
      *  Required Permissions: INTERNET
      */
