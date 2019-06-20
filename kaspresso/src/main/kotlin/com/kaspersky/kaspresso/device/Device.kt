@@ -51,40 +51,40 @@ class Device(configurator: Configurator) {
     /**
      * Holds a reference to an implementation of [Files] interface, held by [Configurator].
      */
-    var files: Files = configurator.files
+    val files: Files = configurator.files
 
     /**
      * Holds a reference to an implementation of [Internet] interface, held by [Configurator].
      */
-    var internet: Internet = configurator.internet
+    val internet: Internet = configurator.internet
 
     /**
      * Holds a reference to an implementation of [Location] interface, held by [Configurator].
      */
-    var location: Location = configurator.location
+    val location: Location = configurator.location
 
     /**
      * Holds a reference to an implementation of [Keyboard] interface, held by [Configurator].
      */
-    var keyboard: Keyboard = configurator.keyboard
+    val keyboard: Keyboard = configurator.keyboard
 
     /**
      * Holds a reference to an implementation of [Screenshots] interface, held by [Configurator].
      */
-    var screenshots: Screenshots = configurator.screenshots
+    val screenshots: Screenshots = configurator.screenshots
 
     /**
      * Holds a reference to an implementation of [Accessibility] interface, held by [Configurator].
      */
-    var accessibility: Accessibility = configurator.accessibility
+    val accessibility: Accessibility = configurator.accessibility
 
     /**
      * Holds a reference to an implementation of [Permissions] interface, held by [Configurator].
      */
-    var permissions: Permissions = configurator.permissions
+    val permissions: Permissions = configurator.permissions
 
     /**
      * Holds a reference to an implementation of [Exploit] interface, held by [Configurator].
      */
-    var exploit: Exploit = configurator.exploit
+    val exploit: Exploit = configurator.exploit
 }
