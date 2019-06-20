@@ -15,4 +15,9 @@ class KLogger(
     override fun i(tag: String, text: String) = logger.i(tag, text)
     override fun d(tag: String, text: String) = logger.d(tag, text)
     override fun e(tag: String, text: String) = logger.e(tag, text)
+
+    override fun section(text: String) = logger.section(text)
+    override fun header(text: String) = logger.header(text)
+    override fun footer(text: String) = logger.footer(text)
+    override fun line() = logger.line()
 }

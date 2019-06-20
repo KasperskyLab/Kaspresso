@@ -41,6 +41,7 @@ import com.kaspersky.kaspresso.device.location.Location
 import com.kaspersky.kaspresso.device.location.LocationImpl
 import com.kaspersky.kaspresso.device.phone.Phone
 import com.kaspersky.kaspresso.device.phone.PhoneImpl
+import com.kaspersky.kaspresso.logger.composite.CompositeLogger
 
 /**
  * A class that keeps all settings.
@@ -49,6 +50,7 @@ import com.kaspersky.kaspresso.device.phone.PhoneImpl
  * @param attemptsIntervalMs A frequency of action attempts in milliseconds.
  * @param logger Holds an implementation of [UiTestLogger] interface for inner framework usage.
  * @param externalLogger Holds an implementation of [UiTestLogger] interface for external usage.
+ * @param compositeLogger Holds an instance of [CompositeLogger] for inner framework usage. Not accessible from outside.
  * @param apps Holds an implementation of [Apps] interface. If it was not specified in [Configurator.Builder], the
  * default implementation is used.
  * @param activities Holds an implementation of [Activities] interface. If it was not specified in [Configurator.Builder],
@@ -92,6 +94,7 @@ class Configurator(
     internal val attemptsIntervalMs: Long = DEFAULT_ATTEMPTS_INTERVAL_MS,
     internal val logger: UiTestLogger,
     internal val externalLogger: UiTestLogger,
+    internal val compositeLogger: CompositeLogger,
     internal val apps: Apps,
     internal val activities: Activities,
     internal val files: Files,
@@ -123,6 +126,7 @@ class Configurator(
         internal var attemptsTimeoutMs: Long = DEFAULT_ATTEMPTS_TIMEOUT_MS
         internal var attemptsIntervalMs: Long = DEFAULT_ATTEMPTS_INTERVAL_MS
         internal var logger: UiTestLogger = UiTestLoggerImpl(DEFAULT_INNER_LOGGER_TAG)
+        internal var compositeLogger: CompositeLogger = CompositeLogger(logger)
         internal var allowedExceptionsForAttempt: Set<Class<out Throwable>> =
             setOf(
                 PerformException::class.java,
@@ -152,6 +156,9 @@ class Configurator(
                     viewActionInterceptors = listOf(LoggingViewActionInterceptor(logger))
                     viewAssertionInterceptors = listOf(LoggingViewAssertionInterceptor(logger))
 
+                    atomInterceptors = listOf(LoggingAtomInterceptor(compositeLogger))
+                    webAssertionInterceptors = listOf(LoggingWebAssertionInterceptor(compositeLogger))
+
                     executingInterceptor = FlakySafeExecutingInterceptor()
                     failureInterceptor = LoggingFailureInterceptor(logger)
 
@@ -174,6 +181,7 @@ class Configurator(
 
         var logger: UiTestLogger = UiTestLoggerImpl(DEFAULT_INNER_LOGGER_TAG)
         var externalLogger: UiTestLogger = UiTestLoggerImpl(DEFAULT_OUTER_LOGGER_TAG)
+        var compositeLogger: CompositeLogger = CompositeLogger(logger)
 
         var apps: Apps = AppsImpl(
             logger,
@@ -230,6 +238,7 @@ class Configurator(
 
                 logger = logger,
                 externalLogger = externalLogger,
+                compositeLogger = compositeLogger,
 
                 apps = apps,
                 activities = activities,
@@ -270,6 +279,7 @@ class Configurator(
             Configurator.attemptsIntervalMs = attemptsIntervalMs
             Configurator.attemptsTimeoutMs = attemptsTimeoutMs
             Configurator.logger = logger
+            Configurator.compositeLogger = compositeLogger
 
             return configurator
         }

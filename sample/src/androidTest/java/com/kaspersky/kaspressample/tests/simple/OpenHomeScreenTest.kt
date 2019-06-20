@@ -72,5 +72,4 @@ class OpenHomeScreenTest : TestCase() {
             step("Just Empty Step") {}
         }
     }
-
 }

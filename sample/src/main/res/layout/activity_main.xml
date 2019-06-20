@@ -18,6 +18,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/next"/>
+
+    <Button
+            android:id="@+id/activity_main_button_webview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/webview"/>
+
     <TextView
             android:text="@string/main_screen_description"
             android:layout_width="wrap_content"
