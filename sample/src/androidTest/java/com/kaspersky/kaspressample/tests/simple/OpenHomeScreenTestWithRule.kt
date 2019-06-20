@@ -7,6 +7,7 @@ import android.support.test.runner.AndroidJUnit4
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.screen.HomeScreen
 import com.kaspersky.kaspressample.screen.MainScreen
+import com.kaspersky.kaspresso.flakysafety.attempt
 import com.kaspersky.kaspresso.testcases.api.testcaserule.TestCaseRule
 import com.kaspersky.kaspresso.viewactions.orientation.Orientation
 import org.junit.Rule
@@ -49,7 +50,9 @@ class OpenHomeScreenTestWithRule {
                 homeScreen {
                     title {
                         isVisible()
-                        //hasText("Ooops!") //Uncomment to fail test
+                        attempt(message = "You should've been commented this line before launching the test") {
+                            //hasText("Ooops!") //Uncomment to fail test
+                        }
                     }
                 }
             }
