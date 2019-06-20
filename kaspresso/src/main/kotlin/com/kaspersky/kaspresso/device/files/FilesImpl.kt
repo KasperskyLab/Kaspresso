@@ -18,4 +18,15 @@ class FilesImpl: Files {
     override fun push(serverPath: String, devicePath: String) {
         AdbServer.performAdb("push $serverPath $devicePath")
     }
+
+    /**
+     *  Removes a file by given path.
+     *
+     *  Required Permissions: INTERNET
+     *
+     *  @param path a path to remove
+     */
+    override fun remove(path: String) {
+        AdbServer.performShell("rm -f $path")
+    }
 }
