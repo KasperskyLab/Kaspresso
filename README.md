@@ -1,5 +1,7 @@
 # **Kaspresso**
 
+[![CircleCI](https://circleci.com/gh/matzuk/Kaspresso.svg?style=svg&circle-token=218b4c5961fedf37a134fb94d522813be949ebe5)](https://circleci.com/gh/matzuk/Kaspresso)
+
 ## **Espresso**
 Для UI-тестирования существует немало различных фреймворков. Когда-то наиболее популярным был фреймворк **Robotium**, но
 сейчас его вытеснил **Espresso**, который мы и будем рассматривать. Оба этих тестовых фреймворка позволяют выполнять
