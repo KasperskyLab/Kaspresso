@@ -2,7 +2,7 @@ package com.kaspersky.kaspresso.device.locales
 
 import android.support.test.InstrumentationRegistry
 import com.kaspersky.kaspresso.logger.UiTestLogger
-import java.util.*
+import java.util.Locale
 
 /**
  *  Utility class for handling locale parsing.

@@ -1,6 +1,11 @@
 package com.kaspersky.kaspresso.delegates
 
-import android.support.test.espresso.*
+import android.support.test.espresso.FailureHandler
+import android.support.test.espresso.NoMatchingViewException
+import android.support.test.espresso.Root
+import android.support.test.espresso.ViewAction
+import android.support.test.espresso.ViewAssertion
+import android.support.test.espresso.ViewInteraction
 import android.view.View
 import com.agoda.kakao.delegates.ViewInteractionDelegate
 import com.kaspersky.kaspresso.configurator.Configurator
