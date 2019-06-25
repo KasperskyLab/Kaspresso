@@ -80,7 +80,7 @@ complexity:
     active: true
     threshold: 10
     ignoreSingleWhenExpression: false
-    ignoreSimpleWhenEntries: false
+    ignoreSimpleWhenEntries: true
   LabeledExpression:
     active: false
   LargeClass:
@@ -92,7 +92,7 @@ complexity:
   LongParameterList:
     active: true
     threshold: 6
-    ignoreDefaultParameters: false
+    ignoreDefaultParameters: true
   MethodOverloading:
     active: false
     threshold: 6
@@ -307,7 +307,7 @@ naming:
     active: false
     maximumFunctionNameLength: 30
   FunctionMinLength:
-    active: true
+    active: false
     minimumFunctionNameLength: 3
   FunctionNaming:
     active: true
@@ -357,7 +357,7 @@ performance:
   ForEachOnRange:
     active: true
   SpreadOperator:
-    active: true
+    active: false
   UnnecessaryTemporaryInstantiation:
     active: true
 
