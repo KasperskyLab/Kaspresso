@@ -13,5 +13,4 @@ class TestCaseDataProducer {
         // Init data at server side or by another way
         return TestCaseData(testCaseDsl.companies, testCaseDsl.owners)
     }
-
 }

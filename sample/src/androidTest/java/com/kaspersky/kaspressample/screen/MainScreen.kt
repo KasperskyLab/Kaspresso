@@ -1,9 +1,9 @@
 package com.kaspersky.kaspressample.screen
 
-import com.kaspersky.kaspressample.R
 import com.agoda.kakao.screen.Screen
 import com.agoda.kakao.text.KButton
 import com.agoda.kakao.text.KTextView
+import com.kaspersky.kaspressample.R
 
 class MainScreen : Screen<MainScreen>() {
 
