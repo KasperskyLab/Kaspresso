@@ -2,10 +2,10 @@ package com.kaspersky.kaspresso.delegates
 
 import android.support.test.espresso.*
 import android.view.View
+import com.agoda.kakao.delegates.ViewInteractionDelegate
 import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.proxy.ViewActionProxy
 import com.kaspersky.kaspresso.proxy.ViewAssertionProxy
-import com.agoda.kakao.delegates.ViewInteractionDelegate
 import org.hamcrest.Matcher
 
 /**

@@ -5,12 +5,12 @@ import android.support.test.espresso.DataInteraction
 import android.support.test.espresso.ViewAssertion
 import android.support.test.espresso.ViewInteraction
 import android.view.View
-import com.kaspersky.kaspresso.configurator.Configurator
-import com.kaspersky.kaspresso.proxy.ViewAssertionProxy
 import com.agoda.kakao.delegates.DataInteractionDelegate
 import com.agoda.kakao.delegates.ViewInteractionDelegate
-import org.hamcrest.Matcher
+import com.kaspersky.kaspresso.configurator.Configurator
+import com.kaspersky.kaspresso.proxy.ViewAssertionProxy
 import javax.annotation.CheckReturnValue
+import org.hamcrest.Matcher
 
 /**
  * An implementation of [DataInteractionDelegate], that delegates the [DataInteraction]'s interface calls

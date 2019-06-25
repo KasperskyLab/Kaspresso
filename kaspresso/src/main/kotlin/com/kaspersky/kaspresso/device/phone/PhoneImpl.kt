@@ -2,7 +2,7 @@ package com.kaspersky.kaspresso.device.phone
 
 import com.kaspersky.kaspresso.device.server.AdbServer
 
-class PhoneImpl: Phone {
+class PhoneImpl : Phone {
 
     /**
      *  Emulates incoming call.

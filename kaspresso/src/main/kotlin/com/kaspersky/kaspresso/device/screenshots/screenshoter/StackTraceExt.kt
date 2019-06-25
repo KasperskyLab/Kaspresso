@@ -29,7 +29,7 @@ private fun StackTraceElement.isCucumber(): Boolean {
 }
 
 private fun Array<StackTraceElement>.extractStackElement(i: Int): StackTraceElement {
-    //Stacktrace length changed in M
+    // Stacktrace length changed in M
     val testClassTraceIndex = if (Build.VERSION.SDK_INT >= 23) i - 2 else i - 3
     return this[testClassTraceIndex]
 }

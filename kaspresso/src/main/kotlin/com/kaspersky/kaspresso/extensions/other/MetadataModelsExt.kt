@@ -13,10 +13,9 @@ import com.kaspersky.kaspresso.device.activities.metadata.Metadata
 internal fun Metadata.toXml(productPackage: String): String {
     val locStringsXml = window.localizedStrings.joinToString(separator = "") { it.toXml(productPackage) }
     val windowXml =
-        """<Window Left="${window.left}" Top="${window.top}" Width="${window.width}" Height="${window.height}">${locStringsXml}</Window>"""
+        """<Window Left="${window.left}" Top="${window.top}" Width="${window.width}" Height="${window.height}">$locStringsXml</Window>"""
     return """<Metadata>$windowXml</Metadata>"""
 }
-
 
 /**
  *  Transforms [LocalizedString] object to an xml string.

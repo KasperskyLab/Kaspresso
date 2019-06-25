@@ -8,10 +8,10 @@ import com.kaspersky.kaspresso.extensions.other.getAllInterfaces
 import com.kaspersky.kaspresso.reflect.proxy.UiInvocationHandler
 import com.kaspersky.kaspresso.rule.LocaleRule
 import com.kaspersky.kaspresso.rule.TestFailRule
-import org.junit.Before
-import org.junit.Rule
 import java.io.File
 import java.lang.reflect.Proxy
+import org.junit.Before
+import org.junit.Rule
 
 /**
  *  Base class for all docloc screenshot tests.

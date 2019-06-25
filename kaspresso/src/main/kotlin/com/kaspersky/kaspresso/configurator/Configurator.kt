@@ -5,6 +5,7 @@ import android.support.test.espresso.Espresso
 import android.support.test.espresso.NoMatchingViewException
 import android.support.test.espresso.PerformException
 import android.support.test.uiautomator.UiDevice
+import com.agoda.kakao.configurator.KakaoConfigurator
 import com.kaspersky.kaspresso.delegates.DataInteractionDelegateKaspressoImpl
 import com.kaspersky.kaspresso.delegates.ViewInteractionDelegateKaspressoImpl
 import com.kaspersky.kaspresso.delegates.WebInteractionDelegateKaspressoImpl
@@ -20,8 +21,14 @@ import com.kaspersky.kaspresso.device.files.Files
 import com.kaspersky.kaspresso.device.files.FilesImpl
 import com.kaspersky.kaspresso.device.internet.Internet
 import com.kaspersky.kaspresso.device.internet.InternetImpl
+import com.kaspersky.kaspresso.device.keyboard.Keyboard
+import com.kaspersky.kaspresso.device.keyboard.KeyboardImpl
+import com.kaspersky.kaspresso.device.location.Location
+import com.kaspersky.kaspresso.device.location.LocationImpl
 import com.kaspersky.kaspresso.device.permissions.Permissions
 import com.kaspersky.kaspresso.device.permissions.PermissionsImpl
+import com.kaspersky.kaspresso.device.phone.Phone
+import com.kaspersky.kaspresso.device.phone.PhoneImpl
 import com.kaspersky.kaspresso.device.screenshots.Screenshots
 import com.kaspersky.kaspresso.device.screenshots.ScreenshotsImpl
 import com.kaspersky.kaspresso.interceptors.*
@@ -32,16 +39,9 @@ import com.kaspersky.kaspresso.interceptors.impl.screenshot.ScreenshotStepInterc
 import com.kaspersky.kaspresso.interceptors.impl.screenshot.TestRunnerScreenshotInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.logger.UiTestLoggerImpl
+import com.kaspersky.kaspresso.logger.composite.CompositeLogger
 import com.kaspersky.kaspresso.report.impl.AllureReportWriter
 import com.kaspersky.kaspresso.testcases.core.testcontext.TestContext
-import com.agoda.kakao.configurator.KakaoConfigurator
-import com.kaspersky.kaspresso.device.keyboard.Keyboard
-import com.kaspersky.kaspresso.device.keyboard.KeyboardImpl
-import com.kaspersky.kaspresso.device.location.Location
-import com.kaspersky.kaspresso.device.location.LocationImpl
-import com.kaspersky.kaspresso.device.phone.Phone
-import com.kaspersky.kaspresso.device.phone.PhoneImpl
-import com.kaspersky.kaspresso.logger.composite.CompositeLogger
 
 /**
  * A class that keeps all settings.

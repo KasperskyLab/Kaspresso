@@ -1,8 +1,8 @@
 package com.kaspersky.kaspresso.extensions.kakaoext
 
+import com.agoda.kakao.common.views.KBaseView
 import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.logger.UiTestLogger
-import com.agoda.kakao.common.views.KBaseView
 
 /**
  * Provides [attempt] method as an extension of [KBaseView].

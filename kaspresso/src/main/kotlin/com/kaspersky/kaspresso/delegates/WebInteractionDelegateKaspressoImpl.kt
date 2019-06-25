@@ -6,11 +6,11 @@ import android.support.test.espresso.web.assertion.WebAssertionProxy
 import android.support.test.espresso.web.model.Atom
 import android.support.test.espresso.web.model.ElementReference
 import android.support.test.espresso.web.sugar.Web
+import com.agoda.kakao.delegates.WebInteractionDelegate
 import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.proxy.AtomProxy
-import com.agoda.kakao.delegates.WebInteractionDelegate
-import org.hamcrest.Matcher
 import javax.annotation.CheckReturnValue
+import org.hamcrest.Matcher
 
 /**
  * An implementation of [WebInteractionDelegate], that delegates the [Web.WebInteraction]'s interface calls
