@@ -28,8 +28,9 @@ private fun StackTraceElement.isCucumber(): Boolean {
     return TEST_CASE_CLASS_CUCUMBER_JVM == className && TEST_CASE_METHOD_CUCUMBER_JVM == methodName
 }
 
+@Suppress("MagicNumber")
 private fun Array<StackTraceElement>.extractStackElement(i: Int): StackTraceElement {
     // Stacktrace length changed in M
-    val testClassTraceIndex = if (Build.VERSION.SDK_INT >= 23) i - 2 else i - 3
+    val testClassTraceIndex = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) i - 2 else i - 3
     return this[testClassTraceIndex]
 }

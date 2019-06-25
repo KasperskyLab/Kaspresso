@@ -22,6 +22,12 @@ class AppsImpl(
     private val uiDevice: UiDevice
 ) : Apps {
 
+    companion object {
+
+        const val LAUNCH_RECENT_TIMEOUT = 1_000L
+        const val LAUNCH_APP_TIMEOUT = 5_000L
+    }
+
     private val chromePackageName: String = "com.android.chrome"
 
     override val targetAppLauncherPackageName: String = uiDevice.launcherPackageName
@@ -89,7 +95,7 @@ class AppsImpl(
 
         val condition = Until.hasObject(By.pkg(packageName).depth(0))
 
-        uiDevice.wait(condition, 5_000)
+        uiDevice.wait(condition, LAUNCH_APP_TIMEOUT)
     }
 
     override fun openRecent(contentDescription: String) {
@@ -98,13 +104,13 @@ class AppsImpl(
         val appSelector = UiSelector().descriptionContains(contentDescription)
         val recentApp = uiDevice.findObject(appSelector)
 
-        Thread.sleep(1_000)
+        Thread.sleep(LAUNCH_RECENT_TIMEOUT)
 
         if (recentApp.exists()) {
             recentApp.click()
         }
 
-        Thread.sleep(1_000)
+        Thread.sleep(LAUNCH_RECENT_TIMEOUT)
     }
 
     override fun kill(packageName: String) {
