@@ -57,6 +57,13 @@ fun <T> attempt(
 
     logger.e(caughtAllowedException.getStackTraceAsString())
 
+    failAttempt(message, caughtAllowedException)
+}
+
+/**
+ *  Throws [KaspressoAssertionError] if message is specified, or [caughtAllowedException] otherwise.
+ */
+private fun failAttempt(message: String?, caughtAllowedException: Throwable): Nothing {
     if (message != null) {
         throw KaspressoAssertionError(message, caughtAllowedException)
     }

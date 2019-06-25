@@ -40,8 +40,8 @@ internal class InternalScreenshotMaker(
 
         fillBitmap(activity, bitmap, file)
 
-        BufferedOutputStream(FileOutputStream(file)).use {
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, it)
+        BufferedOutputStream(FileOutputStream(file)).use { outputStream ->
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
             file.setReadable(true, false)
         }
         bitmap.recycle()
