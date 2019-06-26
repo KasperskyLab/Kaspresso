@@ -8,8 +8,8 @@ import com.kaspersky.kaspresso.testcases.core.step.StepsManager
 import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
 import com.kaspersky.kaspresso.testcases.core.testcontext.TestContext
 import com.kaspersky.kaspresso.testcases.models.MainTestSectionResult
-import com.kaspersky.kaspresso.testcases.models.info.StepInfo
 import com.kaspersky.kaspresso.testcases.models.TestBody
+import com.kaspersky.kaspresso.testcases.models.info.StepInfo
 import com.kaspersky.kaspresso.testcases.models.info.TestInfo
 
 internal class TestRunner<InitData, Data>(
@@ -71,6 +71,7 @@ internal class TestRunner<InitData, Data>(
         resultException?.let { throw it }
     }
 
+    @Suppress("LongParameterList")
     private fun runBeforeTestSection(
         testInfo: TestInfo,
         beforeTestActions: BaseTestContext.() -> Unit,

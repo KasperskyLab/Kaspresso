@@ -54,7 +54,7 @@ class ScreenshotsDirectoryStorage {
     }
 
     private fun getScreenshotDirectory(context: Context, screenshotDir: File): File {
-        return if (Build.VERSION.SDK_INT >= 21) {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             // Use external storage.
             Environment.getExternalStorageDirectory().resolve(screenshotDir)
         } else {

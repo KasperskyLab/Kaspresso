@@ -5,10 +5,10 @@ import android.support.test.InstrumentationRegistry
 import android.support.test.runner.lifecycle.ActivityLifecycleCallback
 import android.support.test.runner.lifecycle.ActivityLifecycleMonitorRegistry
 import android.support.test.runner.lifecycle.Stage
+import java.util.Locale
 import org.junit.rules.TestRule
 import org.junit.runner.Description
 import org.junit.runners.model.Statement
-import java.util.*
 
 /**
  *  Test rule to switch locales.

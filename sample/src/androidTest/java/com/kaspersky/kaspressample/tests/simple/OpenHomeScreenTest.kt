@@ -4,8 +4,8 @@ import android.Manifest
 import android.support.test.rule.ActivityTestRule
 import android.support.test.rule.GrantPermissionRule
 import android.support.test.runner.AndroidJUnit4
-import com.kaspersky.kaspressample.scenarios.CheckHomeTitleScenario
 import com.kaspersky.kaspressample.MainActivity
+import com.kaspersky.kaspressample.scenarios.CheckHomeTitleScenario
 import com.kaspersky.kaspressample.screen.HomeScreen
 import com.kaspersky.kaspressample.screen.MainScreen
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
@@ -49,7 +49,7 @@ class OpenHomeScreenTest : TestCase() {
                 homeScreen {
                     title {
                         isVisible()
-                        //hasText("Ooops!") //Uncomment to fail test
+                        // hasText("Ooops!") //Uncomment to fail test
                     }
                 }
             }
@@ -60,14 +60,13 @@ class OpenHomeScreenTest : TestCase() {
 
                 homeScreen {
                     title {
-                        //hasText("Ooops!") //Uncomment to fail test
+                        // hasText("Ooops!") //Uncomment to fail test
                     }
                 }
                 step("Just Empty SubStep") {
                     step("Just Empty SubSubStep") {}
                 }
             }
-
 
             step("Just Empty Step") {}
         }

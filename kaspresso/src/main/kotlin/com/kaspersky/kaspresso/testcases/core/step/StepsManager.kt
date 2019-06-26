@@ -1,8 +1,8 @@
 package com.kaspersky.kaspresso.testcases.core.step
 
+import com.kaspersky.kaspresso.testcases.models.StepStatus
 import com.kaspersky.kaspresso.testcases.models.info.InternalStepInfo
 import com.kaspersky.kaspresso.testcases.models.info.StepInfo
-import com.kaspersky.kaspresso.testcases.models.StepStatus
 
 /**
  * [StepsManager] produces step and manages lifecycle of step.

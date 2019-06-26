@@ -1,7 +1,6 @@
 package com.kaspersky.kaspresso.logger.composite
 
 import com.kaspersky.kaspresso.logger.UiTestLogger
-import java.lang.StringBuilder
 
 class CompositeError internal constructor(
     private val logger: UiTestLogger

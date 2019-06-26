@@ -15,6 +15,11 @@ internal class InternalScreenshotMaker(
     private val screenshotFiles: ScreenshotFiles
 ) {
 
+    companion object {
+
+        const val PICTURE_QUALITY = 100
+    }
+
     /**
      * Takes a screenshot with the specified tag.
      *
@@ -40,8 +45,8 @@ internal class InternalScreenshotMaker(
 
         fillBitmap(activity, bitmap, file)
 
-        BufferedOutputStream(FileOutputStream(file)).use {
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, it)
+        BufferedOutputStream(FileOutputStream(file)).use { outputStream ->
+            bitmap.compress(Bitmap.CompressFormat.PNG, PICTURE_QUALITY, outputStream)
             file.setReadable(true, false)
         }
         bitmap.recycle()

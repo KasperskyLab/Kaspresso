@@ -1,10 +1,10 @@
 package com.kaspersky.kaspresso.testcases.api.testcase
 
 import com.kaspersky.kaspresso.configurator.Configurator
-import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
-import com.kaspersky.kaspresso.testcases.models.TestBody
 import com.kaspersky.kaspresso.testcases.core.sections.AfterTestSection
 import com.kaspersky.kaspresso.testcases.core.sections.BeforeTestSection
+import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
+import com.kaspersky.kaspresso.testcases.models.TestBody
 
 /**
  *  A base class for all parametrized test cases. Extend this class with a single base project-wide inheritor of

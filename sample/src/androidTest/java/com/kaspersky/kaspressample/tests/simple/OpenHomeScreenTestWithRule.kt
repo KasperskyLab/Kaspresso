@@ -51,7 +51,7 @@ class OpenHomeScreenTestWithRule {
                     title {
                         isVisible()
                         attempt(message = "You should've been commented this line before launching the test") {
-                            //hasText("Ooops!") //Uncomment to fail test
+                            // hasText("Ooops!") //Uncomment to fail test
                         }
                     }
                 }
@@ -59,5 +59,4 @@ class OpenHomeScreenTestWithRule {
             step("Just Empty Step") {}
         }
     }
-
 }
