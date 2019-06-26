@@ -1,7 +1,6 @@
 package com.kaspersky.kaspresso.device.apps
 
 import android.net.Uri
-import android.os.Build
 
 /**
  * An interface to work with installer, launcher and package manager.
@@ -18,12 +17,16 @@ interface Apps {
     /**
      *  Installs an app via ADB.
      *
+     *  Required Permissions: INTERNET.
+     *
      *  @param apkPath a path to an apk to be installed. The apk is hosted on the test server.
      */
     fun install(apkPath: String)
 
     /**
      *  Uninstalls an app via ADB.
+     *
+     *  Required Permissions: INTERNET.
      *
      *  @param packageName an android package name of an app to be deleted.
      */

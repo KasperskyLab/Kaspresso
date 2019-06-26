@@ -3,12 +3,10 @@ package com.kaspersky.kaspresso.device.apps
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.support.test.InstrumentationRegistry
 import android.support.test.uiautomator.By
 import android.support.test.uiautomator.UiDevice
 import android.support.test.uiautomator.UiSelector
 import android.support.test.uiautomator.Until
-import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.device.server.AdbServer
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import org.hamcrest.CoreMatchers
@@ -18,16 +16,19 @@ import org.junit.Assert
 /**
  * Default implementation of Apps interface.
  */
-class AppsImpl : Apps {
+class AppsImpl(
+    private val logger: UiTestLogger,
+    private val context: Context,
+    private val uiDevice: UiDevice
+) : Apps {
 
-    private val chromePackageName = "com.android.chrome"
+    companion object {
 
-    private val context: Context
-        get() = InstrumentationRegistry.getInstrumentation().context
+        const val LAUNCH_RECENT_TIMEOUT = 1_000L
+        const val LAUNCH_APP_TIMEOUT = 5_000L
+    }
 
-    private val uiDevice: UiDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
-
-    private val logger: UiTestLogger = Configurator.logger
+    private val chromePackageName: String = "com.android.chrome"
 
     override val targetAppLauncherPackageName: String = uiDevice.launcherPackageName
 
@@ -35,6 +36,8 @@ class AppsImpl : Apps {
 
     /**
      *  Installs an app via ADB.
+     *
+     *  Required Permissions: INTERNET.
      *
      *  @param apkPath a path to an apk to be installed. The apk is hosted on the test server.
      */
@@ -44,6 +47,8 @@ class AppsImpl : Apps {
 
     /**
      *  Uninstalls an app via ADB.
+     *
+     *  Required Permissions: INTERNET.
      *
      *  @param packageName an android package name of an app to be deleted.
      */
@@ -90,7 +95,7 @@ class AppsImpl : Apps {
 
         val condition = Until.hasObject(By.pkg(packageName).depth(0))
 
-        uiDevice.wait(condition, 5_000)
+        uiDevice.wait(condition, LAUNCH_APP_TIMEOUT)
     }
 
     override fun openRecent(contentDescription: String) {
@@ -99,13 +104,13 @@ class AppsImpl : Apps {
         val appSelector = UiSelector().descriptionContains(contentDescription)
         val recentApp = uiDevice.findObject(appSelector)
 
-        Thread.sleep(1_000)
+        Thread.sleep(LAUNCH_RECENT_TIMEOUT)
 
         if (recentApp.exists()) {
             recentApp.click()
         }
 
-        Thread.sleep(1_000)
+        Thread.sleep(LAUNCH_RECENT_TIMEOUT)
     }
 
     override fun kill(packageName: String) {

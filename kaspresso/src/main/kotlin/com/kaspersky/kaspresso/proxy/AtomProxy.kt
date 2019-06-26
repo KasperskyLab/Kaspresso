@@ -13,6 +13,8 @@ class AtomProxy<R>(
     private val interceptors: List<AtomInterceptor>
 ) : Atom<R> {
 
+    private var lastArgs: MutableList<Any>? = null
+
     /**
      * Simply calls [Atom.getArguments] on wrapped [atom].
      *
@@ -20,7 +22,7 @@ class AtomProxy<R>(
      * @return a [List] of objects to pass to the script as arguments.
      */
     override fun getArguments(elementContext: ElementReference?): MutableList<Any> {
-        return atom.getArguments(elementContext)
+        return atom.getArguments(elementContext).also { lastArgs = it }
     }
 
     /**
@@ -30,7 +32,7 @@ class AtomProxy<R>(
      * @return [R] a result type of the atom.
      */
     override fun transform(evaluation: Evaluation?): R {
-        interceptors.forEach { it.intercept(evaluation) }
+        interceptors.forEach { it.intercept(evaluation, atom, lastArgs) }
         return atom.transform(evaluation)
     }
 

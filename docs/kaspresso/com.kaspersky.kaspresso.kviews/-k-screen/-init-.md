@@ -4,5 +4,5 @@
 
 `KScreen()`
 
-An extension of [com.kaspersky.klkakao.screen.Screen](#).
+An extension of [com.agoda.kakao.screen.Screen](#).
 

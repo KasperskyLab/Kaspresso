@@ -1,4 +1,4 @@
-[kaspresso](../../index.md) / [com.kaspersky.kaspresso.extensions.kakaoext](../index.md) / [com.kaspersky.klkakao.text.TextViewActions](index.md) / [getText](./get-text.md)
+[kaspresso](../../index.md) / [com.kaspersky.kaspresso.extensions.kakaoext](../index.md) / [com.agoda.kakao.text.TextViewActions](index.md) / [getText](./get-text.md)
 
 # getText
 

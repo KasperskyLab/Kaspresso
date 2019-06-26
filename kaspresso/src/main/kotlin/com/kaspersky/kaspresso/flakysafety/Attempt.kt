@@ -1,14 +1,16 @@
 package com.kaspersky.kaspresso.flakysafety
 
 import com.kaspersky.kaspresso.configurator.Configurator
-import com.kaspersky.kaspresso.logger.UiTestLogger
+import com.kaspersky.kaspresso.exceptions.KaspressoAssertionError
 import com.kaspersky.kaspresso.extensions.other.getStackTraceAsString
+import com.kaspersky.kaspresso.logger.UiTestLogger
 
 /**
  * Makes several attempts to invoke an action.
  *
  * @param timeoutMs a timeout for all attempts in milliseconds.
  * @param intervalMs an interval between attempts in milliseconds.
+ * @param message a message of an AssertionError if it's set to anything but null.
  * @param logger a logger to log errors.
  * @param allowedExceptions exceptions that doesn't stop attempts.
  * @param action an action that is attempted to be invoked.
@@ -17,6 +19,7 @@ import com.kaspersky.kaspresso.extensions.other.getStackTraceAsString
 fun <T> attempt(
     timeoutMs: Long = Configurator.attemptsTimeoutMs,
     intervalMs: Long = Configurator.attemptsIntervalMs,
+    message: String? = null,
     logger: UiTestLogger = Configurator.logger,
     allowedExceptions: Set<Class<out Throwable>> = Configurator.allowedExceptionsForAttempt,
     action: () -> T
@@ -53,6 +56,17 @@ fun <T> attempt(
     )
 
     logger.e(caughtAllowedException.getStackTraceAsString())
+
+    failAttempt(message, caughtAllowedException)
+}
+
+/**
+ *  Throws [KaspressoAssertionError] if message is specified, or [caughtAllowedException] otherwise.
+ */
+private fun failAttempt(message: String?, caughtAllowedException: Throwable): Nothing {
+    if (message != null) {
+        throw KaspressoAssertionError(message, caughtAllowedException)
+    }
 
     throw caughtAllowedException
 }

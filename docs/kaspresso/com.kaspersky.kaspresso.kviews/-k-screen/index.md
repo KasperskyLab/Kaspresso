@@ -4,13 +4,13 @@
 
 `abstract class KScreen<out T : `[`KScreen`](./index.md)`<`[`T`](index.md#T)`>> : ScreenActions`
 
-An extension of [com.kaspersky.klkakao.screen.Screen](#).
+An extension of [com.agoda.kakao.screen.Screen](#).
 
 ### Constructors
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | `KScreen()`<br>An extension of [com.kaspersky.klkakao.screen.Screen](#). |
+| [&lt;init&gt;](-init-.md) | `KScreen()`<br>An extension of [com.agoda.kakao.screen.Screen](#). |
 
 ### Properties
 
