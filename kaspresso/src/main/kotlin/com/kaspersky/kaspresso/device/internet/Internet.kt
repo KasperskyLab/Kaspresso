@@ -7,11 +7,15 @@ interface Internet {
 
     /**
      *  Enables wi-fi and mobile data using adb.
+     *
+     *  Required Permissions: INTERNET.
      */
     fun enable()
 
     /**
      *  Disables wi-fi and mobile data using adb.
+     *
+     *  Required Permissions: INTERNET.
      */
     fun disable()
 

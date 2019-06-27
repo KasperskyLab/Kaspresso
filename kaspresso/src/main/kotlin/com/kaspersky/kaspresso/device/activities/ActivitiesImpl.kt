@@ -6,7 +6,6 @@ import android.support.test.InstrumentationRegistry
 import android.support.test.internal.runner.junit4.statement.UiThreadStatement
 import android.support.test.runner.lifecycle.ActivityLifecycleMonitorRegistry
 import android.support.test.runner.lifecycle.Stage
-import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import org.hamcrest.CoreMatchers
 import org.junit.Assert
@@ -14,9 +13,9 @@ import org.junit.Assert
 /**
  * Default implementation of Activities interface.
  */
-class ActivitiesImpl : Activities {
-
-    private val logger: UiTestLogger = Configurator.logger
+class ActivitiesImpl(
+    private val logger: UiTestLogger
+) : Activities {
 
     /**
      * Checks if this is a main thread.
@@ -27,7 +26,7 @@ class ActivitiesImpl : Activities {
     /**
      * Finds and returns resumed activity if it exists, otherwise logs error.
      *
-     * @return nullable resumed activity
+     * @return nullable resumed activity.
      */
     override fun getResumed(): Activity? {
         var resumedActivity: Activity? = null

@@ -1,6 +1,6 @@
-[kaspresso](../../index.md) / [com.kaspersky.kaspresso.extensions.kakaoext](../index.md) / [com.kaspersky.klkakao.text.TextViewActions](./index.md)
+[kaspresso](../../index.md) / [com.kaspersky.kaspresso.extensions.kakaoext](../index.md) / [com.agoda.kakao.text.TextViewActions](./index.md)
 
-### Extensions for com.kaspersky.klkakao.text.TextViewActions
+### Extensions for com.agoda.kakao.text.TextViewActions
 
 | Name | Summary |
 |---|---|

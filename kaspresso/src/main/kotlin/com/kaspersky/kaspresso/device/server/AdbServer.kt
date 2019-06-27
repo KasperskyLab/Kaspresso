@@ -16,6 +16,8 @@ object AdbServer {
     /**
      *  Executes shell commands blocking current thread.
      *
+     *  Required Permissions: INTERNET.
+     *
      *  @param commands commands to execute.
      */
     fun performCmd(vararg commands: String) {
@@ -25,6 +27,8 @@ object AdbServer {
     /**
      *  Performs adb commands blocking current thread.
      *
+     *  Required Permissions: INTERNET.
+     *
      *  @param commands commands to execute.
      */
     fun performAdb(vararg commands: String) {
@@ -33,6 +37,8 @@ object AdbServer {
 
     /**
      *  Performs shell commands blocking current thread.
+     *
+     *  Required Permissions: INTERNET.
      *
      *  @param commands commands to execute.
      */

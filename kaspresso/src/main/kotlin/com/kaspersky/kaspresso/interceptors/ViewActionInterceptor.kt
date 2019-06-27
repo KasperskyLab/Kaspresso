@@ -1,7 +1,7 @@
 package com.kaspersky.kaspresso.interceptors
 
-import android.view.View
 import android.support.test.espresso.ViewAction
+import android.view.View
 
 /**
  * An interface for all view action interceptors, used in [com.kaspersky.kaspresso.proxy.ViewActionProxy].

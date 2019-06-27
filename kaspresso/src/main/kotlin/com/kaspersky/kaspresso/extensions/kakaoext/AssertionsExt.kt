@@ -1,8 +1,8 @@
 package com.kaspersky.kaspresso.extensions.kakaoext
 
+import com.agoda.kakao.common.assertions.BaseAssertions
 import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.logger.UiTestLogger
-import com.kaspersky.klkakao.common.assertions.BaseAssertions
 
 /**
  * A multiple assertion.

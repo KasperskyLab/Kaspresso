@@ -4,19 +4,19 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.net.wifi.WifiManager
 import android.os.Build
-import android.support.test.InstrumentationRegistry
 import com.kaspersky.kaspresso.device.server.AdbServer
 
 /**
  * Default implementation of Internet interface.
  */
-class InternetImpl: Internet {
-
+class InternetImpl(
     private val targetContext: Context
-        get() = InstrumentationRegistry.getTargetContext()
+) : Internet {
 
     /**
      *  Enables wi-fi and mobile data using adb.
+     *
+     *  Required Permissions: INTERNET.
      */
     override fun enable() {
         AdbServer.performAdb("shell svc data enable", "shell svc wifi enable")
@@ -24,6 +24,8 @@ class InternetImpl: Internet {
 
     /**
      *  Disables wi-fi and mobile data using adb.
+     *
+     *  Required Permissions: INTERNET.
      */
     override fun disable() {
         AdbServer.performAdb("shell svc data disable", "shell svc wifi disable")
