@@ -13,6 +13,7 @@ import com.kaspersky.kaspresso.device.internet.Internet
 import com.kaspersky.kaspresso.device.keyboard.Keyboard
 import com.kaspersky.kaspresso.device.location.Location
 import com.kaspersky.kaspresso.device.permissions.Permissions
+import com.kaspersky.kaspresso.device.phone.Phone
 import com.kaspersky.kaspresso.device.screenshots.Screenshots
 
 /**
@@ -67,6 +68,11 @@ class Device(configurator: Configurator) {
      * Holds a reference to an implementation of [Keyboard] interface, held by [Configurator].
      */
     val keyboard: Keyboard = configurator.keyboard
+
+    /**
+     * Holds a reference to an implementation of [Phone] interface, held by [Configurator].
+     */
+    val phone: Phone = configurator.phone
 
     /**
      * Holds a reference to an implementation of [Screenshots] interface, held by [Configurator].
