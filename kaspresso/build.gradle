@@ -37,7 +37,6 @@ dependencies {
 
     testImplementation "junit:junit:$versions.junit"
 
-    implementation "com.android.support:design:$versions.androidSupport"
     implementation "com.android.support.test:runner:$versions.runner"
     implementation "com.android.support.test.espresso:espresso-web:$versions.espresso"
     implementation "com.android.support.test.espresso:espresso-core:$versions.espresso"
@@ -45,7 +44,6 @@ dependencies {
     implementation "com.android.support.test.espresso:espresso-intents:$versions.espresso"
     implementation "com.android.support.test.uiautomator:uiautomator-v18:$versions.uiautomator"
 
-    implementation "com.squareup.retrofit2:retrofit:$versions.retrofit"
     implementation "com.kaspersky.components:test-server:$versions.server"
 }
 
