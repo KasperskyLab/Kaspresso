@@ -59,11 +59,6 @@ import com.kaspersky.kaspresso.testcases.core.testcontext.TestContext
 /**
  * A class that keeps all settings.
  *
- * @param attemptsTimeoutMs A timeout for all action attempts in milliseconds.
- * @param attemptsIntervalMs A frequency of action attempts in milliseconds.
- * @param logger Holds an implementation of [UiTestLogger] interface for inner framework usage.
- * @param externalLogger Holds an implementation of [UiTestLogger] interface for external usage.
- * @param compositeLogger Holds an instance of [CompositeLogger] for inner framework usage. Not accessible from outside.
  * @param apps Holds an implementation of [Apps] interface. If it was not specified in [Configurator.Builder], the
  * default implementation is used.
  * @param activities Holds an implementation of [Activities] interface. If it was not specified in [Configurator.Builder],
@@ -86,7 +81,6 @@ import com.kaspersky.kaspresso.testcases.core.testcontext.TestContext
  * the default implementation is used.
  * @param exploit Holds an implementation of [Exploit] interface. If it was not specified in [Configurator.Builder],
  * the default implementation is used.
- * @param allowedExceptionsForAttempt Exceptions that doesn't stop attempts.
  * @param viewActionInterceptors Interceptors that are called by [com.kaspersky.kaspresso.proxy.ViewActionProxy]
  * before actually [android.support.test.espresso.ViewAction.perform] call.
  * @param viewAssertionInterceptors Interceptors that are called by [com.kaspersky.kaspresso.proxy.ViewAssertionProxy]
@@ -103,11 +97,6 @@ import com.kaspersky.kaspresso.testcases.core.testcontext.TestContext
  * [com.kaspersky.kaspresso.testcases.models.TestInfo]. Interceptor works using decorator pattern. First interceptor wraps others.
  */
 class Configurator(
-    internal val attemptsTimeoutMs: Long = DEFAULT_ATTEMPTS_TIMEOUT_MS,
-    internal val attemptsIntervalMs: Long = DEFAULT_ATTEMPTS_INTERVAL_MS,
-    internal val logger: UiTestLogger,
-    internal val externalLogger: UiTestLogger,
-    internal val compositeLogger: CompositeLogger,
     internal val apps: Apps,
     internal val activities: Activities,
     internal val files: Files,
@@ -119,7 +108,6 @@ class Configurator(
     internal val accessibility: Accessibility,
     internal val permissions: Permissions,
     internal val exploit: Exploit,
-    internal val allowedExceptionsForAttempt: Set<Class<out Throwable>>,
     internal val viewActionInterceptors: List<ViewActionInterceptor>,
     internal val viewAssertionInterceptors: List<ViewAssertionInterceptor>,
     internal val atomInterceptors: List<AtomInterceptor>,
@@ -134,18 +122,42 @@ class Configurator(
         internal const val DEFAULT_ATTEMPTS_INTERVAL_MS: Long = 500L
 
         internal const val DEFAULT_INNER_LOGGER_TAG: String = "KASPRESSO"
-        internal const val DEFAULT_OUTER_LOGGER_TAG: String = "KASPRESSO_SPECIAL"
+        internal const val DEFAULT_EXTERNAL_LOGGER_TAG: String = "KASPRESSO_SPECIAL"
 
+        /**
+         * A timeout for all action attempts in milliseconds.
+         */
         internal var attemptsTimeoutMs: Long = DEFAULT_ATTEMPTS_TIMEOUT_MS
+
+        /**
+         * A frequency of action attempts in milliseconds.
+         */
         internal var attemptsIntervalMs: Long = DEFAULT_ATTEMPTS_INTERVAL_MS
-        internal var logger: UiTestLogger = UiTestLoggerImpl(DEFAULT_INNER_LOGGER_TAG)
-        internal var compositeLogger: CompositeLogger = CompositeLogger(logger)
+
+        /**
+         * Exceptions that doesn't stop attempts.
+         */
         internal var allowedExceptionsForAttempt: Set<Class<out Throwable>> =
             setOf(
                 PerformException::class.java,
                 NoMatchingViewException::class.java,
                 AssertionError::class.java
             )
+
+        /**
+         * Holds an implementation of [UiTestLogger] interface for inner framework usage.
+         */
+        internal var logger: UiTestLogger = UiTestLoggerImpl(DEFAULT_INNER_LOGGER_TAG)
+
+        /**
+         * Holds an implementation of [UiTestLogger] interface for external usage.
+         */
+        internal var externalLogger: UiTestLogger = UiTestLoggerImpl(DEFAULT_EXTERNAL_LOGGER_TAG)
+
+        /**
+         *Holds an instance of [CompositeLogger] for inner framework usage. Not accessible from outside.
+         */
+        internal var compositeLogger: CompositeLogger = CompositeLogger(logger)
     }
 
     /**
@@ -191,9 +203,14 @@ class Configurator(
 
         var attemptsTimeoutMs: Long = DEFAULT_ATTEMPTS_TIMEOUT_MS
         var attemptsIntervalMs: Long = DEFAULT_ATTEMPTS_INTERVAL_MS
+        var allowedExceptionsForAttempt: Set<Class<out Throwable>> = setOf(
+            PerformException::class.java,
+            NoMatchingViewException::class.java,
+            AssertionError::class.java
+        )
 
         var logger: UiTestLogger = UiTestLoggerImpl(DEFAULT_INNER_LOGGER_TAG)
-        var externalLogger: UiTestLogger = UiTestLoggerImpl(DEFAULT_OUTER_LOGGER_TAG)
+        var externalLogger: UiTestLogger = UiTestLoggerImpl(DEFAULT_EXTERNAL_LOGGER_TAG)
         var compositeLogger: CompositeLogger = CompositeLogger(logger)
 
         var apps: Apps = AppsImpl(
@@ -213,12 +230,6 @@ class Configurator(
             PermissionsImpl(logger, UiDevice.getInstance(InstrumentationRegistry.getInstrumentation()))
         var exploit: Exploit =
             ExploitImpl(activities, UiDevice.getInstance(InstrumentationRegistry.getInstrumentation()))
-
-        var allowedExceptionsForAttempt: Set<Class<out Throwable>> = setOf(
-            PerformException::class.java,
-            NoMatchingViewException::class.java,
-            AssertionError::class.java
-        )
 
         var viewActionInterceptors: List<ViewActionInterceptor> = emptyList()
         var viewAssertionInterceptors: List<ViewAssertionInterceptor> = emptyList()
@@ -245,14 +256,6 @@ class Configurator(
         internal fun build(): Configurator {
 
             val configurator = Configurator(
-
-                attemptsTimeoutMs = attemptsTimeoutMs,
-                attemptsIntervalMs = attemptsIntervalMs,
-
-                logger = logger,
-                externalLogger = externalLogger,
-                compositeLogger = compositeLogger,
-
                 apps = apps,
                 activities = activities,
                 files = files,
@@ -264,8 +267,6 @@ class Configurator(
                 accessibility = accessibility,
                 permissions = permissions,
                 exploit = exploit,
-
-                allowedExceptionsForAttempt = allowedExceptionsForAttempt,
 
                 viewActionInterceptors = viewActionInterceptors,
                 viewAssertionInterceptors = viewAssertionInterceptors,
@@ -288,10 +289,12 @@ class Configurator(
                 initWebInteractionDelegateFactory { WebInteractionDelegateKaspressoImpl(it, configurator) }
             }
 
-            Configurator.allowedExceptionsForAttempt = allowedExceptionsForAttempt
-            Configurator.attemptsIntervalMs = attemptsIntervalMs
             Configurator.attemptsTimeoutMs = attemptsTimeoutMs
+            Configurator.attemptsIntervalMs = attemptsIntervalMs
+            Configurator.allowedExceptionsForAttempt = allowedExceptionsForAttempt
+
             Configurator.logger = logger
+            Configurator.externalLogger = externalLogger
             Configurator.compositeLogger = compositeLogger
 
             return configurator

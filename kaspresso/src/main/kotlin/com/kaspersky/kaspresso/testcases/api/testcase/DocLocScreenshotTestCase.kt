@@ -2,6 +2,7 @@ package com.kaspersky.kaspresso.testcases.api.testcase
 
 import android.Manifest
 import android.support.test.rule.GrantPermissionRule
+import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.device.locales.Locales
 import com.kaspersky.kaspresso.device.screenshots.docloc.DocLocScreenshotCapturer
 import com.kaspersky.kaspresso.extensions.other.getAllInterfaces
@@ -81,7 +82,7 @@ abstract class DocLocScreenshotTestCase(
     private lateinit var screenshotsDir: File
     private lateinit var screenshotCapturer: DocLocScreenshotCapturer
 
-    @PublishedApi internal val logger = configurator.logger
+    @PublishedApi internal val logger = Configurator.logger
     private val confLocales: Locales = Locales(logger)
 
     @get:Rule
