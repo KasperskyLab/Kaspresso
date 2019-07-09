@@ -9,8 +9,6 @@ import com.kaspersky.test_server.api.ExecutorResultStatus
  */
 object AdbServer {
 
-    private val TAG = javaClass.simpleName
-
     private val adbTerminal: AdbTerminal by lazy {
         AdbTerminal.apply {
             connect()
@@ -24,15 +22,19 @@ object AdbServer {
      *
      *  @param commands commands to execute.
      *  @throws AdbServerException if command result status is Failed
+     *  @return list of answers of command execution
      */
-    fun performCmd(vararg commands: String) {
+    fun performCmd(vararg commands: String): List<String> {
+        val answers = mutableListOf<String>()
         commands.forEach { command ->
             val commandResult = adbTerminal.executeCmd(command)
-            Configurator.logger.i(TAG, "cmd command=$command was performed with result=$commandResult")
+            Configurator.logger.i("cmd command=$command was performed with result=$commandResult")
             if (commandResult.status == ExecutorResultStatus.FAILED) {
                 throw AdbServerException("cmd command=$command was performed with failed result=$commandResult")
             }
+            answers.add(commandResult.description)
         }
+        return answers
     }
 
     /**
@@ -42,15 +44,19 @@ object AdbServer {
      *
      *  @param commands commands to execute.
      *  @throws AdbServerException if command result status is Failed
+     *  @return list of answers of command execution
      */
-    fun performAdb(vararg commands: String) {
+    fun performAdb(vararg commands: String): List<String> {
+        val answers = mutableListOf<String>()
         commands.forEach { command ->
             val commandResult = adbTerminal.executeAdb(command)
-            Configurator.logger.i(TAG, "adb command=$command was performed with result=$commandResult")
+            Configurator.logger.i("adb command=$command was performed with result=$commandResult")
             if (commandResult.status == ExecutorResultStatus.FAILED) {
                 throw AdbServerException("adb command=$command was performed with failed result=$commandResult")
             }
+            answers.add(commandResult.description)
         }
+        return answers
     }
 
     /**
@@ -59,10 +65,16 @@ object AdbServer {
      *  Required Permissions: INTERNET.
      *
      *  @param commands commands to execute.
+     *  @throws AdbServerException if command result status is Failed
+     *  @return list of answers of command execution
      */
-    fun performShell(vararg commands: String) {
+    fun performShell(vararg commands: String): List<String> {
+        val answers = mutableListOf<String>()
         commands.forEach { command ->
-            performAdb("shell $command")
+            answers.addAll(
+                performAdb("shell $command")
+            )
         }
+        return answers
     }
 }
