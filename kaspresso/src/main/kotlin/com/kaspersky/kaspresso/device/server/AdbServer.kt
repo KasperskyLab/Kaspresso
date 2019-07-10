@@ -17,64 +17,63 @@ object AdbServer {
 
     /**
      *  Executes shell commands blocking current thread.
+     *  Please be aware! If any command that is in @param commands failed then AdbServerException will be thrown
      *
      *  Required Permissions: INTERNET.
      *
      *  @param commands commands to execute.
-     *  @throws AdbServerException if command result status is Failed
-     *  @return list of answers of command execution
+     *  @throws AdbServerException if a result status of any command in @param commands is Failed
+     *  @return sequence of answers of commands' execution
      */
-    fun performCmd(vararg commands: String): List<String> {
-        val answers = mutableListOf<String>()
-        commands.forEach { command ->
-            val commandResult = adbTerminal.executeCmd(command)
-            Configurator.logger.i("cmd command=$command was performed with result=$commandResult")
-            if (commandResult.status == ExecutorResultStatus.FAILED) {
-                throw AdbServerException("cmd command=$command was performed with failed result=$commandResult")
+    fun performCmd(vararg commands: String): Sequence<String> {
+        return commands.asSequence()
+            .map { command -> command to adbTerminal.executeCmd(command) }
+            .onEach { (command, result) ->
+                Configurator.logger.i("cmd command=$command was performed with result=$result")
             }
-            answers.add(commandResult.description)
-        }
-        return answers
+            .onEach { (command, result) ->
+                if (result.status == ExecutorResultStatus.FAILED)
+                    throw AdbServerException("cmd command=$command was performed with failed result=$result")
+            }
+            .map { (_, result) -> result.description }
     }
 
     /**
      *  Performs adb commands blocking current thread.
+     *  Please be aware! If any command that is in @param commands failed then AdbServerException will be thrown
      *
      *  Required Permissions: INTERNET.
      *
      *  @param commands commands to execute.
-     *  @throws AdbServerException if command result status is Failed
-     *  @return list of answers of command execution
+     *  @throws AdbServerException if a result status of any command in @param commands is Failed
+     *  @return sequence of answers of commands' execution
      */
-    fun performAdb(vararg commands: String): List<String> {
-        val answers = mutableListOf<String>()
-        commands.forEach { command ->
-            val commandResult = adbTerminal.executeAdb(command)
-            Configurator.logger.i("adb command=$command was performed with result=$commandResult")
-            if (commandResult.status == ExecutorResultStatus.FAILED) {
-                throw AdbServerException("adb command=$command was performed with failed result=$commandResult")
+    fun performAdb(vararg commands: String): Sequence<String> {
+        return commands.asSequence()
+            .map { command -> command to adbTerminal.executeAdb(command) }
+            .onEach { (command, result) ->
+                Configurator.logger.i("adb command=$command was performed with result=$result")
             }
-            answers.add(commandResult.description)
-        }
-        return answers
+            .onEach { (command, result) ->
+                if (result.status == ExecutorResultStatus.FAILED)
+                    throw AdbServerException("adb command=$command was performed with failed result=$result")
+            }
+            .map { (_, result) -> result.description }
     }
 
     /**
      *  Performs shell commands blocking current thread.
+     *  Please be aware! If any command that is in @param commands failed then AdbServerException will be thrown
      *
      *  Required Permissions: INTERNET.
      *
      *  @param commands commands to execute.
-     *  @throws AdbServerException if command result status is Failed
-     *  @return list of answers of command execution
+     *  @throws AdbServerException if a result status of any command in @param commands is Failed
+     *  @return sequence of answers of commands' execution
      */
-    fun performShell(vararg commands: String): List<String> {
-        val answers = mutableListOf<String>()
-        commands.forEach { command ->
-            answers.addAll(
-                performAdb("shell $command")
-            )
-        }
-        return answers
+    fun performShell(vararg commands: String): Sequence<String> {
+        return commands.asSequence()
+            .onEach { command -> performAdb("shell $command") }
     }
+
 }
