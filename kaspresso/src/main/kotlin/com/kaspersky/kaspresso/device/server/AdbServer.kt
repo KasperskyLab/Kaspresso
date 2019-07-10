@@ -25,7 +25,7 @@ object AdbServer {
      *  @throws AdbServerException if a result status of any command in @param commands is Failed
      *  @return sequence of answers of commands' execution
      */
-    fun performCmd(vararg commands: String): Sequence<String> {
+    fun performCmd(vararg commands: String): List<String> {
         return commands.asSequence()
             .map { command -> command to adbTerminal.executeCmd(command) }
             .onEach { (command, result) ->
@@ -36,6 +36,7 @@ object AdbServer {
                     throw AdbServerException("cmd command=$command was performed with failed result=$result")
             }
             .map { (_, result) -> result.description }
+            .toList()
     }
 
     /**
@@ -48,7 +49,7 @@ object AdbServer {
      *  @throws AdbServerException if a result status of any command in @param commands is Failed
      *  @return sequence of answers of commands' execution
      */
-    fun performAdb(vararg commands: String): Sequence<String> {
+    fun performAdb(vararg commands: String): List<String> {
         return commands.asSequence()
             .map { command -> command to adbTerminal.executeAdb(command) }
             .onEach { (command, result) ->
@@ -59,6 +60,7 @@ object AdbServer {
                     throw AdbServerException("adb command=$command was performed with failed result=$result")
             }
             .map { (_, result) -> result.description }
+            .toList()
     }
 
     /**
@@ -71,8 +73,9 @@ object AdbServer {
      *  @throws AdbServerException if a result status of any command in @param commands is Failed
      *  @return sequence of answers of commands' execution
      */
-    fun performShell(vararg commands: String): Sequence<String> {
+    fun performShell(vararg commands: String): List<String> {
         return commands.asSequence()
             .onEach { command -> performAdb("shell $command") }
+            .toList()
     }
 }
