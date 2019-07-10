@@ -75,5 +75,4 @@ object AdbServer {
         return commands.asSequence()
             .onEach { command -> performAdb("shell $command") }
     }
-
 }
