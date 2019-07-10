@@ -2,6 +2,7 @@ package com.kaspersky.kaspresso.device.server
 
 import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.test_server.AdbTerminal
+import com.kaspersky.test_server.api.CommandResult
 import com.kaspersky.test_server.api.ExecutorResultStatus
 
 /**
@@ -26,17 +27,9 @@ object AdbServer {
      *  @return list of answers of commands' execution
      */
     fun performCmd(vararg commands: String): List<String> {
-        return commands.asSequence()
-            .map { command -> command to adbTerminal.executeCmd(command) }
-            .onEach { (command, result) ->
-                Configurator.logger.i("cmd command=$command was performed with result=$result")
-            }
-            .onEach { (command, result) ->
-                if (result.status == ExecutorResultStatus.FAILED)
-                    throw AdbServerException("cmd command=$command was performed with failed result=$result")
-            }
-            .map { (_, result) -> result.description }
-            .toList()
+        return perform(commands) {
+            adbTerminal.executeCmd(it)
+        }
     }
 
     /**
@@ -50,17 +43,9 @@ object AdbServer {
      *  @return list of answers of commands' execution
      */
     fun performAdb(vararg commands: String): List<String> {
-        return commands.asSequence()
-            .map { command -> command to adbTerminal.executeAdb(command) }
-            .onEach { (command, result) ->
-                Configurator.logger.i("adb command=$command was performed with result=$result")
-            }
-            .onEach { (command, result) ->
-                if (result.status == ExecutorResultStatus.FAILED)
-                    throw AdbServerException("adb command=$command was performed with failed result=$result")
-            }
-            .map { (_, result) -> result.description }
-            .toList()
+        return perform(commands) {
+            adbTerminal.executeAdb(it)
+        }
     }
 
     /**
@@ -74,8 +59,22 @@ object AdbServer {
      *  @return list of answers of commands' execution
      */
     fun performShell(vararg commands: String): List<String> {
+        return perform(commands) {
+            adbTerminal.executeAdb("shell $it")
+        }
+    }
+
+    private fun perform(commands: Array<out String>, executor: (String) -> CommandResult): List<String> {
         return commands.asSequence()
-            .onEach { command -> performAdb("shell $command") }
+            .map { command -> command to executor.invoke(command) }
+            .onEach { (command, result) ->
+                Configurator.logger.i("command=$command was performed with result=$result")
+            }
+            .onEach { (command, result) ->
+                if (result.status == ExecutorResultStatus.FAILED)
+                    throw AdbServerException("command=$command was performed with failed result=$result")
+            }
+            .map { (_, result) -> result.description }
             .toList()
     }
 }
