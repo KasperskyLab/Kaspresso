@@ -23,7 +23,7 @@ object AdbServer {
      *
      *  @param commands commands to execute.
      *  @throws AdbServerException if a result status of any command in @param commands is Failed
-     *  @return sequence of answers of commands' execution
+     *  @return list of answers of commands' execution
      */
     fun performCmd(vararg commands: String): List<String> {
         return commands.asSequence()
@@ -47,7 +47,7 @@ object AdbServer {
      *
      *  @param commands commands to execute.
      *  @throws AdbServerException if a result status of any command in @param commands is Failed
-     *  @return sequence of answers of commands' execution
+     *  @return list of answers of commands' execution
      */
     fun performAdb(vararg commands: String): List<String> {
         return commands.asSequence()
@@ -71,7 +71,7 @@ object AdbServer {
      *
      *  @param commands commands to execute.
      *  @throws AdbServerException if a result status of any command in @param commands is Failed
-     *  @return sequence of answers of commands' execution
+     *  @return list of answers of commands' execution
      */
     fun performShell(vararg commands: String): List<String> {
         return commands.asSequence()
