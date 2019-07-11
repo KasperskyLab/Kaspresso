@@ -95,6 +95,8 @@ import com.kaspersky.kaspresso.testcases.core.testcontext.TestContext
  * Interceptors work using decorator pattern. First interceptor wraps others.
  * @param testRunInterceptors An interceptors set that actually manages the execution of test sections
  * [com.kaspersky.kaspresso.testcases.models.TestInfo]. Interceptor works using decorator pattern. First interceptor wraps others.
+ * @param externalLogger Holds an implementation of [UiTestLogger] interface for external usage.
+ * @param compositeLogger Holds an instance of [CompositeLogger] for inner framework usage. Not accessible from outside.
  */
 class Configurator(
     internal val apps: Apps,
@@ -114,7 +116,9 @@ class Configurator(
     internal val webAssertionInterceptors: List<WebAssertionInterceptor>,
     internal val executingInterceptor: ExecutingInterceptor? = null,
     internal val stepInterceptors: List<StepInterceptor>,
-    internal val testRunInterceptors: List<TestRunInterceptor>
+    internal val testRunInterceptors: List<TestRunInterceptor>,
+    internal val externalLogger: UiTestLogger,
+    internal val compositeLogger: CompositeLogger
 ) {
     companion object {
 
@@ -148,16 +152,6 @@ class Configurator(
          * Holds an implementation of [UiTestLogger] interface for inner framework usage.
          */
         internal var logger: UiTestLogger = UiTestLoggerImpl(DEFAULT_INNER_LOGGER_TAG)
-
-        /**
-         * Holds an implementation of [UiTestLogger] interface for external usage.
-         */
-        internal var externalLogger: UiTestLogger = UiTestLoggerImpl(DEFAULT_EXTERNAL_LOGGER_TAG)
-
-        /**
-         *Holds an instance of [CompositeLogger] for inner framework usage. Not accessible from outside.
-         */
-        internal var compositeLogger: CompositeLogger = CompositeLogger(logger)
     }
 
     /**
@@ -276,7 +270,10 @@ class Configurator(
                 executingInterceptor = executingInterceptor,
 
                 stepInterceptors = stepInterceptors,
-                testRunInterceptors = testRunInterceptors
+                testRunInterceptors = testRunInterceptors,
+
+                externalLogger = externalLogger,
+                compositeLogger = compositeLogger
             )
 
             failureInterceptor?.let { Espresso.setFailureHandler(it::interceptAndThrow) }
@@ -319,8 +316,6 @@ class Configurator(
             Configurator.allowedExceptionsForAttempt = allowedExceptionsForAttempt
 
             Configurator.logger = logger
-            Configurator.externalLogger = externalLogger
-            Configurator.compositeLogger = compositeLogger
 
             return configurator
         }
