@@ -4,7 +4,7 @@ import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.extensions.other.forEachSafely
 import com.kaspersky.kaspresso.extensions.other.invokeSafely
 import com.kaspersky.kaspresso.extensions.other.throwAll
-import com.kaspersky.kaspresso.interceptors.test.StepInterceptor
+import com.kaspersky.kaspresso.interceptors.testcase.StepInterceptor
 import com.kaspersky.kaspresso.testcases.api.scenario.BaseScenario
 import com.kaspersky.kaspresso.testcases.core.step.StepInfoProducer
 

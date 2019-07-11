@@ -17,17 +17,11 @@ internal class WebInteractionInterceptor(
         interaction: Web.WebInteraction<*>,
         assertion: WebAssertion<*>
     ) {
-        val matcher: Matcher<*> =
-            interaction.javaClass
-                .getDeclaredField("viewMatcher")
-                .apply { isAccessible = true }
-                .get(interaction) as Matcher<*>
-
         execute {
             interaction.check(
                 WebAssertionProxy(
                     assertion,
-                    matcher,
+                    interaction.getMatcher(),
                     configurator.webAssertionInterceptors
                 )
             )
@@ -40,8 +34,19 @@ internal class WebInteractionInterceptor(
     ) {
         execute {
             interaction.perform(
-                AtomProxy(action, configurator.atomInterceptors)
+                AtomProxy(
+                    action,
+                    interaction.getMatcher(),
+                    configurator.atomInterceptors
+                )
             )
         }
+    }
+
+    private fun Web.WebInteraction<*>.getMatcher(): Matcher<*> {
+        return javaClass
+            .getDeclaredField("viewMatcher")
+            .apply { isAccessible = true }
+            .get(this) as Matcher<*>
     }
 }

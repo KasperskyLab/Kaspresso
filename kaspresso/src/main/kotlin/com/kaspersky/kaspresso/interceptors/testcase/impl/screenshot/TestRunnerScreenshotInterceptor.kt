@@ -1,7 +1,7 @@
-package com.kaspersky.kaspresso.interceptors.test.impl.screenshot
+package com.kaspersky.kaspresso.interceptors.testcase.impl.screenshot
 
 import com.kaspersky.kaspresso.device.screenshots.Screenshots
-import com.kaspersky.kaspresso.interceptors.test.TestRunInterceptor
+import com.kaspersky.kaspresso.interceptors.testcase.TestRunInterceptor
 import com.kaspersky.kaspresso.testcases.models.info.TestInfo
 
 class TestRunnerScreenshotInterceptor(

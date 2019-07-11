@@ -1,6 +1,6 @@
-package com.kaspersky.kaspresso.interceptors.test.impl.logging
+package com.kaspersky.kaspresso.interceptors.testcase.impl.logging
 
-import com.kaspersky.kaspresso.interceptors.test.TestRunInterceptor
+import com.kaspersky.kaspresso.interceptors.testcase.TestRunInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.testcases.models.info.TestInfo
 

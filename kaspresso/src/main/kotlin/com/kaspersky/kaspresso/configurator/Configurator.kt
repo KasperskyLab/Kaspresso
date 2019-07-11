@@ -31,22 +31,22 @@ import com.kaspersky.kaspresso.device.screenshots.ScreenshotsImpl
 import com.kaspersky.kaspresso.interceptors.view.AtomInterceptor
 import com.kaspersky.kaspresso.interceptors.view.ExecutingInterceptor
 import com.kaspersky.kaspresso.interceptors.view.FailureInterceptor
-import com.kaspersky.kaspresso.interceptors.test.StepInterceptor
-import com.kaspersky.kaspresso.interceptors.test.TestRunInterceptor
+import com.kaspersky.kaspresso.interceptors.testcase.StepInterceptor
+import com.kaspersky.kaspresso.interceptors.testcase.TestRunInterceptor
 import com.kaspersky.kaspresso.interceptors.view.ViewActionInterceptor
 import com.kaspersky.kaspresso.interceptors.view.ViewAssertionInterceptor
 import com.kaspersky.kaspresso.interceptors.view.WebAssertionInterceptor
 import com.kaspersky.kaspresso.interceptors.view.impl.flakysafety.FlakySafeExecutingInterceptor
 import com.kaspersky.kaspresso.interceptors.view.impl.logging.LoggingAtomInterceptor
 import com.kaspersky.kaspresso.interceptors.view.impl.logging.LoggingFailureInterceptor
-import com.kaspersky.kaspresso.interceptors.test.impl.logging.LoggingStepInterceptor
+import com.kaspersky.kaspresso.interceptors.testcase.impl.logging.LoggingStepInterceptor
 import com.kaspersky.kaspresso.interceptors.view.impl.logging.LoggingViewActionInterceptor
 import com.kaspersky.kaspresso.interceptors.view.impl.logging.LoggingViewAssertionInterceptor
 import com.kaspersky.kaspresso.interceptors.view.impl.logging.LoggingWebAssertionInterceptor
-import com.kaspersky.kaspresso.interceptors.test.impl.logging.TestRunLoggerInterceptor
-import com.kaspersky.kaspresso.interceptors.test.impl.report.BuildStepReportInterceptor
-import com.kaspersky.kaspresso.interceptors.test.impl.screenshot.ScreenshotStepInterceptor
-import com.kaspersky.kaspresso.interceptors.test.impl.screenshot.TestRunnerScreenshotInterceptor
+import com.kaspersky.kaspresso.interceptors.testcase.impl.logging.TestRunLoggerInterceptor
+import com.kaspersky.kaspresso.interceptors.testcase.impl.report.BuildStepReportInterceptor
+import com.kaspersky.kaspresso.interceptors.testcase.impl.screenshot.ScreenshotStepInterceptor
+import com.kaspersky.kaspresso.interceptors.testcase.impl.screenshot.TestRunnerScreenshotInterceptor
 import com.kaspersky.kaspresso.interceptors.interaction.impl.DataInteractionInterceptor
 import com.kaspersky.kaspresso.interceptors.interaction.impl.ViewInteractionInterceptor
 import com.kaspersky.kaspresso.interceptors.interaction.impl.WebInteractionInterceptor
@@ -175,8 +175,8 @@ class Configurator(
                     viewActionInterceptors = mutableListOf(LoggingViewActionInterceptor(logger))
                     viewAssertionInterceptors = mutableListOf(LoggingViewAssertionInterceptor(logger))
 
-                    atomInterceptors = mutableListOf(LoggingAtomInterceptor(compositeLogger))
-                    webAssertionInterceptors = mutableListOf(LoggingWebAssertionInterceptor(compositeLogger))
+                    atomInterceptors = mutableListOf(LoggingAtomInterceptor(logger))
+                    webAssertionInterceptors = mutableListOf(LoggingWebAssertionInterceptor(logger))
 
                     executingInterceptor = FlakySafeExecutingInterceptor()
                     failureInterceptor = LoggingFailureInterceptor(logger)

@@ -1,4 +1,4 @@
-package com.kaspersky.kaspresso.interceptors.test
+package com.kaspersky.kaspresso.interceptors.testcase
 
 import com.kaspersky.kaspresso.testcases.models.info.StepInfo
 

@@ -1,7 +1,7 @@
-package com.kaspersky.kaspresso.interceptors.test.impl.logging
+package com.kaspersky.kaspresso.interceptors.testcase.impl.logging
 
 import com.kaspersky.kaspresso.extensions.other.toTime
-import com.kaspersky.kaspresso.interceptors.test.StepInterceptor
+import com.kaspersky.kaspresso.interceptors.testcase.StepInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.testcases.models.info.StepInfo
 

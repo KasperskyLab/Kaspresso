@@ -1,7 +1,7 @@
-package com.kaspersky.kaspresso.interceptors.test.impl.composite
+package com.kaspersky.kaspresso.interceptors.testcase.impl.composite
 
 import com.kaspersky.kaspresso.extensions.other.forEachSafely
-import com.kaspersky.kaspresso.interceptors.test.TestRunInterceptor
+import com.kaspersky.kaspresso.interceptors.testcase.TestRunInterceptor
 import com.kaspersky.kaspresso.testcases.models.info.TestInfo
 
 class TestRunCompositeInterceptor(

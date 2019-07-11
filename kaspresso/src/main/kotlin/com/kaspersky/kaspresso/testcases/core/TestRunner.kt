@@ -2,8 +2,8 @@ package com.kaspersky.kaspresso.testcases.core
 
 import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.extensions.other.getException
-import com.kaspersky.kaspresso.interceptors.test.TestRunInterceptor
-import com.kaspersky.kaspresso.interceptors.test.impl.composite.TestRunCompositeInterceptor
+import com.kaspersky.kaspresso.interceptors.testcase.TestRunInterceptor
+import com.kaspersky.kaspresso.interceptors.testcase.impl.composite.TestRunCompositeInterceptor
 import com.kaspersky.kaspresso.testcases.core.step.StepsManager
 import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
 import com.kaspersky.kaspresso.testcases.core.testcontext.TestContext
