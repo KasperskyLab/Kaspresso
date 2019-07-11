@@ -5,10 +5,10 @@ import com.kaspersky.kaspresso.testcases.core.testcontext.TestContext
 
 internal class TestBody<InitData, Data>(
     val testName: String,
-    val beforeTestActions: BaseTestContext.() -> Unit,
-    val afterTestActions: BaseTestContext.() -> Unit,
+    val beforeTestActions: (BaseTestContext.() -> Unit)?,
+    val afterTestActions: (BaseTestContext.() -> Unit)?,
     val steps: TestContext<Data>.() -> Unit,
-    var initActions: (InitData.() -> Unit)?,
+    val initActions: (InitData.() -> Unit)?,
     val transformActionsList: List<Data.() -> Unit>,
     val dataProducer: (((InitData.() -> Unit)?) -> Data)
 ) {
@@ -26,8 +26,8 @@ internal class TestBody<InitData, Data>(
 
             return TestBody(
                 requireNotNull(testName),
-                requireNotNull(beforeTestActions),
-                requireNotNull(afterTestActions),
+                beforeTestActions,
+                afterTestActions,
                 requireNotNull(steps),
                 initActions,
                 transformActionsList,

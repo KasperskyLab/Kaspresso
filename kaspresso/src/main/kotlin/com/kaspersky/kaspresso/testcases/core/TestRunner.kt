@@ -74,7 +74,7 @@ internal class TestRunner<InitData, Data>(
     @Suppress("LongParameterList")
     private fun runBeforeTestSection(
         testInfo: TestInfo,
-        beforeTestActions: BaseTestContext.() -> Unit,
+        beforeTestActions: (BaseTestContext.() -> Unit)?,
         initDataActions: (InitData.() -> Unit)?,
         transformDataActionsList: List<Data.() -> Unit>,
         testRunInterceptor: TestRunInterceptor,
@@ -83,9 +83,7 @@ internal class TestRunner<InitData, Data>(
 
         try {
             testRunInterceptor.onBeforeSectionStarted(testInfo)
-            beforeTestActions.invoke(
-                BaseTestContext(configurator)
-            )
+            beforeTestActions?.invoke(BaseTestContext(configurator))
 
             val data: Data = dataProducer.invoke(initDataActions)
 
@@ -139,12 +137,12 @@ internal class TestRunner<InitData, Data>(
 
     private fun runAfterTestSection(
         testInfo: TestInfo,
-        afterTestActions: BaseTestContext.() -> Unit,
+        afterTestActions: (BaseTestContext.() -> Unit)?,
         testRunInterceptor: TestRunInterceptor
     ) {
         try {
             testRunInterceptor.onAfterSectionStarted(testInfo)
-            afterTestActions.invoke(BaseTestContext(configurator))
+            afterTestActions?.invoke(BaseTestContext(configurator))
             testRunInterceptor.onAfterSectionFinishedSuccess(testInfo)
         } catch (e: Throwable) {
             testRunInterceptor.onAfterSectionFinishedFailed(testInfo, e)
