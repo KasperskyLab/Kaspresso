@@ -69,5 +69,4 @@ abstract class BaseTestCase<InitData, Data>(
             this.dataProducer = this@BaseTestCase.dataProducer
         }
     }
-
 }
