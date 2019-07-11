@@ -172,21 +172,21 @@ class Configurator(
             fun default(): Builder {
                 return Builder().apply {
 
-                    viewActionInterceptors = listOf(LoggingViewActionInterceptor(logger))
-                    viewAssertionInterceptors = listOf(LoggingViewAssertionInterceptor(logger))
+                    viewActionInterceptors = mutableListOf(LoggingViewActionInterceptor(logger))
+                    viewAssertionInterceptors = mutableListOf(LoggingViewAssertionInterceptor(logger))
 
-                    atomInterceptors = listOf(LoggingAtomInterceptor(compositeLogger))
-                    webAssertionInterceptors = listOf(LoggingWebAssertionInterceptor(compositeLogger))
+                    atomInterceptors = mutableListOf(LoggingAtomInterceptor(compositeLogger))
+                    webAssertionInterceptors = mutableListOf(LoggingWebAssertionInterceptor(compositeLogger))
 
                     executingInterceptor = FlakySafeExecutingInterceptor()
                     failureInterceptor = LoggingFailureInterceptor(logger)
 
-                    stepInterceptors = listOf(
+                    stepInterceptors = mutableListOf(
                         LoggingStepInterceptor(logger),
                         ScreenshotStepInterceptor(screenshots)
                     )
 
-                    testRunInterceptors = listOf(
+                    testRunInterceptors = mutableListOf(
                         TestRunLoggerInterceptor(logger),
                         TestRunnerScreenshotInterceptor(screenshots),
                         BuildStepReportInterceptor(AllureReportWriter(logger))
@@ -225,10 +225,10 @@ class Configurator(
         var exploit: Exploit =
             ExploitImpl(activities, UiDevice.getInstance(InstrumentationRegistry.getInstrumentation()))
 
-        var viewActionInterceptors: List<ViewActionInterceptor> = emptyList()
-        var viewAssertionInterceptors: List<ViewAssertionInterceptor> = emptyList()
-        var atomInterceptors: List<AtomInterceptor> = emptyList()
-        var webAssertionInterceptors: List<WebAssertionInterceptor> = emptyList()
+        var viewActionInterceptors: MutableList<ViewActionInterceptor> = mutableListOf()
+        var viewAssertionInterceptors: MutableList<ViewAssertionInterceptor> = mutableListOf()
+        var atomInterceptors: MutableList<AtomInterceptor> = mutableListOf()
+        var webAssertionInterceptors: MutableList<WebAssertionInterceptor> = mutableListOf()
 
         var executingInterceptor: ExecutingInterceptor? = null
 
@@ -238,9 +238,9 @@ class Configurator(
          */
         var failureInterceptor: FailureInterceptor? = null
 
-        var stepInterceptors: List<StepInterceptor> = emptyList()
+        var stepInterceptors: MutableList<StepInterceptor> = mutableListOf()
 
-        var testRunInterceptors: List<TestRunInterceptor> = emptyList()
+        var testRunInterceptors: MutableList<TestRunInterceptor> = mutableListOf()
 
         /**
          * Terminating method to build built [Configurator] settings. Can be called only inside the framework
