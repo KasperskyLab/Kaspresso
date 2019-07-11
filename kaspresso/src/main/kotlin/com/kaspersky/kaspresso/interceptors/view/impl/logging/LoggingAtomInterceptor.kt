@@ -18,17 +18,13 @@ class LoggingAtomInterceptor(
      * @param evaluation represents the results of a Javascript execution.
      */
     override fun intercept(atomProxy: AtomProxy<*>, evaluation: Evaluation?) {
+        val message: String =
+            if ((evaluation != null) and evaluation!!.hasMessage()) {
+                "with message=\"${evaluation.message}\""
+            } else {
+                ""
+            }
 
-        var message = ""
-        var status = ""
-        var result = ""
-
-        evaluation?.let { eval: Evaluation ->
-            if (eval.hasMessage()) message = "with message=\"${eval.message}\""
-            status = "with status=\"${eval.status}\""
-            eval.value?.let { result = "with result=\"$it\"" }
-        }
-
-        logger.i("${atomProxy.describe()} ${message}completed $status $result".trimEnd())
+        logger.i("${atomProxy.describe()} $message".trimEnd())
     }
 }
