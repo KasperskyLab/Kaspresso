@@ -3,7 +3,7 @@ package com.kaspersky.kaspresso.proxy
 import android.support.test.espresso.web.model.Atom
 import android.support.test.espresso.web.model.ElementReference
 import android.support.test.espresso.web.model.Evaluation
-import com.kaspersky.kaspresso.interceptors.AtomInterceptor
+import com.kaspersky.kaspresso.interceptors.view.AtomInterceptor
 
 /**
  * A proxy-wrapper of [Atom] for interceptors calls.

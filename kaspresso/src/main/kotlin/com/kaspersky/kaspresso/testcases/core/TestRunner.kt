@@ -2,8 +2,8 @@ package com.kaspersky.kaspresso.testcases.core
 
 import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.extensions.other.getException
-import com.kaspersky.kaspresso.interceptors.TestRunInterceptor
-import com.kaspersky.kaspresso.interceptors.impl.composite.TestRunCompositeInterceptor
+import com.kaspersky.kaspresso.interceptors.test.TestRunInterceptor
+import com.kaspersky.kaspresso.interceptors.test.impl.composite.TestRunCompositeInterceptor
 import com.kaspersky.kaspresso.testcases.core.step.StepsManager
 import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
 import com.kaspersky.kaspresso.testcases.core.testcontext.TestContext
@@ -20,10 +20,11 @@ internal class TestRunner<InitData, Data>(
         val exceptions: MutableList<Throwable> = mutableListOf()
         val resultException: Throwable?
 
-        val testRunInterceptor: TestRunInterceptor = TestRunCompositeInterceptor(
-            configurator.testRunInterceptors,
-            exceptions
-        )
+        val testRunInterceptor: TestRunInterceptor =
+            TestRunCompositeInterceptor(
+                configurator.testRunInterceptors,
+                exceptions
+            )
 
         val stepsManager = StepsManager(testBody.testName)
         var testInfo = TestInfo(testBody.testName)

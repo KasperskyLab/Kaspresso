@@ -1,7 +1,7 @@
 package android.support.test.espresso.web.assertion
 
 import android.webkit.WebView
-import com.kaspersky.kaspresso.interceptors.WebAssertionInterceptor
+import com.kaspersky.kaspresso.interceptors.view.WebAssertionInterceptor
 import org.hamcrest.Matcher
 import org.hamcrest.StringDescription
 
