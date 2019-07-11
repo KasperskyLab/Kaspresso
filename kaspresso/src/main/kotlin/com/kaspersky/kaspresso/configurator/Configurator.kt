@@ -5,10 +5,7 @@ import android.support.test.espresso.Espresso
 import android.support.test.espresso.NoMatchingViewException
 import android.support.test.espresso.PerformException
 import android.support.test.uiautomator.UiDevice
-import com.agoda.kakao.configurator.KakaoConfigurator
-import com.kaspersky.kaspresso.delegates.DataInteractionDelegateKaspressoImpl
-import com.kaspersky.kaspresso.delegates.ViewInteractionDelegateKaspressoImpl
-import com.kaspersky.kaspresso.delegates.WebInteractionDelegateKaspressoImpl
+import com.agoda.kakao.Kakao
 import com.kaspersky.kaspresso.device.accessibility.Accessibility
 import com.kaspersky.kaspresso.device.accessibility.AccessibilityImpl
 import com.kaspersky.kaspresso.device.activities.Activities
@@ -50,6 +47,9 @@ import com.kaspersky.kaspresso.interceptors.impl.logging.TestRunLoggerIntercepto
 import com.kaspersky.kaspresso.interceptors.impl.report.BuildStepReportInterceptor
 import com.kaspersky.kaspresso.interceptors.impl.screenshot.ScreenshotStepInterceptor
 import com.kaspersky.kaspresso.interceptors.impl.screenshot.TestRunnerScreenshotInterceptor
+import com.kaspersky.kaspresso.kakao_interceptors.DataInteractionKakaoInterceptor
+import com.kaspersky.kaspresso.kakao_interceptors.ViewInteractionKakaoInterceptor
+import com.kaspersky.kaspresso.kakao_interceptors.WebInteractionKakaoInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.logger.UiTestLoggerImpl
 import com.kaspersky.kaspresso.logger.composite.CompositeLogger
@@ -281,12 +281,37 @@ class Configurator(
 
             failureInterceptor?.let { Espresso.setFailureHandler(it::interceptAndThrow) }
 
-            with(KakaoConfigurator) {
-                initViewInteractionDelegateFactory { ViewInteractionDelegateKaspressoImpl(it, configurator) }
-                initDataInteractionDelegateFactory { viewInteraction, dataInteraction ->
-                    DataInteractionDelegateKaspressoImpl(viewInteraction, dataInteraction, configurator)
+            val viewInteractionKakaoInterceptor = ViewInteractionKakaoInterceptor(configurator)
+            val dataInteractionKakaoInterceptor = DataInteractionKakaoInterceptor(configurator)
+            val webInteractionKakaoInterceptor = WebInteractionKakaoInterceptor(configurator)
+
+            Kakao.intercept {
+                onViewInteraction {
+                    onCheck(
+                        isOverride = true,
+                        interceptor = viewInteractionKakaoInterceptor.captureCheck()
+                    )
+                    onPerform(
+                        isOverride = true,
+                        interceptor = viewInteractionKakaoInterceptor.capturePerform()
+                    )
                 }
-                initWebInteractionDelegateFactory { WebInteractionDelegateKaspressoImpl(it, configurator) }
+                onDataInteraction {
+                    onCheck(
+                        isOverride = true,
+                        interceptor = dataInteractionKakaoInterceptor.captureCheck()
+                    )
+                }
+                onWebInteraction {
+                    onCheck(
+                        isOverride = true,
+                        interceptor = webInteractionKakaoInterceptor.captureCheck()
+                    )
+                    onPerform(
+                        isOverride = true,
+                        interceptor = webInteractionKakaoInterceptor.capturePerform()
+                    )
+                }
             }
 
             Configurator.attemptsTimeoutMs = attemptsTimeoutMs
@@ -302,10 +327,6 @@ class Configurator(
     }
 
     internal fun reset() {
-        with(KakaoConfigurator) {
-            initViewInteractionDelegateFactory(null)
-            initDataInteractionDelegateFactory(null)
-            initWebInteractionDelegateFactory(null)
-        }
+        Kakao.reset()
     }
 }
