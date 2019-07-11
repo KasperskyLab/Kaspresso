@@ -12,11 +12,7 @@ class FlakySafeExecutingInterceptor : ExecutingInterceptor {
     /**
      * Performs multiple attempts to execute an action or an assertion.
      *
-     * @param function a function-wrapper of an action or an assertion to be invoked.
+     * @param executable a function-wrapper of an action or an assertion to be invoked.
      */
-    override fun <EspressoInteraction> interceptAndExecute(
-        function: () -> EspressoInteraction
-    ) {
-        attempt { function.invoke() }
-    }
+    override fun <Interaction> interceptAndExecute(executable: () -> Interaction) = attempt(action = executable)
 }

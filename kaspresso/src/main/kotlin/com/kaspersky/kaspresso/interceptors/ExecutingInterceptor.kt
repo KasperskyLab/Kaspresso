@@ -8,7 +8,7 @@ interface ExecutingInterceptor {
     /**
      * Called to do some stuff and actually execute an action or an assertion.
      *
-     * @param function a function-wrapper of an action or an assertion to be invoked.
+     * @param executable a function-wrapper of an action or an assertion to be invoked.
      */
-    fun <EspressoInteraction> interceptAndExecute(function: () -> EspressoInteraction)
+    fun <Interaction> interceptAndExecute(executable: () -> Interaction)
 }

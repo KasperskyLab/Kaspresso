@@ -47,9 +47,9 @@ import com.kaspersky.kaspresso.interceptors.impl.logging.TestRunLoggerIntercepto
 import com.kaspersky.kaspresso.interceptors.impl.report.BuildStepReportInterceptor
 import com.kaspersky.kaspresso.interceptors.impl.screenshot.ScreenshotStepInterceptor
 import com.kaspersky.kaspresso.interceptors.impl.screenshot.TestRunnerScreenshotInterceptor
-import com.kaspersky.kaspresso.kakao_interceptors.DataInteractionKakaoInterceptor
-import com.kaspersky.kaspresso.kakao_interceptors.ViewInteractionKakaoInterceptor
-import com.kaspersky.kaspresso.kakao_interceptors.WebInteractionKakaoInterceptor
+import com.kaspersky.kaspresso.interceptors.impl.interaction.DataInteractionInterceptor
+import com.kaspersky.kaspresso.interceptors.impl.interaction.ViewInteractionInterceptor
+import com.kaspersky.kaspresso.interceptors.impl.interaction.WebInteractionInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.logger.UiTestLoggerImpl
 import com.kaspersky.kaspresso.logger.composite.CompositeLogger
@@ -278,35 +278,38 @@ class Configurator(
 
             failureInterceptor?.let { Espresso.setFailureHandler(it::interceptAndThrow) }
 
-            val viewInteractionKakaoInterceptor = ViewInteractionKakaoInterceptor(configurator)
-            val dataInteractionKakaoInterceptor = DataInteractionKakaoInterceptor(configurator)
-            val webInteractionKakaoInterceptor = WebInteractionKakaoInterceptor(configurator)
+            val viewInteractionInterceptor =
+                ViewInteractionInterceptor(configurator)
+            val dataInteractionInterceptor =
+                DataInteractionInterceptor(configurator)
+            val webInteractionInterceptor =
+                WebInteractionInterceptor(configurator)
 
             Kakao.intercept {
                 onViewInteraction {
                     onCheck(
                         isOverride = true,
-                        interceptor = viewInteractionKakaoInterceptor.captureCheck()
+                        interceptor = viewInteractionInterceptor::interceptCheck
                     )
                     onPerform(
                         isOverride = true,
-                        interceptor = viewInteractionKakaoInterceptor.capturePerform()
+                        interceptor = viewInteractionInterceptor::interceptPerform
                     )
                 }
                 onDataInteraction {
                     onCheck(
                         isOverride = true,
-                        interceptor = dataInteractionKakaoInterceptor.captureCheck()
+                        interceptor = dataInteractionInterceptor::interceptCheck
                     )
                 }
                 onWebInteraction {
                     onCheck(
                         isOverride = true,
-                        interceptor = webInteractionKakaoInterceptor.captureCheck()
+                        interceptor = webInteractionInterceptor::interceptCheck
                     )
                     onPerform(
                         isOverride = true,
-                        interceptor = webInteractionKakaoInterceptor.capturePerform()
+                        interceptor = webInteractionInterceptor::interceptPerform
                     )
                 }
             }

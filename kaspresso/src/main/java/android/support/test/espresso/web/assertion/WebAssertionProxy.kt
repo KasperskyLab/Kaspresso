@@ -1,6 +1,5 @@
 package android.support.test.espresso.web.assertion
 
-import android.support.test.espresso.web.model.Atom
 import android.webkit.WebView
 import com.kaspersky.kaspresso.interceptors.WebAssertionInterceptor
 import org.hamcrest.Matcher
@@ -11,10 +10,9 @@ import org.hamcrest.StringDescription
  */
 class WebAssertionProxy<E>(
     private val webAssertion: WebAssertion<E>,
-    atom: Atom<E>,
-    private val matcher: Matcher<E>,
+    private val matcher: Matcher<*>,
     private val interceptors: List<WebAssertionInterceptor>
-) : WebAssertion<E>(atom) {
+) : WebAssertion<E>(webAssertion.atom) {
 
     /**
      * Calls interceptors before [WebViewAssertions.ResultCheckingWebAssertion.checkResult] on wrapped [webAssertion] is
