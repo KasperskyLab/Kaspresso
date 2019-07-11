@@ -17,5 +17,4 @@ internal class DataInteractionKakaoInterceptor(
         )
         execute { dataInteraction.check(viewAssertionProxy) }
     }
-
 }

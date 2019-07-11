@@ -19,5 +19,4 @@ class FlakySafeExecutingInterceptor : ExecutingInterceptor {
     ) {
         attempt { function.invoke() }
     }
-
 }

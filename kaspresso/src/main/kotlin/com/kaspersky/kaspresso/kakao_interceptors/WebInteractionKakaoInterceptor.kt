@@ -8,7 +8,7 @@ import com.kaspersky.kaspresso.proxy.AtomProxy
 
 internal class WebInteractionKakaoInterceptor(
     private val configurator: Configurator
-) : InteractionKakaoInterceptor(configurator){
+) : InteractionKakaoInterceptor(configurator) {
 
     fun captureCheck(): (Web.WebInteraction<*>, WebAssertion<*>) -> Unit = {
             webInteraction, webAssertion ->
@@ -33,5 +33,4 @@ internal class WebInteractionKakaoInterceptor(
         )
         execute { webInteraction.perform(webActionProxy) }
     }
-
 }

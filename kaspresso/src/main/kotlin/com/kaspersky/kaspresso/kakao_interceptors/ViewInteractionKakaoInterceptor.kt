@@ -28,5 +28,4 @@ internal class ViewInteractionKakaoInterceptor(
         )
         execute { viewInteraction.perform(viewActionProxy) }
     }
-
 }

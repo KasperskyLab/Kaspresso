@@ -1,7 +1,5 @@
 package com.kaspersky.kaspresso.interceptors
 
-import android.support.test.espresso.ViewInteraction
-
 /**
  * An interface for all executing interceptors, actually manages the execution of actions or assertions.
  */
