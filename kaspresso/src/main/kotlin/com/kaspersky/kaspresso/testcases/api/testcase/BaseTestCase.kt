@@ -3,6 +3,8 @@ package com.kaspersky.kaspresso.testcases.api.testcase
 import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.testcases.core.sections.AfterTestSection
 import com.kaspersky.kaspresso.testcases.core.sections.BeforeTestSection
+import com.kaspersky.kaspresso.testcases.core.sections.MainTestSection
+import com.kaspersky.kaspresso.testcases.core.sections.TransformSection
 import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
 import com.kaspersky.kaspresso.testcases.models.TestBody
 
@@ -36,11 +38,36 @@ abstract class BaseTestCase<InitData, Data>(
         actions: BaseTestContext.() -> Unit
     ): AfterTestSection<InitData, Data> {
 
-        val testBodyBuilder = TestBody.Builder<InitData, Data>().apply {
-            this.testName = testName
-            this.dataProducer = this@BaseTestCase.dataProducer
-        }
+        val testBodyBuilder = createBaseTestBodyBuilder(testName)
 
         return BeforeTestSection(configurator, testBodyBuilder).beforeTest(actions)
     }
+
+    /**
+     * Starts the building of a test from data initialization section. Sets
+     * [com.kaspersky.kaspresso.testcases.core.sections.InitSection] actions and returns an existing instance of
+     * [MainTestSection] to continue building a tests.
+     *
+     * @param testName a name of the test.
+     * @param actions actions to be wrapped and invoked before the test for data initialization
+     * @return an existing instance of [MainTestSection].
+     */
+    protected fun init(
+        testName: String = testCaseName,
+        actions: InitData.() -> Unit
+    ): TransformSection<Data> {
+        val testBodyBuilder = createBaseTestBodyBuilder(testName).apply {
+            initActions = actions
+        }
+
+        return MainTestSection(configurator, testBodyBuilder)
+    }
+
+    private fun createBaseTestBodyBuilder(testName: String): TestBody.Builder<InitData, Data> {
+        return TestBody.Builder<InitData, Data>().apply {
+            this.testName = testName
+            this.dataProducer = this@BaseTestCase.dataProducer
+        }
+    }
+
 }
