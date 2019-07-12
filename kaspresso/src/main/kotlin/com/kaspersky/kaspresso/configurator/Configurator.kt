@@ -52,7 +52,6 @@ import com.kaspersky.kaspresso.interceptors.interaction.impl.ViewInteractionInte
 import com.kaspersky.kaspresso.interceptors.interaction.impl.WebInteractionInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.logger.UiTestLoggerImpl
-import com.kaspersky.kaspresso.logger.composite.CompositeLogger
 import com.kaspersky.kaspresso.report.impl.AllureReportWriter
 import com.kaspersky.kaspresso.testcases.core.testcontext.TestContext
 
@@ -96,7 +95,6 @@ import com.kaspersky.kaspresso.testcases.core.testcontext.TestContext
  * @param testRunInterceptors An interceptors set that actually manages the execution of test sections
  * [com.kaspersky.kaspresso.testcases.models.TestInfo]. Interceptor works using decorator pattern. First interceptor wraps others.
  * @param externalLogger Holds an implementation of [UiTestLogger] interface for external usage.
- * @param compositeLogger Holds an instance of [CompositeLogger] for inner framework usage. Not accessible from outside.
  */
 class Configurator(
     internal val apps: Apps,
@@ -117,8 +115,7 @@ class Configurator(
     internal val executingInterceptor: ExecutingInterceptor? = null,
     internal val stepInterceptors: List<StepInterceptor>,
     internal val testRunInterceptors: List<TestRunInterceptor>,
-    internal val externalLogger: UiTestLogger,
-    internal val compositeLogger: CompositeLogger
+    internal val externalLogger: UiTestLogger
 ) {
     companion object {
 
@@ -205,7 +202,6 @@ class Configurator(
 
         var logger: UiTestLogger = UiTestLoggerImpl(DEFAULT_INNER_LOGGER_TAG)
         var externalLogger: UiTestLogger = UiTestLoggerImpl(DEFAULT_EXTERNAL_LOGGER_TAG)
-        var compositeLogger: CompositeLogger = CompositeLogger(logger)
 
         var apps: Apps = AppsImpl(
             logger,
@@ -272,8 +268,7 @@ class Configurator(
                 stepInterceptors = stepInterceptors,
                 testRunInterceptors = testRunInterceptors,
 
-                externalLogger = externalLogger,
-                compositeLogger = compositeLogger
+                externalLogger = externalLogger
             )
 
             failureInterceptor?.let { Espresso.setFailureHandler(it::interceptAndThrow) }
