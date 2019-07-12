@@ -1,9 +1,12 @@
 package com.kaspersky.kaspresso.interceptors.view.impl.logging
 
+import android.support.test.espresso.web.model.Atom
 import android.support.test.espresso.web.model.Evaluation
+import android.support.test.espresso.web.webdriver.describeTo
 import com.kaspersky.kaspresso.interceptors.view.AtomInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.proxy.AtomProxy
+import org.hamcrest.StringDescription
 
 /**
  * An implementation of [AtomInterceptor] that logs info about web action.
@@ -17,14 +20,29 @@ class LoggingAtomInterceptor(
      *
      * @param evaluation represents the results of a Javascript execution.
      */
-    override fun intercept(atomProxy: AtomProxy<*>, evaluation: Evaluation?) {
-        val message: String =
-            if ((evaluation != null) and evaluation!!.hasMessage()) {
-                "with message=\"${evaluation.message}\""
-            } else {
-                ""
-            }
+    override fun intercept(
+        atomProxy: AtomProxy<*>,
+        evaluation: Evaluation?
+    ) {
+        logger.i(getFullAtomDescription(atomProxy, evaluation))
+    }
 
-        logger.i("${atomProxy.describe()} $message".trimEnd())
+    /**
+     * @return a string description of [Atom].
+     */
+    private fun getFullAtomDescription(
+        atomProxy: AtomProxy<*>,
+        evaluation: Evaluation?
+    ): String {
+
+        return StringBuilder("web action")
+            .apply {
+                atomProxy.atom.describeTo(this, evaluation)
+            }
+            .apply {
+                append(" on webview ")
+                atomProxy.matcher.describeTo(StringDescription(this))
+            }
+            .toString()
     }
 }

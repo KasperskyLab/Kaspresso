@@ -1,9 +1,11 @@
 package com.kaspersky.kaspresso.interceptors.view.impl.logging
 
-import android.support.test.espresso.web.assertion.WebAssertionProxy
+import android.support.test.espresso.web.assertion.*
 import android.webkit.WebView
 import com.kaspersky.kaspresso.interceptors.view.WebAssertionInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
+import android.support.test.espresso.web.assertion.WebAssertionProxy
+import org.hamcrest.StringDescription
 
 /**
  * An implementation of [WebAssertionInterceptor] that logs info about
@@ -27,6 +29,25 @@ class LoggingWebAssertionInterceptor(
         view: WebView?,
         result: Any
     ) {
-        logger.i(webAssertionProxy.describe(result))
+        logger.i(getFullWebAssertionDescription(webAssertionProxy, result))
+    }
+
+    /**
+     * @return a string description of [WebAssertion].
+     */
+    private fun getFullWebAssertionDescription(
+        webAssertionProxy: WebAssertionProxy<*>,
+        result: Any
+    ): String {
+
+        return StringBuilder("web assertion")
+            .apply {
+                webAssertionProxy.webAssertion.describeTo(this, result)
+            }
+            .apply {
+                append(" on webview ")
+                webAssertionProxy.matcher.describeTo(StringDescription(this))
+            }
+            .toString()
     }
 }

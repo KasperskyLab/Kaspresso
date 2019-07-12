@@ -3,17 +3,15 @@ package com.kaspersky.kaspresso.proxy
 import android.support.test.espresso.web.model.Atom
 import android.support.test.espresso.web.model.ElementReference
 import android.support.test.espresso.web.model.Evaluation
-import android.support.test.espresso.web.webdriver.WebDriverAtomScriptsProvider
 import com.kaspersky.kaspresso.interceptors.view.AtomInterceptor
 import org.hamcrest.Matcher
-import org.hamcrest.StringDescription
 
 /**
  * A proxy-wrapper of [Atom] for interceptors calls.
  */
 class AtomProxy<R>(
-    private val atom: Atom<R>,
-    private val matcher: Matcher<*>,
+    val atom: Atom<R>,
+    val matcher: Matcher<*>,
     private val interceptors: List<AtomInterceptor>
 ) : Atom<R> {
 
@@ -44,31 +42,4 @@ class AtomProxy<R>(
      * @return the script to be evaluated.
      */
     override fun getScript(): String = atom.script
-
-    /**
-     * @return a string description of [Atom].
-     */
-    fun describe(): String {
-        val builder = StringBuilder("web action \"${atom.getActionDescription()}\" on webview ")
-        matcher.describeTo(StringDescription(builder))
-        return builder.toString()
-    }
-
-    private fun Atom<*>.getActionDescription(): String {
-        return with(WebDriverAtomScriptsProvider) {
-            when (script) {
-                GET_VISIBLE_TEXT_ANDROID -> "get visible text"
-                CLICK_ANDROID -> "click on element"
-                SCROLL_INTO_VIEW_ANDROID -> "scroll into view"
-                CLEAR_ANDROID -> "clear"
-                SEND_KEYS_ANDROID -> "send keys"
-                ACTIVE_ELEMENT_ANDROID -> "active element"
-                FRAME_BY_ID_OR_NAME_ANDROID -> "frame by id or name"
-                FRAME_BY_INDEX_ANDROID -> "frame by index android"
-                FIND_ELEMENT_ANDROID -> "find element"
-                FIND_ELEMENTS_ANDROID -> "find elements"
-                else -> ""
-            }
-        }
-    }
 }
