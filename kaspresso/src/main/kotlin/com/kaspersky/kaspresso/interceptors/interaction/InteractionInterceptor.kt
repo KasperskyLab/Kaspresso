@@ -2,15 +2,14 @@ package com.kaspersky.kaspresso.interceptors.interaction
 
 import com.kaspersky.kaspresso.configurator.Configurator
 
-internal interface InteractionInterceptor<Interaction, Action, Assertion> {
-
+abstract class InteractionInterceptor<Interaction, Action, Assertion>(
     val configurator: Configurator
+) {
+    abstract fun interceptCheck(interaction: Interaction, assertion: Assertion)
 
-    fun interceptCheck(interaction: Interaction, assertion: Assertion)
+    abstract fun interceptPerform(interaction: Interaction, action: Action)
 
-    fun interceptPerform(interaction: Interaction, action: Action)
-
-    fun <ExecutedInteraction> execute(executable: () -> ExecutedInteraction) {
+    protected fun <ExecutedInteraction> execute(executable: () -> ExecutedInteraction) {
         configurator.executingInterceptor
             ?.interceptAndExecute(executable)
             ?: executable.invoke()

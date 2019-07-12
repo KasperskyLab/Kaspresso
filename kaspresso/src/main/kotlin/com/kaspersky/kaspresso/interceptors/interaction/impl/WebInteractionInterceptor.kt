@@ -10,8 +10,8 @@ import com.kaspersky.kaspresso.proxy.AtomProxy
 import org.hamcrest.Matcher
 
 internal class WebInteractionInterceptor(
-    override val configurator: Configurator
-) : InteractionInterceptor<Web.WebInteraction<*>, Atom<*>, WebAssertion<*>> {
+    configurator: Configurator
+) : InteractionInterceptor<Web.WebInteraction<*>, Atom<*>, WebAssertion<*>>(configurator) {
 
     override fun interceptCheck(
         interaction: Web.WebInteraction<*>,

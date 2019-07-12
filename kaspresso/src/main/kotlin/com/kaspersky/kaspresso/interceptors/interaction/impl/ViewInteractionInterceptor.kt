@@ -9,8 +9,8 @@ import com.kaspersky.kaspresso.proxy.ViewActionProxy
 import com.kaspersky.kaspresso.proxy.ViewAssertionProxy
 
 internal class ViewInteractionInterceptor(
-    override val configurator: Configurator
-) : InteractionInterceptor<ViewInteraction, ViewAction, ViewAssertion> {
+    configurator: Configurator
+) : InteractionInterceptor<ViewInteraction, ViewAction, ViewAssertion>(configurator) {
 
     override fun interceptCheck(
         interaction: ViewInteraction,
