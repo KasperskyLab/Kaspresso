@@ -2,7 +2,16 @@ package android.support.test.espresso.web.webdriver
 
 import android.support.test.espresso.web.model.Atom
 import android.support.test.espresso.web.model.Evaluation
-import android.support.test.espresso.web.webdriver.WebDriverAtomScripts.*
+import android.support.test.espresso.web.webdriver.WebDriverAtomScripts.ACTIVE_ELEMENT_ANDROID
+import android.support.test.espresso.web.webdriver.WebDriverAtomScripts.CLEAR_ANDROID
+import android.support.test.espresso.web.webdriver.WebDriverAtomScripts.CLICK_ANDROID
+import android.support.test.espresso.web.webdriver.WebDriverAtomScripts.FIND_ELEMENTS_ANDROID
+import android.support.test.espresso.web.webdriver.WebDriverAtomScripts.FIND_ELEMENT_ANDROID
+import android.support.test.espresso.web.webdriver.WebDriverAtomScripts.FRAME_BY_ID_OR_NAME_ANDROID
+import android.support.test.espresso.web.webdriver.WebDriverAtomScripts.FRAME_BY_INDEX_ANDROID
+import android.support.test.espresso.web.webdriver.WebDriverAtomScripts.GET_VISIBLE_TEXT_ANDROID
+import android.support.test.espresso.web.webdriver.WebDriverAtomScripts.SCROLL_INTO_VIEW_ANDROID
+import android.support.test.espresso.web.webdriver.WebDriverAtomScripts.SEND_KEYS_ANDROID
 
 /**
  * Uses [WebDriverAtomScripts] class, that has package-local access in Espresso, so it has to be in the same package.

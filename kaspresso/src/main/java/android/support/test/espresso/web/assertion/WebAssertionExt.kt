@@ -1,7 +1,7 @@
 package android.support.test.espresso.web.assertion
 
 import android.support.test.espresso.web.model.Atom
-import android.support.test.espresso.web.webdriver.*
+import android.support.test.espresso.web.webdriver.WebDriverAtomScriptsProvider
 import org.hamcrest.Matcher
 import org.hamcrest.StringDescription
 
@@ -39,16 +39,8 @@ private fun Matcher<*>.getResultDescription(): String {
     return StringBuilder()
         .apply { this@getResultDescription.describeTo(StringDescription(this)) }
         .toString()
-        .also {
-            when {
-                it.contains("is ") -> {
-                    return it.replace("is ", "element has text ")
-                }
-                it.contains("a string containing ") -> {
-                    return it.replace("a string containing ", "element contains text ")
-                }
-            }
-        }
+        .replace("is ", "element has text ")
+        .replace("a string containing ", "element contains text ")
 }
 
 private object WebDriverAtomScriptsReceiver : WebDriverAtomScriptsProvider() {

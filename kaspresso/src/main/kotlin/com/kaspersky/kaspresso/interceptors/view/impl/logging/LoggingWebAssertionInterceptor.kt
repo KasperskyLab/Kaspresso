@@ -1,10 +1,10 @@
 package com.kaspersky.kaspresso.interceptors.view.impl.logging
 
-import android.support.test.espresso.web.assertion.*
+import android.support.test.espresso.web.assertion.WebAssertionProxy
+import android.support.test.espresso.web.assertion.describeTo
 import android.webkit.WebView
 import com.kaspersky.kaspresso.interceptors.view.WebAssertionInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
-import android.support.test.espresso.web.assertion.WebAssertionProxy
 import org.hamcrest.StringDescription
 
 /**
