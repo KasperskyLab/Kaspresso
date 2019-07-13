@@ -8,5 +8,5 @@ open class BaseTestContext internal constructor(configurator: Configurator) {
 
     val device: Device = Device(configurator)
 
-    val kLogger: KLogger = KLogger(Configurator.externalLogger)
+    val kLogger: KLogger = KLogger(configurator.externalLogger)
 }

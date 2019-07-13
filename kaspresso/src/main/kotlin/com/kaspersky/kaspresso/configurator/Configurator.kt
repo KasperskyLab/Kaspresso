@@ -5,10 +5,7 @@ import android.support.test.espresso.Espresso
 import android.support.test.espresso.NoMatchingViewException
 import android.support.test.espresso.PerformException
 import android.support.test.uiautomator.UiDevice
-import com.agoda.kakao.configurator.KakaoConfigurator
-import com.kaspersky.kaspresso.delegates.DataInteractionDelegateKaspressoImpl
-import com.kaspersky.kaspresso.delegates.ViewInteractionDelegateKaspressoImpl
-import com.kaspersky.kaspresso.delegates.WebInteractionDelegateKaspressoImpl
+import com.agoda.kakao.Kakao
 import com.kaspersky.kaspresso.device.accessibility.Accessibility
 import com.kaspersky.kaspresso.device.accessibility.AccessibilityImpl
 import com.kaspersky.kaspresso.device.activities.Activities
@@ -31,28 +28,30 @@ import com.kaspersky.kaspresso.device.phone.Phone
 import com.kaspersky.kaspresso.device.phone.PhoneImpl
 import com.kaspersky.kaspresso.device.screenshots.Screenshots
 import com.kaspersky.kaspresso.device.screenshots.ScreenshotsImpl
-import com.kaspersky.kaspresso.interceptors.AtomInterceptor
-import com.kaspersky.kaspresso.interceptors.ExecutingInterceptor
-import com.kaspersky.kaspresso.interceptors.FailureInterceptor
-import com.kaspersky.kaspresso.interceptors.StepInterceptor
-import com.kaspersky.kaspresso.interceptors.TestRunInterceptor
-import com.kaspersky.kaspresso.interceptors.ViewActionInterceptor
-import com.kaspersky.kaspresso.interceptors.ViewAssertionInterceptor
-import com.kaspersky.kaspresso.interceptors.WebAssertionInterceptor
-import com.kaspersky.kaspresso.interceptors.impl.flakysafety.FlakySafeExecutingInterceptor
-import com.kaspersky.kaspresso.interceptors.impl.logging.LoggingAtomInterceptor
-import com.kaspersky.kaspresso.interceptors.impl.logging.LoggingFailureInterceptor
-import com.kaspersky.kaspresso.interceptors.impl.logging.LoggingStepInterceptor
-import com.kaspersky.kaspresso.interceptors.impl.logging.LoggingViewActionInterceptor
-import com.kaspersky.kaspresso.interceptors.impl.logging.LoggingViewAssertionInterceptor
-import com.kaspersky.kaspresso.interceptors.impl.logging.LoggingWebAssertionInterceptor
-import com.kaspersky.kaspresso.interceptors.impl.logging.TestRunLoggerInterceptor
-import com.kaspersky.kaspresso.interceptors.impl.report.BuildStepReportInterceptor
-import com.kaspersky.kaspresso.interceptors.impl.screenshot.ScreenshotStepInterceptor
-import com.kaspersky.kaspresso.interceptors.impl.screenshot.TestRunnerScreenshotInterceptor
+import com.kaspersky.kaspresso.interceptors.interaction.impl.DataInteractionInterceptor
+import com.kaspersky.kaspresso.interceptors.interaction.impl.ViewInteractionInterceptor
+import com.kaspersky.kaspresso.interceptors.interaction.impl.WebInteractionInterceptor
+import com.kaspersky.kaspresso.interceptors.testcase.StepInterceptor
+import com.kaspersky.kaspresso.interceptors.testcase.TestRunInterceptor
+import com.kaspersky.kaspresso.interceptors.testcase.impl.logging.LoggingStepInterceptor
+import com.kaspersky.kaspresso.interceptors.testcase.impl.logging.TestRunLoggerInterceptor
+import com.kaspersky.kaspresso.interceptors.testcase.impl.report.BuildStepReportInterceptor
+import com.kaspersky.kaspresso.interceptors.testcase.impl.screenshot.ScreenshotStepInterceptor
+import com.kaspersky.kaspresso.interceptors.testcase.impl.screenshot.TestRunnerScreenshotInterceptor
+import com.kaspersky.kaspresso.interceptors.view.AtomInterceptor
+import com.kaspersky.kaspresso.interceptors.view.ExecutingInterceptor
+import com.kaspersky.kaspresso.interceptors.view.FailureInterceptor
+import com.kaspersky.kaspresso.interceptors.view.ViewActionInterceptor
+import com.kaspersky.kaspresso.interceptors.view.ViewAssertionInterceptor
+import com.kaspersky.kaspresso.interceptors.view.WebAssertionInterceptor
+import com.kaspersky.kaspresso.interceptors.view.impl.flakysafety.FlakySafeExecutingInterceptor
+import com.kaspersky.kaspresso.interceptors.view.impl.logging.LoggingAtomInterceptor
+import com.kaspersky.kaspresso.interceptors.view.impl.logging.LoggingFailureInterceptor
+import com.kaspersky.kaspresso.interceptors.view.impl.logging.LoggingViewActionInterceptor
+import com.kaspersky.kaspresso.interceptors.view.impl.logging.LoggingViewAssertionInterceptor
+import com.kaspersky.kaspresso.interceptors.view.impl.logging.LoggingWebAssertionInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.logger.UiTestLoggerImpl
-import com.kaspersky.kaspresso.logger.composite.CompositeLogger
 import com.kaspersky.kaspresso.report.impl.AllureReportWriter
 import com.kaspersky.kaspresso.testcases.core.testcontext.TestContext
 
@@ -95,6 +94,7 @@ import com.kaspersky.kaspresso.testcases.core.testcontext.TestContext
  * Interceptors work using decorator pattern. First interceptor wraps others.
  * @param testRunInterceptors An interceptors set that actually manages the execution of test sections
  * [com.kaspersky.kaspresso.testcases.models.TestInfo]. Interceptor works using decorator pattern. First interceptor wraps others.
+ * @param externalLogger Holds an implementation of [UiTestLogger] interface for external usage.
  */
 class Configurator(
     internal val apps: Apps,
@@ -114,7 +114,8 @@ class Configurator(
     internal val webAssertionInterceptors: List<WebAssertionInterceptor>,
     internal val executingInterceptor: ExecutingInterceptor? = null,
     internal val stepInterceptors: List<StepInterceptor>,
-    internal val testRunInterceptors: List<TestRunInterceptor>
+    internal val testRunInterceptors: List<TestRunInterceptor>,
+    internal val externalLogger: UiTestLogger
 ) {
     companion object {
 
@@ -148,16 +149,6 @@ class Configurator(
          * Holds an implementation of [UiTestLogger] interface for inner framework usage.
          */
         internal var logger: UiTestLogger = UiTestLoggerImpl(DEFAULT_INNER_LOGGER_TAG)
-
-        /**
-         * Holds an implementation of [UiTestLogger] interface for external usage.
-         */
-        internal var externalLogger: UiTestLogger = UiTestLoggerImpl(DEFAULT_EXTERNAL_LOGGER_TAG)
-
-        /**
-         *Holds an instance of [CompositeLogger] for inner framework usage. Not accessible from outside.
-         */
-        internal var compositeLogger: CompositeLogger = CompositeLogger(logger)
     }
 
     /**
@@ -181,8 +172,8 @@ class Configurator(
                     viewActionInterceptors = mutableListOf(LoggingViewActionInterceptor(logger))
                     viewAssertionInterceptors = mutableListOf(LoggingViewAssertionInterceptor(logger))
 
-                    atomInterceptors = mutableListOf(LoggingAtomInterceptor(compositeLogger))
-                    webAssertionInterceptors = mutableListOf(LoggingWebAssertionInterceptor(compositeLogger))
+                    atomInterceptors = mutableListOf(LoggingAtomInterceptor(logger))
+                    webAssertionInterceptors = mutableListOf(LoggingWebAssertionInterceptor(logger))
 
                     executingInterceptor = FlakySafeExecutingInterceptor()
                     failureInterceptor = LoggingFailureInterceptor(logger)
@@ -211,7 +202,6 @@ class Configurator(
 
         var logger: UiTestLogger = UiTestLoggerImpl(DEFAULT_INNER_LOGGER_TAG)
         var externalLogger: UiTestLogger = UiTestLoggerImpl(DEFAULT_EXTERNAL_LOGGER_TAG)
-        var compositeLogger: CompositeLogger = CompositeLogger(logger)
 
         var apps: Apps = AppsImpl(
             logger,
@@ -276,17 +266,47 @@ class Configurator(
                 executingInterceptor = executingInterceptor,
 
                 stepInterceptors = stepInterceptors,
-                testRunInterceptors = testRunInterceptors
+                testRunInterceptors = testRunInterceptors,
+
+                externalLogger = externalLogger
             )
 
             failureInterceptor?.let { Espresso.setFailureHandler(it::interceptAndThrow) }
 
-            with(KakaoConfigurator) {
-                initViewInteractionDelegateFactory { ViewInteractionDelegateKaspressoImpl(it, configurator) }
-                initDataInteractionDelegateFactory { viewInteraction, dataInteraction ->
-                    DataInteractionDelegateKaspressoImpl(viewInteraction, dataInteraction, configurator)
+            val viewInteractionInterceptor =
+                ViewInteractionInterceptor(configurator)
+            val dataInteractionInterceptor =
+                DataInteractionInterceptor(configurator)
+            val webInteractionInterceptor =
+                WebInteractionInterceptor(configurator)
+
+            Kakao.intercept {
+                onViewInteraction {
+                    onCheck(
+                        isOverride = true,
+                        interceptor = viewInteractionInterceptor::interceptCheck
+                    )
+                    onPerform(
+                        isOverride = true,
+                        interceptor = viewInteractionInterceptor::interceptPerform
+                    )
                 }
-                initWebInteractionDelegateFactory { WebInteractionDelegateKaspressoImpl(it, configurator) }
+                onDataInteraction {
+                    onCheck(
+                        isOverride = true,
+                        interceptor = dataInteractionInterceptor::interceptCheck
+                    )
+                }
+                onWebInteraction {
+                    onCheck(
+                        isOverride = true,
+                        interceptor = webInteractionInterceptor::interceptCheck
+                    )
+                    onPerform(
+                        isOverride = true,
+                        interceptor = webInteractionInterceptor::interceptPerform
+                    )
+                }
             }
 
             Configurator.attemptsTimeoutMs = attemptsTimeoutMs
@@ -294,18 +314,12 @@ class Configurator(
             Configurator.allowedExceptionsForAttempt = allowedExceptionsForAttempt
 
             Configurator.logger = logger
-            Configurator.externalLogger = externalLogger
-            Configurator.compositeLogger = compositeLogger
 
             return configurator
         }
     }
 
     internal fun reset() {
-        with(KakaoConfigurator) {
-            initViewInteractionDelegateFactory(null)
-            initDataInteractionDelegateFactory(null)
-            initWebInteractionDelegateFactory(null)
-        }
+        Kakao.reset()
     }
 }

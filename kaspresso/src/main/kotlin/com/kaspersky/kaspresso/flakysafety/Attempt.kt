@@ -23,7 +23,7 @@ fun <T> attempt(
     logger: UiTestLogger = Configurator.logger,
     allowedExceptions: Set<Class<out Throwable>> = Configurator.allowedExceptionsForAttempt,
     action: () -> T
-): T {
+) {
     if (intervalMs >= timeoutMs) {
         throw IllegalArgumentException("The interval of attempts should be longer than the timeout of all attempts")
     }
@@ -33,7 +33,8 @@ fun <T> attempt(
 
     do {
         try {
-            return action.invoke()
+            action.invoke()
+            return
         } catch (e: Throwable) {
             val isExceptionAllowed =
                 allowedExceptions.find { it.isAssignableFrom(e.javaClass) } != null
@@ -63,10 +64,10 @@ fun <T> attempt(
 /**
  *  Throws [KaspressoAssertionError] if message is specified, or [caughtAllowedException] otherwise.
  */
-private fun failAttempt(message: String?, caughtAllowedException: Throwable): Nothing {
-    if (message != null) {
-        throw KaspressoAssertionError(message, caughtAllowedException)
-    }
-
-    throw caughtAllowedException
+private fun failAttempt(
+    message: String?,
+    caughtAllowedException: Throwable
+): Nothing {
+    message ?: throw caughtAllowedException
+    throw KaspressoAssertionError(message, caughtAllowedException)
 }

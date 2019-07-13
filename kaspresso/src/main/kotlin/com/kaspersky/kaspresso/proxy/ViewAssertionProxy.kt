@@ -3,7 +3,7 @@ package com.kaspersky.kaspresso.proxy
 import android.support.test.espresso.NoMatchingViewException
 import android.support.test.espresso.ViewAssertion
 import android.view.View
-import com.kaspersky.kaspresso.interceptors.ViewAssertionInterceptor
+import com.kaspersky.kaspresso.interceptors.view.ViewAssertionInterceptor
 
 /**
  * A proxy-wrapper of [ViewAssertion] for interceptors calls.

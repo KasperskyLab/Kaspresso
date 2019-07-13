@@ -42,6 +42,7 @@ class WebViewTest : TestCase() {
             step("Open WebView Screen") {
                 mainScreen {
                     webViewButton {
+                        hasAnyText()
                         click()
                     }
                 }
@@ -76,6 +77,7 @@ class WebViewTest : TestCase() {
                             "/html/body/header/section/div[3]/div[2]/button"
                         ) {
                             hasText("Sign in")
+                            scroll()
                             click()
                         }
                     }

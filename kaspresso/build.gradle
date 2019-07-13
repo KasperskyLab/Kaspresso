@@ -43,6 +43,7 @@ dependencies {
     implementation "com.android.support.test.espresso:espresso-contrib:$versions.espresso"
     implementation "com.android.support.test.espresso:espresso-intents:$versions.espresso"
     implementation "com.android.support.test.uiautomator:uiautomator-v18:$versions.uiautomator"
+    implementation "com.agoda.kakao:kakao:$versions.kakao-support"
 }
 
 task sourcesJar(type: Jar) {
