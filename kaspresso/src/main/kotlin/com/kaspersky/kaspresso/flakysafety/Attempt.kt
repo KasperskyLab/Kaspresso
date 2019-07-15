@@ -23,6 +23,7 @@ import com.kaspersky.kaspresso.logger.UiTestLogger
  * @param action an action that is attempted to be invoked.
  * @return [T] as it is a result of [action] invocation.
  */
+@Suppress("detekt.NestedBlockDepth")
 fun <T> attempt(
     timeoutMs: Long = Configurator.attemptsTimeoutMs,
     intervalMs: Long = Configurator.attemptsIntervalMs,
