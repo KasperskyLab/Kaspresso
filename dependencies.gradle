@@ -12,6 +12,6 @@ ext.versions = [
         runner        : "1.0.2",
         espresso      : "3.0.2",
         uiautomator   : "2.1.3",
-        server        : "1.0.22",
-        dokka         : "0.9.18"
+        dokka         : "0.9.18",
+        kakao         : "2.1.0"
 ]

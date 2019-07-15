@@ -2,8 +2,8 @@ package com.kaspersky.kaspresso.testcases.core
 
 import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.extensions.other.getException
-import com.kaspersky.kaspresso.interceptors.TestRunInterceptor
-import com.kaspersky.kaspresso.interceptors.impl.composite.TestRunCompositeInterceptor
+import com.kaspersky.kaspresso.interceptors.testcase.TestRunInterceptor
+import com.kaspersky.kaspresso.interceptors.testcase.impl.composite.TestRunCompositeInterceptor
 import com.kaspersky.kaspresso.testcases.core.step.StepsManager
 import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
 import com.kaspersky.kaspresso.testcases.core.testcontext.TestContext
@@ -20,10 +20,11 @@ internal class TestRunner<InitData, Data>(
         val exceptions: MutableList<Throwable> = mutableListOf()
         val resultException: Throwable?
 
-        val testRunInterceptor: TestRunInterceptor = TestRunCompositeInterceptor(
-            configurator.testRunInterceptors,
-            exceptions
-        )
+        val testRunInterceptor: TestRunInterceptor =
+            TestRunCompositeInterceptor(
+                configurator.testRunInterceptors,
+                exceptions
+            )
 
         val stepsManager = StepsManager(testBody.testName)
         var testInfo = TestInfo(testBody.testName)
@@ -74,7 +75,7 @@ internal class TestRunner<InitData, Data>(
     @Suppress("LongParameterList")
     private fun runBeforeTestSection(
         testInfo: TestInfo,
-        beforeTestActions: BaseTestContext.() -> Unit,
+        beforeTestActions: (BaseTestContext.() -> Unit)?,
         initDataActions: (InitData.() -> Unit)?,
         transformDataActionsList: List<Data.() -> Unit>,
         testRunInterceptor: TestRunInterceptor,
@@ -83,9 +84,7 @@ internal class TestRunner<InitData, Data>(
 
         try {
             testRunInterceptor.onBeforeSectionStarted(testInfo)
-            beforeTestActions.invoke(
-                BaseTestContext(configurator)
-            )
+            beforeTestActions?.invoke(BaseTestContext(configurator))
 
             val data: Data = dataProducer.invoke(initDataActions)
 
@@ -139,12 +138,12 @@ internal class TestRunner<InitData, Data>(
 
     private fun runAfterTestSection(
         testInfo: TestInfo,
-        afterTestActions: BaseTestContext.() -> Unit,
+        afterTestActions: (BaseTestContext.() -> Unit)?,
         testRunInterceptor: TestRunInterceptor
     ) {
         try {
             testRunInterceptor.onAfterSectionStarted(testInfo)
-            afterTestActions.invoke(BaseTestContext(configurator))
+            afterTestActions?.invoke(BaseTestContext(configurator))
             testRunInterceptor.onAfterSectionFinishedSuccess(testInfo)
         } catch (e: Throwable) {
             testRunInterceptor.onAfterSectionFinishedFailed(testInfo, e)

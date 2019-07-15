@@ -2,7 +2,6 @@ buildscript {
     apply from : 'dependencies.gradle'
 
     repositories {
-        maven { url pInternalRepositoryUrl= }
         google()
         jcenter()
     }
@@ -22,7 +21,6 @@ apply from: 'static_analysis/config/qualityDetekt.gradle'
 
 allprojects {
     repositories {
-        maven { url pInternalRepositoryUrl= }
         google()
         jcenter()
     }

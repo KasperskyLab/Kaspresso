@@ -1,4 +1,4 @@
-package com.kaspersky.kaspresso.interceptors
+package com.kaspersky.kaspresso.interceptors.view
 
 import android.support.test.espresso.ViewAction
 import android.view.View

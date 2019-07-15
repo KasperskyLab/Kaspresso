@@ -1,9 +1,9 @@
-package com.kaspersky.kaspresso.interceptors.impl.logging
+package com.kaspersky.kaspresso.interceptors.view.impl.logging
 
 import android.support.test.espresso.ViewAction
 import android.view.View
 import com.kaspersky.kaspresso.extensions.other.describe
-import com.kaspersky.kaspresso.interceptors.ViewActionInterceptor
+import com.kaspersky.kaspresso.interceptors.view.ViewActionInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
 
 /**

@@ -1,4 +1,4 @@
-package com.kaspersky.kaspresso.interceptors
+package com.kaspersky.kaspresso.interceptors.view
 
 import android.view.View
 import org.hamcrest.Matcher

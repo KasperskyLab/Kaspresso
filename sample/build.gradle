@@ -57,4 +57,5 @@ dependencies {
     androidTestImplementation "com.android.support.test.uiautomator:uiautomator-v18:$versions.uiautomator"
 
     androidTestImplementation project(':kaspresso')
+    androidTestImplementation "com.agoda.kakao:kakao:$versions.kakao-support"
 }

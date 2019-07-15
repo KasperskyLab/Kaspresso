@@ -1,11 +1,11 @@
-package com.kaspersky.kaspresso.interceptors.impl.logging
+package com.kaspersky.kaspresso.interceptors.view.impl.logging
 
 import android.support.test.espresso.NoMatchingViewException
 import android.support.test.espresso.ViewAssertion
 import android.support.test.espresso.assertion.describe
 import android.view.View
 import com.kaspersky.kaspresso.extensions.other.describe
-import com.kaspersky.kaspresso.interceptors.ViewAssertionInterceptor
+import com.kaspersky.kaspresso.interceptors.view.ViewAssertionInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
 
 /**

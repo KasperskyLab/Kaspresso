@@ -44,7 +44,7 @@ dependencies {
     implementation "com.android.support.test.espresso:espresso-intents:$versions.espresso"
     implementation "com.android.support.test.uiautomator:uiautomator-v18:$versions.uiautomator"
 
-    implementation "com.kaspersky.components:test-server:$versions.server"
+    implementation "com.agoda.kakao:kakao:$versions.kakao-support"
 }
 
 if (pPublish.toBoolean()) {
@@ -78,8 +78,4 @@ task javadocJar(type: Jar, dependsOn: dokka) {
 artifacts {
     archives javadocJar
     archives sourcesJar
-}
-
-repositories {
-    mavenCentral()
 }

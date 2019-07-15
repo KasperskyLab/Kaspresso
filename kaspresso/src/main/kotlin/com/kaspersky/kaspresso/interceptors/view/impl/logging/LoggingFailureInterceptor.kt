@@ -1,9 +1,9 @@
-package com.kaspersky.kaspresso.interceptors.impl.logging
+package com.kaspersky.kaspresso.interceptors.view.impl.logging
 
 import android.support.test.espresso.PerformException
 import android.view.View
 import com.kaspersky.kaspresso.extensions.espressoext.describe
-import com.kaspersky.kaspresso.interceptors.FailureInterceptor
+import com.kaspersky.kaspresso.interceptors.view.FailureInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import junit.framework.AssertionFailedError
 import org.hamcrest.Matcher
