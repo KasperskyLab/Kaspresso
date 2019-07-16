@@ -39,12 +39,18 @@ import com.kaspersky.kaspresso.interceptors.testcase.impl.report.BuildStepReport
 import com.kaspersky.kaspresso.interceptors.testcase.impl.screenshot.ScreenshotStepInterceptor
 import com.kaspersky.kaspresso.interceptors.testcase.impl.screenshot.TestRunnerScreenshotInterceptor
 import com.kaspersky.kaspresso.interceptors.view.AtomInterceptor
-import com.kaspersky.kaspresso.interceptors.view.ExecutingInterceptor
 import com.kaspersky.kaspresso.interceptors.view.FailureInterceptor
 import com.kaspersky.kaspresso.interceptors.view.ViewActionInterceptor
 import com.kaspersky.kaspresso.interceptors.view.ViewAssertionInterceptor
 import com.kaspersky.kaspresso.interceptors.view.WebAssertionInterceptor
-import com.kaspersky.kaspresso.interceptors.view.impl.flakysafety.FlakySafeExecutingInterceptor
+import com.kaspersky.kaspresso.interceptors.interactors.DataInteractor
+import com.kaspersky.kaspresso.interceptors.interactors.ViewInteractor
+import com.kaspersky.kaspresso.interceptors.interactors.WebInteractor
+import com.kaspersky.kaspresso.interceptors.interactors.impl.autoscroll.AutoscrollViewInteractor
+import com.kaspersky.kaspresso.interceptors.interactors.impl.autoscroll.AutoscrollWebInteractor
+import com.kaspersky.kaspresso.interceptors.interactors.impl.flakysafety.FlakySafeDataInteractor
+import com.kaspersky.kaspresso.interceptors.interactors.impl.flakysafety.FlakySafeViewInteractor
+import com.kaspersky.kaspresso.interceptors.interactors.impl.flakysafety.FlakySafeWebInteractor
 import com.kaspersky.kaspresso.interceptors.view.impl.logging.LoggingAtomInterceptor
 import com.kaspersky.kaspresso.interceptors.view.impl.logging.LoggingFailureInterceptor
 import com.kaspersky.kaspresso.interceptors.view.impl.logging.LoggingViewActionInterceptor
@@ -89,7 +95,7 @@ import com.kaspersky.kaspresso.testcases.core.testcontext.TestContext
  * @param webAssertionInterceptors Interceptors that are called by [android.support.test.espresso.web.assertion.WebAssertionProxy]
  * before actually [android.support.test.espresso.web.assertion.WebAssertion.checkResult] call.
  * @param executingInterceptor An interceptor that actually manages the execution of actions or assertions. For example,
- * [FlakySafeExecutingInterceptor] performs multiple attempting to execute an action or assertion.
+ * [FlakySafeExecutionInterceptor] performs multiple attempting to interact an action or assertion.
  * @param stepInterceptors An interceptors set that actually manages the execution of steps [TestContext.step].
  * Interceptors work using decorator pattern. First interceptor wraps others.
  * @param testRunInterceptors An interceptors set that actually manages the execution of test sections
@@ -112,7 +118,9 @@ class Configurator(
     internal val viewAssertionInterceptors: List<ViewAssertionInterceptor>,
     internal val atomInterceptors: List<AtomInterceptor>,
     internal val webAssertionInterceptors: List<WebAssertionInterceptor>,
-    internal val executingInterceptor: ExecutingInterceptor? = null,
+    internal val viewInteractors: List<ViewInteractor>,
+    internal val dataInteractors: List<DataInteractor>,
+    internal val webInteractors: List<WebInteractor>,
     internal val stepInterceptors: List<StepInterceptor>,
     internal val testRunInterceptors: List<TestRunInterceptor>,
     internal val externalLogger: UiTestLogger
@@ -175,7 +183,10 @@ class Configurator(
                     atomInterceptors = mutableListOf(LoggingAtomInterceptor(logger))
                     webAssertionInterceptors = mutableListOf(LoggingWebAssertionInterceptor(logger))
 
-                    executingInterceptor = FlakySafeExecutingInterceptor()
+                    viewInteractors = mutableListOf(FlakySafeViewInteractor(), AutoscrollViewInteractor())
+                    dataInteractors = mutableListOf(FlakySafeDataInteractor())
+                    webInteractors = mutableListOf(FlakySafeWebInteractor(), AutoscrollWebInteractor())
+
                     failureInterceptor = LoggingFailureInterceptor(logger)
 
                     stepInterceptors = mutableListOf(
@@ -226,10 +237,12 @@ class Configurator(
         var atomInterceptors: MutableList<AtomInterceptor> = mutableListOf()
         var webAssertionInterceptors: MutableList<WebAssertionInterceptor> = mutableListOf()
 
-        var executingInterceptor: ExecutingInterceptor? = null
+        var viewInteractors: MutableList<ViewInteractor> = mutableListOf()
+        var dataInteractors: MutableList<DataInteractor> = mutableListOf()
+        var webInteractors: MutableList<WebInteractor> = mutableListOf()
 
         /**
-         * An interceptor that is called on failures. It's [FailureInterceptor.interceptAndThrow] method is being
+         * An interceptor that is called on failures. It's [FailureInterceptor.intercept] method is being
          * provide as the default [android.support.test.espresso.FailureHandler].
          */
         var failureInterceptor: FailureInterceptor? = null
@@ -263,7 +276,9 @@ class Configurator(
                 atomInterceptors = atomInterceptors,
                 webAssertionInterceptors = webAssertionInterceptors,
 
-                executingInterceptor = executingInterceptor,
+                viewInteractors = viewInteractors,
+                dataInteractors = dataInteractors,
+                webInteractors = webInteractors,
 
                 stepInterceptors = stepInterceptors,
                 testRunInterceptors = testRunInterceptors,
@@ -273,12 +288,9 @@ class Configurator(
 
             failureInterceptor?.let { Espresso.setFailureHandler(it::interceptAndThrow) }
 
-            val viewInteractionInterceptor =
-                ViewInteractionInterceptor(configurator)
-            val dataInteractionInterceptor =
-                DataInteractionInterceptor(configurator)
-            val webInteractionInterceptor =
-                WebInteractionInterceptor(configurator)
+            val viewInteractionInterceptor = ViewInteractionInterceptor(configurator)
+            val dataInteractionInterceptor = DataInteractionInterceptor(configurator)
+            val webInteractionInterceptor = WebInteractionInterceptor(configurator)
 
             Kakao.intercept {
                 onViewInteraction {
@@ -319,7 +331,5 @@ class Configurator(
         }
     }
 
-    internal fun reset() {
-        Kakao.reset()
-    }
+    internal fun reset(): Unit = Kakao.reset()
 }

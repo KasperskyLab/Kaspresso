@@ -17,30 +17,30 @@ internal class WebInteractionInterceptor(
         interaction: Web.WebInteraction<*>,
         assertion: WebAssertion<*>
     ) {
-        execute {
-            interaction.check(
-                WebAssertionProxy(
-                    assertion,
-                    interaction.getMatcher(),
-                    configurator.webAssertionInterceptors
-                )
+        interaction.check(
+            WebAssertionProxy(
+                assertion,
+                interaction.getMatcher(),
+                interaction,
+                configurator.webAssertionInterceptors,
+                configurator.webInteractors
             )
-        }
+        )
     }
 
     override fun interceptPerform(
         interaction: Web.WebInteraction<*>,
         action: Atom<*>
     ) {
-        execute {
-            interaction.perform(
-                AtomProxy(
-                    action,
-                    interaction.getMatcher(),
-                    configurator.atomInterceptors
-                )
+        interaction.perform(
+            AtomProxy(
+                action,
+                interaction.getMatcher(),
+                interaction,
+                configurator.atomInterceptors,
+                configurator.webInteractors
             )
-        }
+        )
     }
 
     private fun Web.WebInteraction<*>.getMatcher(): Matcher<*> {

@@ -1,21 +1,19 @@
 package com.kaspersky.kaspresso.proxy
 
-import android.support.test.espresso.NoMatchingViewException
-import android.support.test.espresso.ViewAssertion
-import android.support.test.espresso.ViewInteraction
+import android.support.test.espresso.*
 import android.view.View
 import com.kaspersky.kaspresso.interceptors.view.ViewAssertionInterceptor
-import com.kaspersky.kaspresso.interceptors.interactors.ViewInteractor
+import com.kaspersky.kaspresso.interceptors.interactors.DataInteractor
 
 /**
- * A proxy-wrapper of [ViewAssertion] for interceptors calls.
+ * A proxy-wrapper of [ViewAction] for interceptors calls.
  */
-class ViewAssertionProxy(
+class DataAssertionProxy(
     private val viewAssertion: ViewAssertion,
-    override val interaction: ViewInteraction,
+    override val interaction: DataInteraction,
     private val interceptors: List<ViewAssertionInterceptor>,
-    override val interactors: List<ViewInteractor>
-) : ViewAssertion, InteractionProxy<ViewInteraction> {
+    override val interactors: List<DataInteractor>
+) : ViewAssertion, InteractionProxy<DataInteraction> {
 
     /**
      * Calls interceptors before [ViewAssertion.check] on wrapped [viewAssertion] is called.

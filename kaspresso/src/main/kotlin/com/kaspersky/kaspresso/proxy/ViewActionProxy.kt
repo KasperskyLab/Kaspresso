@@ -2,8 +2,10 @@ package com.kaspersky.kaspresso.proxy
 
 import android.support.test.espresso.UiController
 import android.support.test.espresso.ViewAction
+import android.support.test.espresso.ViewInteraction
 import android.view.View
 import com.kaspersky.kaspresso.interceptors.view.ViewActionInterceptor
+import com.kaspersky.kaspresso.interceptors.interactors.ViewInteractor
 import org.hamcrest.Matcher
 
 /**
@@ -11,8 +13,10 @@ import org.hamcrest.Matcher
  */
 class ViewActionProxy(
     private val viewAction: ViewAction,
-    private val interceptors: List<ViewActionInterceptor>
-) : ViewAction {
+    override val interaction: ViewInteraction,
+    private val interceptors: List<ViewActionInterceptor>,
+    override val interactors: List<ViewInteractor>
+) : ViewAction, InteractionProxy<ViewInteraction> {
 
     /**
      * Simply calls [ViewAction.getDescription] on wrapped [viewAction].
@@ -36,6 +40,6 @@ class ViewActionProxy(
      */
     override fun perform(uiController: UiController, view: View) {
         interceptors.forEach { it.intercept(viewAction, view) }
-        viewAction.perform(uiController, view)
+        interact(view) { viewAction.perform(uiController, view) }
     }
 }

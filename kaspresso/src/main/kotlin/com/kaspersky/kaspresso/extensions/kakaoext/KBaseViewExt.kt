@@ -14,7 +14,7 @@ fun <T : KBaseView<Any>, R> T.attempt(
     logger: UiTestLogger = Configurator.logger,
     allowedExceptions: Set<Class<out Throwable>> = Configurator.allowedExceptionsForAttempt,
     action: T.() -> R
-) {
+): R {
     return com.kaspersky.kaspresso.flakysafety.attempt(
         timeoutMs = timeoutMs,
         intervalMs = intervalMs,

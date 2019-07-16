@@ -3,7 +3,9 @@ package com.kaspersky.kaspresso.proxy
 import android.support.test.espresso.web.model.Atom
 import android.support.test.espresso.web.model.ElementReference
 import android.support.test.espresso.web.model.Evaluation
+import android.support.test.espresso.web.sugar.Web
 import com.kaspersky.kaspresso.interceptors.view.AtomInterceptor
+import com.kaspersky.kaspresso.interceptors.interactors.WebInteractor
 import org.hamcrest.Matcher
 
 /**
@@ -12,13 +14,15 @@ import org.hamcrest.Matcher
 class AtomProxy<R>(
     val atom: Atom<R>,
     val matcher: Matcher<*>,
-    private val interceptors: List<AtomInterceptor>
-) : Atom<R> {
+    override val interaction: Web.WebInteraction<*>,
+    private val interceptors: List<AtomInterceptor>,
+    override val interactors: List<WebInteractor>
+) : Atom<R>, InteractionProxy<Web.WebInteraction<*>> {
 
     /**
      * Simply calls [Atom.getArguments] on wrapped [atom].
      *
-     * @param elementContext null unless an ElementReference has been supplied to execute this atom with.
+     * @param elementContext null unless an ElementReference has been supplied to interact this atom with.
      * @return a [List] of objects to pass to the script as arguments.
      */
     override fun getArguments(elementContext: ElementReference?): MutableList<Any> {
@@ -33,7 +37,7 @@ class AtomProxy<R>(
      */
     override fun transform(evaluation: Evaluation?): R {
         interceptors.forEach { it.intercept(this, evaluation) }
-        return atom.transform(evaluation)
+        return interact(null) { atom.transform(evaluation) }
     }
 
     /**

@@ -16,21 +16,17 @@ internal class ViewInteractionInterceptor(
         interaction: ViewInteraction,
         assertion: ViewAssertion
     ) {
-        execute {
-            interaction.check(
-                ViewAssertionProxy(assertion, configurator.viewAssertionInterceptors)
-            )
-        }
+        interaction.check(
+            ViewAssertionProxy(assertion, interaction, configurator.viewAssertionInterceptors, configurator.viewInteractors)
+        )
     }
 
     override fun interceptPerform(
         interaction: ViewInteraction,
         action: ViewAction
     ) {
-        execute {
-            interaction.perform(
-                ViewActionProxy(action, configurator.viewActionInterceptors)
-            )
-        }
+        interaction.perform(
+            ViewActionProxy(action, interaction, configurator.viewActionInterceptors, configurator.viewInteractors)
+        )
     }
 }

@@ -23,7 +23,8 @@ fun <T> attempt(
     logger: UiTestLogger = Configurator.logger,
     allowedExceptions: Set<Class<out Throwable>> = Configurator.allowedExceptionsForAttempt,
     action: () -> T
-) {
+): T {
+
     if (intervalMs >= timeoutMs) {
         throw IllegalArgumentException("The interval of attempts should be longer than the timeout of all attempts")
     }
@@ -33,8 +34,7 @@ fun <T> attempt(
 
     do {
         try {
-            action.invoke()
-            return
+            return action.invoke()
         } catch (e: Throwable) {
             val isExceptionAllowed =
                 allowedExceptions.find { it.isAssignableFrom(e.javaClass) } != null

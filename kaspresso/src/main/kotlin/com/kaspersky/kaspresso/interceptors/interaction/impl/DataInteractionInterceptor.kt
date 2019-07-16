@@ -5,7 +5,7 @@ import android.support.test.espresso.ViewAction
 import android.support.test.espresso.ViewAssertion
 import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.interceptors.interaction.InteractionInterceptor
-import com.kaspersky.kaspresso.proxy.ViewAssertionProxy
+import com.kaspersky.kaspresso.proxy.DataAssertionProxy
 
 internal class DataInteractionInterceptor(
     configurator: Configurator
@@ -15,11 +15,9 @@ internal class DataInteractionInterceptor(
         interaction: DataInteraction,
         assertion: ViewAssertion
     ) {
-        execute {
-            interaction.check(
-                ViewAssertionProxy(assertion, configurator.viewAssertionInterceptors)
-            )
-        }
+        interaction.check(
+            DataAssertionProxy(assertion, interaction, configurator.viewAssertionInterceptors, configurator.dataInteractors)
+        )
     }
 
     override fun interceptPerform(
