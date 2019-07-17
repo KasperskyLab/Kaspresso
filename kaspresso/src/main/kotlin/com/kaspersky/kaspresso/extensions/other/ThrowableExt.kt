@@ -1,6 +1,6 @@
 package com.kaspersky.kaspresso.extensions.other
 
-import io.reactivex.exceptions.CompositeException
+import io.reactivex.exceptions.ExtCompositeException
 import java.io.PrintWriter
 import java.io.StringWriter
 
@@ -38,7 +38,7 @@ inline fun <reified ERROR : Throwable, LISTENER> Iterable<LISTENER>.forEachSafel
 internal fun <T : Throwable> List<T>.getException(): Throwable? {
     return when (this.size) {
         1 -> throw this[0]
-        in 2..Int.MAX_VALUE -> throw CompositeException(this)
+        in 2..Int.MAX_VALUE -> throw ExtCompositeException(this)
         else -> null
     }
 }
@@ -46,6 +46,6 @@ internal fun <T : Throwable> List<T>.getException(): Throwable? {
 internal fun <T : Throwable> List<T>.throwAll() {
     when (this.size) {
         1 -> throw this[0]
-        in 2..Int.MAX_VALUE -> throw CompositeException(this)
+        in 2..Int.MAX_VALUE -> throw ExtCompositeException(this)
     }
 }

@@ -35,7 +35,7 @@ import java.util.*;
  * If you invoke {@link #getCause()}, it will lazily create the causal chain but will stop if it finds any
  * Throwable in the chain that it has already seen.
  */
-public final class CompositeException extends RuntimeException {
+public final class ExtCompositeException extends RuntimeException {
 
     private static final long serialVersionUID = 3026362227162912146L;
 
@@ -50,7 +50,7 @@ public final class CompositeException extends RuntimeException {
      *
      * @throws IllegalArgumentException if <code>exceptions</code> is empty.
      */
-    public CompositeException(@NonNull Throwable... exceptions) {
+    public ExtCompositeException(@NonNull Throwable... exceptions) {
         this(exceptions == null ?
                 Collections.singletonList(new NullPointerException("exceptions was null")) : Arrays.asList(exceptions));
     }
@@ -62,13 +62,13 @@ public final class CompositeException extends RuntimeException {
      *
      * @throws IllegalArgumentException if <code>errors</code> is empty.
      */
-    public CompositeException(@NonNull Iterable<? extends Throwable> errors) {
+    public ExtCompositeException(@NonNull Iterable<? extends Throwable> errors) {
         Set<Throwable> deDupedExceptions = new LinkedHashSet<Throwable>();
         List<Throwable> localExceptions = new ArrayList<Throwable>();
         if (errors != null) {
             for (Throwable ex : errors) {
-                if (ex instanceof CompositeException) {
-                    deDupedExceptions.addAll(((CompositeException) ex).getExceptions());
+                if (ex instanceof ExtCompositeException) {
+                    deDupedExceptions.addAll(((ExtCompositeException) ex).getExceptions());
                 } else if (ex != null) {
                     deDupedExceptions.add(ex);
                 } else {
