@@ -1,6 +1,6 @@
 package com.kaspersky.kaspresso.interceptors.view.impl.logging
 
-import android.support.test.espresso.PerformException
+import androidx.test.espresso.PerformException
 import android.view.View
 import com.kaspersky.kaspresso.extensions.espressoext.describe
 import com.kaspersky.kaspresso.interceptors.view.FailureInterceptor

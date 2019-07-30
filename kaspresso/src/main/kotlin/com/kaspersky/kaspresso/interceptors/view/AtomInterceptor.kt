@@ -1,6 +1,6 @@
 package com.kaspersky.kaspresso.interceptors.view
 
-import android.support.test.espresso.web.model.Evaluation
+import androidx.test.espresso.web.model.Evaluation
 import com.kaspersky.kaspresso.proxy.AtomProxy
 
 /**
@@ -9,7 +9,7 @@ import com.kaspersky.kaspresso.proxy.AtomProxy
 interface AtomInterceptor {
 
     /**
-     * Called to do some stuff before [android.support.test.espresso.web.model.Atom.transform] is actually called.
+     * Called to do some stuff before [androidx.test.espresso.web.model.Atom.transform] is actually called.
      *
      * @param evaluation represents the results of a Javascript execution.
      */

@@ -9,7 +9,7 @@ import org.hamcrest.Matcher
 interface FailureInterceptor {
 
     /**
-     * Reference to this method is provided as [android.support.test.espresso.FailureHandler] and is called on failures,
+     * Reference to this method is provided as [androidx.test.espresso.FailureHandler] and is called on failures,
      * to do some stuff and throw an exception further.
      *
      * @param error the reason of failure.

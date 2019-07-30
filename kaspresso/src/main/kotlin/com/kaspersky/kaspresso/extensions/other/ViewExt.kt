@@ -1,7 +1,7 @@
 package com.kaspersky.kaspresso.extensions.other
 
 import android.content.res.Resources
-import android.support.test.espresso.matcher.ViewMatchers.isDisplayingAtLeast
+import androidx.test.espresso.matcher.ViewMatchers.isDisplayingAtLeast
 import android.view.View
 import android.widget.TextView
 
