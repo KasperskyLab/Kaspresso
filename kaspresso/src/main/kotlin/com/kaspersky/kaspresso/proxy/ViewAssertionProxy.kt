@@ -1,8 +1,8 @@
 package com.kaspersky.kaspresso.proxy
 
+import android.view.View
 import androidx.test.espresso.NoMatchingViewException
 import androidx.test.espresso.ViewAssertion
-import android.view.View
 import com.kaspersky.kaspresso.interceptors.view.ViewAssertionInterceptor
 
 /**

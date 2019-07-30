@@ -1,11 +1,11 @@
 package com.kaspersky.kaspresso.flakysafety
 
+import android.widget.FrameLayout
 import androidx.test.InstrumentationRegistry
 import androidx.test.uiautomator.By
 import androidx.test.uiautomator.BySelector
 import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.Until
-import android.widget.FrameLayout
 import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.exceptions.AndroidSystemOverlayException
 import com.kaspersky.kaspresso.exceptions.KaspressoAssertionError
@@ -50,7 +50,8 @@ fun <T> attempt(
             if (needCheckAndroidSystemFirstTime) {
                 needCheckAndroidSystemFirstTime = false
                 if (isAndroidSystemDetectedAndRemoved(logger)) {
-                    caughtAllowedException = AndroidSystemOverlayException("Android system dialog/window has overlaid the application")
+                    caughtAllowedException =
+                        AndroidSystemOverlayException("Android system dialog/window has overlaid the application")
                     continue
                 }
             }
@@ -85,8 +86,9 @@ fun <T> attempt(
 private fun isAndroidSystemDetectedAndRemoved(logger: UiTestLogger): Boolean {
     with(UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())) {
         if (isVisible(By.pkg("android").clazz(FrameLayout::class.java))) {
-            logger.i("The android system dialog/window was detected. " +
-                    "Kaspresso presses back to try remove detected dialog/window"
+            logger.i(
+                "The android system dialog/window was detected. " +
+                        "Kaspresso presses back to try remove detected dialog/window"
             )
             pressBack()
             return true
