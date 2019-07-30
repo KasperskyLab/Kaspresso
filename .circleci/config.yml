@@ -9,14 +9,14 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "kaspresso/build.gradle" }}-{{ checksum  "sample/build.gradle" }}
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "kaspresso/build.gradle" }}-{{ checksum  "sample/build.gradle" }}-{{ checksum  "dependencies.gradle" }}
       - run:
           name: Download Dependencies
           command: ./gradlew androidDependencies
       - save_cache:
           paths:
             - ~/.gradle
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "kaspresso/build.gradle" }}-{{ checksum  "sample/build.gradle" }}
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "kaspresso/build.gradle" }}-{{ checksum  "sample/build.gradle" }}-{{ checksum  "dependencies.gradle" }}
       - run:
           name: Run Tests
           command: ./gradlew assemble test
