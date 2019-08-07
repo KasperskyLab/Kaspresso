@@ -11,5 +11,5 @@ class MainScreen : Screen<MainScreen>() {
 
     val webViewButton = KButton { withId(R.id.activity_main_button_webview) }
 
-    val descriptionText = KTextView { withId(R.id.activity_main_text_view_description) }
+    val descriptionText = KTextView { withId(R.id.activity_main_title) }
 }

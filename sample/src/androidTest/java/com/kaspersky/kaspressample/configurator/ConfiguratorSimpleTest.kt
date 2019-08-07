@@ -1,23 +1,24 @@
-package com.kaspersky.kaspressample.tests.simple
+package com.kaspersky.kaspressample.configurator
 
 import android.Manifest
 import android.support.test.rule.ActivityTestRule
 import android.support.test.rule.GrantPermissionRule
 import android.support.test.runner.AndroidJUnit4
 import com.kaspersky.kaspressample.MainActivity
-import com.kaspersky.kaspressample.scenarios.CheckHomeTitleScenario
-import com.kaspersky.kaspressample.screen.HomeScreen
+import com.kaspersky.kaspressample.R
 import com.kaspersky.kaspressample.screen.MainScreen
+import com.kaspersky.kaspressample.screen.SimpleScreen
+import com.kaspersky.kaspresso.flakysafety.attempt
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class OpenHomeScreenWithOnlyInitSection : TestCase() {
+class ConfiguratorSimpleTest : TestCase() {
 
     private val mainScreen = MainScreen()
-    private val homeScreen = HomeScreen()
+    private val simpleScreen = SimpleScreen()
 
     @get:Rule
     val runtimePermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
@@ -30,43 +31,46 @@ class OpenHomeScreenWithOnlyInitSection : TestCase() {
 
     @Test
     fun test() {
-        init {
-            // data initialization
-        }.run {
+        before {
             activityTestRule.launchActivity(null)
+        }.after {
+        }.run {
 
-            step("Open Home Screen") {
+            step("Open Simple Screen") {
                 mainScreen {
                     nextButton {
+                        isVisible()
                         click()
                     }
                 }
             }
 
-            step("Check Home Screen") {
-                homeScreen {
-                    title {
+            step("Click button 1 and check button 2") {
+                simpleScreen {
+                    button1 {
+                        click()
+                    }
+                    button2 {
                         isVisible()
-                        // hasText("Ooops!") //Uncomment to fail test
                     }
                 }
             }
-            step("My Awesome Scenario") {
-                scenario(
-                    CheckHomeTitleScenario()
-                )
 
-                homeScreen {
-                    title {
-                        // hasText("Ooops!") //Uncomment to fail test
+            step("Click button 2 and check edit") {
+                simpleScreen {
+                    button2 {
+                        click()
                     }
-                }
-                step("Just Empty SubStep") {
-                    step("Just Empty SubSubStep") {}
+                    attempt(timeoutMs = 5000) {
+                        edit {
+                            isVisible()
+                            hasText(R.string.text_edit_text)
+                        }
+                    }
                 }
             }
 
-            step("Just Empty Step") {}
         }
     }
+
 }
