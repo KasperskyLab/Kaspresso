@@ -1,8 +1,8 @@
 package com.kaspersky.kaspresso.interceptors.interaction.impl
 
-import android.support.test.espresso.ViewAction
-import android.support.test.espresso.ViewAssertion
-import android.support.test.espresso.ViewInteraction
+import androidx.test.espresso.ViewAction
+import androidx.test.espresso.ViewAssertion
+import androidx.test.espresso.ViewInteraction
 import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.interceptors.interaction.InteractionInterceptor
 import com.kaspersky.kaspresso.proxy.ViewActionProxy

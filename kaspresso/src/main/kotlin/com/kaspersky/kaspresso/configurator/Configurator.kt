@@ -1,10 +1,10 @@
 package com.kaspersky.kaspresso.configurator
 
-import android.support.test.InstrumentationRegistry
-import android.support.test.espresso.Espresso
-import android.support.test.espresso.NoMatchingViewException
-import android.support.test.espresso.PerformException
-import android.support.test.uiautomator.UiDevice
+import androidx.test.InstrumentationRegistry
+import androidx.test.espresso.Espresso
+import androidx.test.espresso.NoMatchingViewException
+import androidx.test.espresso.PerformException
+import androidx.test.uiautomator.UiDevice
 import com.agoda.kakao.Kakao
 import com.kaspersky.kaspresso.device.accessibility.Accessibility
 import com.kaspersky.kaspresso.device.accessibility.AccessibilityImpl
@@ -81,13 +81,13 @@ import com.kaspersky.kaspresso.testcases.core.testcontext.TestContext
  * @param exploit Holds an implementation of [Exploit] interface. If it was not specified in [Configurator.Builder],
  * the default implementation is used.
  * @param viewActionInterceptors Interceptors that are called by [com.kaspersky.kaspresso.proxy.ViewActionProxy]
- * before actually [android.support.test.espresso.ViewAction.perform] call.
+ * before actually [androidx.test.espresso.ViewAction.perform] call.
  * @param viewAssertionInterceptors Interceptors that are called by [com.kaspersky.kaspresso.proxy.ViewAssertionProxy]
- * before actually [android.support.test.espresso.ViewAssertion.check] call.
+ * before actually [androidx.test.espresso.ViewAssertion.check] call.
  * @param atomInterceptors Interceptors that are called by [com.kaspersky.kaspresso.proxy.AtomProxy]
- * before actually [android.support.test.espresso.web.model.Atom.transform] call.
- * @param webAssertionInterceptors Interceptors that are called by [android.support.test.espresso.web.assertion.WebAssertionProxy]
- * before actually [android.support.test.espresso.web.assertion.WebAssertion.checkResult] call.
+ * before actually [androidx.test.espresso.web.model.Atom.transform] call.
+ * @param webAssertionInterceptors Interceptors that are called by [androidx.test.espresso.web.assertion.WebAssertionProxy]
+ * before actually [androidx.test.espresso.web.assertion.WebAssertion.checkResult] call.
  * @param executingInterceptor An interceptor that actually manages the execution of actions or assertions. For example,
  * [FlakySafeExecutingInterceptor] performs multiple attempting to execute an action or assertion.
  * @param stepInterceptors An interceptors set that actually manages the execution of steps [TestContext.step].
@@ -230,7 +230,7 @@ class Configurator(
 
         /**
          * An interceptor that is called on failures. It's [FailureInterceptor.interceptAndThrow] method is being
-         * provide as the default [android.support.test.espresso.FailureHandler].
+         * provide as the default [androidx.test.espresso.FailureHandler].
          */
         var failureInterceptor: FailureInterceptor? = null
 

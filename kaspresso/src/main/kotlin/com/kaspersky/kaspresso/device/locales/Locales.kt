@@ -1,6 +1,6 @@
 package com.kaspersky.kaspresso.device.locales
 
-import android.support.test.InstrumentationRegistry
+import androidx.test.InstrumentationRegistry
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import java.util.Locale
 

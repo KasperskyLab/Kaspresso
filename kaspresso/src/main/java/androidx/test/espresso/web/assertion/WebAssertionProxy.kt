@@ -1,4 +1,4 @@
-package android.support.test.espresso.web.assertion
+package androidx.test.espresso.web.assertion
 
 import android.webkit.WebView
 import com.kaspersky.kaspresso.interceptors.view.WebAssertionInterceptor
