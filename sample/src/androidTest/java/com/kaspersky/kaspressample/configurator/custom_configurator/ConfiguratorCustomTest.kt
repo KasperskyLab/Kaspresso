@@ -1,4 +1,4 @@
-package com.kaspersky.kaspressample.configurator
+package com.kaspersky.kaspressample.configurator.custom_configurator
 
 import android.Manifest
 import android.support.test.rule.ActivityTestRule
@@ -8,21 +8,26 @@ import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.R
 import com.kaspersky.kaspressample.screen.MainScreen
 import com.kaspersky.kaspressample.screen.SimpleScreen
+import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.flakysafety.attempt
-import com.kaspersky.kaspresso.testcases.api.testcaserule.TestCaseRule
+import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 /**
- * In this example you can observe a test tuned by default Configurator.
- * When you start the test you can see output of default Kaspresso interceptors:
- * - a lot of useful logs
- * - failure handling
- * - screenshots in a device
+ * In this test we show how to configure your custom Kaspresso interceptors.
+ * Besides in the test there are some assertions to check a work of interceptors.
+ *
  */
 @RunWith(AndroidJUnit4::class)
-class ConfiguratorSimpleTestWithRule {
+class ConfiguratorCustomTest : TestCase(
+    configBuilder = Configurator.Builder.default().apply {
+        viewActionInterceptors.add(CustomViewActionInterceptor())
+        viewAssertionInterceptors.add(CustomViewAssertionInterceptor())
+        stepInterceptors.add(CustomStepInterceptor())
+    }
+) {
 
     private val mainScreen = MainScreen()
     private val simpleScreen = SimpleScreen()
@@ -36,14 +41,12 @@ class ConfiguratorSimpleTestWithRule {
     @get:Rule
     val activityTestRule = ActivityTestRule(MainActivity::class.java, true, false)
 
-    @get:Rule
-    val testCaseRule = TestCaseRule(javaClass.simpleName)
-
     @Test
     fun test() {
-        testCaseRule.before {
+        before {
             activityTestRule.launchActivity(null)
         }.after {
+            CheckCustomInterceptorsStorage.resetAllCheckLists()
         }.run {
 
             step("Open Simple Screen") {
@@ -79,6 +82,13 @@ class ConfiguratorSimpleTestWithRule {
                     }
                 }
             }
+
+            kLogger.i("Final assert")
+            CheckCustomInterceptorsStorage.assertAllCheckLists(
+                actionsCount = 3,
+                assertionsCount = 4,
+                stepCount = 3
+            )
 
         }
     }

@@ -14,6 +14,13 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
+/**
+ * In this example you can observe a test tuned by default Configurator.
+ * When you start the test you can see output of default Kaspresso interceptors:
+ * - a lot of useful logs
+ * - failure handling
+ * - screenshots in a device
+ */
 @RunWith(AndroidJUnit4::class)
 class ConfiguratorSimpleTest : TestCase() {
 
