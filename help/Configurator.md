@@ -39,4 +39,4 @@ As we wrote above all actions to add Kaspresso in a test where Espresso and Kaka
 
 ### **Configurator and Kaspresso interceptors example**
 
-The example how to set Configurator and how to use Kaspresso interceptors are here and here
+The example how to set Configurator and how to use Kaspresso interceptors are in [com.kaspersky.kaspressample/configurator].
