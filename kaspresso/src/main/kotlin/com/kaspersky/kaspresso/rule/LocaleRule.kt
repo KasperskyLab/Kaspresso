@@ -1,10 +1,10 @@
 package com.kaspersky.kaspresso.rule
 
 import android.content.Context
-import androidx.test.InstrumentationRegistry
-import androidx.test.runner.lifecycle.ActivityLifecycleCallback
-import androidx.test.runner.lifecycle.ActivityLifecycleMonitorRegistry
-import androidx.test.runner.lifecycle.Stage
+import android.support.test.InstrumentationRegistry
+import android.support.test.runner.lifecycle.ActivityLifecycleCallback
+import android.support.test.runner.lifecycle.ActivityLifecycleMonitorRegistry
+import android.support.test.runner.lifecycle.Stage
 import java.util.Locale
 import org.junit.rules.TestRule
 import org.junit.runner.Description

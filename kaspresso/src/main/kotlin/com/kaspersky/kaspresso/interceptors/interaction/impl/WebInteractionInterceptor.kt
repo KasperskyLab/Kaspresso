@@ -1,9 +1,9 @@
 package com.kaspersky.kaspresso.interceptors.interaction.impl
 
-import androidx.test.espresso.web.assertion.WebAssertion
-import androidx.test.espresso.web.assertion.WebAssertionProxy
-import androidx.test.espresso.web.model.Atom
-import androidx.test.espresso.web.sugar.Web
+import android.support.test.espresso.web.assertion.WebAssertion
+import android.support.test.espresso.web.assertion.WebAssertionProxy
+import android.support.test.espresso.web.model.Atom
+import android.support.test.espresso.web.sugar.Web
 import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.interceptors.interaction.InteractionInterceptor
 import com.kaspersky.kaspresso.proxy.AtomProxy

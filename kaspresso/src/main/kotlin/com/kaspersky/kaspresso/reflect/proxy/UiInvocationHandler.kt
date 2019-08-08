@@ -1,6 +1,6 @@
 package com.kaspersky.kaspresso.reflect.proxy
 
-import androidx.test.internal.runner.junit4.statement.UiThreadStatement
+import android.support.test.internal.runner.junit4.statement.UiThreadStatement
 import com.kaspersky.kaspresso.extensions.other.getStackTraceAsString
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import java.lang.reflect.InvocationHandler

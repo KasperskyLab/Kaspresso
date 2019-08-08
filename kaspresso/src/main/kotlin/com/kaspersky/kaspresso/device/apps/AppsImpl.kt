@@ -3,10 +3,10 @@ package com.kaspersky.kaspresso.device.apps
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import androidx.test.uiautomator.By
-import androidx.test.uiautomator.UiDevice
-import androidx.test.uiautomator.UiSelector
-import androidx.test.uiautomator.Until
+import android.support.test.uiautomator.By
+import android.support.test.uiautomator.UiDevice
+import android.support.test.uiautomator.UiSelector
+import android.support.test.uiautomator.Until
 import com.kaspersky.kaspresso.device.server.AdbServer
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import org.hamcrest.CoreMatchers
