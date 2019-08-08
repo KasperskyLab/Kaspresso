@@ -19,5 +19,4 @@ class CustomViewAssertionInterceptor : ViewAssertionInterceptor {
         previousView = view
         previousViewAssertion = viewAssertion
     }
-
 }

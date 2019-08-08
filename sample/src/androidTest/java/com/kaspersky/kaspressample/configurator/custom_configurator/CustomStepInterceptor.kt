@@ -8,5 +8,4 @@ class CustomStepInterceptor : StepInterceptor {
     override fun interceptAfterFinally(stepInfo: StepInfo) {
         CheckCustomInterceptorsStorage.putToStepInterceptorCheckList()
     }
-
 }

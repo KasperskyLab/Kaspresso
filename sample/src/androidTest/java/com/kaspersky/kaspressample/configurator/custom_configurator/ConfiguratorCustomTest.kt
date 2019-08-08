@@ -89,8 +89,6 @@ class ConfiguratorCustomTest : TestCase(
                 assertionsCount = 4,
                 stepCount = 3
             )
-
         }
     }
-
 }

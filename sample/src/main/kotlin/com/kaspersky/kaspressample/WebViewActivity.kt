@@ -51,5 +51,4 @@ class WebViewActivity : AppCompatActivity() {
             super.onBackPressed()
         }
     }
-
 }

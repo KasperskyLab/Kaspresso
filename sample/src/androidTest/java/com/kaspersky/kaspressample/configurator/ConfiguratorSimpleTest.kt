@@ -76,8 +76,6 @@ class ConfiguratorSimpleTest : TestCase() {
                     }
                 }
             }
-
         }
     }
-
 }

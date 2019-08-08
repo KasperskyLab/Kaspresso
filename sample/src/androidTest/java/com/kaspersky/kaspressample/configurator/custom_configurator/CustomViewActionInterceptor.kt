@@ -9,5 +9,4 @@ class CustomViewActionInterceptor : ViewActionInterceptor {
     override fun intercept(viewAction: ViewAction, view: View) {
         CheckCustomInterceptorsStorage.putToViewActionInterceptorCheckList()
     }
-
 }

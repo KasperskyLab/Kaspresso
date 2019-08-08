@@ -31,5 +31,4 @@ object CheckCustomInterceptorsStorage {
         assertTrue(viewAssertionInterceptorCheckList == "B".repeat(assertionsCount).toMutableList())
         assertTrue(stepInterceptorCheckList == "C".repeat(stepCount).toMutableList())
     }
-
 }

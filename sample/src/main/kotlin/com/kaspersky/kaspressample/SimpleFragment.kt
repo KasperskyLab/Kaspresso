@@ -5,8 +5,8 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import kotlinx.android.synthetic.main.fragment_simple.*
 import java.util.concurrent.Executors
+import kotlinx.android.synthetic.main.fragment_simple.*
 
 class SimpleFragment : Fragment() {
 
@@ -14,6 +14,7 @@ class SimpleFragment : Fragment() {
         fun newInstance() = SimpleFragment()
 
         const val TAG = "SimpleFragment"
+        private const val TIMEOUT: Long = 2000
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -28,10 +29,9 @@ class SimpleFragment : Fragment() {
         button_2.setOnClickListener {
             // special sleep to emulate ui block operation to check attempt method correctness
             Executors.newSingleThreadExecutor().submit {
-                Thread.sleep(2000)
+                Thread.sleep(TIMEOUT)
                 activity?.runOnUiThread { edit.visibility = View.VISIBLE }
             }
         }
     }
-
 }
