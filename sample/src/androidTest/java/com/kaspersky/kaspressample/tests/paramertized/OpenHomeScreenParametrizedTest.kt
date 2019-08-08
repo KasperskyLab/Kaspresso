@@ -1,9 +1,9 @@
 package com.kaspersky.kaspressample.tests.paramertized
 
 import android.Manifest
-import androidx.test.rule.ActivityTestRule
-import androidx.test.rule.GrantPermissionRule
-import androidx.test.runner.AndroidJUnit4
+import android.support.test.rule.ActivityTestRule
+import android.support.test.rule.GrantPermissionRule
+import android.support.test.runner.AndroidJUnit4
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.scenarios.CheckHomeTitleNoParametersScenario
 import com.kaspersky.kaspressample.screen.MainScreen

@@ -1,8 +1,8 @@
 package com.kaspersky.kaspresso.proxy
 
-import androidx.test.espresso.web.model.Atom
-import androidx.test.espresso.web.model.ElementReference
-import androidx.test.espresso.web.model.Evaluation
+import android.support.test.espresso.web.model.Atom
+import android.support.test.espresso.web.model.ElementReference
+import android.support.test.espresso.web.model.Evaluation
 import com.kaspersky.kaspresso.interceptors.view.AtomInterceptor
 import org.hamcrest.Matcher
 

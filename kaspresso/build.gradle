@@ -37,13 +37,13 @@ dependencies {
 
     testImplementation "junit:junit:$versions.junit"
 
-    implementation "androidx.test:runner:$versions.runner"
-    implementation "androidx.test.espresso:espresso-web:$versions.espresso"
-    implementation "androidx.test.espresso:espresso-core:$versions.espresso"
-    implementation "androidx.test.espresso:espresso-contrib:$versions.espresso"
-    implementation "androidx.test.espresso:espresso-intents:$versions.espresso"
-    implementation "androidx.test.uiautomator:uiautomator:$versions.uiautomator"
-    implementation "com.agoda.kakao:kakao:$versions.kakao"
+    implementation "com.android.support.test:runner:$versions.runner"
+    implementation "com.android.support.test.espresso:espresso-web:$versions.espresso"
+    implementation "com.android.support.test.espresso:espresso-core:$versions.espresso"
+    implementation "com.android.support.test.espresso:espresso-contrib:$versions.espresso"
+    implementation "com.android.support.test.espresso:espresso-intents:$versions.espresso"
+    implementation "com.android.support.test.uiautomator:uiautomator-v18:$versions.uiautomator"
+    implementation "com.agoda.kakao:kakao:$versions.kakao-support"
 }
 
 task sourcesJar(type: Jar) {

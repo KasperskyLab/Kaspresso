@@ -1,6 +1,6 @@
-package androidx.test.espresso.assertion
+package android.support.test.espresso.assertion
 
-import androidx.test.espresso.ViewAssertion
+import android.support.test.espresso.ViewAssertion
 import org.hamcrest.StringDescription
 
 /**
