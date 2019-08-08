@@ -3,7 +3,7 @@ package com.kaspersky.kaspresso.device.accessibility
 import android.annotation.TargetApi
 import android.app.UiAutomation
 import android.os.Build
-import androidx.test.InstrumentationRegistry
+import android.support.test.InstrumentationRegistry
 
 /**
  * An implementation of Accessibility interface.
