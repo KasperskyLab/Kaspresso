@@ -1,11 +1,11 @@
 package com.kaspersky.kaspressample.tests.simple
 
 import android.Manifest
-import android.support.test.espresso.web.webdriver.DriverAtoms
-import android.support.test.espresso.web.webdriver.Locator
-import android.support.test.rule.ActivityTestRule
-import android.support.test.rule.GrantPermissionRule
-import android.support.test.runner.AndroidJUnit4
+import androidx.test.espresso.web.webdriver.DriverAtoms
+import androidx.test.espresso.web.webdriver.Locator
+import androidx.test.rule.ActivityTestRule
+import androidx.test.rule.GrantPermissionRule
+import androidx.test.runner.AndroidJUnit4
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.screen.MainScreen
 import com.kaspersky.kaspressample.screen.WebViewScreen
@@ -42,6 +42,7 @@ class WebViewTest : TestCase() {
             step("Open WebView Screen") {
                 mainScreen {
                     webViewButton {
+                        hasAnyText()
                         click()
                     }
                 }
@@ -76,6 +77,7 @@ class WebViewTest : TestCase() {
                             "/html/body/header/section/div[3]/div[2]/button"
                         ) {
                             hasText("Sign in")
+                            scroll()
                             click()
                         }
                     }

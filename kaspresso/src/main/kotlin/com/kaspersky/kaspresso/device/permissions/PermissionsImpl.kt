@@ -1,8 +1,8 @@
 package com.kaspersky.kaspresso.device.permissions
 
-import android.support.test.uiautomator.UiDevice
-import android.support.test.uiautomator.UiObjectNotFoundException
-import android.support.test.uiautomator.UiSelector
+import androidx.test.uiautomator.UiDevice
+import androidx.test.uiautomator.UiObjectNotFoundException
+import androidx.test.uiautomator.UiSelector
 import com.kaspersky.kaspresso.extensions.other.getStackTraceAsString
 import com.kaspersky.kaspresso.flakysafety.wait
 import com.kaspersky.kaspresso.logger.UiTestLogger

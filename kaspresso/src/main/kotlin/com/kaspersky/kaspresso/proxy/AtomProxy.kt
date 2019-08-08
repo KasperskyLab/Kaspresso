@@ -1,19 +1,19 @@
 package com.kaspersky.kaspresso.proxy
 
-import android.support.test.espresso.web.model.Atom
-import android.support.test.espresso.web.model.ElementReference
-import android.support.test.espresso.web.model.Evaluation
-import com.kaspersky.kaspresso.interceptors.AtomInterceptor
+import androidx.test.espresso.web.model.Atom
+import androidx.test.espresso.web.model.ElementReference
+import androidx.test.espresso.web.model.Evaluation
+import com.kaspersky.kaspresso.interceptors.view.AtomInterceptor
+import org.hamcrest.Matcher
 
 /**
  * A proxy-wrapper of [Atom] for interceptors calls.
  */
 class AtomProxy<R>(
-    private val atom: Atom<R>,
+    val atom: Atom<R>,
+    val matcher: Matcher<*>,
     private val interceptors: List<AtomInterceptor>
 ) : Atom<R> {
-
-    private var lastArgs: MutableList<Any>? = null
 
     /**
      * Simply calls [Atom.getArguments] on wrapped [atom].
@@ -22,7 +22,7 @@ class AtomProxy<R>(
      * @return a [List] of objects to pass to the script as arguments.
      */
     override fun getArguments(elementContext: ElementReference?): MutableList<Any> {
-        return atom.getArguments(elementContext).also { lastArgs = it }
+        return atom.getArguments(elementContext)
     }
 
     /**
@@ -32,7 +32,7 @@ class AtomProxy<R>(
      * @return [R] a result type of the atom.
      */
     override fun transform(evaluation: Evaluation?): R {
-        interceptors.forEach { it.intercept(evaluation, atom, lastArgs) }
+        interceptors.forEach { it.intercept(this, evaluation) }
         return atom.transform(evaluation)
     }
 
