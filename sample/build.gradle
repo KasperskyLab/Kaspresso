@@ -10,8 +10,6 @@ android {
     defaultConfig {
         applicationId "com.kaspersky.kaspressample"
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
         minSdkVersion versions.minSdk
         targetSdkVersion versions.targetSdk
         versionName "$pKaspressampleMajor.$pKaspressampleMinor.$pKaspressampleBuild"
