@@ -24,9 +24,6 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class ConfiguratorSimpleTestWithRule {
 
-    private val mainScreen = MainScreen()
-    private val simpleScreen = SimpleScreen()
-
     @get:Rule
     val runtimePermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
         Manifest.permission.WRITE_EXTERNAL_STORAGE,
@@ -47,7 +44,7 @@ class ConfiguratorSimpleTestWithRule {
         }.run {
 
             step("Open Simple Screen") {
-                mainScreen {
+                MainScreen {
                     nextButton {
                         isVisible()
                         click()
@@ -56,7 +53,7 @@ class ConfiguratorSimpleTestWithRule {
             }
 
             step("Click button 1 and check button 2") {
-                simpleScreen {
+                SimpleScreen {
                     button1 {
                         click()
                     }
@@ -67,15 +64,13 @@ class ConfiguratorSimpleTestWithRule {
             }
 
             step("Click button 2 and check edit") {
-                simpleScreen {
+                SimpleScreen {
                     button2 {
                         click()
                     }
-                    attempt(timeoutMs = 5000) {
-                        edit {
-                            isVisible()
-                            hasText(R.string.text_edit_text)
-                        }
+                    edit {
+                        attempt(timeoutMs = 5000) { isVisible() }
+                        hasText(R.string.text_edit_text)
                     }
                 }
             }

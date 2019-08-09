@@ -5,7 +5,7 @@ import com.agoda.kakao.screen.Screen
 import com.agoda.kakao.text.KButton
 import com.kaspersky.kaspressample.R
 
-class SimpleScreen : Screen<SimpleScreen>() {
+object SimpleScreen : Screen<SimpleScreen>() {
 
     val button1 = KButton { withId(R.id.button_1) }
 

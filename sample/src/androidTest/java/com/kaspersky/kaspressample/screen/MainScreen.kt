@@ -5,7 +5,7 @@ import com.agoda.kakao.text.KButton
 import com.agoda.kakao.text.KTextView
 import com.kaspersky.kaspressample.R
 
-class MainScreen : Screen<MainScreen>() {
+object MainScreen : Screen<MainScreen>() {
 
     val nextButton = KButton { withId(R.id.activity_main_button_next) }
 
