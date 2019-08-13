@@ -1,24 +1,28 @@
-package com.kaspersky.kaspressample.tests.simple
+package com.kaspersky.kaspressample.configurator
 
 import android.Manifest
 import android.support.test.rule.ActivityTestRule
 import android.support.test.rule.GrantPermissionRule
 import android.support.test.runner.AndroidJUnit4
 import com.kaspersky.kaspressample.MainActivity
-import com.kaspersky.kaspressample.screen.HomeScreen
+import com.kaspersky.kaspressample.R
 import com.kaspersky.kaspressample.screen.MainScreen
+import com.kaspersky.kaspressample.screen.SimpleScreen
 import com.kaspersky.kaspresso.flakysafety.attempt
 import com.kaspersky.kaspresso.testcases.api.testcaserule.TestCaseRule
-import com.kaspersky.kaspresso.viewactions.orientation.Orientation
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
+/**
+ * In this example you can observe a test tuned by default Configurator.
+ * When you start the test you can see output of default Kaspresso interceptors:
+ * - a lot of useful logs
+ * - failure handling
+ * - screenshots in a device
+ */
 @RunWith(AndroidJUnit4::class)
-class OpenHomeScreenTestWithRule {
-
-    private val mainScreen = MainScreen()
-    private val homeScreen = HomeScreen()
+class ConfiguratorSimpleTestWithRule {
 
     @get:Rule
     val runtimePermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
@@ -35,28 +39,41 @@ class OpenHomeScreenTestWithRule {
     @Test
     fun test() {
         testCaseRule.before {
-            device.exploit.setOrientation(Orientation.Landscape)
             activityTestRule.launchActivity(null)
         }.after {
-            device.exploit.setOrientation(Orientation.Portrait)
         }.run {
 
-            step("Open Home screen") {
-                mainScreen {
+            step("Open Simple Screen") {
+                MainScreen {
                     nextButton {
+                        isVisible()
                         click()
                     }
                 }
-                homeScreen {
-                    title {
+            }
+
+            step("Click button 1 and check button 2") {
+                SimpleScreen {
+                    button1 {
+                        click()
+                    }
+                    button2 {
                         isVisible()
-                        attempt(message = "You should've been commented this line before launching the test") {
-                            // hasText("Ooops!") //Uncomment to fail test
-                        }
                     }
                 }
             }
-            step("Just Empty Step") {}
+
+            step("Click button 2 and check edit") {
+                SimpleScreen {
+                    button2 {
+                        click()
+                    }
+                    edit {
+                        attempt(timeoutMs = 5000) { isVisible() }
+                        hasText(R.string.text_edit_text)
+                    }
+                }
+            }
         }
     }
 }

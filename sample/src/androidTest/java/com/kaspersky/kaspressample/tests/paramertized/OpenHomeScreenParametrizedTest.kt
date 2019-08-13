@@ -15,8 +15,6 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class OpenHomeScreenParametrizedTest : BaseParametrizedTest() {
 
-    private val mainScreen = MainScreen()
-
     @get:Rule
     val runtimePermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
         Manifest.permission.WRITE_EXTERNAL_STORAGE,
@@ -60,7 +58,7 @@ class OpenHomeScreenParametrizedTest : BaseParametrizedTest() {
             step("Open Home Screen") {
                 kLogger.i(data.companies.toString())
 
-                mainScreen {
+                MainScreen {
                     descriptionText {
                         // Oops, it fails, please comment if you want to pass the test
                         hasText(data.owners.first().firstName ?: "")
