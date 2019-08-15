@@ -5,4 +5,8 @@
     <string name="home_fragment_title">Home Fragment</string>
     <string name="add_fragment_error">Already added</string>
     <string name="main_screen_description">Main Screen</string>
+
+    <!-- Device Sample Activity -->
+    <string name="device_sample_title">Device Sample</string>
+    <string name="device_sample_input_hint">Type text here…</string>
 </resources>
