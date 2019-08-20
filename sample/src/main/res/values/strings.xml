@@ -2,7 +2,10 @@
     <string name="app_name">Kaspresso Sample</string>
     <string name="next">Next</string>
     <string name="webview">WebView</string>
-    <string name="home_fragment_title">Home Fragment</string>
+    <string name="home_fragment_title">Simple Fragment</string>
+    <string name="text_button_1">Button 1</string>
+    <string name="text_button_2">Button 2</string>
+    <string name="text_edit_text">Some text</string>
     <string name="add_fragment_error">Already added</string>
     <string name="main_screen_description">Main Screen</string>
 

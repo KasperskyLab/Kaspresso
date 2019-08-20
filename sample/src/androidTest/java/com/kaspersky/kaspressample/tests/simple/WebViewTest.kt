@@ -19,9 +19,6 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class WebViewTest : TestCase() {
 
-    private val mainScreen = MainScreen()
-    private val webViewScreen = WebViewScreen()
-
     @get:Rule
     val runtimePermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
         Manifest.permission.WRITE_EXTERNAL_STORAGE,
@@ -40,7 +37,7 @@ class WebViewTest : TestCase() {
         }.run {
 
             step("Open WebView Screen") {
-                mainScreen {
+                MainScreen {
                     webViewButton {
                         hasAnyText()
                         click()
@@ -49,7 +46,7 @@ class WebViewTest : TestCase() {
             }
 
             step("Click \"Sign in\" button") {
-                webViewScreen {
+                WebViewScreen {
 
                     webView {
                         attempt(

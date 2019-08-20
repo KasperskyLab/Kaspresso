@@ -1,34 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context=".MainActivity">
-
-    <FrameLayout
-            android:id="@+id/activity_main_frame_layout_root"
-            android:layout_width="match_parent"
-            android:layout_weight="1"
-            android:layout_height="0dp"/>
-    <Button
-            android:id="@+id/activity_main_button_next"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/next"/>
-
-    <Button
-            android:id="@+id/activity_main_button_webview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/webview"/>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
 
     <TextView
-            android:text="@string/main_screen_description"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:id="@+id/activity_main_text_view_description"/>
+        android:id="@+id/activity_main_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18pt"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/main_screen_description"/>
 
-</LinearLayout>
+    <Button
+        android:id="@+id/activity_main_button_next"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/activity_main_title"
+        android:text="@string/next"/>
+
+    <Button
+        android:id="@+id/activity_main_button_webview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/activity_main_button_next"
+        android:text="@string/webview"/>
+
+    <FrameLayout
+        android:id="@+id/activity_main_frame_layout_root"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/activity_main_button_webview"/>
+
+</RelativeLayout>
