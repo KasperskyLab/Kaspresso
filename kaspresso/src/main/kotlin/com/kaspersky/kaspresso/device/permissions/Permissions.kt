@@ -16,7 +16,7 @@ interface Permissions {
     fun denyViaDialog()
 
     /**
-     * Passes the permission-requesting permissions dialog on android 10
+     * Passes the permission-requesting permissions dialog
      */
     fun clickOn(button : Button)
 

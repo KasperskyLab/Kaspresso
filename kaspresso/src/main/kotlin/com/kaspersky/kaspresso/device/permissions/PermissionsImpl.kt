@@ -1,5 +1,6 @@
 package com.kaspersky.kaspresso.device.permissions
 
+import android.os.Build
 import android.support.test.uiautomator.UiDevice
 import android.support.test.uiautomator.UiObjectNotFoundException
 import android.support.test.uiautomator.UiSelector
@@ -15,7 +16,8 @@ class PermissionsImpl(
     private val uiDevice: UiDevice
 ) : Permissions {
 
-    private val packageInstallerPackageName = "com.android.packageinstaller"
+    private val packageInstallerPackageName = if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P)
+        "com.google.android.permissioncontroller" else "com.android.packageinstaller"
 
     private val permissionDenyButtonId = "$packageInstallerPackageName:id/permission_deny_button"
     private val permissionAllowButtonId = "$packageInstallerPackageName:id/permission_allow_button"
@@ -69,7 +71,6 @@ class PermissionsImpl(
     }
 
     private fun getResIdWithPackageName(resId: String): String {
-        val packageName = "com.google.android.permissioncontroller"
-        return "$packageName:id/$resId"
+        return "$packageInstallerPackageName:id/$resId"
     }
 }
