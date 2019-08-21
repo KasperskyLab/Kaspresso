@@ -1,7 +1,7 @@
 package com.kaspersky.kaspresso.device.permissions
 
-import android.support.test.uiautomator.UiDevice
 import android.os.Build
+import android.support.test.uiautomator.UiDevice
 import android.support.test.uiautomator.UiObjectNotFoundException
 import android.support.test.uiautomator.UiSelector
 import com.kaspersky.kaspresso.extensions.other.getStackTraceAsString

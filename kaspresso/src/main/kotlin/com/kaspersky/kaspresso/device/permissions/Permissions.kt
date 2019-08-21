@@ -18,7 +18,7 @@ interface Permissions {
     /**
      * Passes the permission-requesting permissions dialog
      */
-    fun clickOn(button : Button)
+    fun clickOn(button: Button)
 
     enum class Button {
         ALLOW,
