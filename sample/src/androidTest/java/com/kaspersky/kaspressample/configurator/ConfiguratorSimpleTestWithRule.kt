@@ -69,7 +69,7 @@ class ConfiguratorSimpleTestWithRule {
                         click()
                     }
                     edit {
-                        attempt(timeoutMs = 5000) { isVisible() }
+                        attempt(timeoutMs = 7000) { isVisible() }
                         hasText(R.string.text_edit_text)
                     }
                 }
