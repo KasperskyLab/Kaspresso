@@ -1,6 +1,13 @@
 package com.kaspersky.kaspresso.flakysafety
 
+import android.widget.FrameLayout
+import androidx.test.InstrumentationRegistry
+import androidx.test.uiautomator.By
+import androidx.test.uiautomator.BySelector
+import androidx.test.uiautomator.UiDevice
+import androidx.test.uiautomator.Until
 import com.kaspersky.kaspresso.configurator.Configurator
+import com.kaspersky.kaspresso.exceptions.AndroidSystemOverlayException
 import com.kaspersky.kaspresso.exceptions.KaspressoAssertionError
 import com.kaspersky.kaspresso.extensions.other.getStackTraceAsString
 import com.kaspersky.kaspresso.logger.UiTestLogger
@@ -16,6 +23,7 @@ import com.kaspersky.kaspresso.logger.UiTestLogger
  * @param action an action that is attempted to be invoked.
  * @return [T] as it is a result of [action] invocation.
  */
+@Suppress("detekt.NestedBlockDepth")
 fun <T> attempt(
     timeoutMs: Long = Configurator.attemptsTimeoutMs,
     intervalMs: Long = Configurator.attemptsIntervalMs,
@@ -31,14 +39,24 @@ fun <T> attempt(
 
     var caughtAllowedException: Throwable
     val startTime = System.currentTimeMillis()
+    var needCheckAndroidSystemFirstTime = true
 
     do {
         try {
             return action.invoke()
         } catch (e: Throwable) {
-            val isExceptionAllowed =
-                allowedExceptions.find { it.isAssignableFrom(e.javaClass) } != null
+            // check android system dialog/window only first and one time because
+            // usually the fact of overlaying is discovered at the beginning of work
+            if (needCheckAndroidSystemFirstTime) {
+                needCheckAndroidSystemFirstTime = false
+                if (isAndroidSystemDetectedAndRemoved(logger)) {
+                    caughtAllowedException =
+                        AndroidSystemOverlayException("Android system dialog/window has overlaid the application")
+                    continue
+                }
+            }
 
+            val isExceptionAllowed = allowedExceptions.find { it.isAssignableFrom(e.javaClass) } != null
             when {
                 isExceptionAllowed -> {
                     Thread.sleep(intervalMs)
@@ -59,6 +77,32 @@ fun <T> attempt(
     logger.e(caughtAllowedException.getStackTraceAsString())
 
     failAttempt(message, caughtAllowedException)
+}
+
+/**
+ * Check android system dialogs/windows are overlaying the app.
+ * If system dialog/window has been detected then try to remove it by back button pressing.
+ */
+private fun isAndroidSystemDetectedAndRemoved(logger: UiTestLogger): Boolean {
+    with(UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())) {
+        if (isVisible(By.pkg("android").clazz(FrameLayout::class.java))) {
+            logger.i(
+                "The android system dialog/window was detected. " +
+                        "Kaspresso presses back to try remove detected dialog/window"
+            )
+            pressBack()
+            return true
+        }
+    }
+    return false
+}
+
+/**
+ * isVisible method for non-app's elements and with a waiting
+ */
+private fun UiDevice.isVisible(selector: BySelector, timeMs: Long = 1000): Boolean {
+    wait(Until.findObject(selector), timeMs)
+    return findObject(selector) != null
 }
 
 /**

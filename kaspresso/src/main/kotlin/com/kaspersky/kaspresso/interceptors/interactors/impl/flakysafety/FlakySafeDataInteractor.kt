@@ -1,6 +1,6 @@
 package com.kaspersky.kaspresso.interceptors.interactors.impl.flakysafety
 
-import android.support.test.espresso.DataInteraction
+import androidx.test.espresso.DataInteraction
 import com.kaspersky.kaspresso.flakysafety.attempt
 import com.kaspersky.kaspresso.interceptors.interactors.DataInteractor
 

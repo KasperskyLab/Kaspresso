@@ -1,7 +1,7 @@
-package android.support.test.espresso.web.assertion
+package androidx.test.espresso.web.assertion
 
-import android.support.test.espresso.web.model.Atom
-import android.support.test.espresso.web.webdriver.WebDriverAtomScriptsProvider
+import androidx.test.espresso.web.model.Atom
+import androidx.test.espresso.web.webdriver.WebDriverAtomScriptsProvider
 import org.hamcrest.Matcher
 import org.hamcrest.StringDescription
 

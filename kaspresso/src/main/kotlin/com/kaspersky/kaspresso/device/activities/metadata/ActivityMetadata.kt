@@ -2,9 +2,9 @@ package com.kaspersky.kaspresso.device.activities.metadata
 
 import android.app.Activity
 import android.content.res.Resources
-import android.support.test.espresso.util.TreeIterables
 import android.view.View
 import android.widget.TextView
+import androidx.test.espresso.util.TreeIterables
 import com.kaspersky.kaspresso.logger.UiTestLogger
 
 /**

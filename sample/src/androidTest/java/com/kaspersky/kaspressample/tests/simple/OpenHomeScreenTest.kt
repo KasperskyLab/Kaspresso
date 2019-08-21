@@ -1,9 +1,9 @@
 package com.kaspersky.kaspressample.tests.simple
 
 import android.Manifest
-import android.support.test.rule.ActivityTestRule
-import android.support.test.rule.GrantPermissionRule
-import android.support.test.runner.AndroidJUnit4
+import androidx.test.rule.ActivityTestRule
+import androidx.test.rule.GrantPermissionRule
+import androidx.test.runner.AndroidJUnit4
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.scenarios.CheckHomeTitleScenario
 import com.kaspersky.kaspressample.screen.HomeScreen

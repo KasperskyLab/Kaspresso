@@ -1,6 +1,6 @@
 package com.kaspersky.kaspresso.interceptors.interactors.impl.flakysafety
 
-import android.support.test.espresso.ViewInteraction
+import androidx.test.espresso.ViewInteraction
 import com.kaspersky.kaspresso.flakysafety.attempt
 import com.kaspersky.kaspresso.interceptors.interactors.ViewInteractor
 

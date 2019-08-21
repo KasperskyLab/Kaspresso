@@ -1,15 +1,15 @@
 package com.kaspersky.kaspresso.interceptors.interactors.impl.autoscroll
 
-import android.support.test.espresso.NoMatchingViewException
-import android.support.test.espresso.ViewInteraction
-import android.support.test.espresso.action.ViewActions
-import android.support.test.espresso.matcher.ViewMatchers.isAssignableFrom
-import android.support.test.espresso.matcher.ViewMatchers.isDescendantOfA
-import android.support.v4.widget.NestedScrollView
 import android.view.View
 import android.widget.HorizontalScrollView
 import android.widget.ListView
 import android.widget.ScrollView
+import androidx.core.widget.NestedScrollView
+import androidx.test.espresso.NoMatchingViewException
+import androidx.test.espresso.ViewInteraction
+import androidx.test.espresso.action.ViewActions
+import androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom
+import androidx.test.espresso.matcher.ViewMatchers.isDescendantOfA
 import com.kaspersky.kaspresso.interceptors.interactors.ViewInteractor
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers.anyOf

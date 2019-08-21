@@ -1,9 +1,9 @@
 package com.kaspersky.kaspresso.proxy
 
-import android.support.test.espresso.UiController
-import android.support.test.espresso.ViewAction
-import android.support.test.espresso.ViewInteraction
 import android.view.View
+import androidx.test.espresso.UiController
+import androidx.test.espresso.ViewAction
+import androidx.test.espresso.ViewInteraction
 import com.kaspersky.kaspresso.interceptors.view.ViewActionInterceptor
 import com.kaspersky.kaspresso.interceptors.interactors.ViewInteractor
 import org.hamcrest.Matcher

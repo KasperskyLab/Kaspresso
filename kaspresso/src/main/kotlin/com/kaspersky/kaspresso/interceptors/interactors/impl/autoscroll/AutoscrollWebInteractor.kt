@@ -1,8 +1,8 @@
 package com.kaspersky.kaspresso.interceptors.interactors.impl.autoscroll
 
-import android.support.test.espresso.NoMatchingViewException
-import android.support.test.espresso.web.sugar.Web
-import android.support.test.espresso.web.webdriver.DriverAtoms
+import androidx.test.espresso.NoMatchingViewException
+import androidx.test.espresso.web.sugar.Web
+import androidx.test.espresso.web.webdriver.DriverAtoms
 import com.kaspersky.kaspresso.interceptors.interactors.WebInteractor
 
 class AutoscrollWebInteractor : WebInteractor {

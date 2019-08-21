@@ -1,7 +1,7 @@
-package android.support.test.espresso.web.assertion
+package androidx.test.espresso.web.assertion
 
-import android.support.test.espresso.web.sugar.Web
 import android.webkit.WebView
+import androidx.test.espresso.web.sugar.Web
 import com.kaspersky.kaspresso.interceptors.view.WebAssertionInterceptor
 import com.kaspersky.kaspresso.interceptors.interactors.WebInteractor
 import com.kaspersky.kaspresso.proxy.InteractionProxy

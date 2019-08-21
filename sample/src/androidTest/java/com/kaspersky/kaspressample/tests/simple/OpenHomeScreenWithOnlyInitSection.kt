@@ -5,17 +5,16 @@ import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
 import androidx.test.runner.AndroidJUnit4
 import com.kaspersky.kaspressample.MainActivity
+import com.kaspersky.kaspressample.scenarios.CheckHomeTitleScenario
 import com.kaspersky.kaspressample.screen.HomeScreen
 import com.kaspersky.kaspressample.screen.MainScreen
-import com.kaspersky.kaspresso.flakysafety.attempt
-import com.kaspersky.kaspresso.testcases.api.testcaserule.TestCaseRule
-import com.kaspersky.kaspresso.viewactions.orientation.Orientation
+import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class OpenHomeScreenTestWithRule {
+class OpenHomeScreenWithOnlyInitSection : TestCase() {
 
     private val mainScreen = MainScreen()
     private val homeScreen = HomeScreen()
@@ -29,33 +28,44 @@ class OpenHomeScreenTestWithRule {
     @get:Rule
     val activityTestRule = ActivityTestRule(MainActivity::class.java, true, false)
 
-    @get:Rule
-    val testCaseRule = TestCaseRule(javaClass.simpleName)
-
     @Test
     fun test() {
-        testCaseRule.before {
-            device.exploit.setOrientation(Orientation.Landscape)
-            activityTestRule.launchActivity(null)
-        }.after {
-            device.exploit.setOrientation(Orientation.Portrait)
+        init {
+            // data initialization
         }.run {
+            activityTestRule.launchActivity(null)
 
-            step("Open Home screen") {
+            step("Open Home Screen") {
                 mainScreen {
                     nextButton {
                         click()
                     }
                 }
+            }
+
+            step("Check Home Screen") {
                 homeScreen {
                     title {
                         isVisible()
-                        attempt(message = "You should've been commented this line before launching the test") {
-                            // hasText("Ooops!") //Uncomment to fail test
-                        }
+                        // hasText("Ooops!") //Uncomment to fail test
                     }
                 }
             }
+            step("My Awesome Scenario") {
+                scenario(
+                    CheckHomeTitleScenario()
+                )
+
+                homeScreen {
+                    title {
+                        // hasText("Ooops!") //Uncomment to fail test
+                    }
+                }
+                step("Just Empty SubStep") {
+                    step("Just Empty SubSubStep") {}
+                }
+            }
+
             step("Just Empty Step") {}
         }
     }

@@ -1,6 +1,6 @@
 package com.kaspersky.kaspresso.interceptors.interactors.impl.flakysafety
 
-import android.support.test.espresso.web.sugar.Web
+import androidx.test.espresso.web.sugar.Web
 import com.kaspersky.kaspresso.flakysafety.attempt
 import com.kaspersky.kaspresso.interceptors.interactors.WebInteractor
 
