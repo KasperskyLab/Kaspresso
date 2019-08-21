@@ -36,9 +36,7 @@ class DeviceKeyboardSampleTest : TestCase() {
     @Test
     fun keyboardSampleTest() {
         before {
-            // do nothing
         }.after {
-            // do nothing
         }.run {
 
             /**
