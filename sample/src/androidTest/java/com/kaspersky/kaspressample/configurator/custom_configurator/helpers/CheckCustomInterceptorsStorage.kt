@@ -1,4 +1,4 @@
-package com.kaspersky.kaspressample.configurator.custom_configurator
+package com.kaspersky.kaspressample.configurator.custom_configurator.helpers
 
 import org.junit.Assert.assertTrue
 

@@ -6,6 +6,10 @@ import android.support.test.rule.GrantPermissionRule
 import android.support.test.runner.AndroidJUnit4
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.R
+import com.kaspersky.kaspressample.configurator.custom_configurator.helpers.CheckCustomInterceptorsStorage
+import com.kaspersky.kaspressample.configurator.custom_configurator.interceptors.CustomStepInterceptor
+import com.kaspersky.kaspressample.configurator.custom_configurator.interceptors.CustomViewActionInterceptor
+import com.kaspersky.kaspressample.configurator.custom_configurator.interceptors.CustomViewAssertionInterceptor
 import com.kaspersky.kaspressample.screen.MainScreen
 import com.kaspersky.kaspressample.screen.SimpleScreen
 import com.kaspersky.kaspresso.configurator.Configurator
