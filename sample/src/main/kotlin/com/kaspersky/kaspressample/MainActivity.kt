@@ -35,5 +35,23 @@ class MainActivity : AppCompatActivity() {
                 Intent(this, WebViewActivity::class.java)
             )
         }
+
+        activity_main_button_recycler_stub.setOnClickListener {
+            startActivity(
+                Intent(this, RecyclerStubActivity::class.java)
+            )
+        }
+
+        activity_main_button_list_stub.setOnClickListener {
+            startActivity(
+                Intent(this, ListStubActivity::class.java)
+            )
+        }
+
+        activity_main_button_scroll_view_stub.setOnClickListener {
+            startActivity(
+                Intent(this, ScrollViewStubActivity::class.java)
+            )
+        }
     }
 }

@@ -5,4 +5,7 @@
     <string name="home_fragment_title">Home Fragment</string>
     <string name="add_fragment_error">Already added</string>
     <string name="main_screen_description">Main Screen</string>
+    <string name="recycler_stub">Recycler Stub</string>
+    <string name="list_stub">List Stub</string>
+    <string name="scroll_view_stub">Scroll View Stub</string>
 </resources>

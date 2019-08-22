@@ -26,8 +26,19 @@
         <activity
                 android:name=".WebViewActivity"
                 android:label="@string/webview"
-                android:theme="@style/Theme.AppCompat.NoActionBar"
-        />
+                android:theme="@style/Theme.AppCompat.NoActionBar"/>
+
+        <activity
+                android:name=".RecyclerStubActivity"
+                android:label="@string/recycler_stub"/>
+
+        <activity
+                android:name=".ListStubActivity"
+                android:label="@string/list_stub"/>
+
+        <activity
+                android:name=".ScrollViewStubActivity"
+                android:label="@string/scroll_view_stub"/>
 
     </application>
 

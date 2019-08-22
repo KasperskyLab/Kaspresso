@@ -25,6 +25,24 @@
             android:layout_height="wrap_content"
             android:text="@string/webview"/>
 
+    <Button
+            android:id="@+id/activity_main_button_recycler_stub"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/recycler_stub"/>
+
+    <Button
+            android:id="@+id/activity_main_button_list_stub"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/list_stub"/>
+
+    <Button
+            android:id="@+id/activity_main_button_scroll_view_stub"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/scroll_view_stub"/>
+
     <TextView
             android:text="@string/main_screen_description"
             android:layout_width="wrap_content"

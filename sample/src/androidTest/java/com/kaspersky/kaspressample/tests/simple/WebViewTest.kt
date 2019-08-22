@@ -48,7 +48,7 @@ class WebViewTest : TestCase() {
                 }
             }
 
-            step("Click \"Sign in\" button") {
+            step("Find \"Sign in\" button") {
                 webViewScreen {
 
                     webView {
@@ -71,13 +71,32 @@ class WebViewTest : TestCase() {
                             web.withElement(ref).perform(DriverAtoms.getText())
                         }
 
+                        withElement(
+                            Locator.XPATH,
+                            "/html/body/section[1]/div/div/h2"
+                        ) {
+                            containsText("Protect your data")
+                        }
+
                         // same element
                         withElement(
                             Locator.XPATH,
                             "/html/body/header/section/div[3]/div[2]/button"
                         ) {
                             hasText("Sign in")
-                            scroll()
+                        }
+                    }
+                }
+            }
+
+            step("Click \"Ask question\" button") {
+                webViewScreen {
+                    webView {
+                        withElement(
+                            Locator.XPATH,
+                            "/html/body/section[5]/div/div/div[2]/div[3]/button"
+                        ) {
+                            hasText("Ask question")
                             click()
                         }
                     }
