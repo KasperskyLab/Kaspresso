@@ -11,9 +11,5 @@ class FlakySafeDataInteractor : DataInteractor {
      *
      * @param execution a function-wrapper of an action or an assertion to be invoked.
      */
-    override fun <R> interact(
-        view: Any?,
-        interaction: DataInteraction,
-        interactable: () -> R
-    ): R = attempt(action = interactable)
+    override fun <R> interact(interaction: DataInteraction, action: () -> R): R = attempt(action = action)
 }

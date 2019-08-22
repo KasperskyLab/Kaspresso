@@ -8,11 +8,7 @@ interface Interactor<Interaction> {
     /**
      * Called to do some stuff and actually interact an action or an assertion.
      *
-     * @param interactable a function-wrapper of an action or an assertion to be invoked.
+     * @param action a function-wrapper of an action or an assertion to be invoked.
      */
-    fun <R> interact(
-        view: Any?,
-        interaction: Interaction,
-        interactable: () -> R
-    ): R
+    fun <R> interact(interaction: Interaction, action: () -> R): R
 }

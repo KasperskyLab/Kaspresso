@@ -15,9 +15,5 @@ class FlakySafeViewInteractor : ViewInteractor {
      *
      * @param execution a function-wrapper of an action or an assertion to be invoked.
      */
-    override fun <R> interact(
-        view: Any?,
-        interaction: ViewInteraction,
-        interactable: () -> R
-    ): R = attempt(action = interactable)
+    override fun <R> interact(interaction: ViewInteraction, action: () -> R): R = attempt(action = action)
 }

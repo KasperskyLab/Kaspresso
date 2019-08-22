@@ -11,9 +11,5 @@ class FlakySafeWebInteractor : WebInteractor {
      *
      * @param execution a function-wrapper of an action or an assertion to be invoked.
      */
-    override fun <R> interact(
-        view: Any?,
-        interaction: Web.WebInteraction<*>,
-        interactable: () -> R
-    ): R = attempt(action = interactable)
+    override fun <R> interact(interaction: Web.WebInteraction<*>, action: () -> R): R = attempt(action = action)
 }

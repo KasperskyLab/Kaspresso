@@ -3,9 +3,7 @@ package com.kaspersky.kaspresso.proxy
 import androidx.test.espresso.web.model.Atom
 import androidx.test.espresso.web.model.ElementReference
 import androidx.test.espresso.web.model.Evaluation
-import androidx.test.espresso.web.sugar.Web
 import com.kaspersky.kaspresso.interceptors.view.AtomInterceptor
-import com.kaspersky.kaspresso.interceptors.interactors.WebInteractor
 import org.hamcrest.Matcher
 
 /**
@@ -14,10 +12,8 @@ import org.hamcrest.Matcher
 class AtomProxy<R>(
     val atom: Atom<R>,
     val matcher: Matcher<*>,
-    override val interaction: Web.WebInteraction<*>,
-    private val interceptors: List<AtomInterceptor>,
-    override val interactors: List<WebInteractor>
-) : Atom<R>, InteractionProxy<Web.WebInteraction<*>> {
+    private val interceptors: List<AtomInterceptor>
+) : Atom<R> {
 
     /**
      * Simply calls [Atom.getArguments] on wrapped [atom].
@@ -37,7 +33,7 @@ class AtomProxy<R>(
      */
     override fun transform(evaluation: Evaluation?): R {
         interceptors.forEach { it.intercept(this, evaluation) }
-        return interact(null) { atom.transform(evaluation) }
+        return atom.transform(evaluation)
     }
 
     /**

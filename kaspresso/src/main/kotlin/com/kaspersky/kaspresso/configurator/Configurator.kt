@@ -183,9 +183,9 @@ class Configurator(
                     atomInterceptors = mutableListOf(LoggingAtomInterceptor(logger))
                     webAssertionInterceptors = mutableListOf(LoggingWebAssertionInterceptor(logger))
 
-                    viewInteractors = mutableListOf(FlakySafeViewInteractor(), AutoscrollViewInteractor())
+                    viewInteractors = mutableListOf(AutoscrollViewInteractor(), FlakySafeViewInteractor())
                     dataInteractors = mutableListOf(FlakySafeDataInteractor())
-                    webInteractors = mutableListOf(FlakySafeWebInteractor(), AutoscrollWebInteractor())
+                    webInteractors = mutableListOf(AutoscrollWebInteractor(), FlakySafeWebInteractor())
 
                     failureInterceptor = LoggingFailureInterceptor(logger)
 

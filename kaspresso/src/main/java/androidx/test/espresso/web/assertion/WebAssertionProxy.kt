@@ -1,10 +1,7 @@
 package androidx.test.espresso.web.assertion
 
 import android.webkit.WebView
-import androidx.test.espresso.web.sugar.Web
 import com.kaspersky.kaspresso.interceptors.view.WebAssertionInterceptor
-import com.kaspersky.kaspresso.interceptors.interactors.WebInteractor
-import com.kaspersky.kaspresso.proxy.InteractionProxy
 import org.hamcrest.Matcher
 
 /**
@@ -16,10 +13,8 @@ import org.hamcrest.Matcher
 class WebAssertionProxy<E>(
     val webAssertion: WebAssertion<E>,
     val matcher: Matcher<*>,
-    override val interaction: Web.WebInteraction<*>,
-    private val interceptors: List<WebAssertionInterceptor>,
-    override val interactors: List<WebInteractor>
-) : WebAssertion<E>(webAssertion.atom), InteractionProxy<Web.WebInteraction<*>> {
+    private val interceptors: List<WebAssertionInterceptor>
+) : WebAssertion<E>(webAssertion.atom) {
 
     /**
      * Calls interceptors before [WebViewAssertions.ResultCheckingWebAssertion.checkResult] on wrapped [webAssertion] is
@@ -30,6 +25,6 @@ class WebAssertionProxy<E>(
      */
     override fun checkResult(view: WebView?, result: E) {
         interceptors.forEach { it.intercept(this, view, result as Any) }
-        interact(view) { (webAssertion as WebViewAssertions.ResultCheckingWebAssertion).checkResult(view, result) }
+        (webAssertion as WebViewAssertions.ResultCheckingWebAssertion).checkResult(view, result)
     }
 }

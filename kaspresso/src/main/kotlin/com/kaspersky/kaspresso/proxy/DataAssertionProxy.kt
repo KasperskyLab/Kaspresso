@@ -1,21 +1,17 @@
 package com.kaspersky.kaspresso.proxy
 
 import android.view.View
-import androidx.test.espresso.DataInteraction
 import androidx.test.espresso.NoMatchingViewException
 import androidx.test.espresso.ViewAssertion
 import com.kaspersky.kaspresso.interceptors.view.ViewAssertionInterceptor
-import com.kaspersky.kaspresso.interceptors.interactors.DataInteractor
 
 /**
  * A proxy-wrapper of [ViewAction] for interceptors calls.
  */
 class DataAssertionProxy(
     private val viewAssertion: ViewAssertion,
-    override val interaction: DataInteraction,
-    private val interceptors: List<ViewAssertionInterceptor>,
-    override val interactors: List<DataInteractor>
-) : ViewAssertion, InteractionProxy<DataInteraction> {
+    private val interceptors: List<ViewAssertionInterceptor>
+) : ViewAssertion {
 
     /**
      * Calls interceptors before [ViewAssertion.check] on wrapped [viewAssertion] is called.
@@ -27,6 +23,6 @@ class DataAssertionProxy(
      */
     override fun check(view: View?, noViewFoundException: NoMatchingViewException?) {
         interceptors.forEach { it.intercept(viewAssertion, view, noViewFoundException) }
-        interact(view) { viewAssertion.check(view, noViewFoundException) }
+        viewAssertion.check(view, noViewFoundException)
     }
 }
