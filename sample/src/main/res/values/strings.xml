@@ -12,4 +12,5 @@
     <!-- Device Sample Activity -->
     <string name="device_sample_title">Device Sample</string>
     <string name="device_sample_input_hint">Type text here…</string>
+    <string name="device_request_permission">Request Permission</string>
 </resources>
