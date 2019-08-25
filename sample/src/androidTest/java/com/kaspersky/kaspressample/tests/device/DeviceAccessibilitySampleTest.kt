@@ -50,7 +50,7 @@ class DeviceAccessibilitySampleTest : TestCase() {
     }
 
     private fun BaseTestContext.isAccessibilityServiceEnabled(): Boolean {
-        return Settings.Secure.getString(device.context.contentResolver,
+        return Settings.Secure.getString(device.targetContext.contentResolver,
             ENABLED_ACCESSIBILITY_SERVICES)?.contains(SERVICE_CLASS_NAME) ?: false
     }
 }
