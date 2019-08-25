@@ -1,5 +1,6 @@
 package com.kaspersky.kaspressample.tests.device
 
+import android.os.Build
 import android.provider.Settings
 import android.provider.Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES
 import android.support.test.rule.ActivityTestRule
@@ -11,6 +12,7 @@ import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
+import org.junit.Assume.assumeTrue
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -29,6 +31,7 @@ class DeviceAccessibilitySampleTest : TestCase() {
     @Test
     fun accessibilitySampleTest() {
         before {
+            assumeTrue(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
             device.accessibility.disable()
         }.after {
             device.accessibility.disable()
