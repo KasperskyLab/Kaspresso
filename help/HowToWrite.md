@@ -185,7 +185,7 @@ There are cases when some sentences of steps are absolutely identically and occu
 For this sentences we have introduced ```scenario``` where you can replace your sequences of steps.
 
 How is this api enabled? <br>
-Let's look at [com.kaspersky.kaspressample.configurator.ConfiguratorSimpleTest] and [com.kaspersky.kaspressample.configurator.ConfiguratorSimpleTestWithRule]. <br>
+Let's look at [com.kaspersky.kaspressample.simple_tests.SimpleTest] and [com.kaspersky.kaspressample.simple_tests.SimpleTestWithRule]. <br>
 At the first example we inherit ```ConfiguratorSimpleTest``` from ```TestCase```. At the second example we use ```TestCaseRule``` field. 
 Also you can use ```BaseTestCase``` and ```BaseTestCaseRule```. <br>
 
@@ -194,7 +194,7 @@ A developer, while he is writing a test, needs to prepare some data for the test
 Usually, it's the beginning of the test. <br>
 But, first, we want to divide test data preparing and test data usage. Second, we want to guarantee that test data were prepared **before** test.
 That's why we decided to introduce special dsl to help and to highlight the work with test data preparing. <br>
-Please look at the example - [com.kaspersky.kaspressample.tests.paramertized.OpenHomeScreenParametrizedTest]. <br>
+Please look at the example - [com.kaspersky.kaspressample.dsl_tests.InitTransformDataTest]. <br>
 Updated dsl looks like:
 ```kotlin 
 before {
