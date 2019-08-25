@@ -1,19 +1,17 @@
-package com.kaspersky.kaspressample.tests.paramertized
+package com.kaspersky.kaspressample.dsl_tests
 
 import android.Manifest
 import android.support.test.rule.ActivityTestRule
 import android.support.test.rule.GrantPermissionRule
 import android.support.test.runner.AndroidJUnit4
 import com.kaspersky.kaspressample.MainActivity
-import com.kaspersky.kaspressample.scenarios.CheckHomeTitleNoParametersScenario
 import com.kaspersky.kaspressample.screen.MainScreen
-import com.kaspersky.kaspresso.viewactions.orientation.Orientation
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class OpenHomeScreenParametrizedTest : BaseParametrizedTest() {
+class InitTransformDataTest : BaseParametrizedTest() {
 
     @get:Rule
     val runtimePermissionRule: GrantPermissionRule = GrantPermissionRule.grant(

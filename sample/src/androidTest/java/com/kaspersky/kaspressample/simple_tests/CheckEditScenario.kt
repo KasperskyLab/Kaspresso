@@ -1,4 +1,4 @@
-package com.kaspersky.kaspressample.configurator
+package com.kaspersky.kaspressample.simple_tests
 
 import com.kaspersky.kaspressample.screen.SimpleScreen
 import com.kaspersky.kaspresso.testcases.api.scenario.BaseScenario

@@ -1,4 +1,4 @@
-package com.kaspersky.kaspressample.tests.simple
+package com.kaspersky.kaspressample.web_tests
 
 import android.Manifest
 import android.support.test.espresso.web.webdriver.DriverAtoms

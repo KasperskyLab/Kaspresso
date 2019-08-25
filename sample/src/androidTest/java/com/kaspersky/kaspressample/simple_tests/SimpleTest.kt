@@ -1,4 +1,4 @@
-package com.kaspersky.kaspressample.configurator
+package com.kaspersky.kaspressample.simple_tests
 
 import android.Manifest
 import android.support.test.rule.ActivityTestRule
@@ -20,9 +20,10 @@ import org.junit.runner.RunWith
  * - a lot of useful logs
  * - failure handling
  * - screenshots in the device
+ * * Also you can observe the test dsl simplifying a writing of any test
  */
 @RunWith(AndroidJUnit4::class)
-class ConfiguratorSimpleTest : TestCase() {
+class SimpleTest : TestCase() {
 
     @get:Rule
     val runtimePermissionRule: GrantPermissionRule = GrantPermissionRule.grant(

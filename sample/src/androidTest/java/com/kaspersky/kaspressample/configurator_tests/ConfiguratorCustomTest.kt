@@ -1,4 +1,4 @@
-package com.kaspersky.kaspressample.configurator
+package com.kaspersky.kaspressample.configurator_tests
 
 import android.Manifest
 import android.support.test.rule.ActivityTestRule
@@ -6,23 +6,32 @@ import android.support.test.rule.GrantPermissionRule
 import android.support.test.runner.AndroidJUnit4
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.R
+import com.kaspersky.kaspressample.configurator_tests.helpers.CheckCustomInterceptorsStorage
+import com.kaspersky.kaspressample.configurator_tests.interceptors.CustomStepInterceptor
+import com.kaspersky.kaspressample.configurator_tests.interceptors.CustomViewActionInterceptor
+import com.kaspersky.kaspressample.configurator_tests.interceptors.CustomViewAssertionInterceptor
 import com.kaspersky.kaspressample.screen.MainScreen
 import com.kaspersky.kaspressample.screen.SimpleScreen
+import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.flakysafety.attempt
-import com.kaspersky.kaspresso.testcases.api.testcaserule.TestCaseRule
+import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 /**
- * In this example you can observe a test tuned by default Configurator.
- * When you start the test you can see output of default Kaspresso interceptors:
- * - a lot of useful logs
- * - failure handling
- * - screenshots in the device
+ * In this test we show how to configure your custom Kaspresso interceptors.
+ * Besides in the test there are some assertions to check a work of interceptors.
+ *
  */
 @RunWith(AndroidJUnit4::class)
-class ConfiguratorSimpleTestWithRule {
+class ConfiguratorCustomTest : TestCase(
+    configBuilder = Configurator.Builder.default().apply {
+        viewActionInterceptors.add(CustomViewActionInterceptor())
+        viewAssertionInterceptors.add(CustomViewAssertionInterceptor())
+        stepInterceptors.add(CustomStepInterceptor())
+    }
+) {
 
     @get:Rule
     val runtimePermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
@@ -33,19 +42,15 @@ class ConfiguratorSimpleTestWithRule {
     @get:Rule
     val activityTestRule = ActivityTestRule(MainActivity::class.java, true, false)
 
-    @get:Rule
-    val testCaseRule = TestCaseRule(javaClass.simpleName)
-
     @Test
     fun test() {
-        testCaseRule.before {
+        before {
             activityTestRule.launchActivity(null)
         }.after {
+            CheckCustomInterceptorsStorage.resetAllCheckLists()
         }.run {
 
             step("Open Simple Screen") {
-                kLogger.i("I am kLogger")
-                device.screenshots.take("Additional_screenshot")
                 MainScreen {
                     nextButton {
                         isVisible()
@@ -54,7 +59,7 @@ class ConfiguratorSimpleTestWithRule {
                 }
             }
 
-            step("Click button_1 and check button_2") {
+            step("Click button 1 and check button 2") {
                 SimpleScreen {
                     button1 {
                         click()
@@ -65,20 +70,23 @@ class ConfiguratorSimpleTestWithRule {
                 }
             }
 
-            step("Click button_2 and check edit") {
+            step("Click button 2 and check edit") {
                 SimpleScreen {
                     button2 {
                         click()
                     }
                     edit {
-                        attempt(timeoutMs = 7000) { isVisible() }
+                        attempt(timeoutMs = 5000) { isVisible() }
                         hasText(R.string.text_edit_text)
                     }
                 }
             }
 
-            scenario(
-                CheckEditScenario()
+            kLogger.i("Final assert")
+            CheckCustomInterceptorsStorage.assertAllCheckLists(
+                actionsCount = 3,
+                assertionsCount = 4,
+                stepCount = 3
             )
         }
     }
