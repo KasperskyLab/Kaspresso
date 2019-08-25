@@ -19,7 +19,7 @@ import org.junit.runner.RunWith
  * When you start the test you can see output of default Kaspresso interceptors:
  * - a lot of useful logs
  * - failure handling
- * - screenshots in a device
+ * - screenshots in the device
  */
 @RunWith(AndroidJUnit4::class)
 class ConfiguratorSimpleTestWithRule {
@@ -44,6 +44,8 @@ class ConfiguratorSimpleTestWithRule {
         }.run {
 
             step("Open Simple Screen") {
+                kLogger.i("I am kLogger")
+                device.screenshots.take("Additional_screenshot")
                 MainScreen {
                     nextButton {
                         isVisible()
@@ -52,7 +54,7 @@ class ConfiguratorSimpleTestWithRule {
                 }
             }
 
-            step("Click button 1 and check button 2") {
+            step("Click button_1 and check button_2") {
                 SimpleScreen {
                     button1 {
                         click()
@@ -63,7 +65,7 @@ class ConfiguratorSimpleTestWithRule {
                 }
             }
 
-            step("Click button 2 and check edit") {
+            step("Click button_2 and check edit") {
                 SimpleScreen {
                     button2 {
                         click()
@@ -74,6 +76,10 @@ class ConfiguratorSimpleTestWithRule {
                     }
                 }
             }
+
+            scenario(
+                CheckEditScenario()
+            )
         }
     }
 }
