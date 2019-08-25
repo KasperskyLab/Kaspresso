@@ -1,10 +1,13 @@
 package com.kaspersky.kaspressample.screen
 
-import com.agoda.kakao.screen.Screen
 import com.agoda.kakao.web.KWebView
 import com.kaspersky.kaspressample.R
+import com.kaspersky.kaspressample.WebViewActivity
 
-object WebViewScreen : Screen<WebViewScreen>() {
+object WebViewScreen : KScreen<WebViewScreen>() {
+
+    override val layoutId: Int? = R.layout.activity_webview
+    override val viewClass: Class<*>? = WebViewActivity::class.java
 
     val webView = KWebView {
         withId(R.id.webView)
