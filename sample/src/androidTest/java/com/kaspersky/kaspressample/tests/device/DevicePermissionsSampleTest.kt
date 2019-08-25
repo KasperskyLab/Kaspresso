@@ -5,11 +5,10 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
-import com.kaspersky.kaspressample.DeviceSampleActivity
+import com.kaspersky.kaspressample.devicesample.DeviceSampleActivity
 import com.kaspersky.kaspressample.screen.DeviceSampleScreen
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
-import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Assume.assumeTrue
 import org.junit.Rule
@@ -31,8 +30,6 @@ class DevicePermissionsSampleTest : TestCase() {
         }.run {
 
             step("Request permissions") {
-                assertFalse(hasCallLogPermission())
-
                 DeviceSampleScreen {
                     // Button click requests permission using default Android dialog
                     requestPermissionButton {

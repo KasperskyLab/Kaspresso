@@ -1,9 +1,10 @@
-package com.kaspersky.kaspressample
+package com.kaspersky.kaspressample.devicesample
 
 import android.Manifest
 import android.os.Build
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import com.kaspersky.kaspressample.R
 import kotlinx.android.synthetic.main.activity_device_sample.request_permission_button
 
 class DeviceSampleActivity : AppCompatActivity() {
@@ -18,7 +19,9 @@ class DeviceSampleActivity : AppCompatActivity() {
 
         request_permission_button.setOnClickListener {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                requestPermissions(arrayOf(Manifest.permission.READ_CALL_LOG), PERMISSION_REQUEST_CODE)
+                requestPermissions(arrayOf(Manifest.permission.READ_CALL_LOG),
+                    PERMISSION_REQUEST_CODE
+                )
             }
         }
     }

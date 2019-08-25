@@ -8,7 +8,7 @@ import android.support.test.runner.AndroidJUnit4
 import android.support.test.uiautomator.UiDevice
 import android.support.test.uiautomator.UiObject
 import android.view.KeyEvent
-import com.kaspersky.kaspressample.DeviceSampleActivity
+import com.kaspersky.kaspressample.devicesample.DeviceSampleActivity
 import com.kaspersky.kaspressample.screen.DeviceSampleScreen
 import com.kaspersky.kaspresso.device.keyboard.Keyboard
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase

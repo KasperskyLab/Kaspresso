@@ -1,3 +1,0 @@
-Kaspresso
-
-This file is used for sample tests.

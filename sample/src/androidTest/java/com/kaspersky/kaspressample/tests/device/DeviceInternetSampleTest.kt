@@ -5,7 +5,7 @@ import android.net.wifi.WifiManager
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
 import com.agoda.kakao.screen.Screen
-import com.kaspersky.kaspressample.DeviceSampleActivity
+import com.kaspersky.kaspressample.devicesample.DeviceSampleActivity
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
 import org.junit.Assert.assertFalse
@@ -18,7 +18,7 @@ import org.junit.runner.RunWith
 class DeviceInternetSampleTest : TestCase() {
 
     companion object {
-        const val NETWORK_ESTABLISHMENT_DELAY = 750L
+        const val NETWORK_ESTABLISHMENT_DELAY = 1_500L
     }
 
     @get:Rule
