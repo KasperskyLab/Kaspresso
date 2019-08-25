@@ -60,22 +60,24 @@ class DeviceScreenshotSampleTest : TestCase() {
         }
     }
 
+    @Suppress("ReturnCount")
     private fun containsFileWithName(dir: File?, name: String): Boolean {
         if (dir == null || !dir.exists()) return false
 
-        dir.listFiles().forEach {
-            if (it.isDirectory && containsFileWithName(it, name)) return true
-            else if (it.name.contains(SCREENSHOT_TAG)) return true
+        dir.listFiles().forEach { file ->
+            if (file.isDirectory && containsFileWithName(file, name)) return true
+            else if (file.name.contains(SCREENSHOT_TAG)) return true
         }
+
         return false
     }
 
     private fun deleteDir(dir: File?) {
         if (dir == null || !dir.exists()) return
 
-        dir.listFiles().forEach {
-            if (it.isDirectory) deleteDir(it)
-            if (it.isFile) it.delete()
+        dir.listFiles().forEach { file ->
+            if (file.isDirectory) deleteDir(file)
+            if (file.isFile) file.delete()
         }
         dir.delete()
     }

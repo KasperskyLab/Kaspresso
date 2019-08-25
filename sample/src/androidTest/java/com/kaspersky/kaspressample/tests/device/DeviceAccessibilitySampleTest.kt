@@ -18,13 +18,13 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class DeviceAccessibilitySampleTest : TestCase() {
 
-    @get:Rule
-    val activityRule = ActivityTestRule(DeviceSampleActivity::class.java, false, true)
-
     companion object {
         private const val SETTINGS_UPDATE_DELAY = 1_000L
         private val SERVICE_CLASS_NAME = DeviceSampleAccessibilityService::class.java.canonicalName!!
     }
+
+    @get:Rule
+    val activityRule = ActivityTestRule(DeviceSampleActivity::class.java, false, true)
 
     @Test
     fun accessibilitySampleTest() {

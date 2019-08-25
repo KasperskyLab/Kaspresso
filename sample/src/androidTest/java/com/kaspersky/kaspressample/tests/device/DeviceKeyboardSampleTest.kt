@@ -20,7 +20,6 @@ import org.junit.runner.RunWith
 class DeviceKeyboardSampleTest : TestCase() {
 
     companion object {
-
         const val TEXT_TO_BE_TYPED = "Kaspresso"
     }
 
