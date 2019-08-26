@@ -1,8 +1,8 @@
 package com.kaspersky.kaspressample.screen
 
 import androidx.test.espresso.DataInteraction
-import com.agoda.kakao.list.KAdapterItem
 import com.agoda.kakao.list.KAbsListView
+import com.agoda.kakao.list.KAdapterItem
 import com.agoda.kakao.screen.Screen
 import com.agoda.kakao.text.KTextView
 import com.kaspersky.kaspressample.R

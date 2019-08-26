@@ -1,19 +1,13 @@
 package com.kaspersky.kaspressample.tests.simple
 
 import android.Manifest
-import androidx.test.espresso.NoMatchingViewException
 import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
 import androidx.test.runner.AndroidJUnit4
-import com.agoda.kakao.common.assertions.BaseAssertions
-import com.agoda.kakao.common.builders.ViewBuilder
-import com.agoda.kakao.common.views.KView
-import com.agoda.kakao.list.DataBuilder
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.screen.ListStubScreen
 import com.kaspersky.kaspressample.screen.MainScreen
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
-import org.hamcrest.Matcher
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith

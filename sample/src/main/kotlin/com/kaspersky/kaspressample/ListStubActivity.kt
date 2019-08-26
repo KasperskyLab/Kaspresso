@@ -12,7 +12,11 @@ import kotlinx.android.synthetic.main.list_stub_item.view.*
 
 class ListStubActivity : AppCompatActivity() {
 
-    val data = Array(100) { it.toString() }
+    private companion object {
+        private const val ITEMS_AMOUNT = 100
+    }
+
+    private val data = Array(ITEMS_AMOUNT) { it.toString() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
