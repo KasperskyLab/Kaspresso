@@ -1,11 +1,9 @@
 package com.kaspersky.kaspressample.screen
 
-import com.agoda.kakao.screen.Screen
 import com.agoda.kakao.text.KButton
 import com.agoda.kakao.text.KTextView
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.R
-import com.kaspersky.kaspressample.SimpleFragment
 
 object MainScreen : KScreen<MainScreen>() {
 

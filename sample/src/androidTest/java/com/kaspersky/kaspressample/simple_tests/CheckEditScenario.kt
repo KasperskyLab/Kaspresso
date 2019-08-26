@@ -27,5 +27,4 @@ class CheckEditScenario<ScenarioData> : BaseScenario<ScenarioData>() {
             }
         }
     }
-
 }
