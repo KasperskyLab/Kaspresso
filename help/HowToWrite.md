@@ -170,9 +170,11 @@ fun shouldPassOnNoInternetScanTest() =
             }
         }
 
-        scenario(
-            CheckEditScenario()
-        )
+        step("Check all possibilities of edit") {
+            scenario(
+                CheckEditScenario()
+            )
+        }
     }
 ```  
 Let's describe the structure: <br>

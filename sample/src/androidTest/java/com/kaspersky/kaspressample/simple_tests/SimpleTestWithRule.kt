@@ -78,9 +78,11 @@ class SimpleTestWithRule {
                 }
             }
 
-            scenario(
-                CheckEditScenario()
-            )
+            step("Check all possibilities of edit") {
+                scenario(
+                    CheckEditScenario()
+                )
+            }
         }
     }
 }
