@@ -1,6 +1,7 @@
 package com.kaspersky.kaspresso.interceptors.interactors.impl.autoscroll
 
-import androidx.test.espresso.*
+import androidx.test.espresso.PerformException
+import androidx.test.espresso.ViewInteraction
 import androidx.test.espresso.action.ViewActions
 import com.kaspersky.kaspresso.interceptors.interactors.ViewInteractor
 
