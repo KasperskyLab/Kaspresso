@@ -232,9 +232,11 @@ before {
 }
 ```  
 1. ```init``` <br>
-Here, you prepare only sets of data without any transforms and connections. Also, you can make requests to your test server, for example.
+Here, you prepare only sets of data without any transforms and connections. Also, you can make requests to your test server, for example. <br>
+It's optional block.
 2. ```transform``` <br>
-This construction is for transforming of our test data. In our example we join *owner* and *company*.
+This construction is for transforming of our test data. In our example we join *owner* and *company*. <br>
+It's optional block. The block is enabled only after ```init``` block.
 
 Alexander Blinov wrote a good article about *init-transform* dsl in [russian article](https://habr.com/ru/company/hh/blog/455042/) where he explains all dsl details very well. You are welcome!
 
