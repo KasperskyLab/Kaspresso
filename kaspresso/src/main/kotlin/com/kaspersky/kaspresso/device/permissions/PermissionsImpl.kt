@@ -17,10 +17,7 @@ class PermissionsImpl(
 ) : Permissions {
 
     private val packageInstallerPackageName = if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P)
-        "com.google.android.permissioncontroller" else "com.android.packageinstaller"
-
-    private val permissionDenyButtonId = "$packageInstallerPackageName:id/permission_deny_button"
-    private val permissionAllowButtonId = "$packageInstallerPackageName:id/permission_allow_button"
+        "com.android.permissioncontroller" else "com.android.packageinstaller"
 
     private val buttonResNameMap = mapOf(
         Permissions.Button.ALLOW to getResIdWithPackageName("permission_allow_button"),
@@ -32,18 +29,18 @@ class PermissionsImpl(
     /**
      * Waits for 1 sec, passes the permission-requesting permissions dialog and allows permissions.
      */
-    override fun allowViaDialog() = wait(timeoutMs = 1_000) { handlePermissionRequest(permissionAllowButtonId) }
+    override fun allowViaDialog() = wait(timeoutMs = 1_000) { handlePermissionRequest(Permissions.Button.ALLOW) }
 
     /**
      * Waits for 1 sec, passes the permission-requesting permissions dialog and denies permissions.
      */
-    override fun denyViaDialog() = wait(timeoutMs = 1_000) { handlePermissionRequest(permissionDenyButtonId) }
+    override fun denyViaDialog() = wait(timeoutMs = 1_000) { handlePermissionRequest(Permissions.Button.DENY) }
 
     /**
      * Waits for 1 sec, passes the permission-requesting permissions dialog
      */
     override fun clickOn(button: Permissions.Button) = wait(timeoutMs = 1_000) {
-        handlePermissionRequest(buttonResNameMap[button])
+        handlePermissionRequest(button)
     }
 
     /**
@@ -51,12 +48,12 @@ class PermissionsImpl(
      *
      * @param buttonResId resource name of permission dialog button
      */
-    private fun handlePermissionRequest(buttonResId: String?) {
+    private fun handlePermissionRequest(button: Permissions.Button) {
         try {
             val btnSelector = UiSelector()
                 .clickable(true)
                 .checkable(false)
-                .resourceId(buttonResId)
+                .resourceId(buttonResNameMap[button])
 
             val btn = uiDevice.findObject(btnSelector)
 

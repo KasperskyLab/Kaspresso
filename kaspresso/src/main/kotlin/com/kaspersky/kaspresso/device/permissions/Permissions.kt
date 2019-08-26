@@ -8,11 +8,13 @@ interface Permissions {
     /**
      * Passes the permission-requesting permissions dialog and allows permissions.
      */
+    @Deprecated("use Permissions.clickOn")
     fun allowViaDialog()
 
     /**
      * Passes the permission-requesting permissions dialog and denies permissions.
      */
+    @Deprecated("use Permissions.clickOn")
     fun denyViaDialog()
 
     /**
