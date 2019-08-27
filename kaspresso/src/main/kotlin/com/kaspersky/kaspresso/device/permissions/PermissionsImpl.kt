@@ -2,6 +2,7 @@ package com.kaspersky.kaspresso.device.permissions
 
 import android.os.Build
 import android.support.test.uiautomator.UiDevice
+import android.support.test.uiautomator.UiObject
 import android.support.test.uiautomator.UiObjectNotFoundException
 import android.support.test.uiautomator.UiSelector
 import com.kaspersky.kaspresso.extensions.other.getStackTraceAsString
@@ -44,24 +45,41 @@ class PermissionsImpl(
     }
 
     /**
+     * Waits for 1 sec, check the permission-requesting permissions dialog is visible.
+     */
+    override fun isDialogVisible(): Boolean = wait(timeoutMs = 1_000) {
+        return@wait getPermissionDialogButtonAsUiObject(Permissions.Button.ALLOW)?.exists()
+            ?: getPermissionDialogButtonAsUiObject(Permissions.Button.DENY)?.exists()
+                ?: false
+    }
+
+    /**
      * Passes the permission-requesting permissions dialog.
      *
      * @param buttonResId resource name of permission dialog button
      */
     private fun handlePermissionRequest(button: Permissions.Button) {
-        try {
+        val uiObjectButton = getPermissionDialogButtonAsUiObject(button)
+        if (uiObjectButton != null && uiObjectButton.exists()) {
+            uiObjectButton.click()
+        } else {
+            logger.e("In method handlePermissionRequest button=$button is not exist or is not found.")
+        }
+    }
+
+    /**
+     * Get button of permissions' dialog as UIObject of UI Automator or null if UiObject was not found
+     */
+    private fun getPermissionDialogButtonAsUiObject(button: Permissions.Button): UiObject? {
+        return try {
             val btnSelector = UiSelector()
                 .clickable(true)
                 .checkable(false)
                 .resourceId(buttonResNameMap[button])
-
-            val btn = uiDevice.findObject(btnSelector)
-
-            if (btn.exists()) {
-                btn.click()
-            }
+            uiDevice.findObject(btnSelector)
         } catch (e: UiObjectNotFoundException) {
             logger.e("There are no permissions dialog to interact with.")
+            null
         } catch (e: Throwable) {
             logger.e(e.getStackTraceAsString())
             throw e
