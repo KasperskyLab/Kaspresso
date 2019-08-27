@@ -2,6 +2,7 @@ package com.kaspersky.kaspresso.device.permissions
 
 import android.os.Build
 import android.support.test.uiautomator.UiDevice
+import android.support.test.uiautomator.UiObject
 import android.support.test.uiautomator.UiObjectNotFoundException
 import android.support.test.uiautomator.UiSelector
 import com.kaspersky.kaspresso.extensions.other.getStackTraceAsString
@@ -12,18 +13,18 @@ import com.kaspersky.kaspresso.logger.UiTestLogger
  * An implementation of Permissions interface.
  */
 class PermissionsImpl(
-        private val logger: UiTestLogger,
-        private val uiDevice: UiDevice
+    private val logger: UiTestLogger,
+    private val uiDevice: UiDevice
 ) : Permissions {
 
     private val packageInstallerPackageName = if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P)
         "com.android.permissioncontroller" else "com.android.packageinstaller"
 
     private val buttonResNameMap = mapOf(
-            Permissions.Button.ALLOW to getResIdWithPackageName("permission_allow_button"),
-            Permissions.Button.ALLOW_ALWAYS to getResIdWithPackageName("permission_allow_always_button"),
-            Permissions.Button.ALLOW_FOREGROUND to getResIdWithPackageName("permission_allow_foreground_only_button"),
-            Permissions.Button.DENY to getResIdWithPackageName("permission_deny_button")
+        Permissions.Button.ALLOW to getResIdWithPackageName("permission_allow_button"),
+        Permissions.Button.ALLOW_ALWAYS to getResIdWithPackageName("permission_allow_always_button"),
+        Permissions.Button.ALLOW_FOREGROUND to getResIdWithPackageName("permission_allow_foreground_only_button"),
+        Permissions.Button.DENY to getResIdWithPackageName("permission_deny_button")
     )
 
     /**
@@ -37,15 +38,19 @@ class PermissionsImpl(
     override fun denyViaDialog() = wait(timeoutMs = 1_000) { handlePermissionRequest(Permissions.Button.DENY) }
 
     /**
-     * Waits for 1 sec, passes the permission-requesting permissions dialog and allows permissions.
-     */
-    override fun allowisVisibleDialog(): Boolean = wait(timeoutMs = 1_000) { handleIsVisibleRequest(Permissions.Button.ALLOW) }
-
-    /**
      * Waits for 1 sec, passes the permission-requesting permissions dialog
      */
     override fun clickOn(button: Permissions.Button) = wait(timeoutMs = 1_000) {
         handlePermissionRequest(button)
+    }
+
+    /**
+     * Waits for 1 sec, check the permission-requesting permissions dialog is visible.
+     */
+    override fun isDialogVisible(): Boolean = wait(timeoutMs = 1_000) {
+        return@wait getPermissionDialogButtonAsUiObject(Permissions.Button.ALLOW)?.exists()
+            ?: getPermissionDialogButtonAsUiObject(Permissions.Button.DENY)?.exists()
+                ?: false
     }
 
     /**
@@ -54,49 +59,31 @@ class PermissionsImpl(
      * @param buttonResId resource name of permission dialog button
      */
     private fun handlePermissionRequest(button: Permissions.Button) {
-        try {
-            val btnSelector = UiSelector()
-                    .clickable(true)
-                    .checkable(false)
-                    .resourceId(buttonResNameMap[button])
-
-            val btn = uiDevice.findObject(btnSelector)
-
-            if (btn.exists()) {
-                btn.click()
-            }
-        } catch (e: UiObjectNotFoundException) {
-            logger.e("There are no permissions dialog to interact with.")
-        } catch (e: Throwable) {
-            logger.e(e.getStackTraceAsString())
-            throw e
+        val uiObjectButton = getPermissionDialogButtonAsUiObject(button)
+        if (uiObjectButton != null && uiObjectButton.exists()) {
+            uiObjectButton.click()
+        } else {
+            logger.e("In method handlePermissionRequest button=$button is not exist or is not found.")
         }
     }
 
     /**
-     * Passes the permission-requesting permissions dialog.
-     *
-     * @param buttonResId resource name of permission dialog button
+     * Get button of permissions' dialog as UIObject of UI Automator or null if UiObject was not found
      */
-    private fun handleIsVisibleRequest(button: Permissions.Button): Boolean {
-        try {
+    private fun getPermissionDialogButtonAsUiObject(button: Permissions.Button): UiObject? {
+        return try {
             val btnSelector = UiSelector()
-                    .clickable(true)
-                    .checkable(false)
-                    .resourceId(buttonResNameMap[button])
-
-            val btn = uiDevice.findObject(btnSelector)
-
-            if (btn.exists()) {
-                return true
-            }
+                .clickable(true)
+                .checkable(false)
+                .resourceId(buttonResNameMap[button])
+            uiDevice.findObject(btnSelector)
         } catch (e: UiObjectNotFoundException) {
-            logger.e("There are no visible permissions dialog.")
+            logger.e("There are no permissions dialog to interact with.")
+            null
         } catch (e: Throwable) {
             logger.e(e.getStackTraceAsString())
             throw e
         }
-        return false
     }
 
     private fun getResIdWithPackageName(resId: String): String {
