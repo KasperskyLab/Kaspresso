@@ -37,6 +37,11 @@ class PermissionsImpl(
     override fun denyViaDialog() = wait(timeoutMs = 1_000) { handlePermissionRequest(Permissions.Button.DENY) }
 
     /**
+     * Waits for 1 sec, passes the permission-requesting permissions dialog and allows permissions.
+     */
+    override fun allowisVisibleDialog():bool = wait(timeoutMs = 1_000) { handleIsVisibleRequest(Permissions.Button.ALLOW) }
+    
+    /**
      * Waits for 1 sec, passes the permission-requesting permissions dialog
      */
     override fun clickOn(button: Permissions.Button) = wait(timeoutMs = 1_000) {
@@ -62,6 +67,32 @@ class PermissionsImpl(
             }
         } catch (e: UiObjectNotFoundException) {
             logger.e("There are no permissions dialog to interact with.")
+        } catch (e: Throwable) {
+            logger.e(e.getStackTraceAsString())
+            throw e
+        }
+    }
+    
+    /**
+     * Passes the permission-requesting permissions dialog.
+     *
+     * @param buttonResId resource name of permission dialog button
+     */
+    private fun handleIsVisibleRequest(button: Permissions.Button):bool {
+        try {
+            val btnSelector = UiSelector()
+                .clickable(true)
+                .checkable(false)
+                .resourceId(buttonResNameMap[button])
+
+            val btn = uiDevice.findObject(btnSelector)
+
+            if (btn.exists()) {
+                return true
+            }
+            return false
+        } catch (e: UiObjectNotFoundException) {
+            logger.e("There are no visible permissions dialog.")
         } catch (e: Throwable) {
             logger.e(e.getStackTraceAsString())
             throw e
