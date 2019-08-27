@@ -16,6 +16,11 @@ interface Permissions {
      */
     @Deprecated("use Permissions.clickOn")
     fun denyViaDialog()
+    
+     /**
+     * Passes the permission-requesting permissions dialog and returns true if visible.
+     */
+    fun allowIsVisibleDialog:true()
 
     /**
      * Passes the permission-requesting permissions dialog
