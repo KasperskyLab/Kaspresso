@@ -39,7 +39,7 @@ class PermissionsImpl(
     /**
      * Waits for 1 sec, passes the permission-requesting permissions dialog and allows permissions.
      */
-    override fun allowisVisibleDialog():bool = wait(timeoutMs = 1_000) { handleIsVisibleRequest(Permissions.Button.ALLOW) }
+    override fun allowisVisibleDialog():Boolean = wait(timeoutMs = 1_000) { handleIsVisibleRequest(Permissions.Button.ALLOW) }
     
     /**
      * Waits for 1 sec, passes the permission-requesting permissions dialog
@@ -78,25 +78,25 @@ class PermissionsImpl(
      *
      * @param buttonResId resource name of permission dialog button
      */
-    private fun handleIsVisibleRequest(button: Permissions.Button):bool {
+    private fun handleIsVisibleRequest(button: Permissions.Button): Boolean {
         try {
             val btnSelector = UiSelector()
-                .clickable(true)
-                .checkable(false)
-                .resourceId(buttonResNameMap[button])
+                    .clickable(true)
+                    .checkable(false)
+                    .resourceId(buttonResNameMap[button])
 
             val btn = uiDevice.findObject(btnSelector)
 
             if (btn.exists()) {
                 return true
             }
-            return false
         } catch (e: UiObjectNotFoundException) {
             logger.e("There are no visible permissions dialog.")
         } catch (e: Throwable) {
             logger.e(e.getStackTraceAsString())
             throw e
         }
+        return false
     }
 
     private fun getResIdWithPackageName(resId: String): String {

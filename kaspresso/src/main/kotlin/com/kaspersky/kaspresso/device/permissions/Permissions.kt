@@ -20,7 +20,7 @@ interface Permissions {
      /**
      * Passes the permission-requesting permissions dialog and returns true if visible.
      */
-    fun allowIsVisibleDialog:true()
+    fun allowisVisibleDialog():Boolean
 
     /**
      * Passes the permission-requesting permissions dialog
