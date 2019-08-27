@@ -12,18 +12,18 @@ import com.kaspersky.kaspresso.logger.UiTestLogger
  * An implementation of Permissions interface.
  */
 class PermissionsImpl(
-    private val logger: UiTestLogger,
-    private val uiDevice: UiDevice
+        private val logger: UiTestLogger,
+        private val uiDevice: UiDevice
 ) : Permissions {
 
     private val packageInstallerPackageName = if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P)
         "com.android.permissioncontroller" else "com.android.packageinstaller"
 
     private val buttonResNameMap = mapOf(
-        Permissions.Button.ALLOW to getResIdWithPackageName("permission_allow_button"),
-        Permissions.Button.ALLOW_ALWAYS to getResIdWithPackageName("permission_allow_always_button"),
-        Permissions.Button.ALLOW_FOREGROUND to getResIdWithPackageName("permission_allow_foreground_only_button"),
-        Permissions.Button.DENY to getResIdWithPackageName("permission_deny_button")
+            Permissions.Button.ALLOW to getResIdWithPackageName("permission_allow_button"),
+            Permissions.Button.ALLOW_ALWAYS to getResIdWithPackageName("permission_allow_always_button"),
+            Permissions.Button.ALLOW_FOREGROUND to getResIdWithPackageName("permission_allow_foreground_only_button"),
+            Permissions.Button.DENY to getResIdWithPackageName("permission_deny_button")
     )
 
     /**
@@ -39,8 +39,8 @@ class PermissionsImpl(
     /**
      * Waits for 1 sec, passes the permission-requesting permissions dialog and allows permissions.
      */
-    override fun allowisVisibleDialog():Boolean = wait(timeoutMs = 1_000) { handleIsVisibleRequest(Permissions.Button.ALLOW) }
-    
+    override fun allowisVisibleDialog(): Boolean = wait(timeoutMs = 1_000) { handleIsVisibleRequest(Permissions.Button.ALLOW) }
+
     /**
      * Waits for 1 sec, passes the permission-requesting permissions dialog
      */
@@ -56,9 +56,9 @@ class PermissionsImpl(
     private fun handlePermissionRequest(button: Permissions.Button) {
         try {
             val btnSelector = UiSelector()
-                .clickable(true)
-                .checkable(false)
-                .resourceId(buttonResNameMap[button])
+                    .clickable(true)
+                    .checkable(false)
+                    .resourceId(buttonResNameMap[button])
 
             val btn = uiDevice.findObject(btnSelector)
 
@@ -72,7 +72,7 @@ class PermissionsImpl(
             throw e
         }
     }
-    
+
     /**
      * Passes the permission-requesting permissions dialog.
      *
