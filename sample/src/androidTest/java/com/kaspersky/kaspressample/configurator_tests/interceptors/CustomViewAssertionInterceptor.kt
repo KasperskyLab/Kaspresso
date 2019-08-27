@@ -1,8 +1,9 @@
-package com.kaspersky.kaspressample.configurator.custom_configurator
+package com.kaspersky.kaspressample.configurator_tests.interceptors
 
 import android.support.test.espresso.NoMatchingViewException
 import android.support.test.espresso.ViewAssertion
 import android.view.View
+import com.kaspersky.kaspressample.configurator_tests.helpers.CheckCustomInterceptorsStorage
 import com.kaspersky.kaspresso.interceptors.view.ViewAssertionInterceptor
 
 class CustomViewAssertionInterceptor : ViewAssertionInterceptor {

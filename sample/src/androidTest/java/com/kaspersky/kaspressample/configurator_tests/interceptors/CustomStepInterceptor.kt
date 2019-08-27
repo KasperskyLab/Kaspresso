@@ -1,5 +1,6 @@
-package com.kaspersky.kaspressample.configurator.custom_configurator
+package com.kaspersky.kaspressample.configurator_tests.interceptors
 
+import com.kaspersky.kaspressample.configurator_tests.helpers.CheckCustomInterceptorsStorage
 import com.kaspersky.kaspresso.interceptors.testcase.StepInterceptor
 import com.kaspersky.kaspresso.testcases.models.info.StepInfo
 

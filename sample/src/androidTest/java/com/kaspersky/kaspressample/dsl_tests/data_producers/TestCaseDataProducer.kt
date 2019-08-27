@@ -1,7 +1,7 @@
-package com.kaspersky.kaspressample.data_producers
+package com.kaspersky.kaspressample.dsl_tests.data_producers
 
-import com.kaspersky.kaspressample.data.TestCaseData
-import com.kaspersky.kaspressample.data.TestCaseDsl
+import com.kaspersky.kaspressample.dsl_tests.data.TestCaseData
+import com.kaspersky.kaspressample.dsl_tests.data.TestCaseDsl
 
 class TestCaseDataProducer {
 

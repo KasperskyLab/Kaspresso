@@ -1,8 +1,8 @@
-package com.kaspersky.kaspressample.tests.paramertized
+package com.kaspersky.kaspressample.dsl_tests
 
-import com.kaspersky.kaspressample.data.TestCaseData
-import com.kaspersky.kaspressample.data.TestCaseDsl
-import com.kaspersky.kaspressample.data_producers.TestCaseDataProducer
+import com.kaspersky.kaspressample.dsl_tests.data.TestCaseData
+import com.kaspersky.kaspressample.dsl_tests.data.TestCaseDsl
+import com.kaspersky.kaspressample.dsl_tests.data_producers.TestCaseDataProducer
 import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.testcases.api.testcase.BaseTestCase
 

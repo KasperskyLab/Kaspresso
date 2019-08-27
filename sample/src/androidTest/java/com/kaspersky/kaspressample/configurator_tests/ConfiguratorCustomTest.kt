@@ -1,4 +1,4 @@
-package com.kaspersky.kaspressample.configurator.custom_configurator
+package com.kaspersky.kaspressample.configurator_tests
 
 import android.Manifest
 import android.support.test.rule.ActivityTestRule
@@ -6,6 +6,10 @@ import android.support.test.rule.GrantPermissionRule
 import android.support.test.runner.AndroidJUnit4
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.R
+import com.kaspersky.kaspressample.configurator_tests.helpers.CheckCustomInterceptorsStorage
+import com.kaspersky.kaspressample.configurator_tests.interceptors.CustomStepInterceptor
+import com.kaspersky.kaspressample.configurator_tests.interceptors.CustomViewActionInterceptor
+import com.kaspersky.kaspressample.configurator_tests.interceptors.CustomViewAssertionInterceptor
 import com.kaspersky.kaspressample.screen.MainScreen
 import com.kaspersky.kaspressample.screen.SimpleScreen
 import com.kaspersky.kaspresso.configurator.Configurator

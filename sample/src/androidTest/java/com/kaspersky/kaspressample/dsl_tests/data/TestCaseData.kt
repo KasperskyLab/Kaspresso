@@ -1,4 +1,4 @@
-package com.kaspersky.kaspressample.data
+package com.kaspersky.kaspressample.dsl_tests.data
 
 class TestCaseData(
     val companies: MutableList<Company> = mutableListOf(),
