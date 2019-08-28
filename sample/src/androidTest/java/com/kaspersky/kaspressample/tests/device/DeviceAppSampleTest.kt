@@ -4,7 +4,7 @@ import android.support.test.runner.AndroidJUnit4
 import com.kaspersky.kaspresso.device.server.AdbServer
 import com.kaspersky.kaspresso.device.server.AdbServerException
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
-import org.junit.Assert
+import org.junit.Assert.assertTrue
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -25,7 +25,7 @@ class DeviceAppSampleTest : TestCase() {
                     device.apps.install(apkName)
                 } catch (ex: AdbServerException) {
                     // APK file should be reachable from desktop server.
-                    Assert.assertTrue(
+                    assertTrue(
                         "failed to stat $apkName: No such file or directory" in ex.message
                     )
                 }
@@ -37,7 +37,7 @@ class DeviceAppSampleTest : TestCase() {
                     AdbServer.performAdb("uninstall com.android.settings")
                 } catch (ex: AdbServerException) {
                     // deleting system app caused error.
-                    Assert.assertTrue("exitCode=1" in ex.message)
+                    assertTrue("exitCode=1" in ex.message)
                 }
             }
         }

@@ -7,5 +7,5 @@ class DeviceSampleAccessibilityService : AccessibilityService() {
 
     override fun onInterrupt() { }
 
-    override fun onAccessibilityEvent(p0: AccessibilityEvent?) { }
+    override fun onAccessibilityEvent(event: AccessibilityEvent?) { }
 }

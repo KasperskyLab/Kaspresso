@@ -46,6 +46,6 @@ class DevicePermissionsSampleTest : TestCase() {
     }
 
     private fun BaseTestContext.hasCallLogPermission(): Boolean =
-        this.device.targetContext.checkSelfPermission(Manifest.permission.READ_CALL_LOG) ==
+        device.targetContext.checkSelfPermission(Manifest.permission.READ_CALL_LOG) ==
                 PackageManager.PERMISSION_GRANTED
 }
