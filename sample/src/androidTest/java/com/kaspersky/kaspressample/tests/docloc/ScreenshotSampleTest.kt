@@ -8,10 +8,10 @@ import com.kaspersky.kaspressample.screen.MainScreen
 import com.kaspersky.kaspressample.screen.SimpleScreen
 import com.kaspersky.kaspresso.annotations.ScreenShooterTest
 import com.kaspersky.kaspresso.testcases.api.testcase.DocLocScreenshotTestCase
+import java.io.File
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import java.io.File
 
 @RunWith(AndroidJUnit4::class)
 class ScreenshotSampleTest : DocLocScreenshotTestCase(locales = "en,ru", screenshotsDirectory = File("screenshots")) {
