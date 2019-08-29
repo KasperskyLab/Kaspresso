@@ -7,14 +7,18 @@ import androidx.test.runner.AndroidJUnit4
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.screen.MainScreen
 import com.kaspersky.kaspressample.screen.ScrollViewStubScreen
+import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class ScrollViewStubTest : TestCase() {
-
+class ScrollViewStubTest : TestCase(
+    configBuilder = Configurator.Builder().apply {
+        attemptsTimeoutMs = 5_000L
+    }
+) {
     private val mainScreen = MainScreen()
     private val scrollViewStubScreen = ScrollViewStubScreen()
 
@@ -41,9 +45,12 @@ class ScrollViewStubTest : TestCase() {
                 }
             }
 
-            step("Click button 5") {
+            step("Click button \"bzzz\" when it appears") {
                 scrollViewStubScreen {
                     scrollViewStub.isVisible()
+
+                    btn5.compositeCheck({ hasText("bzzz") }, { hasText("zzzb") })
+
                     btn5.click()
                 }
             }
