@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Kaspresso Пример</string>
+    <string name="next">Далее</string>
+    <string name="webview">ВебОкно</string>
+    <string name="home_fragment_title">Простой фрагмент</string>
+    <string name="text_button_1">Кнопка 1</string>
+    <string name="text_button_2">Кнопка 2</string>
+    <string name="text_edit_text">Какой-то текст</string>
+    <string name="add_fragment_error">Уже добавлено</string>
+    <string name="main_screen_description">Главный экран</string>
+</resources>
