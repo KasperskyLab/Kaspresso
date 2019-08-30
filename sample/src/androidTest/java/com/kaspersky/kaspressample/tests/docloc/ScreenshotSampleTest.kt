@@ -14,7 +14,10 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class ScreenshotSampleTest : DocLocScreenshotTestCase(locales = "en,ru", screenshotsDirectory = File("screenshots")) {
+class ScreenshotSampleTest : DocLocScreenshotTestCase(
+    screenshotsDirectory = File("screenshots"),
+    locales = "en,ru"
+) {
 
     @get:Rule
     val activityRule = ActivityTestRule(MainActivity::class.java, false, true)
