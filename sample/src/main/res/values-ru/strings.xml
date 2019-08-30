@@ -8,4 +8,11 @@
     <string name="text_edit_text">Какой-то текст</string>
     <string name="add_fragment_error">Уже добавлено</string>
     <string name="main_screen_description">Главный экран</string>
+
+    <!-- Screenshooter sample test -->
+    <string name="increment">Прибавить</string>
+    <string name="decrement">Убавить</string>
+    <string name="change_color_to_black">Сделать фон чёрным</string>
+    <string name="change_color_to_red">Сделать фон красным</string>
+    <string name="counter_value">Текущее значение: %d</string>
 </resources>

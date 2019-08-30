@@ -8,4 +8,11 @@
     <string name="text_edit_text">Some text</string>
     <string name="add_fragment_error">Already added</string>
     <string name="main_screen_description">Main Screen</string>
+
+    <!-- Screenshooter sample test -->
+    <string name="increment">Increment</string>
+    <string name="decrement">Decrement</string>
+    <string name="change_color_to_black">Set background to black</string>
+    <string name="change_color_to_red">Set background to red</string>
+    <string name="counter_value">Current value: %d</string>
 </resources>

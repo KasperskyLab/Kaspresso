@@ -56,27 +56,6 @@ annotation to default `AndroidJUnitRunner` with command:
 adb shell am instrument -w -e annotation com.kaspersky.kaspresso.annotations.ScreenShooterTest your.package.name/android.support.test.runner.AndroidJUnitRunner
 ```
 
-**Base class**
-
-Also you could create a base class for all of your screenshooter tests to remove some boilerplate: 
-
- ```kotlin
-open class ProductDocLocScreenshotTestCase(testName: String) : DocLocScreenshotTestCase(
-    File(testName), "comma-separated string of locales"
-) {
-
-    @get:Rule
-    val activityTestRule = ActivityTestRule(FragmentTestActivity::class.java, true, false)
-
-    protected lateinit var activity: FragmentTestActivity
-
-    @Before
-    open fun setUp() {
-        activity = activityTestRule.launchActivity(null)
-    }
-}
-```
-
 **Screenshot files location**
 
 All screenshot files are stored in the directory, that you passed in the base class constructor. 
@@ -95,6 +74,49 @@ For the sample test case, the files tree should be like:
                 
 So, in order to save screenshots at external storage, the test application requires 
 `android.permission.WRITE_EXTERNAL_STORAGE` permission. 
+
+## Advanced usage
+
+In most cases there is no need to launch certain activity, do a lot of steps before reaching 
+necessary functionality. Often showing fragments will be sufficient to make required screenshots.
+ So you could create a FragmentTestActivity and manage fragment transactions: 
+ 
+```kotlin
+class FragmentTestActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_fragment_container)
+    }
+
+    fun setFragment(fragment: Fragment) {
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.content_container, fragment, "")
+        fragmentTransaction.build()
+    }
+}
+```
+
+Then create a base product screenshot test case: 
+ 
+ ```kotlin
+open class ProductDocLocScreenshotTestCase(testName: String) : DocLocScreenshotTestCase(
+    File(testName), "en,ru"
+) {
+
+    @get:Rule
+    val activityTestRule = ActivityTestRule(FragmentTestActivity::class.java, true, false)
+
+    protected lateinit var activity: FragmentTestActivity
+
+    @Before
+    open fun setUp() {
+        activity = activityTestRule.launchActivity(null)
+    }
+}
+```  
+
+
 
 **Methods provided by DocLocScreenshotTestCase class**
 
