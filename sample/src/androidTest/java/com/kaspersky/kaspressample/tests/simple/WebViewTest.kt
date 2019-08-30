@@ -91,15 +91,15 @@ class WebViewTest : TestCase() {
                             "//*[@id=\"app\"]/section[5]/div/div/div[2]/div[3]/button"
                         ) {
                             compose(this@webView) {
-                                +{ _: WebElementBuilder.KWebInteraction ->
+                                and {
                                     hasText("fuck")
                                     click()
                                 }
-                                +{ _: WebElementBuilder.KWebInteraction ->
+                                and {
                                     hasText("Ask questio")
                                     click()
                                 }
-                                +{ _: WebElementBuilder.KWebInteraction ->
+                                and {
                                     hasText("Ask question")
                                     click()
                                 }

@@ -158,8 +158,8 @@ abstract class Composer(
 
         internal val actions: MutableList<T.() -> Unit> = arrayListOf()
 
-        operator fun (T.() -> Unit).unaryPlus() {
-            actions += this
+        fun and(action: T.() -> Unit) {
+            actions += action
         }
     }
 }

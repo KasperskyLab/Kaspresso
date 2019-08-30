@@ -56,12 +56,12 @@ class ScrollViewStubTest : TestCase(
                     }
 
                     btn5.compose {
-                        +{ it: KButton ->
-                            it.hasText("bzzz")
-                            it.click()
+                        and { hasText("zzzb") }
+                        and {
+                            hasText("bzzz")
+                            click()
                         }
-                        +{ it: KButton -> it.hasText("zzzb") }
-                        +action
+                        and(action)
                     }
                 }
             }
