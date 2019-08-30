@@ -15,15 +15,15 @@ internal class ViewInteractionInterceptor(
 
     override fun interceptCheck(interaction: ViewInteraction, assertion: ViewAssertion) {
         configurator.viewInteractors.fold(
-            { interaction.check(ViewAssertionProxy(assertion, configurator.viewAssertionInterceptors)) },
-            { acc, viewInteractor: ViewInteractor -> { viewInteractor.interact(interaction, acc) } }
+            initial = { interaction.check(ViewAssertionProxy(assertion, configurator.viewAssertionInterceptors)) },
+            operation = { acc, viewInteractor: ViewInteractor -> { viewInteractor.interact(interaction, acc) } }
         ).invoke()
     }
 
     override fun interceptPerform(interaction: ViewInteraction, action: ViewAction) {
         configurator.viewInteractors.fold(
-            { interaction.perform(ViewActionProxy(action, configurator.viewActionInterceptors)) },
-            { acc, viewInteractor: ViewInteractor -> { viewInteractor.interact(interaction, acc) } }
+            initial = { interaction.perform(ViewActionProxy(action, configurator.viewActionInterceptors)) },
+            operation = { acc, viewInteractor: ViewInteractor -> { viewInteractor.interact(interaction, acc) } }
         ).invoke()
     }
 }

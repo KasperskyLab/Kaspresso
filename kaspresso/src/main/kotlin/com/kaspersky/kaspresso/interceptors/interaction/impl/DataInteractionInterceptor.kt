@@ -14,8 +14,8 @@ internal class DataInteractionInterceptor(
 
     override fun interceptCheck(interaction: DataInteraction, assertion: ViewAssertion) {
         configurator.dataInteractors.fold(
-            { interaction.check(DataAssertionProxy(assertion, configurator.viewAssertionInterceptors)) },
-            { acc, dataInteractor: DataInteractor -> { dataInteractor.interact(interaction, acc) } }
+            initial = { interaction.check(DataAssertionProxy(assertion, configurator.viewAssertionInterceptors)) },
+            operation = { acc, dataInteractor: DataInteractor -> { dataInteractor.interact(interaction, acc) } }
         ).invoke()
     }
 

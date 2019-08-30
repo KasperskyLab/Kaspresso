@@ -40,24 +40,7 @@ abstract class Composer(
         }
 
         configurator.viewInteractors.fold(
-            initial = {
-                Configurator.logger.i("Composed action started.")
-                var cachedError: Throwable? = null
-
-                actions.forEach { action: T.() -> Unit ->
-                    try {
-                        action.invoke(this@compose)
-                        Configurator.logger.i("Composed action successfully performed.")
-                        return@fold
-                    } catch (error: Throwable) {
-                        cachedError = error
-                        Configurator.logger.i("One part of composed action failed.")
-                    }
-                }
-
-                Configurator.logger.i("Composed action totally failed.")
-                throw cachedError!!
-            },
+            initial = { invokeComposed(this@compose, *actions) },
             operation = { acc, viewInteractor: ViewInteractor -> { viewInteractor.interact(viewInteraction, acc) } }
         ).invoke()
 
@@ -74,11 +57,7 @@ abstract class Composer(
         interceptable.intercept {
             onCheck(true) { webInteraction: Web.WebInteraction<*>, webAssertion: WebAssertion<*> ->
                 webInteraction.check(
-                    WebAssertionProxy(
-                        webAssertion,
-                        webInteraction.getMatcher(),
-                        configurator.webAssertionInterceptors
-                    )
+                    WebAssertionProxy(webAssertion, webInteraction.getMatcher(), configurator.webAssertionInterceptors)
                 )
             }
             onPerform(true) { webInteraction: Web.WebInteraction<*>, atom: Atom<*> ->
@@ -87,24 +66,7 @@ abstract class Composer(
         }
 
         configurator.webInteractors.fold(
-            initial = {
-                Configurator.logger.i("Composed action started.")
-                var cachedError: Throwable? = null
-
-                actions.forEach { action: T.() -> Unit ->
-                    try {
-                        action.invoke(this@compose)
-                        Configurator.logger.i("Composed action successfully performed.")
-                        return@fold
-                    } catch (error: Throwable) {
-                        cachedError = error
-                        Configurator.logger.i("One part of composed action failed.")
-                    }
-                }
-
-                Configurator.logger.i("Composed action totally failed.")
-                throw cachedError!!
-            },
+            initial = { invokeComposed(this@compose, *actions) },
             operation = { acc, webInteractor: WebInteractor -> { webInteractor.interact(webInteraction, acc) } }
         ).invoke()
 
@@ -162,5 +124,24 @@ abstract class Composer(
             onCheck(true, oldInterceptor::interceptCheck)
             onPerform(true, oldInterceptor::interceptPerform)
         }
+    }
+
+    private fun <T> invokeComposed(context: T, vararg actions: T.() -> Unit) {
+        Configurator.logger.i("Composed action started.")
+        var cachedError: Throwable? = null
+
+        actions.forEach { action: T.() -> Unit ->
+            try {
+                action.invoke(context)
+                Configurator.logger.i("Composed action successfully performed.")
+                return
+            } catch (error: Throwable) {
+                cachedError = error
+                Configurator.logger.i("One part of composed action failed.")
+            }
+        }
+
+        Configurator.logger.i("Composed action totally failed.")
+        throw cachedError!!
     }
 }
