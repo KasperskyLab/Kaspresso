@@ -4,6 +4,7 @@ import android.Manifest
 import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
 import androidx.test.runner.AndroidJUnit4
+import com.agoda.kakao.text.KButton
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.screen.MainScreen
 import com.kaspersky.kaspressample.screen.ScrollViewStubScreen
@@ -15,7 +16,7 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class ScrollViewStubTest : TestCase(
-    configBuilder = Configurator.Builder().apply {
+    configBuilder = Configurator.Builder.default().apply {
         attemptsTimeoutMs = 5_000L
     }
 ) {
@@ -49,9 +50,17 @@ class ScrollViewStubTest : TestCase(
                 scrollViewStubScreen {
                     scrollViewStub.isVisible()
 
-                    btn5.compositeCheck({ hasText("bzzz") }, { hasText("zzzb") })
+                    val action1: KButton.() -> Unit = {
+                        hasText("bzzz")
+                        click()
+                    }
 
-                    btn5.click()
+                    val action2: KButton.() -> Unit = {
+                        hasText("zzzb")
+                        click()
+                    }
+
+                    btn5.compose(action1, action2)
                 }
             }
         }
