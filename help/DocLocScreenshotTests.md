@@ -93,6 +93,9 @@ For the sample test case, the files tree should be like:
                 // screenshot files
             - ru
                 // screenshot files
+                
+So, in order to save screenshots at external storage, the test application requires 
+`android.permission.WRITE_EXTERNAL_STORAGE` permission. 
 
 **Methods provided by DocLocScreenshotTestCase class**
 
