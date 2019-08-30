@@ -15,23 +15,10 @@ import com.kaspersky.kaspresso.proxy.ViewAssertionProxy
 abstract class Composer(
     internal val configurator: Configurator
 ) {
-    fun <T> T.compose(
-        vararg actions: T.() -> Unit
-    ) where T : BaseActions, T : BaseAssertions, T : Interceptable<ViewInteraction, ViewAssertion, ViewAction> {
+    fun <T> T.compose(vararg actions: T.() -> Unit)
+            where T : BaseActions, T : BaseAssertions, T : Interceptable<ViewInteraction, ViewAssertion, ViewAction> {
 
-        var cachedViewInteraction: ViewInteraction? = null
-
-        val cacheViewInteraction =
-            { viewInteraction: ViewInteraction, _: Any? ->
-                cachedViewInteraction = viewInteraction
-            }
-
-        intercept {
-            onCheck(true, cacheViewInteraction)
-            onPerform(true, cacheViewInteraction)
-        }
-
-        actions.first().invoke(this)
+        val viewInteraction: ViewInteraction = getViewInteraction(actions.first())
 
         intercept {
             onCheck(true) { viewInteraction: ViewInteraction, viewAssertion: ViewAssertion ->
@@ -61,16 +48,38 @@ abstract class Composer(
                 Configurator.logger.i("Composed action totally failed.")
                 throw cachedError!!
             },
-            operation = { acc, viewInteractor: ViewInteractor ->
-                { viewInteractor.interact(cachedViewInteraction!!, acc) }
-            }
+            operation = { acc, viewInteractor: ViewInteractor -> { viewInteractor.interact(viewInteraction, acc) } }
         ).invoke()
 
-        val oldViewInteractioninterceptor = ViewInteractionInterceptor(configurator)
+        setOldViewInteractionInterceptor()
+    }
+
+    private fun <T> T.getViewInteraction(action: T.() -> Unit): ViewInteraction
+            where T : BaseActions, T : BaseAssertions, T : Interceptable<ViewInteraction, ViewAssertion, ViewAction> {
+
+        var cachedViewInteraction: ViewInteraction? = null
+
+        val cacheViewInteraction: (ViewInteraction, Any?) -> Unit =
+            { viewInteraction: ViewInteraction, _ -> cachedViewInteraction = viewInteraction }
 
         intercept {
-            onCheck(true, oldViewInteractioninterceptor::interceptCheck)
-            onPerform(true, oldViewInteractioninterceptor::interceptPerform)
+            onCheck(true, cacheViewInteraction)
+            onPerform(true, cacheViewInteraction)
+        }
+
+        action.invoke(this)
+
+        return cachedViewInteraction!!
+    }
+
+    private fun <T> T.setOldViewInteractionInterceptor()
+            where T : BaseActions, T : BaseAssertions, T : Interceptable<ViewInteraction, ViewAssertion, ViewAction> {
+
+        val oldInterceptor = ViewInteractionInterceptor(configurator)
+
+        intercept {
+            onCheck(true, oldInterceptor::interceptCheck)
+            onPerform(true, oldInterceptor::interceptPerform)
         }
     }
 }
