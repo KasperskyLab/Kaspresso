@@ -22,15 +22,13 @@ class AutoscrollWebInteractor(
         }
     }
 
-    override fun <R> autoscroll(interaction: Web.WebInteraction<*>, action: () -> R, error: Throwable): R {
-        val result: R = try {
+    override fun <R> autoscroll(interaction: Web.WebInteraction<*>, action: () -> R, cachedError: Throwable): R {
+        return try {
             interaction.perform(DriverAtoms.webScrollIntoView())
+            logger.i("Web autoscroll successfully performed.")
             action.invoke()
-        } catch (e: Throwable) {
-            throw error
+        } catch (error: Throwable) {
+            throw cachedError
         }
-
-        logger.i("Web autoscroll successfully performed.")
-        return result
     }
 }

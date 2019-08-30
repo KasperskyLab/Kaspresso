@@ -9,9 +9,7 @@ import androidx.test.runner.AndroidJUnit4
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.screen.MainScreen
 import com.kaspersky.kaspressample.screen.WebViewScreen
-import com.kaspersky.kaspresso.flakysafety.attempt
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
-import java.util.concurrent.TimeUnit
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -52,17 +50,6 @@ class WebViewTest : TestCase() {
                 webViewScreen {
 
                     webView {
-                        attempt(
-                            timeoutMs = TimeUnit.SECONDS.toMillis(3)
-                        ) {
-                            withElement(
-                                Locator.XPATH,
-                                "/html/body/header/section/div[1]/div/div[1]/div[2]/button[3]"
-                            ) {
-                                hasText("Sign up")
-                            }
-                        }
-
                         withElement(
                             Locator.CLASS_NAME,
                             "btn"
@@ -73,15 +60,14 @@ class WebViewTest : TestCase() {
 
                         withElement(
                             Locator.XPATH,
-                            "/html/body/section[1]/div/div/h2"
+                            "//*[@id=\"app\"]/section[1]/div/div/h2"
                         ) {
                             containsText("Protect your data")
                         }
 
-                        // same element
                         withElement(
                             Locator.XPATH,
-                            "/html/body/header/section/div[3]/div[2]/button"
+                            "//*[@id=\"app\"]/header/section/div[3]/div[2]/button"
                         ) {
                             hasText("Sign in")
                         }
@@ -94,10 +80,21 @@ class WebViewTest : TestCase() {
                     webView {
                         withElement(
                             Locator.XPATH,
-                            "/html/body/section[5]/div/div/div[2]/div[3]/button"
+                            "//*[@id=\"app\"]/section[5]/div/div/div[2]/div[3]/button"
                         ) {
                             hasText("Ask question")
-                            click()
+                        }
+
+                        withElement(
+                            Locator.XPATH,
+                            "//*[@id=\"app\"]/section[5]/div/div/div[2]/div[3]/button"
+                        ) {
+                            compose(
+                                this@webView,
+                                { hasText("fuck"); click() },
+                                { hasText("Ask questio"); click() },
+                                { hasText("Ask question"); click() }
+                            )
                         }
                     }
                 }

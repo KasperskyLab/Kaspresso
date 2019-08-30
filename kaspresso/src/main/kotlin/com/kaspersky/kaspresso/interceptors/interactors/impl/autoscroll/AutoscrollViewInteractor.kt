@@ -22,15 +22,13 @@ class AutoscrollViewInteractor(
         }
     }
 
-    override fun <R> autoscroll(interaction: ViewInteraction, action: () -> R, error: Throwable): R {
-        val result: R = try {
+    override fun <R> autoscroll(interaction: ViewInteraction, action: () -> R, cachedError: Throwable): R {
+        return try {
             interaction.perform(ViewActions.scrollTo())
+            logger.i("View autoscroll successfully performed.")
             action.invoke()
-        } catch (e: Throwable) {
-            throw error
+        } catch (error: Throwable) {
+            throw cachedError
         }
-
-        logger.i("View autoscroll successfully performed.")
-        return result
     }
 }
