@@ -12,8 +12,7 @@ calling `DocLocScreenshotTestCase#captureScreenshot(String)` method.
         
 ## Usage
 
-To create a single test, you should class which extends `DocLocScreenshotTestCase` as shown 
-below: 
+To create a single test, you should extend `DocLocScreenshotTestCase` class as shown below: 
 
 ```kotlin
 @RunWith(AndroidJUnit4::class)
@@ -45,11 +44,11 @@ class ScreenshotSampleTest : DocLocScreenshotTestCase(
 
 There are two parameters passed in the base constructor: 
 - locales - comma-separated string with locales to run test with;
-- screenshotsDirectory - directory to save screenshot (will be cleared before launching the test).
+- screenshotsDirectory - directory to save screenshot.
 
 For full example, check the [com.kaspersky.kaspressample.tests.docloc.ScreenshotSampleTest]. 
 
-Notice, that the test is marked by `@ScreenShooterTest` annotation. This is intended to 
+Notice, that the test is marked with `@ScreenShooterTest` annotation. This is intended to 
 filter only screenshooter tests to be run. For example, you could pass the 
 annotation to default `AndroidJUnitRunner` with command: 
 
