@@ -13,6 +13,10 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
+/**
+ * An example of [DocLocScreenshotTestCase] usage. For more information see
+ * help/DocLocScreenshotTests.md page.
+ */
 @RunWith(AndroidJUnit4::class)
 class ScreenshotSampleTest : DocLocScreenshotTestCase(
     screenshotsDirectory = File("screenshots"),
