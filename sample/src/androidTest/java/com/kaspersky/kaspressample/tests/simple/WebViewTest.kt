@@ -6,6 +6,7 @@ import androidx.test.espresso.web.webdriver.Locator
 import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
 import androidx.test.runner.AndroidJUnit4
+import com.agoda.kakao.web.WebElementBuilder
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.screen.MainScreen
 import com.kaspersky.kaspressample.screen.WebViewScreen
@@ -89,12 +90,20 @@ class WebViewTest : TestCase() {
                             Locator.XPATH,
                             "//*[@id=\"app\"]/section[5]/div/div/div[2]/div[3]/button"
                         ) {
-                            compose(
-                                this@webView,
-                                { hasText("fuck"); click() },
-                                { hasText("Ask questio"); click() },
-                                { hasText("Ask question"); click() }
-                            )
+                            compose(this@webView) {
+                                +{ _: WebElementBuilder.KWebInteraction ->
+                                    hasText("fuck")
+                                    click()
+                                }
+                                +{ _: WebElementBuilder.KWebInteraction ->
+                                    hasText("Ask questio")
+                                    click()
+                                }
+                                +{ _: WebElementBuilder.KWebInteraction ->
+                                    hasText("Ask question")
+                                    click()
+                                }
+                            }
                         }
                     }
                 }

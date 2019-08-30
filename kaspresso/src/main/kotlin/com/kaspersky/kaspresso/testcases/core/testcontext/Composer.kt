@@ -25,22 +25,28 @@ import com.kaspersky.kaspresso.proxy.ViewAssertionProxy
 abstract class Composer(
     internal val configurator: Configurator
 ) {
-    fun <T> T.compose(vararg actions: T.() -> Unit): Unit
+    fun <T> T.compose(block: ActionsPack<T>.() -> Unit): Unit
             where T : BaseActions, T : BaseAssertions, T : Interceptable<ViewInteraction, ViewAssertion, ViewAction> {
+
+        val actions: List<T.() -> Unit> = ActionsPack<T>().apply(block).actions
 
         val viewInteraction: ViewInteraction = getViewInteraction(actions.first())
 
         intercept {
             onCheck(true) { viewInteraction: ViewInteraction, viewAssertion: ViewAssertion ->
-                viewInteraction.check(ViewAssertionProxy(viewAssertion, configurator.viewAssertionInterceptors))
+                viewInteraction.check(
+                    ViewAssertionProxy(viewAssertion, configurator.viewAssertionInterceptors)
+                )
             }
             onPerform(true) { viewInteraction: ViewInteraction, viewAction: ViewAction ->
-                viewInteraction.perform(ViewActionProxy(viewAction, configurator.viewActionInterceptors))
+                viewInteraction.perform(
+                    ViewActionProxy(viewAction, configurator.viewActionInterceptors)
+                )
             }
         }
 
         configurator.viewInteractors.fold(
-            initial = { invokeComposed(this@compose, *actions) },
+            initial = { invokeComposed(this@compose, actions) },
             operation = { acc, viewInteractor: ViewInteractor -> { viewInteractor.interact(viewInteraction, acc) } }
         ).invoke()
 
@@ -49,8 +55,10 @@ abstract class Composer(
 
     fun <T> T.compose(
         interceptable: Interceptable<Web.WebInteraction<*>, WebAssertion<*>, Atom<*>>,
-        vararg actions: T.() -> Unit
+        block: ActionsPack<T>.() -> Unit
     ): Unit where T : WebActions, T : WebAssertions {
+
+        val actions: List<T.() -> Unit> = ActionsPack<T>().apply(block).actions
 
         val webInteraction: Web.WebInteraction<*> = getWebInteraction(interceptable, actions.first())
 
@@ -61,12 +69,14 @@ abstract class Composer(
                 )
             }
             onPerform(true) { webInteraction: Web.WebInteraction<*>, atom: Atom<*> ->
-                webInteraction.perform(AtomProxy(atom, webInteraction.getMatcher(), configurator.atomInterceptors))
+                webInteraction.perform(
+                    AtomProxy(atom, webInteraction.getMatcher(), configurator.atomInterceptors)
+                )
             }
         }
 
         configurator.webInteractors.fold(
-            initial = { invokeComposed(this@compose, *actions) },
+            initial = { invokeComposed(this@compose, actions) },
             operation = { acc, webInteractor: WebInteractor -> { webInteractor.interact(webInteraction, acc) } }
         ).invoke()
 
@@ -114,10 +124,9 @@ abstract class Composer(
         }
     }
 
-    private fun <T> T.setOldWebInteractionInterceptor(
+    private fun setOldWebInteractionInterceptor(
         interceptable: Interceptable<Web.WebInteraction<*>, WebAssertion<*>, Atom<*>>
-    ): Unit where T : WebActions, T : WebAssertions {
-
+    ) {
         val oldInterceptor = WebInteractionInterceptor(configurator)
 
         interceptable.intercept {
@@ -126,7 +135,7 @@ abstract class Composer(
         }
     }
 
-    private fun <T> invokeComposed(context: T, vararg actions: T.() -> Unit) {
+    private fun <T> invokeComposed(context: T, actions: List<T.() -> Unit>) {
         Configurator.logger.i("Composed action started.")
         var cachedError: Throwable? = null
 
@@ -143,5 +152,14 @@ abstract class Composer(
 
         Configurator.logger.i("Composed action totally failed.")
         throw cachedError!!
+    }
+
+    class ActionsPack<T> {
+
+        internal val actions: MutableList<T.() -> Unit> = arrayListOf()
+
+        operator fun (T.() -> Unit).unaryPlus() {
+            actions += this
+        }
     }
 }

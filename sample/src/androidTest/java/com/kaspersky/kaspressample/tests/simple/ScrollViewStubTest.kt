@@ -50,17 +50,19 @@ class ScrollViewStubTest : TestCase(
                 scrollViewStubScreen {
                     scrollViewStub.isVisible()
 
-                    val action1: KButton.() -> Unit = {
-                        hasText("bzzz")
+                    val action: KButton.() -> Unit = {
+                        hasText("zbzbz")
                         click()
                     }
 
-                    val action2: KButton.() -> Unit = {
-                        hasText("zzzb")
-                        click()
+                    btn5.compose {
+                        +{ it: KButton ->
+                            it.hasText("bzzz")
+                            it.click()
+                        }
+                        +{ it: KButton -> it.hasText("zzzb") }
+                        +action
                     }
-
-                    btn5.compose(action1, action2)
                 }
             }
         }
