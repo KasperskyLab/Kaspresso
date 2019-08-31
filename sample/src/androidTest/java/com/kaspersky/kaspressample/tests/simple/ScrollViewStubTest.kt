@@ -55,6 +55,11 @@ class ScrollViewStubTest : TestCase(
                         click()
                     }
 
+                    compose<KButton> {
+                        or(btn4) { hasText("bzzz") }
+                        or(btn5) { hasText("bzzz") }
+                    }
+
                     btn5.compose {
                         or { hasText("zzzb") }
                         or {

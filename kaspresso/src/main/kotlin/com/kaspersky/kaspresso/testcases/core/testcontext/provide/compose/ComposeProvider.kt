@@ -9,6 +9,9 @@ import com.agoda.kakao.intercept.Interceptable
 
 interface ComposeProvider {
 
+    fun <T> compose(block: ComponentPack<T>.() -> Unit): Unit
+            where T : BaseActions, T : BaseAssertions, T : Interceptable<ViewInteraction, ViewAssertion, ViewAction>
+
     fun <T> T.compose(block: ActionsPack<T>.() -> Unit): Unit
             where T : BaseActions, T : BaseAssertions, T : Interceptable<ViewInteraction, ViewAssertion, ViewAction>
 }

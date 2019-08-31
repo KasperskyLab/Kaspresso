@@ -29,9 +29,18 @@ open class BaseTestContext internal constructor(
 
     val kLogger: KLogger = KLogger(configurator.externalLogger)
 
+    override fun <T> compose(block: ComponentPack<T>.() -> Unit): Unit
+            where T : BaseActions, T : BaseAssertions, T : Interceptable<ViewInteraction, ViewAssertion, ViewAction> =
+        composer.compose(block)
+
     override fun <T> T.compose(block: ActionsPack<T>.() -> Unit): Unit
             where T : BaseActions, T : BaseAssertions, T : Interceptable<ViewInteraction, ViewAssertion, ViewAction> =
         composer.compose(this, block)
+
+    override fun <T> compose(
+        interceptable: Interceptable<Web.WebInteraction<*>, WebAssertion<*>, Atom<*>>,
+        block: ComponentPack<T>.() -> Unit
+    ) where T : WebActions, T : WebAssertions = webComposer.compose(interceptable, block)
 
     override fun <T> T.compose(
         interceptable: Interceptable<Web.WebInteraction<*>, WebAssertion<*>, Atom<*>>,

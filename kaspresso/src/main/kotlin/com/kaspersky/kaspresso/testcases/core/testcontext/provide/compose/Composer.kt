@@ -14,6 +14,52 @@ import com.kaspersky.kaspresso.proxy.ViewAssertionProxy
 
 class Composer(private val configurator: Configurator) {
 
+    fun <T> compose(block: ComponentPack<T>.() -> Unit): Unit
+            where T : BaseActions, T : BaseAssertions, T : Interceptable<ViewInteraction, ViewAssertion, ViewAction> {
+
+        val components: List<Component<T>> = ComponentPack<T>().apply(block).build()
+
+        val firstComponent: Component<T> = components.first()
+        val otherCompoentns: List<Component<T>> = components.subList(1, components.size)
+
+        otherCompoentns.forEach { component: Component<T> ->
+
+            component.element.intercept {
+                onCheck(true) { viewInteraction: ViewInteraction, viewAssertion: ViewAssertion ->
+                    viewInteraction.check(ViewAssertionProxy(viewAssertion, configurator.viewAssertionInterceptors))
+                }
+                onPerform(true) { viewInteraction: ViewInteraction, viewAction: ViewAction ->
+                    viewInteraction.perform(ViewActionProxy(viewAction, configurator.viewActionInterceptors))
+                }
+            }
+        }
+
+        firstComponent.element.intercept {
+            onAll(true) { viewInteraction: ViewInteraction ->
+
+                firstComponent.element.intercept {
+                    onCheck(true) { viewInteraction: ViewInteraction, viewAssertion: ViewAssertion ->
+                        viewInteraction.check(ViewAssertionProxy(viewAssertion, configurator.viewAssertionInterceptors))
+                    }
+                    onPerform(true) { viewInteraction: ViewInteraction, viewAction: ViewAction ->
+                        viewInteraction.perform(ViewActionProxy(viewAction, configurator.viewActionInterceptors))
+                    }
+                }
+
+                configurator.viewInteractors.fold(
+                    initial = { invokeComposed(components) },
+                    operation = { acc, viewInteractor: ViewInteractor ->
+                        { viewInteractor.interact(viewInteraction, acc) }
+                    }
+                ).invoke()
+            }
+        }
+
+        firstComponent.action.invoke(firstComponent.element)
+
+        components.forEach { setOldViewInteractionInterceptor(it.element) }
+    }
+
     fun <T> compose(element: T, block: ActionsPack<T>.() -> Unit): Unit
             where T : BaseActions, T : BaseAssertions, T : Interceptable<ViewInteraction, ViewAssertion, ViewAction> {
 

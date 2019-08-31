@@ -9,6 +9,11 @@ import com.agoda.kakao.web.WebAssertions
 
 interface WebComposeProvider {
 
+    fun <T> compose(
+        interceptable: Interceptable<Web.WebInteraction<*>, WebAssertion<*>, Atom<*>>,
+        block: ComponentPack<T>.() -> Unit
+    ): Unit where T : WebActions, T : WebAssertions
+
     fun <T> T.compose(
         interceptable: Interceptable<Web.WebInteraction<*>, WebAssertion<*>, Atom<*>>,
         block: ActionsPack<T>.() -> Unit
