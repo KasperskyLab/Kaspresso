@@ -6,7 +6,6 @@ import androidx.test.espresso.web.webdriver.Locator
 import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
 import androidx.test.runner.AndroidJUnit4
-import com.agoda.kakao.web.WebElementBuilder
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.screen.MainScreen
 import com.kaspersky.kaspressample.screen.WebViewScreen
