@@ -31,25 +31,32 @@ abstract class Composer(
 
         val actions: List<T.() -> Unit> = ActionsPack<T>().apply(block).build()
 
-        val viewInteraction: ViewInteraction = getViewInteraction(actions.first())
-
         intercept {
-            onCheck(true) { viewInteraction: ViewInteraction, viewAssertion: ViewAssertion ->
-                viewInteraction.check(
-                    ViewAssertionProxy(viewAssertion, configurator.viewAssertionInterceptors)
-                )
-            }
-            onPerform(true) { viewInteraction: ViewInteraction, viewAction: ViewAction ->
-                viewInteraction.perform(
-                    ViewActionProxy(viewAction, configurator.viewActionInterceptors)
-                )
+            onAll(true) { viewInteraction: ViewInteraction ->
+
+                intercept {
+                    onCheck(true) { viewInteraction: ViewInteraction, viewAssertion: ViewAssertion ->
+                        viewInteraction.check(
+                            ViewAssertionProxy(viewAssertion, configurator.viewAssertionInterceptors)
+                        )
+                    }
+                    onPerform(true) { viewInteraction: ViewInteraction, viewAction: ViewAction ->
+                        viewInteraction.perform(
+                            ViewActionProxy(viewAction, configurator.viewActionInterceptors)
+                        )
+                    }
+                }
+
+                configurator.viewInteractors.fold(
+                    initial = { invokeComposed(this@compose, actions) },
+                    operation = { acc, viewInteractor: ViewInteractor ->
+                        { viewInteractor.interact(viewInteraction, acc) }
+                    }
+                ).invoke()
             }
         }
 
-        configurator.viewInteractors.fold(
-            initial = { invokeComposed(this@compose, actions) },
-            operation = { acc, viewInteractor: ViewInteractor -> { viewInteractor.interact(viewInteraction, acc) } }
-        ).invoke()
+        actions.first().invoke(this)
 
         setOldViewInteractionInterceptor()
     }
@@ -61,57 +68,36 @@ abstract class Composer(
 
         val actions: List<T.() -> Unit> = ActionsPack<T>().apply(block).build()
 
-        val webInteraction: Web.WebInteraction<*> = getWebInteraction(interceptable, actions.first())
-
         interceptable.intercept {
-            onCheck(true) { webInteraction: Web.WebInteraction<*>, webAssertion: WebAssertion<*> ->
-                webInteraction.check(
-                    WebAssertionProxy(webAssertion, webInteraction.getMatcher(), configurator.webAssertionInterceptors)
-                )
-            }
-            onPerform(true) { webInteraction: Web.WebInteraction<*>, atom: Atom<*> ->
-                webInteraction.perform(
-                    AtomProxy(atom, webInteraction.getMatcher(), configurator.atomInterceptors)
-                )
+            onAll(true) { webInteraction: Web.WebInteraction<*> ->
+
+                interceptable.intercept {
+                    onCheck(true) { webInteraction: Web.WebInteraction<*>, webAssertion: WebAssertion<*> ->
+                        webInteraction.check(
+                            WebAssertionProxy(
+                                webAssertion,
+                                webInteraction.getMatcher(),
+                                configurator.webAssertionInterceptors
+                            )
+                        )
+                    }
+                    onPerform(true) { webInteraction: Web.WebInteraction<*>, atom: Atom<*> ->
+                        webInteraction.perform(
+                            AtomProxy(atom, webInteraction.getMatcher(), configurator.atomInterceptors)
+                        )
+                    }
+                }
+
+                configurator.webInteractors.fold(
+                    initial = { invokeComposed(this@compose, actions) },
+                    operation = { acc, webInteractor: WebInteractor -> { webInteractor.interact(webInteraction, acc) } }
+                ).invoke()
             }
         }
 
-        configurator.webInteractors.fold(
-            initial = { invokeComposed(this@compose, actions) },
-            operation = { acc, webInteractor: WebInteractor -> { webInteractor.interact(webInteraction, acc) } }
-        ).invoke()
+        actions.first().invoke(this)
 
         setOldWebInteractionInterceptor(interceptable)
-    }
-
-    private fun <T> T.getViewInteraction(action: T.() -> Unit): ViewInteraction
-            where T : BaseActions, T : BaseAssertions, T : Interceptable<ViewInteraction, ViewAssertion, ViewAction> {
-
-        var cachedViewInteraction: ViewInteraction? = null
-
-        intercept {
-            onAll(true) { viewInteraction: ViewInteraction -> cachedViewInteraction = viewInteraction }
-        }
-
-        action.invoke(this)
-
-        return cachedViewInteraction!!
-    }
-
-    private fun <T> T.getWebInteraction(
-        interceptable: Interceptable<Web.WebInteraction<*>, WebAssertion<*>, Atom<*>>,
-        action: T.() -> Unit
-    ): Web.WebInteraction<*> where T : WebActions, T : WebAssertions {
-
-        var cachedWebInteraction: Web.WebInteraction<*>? = null
-
-        interceptable.intercept {
-            onAll(true) { webInteraction: Web.WebInteraction<*> -> cachedWebInteraction = webInteraction }
-        }
-
-        action.invoke(this)
-
-        return cachedWebInteraction!!
     }
 
     private fun <T> T.setOldViewInteractionInterceptor(): Unit
