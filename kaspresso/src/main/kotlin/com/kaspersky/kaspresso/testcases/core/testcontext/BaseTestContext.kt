@@ -14,11 +14,13 @@ import com.agoda.kakao.web.WebAssertions
 import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.device.Device
 import com.kaspersky.kaspresso.logger.KLogger
-import com.kaspersky.kaspresso.testcases.core.compose.*
+import com.kaspersky.kaspresso.testcases.core.testcontext.provide.attempt.AttemptProvider
+import com.kaspersky.kaspresso.testcases.core.testcontext.provide.compose.*
+import com.kaspersky.kaspresso.testcases.core.testcontext.provide.wait.WaitProvider
 
 open class BaseTestContext internal constructor(
     configurator: Configurator
-) : ComposeProvider, WebComposeProvider {
+) : AttemptProvider, WaitProvider, ComposeProvider, WebComposeProvider {
 
     private val composer: Composer = Composer(configurator)
     private val webComposer: WebComposer = WebComposer(configurator)

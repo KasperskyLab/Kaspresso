@@ -1,4 +1,4 @@
-package com.kaspersky.kaspresso.testcases.core.compose
+package com.kaspersky.kaspresso.testcases.core.testcontext.provide.compose
 
 import com.kaspersky.kaspresso.configurator.Configurator
 

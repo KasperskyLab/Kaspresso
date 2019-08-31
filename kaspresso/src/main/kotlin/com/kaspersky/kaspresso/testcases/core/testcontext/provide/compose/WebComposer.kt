@@ -1,4 +1,4 @@
-package com.kaspersky.kaspresso.testcases.core.compose
+package com.kaspersky.kaspresso.testcases.core.testcontext.provide.compose
 
 import androidx.test.espresso.web.assertion.WebAssertion
 import androidx.test.espresso.web.assertion.WebAssertionProxy
