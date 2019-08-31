@@ -3,8 +3,8 @@ package com.kaspersky.kaspressample.tests.docloc.advanced
 import android.support.test.rule.ActivityTestRule
 import com.kaspersky.kaspressample.docloc.FragmentTestActivity
 import com.kaspersky.kaspresso.testcases.api.testcase.DocLocScreenshotTestCase
-import org.junit.Rule
 import java.io.File
+import org.junit.Rule
 
 open class ProductDocLocScreenshotTestCase : DocLocScreenshotTestCase(
     screenshotsDirectory = File("screenshots"),
@@ -16,5 +16,4 @@ open class ProductDocLocScreenshotTestCase : DocLocScreenshotTestCase(
 
     protected val activity: FragmentTestActivity
         get() = activityTestRule.activity
-
 }
