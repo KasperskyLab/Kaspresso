@@ -91,15 +91,15 @@ class WebViewTest : TestCase() {
                             "//*[@id=\"app\"]/section[5]/div/div/div[2]/div[3]/button"
                         ) {
                             compose(this@webView) {
-                                and {
+                                or {
                                     hasText("fuck")
                                     click()
                                 }
-                                and {
+                                or {
                                     hasText("Ask questio")
                                     click()
                                 }
-                                and {
+                                or {
                                     hasText("Ask question")
                                     click()
                                 }

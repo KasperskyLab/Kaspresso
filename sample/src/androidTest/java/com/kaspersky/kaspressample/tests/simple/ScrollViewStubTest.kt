@@ -56,12 +56,12 @@ class ScrollViewStubTest : TestCase(
                     }
 
                     btn5.compose {
-                        and { hasText("zzzb") }
-                        and {
+                        or { hasText("zzzb") }
+                        or {
                             hasText("bzzz")
                             click()
                         }
-                        and(action)
+                        or(action)
                     }
                 }
             }
