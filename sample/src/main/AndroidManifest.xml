@@ -29,6 +29,12 @@
                 android:theme="@style/Theme.AppCompat.NoActionBar"
         />
 
+        <activity
+                android:name=".docloc.FragmentTestActivity"
+                android:theme="@style/Theme.AppCompat.NoActionBar"
+        />
+
+
     </application>
 
 </manifest>
