@@ -21,6 +21,7 @@ import com.kaspersky.kaspresso.interceptors.interactors.WebInteractor
 import com.kaspersky.kaspresso.proxy.AtomProxy
 import com.kaspersky.kaspresso.proxy.ViewActionProxy
 import com.kaspersky.kaspresso.proxy.ViewAssertionProxy
+import java.lang.IllegalArgumentException
 
 abstract class Composer(
     internal val configurator: Configurator
@@ -28,7 +29,7 @@ abstract class Composer(
     fun <T> T.compose(block: ActionsPack<T>.() -> Unit): Unit
             where T : BaseActions, T : BaseAssertions, T : Interceptable<ViewInteraction, ViewAssertion, ViewAction> {
 
-        val actions: List<T.() -> Unit> = ActionsPack<T>().apply(block).actions
+        val actions: List<T.() -> Unit> = ActionsPack<T>().apply(block).build()
 
         val viewInteraction: ViewInteraction = getViewInteraction(actions.first())
 
@@ -58,7 +59,7 @@ abstract class Composer(
         block: ActionsPack<T>.() -> Unit
     ): Unit where T : WebActions, T : WebAssertions {
 
-        val actions: List<T.() -> Unit> = ActionsPack<T>().apply(block).actions
+        val actions: List<T.() -> Unit> = ActionsPack<T>().apply(block).build()
 
         val webInteraction: Web.WebInteraction<*> = getWebInteraction(interceptable, actions.first())
 
@@ -156,10 +157,15 @@ abstract class Composer(
 
     class ActionsPack<T> {
 
-        internal val actions: MutableList<T.() -> Unit> = arrayListOf()
+        private val actions: MutableList<T.() -> Unit> = arrayListOf()
 
         fun or(action: T.() -> Unit) {
             actions += action
+        }
+
+        internal fun build(): MutableList<T.() -> Unit> {
+            if (actions.isEmpty()) throw IllegalArgumentException("Nothing to compose")
+            return actions
         }
     }
 }
