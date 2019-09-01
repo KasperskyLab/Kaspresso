@@ -3,16 +3,16 @@ package com.kaspersky.kaspresso.proxy
 import androidx.test.espresso.web.model.Atom
 import androidx.test.espresso.web.model.ElementReference
 import androidx.test.espresso.web.model.Evaluation
-import com.kaspersky.kaspresso.interceptors.view.AtomInterceptor
+import com.kaspersky.kaspresso.interceptors.watcher.view.AtomWatcherInterceptor
 import org.hamcrest.Matcher
 
 /**
- * A proxy-wrapper of [Atom] for interceptors calls.
+ * A proxy-wrapper of [Atom] for watcherInterceptors calls.
  */
 class AtomProxy<R>(
     val atom: Atom<R>,
     val matcher: Matcher<*>,
-    private val interceptors: List<AtomInterceptor>
+    private val watcherInterceptors: List<AtomWatcherInterceptor>
 ) : Atom<R> {
 
     /**
@@ -26,13 +26,13 @@ class AtomProxy<R>(
     }
 
     /**
-     * Calls interceptors before [Atom.transform] on wrapped [atom] is called.
+     * Calls watcherInterceptors before [Atom.transform] on wrapped [atom] is called.
      *
      * @param evaluation represents the results of a Javascript execution.
      * @return [R] a result type of the atom.
      */
     override fun transform(evaluation: Evaluation?): R {
-        interceptors.forEach { it.intercept(this, evaluation) }
+        watcherInterceptors.forEach { it.intercept(this, evaluation) }
         return atom.transform(evaluation)
     }
 
