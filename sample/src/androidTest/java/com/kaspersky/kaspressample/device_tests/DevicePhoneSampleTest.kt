@@ -1,4 +1,4 @@
-package com.kaspersky.kaspressample.tests.device
+package com.kaspersky.kaspressample.device_tests
 
 import android.Manifest
 import android.provider.CallLog
@@ -51,7 +51,10 @@ class DevicePhoneSampleTest : TestCase() {
             }
 
             step("Receive SMS message") {
-                device.phone.receiveSms(PHONE_NUMBER, SMS_MESSAGE_TEXT)
+                device.phone.receiveSms(
+                    PHONE_NUMBER,
+                    SMS_MESSAGE_TEXT
+                )
                 Screen.idle(CONTENT_UPDATE_DELAY)
 
                 val messageInfo = getLastSmsInfo()

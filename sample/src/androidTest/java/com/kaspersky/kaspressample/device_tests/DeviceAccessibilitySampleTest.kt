@@ -1,4 +1,4 @@
-package com.kaspersky.kaspressample.tests.device
+package com.kaspersky.kaspressample.device_tests
 
 import android.os.Build
 import android.provider.Settings
@@ -36,8 +36,11 @@ class DeviceAccessibilitySampleTest : TestCase() {
         }.after {
             device.accessibility.disable()
         }.run {
+
             step("Enable accessibility service") {
-                device.accessibility.enable(device.targetContext.packageName, SERVICE_CLASS_NAME)
+                device.accessibility.enable(device.targetContext.packageName,
+                    SERVICE_CLASS_NAME
+                )
                 Screen.idle(SETTINGS_UPDATE_DELAY)
 
                 assertTrue(isAccessibilityServiceEnabled())

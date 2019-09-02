@@ -1,4 +1,4 @@
-package com.kaspersky.kaspressample.tests.device
+package com.kaspersky.kaspressample.device_tests
 
 import android.Manifest
 import android.location.Location
@@ -74,10 +74,14 @@ class DeviceLocationSampleTest : TestCase() {
             }
 
             step("Set fake location") {
-                device.location.setLocation(MUNICH_LOCATION_LAT, MUNICH_LOCATION_LNG)
+                device.location.setLocation(
+                    MUNICH_LOCATION_LAT,
+                    MUNICH_LOCATION_LNG
+                )
 
                 /** Request single update to apply changes */
-                manager.requestSingleUpdate(LocationManager.GPS_PROVIDER, EMPTY_LISTENER,
+                manager.requestSingleUpdate(LocationManager.GPS_PROVIDER,
+                    EMPTY_LISTENER,
                     Looper.getMainLooper())
 
                 attempt(timeoutMs = 10_000, intervalMs = 500) {
@@ -86,8 +90,14 @@ class DeviceLocationSampleTest : TestCase() {
                 }
 
                 val location = manager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-                assertEquals(MUNICH_LOCATION_LAT, location.latitude, DELTA)
-                assertEquals(MUNICH_LOCATION_LAT, location.latitude, DELTA)
+                assertEquals(
+                    MUNICH_LOCATION_LAT, location.latitude,
+                    DELTA
+                )
+                assertEquals(
+                    MUNICH_LOCATION_LAT, location.latitude,
+                    DELTA
+                )
             }
         }
     }

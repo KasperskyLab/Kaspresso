@@ -4,7 +4,7 @@
 
 ### **Structure** 
 
-**Device** provides these managers: <br>
+**Device** provides these managers: 
 
 1. `uiDevice` returns an instance of [android.support.test.uiautomator.UiDevice].
 2. `apps` allows to install or uninstall applications.

@@ -1,4 +1,4 @@
-package com.kaspersky.kaspressample.tests.device
+package com.kaspersky.kaspressample.device_tests
 
 import android.net.ConnectivityManager
 import android.net.wifi.WifiManager
@@ -18,7 +18,7 @@ import org.junit.runner.RunWith
 class DeviceInternetSampleTest : TestCase() {
 
     companion object {
-        const val NETWORK_ESTABLISHMENT_DELAY = 1_500L
+        private const val NETWORK_ESTABLISHMENT_DELAY = 1_500L
     }
 
     @get:Rule
@@ -35,13 +35,13 @@ class DeviceInternetSampleTest : TestCase() {
             step("Disable internet") {
                 device.internet.disable()
                 Screen.idle(NETWORK_ESTABLISHMENT_DELAY)
-                assertFalse(isConnectedOrConnecting())
+                assertTrue(isDisconnected())
             }
 
             step("Enable internet") {
                 device.internet.enable()
                 Screen.idle(NETWORK_ESTABLISHMENT_DELAY)
-                assertTrue(isConnectedOrConnecting())
+                assertFalse(isDisconnected())
             }
 
             step("Toggle WiFi") {
@@ -56,10 +56,9 @@ class DeviceInternetSampleTest : TestCase() {
         }
     }
 
-    private fun BaseTestContext.isConnectedOrConnecting(): Boolean {
-        val manager = device.context.getSystemService(ConnectivityManager::class.java)
-        return manager.activeNetworkInfo != null
-    }
+    private fun BaseTestContext.isDisconnected(): Boolean =
+        device.context.getSystemService(ConnectivityManager::class.java).activeNetworkInfo == null
+
 
     private fun BaseTestContext.isWiFiEnabled(): Boolean =
         device.context.getSystemService(WifiManager::class.java).isWifiEnabled

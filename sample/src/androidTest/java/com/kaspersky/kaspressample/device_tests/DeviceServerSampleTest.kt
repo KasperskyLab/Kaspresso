@@ -1,4 +1,4 @@
-package com.kaspersky.kaspressample.tests.device
+package com.kaspersky.kaspressample.device_tests
 
 import android.support.test.runner.AndroidJUnit4
 import com.kaspersky.kaspresso.device.server.AdbServer

@@ -1,4 +1,4 @@
-package com.kaspersky.kaspressample.tests.device
+package com.kaspersky.kaspressample.device_tests
 
 import android.Manifest
 import android.content.Context
@@ -46,7 +46,9 @@ class DeviceScreenshotSampleTest : TestCase() {
     }
 
     private fun BaseTestContext.screenshotExists(): Boolean {
-        return containsFileWithName(screenshotsDir(), SCREENSHOT_TAG)
+        return containsFileWithName(screenshotsDir(),
+            SCREENSHOT_TAG
+        )
     }
 
     private fun BaseTestContext.screenshotsDir(): File? {
