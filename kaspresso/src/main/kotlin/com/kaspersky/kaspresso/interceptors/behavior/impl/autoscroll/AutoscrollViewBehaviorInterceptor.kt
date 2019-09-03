@@ -3,9 +3,9 @@ package com.kaspersky.kaspresso.interceptors.behavior.impl.autoscroll
 import androidx.test.espresso.PerformException
 import androidx.test.espresso.ViewInteraction
 import androidx.test.espresso.action.ViewActions
-import com.kaspersky.kaspresso.interceptors.behavior.ViewBehaviorInteractor
+import com.kaspersky.kaspresso.interceptors.behavior.ViewBehaviorInterceptor
 
-class AutoscrollViewBehaviorInteractor : ViewBehaviorInteractor {
+class AutoscrollViewBehaviorInterceptor : ViewBehaviorInterceptor {
 
     override fun <R> interact(interaction: ViewInteraction, action: () -> R): R {
         return try {

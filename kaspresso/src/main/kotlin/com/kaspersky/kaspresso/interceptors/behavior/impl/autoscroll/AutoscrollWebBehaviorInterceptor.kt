@@ -3,9 +3,9 @@ package com.kaspersky.kaspresso.interceptors.behavior.impl.autoscroll
 import androidx.test.espresso.PerformException
 import androidx.test.espresso.web.sugar.Web
 import androidx.test.espresso.web.webdriver.DriverAtoms
-import com.kaspersky.kaspresso.interceptors.behavior.WebBehaviorInteractor
+import com.kaspersky.kaspresso.interceptors.behavior.WebBehaviorInterceptor
 
-class AutoscrollWebBehaviorInteractor : WebBehaviorInteractor {
+class AutoscrollWebBehaviorInterceptor : WebBehaviorInterceptor {
 
     override fun <R> interact(interaction: Web.WebInteraction<*>, action: () -> R): R {
         return try {

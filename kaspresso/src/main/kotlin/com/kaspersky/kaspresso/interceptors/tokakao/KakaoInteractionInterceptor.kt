@@ -1,4 +1,4 @@
-package com.kaspersky.kaspresso.interceptors.to_kakao
+package com.kaspersky.kaspresso.interceptors.tokakao
 
 import com.kaspersky.kaspresso.configurator.Configurator
 

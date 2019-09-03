@@ -2,13 +2,13 @@ package com.kaspersky.kaspresso.interceptors.behavior.impl.flakysafety
 
 import androidx.test.espresso.ViewInteraction
 import com.kaspersky.kaspresso.flakysafety.attempt
-import com.kaspersky.kaspresso.interceptors.behavior.ViewBehaviorInteractor
+import com.kaspersky.kaspresso.interceptors.behavior.ViewBehaviorInterceptor
 
 /**
  * An implementation of [Interactor] that performs multiple attempts to interact an action or an assertion to
  * provide flaky safety.
  */
-class FlakySafeViewBehaviorInteractor : ViewBehaviorInteractor {
+class FlakySafeViewBehaviorInterceptor : ViewBehaviorInterceptor {
 
     /**
      * Performs multiple attempts to interact an action or an assertion.

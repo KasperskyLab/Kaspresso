@@ -2,9 +2,9 @@ package com.kaspersky.kaspresso.interceptors.behavior.impl.flakysafety
 
 import androidx.test.espresso.web.sugar.Web
 import com.kaspersky.kaspresso.flakysafety.attempt
-import com.kaspersky.kaspresso.interceptors.behavior.WebBehaviorInteractor
+import com.kaspersky.kaspresso.interceptors.behavior.WebBehaviorInterceptor
 
-class FlakySafeWebBehaviorInteractor : WebBehaviorInteractor {
+class FlakySafeWebBehaviorInterceptor : WebBehaviorInterceptor {
 
     /**
      * Performs multiple attempts to interact an action or an assertion.
