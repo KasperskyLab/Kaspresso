@@ -10,10 +10,10 @@
     <string name="main_screen_description">Main Screen</string>
 
     <!-- Device Sample Activity -->
-    <string name="device_sample_title">Device Sample</string>
-    <string name="device_sample_accessibility_service_title">Kaspresso Sample Accessibility Service</string>
-    <string name="device_sample_input_hint">Type text here…</string>
-    <string name="device_request_permission">Request Permission</string>
+    <string name="device_sample_title" translatable="false">Device Sample</string>
+    <string name="device_sample_accessibility_service_title" translatable="false">Kaspresso Sample Accessibility Service</string>
+    <string name="device_sample_input_hint" translatable="false">Type text here…</string>
+    <string name="device_request_permission" translatable="false">Request Permission</string>
 
     <!-- Screenshooter sample test -->
     <string name="increment">Increment</string>
