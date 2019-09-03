@@ -71,7 +71,7 @@ import org.junit.Rule
  *      }
  *  ```
  *
- *  @param screenshotsDirectory directory to save screenshot. Will be cleared before launching the test.
+ *  @param screenshotsDirectory directory to save screenshot.
  *  @param locales comma-separated string with locales to run test with.
  */
 abstract class DocLocScreenshotTestCase(

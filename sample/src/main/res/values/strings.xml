@@ -14,4 +14,11 @@
     <string name="device_sample_accessibility_service_title">Kaspresso Sample Accessibility Service</string>
     <string name="device_sample_input_hint">Type text here…</string>
     <string name="device_request_permission">Request Permission</string>
+
+    <!-- Screenshooter sample test -->
+    <string name="increment">Increment</string>
+    <string name="decrement">Decrement</string>
+    <string name="change_color_to_black">Set background to black</string>
+    <string name="change_color_to_red">Set background to red</string>
+    <string name="counter_value">Current value: %d</string>
 </resources>

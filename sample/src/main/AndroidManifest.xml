@@ -36,6 +36,12 @@
         />
 
         <activity
+                android:name=".docloc.FragmentTestActivity"
+                android:theme="@style/Theme.AppCompat.NoActionBar"
+        />
+
+
+        <activity
                 android:name=".devicesample.DeviceSampleActivity"
                 android:label="@string/device_sample_title"
         />
