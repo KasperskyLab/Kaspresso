@@ -59,7 +59,6 @@ class DeviceInternetSampleTest : TestCase() {
     private fun BaseTestContext.isDisconnected(): Boolean =
         device.context.getSystemService(ConnectivityManager::class.java).activeNetworkInfo == null
 
-
     private fun BaseTestContext.isWiFiEnabled(): Boolean =
         device.context.getSystemService(WifiManager::class.java).isWifiEnabled
 }
