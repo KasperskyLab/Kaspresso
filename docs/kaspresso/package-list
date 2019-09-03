@@ -30,8 +30,8 @@ com.kaspersky.kaspresso.extensions.other
 com.kaspersky.kaspresso.extensions.spoonext
 com.kaspersky.kaspresso.flakysafety
 com.kaspersky.kaspresso.interceptors
-com.kaspersky.kaspresso.interceptors.view.impl.flakysafety
-com.kaspersky.kaspresso.interceptors.view.impl.logging
+com.kaspersky.kaspresso.interceptors.watcher_interceptors.view.impl.flakysafety
+com.kaspersky.kaspresso.interceptors.watcher_interceptors.view.impl.logging
 com.kaspersky.kaspresso.kviews
 com.kaspersky.kaspresso.logger
 com.kaspersky.kaspresso.matchers.canscroll

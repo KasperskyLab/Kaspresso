@@ -3,15 +3,15 @@ package com.kaspersky.kaspresso.proxy
 import android.view.View
 import androidx.test.espresso.UiController
 import androidx.test.espresso.ViewAction
-import com.kaspersky.kaspresso.interceptors.view.ViewActionInterceptor
+import com.kaspersky.kaspresso.interceptors.watcher.view.ViewActionWatcherInterceptor
 import org.hamcrest.Matcher
 
 /**
- * A proxy-wrapper of [ViewAction] for interceptors calls.
+ * A proxy-wrapper of [ViewAction] for watcherInterceptors calls.
  */
 class ViewActionProxy(
     private val viewAction: ViewAction,
-    private val interceptors: List<ViewActionInterceptor>
+    private val watcherInterceptors: List<ViewActionWatcherInterceptor>
 ) : ViewAction {
 
     /**
@@ -29,13 +29,13 @@ class ViewActionProxy(
     override fun getConstraints(): Matcher<View> = viewAction.constraints
 
     /**
-     * Calls interceptors before [ViewAction.perform] on wrapped [viewAction] is called.
+     * Calls watcherInterceptors before [ViewAction.perform] on wrapped [viewAction] is called.
      *
      * @param uiController the controller to use to interact with the UI.
      * @param view the view to act upon. never null.
      */
     override fun perform(uiController: UiController, view: View) {
-        interceptors.forEach { it.intercept(viewAction, view) }
+        watcherInterceptors.forEach { it.intercept(viewAction, view) }
         viewAction.perform(uiController, view)
     }
 }
