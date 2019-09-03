@@ -1,6 +1,6 @@
 package com.kaspersky.kaspresso.device.files
 
-import com.kaspersky.kaspresso.device.server.AdbServer
+import com.kaspersky.kaspresso.device.server.AdbServerWrapper
 
 /**
  * Default implementation of Files interface.
@@ -16,7 +16,7 @@ class FilesImpl : Files {
      *  @param devicePath a path to copy.
      */
     override fun push(serverPath: String, devicePath: String) {
-        AdbServer.performAdb("push $serverPath $devicePath")
+        AdbServerWrapper.performAdb("push $serverPath $devicePath")
     }
 
     /**
@@ -27,6 +27,6 @@ class FilesImpl : Files {
      *  @param path a path to remove
      */
     override fun remove(path: String) {
-        AdbServer.performShell("rm -f $path")
+        AdbServerWrapper.performShell("rm -f $path")
     }
 }

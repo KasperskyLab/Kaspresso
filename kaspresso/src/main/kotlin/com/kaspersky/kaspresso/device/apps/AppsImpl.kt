@@ -7,7 +7,7 @@ import android.support.test.uiautomator.By
 import android.support.test.uiautomator.UiDevice
 import android.support.test.uiautomator.UiSelector
 import android.support.test.uiautomator.Until
-import com.kaspersky.kaspresso.device.server.AdbServer
+import com.kaspersky.kaspresso.device.server.AdbServerWrapper
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import org.hamcrest.CoreMatchers
 import org.hamcrest.MatcherAssert
@@ -42,7 +42,7 @@ class AppsImpl(
      *  @param apkPath a path to an apk to be installed. The apk is hosted on the test server.
      */
     override fun install(apkPath: String) {
-        AdbServer.performAdb("install $apkPath")
+        AdbServerWrapper.performAdb("install $apkPath")
     }
 
     /**
@@ -53,7 +53,7 @@ class AppsImpl(
      *  @param packageName an android package name of an app to be deleted.
      */
     override fun uninstall(packageName: String) {
-        AdbServer.performAdb("uninstall $packageName")
+        AdbServerWrapper.performAdb("uninstall $packageName")
     }
 
     override fun waitForLauncher(timeout: Long, launcherPackageName: String) {

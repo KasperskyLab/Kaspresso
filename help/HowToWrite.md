@@ -257,5 +257,17 @@ If you set your test data by ```init-transform``` methods using then this test d
 2. ```kLogger``` <br>
 It's a logger for tests allowed to output logs by more appropriate and readable form
 3. ```device``` <br>
-It's a special interface given beautiful possibilities to do a lot of useful things at the test. More info about ```device``` at // bla-bla-bla
+It's a special interface given beautiful possibilities to do a lot of useful things at the test. <br>
+Implementations of ```device``` use UiAutomator and AdbServer under the hood. 
+
+### AdbServer
+As it was mentioned above, ```device``` uses AdbServer under the hood. 
+The more detailed info you can find out at [AdbServer repository](https://github.com/matzuk/AdbServer). <br>
+To start to work with ```device``` or special object [AdbServerWrapper] 
+that is simple comfortable wrapper over [AdbServer repository](https://github.com/matzuk/AdbServer) you need to execute 
+*artifacts/desktop.jar* on your local machine or a server where you run tests. <br>
+The command to execute is
+```
+java -jar desktop.jar
+```
 
