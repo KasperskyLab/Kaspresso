@@ -1,6 +1,5 @@
 package com.kaspersky.kaspresso.device.server
 
-import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.test_server.AdbTerminal
 import com.kaspersky.test_server.api.CommandResult
 import com.kaspersky.test_server.api.ExecutorResultStatus
@@ -68,7 +67,8 @@ object AdbServer {
         return commands.asSequence()
             .map { command -> command to executor.invoke(command) }
             .onEach { (command, result) ->
-                Configurator.logger.i("command=$command was performed with result=$result")
+                // TODO
+//                Configurator.logger.i("command=$command was performed with result=$result")
             }
             .onEach { (command, result) ->
                 if (result.status == ExecutorResultStatus.FAILED)

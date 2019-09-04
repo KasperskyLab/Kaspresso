@@ -58,7 +58,7 @@ class OpenHomeScreenParametrizedTest : BaseParametrizedTest() {
             makeOwner(ownerSurname = "Pichai", companyName = "Google")
         }.run {
             step("Open Home Screen") {
-                kLogger.i(data.companies.toString())
+                testLogger.i(data.companies.toString())
 
                 mainScreen {
                     descriptionText {

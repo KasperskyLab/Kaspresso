@@ -10,9 +10,9 @@ import com.kaspersky.kaspresso.logger.UiTestLogger
  * @param action an action that to be invoked.
  * @return [T] as it is a result of [action] invocation.
  */
-fun <T> wait(
-    timeoutMs: Long = Configurator.attemptsTimeoutMs,
-    logger: UiTestLogger = Configurator.logger,
+internal fun <T> wait(
+    timeoutMs: Long,
+    logger: UiTestLogger,
     action: () -> T
 ): T {
     logger.i("Waiting for $timeoutMs ms")

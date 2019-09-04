@@ -28,6 +28,7 @@ import com.kaspersky.kaspresso.device.phone.Phone
 import com.kaspersky.kaspresso.device.phone.PhoneImpl
 import com.kaspersky.kaspresso.device.screenshots.Screenshots
 import com.kaspersky.kaspresso.device.screenshots.ScreenshotsImpl
+import com.kaspersky.kaspresso.flakysafety.FlakySafetyParams
 import com.kaspersky.kaspresso.interceptors.interaction.impl.DataInteractionInterceptor
 import com.kaspersky.kaspresso.interceptors.interaction.impl.ViewInteractionInterceptor
 import com.kaspersky.kaspresso.interceptors.interaction.impl.WebInteractionInterceptor
@@ -100,7 +101,7 @@ import com.kaspersky.kaspresso.testcases.core.testcontext.TestContext
  * Interceptors work using decorator pattern. First interceptor wraps others.
  * @param testRunInterceptors An interceptors set that actually manages the execution of test sections
  * [com.kaspersky.kaspresso.testcases.models.TestInfo]. Interceptor works using decorator pattern. First interceptor wraps others.
- * @param externalLogger Holds an implementation of [UiTestLogger] interface for external usage.
+ * @param testLogger Holds an implementation of [UiTestLogger] interface for external usage.
  */
 class Configurator(
     internal val apps: Apps,
@@ -123,40 +124,19 @@ class Configurator(
     internal val webInteractors: List<WebInteractor>,
     internal val stepInterceptors: List<StepInterceptor>,
     internal val testRunInterceptors: List<TestRunInterceptor>,
-    internal val externalLogger: UiTestLogger
+
+    internal val libLogger: UiTestLogger,
+    internal val testLogger: UiTestLogger,
+
+    internal val flakySafetyParams: FlakySafetyParams
 ) {
-    companion object {
+    private companion object {
 
-        internal const val DEFAULT_ATTEMPTS_TIMEOUT_MS: Long = 2_000L
-        internal const val DEFAULT_ATTEMPTS_INTERVAL_MS: Long = 500L
+        private const val DEFAULT_ATTEMPTS_TIMEOUT_MS: Long = 2_000L
+        private const val DEFAULT_ATTEMPTS_INTERVAL_MS: Long = 500L
 
-        internal const val DEFAULT_INNER_LOGGER_TAG: String = "KASPRESSO"
-        internal const val DEFAULT_EXTERNAL_LOGGER_TAG: String = "KASPRESSO_SPECIAL"
-
-        /**
-         * A timeout for all action attempts in milliseconds.
-         */
-        internal var attemptsTimeoutMs: Long = DEFAULT_ATTEMPTS_TIMEOUT_MS
-
-        /**
-         * A frequency of action attempts in milliseconds.
-         */
-        internal var attemptsIntervalMs: Long = DEFAULT_ATTEMPTS_INTERVAL_MS
-
-        /**
-         * Exceptions that doesn't stop attempts.
-         */
-        internal var allowedExceptionsForAttempt: Set<Class<out Throwable>> =
-            setOf(
-                PerformException::class.java,
-                NoMatchingViewException::class.java,
-                AssertionError::class.java
-            )
-
-        /**
-         * Holds an implementation of [UiTestLogger] interface for inner framework usage.
-         */
-        internal var logger: UiTestLogger = UiTestLoggerImpl(DEFAULT_INNER_LOGGER_TAG)
+        private const val DEFAULT_LIB_LOGGER_TAG: String = "KASPRESSO"
+        private const val DEFAULT_TEST_LOGGER_TAG: String = "KASPRESSO_TEST"
     }
 
     /**
@@ -169,16 +149,29 @@ class Configurator(
             /**
              * Puts the default settings pack to [Builder].
              * Please be aware if you add some settings after [default] method. You can catch inconsistent state of the
-             * [Builder]. For example if you change [logger] after [default] method than all interceptors will work with
-             * old [logger].
+             * [Builder]. For example if you change [libLogger] after [default] method than all interceptors will work with
+             * old [libLogger].
              *
              * @return an existing instance of [Builder].
              */
             fun default(): Builder {
                 return Builder().apply {
 
-                    viewActionInterceptors = mutableListOf(LoggingViewActionInterceptor(logger))
-                    viewAssertionInterceptors = mutableListOf(LoggingViewAssertionInterceptor(logger))
+                    viewActionInterceptors = mutableListOf(
+                        LoggingViewActionInterceptor(libLogger)
+                    )
+
+                    viewAssertionInterceptors = mutableListOf(
+                        LoggingViewAssertionInterceptor(libLogger)
+                    )
+
+                    atomInterceptors = mutableListOf(
+                        LoggingAtomInterceptor(libLogger)
+                    )
+
+                    webAssertionInterceptors = mutableListOf(
+                        LoggingWebAssertionInterceptor(libLogger)
+                    )
 
                     atomInterceptors = mutableListOf(LoggingAtomInterceptor(logger))
                     webAssertionInterceptors = mutableListOf(LoggingWebAssertionInterceptor(logger))
@@ -190,29 +183,32 @@ class Configurator(
                     failureInterceptor = LoggingFailureInterceptor(logger)
 
                     stepInterceptors = mutableListOf(
-                        LoggingStepInterceptor(logger),
+                        LoggingStepInterceptor(libLogger),
                         ScreenshotStepInterceptor(screenshots)
                     )
 
                     testRunInterceptors = mutableListOf(
-                        TestRunLoggerInterceptor(logger),
+                        TestRunLoggerInterceptor(libLogger),
                         TestRunnerScreenshotInterceptor(screenshots),
-                        BuildStepReportInterceptor(AllureReportWriter(logger))
+                        BuildStepReportInterceptor(AllureReportWriter(libLogger))
                     )
                 }
             }
         }
 
-        var attemptsTimeoutMs: Long = DEFAULT_ATTEMPTS_TIMEOUT_MS
-        var attemptsIntervalMs: Long = DEFAULT_ATTEMPTS_INTERVAL_MS
-        var allowedExceptionsForAttempt: Set<Class<out Throwable>> = setOf(
-            PerformException::class.java,
-            NoMatchingViewException::class.java,
-            AssertionError::class.java
-        )
+        var flakySafetyParams: FlakySafetyParams =
+            FlakySafetyParams(
+                DEFAULT_ATTEMPTS_TIMEOUT_MS,
+                DEFAULT_ATTEMPTS_INTERVAL_MS,
+                setOf(
+                    PerformException::class.java,
+                    NoMatchingViewException::class.java,
+                    AssertionError::class.java
+                )
+            )
 
-        var logger: UiTestLogger = UiTestLoggerImpl(DEFAULT_INNER_LOGGER_TAG)
-        var externalLogger: UiTestLogger = UiTestLoggerImpl(DEFAULT_EXTERNAL_LOGGER_TAG)
+        var libLogger: UiTestLogger = UiTestLoggerImpl(DEFAULT_LIB_LOGGER_TAG)
+        var testLogger: UiTestLogger = UiTestLoggerImpl(DEFAULT_TEST_LOGGER_TAG)
 
         var apps: Apps =
             AppsImpl(
@@ -226,7 +222,7 @@ class Configurator(
         var phone: Phone = PhoneImpl()
         var location: Location = LocationImpl()
         var keyboard: Keyboard = KeyboardImpl()
-        var screenshots: Screenshots = ScreenshotsImpl(logger, activities)
+        var screenshots: Screenshots = ScreenshotsImpl(libLogger, activities)
         var accessibility: Accessibility = AccessibilityImpl()
         var permissions: Permissions =
             PermissionsImpl(libLogger, UiDevice.getInstance(InstrumentationRegistry.getInstrumentation()))
@@ -284,7 +280,10 @@ class Configurator(
                 stepInterceptors = stepInterceptors,
                 testRunInterceptors = testRunInterceptors,
 
-                externalLogger = externalLogger
+                libLogger = libLogger,
+                testLogger = testLogger,
+
+                flakySafetyParams = flakySafetyParams
             )
 
             failureInterceptor?.let { Espresso.setFailureHandler(it::interceptAndThrow) }
@@ -306,12 +305,6 @@ class Configurator(
                     onPerform(isOverride = true, interceptor = webInteractionInterceptor::interceptPerform)
                 }
             }
-
-            Configurator.attemptsTimeoutMs = attemptsTimeoutMs
-            Configurator.attemptsIntervalMs = attemptsIntervalMs
-            Configurator.allowedExceptionsForAttempt = allowedExceptionsForAttempt
-
-            Configurator.logger = logger
 
             return configurator
         }
