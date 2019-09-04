@@ -263,7 +263,7 @@ Implementations of ```device``` use UiAutomator and AdbServer under the hood.
 ### AdbServer
 As it was mentioned above, ```device``` uses AdbServer under the hood. 
 The more detailed info you can find out at [AdbServer repository](https://github.com/matzuk/AdbServer). <br>
-To start to work with ```device``` or special object [AdbServerWrapper] 
+To start to work with ```device``` or special object [AdbServer] 
 that is simple comfortable wrapper over [AdbServer repository](https://github.com/matzuk/AdbServer) you need to execute 
 *artifacts/desktop.jar* on your local machine or a server where you run tests. <br>
 The command to execute is

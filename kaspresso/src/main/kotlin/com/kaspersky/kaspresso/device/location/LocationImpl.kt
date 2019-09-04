@@ -1,6 +1,6 @@
 package com.kaspersky.kaspresso.device.location
 
-import com.kaspersky.kaspresso.device.server.AdbServerWrapper
+import com.kaspersky.kaspresso.device.server.AdbServer
 
 class LocationImpl : Location {
 
@@ -28,10 +28,10 @@ class LocationImpl : Location {
      *  Required Permissions: INTERNET
      */
     override fun setLocation(lat: Double, lon: Double) {
-        AdbServerWrapper.performAdb("emu geo fix $lon $lat") // geo fix uses Lon-Lat, almost everyone uses Lat-Lon
+        AdbServer.performAdb("emu geo fix $lon $lat") // geo fix uses Lon-Lat, almost everyone uses Lat-Lon
     }
 
     private fun setLocationProviders(providers: String) {
-        AdbServerWrapper.performShell("settings put secure location_providers_allowed $providers")
+        AdbServer.performShell("settings put secure location_providers_allowed $providers")
     }
 }

@@ -8,7 +8,7 @@ import com.kaspersky.test_server.api.ExecutorResultStatus
 /**
  * Encapsulates all work with adb server.
  */
-object AdbServerWrapper {
+object AdbServer {
 
     private val adbTerminal: AdbTerminal by lazy {
         AdbTerminal.apply {

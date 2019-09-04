@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.net.wifi.WifiManager
 import android.os.Build
-import com.kaspersky.kaspresso.device.server.AdbServerWrapper
+import com.kaspersky.kaspresso.device.server.AdbServer
 
 /**
  * Default implementation of Internet interface.
@@ -19,7 +19,7 @@ class InternetImpl(
      *  Required Permissions: INTERNET.
      */
     override fun enable() {
-        AdbServerWrapper.performAdb("shell svc data enable", "shell svc wifi enable")
+        AdbServer.performAdb("shell svc data enable", "shell svc wifi enable")
     }
 
     /**
@@ -28,7 +28,7 @@ class InternetImpl(
      *  Required Permissions: INTERNET.
      */
     override fun disable() {
-        AdbServerWrapper.performAdb("shell svc data disable", "shell svc wifi disable")
+        AdbServer.performAdb("shell svc data disable", "shell svc wifi disable")
     }
 
     /**

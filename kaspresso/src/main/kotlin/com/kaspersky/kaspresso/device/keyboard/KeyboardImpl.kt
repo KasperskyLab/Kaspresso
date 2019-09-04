@@ -4,7 +4,7 @@ import android.support.test.espresso.action.ViewActions
 import android.support.test.uiautomator.UiDevice
 import android.support.test.uiautomator.UiObject
 import android.view.KeyEvent
-import com.kaspersky.kaspresso.device.server.AdbServerWrapper
+import com.kaspersky.kaspresso.device.server.AdbServer
 
 class KeyboardImpl : Keyboard {
 
@@ -23,7 +23,7 @@ class KeyboardImpl : Keyboard {
          * to prevent missing characters in the input field caused by very fast typing speed
          */
         text.map { char -> "input text $char" }
-            .forEach { command -> AdbServerWrapper.performShell(command) }
+            .forEach { command -> AdbServer.performShell(command) }
     }
 
     /**
@@ -39,6 +39,6 @@ class KeyboardImpl : Keyboard {
      *  @param keyEvent the code from a [KeyEvent] constant to send on device.
      */
     override fun sendEvent(keyEvent: Int) {
-        AdbServerWrapper.performShell("input keyevent $keyEvent")
+        AdbServer.performShell("input keyevent $keyEvent")
     }
 }
