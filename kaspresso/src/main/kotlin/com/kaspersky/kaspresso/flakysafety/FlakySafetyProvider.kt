@@ -30,7 +30,6 @@ interface FlakySafetyProvider {
                     "because of ${caughtAllowedException.javaClass.simpleName}"
         )
 
-        failureMessage ?: throw caughtAllowedException
-        throw KaspressoAssertionError(failureMessage, caughtAllowedException)
+        throw failureMessage?.let { KaspressoAssertionError(it, caughtAllowedException) } ?: caughtAllowedException
     }
 }

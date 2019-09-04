@@ -1,10 +1,11 @@
 package com.kaspersky.kaspresso.testcases.core.testcontext
 
+import com.kaspersky.kaspresso.compose.ComposeProvider
+import com.kaspersky.kaspresso.compose.WebComposeProvider
 import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.device.Device
-import com.kaspersky.kaspresso.flakysafety.FlakySafetyProvider
-import com.kaspersky.kaspresso.compose.*
 import com.kaspersky.kaspresso.flakysafety.FlakySafetyParams
+import com.kaspersky.kaspresso.flakysafety.FlakySafetyProvider
 import com.kaspersky.kaspresso.logger.UiTestLogger
 
 open class BaseTestContext internal constructor(

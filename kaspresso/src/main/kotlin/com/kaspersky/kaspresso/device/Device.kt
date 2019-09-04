@@ -9,9 +9,9 @@ import com.kaspersky.kaspresso.device.activities.Activities
 import com.kaspersky.kaspresso.device.apps.Apps
 import com.kaspersky.kaspresso.device.exploit.Exploit
 import com.kaspersky.kaspresso.device.files.Files
-import com.kaspersky.kaspresso.device.network.Network
 import com.kaspersky.kaspresso.device.keyboard.Keyboard
 import com.kaspersky.kaspresso.device.location.Location
+import com.kaspersky.kaspresso.device.network.Network
 import com.kaspersky.kaspresso.device.permissions.Permissions
 import com.kaspersky.kaspresso.device.phone.Phone
 import com.kaspersky.kaspresso.device.screenshots.Screenshots
@@ -93,5 +93,4 @@ class Device(
      * A property to get an instance of [UiDevice].
      */
     val uiDevice: UiDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
-
 }

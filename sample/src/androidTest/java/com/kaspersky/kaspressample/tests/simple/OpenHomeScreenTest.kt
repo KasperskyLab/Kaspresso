@@ -1,9 +1,15 @@
 package com.kaspersky.kaspressample.tests.simple
 
 import android.Manifest
+import android.view.View
+import android.widget.TextView
+import androidx.test.espresso.UiController
+import androidx.test.espresso.ViewAction
+import androidx.test.espresso.matcher.ViewMatchers
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
-import androidx.test.runner.AndroidJUnit4
+import com.agoda.kakao.text.TextViewActions
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.scenarios.CheckHomeTitleScenario
 import com.kaspersky.kaspressample.screen.HomeScreen
@@ -71,4 +77,26 @@ class OpenHomeScreenTest : TestCase() {
             step("Just Empty Step") {}
         }
     }
+}
+
+/**
+ * @return a [String] descriotion of [TextViewActions].
+ */
+fun TextViewActions.getText(): String {
+
+    var stringHolder = "_"
+
+    view.perform(object : ViewAction {
+
+        override fun getConstraints() = ViewMatchers.isAssignableFrom(TextView::class.java)
+
+        override fun getDescription() = "getting text from a TextView"
+
+        override fun perform(uiController: UiController?, view: View?) {
+            val tv = view as TextView
+            stringHolder = tv.text.toString()
+        }
+    })
+
+    return stringHolder
 }

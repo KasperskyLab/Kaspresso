@@ -41,7 +41,6 @@ interface ComposeProvider {
             ?.withLoggingOnFailure(composedAction)
             ?: composedAction.invoke()
 
-
         components.forEach { it.element.setInterception() }
     }
 
