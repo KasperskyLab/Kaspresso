@@ -16,8 +16,8 @@ import com.kaspersky.kaspresso.device.exploit.Exploit
 import com.kaspersky.kaspresso.device.exploit.ExploitImpl
 import com.kaspersky.kaspresso.device.files.Files
 import com.kaspersky.kaspresso.device.files.FilesImpl
-import com.kaspersky.kaspresso.device.internet.Internet
-import com.kaspersky.kaspresso.device.internet.InternetImpl
+import com.kaspersky.kaspresso.device.network.Network
+import com.kaspersky.kaspresso.device.network.NetworkImpl
 import com.kaspersky.kaspresso.device.keyboard.Keyboard
 import com.kaspersky.kaspresso.device.keyboard.KeyboardImpl
 import com.kaspersky.kaspresso.device.location.Location
@@ -73,7 +73,7 @@ import com.kaspersky.kaspresso.testcases.core.testcontext.TestContext
  * the default implementation is used.
  * @param files Holds an implementation of [Files] interface. If it was not specified in [Configurator.Builder],
  * the default implementation is used.
- * @param internet Holds an implementation of [Internet] interface. If it was not specified in [Configurator.Builder],
+ * @param internet Holds an implementation of [Network] interface. If it was not specified in [Configurator.Builder],
  * the default implementation is used.
  * @param phone Holds an implementation of [Phone] interface. If it was not specified in [Configurator.Builder],
  * the default implementation is used.
@@ -203,7 +203,7 @@ data class Configurator(
             )
         var activities: Activities = ActivitiesImpl(libLogger)
         var files: Files = FilesImpl()
-        var internet: Internet = InternetImpl(InstrumentationRegistry.getInstrumentation().targetContext)
+        var network: Network = NetworkImpl(InstrumentationRegistry.getInstrumentation().targetContext)
         var phone: Phone = PhoneImpl()
         var location: Location = LocationImpl()
         var keyboard: Keyboard = KeyboardImpl()
@@ -249,7 +249,7 @@ data class Configurator(
                     apps = apps,
                     activities = activities,
                     files = files,
-                    internet = internet,
+                    network = network,
                     phone = phone,
                     location = location,
                     keyboard = keyboard,

@@ -9,7 +9,7 @@ import com.kaspersky.kaspresso.device.activities.Activities
 import com.kaspersky.kaspresso.device.apps.Apps
 import com.kaspersky.kaspresso.device.exploit.Exploit
 import com.kaspersky.kaspresso.device.files.Files
-import com.kaspersky.kaspresso.device.internet.Internet
+import com.kaspersky.kaspresso.device.network.Network
 import com.kaspersky.kaspresso.device.keyboard.Keyboard
 import com.kaspersky.kaspresso.device.location.Location
 import com.kaspersky.kaspresso.device.permissions.Permissions
@@ -38,9 +38,9 @@ class Device(
     val files: Files,
 
     /**
-     * Holds a reference to an implementation of [Internet] interface, held by [Configurator].
+     * Holds a reference to an implementation of [Network] interface, held by [Configurator].
      */
-    val internet: Internet,
+    val network: Network,
 
     /**
      * Holds a reference to an implementation of [Phone] interface, held by [Configurator].
