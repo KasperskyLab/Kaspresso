@@ -1,4 +1,4 @@
-package com.kaspersky.kaspresso.testcases.core.testcontext.provide.compose
+package com.kaspersky.kaspresso.compose
 
 import java.lang.IllegalArgumentException
 

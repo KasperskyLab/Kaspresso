@@ -49,7 +49,7 @@ class OpenHomeScreenTestWithRule {
                 homeScreen {
                     title {
                         isVisible()
-                        attempt(message = "You should've been commented this line before launching the test") {
+                        flakySafely(failureMessage = "You should've been commented this line before the test") {
                             // hasText("Ooops!") //Uncomment to fail test
                         }
                     }

@@ -1,8 +1,7 @@
 package com.kaspersky.kaspresso.configurator
 
 import androidx.test.espresso.Espresso
-import androidx.test.espresso.NoMatchingViewException
-import androidx.test.espresso.PerformException
+import androidx.test.espresso.FailureHandler
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.UiDevice
 import com.agoda.kakao.Kakao
@@ -49,12 +48,14 @@ import com.kaspersky.kaspresso.interceptors.testcase.impl.report.BuildStepReport
 import com.kaspersky.kaspresso.interceptors.testcase.impl.screenshot.ScreenshotStepInterceptor
 import com.kaspersky.kaspresso.interceptors.testcase.impl.screenshot.TestRunnerScreenshotInterceptor
 import com.kaspersky.kaspresso.interceptors.view.AtomInterceptor
-import com.kaspersky.kaspresso.interceptors.view.FailureInterceptor
 import com.kaspersky.kaspresso.interceptors.view.ViewActionInterceptor
 import com.kaspersky.kaspresso.interceptors.view.ViewAssertionInterceptor
 import com.kaspersky.kaspresso.interceptors.view.WebAssertionInterceptor
 import com.kaspersky.kaspresso.interceptors.view.impl.logging.LoggingAtomInterceptor
-import com.kaspersky.kaspresso.interceptors.view.impl.logging.LoggingFailureInterceptor
+import com.kaspersky.kaspresso.failure.LoggingFailureHandler
+import com.kaspersky.kaspresso.interceptors.interactors.impl.failure.FailureLoggingDataInteractor
+import com.kaspersky.kaspresso.interceptors.interactors.impl.failure.FailureLoggingViewInteractor
+import com.kaspersky.kaspresso.interceptors.interactors.impl.failure.FailureLoggingWebInteractor
 import com.kaspersky.kaspresso.interceptors.view.impl.logging.LoggingViewActionInterceptor
 import com.kaspersky.kaspresso.interceptors.view.impl.logging.LoggingViewAssertionInterceptor
 import com.kaspersky.kaspresso.interceptors.view.impl.logging.LoggingWebAssertionInterceptor
@@ -158,14 +159,22 @@ data class Configurator(
                         LoggingWebAssertionInterceptor(libLogger)
                     )
 
-                    atomInterceptors = mutableListOf(LoggingAtomInterceptor(logger))
-                    webAssertionInterceptors = mutableListOf(LoggingWebAssertionInterceptor(logger))
+                    viewInteractors = mutableListOf(
+                        AutoscrollViewInteractor(libLogger),
+                        FlakySafeViewInteractor(flakySafetyParams, libLogger),
+                        FailureLoggingViewInteractor(libLogger)
+                    )
 
-                    viewInteractors = mutableListOf(AutoscrollViewInteractor(logger), FlakySafeViewInteractor())
-                    dataInteractors = mutableListOf(FlakySafeDataInteractor())
-                    webInteractors = mutableListOf(AutoscrollWebInteractor(logger), FlakySafeWebInteractor())
+                    dataInteractors = mutableListOf(
+                        FlakySafeDataInteractor(flakySafetyParams, libLogger),
+                        FailureLoggingDataInteractor(libLogger)
+                    )
 
-                    failureInterceptor = LoggingFailureInterceptor(logger)
+                    webInteractors = mutableListOf(
+                        AutoscrollWebInteractor(libLogger),
+                        FlakySafeWebInteractor(flakySafetyParams, libLogger),
+                        FailureLoggingWebInteractor(libLogger)
+                    )
 
                     stepInterceptors = mutableListOf(
                         LoggingStepInterceptor(libLogger),
@@ -177,6 +186,8 @@ data class Configurator(
                         TestRunnerScreenshotInterceptor(screenshots),
                         BuildStepReportInterceptor(AllureReportWriter(libLogger))
                     )
+
+                    failureHandler = LoggingFailureHandler(libLogger)
                 }
             }
         }
@@ -216,6 +227,12 @@ data class Configurator(
 
         var stepInterceptors: MutableList<StepInterceptor> = mutableListOf()
         var testRunInterceptors: MutableList<TestRunInterceptor> = mutableListOf()
+
+        /**
+         * An interceptor that is called on failures. It's [FailureHandler.intercept] method is being
+         * provide as the default [androidx.test.espresso.FailureHandler].
+         */
+        var failureHandler: FailureHandler = LoggingFailureHandler(libLogger)
 
         /**
          * Terminating method to build built [Configurator] settings. Can be called only inside the framework
@@ -274,6 +291,8 @@ data class Configurator(
                     onPerform(isOverride = true, interceptor = webInteractionInterceptor::interceptPerform)
                 }
             }
+
+            Espresso.setFailureHandler(failureHandler)
 
             return configurator
         }

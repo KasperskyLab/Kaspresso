@@ -78,30 +78,40 @@ class WebViewTest : TestCase() {
             step("Click \"Ask question\" button") {
                 webViewScreen {
                     webView {
-                        withElement(
-                            Locator.XPATH,
-                            "//*[@id=\"app\"]/section[5]/div/div/div[2]/div[3]/button"
-                        ) {
-                            hasText("Ask question")
-                        }
 
                         withElement(
                             Locator.XPATH,
                             "//*[@id=\"app\"]/section[5]/div/div/div[2]/div[3]/button"
                         ) {
-                            compose(this@webView) {
+                            webCompose(this@webView) {
                                 or {
+                                    containsText("fffuuuuu")
                                     hasText("fuck")
-                                    click()
                                 }
                                 or {
+                                    containsText("Ask questiop")
                                     hasText("Ask questio")
-                                    click()
                                 }
                                 or {
+                                    containsText("Ask question")
                                     hasText("Ask question")
-                                    click()
                                 }
+                            }
+                        }
+
+                        webCompose {
+                            orWithElement(
+                                Locator.XPATH,
+                                "//*[@id=\"app\"]/section[5]/div/div/div[2]/div[3]/button"
+                            ) {
+                                hasText("TRATATATA")
+                            }
+                            orWithElement(
+                                Locator.XPATH,
+                                "//*[@id=\"app\"]/section[5]/div/div/div[2]/div[3]/button"
+                            ) {
+                                hasText("Ask question")
+                                click()
                             }
                         }
                     }
