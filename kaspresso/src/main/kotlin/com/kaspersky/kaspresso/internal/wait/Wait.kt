@@ -1,6 +1,5 @@
-package com.kaspersky.kaspresso.flakysafety
+package com.kaspersky.kaspresso.internal.wait
 
-import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.logger.UiTestLogger
 
 /**

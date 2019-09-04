@@ -1,4 +1,4 @@
-package com.kaspersky.kaspresso.extensions.other
+package com.kaspersky.kaspresso.internal.extensions.other
 
 import io.reactivex.exceptions.CompositeException
 import java.io.PrintWriter
@@ -7,16 +7,10 @@ import java.io.StringWriter
 /**
  * @return the stack trace of the [Throwable] as a [String].
  */
-fun Throwable.getStackTraceAsString(): String {
-    val sw = StringWriter()
-    val pw = PrintWriter(sw)
+internal fun Throwable.getStackTraceAsString(): String =
+    StringWriter().also { printStackTrace(PrintWriter(it)) }.toString()
 
-    printStackTrace(pw)
-
-    return sw.toString()
-}
-
-inline fun <reified T : Throwable> invokeSafely(exceptions: MutableList<T>, action: () -> Unit) {
+internal inline fun <reified T : Throwable> invokeSafely(exceptions: MutableList<T>, action: () -> Unit) {
     try {
         action.invoke()
     } catch (e: Throwable) {
@@ -28,7 +22,7 @@ inline fun <reified T : Throwable> invokeSafely(exceptions: MutableList<T>, acti
     }
 }
 
-inline fun <reified ERROR : Throwable, LISTENER> Iterable<LISTENER>.forEachSafely(
+internal inline fun <reified ERROR : Throwable, LISTENER> Iterable<LISTENER>.forEachSafely(
     exceptions: MutableList<ERROR>,
     action: (LISTENER) -> Unit
 ) {

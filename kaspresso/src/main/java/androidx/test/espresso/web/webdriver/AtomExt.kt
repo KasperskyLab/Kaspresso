@@ -18,10 +18,7 @@ import androidx.test.espresso.web.webdriver.WebDriverAtomScripts.SEND_KEYS_ANDRO
  *
  * @return a string description of [Atom].
  */
-fun Atom<*>.describeTo(
-    builder: StringBuilder,
-    evaluation: Evaluation?
-) {
+internal fun Atom<*>.describeTo(builder: StringBuilder, evaluation: Evaluation?) {
     builder
         .append(" \"${getActionDescription()}\"")
         .apply {

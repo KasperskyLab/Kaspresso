@@ -1,9 +1,9 @@
 package com.kaspersky.kaspresso.configurator
 
-import androidx.test.InstrumentationRegistry
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.NoMatchingViewException
 import androidx.test.espresso.PerformException
+import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.UiDevice
 import com.agoda.kakao.Kakao
 import com.kaspersky.kaspresso.device.accessibility.Accessibility
@@ -214,21 +214,22 @@ class Configurator(
         var logger: UiTestLogger = UiTestLoggerImpl(DEFAULT_INNER_LOGGER_TAG)
         var externalLogger: UiTestLogger = UiTestLoggerImpl(DEFAULT_EXTERNAL_LOGGER_TAG)
 
-        var apps: Apps = AppsImpl(
-            logger,
-            InstrumentationRegistry.getInstrumentation().context,
-            UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
-        )
-        var activities: Activities = ActivitiesImpl(logger)
+        var apps: Apps =
+            AppsImpl(
+                libLogger,
+                InstrumentationRegistry.getInstrumentation().context,
+                UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
+            )
+        var activities: Activities = ActivitiesImpl(libLogger)
         var files: Files = FilesImpl()
-        var internet: Internet = InternetImpl(InstrumentationRegistry.getTargetContext())
+        var internet: Internet = InternetImpl(InstrumentationRegistry.getInstrumentation().targetContext)
         var phone: Phone = PhoneImpl()
         var location: Location = LocationImpl()
         var keyboard: Keyboard = KeyboardImpl()
         var screenshots: Screenshots = ScreenshotsImpl(logger, activities)
         var accessibility: Accessibility = AccessibilityImpl()
         var permissions: Permissions =
-            PermissionsImpl(logger, UiDevice.getInstance(InstrumentationRegistry.getInstrumentation()))
+            PermissionsImpl(libLogger, UiDevice.getInstance(InstrumentationRegistry.getInstrumentation()))
         var exploit: Exploit =
             ExploitImpl(activities, UiDevice.getInstance(InstrumentationRegistry.getInstrumentation()))
 
@@ -294,30 +295,15 @@ class Configurator(
 
             Kakao.intercept {
                 onViewInteraction {
-                    onCheck(
-                        isOverride = true,
-                        interceptor = viewInteractionInterceptor::interceptCheck
-                    )
-                    onPerform(
-                        isOverride = true,
-                        interceptor = viewInteractionInterceptor::interceptPerform
-                    )
+                    onCheck(isOverride = true, interceptor = viewInteractionInterceptor::interceptCheck)
+                    onPerform(isOverride = true, interceptor = viewInteractionInterceptor::interceptPerform)
                 }
                 onDataInteraction {
-                    onCheck(
-                        isOverride = true,
-                        interceptor = dataInteractionInterceptor::interceptCheck
-                    )
+                    onCheck(isOverride = true, interceptor = dataInteractionInterceptor::interceptCheck)
                 }
                 onWebInteraction {
-                    onCheck(
-                        isOverride = true,
-                        interceptor = webInteractionInterceptor::interceptCheck
-                    )
-                    onPerform(
-                        isOverride = true,
-                        interceptor = webInteractionInterceptor::interceptPerform
-                    )
+                    onCheck(isOverride = true, interceptor = webInteractionInterceptor::interceptCheck)
+                    onPerform(isOverride = true, interceptor = webInteractionInterceptor::interceptPerform)
                 }
             }
 

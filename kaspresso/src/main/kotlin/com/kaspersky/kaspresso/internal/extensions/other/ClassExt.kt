@@ -1,4 +1,4 @@
-package com.kaspersky.kaspresso.extensions.other
+package com.kaspersky.kaspresso.internal.extensions.other
 
 /**
  *  Returns an array of all directly and indirectly implemented interfaces

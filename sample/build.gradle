@@ -49,6 +49,7 @@ dependencies {
     androidTestImplementation "androidx.test.espresso:espresso-contrib:$versions.espresso"
     androidTestImplementation "androidx.test.espresso:espresso-intents:$versions.espresso"
     androidTestImplementation "androidx.test.uiautomator:uiautomator:$versions.uiautomator"
+    androidTestImplementation "androidx.test.ext:junit:$versions.extJunit"
 
     androidTestImplementation project(':kaspresso')
     androidTestImplementation "com.agoda.kakao:kakao:$versions.kakao"

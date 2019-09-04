@@ -4,7 +4,7 @@ import android.view.View
 import androidx.test.espresso.NoMatchingViewException
 import androidx.test.espresso.ViewAssertion
 import androidx.test.espresso.assertion.describe
-import com.kaspersky.kaspresso.extensions.other.describe
+import com.kaspersky.kaspresso.internal.extensions.other.describe
 import com.kaspersky.kaspresso.interceptors.view.ViewAssertionInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
 

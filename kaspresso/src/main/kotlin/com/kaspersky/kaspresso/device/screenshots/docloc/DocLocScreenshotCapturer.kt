@@ -5,9 +5,9 @@ import com.kaspersky.kaspresso.device.activities.metadata.ActivityMetadata
 import com.kaspersky.kaspresso.device.apps.Apps
 import com.kaspersky.kaspresso.device.screenshots.screenshoter.ScreenshotFiles
 import com.kaspersky.kaspresso.device.screenshots.screenshoter.external.ExternalScreenshotMaker
-import com.kaspersky.kaspresso.extensions.other.safeWrite
-import com.kaspersky.kaspresso.extensions.other.toXml
-import com.kaspersky.kaspresso.flakysafety.wait
+import com.kaspersky.kaspresso.internal.extensions.other.safeWrite
+import com.kaspersky.kaspresso.internal.extensions.other.toXml
+import com.kaspersky.kaspresso.internal.wait.wait
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import java.io.File
 
@@ -21,7 +21,7 @@ internal class DocLocScreenshotCapturer(
     private val activities: Activities,
     private val apps: Apps
 ) {
-    companion object {
+    private companion object {
         private const val SCREENSHOT_CAPTURE_DELAY_MS: Long = 500
     }
 
@@ -36,7 +36,7 @@ internal class DocLocScreenshotCapturer(
      *  @param screenshotName name of screenshot. Must match [a-zA-Z0-9_-]+
      */
     fun captureScreenshot(screenshotName: String) {
-        wait(SCREENSHOT_CAPTURE_DELAY_MS) {
+        wait(timeoutMs = SCREENSHOT_CAPTURE_DELAY_MS, logger = logger) {
             val screenshotFile = screenshoter.screenshot(screenshotName)
             saveScreenshotMetadata(screenshotFile.parentFile, screenshotName)
         }
@@ -47,9 +47,7 @@ internal class DocLocScreenshotCapturer(
      *  @param screenshotName name of screenshot. Must match [a-zA-Z0-9_-]+
      */
     fun captureScreenshotOnFail(screenshotName: String) {
-        wait(SCREENSHOT_CAPTURE_DELAY_MS) {
-            failScreenshoter.screenshot(screenshotName)
-        }
+        wait(timeoutMs = SCREENSHOT_CAPTURE_DELAY_MS, logger = logger) { failScreenshoter.screenshot(screenshotName) }
     }
 
     private fun saveScreenshotMetadata(folderPath: File, stepName: String) {
@@ -61,7 +59,7 @@ internal class DocLocScreenshotCapturer(
         runCatching {
             val metadata = activityMetadata.getFromActivity(activity)
                 .toXml(apps.targetAppPackageName)
-            folderPath.resolve("$stepName.xml").safeWrite(metadata)
+            folderPath.resolve("$stepName.xml").safeWrite(logger, metadata)
         }
     }
 }

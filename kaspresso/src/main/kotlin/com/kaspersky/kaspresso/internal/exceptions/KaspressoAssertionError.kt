@@ -1,4 +1,4 @@
-package com.kaspersky.kaspresso.exceptions
+package com.kaspersky.kaspresso.internal.exceptions
 
 /**
  *  Exception with no stacktrace to hold an assertion message and the initial cause of the exception.

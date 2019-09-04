@@ -3,7 +3,7 @@ package com.kaspersky.kaspresso.device.screenshots.screenshoter
 import android.content.Context
 import android.os.Build
 import android.os.Environment
-import com.kaspersky.kaspresso.extensions.other.createDirectoryRWX
+import com.kaspersky.kaspresso.internal.extensions.other.createDirectoryRWX
 import java.io.File
 
 class ScreenshotsDirectoryStorage {

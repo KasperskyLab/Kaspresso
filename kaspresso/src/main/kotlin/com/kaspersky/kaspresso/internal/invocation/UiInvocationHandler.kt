@@ -1,7 +1,7 @@
-package com.kaspersky.kaspresso.reflect.proxy
+package com.kaspersky.kaspresso.internal.invocation
 
 import androidx.test.internal.runner.junit4.statement.UiThreadStatement
-import com.kaspersky.kaspresso.extensions.other.getStackTraceAsString
+import com.kaspersky.kaspresso.internal.extensions.other.getStackTraceAsString
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import java.lang.reflect.InvocationHandler
 import java.lang.reflect.InvocationTargetException

@@ -1,4 +1,4 @@
-package com.kaspersky.kaspresso.extensions.other
+package com.kaspersky.kaspresso.internal.extensions.other
 
 import android.text.TextUtils.htmlEncode
 import com.kaspersky.kaspresso.device.activities.metadata.LocalizedString

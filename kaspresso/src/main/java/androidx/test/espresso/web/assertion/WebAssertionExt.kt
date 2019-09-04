@@ -11,10 +11,7 @@ import org.hamcrest.StringDescription
  *
  * @return a string description of [WebAssertion].
  */
-fun WebAssertion<*>.describeTo(
-    builder: StringBuilder,
-    result: Any
-) {
+internal fun WebAssertion<*>.describeTo(builder: StringBuilder, result: Any) {
     when (this@describeTo) {
         is WebViewAssertions.ResultCheckingWebAssertion -> {
             builder.append(" \"${getResultMatcher().getResultDescription()}\"")
@@ -44,7 +41,6 @@ private fun Matcher<*>.getResultDescription(): String {
 }
 
 private object WebDriverAtomScriptsReceiver : WebDriverAtomScriptsProvider() {
-
     fun Atom<*>.getActionDescription(): String {
         return when (script) {
             GET_VISIBLE_TEXT_ANDROID -> "using web action=\"get visible text\""

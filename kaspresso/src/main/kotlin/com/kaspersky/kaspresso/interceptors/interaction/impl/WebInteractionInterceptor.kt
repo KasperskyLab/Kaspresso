@@ -5,7 +5,7 @@ import androidx.test.espresso.web.assertion.WebAssertionProxy
 import androidx.test.espresso.web.model.Atom
 import androidx.test.espresso.web.sugar.Web
 import com.kaspersky.kaspresso.configurator.Configurator
-import com.kaspersky.kaspresso.extensions.espressoext.getMatcher
+import com.kaspersky.kaspresso.internal.extensions.espressoext.getMatcher
 import com.kaspersky.kaspresso.interceptors.interaction.InteractionInterceptor
 import com.kaspersky.kaspresso.interceptors.interactors.WebInteractor
 import com.kaspersky.kaspresso.proxy.AtomProxy

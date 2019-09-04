@@ -3,14 +3,14 @@ package com.kaspersky.kaspresso.interceptors.interactors.impl.autoscroll
 import androidx.test.espresso.PerformException
 import androidx.test.espresso.ViewInteraction
 import androidx.test.espresso.action.ViewActions
-import com.kaspersky.kaspresso.interceptors.interactors.AutoscrollInteractor
+import com.kaspersky.kaspresso.interceptors.interactors.AutoscrollProvider
 import com.kaspersky.kaspresso.interceptors.interactors.ViewInteractor
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import junit.framework.AssertionFailedError
 
 class AutoscrollViewInteractor(
     private val logger: UiTestLogger
-) : ViewInteractor, AutoscrollInteractor<ViewInteraction> {
+) : ViewInteractor, AutoscrollProvider<ViewInteraction> {
 
     override fun <R> interact(interaction: ViewInteraction, action: () -> R): R {
         return try {

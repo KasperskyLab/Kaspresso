@@ -1,6 +1,7 @@
 package com.kaspersky.kaspresso.device.screenshots.screenshoter.external
 
-import androidx.test.InstrumentationRegistry
+import android.content.Context
+import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.UiDevice
 import com.kaspersky.kaspresso.device.screenshots.screenshoter.ScreenshotFiles
 import java.io.File
@@ -11,7 +12,6 @@ import java.io.File
 internal class ExternalScreenshotMaker(
     private val screenshotFiles: ScreenshotFiles
 ) {
-
     /**
      * Takes a screenshot with the specified tag.
      *
@@ -19,12 +19,8 @@ internal class ExternalScreenshotMaker(
      * @return the image file that was created
      */
     fun screenshot(tag: String): File {
-        val screenshotFile = screenshotFiles.getScreenshotFile(
-            InstrumentationRegistry.getTargetContext().applicationContext,
-            tag
-        )
-        takeScreenshot(screenshotFile)
-        return screenshotFile
+        val appContext: Context = InstrumentationRegistry.getInstrumentation().targetContext.applicationContext
+        return screenshotFiles.getScreenshotFile(appContext, tag).also { takeScreenshot(it) }
     }
 
     private fun takeScreenshot(file: File) {

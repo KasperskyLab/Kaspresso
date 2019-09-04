@@ -1,4 +1,4 @@
-package com.kaspersky.kaspresso.extensions.other
+package com.kaspersky.kaspresso.internal.extensions.other
 
 import android.content.res.Resources
 import android.view.View
@@ -8,7 +8,7 @@ import androidx.test.espresso.matcher.ViewMatchers.isDisplayingAtLeast
 /**
  * @return a [String] description of the [View]
  */
-fun View?.describe(): String {
+internal fun View?.describe(): String {
     if (this == null) return "null"
 
     val builder = StringBuilder()
@@ -39,7 +39,7 @@ fun View?.describe(): String {
 /**
  * @return true if [View] is displayed, otherwise - false.
  */
-fun View.isDisplayed(): Boolean {
+internal fun View.isDisplayed(): Boolean {
     return isDisplayingAtLeast(VIEW_DISPLAY_THRESHOLD_PERCENT).matches(this)
 }
 

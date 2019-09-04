@@ -1,6 +1,6 @@
-package com.kaspersky.kaspresso.extensions.other
+package com.kaspersky.kaspresso.internal.extensions.other
 
-import com.kaspersky.kaspresso.configurator.Configurator
+import com.kaspersky.kaspresso.logger.UiTestLogger
 import java.io.File
 import java.io.FileNotFoundException
 import java.io.IOException
@@ -10,14 +10,13 @@ import java.io.IOException
  *
  *  @param data text to write.
  */
-fun File.safeWrite(data: String) {
-    val log = Configurator.logger
+internal fun File.safeWrite(logger: UiTestLogger, data: String) {
     try {
         this.writeText(data)
     } catch (e: FileNotFoundException) {
-        log.e("Can not create file: ${e.message}")
+        logger.e("Can not create file: ${e.message}")
     } catch (e: IOException) {
-        log.e(e.getStackTraceAsString())
+        logger.e(e.getStackTraceAsString())
     }
 }
 

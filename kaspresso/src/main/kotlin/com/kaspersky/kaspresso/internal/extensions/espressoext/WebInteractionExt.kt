@@ -1,4 +1,4 @@
-package com.kaspersky.kaspresso.extensions.espressoext
+package com.kaspersky.kaspresso.internal.extensions.espressoext
 
 import androidx.test.espresso.web.sugar.Web
 import org.hamcrest.Matcher

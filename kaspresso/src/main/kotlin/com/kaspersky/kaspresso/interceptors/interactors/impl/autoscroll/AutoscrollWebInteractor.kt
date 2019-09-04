@@ -3,14 +3,14 @@ package com.kaspersky.kaspresso.interceptors.interactors.impl.autoscroll
 import androidx.test.espresso.PerformException
 import androidx.test.espresso.web.sugar.Web
 import androidx.test.espresso.web.webdriver.DriverAtoms
-import com.kaspersky.kaspresso.interceptors.interactors.AutoscrollInteractor
+import com.kaspersky.kaspresso.interceptors.interactors.AutoscrollProvider
 import com.kaspersky.kaspresso.interceptors.interactors.WebInteractor
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import junit.framework.AssertionFailedError
 
 class AutoscrollWebInteractor(
     private val logger: UiTestLogger
-) : WebInteractor, AutoscrollInteractor<Web.WebInteraction<*>> {
+) : WebInteractor, AutoscrollProvider<Web.WebInteraction<*>> {
 
     override fun <R> interact(interaction: Web.WebInteraction<*>, action: () -> R): R {
         return try {

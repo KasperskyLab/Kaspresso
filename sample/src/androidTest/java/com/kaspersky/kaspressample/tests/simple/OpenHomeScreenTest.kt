@@ -8,8 +8,8 @@ import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.scenarios.CheckHomeTitleScenario
 import com.kaspersky.kaspressample.screen.HomeScreen
 import com.kaspersky.kaspressample.screen.MainScreen
+import com.kaspersky.kaspresso.device.exploit.Exploit
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
-import com.kaspersky.kaspresso.viewactions.orientation.Orientation
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
