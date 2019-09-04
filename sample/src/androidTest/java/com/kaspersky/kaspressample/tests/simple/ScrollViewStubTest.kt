@@ -17,7 +17,7 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class ScrollViewStubTest : TestCase(
     configBuilder = Configurator.Builder.default().apply {
-        attemptsTimeoutMs = 5_000L
+        flakySafetyParams.timeoutMs = 5_000L
     }
 ) {
     private val mainScreen = MainScreen()

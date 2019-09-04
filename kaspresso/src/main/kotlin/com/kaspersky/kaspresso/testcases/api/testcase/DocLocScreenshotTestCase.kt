@@ -104,8 +104,8 @@ abstract class DocLocScreenshotTestCase(
         screenshotCapturer = DocLocScreenshotCapturer(
             screenshotsDir,
             logger,
-            configurator.activities,
-            configurator.apps
+            configurator.device.activities,
+            configurator.device.apps
         )
 
         testFailRule.screenshotCapturer = screenshotCapturer

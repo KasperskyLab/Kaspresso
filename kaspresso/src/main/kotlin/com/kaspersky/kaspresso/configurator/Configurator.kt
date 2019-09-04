@@ -6,6 +6,7 @@ import androidx.test.espresso.PerformException
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.UiDevice
 import com.agoda.kakao.Kakao
+import com.kaspersky.kaspresso.device.Device
 import com.kaspersky.kaspresso.device.accessibility.Accessibility
 import com.kaspersky.kaspresso.device.accessibility.AccessibilityImpl
 import com.kaspersky.kaspresso.device.activities.Activities
@@ -103,18 +104,11 @@ import com.kaspersky.kaspresso.testcases.core.testcontext.TestContext
  * [com.kaspersky.kaspresso.testcases.models.TestInfo]. Interceptor works using decorator pattern. First interceptor wraps others.
  * @param testLogger Holds an implementation of [UiTestLogger] interface for external usage.
  */
-class Configurator(
-    internal val apps: Apps,
-    internal val activities: Activities,
-    internal val files: Files,
-    internal val internet: Internet,
-    internal val phone: Phone,
-    internal val location: Location,
-    internal val keyboard: Keyboard,
-    internal val screenshots: Screenshots,
-    internal val accessibility: Accessibility,
-    internal val permissions: Permissions,
-    internal val exploit: Exploit,
+data class Configurator(
+    internal val libLogger: UiTestLogger,
+    internal val testLogger: UiTestLogger,
+    internal val device: Device,
+    internal val flakySafetyParams: FlakySafetyParams,
     internal val viewActionInterceptors: List<ViewActionInterceptor>,
     internal val viewAssertionInterceptors: List<ViewAssertionInterceptor>,
     internal val atomInterceptors: List<AtomInterceptor>,
@@ -123,18 +117,9 @@ class Configurator(
     internal val dataInteractors: List<DataInteractor>,
     internal val webInteractors: List<WebInteractor>,
     internal val stepInterceptors: List<StepInterceptor>,
-    internal val testRunInterceptors: List<TestRunInterceptor>,
-
-    internal val libLogger: UiTestLogger,
-    internal val testLogger: UiTestLogger,
-
-    internal val flakySafetyParams: FlakySafetyParams
+    internal val testRunInterceptors: List<TestRunInterceptor>
 ) {
     private companion object {
-
-        private const val DEFAULT_ATTEMPTS_TIMEOUT_MS: Long = 2_000L
-        private const val DEFAULT_ATTEMPTS_INTERVAL_MS: Long = 500L
-
         private const val DEFAULT_LIB_LOGGER_TAG: String = "KASPRESSO"
         private const val DEFAULT_TEST_LOGGER_TAG: String = "KASPRESSO_TEST"
     }
@@ -196,17 +181,6 @@ class Configurator(
             }
         }
 
-        var flakySafetyParams: FlakySafetyParams =
-            FlakySafetyParams(
-                DEFAULT_ATTEMPTS_TIMEOUT_MS,
-                DEFAULT_ATTEMPTS_INTERVAL_MS,
-                setOf(
-                    PerformException::class.java,
-                    NoMatchingViewException::class.java,
-                    AssertionError::class.java
-                )
-            )
-
         var libLogger: UiTestLogger = UiTestLoggerImpl(DEFAULT_LIB_LOGGER_TAG)
         var testLogger: UiTestLogger = UiTestLoggerImpl(DEFAULT_TEST_LOGGER_TAG)
 
@@ -229,6 +203,8 @@ class Configurator(
         var exploit: Exploit =
             ExploitImpl(activities, UiDevice.getInstance(InstrumentationRegistry.getInstrumentation()))
 
+        var flakySafetyParams: FlakySafetyParams = FlakySafetyParams()
+
         var viewActionInterceptors: MutableList<ViewActionInterceptor> = mutableListOf()
         var viewAssertionInterceptors: MutableList<ViewAssertionInterceptor> = mutableListOf()
         var atomInterceptors: MutableList<AtomInterceptor> = mutableListOf()
@@ -238,14 +214,7 @@ class Configurator(
         var dataInteractors: MutableList<DataInteractor> = mutableListOf()
         var webInteractors: MutableList<WebInteractor> = mutableListOf()
 
-        /**
-         * An interceptor that is called on failures. It's [FailureInterceptor.intercept] method is being
-         * provide as the default [androidx.test.espresso.FailureHandler].
-         */
-        var failureInterceptor: FailureInterceptor? = null
-
         var stepInterceptors: MutableList<StepInterceptor> = mutableListOf()
-
         var testRunInterceptors: MutableList<TestRunInterceptor> = mutableListOf()
 
         /**
@@ -256,17 +225,24 @@ class Configurator(
         internal fun build(): Configurator {
 
             val configurator = Configurator(
-                apps = apps,
-                activities = activities,
-                files = files,
-                internet = internet,
-                phone = phone,
-                location = location,
-                keyboard = keyboard,
-                screenshots = screenshots,
-                accessibility = accessibility,
-                permissions = permissions,
-                exploit = exploit,
+                libLogger = libLogger,
+                testLogger = testLogger,
+
+                device = Device(
+                    apps = apps,
+                    activities = activities,
+                    files = files,
+                    internet = internet,
+                    phone = phone,
+                    location = location,
+                    keyboard = keyboard,
+                    screenshots = screenshots,
+                    accessibility = accessibility,
+                    permissions = permissions,
+                    exploit = exploit
+                ),
+
+                flakySafetyParams = flakySafetyParams,
 
                 viewActionInterceptors = viewActionInterceptors,
                 viewAssertionInterceptors = viewAssertionInterceptors,
@@ -278,15 +254,8 @@ class Configurator(
                 webInteractors = webInteractors,
 
                 stepInterceptors = stepInterceptors,
-                testRunInterceptors = testRunInterceptors,
-
-                libLogger = libLogger,
-                testLogger = testLogger,
-
-                flakySafetyParams = flakySafetyParams
+                testRunInterceptors = testRunInterceptors
             )
-
-            failureInterceptor?.let { Espresso.setFailureHandler(it::interceptAndThrow) }
 
             val viewInteractionInterceptor = ViewInteractionInterceptor(configurator)
             val dataInteractionInterceptor = DataInteractionInterceptor(configurator)

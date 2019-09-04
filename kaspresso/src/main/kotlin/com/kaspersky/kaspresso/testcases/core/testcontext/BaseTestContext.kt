@@ -11,10 +11,10 @@ open class BaseTestContext internal constructor(
     configurator: Configurator
 ) : AttemptProvider, WaitProvider, ComposeProvider, WebComposeProvider {
 
-    private val composer: Composer = Composer(configurator)
-    private val webComposer: WebComposer = WebComposer(configurator)
+    override val params: FlakySafetyParams = configurator.flakySafetyParams
+    override val logger: UiTestLogger = configurator.libLogger
 
-    val device: Device = Device(configurator)
+    val device: Device = configurator.device
 
     val testLogger: UiTestLogger = configurator.testLogger
 }

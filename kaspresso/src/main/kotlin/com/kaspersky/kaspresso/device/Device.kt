@@ -19,8 +19,64 @@ import com.kaspersky.kaspresso.device.screenshots.Screenshots
 /**
  * A provider of managers for all off-screen work.
  */
-class Device(configurator: Configurator) {
+class Device(
 
+    /**
+     * Holds an implementation of [Apps] interface. If it was not specified in [Configurator.Builder], the default
+     * implementation is used.
+     */
+    val apps: Apps,
+
+    /**
+     * Holds a reference to an implementation of [Activities] interface, held by [Configurator].
+     */
+    val activities: Activities,
+
+    /**
+     * Holds a reference to an implementation of [Files] interface, held by [Configurator].
+     */
+    val files: Files,
+
+    /**
+     * Holds a reference to an implementation of [Internet] interface, held by [Configurator].
+     */
+    val internet: Internet,
+
+    /**
+     * Holds a reference to an implementation of [Phone] interface, held by [Configurator].
+     */
+    val phone: Phone,
+
+    /**
+     * Holds a reference to an implementation of [Location] interface, held by [Configurator].
+     */
+    val location: Location,
+
+    /**
+     * Holds a reference to an implementation of [Keyboard] interface, held by [Configurator].
+     */
+    val keyboard: Keyboard,
+
+    /**
+     * Holds a reference to an implementation of [Screenshots] interface, held by [Configurator].
+     */
+    val screenshots: Screenshots,
+
+    /**
+     * Holds a reference to an implementation of [Accessibility] interface, held by [Configurator].
+     */
+    val accessibility: Accessibility,
+
+    /**
+     * Holds a reference to an implementation of [Permissions] interface, held by [Configurator].
+     */
+    val permissions: Permissions,
+
+    /**
+     * Holds a reference to an implementation of [Exploit] interface, held by [Configurator].
+     */
+    val exploit: Exploit
+) {
     /**
      * A not caching property to get [Context].
      */
@@ -38,59 +94,4 @@ class Device(configurator: Configurator) {
      */
     val uiDevice: UiDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
 
-    /**
-     * Holds an implementation of [Apps] interface. If it was not specified in [Configurator.Builder], the default
-     * implementation is used.
-     */
-    val apps: Apps = configurator.apps
-
-    /**
-     * Holds a reference to an implementation of [Activities] interface, held by [Configurator].
-     */
-    val activities: Activities = configurator.activities
-
-    /**
-     * Holds a reference to an implementation of [Files] interface, held by [Configurator].
-     */
-    val files: Files = configurator.files
-
-    /**
-     * Holds a reference to an implementation of [Internet] interface, held by [Configurator].
-     */
-    val internet: Internet = configurator.internet
-
-    /**
-     * Holds a reference to an implementation of [Location] interface, held by [Configurator].
-     */
-    val location: Location = configurator.location
-
-    /**
-     * Holds a reference to an implementation of [Keyboard] interface, held by [Configurator].
-     */
-    val keyboard: Keyboard = configurator.keyboard
-
-    /**
-     * Holds a reference to an implementation of [Phone] interface, held by [Configurator].
-     */
-    val phone: Phone = configurator.phone
-
-    /**
-     * Holds a reference to an implementation of [Screenshots] interface, held by [Configurator].
-     */
-    val screenshots: Screenshots = configurator.screenshots
-
-    /**
-     * Holds a reference to an implementation of [Accessibility] interface, held by [Configurator].
-     */
-    val accessibility: Accessibility = configurator.accessibility
-
-    /**
-     * Holds a reference to an implementation of [Permissions] interface, held by [Configurator].
-     */
-    val permissions: Permissions = configurator.permissions
-
-    /**
-     * Holds a reference to an implementation of [Exploit] interface, held by [Configurator].
-     */
-    val exploit: Exploit = configurator.exploit
 }
