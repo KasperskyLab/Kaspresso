@@ -7,9 +7,8 @@ import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.screen.HomeScreen
 import com.kaspersky.kaspressample.screen.MainScreen
-import com.kaspersky.kaspresso.flakysafety.attempt
+import com.kaspersky.kaspresso.device.exploit.Exploit
 import com.kaspersky.kaspresso.testcases.api.testcaserule.TestCaseRule
-import com.kaspersky.kaspresso.viewactions.orientation.Orientation
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -35,10 +34,10 @@ class OpenHomeScreenTestWithRule {
     @Test
     fun test() {
         testCaseRule.before {
-            device.exploit.setOrientation(Orientation.Landscape)
+            device.exploit.setOrientation(Exploit.DeviceOrientation.Landscape)
             activityTestRule.launchActivity(null)
         }.after {
-            device.exploit.setOrientation(Orientation.Portrait)
+            device.exploit.setOrientation(Exploit.DeviceOrientation.Portrait)
         }.run {
 
             step("Open Home screen") {

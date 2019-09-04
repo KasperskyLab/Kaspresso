@@ -7,7 +7,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.scenarios.CheckHomeTitleNoParametersScenario
 import com.kaspersky.kaspressample.screen.MainScreen
-import com.kaspersky.kaspresso.viewactions.orientation.Orientation
+import com.kaspersky.kaspresso.device.exploit.Exploit
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -31,7 +31,7 @@ class OpenHomeScreenParametrizedTest : BaseParametrizedTest() {
         before {
             activityTestRule.launchActivity(null)
         }.after {
-            device.exploit.setOrientation(Orientation.Portrait)
+            device.exploit.setOrientation(Exploit.DeviceOrientation.Portrait)
         }.init {
             company {
                 name = "Microsoft"
