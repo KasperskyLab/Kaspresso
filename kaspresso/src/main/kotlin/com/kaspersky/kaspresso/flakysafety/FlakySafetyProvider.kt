@@ -9,7 +9,7 @@ interface FlakySafetyProvider {
     val logger: UiTestLogger
 
     fun <T> flakySafely(failureMessage: String? = null, action: () -> T): T {
-        var caughtAllowedException: Throwable
+        var cachedError: Throwable
         val startTime = System.currentTimeMillis()
 
         do {
@@ -18,7 +18,7 @@ interface FlakySafetyProvider {
             } catch (error: Throwable) {
                 if (params.isExceptionAllowed(error)) {
                     Thread.sleep(params.intervalMs)
-                    caughtAllowedException = error
+                    cachedError = error
                 } else {
                     throw error
                 }
@@ -27,10 +27,10 @@ interface FlakySafetyProvider {
 
         logger.e(
             "All attempts to interact for ${params.timeoutMs} ms totally failed " +
-                    "because of ${caughtAllowedException.javaClass.simpleName}"
+                    "because of \n${cachedError.javaClass.simpleName}${cachedError.message?.let { ": $it" } ?: ""}"
         )
 
-        throw failureMessage?.let { KaspressoAssertionError(it, caughtAllowedException) } ?: caughtAllowedException
+        throw failureMessage?.let { KaspressoAssertionError(it, cachedError) } ?: cachedError
     }
 }
 

@@ -29,7 +29,7 @@ interface FailureLoggingProvider {
     fun logDescriptionAndThrow(error: Throwable?, viewMatcher: Matcher<View>?) {
         logger.e(
             "Failed to interact with view matching: ${viewMatcher.describe()}" +
-                    error?.let { " because of ${error.javaClass.simpleName}" }
+                    error?.let { " because of \n${error.javaClass.simpleName}${error.message?.let { ": $it" } ?: ""}" }
         )
 
         error?.let { throw it.describedWith(viewMatcher) }
