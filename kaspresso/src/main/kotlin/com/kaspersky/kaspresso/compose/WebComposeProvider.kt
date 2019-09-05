@@ -8,6 +8,7 @@ import com.kaspersky.kaspresso.flakysafety.FlakySafetyProvider
 import com.kaspersky.kaspresso.flakysafety.flakySafelyIfNotNull
 import com.kaspersky.kaspresso.interceptors.interaction.impl.WebInteractionInterceptor
 import com.kaspersky.kaspresso.interceptors.interaction.impl.compose.ComposeWebInteractionInterceptor
+import com.kaspersky.kaspresso.interceptors.interactors.WebInteractor
 import com.kaspersky.kaspresso.interceptors.interactors.impl.failure.FailureLoggingWebInteractor
 import com.kaspersky.kaspresso.interceptors.interactors.impl.flakysafety.FlakySafeWebInteractor
 
@@ -55,10 +56,10 @@ interface WebComposeProvider {
         var flakySafetyProvider: FlakySafetyProvider? = null
         var failureLoggingProvider: FailureLoggingProvider? = null
 
-        configurator.webInteractors.forEach {
-            when (it) {
-                is FlakySafeWebInteractor -> flakySafetyProvider = it
-                is FailureLoggingWebInteractor -> failureLoggingProvider = it
+        configurator.webInteractors.forEach { webInteractor: WebInteractor ->
+            when (webInteractor) {
+                is FlakySafeWebInteractor -> flakySafetyProvider = webInteractor
+                is FailureLoggingWebInteractor -> failureLoggingProvider = webInteractor
             }
         }
 

@@ -13,6 +13,7 @@ import com.kaspersky.kaspresso.flakysafety.FlakySafetyProvider
 import com.kaspersky.kaspresso.flakysafety.flakySafelyIfNotNull
 import com.kaspersky.kaspresso.interceptors.interaction.impl.ViewInteractionInterceptor
 import com.kaspersky.kaspresso.interceptors.interaction.impl.compose.ComposeViewInteractionInterceptor
+import com.kaspersky.kaspresso.interceptors.interactors.ViewInteractor
 import com.kaspersky.kaspresso.interceptors.interactors.impl.failure.FailureLoggingViewInteractor
 import com.kaspersky.kaspresso.interceptors.interactors.impl.flakysafety.FlakySafeViewInteractor
 
@@ -60,10 +61,10 @@ interface ComposeProvider {
         var flakySafetyProvider: FlakySafetyProvider? = null
         var failureLoggingProvider: FailureLoggingProvider? = null
 
-        configurator.viewInteractors.forEach {
-            when (it) {
-                is FlakySafeViewInteractor -> flakySafetyProvider = it
-                is FailureLoggingViewInteractor -> failureLoggingProvider = it
+        configurator.viewInteractors.forEach { viewInteractor: ViewInteractor ->
+            when (viewInteractor) {
+                is FlakySafeViewInteractor -> flakySafetyProvider = viewInteractor
+                is FailureLoggingViewInteractor -> failureLoggingProvider = viewInteractor
             }
         }
 
