@@ -5,6 +5,7 @@ import androidx.test.espresso.FailureHandler
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.UiDevice
 import com.agoda.kakao.Kakao
+import com.kaspersky.kaspresso.autoscroll.AutoScrollParams
 import com.kaspersky.kaspresso.device.Device
 import com.kaspersky.kaspresso.device.accessibility.Accessibility
 import com.kaspersky.kaspresso.device.accessibility.AccessibilityImpl
@@ -36,8 +37,8 @@ import com.kaspersky.kaspresso.interceptors.interaction.impl.WebInteractionInter
 import com.kaspersky.kaspresso.interceptors.interactors.DataInteractor
 import com.kaspersky.kaspresso.interceptors.interactors.ViewInteractor
 import com.kaspersky.kaspresso.interceptors.interactors.WebInteractor
-import com.kaspersky.kaspresso.interceptors.interactors.impl.autoscroll.AutoscrollViewInteractor
-import com.kaspersky.kaspresso.interceptors.interactors.impl.autoscroll.AutoscrollWebInteractor
+import com.kaspersky.kaspresso.interceptors.interactors.impl.autoscroll.AutoScrollViewInteractor
+import com.kaspersky.kaspresso.interceptors.interactors.impl.autoscroll.AutoScrollWebInteractor
 import com.kaspersky.kaspresso.interceptors.interactors.impl.failure.FailureLoggingDataInteractor
 import com.kaspersky.kaspresso.interceptors.interactors.impl.failure.FailureLoggingViewInteractor
 import com.kaspersky.kaspresso.interceptors.interactors.impl.failure.FailureLoggingWebInteractor
@@ -110,6 +111,7 @@ data class Configurator(
     internal val testLogger: UiTestLogger,
     internal val device: Device,
     internal val flakySafetyParams: FlakySafetyParams,
+    internal val autoScrollParams: AutoScrollParams,
     internal val viewActionInterceptors: List<ViewActionInterceptor>,
     internal val viewAssertionInterceptors: List<ViewAssertionInterceptor>,
     internal val atomInterceptors: List<AtomInterceptor>,
@@ -160,7 +162,7 @@ data class Configurator(
                     )
 
                     viewInteractors = mutableListOf(
-                        AutoscrollViewInteractor(libLogger),
+                        AutoScrollViewInteractor(autoScrollParams, libLogger),
                         FlakySafeViewInteractor(flakySafetyParams, libLogger),
                         FailureLoggingViewInteractor(libLogger)
                     )
@@ -171,7 +173,7 @@ data class Configurator(
                     )
 
                     webInteractors = mutableListOf(
-                        AutoscrollWebInteractor(libLogger),
+                        AutoScrollWebInteractor(autoScrollParams, libLogger),
                         FlakySafeWebInteractor(flakySafetyParams, libLogger),
                         FailureLoggingWebInteractor(libLogger)
                     )
@@ -215,6 +217,7 @@ data class Configurator(
             ExploitImpl(activities, UiDevice.getInstance(InstrumentationRegistry.getInstrumentation()))
 
         var flakySafetyParams: FlakySafetyParams = FlakySafetyParams()
+        var autoScrollParams: AutoScrollParams = AutoScrollParams()
 
         var viewActionInterceptors: MutableList<ViewActionInterceptor> = mutableListOf()
         var viewAssertionInterceptors: MutableList<ViewAssertionInterceptor> = mutableListOf()
@@ -260,6 +263,7 @@ data class Configurator(
                 ),
 
                 flakySafetyParams = flakySafetyParams,
+                autoScrollParams = autoScrollParams,
 
                 viewActionInterceptors = viewActionInterceptors,
                 viewAssertionInterceptors = viewAssertionInterceptors,

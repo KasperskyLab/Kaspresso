@@ -1,32 +1,25 @@
 package com.kaspersky.kaspresso.interceptors.interactors.impl.autoscroll
 
-import androidx.test.espresso.PerformException
 import androidx.test.espresso.web.sugar.Web
 import androidx.test.espresso.web.webdriver.DriverAtoms
-import com.kaspersky.kaspresso.interceptors.interactors.AutoscrollProvider
+import com.kaspersky.kaspresso.autoscroll.AutoScrollParams
+import com.kaspersky.kaspresso.autoscroll.AutoScrollProvider
 import com.kaspersky.kaspresso.interceptors.interactors.WebInteractor
 import com.kaspersky.kaspresso.logger.UiTestLogger
-import io.reactivex.exceptions.CompositeException
-import junit.framework.AssertionFailedError
 
-class AutoscrollWebInteractor(
+class AutoScrollWebInteractor(
+    override val params: AutoScrollParams,
     private val logger: UiTestLogger
-) : WebInteractor, AutoscrollProvider<Web.WebInteraction<*>> {
+) : WebInteractor, AutoScrollProvider<Web.WebInteraction<*>> {
 
     override fun <R> interact(interaction: Web.WebInteraction<*>, action: () -> R): R {
         return try {
             action.invoke()
-        } catch (errors: CompositeException) {
-            errors.exceptions.forEach { error: Throwable ->
-                if (error is AssertionFailedError || error is PerformException) {
-                    return autoscroll(interaction, action, errors)
-                }
+        } catch (error: Throwable) {
+            if (params.isExceptionAllowed(error)) {
+                return autoscroll(interaction, action, error)
             }
-            throw errors
-        } catch (error: AssertionFailedError) {
-            autoscroll(interaction, action, error)
-        } catch (error: PerformException) {
-            autoscroll(interaction, action, error)
+            throw error
         }
     }
 
