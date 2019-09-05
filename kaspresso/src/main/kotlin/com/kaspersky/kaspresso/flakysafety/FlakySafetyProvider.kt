@@ -33,3 +33,6 @@ interface FlakySafetyProvider {
         throw failureMessage?.let { KaspressoAssertionError(it, caughtAllowedException) } ?: caughtAllowedException
     }
 }
+
+fun <T> FlakySafetyProvider?.flakySafelyIfNotNull(failureMessage: String? = null, action: () -> T): T =
+    if (this != null) flakySafely(failureMessage, action) else action.invoke()

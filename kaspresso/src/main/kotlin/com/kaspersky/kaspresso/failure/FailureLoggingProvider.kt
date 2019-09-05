@@ -12,7 +12,7 @@ interface FailureLoggingProvider {
 
     val logger: UiTestLogger
 
-    fun <R> withLoggingOnFailure(action: () -> R): R {
+    fun <T> withLoggingOnFailure(action: () -> T): T {
         return try {
             action.invoke()
         } catch (error: Throwable) {
@@ -57,3 +57,6 @@ interface FailureLoggingProvider {
         }.apply { stackTrace = Thread.currentThread().stackTrace }
     }
 }
+
+fun <T> FailureLoggingProvider?.withLoggingOnFailureIfNotNull(action: () -> T): T =
+    if (this != null) withLoggingOnFailure(action) else action.invoke()

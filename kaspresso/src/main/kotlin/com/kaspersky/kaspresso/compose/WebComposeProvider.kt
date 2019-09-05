@@ -3,7 +3,9 @@ package com.kaspersky.kaspresso.compose
 import com.agoda.kakao.web.WebElementBuilder
 import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.failure.FailureLoggingProvider
+import com.kaspersky.kaspresso.failure.withLoggingOnFailureIfNotNull
 import com.kaspersky.kaspresso.flakysafety.FlakySafetyProvider
+import com.kaspersky.kaspresso.flakysafety.flakySafelyIfNotNull
 import com.kaspersky.kaspresso.interceptors.interaction.impl.WebInteractionInterceptor
 import com.kaspersky.kaspresso.interceptors.interaction.impl.compose.ComposeWebInteractionInterceptor
 import com.kaspersky.kaspresso.interceptors.interactors.impl.failure.FailureLoggingWebInteractor
@@ -13,28 +15,18 @@ interface WebComposeProvider {
 
     val configurator: Configurator
 
-    private val flakySafetyProvider: FlakySafetyProvider?
-        get() = configurator.webInteractors.find { it is FlakySafeWebInteractor } as FlakySafetyProvider?
-
-    private val failureLoggingProvider: FailureLoggingProvider?
-        get() = configurator.webInteractors.find { it is FailureLoggingWebInteractor } as FailureLoggingProvider?
-
-    fun WebElementBuilder.webCompose(
-        block: WebComponentPack.() -> Unit
-    ) {
+    fun WebElementBuilder.webCompose(block: WebComponentPack.() -> Unit) {
         val webComponents: List<WebComponent> = WebComponentPack(this).apply(block).build()
 
         webComponents.forEach { it.webElementBuilder.setComposeInterception() }
 
-        val composedAction: () -> Unit = {
-            flakySafetyProvider
-                ?.flakySafely { invokeComposed(webComponents) }
-                ?: invokeComposed(webComponents)
-        }
+        val (flakySafetyProvider, failureLoggingProvider) = getProviders()
 
-        failureLoggingProvider
-            ?.withLoggingOnFailure(composedAction)
-            ?: composedAction.invoke()
+        failureLoggingProvider.withLoggingOnFailureIfNotNull {
+            flakySafetyProvider.flakySafelyIfNotNull {
+                invokeComposed(webComponents)
+            }
+        }
 
         webComponents.forEach { it.webElementBuilder.setInterception() }
     }
@@ -48,17 +40,29 @@ interface WebComposeProvider {
 
         webElementBuilder.setComposeInterception()
 
-        val composedAction: () -> Unit = {
-            flakySafetyProvider
-                ?.flakySafely { invokeComposed(this, actions) }
-                ?: invokeComposed(this, actions)
+        val (flakySafetyProvider, failureLoggingProvider) = getProviders()
+
+        failureLoggingProvider.withLoggingOnFailureIfNotNull {
+            flakySafetyProvider.flakySafelyIfNotNull {
+                invokeComposed(this, actions)
+            }
         }
 
-        failureLoggingProvider
-            ?.withLoggingOnFailure(composedAction)
-            ?: composedAction.invoke()
-
         webElementBuilder.setInterception()
+    }
+
+    private fun getProviders(): Pair<FlakySafetyProvider?, FailureLoggingProvider?> {
+        var flakySafetyProvider: FlakySafetyProvider? = null
+        var failureLoggingProvider: FailureLoggingProvider? = null
+
+        configurator.webInteractors.forEach {
+            when (it) {
+                is FlakySafeWebInteractor -> flakySafetyProvider = it
+                is FailureLoggingWebInteractor -> failureLoggingProvider = it
+            }
+        }
+
+        return Pair(flakySafetyProvider, failureLoggingProvider)
     }
 
     private fun WebElementBuilder.setComposeInterception() {

@@ -8,7 +8,9 @@ import com.agoda.kakao.common.assertions.BaseAssertions
 import com.agoda.kakao.intercept.Interceptable
 import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.failure.FailureLoggingProvider
+import com.kaspersky.kaspresso.failure.withLoggingOnFailureIfNotNull
 import com.kaspersky.kaspresso.flakysafety.FlakySafetyProvider
+import com.kaspersky.kaspresso.flakysafety.flakySafelyIfNotNull
 import com.kaspersky.kaspresso.interceptors.interaction.impl.ViewInteractionInterceptor
 import com.kaspersky.kaspresso.interceptors.interaction.impl.compose.ComposeViewInteractionInterceptor
 import com.kaspersky.kaspresso.interceptors.interactors.impl.failure.FailureLoggingViewInteractor
@@ -18,12 +20,6 @@ interface ComposeProvider {
 
     val configurator: Configurator
 
-    private val flakySafetyProvider: FlakySafetyProvider?
-        get() = configurator.viewInteractors.find { it is FlakySafeViewInteractor } as FlakySafetyProvider?
-
-    private val failureLoggingProvider: FailureLoggingProvider?
-        get() = configurator.viewInteractors.find { it is FailureLoggingViewInteractor } as FailureLoggingProvider?
-
     fun <T> compose(block: ComponentPack<T>.() -> Unit): Unit
             where T : BaseActions, T : BaseAssertions, T : Interceptable<ViewInteraction, ViewAssertion, ViewAction> {
 
@@ -31,15 +27,13 @@ interface ComposeProvider {
 
         components.forEach { it.element.setComposeInterception() }
 
-        val composedAction: () -> Unit = {
-            flakySafetyProvider
-                ?.flakySafely { invokeComposed(components) }
-                ?: invokeComposed(components)
-        }
+        val (flakySafetyProvider, failureLoggingProvider) = getProviders()
 
-        failureLoggingProvider
-            ?.withLoggingOnFailure(composedAction)
-            ?: composedAction.invoke()
+        failureLoggingProvider.withLoggingOnFailureIfNotNull {
+            flakySafetyProvider.flakySafelyIfNotNull {
+                invokeComposed(components)
+            }
+        }
 
         components.forEach { it.element.setInterception() }
     }
@@ -51,17 +45,29 @@ interface ComposeProvider {
 
         setComposeInterception()
 
-        val composedAction: () -> Unit = {
-            flakySafetyProvider
-                ?.flakySafely { invokeComposed(this, actions) }
-                ?: invokeComposed(this, actions)
+        val (flakySafetyProvider, failureLoggingProvider) = getProviders()
+
+        failureLoggingProvider.withLoggingOnFailureIfNotNull {
+            flakySafetyProvider.flakySafelyIfNotNull {
+                invokeComposed(this, actions)
+            }
         }
 
-        failureLoggingProvider
-            ?.withLoggingOnFailure(composedAction)
-            ?: composedAction.invoke()
-
         setInterception()
+    }
+
+    private fun getProviders(): Pair<FlakySafetyProvider?, FailureLoggingProvider?> {
+        var flakySafetyProvider: FlakySafetyProvider? = null
+        var failureLoggingProvider: FailureLoggingProvider? = null
+
+        configurator.viewInteractors.forEach {
+            when (it) {
+                is FlakySafeViewInteractor -> flakySafetyProvider = it
+                is FailureLoggingViewInteractor -> failureLoggingProvider = it
+            }
+        }
+
+        return Pair(flakySafetyProvider, failureLoggingProvider)
     }
 
     private fun <T> T.setComposeInterception(): Unit
