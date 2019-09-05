@@ -6,6 +6,7 @@ import androidx.test.espresso.web.webdriver.DriverAtoms
 import com.kaspersky.kaspresso.interceptors.interactors.AutoscrollProvider
 import com.kaspersky.kaspresso.interceptors.interactors.WebInteractor
 import com.kaspersky.kaspresso.logger.UiTestLogger
+import io.reactivex.exceptions.CompositeException
 import junit.framework.AssertionFailedError
 
 class AutoscrollWebInteractor(
@@ -15,6 +16,13 @@ class AutoscrollWebInteractor(
     override fun <R> interact(interaction: Web.WebInteraction<*>, action: () -> R): R {
         return try {
             action.invoke()
+        } catch (errors: CompositeException) {
+            errors.exceptions.forEach { error: Throwable ->
+                if (error is AssertionFailedError || error is PerformException) {
+                    return autoscroll(interaction, action, errors)
+                }
+            }
+            throw errors
         } catch (error: AssertionFailedError) {
             autoscroll(interaction, action, error)
         } catch (error: PerformException) {

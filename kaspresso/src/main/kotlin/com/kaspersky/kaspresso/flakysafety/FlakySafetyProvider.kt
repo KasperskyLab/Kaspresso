@@ -15,12 +15,12 @@ interface FlakySafetyProvider {
         do {
             try {
                 return action.invoke()
-            } catch (e: Throwable) {
-                if (params.allowedExceptions.find { it.isAssignableFrom(e.javaClass) } != null) {
+            } catch (error: Throwable) {
+                if (params.isExceptionAllowed(error)) {
                     Thread.sleep(params.intervalMs)
-                    caughtAllowedException = e
+                    caughtAllowedException = error
                 } else {
-                    throw e
+                    throw error
                 }
             }
         } while (System.currentTimeMillis() - startTime <= params.timeoutMs)
