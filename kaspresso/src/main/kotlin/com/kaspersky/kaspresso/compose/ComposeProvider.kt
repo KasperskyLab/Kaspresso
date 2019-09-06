@@ -11,11 +11,11 @@ import com.kaspersky.kaspresso.failure.FailureLoggingProvider
 import com.kaspersky.kaspresso.failure.withLoggingOnFailureIfNotNull
 import com.kaspersky.kaspresso.flakysafety.FlakySafetyProvider
 import com.kaspersky.kaspresso.flakysafety.flakySafelyIfNotNull
-import com.kaspersky.kaspresso.interceptors.interaction.impl.ViewInteractionInterceptor
-import com.kaspersky.kaspresso.interceptors.interaction.impl.compose.ComposeViewInteractionInterceptor
-import com.kaspersky.kaspresso.interceptors.interactors.ViewInteractor
-import com.kaspersky.kaspresso.interceptors.interactors.impl.failure.FailureLoggingViewInteractor
-import com.kaspersky.kaspresso.interceptors.interactors.impl.flakysafety.FlakySafeViewInteractor
+import com.kaspersky.kaspresso.interceptors.behavior.ViewBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.tokakao.compose.ComposeViewInteractionInterceptor
+import com.kaspersky.kaspresso.interceptors.behavior.impl.failure.FailureLoggingViewBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behavior.impl.flakysafety.FlakySafeViewBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.tokakao.impl.ViewKakaoInteractionInterceptor
 
 interface ComposeProvider {
 
@@ -61,10 +61,10 @@ interface ComposeProvider {
         var flakySafetyProvider: FlakySafetyProvider? = null
         var failureLoggingProvider: FailureLoggingProvider? = null
 
-        configurator.viewInteractors.forEach { viewInteractor: ViewInteractor ->
-            when (viewInteractor) {
-                is FlakySafeViewInteractor -> flakySafetyProvider = viewInteractor
-                is FailureLoggingViewInteractor -> failureLoggingProvider = viewInteractor
+        configurator.viewBehaviorInterceptors.forEach { viewBehaviorInterceptor: ViewBehaviorInterceptor ->
+            when (viewBehaviorInterceptor) {
+                is FlakySafeViewBehaviorInterceptor -> flakySafetyProvider = viewBehaviorInterceptor
+                is FailureLoggingViewBehaviorInterceptor -> failureLoggingProvider = viewBehaviorInterceptor
             }
         }
 
@@ -74,7 +74,8 @@ interface ComposeProvider {
     private fun <T> T.setComposeInterception(): Unit
             where T : BaseActions, T : BaseAssertions, T : Interceptable<ViewInteraction, ViewAssertion, ViewAction> {
 
-        val interceptor = ComposeViewInteractionInterceptor(configurator)
+        val interceptor =
+            ComposeViewInteractionInterceptor(configurator)
 
         intercept {
             onCheck(true, interceptor::interceptCheck)
@@ -85,7 +86,7 @@ interface ComposeProvider {
     private fun <T> T.setInterception(): Unit
             where T : BaseActions, T : BaseAssertions, T : Interceptable<ViewInteraction, ViewAssertion, ViewAction> {
 
-        val interceptor = ViewInteractionInterceptor(configurator)
+        val interceptor = ViewKakaoInteractionInterceptor(configurator)
 
         intercept {
             onCheck(true, interceptor::interceptCheck)

@@ -31,35 +31,35 @@ import com.kaspersky.kaspresso.device.screenshots.Screenshots
 import com.kaspersky.kaspresso.device.screenshots.ScreenshotsImpl
 import com.kaspersky.kaspresso.failure.LoggingFailureHandler
 import com.kaspersky.kaspresso.flakysafety.FlakySafetyParams
-import com.kaspersky.kaspresso.interceptors.interaction.impl.DataInteractionInterceptor
-import com.kaspersky.kaspresso.interceptors.interaction.impl.ViewInteractionInterceptor
-import com.kaspersky.kaspresso.interceptors.interaction.impl.WebInteractionInterceptor
-import com.kaspersky.kaspresso.interceptors.interactors.DataInteractor
-import com.kaspersky.kaspresso.interceptors.interactors.ViewInteractor
-import com.kaspersky.kaspresso.interceptors.interactors.WebInteractor
-import com.kaspersky.kaspresso.interceptors.interactors.impl.autoscroll.AutoScrollViewInteractor
-import com.kaspersky.kaspresso.interceptors.interactors.impl.autoscroll.AutoScrollWebInteractor
-import com.kaspersky.kaspresso.interceptors.interactors.impl.failure.FailureLoggingDataInteractor
-import com.kaspersky.kaspresso.interceptors.interactors.impl.failure.FailureLoggingViewInteractor
-import com.kaspersky.kaspresso.interceptors.interactors.impl.failure.FailureLoggingWebInteractor
-import com.kaspersky.kaspresso.interceptors.interactors.impl.flakysafety.FlakySafeDataInteractor
-import com.kaspersky.kaspresso.interceptors.interactors.impl.flakysafety.FlakySafeViewInteractor
-import com.kaspersky.kaspresso.interceptors.interactors.impl.flakysafety.FlakySafeWebInteractor
-import com.kaspersky.kaspresso.interceptors.testcase.StepInterceptor
-import com.kaspersky.kaspresso.interceptors.testcase.TestRunInterceptor
-import com.kaspersky.kaspresso.interceptors.testcase.impl.logging.LoggingStepInterceptor
-import com.kaspersky.kaspresso.interceptors.testcase.impl.logging.TestRunLoggerInterceptor
-import com.kaspersky.kaspresso.interceptors.testcase.impl.report.BuildStepReportInterceptor
-import com.kaspersky.kaspresso.interceptors.testcase.impl.screenshot.ScreenshotStepInterceptor
-import com.kaspersky.kaspresso.interceptors.testcase.impl.screenshot.TestRunnerScreenshotInterceptor
-import com.kaspersky.kaspresso.interceptors.view.AtomInterceptor
-import com.kaspersky.kaspresso.interceptors.view.ViewActionInterceptor
-import com.kaspersky.kaspresso.interceptors.view.ViewAssertionInterceptor
-import com.kaspersky.kaspresso.interceptors.view.WebAssertionInterceptor
-import com.kaspersky.kaspresso.interceptors.view.impl.logging.LoggingAtomInterceptor
-import com.kaspersky.kaspresso.interceptors.view.impl.logging.LoggingViewActionInterceptor
-import com.kaspersky.kaspresso.interceptors.view.impl.logging.LoggingViewAssertionInterceptor
-import com.kaspersky.kaspresso.interceptors.view.impl.logging.LoggingWebAssertionInterceptor
+import com.kaspersky.kaspresso.interceptors.behavior.DataBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behavior.ViewBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behavior.WebBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behavior.impl.autoscroll.AutoScrollViewBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behavior.impl.autoscroll.AutoScrollWebBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behavior.impl.failure.FailureLoggingDataBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behavior.impl.failure.FailureLoggingViewBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behavior.impl.failure.FailureLoggingWebBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behavior.impl.flakysafety.FlakySafeDataBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behavior.impl.flakysafety.FlakySafeViewBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behavior.impl.flakysafety.FlakySafeWebBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.tokakao.impl.DataKakaoInteractionInterceptor
+import com.kaspersky.kaspresso.interceptors.tokakao.impl.ViewKakaoInteractionInterceptor
+import com.kaspersky.kaspresso.interceptors.tokakao.impl.WebKakaoInteractionInterceptor
+import com.kaspersky.kaspresso.interceptors.watcher.testcase.StepWatcherInterceptor
+import com.kaspersky.kaspresso.interceptors.watcher.testcase.TestRunWatcherInterceptor
+import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.logging.LoggingStepWatcherInterceptor
+import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.logging.TestRunLoggerWatcherInterceptor
+import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.report.BuildStepReportWatcherInterceptor
+import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.screenshot.ScreenshotStepWatcherInterceptor
+import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.screenshot.TestRunnerScreenshotWatcherInterceptor
+import com.kaspersky.kaspresso.interceptors.watcher.view.AtomWatcherInterceptor
+import com.kaspersky.kaspresso.interceptors.watcher.view.ViewActionWatcherInterceptor
+import com.kaspersky.kaspresso.interceptors.watcher.view.ViewAssertionWatcherInterceptor
+import com.kaspersky.kaspresso.interceptors.watcher.view.WebAssertionWatcherInterceptor
+import com.kaspersky.kaspresso.interceptors.watcher.view.impl.logging.LoggingAtomWatcherInterceptor
+import com.kaspersky.kaspresso.interceptors.watcher.view.impl.logging.LoggingViewActionWatcherInterceptor
+import com.kaspersky.kaspresso.interceptors.watcher.view.impl.logging.LoggingViewAssertionWatcherInterceptor
+import com.kaspersky.kaspresso.interceptors.watcher.view.impl.logging.LoggingWebAssertionWatcherInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.logger.UiTestLoggerImpl
 import com.kaspersky.kaspresso.report.impl.AllureReportWriter
@@ -90,19 +90,19 @@ import com.kaspersky.kaspresso.testcases.core.testcontext.TestContext
  * the default implementation is used.
  * @param exploit Holds an implementation of [Exploit] interface. If it was not specified in [Configurator.Builder],
  * the default implementation is used.
- * @param viewActionInterceptors Interceptors that are called by [com.kaspersky.kaspresso.proxy.ViewActionProxy]
+ * @param viewActionWatcherInterceptors Interceptors that are called by [com.kaspersky.kaspresso.proxy.ViewActionProxy]
  * before actually [androidx.test.espresso.ViewAction.perform] call.
- * @param viewAssertionInterceptors Interceptors that are called by [com.kaspersky.kaspresso.proxy.ViewAssertionProxy]
+ * @param viewAssertionWatcherInterceptors Interceptors that are called by [com.kaspersky.kaspresso.proxy.ViewAssertionProxy]
  * before actually [androidx.test.espresso.ViewAssertion.check] call.
- * @param atomInterceptors Interceptors that are called by [com.kaspersky.kaspresso.proxy.AtomProxy]
+ * @param atomWatcherInterceptors Interceptors that are called by [com.kaspersky.kaspresso.proxy.AtomProxy]
  * before actually [androidx.test.espresso.web.model.Atom.transform] call.
- * @param webAssertionInterceptors Interceptors that are called by [androidx.test.espresso.web.assertion.WebAssertionProxy]
+ * @param webAssertionWatcherInterceptors Interceptors that are called by [androidx.test.espresso.web.assertion.WebAssertionProxy]
  * before actually [androidx.test.espresso.web.assertion.WebAssertion.checkResult] call.
  * @param executingInterceptor An interceptor that actually manages the execution of actions or assertions. For example,
  * [FlakySafeExecutionInterceptor] performs multiple attempting to interact an action or assertion.
- * @param stepInterceptors An interceptors set that actually manages the execution of steps [TestContext.step].
+ * @param stepWatcherInterceptors An interceptors set that actually manages the execution of steps [TestContext.step].
  * Interceptors work using decorator pattern. First interceptor wraps others.
- * @param testRunInterceptors An interceptors set that actually manages the execution of test sections
+ * @param testRunWatcherInterceptors An interceptors set that actually manages the execution of test sections
  * [com.kaspersky.kaspresso.testcases.models.TestInfo]. Interceptor works using decorator pattern. First interceptor wraps others.
  * @param testLogger Holds an implementation of [UiTestLogger] interface for external usage.
  */
@@ -112,15 +112,15 @@ data class Configurator(
     internal val device: Device,
     internal val flakySafetyParams: FlakySafetyParams,
     internal val autoScrollParams: AutoScrollParams,
-    internal val viewActionInterceptors: List<ViewActionInterceptor>,
-    internal val viewAssertionInterceptors: List<ViewAssertionInterceptor>,
-    internal val atomInterceptors: List<AtomInterceptor>,
-    internal val webAssertionInterceptors: List<WebAssertionInterceptor>,
-    internal val viewInteractors: List<ViewInteractor>,
-    internal val dataInteractors: List<DataInteractor>,
-    internal val webInteractors: List<WebInteractor>,
-    internal val stepInterceptors: List<StepInterceptor>,
-    internal val testRunInterceptors: List<TestRunInterceptor>
+    internal val viewActionWatcherInterceptors: List<ViewActionWatcherInterceptor>,
+    internal val viewAssertionWatcherInterceptors: List<ViewAssertionWatcherInterceptor>,
+    internal val atomWatcherInterceptors: List<AtomWatcherInterceptor>,
+    internal val webAssertionWatcherInterceptors: List<WebAssertionWatcherInterceptor>,
+    internal val viewBehaviorInterceptors: List<ViewBehaviorInterceptor>,
+    internal val dataBehaviorInterceptors: List<DataBehaviorInterceptor>,
+    internal val webBehaviorInterceptors: List<WebBehaviorInterceptor>,
+    internal val stepWatcherInterceptors: List<StepWatcherInterceptor>,
+    internal val testRunWatcherInterceptors: List<TestRunWatcherInterceptor>
 ) {
     private companion object {
         private const val DEFAULT_LIB_LOGGER_TAG: String = "KASPRESSO"
@@ -145,48 +145,48 @@ data class Configurator(
             fun default(): Builder {
                 return Builder().apply {
 
-                    viewActionInterceptors = mutableListOf(
-                        LoggingViewActionInterceptor(libLogger)
+                    viewActionWatcherInterceptors = mutableListOf(
+                        LoggingViewActionWatcherInterceptor(libLogger)
                     )
 
-                    viewAssertionInterceptors = mutableListOf(
-                        LoggingViewAssertionInterceptor(libLogger)
+                    viewAssertionWatcherInterceptors = mutableListOf(
+                        LoggingViewAssertionWatcherInterceptor(libLogger)
                     )
 
-                    atomInterceptors = mutableListOf(
-                        LoggingAtomInterceptor(libLogger)
+                    atomWatcherInterceptors = mutableListOf(
+                        LoggingAtomWatcherInterceptor(libLogger)
                     )
 
-                    webAssertionInterceptors = mutableListOf(
-                        LoggingWebAssertionInterceptor(libLogger)
+                    webAssertionWatcherInterceptors = mutableListOf(
+                        LoggingWebAssertionWatcherInterceptor(libLogger)
                     )
 
-                    viewInteractors = mutableListOf(
-                        AutoScrollViewInteractor(autoScrollParams, libLogger),
-                        FlakySafeViewInteractor(flakySafetyParams, libLogger),
-                        FailureLoggingViewInteractor(libLogger)
+                    viewBehaviorInterceptors = mutableListOf(
+                        AutoScrollViewBehaviorInterceptor(autoScrollParams, libLogger),
+                        FlakySafeViewBehaviorInterceptor(flakySafetyParams, libLogger),
+                        FailureLoggingViewBehaviorInterceptor(libLogger)
                     )
 
-                    dataInteractors = mutableListOf(
-                        FlakySafeDataInteractor(flakySafetyParams, libLogger),
-                        FailureLoggingDataInteractor(libLogger)
+                    dataBehaviorInterceptors = mutableListOf(
+                        FlakySafeDataBehaviorInterceptor(flakySafetyParams, libLogger),
+                        FailureLoggingDataBehaviorInterceptor(libLogger)
                     )
 
-                    webInteractors = mutableListOf(
-                        AutoScrollWebInteractor(autoScrollParams, libLogger),
-                        FlakySafeWebInteractor(flakySafetyParams, libLogger),
-                        FailureLoggingWebInteractor(libLogger)
+                    webBehaviorInterceptors = mutableListOf(
+                        AutoScrollWebBehaviorInterceptor(autoScrollParams, libLogger),
+                        FlakySafeWebBehaviorInterceptor(flakySafetyParams, libLogger),
+                        FailureLoggingWebBehaviorInterceptor(libLogger)
                     )
 
-                    stepInterceptors = mutableListOf(
-                        LoggingStepInterceptor(libLogger),
-                        ScreenshotStepInterceptor(screenshots)
+                    stepWatcherInterceptors = mutableListOf(
+                        LoggingStepWatcherInterceptor(libLogger),
+                        ScreenshotStepWatcherInterceptor(screenshots)
                     )
 
-                    testRunInterceptors = mutableListOf(
-                        TestRunLoggerInterceptor(libLogger),
-                        TestRunnerScreenshotInterceptor(screenshots),
-                        BuildStepReportInterceptor(AllureReportWriter(libLogger))
+                    testRunWatcherInterceptors = mutableListOf(
+                        TestRunLoggerWatcherInterceptor(libLogger),
+                        TestRunnerScreenshotWatcherInterceptor(screenshots),
+                        BuildStepReportWatcherInterceptor(AllureReportWriter(libLogger))
                     )
 
                     failureHandler = LoggingFailureHandler(libLogger)
@@ -219,17 +219,17 @@ data class Configurator(
         var flakySafetyParams: FlakySafetyParams = FlakySafetyParams()
         var autoScrollParams: AutoScrollParams = AutoScrollParams()
 
-        var viewActionInterceptors: MutableList<ViewActionInterceptor> = mutableListOf()
-        var viewAssertionInterceptors: MutableList<ViewAssertionInterceptor> = mutableListOf()
-        var atomInterceptors: MutableList<AtomInterceptor> = mutableListOf()
-        var webAssertionInterceptors: MutableList<WebAssertionInterceptor> = mutableListOf()
+        var viewActionWatcherInterceptors: MutableList<ViewActionWatcherInterceptor> = mutableListOf()
+        var viewAssertionWatcherInterceptors: List<ViewAssertionWatcherInterceptor> = mutableListOf()
+        var atomWatcherInterceptors: List<AtomWatcherInterceptor> = mutableListOf()
+        var webAssertionWatcherInterceptors: List<WebAssertionWatcherInterceptor> = mutableListOf()
 
-        var viewInteractors: MutableList<ViewInteractor> = mutableListOf()
-        var dataInteractors: MutableList<DataInteractor> = mutableListOf()
-        var webInteractors: MutableList<WebInteractor> = mutableListOf()
+        var viewBehaviorInterceptors: MutableList<ViewBehaviorInterceptor> = mutableListOf()
+        var dataBehaviorInterceptors: MutableList<DataBehaviorInterceptor> = mutableListOf()
+        var webBehaviorInterceptors: MutableList<WebBehaviorInterceptor> = mutableListOf()
 
-        var stepInterceptors: MutableList<StepInterceptor> = mutableListOf()
-        var testRunInterceptors: MutableList<TestRunInterceptor> = mutableListOf()
+        var stepWatcherInterceptors: MutableList<StepWatcherInterceptor> = mutableListOf()
+        var testRunWatcherInterceptors: MutableList<TestRunWatcherInterceptor> = mutableListOf()
 
         /**
          * An interceptor that is called on failures. It's [FailureHandler.intercept] method is being
@@ -265,22 +265,22 @@ data class Configurator(
                 flakySafetyParams = flakySafetyParams,
                 autoScrollParams = autoScrollParams,
 
-                viewActionInterceptors = viewActionInterceptors,
-                viewAssertionInterceptors = viewAssertionInterceptors,
-                atomInterceptors = atomInterceptors,
-                webAssertionInterceptors = webAssertionInterceptors,
+                viewActionWatcherInterceptors = viewActionWatcherInterceptors,
+                viewAssertionWatcherInterceptors = viewAssertionWatcherInterceptors,
+                atomWatcherInterceptors = atomWatcherInterceptors,
+                webAssertionWatcherInterceptors = webAssertionWatcherInterceptors,
 
-                viewInteractors = viewInteractors,
-                dataInteractors = dataInteractors,
-                webInteractors = webInteractors,
+                viewBehaviorInterceptors = viewBehaviorInterceptors,
+                dataBehaviorInterceptors = dataBehaviorInterceptors,
+                webBehaviorInterceptors = webBehaviorInterceptors,
 
-                stepInterceptors = stepInterceptors,
-                testRunInterceptors = testRunInterceptors
+                stepWatcherInterceptors = stepWatcherInterceptors,
+                testRunWatcherInterceptors = testRunWatcherInterceptors
             )
 
-            val viewInteractionInterceptor = ViewInteractionInterceptor(configurator)
-            val dataInteractionInterceptor = DataInteractionInterceptor(configurator)
-            val webInteractionInterceptor = WebInteractionInterceptor(configurator)
+            val viewInteractionInterceptor = ViewKakaoInteractionInterceptor(configurator)
+            val dataInteractionInterceptor = DataKakaoInteractionInterceptor(configurator)
+            val webInteractionInterceptor = WebKakaoInteractionInterceptor(configurator)
 
             Kakao.intercept {
                 onViewInteraction {

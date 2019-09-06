@@ -1,7 +1,7 @@
 package com.kaspersky.kaspresso.testcases.core.testcontext
 
 import com.kaspersky.kaspresso.configurator.Configurator
-import com.kaspersky.kaspresso.interceptors.testcase.StepInterceptor
+import com.kaspersky.kaspresso.interceptors.watcher.testcase.StepWatcherInterceptor
 import com.kaspersky.kaspresso.internal.extensions.other.forEachSafely
 import com.kaspersky.kaspresso.internal.extensions.other.invokeSafely
 import com.kaspersky.kaspresso.internal.extensions.other.throwAll
@@ -19,7 +19,7 @@ class TestContext<Data> internal constructor(
     val data: Data
 ) : BaseTestContext(configurator) {
 
-    private val interceptors: List<StepInterceptor> = configurator.stepInterceptors
+    private val watcherInterceptors: List<StepWatcherInterceptor> = configurator.stepWatcherInterceptors
 
     /**
      * A representation of a [TestContext]'s step.
@@ -33,19 +33,19 @@ class TestContext<Data> internal constructor(
 
         val stepInfo = stepInfoProducer.produceStepInfo(description)
 
-        interceptors.forEachSafely(exceptions) { it.interceptBefore(stepInfo) }
+        watcherInterceptors.forEachSafely(exceptions) { it.interceptBefore(stepInfo) }
 
         try {
             actions.invoke()
             stepInfoProducer.onStepFinished(stepInfo)
 
-            interceptors.forEach {
+            watcherInterceptors.forEach {
                 invokeSafely(exceptions) { it.interceptAfterWithSuccess(stepInfo) }
                 invokeSafely(exceptions) { it.interceptAfterFinally(stepInfo) }
             }
         } catch (throwable: Throwable) {
             stepInfoProducer.onStepFinished(stepInfo, throwable)
-            interceptors.forEach {
+            watcherInterceptors.forEach {
                 invokeSafely(exceptions) { it.interceptAfterWithError(stepInfo, throwable) }
                 invokeSafely(exceptions) { it.interceptAfterFinally(stepInfo) }
             }

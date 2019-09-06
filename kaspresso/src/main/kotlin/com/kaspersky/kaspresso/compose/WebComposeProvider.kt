@@ -6,11 +6,11 @@ import com.kaspersky.kaspresso.failure.FailureLoggingProvider
 import com.kaspersky.kaspresso.failure.withLoggingOnFailureIfNotNull
 import com.kaspersky.kaspresso.flakysafety.FlakySafetyProvider
 import com.kaspersky.kaspresso.flakysafety.flakySafelyIfNotNull
-import com.kaspersky.kaspresso.interceptors.interaction.impl.WebInteractionInterceptor
-import com.kaspersky.kaspresso.interceptors.interaction.impl.compose.ComposeWebInteractionInterceptor
-import com.kaspersky.kaspresso.interceptors.interactors.WebInteractor
-import com.kaspersky.kaspresso.interceptors.interactors.impl.failure.FailureLoggingWebInteractor
-import com.kaspersky.kaspresso.interceptors.interactors.impl.flakysafety.FlakySafeWebInteractor
+import com.kaspersky.kaspresso.interceptors.behavior.WebBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.tokakao.compose.ComposeWebInteractionInterceptor
+import com.kaspersky.kaspresso.interceptors.behavior.impl.failure.FailureLoggingWebBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behavior.impl.flakysafety.FlakySafeWebBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.tokakao.impl.WebKakaoInteractionInterceptor
 
 interface WebComposeProvider {
 
@@ -56,10 +56,10 @@ interface WebComposeProvider {
         var flakySafetyProvider: FlakySafetyProvider? = null
         var failureLoggingProvider: FailureLoggingProvider? = null
 
-        configurator.webInteractors.forEach { webInteractor: WebInteractor ->
-            when (webInteractor) {
-                is FlakySafeWebInteractor -> flakySafetyProvider = webInteractor
-                is FailureLoggingWebInteractor -> failureLoggingProvider = webInteractor
+        configurator.webBehaviorInterceptors.forEach { webBehaviorInterceptor: WebBehaviorInterceptor ->
+            when (webBehaviorInterceptor) {
+                is FlakySafeWebBehaviorInterceptor -> flakySafetyProvider = webBehaviorInterceptor
+                is FailureLoggingWebBehaviorInterceptor -> failureLoggingProvider = webBehaviorInterceptor
             }
         }
 
@@ -67,7 +67,8 @@ interface WebComposeProvider {
     }
 
     private fun WebElementBuilder.setComposeInterception() {
-        val interceptor = ComposeWebInteractionInterceptor(configurator)
+        val interceptor =
+            ComposeWebInteractionInterceptor(configurator)
 
         intercept {
             onCheck(true, interceptor::interceptCheck)
@@ -76,7 +77,7 @@ interface WebComposeProvider {
     }
 
     private fun WebElementBuilder.setInterception() {
-        val interceptor = WebInteractionInterceptor(configurator)
+        val interceptor = WebKakaoInteractionInterceptor(configurator)
 
         intercept {
             onCheck(true, interceptor::interceptCheck)
