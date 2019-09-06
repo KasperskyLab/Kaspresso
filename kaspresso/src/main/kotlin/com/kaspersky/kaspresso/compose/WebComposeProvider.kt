@@ -7,9 +7,9 @@ import com.kaspersky.kaspresso.failure.withLoggingOnFailureIfNotNull
 import com.kaspersky.kaspresso.flakysafety.FlakySafetyProvider
 import com.kaspersky.kaspresso.flakysafety.flakySafelyIfNotNull
 import com.kaspersky.kaspresso.interceptors.behavior.WebBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.tokakao.compose.ComposeWebInteractionInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.impl.failure.FailureLoggingWebBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.impl.flakysafety.FlakySafeWebBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.tokakao.compose.ComposeWebInteractionInterceptor
 import com.kaspersky.kaspresso.interceptors.tokakao.impl.WebKakaoInteractionInterceptor
 
 interface WebComposeProvider {
