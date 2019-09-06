@@ -1,0 +1,15 @@
+package com.kaspersky.kaspresso.interceptors.behavior.impl.systemsafety
+
+import androidx.test.espresso.ViewInteraction
+import com.kaspersky.kaspresso.interceptors.behavior.ViewBehaviorInterceptor
+import com.kaspersky.kaspresso.logger.UiTestLogger
+import com.kaspersky.kaspresso.systemsafety.SystemDialogSafetyParams
+import com.kaspersky.kaspresso.systemsafety.SystemDialogSafetyProvider
+
+class SystemDialogSafetyViewBehaviorInterceptor(
+    override val params: SystemDialogSafetyParams,
+    override val logger: UiTestLogger
+) : ViewBehaviorInterceptor, SystemDialogSafetyProvider {
+
+    override fun <R> interact(interaction: ViewInteraction, action: () -> R): R = passSystemDialogs(action = action)
+}

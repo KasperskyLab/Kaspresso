@@ -42,6 +42,9 @@ import com.kaspersky.kaspresso.interceptors.behavior.impl.failure.FailureLogging
 import com.kaspersky.kaspresso.interceptors.behavior.impl.flakysafety.FlakySafeDataBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.impl.flakysafety.FlakySafeViewBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.impl.flakysafety.FlakySafeWebBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behavior.impl.systemsafety.SystemDialogSafetyDataBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behavior.impl.systemsafety.SystemDialogSafetyViewBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behavior.impl.systemsafety.SystemDialogSafetyWebBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.tokakao.impl.DataKakaoInteractionInterceptor
 import com.kaspersky.kaspresso.interceptors.tokakao.impl.ViewKakaoInteractionInterceptor
 import com.kaspersky.kaspresso.interceptors.tokakao.impl.WebKakaoInteractionInterceptor
@@ -63,6 +66,7 @@ import com.kaspersky.kaspresso.interceptors.watcher.view.impl.logging.LoggingWeb
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.logger.UiTestLoggerImpl
 import com.kaspersky.kaspresso.report.impl.AllureReportWriter
+import com.kaspersky.kaspresso.systemsafety.SystemDialogSafetyParams
 import com.kaspersky.kaspresso.testcases.core.testcontext.TestContext
 
 /**
@@ -163,17 +167,20 @@ data class Configurator(
 
                     viewBehaviorInterceptors = mutableListOf(
                         AutoScrollViewBehaviorInterceptor(autoScrollParams, libLogger),
+                        SystemDialogSafetyViewBehaviorInterceptor(systemDialogSafetyParams, libLogger),
                         FlakySafeViewBehaviorInterceptor(flakySafetyParams, libLogger),
                         FailureLoggingViewBehaviorInterceptor(libLogger)
                     )
 
                     dataBehaviorInterceptors = mutableListOf(
+                        SystemDialogSafetyDataBehaviorInterceptor(systemDialogSafetyParams, libLogger),
                         FlakySafeDataBehaviorInterceptor(flakySafetyParams, libLogger),
                         FailureLoggingDataBehaviorInterceptor(libLogger)
                     )
 
                     webBehaviorInterceptors = mutableListOf(
                         AutoScrollWebBehaviorInterceptor(autoScrollParams, libLogger),
+                        SystemDialogSafetyWebBehaviorInterceptor(systemDialogSafetyParams, libLogger),
                         FlakySafeWebBehaviorInterceptor(flakySafetyParams, libLogger),
                         FailureLoggingWebBehaviorInterceptor(libLogger)
                     )
@@ -218,6 +225,7 @@ data class Configurator(
 
         var flakySafetyParams: FlakySafetyParams = FlakySafetyParams()
         var autoScrollParams: AutoScrollParams = AutoScrollParams()
+        var systemDialogSafetyParams: SystemDialogSafetyParams = SystemDialogSafetyParams()
 
         var viewActionWatcherInterceptors: MutableList<ViewActionWatcherInterceptor> = mutableListOf()
         var viewAssertionWatcherInterceptors: List<ViewAssertionWatcherInterceptor> = mutableListOf()
