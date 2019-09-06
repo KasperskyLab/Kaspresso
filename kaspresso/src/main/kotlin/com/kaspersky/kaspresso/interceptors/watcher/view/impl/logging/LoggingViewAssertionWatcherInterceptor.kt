@@ -22,14 +22,7 @@ class LoggingViewAssertionWatcherInterceptor(
      * @param view an Android [View], on which [viewAssertion] is performed.
      * @param exception indicates that a given matcher did not match any elements in the view hierarchy.
      */
-    override fun intercept(
-        viewAssertion: ViewAssertion,
-        view: View?,
-        exception: NoMatchingViewException?
-    ) {
-        val text = exception?.viewMatcherDescription
-            ?: "${viewAssertion.describe()} on ${view.describe()}"
-
-        logger.i(text)
+    override fun intercept(viewAssertion: ViewAssertion, view: View?, exception: NoMatchingViewException?) {
+        logger.i(exception?.viewMatcherDescription ?: "${viewAssertion.describe()} on ${view.describe()}")
     }
 }

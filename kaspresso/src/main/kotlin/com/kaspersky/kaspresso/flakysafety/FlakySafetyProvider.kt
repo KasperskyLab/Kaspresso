@@ -1,6 +1,7 @@
 package com.kaspersky.kaspresso.flakysafety
 
 import com.kaspersky.kaspresso.internal.exceptions.KaspressoAssertionError
+import com.kaspersky.kaspresso.internal.extensions.other.isAllowed
 import com.kaspersky.kaspresso.logger.UiTestLogger
 
 interface FlakySafetyProvider {
@@ -16,7 +17,7 @@ interface FlakySafetyProvider {
             try {
                 return action.invoke()
             } catch (error: Throwable) {
-                if (params.isExceptionAllowed(error)) {
+                if (error.isAllowed(params.allowedExceptions)) {
                     Thread.sleep(params.intervalMs)
                     cachedError = error
                 } else {

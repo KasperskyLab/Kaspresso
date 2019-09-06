@@ -15,11 +15,7 @@ class WebComponentPack(
 ) {
     private val webComponents: MutableList<WebComponent> = arrayListOf()
 
-    fun orWithElement(
-        locator: Locator,
-        value: String,
-        webAction: WebElementBuilder.KWebInteraction.() -> Unit
-    ) {
+    fun orWithElement(locator: Locator, value: String, webAction: WebElementBuilder.KWebInteraction.() -> Unit) {
         webElementBuilder.withElement(locator, value) {
             webComponents += WebComponent(this, webElementBuilder, webAction)
         }

@@ -43,3 +43,16 @@ internal fun <T : Throwable> List<T>.throwAll() {
         in 2..Int.MAX_VALUE -> throw CompositeException(this)
     }
 }
+
+internal fun <T : Throwable> T.isAllowed(allowed: MutableSet<Class<out Throwable>>): Boolean {
+    return when (this) {
+        is CompositeException -> {
+            exceptions.find { e: Throwable ->
+                allowed.find { it.isAssignableFrom(e.javaClass) } != null
+            } != null
+        }
+        else -> {
+            allowed.find { it.isAssignableFrom(javaClass) } != null
+        }
+    }
+}

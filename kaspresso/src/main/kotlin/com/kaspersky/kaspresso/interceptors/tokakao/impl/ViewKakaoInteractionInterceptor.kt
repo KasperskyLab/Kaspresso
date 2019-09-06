@@ -15,15 +15,27 @@ internal class ViewKakaoInteractionInterceptor(
 
     override fun interceptCheck(interaction: ViewInteraction, assertion: ViewAssertion) {
         configurator.viewBehaviorInterceptors.fold(
-            { interaction.check(ViewAssertionProxy(assertion, configurator.viewAssertionWatcherInterceptors)) },
-            { acc, viewInteractor: ViewBehaviorInterceptor -> { viewInteractor.interact(interaction, acc) } }
+            initial = {
+                interaction.check(
+                    ViewAssertionProxy(assertion, configurator.viewAssertionWatcherInterceptors)
+                )
+            },
+            operation = { acc, viewInteractor: ViewBehaviorInterceptor ->
+                { viewInteractor.interact(interaction, acc) }
+            }
         ).invoke()
     }
 
     override fun interceptPerform(interaction: ViewInteraction, action: ViewAction) {
         configurator.viewBehaviorInterceptors.fold(
-            { interaction.perform(ViewActionProxy(action, configurator.viewActionWatcherInterceptors)) },
-            { acc, viewInteractor: ViewBehaviorInterceptor -> { viewInteractor.interact(interaction, acc) } }
+            initial = {
+                interaction.perform(
+                    ViewActionProxy(action, configurator.viewActionWatcherInterceptors)
+                )
+            },
+            operation = { acc, viewInteractor: ViewBehaviorInterceptor ->
+                { viewInteractor.interact(interaction, acc) }
+            }
         ).invoke()
     }
 }

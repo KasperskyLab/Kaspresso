@@ -1,5 +1,6 @@
 package com.kaspersky.kaspresso.configurator
 
+import android.app.Instrumentation
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.FailureHandler
 import androidx.test.platform.app.InstrumentationRegistry
@@ -204,24 +205,19 @@ data class Configurator(
         var libLogger: UiTestLogger = UiTestLoggerImpl(DEFAULT_LIB_LOGGER_TAG)
         var testLogger: UiTestLogger = UiTestLoggerImpl(DEFAULT_TEST_LOGGER_TAG)
 
-        var apps: Apps =
-            AppsImpl(
-                libLogger,
-                InstrumentationRegistry.getInstrumentation().context,
-                UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
-            )
+        private val instrumentation: Instrumentation = InstrumentationRegistry.getInstrumentation()
+
+        var apps: Apps = AppsImpl(libLogger, instrumentation.context, UiDevice.getInstance(instrumentation))
         var activities: Activities = ActivitiesImpl(libLogger)
         var files: Files = FilesImpl()
-        var network: Network = NetworkImpl(InstrumentationRegistry.getInstrumentation().targetContext)
+        var network: Network = NetworkImpl(instrumentation.targetContext)
         var phone: Phone = PhoneImpl()
         var location: Location = LocationImpl()
         var keyboard: Keyboard = KeyboardImpl()
         var screenshots: Screenshots = ScreenshotsImpl(libLogger, activities)
         var accessibility: Accessibility = AccessibilityImpl()
-        var permissions: Permissions =
-            PermissionsImpl(libLogger, UiDevice.getInstance(InstrumentationRegistry.getInstrumentation()))
-        var exploit: Exploit =
-            ExploitImpl(activities, UiDevice.getInstance(InstrumentationRegistry.getInstrumentation()))
+        var permissions: Permissions = PermissionsImpl(libLogger, UiDevice.getInstance(instrumentation))
+        var exploit: Exploit = ExploitImpl(activities, UiDevice.getInstance(instrumentation))
 
         var flakySafetyParams: FlakySafetyParams = FlakySafetyParams()
         var autoScrollParams: AutoScrollParams = AutoScrollParams()

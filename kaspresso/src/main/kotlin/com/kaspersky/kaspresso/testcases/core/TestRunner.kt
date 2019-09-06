@@ -16,7 +16,6 @@ internal class TestRunner<InitData, Data>(
     private val configurator: Configurator
 ) {
     fun run(testBody: TestBody<InitData, Data>) {
-
         val exceptions: MutableList<Throwable> = mutableListOf()
         val resultException: Throwable?
 

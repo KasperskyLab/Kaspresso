@@ -24,22 +24,14 @@ class LoggingWebAssertionWatcherInterceptor(
      *      is performed.
      * @param result a result of [androidx.test.espresso.web.assertion.WebAssertion].
      */
-    override fun intercept(
-        webAssertionProxy: WebAssertionProxy<*>,
-        view: WebView?,
-        result: Any
-    ) {
+    override fun intercept(webAssertionProxy: WebAssertionProxy<*>, view: WebView?, result: Any) {
         logger.i(getFullWebAssertionDescription(webAssertionProxy, result))
     }
 
     /**
      * @return a string description of [WebAssertion].
      */
-    private fun getFullWebAssertionDescription(
-        webAssertionProxy: WebAssertionProxy<*>,
-        result: Any
-    ): String {
-
+    private fun getFullWebAssertionDescription(webAssertionProxy: WebAssertionProxy<*>, result: Any): String {
         return StringBuilder("web assertion")
             .apply {
                 webAssertionProxy.webAssertion.describeTo(this, result)

@@ -22,7 +22,11 @@ internal class ComposeWebInteractionInterceptor(
             .fold(
                 initial = {
                     interaction.check(
-                        WebAssertionProxy(assertion, interaction.getMatcher(), configurator.webAssertionWatcherInterceptors)
+                        WebAssertionProxy(
+                            assertion,
+                            interaction.getMatcher(),
+                            configurator.webAssertionWatcherInterceptors
+                        )
                     )
                 },
                 operation = { acc, webBehaviorInterceptor: WebBehaviorInterceptor ->

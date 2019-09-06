@@ -16,6 +16,5 @@ open class BaseTestContext internal constructor(
     override val logger: UiTestLogger = configurator.libLogger
 
     val device: Device = configurator.device
-
     val testLogger: UiTestLogger = configurator.testLogger
 }

@@ -17,9 +17,5 @@ interface WebAssertionWatcherInterceptor {
      * @param view an Android [View], on which [androidx.test.espresso.web.assertion.WebAssertion] is performed.
      * @param result a result of [androidx.test.espresso.web.assertion.WebAssertion].
      */
-    fun intercept(
-        webAssertionProxy: WebAssertionProxy<*>,
-        view: WebView?,
-        result: Any
-    )
+    fun intercept(webAssertionProxy: WebAssertionProxy<*>, view: WebView?, result: Any)
 }

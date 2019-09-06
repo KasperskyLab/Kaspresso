@@ -6,6 +6,7 @@ import androidx.test.uiautomator.By
 import androidx.test.uiautomator.BySelector
 import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.Until
+import com.kaspersky.kaspresso.internal.extensions.other.isAllowed
 import com.kaspersky.kaspresso.logger.UiTestLogger
 
 interface SystemDialogSafetyProvider {
@@ -17,8 +18,8 @@ interface SystemDialogSafetyProvider {
         return try {
             action.invoke()
         } catch (exception: Exception) {
-            val isExceptionIntercepted = params.isExceptionAllowed(exception)
-            if (isExceptionIntercepted && isAndroidSystemDetectedAndRemoved(logger)) {
+            val isExceptionIntercepted = exception.isAllowed(params.allowedExceptions)
+            if (isExceptionIntercepted && isAndroidSystemDetectedAndRemoved()) {
                 return action.invoke()
             }
             throw exception
@@ -29,7 +30,7 @@ interface SystemDialogSafetyProvider {
      * Check android system dialogs/windows are overlaying the app.
      * If system dialog/window has been detected then try to remove it by back button pressing.
      */
-    private fun isAndroidSystemDetectedAndRemoved(logger: UiTestLogger): Boolean {
+    private fun isAndroidSystemDetectedAndRemoved(): Boolean {
         with(UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())) {
             if (isVisible(By.pkg("android").clazz(FrameLayout::class.java))) {
                 logger.i(

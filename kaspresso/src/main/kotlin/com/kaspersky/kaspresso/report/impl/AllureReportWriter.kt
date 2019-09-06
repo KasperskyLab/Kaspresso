@@ -9,7 +9,6 @@ class AllureReportWriter(
 ) : ReportWriter {
 
     override fun processTestResults(testInfo: TestInfo) {
-        // TODO add real implementation
-        uiTestLogger.section("Allure test results: $testInfo")
+        // TODO coming soon...
     }
 }

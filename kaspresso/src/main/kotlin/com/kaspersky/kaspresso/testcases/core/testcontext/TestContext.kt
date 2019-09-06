@@ -28,9 +28,7 @@ class TestContext<Data> internal constructor(
      * @param actions a set of actions of a step.
      */
     fun step(description: String, actions: () -> Unit) {
-
         val exceptions: MutableList<Throwable> = mutableListOf()
-
         val stepInfo = stepInfoProducer.produceStepInfo(description)
 
         watcherInterceptors.forEachSafely(exceptions) { it.interceptBefore(stepInfo) }

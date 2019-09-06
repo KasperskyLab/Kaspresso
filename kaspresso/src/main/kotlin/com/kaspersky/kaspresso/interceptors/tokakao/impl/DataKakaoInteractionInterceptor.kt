@@ -14,8 +14,14 @@ internal class DataKakaoInteractionInterceptor(
 
     override fun interceptCheck(interaction: DataInteraction, assertion: ViewAssertion) {
         configurator.dataBehaviorInterceptors.fold(
-            { interaction.check(DataAssertionProxy(assertion, configurator.viewAssertionWatcherInterceptors)) },
-            { acc, dataInteractor: DataBehaviorInterceptor -> { dataInteractor.interact(interaction, acc) } }
+            initial = {
+                interaction.check(
+                    DataAssertionProxy(assertion, configurator.viewAssertionWatcherInterceptors)
+                )
+            },
+            operation = { acc, dataInteractor: DataBehaviorInterceptor ->
+                { dataInteractor.interact(interaction, acc) }
+            }
         ).invoke()
     }
 

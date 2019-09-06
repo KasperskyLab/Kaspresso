@@ -16,9 +16,5 @@ interface ViewAssertionWatcherInterceptor {
      * @param view an Android [View], on which [viewAssertion] is performed.
      * @param exception indicates that a given matcher did not match any elements in the view hierarchy.
      */
-    fun intercept(
-        viewAssertion: ViewAssertion,
-        view: View?,
-        exception: NoMatchingViewException?
-    )
+    fun intercept(viewAssertion: ViewAssertion, view: View?, exception: NoMatchingViewException?)
 }
