@@ -16,5 +16,5 @@ class FlakySafeWebBehaviorInterceptor(
      *
      * @param execution a function-wrapper of an action or an assertion to be invoked.
      */
-    override fun <R> interact(interaction: Web.WebInteraction<*>, action: () -> R): R = flakySafely(action = action)
+    override fun <R> intercept(interaction: Web.WebInteraction<*>, action: () -> R): R = flakySafely(action = action)
 }

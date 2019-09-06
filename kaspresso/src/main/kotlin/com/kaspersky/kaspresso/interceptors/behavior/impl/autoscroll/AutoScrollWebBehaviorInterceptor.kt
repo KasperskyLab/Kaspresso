@@ -13,7 +13,7 @@ class AutoScrollWebBehaviorInterceptor(
     private val logger: UiTestLogger
 ) : WebBehaviorInterceptor, AutoScrollProvider<Web.WebInteraction<*>> {
 
-    override fun <R> interact(interaction: Web.WebInteraction<*>, action: () -> R): R {
+    override fun <R> intercept(interaction: Web.WebInteraction<*>, action: () -> R): R {
         return try {
             action.invoke()
         } catch (error: Throwable) {

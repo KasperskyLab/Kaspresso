@@ -11,5 +11,5 @@ class SystemDialogSafetyWebBehaviorInterceptor(
     override val logger: UiTestLogger
 ) : WebBehaviorInterceptor, SystemDialogSafetyProvider {
 
-    override fun <R> interact(interaction: Web.WebInteraction<*>, action: () -> R): R = passSystemDialogs(action = action)
+    override fun <R> intercept(interaction: Web.WebInteraction<*>, action: () -> R): R = passSystemDialogs(action = action)
 }

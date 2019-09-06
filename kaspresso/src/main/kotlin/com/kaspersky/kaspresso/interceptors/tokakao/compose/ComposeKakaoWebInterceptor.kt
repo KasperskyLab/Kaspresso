@@ -8,13 +8,13 @@ import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.interceptors.behavior.WebBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.impl.failure.FailureLoggingWebBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.impl.flakysafety.FlakySafeWebBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.tokakao.KakaoInteractionInterceptor
+import com.kaspersky.kaspresso.interceptors.tokakao.KakaoInterceptor
 import com.kaspersky.kaspresso.internal.extensions.espressoext.getMatcher
 import com.kaspersky.kaspresso.proxy.AtomProxy
 
-internal class ComposeWebInteractionInterceptor(
+internal class ComposeKakaoWebInterceptor(
     configurator: Configurator
-) : KakaoInteractionInterceptor<Web.WebInteraction<*>, Atom<*>, WebAssertion<*>>(configurator) {
+) : KakaoInterceptor<Web.WebInteraction<*>, Atom<*>, WebAssertion<*>>(configurator) {
 
     override fun interceptCheck(interaction: Web.WebInteraction<*>, assertion: WebAssertion<*>) {
         configurator.webBehaviorInterceptors
@@ -30,7 +30,7 @@ internal class ComposeWebInteractionInterceptor(
                     )
                 },
                 operation = { acc, webBehaviorInterceptor: WebBehaviorInterceptor ->
-                    { webBehaviorInterceptor.interact(interaction, acc) }
+                    { webBehaviorInterceptor.intercept(interaction, acc) }
                 }
             ).invoke()
     }
@@ -45,7 +45,7 @@ internal class ComposeWebInteractionInterceptor(
                     )
                 },
                 operation = { acc, webBehaviorInterceptor: WebBehaviorInterceptor ->
-                    { webBehaviorInterceptor.interact(interaction, acc) }
+                    { webBehaviorInterceptor.intercept(interaction, acc) }
                 }
             ).invoke()
     }

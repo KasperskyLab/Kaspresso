@@ -6,13 +6,13 @@ import androidx.test.espresso.web.model.Atom
 import androidx.test.espresso.web.sugar.Web
 import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.interceptors.behavior.WebBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.tokakao.KakaoInteractionInterceptor
+import com.kaspersky.kaspresso.interceptors.tokakao.KakaoInterceptor
 import com.kaspersky.kaspresso.internal.extensions.espressoext.getMatcher
 import com.kaspersky.kaspresso.proxy.AtomProxy
 
-internal class WebKakaoInteractionInterceptor(
+internal class KakaoWebInterceptor(
     configurator: Configurator
-) : KakaoInteractionInterceptor<Web.WebInteraction<*>, Atom<*>, WebAssertion<*>>(configurator) {
+) : KakaoInterceptor<Web.WebInteraction<*>, Atom<*>, WebAssertion<*>>(configurator) {
 
     override fun interceptCheck(interaction: Web.WebInteraction<*>, assertion: WebAssertion<*>) {
         configurator.webBehaviorInterceptors.fold(
@@ -21,8 +21,8 @@ internal class WebKakaoInteractionInterceptor(
                     WebAssertionProxy(assertion, interaction.getMatcher(), configurator.webAssertionWatcherInterceptors)
                 )
             },
-            operation = { acc, webInteractor: WebBehaviorInterceptor ->
-                { webInteractor.interact(interaction, acc) }
+            operation = { acc, webBehaviorInterceptor: WebBehaviorInterceptor ->
+                { webBehaviorInterceptor.intercept(interaction, acc) }
             }
         ).invoke()
     }
@@ -34,8 +34,8 @@ internal class WebKakaoInteractionInterceptor(
                     AtomProxy(action, interaction.getMatcher(), configurator.atomWatcherInterceptors)
                 )
             },
-            operation = { acc, webInteractor: WebBehaviorInterceptor ->
-                { webInteractor.interact(interaction, acc) }
+            operation = { acc, webBehaviorInterceptor: WebBehaviorInterceptor ->
+                { webBehaviorInterceptor.intercept(interaction, acc) }
             }
         ).invoke()
     }

@@ -9,5 +9,5 @@ class FailureLoggingWebBehaviorInterceptor(
     override val logger: UiTestLogger
 ) : WebBehaviorInterceptor, FailureLoggingProvider {
 
-    override fun <R> interact(interaction: Web.WebInteraction<*>, action: () -> R): R = withLoggingOnFailure(action)
+    override fun <R> intercept(interaction: Web.WebInteraction<*>, action: () -> R): R = withLoggingOnFailure(action)
 }

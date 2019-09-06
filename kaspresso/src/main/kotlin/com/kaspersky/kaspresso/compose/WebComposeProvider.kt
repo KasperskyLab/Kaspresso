@@ -9,8 +9,8 @@ import com.kaspersky.kaspresso.flakysafety.flakySafelyIfNotNull
 import com.kaspersky.kaspresso.interceptors.behavior.WebBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.impl.failure.FailureLoggingWebBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.impl.flakysafety.FlakySafeWebBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.tokakao.compose.ComposeWebInteractionInterceptor
-import com.kaspersky.kaspresso.interceptors.tokakao.impl.WebKakaoInteractionInterceptor
+import com.kaspersky.kaspresso.interceptors.tokakao.compose.ComposeKakaoWebInterceptor
+import com.kaspersky.kaspresso.interceptors.tokakao.impl.KakaoWebInterceptor
 
 interface WebComposeProvider {
 
@@ -67,8 +67,7 @@ interface WebComposeProvider {
     }
 
     private fun WebElementBuilder.setComposeInterception() {
-        val interceptor =
-            ComposeWebInteractionInterceptor(configurator)
+        val interceptor = ComposeKakaoWebInterceptor(configurator)
 
         intercept {
             onCheck(true, interceptor::interceptCheck)
@@ -77,7 +76,7 @@ interface WebComposeProvider {
     }
 
     private fun WebElementBuilder.setInterception() {
-        val interceptor = WebKakaoInteractionInterceptor(configurator)
+        val interceptor = KakaoWebInterceptor(configurator)
 
         intercept {
             onCheck(true, interceptor::interceptCheck)

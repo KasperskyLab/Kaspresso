@@ -10,5 +10,5 @@ interface BehaviorInterceptor<Interaction> {
      *
      * @param action a function-wrapper of an action or an assertion to be invoked.
      */
-    fun <R> interact(interaction: Interaction, action: () -> R): R
+    fun <R> intercept(interaction: Interaction, action: () -> R): R
 }

@@ -46,9 +46,9 @@ import com.kaspersky.kaspresso.interceptors.behavior.impl.flakysafety.FlakySafeW
 import com.kaspersky.kaspresso.interceptors.behavior.impl.systemsafety.SystemDialogSafetyDataBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.impl.systemsafety.SystemDialogSafetyViewBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.impl.systemsafety.SystemDialogSafetyWebBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.tokakao.impl.DataKakaoInteractionInterceptor
-import com.kaspersky.kaspresso.interceptors.tokakao.impl.ViewKakaoInteractionInterceptor
-import com.kaspersky.kaspresso.interceptors.tokakao.impl.WebKakaoInteractionInterceptor
+import com.kaspersky.kaspresso.interceptors.tokakao.impl.KakaoDataInterceptor
+import com.kaspersky.kaspresso.interceptors.tokakao.impl.KakaoViewInterceptor
+import com.kaspersky.kaspresso.interceptors.tokakao.impl.KakaoWebInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.StepWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.TestRunWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.logging.LoggingStepWatcherInterceptor
@@ -239,7 +239,27 @@ data class Configurator(
          * An interceptor that is called on failures. It's [FailureHandler.intercept] method is being
          * provide as the default [androidx.test.espresso.FailureHandler].
          */
-        var failureHandler: FailureHandler = LoggingFailureHandler(libLogger)
+        var failureHandler: FailureHandler? = null
+
+        private fun initInterception(configurator: Configurator) {
+            val viewInterceptor = KakaoViewInterceptor(configurator)
+            val dataInterceptor = KakaoDataInterceptor(configurator)
+            val webInterceptor = KakaoWebInterceptor(configurator)
+
+            Kakao.intercept {
+                onViewInteraction {
+                    onCheck(isOverride = true, interceptor = viewInterceptor::interceptCheck)
+                    onPerform(isOverride = true, interceptor = viewInterceptor::interceptPerform)
+                }
+                onDataInteraction {
+                    onCheck(isOverride = true, interceptor = dataInterceptor::interceptCheck)
+                }
+                onWebInteraction {
+                    onCheck(isOverride = true, interceptor = webInterceptor::interceptCheck)
+                    onPerform(isOverride = true, interceptor = webInterceptor::interceptPerform)
+                }
+            }
+        }
 
         /**
          * Terminating method to build built [Configurator] settings. Can be called only inside the framework
@@ -282,25 +302,9 @@ data class Configurator(
                 testRunWatcherInterceptors = testRunWatcherInterceptors
             )
 
-            val viewInteractionInterceptor = ViewKakaoInteractionInterceptor(configurator)
-            val dataInteractionInterceptor = DataKakaoInteractionInterceptor(configurator)
-            val webInteractionInterceptor = WebKakaoInteractionInterceptor(configurator)
+            initInterception(configurator)
 
-            Kakao.intercept {
-                onViewInteraction {
-                    onCheck(isOverride = true, interceptor = viewInteractionInterceptor::interceptCheck)
-                    onPerform(isOverride = true, interceptor = viewInteractionInterceptor::interceptPerform)
-                }
-                onDataInteraction {
-                    onCheck(isOverride = true, interceptor = dataInteractionInterceptor::interceptCheck)
-                }
-                onWebInteraction {
-                    onCheck(isOverride = true, interceptor = webInteractionInterceptor::interceptCheck)
-                    onPerform(isOverride = true, interceptor = webInteractionInterceptor::interceptPerform)
-                }
-            }
-
-            Espresso.setFailureHandler(failureHandler)
+            failureHandler?.let { Espresso.setFailureHandler(it) }
 
             return configurator
         }

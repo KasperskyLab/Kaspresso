@@ -14,8 +14,8 @@ import com.kaspersky.kaspresso.flakysafety.flakySafelyIfNotNull
 import com.kaspersky.kaspresso.interceptors.behavior.ViewBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.impl.failure.FailureLoggingViewBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.impl.flakysafety.FlakySafeViewBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.tokakao.compose.ComposeViewInteractionInterceptor
-import com.kaspersky.kaspresso.interceptors.tokakao.impl.ViewKakaoInteractionInterceptor
+import com.kaspersky.kaspresso.interceptors.tokakao.compose.ComposeKakaoViewInterceptor
+import com.kaspersky.kaspresso.interceptors.tokakao.impl.KakaoViewInterceptor
 
 interface ComposeProvider {
 
@@ -74,8 +74,7 @@ interface ComposeProvider {
     private fun <T> T.setComposeInterception(): Unit
             where T : BaseActions, T : BaseAssertions, T : Interceptable<ViewInteraction, ViewAssertion, ViewAction> {
 
-        val interceptor =
-            ComposeViewInteractionInterceptor(configurator)
+        val interceptor = ComposeKakaoViewInterceptor(configurator)
 
         intercept {
             onCheck(true, interceptor::interceptCheck)
@@ -86,7 +85,7 @@ interface ComposeProvider {
     private fun <T> T.setInterception(): Unit
             where T : BaseActions, T : BaseAssertions, T : Interceptable<ViewInteraction, ViewAssertion, ViewAction> {
 
-        val interceptor = ViewKakaoInteractionInterceptor(configurator)
+        val interceptor = KakaoViewInterceptor(configurator)
 
         intercept {
             onCheck(true, interceptor::interceptCheck)

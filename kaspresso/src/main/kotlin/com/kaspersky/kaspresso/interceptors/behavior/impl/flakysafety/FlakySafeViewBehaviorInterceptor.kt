@@ -20,5 +20,5 @@ class FlakySafeViewBehaviorInterceptor(
      *
      * @param execution a function-wrapper of an action or an assertion to be invoked.
      */
-    override fun <R> interact(interaction: ViewInteraction, action: () -> R): R = flakySafely(action = action)
+    override fun <R> intercept(interaction: ViewInteraction, action: () -> R): R = flakySafely(action = action)
 }

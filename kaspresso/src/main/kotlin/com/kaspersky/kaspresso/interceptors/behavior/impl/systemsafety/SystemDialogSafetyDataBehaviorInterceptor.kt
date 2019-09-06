@@ -11,5 +11,5 @@ class SystemDialogSafetyDataBehaviorInterceptor(
     override val logger: UiTestLogger
 ) : DataBehaviorInterceptor, SystemDialogSafetyProvider {
 
-    override fun <R> interact(interaction: DataInteraction, action: () -> R): R = passSystemDialogs(action = action)
+    override fun <R> intercept(interaction: DataInteraction, action: () -> R): R = passSystemDialogs(action = action)
 }

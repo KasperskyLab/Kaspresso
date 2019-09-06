@@ -13,7 +13,7 @@ class AutoScrollViewBehaviorInterceptor(
     private val logger: UiTestLogger
 ) : ViewBehaviorInterceptor, AutoScrollProvider<ViewInteraction> {
 
-    override fun <R> interact(interaction: ViewInteraction, action: () -> R): R {
+    override fun <R> intercept(interaction: ViewInteraction, action: () -> R): R {
         return try {
             action.invoke()
         } catch (error: Throwable) {

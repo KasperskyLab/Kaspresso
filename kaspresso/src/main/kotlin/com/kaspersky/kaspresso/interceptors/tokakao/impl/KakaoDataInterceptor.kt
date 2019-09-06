@@ -5,12 +5,12 @@ import androidx.test.espresso.ViewAction
 import androidx.test.espresso.ViewAssertion
 import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.interceptors.behavior.DataBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.tokakao.KakaoInteractionInterceptor
+import com.kaspersky.kaspresso.interceptors.tokakao.KakaoInterceptor
 import com.kaspersky.kaspresso.proxy.DataAssertionProxy
 
-internal class DataKakaoInteractionInterceptor(
+internal class KakaoDataInterceptor(
     configurator: Configurator
-) : KakaoInteractionInterceptor<DataInteraction, ViewAction, ViewAssertion>(configurator) {
+) : KakaoInterceptor<DataInteraction, ViewAction, ViewAssertion>(configurator) {
 
     override fun interceptCheck(interaction: DataInteraction, assertion: ViewAssertion) {
         configurator.dataBehaviorInterceptors.fold(
@@ -19,8 +19,8 @@ internal class DataKakaoInteractionInterceptor(
                     DataAssertionProxy(assertion, configurator.viewAssertionWatcherInterceptors)
                 )
             },
-            operation = { acc, dataInteractor: DataBehaviorInterceptor ->
-                { dataInteractor.interact(interaction, acc) }
+            operation = { acc, dataBehaviorInterceptor: DataBehaviorInterceptor ->
+                { dataBehaviorInterceptor.intercept(interaction, acc) }
             }
         ).invoke()
     }

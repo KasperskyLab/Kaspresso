@@ -5,13 +5,13 @@ import androidx.test.espresso.ViewAssertion
 import androidx.test.espresso.ViewInteraction
 import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.interceptors.behavior.ViewBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.tokakao.KakaoInteractionInterceptor
+import com.kaspersky.kaspresso.interceptors.tokakao.KakaoInterceptor
 import com.kaspersky.kaspresso.proxy.ViewActionProxy
 import com.kaspersky.kaspresso.proxy.ViewAssertionProxy
 
-internal class ViewKakaoInteractionInterceptor(
+internal class KakaoViewInterceptor(
     configurator: Configurator
-) : KakaoInteractionInterceptor<ViewInteraction, ViewAction, ViewAssertion>(configurator) {
+) : KakaoInterceptor<ViewInteraction, ViewAction, ViewAssertion>(configurator) {
 
     override fun interceptCheck(interaction: ViewInteraction, assertion: ViewAssertion) {
         configurator.viewBehaviorInterceptors.fold(
@@ -20,8 +20,8 @@ internal class ViewKakaoInteractionInterceptor(
                     ViewAssertionProxy(assertion, configurator.viewAssertionWatcherInterceptors)
                 )
             },
-            operation = { acc, viewInteractor: ViewBehaviorInterceptor ->
-                { viewInteractor.interact(interaction, acc) }
+            operation = { acc, viewBehaviorInterceptor: ViewBehaviorInterceptor ->
+                { viewBehaviorInterceptor.intercept(interaction, acc) }
             }
         ).invoke()
     }
@@ -33,8 +33,8 @@ internal class ViewKakaoInteractionInterceptor(
                     ViewActionProxy(action, configurator.viewActionWatcherInterceptors)
                 )
             },
-            operation = { acc, viewInteractor: ViewBehaviorInterceptor ->
-                { viewInteractor.interact(interaction, acc) }
+            operation = { acc, viewBehaviorInterceptor: ViewBehaviorInterceptor ->
+                { viewBehaviorInterceptor.intercept(interaction, acc) }
             }
         ).invoke()
     }

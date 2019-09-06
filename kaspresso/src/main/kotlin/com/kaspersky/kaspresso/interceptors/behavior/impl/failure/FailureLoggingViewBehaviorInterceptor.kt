@@ -9,5 +9,5 @@ class FailureLoggingViewBehaviorInterceptor(
     override val logger: UiTestLogger
 ) : ViewBehaviorInterceptor, FailureLoggingProvider {
 
-    override fun <R> interact(interaction: ViewInteraction, action: () -> R): R = withLoggingOnFailure(action)
+    override fun <R> intercept(interaction: ViewInteraction, action: () -> R): R = withLoggingOnFailure(action)
 }
