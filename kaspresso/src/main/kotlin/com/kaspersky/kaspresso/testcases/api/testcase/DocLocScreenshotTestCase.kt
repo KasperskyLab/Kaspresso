@@ -2,11 +2,11 @@ package com.kaspersky.kaspresso.testcases.api.testcase
 
 import android.Manifest
 import androidx.test.rule.GrantPermissionRule
-import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.device.locales.Locales
 import com.kaspersky.kaspresso.device.screenshots.docloc.DocLocScreenshotCapturer
-import com.kaspersky.kaspresso.extensions.other.getAllInterfaces
-import com.kaspersky.kaspresso.reflect.proxy.UiInvocationHandler
+import com.kaspersky.kaspresso.internal.extensions.other.getAllInterfaces
+import com.kaspersky.kaspresso.internal.invocation.UiInvocationHandler
+import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.rule.LocaleRule
 import com.kaspersky.kaspresso.rule.TestFailRule
 import java.io.File
@@ -82,7 +82,7 @@ abstract class DocLocScreenshotTestCase(
     private lateinit var screenshotsDir: File
     private lateinit var screenshotCapturer: DocLocScreenshotCapturer
 
-    @PublishedApi internal val logger = Configurator.logger
+    @PublishedApi internal val logger: UiTestLogger = configurator.libLogger
     private val confLocales: Locales = Locales(logger)
 
     @get:Rule
@@ -99,14 +99,13 @@ abstract class DocLocScreenshotTestCase(
 
     @Before
     fun setup() {
-        screenshotsDir = screenshotsDirectory
-            .resolve(localeRule.locale.toString())
+        screenshotsDir = screenshotsDirectory.resolve(localeRule.locale.toString())
 
         screenshotCapturer = DocLocScreenshotCapturer(
             screenshotsDir,
             logger,
-            configurator.activities,
-            configurator.apps
+            configurator.device.activities,
+            configurator.device.apps
         )
 
         testFailRule.screenshotCapturer = screenshotCapturer

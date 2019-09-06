@@ -1,13 +1,13 @@
 package com.kaspersky.kaspressample.tests.paramertized
 
 import android.Manifest
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
-import androidx.test.runner.AndroidJUnit4
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.scenarios.CheckHomeTitleNoParametersScenario
 import com.kaspersky.kaspressample.screen.MainScreen
-import com.kaspersky.kaspresso.viewactions.orientation.Orientation
+import com.kaspersky.kaspresso.device.exploit.Exploit
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -31,7 +31,7 @@ class OpenHomeScreenParametrizedTest : BaseParametrizedTest() {
         before {
             activityTestRule.launchActivity(null)
         }.after {
-            device.exploit.setOrientation(Orientation.Portrait)
+            device.exploit.setOrientation(Exploit.DeviceOrientation.Portrait)
         }.init {
             company {
                 name = "Microsoft"
@@ -58,7 +58,7 @@ class OpenHomeScreenParametrizedTest : BaseParametrizedTest() {
             makeOwner(ownerSurname = "Pichai", companyName = "Google")
         }.run {
             step("Open Home Screen") {
-                kLogger.i(data.companies.toString())
+                testLogger.i(data.companies.toString())
 
                 mainScreen {
                     descriptionText {

@@ -2,8 +2,8 @@ package com.kaspersky.kaspresso.interceptors.watcher.view.impl.logging
 
 import android.view.View
 import androidx.test.espresso.PerformException
-import com.kaspersky.kaspresso.extensions.espressoext.describe
 import com.kaspersky.kaspresso.interceptors.watcher.view.FailureInterceptor
+import com.kaspersky.kaspresso.internal.extensions.espressoext.describe
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import junit.framework.AssertionFailedError
 import org.hamcrest.Matcher

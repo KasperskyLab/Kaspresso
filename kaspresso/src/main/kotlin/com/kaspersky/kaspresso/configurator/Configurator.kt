@@ -1,11 +1,12 @@
 package com.kaspersky.kaspresso.configurator
 
-import androidx.test.InstrumentationRegistry
 import androidx.test.espresso.Espresso
-import androidx.test.espresso.NoMatchingViewException
-import androidx.test.espresso.PerformException
+import androidx.test.espresso.FailureHandler
+import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.UiDevice
 import com.agoda.kakao.Kakao
+import com.kaspersky.kaspresso.autoscroll.AutoScrollParams
+import com.kaspersky.kaspresso.device.Device
 import com.kaspersky.kaspresso.device.accessibility.Accessibility
 import com.kaspersky.kaspresso.device.accessibility.AccessibilityImpl
 import com.kaspersky.kaspresso.device.activities.Activities
@@ -16,26 +17,34 @@ import com.kaspersky.kaspresso.device.exploit.Exploit
 import com.kaspersky.kaspresso.device.exploit.ExploitImpl
 import com.kaspersky.kaspresso.device.files.Files
 import com.kaspersky.kaspresso.device.files.FilesImpl
-import com.kaspersky.kaspresso.device.internet.Internet
-import com.kaspersky.kaspresso.device.internet.InternetImpl
 import com.kaspersky.kaspresso.device.keyboard.Keyboard
 import com.kaspersky.kaspresso.device.keyboard.KeyboardImpl
 import com.kaspersky.kaspresso.device.location.Location
 import com.kaspersky.kaspresso.device.location.LocationImpl
+import com.kaspersky.kaspresso.device.network.Network
+import com.kaspersky.kaspresso.device.network.NetworkImpl
 import com.kaspersky.kaspresso.device.permissions.Permissions
 import com.kaspersky.kaspresso.device.permissions.PermissionsImpl
 import com.kaspersky.kaspresso.device.phone.Phone
 import com.kaspersky.kaspresso.device.phone.PhoneImpl
 import com.kaspersky.kaspresso.device.screenshots.Screenshots
 import com.kaspersky.kaspresso.device.screenshots.ScreenshotsImpl
+import com.kaspersky.kaspresso.failure.LoggingFailureHandler
+import com.kaspersky.kaspresso.flakysafety.FlakySafetyParams
 import com.kaspersky.kaspresso.interceptors.behavior.DataBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.ViewBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.WebBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.behavior.impl.autoscroll.AutoscrollViewBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.behavior.impl.autoscroll.AutoscrollWebBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behavior.impl.autoscroll.AutoScrollViewBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behavior.impl.autoscroll.AutoScrollWebBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behavior.impl.failure.FailureLoggingDataBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behavior.impl.failure.FailureLoggingViewBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behavior.impl.failure.FailureLoggingWebBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.impl.flakysafety.FlakySafeDataBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.impl.flakysafety.FlakySafeViewBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.impl.flakysafety.FlakySafeWebBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behavior.impl.systemsafety.SystemDialogSafetyDataBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behavior.impl.systemsafety.SystemDialogSafetyViewBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behavior.impl.systemsafety.SystemDialogSafetyWebBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.tokakao.impl.DataKakaoInteractionInterceptor
 import com.kaspersky.kaspresso.interceptors.tokakao.impl.ViewKakaoInteractionInterceptor
 import com.kaspersky.kaspresso.interceptors.tokakao.impl.WebKakaoInteractionInterceptor
@@ -47,18 +56,17 @@ import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.report.BuildSt
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.screenshot.ScreenshotStepWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.screenshot.TestRunnerScreenshotWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.view.AtomWatcherInterceptor
-import com.kaspersky.kaspresso.interceptors.watcher.view.FailureInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.view.ViewActionWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.view.ViewAssertionWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.view.WebAssertionWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.view.impl.logging.LoggingAtomWatcherInterceptor
-import com.kaspersky.kaspresso.interceptors.watcher.view.impl.logging.LoggingFailureInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.view.impl.logging.LoggingViewActionWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.view.impl.logging.LoggingViewAssertionWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.view.impl.logging.LoggingWebAssertionWatcherInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.logger.UiTestLoggerImpl
 import com.kaspersky.kaspresso.report.impl.AllureReportWriter
+import com.kaspersky.kaspresso.systemsafety.SystemDialogSafetyParams
 import com.kaspersky.kaspresso.testcases.core.testcontext.TestContext
 
 /**
@@ -70,7 +78,7 @@ import com.kaspersky.kaspresso.testcases.core.testcontext.TestContext
  * the default implementation is used.
  * @param files Holds an implementation of [Files] interface. If it was not specified in [Configurator.Builder],
  * the default implementation is used.
- * @param internet Holds an implementation of [Internet] interface. If it was not specified in [Configurator.Builder],
+ * @param internet Holds an implementation of [Network] interface. If it was not specified in [Configurator.Builder],
  * the default implementation is used.
  * @param phone Holds an implementation of [Phone] interface. If it was not specified in [Configurator.Builder],
  * the default implementation is used.
@@ -100,20 +108,14 @@ import com.kaspersky.kaspresso.testcases.core.testcontext.TestContext
  * Interceptors work using decorator pattern. First interceptor wraps others.
  * @param testRunWatcherInterceptors An interceptors set that actually manages the execution of test sections
  * [com.kaspersky.kaspresso.testcases.models.TestInfo]. Interceptor works using decorator pattern. First interceptor wraps others.
- * @param externalLogger Holds an implementation of [UiTestLogger] interface for external usage.
+ * @param testLogger Holds an implementation of [UiTestLogger] interface for external usage.
  */
-class Configurator(
-    internal val apps: Apps,
-    internal val activities: Activities,
-    internal val files: Files,
-    internal val internet: Internet,
-    internal val phone: Phone,
-    internal val location: Location,
-    internal val keyboard: Keyboard,
-    internal val screenshots: Screenshots,
-    internal val accessibility: Accessibility,
-    internal val permissions: Permissions,
-    internal val exploit: Exploit,
+data class Configurator(
+    internal val libLogger: UiTestLogger,
+    internal val testLogger: UiTestLogger,
+    internal val device: Device,
+    internal val flakySafetyParams: FlakySafetyParams,
+    internal val autoScrollParams: AutoScrollParams,
     internal val viewActionWatcherInterceptors: List<ViewActionWatcherInterceptor>,
     internal val viewAssertionWatcherInterceptors: List<ViewAssertionWatcherInterceptor>,
     internal val atomWatcherInterceptors: List<AtomWatcherInterceptor>,
@@ -122,41 +124,11 @@ class Configurator(
     internal val dataBehaviorInterceptors: List<DataBehaviorInterceptor>,
     internal val webBehaviorInterceptors: List<WebBehaviorInterceptor>,
     internal val stepWatcherInterceptors: List<StepWatcherInterceptor>,
-    internal val testRunWatcherInterceptors: List<TestRunWatcherInterceptor>,
-    internal val externalLogger: UiTestLogger
+    internal val testRunWatcherInterceptors: List<TestRunWatcherInterceptor>
 ) {
-    companion object {
-
-        internal const val DEFAULT_ATTEMPTS_TIMEOUT_MS: Long = 2_000L
-        internal const val DEFAULT_ATTEMPTS_INTERVAL_MS: Long = 500L
-
-        internal const val DEFAULT_INNER_LOGGER_TAG: String = "KASPRESSO"
-        internal const val DEFAULT_EXTERNAL_LOGGER_TAG: String = "KASPRESSO_SPECIAL"
-
-        /**
-         * A timeout for all action attempts in milliseconds.
-         */
-        internal var attemptsTimeoutMs: Long = DEFAULT_ATTEMPTS_TIMEOUT_MS
-
-        /**
-         * A frequency of action attempts in milliseconds.
-         */
-        internal var attemptsIntervalMs: Long = DEFAULT_ATTEMPTS_INTERVAL_MS
-
-        /**
-         * Exceptions that doesn't stop attempts.
-         */
-        internal var allowedExceptionsForAttempt: Set<Class<out Throwable>> =
-            setOf(
-                PerformException::class.java,
-                NoMatchingViewException::class.java,
-                AssertionError::class.java
-            )
-
-        /**
-         * Holds an implementation of [UiTestLogger] interface for inner framework usage.
-         */
-        internal var logger: UiTestLogger = UiTestLoggerImpl(DEFAULT_INNER_LOGGER_TAG)
+    private companion object {
+        private const val DEFAULT_LIB_LOGGER_TAG: String = "KASPRESSO"
+        private const val DEFAULT_TEST_LOGGER_TAG: String = "KASPRESSO_TEST"
     }
 
     /**
@@ -169,97 +141,109 @@ class Configurator(
             /**
              * Puts the default settings pack to [Builder].
              * Please be aware if you add some settings after [default] method. You can catch inconsistent state of the
-             * [Builder]. For example if you change [logger] after [default] method than all interceptors will work with
-             * old [logger].
+             * [Builder]. For example if you change [libLogger] after [default] method than all interceptors will work with
+             * old [libLogger].
              *
              * @return an existing instance of [Builder].
              */
             fun default(): Builder {
                 return Builder().apply {
 
-                    viewActionWatcherInterceptors = mutableListOf(LoggingViewActionWatcherInterceptor(logger))
-                    viewAssertionWatcherInterceptors = mutableListOf(LoggingViewAssertionWatcherInterceptor(logger))
+                    viewActionWatcherInterceptors = mutableListOf(
+                        LoggingViewActionWatcherInterceptor(libLogger)
+                    )
 
-                    atomWatcherInterceptors = mutableListOf(LoggingAtomWatcherInterceptor(logger))
-                    webAssertionWatcherInterceptors = mutableListOf(LoggingWebAssertionWatcherInterceptor(logger))
+                    viewAssertionWatcherInterceptors = mutableListOf(
+                        LoggingViewAssertionWatcherInterceptor(libLogger)
+                    )
 
-                    viewBehaviorInterceptors = mutableListOf(AutoscrollViewBehaviorInterceptor(), FlakySafeViewBehaviorInterceptor())
-                    dataBehaviorInterceptors = mutableListOf(FlakySafeDataBehaviorInterceptor())
-                    webBehaviorInterceptors = mutableListOf(AutoscrollWebBehaviorInterceptor(), FlakySafeWebBehaviorInterceptor())
+                    atomWatcherInterceptors = mutableListOf(
+                        LoggingAtomWatcherInterceptor(libLogger)
+                    )
 
-                    failureInterceptor = LoggingFailureInterceptor(logger)
+                    webAssertionWatcherInterceptors = mutableListOf(
+                        LoggingWebAssertionWatcherInterceptor(libLogger)
+                    )
+
+                    viewBehaviorInterceptors = mutableListOf(
+                        AutoScrollViewBehaviorInterceptor(autoScrollParams, libLogger),
+                        SystemDialogSafetyViewBehaviorInterceptor(systemDialogSafetyParams, libLogger),
+                        FlakySafeViewBehaviorInterceptor(flakySafetyParams, libLogger),
+                        FailureLoggingViewBehaviorInterceptor(libLogger)
+                    )
+
+                    dataBehaviorInterceptors = mutableListOf(
+                        SystemDialogSafetyDataBehaviorInterceptor(systemDialogSafetyParams, libLogger),
+                        FlakySafeDataBehaviorInterceptor(flakySafetyParams, libLogger),
+                        FailureLoggingDataBehaviorInterceptor(libLogger)
+                    )
+
+                    webBehaviorInterceptors = mutableListOf(
+                        AutoScrollWebBehaviorInterceptor(autoScrollParams, libLogger),
+                        SystemDialogSafetyWebBehaviorInterceptor(systemDialogSafetyParams, libLogger),
+                        FlakySafeWebBehaviorInterceptor(flakySafetyParams, libLogger),
+                        FailureLoggingWebBehaviorInterceptor(libLogger)
+                    )
 
                     stepWatcherInterceptors = mutableListOf(
-                        LoggingStepWatcherInterceptor(
-                            logger
-                        ),
-                        ScreenshotStepWatcherInterceptor(
-                            screenshots
-                        )
+                        LoggingStepWatcherInterceptor(libLogger),
+                        ScreenshotStepWatcherInterceptor(screenshots)
                     )
 
                     testRunWatcherInterceptors = mutableListOf(
-                        TestRunLoggerWatcherInterceptor(
-                            logger
-                        ),
-                        TestRunnerScreenshotWatcherInterceptor(
-                            screenshots
-                        ),
-                        BuildStepReportWatcherInterceptor(
-                            AllureReportWriter(logger)
-                        )
+                        TestRunLoggerWatcherInterceptor(libLogger),
+                        TestRunnerScreenshotWatcherInterceptor(screenshots),
+                        BuildStepReportWatcherInterceptor(AllureReportWriter(libLogger))
                     )
+
+                    failureHandler = LoggingFailureHandler(libLogger)
                 }
             }
         }
 
-        var attemptsTimeoutMs: Long = DEFAULT_ATTEMPTS_TIMEOUT_MS
-        var attemptsIntervalMs: Long = DEFAULT_ATTEMPTS_INTERVAL_MS
-        var allowedExceptionsForAttempt: Set<Class<out Throwable>> = setOf(
-            PerformException::class.java,
-            NoMatchingViewException::class.java,
-            AssertionError::class.java
-        )
+        var libLogger: UiTestLogger = UiTestLoggerImpl(DEFAULT_LIB_LOGGER_TAG)
+        var testLogger: UiTestLogger = UiTestLoggerImpl(DEFAULT_TEST_LOGGER_TAG)
 
-        var logger: UiTestLogger = UiTestLoggerImpl(DEFAULT_INNER_LOGGER_TAG)
-        var externalLogger: UiTestLogger = UiTestLoggerImpl(DEFAULT_EXTERNAL_LOGGER_TAG)
-
-        var apps: Apps = AppsImpl(
-            logger,
-            InstrumentationRegistry.getInstrumentation().context,
-            UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
-        )
-        var activities: Activities = ActivitiesImpl(logger)
+        var apps: Apps =
+            AppsImpl(
+                libLogger,
+                InstrumentationRegistry.getInstrumentation().context,
+                UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
+            )
+        var activities: Activities = ActivitiesImpl(libLogger)
         var files: Files = FilesImpl()
-        var internet: Internet = InternetImpl(InstrumentationRegistry.getTargetContext())
+        var network: Network = NetworkImpl(InstrumentationRegistry.getInstrumentation().targetContext)
         var phone: Phone = PhoneImpl()
         var location: Location = LocationImpl()
         var keyboard: Keyboard = KeyboardImpl()
-        var screenshots: Screenshots = ScreenshotsImpl(logger, activities)
+        var screenshots: Screenshots = ScreenshotsImpl(libLogger, activities)
         var accessibility: Accessibility = AccessibilityImpl()
         var permissions: Permissions =
-            PermissionsImpl(logger, UiDevice.getInstance(InstrumentationRegistry.getInstrumentation()))
+            PermissionsImpl(libLogger, UiDevice.getInstance(InstrumentationRegistry.getInstrumentation()))
         var exploit: Exploit =
             ExploitImpl(activities, UiDevice.getInstance(InstrumentationRegistry.getInstrumentation()))
 
+        var flakySafetyParams: FlakySafetyParams = FlakySafetyParams()
+        var autoScrollParams: AutoScrollParams = AutoScrollParams()
+        var systemDialogSafetyParams: SystemDialogSafetyParams = SystemDialogSafetyParams()
+
         var viewActionWatcherInterceptors: MutableList<ViewActionWatcherInterceptor> = mutableListOf()
-        var viewAssertionWatcherInterceptors: MutableList<ViewAssertionWatcherInterceptor> = mutableListOf()
-        var atomWatcherInterceptors: MutableList<AtomWatcherInterceptor> = mutableListOf()
-        var webAssertionWatcherInterceptors: MutableList<WebAssertionWatcherInterceptor> = mutableListOf()
+        var viewAssertionWatcherInterceptors: List<ViewAssertionWatcherInterceptor> = mutableListOf()
+        var atomWatcherInterceptors: List<AtomWatcherInterceptor> = mutableListOf()
+        var webAssertionWatcherInterceptors: List<WebAssertionWatcherInterceptor> = mutableListOf()
 
         var viewBehaviorInterceptors: MutableList<ViewBehaviorInterceptor> = mutableListOf()
         var dataBehaviorInterceptors: MutableList<DataBehaviorInterceptor> = mutableListOf()
         var webBehaviorInterceptors: MutableList<WebBehaviorInterceptor> = mutableListOf()
 
+        var stepWatcherInterceptors: MutableList<StepWatcherInterceptor> = mutableListOf()
+        var testRunWatcherInterceptors: MutableList<TestRunWatcherInterceptor> = mutableListOf()
+
         /**
-         * An interceptor that is called on failures. It's [FailureInterceptor.intercept] method is being
+         * An interceptor that is called on failures. It's [FailureHandler.intercept] method is being
          * provide as the default [androidx.test.espresso.FailureHandler].
          */
-        var failureInterceptor: FailureInterceptor? = null
-
-        var stepWatcherInterceptors: MutableList<StepWatcherInterceptor> = mutableListOf()
-
-        var testRunWatcherInterceptors: MutableList<TestRunWatcherInterceptor> = mutableListOf()
+        var failureHandler: FailureHandler = LoggingFailureHandler(libLogger)
 
         /**
          * Terminating method to build built [Configurator] settings. Can be called only inside the framework
@@ -269,17 +253,25 @@ class Configurator(
         internal fun build(): Configurator {
 
             val configurator = Configurator(
-                apps = apps,
-                activities = activities,
-                files = files,
-                internet = internet,
-                phone = phone,
-                location = location,
-                keyboard = keyboard,
-                screenshots = screenshots,
-                accessibility = accessibility,
-                permissions = permissions,
-                exploit = exploit,
+                libLogger = libLogger,
+                testLogger = testLogger,
+
+                device = Device(
+                    apps = apps,
+                    activities = activities,
+                    files = files,
+                    network = network,
+                    phone = phone,
+                    location = location,
+                    keyboard = keyboard,
+                    screenshots = screenshots,
+                    accessibility = accessibility,
+                    permissions = permissions,
+                    exploit = exploit
+                ),
+
+                flakySafetyParams = flakySafetyParams,
+                autoScrollParams = autoScrollParams,
 
                 viewActionWatcherInterceptors = viewActionWatcherInterceptors,
                 viewAssertionWatcherInterceptors = viewAssertionWatcherInterceptors,
@@ -291,12 +283,8 @@ class Configurator(
                 webBehaviorInterceptors = webBehaviorInterceptors,
 
                 stepWatcherInterceptors = stepWatcherInterceptors,
-                testRunWatcherInterceptors = testRunWatcherInterceptors,
-
-                externalLogger = externalLogger
+                testRunWatcherInterceptors = testRunWatcherInterceptors
             )
-
-            failureInterceptor?.let { Espresso.setFailureHandler(it::interceptAndThrow) }
 
             val viewInteractionInterceptor = ViewKakaoInteractionInterceptor(configurator)
             val dataInteractionInterceptor = DataKakaoInteractionInterceptor(configurator)
@@ -304,38 +292,19 @@ class Configurator(
 
             Kakao.intercept {
                 onViewInteraction {
-                    onCheck(
-                        isOverride = true,
-                        interceptor = viewInteractionInterceptor::interceptCheck
-                    )
-                    onPerform(
-                        isOverride = true,
-                        interceptor = viewInteractionInterceptor::interceptPerform
-                    )
+                    onCheck(isOverride = true, interceptor = viewInteractionInterceptor::interceptCheck)
+                    onPerform(isOverride = true, interceptor = viewInteractionInterceptor::interceptPerform)
                 }
                 onDataInteraction {
-                    onCheck(
-                        isOverride = true,
-                        interceptor = dataInteractionInterceptor::interceptCheck
-                    )
+                    onCheck(isOverride = true, interceptor = dataInteractionInterceptor::interceptCheck)
                 }
                 onWebInteraction {
-                    onCheck(
-                        isOverride = true,
-                        interceptor = webInteractionInterceptor::interceptCheck
-                    )
-                    onPerform(
-                        isOverride = true,
-                        interceptor = webInteractionInterceptor::interceptPerform
-                    )
+                    onCheck(isOverride = true, interceptor = webInteractionInterceptor::interceptCheck)
+                    onPerform(isOverride = true, interceptor = webInteractionInterceptor::interceptPerform)
                 }
             }
 
-            Configurator.attemptsTimeoutMs = attemptsTimeoutMs
-            Configurator.attemptsIntervalMs = attemptsIntervalMs
-            Configurator.allowedExceptionsForAttempt = allowedExceptionsForAttempt
-
-            Configurator.logger = logger
+            Espresso.setFailureHandler(failureHandler)
 
             return configurator
         }

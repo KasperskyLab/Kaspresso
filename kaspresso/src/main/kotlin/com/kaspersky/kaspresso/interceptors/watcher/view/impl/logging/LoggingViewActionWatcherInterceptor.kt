@@ -2,8 +2,8 @@ package com.kaspersky.kaspresso.interceptors.watcher.view.impl.logging
 
 import android.view.View
 import androidx.test.espresso.ViewAction
-import com.kaspersky.kaspresso.extensions.other.describe
 import com.kaspersky.kaspresso.interceptors.watcher.view.ViewActionWatcherInterceptor
+import com.kaspersky.kaspresso.internal.extensions.other.describe
 import com.kaspersky.kaspresso.logger.UiTestLogger
 
 /**

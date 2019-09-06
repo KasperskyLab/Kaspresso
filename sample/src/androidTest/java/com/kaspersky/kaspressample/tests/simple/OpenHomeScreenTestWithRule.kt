@@ -1,15 +1,14 @@
 package com.kaspersky.kaspressample.tests.simple
 
 import android.Manifest
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
-import androidx.test.runner.AndroidJUnit4
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.screen.HomeScreen
 import com.kaspersky.kaspressample.screen.MainScreen
-import com.kaspersky.kaspresso.flakysafety.attempt
+import com.kaspersky.kaspresso.device.exploit.Exploit
 import com.kaspersky.kaspresso.testcases.api.testcaserule.TestCaseRule
-import com.kaspersky.kaspresso.viewactions.orientation.Orientation
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -35,10 +34,10 @@ class OpenHomeScreenTestWithRule {
     @Test
     fun test() {
         testCaseRule.before {
-            device.exploit.setOrientation(Orientation.Landscape)
+            device.exploit.setOrientation(Exploit.DeviceOrientation.Landscape)
             activityTestRule.launchActivity(null)
         }.after {
-            device.exploit.setOrientation(Orientation.Portrait)
+            device.exploit.setOrientation(Exploit.DeviceOrientation.Portrait)
         }.run {
 
             step("Open Home screen") {
@@ -50,7 +49,7 @@ class OpenHomeScreenTestWithRule {
                 homeScreen {
                     title {
                         isVisible()
-                        attempt(message = "You should've been commented this line before launching the test") {
+                        flakySafely(failureMessage = "You should've been commented this line before the test") {
                             // hasText("Ooops!") //Uncomment to fail test
                         }
                     }

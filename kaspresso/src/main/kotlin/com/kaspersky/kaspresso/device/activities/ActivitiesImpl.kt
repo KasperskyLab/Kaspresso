@@ -2,8 +2,8 @@ package com.kaspersky.kaspresso.device.activities
 
 import android.app.Activity
 import android.os.Looper
-import androidx.test.InstrumentationRegistry
 import androidx.test.internal.runner.junit4.statement.UiThreadStatement
+import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.runner.lifecycle.ActivityLifecycleMonitorRegistry
 import androidx.test.runner.lifecycle.Stage
 import com.kaspersky.kaspresso.logger.UiTestLogger

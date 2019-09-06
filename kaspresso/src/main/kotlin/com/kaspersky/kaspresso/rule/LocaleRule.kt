@@ -1,7 +1,7 @@
 package com.kaspersky.kaspresso.rule
 
 import android.content.Context
-import androidx.test.InstrumentationRegistry
+import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.runner.lifecycle.ActivityLifecycleCallback
 import androidx.test.runner.lifecycle.ActivityLifecycleMonitorRegistry
 import androidx.test.runner.lifecycle.Stage
@@ -40,13 +40,13 @@ class LocaleRule internal constructor(
 
                     for (locale in locales) {
                         currentLocale = locale
-                        applyCurrentLocaleToContext(InstrumentationRegistry.getTargetContext())
+                        applyCurrentLocaleToContext(InstrumentationRegistry.getInstrumentation().targetContext)
                         base.evaluate()
                     }
                 } finally {
                     if (deviceLocale != null) {
                         currentLocale = deviceLocale!!
-                        applyCurrentLocaleToContext(InstrumentationRegistry.getTargetContext())
+                        applyCurrentLocaleToContext(InstrumentationRegistry.getInstrumentation().targetContext)
                     }
 
                     ActivityLifecycleMonitorRegistry.getInstance().removeLifecycleCallback(callback)

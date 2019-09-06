@@ -4,7 +4,7 @@ import com.kaspersky.kaspresso.device.activities.Activities
 import com.kaspersky.kaspresso.device.screenshots.screenshoter.ScreenshotFiles
 import com.kaspersky.kaspresso.device.screenshots.screenshoter.external.ExternalScreenshotMaker
 import com.kaspersky.kaspresso.device.screenshots.screenshoter.internal.InternalScreenshotMaker
-import com.kaspersky.kaspresso.extensions.other.getStackTraceAsString
+import com.kaspersky.kaspresso.internal.extensions.other.getStackTraceAsString
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import java.io.File
 

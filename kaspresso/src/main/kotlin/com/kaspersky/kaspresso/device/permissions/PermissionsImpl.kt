@@ -3,8 +3,8 @@ package com.kaspersky.kaspresso.device.permissions
 import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.UiObjectNotFoundException
 import androidx.test.uiautomator.UiSelector
-import com.kaspersky.kaspresso.extensions.other.getStackTraceAsString
-import com.kaspersky.kaspresso.flakysafety.wait
+import com.kaspersky.kaspresso.internal.extensions.other.getStackTraceAsString
+import com.kaspersky.kaspresso.internal.wait.wait
 import com.kaspersky.kaspresso.logger.UiTestLogger
 
 /**
@@ -15,6 +15,10 @@ class PermissionsImpl(
     private val uiDevice: UiDevice
 ) : Permissions {
 
+    private companion object {
+        private const val DIALOG_TIMEOUT_MS: Long = 1_000
+    }
+
     private val packageInstallerPackageName = "com.android.packageinstaller"
     private val permissionDenyButtonId = "$packageInstallerPackageName:id/permission_deny_button"
     private val permissionAllowButtonId = "$packageInstallerPackageName:id/permission_allow_button"
@@ -22,12 +26,14 @@ class PermissionsImpl(
     /**
      * Waits for 1 sec, passes the permission-requesting permissions dialog and allows permissions.
      */
-    override fun allowViaDialog() = wait(timeoutMs = 1_000) { handlePermissionRequest(shouldAllowPermissions = true) }
+    override fun allowViaDialog() =
+        wait(timeoutMs = DIALOG_TIMEOUT_MS, logger = logger) { handlePermissionRequest(shouldAllowPermissions = true) }
 
     /**
      * Waits for 1 sec, passes the permission-requesting permissions dialog and denies permissions.
      */
-    override fun denyViaDialog() = wait(timeoutMs = 1_000) { handlePermissionRequest(shouldAllowPermissions = false) }
+    override fun denyViaDialog() =
+        wait(timeoutMs = DIALOG_TIMEOUT_MS, logger = logger) { handlePermissionRequest(shouldAllowPermissions = false) }
 
     /**
      * Passes the permission-requesting permissions dialog.
