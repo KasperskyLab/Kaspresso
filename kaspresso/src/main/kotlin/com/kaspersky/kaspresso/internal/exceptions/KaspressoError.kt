@@ -6,7 +6,7 @@ package com.kaspersky.kaspresso.internal.exceptions
  *  It is derived from [java.lang.Error] instead of [java.lang.AssertionError] since
  *  the desired constructor with a [message] and [cause] is not supported in Java 6.
  */
-internal class KaspressoAssertionError(message: String, cause: Throwable) : java.lang.Error(message, cause) {
+internal class KaspressoError(message: String, cause: Throwable) : java.lang.Error(message, cause) {
 
     /**
      *  Do not fill stacktrace

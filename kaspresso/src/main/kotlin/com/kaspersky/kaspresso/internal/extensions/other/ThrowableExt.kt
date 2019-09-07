@@ -1,5 +1,6 @@
 package com.kaspersky.kaspresso.internal.extensions.other
 
+import com.kaspersky.kaspresso.internal.exceptions.KaspressoError
 import io.reactivex.exceptions.CompositeException
 import java.io.PrintWriter
 import java.io.StringWriter
@@ -44,7 +45,7 @@ internal fun <T : Throwable> List<T>.throwAll() {
     }
 }
 
-internal fun <T : Throwable> T.isAllowed(allowed: MutableSet<Class<out Throwable>>): Boolean {
+internal fun <T : Throwable> T.isAllowed(allowed: Set<Class<out Throwable>>): Boolean {
     return when (this) {
         is CompositeException -> {
             exceptions.find { e: Throwable ->
@@ -56,3 +57,6 @@ internal fun <T : Throwable> T.isAllowed(allowed: MutableSet<Class<out Throwable
         }
     }
 }
+
+internal fun Throwable.withMessage(failureMessage: String?): Throwable =
+    failureMessage?.let { KaspressoError(it, this) } ?: this

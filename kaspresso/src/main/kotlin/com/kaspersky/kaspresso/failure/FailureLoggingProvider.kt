@@ -12,5 +12,5 @@ interface FailureLoggingProvider {
     fun logDescriptionAndThrow(error: Throwable?, viewMatcher: Matcher<View>?)
 }
 
-fun <T> FailureLoggingProvider?.withLoggingOnFailureIfNotNull(action: () -> T): T =
+internal fun <T> FailureLoggingProvider?.withLoggingOnFailureIfNotNull(action: () -> T): T =
     if (this != null) withLoggingOnFailure(action) else action.invoke()

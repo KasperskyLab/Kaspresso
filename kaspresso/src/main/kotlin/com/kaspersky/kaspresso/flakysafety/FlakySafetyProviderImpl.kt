@@ -1,7 +1,7 @@
 package com.kaspersky.kaspresso.flakysafety
 
-import com.kaspersky.kaspresso.internal.exceptions.KaspressoAssertionError
 import com.kaspersky.kaspresso.internal.extensions.other.isAllowed
+import com.kaspersky.kaspresso.internal.extensions.other.withMessage
 import com.kaspersky.kaspresso.logger.UiTestLogger
 
 class FlakySafetyProviderImpl(
@@ -10,7 +10,26 @@ class FlakySafetyProviderImpl(
 ) : FlakySafetyProvider {
 
     @Throws(Throwable::class)
-    override fun <T> flakySafely(failureMessage: String?, action: () -> T): T {
+    override fun <T> flakySafely(action: () -> T): T = invokeFlakySafely(params, null, action)
+
+    @Throws(Throwable::class)
+    override fun <T> flakySafely(
+        timeoutMs: Long?,
+        intervalMs: Long?,
+        allowedExceptions: MutableSet<Class<out Throwable>>?,
+        failureMessage: String?,
+        action: () -> T
+    ): T = invokeFlakySafely(
+        params = FlakySafetyParams(
+            timeoutMs ?: params.timeoutMs,
+            intervalMs ?: params.intervalMs,
+            allowedExceptions ?: params.allowedExceptions
+        ),
+        failureMessage = failureMessage,
+        action = action
+    )
+
+    private fun <T> invokeFlakySafely(params: FlakySafetyParams, failureMessage: String?, action: () -> T): T {
         var cachedError: Throwable
         val startTime = System.currentTimeMillis()
 
@@ -32,6 +51,6 @@ class FlakySafetyProviderImpl(
                     "because of ${cachedError.javaClass.simpleName}"
         )
 
-        throw failureMessage?.let { KaspressoAssertionError(it, cachedError) } ?: cachedError
+        throw cachedError.withMessage(failureMessage)
     }
 }
