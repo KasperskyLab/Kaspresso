@@ -2,65 +2,60 @@ package com.kaspersky.kaspresso.systemsafety
 
 import android.widget.FrameLayout
 import androidx.test.uiautomator.*
-import com.kaspersky.kaspresso.internal.extensions.other.isAllowed
 import com.kaspersky.kaspresso.logger.UiTestLogger
-import io.reactivex.exceptions.CompositeException
 
 class SystemDialogSafetyProviderImpl(
-    private val params: SystemDialogSafetyParams,
     private val logger: UiTestLogger,
     private val uiDevice: UiDevice
 ) : SystemDialogSafetyProvider {
 
     private val attemptsToSuppress: List<(UiDevice) -> Unit> = listOf(
-        { uiDevice -> uiDevice.pressBack() },
-        { uiDevice -> uiDevice.findObject(UiSelector().resourceId("android:id/button1")).click() }
+        { uiDevice -> uiDevice.findObject(UiSelector().resourceId("android:id/button1")).click() },
+        { uiDevice -> uiDevice.pressBack() }
     )
 
     override fun <R> passSystemDialogs(action: () -> R): R {
         return try {
             action.invoke()
         } catch (error: Throwable) {
-            if (isErrorAllowedAndAndroidSystemDetected(error)) {
-                return suppressSystemDialogs(action)
+            if (isAndroidSystemDetected()) {
+                return suppressSystemDialogs(error, action)
             }
             throw error
         }
     }
 
-    private fun <R> suppressSystemDialogs(action: () -> R): R {
+    private fun <R> suppressSystemDialogs(firstError: Throwable, action: () -> R): R {
         logger.i("The suppressing of SystemDialogs starts")
-        val cachedErrors: MutableList<Throwable> = mutableListOf()
-        attemptsToSuppress.forEach {
+        var cachedError: Throwable = firstError
+        attemptsToSuppress.forEachIndexed { index, attemptToSuppress ->
             try {
-                it.invoke(uiDevice)
+                logger.i("The suppressing of SystemDialogs on the try #$index starts")
+                attemptToSuppress.invoke(uiDevice)
                 val result = action.invoke()
-                logger.i("The suppressing of SystemDialogs succeeds")
+                logger.i("The suppressing of SystemDialogs succeeds on the try #$index")
                 return result
             } catch (error: Throwable) {
-                logger.i("One part of the suppressing of SystemDialogs failed")
-                cachedErrors += error
-                if (!isErrorAllowedAndAndroidSystemDetected(error)) {
+                logger.i("The try #$index of the suppressing of SystemDialogs failed")
+                cachedError = error
+                if (!isAndroidSystemDetected()) {
                     logger.i(
-                        "The suppressing of SystemDialogs failed. " +
+                        "The try #$index of the suppressing of SystemDialogs failed. " +
                                 "The reason is the error is not allowed or " +
                                 "android system dialog is suppressed but the error is existing"
                     )
-                    throw CompositeException(cachedErrors)
+                    throw cachedError
                 }
             }
         }
         logger.i("The suppressing of SystemDialogs totally failed")
-        throw CompositeException(cachedErrors)
+        throw cachedError
     }
 
     /**
      * Check error is allowed and android system dialogs/windows are overlaying the app.
      */
-    private fun isErrorAllowedAndAndroidSystemDetected(error: Throwable): Boolean {
-        if (!error.isAllowed(params.allowedExceptions)) {
-            return false
-        }
+    private fun isAndroidSystemDetected(): Boolean {
         with(uiDevice) {
             if (isVisible(By.pkg("android").clazz(FrameLayout::class.java))) {
                 logger.i("The android system dialog/window was detected")

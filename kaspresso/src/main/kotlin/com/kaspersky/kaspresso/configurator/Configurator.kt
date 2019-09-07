@@ -69,7 +69,6 @@ import com.kaspersky.kaspresso.interceptors.watcher.view.impl.logging.LoggingWeb
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.logger.UiTestLoggerImpl
 import com.kaspersky.kaspresso.report.impl.AllureReportWriter
-import com.kaspersky.kaspresso.systemsafety.SystemDialogSafetyParams
 
 /**
  * A class that keeps all settings.
@@ -170,20 +169,20 @@ data class Configurator(
 
                     viewBehaviorInterceptors = mutableListOf(
                         AutoScrollViewBehaviorInterceptor(autoScrollParams, libLogger),
-                        SystemDialogSafetyViewBehaviorInterceptor(systemDialogSafetyParams, libLogger, uiDevice),
+                        SystemDialogSafetyViewBehaviorInterceptor(libLogger, uiDevice),
                         FlakySafeViewBehaviorInterceptor(flakySafetyParams, libLogger),
                         FailureLoggingViewBehaviorInterceptor(libLogger)
                     )
 
                     dataBehaviorInterceptors = mutableListOf(
-                        SystemDialogSafetyDataBehaviorInterceptor(systemDialogSafetyParams, libLogger, uiDevice),
+                        SystemDialogSafetyDataBehaviorInterceptor(libLogger, uiDevice),
                         FlakySafeDataBehaviorInterceptor(flakySafetyParams, libLogger),
                         FailureLoggingDataBehaviorInterceptor(libLogger)
                     )
 
                     webBehaviorInterceptors = mutableListOf(
                         AutoScrollWebBehaviorInterceptor(autoScrollParams, libLogger),
-                        SystemDialogSafetyWebBehaviorInterceptor(systemDialogSafetyParams, libLogger, uiDevice),
+                        SystemDialogSafetyWebBehaviorInterceptor(libLogger, uiDevice),
                         FlakySafeWebBehaviorInterceptor(flakySafetyParams, libLogger),
                         FailureLoggingWebBehaviorInterceptor(libLogger)
                     )
@@ -226,7 +225,6 @@ data class Configurator(
 
         var flakySafetyParams: FlakySafetyParams = FlakySafetyParams()
         var autoScrollParams: AutoScrollParams = AutoScrollParams()
-        var systemDialogSafetyParams: SystemDialogSafetyParams = SystemDialogSafetyParams()
 
         var viewActionWatcherInterceptors: MutableList<ViewActionWatcherInterceptor> = mutableListOf()
         var viewAssertionWatcherInterceptors: List<ViewAssertionWatcherInterceptor> = mutableListOf()
