@@ -6,7 +6,9 @@ import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.UiObject
 import com.kaspersky.kaspresso.device.server.AdbServer
 
-class KeyboardImpl : Keyboard {
+class KeyboardImpl(
+    private val adbServer: AdbServer
+) : Keyboard {
 
     /**
      *  Types text char by char in the focused text field.
@@ -23,7 +25,7 @@ class KeyboardImpl : Keyboard {
          * to prevent missing characters in the input field caused by very fast typing speed
          */
         text.map { char -> "input text $char" }
-            .forEach { command -> AdbServer.performShell(command) }
+            .forEach { command -> adbServer.performShell(command) }
     }
 
     /**
@@ -39,6 +41,6 @@ class KeyboardImpl : Keyboard {
      *  @param keyEvent the code from a [KeyEvent] constant to send on device.
      */
     override fun sendEvent(keyEvent: Int) {
-        AdbServer.performShell("input keyevent $keyEvent")
+        adbServer.performShell("input keyevent $keyEvent")
     }
 }

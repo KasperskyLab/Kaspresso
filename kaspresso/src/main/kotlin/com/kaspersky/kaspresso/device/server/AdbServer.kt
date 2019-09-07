@@ -1,19 +1,14 @@
 package com.kaspersky.kaspresso.device.server
 
-import com.kaspersky.test_server.AdbTerminal
-import com.kaspersky.test_server.api.CommandResult
-import com.kaspersky.test_server.api.ExecutorResultStatus
-
 /**
- * Encapsulates all work with adb server.
+ * It's a comfortable wrapper to work with AdbServer repository.
+ * Important notes:
+ * 1. Real connection is established only after a call one of methods of the interface except disconnectServer().
+ * So it's lazy wrapper. Keep it in your mind when you decide to put custom implementation od AdbServer.
+ * 2. After each test a developer has to disconnect AdbServer. There is disconnectServer() method to complete the disconnection.
+ * But Kaspresso calls disconnectServer() after each test if the connection was established during the test. What's why don't worry =)
  */
-object AdbServer {
-
-    private val adbTerminal: AdbTerminal by lazy {
-        AdbTerminal.apply {
-            connect()
-        }
-    }
+interface AdbServer {
 
     /**
      *  Executes shell commands blocking current thread.
@@ -25,11 +20,7 @@ object AdbServer {
      *  @throws AdbServerException if a result status of any command in @param commands is Failed
      *  @return list of answers of commands' execution
      */
-    fun performCmd(vararg commands: String): List<String> {
-        return perform(commands) {
-            adbTerminal.executeCmd(it)
-        }
-    }
+    fun performCmd(vararg commands: String): List<String>
 
     /**
      *  Performs adb commands blocking current thread.
@@ -41,11 +32,7 @@ object AdbServer {
      *  @throws AdbServerException if a result status of any command in @param commands is Failed
      *  @return list of answers of commands' execution
      */
-    fun performAdb(vararg commands: String): List<String> {
-        return perform(commands) {
-            adbTerminal.executeAdb(it)
-        }
-    }
+    fun performAdb(vararg commands: String): List<String>
 
     /**
      *  Performs shell commands blocking current thread.
@@ -57,24 +44,12 @@ object AdbServer {
      *  @throws AdbServerException if a result status of any command in @param commands is Failed
      *  @return list of answers of commands' execution
      */
-    fun performShell(vararg commands: String): List<String> {
-        return perform(commands) {
-            adbTerminal.executeAdb("shell $it")
-        }
-    }
+    fun performShell(vararg commands: String): List<String>
 
-    private fun perform(commands: Array<out String>, executor: (String) -> CommandResult): List<String> {
-        return commands.asSequence()
-            .map { command -> command to executor.invoke(command) }
-            .onEach { (command, result) ->
-                // TODO
-//                Configurator.logger.i("command=$command was performed with result=$result")
-            }
-            .onEach { (command, result) ->
-                if (result.status == ExecutorResultStatus.FAILED)
-                    throw AdbServerException("command=$command was performed with failed result=$result")
-            }
-            .map { (_, result) -> result.description }
-            .toList()
-    }
+    /**
+     * Disconnect from AdbServer.
+     * The method is called by Kaspresso after each test.
+     */
+    fun disconnectServer()
+
 }

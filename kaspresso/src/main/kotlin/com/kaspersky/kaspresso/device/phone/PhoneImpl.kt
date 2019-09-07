@@ -2,7 +2,9 @@ package com.kaspersky.kaspresso.device.phone
 
 import com.kaspersky.kaspresso.device.server.AdbServer
 
-class PhoneImpl : Phone {
+class PhoneImpl(
+    private val adbServer: AdbServer
+) : Phone {
 
     /**
      *  Emulates incoming call.
@@ -10,7 +12,7 @@ class PhoneImpl : Phone {
      *  Required Permissions: INTERNET
      */
     override fun emulateCall(number: String) {
-        AdbServer.performAdb("emu gsm call $number")
+        adbServer.performAdb("emu gsm call $number")
     }
 
     /**
@@ -19,7 +21,7 @@ class PhoneImpl : Phone {
      *  Required Permissions: INTERNET
      */
     override fun cancelCall(number: String) {
-        AdbServer.performAdb("emu gsm cancel $number")
+        adbServer.performAdb("emu gsm cancel $number")
     }
 
     /**
@@ -28,6 +30,6 @@ class PhoneImpl : Phone {
      *  Required Permissions: INTERNET
      */
     override fun receiveSms(number: String, text: String) {
-        AdbServer.performAdb("emu sms send $number $text")
+        adbServer.performAdb("emu sms send $number $text")
     }
 }

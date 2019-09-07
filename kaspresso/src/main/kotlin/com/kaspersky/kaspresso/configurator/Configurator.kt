@@ -30,6 +30,8 @@ import com.kaspersky.kaspresso.device.phone.Phone
 import com.kaspersky.kaspresso.device.phone.PhoneImpl
 import com.kaspersky.kaspresso.device.screenshots.Screenshots
 import com.kaspersky.kaspresso.device.screenshots.ScreenshotsImpl
+import com.kaspersky.kaspresso.device.server.AdbServer
+import com.kaspersky.kaspresso.device.server.AdbServerImpl
 import com.kaspersky.kaspresso.failure.LoggingFailureHandler
 import com.kaspersky.kaspresso.flakysafety.FlakySafetyParams
 import com.kaspersky.kaspresso.interceptors.behavior.DataBehaviorInterceptor
@@ -68,7 +70,6 @@ import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.logger.UiTestLoggerImpl
 import com.kaspersky.kaspresso.report.impl.AllureReportWriter
 import com.kaspersky.kaspresso.systemsafety.SystemDialogSafetyParams
-import com.kaspersky.kaspresso.testcases.core.testcontext.TestContext
 
 /**
  * A class that keeps all settings.
@@ -114,6 +115,7 @@ import com.kaspersky.kaspresso.testcases.core.testcontext.TestContext
 data class Configurator(
     internal val libLogger: UiTestLogger,
     internal val testLogger: UiTestLogger,
+    internal val adbServer: AdbServer,
     internal val device: Device,
     internal val flakySafetyParams: FlakySafetyParams,
     internal val autoScrollParams: AutoScrollParams,
@@ -207,17 +209,19 @@ data class Configurator(
 
         private val instrumentation: Instrumentation = InstrumentationRegistry.getInstrumentation()
 
-        var apps: Apps = AppsImpl(libLogger, instrumentation.context, UiDevice.getInstance(instrumentation))
+        var adbServer: AdbServer = AdbServerImpl(libLogger)
+
+        var apps: Apps = AppsImpl(libLogger, instrumentation.context, UiDevice.getInstance(instrumentation), adbServer)
         var activities: Activities = ActivitiesImpl(libLogger)
-        var files: Files = FilesImpl()
-        var network: Network = NetworkImpl(instrumentation.targetContext)
-        var phone: Phone = PhoneImpl()
-        var location: Location = LocationImpl()
-        var keyboard: Keyboard = KeyboardImpl()
+        var files: Files = FilesImpl(adbServer)
+        var network: Network = NetworkImpl(instrumentation.targetContext, adbServer)
+        var phone: Phone = PhoneImpl(adbServer)
+        var location: Location = LocationImpl(adbServer)
+        var keyboard: Keyboard = KeyboardImpl(adbServer)
         var screenshots: Screenshots = ScreenshotsImpl(libLogger, activities)
         var accessibility: Accessibility = AccessibilityImpl()
         var permissions: Permissions = PermissionsImpl(libLogger, UiDevice.getInstance(instrumentation))
-        var exploit: Exploit = ExploitImpl(activities, UiDevice.getInstance(instrumentation))
+        var exploit: Exploit = ExploitImpl(activities, UiDevice.getInstance(instrumentation), adbServer)
 
         var flakySafetyParams: FlakySafetyParams = FlakySafetyParams()
         var autoScrollParams: AutoScrollParams = AutoScrollParams()
@@ -272,6 +276,7 @@ data class Configurator(
                 libLogger = libLogger,
                 testLogger = testLogger,
 
+                adbServer = adbServer,
                 device = Device(
                     apps = apps,
                     activities = activities,

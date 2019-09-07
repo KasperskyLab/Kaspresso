@@ -64,6 +64,7 @@ internal class TestRunner<InitData, Data>(
                 resultException = exceptions.getException()
                 testInfo = testInfo.copy(throwable = resultException)
                 testRunWatcherInterceptor.onTestFinished(testInfo, testPassed)
+                configurator.adbServer.disconnectServer()
                 configurator.reset()
             }
         }

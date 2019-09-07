@@ -19,7 +19,8 @@ import org.junit.Assert
 class AppsImpl(
     private val logger: UiTestLogger,
     private val context: Context,
-    private val uiDevice: UiDevice
+    private val uiDevice: UiDevice,
+    private val adbServer: AdbServer
 ) : Apps {
 
     companion object {
@@ -42,7 +43,7 @@ class AppsImpl(
      *  @param apkPath a path to an apk to be installed. The apk is hosted on the test server.
      */
     override fun install(apkPath: String) {
-        AdbServer.performAdb("install $apkPath")
+        adbServer.performAdb("install $apkPath")
     }
 
     /**
@@ -53,7 +54,7 @@ class AppsImpl(
      *  @param packageName an android package name of an app to be deleted.
      */
     override fun uninstall(packageName: String) {
-        AdbServer.performAdb("uninstall $packageName")
+        adbServer.performAdb("uninstall $packageName")
     }
 
     override fun waitForLauncher(timeout: Long, launcherPackageName: String) {

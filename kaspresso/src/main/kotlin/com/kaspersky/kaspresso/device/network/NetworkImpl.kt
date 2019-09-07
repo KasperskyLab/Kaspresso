@@ -10,7 +10,8 @@ import com.kaspersky.kaspresso.device.server.AdbServer
  * Default implementation of Network interface.
  */
 class NetworkImpl(
-    private val targetContext: Context
+    private val targetContext: Context,
+    private val adbServer: AdbServer
 ) : Network {
 
     /**
@@ -19,7 +20,7 @@ class NetworkImpl(
      *  Required Permissions: INTERNET.
      */
     override fun enable() {
-        AdbServer.performAdb("shell svc data enable", "shell svc wifi enable")
+        adbServer.performAdb("shell svc data enable", "shell svc wifi enable")
     }
 
     /**
@@ -28,7 +29,7 @@ class NetworkImpl(
      *  Required Permissions: INTERNET.
      */
     override fun disable() {
-        AdbServer.performAdb("shell svc data disable", "shell svc wifi disable")
+        adbServer.performAdb("shell svc data disable", "shell svc wifi disable")
     }
 
     /**
