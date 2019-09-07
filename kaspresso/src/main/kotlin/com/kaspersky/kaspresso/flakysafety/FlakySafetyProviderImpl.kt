@@ -3,11 +3,18 @@ package com.kaspersky.kaspresso.flakysafety
 import com.kaspersky.kaspresso.internal.extensions.other.isAllowed
 import com.kaspersky.kaspresso.internal.extensions.other.withMessage
 import com.kaspersky.kaspresso.logger.UiTestLogger
+import java.util.*
+import java.util.concurrent.locks.ReentrantLock
+import kotlin.concurrent.schedule
+import kotlin.concurrent.withLock
 
 class FlakySafetyProviderImpl(
     private val params: FlakySafetyParams,
     private val logger: UiTestLogger
 ) : FlakySafetyProvider {
+
+    private val lock = ReentrantLock()
+    private val condition = lock.newCondition()
 
     @Throws(Throwable::class)
     override fun <T> flakySafely(action: () -> T): T = invokeFlakySafely(params, null, action)
@@ -38,8 +45,13 @@ class FlakySafetyProviderImpl(
                 return action.invoke()
             } catch (error: Throwable) {
                 if (error.isAllowed(params.allowedExceptions)) {
-                    Thread.sleep(params.intervalMs)
                     cachedError = error
+                    lock.withLock {
+                        Timer().schedule(params.intervalMs) {
+                            lock.withLock { condition.signalAll() }
+                        }
+                        condition.await()
+                    }
                 } else {
                     throw error
                 }
