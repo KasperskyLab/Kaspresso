@@ -1,7 +1,11 @@
 package com.kaspersky.kaspresso.systemsafety
 
 import android.widget.FrameLayout
-import androidx.test.uiautomator.*
+import androidx.test.uiautomator.By
+import androidx.test.uiautomator.BySelector
+import androidx.test.uiautomator.UiDevice
+import androidx.test.uiautomator.UiSelector
+import androidx.test.uiautomator.Until
 import com.kaspersky.kaspresso.logger.UiTestLogger
 
 class SystemDialogSafetyProviderImpl(

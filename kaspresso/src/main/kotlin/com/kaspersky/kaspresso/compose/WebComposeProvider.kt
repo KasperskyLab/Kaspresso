@@ -1,8 +1,8 @@
 package com.kaspersky.kaspresso.compose
 
 import com.agoda.kakao.web.WebElementBuilder
-import com.kaspersky.kaspresso.compose.pack.ActionsPack
 import com.kaspersky.kaspresso.compose.pack.ActionsOnWebElementsPack
+import com.kaspersky.kaspresso.compose.pack.ActionsPack
 
 interface WebComposeProvider {
 
