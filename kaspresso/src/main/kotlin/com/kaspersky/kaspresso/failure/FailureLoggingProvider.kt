@@ -9,7 +9,6 @@ interface FailureLoggingProvider {
 
     fun logStackTrace(error: Throwable)
 
-    @Throws(Throwable::class)
     fun logDescriptionAndThrow(error: Throwable?, viewMatcher: Matcher<View>?)
 }
 

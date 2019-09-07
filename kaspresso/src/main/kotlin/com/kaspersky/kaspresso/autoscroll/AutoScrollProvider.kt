@@ -2,7 +2,7 @@ package com.kaspersky.kaspresso.autoscroll
 
 interface AutoScrollProvider<Interaction> {
 
-    val params: AutoScrollParams
+    fun <T> withAutoScroll(interaction: Interaction, action: () -> T): T
 
-    fun <R> autoScroll(interaction: Interaction, action: () -> R, cachedError: Throwable): R
+    fun <T> scroll(interaction: Interaction, action: () -> T, cachedError: Throwable): T
 }

@@ -11,5 +11,5 @@ class FailureLoggingDataBehaviorInterceptor(
 ) : DataBehaviorInterceptor,
     FailureLoggingProvider by FailureLoggingProviderImpl(logger) {
 
-    override fun <R> intercept(interaction: DataInteraction, action: () -> R): R = withLoggingOnFailure(action)
+    override fun <T> intercept(interaction: DataInteraction, action: () -> T): T = withLoggingOnFailure(action)
 }

@@ -13,6 +13,5 @@ class SystemDialogSafetyWebBehaviorInterceptor(
 ) : WebBehaviorInterceptor,
     SystemDialogSafetyProvider by SystemDialogSafetyProviderImpl(params, logger) {
 
-    override fun <R> intercept(interaction: Web.WebInteraction<*>, action: () -> R): R =
-        passSystemDialogs(action = action)
+    override fun <T> intercept(interaction: Web.WebInteraction<*>, action: () -> T): T = passSystemDialogs(action)
 }

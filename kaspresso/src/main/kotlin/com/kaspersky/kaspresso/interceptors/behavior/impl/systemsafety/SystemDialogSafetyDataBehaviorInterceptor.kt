@@ -13,5 +13,5 @@ class SystemDialogSafetyDataBehaviorInterceptor(
 ) : DataBehaviorInterceptor,
     SystemDialogSafetyProvider by SystemDialogSafetyProviderImpl(params, logger) {
 
-    override fun <R> intercept(interaction: DataInteraction, action: () -> R): R = passSystemDialogs(action = action)
+    override fun <T> intercept(interaction: DataInteraction, action: () -> T): T = passSystemDialogs(action)
 }

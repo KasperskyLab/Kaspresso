@@ -13,5 +13,5 @@ class SystemDialogSafetyViewBehaviorInterceptor(
 ) : ViewBehaviorInterceptor,
     SystemDialogSafetyProvider by SystemDialogSafetyProviderImpl(params, logger) {
 
-    override fun <R> intercept(interaction: ViewInteraction, action: () -> R): R = passSystemDialogs(action = action)
+    override fun <T> intercept(interaction: ViewInteraction, action: () -> T): T = passSystemDialogs(action)
 }

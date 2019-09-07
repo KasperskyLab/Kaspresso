@@ -9,11 +9,11 @@ import org.hamcrest.Matcher
 /**
  * A proxy-wrapper of [Atom] for watcherInterceptors calls.
  */
-class AtomProxy<R>(
-    val atom: Atom<R>,
+class AtomProxy<T>(
+    val atom: Atom<T>,
     val matcher: Matcher<*>,
     private val watcherInterceptors: List<AtomWatcherInterceptor>
-) : Atom<R> {
+) : Atom<T> {
 
     /**
      * Simply calls [Atom.getArguments] on wrapped [atom].
@@ -31,7 +31,7 @@ class AtomProxy<R>(
      * @param evaluation represents the results of a Javascript execution.
      * @return [R] a result type of the atom.
      */
-    override fun transform(evaluation: Evaluation?): R {
+    override fun transform(evaluation: Evaluation?): T {
         watcherInterceptors.forEach { it.intercept(this, evaluation) }
         return atom.transform(evaluation)
     }

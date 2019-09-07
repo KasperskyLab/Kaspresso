@@ -14,7 +14,8 @@ class SystemDialogSafetyProviderImpl(
     private val logger: UiTestLogger
 ) : SystemDialogSafetyProvider {
 
-    override fun <R> passSystemDialogs(action: () -> R): R {
+    @Throws(Throwable::class)
+    override fun <T> passSystemDialogs(action: () -> T): T {
         return try {
             action.invoke()
         } catch (exception: Exception) {

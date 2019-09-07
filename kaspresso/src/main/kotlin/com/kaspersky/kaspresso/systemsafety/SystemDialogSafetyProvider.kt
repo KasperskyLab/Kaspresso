@@ -2,5 +2,5 @@ package com.kaspersky.kaspresso.systemsafety
 
 interface SystemDialogSafetyProvider {
 
-    fun <R> passSystemDialogs(action: () -> R): R
+    fun <T> passSystemDialogs(action: () -> T): T
 }

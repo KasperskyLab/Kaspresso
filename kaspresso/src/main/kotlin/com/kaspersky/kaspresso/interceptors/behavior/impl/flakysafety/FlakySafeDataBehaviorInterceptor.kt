@@ -18,5 +18,5 @@ class FlakySafeDataBehaviorInterceptor(
      *
      * @param execution a function-wrapper of an action or an assertion to be invoked.
      */
-    override fun <R> intercept(interaction: DataInteraction, action: () -> R): R = flakySafely(action = action)
+    override fun <T> intercept(interaction: DataInteraction, action: () -> T): T = flakySafely(action = action)
 }

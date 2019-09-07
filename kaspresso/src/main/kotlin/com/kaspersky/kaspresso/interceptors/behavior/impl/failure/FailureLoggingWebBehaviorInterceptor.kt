@@ -11,5 +11,5 @@ class FailureLoggingWebBehaviorInterceptor(
 ) : WebBehaviorInterceptor,
     FailureLoggingProvider by FailureLoggingProviderImpl(logger) {
 
-    override fun <R> intercept(interaction: Web.WebInteraction<*>, action: () -> R): R = withLoggingOnFailure(action)
+    override fun <T> intercept(interaction: Web.WebInteraction<*>, action: () -> T): T = withLoggingOnFailure(action)
 }
