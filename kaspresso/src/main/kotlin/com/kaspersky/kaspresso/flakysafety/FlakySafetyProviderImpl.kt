@@ -29,7 +29,7 @@ class FlakySafetyProviderImpl(
 
         logger.e(
             "All attempts to interact for ${params.timeoutMs} ms totally failed " +
-                    "because of \n${cachedError.javaClass.simpleName}${cachedError.message?.let { ": $it" } ?: ""}"
+                    "because of ${cachedError.javaClass.simpleName}"
         )
 
         throw failureMessage?.let { KaspressoAssertionError(it, cachedError) } ?: cachedError
