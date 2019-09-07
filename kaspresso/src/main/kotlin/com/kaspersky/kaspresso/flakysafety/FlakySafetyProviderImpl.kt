@@ -33,5 +33,4 @@ class FlakySafetyProviderImpl(
 
         throw failureMessage?.let { KaspressoAssertionError(it, cachedError) } ?: cachedError
     }
-
 }

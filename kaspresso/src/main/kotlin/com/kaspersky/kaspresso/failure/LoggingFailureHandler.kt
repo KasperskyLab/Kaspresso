@@ -9,8 +9,9 @@ import org.hamcrest.Matcher
  * An implementation of [FailureHandler] that logs rich description of failure.
  */
 class LoggingFailureHandler(
-    override val logger: UiTestLogger
-) : FailureHandler, FailureLoggingProvider {
+    val logger: UiTestLogger
+) : FailureHandler,
+    FailureLoggingProvider by FailureLoggingProviderImpl(logger) {
 
     @Throws(Throwable::class)
     override fun handle(error: Throwable?, viewMatcher: Matcher<View>?) {

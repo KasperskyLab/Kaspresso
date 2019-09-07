@@ -51,5 +51,4 @@ interface AdbServer {
      * The method is called by Kaspresso after each test.
      */
     fun disconnectServer()
-
 }

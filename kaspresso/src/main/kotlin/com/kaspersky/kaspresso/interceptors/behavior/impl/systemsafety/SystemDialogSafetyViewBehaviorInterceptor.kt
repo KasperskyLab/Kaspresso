@@ -5,11 +5,13 @@ import com.kaspersky.kaspresso.interceptors.behavior.ViewBehaviorInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.systemsafety.SystemDialogSafetyParams
 import com.kaspersky.kaspresso.systemsafety.SystemDialogSafetyProvider
+import com.kaspersky.kaspresso.systemsafety.SystemDialogSafetyProviderImpl
 
 class SystemDialogSafetyViewBehaviorInterceptor(
-    override val params: SystemDialogSafetyParams,
-    override val logger: UiTestLogger
-) : ViewBehaviorInterceptor, SystemDialogSafetyProvider {
+    private val params: SystemDialogSafetyParams,
+    private val logger: UiTestLogger
+) : ViewBehaviorInterceptor,
+    SystemDialogSafetyProvider by SystemDialogSafetyProviderImpl(params, logger) {
 
     override fun <R> intercept(interaction: ViewInteraction, action: () -> R): R = passSystemDialogs(action = action)
 }
