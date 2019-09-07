@@ -24,6 +24,7 @@
                     android:id="@+id/scroll_view_stub_btn2"
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
+                    android:background="@color/colorPrimary"
                     android:text="2"/>
 
             <Button
@@ -35,6 +36,7 @@
             <Button
                     android:id="@+id/scroll_view_stub_btn4"
                     android:layout_width="match_parent"
+                    android:background="@color/colorPrimary"
                     android:layout_height="300dp"
                     android:text="4"/>
 
@@ -43,6 +45,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
                     android:text="5"/>
+
+            <TextView
+                    android:id="@+id/scroll_view_stub_tv6"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:background="@color/colorPrimary"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:text="6"/>
 
         </LinearLayout>
 

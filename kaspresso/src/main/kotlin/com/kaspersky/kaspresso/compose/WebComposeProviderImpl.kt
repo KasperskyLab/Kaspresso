@@ -1,6 +1,8 @@
 package com.kaspersky.kaspresso.compose
 
 import com.agoda.kakao.web.WebElementBuilder
+import com.kaspersky.kaspresso.compose.pack.ActionsPack
+import com.kaspersky.kaspresso.compose.pack.ActionsOnWebElementsPack
 import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.failure.FailureLoggingProvider
 import com.kaspersky.kaspresso.failure.withLoggingOnFailureIfNotNull
@@ -14,30 +16,29 @@ import com.kaspersky.kaspresso.interceptors.tokakao.impl.KakaoWebInterceptor
 
 class WebComposeProviderImpl(
     private val configurator: Configurator
-): WebComposeProvider {
+) : WebComposeProvider {
 
-    override fun WebElementBuilder.webCompose(block: WebComponentPack.() -> Unit) {
-        val webComponents: List<WebComponent> = WebComponentPack(this).apply(block).build()
+    override fun WebElementBuilder.compose(block: ActionsOnWebElementsPack.() -> Unit) {
+        val actions: List<() -> Unit> = ActionsOnWebElementsPack(this).apply(block).build()
 
-        webComponents.forEach { it.webElementBuilder.setComposeInterception() }
+        setComposeInterception()
 
         val (flakySafetyProvider, failureLoggingProvider) = getProviders()
 
         failureLoggingProvider.withLoggingOnFailureIfNotNull {
             flakySafetyProvider.flakySafelyIfNotNull {
-                invokeComposed(webComponents, configurator.libLogger)
+                invokeComposed(actions, configurator.libLogger)
             }
         }
 
-        webComponents.forEach { it.webElementBuilder.setInterception() }
+        setInterception()
     }
 
-    override fun WebElementBuilder.KWebInteraction.webCompose(
+    override fun WebElementBuilder.KWebInteraction.compose(
         webElementBuilder: WebElementBuilder,
         block: ActionsPack<WebElementBuilder.KWebInteraction>.() -> Unit
     ) {
-        val actions: List<WebElementBuilder.KWebInteraction.() -> Unit> =
-            ActionsPack<WebElementBuilder.KWebInteraction>().apply(block).build()
+        val actions: List<() -> Unit> = ActionsPack(this).apply(block).build()
 
         webElementBuilder.setComposeInterception()
 
@@ -45,7 +46,7 @@ class WebComposeProviderImpl(
 
         failureLoggingProvider.withLoggingOnFailureIfNotNull {
             flakySafetyProvider.flakySafelyIfNotNull {
-                invokeComposed(this, actions, configurator.libLogger)
+                invokeComposed(actions, configurator.libLogger)
             }
         }
 

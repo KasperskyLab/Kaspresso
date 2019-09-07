@@ -83,7 +83,7 @@ class WebViewTest : TestCase() {
                             Locator.XPATH,
                             "//*[@id=\"app\"]/section[5]/div/div/div[2]/div[3]/button"
                         ) {
-                            webCompose(this@webView) {
+                            compose(this@webView) {
                                 or {
                                     containsText("fffuuuuu")
                                     hasText("fuck")
@@ -99,7 +99,7 @@ class WebViewTest : TestCase() {
                             }
                         }
 
-                        webCompose {
+                        compose {
                             orWithElement(
                                 Locator.XPATH,
                                 "//*[@id=\"app\"]/section[5]/div/div/div[2]/div[3]/button"

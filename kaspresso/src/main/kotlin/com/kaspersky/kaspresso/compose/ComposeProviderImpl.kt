@@ -6,6 +6,8 @@ import androidx.test.espresso.ViewInteraction
 import com.agoda.kakao.common.actions.BaseActions
 import com.agoda.kakao.common.assertions.BaseAssertions
 import com.agoda.kakao.intercept.Interceptable
+import com.kaspersky.kaspresso.compose.pack.ActionsPack
+import com.kaspersky.kaspresso.compose.pack.ActionsOnElementsPack
 import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.failure.FailureLoggingProvider
 import com.kaspersky.kaspresso.failure.withLoggingOnFailureIfNotNull
@@ -21,28 +23,26 @@ class ComposeProviderImpl(
     private val configurator: Configurator
 ) : ComposeProvider {
 
-    override fun <T> compose(block: ComponentPack<T>.() -> Unit): Unit
-            where T : BaseActions, T : BaseAssertions, T : Interceptable<ViewInteraction, ViewAssertion, ViewAction> {
+    override fun compose(block: ActionsOnElementsPack.() -> Unit) {
+        val (elements, actions) = ActionsOnElementsPack().apply(block).build()
 
-        val components: List<Component<T>> = ComponentPack<T>().apply(block).build()
-
-        components.forEach { it.element.setComposeInterception() }
+        elements.forEach { it.setComposeInterception() }
 
         val (flakySafetyProvider, failureLoggingProvider) = getProviders()
 
         failureLoggingProvider.withLoggingOnFailureIfNotNull {
             flakySafetyProvider.flakySafelyIfNotNull {
-                invokeComposed(components, configurator.libLogger)
+                invokeComposed(actions, configurator.libLogger)
             }
         }
 
-        components.forEach { it.element.setInterception() }
+        elements.forEach { it.setInterception() }
     }
 
     override fun <T> T.compose(block: ActionsPack<T>.() -> Unit): Unit
             where T : BaseActions, T : BaseAssertions, T : Interceptable<ViewInteraction, ViewAssertion, ViewAction> {
 
-        val actions: List<T.() -> Unit> = ActionsPack<T>().apply(block).build()
+        val actions: List<() -> Unit> = ActionsPack(this).apply(block).build()
 
         setComposeInterception()
 
@@ -50,7 +50,7 @@ class ComposeProviderImpl(
 
         failureLoggingProvider.withLoggingOnFailureIfNotNull {
             flakySafetyProvider.flakySafelyIfNotNull {
-                invokeComposed(this, actions, configurator.libLogger)
+                invokeComposed(actions, configurator.libLogger)
             }
         }
 
@@ -71,9 +71,7 @@ class ComposeProviderImpl(
         return Pair(flakySafetyProvider, failureLoggingProvider)
     }
 
-    private fun <T> T.setComposeInterception(): Unit
-            where T : BaseActions, T : BaseAssertions, T : Interceptable<ViewInteraction, ViewAssertion, ViewAction> {
-
+    private fun Interceptable<ViewInteraction, ViewAssertion, ViewAction>.setComposeInterception() {
         val interceptor = ComposeKakaoViewInterceptor(configurator)
 
         intercept {
@@ -82,9 +80,7 @@ class ComposeProviderImpl(
         }
     }
 
-    private fun <T> T.setInterception(): Unit
-            where T : BaseActions, T : BaseAssertions, T : Interceptable<ViewInteraction, ViewAssertion, ViewAction> {
-
+    private fun Interceptable<ViewInteraction, ViewAssertion, ViewAction>.setInterception() {
         val interceptor = KakaoViewInterceptor(configurator)
 
         intercept {
