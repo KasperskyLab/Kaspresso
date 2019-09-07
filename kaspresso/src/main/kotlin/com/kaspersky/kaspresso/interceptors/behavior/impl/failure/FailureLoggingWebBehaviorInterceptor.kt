@@ -7,7 +7,7 @@ import com.kaspersky.kaspresso.interceptors.behavior.WebBehaviorInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
 
 class FailureLoggingWebBehaviorInterceptor(
-    private val logger: UiTestLogger
+    logger: UiTestLogger
 ) : WebBehaviorInterceptor,
     FailureLoggingProvider by FailureLoggingProviderImpl(logger) {
 

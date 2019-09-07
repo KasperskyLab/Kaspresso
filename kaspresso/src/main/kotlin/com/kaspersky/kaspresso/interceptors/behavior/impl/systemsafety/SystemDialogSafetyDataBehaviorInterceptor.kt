@@ -8,8 +8,8 @@ import com.kaspersky.kaspresso.systemsafety.SystemDialogSafetyProvider
 import com.kaspersky.kaspresso.systemsafety.SystemDialogSafetyProviderImpl
 
 class SystemDialogSafetyDataBehaviorInterceptor(
-    private val params: SystemDialogSafetyParams,
-    private val logger: UiTestLogger
+    params: SystemDialogSafetyParams,
+    logger: UiTestLogger
 ) : DataBehaviorInterceptor,
     SystemDialogSafetyProvider by SystemDialogSafetyProviderImpl(params, logger) {
 

@@ -8,8 +8,8 @@ import com.kaspersky.kaspresso.interceptors.behavior.WebBehaviorInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
 
 class FlakySafeWebBehaviorInterceptor(
-    val params: FlakySafetyParams,
-    val logger: UiTestLogger
+    params: FlakySafetyParams,
+    logger: UiTestLogger
 ) : WebBehaviorInterceptor,
     FlakySafetyProvider by FlakySafetyProviderImpl(params, logger) {
 

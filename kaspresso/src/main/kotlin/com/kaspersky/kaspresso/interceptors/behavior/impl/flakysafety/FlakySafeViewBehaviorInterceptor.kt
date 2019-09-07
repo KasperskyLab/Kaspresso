@@ -12,8 +12,8 @@ import com.kaspersky.kaspresso.logger.UiTestLogger
  * provide flaky safety.
  */
 class FlakySafeViewBehaviorInterceptor(
-    val params: FlakySafetyParams,
-    val logger: UiTestLogger
+    params: FlakySafetyParams,
+    logger: UiTestLogger
 ) : ViewBehaviorInterceptor,
     FlakySafetyProvider by FlakySafetyProviderImpl(params, logger) {
 
