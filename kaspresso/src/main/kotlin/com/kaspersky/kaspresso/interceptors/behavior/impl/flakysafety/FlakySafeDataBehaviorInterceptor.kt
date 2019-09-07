@@ -8,8 +8,8 @@ import com.kaspersky.kaspresso.interceptors.behavior.DataBehaviorInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
 
 class FlakySafeDataBehaviorInterceptor(
-    val params: FlakySafetyParams,
-    val logger: UiTestLogger
+    params: FlakySafetyParams,
+    logger: UiTestLogger
 ) : DataBehaviorInterceptor,
     FlakySafetyProvider by FlakySafetyProviderImpl(params, logger) {
 
@@ -18,5 +18,5 @@ class FlakySafeDataBehaviorInterceptor(
      *
      * @param execution a function-wrapper of an action or an assertion to be invoked.
      */
-    override fun <R> intercept(interaction: DataInteraction, action: () -> R): R = flakySafely(action = action)
+    override fun <T> intercept(interaction: DataInteraction, action: () -> T): T = flakySafely(action = action)
 }

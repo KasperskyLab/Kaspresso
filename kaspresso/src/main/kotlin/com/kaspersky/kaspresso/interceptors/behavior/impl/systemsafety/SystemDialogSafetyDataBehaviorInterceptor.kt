@@ -8,10 +8,10 @@ import com.kaspersky.kaspresso.systemsafety.SystemDialogSafetyProvider
 import com.kaspersky.kaspresso.systemsafety.SystemDialogSafetyProviderImpl
 
 class SystemDialogSafetyDataBehaviorInterceptor(
-    private val logger: UiTestLogger,
-    private val uiDevice: UiDevice
+    logger: UiTestLogger,
+    uiDevice: UiDevice
 ) : DataBehaviorInterceptor,
     SystemDialogSafetyProvider by SystemDialogSafetyProviderImpl(logger, uiDevice) {
 
-    override fun <R> intercept(interaction: DataInteraction, action: () -> R): R = passSystemDialogs(action = action)
+    override fun <T> intercept(interaction: DataInteraction, action: () -> T): T = passSystemDialogs(action)
 }

@@ -9,7 +9,7 @@ import org.hamcrest.Matcher
  * An implementation of [FailureHandler] that logs rich description of failure.
  */
 class LoggingFailureHandler(
-    val logger: UiTestLogger
+    logger: UiTestLogger
 ) : FailureHandler,
     FailureLoggingProvider by FailureLoggingProviderImpl(logger) {
 

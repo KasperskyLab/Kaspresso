@@ -14,7 +14,7 @@ class SystemDialogSafetyProviderImpl(
         { uiDevice -> uiDevice.pressBack() }
     )
 
-    override fun <R> passSystemDialogs(action: () -> R): R {
+    override fun <T> passSystemDialogs(action: () -> T): T {
         return try {
             action.invoke()
         } catch (error: Throwable) {

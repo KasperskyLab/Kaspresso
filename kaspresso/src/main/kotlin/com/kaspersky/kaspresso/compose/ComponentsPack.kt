@@ -2,9 +2,9 @@ package com.kaspersky.kaspresso.compose
 
 import java.lang.IllegalArgumentException
 
-data class Component<T>(
-    val element: T,
-    val action: T.() -> Unit
+open class Component<T>(
+    open val element: T,
+    open val action: T.() -> Unit
 )
 
 class ComponentPack<T> {

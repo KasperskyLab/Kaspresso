@@ -9,6 +9,7 @@ class FlakySafetyProviderImpl(
     private val logger: UiTestLogger
 ) : FlakySafetyProvider {
 
+    @Throws(Throwable::class)
     override fun <T> flakySafely(failureMessage: String?, action: () -> T): T {
         var cachedError: Throwable
         val startTime = System.currentTimeMillis()

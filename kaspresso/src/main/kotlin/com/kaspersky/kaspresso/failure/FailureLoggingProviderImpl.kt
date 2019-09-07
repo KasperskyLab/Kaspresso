@@ -12,6 +12,7 @@ class FailureLoggingProviderImpl(
     private val logger: UiTestLogger
 ) : FailureLoggingProvider {
 
+    @Throws(Throwable::class)
     override fun <T> withLoggingOnFailure(action: () -> T): T {
         return try {
             action.invoke()

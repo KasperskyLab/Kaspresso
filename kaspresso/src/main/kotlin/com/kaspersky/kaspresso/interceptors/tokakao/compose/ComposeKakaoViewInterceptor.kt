@@ -29,13 +29,15 @@ internal class ComposeKakaoViewInterceptor(
     }
 
     override fun interceptPerform(interaction: ViewInteraction, action: ViewAction) {
-        configurator.viewBehaviorInterceptors.filter { it !is FlakySafeViewBehaviorInterceptor }.fold(
-            initial = {
-                interaction.perform(ViewActionProxy(action, configurator.viewActionWatcherInterceptors))
-            },
-            operation = { acc, viewBehaviorInterceptor: ViewBehaviorInterceptor ->
-                { viewBehaviorInterceptor.intercept(interaction, acc) }
-            }
-        ).invoke()
+        configurator.viewBehaviorInterceptors
+            .filter { it !is FlakySafeViewBehaviorInterceptor && it !is FailureLoggingViewBehaviorInterceptor }
+            .fold(
+                initial = {
+                    interaction.perform(ViewActionProxy(action, configurator.viewActionWatcherInterceptors))
+                },
+                operation = { acc, viewBehaviorInterceptor: ViewBehaviorInterceptor ->
+                    { viewBehaviorInterceptor.intercept(interaction, acc) }
+                }
+            ).invoke()
     }
 }

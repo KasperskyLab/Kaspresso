@@ -8,10 +8,10 @@ import com.kaspersky.kaspresso.systemsafety.SystemDialogSafetyProvider
 import com.kaspersky.kaspresso.systemsafety.SystemDialogSafetyProviderImpl
 
 class SystemDialogSafetyWebBehaviorInterceptor(
-    private val logger: UiTestLogger,
-    private val uiDevice: UiDevice
+    logger: UiTestLogger,
+    uiDevice: UiDevice
 ) : WebBehaviorInterceptor,
     SystemDialogSafetyProvider by SystemDialogSafetyProviderImpl(logger, uiDevice) {
 
-    override fun <R> intercept(interaction: Web.WebInteraction<*>, action: () -> R): R = passSystemDialogs(action = action)
+    override fun <T> intercept(interaction: Web.WebInteraction<*>, action: () -> T): T = passSystemDialogs(action)
 }

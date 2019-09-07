@@ -4,11 +4,11 @@ import androidx.test.espresso.web.webdriver.Locator
 import com.agoda.kakao.web.WebElementBuilder
 import java.lang.IllegalArgumentException
 
-data class WebComponent(
-    val webElement: WebElementBuilder.KWebInteraction,
+class WebComponent(
+    element: WebElementBuilder.KWebInteraction,
     val webElementBuilder: WebElementBuilder,
-    val webAction: WebElementBuilder.KWebInteraction.() -> Unit
-)
+    action: WebElementBuilder.KWebInteraction.() -> Unit
+) : Component<WebElementBuilder.KWebInteraction>(element, action)
 
 class WebComponentPack(
     private val webElementBuilder: WebElementBuilder

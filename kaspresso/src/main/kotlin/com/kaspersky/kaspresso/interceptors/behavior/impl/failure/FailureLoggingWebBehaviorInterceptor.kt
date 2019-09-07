@@ -7,9 +7,9 @@ import com.kaspersky.kaspresso.interceptors.behavior.WebBehaviorInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
 
 class FailureLoggingWebBehaviorInterceptor(
-    private val logger: UiTestLogger
+    logger: UiTestLogger
 ) : WebBehaviorInterceptor,
     FailureLoggingProvider by FailureLoggingProviderImpl(logger) {
 
-    override fun <R> intercept(interaction: Web.WebInteraction<*>, action: () -> R): R = withLoggingOnFailure(action)
+    override fun <T> intercept(interaction: Web.WebInteraction<*>, action: () -> T): T = withLoggingOnFailure(action)
 }

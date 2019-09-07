@@ -11,8 +11,8 @@ class ScrollViewStubScreen : Screen<ScrollViewStubScreen>() {
         withId(R.id.scroll_view)
     }
 
-    val btn3 = KButton {
-        withId(R.id.scroll_view_stub_btn3)
+    val btn1 = KButton {
+        withId(R.id.scroll_view_stub_btn1)
     }
 
     val btn5 = KButton {

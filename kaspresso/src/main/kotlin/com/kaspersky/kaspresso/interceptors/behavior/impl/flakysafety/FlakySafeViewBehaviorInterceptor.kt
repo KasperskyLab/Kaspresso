@@ -12,8 +12,8 @@ import com.kaspersky.kaspresso.logger.UiTestLogger
  * provide flaky safety.
  */
 class FlakySafeViewBehaviorInterceptor(
-    val params: FlakySafetyParams,
-    val logger: UiTestLogger
+    params: FlakySafetyParams,
+    logger: UiTestLogger
 ) : ViewBehaviorInterceptor,
     FlakySafetyProvider by FlakySafetyProviderImpl(params, logger) {
 
@@ -22,5 +22,5 @@ class FlakySafeViewBehaviorInterceptor(
      *
      * @param execution a function-wrapper of an action or an assertion to be invoked.
      */
-    override fun <R> intercept(interaction: ViewInteraction, action: () -> R): R = flakySafely(action = action)
+    override fun <T> intercept(interaction: ViewInteraction, action: () -> T): T = flakySafely(action = action)
 }
