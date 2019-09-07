@@ -3,6 +3,7 @@ package com.kaspersky.kaspresso.interceptors.behavior.impl.flakysafety
 import androidx.test.espresso.ViewInteraction
 import com.kaspersky.kaspresso.flakysafety.FlakySafetyParams
 import com.kaspersky.kaspresso.flakysafety.FlakySafetyProvider
+import com.kaspersky.kaspresso.flakysafety.FlakySafetyProviderImpl
 import com.kaspersky.kaspresso.interceptors.behavior.ViewBehaviorInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
 
@@ -11,9 +12,10 @@ import com.kaspersky.kaspresso.logger.UiTestLogger
  * provide flaky safety.
  */
 class FlakySafeViewBehaviorInterceptor(
-    override val params: FlakySafetyParams,
-    override val logger: UiTestLogger
-) : ViewBehaviorInterceptor, FlakySafetyProvider {
+    val params: FlakySafetyParams,
+    val logger: UiTestLogger
+) : ViewBehaviorInterceptor,
+    FlakySafetyProvider by FlakySafetyProviderImpl(params, logger) {
 
     /**
      * Performs multiple attempts to interact an action or an assertion.
