@@ -82,7 +82,9 @@ abstract class DocLocScreenshotTestCase(
     private lateinit var screenshotsDir: File
     private lateinit var screenshotCapturer: DocLocScreenshotCapturer
 
-    @PublishedApi internal val logger: UiTestLogger = configurator.libLogger
+    @PublishedApi
+    internal val logger: UiTestLogger = configurator.libLogger
+
     private val confLocales: Locales = Locales(logger)
 
     @get:Rule

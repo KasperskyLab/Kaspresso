@@ -20,9 +20,6 @@ class ScrollViewStubTest : TestCase(
         flakySafetyParams.timeoutMs = 5_000L
     }
 ) {
-    private val mainScreen = MainScreen()
-    private val scrollViewStubScreen = ScrollViewStubScreen()
-
     @get:Rule
     val runtimePermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
         Manifest.permission.WRITE_EXTERNAL_STORAGE,
@@ -39,7 +36,7 @@ class ScrollViewStubTest : TestCase(
         }.after {
         }.run {
             step("Open Scroll View Stub Screen") {
-                mainScreen {
+                MainScreen {
                     scrollViewStubButton {
                         click()
                     }
@@ -47,7 +44,7 @@ class ScrollViewStubTest : TestCase(
             }
 
             step("Click button \"bzzz\" when it appears") {
-                scrollViewStubScreen {
+                ScrollViewStubScreen {
                     scrollViewStub.isVisible()
 
                     val action: KButton.() -> Unit = {

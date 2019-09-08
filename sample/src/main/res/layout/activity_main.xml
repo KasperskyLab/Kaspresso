@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -7,46 +7,62 @@
         android:orientation="vertical"
         tools:context=".MainActivity">
 
-    <FrameLayout
-            android:id="@+id/activity_main_frame_layout_root"
-            android:layout_width="match_parent"
-            android:layout_weight="1"
-            android:layout_height="0dp"/>
+    <TextView
+            android:id="@+id/activity_main_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18pt"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true"
+            android:text="@string/main_screen_description"/>
+
     <Button
             android:id="@+id/activity_main_button_next"
             style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/activity_main_title"
             android:text="@string/next"/>
 
     <Button
             android:id="@+id/activity_main_button_webview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/activity_main_button_next"
             android:text="@string/webview"/>
 
     <Button
             android:id="@+id/activity_main_button_recycler_stub"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/activity_main_button_webview"
             android:text="@string/recycler_stub"/>
 
     <Button
             android:id="@+id/activity_main_button_list_stub"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/activity_main_button_recycler_stub"
             android:text="@string/list_stub"/>
 
     <Button
             android:id="@+id/activity_main_button_scroll_view_stub"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/activity_main_button_list_stub"
             android:text="@string/scroll_view_stub"/>
 
     <TextView
             android:text="@string/main_screen_description"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_below="@+id/activity_main_button_scroll_view_stub"
             android:id="@+id/activity_main_text_view_description"/>
 
-</LinearLayout>
+    <FrameLayout
+            android:id="@+id/activity_main_frame_layout_root"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/activity_main_button_webview"/>
+
+</RelativeLayout>

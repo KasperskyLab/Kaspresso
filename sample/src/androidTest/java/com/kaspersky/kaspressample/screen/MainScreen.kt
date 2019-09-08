@@ -1,11 +1,14 @@
 package com.kaspersky.kaspressample.screen
 
-import com.agoda.kakao.screen.Screen
 import com.agoda.kakao.text.KButton
 import com.agoda.kakao.text.KTextView
+import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.R
 
-class MainScreen : Screen<MainScreen>() {
+object MainScreen : KScreen<MainScreen>() {
+
+    override val layoutId: Int? = R.layout.activity_main
+    override val viewClass: Class<*>? = MainActivity::class.java
 
     val nextButton = KButton { withId(R.id.activity_main_button_next) }
 
@@ -17,5 +20,5 @@ class MainScreen : Screen<MainScreen>() {
 
     val scrollViewStubButton = KButton { withId(R.id.activity_main_button_scroll_view_stub) }
 
-    val descriptionText = KTextView { withId(R.id.activity_main_text_view_description) }
+    val descriptionText = KTextView { withId(R.id.activity_main_title) }
 }

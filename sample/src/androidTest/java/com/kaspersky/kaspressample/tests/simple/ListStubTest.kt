@@ -15,9 +15,6 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class ListStubTest : TestCase() {
 
-    private val mainScreen = MainScreen()
-    private val listStubScreen = ListStubScreen()
-
     @get:Rule
     val runtimePermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
         Manifest.permission.WRITE_EXTERNAL_STORAGE,
@@ -34,7 +31,7 @@ class ListStubTest : TestCase() {
         }.after {
         }.run {
             step("Open List Stub Screen") {
-                mainScreen {
+                MainScreen {
                     listStubButton {
                         click()
                     }
@@ -42,7 +39,7 @@ class ListStubTest : TestCase() {
             }
 
             step("Find 56th element") {
-                listStubScreen {
+                ListStubScreen {
                     listStub {
                         isVisible()
                         hasSize(100)

@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
 
         activity_main_button_next.setOnClickListener {
             with(supportFragmentManager) {
-                val hasFragment = findFragmentByTag(HomeFragment.TAG) != null
+                val hasFragment = findFragmentByTag(SimpleFragment.TAG) != null
 
                 if (hasFragment) {
                     Snackbar.make(
@@ -24,7 +24,11 @@ class MainActivity : AppCompatActivity() {
                     ).show()
                 } else {
                     beginTransaction()
-                        .add(R.id.activity_main_frame_layout_root, HomeFragment.newInstance(), HomeFragment.TAG)
+                        .add(
+                            R.id.activity_main_frame_layout_root,
+                            SimpleFragment.newInstance(),
+                            SimpleFragment.TAG
+                        )
                         .commitNow()
                 }
             }

@@ -9,6 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.kaspersky.kaspressample"
+
         minSdkVersion versions.minSdk
         targetSdkVersion versions.targetSdk
         versionName "$pKaspressampleMajor.$pKaspressampleMinor.$pKaspressampleBuild"
@@ -30,6 +31,9 @@ android {
         }
     }
 
+    lintOptions {
+        abortOnError false
+    }
 }
 
 dependencies {

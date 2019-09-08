@@ -19,20 +19,12 @@ class WebViewActivity : AppCompatActivity() {
             webViewClient = object : WebViewClient() {
 
                 @TargetApi(Build.VERSION_CODES.N)
-                override fun shouldOverrideUrlLoading(
-                    view: WebView,
-                    request: WebResourceRequest
-                ): Boolean {
-
+                override fun shouldOverrideUrlLoading(view: WebView, request: WebResourceRequest): Boolean {
                     view.loadUrl(request.url.toString())
                     return true
                 }
 
-                override fun shouldOverrideUrlLoading(
-                    view: WebView,
-                    url: String
-                ): Boolean {
-
+                override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
                     view.loadUrl(url)
                     return true
                 }

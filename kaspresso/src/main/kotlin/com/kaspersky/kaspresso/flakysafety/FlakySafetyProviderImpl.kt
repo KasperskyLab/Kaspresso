@@ -3,7 +3,7 @@ package com.kaspersky.kaspresso.flakysafety
 import com.kaspersky.kaspresso.internal.extensions.other.isAllowed
 import com.kaspersky.kaspresso.internal.extensions.other.withMessage
 import com.kaspersky.kaspresso.logger.UiTestLogger
-import java.util.*
+import java.util.Timer
 import java.util.concurrent.locks.ReentrantLock
 import kotlin.concurrent.schedule
 import kotlin.concurrent.withLock

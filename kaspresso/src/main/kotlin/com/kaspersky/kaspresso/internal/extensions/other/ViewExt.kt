@@ -3,7 +3,6 @@ package com.kaspersky.kaspresso.internal.extensions.other
 import android.content.res.Resources
 import android.view.View
 import android.widget.TextView
-import androidx.test.espresso.matcher.ViewMatchers.isDisplayingAtLeast
 
 /**
  * @return a [String] description of the [View]
@@ -35,12 +34,3 @@ internal fun View?.describe(): String {
 
     return "${this::class.java.simpleName}($builder)"
 }
-
-/**
- * @return true if [View] is displayed, otherwise - false.
- */
-internal fun View.isDisplayed(): Boolean {
-    return isDisplayingAtLeast(VIEW_DISPLAY_THRESHOLD_PERCENT).matches(this)
-}
-
-private const val VIEW_DISPLAY_THRESHOLD_PERCENT = 90

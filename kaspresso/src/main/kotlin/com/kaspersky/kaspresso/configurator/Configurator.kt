@@ -227,9 +227,9 @@ data class Configurator(
         var autoScrollParams: AutoScrollParams = AutoScrollParams()
 
         var viewActionWatcherInterceptors: MutableList<ViewActionWatcherInterceptor> = mutableListOf()
-        var viewAssertionWatcherInterceptors: List<ViewAssertionWatcherInterceptor> = mutableListOf()
-        var atomWatcherInterceptors: List<AtomWatcherInterceptor> = mutableListOf()
-        var webAssertionWatcherInterceptors: List<WebAssertionWatcherInterceptor> = mutableListOf()
+        var viewAssertionWatcherInterceptors: MutableList<ViewAssertionWatcherInterceptor> = mutableListOf()
+        var atomWatcherInterceptors: MutableList<AtomWatcherInterceptor> = mutableListOf()
+        var webAssertionWatcherInterceptors: MutableList<WebAssertionWatcherInterceptor> = mutableListOf()
 
         var viewBehaviorInterceptors: MutableList<ViewBehaviorInterceptor> = mutableListOf()
         var dataBehaviorInterceptors: MutableList<DataBehaviorInterceptor> = mutableListOf()
