@@ -131,10 +131,10 @@ Kaspresso proposes such very important things for ui-tests as the set of rules o
 ## Wiki
 For all information check [Kaspresso wiki](https://github.com/matzuk/Kaspresso/wiki)
 
-## Links
+## Integration
 // todo
 
-## Integration
+## Links
 // todo
 
 ## Contribution Policy
