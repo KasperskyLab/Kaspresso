@@ -20,15 +20,14 @@ Kaspresso interceptors will not work if You set your custom Kakao interceptors b
 If you set your custom Kakao interceptors for concrete ```Screen``` or ```KView``` and set argument ```isOverride``` in true then Kaspresso interceptors will not work for concrete ```Screen``` or ```KView``` fully. 
 <br> <br>
 Kaspresso interceptors can be divided into two types: <br>
-    1. Behavior Interceptors - are intercepting calls to ViewInteraction, DataInteraction, WebInteraction and do some stuff. <br>
-    2. Watcher Interceptors - are intercepting calls to ViewAction, ViewAssertion, Atom, WebAssertion and do some stuff. <br>
+    1. ```Behavior Interceptors``` - are intercepting calls to ViewInteraction, DataInteraction, WebInteraction and do some stuff. <br>
+    2. ```Watcher Interceptors``` - are intercepting calls to ViewAction, ViewAssertion, Atom, WebAssertion and do some stuff. <br>
 
 Let's describe mentioned Kaspresso interceptors shortly: <br>
     1. ```viewActionWatcherInterceptors``` - do some stuff before [android.support.test.espresso.ViewAction.perform] is actually called <br>
     2. ```viewAssertionWatcherInterceptors``` - do some stuff before [android.support.test.espresso.ViewAssertion.check] is actually called <br>
     3. ```atomWatcherInterceptors``` - do some stuff before [android.support.test.espresso.web.model.Atom.transform] is actually called <br>
     4. ```webAssertionWatcherInterceptors``` - do some stuff before [android.support.test.espresso.web.assertion.WebAssertion.checkResult] is actually called <br>
-
     5. ```viewBehaviorInterceptor``` - intercept calls to ```ViewInteraction#perform``` and ```ViewInteraction#check``` <br>
     6. ```dataBehaviorInterceptor``` - intercept calls to ```DataInteraction#check``` <br>
     7. ```webBehaviorInterceptor``` - intercept calls to ```Web.WebInteraction<R>#perform``` and ```Web.WebInteraction<R>#check``` <br>
