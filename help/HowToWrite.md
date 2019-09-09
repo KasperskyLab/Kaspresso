@@ -132,10 +132,10 @@ All of the above mentioned inspired us to create test's structure like below:
 ```kotlin
 @Test
 fun shouldPassOnNoInternetScanTest() =
-    beforeTest {
+    before {
         activityTestRule.launchActivity(null)
         // some things with the state
-    }.afterTest {
+    }.after {
         // some things with the state
     }.run {
         step("Open Simple Screen") {
@@ -178,7 +178,7 @@ fun shouldPassOnNoInternetScanTest() =
     }
 ```  
 Let's describe the structure: <br>
-1. ``` beforeTest - afterTest - run``` <br>
+1. ``` before - after - run``` <br>
 At the beginning, we think about a state. After the state, we begin to consider the test body.
 2. ```step``` <br>
 ```step``` in the test is similar to *step* in the test-case. That's why test reading is easier and understandable.
@@ -253,10 +253,21 @@ Finally, let's look at all available Test dsl in Kaspresso:
 ##### Some words about *run* method
 After all preparing in ```run```, next things are available:
 1. ```data``` <br>
-If you set your test data by ```init-transform``` methods using then this test data is available by ```data``` field
-2. ```kLogger``` <br>
-It's a logger for tests allowed to output logs by more appropriate and readable form
+If you set your test data by ```init-transform``` methods using then this test data is available by ```data``` field.
+2. ```testLogger``` <br>
+It's a logger for tests allowed to output logs by more appropriate and readable form.
 3. ```device``` <br>
+An instance of ```Device``` class is available in this context.
+4. ```adbServer``` <br>
+You have an access to AdbServer instance used in ```Device```'s interfaces via ```adbServer``` property.
+5. ```flakySafely``` <br>
+It's a method that receives a lambda and invokes it in the same manner as FlakySafeBehaviorInterceptor does.
+If you disabled this interceptor or if you want to set some special flaky safety params for any view, you can use this method.
+6. ```compose``` <br>
+This is a method to make a composed action from multiple actions or assertions, and this action succeeds if at least one of it components succeeds.
+It is available as an extension function for any KView (any that implements both BaseActions, BaseAssertions and Interceptable interfaces),
+and as just a regular method (in this case it can take actions on different views as well).
+
 It's a special interface given beautiful possibilities to do a lot of useful things at the test. <br>
 Implementations of ```device``` use UiAutomator and AdbServer under the hood. 
 

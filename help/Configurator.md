@@ -5,33 +5,44 @@ A developer can customize **Configurator** by setting ```Configurator.Builder```
 
 ### Structure
 
-All settings in **Configurator** are may be divided into four groups: <br>
+All settings in **Configurator** may be divided into four groups: <br>
 
 1. Loggers <br>
-```logger``` - inner Kaspresso logger <br>
-```externalLogger``` - logger enabled for developers in tests.
-It's available by ```kLogger``` field in ```run``` method in test dsl (by ```TestContext``` class). <br>
+```libLogger``` - inner Kaspresso logger <br>
+```testLogger``` - logger available for developers in tests.
+It's available by ```testlLogger``` property in test sections (```before, after, init, transform, run```) in test dsl (by ```TestContext``` class). <br>
+Also it is availaible while setting ```Configurator.Builder``` if you want to add it to your custom interceptors, for example.<br>
 
 2. Kaspresso interceptors based on Kakao Interceptors. <br>
 These interceptors were introduced to simplify and uniform using of [Kakao interceptors](https://github.com/agoda-com/Kakao#intercepting).<br> <br>
 **Important moment** about a mixing of Kaspresso interceptors and Kakao interceptors. <br>
 Kaspresso interceptors will not work if You set your custom Kakao interceptors by calling of ```Kakao.intercept``` method in the test. <br> 
 If you set your custom Kakao interceptors for concrete ```Screen``` or ```KView``` and set argument ```isOverride``` in true then Kaspresso interceptors will not work for concrete ```Screen``` or ```KView``` fully. 
-<br> <br> 
-Let's describe mentioned Kaspresso interceptors shortly: <br>
-    1. ```viewActionInterceptors``` - do some stuff before [android.support.test.espresso.ViewAction.perform] is actually called <br>
-    2. ```viewAssertionInterceptors``` - do some stuff before [android.support.test.espresso.ViewAssertion.check] is actually called <br>
-    3. ```atomInterceptors``` - do some stuff before [android.support.test.espresso.web.model.Atom.transform] is actually called <br>
-    4. ```webAssertionInterceptors``` - do some stuff before [android.support.test.espresso.web.assertion.WebAssertion.checkResult] is actually called <br>
-    5. ```executingInterceptor``` - do some stuff and **actually execute** an action or an assertion <br>
-    6. ```failureInterceptor``` - an interceptor that is called on failures. It's [FailureInterceptor.interceptAndThrow] method is being provide as the default [android.support.test.espresso.FailureHandler].
+<br> <br>
+Kaspresso interceptors can be divided into two types: <br>
+    1. Behavior Interceptors - are intercepting calls to ViewInteraction, DataInteraction, WebInteraction and do some stuff. <br>
+    2. Watcher Interceptors - are intercepting calls to ViewAction, ViewAssertion, Atom, WebAssertion and do some stuff. <br>
 
-3. Clean Kaspresso interceptors <br>
+Let's describe mentioned Kaspresso interceptors shortly: <br>
+    1. ```viewActionWatcherInterceptors``` - do some stuff before [android.support.test.espresso.ViewAction.perform] is actually called <br>
+    2. ```viewAssertionWatcherInterceptors``` - do some stuff before [android.support.test.espresso.ViewAssertion.check] is actually called <br>
+    3. ```atomWatcherInterceptors``` - do some stuff before [android.support.test.espresso.web.model.Atom.transform] is actually called <br>
+    4. ```webAssertionWatcherInterceptors``` - do some stuff before [android.support.test.espresso.web.assertion.WebAssertion.checkResult] is actually called <br>
+
+    5. ```viewBehaviorInterceptor``` - intercept calls to ```ViewInteraction#perform``` and ```ViewInteraction#check``` <br>
+    6. ```dataBehaviorInterceptor``` - intercept calls to ```DataInteraction#check``` <br>
+    7. ```webBehaviorInterceptor``` - intercept calls to ```Web.WebInteraction<R>#perform``` and ```Web.WebInteraction<R>#check``` <br>
+
+4. Special Kaspresso interceptors <br>
 These interceptors are not based on some lib. Short description:
-    1. ```stepInterceptors``` - an interceptor of **Step** lifecycle actions
-    2. ```testRunInterceptors``` - an interceptor of entire **Test** lifecycle actions
+    1. ```stepWatcherInterceptors``` - an interceptor of **Step** lifecycle actions
+    2. ```testRunWatcherInterceptors``` - an interceptor of entire **Test** lifecycle actions
     
-4. Other fields are to ```Device``` class. Detailed info is below. 
+5. Device <br>
+```Device``` instance. Detailed info is below.
+
+6. AdbServer <br>
+```AdbServer``` instance. Detailed info follows.
 
 ### Using
 
@@ -117,7 +128,8 @@ Pretty good.
 A developer receives a screenshot after each Step and after any error. Screenshots are saving at Device in "sdcard/screenshots". 
 
 ##### Handling of flaky errors
-Any lib for ui-tests is flaky. It's a hard truth of life. Any action/assert in your test mays to flak. <br>
+Any lib for ui-tests is flaky. It's a hard truth of life. Any action/assert in your test may fail for some undefined reason. <br>
 That's why Kaspresso wraps **all** actions/assertions of Kakao and handles set of potential flaky exceptions.
 If an exception happened then Kaspresso attempts to repeat failed actions/assert for 2 seconds. Such handling rescues developers of any flaky action/assert.<br>
+If the fault is due to an interaction with an element which is not visible and to which you need to scroll, Kaspresso will try to fix it by performing an autoscroll action by itself.
 Also, Kaspresso attempts to remove all system dialogs if it prevents the test executes.
