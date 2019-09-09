@@ -137,5 +137,10 @@ For all information check [Kaspresso wiki](https://github.com/matzuk/Kaspresso/w
 ## Integration
 // todo
 
+## Contribution Policy
+Kaspresso is an open source project, and depends on its users to improve it. We are more than happy to find you interested in taking the project forward. <br>
+Kindly refer to the Contribution Guidelines for detailed information. <br>
+// todo add the reference to Contribution Guidelines
+
 ## License
 Kaspresso is open source and available under the [Apache License, Version 2.0](https://github.com/matzuk/Kaspresso/blob/external_master/LICENSE).
