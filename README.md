@@ -8,13 +8,13 @@ Kaspresso is a UiTest framework based on [Espresso](https://developer.android.co
 
 ## Capabilities
 
-1. Stability. 
+#### Stability 
 
 Kaspresso provides a mechanism to handle a flakiness of Espresso. 
 
 Flakiness in ui tests is when one test passes 50 times but brakes at 51 attempt without any understandable reason. 
 Unfortunately, it's a disease of all ui-tests libraries.  
-2. Readability. 
+#### Readability
 
 We like a syntax to write ui-tests providing by Kakao. Just compare: 
 
@@ -92,7 +92,7 @@ fun shouldPassOnNoInternetScanTest() =
         }
     }
 ```
-3. Flexibility. 
+#### Flexibility
 
 We have introduced a mechanism of interceptors giving an ability to catch all actions going to Espresso. 
 
@@ -100,13 +100,13 @@ Thanks to this mechanism, the developer can add additional custom actions at eac
 handle results of actions of Espresso and re-run failed actions (flaky tests handling), for example, and do other interesting things. 
 
 Part of interceptors was introduced in Kakao version 2.1, another part of interceptors was introduced in Kaspresso.
-4. Ability to call Adb commands. 
+#### Ability to call Adb commands
 
 Espresso or UiAutomator doesn't allow to call adb commands inside a test. 
 That's why we have written special [AdbServer repository](https://github.com/matzuk/AdbServer) fixing mentioned problem. 
 
 In Kaspresso, the developer can call adb and cmd commands by ```AdbServer``` class.  
-5. Ability to work with Android System. 
+#### Ability to work with Android System
 
 There are a lot of useful classes in Kaspresso to work with Android System. 
 
@@ -117,14 +117,14 @@ Examples of such work:
     4. emulate phone calls, 
     5. make screenshots,
     6. and other.
-6. Feature's screenshoting. 
+#### Feature's screenshoting
 
 Sometimes when developing new features, there is a need to check if the application works properly in all supported languages.
 Kaspresso offers a possibility make feature's screenshots fast and automatically. 
-7. Configurability. 
+#### Configurability
 
 The developer can set any part of Kaspresso thanks to ```Configurator.Builder```.
-8. The philosophy. 
+#### The philosophy
 
 Kaspresso proposes such very important things for ui-tests as the set of rules on how to write ui-tests.
 
