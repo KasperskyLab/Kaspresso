@@ -1,6 +1,6 @@
-package com.kaspersky.kaspresso.rule
+package com.kaspersky.kaspresso.docloc.rule
 
-import com.kaspersky.kaspresso.device.screenshots.docloc.DocLocScreenshotCapturer
+import com.kaspersky.kaspresso.docloc.DocLocScreenshotCapturer
 import org.junit.rules.TestWatcher
 import org.junit.runner.Description
 

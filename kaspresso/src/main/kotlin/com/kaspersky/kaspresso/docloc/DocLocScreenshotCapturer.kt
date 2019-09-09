@@ -1,4 +1,4 @@
-package com.kaspersky.kaspresso.device.screenshots.docloc
+package com.kaspersky.kaspresso.docloc
 
 import com.kaspersky.kaspresso.device.activities.Activities
 import com.kaspersky.kaspresso.device.activities.metadata.ActivityMetadata

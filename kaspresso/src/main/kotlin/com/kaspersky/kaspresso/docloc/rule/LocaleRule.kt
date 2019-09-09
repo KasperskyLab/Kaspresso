@@ -1,4 +1,4 @@
-package com.kaspersky.kaspresso.rule
+package com.kaspersky.kaspresso.docloc.rule
 
 import android.content.Context
 import androidx.test.platform.app.InstrumentationRegistry
