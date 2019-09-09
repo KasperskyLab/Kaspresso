@@ -1,0 +1,13 @@
+The following authors have created the source code of "Kaspresso" <br>
+published and distributed by AO Kaspersky Lab as the owner: <br><br>
+Egor Kurnikov <Egor.Kurnikov@kaspersky.com> <br>
+Eugene Matsyuk <Evgeny.Matsyuk@kaspersky.com> <br>
+Andrey Antipov <antipov11.11@gmail.com> <br>
+Ruslan Mingaliev <Ruslan.Mingaliev@kaspersky.com> <br>
+Alexander Blinov <xanderblinov@gmail.com> <br>
+Pavel Strelchenko <> <br>
+Rinat Agishev <Rinat.Agishev@kaspersky.com> <br>
+Sergey Zankin <Sergey.Zankin@kaspersky.com> <br>
+Alexey Tvorogov <Alexey.Tvorogov@kaspersky.com> <br>
+Alexey Demov <Alexey.Demov@kaspersky.com> <br>
+Nikolay Nesterov <> <br>
