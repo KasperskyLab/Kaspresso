@@ -32,6 +32,10 @@
         </activity>
 
         <activity
+                android:name=".SimpleActivity"
+                android:label="@string/simple_screen"/>
+
+        <activity
                 android:name=".WebViewActivity"
                 android:label="@string/webview"
                 android:theme="@style/Theme.AppCompat.NoActionBar"/>

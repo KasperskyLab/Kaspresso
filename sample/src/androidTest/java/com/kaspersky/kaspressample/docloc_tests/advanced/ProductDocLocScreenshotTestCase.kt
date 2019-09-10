@@ -1,4 +1,4 @@
-package com.kaspersky.kaspressample.tests.docloc.advanced
+package com.kaspersky.kaspressample.docloc_tests.advanced
 
 import androidx.test.rule.ActivityTestRule
 import com.kaspersky.kaspressample.docloc.FragmentTestActivity

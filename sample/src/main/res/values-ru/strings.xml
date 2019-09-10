@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Kaspresso Пример</string>
-    <string name="next">Далее</string>
+    <string name="simple_fragment">Далее</string>
     <string name="webview">ВебОкно</string>
     <string name="home_fragment_title">Простой фрагмент</string>
     <string name="text_button_1">Кнопка 1</string>

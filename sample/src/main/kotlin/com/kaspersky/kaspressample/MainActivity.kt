@@ -12,26 +12,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        activity_main_button_next.setOnClickListener {
-            with(supportFragmentManager) {
-                val hasFragment = findFragmentByTag(SimpleFragment.TAG) != null
-
-                if (hasFragment) {
-                    Snackbar.make(
-                        activity_main_frame_layout_root,
-                        getString(R.string.add_fragment_error),
-                        Snackbar.LENGTH_SHORT
-                    ).show()
-                } else {
-                    beginTransaction()
-                        .add(
-                            R.id.activity_main_frame_layout_root,
-                            SimpleFragment.newInstance(),
-                            SimpleFragment.TAG
-                        )
-                        .commitNow()
-                }
-            }
+        activity_main_button_simple.setOnClickListener {
+            startActivity(
+                Intent(this, SimpleActivity::class.java)
+            )
         }
 
         activity_main_button_webview.setOnClickListener {

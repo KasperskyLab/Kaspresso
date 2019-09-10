@@ -1,4 +1,4 @@
-package com.kaspersky.kaspressample.tests.docloc
+package com.kaspersky.kaspressample.docloc_tests
 
 import android.content.Intent
 import android.provider.Settings

@@ -1,25 +1,23 @@
 package com.kaspersky.kaspressample
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
 import java.util.concurrent.Executors
-import kotlinx.android.synthetic.main.fragment_simple.*
+import kotlinx.android.synthetic.main.activity_simple.*
 
-class SimpleFragment : Fragment() {
+class SimpleActivity : AppCompatActivity() {
 
     companion object {
 
-        const val TAG = "SimpleFragment"
+        const val TAG = "SimpleActivity"
         private const val TIMEOUT: Long = 2000
-
-        fun newInstance() = SimpleFragment()
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_simple, container, false)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_simple)
+
     }
 
     override fun onResume() {
@@ -31,7 +29,7 @@ class SimpleFragment : Fragment() {
             // special sleep to emulate ui block operation to check attempt method correctness
             Executors.newSingleThreadExecutor().submit {
                 Thread.sleep(TIMEOUT)
-                activity?.runOnUiThread { edit.visibility = View.VISIBLE }
+                runOnUiThread { edit.visibility = View.VISIBLE }
             }
         }
     }

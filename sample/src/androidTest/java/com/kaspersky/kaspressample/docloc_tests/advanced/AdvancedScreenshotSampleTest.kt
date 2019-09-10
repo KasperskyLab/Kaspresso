@@ -1,4 +1,4 @@
-package com.kaspersky.kaspressample.tests.docloc.advanced
+package com.kaspersky.kaspressample.docloc_tests.advanced
 
 import android.graphics.Color
 import androidx.test.ext.junit.runners.AndroidJUnit4

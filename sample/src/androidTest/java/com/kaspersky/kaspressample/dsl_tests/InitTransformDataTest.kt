@@ -60,7 +60,7 @@ class InitTransformDataTest : BaseParametrizedTest() {
                         hasNoText(data.owners.first().firstName ?: "")
                     }
 
-                    nextButton {
+                    simpleButton {
                         click()
                     }
                 }

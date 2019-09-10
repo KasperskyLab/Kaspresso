@@ -47,7 +47,7 @@ class SimpleTestWithRule {
                 testLogger.i("I am testLogger")
                 device.screenshots.take("Additional_screenshot")
                 MainScreen {
-                    nextButton {
+                    simpleButton {
                         isVisible()
                         click()
                     }

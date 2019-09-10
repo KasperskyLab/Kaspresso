@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Kaspresso Sample</string>
-    <string name="next">Next</string>
+    <string name="simple_fragment">Simple fragment</string>
     <string name="webview">WebView</string>
     <string name="home_fragment_title">Simple Fragment</string>
     <string name="text_button_1">Button 1</string>
@@ -8,6 +8,7 @@
     <string name="text_edit_text">Some text</string>
     <string name="add_fragment_error">Already added</string>
     <string name="main_screen_description">Main Screen</string>
+    <string name="simple_screen">Simple screen</string>
     <string name="recycler_stub">Recycler Stub</string>
     <string name="list_stub">List Stub</string>
     <string name="scroll_view_stub">Scroll View Stub</string>

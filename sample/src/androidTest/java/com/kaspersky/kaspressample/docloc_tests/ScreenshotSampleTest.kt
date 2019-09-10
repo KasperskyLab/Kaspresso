@@ -1,10 +1,9 @@
-package com.kaspersky.kaspressample.tests.docloc
+package com.kaspersky.kaspressample.docloc_tests
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import com.agoda.kakao.screen.Screen
-import com.kaspersky.kaspressample.MainActivity
-import com.kaspersky.kaspressample.screen.MainScreen
+import com.kaspersky.kaspressample.SimpleActivity
 import com.kaspersky.kaspressample.screen.SimpleScreen
 import com.kaspersky.kaspresso.annotations.ScreenShooterTest
 import com.kaspersky.kaspresso.testcases.api.testcase.DocLocScreenshotTestCase
@@ -24,7 +23,7 @@ class ScreenshotSampleTest : DocLocScreenshotTestCase(
 ) {
 
     @get:Rule
-    val activityRule = ActivityTestRule(MainActivity::class.java, false, true)
+    val activityRule = ActivityTestRule(SimpleActivity::class.java, false, true)
 
     @ScreenShooterTest
     @Test
@@ -34,30 +33,20 @@ class ScreenshotSampleTest : DocLocScreenshotTestCase(
         }.run {
 
             step("1. Launch activity") {
-                captureScreenshot("1. Main screen")
+                captureScreenshot("1. Simple screen")
             }
 
-            step("2. Press the 'Next' button") {
-                MainScreen {
-                    nextButton {
-                        click()
-                    }
-                }
-
-                captureScreenshot("2. Simple fragment - one button")
-            }
-
-            step("3. Press Button 1") {
+            step("2. Press Button 1") {
                 SimpleScreen {
                     button1 {
                         click()
                     }
                 }
 
-                captureScreenshot("3. Simple fragment - two buttons")
+                captureScreenshot("2. Simple fragment - two buttons")
             }
 
-            step("4. Press Button 2") {
+            step("3. Press Button 2") {
                 SimpleScreen {
                     button2 {
                         click()
@@ -66,10 +55,10 @@ class ScreenshotSampleTest : DocLocScreenshotTestCase(
 
                 Screen.idle(2_500L) // Wait for timeout
 
-                captureScreenshot("4. Simple fragment - input")
+                captureScreenshot("3. Simple fragment - input")
             }
 
-            step("5. Type text") {
+            step("4. Type text") {
                 SimpleScreen {
                     edit {
                         clearText()
@@ -77,7 +66,7 @@ class ScreenshotSampleTest : DocLocScreenshotTestCase(
                     }
                 }
 
-                captureScreenshot("5. Simple fragment - typed text")
+                captureScreenshot("4. Simple fragment - typed text")
             }
         }
     }
