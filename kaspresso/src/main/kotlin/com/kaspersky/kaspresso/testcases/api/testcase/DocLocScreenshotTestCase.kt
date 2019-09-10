@@ -83,7 +83,7 @@ abstract class DocLocScreenshotTestCase(
     private lateinit var screenshotCapturer: DocLocScreenshotCapturer
 
     @PublishedApi
-    internal val logger: UiTestLogger = configurator.libLogger
+    internal val logger: UiTestLogger = kaspresso.libLogger
 
     private val confLocales: Locales = Locales(logger)
 
@@ -106,8 +106,8 @@ abstract class DocLocScreenshotTestCase(
         screenshotCapturer = DocLocScreenshotCapturer(
             screenshotsDir,
             logger,
-            configurator.device.activities,
-            configurator.device.apps
+            kaspresso.device.activities,
+            kaspresso.device.apps
         )
 
         testFailRule.screenshotCapturer = screenshotCapturer

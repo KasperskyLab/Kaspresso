@@ -3,7 +3,7 @@ package com.kaspersky.kaspresso.compose
 import com.agoda.kakao.web.WebElementBuilder
 import com.kaspersky.kaspresso.compose.pack.ActionsOnWebElementsPack
 import com.kaspersky.kaspresso.compose.pack.ActionsPack
-import com.kaspersky.kaspresso.configurator.Configurator
+import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.failure.FailureLoggingProvider
 import com.kaspersky.kaspresso.failure.withLoggingOnFailureIfNotNull
 import com.kaspersky.kaspresso.flakysafety.FlakySafetyProvider
@@ -15,7 +15,7 @@ import com.kaspersky.kaspresso.interceptors.tokakao.compose.ComposeKakaoWebInter
 import com.kaspersky.kaspresso.interceptors.tokakao.impl.KakaoWebInterceptor
 
 class WebComposeProviderImpl(
-    private val configurator: Configurator
+    private val kaspresso: Kaspresso
 ) : WebComposeProvider {
 
     override fun WebElementBuilder.compose(block: ActionsOnWebElementsPack.() -> Unit) {
@@ -27,7 +27,7 @@ class WebComposeProviderImpl(
 
         failureLoggingProvider.withLoggingOnFailureIfNotNull {
             flakySafetyProvider.flakySafelyIfNotNull {
-                invokeComposed(actions, configurator.libLogger)
+                invokeComposed(actions, kaspresso.libLogger)
             }
         }
 
@@ -46,7 +46,7 @@ class WebComposeProviderImpl(
 
         failureLoggingProvider.withLoggingOnFailureIfNotNull {
             flakySafetyProvider.flakySafelyIfNotNull {
-                invokeComposed(actions, configurator.libLogger)
+                invokeComposed(actions, kaspresso.libLogger)
             }
         }
 
@@ -57,7 +57,7 @@ class WebComposeProviderImpl(
         var flakySafetyProvider: FlakySafetyProvider? = null
         var failureLoggingProvider: FailureLoggingProvider? = null
 
-        configurator.webBehaviorInterceptors.forEach { webBehaviorInterceptor: WebBehaviorInterceptor ->
+        kaspresso.webBehaviorInterceptors.forEach { webBehaviorInterceptor: WebBehaviorInterceptor ->
             when (webBehaviorInterceptor) {
                 is FlakySafeWebBehaviorInterceptor -> flakySafetyProvider = webBehaviorInterceptor
                 is FailureLoggingWebBehaviorInterceptor -> failureLoggingProvider = webBehaviorInterceptor
@@ -68,7 +68,7 @@ class WebComposeProviderImpl(
     }
 
     private fun WebElementBuilder.setComposeInterception() {
-        val interceptor = ComposeKakaoWebInterceptor(configurator)
+        val interceptor = ComposeKakaoWebInterceptor(kaspresso)
 
         intercept {
             onCheck(true, interceptor::interceptCheck)
@@ -77,7 +77,7 @@ class WebComposeProviderImpl(
     }
 
     private fun WebElementBuilder.setInterception() {
-        val interceptor = KakaoWebInterceptor(configurator)
+        val interceptor = KakaoWebInterceptor(kaspresso)
 
         intercept {
             onCheck(true, interceptor::interceptCheck)

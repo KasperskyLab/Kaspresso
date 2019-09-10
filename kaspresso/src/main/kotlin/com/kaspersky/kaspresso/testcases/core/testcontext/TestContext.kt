@@ -1,6 +1,6 @@
 package com.kaspersky.kaspresso.testcases.core.testcontext
 
-import com.kaspersky.kaspresso.configurator.Configurator
+import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.StepWatcherInterceptor
 import com.kaspersky.kaspresso.internal.extensions.other.forEachSafely
 import com.kaspersky.kaspresso.internal.extensions.other.invokeSafely
@@ -14,12 +14,12 @@ import com.kaspersky.kaspresso.testcases.core.step.StepInfoProducer
  * @param Data data created in before section.
  */
 class TestContext<Data> internal constructor(
-    configurator: Configurator,
+    kaspresso: Kaspresso,
     private val stepInfoProducer: StepInfoProducer,
     val data: Data
-) : BaseTestContext(configurator) {
+) : BaseTestContext(kaspresso) {
 
-    private val watcherInterceptors: List<StepWatcherInterceptor> = configurator.stepWatcherInterceptors
+    private val watcherInterceptors: List<StepWatcherInterceptor> = kaspresso.stepWatcherInterceptors
 
     /**
      * A representation of a [TestContext]'s step.

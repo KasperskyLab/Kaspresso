@@ -8,7 +8,7 @@ import com.agoda.kakao.common.assertions.BaseAssertions
 import com.agoda.kakao.intercept.Interceptable
 import com.kaspersky.kaspresso.compose.pack.ActionsOnElementsPack
 import com.kaspersky.kaspresso.compose.pack.ActionsPack
-import com.kaspersky.kaspresso.configurator.Configurator
+import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.failure.FailureLoggingProvider
 import com.kaspersky.kaspresso.failure.withLoggingOnFailureIfNotNull
 import com.kaspersky.kaspresso.flakysafety.FlakySafetyProvider
@@ -20,7 +20,7 @@ import com.kaspersky.kaspresso.interceptors.tokakao.compose.ComposeKakaoViewInte
 import com.kaspersky.kaspresso.interceptors.tokakao.impl.KakaoViewInterceptor
 
 class ComposeProviderImpl(
-    private val configurator: Configurator
+    private val kaspresso: Kaspresso
 ) : ComposeProvider {
 
     override fun compose(block: ActionsOnElementsPack.() -> Unit) {
@@ -32,7 +32,7 @@ class ComposeProviderImpl(
 
         failureLoggingProvider.withLoggingOnFailureIfNotNull {
             flakySafetyProvider.flakySafelyIfNotNull {
-                invokeComposed(actions, configurator.libLogger)
+                invokeComposed(actions, kaspresso.libLogger)
             }
         }
 
@@ -50,7 +50,7 @@ class ComposeProviderImpl(
 
         failureLoggingProvider.withLoggingOnFailureIfNotNull {
             flakySafetyProvider.flakySafelyIfNotNull {
-                invokeComposed(actions, configurator.libLogger)
+                invokeComposed(actions, kaspresso.libLogger)
             }
         }
 
@@ -61,7 +61,7 @@ class ComposeProviderImpl(
         var flakySafetyProvider: FlakySafetyProvider? = null
         var failureLoggingProvider: FailureLoggingProvider? = null
 
-        configurator.viewBehaviorInterceptors.forEach { viewBehaviorInterceptor: ViewBehaviorInterceptor ->
+        kaspresso.viewBehaviorInterceptors.forEach { viewBehaviorInterceptor: ViewBehaviorInterceptor ->
             when (viewBehaviorInterceptor) {
                 is FlakySafeViewBehaviorInterceptor -> flakySafetyProvider = viewBehaviorInterceptor
                 is FailureLoggingViewBehaviorInterceptor -> failureLoggingProvider = viewBehaviorInterceptor
@@ -72,7 +72,7 @@ class ComposeProviderImpl(
     }
 
     private fun Interceptable<ViewInteraction, ViewAssertion, ViewAction>.setComposeInterception() {
-        val interceptor = ComposeKakaoViewInterceptor(configurator)
+        val interceptor = ComposeKakaoViewInterceptor(kaspresso)
 
         intercept {
             onCheck(true, interceptor::interceptCheck)
@@ -81,7 +81,7 @@ class ComposeProviderImpl(
     }
 
     private fun Interceptable<ViewInteraction, ViewAssertion, ViewAction>.setInterception() {
-        val interceptor = KakaoViewInterceptor(configurator)
+        val interceptor = KakaoViewInterceptor(kaspresso)
 
         intercept {
             onCheck(true, interceptor::interceptCheck)

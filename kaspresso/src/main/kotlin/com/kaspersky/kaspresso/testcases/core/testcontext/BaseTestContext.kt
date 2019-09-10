@@ -4,7 +4,7 @@ import com.kaspersky.kaspresso.compose.ComposeProvider
 import com.kaspersky.kaspresso.compose.ComposeProviderImpl
 import com.kaspersky.kaspresso.compose.WebComposeProvider
 import com.kaspersky.kaspresso.compose.WebComposeProviderImpl
-import com.kaspersky.kaspresso.configurator.Configurator
+import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.device.Device
 import com.kaspersky.kaspresso.device.server.AdbServer
 import com.kaspersky.kaspresso.flakysafety.FlakySafetyProvider
@@ -12,12 +12,12 @@ import com.kaspersky.kaspresso.flakysafety.FlakySafetyProviderImpl
 import com.kaspersky.kaspresso.logger.UiTestLogger
 
 open class BaseTestContext internal constructor(
-    configurator: Configurator
-) : FlakySafetyProvider by FlakySafetyProviderImpl(configurator.flakySafetyParams, configurator.libLogger),
-    ComposeProvider by ComposeProviderImpl(configurator),
-    WebComposeProvider by WebComposeProviderImpl(configurator) {
+    kaspresso: Kaspresso
+) : FlakySafetyProvider by FlakySafetyProviderImpl(kaspresso.flakySafetyParams, kaspresso.libLogger),
+    ComposeProvider by ComposeProviderImpl(kaspresso),
+    WebComposeProvider by WebComposeProviderImpl(kaspresso) {
 
-    val device: Device = configurator.device
-    val adbServer: AdbServer = configurator.adbServer
-    val testLogger: UiTestLogger = configurator.testLogger
+    val device: Device = kaspresso.device
+    val adbServer: AdbServer = kaspresso.adbServer
+    val testLogger: UiTestLogger = kaspresso.testLogger
 }

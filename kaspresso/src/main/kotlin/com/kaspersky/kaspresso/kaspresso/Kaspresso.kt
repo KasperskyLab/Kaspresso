@@ -1,4 +1,4 @@
-package com.kaspersky.kaspresso.configurator
+package com.kaspersky.kaspresso.kaspresso
 
 import android.app.Instrumentation
 import androidx.test.espresso.Espresso
@@ -73,27 +73,27 @@ import com.kaspersky.kaspresso.report.impl.AllureReportWriter
 /**
  * A class that keeps all settings.
  *
- * @param apps Holds an implementation of [Apps] interface. If it was not specified in [Configurator.Builder], the
+ * @param apps Holds an implementation of [Apps] interface. If it was not specified in [Kaspresso.Builder], the
  * default implementation is used.
- * @param activities Holds an implementation of [Activities] interface. If it was not specified in [Configurator.Builder],
+ * @param activities Holds an implementation of [Activities] interface. If it was not specified in [Kaspresso.Builder],
  * the default implementation is used.
- * @param files Holds an implementation of [Files] interface. If it was not specified in [Configurator.Builder],
+ * @param files Holds an implementation of [Files] interface. If it was not specified in [Kaspresso.Builder],
  * the default implementation is used.
- * @param internet Holds an implementation of [Network] interface. If it was not specified in [Configurator.Builder],
+ * @param internet Holds an implementation of [Network] interface. If it was not specified in [Kaspresso.Builder],
  * the default implementation is used.
- * @param phone Holds an implementation of [Phone] interface. If it was not specified in [Configurator.Builder],
+ * @param phone Holds an implementation of [Phone] interface. If it was not specified in [Kaspresso.Builder],
  * the default implementation is used.
- * @param location Holds an implementation of [Location] interface. If it was not specified in [Configurator.Builder],
+ * @param location Holds an implementation of [Location] interface. If it was not specified in [Kaspresso.Builder],
  * the default implementation is used.
- * @param keyboard Holds an implementation of [Keyboard] interface. If it was not specified in [Configurator.Builder],
+ * @param keyboard Holds an implementation of [Keyboard] interface. If it was not specified in [Kaspresso.Builder],
  * the default implementation is used.
- * @param screenshots Holds an implementation of [Screenshots] interface. If it was not specified in [Configurator.Builder],
+ * @param screenshots Holds an implementation of [Screenshots] interface. If it was not specified in [Kaspresso.Builder],
  * the default implementation is used.
- * @param accessibility Holds an implementation of [Accessibility] interface. If it was not specified in [Configurator.Builder],
+ * @param accessibility Holds an implementation of [Accessibility] interface. If it was not specified in [Kaspresso.Builder],
  * the default implementation is used.
- * @param permissions Holds an implementation of [Permissions] interface. If it was not specified in [Configurator.Builder],
+ * @param permissions Holds an implementation of [Permissions] interface. If it was not specified in [Kaspresso.Builder],
  * the default implementation is used.
- * @param exploit Holds an implementation of [Exploit] interface. If it was not specified in [Configurator.Builder],
+ * @param exploit Holds an implementation of [Exploit] interface. If it was not specified in [Kaspresso.Builder],
  * the default implementation is used.
  * @param viewActionWatcherInterceptors Interceptors that are called by [com.kaspersky.kaspresso.proxy.ViewActionProxy]
  * before actually [androidx.test.espresso.ViewAction.perform] call.
@@ -111,7 +111,7 @@ import com.kaspersky.kaspresso.report.impl.AllureReportWriter
  * [com.kaspersky.kaspresso.testcases.models.TestInfo]. Interceptor works using decorator pattern. First interceptor wraps others.
  * @param testLogger Holds an implementation of [UiTestLogger] interface for external usage.
  */
-data class Configurator(
+data class Kaspresso(
     internal val libLogger: UiTestLogger,
     internal val testLogger: UiTestLogger,
     internal val adbServer: AdbServer,
@@ -134,7 +134,7 @@ data class Configurator(
     }
 
     /**
-     * A class for [Configurator] initialization. The right way to change [Configurator] settings is to use [Builder].
+     * A class for [Kaspresso] initialization. The right way to change [Kaspresso] settings is to use [Builder].
      */
     class Builder {
 
@@ -244,10 +244,10 @@ data class Configurator(
          */
         var failureHandler: FailureHandler? = null
 
-        private fun initInterception(configurator: Configurator) {
-            val viewInterceptor = KakaoViewInterceptor(configurator)
-            val dataInterceptor = KakaoDataInterceptor(configurator)
-            val webInterceptor = KakaoWebInterceptor(configurator)
+        private fun initInterception(kaspresso: Kaspresso) {
+            val viewInterceptor = KakaoViewInterceptor(kaspresso)
+            val dataInterceptor = KakaoDataInterceptor(kaspresso)
+            val webInterceptor = KakaoWebInterceptor(kaspresso)
 
             Kakao.intercept {
                 onViewInteraction {
@@ -265,13 +265,13 @@ data class Configurator(
         }
 
         /**
-         * Terminating method to build built [Configurator] settings. Can be called only inside the framework
+         * Terminating method to build built [Kaspresso] settings. Can be called only inside the framework
          * package. Actually called when the base [com.kaspersky.kaspresso.testcases.api.BaseTestCase] class is
          * constructed.
          */
-        internal fun build(): Configurator {
+        internal fun build(): Kaspresso {
 
-            val configurator = Configurator(
+            val kaspresso = Kaspresso(
                 libLogger = libLogger,
                 testLogger = testLogger,
 
@@ -306,11 +306,11 @@ data class Configurator(
                 testRunWatcherInterceptors = testRunWatcherInterceptors
             )
 
-            initInterception(configurator)
+            initInterception(kaspresso)
 
             failureHandler?.let { Espresso.setFailureHandler(it) }
 
-            return configurator
+            return kaspresso
         }
     }
 

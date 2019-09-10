@@ -14,7 +14,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 /**
- * In this example you can observe a test tuned by default Configurator.
+ * In this example you can observe a test tuned by default Kaspresso configuration.
  * When you start the test you can see output of default Kaspresso interceptors:
  * - a lot of useful logs
  * - failure handling
