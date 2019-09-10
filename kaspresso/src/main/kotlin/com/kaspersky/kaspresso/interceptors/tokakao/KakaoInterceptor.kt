@@ -1,9 +1,9 @@
 package com.kaspersky.kaspresso.interceptors.tokakao
 
-import com.kaspersky.kaspresso.configurator.Configurator
+import com.kaspersky.kaspresso.kaspresso.Kaspresso
 
 abstract class KakaoInterceptor<Interaction, Action, Assertion>(
-    protected val configurator: Configurator
+    protected val kaspresso: Kaspresso
 ) {
     abstract fun interceptCheck(interaction: Interaction, assertion: Assertion)
 

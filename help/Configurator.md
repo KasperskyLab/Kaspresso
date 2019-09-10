@@ -1,17 +1,17 @@
-## Configurator
+## Kaspresso
 
-**Configurator** - is a single point to set Kaspresso. <br>
-A developer can customize **Configurator** by setting ```Configurator.Builder``` at constructors of ```TestCase```, ```BaseTestCase```, ```TestCaseRule```, ```BaseTestCaseRule```.
+**Kaspresso** class - is a single point to set Kaspresso parameters. <br>
+A developer can customize **Kaspresso** by setting ```Kaspresso.Builder``` at constructors of ```TestCase```, ```BaseTestCase```, ```TestCaseRule```, ```BaseTestCaseRule```.
 
 ### Structure
 
-All settings in **Configurator** may be divided into four groups: <br>
+All settings in **Kaspresso** class may be divided into four groups: <br>
 
 1. Loggers <br>
 ```libLogger``` - inner Kaspresso logger <br>
 ```testLogger``` - logger available for developers in tests.
 It's available by ```testlLogger``` property in test sections (```before, after, init, transform, run```) in test dsl (by ```TestContext``` class). <br>
-Also it is availaible while setting ```Configurator.Builder``` if you want to add it to your custom interceptors, for example.<br>
+Also it is availaible while setting ```Kaspresso.Builder``` if you want to add it to your custom interceptors, for example.<br>
 
 2. Kaspresso interceptors based on Kakao Interceptors. <br>
 These interceptors were introduced to simplify and uniform using of [Kakao interceptors](https://github.com/agoda-com/Kakao#intercepting).<br> <br>
@@ -53,9 +53,9 @@ All actions to add Kaspresso in the test where Espresso and Kakao are using is o
 
 The example how to set Configurator and how to use Kaspresso interceptors are in [com.kaspersky.kaspressample/configurator].
 
-### Default configurator settings
-```BaseTestCase```, ```TestCase```, ```BaseTestCaseRule```, ```TestCaseRule``` are using default customized **Configurator**. <br>
-Most valuable features of default customized **Configurator** are below.
+### Default Kaspresso settings
+```BaseTestCase```, ```TestCase```, ```BaseTestCaseRule```, ```TestCaseRule``` are using default customized **Kaspresso**. <br>
+Most valuable features of default customized **Kaspresso** are below.
 
 ##### Logging
 Just start [com.kaspersky.kaspressample.simple_tests.SimpleTest]. Next, you will see those logs:

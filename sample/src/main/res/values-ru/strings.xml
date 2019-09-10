@@ -8,6 +8,10 @@
     <string name="text_edit_text">Какой-то текст</string>
     <string name="add_fragment_error">Уже добавлено</string>
     <string name="main_screen_description">Главный экран</string>
+    <string name="simple_screen">Simple screen</string>
+    <string name="recycler_stub">Recycler Stub</string>
+    <string name="list_stub">List Stub</string>
+    <string name="scroll_view_stub">Scroll View Stub</string>
 
     <!-- Screenshooter sample test -->
     <string name="increment">Прибавить</string>

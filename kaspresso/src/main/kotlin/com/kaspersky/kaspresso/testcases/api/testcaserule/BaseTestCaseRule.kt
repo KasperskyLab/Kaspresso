@@ -1,6 +1,6 @@
 package com.kaspersky.kaspresso.testcases.api.testcaserule
 
-import com.kaspersky.kaspresso.configurator.Configurator
+import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.testcases.core.sections.AfterTestSection
 import com.kaspersky.kaspresso.testcases.core.sections.BeforeTestSection
 import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
@@ -16,12 +16,12 @@ import org.junit.runners.model.Statement
  *  @param Data data transformed from [InitData] by special function.
  */
 open class BaseTestCaseRule<InitData, Data>(
-    configBuilder: Configurator.Builder = Configurator.Builder.default(),
+    kaspressoBuilder: Kaspresso.Builder = Kaspresso.Builder.default(),
     private val dataProducer: (((InitData.() -> Unit)?) -> Data),
     private val testClassName: String
 ) : TestRule {
 
-    private val configurator: Configurator = configBuilder.build()
+    private val kaspresso: Kaspresso = kaspressoBuilder.build()
 
     override fun apply(base: Statement?, description: Description?) = object : Statement() {
         override fun evaluate() {
@@ -47,6 +47,6 @@ open class BaseTestCaseRule<InitData, Data>(
             this.dataProducer = this@BaseTestCaseRule.dataProducer
         }
 
-        return BeforeTestSection(configurator, testBodyBuilder).beforeTest(actions)
+        return BeforeTestSection(kaspresso, testBodyBuilder).beforeTest(actions)
     }
 }

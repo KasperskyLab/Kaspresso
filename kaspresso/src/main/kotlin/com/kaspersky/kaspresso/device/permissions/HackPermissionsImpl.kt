@@ -17,7 +17,8 @@ class HackPermissionsImpl(
     override fun grant(packageName: String, permission: String): Boolean {
         logger.i("Attempt to grant permission=$permission for packageName=$packageName unfairly")
         return try {
-            InstrumentationRegistry.getInstrumentation().uiAutomation
+            InstrumentationRegistry.getInstrumentation()
+                .uiAutomation
                 .javaClass
                 .getDeclaredMethod(
                     "grantRuntimePermission",

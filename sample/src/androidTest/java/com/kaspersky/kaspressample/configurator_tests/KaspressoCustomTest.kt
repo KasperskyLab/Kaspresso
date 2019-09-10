@@ -12,7 +12,7 @@ import com.kaspersky.kaspressample.configurator_tests.interceptors.CustomViewAct
 import com.kaspersky.kaspressample.configurator_tests.interceptors.CustomViewAssertionWatcherInterceptor
 import com.kaspersky.kaspressample.screen.MainScreen
 import com.kaspersky.kaspressample.screen.SimpleScreen
-import com.kaspersky.kaspresso.configurator.Configurator
+import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.junit.Rule
 import org.junit.Test
@@ -24,8 +24,8 @@ import org.junit.runner.RunWith
  *
  */
 @RunWith(AndroidJUnit4::class)
-class ConfiguratorCustomTest : TestCase(
-    configBuilder = Configurator.Builder.default().apply {
+class KaspressoCustomTest : TestCase(
+    kaspressoBuilder = Kaspresso.Builder.default().apply {
         viewActionWatcherInterceptors.add(CustomViewActionWatcherInterceptor())
         viewAssertionWatcherInterceptors.add(CustomViewAssertionWatcherInterceptor())
         stepWatcherInterceptors.add(CustomStepWatcherInterceptor())

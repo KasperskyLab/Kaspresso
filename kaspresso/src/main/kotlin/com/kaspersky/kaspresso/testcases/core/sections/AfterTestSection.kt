@@ -1,6 +1,6 @@
 package com.kaspersky.kaspresso.testcases.core.sections
 
-import com.kaspersky.kaspresso.configurator.Configurator
+import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
 import com.kaspersky.kaspresso.testcases.models.TestBody
 
@@ -8,7 +8,7 @@ import com.kaspersky.kaspresso.testcases.models.TestBody
  * A representation of a set of actions to invoke after the test.
  */
 class AfterTestSection<InitData, Data> internal constructor(
-    private val configurator: Configurator,
+    private val kaspresso: Kaspresso,
     private val testBodyBuilder: TestBody.Builder<InitData, Data>
 ) {
     /**
@@ -20,7 +20,7 @@ class AfterTestSection<InitData, Data> internal constructor(
      */
     fun after(actions: BaseTestContext.() -> Unit): InitSection<InitData, Data> {
         return MainTestSection(
-            configurator,
+            kaspresso,
             testBodyBuilder.apply { afterTestActions = actions }
         )
     }

@@ -13,7 +13,6 @@ internal class LocaleSettings(
     private val context: Context,
     private val logger: UiTestLogger
 ) {
-
     /**
      * Change locale for Android OS Settings.
      *

@@ -11,7 +11,7 @@ $dokka.location:com.kaspersky.kaspresso.internal.extensions.other$safeWrite(java
 android.support.test.espresso.assertion
 android.support.test.espresso.web.assertion
 com.kaspersky.kaspresso.annotations
-com.kaspersky.kaspresso.configurator
+com.kaspersky.kaspresso.kaspresso
 com.kaspersky.kaspresso.delegates
 com.kaspersky.kaspresso.device
 com.kaspersky.kaspresso.device.accessibility

@@ -1,9 +1,9 @@
 package com.kaspersky.kaspresso.testcases.core
 
-import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.TestRunWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.composite.TestRunCompositeWatcherInterceptor
 import com.kaspersky.kaspresso.internal.extensions.other.getException
+import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.testcases.core.step.StepsManager
 import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
 import com.kaspersky.kaspresso.testcases.core.testcontext.TestContext
@@ -13,7 +13,7 @@ import com.kaspersky.kaspresso.testcases.models.info.StepInfo
 import com.kaspersky.kaspresso.testcases.models.info.TestInfo
 
 internal class TestRunner<InitData, Data>(
-    private val configurator: Configurator
+    private val kaspresso: Kaspresso
 ) {
     fun run(testBody: TestBody<InitData, Data>) {
         val exceptions: MutableList<Throwable> = mutableListOf()
@@ -21,7 +21,7 @@ internal class TestRunner<InitData, Data>(
 
         val testRunWatcherInterceptor: TestRunWatcherInterceptor =
             TestRunCompositeWatcherInterceptor(
-                configurator.testRunWatcherInterceptors,
+                kaspresso.testRunWatcherInterceptors,
                 exceptions
             )
 
@@ -64,8 +64,8 @@ internal class TestRunner<InitData, Data>(
                 resultException = exceptions.getException()
                 testInfo = testInfo.copy(throwable = resultException)
                 testRunWatcherInterceptor.onTestFinished(testInfo, testPassed)
-                configurator.adbServer.disconnectServer()
-                configurator.reset()
+                kaspresso.adbServer.disconnectServer()
+                kaspresso.reset()
             }
         }
 
@@ -84,7 +84,7 @@ internal class TestRunner<InitData, Data>(
 
         try {
             testRunWatcherInterceptor.onBeforeSectionStarted(testInfo)
-            beforeTestActions?.invoke(BaseTestContext(configurator))
+            beforeTestActions?.invoke(BaseTestContext(kaspresso))
 
             val data: Data = dataProducer.invoke(initDataActions)
 
@@ -117,7 +117,7 @@ internal class TestRunner<InitData, Data>(
             testRunWatcherInterceptor.onMainSectionStarted(testInfo)
 
             steps.invoke(
-                TestContext(configurator, stepsManager, data)
+                TestContext(kaspresso, stepsManager, data)
             )
 
             val allStepsResult: List<StepInfo> = stepsManager.getAllStepsResult()
@@ -143,7 +143,7 @@ internal class TestRunner<InitData, Data>(
     ) {
         try {
             testRunWatcherInterceptor.onAfterSectionStarted(testInfo)
-            afterTestActions?.invoke(BaseTestContext(configurator))
+            afterTestActions?.invoke(BaseTestContext(kaspresso))
             testRunWatcherInterceptor.onAfterSectionFinishedSuccess(testInfo)
         } catch (e: Throwable) {
             testRunWatcherInterceptor.onAfterSectionFinishedFailed(testInfo, e)

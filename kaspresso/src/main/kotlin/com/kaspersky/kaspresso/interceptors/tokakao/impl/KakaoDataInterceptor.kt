@@ -3,20 +3,20 @@ package com.kaspersky.kaspresso.interceptors.tokakao.impl
 import androidx.test.espresso.DataInteraction
 import androidx.test.espresso.ViewAction
 import androidx.test.espresso.ViewAssertion
-import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.interceptors.behavior.DataBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.tokakao.KakaoInterceptor
+import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.proxy.DataAssertionProxy
 
 internal class KakaoDataInterceptor(
-    configurator: Configurator
-) : KakaoInterceptor<DataInteraction, ViewAction, ViewAssertion>(configurator) {
+    kaspresso: Kaspresso
+) : KakaoInterceptor<DataInteraction, ViewAction, ViewAssertion>(kaspresso) {
 
     override fun interceptCheck(interaction: DataInteraction, assertion: ViewAssertion) {
-        configurator.dataBehaviorInterceptors.fold(
+        kaspresso.dataBehaviorInterceptors.fold(
             initial = {
                 interaction.check(
-                    DataAssertionProxy(assertion, configurator.viewAssertionWatcherInterceptors)
+                    DataAssertionProxy(assertion, kaspresso.viewAssertionWatcherInterceptors)
                 )
             },
             operation = { acc, dataBehaviorInterceptor: DataBehaviorInterceptor ->
