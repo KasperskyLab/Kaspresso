@@ -11,17 +11,18 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class AdvancedScreenshotSampleTest : ProductDocLocScreenshotTestCase() {
 
-    private val fragment = ScreenshotSampleFragment()
-    private val view = getUiSafeProxy(fragment as ScreenshotSampleView)
+    private lateinit var fragment: ScreenshotSampleFragment
+    private lateinit var view: ScreenshotSampleView
 
     @ScreenShooterTest
     @Test
     fun test() {
         before {
+            fragment = ScreenshotSampleFragment()
+            view = getUiSafeProxy(fragment as ScreenshotSampleView)
             activity.setFragment(fragment)
         }.after {
         }.run {
-
             step("1. Launch feature screen") {
                 view.setCounterValue(0)
                 view.setBackgroundColor(Color.WHITE)

@@ -6,7 +6,6 @@ import android.os.UserHandle
 import androidx.test.platform.app.InstrumentationRegistry
 import com.kaspersky.kaspresso.logger.UiTestLogger
 
-
 /**
  * An implementation of HackPermissions interface.
  */
@@ -33,5 +32,4 @@ class HackPermissionsImpl(
             false
         }
     }
-
 }

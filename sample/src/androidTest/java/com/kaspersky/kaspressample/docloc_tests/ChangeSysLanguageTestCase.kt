@@ -2,16 +2,15 @@ package com.kaspersky.kaspressample.docloc_tests
 
 import android.content.Intent
 import android.provider.Settings
-import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspresso.testcases.api.testcase.DocLocScreenshotTestCase
+import java.io.File
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import java.io.File
-
 
 @RunWith(AndroidJUnit4::class)
 class ChangeSysLanguageTestCase : DocLocScreenshotTestCase(

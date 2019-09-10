@@ -18,24 +18,20 @@ import org.junit.runners.model.Statement
  */
 class LocaleRule internal constructor(
     private val locales: Set<Locale>,
-    private val changeSystemLocale: Boolean,
     private val device: Device,
+    changeSystemLocale: Boolean,
     logger: UiTestLogger
 ) : TestRule {
 
     private val localeSettings: LocaleSettings = LocaleSettings(device.context, logger)
+    private val systemLocaleShouldBeChanged: Boolean = changeSystemLocale &&
+            device.hackPermissions.grant(device.targetContext.packageName, Manifest.permission.CHANGE_CONFIGURATION)
 
     private var deviceLocale: Locale? = null
     private var currentLocale: Locale? = null
 
     val locale: Locale
         get() = currentLocale!!
-
-    init {
-        if (changeSystemLocale) {
-            device.hackPermissions.grant(device.targetContext.packageName, Manifest.permission.CHANGE_CONFIGURATION)
-        }
-    }
 
     override fun apply(base: Statement, description: Description): Statement {
         return object : Statement() {
@@ -54,7 +50,7 @@ class LocaleRule internal constructor(
 
                     for (locale in locales) {
                         currentLocale = locale
-                        if (changeSystemLocale) {
+                        if (systemLocaleShouldBeChanged) {
                             localeSettings.changeLanguage(locale)
                         } else {
                             applyCurrentLocaleToContext(device.context)

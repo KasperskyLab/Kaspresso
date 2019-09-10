@@ -9,5 +9,4 @@ interface HackPermissions {
      * @return result of operation: true is success, false is something went wrong
      */
     fun grant(packageName: String, permission: String): Boolean
-
 }

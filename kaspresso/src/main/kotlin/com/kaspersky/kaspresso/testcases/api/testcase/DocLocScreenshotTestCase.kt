@@ -4,11 +4,11 @@ import android.Manifest
 import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspresso.device.locales.Locales
 import com.kaspersky.kaspresso.docloc.DocLocScreenshotCapturer
+import com.kaspersky.kaspresso.docloc.rule.LocaleRule
+import com.kaspersky.kaspresso.docloc.rule.TestFailRule
 import com.kaspersky.kaspresso.internal.extensions.other.getAllInterfaces
 import com.kaspersky.kaspresso.internal.invocation.UiInvocationHandler
 import com.kaspersky.kaspresso.logger.UiTestLogger
-import com.kaspersky.kaspresso.docloc.rule.LocaleRule
-import com.kaspersky.kaspresso.docloc.rule.TestFailRule
 import java.io.File
 import java.lang.reflect.Proxy
 import org.junit.Before
@@ -78,8 +78,8 @@ import org.junit.Rule
  */
 abstract class DocLocScreenshotTestCase(
     private val screenshotsDirectory: File,
-    locales: String?,
-    private val changeSystemLocale: Boolean = false
+    private val changeSystemLocale: Boolean = false,
+    locales: String?
 ) : TestCase() {
 
     private lateinit var screenshotsDir: File
