@@ -51,7 +51,7 @@ class KaspressoCustomTest : TestCase(
 
             step("Open Simple Screen") {
                 MainScreen {
-                    nextButton {
+                    simpleButton {
                         isVisible()
                         click()
                     }

@@ -10,7 +10,7 @@ object MainScreen : KScreen<MainScreen>() {
     override val layoutId: Int? = R.layout.activity_main
     override val viewClass: Class<*>? = MainActivity::class.java
 
-    val nextButton = KButton { withId(R.id.activity_main_button_next) }
+    val simpleButton = KButton { withId(R.id.activity_main_button_simple) }
 
     val webViewButton = KButton { withId(R.id.activity_main_button_webview) }
 

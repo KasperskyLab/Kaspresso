@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Kaspresso Пример</string>
-    <string name="next">Далее</string>
+    <string name="simple_fragment">Далее</string>
     <string name="webview">ВебОкно</string>
     <string name="home_fragment_title">Простой фрагмент</string>
     <string name="text_button_1">Кнопка 1</string>
@@ -8,6 +8,10 @@
     <string name="text_edit_text">Какой-то текст</string>
     <string name="add_fragment_error">Уже добавлено</string>
     <string name="main_screen_description">Главный экран</string>
+    <string name="simple_screen">Simple screen</string>
+    <string name="recycler_stub">Recycler Stub</string>
+    <string name="list_stub">List Stub</string>
+    <string name="scroll_view_stub">Scroll View Stub</string>
 
     <!-- Screenshooter sample test -->
     <string name="increment">Прибавить</string>

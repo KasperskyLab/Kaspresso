@@ -36,7 +36,7 @@ com.kaspersky.kaspresso.kviews
 com.kaspersky.kaspresso.logger
 com.kaspersky.kaspresso.matchers.canscroll
 com.kaspersky.kaspresso.proxy
-com.kaspersky.kaspresso.rule
+com.kaspersky.kaspresso.docloc.rule
 com.kaspersky.kaspresso.testcases
 com.kaspersky.kaspresso.testcases.runners
 com.kaspersky.kaspresso.viewactions.orientation

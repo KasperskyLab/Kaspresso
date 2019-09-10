@@ -24,6 +24,8 @@ import com.kaspersky.kaspresso.device.location.Location
 import com.kaspersky.kaspresso.device.location.LocationImpl
 import com.kaspersky.kaspresso.device.network.Network
 import com.kaspersky.kaspresso.device.network.NetworkImpl
+import com.kaspersky.kaspresso.device.permissions.HackPermissions
+import com.kaspersky.kaspresso.device.permissions.HackPermissionsImpl
 import com.kaspersky.kaspresso.device.permissions.Permissions
 import com.kaspersky.kaspresso.device.permissions.PermissionsImpl
 import com.kaspersky.kaspresso.device.phone.Phone
@@ -211,7 +213,7 @@ data class Kaspresso(
 
         var adbServer: AdbServer = AdbServerImpl(libLogger)
 
-        var apps: Apps = AppsImpl(libLogger, instrumentation.context, UiDevice.getInstance(instrumentation), adbServer)
+        var apps: Apps = AppsImpl(libLogger, instrumentation.context, uiDevice, adbServer)
         var activities: Activities = ActivitiesImpl(libLogger)
         var files: Files = FilesImpl(adbServer)
         var network: Network = NetworkImpl(instrumentation.targetContext, adbServer)
@@ -220,8 +222,9 @@ data class Kaspresso(
         var keyboard: Keyboard = KeyboardImpl(adbServer)
         var screenshots: Screenshots = ScreenshotsImpl(libLogger, activities)
         var accessibility: Accessibility = AccessibilityImpl()
-        var permissions: Permissions = PermissionsImpl(libLogger, UiDevice.getInstance(instrumentation))
-        var exploit: Exploit = ExploitImpl(activities, UiDevice.getInstance(instrumentation), adbServer)
+        var permissions: Permissions = PermissionsImpl(libLogger, uiDevice)
+        var hackPermissions: HackPermissions = HackPermissionsImpl(instrumentation.uiAutomation, libLogger)
+        var exploit: Exploit = ExploitImpl(activities, uiDevice, adbServer)
 
         var flakySafetyParams: FlakySafetyParams = FlakySafetyParams()
         var autoScrollParams: AutoScrollParams = AutoScrollParams()
@@ -287,6 +290,7 @@ data class Kaspresso(
                     screenshots = screenshots,
                     accessibility = accessibility,
                     permissions = permissions,
+                    hackPermissions = hackPermissions,
                     exploit = exploit
                 ),
 
