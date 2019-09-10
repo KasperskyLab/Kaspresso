@@ -33,5 +33,4 @@ class HackPermissionsImpl(
             false
         }
     }
-
 }

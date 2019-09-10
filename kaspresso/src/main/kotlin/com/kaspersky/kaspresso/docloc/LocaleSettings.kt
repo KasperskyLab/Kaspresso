@@ -7,7 +7,7 @@ import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.os.Process
 import com.kaspersky.kaspresso.logger.UiTestLogger
-import java.util.*
+import java.util.Locale
 
 internal class LocaleSettings(
     private val context: Context,
@@ -43,5 +43,4 @@ internal class LocaleSettings(
     private fun isNotGrantedChangeConfigurationPermission(): Boolean {
         return context.checkPermission(Manifest.permission.CHANGE_CONFIGURATION, Process.myPid(), Process.myUid()) != PackageManager.PERMISSION_GRANTED
     }
-
 }

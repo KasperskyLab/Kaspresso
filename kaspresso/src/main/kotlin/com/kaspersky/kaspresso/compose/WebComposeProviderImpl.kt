@@ -3,7 +3,6 @@ package com.kaspersky.kaspresso.compose
 import com.agoda.kakao.web.WebElementBuilder
 import com.kaspersky.kaspresso.compose.pack.ActionsOnWebElementsPack
 import com.kaspersky.kaspresso.compose.pack.ActionsPack
-import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.failure.FailureLoggingProvider
 import com.kaspersky.kaspresso.failure.withLoggingOnFailureIfNotNull
 import com.kaspersky.kaspresso.flakysafety.FlakySafetyProvider
@@ -13,6 +12,7 @@ import com.kaspersky.kaspresso.interceptors.behavior.impl.failure.FailureLogging
 import com.kaspersky.kaspresso.interceptors.behavior.impl.flakysafety.FlakySafeWebBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.tokakao.compose.ComposeKakaoWebInterceptor
 import com.kaspersky.kaspresso.interceptors.tokakao.impl.KakaoWebInterceptor
+import com.kaspersky.kaspresso.kaspresso.Kaspresso
 
 class WebComposeProviderImpl(
     private val kaspresso: Kaspresso

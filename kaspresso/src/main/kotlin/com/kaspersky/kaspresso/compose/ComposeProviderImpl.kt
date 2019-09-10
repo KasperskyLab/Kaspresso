@@ -8,7 +8,6 @@ import com.agoda.kakao.common.assertions.BaseAssertions
 import com.agoda.kakao.intercept.Interceptable
 import com.kaspersky.kaspresso.compose.pack.ActionsOnElementsPack
 import com.kaspersky.kaspresso.compose.pack.ActionsPack
-import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.failure.FailureLoggingProvider
 import com.kaspersky.kaspresso.failure.withLoggingOnFailureIfNotNull
 import com.kaspersky.kaspresso.flakysafety.FlakySafetyProvider
@@ -18,6 +17,7 @@ import com.kaspersky.kaspresso.interceptors.behavior.impl.failure.FailureLogging
 import com.kaspersky.kaspresso.interceptors.behavior.impl.flakysafety.FlakySafeViewBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.tokakao.compose.ComposeKakaoViewInterceptor
 import com.kaspersky.kaspresso.interceptors.tokakao.impl.KakaoViewInterceptor
+import com.kaspersky.kaspresso.kaspresso.Kaspresso
 
 class ComposeProviderImpl(
     private val kaspresso: Kaspresso
