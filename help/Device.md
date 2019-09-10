@@ -23,7 +23,7 @@ Also **Device** provides application and test contexts - `targetContext` and `co
 
 ### **Usage**
 
-Device instance available in `BaseTestContext` scope. So, you can use it in test cases or in methods that extend `BaseTestContext` class.
+Device instance available in `BaseTestContext` scope via ```device``` property. So, you can use it in test cases or in methods that extend `BaseTestContext` class.
 
 ### **Limitations**
 
