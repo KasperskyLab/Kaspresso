@@ -1,10 +1,13 @@
 package com.kaspersky.kaspresso.docloc.rule
 
+import android.Manifest
 import android.content.Context
-import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.runner.lifecycle.ActivityLifecycleCallback
 import androidx.test.runner.lifecycle.ActivityLifecycleMonitorRegistry
 import androidx.test.runner.lifecycle.Stage
+import com.kaspersky.kaspresso.device.Device
+import com.kaspersky.kaspresso.docloc.LocaleSettings
+import com.kaspersky.kaspresso.logger.UiTestLogger
 import java.util.Locale
 import org.junit.rules.TestRule
 import org.junit.runner.Description
@@ -14,14 +17,25 @@ import org.junit.runners.model.Statement
  *  Test rule to switch locales.
  */
 class LocaleRule internal constructor(
-    private val locales: Set<Locale>
+    private val locales: Set<Locale>,
+    private val changeSystemLocale: Boolean,
+    private val device: Device,
+    logger: UiTestLogger
 ) : TestRule {
+
+    private val localeSettings: LocaleSettings = LocaleSettings(device.context, logger)
 
     private var deviceLocale: Locale? = null
     private var currentLocale: Locale? = null
 
     val locale: Locale
         get() = currentLocale!!
+
+    init {
+        if (changeSystemLocale) {
+            device.hackPermissions.grant(device.targetContext.packageName, Manifest.permission.CHANGE_CONFIGURATION)
+        }
+    }
 
     override fun apply(base: Statement, description: Description): Statement {
         return object : Statement() {
@@ -40,13 +54,17 @@ class LocaleRule internal constructor(
 
                     for (locale in locales) {
                         currentLocale = locale
-                        applyCurrentLocaleToContext(InstrumentationRegistry.getInstrumentation().targetContext)
+                        if (changeSystemLocale) {
+                            localeSettings.changeLanguage(locale)
+                        } else {
+                            applyCurrentLocaleToContext(device.context)
+                        }
                         base.evaluate()
                     }
                 } finally {
                     if (deviceLocale != null) {
                         currentLocale = deviceLocale!!
-                        applyCurrentLocaleToContext(InstrumentationRegistry.getInstrumentation().targetContext)
+                        applyCurrentLocaleToContext(device.context)
                     }
 
                     ActivityLifecycleMonitorRegistry.getInstance().removeLifecycleCallback(callback)
@@ -59,13 +77,7 @@ class LocaleRule internal constructor(
         val resources = context.resources
         Locale.setDefault(currentLocale)
         val configuration = resources.configuration
-
-        if (android.os.Build.VERSION.SDK_INT > android.os.Build.VERSION_CODES.JELLY_BEAN) {
-            configuration.setLocale(currentLocale)
-        } else {
-            configuration.locale = currentLocale
-        }
-
+        configuration.setLocale(currentLocale)
         resources.updateConfiguration(configuration, resources.displayMetrics)
     }
 }

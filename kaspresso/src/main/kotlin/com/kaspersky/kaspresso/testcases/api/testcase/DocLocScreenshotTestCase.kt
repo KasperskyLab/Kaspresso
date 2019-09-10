@@ -73,10 +73,13 @@ import org.junit.Rule
  *
  *  @param screenshotsDirectory directory to save screenshot. Will be cleared before launching the test.
  *  @param locales comma-separated string with locales to run test with.
+ *  @param changeSystemLocale change the system language, i.e. system dialogs (e.g. runtime permissions) will also be localized.
+ *      Need permission in manifest file for a target app android.permission.CHANGE_CONFIGURATION
  */
 abstract class DocLocScreenshotTestCase(
     private val screenshotsDirectory: File,
-    locales: String?
+    locales: String?,
+    private val changeSystemLocale: Boolean = false
 ) : TestCase() {
 
     private lateinit var screenshotsDir: File
@@ -89,8 +92,10 @@ abstract class DocLocScreenshotTestCase(
 
     @get:Rule
     val localeRule = LocaleRule(
-        locales?.let { confLocales.parseLocales(it) }
-            ?: confLocales.getSupportedLocales()
+        locales = locales?.let { confLocales.parseLocales(it) } ?: confLocales.getSupportedLocales(),
+        changeSystemLocale = changeSystemLocale,
+        device = configurator.device,
+        logger = configurator.libLogger
     )
 
     @get:Rule

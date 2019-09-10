@@ -12,6 +12,7 @@ import com.kaspersky.kaspresso.device.files.Files
 import com.kaspersky.kaspresso.device.keyboard.Keyboard
 import com.kaspersky.kaspresso.device.location.Location
 import com.kaspersky.kaspresso.device.network.Network
+import com.kaspersky.kaspresso.device.permissions.HackPermissions
 import com.kaspersky.kaspresso.device.permissions.Permissions
 import com.kaspersky.kaspresso.device.phone.Phone
 import com.kaspersky.kaspresso.device.screenshots.Screenshots
@@ -71,6 +72,11 @@ class Device(
      * Holds a reference to an implementation of [Permissions] interface, held by [Configurator].
      */
     val permissions: Permissions,
+
+    /**
+     * Holds a reference to an implementation of [HackPermissions] interface, held by [Configurator].
+     */
+    val hackPermissions: HackPermissions,
 
     /**
      * Holds a reference to an implementation of [Exploit] interface, held by [Configurator].
