@@ -28,13 +28,15 @@ class ListStubActivity : AppCompatActivity() {
                 override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
                     val view: View
 
-                    if (convertView != null) {
+                    val vh =  if (convertView != null) {
                         view = convertView
                         convertView.tag as StubViewHolder
                     } else {
                         view = layoutInflater.inflate(R.layout.list_stub_item, null)
-                        StubViewHolder(view.title.apply { view.tag = this })
-                    }.apply {
+                        StubViewHolder(view.findViewById(R.id.title)).apply { view.tag = this }
+                    }
+
+                    vh.apply {
                         title.text = data[position]
                         title.setBackgroundColor(if (position % 2 == 0) Color.WHITE else Color.GRAY)
                     }
