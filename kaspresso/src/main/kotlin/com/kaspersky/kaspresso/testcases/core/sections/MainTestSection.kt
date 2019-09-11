@@ -1,13 +1,16 @@
 package com.kaspersky.kaspresso.testcases.core.sections
 
-import com.kaspersky.kaspresso.configurator.Configurator
+import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.testcases.api.testcase.BaseTestCase
 import com.kaspersky.kaspresso.testcases.core.TestRunner
 import com.kaspersky.kaspresso.testcases.core.testcontext.TestContext
 import com.kaspersky.kaspresso.testcases.models.TestBody
 
+/**
+ * The representation of an actual test.
+ */
 class MainTestSection<InitData, Data> internal constructor(
-    private val configurator: Configurator,
+    private val kaspresso: Kaspresso,
     private val testBodyBuilder: TestBody.Builder<InitData, Data>
 ) : InitSection<InitData, Data>, TransformSection<Data> {
 
@@ -23,7 +26,7 @@ class MainTestSection<InitData, Data> internal constructor(
      */
     override fun run(steps: TestContext<Data>.() -> Unit) {
         val testBody = testBodyBuilder.apply { this.steps = steps }.build()
-        TestRunner<InitData, Data>(configurator).run(testBody)
+        TestRunner<InitData, Data>(kaspresso).run(testBody)
     }
 
     /**

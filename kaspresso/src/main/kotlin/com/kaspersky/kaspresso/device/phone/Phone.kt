@@ -1,25 +1,28 @@
 package com.kaspersky.kaspresso.device.phone
 
+/**
+ * The interface to work with telephony.
+ */
 interface Phone {
 
     /**
-     *  Emulates incoming call.
+     * Emulates incoming call.
      *
-     *  Required Permissions: INTERNET
+     * Required Permissions: INTERNET
      */
     fun emulateCall(number: String)
 
     /**
-     *  Cancels incoming call.
+     * Cancels incoming call.
      *
-     *  Required Permissions: INTERNET
+     * Required Permissions: INTERNET
      */
     fun cancelCall(number: String)
 
     /**
-     *  Emulates receiving an SMS from [number].
+     * Emulates receiving an SMS from [number].
      *
-     *  Required Permissions: INTERNET
+     * Required Permissions: INTERNET
      */
     fun receiveSms(number: String, text: String)
 }

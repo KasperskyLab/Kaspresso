@@ -2,7 +2,7 @@
 
 # &lt;init&gt;
 
-`ViewActionProxy(viewAction: ViewAction, interceptors: `[`List`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)`<`[`ViewActionInterceptor`](../../com.kaspersky.kaspresso.interceptors/-view-action-interceptor/index.md)`>)`
+`ViewActionProxy(viewAction: ViewAction, watcherInterceptors: `[`List`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)`<`[`ViewActionWatcherInterceptor`](../../com.kaspersky.kaspresso.interceptors.watcher.view/-view-action-watcher-interceptor/index.md)`>)`
 
-A proxy-wrapper of [ViewAction](#) for interceptors calls.
+The proxy-wrapper of [ViewAction](#) for watcher interceptors calls.
 

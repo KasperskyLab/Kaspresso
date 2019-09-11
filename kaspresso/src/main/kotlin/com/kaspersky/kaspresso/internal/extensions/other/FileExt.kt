@@ -6,9 +6,9 @@ import java.io.FileNotFoundException
 import java.io.IOException
 
 /**
- *  Writes given text to file catching IOExceptions and logging it.
+ * Writes given text to file catching IOExceptions and logging it.
  *
- *  @param data text to write.
+ * @param data the text to write.
  */
 internal fun File.safeWrite(logger: UiTestLogger, data: String) {
     try {
@@ -21,7 +21,7 @@ internal fun File.safeWrite(logger: UiTestLogger, data: String) {
 }
 
 /**
- *  Creates a directory with all needed parent dirs, then grants RWX permissions.
+ * Creates a directory with all needed parent dirs, then grants RWX permissions.
  */
 internal fun File.createDirectoryRWX() {
     mkdirs()

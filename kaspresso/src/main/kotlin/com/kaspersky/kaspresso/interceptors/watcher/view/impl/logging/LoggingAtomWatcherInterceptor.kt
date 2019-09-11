@@ -9,7 +9,7 @@ import com.kaspersky.kaspresso.proxy.AtomProxy
 import org.hamcrest.StringDescription
 
 /**
- * An implementation of [AtomWatcherInterceptor] that logs info about web action.
+ * The implementation of [AtomWatcherInterceptor] that logs info about web action.
  */
 class LoggingAtomWatcherInterceptor(
     private val logger: UiTestLogger

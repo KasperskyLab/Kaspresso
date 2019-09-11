@@ -7,7 +7,7 @@ import android.os.Build
 import com.kaspersky.kaspresso.device.server.AdbServer
 
 /**
- * Default implementation of Network interface.
+ * The implementation of the [Network] interface.
  */
 class NetworkImpl(
     private val targetContext: Context,
@@ -15,18 +15,18 @@ class NetworkImpl(
 ) : Network {
 
     /**
-     *  Enables wi-fi and mobile data using adb.
+     * Enables wi-fi and mobile data using adb.
      *
-     *  Required Permissions: INTERNET.
+     * Required Permissions: INTERNET.
      */
     override fun enable() {
         adbServer.performAdb("shell svc data enable", "shell svc wifi enable")
     }
 
     /**
-     *  Disables wi-fi and mobile data using adb.
+     * Disables wi-fi and mobile data using adb.
      *
-     *  Required Permissions: INTERNET.
+     * Required Permissions: INTERNET.
      */
     override fun disable() {
         adbServer.performAdb("shell svc data disable", "shell svc wifi disable")

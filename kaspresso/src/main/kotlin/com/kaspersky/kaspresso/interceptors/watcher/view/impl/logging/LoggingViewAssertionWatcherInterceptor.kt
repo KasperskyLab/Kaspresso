@@ -9,7 +9,7 @@ import com.kaspersky.kaspresso.internal.extensions.other.describe
 import com.kaspersky.kaspresso.logger.UiTestLogger
 
 /**
- * An implementation of [ViewAssertionWatcherInterceptor] that logs info about [ViewAssertion].
+ * The implementation of [ViewAssertionWatcherInterceptor] that logs info about [ViewAssertion].
  */
 class LoggingViewAssertionWatcherInterceptor(
     private val logger: UiTestLogger

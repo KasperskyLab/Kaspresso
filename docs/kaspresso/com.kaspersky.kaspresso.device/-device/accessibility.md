@@ -2,7 +2,7 @@
 
 # accessibility
 
-`var accessibility: `[`Accessibility`](../../com.kaspersky.kaspresso.device.accessibility/-accessibility/index.md)
+`val accessibility: `[`Accessibility`](../../com.kaspersky.kaspresso.device.accessibility/-accessibility/index.md)
 
-Holds a reference to an implementation of [Accessibility](../../com.kaspersky.kaspresso.device.accessibility/-accessibility/index.md) interface, held by [Configurator](../../com.kaspersky.kaspresso.configurator/-configurator/index.md).
+Holds the reference to the implementation of [Accessibility](../../com.kaspersky.kaspresso.device.accessibility/-accessibility/index.md) interface.
 

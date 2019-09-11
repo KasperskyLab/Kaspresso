@@ -11,12 +11,12 @@ class ScreenshotsDirectoryStorage {
     private val clearedOutputDirectories = HashSet<File>()
 
     /**
-     *  Returns the directory for screenshots resolved by storage's root.
-     *  If the directory doesn't exist, it will be created.
+     * Returns the directory for screenshots resolved by storage's root.
+     * If the directory doesn't exist, it will be created.
      *
-     *  @param context a context to get directory on pre-lollipop.
-     *  @param screenshotDir desired root directory.
-     *  @return [File] which represents an existing directory.
+     * @param context a context to get directory on pre-lollipop.
+     * @param screenshotDir desired root directory.
+     * @return [File] which represents an existing directory.
      */
     fun getRootScreenshotDirectory(
         context: Context,
@@ -30,12 +30,12 @@ class ScreenshotsDirectoryStorage {
     }
 
     /**
-     *  Returns directory for a particular test.
-     *  If the directory exists, it will be deleted on the first method call.
-     *  If the directory doesn't exist, it will be created.
+     * Returns directory for a particular test.
+     * If the directory exists, it will be deleted on the first method call.
+     * If the directory doesn't exist, it will be created.
      *
-     *  @param screenshotTestDir desired directory resolved by the root dir.
-     *  @return [File] which represents an existing directory.
+     * @param screenshotTestDir desired directory resolved by the root dir.
+     * @return [File] which represents an existing directory.
      */
     fun obtainDirectory(
         screenshotTestDir: File

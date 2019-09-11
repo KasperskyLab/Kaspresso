@@ -123,7 +123,7 @@ Sometimes when developing new features, there is a need to check if the applicat
 Kaspresso offers a possibility make feature's screenshots fast and automatically. 
 #### Configurability
 
-The developer can set any part of Kaspresso thanks to ```Configurator.Builder```.
+The developer can tune any part of Kaspresso thanks to ```Kaspresso.Builder```.
 #### The philosophy
 
 Kaspresso proposes such very important things for ui-tests as the set of rules on how to write ui-tests.

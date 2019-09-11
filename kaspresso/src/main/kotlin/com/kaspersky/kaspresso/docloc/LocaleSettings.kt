@@ -7,17 +7,16 @@ import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.os.Process
 import com.kaspersky.kaspresso.logger.UiTestLogger
-import java.util.*
+import java.util.Locale
 
 internal class LocaleSettings(
     private val context: Context,
     private val logger: UiTestLogger
 ) {
-
     /**
-     * Change locale for Android OS Settings.
+     * Changes locale for Android OS Settings.
      *
-     * @return locale has been changed in Settings
+     * @return true if the locale has been changed in Settings, false otherwise
      */
     @SuppressLint("PrivateApi", "DiscouragedPrivateApi")
     fun changeLanguage(locale: Locale): Boolean {
@@ -44,5 +43,4 @@ internal class LocaleSettings(
     private fun isNotGrantedChangeConfigurationPermission(): Boolean {
         return context.checkPermission(Manifest.permission.CHANGE_CONFIGURATION, Process.myPid(), Process.myUid()) != PackageManager.PERMISSION_GRANTED
     }
-
 }

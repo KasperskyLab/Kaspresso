@@ -4,7 +4,7 @@ import android.webkit.WebView
 import androidx.test.espresso.web.assertion.WebAssertionProxy
 
 /**
- * An interface for all atom interceptors, used in [WebAssertionProxy].
+ * The interface for all atom interceptors, used in [WebAssertionProxy].
  */
 interface WebAssertionWatcherInterceptor {
 

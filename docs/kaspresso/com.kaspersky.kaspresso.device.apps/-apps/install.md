@@ -6,6 +6,8 @@
 
 Installs an app via ADB.
 
+Required Permissions: INTERNET.
+
 ### Parameters
 
-`apkPath` - a path to an apk to be installed. The apk is hosted on the test server.
+`apkPath` - a path to the apk to be installed. The apk is hosted on the test server.

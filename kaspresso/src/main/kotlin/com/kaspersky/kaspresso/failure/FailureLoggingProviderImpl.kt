@@ -8,10 +8,22 @@ import com.kaspersky.kaspresso.logger.UiTestLogger
 import junit.framework.AssertionFailedError
 import org.hamcrest.Matcher
 
+/**
+ * The implementation of the [FailureLoggingProvider] interface.
+ */
 class FailureLoggingProviderImpl(
     private val logger: UiTestLogger
 ) : FailureLoggingProvider {
 
+    /**
+     * Invokes the given [action] and logs if it fails.
+     *
+     * @param action the action to invoke.
+     *
+     * @return the result of the [action] invocation.
+     *
+     * @throws Throwable if the [action] invocation failed.
+     */
     @Throws(Throwable::class)
     override fun <T> withLoggingOnFailure(action: () -> T): T {
         return try {
@@ -22,10 +34,23 @@ class FailureLoggingProviderImpl(
         }
     }
 
+    /**
+     * Logs the [error]'s stacktrace.
+     *
+     * @param error the error to get stacktrace from.
+     */
     override fun logStackTrace(error: Throwable) {
         logger.e(error.getStackTraceAsString())
     }
 
+    /**
+     * Logs the [error] description got by [viewMatcher] and throws the [error].
+     *
+     * @param error the error to be described.
+     * @param viewMatcher the view matcher to get description from.
+     *
+     * @throws Throwable the given [error].
+     */
     @Throws(Throwable::class)
     override fun logDescriptionAndThrow(error: Throwable?, viewMatcher: Matcher<View>?) {
         logger.e(
@@ -37,11 +62,11 @@ class FailureLoggingProviderImpl(
     }
 
     /**
-     * Transforms an exception to more readable form.
+     * Transforms the given exception to more readable form.
      *
-     * @param error the reason of failure.
      * @param viewMatcher a matcher, which corresponded to the view on which the error occurred.
-     * @return transformed [error]
+     *
+     * @return transformed [error].
      */
     private fun Throwable.describedWith(viewMatcher: Matcher<View>?): Throwable {
         return when (this) {

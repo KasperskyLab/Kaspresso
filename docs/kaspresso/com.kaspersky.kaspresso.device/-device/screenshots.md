@@ -2,7 +2,7 @@
 
 # screenshots
 
-`var screenshots: `[`Screenshots`](../../com.kaspersky.kaspresso.device.screenshots/-screenshots/index.md)
+`val screenshots: `[`Screenshots`](../../com.kaspersky.kaspresso.device.screenshots/-screenshots/index.md)
 
-Holds a reference to an implementation of [Screenshots](../../com.kaspersky.kaspresso.device.screenshots/-screenshots/index.md) interface, held by [Configurator](../../com.kaspersky.kaspresso.configurator/-configurator/index.md).
+Holds the reference to the implementation of [Screenshots](../../com.kaspersky.kaspresso.device.screenshots/-screenshots/index.md) interface.
 

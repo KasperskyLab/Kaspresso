@@ -119,13 +119,15 @@ For example, create a new test class which extends `ProductDocLocScreenshotTestC
 @RunWith(AndroidJUnit4::class)
 class AdvancedScreenshotSampleTest : ProductDocLocScreenshotTestCase() {
 
-    private val fragment: FeatureFragment = FeatureFragment()
-    private val view: FeatureView = getUiSafeProxy(fragment as FeatureView)
+    private lateinit var fragment: FeatureFragment
+    private lateinit var view: FeatureView
 
     @ScreenShooterTest
     @Test
     fun test() {
         before {
+            fragment = FeatureFragment()
+            view = getUiSafeProxy(fragment as FeatureView)
             activity.setFragment(fragment)
         }.after {
         }.run {

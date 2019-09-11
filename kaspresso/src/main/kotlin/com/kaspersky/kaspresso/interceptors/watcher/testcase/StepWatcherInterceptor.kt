@@ -2,6 +2,9 @@ package com.kaspersky.kaspresso.interceptors.watcher.testcase
 
 import com.kaspersky.kaspresso.testcases.models.info.StepInfo
 
+/**
+ * The interface for all interceptors intercepting step events.
+ */
 interface StepWatcherInterceptor {
 
     fun interceptBefore(stepInfo: StepInfo) = Unit

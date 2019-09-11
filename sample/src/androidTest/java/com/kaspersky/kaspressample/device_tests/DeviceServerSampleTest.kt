@@ -1,7 +1,7 @@
 package com.kaspersky.kaspressample.device_tests
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.kaspersky.kaspresso.device.server.AdbServerException
+import com.kaspersky.kaspresso.internal.exceptions.AdbServerException
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.junit.Assert.assertTrue
 import org.junit.Test

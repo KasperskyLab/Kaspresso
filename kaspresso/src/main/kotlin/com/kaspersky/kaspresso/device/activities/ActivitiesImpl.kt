@@ -11,7 +11,7 @@ import org.hamcrest.CoreMatchers
 import org.junit.Assert
 
 /**
- * Default implementation of Activities interface.
+ * The implementation of the [Activities] interface.
  */
 class ActivitiesImpl(
     private val logger: UiTestLogger

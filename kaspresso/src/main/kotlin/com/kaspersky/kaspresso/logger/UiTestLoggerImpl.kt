@@ -3,7 +3,7 @@ package com.kaspersky.kaspresso.logger
 import android.util.Log
 
 /**
- * Default implementation of [UiTestLogger] using [android.util.Log].
+ * The default implementation of [UiTestLogger] using [android.util.Log].
  */
 class UiTestLoggerImpl(
     private val tag: String

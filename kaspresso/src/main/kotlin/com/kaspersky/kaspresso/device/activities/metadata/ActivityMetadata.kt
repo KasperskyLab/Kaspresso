@@ -8,7 +8,7 @@ import androidx.test.espresso.util.TreeIterables
 import com.kaspersky.kaspresso.logger.UiTestLogger
 
 /**
- *  Utility class to collect metadata from a window.
+ * The utility class to collect metadata from a window.
  */
 internal class ActivityMetadata(
     private val logger: UiTestLogger
@@ -18,12 +18,12 @@ internal class ActivityMetadata(
     }
 
     /**
-     *  Returns a formed metadata object for a given activity, by collecting all visible [TextView] data.
-     *  If several elements have the same id, surrogate index will be added.
-     *  If android cannot get view's id, it will be written as [id:<id>].
+     * Returns a formed metadata object for a given activity, by collecting all visible [TextView] data.
+     * If several elements have the same id, surrogate index will be added.
+     * If android cannot get view's id, it will be written as [id:<id>].
      *
-     *  @param activity activity to collect metadata from.
-     *  @return Metadata for the activity.
+     * @param activity activity to collect metadata from.
+     * @return Metadata for the activity.
      */
     internal fun getFromActivity(activity: Activity): Metadata {
         return getMetadata(activity)

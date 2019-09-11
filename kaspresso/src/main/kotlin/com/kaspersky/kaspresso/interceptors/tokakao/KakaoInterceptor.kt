@@ -1,9 +1,12 @@
 package com.kaspersky.kaspresso.interceptors.tokakao
 
-import com.kaspersky.kaspresso.configurator.Configurator
+import com.kaspersky.kaspresso.kaspresso.Kaspresso
 
+/**
+ * The base class for Kaspresso's implementations of Kakao's interceptors.
+ */
 abstract class KakaoInterceptor<Interaction, Action, Assertion>(
-    protected val configurator: Configurator
+    protected val kaspresso: Kaspresso
 ) {
     abstract fun interceptCheck(interaction: Interaction, assertion: Assertion)
 

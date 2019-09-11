@@ -8,7 +8,6 @@ import com.agoda.kakao.common.assertions.BaseAssertions
 import com.agoda.kakao.intercept.Interceptable
 import com.kaspersky.kaspresso.compose.pack.ActionsOnElementsPack
 import com.kaspersky.kaspresso.compose.pack.ActionsPack
-import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.failure.FailureLoggingProvider
 import com.kaspersky.kaspresso.failure.withLoggingOnFailureIfNotNull
 import com.kaspersky.kaspresso.flakysafety.FlakySafetyProvider
@@ -18,11 +17,21 @@ import com.kaspersky.kaspresso.interceptors.behavior.impl.failure.FailureLogging
 import com.kaspersky.kaspresso.interceptors.behavior.impl.flakysafety.FlakySafeViewBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.tokakao.compose.ComposeKakaoViewInterceptor
 import com.kaspersky.kaspresso.interceptors.tokakao.impl.KakaoViewInterceptor
+import com.kaspersky.kaspresso.kaspresso.Kaspresso
 
+/**
+ * The implementation of the [ComposeProvider] interface.
+ */
 class ComposeProviderImpl(
-    private val configurator: Configurator
+    private val kaspresso: Kaspresso
 ) : ComposeProvider {
 
+    /**
+     * Composes a [block] of actions with their views to invoke on in one composite action that succeeds if at least
+     * one of it's parts succeeds.
+     *
+     * @param block the actions to compose.
+     */
     override fun compose(block: ActionsOnElementsPack.() -> Unit) {
         val (elements, actions) = ActionsOnElementsPack().apply(block).build()
 
@@ -32,13 +41,19 @@ class ComposeProviderImpl(
 
         failureLoggingProvider.withLoggingOnFailureIfNotNull {
             flakySafetyProvider.flakySafelyIfNotNull {
-                invokeComposed(actions, configurator.libLogger)
+                invokeComposed(actions, kaspresso.libLogger)
             }
         }
 
         elements.forEach { it.setInterception() }
     }
 
+    /**
+     * Composes a [block] of actions on the given view of type [T] in one composite action that succeeds if at least
+     * one of it's parts succeeds.
+     *
+     * @param block the actions to compose.
+     */
     override fun <T> T.compose(block: ActionsPack<T>.() -> Unit): Unit
             where T : BaseActions, T : BaseAssertions, T : Interceptable<ViewInteraction, ViewAssertion, ViewAction> {
 
@@ -50,7 +65,7 @@ class ComposeProviderImpl(
 
         failureLoggingProvider.withLoggingOnFailureIfNotNull {
             flakySafetyProvider.flakySafelyIfNotNull {
-                invokeComposed(actions, configurator.libLogger)
+                invokeComposed(actions, kaspresso.libLogger)
             }
         }
 
@@ -61,7 +76,7 @@ class ComposeProviderImpl(
         var flakySafetyProvider: FlakySafetyProvider? = null
         var failureLoggingProvider: FailureLoggingProvider? = null
 
-        configurator.viewBehaviorInterceptors.forEach { viewBehaviorInterceptor: ViewBehaviorInterceptor ->
+        kaspresso.viewBehaviorInterceptors.forEach { viewBehaviorInterceptor: ViewBehaviorInterceptor ->
             when (viewBehaviorInterceptor) {
                 is FlakySafeViewBehaviorInterceptor -> flakySafetyProvider = viewBehaviorInterceptor
                 is FailureLoggingViewBehaviorInterceptor -> failureLoggingProvider = viewBehaviorInterceptor
@@ -72,7 +87,7 @@ class ComposeProviderImpl(
     }
 
     private fun Interceptable<ViewInteraction, ViewAssertion, ViewAction>.setComposeInterception() {
-        val interceptor = ComposeKakaoViewInterceptor(configurator)
+        val interceptor = ComposeKakaoViewInterceptor(kaspresso)
 
         intercept {
             onCheck(true, interceptor::interceptCheck)
@@ -81,7 +96,7 @@ class ComposeProviderImpl(
     }
 
     private fun Interceptable<ViewInteraction, ViewAssertion, ViewAction>.setInterception() {
-        val interceptor = KakaoViewInterceptor(configurator)
+        val interceptor = KakaoViewInterceptor(kaspresso)
 
         intercept {
             onCheck(true, interceptor::interceptCheck)

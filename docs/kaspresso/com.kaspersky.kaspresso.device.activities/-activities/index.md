@@ -4,7 +4,7 @@
 
 `interface Activities`
 
-An interface to work with activities.
+The interface to work with activities.
 
 ### Functions
 
@@ -17,4 +17,4 @@ An interface to work with activities.
 
 | Name | Summary |
 |---|---|
-| [ActivitiesImpl](../-activities-impl/index.md) | `class ActivitiesImpl : `[`Activities`](./index.md)<br>Default implementation of Activities interface. |
+| [ActivitiesImpl](../-activities-impl/index.md) | `class ActivitiesImpl : `[`Activities`](./index.md)<br>The implementation of the [Activities](./index.md) interface. |

@@ -4,5 +4,5 @@
 
 `AccessibilityImpl()`
 
-An implementation of Accessibility interface.
+The implementation of the [Accessibility](../-accessibility/index.md) interface.
 

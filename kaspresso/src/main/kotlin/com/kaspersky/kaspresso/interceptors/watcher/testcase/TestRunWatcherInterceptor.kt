@@ -2,6 +2,9 @@ package com.kaspersky.kaspresso.interceptors.watcher.testcase
 
 import com.kaspersky.kaspresso.testcases.models.info.TestInfo
 
+/**
+ * The interface for all interceptors intercepting test run events.
+ */
 interface TestRunWatcherInterceptor {
 
     fun onTestStarted(testInfo: TestInfo) = Unit

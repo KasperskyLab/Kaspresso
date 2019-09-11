@@ -4,7 +4,7 @@ import androidx.test.espresso.web.model.Evaluation
 import com.kaspersky.kaspresso.proxy.AtomProxy
 
 /**
- * An interface for all atom interceptors, used in [com.kaspersky.kaspresso.proxy.AtomProxy].
+ * The interface for all atom interceptors, used in [com.kaspersky.kaspresso.proxy.AtomProxy].
  */
 interface AtomWatcherInterceptor {
 

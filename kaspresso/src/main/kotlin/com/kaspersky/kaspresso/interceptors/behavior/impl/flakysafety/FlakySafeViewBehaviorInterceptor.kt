@@ -8,8 +8,8 @@ import com.kaspersky.kaspresso.interceptors.behavior.ViewBehaviorInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
 
 /**
- * An implementation of [Interactor] that performs multiple attempts to interact an action or an assertion to
- * provide flaky safety.
+ * The implementation of [ViewBehaviorInterceptor] and [FlakySafetyProvider] interfaces.
+ * Provides system flaky safety functionality for [ViewInteraction.perform] and [ViewInteraction.check] calls.
  */
 class FlakySafeViewBehaviorInterceptor(
     params: FlakySafetyParams,
@@ -18,9 +18,10 @@ class FlakySafeViewBehaviorInterceptor(
     FlakySafetyProvider by FlakySafetyProviderImpl(params, logger) {
 
     /**
-     * Performs multiple attempts to interact an action or an assertion.
+     * Wraps the given [action] invocation with the flaky safety.
      *
-     * @param execution a function-wrapper of an action or an assertion to be invoked.
+     * @param interaction the intercepted [ViewInteraction].
+     * @param action the action to invoke.
      */
     override fun <T> intercept(interaction: ViewInteraction, action: () -> T): T = flakySafely(action = action)
 }

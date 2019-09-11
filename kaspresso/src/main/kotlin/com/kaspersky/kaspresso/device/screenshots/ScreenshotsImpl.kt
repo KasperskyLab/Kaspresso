@@ -9,7 +9,7 @@ import com.kaspersky.kaspresso.logger.UiTestLogger
 import java.io.File
 
 /**
- * Default implementation of Screenshots interface.
+ * The implementation of the [Screenshots] interface.
  */
 class ScreenshotsImpl(
     private val logger: UiTestLogger,

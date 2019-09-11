@@ -7,7 +7,7 @@ import com.kaspersky.kaspresso.internal.extensions.other.describe
 import com.kaspersky.kaspresso.logger.UiTestLogger
 
 /**
- * An implementation of [ViewActionWatcherInterceptor] that logs info about [ViewAction].
+ * The implementation of [ViewActionWatcherInterceptor] that logs info about [ViewAction].
  */
 class LoggingViewActionWatcherInterceptor(
     private val logger: UiTestLogger
@@ -16,7 +16,7 @@ class LoggingViewActionWatcherInterceptor(
     /**
      * Writes info to [logger].
      *
-     * @param viewAction responsible for performing an to_kakao on the given [View] element.
+     * @param viewAction responsible for performing an interaction on the given [View] element.
      * @param view an Android [View], on which [viewAction] is performed.
      */
     override fun intercept(viewAction: ViewAction, view: View) {

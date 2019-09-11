@@ -45,6 +45,9 @@ internal fun <T : Throwable> List<T>.throwAll() {
     }
 }
 
+/**
+ * @return true if the given throwable is contained by [allowed] set, false otherwise.
+ */
 internal fun <T : Throwable> T.isAllowed(allowed: Set<Class<out Throwable>>): Boolean {
     return when (this) {
         is CompositeException -> {
@@ -58,5 +61,9 @@ internal fun <T : Throwable> T.isAllowed(allowed: Set<Class<out Throwable>>): Bo
     }
 }
 
+/**
+ * @return the new [KaspressoError] instance with [failureMessage] and given throwable as a cause if [failureMessage]
+ * is not null, or just given throwable otherwise.
+ */
 internal fun Throwable.withMessage(failureMessage: String?): Throwable =
     failureMessage?.let { KaspressoError(it, this) } ?: this

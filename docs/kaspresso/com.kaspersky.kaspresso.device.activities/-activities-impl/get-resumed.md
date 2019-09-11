@@ -9,5 +9,5 @@ Overrides [Activities.getResumed](../-activities/get-resumed.md)
 Finds and returns resumed activity if it exists, otherwise logs error.
 
 **Return**
-nullable resumed activity
+nullable resumed activity.
 

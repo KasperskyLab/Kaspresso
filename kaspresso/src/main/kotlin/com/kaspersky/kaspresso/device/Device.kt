@@ -3,7 +3,6 @@ package com.kaspersky.kaspresso.device
 import android.content.Context
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.UiDevice
-import com.kaspersky.kaspresso.configurator.Configurator
 import com.kaspersky.kaspresso.device.accessibility.Accessibility
 import com.kaspersky.kaspresso.device.activities.Activities
 import com.kaspersky.kaspresso.device.apps.Apps
@@ -18,68 +17,67 @@ import com.kaspersky.kaspresso.device.phone.Phone
 import com.kaspersky.kaspresso.device.screenshots.Screenshots
 
 /**
- * A provider of managers for all off-screen work.
+ * The provider of managers for all off-screen work.
  */
-class Device(
+data class Device(
 
     /**
-     * Holds an implementation of [Apps] interface. If it was not specified in [Configurator.Builder], the default
-     * implementation is used.
+     * Holds the reference to the implementation of [Apps] interface.
      */
     val apps: Apps,
 
     /**
-     * Holds a reference to an implementation of [Activities] interface, held by [Configurator].
+     * Holds the reference to the implementation of [Activities] interface.
      */
     val activities: Activities,
 
     /**
-     * Holds a reference to an implementation of [Files] interface, held by [Configurator].
+     * Holds the reference to the implementation of [Files] interface.
      */
     val files: Files,
 
     /**
-     * Holds a reference to an implementation of [Network] interface, held by [Configurator].
+     * Holds the reference to the implementation of [Network] interface.
      */
     val network: Network,
 
     /**
-     * Holds a reference to an implementation of [Phone] interface, held by [Configurator].
+     * Holds the reference to the implementation of [Phone] interface.
      */
     val phone: Phone,
 
     /**
-     * Holds a reference to an implementation of [Location] interface, held by [Configurator].
+     * Holds the reference to the implementation of [Location] interface.
      */
     val location: Location,
 
     /**
-     * Holds a reference to an implementation of [Keyboard] interface, held by [Configurator].
+     * Holds the reference to the implementation of [Keyboard] interface.
      */
     val keyboard: Keyboard,
 
     /**
-     * Holds a reference to an implementation of [Screenshots] interface, held by [Configurator].
+     * Holds the reference to the implementation of [Screenshots] interface.
      */
     val screenshots: Screenshots,
 
     /**
-     * Holds a reference to an implementation of [Accessibility] interface, held by [Configurator].
+     * Holds the reference to the implementation of [Accessibility] interface.
      */
     val accessibility: Accessibility,
 
     /**
-     * Holds a reference to an implementation of [Permissions] interface, held by [Configurator].
+     * Holds the reference to the implementation of [Permissions] interface.
      */
     val permissions: Permissions,
 
     /**
-     * Holds a reference to an implementation of [HackPermissions] interface, held by [Configurator].
+     * Holds the reference to the implementation of [HackPermissions] interface.
      */
     val hackPermissions: HackPermissions,
 
     /**
-     * Holds a reference to an implementation of [Exploit] interface, held by [Configurator].
+     * Holds the reference to the implementation of [Exploit] interface.
      */
     val exploit: Exploit
 ) {
@@ -96,7 +94,7 @@ class Device(
         get() = InstrumentationRegistry.getInstrumentation().targetContext
 
     /**
-     * A property to get an instance of [UiDevice].
+     * A property to get the instance of [UiDevice].
      */
     val uiDevice: UiDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
 }

@@ -6,7 +6,7 @@ import androidx.test.espresso.ViewAssertion
 import com.kaspersky.kaspresso.interceptors.watcher.view.ViewAssertionWatcherInterceptor
 
 /**
- * A proxy-wrapper of [ViewAssertion] for watcherInterceptors calls.
+ * The proxy-wrapper of [ViewAssertion] for watcher interceptors calls.
  */
 class ViewAssertionProxy(
     private val viewAssertion: ViewAssertion,
@@ -14,9 +14,9 @@ class ViewAssertionProxy(
 ) : ViewAssertion {
 
     /**
-     * Calls watcherInterceptors before [ViewAssertion.check] on wrapped [viewAssertion] is called.
+     * Calls watcher interceptors before [ViewAssertion.check] on wrapped [viewAssertion] is called.
      *
-     * @param view the view, if one was found during the view to_kakao or null if it was not (which
+     * @param view the view, if one was found during the view interaction or null if it was not (which
      *     may be an acceptable option for an assertion).
      * @param noViewFoundException an exception detailing why the view could not be found or null if
      *     the view was found.

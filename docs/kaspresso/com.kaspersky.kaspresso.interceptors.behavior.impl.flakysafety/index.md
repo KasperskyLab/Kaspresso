@@ -1,0 +1,11 @@
+[kaspresso](../index.md) / [com.kaspersky.kaspresso.interceptors.behavior.impl.flakysafety](./index.md)
+
+## Package com.kaspersky.kaspresso.interceptors.behavior.impl.flakysafety
+
+### Types
+
+| Name | Summary |
+|---|---|
+| [FlakySafeDataBehaviorInterceptor](-flaky-safe-data-behavior-interceptor/index.md) | `class FlakySafeDataBehaviorInterceptor : `[`DataBehaviorInterceptor`](../com.kaspersky.kaspresso.interceptors.behavior/-data-behavior-interceptor.md)`, `[`FlakySafetyProvider`](../com.kaspersky.kaspresso.flakysafety/-flaky-safety-provider/index.md)<br>The implementation of [DataBehaviorInterceptor](../com.kaspersky.kaspresso.interceptors.behavior/-data-behavior-interceptor.md) and [FlakySafetyProvider](../com.kaspersky.kaspresso.flakysafety/-flaky-safety-provider/index.md) interfaces. Provides system flaky safety functionality for [DataInteraction.check](#) calls. |
+| [FlakySafeViewBehaviorInterceptor](-flaky-safe-view-behavior-interceptor/index.md) | `class FlakySafeViewBehaviorInterceptor : `[`ViewBehaviorInterceptor`](../com.kaspersky.kaspresso.interceptors.behavior/-view-behavior-interceptor.md)`, `[`FlakySafetyProvider`](../com.kaspersky.kaspresso.flakysafety/-flaky-safety-provider/index.md)<br>The implementation of [ViewBehaviorInterceptor](../com.kaspersky.kaspresso.interceptors.behavior/-view-behavior-interceptor.md) and [FlakySafetyProvider](../com.kaspersky.kaspresso.flakysafety/-flaky-safety-provider/index.md) interfaces. Provides system flaky safety functionality for [ViewInteraction.perform](#) and [ViewInteraction.check](#) calls. |
+| [FlakySafeWebBehaviorInterceptor](-flaky-safe-web-behavior-interceptor/index.md) | `class FlakySafeWebBehaviorInterceptor : `[`WebBehaviorInterceptor`](../com.kaspersky.kaspresso.interceptors.behavior/-web-behavior-interceptor.md)`, `[`FlakySafetyProvider`](../com.kaspersky.kaspresso.flakysafety/-flaky-safety-provider/index.md)<br>The implementation of [WebBehaviorInterceptor](../com.kaspersky.kaspresso.interceptors.behavior/-web-behavior-interceptor.md) and [FlakySafetyProvider](../com.kaspersky.kaspresso.flakysafety/-flaky-safety-provider/index.md) interfaces. Provides system flaky safety functionality for [Web.WebInteraction.perform](#) and [Web.WebInteraction.check](#) calls. |

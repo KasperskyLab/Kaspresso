@@ -9,7 +9,7 @@ import java.lang.reflect.Method
 import java.util.concurrent.CountDownLatch
 
 /**
- * An [InvocationHandler] for dynamic proxy which will suppress any exception thrown from the target.
+ * The [InvocationHandler] implementation for dynamic proxy which will suppress any exception thrown from the target.
  */
 @PublishedApi
 internal class UiInvocationHandler(

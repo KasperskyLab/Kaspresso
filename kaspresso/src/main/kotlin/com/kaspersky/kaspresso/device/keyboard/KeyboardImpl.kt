@@ -6,18 +6,21 @@ import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.UiObject
 import com.kaspersky.kaspresso.device.server.AdbServer
 
+/**
+ * The implementation of the [Keyboard] interface.
+ */
 class KeyboardImpl(
     private val adbServer: AdbServer
 ) : Keyboard {
 
     /**
-     *  Types text char by char in the focused text field.
-     *  Use it only when Espresso or UiAutomator are not appropriate (e.g. when you are on the lock screen).
+     * Types text char by char in the focused text field.
+     * Use it only when Espresso or UiAutomator are not appropriate (e.g. when you are on the lock screen).
      *
-     *  Consider to use [ViewActions.typeText].
-     *  Also, consider to use [UiObject.setText].
+     * Consider to use [ViewActions.typeText].
+     * Also, consider to use [UiObject.setText].
      *
-     *  Required Permissions: INTERNET
+     * Required Permissions: INTERNET
      */
     override fun typeText(text: String) {
         /*
@@ -29,16 +32,16 @@ class KeyboardImpl(
     }
 
     /**
-     *  Sends a key event.
-     *  Use constants from [KeyEvent] to get the code.
+     * Sends a key event.
+     * Use constants from [KeyEvent] to get the code.
      *
-     *  Consider to use [ViewActions.pressKey].
-     *  Also, consider to use [UiDevice.pressKeyCode],
-     *  or more semantic methods like [UiDevice.pressMenu], [UiDevice.pressDPadLeft] and so on.
+     * Consider to use [ViewActions.pressKey].
+     * Also, consider to use [UiDevice.pressKeyCode],
+     * or more semantic methods like [UiDevice.pressMenu], [UiDevice.pressDPadLeft] and so on.
      *
-     *  Required Permissions: INTERNET
+     * Required Permissions: INTERNET
      *
-     *  @param keyEvent the code from a [KeyEvent] constant to send on device.
+     * @param keyEvent the code from a [KeyEvent] constant to send on device.
      */
     override fun sendEvent(keyEvent: Int) {
         adbServer.performShell("input keyevent $keyEvent")

@@ -3,6 +3,12 @@ package com.kaspersky.kaspresso.compose
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import io.reactivex.exceptions.CompositeException
 
+/**
+ * Invokes the given list of [actions] and succeeds if at least one of them succeeds.
+ *
+ * @param actions the list of actions to invoke.
+ * @param logger the logger
+ */
 internal fun invokeComposed(actions: List<() -> Unit>, logger: UiTestLogger) {
     logger.i("Composed action started.")
     val cachedErrors: MutableList<Throwable> = mutableListOf()

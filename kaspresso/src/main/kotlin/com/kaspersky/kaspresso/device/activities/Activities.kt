@@ -3,7 +3,7 @@ package com.kaspersky.kaspresso.device.activities
 import android.app.Activity
 
 /**
- * An interface to work with activities.
+ * The interface to work with activities.
  */
 interface Activities {
 

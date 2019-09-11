@@ -4,5 +4,5 @@
 
 `val uiDevice: UiDevice`
 
-A property to get an instance of [UiDevice](#).
+A property to get the instance of [UiDevice](#).
 

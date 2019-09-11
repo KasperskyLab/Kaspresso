@@ -6,6 +6,8 @@
 
 Performs adb push.
 
+Required Permissions: INTERNET.
+
 ### Parameters
 
 `serverPath` - a file path relative to the server directory.

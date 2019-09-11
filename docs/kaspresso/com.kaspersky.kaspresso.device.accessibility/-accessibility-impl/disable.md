@@ -6,5 +6,5 @@
 
 Overrides [Accessibility.disable](../-accessibility/disable.md)
 
-Enables accessibility. Available since api 24.
+Disables accessibility. Available since api 24.
 

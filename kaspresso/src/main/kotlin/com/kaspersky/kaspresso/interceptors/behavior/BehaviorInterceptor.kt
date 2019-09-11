@@ -1,12 +1,12 @@
 package com.kaspersky.kaspresso.interceptors.behavior
 
 /**
- * An interface for all executing interceptors, actually manages the execution of actions or assertions.
+ * The interface for all interceptors that change the default interaction. Often it wraps the interaction calls.
  */
 interface BehaviorInterceptor<Interaction> {
 
     /**
-     * Called to do some stuff and actually interact an action or an assertion.
+     * Called to do some stuff and actually perform an interaction with element.
      *
      * @param action a function-wrapper of an action or an assertion to be invoked.
      */

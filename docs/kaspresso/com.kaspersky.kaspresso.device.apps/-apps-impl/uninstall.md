@@ -8,6 +8,8 @@ Overrides [Apps.uninstall](../-apps/uninstall.md)
 
 Uninstalls an app via ADB.
 
+Required Permissions: INTERNET.
+
 ### Parameters
 
 `packageName` - an android package name of an app to be deleted.
