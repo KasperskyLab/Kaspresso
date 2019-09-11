@@ -1,7 +1,7 @@
 package com.kaspersky.kaspresso.compose
 
 import com.kaspersky.kaspresso.logger.UiTestLogger
-import io.reactivex.exceptions.CompositeException
+import io.reactivex.exceptions.ExtCompositeException
 
 /**
  * Invokes the given list of [actions] and succeeds if at least one of them succeeds.
@@ -25,5 +25,5 @@ internal fun invokeComposed(actions: List<() -> Unit>, logger: UiTestLogger) {
     }
 
     logger.i("Composed action totally failed.")
-    throw CompositeException(cachedErrors)
+    throw ExtCompositeException(cachedErrors)
 }

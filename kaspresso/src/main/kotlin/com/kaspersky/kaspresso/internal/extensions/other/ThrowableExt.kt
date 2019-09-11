@@ -1,7 +1,7 @@
 package com.kaspersky.kaspresso.internal.extensions.other
 
 import com.kaspersky.kaspresso.internal.exceptions.KaspressoError
-import io.reactivex.exceptions.CompositeException
+import io.reactivex.exceptions.ExtCompositeException
 import java.io.PrintWriter
 import java.io.StringWriter
 
@@ -33,7 +33,7 @@ internal inline fun <reified ERROR : Throwable, LISTENER> Iterable<LISTENER>.for
 internal fun <T : Throwable> List<T>.getException(): Throwable? {
     return when (this.size) {
         1 -> throw this[0]
-        in 2..Int.MAX_VALUE -> throw CompositeException(this)
+        in 2..Int.MAX_VALUE -> throw ExtCompositeException(this)
         else -> null
     }
 }
@@ -41,7 +41,7 @@ internal fun <T : Throwable> List<T>.getException(): Throwable? {
 internal fun <T : Throwable> List<T>.throwAll() {
     when (this.size) {
         1 -> throw this[0]
-        in 2..Int.MAX_VALUE -> throw CompositeException(this)
+        in 2..Int.MAX_VALUE -> throw ExtCompositeException(this)
     }
 }
 
@@ -50,7 +50,7 @@ internal fun <T : Throwable> List<T>.throwAll() {
  */
 internal fun <T : Throwable> T.isAllowed(allowed: Set<Class<out Throwable>>): Boolean {
     return when (this) {
-        is CompositeException -> {
+        is ExtCompositeException -> {
             exceptions.find { e: Throwable ->
                 allowed.find { it.isAssignableFrom(e.javaClass) } != null
             } != null

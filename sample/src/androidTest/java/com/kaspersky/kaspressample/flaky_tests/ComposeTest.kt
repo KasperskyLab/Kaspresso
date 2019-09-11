@@ -8,6 +8,7 @@ import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.R
 import com.kaspersky.kaspressample.screen.MainScreen
 import com.kaspersky.kaspressample.screen.ScrollViewSampleScreen
+import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import java.util.concurrent.TimeUnit
 import org.junit.Rule
@@ -15,7 +16,11 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class CommonFlakyTest : TestCase() {
+class ComposeTest : TestCase(
+    kaspressoBuilder = Kaspresso.Builder.default().apply {
+        flakySafetyParams.timeoutMs = TimeUnit.SECONDS.toMillis(8)
+    }
+) {
 
     @get:Rule
     val runtimePermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
@@ -48,16 +53,33 @@ class CommonFlakyTest : TestCase() {
 
             step("Check btn5's text") {
                 ScrollViewSampleScreen {
-                    flakySafely(timeoutMs = TimeUnit.SECONDS.toMillis(7)) {
-                        btn5.hasText(R.string.common_flaky_final_button)
+                    compose {
+                        or(btn5) { hasText(R.string.common_flaky_final_button) }
+                        or(btn1) { hasText(R.string.common_flaky_final_button) }
                     }
                 }
             }
 
             step("Check tv6's text") {
                 ScrollViewSampleScreen {
-                    flakySafely(timeoutMs = TimeUnit.SECONDS.toMillis(7)) {
-                        tv6.hasText(R.string.common_flaky_final_textview)
+                    compose {
+                        or(tv6) { hasText(R.string.common_flaky_final_textview) }
+                        or(btn1) { hasText(R.string.common_flaky_final_textview) }
+                    }
+                }
+            }
+
+            step("Check btn5's text again and click on it") {
+                ScrollViewSampleScreen {
+                    btn5.compose {
+                        or {
+                            hasText("Something wrong")
+                            click()
+                        }
+                        or {
+                            hasText(R.string.common_flaky_final_button)
+                            click()
+                        }
                     }
                 }
             }

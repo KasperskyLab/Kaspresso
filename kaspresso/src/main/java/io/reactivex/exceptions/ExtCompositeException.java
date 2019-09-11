@@ -22,7 +22,7 @@ import java.io.PrintWriter;
 import java.util.*;
 
 /**
- * Represents an exception that is a composite of one or more other exceptions. A {@code CompositeException}
+ * Represents an exception that is a composite of one or more other exceptions. A {@code ExtCompositeException}
  * does not modify the structure of any exception it wraps, but at print-time it iterates through the list of
  * Throwables contained in the composite in order to print them all.
  *
@@ -35,7 +35,7 @@ import java.util.*;
  * If you invoke {@link #getCause()}, it will lazily create the causal chain but will stop if it finds any
  * Throwable in the chain that it has already seen.
  */
-public final class CompositeException extends RuntimeException {
+public final class ExtCompositeException extends RuntimeException {
 
     private static final long serialVersionUID = 3026362227162912146L;
 
@@ -44,31 +44,31 @@ public final class CompositeException extends RuntimeException {
     private Throwable cause;
 
     /**
-     * Constructs a CompositeException with the given array of Throwables as the
+     * Constructs a ExtCompositeException with the given array of Throwables as the
      * list of suppressed exceptions.
      * @param exceptions the Throwables to have as initially suppressed exceptions
      *
      * @throws IllegalArgumentException if <code>exceptions</code> is empty.
      */
-    public CompositeException(@NonNull Throwable... exceptions) {
+    public ExtCompositeException(@NonNull Throwable... exceptions) {
         this(exceptions == null ?
                 Collections.singletonList(new NullPointerException("exceptions was null")) : Arrays.asList(exceptions));
     }
 
     /**
-     * Constructs a CompositeException with the given array of Throwables as the
+     * Constructs a ExtCompositeException with the given array of Throwables as the
      * list of suppressed exceptions.
      * @param errors the Throwables to have as initially suppressed exceptions
      *
      * @throws IllegalArgumentException if <code>errors</code> is empty.
      */
-    public CompositeException(@NonNull Iterable<? extends Throwable> errors) {
+    public ExtCompositeException(@NonNull Iterable<? extends Throwable> errors) {
         Set<Throwable> deDupedExceptions = new LinkedHashSet<Throwable>();
         List<Throwable> localExceptions = new ArrayList<Throwable>();
         if (errors != null) {
             for (Throwable ex : errors) {
-                if (ex instanceof CompositeException) {
-                    deDupedExceptions.addAll(((CompositeException) ex).getExceptions());
+                if (ex instanceof ExtCompositeException) {
+                    deDupedExceptions.addAll(((ExtCompositeException) ex).getExceptions());
                 } else if (ex != null) {
                     deDupedExceptions.add(ex);
                 } else {
@@ -87,9 +87,9 @@ public final class CompositeException extends RuntimeException {
     }
 
     /**
-     * Retrieves the list of exceptions that make up the {@code CompositeException}.
+     * Retrieves the list of exceptions that make up the {@code ExtCompositeException}.
      *
-     * @return the exceptions that make up the {@code CompositeException}, as a {@link List} of {@link Throwable}s
+     * @return the exceptions that make up the {@code ExtCompositeException}, as a {@link List} of {@link Throwable}s
      */
     @NonNull
     public List<Throwable> getExceptions() {
@@ -170,7 +170,7 @@ public final class CompositeException extends RuntimeException {
     }
 
     /**
-     * Special handling for printing out a {@code CompositeException}.
+     * Special handling for printing out a {@code ExtCompositeException}.
      * Loops through all inner exceptions and prints them out.
      *
      * @param s
@@ -238,7 +238,7 @@ public final class CompositeException extends RuntimeException {
 
     static final class CompositeExceptionCausalChain extends RuntimeException {
         private static final long serialVersionUID = 3875212506787802066L;
-        /* package-private */static final String MESSAGE = "Chain of Causes for CompositeException In Order Received =>";
+        /* package-private */static final String MESSAGE = "Chain of Causes for ExtCompositeException In Order Received =>";
 
         @Override
         public String getMessage() {

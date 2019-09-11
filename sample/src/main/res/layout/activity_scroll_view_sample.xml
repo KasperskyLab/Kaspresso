@@ -15,39 +15,39 @@
                 android:orientation="vertical">
 
             <Button
-                    android:id="@+id/scroll_view_stub_btn1"
+                    android:id="@+id/scroll_view_btn1"
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
                     android:text="@string/common_flaky_start_1"/>
 
             <Button
-                    android:id="@+id/scroll_view_stub_btn2"
+                    android:id="@+id/scroll_view_btn2"
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
                     android:background="@color/colorPrimary"
                     android:text="@string/common_flaky_start_2"/>
 
             <Button
-                    android:id="@+id/scroll_view_stub_btn3"
+                    android:id="@+id/scroll_view_btn3"
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
                     android:text="@string/common_flaky_start_3"/>
 
             <Button
-                    android:id="@+id/scroll_view_stub_btn4"
+                    android:id="@+id/scroll_view_btn4"
                     android:layout_width="match_parent"
                     android:background="@color/colorPrimary"
                     android:layout_height="300dp"
                     android:text="@string/common_flaky_start_4"/>
 
             <Button
-                    android:id="@+id/scroll_view_stub_btn5"
+                    android:id="@+id/scroll_view_btn5"
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
                     android:text="@string/common_flaky_start_5"/>
 
             <TextView
-                    android:id="@+id/scroll_view_stub_tv6"
+                    android:id="@+id/scroll_view_tv6"
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
                     android:background="@color/colorPrimary"

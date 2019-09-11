@@ -17,8 +17,8 @@ internal class KakaoViewInterceptor(
 ) : KakaoInterceptor<ViewInteraction, ViewAction, ViewAssertion>(kaspresso) {
 
     /**
-     * Folds all [ViewBehaviorInterceptor]'s one into another with the actual [interaction] "check" call as the initial,
-     * and invokes the resulting lambda.
+     * Folds all [ViewBehaviorInterceptor]'s one into another in the order from the first to the last with the actual
+     * [androidx.test.espresso.ViewInteraction.check] call as the initial, and invokes the resulting lambda.
      */
     override fun interceptCheck(interaction: ViewInteraction, assertion: ViewAssertion) {
         kaspresso.viewBehaviorInterceptors.fold(
@@ -34,8 +34,8 @@ internal class KakaoViewInterceptor(
     }
 
     /**
-     * Folds all [ViewBehaviorInterceptor]'s one into another with the actual [interaction] "perform" call as the initial,
-     * and invokes the resulting lambda.
+     * Folds all [ViewBehaviorInterceptor]'s one into another in the order from the first to the last with the actual
+     * [androidx.test.espresso.ViewInteraction.perform] call as the initial, and invokes the resulting lambda.
      */
     override fun interceptPerform(interaction: ViewInteraction, action: ViewAction) {
         kaspresso.viewBehaviorInterceptors.fold(
