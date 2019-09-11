@@ -10,10 +10,10 @@ import com.kaspersky.kaspressample.screen.MainScreen
 import com.kaspersky.kaspressample.screen.ScrollViewSampleScreen
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
+import java.util.concurrent.TimeUnit
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import java.util.concurrent.TimeUnit
 
 @RunWith(AndroidJUnit4::class)
 class ComposeTest : TestCase(
