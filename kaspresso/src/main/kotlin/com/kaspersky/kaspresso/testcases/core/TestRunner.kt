@@ -12,6 +12,9 @@ import com.kaspersky.kaspresso.testcases.models.TestBody
 import com.kaspersky.kaspresso.testcases.models.info.StepInfo
 import com.kaspersky.kaspresso.testcases.models.info.TestInfo
 
+/**
+ * Kaspresso test runner. Runs all test sections and calls test run watcher interceptors.
+ */
 internal class TestRunner<InitData, Data>(
     private val kaspresso: Kaspresso
 ) {

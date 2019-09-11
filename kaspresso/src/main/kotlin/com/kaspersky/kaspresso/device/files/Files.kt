@@ -1,26 +1,26 @@
 package com.kaspersky.kaspresso.device.files
 
 /**
- * An interface to work with file permissions.
+ * The interface to work with file permissions.
  */
 interface Files {
 
     /**
-     *  Performs adb push.
+     * Performs adb push.
      *
-     *  Required Permissions: INTERNET.
+     * Required Permissions: INTERNET.
      *
-     *  @param serverPath a file path relative to the server directory.
-     *  @param devicePath a path to copy.
+     * @param serverPath a file path relative to the server directory.
+     * @param devicePath a path to copy.
      */
     fun push(serverPath: String, devicePath: String)
 
     /**
-     *  Removes a file by given path.
+     * Removes a file by given path.
      *
-     *  Required Permissions: INTERNET
+     * Required Permissions: INTERNET
      *
-     *  @param path a path to remove
+     * @param path a path to remove
      */
     fun remove(path: String)
 }

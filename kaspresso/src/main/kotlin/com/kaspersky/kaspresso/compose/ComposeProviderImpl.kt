@@ -19,10 +19,19 @@ import com.kaspersky.kaspresso.interceptors.tokakao.compose.ComposeKakaoViewInte
 import com.kaspersky.kaspresso.interceptors.tokakao.impl.KakaoViewInterceptor
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 
+/**
+ * The implementation of the [ComposeProvider] interface.
+ */
 class ComposeProviderImpl(
     private val kaspresso: Kaspresso
 ) : ComposeProvider {
 
+    /**
+     * Composes a [block] of actions with their views to invoke on in one composite action that succeeds if at least
+     * one of it's parts succeeds.
+     *
+     * @param block the actions to compose.
+     */
     override fun compose(block: ActionsOnElementsPack.() -> Unit) {
         val (elements, actions) = ActionsOnElementsPack().apply(block).build()
 
@@ -39,6 +48,12 @@ class ComposeProviderImpl(
         elements.forEach { it.setInterception() }
     }
 
+    /**
+     * Composes a [block] of actions on the given view of type [T] in one composite action that succeeds if at least
+     * one of it's parts succeeds.
+     *
+     * @param block the actions to compose.
+     */
     override fun <T> T.compose(block: ActionsPack<T>.() -> Unit): Unit
             where T : BaseActions, T : BaseAssertions, T : Interceptable<ViewInteraction, ViewAssertion, ViewAction> {
 

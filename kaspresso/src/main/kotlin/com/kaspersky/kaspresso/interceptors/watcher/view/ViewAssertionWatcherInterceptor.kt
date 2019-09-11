@@ -5,7 +5,7 @@ import androidx.test.espresso.NoMatchingViewException
 import androidx.test.espresso.ViewAssertion
 
 /**
- * An interface for all view action interceptors, used in [com.kaspersky.kaspresso.proxy.ViewAssertionProxy].
+ * The interface for all view action interceptors, used in [com.kaspersky.kaspresso.proxy.ViewAssertionProxy].
  */
 interface ViewAssertionWatcherInterceptor {
 

@@ -1,7 +1,7 @@
 package com.kaspersky.kaspresso.device.accessibility
 
 /**
- * An interface to work with accessibility.
+ * The interface to work with accessibility.
  */
 interface Accessibility {
 

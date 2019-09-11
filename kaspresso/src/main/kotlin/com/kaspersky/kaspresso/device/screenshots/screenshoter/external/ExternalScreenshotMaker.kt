@@ -7,7 +7,7 @@ import com.kaspersky.kaspresso.device.screenshots.screenshoter.ScreenshotFiles
 import java.io.File
 
 /**
- * Class for capturing spoon-compatible screenshots by uiautomator.
+ * The class for capturing spoon-compatible screenshots by uiautomator.
  */
 internal class ExternalScreenshotMaker(
     private val screenshotFiles: ScreenshotFiles

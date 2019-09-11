@@ -6,6 +6,9 @@ import com.kaspersky.kaspresso.testcases.core.TestRunner
 import com.kaspersky.kaspresso.testcases.core.testcontext.TestContext
 import com.kaspersky.kaspresso.testcases.models.TestBody
 
+/**
+ * The representation of an actual test.
+ */
 class MainTestSection<InitData, Data> internal constructor(
     private val kaspresso: Kaspresso,
     private val testBodyBuilder: TestBody.Builder<InitData, Data>

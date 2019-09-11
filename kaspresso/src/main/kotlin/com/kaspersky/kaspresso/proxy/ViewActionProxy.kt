@@ -7,7 +7,7 @@ import com.kaspersky.kaspresso.interceptors.watcher.view.ViewActionWatcherInterc
 import org.hamcrest.Matcher
 
 /**
- * A proxy-wrapper of [ViewAction] for watcherInterceptors calls.
+ * The proxy-wrapper of [ViewAction] for watcher interceptors calls.
  */
 class ViewActionProxy(
     private val viewAction: ViewAction,
@@ -24,12 +24,12 @@ class ViewActionProxy(
     /**
      * Simply calls [ViewAction.getConstraints] on wrapped [viewAction].
      *
-     * @return a matcher that will be tested prior to calling perform
+     * @return a matcher that will be tested prior to calling perform.
      */
     override fun getConstraints(): Matcher<View> = viewAction.constraints
 
     /**
-     * Calls watcherInterceptors before [ViewAction.perform] on wrapped [viewAction] is called.
+     * Calls watcher interceptors before [ViewAction.perform] on wrapped [viewAction] is called.
      *
      * @param uiController the controller to use to interact with the UI.
      * @param view the view to act upon. never null.

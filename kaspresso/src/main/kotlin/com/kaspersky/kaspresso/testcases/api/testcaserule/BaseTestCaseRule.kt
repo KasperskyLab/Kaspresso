@@ -10,10 +10,10 @@ import org.junit.runner.Description
 import org.junit.runners.model.Statement
 
 /**
- *  A base class for all parametrized test cases rules.
+ * The base class for all parametrized test cases rules.
  *
- *  @param InitData data initialized in before section.
- *  @param Data data transformed from [InitData] by special function.
+ * @param InitData data initialized in before section.
+ * @param Data data transformed from [InitData] by special function.
  */
 open class BaseTestCaseRule<InitData, Data>(
     kaspressoBuilder: Kaspresso.Builder = Kaspresso.Builder.default(),

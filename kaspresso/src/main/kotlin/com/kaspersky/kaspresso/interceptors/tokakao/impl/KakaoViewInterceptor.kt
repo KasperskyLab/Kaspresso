@@ -9,10 +9,17 @@ import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.proxy.ViewActionProxy
 import com.kaspersky.kaspresso.proxy.ViewAssertionProxy
 
+/**
+ * Kaspresso's implementation of Kakao's view interaction interceptor.
+ */
 internal class KakaoViewInterceptor(
     kaspresso: Kaspresso
 ) : KakaoInterceptor<ViewInteraction, ViewAction, ViewAssertion>(kaspresso) {
 
+    /**
+     * Folds all [ViewBehaviorInterceptor]'s one into another with the actual [interaction] "check" call as the initial,
+     * and invokes the resulting lambda.
+     */
     override fun interceptCheck(interaction: ViewInteraction, assertion: ViewAssertion) {
         kaspresso.viewBehaviorInterceptors.fold(
             initial = {
@@ -26,6 +33,10 @@ internal class KakaoViewInterceptor(
         ).invoke()
     }
 
+    /**
+     * Folds all [ViewBehaviorInterceptor]'s one into another with the actual [interaction] "perform" call as the initial,
+     * and invokes the resulting lambda.
+     */
     override fun interceptPerform(interaction: ViewInteraction, action: ViewAction) {
         kaspresso.viewBehaviorInterceptors.fold(
             initial = {

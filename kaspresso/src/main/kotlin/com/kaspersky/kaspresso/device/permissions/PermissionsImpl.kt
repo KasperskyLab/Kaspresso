@@ -10,7 +10,7 @@ import com.kaspersky.kaspresso.internal.wait.wait
 import com.kaspersky.kaspresso.logger.UiTestLogger
 
 /**
- * An implementation of Permissions interface.
+ * The implementation of the [Permissions] interface.
  */
 class PermissionsImpl(
     private val logger: UiTestLogger,

@@ -14,7 +14,7 @@ import org.junit.runner.Description
 import org.junit.runners.model.Statement
 
 /**
- *  Test rule to switch locales.
+ * The test rule to switch locales.
  */
 class LocaleRule internal constructor(
     private val locales: Set<Locale>,

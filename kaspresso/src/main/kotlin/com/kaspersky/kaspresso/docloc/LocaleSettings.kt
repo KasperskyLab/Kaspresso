@@ -14,9 +14,9 @@ internal class LocaleSettings(
     private val logger: UiTestLogger
 ) {
     /**
-     * Change locale for Android OS Settings.
+     * Changes locale for Android OS Settings.
      *
-     * @return locale has been changed in Settings
+     * @return true if the locale has been changed in Settings, false otherwise
      */
     @SuppressLint("PrivateApi", "DiscouragedPrivateApi")
     fun changeLanguage(locale: Locale): Boolean {

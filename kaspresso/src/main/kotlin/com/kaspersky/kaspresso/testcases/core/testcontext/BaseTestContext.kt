@@ -11,6 +11,11 @@ import com.kaspersky.kaspresso.flakysafety.FlakySafetyProviderImpl
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.logger.UiTestLogger
 
+/**
+ * Provides the Kaspresso functionality for "run" section: [Device], [AdbServer], the [UiTestLogger] implementation
+ * for external developers. Also provides flaky safety, composing and web composing functionalities via
+ * implementing [FlakySafetyProvider], [ComposeProvider] and [WebComposeProvider] interfaces.
+ */
 open class BaseTestContext internal constructor(
     kaspresso: Kaspresso
 ) : FlakySafetyProvider by FlakySafetyProviderImpl(kaspresso.flakySafetyParams, kaspresso.libLogger),

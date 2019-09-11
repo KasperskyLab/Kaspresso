@@ -7,13 +7,16 @@ import androidx.test.platform.app.InstrumentationRegistry
 import com.kaspersky.kaspresso.logger.UiTestLogger
 
 /**
- * An implementation of HackPermissions interface.
+ * The implementation of the [HackPermissions] interface.
  */
 class HackPermissionsImpl(
     private val uiAutomation: UiAutomation,
     private val logger: UiTestLogger
 ) : HackPermissions {
 
+    /**
+     * @return result of operation: true is success, false is something went wrong
+     */
     override fun grant(packageName: String, permission: String): Boolean {
         logger.i("Attempt to grant permission=$permission for packageName=$packageName unfairly")
         return try {

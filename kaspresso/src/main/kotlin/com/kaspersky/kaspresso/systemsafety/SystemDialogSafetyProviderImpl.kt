@@ -7,7 +7,11 @@ import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.UiSelector
 import androidx.test.uiautomator.Until
 import com.kaspersky.kaspresso.logger.UiTestLogger
+import java.util.concurrent.TimeUnit
 
+/**
+ * The implementation of the [SystemDialogSafetyProvider] interface.
+ */
 class SystemDialogSafetyProviderImpl(
     private val logger: UiTestLogger,
     private val uiDevice: UiDevice
@@ -18,6 +22,18 @@ class SystemDialogSafetyProviderImpl(
         { uiDevice -> uiDevice.pressBack() }
     )
 
+    /**
+     * Invokes the given [action] and hides the system dialog if the invocation is failed and the system
+     * dialog is actually shown via [suppressSystemDialogs] call.
+     *
+     * @param action the action to invoke.
+     *
+     * @return the result of [action]'s invocation.
+     *
+     * @throws Throwable if caught while [action] invocation error is not allowed
+     * or if[suppressSystemDialogs] throws an exception.
+     */
+    @Throws(Throwable::class)
     override fun <T> passSystemDialogs(action: () -> T): T {
         return try {
             action.invoke()
@@ -29,19 +45,28 @@ class SystemDialogSafetyProviderImpl(
         }
     }
 
+    /**
+     * Attempts to hide the system dialog and re-invokes the given [action].
+     */
+    @Throws(Throwable::class)
     private fun <R> suppressSystemDialogs(firstError: Throwable, action: () -> R): R {
         logger.i("The suppressing of SystemDialogs starts")
         var cachedError: Throwable = firstError
+
         attemptsToSuppress.forEachIndexed { index, attemptToSuppress ->
             try {
                 logger.i("The suppressing of SystemDialogs on the try #$index starts")
+
                 attemptToSuppress.invoke(uiDevice)
                 val result = action.invoke()
+
                 logger.i("The suppressing of SystemDialogs succeeds on the try #$index")
                 return result
             } catch (error: Throwable) {
                 logger.i("The try #$index of the suppressing of SystemDialogs failed")
+
                 cachedError = error
+
                 if (!isAndroidSystemDetected()) {
                     logger.i(
                         "The try #$index of the suppressing of SystemDialogs failed. " +
@@ -52,12 +77,13 @@ class SystemDialogSafetyProviderImpl(
                 }
             }
         }
+
         logger.i("The suppressing of SystemDialogs totally failed")
         throw cachedError
     }
 
     /**
-     * Check error is allowed and android system dialogs/windows are overlaying the app.
+     * Checks if error is allowed and android system dialogs/windows are overlaying the app.
      */
     private fun isAndroidSystemDetected(): Boolean {
         with(uiDevice) {
@@ -70,9 +96,12 @@ class SystemDialogSafetyProviderImpl(
     }
 
     /**
-     * isVisible method for non-app's elements and with a waiting
+     * The "isVisible" method with waiting for non-app's elements.
      */
-    private fun UiDevice.isVisible(selector: BySelector, timeMs: Long = 1000): Boolean {
+    private fun UiDevice.isVisible(
+        selector: BySelector,
+        timeMs: Long = TimeUnit.SECONDS.toMillis(1)
+    ): Boolean {
         wait(Until.findObject(selector), timeMs)
         return findObject(selector) != null
     }

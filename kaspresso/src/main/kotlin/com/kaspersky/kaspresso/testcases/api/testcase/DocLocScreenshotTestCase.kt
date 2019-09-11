@@ -15,7 +15,7 @@ import org.junit.Before
 import org.junit.Rule
 
 /**
- *  Base class for all docloc screenshot tests.
+ *  The base class for all docloc screenshot tests.
  *
  *  Project-wide ScreenshotTestCase should be implemented as following:
  *
@@ -119,21 +119,21 @@ abstract class DocLocScreenshotTestCase(
     }
 
     /**
-     *  Captures screenshot with a given [name] and saves it to
-     *  <device path for pictures>/<locale>/<screenshotsDirectory>.
+     * Captures a screenshot with a given [name] and saves it to
+     * <device path for pictures>/<locale>/<screenshotsDirectory>.
      *
-     *  @param name screenshot name. English letters, spaces, numbers and dots are allowed.
+     * @param name screenshot name. English letters, spaces, numbers and dots are allowed.
      */
     protected open fun captureScreenshot(name: String) {
         screenshotCapturer.captureScreenshot(name.replace(Regex("[. ]"), "_").replace(".", "_"))
     }
 
     /**
-     *  Return a dynamic proxy for a given view.
-     *  [I] must be interface.
+     * Return a dynamic proxy for a given view.
+     * [I] must be interface.
      *
-     *  @param view proxy target.
-     *  @return a proxy over the given view.
+     * @param view proxy target.
+     * @return a proxy over the given view.
      */
     inline fun <reified I : Any> getUiSafeProxy(view: I): I {
         if (!I::class.java.isInterface) {
@@ -150,10 +150,10 @@ abstract class DocLocScreenshotTestCase(
     }
 
     /**
-     *  Return a dynamic proxy over all interfaces that [view] implements.
+     * Return a dynamic proxy over all interfaces that [view] implements.
      *
-     *  @param view proxy target.
-     *  @return a proxy over the given view.
+     * @param view proxy target.
+     * @return a proxy over the given view.
      */
     inline fun <reified T : Any> getUiSafeProxyFromImplementation(view: T): Any {
         return Proxy.newProxyInstance(

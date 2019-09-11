@@ -12,6 +12,10 @@ import com.kaspersky.kaspresso.internal.extensions.espressoext.getMatcher
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.proxy.AtomProxy
 
+/**
+ * Kaspresso's implementation of Kakao's web interaction interceptor that used while composing multiple
+ * actions or assertions.
+ */
 internal class ComposeKakaoWebInterceptor(
     kaspresso: Kaspresso
 ) : KakaoInterceptor<Web.WebInteraction<*>, Atom<*>, WebAssertion<*>>(kaspresso) {

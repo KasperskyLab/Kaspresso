@@ -11,10 +11,22 @@ import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.proxy.ViewActionProxy
 import com.kaspersky.kaspresso.proxy.ViewAssertionProxy
 
+/**
+ * Kaspresso's implementation of Kakao's view interaction interceptor that used while composing multiple
+ * actions or assertions.
+ */
 internal class ComposeKakaoViewInterceptor(
     kaspresso: Kaspresso
 ) : KakaoInterceptor<ViewInteraction, ViewAction, ViewAssertion>(kaspresso) {
 
+    /**
+     * Folds all [ViewBehaviorInterceptor]'s
+     * (except [FlakySafeViewBehaviorInterceptor] and [FailureLoggingViewBehaviorInterceptor])
+     * one into another with the actual [interaction] "check" call as the initial,
+     * and invokes the resulting lambda.
+     * [FlakySafeViewBehaviorInterceptor] and [FailureLoggingViewBehaviorInterceptor] are excepted because they should
+     * not intercept each of composing actions or assertions but only the whole composed.
+     */
     override fun interceptCheck(interaction: ViewInteraction, assertion: ViewAssertion) {
         kaspresso.viewBehaviorInterceptors
             .filter { it !is FlakySafeViewBehaviorInterceptor && it !is FailureLoggingViewBehaviorInterceptor }
@@ -28,6 +40,14 @@ internal class ComposeKakaoViewInterceptor(
             ).invoke()
     }
 
+    /**
+     * Folds all [ViewBehaviorInterceptor]'s
+     * (except [FlakySafeViewBehaviorInterceptor] and [FailureLoggingViewBehaviorInterceptor])
+     * one into another with the actual [interaction] "perform" call as the initial,
+     * and invokes the resulting lambda.
+     * [FlakySafeViewBehaviorInterceptor] and [FailureLoggingViewBehaviorInterceptor] are excepted because they should
+     * not intercept each of composing actions or assertions but only the whole composed.
+     */
     override fun interceptPerform(interaction: ViewInteraction, action: ViewAction) {
         kaspresso.viewBehaviorInterceptors
             .filter { it !is FlakySafeViewBehaviorInterceptor && it !is FailureLoggingViewBehaviorInterceptor }

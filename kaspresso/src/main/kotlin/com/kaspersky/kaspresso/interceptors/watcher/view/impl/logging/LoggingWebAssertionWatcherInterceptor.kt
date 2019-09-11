@@ -8,7 +8,7 @@ import com.kaspersky.kaspresso.logger.UiTestLogger
 import org.hamcrest.StringDescription
 
 /**
- * An implementation of [WebAssertionWatcherInterceptor] that logs info about
+ * The implementation of [WebAssertionWatcherInterceptor] that logs info about
  * [androidx.test.espresso.web.assertion.WebAssertion].
  */
 class LoggingWebAssertionWatcherInterceptor(

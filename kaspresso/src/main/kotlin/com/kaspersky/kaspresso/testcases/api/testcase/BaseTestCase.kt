@@ -9,12 +9,12 @@ import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
 import com.kaspersky.kaspresso.testcases.models.TestBody
 
 /**
- *  A base class for all parametrized test cases. Extend this class with a single base project-wide inheritor of
- *  [TestCase] as a parent for all actual project-wide test cases. Nesting test cases are not recommended, use
- *  [com.kaspersky.kaspresso.testcases.api.scenario.Scenario] instead.
+ * The base class for all parametrized test cases. Extend this class with a single base project-wide inheritor of
+ * [TestCase] as a parent for all actual project-wide test cases. Nesting test cases are not recommended, use
+ * [com.kaspersky.kaspresso.testcases.api.scenario.Scenario] instead.
  *
- *  @param InitData data initialized in before section.
- *  @param Data data transformed from [InitData] by special function.
+ * @param InitData data initialized in before section.
+ * @param Data data transformed from [InitData] by special function.
  */
 abstract class BaseTestCase<InitData, Data>(
     kaspressoBuilder: Kaspresso.Builder = Kaspresso.Builder.default(),

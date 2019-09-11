@@ -14,10 +14,19 @@ import com.kaspersky.kaspresso.interceptors.tokakao.compose.ComposeKakaoWebInter
 import com.kaspersky.kaspresso.interceptors.tokakao.impl.KakaoWebInterceptor
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 
+/**
+ * The implementation of the [WebComposeProvider] interface.
+ */
 class WebComposeProviderImpl(
     private val kaspresso: Kaspresso
 ) : WebComposeProvider {
 
+    /**
+     * Composes a [block] of actions with their web views to invoke on in one composite action that succeeds if at least
+     * one of it's parts succeeds.
+     *
+     * @param block the actions to compose.
+     */
     override fun WebElementBuilder.compose(block: ActionsOnWebElementsPack.() -> Unit) {
         val actions: List<() -> Unit> = ActionsOnWebElementsPack(this).apply(block).build()
 
@@ -34,6 +43,12 @@ class WebComposeProviderImpl(
         setInterception()
     }
 
+    /**
+     * Composes a [block] of actions on the given web view in one composite action that succeeds if at least
+     * one of it's parts succeeds.
+     *
+     * @param block the actions to compose.
+     */
     override fun WebElementBuilder.KWebInteraction.compose(
         webElementBuilder: WebElementBuilder,
         block: ActionsPack<WebElementBuilder.KWebInteraction>.() -> Unit

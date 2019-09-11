@@ -1,21 +1,21 @@
 package com.kaspersky.kaspresso.device.network
 
 /**
- * An interface to work with network settings.
+ * The interface to work with network settings.
  */
 interface Network {
 
     /**
-     *  Enables wi-fi and mobile data using adb.
+     * Enables wi-fi and mobile data using adb.
      *
-     *  Required Permissions: INTERNET.
+     * Required Permissions: INTERNET.
      */
     fun enable()
 
     /**
-     *  Disables wi-fi and mobile data using adb.
+     * Disables wi-fi and mobile data using adb.
      *
-     *  Required Permissions: INTERNET.
+     * Required Permissions: INTERNET.
      */
     fun disable()
 

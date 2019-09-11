@@ -6,7 +6,7 @@ import android.os.Build
 import androidx.test.platform.app.InstrumentationRegistry
 
 /**
- * An implementation of Accessibility interface.
+ * The implementation of the [Accessibility] interface.
  */
 class AccessibilityImpl : Accessibility {
 

@@ -7,7 +7,7 @@ import com.kaspersky.kaspresso.interceptors.watcher.view.AtomWatcherInterceptor
 import org.hamcrest.Matcher
 
 /**
- * A proxy-wrapper of [Atom] for watcherInterceptors calls.
+ * The proxy-wrapper of [Atom] for watcher interceptors calls.
  */
 class AtomProxy<T>(
     val atom: Atom<T>,
@@ -26,7 +26,7 @@ class AtomProxy<T>(
     }
 
     /**
-     * Calls watcherInterceptors before [Atom.transform] on wrapped [atom] is called.
+     * Calls watcher interceptors before [Atom.transform] on wrapped [atom] is called.
      *
      * @param evaluation represents the results of a Javascript execution.
      * @return [R] a result type of the atom.

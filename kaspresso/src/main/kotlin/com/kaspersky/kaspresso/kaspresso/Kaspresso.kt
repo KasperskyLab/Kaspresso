@@ -73,45 +73,7 @@ import com.kaspersky.kaspresso.logger.UiTestLoggerImpl
 import com.kaspersky.kaspresso.report.impl.AllureReportWriter
 
 /**
- * A class that keeps all settings.
- *
- * @param apps Holds an implementation of [Apps] interface. If it was not specified in [Kaspresso.Builder], the
- * default implementation is used.
- * @param activities Holds an implementation of [Activities] interface. If it was not specified in [Kaspresso.Builder],
- * the default implementation is used.
- * @param files Holds an implementation of [Files] interface. If it was not specified in [Kaspresso.Builder],
- * the default implementation is used.
- * @param internet Holds an implementation of [Network] interface. If it was not specified in [Kaspresso.Builder],
- * the default implementation is used.
- * @param phone Holds an implementation of [Phone] interface. If it was not specified in [Kaspresso.Builder],
- * the default implementation is used.
- * @param location Holds an implementation of [Location] interface. If it was not specified in [Kaspresso.Builder],
- * the default implementation is used.
- * @param keyboard Holds an implementation of [Keyboard] interface. If it was not specified in [Kaspresso.Builder],
- * the default implementation is used.
- * @param screenshots Holds an implementation of [Screenshots] interface. If it was not specified in [Kaspresso.Builder],
- * the default implementation is used.
- * @param accessibility Holds an implementation of [Accessibility] interface. If it was not specified in [Kaspresso.Builder],
- * the default implementation is used.
- * @param permissions Holds an implementation of [Permissions] interface. If it was not specified in [Kaspresso.Builder],
- * the default implementation is used.
- * @param exploit Holds an implementation of [Exploit] interface. If it was not specified in [Kaspresso.Builder],
- * the default implementation is used.
- * @param viewActionWatcherInterceptors Interceptors that are called by [com.kaspersky.kaspresso.proxy.ViewActionProxy]
- * before actually [androidx.test.espresso.ViewAction.perform] call.
- * @param viewAssertionWatcherInterceptors Interceptors that are called by [com.kaspersky.kaspresso.proxy.ViewAssertionProxy]
- * before actually [androidx.test.espresso.ViewAssertion.check] call.
- * @param atomWatcherInterceptors Interceptors that are called by [com.kaspersky.kaspresso.proxy.AtomProxy]
- * before actually [androidx.test.espresso.web.model.Atom.transform] call.
- * @param webAssertionWatcherInterceptors Interceptors that are called by [androidx.test.espresso.web.assertion.WebAssertionProxy]
- * before actually [androidx.test.espresso.web.assertion.WebAssertion.checkResult] call.
- * @param executingInterceptor An interceptor that actually manages the execution of actions or assertions. For example,
- * [FlakySafeExecutionInterceptor] performs multiple attempting to interact an action or assertion.
- * @param stepWatcherInterceptors An interceptors set that actually manages the execution of steps [TestContext.step].
- * Interceptors work using decorator pattern. First interceptor wraps others.
- * @param testRunWatcherInterceptors An interceptors set that actually manages the execution of test sections
- * [com.kaspersky.kaspresso.testcases.models.TestInfo]. Interceptor works using decorator pattern. First interceptor wraps others.
- * @param testLogger Holds an implementation of [UiTestLogger] interface for external usage.
+ * The storage of all Kaspresso preferences and entities, such as [AdbServer], [Device] and different interceptors.
  */
 data class Kaspresso(
     internal val libLogger: UiTestLogger,
@@ -136,19 +98,18 @@ data class Kaspresso(
     }
 
     /**
-     * A class for [Kaspresso] initialization. The right way to change [Kaspresso] settings is to use [Builder].
+     * The class for [Kaspresso] configuration and initialization. This is the way to set Kaspresso preferences.
      */
     class Builder {
 
         companion object {
-
             /**
-             * Puts the default settings pack to [Builder].
+             * Puts the default preferences and entities pack to [Builder].
              * Please be aware if you add some settings after [default] method. You can catch inconsistent state of the
-             * [Builder]. For example if you change [libLogger] after [default] method than all interceptors will work with
-             * old [libLogger].
+             * [Builder]. For example if you change [libLogger] after [default] method than all interceptors will work
+             * with old [libLogger].
              *
-             * @return an existing instance of [Builder].
+             * @return the new instance of [Builder].
              */
             fun default(): Builder {
                 return Builder().apply {
@@ -205,48 +166,184 @@ data class Kaspresso(
             }
         }
 
+        /**
+         * Holds an implementation of [UiTestLogger] interface for inner Kaspresso usage.
+         * If it was not specified, the default implementation with default tag is used.
+         */
         var libLogger: UiTestLogger = UiTestLoggerImpl(DEFAULT_LIB_LOGGER_TAG)
+
+        /**
+         * Holds an implementation of [UiTestLogger] interface for external developer's usage in tests.
+         * If it was not specified, the default implementation with default tag is used.
+         */
         var testLogger: UiTestLogger = UiTestLoggerImpl(DEFAULT_TEST_LOGGER_TAG)
 
         private val instrumentation: Instrumentation = InstrumentationRegistry.getInstrumentation()
         private val uiDevice = UiDevice.getInstance(instrumentation)
 
+        /**
+         * Holds an implementation of [AdbServer] interface. If it was not specified, the default implementation is used.
+         */
         var adbServer: AdbServer = AdbServerImpl(libLogger)
 
+        /**
+         * Holds an implementation of [Apps] interface. If it was not specified, the default implementation is used.
+         */
         var apps: Apps = AppsImpl(libLogger, instrumentation.context, uiDevice, adbServer)
+
+        /**
+         * Holds an implementation of [Activities] interface. If it was not specified, the default implementation is used.
+         */
         var activities: Activities = ActivitiesImpl(libLogger)
+
+        /**
+         * Holds an implementation of [Files] interface. If it was not specified, the default implementation is used.
+         */
         var files: Files = FilesImpl(adbServer)
+
+        /**
+         * Holds an implementation of [Network] interface. If it was not specified, the default implementation is used.
+         */
         var network: Network = NetworkImpl(instrumentation.targetContext, adbServer)
+
+        /**
+         * Holds an implementation of [Phone] interface. If it was not specified, the default implementation is used.
+         */
         var phone: Phone = PhoneImpl(adbServer)
+
+        /**
+         * Holds an implementation of [Location] interface. If it was not specified, the default implementation is used.
+         */
         var location: Location = LocationImpl(adbServer)
+
+        /**
+         * Holds an implementation of [Keyboard] interface. If it was not specified, the default implementation is used.
+         */
         var keyboard: Keyboard = KeyboardImpl(adbServer)
+
+        /**
+         * Holds an implementation of [Screenshots] interface. If it was not specified, the default implementation is used.
+         */
         var screenshots: Screenshots = ScreenshotsImpl(libLogger, activities)
+
+        /**
+         * Holds an implementation of [Accessibility] interface. If it was not specified, the default implementation is used.
+         */
         var accessibility: Accessibility = AccessibilityImpl()
+
+        /**
+         * Holds an implementation of [Permissions] interface. If it was not specified, the default implementation is used.
+         */
         var permissions: Permissions = PermissionsImpl(libLogger, uiDevice)
+
+        /**
+         * Holds an implementation of [HackPermissions] interface. If it was not specified, the default implementation is used.
+         */
         var hackPermissions: HackPermissions = HackPermissionsImpl(instrumentation.uiAutomation, libLogger)
+
+        /**
+         * Holds an implementation of [Exploit] interface. If it was not specified, the default implementation is used.
+         */
         var exploit: Exploit = ExploitImpl(activities, uiDevice, adbServer)
 
+        /**
+         * Holds the [FlakySafetyParams] for [com.kaspersky.kaspresso.flakysafety.FlakySafetyProvider]'s usage.
+         * If it was not specified, the default implementation is used.
+         */
         var flakySafetyParams: FlakySafetyParams = FlakySafetyParams()
+
+        /**
+         * Holds the [AutoScrollParams] for [com.kaspersky.kaspresso.autoscroll.AutoScrollProvider]'s usage.
+         * If it was not specified, the default implementation is used.
+         */
         var autoScrollParams: AutoScrollParams = AutoScrollParams()
 
+        /**
+         * Holds the list of [ViewActionWatcherInterceptor]s.
+         * If it was not specified, Kaspresso will use no [ViewActionWatcherInterceptor]s.
+         * These interceptors are called by [com.kaspersky.kaspresso.proxy.ViewActionProxy]
+         * before actual [androidx.test.espresso.ViewAction.perform] call.
+         */
         var viewActionWatcherInterceptors: MutableList<ViewActionWatcherInterceptor> = mutableListOf()
+
+        /**
+         * Holds the list of [ViewAssertionWatcherInterceptor]s.
+         * If it was not specified, Kaspresso will use no [ViewAssertionWatcherInterceptor]s.
+         * These interceptors are called by [com.kaspersky.kaspresso.proxy.ViewAssertionProxy]
+         * before actual [androidx.test.espresso.ViewAssertion.check] call.
+         */
         var viewAssertionWatcherInterceptors: MutableList<ViewAssertionWatcherInterceptor> = mutableListOf()
+
+        /**
+         * Holds the list of [AtomWatcherInterceptor]s.
+         * If it was not specified, Kaspresso will use no [AtomWatcherInterceptor]s.
+         * These interceptors are called by [com.kaspersky.kaspresso.proxy.AtomProxy]
+         * before [androidx.test.espresso.web.model.Atom] is actually called.
+         */
         var atomWatcherInterceptors: MutableList<AtomWatcherInterceptor> = mutableListOf()
+
+        /**
+         * Holds the list of [WebAssertionWatcherInterceptor]s.
+         * If it was not specified, Kaspresso will use no [WebAssertionWatcherInterceptor]s.
+         * These interceptors are called by [androidx.test.espresso.web.assertion.WebAssertionProxy]
+         * before actual [androidx.test.espresso.web.assertion.WebAssertion.checkResult] call.
+         */
         var webAssertionWatcherInterceptors: MutableList<WebAssertionWatcherInterceptor> = mutableListOf()
 
+        /**
+         * Holds the list of [ViewBehaviorInterceptor]s.
+         * If it was not specified, Kaspresso will use no [ViewBehaviorInterceptor]s.
+         * These interceptors are called by [com.kaspersky.kaspresso.interceptors.tokakao.impl.KakaoViewInterceptor]
+         * before actual [androidx.test.espresso.ViewInteraction.perform] and
+         * [androidx.test.espresso.ViewInteraction.check] calls.
+         */
         var viewBehaviorInterceptors: MutableList<ViewBehaviorInterceptor> = mutableListOf()
+
+        /**
+         * Holds the list of [DataBehaviorInterceptor]s.
+         * If it was not specified, Kaspresso will use no [DataBehaviorInterceptor]s.
+         * These interceptors are called by [com.kaspersky.kaspresso.interceptors.tokakao.impl.KakaoDataInterceptor]
+         * before actual [androidx.test.espresso.DataInteraction.check] call.
+         */
         var dataBehaviorInterceptors: MutableList<DataBehaviorInterceptor> = mutableListOf()
+
+        /**
+         * Holds the list of [WebBehaviorInterceptor]s.
+         * If it was not specified, Kaspresso will use no [WebBehaviorInterceptor]s.
+         * These interceptors are called by [com.kaspersky.kaspresso.interceptors.tokakao.impl.KakaoWebInterceptor]
+         * before actual [androidx.test.espresso.web.sugar.Web.WebInteraction.perform] and
+         * [androidx.test.espresso.web.sugar.Web.WebInteraction.check] calls.
+         */
         var webBehaviorInterceptors: MutableList<WebBehaviorInterceptor> = mutableListOf()
 
+        /**
+         * Holds the list of [StepWatcherInterceptor]s.
+         * If it was not specified, Kaspresso will use no [StepWatcherInterceptor]s.
+         * These interceptors are called by [com.kaspersky.kaspresso.testcases.core.testcontext.TestContext] in "step"
+         * method on both "step started", "step finished with success", "step finished with failure" and
+         * "step finally finished" events.
+         */
         var stepWatcherInterceptors: MutableList<StepWatcherInterceptor> = mutableListOf()
+
+        /**
+         * Holds the list of [TestRunWatcherInterceptor]s.
+         * If it was not specified, Kaspresso will use no [TestRunWatcherInterceptor]s.
+         * These interceptors are called by [com.kaspersky.kaspresso.testcases.core.TestRunner] in "run"
+         * method on "test started", on all [com.kaspersky.kaspresso.testcases.core.sections]' "section started",
+         * "section finished with success" and "section finished with failure", and "test finished" events.
+         */
         var testRunWatcherInterceptors: MutableList<TestRunWatcherInterceptor> = mutableListOf()
 
         /**
-         * An interceptor that is called on failures. It's [FailureHandler.intercept] method is being
-         * provide as the default [androidx.test.espresso.FailureHandler].
+         * Holds the implementation of the [androidx.test.espresso.FailureHandler] interface, that is called on every
+         * failure.
          */
         var failureHandler: FailureHandler? = null
 
+        /**
+         * Sets the Kaspressos's implementations of Kakao's [androidx.test.espresso.ViewInteraction] interceptor,
+         * [androidx.test.espresso.DataInteraction] interceptor and [androidx.test.espresso.WebInteraction] interceptor.
+         */
         private fun initInterception(kaspresso: Kaspresso) {
             val viewInterceptor = KakaoViewInterceptor(kaspresso)
             val dataInterceptor = KakaoDataInterceptor(kaspresso)
@@ -268,9 +365,11 @@ data class Kaspresso(
         }
 
         /**
-         * Terminating method to build built [Kaspresso] settings. Can be called only inside the framework
-         * package. Actually called when the base [com.kaspersky.kaspresso.testcases.api.BaseTestCase] class is
-         * constructed.
+         * Terminating method to build [Kaspresso] instance. Can be called only inside the framework package.
+         * Actually called when the base [com.kaspersky.kaspresso.testcases.api.testcase.BaseTestCase] class is
+         * instantiated.
+         *
+         * @return build [Kaspresso] instance.
          */
         internal fun build(): Kaspresso {
 

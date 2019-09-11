@@ -5,7 +5,7 @@ import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
 import com.kaspersky.kaspresso.testcases.models.TestBody
 
 /**
- * A representation of a set of actions to be invoked before the test.
+ * The representation of a set of actions to be invoked before the test.
  */
 class BeforeTestSection<InitData, Data> internal constructor(
     private val kaspresso: Kaspresso,

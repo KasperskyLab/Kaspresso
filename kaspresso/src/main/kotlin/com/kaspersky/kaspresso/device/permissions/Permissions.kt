@@ -1,7 +1,7 @@
 package com.kaspersky.kaspresso.device.permissions
 
 /**
- * An interface to work with permissions fairly by real permission dialogs.
+ * The interface to work with permissions fairly by real permission dialogs.
  */
 interface Permissions {
 

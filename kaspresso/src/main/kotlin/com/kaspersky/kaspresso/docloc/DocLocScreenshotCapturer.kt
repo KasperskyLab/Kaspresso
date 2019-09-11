@@ -12,8 +12,8 @@ import com.kaspersky.kaspresso.logger.UiTestLogger
 import java.io.File
 
 /**
- *  Class for saving and clearing docloc screenshots with metadata.
- *  @param screenshotsDir directory to save screenshots and metadata.
+ * The class for saving and clearing docloc screenshots with metadata.
+ * @param screenshotsDir directory to save screenshots and metadata.
  */
 internal class DocLocScreenshotCapturer(
     private val screenshotsDir: File,
@@ -32,8 +32,8 @@ internal class DocLocScreenshotCapturer(
     private val activityMetadata = ActivityMetadata(logger)
 
     /**
-     *  Capture screenshot and save it with metadata to [screenshotsDir].
-     *  @param screenshotName name of screenshot. Must match [a-zA-Z0-9_-]+
+     * Captures a screenshot and save it with metadata to [screenshotsDir].
+     * @param screenshotName name of screenshot. Must match [a-zA-Z0-9_-]+
      */
     fun captureScreenshot(screenshotName: String) {
         wait(timeoutMs = SCREENSHOT_CAPTURE_DELAY_MS, logger = logger) {
@@ -43,8 +43,8 @@ internal class DocLocScreenshotCapturer(
     }
 
     /**
-     *  Capture screenshot and save it to [screenshotsDir]/fails.
-     *  @param screenshotName name of screenshot. Must match [a-zA-Z0-9_-]+
+     * Captures a screenshot and save it to [screenshotsDir]/fails.
+     * @param screenshotName name of screenshot. Must match [a-zA-Z0-9_-]+
      */
     fun captureScreenshotOnFail(screenshotName: String) {
         wait(timeoutMs = SCREENSHOT_CAPTURE_DELAY_MS, logger = logger) { failScreenshoter.screenshot(screenshotName) }
