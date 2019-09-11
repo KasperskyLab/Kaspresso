@@ -1,9 +1,11 @@
 package com.kaspersky.kaspressample.device_tests
 
+import android.Manifest
 import android.net.ConnectivityManager
 import android.net.wifi.WifiManager
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
+import androidx.test.rule.GrantPermissionRule
 import com.agoda.kakao.screen.Screen
 import com.kaspersky.kaspressample.device.DeviceSampleActivity
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
@@ -20,6 +22,12 @@ class DeviceInternetSampleTest : TestCase() {
     companion object {
         private const val NETWORK_ESTABLISHMENT_DELAY = 1_500L
     }
+
+    @get:Rule
+    val runtimePermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
+        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        Manifest.permission.READ_EXTERNAL_STORAGE
+    )
 
     @get:Rule
     val activityTestRule = ActivityTestRule(DeviceSampleActivity::class.java, true, true)

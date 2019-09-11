@@ -42,12 +42,14 @@ class DeviceLocationSampleTest : TestCase() {
     }
 
     @get:Rule
-    val rule = ActivityTestRule(MainActivity::class.java, false, true)
-
-    @get:Rule
-    val permissionsRule: GrantPermissionRule = GrantPermissionRule.grant(
+    val runtimePermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
+        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        Manifest.permission.READ_EXTERNAL_STORAGE,
         Manifest.permission.ACCESS_FINE_LOCATION
     )
+
+    @get:Rule
+    val rule = ActivityTestRule(MainActivity::class.java, false, true)
 
     private lateinit var manager: LocationManager
 

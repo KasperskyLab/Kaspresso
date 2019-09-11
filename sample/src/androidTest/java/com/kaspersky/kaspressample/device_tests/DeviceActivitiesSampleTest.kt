@@ -16,13 +16,13 @@ import org.junit.runner.RunWith
 class DeviceActivitiesSampleTest : TestCase() {
 
     @get:Rule
-    val activityTestRule = ActivityTestRule(MainActivity::class.java, true, true)
-
-    @get:Rule
     val runtimePermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
         Manifest.permission.WRITE_EXTERNAL_STORAGE,
         Manifest.permission.READ_EXTERNAL_STORAGE
     )
+
+    @get:Rule
+    val activityTestRule = ActivityTestRule(MainActivity::class.java, true, true)
 
     @Test
     fun activitiesSampleTest() {

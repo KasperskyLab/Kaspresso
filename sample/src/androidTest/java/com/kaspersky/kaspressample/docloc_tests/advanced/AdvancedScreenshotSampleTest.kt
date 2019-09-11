@@ -1,11 +1,14 @@
 package com.kaspersky.kaspressample.docloc_tests.advanced
 
+import android.Manifest
 import android.graphics.Color
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspressample.docloc.ScreenshotSampleFragment
 import com.kaspersky.kaspressample.docloc.ScreenshotSampleView
 import com.kaspersky.kaspresso.annotations.ScreenShooterTest
 import com.kaspersky.kaspresso.testcases.api.testcase.DocLocScreenshotTestCase
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -18,6 +21,12 @@ class AdvancedScreenshotSampleTest : ProductDocLocScreenshotTestCase() {
 
     private lateinit var fragment: ScreenshotSampleFragment
     private lateinit var view: ScreenshotSampleView
+
+    @get:Rule
+    val runtimePermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
+        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        Manifest.permission.READ_EXTERNAL_STORAGE
+    )
 
     @ScreenShooterTest
     @Test

@@ -25,10 +25,13 @@ class DeviceScreenshotSampleTest : TestCase() {
     }
 
     @get:Rule
-    val activityRule = ActivityTestRule(DeviceSampleActivity::class.java, false, true)
+    val runtimePermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
+        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        Manifest.permission.READ_EXTERNAL_STORAGE
+    )
 
     @get:Rule
-    val permissionsRule: GrantPermissionRule = GrantPermissionRule.grant(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+    val activityRule = ActivityTestRule(DeviceSampleActivity::class.java, false, true)
 
     @Test
     fun screenshotSampleTest() {
