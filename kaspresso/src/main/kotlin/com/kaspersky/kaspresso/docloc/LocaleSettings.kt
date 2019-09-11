@@ -20,9 +20,9 @@ internal class LocaleSettings(
      */
     @SuppressLint("PrivateApi", "DiscouragedPrivateApi")
     fun changeLanguage(locale: Locale): Boolean {
-        logger.i("Attempt to change locale for Android OS Settings started")
+        logger.i("DocLoc: Attempt to change locale for Android OS Settings started")
         if (isNotGrantedChangeConfigurationPermission()) {
-            logger.i("Attempt to change locale for Android OS Settings failed")
+            logger.i("DocLoc: Attempt to change locale for Android OS Settings failed")
             return false
         }
         return try {
@@ -32,10 +32,10 @@ internal class LocaleSettings(
             configuration.javaClass.getDeclaredField("userSetLocale").setBoolean(configuration, true)
             configuration.javaClass.getDeclaredField("locale").set(configuration, locale)
             amService.javaClass.getDeclaredMethod("updateConfiguration", Configuration::class.java).invoke(amService, configuration)
-            logger.i("Attempt to change locale for Android OS Settings was successful")
+            logger.i("DocLoc: Attempt to change locale for Android OS Settings was successful")
             true
         } catch (error: Throwable) {
-            logger.e("Attempt to change locale for Android OS Settings failed with error=$error")
+            logger.e("DocLoc: Attempt to change locale for Android OS Settings failed with error=$error")
             false
         }
     }

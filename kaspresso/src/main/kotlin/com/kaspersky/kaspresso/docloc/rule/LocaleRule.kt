@@ -7,6 +7,7 @@ import androidx.test.runner.lifecycle.ActivityLifecycleCallback
 import androidx.test.runner.lifecycle.ActivityLifecycleMonitorRegistry
 import androidx.test.runner.lifecycle.Stage
 import com.kaspersky.kaspresso.device.Device
+import com.kaspersky.kaspresso.docloc.DoclocException
 import com.kaspersky.kaspresso.docloc.LocaleSettings
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import java.util.Locale
@@ -20,13 +21,11 @@ import org.junit.runners.model.Statement
 class LocaleRule internal constructor(
     private val locales: Set<Locale>,
     private val device: Device,
-    changeSystemLocale: Boolean,
-    logger: UiTestLogger
+    private val changeSystemLocale: Boolean,
+    private val logger: UiTestLogger
 ) : TestRule {
 
     private val localeSettings: LocaleSettings = LocaleSettings(device.context, logger)
-    private val systemLocaleShouldBeChanged: Boolean = changeSystemLocale &&
-            device.hackPermissions.grant(device.targetContext.packageName, Manifest.permission.CHANGE_CONFIGURATION)
 
     private var deviceLocale: Locale? = null
     private var currentLocale: Locale? = null
@@ -36,38 +35,39 @@ class LocaleRule internal constructor(
 
     override fun apply(base: Statement, description: Description): Statement {
         return object : Statement() {
-
             override fun evaluate() {
-                var cachedActivity: Activity? = null
-                val callback = ActivityLifecycleCallback { activity, stage ->
-                    if (stage == Stage.CREATED) {
-                        applyCurrentLocaleToContext(activity)
-                        cachedActivity = activity
-                    }
-                }
-
-                ActivityLifecycleMonitorRegistry.getInstance().addLifecycleCallback(callback)
-
-                try {
-                    deviceLocale = Locale.getDefault()
-
-                    for (locale in locales) {
-                        currentLocale = locale
-                        if (systemLocaleShouldBeChanged) {
-                            localeSettings.changeLanguage(locale)
-                        } else {
-                            applyCurrentLocaleToContext(cachedActivity ?: device.context)
-                        }
-                        base.evaluate()
-                    }
-                } finally {
-                    if (deviceLocale != null) {
-                        currentLocale = deviceLocale!!
-                        applyCurrentLocaleToContext(cachedActivity ?: device.context)
-                    }
-                    ActivityLifecycleMonitorRegistry.getInstance().removeLifecycleCallback(callback)
-                }
+                if (changeSystemLocale) changeLanguageInOs(base)
+                else changeLanguageInApp(base)
             }
+        }
+    }
+
+    private fun changeLanguageInApp(base: Statement) {
+        logger.i("DocLoc: changeLanguageInApp started")
+        var cachedActivity: Activity? = null
+        val callback = ActivityLifecycleCallback { activity, stage ->
+            if (stage == Stage.CREATED) {
+                cachedActivity = activity
+            }
+        }
+        ActivityLifecycleMonitorRegistry.getInstance().addLifecycleCallback(callback)
+
+        try {
+            deviceLocale = Locale.getDefault()
+
+            for (locale in locales) {
+                currentLocale = locale
+                logger.i("DocLoc: changeLanguageInApp is processing. New language = $locale")
+                applyCurrentLocaleToContext(cachedActivity ?: device.targetContext)
+                base.evaluate()
+            }
+        } finally {
+            if (deviceLocale != null) {
+                currentLocale = deviceLocale!!
+                logger.i("DocLoc: changeLanguageInOs is finishing. Return to language = $currentLocale")
+                applyCurrentLocaleToContext(device.targetContext)
+            }
+            ActivityLifecycleMonitorRegistry.getInstance().removeLifecycleCallback(callback)
         }
     }
 
@@ -78,4 +78,30 @@ class LocaleRule internal constructor(
         configuration.setLocale(currentLocale)
         resources.updateConfiguration(configuration, resources.displayMetrics)
     }
+
+    private fun changeLanguageInOs(base: Statement) {
+        logger.i("DocLoc: changeLanguageInOs started")
+        val permissionGranted = device.hackPermissions.grant(device.targetContext.packageName, Manifest.permission.CHANGE_CONFIGURATION)
+        if (!permissionGranted) {
+            throw DoclocException("The attempt to grant Manifest.permission.CHANGE_CONFIGURATION for " +
+                    "DocLoc screenshots of system windows failed"
+            )
+        }
+        try {
+            deviceLocale = Locale.getDefault()
+            for (locale in locales) {
+                currentLocale = locale
+                logger.i("DocLoc: changeLanguageInOs is processing. New language = $locale")
+                localeSettings.changeLanguage(locale)
+                base.evaluate()
+            }
+        } finally {
+            if (deviceLocale != null) {
+                currentLocale = deviceLocale!!
+                logger.i("DocLoc: changeLanguageInOs is finishing. Return to language = $currentLocale")
+                currentLocale?.let { localeSettings.changeLanguage(it) }
+            }
+        }
+    }
+
 }
