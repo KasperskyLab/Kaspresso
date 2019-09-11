@@ -4,8 +4,8 @@ import androidx.test.espresso.DataInteraction
 import com.agoda.kakao.list.KAbsListView
 import com.agoda.kakao.list.KAdapterItem
 import com.agoda.kakao.text.KTextView
-import com.kaspersky.kaspressample.flaky.ListStubActivity
 import com.kaspersky.kaspressample.R
+import com.kaspersky.kaspressample.flaky.ListStubActivity
 
 object ListStubScreen : KScreen<ListStubScreen>() {
 
