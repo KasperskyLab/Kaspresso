@@ -10,8 +10,8 @@ import kotlinx.android.synthetic.main.activity_scroll_view_sample.*
 class CommonFlakyActivity : AppCompatActivity() {
 
     private companion object {
-        private val DELAY_FOR_BUTTON = TimeUnit.SECONDS.toMillis(4)
-        private val DELAY_FOR_TEXTVIEW = TimeUnit.SECONDS.toMillis(8)
+        private val DELAY_FOR_BUTTON = TimeUnit.SECONDS.toMillis(6)
+        private val DELAY_FOR_TEXTVIEW = TimeUnit.SECONDS.toMillis(12)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
