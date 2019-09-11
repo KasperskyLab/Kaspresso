@@ -103,5 +103,4 @@ class LocaleRule internal constructor(
             }
         }
     }
-
 }
