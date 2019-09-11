@@ -20,6 +20,14 @@ internal class ComposeKakaoWebInterceptor(
     kaspresso: Kaspresso
 ) : KakaoInterceptor<Web.WebInteraction<*>, Atom<*>, WebAssertion<*>>(kaspresso) {
 
+    /**
+     * Folds all [WebBehaviorInterceptor]'s
+     * (except [FlakySafeWebBehaviorInterceptor] and [FailureLoggingWebBehaviorInterceptor])
+     * one into another in the order from the first to the last with the actual
+     * [androidx.test.espresso.web.sugar.Web.WebInteraction.check]  call as the initial, and invokes the resulting
+     * lambda. [FlakySafeWebBehaviorInterceptor] and [FailureLoggingWebBehaviorInterceptor] are excepted because they
+     * should not intercept each of composing actions or assertions but only the whole composed.
+     */
     override fun interceptCheck(interaction: Web.WebInteraction<*>, assertion: WebAssertion<*>) {
         kaspresso.webBehaviorInterceptors
             .filter { it !is FlakySafeWebBehaviorInterceptor && it !is FailureLoggingWebBehaviorInterceptor }
@@ -39,6 +47,14 @@ internal class ComposeKakaoWebInterceptor(
             ).invoke()
     }
 
+    /**
+     * Folds all [WebBehaviorInterceptor]'s
+     * (except [FlakySafeWebBehaviorInterceptor] and [FailureLoggingWebBehaviorInterceptor])
+     * one into another in the order from the first to the last with the actual
+     * [androidx.test.espresso.web.sugar.Web.WebInteraction.perform] call as the initial, and invokes the resulting
+     * lambda. [FlakySafeWebBehaviorInterceptor] and [FailureLoggingWebBehaviorInterceptor] are excepted because they
+     * should not intercept each of composing actions or assertions but only the whole composed.
+     */
     override fun interceptPerform(interaction: Web.WebInteraction<*>, action: Atom<*>) {
         kaspresso.webBehaviorInterceptors
             .filter { it !is FlakySafeWebBehaviorInterceptor && it !is FailureLoggingWebBehaviorInterceptor }

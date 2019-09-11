@@ -16,8 +16,8 @@ internal class KakaoDataInterceptor(
 ) : KakaoInterceptor<DataInteraction, ViewAction, ViewAssertion>(kaspresso) {
 
     /**
-     * Folds all [DataBehaviorInterceptor]'s one into another with the actual [interaction] "check" call as the initial,
-     * and invokes the resulting lambda.
+     * Folds all [DataBehaviorInterceptor]'s one into another in the order from the first to the last with the actual
+     * [androidx.test.espresso.DataInteraction.check] call as the initial, and invokes the resulting lambda.
      */
     override fun interceptCheck(interaction: DataInteraction, assertion: ViewAssertion) {
         kaspresso.dataBehaviorInterceptors.fold(

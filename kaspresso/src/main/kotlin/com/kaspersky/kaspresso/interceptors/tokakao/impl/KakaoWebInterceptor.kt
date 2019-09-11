@@ -18,8 +18,9 @@ internal class KakaoWebInterceptor(
 ) : KakaoInterceptor<Web.WebInteraction<*>, Atom<*>, WebAssertion<*>>(kaspresso) {
 
     /**
-     * Folds all [Web.WebInteraction]'s one into another with the actual [interaction] "check" call as the initial,
-     * and invokes the resulting lambda.
+     * Folds all [Web.WebInteraction]'s one into another in the order from the first to the last with the actual
+     * [androidx.test.espresso.web.sugar.Web.WebInteraction.check] call as the initial, and invokes the resulting
+     * lambda.
      */
     override fun interceptCheck(interaction: Web.WebInteraction<*>, assertion: WebAssertion<*>) {
         kaspresso.webBehaviorInterceptors.fold(
@@ -35,8 +36,9 @@ internal class KakaoWebInterceptor(
     }
 
     /**
-     * Folds all [Web.WebInteraction]'s one into another with the actual [interaction] "perform" call as the initial,
-     * and invokes the resulting lambda.
+     * Folds all [Web.WebInteraction]'s one into another in the order from the first to the last with the actual
+     * [androidx.test.espresso.web.sugar.Web.WebInteraction.perform] call as the initial, and invokes the resulting
+     * lambda.
      */
     override fun interceptPerform(interaction: Web.WebInteraction<*>, action: Atom<*>) {
         kaspresso.webBehaviorInterceptors.fold(

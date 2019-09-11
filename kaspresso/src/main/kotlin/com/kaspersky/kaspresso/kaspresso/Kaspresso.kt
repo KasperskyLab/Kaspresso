@@ -296,6 +296,10 @@ data class Kaspresso(
          * These interceptors are called by [com.kaspersky.kaspresso.interceptors.tokakao.impl.KakaoViewInterceptor]
          * before actual [androidx.test.espresso.ViewInteraction.perform] and
          * [androidx.test.espresso.ViewInteraction.check] calls.
+         * Note that the order of [ViewBehaviorInterceptor]s in this list is significant: the first item wil be
+         * at the lowest level of intercepting chain, and the last item will be at the highest level.
+         * For example: the first item actually wraps the [androidx.test.espresso.ViewInteraction.perform] call,
+         * the second item wraps the first item, and so on.
          */
         var viewBehaviorInterceptors: MutableList<ViewBehaviorInterceptor> = mutableListOf()
 
@@ -304,6 +308,10 @@ data class Kaspresso(
          * If it was not specified, Kaspresso will use no [DataBehaviorInterceptor]s.
          * These interceptors are called by [com.kaspersky.kaspresso.interceptors.tokakao.impl.KakaoDataInterceptor]
          * before actual [androidx.test.espresso.DataInteraction.check] call.
+         * Note that the order of [DataBehaviorInterceptor]s in this list is significant: the first item wil be
+         * at the lowest level of intercepting chain, and the last item will be at the highest level.
+         * For example: the first item actually wraps the [androidx.test.espresso.DataInteraction.check] call,
+         * the second item wraps the first item, and so on.
          */
         var dataBehaviorInterceptors: MutableList<DataBehaviorInterceptor> = mutableListOf()
 
@@ -313,6 +321,10 @@ data class Kaspresso(
          * These interceptors are called by [com.kaspersky.kaspresso.interceptors.tokakao.impl.KakaoWebInterceptor]
          * before actual [androidx.test.espresso.web.sugar.Web.WebInteraction.perform] and
          * [androidx.test.espresso.web.sugar.Web.WebInteraction.check] calls.
+         * Note that the order of [WebBehaviorInterceptor]s in this list is significant: the first item wil be
+         * at the lowest level of intercepting chain, and the last item will be at the highest level.
+         * For example: the first item actually wraps the [androidx.test.espresso.web.sugar.Web.WebInteraction.perform]
+         * call, the second item wraps the first item, and so on.
          */
         var webBehaviorInterceptors: MutableList<WebBehaviorInterceptor> = mutableListOf()
 

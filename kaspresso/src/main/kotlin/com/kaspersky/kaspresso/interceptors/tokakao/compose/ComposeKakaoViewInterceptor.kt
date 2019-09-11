@@ -22,8 +22,8 @@ internal class ComposeKakaoViewInterceptor(
     /**
      * Folds all [ViewBehaviorInterceptor]'s
      * (except [FlakySafeViewBehaviorInterceptor] and [FailureLoggingViewBehaviorInterceptor])
-     * one into another with the actual [interaction] "check" call as the initial,
-     * and invokes the resulting lambda.
+     * one into another in the order from the first to the last with the actual
+     * [androidx.test.espresso.ViewInteraction.check] call as the initial, and invokes the resulting lambda.
      * [FlakySafeViewBehaviorInterceptor] and [FailureLoggingViewBehaviorInterceptor] are excepted because they should
      * not intercept each of composing actions or assertions but only the whole composed.
      */
@@ -43,8 +43,8 @@ internal class ComposeKakaoViewInterceptor(
     /**
      * Folds all [ViewBehaviorInterceptor]'s
      * (except [FlakySafeViewBehaviorInterceptor] and [FailureLoggingViewBehaviorInterceptor])
-     * one into another with the actual [interaction] "perform" call as the initial,
-     * and invokes the resulting lambda.
+     * one into another in the order from the first to the last  with the actual
+     * [androidx.test.espresso.ViewInteraction.perform] call as the initial, and invokes the resulting lambda.
      * [FlakySafeViewBehaviorInterceptor] and [FailureLoggingViewBehaviorInterceptor] are excepted because they should
      * not intercept each of composing actions or assertions but only the whole composed.
      */
