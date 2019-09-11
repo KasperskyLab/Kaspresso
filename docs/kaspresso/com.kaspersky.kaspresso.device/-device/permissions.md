@@ -2,7 +2,7 @@
 
 # permissions
 
-`var permissions: `[`Permissions`](../../com.kaspersky.kaspresso.device.permissions/-permissions/index.md)
+`val permissions: `[`Permissions`](../../com.kaspersky.kaspresso.device.permissions/-permissions/index.md)
 
-Holds a reference to an implementation of [Permissions](../../com.kaspersky.kaspresso.device.permissions/-permissions/index.md) interface, held by [Configurator](../../com.kaspersky.kaspresso.configurator/-configurator/index.md).
+Holds the reference to the implementation of [Permissions](../../com.kaspersky.kaspresso.device.permissions/-permissions/index.md) interface.
 

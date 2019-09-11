@@ -4,13 +4,13 @@
 
 `class AppsImpl : `[`Apps`](../-apps/index.md)
 
-Default implementation of Apps interface.
+The implementation of the [Apps](../-apps/index.md) interface.
 
 ### Constructors
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | `AppsImpl()`<br>Default implementation of Apps interface. |
+| [&lt;init&gt;](-init-.md) | `AppsImpl(logger: `[`UiTestLogger`](../../com.kaspersky.kaspresso.logger/-ui-test-logger.md)`, context: `[`Context`](https://developer.android.com/reference/android/content/Context.html)`, uiDevice: UiDevice, adbServer: `[`AdbServer`](../../com.kaspersky.kaspresso.device.server/-adb-server/index.md)`)`<br>The implementation of the [Apps](../-apps/index.md) interface. |
 
 ### Properties
 
@@ -24,10 +24,17 @@ Default implementation of Apps interface.
 | Name | Summary |
 |---|---|
 | [install](install.md) | `fun install(apkPath: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Installs an app via ADB. |
-| [kill](kill.md) | `fun kill(packageName: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
-| [launch](launch.md) | `fun launch(packageName: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, data: `[`Uri`](https://developer.android.com/reference/android/net/Uri.html)`?): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
-| [openRecent](open-recent.md) | `fun openRecent(contentDescription: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
-| [openUrlInChrome](open-url-in-chrome.md) | `fun openUrlInChrome(url: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [kill](kill.md) | `fun kill(packageName: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Kills the process of the app by the given [packageName](kill.md#com.kaspersky.kaspresso.device.apps.AppsImpl$kill(kotlin.String)/packageName). |
+| [launch](launch.md) | `fun launch(packageName: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, data: `[`Uri`](https://developer.android.com/reference/android/net/Uri.html)`?): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Launches an app with given [packageName](launch.md#com.kaspersky.kaspresso.device.apps.AppsImpl$launch(kotlin.String, android.net.Uri)/packageName). |
+| [openRecent](open-recent.md) | `fun openRecent(contentDescription: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Opens the app from the recent list by the description. |
+| [openUrlInChrome](open-url-in-chrome.md) | `fun openUrlInChrome(url: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Opens the given [url](open-url-in-chrome.md#com.kaspersky.kaspresso.device.apps.AppsImpl$openUrlInChrome(kotlin.String)/url) on Chrome. |
 | [uninstall](uninstall.md) | `fun uninstall(packageName: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Uninstalls an app via ADB. |
 | [waitForAppLaunchAndReady](wait-for-app-launch-and-ready.md) | `fun waitForAppLaunchAndReady(timeout: `[`Long`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html)`, packageName: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
 | [waitForLauncher](wait-for-launcher.md) | `fun waitForLauncher(timeout: `[`Long`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html)`, launcherPackageName: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+
+### Companion Object Properties
+
+| Name | Summary |
+|---|---|
+| [LAUNCH_APP_TIMEOUT](-l-a-u-n-c-h_-a-p-p_-t-i-m-e-o-u-t.md) | `const val LAUNCH_APP_TIMEOUT: `[`Long`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html) |
+| [LAUNCH_RECENT_TIMEOUT](-l-a-u-n-c-h_-r-e-c-e-n-t_-t-i-m-e-o-u-t.md) | `const val LAUNCH_RECENT_TIMEOUT: `[`Long`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html) |

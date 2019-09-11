@@ -7,5 +7,5 @@
 Finds and returns resumed activity if it exists.
 
 **Return**
-nullable resumed activity
+nullable resumed activity.
 

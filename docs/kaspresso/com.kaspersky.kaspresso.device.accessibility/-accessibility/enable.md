@@ -2,12 +2,12 @@
 
 # enable
 
-`abstract fun enable(packageName: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, className: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)` = KASPERSKY_ACCESSIBILITY_SERVICE_CLASS_NAME): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`abstract fun enable(packageName: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, className: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Enables accessibility. Available since api 24.
 
 ### Parameters
 
-`packageName` - a package name of an accessibility service
+`packageName` - a package name of an accessibility service.
 
-`className` - a class name of an accessibility service
+`className` - a class name of an accessibility service.

@@ -1,0 +1,11 @@
+[kaspresso](../index.md) / [com.kaspersky.kaspresso.interceptors.behavior.impl.failure](./index.md)
+
+## Package com.kaspersky.kaspresso.interceptors.behavior.impl.failure
+
+### Types
+
+| Name | Summary |
+|---|---|
+| [FailureLoggingDataBehaviorInterceptor](-failure-logging-data-behavior-interceptor/index.md) | `class FailureLoggingDataBehaviorInterceptor : `[`DataBehaviorInterceptor`](../com.kaspersky.kaspresso.interceptors.behavior/-data-behavior-interceptor.md)`, `[`FailureLoggingProvider`](../com.kaspersky.kaspresso.failure/-failure-logging-provider/index.md)<br>The implementation of [DataBehaviorInterceptor](../com.kaspersky.kaspresso.interceptors.behavior/-data-behavior-interceptor.md) and [FailureLoggingProvider](../com.kaspersky.kaspresso.failure/-failure-logging-provider/index.md) interfaces. Provides failure logging functionality for [DataInteraction.check](#) calls. |
+| [FailureLoggingViewBehaviorInterceptor](-failure-logging-view-behavior-interceptor/index.md) | `class FailureLoggingViewBehaviorInterceptor : `[`ViewBehaviorInterceptor`](../com.kaspersky.kaspresso.interceptors.behavior/-view-behavior-interceptor.md)`, `[`FailureLoggingProvider`](../com.kaspersky.kaspresso.failure/-failure-logging-provider/index.md)<br>The implementation of [ViewBehaviorInterceptor](../com.kaspersky.kaspresso.interceptors.behavior/-view-behavior-interceptor.md) and [FailureLoggingProvider](../com.kaspersky.kaspresso.failure/-failure-logging-provider/index.md) interfaces. Provides failure logging functionality for [ViewInteraction.perform](#) and [ViewInteraction.check](#) calls. |
+| [FailureLoggingWebBehaviorInterceptor](-failure-logging-web-behavior-interceptor/index.md) | `class FailureLoggingWebBehaviorInterceptor : `[`WebBehaviorInterceptor`](../com.kaspersky.kaspresso.interceptors.behavior/-web-behavior-interceptor.md)`, `[`FailureLoggingProvider`](../com.kaspersky.kaspresso.failure/-failure-logging-provider/index.md)<br>The implementation of [WebBehaviorInterceptor](../com.kaspersky.kaspresso.interceptors.behavior/-web-behavior-interceptor.md) and [FailureLoggingProvider](../com.kaspersky.kaspresso.failure/-failure-logging-provider/index.md) interfaces. Provides failure logging functionality for [Web.WebInteraction.perform](#) and [Web.WebInteraction.check](#) calls. |

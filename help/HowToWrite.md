@@ -188,7 +188,7 @@ For this sentences we have introduced ```scenario``` where you can replace your 
 
 How is this api enabled? <br>
 Let's look at [com.kaspersky.kaspressample.simple_tests.SimpleTest] and [com.kaspersky.kaspressample.simple_tests.SimpleTestWithRule]. <br>
-At the first example we inherit ```ConfiguratorSimpleTest``` from ```TestCase```. At the second example we use ```TestCaseRule``` field. 
+At the first example we inherit ```SimpleTest``` from ```TestCase```. At the second example we use ```TestCaseRule``` field.
 Also you can use ```BaseTestCase``` and ```BaseTestCaseRule```. <br>
 
 ##### Test data for the test

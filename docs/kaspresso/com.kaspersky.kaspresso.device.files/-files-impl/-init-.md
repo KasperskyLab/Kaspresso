@@ -2,7 +2,7 @@
 
 # &lt;init&gt;
 
-`FilesImpl()`
+`FilesImpl(adbServer: `[`AdbServer`](../../com.kaspersky.kaspresso.device.server/-adb-server/index.md)`)`
 
-Default implementation of Files interface.
+The implementation of the [Files](../-files/index.md) interface.
 

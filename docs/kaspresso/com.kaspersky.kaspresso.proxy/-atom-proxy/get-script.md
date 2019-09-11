@@ -4,7 +4,7 @@
 
 `fun getScript(): `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)
 
-Simply calls [Atom.getScript](#) on wrapped [atom](#).
+Simply calls [Atom.getScript](#) on wrapped [atom](atom.md).
 
 **Return**
 the script to be evaluated.

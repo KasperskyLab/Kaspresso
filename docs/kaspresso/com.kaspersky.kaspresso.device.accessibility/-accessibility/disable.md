@@ -4,5 +4,5 @@
 
 `abstract fun disable(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
-Enables accessibility. Available since api 24.
+Disables accessibility. Available since api 24.
 

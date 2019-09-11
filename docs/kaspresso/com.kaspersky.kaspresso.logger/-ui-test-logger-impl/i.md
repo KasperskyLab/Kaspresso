@@ -4,13 +4,13 @@
 
 `fun i(text: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
-Overrides [UiTestLogger.i](../-ui-test-logger/i.md)
+Overrides [Logger.i](../-logger/i.md)
 
 Info level of logging.
 
 `fun i(tag: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, text: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
-Overrides [UiTestLogger.i](../-ui-test-logger/i.md)
+Overrides [Logger.i](../-logger/i.md)
 
 Info level of logging with tag.
 

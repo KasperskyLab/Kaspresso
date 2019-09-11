@@ -49,9 +49,9 @@ All actions to add Kaspresso in the test where Espresso and Kakao are using is o
 - extend ```BaseTestCase``` or ```TestCase```
 - add ```BaseTestCaseRule``` or ```TestCaseRule``` rule field in your test  
 
-### Configurator and Kaspresso interceptors example
+### Kaspresso configuring and Kaspresso interceptors example
 
-The example how to set Configurator and how to use Kaspresso interceptors are in [com.kaspersky.kaspressample/configurator].
+The example how to configure Kaspresso and how to use Kaspresso interceptors are in [com.kaspersky.kaspressample/configurator].
 
 ### Default Kaspresso settings
 ```BaseTestCase```, ```TestCase```, ```BaseTestCaseRule```, ```TestCaseRule``` are using default customized **Kaspresso**. <br>

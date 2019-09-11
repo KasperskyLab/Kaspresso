@@ -4,13 +4,13 @@
 
 `class ActivitiesImpl : `[`Activities`](../-activities/index.md)
 
-Default implementation of Activities interface.
+The implementation of the [Activities](../-activities/index.md) interface.
 
 ### Constructors
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | `ActivitiesImpl()`<br>Default implementation of Activities interface. |
+| [&lt;init&gt;](-init-.md) | `ActivitiesImpl(logger: `[`UiTestLogger`](../../com.kaspersky.kaspresso.logger/-ui-test-logger.md)`)`<br>The implementation of the [Activities](../-activities/index.md) interface. |
 
 ### Functions
 
