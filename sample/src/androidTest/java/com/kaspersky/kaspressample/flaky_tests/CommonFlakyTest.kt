@@ -16,11 +16,8 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class CommonFlakyTest : TestCase(
-    kaspressoBuilder = Kaspresso.Builder.default().apply {
-        flakySafetyParams.timeoutMs = 5_000L
-    }
-) {
+class CommonFlakyTest : TestCase() {
+    
     @get:Rule
     val runtimePermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
         Manifest.permission.WRITE_EXTERNAL_STORAGE,
@@ -44,20 +41,32 @@ class CommonFlakyTest : TestCase(
                 }
             }
 
-            step("Click button fifth button when it appears") {
+            step("Check ScroolView screen is visible") {
                 ScrollViewStubScreen {
                     scrollViewStub.isVisible()
+                }
+            }
 
+            step("Check btn5 is visible") {
+                ScrollViewStubScreen {
+                    compose {
+                        or(btn1) { flakySafely(timeoutMs = 5000) { hasText(R.string.common_flaky_final_button) } }
+                        or(btn5) { flakySafely(timeoutMs = 5000) { hasText(R.string.common_flaky_final_button) } }
+                    }
+                }
+            }
+
+            step("Check tv6 is visible") {
+                ScrollViewStubScreen {
                     compose {
                         or(tv6) { hasText(R.string.common_flaky_final_textview) }
                         or(btn1) { hasText(R.string.common_flaky_final_textview) }
                     }
+                }
+            }
 
-                    compose {
-                        or(btn1) { hasText(R.string.common_flaky_final_button) }
-                        or(btn5) { hasText(R.string.common_flaky_final_button) }
-                    }
-
+            step("Check #2 btn5 is visible") {
+                ScrollViewStubScreen {
                     btn5.compose {
                         or { hasText("Something wrong") }
                         or {
