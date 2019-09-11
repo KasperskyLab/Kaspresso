@@ -49,7 +49,7 @@
                 android:label="@string/list_stub"/>
 
         <activity
-                android:name=".flaky.CommonFlakyStubActivity"
+                android:name=".flaky.CommonFlakyActivity"
                 android:label="@string/scroll_view_stub"/>
 
         <activity
