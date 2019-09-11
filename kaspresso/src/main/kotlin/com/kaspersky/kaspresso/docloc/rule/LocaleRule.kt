@@ -1,6 +1,7 @@
 package com.kaspersky.kaspresso.docloc.rule
 
 import android.Manifest
+import android.app.Activity
 import android.content.Context
 import androidx.test.runner.lifecycle.ActivityLifecycleCallback
 import androidx.test.runner.lifecycle.ActivityLifecycleMonitorRegistry
@@ -37,9 +38,11 @@ class LocaleRule internal constructor(
         return object : Statement() {
 
             override fun evaluate() {
+                var cachedActivity: Activity? = null
                 val callback = ActivityLifecycleCallback { activity, stage ->
                     if (stage == Stage.CREATED) {
                         applyCurrentLocaleToContext(activity)
+                        cachedActivity = activity
                     }
                 }
 
@@ -53,16 +56,15 @@ class LocaleRule internal constructor(
                         if (systemLocaleShouldBeChanged) {
                             localeSettings.changeLanguage(locale)
                         } else {
-                            applyCurrentLocaleToContext(device.context)
+                            applyCurrentLocaleToContext(cachedActivity ?: device.context)
                         }
                         base.evaluate()
                     }
                 } finally {
                     if (deviceLocale != null) {
                         currentLocale = deviceLocale!!
-                        applyCurrentLocaleToContext(device.context)
+                        applyCurrentLocaleToContext(cachedActivity ?: device.context)
                     }
-
                     ActivityLifecycleMonitorRegistry.getInstance().removeLifecycleCallback(callback)
                 }
             }
