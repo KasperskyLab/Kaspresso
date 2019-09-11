@@ -16,7 +16,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class ScrollViewStubTest : TestCase(
+class CommonFlakyTest : TestCase(
     kaspressoBuilder = Kaspresso.Builder.default().apply {
         flakySafetyParams.timeoutMs = 5_000L
     }
