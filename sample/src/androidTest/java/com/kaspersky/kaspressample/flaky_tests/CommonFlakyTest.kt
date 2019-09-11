@@ -61,21 +61,6 @@ class CommonFlakyTest : TestCase() {
                     }
                 }
             }
-
-            step("Check btn5's text again and click on it") {
-                ScrollViewSampleScreen {
-                    btn5.compose {
-                        or {
-                            hasText("Something wrong")
-                            click()
-                        }
-                        or {
-                            hasText(R.string.common_flaky_final_button)
-                            click()
-                        }
-                    }
-                }
-            }
         }
     }
 }
