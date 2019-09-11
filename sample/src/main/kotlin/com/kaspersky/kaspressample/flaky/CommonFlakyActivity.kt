@@ -5,7 +5,7 @@ import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import com.kaspersky.kaspressample.R
 import java.util.concurrent.TimeUnit
-import kotlinx.android.synthetic.main.activity_scroll_view_stub.*
+import kotlinx.android.synthetic.main.activity_scroll_view_sample.*
 
 class CommonFlakyActivity : AppCompatActivity() {
 
@@ -16,13 +16,13 @@ class CommonFlakyActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_scroll_view_stub)
+        setContentView(R.layout.activity_scroll_view_sample)
 
         Handler(mainLooper)
-            .apply { postDelayed({ scroll_view_stub_tv6.text = getString(R.string.common_flaky_final_textview) },
+            .apply { postDelayed({ scroll_view_tv6.text = getString(R.string.common_flaky_final_textview) },
                 DELAY_FOR_TEXTVIEW
             ) }
-            .apply { postDelayed({ scroll_view_stub_btn5.text = getString(R.string.common_flaky_final_button) },
+            .apply { postDelayed({ scroll_view_btn5.text = getString(R.string.common_flaky_final_button) },
                 DELAY_FOR_BUTTON
             ) }
     }

@@ -7,7 +7,7 @@ import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.R
 import com.kaspersky.kaspressample.screen.MainScreen
-import com.kaspersky.kaspressample.screen.ScrollViewStubScreen
+import com.kaspersky.kaspressample.screen.ScrollViewSampleScreen
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.junit.Rule
 import org.junit.Test
@@ -40,13 +40,13 @@ class CommonFlakyTest : TestCase() {
             }
 
             step("Check ScrollView screen is visible") {
-                ScrollViewStubScreen {
-                    scrollViewStub.isVisible()
+                ScrollViewSampleScreen {
+                    scrollView.isVisible()
                 }
             }
 
             step("Check btn5's text") {
-                ScrollViewStubScreen {
+                ScrollViewSampleScreen {
                     flakySafely(timeoutMs = 5_000) {
                         compose {
                             or(btn5) { hasText(R.string.common_flaky_final_button) }
@@ -57,7 +57,7 @@ class CommonFlakyTest : TestCase() {
             }
 
             step("Check tv6's text") {
-                ScrollViewStubScreen {
+                ScrollViewSampleScreen {
                     flakySafely(timeoutMs = 5_000) {
                         compose {
                             or(tv6) { hasText(R.string.common_flaky_final_textview) }
@@ -68,7 +68,7 @@ class CommonFlakyTest : TestCase() {
             }
 
             step("Check btn5's text again and click on it") {
-                ScrollViewStubScreen {
+                ScrollViewSampleScreen {
                     btn5.compose {
                         or {
                             hasText("Something wrong")

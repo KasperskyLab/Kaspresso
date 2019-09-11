@@ -41,16 +41,8 @@
                 android:theme="@style/Theme.AppCompat.NoActionBar"/>
 
         <activity
-                android:name=".flaky.RecyclerStubActivity"
-                android:label="@string/recycler_stub"/>
-
-        <activity
-                android:name=".flaky.ListStubActivity"
-                android:label="@string/list_stub"/>
-
-        <activity
                 android:name=".flaky.CommonFlakyActivity"
-                android:label="@string/scroll_view_stub"/>
+                android:label="@string/scroll_view_sample"/>
 
         <activity
                 android:name=".docloc.FragmentTestActivity"
