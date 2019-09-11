@@ -7,7 +7,6 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspressample.devicesample.DeviceSampleActivity
-import com.kaspersky.kaspressample.screen.DeviceSampleScreen
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
 import org.junit.Assert.assertTrue
@@ -24,7 +23,7 @@ import org.junit.runner.RunWith
  * It's needed measure because of AndroidJUnit Runner specific that doesn't reset state of app between tests.
  */
 @RunWith(AndroidJUnit4::class)
-class DevicePermissionsSampleTest : TestCase() {
+class DeviceHackPermissionsSampleTest : TestCase() {
 
     @get:Rule
     val activityTestRule = ActivityTestRule(DeviceSampleActivity::class.java, false, true)
@@ -44,18 +43,7 @@ class DevicePermissionsSampleTest : TestCase() {
         }.run {
 
             step("Request permissions") {
-                DeviceSampleScreen {
-                    // Button click requests permission using default Android dialog
-                    requestPermissionButton {
-                        click()
-                    }
-                }
-
-                device.permissions.apply {
-                    flakySafely { assertTrue(isDialogVisible()) }
-                    allowViaDialog()
-                }
-
+                device.hackPermissions.grant(device.targetContext.packageName, Manifest.permission.READ_CALL_LOG)
                 // Contacts permission should be granted now
                 assertTrue(hasCallLogPermission())
             }
