@@ -12,6 +12,10 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
+/**
+ * An example of [DocLocScreenshotTestCase] usage with locale's changing at OS.
+ * For more information see DocLoc wiki page.
+ */
 @RunWith(AndroidJUnit4::class)
 class ChangeSysLanguageTestCase : DocLocScreenshotTestCase(
     screenshotsDirectory = File("screenshots"),

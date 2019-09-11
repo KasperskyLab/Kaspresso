@@ -1,4 +1,4 @@
-package com.kaspersky.kaspressample
+package com.kaspersky.kaspressample.flaky
 
 import android.graphics.Color
 import android.os.Bundle
@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.kaspersky.kaspressample.R
 import kotlinx.android.synthetic.main.activity_list_stub.*
-import kotlinx.android.synthetic.main.list_stub_item.view.*
 
 class ListStubActivity : AppCompatActivity() {
 
@@ -33,7 +33,8 @@ class ListStubActivity : AppCompatActivity() {
                         convertView.tag as StubViewHolder
                     } else {
                         view = layoutInflater.inflate(R.layout.list_stub_item, null)
-                        StubViewHolder(view.findViewById(R.id.title)).apply { view.tag = this }
+                        StubViewHolder(view.findViewById(R.id.title))
+                            .apply { view.tag = this }
                     }
 
                     vh.apply {

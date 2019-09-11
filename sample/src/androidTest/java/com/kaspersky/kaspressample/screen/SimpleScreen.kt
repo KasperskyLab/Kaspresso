@@ -3,7 +3,7 @@ package com.kaspersky.kaspressample.screen
 import com.agoda.kakao.edit.KEditText
 import com.agoda.kakao.text.KButton
 import com.kaspersky.kaspressample.R
-import com.kaspersky.kaspressample.SimpleActivity
+import com.kaspersky.kaspressample.simple.SimpleActivity
 
 object SimpleScreen : KScreen<SimpleScreen>() {
 

@@ -3,12 +3,12 @@ package com.kaspersky.kaspressample.screen
 import com.agoda.kakao.scroll.KScrollView
 import com.agoda.kakao.text.KButton
 import com.kaspersky.kaspressample.R
-import com.kaspersky.kaspressample.ScrollViewStubActivity
+import com.kaspersky.kaspressample.flaky.CommonFlakyStubActivity
 
 object ScrollViewStubScreen : KScreen<ScrollViewStubScreen>() {
 
     override val layoutId: Int? = R.layout.activity_scroll_view_stub
-    override val viewClass: Class<*>? = ScrollViewStubActivity::class.java
+    override val viewClass: Class<*>? = CommonFlakyStubActivity::class.java
 
     val scrollViewStub = KScrollView {
         withId(R.id.scroll_view)

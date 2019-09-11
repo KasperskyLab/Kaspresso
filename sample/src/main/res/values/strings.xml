@@ -25,4 +25,15 @@
     <string name="change_color_to_black">Set background to black</string>
     <string name="change_color_to_red">Set background to red</string>
     <string name="counter_value">Current value: %d</string>
+
+    <!-- Screenshooter sample test -->
+    <string name="common_flaky_final_textview">TextView</string>
+    <string name="common_flaky_final_button">Button</string>
+    <string name="common_flaky_start_1">1</string>
+    <string name="common_flaky_start_2">2</string>
+    <string name="common_flaky_start_3">3</string>
+    <string name="common_flaky_start_4">4</string>
+    <string name="common_flaky_start_5">5</string>
+    <string name="common_flaky_start_6">6</string>
+
 </resources>

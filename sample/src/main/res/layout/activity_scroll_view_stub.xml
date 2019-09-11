@@ -18,33 +18,33 @@
                     android:id="@+id/scroll_view_stub_btn1"
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
-                    android:text="1"/>
+                    android:text="@string/common_flaky_start_1"/>
 
             <Button
                     android:id="@+id/scroll_view_stub_btn2"
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
                     android:background="@color/colorPrimary"
-                    android:text="2"/>
+                    android:text="@string/common_flaky_start_2"/>
 
             <Button
                     android:id="@+id/scroll_view_stub_btn3"
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
-                    android:text="3"/>
+                    android:text="@string/common_flaky_start_3"/>
 
             <Button
                     android:id="@+id/scroll_view_stub_btn4"
                     android:layout_width="match_parent"
                     android:background="@color/colorPrimary"
                     android:layout_height="300dp"
-                    android:text="4"/>
+                    android:text="@string/common_flaky_start_4"/>
 
             <Button
                     android:id="@+id/scroll_view_stub_btn5"
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
-                    android:text="5"/>
+                    android:text="@string/common_flaky_start_5"/>
 
             <TextView
                     android:id="@+id/scroll_view_stub_tv6"
@@ -53,7 +53,7 @@
                     android:background="@color/colorPrimary"
                     android:textStyle="bold"
                     android:gravity="center"
-                    android:text="6"/>
+                    android:text="@string/common_flaky_start_6"/>
 
         </LinearLayout>
 

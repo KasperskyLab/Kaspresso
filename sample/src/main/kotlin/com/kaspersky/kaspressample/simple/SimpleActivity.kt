@@ -1,8 +1,9 @@
-package com.kaspersky.kaspressample
+package com.kaspersky.kaspressample.simple
 
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.kaspersky.kaspressample.R
 import java.util.concurrent.Executors
 import kotlinx.android.synthetic.main.activity_simple.*
 

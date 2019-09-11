@@ -1,4 +1,4 @@
-package com.kaspersky.kaspressample.scroll_tests
+package com.kaspersky.kaspressample.flaky_tests
 
 import android.Manifest
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -6,6 +6,7 @@ import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
 import com.agoda.kakao.text.KButton
 import com.kaspersky.kaspressample.MainActivity
+import com.kaspersky.kaspressample.R
 import com.kaspersky.kaspressample.screen.MainScreen
 import com.kaspersky.kaspressample.screen.ScrollViewStubScreen
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
@@ -43,32 +44,26 @@ class ScrollViewStubTest : TestCase(
                 }
             }
 
-            step("Click button \"bzzz\" when it appears") {
+            step("Click button fifth button when it appears") {
                 ScrollViewStubScreen {
                     scrollViewStub.isVisible()
 
-                    val action: KButton.() -> Unit = {
-                        hasText("zbzbz")
-                        click()
+                    compose {
+                        or(tv6) { hasText(R.string.common_flaky_final_textview) }
+                        or(btn1) { hasText(R.string.common_flaky_final_textview) }
                     }
 
                     compose {
-                        or(tv6) { hasText("bzzz") }
-                        or(btn1) { hasText("bzzz") }
-                    }
-
-                    compose {
-                        or(btn5) { hasText("bzzz") }
-                        or(btn1) { hasText("bzzz") }
+                        or(btn1) { hasText(R.string.common_flaky_final_button) }
+                        or(btn5) { hasText(R.string.common_flaky_final_button) }
                     }
 
                     btn5.compose {
-                        or { hasText("zzzb") }
+                        or { hasText("Something wrong") }
                         or {
-                            hasText("bzzz")
+                            hasText(R.string.common_flaky_final_button)
                             click()
                         }
-                        or(action)
                     }
                 }
             }

@@ -5,9 +5,14 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.kaspersky.kaspressample.docloc.ScreenshotSampleFragment
 import com.kaspersky.kaspressample.docloc.ScreenshotSampleView
 import com.kaspersky.kaspresso.annotations.ScreenShooterTest
+import com.kaspersky.kaspresso.testcases.api.testcase.DocLocScreenshotTestCase
 import org.junit.Test
 import org.junit.runner.RunWith
 
+/**
+ * An example of advanced [DocLocScreenshotTestCase] usage.
+ * For more information see DocLoc wiki page.
+ */
 @RunWith(AndroidJUnit4::class)
 class AdvancedScreenshotSampleTest : ProductDocLocScreenshotTestCase() {
 

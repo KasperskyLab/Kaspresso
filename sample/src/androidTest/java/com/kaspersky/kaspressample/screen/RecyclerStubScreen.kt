@@ -5,7 +5,7 @@ import com.agoda.kakao.recycler.KRecyclerItem
 import com.agoda.kakao.recycler.KRecyclerView
 import com.agoda.kakao.text.KTextView
 import com.kaspersky.kaspressample.R
-import com.kaspersky.kaspressample.RecyclerStubActivity
+import com.kaspersky.kaspressample.flaky.RecyclerStubActivity
 import org.hamcrest.Matcher
 
 object RecyclerStubScreen : KScreen<RecyclerStubScreen>() {

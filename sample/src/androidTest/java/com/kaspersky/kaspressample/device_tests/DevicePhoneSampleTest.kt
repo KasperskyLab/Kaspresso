@@ -7,7 +7,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
 import com.agoda.kakao.screen.Screen
-import com.kaspersky.kaspressample.devicesample.DeviceSampleActivity
+import com.kaspersky.kaspressample.device.DeviceSampleActivity
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
 import org.junit.Assert.assertEquals

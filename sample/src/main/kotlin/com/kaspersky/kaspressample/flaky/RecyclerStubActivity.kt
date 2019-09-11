@@ -1,4 +1,4 @@
-package com.kaspersky.kaspressample
+package com.kaspersky.kaspressample.flaky
 
 import android.graphics.Color
 import android.os.Bundle
@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.kaspersky.kaspressample.R
 import kotlinx.android.synthetic.main.activity_recycler_stub.*
 
 class RecyclerStubActivity : AppCompatActivity() {
@@ -31,7 +32,11 @@ class RecyclerStubActivity : AppCompatActivity() {
 
                 override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StubViewHolder =
                     StubViewHolder(
-                        LayoutInflater.from(parent.context).inflate(R.layout.list_stub_item, parent, false)
+                        LayoutInflater.from(parent.context).inflate(
+                            R.layout.list_stub_item,
+                            parent,
+                            false
+                        )
                     )
 
                 override fun onBindViewHolder(viewHolder: StubViewHolder, position: Int) =

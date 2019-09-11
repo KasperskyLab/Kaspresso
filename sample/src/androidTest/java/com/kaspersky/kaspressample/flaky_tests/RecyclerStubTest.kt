@@ -1,19 +1,19 @@
-package com.kaspersky.kaspressample.scroll_tests
+package com.kaspersky.kaspressample.flaky_tests
 
 import android.Manifest
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspressample.MainActivity
-import com.kaspersky.kaspressample.screen.ListStubScreen
 import com.kaspersky.kaspressample.screen.MainScreen
+import com.kaspersky.kaspressample.screen.RecyclerStubScreen
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class ListStubTest : TestCase() {
+class RecyclerStubTest : TestCase() {
 
     @get:Rule
     val runtimePermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
@@ -30,23 +30,22 @@ class ListStubTest : TestCase() {
             activityTestRule.launchActivity(null)
         }.after {
         }.run {
-            step("Open List Stub Screen") {
+            step("Open Recycler Stub Screen") {
                 MainScreen {
-                    listStubButton {
+                    recyclerStubButton {
                         click()
                     }
                 }
             }
 
             step("Find 56th element") {
-                ListStubScreen {
-                    listStub {
+                RecyclerStubScreen {
+                    recyclerStub {
                         isVisible()
                         hasSize(100)
 
-                        childWith<ListStubScreen.StubItem> {
-                            isInstanceOf(String::class.java)
-                            equals("56")
+                        childWith<RecyclerStubScreen.StubItem> {
+                            withDescendant { withText("56") }
                         } perform {
                             isVisible()
                         }

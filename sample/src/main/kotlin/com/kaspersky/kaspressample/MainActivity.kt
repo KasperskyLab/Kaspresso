@@ -3,6 +3,11 @@ package com.kaspersky.kaspressample
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.kaspersky.kaspressample.flaky.ListStubActivity
+import com.kaspersky.kaspressample.flaky.RecyclerStubActivity
+import com.kaspersky.kaspressample.flaky.CommonFlakyStubActivity
+import com.kaspersky.kaspressample.simple.SimpleActivity
+import com.kaspersky.kaspressample.web.WebViewActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -37,7 +42,7 @@ class MainActivity : AppCompatActivity() {
 
         activity_main_button_scroll_view_stub.setOnClickListener {
             startActivity(
-                Intent(this, ScrollViewStubActivity::class.java)
+                Intent(this, CommonFlakyStubActivity::class.java)
             )
         }
     }

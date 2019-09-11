@@ -1,4 +1,4 @@
-package com.kaspersky.kaspressample.devicesample
+package com.kaspersky.kaspressample.device
 
 import android.accessibilityservice.AccessibilityService
 import android.view.accessibility.AccessibilityEvent

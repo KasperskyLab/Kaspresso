@@ -3,7 +3,7 @@ package com.kaspersky.kaspressample.docloc_tests
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import com.agoda.kakao.screen.Screen
-import com.kaspersky.kaspressample.SimpleActivity
+import com.kaspersky.kaspressample.simple.SimpleActivity
 import com.kaspersky.kaspressample.screen.SimpleScreen
 import com.kaspersky.kaspresso.annotations.ScreenShooterTest
 import com.kaspersky.kaspresso.testcases.api.testcase.DocLocScreenshotTestCase
@@ -13,8 +13,8 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 /**
- * An example of [DocLocScreenshotTestCase] usage. For more information see
- * help/DocLocScreenshotTests.md page.
+ * An example of [DocLocScreenshotTestCase] usage.
+ * For more information see DocLoc wiki page.
  */
 @RunWith(AndroidJUnit4::class)
 class ScreenshotSampleTest : DocLocScreenshotTestCase(

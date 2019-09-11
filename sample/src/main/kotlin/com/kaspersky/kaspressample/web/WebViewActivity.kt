@@ -1,4 +1,4 @@
-package com.kaspersky.kaspressample
+package com.kaspersky.kaspressample.web
 
 import android.annotation.TargetApi
 import android.os.Build
@@ -7,6 +7,7 @@ import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.appcompat.app.AppCompatActivity
+import com.kaspersky.kaspressample.R
 import kotlinx.android.synthetic.main.activity_webview.*
 
 class WebViewActivity : AppCompatActivity() {

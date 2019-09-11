@@ -32,24 +32,24 @@
         </activity>
 
         <activity
-                android:name=".SimpleActivity"
+                android:name=".simple.SimpleActivity"
                 android:label="@string/simple_screen"/>
 
         <activity
-                android:name=".WebViewActivity"
+                android:name=".web.WebViewActivity"
                 android:label="@string/webview"
                 android:theme="@style/Theme.AppCompat.NoActionBar"/>
 
         <activity
-                android:name=".RecyclerStubActivity"
+                android:name=".flaky.RecyclerStubActivity"
                 android:label="@string/recycler_stub"/>
 
         <activity
-                android:name=".ListStubActivity"
+                android:name=".flaky.ListStubActivity"
                 android:label="@string/list_stub"/>
 
         <activity
-                android:name=".ScrollViewStubActivity"
+                android:name=".flaky.CommonFlakyStubActivity"
                 android:label="@string/scroll_view_stub"/>
 
         <activity
@@ -58,11 +58,11 @@
 
 
         <activity
-                android:name=".devicesample.DeviceSampleActivity"
+                android:name=".device.DeviceSampleActivity"
                 android:label="@string/device_sample_title"/>
 
         <service
-                android:name=".devicesample.DeviceSampleAccessibilityService"
+                android:name=".device.DeviceSampleAccessibilityService"
                 android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"
                 android:label="@string/device_sample_accessibility_service_title">
             <intent-filter>

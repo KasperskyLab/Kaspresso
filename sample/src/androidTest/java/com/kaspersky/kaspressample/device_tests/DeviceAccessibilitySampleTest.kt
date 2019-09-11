@@ -6,8 +6,8 @@ import android.provider.Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import com.agoda.kakao.screen.Screen
-import com.kaspersky.kaspressample.devicesample.DeviceSampleAccessibilityService
-import com.kaspersky.kaspressample.devicesample.DeviceSampleActivity
+import com.kaspersky.kaspressample.device.DeviceSampleAccessibilityService
+import com.kaspersky.kaspressample.device.DeviceSampleActivity
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
 import org.junit.Assert.assertFalse
