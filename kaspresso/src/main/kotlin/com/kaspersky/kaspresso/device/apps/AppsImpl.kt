@@ -3,10 +3,10 @@ package com.kaspersky.kaspresso.device.apps
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.support.test.uiautomator.By
-import android.support.test.uiautomator.UiDevice
-import android.support.test.uiautomator.UiSelector
-import android.support.test.uiautomator.Until
+import androidx.test.uiautomator.By
+import androidx.test.uiautomator.UiDevice
+import androidx.test.uiautomator.UiSelector
+import androidx.test.uiautomator.Until
 import com.kaspersky.kaspresso.device.server.AdbServer
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import org.hamcrest.CoreMatchers
@@ -14,12 +14,13 @@ import org.hamcrest.MatcherAssert
 import org.junit.Assert
 
 /**
- * Default implementation of Apps interface.
+ * The implementation of the [Apps] interface.
  */
 class AppsImpl(
     private val logger: UiTestLogger,
     private val context: Context,
-    private val uiDevice: UiDevice
+    private val uiDevice: UiDevice,
+    private val adbServer: AdbServer
 ) : Apps {
 
     companion object {
@@ -35,25 +36,25 @@ class AppsImpl(
     override val targetAppPackageName: String = context.packageName
 
     /**
-     *  Installs an app via ADB.
+     * Installs an app via ADB.
      *
-     *  Required Permissions: INTERNET.
+     * Required Permissions: INTERNET.
      *
-     *  @param apkPath a path to an apk to be installed. The apk is hosted on the test server.
+     * @param apkPath a path to an apk to be installed. The apk is hosted on the test server.
      */
     override fun install(apkPath: String) {
-        AdbServer.performAdb("install $apkPath")
+        adbServer.performAdb("install $apkPath")
     }
 
     /**
-     *  Uninstalls an app via ADB.
+     * Uninstalls an app via ADB.
      *
-     *  Required Permissions: INTERNET.
+     * Required Permissions: INTERNET.
      *
-     *  @param packageName an android package name of an app to be deleted.
+     * @param packageName an android package name of an app to be deleted.
      */
     override fun uninstall(packageName: String) {
-        AdbServer.performAdb("uninstall $packageName")
+        adbServer.performAdb("uninstall $packageName")
     }
 
     override fun waitForLauncher(timeout: Long, launcherPackageName: String) {
@@ -77,8 +78,19 @@ class AppsImpl(
         )
     }
 
+    /**
+     * Opens the given [url] on Chrome.
+     *
+     * @param url the url to be opened.
+     */
     override fun openUrlInChrome(url: String) = launch(chromePackageName, Uri.parse(url))
 
+    /**
+     * Launches an app with given [packageName].
+     *
+     * @param packageName the package name of an app to launch.
+     * @param data the data to put to the launch intent.
+     */
     override fun launch(packageName: String, data: Uri?) {
         val intent = context.packageManager
             ?.getLaunchIntentForPackage(packageName)
@@ -98,6 +110,11 @@ class AppsImpl(
         uiDevice.wait(condition, LAUNCH_APP_TIMEOUT)
     }
 
+    /**
+     * Opens the app from the recent list by the description.
+     *
+     * @param contentDescription the description of the app to launch.
+     */
     override fun openRecent(contentDescription: String) {
         uiDevice.pressRecentApps()
 
@@ -113,6 +130,11 @@ class AppsImpl(
         Thread.sleep(LAUNCH_RECENT_TIMEOUT)
     }
 
+    /**
+     * Kills the process of the app by the given [packageName].
+     *
+     * @param packageName the package name of the app to be killed.
+     */
     override fun kill(packageName: String) {
         Runtime.getRuntime().exec(arrayOf("am", "force-stop", packageName))
     }

@@ -1,13 +1,15 @@
 package com.kaspersky.kaspressample.device_tests
 
+import android.Manifest
 import android.os.Build
 import android.provider.Settings
 import android.provider.Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES
-import android.support.test.rule.ActivityTestRule
-import android.support.test.runner.AndroidJUnit4
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.rule.ActivityTestRule
+import androidx.test.rule.GrantPermissionRule
 import com.agoda.kakao.screen.Screen
-import com.kaspersky.kaspressample.devicesample.DeviceSampleAccessibilityService
-import com.kaspersky.kaspressample.devicesample.DeviceSampleActivity
+import com.kaspersky.kaspressample.device.DeviceSampleAccessibilityService
+import com.kaspersky.kaspressample.device.DeviceSampleActivity
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
 import org.junit.Assert.assertFalse
@@ -26,6 +28,12 @@ class DeviceAccessibilitySampleTest : TestCase() {
     }
 
     @get:Rule
+    val runtimePermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
+        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        Manifest.permission.READ_EXTERNAL_STORAGE
+    )
+
+    @get:Rule
     val activityRule = ActivityTestRule(DeviceSampleActivity::class.java, false, true)
 
     @Test
@@ -38,7 +46,8 @@ class DeviceAccessibilitySampleTest : TestCase() {
         }.run {
 
             step("Enable accessibility service") {
-                device.accessibility.enable(device.targetContext.packageName,
+                device.accessibility.enable(
+                    device.targetContext.packageName,
                     SERVICE_CLASS_NAME
                 )
                 Screen.idle(SETTINGS_UPDATE_DELAY)
@@ -56,7 +65,9 @@ class DeviceAccessibilitySampleTest : TestCase() {
     }
 
     private fun BaseTestContext.isAccessibilityServiceEnabled(): Boolean {
-        return Settings.Secure.getString(device.targetContext.contentResolver,
-            ENABLED_ACCESSIBILITY_SERVICES)?.contains(SERVICE_CLASS_NAME) ?: false
+        return Settings.Secure.getString(
+            device.targetContext.contentResolver,
+            ENABLED_ACCESSIBILITY_SERVICES
+        )?.contains(SERVICE_CLASS_NAME) ?: false
     }
 }

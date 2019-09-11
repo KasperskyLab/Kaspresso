@@ -10,6 +10,6 @@ Enables accessibility. Available since api 24.
 
 ### Parameters
 
-`packageName` - a package name of an accessibility service
+`packageName` - a package name of an accessibility service.
 
-`className` - a class name of an accessibility service
+`className` - a class name of an accessibility service.

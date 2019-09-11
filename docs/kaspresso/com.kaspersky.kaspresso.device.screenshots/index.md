@@ -6,5 +6,5 @@
 
 | Name | Summary |
 |---|---|
-| [Screenshots](-screenshots/index.md) | `interface Screenshots`<br>An interface to make screenshots. |
-| [ScreenshotsImpl](-screenshots-impl/index.md) | `class ScreenshotsImpl : `[`Screenshots`](-screenshots/index.md)<br>Default implementation of Screenshots interface. |
+| [Screenshots](-screenshots/index.md) | `interface Screenshots`<br>The interface to make screenshots. |
+| [ScreenshotsImpl](-screenshots-impl/index.md) | `class ScreenshotsImpl : `[`Screenshots`](-screenshots/index.md)<br>The implementation of the [Screenshots](-screenshots/index.md) interface. |

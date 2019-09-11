@@ -1,21 +1,20 @@
 package com.kaspersky.kaspressample.simple_tests
 
 import android.Manifest
-import android.support.test.rule.ActivityTestRule
-import android.support.test.rule.GrantPermissionRule
-import android.support.test.runner.AndroidJUnit4
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.rule.ActivityTestRule
+import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.R
 import com.kaspersky.kaspressample.screen.MainScreen
 import com.kaspersky.kaspressample.screen.SimpleScreen
-import com.kaspersky.kaspresso.flakysafety.attempt
 import com.kaspersky.kaspresso.testcases.api.testcaserule.TestCaseRule
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 /**
- * In this example you can observe a test tuned by default Configurator.
+ * In this example you can observe a test tuned by default Kaspresso configuration.
  * When you start the test you can see output of default Kaspresso interceptors:
  * - a lot of useful logs
  * - failure handling
@@ -45,10 +44,10 @@ class SimpleTestWithRule {
         }.run {
 
             step("Open Simple Screen") {
-                kLogger.i("I am kLogger")
+                testLogger.i("I am testLogger")
                 device.screenshots.take("Additional_screenshot")
                 MainScreen {
-                    nextButton {
+                    simpleButton {
                         isVisible()
                         click()
                     }
@@ -72,7 +71,7 @@ class SimpleTestWithRule {
                         click()
                     }
                     edit {
-                        attempt(timeoutMs = 7000) { isVisible() }
+                        flakySafely(timeoutMs = 7000) { isVisible() }
                         hasText(R.string.text_edit_text)
                     }
                 }

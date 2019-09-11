@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools" package="com.kaspersky.kaspressample">
+          xmlns:tools="http://schemas.android.com/tools"
+          package="com.kaspersky.kaspressample">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
@@ -11,6 +12,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.READ_CALL_LOG"/>
     <uses-permission android:name="android.permission.READ_SMS"/>
+    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" tools:ignore="ProtectedPermissions"/>
 
     <application
             android:allowBackup="false"
@@ -30,28 +32,41 @@
         </activity>
 
         <activity
-                android:name=".WebViewActivity"
+                android:name=".simple.SimpleActivity"
+                android:label="@string/simple_screen"/>
+
+        <activity
+                android:name=".web.WebViewActivity"
                 android:label="@string/webview"
-                android:theme="@style/Theme.AppCompat.NoActionBar"
-        />
+                android:theme="@style/Theme.AppCompat.NoActionBar"/>
+
+        <activity
+                android:name=".flaky.RecyclerStubActivity"
+                android:label="@string/recycler_stub"/>
+
+        <activity
+                android:name=".flaky.ListStubActivity"
+                android:label="@string/list_stub"/>
+
+        <activity
+                android:name=".flaky.CommonFlakyActivity"
+                android:label="@string/scroll_view_stub"/>
 
         <activity
                 android:name=".docloc.FragmentTestActivity"
-                android:theme="@style/Theme.AppCompat.NoActionBar"
-        />
+                android:theme="@style/Theme.AppCompat.NoActionBar"/>
 
 
         <activity
-                android:name=".devicesample.DeviceSampleActivity"
-                android:label="@string/device_sample_title"
-        />
+                android:name=".device.DeviceSampleActivity"
+                android:label="@string/device_sample_title"/>
 
         <service
-                android:name=".devicesample.DeviceSampleAccessibilityService"
+                android:name=".device.DeviceSampleAccessibilityService"
                 android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"
                 android:label="@string/device_sample_accessibility_service_title">
             <intent-filter>
-                <action android:name="android.accessibilityservice.AccessibilityService" />
+                <action android:name="android.accessibilityservice.AccessibilityService"/>
             </intent-filter>
         </service>
     </application>

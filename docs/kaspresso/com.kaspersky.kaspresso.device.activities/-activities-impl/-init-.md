@@ -2,7 +2,7 @@
 
 # &lt;init&gt;
 
-`ActivitiesImpl()`
+`ActivitiesImpl(logger: `[`UiTestLogger`](../../com.kaspersky.kaspresso.logger/-ui-test-logger.md)`)`
 
-Default implementation of Activities interface.
+The implementation of the [Activities](../-activities/index.md) interface.
 

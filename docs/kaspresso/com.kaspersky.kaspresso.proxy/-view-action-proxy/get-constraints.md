@@ -7,5 +7,5 @@
 Simply calls [ViewAction.getConstraints](#) on wrapped [viewAction](#).
 
 **Return**
-a matcher that will be tested prior to calling perform
+a matcher that will be tested prior to calling perform.
 

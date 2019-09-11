@@ -2,7 +2,7 @@
 
 # &lt;init&gt;
 
-`ViewAssertionProxy(viewAssertion: ViewAssertion, interceptors: `[`List`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)`<`[`ViewAssertionInterceptor`](../../com.kaspersky.kaspresso.interceptors/-view-assertion-interceptor/index.md)`>)`
+`ViewAssertionProxy(viewAssertion: ViewAssertion, watcherInterceptors: `[`List`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)`<`[`ViewAssertionWatcherInterceptor`](../../com.kaspersky.kaspresso.interceptors.watcher.view/-view-assertion-watcher-interceptor/index.md)`>)`
 
-A proxy-wrapper of [ViewAssertion](#) for interceptors calls.
+The proxy-wrapper of [ViewAssertion](#) for watcher interceptors calls.
 

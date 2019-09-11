@@ -1,11 +1,13 @@
 package com.kaspersky.kaspressample.device_tests
 
+import android.Manifest
 import android.net.ConnectivityManager
 import android.net.wifi.WifiManager
-import android.support.test.rule.ActivityTestRule
-import android.support.test.runner.AndroidJUnit4
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.rule.ActivityTestRule
+import androidx.test.rule.GrantPermissionRule
 import com.agoda.kakao.screen.Screen
-import com.kaspersky.kaspressample.devicesample.DeviceSampleActivity
+import com.kaspersky.kaspressample.device.DeviceSampleActivity
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
 import org.junit.Assert.assertFalse
@@ -22,34 +24,40 @@ class DeviceInternetSampleTest : TestCase() {
     }
 
     @get:Rule
+    val runtimePermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
+        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        Manifest.permission.READ_EXTERNAL_STORAGE
+    )
+
+    @get:Rule
     val activityTestRule = ActivityTestRule(DeviceSampleActivity::class.java, true, true)
 
     @Test
     fun internetSampleTest() {
         before {
-            device.internet.enable()
+            device.network.enable()
         }.after {
-            device.internet.enable()
+            device.network.enable()
         }.run {
 
             step("Disable internet") {
-                device.internet.disable()
+                device.network.disable()
                 Screen.idle(NETWORK_ESTABLISHMENT_DELAY)
                 assertTrue(isDisconnected())
             }
 
             step("Enable internet") {
-                device.internet.enable()
+                device.network.enable()
                 Screen.idle(NETWORK_ESTABLISHMENT_DELAY)
                 assertFalse(isDisconnected())
             }
 
             step("Toggle WiFi") {
-                device.internet.toggleWiFi(false)
+                device.network.toggleWiFi(false)
                 Screen.idle(NETWORK_ESTABLISHMENT_DELAY)
                 assertFalse(isWiFiEnabled())
 
-                device.internet.toggleWiFi(true)
+                device.network.toggleWiFi(true)
                 Screen.idle(NETWORK_ESTABLISHMENT_DELAY)
                 assertTrue(isWiFiEnabled())
             }

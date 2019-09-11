@@ -1,8 +1,10 @@
 package com.kaspersky.kaspressample.device_tests
 
+import android.Manifest
 import android.os.Environment
-import android.support.test.rule.ActivityTestRule
-import android.support.test.runner.AndroidJUnit4
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.rule.ActivityTestRule
+import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspresso.device.files.Files
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
@@ -25,6 +27,12 @@ class DeviceFilesSampleTest : TestCase() {
         private const val FILE_NAME = "hello_world.apk"
         private const val FILE_RELATIVE_PATH = "artifacts/$FILE_NAME"
     }
+
+    @get:Rule
+    val runtimePermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
+        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        Manifest.permission.READ_EXTERNAL_STORAGE
+    )
 
     @get:Rule
     val activityTestRule = ActivityTestRule(MainActivity::class.java, true, true)

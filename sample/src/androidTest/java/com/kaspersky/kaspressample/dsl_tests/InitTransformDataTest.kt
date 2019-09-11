@@ -1,9 +1,9 @@
 package com.kaspersky.kaspressample.dsl_tests
 
 import android.Manifest
-import android.support.test.rule.ActivityTestRule
-import android.support.test.rule.GrantPermissionRule
-import android.support.test.runner.AndroidJUnit4
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.rule.ActivityTestRule
+import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.screen.MainScreen
 import org.junit.Rule
@@ -53,14 +53,14 @@ class InitTransformDataTest : BaseParametrizedTest() {
             makeOwner(ownerSurname = "Pichai", companyName = "Google")
         }.run {
             step("Some test step") {
-                kLogger.i(data.companies.toString())
+                testLogger.i(data.companies.toString())
 
                 MainScreen {
                     descriptionText {
                         hasNoText(data.owners.first().firstName ?: "")
                     }
 
-                    nextButton {
+                    simpleButton {
                         click()
                     }
                 }

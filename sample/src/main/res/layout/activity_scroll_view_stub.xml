@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <ScrollView
+            android:id="@+id/scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+            <Button
+                    android:id="@+id/scroll_view_stub_btn1"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:text="@string/common_flaky_start_1"/>
+
+            <Button
+                    android:id="@+id/scroll_view_stub_btn2"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:background="@color/colorPrimary"
+                    android:text="@string/common_flaky_start_2"/>
+
+            <Button
+                    android:id="@+id/scroll_view_stub_btn3"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:text="@string/common_flaky_start_3"/>
+
+            <Button
+                    android:id="@+id/scroll_view_stub_btn4"
+                    android:layout_width="match_parent"
+                    android:background="@color/colorPrimary"
+                    android:layout_height="300dp"
+                    android:text="@string/common_flaky_start_4"/>
+
+            <Button
+                    android:id="@+id/scroll_view_stub_btn5"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:text="@string/common_flaky_start_5"/>
+
+            <TextView
+                    android:id="@+id/scroll_view_stub_tv6"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:background="@color/colorPrimary"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:text="@string/common_flaky_start_6"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

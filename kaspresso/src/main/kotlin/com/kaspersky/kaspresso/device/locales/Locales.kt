@@ -1,11 +1,11 @@
 package com.kaspersky.kaspresso.device.locales
 
-import android.support.test.InstrumentationRegistry
+import androidx.test.platform.app.InstrumentationRegistry
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import java.util.Locale
 
 /**
- *  Utility class for handling locale parsing.
+ * The utility class for handling locale parsing.
  */
 internal class Locales(
     private val logger: UiTestLogger
@@ -17,21 +17,21 @@ internal class Locales(
     }
 
     /**
-     *  Returns set of supported locales for test.
-     *  If csv string with locales is passed to test by localizations key its value will be used.
-     *  Otherwise, default localizations will be applied (en,ru).
+     * Returns set of supported locales for test.
+     * If csv string with locales is passed to test by localizations key its value will be used.
+     * Otherwise, default localizations will be applied (en,ru).
      *
-     *  @return set of supported locales.
+     * @return set of supported locales.
      */
     fun getSupportedLocales(): Set<Locale> {
         return parseLocales(getLocaleString())
     }
 
     /**
-     *  Parses comma-separated string to set of locales.
+     * Parses comma-separated string to set of locales.
      *
-     *  @param locales comma-separated string containing locales.
-     *  @return set of pares locales.
+     * @param locales comma-separated string containing locales.
+     * @return set of pares locales.
      */
     fun parseLocales(locales: String): Set<Locale> {
         val localizationsArray = locales.replace(" ", "").split(",")

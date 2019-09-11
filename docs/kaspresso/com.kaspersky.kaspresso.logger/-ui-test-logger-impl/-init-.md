@@ -4,5 +4,5 @@
 
 `UiTestLoggerImpl(tag: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`)`
 
-Default implementation of [UiTestLogger](../-ui-test-logger/index.md) using [android.util.Log](https://developer.android.com/reference/android/util/Log.html).
+The default implementation of [UiTestLogger](../-ui-test-logger.md) using [android.util.Log](https://developer.android.com/reference/android/util/Log.html).
 

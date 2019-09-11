@@ -6,5 +6,5 @@
 
 | Name | Summary |
 |---|---|
-| [Activities](-activities/index.md) | `interface Activities`<br>An interface to work with activities. |
-| [ActivitiesImpl](-activities-impl/index.md) | `class ActivitiesImpl : `[`Activities`](-activities/index.md)<br>Default implementation of Activities interface. |
+| [Activities](-activities/index.md) | `interface Activities`<br>The interface to work with activities. |
+| [ActivitiesImpl](-activities-impl/index.md) | `class ActivitiesImpl : `[`Activities`](-activities/index.md)<br>The implementation of the [Activities](-activities/index.md) interface. |

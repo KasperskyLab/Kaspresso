@@ -3,11 +3,11 @@ package com.kaspersky.kaspressample.device_tests
 import android.Manifest
 import android.provider.CallLog
 import android.provider.Telephony
-import android.support.test.rule.ActivityTestRule
-import android.support.test.rule.GrantPermissionRule
-import android.support.test.runner.AndroidJUnit4
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.rule.ActivityTestRule
+import androidx.test.rule.GrantPermissionRule
 import com.agoda.kakao.screen.Screen
-import com.kaspersky.kaspressample.devicesample.DeviceSampleActivity
+import com.kaspersky.kaspressample.device.DeviceSampleActivity
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
 import org.junit.Assert.assertEquals
@@ -29,7 +29,9 @@ class DevicePhoneSampleTest : TestCase() {
     @get:Rule
     val permissionsRule: GrantPermissionRule = GrantPermissionRule.grant(
         Manifest.permission.READ_CALL_LOG,
-        Manifest.permission.READ_SMS
+        Manifest.permission.READ_SMS,
+        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        Manifest.permission.READ_EXTERNAL_STORAGE
     )
 
     @get:Rule
@@ -66,8 +68,10 @@ class DevicePhoneSampleTest : TestCase() {
     }
 
     private fun BaseTestContext.getLastCallPhoneNumber(): String? {
-        val cursor = device.targetContext.contentResolver.query(CallLog.Calls.CONTENT_URI, null,
-            null, null, CallLog.Calls.DATE + " DESC")
+        val cursor = device.targetContext.contentResolver.query(
+            CallLog.Calls.CONTENT_URI, null,
+            null, null, CallLog.Calls.DATE + " DESC"
+        )
 
         cursor?.use {
             return if (cursor.moveToFirst()) {

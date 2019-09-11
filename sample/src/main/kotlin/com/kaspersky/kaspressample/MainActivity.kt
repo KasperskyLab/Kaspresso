@@ -2,8 +2,12 @@ package com.kaspersky.kaspressample
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.Snackbar
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
+import com.kaspersky.kaspressample.flaky.CommonFlakyActivity
+import com.kaspersky.kaspressample.flaky.ListStubActivity
+import com.kaspersky.kaspressample.flaky.RecyclerStubActivity
+import com.kaspersky.kaspressample.simple.SimpleActivity
+import com.kaspersky.kaspressample.web.WebViewActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -12,27 +16,33 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        activity_main_button_next.setOnClickListener {
-            with(supportFragmentManager) {
-                val hasFragment = findFragmentByTag(SimpleFragment.TAG) != null
-
-                if (hasFragment) {
-                    Snackbar.make(
-                        activity_main_frame_layout_root,
-                        getString(R.string.add_fragment_error),
-                        Snackbar.LENGTH_SHORT
-                    ).show()
-                } else {
-                    beginTransaction()
-                        .add(R.id.activity_main_frame_layout_root, SimpleFragment.newInstance(), SimpleFragment.TAG)
-                        .commitNow()
-                }
-            }
+        activity_main_button_simple.setOnClickListener {
+            startActivity(
+                Intent(this, SimpleActivity::class.java)
+            )
         }
 
         activity_main_button_webview.setOnClickListener {
             startActivity(
                 Intent(this, WebViewActivity::class.java)
+            )
+        }
+
+        activity_main_button_recycler_stub.setOnClickListener {
+            startActivity(
+                Intent(this, RecyclerStubActivity::class.java)
+            )
+        }
+
+        activity_main_button_list_stub.setOnClickListener {
+            startActivity(
+                Intent(this, ListStubActivity::class.java)
+            )
+        }
+
+        activity_main_button_scroll_view_stub.setOnClickListener {
+            startActivity(
+                Intent(this, CommonFlakyActivity::class.java)
             )
         }
     }

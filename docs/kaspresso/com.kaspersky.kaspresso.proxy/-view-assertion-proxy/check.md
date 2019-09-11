@@ -4,7 +4,7 @@
 
 `fun check(view: `[`View`](https://developer.android.com/reference/android/view/View.html)`?, noViewFoundException: NoMatchingViewException?): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
-Calls interceptors before [ViewAssertion.check](#) on wrapped [viewAssertion](#) is called.
+Calls watcher interceptors before [ViewAssertion.check](#) on wrapped [viewAssertion](#) is called.
 
 ### Parameters
 

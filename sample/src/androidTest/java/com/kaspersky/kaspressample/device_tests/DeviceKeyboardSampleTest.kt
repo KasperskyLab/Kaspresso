@@ -1,14 +1,11 @@
 package com.kaspersky.kaspressample.device_tests
 
 import android.Manifest
-import android.support.test.espresso.action.ViewActions
-import android.support.test.rule.ActivityTestRule
-import android.support.test.rule.GrantPermissionRule
-import android.support.test.runner.AndroidJUnit4
-import android.support.test.uiautomator.UiDevice
-import android.support.test.uiautomator.UiObject
 import android.view.KeyEvent
-import com.kaspersky.kaspressample.devicesample.DeviceSampleActivity
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.rule.ActivityTestRule
+import androidx.test.rule.GrantPermissionRule
+import com.kaspersky.kaspressample.device.DeviceSampleActivity
 import com.kaspersky.kaspressample.screen.DeviceSampleScreen
 import com.kaspersky.kaspresso.device.keyboard.Keyboard
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
@@ -24,13 +21,13 @@ class DeviceKeyboardSampleTest : TestCase() {
     }
 
     @get:Rule
-    val activityTestRule = ActivityTestRule(DeviceSampleActivity::class.java, true, true)
-
-    @get:Rule
     val runtimePermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
         Manifest.permission.WRITE_EXTERNAL_STORAGE,
         Manifest.permission.READ_EXTERNAL_STORAGE
     )
+
+    @get:Rule
+    val activityTestRule = ActivityTestRule(DeviceSampleActivity::class.java, true, true)
 
     @Test
     fun keyboardSampleTest() {

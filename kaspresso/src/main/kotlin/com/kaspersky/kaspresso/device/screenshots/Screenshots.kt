@@ -1,7 +1,7 @@
 package com.kaspersky.kaspresso.device.screenshots
 
 /**
- * An interface to make screenshots.
+ * The interface to make screenshots.
  */
 interface Screenshots {
 

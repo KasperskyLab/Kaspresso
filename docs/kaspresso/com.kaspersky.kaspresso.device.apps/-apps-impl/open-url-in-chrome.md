@@ -6,3 +6,8 @@
 
 Overrides [Apps.openUrlInChrome](../-apps/open-url-in-chrome.md)
 
+Opens the given [url](open-url-in-chrome.md#com.kaspersky.kaspresso.device.apps.AppsImpl$openUrlInChrome(kotlin.String)/url) on Chrome.
+
+### Parameters
+
+`url` - the url to be opened.

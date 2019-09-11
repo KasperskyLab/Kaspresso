@@ -3,9 +3,10 @@ package com.kaspersky.kaspressample.device_tests
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Build
-import android.support.test.rule.ActivityTestRule
-import android.support.test.runner.AndroidJUnit4
-import com.kaspersky.kaspressample.devicesample.DeviceSampleActivity
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.rule.ActivityTestRule
+import androidx.test.rule.GrantPermissionRule
+import com.kaspersky.kaspressample.device.DeviceSampleActivity
 import com.kaspersky.kaspressample.screen.DeviceSampleScreen
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
@@ -15,8 +16,21 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
+/**
+ * Attention please!
+ * Before you start this test you must remove Kaspresso sample application at the device or
+ * execute adb shell commands like "pm clear com.kaspersky.kaspressample"
+ * to reset permissions granted before.
+ * It's needed measure because of AndroidJUnit Runner specific that doesn't reset state of app between tests.
+ */
 @RunWith(AndroidJUnit4::class)
 class DevicePermissionsSampleTest : TestCase() {
+
+    @get:Rule
+    val runtimePermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
+        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        Manifest.permission.READ_EXTERNAL_STORAGE
+    )
 
     @get:Rule
     val activityTestRule = ActivityTestRule(DeviceSampleActivity::class.java, false, true)
@@ -37,7 +51,10 @@ class DevicePermissionsSampleTest : TestCase() {
                     }
                 }
 
-                device.permissions.allowViaDialog()
+                device.permissions.apply {
+                    flakySafely { assertTrue(isDialogVisible()) }
+                    allowViaDialog()
+                }
 
                 // Contacts permission should be granted now
                 assertTrue(hasCallLogPermission())

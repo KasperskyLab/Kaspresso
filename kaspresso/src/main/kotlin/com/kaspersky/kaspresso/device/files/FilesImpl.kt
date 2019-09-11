@@ -3,30 +3,32 @@ package com.kaspersky.kaspresso.device.files
 import com.kaspersky.kaspresso.device.server.AdbServer
 
 /**
- * Default implementation of Files interface.
+ * The implementation of the [Files] interface.
  */
-class FilesImpl : Files {
+class FilesImpl(
+    private val adbServer: AdbServer
+) : Files {
 
     /**
-     *  Performs adb push.
+     * Performs adb push.
      *
-     *  Required Permissions: INTERNET.
+     * Required Permissions: INTERNET.
      *
-     *  @param serverPath a file path relative to the server directory.
-     *  @param devicePath a path to copy.
+     * @param serverPath a file path relative to the server directory.
+     * @param devicePath a path to copy.
      */
     override fun push(serverPath: String, devicePath: String) {
-        AdbServer.performAdb("push $serverPath $devicePath")
+        adbServer.performAdb("push $serverPath $devicePath")
     }
 
     /**
-     *  Removes a file by given path.
+     * Removes a file by given path.
      *
-     *  Required Permissions: INTERNET
+     * Required Permissions: INTERNET
      *
-     *  @param path a path to remove
+     * @param path a path to remove
      */
     override fun remove(path: String) {
-        AdbServer.performShell("rm -f $path")
+        adbServer.performShell("rm -f $path")
     }
 }

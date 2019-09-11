@@ -2,14 +2,14 @@
 
 # transform
 
-`fun transform(evaluation: Evaluation?): `[`R`](index.md#R)
+`fun transform(evaluation: Evaluation?): `[`T`](index.md#T)
 
-Calls interceptors before [Atom.transform](#) on wrapped [atom](#) is called.
+Calls watcher interceptors before [Atom.transform](#) on wrapped [atom](atom.md) is called.
 
 ### Parameters
 
 `evaluation` - represents the results of a Javascript execution.
 
 **Return**
-[R](index.md#R) a result type of the atom.
+[R](#) a result type of the atom.
 

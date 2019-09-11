@@ -6,12 +6,11 @@ import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
 import android.os.Looper
-import android.support.test.rule.ActivityTestRule
-import android.support.test.rule.GrantPermissionRule
-import android.support.test.runner.AndroidJUnit4
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.rule.ActivityTestRule
+import androidx.test.rule.GrantPermissionRule
 import com.agoda.kakao.screen.Screen
 import com.kaspersky.kaspressample.MainActivity
-import com.kaspersky.kaspresso.flakysafety.attempt
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
@@ -32,23 +31,25 @@ class DeviceLocationSampleTest : TestCase() {
 
         private val EMPTY_LISTENER = object : LocationListener {
 
-            override fun onLocationChanged(location: Location?) { }
+            override fun onLocationChanged(location: Location?) {}
 
-            override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) { }
+            override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {}
 
-            override fun onProviderEnabled(provider: String?) { }
+            override fun onProviderEnabled(provider: String?) {}
 
-            override fun onProviderDisabled(provider: String?) { }
+            override fun onProviderDisabled(provider: String?) {}
         }
     }
 
     @get:Rule
-    val rule = ActivityTestRule(MainActivity::class.java, false, true)
-
-    @get:Rule
-    val permissionsRule: GrantPermissionRule = GrantPermissionRule.grant(
+    val runtimePermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
+        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        Manifest.permission.READ_EXTERNAL_STORAGE,
         Manifest.permission.ACCESS_FINE_LOCATION
     )
+
+    @get:Rule
+    val rule = ActivityTestRule(MainActivity::class.java, false, true)
 
     private lateinit var manager: LocationManager
 
@@ -80,11 +81,13 @@ class DeviceLocationSampleTest : TestCase() {
                 )
 
                 /** Request single update to apply changes */
-                manager.requestSingleUpdate(LocationManager.GPS_PROVIDER,
+                manager.requestSingleUpdate(
+                    LocationManager.GPS_PROVIDER,
                     EMPTY_LISTENER,
-                    Looper.getMainLooper())
+                    Looper.getMainLooper()
+                )
 
-                attempt(timeoutMs = 10_000, intervalMs = 500) {
+                flakySafely(timeoutMs = 10_000, intervalMs = 500) {
                     val location = manager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
                     assertNotNull(location)
                 }

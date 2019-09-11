@@ -3,7 +3,7 @@ package com.kaspersky.kaspresso.device.apps
 import android.net.Uri
 
 /**
- * An interface to work with installer, launcher and package manager.
+ * The interface to work with installer, launcher and package manager.
  */
 interface Apps {
 
@@ -15,20 +15,20 @@ interface Apps {
     val targetAppPackageName: String
 
     /**
-     *  Installs an app via ADB.
+     * Installs an app via ADB.
      *
-     *  Required Permissions: INTERNET.
+     * Required Permissions: INTERNET.
      *
-     *  @param apkPath a path to an apk to be installed. The apk is hosted on the test server.
+     * @param apkPath a path to the apk to be installed. The apk is hosted on the test server.
      */
     fun install(apkPath: String)
 
     /**
-     *  Uninstalls an app via ADB.
+     * Uninstalls an app via ADB.
      *
-     *  Required Permissions: INTERNET.
+     * Required Permissions: INTERNET.
      *
-     *  @param packageName an android package name of an app to be deleted.
+     * @param packageName an android package name of the app to be deleted.
      */
     fun uninstall(packageName: String)
 
@@ -42,11 +42,32 @@ interface Apps {
         packageName: String = targetAppPackageName
     )
 
+    /**
+     * Opens the given [url] on Chrome.
+     *
+     * @param url the url to be opened.
+     */
     fun openUrlInChrome(url: String)
 
+    /**
+     * Launches an app with given [packageName].
+     *
+     * @param packageName the package name of an app to launch.
+     * @param data the data to put to the launch intent.
+     */
     fun launch(packageName: String, data: Uri? = null)
 
+    /**
+     * Opens the app from the recent list by the description.
+     *
+     * @param contentDescription the description of the app to launch.
+     */
     fun openRecent(contentDescription: String)
 
+    /**
+     * Kills the process of the app by the given [packageName].
+     *
+     * @param packageName the package name of the app to be killed.
+     */
     fun kill(packageName: String = targetAppPackageName)
 }

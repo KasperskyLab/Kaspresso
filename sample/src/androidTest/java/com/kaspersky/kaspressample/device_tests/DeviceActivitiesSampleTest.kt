@@ -1,9 +1,9 @@
 package com.kaspersky.kaspressample.device_tests
 
 import android.Manifest
-import android.support.test.rule.ActivityTestRule
-import android.support.test.rule.GrantPermissionRule
-import android.support.test.runner.AndroidJUnit4
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.rule.ActivityTestRule
+import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.hamcrest.CoreMatchers.instanceOf
@@ -16,13 +16,13 @@ import org.junit.runner.RunWith
 class DeviceActivitiesSampleTest : TestCase() {
 
     @get:Rule
-    val activityTestRule = ActivityTestRule(MainActivity::class.java, true, true)
-
-    @get:Rule
     val runtimePermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
         Manifest.permission.WRITE_EXTERNAL_STORAGE,
         Manifest.permission.READ_EXTERNAL_STORAGE
     )
+
+    @get:Rule
+    val activityTestRule = ActivityTestRule(MainActivity::class.java, true, true)
 
     @Test
     fun activitiesSampleTest() {

@@ -17,6 +17,7 @@ class CheckEditScenario<ScenarioData> : BaseScenario<ScenarioData>() {
                 }
             }
         }
+
         step("Change the text in edit and check it. Second check") {
             SimpleScreen {
                 edit {

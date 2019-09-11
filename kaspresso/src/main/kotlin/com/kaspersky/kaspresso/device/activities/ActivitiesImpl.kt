@@ -2,16 +2,16 @@ package com.kaspersky.kaspresso.device.activities
 
 import android.app.Activity
 import android.os.Looper
-import android.support.test.InstrumentationRegistry
-import android.support.test.internal.runner.junit4.statement.UiThreadStatement
-import android.support.test.runner.lifecycle.ActivityLifecycleMonitorRegistry
-import android.support.test.runner.lifecycle.Stage
+import androidx.test.internal.runner.junit4.statement.UiThreadStatement
+import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.runner.lifecycle.ActivityLifecycleMonitorRegistry
+import androidx.test.runner.lifecycle.Stage
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import org.hamcrest.CoreMatchers
 import org.junit.Assert
 
 /**
- * Default implementation of Activities interface.
+ * The implementation of the [Activities] interface.
  */
 class ActivitiesImpl(
     private val logger: UiTestLogger

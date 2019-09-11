@@ -2,7 +2,7 @@
 
 # &lt;init&gt;
 
-`ScreenshotsImpl()`
+`ScreenshotsImpl(logger: `[`UiTestLogger`](../../com.kaspersky.kaspresso.logger/-ui-test-logger.md)`, activities: `[`Activities`](../../com.kaspersky.kaspresso.device.activities/-activities/index.md)`, screenshotDir: `[`File`](https://developer.android.com/reference/java/io/File.html)` = File("screenshots"))`
 
-Default implementation of Screenshots interface.
+The implementation of the [Screenshots](../-screenshots/index.md) interface.
 

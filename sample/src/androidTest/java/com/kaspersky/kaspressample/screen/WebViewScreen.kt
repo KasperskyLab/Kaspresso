@@ -2,7 +2,7 @@ package com.kaspersky.kaspressample.screen
 
 import com.agoda.kakao.web.KWebView
 import com.kaspersky.kaspressample.R
-import com.kaspersky.kaspressample.WebViewActivity
+import com.kaspersky.kaspressample.web.WebViewActivity
 
 object WebViewScreen : KScreen<WebViewScreen>() {
 

@@ -6,3 +6,8 @@
 
 Overrides [Apps.kill](../-apps/kill.md)
 
+Kills the process of the app by the given [packageName](kill.md#com.kaspersky.kaspresso.device.apps.AppsImpl$kill(kotlin.String)/packageName).
+
+### Parameters
+
+`packageName` - the package name of the app to be killed.

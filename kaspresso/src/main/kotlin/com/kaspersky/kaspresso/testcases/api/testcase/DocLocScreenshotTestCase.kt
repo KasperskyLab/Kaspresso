@@ -1,21 +1,21 @@
 package com.kaspersky.kaspresso.testcases.api.testcase
 
 import android.Manifest
-import android.support.test.rule.GrantPermissionRule
-import com.kaspersky.kaspresso.configurator.Configurator
+import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspresso.device.locales.Locales
-import com.kaspersky.kaspresso.device.screenshots.docloc.DocLocScreenshotCapturer
-import com.kaspersky.kaspresso.extensions.other.getAllInterfaces
-import com.kaspersky.kaspresso.reflect.proxy.UiInvocationHandler
-import com.kaspersky.kaspresso.rule.LocaleRule
-import com.kaspersky.kaspresso.rule.TestFailRule
+import com.kaspersky.kaspresso.docloc.DocLocScreenshotCapturer
+import com.kaspersky.kaspresso.docloc.rule.LocaleRule
+import com.kaspersky.kaspresso.docloc.rule.TestFailRule
+import com.kaspersky.kaspresso.internal.extensions.other.getAllInterfaces
+import com.kaspersky.kaspresso.internal.invocation.UiInvocationHandler
+import com.kaspersky.kaspresso.logger.UiTestLogger
 import java.io.File
 import java.lang.reflect.Proxy
 import org.junit.Before
 import org.junit.Rule
 
 /**
- *  Base class for all docloc screenshot tests.
+ *  The base class for all docloc screenshot tests.
  *
  *  Project-wide ScreenshotTestCase should be implemented as following:
  *
@@ -71,24 +71,31 @@ import org.junit.Rule
  *      }
  *  ```
  *
- *  @param screenshotsDirectory directory to save screenshot.
+ *  @param screenshotsDirectory directory to save screenshot. Will be cleared before launching the test.
  *  @param locales comma-separated string with locales to run test with.
+ *  @param changeSystemLocale change the system language, i.e. system dialogs (e.g. runtime permissions) will also be localized.
+ *      Need permission in manifest file for a target app android.permission.CHANGE_CONFIGURATION
  */
 abstract class DocLocScreenshotTestCase(
     private val screenshotsDirectory: File,
+    private val changeSystemLocale: Boolean = false,
     locales: String?
 ) : TestCase() {
 
     private lateinit var screenshotsDir: File
     private lateinit var screenshotCapturer: DocLocScreenshotCapturer
 
-    @PublishedApi internal val logger = Configurator.logger
+    @PublishedApi
+    internal val logger: UiTestLogger = kaspresso.libLogger
+
     private val confLocales: Locales = Locales(logger)
 
     @get:Rule
     val localeRule = LocaleRule(
-        locales?.let { confLocales.parseLocales(it) }
-            ?: confLocales.getSupportedLocales()
+        locales = locales?.let { confLocales.parseLocales(it) } ?: confLocales.getSupportedLocales(),
+        changeSystemLocale = changeSystemLocale,
+        device = kaspresso.device,
+        logger = kaspresso.libLogger
     )
 
     @get:Rule
@@ -99,35 +106,34 @@ abstract class DocLocScreenshotTestCase(
 
     @Before
     fun setup() {
-        screenshotsDir = screenshotsDirectory
-            .resolve(localeRule.locale.toString())
+        screenshotsDir = screenshotsDirectory.resolve(localeRule.locale.toString())
 
         screenshotCapturer = DocLocScreenshotCapturer(
             screenshotsDir,
             logger,
-            configurator.activities,
-            configurator.apps
+            kaspresso.device.activities,
+            kaspresso.device.apps
         )
 
         testFailRule.screenshotCapturer = screenshotCapturer
     }
 
     /**
-     *  Captures screenshot with a given [name] and saves it to
-     *  <device path for pictures>/<locale>/<screenshotsDirectory>.
+     * Captures a screenshot with a given [name] and saves it to
+     * <device path for pictures>/<locale>/<screenshotsDirectory>.
      *
-     *  @param name screenshot name. English letters, spaces, numbers and dots are allowed.
+     * @param name screenshot name. English letters, spaces, numbers and dots are allowed.
      */
     protected open fun captureScreenshot(name: String) {
         screenshotCapturer.captureScreenshot(name.replace(Regex("[. ]"), "_").replace(".", "_"))
     }
 
     /**
-     *  Return a dynamic proxy for a given view.
-     *  [I] must be interface.
+     * Return a dynamic proxy for a given view.
+     * [I] must be interface.
      *
-     *  @param view proxy target.
-     *  @return a proxy over the given view.
+     * @param view proxy target.
+     * @return a proxy over the given view.
      */
     inline fun <reified I : Any> getUiSafeProxy(view: I): I {
         if (!I::class.java.isInterface) {
@@ -144,10 +150,10 @@ abstract class DocLocScreenshotTestCase(
     }
 
     /**
-     *  Return a dynamic proxy over all interfaces that [view] implements.
+     * Return a dynamic proxy over all interfaces that [view] implements.
      *
-     *  @param view proxy target.
-     *  @return a proxy over the given view.
+     * @param view proxy target.
+     * @return a proxy over the given view.
      */
     inline fun <reified T : Any> getUiSafeProxyFromImplementation(view: T): Any {
         return Proxy.newProxyInstance(

@@ -4,16 +4,16 @@
 
 `interface Screenshots`
 
-An interface to make screenshots.
+The interface to make screenshots.
 
 ### Functions
 
 | Name | Summary |
 |---|---|
-| [makeIfPossible](make-if-possible.md) | `abstract fun makeIfPossible(tag: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Makes screenshot if it is possible. |
+| [take](take.md) | `abstract fun take(tag: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Takes screenshot if it is possible. |
 
 ### Inheritors
 
 | Name | Summary |
 |---|---|
-| [ScreenshotsImpl](../-screenshots-impl/index.md) | `class ScreenshotsImpl : `[`Screenshots`](./index.md)<br>Default implementation of Screenshots interface. |
+| [ScreenshotsImpl](../-screenshots-impl/index.md) | `class ScreenshotsImpl : `[`Screenshots`](./index.md)<br>The implementation of the [Screenshots](./index.md) interface. |

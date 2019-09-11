@@ -2,7 +2,7 @@
 
 # &lt;init&gt;
 
-`PermissionsImpl()`
+`PermissionsImpl(logger: `[`UiTestLogger`](../../com.kaspersky.kaspresso.logger/-ui-test-logger.md)`, uiDevice: UiDevice)`
 
-An implementation of Permissions interface.
+The implementation of the [Permissions](../-permissions/index.md) interface.
 

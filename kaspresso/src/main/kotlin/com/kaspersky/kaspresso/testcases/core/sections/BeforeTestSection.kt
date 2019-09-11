@@ -1,14 +1,14 @@
 package com.kaspersky.kaspresso.testcases.core.sections
 
-import com.kaspersky.kaspresso.configurator.Configurator
+import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
 import com.kaspersky.kaspresso.testcases.models.TestBody
 
 /**
- * A representation of a set of actions to be invoked before the test.
+ * The representation of a set of actions to be invoked before the test.
  */
 class BeforeTestSection<InitData, Data> internal constructor(
-    private val configurator: Configurator,
+    private val kaspresso: Kaspresso,
     private val testBodyBuilder: TestBody.Builder<InitData, Data>
 ) {
     /**
@@ -20,7 +20,7 @@ class BeforeTestSection<InitData, Data> internal constructor(
      */
     fun beforeTest(actions: BaseTestContext.() -> Unit): AfterTestSection<InitData, Data> {
         return AfterTestSection(
-            configurator,
+            kaspresso,
             testBodyBuilder.apply { beforeTestActions = actions }
         )
     }

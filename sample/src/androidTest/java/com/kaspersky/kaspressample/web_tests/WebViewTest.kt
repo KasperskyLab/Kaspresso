@@ -1,17 +1,15 @@
 package com.kaspersky.kaspressample.web_tests
 
 import android.Manifest
-import android.support.test.espresso.web.webdriver.DriverAtoms
-import android.support.test.espresso.web.webdriver.Locator
-import android.support.test.rule.ActivityTestRule
-import android.support.test.rule.GrantPermissionRule
-import android.support.test.runner.AndroidJUnit4
+import androidx.test.espresso.web.webdriver.DriverAtoms
+import androidx.test.espresso.web.webdriver.Locator
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.rule.ActivityTestRule
+import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.screen.MainScreen
 import com.kaspersky.kaspressample.screen.WebViewScreen
-import com.kaspersky.kaspresso.flakysafety.attempt
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
-import java.util.concurrent.TimeUnit
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -45,21 +43,10 @@ class WebViewTest : TestCase() {
                 }
             }
 
-            step("Click \"Sign in\" button") {
+            step("Find \"Sign in\" button") {
                 WebViewScreen {
 
                     webView {
-                        attempt(
-                            timeoutMs = TimeUnit.SECONDS.toMillis(3)
-                        ) {
-                            withElement(
-                                Locator.XPATH,
-                                "/html/body/header/section/div[1]/div/div[1]/div[2]/button[3]"
-                            ) {
-                                hasText("Sign up")
-                            }
-                        }
-
                         withElement(
                             Locator.CLASS_NAME,
                             "btn"
@@ -68,14 +55,61 @@ class WebViewTest : TestCase() {
                             web.withElement(ref).perform(DriverAtoms.getText())
                         }
 
-                        // same element
                         withElement(
                             Locator.XPATH,
-                            "/html/body/header/section/div[3]/div[2]/button"
+                            "//*[@id=\"app\"]/section[1]/div/div/h2"
+                        ) {
+                            containsText("Protect your data")
+                        }
+
+                        withElement(
+                            Locator.XPATH,
+                            "//*[@id=\"app\"]/header/section/div[3]/div[2]/button"
                         ) {
                             hasText("Sign in")
-                            scroll()
-                            click()
+                        }
+                    }
+                }
+            }
+
+            step("Click \"Ask question\" button") {
+                WebViewScreen {
+                    webView {
+
+                        withElement(
+                            Locator.XPATH,
+                            "//*[@id=\"app\"]/section[5]/div/div/div[2]/div[3]/button"
+                        ) {
+                            compose(this@webView) {
+                                or {
+                                    containsText("fffuuuuu")
+                                    hasText("fuck")
+                                }
+                                or {
+                                    containsText("Ask questiop")
+                                    hasText("Ask questio")
+                                }
+                                or {
+                                    containsText("Ask question")
+                                    hasText("Ask question")
+                                }
+                            }
+                        }
+
+                        compose {
+                            orWithElement(
+                                Locator.XPATH,
+                                "//*[@id=\"app\"]/section[5]/div/div/div[2]/div[3]/button"
+                            ) {
+                                hasText("TRATATATA")
+                            }
+                            orWithElement(
+                                Locator.XPATH,
+                                "//*[@id=\"app\"]/section[5]/div/div/div[2]/div[3]/button"
+                            ) {
+                                hasText("Ask question")
+                                click()
+                            }
                         }
                     }
                 }

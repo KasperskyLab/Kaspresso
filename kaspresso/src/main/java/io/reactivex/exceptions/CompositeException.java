@@ -15,7 +15,7 @@
  */
 package io.reactivex.exceptions;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import java.io.PrintStream;
 import java.io.PrintWriter;

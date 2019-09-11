@@ -2,32 +2,37 @@ package com.kaspersky.kaspresso.device.phone
 
 import com.kaspersky.kaspresso.device.server.AdbServer
 
-class PhoneImpl : Phone {
+/**
+ * The implementation of the [Phone] interface.
+ */
+class PhoneImpl(
+    private val adbServer: AdbServer
+) : Phone {
 
     /**
-     *  Emulates incoming call.
+     * Emulates incoming call.
      *
-     *  Required Permissions: INTERNET
+     * Required Permissions: INTERNET
      */
     override fun emulateCall(number: String) {
-        AdbServer.performAdb("emu gsm call $number")
+        adbServer.performAdb("emu gsm call $number")
     }
 
     /**
-     *  Cancels incoming call.
+     * Cancels incoming call.
      *
-     *  Required Permissions: INTERNET
+     * Required Permissions: INTERNET
      */
     override fun cancelCall(number: String) {
-        AdbServer.performAdb("emu gsm cancel $number")
+        adbServer.performAdb("emu gsm cancel $number")
     }
 
     /**
-     *  Emulates receiving an SMS from [number].
+     * Emulates receiving an SMS from [number].
      *
-     *  Required Permissions: INTERNET
+     * Required Permissions: INTERNET
      */
     override fun receiveSms(number: String, text: String) {
-        AdbServer.performAdb("emu sms send $number $text")
+        adbServer.performAdb("emu sms send $number $text")
     }
 }

@@ -4,10 +4,10 @@ import android.Manifest
 import android.content.Context
 import android.os.Build
 import android.os.Environment
-import android.support.test.rule.ActivityTestRule
-import android.support.test.rule.GrantPermissionRule
-import android.support.test.runner.AndroidJUnit4
-import com.kaspersky.kaspressample.devicesample.DeviceSampleActivity
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.rule.ActivityTestRule
+import androidx.test.rule.GrantPermissionRule
+import com.kaspersky.kaspressample.device.DeviceSampleActivity
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
 import java.io.File
@@ -25,10 +25,13 @@ class DeviceScreenshotSampleTest : TestCase() {
     }
 
     @get:Rule
-    val activityRule = ActivityTestRule(DeviceSampleActivity::class.java, false, true)
+    val runtimePermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
+        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        Manifest.permission.READ_EXTERNAL_STORAGE
+    )
 
     @get:Rule
-    val permissionsRule: GrantPermissionRule = GrantPermissionRule.grant(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+    val activityRule = ActivityTestRule(DeviceSampleActivity::class.java, false, true)
 
     @Test
     fun screenshotSampleTest() {
@@ -45,11 +48,7 @@ class DeviceScreenshotSampleTest : TestCase() {
         }
     }
 
-    private fun BaseTestContext.screenshotExists(): Boolean {
-        return containsFileWithName(screenshotsDir(),
-            SCREENSHOT_TAG
-        )
-    }
+    private fun BaseTestContext.screenshotExists(): Boolean = containsFileWithName(screenshotsDir(), SCREENSHOT_TAG)
 
     private fun BaseTestContext.screenshotsDir(): File? {
         val dir = File("screenshots")

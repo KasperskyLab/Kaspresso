@@ -2,10 +2,10 @@ package com.kaspersky.kaspressample.docloc
 
 import android.graphics.Color
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.kaspersky.kaspressample.R
 import kotlinx.android.synthetic.main.fragment_screenshot.background
 import kotlinx.android.synthetic.main.fragment_screenshot.counter
@@ -18,11 +18,7 @@ class ScreenshotSampleFragment : Fragment(), ScreenshotSampleView {
 
     private val presenter = ScreenshotSamplePresenter(this)
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_screenshot, container, false)
     }
 

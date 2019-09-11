@@ -3,12 +3,12 @@ package com.kaspersky.kaspressample.screen
 import com.agoda.kakao.edit.KEditText
 import com.agoda.kakao.text.KButton
 import com.kaspersky.kaspressample.R
-import com.kaspersky.kaspressample.SimpleFragment
+import com.kaspersky.kaspressample.simple.SimpleActivity
 
 object SimpleScreen : KScreen<SimpleScreen>() {
 
-    override val layoutId: Int? = R.layout.fragment_simple
-    override val viewClass: Class<*>? = SimpleFragment::class.java
+    override val layoutId: Int? = R.layout.activity_simple
+    override val viewClass: Class<*>? = SimpleActivity::class.java
 
     val button1 = KButton { withId(R.id.button_1) }
 

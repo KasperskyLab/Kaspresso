@@ -6,3 +6,8 @@
 
 Overrides [Apps.openRecent](../-apps/open-recent.md)
 
+Opens the app from the recent list by the description.
+
+### Parameters
+
+`contentDescription` - the description of the app to launch.
