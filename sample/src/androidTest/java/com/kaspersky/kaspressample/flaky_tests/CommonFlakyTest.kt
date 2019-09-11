@@ -4,12 +4,10 @@ import android.Manifest
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
-import com.agoda.kakao.text.KButton
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.R
 import com.kaspersky.kaspressample.screen.MainScreen
 import com.kaspersky.kaspressample.screen.ScrollViewStubScreen
-import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.junit.Rule
 import org.junit.Test
@@ -41,34 +39,41 @@ class CommonFlakyTest : TestCase() {
                 }
             }
 
-            step("Check ScroolView screen is visible") {
+            step("Check ScrollView screen is visible") {
                 ScrollViewStubScreen {
                     scrollViewStub.isVisible()
                 }
             }
 
-            step("Check btn5 is visible") {
+            step("Check btn5's text") {
                 ScrollViewStubScreen {
-                    compose {
-                        or(btn1) { flakySafely(timeoutMs = 5000) { hasText(R.string.common_flaky_final_button) } }
-                        or(btn5) { flakySafely(timeoutMs = 5000) { hasText(R.string.common_flaky_final_button) } }
+                    flakySafely(timeoutMs = 5_000) {
+                        compose {
+                            or(btn5) { hasText(R.string.common_flaky_final_button) }
+                            or(btn1) { hasText(R.string.common_flaky_final_button) }
+                        }
                     }
                 }
             }
 
-            step("Check tv6 is visible") {
+            step("Check tv6's text") {
                 ScrollViewStubScreen {
-                    compose {
-                        or(tv6) { hasText(R.string.common_flaky_final_textview) }
-                        or(btn1) { hasText(R.string.common_flaky_final_textview) }
+                    flakySafely(timeoutMs = 5_000) {
+                        compose {
+                            or(tv6) { hasText(R.string.common_flaky_final_textview) }
+                            or(btn1) { hasText(R.string.common_flaky_final_textview) }
+                        }
                     }
                 }
             }
 
-            step("Check #2 btn5 is visible") {
+            step("Check btn5's text again and click on it") {
                 ScrollViewStubScreen {
                     btn5.compose {
-                        or { hasText("Something wrong") }
+                        or {
+                            hasText("Something wrong")
+                            click()
+                        }
                         or {
                             hasText(R.string.common_flaky_final_button)
                             click()

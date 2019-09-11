@@ -28,7 +28,7 @@ class ListStubActivity : AppCompatActivity() {
                 override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
                     val view: View
 
-                    val vh =  if (convertView != null) {
+                    val vh = if (convertView != null) {
                         view = convertView
                         convertView.tag as StubViewHolder
                     } else {

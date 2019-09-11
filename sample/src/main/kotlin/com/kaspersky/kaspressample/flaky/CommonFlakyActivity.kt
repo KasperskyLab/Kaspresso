@@ -7,11 +7,11 @@ import com.kaspersky.kaspressample.R
 import java.util.concurrent.TimeUnit
 import kotlinx.android.synthetic.main.activity_scroll_view_stub.*
 
-class CommonFlakyStubActivity : AppCompatActivity() {
+class CommonFlakyActivity : AppCompatActivity() {
 
     private companion object {
-        private val DELAY_FOR_BUTTON = TimeUnit.SECONDS.toMillis(5)
-        private val DELAY_FOR_TEXTVIEW = TimeUnit.SECONDS.toMillis(2)
+        private val DELAY_FOR_BUTTON = TimeUnit.SECONDS.toMillis(4)
+        private val DELAY_FOR_TEXTVIEW = TimeUnit.SECONDS.toMillis(8)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
