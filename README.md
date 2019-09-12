@@ -1,6 +1,6 @@
 # Kaspresso
 
-[![CircleCI](https://circleci.com/gh/matzuk/Kaspresso.svg?style=svg&circle-token=218b4c5961fedf37a134fb94d522813be949ebe5)](https://circleci.com/gh/matzuk/Kaspresso)
+[![CircleCI](https://circleci.com/gh/matzuk/Kaspresso.svg?style=svg&circle-token=705dd95e0d0b528b0b59e1b638cfa7c9e7659500)](https://circleci.com/gh/matzuk/Kaspresso)
 
 Kaspresso is a UiTest framework based on [Espresso](https://developer.android.com/training/testing/espresso), 
 [UIAutomator](https://developer.android.com/training/testing/ui-automator) and 
