@@ -1,4 +1,4 @@
-[kaspresso](../../index.md) / [androidx.test.espresso.web.assertion](../index.md) / [WebAssertionProxy](index.md) / [checkResult](./check-result.md)
+[kaspresso](../../index.md) / [android.support.test.espresso.web.assertion](../index.md) / [WebAssertionProxy](index.md) / [checkResult](./check-result.md)
 
 # checkResult
 

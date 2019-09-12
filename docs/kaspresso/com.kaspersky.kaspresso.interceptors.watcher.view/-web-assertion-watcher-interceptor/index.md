@@ -4,13 +4,13 @@
 
 `interface WebAssertionWatcherInterceptor`
 
-The interface for all atom interceptors, used in [WebAssertionProxy](../../androidx.test.espresso.web.assertion/-web-assertion-proxy/index.md).
+The interface for all atom interceptors, used in [WebAssertionProxy](../../android.support.test.espresso.web.assertion/-web-assertion-proxy/index.md).
 
 ### Functions
 
 | Name | Summary |
 |---|---|
-| [intercept](intercept.md) | `abstract fun intercept(webAssertionProxy: `[`WebAssertionProxy`](../../androidx.test.espresso.web.assertion/-web-assertion-proxy/index.md)`<*>, view: `[`WebView`](https://developer.android.com/reference/android/webkit/WebView.html)`?, result: `[`Any`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Called to do some stuff before [androidx.test.espresso.web.assertion.WebAssertion.checkResult](#) is actually called. |
+| [intercept](intercept.md) | `abstract fun intercept(webAssertionProxy: `[`WebAssertionProxy`](../../android.support.test.espresso.web.assertion/-web-assertion-proxy/index.md)`<*>, view: `[`WebView`](https://developer.android.com/reference/android/webkit/WebView.html)`?, result: `[`Any`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Called to do some stuff before [androidx.test.espresso.web.assertion.WebAssertion.checkResult](#) is actually called. |
 
 ### Inheritors
 

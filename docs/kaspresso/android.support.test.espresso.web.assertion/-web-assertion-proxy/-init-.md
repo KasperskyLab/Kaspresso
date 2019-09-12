@@ -1,4 +1,4 @@
-[kaspresso](../../index.md) / [androidx.test.espresso.web.assertion](../index.md) / [WebAssertionProxy](index.md) / [&lt;init&gt;](./-init-.md)
+[kaspresso](../../index.md) / [android.support.test.espresso.web.assertion](../index.md) / [WebAssertionProxy](index.md) / [&lt;init&gt;](./-init-.md)
 
 # &lt;init&gt;
 

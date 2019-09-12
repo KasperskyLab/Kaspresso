@@ -20,6 +20,7 @@ com.kaspersky.kaspresso.device.phone
 com.kaspersky.kaspresso.device.screenshots
 com.kaspersky.kaspresso.device.screenshots.screenshoter
 com.kaspersky.kaspresso.device.server
+com.kaspersky.kaspresso.docloc
 com.kaspersky.kaspresso.docloc.rule
 com.kaspersky.kaspresso.failure
 com.kaspersky.kaspresso.flakysafety

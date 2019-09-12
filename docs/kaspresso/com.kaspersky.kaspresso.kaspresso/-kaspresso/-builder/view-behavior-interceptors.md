@@ -9,4 +9,8 @@ If it was not specified, Kaspresso will use no [ViewBehaviorInterceptor](../../.
 These interceptors are called by [com.kaspersky.kaspresso.interceptors.tokakao.impl.KakaoViewInterceptor](#)
 before actual [androidx.test.espresso.ViewInteraction.perform](#) and
 [androidx.test.espresso.ViewInteraction.check](#) calls.
+Note that the order of [ViewBehaviorInterceptor](../../../com.kaspersky.kaspresso.interceptors.behavior/-view-behavior-interceptor.md)s in this list is significant: the first item wil be
+at the lowest level of intercepting chain, and the last item will be at the highest level.
+For example: the first item actually wraps the [androidx.test.espresso.ViewInteraction.perform](#) call,
+the second item wraps the first item, and so on.
 

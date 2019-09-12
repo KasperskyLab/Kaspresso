@@ -4,7 +4,7 @@
 
 | Name | Summary |
 |---|---|
-| [androidx.test.espresso.web.assertion](androidx.test.espresso.web.assertion/index.md) |  |
+| [android.support.test.espresso.web.assertion](android.support.test.espresso.web.assertion/index.md) |  |
 | [com.kaspersky.kaspresso.annotations](com.kaspersky.kaspresso.annotations/index.md) |  |
 | [com.kaspersky.kaspresso.autoscroll](com.kaspersky.kaspresso.autoscroll/index.md) |  |
 | [com.kaspersky.kaspresso.compose](com.kaspersky.kaspresso.compose/index.md) |  |
@@ -23,6 +23,7 @@
 | [com.kaspersky.kaspresso.device.screenshots](com.kaspersky.kaspresso.device.screenshots/index.md) |  |
 | [com.kaspersky.kaspresso.device.screenshots.screenshoter](com.kaspersky.kaspresso.device.screenshots.screenshoter/index.md) |  |
 | [com.kaspersky.kaspresso.device.server](com.kaspersky.kaspresso.device.server/index.md) |  |
+| [com.kaspersky.kaspresso.docloc](com.kaspersky.kaspresso.docloc/index.md) |  |
 | [com.kaspersky.kaspresso.docloc.rule](com.kaspersky.kaspresso.docloc.rule/index.md) |  |
 | [com.kaspersky.kaspresso.failure](com.kaspersky.kaspresso.failure/index.md) |  |
 | [com.kaspersky.kaspresso.flakysafety](com.kaspersky.kaspresso.flakysafety/index.md) |  |

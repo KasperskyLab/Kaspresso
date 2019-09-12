@@ -1,6 +1,6 @@
-[kaspresso](../index.md) / [androidx.test.espresso.web.assertion](./index.md)
+[kaspresso](../index.md) / [android.support.test.espresso.web.assertion](./index.md)
 
-## Package androidx.test.espresso.web.assertion
+## Package android.support.test.espresso.web.assertion
 
 ### Types
 
