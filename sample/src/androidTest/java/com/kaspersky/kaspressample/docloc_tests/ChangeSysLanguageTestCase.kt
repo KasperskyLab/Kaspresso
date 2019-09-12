@@ -42,9 +42,7 @@ class ChangeSysLanguageTestCase : DocLocScreenshotTestCase(
             step("Start Android OS Settings") {
                 val intent = Intent(Settings.ACTION_SETTINGS)
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-
-                val context = InstrumentationRegistry.getInstrumentation().targetContext
-                context.startActivity(intent)
+                device.targetContext.startActivity(intent)
                 device.uiDevice.waitForIdle(3000)
             }
             step("Capture Android OS Settings") {
