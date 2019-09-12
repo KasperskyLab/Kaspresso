@@ -3,7 +3,6 @@ package com.kaspersky.kaspresso.flakysafety
 import android.support.test.espresso.NoMatchingViewException
 import android.support.test.espresso.PerformException
 
-
 /**
  * The class that holds all the necessary for [FlakySafetyProvider] parameters.
  */

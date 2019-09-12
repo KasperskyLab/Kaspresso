@@ -1,6 +1,10 @@
 package com.kaspersky.kaspresso.systemsafety
 
-import android.support.test.uiautomator.*
+import android.support.test.uiautomator.By
+import android.support.test.uiautomator.BySelector
+import android.support.test.uiautomator.UiDevice
+import android.support.test.uiautomator.UiSelector
+import android.support.test.uiautomator.Until
 import android.widget.FrameLayout
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import java.util.concurrent.TimeUnit

@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.kaspersky.kaspressample.R
-import kotlinx.android.synthetic.main.activity_simple.*
 import java.util.concurrent.Executors
+import kotlinx.android.synthetic.main.activity_simple.*
 
 class SimpleActivity : AppCompatActivity() {
 

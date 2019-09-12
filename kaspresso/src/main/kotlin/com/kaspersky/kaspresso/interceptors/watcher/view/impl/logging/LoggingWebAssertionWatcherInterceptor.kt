@@ -1,8 +1,8 @@
 package com.kaspersky.kaspresso.interceptors.watcher.view.impl.logging
 
-import android.webkit.WebView
 import android.support.test.espresso.web.assertion.WebAssertionProxy
 import android.support.test.espresso.web.assertion.describeTo
+import android.webkit.WebView
 import com.kaspersky.kaspresso.interceptors.watcher.view.WebAssertionWatcherInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import org.hamcrest.StringDescription
