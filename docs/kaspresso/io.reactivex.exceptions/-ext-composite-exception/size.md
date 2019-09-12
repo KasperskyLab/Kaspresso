@@ -1,4 +1,4 @@
-[kaspresso](../../index.md) / [io.reactivex.exceptions](../index.md) / [CompositeException](index.md) / [size](./size.md)
+[kaspresso](../../index.md) / [io.reactivex.exceptions](../index.md) / [ExtCompositeException](index.md) / [size](./size.md)
 
 # size
 

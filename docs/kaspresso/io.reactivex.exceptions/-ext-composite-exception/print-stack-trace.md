@@ -1,4 +1,4 @@
-[kaspresso](../../index.md) / [io.reactivex.exceptions](../index.md) / [CompositeException](index.md) / [printStackTrace](./print-stack-trace.md)
+[kaspresso](../../index.md) / [io.reactivex.exceptions](../index.md) / [ExtCompositeException](index.md) / [printStackTrace](./print-stack-trace.md)
 
 # printStackTrace
 

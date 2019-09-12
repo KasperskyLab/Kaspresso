@@ -23,6 +23,7 @@
 | [com.kaspersky.kaspresso.device.screenshots](com.kaspersky.kaspresso.device.screenshots/index.md) |  |
 | [com.kaspersky.kaspresso.device.screenshots.screenshoter](com.kaspersky.kaspresso.device.screenshots.screenshoter/index.md) |  |
 | [com.kaspersky.kaspresso.device.server](com.kaspersky.kaspresso.device.server/index.md) |  |
+| [com.kaspersky.kaspresso.docloc](com.kaspersky.kaspresso.docloc/index.md) |  |
 | [com.kaspersky.kaspresso.docloc.rule](com.kaspersky.kaspresso.docloc.rule/index.md) |  |
 | [com.kaspersky.kaspresso.failure](com.kaspersky.kaspresso.failure/index.md) |  |
 | [com.kaspersky.kaspresso.flakysafety](com.kaspersky.kaspresso.flakysafety/index.md) |  |
