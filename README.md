@@ -6,6 +6,8 @@ Kaspresso is a UiTest framework based on [Espresso](https://developer.android.co
 [UIAutomator](https://developer.android.com/training/testing/ui-automator) and 
 [Kakao](https://github.com/agoda-com/Kakao) and assisting to write right and no-pain ui tests.
 
+![](https://habrastorage.org/webt/dw/jh/9k/dwjh9kypjl637kxj8tiaxwjvtp0.png)
+
 ## Capabilities
 
 #### Stability 
