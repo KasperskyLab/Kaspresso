@@ -5,9 +5,9 @@ import com.agoda.kakao.text.KButton
 import com.kaspersky.kaspressample.R
 import com.kaspersky.kaspressample.flaky.CommonFlakyActivity
 
-object ScrollViewSampleScreen : KScreen<ScrollViewSampleScreen>() {
+object CommonFlakyScreen : KScreen<CommonFlakyScreen>() {
 
-    override val layoutId: Int? = R.layout.activity_scroll_view_sample
+    override val layoutId: Int? = R.layout.activity_common_flaky
     override val viewClass: Class<*>? = CommonFlakyActivity::class.java
 
     val scrollView = KScrollView {

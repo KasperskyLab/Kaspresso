@@ -7,7 +7,7 @@ import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.R
 import com.kaspersky.kaspressample.screen.MainScreen
-import com.kaspersky.kaspressample.screen.ScrollViewSampleScreen
+import com.kaspersky.kaspressample.screen.CommonFlakyScreen
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import java.util.concurrent.TimeUnit
@@ -46,13 +46,13 @@ class ComposeTest : TestCase(
             }
 
             step("Check ScrollView screen is visible") {
-                ScrollViewSampleScreen {
+                CommonFlakyScreen {
                     scrollView.isVisible()
                 }
             }
 
             step("Check btn5's text") {
-                ScrollViewSampleScreen {
+                CommonFlakyScreen {
                     compose {
                         or(btn5) { hasText(R.string.common_flaky_final_button) }
                         or(btn1) { hasText(R.string.common_flaky_final_button) }
@@ -61,7 +61,7 @@ class ComposeTest : TestCase(
             }
 
             step("Check tv6's text") {
-                ScrollViewSampleScreen {
+                CommonFlakyScreen {
                     compose {
                         or(tv6) { hasText(R.string.common_flaky_final_textview) }
                         or(btn1) { hasText(R.string.common_flaky_final_textview) }
@@ -70,7 +70,7 @@ class ComposeTest : TestCase(
             }
 
             step("Check btn5's text again and click on it") {
-                ScrollViewSampleScreen {
+                CommonFlakyScreen {
                     btn5.compose {
                         or {
                             hasText("Something wrong")
