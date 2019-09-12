@@ -2,17 +2,12 @@ package com.kaspersky.kaspressample.docloc
 
 import android.graphics.Color
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import com.kaspersky.kaspressample.R
-import kotlinx.android.synthetic.main.fragment_screenshot.background
-import kotlinx.android.synthetic.main.fragment_screenshot.counter
-import kotlinx.android.synthetic.main.fragment_screenshot.decrement
-import kotlinx.android.synthetic.main.fragment_screenshot.increment
-import kotlinx.android.synthetic.main.fragment_screenshot.set_black_background
-import kotlinx.android.synthetic.main.fragment_screenshot.set_red_background
+import kotlinx.android.synthetic.main.fragment_screenshot.*
 
 class ScreenshotSampleFragment : Fragment(), ScreenshotSampleView {
 

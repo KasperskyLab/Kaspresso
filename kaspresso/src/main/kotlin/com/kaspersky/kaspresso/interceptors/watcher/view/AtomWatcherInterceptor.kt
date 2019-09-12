@@ -1,6 +1,6 @@
 package com.kaspersky.kaspresso.interceptors.watcher.view
 
-import androidx.test.espresso.web.model.Evaluation
+import android.support.test.espresso.web.model.Evaluation
 import com.kaspersky.kaspresso.proxy.AtomProxy
 
 /**

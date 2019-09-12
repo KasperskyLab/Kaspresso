@@ -1,6 +1,6 @@
 package com.kaspersky.kaspressample.docloc_tests.advanced
 
-import androidx.test.rule.ActivityTestRule
+import android.support.test.rule.ActivityTestRule
 import com.kaspersky.kaspressample.docloc.FragmentTestActivity
 import com.kaspersky.kaspresso.testcases.api.testcase.DocLocScreenshotTestCase
 import java.io.File

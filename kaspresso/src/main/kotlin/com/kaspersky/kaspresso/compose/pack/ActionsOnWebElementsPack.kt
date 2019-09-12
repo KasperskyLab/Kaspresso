@@ -1,6 +1,6 @@
 package com.kaspersky.kaspresso.compose.pack
 
-import androidx.test.espresso.web.webdriver.Locator
+import android.support.test.espresso.web.webdriver.Locator
 import com.agoda.kakao.web.WebElementBuilder
 import java.lang.IllegalArgumentException
 

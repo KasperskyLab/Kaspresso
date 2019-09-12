@@ -1,8 +1,8 @@
 package com.kaspersky.kaspresso.device.screenshots.screenshoter.external
 
 import android.content.Context
-import androidx.test.platform.app.InstrumentationRegistry
-import androidx.test.uiautomator.UiDevice
+import android.support.test.InstrumentationRegistry
+import android.support.test.uiautomator.UiDevice
 import com.kaspersky.kaspresso.device.screenshots.screenshoter.ScreenshotFiles
 import java.io.File
 

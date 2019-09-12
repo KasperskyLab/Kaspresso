@@ -1,8 +1,8 @@
 package com.kaspersky.kaspresso.interceptors.tokakao.impl
 
-import androidx.test.espresso.DataInteraction
-import androidx.test.espresso.ViewAction
-import androidx.test.espresso.ViewAssertion
+import android.support.test.espresso.DataInteraction
+import android.support.test.espresso.ViewAction
+import android.support.test.espresso.ViewAssertion
 import com.kaspersky.kaspresso.interceptors.behavior.DataBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.tokakao.KakaoInterceptor
 import com.kaspersky.kaspresso.kaspresso.Kaspresso

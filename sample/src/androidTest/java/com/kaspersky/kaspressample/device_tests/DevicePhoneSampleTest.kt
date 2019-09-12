@@ -3,9 +3,9 @@ package com.kaspersky.kaspressample.device_tests
 import android.Manifest
 import android.provider.CallLog
 import android.provider.Telephony
-import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.rule.ActivityTestRule
-import androidx.test.rule.GrantPermissionRule
+import android.support.test.rule.ActivityTestRule
+import android.support.test.rule.GrantPermissionRule
+import android.support.test.runner.AndroidJUnit4
 import com.agoda.kakao.screen.Screen
 import com.kaspersky.kaspressample.device.DeviceSampleActivity
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase

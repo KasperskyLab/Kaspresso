@@ -3,10 +3,9 @@ package com.kaspersky.kaspressample.docloc_tests
 import android.Manifest
 import android.content.Intent
 import android.provider.Settings
-import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.platform.app.InstrumentationRegistry
-import androidx.test.rule.ActivityTestRule
-import androidx.test.rule.GrantPermissionRule
+import android.support.test.rule.ActivityTestRule
+import android.support.test.rule.GrantPermissionRule
+import android.support.test.runner.AndroidJUnit4
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspresso.testcases.api.testcase.DocLocScreenshotTestCase
 import java.io.File
@@ -43,8 +42,7 @@ class ChangeSysLanguageTestCase : DocLocScreenshotTestCase(
                 val intent = Intent(Settings.ACTION_SETTINGS)
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 
-                val context = InstrumentationRegistry.getInstrumentation().targetContext
-                context.startActivity(intent)
+                device.targetContext.startActivity(intent)
                 device.uiDevice.waitForIdle(3000)
             }
             step("Capture Android OS Settings") {

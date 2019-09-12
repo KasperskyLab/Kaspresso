@@ -1,6 +1,6 @@
 package com.kaspersky.kaspresso.autoscroll
 
-import androidx.test.espresso.PerformException
+import android.support.test.espresso.PerformException
 import junit.framework.AssertionFailedError
 
 /**

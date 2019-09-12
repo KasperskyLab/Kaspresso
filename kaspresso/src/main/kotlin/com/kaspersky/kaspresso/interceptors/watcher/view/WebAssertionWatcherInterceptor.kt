@@ -1,7 +1,7 @@
 package com.kaspersky.kaspresso.interceptors.watcher.view
 
 import android.webkit.WebView
-import androidx.test.espresso.web.assertion.WebAssertionProxy
+import android.support.test.espresso.web.assertion.WebAssertionProxy
 
 /**
  * The interface for all atom interceptors, used in [WebAssertionProxy].

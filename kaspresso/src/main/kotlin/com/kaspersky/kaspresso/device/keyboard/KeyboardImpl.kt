@@ -1,9 +1,6 @@
 package com.kaspersky.kaspresso.device.keyboard
 
 import android.view.KeyEvent
-import androidx.test.espresso.action.ViewActions
-import androidx.test.uiautomator.UiDevice
-import androidx.test.uiautomator.UiObject
 import com.kaspersky.kaspresso.device.server.AdbServer
 
 /**

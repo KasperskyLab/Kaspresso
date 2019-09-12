@@ -1,8 +1,8 @@
 package com.kaspersky.kaspresso.device
 
 import android.content.Context
-import androidx.test.platform.app.InstrumentationRegistry
-import androidx.test.uiautomator.UiDevice
+import android.support.test.InstrumentationRegistry
+import android.support.test.uiautomator.UiDevice
 import com.kaspersky.kaspresso.device.accessibility.Accessibility
 import com.kaspersky.kaspresso.device.activities.Activities
 import com.kaspersky.kaspresso.device.apps.Apps

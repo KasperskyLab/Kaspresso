@@ -1,8 +1,8 @@
 package com.kaspersky.kaspressample.configurator_tests.interceptors
 
+import android.support.test.espresso.NoMatchingViewException
+import android.support.test.espresso.ViewAssertion
 import android.view.View
-import androidx.test.espresso.NoMatchingViewException
-import androidx.test.espresso.ViewAssertion
 import com.kaspersky.kaspressample.configurator_tests.helpers.CheckCustomInterceptorsStorage
 import com.kaspersky.kaspresso.interceptors.watcher.view.ViewAssertionWatcherInterceptor
 

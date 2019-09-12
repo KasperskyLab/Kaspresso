@@ -1,9 +1,9 @@
 package com.kaspersky.kaspressample.dsl_tests
 
 import android.Manifest
-import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.rule.ActivityTestRule
-import androidx.test.rule.GrantPermissionRule
+import android.support.test.rule.ActivityTestRule
+import android.support.test.rule.GrantPermissionRule
+import android.support.test.runner.AndroidJUnit4
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.screen.MainScreen
 import org.junit.Rule

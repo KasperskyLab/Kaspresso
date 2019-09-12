@@ -1,4 +1,4 @@
-package androidx.test.espresso.web.webdriver
+package android.support.test.espresso.web.webdriver
 
 /**
  * Provides [WebDriverAtomScripts] types to descendants as they are with package-local access.

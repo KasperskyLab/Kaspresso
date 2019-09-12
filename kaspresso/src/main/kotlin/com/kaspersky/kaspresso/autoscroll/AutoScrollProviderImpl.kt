@@ -1,7 +1,7 @@
 package com.kaspersky.kaspresso.autoscroll
 
-import androidx.test.espresso.ViewInteraction
-import androidx.test.espresso.action.ViewActions
+import android.support.test.espresso.ViewInteraction
+import android.support.test.espresso.action.ViewActions
 import com.kaspersky.kaspresso.internal.extensions.other.isAllowed
 import com.kaspersky.kaspresso.logger.UiTestLogger
 

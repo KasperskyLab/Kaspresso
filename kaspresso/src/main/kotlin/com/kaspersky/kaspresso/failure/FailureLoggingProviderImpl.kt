@@ -1,7 +1,7 @@
 package com.kaspersky.kaspresso.failure
 
+import android.support.test.espresso.PerformException
 import android.view.View
-import androidx.test.espresso.PerformException
 import com.kaspersky.kaspresso.internal.extensions.espressoext.describe
 import com.kaspersky.kaspresso.internal.extensions.other.getStackTraceAsString
 import com.kaspersky.kaspresso.logger.UiTestLogger

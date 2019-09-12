@@ -1,7 +1,7 @@
 $dokka.format:gfm
 $dokka.linkExtension:md
 
-androidx.test.espresso.web.assertion
+android.support.test.espresso.web.assertion
 com.kaspersky.kaspresso.annotations
 com.kaspersky.kaspresso.autoscroll
 com.kaspersky.kaspresso.compose

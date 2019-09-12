@@ -1,9 +1,9 @@
 package com.kaspersky.kaspressample.docloc_tests
 
 import android.Manifest
-import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.rule.ActivityTestRule
-import androidx.test.rule.GrantPermissionRule
+import android.support.test.rule.ActivityTestRule
+import android.support.test.rule.GrantPermissionRule
+import android.support.test.runner.AndroidJUnit4
 import com.agoda.kakao.screen.Screen
 import com.kaspersky.kaspressample.screen.SimpleScreen
 import com.kaspersky.kaspressample.simple.SimpleActivity

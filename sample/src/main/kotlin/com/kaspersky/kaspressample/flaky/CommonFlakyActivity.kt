@@ -2,10 +2,10 @@ package com.kaspersky.kaspressample.flaky
 
 import android.os.Bundle
 import android.os.Handler
-import androidx.appcompat.app.AppCompatActivity
+import android.support.v7.app.AppCompatActivity
 import com.kaspersky.kaspressample.R
-import java.util.concurrent.TimeUnit
 import kotlinx.android.synthetic.main.activity_common_flaky.*
+import java.util.concurrent.TimeUnit
 
 class CommonFlakyActivity : AppCompatActivity() {
 

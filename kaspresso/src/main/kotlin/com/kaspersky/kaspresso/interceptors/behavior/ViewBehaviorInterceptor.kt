@@ -1,6 +1,7 @@
 package com.kaspersky.kaspresso.interceptors.behavior
 
-import androidx.test.espresso.ViewInteraction
+import android.support.test.espresso.ViewInteraction
+
 
 /**
  * The derived from [BehaviorInterceptor] interface for intercepting [ViewInteraction.perform] and

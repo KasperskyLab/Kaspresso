@@ -1,6 +1,6 @@
 package com.kaspersky.kaspresso.interceptors.behavior.impl.failure
 
-import androidx.test.espresso.ViewInteraction
+import android.support.test.espresso.ViewInteraction
 import com.kaspersky.kaspresso.failure.FailureLoggingProvider
 import com.kaspersky.kaspresso.failure.FailureLoggingProviderImpl
 import com.kaspersky.kaspresso.interceptors.behavior.ViewBehaviorInterceptor

@@ -4,9 +4,9 @@ import android.Manifest
 import android.os.Build
 import android.provider.Settings
 import android.provider.Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES
-import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.rule.ActivityTestRule
-import androidx.test.rule.GrantPermissionRule
+import android.support.test.rule.ActivityTestRule
+import android.support.test.rule.GrantPermissionRule
+import android.support.test.runner.AndroidJUnit4
 import com.agoda.kakao.screen.Screen
 import com.kaspersky.kaspressample.device.DeviceSampleAccessibilityService
 import com.kaspersky.kaspressample.device.DeviceSampleActivity

@@ -3,10 +3,10 @@ package com.kaspersky.kaspressample.web
 import android.annotation.TargetApi
 import android.os.Build
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import androidx.appcompat.app.AppCompatActivity
 import com.kaspersky.kaspressample.R
 import kotlinx.android.synthetic.main.activity_webview.*
 

@@ -1,7 +1,7 @@
 package com.kaspersky.kaspresso.testcases.api.testcase
 
 import android.Manifest
-import androidx.test.rule.GrantPermissionRule
+import android.support.test.rule.GrantPermissionRule
 import com.kaspersky.kaspresso.device.locales.Locales
 import com.kaspersky.kaspresso.docloc.DocLocScreenshotCapturer
 import com.kaspersky.kaspresso.docloc.rule.LocaleRule

@@ -1,6 +1,6 @@
 package com.kaspersky.kaspresso.interceptors.behavior.impl.autoscroll
 
-import androidx.test.espresso.web.sugar.Web
+import android.support.test.espresso.web.sugar.Web
 import com.kaspersky.kaspresso.autoscroll.AutoScrollParams
 import com.kaspersky.kaspresso.autoscroll.AutoScrollProvider
 import com.kaspersky.kaspresso.autoscroll.WebAutoScrollProviderImpl

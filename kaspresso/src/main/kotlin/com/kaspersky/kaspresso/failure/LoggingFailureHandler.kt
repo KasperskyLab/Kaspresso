@@ -1,7 +1,7 @@
 package com.kaspersky.kaspresso.failure
 
+import android.support.test.espresso.FailureHandler
 import android.view.View
-import androidx.test.espresso.FailureHandler
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import org.hamcrest.Matcher
 

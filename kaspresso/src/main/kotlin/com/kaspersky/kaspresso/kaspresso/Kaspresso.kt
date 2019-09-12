@@ -1,10 +1,10 @@
 package com.kaspersky.kaspresso.kaspresso
 
 import android.app.Instrumentation
-import androidx.test.espresso.Espresso
-import androidx.test.espresso.FailureHandler
-import androidx.test.platform.app.InstrumentationRegistry
-import androidx.test.uiautomator.UiDevice
+import android.support.test.InstrumentationRegistry
+import android.support.test.espresso.Espresso
+import android.support.test.espresso.FailureHandler
+import android.support.test.uiautomator.UiDevice
 import com.agoda.kakao.Kakao
 import com.kaspersky.kaspresso.autoscroll.AutoScrollParams
 import com.kaspersky.kaspresso.device.Device

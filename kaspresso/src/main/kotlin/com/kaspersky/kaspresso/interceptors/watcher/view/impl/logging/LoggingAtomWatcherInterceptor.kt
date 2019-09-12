@@ -1,8 +1,8 @@
 package com.kaspersky.kaspresso.interceptors.watcher.view.impl.logging
 
-import androidx.test.espresso.web.model.Atom
-import androidx.test.espresso.web.model.Evaluation
-import androidx.test.espresso.web.webdriver.describeTo
+import android.support.test.espresso.web.model.Atom
+import android.support.test.espresso.web.model.Evaluation
+import android.support.test.espresso.web.webdriver.describeTo
 import com.kaspersky.kaspresso.interceptors.watcher.view.AtomWatcherInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.proxy.AtomProxy

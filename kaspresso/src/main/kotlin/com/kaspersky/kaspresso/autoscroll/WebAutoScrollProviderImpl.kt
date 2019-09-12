@@ -1,7 +1,7 @@
 package com.kaspersky.kaspresso.autoscroll
 
-import androidx.test.espresso.web.sugar.Web
-import androidx.test.espresso.web.webdriver.DriverAtoms
+import android.support.test.espresso.web.sugar.Web
+import android.support.test.espresso.web.webdriver.DriverAtoms
 import com.kaspersky.kaspresso.internal.extensions.other.isAllowed
 import com.kaspersky.kaspresso.logger.UiTestLogger
 

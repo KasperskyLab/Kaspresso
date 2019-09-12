@@ -3,9 +3,9 @@ package com.kaspersky.kaspressample.device
 import android.Manifest
 import android.os.Build
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import android.support.v7.app.AppCompatActivity
 import com.kaspersky.kaspressample.R
-import kotlinx.android.synthetic.main.activity_device_sample.request_permission_button
+import kotlinx.android.synthetic.main.activity_device_sample.*
 
 class DeviceSampleActivity : AppCompatActivity() {
 

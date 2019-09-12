@@ -3,9 +3,9 @@ package com.kaspersky.kaspresso.docloc.rule
 import android.Manifest
 import android.app.Activity
 import android.content.Context
-import androidx.test.runner.lifecycle.ActivityLifecycleCallback
-import androidx.test.runner.lifecycle.ActivityLifecycleMonitorRegistry
-import androidx.test.runner.lifecycle.Stage
+import android.support.test.runner.lifecycle.ActivityLifecycleCallback
+import android.support.test.runner.lifecycle.ActivityLifecycleMonitorRegistry
+import android.support.test.runner.lifecycle.Stage
 import com.kaspersky.kaspresso.device.Device
 import com.kaspersky.kaspresso.docloc.DoclocException
 import com.kaspersky.kaspresso.docloc.LocaleSettings
