@@ -14,7 +14,7 @@ android {
         targetSdkVersion versions.targetSdk
         versionName "$pKaspressoMajor.$pKaspressoMinor.$pKaspressoBuild"
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         sourceSets {
             main.java.srcDirs += 'src/main/kotlin'

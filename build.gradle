@@ -28,7 +28,7 @@ allprojects {
     configurations.all {
         resolutionStrategy {
             eachDependency { DependencyResolveDetails details ->
-                if (details.requested.group == 'com.android.support'
+                if (details.requested.group == 'com.androidx'
                         && !details.requested.name.startsWith('multidex')
                 ) {
                     details.useVersion versions.androidSupport

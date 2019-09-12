@@ -42,7 +42,7 @@ dependencies {
 
     implementation "androidx.appcompat:appcompat:$versions.androidSupport"
     implementation "com.google.android.material:material:$versions.androidMaterial"
-    implementation "com.android.support.constraint:constraint-layout:$versions.constraint"
+    implementation "androidx.constraintlayout:constraintlayout:$versions.constraint"
 
 
     testImplementation "junit:junit:$versions.junit"
