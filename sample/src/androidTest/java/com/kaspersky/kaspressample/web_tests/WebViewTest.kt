@@ -83,7 +83,7 @@ class WebViewTest : TestCase() {
                             compose(this@webView) {
                                 or {
                                     containsText("fffuuuuu")
-                                    hasText("fuck")
+                                    hasText("fuuuu")
                                 }
                                 or {
                                     containsText("Ask questiop")
@@ -92,6 +92,10 @@ class WebViewTest : TestCase() {
                                 or {
                                     containsText("Ask question")
                                     hasText("Ask question")
+                                }
+                                or {
+                                    containsText("Get Support")
+                                    hasText("Get Support")
                                 }
                             }
                         }
@@ -108,6 +112,13 @@ class WebViewTest : TestCase() {
                                 "//*[@id=\"app\"]/section[5]/div/div/div[2]/div[3]/button"
                             ) {
                                 hasText("Ask question")
+                                click()
+                            }
+                            orWithElement(
+                                Locator.XPATH,
+                                "//*[@id=\"app\"]/section[5]/div/div/div[2]/div[3]/button"
+                            ) {
+                                hasText("Get Support")
                                 click()
                             }
                         }
