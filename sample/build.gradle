@@ -15,7 +15,7 @@ android {
         versionName "$pKaspressampleMajor.$pKaspressampleMinor.$pKaspressampleBuild"
         versionCode Integer.parseInt(pKaspressampleCode)
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         sourceSets {
             main.java.srcDirs += 'src/main/kotlin'
@@ -40,21 +40,20 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
 
-    implementation "androidx.appcompat:appcompat:$versions.androidSupport"
-    implementation "com.google.android.material:material:$versions.androidMaterial"
+    implementation "com.android.support:appcompat-v7:$versions.androidSupport"
+    implementation "com.android.support:design:$versions.androidSupport"
     implementation "com.android.support.constraint:constraint-layout:$versions.constraint"
 
 
     testImplementation "junit:junit:$versions.junit"
 
-    androidTestImplementation "androidx.test:runner:$versions.runner"
-    androidTestImplementation "androidx.test.espresso:espresso-web:$versions.espresso"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$versions.espresso"
-    androidTestImplementation "androidx.test.espresso:espresso-contrib:$versions.espresso"
-    androidTestImplementation "androidx.test.espresso:espresso-intents:$versions.espresso"
-    androidTestImplementation "androidx.test.uiautomator:uiautomator:$versions.uiautomator"
-    androidTestImplementation "androidx.test.ext:junit:$versions.extJunit"
+    androidTestImplementation "com.android.support.test:runner:$versions.runner"
+    androidTestImplementation "com.android.support.test.espresso:espresso-web:$versions.espresso"
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:$versions.espresso"
+    androidTestImplementation "com.android.support.test.espresso:espresso-contrib:$versions.espresso"
+    androidTestImplementation "com.android.support.test.espresso:espresso-intents:$versions.espresso"
+    androidTestImplementation "com.android.support.test.uiautomator:uiautomator-v18:$versions.uiautomator"
 
     androidTestImplementation project(':kaspresso')
-    androidTestImplementation "com.agoda.kakao:kakao:$versions.kakao"
+    androidTestImplementation "com.agoda.kakao:kakao:$versions.kakao-support"
 }
