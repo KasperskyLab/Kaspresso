@@ -1,1 +1,1 @@
-include ':kaspresso', ':sample'
+include ':kaspresso', ':sample', ':allure-model'
