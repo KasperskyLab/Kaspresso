@@ -129,7 +129,7 @@ The developer can tune any part of Kaspresso thanks to ```Kaspresso.Builder```.
 Kaspresso proposes such very important things for ui-tests as the set of rules on how to write ui-tests.
 
 ## Wiki
-For all information check [Kaspresso wiki](https://github.com/matzuk/Kaspresso/wiki)
+For all information check [Kaspresso wiki](https://github.com/KasperskyLab/Kaspresso/blob/master/wiki/00.%20Home.md)
 
 ## Integration
 // todo
