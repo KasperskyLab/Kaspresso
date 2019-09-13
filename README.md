@@ -1,7 +1,5 @@
 # Kaspresso
 
-[![CircleCI](https://circleci.com/gh/matzuk/Kaspresso.svg?style=svg&circle-token=705dd95e0d0b528b0b59e1b638cfa7c9e7659500)](https://circleci.com/gh/matzuk/Kaspresso)
-
 Kaspresso is a UiTest framework based on [Espresso](https://developer.android.com/training/testing/espresso), 
 [UIAutomator](https://developer.android.com/training/testing/ui-automator) and 
 [Kakao](https://github.com/agoda-com/Kakao) and assisting to write right and no-pain ui tests.
@@ -105,7 +103,7 @@ Part of interceptors was introduced in Kakao version 2.1, another part of interc
 #### Ability to call Adb commands
 
 Espresso or UiAutomator doesn't allow to call adb commands inside a test. 
-That's why we have written special [AdbServer repository](https://github.com/matzuk/AdbServer) fixing mentioned problem. 
+That's why we have written special [AdbServer repository](https://github.com/KasperskyLab/AdbServer) fixing mentioned problem. 
 
 In Kaspresso, the developer can call adb and cmd commands by ```AdbServer``` class.  
 #### Ability to work with Android System
@@ -136,12 +134,12 @@ For all information check [Kaspresso wiki](https://github.com/matzuk/Kaspresso/w
 ## Integration
 // todo
 
-## Links
-// todo
+## Support
+Russian support in telegram - t.me/kaspresso
 
 ## Contribution Policy
 Kaspresso is an open source project, and depends on its users to improve it. We are more than happy to find you interested in taking the project forward. <br>
-Kindly refer to the [Contribution Guidelines](https://github.com/matzuk/Kaspresso/blob/master/CONTRIBUTING.md) for detailed information. <br>
+Kindly refer to the [Contribution Guidelines](https://github.com/KasperskyLab/Kaspresso/blob/master/CONTRIBUTING.md) for detailed information. <br>
 
 ## License
-Kaspresso is open source and available under the [Apache License, Version 2.0](https://github.com/matzuk/Kaspresso/blob/external_master/LICENSE).
+Kaspresso is open source and available under the [Apache License, Version 2.0](https://github.com/KasperskyLab/Kaspresso/blob/master/LICENSE).
