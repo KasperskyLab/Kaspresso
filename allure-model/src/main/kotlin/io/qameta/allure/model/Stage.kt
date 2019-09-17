@@ -2,7 +2,6 @@ package io.qameta.allure.model
 
 import com.google.gson.annotations.SerializedName
 
-
 enum class Stage(val s: String) {
     @SerializedName("scheduled")
     SCHEDULED("scheduled"),

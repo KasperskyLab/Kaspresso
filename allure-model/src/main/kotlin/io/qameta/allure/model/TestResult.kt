@@ -1,8 +1,7 @@
 package io.qameta.allure.model
 
 import com.google.gson.annotations.SerializedName
-import java.util.*
-
+import java.util.UUID
 
 class TestResult(
     @SerializedName("uuid")

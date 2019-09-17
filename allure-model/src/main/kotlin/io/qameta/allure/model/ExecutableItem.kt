@@ -2,7 +2,6 @@ package io.qameta.allure.model
 
 import com.google.gson.annotations.SerializedName
 
-
 abstract class ExecutableItem(
     @SerializedName("name")
     open var name: String? = null,
@@ -21,11 +20,10 @@ abstract class ExecutableItem(
     @SerializedName("statusDetails")
     override var statusDetails: StatusDetails? = null,
     @SerializedName("steps")
-    override var steps: MutableList<StepResult> = ArrayList(),
+    override var steps: MutableList<StepResult> = mutableListOf(),
     @SerializedName("attachments")
-    override var attachments: MutableList<Attachment> = ArrayList(),
+    override var attachments: MutableList<Attachment> = mutableListOf(),
     @SerializedName("parameters")
-    override var parameters: MutableList<Parameter> = ArrayList()
+    override var parameters: MutableList<Parameter> = mutableListOf()
 ) : WithSteps, WithAttachments, WithParameters,
     WithStatusDetails
-

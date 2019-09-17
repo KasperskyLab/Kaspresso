@@ -4,7 +4,6 @@ import com.google.gson.annotations.SerializedName
 import java.io.PrintWriter
 import java.io.StringWriter
 
-
 data class StatusDetails(
     @SerializedName("known")
     var known: Boolean? = null,

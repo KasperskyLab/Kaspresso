@@ -2,7 +2,6 @@ package io.qameta.allure.model
 
 import com.google.gson.annotations.SerializedName
 
-
 enum class Status(val s: String) {
     @SerializedName("failed")
     FAILED("failed"),
@@ -25,4 +24,3 @@ enum class Status(val s: String) {
         }
     }
 }
-
