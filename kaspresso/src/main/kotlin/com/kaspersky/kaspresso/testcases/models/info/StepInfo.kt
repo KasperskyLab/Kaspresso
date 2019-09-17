@@ -11,6 +11,6 @@ interface StepInfo {
     val subSteps: List<StepInfo>
     val status: StepStatus
     val throwable: Throwable?
-    val start: Long
-    val stop: Long
+    val startTime: Long
+    val stopTime: Long
 }

@@ -5,7 +5,6 @@ import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.report.ReportWriter
 import com.kaspersky.kaspresso.testcases.models.info.TestInfo
 
-
 class AllureReportWriter(
     private val uiTestLogger: UiTestLogger
 ) : ReportWriter {
@@ -15,10 +14,8 @@ class AllureReportWriter(
         private const val MAX_LOG_CHUNK_LENGTH = 4000 - STEPS_INFO_LABEL.length - 1
     }
 
-
     private val stepInfoConverter: StepInfoConverter by lazy { StepInfoConverter() }
     private val gson: Gson by lazy { Gson() }
-
 
     override fun processTestResults(testInfo: TestInfo) {
         val steps = testInfo.stepInfos.map { stepInfoConverter.convert(it) }
@@ -38,5 +35,4 @@ class AllureReportWriter(
             uiTestLogger.i("$STEPS_INFO_LABEL $stepsJson")
         }
     }
-
 }

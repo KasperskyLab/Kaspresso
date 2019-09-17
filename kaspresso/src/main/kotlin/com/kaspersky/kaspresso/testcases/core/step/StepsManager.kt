@@ -103,7 +103,7 @@ internal class StepsManager(
 
         localCurrentStepResult.internalStatus = if (error == null) StepStatus.SUCCESS else StepStatus.FAILED
         localCurrentStepResult.internalThrowable = error
-        localCurrentStepResult.internalStop = System.currentTimeMillis()
+        localCurrentStepResult.internalStopTime = System.currentTimeMillis()
         currentStepResult = localCurrentStepResult.parentStepInfo
     }
 
@@ -167,7 +167,7 @@ internal class StepsManager(
             ordinal = ++stepsCounter,
             stepNumber = stepNumber,
             parentStepInfo = parentStepInfo,
-            start = System.currentTimeMillis()
+            startTime = System.currentTimeMillis()
         )
     }
 }
