@@ -5,6 +5,17 @@ import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.report.ReportWriter
 import com.kaspersky.kaspresso.testcases.models.info.TestInfo
 
+/**
+ * This [com.kaspersky.kaspresso.report.ReportWriter] processes [com.kaspersky.kaspresso.testcases.models.info.TestInfo]
+ * for generating LogCat logs with <a href="https://docs.qameta.io/allure/#_steps">Allure's steps</a> info JSON.
+ *
+ * I/KASPRESSO: ---------------------------------------------------------------------------
+ * I/KASPRESSO: TEST PASSED
+ * I/KASPRESSO: ---------------------------------------------------------------------------
+ * I/KASPRESSO: #AllureStepsInfoJson#: [{"attachments":[],"name":"My step 1","parameters":[],"stage":"finished","start":1568790287246,"status":"passed", "steps":[],"stop":1568790288184}]
+ *
+ * This logs should be processed by your's tests orchestrator (e.g. <a href="https://github.com/Malinskiy/marathon/issues">Marathon</a>).
+ */
 class AllureReportWriter(
     private val uiTestLogger: UiTestLogger
 ) : ReportWriter {

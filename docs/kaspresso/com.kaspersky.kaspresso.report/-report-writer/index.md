@@ -14,4 +14,4 @@
 
 | Name | Summary |
 |---|---|
-| [AllureReportWriter](../../com.kaspersky.kaspresso.report.impl/-allure-report-writer/index.md) | `class AllureReportWriter : `[`ReportWriter`](./index.md) |
+| [AllureReportWriter](../../com.kaspersky.kaspresso.report.impl/-allure-report-writer/index.md) | `class AllureReportWriter : `[`ReportWriter`](./index.md)<br>This [com.kaspersky.kaspresso.report.ReportWriter](./index.md) processes [com.kaspersky.kaspresso.testcases.models.info.TestInfo](../../com.kaspersky.kaspresso.testcases.models.info/-test-info/index.md) for generating LogCat logs with Allure's steps info JSON. |
