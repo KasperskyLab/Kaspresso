@@ -1,0 +1,16 @@
+apply plugin: 'kotlin'
+apply plugin: 'java-library'
+
+
+sourceSets {
+    main.java.srcDirs += 'src/main/kotlin'
+}
+
+
+dependencies {
+    compileOnly "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
+    compileOnly "com.google.code.gson:gson:$versions.gson"
+}
+
+
+

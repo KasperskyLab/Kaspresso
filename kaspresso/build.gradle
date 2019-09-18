@@ -44,6 +44,7 @@ dependencies {
     implementation "androidx.test.espresso:espresso-intents:$versions.espresso"
     implementation "androidx.test.uiautomator:uiautomator:$versions.uiautomator"
     implementation "com.agoda.kakao:kakao:$versions.kakao"
+    implementation "com.google.code.gson:gson:$versions.gson"
 }
 
 task sourcesJar(type: Jar) {

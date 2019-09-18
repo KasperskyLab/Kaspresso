@@ -17,5 +17,7 @@ ext.versions = [
         uiautomator    : "2.2.0",
         dokka          : "0.9.18",
         kakao          : "2.1.0",
+        gson           : "2.8.5",
+        kakao          : "2.1.0",
         adbserver      : "1.0.0",
 ]
