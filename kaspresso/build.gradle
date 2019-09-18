@@ -4,6 +4,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply from: '../dependencies.gradle'
 apply from: '../dokka.gradle'
+apply from: '../publish.gradle'
 
 android {
     compileSdkVersion Integer.parseInt(versions.compileSdk)
@@ -31,8 +32,7 @@ android {
 }
 
 dependencies {
-    api fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
-
+    api "com.kaspersky.android-components:adbserver-device:$versions.adbserver"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
 
     testImplementation "junit:junit:$versions.junit"
