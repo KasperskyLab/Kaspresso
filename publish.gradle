@@ -37,7 +37,6 @@ bintray {
 
         version {
             name = this.ver
-            released = new Date()
         }
     }
 }
