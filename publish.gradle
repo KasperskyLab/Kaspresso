@@ -19,6 +19,20 @@ publishing {
             groupId this.groupId
             artifactId this.artifactId
             version this.ver
+
+            pom.withXml {
+                def dependenciesNode = asNode().getAt('dependencies')[0]
+                        ?: asNode().appendNode('dependencies')
+
+                configurations.implementation.allDependencies.each {
+                    if (it.name != 'unspecified') {
+                        def dependencyNode = dependenciesNode.appendNode('dependency')
+                        dependencyNode.appendNode('groupId', it.group)
+                        dependencyNode.appendNode('artifactId', it.name)
+                        dependencyNode.appendNode('version', it.version)
+                    }
+                }
+            }
         }
     }
 }
