@@ -149,6 +149,12 @@ And then add dependency to your module `build.gradle`:
 implementation 'com.kaspersky.android-components:kaspresso:1.0.0'
 ```
 
+If you are still using old Android Support libraries, use the `<version>-support` artifact:
+
+```
+implementation 'com.kaspersky.android-components:kaspresso:1.0.0-support'
+```
+
 ## Support
 Russian support in telegram - t.me/kaspresso
 
