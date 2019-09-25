@@ -79,7 +79,7 @@ fun shouldPassOnNoInternetScanTest() =
                     click()
                 }
                 edit {
-                    attempt(timeoutMs = 7000) { isVisible() }
+                    flakySafely(timeoutMs = 7000) { isVisible() }
                     hasText(R.string.text_edit_text)
                 }
             }
