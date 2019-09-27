@@ -2,8 +2,8 @@
 
 # autoScrollParams
 
-`var autoScrollParams: `[`AutoScrollParams`](../../../com.kaspersky.kaspresso.autoscroll/-auto-scroll-params/index.md)
+`val autoScrollParams: `[`AutoScrollParams`](../../../com.kaspersky.kaspresso.params/-auto-scroll-params/index.md)
 
-Holds the [AutoScrollParams](../../../com.kaspersky.kaspresso.autoscroll/-auto-scroll-params/index.md) for [com.kaspersky.kaspresso.autoscroll.AutoScrollProvider](../../../com.kaspersky.kaspresso.autoscroll/-auto-scroll-provider/index.md)'s usage.
+Holds the [AutoScrollParams](../../../com.kaspersky.kaspresso.params/-auto-scroll-params/index.md) for [com.kaspersky.kaspresso.autoscroll.AutoScrollProvider](../../../com.kaspersky.kaspresso.autoscroll/-auto-scroll-provider/index.md)'s usage.
 If it was not specified, the default implementation is used.
 

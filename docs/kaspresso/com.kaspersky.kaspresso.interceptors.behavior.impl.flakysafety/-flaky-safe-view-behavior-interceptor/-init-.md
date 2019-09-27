@@ -2,7 +2,7 @@
 
 # &lt;init&gt;
 
-`FlakySafeViewBehaviorInterceptor(params: `[`FlakySafetyParams`](../../com.kaspersky.kaspresso.flakysafety/-flaky-safety-params/index.md)`, logger: `[`UiTestLogger`](../../com.kaspersky.kaspresso.logger/-ui-test-logger.md)`)`
+`FlakySafeViewBehaviorInterceptor(params: `[`FlakySafetyParams`](../../com.kaspersky.kaspresso.params/-flaky-safety-params/index.md)`, logger: `[`UiTestLogger`](../../com.kaspersky.kaspresso.logger/-ui-test-logger.md)`)`
 
 The implementation of [ViewBehaviorInterceptor](../../com.kaspersky.kaspresso.interceptors.behavior/-view-behavior-interceptor.md) and [FlakySafetyProvider](../../com.kaspersky.kaspresso.flakysafety/-flaky-safety-provider/index.md) interfaces.
 Provides system flaky safety functionality for [ViewInteraction.perform](#) and [ViewInteraction.check](#) calls.
