@@ -20,21 +20,14 @@ class LoggingAtomWatcherInterceptor(
      *
      * @param evaluation represents the results of a Javascript execution.
      */
-    override fun intercept(
-        atomProxy: AtomProxy<*>,
-        evaluation: Evaluation?
-    ) {
+    override fun intercept(atomProxy: AtomProxy<*>, evaluation: Evaluation?) {
         logger.i(getFullAtomDescription(atomProxy, evaluation))
     }
 
     /**
      * @return a string description of [Atom].
      */
-    private fun getFullAtomDescription(
-        atomProxy: AtomProxy<*>,
-        evaluation: Evaluation?
-    ): String {
-
+    private fun getFullAtomDescription(atomProxy: AtomProxy<*>, evaluation: Evaluation?): String {
         return StringBuilder("web action")
             .apply {
                 atomProxy.atom.describeTo(this, evaluation)

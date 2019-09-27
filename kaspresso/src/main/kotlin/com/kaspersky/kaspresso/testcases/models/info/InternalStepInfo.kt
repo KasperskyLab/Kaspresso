@@ -5,12 +5,11 @@ import com.kaspersky.kaspresso.testcases.models.StepStatus
 internal class InternalStepInfo(
     override val description: String,
     override val testClassName: String,
-    override val level: Int,
-    override val number: String,
+    override val number: String?,
     override val ordinal: Int,
     override val startTime: Long,
     // position on each level of step hierarchy
-    val stepNumber: MutableList<Int>,
+    val stepNumber: MutableList<Int>?,
     // internal mutable properties to hide mutability from users
     val parentStepInfo: InternalStepInfo? = null,
     val internalSubStepInfos: MutableList<InternalStepInfo> = mutableListOf(),
@@ -35,7 +34,7 @@ internal class InternalStepInfo(
         return "StepInfo(" +
                 "description=$description, " +
                 "testClassName=$testClassName, " +
-                "level=$level, number=$number, " +
+                "number=$number, " +
                 "ordinal=$ordinal, " +
                 "stepNumber=$stepNumber, " +
                 "subSteps=$internalSubStepInfos" +

@@ -71,6 +71,7 @@ import com.kaspersky.kaspresso.interceptors.watcher.view.impl.logging.LoggingWeb
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.logger.UiTestLoggerImpl
 import com.kaspersky.kaspresso.report.impl.AllureReportWriter
+import com.kaspersky.kaspresso.testcases.models.StepParams
 
 /**
  * The storage of all Kaspresso preferences and entities, such as [AdbServer], [Device] and different interceptors.
@@ -82,6 +83,7 @@ data class Kaspresso(
     internal val device: Device,
     internal val flakySafetyParams: FlakySafetyParams,
     internal val autoScrollParams: AutoScrollParams,
+    internal val stepParams: StepParams,
     internal val viewActionWatcherInterceptors: List<ViewActionWatcherInterceptor>,
     internal val viewAssertionWatcherInterceptors: List<ViewAssertionWatcherInterceptor>,
     internal val atomWatcherInterceptors: List<AtomWatcherInterceptor>,
@@ -259,6 +261,12 @@ data class Kaspresso(
         var autoScrollParams: AutoScrollParams = AutoScrollParams()
 
         /**
+         * Holds the [StepParams] for [com.kaspersky.kaspresso.testcases.core.step.StepsManager]'s usage.
+         * If it was not specified, the default implementation is used.
+         */
+        var stepParams: StepParams = StepParams()
+
+        /**
          * Holds the list of [ViewActionWatcherInterceptor]s.
          * If it was not specified, Kaspresso will use no [ViewActionWatcherInterceptor]s.
          * These interceptors are called by [com.kaspersky.kaspresso.proxy.ViewActionProxy]
@@ -407,6 +415,7 @@ data class Kaspresso(
 
                 flakySafetyParams = flakySafetyParams,
                 autoScrollParams = autoScrollParams,
+                stepParams = stepParams,
 
                 viewActionWatcherInterceptors = viewActionWatcherInterceptors,
                 viewAssertionWatcherInterceptors = viewAssertionWatcherInterceptors,
