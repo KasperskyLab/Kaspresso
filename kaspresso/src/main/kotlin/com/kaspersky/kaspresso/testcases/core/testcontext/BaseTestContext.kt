@@ -18,7 +18,7 @@ import com.kaspersky.kaspresso.logger.UiTestLogger
  */
 open class BaseTestContext internal constructor(
     kaspresso: Kaspresso
-) : FlakySafetyProvider by FlakySafetyProviderImpl(kaspresso.flakySafetyParams, kaspresso.libLogger),
+) : FlakySafetyProvider by FlakySafetyProviderImpl(kaspresso.params.flakySafetyParams, kaspresso.libLogger),
     ComposeProvider by ComposeProviderImpl(kaspresso),
     WebComposeProvider by WebComposeProviderImpl(kaspresso) {
 

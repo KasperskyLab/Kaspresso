@@ -1,7 +1,7 @@
 package com.kaspersky.kaspresso.interceptors.behavior.impl.flakysafety
 
 import androidx.test.espresso.DataInteraction
-import com.kaspersky.kaspresso.flakysafety.FlakySafetyParams
+import com.kaspersky.kaspresso.params.FlakySafetyParams
 import com.kaspersky.kaspresso.flakysafety.FlakySafetyProvider
 import com.kaspersky.kaspresso.flakysafety.FlakySafetyProviderImpl
 import com.kaspersky.kaspresso.interceptors.behavior.DataBehaviorInterceptor
