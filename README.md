@@ -92,6 +92,12 @@ fun shouldPassOnNoInternetScanTest() =
         }
     }
 ```
+#### Logging
+Kaspresso transform your tests' logs into understandable and pleasant text:
+
+<img src="https://habrastorage.org/webt/03/nn/qg/03nnqgupdqnwa_i4jwyz1uqq6r0.png" />
+<img src="https://habrastorage.org/webt/tq/az/3v/tqaz3vjsgpw0-ivylrfbnuqyiqa.png" />
+
 #### Flexibility
 
 We have introduced a mechanism of interceptors giving an ability to catch all actions going to Espresso. 
