@@ -116,13 +116,13 @@ In Kaspresso, the developer can call adb and cmd commands by ```AdbServer``` cla
 
 There are a lot of useful classes in Kaspresso to work with Android System. 
 
-Examples of such work: 
-    1. push files, 
-    2. enable/disable network, 
-    3. permissions' giving, 
-    4. emulate phone calls, 
-    5. make screenshots,
-    6. and other.
+Examples of such work: <br> 
+    1. push files, <br>
+    2. enable/disable network, <br>
+    3. permissions' giving, <br>
+    4. emulate phone calls, <br>
+    5. make screenshots, <br>
+    6. and other.<br>
 #### Feature's screenshoting
 
 Sometimes when developing new features, there is a need to check if the application works properly in all supported languages.
