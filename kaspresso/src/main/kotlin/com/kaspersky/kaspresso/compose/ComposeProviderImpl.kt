@@ -39,9 +39,9 @@ class ComposeProviderImpl(
 
         val (flakySafetyProvider, failureLoggingProvider) = getProviders()
 
-        failureLoggingProvider.withLoggingOnFailureIfNotNull {
+        failureLoggingProvider.withLoggingOnFailureIfNotNull(null) {
             flakySafetyProvider.flakySafelyIfNotNull {
-                invokeComposed(actions, kaspresso.libLogger)
+                invokeComposed(actions, kaspresso.libLogger, elements)
             }
         }
 
@@ -63,7 +63,7 @@ class ComposeProviderImpl(
 
         val (flakySafetyProvider, failureLoggingProvider) = getProviders()
 
-        failureLoggingProvider.withLoggingOnFailureIfNotNull {
+        failureLoggingProvider.withLoggingOnFailureIfNotNull(view.interaction) {
             flakySafetyProvider.flakySafelyIfNotNull {
                 invokeComposed(actions, kaspresso.libLogger)
             }
@@ -72,9 +72,9 @@ class ComposeProviderImpl(
         setInterception()
     }
 
-    private fun getProviders(): Pair<FlakySafetyProvider?, FailureLoggingProvider?> {
+    private fun getProviders(): Pair<FlakySafetyProvider?, FailureLoggingProvider<ViewInteraction>?> {
         var flakySafetyProvider: FlakySafetyProvider? = null
-        var failureLoggingProvider: FailureLoggingProvider? = null
+        var failureLoggingProvider: FailureLoggingProvider<ViewInteraction>? = null
 
         kaspresso.viewBehaviorInterceptors.forEach { viewBehaviorInterceptor: ViewBehaviorInterceptor ->
             when (viewBehaviorInterceptor) {

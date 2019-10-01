@@ -7,7 +7,7 @@ import org.hamcrest.StringDescription
 /**
  * @return a [String] description of [Matcher].
  */
-internal fun Matcher<View>?.describe(): String {
+internal fun Matcher<in View>?.describe(): String {
     if (this == null) return "null"
 
     val builder = StringBuilder()

@@ -2,6 +2,7 @@ package com.kaspersky.kaspresso.failure
 
 import android.view.View
 import androidx.test.espresso.FailureHandler
+import androidx.test.espresso.ViewInteraction
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import org.hamcrest.Matcher
 
@@ -11,7 +12,7 @@ import org.hamcrest.Matcher
 class LoggingFailureHandler(
     logger: UiTestLogger
 ) : FailureHandler,
-    FailureLoggingProvider by FailureLoggingProviderImpl(logger) {
+    FailureLoggingProvider<ViewInteraction> by FailureLoggingProviderImpl(logger) {
 
     /**
      * Calls [logDescriptionAndThrow] on each failure.

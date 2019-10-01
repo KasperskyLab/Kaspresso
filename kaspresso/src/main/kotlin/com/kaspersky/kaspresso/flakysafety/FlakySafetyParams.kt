@@ -2,6 +2,7 @@ package com.kaspersky.kaspresso.flakysafety
 
 import androidx.test.espresso.NoMatchingViewException
 import androidx.test.espresso.PerformException
+import com.kaspersky.kaspresso.internal.exceptions.ThrowableWithInteraction
 
 /**
  * The class that holds all the necessary for [FlakySafetyProvider] parameters.
@@ -17,7 +18,8 @@ class FlakySafetyParams(
         mutableSetOf(
             PerformException::class.java,
             NoMatchingViewException::class.java,
-            AssertionError::class.java
+            AssertionError::class.java,
+            ThrowableWithInteraction::class.java
         )
 ) {
     private companion object {

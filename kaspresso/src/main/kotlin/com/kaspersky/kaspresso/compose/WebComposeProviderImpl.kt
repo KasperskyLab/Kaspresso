@@ -1,5 +1,6 @@
 package com.kaspersky.kaspresso.compose
 
+import androidx.test.espresso.web.sugar.Web
 import com.agoda.kakao.web.WebElementBuilder
 import com.kaspersky.kaspresso.compose.pack.ActionsOnWebElementsPack
 import com.kaspersky.kaspresso.compose.pack.ActionsPack
@@ -34,7 +35,7 @@ class WebComposeProviderImpl(
 
         val (flakySafetyProvider, failureLoggingProvider) = getProviders()
 
-        failureLoggingProvider.withLoggingOnFailureIfNotNull {
+        failureLoggingProvider.withLoggingOnFailureIfNotNull(null) {
             flakySafetyProvider.flakySafelyIfNotNull {
                 invokeComposed(actions, kaspresso.libLogger)
             }
@@ -59,7 +60,7 @@ class WebComposeProviderImpl(
 
         val (flakySafetyProvider, failureLoggingProvider) = getProviders()
 
-        failureLoggingProvider.withLoggingOnFailureIfNotNull {
+        failureLoggingProvider.withLoggingOnFailureIfNotNull(web.interaction) {
             flakySafetyProvider.flakySafelyIfNotNull {
                 invokeComposed(actions, kaspresso.libLogger)
             }
@@ -68,9 +69,9 @@ class WebComposeProviderImpl(
         webElementBuilder.setInterception()
     }
 
-    private fun getProviders(): Pair<FlakySafetyProvider?, FailureLoggingProvider?> {
+    private fun getProviders(): Pair<FlakySafetyProvider?, FailureLoggingProvider<Web.WebInteraction<*>>?> {
         var flakySafetyProvider: FlakySafetyProvider? = null
-        var failureLoggingProvider: FailureLoggingProvider? = null
+        var failureLoggingProvider: FailureLoggingProvider<Web.WebInteraction<*>>? = null
 
         kaspresso.webBehaviorInterceptors.forEach { webBehaviorInterceptor: WebBehaviorInterceptor ->
             when (webBehaviorInterceptor) {

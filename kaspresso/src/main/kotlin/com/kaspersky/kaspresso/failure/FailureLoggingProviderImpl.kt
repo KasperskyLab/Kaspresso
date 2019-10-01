@@ -2,9 +2,12 @@ package com.kaspersky.kaspresso.failure
 
 import android.view.View
 import androidx.test.espresso.PerformException
+import com.kaspersky.kaspresso.internal.exceptions.ThrowableWithInteraction
 import com.kaspersky.kaspresso.internal.extensions.espressoext.describe
+import com.kaspersky.kaspresso.internal.extensions.other.getException
 import com.kaspersky.kaspresso.internal.extensions.other.getStackTraceAsString
 import com.kaspersky.kaspresso.logger.UiTestLogger
+import com.kaspersky.kaspresso.failure.describe.FailedAssertionDescriber
 import io.reactivex.exceptions.ExtCompositeException
 import junit.framework.AssertionFailedError
 import org.hamcrest.Matcher
@@ -12,9 +15,10 @@ import org.hamcrest.Matcher
 /**
  * The implementation of the [FailureLoggingProvider] interface.
  */
-class FailureLoggingProviderImpl(
-    private val logger: UiTestLogger
-) : FailureLoggingProvider {
+class FailureLoggingProviderImpl<Interaction>(
+    private val logger: UiTestLogger,
+    private val failedAssertionDescriber: FailedAssertionDescriber<Interaction>? = null
+) : FailureLoggingProvider<Interaction> {
 
     /**
      * Invokes the given [action] and logs if it fails.
@@ -26,12 +30,23 @@ class FailureLoggingProviderImpl(
      * @throws Throwable if the [action] invocation failed.
      */
     @Throws(Throwable::class)
-    override fun <T> withLoggingOnFailure(action: () -> T): T {
+    override fun <T> withLoggingOnFailure(interaction: Interaction?, action: () -> T): T {
         return try {
             action.invoke()
         } catch (error: Throwable) {
-            logStackTrace(error)
-            throw error
+            logStackTrace(interaction, error)
+
+            throw when (error) {
+                is ThrowableWithInteraction -> {
+                    error.throwable
+                }
+                is ExtCompositeException -> {
+                    error.exceptions.map { if (it is ThrowableWithInteraction) it.throwable else it }.getException()!!
+                }
+                else -> {
+                    error
+                }
+            }
         }
     }
 
@@ -40,13 +55,43 @@ class FailureLoggingProviderImpl(
      *
      * @param error the error to get stacktrace from.
      */
-    override fun logStackTrace(error: Throwable) {
-        logger.e(error.getStackTraceAsString())
-
-        if (error is ExtCompositeException) {
-            error.exceptions.forEachIndexed { i: Int, e: Throwable ->
-                logger.e("Composed exception ${i + 1} :")
-                logger.e(e.getStackTraceAsString())
+    override fun logStackTrace(interaction: Interaction?, error: Throwable) {
+        when (error) {
+            is ExtCompositeException -> {
+                logger.e(error.getStackTraceAsString())
+                error.exceptions.forEachIndexed { i: Int, e: Throwable ->
+                    logger.e("Composed exception ${i + 1} :")
+                    if (e is ThrowableWithInteraction) {
+                        if (e.throwable is AssertionError) {
+                            failedAssertionDescriber?.getDescription(e.interaction as Interaction)
+                                ?.let {
+                                    logger.e(
+                                        e.throwable.getStackTraceAsString()
+                                            .replace(e.throwable.toString(), "${e.throwable.javaClass.name}: $it")
+                                    )
+                                }
+                                ?: logger.e(e.throwable.getStackTraceAsString())
+                        } else {
+                            logger.e(e.throwable.getStackTraceAsString())
+                        }
+                    } else {
+                        logger.e(e.getStackTraceAsString())
+                    }
+                }
+            }
+            else -> {
+                if (interaction != null && error is AssertionError) {
+                    failedAssertionDescriber?.getDescription(interaction)
+                        ?.let {
+                            logger.e(
+                                error.getStackTraceAsString()
+                                    .replace(error.toString(), "${error.javaClass.name}: $it")
+                            )
+                        }
+                        ?: logger.e(error.getStackTraceAsString())
+                } else {
+                    logger.e(error.getStackTraceAsString())
+                }
             }
         }
     }
