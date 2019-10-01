@@ -23,6 +23,7 @@ class FailedViewAssertionDescriber(
                                 ?.value
                         }
                     }
+                    // here will be more view assertions
                     else -> {
                         viewAssertionsMap[cachedViewAssertion]?.invoke(interaction)
                     }

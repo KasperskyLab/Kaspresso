@@ -10,4 +10,6 @@ abstract class ViewMatchersProvider {
 
     protected val WITH_EFFECTIVE_VISIBILITY: Class<out Matcher<in View>> =
         ViewMatchers.WithEffectiveVisibilityMatcher::class.java
+
+    // Here will be more view matchers
 }

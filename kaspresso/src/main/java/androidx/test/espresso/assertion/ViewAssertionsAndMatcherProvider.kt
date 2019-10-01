@@ -7,4 +7,6 @@ abstract class ViewAssertionsAndMatcherProvider : ViewMatchersProvider() {
 
     protected val MATCHES_VIEW_ASSERTION: Class<out ViewAssertion> =
         ViewAssertions.MatchesViewAssertion::class.java
+
+    // Here will be more view assertions
 }

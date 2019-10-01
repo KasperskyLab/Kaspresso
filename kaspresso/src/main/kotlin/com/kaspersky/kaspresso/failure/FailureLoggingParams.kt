@@ -24,7 +24,13 @@ data class FailureLoggingParams internal constructor(
         viewMatchersMap = hashMapOf(
             WITH_TEXT_MATCHER to { ObtainTextViewAction() },
             WITH_EFFECTIVE_VISIBILITY to { ObtainVisibilityViewAction() }
+            // here will be more view matchers
+            // users can add their own
         )
+
+        // here will be webMatchersMap default initialization
+
+        // here will be viewAssertionsMap default initialization
 //        viewAssertionsMap = hashMapOf(
 //            MATCHES_VIEW_ASSERTION to { ObtainTextViewAction().apply { perform(this) }.value }
 //        )
