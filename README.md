@@ -1,3 +1,5 @@
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Kaspresso-green.svg?style=flat )]( https://android-arsenal.com/details/1/7896)
+
 # Kaspresso
 
 Kaspresso is a UiTest framework based on [Espresso](https://developer.android.com/training/testing/espresso), 
