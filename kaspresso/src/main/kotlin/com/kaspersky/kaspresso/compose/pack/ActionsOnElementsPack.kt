@@ -12,7 +12,6 @@ import java.lang.IllegalArgumentException
  * The builder class for parameters of [com.kaspersky.kaspresso.compose.ComposeProvider.compose] method.
  */
 class ActionsOnElementsPack {
-
     private val elements: MutableList<Interceptable<ViewInteraction, ViewAssertion, ViewAction>> = mutableListOf()
     private val actions: MutableList<() -> Unit> = mutableListOf()
 

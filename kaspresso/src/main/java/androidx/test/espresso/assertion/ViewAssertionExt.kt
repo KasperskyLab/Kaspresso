@@ -1,13 +1,15 @@
 package androidx.test.espresso.assertion
 
+import android.view.View
 import androidx.test.espresso.ViewAssertion
+import org.hamcrest.Matcher
 import org.hamcrest.StringDescription
 
 /**
  * @return a [String] description of [ViewAssertion].
  */
 internal fun ViewAssertion?.describe(): String {
-    if (this == null) return "null"
+    this ?: return "null"
 
     val builder = StringBuilder("Check ")
 
@@ -21,4 +23,9 @@ internal fun ViewAssertion?.describe(): String {
     }
 
     return builder.toString()
+}
+
+internal fun ViewAssertion.getViewMatcher(): Matcher<in View>? {
+    if (this is ViewAssertions.MatchesViewAssertion) return viewMatcher
+    return null
 }

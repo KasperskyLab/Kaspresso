@@ -13,7 +13,7 @@ import com.kaspersky.kaspresso.logger.UiTestLogger
 class FailureLoggingDataBehaviorInterceptor(
     logger: UiTestLogger
 ) : DataBehaviorInterceptor,
-    FailureLoggingProvider by FailureLoggingProviderImpl(logger) {
+    FailureLoggingProvider<DataInteraction> by FailureLoggingProviderImpl(logger) {
 
     /**
      * Wraps the given [action] invocation with the failure logging.
@@ -21,5 +21,6 @@ class FailureLoggingDataBehaviorInterceptor(
      * @param interaction the intercepted [DataInteraction].
      * @param action the action to invoke.
      */
-    override fun <T> intercept(interaction: DataInteraction, action: () -> T): T = withLoggingOnFailure(action)
+    override fun <T> intercept(interaction: DataInteraction, action: () -> T): T =
+        withLoggingOnFailure(interaction, action)
 }

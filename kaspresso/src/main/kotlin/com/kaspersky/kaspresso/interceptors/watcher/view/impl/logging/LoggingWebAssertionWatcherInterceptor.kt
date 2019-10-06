@@ -16,7 +16,7 @@ class LoggingWebAssertionWatcherInterceptor(
 ) : WebAssertionWatcherInterceptor {
 
     /**
-     * Writes info to [compositeLogger].
+     * Writes info to [UiTestLogger].
      *
      * @param webAssertionProxy a proxy-wrapper of [androidx.test.espresso.web.assertion.WebAssertion] for
      *      interceptors calls.
@@ -25,20 +25,20 @@ class LoggingWebAssertionWatcherInterceptor(
      * @param result a result of [androidx.test.espresso.web.assertion.WebAssertion].
      */
     override fun intercept(webAssertionProxy: WebAssertionProxy<*>, view: WebView?, result: Any) {
-        logger.i(getFullWebAssertionDescription(webAssertionProxy, result))
+        logger.i(webAssertionProxy.fullDescription(result))
     }
 
     /**
-     * @return a string description of [WebAssertion].
+     * @return a string description of [WebAssertionProxy].
      */
-    private fun getFullWebAssertionDescription(webAssertionProxy: WebAssertionProxy<*>, result: Any): String {
+    private fun WebAssertionProxy<*>.fullDescription(result: Any): String {
         return StringBuilder("web assertion")
             .apply {
-                webAssertionProxy.webAssertion.describeTo(this, result)
+                webAssertion.describeTo(this, result)
             }
             .apply {
                 append(" on webview ")
-                webAssertionProxy.matcher.describeTo(StringDescription(this))
+                matcher.describeTo(StringDescription(this))
             }
             .toString()
     }

@@ -34,7 +34,9 @@ import com.kaspersky.kaspresso.device.screenshots.Screenshots
 import com.kaspersky.kaspresso.device.screenshots.ScreenshotsImpl
 import com.kaspersky.kaspresso.device.server.AdbServer
 import com.kaspersky.kaspresso.device.server.AdbServerImpl
+import com.kaspersky.kaspresso.failure.FailureLoggingParams
 import com.kaspersky.kaspresso.failure.LoggingFailureHandler
+import com.kaspersky.kaspresso.failure.describe.AssertionCache
 import com.kaspersky.kaspresso.flakysafety.FlakySafetyParams
 import com.kaspersky.kaspresso.interceptors.behavior.DataBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.ViewBehaviorInterceptor
@@ -64,12 +66,15 @@ import com.kaspersky.kaspresso.interceptors.watcher.view.AtomWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.view.ViewActionWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.view.ViewAssertionWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.view.WebAssertionWatcherInterceptor
+import com.kaspersky.kaspresso.interceptors.watcher.view.impl.caching.CachingViewAssertionWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.view.impl.logging.LoggingAtomWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.view.impl.logging.LoggingViewActionWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.view.impl.logging.LoggingViewAssertionWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.view.impl.logging.LoggingWebAssertionWatcherInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.logger.UiTestLoggerImpl
+import com.kaspersky.kaspresso.failure.describe.FailedViewAssertionDescriber
+import com.kaspersky.kaspresso.failure.describe.FailedWebAssertionDescriber
 import com.kaspersky.kaspresso.report.impl.AllureReportWriter
 
 /**
@@ -82,6 +87,7 @@ data class Kaspresso(
     internal val device: Device,
     internal val flakySafetyParams: FlakySafetyParams,
     internal val autoScrollParams: AutoScrollParams,
+    internal val failureLoggingParams: FailureLoggingParams,
     internal val viewActionWatcherInterceptors: List<ViewActionWatcherInterceptor>,
     internal val viewAssertionWatcherInterceptors: List<ViewAssertionWatcherInterceptor>,
     internal val atomWatcherInterceptors: List<AtomWatcherInterceptor>,
@@ -113,13 +119,15 @@ data class Kaspresso(
              */
             fun default(): Builder {
                 return Builder().apply {
+                    val assertionCache = AssertionCache()
 
                     viewActionWatcherInterceptors = mutableListOf(
                         LoggingViewActionWatcherInterceptor(libLogger)
                     )
 
                     viewAssertionWatcherInterceptors = mutableListOf(
-                        LoggingViewAssertionWatcherInterceptor(libLogger)
+                        LoggingViewAssertionWatcherInterceptor(libLogger),
+                        CachingViewAssertionWatcherInterceptor(assertionCache)
                     )
 
                     atomWatcherInterceptors = mutableListOf(
@@ -134,7 +142,13 @@ data class Kaspresso(
                         AutoScrollViewBehaviorInterceptor(autoScrollParams, libLogger),
                         SystemDialogSafetyViewBehaviorInterceptor(libLogger, uiDevice),
                         FlakySafeViewBehaviorInterceptor(flakySafetyParams, libLogger),
-                        FailureLoggingViewBehaviorInterceptor(libLogger)
+                        FailureLoggingViewBehaviorInterceptor(
+                            libLogger,
+                            FailedViewAssertionDescriber(
+                                failureLoggingParams,
+                                assertionCache
+                            )
+                        )
                     )
 
                     dataBehaviorInterceptors = mutableListOf(
@@ -147,7 +161,13 @@ data class Kaspresso(
                         AutoScrollWebBehaviorInterceptor(autoScrollParams, libLogger),
                         SystemDialogSafetyWebBehaviorInterceptor(libLogger, uiDevice),
                         FlakySafeWebBehaviorInterceptor(flakySafetyParams, libLogger),
-                        FailureLoggingWebBehaviorInterceptor(libLogger)
+                        FailureLoggingWebBehaviorInterceptor(
+                            libLogger,
+                            FailedWebAssertionDescriber(
+                                failureLoggingParams,
+                                assertionCache
+                            )
+                        )
                     )
 
                     stepWatcherInterceptors = mutableListOf(
@@ -257,6 +277,12 @@ data class Kaspresso(
          * If it was not specified, the default implementation is used.
          */
         var autoScrollParams: AutoScrollParams = AutoScrollParams()
+
+        /**
+         * Holds the [FailureLoggingParams] for [com.kaspersky.kaspresso.failure.FailureLoggingProvider]'s usage.
+         * If it was not specified, the default implementation is used.
+         */
+        var failureLoggingParams: FailureLoggingParams = FailureLoggingParams()
 
         /**
          * Holds the list of [ViewActionWatcherInterceptor]s.
@@ -407,6 +433,7 @@ data class Kaspresso(
 
                 flakySafetyParams = flakySafetyParams,
                 autoScrollParams = autoScrollParams,
+                failureLoggingParams = failureLoggingParams,
 
                 viewActionWatcherInterceptors = viewActionWatcherInterceptors,
                 viewAssertionWatcherInterceptors = viewAssertionWatcherInterceptors,
