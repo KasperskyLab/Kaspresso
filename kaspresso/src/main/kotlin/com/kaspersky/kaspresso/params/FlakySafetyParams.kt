@@ -1,17 +1,18 @@
-package com.kaspersky.kaspresso.flakysafety
+package com.kaspersky.kaspresso.params
 
 import androidx.test.espresso.NoMatchingViewException
 import androidx.test.espresso.PerformException
 
 /**
- * The class that holds all the necessary for [FlakySafetyProvider] parameters.
+ * The class that holds all the necessary for [com.kaspersky.kaspresso.flakysafety.FlakySafetyProviderImpl] parameters.
  */
 class FlakySafetyParams(
     timeoutMs: Long = DEFAULT_TIMEOUT_MS,
     intervalMs: Long = DEFAULT_INTERVAL_MS,
 
     /**
-     * The set of exceptions, if caught, the [FlakySafetyProvider] will continue to attempt.
+     * The set of exceptions, if caught, the [com.kaspersky.kaspresso.flakysafety.FlakySafetyProviderImpl] will continue
+     * to attempt.
      */
     var allowedExceptions: MutableSet<Class<out Throwable>> =
         mutableSetOf(
@@ -26,7 +27,8 @@ class FlakySafetyParams(
     }
 
     /**
-     * The timeout during which attempts will be made by the [FlakySafetyProvider].
+     * The timeout during which attempts will be made by the
+     * [com.kaspersky.kaspresso.flakysafety.FlakySafetyProviderImpl].
      */
     var timeoutMs: Long = timeoutMs
         set(value) {
@@ -35,7 +37,7 @@ class FlakySafetyParams(
         }
 
     /**
-     * The interval at which attempts will be made by the [FlakySafetyProvider].
+     * The interval at which attempts will be made by the [com.kaspersky.kaspresso.flakysafety.FlakySafetyProviderImpl].
      */
     var intervalMs: Long = intervalMs
         set(value) {

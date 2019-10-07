@@ -2,8 +2,8 @@
 
 # flakySafetyParams
 
-`var flakySafetyParams: `[`FlakySafetyParams`](../../../com.kaspersky.kaspresso.flakysafety/-flaky-safety-params/index.md)
+`val flakySafetyParams: `[`FlakySafetyParams`](../../../com.kaspersky.kaspresso.params/-flaky-safety-params/index.md)
 
-Holds the [FlakySafetyParams](../../../com.kaspersky.kaspresso.flakysafety/-flaky-safety-params/index.md) for [com.kaspersky.kaspresso.flakysafety.FlakySafetyProvider](../../../com.kaspersky.kaspresso.flakysafety/-flaky-safety-provider/index.md)'s usage.
+Holds the [FlakySafetyParams](../../../com.kaspersky.kaspresso.params/-flaky-safety-params/index.md) for [com.kaspersky.kaspresso.flakysafety.FlakySafetyProvider](../../../com.kaspersky.kaspresso.flakysafety/-flaky-safety-provider/index.md)'s usage.
 If it was not specified, the default implementation is used.
 

@@ -43,6 +43,7 @@
 | [com.kaspersky.kaspresso.internal.exceptions](com.kaspersky.kaspresso.internal.exceptions/index.md) |  |
 | [com.kaspersky.kaspresso.kaspresso](com.kaspersky.kaspresso.kaspresso/index.md) |  |
 | [com.kaspersky.kaspresso.logger](com.kaspersky.kaspresso.logger/index.md) |  |
+| [com.kaspersky.kaspresso.params](com.kaspersky.kaspresso.params/index.md) |  |
 | [com.kaspersky.kaspresso.proxy](com.kaspersky.kaspresso.proxy/index.md) |  |
 | [com.kaspersky.kaspresso.report](com.kaspersky.kaspresso.report/index.md) |  |
 | [com.kaspersky.kaspresso.report.impl](com.kaspersky.kaspresso.report.impl/index.md) |  |

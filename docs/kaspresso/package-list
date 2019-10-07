@@ -40,6 +40,7 @@ com.kaspersky.kaspresso.interceptors.watcher.view.impl.logging
 com.kaspersky.kaspresso.internal.exceptions
 com.kaspersky.kaspresso.kaspresso
 com.kaspersky.kaspresso.logger
+com.kaspersky.kaspresso.params
 com.kaspersky.kaspresso.proxy
 com.kaspersky.kaspresso.report
 com.kaspersky.kaspresso.report.impl

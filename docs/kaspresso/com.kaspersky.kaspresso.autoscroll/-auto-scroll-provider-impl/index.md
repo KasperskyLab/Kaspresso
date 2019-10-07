@@ -10,7 +10,7 @@ The implementation of the [AutoScrollProvider](../-auto-scroll-provider/index.md
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | `AutoScrollProviderImpl(params: `[`AutoScrollParams`](../-auto-scroll-params/index.md)`, logger: `[`UiTestLogger`](../../com.kaspersky.kaspresso.logger/-ui-test-logger.md)`)`<br>The implementation of the [AutoScrollProvider](../-auto-scroll-provider/index.md) interface for [ViewInteraction](#) |
+| [&lt;init&gt;](-init-.md) | `AutoScrollProviderImpl(params: `[`AutoScrollParams`](../../com.kaspersky.kaspresso.params/-auto-scroll-params/index.md)`, logger: `[`UiTestLogger`](../../com.kaspersky.kaspresso.logger/-ui-test-logger.md)`)`<br>The implementation of the [AutoScrollProvider](../-auto-scroll-provider/index.md) interface for [ViewInteraction](#) |
 
 ### Functions
 

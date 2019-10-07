@@ -1,11 +1,11 @@
 package com.kaspersky.kaspresso.interceptors.behavior.impl.autoscroll
 
 import androidx.test.espresso.ViewInteraction
-import com.kaspersky.kaspresso.autoscroll.AutoScrollParams
 import com.kaspersky.kaspresso.autoscroll.AutoScrollProvider
 import com.kaspersky.kaspresso.autoscroll.AutoScrollProviderImpl
 import com.kaspersky.kaspresso.interceptors.behavior.ViewBehaviorInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
+import com.kaspersky.kaspresso.params.AutoScrollParams
 
 /**
  * The implementation of [ViewBehaviorInterceptor] and [AutoScrollProvider] interfaces.
