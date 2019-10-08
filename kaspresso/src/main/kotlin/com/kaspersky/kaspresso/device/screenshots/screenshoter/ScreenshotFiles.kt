@@ -35,7 +35,7 @@ internal class ScreenshotFiles(
 
         val screenshotTestDirectory = directoryStorage.obtainDirectory(getDirectoryForTest(screenshotRootDirectory))
 
-        val screenshotName = System.currentTimeMillis().toString() + NAME_SEPARATOR + tag + EXTENSION
+        val screenshotName = tag + EXTENSION
         return screenshotTestDirectory.resolve(screenshotName)
     }
 

@@ -17,6 +17,10 @@ class ScreenshotsImpl(
     screenshotDir: File = File("screenshots")
 ) : Screenshots {
 
+    companion object {
+        private const val NAME_SEPARATOR = "_"
+    }
+
     private val screenshotFiles = ScreenshotFiles(screenshotDir)
 
     private val internalScreenshotMaker = InternalScreenshotMaker(screenshotFiles)
@@ -24,6 +28,9 @@ class ScreenshotsImpl(
 
     /**
      * Takes screenshot if it is possible, otherwise logs the error.
+     * The method adds System.currentTimeMillis() to the tag to save all screenshots of a test
+     *     running several times per the same suite. That's why a name will look
+     *     like "1570158949869_ScreenshotSampleTest_step_1".
      *
      * Required Permissions: WRITE_EXTERNAL_STORAGE.
      *
@@ -31,16 +38,17 @@ class ScreenshotsImpl(
      */
     override fun take(tag: String) {
         val resumedActivity = activities.getResumed()
+        val fullName = System.currentTimeMillis().toString() + NAME_SEPARATOR + tag
 
         if (resumedActivity != null) {
             runCatching {
-                internalScreenshotMaker.screenshot(resumedActivity, tag)
+                internalScreenshotMaker.screenshot(resumedActivity, fullName)
             }.onSuccess {
                 return
             }
         }
 
-        runCatching { externalScreenshotMaker.screenshot(tag) }
+        runCatching { externalScreenshotMaker.screenshot(fullName) }
             .onFailure { e -> logger.e("An error while making screenshot occurred: ${e.getStackTraceAsString()}") }
     }
 }
