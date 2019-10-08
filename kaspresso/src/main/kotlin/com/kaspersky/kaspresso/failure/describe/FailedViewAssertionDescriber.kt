@@ -19,13 +19,15 @@ class FailedViewAssertionDescriber(
                         if (cachedViewMatcher == null) {
                             null
                         } else {
-                            viewMatchersMap[cachedViewMatcher!!.javaClass]?.invoke().apply { interaction.perform(this) }
+                            viewMatcherDescribers[cachedViewMatcher!!.javaClass]
+                                ?.invoke()
+                                ?.apply { interaction.perform(this) }
                                 ?.value
                         }
                     }
                     // here will be more view assertions
                     else -> {
-                        viewAssertionsMap[cachedViewAssertion]?.invoke(interaction)
+                        viewAssertionDescribers[cachedViewAssertion]?.invoke(interaction)
                     }
                 }
             }
