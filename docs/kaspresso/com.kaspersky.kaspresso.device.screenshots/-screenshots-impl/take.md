@@ -7,6 +7,9 @@
 Overrides [Screenshots.take](../-screenshots/take.md)
 
 Takes screenshot if it is possible, otherwise logs the error.
+The method adds System.currentTimeMillis() to the tag to save all screenshots of a test
+    running several times per the same suite. That's why a name will look
+    like "1570158949869_ScreenshotSampleTest_step_1".
 
 Required Permissions: WRITE_EXTERNAL_STORAGE.
 
