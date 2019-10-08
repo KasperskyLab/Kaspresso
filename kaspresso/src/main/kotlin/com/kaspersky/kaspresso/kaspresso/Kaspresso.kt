@@ -72,7 +72,7 @@ import com.kaspersky.kaspresso.params.AutoScrollParams
 import com.kaspersky.kaspresso.params.FlakySafetyParams
 import com.kaspersky.kaspresso.params.Params
 import com.kaspersky.kaspresso.report.impl.AllureReportWriter
-import com.kaspersky.kaspresso.testcases.models.StepParams
+import com.kaspersky.kaspresso.params.StepParams
 
 /**
  * The storage of all Kaspresso preferences and entities, such as [AdbServer], [Device] and different interceptors.
@@ -263,7 +263,7 @@ data class Kaspresso(
          * Holds the [StepParams] for [com.kaspersky.kaspresso.testcases.core.step.StepsManager]'s usage.
          * If it was not specified, the default implementation is used.
          */
-        var stepParams: StepParams = StepParams()
+        val stepParams: StepParams = StepParams()
 
         /**
          * Holds the list of [ViewActionWatcherInterceptor]s.
@@ -397,6 +397,7 @@ data class Kaspresso(
                 testLogger = testLogger,
 
                 adbServer = adbServer,
+
                 device = Device(
                     apps = apps,
                     activities = activities,
