@@ -4,6 +4,7 @@ import androidx.test.espresso.web.sugar.Web
 import androidx.test.espresso.web.webdriver.DriverAtoms
 import com.kaspersky.kaspresso.internal.extensions.other.isAllowed
 import com.kaspersky.kaspresso.logger.UiTestLogger
+import com.kaspersky.kaspresso.params.AutoScrollParams
 
 /**
  * The implementation of the [AutoScrollProvider] interface for [Web.WebInteraction]

@@ -1,11 +1,11 @@
 package com.kaspersky.kaspresso.interceptors.behavior.impl.flakysafety
 
 import androidx.test.espresso.ViewInteraction
-import com.kaspersky.kaspresso.flakysafety.FlakySafetyParams
 import com.kaspersky.kaspresso.flakysafety.FlakySafetyProvider
 import com.kaspersky.kaspresso.flakysafety.FlakySafetyProviderImpl
 import com.kaspersky.kaspresso.interceptors.behavior.ViewBehaviorInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
+import com.kaspersky.kaspresso.params.FlakySafetyParams
 
 /**
  * The implementation of [ViewBehaviorInterceptor] and [FlakySafetyProvider] interfaces.

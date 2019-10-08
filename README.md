@@ -1,3 +1,5 @@
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Kaspresso-green.svg?style=flat )]( https://android-arsenal.com/details/1/7896)
+
 # Kaspresso
 
 Kaspresso is a UiTest framework based on [Espresso](https://developer.android.com/training/testing/espresso), 
@@ -92,6 +94,12 @@ fun shouldPassOnNoInternetScanTest() =
         }
     }
 ```
+#### Logging
+Kaspresso transform your tests' logs into understandable and pleasant text:
+
+<img src="https://habrastorage.org/webt/03/nn/qg/03nnqgupdqnwa_i4jwyz1uqq6r0.png" />
+<img src="https://habrastorage.org/webt/tq/az/3v/tqaz3vjsgpw0-ivylrfbnuqyiqa.png" />
+
 #### Flexibility
 
 We have introduced a mechanism of interceptors giving an ability to catch all actions going to Espresso. 
@@ -110,13 +118,13 @@ In Kaspresso, the developer can call adb and cmd commands by ```AdbServer``` cla
 
 There are a lot of useful classes in Kaspresso to work with Android System. 
 
-Examples of such work: 
-    1. push files, 
-    2. enable/disable network, 
-    3. permissions' giving, 
-    4. emulate phone calls, 
-    5. make screenshots,
-    6. and other.
+Examples of such work: <br> 
+    1. push files, <br>
+    2. enable/disable network, <br>
+    3. permissions' giving, <br>
+    4. emulate phone calls, <br>
+    5. make screenshots, <br>
+    6. and other.<br>
 #### Feature's screenshoting
 
 Sometimes when developing new features, there is a need to check if the application works properly in all supported languages.
@@ -146,13 +154,13 @@ allprojects {
 And then add dependency to your module `build.gradle`:
 
 ```
-implementation 'com.kaspersky.android-components:kaspresso:1.0.1'
+androidTestImplementation 'com.kaspersky.android-components:kaspresso:1.0.1'
 ```
 
 If you are still using old Android Support libraries, use the `<version>-support` artifact:
 
 ```
-implementation 'com.kaspersky.android-components:kaspresso:1.0.1-support'
+androidTestImplementation 'com.kaspersky.android-components:kaspresso:1.0.1-support'
 ```
 
 ## Support

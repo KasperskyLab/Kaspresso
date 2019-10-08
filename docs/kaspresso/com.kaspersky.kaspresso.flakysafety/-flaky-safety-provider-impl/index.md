@@ -10,7 +10,7 @@ The implementation of the [FlakySafetyProvider](../-flaky-safety-provider/index.
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | `FlakySafetyProviderImpl(params: `[`FlakySafetyParams`](../-flaky-safety-params/index.md)`, logger: `[`UiTestLogger`](../../com.kaspersky.kaspresso.logger/-ui-test-logger.md)`)`<br>The implementation of the [FlakySafetyProvider](../-flaky-safety-provider/index.md) interface. |
+| [&lt;init&gt;](-init-.md) | `FlakySafetyProviderImpl(params: `[`FlakySafetyParams`](../../com.kaspersky.kaspresso.params/-flaky-safety-params/index.md)`, logger: `[`UiTestLogger`](../../com.kaspersky.kaspresso.logger/-ui-test-logger.md)`)`<br>The implementation of the [FlakySafetyProvider](../-flaky-safety-provider/index.md) interface. |
 
 ### Functions
 
