@@ -14,12 +14,9 @@ import com.kaspersky.kaspresso.logger.UiTestLogger
  */
 class PermissionsImpl(
     private val logger: UiTestLogger,
-    private val uiDevice: UiDevice
+    private val uiDevice: UiDevice,
+    private val dialogTimeoutMs: Long
 ) : Permissions {
-
-    private companion object {
-        private const val DIALOG_TIMEOUT_MS: Long = 1_000
-    }
 
     private val packageInstallerPackageName =
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P)
@@ -38,25 +35,25 @@ class PermissionsImpl(
      * Waits for 1 sec, passes the permission-requesting permissions dialog and allows permissions.
      */
     override fun allowViaDialog() =
-        wait(timeoutMs = DIALOG_TIMEOUT_MS, logger = logger) { handlePermissionRequest(Permissions.Button.ALLOW) }
+        wait(timeoutMs = dialogTimeoutMs, logger = logger) { handlePermissionRequest(Permissions.Button.ALLOW) }
 
     /**
      * Waits for 1 sec, passes the permission-requesting permissions dialog and denies permissions.
      */
     override fun denyViaDialog() =
-        wait(timeoutMs = DIALOG_TIMEOUT_MS, logger = logger) { handlePermissionRequest(Permissions.Button.DENY) }
+        wait(timeoutMs = dialogTimeoutMs, logger = logger) { handlePermissionRequest(Permissions.Button.DENY) }
 
     /**
      * Waits for 1 sec, passes the permission-requesting permissions dialog
      */
     override fun clickOn(button: Permissions.Button) =
-        wait(timeoutMs = DIALOG_TIMEOUT_MS, logger = logger) { handlePermissionRequest(button) }
+        wait(timeoutMs = dialogTimeoutMs, logger = logger) { handlePermissionRequest(button) }
 
     /**
      * Waits for 1 sec, check the permission-requesting permissions dialog is visible.
      */
     override fun isDialogVisible(): Boolean =
-        wait(timeoutMs = DIALOG_TIMEOUT_MS, logger = logger) {
+        wait(timeoutMs = dialogTimeoutMs, logger = logger) {
             return@wait getPermissionDialogButtonAsUiObject(Permissions.Button.ALLOW)
                 ?.exists()
                 ?: getPermissionDialogButtonAsUiObject(Permissions.Button.DENY)

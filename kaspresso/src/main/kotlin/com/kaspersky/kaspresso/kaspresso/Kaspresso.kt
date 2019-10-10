@@ -95,6 +95,7 @@ data class Kaspresso(
     private companion object {
         private const val DEFAULT_LIB_LOGGER_TAG: String = "KASPRESSO"
         private const val DEFAULT_TEST_LOGGER_TAG: String = "KASPRESSO_TEST"
+        private const val PERMISSIONS_DIALOG_TIMEOUT_MS: Long = 5_000
     }
 
     /**
@@ -234,7 +235,7 @@ data class Kaspresso(
         /**
          * Holds an implementation of [Permissions] interface. If it was not specified, the default implementation is used.
          */
-        var permissions: Permissions = PermissionsImpl(libLogger, uiDevice)
+        var permissions: Permissions = PermissionsImpl(libLogger, uiDevice, PERMISSIONS_DIALOG_TIMEOUT_MS)
 
         /**
          * Holds an implementation of [HackPermissions] interface. If it was not specified, the default implementation is used.
