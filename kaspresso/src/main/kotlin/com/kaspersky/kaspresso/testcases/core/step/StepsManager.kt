@@ -1,5 +1,6 @@
 package com.kaspersky.kaspresso.testcases.core.step
 
+import com.kaspersky.kaspresso.params.StepParams
 import com.kaspersky.kaspresso.testcases.models.StepStatus
 import com.kaspersky.kaspresso.testcases.models.info.InternalStepInfo
 import com.kaspersky.kaspresso.testcases.models.info.StepInfo
@@ -58,7 +59,8 @@ import com.kaspersky.kaspresso.testcases.models.info.StepInfo
  */
 
 internal class StepsManager(
-    private val testName: String
+    private val testName: String,
+    private val stepParams: StepParams
 ) : StepInfoProducer {
 
     private val stepResultList: MutableList<InternalStepInfo> = mutableListOf()
@@ -71,17 +73,24 @@ internal class StepsManager(
         checkState()
 
         val localCurrentStep = currentStepResult
+        var stepNumber: MutableList<Int>? = null
         val stepInfo: InternalStepInfo
 
         if (localCurrentStep == null) {
-            val stepNumber = mutableListOf(stepResultList.size + 1)
+            if (stepParams.autonumber) {
+                stepNumber = mutableListOf(stepResultList.size + 1)
+            }
+
             stepInfo = produceInternalStepInfo(description, stepNumber)
             currentStepResult = stepInfo
             stepResultList.add(stepInfo)
         } else {
-            val stepNumber: MutableList<Int> = mutableListOf()
-            stepNumber.addAll(localCurrentStep.stepNumber)
-            stepNumber.add(localCurrentStep.internalSubStepInfos.size + 1)
+            if (stepParams.autonumber) {
+                stepNumber = mutableListOf()
+                stepNumber.addAll(localCurrentStep.stepNumber!!)
+                stepNumber.add(localCurrentStep.internalSubStepInfos.size + 1)
+            }
+
             stepInfo = produceInternalStepInfo(description, stepNumber, localCurrentStep)
             localCurrentStep.internalSubStepInfos.add(stepInfo)
             currentStepResult = stepInfo
@@ -155,15 +164,14 @@ internal class StepsManager(
 
     private fun produceInternalStepInfo(
         description: String,
-        stepNumber: MutableList<Int>,
+        stepNumber: MutableList<Int>?,
         parentStepInfo: InternalStepInfo? = null
     ): InternalStepInfo {
 
         return InternalStepInfo(
             description = description,
             testClassName = testName,
-            level = stepNumber.size,
-            number = stepNumber.joinToString(separator = "."),
+            number = stepNumber?.joinToString(separator = "."),
             ordinal = ++stepsCounter,
             stepNumber = stepNumber,
             parentStepInfo = parentStepInfo,
