@@ -42,4 +42,4 @@ interface FlakySafetyProvider {
  * @return the result of the [action] invocation.
  */
 internal fun <T> FlakySafetyProvider?.flakySafelyIfNotNull(action: () -> T): T =
-    if (this != null) flakySafely(action) else action.invoke()
+    this?.flakySafely(action) ?: action.invoke()
