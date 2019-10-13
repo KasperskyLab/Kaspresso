@@ -10,6 +10,7 @@
     <string name="main_screen_description">Main Screen</string>
     <string name="simple_screen">Simple screen</string>
     <string name="scroll_view_sample">Scroll View Stub</string>
+    <string name="check_during_sample">Check During sample</string>
 
     <!-- Device Sample Activity -->
     <string name="device_sample_title" translatable="false">Device Sample</string>
@@ -33,5 +34,10 @@
     <string name="common_flaky_start_4">4</string>
     <string name="common_flaky_start_5">5</string>
     <string name="common_flaky_start_6">6</string>
+
+    <!-- CheckDuring sample test -->
+    <string name="check_during_start_button">Start some work with the success dialog at the end</string>
+    <string name="check_during_dialog_title">Some work finished</string>
+
 
 </resources>

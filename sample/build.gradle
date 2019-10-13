@@ -56,4 +56,5 @@ dependencies {
 
     androidTestImplementation project(':kaspresso')
     androidTestImplementation "com.agoda.kakao:kakao:$versions.kakao"
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
 }

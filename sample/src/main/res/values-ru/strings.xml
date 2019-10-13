@@ -10,6 +10,7 @@
     <string name="main_screen_description">Главный экран</string>
     <string name="simple_screen">Simple screen</string>
     <string name="scroll_view_sample">Scroll View Stub</string>
+    <string name="check_during_sample">Check During пример</string>
 
     <!-- Screenshooter sample test -->
     <string name="increment">Прибавить</string>

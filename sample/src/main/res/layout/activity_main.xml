@@ -5,6 +5,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:padding="16dp"
         tools:context=".MainActivity">
 
     <TextView
@@ -36,12 +37,17 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/activity_main_button_webview"
             android:text="@string/scroll_view_sample"/>
-
+    <Button
+            android:id="@+id/activity_main_button_check_during_sample"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/check_during_sample"
+            android:layout_below="@+id/activity_main_button_scroll_view_sample" />
     <TextView
             android:text="@string/main_screen_description"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_below="@+id/activity_main_button_scroll_view_sample"
+            android:layout_below="@+id/activity_main_button_check_during_sample"
             android:id="@+id/activity_main_text_view_description"/>
 
 </RelativeLayout>

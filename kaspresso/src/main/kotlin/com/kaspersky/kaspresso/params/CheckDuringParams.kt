@@ -8,7 +8,7 @@ class CheckDuringParams(
     intervalMs: Long = DEFAULT_INTERVAL_MS
 ) {
     private companion object {
-        private const val DEFAULT_TIMEOUT_MS: Long = 2_000L
+        private const val DEFAULT_TIMEOUT_MS: Long = 5_000L
         private const val DEFAULT_INTERVAL_MS: Long = 500L
     }
 
