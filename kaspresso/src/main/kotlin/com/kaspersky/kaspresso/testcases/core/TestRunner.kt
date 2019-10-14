@@ -87,8 +87,9 @@ internal class TestRunner<InitData, Data>(
 
         try {
             testRunWatcherInterceptor.onBeforeSectionStarted(testInfo)
-            kaspresso.beforeSectionFirstDefaultActions.forEach { it.invoke(BaseTestContext(kaspresso)) }
-            beforeTestActions?.invoke(BaseTestContext(kaspresso))
+            val baseTestContext = BaseTestContext(kaspresso)
+            kaspresso.beforeSectionFirstDefaultActions.forEach { it.invoke(baseTestContext) }
+            beforeTestActions?.invoke(baseTestContext)
 
             val data: Data = dataProducer.invoke(initDataActions)
 
@@ -96,7 +97,7 @@ internal class TestRunner<InitData, Data>(
                 transformation.invoke(data)
             }
 
-            kaspresso.beforeSectionLastDefaultActions.forEach { it.invoke(BaseTestContext(kaspresso)) }
+            kaspresso.beforeSectionLastDefaultActions.forEach { it.invoke(baseTestContext) }
             testRunWatcherInterceptor.onBeforeSectionFinishedSuccess(testInfo)
 
             return data
@@ -148,9 +149,10 @@ internal class TestRunner<InitData, Data>(
     ) {
         try {
             testRunWatcherInterceptor.onAfterSectionStarted(testInfo)
-            kaspresso.afterSectionFirstDefaultActions.forEach { it.invoke(BaseTestContext(kaspresso)) }
-            afterTestActions?.invoke(BaseTestContext(kaspresso))
-            kaspresso.afterSectionLastDefaultActions.forEach { it.invoke(BaseTestContext(kaspresso)) }
+            val baseTestContext = BaseTestContext(kaspresso)
+            kaspresso.afterSectionFirstDefaultActions.forEach { it.invoke(baseTestContext) }
+            afterTestActions?.invoke(baseTestContext)
+            kaspresso.afterSectionLastDefaultActions.forEach { it.invoke(baseTestContext) }
             testRunWatcherInterceptor.onAfterSectionFinishedSuccess(testInfo)
         } catch (e: Throwable) {
             testRunWatcherInterceptor.onAfterSectionFinishedFailed(testInfo, e)
