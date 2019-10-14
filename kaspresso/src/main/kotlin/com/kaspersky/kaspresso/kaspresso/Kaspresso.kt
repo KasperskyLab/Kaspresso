@@ -73,6 +73,7 @@ import com.kaspersky.kaspresso.params.FlakySafetyParams
 import com.kaspersky.kaspresso.params.Params
 import com.kaspersky.kaspresso.report.impl.AllureReportWriter
 import com.kaspersky.kaspresso.params.StepParams
+import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
 
 /**
  * The storage of all Kaspresso preferences and entities, such as [AdbServer], [Device] and different interceptors.
@@ -91,7 +92,11 @@ data class Kaspresso(
     internal val dataBehaviorInterceptors: List<DataBehaviorInterceptor>,
     internal val webBehaviorInterceptors: List<WebBehaviorInterceptor>,
     internal val stepWatcherInterceptors: List<StepWatcherInterceptor>,
-    internal val testRunWatcherInterceptors: List<TestRunWatcherInterceptor>
+    internal val testRunWatcherInterceptors: List<TestRunWatcherInterceptor>,
+    internal val beforeSectionFirstDefaultActions: List<BaseTestContext.() -> Unit>,
+    internal val beforeSectionLastDefaultActions: List<BaseTestContext.() -> Unit>,
+    internal val afterSectionFirstDefaultActions: List<BaseTestContext.() -> Unit>,
+    internal val afterSectionLastDefaultActions: List<BaseTestContext.() -> Unit>
 ) {
     private companion object {
         private const val DEFAULT_LIB_LOGGER_TAG: String = "KASPRESSO"
@@ -360,6 +365,30 @@ data class Kaspresso(
         var failureHandler: FailureHandler? = null
 
         /**
+         * Holds the list of actions which will be executed in "before section" at first in all tests.
+         * The action has access to BaseTestContext.
+         */
+        var beforeSectionFirstDefaultActions: MutableList<BaseTestContext.() -> Unit> = mutableListOf()
+
+        /**
+         * Holds the list of actions which will be executed in "before section" at last in all tests.
+         * The action has access to BaseTestContext.
+         */
+        var beforeSectionLastDefaultActions: MutableList<BaseTestContext.() -> Unit> = mutableListOf()
+
+        /**
+         * Holds the list of actions which will be executed in "after section" at first in all tests.
+         * The action has access to BaseTestContext.
+         */
+        var afterSectionFirstDefaultActions: MutableList<BaseTestContext.() -> Unit> = mutableListOf()
+
+        /**
+         * Holds the list of actions which will be executed in "after section" at last in all tests.
+         * The action has access to BaseTestContext.
+         */
+        var afterSectionLastDefaultActions: MutableList<BaseTestContext.() -> Unit> = mutableListOf()
+
+        /**
          * Sets the Kaspressos's implementations of Kakao's [androidx.test.espresso.ViewInteraction] interceptor,
          * [androidx.test.espresso.DataInteraction] interceptor and [androidx.test.espresso.WebInteraction] interceptor.
          */
@@ -429,7 +458,12 @@ data class Kaspresso(
                 webBehaviorInterceptors = webBehaviorInterceptors,
 
                 stepWatcherInterceptors = stepWatcherInterceptors,
-                testRunWatcherInterceptors = testRunWatcherInterceptors
+                testRunWatcherInterceptors = testRunWatcherInterceptors,
+
+                beforeSectionFirstDefaultActions = beforeSectionFirstDefaultActions,
+                beforeSectionLastDefaultActions = beforeSectionLastDefaultActions,
+                afterSectionFirstDefaultActions = afterSectionFirstDefaultActions,
+                afterSectionLastDefaultActions = afterSectionLastDefaultActions
             )
 
             initInterception(kaspresso)
