@@ -1,4 +1,4 @@
-package com.kaspersky.kaspressample.configurator_tests
+package com.kaspersky.kaspressample.configurator_tests.defaultaction_tests
 
 import android.Manifest
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -10,6 +10,7 @@ import com.kaspersky.kaspressample.screen.MainScreen
 import com.kaspersky.kaspressample.screen.SimpleScreen
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
+import org.junit.After
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -18,9 +19,16 @@ import org.junit.runner.RunWith
 class DefaultActionsTest : TestCase(
     kaspressoBuilder = Kaspresso.Builder.default().apply {
         beforeSectionFirstDefaultActions.add { testLogger.i("beforeSectionFirstDefaultAction") }
+        beforeSectionFirstDefaultActions.add { DefaultActionsChecker.putBeforeFirst() }
+
         beforeSectionLastDefaultActions.add { testLogger.i("beforeSectionLastDefaultActions") }
+        beforeSectionLastDefaultActions.add { DefaultActionsChecker.putBeforeLast() }
+
         afterSectionFirstDefaultActions.add { testLogger.i("afterSectionFirstDefaultActions") }
+        afterSectionFirstDefaultActions.add { DefaultActionsChecker.putAfterFirst() }
+
         afterSectionLastDefaultActions.add { testLogger.i("afterSectionLastDefaultActions") }
+        afterSectionLastDefaultActions.add { DefaultActionsChecker.putAfterLast() }
     }
 ) {
     @get:Rule
@@ -32,6 +40,12 @@ class DefaultActionsTest : TestCase(
     @get:Rule
     val activityTestRule = ActivityTestRule(MainActivity::class.java, true, false)
 
+    @After
+    fun afterTest() {
+        DefaultActionsChecker.assertFullAfter()
+        DefaultActionsChecker.reset()
+    }
+
     @Test
     fun test() {
         before {
@@ -39,6 +53,7 @@ class DefaultActionsTest : TestCase(
             testLogger.i("beforeSection")
         }.after {
             testLogger.i("afterSection")
+            DefaultActionsChecker.assertAfter()
         }.run {
 
             step("Open Simple Screen") {
@@ -67,7 +82,9 @@ class DefaultActionsTest : TestCase(
                 }
             }
 
-            testLogger.i("Final assert")
+            step("Main part assert") {
+                DefaultActionsChecker.assertMain()
+            }
         }
     }
 }
