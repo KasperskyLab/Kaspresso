@@ -15,7 +15,7 @@ Kaspresso is a UiTest framework based on [Espresso](https://developer.android.co
 
 Kaspresso provides a mechanism to handle a flakiness of Espresso. 
 
-Flakiness in ui tests is when one test passes 50 times but brakes at 51 attempt without any understandable reason. 
+Flakiness in ui tests is when one test passes 50 times but breaks at 51 attempt without any understandable reason. 
 Unfortunately, it's a disease of all ui-tests libraries.  
 #### Readability
 
