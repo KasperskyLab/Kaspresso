@@ -10,7 +10,7 @@ object DefaultActionsChecker {
         checkList.add('A')
     }
 
-    fun putBeforeLast() {
+    fun putBeforeSecond() {
         checkList.add('B')
     }
 
@@ -18,7 +18,7 @@ object DefaultActionsChecker {
         checkList.add('C')
     }
 
-    fun putAfterLast() {
+    fun putAfterSecond() {
         checkList.add('D')
     }
 
@@ -26,16 +26,11 @@ object DefaultActionsChecker {
         checkList.clear()
     }
 
-    fun assertMain() {
+    fun assertBefore() {
         assertTrue(checkList == "AB".toMutableList())
     }
 
     fun assertAfter() {
-        assertTrue(checkList == "ABC".toMutableList())
+        assertTrue(checkList == "ABD".toMutableList())
     }
-
-    fun assertFullAfter() {
-        assertTrue(checkList == "ABCD".toMutableList())
-    }
-
 }

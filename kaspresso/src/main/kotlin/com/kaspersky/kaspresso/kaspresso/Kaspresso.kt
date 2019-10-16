@@ -71,8 +71,8 @@ import com.kaspersky.kaspresso.logger.UiTestLoggerImpl
 import com.kaspersky.kaspresso.params.AutoScrollParams
 import com.kaspersky.kaspresso.params.FlakySafetyParams
 import com.kaspersky.kaspresso.params.Params
-import com.kaspersky.kaspresso.report.impl.AllureReportWriter
 import com.kaspersky.kaspresso.params.StepParams
+import com.kaspersky.kaspresso.report.impl.AllureReportWriter
 import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
 
 /**
@@ -93,10 +93,8 @@ data class Kaspresso(
     internal val webBehaviorInterceptors: List<WebBehaviorInterceptor>,
     internal val stepWatcherInterceptors: List<StepWatcherInterceptor>,
     internal val testRunWatcherInterceptors: List<TestRunWatcherInterceptor>,
-    internal val beforeSectionFirstDefaultActions: List<BaseTestContext.() -> Unit>,
-    internal val beforeSectionLastDefaultActions: List<BaseTestContext.() -> Unit>,
-    internal val afterSectionFirstDefaultActions: List<BaseTestContext.() -> Unit>,
-    internal val afterSectionLastDefaultActions: List<BaseTestContext.() -> Unit>
+    internal val beforeEachTestAction: (BaseTestContext.() -> Unit)?,
+    internal val afterEachTestAction: (BaseTestContext.() -> Unit)?
 ) {
     private companion object {
         private const val DEFAULT_LIB_LOGGER_TAG: String = "KASPRESSO"
@@ -365,12 +363,6 @@ data class Kaspresso(
         var failureHandler: FailureHandler? = null
 
         /**
-         * Holds the list of actions which will be executed in "before section" at first in all tests.
-         * The action has access to BaseTestContext.
-         */
-        var beforeSectionFirstDefaultActions: MutableList<BaseTestContext.() -> Unit> = mutableListOf()
-
-        /**
          * Holds the list of actions which will be executed in "before section" at last in all tests.
          * The action has access to BaseTestContext.
          */
@@ -387,6 +379,56 @@ data class Kaspresso(
          * The action has access to BaseTestContext.
          */
         var afterSectionLastDefaultActions: MutableList<BaseTestContext.() -> Unit> = mutableListOf()
+
+        /**
+         * Holds the action which will be executed before the test.
+         * The action has access to BaseTestContext.
+         */
+        private var beforeEachTestAction: (BaseTestContext.() -> Unit)? = null
+
+        /**
+         * Set the action which will be executed before the test.
+         * The action has access to BaseTestContext.
+         * If you set @param override in false then the final beforeAction will be
+         *     beforeAction of the parent TestCase plus current @param action.
+         *     Otherwise final beforeAction will be only @param action.
+         */
+        fun beforeEachTest(override: Boolean = false, action: BaseTestContext.() -> Unit) {
+            if (override) {
+                beforeEachTestAction = action
+            } else {
+                val oldBeforeEachTestAction = beforeEachTestAction
+                beforeEachTestAction = {
+                    oldBeforeEachTestAction?.invoke(this)
+                    action.invoke(this)
+                }
+            }
+        }
+
+        /**
+         * Holds the action which will be executed after the test.
+         * The action has access to BaseTestContext.
+         */
+        private var afterEachTestAction: (BaseTestContext.() -> Unit)? = null
+
+        /**
+         * Set the action which will be executed after the test.
+         * The action has access to BaseTestContext.
+         * If you set @param override in false then the final beforeAction will be
+         *     beforeAction of the parent TestCase plus current @param action.
+         *     Otherwise final beforeAction will be only @param action.
+         */
+        fun afterEachTest(override: Boolean = false, action: BaseTestContext.() -> Unit) {
+            if (override) {
+                afterEachTestAction = action
+            } else {
+                val oldAfterEachTestAction = afterEachTestAction
+                afterEachTestAction = {
+                    oldAfterEachTestAction?.invoke(this)
+                    action.invoke(this)
+                }
+            }
+        }
 
         /**
          * Sets the Kaspressos's implementations of Kakao's [androidx.test.espresso.ViewInteraction] interceptor,
@@ -460,10 +502,8 @@ data class Kaspresso(
                 stepWatcherInterceptors = stepWatcherInterceptors,
                 testRunWatcherInterceptors = testRunWatcherInterceptors,
 
-                beforeSectionFirstDefaultActions = beforeSectionFirstDefaultActions,
-                beforeSectionLastDefaultActions = beforeSectionLastDefaultActions,
-                afterSectionFirstDefaultActions = afterSectionFirstDefaultActions,
-                afterSectionLastDefaultActions = afterSectionLastDefaultActions
+                beforeEachTestAction = beforeEachTestAction,
+                afterEachTestAction = afterEachTestAction
             )
 
             initInterception(kaspresso)

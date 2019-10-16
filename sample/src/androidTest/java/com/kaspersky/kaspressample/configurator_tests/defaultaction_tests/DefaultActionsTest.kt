@@ -8,27 +8,22 @@ import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.R
 import com.kaspersky.kaspressample.screen.MainScreen
 import com.kaspersky.kaspressample.screen.SimpleScreen
-import com.kaspersky.kaspresso.kaspresso.Kaspresso
-import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.junit.After
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class DefaultActionsTest : TestCase(
-    kaspressoBuilder = Kaspresso.Builder.default().apply {
-        beforeSectionFirstDefaultActions.add { testLogger.i("beforeSectionFirstDefaultAction") }
-        beforeSectionFirstDefaultActions.add { DefaultActionsChecker.putBeforeFirst() }
-
-        beforeSectionLastDefaultActions.add { testLogger.i("beforeSectionLastDefaultActions") }
-        beforeSectionLastDefaultActions.add { DefaultActionsChecker.putBeforeLast() }
-
-        afterSectionFirstDefaultActions.add { testLogger.i("afterSectionFirstDefaultActions") }
-        afterSectionFirstDefaultActions.add { DefaultActionsChecker.putAfterFirst() }
-
-        afterSectionLastDefaultActions.add { testLogger.i("afterSectionLastDefaultActions") }
-        afterSectionLastDefaultActions.add { DefaultActionsChecker.putAfterLast() }
+class DefaultActionsTest : ParentTestCase(
+    kaspressoBuilderAdditional = {
+        beforeEachTest {
+            testLogger.i("beforeTestSecondAction")
+            DefaultActionsChecker.putBeforeSecond()
+        }
+        afterEachTest(override = true) {
+            testLogger.i("afterTestSecondAction")
+            DefaultActionsChecker.putAfterSecond()
+        }
     }
 ) {
     @get:Rule
@@ -42,7 +37,7 @@ class DefaultActionsTest : TestCase(
 
     @After
     fun afterTest() {
-        DefaultActionsChecker.assertFullAfter()
+        DefaultActionsChecker.assertAfter()
         DefaultActionsChecker.reset()
     }
 
@@ -51,9 +46,9 @@ class DefaultActionsTest : TestCase(
         before {
             activityTestRule.launchActivity(null)
             testLogger.i("beforeSection")
+            DefaultActionsChecker.assertBefore()
         }.after {
             testLogger.i("afterSection")
-            DefaultActionsChecker.assertAfter()
         }.run {
 
             step("Open Simple Screen") {
@@ -80,10 +75,6 @@ class DefaultActionsTest : TestCase(
                         hasText(R.string.text_edit_text)
                     }
                 }
-            }
-
-            step("Main part assert") {
-                DefaultActionsChecker.assertMain()
             }
         }
     }
