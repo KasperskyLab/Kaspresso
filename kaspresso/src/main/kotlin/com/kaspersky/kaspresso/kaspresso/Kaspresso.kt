@@ -363,24 +363,6 @@ data class Kaspresso(
         var failureHandler: FailureHandler? = null
 
         /**
-         * Holds the list of actions which will be executed in "before section" at last in all tests.
-         * The action has access to BaseTestContext.
-         */
-        var beforeSectionLastDefaultActions: MutableList<BaseTestContext.() -> Unit> = mutableListOf()
-
-        /**
-         * Holds the list of actions which will be executed in "after section" at first in all tests.
-         * The action has access to BaseTestContext.
-         */
-        var afterSectionFirstDefaultActions: MutableList<BaseTestContext.() -> Unit> = mutableListOf()
-
-        /**
-         * Holds the list of actions which will be executed in "after section" at last in all tests.
-         * The action has access to BaseTestContext.
-         */
-        var afterSectionLastDefaultActions: MutableList<BaseTestContext.() -> Unit> = mutableListOf()
-
-        /**
          * Holds the action which will be executed before the test.
          * The action has access to BaseTestContext.
          */
