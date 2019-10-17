@@ -32,21 +32,21 @@ class TestContext<Data> internal constructor(
         val exceptions: MutableList<Throwable> = mutableListOf()
         val stepInfo = stepInfoProducer.produceStepInfo(description)
 
-        stepInterceptors.forEachSafely(exceptions) { it.interceptBefore(stepInfo) }
+        stepInterceptors.forEachSafely(exceptions) { it.run { interceptBefore(stepInfo) } }
 
         try {
             actions.invoke()
             stepInfoProducer.onStepFinished(stepInfo)
 
             stepInterceptors.forEach {
-                invokeSafely(exceptions) { it.interceptAfterWithSuccess(stepInfo) }
-                invokeSafely(exceptions) { it.interceptAfterFinally(stepInfo) }
+                invokeSafely(exceptions) { it.run { interceptAfterWithSuccess(stepInfo) } }
+                invokeSafely(exceptions) { it.run { interceptAfterFinally(stepInfo) } }
             }
         } catch (throwable: Throwable) {
             stepInfoProducer.onStepFinished(stepInfo, throwable)
             stepInterceptors.forEach {
-                invokeSafely(exceptions) { it.interceptAfterWithError(stepInfo, throwable) }
-                invokeSafely(exceptions) { it.interceptAfterFinally(stepInfo) }
+                invokeSafely(exceptions) { it.run { interceptAfterWithError(stepInfo, throwable) } }
+                invokeSafely(exceptions) { it.run { interceptAfterFinally(stepInfo) } }
             }
 
             exceptions.add(throwable)

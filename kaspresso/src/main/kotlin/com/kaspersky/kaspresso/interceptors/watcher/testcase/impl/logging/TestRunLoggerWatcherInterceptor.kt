@@ -2,6 +2,7 @@ package com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.logging
 
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.TestRunWatcherInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
+import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
 import com.kaspersky.kaspresso.testcases.models.info.TestInfo
 
 /**
@@ -17,7 +18,7 @@ class TestRunLoggerWatcherInterceptor(
      *
      * @param testInfo the test info to log.
      */
-    override fun onBeforeSectionStarted(testInfo: TestInfo) {
+    override fun BaseTestContext.onBeforeSectionStarted(testInfo: TestInfo) {
         logger.section("BEFORE TEST SECTION")
     }
 
@@ -27,7 +28,7 @@ class TestRunLoggerWatcherInterceptor(
      * @param testInfo the test info to log.
      * @param throwable the error occurred to log.
      */
-    override fun onBeforeSectionFinishedFailed(testInfo: TestInfo, throwable: Throwable) {
+    override fun BaseTestContext.onBeforeSectionFinishedFailed(testInfo: TestInfo, throwable: Throwable) {
         logger.section("BEFORE TEST SECTION FAILED")
     }
 
@@ -36,7 +37,7 @@ class TestRunLoggerWatcherInterceptor(
      *
      * @param testInfo the test info to log.
      */
-    override fun onMainSectionStarted(testInfo: TestInfo) {
+    override fun BaseTestContext.onMainSectionStarted(testInfo: TestInfo) {
         logger.section("TEST SECTION")
     }
 
@@ -45,7 +46,7 @@ class TestRunLoggerWatcherInterceptor(
      *
      * @param testInfo the test info to log.
      */
-    override fun onAfterSectionStarted(testInfo: TestInfo) {
+    override fun BaseTestContext.onAfterSectionStarted(testInfo: TestInfo) {
         logger.section("AFTER TEST SECTION")
     }
 
@@ -55,7 +56,7 @@ class TestRunLoggerWatcherInterceptor(
      * @param testInfo the test info to log.
      * @param throwable the error occurred to log.
      */
-    override fun onAfterSectionFinishedFailed(testInfo: TestInfo, throwable: Throwable) {
+    override fun BaseTestContext.onAfterSectionFinishedFailed(testInfo: TestInfo, throwable: Throwable) {
         logger.section("AFTER TEST SECTION FAILED")
     }
 
@@ -65,7 +66,7 @@ class TestRunLoggerWatcherInterceptor(
      * @param testInfo the test info to log.
      * @param success the while test was finished successfully or not.
      */
-    override fun onTestFinished(testInfo: TestInfo, success: Boolean) {
+    override fun BaseTestContext.onTestFinished(testInfo: TestInfo, success: Boolean) {
         logger.section(if (success) "TEST PASSED" else "TEST FAILED")
     }
 }

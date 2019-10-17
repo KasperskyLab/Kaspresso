@@ -2,6 +2,7 @@ package com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.composite
 
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.TestRunWatcherInterceptor
 import com.kaspersky.kaspresso.internal.extensions.other.forEachSafely
+import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
 import com.kaspersky.kaspresso.testcases.models.info.TestInfo
 
 /**
@@ -19,8 +20,8 @@ class TestRunCompositeWatcherInterceptor(
      *
      * @param testInfo the test info to pass to [watcherInterceptors].
      */
-    override fun onTestStarted(testInfo: TestInfo) {
-        watcherInterceptors.forEachSafely(exceptions) { it.onTestStarted(testInfo) }
+    override fun BaseTestContext.onTestStarted(testInfo: TestInfo) {
+        watcherInterceptors.forEachSafely(exceptions) { it.run { onTestStarted(testInfo) } }
     }
 
     /**
@@ -28,8 +29,8 @@ class TestRunCompositeWatcherInterceptor(
      *
      * @param testInfo the test info to pass to [watcherInterceptors].
      */
-    override fun onBeforeSectionStarted(testInfo: TestInfo) {
-        watcherInterceptors.forEachSafely(exceptions) { it.onBeforeSectionStarted(testInfo) }
+    override fun BaseTestContext.onBeforeSectionStarted(testInfo: TestInfo) {
+        watcherInterceptors.forEachSafely(exceptions) { it.run { onBeforeSectionStarted(testInfo) } }
     }
 
     /**
@@ -37,8 +38,8 @@ class TestRunCompositeWatcherInterceptor(
      *
      * @param testInfo the test info to pass to [watcherInterceptors].
      */
-    override fun onBeforeSectionFinishedSuccess(testInfo: TestInfo) {
-        watcherInterceptors.forEachSafely(exceptions) { it.onBeforeSectionFinishedSuccess(testInfo) }
+    override fun BaseTestContext.onBeforeSectionFinishedSuccess(testInfo: TestInfo) {
+        watcherInterceptors.forEachSafely(exceptions) { it.run { onBeforeSectionFinishedSuccess(testInfo) } }
     }
 
     /**
@@ -47,8 +48,8 @@ class TestRunCompositeWatcherInterceptor(
      * @param testInfo the test info to pass to [watcherInterceptors].
      * @param throwable the error occured to pass to  [watcherInterceptors].
      */
-    override fun onBeforeSectionFinishedFailed(testInfo: TestInfo, throwable: Throwable) {
-        watcherInterceptors.forEachSafely(exceptions) { it.onBeforeSectionFinishedFailed(testInfo, throwable) }
+    override fun BaseTestContext.onBeforeSectionFinishedFailed(testInfo: TestInfo, throwable: Throwable) {
+        watcherInterceptors.forEachSafely(exceptions) { it.run { onBeforeSectionFinishedFailed(testInfo, throwable) } }
     }
 
     /**
@@ -56,8 +57,8 @@ class TestRunCompositeWatcherInterceptor(
      *
      * @param testInfo the test info to pass to [watcherInterceptors].
      */
-    override fun onMainSectionStarted(testInfo: TestInfo) {
-        watcherInterceptors.forEachSafely(exceptions) { it.onMainSectionStarted(testInfo) }
+    override fun BaseTestContext.onMainSectionStarted(testInfo: TestInfo) {
+        watcherInterceptors.forEachSafely(exceptions) { it.run { onMainSectionStarted(testInfo) } }
     }
 
     /**
@@ -65,8 +66,8 @@ class TestRunCompositeWatcherInterceptor(
      *
      * @param testInfo the test info to pass to [watcherInterceptors].
      */
-    override fun onMainSectionFinishedSuccess(testInfo: TestInfo) {
-        watcherInterceptors.forEachSafely(exceptions) { it.onMainSectionFinishedSuccess(testInfo) }
+    override fun BaseTestContext.onMainSectionFinishedSuccess(testInfo: TestInfo) {
+        watcherInterceptors.forEachSafely(exceptions) { it.run { onMainSectionFinishedSuccess(testInfo) } }
     }
 
     /**
@@ -75,8 +76,8 @@ class TestRunCompositeWatcherInterceptor(
      * @param testInfo the test info to pass to [watcherInterceptors].
      * @param throwable the error occured to pass to  [watcherInterceptors].
      */
-    override fun onMainSectionFinishedFailed(testInfo: TestInfo, throwable: Throwable) {
-        watcherInterceptors.forEachSafely(exceptions) { it.onMainSectionFinishedFailed(testInfo, throwable) }
+    override fun BaseTestContext.onMainSectionFinishedFailed(testInfo: TestInfo, throwable: Throwable) {
+        watcherInterceptors.forEachSafely(exceptions) { it.run { onMainSectionFinishedFailed(testInfo, throwable) } }
     }
 
     /**
@@ -84,8 +85,8 @@ class TestRunCompositeWatcherInterceptor(
      *
      * @param testInfo the test info to pass to [watcherInterceptors].
      */
-    override fun onAfterSectionStarted(testInfo: TestInfo) {
-        watcherInterceptors.forEachSafely(exceptions) { it.onAfterSectionStarted(testInfo) }
+    override fun BaseTestContext.onAfterSectionStarted(testInfo: TestInfo) {
+        watcherInterceptors.forEachSafely(exceptions) { it.run { onAfterSectionStarted(testInfo) } }
     }
 
     /**
@@ -93,8 +94,8 @@ class TestRunCompositeWatcherInterceptor(
      *
      * @param testInfo the test info to pass to [watcherInterceptors].
      */
-    override fun onAfterSectionFinishedSuccess(testInfo: TestInfo) {
-        watcherInterceptors.forEachSafely(exceptions) { it.onAfterSectionFinishedSuccess(testInfo) }
+    override fun BaseTestContext.onAfterSectionFinishedSuccess(testInfo: TestInfo) {
+        watcherInterceptors.forEachSafely(exceptions) { it.run { onAfterSectionFinishedSuccess(testInfo) } }
     }
 
     /**
@@ -103,8 +104,8 @@ class TestRunCompositeWatcherInterceptor(
      * @param testInfo the test info to pass to [watcherInterceptors].
      * @param throwable the error occured to pass to  [watcherInterceptors].
      */
-    override fun onAfterSectionFinishedFailed(testInfo: TestInfo, throwable: Throwable) {
-        watcherInterceptors.forEachSafely(exceptions) { it.onAfterSectionFinishedFailed(testInfo, throwable) }
+    override fun BaseTestContext.onAfterSectionFinishedFailed(testInfo: TestInfo, throwable: Throwable) {
+        watcherInterceptors.forEachSafely(exceptions) { it.run { onAfterSectionFinishedFailed(testInfo, throwable) } }
     }
 
     /**
@@ -113,7 +114,7 @@ class TestRunCompositeWatcherInterceptor(
      * @param testInfo the test info to pass to [watcherInterceptors].
      * @param success the while test was finished successfully or not, to pass to [watcherInterceptors].
      */
-    override fun onTestFinished(testInfo: TestInfo, success: Boolean) {
-        watcherInterceptors.forEachSafely(exceptions) { it.onTestFinished(testInfo, success) }
+    override fun BaseTestContext.onTestFinished(testInfo: TestInfo, success: Boolean) {
+        watcherInterceptors.forEachSafely(exceptions) { it.run { onTestFinished(testInfo, success) } }
     }
 }

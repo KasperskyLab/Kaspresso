@@ -2,6 +2,7 @@ package com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.screenshot
 
 import com.kaspersky.kaspresso.device.screenshots.Screenshots
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.TestRunWatcherInterceptor
+import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
 import com.kaspersky.kaspresso.testcases.models.info.TestInfo
 
 /**
@@ -18,7 +19,7 @@ class TestRunnerScreenshotWatcherInterceptor(
      * @param testInfo the test info to use in screenshots name.
      * @param throwable the error occurred to use in screenshots name.
      */
-    override fun onAfterSectionFinishedFailed(testInfo: TestInfo, throwable: Throwable) {
+    override fun BaseTestContext.onAfterSectionFinishedFailed(testInfo: TestInfo, throwable: Throwable) {
         screenshots.take("AfterTestSection_failure_${throwable.javaClass.simpleName}")
     }
 
@@ -28,7 +29,7 @@ class TestRunnerScreenshotWatcherInterceptor(
      * @param testInfo the test info to use in screenshots name.
      * @param throwable the error occurred to use in screenshots name.
      */
-    override fun onBeforeSectionFinishedFailed(testInfo: TestInfo, throwable: Throwable) {
+    override fun BaseTestContext.onBeforeSectionFinishedFailed(testInfo: TestInfo, throwable: Throwable) {
         screenshots.take("BeforeTestSection_failure_${throwable.javaClass.simpleName}")
     }
 }

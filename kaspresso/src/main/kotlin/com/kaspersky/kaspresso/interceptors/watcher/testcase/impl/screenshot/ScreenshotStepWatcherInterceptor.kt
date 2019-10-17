@@ -2,6 +2,7 @@ package com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.screenshot
 
 import com.kaspersky.kaspresso.device.screenshots.Screenshots
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.StepWatcherInterceptor
+import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
 import com.kaspersky.kaspresso.testcases.models.info.StepInfo
 
 /**
@@ -17,7 +18,7 @@ class ScreenshotStepWatcherInterceptor(
      *
      * @param stepInfo the step info to log.
      */
-    override fun interceptAfterWithSuccess(stepInfo: StepInfo) {
+    override fun BaseTestContext.interceptAfterWithSuccess(stepInfo: StepInfo) {
         screenshots.take(makeScreenshotTag(stepInfo))
     }
 
@@ -27,7 +28,7 @@ class ScreenshotStepWatcherInterceptor(
      * @param stepInfo the step info to log.
      * @param error the error occurred to use in screenshots name.
      */
-    override fun interceptAfterWithError(stepInfo: StepInfo, error: Throwable) {
+    override fun BaseTestContext.interceptAfterWithError(stepInfo: StepInfo, error: Throwable) {
         screenshots.take("${makeScreenshotTag(stepInfo)}_failure_${error.javaClass.simpleName}")
     }
 

@@ -31,9 +31,12 @@ internal class TestRunner<InitData, Data>(
         val stepsManager = StepsManager(testBody.testName, kaspresso.params.stepParams)
         var testInfo = TestInfo(testBody.testName)
         var testPassed = true
+        val baseTestContext = BaseTestContext(kaspresso)
 
         try {
-            testRunWatcherInterceptor.onTestStarted(testInfo)
+            baseTestContext.run {
+                testRunWatcherInterceptor.run { onTestStarted(testInfo) }
+            }
 
             val data: Data = runBeforeTestSection(
                 testInfo,
@@ -41,7 +44,8 @@ internal class TestRunner<InitData, Data>(
                 testBody.initActions,
                 testBody.transformActionsList,
                 testRunWatcherInterceptor,
-                testBody.dataProducer
+                testBody.dataProducer,
+                baseTestContext
             )
 
             val mainTestSectionResult: MainTestSectionResult = runMainTestSection(
@@ -49,7 +53,8 @@ internal class TestRunner<InitData, Data>(
                 testBody.steps,
                 testRunWatcherInterceptor,
                 stepsManager,
-                data
+                data,
+                baseTestContext
             )
 
             testInfo = mainTestSectionResult.testInfo
@@ -59,14 +64,21 @@ internal class TestRunner<InitData, Data>(
             exceptions.add(e)
         } finally {
             try {
-                runAfterTestSection(testInfo, testBody.afterTestActions, testRunWatcherInterceptor)
+                runAfterTestSection(
+                    testInfo,
+                    testBody.afterTestActions,
+                    testRunWatcherInterceptor,
+                    baseTestContext
+                )
             } catch (e: Throwable) {
                 testPassed = false
                 exceptions.add(e)
             } finally {
                 resultException = exceptions.getException()
                 testInfo = testInfo.copy(throwable = resultException)
-                testRunWatcherInterceptor.onTestFinished(testInfo, testPassed)
+                baseTestContext.run {
+                    testRunWatcherInterceptor.run { onTestFinished(testInfo, testPassed) }
+                }
                 kaspresso.adbServer.disconnectServer()
                 kaspresso.reset()
             }
@@ -82,13 +94,14 @@ internal class TestRunner<InitData, Data>(
         initDataActions: (InitData.() -> Unit)?,
         transformDataActionsList: List<Data.() -> Unit>,
         testRunWatcherInterceptor: TestRunWatcherInterceptor,
-        dataProducer: ((InitData.() -> Unit)?) -> Data
+        dataProducer: ((InitData.() -> Unit)?) -> Data,
+        baseTestContext: BaseTestContext
     ): Data {
 
         try {
-            testRunWatcherInterceptor.onBeforeSectionStarted(testInfo)
-            val baseTestContext = BaseTestContext(kaspresso)
-            kaspresso.beforeEachTestAction?.invoke(baseTestContext)
+            baseTestContext.run {
+                testRunWatcherInterceptor.run { onBeforeSectionStarted(testInfo) }
+            }
             beforeTestActions?.invoke(baseTestContext)
 
             val data: Data = dataProducer.invoke(initDataActions)
@@ -97,11 +110,15 @@ internal class TestRunner<InitData, Data>(
                 transformation.invoke(data)
             }
 
-            testRunWatcherInterceptor.onBeforeSectionFinishedSuccess(testInfo)
+            baseTestContext.run {
+                testRunWatcherInterceptor.run { onBeforeSectionFinishedSuccess(testInfo) }
+            }
 
             return data
         } catch (e: Throwable) {
-            testRunWatcherInterceptor.onBeforeSectionFinishedFailed(testInfo, e)
+            baseTestContext.run {
+                testRunWatcherInterceptor.run { onBeforeSectionFinishedFailed(testInfo, e) }
+            }
             throw e
         }
     }
@@ -111,7 +128,8 @@ internal class TestRunner<InitData, Data>(
         steps: TestContext<Data>.() -> Unit,
         testRunWatcherInterceptor: TestRunWatcherInterceptor,
         stepsManager: StepsManager,
-        data: Data
+        data: Data,
+        baseTestContext: BaseTestContext
     ): MainTestSectionResult {
 
         var mainTestSectionResult: MainTestSectionResult
@@ -119,7 +137,9 @@ internal class TestRunner<InitData, Data>(
         checkTestInfo(testInfo)
 
         try {
-            testRunWatcherInterceptor.onMainSectionStarted(testInfo)
+            baseTestContext.run {
+                testRunWatcherInterceptor.run { onMainSectionStarted(testInfo) }
+            }
 
             steps.invoke(
                 TestContext(kaspresso, stepsManager, data)
@@ -129,13 +149,17 @@ internal class TestRunner<InitData, Data>(
             val updatedTestInfo = testInfo.copy(stepInfos = allStepsResult)
             mainTestSectionResult = MainTestSectionResult(updatedTestInfo)
 
-            testRunWatcherInterceptor.onMainSectionFinishedSuccess(updatedTestInfo)
+            baseTestContext.run {
+                testRunWatcherInterceptor.run { onMainSectionFinishedSuccess(updatedTestInfo) }
+            }
         } catch (e: Throwable) {
             val allStepsResult: List<StepInfo> = stepsManager.getAllStepsResult()
             val updatedTestInfo = testInfo.copy(stepInfos = allStepsResult)
             mainTestSectionResult = MainTestSectionResult(updatedTestInfo, e)
 
-            testRunWatcherInterceptor.onMainSectionFinishedFailed(updatedTestInfo, e)
+            baseTestContext.run {
+                testRunWatcherInterceptor.run { onMainSectionFinishedFailed(updatedTestInfo, e) }
+            }
         }
 
         return mainTestSectionResult
@@ -144,16 +168,21 @@ internal class TestRunner<InitData, Data>(
     private fun runAfterTestSection(
         testInfo: TestInfo,
         afterTestActions: (BaseTestContext.() -> Unit)?,
-        testRunWatcherInterceptor: TestRunWatcherInterceptor
+        testRunWatcherInterceptor: TestRunWatcherInterceptor,
+        baseTestContext: BaseTestContext
     ) {
         try {
-            testRunWatcherInterceptor.onAfterSectionStarted(testInfo)
-            val baseTestContext = BaseTestContext(kaspresso)
+            baseTestContext.run {
+                testRunWatcherInterceptor.run { onAfterSectionStarted(testInfo) }
+            }
             afterTestActions?.invoke(baseTestContext)
-            kaspresso.afterEachTestAction?.invoke(baseTestContext)
-            testRunWatcherInterceptor.onAfterSectionFinishedSuccess(testInfo)
+            baseTestContext.run {
+                testRunWatcherInterceptor.run { onAfterSectionFinishedSuccess(testInfo) }
+            }
         } catch (e: Throwable) {
-            testRunWatcherInterceptor.onAfterSectionFinishedFailed(testInfo, e)
+            baseTestContext.run {
+                testRunWatcherInterceptor.run { onAfterSectionFinishedFailed(testInfo, e) }
+            }
             throw e
         }
     }

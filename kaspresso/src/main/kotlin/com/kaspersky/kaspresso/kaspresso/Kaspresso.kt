@@ -92,9 +92,7 @@ data class Kaspresso(
     internal val dataBehaviorInterceptors: List<DataBehaviorInterceptor>,
     internal val webBehaviorInterceptors: List<WebBehaviorInterceptor>,
     internal val stepWatcherInterceptors: List<StepWatcherInterceptor>,
-    internal val testRunWatcherInterceptors: List<TestRunWatcherInterceptor>,
-    internal val beforeEachTestAction: (BaseTestContext.() -> Unit)?,
-    internal val afterEachTestAction: (BaseTestContext.() -> Unit)?
+    internal val testRunWatcherInterceptors: List<TestRunWatcherInterceptor>
 ) {
     private companion object {
         private const val DEFAULT_LIB_LOGGER_TAG: String = "KASPRESSO"
@@ -482,10 +480,7 @@ data class Kaspresso(
                 webBehaviorInterceptors = webBehaviorInterceptors,
 
                 stepWatcherInterceptors = stepWatcherInterceptors,
-                testRunWatcherInterceptors = testRunWatcherInterceptors,
-
-                beforeEachTestAction = beforeEachTestAction,
-                afterEachTestAction = afterEachTestAction
+                testRunWatcherInterceptors = testRunWatcherInterceptors
             )
 
             initInterception(kaspresso)
