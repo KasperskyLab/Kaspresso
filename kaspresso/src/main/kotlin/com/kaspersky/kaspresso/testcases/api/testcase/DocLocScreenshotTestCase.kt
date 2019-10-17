@@ -8,6 +8,7 @@ import com.kaspersky.kaspresso.docloc.rule.LocaleRule
 import com.kaspersky.kaspresso.docloc.rule.TestFailRule
 import com.kaspersky.kaspresso.internal.extensions.other.getAllInterfaces
 import com.kaspersky.kaspresso.internal.invocation.UiInvocationHandler
+import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import java.io.File
 import java.lang.reflect.Proxy
@@ -79,8 +80,9 @@ import org.junit.Rule
 abstract class DocLocScreenshotTestCase(
     private val screenshotsDirectory: File,
     private val changeSystemLocale: Boolean = false,
-    locales: String?
-) : TestCase() {
+    locales: String?,
+    kaspressoBuilder: Kaspresso.Builder = Kaspresso.Builder.default()
+) : TestCase(kaspressoBuilder = kaspressoBuilder) {
 
     private lateinit var screenshotsDir: File
     private lateinit var screenshotCapturer: DocLocScreenshotCapturer
