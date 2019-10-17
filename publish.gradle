@@ -13,9 +13,11 @@ ext {
 publishing {
     publications {
         Kaspresso(MavenPublication) {
-            artifact "$rootDir/kaspresso/build/outputs/aar/kaspresso-release.aar"
-            artifact sourcesJar
-            artifact javadocJar
+            afterEvaluate {
+                artifact "$rootDir/kaspresso/build/outputs/aar/kaspresso-release.aar"
+                artifact sourcesJar
+                artifact javadocJar
+            }
             groupId this.groupId
             artifactId this.artifactId
             version this.ver
