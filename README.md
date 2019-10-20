@@ -165,6 +165,7 @@ androidTestImplementation 'com.kaspersky.android-components:kaspresso:1.0.1-supp
 ```
 
 ## Support
+English support in telegram - t.me/kaspresso_en
 Russian support in telegram - t.me/kaspresso
 
 ## Contribution Policy
