@@ -1,6 +1,6 @@
 # CONTRIBUTOR LICENSE AGREEMENT
 Please agree to terms of this Contributor License Agreement (CLA) by adding the following text into your pull request:
-“I hereby agree to the terms of the Contributor License Agreement available at https://help.kaspersky.com/CLA.”
+“I hereby agree to the terms of the Contributor License Agreement available at https://github.com/KasperskyLab/Kaspresso/blob/master/CLA.md.”
 You accept and agree to the following terms and conditions for Your past, present and future Contributions submitted to the AO Kaspersky Lab (“Company”).
 1.	Definitions.
 "You" (or "Your") shall mean the legal owner of the Contribution that is making this CLA with the Company. For legal entities, the entity making a Contribution and all other entities that control, are controlled by, or are under common control with that entity are considered to be a single Contributor. For the purposes of this definition, "control" means (i) the power, direct or indirect, to cause the direction or management of such entity, whether by contract or otherwise, or (ii) ownership of fifty percent (50%) or more of the outstanding shares, or (iii) beneficial ownership of such entity.
