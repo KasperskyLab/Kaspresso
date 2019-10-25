@@ -17,7 +17,7 @@ interface ContinuouslyProvider {
      *
      * @return the [action] invocation result.
      */
-    fun <T> continuously(action: () -> T)
+    fun <T> continuously(action: () -> T): T
 
     /**
      * Invokes the given [action] during set timeout.
@@ -39,5 +39,5 @@ interface ContinuouslyProvider {
         intervalMs: Long? = null,
         failureMessage: String? = null,
         action: () -> T
-    )
+    ): T
 }

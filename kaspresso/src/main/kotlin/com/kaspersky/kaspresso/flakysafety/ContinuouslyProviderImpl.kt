@@ -29,7 +29,7 @@ class ContinuouslyProviderImpl(
      * @throws Throwable if any of attempts failed.
      */
     @Throws(Throwable::class)
-    override fun <T> continuously(action: () -> T) = invokeContinuously(params, null, action)
+    override fun <T> continuously(action: () -> T): T = invokeContinuously(params, null, action)
 
     /**
      * Invokes the given [action] during set timeout.
@@ -49,7 +49,7 @@ class ContinuouslyProviderImpl(
         intervalMs: Long?,
         failureMessage: String?,
         action: () -> T
-    ) = invokeContinuously(
+    ): T = invokeContinuously(
         params = ContinuouslyParams(
             timeoutMs ?: params.timeoutMs,
             intervalMs ?: params.intervalMs
@@ -61,13 +61,17 @@ class ContinuouslyProviderImpl(
     /**
      * Attempts to invoke the given [action].
      */
-    private fun <T> invokeContinuously(params: ContinuouslyParams, failureMessage: String?, action: () -> T) {
+    private fun <T> invokeContinuously(params: ContinuouslyParams, failureMessage: String?, action: () -> T): T {
         val startTime = System.currentTimeMillis()
 
         do {
             try {
                 action.invoke()
             } catch (error: Throwable) {
+                logger.e(
+                    "Continuous interaction for ${params.timeoutMs} ms failed " +
+                            "because of ${error.javaClass.simpleName}"
+                )
                 throw if (failureMessage != null) error.withMessage(failureMessage) else error
             }
             lock.withLock {
@@ -79,7 +83,9 @@ class ContinuouslyProviderImpl(
         } while (System.currentTimeMillis() - startTime <= params.timeoutMs)
 
         logger.i(
-            "All attempts to interact for ${params.timeoutMs} ms passed"
+            "Continuous interaction during the ${params.timeoutMs} succeeded"
         )
+
+        return action.invoke()
     }
 }
