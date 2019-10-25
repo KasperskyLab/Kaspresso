@@ -6,7 +6,7 @@
 
 Overrides [CheckDuringProvider.checkDuring](../-check-during-provider/check-during.md)
 
-Invokes the given [action](check-during.md#com.kaspersky.kaspresso.flakysafety.CheckDuringProviderImpl$checkDuring(kotlin.Function0((com.kaspersky.kaspresso.flakysafety.CheckDuringProviderImpl.checkDuring.T)))/action) during set timeout.
+Invokes the given [action](check-during.md#com.kaspersky.kaspresso.flakysafety.ContinuouslyProviderImpl$checkDuring(kotlin.Function0((continuously.T)))/action) during set timeout.
 
 ### Parameters
 
@@ -17,13 +17,13 @@ Invokes the given [action](check-during.md#com.kaspersky.kaspresso.flakysafety.C
 `Throwable` - if any of attempts failed.
 
 **Return**
-the [action](check-during.md#com.kaspersky.kaspresso.flakysafety.CheckDuringProviderImpl$checkDuring(kotlin.Function0((com.kaspersky.kaspresso.flakysafety.CheckDuringProviderImpl.checkDuring.T)))/action) invocation result.
+the [action](check-during.md#com.kaspersky.kaspresso.flakysafety.ContinuouslyProviderImpl$checkDuring(kotlin.Function0((continuously.T)))/action) invocation result.
 
 `fun <T> checkDuring(timeoutMs: `[`Long`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html)`?, intervalMs: `[`Long`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html)`?, failureMessage: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`?, action: () -> `[`T`](check-during.md#T)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Overrides [CheckDuringProvider.checkDuring](../-check-during-provider/check-during.md)
 
-Invokes the given [action](check-during.md#com.kaspersky.kaspresso.flakysafety.CheckDuringProviderImpl$checkDuring(kotlin.Long, kotlin.Long, kotlin.String, kotlin.Function0((com.kaspersky.kaspresso.flakysafety.CheckDuringProviderImpl.checkDuring.T)))/action) during set timeout.
+Invokes the given [action](check-during.md#com.kaspersky.kaspresso.flakysafety.ContinuouslyProviderImpl$checkDuring(kotlin.Long, kotlin.Long, kotlin.String, kotlin.Function0((continuously.T)))/action) during set timeout.
 
 ### Parameters
 
@@ -40,5 +40,5 @@ Invokes the given [action](check-during.md#com.kaspersky.kaspresso.flakysafety.C
 `Throwable` - if any of attempts failed.
 
 **Return**
-the [action](check-during.md#com.kaspersky.kaspresso.flakysafety.CheckDuringProviderImpl$checkDuring(kotlin.Long, kotlin.Long, kotlin.String, kotlin.Function0((com.kaspersky.kaspresso.flakysafety.CheckDuringProviderImpl.checkDuring.T)))/action) invocation result.
+the [action](check-during.md#com.kaspersky.kaspresso.flakysafety.ContinuouslyProviderImpl$checkDuring(kotlin.Long, kotlin.Long, kotlin.String, kotlin.Function0((continuously.T)))/action) invocation result.
 

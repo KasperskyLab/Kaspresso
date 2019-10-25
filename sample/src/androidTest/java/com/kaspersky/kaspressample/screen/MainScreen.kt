@@ -16,7 +16,7 @@ object MainScreen : KScreen<MainScreen>() {
 
     val scrollViewStubButton = KButton { withId(R.id.activity_main_button_scroll_view_sample) }
 
-    val checkDuringButton = KButton { withId(R.id.activity_main_button_check_during_sample) }
+    val continuouslyButton = KButton { withId(R.id.activity_main_button_continuously_sample) }
 
     val descriptionText = KTextView { withId(R.id.activity_main_title) }
 }

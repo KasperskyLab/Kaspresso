@@ -6,7 +6,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspressample.MainActivity
-import com.kaspersky.kaspressample.screen.CheckDuringScreen
+import com.kaspersky.kaspressample.screen.ContinuouslyScreen
 import com.kaspersky.kaspressample.screen.MainScreen
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import java.util.concurrent.TimeUnit
@@ -16,7 +16,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class CheckDuringTest : TestCase() {
+class ContinuouslyTest : TestCase() {
 
     companion object {
         private val FAKE_MAX_DELAY = TimeUnit.SECONDS.toMillis(5)
@@ -41,22 +41,22 @@ class CheckDuringTest : TestCase() {
             // Don`t allow to run this test on Android >= Oreo
             Assume.assumeTrue(Build.VERSION.SDK_INT < Build.VERSION_CODES.O)
 
-            step("Open Check During Screen") {
+            step("Open Continuously Screen") {
                 MainScreen {
-                    checkDuringButton {
+                    continuouslyButton {
                         click()
                     }
                 }
             }
             step("Push start button") {
-                CheckDuringScreen {
+                ContinuouslyScreen {
                     startButton {
                         click()
                     }
                 }
             }
             step("Check dialog appeared") {
-                CheckDuringScreen {
+                ContinuouslyScreen {
                     flakySafely(FAKE_MAX_DELAY) {
                         dialogTitle {
                             isVisible()
@@ -77,23 +77,23 @@ class CheckDuringTest : TestCase() {
             // Don`t allow to run this test on Android < Oreo
             Assume.assumeTrue(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
 
-            step("Open Check During Screen") {
+            step("Open Continuously Screen") {
                 MainScreen {
-                    checkDuringButton {
+                    continuouslyButton {
                         click()
                     }
                 }
             }
             step("Push start button") {
-                CheckDuringScreen {
+                ContinuouslyScreen {
                     startButton {
                         click()
                     }
                 }
             }
             step("Check dialog not appeared") {
-                CheckDuringScreen {
-                    checkDuring(FAKE_MAX_DELAY) {
+                ContinuouslyScreen {
+                    continuously(FAKE_MAX_DELAY) {
                         dialogTitle {
                             doesNotExist()
                         }

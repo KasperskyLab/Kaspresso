@@ -5,11 +5,11 @@
         android:layout_height="match_parent">
 
     <Button
-            android:id="@+id/check_during_start_btn"
+            android:id="@+id/coninuously_start_btn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:text="@string/check_during_start_button"
+            android:text="@string/continuously_start_button"
             android:textAllCaps="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

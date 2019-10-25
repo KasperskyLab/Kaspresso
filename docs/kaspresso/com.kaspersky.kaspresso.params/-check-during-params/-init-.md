@@ -4,5 +4,5 @@
 
 `CheckDuringParams(timeoutMs: `[`Long`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html)` = DEFAULT_TIMEOUT_MS, intervalMs: `[`Long`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html)` = DEFAULT_INTERVAL_MS)`
 
-The class that holds all the necessary for [com.kaspersky.kaspresso.flakysafety.CheckDuringProviderImpl](../../com.kaspersky.kaspresso.flakysafety/-check-during-provider-impl/index.md) parameters.
+The class that holds all the necessary for [com.kaspersky.kaspresso.flakysafety.ContinuouslyProviderImpl](../../com.kaspersky.kaspresso.flakysafety/-check-during-provider-impl/index.md) parameters.
 

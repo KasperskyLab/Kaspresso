@@ -2,19 +2,19 @@ package com.kaspersky.kaspresso.flakysafety
 
 import com.kaspersky.kaspresso.internal.extensions.other.withMessage
 import com.kaspersky.kaspresso.logger.UiTestLogger
-import com.kaspersky.kaspresso.params.CheckDuringParams
+import com.kaspersky.kaspresso.params.ContinuouslyParams
 import java.util.Timer
 import java.util.concurrent.locks.ReentrantLock
 import kotlin.concurrent.schedule
 import kotlin.concurrent.withLock
 
 /**
- * The implementation of the [CheckDuringProvider] interface.
+ * The implementation of the [ContinuouslyProvider] interface.
  */
-class CheckDuringProviderImpl(
-    private val params: CheckDuringParams,
+class ContinuouslyProviderImpl(
+    private val params: ContinuouslyParams,
     private val logger: UiTestLogger
-) : CheckDuringProvider {
+) : ContinuouslyProvider {
 
     private val lock = ReentrantLock()
     private val condition = lock.newCondition()
@@ -29,7 +29,7 @@ class CheckDuringProviderImpl(
      * @throws Throwable if any of attempts failed.
      */
     @Throws(Throwable::class)
-    override fun <T> checkDuring(action: () -> T) = invokeCheckDuring(params, null, action)
+    override fun <T> continuously(action: () -> T) = invokeContinuously(params, null, action)
 
     /**
      * Invokes the given [action] during set timeout.
@@ -44,13 +44,13 @@ class CheckDuringProviderImpl(
      * @throws Throwable if any of attempts failed.
      */
     @Throws(Throwable::class)
-    override fun <T> checkDuring(
+    override fun <T> continuously(
         timeoutMs: Long?,
         intervalMs: Long?,
         failureMessage: String?,
         action: () -> T
-    ) = invokeCheckDuring(
-        params = CheckDuringParams(
+    ) = invokeContinuously(
+        params = ContinuouslyParams(
             timeoutMs ?: params.timeoutMs,
             intervalMs ?: params.intervalMs
         ),
@@ -61,7 +61,7 @@ class CheckDuringProviderImpl(
     /**
      * Attempts to invoke the given [action].
      */
-    private fun <T> invokeCheckDuring(params: CheckDuringParams, failureMessage: String?, action: () -> T) {
+    private fun <T> invokeContinuously(params: ContinuouslyParams, failureMessage: String?, action: () -> T) {
         val startTime = System.currentTimeMillis()
 
         do {

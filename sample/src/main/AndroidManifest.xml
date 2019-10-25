@@ -45,8 +45,8 @@
                 android:label="@string/scroll_view_sample"/>
 
         <activity
-                android:name=".check_during.CheckDuringSampleActivity"
-                android:label="@string/check_during_sample"/>
+                android:name=".continuously.ContinuouslySampleActivity"
+                android:label="@string/continuously_sample"/>
 
         <activity
                 android:name=".docloc.FragmentTestActivity"

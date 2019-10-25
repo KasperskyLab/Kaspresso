@@ -69,7 +69,7 @@ import com.kaspersky.kaspresso.interceptors.watcher.view.impl.logging.LoggingWeb
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.logger.UiTestLoggerImpl
 import com.kaspersky.kaspresso.params.AutoScrollParams
-import com.kaspersky.kaspresso.params.CheckDuringParams
+import com.kaspersky.kaspresso.params.ContinuouslyParams
 import com.kaspersky.kaspresso.params.FlakySafetyParams
 import com.kaspersky.kaspresso.params.Params
 import com.kaspersky.kaspresso.params.StepParams
@@ -255,10 +255,10 @@ data class Kaspresso(
         val flakySafetyParams: FlakySafetyParams = FlakySafetyParams()
 
         /**
-         * Holds the [CheckDuringParams] for [com.kaspersky.kaspresso.flakysafety.CheckDuringProvider]'s usage.
+         * Holds the [ContinuouslyParams] for [com.kaspersky.kaspresso.flakysafety.ContinuouslyProvider]'s usage.
          * If it was not specified, the default implementation is used.
          */
-        val checkDuringParams: CheckDuringParams = CheckDuringParams()
+        val continuouslyParams: ContinuouslyParams = ContinuouslyParams()
 
         /**
          * Holds the [AutoScrollParams] for [com.kaspersky.kaspresso.autoscroll.AutoScrollProvider]'s usage.
@@ -422,7 +422,7 @@ data class Kaspresso(
 
                 params = Params(
                     flakySafetyParams = flakySafetyParams,
-                    checkDuringParams = checkDuringParams,
+                    continuouslyParams = continuouslyParams,
                     autoScrollParams = autoScrollParams,
                     stepParams = stepParams
                 ),

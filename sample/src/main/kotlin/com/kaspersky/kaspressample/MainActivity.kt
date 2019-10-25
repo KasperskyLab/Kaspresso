@@ -3,7 +3,7 @@ package com.kaspersky.kaspressample
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.kaspersky.kaspressample.check_during.CheckDuringSampleActivity
+import com.kaspersky.kaspressample.continuously.ContinuouslySampleActivity
 import com.kaspersky.kaspressample.flaky.CommonFlakyActivity
 import com.kaspersky.kaspressample.simple.SimpleActivity
 import com.kaspersky.kaspressample.web.WebViewActivity
@@ -33,9 +33,9 @@ class MainActivity : AppCompatActivity() {
             )
         }
 
-        activity_main_button_check_during_sample.setOnClickListener {
+        activity_main_button_continuously_sample.setOnClickListener {
             startActivity(
-                Intent(this, CheckDuringSampleActivity::class.java)
+                Intent(this, ContinuouslySampleActivity::class.java)
             )
         }
     }

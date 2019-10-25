@@ -1,9 +1,9 @@
 package com.kaspersky.kaspresso.params
 
 /**
- * The class that holds all the necessary for [com.kaspersky.kaspresso.flakysafety.CheckDuringProviderImpl] parameters.
+ * The class that holds all the necessary for [com.kaspersky.kaspresso.flakysafety.ContinuouslyProviderImpl] parameters.
  */
-class CheckDuringParams(
+class ContinuouslyParams(
     timeoutMs: Long = DEFAULT_TIMEOUT_MS,
     intervalMs: Long = DEFAULT_INTERVAL_MS
 ) {
@@ -14,7 +14,7 @@ class CheckDuringParams(
 
     /**
      * The timeout during which attempts will be made by the
-     * [com.kaspersky.kaspresso.flakysafety.CheckDuringProviderImpl].
+     * [com.kaspersky.kaspresso.flakysafety.ContinuouslyProviderImpl].
      */
     var timeoutMs: Long = timeoutMs
         set(value) {
@@ -23,7 +23,7 @@ class CheckDuringParams(
         }
 
     /**
-     * The interval at which attempts will be made by the [com.kaspersky.kaspresso.flakysafety.CheckDuringProviderImpl].
+     * The interval at which attempts will be made by the [com.kaspersky.kaspresso.flakysafety.ContinuouslyProviderImpl].
      */
     var intervalMs: Long = intervalMs
         set(value) {

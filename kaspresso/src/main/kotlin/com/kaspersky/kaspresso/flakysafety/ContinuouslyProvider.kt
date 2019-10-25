@@ -3,7 +3,7 @@ package com.kaspersky.kaspresso.flakysafety
 /**
  * The interface to provide the flaky safety functionality.
  */
-interface CheckDuringProvider {
+interface ContinuouslyProvider {
 
     /**
      * Invokes the given [action] during set timeout.
@@ -17,7 +17,7 @@ interface CheckDuringProvider {
      *
      * @return the [action] invocation result.
      */
-    fun <T> checkDuring(action: () -> T)
+    fun <T> continuously(action: () -> T)
 
     /**
      * Invokes the given [action] during set timeout.
@@ -34,7 +34,7 @@ interface CheckDuringProvider {
      *
      * @return the [action] invocation result.
      */
-    fun <T> checkDuring(
+    fun <T> continuously(
         timeoutMs: Long? = null,
         intervalMs: Long? = null,
         failureMessage: String? = null,

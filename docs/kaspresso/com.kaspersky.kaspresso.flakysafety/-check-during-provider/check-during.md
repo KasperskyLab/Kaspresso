@@ -4,7 +4,7 @@
 
 `abstract fun <T> checkDuring(action: () -> `[`T`](check-during.md#T)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
-Invokes the given [action](check-during.md#com.kaspersky.kaspresso.flakysafety.CheckDuringProvider$checkDuring(kotlin.Function0((com.kaspersky.kaspresso.flakysafety.CheckDuringProvider.checkDuring.T)))/action) during set timeout.
+Invokes the given [action](check-during.md#com.kaspersky.kaspresso.flakysafety.ContinuouslyProvider$checkDuring(kotlin.Function0((com.kaspersky.kaspresso.flakysafety.ContinuouslyProvider.continuously.T)))/action) during set timeout.
 
 It can be helpful for checking of negative scenarios.
 
@@ -16,11 +16,11 @@ and throws inside exception outside as soon as it was thrown
 `action` - the action to invoke.
 
 **Return**
-the [action](check-during.md#com.kaspersky.kaspresso.flakysafety.CheckDuringProvider$checkDuring(kotlin.Function0((com.kaspersky.kaspresso.flakysafety.CheckDuringProvider.checkDuring.T)))/action) invocation result.
+the [action](check-during.md#com.kaspersky.kaspresso.flakysafety.ContinuouslyProvider$checkDuring(kotlin.Function0((com.kaspersky.kaspresso.flakysafety.ContinuouslyProvider.continuously.T)))/action) invocation result.
 
 `abstract fun <T> checkDuring(timeoutMs: `[`Long`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html)`? = null, intervalMs: `[`Long`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html)`? = null, failureMessage: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`? = null, action: () -> `[`T`](check-during.md#T)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
-Invokes the given [action](check-during.md#com.kaspersky.kaspresso.flakysafety.CheckDuringProvider$checkDuring(kotlin.Long, kotlin.Long, kotlin.String, kotlin.Function0((com.kaspersky.kaspresso.flakysafety.CheckDuringProvider.checkDuring.T)))/action) during set timeout.
+Invokes the given [action](check-during.md#com.kaspersky.kaspresso.flakysafety.ContinuouslyProvider$checkDuring(kotlin.Long, kotlin.Long, kotlin.String, kotlin.Function0((com.kaspersky.kaspresso.flakysafety.ContinuouslyProvider.continuously.T)))/action) during set timeout.
 
 It can be helpful for checking of negative scenarios.
 
@@ -38,5 +38,5 @@ and throws inside exception outside as soon as it was thrown
 `action` - the action to invoke.
 
 **Return**
-the [action](check-during.md#com.kaspersky.kaspresso.flakysafety.CheckDuringProvider$checkDuring(kotlin.Long, kotlin.Long, kotlin.String, kotlin.Function0((com.kaspersky.kaspresso.flakysafety.CheckDuringProvider.checkDuring.T)))/action) invocation result.
+the [action](check-during.md#com.kaspersky.kaspresso.flakysafety.ContinuouslyProvider$checkDuring(kotlin.Long, kotlin.Long, kotlin.String, kotlin.Function0((com.kaspersky.kaspresso.flakysafety.ContinuouslyProvider.continuously.T)))/action) invocation result.
 
