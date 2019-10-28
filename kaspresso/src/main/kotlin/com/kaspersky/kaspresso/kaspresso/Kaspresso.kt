@@ -69,10 +69,11 @@ import com.kaspersky.kaspresso.interceptors.watcher.view.impl.logging.LoggingWeb
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.logger.UiTestLoggerImpl
 import com.kaspersky.kaspresso.params.AutoScrollParams
+import com.kaspersky.kaspresso.params.ContinuouslyParams
 import com.kaspersky.kaspresso.params.FlakySafetyParams
 import com.kaspersky.kaspresso.params.Params
-import com.kaspersky.kaspresso.report.impl.AllureReportWriter
 import com.kaspersky.kaspresso.params.StepParams
+import com.kaspersky.kaspresso.report.impl.AllureReportWriter
 
 /**
  * The storage of all Kaspresso preferences and entities, such as [AdbServer], [Device] and different interceptors.
@@ -254,6 +255,12 @@ data class Kaspresso(
         val flakySafetyParams: FlakySafetyParams = FlakySafetyParams()
 
         /**
+         * Holds the [ContinuouslyParams] for [com.kaspersky.kaspresso.flakysafety.ContinuouslyProvider]'s usage.
+         * If it was not specified, the default implementation is used.
+         */
+        val continuouslyParams: ContinuouslyParams = ContinuouslyParams()
+
+        /**
          * Holds the [AutoScrollParams] for [com.kaspersky.kaspresso.autoscroll.AutoScrollProvider]'s usage.
          * If it was not specified, the default implementation is used.
          */
@@ -415,6 +422,7 @@ data class Kaspresso(
 
                 params = Params(
                     flakySafetyParams = flakySafetyParams,
+                    continuouslyParams = continuouslyParams,
                     autoScrollParams = autoScrollParams,
                     stepParams = stepParams
                 ),
