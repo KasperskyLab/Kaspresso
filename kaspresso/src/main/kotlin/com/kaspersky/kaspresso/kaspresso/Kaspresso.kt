@@ -105,66 +105,91 @@ data class Kaspresso(
     class Builder {
 
         companion object {
+
             /**
-             * Puts the default preferences and entities pack to [Builder].
+             * Default (preconfigured full-featured with screenshot functionality) [Builder] for test environment configuration.
+             *
              * Please be aware if you add some settings after [default] method. You can catch inconsistent state of the
              * [Builder]. For example if you change [libLogger] after [default] method than all interceptors will work
              * with old [libLogger].
              *
              * @return the new instance of [Builder].
              */
-            fun default(): Builder {
-                return Builder().apply {
+            @Deprecated("Use `advanced()` builder.", ReplaceWith("advanced()"))
+            fun default(): Builder = advanced()
 
-                    viewActionWatcherInterceptors = mutableListOf(
-                        LoggingViewActionWatcherInterceptor(libLogger)
-                    )
+            /**
+             * Simple (preconfigured with logging and flaky-safe features) [Builder] for test environment configuration.
+             *
+             * Please be aware if you add some settings after [default] method. You can catch inconsistent state of the
+             * [Builder]. For example if you change [libLogger] after [default] method than all interceptors will work
+             * with old [libLogger].
+             *
+             * @return the new instance of [Builder].
+             */
+            fun simple(): Builder = Builder().apply {
 
-                    viewAssertionWatcherInterceptors = mutableListOf(
-                        LoggingViewAssertionWatcherInterceptor(libLogger)
-                    )
+                viewActionWatcherInterceptors = mutableListOf(
+                    LoggingViewActionWatcherInterceptor(libLogger)
+                )
 
-                    atomWatcherInterceptors = mutableListOf(
-                        LoggingAtomWatcherInterceptor(libLogger)
-                    )
+                viewAssertionWatcherInterceptors = mutableListOf(
+                    LoggingViewAssertionWatcherInterceptor(libLogger)
+                )
 
-                    webAssertionWatcherInterceptors = mutableListOf(
-                        LoggingWebAssertionWatcherInterceptor(libLogger)
-                    )
+                atomWatcherInterceptors = mutableListOf(
+                    LoggingAtomWatcherInterceptor(libLogger)
+                )
 
-                    viewBehaviorInterceptors = mutableListOf(
-                        AutoScrollViewBehaviorInterceptor(autoScrollParams, libLogger),
-                        SystemDialogSafetyViewBehaviorInterceptor(libLogger, uiDevice),
-                        FlakySafeViewBehaviorInterceptor(flakySafetyParams, libLogger),
-                        FailureLoggingViewBehaviorInterceptor(libLogger)
-                    )
+                webAssertionWatcherInterceptors = mutableListOf(
+                    LoggingWebAssertionWatcherInterceptor(libLogger)
+                )
 
-                    dataBehaviorInterceptors = mutableListOf(
-                        SystemDialogSafetyDataBehaviorInterceptor(libLogger, uiDevice),
-                        FlakySafeDataBehaviorInterceptor(flakySafetyParams, libLogger),
-                        FailureLoggingDataBehaviorInterceptor(libLogger)
-                    )
+                viewBehaviorInterceptors = mutableListOf(
+                    AutoScrollViewBehaviorInterceptor(autoScrollParams, libLogger),
+                    SystemDialogSafetyViewBehaviorInterceptor(libLogger, uiDevice),
+                    FlakySafeViewBehaviorInterceptor(flakySafetyParams, libLogger),
+                    FailureLoggingViewBehaviorInterceptor(libLogger)
+                )
 
-                    webBehaviorInterceptors = mutableListOf(
-                        AutoScrollWebBehaviorInterceptor(autoScrollParams, libLogger),
-                        SystemDialogSafetyWebBehaviorInterceptor(libLogger, uiDevice),
-                        FlakySafeWebBehaviorInterceptor(flakySafetyParams, libLogger),
-                        FailureLoggingWebBehaviorInterceptor(libLogger)
-                    )
+                dataBehaviorInterceptors = mutableListOf(
+                    SystemDialogSafetyDataBehaviorInterceptor(libLogger, uiDevice),
+                    FlakySafeDataBehaviorInterceptor(flakySafetyParams, libLogger),
+                    FailureLoggingDataBehaviorInterceptor(libLogger)
+                )
 
-                    stepWatcherInterceptors = mutableListOf(
-                        LoggingStepWatcherInterceptor(libLogger),
-                        ScreenshotStepWatcherInterceptor(screenshots)
-                    )
+                webBehaviorInterceptors = mutableListOf(
+                    AutoScrollWebBehaviorInterceptor(autoScrollParams, libLogger),
+                    SystemDialogSafetyWebBehaviorInterceptor(libLogger, uiDevice),
+                    FlakySafeWebBehaviorInterceptor(flakySafetyParams, libLogger),
+                    FailureLoggingWebBehaviorInterceptor(libLogger)
+                )
 
-                    testRunWatcherInterceptors = mutableListOf(
-                        TestRunLoggerWatcherInterceptor(libLogger),
-                        TestRunnerScreenshotWatcherInterceptor(screenshots),
-                        BuildStepReportWatcherInterceptor(AllureReportWriter(libLogger))
-                    )
+                stepWatcherInterceptors = mutableListOf(
+                    LoggingStepWatcherInterceptor(libLogger)
+                )
 
-                    failureHandler = LoggingFailureHandler(libLogger)
-                }
+                testRunWatcherInterceptors = mutableListOf(
+                    TestRunLoggerWatcherInterceptor(libLogger),
+                    BuildStepReportWatcherInterceptor(AllureReportWriter(libLogger))
+                )
+
+                failureHandler = LoggingFailureHandler(libLogger)
+            }
+
+            /**
+             * Advanced (full-featured with screenshot functionality) [Builder] for test environment configuration.
+             *
+             * Please be aware if you add some settings after [default] method. You can catch inconsistent state of the
+             * [Builder]. For example if you change [libLogger] after [default] method than all interceptors will work
+             * with old [libLogger].
+             *
+             * @return the new instance of [Builder].
+             */
+            fun advanced(): Builder = simple().apply {
+
+                stepWatcherInterceptors.add(ScreenshotStepWatcherInterceptor(screenshots))
+                testRunWatcherInterceptors.add(TestRunnerScreenshotWatcherInterceptor(screenshots))
             }
         }
 
