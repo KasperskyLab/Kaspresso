@@ -16,4 +16,4 @@ The implementation of the [Screenshots](../-screenshots/index.md) interface.
 
 | Name | Summary |
 |---|---|
-| [take](take.md) | `fun take(tag: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Takes screenshot if it is possible, otherwise logs the error. |
+| [take](take.md) | `fun take(tag: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Takes screenshot if it is possible, otherwise logs the error. The method adds System.currentTimeMillis() to the tag to save all screenshots of a test     running several times per the same suite. That's why a name will look     like "1570158949869_ScreenshotSampleTest_step_1". |

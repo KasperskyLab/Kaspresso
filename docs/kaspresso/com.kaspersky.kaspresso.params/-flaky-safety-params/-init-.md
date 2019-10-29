@@ -1,4 +1,4 @@
-[kaspresso](../../index.md) / [com.kaspersky.kaspresso.flakysafety](../index.md) / [FlakySafetyParams](index.md) / [&lt;init&gt;](./-init-.md)
+[kaspresso](../../index.md) / [com.kaspersky.kaspresso.params](../index.md) / [FlakySafetyParams](index.md) / [&lt;init&gt;](./-init-.md)
 
 # &lt;init&gt;
 
@@ -8,5 +8,5 @@
             AssertionError::class.java
         ))`
 
-The class that holds all the necessary for [FlakySafetyProvider](../-flaky-safety-provider/index.md) parameters.
+The class that holds all the necessary for [com.kaspersky.kaspresso.flakysafety.FlakySafetyProviderImpl](../../com.kaspersky.kaspresso.flakysafety/-flaky-safety-provider-impl/index.md) parameters.
 

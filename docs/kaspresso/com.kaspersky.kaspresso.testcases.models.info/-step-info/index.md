@@ -9,8 +9,7 @@
 | Name | Summary |
 |---|---|
 | [description](description.md) | `abstract val description: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html) |
-| [level](level.md) | `abstract val level: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html) |
-| [number](number.md) | `abstract val number: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html) |
+| [number](number.md) | `abstract val number: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`?` |
 | [ordinal](ordinal.md) | `abstract val ordinal: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html) |
 | [startTime](start-time.md) | `abstract val startTime: `[`Long`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html) |
 | [status](status.md) | `abstract val status: `[`StepStatus`](../../com.kaspersky.kaspresso.testcases.models/-step-status/index.md) |

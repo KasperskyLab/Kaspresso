@@ -73,6 +73,8 @@ class LoggingStepWatcherInterceptor(
     }
 
     private fun getStepHeader(stepInfo: StepInfo): String {
-        return "TEST STEP: \"${stepInfo.number}. ${stepInfo.description}\" in ${stepInfo.testClassName}"
+        return "TEST STEP: \"" +
+                (stepInfo.number?.let { "$it. " } ?: "") +
+                "${stepInfo.description}\" in ${stepInfo.testClassName}"
     }
 }

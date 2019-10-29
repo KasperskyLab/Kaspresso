@@ -5,5 +5,7 @@ package com.kaspersky.kaspresso.params
  */
 data class Params(
     val flakySafetyParams: FlakySafetyParams,
-    val autoScrollParams: AutoScrollParams
+    val continuouslyParams: ContinuouslyParams,
+    val autoScrollParams: AutoScrollParams,
+    val stepParams: StepParams
 )
