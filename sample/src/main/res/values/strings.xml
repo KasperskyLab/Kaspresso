@@ -39,5 +39,12 @@
     <string name="continuously_start_button">Start some work with the success dialog at the end</string>
     <string name="continuously_dialog_title">Some work finished</string>
 
+    <!-- Upgrade scenario -->
+    <string name="upgrade_title" translatable="false">Upgrade scenario</string>
+    <string name="upgrade_version_placeholder" translatable="false">v.%d</string>
+    <string name="upgrade_value_placeholder" translatable="false">Current value is: %s</string>
+    <string name="upgrade_label_value" translatable="false">Value</string>
+    <string name="upgrade_value_input_hint" translatable="false">Type new value here</string>
+    <string name="upgrade_apply_button" translatable="false">Apply</string>
 
 </resources>

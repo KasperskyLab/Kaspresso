@@ -57,6 +57,9 @@
                 android:name=".device.DeviceSampleActivity"
                 android:label="@string/device_sample_title"/>
 
+        <activity android:name=".upgrade.UpgradeTestActivity"
+                android:label="@string/upgrade_title"/>
+
         <service
                 android:name=".device.DeviceSampleAccessibilityService"
                 android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"
