@@ -52,6 +52,9 @@ class TestRunCompositeWatcherInterceptor(
         }
     }
 
+    /**
+     * First of all, call DefaultsTestRunWatcherInterceptor because it's beforeEachTest is very first in the test
+     */
     private fun getBeforeSectionList(): List<TestRunWatcherInterceptor> {
         return watcherInterceptors.sortedWith(Comparator { o1, o2 ->
             when {
@@ -139,6 +142,9 @@ class TestRunCompositeWatcherInterceptor(
         getAfterSectionList().forEachSafely(exceptions) { it.onAfterSectionFinishedFailed(testInfo, throwable) }
     }
 
+    /**
+     * In last turn, call DefaultsTestRunWatcherInterceptor because it's afterEachTest is very last in the test
+     */
     private fun getAfterSectionList(): List<TestRunWatcherInterceptor> {
         return watcherInterceptors.sortedWith(Comparator { o1, o2 ->
             when {
