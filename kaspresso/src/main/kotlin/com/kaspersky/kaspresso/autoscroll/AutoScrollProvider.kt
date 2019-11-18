@@ -25,5 +25,10 @@ interface AutoScrollProvider<Interaction> {
      *
      * @return the result of [action] invocation.
      */
-    fun <T> scroll(interaction: Interaction, action: () -> T, cachedError: Throwable): T
+    fun <T> scroll(interaction: Interaction, action: () -> T, cachedError: Throwable): T 
+    
+    
+    
+    
+    
 }
