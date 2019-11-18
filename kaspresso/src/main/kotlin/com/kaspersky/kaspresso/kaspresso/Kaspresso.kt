@@ -53,6 +53,7 @@ import com.kaspersky.kaspresso.interceptors.tokakao.impl.KakaoViewInterceptor
 import com.kaspersky.kaspresso.interceptors.tokakao.impl.KakaoWebInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.StepWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.TestRunWatcherInterceptor
+import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.defaults.DefaultsTestRunWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.logging.LoggingStepWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.logging.TestRunLoggerWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.report.BuildStepReportWatcherInterceptor
@@ -93,9 +94,7 @@ data class Kaspresso(
     internal val dataBehaviorInterceptors: List<DataBehaviorInterceptor>,
     internal val webBehaviorInterceptors: List<WebBehaviorInterceptor>,
     internal val stepWatcherInterceptors: List<StepWatcherInterceptor>,
-    internal val testRunWatcherInterceptors: List<TestRunWatcherInterceptor>,
-    internal val beforeEachTestAction: (BaseTestContext.() -> Unit)?,
-    internal val afterEachTestAction: (BaseTestContext.() -> Unit)?
+    internal val testRunWatcherInterceptors: List<TestRunWatcherInterceptor>
 ) {
     private companion object {
         private const val DEFAULT_LIB_LOGGER_TAG: String = "KASPRESSO"
@@ -163,7 +162,8 @@ data class Kaspresso(
                     testRunWatcherInterceptors = mutableListOf(
                         TestRunLoggerWatcherInterceptor(libLogger),
                         TestRunnerScreenshotWatcherInterceptor(screenshots),
-                        BuildStepReportWatcherInterceptor(AllureReportWriter(libLogger))
+                        BuildStepReportWatcherInterceptor(AllureReportWriter(libLogger)),
+                        defaultsTestRunWatcherInterceptor
                     )
 
                     failureHandler = LoggingFailureHandler(libLogger)
@@ -369,11 +369,7 @@ data class Kaspresso(
          */
         var failureHandler: FailureHandler? = null
 
-        /**
-         * Holds the action which will be executed before the test.
-         * The action has access to BaseTestContext.
-         */
-        private var beforeEachTestAction: (BaseTestContext.() -> Unit)? = null
+        private val defaultsTestRunWatcherInterceptor = DefaultsTestRunWatcherInterceptor()
 
         /**
          * Set the action which will be executed before the test.
@@ -383,22 +379,8 @@ data class Kaspresso(
          *     Otherwise final beforeAction will be only @param action.
          */
         fun beforeEachTest(override: Boolean = false, action: BaseTestContext.() -> Unit) {
-            if (override) {
-                beforeEachTestAction = action
-            } else {
-                val oldBeforeEachTestAction = beforeEachTestAction
-                beforeEachTestAction = {
-                    oldBeforeEachTestAction?.invoke(this)
-                    action.invoke(this)
-                }
-            }
+            defaultsTestRunWatcherInterceptor.beforeEachTest(override, action)
         }
-
-        /**
-         * Holds the action which will be executed after the test.
-         * The action has access to BaseTestContext.
-         */
-        private var afterEachTestAction: (BaseTestContext.() -> Unit)? = null
 
         /**
          * Set the action which will be executed after the test.
@@ -408,15 +390,7 @@ data class Kaspresso(
          *     Otherwise final beforeAction will be only @param action.
          */
         fun afterEachTest(override: Boolean = false, action: BaseTestContext.() -> Unit) {
-            if (override) {
-                afterEachTestAction = action
-            } else {
-                val oldAfterEachTestAction = afterEachTestAction
-                afterEachTestAction = {
-                    oldAfterEachTestAction?.invoke(this)
-                    action.invoke(this)
-                }
-            }
+            defaultsTestRunWatcherInterceptor.afterEachTest(override, action)
         }
 
         /**
@@ -490,10 +464,7 @@ data class Kaspresso(
                 webBehaviorInterceptors = webBehaviorInterceptors,
 
                 stepWatcherInterceptors = stepWatcherInterceptors,
-                testRunWatcherInterceptors = testRunWatcherInterceptors,
-
-                beforeEachTestAction = beforeEachTestAction,
-                afterEachTestAction = afterEachTestAction
+                testRunWatcherInterceptors = testRunWatcherInterceptors
             )
 
             initInterception(kaspresso)

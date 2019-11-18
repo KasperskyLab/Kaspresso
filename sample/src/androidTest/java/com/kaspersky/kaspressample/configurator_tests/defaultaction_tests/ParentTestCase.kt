@@ -8,11 +8,11 @@ open class ParentTestCase(
 ) : TestCase(kaspressoBuilder = Kaspresso.Builder.default().apply {
         beforeEachTest {
             testLogger.i("beforeTestFirstAction")
-            DefaultActionsChecker.putBeforeFirst()
+            DefaultActionsChecker.putBeforeInParentTestCase()
         }
         afterEachTest {
             testLogger.i("afterTestFirstAction")
-            DefaultActionsChecker.putAfterFirst()
+            DefaultActionsChecker.putAfterInParentTestCase()
         }
         kaspressoBuilderAdditional.invoke(this)
     }

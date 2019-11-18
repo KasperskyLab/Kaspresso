@@ -18,11 +18,11 @@ class DefaultActionsTest : ParentTestCase(
     kaspressoBuilderAdditional = {
         beforeEachTest {
             testLogger.i("beforeTestSecondAction")
-            DefaultActionsChecker.putBeforeSecond()
+            DefaultActionsChecker.putBeforeInTestCase()
         }
         afterEachTest(override = true) {
             testLogger.i("afterTestSecondAction")
-            DefaultActionsChecker.putAfterSecond()
+            DefaultActionsChecker.putAfterInTestCase()
         }
     }
 ) {
@@ -46,9 +46,11 @@ class DefaultActionsTest : ParentTestCase(
         before {
             activityTestRule.launchActivity(null)
             testLogger.i("beforeSection")
+            DefaultActionsChecker.putBeforeInBeforeSection()
             DefaultActionsChecker.assertBefore()
         }.after {
             testLogger.i("afterSection")
+            DefaultActionsChecker.putAfterInAfterSection()
         }.run {
 
             step("Open Simple Screen") {

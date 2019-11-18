@@ -6,20 +6,28 @@ object DefaultActionsChecker {
 
     private val checkList = mutableListOf<Char>()
 
-    fun putBeforeFirst() {
+    fun putBeforeInParentTestCase() {
         checkList.add('A')
     }
 
-    fun putBeforeSecond() {
+    fun putBeforeInTestCase() {
         checkList.add('B')
     }
 
-    fun putAfterFirst() {
+    fun putBeforeInBeforeSection() {
         checkList.add('C')
     }
 
-    fun putAfterSecond() {
+    fun putAfterInParentTestCase() {
         checkList.add('D')
+    }
+
+    fun putAfterInTestCase() {
+        checkList.add('E')
+    }
+
+    fun putAfterInAfterSection() {
+        checkList.add('F')
     }
 
     fun reset() {
@@ -27,10 +35,19 @@ object DefaultActionsChecker {
     }
 
     fun assertBefore() {
-        assertTrue(checkList == "AB".toMutableList())
+        // A - first => calls  in parent TestCase
+        // B - second => calls in TestCase's constructor in beforeEachTest
+        // C - third => calls in beforeTest section
+        assertTrue(checkList == "ABC".toMutableList())
     }
 
     fun assertAfter() {
-        assertTrue(checkList == "ABD".toMutableList())
+        // A - first => calls  in parent TestCase
+        // B - second => calls in TestCase's constructor in beforeEachTest
+        // C - third => calls in beforeTest section
+        // F - fourth => calls in afterTest section
+        // E - fifth => calls in TestCase's constructor in afterEachTest
+        // D - NO => because in TestCase's constructor we call afterEachTest method with override=true
+        assertTrue(checkList == "ABCFE".toMutableList())
     }
 }
