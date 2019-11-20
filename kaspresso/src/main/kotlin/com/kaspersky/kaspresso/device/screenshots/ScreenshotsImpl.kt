@@ -14,7 +14,8 @@ import java.io.File
 class ScreenshotsImpl(
     private val logger: UiTestLogger,
     private val activities: Activities,
-    screenshotDir: File = File("screenshots")
+    screenshotDir: File = File("screenshots"),
+    private val addTimestamps: Boolean = true
 ) : Screenshots {
 
     companion object {
@@ -28,9 +29,9 @@ class ScreenshotsImpl(
 
     /**
      * Takes screenshot if it is possible, otherwise logs the error.
-     * The method adds System.currentTimeMillis() to the tag to save all screenshots of a test
-     *     running several times per the same suite. That's why a name will look
-     *     like "1570158949869_ScreenshotSampleTest_step_1".
+     * If addTimestamps is true, the method adds System.currentTimeMillis() to the tag to save
+     * all screenshots of a test running several times per the same suite. In that case a name will look
+     * like "1570158949869_ScreenshotSampleTest_step_1".
      *
      * Required Permissions: WRITE_EXTERNAL_STORAGE.
      *
@@ -38,7 +39,8 @@ class ScreenshotsImpl(
      */
     override fun take(tag: String) {
         val resumedActivity = activities.getResumed()
-        val fullName = System.currentTimeMillis().toString() + NAME_SEPARATOR + tag
+        val namePrefix = if (addTimestamps) System.currentTimeMillis().toString() + NAME_SEPARATOR else ""
+        val fullName = namePrefix + tag
 
         if (resumedActivity != null) {
             runCatching {
