@@ -17,8 +17,13 @@ class SystemDialogSafetyProviderImpl(
     private val uiDevice: UiDevice
 ) : SystemDialogSafetyProvider {
 
+    companion object {
+        private const val DEFAULT_TIMEOUT: Long = 2000
+    }
+
     private val attemptsToSuppress: List<(UiDevice) -> Unit> = listOf(
-        { uiDevice -> uiDevice.findObject(UiSelector().resourceId("android:id/button1")).click() },
+        { uiDevice -> uiDevice.wait(Until.findObject(By.res("android:id/button1")), DEFAULT_TIMEOUT).click() },
+        { uiDevice -> uiDevice.wait(Until.findObject(By.textContains("Close")), DEFAULT_TIMEOUT).click() },
         { uiDevice -> uiDevice.pressBack() }
     )
 
