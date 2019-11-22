@@ -22,7 +22,7 @@ class SystemDialogSafetyProviderImpl(
 
     private val attemptsToSuppress: List<(UiDevice) -> Unit> = listOf(
         { uiDevice -> uiDevice.wait(Until.findObject(By.res("android:id/button1")), DEFAULT_TIMEOUT).click() },
-        { uiDevice -> uiDevice.wait(Until.findObject(By.textContains("Close")), DEFAULT_TIMEOUT).click() },
+        { uiDevice -> uiDevice.wait(Until.findObject(By.res("android:id/closeButton")), DEFAULT_TIMEOUT).click() },
         { uiDevice -> uiDevice.pressBack() }
     )
 
