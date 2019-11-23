@@ -1,10 +1,15 @@
 package com.kaspersky.kaspresso.testcases.api.testcase
 
+import com.kaspersky.kaspresso.device.Device
+import com.kaspersky.kaspresso.device.server.AdbServer
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
+import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.testcases.core.sections.AfterTestSection
 import com.kaspersky.kaspresso.testcases.core.sections.BeforeTestSection
 import com.kaspersky.kaspresso.testcases.core.sections.MainTestSection
 import com.kaspersky.kaspresso.testcases.core.sections.TransformSection
+import com.kaspersky.kaspresso.testcases.core.testassistants.TestAssistantsProvider
+import com.kaspersky.kaspresso.testcases.core.testassistants.TestAssistantsProviderImpl
 import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
 import com.kaspersky.kaspresso.testcases.models.TestBody
 
@@ -19,10 +24,16 @@ import com.kaspersky.kaspresso.testcases.models.TestBody
 abstract class BaseTestCase<InitData, Data>(
     kaspressoBuilder: Kaspresso.Builder = Kaspresso.Builder.default(),
     private val dataProducer: (((InitData.() -> Unit)?) -> Data)
-) {
-    private val testCaseName = javaClass.simpleName
+) : TestAssistantsProvider {
 
     internal val kaspresso: Kaspresso = kaspressoBuilder.build()
+
+    private val testCaseName = javaClass.simpleName
+    private val testAssistantsProvider = TestAssistantsProviderImpl(kaspresso)
+
+    override val adbServer: AdbServer = testAssistantsProvider.adbServer
+    override val device: Device = testAssistantsProvider.device
+    override val testLogger: UiTestLogger = testAssistantsProvider.testLogger
 
     /**
      * Starts the building of a test, sets the [BeforeTestSection] actions and returns an existing instance of

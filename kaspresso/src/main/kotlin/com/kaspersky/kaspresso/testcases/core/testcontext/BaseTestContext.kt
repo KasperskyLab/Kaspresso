@@ -12,6 +12,8 @@ import com.kaspersky.kaspresso.flakysafety.FlakySafetyProvider
 import com.kaspersky.kaspresso.flakysafety.FlakySafetyProviderImpl
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.logger.UiTestLogger
+import com.kaspersky.kaspresso.testcases.core.testassistants.TestAssistantsProvider
+import com.kaspersky.kaspresso.testcases.core.testassistants.TestAssistantsProviderImpl
 
 /**
  * Provides the Kaspresso functionality for "run" section: [Device], [AdbServer], the [UiTestLogger] implementation
@@ -23,9 +25,5 @@ open class BaseTestContext internal constructor(
 ) : FlakySafetyProvider by FlakySafetyProviderImpl(kaspresso.params.flakySafetyParams, kaspresso.libLogger),
     ContinuouslyProvider by ContinuouslyProviderImpl(kaspresso.params.continuouslyParams, kaspresso.libLogger),
     ComposeProvider by ComposeProviderImpl(kaspresso),
-    WebComposeProvider by WebComposeProviderImpl(kaspresso) {
-
-    val device: Device = kaspresso.device
-    val adbServer: AdbServer = kaspresso.adbServer
-    val testLogger: UiTestLogger = kaspresso.testLogger
-}
+    WebComposeProvider by WebComposeProviderImpl(kaspresso),
+    TestAssistantsProvider by TestAssistantsProviderImpl(kaspresso)
