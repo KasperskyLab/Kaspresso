@@ -4,6 +4,7 @@ import com.kaspersky.kaspresso.device.Device
 import com.kaspersky.kaspresso.device.server.AdbServer
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.logger.UiTestLogger
+import com.kaspersky.kaspresso.testcases.core.TestRunner
 import com.kaspersky.kaspresso.testcases.core.sections.AfterTestSection
 import com.kaspersky.kaspresso.testcases.core.sections.BeforeTestSection
 import com.kaspersky.kaspresso.testcases.core.sections.MainTestSection
@@ -11,6 +12,7 @@ import com.kaspersky.kaspresso.testcases.core.sections.TransformSection
 import com.kaspersky.kaspresso.testcases.core.testassistants.TestAssistantsProvider
 import com.kaspersky.kaspresso.testcases.core.testassistants.TestAssistantsProviderImpl
 import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
+import com.kaspersky.kaspresso.testcases.core.testcontext.TestContext
 import com.kaspersky.kaspresso.testcases.models.TestBody
 
 /**
@@ -71,6 +73,25 @@ abstract class BaseTestCase<InitData, Data>(
         }
 
         return MainTestSection(kaspresso, testBodyBuilder)
+    }
+
+    /**
+     * Runs:
+     * 1) [BeforeTestSection],
+     * 2) Optional [init],
+     * 3) Optional [TransformSection.transform]'s sections (only if [init] was called before),
+     * 4) [MainTestSection]'s steps,
+     * 5) [AfterTestSection]. [AfterTestSection] is invoked even if [BeforeTestSection] or [BaseTestCase]'s [steps] failed.
+     *
+     * @param steps steps to run.
+     */
+    fun run(
+        testName: String = testCaseName,
+        steps: TestContext<Data>.() -> Unit
+    ) {
+        val testBodyBuilder = createBaseTestBodyBuilder(testName)
+        val testBody = testBodyBuilder.apply { this.steps = steps }.build()
+        TestRunner<InitData, Data>(kaspresso).run(testBody)
     }
 
     private fun createBaseTestBodyBuilder(testName: String): TestBody.Builder<InitData, Data> {
