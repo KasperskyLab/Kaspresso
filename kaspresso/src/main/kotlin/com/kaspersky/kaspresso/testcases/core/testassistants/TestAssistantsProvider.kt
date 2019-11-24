@@ -8,7 +8,7 @@ import com.kaspersky.kaspresso.logger.UiTestLogger
  * Provider of test assistants allowed in [com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext],
  * [com.kaspersky.kaspresso.testcases.api.testcase.BaseTestCase] and their inheritors
  */
-internal interface TestAssistantsProvider {
+interface TestAssistantsProvider {
 
     val device: Device
     val adbServer: AdbServer
