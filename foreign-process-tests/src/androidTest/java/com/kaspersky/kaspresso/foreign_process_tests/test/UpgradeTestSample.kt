@@ -48,11 +48,9 @@ class UpgradeTestSample : UpgradeTestCase() {
                     input {
                         replaceText(VALUE)
                     }
-
                     apply {
                         click()
                     }
-
                     value {
                         containsText(VALUE)
                     }
@@ -80,7 +78,6 @@ class UpgradeTestSample : UpgradeTestCase() {
                     version {
                         hasText(VERSION_TEXT_AFTER_UPDATE)
                     }
-
                     value {
                         containsText(VALUE)
                     }

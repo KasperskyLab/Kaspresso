@@ -3,9 +3,9 @@ package com.kaspersky.kaspresso.foreign_process_tests.screen
 import com.kaspersky.components.uiautomator_dsl.edit.UiEditText
 import com.kaspersky.components.uiautomator_dsl.text.UiButton
 import com.kaspersky.components.uiautomator_dsl.text.UiTextView
-import com.kaspersky.kaspresso.foreign_process_tests.common.UiScreen
+import com.kaspersky.kaspresso.foreign_process_tests.common.UpgradeUiScreen
 
-object UpgradeScreen : UiScreen<UpgradeScreen>() {
+object UpgradeScreen : UpgradeUiScreen<UpgradeScreen>() {
 
     private const val VERSION_ID = "upgrade_version"
     private const val INPUT_ID = "upgrade_value_input"

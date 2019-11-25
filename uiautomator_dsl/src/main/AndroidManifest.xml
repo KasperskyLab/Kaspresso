@@ -1,2 +1,1 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.kaspersky.components.uiautomator_dsl" />
+<manifest package="com.kaspersky.components.uiautomator_dsl" />
