@@ -29,7 +29,7 @@ internal class TestRunner<InitData, Data>(
                 kaspresso.libLogger,
                 exceptions
             )
-        testRunWatcherInterceptor.requestBaseTestContest(baseTestContext)
+        testRunWatcherInterceptor.requestBaseTestContext(baseTestContext)
 
         val stepsManager = StepsManager(testBody.testName, kaspresso.params.stepParams)
         var testInfo = TestInfo(testBody.testName)

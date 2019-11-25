@@ -18,8 +18,8 @@ class TestRunCompositeWatcherInterceptor(
     private val exceptions: MutableList<Throwable>
 ) : TestRunWatcherInterceptor {
 
-    override fun requestBaseTestContest(context: BaseTestContext) {
-        watcherInterceptors.forEachSafely(exceptions) { it.requestBaseTestContest(context) }
+    override fun requestBaseTestContext(context: BaseTestContext) {
+        watcherInterceptors.forEachSafely(exceptions) { it.requestBaseTestContext(context) }
     }
 
     /**

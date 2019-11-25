@@ -20,7 +20,7 @@ class DefaultsTestRunWatcherInterceptor : TestRunWatcherInterceptor {
      */
     private var afterEachTestAction: (BaseTestContext.() -> Unit)? = null
 
-    override fun requestBaseTestContest(context: BaseTestContext) {
+    override fun requestBaseTestContext(context: BaseTestContext) {
         this.context = context
     }
 
