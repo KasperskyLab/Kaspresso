@@ -11,7 +11,10 @@ import java.io.StringWriter
 internal fun Throwable.getStackTraceAsString(): String =
     StringWriter().also { printStackTrace(PrintWriter(it)) }.toString()
 
-internal inline fun <reified T : Throwable> invokeSafely(exceptions: MutableList<T>, action: () -> Unit) {
+internal inline fun <reified T : Throwable> invokeSafely(
+    exceptions: MutableList<T>,
+    action: () -> Unit
+) {
     try {
         action.invoke()
     } catch (e: Throwable) {
@@ -32,8 +35,8 @@ internal inline fun <reified ERROR : Throwable, LISTENER> Iterable<LISTENER>.for
 
 internal fun <T : Throwable> List<T>.getException(): Throwable? {
     return when (this.size) {
-        1 -> throw this[0]
-        in 2..Int.MAX_VALUE -> throw ExtCompositeException(this)
+        1 -> this[0]
+        in 2..Int.MAX_VALUE -> ExtCompositeException(this)
         else -> null
     }
 }

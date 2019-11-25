@@ -12,3 +12,6 @@ Sergey Zankin <Sergey.Zankin@kaspersky.com> <br>
 Alexey Tvorogov <Alexey.Tvorogov@kaspersky.com> <br>
 Alexey Demov <Alexey.Demov@kaspersky.com> <br>
 Nikolay Nesterov <nikolaynesterov@gmail.com> <br>
+Dmitriy Voronin <dsvoronin@gmail.com> <br>
+Amit Barjatya <lavibarjatya@gmail.com> <br>
+Vyacheslav Rodionov <Vyacheslav.Rodionov@kaspersky.com> <br>

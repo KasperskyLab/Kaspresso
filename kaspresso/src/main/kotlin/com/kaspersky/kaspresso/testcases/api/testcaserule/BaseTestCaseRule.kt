@@ -3,7 +3,10 @@ package com.kaspersky.kaspresso.testcases.api.testcaserule
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.testcases.core.sections.AfterTestSection
 import com.kaspersky.kaspresso.testcases.core.sections.BeforeTestSection
+import com.kaspersky.kaspresso.testcases.core.sections.MainTestSection
+import com.kaspersky.kaspresso.testcases.core.sections.TransformSection
 import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
+import com.kaspersky.kaspresso.testcases.core.testcontext.TestContext
 import com.kaspersky.kaspresso.testcases.models.TestBody
 import org.junit.rules.TestRule
 import org.junit.runner.Description
@@ -41,12 +44,48 @@ open class BaseTestCaseRule<InitData, Data>(
         testName: String = testClassName,
         actions: BaseTestContext.() -> Unit
     ): AfterTestSection<InitData, Data> {
+        val testBodyBuilder = createBaseTestBodyBuilder(testName)
+        return BeforeTestSection(kaspresso, testBodyBuilder).beforeTest(actions)
+    }
 
-        val testBodyBuilder = TestBody.Builder<InitData, Data>().apply {
+    /**
+     * Starts the building of a test from data initialization section. Sets
+     * [com.kaspersky.kaspresso.testcases.core.sections.InitSection] actions and returns an existing instance of
+     * [MainTestSection] to continue building a tests.
+     *
+     * @param testName a name of the test.
+     * @param actions actions to be wrapped and invoked before the test for data initialization
+     * @return an existing instance of [MainTestSection].
+     */
+    fun init(
+        testName: String = testClassName,
+        actions: InitData.() -> Unit
+    ): TransformSection<Data> {
+        val testBodyBuilder = createBaseTestBodyBuilder(testName).apply {
+            initActions = actions
+        }
+        return MainTestSection(kaspresso, testBodyBuilder)
+    }
+
+    /**
+     * Sets [com.kaspersky.kaspresso.testcases.core.sections.MainTestSection] steps, creates an instance of
+     * [MainTestSection] and runs it
+     *
+     * @param testName a name of the test.
+     * @param steps actions to invoke in main test section.
+     */
+    fun run(
+        testName: String = testClassName,
+        steps: TestContext<Data>.() -> Unit
+    ) {
+        val testBodyBuilder = createBaseTestBodyBuilder(testName)
+        MainTestSection(kaspresso, testBodyBuilder).run(steps)
+    }
+
+    private fun createBaseTestBodyBuilder(testName: String): TestBody.Builder<InitData, Data> {
+        return TestBody.Builder<InitData, Data>().apply {
             this.testName = testName
             this.dataProducer = this@BaseTestCaseRule.dataProducer
         }
-
-        return BeforeTestSection(kaspresso, testBodyBuilder).beforeTest(actions)
     }
 }

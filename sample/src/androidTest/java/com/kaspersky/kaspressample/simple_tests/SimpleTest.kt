@@ -34,13 +34,10 @@ class SimpleTest : TestCase() {
     val activityTestRule = ActivityTestRule(MainActivity::class.java, true, false)
 
     @Test
-    fun test() {
-        before {
-            activityTestRule.launchActivity(null)
-        }.after {
-        }.run {
-
+    fun test() =
+        run {
             step("Open Simple Screen") {
+                activityTestRule.launchActivity(null)
                 testLogger.i("I am testLogger")
                 device.screenshots.take("Additional_screenshot")
                 MainScreen {
@@ -79,6 +76,5 @@ class SimpleTest : TestCase() {
                     CheckEditScenario()
                 )
             }
-        }
     }
 }

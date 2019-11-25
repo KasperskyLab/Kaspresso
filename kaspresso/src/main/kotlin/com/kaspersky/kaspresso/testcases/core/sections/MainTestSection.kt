@@ -16,7 +16,7 @@ class MainTestSection<InitData, Data> internal constructor(
 
     /**
      * Runs:
-     * 1) [BeforeTestSection],
+     * 1) Optional [BeforeTestSection],
      * 2) Optional [init],
      * 3) Optional [transform]'s sections (only if [init] was called before),
      * 4) [MainTestSection]'s steps,

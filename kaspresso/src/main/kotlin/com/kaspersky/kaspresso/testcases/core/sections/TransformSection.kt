@@ -7,7 +7,7 @@ interface TransformSection<Data> {
 
     /**
      * Runs:
-     * 1) [BeforeTestSection],
+     * 1) Optional [BeforeTestSection],
      * 2) Optional [InitSection.init],
      * 3) Optional [transform]'s sections (only if [InitSection.init] was called before),
      * 4) [MainTestSection]'s steps,

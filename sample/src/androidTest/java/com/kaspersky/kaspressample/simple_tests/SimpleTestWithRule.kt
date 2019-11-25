@@ -37,14 +37,11 @@ class SimpleTestWithRule {
     val testCaseRule = TestCaseRule(javaClass.simpleName)
 
     @Test
-    fun test() {
-        testCaseRule.before {
-            activityTestRule.launchActivity(null)
-        }.after {
-        }.run {
-
+    fun test() =
+        testCaseRule.run {
             step("Open Simple Screen") {
                 testLogger.i("I am testLogger")
+                activityTestRule.launchActivity(null)
                 device.screenshots.take("Additional_screenshot")
                 MainScreen {
                     simpleButton {
@@ -82,6 +79,5 @@ class SimpleTestWithRule {
                     CheckEditScenario()
                 )
             }
-        }
     }
 }
