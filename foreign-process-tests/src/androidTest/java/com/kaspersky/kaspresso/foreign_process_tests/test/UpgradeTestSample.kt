@@ -48,7 +48,7 @@ class UpgradeTestSample : UpgradeTestCase() {
                     input {
                         replaceText(VALUE)
                     }
-                    apply {
+                    applyBtn {
                         click()
                     }
                     value {

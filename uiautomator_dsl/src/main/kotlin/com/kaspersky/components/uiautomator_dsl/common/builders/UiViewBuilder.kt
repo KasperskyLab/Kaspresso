@@ -2,6 +2,7 @@ package com.kaspersky.components.uiautomator_dsl.common.builders
 
 import androidx.test.uiautomator.By
 import androidx.test.uiautomator.BySelector
+import com.google.common.truth.Truth.assertThat
 import com.kaspersky.components.uiautomator_dsl.common.UiAutomatorDslMarker
 
 @UiAutomatorDslMarker
@@ -14,7 +15,7 @@ class UiViewBuilder {
     }
 
     fun build(): BySelector {
-        checkNotNull(selector) { "ViewBuilder selector is undefined" }
+        assertThat(selector).isNotNull()
         return selector as BySelector
     }
 }
