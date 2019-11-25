@@ -18,7 +18,7 @@ class PermissionsImpl(
 ) : Permissions {
 
     private companion object {
-        private const val DIALOG_TIMEOUT_MS: Long = 1_000
+        private const val DIALOG_TIMEOUT_MS: Long = 3_000
     }
 
     private val packageInstallerPackageName =

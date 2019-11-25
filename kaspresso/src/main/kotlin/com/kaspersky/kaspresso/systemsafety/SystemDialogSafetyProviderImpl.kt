@@ -4,7 +4,6 @@ import android.widget.FrameLayout
 import androidx.test.uiautomator.By
 import androidx.test.uiautomator.BySelector
 import androidx.test.uiautomator.UiDevice
-import androidx.test.uiautomator.UiSelector
 import androidx.test.uiautomator.Until
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import java.util.concurrent.TimeUnit
@@ -17,8 +16,13 @@ class SystemDialogSafetyProviderImpl(
     private val uiDevice: UiDevice
 ) : SystemDialogSafetyProvider {
 
+    companion object {
+        private const val DEFAULT_TIMEOUT: Long = 2000
+    }
+
     private val attemptsToSuppress: List<(UiDevice) -> Unit> = listOf(
-        { uiDevice -> uiDevice.findObject(UiSelector().resourceId("android:id/button1")).click() },
+        { uiDevice -> uiDevice.wait(Until.findObject(By.res("android:id/button1")), DEFAULT_TIMEOUT).click() },
+        { uiDevice -> uiDevice.wait(Until.findObject(By.res("android:id/closeButton")), DEFAULT_TIMEOUT).click() },
         { uiDevice -> uiDevice.pressBack() }
     )
 
