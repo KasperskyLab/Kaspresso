@@ -19,6 +19,8 @@ import com.kaspersky.kaspresso.device.files.Files
 import com.kaspersky.kaspresso.device.files.FilesImpl
 import com.kaspersky.kaspresso.device.keyboard.Keyboard
 import com.kaspersky.kaspresso.device.keyboard.KeyboardImpl
+import com.kaspersky.kaspresso.device.languages.LanguageSwitcher
+import com.kaspersky.kaspresso.device.languages.LanguageSwitcherImpl
 import com.kaspersky.kaspresso.device.location.Location
 import com.kaspersky.kaspresso.device.location.LocationImpl
 import com.kaspersky.kaspresso.device.network.Network
@@ -252,6 +254,11 @@ data class Kaspresso(
         var exploit: Exploit = ExploitImpl(activities, uiDevice, adbServer)
 
         /**
+         * Holds an implementation of [LanguageSwitcher] interface. If it was not specified, the default implementation is used.
+         */
+        var languageSwitcher: LanguageSwitcher = LanguageSwitcherImpl(libLogger, instrumentation.targetContext)
+
+        /**
          * Holds the [FlakySafetyParams] for [com.kaspersky.kaspresso.flakysafety.FlakySafetyProvider]'s usage.
          * If it was not specified, the default implementation is used.
          */
@@ -444,7 +451,8 @@ data class Kaspresso(
                     accessibility = accessibility,
                     permissions = permissions,
                     hackPermissions = hackPermissions,
-                    exploit = exploit
+                    exploit = exploit,
+                    languageSwitcher = languageSwitcher
                 ),
 
                 params = Params(
