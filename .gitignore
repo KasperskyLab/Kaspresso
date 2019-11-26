@@ -1,6 +1,8 @@
 # Built application files
 *.apk
 !/artifacts/hello_world.apk
+!/artifacts/upgrade_test_v1.apk
+!/artifacts/upgrade_test_v2.apk
 *.ap_
 *.aab
 

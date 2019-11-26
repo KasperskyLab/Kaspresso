@@ -1,0 +1,30 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply from: '../dependencies.gradle'
+
+android {
+    compileSdkVersion versions.compileSdk.toInteger()
+    buildToolsVersion versions.buildTools
+
+    defaultConfig {
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk.toInteger()
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        sourceSets {
+            main.java.srcDirs += 'src/main/kotlin'
+            main.res.srcDirs += 'src/main/res'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "com.google.truth:truth:$versions.truth"
+    implementation "androidx.test.ext:junit:$versions.extJunit"
+    implementation "androidx.test.uiautomator:uiautomator:$versions.uiautomator"
+}
