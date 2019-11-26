@@ -5,7 +5,7 @@ import com.kaspersky.kaspresso.testcases.models.info.TestInfo
 /**
  * The interface for all interceptors intercepting test run events.
  */
-interface TestRunWatcherInterceptor {
+interface TestRunWatcherInterceptor : TestContextHolder {
 
     fun onTestStarted(testInfo: TestInfo) = Unit
 

@@ -53,6 +53,7 @@ import com.kaspersky.kaspresso.interceptors.tokakao.impl.KakaoViewInterceptor
 import com.kaspersky.kaspresso.interceptors.tokakao.impl.KakaoWebInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.StepWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.TestRunWatcherInterceptor
+import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.defaults.DefaultTestRunWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.logging.LoggingStepWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.logging.TestRunLoggerWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.report.BuildStepReportWatcherInterceptor
@@ -74,6 +75,7 @@ import com.kaspersky.kaspresso.params.FlakySafetyParams
 import com.kaspersky.kaspresso.params.Params
 import com.kaspersky.kaspresso.params.StepParams
 import com.kaspersky.kaspresso.report.impl.AllureReportWriter
+import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
 
 /**
  * The storage of all Kaspresso preferences and entities, such as [AdbServer], [Device] and different interceptors.
@@ -160,7 +162,8 @@ data class Kaspresso(
                     testRunWatcherInterceptors = mutableListOf(
                         TestRunLoggerWatcherInterceptor(libLogger),
                         TestRunnerScreenshotWatcherInterceptor(screenshots),
-                        BuildStepReportWatcherInterceptor(AllureReportWriter(libLogger))
+                        BuildStepReportWatcherInterceptor(AllureReportWriter(libLogger)),
+                        defaultsTestRunWatcherInterceptor
                     )
 
                     failureHandler = LoggingFailureHandler(libLogger)
@@ -365,6 +368,30 @@ data class Kaspresso(
          * failure.
          */
         var failureHandler: FailureHandler? = null
+
+        private val defaultsTestRunWatcherInterceptor = DefaultTestRunWatcherInterceptor()
+
+        /**
+         * Set the action which will be executed before the test.
+         * The action has access to BaseTestContext.
+         * If you set @param override in false then the final beforeAction will be
+         *     beforeAction of the parent TestCase plus current @param action.
+         *     Otherwise final beforeAction will be only @param action.
+         */
+        fun beforeEachTest(override: Boolean = false, action: BaseTestContext.() -> Unit) {
+            defaultsTestRunWatcherInterceptor.beforeEachTest(override, action)
+        }
+
+        /**
+         * Set the action which will be executed after the test.
+         * The action has access to BaseTestContext.
+         * If you set @param override in false then the final beforeAction will be
+         *     beforeAction of the parent TestCase plus current @param action.
+         *     Otherwise final beforeAction will be only @param action.
+         */
+        fun afterEachTest(override: Boolean = false, action: BaseTestContext.() -> Unit) {
+            defaultsTestRunWatcherInterceptor.afterEachTest(override, action)
+        }
 
         /**
          * Sets the Kaspressos's implementations of Kakao's [androidx.test.espresso.ViewInteraction] interceptor,
