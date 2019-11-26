@@ -4,7 +4,7 @@ import com.kaspersky.kaspresso.interceptors.watcher.testcase.TestRunWatcherInter
 import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
 import com.kaspersky.kaspresso.testcases.models.info.TestInfo
 
-class DefaultsTestRunWatcherInterceptor : TestRunWatcherInterceptor {
+class DefaultTestRunWatcherInterceptor : TestRunWatcherInterceptor {
 
     private lateinit var context: BaseTestContext
 
@@ -20,7 +20,7 @@ class DefaultsTestRunWatcherInterceptor : TestRunWatcherInterceptor {
      */
     private var afterEachTestAction: (BaseTestContext.() -> Unit)? = null
 
-    override fun requestBaseTestContext(context: BaseTestContext) {
+    override fun setBaseTestContext(context: BaseTestContext) {
         this.context = context
     }
 

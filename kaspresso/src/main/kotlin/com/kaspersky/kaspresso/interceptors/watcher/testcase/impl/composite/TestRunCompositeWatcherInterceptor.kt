@@ -1,7 +1,7 @@
 package com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.composite
 
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.TestRunWatcherInterceptor
-import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.defaults.DefaultsTestRunWatcherInterceptor
+import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.defaults.DefaultTestRunWatcherInterceptor
 import com.kaspersky.kaspresso.internal.extensions.other.forEachSafely
 import com.kaspersky.kaspresso.logger.Logger
 import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
@@ -18,8 +18,14 @@ class TestRunCompositeWatcherInterceptor(
     private val exceptions: MutableList<Throwable>
 ) : TestRunWatcherInterceptor {
 
-    override fun requestBaseTestContext(context: BaseTestContext) {
-        watcherInterceptors.forEachSafely(exceptions) { it.requestBaseTestContext(context) }
+    companion object {
+        const val BIGGER: Int = -1
+        const val FEWER: Int = 1
+        const val DOES_NOT_MATTER: Int = 0
+    }
+
+    override fun setBaseTestContext(context: BaseTestContext) {
+        watcherInterceptors.forEachSafely(exceptions) { it.setBaseTestContext(context) }
     }
 
     /**
@@ -37,30 +43,30 @@ class TestRunCompositeWatcherInterceptor(
      * @param testInfo the test info to pass to [watcherInterceptors].
      */
     override fun onBeforeSectionStarted(testInfo: TestInfo) {
-        checkDefaultsTestRunWatcherInterceptorExisting()
+        checkIfDefaultWatcherInterceptorsExist()
         getBeforeSectionList().forEachSafely(exceptions) { it.onBeforeSectionStarted(testInfo) }
     }
 
-    private fun checkDefaultsTestRunWatcherInterceptorExisting() {
+    private fun checkIfDefaultWatcherInterceptorsExist() {
         if (watcherInterceptors
-                .filterIsInstance<DefaultsTestRunWatcherInterceptor>()
+                .filterIsInstance<DefaultTestRunWatcherInterceptor>()
                 .isEmpty()
         ) {
-            logger.e("Please, revert back DefaultsTestRunWatcherInterceptor to " +
+            logger.e("Please, revert back DefaultTestRunWatcherInterceptor to " +
                     "Kaspresso.Builder.testRunWatcherInterceptors. " +
                     "Otherwise Kaspresso.Builder.beforeEachTest and Kaspresso.Biulder.afterEachTest will not work!")
         }
     }
 
     /**
-     * First of all, call DefaultsTestRunWatcherInterceptor because it's beforeEachTest is very first in the test
+     * First of all, call DefaultTestRunWatcherInterceptor because it's beforeEachTest is very first in the test
      */
     private fun getBeforeSectionList(): List<TestRunWatcherInterceptor> {
         return watcherInterceptors.sortedWith(Comparator { o1, o2 ->
             when {
-                o1 is DefaultsTestRunWatcherInterceptor -> return@Comparator -1
-                o2 is DefaultsTestRunWatcherInterceptor -> return@Comparator 1
-                else -> return@Comparator 0
+                o1 is DefaultTestRunWatcherInterceptor -> return@Comparator BIGGER
+                o2 is DefaultTestRunWatcherInterceptor -> return@Comparator FEWER
+                else -> return@Comparator DOES_NOT_MATTER
             }
         })
     }
@@ -127,7 +133,7 @@ class TestRunCompositeWatcherInterceptor(
      * @param testInfo the test info to pass to [watcherInterceptors].
      */
     override fun onAfterSectionFinishedSuccess(testInfo: TestInfo) {
-        checkDefaultsTestRunWatcherInterceptorExisting()
+        checkIfDefaultWatcherInterceptorsExist()
         getAfterSectionList().forEachSafely(exceptions) { it.onAfterSectionFinishedSuccess(testInfo) }
     }
 
@@ -138,19 +144,19 @@ class TestRunCompositeWatcherInterceptor(
      * @param throwable the error occured to pass to  [watcherInterceptors].
      */
     override fun onAfterSectionFinishedFailed(testInfo: TestInfo, throwable: Throwable) {
-        checkDefaultsTestRunWatcherInterceptorExisting()
+        checkIfDefaultWatcherInterceptorsExist()
         getAfterSectionList().forEachSafely(exceptions) { it.onAfterSectionFinishedFailed(testInfo, throwable) }
     }
 
     /**
-     * In last turn, call DefaultsTestRunWatcherInterceptor because it's afterEachTest is very last in the test
+     * In last turn, call DefaultTestRunWatcherInterceptor because it's afterEachTest is very last in the test
      */
     private fun getAfterSectionList(): List<TestRunWatcherInterceptor> {
         return watcherInterceptors.sortedWith(Comparator { o1, o2 ->
             when {
-                o1 is DefaultsTestRunWatcherInterceptor -> return@Comparator 1
-                o2 is DefaultsTestRunWatcherInterceptor -> return@Comparator -1
-                else -> return@Comparator 0
+                o1 is DefaultTestRunWatcherInterceptor -> return@Comparator FEWER
+                o2 is DefaultTestRunWatcherInterceptor -> return@Comparator BIGGER
+                else -> return@Comparator DOES_NOT_MATTER
             }
         })
     }

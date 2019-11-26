@@ -3,9 +3,9 @@ package com.kaspersky.kaspresso.interceptors.watcher.testcase
 import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
 
 /**
- * Requestor of BaseTestContext
+ * Holder of BaseTestContext
  */
-interface TestContextRequestor {
+interface TestContextHolder {
 
-    fun requestBaseTestContext(context: BaseTestContext) = Unit
+    fun setBaseTestContext(context: BaseTestContext) = Unit
 }

@@ -53,7 +53,7 @@ import com.kaspersky.kaspresso.interceptors.tokakao.impl.KakaoViewInterceptor
 import com.kaspersky.kaspresso.interceptors.tokakao.impl.KakaoWebInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.StepWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.TestRunWatcherInterceptor
-import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.defaults.DefaultsTestRunWatcherInterceptor
+import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.defaults.DefaultTestRunWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.logging.LoggingStepWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.logging.TestRunLoggerWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.report.BuildStepReportWatcherInterceptor
@@ -369,7 +369,7 @@ data class Kaspresso(
          */
         var failureHandler: FailureHandler? = null
 
-        private val defaultsTestRunWatcherInterceptor = DefaultsTestRunWatcherInterceptor()
+        private val defaultsTestRunWatcherInterceptor = DefaultTestRunWatcherInterceptor()
 
         /**
          * Set the action which will be executed before the test.
