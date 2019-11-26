@@ -39,9 +39,7 @@ class DevicePhoneSampleTest : TestCase() {
 
     @Test
     fun phoneSampleTest() {
-        before {
-        }.after {
-        }.run {
+        run {
 
             step("Emulate a call") {
                 device.phone.emulateCall(PHONE_NUMBER)

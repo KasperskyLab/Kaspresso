@@ -21,9 +21,7 @@ class DeviceServerSampleTest : TestCase() {
 
     @Test
     fun serverSampleTest() {
-        before {
-        }.after {
-        }.run {
+        run {
 
             step("Execute command on host") {
                 val result = adbServer.performCmd("hostname")

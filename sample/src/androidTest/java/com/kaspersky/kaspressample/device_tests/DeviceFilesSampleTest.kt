@@ -39,9 +39,7 @@ class DeviceFilesSampleTest : TestCase() {
 
     @Test
     fun filesSampleTest() {
-        before {
-        }.after {
-        }.run {
+        run {
 
             step("Push $FILE_RELATIVE_PATH to device") {
                 device.files.push(FILE_RELATIVE_PATH, Environment.getExternalStorageDirectory().absolutePath)
