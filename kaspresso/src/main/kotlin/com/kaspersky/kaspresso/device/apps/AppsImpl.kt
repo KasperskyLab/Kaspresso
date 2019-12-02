@@ -65,7 +65,8 @@ class AppsImpl(
      * @return a [Boolean] of installation state
      */
     override fun isInstalled(packageName: String): Boolean {
-        val packageManager = context.packageManager ?: return false
+        val packageManager = context.packageManager
+        if (packageManager == null) return false
         return try {
             packageManager.getApplicationInfo(packageName, 0)
             true
