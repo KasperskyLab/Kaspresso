@@ -48,6 +48,20 @@ class AppsImpl(
     }
 
     /**
+     * Installs an app via ADB only if [packageName] is not installed
+     *
+     * Required Permissions: INTERNET.
+     *
+     * @param packageName an android package name of the app to be checked.
+     * @param apkPath a path to the apk to be installed. The apk is hosted on the test server.
+     */
+    override fun installWithChecking(packageName: String, apkPath: String) {
+        if (!isInstalled(packageName)) {
+            install(apkPath)
+        }
+    }
+
+    /**
      * Uninstalls an app via ADB.
      *
      * Required Permissions: INTERNET.
@@ -56,6 +70,19 @@ class AppsImpl(
      */
     override fun uninstall(packageName: String) {
         adbServer.performAdb("uninstall $packageName")
+    }
+
+    /**
+     * Uninstalls an app via ADB only if it installed
+     *
+     * Required Permissions: INTERNET.
+     *
+     * @param packageName an android package name of an app to be deleted.
+     */
+    override fun uninstallWithChecking(packageName: String) {
+        if (isInstalled(packageName)) {
+            uninstall(packageName)
+        }
     }
 
     /**
