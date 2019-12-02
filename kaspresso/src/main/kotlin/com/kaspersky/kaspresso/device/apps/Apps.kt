@@ -32,6 +32,13 @@ interface Apps {
      */
     fun uninstall(packageName: String)
 
+    /**
+     * Checks app is installed on device
+     *
+     * @param packageName an android package name of the app to be checked.
+     */
+    fun isInstalled(packageName: String): Boolean
+
     fun waitForLauncher(
         timeout: Long = MAX_LAUNCH_TIME_MS,
         launcherPackageName: String = targetAppLauncherPackageName

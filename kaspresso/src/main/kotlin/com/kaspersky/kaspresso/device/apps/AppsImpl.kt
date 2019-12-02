@@ -2,6 +2,7 @@ package com.kaspersky.kaspresso.device.apps
 
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import androidx.test.uiautomator.By
 import androidx.test.uiautomator.UiDevice
@@ -55,6 +56,25 @@ class AppsImpl(
      */
     override fun uninstall(packageName: String) {
         adbServer.performAdb("uninstall $packageName")
+    }
+
+    /**
+     * Checks app is installed on device
+     *
+     * @param packageName an android package name of the app to be checked.
+     */
+    override fun isInstalled(packageName: String): Boolean {
+        val packageManager = context.packageManager
+        return if (packageManager != null) {
+            try {
+                packageManager.getApplicationInfo(packageName, 0)
+                true
+            } catch (e: PackageManager.NameNotFoundException) {
+                false
+            }
+        } else {
+            false
+        }
     }
 
     override fun waitForLauncher(timeout: Long, launcherPackageName: String) {
