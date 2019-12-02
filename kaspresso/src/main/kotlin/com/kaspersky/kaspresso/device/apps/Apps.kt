@@ -36,6 +36,7 @@ interface Apps {
      * Checks app is installed on device
      *
      * @param packageName an android package name of the app to be checked.
+     * @return a [Boolean] of installation state
      */
     fun isInstalled(packageName: String): Boolean
 

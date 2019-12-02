@@ -62,6 +62,7 @@ class AppsImpl(
      * Checks app is installed on device
      *
      * @param packageName an android package name of the app to be checked.
+     * @return a [Boolean] of installation state
      */
     override fun isInstalled(packageName: String): Boolean {
         val packageManager = context.packageManager
