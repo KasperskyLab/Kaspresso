@@ -73,6 +73,19 @@ class AppsImpl(
     }
 
     /**
+     * Uninstalls an app via ADB only if it installed
+     *
+     * Required Permissions: INTERNET.
+     *
+     * @param packageName an android package name of an app to be deleted.
+     */
+    override fun uninstallWithChecking(packageName: String) {
+        if (isInstalled(packageName)) {
+            uninstall(packageName)
+        }
+    }
+
+    /**
      * Checks app is installed on device
      *
      * @param packageName an android package name of the app to be checked.

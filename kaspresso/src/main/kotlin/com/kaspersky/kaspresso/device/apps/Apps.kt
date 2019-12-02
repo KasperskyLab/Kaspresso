@@ -43,6 +43,15 @@ interface Apps {
     fun uninstall(packageName: String)
 
     /**
+     * Uninstalls an app via ADB only if it installed
+     *
+     * Required Permissions: INTERNET.
+     *
+     * @param packageName an android package name of an app to be deleted.
+     */
+    fun uninstallWithChecking(packageName: String)
+
+    /**
      * Checks app is installed on device
      *
      * @param packageName an android package name of the app to be checked.
