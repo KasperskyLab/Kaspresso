@@ -24,6 +24,16 @@ interface Apps {
     fun install(apkPath: String)
 
     /**
+     * Installs an app via ADB only if [packageName] is not installed
+     *
+     * Required Permissions: INTERNET.
+     *
+     * @param packageName an android package name of the app to be checked.
+     * @param apkPath a path to the apk to be installed. The apk is hosted on the test server.
+     */
+    fun installWithChecking(packageName: String, apkPath: String)
+
+    /**
      * Uninstalls an app via ADB.
      *
      * Required Permissions: INTERNET.
@@ -31,6 +41,23 @@ interface Apps {
      * @param packageName an android package name of the app to be deleted.
      */
     fun uninstall(packageName: String)
+
+    /**
+     * Uninstalls an app via ADB only if it installed
+     *
+     * Required Permissions: INTERNET.
+     *
+     * @param packageName an android package name of an app to be deleted.
+     */
+    fun uninstallWithChecking(packageName: String)
+
+    /**
+     * Checks app is installed on device
+     *
+     * @param packageName an android package name of the app to be checked.
+     * @return a [Boolean] of installation state
+     */
+    fun isInstalled(packageName: String): Boolean
 
     fun waitForLauncher(
         timeout: Long = MAX_LAUNCH_TIME_MS,

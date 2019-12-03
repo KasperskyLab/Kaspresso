@@ -2,6 +2,7 @@ package com.kaspersky.kaspresso.device.apps
 
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import androidx.test.uiautomator.By
 import androidx.test.uiautomator.UiDevice
@@ -47,6 +48,20 @@ class AppsImpl(
     }
 
     /**
+     * Installs an app via ADB only if [packageName] is not installed
+     *
+     * Required Permissions: INTERNET.
+     *
+     * @param packageName an android package name of the app to be checked.
+     * @param apkPath a path to the apk to be installed. The apk is hosted on the test server.
+     */
+    override fun installWithChecking(packageName: String, apkPath: String) {
+        if (!isInstalled(packageName)) {
+            install(apkPath)
+        }
+    }
+
+    /**
      * Uninstalls an app via ADB.
      *
      * Required Permissions: INTERNET.
@@ -55,6 +70,36 @@ class AppsImpl(
      */
     override fun uninstall(packageName: String) {
         adbServer.performAdb("uninstall $packageName")
+    }
+
+    /**
+     * Uninstalls an app via ADB only if it installed
+     *
+     * Required Permissions: INTERNET.
+     *
+     * @param packageName an android package name of an app to be deleted.
+     */
+    override fun uninstallWithChecking(packageName: String) {
+        if (isInstalled(packageName)) {
+            uninstall(packageName)
+        }
+    }
+
+    /**
+     * Checks app is installed on device
+     *
+     * @param packageName an android package name of the app to be checked.
+     * @return a [Boolean] of installation state
+     */
+    override fun isInstalled(packageName: String): Boolean {
+        val packageManager = context.packageManager
+        if (packageManager == null) return false
+        return try {
+            packageManager.getApplicationInfo(packageName, 0)
+            true
+        } catch (e: PackageManager.NameNotFoundException) {
+            false
+        }
     }
 
     override fun waitForLauncher(timeout: Long, launcherPackageName: String) {
