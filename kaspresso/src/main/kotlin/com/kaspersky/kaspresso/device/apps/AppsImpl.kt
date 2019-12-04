@@ -55,7 +55,7 @@ class AppsImpl(
      * @param packageName an android package name of the app to be checked.
      * @param apkPath a path to the apk to be installed. The apk is hosted on the test server.
      */
-    override fun installWithChecking(packageName: String, apkPath: String) {
+    override fun installIfNotExist(packageName: String, apkPath: String) {
         if (!isInstalled(packageName)) {
             install(apkPath)
         }
@@ -79,7 +79,7 @@ class AppsImpl(
      *
      * @param packageName an android package name of an app to be deleted.
      */
-    override fun uninstallWithChecking(packageName: String) {
+    override fun uninstallIfExist(packageName: String) {
         if (isInstalled(packageName)) {
             uninstall(packageName)
         }
