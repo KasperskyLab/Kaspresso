@@ -136,20 +136,20 @@ data class Kaspresso(
 
                     viewBehaviorInterceptors = mutableListOf(
                         AutoScrollViewBehaviorInterceptor(autoScrollParams, libLogger),
-                        SystemDialogSafetyViewBehaviorInterceptor(libLogger, uiDevice),
+                        SystemDialogSafetyViewBehaviorInterceptor(libLogger, uiDevice, adbServer),
                         FlakySafeViewBehaviorInterceptor(flakySafetyParams, libLogger),
                         FailureLoggingViewBehaviorInterceptor(libLogger)
                     )
 
                     dataBehaviorInterceptors = mutableListOf(
-                        SystemDialogSafetyDataBehaviorInterceptor(libLogger, uiDevice),
+                        SystemDialogSafetyDataBehaviorInterceptor(libLogger, uiDevice, adbServer),
                         FlakySafeDataBehaviorInterceptor(flakySafetyParams, libLogger),
                         FailureLoggingDataBehaviorInterceptor(libLogger)
                     )
 
                     webBehaviorInterceptors = mutableListOf(
                         AutoScrollWebBehaviorInterceptor(autoScrollParams, libLogger),
-                        SystemDialogSafetyWebBehaviorInterceptor(libLogger, uiDevice),
+                        SystemDialogSafetyWebBehaviorInterceptor(libLogger, uiDevice, adbServer),
                         FlakySafeWebBehaviorInterceptor(flakySafetyParams, libLogger),
                         FailureLoggingWebBehaviorInterceptor(libLogger)
                     )
