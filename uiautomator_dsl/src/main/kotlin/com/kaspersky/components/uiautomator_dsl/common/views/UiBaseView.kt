@@ -26,7 +26,11 @@ open class UiBaseView<out T> : UiBaseActions, UiBaseAssertions {
             .findObject(UiViewBuilder().apply(func).build())
     }
 
-    operator fun invoke(function: T.() -> Unit) {
+    /**
+     * @param safely - If true, invokes function only if [innerView] is not null. Skips invocation otherwise.
+     */
+    operator fun invoke(safely: Boolean = false, function: T.() -> Unit) {
+        if (safely && innerView == null) return
         function(this as T)
     }
 
