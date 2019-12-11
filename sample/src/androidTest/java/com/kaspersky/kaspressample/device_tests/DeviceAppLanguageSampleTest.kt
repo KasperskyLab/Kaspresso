@@ -43,7 +43,7 @@ class DeviceAppLanguageSampleTest : TestCase() {
     }
 
     private fun changeAppLanguageAndCheckIt(locale: Locale) {
-        device.languageSwitcher.switchLanguageInApp(locale)
+        device.language.switchInApp(locale)
         assertEquals(locale.language, getCurrentLocale(device.targetContext))
         updateActivity()
         Thread.sleep(1000)
