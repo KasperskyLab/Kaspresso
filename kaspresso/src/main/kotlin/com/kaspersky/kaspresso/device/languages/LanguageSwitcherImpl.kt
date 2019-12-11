@@ -2,13 +2,12 @@ package com.kaspersky.kaspresso.device.languages
 
 import android.app.Activity
 import android.content.Context
+import androidx.core.os.ConfigurationCompat
 import androidx.test.runner.lifecycle.ActivityLifecycleCallback
 import androidx.test.runner.lifecycle.ActivityLifecycleMonitorRegistry
 import androidx.test.runner.lifecycle.Stage
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import java.util.Locale
-import androidx.core.os.ConfigurationCompat
-
 
 class LanguageSwitcherImpl(
     private val logger: UiTestLogger,
@@ -40,6 +39,7 @@ class LanguageSwitcherImpl(
             logger.i("Switch the language in the Application to $locale: success")
         } catch (exception: Exception) {
             logger.e("Switch the language in the Application to $locale: failed with the exception: $exception")
+            throw exception
         } finally {
             ActivityLifecycleMonitorRegistry.getInstance().removeLifecycleCallback(callback)
         }

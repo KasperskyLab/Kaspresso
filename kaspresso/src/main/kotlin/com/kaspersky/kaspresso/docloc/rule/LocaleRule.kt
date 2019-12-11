@@ -1,11 +1,6 @@
 package com.kaspersky.kaspresso.docloc.rule
 
 import android.Manifest
-import android.app.Activity
-import android.content.Context
-import androidx.test.runner.lifecycle.ActivityLifecycleCallback
-import androidx.test.runner.lifecycle.ActivityLifecycleMonitorRegistry
-import androidx.test.runner.lifecycle.Stage
 import com.kaspersky.kaspresso.device.Device
 import com.kaspersky.kaspresso.docloc.DoclocException
 import com.kaspersky.kaspresso.docloc.LocaleSettings
@@ -27,7 +22,7 @@ class LocaleRule internal constructor(
 
     private val localeSettings: LocaleSettings = LocaleSettings(device.context, logger)
 
-    private var deviceLocale: Locale? = null
+    private val deviceLocale: Locale = Locale.getDefault()
     private var currentLocale: Locale? = null
 
     val locale: Locale
@@ -44,39 +39,20 @@ class LocaleRule internal constructor(
 
     private fun changeLanguageInApp(base: Statement) {
         logger.i("DocLoc: changeLanguageInApp started")
-        var cachedActivity: Activity? = null
-        val callback = ActivityLifecycleCallback { activity, stage ->
-            if (stage == Stage.CREATED) {
-                cachedActivity = activity
-            }
-        }
-        ActivityLifecycleMonitorRegistry.getInstance().addLifecycleCallback(callback)
-
         try {
-            deviceLocale = Locale.getDefault()
-
-            for (locale in locales) {
-                currentLocale = locale
-                logger.i("DocLoc: changeLanguageInApp is processing. New language = $locale")
-                applyCurrentLocaleToContext(cachedActivity ?: device.targetContext)
+            locales.onEach {
+                currentLocale = it
+                logger.i("DocLoc: changeLanguageInApp is processing. New language=$it is installing")
+                device.languageSwitcher.switchLanguageInApp(it)
+                logger.i("DocLoc: changeLanguageInApp is processing. New language=$it is installed")
                 base.evaluate()
             }
         } finally {
-            if (deviceLocale != null) {
-                currentLocale = deviceLocale!!
-                logger.i("DocLoc: changeLanguageInOs is finishing. Return to language = $currentLocale")
-                applyCurrentLocaleToContext(device.targetContext)
-            }
-            ActivityLifecycleMonitorRegistry.getInstance().removeLifecycleCallback(callback)
+            logger.i("DocLoc: changeLanguageInApp is finishing. Device language=$deviceLocale is restoring")
+            currentLocale = deviceLocale
+            device.languageSwitcher.switchLanguageInApp(deviceLocale)
+            logger.i("DocLoc: changeLanguageInApp is finishing. Device language=$deviceLocale is restored")
         }
-    }
-
-    private fun applyCurrentLocaleToContext(context: Context) {
-        val resources = context.resources
-        Locale.setDefault(currentLocale)
-        val configuration = resources.configuration
-        configuration.setLocale(currentLocale)
-        resources.updateConfiguration(configuration, resources.displayMetrics)
     }
 
     private fun changeLanguageInOs(base: Statement) {
@@ -88,19 +64,18 @@ class LocaleRule internal constructor(
             )
         }
         try {
-            deviceLocale = Locale.getDefault()
-            for (locale in locales) {
-                currentLocale = locale
-                logger.i("DocLoc: changeLanguageInOs is processing. New language = $locale")
-                localeSettings.changeLanguage(locale)
+            locales.onEach {
+                currentLocale = it
+                logger.i("DocLoc: changeLanguageInOs is processing. New language=$it is installing")
+                localeSettings.changeLanguage(it)
+                logger.i("DocLoc: changeLanguageInOs is processing. New language=$it is installed")
                 base.evaluate()
             }
         } finally {
-            if (deviceLocale != null) {
-                currentLocale = deviceLocale!!
-                logger.i("DocLoc: changeLanguageInOs is finishing. Return to language = $currentLocale")
-                currentLocale?.let { localeSettings.changeLanguage(it) }
-            }
+            logger.i("DocLoc: changeLanguageInOs is finishing. Device language=$deviceLocale is restoring")
+            currentLocale = deviceLocale
+            localeSettings.changeLanguage(deviceLocale)
+            logger.i("DocLoc: changeLanguageInOs is finishing. Device language=$deviceLocale is restored")
         }
     }
 }
