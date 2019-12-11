@@ -37,9 +37,9 @@ class LanguageSwitcherImpl(
                 locale = locale
             )
             logger.i("Switch the language in the Application to $locale: success")
-        } catch (exception: Exception) {
-            logger.e("Switch the language in the Application to $locale: failed with the exception: $exception")
-            throw exception
+        } catch (error: Throwable) {
+            logger.e("Switch the language in the Application to $locale: failed with the error: $error")
+            throw error
         } finally {
             ActivityLifecycleMonitorRegistry.getInstance().removeLifecycleCallback(callback)
         }

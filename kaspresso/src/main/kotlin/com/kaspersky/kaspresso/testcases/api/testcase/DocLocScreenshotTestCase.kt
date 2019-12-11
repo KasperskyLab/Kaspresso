@@ -108,7 +108,7 @@ abstract class DocLocScreenshotTestCase(
 
     @Before
     fun setup() {
-        screenshotsDir = screenshotsDirectory.resolve(localeRule.locale.toString())
+        screenshotsDir = screenshotsDirectory.resolve(localeRule.currentLocaleName)
 
         screenshotCapturer = DocLocScreenshotCapturer(
             screenshotsDir,
