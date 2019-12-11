@@ -2,7 +2,7 @@
 
 # continuously
 
-`fun <T> continuously(action: () -> `[`T`](continuously.md#T)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`fun <T> continuously(action: () -> `[`T`](continuously.md#T)`): `[`T`](continuously.md#T)
 
 Overrides [ContinuouslyProvider.continuously](../-continuously-provider/continuously.md)
 
@@ -19,7 +19,7 @@ Invokes the given [action](continuously.md#com.kaspersky.kaspresso.flakysafety.C
 **Return**
 the [action](continuously.md#com.kaspersky.kaspresso.flakysafety.ContinuouslyProviderImpl$continuously(kotlin.Function0((com.kaspersky.kaspresso.flakysafety.ContinuouslyProviderImpl.continuously.T)))/action) invocation result.
 
-`fun <T> continuously(timeoutMs: `[`Long`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html)`?, intervalMs: `[`Long`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html)`?, failureMessage: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`?, action: () -> `[`T`](continuously.md#T)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`fun <T> continuously(timeoutMs: `[`Long`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html)`?, intervalMs: `[`Long`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html)`?, failureMessage: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`?, action: () -> `[`T`](continuously.md#T)`): `[`T`](continuously.md#T)
 
 Overrides [ContinuouslyProvider.continuously](../-continuously-provider/continuously.md)
 

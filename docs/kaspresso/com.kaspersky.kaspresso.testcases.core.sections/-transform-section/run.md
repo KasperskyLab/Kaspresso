@@ -6,7 +6,7 @@
 
 Runs:
 
-1. [BeforeTestSection](../-before-test-section/index.md),
+1. Optional [BeforeTestSection](../-before-test-section/index.md),
 2. Optional [InitSection.init](../-init-section/init.md),
 3. Optional [transform](transform.md)'s sections (only if [InitSection.init](../-init-section/init.md) was called before),
 4. [MainTestSection](../-main-test-section/index.md)'s steps,
