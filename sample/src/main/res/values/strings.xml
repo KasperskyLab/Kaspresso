@@ -25,7 +25,7 @@
     <string name="change_color_to_red">Set background to red</string>
     <string name="counter_value">Current value: %d</string>
 
-    <!-- Screenshooter sample test -->
+    <!-- Flakysafety sample test -->
     <string name="common_flaky_final_textview">TextView</string>
     <string name="common_flaky_final_button">Button</string>
     <string name="common_flaky_start_1">1</string>
