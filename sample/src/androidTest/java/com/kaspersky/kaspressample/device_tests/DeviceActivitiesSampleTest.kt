@@ -26,9 +26,7 @@ class DeviceActivitiesSampleTest : TestCase() {
 
     @Test
     fun activitiesSampleTest() {
-        before {
-        }.after {
-        }.run {
+        run {
 
             step("Check if MainActivity is currently resumed") {
                 device.activities.isCurrent(MainActivity::class.java)

@@ -31,9 +31,7 @@ class DeviceKeyboardSampleTest : TestCase() {
 
     @Test
     fun keyboardSampleTest() {
-        before {
-        }.after {
-        }.run {
+        run {
 
             /**
              * Consider to use [ViewActions.typeText] or [UiObject.setText] instead of [Keyboard.typeText]

@@ -13,6 +13,7 @@ com.kaspersky.kaspresso.device.apps
 com.kaspersky.kaspresso.device.exploit
 com.kaspersky.kaspresso.device.files
 com.kaspersky.kaspresso.device.keyboard
+com.kaspersky.kaspresso.device.languages
 com.kaspersky.kaspresso.device.location
 com.kaspersky.kaspresso.device.network
 com.kaspersky.kaspresso.device.permissions
@@ -32,6 +33,7 @@ com.kaspersky.kaspresso.interceptors.behavior.impl.systemsafety
 com.kaspersky.kaspresso.interceptors.tokakao
 com.kaspersky.kaspresso.interceptors.watcher.testcase
 com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.composite
+com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.defaults
 com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.logging
 com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.report
 com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.screenshot
@@ -49,6 +51,7 @@ com.kaspersky.kaspresso.testcases.api.scenario
 com.kaspersky.kaspresso.testcases.api.testcase
 com.kaspersky.kaspresso.testcases.api.testcaserule
 com.kaspersky.kaspresso.testcases.core.sections
+com.kaspersky.kaspresso.testcases.core.testassistants
 com.kaspersky.kaspresso.testcases.core.testcontext
 com.kaspersky.kaspresso.testcases.models
 com.kaspersky.kaspresso.testcases.models.info

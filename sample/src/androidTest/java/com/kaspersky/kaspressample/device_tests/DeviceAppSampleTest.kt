@@ -41,9 +41,7 @@ class DeviceAppSampleTest : TestCase() {
 
     @Test
     fun test() {
-        before {
-        }.after {
-        }.run {
+        run {
 
             step("Install hello world apk") {
                 device.apps.install(TEST_APK_FILE_RELATIVE_PATH)

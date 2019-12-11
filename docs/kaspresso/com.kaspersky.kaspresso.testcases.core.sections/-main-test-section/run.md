@@ -10,7 +10,7 @@ Overrides [TransformSection.run](../-transform-section/run.md)
 
 Runs:
 
-1. [BeforeTestSection](../-before-test-section/index.md),
+1. Optional [BeforeTestSection](../-before-test-section/index.md),
 2. Optional [init](init.md),
 3. Optional [transform](transform.md)'s sections (only if [init](init.md) was called before),
 4. [MainTestSection](index.md)'s steps,

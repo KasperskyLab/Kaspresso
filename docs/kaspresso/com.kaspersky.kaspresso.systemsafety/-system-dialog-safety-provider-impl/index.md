@@ -10,7 +10,7 @@ The implementation of the [SystemDialogSafetyProvider](../-system-dialog-safety-
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | `SystemDialogSafetyProviderImpl(logger: `[`UiTestLogger`](../../com.kaspersky.kaspresso.logger/-ui-test-logger.md)`, uiDevice: UiDevice)`<br>The implementation of the [SystemDialogSafetyProvider](../-system-dialog-safety-provider/index.md) interface. |
+| [&lt;init&gt;](-init-.md) | `SystemDialogSafetyProviderImpl(logger: `[`UiTestLogger`](../../com.kaspersky.kaspresso.logger/-ui-test-logger.md)`, uiDevice: UiDevice, adbServer: `[`AdbServer`](../../com.kaspersky.kaspresso.device.server/-adb-server/index.md)`)`<br>The implementation of the [SystemDialogSafetyProvider](../-system-dialog-safety-provider/index.md) interface. |
 
 ### Functions
 
