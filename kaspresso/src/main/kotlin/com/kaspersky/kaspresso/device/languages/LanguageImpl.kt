@@ -9,12 +9,12 @@ import androidx.test.runner.lifecycle.Stage
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import java.util.Locale
 
-class LanguageSwitcherImpl(
+class LanguageImpl(
     private val logger: UiTestLogger,
     private val context: Context
-) : LanguageSwitcher {
+) : Language {
 
-    override fun switchLanguageInApp(locale: Locale) {
+    override fun switchInApp(locale: Locale) {
         logger.i("Switch the language in the Application to $locale: start")
         if (getCurrentLocale() == locale) {
             logger.i(

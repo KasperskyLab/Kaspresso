@@ -3,9 +3,9 @@ package com.kaspersky.kaspresso.device.languages
 import java.util.Locale
 
 /**
- * The switcher of languages
+ * The interface to work with languages
  */
-interface LanguageSwitcher {
+interface Language {
 
     /**
      * Switches language only in the current Application (not in OS!).
@@ -15,5 +15,5 @@ interface LanguageSwitcher {
      *
      * @throws Throwable if something went wrong
      */
-    fun switchLanguageInApp(locale: Locale)
+    fun switchInApp(locale: Locale)
 }

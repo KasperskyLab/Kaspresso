@@ -1,7 +1,7 @@
 package com.kaspersky.kaspresso.docloc.rule
 
 import com.kaspersky.kaspresso.device.Device
-import com.kaspersky.kaspresso.docloc.SystemLanguageSwitcher
+import com.kaspersky.kaspresso.docloc.SystemLanguage
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import java.util.Locale
 import org.junit.rules.TestRule
@@ -18,8 +18,8 @@ class LocaleRule internal constructor(
     private val logger: UiTestLogger
 ) : TestRule {
 
-    private val systemLanguageSwitcher: SystemLanguageSwitcher =
-        SystemLanguageSwitcher(device.context, logger, device.hackPermissions)
+    private val systemLanguage: SystemLanguage =
+        SystemLanguage(device.context, logger, device.hackPermissions)
 
     private val deviceLocale: Locale = Locale.getDefault()
     private var currentLocale: Locale? = null
@@ -42,14 +42,14 @@ class LocaleRule internal constructor(
             locales.onEach { locale ->
                 currentLocale = locale
                 logger.i("DocLoc: changeLanguageInApp is processing. New language=$locale is installing")
-                device.languageSwitcher.switchLanguageInApp(locale)
+                device.language.switchInApp(locale)
                 logger.i("DocLoc: changeLanguageInApp is processing. New language=$locale is installed")
                 base.evaluate()
             }
         } finally {
             logger.i("DocLoc: changeLanguageInApp is finishing. Device language=$deviceLocale is restoring")
             currentLocale = deviceLocale
-            device.languageSwitcher.switchLanguageInApp(deviceLocale)
+            device.language.switchInApp(deviceLocale)
             logger.i("DocLoc: changeLanguageInApp is finishing. Device language=$deviceLocale is restored")
         }
     }
@@ -60,14 +60,14 @@ class LocaleRule internal constructor(
             locales.onEach { locale ->
                 currentLocale = locale
                 logger.i("DocLoc: changeLanguageInOs is processing. New language=$locale is installing")
-                systemLanguageSwitcher.changeLanguage(locale)
+                systemLanguage.switch(locale)
                 logger.i("DocLoc: changeLanguageInOs is processing. New language=$locale is installed")
                 base.evaluate()
             }
         } finally {
             logger.i("DocLoc: changeLanguageInOs is finishing. Device language=$deviceLocale is restoring")
             currentLocale = deviceLocale
-            systemLanguageSwitcher.changeLanguage(deviceLocale)
+            systemLanguage.switch(deviceLocale)
             logger.i("DocLoc: changeLanguageInOs is finishing. Device language=$deviceLocale is restored")
         }
     }

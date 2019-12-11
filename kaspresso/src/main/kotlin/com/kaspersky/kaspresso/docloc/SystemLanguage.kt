@@ -10,7 +10,7 @@ import com.kaspersky.kaspresso.device.permissions.HackPermissions
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import java.util.Locale
 
-internal class SystemLanguageSwitcher(
+internal class SystemLanguage(
     private val context: Context,
     private val logger: UiTestLogger,
     private val hackPermissions: HackPermissions
@@ -24,8 +24,8 @@ internal class SystemLanguageSwitcher(
      * @throws Throwable if something went wrong
      */
     @SuppressLint("PrivateApi", "DiscouragedPrivateApi")
-    fun changeLanguage(locale: Locale) {
-        logger.i("SystemLanguageSwitcher: Installing new system language=$locale started")
+    fun switch(locale: Locale) {
+        logger.i("SystemLanguage: Installing new system language=$locale started")
         grantPermissionsIfNeed()
         try {
             val cls = Class.forName("android.app.ActivityManagerNative")
@@ -34,9 +34,9 @@ internal class SystemLanguageSwitcher(
             configuration.javaClass.getDeclaredField("userSetLocale").setBoolean(configuration, true)
             configuration.javaClass.getDeclaredField("locale").set(configuration, locale)
             amService.javaClass.getDeclaredMethod("updateConfiguration", Configuration::class.java).invoke(amService, configuration)
-            logger.i("SystemLanguageSwitcher: Installing new system language=$locale completed")
+            logger.i("SystemLanguage: Installing new system language=$locale completed")
         } catch (error: Throwable) {
-            logger.e("SystemLanguageSwitcher: Installing new system language=$locale failed with error=$error")
+            logger.e("SystemLanguage: Installing new system language=$locale failed with error=$error")
             throw error
         }
     }
@@ -52,8 +52,8 @@ internal class SystemLanguageSwitcher(
         }
         val attemptToGrantPermissionResult = hackPermissions.grant(context.packageName, Manifest.permission.CHANGE_CONFIGURATION)
         if (!attemptToGrantPermissionResult) {
-            throw DocLocException("SystemLanguageSwitcher: The attempt to grant Manifest.permission.CHANGE_CONFIGURATION " +
-                    "for SystemLanguageSwitcher failed"
+            throw DocLocException("SystemLanguage: The attempt to grant Manifest.permission.CHANGE_CONFIGURATION " +
+                    "for SystemLanguage failed"
             )
         }
     }
