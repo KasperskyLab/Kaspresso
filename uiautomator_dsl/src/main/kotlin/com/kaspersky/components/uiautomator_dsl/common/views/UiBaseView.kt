@@ -35,9 +35,4 @@ open class UiBaseView<out T> : UiBaseActions, UiBaseAssertions {
         if (safely && innerView == null) return
         function(this as T)
     }
-
-    infix fun perform(function: T.() -> Unit): T {
-        function(this as T)
-        return this
-    }
 }
