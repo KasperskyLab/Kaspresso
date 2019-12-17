@@ -12,8 +12,8 @@ object UpgradeScreen : UpgradeUiScreen<UpgradeScreen>() {
     private const val APPLY_BTN_ID = "upgrade_apply_btn"
     private const val VALUE_TEXT = "upgrade_value_current"
 
-    val version get() = UiTextView { withId(MAIN_APP_PACKAGE_ID, VERSION_ID) }
-    val input get() = UiEditText { withId(MAIN_APP_PACKAGE_ID, INPUT_ID) }
-    val applyBtn get() = UiButton { withId(MAIN_APP_PACKAGE_ID, APPLY_BTN_ID) }
-    val value get() = UiTextView { withId(MAIN_APP_PACKAGE_ID, VALUE_TEXT) }
+    val version = UiTextView { withId(MAIN_APP_PACKAGE_ID, VERSION_ID) }
+    val input = UiEditText { withId(MAIN_APP_PACKAGE_ID, INPUT_ID) }
+    val applyBtn = UiButton { withId(MAIN_APP_PACKAGE_ID, APPLY_BTN_ID) }
+    val value = UiTextView { withId(MAIN_APP_PACKAGE_ID, VALUE_TEXT) }
 }

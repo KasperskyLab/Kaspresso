@@ -13,17 +13,20 @@ import com.kaspersky.components.uiautomator_dsl.common.builders.UiViewBuilder
 @UiAutomatorDslMarker
 open class UiBaseView<out T> : UiBaseActions, UiBaseAssertions {
 
-    private val innerView: UiObject2?
+    private var innerViewLoader: () -> UiObject2
+    private var innerView: UiObject2? = null
     override val actionsView: UiObject2? get() = innerView
     override val assertionsView: UiObject2? get() = innerView
 
     constructor(selector: BySelector) {
-        innerView = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation()).findObject(selector)
+        innerViewLoader = { UiDevice.getInstance(InstrumentationRegistry.getInstrumentation()).findObject(selector) }
     }
 
     constructor(func: UiViewBuilder.() -> Unit) {
-        innerView = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
-            .findObject(UiViewBuilder().apply(func).build())
+        innerViewLoader = {
+            UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
+                .findObject(UiViewBuilder().apply(func).build())
+        }
     }
 
     /**
@@ -32,6 +35,7 @@ open class UiBaseView<out T> : UiBaseActions, UiBaseAssertions {
      * won't be thrown.
      */
     operator fun invoke(safely: Boolean = false, function: T.() -> Unit) {
+        innerView = innerViewLoader.invoke()
         if (safely && innerView == null) return
         function(this as T)
     }

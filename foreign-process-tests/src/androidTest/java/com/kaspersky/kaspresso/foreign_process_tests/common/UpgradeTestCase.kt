@@ -23,7 +23,7 @@ open class UpgradeTestCase : TestCase() {
     }
 
     fun BaseTestContext.updateAndLaunchMainApp() {
-        device.apps.install(NEW_VERSION_FILE)
+        adbServer.performAdb("install -r $NEW_VERSION_FILE")
 
         with(device.targetContext) {
             val intent = packageManager.getLaunchIntentForPackage(MAIN_APP_PACKAGE_ID)
