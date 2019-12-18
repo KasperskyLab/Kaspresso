@@ -8,26 +8,23 @@ import com.kaspersky.components.uiautomator_dsl.common.UiAutomatorDslMarker
 import com.kaspersky.components.uiautomator_dsl.common.actions.UiBaseActions
 import com.kaspersky.components.uiautomator_dsl.common.assertions.UiBaseAssertions
 import com.kaspersky.components.uiautomator_dsl.common.builders.UiViewBuilder
+import com.kaspersky.components.uiautomator_dsl.intercept.Interceptable
+import com.kaspersky.components.uiautomator_dsl.proxy.Proxy
+import com.kaspersky.components.uiautomator_dsl.proxy.UiAction
+import com.kaspersky.components.uiautomator_dsl.proxy.UiAssert
+import com.kaspersky.components.uiautomator_dsl.proxy.UiObject2Proxy
+import kotlin.properties.Delegates
 
 @Suppress("UNCHECKED_CAST")
 @UiAutomatorDslMarker
-open class UiBaseView<out T> : UiBaseActions, UiBaseAssertions {
+open class UiBaseView<out T>(private val selector: BySelector) : UiBaseActions, UiBaseAssertions,
+    Interceptable<UiObject2?, UiAssert, UiAction> {
 
-    private var innerViewLoader: () -> UiObject2
-    private var innerView: UiObject2? = null
-    override val actionsView: UiObject2? get() = innerView
-    override val assertionsView: UiObject2? get() = innerView
+    override val view: UiObject2Proxy = UiObject2Proxy(selector)
+    override val actionsView: UiObject2Proxy get() = view
+    override val assertionsView: UiObject2Proxy get() = view
 
-    constructor(selector: BySelector) {
-        innerViewLoader = { UiDevice.getInstance(InstrumentationRegistry.getInstrumentation()).findObject(selector) }
-    }
-
-    constructor(func: UiViewBuilder.() -> Unit) {
-        innerViewLoader = {
-            UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
-                .findObject(UiViewBuilder().apply(func).build())
-        }
-    }
+    constructor(func: UiViewBuilder.() -> Unit) : this(UiViewBuilder().apply(func).build())
 
     /**
      * @param safely - Set to true only when you are not sure if the [innerView] is null or not.
@@ -35,8 +32,8 @@ open class UiBaseView<out T> : UiBaseActions, UiBaseAssertions {
      * won't be thrown.
      */
     operator fun invoke(safely: Boolean = false, function: T.() -> Unit) {
-        innerView = innerViewLoader.invoke()
-        if (safely && innerView == null) return
+        view.loadView()
+        if (safely && view.interaction == null) return
         function(this as T)
     }
 }

@@ -6,12 +6,10 @@ import com.kaspersky.components.uiautomator_dsl.common.actions.UiBaseActions
 interface UiEditableActions : UiBaseActions {
 
     fun typeText(text: String) {
-        assertThat(actionsView).isNotNull()
-        actionsView?.text = actionsView?.text + text
+        actionsView.perform("typeText(text=$text)") { this.text = this.text + text }
     }
 
     fun replaceText(text: String) {
-        assertThat(actionsView).isNotNull()
-        actionsView?.text = text
+        actionsView.perform("replaceText(text=$text)") { this.text = text }
     }
 }

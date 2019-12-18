@@ -1,6 +1,7 @@
 package com.kaspersky.kaspresso.foreign_process_tests.test
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.kaspersky.components.uiautomator_dsl.UiAutomatorConfigurator
 import com.kaspersky.kaspresso.foreign_process_tests.common.UpgradeTestCase
 import com.kaspersky.kaspresso.foreign_process_tests.screen.MainScreen
 import com.kaspersky.kaspresso.foreign_process_tests.screen.UpgradeScreen
@@ -19,6 +20,16 @@ class UpgradeTestSample : UpgradeTestCase() {
     @Test
     fun upgradeTest() {
         before {
+            UiAutomatorConfigurator {
+                intercept {
+                    onUiInteraction {
+                        onCheck { uiObject2, uiAssert ->
+                            testLogger.i("UIA", uiAssert.getDescription())
+                            uiAssert.check(uiObject2!!)
+                        }
+                    }
+                }
+            }
         }.after {
             uninstallMainApp()
         }.run {

@@ -6,27 +6,22 @@ import com.kaspersky.components.uiautomator_dsl.common.assertions.UiBaseAssertio
 interface UiTextViewAssertions : UiBaseAssertions {
 
     fun hasEmptyText() {
-        assertThat(assertionsView).isNotNull()
-        assertThat(assertionsView?.text).isEmpty()
+        assertionsView.check("hasEmptyText") { assertThat(text).isEmpty() }
     }
 
     fun hasAnyText() {
-        assertThat(assertionsView).isNotNull()
-        assertThat(assertionsView?.text).isNotEmpty()
+        assertionsView.check("hasAnyText") { assertThat(text).isNotEmpty() }
     }
 
     fun hasText(text: String) {
-        assertThat(assertionsView).isNotNull()
-        assertThat(assertionsView?.text).isEqualTo(text)
+        assertionsView.check("hasText(text=$text)") { assertThat(this.text).isEqualTo(text) }
     }
 
     fun hasNoText(text: String) {
-        assertThat(assertionsView).isNotNull()
-        assertThat(assertionsView?.text).isNotEqualTo(text)
+        assertionsView.check("hasNoText(text=$text)") { assertThat(this.text).isNotEqualTo(text) }
     }
 
     fun containsText(text: String) {
-        assertThat(assertionsView).isNotNull()
-        assertThat(assertionsView?.text).contains(text)
+        assertionsView.check("containsText(text=$text)") { assertThat(this.text).contains(text) }
     }
 }

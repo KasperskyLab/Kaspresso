@@ -1,24 +1,22 @@
 package com.kaspersky.components.uiautomator_dsl.common.actions
 
-import androidx.test.uiautomator.UiObject2
-import com.google.common.truth.Truth.assertThat
+import com.kaspersky.components.uiautomator_dsl.proxy.UiObject2Proxy
 
 interface UiBaseActions {
-    val actionsView: UiObject2?
+    val actionsView: UiObject2Proxy
 
     fun click() {
-        assertThat(actionsView).isNotNull()
-        actionsView?.click()
+        actionsView.perform("click") { click() }
     }
 
     fun doubleClick() {
-        assertThat(actionsView).isNotNull()
-        actionsView?.click()
-        actionsView?.click()
+        actionsView.perform("doubleClick") {
+            click()
+            click()
+        }
     }
 
     fun longClick() {
-        assertThat(actionsView).isNotNull()
-        actionsView?.longClick()
+        actionsView.perform("longClick") { longClick() }
     }
 }

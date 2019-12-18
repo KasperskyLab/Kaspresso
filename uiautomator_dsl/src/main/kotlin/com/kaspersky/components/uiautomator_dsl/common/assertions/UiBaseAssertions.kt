@@ -1,56 +1,62 @@
 package com.kaspersky.components.uiautomator_dsl.common.assertions
 
-import androidx.test.uiautomator.UiObject2
 import com.google.common.truth.Truth.assertThat
+import com.kaspersky.components.uiautomator_dsl.proxy.UiObject2Proxy
 
 interface UiBaseAssertions {
-    val assertionsView: UiObject2?
+    val assertionsView: UiObject2Proxy
 
     fun isDisplayed() {
-        assertThat(assertionsView).isNotNull()
+        assertionsView.check("isDisplayed") {
+            // todo
+            // assertThat(assertionsView).isNotNull()
+        }
     }
 
     fun isNotDisplayed() {
-        assertThat(assertionsView).isNull()
+        assertionsView.check("isNotDisplayed") {
+            // todo
+            // assertThat(assertionsView).isNull()
+        }
     }
 
     fun isSelected() {
-        assertThat(assertionsView?.isSelected).isTrue()
+        assertionsView.check("isSelected") { assertThat(isSelected).isTrue() }
     }
 
     fun isNotSelected() {
-        assertThat(assertionsView?.isSelected).isFalse()
+        assertionsView.check("isNotSelected") { assertThat(isSelected).isFalse() }
     }
 
     fun isFocused() {
-        assertThat(assertionsView?.isFocused).isTrue()
+        assertionsView.check("isFocused") { assertThat(isFocused).isTrue() }
     }
 
     fun isNotFocused() {
-        assertThat(assertionsView?.isFocused).isFalse()
+        assertionsView.check("isNotFocused") { assertThat(isFocused).isFalse() }
     }
 
     fun isFocusable() {
-        assertThat(assertionsView?.isFocusable).isTrue()
+        assertionsView.check("isFocusable") { assertThat(isFocusable).isTrue() }
     }
 
     fun isNotFocusable() {
-        assertThat(assertionsView?.isFocusable).isFalse()
+        assertionsView.check("isNotFocusable") { assertThat(isFocusable).isFalse() }
     }
 
     fun isClickable() {
-        assertThat(assertionsView?.isClickable).isTrue()
+        assertionsView.check("isClickable") { assertThat(isClickable).isTrue() }
     }
 
-    fun isNotClicable() {
-        assertThat(assertionsView?.isClickable).isFalse()
+    fun isNotClickable() {
+        assertionsView.check("isNotClickable") { assertThat(isClickable).isFalse() }
     }
 
     fun isEnabled() {
-        assertThat(assertionsView?.isEnabled).isTrue()
+        assertionsView.check("isEnabled") { assertThat(isEnabled).isTrue() }
     }
 
     fun isDisabled() {
-        assertThat(assertionsView?.isEnabled).isFalse()
+        assertionsView.check("isDisabled") { assertThat(isEnabled).isFalse() }
     }
 }
