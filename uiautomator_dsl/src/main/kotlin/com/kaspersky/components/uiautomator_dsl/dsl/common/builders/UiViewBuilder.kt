@@ -1,9 +1,9 @@
-package com.kaspersky.components.uiautomator_dsl.common.builders
+package com.kaspersky.components.uiautomator_dsl.dsl.common.builders
 
 import androidx.test.uiautomator.By
 import androidx.test.uiautomator.BySelector
 import com.google.common.truth.Truth.assertThat
-import com.kaspersky.components.uiautomator_dsl.common.UiAutomatorDslMarker
+import com.kaspersky.components.uiautomator_dsl.dsl.common.UiAutomatorDslMarker
 
 @UiAutomatorDslMarker
 class UiViewBuilder {

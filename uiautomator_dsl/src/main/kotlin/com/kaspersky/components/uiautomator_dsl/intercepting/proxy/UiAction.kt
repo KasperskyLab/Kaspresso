@@ -1,4 +1,4 @@
-package com.kaspersky.components.uiautomator_dsl.proxy
+package com.kaspersky.components.uiautomator_dsl.intercepting.proxy
 
 import androidx.test.uiautomator.UiObject2
 

@@ -1,7 +1,6 @@
-package com.kaspersky.components.uiautomator_dsl.edit
+package com.kaspersky.components.uiautomator_dsl.dsl.edit
 
-import com.google.common.truth.Truth.assertThat
-import com.kaspersky.components.uiautomator_dsl.common.actions.UiBaseActions
+import com.kaspersky.components.uiautomator_dsl.dsl.common.actions.UiBaseActions
 
 interface UiEditableActions : UiBaseActions {
 

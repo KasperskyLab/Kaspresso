@@ -1,11 +1,11 @@
-package com.kaspersky.components.uiautomator_dsl.proxy
+package com.kaspersky.components.uiautomator_dsl.intercepting.proxy
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.BySelector
 import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.UiObject2
 import com.kaspersky.components.uiautomator_dsl.UiAutomatorConfigurator
-import com.kaspersky.components.uiautomator_dsl.intercept.Interceptor
+import com.kaspersky.components.uiautomator_dsl.intercepting.intercept.Interceptor
 
 class UiObject2Proxy(private val selector: BySelector) : Proxy<UiObject2?, UiAssert, UiAction> {
 

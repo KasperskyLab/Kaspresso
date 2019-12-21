@@ -1,6 +1,6 @@
-package com.kaspersky.components.uiautomator_dsl.intercept
+package com.kaspersky.components.uiautomator_dsl.intercepting.intercept
 
-import com.kaspersky.components.uiautomator_dsl.proxy.Proxy
+import com.kaspersky.components.uiautomator_dsl.intercepting.proxy.Proxy
 
 interface Interceptable<INTERACTION, ASSERTION, ACTION> {
     val view: Proxy<INTERACTION, ASSERTION, ACTION>

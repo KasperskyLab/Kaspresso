@@ -1,8 +1,8 @@
-package com.kaspersky.components.uiautomator_dsl.intercept
+package com.kaspersky.components.uiautomator_dsl.intercepting.intercept
 
 import androidx.test.uiautomator.UiObject2
-import com.kaspersky.components.uiautomator_dsl.proxy.UiAction
-import com.kaspersky.components.uiautomator_dsl.proxy.UiAssert
+import com.kaspersky.components.uiautomator_dsl.intercepting.proxy.UiAction
+import com.kaspersky.components.uiautomator_dsl.intercepting.proxy.UiAssert
 
 class Interceptor <INTERACTION, ASSERTION, ACTION>(
     val onCheck: Interception<(INTERACTION, ASSERTION) -> Unit>?,

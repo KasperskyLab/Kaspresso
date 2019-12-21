@@ -1,9 +1,9 @@
 package com.kaspersky.components.uiautomator_dsl
 
 import androidx.test.uiautomator.UiObject2
-import com.kaspersky.components.uiautomator_dsl.intercept.Interceptor
-import com.kaspersky.components.uiautomator_dsl.proxy.UiAction
-import com.kaspersky.components.uiautomator_dsl.proxy.UiAssert
+import com.kaspersky.components.uiautomator_dsl.intercepting.intercept.Interceptor
+import com.kaspersky.components.uiautomator_dsl.intercepting.proxy.UiAction
+import com.kaspersky.components.uiautomator_dsl.intercepting.proxy.UiAssert
 
 object UiAutomatorConfigurator {
 

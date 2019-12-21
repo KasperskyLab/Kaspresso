@@ -1,4 +1,4 @@
-package com.kaspersky.components.uiautomator_dsl.screen
+package com.kaspersky.components.uiautomator_dsl.dsl.screen
 
 @Suppress("UNCHECKED_CAST")
 open class UiScreen<out T : UiScreen<T>> {

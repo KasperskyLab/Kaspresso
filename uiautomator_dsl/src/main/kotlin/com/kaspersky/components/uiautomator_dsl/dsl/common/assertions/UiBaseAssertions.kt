@@ -1,7 +1,7 @@
-package com.kaspersky.components.uiautomator_dsl.common.assertions
+package com.kaspersky.components.uiautomator_dsl.dsl.common.assertions
 
 import com.google.common.truth.Truth.assertThat
-import com.kaspersky.components.uiautomator_dsl.proxy.UiObject2Proxy
+import com.kaspersky.components.uiautomator_dsl.intercepting.proxy.UiObject2Proxy
 
 interface UiBaseAssertions {
     val assertionsView: UiObject2Proxy

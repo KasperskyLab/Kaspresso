@@ -1,6 +1,6 @@
-package com.kaspersky.components.uiautomator_dsl.proxy
+package com.kaspersky.components.uiautomator_dsl.intercepting.proxy
 
-import com.kaspersky.components.uiautomator_dsl.intercept.Interceptor
+import com.kaspersky.components.uiautomator_dsl.intercepting.intercept.Interceptor
 
 interface Proxy<INTERACTION, ASSERTION, ACTION> {
     var interaction: INTERACTION

@@ -1,19 +1,15 @@
-package com.kaspersky.components.uiautomator_dsl.common.views
+package com.kaspersky.components.uiautomator_dsl.dsl.common.views
 
-import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.BySelector
-import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.UiObject2
-import com.kaspersky.components.uiautomator_dsl.common.UiAutomatorDslMarker
-import com.kaspersky.components.uiautomator_dsl.common.actions.UiBaseActions
-import com.kaspersky.components.uiautomator_dsl.common.assertions.UiBaseAssertions
-import com.kaspersky.components.uiautomator_dsl.common.builders.UiViewBuilder
-import com.kaspersky.components.uiautomator_dsl.intercept.Interceptable
-import com.kaspersky.components.uiautomator_dsl.proxy.Proxy
-import com.kaspersky.components.uiautomator_dsl.proxy.UiAction
-import com.kaspersky.components.uiautomator_dsl.proxy.UiAssert
-import com.kaspersky.components.uiautomator_dsl.proxy.UiObject2Proxy
-import kotlin.properties.Delegates
+import com.kaspersky.components.uiautomator_dsl.dsl.common.UiAutomatorDslMarker
+import com.kaspersky.components.uiautomator_dsl.dsl.common.actions.UiBaseActions
+import com.kaspersky.components.uiautomator_dsl.dsl.common.assertions.UiBaseAssertions
+import com.kaspersky.components.uiautomator_dsl.dsl.common.builders.UiViewBuilder
+import com.kaspersky.components.uiautomator_dsl.intercepting.intercept.Interceptable
+import com.kaspersky.components.uiautomator_dsl.intercepting.proxy.UiAction
+import com.kaspersky.components.uiautomator_dsl.intercepting.proxy.UiAssert
+import com.kaspersky.components.uiautomator_dsl.intercepting.proxy.UiObject2Proxy
 
 @Suppress("UNCHECKED_CAST")
 @UiAutomatorDslMarker
