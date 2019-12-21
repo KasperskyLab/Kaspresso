@@ -3,7 +3,7 @@ package com.kaspersky.components.uiautomator_dsl.intercepting.proxy
 import com.kaspersky.components.uiautomator_dsl.intercepting.intercept.Interceptor
 
 interface Proxy<INTERACTION, ASSERTION, ACTION> {
-    var interaction: INTERACTION
+    val interaction: INTERACTION
     var interceptor: Interceptor<INTERACTION, ASSERTION, ACTION>?
 
     fun screenInterceptors(): Iterable<Interceptor<INTERACTION, ASSERTION, ACTION>>

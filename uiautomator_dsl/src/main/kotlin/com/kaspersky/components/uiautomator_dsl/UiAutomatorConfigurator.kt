@@ -1,13 +1,14 @@
 package com.kaspersky.components.uiautomator_dsl
 
-import androidx.test.uiautomator.UiObject2
 import com.kaspersky.components.uiautomator_dsl.intercepting.intercept.Interceptor
-import com.kaspersky.components.uiautomator_dsl.intercepting.proxy.UiAction
-import com.kaspersky.components.uiautomator_dsl.intercepting.proxy.UiAssert
+import com.kaspersky.components.uiautomator_dsl.intercepting.actions.UiAction
+import com.kaspersky.components.uiautomator_dsl.intercepting.asserts.UiAssert
+import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiInteraction
+import java.util.*
 
 object UiAutomatorConfigurator {
 
-    internal var uiInterceptor: Interceptor<UiObject2?, UiAssert, UiAction>? = null
+    internal var uiInterceptor: Interceptor<UiInteraction, UiAssert, UiAction>? = null
 
     /**
      * Operator that allows usage of DSL style

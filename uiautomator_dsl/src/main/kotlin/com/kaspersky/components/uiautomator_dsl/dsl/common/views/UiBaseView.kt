@@ -7,14 +7,15 @@ import com.kaspersky.components.uiautomator_dsl.dsl.common.actions.UiBaseActions
 import com.kaspersky.components.uiautomator_dsl.dsl.common.assertions.UiBaseAssertions
 import com.kaspersky.components.uiautomator_dsl.dsl.common.builders.UiViewBuilder
 import com.kaspersky.components.uiautomator_dsl.intercepting.intercept.Interceptable
-import com.kaspersky.components.uiautomator_dsl.intercepting.proxy.UiAction
-import com.kaspersky.components.uiautomator_dsl.intercepting.proxy.UiAssert
+import com.kaspersky.components.uiautomator_dsl.intercepting.actions.UiAction
+import com.kaspersky.components.uiautomator_dsl.intercepting.asserts.UiAssert
+import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiInteraction
 import com.kaspersky.components.uiautomator_dsl.intercepting.proxy.UiObject2Proxy
 
 @Suppress("UNCHECKED_CAST")
 @UiAutomatorDslMarker
-open class UiBaseView<out T>(private val selector: BySelector) : UiBaseActions, UiBaseAssertions,
-    Interceptable<UiObject2?, UiAssert, UiAction> {
+open class UiBaseView<out T>(selector: BySelector) : UiBaseActions, UiBaseAssertions,
+    Interceptable<UiInteraction, UiAssert, UiAction> {
 
     override val view: UiObject2Proxy = UiObject2Proxy(selector)
     override val actionsView: UiObject2Proxy get() = view
@@ -29,7 +30,8 @@ open class UiBaseView<out T>(private val selector: BySelector) : UiBaseActions, 
      */
     operator fun invoke(safely: Boolean = false, function: T.() -> Unit) {
         view.loadView()
-        if (safely && view.interaction == null) return
+        // todo remove it?
+        if (safely && view.interaction.uiObject2 == null) return
         function(this as T)
     }
 }

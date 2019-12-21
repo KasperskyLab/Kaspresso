@@ -23,9 +23,9 @@ class UpgradeTestSample : UpgradeTestCase() {
             UiAutomatorConfigurator {
                 intercept {
                     onUiInteraction {
-                        onCheck { uiObject2, uiAssert ->
+                        onCheck { uiInteraction, uiAssert ->
                             testLogger.i("UIA", uiAssert.getDescription())
-                            uiAssert.check(uiObject2!!)
+                            uiAssert.check(uiInteraction)
                         }
                     }
                 }
