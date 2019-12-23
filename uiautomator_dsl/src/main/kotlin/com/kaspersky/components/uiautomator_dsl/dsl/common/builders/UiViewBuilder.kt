@@ -10,8 +10,8 @@ class UiViewBuilder {
 
     private var selector: BySelector? = null
 
-    fun withId(packageName: String, res: String) {
-        selector = By.res(packageName, res)
+    fun withId(packageName: String, resourceId: String) {
+        selector = By.res(packageName, resourceId)
     }
 
     fun build(): BySelector {

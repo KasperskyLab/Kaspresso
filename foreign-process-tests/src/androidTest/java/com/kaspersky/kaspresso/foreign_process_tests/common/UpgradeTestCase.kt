@@ -34,6 +34,6 @@ open class UpgradeTestCase : TestCase() {
     }
 
     fun BaseTestContext.uninstallMainApp() {
-        device.apps.uninstall(MAIN_APP_PACKAGE_ID)
+        device.apps.uninstallIfExist(MAIN_APP_PACKAGE_ID)
     }
 }
