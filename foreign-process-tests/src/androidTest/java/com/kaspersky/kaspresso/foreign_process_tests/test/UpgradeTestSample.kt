@@ -1,10 +1,13 @@
 package com.kaspersky.kaspresso.foreign_process_tests.test
 
+import android.Manifest
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.components.uiautomator_dsl.UiAutomatorConfigurator
 import com.kaspersky.kaspresso.foreign_process_tests.common.UpgradeTestCase
 import com.kaspersky.kaspresso.foreign_process_tests.screen.MainScreen
 import com.kaspersky.kaspresso.foreign_process_tests.screen.UpgradeScreen
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -16,6 +19,12 @@ class UpgradeTestSample : UpgradeTestCase() {
         private const val VERSION_TEXT_AFTER_UPDATE = "v.2"
         private const val VALUE = "Kaspresso"
     }
+
+    @get:Rule
+    val runtimePermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
+        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        Manifest.permission.READ_EXTERNAL_STORAGE
+    )
 
     @Test
     fun upgradeTest() {
