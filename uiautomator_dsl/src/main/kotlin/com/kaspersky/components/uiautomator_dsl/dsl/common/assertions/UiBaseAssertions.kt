@@ -2,61 +2,78 @@ package com.kaspersky.components.uiautomator_dsl.dsl.common.assertions
 
 import com.google.common.truth.Truth.assertThat
 import com.kaspersky.components.uiautomator_dsl.intercepting.proxy.UiObject2Proxy
+import com.kaspersky.components.uiautomator_dsl.dsl.common.assertions.UiBaseAssertions.BaseAssertType.*
+import com.kaspersky.components.uiautomator_dsl.intercepting.asserts.UiAssertType
 
 interface UiBaseAssertions {
     val assertionsView: UiObject2Proxy
 
     fun isDisplayed() {
-        assertionsView.check("isDisplayed") {
+        assertionsView.check(IS_DISPLAYED) {
             // todo
             // assertThat(assertionsView).isNotNull()
         }
     }
 
     fun isNotDisplayed() {
-        assertionsView.check("isNotDisplayed") {
+        assertionsView.check(IS_NOT_DISPLAYED) {
             // todo
             // assertThat(assertionsView).isNull()
         }
     }
 
     fun isSelected() {
-        assertionsView.check("isSelected") { assertThat(isSelected).isTrue() }
+        assertionsView.check(IS_SELECTED) { assertThat(isSelected).isTrue() }
     }
 
     fun isNotSelected() {
-        assertionsView.check("isNotSelected") { assertThat(isSelected).isFalse() }
+        assertionsView.check(IS_NOT_SELECTED) { assertThat(isSelected).isFalse() }
     }
 
     fun isFocused() {
-        assertionsView.check("isFocused") { assertThat(isFocused).isTrue() }
+        assertionsView.check(IS_FOCUSED) { assertThat(isFocused).isTrue() }
     }
 
     fun isNotFocused() {
-        assertionsView.check("isNotFocused") { assertThat(isFocused).isFalse() }
+        assertionsView.check(IS_NOT_FOCUSED) { assertThat(isFocused).isFalse() }
     }
 
     fun isFocusable() {
-        assertionsView.check("isFocusable") { assertThat(isFocusable).isTrue() }
+        assertionsView.check(IS_FOCUSABLE) { assertThat(isFocusable).isTrue() }
     }
 
     fun isNotFocusable() {
-        assertionsView.check("isNotFocusable") { assertThat(isFocusable).isFalse() }
+        assertionsView.check(IS_NOT_FOCUSABLE) { assertThat(isFocusable).isFalse() }
     }
 
     fun isClickable() {
-        assertionsView.check("isClickable") { assertThat(isClickable).isTrue() }
+        assertionsView.check(IS_CLICKABLE) { assertThat(isClickable).isTrue() }
     }
 
     fun isNotClickable() {
-        assertionsView.check("isNotClickable") { assertThat(isClickable).isFalse() }
+        assertionsView.check(IS_NOT_CLICKABLE) { assertThat(isClickable).isFalse() }
     }
 
     fun isEnabled() {
-        assertionsView.check("isEnabled") { assertThat(isEnabled).isTrue() }
+        assertionsView.check(IS_ENABLED) { assertThat(isEnabled).isTrue() }
     }
 
     fun isDisabled() {
-        assertionsView.check("isDisabled") { assertThat(isEnabled).isFalse() }
+        assertionsView.check(IS_DISABLED) { assertThat(isEnabled).isFalse() }
+    }
+
+    enum class BaseAssertType : UiAssertType {
+        IS_DISPLAYED,
+        IS_NOT_DISPLAYED,
+        IS_SELECTED,
+        IS_NOT_SELECTED,
+        IS_FOCUSED,
+        IS_NOT_FOCUSED,
+        IS_FOCUSABLE,
+        IS_NOT_FOCUSABLE,
+        IS_CLICKABLE,
+        IS_NOT_CLICKABLE,
+        IS_ENABLED,
+        IS_DISABLED
     }
 }

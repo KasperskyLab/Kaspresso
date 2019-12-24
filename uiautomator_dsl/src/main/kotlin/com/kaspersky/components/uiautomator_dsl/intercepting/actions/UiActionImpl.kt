@@ -5,9 +5,12 @@ import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiInter
 import com.kaspersky.components.uiautomator_dsl.intercepting.exceptions.UnfoundedUiObjectException
 
 class UiActionImpl(
+    private val type: UiActionType,
     private val description: String,
     private val action: UiObject2.() -> Unit
 ) : UiAction {
+
+    override fun getType(): UiActionType = type
 
     override fun getDescription(): String = description
 

@@ -4,6 +4,8 @@ import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiInter
 
 interface UiAssert {
 
+    fun getType(): UiAssertType
+
     fun getDescription(): String
 
     fun check(interaction: UiInteraction)

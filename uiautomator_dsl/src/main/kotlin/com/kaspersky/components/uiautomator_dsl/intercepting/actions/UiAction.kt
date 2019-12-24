@@ -4,6 +4,8 @@ import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiInter
 
 interface UiAction {
 
+    fun getType(): UiActionType
+
     fun getDescription(): String
 
     fun perform(interaction: UiInteraction)

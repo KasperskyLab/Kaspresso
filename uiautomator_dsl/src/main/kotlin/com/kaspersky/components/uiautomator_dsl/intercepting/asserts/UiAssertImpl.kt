@@ -5,9 +5,12 @@ import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiInter
 import com.kaspersky.components.uiautomator_dsl.intercepting.exceptions.UnfoundedUiObjectException
 
 class UiAssertImpl(
+    private val type: UiAssertType,
     private val description: String,
     private val assert: UiObject2.() -> Unit
 ) : UiAssert {
+
+    override fun getType(): UiAssertType = type
 
     override fun getDescription(): String = description
 
