@@ -24,7 +24,7 @@ class UiObject2Proxy(
         private const val EMPTY_STRING: String = ""
     }
 
-    val objectInteraction: UiObjectInteraction = UiObjectInteraction(
+    override val interaction: UiObjectInteraction = UiObjectInteraction(
         UiDevice.getInstance(InstrumentationRegistry.getInstrumentation()),
         selector,
         elementClassName
@@ -32,7 +32,7 @@ class UiObject2Proxy(
     override var interceptor: Interceptor<UiObjectInteraction, UiAssert, UiAction>? = null
 
     fun loadView() {
-        objectInteraction.tryToFindUiObject()
+        interaction.tryToFindUiObject()
     }
 
     /**
@@ -44,11 +44,11 @@ class UiObject2Proxy(
         assert: UiObject2.() -> Unit
     ) {
         val uiAssert: UiAssert = UiAssertImpl(type, description, assert)
-        if (!interceptCheck(uiAssert)) uiAssert.check(objectInteraction)
+        if (!interceptCheck(uiAssert)) uiAssert.check(interaction)
     }
 
     fun check(uiAssert: UiAssert) {
-        if (!interceptCheck(uiAssert)) uiAssert.check(objectInteraction)
+        if (!interceptCheck(uiAssert)) uiAssert.check(interaction)
     }
 
     /**
@@ -60,11 +60,11 @@ class UiObject2Proxy(
         action: UiObject2.() -> Unit
     ) {
         val uiAction: UiAction = UiActionImpl(type, description, action)
-        if (!interceptPerform(uiAction)) uiAction.perform(objectInteraction)
+        if (!interceptPerform(uiAction)) uiAction.perform(interaction)
     }
 
     fun perform(uiAction: UiAction) {
-        if (!interceptPerform(uiAction)) uiAction.perform(objectInteraction)
+        if (!interceptPerform(uiAction)) uiAction.perform(interaction)
     }
 
     override fun screenInterceptors(): Iterable<Interceptor<UiObjectInteraction, UiAssert, UiAction>> =

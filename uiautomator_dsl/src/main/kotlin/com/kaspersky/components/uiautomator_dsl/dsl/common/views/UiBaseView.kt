@@ -30,7 +30,7 @@ open class UiBaseView<out T>(selector: BySelector) : UiBaseActions, UiBaseAssert
     operator fun invoke(safely: Boolean = false, function: T.() -> Unit) {
         view.loadView()
         // todo remove it?
-        if (safely && view.objectInteraction.uiObject2 == null) return
+        if (safely && view.interaction.uiObject2 == null) return
         function(this as T)
     }
 }
