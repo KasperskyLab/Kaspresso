@@ -1,7 +1,7 @@
 package com.kaspersky.components.uiautomator_dsl.dsl.edit
 
 import com.kaspersky.components.uiautomator_dsl.dsl.common.actions.UiBaseActions
-import com.kaspersky.components.uiautomator_dsl.intercepting.actions.UiActionType
+import com.kaspersky.components.uiautomator_dsl.intercepting.actions.`object`.UiActionType
 import com.kaspersky.components.uiautomator_dsl.dsl.edit.UiEditableActions.EditableActionType.*
 
 interface UiEditableActions : UiBaseActions {

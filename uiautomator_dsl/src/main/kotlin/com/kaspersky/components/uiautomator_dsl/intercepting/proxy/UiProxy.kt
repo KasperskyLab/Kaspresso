@@ -1,21 +1,21 @@
 package com.kaspersky.components.uiautomator_dsl.intercepting.proxy
 
-import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.BySelector
 import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.UiObject2
 import com.kaspersky.components.uiautomator_dsl.UiAutomatorConfigurator
 import com.kaspersky.components.uiautomator_dsl.dsl.screen.UiScreen
-import com.kaspersky.components.uiautomator_dsl.intercepting.actions.UiAction
-import com.kaspersky.components.uiautomator_dsl.intercepting.actions.UiActionImpl
-import com.kaspersky.components.uiautomator_dsl.intercepting.actions.UiActionType
-import com.kaspersky.components.uiautomator_dsl.intercepting.asserts.UiAssert
-import com.kaspersky.components.uiautomator_dsl.intercepting.asserts.UiAssertImpl
-import com.kaspersky.components.uiautomator_dsl.intercepting.asserts.UiAssertType
+import com.kaspersky.components.uiautomator_dsl.intercepting.actions.`object`.UiAction
+import com.kaspersky.components.uiautomator_dsl.intercepting.actions.`object`.UiActionImpl
+import com.kaspersky.components.uiautomator_dsl.intercepting.actions.`object`.UiActionType
+import com.kaspersky.components.uiautomator_dsl.intercepting.asserts.`object`.UiAssert
+import com.kaspersky.components.uiautomator_dsl.intercepting.asserts.`object`.UiAssertImpl
+import com.kaspersky.components.uiautomator_dsl.intercepting.asserts.`object`.UiAssertType
 import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiInteraction
 import com.kaspersky.components.uiautomator_dsl.intercepting.intercept.Interceptor
 
 class UiProxy(
+    device: UiDevice,
     selector: BySelector,
     elementClassName: String
 ) : Proxy<UiInteraction, UiAssert, UiAction> {
@@ -24,11 +24,7 @@ class UiProxy(
         private const val EMPTY_STRING: String = ""
     }
 
-    override val interaction: UiInteraction = UiInteraction(
-        UiDevice.getInstance(InstrumentationRegistry.getInstrumentation()),
-        selector,
-        elementClassName
-    )
+    override val interaction: UiInteraction = UiInteraction(device, selector, elementClassName)
     override var interceptor: Interceptor<UiInteraction, UiAssert, UiAction>? = null
 
     fun loadView() {
@@ -43,7 +39,12 @@ class UiProxy(
         description: String = EMPTY_STRING,
         assert: UiObject2.() -> Unit
     ) {
-        val uiAssert: UiAssert = UiAssertImpl(type, description, assert)
+        val uiAssert: UiAssert =
+            UiAssertImpl(
+                type,
+                description,
+                assert
+            )
         if (!interceptCheck(uiAssert)) uiAssert.check(interaction)
     }
 
@@ -59,7 +60,12 @@ class UiProxy(
         description: String = EMPTY_STRING,
         action: UiObject2.() -> Unit
     ) {
-        val uiAction: UiAction = UiActionImpl(type, description, action)
+        val uiAction: UiAction =
+            UiActionImpl(
+                type,
+                description,
+                action
+            )
         if (!interceptPerform(uiAction)) uiAction.perform(interaction)
     }
 

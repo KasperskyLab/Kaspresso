@@ -3,20 +3,27 @@ package com.kaspersky.components.uiautomator_dsl.dsl.screen
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.UiDevice
 import com.kaspersky.components.uiautomator_dsl.dsl.common.UiAutomatorDslMarker
-import com.kaspersky.components.uiautomator_dsl.intercepting.actions.UiAction
-import com.kaspersky.components.uiautomator_dsl.intercepting.asserts.UiAssert
+import com.kaspersky.components.uiautomator_dsl.intercepting.actions.`object`.UiAction
+import com.kaspersky.components.uiautomator_dsl.intercepting.actions.device.UiDeviceAction
+import com.kaspersky.components.uiautomator_dsl.intercepting.asserts.`object`.UiAssert
+import com.kaspersky.components.uiautomator_dsl.intercepting.asserts.device.UiDeviceAssert
+import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiDeviceInteraction
 import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiInteraction
 import com.kaspersky.components.uiautomator_dsl.intercepting.intercept.Interceptor
+import com.kaspersky.components.uiautomator_dsl.intercepting.proxy.UiDeviceProxy
 import java.util.*
 
 @Suppress("UNCHECKED_CAST")
 @UiAutomatorDslMarker
 open class UiScreen<out T : UiScreen<T>> : UiScreenActions {
 
-    private var uiInterceptor: Interceptor<UiInteraction, UiAssert, UiAction>? = null
-    private var isActive = false
+    override val uiDeviceProxy: UiDeviceProxy = UiDeviceProxy(
+        UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
+    )
 
-    override val uiDevice: UiDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
+    private var uiInterceptor: Interceptor<UiInteraction, UiAssert, UiAction>? = null
+    private var uiDeviceInterceptor: Interceptor<UiDeviceInteraction, UiDeviceAssert, UiDeviceAction>? = null
+    private var isActive = false
 
     /**
      * Sets the interceptors for the screen.
@@ -51,8 +58,9 @@ open class UiScreen<out T : UiScreen<T>> : UiScreenActions {
             removeInterceptors()
         }
 
-        Interceptor.Configurator().apply(configurator).configure().also { (uiInterceptor) ->
+        Interceptor.Configurator().apply(configurator).configure().also { (uiInterceptor, uiDeviceInterceptor) ->
             this.uiInterceptor = uiInterceptor
+            this.uiDeviceInterceptor = uiDeviceInterceptor
         }
 
         if (isActive) {
@@ -71,6 +79,7 @@ open class UiScreen<out T : UiScreen<T>> : UiScreenActions {
             removeInterceptors()
         }
         uiInterceptor = null
+        uiDeviceInterceptor = null
     }
 
     operator fun invoke(function: T.() -> Unit) {
@@ -85,13 +94,16 @@ open class UiScreen<out T : UiScreen<T>> : UiScreenActions {
 
     private fun addInterceptors() {
         uiInterceptor?.let { UI_INTERCEPTORS.offerFirst(it) }
+        uiDeviceInterceptor?.let { UI_DEVICE_INTERCEPTORS.offerFirst(it) }
     }
 
     private fun removeInterceptors() {
         uiInterceptor?.let { UI_INTERCEPTORS.removeFirstOccurrence(it) }
+        uiDeviceInterceptor?.let { UI_DEVICE_INTERCEPTORS.removeFirstOccurrence(it) }
     }
 
     companion object {
         internal val UI_INTERCEPTORS: Deque<Interceptor<UiInteraction, UiAssert, UiAction>> = LinkedList()
+        internal val UI_DEVICE_INTERCEPTORS: Deque<Interceptor<UiDeviceInteraction, UiDeviceAssert, UiDeviceAction>> = LinkedList()
     }
 }

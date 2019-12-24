@@ -1,17 +1,21 @@
 package com.kaspersky.components.uiautomator_dsl.dsl.screen
 
-import androidx.test.uiautomator.UiDevice
+import com.kaspersky.components.uiautomator_dsl.intercepting.actions.device.UiDeviceActionType
+import com.kaspersky.components.uiautomator_dsl.intercepting.proxy.UiDeviceProxy
 
-// todo create stack of <INTERACTION, ASSERTION, ACTION> for UiDevice (Screen/System)
 interface UiScreenActions {
 
-    val uiDevice: UiDevice
+    val uiDeviceProxy: UiDeviceProxy
 
     /**
      * Performs click on device's back button
      */
     fun pressBack() {
-        uiDevice.pressBack()
+        uiDeviceProxy.perform(UiScreenActionType.PRESS_BACK) { pressBack() }
+    }
+
+    enum class UiScreenActionType : UiDeviceActionType {
+        PRESS_BACK
     }
 
 }

@@ -1,4 +1,4 @@
-package com.kaspersky.components.uiautomator_dsl.intercepting.asserts
+package com.kaspersky.components.uiautomator_dsl.intercepting.asserts.`object`
 
 import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiInteraction
 

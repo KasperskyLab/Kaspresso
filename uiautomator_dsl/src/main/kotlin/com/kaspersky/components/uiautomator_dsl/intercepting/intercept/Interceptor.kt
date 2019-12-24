@@ -1,7 +1,10 @@
 package com.kaspersky.components.uiautomator_dsl.intercepting.intercept
 
-import com.kaspersky.components.uiautomator_dsl.intercepting.actions.UiAction
-import com.kaspersky.components.uiautomator_dsl.intercepting.asserts.UiAssert
+import com.kaspersky.components.uiautomator_dsl.intercepting.actions.`object`.UiAction
+import com.kaspersky.components.uiautomator_dsl.intercepting.actions.device.UiDeviceAction
+import com.kaspersky.components.uiautomator_dsl.intercepting.asserts.`object`.UiAssert
+import com.kaspersky.components.uiautomator_dsl.intercepting.asserts.device.UiDeviceAssert
+import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiDeviceInteraction
 import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiInteraction
 
 class Interceptor <INTERACTION, ASSERTION, ACTION>(
@@ -69,6 +72,7 @@ class Interceptor <INTERACTION, ASSERTION, ACTION>(
      */
     class Configurator {
         private var uiInterceptor: Interceptor<UiInteraction, UiAssert, UiAction>? = null
+        private var uiDeviceInterceptor: Interceptor<UiDeviceInteraction, UiDeviceAssert, UiDeviceAction>? = null
 
         /**
          * Setups the interceptor for `check` and `perform` operations happening through [ViewInteraction]
@@ -79,10 +83,15 @@ class Interceptor <INTERACTION, ASSERTION, ACTION>(
             uiInterceptor = Builder<UiInteraction, UiAssert, UiAction>().apply(builder).build()
         }
 
-        internal fun configure() = Configuration(uiInterceptor)
+        fun onUiDeviceInteraction(builder: Builder<UiDeviceInteraction, UiDeviceAssert, UiDeviceAction>.() -> Unit) {
+            uiDeviceInterceptor = Builder<UiDeviceInteraction, UiDeviceAssert, UiDeviceAction>().apply(builder).build()
+        }
+
+        internal fun configure() = Configuration(uiInterceptor, uiDeviceInterceptor)
     }
 
     data class Configuration(
-        val uiInterceptor: Interceptor<UiInteraction, UiAssert, UiAction>?
+        val uiInterceptor: Interceptor<UiInteraction, UiAssert, UiAction>?,
+        val uiDeviceInterceptor: Interceptor<UiDeviceInteraction, UiDeviceAssert, UiDeviceAction>?
     )
 }

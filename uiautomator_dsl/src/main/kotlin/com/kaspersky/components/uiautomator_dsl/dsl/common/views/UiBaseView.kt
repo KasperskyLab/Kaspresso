@@ -1,12 +1,14 @@
 package com.kaspersky.components.uiautomator_dsl.dsl.common.views
 
+import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.BySelector
+import androidx.test.uiautomator.UiDevice
 import com.kaspersky.components.uiautomator_dsl.dsl.common.UiAutomatorDslMarker
 import com.kaspersky.components.uiautomator_dsl.dsl.common.actions.UiBaseActions
 import com.kaspersky.components.uiautomator_dsl.dsl.common.assertions.UiBaseAssertions
 import com.kaspersky.components.uiautomator_dsl.dsl.common.builders.UiViewBuilder
-import com.kaspersky.components.uiautomator_dsl.intercepting.actions.UiAction
-import com.kaspersky.components.uiautomator_dsl.intercepting.asserts.UiAssert
+import com.kaspersky.components.uiautomator_dsl.intercepting.actions.`object`.UiAction
+import com.kaspersky.components.uiautomator_dsl.intercepting.asserts.`object`.UiAssert
 import com.kaspersky.components.uiautomator_dsl.intercepting.intercept.Interceptable
 import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiInteraction
 import com.kaspersky.components.uiautomator_dsl.intercepting.proxy.UiProxy
@@ -16,7 +18,11 @@ import com.kaspersky.components.uiautomator_dsl.intercepting.proxy.UiProxy
 open class UiBaseView<out T>(selector: BySelector) : UiBaseActions, UiBaseAssertions,
     Interceptable<UiInteraction, UiAssert, UiAction> {
 
-    override val view: UiProxy = UiProxy(selector, this::class.java.simpleName)
+    override val view: UiProxy = UiProxy(
+        UiDevice.getInstance(InstrumentationRegistry.getInstrumentation()),
+        selector,
+        this::class.java.simpleName
+    )
     override val actionsView: UiProxy get() = view
     override val assertionsView: UiProxy get() = view
 

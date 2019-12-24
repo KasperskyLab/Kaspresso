@@ -3,7 +3,7 @@ package com.kaspersky.components.uiautomator_dsl.dsl.common.assertions
 import com.google.common.truth.Truth.assertThat
 import com.kaspersky.components.uiautomator_dsl.intercepting.proxy.UiProxy
 import com.kaspersky.components.uiautomator_dsl.dsl.common.assertions.UiBaseAssertions.BaseAssertType.*
-import com.kaspersky.components.uiautomator_dsl.intercepting.asserts.UiAssertType
+import com.kaspersky.components.uiautomator_dsl.intercepting.asserts.`object`.UiAssertType
 
 interface UiBaseAssertions {
     val assertionsView: UiProxy

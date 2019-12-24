@@ -1,24 +1,24 @@
-package com.kaspersky.components.uiautomator_dsl.intercepting.asserts
+package com.kaspersky.components.uiautomator_dsl.intercepting.actions.`object`
 
 import androidx.test.uiautomator.UiObject2
 import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiInteraction
 import com.kaspersky.components.uiautomator_dsl.intercepting.exceptions.UnfoundedUiObjectException
 
-class UiAssertImpl(
-    private val type: UiAssertType,
+class UiActionImpl(
+    private val type: UiActionType,
     private val description: String,
-    private val assert: UiObject2.() -> Unit
-) : UiAssert {
+    private val action: UiObject2.() -> Unit
+) : UiAction {
 
-    override fun getType(): UiAssertType = type
+    override fun getType(): UiActionType = type
 
     override fun getDescription(): String = description
 
-    override fun check(interaction: UiInteraction) {
+    override fun perform(interaction: UiInteraction) {
         val uiObject2 = interaction.uiObject2
             ?: throw UnfoundedUiObjectException(
                 interaction.selector
             )
-        assert.invoke(uiObject2)
+        action.invoke(uiObject2)
     }
 }
