@@ -11,9 +11,12 @@ import com.kaspersky.components.uiautomator_dsl.intercepting.asserts.UiAssertImp
 import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiInteraction
 import com.kaspersky.components.uiautomator_dsl.intercepting.intercept.Interceptor
 
-class UiObject2Proxy(selector: BySelector) : Proxy<UiInteraction, UiAssert, UiAction> {
+class UiObject2Proxy(
+    selector: BySelector,
+    elementClassName: String
+) : Proxy<UiInteraction, UiAssert, UiAction> {
 
-    override val interaction: UiInteraction = UiInteraction(selector)
+    override val interaction: UiInteraction = UiInteraction(selector, elementClassName)
     override var interceptor: Interceptor<UiInteraction, UiAssert, UiAction>? = null
 
     fun loadView() {
@@ -32,6 +35,10 @@ class UiObject2Proxy(selector: BySelector) : Proxy<UiInteraction, UiAssert, UiAc
         if (!interceptCheck(uiAssert)) uiAssert.check(interaction)
     }
 
+    fun check(uiAssert: UiAssert) {
+        if (!interceptCheck(uiAssert)) uiAssert.check(interaction)
+    }
+
     /**
      * @action must throw exception if something went wrong
      */
@@ -41,6 +48,10 @@ class UiObject2Proxy(selector: BySelector) : Proxy<UiInteraction, UiAssert, UiAc
                 description,
                 action
             )
+        if (!interceptPerform(uiAction)) uiAction.perform(interaction)
+    }
+
+    fun perform(uiAction: UiAction) {
         if (!interceptPerform(uiAction)) uiAction.perform(interaction)
     }
 

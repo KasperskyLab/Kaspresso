@@ -6,7 +6,9 @@ import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.UiObject2
 
 class UiInteraction(
-    val selector: BySelector
+    val selector: BySelector,
+    // UiButton, UiTextView, UiEditText, etc.
+    val elementClassName: String
 ) {
 
     var uiObject2: UiObject2? = null
