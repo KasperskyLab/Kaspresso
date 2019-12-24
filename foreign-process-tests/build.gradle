@@ -31,6 +31,7 @@ dependencies {
 
     testImplementation "junit:junit:$versions.junit"
 
+    androidTestImplementation "androidx.test.espresso:espresso-intents:$versions.espresso"
     androidTestImplementation "androidx.test:runner:$versions.runner"
     androidTestImplementation "androidx.test.ext:junit:$versions.extJunit"
     androidTestImplementation "androidx.test.uiautomator:uiautomator:$versions.uiautomator"

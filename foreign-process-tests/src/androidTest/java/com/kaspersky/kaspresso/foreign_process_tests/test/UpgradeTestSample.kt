@@ -3,6 +3,7 @@ package com.kaspersky.kaspresso.foreign_process_tests.test
 import android.Manifest
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.GrantPermissionRule
+
 import com.kaspersky.components.uiautomator_dsl.UiAutomatorConfigurator
 import com.kaspersky.kaspresso.foreign_process_tests.common.UpgradeTestCase
 import com.kaspersky.kaspresso.foreign_process_tests.screen.MainScreen
