@@ -43,7 +43,7 @@
 | [com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.defaults.DefaultTestRunWatcherInterceptor](../com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.defaults/-default-test-run-watcher-interceptor/index.md) |  |
 | [com.kaspersky.kaspresso.annotations.Develop](../com.kaspersky.kaspresso.annotations/-develop/index.md) |  |
 | [com.kaspersky.kaspresso.device.Device](../com.kaspersky.kaspresso.device/-device/index.md) | The provider of managers for all off-screen work. |
-| [com.kaspersky.kaspresso.docloc.DoclocException](../com.kaspersky.kaspresso.docloc/-docloc-exception/index.md) |  |
+| [com.kaspersky.kaspresso.docloc.DocLocException](../com.kaspersky.kaspresso.docloc/-doc-loc-exception/index.md) |  |
 | [com.kaspersky.kaspresso.testcases.api.testcase.DocLocScreenshotTestCase](../com.kaspersky.kaspresso.testcases.api.testcase/-doc-loc-screenshot-test-case/index.md) | The base class for all docloc screenshot tests. |
 | [com.kaspersky.kaspresso.annotations.E2e](../com.kaspersky.kaspresso.annotations/-e2e/index.md) |  |
 | [com.kaspersky.kaspresso.annotations.E2eFast](../com.kaspersky.kaspresso.annotations/-e2e-fast/index.md) |  |
@@ -72,8 +72,8 @@
 | [com.kaspersky.kaspresso.kaspresso.Kaspresso](../com.kaspersky.kaspresso.kaspresso/-kaspresso/index.md) | The storage of all Kaspresso preferences and entities, such as [AdbServer](../com.kaspersky.kaspresso.device.server/-adb-server/index.md), [Device](../com.kaspersky.kaspresso.device/-device/index.md) and different interceptors. |
 | [com.kaspersky.kaspresso.device.keyboard.Keyboard](../com.kaspersky.kaspresso.device.keyboard/-keyboard/index.md) | Use this API only if neither Espresso, nor UiAutomator work for some reasons. E.g. because of animations. |
 | [com.kaspersky.kaspresso.device.keyboard.KeyboardImpl](../com.kaspersky.kaspresso.device.keyboard/-keyboard-impl/index.md) | The implementation of the [Keyboard](../com.kaspersky.kaspresso.device.keyboard/-keyboard/index.md) interface. |
-| [com.kaspersky.kaspresso.device.languages.LanguageSwitcher](../com.kaspersky.kaspresso.device.languages/-language-switcher/index.md) | The switcher of languages |
-| [com.kaspersky.kaspresso.device.languages.LanguageSwitcherImpl](../com.kaspersky.kaspresso.device.languages/-language-switcher-impl/index.md) |  |
+| [com.kaspersky.kaspresso.device.languages.Language](../com.kaspersky.kaspresso.device.languages/-language/index.md) | The interface to work with languages |
+| [com.kaspersky.kaspresso.device.languages.LanguageImpl](../com.kaspersky.kaspresso.device.languages/-language-impl/index.md) |  |
 | [com.kaspersky.kaspresso.docloc.rule.LocaleRule](../com.kaspersky.kaspresso.docloc.rule/-locale-rule/index.md) | The test rule to switch locales. |
 | [com.kaspersky.kaspresso.device.location.Location](../com.kaspersky.kaspresso.device.location/-location/index.md) | The interface to work with device's location. |
 | [com.kaspersky.kaspresso.device.location.LocationImpl](../com.kaspersky.kaspresso.device.location/-location-impl/index.md) | The implementation of the [Location](../com.kaspersky.kaspresso.device.location/-location/index.md) interface. |

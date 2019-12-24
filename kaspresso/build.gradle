@@ -60,3 +60,28 @@ artifacts {
     archives javadocJar
     archives sourcesJar
 }
+
+artifactory {
+    contextUrl = "https://oss.jfrog.org/artifactory"
+    publish {
+        repository {
+            repoKey = 'oss-snapshot-local'
+            username = "${bintrayuser}"
+            password = "${artifactoryPassword}"
+            maven = true
+        }
+
+        defaults {
+            publications 'Kaspresso'
+        }
+    }
+
+    resolve {
+        repository {
+            repoKey = 'libs-snapshot'
+            username = "${bintrayuser}"
+            password = "${artifactoryPassword}"
+            maven = true
+        }
+    }
+}

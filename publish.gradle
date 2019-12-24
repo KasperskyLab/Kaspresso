@@ -41,22 +41,6 @@ publishing {
     }
 }
 
-artifactory {
-    contextUrl = 'https://oss.jfrog.org'
-    publish {
-        repository {
-            repoKey = 'oss-snapshot-local'
-
-            username = property('bintrayuser')
-            password = property('bintraykey')
-        }
-
-        defaults {
-            publications 'Kaspresso'
-        }
-    }
-}
-
 bintray {
     user = property('bintrayuser')
     key = property('bintraykey')

@@ -6,4 +6,4 @@
 
 | Name | Summary |
 |---|---|
-| [DoclocException](-docloc-exception/index.md) | `class DoclocException : `[`RuntimeException`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-runtime-exception/index.html) |
+| [DocLocException](-doc-loc-exception/index.md) | `class DocLocException : `[`RuntimeException`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-runtime-exception/index.html) |
