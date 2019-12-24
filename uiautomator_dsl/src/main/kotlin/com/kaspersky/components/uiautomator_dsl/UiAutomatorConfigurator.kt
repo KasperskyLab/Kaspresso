@@ -3,11 +3,11 @@ package com.kaspersky.components.uiautomator_dsl
 import com.kaspersky.components.uiautomator_dsl.intercepting.intercept.Interceptor
 import com.kaspersky.components.uiautomator_dsl.intercepting.actions.UiAction
 import com.kaspersky.components.uiautomator_dsl.intercepting.asserts.UiAssert
-import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiObjectInteraction
+import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiInteraction
 
 object UiAutomatorConfigurator {
 
-    internal var uiObjectInterceptor: Interceptor<UiObjectInteraction, UiAssert, UiAction>? = null
+    internal var uiInterceptor: Interceptor<UiInteraction, UiAssert, UiAction>? = null
 
     /**
      * Operator that allows usage of DSL style
@@ -28,7 +28,7 @@ object UiAutomatorConfigurator {
      */
     fun intercept(configurator: Interceptor.Configurator.() -> Unit) {
         Interceptor.Configurator().apply(configurator).configure().also { (uiObjectInterceptor) ->
-            this.uiObjectInterceptor = uiObjectInterceptor
+            this.uiInterceptor = uiObjectInterceptor
         }
     }
 
@@ -39,7 +39,7 @@ object UiAutomatorConfigurator {
      * @see Interceptor
      */
     fun reset() {
-        uiObjectInterceptor = null
+        uiInterceptor = null
     }
 
 }

@@ -1,6 +1,6 @@
 package com.kaspersky.components.uiautomator_dsl.intercepting.actions
 
-import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiObjectInteraction
+import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiInteraction
 
 interface UiAction {
 
@@ -8,6 +8,6 @@ interface UiAction {
 
     fun getDescription(): String
 
-    fun perform(objectInteraction: UiObjectInteraction)
+    fun perform(interaction: UiInteraction)
 
 }

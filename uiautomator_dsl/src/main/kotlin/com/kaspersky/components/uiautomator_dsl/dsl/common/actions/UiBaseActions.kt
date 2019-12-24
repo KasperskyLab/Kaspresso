@@ -1,11 +1,11 @@
 package com.kaspersky.components.uiautomator_dsl.dsl.common.actions
 
-import com.kaspersky.components.uiautomator_dsl.intercepting.proxy.UiObject2Proxy
+import com.kaspersky.components.uiautomator_dsl.intercepting.proxy.UiProxy
 import com.kaspersky.components.uiautomator_dsl.dsl.common.actions.UiBaseActions.BaseActionType.*
 import com.kaspersky.components.uiautomator_dsl.intercepting.actions.UiActionType
 
 interface UiBaseActions {
-    val actionsView: UiObject2Proxy
+    val actionsView: UiProxy
 
     fun click() {
         actionsView.perform(CLICK) { click() }

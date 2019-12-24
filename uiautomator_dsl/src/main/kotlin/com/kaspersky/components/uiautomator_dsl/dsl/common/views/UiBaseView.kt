@@ -8,17 +8,17 @@ import com.kaspersky.components.uiautomator_dsl.dsl.common.builders.UiViewBuilde
 import com.kaspersky.components.uiautomator_dsl.intercepting.actions.UiAction
 import com.kaspersky.components.uiautomator_dsl.intercepting.asserts.UiAssert
 import com.kaspersky.components.uiautomator_dsl.intercepting.intercept.Interceptable
-import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiObjectInteraction
-import com.kaspersky.components.uiautomator_dsl.intercepting.proxy.UiObject2Proxy
+import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiInteraction
+import com.kaspersky.components.uiautomator_dsl.intercepting.proxy.UiProxy
 
 @Suppress("UNCHECKED_CAST")
 @UiAutomatorDslMarker
 open class UiBaseView<out T>(selector: BySelector) : UiBaseActions, UiBaseAssertions,
-    Interceptable<UiObjectInteraction, UiAssert, UiAction> {
+    Interceptable<UiInteraction, UiAssert, UiAction> {
 
-    override val view: UiObject2Proxy = UiObject2Proxy(selector, this::class.java.simpleName)
-    override val actionsView: UiObject2Proxy get() = view
-    override val assertionsView: UiObject2Proxy get() = view
+    override val view: UiProxy = UiProxy(selector, this::class.java.simpleName)
+    override val actionsView: UiProxy get() = view
+    override val assertionsView: UiProxy get() = view
 
     constructor(func: UiViewBuilder.() -> Unit) : this(UiViewBuilder().apply(func).build())
 

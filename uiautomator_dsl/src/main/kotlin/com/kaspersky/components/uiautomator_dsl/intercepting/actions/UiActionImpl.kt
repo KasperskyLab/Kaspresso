@@ -1,7 +1,7 @@
 package com.kaspersky.components.uiautomator_dsl.intercepting.actions
 
 import androidx.test.uiautomator.UiObject2
-import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiObjectInteraction
+import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiInteraction
 import com.kaspersky.components.uiautomator_dsl.intercepting.exceptions.UnfoundedUiObjectException
 
 class UiActionImpl(
@@ -14,10 +14,10 @@ class UiActionImpl(
 
     override fun getDescription(): String = description
 
-    override fun perform(objectInteraction: UiObjectInteraction) {
-        val uiObject2 = objectInteraction.uiObject2
+    override fun perform(interaction: UiInteraction) {
+        val uiObject2 = interaction.uiObject2
             ?: throw UnfoundedUiObjectException(
-                objectInteraction.selector
+                interaction.selector
             )
         action.invoke(uiObject2)
     }

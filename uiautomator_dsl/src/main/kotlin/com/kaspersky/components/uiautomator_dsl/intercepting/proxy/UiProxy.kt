@@ -12,24 +12,24 @@ import com.kaspersky.components.uiautomator_dsl.intercepting.actions.UiActionTyp
 import com.kaspersky.components.uiautomator_dsl.intercepting.asserts.UiAssert
 import com.kaspersky.components.uiautomator_dsl.intercepting.asserts.UiAssertImpl
 import com.kaspersky.components.uiautomator_dsl.intercepting.asserts.UiAssertType
-import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiObjectInteraction
+import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiInteraction
 import com.kaspersky.components.uiautomator_dsl.intercepting.intercept.Interceptor
 
-class UiObject2Proxy(
+class UiProxy(
     selector: BySelector,
     elementClassName: String
-) : Proxy<UiObjectInteraction, UiAssert, UiAction> {
+) : Proxy<UiInteraction, UiAssert, UiAction> {
 
     companion object {
         private const val EMPTY_STRING: String = ""
     }
 
-    override val interaction: UiObjectInteraction = UiObjectInteraction(
+    override val interaction: UiInteraction = UiInteraction(
         UiDevice.getInstance(InstrumentationRegistry.getInstrumentation()),
         selector,
         elementClassName
     )
-    override var interceptor: Interceptor<UiObjectInteraction, UiAssert, UiAction>? = null
+    override var interceptor: Interceptor<UiInteraction, UiAssert, UiAction>? = null
 
     fun loadView() {
         interaction.tryToFindUiObject()
@@ -67,10 +67,10 @@ class UiObject2Proxy(
         if (!interceptPerform(uiAction)) uiAction.perform(interaction)
     }
 
-    override fun screenInterceptors(): Iterable<Interceptor<UiObjectInteraction, UiAssert, UiAction>> =
-        UiScreen.UI_OBJECT_INTERCEPTORS
+    override fun screenInterceptors(): Iterable<Interceptor<UiInteraction, UiAssert, UiAction>> =
+        UiScreen.UI_INTERCEPTORS
 
-    override fun kakaoInterceptor(): Interceptor<UiObjectInteraction, UiAssert, UiAction>? =
-        UiAutomatorConfigurator.uiObjectInterceptor
+    override fun kakaoInterceptor(): Interceptor<UiInteraction, UiAssert, UiAction>? =
+        UiAutomatorConfigurator.uiInterceptor
 
 }

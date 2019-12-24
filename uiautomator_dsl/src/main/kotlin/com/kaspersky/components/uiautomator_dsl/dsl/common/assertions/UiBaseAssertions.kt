@@ -1,12 +1,12 @@
 package com.kaspersky.components.uiautomator_dsl.dsl.common.assertions
 
 import com.google.common.truth.Truth.assertThat
-import com.kaspersky.components.uiautomator_dsl.intercepting.proxy.UiObject2Proxy
+import com.kaspersky.components.uiautomator_dsl.intercepting.proxy.UiProxy
 import com.kaspersky.components.uiautomator_dsl.dsl.common.assertions.UiBaseAssertions.BaseAssertType.*
 import com.kaspersky.components.uiautomator_dsl.intercepting.asserts.UiAssertType
 
 interface UiBaseAssertions {
-    val assertionsView: UiObject2Proxy
+    val assertionsView: UiProxy
 
     fun isDisplayed() {
         assertionsView.check(IS_DISPLAYED) {
