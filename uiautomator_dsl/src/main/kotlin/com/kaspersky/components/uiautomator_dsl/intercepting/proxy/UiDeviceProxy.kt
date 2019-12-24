@@ -1,6 +1,5 @@
 package com.kaspersky.components.uiautomator_dsl.intercepting.proxy
 
-import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.UiDevice
 import com.kaspersky.components.uiautomator_dsl.UiAutomatorConfigurator
 import com.kaspersky.components.uiautomator_dsl.dsl.screen.UiScreen
