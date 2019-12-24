@@ -1,6 +1,8 @@
 package com.kaspersky.components.uiautomator_dsl.intercepting.proxy
 
+import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.BySelector
+import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.UiObject2
 import com.kaspersky.components.uiautomator_dsl.UiAutomatorConfigurator
 import com.kaspersky.components.uiautomator_dsl.dsl.screen.UiScreen
@@ -22,7 +24,11 @@ class UiObject2Proxy(
         private const val EMPTY_STRING: String = ""
     }
 
-    override val interaction: UiInteraction = UiInteraction(selector, elementClassName)
+    override val interaction: UiInteraction = UiInteraction(
+        UiDevice.getInstance(InstrumentationRegistry.getInstrumentation()),
+        selector,
+        elementClassName
+    )
     override var interceptor: Interceptor<UiInteraction, UiAssert, UiAction>? = null
 
     fun loadView() {
