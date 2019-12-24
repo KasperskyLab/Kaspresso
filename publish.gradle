@@ -1,8 +1,10 @@
 apply plugin: 'com.jfrog.bintray'
+apply plugin: 'com.jfrog.artifactory'
 apply plugin: 'maven-publish'
 
 ext {
-    ver = '1.0.1'
+    ver = '1.0.2'
+    snapshots = '1.0.3-SNAPSHOT'
     groupId = 'com.kaspersky.android-components'
     artifactId = 'kaspresso'
     repo = 'Kaspresso'
@@ -20,7 +22,7 @@ publishing {
             }
             groupId this.groupId
             artifactId this.artifactId
-            version this.ver
+            version this.snapshots
 
             pom.withXml {
                 def dependenciesNode = asNode().getAt('dependencies')[0]
@@ -35,6 +37,22 @@ publishing {
                     }
                 }
             }
+        }
+    }
+}
+
+artifactory {
+    contextUrl = 'https://oss.jfrog.org'
+    publish {
+        repository {
+            repoKey = 'oss-snapshot-local'
+
+            username = property('bintrayuser')
+            password = property('bintraykey')
+        }
+
+        defaults {
+            publications 'Kaspresso'
         }
     }
 }
@@ -58,3 +76,4 @@ bintray {
 }
 
 bintrayUpload.dependsOn assemble
+artifactoryPublish.dependsOn assemble
