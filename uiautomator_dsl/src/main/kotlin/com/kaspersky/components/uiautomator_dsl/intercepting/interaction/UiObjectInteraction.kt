@@ -5,7 +5,7 @@ import androidx.test.uiautomator.BySelector
 import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.UiObject2
 
-class UiInteraction(
+class UiObjectInteraction(
     val device: UiDevice,
     val selector: BySelector,
     // UiButton, UiTextView, UiEditText, etc.

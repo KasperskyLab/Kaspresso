@@ -1,6 +1,6 @@
 package com.kaspersky.components.uiautomator_dsl.intercepting.asserts
 
-import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiInteraction
+import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiObjectInteraction
 
 interface UiAssert {
 
@@ -8,6 +8,6 @@ interface UiAssert {
 
     fun getDescription(): String
 
-    fun check(interaction: UiInteraction)
+    fun check(objectInteraction: UiObjectInteraction)
 
 }

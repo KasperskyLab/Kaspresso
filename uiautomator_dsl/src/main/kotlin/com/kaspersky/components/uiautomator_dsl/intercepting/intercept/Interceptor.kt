@@ -2,7 +2,7 @@ package com.kaspersky.components.uiautomator_dsl.intercepting.intercept
 
 import com.kaspersky.components.uiautomator_dsl.intercepting.actions.UiAction
 import com.kaspersky.components.uiautomator_dsl.intercepting.asserts.UiAssert
-import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiInteraction
+import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiObjectInteraction
 
 class Interceptor <INTERACTION, ASSERTION, ACTION>(
     val onCheck: Interception<(INTERACTION, ASSERTION) -> Unit>?,
@@ -20,7 +20,7 @@ class Interceptor <INTERACTION, ASSERTION, ACTION>(
         private var onAll: Interception<(INTERACTION) -> Unit>? = null
 
         /**
-         * Sets the interceptor for the `check` operation for a given interaction.
+         * Sets the interceptor for the `check` operation for a given objectInteraction.
          * If overridden, breaks the call chain of operation and transfers the responsibility
          * to invoke the Espresso on the developer.
          *
@@ -32,7 +32,7 @@ class Interceptor <INTERACTION, ASSERTION, ACTION>(
         }
 
         /**
-         * Sets the interceptor for the `perform` operation for a given interaction.
+         * Sets the interceptor for the `perform` operation for a given objectInteraction.
          * If overridden, breaks the call chain of operation and transfers the responsibility
          * to invoke the Espresso on the developer.
          *
@@ -44,7 +44,7 @@ class Interceptor <INTERACTION, ASSERTION, ACTION>(
         }
 
         /**
-         * Sets the interceptor for the `check` and `perform` operations for a given interaction.
+         * Sets the interceptor for the `check` and `perform` operations for a given objectInteraction.
          * If overridden, breaks the call chain of operation and transfers the responsibility
          * to invoke the Espresso on the developer.
          *
@@ -68,21 +68,21 @@ class Interceptor <INTERACTION, ASSERTION, ACTION>(
      * @see com.agoda.kakao.screen.Screen
      */
     class Configurator {
-        private var uiInterceptor: Interceptor<UiInteraction, UiAssert, UiAction>? = null
+        private var uiObjectInterceptor: Interceptor<UiObjectInteraction, UiAssert, UiAction>? = null
 
         /**
          * Setups the interceptor for `check` and `perform` operations happening through [ViewInteraction]
          *
          * @param builder Builder of interceptor for [ViewInteraction]
          */
-        fun onUiInteraction(builder: Builder<UiInteraction, UiAssert, UiAction>.() -> Unit) {
-            uiInterceptor = Builder<UiInteraction, UiAssert, UiAction>().apply(builder).build()
+        fun onUiInteraction(builder: Builder<UiObjectInteraction, UiAssert, UiAction>.() -> Unit) {
+            uiObjectInterceptor = Builder<UiObjectInteraction, UiAssert, UiAction>().apply(builder).build()
         }
 
-        internal fun configure() = Configuration(uiInterceptor)
+        internal fun configure() = Configuration(uiObjectInterceptor)
     }
 
     data class Configuration(
-        val uiInterceptor: Interceptor<UiInteraction, UiAssert, UiAction>?
+        val uiObjectInterceptor: Interceptor<UiObjectInteraction, UiAssert, UiAction>?
     )
 }

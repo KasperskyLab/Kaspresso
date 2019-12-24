@@ -7,7 +7,7 @@ interface Interceptable<INTERACTION, ASSERTION, ACTION> {
 
     /**
      * Sets the interceptors for the instance.
-     * Interceptors will be invoked on the interaction with the KView.
+     * Interceptors will be invoked on the objectInteraction with the KView.
      *
      * @param builder Builder of the interceptors
      *

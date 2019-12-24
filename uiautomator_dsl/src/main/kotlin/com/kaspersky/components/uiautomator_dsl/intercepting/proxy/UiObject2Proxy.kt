@@ -12,27 +12,27 @@ import com.kaspersky.components.uiautomator_dsl.intercepting.actions.UiActionTyp
 import com.kaspersky.components.uiautomator_dsl.intercepting.asserts.UiAssert
 import com.kaspersky.components.uiautomator_dsl.intercepting.asserts.UiAssertImpl
 import com.kaspersky.components.uiautomator_dsl.intercepting.asserts.UiAssertType
-import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiInteraction
+import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiObjectInteraction
 import com.kaspersky.components.uiautomator_dsl.intercepting.intercept.Interceptor
 
 class UiObject2Proxy(
     selector: BySelector,
     elementClassName: String
-) : Proxy<UiInteraction, UiAssert, UiAction> {
+) : Proxy<UiObjectInteraction, UiAssert, UiAction> {
 
     companion object {
         private const val EMPTY_STRING: String = ""
     }
 
-    override val interaction: UiInteraction = UiInteraction(
+    val objectInteraction: UiObjectInteraction = UiObjectInteraction(
         UiDevice.getInstance(InstrumentationRegistry.getInstrumentation()),
         selector,
         elementClassName
     )
-    override var interceptor: Interceptor<UiInteraction, UiAssert, UiAction>? = null
+    override var interceptor: Interceptor<UiObjectInteraction, UiAssert, UiAction>? = null
 
     fun loadView() {
-        interaction.tryToFindUiObject()
+        objectInteraction.tryToFindUiObject()
     }
 
     /**
@@ -44,11 +44,11 @@ class UiObject2Proxy(
         assert: UiObject2.() -> Unit
     ) {
         val uiAssert: UiAssert = UiAssertImpl(type, description, assert)
-        if (!interceptCheck(uiAssert)) uiAssert.check(interaction)
+        if (!interceptCheck(uiAssert)) uiAssert.check(objectInteraction)
     }
 
     fun check(uiAssert: UiAssert) {
-        if (!interceptCheck(uiAssert)) uiAssert.check(interaction)
+        if (!interceptCheck(uiAssert)) uiAssert.check(objectInteraction)
     }
 
     /**
@@ -60,17 +60,17 @@ class UiObject2Proxy(
         action: UiObject2.() -> Unit
     ) {
         val uiAction: UiAction = UiActionImpl(type, description, action)
-        if (!interceptPerform(uiAction)) uiAction.perform(interaction)
+        if (!interceptPerform(uiAction)) uiAction.perform(objectInteraction)
     }
 
     fun perform(uiAction: UiAction) {
-        if (!interceptPerform(uiAction)) uiAction.perform(interaction)
+        if (!interceptPerform(uiAction)) uiAction.perform(objectInteraction)
     }
 
-    override fun screenInterceptors(): Iterable<Interceptor<UiInteraction, UiAssert, UiAction>> =
-        UiScreen.uiInterceptors
+    override fun screenInterceptors(): Iterable<Interceptor<UiObjectInteraction, UiAssert, UiAction>> =
+        UiScreen.UI_OBJECT_INTERCEPTORS
 
-    override fun kakaoInterceptor(): Interceptor<UiInteraction, UiAssert, UiAction>? =
-        UiAutomatorConfigurator.uiInterceptor
+    override fun kakaoInterceptor(): Interceptor<UiObjectInteraction, UiAssert, UiAction>? =
+        UiAutomatorConfigurator.uiObjectInterceptor
 
 }
