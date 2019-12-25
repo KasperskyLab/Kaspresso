@@ -7,9 +7,8 @@ import com.kaspersky.components.uiautomator_dsl.dsl.common.UiAutomatorDslMarker
 import com.kaspersky.components.uiautomator_dsl.dsl.common.actions.UiBaseActions
 import com.kaspersky.components.uiautomator_dsl.dsl.common.assertions.UiBaseAssertions
 import com.kaspersky.components.uiautomator_dsl.dsl.common.builders.UiViewBuilder
-import com.kaspersky.components.uiautomator_dsl.intercepting.actions.UiAction
-import com.kaspersky.components.uiautomator_dsl.intercepting.actions.UiAssertion
-import com.kaspersky.components.uiautomator_dsl.intercepting.actions.UiOperation
+import com.kaspersky.components.uiautomator_dsl.intercepting.operations.UiAction
+import com.kaspersky.components.uiautomator_dsl.intercepting.operations.UiAssertion
 import com.kaspersky.components.uiautomator_dsl.intercepting.intercept.Interceptable
 import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiInteraction
 import com.kaspersky.components.uiautomator_dsl.intercepting.proxy.UiProxy

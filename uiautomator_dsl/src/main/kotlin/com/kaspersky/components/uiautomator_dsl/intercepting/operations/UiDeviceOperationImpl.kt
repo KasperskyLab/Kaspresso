@@ -1,4 +1,4 @@
-package com.kaspersky.components.uiautomator_dsl.intercepting.actions
+package com.kaspersky.components.uiautomator_dsl.intercepting.operations
 
 import androidx.test.uiautomator.UiDevice
 import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiDeviceInteraction

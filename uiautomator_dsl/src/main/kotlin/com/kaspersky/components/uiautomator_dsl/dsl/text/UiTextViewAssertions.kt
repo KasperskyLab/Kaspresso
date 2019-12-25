@@ -3,7 +3,7 @@ package com.kaspersky.components.uiautomator_dsl.dsl.text
 import com.google.common.truth.Truth.assertThat
 import com.kaspersky.components.uiautomator_dsl.dsl.common.assertions.UiBaseAssertions
 import com.kaspersky.components.uiautomator_dsl.dsl.text.UiTextViewAssertions.TextViewAssertType.*
-import com.kaspersky.components.uiautomator_dsl.intercepting.actions.UiOperationType
+import com.kaspersky.components.uiautomator_dsl.intercepting.operations.UiOperationType
 
 interface UiTextViewAssertions : UiBaseAssertions {
 

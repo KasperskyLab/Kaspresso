@@ -3,7 +3,7 @@ package com.kaspersky.components.uiautomator_dsl.dsl.screen
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.UiDevice
 import com.kaspersky.components.uiautomator_dsl.dsl.common.UiAutomatorDslMarker
-import com.kaspersky.components.uiautomator_dsl.intercepting.actions.*
+import com.kaspersky.components.uiautomator_dsl.intercepting.operations.*
 import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiDeviceInteraction
 import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiInteraction
 import com.kaspersky.components.uiautomator_dsl.intercepting.intercept.Interceptor

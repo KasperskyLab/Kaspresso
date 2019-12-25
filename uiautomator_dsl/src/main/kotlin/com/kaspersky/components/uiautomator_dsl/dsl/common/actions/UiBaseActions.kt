@@ -2,7 +2,7 @@ package com.kaspersky.components.uiautomator_dsl.dsl.common.actions
 
 import com.kaspersky.components.uiautomator_dsl.intercepting.proxy.UiProxy
 import com.kaspersky.components.uiautomator_dsl.dsl.common.actions.UiBaseActions.BaseUiOperationType.*
-import com.kaspersky.components.uiautomator_dsl.intercepting.actions.UiOperationType
+import com.kaspersky.components.uiautomator_dsl.intercepting.operations.UiOperationType
 
 interface UiBaseActions {
     val actionsView: UiProxy

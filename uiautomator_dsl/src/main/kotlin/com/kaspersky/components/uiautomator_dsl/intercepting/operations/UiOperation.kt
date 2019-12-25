@@ -1,4 +1,4 @@
-package com.kaspersky.components.uiautomator_dsl.intercepting.actions
+package com.kaspersky.components.uiautomator_dsl.intercepting.operations
 
 interface UiOperation<INTERACTION> {
 

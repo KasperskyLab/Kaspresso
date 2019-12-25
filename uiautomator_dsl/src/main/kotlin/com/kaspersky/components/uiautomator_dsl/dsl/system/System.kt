@@ -6,8 +6,8 @@ import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiDevic
 import com.kaspersky.components.uiautomator_dsl.intercepting.intercept.Interceptable
 import com.kaspersky.components.uiautomator_dsl.intercepting.proxy.UiDeviceProxy
 import com.kaspersky.components.uiautomator_dsl.dsl.system.System.SystemOperationType.*
-import com.kaspersky.components.uiautomator_dsl.intercepting.actions.UiOperation
-import com.kaspersky.components.uiautomator_dsl.intercepting.actions.UiOperationType
+import com.kaspersky.components.uiautomator_dsl.intercepting.operations.UiOperation
+import com.kaspersky.components.uiautomator_dsl.intercepting.operations.UiOperationType
 
 object System : Interceptable<UiDeviceInteraction, UiOperation<UiDeviceInteraction>, UiOperation<UiDeviceInteraction>> {
 
