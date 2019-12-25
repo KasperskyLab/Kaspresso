@@ -26,7 +26,7 @@ interface Proxy<INTERACTION, ASSERTION, ACTION> {
     }
 
     /**
-     * Runs the interceptors available for the given delegate during the `perform` operation.
+     * Runs the interceptors available for the given delegate during the `execute` operation.
      *
      * @return `true` if the call chain has been interrupted and there is no need to do Espresso call,
      *         false otherwise.

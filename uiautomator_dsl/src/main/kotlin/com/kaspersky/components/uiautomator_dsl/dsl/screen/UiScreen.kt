@@ -3,10 +3,7 @@ package com.kaspersky.components.uiautomator_dsl.dsl.screen
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.UiDevice
 import com.kaspersky.components.uiautomator_dsl.dsl.common.UiAutomatorDslMarker
-import com.kaspersky.components.uiautomator_dsl.intercepting.actions.`object`.UiAction
-import com.kaspersky.components.uiautomator_dsl.intercepting.actions.device.UiDeviceAction
-import com.kaspersky.components.uiautomator_dsl.intercepting.asserts.`object`.UiAssert
-import com.kaspersky.components.uiautomator_dsl.intercepting.asserts.device.UiDeviceAssert
+import com.kaspersky.components.uiautomator_dsl.intercepting.actions.*
 import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiDeviceInteraction
 import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiInteraction
 import com.kaspersky.components.uiautomator_dsl.intercepting.intercept.Interceptor
@@ -21,8 +18,8 @@ open class UiScreen<out T : UiScreen<T>> : UiScreenActions {
         UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
     )
 
-    private var uiInterceptor: Interceptor<UiInteraction, UiAssert, UiAction>? = null
-    private var uiDeviceInterceptor: Interceptor<UiDeviceInteraction, UiDeviceAssert, UiDeviceAction>? = null
+    private var uiInterceptor: Interceptor<UiInteraction, UiAssertion, UiAction>? = null
+    private var uiDeviceInterceptor: Interceptor<UiDeviceInteraction, UiDeviceAssertion, UiDeviceAction>? = null
     private var isActive = false
 
     /**
@@ -103,7 +100,7 @@ open class UiScreen<out T : UiScreen<T>> : UiScreenActions {
     }
 
     companion object {
-        internal val UI_INTERCEPTORS: Deque<Interceptor<UiInteraction, UiAssert, UiAction>> = LinkedList()
-        internal val UI_DEVICE_INTERCEPTORS: Deque<Interceptor<UiDeviceInteraction, UiDeviceAssert, UiDeviceAction>> = LinkedList()
+        internal val UI_INTERCEPTORS: Deque<Interceptor<UiInteraction, UiAssertion, UiAction>> = LinkedList()
+        internal val UI_DEVICE_INTERCEPTORS: Deque<Interceptor<UiDeviceInteraction, UiDeviceAssertion, UiDeviceAction>> = LinkedList()
     }
 }

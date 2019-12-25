@@ -2,15 +2,14 @@ package com.kaspersky.components.uiautomator_dsl.dsl.system
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.UiDevice
-import com.kaspersky.components.uiautomator_dsl.intercepting.actions.device.UiDeviceAction
-import com.kaspersky.components.uiautomator_dsl.intercepting.actions.device.UiDeviceActionType
-import com.kaspersky.components.uiautomator_dsl.intercepting.asserts.device.UiDeviceAssert
 import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiDeviceInteraction
 import com.kaspersky.components.uiautomator_dsl.intercepting.intercept.Interceptable
 import com.kaspersky.components.uiautomator_dsl.intercepting.proxy.UiDeviceProxy
-import com.kaspersky.components.uiautomator_dsl.dsl.system.System.SystemActionType.*
+import com.kaspersky.components.uiautomator_dsl.dsl.system.System.SystemOperationType.*
+import com.kaspersky.components.uiautomator_dsl.intercepting.actions.UiOperation
+import com.kaspersky.components.uiautomator_dsl.intercepting.actions.UiOperationType
 
-object System : Interceptable<UiDeviceInteraction, UiDeviceAssert, UiDeviceAction> {
+object System : Interceptable<UiDeviceInteraction, UiOperation<UiDeviceInteraction>, UiOperation<UiDeviceInteraction>> {
 
     override val view: UiDeviceProxy = UiDeviceProxy(
         UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
@@ -48,7 +47,7 @@ object System : Interceptable<UiDeviceInteraction, UiDeviceAssert, UiDeviceActio
         view.perform(PRESS_SEARCH) { this.pressSearch() }
     }
 
-    enum class SystemActionType : UiDeviceActionType {
+    enum class SystemOperationType : UiOperationType {
         OPEN_NOTIFICATION,
         OPEN_QUICK_SETTINGS,
         PRESS_DELETE,

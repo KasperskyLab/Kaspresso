@@ -2,8 +2,8 @@ package com.kaspersky.components.uiautomator_dsl.dsl.text
 
 import com.google.common.truth.Truth.assertThat
 import com.kaspersky.components.uiautomator_dsl.dsl.common.assertions.UiBaseAssertions
-import com.kaspersky.components.uiautomator_dsl.intercepting.asserts.`object`.UiAssertType
 import com.kaspersky.components.uiautomator_dsl.dsl.text.UiTextViewAssertions.TextViewAssertType.*
+import com.kaspersky.components.uiautomator_dsl.intercepting.actions.UiOperationType
 
 interface UiTextViewAssertions : UiBaseAssertions {
 
@@ -36,8 +36,7 @@ interface UiTextViewAssertions : UiBaseAssertions {
         ) { assertThat(this.text).contains(text) }
     }
 
-    enum class TextViewAssertType :
-        UiAssertType {
+    enum class TextViewAssertType : UiOperationType {
         HAS_EMPTY_TEXT,
         HAS_ANY_TEXT,
         HAS_TEXT,

@@ -1,8 +1,8 @@
 package com.kaspersky.components.uiautomator_dsl.dsl.edit
 
 import com.kaspersky.components.uiautomator_dsl.dsl.common.actions.UiBaseActions
-import com.kaspersky.components.uiautomator_dsl.intercepting.actions.`object`.UiActionType
-import com.kaspersky.components.uiautomator_dsl.dsl.edit.UiEditableActions.EditableActionType.*
+import com.kaspersky.components.uiautomator_dsl.intercepting.actions.UiOperationType
+import com.kaspersky.components.uiautomator_dsl.dsl.edit.UiEditableActions.EditableUiOperationType.*
 
 interface UiEditableActions : UiBaseActions {
 
@@ -20,7 +20,8 @@ interface UiEditableActions : UiBaseActions {
         ) { this.text = text }
     }
 
-    enum class EditableActionType : UiActionType {
+    enum class EditableUiOperationType :
+        UiOperationType {
         TYPE_TEXT,
         REPLACE_TEXT
     }

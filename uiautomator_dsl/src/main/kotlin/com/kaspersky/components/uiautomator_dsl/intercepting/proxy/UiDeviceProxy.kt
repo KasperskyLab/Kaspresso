@@ -3,18 +3,13 @@ package com.kaspersky.components.uiautomator_dsl.intercepting.proxy
 import androidx.test.uiautomator.UiDevice
 import com.kaspersky.components.uiautomator_dsl.UiAutomatorConfigurator
 import com.kaspersky.components.uiautomator_dsl.dsl.screen.UiScreen
-import com.kaspersky.components.uiautomator_dsl.intercepting.actions.device.UiDeviceAction
-import com.kaspersky.components.uiautomator_dsl.intercepting.actions.device.UiDeviceActionImpl
-import com.kaspersky.components.uiautomator_dsl.intercepting.actions.device.UiDeviceActionType
-import com.kaspersky.components.uiautomator_dsl.intercepting.asserts.device.UiDeviceAssert
-import com.kaspersky.components.uiautomator_dsl.intercepting.asserts.device.UiDeviceAssertImpl
-import com.kaspersky.components.uiautomator_dsl.intercepting.asserts.device.UiDeviceAssertType
+import com.kaspersky.components.uiautomator_dsl.intercepting.actions.*
 import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiDeviceInteraction
 import com.kaspersky.components.uiautomator_dsl.intercepting.intercept.Interceptor
 
 class UiDeviceProxy(
     device: UiDevice
-) : Proxy<UiDeviceInteraction, UiDeviceAssert, UiDeviceAction> {
+) : Proxy<UiDeviceInteraction, UiDeviceAssertion, UiDeviceAction> {
 
     companion object {
         private const val EMPTY_STRING: String = ""
@@ -22,53 +17,49 @@ class UiDeviceProxy(
 
     override val interaction = UiDeviceInteraction(device)
 
-    override var interceptor: Interceptor<UiDeviceInteraction, UiDeviceAssert, UiDeviceAction>? = null
+    override var interceptor: Interceptor<UiDeviceInteraction, UiDeviceAssertion, UiDeviceAction>? = null
 
     /**
      * @action must throw exception if something went wrong
      */
     fun check(
-        type: UiDeviceAssertType,
+        type: UiOperationType,
         description: String = EMPTY_STRING,
         assert: UiDevice.() -> Unit
     ) {
-        val uiAssert: UiDeviceAssert =
-            UiDeviceAssertImpl(
-                type,
-                description,
-                assert
-            )
-        if (!interceptCheck(uiAssert)) uiAssert.check(interaction)
-    }
-
-    fun check(uiAssert: UiDeviceAssert) {
-        if (!interceptCheck(uiAssert)) uiAssert.check(interaction)
+        val uiDeviceAssertion = getUiDeviceOperation(type, description, assert)
+        check(uiDeviceAssertion)
     }
 
     /**
      * @action must throw exception if something went wrong
      */
     fun perform(
-        type: UiDeviceActionType,
+        type: UiOperationType,
         description: String = EMPTY_STRING,
         action: UiDevice.() -> Unit
     ) {
-        val uiAction: UiDeviceAction =
-            UiDeviceActionImpl(
-                type,
-                description,
-                action
-            )
-        if (!interceptPerform(uiAction)) uiAction.perform(interaction)
+        val uiDeviceAction = getUiDeviceOperation(type, description, action)
+        perform(uiDeviceAction)
     }
 
-    fun perform(uiAction: UiDeviceAction) {
-        if (!interceptPerform(uiAction)) uiAction.perform(interaction)
+    private fun getUiDeviceOperation(
+        type: UiOperationType,
+        description: String = EMPTY_STRING,
+        action: UiDevice.() -> Unit
+    ) = UiDeviceOperationImpl(type, description, action)
+
+    fun check(uiDeviceAssertion: UiDeviceAssertion) {
+        if (!interceptCheck(uiDeviceAssertion)) uiDeviceAssertion.execute(interaction)
     }
 
-    override fun screenInterceptors(): Iterable<Interceptor<UiDeviceInteraction, UiDeviceAssert, UiDeviceAction>> =
+    fun perform(uiDeviceAction: UiDeviceAction) {
+        if (!interceptPerform(uiDeviceAction)) uiDeviceAction.execute(interaction)
+    }
+
+    override fun screenInterceptors(): Iterable<Interceptor<UiDeviceInteraction, UiDeviceAssertion, UiDeviceAction>> =
         UiScreen.UI_DEVICE_INTERCEPTORS
 
-    override fun kakaoInterceptor(): Interceptor<UiDeviceInteraction, UiDeviceAssert, UiDeviceAction>? =
+    override fun kakaoInterceptor(): Interceptor<UiDeviceInteraction, UiDeviceAssertion, UiDeviceAction>? =
         UiAutomatorConfigurator.uiDeviceInterceptor
 }

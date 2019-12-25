@@ -1,8 +1,8 @@
 package com.kaspersky.components.uiautomator_dsl.dsl.common.actions
 
 import com.kaspersky.components.uiautomator_dsl.intercepting.proxy.UiProxy
-import com.kaspersky.components.uiautomator_dsl.dsl.common.actions.UiBaseActions.BaseActionType.*
-import com.kaspersky.components.uiautomator_dsl.intercepting.actions.`object`.UiActionType
+import com.kaspersky.components.uiautomator_dsl.dsl.common.actions.UiBaseActions.BaseUiOperationType.*
+import com.kaspersky.components.uiautomator_dsl.intercepting.actions.UiOperationType
 
 interface UiBaseActions {
     val actionsView: UiProxy
@@ -22,7 +22,8 @@ interface UiBaseActions {
         actionsView.perform(LONG_CLICK) { longClick() }
     }
 
-    enum class BaseActionType : UiActionType {
+    enum class BaseUiOperationType :
+        UiOperationType {
         CLICK,
         DOUBLE_CLICK,
         LONG_CLICK

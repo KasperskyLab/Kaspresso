@@ -5,12 +5,7 @@ import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.UiObject2
 import com.kaspersky.components.uiautomator_dsl.UiAutomatorConfigurator
 import com.kaspersky.components.uiautomator_dsl.dsl.screen.UiScreen
-import com.kaspersky.components.uiautomator_dsl.intercepting.actions.`object`.UiAction
-import com.kaspersky.components.uiautomator_dsl.intercepting.actions.`object`.UiActionImpl
-import com.kaspersky.components.uiautomator_dsl.intercepting.actions.`object`.UiActionType
-import com.kaspersky.components.uiautomator_dsl.intercepting.asserts.`object`.UiAssert
-import com.kaspersky.components.uiautomator_dsl.intercepting.asserts.`object`.UiAssertImpl
-import com.kaspersky.components.uiautomator_dsl.intercepting.asserts.`object`.UiAssertType
+import com.kaspersky.components.uiautomator_dsl.intercepting.actions.*
 import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiInteraction
 import com.kaspersky.components.uiautomator_dsl.intercepting.intercept.Interceptor
 
@@ -18,14 +13,14 @@ class UiProxy(
     device: UiDevice,
     selector: BySelector,
     elementClassName: String
-) : Proxy<UiInteraction, UiAssert, UiAction> {
+) : Proxy<UiInteraction, UiAssertion, UiAction> {
 
     companion object {
         private const val EMPTY_STRING: String = ""
     }
 
     override val interaction: UiInteraction = UiInteraction(device, selector, elementClassName)
-    override var interceptor: Interceptor<UiInteraction, UiAssert, UiAction>? = null
+    override var interceptor: Interceptor<UiInteraction, UiAssertion, UiAction>? = null
 
     fun loadView() {
         interaction.tryToFindUiObject()
@@ -35,48 +30,44 @@ class UiProxy(
      * @action must throw exception if something went wrong
      */
     fun check(
-        type: UiAssertType,
+        type: UiOperationType,
         description: String = EMPTY_STRING,
         assert: UiObject2.() -> Unit
     ) {
-        val uiAssert: UiAssert =
-            UiAssertImpl(
-                type,
-                description,
-                assert
-            )
-        if (!interceptCheck(uiAssert)) uiAssert.check(interaction)
-    }
-
-    fun check(uiAssert: UiAssert) {
-        if (!interceptCheck(uiAssert)) uiAssert.check(interaction)
+        val uiAssertion = getUiOperation(type, description, assert)
+        check(uiAssertion)
     }
 
     /**
      * @action must throw exception if something went wrong
      */
     fun perform(
-        type: UiActionType,
+        type: UiOperationType,
         description: String = EMPTY_STRING,
         action: UiObject2.() -> Unit
     ) {
-        val uiAction: UiAction =
-            UiActionImpl(
-                type,
-                description,
-                action
-            )
-        if (!interceptPerform(uiAction)) uiAction.perform(interaction)
+        val uiAction = getUiOperation(type, description, action)
+        perform(uiAction)
     }
 
-    fun perform(uiAction: UiAction) {
-        if (!interceptPerform(uiAction)) uiAction.perform(interaction)
+    private fun getUiOperation(
+        type: UiOperationType,
+        description: String = EMPTY_STRING,
+        action: UiObject2.() -> Unit
+    ) = UiOperationImpl(type, description, action)
+
+    fun check(uiAssertion: UiAssertion) {
+        if (!interceptCheck(uiAssertion)) uiAssertion.execute(interaction)
     }
 
-    override fun screenInterceptors(): Iterable<Interceptor<UiInteraction, UiAssert, UiAction>> =
+    fun perform(uiOperation: UiAction) {
+        if (!interceptPerform(uiOperation)) uiOperation.execute(interaction)
+    }
+
+    override fun screenInterceptors(): Iterable<Interceptor<UiInteraction, UiAssertion, UiAction>> =
         UiScreen.UI_INTERCEPTORS
 
-    override fun kakaoInterceptor(): Interceptor<UiInteraction, UiAssert, UiAction>? =
+    override fun kakaoInterceptor(): Interceptor<UiInteraction, UiAssertion, UiAction>? =
         UiAutomatorConfigurator.uiInterceptor
 
 }

@@ -1,17 +1,14 @@
 package com.kaspersky.components.uiautomator_dsl
 
+import com.kaspersky.components.uiautomator_dsl.intercepting.actions.*
 import com.kaspersky.components.uiautomator_dsl.intercepting.intercept.Interceptor
-import com.kaspersky.components.uiautomator_dsl.intercepting.actions.`object`.UiAction
-import com.kaspersky.components.uiautomator_dsl.intercepting.actions.device.UiDeviceAction
-import com.kaspersky.components.uiautomator_dsl.intercepting.asserts.`object`.UiAssert
-import com.kaspersky.components.uiautomator_dsl.intercepting.asserts.device.UiDeviceAssert
 import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiDeviceInteraction
 import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiInteraction
 
 object UiAutomatorConfigurator {
 
-    internal var uiInterceptor: Interceptor<UiInteraction, UiAssert, UiAction>? = null
-    internal var uiDeviceInterceptor: Interceptor<UiDeviceInteraction, UiDeviceAssert, UiDeviceAction>? = null
+    internal var uiInterceptor: Interceptor<UiInteraction, UiAssertion, UiAction>? = null
+    internal var uiDeviceInterceptor: Interceptor<UiDeviceInteraction, UiDeviceAssertion, UiDeviceAction>? = null
 
     /**
      * Operator that allows usage of DSL style

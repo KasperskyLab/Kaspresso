@@ -1,9 +1,6 @@
 package com.kaspersky.components.uiautomator_dsl.intercepting.intercept
 
-import com.kaspersky.components.uiautomator_dsl.intercepting.actions.`object`.UiAction
-import com.kaspersky.components.uiautomator_dsl.intercepting.actions.device.UiDeviceAction
-import com.kaspersky.components.uiautomator_dsl.intercepting.asserts.`object`.UiAssert
-import com.kaspersky.components.uiautomator_dsl.intercepting.asserts.device.UiDeviceAssert
+import com.kaspersky.components.uiautomator_dsl.intercepting.actions.*
 import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiDeviceInteraction
 import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiInteraction
 
@@ -35,7 +32,7 @@ class Interceptor <INTERACTION, ASSERTION, ACTION>(
         }
 
         /**
-         * Sets the interceptor for the `perform` operation for a given objectInteraction.
+         * Sets the interceptor for the `execute` operation for a given objectInteraction.
          * If overridden, breaks the call chain of operation and transfers the responsibility
          * to invoke the Espresso on the developer.
          *
@@ -47,7 +44,7 @@ class Interceptor <INTERACTION, ASSERTION, ACTION>(
         }
 
         /**
-         * Sets the interceptor for the `check` and `perform` operations for a given objectInteraction.
+         * Sets the interceptor for the `check` and `execute` operations for a given objectInteraction.
          * If overridden, breaks the call chain of operation and transfers the responsibility
          * to invoke the Espresso on the developer.
          *
@@ -71,27 +68,27 @@ class Interceptor <INTERACTION, ASSERTION, ACTION>(
      * @see com.agoda.kakao.screen.Screen
      */
     class Configurator {
-        private var uiInterceptor: Interceptor<UiInteraction, UiAssert, UiAction>? = null
-        private var uiDeviceInterceptor: Interceptor<UiDeviceInteraction, UiDeviceAssert, UiDeviceAction>? = null
+        private var uiInterceptor: Interceptor<UiInteraction, UiAssertion, UiAction>? = null
+        private var uiDeviceInterceptor: Interceptor<UiDeviceInteraction, UiDeviceAssertion, UiDeviceAction>? = null
 
         /**
-         * Setups the interceptor for `check` and `perform` operations happening through [ViewInteraction]
+         * Setups the interceptor for `check` and `execute` operations happening through [ViewInteraction]
          *
          * @param builder Builder of interceptor for [ViewInteraction]
          */
-        fun onUiInteraction(builder: Builder<UiInteraction, UiAssert, UiAction>.() -> Unit) {
-            uiInterceptor = Builder<UiInteraction, UiAssert, UiAction>().apply(builder).build()
+        fun onUiInteraction(builder: Builder<UiInteraction, UiAssertion, UiAction>.() -> Unit) {
+            uiInterceptor = Builder<UiInteraction, UiAssertion, UiAction>().apply(builder).build()
         }
 
-        fun onUiDeviceInteraction(builder: Builder<UiDeviceInteraction, UiDeviceAssert, UiDeviceAction>.() -> Unit) {
-            uiDeviceInterceptor = Builder<UiDeviceInteraction, UiDeviceAssert, UiDeviceAction>().apply(builder).build()
+        fun onUiDeviceInteraction(builder: Builder<UiDeviceInteraction, UiDeviceAssertion, UiDeviceAction>.() -> Unit) {
+            uiDeviceInterceptor = Builder<UiDeviceInteraction, UiDeviceAssertion, UiDeviceAction>().apply(builder).build()
         }
 
         internal fun configure() = Configuration(uiInterceptor, uiDeviceInterceptor)
     }
 
     data class Configuration(
-        val uiInterceptor: Interceptor<UiInteraction, UiAssert, UiAction>?,
-        val uiDeviceInterceptor: Interceptor<UiDeviceInteraction, UiDeviceAssert, UiDeviceAction>?
+        val uiInterceptor: Interceptor<UiInteraction, UiAssertion, UiAction>?,
+        val uiDeviceInterceptor: Interceptor<UiDeviceInteraction, UiDeviceAssertion, UiDeviceAction>?
     )
 }

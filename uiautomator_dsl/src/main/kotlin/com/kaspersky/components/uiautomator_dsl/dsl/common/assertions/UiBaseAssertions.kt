@@ -3,7 +3,7 @@ package com.kaspersky.components.uiautomator_dsl.dsl.common.assertions
 import com.google.common.truth.Truth.assertThat
 import com.kaspersky.components.uiautomator_dsl.intercepting.proxy.UiProxy
 import com.kaspersky.components.uiautomator_dsl.dsl.common.assertions.UiBaseAssertions.BaseAssertType.*
-import com.kaspersky.components.uiautomator_dsl.intercepting.asserts.`object`.UiAssertType
+import com.kaspersky.components.uiautomator_dsl.intercepting.actions.UiOperationType
 
 interface UiBaseAssertions {
     val assertionsView: UiProxy
@@ -62,7 +62,7 @@ interface UiBaseAssertions {
         assertionsView.check(IS_DISABLED) { assertThat(isEnabled).isFalse() }
     }
 
-    enum class BaseAssertType : UiAssertType {
+    enum class BaseAssertType : UiOperationType {
         IS_DISPLAYED,
         IS_NOT_DISPLAYED,
         IS_SELECTED,
