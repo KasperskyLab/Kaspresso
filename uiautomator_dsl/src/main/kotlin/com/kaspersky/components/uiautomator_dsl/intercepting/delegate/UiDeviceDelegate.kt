@@ -9,7 +9,7 @@ import com.kaspersky.components.uiautomator_dsl.intercepting.intercept.UiInterce
 
 class UiDeviceDelegate(
     device: UiDevice
-) : UiDelegate<UiDeviceInteraction, UiDeviceAssertion, UiDeviceAction> {
+) : Delegate<UiDeviceInteraction, UiDeviceAssertion, UiDeviceAction> {
 
     override val interaction = UiDeviceInteraction(device)
 

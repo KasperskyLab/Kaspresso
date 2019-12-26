@@ -11,20 +11,20 @@ import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertio
 import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion.UiAssertion
 import com.kaspersky.components.uiautomator_dsl.intercepting.intercept.UiInterceptable
 import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiInteraction
-import com.kaspersky.components.uiautomator_dsl.intercepting.delegate.UiUiDelegate
+import com.kaspersky.components.uiautomator_dsl.intercepting.delegate.UiDelegate
 
 @Suppress("UNCHECKED_CAST")
 @UiAutomatorDslMarker
 open class UiBaseView<out T>(selector: BySelector) : UiBaseActions, UiBaseAssertions,
     UiInterceptable<UiInteraction, UiAssertion, UiAction> {
 
-    override val view: UiUiDelegate = UiUiDelegate(
+    override val view: UiDelegate = UiDelegate(
         UiDevice.getInstance(InstrumentationRegistry.getInstrumentation()),
         selector,
         this::class.java.simpleName
     )
-    override val actionsView: UiUiDelegate get() = view
-    override val assertionsView: UiUiDelegate get() = view
+    override val actionsView: UiDelegate get() = view
+    override val assertionsView: UiDelegate get() = view
 
     constructor(func: UiViewBuilder.() -> Unit) : this(UiViewBuilder().apply(func).build())
 

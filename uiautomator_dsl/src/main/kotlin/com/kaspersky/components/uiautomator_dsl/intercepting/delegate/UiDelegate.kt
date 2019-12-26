@@ -1,64 +1,69 @@
 package com.kaspersky.components.uiautomator_dsl.intercepting.delegate
 
+import androidx.test.uiautomator.BySelector
+import androidx.test.uiautomator.UiDevice
+import androidx.test.uiautomator.UiObject2
+import com.kaspersky.components.uiautomator_dsl.UiAutomatorConfigurator
+import com.kaspersky.components.uiautomator_dsl.dsl.screen.UiScreen
+import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion.*
+import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiInteraction
 import com.kaspersky.components.uiautomator_dsl.intercepting.intercept.UiInterceptor
 
-interface UiDelegate<INTERACTION, ASSERTION, ACTION> {
-    val interaction: INTERACTION
-    var interceptor: UiInterceptor<INTERACTION, ASSERTION, ACTION>?
+class UiDelegate(
+    device: UiDevice,
+    selector: BySelector,
+    elementClassName: String
+) : Delegate<UiInteraction, UiAssertion, UiAction> {
 
-    fun screenInterceptors(): Iterable<UiInterceptor<INTERACTION, ASSERTION, ACTION>>
-    fun kakaoInterceptor(): UiInterceptor<INTERACTION, ASSERTION, ACTION>?
+    override val interaction: UiInteraction = UiInteraction(device, selector, elementClassName)
+    override var interceptor: UiInterceptor<UiInteraction, UiAssertion, UiAction>? = null
 
-    /**
-     * Runs the interceptors available for the given delegate during the `check` operation.
-     *
-     * @return `true` if the call chain has been interrupted and there is no need to do Espresso call,
-     *         false otherwise.
-     */
-    fun interceptCheck(assertion: ASSERTION): Boolean {
-        fun intercept(uiInterceptor: UiInterceptor<INTERACTION, ASSERTION, ACTION>): Boolean {
-            return interceptOnAll(uiInterceptor) || interceptOnCheck(uiInterceptor, assertion)
-        }
-
-        return interceptor?.let { intercept(it) } ?: false ||
-                screenInterceptors().any { intercept(it) } ||
-                kakaoInterceptor()?.let { intercept(it) } ?: false
+    fun loadView() {
+        interaction.tryToFindUiObject()
     }
 
     /**
-     * Runs the interceptors available for the given delegate during the `execute` operation.
-     *
-     * @return `true` if the call chain has been interrupted and there is no need to do Espresso call,
-     *         false otherwise.
+     * @action must throw exception if something went wrong
      */
-    fun interceptPerform(action: ACTION): Boolean {
-        fun intercept(uiInterceptor: UiInterceptor<INTERACTION, ASSERTION, ACTION>): Boolean {
-            return interceptOnAll(uiInterceptor) || interceptOnPerform(uiInterceptor, action)
-        }
-
-        return interceptor?.let { intercept(it) } ?: false ||
-                screenInterceptors().any { intercept(it) } ||
-                kakaoInterceptor()?.let { intercept(it) } ?: false
+    fun check(
+        type: UiOperationType,
+        description: String? = null,
+        assert: UiObject2.() -> Unit
+    ) {
+        val uiAssertion = getUiOperation(type, description, assert)
+        check(uiAssertion)
     }
 
-    private fun interceptOnAll(uiInterceptor: UiInterceptor<INTERACTION, ASSERTION, ACTION>): Boolean {
-        return uiInterceptor.onAll?.let { (isOverride, interception) ->
-            interception(interaction)
-            isOverride
-        } ?: false
+    /**
+     * @action must throw exception if something went wrong
+     */
+    fun perform(
+        type: UiOperationType,
+        description: String? = null,
+        action: UiObject2.() -> Unit
+    ) {
+        val uiAction = getUiOperation(type, description, action)
+        perform(uiAction)
     }
 
-    private fun interceptOnCheck(uiInterceptor: UiInterceptor<INTERACTION, ASSERTION, ACTION>, assertion: ASSERTION): Boolean {
-        return uiInterceptor.onCheck?.let { (isOverride, interception) ->
-            interception(interaction, assertion)
-            isOverride
-        } ?: false
+    private fun getUiOperation(
+        type: UiOperationType,
+        description: String? = null,
+        action: UiObject2.() -> Unit
+    ) = UiOperationImpl(type, description, action)
+
+    fun check(uiAssertion: UiAssertion) {
+        if (!interceptCheck(uiAssertion)) uiAssertion.execute(interaction)
     }
 
-    private fun interceptOnPerform(uiInterceptor: UiInterceptor<INTERACTION, ASSERTION, ACTION>, action: ACTION): Boolean {
-        return uiInterceptor.onPerform?.let { (isOverride, interception) ->
-            interception(interaction, action)
-            isOverride
-        } ?: false
+    fun perform(uiOperation: UiAction) {
+        if (!interceptPerform(uiOperation)) uiOperation.execute(interaction)
     }
+
+    override fun screenInterceptors(): Iterable<UiInterceptor<UiInteraction, UiAssertion, UiAction>> =
+        UiScreen.UI_INTERCEPTORS
+
+    override fun kakaoInterceptor(): UiInterceptor<UiInteraction, UiAssertion, UiAction>? =
+        UiAutomatorConfigurator.uiInterceptor
+
 }

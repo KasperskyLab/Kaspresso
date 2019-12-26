@@ -1,11 +1,11 @@
 package com.kaspersky.components.uiautomator_dsl.dsl.common.actions
 
-import com.kaspersky.components.uiautomator_dsl.intercepting.delegate.UiUiDelegate
+import com.kaspersky.components.uiautomator_dsl.intercepting.delegate.UiDelegate
 import com.kaspersky.components.uiautomator_dsl.dsl.common.actions.UiBaseActions.BaseUiOperationType.*
 import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion.UiOperationType
 
 interface UiBaseActions {
-    val actionsView: UiUiDelegate
+    val actionsView: UiDelegate
 
     fun click() {
         actionsView.perform(CLICK) { click() }
