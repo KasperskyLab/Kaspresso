@@ -1,14 +1,14 @@
 package com.kaspersky.components.uiautomator_dsl
 
-import com.kaspersky.components.uiautomator_dsl.intercepting.operations.*
-import com.kaspersky.components.uiautomator_dsl.intercepting.intercept.Interceptor
+import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion.*
+import com.kaspersky.components.uiautomator_dsl.intercepting.intercept.UiInterceptor
 import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiDeviceInteraction
 import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiInteraction
 
 object UiAutomatorConfigurator {
 
-    internal var uiInterceptor: Interceptor<UiInteraction, UiAssertion, UiAction>? = null
-    internal var uiDeviceInterceptor: Interceptor<UiDeviceInteraction, UiDeviceAssertion, UiDeviceAction>? = null
+    internal var uiInterceptor: UiInterceptor<UiInteraction, UiAssertion, UiAction>? = null
+    internal var uiDeviceInterceptor: UiInterceptor<UiDeviceInteraction, UiDeviceAssertion, UiDeviceAction>? = null
 
     /**
      * Operator that allows usage of DSL style
@@ -25,10 +25,10 @@ object UiAutomatorConfigurator {
      *
      * @param configurator Configuration of the interceptors
      *
-     * @see Interceptor
+     * @see UiInterceptor
      */
-    fun intercept(configurator: Interceptor.Configurator.() -> Unit) {
-        Interceptor.Configurator().apply(configurator).configure().also { (uiInterceptor, uiDeviceInterceptor) ->
+    fun intercept(configurator: UiInterceptor.Configurator.() -> Unit) {
+        UiInterceptor.Configurator().apply(configurator).configure().also { (uiInterceptor, uiDeviceInterceptor) ->
             this.uiInterceptor = uiInterceptor
             this.uiDeviceInterceptor = uiDeviceInterceptor
         }
@@ -38,7 +38,7 @@ object UiAutomatorConfigurator {
      * Removes the interceptors from the Kakao runtime.
      *
      * @see intercept
-     * @see Interceptor
+     * @see UiInterceptor
      */
     fun reset() {
         uiInterceptor = null

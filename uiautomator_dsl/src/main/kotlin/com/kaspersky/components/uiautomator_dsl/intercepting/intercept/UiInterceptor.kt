@@ -1,23 +1,23 @@
 package com.kaspersky.components.uiautomator_dsl.intercepting.intercept
 
-import com.kaspersky.components.uiautomator_dsl.intercepting.operations.*
+import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion.*
 import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiDeviceInteraction
 import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiInteraction
 
-class Interceptor <INTERACTION, ASSERTION, ACTION>(
-    val onCheck: Interception<(INTERACTION, ASSERTION) -> Unit>?,
-    val onPerform: Interception<(INTERACTION, ACTION) -> Unit>?,
-    val onAll: Interception<(INTERACTION) -> Unit>?
+class UiInterceptor <INTERACTION, ASSERTION, ACTION>(
+    val onCheck: UiInterception<(INTERACTION, ASSERTION) -> Unit>?,
+    val onPerform: UiInterception<(INTERACTION, ACTION) -> Unit>?,
+    val onAll: UiInterception<(INTERACTION) -> Unit>?
 ) {
     /**
-     * Builder class that is used to build a single instance of [Interceptor].
+     * Builder class that is used to build a single instance of [UiInterceptor].
      *
-     * @see Interceptor
+     * @see UiInterceptor
      */
     class Builder<INTERACTION, ASSERTION, ACTION> {
-        private var onCheck: Interception<(INTERACTION, ASSERTION) -> Unit>? = null
-        private var onPerform: Interception<(INTERACTION, ACTION) -> Unit>? = null
-        private var onAll: Interception<(INTERACTION) -> Unit>? = null
+        private var onCheck: UiInterception<(INTERACTION, ASSERTION) -> Unit>? = null
+        private var onPerform: UiInterception<(INTERACTION, ACTION) -> Unit>? = null
+        private var onAll: UiInterception<(INTERACTION) -> Unit>? = null
 
         /**
          * Sets the interceptor for the `check` operation for a given objectInteraction.
@@ -28,7 +28,7 @@ class Interceptor <INTERACTION, ASSERTION, ACTION>(
          * @param interceptor lambda with intercepting logic
          */
         fun onCheck(isOverride: Boolean = false, interceptor: (INTERACTION, ASSERTION) -> Unit) {
-            onCheck = Interception(isOverride, interceptor)
+            onCheck = UiInterception(isOverride, interceptor)
         }
 
         /**
@@ -40,7 +40,7 @@ class Interceptor <INTERACTION, ASSERTION, ACTION>(
          * @param interceptor lambda with intercepting logic
          */
         fun onPerform(isOverride: Boolean = false, interceptor: (INTERACTION, ACTION) -> Unit) {
-            onPerform = Interception(isOverride, interceptor)
+            onPerform = UiInterception(isOverride, interceptor)
         }
 
         /**
@@ -54,10 +54,10 @@ class Interceptor <INTERACTION, ASSERTION, ACTION>(
          * @param interceptor lambda with intercepting logic
          */
         fun onAll(isOverride: Boolean = false, interceptor: (INTERACTION) -> Unit) {
-            onAll = Interception(isOverride, interceptor)
+            onAll = UiInterception(isOverride, interceptor)
         }
 
-        internal fun build(): Interceptor<INTERACTION, ASSERTION, ACTION> = Interceptor(onCheck, onPerform, onAll)
+        internal fun build(): UiInterceptor<INTERACTION, ASSERTION, ACTION> = UiInterceptor(onCheck, onPerform, onAll)
     }
 
     /**
@@ -68,8 +68,8 @@ class Interceptor <INTERACTION, ASSERTION, ACTION>(
      * @see com.agoda.kakao.screen.Screen
      */
     class Configurator {
-        private var uiInterceptor: Interceptor<UiInteraction, UiAssertion, UiAction>? = null
-        private var uiDeviceInterceptor: Interceptor<UiDeviceInteraction, UiDeviceAssertion, UiDeviceAction>? = null
+        private var uiInterceptor: UiInterceptor<UiInteraction, UiAssertion, UiAction>? = null
+        private var uiDeviceInterceptor: UiInterceptor<UiDeviceInteraction, UiDeviceAssertion, UiDeviceAction>? = null
 
         /**
          * Setups the interceptor for `check` and `execute` operations happening through [ViewInteraction]
@@ -88,7 +88,7 @@ class Interceptor <INTERACTION, ASSERTION, ACTION>(
     }
 
     data class Configuration(
-        val uiInterceptor: Interceptor<UiInteraction, UiAssertion, UiAction>?,
-        val uiDeviceInterceptor: Interceptor<UiDeviceInteraction, UiDeviceAssertion, UiDeviceAction>?
+        val uiUiInterceptor: UiInterceptor<UiInteraction, UiAssertion, UiAction>?,
+        val uiDeviceInterceptor: UiInterceptor<UiDeviceInteraction, UiDeviceAssertion, UiDeviceAction>?
     )
 }

@@ -1,4 +1,4 @@
-package com.kaspersky.components.uiautomator_dsl.intercepting.operations
+package com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion
 
 import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiDeviceInteraction
 import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiInteraction

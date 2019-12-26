@@ -7,24 +7,24 @@ import com.kaspersky.components.uiautomator_dsl.dsl.common.UiAutomatorDslMarker
 import com.kaspersky.components.uiautomator_dsl.dsl.common.actions.UiBaseActions
 import com.kaspersky.components.uiautomator_dsl.dsl.common.assertions.UiBaseAssertions
 import com.kaspersky.components.uiautomator_dsl.dsl.common.builders.UiViewBuilder
-import com.kaspersky.components.uiautomator_dsl.intercepting.operations.UiAction
-import com.kaspersky.components.uiautomator_dsl.intercepting.operations.UiAssertion
-import com.kaspersky.components.uiautomator_dsl.intercepting.intercept.Interceptable
+import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion.UiAction
+import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion.UiAssertion
+import com.kaspersky.components.uiautomator_dsl.intercepting.intercept.UiInterceptable
 import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiInteraction
-import com.kaspersky.components.uiautomator_dsl.intercepting.proxy.UiProxy
+import com.kaspersky.components.uiautomator_dsl.intercepting.delegate.UiUiDelegate
 
 @Suppress("UNCHECKED_CAST")
 @UiAutomatorDslMarker
 open class UiBaseView<out T>(selector: BySelector) : UiBaseActions, UiBaseAssertions,
-    Interceptable<UiInteraction, UiAssertion, UiAction> {
+    UiInterceptable<UiInteraction, UiAssertion, UiAction> {
 
-    override val view: UiProxy = UiProxy(
+    override val view: UiUiDelegate = UiUiDelegate(
         UiDevice.getInstance(InstrumentationRegistry.getInstrumentation()),
         selector,
         this::class.java.simpleName
     )
-    override val actionsView: UiProxy get() = view
-    override val assertionsView: UiProxy get() = view
+    override val actionsView: UiUiDelegate get() = view
+    override val assertionsView: UiUiDelegate get() = view
 
     constructor(func: UiViewBuilder.() -> Unit) : this(UiViewBuilder().apply(func).build())
 

@@ -1,4 +1,4 @@
-package com.kaspersky.components.uiautomator_dsl.intercepting.exceptions
+package com.kaspersky.components.uiautomator_dsl.intercepting.exception
 
 import androidx.test.uiautomator.BySelector
 

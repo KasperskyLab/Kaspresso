@@ -1,26 +1,22 @@
-package com.kaspersky.components.uiautomator_dsl.intercepting.proxy
+package com.kaspersky.components.uiautomator_dsl.intercepting.delegate
 
 import androidx.test.uiautomator.BySelector
 import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.UiObject2
 import com.kaspersky.components.uiautomator_dsl.UiAutomatorConfigurator
 import com.kaspersky.components.uiautomator_dsl.dsl.screen.UiScreen
-import com.kaspersky.components.uiautomator_dsl.intercepting.operations.*
+import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion.*
 import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiInteraction
-import com.kaspersky.components.uiautomator_dsl.intercepting.intercept.Interceptor
+import com.kaspersky.components.uiautomator_dsl.intercepting.intercept.UiInterceptor
 
-class UiProxy(
+class UiUiDelegate(
     device: UiDevice,
     selector: BySelector,
     elementClassName: String
-) : Proxy<UiInteraction, UiAssertion, UiAction> {
-
-    companion object {
-        private const val EMPTY_STRING: String = ""
-    }
+) : UiDelegate<UiInteraction, UiAssertion, UiAction> {
 
     override val interaction: UiInteraction = UiInteraction(device, selector, elementClassName)
-    override var interceptor: Interceptor<UiInteraction, UiAssertion, UiAction>? = null
+    override var interceptor: UiInterceptor<UiInteraction, UiAssertion, UiAction>? = null
 
     fun loadView() {
         interaction.tryToFindUiObject()
@@ -31,7 +27,7 @@ class UiProxy(
      */
     fun check(
         type: UiOperationType,
-        description: String = EMPTY_STRING,
+        description: String? = null,
         assert: UiObject2.() -> Unit
     ) {
         val uiAssertion = getUiOperation(type, description, assert)
@@ -43,7 +39,7 @@ class UiProxy(
      */
     fun perform(
         type: UiOperationType,
-        description: String = EMPTY_STRING,
+        description: String? = null,
         action: UiObject2.() -> Unit
     ) {
         val uiAction = getUiOperation(type, description, action)
@@ -52,7 +48,7 @@ class UiProxy(
 
     private fun getUiOperation(
         type: UiOperationType,
-        description: String = EMPTY_STRING,
+        description: String? = null,
         action: UiObject2.() -> Unit
     ) = UiOperationImpl(type, description, action)
 
@@ -64,10 +60,10 @@ class UiProxy(
         if (!interceptPerform(uiOperation)) uiOperation.execute(interaction)
     }
 
-    override fun screenInterceptors(): Iterable<Interceptor<UiInteraction, UiAssertion, UiAction>> =
+    override fun screenInterceptors(): Iterable<UiInterceptor<UiInteraction, UiAssertion, UiAction>> =
         UiScreen.UI_INTERCEPTORS
 
-    override fun kakaoInterceptor(): Interceptor<UiInteraction, UiAssertion, UiAction>? =
+    override fun kakaoInterceptor(): UiInterceptor<UiInteraction, UiAssertion, UiAction>? =
         UiAutomatorConfigurator.uiInterceptor
 
 }
