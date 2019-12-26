@@ -9,17 +9,11 @@ interface UiBaseAssertions {
     val assertionsView: UiObjectDelegate
 
     fun isDisplayed() {
-        assertionsView.check(IS_DISPLAYED) {
-            // todo
-            // assertThat(assertionsView).isNotNull()
-        }
+        assertionsView.check(DisplayedObjectAssertion.assertDisplayed())
     }
 
     fun isNotDisplayed() {
-        assertionsView.check(IS_NOT_DISPLAYED) {
-            // todo
-            // assertThat(assertionsView).isNull()
-        }
+        assertionsView.check(DisplayedObjectAssertion.assertNotDisplayed())
     }
 
     fun isSelected() {
@@ -63,8 +57,6 @@ interface UiBaseAssertions {
     }
 
     enum class BaseAssertType : UiOperationType {
-        IS_DISPLAYED,
-        IS_NOT_DISPLAYED,
         IS_SELECTED,
         IS_NOT_SELECTED,
         IS_FOCUSED,
