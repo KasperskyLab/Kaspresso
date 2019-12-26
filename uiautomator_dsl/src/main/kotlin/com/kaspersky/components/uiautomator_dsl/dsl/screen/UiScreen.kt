@@ -5,7 +5,7 @@ import androidx.test.uiautomator.UiDevice
 import com.kaspersky.components.uiautomator_dsl.dsl.common.UiAutomatorDslMarker
 import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion.*
 import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiDeviceInteraction
-import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiInteraction
+import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiObjectInteraction
 import com.kaspersky.components.uiautomator_dsl.intercepting.intercept.UiInterceptor
 import com.kaspersky.components.uiautomator_dsl.intercepting.delegate.UiDeviceDelegate
 import java.util.*
@@ -18,7 +18,7 @@ open class UiScreen<out T : UiScreen<T>> : UiScreenActions {
         UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
     )
 
-    private var uiInterceptor: UiInterceptor<UiInteraction, UiAssertion, UiAction>? = null
+    private var uiObjectInterceptor: UiInterceptor<UiObjectInteraction, UiObjectAssertion, UiObjectAction>? = null
     private var uiDeviceInterceptor: UiInterceptor<UiDeviceInteraction, UiDeviceAssertion, UiDeviceAction>? = null
     private var isActive = false
 
@@ -56,7 +56,7 @@ open class UiScreen<out T : UiScreen<T>> : UiScreenActions {
         }
 
         UiInterceptor.Configurator().apply(configurator).configure().also { (uiInterceptor, uiDeviceInterceptor) ->
-            this.uiInterceptor = uiInterceptor
+            this.uiObjectInterceptor = uiInterceptor
             this.uiDeviceInterceptor = uiDeviceInterceptor
         }
 
@@ -75,7 +75,7 @@ open class UiScreen<out T : UiScreen<T>> : UiScreenActions {
         if (isActive) {
             removeInterceptors()
         }
-        uiInterceptor = null
+        uiObjectInterceptor = null
         uiDeviceInterceptor = null
     }
 
@@ -90,17 +90,17 @@ open class UiScreen<out T : UiScreen<T>> : UiScreenActions {
     }
 
     private fun addInterceptors() {
-        uiInterceptor?.let { UI_INTERCEPTORS.offerFirst(it) }
+        uiObjectInterceptor?.let { UI_OBJECT_INTERCEPTORS.offerFirst(it) }
         uiDeviceInterceptor?.let { UI_DEVICE_INTERCEPTORS.offerFirst(it) }
     }
 
     private fun removeInterceptors() {
-        uiInterceptor?.let { UI_INTERCEPTORS.removeFirstOccurrence(it) }
+        uiObjectInterceptor?.let { UI_OBJECT_INTERCEPTORS.removeFirstOccurrence(it) }
         uiDeviceInterceptor?.let { UI_DEVICE_INTERCEPTORS.removeFirstOccurrence(it) }
     }
 
     companion object {
-        internal val UI_INTERCEPTORS: Deque<UiInterceptor<UiInteraction, UiAssertion, UiAction>> = LinkedList()
+        internal val UI_OBJECT_INTERCEPTORS: Deque<UiInterceptor<UiObjectInteraction, UiObjectAssertion, UiObjectAction>> = LinkedList()
         internal val UI_DEVICE_INTERCEPTORS: Deque<UiInterceptor<UiDeviceInteraction, UiDeviceAssertion, UiDeviceAction>> = LinkedList()
     }
 }

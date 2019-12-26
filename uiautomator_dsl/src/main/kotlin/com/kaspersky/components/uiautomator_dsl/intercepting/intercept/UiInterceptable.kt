@@ -1,9 +1,9 @@
 package com.kaspersky.components.uiautomator_dsl.intercepting.intercept
 
-import com.kaspersky.components.uiautomator_dsl.intercepting.delegate.Delegate
+import com.kaspersky.components.uiautomator_dsl.intercepting.delegate.UiDelegate
 
 interface UiInterceptable<INTERACTION, ASSERTION, ACTION> {
-    val view: Delegate<INTERACTION, ASSERTION, ACTION>
+    val view: UiDelegate<INTERACTION, ASSERTION, ACTION>
 
     /**
      * Sets the interceptors for the instance.

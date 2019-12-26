@@ -2,7 +2,7 @@ package com.kaspersky.components.uiautomator_dsl.intercepting.intercept
 
 import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion.*
 import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiDeviceInteraction
-import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiInteraction
+import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiObjectInteraction
 
 class UiInterceptor <INTERACTION, ASSERTION, ACTION>(
     val onCheck: UiInterception<(INTERACTION, ASSERTION) -> Unit>?,
@@ -68,7 +68,7 @@ class UiInterceptor <INTERACTION, ASSERTION, ACTION>(
      * @see com.agoda.kakao.screen.Screen
      */
     class Configurator {
-        private var uiInterceptor: UiInterceptor<UiInteraction, UiAssertion, UiAction>? = null
+        private var uiObjectObjectInterceptor: UiInterceptor<UiObjectInteraction, UiObjectAssertion, UiObjectAction>? = null
         private var uiDeviceInterceptor: UiInterceptor<UiDeviceInteraction, UiDeviceAssertion, UiDeviceAction>? = null
 
         /**
@@ -76,19 +76,19 @@ class UiInterceptor <INTERACTION, ASSERTION, ACTION>(
          *
          * @param builder Builder of interceptor for [ViewInteraction]
          */
-        fun onUiInteraction(builder: Builder<UiInteraction, UiAssertion, UiAction>.() -> Unit) {
-            uiInterceptor = Builder<UiInteraction, UiAssertion, UiAction>().apply(builder).build()
+        fun onUiInteraction(builder: Builder<UiObjectInteraction, UiObjectAssertion, UiObjectAction>.() -> Unit) {
+            uiObjectObjectInterceptor = Builder<UiObjectInteraction, UiObjectAssertion, UiObjectAction>().apply(builder).build()
         }
 
         fun onUiDeviceInteraction(builder: Builder<UiDeviceInteraction, UiDeviceAssertion, UiDeviceAction>.() -> Unit) {
             uiDeviceInterceptor = Builder<UiDeviceInteraction, UiDeviceAssertion, UiDeviceAction>().apply(builder).build()
         }
 
-        internal fun configure() = Configuration(uiInterceptor, uiDeviceInterceptor)
+        internal fun configure() = Configuration(uiObjectObjectInterceptor, uiDeviceInterceptor)
     }
 
     data class Configuration(
-        val uiUiInterceptor: UiInterceptor<UiInteraction, UiAssertion, UiAction>?,
+        val uiUiObjectObjectInterceptor: UiInterceptor<UiObjectInteraction, UiObjectAssertion, UiObjectAction>?,
         val uiDeviceInterceptor: UiInterceptor<UiDeviceInteraction, UiDeviceAssertion, UiDeviceAction>?
     )
 }

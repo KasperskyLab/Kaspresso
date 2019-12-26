@@ -1,11 +1,11 @@
 package com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion
 
 import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiDeviceInteraction
-import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiInteraction
+import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiObjectInteraction
 
-typealias UiAction = UiOperation<UiInteraction>
+typealias UiObjectAction = UiOperation<UiObjectInteraction>
 
-typealias UiAssertion = UiOperation<UiInteraction>
+typealias UiObjectAssertion = UiOperation<UiObjectInteraction>
 
 typealias UiDeviceAction = UiOperation<UiDeviceInteraction>
 

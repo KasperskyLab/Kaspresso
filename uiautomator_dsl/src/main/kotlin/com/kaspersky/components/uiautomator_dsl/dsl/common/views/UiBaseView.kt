@@ -7,24 +7,24 @@ import com.kaspersky.components.uiautomator_dsl.dsl.common.UiAutomatorDslMarker
 import com.kaspersky.components.uiautomator_dsl.dsl.common.actions.UiBaseActions
 import com.kaspersky.components.uiautomator_dsl.dsl.common.assertions.UiBaseAssertions
 import com.kaspersky.components.uiautomator_dsl.dsl.common.builders.UiViewBuilder
-import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion.UiAction
-import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion.UiAssertion
+import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion.UiObjectAction
+import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion.UiObjectAssertion
 import com.kaspersky.components.uiautomator_dsl.intercepting.intercept.UiInterceptable
-import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiInteraction
-import com.kaspersky.components.uiautomator_dsl.intercepting.delegate.UiDelegate
+import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiObjectInteraction
+import com.kaspersky.components.uiautomator_dsl.intercepting.delegate.UiObjectDelegate
 
 @Suppress("UNCHECKED_CAST")
 @UiAutomatorDslMarker
 open class UiBaseView<out T>(selector: BySelector) : UiBaseActions, UiBaseAssertions,
-    UiInterceptable<UiInteraction, UiAssertion, UiAction> {
+    UiInterceptable<UiObjectInteraction, UiObjectAssertion, UiObjectAction> {
 
-    override val view: UiDelegate = UiDelegate(
+    override val view: UiObjectDelegate = UiObjectDelegate(
         UiDevice.getInstance(InstrumentationRegistry.getInstrumentation()),
         selector,
         this::class.java.simpleName
     )
-    override val actionsView: UiDelegate get() = view
-    override val assertionsView: UiDelegate get() = view
+    override val actionsView: UiObjectDelegate get() = view
+    override val assertionsView: UiObjectDelegate get() = view
 
     constructor(func: UiViewBuilder.() -> Unit) : this(UiViewBuilder().apply(func).build())
 
@@ -36,7 +36,7 @@ open class UiBaseView<out T>(selector: BySelector) : UiBaseActions, UiBaseAssert
     operator fun invoke(safely: Boolean = false, function: T.() -> Unit) {
         view.loadView()
         // todo remove it?
-        if (safely && view.interaction.uiObject2 == null) return
+        if (safely && view.objectInteraction.uiObject2 == null) return
         function(this as T)
     }
 }

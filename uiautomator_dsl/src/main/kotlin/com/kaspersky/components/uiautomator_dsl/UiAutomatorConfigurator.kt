@@ -3,11 +3,11 @@ package com.kaspersky.components.uiautomator_dsl
 import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion.*
 import com.kaspersky.components.uiautomator_dsl.intercepting.intercept.UiInterceptor
 import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiDeviceInteraction
-import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiInteraction
+import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiObjectInteraction
 
 object UiAutomatorConfigurator {
 
-    internal var uiInterceptor: UiInterceptor<UiInteraction, UiAssertion, UiAction>? = null
+    internal var uiObjectInterceptor: UiInterceptor<UiObjectInteraction, UiObjectAssertion, UiObjectAction>? = null
     internal var uiDeviceInterceptor: UiInterceptor<UiDeviceInteraction, UiDeviceAssertion, UiDeviceAction>? = null
 
     /**
@@ -29,7 +29,7 @@ object UiAutomatorConfigurator {
      */
     fun intercept(configurator: UiInterceptor.Configurator.() -> Unit) {
         UiInterceptor.Configurator().apply(configurator).configure().also { (uiInterceptor, uiDeviceInterceptor) ->
-            this.uiInterceptor = uiInterceptor
+            this.uiObjectInterceptor = uiInterceptor
             this.uiDeviceInterceptor = uiDeviceInterceptor
         }
     }
@@ -41,7 +41,7 @@ object UiAutomatorConfigurator {
      * @see UiInterceptor
      */
     fun reset() {
-        uiInterceptor = null
+        uiObjectInterceptor = null
         uiDeviceInterceptor = null
     }
 

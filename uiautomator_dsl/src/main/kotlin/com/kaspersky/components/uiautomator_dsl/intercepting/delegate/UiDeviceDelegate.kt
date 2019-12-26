@@ -9,10 +9,9 @@ import com.kaspersky.components.uiautomator_dsl.intercepting.intercept.UiInterce
 
 class UiDeviceDelegate(
     device: UiDevice
-) : Delegate<UiDeviceInteraction, UiDeviceAssertion, UiDeviceAction> {
+) : UiDelegate<UiDeviceInteraction, UiDeviceAssertion, UiDeviceAction> {
 
     override val interaction = UiDeviceInteraction(device)
-
     override var interceptor: UiInterceptor<UiDeviceInteraction, UiDeviceAssertion, UiDeviceAction>? = null
 
     /**
@@ -43,7 +42,7 @@ class UiDeviceDelegate(
         type: UiOperationType,
         description: String? = null,
         action: UiDevice.() -> Unit
-    ) = UiDeviceOperationImpl(type, description, action)
+    ) = UiDeviceOperation(type, description, action)
 
     fun check(uiDeviceAssertion: UiDeviceAssertion) {
         if (!interceptCheck(uiDeviceAssertion)) uiDeviceAssertion.execute(interaction)
