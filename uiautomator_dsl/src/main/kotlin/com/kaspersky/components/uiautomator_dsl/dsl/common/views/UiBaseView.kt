@@ -18,11 +18,15 @@ import com.kaspersky.components.uiautomator_dsl.intercepting.delegate.UiObjectDe
 open class UiBaseView<out T>(selector: BySelector) : UiBaseActions, UiBaseAssertions,
     UiInterceptable<UiObjectInteraction, UiObjectAssertion, UiObjectAction> {
 
-    override val view: UiObjectDelegate = UiObjectDelegate(
-        UiDevice.getInstance(InstrumentationRegistry.getInstrumentation()),
-        selector,
-        this::class.java.simpleName
-    )
+    override val view: UiObjectDelegate by lazy {
+        val delegate = UiObjectDelegate(
+            UiDevice.getInstance(InstrumentationRegistry.getInstrumentation()),
+            selector,
+            this::class.java.simpleName
+        )
+        delegate.loadView()
+        delegate
+    }
     override val actionsView: UiObjectDelegate get() = view
     override val assertionsView: UiObjectDelegate get() = view
 
