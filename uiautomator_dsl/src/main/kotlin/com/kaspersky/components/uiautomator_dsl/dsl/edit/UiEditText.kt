@@ -6,7 +6,7 @@ import com.kaspersky.components.uiautomator_dsl.dsl.common.views.UiBaseView
 import com.kaspersky.components.uiautomator_dsl.dsl.text.UiTextViewAssertions
 
 /**
- * Ui View with UiEditableActions and UiTextViewAssertions
+ * Ui View with [UiEditableActions] and [UiTextViewAssertions]
  *
  * @see UiEditableActions
  * @see UiTextViewAssertions

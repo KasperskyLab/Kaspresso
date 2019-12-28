@@ -4,7 +4,8 @@ import androidx.test.uiautomator.BySelector
 import com.kaspersky.components.uiautomator_dsl.dsl.common.builders.UiViewBuilder
 
 /**
- * Simple view with UiBaseActions and UiBaseAssertions
+ * Simple view with [UiBaseAction][com.kaspersky.components.uiautomator_dsl.dsl.common.actions.UiBaseActions] and
+ * [UiBaseAssertion][com.kaspersky.components.uiautomator_dsl.dsl.common.assertions.UiBaseAssertions]
  *
  * @see com.kaspersky.components.uiautomator_dsl.dsl.common.actions.UiBaseActions
  * @see com.kaspersky.components.uiautomator_dsl.dsl.common.assertions.UiBaseAssertions
