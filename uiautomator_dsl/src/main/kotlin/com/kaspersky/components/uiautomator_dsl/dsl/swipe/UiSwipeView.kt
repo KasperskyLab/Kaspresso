@@ -1,4 +1,4 @@
-package com.kaspersky.components.uiautomator_dsl.dsl.switch
+package com.kaspersky.components.uiautomator_dsl.dsl.swipe
 
 import androidx.test.uiautomator.BySelector
 import com.kaspersky.components.uiautomator_dsl.dsl.common.assertions.UiBaseAssertions
@@ -6,12 +6,12 @@ import com.kaspersky.components.uiautomator_dsl.dsl.common.builders.UiViewBuilde
 import com.kaspersky.components.uiautomator_dsl.dsl.common.views.UiBaseView
 
 /**
- * Ui View with [UiSwitchableActions] and [UiBaseAssertions]
+ * Ui View with [UiSwipeableActions] and [UiBaseAssertions]
  *
- * @see UiSwitchableActions
+ * @see UiSwipeableActions
  * @see UiBaseAssertions
  */
-class UiSwitch : UiBaseView<UiSwitch>, UiSwitchableActions, UiBaseAssertions {
+class UiSwipeView : UiBaseView<UiSwipeView>, UiSwipeableActions, UiBaseAssertions {
     constructor(selector: BySelector) : super(selector)
     constructor(builder: UiViewBuilder.() -> Unit) : super(builder)
 }

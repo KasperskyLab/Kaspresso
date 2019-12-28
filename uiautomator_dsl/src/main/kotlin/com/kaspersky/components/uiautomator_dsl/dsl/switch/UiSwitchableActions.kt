@@ -5,7 +5,7 @@ import com.kaspersky.components.uiautomator_dsl.dsl.switch.UiSwitchableActions.S
 import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion.UiOperationType
 
 /**
- * Provides switchable actions for UiSwitch
+ * Provides switchable actions for UiSwitchView
  */
 interface UiSwitchableActions : UiBaseActions {
 
