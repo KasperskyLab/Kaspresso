@@ -5,6 +5,9 @@ import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertio
 import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion.UiOperationType
 import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiObjectInteraction
 
+/**
+ * Special separate Assertion to determine UiAutomator View is displayed or not
+ */
 class DisplayedObjectAssertion private constructor(
     private val type: DisplayedAssertType
 ) : UiOperation<UiObjectInteraction> {

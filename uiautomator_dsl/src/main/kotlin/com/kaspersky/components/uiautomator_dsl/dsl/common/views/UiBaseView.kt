@@ -13,12 +13,21 @@ import com.kaspersky.components.uiautomator_dsl.intercepting.intercept.UiInterce
 import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiObjectInteraction
 import com.kaspersky.components.uiautomator_dsl.intercepting.delegate.UiObjectDelegate
 
+/**
+ * Base class for all UiAutomator DSL views
+ *
+ * This base class allows create new custom view with ease. All you
+ * have to do is to extend this class, implement all necessarily additional
+ * actions/assertions interfaces and override necessary constructors
+ *
+ * @param T Type of your custom view. Needs to be defined to enable invoke() for descendants
+ */
 @Suppress("UNCHECKED_CAST")
 @UiAutomatorDslMarker
 open class UiBaseView<out T>(selector: BySelector) : UiBaseActions, UiBaseAssertions,
     UiInterceptable<UiObjectInteraction, UiObjectAssertion, UiObjectAction> {
 
-    override val view: UiObjectDelegate by lazy {
+    final override val view: UiObjectDelegate by lazy {
         val delegate = UiObjectDelegate(
             UiDevice.getInstance(InstrumentationRegistry.getInstrumentation()),
             selector,
@@ -27,12 +36,21 @@ open class UiBaseView<out T>(selector: BySelector) : UiBaseActions, UiBaseAssert
         delegate.loadView()
         delegate
     }
-    override val actionsView: UiObjectDelegate get() = view
-    override val assertionsView: UiObjectDelegate get() = view
-
-    constructor(func: UiViewBuilder.() -> Unit) : this(UiViewBuilder().apply(func).build())
+    override val actionsView: UiObjectDelegate = view
+    override val assertionsView: UiObjectDelegate = view
 
     /**
+     * Constructs view class with UiObject interaction from given UiViewBuilder
+     *
+     * @param function UiViewBuilder which will result in [UiObjectInteraction]
+     *
+     * @see UiViewBuilder
+     */
+    constructor(function: UiViewBuilder.() -> Unit) : this(UiViewBuilder().apply(function).build())
+
+    /**
+     * Operator that allows usage of DSL style
+     *
      * @param safely - Set to true only when you are not sure if the [innerView] is null or not.
      * If true, the function invocation will be skipped if the view does not exist, so Exception
      * won't be thrown.

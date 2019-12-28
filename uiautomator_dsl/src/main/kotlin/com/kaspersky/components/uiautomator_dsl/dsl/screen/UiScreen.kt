@@ -10,16 +10,27 @@ import com.kaspersky.components.uiautomator_dsl.intercepting.intercept.UiInterce
 import com.kaspersky.components.uiautomator_dsl.intercepting.delegate.UiDeviceDelegate
 import java.util.*
 
+/**
+ * Container class for UiAutomator elements.
+ *
+ * This class groups UI elements and grants access to basic actions,
+ * such as pressBack
+ *
+ * @param T type of your screen, done to enable invoke() for its children
+ *
+ * @see UiScreenActions
+ */
 @Suppress("UNCHECKED_CAST")
 @UiAutomatorDslMarker
 open class UiScreen<out T : UiScreen<T>> : UiScreenActions {
 
-    override val proxyDevice: UiDeviceDelegate = UiDeviceDelegate(
+    override val device: UiDeviceDelegate = UiDeviceDelegate(
         UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
     )
 
     private var uiObjectInterceptor: UiInterceptor<UiObjectInteraction, UiObjectAssertion, UiObjectAction>? = null
     private var uiDeviceInterceptor: UiInterceptor<UiDeviceInteraction, UiDeviceAssertion, UiDeviceAction>? = null
+
     private var isActive = false
 
     /**
@@ -31,13 +42,6 @@ open class UiScreen<out T : UiScreen<T>> : UiScreenActions {
      * val screen = SomeScreen()
      *
      * screen { // Active
-     *     view { click() }
-     *     ...
-     * } // Inactive
-     *
-     * // OR
-     *
-     * onScreen<SomeScreen>() { // Active
      *     view { click() }
      *     ...
      * } // Inactive
@@ -79,6 +83,11 @@ open class UiScreen<out T : UiScreen<T>> : UiScreenActions {
         uiDeviceInterceptor = null
     }
 
+    /**
+     * Operator that allows usage of DSL style
+     *
+     * @param function Tail lambda with receiver which is your screen
+     */
     operator fun invoke(function: T.() -> Unit) {
         isActive = true
         addInterceptors()
