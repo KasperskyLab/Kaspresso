@@ -33,8 +33,16 @@ interface UiEditableActions : UiBaseActions {
         ) { this.text = text }
     }
 
+    /**
+     * Clears the text content into the view
+     */
+    fun clearText() {
+        actionsView.perform(CLEAR_TEXT) { clear() }
+    }
+
     enum class EditableUiOperationType : UiOperationType {
         TYPE_TEXT,
-        REPLACE_TEXT
+        REPLACE_TEXT,
+        CLEAR_TEXT
     }
 }
