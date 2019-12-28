@@ -38,8 +38,7 @@ interface UiBaseActions {
         actionsView.perform(LONG_CLICK) { longClick() }
     }
 
-    enum class BaseUiOperationType :
-        UiOperationType {
+    enum class BaseUiOperationType : UiOperationType {
         CLICK,
         DOUBLE_CLICK,
         LONG_CLICK

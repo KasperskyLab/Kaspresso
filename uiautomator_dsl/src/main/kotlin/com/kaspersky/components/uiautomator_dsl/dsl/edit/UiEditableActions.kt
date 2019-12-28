@@ -5,7 +5,7 @@ import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertio
 import com.kaspersky.components.uiautomator_dsl.dsl.edit.UiEditableActions.EditableUiOperationType.*
 
 /**
- * Provides editable actions for views
+ * Provides editable actions for UiEditText
  */
 interface UiEditableActions : UiBaseActions {
 

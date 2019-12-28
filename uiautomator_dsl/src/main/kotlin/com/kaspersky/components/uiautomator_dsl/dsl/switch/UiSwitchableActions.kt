@@ -4,6 +4,9 @@ import com.kaspersky.components.uiautomator_dsl.dsl.common.actions.UiBaseActions
 import com.kaspersky.components.uiautomator_dsl.dsl.switch.UiSwitchableActions.SwitchableUiOperationType.SWITCH
 import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion.UiOperationType
 
+/**
+ * Provides switchable actions for UiSwitch
+ */
 interface UiSwitchableActions : UiBaseActions {
 
     enum class Direction { RIGHT, LEFT }
