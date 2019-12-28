@@ -33,8 +33,7 @@ interface UiEditableActions : UiBaseActions {
         ) { this.text = text }
     }
 
-    enum class EditableUiOperationType :
-        UiOperationType {
+    enum class EditableUiOperationType : UiOperationType {
         TYPE_TEXT,
         REPLACE_TEXT
     }
