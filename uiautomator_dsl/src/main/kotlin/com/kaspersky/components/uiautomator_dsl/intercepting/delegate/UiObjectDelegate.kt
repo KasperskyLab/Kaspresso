@@ -3,12 +3,19 @@ package com.kaspersky.components.uiautomator_dsl.intercepting.delegate
 import androidx.test.uiautomator.BySelector
 import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.UiObject2
-import com.kaspersky.components.uiautomator_dsl.UiAutomatorConfigurator
+import com.kaspersky.components.uiautomator_dsl.UiAutomatorDslConfigurator
 import com.kaspersky.components.uiautomator_dsl.dsl.screen.UiScreen
 import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion.*
 import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiObjectInteraction
 import com.kaspersky.components.uiautomator_dsl.intercepting.intercept.UiInterceptor
 
+/**
+ * Delegation class for [androidx.test.uiautomator.UiObject2].
+ * Wraps all available public calls and intercepts into [check] and [perform].
+ *
+ * @see UiDelegate
+ * @see UiInterceptor
+ */
 class UiObjectDelegate(
     device: UiDevice,
     selector: BySelector,
@@ -22,9 +29,6 @@ class UiObjectDelegate(
         interaction.tryToFindUiObject()
     }
 
-    /**
-     * @action must throw exception if something went wrong
-     */
     fun check(
         type: UiOperationType,
         description: String? = null,
@@ -34,9 +38,6 @@ class UiObjectDelegate(
         check(uiAssertion)
     }
 
-    /**
-     * @action must throw exception if something went wrong
-     */
     fun perform(
         type: UiOperationType,
         description: String? = null,
@@ -63,7 +64,7 @@ class UiObjectDelegate(
     override fun screenInterceptors(): Iterable<UiInterceptor<UiObjectInteraction, UiObjectAssertion, UiObjectAction>> =
         UiScreen.UI_OBJECT_INTERCEPTORS
 
-    override fun kakaoInterceptor(): UiInterceptor<UiObjectInteraction, UiObjectAssertion, UiObjectAction>? =
-        UiAutomatorConfigurator.uiObjectInterceptor
+    override fun globalInterceptor(): UiInterceptor<UiObjectInteraction, UiObjectAssertion, UiObjectAction>? =
+        UiAutomatorDslConfigurator.uiObjectInterceptor
 
 }

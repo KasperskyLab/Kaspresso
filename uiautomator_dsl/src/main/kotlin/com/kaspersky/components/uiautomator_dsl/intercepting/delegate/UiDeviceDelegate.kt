@@ -1,12 +1,19 @@
 package com.kaspersky.components.uiautomator_dsl.intercepting.delegate
 
 import androidx.test.uiautomator.UiDevice
-import com.kaspersky.components.uiautomator_dsl.UiAutomatorConfigurator
+import com.kaspersky.components.uiautomator_dsl.UiAutomatorDslConfigurator
 import com.kaspersky.components.uiautomator_dsl.dsl.screen.UiScreen
 import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion.*
 import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiDeviceInteraction
 import com.kaspersky.components.uiautomator_dsl.intercepting.intercept.UiInterceptor
 
+/**
+ * Delegation class for [androidx.test.uiautomator.UiDevice].
+ * Wraps all available public calls and intercepts into [check] and [perform].
+ *
+ * @see Delegate
+ * @see Interceptor
+ */
 class UiDeviceDelegate(
     device: UiDevice
 ) : UiDelegate<UiDeviceInteraction, UiDeviceAssertion, UiDeviceAction> {
@@ -55,6 +62,6 @@ class UiDeviceDelegate(
     override fun screenInterceptors(): Iterable<UiInterceptor<UiDeviceInteraction, UiDeviceAssertion, UiDeviceAction>> =
         UiScreen.UI_DEVICE_INTERCEPTORS
 
-    override fun kakaoInterceptor(): UiInterceptor<UiDeviceInteraction, UiDeviceAssertion, UiDeviceAction>? =
-        UiAutomatorConfigurator.uiDeviceInterceptor
+    override fun globalInterceptor(): UiInterceptor<UiDeviceInteraction, UiDeviceAssertion, UiDeviceAction>? =
+        UiAutomatorDslConfigurator.uiDeviceInterceptor
 }

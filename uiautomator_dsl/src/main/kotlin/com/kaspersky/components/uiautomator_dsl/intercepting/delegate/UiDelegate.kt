@@ -2,17 +2,25 @@ package com.kaspersky.components.uiautomator_dsl.intercepting.delegate
 
 import com.kaspersky.components.uiautomator_dsl.intercepting.intercept.UiInterceptor
 
+/**
+ * Base delegate interface for UiAutomator DSL.
+ *
+ * Provides functionality of aggregating interceptors and invoking them on `check`
+ * and `perform` invocations.
+ *
+ * @see UiInterceptor
+ */
 interface UiDelegate<INTERACTION, ASSERTION, ACTION> {
     val interaction: INTERACTION
     var interceptor: UiInterceptor<INTERACTION, ASSERTION, ACTION>?
 
     fun screenInterceptors(): Iterable<UiInterceptor<INTERACTION, ASSERTION, ACTION>>
-    fun kakaoInterceptor(): UiInterceptor<INTERACTION, ASSERTION, ACTION>?
+    fun globalInterceptor(): UiInterceptor<INTERACTION, ASSERTION, ACTION>?
 
     /**
      * Runs the interceptors available for the given delegate during the `check` operation.
      *
-     * @return `true` if the call chain has been interrupted and there is no need to do Espresso call,
+     * @return `true` if the call chain has been interrupted and there is no need to do UiAutomator call,
      *         false otherwise.
      */
     fun interceptCheck(assertion: ASSERTION): Boolean {
@@ -22,13 +30,13 @@ interface UiDelegate<INTERACTION, ASSERTION, ACTION> {
 
         return interceptor?.let { intercept(it) } ?: false ||
                 screenInterceptors().any { intercept(it) } ||
-                kakaoInterceptor()?.let { intercept(it) } ?: false
+                globalInterceptor()?.let { intercept(it) } ?: false
     }
 
     /**
      * Runs the interceptors available for the given delegate during the `execute` operation.
      *
-     * @return `true` if the call chain has been interrupted and there is no need to do Espresso call,
+     * @return `true` if the call chain has been interrupted and there is no need to do UiAutomator call,
      *         false otherwise.
      */
     fun interceptPerform(action: ACTION): Boolean {
@@ -38,7 +46,7 @@ interface UiDelegate<INTERACTION, ASSERTION, ACTION> {
 
         return interceptor?.let { intercept(it) } ?: false ||
                 screenInterceptors().any { intercept(it) } ||
-                kakaoInterceptor()?.let { intercept(it) } ?: false
+                globalInterceptor()?.let { intercept(it) } ?: false
     }
 
     private fun interceptOnAll(uiInterceptor: UiInterceptor<INTERACTION, ASSERTION, ACTION>): Boolean {

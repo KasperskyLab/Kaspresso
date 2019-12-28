@@ -3,6 +3,9 @@ package com.kaspersky.components.uiautomator_dsl.intercepting.action_and_asserti
 import androidx.test.uiautomator.UiDevice
 import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiDeviceInteraction
 
+/**
+ * Responsible for executing an interaction on the given UiDevice element
+ */
 class UiDeviceOperation(
     private val type: UiOperationType,
     private val description: String?,

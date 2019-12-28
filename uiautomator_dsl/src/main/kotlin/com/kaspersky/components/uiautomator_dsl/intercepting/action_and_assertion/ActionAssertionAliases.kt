@@ -3,6 +3,10 @@ package com.kaspersky.components.uiautomator_dsl.intercepting.action_and_asserti
 import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiDeviceInteraction
 import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiObjectInteraction
 
+/**
+ * Appropriate type aliases of UiOperation according to name paradigm in Kakao library
+ */
+
 typealias UiObjectAction = UiOperation<UiObjectInteraction>
 
 typealias UiObjectAssertion = UiOperation<UiObjectInteraction>

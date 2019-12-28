@@ -5,7 +5,7 @@ import com.kaspersky.components.uiautomator_dsl.intercepting.intercept.UiInterce
 import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiDeviceInteraction
 import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiObjectInteraction
 
-object UiAutomatorConfigurator {
+object UiAutomatorDslConfigurator {
 
     internal var uiObjectInterceptor: UiInterceptor<UiObjectInteraction, UiObjectAssertion, UiObjectAction>? = null
     internal var uiDeviceInterceptor: UiInterceptor<UiDeviceInteraction, UiDeviceAssertion, UiDeviceAction>? = null
@@ -13,15 +13,15 @@ object UiAutomatorConfigurator {
     /**
      * Operator that allows usage of DSL style
      *
-     * @param function Tail lambda with receiver which is your Kakao runtime
+     * @param function tail lambda with receiver which is your UiAutomator DSL runtime
      */
-    operator fun invoke(function: UiAutomatorConfigurator.() -> Unit) {
+    operator fun invoke(function: UiAutomatorDslConfigurator.() -> Unit) {
         function(this)
     }
 
     /**
-     * Sets the interceptors for the whole Kakao runtime.
-     * Interceptors will be invoked on all of the interactions with the KView instances.
+     * Sets the interceptors for the whole UiAutomator DSL runtime.
+     * Interceptors will be invoked on all of the interactions with the UiView instances.
      *
      * @param configurator Configuration of the interceptors
      *
@@ -35,7 +35,7 @@ object UiAutomatorConfigurator {
     }
 
     /**
-     * Removes the interceptors from the Kakao runtime.
+     * Removes the interceptors from the UiAutomator DSL runtime.
      *
      * @see intercept
      * @see UiInterceptor

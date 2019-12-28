@@ -5,6 +5,9 @@ import androidx.test.uiautomator.BySelector
 import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.UiObject2
 
+/**
+ * Provides an interaction to work with the UiView described by [selector]
+ */
 class UiObjectInteraction(
     val device: UiDevice,
     val selector: BySelector,

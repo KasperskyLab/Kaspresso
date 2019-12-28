@@ -4,6 +4,9 @@ import androidx.test.uiautomator.UiObject2
 import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiObjectInteraction
 import com.kaspersky.components.uiautomator_dsl.intercepting.exception.UnfoundedUiObjectException
 
+/**
+ * Responsible for executing an interaction on the given UiObject2 element
+ */
 class UiObjectOperation(
     private val type: UiOperationType,
     private val description: String?,

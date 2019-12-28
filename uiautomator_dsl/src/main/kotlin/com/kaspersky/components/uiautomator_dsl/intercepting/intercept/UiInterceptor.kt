@@ -4,6 +4,36 @@ import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertio
 import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiDeviceInteraction
 import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiObjectInteraction
 
+/**
+ * Base class for intercepting the call chain from UiAutomator DSL to UiAutomator.
+ *
+ * Interceptors can be provided through [UiAutomatorDslConfigurator][com.kaspersky.components.uiautomator_dsl.UiAutomatorDslConfigurator] runtime,
+ * different [UiScreens][com.kaspersky.components.uiautomator_dsl.dsl.screen.UiScreen] as well as [UiViews][com.kaspersky.components.uiautomator_dsl.dsl.common.views.UiBaseView].
+ *
+ * Interceptors are stacked during the runtime for any UiAutomator_DSL-UiAutomator `check` and `perform` operations.
+ * The stack ordering is following: UiView interceptor -> UiScreen interceptors -> UiAutomatorDsl interceptor.
+ *
+ * Any of the interceptors in the chain can break the chain call by setting `isOverride` to true
+ * in [onCheck][Builder.onCheck], [onPerform][Builder.onPerform] or [onAll][Builder.onAll] interception
+ * functions during the configuration. Doing this will not only prevent underlying
+ * interceptors from being invoked, but prevents UiAutomator from executing the operation. In that case,
+ * responsibility for actually making UiAutomator call lies on developer.
+ *
+ * For each operation the interceptor invocation cycle will be as follows:
+ * ```
+ * // For check operation
+ * onAll?.invoke()
+ * onCheck?.invoke()
+ *
+ * // For perform operation
+ * onAll?.invoke()
+ * onPerform?.invoke()
+ * ```
+ *
+ * @see com.kaspersky.components.uiautomator_dsl.UiAutomatorDslConfigurator
+ * @see com.kaspersky.components.uiautomator_dsl.dsl.screen.UiScreen
+ * @see com.kaspersky.components.uiautomator_dsl.dsl.common.views.UiBaseView
+ */
 class UiInterceptor <INTERACTION, ASSERTION, ACTION>(
     val onCheck: UiInterception<(INTERACTION, ASSERTION) -> Unit>?,
     val onPerform: UiInterception<(INTERACTION, ACTION) -> Unit>?,
@@ -20,9 +50,9 @@ class UiInterceptor <INTERACTION, ASSERTION, ACTION>(
         private var onAll: UiInterception<(INTERACTION) -> Unit>? = null
 
         /**
-         * Sets the interceptor for the `check` operation for a given objectInteraction.
+         * Sets the interceptor for the `check` operation for a given interaction.
          * If overridden, breaks the call chain of operation and transfers the responsibility
-         * to invoke the Espresso on the developer.
+         * to invoke the UiAutomator on the developer.
          *
          * @param isOverride if `true` - breaks the call chain, false otherwise
          * @param interceptor lambda with intercepting logic
@@ -32,9 +62,9 @@ class UiInterceptor <INTERACTION, ASSERTION, ACTION>(
         }
 
         /**
-         * Sets the interceptor for the `execute` operation for a given objectInteraction.
+         * Sets the interceptor for the `execute` operation for a given interaction.
          * If overridden, breaks the call chain of operation and transfers the responsibility
-         * to invoke the Espresso on the developer.
+         * to invoke the UiAutomator on the developer.
          *
          * @param isOverride if `true` - breaks the call chain, false otherwise
          * @param interceptor lambda with intercepting logic
@@ -44,9 +74,9 @@ class UiInterceptor <INTERACTION, ASSERTION, ACTION>(
         }
 
         /**
-         * Sets the interceptor for the `check` and `execute` operations for a given objectInteraction.
+         * Sets the interceptor for the `check` and `execute` operations for a given interaction.
          * If overridden, breaks the call chain of operation and transfers the responsibility
-         * to invoke the Espresso on the developer.
+         * to invoke the UiAutomator on the developer.
          *
          * This interceptor is prioritized and is being invoked first for both operations.
          *
@@ -62,24 +92,29 @@ class UiInterceptor <INTERACTION, ASSERTION, ACTION>(
 
     /**
      * Configuration class that is used for building interceptors on the
-     * [Kakao][com.agoda.kakao.Kakao] runtime and [Screen][com.agoda.kakao.screen.Screen] levels.
+     * [UiAutomatorDslConfigurator][com.kaspersky.components.uiautomator_dsl.UiAutomatorDslConfigurator] runtime and [UiScreens][com.kaspersky.components.uiautomator_dsl.dsl.screen.UiScreen] levels.
      *
-     * @see com.agoda.kakao.Kakao
-     * @see com.agoda.kakao.screen.Screen
+     * @see com.kaspersky.components.uiautomator_dsl.UiAutomatorDslConfigurator
+     * @see com.kaspersky.components.uiautomator_dsl.dsl.screen.UiScreen
      */
     class Configurator {
         private var uiObjectObjectInterceptor: UiInterceptor<UiObjectInteraction, UiObjectAssertion, UiObjectAction>? = null
         private var uiDeviceInterceptor: UiInterceptor<UiDeviceInteraction, UiDeviceAssertion, UiDeviceAction>? = null
 
         /**
-         * Setups the interceptor for `check` and `execute` operations happening through [ViewInteraction]
+         * Setups the interceptor for `check` and `execute` operations happening through [UiObjectInteraction]
          *
-         * @param builder Builder of interceptor for [ViewInteraction]
+         * @param builder Builder of interceptor for [UiObjectInteraction]
          */
         fun onUiInteraction(builder: Builder<UiObjectInteraction, UiObjectAssertion, UiObjectAction>.() -> Unit) {
             uiObjectObjectInterceptor = Builder<UiObjectInteraction, UiObjectAssertion, UiObjectAction>().apply(builder).build()
         }
 
+        /**
+         * Setups the interceptor for `check` and `execute` operations happening through [UiDeviceInteraction]
+         *
+         * @param builder Builder of interceptor for [UiDeviceInteraction]
+         */
         fun onUiDeviceInteraction(builder: Builder<UiDeviceInteraction, UiDeviceAssertion, UiDeviceAction>.() -> Unit) {
             uiDeviceInterceptor = Builder<UiDeviceInteraction, UiDeviceAssertion, UiDeviceAction>().apply(builder).build()
         }
