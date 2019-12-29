@@ -7,12 +7,10 @@ import com.kaspersky.kaspressample.screen.SimpleScreen
 import org.junit.Rule
 import org.junit.Test
 
-
 class MainSectionEnricherTest : EnricherTestCase() {
 
     @get:Rule
     val activityTestRule = ActivityTestRule(MainActivity::class.java, true, true)
-
 
     @Test
     fun enricherTestCase() {
@@ -34,6 +32,4 @@ class MainSectionEnricherTest : EnricherTestCase() {
             }
         }
     }
-
-
 }

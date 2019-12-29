@@ -1,6 +1,6 @@
 package com.kaspersky.kaspressample.configurator_tests.enricher_tests.dsl
 
-import java.util.*
+import java.util.UUID
 
 @EnricherTestCaseDsl
 class EnricherTestDsl {
@@ -9,12 +9,10 @@ class EnricherTestDsl {
 
     private val uniqueTestId = UUID.randomUUID().toString()
 
-
     fun user(block: UserDsl.() -> Unit) {
         val userDsl = UserDsl(uniqueTestId)
         userDsl.block()
 
         users += userDsl
     }
-
 }

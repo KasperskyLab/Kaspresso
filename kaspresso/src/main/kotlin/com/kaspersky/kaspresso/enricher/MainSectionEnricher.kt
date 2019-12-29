@@ -41,5 +41,4 @@ interface MainSectionEnricher<Data> {
      * @param testContext - context of your test with data.
      */
     fun afterMainSectionRun(testInfo: TestInfo, testContext: TestContext<Data>) = Unit
-
 }

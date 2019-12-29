@@ -8,7 +8,6 @@ import com.kaspersky.kaspressample.configurator_tests.enricher_tests.enrichers.L
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.testcases.api.testcase.BaseTestCase
 
-
 /**
  * Example of base class with not default TestContext and main section enrichers.
  */

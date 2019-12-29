@@ -5,7 +5,6 @@ import com.kaspersky.kaspresso.enricher.MainSectionEnricher
 import com.kaspersky.kaspresso.testcases.core.testcontext.TestContext
 import com.kaspersky.kaspresso.testcases.models.info.TestInfo
 
-
 class LoggingMainSectionEnricher : MainSectionEnricher<EnricherTestData> {
 
     override fun beforeMainSectionRun(testInfo: TestInfo, testContext: TestContext<EnricherTestData>) {
@@ -17,5 +16,4 @@ class LoggingMainSectionEnricher : MainSectionEnricher<EnricherTestData> {
         testContext.testLogger.d("After main section run...")
         testContext.testLogger.d("Check posts count: ${testContext.data.posts.size}")
     }
-
 }

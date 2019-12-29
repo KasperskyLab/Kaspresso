@@ -1,6 +1,5 @@
 package com.kaspersky.kaspresso.enricher.impl.composite
 
-
 import com.kaspersky.kaspresso.enricher.MainSectionEnricher
 import com.kaspersky.kaspresso.internal.extensions.other.forEachSafely
 import com.kaspersky.kaspresso.testcases.core.testcontext.TestContext
@@ -23,5 +22,4 @@ class CompositeMainSectionEnricher<Data>(
     override fun afterMainSectionRun(testInfo: TestInfo, testContext: TestContext<Data>) {
         mainSectionEnrichers.forEachSafely(exceptions) { it.afterMainSectionRun(testInfo, testContext) }
     }
-
 }

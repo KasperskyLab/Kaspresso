@@ -1,6 +1,5 @@
 package com.kaspersky.kaspressample.configurator_tests.enricher_tests.dsl
 
-
 @EnricherTestCaseDsl
 class PostDsl(
     val uniqueTestId: String,

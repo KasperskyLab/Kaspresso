@@ -5,7 +5,6 @@ import com.kaspersky.kaspressample.configurator_tests.enricher_tests.data.Post
 import com.kaspersky.kaspressample.configurator_tests.enricher_tests.data.User
 import com.kaspersky.kaspressample.configurator_tests.enricher_tests.dsl.EnricherTestDsl
 
-
 class EnricherTestCaseDataProducer {
 
     fun initData(action: (EnricherTestDsl.() -> Unit)?): EnricherTestData {
@@ -28,5 +27,4 @@ class EnricherTestCaseDataProducer {
 
         return EnricherTestData(users, posts)
     }
-
 }
