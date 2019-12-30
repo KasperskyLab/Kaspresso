@@ -10,12 +10,10 @@ import com.kaspersky.kaspresso.testcases.models.info.TestInfo
  * <code>
  * class MyMainSectionEnricher : MainSectionEnricher<TestCaseData> {
  *
- *     override fun beforeMainSectionRun(testInfo: TestInfo, testContext: TestContext<TestCaseData>) {
- *         with(testContext) {
- *             step("New step before 'run' block") {
- *                step("Nested step inside") {
- *                    // do additional stuff
- *                }
+ *     override fun TestContext<TestCaseData>.beforeMainSectionRun(testInfo: TestInfo) {
+ *         step("New step before 'run' block") {
+ *             step("Nested step inside") {
+ *                 // do additional stuff
  *             }
  *         }
  *     }
@@ -30,15 +28,13 @@ interface MainSectionEnricher<Data> {
      * This method will be invoked right before execution of "run" block in your test case.
      *
      * @param testInfo - test information, such as test identifier
-     * @param testContext - context of your test with data.
      */
-    fun beforeMainSectionRun(testInfo: TestInfo, testContext: TestContext<Data>) = Unit
+    fun TestContext<Data>.beforeMainSectionRun(testInfo: TestInfo) = Unit
 
     /**
      * This method will be invoked right after execution of "run" block in your test case.
      *
      * @param testInfo - test information, such as test identifier
-     * @param testContext - context of your test with data.
      */
-    fun afterMainSectionRun(testInfo: TestInfo, testContext: TestContext<Data>) = Unit
+    fun TestContext<Data>.afterMainSectionRun(testInfo: TestInfo) = Unit
 }

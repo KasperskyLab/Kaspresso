@@ -1,6 +1,6 @@
 package com.kaspersky.kaspresso.testcases.models
 
-import com.kaspersky.kaspresso.enricher.impl.BaseMainSectionEnricher
+import com.kaspersky.kaspresso.enricher.MainSectionEnricher
 import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
 import com.kaspersky.kaspresso.testcases.core.testcontext.TestContext
 
@@ -12,7 +12,7 @@ internal class TestBody<InitData, Data>(
     val initActions: (InitData.() -> Unit)?,
     val transformActionsList: List<Data.() -> Unit>,
     val dataProducer: (((InitData.() -> Unit)?) -> Data),
-    val mainSectionEnrichers: List<BaseMainSectionEnricher<Data>>
+    val mainSectionEnrichers: List<MainSectionEnricher<Data>>
 ) {
     internal class Builder<InitData, Data> {
         var testName: String? = null
@@ -22,7 +22,7 @@ internal class TestBody<InitData, Data>(
         var initActions: (InitData.() -> Unit)? = null
         val transformActionsList: MutableList<Data.() -> Unit> = mutableListOf()
         var dataProducer: (((InitData.() -> Unit)?) -> Data)? = null
-        var mainSectionEnrichers: List<BaseMainSectionEnricher<Data>> = mutableListOf()
+        var mainSectionEnrichers: List<MainSectionEnricher<Data>> = mutableListOf()
 
         fun build(): TestBody<InitData, Data> {
             checkInitializationInvariants()
