@@ -19,7 +19,7 @@ class FlakySafetyParams(
     companion object {
         private const val DEFAULT_TIMEOUT_MS: Long = 5_000L
         private const val DEFAULT_INTERVAL_MS: Long = 500L
-        val DEFAULT_ALLOWED_EXCEPTIONS = setOf(
+        private val DEFAULT_ALLOWED_EXCEPTIONS = setOf(
             PerformException::class.java,
             NoMatchingViewException::class.java,
             AssertionError::class.java
