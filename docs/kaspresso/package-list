@@ -24,6 +24,7 @@ com.kaspersky.kaspresso.device.server
 com.kaspersky.kaspresso.docloc
 com.kaspersky.kaspresso.docloc.rule
 com.kaspersky.kaspresso.enricher
+com.kaspersky.kaspresso.enricher.impl
 com.kaspersky.kaspresso.enricher.impl.composite
 com.kaspersky.kaspresso.failure
 com.kaspersky.kaspresso.flakysafety

@@ -1,18 +1,14 @@
 package com.kaspersky.kaspressample.configurator_tests.enricher_tests.enrichers
 
 import com.kaspersky.kaspressample.configurator_tests.enricher_tests.data.EnricherTestData
-import com.kaspersky.kaspresso.enricher.MainSectionEnricher
-import com.kaspersky.kaspresso.testcases.core.testcontext.TestContext
-import com.kaspersky.kaspresso.testcases.models.info.TestInfo
+import com.kaspersky.kaspresso.enricher.impl.BaseMainSectionEnricher
 
-class AssertionMainSectionEnricher : MainSectionEnricher<EnricherTestData> {
+class AssertionMainSectionEnricher : BaseMainSectionEnricher<EnricherTestData>() {
 
-    override fun afterMainSectionRun(testInfo: TestInfo, testContext: TestContext<EnricherTestData>) {
-        super.afterMainSectionRun(testInfo, testContext)
-
-        with(testContext) {
-            step("Real step after 'run' block --> assert posts count") {
-                assert(testContext.data.posts.size == 2)
+    override fun enrichMainSection() {
+        afterMainSectionRun { testInfo ->
+            step("Real step after 'run' block --> assert posts count | ${testInfo.testName}") {
+                assert(data.posts.size == 2)
             }
         }
     }

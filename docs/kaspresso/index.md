@@ -27,6 +27,7 @@
 | [com.kaspersky.kaspresso.docloc](com.kaspersky.kaspresso.docloc/index.md) |  |
 | [com.kaspersky.kaspresso.docloc.rule](com.kaspersky.kaspresso.docloc.rule/index.md) |  |
 | [com.kaspersky.kaspresso.enricher](com.kaspersky.kaspresso.enricher/index.md) |  |
+| [com.kaspersky.kaspresso.enricher.impl](com.kaspersky.kaspresso.enricher.impl/index.md) |  |
 | [com.kaspersky.kaspresso.enricher.impl.composite](com.kaspersky.kaspresso.enricher.impl.composite/index.md) |  |
 | [com.kaspersky.kaspresso.failure](com.kaspersky.kaspresso.failure/index.md) |  |
 | [com.kaspersky.kaspresso.flakysafety](com.kaspersky.kaspresso.flakysafety/index.md) |  |
