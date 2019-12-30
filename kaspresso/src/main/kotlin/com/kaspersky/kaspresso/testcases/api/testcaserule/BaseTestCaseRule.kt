@@ -1,5 +1,6 @@
 package com.kaspersky.kaspresso.testcases.api.testcaserule
 
+import com.kaspersky.kaspresso.enricher.impl.BaseMainSectionEnricher
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.testcases.core.sections.AfterTestSection
 import com.kaspersky.kaspresso.testcases.core.sections.BeforeTestSection
@@ -20,8 +21,9 @@ import org.junit.runners.model.Statement
  */
 open class BaseTestCaseRule<InitData, Data>(
     kaspressoBuilder: Kaspresso.Builder = Kaspresso.Builder.default(),
+    private val testClassName: String,
     private val dataProducer: (((InitData.() -> Unit)?) -> Data),
-    private val testClassName: String
+    private val mainSectionEnrichers: List<BaseMainSectionEnricher<Data>> = emptyList()
 ) : TestRule {
 
     private val kaspresso: Kaspresso = kaspressoBuilder.build()
@@ -86,6 +88,7 @@ open class BaseTestCaseRule<InitData, Data>(
         return TestBody.Builder<InitData, Data>().apply {
             this.testName = testName
             this.dataProducer = this@BaseTestCaseRule.dataProducer
+            this.mainSectionEnrichers = this@BaseTestCaseRule.mainSectionEnrichers
         }
     }
 }
