@@ -28,7 +28,7 @@ interface FlakySafetyProvider {
     fun <T> flakySafely(
         timeoutMs: Long? = null,
         intervalMs: Long? = null,
-        allowedExceptions: MutableSet<Class<out Throwable>>? = null,
+        allowedExceptions: Set<Class<out Throwable>>? = null,
         failureMessage: String? = null,
         action: () -> T
     ): T

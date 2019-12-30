@@ -49,7 +49,7 @@ class FlakySafetyProviderImpl(
     override fun <T> flakySafely(
         timeoutMs: Long?,
         intervalMs: Long?,
-        allowedExceptions: MutableSet<Class<out Throwable>>?,
+        allowedExceptions: Set<Class<out Throwable>>?,
         failureMessage: String?,
         action: () -> T
     ): T = invokeFlakySafely(

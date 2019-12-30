@@ -14,16 +14,16 @@ class FlakySafetyParams(
      * The set of exceptions, if caught, the [com.kaspersky.kaspresso.flakysafety.FlakySafetyProviderImpl] will continue
      * to attempt.
      */
-    var allowedExceptions: MutableSet<Class<out Throwable>> =
-        mutableSetOf(
+    val allowedExceptions: Set<Class<out Throwable>> = DEFAULT_ALLOWED_EXCEPTIONS
+) {
+    companion object {
+        private const val DEFAULT_TIMEOUT_MS: Long = 5_000L
+        private const val DEFAULT_INTERVAL_MS: Long = 500L
+        private val DEFAULT_ALLOWED_EXCEPTIONS = setOf(
             PerformException::class.java,
             NoMatchingViewException::class.java,
             AssertionError::class.java
         )
-) {
-    private companion object {
-        private const val DEFAULT_TIMEOUT_MS: Long = 5_000L
-        private const val DEFAULT_INTERVAL_MS: Long = 500L
     }
 
     /**
