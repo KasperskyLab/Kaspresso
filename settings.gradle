@@ -2,4 +2,5 @@ include':kaspresso',
         ':sample',
         ':allure-model',
         ':uiautomator_dsl',
-        ':foreign-process-tests'
+        ':sample_upgrade_tests',
+        ':sample_uiautomator_dsl'

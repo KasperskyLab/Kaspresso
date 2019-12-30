@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">sample_upgrade_tests</string>
+    <string name="main_activity_text">Sample of upgrade tests</string>
+</resources>
