@@ -140,11 +140,9 @@ internal class TestRunner<InitData, Data>(
             val testContext = TestContext(kaspresso, stepsManager, data)
             testRunWatcherInterceptor.onMainSectionStarted(testInfo)
 
-            mainSectionEnricher.beforeMainSectionRun(testInfo, testContext)
-            steps.invoke(
-                testContext
-            )
-            mainSectionEnricher.afterMainSectionRun(testInfo, testContext)
+            testContext.run { mainSectionEnricher.run { beforeMainSectionRun(testInfo) } }
+            steps.invoke(testContext)
+            testContext.run { mainSectionEnricher.run { afterMainSectionRun(testInfo) } }
 
             val allStepsResult: List<StepInfo> = stepsManager.getAllStepsResult()
             val updatedTestInfo = testInfo.copy(stepInfos = allStepsResult)
