@@ -1,5 +1,7 @@
 package com.kaspersky.kaspresso.testcases.core
 
+import com.kaspersky.kaspresso.enricher.MainSectionEnricher
+import com.kaspersky.kaspresso.enricher.impl.composite.CompositeMainSectionEnricher
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.TestRunWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.composite.TestRunCompositeWatcherInterceptor
 import com.kaspersky.kaspresso.internal.extensions.other.getException
@@ -30,6 +32,11 @@ internal class TestRunner<InitData, Data>(
                 exceptions
             )
         testRunWatcherInterceptor.setBaseTestContext(baseTestContext)
+        val compositeMainSectionEnricher: CompositeMainSectionEnricher<Data> =
+            CompositeMainSectionEnricher(
+                testBody.mainSectionEnrichers,
+                exceptions
+            )
 
         val stepsManager = StepsManager(testBody.testName, kaspresso.params.stepParams)
         var testInfo = TestInfo(testBody.testName)
@@ -52,6 +59,7 @@ internal class TestRunner<InitData, Data>(
                 testInfo,
                 testBody.steps,
                 testRunWatcherInterceptor,
+                compositeMainSectionEnricher,
                 stepsManager,
                 data
             )
@@ -114,10 +122,12 @@ internal class TestRunner<InitData, Data>(
         }
     }
 
+    @Suppress("LongParameterList")
     private fun runMainTestSection(
         testInfo: TestInfo,
         steps: TestContext<Data>.() -> Unit,
         testRunWatcherInterceptor: TestRunWatcherInterceptor,
+        mainSectionEnricher: MainSectionEnricher<Data>,
         stepsManager: StepsManager,
         data: Data
     ): MainTestSectionResult {
@@ -127,11 +137,12 @@ internal class TestRunner<InitData, Data>(
         checkTestInfo(testInfo)
 
         try {
+            val testContext = TestContext(kaspresso, stepsManager, data)
             testRunWatcherInterceptor.onMainSectionStarted(testInfo)
 
-            steps.invoke(
-                TestContext(kaspresso, stepsManager, data)
-            )
+            testContext.run { mainSectionEnricher.run { beforeMainSectionRun(testInfo) } }
+            steps.invoke(testContext)
+            testContext.run { mainSectionEnricher.run { afterMainSectionRun(testInfo) } }
 
             val allStepsResult: List<StepInfo> = stepsManager.getAllStepsResult()
             val updatedTestInfo = testInfo.copy(stepInfos = allStepsResult)

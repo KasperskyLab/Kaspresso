@@ -2,6 +2,7 @@ package com.kaspersky.kaspresso.testcases.api.testcase
 
 import com.kaspersky.kaspresso.device.Device
 import com.kaspersky.kaspresso.device.server.AdbServer
+import com.kaspersky.kaspresso.enricher.MainSectionEnricher
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.testcases.core.sections.AfterTestSection
@@ -24,7 +25,8 @@ import com.kaspersky.kaspresso.testcases.models.TestBody
  */
 abstract class BaseTestCase<InitData, Data>(
     kaspressoBuilder: Kaspresso.Builder = Kaspresso.Builder.default(),
-    private val dataProducer: (((InitData.() -> Unit)?) -> Data)
+    private val dataProducer: (((InitData.() -> Unit)?) -> Data),
+    private val mainSectionEnrichers: List<MainSectionEnricher<Data>> = emptyList()
 ) : TestAssistantsProvider {
 
     internal val kaspresso: Kaspresso = kaspressoBuilder.build()
@@ -90,6 +92,7 @@ abstract class BaseTestCase<InitData, Data>(
         return TestBody.Builder<InitData, Data>().apply {
             this.testName = testName
             this.dataProducer = this@BaseTestCase.dataProducer
+            this.mainSectionEnrichers = this@BaseTestCase.mainSectionEnrichers
         }
     }
 }
