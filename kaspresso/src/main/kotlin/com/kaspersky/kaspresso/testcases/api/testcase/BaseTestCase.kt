@@ -5,6 +5,7 @@ import com.kaspersky.kaspresso.device.server.AdbServer
 import com.kaspersky.kaspresso.enricher.MainSectionEnricher
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.logger.UiTestLogger
+import com.kaspersky.kaspresso.params.Params
 import com.kaspersky.kaspresso.testcases.core.sections.AfterTestSection
 import com.kaspersky.kaspresso.testcases.core.sections.BeforeTestSection
 import com.kaspersky.kaspresso.testcases.core.sections.MainTestSection
@@ -37,6 +38,7 @@ abstract class BaseTestCase<InitData, Data>(
     override val adbServer: AdbServer = testAssistantsProvider.adbServer
     override val device: Device = testAssistantsProvider.device
     override val testLogger: UiTestLogger = testAssistantsProvider.testLogger
+    override val params: Params = testAssistantsProvider.params
 
     /**
      * Starts the building of a test, sets the [BeforeTestSection] actions and returns an existing instance of
