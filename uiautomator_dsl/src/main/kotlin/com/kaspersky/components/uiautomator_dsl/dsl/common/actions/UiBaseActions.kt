@@ -1,8 +1,8 @@
 package com.kaspersky.components.uiautomator_dsl.dsl.common.actions
 
 import com.kaspersky.components.uiautomator_dsl.intercepting.delegate.UiObjectDelegate
-import com.kaspersky.components.uiautomator_dsl.dsl.common.actions.UiBaseActions.BaseUiOperationType.*
-import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion.UiOperationType
+import com.kaspersky.components.uiautomator_dsl.dsl.common.actions.UiBaseActions.BaseUiActionType.*
+import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion.UiActionType
 
 /**
  * Base interface for performing actions on UiAutomator view
@@ -12,20 +12,20 @@ import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertio
  * @see com.kaspersky.components.uiautomator_dsl.dsl.edit.UiEditableActions
  */
 interface UiBaseActions {
-    val actionsView: UiObjectDelegate
+    val view: UiObjectDelegate
 
     /**
      * Performs click on view
      */
     fun click() {
-        actionsView.perform(CLICK) { click() }
+        view.perform(CLICK) { click() }
     }
 
     /**
      * Performs double click on view
      */
     fun doubleClick() {
-        actionsView.perform(DOUBLE_CLICK) {
+        view.perform(DOUBLE_CLICK) {
             click()
             click()
         }
@@ -35,10 +35,10 @@ interface UiBaseActions {
      * Performs long click on view
      */
     fun longClick() {
-        actionsView.perform(LONG_CLICK) { longClick() }
+        view.perform(LONG_CLICK) { longClick() }
     }
 
-    enum class BaseUiOperationType : UiOperationType {
+    enum class BaseUiActionType : UiActionType {
         CLICK,
         DOUBLE_CLICK,
         LONG_CLICK

@@ -1,8 +1,8 @@
 package com.kaspersky.components.uiautomator_dsl.dsl.switch
 
 import com.kaspersky.components.uiautomator_dsl.dsl.common.actions.UiBaseActions
-import com.kaspersky.components.uiautomator_dsl.dsl.switch.UiSwitchableActions.SwitchableUiOperationType.SWITCH
-import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion.UiOperationType
+import com.kaspersky.components.uiautomator_dsl.dsl.switch.UiSwitchableActions.SwitchableUiActionType.SWITCH
+import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion.UiActionType
 
 /**
  * Provides switchable actions for UiSwitchView
@@ -17,7 +17,7 @@ interface UiSwitchableActions : UiBaseActions {
      * @param direction for the thumb to move
      */
     fun swipeSwitchThumb(direction: Direction) {
-        actionsView.perform(SWITCH, "direction=$direction") {
+        view.perform(SWITCH, "direction=$direction") {
             val uiDirection: androidx.test.uiautomator.Direction =
                 if(direction == Direction.RIGHT)
                     androidx.test.uiautomator.Direction.RIGHT
@@ -27,7 +27,7 @@ interface UiSwitchableActions : UiBaseActions {
         }
     }
 
-    enum class SwitchableUiOperationType : UiOperationType {
+    enum class SwitchableUiActionType : UiActionType {
         SWITCH
     }
 }

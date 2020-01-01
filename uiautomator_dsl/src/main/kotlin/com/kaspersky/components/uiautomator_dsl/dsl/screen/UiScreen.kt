@@ -24,7 +24,7 @@ import java.util.*
 @UiAutomatorDslMarker
 open class UiScreen<out T : UiScreen<T>> : UiScreenActions {
 
-    override val device: UiDeviceDelegate = UiDeviceDelegate(
+    override val view: UiDeviceDelegate = UiDeviceDelegate(
         UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
     )
 

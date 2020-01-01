@@ -5,7 +5,9 @@ import androidx.test.uiautomator.UiDevice
 import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiDeviceInteraction
 import com.kaspersky.components.uiautomator_dsl.intercepting.intercept.UiInterceptable
 import com.kaspersky.components.uiautomator_dsl.intercepting.delegate.UiDeviceDelegate
-import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion.UiOperation
+import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion.UiAction
+import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion.UiDeviceAction
+import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion.UiDeviceAssertion
 
 /**
  * Container class for UiAutomator action and assertions executing in the UiSystem.
@@ -13,11 +15,9 @@ import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertio
  * @see UiSystemActions
  */
 object UiSystem : UiSystemActions, UiSystemAssertions,
-    UiInterceptable<UiDeviceInteraction, UiOperation<UiDeviceInteraction>, UiOperation<UiDeviceInteraction>> {
+    UiInterceptable<UiDeviceInteraction, UiDeviceAssertion, UiDeviceAction> {
 
     override val view: UiDeviceDelegate = UiDeviceDelegate(
         UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
     )
-
-    override val device: UiDeviceDelegate = view
 }

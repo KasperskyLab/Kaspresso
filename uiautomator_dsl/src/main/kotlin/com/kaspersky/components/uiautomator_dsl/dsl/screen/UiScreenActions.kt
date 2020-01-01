@@ -1,6 +1,6 @@
 package com.kaspersky.components.uiautomator_dsl.dsl.screen
 
-import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion.UiOperationType
+import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion.UiActionType
 import com.kaspersky.components.uiautomator_dsl.intercepting.delegate.UiDeviceDelegate
 
 /**
@@ -8,20 +8,20 @@ import com.kaspersky.components.uiautomator_dsl.intercepting.delegate.UiDeviceDe
  *
  * Provides basic actions that can be performed on each and every screen
  *
- * @property device UiDeviceDelegate on which all actions are performed
+ * @property view UiDeviceDelegate on which all actions are performed
  */
 interface UiScreenActions {
 
-    val device: UiDeviceDelegate
+    val view: UiDeviceDelegate
 
     /**
      * Simulates a short press on the BACK button.
      */
     fun pressBack() {
-        device.perform(UiScreenOperationType.PRESS_BACK) { pressBack() }
+        view.perform(UiScreenActionType.PRESS_BACK) { pressBack() }
     }
 
-    enum class UiScreenOperationType : UiOperationType {
+    enum class UiScreenActionType : UiActionType {
         PRESS_BACK
     }
 

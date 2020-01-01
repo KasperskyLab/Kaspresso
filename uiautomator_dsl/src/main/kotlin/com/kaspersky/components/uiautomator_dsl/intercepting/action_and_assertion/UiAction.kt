@@ -3,12 +3,12 @@ package com.kaspersky.components.uiautomator_dsl.intercepting.action_and_asserti
 /**
  * Responsible for executing an interaction on the element of UiAutomator
  */
-interface UiOperation<INTERACTION> {
+interface UiAction<VIEW> {
 
-    fun getType(): UiOperationType
+    fun getType(): UiActionType
 
     fun getDescription(): String?
 
-    fun execute(interaction: INTERACTION)
+    fun execute(innerView: VIEW)
 
 }

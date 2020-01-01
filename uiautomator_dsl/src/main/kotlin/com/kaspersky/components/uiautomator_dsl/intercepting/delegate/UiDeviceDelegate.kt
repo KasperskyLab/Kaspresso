@@ -25,11 +25,11 @@ class UiDeviceDelegate(
      * @action must throw exception if something went wrong
      */
     fun check(
-        type: UiOperationType,
+        type: UiActionType,
         description: String? = null,
         assert: UiDevice.() -> Unit
     ) {
-        val uiDeviceAssertion = getUiDeviceOperation(type, description, assert)
+        val uiDeviceAssertion = getUiActionBase(type, description, assert)
         check(uiDeviceAssertion)
     }
 
@@ -37,26 +37,26 @@ class UiDeviceDelegate(
      * @action must throw exception if something went wrong
      */
     fun perform(
-        type: UiOperationType,
+        type: UiActionType,
         description: String? = null,
         action: UiDevice.() -> Unit
     ) {
-        val uiDeviceAction = getUiDeviceOperation(type, description, action)
+        val uiDeviceAction = getUiActionBase(type, description, action)
         perform(uiDeviceAction)
     }
 
-    private fun getUiDeviceOperation(
-        type: UiOperationType,
+    private fun getUiActionBase(
+        type: UiActionType,
         description: String? = null,
         action: UiDevice.() -> Unit
-    ) = UiDeviceOperation(type, description, action)
+    ) = UiActionBaseImpl(type, description, action)
 
-    fun check(uiDeviceAssertion: UiDeviceAssertion) {
-        if (!interceptCheck(uiDeviceAssertion)) uiDeviceAssertion.execute(interaction)
+    fun check(uiAssertion: UiDeviceAssertion) {
+        if (!interceptCheck(uiAssertion)) interaction.check(uiAssertion)
     }
 
-    fun perform(uiDeviceAction: UiDeviceAction) {
-        if (!interceptPerform(uiDeviceAction)) uiDeviceAction.execute(interaction)
+    fun perform(uiAction: UiDeviceAction) {
+        if (!interceptPerform(uiAction)) interaction.perform(uiAction)
     }
 
     override fun screenInterceptors(): Iterable<UiInterceptor<UiDeviceInteraction, UiDeviceAssertion, UiDeviceAction>> =

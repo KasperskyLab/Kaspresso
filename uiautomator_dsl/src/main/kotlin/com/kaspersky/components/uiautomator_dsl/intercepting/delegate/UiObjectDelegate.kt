@@ -30,35 +30,35 @@ class UiObjectDelegate(
     }
 
     fun check(
-        type: UiOperationType,
+        type: UiActionType,
         description: String? = null,
         assert: UiObject2.() -> Unit
     ) {
-        val uiAssertion = getUiOperation(type, description, assert)
+        val uiAssertion = getUiActionBase(type, description, assert)
         check(uiAssertion)
     }
 
     fun perform(
-        type: UiOperationType,
+        type: UiActionType,
         description: String? = null,
         action: UiObject2.() -> Unit
     ) {
-        val uiAction = getUiOperation(type, description, action)
+        val uiAction = getUiActionBase(type, description, action)
         perform(uiAction)
     }
 
-    private fun getUiOperation(
-        type: UiOperationType,
+    private fun getUiActionBase(
+        type: UiActionType,
         description: String? = null,
         action: UiObject2.() -> Unit
-    ) = UiObjectOperation(type, description, action)
+    ) = UiActionBaseImpl(type, description, action)
 
     fun check(uiAssertion: UiObjectAssertion) {
-        if (!interceptCheck(uiAssertion)) uiAssertion.execute(interaction)
+        if (!interceptCheck(uiAssertion)) interaction.check(uiAssertion)
     }
 
-    fun perform(uiObjectOperation: UiObjectAction) {
-        if (!interceptPerform(uiObjectOperation)) uiObjectOperation.execute(interaction)
+    fun perform(uiAction: UiObjectAction) {
+        if (!interceptPerform(uiAction)) interaction.perform(uiAction)
     }
 
     override fun screenInterceptors(): Iterable<UiInterceptor<UiObjectInteraction, UiObjectAssertion, UiObjectAction>> =
@@ -66,5 +66,4 @@ class UiObjectDelegate(
 
     override fun globalInterceptor(): UiInterceptor<UiObjectInteraction, UiObjectAssertion, UiObjectAction>? =
         UiAutomatorDslConfigurator.uiObjectInterceptor
-
 }

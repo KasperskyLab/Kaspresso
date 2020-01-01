@@ -36,8 +36,6 @@ open class UiBaseView<out T>(selector: BySelector) : UiBaseActions, UiBaseAssert
         delegate.loadView()
         delegate
     }
-    override val actionsView: UiObjectDelegate = view
-    override val assertionsView: UiObjectDelegate = view
 
     /**
      * Constructs view class with UiObject interaction from given UiViewBuilder

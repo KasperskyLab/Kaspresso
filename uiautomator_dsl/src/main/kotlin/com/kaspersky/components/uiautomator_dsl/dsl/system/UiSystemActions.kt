@@ -1,6 +1,6 @@
 package com.kaspersky.components.uiautomator_dsl.dsl.system
 
-import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion.UiOperationType
+import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion.UiActionType
 import com.kaspersky.components.uiautomator_dsl.intercepting.delegate.UiDeviceDelegate
 import com.kaspersky.components.uiautomator_dsl.dsl.system.UiSystemActions.SystemActionType.*
 
@@ -9,17 +9,17 @@ import com.kaspersky.components.uiautomator_dsl.dsl.system.UiSystemActions.Syste
  *
  * Provides basic actions that can be performed everywhere
  *
- * @property device UiDeviceDelegate on which all actions are performed
+ * @property view UiDeviceDelegate on which all actions are performed
  */
 interface UiSystemActions {
 
-    val device: UiDeviceDelegate
+    val view: UiDeviceDelegate
 
     /**
      * Opens the notification shade
      */
     fun openNotification() {
-        device.perform(OPEN_NOTIFICATION) {
+        view.perform(OPEN_NOTIFICATION) {
             checkBooleanAction(OPEN_NOTIFICATION) { openNotification() }
         }
     }
@@ -28,7 +28,7 @@ interface UiSystemActions {
      * Opens the Quick Settings shade
      */
     fun openQuickSettings() {
-        device.perform(OPEN_QUICK_SETTINGS) {
+        view.perform(OPEN_QUICK_SETTINGS) {
             checkBooleanAction(OPEN_QUICK_SETTINGS) { openQuickSettings() }
         }
     }
@@ -37,7 +37,7 @@ interface UiSystemActions {
      * Simulates a short press on the DELETE key
      */
     fun pressDelete() {
-        device.perform(PRESS_DELETE) {
+        view.perform(PRESS_DELETE) {
             checkBooleanAction(PRESS_DELETE) { pressDelete() }
         }
     }
@@ -46,7 +46,7 @@ interface UiSystemActions {
      * Simulates a short press on the ENTER key
      */
     fun pressEnter() {
-        device.perform(PRESS_ENTER) {
+        view.perform(PRESS_ENTER) {
             checkBooleanAction(PRESS_ENTER) { pressEnter() }
         }
     }
@@ -55,7 +55,7 @@ interface UiSystemActions {
      * Simulates a short press on the HOME button
      */
     fun pressHome() {
-        device.perform(PRESS_HOME) {
+        view.perform(PRESS_HOME) {
             checkBooleanAction(PRESS_HOME) { pressHome() }
         }
     }
@@ -64,7 +64,7 @@ interface UiSystemActions {
      * Simulates a short press on the MENU button
      */
     fun pressMenu() {
-        device.perform(PRESS_MENU) {
+        view.perform(PRESS_MENU) {
             checkBooleanAction(PRESS_MENU) { pressMenu() }
         }
     }
@@ -73,7 +73,7 @@ interface UiSystemActions {
      * Simulates a short press on the Recent Apps button
      */
     fun pressRecentApps() {
-        device.perform(PRESS_RECENT_APPS) {
+        view.perform(PRESS_RECENT_APPS) {
             checkBooleanAction(PRESS_RECENT_APPS) { pressRecentApps() }
         }
     }
@@ -82,7 +82,7 @@ interface UiSystemActions {
      * Simulates a short press on the SEARCH button
      */
     fun pressSearch() {
-        device.perform(PRESS_SEARCH) {
+        view.perform(PRESS_SEARCH) {
             checkBooleanAction(PRESS_SEARCH) { pressSearch() }
         }
     }
@@ -94,7 +94,7 @@ interface UiSystemActions {
      * @param y coordinate
      */
     fun click(x: Int, y: Int) {
-        device.perform(CLICK) {
+        view.perform(CLICK) {
             checkBooleanAction("$CLICK(x=$x, y=$y)") { click(x, y) }
         }
     }
@@ -112,7 +112,7 @@ interface UiSystemActions {
      * @param steps is the number of steps for the swipe action
      */
     fun drag(startX: Int, startY: Int, endX: Int, endY: Int, steps: Int) {
-        device.perform(DRAG) {
+        view.perform(DRAG) {
             checkBooleanAction(
                 "$DRAG(startX=$startX, startY=$startY, endX=$endX, endY=$endY, steps=$steps)") {
                 drag(startX, startY, endX, endY, steps)
@@ -125,7 +125,7 @@ interface UiSystemActions {
      * it does nothing if the screen is already OFF.
      */
     fun sleep() {
-        device.perform(SLEEP) {
+        view.perform(SLEEP) {
             checkAction(SLEEP) { sleep() }
         }
     }
@@ -135,7 +135,7 @@ interface UiSystemActions {
      * it does nothing if the screen is already ON.
      */
     fun wakeUp() {
-        device.perform(WAKE_UP) {
+        view.perform(WAKE_UP) {
             checkAction(WAKE_UP) { wakeUp() }
         }
     }
@@ -145,10 +145,10 @@ interface UiSystemActions {
         if (!result) throw AssertionError("$methodName method in UiAutomator hasn't performed")
     }
 
-    private fun checkBooleanAction(methodName: UiOperationType, action: () -> Boolean) =
+    private fun checkBooleanAction(methodName: UiActionType, action: () -> Boolean) =
         checkBooleanAction(methodName.name, action)
 
-    private fun checkAction(methodName: UiOperationType, action: () -> Unit) {
+    private fun checkAction(methodName: UiActionType, action: () -> Unit) {
         try {
             action.invoke()
         } catch (exception: Exception) {
@@ -156,7 +156,7 @@ interface UiSystemActions {
         }
     }
 
-    enum class SystemActionType : UiOperationType {
+    enum class SystemActionType : UiActionType {
         OPEN_NOTIFICATION,
         OPEN_QUICK_SETTINGS,
         PRESS_DELETE,

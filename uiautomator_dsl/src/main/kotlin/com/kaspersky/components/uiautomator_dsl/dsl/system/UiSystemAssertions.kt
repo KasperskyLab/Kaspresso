@@ -1,6 +1,6 @@
 package com.kaspersky.components.uiautomator_dsl.dsl.system
 
-import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion.UiOperationType
+import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion.UiActionType
 import com.kaspersky.components.uiautomator_dsl.intercepting.delegate.UiDeviceDelegate
 import com.kaspersky.components.uiautomator_dsl.dsl.system.UiSystemAssertions.SystemAssertionType.IS_SCREEN_ON
 
@@ -9,19 +9,19 @@ import com.kaspersky.components.uiautomator_dsl.dsl.system.UiSystemAssertions.Sy
  *
  * Provides basic assertions that can be checked everywhere
  *
- * @property device UiDeviceDelegate on which all actions are checked
+ * @property view UiDeviceDelegate on which all actions are checked
  */
 interface UiSystemAssertions {
 
-    val device: UiDeviceDelegate
+    val view: UiDeviceDelegate
 
     fun isScreenOn() {
-        device.check(IS_SCREEN_ON) {
+        view.check(IS_SCREEN_ON) {
             checkAssertAction(IS_SCREEN_ON) { isScreenOn }
         }
     }
 
-    private fun checkAssertAction(methodName: UiOperationType, action: () -> Boolean) {
+    private fun checkAssertAction(methodName: UiActionType, action: () -> Boolean) {
         try {
             val result = action.invoke()
             if (!result) throw AssertionError("$methodName method in UiAutomator hasn't checked")
@@ -30,7 +30,7 @@ interface UiSystemAssertions {
         }
     }
 
-    enum class SystemAssertionType : UiOperationType {
+    enum class SystemAssertionType : UiActionType {
         IS_SCREEN_ON
     }
 

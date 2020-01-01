@@ -35,11 +35,9 @@ class UpgradeTestSample : UpgradeTestCase() {
                     onUiInteraction {
                         onCheck { uiInteraction, uiAssert ->
                             testLogger.i("UIA", "type=${uiAssert.getType()}, description=${uiAssert.getDescription()}")
-                            uiAssert.execute(uiInteraction)
                         }
                         onPerform { uiInteraction, uiAction ->
                             testLogger.i("UIA", "type=${uiAction.getType()}, description=${uiAction.getDescription()}")
-                            uiAction.execute(uiInteraction)
                         }
                     }
                 }
