@@ -4,7 +4,7 @@ import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.UiObject2
 
 /**
- * Appropriate type aliases of UiAction according to name paradigm in Kakao library
+ * Appropriate type aliases of UiAction according to name paradigm in Kakao library (Assertions and Actions)
  */
 
 typealias UiObjectAction = UiAction<UiObject2>
