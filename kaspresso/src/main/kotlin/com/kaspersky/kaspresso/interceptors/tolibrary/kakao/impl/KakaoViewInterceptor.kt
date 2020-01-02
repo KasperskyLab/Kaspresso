@@ -1,10 +1,10 @@
-package com.kaspersky.kaspresso.interceptors.tokakao.impl
+package com.kaspersky.kaspresso.interceptors.tolibrary.kakao.impl
 
 import androidx.test.espresso.ViewAction
 import androidx.test.espresso.ViewAssertion
 import androidx.test.espresso.ViewInteraction
 import com.kaspersky.kaspresso.interceptors.behavior.ViewBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.tokakao.KakaoInterceptor
+import com.kaspersky.kaspresso.interceptors.tolibrary.LibraryInterceptor
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.proxy.ViewActionProxy
 import com.kaspersky.kaspresso.proxy.ViewAssertionProxy
@@ -14,7 +14,7 @@ import com.kaspersky.kaspresso.proxy.ViewAssertionProxy
  */
 internal class KakaoViewInterceptor(
     kaspresso: Kaspresso
-) : KakaoInterceptor<ViewInteraction, ViewAction, ViewAssertion>(kaspresso) {
+) : LibraryInterceptor<ViewInteraction, ViewAssertion, ViewAction>(kaspresso) {
 
     /**
      * Folds all [ViewBehaviorInterceptor]'s one into another in the order from the first to the last with the actual

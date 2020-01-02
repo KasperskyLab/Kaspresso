@@ -1,6 +1,5 @@
 package com.kaspersky.components.uiautomator_dsl.intercepting.interaction
 
-import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.BySelector
 import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.UiObject2
@@ -22,7 +21,7 @@ class UiObjectInteraction(
         private set
 
     fun tryToFindUiObject() {
-        uiObject2 = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation()).findObject(selector)
+        uiObject2 = device.findObject(selector)
     }
 
     override fun check(assertion: UiObjectAssertion) {

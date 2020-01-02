@@ -1,0 +1,8 @@
+package com.kaspersky.kaspresso.interceptors.behavior_uia
+
+import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion.UiObjectAction
+import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion.UiObjectAssertion
+import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiObjectInteraction
+
+interface ObjectBehaviorInterceptor :
+    UiAutomatorDslBehaviorInterceptor<UiObjectInteraction, UiObjectAssertion, UiObjectAction>

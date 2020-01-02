@@ -1,0 +1,8 @@
+package com.kaspersky.kaspresso.interceptors.watcher.uiautomator_dsl
+
+import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion.UiObjectAction
+import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion.UiObjectAssertion
+import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiObjectInteraction
+
+interface ObjectWatcherInterceptor :
+    UiAutomatorDslWatcherInterceptor<UiObjectInteraction, UiObjectAssertion, UiObjectAction>

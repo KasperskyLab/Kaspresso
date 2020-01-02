@@ -1,11 +1,11 @@
-package com.kaspersky.kaspresso.interceptors.tokakao.impl
+package com.kaspersky.kaspresso.interceptors.tolibrary.kakao.impl
 
 import androidx.test.espresso.web.assertion.WebAssertion
 import androidx.test.espresso.web.assertion.WebAssertionProxy
 import androidx.test.espresso.web.model.Atom
 import androidx.test.espresso.web.sugar.Web
 import com.kaspersky.kaspresso.interceptors.behavior.WebBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.tokakao.KakaoInterceptor
+import com.kaspersky.kaspresso.interceptors.tolibrary.LibraryInterceptor
 import com.kaspersky.kaspresso.internal.extensions.espressoext.getMatcher
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.proxy.AtomProxy
@@ -15,7 +15,7 @@ import com.kaspersky.kaspresso.proxy.AtomProxy
  */
 internal class KakaoWebInterceptor(
     kaspresso: Kaspresso
-) : KakaoInterceptor<Web.WebInteraction<*>, Atom<*>, WebAssertion<*>>(kaspresso) {
+) : LibraryInterceptor<Web.WebInteraction<*>, WebAssertion<*>, Atom<*>>(kaspresso) {
 
     /**
      * Folds all [Web.WebInteraction]'s one into another in the order from the first to the last with the actual

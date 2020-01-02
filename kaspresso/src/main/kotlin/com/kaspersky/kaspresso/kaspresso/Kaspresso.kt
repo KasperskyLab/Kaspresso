@@ -50,9 +50,11 @@ import com.kaspersky.kaspresso.interceptors.behavior.impl.flakysafety.FlakySafeW
 import com.kaspersky.kaspresso.interceptors.behavior.impl.systemsafety.SystemDialogSafetyDataBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.impl.systemsafety.SystemDialogSafetyViewBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.impl.systemsafety.SystemDialogSafetyWebBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.tokakao.impl.KakaoDataInterceptor
-import com.kaspersky.kaspresso.interceptors.tokakao.impl.KakaoViewInterceptor
-import com.kaspersky.kaspresso.interceptors.tokakao.impl.KakaoWebInterceptor
+import com.kaspersky.kaspresso.interceptors.behavior_uia.DeviceBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behavior_uia.ObjectBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.tolibrary.kakao.impl.KakaoDataInterceptor
+import com.kaspersky.kaspresso.interceptors.tolibrary.kakao.impl.KakaoViewInterceptor
+import com.kaspersky.kaspresso.interceptors.tolibrary.kakao.impl.KakaoWebInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.StepWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.TestRunWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.defaults.DefaultTestRunWatcherInterceptor
@@ -61,6 +63,8 @@ import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.logging.TestRu
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.report.BuildStepReportWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.screenshot.ScreenshotStepWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.screenshot.TestRunnerScreenshotWatcherInterceptor
+import com.kaspersky.kaspresso.interceptors.watcher.uiautomator_dsl.DeviceWatcherInterceptor
+import com.kaspersky.kaspresso.interceptors.watcher.uiautomator_dsl.ObjectWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.view.AtomWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.view.ViewActionWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.view.ViewAssertionWatcherInterceptor
@@ -92,9 +96,13 @@ data class Kaspresso(
     internal val viewAssertionWatcherInterceptors: List<ViewAssertionWatcherInterceptor>,
     internal val atomWatcherInterceptors: List<AtomWatcherInterceptor>,
     internal val webAssertionWatcherInterceptors: List<WebAssertionWatcherInterceptor>,
+    internal val objectWatcherInterceptors: List<ObjectWatcherInterceptor>,
+    internal val deviceWatcherInterceptors: List<DeviceWatcherInterceptor>,
     internal val viewBehaviorInterceptors: List<ViewBehaviorInterceptor>,
     internal val dataBehaviorInterceptors: List<DataBehaviorInterceptor>,
     internal val webBehaviorInterceptors: List<WebBehaviorInterceptor>,
+    internal val objectBehaviorInterceptors: List<ObjectBehaviorInterceptor>,
+    internal val deviceBehaviorInterceptors: List<DeviceBehaviorInterceptor>,
     internal val stepWatcherInterceptors: List<StepWatcherInterceptor>,
     internal val testRunWatcherInterceptors: List<TestRunWatcherInterceptor>
 ) {
@@ -136,6 +144,14 @@ data class Kaspresso(
                         LoggingWebAssertionWatcherInterceptor(libLogger)
                     )
 
+                    objectWatcherInterceptors = mutableListOf(
+                        // todo
+                    )
+
+                    deviceWatcherInterceptors = mutableListOf(
+                        // todo
+                    )
+
                     viewBehaviorInterceptors = mutableListOf(
                         AutoScrollViewBehaviorInterceptor(autoScrollParams, libLogger),
                         SystemDialogSafetyViewBehaviorInterceptor(libLogger, uiDevice, adbServer),
@@ -154,6 +170,14 @@ data class Kaspresso(
                         SystemDialogSafetyWebBehaviorInterceptor(libLogger, uiDevice, adbServer),
                         FlakySafeWebBehaviorInterceptor(flakySafetyParams, libLogger),
                         FailureLoggingWebBehaviorInterceptor(libLogger)
+                    )
+
+                    objectBehaviorInterceptors = mutableListOf(
+                        // todo
+                    )
+
+                    deviceBehaviorInterceptors = mutableListOf(
+                        // todo
                     )
 
                     stepWatcherInterceptors = mutableListOf(
@@ -314,10 +338,16 @@ data class Kaspresso(
          */
         var webAssertionWatcherInterceptors: MutableList<WebAssertionWatcherInterceptor> = mutableListOf()
 
+        // todo comments
+        var objectWatcherInterceptors: List<ObjectWatcherInterceptor> = mutableListOf()
+
+        // todo comments
+        var deviceWatcherInterceptors: List<DeviceWatcherInterceptor> = mutableListOf()
+
         /**
          * Holds the list of [ViewBehaviorInterceptor]s.
          * If it was not specified, Kaspresso will use no [ViewBehaviorInterceptor]s.
-         * These interceptors are called by [com.kaspersky.kaspresso.interceptors.tokakao.impl.KakaoViewInterceptor]
+         * These interceptors are called by [com.kaspersky.kaspresso.interceptors.tolibrary.impl.KakaoViewInterceptor]
          * before actual [androidx.test.espresso.ViewInteraction.perform] and
          * [androidx.test.espresso.ViewInteraction.check] calls.
          * Note that the order of [ViewBehaviorInterceptor]s in this list is significant: the first item wil be
@@ -330,7 +360,7 @@ data class Kaspresso(
         /**
          * Holds the list of [DataBehaviorInterceptor]s.
          * If it was not specified, Kaspresso will use no [DataBehaviorInterceptor]s.
-         * These interceptors are called by [com.kaspersky.kaspresso.interceptors.tokakao.impl.KakaoDataInterceptor]
+         * These interceptors are called by [com.kaspersky.kaspresso.interceptors.tolibrary.impl.KakaoDataInterceptor]
          * before actual [androidx.test.espresso.DataInteraction.check] call.
          * Note that the order of [DataBehaviorInterceptor]s in this list is significant: the first item wil be
          * at the lowest level of intercepting chain, and the last item will be at the highest level.
@@ -342,7 +372,7 @@ data class Kaspresso(
         /**
          * Holds the list of [WebBehaviorInterceptor]s.
          * If it was not specified, Kaspresso will use no [WebBehaviorInterceptor]s.
-         * These interceptors are called by [com.kaspersky.kaspresso.interceptors.tokakao.impl.KakaoWebInterceptor]
+         * These interceptors are called by [com.kaspersky.kaspresso.interceptors.tolibrary.impl.KakaoWebInterceptor]
          * before actual [androidx.test.espresso.web.sugar.Web.WebInteraction.perform] and
          * [androidx.test.espresso.web.sugar.Web.WebInteraction.check] calls.
          * Note that the order of [WebBehaviorInterceptor]s in this list is significant: the first item wil be
@@ -351,6 +381,12 @@ data class Kaspresso(
          * call, the second item wraps the first item, and so on.
          */
         var webBehaviorInterceptors: MutableList<WebBehaviorInterceptor> = mutableListOf()
+
+        // todo comments
+        var objectBehaviorInterceptors: List<ObjectBehaviorInterceptor> = mutableListOf()
+
+        // todo comments
+        var deviceBehaviorInterceptors: List<DeviceBehaviorInterceptor> = mutableListOf()
 
         /**
          * Holds the list of [StepWatcherInterceptor]s.
@@ -467,9 +503,15 @@ data class Kaspresso(
                 atomWatcherInterceptors = atomWatcherInterceptors,
                 webAssertionWatcherInterceptors = webAssertionWatcherInterceptors,
 
+                objectWatcherInterceptors = objectWatcherInterceptors,
+                deviceWatcherInterceptors = deviceWatcherInterceptors,
+
                 viewBehaviorInterceptors = viewBehaviorInterceptors,
                 dataBehaviorInterceptors = dataBehaviorInterceptors,
                 webBehaviorInterceptors = webBehaviorInterceptors,
+
+                objectBehaviorInterceptors = objectBehaviorInterceptors,
+                deviceBehaviorInterceptors = deviceBehaviorInterceptors,
 
                 stepWatcherInterceptors = stepWatcherInterceptors,
                 testRunWatcherInterceptors = testRunWatcherInterceptors
