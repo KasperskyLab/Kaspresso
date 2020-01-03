@@ -4,15 +4,11 @@ import android.Manifest
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
-import com.kaspersky.components.uiautomator_dsl.dsl.system.UiSystem
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.R
 import com.kaspersky.kaspressample.external_screens.UiCommonFlakyScreen
 import com.kaspersky.kaspressample.external_screens.UiMainScreen
-import com.kaspersky.kaspressample.screen.CommonFlakyScreen
-import com.kaspersky.kaspressample.screen.MainScreen
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
-import java.util.concurrent.TimeUnit
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
