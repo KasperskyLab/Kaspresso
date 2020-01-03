@@ -53,7 +53,7 @@ class FlakySafetyProviderImpl(
         failureMessage: String?,
         action: () -> T
     ): T = invokeFlakySafely(
-        params = FlakySafetyParams(
+        params = FlakySafetyParams.customInstance(
             timeoutMs ?: params.timeoutMs,
             intervalMs ?: params.intervalMs,
             allowedExceptions ?: params.allowedExceptions

@@ -52,6 +52,9 @@ import com.kaspersky.kaspresso.interceptors.behavior.impl.systemsafety.SystemDia
 import com.kaspersky.kaspresso.interceptors.behavior.impl.systemsafety.SystemDialogSafetyWebBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior_uia.DeviceBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior_uia.ObjectBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behavior_uia.impl.FlakySafeDeviceBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behavior_uia.impl.FlakySafeObjectBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behavior_uia.impl.ObjectLoaderBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.tolibrary.kakao.impl.KakaoDataInterceptor
 import com.kaspersky.kaspresso.interceptors.tolibrary.kakao.impl.KakaoViewInterceptor
 import com.kaspersky.kaspresso.interceptors.tolibrary.kakao.impl.KakaoWebInterceptor
@@ -65,6 +68,8 @@ import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.screenshot.Scr
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.screenshot.TestRunnerScreenshotWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.uiautomator_dsl.DeviceWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.uiautomator_dsl.ObjectWatcherInterceptor
+import com.kaspersky.kaspresso.interceptors.watcher.uiautomator_dsl.impl.logging.LoggingDeviceWatcherInterceptor
+import com.kaspersky.kaspresso.interceptors.watcher.uiautomator_dsl.impl.logging.LoggingObjectWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.view.AtomWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.view.ViewActionWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.view.ViewAssertionWatcherInterceptor
@@ -145,11 +150,11 @@ data class Kaspresso(
                     )
 
                     objectWatcherInterceptors = mutableListOf(
-                        // todo
+                        LoggingObjectWatcherInterceptor(libLogger)
                     )
 
                     deviceWatcherInterceptors = mutableListOf(
-                        // todo
+                        LoggingDeviceWatcherInterceptor(libLogger)
                     )
 
                     viewBehaviorInterceptors = mutableListOf(
@@ -173,11 +178,12 @@ data class Kaspresso(
                     )
 
                     objectBehaviorInterceptors = mutableListOf(
-                        // todo
+                        FlakySafeObjectBehaviorInterceptor(uiAutomatorDslFlakySafetyParams, libLogger),
+                        ObjectLoaderBehaviorInterceptor(libLogger)
                     )
 
                     deviceBehaviorInterceptors = mutableListOf(
-                        // todo
+                        FlakySafeDeviceBehaviorInterceptor(uiAutomatorDslFlakySafetyParams, libLogger)
                     )
 
                     stepWatcherInterceptors = mutableListOf(
@@ -284,9 +290,12 @@ data class Kaspresso(
 
         /**
          * Holds the [FlakySafetyParams] for [com.kaspersky.kaspresso.flakysafety.FlakySafetyProvider]'s usage.
-         * If it was not specified, the default implementation is used.
+         * If it was not specified, the default implementation for Kakao is used.
          */
-        val flakySafetyParams: FlakySafetyParams = FlakySafetyParams()
+        val flakySafetyParams: FlakySafetyParams = FlakySafetyParams.kakaoInstance()
+
+        // todo comment
+        val uiAutomatorDslFlakySafetyParams: FlakySafetyParams = FlakySafetyParams.uiAutomatorDslInstance()
 
         /**
          * Holds the [ContinuouslyParams] for [com.kaspersky.kaspresso.flakysafety.ContinuouslyProvider]'s usage.
