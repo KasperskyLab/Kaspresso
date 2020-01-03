@@ -55,4 +55,5 @@ dependencies {
 
     androidTestImplementation project(':kaspresso')
     androidTestImplementation "com.agoda.kakao:kakao:$versions.kakao"
+    androidTestImplementation project(':uiautomator_dsl')
 }

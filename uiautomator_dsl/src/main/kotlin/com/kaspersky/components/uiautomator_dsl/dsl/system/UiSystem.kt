@@ -20,4 +20,8 @@ object UiSystem : UiSystemActions, UiSystemAssertions,
     override val view: UiDeviceDelegate = UiDeviceDelegate(
         UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
     )
+
+    operator fun invoke(function: UiSystem.() -> Unit) {
+        function.invoke(this)
+    }
 }

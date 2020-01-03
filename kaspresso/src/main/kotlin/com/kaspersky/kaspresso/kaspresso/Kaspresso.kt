@@ -6,6 +6,7 @@ import androidx.test.espresso.FailureHandler
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.UiDevice
 import com.agoda.kakao.Kakao
+import com.kaspersky.components.uiautomator_dsl.UiAutomatorDslConfigurator
 import com.kaspersky.kaspresso.device.Device
 import com.kaspersky.kaspresso.device.accessibility.Accessibility
 import com.kaspersky.kaspresso.device.accessibility.AccessibilityImpl
@@ -58,6 +59,8 @@ import com.kaspersky.kaspresso.interceptors.behavior_uia.impl.ObjectLoaderBehavi
 import com.kaspersky.kaspresso.interceptors.tolibrary.kakao.impl.KakaoDataInterceptor
 import com.kaspersky.kaspresso.interceptors.tolibrary.kakao.impl.KakaoViewInterceptor
 import com.kaspersky.kaspresso.interceptors.tolibrary.kakao.impl.KakaoWebInterceptor
+import com.kaspersky.kaspresso.interceptors.tolibrary.uiautomator_dsl.UiAutomatorDslDeviceInterceptor
+import com.kaspersky.kaspresso.interceptors.tolibrary.uiautomator_dsl.UiAutomatorDslObjectInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.StepWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.TestRunWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.defaults.DefaultTestRunWatcherInterceptor
@@ -178,8 +181,8 @@ data class Kaspresso(
                     )
 
                     objectBehaviorInterceptors = mutableListOf(
-                        FlakySafeObjectBehaviorInterceptor(uiAutomatorDslFlakySafetyParams, libLogger),
-                        ObjectLoaderBehaviorInterceptor(libLogger)
+                        ObjectLoaderBehaviorInterceptor(libLogger),
+                        FlakySafeObjectBehaviorInterceptor(uiAutomatorDslFlakySafetyParams, libLogger)
                     )
 
                     deviceBehaviorInterceptors = mutableListOf(
@@ -469,6 +472,21 @@ data class Kaspresso(
             }
         }
 
+        private fun initUiAutomatorDslInterception(kaspresso: Kaspresso) {
+            val objectInterceptor = UiAutomatorDslObjectInterceptor(kaspresso)
+            val deviceInterceptor = UiAutomatorDslDeviceInterceptor(kaspresso)
+            UiAutomatorDslConfigurator.intercept {
+                onUiInteraction {
+                    onCheck(isOverride = true, interceptor = objectInterceptor::interceptCheck)
+                    onPerform(isOverride = true, interceptor = objectInterceptor::interceptPerform)
+                }
+                onUiDeviceInteraction {
+                    onCheck(isOverride = true, interceptor = deviceInterceptor::interceptCheck)
+                    onPerform(isOverride = true, interceptor = deviceInterceptor::interceptPerform)
+                }
+            }
+        }
+
         /**
          * Terminating method to build [Kaspresso] instance. Can be called only inside the framework package.
          * Actually called when the base [com.kaspersky.kaspresso.testcases.api.testcase.BaseTestCase] class is
@@ -527,6 +545,7 @@ data class Kaspresso(
             )
 
             initInterception(kaspresso)
+            initUiAutomatorDslInterception(kaspresso)
 
             failureHandler?.let { Espresso.setFailureHandler(it) }
 

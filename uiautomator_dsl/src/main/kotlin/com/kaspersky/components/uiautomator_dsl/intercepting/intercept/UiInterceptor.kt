@@ -98,7 +98,7 @@ class UiInterceptor <INTERACTION, ASSERTION, ACTION>(
      * @see com.kaspersky.components.uiautomator_dsl.dsl.screen.UiScreen
      */
     class Configurator {
-        private var uiObjectObjectInterceptor: UiInterceptor<UiObjectInteraction, UiObjectAssertion, UiObjectAction>? = null
+        private var uiObjectInterceptor: UiInterceptor<UiObjectInteraction, UiObjectAssertion, UiObjectAction>? = null
         private var uiDeviceInterceptor: UiInterceptor<UiDeviceInteraction, UiDeviceAssertion, UiDeviceAction>? = null
 
         /**
@@ -107,7 +107,7 @@ class UiInterceptor <INTERACTION, ASSERTION, ACTION>(
          * @param builder Builder of interceptor for [UiObjectInteraction]
          */
         fun onUiInteraction(builder: Builder<UiObjectInteraction, UiObjectAssertion, UiObjectAction>.() -> Unit) {
-            uiObjectObjectInterceptor = Builder<UiObjectInteraction, UiObjectAssertion, UiObjectAction>().apply(builder).build()
+            uiObjectInterceptor = Builder<UiObjectInteraction, UiObjectAssertion, UiObjectAction>().apply(builder).build()
         }
 
         /**
@@ -119,7 +119,7 @@ class UiInterceptor <INTERACTION, ASSERTION, ACTION>(
             uiDeviceInterceptor = Builder<UiDeviceInteraction, UiDeviceAssertion, UiDeviceAction>().apply(builder).build()
         }
 
-        internal fun configure() = Configuration(uiObjectObjectInterceptor, uiDeviceInterceptor)
+        internal fun configure() = Configuration(uiObjectInterceptor, uiDeviceInterceptor)
     }
 
     data class Configuration(

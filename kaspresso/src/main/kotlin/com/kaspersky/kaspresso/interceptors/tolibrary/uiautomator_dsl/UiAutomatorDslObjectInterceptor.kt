@@ -22,7 +22,7 @@ internal class UiAutomatorDslObjectInterceptor(
                 acc, objectBehaviorInterceptor ->
                 { objectBehaviorInterceptor.interceptCheck(interaction, assertion, acc) }
             }
-        )
+        ).invoke()
     }
 
     override fun interceptPerform(interaction: UiObjectInteraction, action: UiObjectAction) {
@@ -37,6 +37,6 @@ internal class UiAutomatorDslObjectInterceptor(
                     acc, objectBehaviorInterceptor ->
                 { objectBehaviorInterceptor.interceptPerform(interaction, action, acc) }
             }
-        )
+        ).invoke()
     }
 }
