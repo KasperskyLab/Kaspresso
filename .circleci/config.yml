@@ -58,6 +58,7 @@ jobs:
       - store_test_results:
           path: kaspresso/build/test-results
 workflows:
+  vesion: 2
   build_and_deploy:
     jobs:
       - build
