@@ -37,6 +37,12 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Inject environment variables
+          command: |
+            echo $'\n'bintrayuser=$bintrayuser >> ${HOME}/.gradle/gradle.properties
+            echo $'\n'bintraykey=$bintraykey >> ${HOME}/.gradle/gradle.properties
+            echo $'\n'artifactoryPassword=$artifactoryPassword >> ${HOME}/.gradle/gradle.properties
+      - run:
           name: Download Dependencies
           command: ./gradlew androidDependencies
       - run:
