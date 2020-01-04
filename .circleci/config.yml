@@ -28,7 +28,6 @@ jobs:
           destination: reports/uiautomator_dsl
       - store_test_results: 
           path: kaspresso/build/test-results
-
   deploy:
     working_directory: ~/code
     docker:
@@ -58,3 +57,9 @@ jobs:
           destination: reports/uiautomator_dsl
       - store_test_results:
           path: kaspresso/build/test-results
+workflows:
+  build_and_deploy:
+    jobs:
+      - build
+      - deploy
+
