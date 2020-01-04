@@ -38,6 +38,7 @@ jobs:
     branches:
       only:
         - master
+        - snapshots
     steps:
       - checkout
       - run:
