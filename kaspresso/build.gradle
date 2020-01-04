@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply from: '../dependencies.gradle'
 apply from: '../dokka.gradle'
-apply from: '../publish.gradle'
+apply from: 'publish.gradle'
 
 android {
     compileSdkVersion Integer.parseInt(versions.compileSdk)
@@ -59,29 +59,4 @@ task javadocJar(type: Jar, dependsOn: dokka) {
 artifacts {
     archives javadocJar
     archives sourcesJar
-}
-
-artifactory {
-    contextUrl = "https://oss.jfrog.org/artifactory"
-    publish {
-        repository {
-            repoKey = 'oss-snapshot-local'
-            username = "${bintrayuser}"
-            password = "${artifactoryPassword}"
-            maven = true
-        }
-
-        defaults {
-            publications 'Kaspresso'
-        }
-    }
-
-    resolve {
-        repository {
-            repoKey = 'libs-snapshot'
-            username = "${bintrayuser}"
-            password = "${artifactoryPassword}"
-            maven = true
-        }
-    }
 }
