@@ -17,7 +17,7 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class ComposeTest : TestCase(
-    kaspressoBuilder = Kaspresso.Builder.default().apply {
+    kaspressoBuilder = Kaspresso.Builder.advanced().apply {
         flakySafetyParams.timeoutMs = TimeUnit.SECONDS.toMillis(8)
     }
 ) {

@@ -81,7 +81,7 @@ abstract class DocLocScreenshotTestCase(
     private val screenshotsDirectory: File,
     private val changeSystemLocale: Boolean = false,
     locales: String?,
-    kaspressoBuilder: Kaspresso.Builder = Kaspresso.Builder.default()
+    kaspressoBuilder: Kaspresso.Builder = Kaspresso.Builder.advanced()
 ) : TestCase(kaspressoBuilder = kaspressoBuilder) {
 
     private lateinit var screenshotsDir: File
