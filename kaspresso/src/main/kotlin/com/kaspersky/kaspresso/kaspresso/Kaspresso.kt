@@ -110,13 +110,15 @@ data class Kaspresso(
 
         companion object {
             /**
-             * Puts the default preferences and entities pack to [Builder].
+             * Default (preconfigured full-featured with screenshot functionality) [Builder] for test environment configuration.
+             *
              * Please be aware if you add some settings after [default] method. You can catch inconsistent state of the
              * [Builder]. For example if you change [libLogger] after [default] method than all interceptors will work
              * with old [libLogger].
              *
              * @return the new instance of [Builder].
              */
+            @Deprecated("Use `advanced()` builder.", ReplaceWith("Kaspresso.Builder.advanced(customize)"))
             fun default(customize: Builder.() -> Unit = {}): Builder {
                 return Builder().apply {
 
@@ -125,6 +127,46 @@ data class Kaspresso(
                     postDefaultInitInterceptors()
 
                     failureHandler = LoggingFailureHandler(libLogger)
+                }
+            }
+
+            /**
+             * Simple (preconfigured with logging and flaky-safe features) [Builder] for test environment configuration.
+             *
+             * Please be aware if you add some settings after [default] method. You can catch inconsistent state of the
+             * [Builder]. For example if you change [libLogger] after [default] method than all interceptors will work
+             * with old [libLogger].
+             *
+             * @return the new instance of [Builder].
+             */
+            fun simple(customize: Builder.() -> Unit = {}): Builder {
+                return Builder().apply {
+
+                    customize.invoke(this)
+                    postInitVariables()
+                    postDefaultInitInterceptors()
+
+                    failureHandler = LoggingFailureHandler(libLogger)
+                }
+            }
+
+            /**
+             * Advanced (full-featured with screenshot functionality) [Builder] for test environment configuration.
+             *
+             * Please be aware if you add some settings after [default] method. You can catch inconsistent state of the
+             * [Builder]. For example if you change [libLogger] after [default] method than all interceptors will work
+             * with old [libLogger].
+             *
+             * @return the new instance of [Builder].
+             */
+            fun advanced(customize: Builder.() -> Unit = {}): Builder {
+                return simple(customize).apply {
+                    stepWatcherInterceptors.add(ScreenshotStepWatcherInterceptor(screenshots))
+                    testRunWatcherInterceptors.add(
+                        TestRunnerScreenshotWatcherInterceptor(
+                            screenshots
+                        )
+                    )
                 }
             }
         }
