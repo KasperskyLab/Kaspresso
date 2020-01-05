@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build:
+  analyze:
     working_directory: ~/code
     docker:
       - image: circleci/android:api-28
@@ -57,7 +57,7 @@ workflows:
   version: 2
   main_workflow:
     jobs:
-      - build
+      - analyze
       - deploy:
           filters:
             branches:
