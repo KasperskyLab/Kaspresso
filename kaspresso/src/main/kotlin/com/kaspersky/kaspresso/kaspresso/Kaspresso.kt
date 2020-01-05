@@ -109,33 +109,78 @@ data class Kaspresso(
     class Builder {
 
         companion object {
+
             /**
              * Default (preconfigured full-featured with screenshot functionality) [Builder] for test environment configuration.
              *
-             * Please be aware if you add some settings after [default] method. You can catch inconsistent state of the
-             * [Builder]. For example if you change [libLogger] after [default] method than all interceptors will work
-             * with old [libLogger].
+             * If you desire to override some variables in Configurator please use [customize] parameter here.
+             *
+             * The example is:
+             * ```
+             * class ComposeTest : TestCase(
+             *     kaspressoBuilder = Kaspresso.Builder.default {
+             *         screenshots = ScreenshotsImpl(libLogger, activities, "my_directory")
+             *     }
+             * )
+             * ```
+             * In this case your implementation of ```screenshots``` will be used for initializing of all other variables.
+             * So, your implementation has a priority over the default implementation while using [customize] parameter for the overriding.
+             *
+             * Otherwise, if you don't set custom implementation then default implementation of ```screenshots``` will be explored.
+             *
+             * Please, be aware, that overridings like:
+             * ```
+             * class ComposeTest : TestCase(
+             *     kaspressoBuilder = Kaspresso.Builder.default().apply {
+             *         screenshots = ScreenshotsImpl(libLogger, activities, "my_directory")
+             *     }
+             * )
+             * ```
+             * don't give you desired effect! Yes, you have an possibility to use your custom ```screenshots```, but
+             * in all interceptors and other variables default implementation of ```screenshots``` will be exploring.
+             *
+             * We strongly recommend to use ```apply``` construction in such cases as an updating of a list of interceptors or
+             * to change the order of interceptors in the list (for example, it are variables like
+             * ```viewActionWatcherInterceptors```, ```viewAssertionWatcherInterceptors```, etc).
+             *
              *
              * @return the new instance of [Builder].
              */
             @Deprecated("Use `advanced()` builder.", ReplaceWith("Kaspresso.Builder.advanced(customize)"))
-            fun default(customize: Builder.() -> Unit = {}): Builder {
-                return Builder().apply {
-
-                    customize.invoke(this)
-                    postInitVariables()
-                    postDefaultInitInterceptors()
-
-                    failureHandler = LoggingFailureHandler(libLogger)
-                }
-            }
+            fun default(customize: Builder.() -> Unit = {}): Builder = advanced(customize)
 
             /**
              * Simple (preconfigured with logging and flaky-safe features) [Builder] for test environment configuration.
              *
-             * Please be aware if you add some settings after [default] method. You can catch inconsistent state of the
-             * [Builder]. For example if you change [libLogger] after [default] method than all interceptors will work
-             * with old [libLogger].
+             * If you desire to override some variables in Configurator please use [customize] parameter here.
+             *
+             * The example is:
+             * ```
+             * class ComposeTest : TestCase(
+             *     kaspressoBuilder = Kaspresso.Builder.default {
+             *         screenshots = ScreenshotsImpl(libLogger, activities, "my_directory")
+             *     }
+             * )
+             * ```
+             * In this case your implementation of ```screenshots``` will be used for initializing of all other variables.
+             * So, your implementation has a priority over the default implementation while using [customize] parameter for the overriding.
+             *
+             * Otherwise, if you don't set custom implementation then default implementation of ```screenshots``` will be explored.
+             *
+             * Please, be aware, that overridings like:
+             * ```
+             * class ComposeTest : TestCase(
+             *     kaspressoBuilder = Kaspresso.Builder.default().apply {
+             *         screenshots = ScreenshotsImpl(libLogger, activities, "my_directory")
+             *     }
+             * )
+             * ```
+             * don't give you desired effect! Yes, you have an possibility to use your custom ```screenshots```, but
+             * in all interceptors and other variables default implementation of ```screenshots``` will be exploring.
+             *
+             * We strongly recommend to use ```apply``` construction in such cases as an updating of a list of interceptors or
+             * to change the order of interceptors in the list (for example, it are variables like
+             * ```viewActionWatcherInterceptors```, ```viewAssertionWatcherInterceptors```, etc).
              *
              * @return the new instance of [Builder].
              */
@@ -153,9 +198,35 @@ data class Kaspresso(
             /**
              * Advanced (full-featured with screenshot functionality) [Builder] for test environment configuration.
              *
-             * Please be aware if you add some settings after [default] method. You can catch inconsistent state of the
-             * [Builder]. For example if you change [libLogger] after [default] method than all interceptors will work
-             * with old [libLogger].
+             * If you desire to override some variables in Configurator please use [customize] parameter here.
+             *
+             * The example is:
+             * ```
+             * class ComposeTest : TestCase(
+             *     kaspressoBuilder = Kaspresso.Builder.default {
+             *         screenshots = ScreenshotsImpl(libLogger, activities, "my_directory")
+             *     }
+             * )
+             * ```
+             * In this case your implementation of ```screenshots``` will be used for initializing of all other variables.
+             * So, your implementation has a priority over the default implementation while using [customize] parameter for the overriding.
+             *
+             * Otherwise, if you don't set custom implementation then default implementation of ```screenshots``` will be explored.
+             *
+             * Please, be aware, that overridings like:
+             * ```
+             * class ComposeTest : TestCase(
+             *     kaspressoBuilder = Kaspresso.Builder.default().apply {
+             *         screenshots = ScreenshotsImpl(libLogger, activities, "my_directory")
+             *     }
+             * )
+             * ```
+             * don't give you desired effect! Yes, you have an possibility to use your custom ```screenshots```, but
+             * in all interceptors and other variables default implementation of ```screenshots``` will be exploring.
+             *
+             * We strongly recommend to use ```apply``` construction in such cases as an updating of a list of interceptors or
+             * to change the order of interceptors in the list (for example, it are variables like
+             * ```viewActionWatcherInterceptors```, ```viewAssertionWatcherInterceptors```, etc).
              *
              * @return the new instance of [Builder].
              */
@@ -476,13 +547,11 @@ data class Kaspresso(
             )
 
             if (!::stepWatcherInterceptors.isInitialized) stepWatcherInterceptors = mutableListOf(
-                LoggingStepWatcherInterceptor(libLogger),
-                ScreenshotStepWatcherInterceptor(screenshots)
+                LoggingStepWatcherInterceptor(libLogger)
             )
 
             if (!::testRunWatcherInterceptors.isInitialized) testRunWatcherInterceptors = mutableListOf(
                 TestRunLoggerWatcherInterceptor(libLogger),
-                TestRunnerScreenshotWatcherInterceptor(screenshots),
                 BuildStepReportWatcherInterceptor(AllureReportWriter(libLogger)),
                 defaultsTestRunWatcherInterceptor
             )
