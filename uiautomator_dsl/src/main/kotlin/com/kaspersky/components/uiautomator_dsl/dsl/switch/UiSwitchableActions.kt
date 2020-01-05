@@ -19,7 +19,7 @@ interface UiSwitchableActions : UiBaseActions {
     fun swipeSwitchThumb(direction: Direction) {
         view.perform(SWITCH, "direction=$direction") {
             val uiDirection: androidx.test.uiautomator.Direction =
-                if(direction == Direction.RIGHT)
+                if (direction == Direction.RIGHT)
                     androidx.test.uiautomator.Direction.RIGHT
                 else
                     androidx.test.uiautomator.Direction.LEFT

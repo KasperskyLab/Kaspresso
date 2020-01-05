@@ -1,8 +1,8 @@
 package com.kaspersky.components.uiautomator_dsl.dsl.system
 
+import com.kaspersky.components.uiautomator_dsl.dsl.system.UiSystemAssertions.SystemAssertionType.IS_SCREEN_ON
 import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion.UiActionType
 import com.kaspersky.components.uiautomator_dsl.intercepting.delegate.UiDeviceDelegate
-import com.kaspersky.components.uiautomator_dsl.dsl.system.UiSystemAssertions.SystemAssertionType.IS_SCREEN_ON
 
 /**
  * Interface with common assertions providing by UiAutomator and executing in the System
@@ -33,5 +33,4 @@ interface UiSystemAssertions {
     enum class SystemAssertionType : UiActionType {
         IS_SCREEN_ON
     }
-
 }

@@ -17,5 +17,4 @@ interface UiAutomatorDslBehaviorInterceptor<INTERACTION, ASSERTION, ACTION> {
      * @param activity a function-wrapper of an action or an assertion to be invoked.
      */
     fun <T> interceptPerform(interaction: INTERACTION, action: ACTION, activity: () -> T): T
-
 }

@@ -28,7 +28,8 @@ class UiSimpleTest : TestCase() {
     fun upgradeTest() {
         before {
             activityTestRule.launchActivity(null)
-        }.after {  }.run {
+        }.after {
+        }.run {
 
             step("Input text in EditText and check it") {
                 MainScreen {

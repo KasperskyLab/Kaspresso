@@ -4,7 +4,6 @@ import androidx.test.uiautomator.UiObject2
 import com.google.common.truth.Truth.assertThat
 import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion.UiAction
 import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion.UiActionType
-import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiObjectInteraction
 
 /**
  * Special separate Assertion to determine UiAutomator View is displayed or not
@@ -23,7 +22,7 @@ class DisplayedObjectAssertion private constructor(
     override fun getDescription(): String? = null
 
     override fun execute(innerView: UiObject2) {
-        when(type) {
+        when (type) {
             DisplayedAssertType.IS_DISPLAYED -> assertThat(innerView).isNotNull()
             DisplayedAssertType.IS_NOT_DISPLAYED -> assertThat(innerView).isNull()
         }
@@ -33,5 +32,4 @@ class DisplayedObjectAssertion private constructor(
         IS_DISPLAYED,
         IS_NOT_DISPLAYED,
     }
-
 }

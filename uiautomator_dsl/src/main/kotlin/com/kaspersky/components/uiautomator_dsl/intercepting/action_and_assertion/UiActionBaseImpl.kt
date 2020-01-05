@@ -6,7 +6,7 @@ class UiActionBaseImpl<VIEW>(
     private val action: VIEW.() -> Unit
 ) : UiAction<VIEW> {
 
-    override fun getType(): UiActionType  = type
+    override fun getType(): UiActionType = type
 
     override fun getDescription(): String? = description
 

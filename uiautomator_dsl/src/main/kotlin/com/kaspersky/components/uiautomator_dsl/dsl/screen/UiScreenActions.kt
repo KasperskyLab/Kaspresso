@@ -24,5 +24,4 @@ interface UiScreenActions {
     enum class UiScreenActionType : UiActionType {
         PRESS_BACK
     }
-
 }

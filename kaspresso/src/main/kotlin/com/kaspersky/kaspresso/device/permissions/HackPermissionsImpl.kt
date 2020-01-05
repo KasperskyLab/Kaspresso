@@ -3,7 +3,6 @@ package com.kaspersky.kaspresso.device.permissions
 import android.app.UiAutomation
 import android.os.Process
 import android.os.UserHandle
-import androidx.test.platform.app.InstrumentationRegistry
 import com.kaspersky.kaspresso.logger.UiTestLogger
 
 /**

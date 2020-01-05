@@ -2,7 +2,6 @@ package com.kaspersky.components.uiautomator_dsl.dsl.text
 
 import com.google.common.truth.Truth.assertThat
 import com.kaspersky.components.uiautomator_dsl.dsl.common.assertions.UiBaseAssertions
-import com.kaspersky.components.uiautomator_dsl.dsl.text.UiTextViewAssertions.TextViewAssertType.*
 import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion.UiActionType
 
 /**
@@ -14,14 +13,14 @@ interface UiTextViewAssertions : UiBaseAssertions {
      * Checks if the view has empty text
      */
     fun hasEmptyText() {
-        view.check(HAS_EMPTY_TEXT) { assertThat(text).isEmpty() }
+        view.check(TextViewAssertType.HAS_EMPTY_TEXT) { assertThat(text).isEmpty() }
     }
 
     /**
      * Checks if the view has any text
      */
     fun hasAnyText() {
-        view.check(HAS_ANY_TEXT) { assertThat(text).isNotEmpty() }
+        view.check(TextViewAssertType.HAS_ANY_TEXT) { assertThat(text).isNotEmpty() }
     }
 
     /**
@@ -29,7 +28,7 @@ interface UiTextViewAssertions : UiBaseAssertions {
      */
     fun hasText(text: String) {
         view.check(
-            HAS_TEXT,
+            TextViewAssertType.HAS_TEXT,
             "hasText(text=$text)"
         // todo isEqualTo doesn't support auto-capitalization
         // todo but Kakao does
@@ -41,7 +40,7 @@ interface UiTextViewAssertions : UiBaseAssertions {
      */
     fun hasNoText(text: String) {
         view.check(
-            HAS_NO_TEXT,
+            TextViewAssertType.HAS_NO_TEXT,
             "hasNoText(text=$text)"
         ) { assertThat(this.text).isNotEqualTo(text) }
     }
@@ -51,7 +50,7 @@ interface UiTextViewAssertions : UiBaseAssertions {
      */
     fun containsText(text: String) {
         view.check(
-            CONTAINS_TEXT,
+            TextViewAssertType.CONTAINS_TEXT,
             "containsText(text=$text)"
         ) { assertThat(this.text).contains(text) }
     }

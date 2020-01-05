@@ -25,5 +25,4 @@ object UiCommonFlakyScreen : UiSampleScreen<UiCommonFlakyScreen>() {
     val tv6 = UiButton {
         withId(PACKAGE, "scroll_view_tv6")
     }
-
 }

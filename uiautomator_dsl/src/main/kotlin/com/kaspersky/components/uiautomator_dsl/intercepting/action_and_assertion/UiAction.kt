@@ -10,5 +10,4 @@ interface UiAction<VIEW> {
     fun getDescription(): String?
 
     fun execute(innerView: VIEW)
-
 }

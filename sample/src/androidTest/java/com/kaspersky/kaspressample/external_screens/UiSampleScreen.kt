@@ -7,5 +7,4 @@ open class UiSampleScreen<out T : UiSampleScreen<T>> : UiScreen<T>() {
     companion object {
         const val PACKAGE = "com.kaspersky.kaspressample"
     }
-
 }

@@ -2,7 +2,6 @@ package com.kaspersky.components.uiautomator_dsl.dsl.edit
 
 import com.kaspersky.components.uiautomator_dsl.dsl.common.actions.UiBaseActions
 import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion.UiActionType
-import com.kaspersky.components.uiautomator_dsl.dsl.edit.UiEditableActions.EditableUiActionType.*
 
 /**
  * Provides editable actions for UiEditText
@@ -16,7 +15,7 @@ interface UiEditableActions : UiBaseActions {
      */
     fun typeText(text: String) {
         view.perform(
-            TYPE_TEXT,
+            EditableUiActionType.TYPE_TEXT,
             "typeText(text=$text)"
         ) { this.text = this.text + text }
     }
@@ -28,7 +27,7 @@ interface UiEditableActions : UiBaseActions {
      */
     fun replaceText(text: String) {
         view.perform(
-            REPLACE_TEXT,
+            EditableUiActionType.REPLACE_TEXT,
             "replaceText(text=$text)"
         ) { this.text = text }
     }
@@ -37,7 +36,7 @@ interface UiEditableActions : UiBaseActions {
      * Clears the text content into the view
      */
     fun clearText() {
-        view.perform(CLEAR_TEXT) { clear() }
+        view.perform(EditableUiActionType.CLEAR_TEXT) { clear() }
     }
 
     enum class EditableUiActionType : UiActionType {

@@ -3,12 +3,16 @@ package com.kaspersky.components.uiautomator_dsl.dsl.screen
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.UiDevice
 import com.kaspersky.components.uiautomator_dsl.dsl.common.UiAutomatorDslMarker
-import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion.*
+import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion.UiDeviceAction
+import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion.UiDeviceAssertion
+import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion.UiObjectAction
+import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion.UiObjectAssertion
+import com.kaspersky.components.uiautomator_dsl.intercepting.delegate.UiDeviceDelegate
 import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiDeviceInteraction
 import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiObjectInteraction
 import com.kaspersky.components.uiautomator_dsl.intercepting.intercept.UiInterceptor
-import com.kaspersky.components.uiautomator_dsl.intercepting.delegate.UiDeviceDelegate
-import java.util.*
+import java.util.Deque
+import java.util.LinkedList
 
 /**
  * Container class for UiAutomator elements.

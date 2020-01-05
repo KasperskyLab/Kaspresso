@@ -1,7 +1,7 @@
 package com.kaspersky.components.uiautomator_dsl.dsl.check
+import com.kaspersky.components.uiautomator_dsl.dsl.check.UiCheckableActions.CheckableActionType.SET_CHECKED
 import com.kaspersky.components.uiautomator_dsl.dsl.common.actions.UiBaseActions
 import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion.UiActionType
-import com.kaspersky.components.uiautomator_dsl.dsl.check.UiCheckableActions.CheckableActionType.SET_CHECKED
 
 interface UiCheckableActions : UiBaseActions {
 
@@ -19,6 +19,4 @@ interface UiCheckableActions : UiBaseActions {
     enum class CheckableActionType : UiActionType {
         SET_CHECKED
     }
-
-
 }

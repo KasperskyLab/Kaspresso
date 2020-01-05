@@ -3,7 +3,6 @@ package com.kaspersky.components.uiautomator_dsl.dsl.text
 import androidx.test.uiautomator.BySelector
 import com.kaspersky.components.uiautomator_dsl.dsl.common.builders.UiViewBuilder
 import com.kaspersky.components.uiautomator_dsl.dsl.common.views.UiBaseView
-import com.kaspersky.components.uiautomator_dsl.dsl.edit.UiEditableActions
 
 /**
  * Ui View with UiBaseActions and UiTextViewAssertions

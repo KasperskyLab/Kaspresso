@@ -9,9 +9,9 @@ import com.kaspersky.components.uiautomator_dsl.dsl.common.assertions.UiBaseAsse
 import com.kaspersky.components.uiautomator_dsl.dsl.common.builders.UiViewBuilder
 import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion.UiObjectAction
 import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion.UiObjectAssertion
-import com.kaspersky.components.uiautomator_dsl.intercepting.intercept.UiInterceptable
-import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiObjectInteraction
 import com.kaspersky.components.uiautomator_dsl.intercepting.delegate.UiObjectDelegate
+import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiObjectInteraction
+import com.kaspersky.components.uiautomator_dsl.intercepting.intercept.UiInterceptable
 
 /**
  * Base class for all UiAutomator DSL views

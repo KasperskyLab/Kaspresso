@@ -3,7 +3,10 @@ package com.kaspersky.components.uiautomator_dsl.intercepting.delegate
 import androidx.test.uiautomator.UiDevice
 import com.kaspersky.components.uiautomator_dsl.UiAutomatorDslConfigurator
 import com.kaspersky.components.uiautomator_dsl.dsl.screen.UiScreen
-import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion.*
+import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion.UiActionBaseImpl
+import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion.UiActionType
+import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion.UiDeviceAction
+import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion.UiDeviceAssertion
 import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiDeviceInteraction
 import com.kaspersky.components.uiautomator_dsl.intercepting.intercept.UiInterceptor
 
