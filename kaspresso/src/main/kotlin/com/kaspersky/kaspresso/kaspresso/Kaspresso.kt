@@ -119,25 +119,25 @@ data class Kaspresso(
              * ```
              * class ComposeTest : TestCase(
              *     kaspressoBuilder = Kaspresso.Builder.default {
-             *         screenshots = ScreenshotsImpl(libLogger, activities, "my_directory")
+             *         adbServer = CustomAdbServerImpl()
              *     }
              * )
              * ```
-             * In this case your implementation of ```screenshots``` will be used for initializing of all other variables.
+             * In this case your implementation of ```adbServer``` will be used for initializing of all other variables.
              * So, your implementation has a priority over the default implementation while using [customize] parameter for the overriding.
              *
-             * Otherwise, if you don't set custom implementation then default implementation of ```screenshots``` will be explored.
+             * Otherwise, if you don't set custom implementation then default implementation of ```adbServer``` will be explored.
              *
              * Please, be aware, that overridings like:
              * ```
              * class ComposeTest : TestCase(
              *     kaspressoBuilder = Kaspresso.Builder.default().apply {
-             *         screenshots = ScreenshotsImpl(libLogger, activities, "my_directory")
+             *         adbServer = CustomAdbServerImpl()
              *     }
              * )
              * ```
-             * don't give you desired effect! Yes, you have an possibility to use your custom ```screenshots```, but
-             * in all interceptors and other variables default implementation of ```screenshots``` will be exploring.
+             * don't give you desired effect! Yes, you have an possibility to use your custom ```adbServer```, but
+             * in all interceptors and other variables default implementation of ```adbServer``` will be exploring.
              *
              * We strongly recommend to use ```apply``` construction in such cases as an updating of a list of interceptors or
              * to change the order of interceptors in the list (for example, it are variables like
@@ -157,26 +157,26 @@ data class Kaspresso(
              * The example is:
              * ```
              * class ComposeTest : TestCase(
-             *     kaspressoBuilder = Kaspresso.Builder.default {
-             *         screenshots = ScreenshotsImpl(libLogger, activities, "my_directory")
+             *     kaspressoBuilder = Kaspresso.Builder.simple {
+             *         adbServer = CustomAdbServerImpl()
              *     }
              * )
              * ```
-             * In this case your implementation of ```screenshots``` will be used for initializing of all other variables.
+             * In this case your implementation of ```adbServer``` will be used for initializing of all other variables.
              * So, your implementation has a priority over the default implementation while using [customize] parameter for the overriding.
              *
-             * Otherwise, if you don't set custom implementation then default implementation of ```screenshots``` will be explored.
+             * Otherwise, if you don't set custom implementation then default implementation of ```adbServer``` will be explored.
              *
              * Please, be aware, that overridings like:
              * ```
              * class ComposeTest : TestCase(
-             *     kaspressoBuilder = Kaspresso.Builder.default().apply {
-             *         screenshots = ScreenshotsImpl(libLogger, activities, "my_directory")
+             *     kaspressoBuilder = Kaspresso.Builder.simple().apply {
+             *         adbServer = CustomAdbServerImpl()
              *     }
              * )
              * ```
-             * don't give you desired effect! Yes, you have an possibility to use your custom ```screenshots```, but
-             * in all interceptors and other variables default implementation of ```screenshots``` will be exploring.
+             * don't give you desired effect! Yes, you have an possibility to use your custom ```adbServer```, but
+             * in all interceptors and other variables default implementation of ```adbServer``` will be exploring.
              *
              * We strongly recommend to use ```apply``` construction in such cases as an updating of a list of interceptors or
              * to change the order of interceptors in the list (for example, it are variables like
@@ -203,26 +203,26 @@ data class Kaspresso(
              * The example is:
              * ```
              * class ComposeTest : TestCase(
-             *     kaspressoBuilder = Kaspresso.Builder.default {
-             *         screenshots = ScreenshotsImpl(libLogger, activities, "my_directory")
+             *     kaspressoBuilder = Kaspresso.Builder.advanced {
+             *         adbServer = CustomAdbServerImpl()
              *     }
              * )
              * ```
-             * In this case your implementation of ```screenshots``` will be used for initializing of all other variables.
+             * In this case your implementation of ```adbServer``` will be used for initializing of all other variables.
              * So, your implementation has a priority over the default implementation while using [customize] parameter for the overriding.
              *
-             * Otherwise, if you don't set custom implementation then default implementation of ```screenshots``` will be explored.
+             * Otherwise, if you don't set custom implementation then default implementation of ```adbServer``` will be explored.
              *
              * Please, be aware, that overridings like:
              * ```
              * class ComposeTest : TestCase(
-             *     kaspressoBuilder = Kaspresso.Builder.default().apply {
-             *         screenshots = ScreenshotsImpl(libLogger, activities, "my_directory")
+             *     kaspressoBuilder = Kaspresso.Builder.advanced().apply {
+             *         adbServer = CustomAdbServerImpl()
              *     }
              * )
              * ```
-             * don't give you desired effect! Yes, you have an possibility to use your custom ```screenshots```, but
-             * in all interceptors and other variables default implementation of ```screenshots``` will be exploring.
+             * don't give you desired effect! Yes, you have an possibility to use your custom ```adbServer```, but
+             * in all interceptors and other variables default implementation of ```adbServer``` will be exploring.
              *
              * We strongly recommend to use ```apply``` construction in such cases as an updating of a list of interceptors or
              * to change the order of interceptors in the list (for example, it are variables like
