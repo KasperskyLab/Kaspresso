@@ -23,9 +23,6 @@ jobs:
       - store_artifacts:
           path: kaspresso/build/reports
           destination: reports/kaspresso
-      - store_artifacts:
-          path: uiautomator_dsl/build/reports
-          destination: reports/uiautomator_dsl
       - store_test_results: 
           path: kaspresso/build/test-results
   deploy:
@@ -54,9 +51,6 @@ jobs:
       - store_artifacts:
           path: kaspresso/build/reports
           destination: reports/kaspresso
-      - store_artifacts:
-          path: uiautomator_dsl/build/reports
-          destination: reports/uiautomator_dsl
       - store_test_results:
           path: kaspresso/build/test-results
 workflows:
@@ -69,5 +63,3 @@ workflows:
             branches:
               only:
                 - master
-                - snapshots
-
