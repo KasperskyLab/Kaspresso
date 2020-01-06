@@ -23,4 +23,14 @@ interface Files {
      * @param path a path to remove
      */
     fun remove(path: String)
+
+    /**
+     * Performs adb pull.
+     *
+     * Required Permissions: INTERNET.
+     *
+     * @param devicePath a file path relative to the device directory.
+     * @param serverPath a path to copy. (If empty - pulls in adbServer directory)
+     */
+    fun pull(devicePath: String, serverPath: String = "")
 }

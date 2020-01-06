@@ -23,6 +23,8 @@ import com.kaspersky.kaspresso.device.languages.Language
 import com.kaspersky.kaspresso.device.languages.LanguageImpl
 import com.kaspersky.kaspresso.device.location.Location
 import com.kaspersky.kaspresso.device.location.LocationImpl
+import com.kaspersky.kaspresso.device.logcat.Logcat
+import com.kaspersky.kaspresso.device.logcat.LogcatImpl
 import com.kaspersky.kaspresso.device.network.Network
 import com.kaspersky.kaspresso.device.network.NetworkImpl
 import com.kaspersky.kaspresso.device.permissions.HackPermissions
@@ -259,6 +261,11 @@ data class Kaspresso(
         var language: Language = LanguageImpl(libLogger, instrumentation.targetContext)
 
         /**
+         * Holds an implementation of [Logcat] interface. If it was not specified, the default implementation is used.
+         */
+        var logcat: Logcat = LogcatImpl()
+
+        /**
          * Holds the [FlakySafetyParams] for [com.kaspersky.kaspresso.flakysafety.FlakySafetyProvider]'s usage.
          * If it was not specified, the default implementation is used.
          */
@@ -402,7 +409,7 @@ data class Kaspresso(
 
         /**
          * Sets the Kaspressos's implementations of Kakao's [androidx.test.espresso.ViewInteraction] interceptor,
-         * [androidx.test.espresso.DataInteraction] interceptor and [androidx.test.espresso.WebInteraction] interceptor.
+         * [androidx.test.espresso.DataInteraction] interceptor and [androidx.test.espresso.web.sugar.Web.WebInteraction] interceptor.
          */
         private fun initInterception(kaspresso: Kaspresso) {
             val viewInterceptor = KakaoViewInterceptor(kaspresso)
@@ -452,7 +459,8 @@ data class Kaspresso(
                     permissions = permissions,
                     hackPermissions = hackPermissions,
                     exploit = exploit,
-                    language = language
+                    language = language,
+                    logcat = logcat
                 ),
 
                 params = Params(

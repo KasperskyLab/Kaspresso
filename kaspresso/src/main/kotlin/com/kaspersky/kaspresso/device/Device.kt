@@ -11,6 +11,7 @@ import com.kaspersky.kaspresso.device.files.Files
 import com.kaspersky.kaspresso.device.keyboard.Keyboard
 import com.kaspersky.kaspresso.device.languages.Language
 import com.kaspersky.kaspresso.device.location.Location
+import com.kaspersky.kaspresso.device.logcat.Logcat
 import com.kaspersky.kaspresso.device.network.Network
 import com.kaspersky.kaspresso.device.permissions.HackPermissions
 import com.kaspersky.kaspresso.device.permissions.Permissions
@@ -85,7 +86,12 @@ data class Device(
     /**
      * Holds the reference to the implementation of [Language] interface.
      */
-    val language: Language
+    val language: Language,
+
+    /**
+     * Holds the reference to the implementation of [Logcat] interface.
+     */
+    val logcat: Logcat
 ) {
     /**
      * A not caching property to get [Context].
