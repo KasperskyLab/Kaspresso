@@ -1,8 +1,8 @@
 package com.kaspersky.components.uiautomator_dsl.intercepting.interaction
 
-import androidx.test.uiautomator.BySelector
 import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.UiObject2
+import com.kaspersky.components.uiautomator_dsl.dsl.common.builders.UiViewSelector
 import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion.UiObjectAction
 import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion.UiObjectAssertion
 import com.kaspersky.components.uiautomator_dsl.intercepting.exception.UnfoundedUiObjectException
@@ -12,7 +12,7 @@ import com.kaspersky.components.uiautomator_dsl.intercepting.exception.Unfounded
  */
 class UiObjectInteraction(
     val device: UiDevice,
-    val selector: BySelector,
+    val selector: UiViewSelector,
     // UiButton, UiTextView, UiEditText, etc.
     val elementClassName: String
 ) : UiInteraction<UiObjectAssertion, UiObjectAction> {
@@ -21,7 +21,9 @@ class UiObjectInteraction(
         private set
 
     fun tryToFindUiObject() {
-        uiObject2 = device.findObject(selector)
+        val uiObjects = device.findObjects(selector.bySelector)
+        if (uiObjects.isNotEmpty() && selector.index < uiObjects.size)
+            uiObject2 = uiObjects[selector.index]
     }
 
     override fun check(assertion: UiObjectAssertion) {

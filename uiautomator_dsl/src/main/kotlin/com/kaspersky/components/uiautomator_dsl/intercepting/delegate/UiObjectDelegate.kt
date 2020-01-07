@@ -1,9 +1,9 @@
 package com.kaspersky.components.uiautomator_dsl.intercepting.delegate
 
-import androidx.test.uiautomator.BySelector
 import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.UiObject2
 import com.kaspersky.components.uiautomator_dsl.UiAutomatorDslConfigurator
+import com.kaspersky.components.uiautomator_dsl.dsl.common.builders.UiViewSelector
 import com.kaspersky.components.uiautomator_dsl.dsl.screen.UiScreen
 import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion.UiActionBaseImpl
 import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion.UiActionType
@@ -21,7 +21,7 @@ import com.kaspersky.components.uiautomator_dsl.intercepting.intercept.UiInterce
  */
 class UiObjectDelegate(
     device: UiDevice,
-    selector: BySelector,
+    selector: UiViewSelector,
     elementClassName: String
 ) : UiDelegate<UiObjectInteraction, UiObjectAssertion, UiObjectAction> {
 

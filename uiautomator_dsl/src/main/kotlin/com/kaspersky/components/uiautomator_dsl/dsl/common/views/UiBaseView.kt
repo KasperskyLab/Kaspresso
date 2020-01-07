@@ -1,12 +1,12 @@
 package com.kaspersky.components.uiautomator_dsl.dsl.common.views
 
 import androidx.test.platform.app.InstrumentationRegistry
-import androidx.test.uiautomator.BySelector
 import androidx.test.uiautomator.UiDevice
 import com.kaspersky.components.uiautomator_dsl.dsl.common.UiAutomatorDslMarker
 import com.kaspersky.components.uiautomator_dsl.dsl.common.actions.UiBaseActions
 import com.kaspersky.components.uiautomator_dsl.dsl.common.assertions.UiBaseAssertions
 import com.kaspersky.components.uiautomator_dsl.dsl.common.builders.UiViewBuilder
+import com.kaspersky.components.uiautomator_dsl.dsl.common.builders.UiViewSelector
 import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion.UiObjectAction
 import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion.UiObjectAssertion
 import com.kaspersky.components.uiautomator_dsl.intercepting.delegate.UiObjectDelegate
@@ -24,7 +24,7 @@ import com.kaspersky.components.uiautomator_dsl.intercepting.intercept.UiInterce
  */
 @Suppress("UNCHECKED_CAST")
 @UiAutomatorDslMarker
-open class UiBaseView<out T>(selector: BySelector) : UiBaseActions, UiBaseAssertions,
+open class UiBaseView<out T>(selector: UiViewSelector) : UiBaseActions, UiBaseAssertions,
     UiInterceptable<UiObjectInteraction, UiObjectAssertion, UiObjectAction> {
 
     final override val view: UiObjectDelegate by lazy {

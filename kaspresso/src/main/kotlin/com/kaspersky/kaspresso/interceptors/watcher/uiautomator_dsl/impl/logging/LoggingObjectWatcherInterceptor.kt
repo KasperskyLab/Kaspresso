@@ -12,11 +12,11 @@ class LoggingObjectWatcherInterceptor(
 
     override fun interceptCheck(interaction: UiObjectInteraction, assertion: UiObjectAssertion) {
         logger.i("Check=${assertion.getType()}(description={${assertion.getDescription()}} is executing on " +
-                "${interaction.elementClassName}) that was founded by selector=${interaction.selector}")
+                "${interaction.elementClassName}) that was founded by selector=${interaction.selector.bySelector}")
     }
 
     override fun interceptPerform(interaction: UiObjectInteraction, action: UiObjectAction) {
         logger.i("Action=${action.getType()}(description={${action.getDescription()}} is executing on " +
-                "${interaction.elementClassName}) that was founded by selector=${interaction.selector}")
+                "${interaction.elementClassName}) that was founded by selector=${interaction.selector.bySelector}")
     }
 }
