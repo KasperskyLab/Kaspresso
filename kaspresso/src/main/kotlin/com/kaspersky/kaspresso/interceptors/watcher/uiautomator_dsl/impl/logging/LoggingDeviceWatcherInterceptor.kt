@@ -1,8 +1,8 @@
 package com.kaspersky.kaspresso.interceptors.watcher.uiautomator_dsl.impl.logging
 
+import com.kaspersky.components.uiautomatordsl.intercepting.interaction.UiDeviceInteraction
 import com.kaspersky.components.uiautomatordsl.intercepting.operation.UiDeviceAction
 import com.kaspersky.components.uiautomatordsl.intercepting.operation.UiDeviceAssertion
-import com.kaspersky.components.uiautomatordsl.intercepting.interaction.UiDeviceInteraction
 import com.kaspersky.kaspresso.interceptors.watcher.uiautomator_dsl.DeviceWatcherInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
 

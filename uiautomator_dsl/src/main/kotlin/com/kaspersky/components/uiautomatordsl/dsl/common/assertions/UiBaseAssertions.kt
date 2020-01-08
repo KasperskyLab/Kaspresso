@@ -1,8 +1,8 @@
 package com.kaspersky.components.uiautomatordsl.dsl.common.assertions
 
 import com.google.common.truth.Truth.assertThat
-import com.kaspersky.components.uiautomatordsl.intercepting.operation.UiOperationType
 import com.kaspersky.components.uiautomatordsl.intercepting.delegate.UiObjectDelegate
+import com.kaspersky.components.uiautomatordsl.intercepting.operation.UiOperationType
 
 /**
  * Base interface for asserting UiAutomator views

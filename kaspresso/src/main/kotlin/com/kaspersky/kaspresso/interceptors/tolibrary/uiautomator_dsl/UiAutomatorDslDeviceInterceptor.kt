@@ -1,8 +1,8 @@
 package com.kaspersky.kaspresso.interceptors.tolibrary.uiautomator_dsl
 
+import com.kaspersky.components.uiautomatordsl.intercepting.interaction.UiDeviceInteraction
 import com.kaspersky.components.uiautomatordsl.intercepting.operation.UiDeviceAction
 import com.kaspersky.components.uiautomatordsl.intercepting.operation.UiDeviceAssertion
-import com.kaspersky.components.uiautomatordsl.intercepting.interaction.UiDeviceInteraction
 import com.kaspersky.kaspresso.interceptors.tolibrary.LibraryInterceptor
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 

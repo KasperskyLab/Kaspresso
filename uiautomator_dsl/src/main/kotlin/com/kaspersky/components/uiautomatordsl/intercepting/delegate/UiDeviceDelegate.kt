@@ -3,12 +3,12 @@ package com.kaspersky.components.uiautomatordsl.intercepting.delegate
 import androidx.test.uiautomator.UiDevice
 import com.kaspersky.components.uiautomatordsl.UiAutomatorDslConfigurator
 import com.kaspersky.components.uiautomatordsl.dsl.screen.UiScreen
-import com.kaspersky.components.uiautomatordsl.intercepting.operation.UiOperationBaseImpl
-import com.kaspersky.components.uiautomatordsl.intercepting.operation.UiOperationType
-import com.kaspersky.components.uiautomatordsl.intercepting.operation.UiDeviceAction
-import com.kaspersky.components.uiautomatordsl.intercepting.operation.UiDeviceAssertion
 import com.kaspersky.components.uiautomatordsl.intercepting.interaction.UiDeviceInteraction
 import com.kaspersky.components.uiautomatordsl.intercepting.intercept.UiInterceptor
+import com.kaspersky.components.uiautomatordsl.intercepting.operation.UiDeviceAction
+import com.kaspersky.components.uiautomatordsl.intercepting.operation.UiDeviceAssertion
+import com.kaspersky.components.uiautomatordsl.intercepting.operation.UiOperationBaseImpl
+import com.kaspersky.components.uiautomatordsl.intercepting.operation.UiOperationType
 
 /**
  * Delegation class for [androidx.test.uiautomator.UiDevice].

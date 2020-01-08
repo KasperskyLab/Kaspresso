@@ -1,12 +1,12 @@
 package com.kaspersky.components.uiautomatordsl
 
+import com.kaspersky.components.uiautomatordsl.intercepting.interaction.UiDeviceInteraction
+import com.kaspersky.components.uiautomatordsl.intercepting.interaction.UiObjectInteraction
+import com.kaspersky.components.uiautomatordsl.intercepting.intercept.UiInterceptor
 import com.kaspersky.components.uiautomatordsl.intercepting.operation.UiDeviceAction
 import com.kaspersky.components.uiautomatordsl.intercepting.operation.UiDeviceAssertion
 import com.kaspersky.components.uiautomatordsl.intercepting.operation.UiObjectAction
 import com.kaspersky.components.uiautomatordsl.intercepting.operation.UiObjectAssertion
-import com.kaspersky.components.uiautomatordsl.intercepting.interaction.UiDeviceInteraction
-import com.kaspersky.components.uiautomatordsl.intercepting.interaction.UiObjectInteraction
-import com.kaspersky.components.uiautomatordsl.intercepting.intercept.UiInterceptor
 
 object UiAutomatorDslConfigurator {
 

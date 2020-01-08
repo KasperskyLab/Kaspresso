@@ -3,14 +3,14 @@ package com.kaspersky.components.uiautomatordsl.dsl.screen
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.UiDevice
 import com.kaspersky.components.uiautomatordsl.dsl.common.UiAutomatorDslMarker
-import com.kaspersky.components.uiautomatordsl.intercepting.operation.UiDeviceAction
-import com.kaspersky.components.uiautomatordsl.intercepting.operation.UiDeviceAssertion
-import com.kaspersky.components.uiautomatordsl.intercepting.operation.UiObjectAction
-import com.kaspersky.components.uiautomatordsl.intercepting.operation.UiObjectAssertion
 import com.kaspersky.components.uiautomatordsl.intercepting.delegate.UiDeviceDelegate
 import com.kaspersky.components.uiautomatordsl.intercepting.interaction.UiDeviceInteraction
 import com.kaspersky.components.uiautomatordsl.intercepting.interaction.UiObjectInteraction
 import com.kaspersky.components.uiautomatordsl.intercepting.intercept.UiInterceptor
+import com.kaspersky.components.uiautomatordsl.intercepting.operation.UiDeviceAction
+import com.kaspersky.components.uiautomatordsl.intercepting.operation.UiDeviceAssertion
+import com.kaspersky.components.uiautomatordsl.intercepting.operation.UiObjectAction
+import com.kaspersky.components.uiautomatordsl.intercepting.operation.UiObjectAssertion
 import java.util.Deque
 import java.util.LinkedList
 

@@ -1,7 +1,7 @@
 package com.kaspersky.components.uiautomatordsl.dsl.system
 
-import com.kaspersky.components.uiautomatordsl.intercepting.operation.UiOperationType
 import com.kaspersky.components.uiautomatordsl.intercepting.delegate.UiDeviceDelegate
+import com.kaspersky.components.uiautomatordsl.intercepting.operation.UiOperationType
 
 /**
  * Interface with common actions providing by UiAutomator and executing in the System

@@ -3,9 +3,9 @@ package com.kaspersky.components.uiautomatordsl.intercepting.interaction
 import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.UiObject2
 import com.kaspersky.components.uiautomatordsl.dsl.common.builders.UiViewSelector
+import com.kaspersky.components.uiautomatordsl.intercepting.exception.UnfoundedUiObjectException
 import com.kaspersky.components.uiautomatordsl.intercepting.operation.UiObjectAction
 import com.kaspersky.components.uiautomatordsl.intercepting.operation.UiObjectAssertion
-import com.kaspersky.components.uiautomatordsl.intercepting.exception.UnfoundedUiObjectException
 
 /**
  * Provides an interaction to work with the UiView described by [selector]

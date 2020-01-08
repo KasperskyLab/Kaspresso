@@ -7,11 +7,11 @@ import com.kaspersky.components.uiautomatordsl.dsl.common.actions.UiBaseActions
 import com.kaspersky.components.uiautomatordsl.dsl.common.assertions.UiBaseAssertions
 import com.kaspersky.components.uiautomatordsl.dsl.common.builders.UiViewBuilder
 import com.kaspersky.components.uiautomatordsl.dsl.common.builders.UiViewSelector
-import com.kaspersky.components.uiautomatordsl.intercepting.operation.UiObjectAction
-import com.kaspersky.components.uiautomatordsl.intercepting.operation.UiObjectAssertion
 import com.kaspersky.components.uiautomatordsl.intercepting.delegate.UiObjectDelegate
 import com.kaspersky.components.uiautomatordsl.intercepting.interaction.UiObjectInteraction
 import com.kaspersky.components.uiautomatordsl.intercepting.intercept.UiInterceptable
+import com.kaspersky.components.uiautomatordsl.intercepting.operation.UiObjectAction
+import com.kaspersky.components.uiautomatordsl.intercepting.operation.UiObjectAssertion
 
 /**
  * Base class for all UiAutomator DSL views

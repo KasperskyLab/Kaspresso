@@ -1,7 +1,7 @@
 package com.kaspersky.components.uiautomatordsl.dsl.common.actions
 
-import com.kaspersky.components.uiautomatordsl.intercepting.operation.UiOperationType
 import com.kaspersky.components.uiautomatordsl.intercepting.delegate.UiObjectDelegate
+import com.kaspersky.components.uiautomatordsl.intercepting.operation.UiOperationType
 
 /**
  * Base interface for performing actions on UiAutomator view

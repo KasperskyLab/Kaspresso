@@ -1,7 +1,7 @@
 package com.kaspersky.components.uiautomatordsl.dsl.screen
 
-import com.kaspersky.components.uiautomatordsl.intercepting.operation.UiOperationType
 import com.kaspersky.components.uiautomatordsl.intercepting.delegate.UiDeviceDelegate
+import com.kaspersky.components.uiautomatordsl.intercepting.operation.UiOperationType
 
 /**
  * Interface with common actions for all UiAutomator screens

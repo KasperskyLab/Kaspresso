@@ -5,12 +5,12 @@ import androidx.test.uiautomator.UiObject2
 import com.kaspersky.components.uiautomatordsl.UiAutomatorDslConfigurator
 import com.kaspersky.components.uiautomatordsl.dsl.common.builders.UiViewSelector
 import com.kaspersky.components.uiautomatordsl.dsl.screen.UiScreen
-import com.kaspersky.components.uiautomatordsl.intercepting.operation.UiOperationBaseImpl
-import com.kaspersky.components.uiautomatordsl.intercepting.operation.UiOperationType
-import com.kaspersky.components.uiautomatordsl.intercepting.operation.UiObjectAction
-import com.kaspersky.components.uiautomatordsl.intercepting.operation.UiObjectAssertion
 import com.kaspersky.components.uiautomatordsl.intercepting.interaction.UiObjectInteraction
 import com.kaspersky.components.uiautomatordsl.intercepting.intercept.UiInterceptor
+import com.kaspersky.components.uiautomatordsl.intercepting.operation.UiObjectAction
+import com.kaspersky.components.uiautomatordsl.intercepting.operation.UiObjectAssertion
+import com.kaspersky.components.uiautomatordsl.intercepting.operation.UiOperationBaseImpl
+import com.kaspersky.components.uiautomatordsl.intercepting.operation.UiOperationType
 
 /**
  * Delegation class for [androidx.test.uiautomator.UiObject2].

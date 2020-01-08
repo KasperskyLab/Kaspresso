@@ -1,8 +1,8 @@
 package com.kaspersky.kaspresso.interceptors.behavior_uia.impl
 
+import com.kaspersky.components.uiautomatordsl.intercepting.interaction.UiObjectInteraction
 import com.kaspersky.components.uiautomatordsl.intercepting.operation.UiObjectAction
 import com.kaspersky.components.uiautomatordsl.intercepting.operation.UiObjectAssertion
-import com.kaspersky.components.uiautomatordsl.intercepting.interaction.UiObjectInteraction
 import com.kaspersky.kaspresso.interceptors.behavior_uia.ObjectBehaviorInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.objectloader.ObjectLoaderProvider
