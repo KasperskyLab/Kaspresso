@@ -1,8 +1,8 @@
 package com.kaspersky.kaspresso.interceptors.behavior_uia.impl
 
-import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion.UiDeviceAction
-import com.kaspersky.components.uiautomator_dsl.intercepting.action_and_assertion.UiDeviceAssertion
-import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiDeviceInteraction
+import com.kaspersky.components.uiautomatordsl.intercepting.operation.UiDeviceAction
+import com.kaspersky.components.uiautomatordsl.intercepting.operation.UiDeviceAssertion
+import com.kaspersky.components.uiautomatordsl.intercepting.interaction.UiDeviceInteraction
 import com.kaspersky.kaspresso.flakysafety.FlakySafetyProvider
 import com.kaspersky.kaspresso.flakysafety.FlakySafetyProviderImpl
 import com.kaspersky.kaspresso.interceptors.behavior_uia.DeviceBehaviorInterceptor

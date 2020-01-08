@@ -7,8 +7,8 @@ open class UpgradeTestCase : TestCase() {
 
     companion object {
         private const val MAIN_APP_PACKAGE_ID = "com.kaspersky.kaspressample"
-        private const val OLD_VERSION_FILE = "/users/matsyuk/desktop/upgrade_test_v1.apk"
-        private const val NEW_VERSION_FILE = "/users/matsyuk/desktop/upgrade_test_v2.apk"
+        private const val OLD_VERSION_FILE = "artifacts/upgrade_test_v1.apk"
+        private const val NEW_VERSION_FILE = "artifacts/upgrade_test_v2.apk"
     }
 
     fun BaseTestContext.installAndLaunchMainApp() {
@@ -34,6 +34,6 @@ open class UpgradeTestCase : TestCase() {
     }
 
     fun BaseTestContext.uninstallMainApp() {
-        device.apps.uninstallIfExist(MAIN_APP_PACKAGE_ID)
+        device.apps.uninstallIfExists(MAIN_APP_PACKAGE_ID)
     }
 }

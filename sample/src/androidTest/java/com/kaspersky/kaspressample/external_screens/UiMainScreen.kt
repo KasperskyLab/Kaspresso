@@ -1,6 +1,6 @@
 package com.kaspersky.kaspressample.external_screens
 
-import com.kaspersky.components.uiautomator_dsl.dsl.text.UiButton
+import com.kaspersky.components.uiautomatordsl.dsl.text.UiButton
 
 object UiMainScreen : UiSampleScreen<UiMainScreen>() {
 

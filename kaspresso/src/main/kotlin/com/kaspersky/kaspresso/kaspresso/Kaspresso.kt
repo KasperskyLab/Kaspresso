@@ -6,7 +6,7 @@ import androidx.test.espresso.FailureHandler
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.UiDevice
 import com.agoda.kakao.Kakao
-import com.kaspersky.components.uiautomator_dsl.UiAutomatorDslConfigurator
+import com.kaspersky.components.uiautomatordsl.UiAutomatorDslConfigurator
 import com.kaspersky.kaspresso.device.Device
 import com.kaspersky.kaspresso.device.accessibility.Accessibility
 import com.kaspersky.kaspresso.device.accessibility.AccessibilityImpl

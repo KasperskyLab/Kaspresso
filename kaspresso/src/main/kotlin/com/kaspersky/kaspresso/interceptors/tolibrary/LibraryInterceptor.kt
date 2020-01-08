@@ -5,10 +5,10 @@ import com.kaspersky.kaspresso.kaspresso.Kaspresso
 /**
  * The base class of libraries interceptors (Kakao/UiAutomatorDsl) for Kaspresso's implementations
  */
-internal abstract class LibraryInterceptor<INTERACTION, ASSERTION, ACTION>(
+internal abstract class LibraryInterceptor<Interaction, Assertion, Action>(
     protected val kaspresso: Kaspresso
 ) {
-    abstract fun interceptCheck(interaction: INTERACTION, assertion: ASSERTION)
+    abstract fun interceptCheck(interaction: Interaction, assertion: Assertion)
 
-    abstract fun interceptPerform(interaction: INTERACTION, action: ACTION)
+    abstract fun interceptPerform(interaction: Interaction, action: Action)
 }

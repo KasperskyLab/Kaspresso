@@ -1,6 +1,6 @@
 package com.kaspersky.kaspresso.interceptors.behavior_uia
 
-interface UiAutomatorDslBehaviorInterceptor<INTERACTION, ASSERTION, ACTION> {
+interface UiAutomatorDslBehaviorInterceptor<Interaction, Assertion, Action> {
 
     /**
      * todo update comment
@@ -8,7 +8,7 @@ interface UiAutomatorDslBehaviorInterceptor<INTERACTION, ASSERTION, ACTION> {
      *
      * @param activity a function-wrapper of an action or an assertion to be invoked.
      */
-    fun <T> interceptCheck(interaction: INTERACTION, assertion: ASSERTION, activity: () -> T): T
+    fun <T> interceptCheck(interaction: Interaction, assertion: Assertion, activity: () -> T): T
 
     /**
      * todo update comment
@@ -16,5 +16,5 @@ interface UiAutomatorDslBehaviorInterceptor<INTERACTION, ASSERTION, ACTION> {
      *
      * @param activity a function-wrapper of an action or an assertion to be invoked.
      */
-    fun <T> interceptPerform(interaction: INTERACTION, action: ACTION, activity: () -> T): T
+    fun <T> interceptPerform(interaction: Interaction, action: Action, activity: () -> T): T
 }

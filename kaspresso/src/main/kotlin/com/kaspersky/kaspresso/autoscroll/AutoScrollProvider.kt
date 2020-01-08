@@ -3,7 +3,7 @@ package com.kaspersky.kaspresso.autoscroll
 /**
  * The interface to provide autoscroll functionality.
  */
-interface AutoScrollProvider<INTERACTION> {
+interface AutoScrollProvider<Interaction> {
 
     /**
      * Invokes the given [action] and calls [scroll] if it fails. Helps in cases when test fails because of the
@@ -14,7 +14,7 @@ interface AutoScrollProvider<INTERACTION> {
      *
      * @return the result of [action] invocation.
      */
-    fun <T> withAutoScroll(interaction: INTERACTION, action: () -> T): T
+    fun <T> withAutoScroll(interaction: Interaction, action: () -> T): T
 
     /**
      * Performs the autoscrolling functionality. Performs scroll and re-invokes the given [action].
@@ -25,5 +25,5 @@ interface AutoScrollProvider<INTERACTION> {
      *
      * @return the result of [action] invocation.
      */
-    fun <T> scroll(interaction: INTERACTION, action: () -> T, cachedError: Throwable): T
+    fun <T> scroll(interaction: Interaction, action: () -> T, cachedError: Throwable): T
 }

@@ -1,6 +1,6 @@
 package com.kaspersky.kaspresso.objectloader
 
-import com.kaspersky.components.uiautomator_dsl.intercepting.interaction.UiObjectInteraction
+import com.kaspersky.components.uiautomatordsl.intercepting.interaction.UiObjectInteraction
 
 interface ObjectLoaderProvider {
 

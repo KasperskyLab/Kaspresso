@@ -1,8 +1,8 @@
 package com.kaspersky.kaspresso.interceptors.watcher.uiautomator_dsl
 
-interface UiAutomatorDslWatcherInterceptor<INTERACTION, ASSERTION, ACTION> {
+interface UiAutomatorDslWatcherInterceptor<Interaction, Assertion, Action> {
 
-    fun interceptCheck(interaction: INTERACTION, assertion: ASSERTION)
+    fun interceptCheck(interaction: Interaction, assertion: Assertion)
 
-    fun interceptPerform(interaction: INTERACTION, action: ACTION)
+    fun interceptPerform(interaction: Interaction, action: Action)
 }

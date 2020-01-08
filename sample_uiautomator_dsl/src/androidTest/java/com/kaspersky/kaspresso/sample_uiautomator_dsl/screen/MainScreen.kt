@@ -1,9 +1,9 @@
 package com.kaspersky.kaspresso.sample_uiautomator_dsl.screen
 
-import com.kaspersky.components.uiautomator_dsl.dsl.check.UiCheckBox
-import com.kaspersky.components.uiautomator_dsl.dsl.edit.UiEditText
-import com.kaspersky.components.uiautomator_dsl.dsl.screen.UiScreen
-import com.kaspersky.components.uiautomator_dsl.dsl.text.UiButton
+import com.kaspersky.components.uiautomatordsl.dsl.check.UiCheckBox
+import com.kaspersky.components.uiautomatordsl.dsl.edit.UiEditText
+import com.kaspersky.components.uiautomatordsl.dsl.screen.UiScreen
+import com.kaspersky.components.uiautomatordsl.dsl.text.UiButton
 
 object MainScreen : UiScreen<MainScreen>() {
 

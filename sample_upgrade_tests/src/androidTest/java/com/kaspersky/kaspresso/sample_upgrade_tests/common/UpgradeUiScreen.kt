@@ -1,6 +1,6 @@
 package com.kaspersky.kaspresso.sample_upgrade_tests.common
 
-import com.kaspersky.components.uiautomator_dsl.dsl.screen.UiScreen
+import com.kaspersky.components.uiautomatordsl.dsl.screen.UiScreen
 
 @Suppress("UNCHECKED_CAST")
 open class UpgradeUiScreen<out T : UpgradeUiScreen<T>> : UiScreen<T>() {
