@@ -5,7 +5,7 @@ import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 
 open class ParentTestCase(
     kaspressoBuilderAdditional: Kaspresso.Builder.() -> Unit
-) : TestCase(kaspressoBuilder = Kaspresso.Builder.default().apply {
+) : TestCase(kaspressoBuilder = Kaspresso.Builder.advanced().apply {
         beforeEachTest {
             testLogger.i("beforeTestFirstAction")
             DefaultActionsChecker.putBeforeInParentTestCase()

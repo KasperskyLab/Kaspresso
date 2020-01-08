@@ -16,7 +16,7 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class DisabledStepAutoNumberingTest : TestCase(
-    kaspressoBuilder = Kaspresso.Builder.default().apply {
+    kaspressoBuilder = Kaspresso.Builder.advanced().apply {
         stepParams.autonumber = false
     }
 ) {
