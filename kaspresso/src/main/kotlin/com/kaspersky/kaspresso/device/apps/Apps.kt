@@ -31,7 +31,7 @@ interface Apps {
      * @param packageName an android package name of the app to be checked.
      * @param apkPath a path to the apk to be installed. The apk is hosted on the test server.
      */
-    fun installIfNotExist(packageName: String, apkPath: String)
+    fun installIfNotExists(packageName: String, apkPath: String)
 
     /**
      * Uninstalls an app via ADB.
@@ -49,7 +49,7 @@ interface Apps {
      *
      * @param packageName an android package name of an app to be deleted.
      */
-    fun uninstallIfExist(packageName: String)
+    fun uninstallIfExists(packageName: String)
 
     /**
      * Checks app is installed on device
