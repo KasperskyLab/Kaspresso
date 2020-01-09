@@ -36,5 +36,5 @@ dependencies {
     androidTestImplementation "androidx.test.ext:junit:$versions.extJunit"
     androidTestImplementation "androidx.test.uiautomator:uiautomator:$versions.uiautomator"
     androidTestImplementation project(':kaspresso')
-    androidTestImplementation project(':uiautomator_dsl')
+    androidTestImplementation project(':kautomator')
 }

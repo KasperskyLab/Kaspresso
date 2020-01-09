@@ -6,7 +6,7 @@ import androidx.test.espresso.FailureHandler
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.UiDevice
 import com.agoda.kakao.Kakao
-import com.kaspersky.components.uiautomatordsl.UiAutomatorDslConfigurator
+import com.kaspersky.components.kautomator.KautomatorConfigurator
 import com.kaspersky.kaspresso.device.Device
 import com.kaspersky.kaspresso.device.accessibility.Accessibility
 import com.kaspersky.kaspresso.device.accessibility.AccessibilityImpl
@@ -59,8 +59,8 @@ import com.kaspersky.kaspresso.interceptors.behavior_uia.impl.ObjectLoaderBehavi
 import com.kaspersky.kaspresso.interceptors.tolibrary.kakao.impl.KakaoDataInterceptor
 import com.kaspersky.kaspresso.interceptors.tolibrary.kakao.impl.KakaoViewInterceptor
 import com.kaspersky.kaspresso.interceptors.tolibrary.kakao.impl.KakaoWebInterceptor
-import com.kaspersky.kaspresso.interceptors.tolibrary.uiautomator_dsl.UiAutomatorDslDeviceInterceptor
-import com.kaspersky.kaspresso.interceptors.tolibrary.uiautomator_dsl.UiAutomatorDslObjectInterceptor
+import com.kaspersky.kaspresso.interceptors.tolibrary.kautomator.KautomatorDeviceInterceptor
+import com.kaspersky.kaspresso.interceptors.tolibrary.kautomator.KautomatorObjectInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.StepWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.TestRunWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.defaults.DefaultTestRunWatcherInterceptor
@@ -69,10 +69,10 @@ import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.logging.TestRu
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.report.BuildStepReportWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.screenshot.ScreenshotStepWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.screenshot.TestRunnerScreenshotWatcherInterceptor
-import com.kaspersky.kaspresso.interceptors.watcher.uiautomator_dsl.DeviceWatcherInterceptor
-import com.kaspersky.kaspresso.interceptors.watcher.uiautomator_dsl.ObjectWatcherInterceptor
-import com.kaspersky.kaspresso.interceptors.watcher.uiautomator_dsl.impl.logging.LoggingDeviceWatcherInterceptor
-import com.kaspersky.kaspresso.interceptors.watcher.uiautomator_dsl.impl.logging.LoggingObjectWatcherInterceptor
+import com.kaspersky.kaspresso.interceptors.watcher.kautomator.DeviceWatcherInterceptor
+import com.kaspersky.kaspresso.interceptors.watcher.kautomator.ObjectWatcherInterceptor
+import com.kaspersky.kaspresso.interceptors.watcher.kautomator.impl.logging.LoggingDeviceWatcherInterceptor
+import com.kaspersky.kaspresso.interceptors.watcher.kautomator.impl.logging.LoggingObjectWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.view.AtomWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.view.ViewActionWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.view.ViewAssertionWatcherInterceptor
@@ -350,7 +350,7 @@ data class Kaspresso(
         lateinit var flakySafetyParams: FlakySafetyParams
 
         // todo comment
-        lateinit var uiAutomatorDslFlakySafetyParams: FlakySafetyParams
+        lateinit var kautomatorFlakySafetyParams: FlakySafetyParams
 
         /**
          * Holds the [ContinuouslyParams] for [com.kaspersky.kaspresso.flakysafety.ContinuouslyProvider]'s usage.
@@ -521,7 +521,7 @@ data class Kaspresso(
             if (!::language.isInitialized) language = LanguageImpl(libLogger, instrumentation.targetContext)
 
             if (!::flakySafetyParams.isInitialized) flakySafetyParams = FlakySafetyParams.kakaoInstance()
-            if (!::uiAutomatorDslFlakySafetyParams.isInitialized) uiAutomatorDslFlakySafetyParams = FlakySafetyParams.uiAutomatorDslInstance()
+            if (!::kautomatorFlakySafetyParams.isInitialized) kautomatorFlakySafetyParams = FlakySafetyParams.uiAutomatorDslInstance()
             if (!::continuouslyParams.isInitialized) continuouslyParams = ContinuouslyParams()
             if (!::autoScrollParams.isInitialized) autoScrollParams = AutoScrollParams()
             if (!::stepParams.isInitialized) stepParams = StepParams()
@@ -592,11 +592,11 @@ data class Kaspresso(
 
             if (!::objectBehaviorInterceptors.isInitialized) objectBehaviorInterceptors = mutableListOf(
                 ObjectLoaderBehaviorInterceptor(libLogger),
-                FlakySafeObjectBehaviorInterceptor(uiAutomatorDslFlakySafetyParams, libLogger)
+                FlakySafeObjectBehaviorInterceptor(kautomatorFlakySafetyParams, libLogger)
             )
 
             if (!::deviceBehaviorInterceptors.isInitialized) deviceBehaviorInterceptors = mutableListOf(
-                FlakySafeDeviceBehaviorInterceptor(uiAutomatorDslFlakySafetyParams, libLogger)
+                FlakySafeDeviceBehaviorInterceptor(kautomatorFlakySafetyParams, libLogger)
             )
 
             if (!::stepWatcherInterceptors.isInitialized) stepWatcherInterceptors = mutableListOf(
@@ -634,10 +634,10 @@ data class Kaspresso(
             }
         }
 
-        private fun initUiAutomatorDslInterception(kaspresso: Kaspresso) {
-            val objectInterceptor = UiAutomatorDslObjectInterceptor(kaspresso)
-            val deviceInterceptor = UiAutomatorDslDeviceInterceptor(kaspresso)
-            UiAutomatorDslConfigurator.intercept {
+        private fun initKautomatorInterception(kaspresso: Kaspresso) {
+            val objectInterceptor = KautomatorObjectInterceptor(kaspresso)
+            val deviceInterceptor = KautomatorDeviceInterceptor(kaspresso)
+            KautomatorConfigurator.intercept {
                 onUiInteraction {
                     onCheck(isOverride = true, interceptor = objectInterceptor::interceptCheck)
                     onPerform(isOverride = true, interceptor = objectInterceptor::interceptPerform)
@@ -709,7 +709,7 @@ data class Kaspresso(
             )
 
             initInterception(kaspresso)
-            initUiAutomatorDslInterception(kaspresso)
+            initKautomatorInterception(kaspresso)
 
             failureHandler?.let { Espresso.setFailureHandler(it) }
 

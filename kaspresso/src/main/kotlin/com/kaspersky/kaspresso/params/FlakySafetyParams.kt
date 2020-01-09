@@ -3,7 +3,7 @@ package com.kaspersky.kaspresso.params
 import androidx.test.espresso.NoMatchingViewException
 import androidx.test.espresso.PerformException
 import androidx.test.uiautomator.StaleObjectException
-import com.kaspersky.components.uiautomatordsl.intercepting.exception.UnfoundedUiObjectException
+import com.kaspersky.components.kautomator.intercepting.exception.UnfoundedUiObjectException
 import junit.framework.AssertionFailedError
 
 /**

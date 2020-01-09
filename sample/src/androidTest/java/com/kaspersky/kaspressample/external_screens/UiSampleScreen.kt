@@ -1,6 +1,6 @@
 package com.kaspersky.kaspressample.external_screens
 
-import com.kaspersky.components.uiautomatordsl.dsl.screen.UiScreen
+import com.kaspersky.components.kautomator.dsl.screen.UiScreen
 
 open class UiSampleScreen<out T : UiSampleScreen<T>> : UiScreen<T>() {
 
