@@ -25,7 +25,6 @@ class AppsImpl(
 ) : Apps {
 
     companion object {
-
         const val LAUNCH_RECENT_TIMEOUT = 1_000L
         const val LAUNCH_APP_TIMEOUT = 5_000L
     }

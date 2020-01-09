@@ -19,6 +19,7 @@ class FlakySafetyParams private constructor(
      */
     val allowedExceptions: Set<Class<out Throwable>>
 ) {
+
     companion object {
         fun kakaoInstance(): FlakySafetyParams {
             return FlakySafetyParams(
@@ -33,7 +34,7 @@ class FlakySafetyParams private constructor(
             )
         }
 
-        fun uiAutomatorDslInstance(): FlakySafetyParams {
+        fun kautomatorInstance(): FlakySafetyParams {
             return FlakySafetyParams(
                 timeoutMs = 15_000L,
                 intervalMs = 1_000L,

@@ -114,6 +114,7 @@ data class Kaspresso(
     internal val stepWatcherInterceptors: List<StepWatcherInterceptor>,
     internal val testRunWatcherInterceptors: List<TestRunWatcherInterceptor>
 ) {
+
     private companion object {
         private const val DEFAULT_LIB_LOGGER_TAG: String = "KASPRESSO"
         private const val DEFAULT_TEST_LOGGER_TAG: String = "KASPRESSO_TEST"
@@ -521,7 +522,7 @@ data class Kaspresso(
             if (!::language.isInitialized) language = LanguageImpl(libLogger, instrumentation.targetContext)
 
             if (!::flakySafetyParams.isInitialized) flakySafetyParams = FlakySafetyParams.kakaoInstance()
-            if (!::kautomatorFlakySafetyParams.isInitialized) kautomatorFlakySafetyParams = FlakySafetyParams.uiAutomatorDslInstance()
+            if (!::kautomatorFlakySafetyParams.isInitialized) kautomatorFlakySafetyParams = FlakySafetyParams.kautomatorInstance()
             if (!::continuouslyParams.isInitialized) continuouslyParams = ContinuouslyParams()
             if (!::autoScrollParams.isInitialized) autoScrollParams = AutoScrollParams()
             if (!::stepParams.isInitialized) stepParams = StepParams()

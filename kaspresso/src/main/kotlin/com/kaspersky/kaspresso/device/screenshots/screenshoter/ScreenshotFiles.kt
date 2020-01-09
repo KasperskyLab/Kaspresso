@@ -6,6 +6,7 @@ import java.io.File
 internal class ScreenshotFiles(
     private val screenshotDir: File
 ) {
+
     companion object {
         private const val NAME_SEPARATOR = "_"
         private const val EXTENSION = ".png"

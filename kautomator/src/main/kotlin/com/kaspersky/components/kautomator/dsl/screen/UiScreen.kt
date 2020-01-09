@@ -28,6 +28,11 @@ import java.util.LinkedList
 @KautomatorMarker
 open class UiScreen<out T : UiScreen<T>> : UiScreenActions {
 
+    companion object {
+        internal val UI_OBJECT_INTERCEPTORS: Deque<UiInterceptor<UiObjectInteraction, UiObjectAssertion, UiObjectAction>> = LinkedList()
+        internal val UI_DEVICE_INTERCEPTORS: Deque<UiInterceptor<UiDeviceInteraction, UiDeviceAssertion, UiDeviceAction>> = LinkedList()
+    }
+
     override val view: UiDeviceDelegate = UiDeviceDelegate(
         UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
     )
@@ -110,10 +115,5 @@ open class UiScreen<out T : UiScreen<T>> : UiScreenActions {
     private fun removeInterceptors() {
         uiObjectInterceptor?.let { UI_OBJECT_INTERCEPTORS.removeFirstOccurrence(it) }
         uiDeviceInterceptor?.let { UI_DEVICE_INTERCEPTORS.removeFirstOccurrence(it) }
-    }
-
-    companion object {
-        internal val UI_OBJECT_INTERCEPTORS: Deque<UiInterceptor<UiObjectInteraction, UiObjectAssertion, UiObjectAction>> = LinkedList()
-        internal val UI_DEVICE_INTERCEPTORS: Deque<UiInterceptor<UiDeviceInteraction, UiDeviceAssertion, UiDeviceAction>> = LinkedList()
     }
 }

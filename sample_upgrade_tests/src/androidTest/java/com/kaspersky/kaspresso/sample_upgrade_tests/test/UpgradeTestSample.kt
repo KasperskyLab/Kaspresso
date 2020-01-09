@@ -34,10 +34,10 @@ class UpgradeTestSample : UpgradeTestCase() {
                 intercept {
                     onUiInteraction {
                         onCheck { uiInteraction, uiAssert ->
-                            testLogger.i("UIA", "type=${uiAssert.getType()}, description=${uiAssert.getDescription()}")
+                            testLogger.i("UIA", "type=${uiAssert.type}, description=${uiAssert.description}")
                         }
                         onPerform { uiInteraction, uiAction ->
-                            testLogger.i("UIA", "type=${uiAction.getType()}, description=${uiAction.getDescription()}")
+                            testLogger.i("UIA", "type=${uiAction.type}, description=${uiAction.description}")
                         }
                     }
                 }
