@@ -4,7 +4,7 @@ import android.Manifest
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.GrantPermissionRule
 
-import com.kaspersky.components.uiautomatordsl.UiAutomatorDslConfigurator
+import com.kaspersky.components.kautomator.KautomatorConfigurator
 import com.kaspersky.kaspresso.sample_upgrade_tests.common.UpgradeTestCase
 import com.kaspersky.kaspresso.sample_upgrade_tests.screen.MainScreen
 import com.kaspersky.kaspresso.sample_upgrade_tests.screen.UpgradeScreen
@@ -30,7 +30,7 @@ class UpgradeTestSample : UpgradeTestCase() {
     @Test
     fun upgradeTest() {
         before {
-            UiAutomatorDslConfigurator {
+            KautomatorConfigurator {
                 intercept {
                     onUiInteraction {
                         onCheck { uiInteraction, uiAssert ->
