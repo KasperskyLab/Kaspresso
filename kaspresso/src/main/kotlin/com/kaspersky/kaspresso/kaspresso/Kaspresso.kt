@@ -61,6 +61,10 @@ import com.kaspersky.kaspresso.interceptors.tolibrary.kakao.impl.KakaoViewInterc
 import com.kaspersky.kaspresso.interceptors.tolibrary.kakao.impl.KakaoWebInterceptor
 import com.kaspersky.kaspresso.interceptors.tolibrary.kautomator.KautomatorDeviceInterceptor
 import com.kaspersky.kaspresso.interceptors.tolibrary.kautomator.KautomatorObjectInterceptor
+import com.kaspersky.kaspresso.interceptors.watcher.kautomator.DeviceWatcherInterceptor
+import com.kaspersky.kaspresso.interceptors.watcher.kautomator.ObjectWatcherInterceptor
+import com.kaspersky.kaspresso.interceptors.watcher.kautomator.impl.logging.LoggingDeviceWatcherInterceptor
+import com.kaspersky.kaspresso.interceptors.watcher.kautomator.impl.logging.LoggingObjectWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.StepWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.TestRunWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.defaults.DefaultTestRunWatcherInterceptor
@@ -69,10 +73,6 @@ import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.logging.TestRu
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.report.BuildStepReportWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.screenshot.ScreenshotStepWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.screenshot.TestRunnerScreenshotWatcherInterceptor
-import com.kaspersky.kaspresso.interceptors.watcher.kautomator.DeviceWatcherInterceptor
-import com.kaspersky.kaspresso.interceptors.watcher.kautomator.ObjectWatcherInterceptor
-import com.kaspersky.kaspresso.interceptors.watcher.kautomator.impl.logging.LoggingDeviceWatcherInterceptor
-import com.kaspersky.kaspresso.interceptors.watcher.kautomator.impl.logging.LoggingObjectWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.view.AtomWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.view.ViewActionWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.view.ViewAssertionWatcherInterceptor
