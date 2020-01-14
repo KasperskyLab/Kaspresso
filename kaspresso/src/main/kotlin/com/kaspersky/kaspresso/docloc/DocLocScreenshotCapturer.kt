@@ -21,6 +21,7 @@ internal class DocLocScreenshotCapturer(
     private val activities: Activities,
     private val apps: Apps
 ) {
+
     private companion object {
         private const val SCREENSHOT_CAPTURE_DELAY_MS: Long = 500
     }

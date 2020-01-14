@@ -10,8 +10,6 @@ import kotlinx.android.synthetic.main.activity_simple.*
 class SimpleActivity : AppCompatActivity() {
 
     companion object {
-
-        const val TAG = "SimpleActivity"
         private const val TIMEOUT: Long = 2000
     }
 

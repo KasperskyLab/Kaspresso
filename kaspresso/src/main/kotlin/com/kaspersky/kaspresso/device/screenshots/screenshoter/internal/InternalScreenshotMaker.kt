@@ -14,6 +14,7 @@ import java.util.concurrent.CountDownLatch
 internal class InternalScreenshotMaker(
     private val screenshotFiles: ScreenshotFiles
 ) {
+
     companion object {
         const val PICTURE_QUALITY = 100
     }
