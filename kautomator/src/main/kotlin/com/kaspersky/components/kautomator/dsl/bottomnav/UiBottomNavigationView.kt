@@ -1,17 +1,17 @@
 @file:Suppress("unused")
-package com.kaspersky.components.kautomator.dsl.check
+package com.kaspersky.components.kautomator.dsl.bottomnav
 
 import com.kaspersky.components.kautomator.dsl.common.builders.UiViewBuilder
 import com.kaspersky.components.kautomator.dsl.common.builders.UiViewSelector
 import com.kaspersky.components.kautomator.dsl.common.views.UiBaseView
 
 /**
- * Ui View with [UiCheckableActions] and [UiCheckableAssertions]
+ * View for acting and asserting on BottomNavigationView
  *
- * @see UiCheckableActions
- * @see UiCheckableAssertions
+ * @see UiBottomNavigationViewActions
+ * @see UiBottomNavigationViewAssertions
  */
-class UiCheckBox : UiBaseView<UiCheckBox>, UiCheckableActions, UiCheckableAssertions {
+class UiBottomNavigationView : UiBaseView<UiBottomNavigationView>, UiBottomNavigationViewActions, UiBottomNavigationViewAssertions {
     constructor(selector: UiViewSelector) : super(selector)
     constructor(builder: UiViewBuilder.() -> Unit) : super(builder)
 }
