@@ -16,7 +16,7 @@ class BottomNavigationViewTest : TestCase() {
         private const val ITEM_0_ID = "menu_item_1"
         private const val ITEM_1_ID = "menu_item_2"
     }
-    
+
     @get:Rule
     val rule = ActivityTestRule(ComponentsActivity::class.java, true, true)
 
@@ -43,7 +43,7 @@ class BottomNavigationViewTest : TestCase() {
                     }
                 }
             }
-            
+
             step("Select item by label") {
                 ComponentsScreen {
                     bottomNav {
