@@ -1,8 +1,13 @@
+@file:Suppress("unused")
 package com.kaspersky.components.kautomator.dsl.check
+
 import com.kaspersky.components.kautomator.dsl.check.UiCheckableActions.CheckableActionType.SET_CHECKED
 import com.kaspersky.components.kautomator.dsl.common.actions.UiBaseActions
 import com.kaspersky.components.kautomator.intercepting.operation.UiOperationType
 
+/**
+ * Provides actions for checkable views
+ */
 interface UiCheckableActions : UiBaseActions {
 
     /**
