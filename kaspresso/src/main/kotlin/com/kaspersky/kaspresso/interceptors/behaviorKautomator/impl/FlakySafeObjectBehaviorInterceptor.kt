@@ -1,27 +1,29 @@
-package com.kaspersky.kaspresso.interceptors.behavior_uia.impl
+package com.kaspersky.kaspresso.interceptors.behaviorKautomator.impl
 
 import com.kaspersky.components.kautomator.intercepting.interaction.UiObjectInteraction
 import com.kaspersky.components.kautomator.intercepting.operation.UiObjectAction
 import com.kaspersky.components.kautomator.intercepting.operation.UiObjectAssertion
-import com.kaspersky.kaspresso.interceptors.behavior_uia.ObjectBehaviorInterceptor
+import com.kaspersky.kaspresso.flakysafety.FlakySafetyProvider
+import com.kaspersky.kaspresso.flakysafety.FlakySafetyProviderImpl
+import com.kaspersky.kaspresso.interceptors.behaviorKautomator.ObjectBehaviorInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
-import com.kaspersky.kaspresso.objectloader.ObjectLoaderProvider
-import com.kaspersky.kaspresso.objectloader.ObjectLoaderProviderImpl
+import com.kaspersky.kaspresso.params.FlakySafetyParams
 
-class ObjectLoaderBehaviorInterceptor(
-    private val logger: UiTestLogger
+class FlakySafeObjectBehaviorInterceptor(
+    params: FlakySafetyParams,
+    logger: UiTestLogger
 ) : ObjectBehaviorInterceptor,
-    ObjectLoaderProvider by ObjectLoaderProviderImpl(logger) {
+    FlakySafetyProvider by FlakySafetyProviderImpl(params, logger) {
 
     override fun <T> interceptCheck(
         interaction: UiObjectInteraction,
         assertion: UiObjectAssertion,
         activity: () -> T
-    ): T = handleObjectAbsence(interaction = interaction, action = activity)
+    ): T = flakySafely(action = activity)
 
     override fun <T> interceptPerform(
         interaction: UiObjectInteraction,
         action: UiObjectAction,
         activity: () -> T
-    ): T = handleObjectAbsence(interaction = interaction, action = activity)
+    ): T = flakySafely(action = activity)
 }

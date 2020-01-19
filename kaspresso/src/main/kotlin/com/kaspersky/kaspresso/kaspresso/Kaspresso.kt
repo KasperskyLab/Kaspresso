@@ -51,11 +51,11 @@ import com.kaspersky.kaspresso.interceptors.behavior.impl.flakysafety.FlakySafeW
 import com.kaspersky.kaspresso.interceptors.behavior.impl.systemsafety.SystemDialogSafetyDataBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.impl.systemsafety.SystemDialogSafetyViewBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.impl.systemsafety.SystemDialogSafetyWebBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.behavior_uia.DeviceBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.behavior_uia.ObjectBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.behavior_uia.impl.FlakySafeDeviceBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.behavior_uia.impl.FlakySafeObjectBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.behavior_uia.impl.ObjectLoaderBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behaviorKautomator.DeviceBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behaviorKautomator.ObjectBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behaviorKautomator.impl.FlakySafeDeviceBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behaviorKautomator.impl.FlakySafeObjectBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behaviorKautomator.impl.ObjectLoaderBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.tolibrary.kakao.impl.KakaoDataInterceptor
 import com.kaspersky.kaspresso.interceptors.tolibrary.kakao.impl.KakaoViewInterceptor
 import com.kaspersky.kaspresso.interceptors.tolibrary.kakao.impl.KakaoWebInterceptor

@@ -1,4 +1,4 @@
-package com.kaspersky.kaspresso.interceptors.behavior_uia
+package com.kaspersky.kaspresso.interceptors.behaviorKautomator
 
 import com.kaspersky.components.kautomator.intercepting.interaction.UiDeviceInteraction
 import com.kaspersky.components.kautomator.intercepting.operation.UiDeviceAction

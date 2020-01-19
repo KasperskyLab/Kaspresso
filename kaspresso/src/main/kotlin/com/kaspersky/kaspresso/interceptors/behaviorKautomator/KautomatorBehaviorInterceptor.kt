@@ -1,4 +1,4 @@
-package com.kaspersky.kaspresso.interceptors.behavior_uia
+package com.kaspersky.kaspresso.interceptors.behaviorKautomator
 
 interface KautomatorBehaviorInterceptor<Interaction, Assertion, Action> {
 
