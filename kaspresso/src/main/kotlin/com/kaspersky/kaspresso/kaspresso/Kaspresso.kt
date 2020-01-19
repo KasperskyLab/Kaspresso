@@ -55,7 +55,7 @@ import com.kaspersky.kaspresso.interceptors.behaviorKautomator.DeviceBehaviorInt
 import com.kaspersky.kaspresso.interceptors.behaviorKautomator.ObjectBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behaviorKautomator.impl.FlakySafeDeviceBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behaviorKautomator.impl.FlakySafeObjectBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.behaviorKautomator.impl.ObjectLoaderBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behaviorKautomator.impl.UiObjectLoaderBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.tolibrary.kakao.impl.KakaoDataInterceptor
 import com.kaspersky.kaspresso.interceptors.tolibrary.kakao.impl.KakaoViewInterceptor
 import com.kaspersky.kaspresso.interceptors.tolibrary.kakao.impl.KakaoWebInterceptor
@@ -592,7 +592,7 @@ data class Kaspresso(
             )
 
             if (!::objectBehaviorInterceptors.isInitialized) objectBehaviorInterceptors = mutableListOf(
-                ObjectLoaderBehaviorInterceptor(libLogger),
+                UiObjectLoaderBehaviorInterceptor(libLogger),
                 FlakySafeObjectBehaviorInterceptor(kautomatorFlakySafetyParams, libLogger)
             )
 

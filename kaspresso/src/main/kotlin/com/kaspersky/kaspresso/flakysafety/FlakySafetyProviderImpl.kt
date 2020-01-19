@@ -24,9 +24,7 @@ class FlakySafetyProviderImpl(
      * Invokes the given [action] flaky safely.
      *
      * @param action the action to invoke.
-     *
      * @return the [action] invocation result.
-     *
      * @throws Throwable if all attempts failed.
      */
     @Throws(Throwable::class)

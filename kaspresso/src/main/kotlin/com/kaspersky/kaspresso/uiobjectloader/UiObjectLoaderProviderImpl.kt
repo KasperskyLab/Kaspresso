@@ -1,4 +1,4 @@
-package com.kaspersky.kaspresso.objectloader
+package com.kaspersky.kaspresso.uiobjectloader
 
 import androidx.test.uiautomator.StaleObjectException
 import com.kaspersky.components.kautomator.intercepting.exception.UnfoundedUiObjectException
@@ -6,16 +6,22 @@ import com.kaspersky.components.kautomator.intercepting.interaction.UiObjectInte
 import com.kaspersky.kaspresso.internal.extensions.other.isAllowed
 import com.kaspersky.kaspresso.logger.UiTestLogger
 
-class ObjectLoaderProviderImpl(
+/**
+ * The implementation of the [UiObjectLoaderProvider] interface.
+ */
+class UiObjectLoaderProviderImpl(
     private val logger: UiTestLogger
-) : ObjectLoaderProvider {
+) : UiObjectLoaderProvider {
 
     companion object {
         private val OBJECT_ABSENCE_EXCEPTIONS: Set<Class<out Throwable>> =
             setOf(UnfoundedUiObjectException::class.java, StaleObjectException::class.java)
     }
 
-    override fun <T> handleObjectAbsence(interaction: UiObjectInteraction, action: () -> T): T {
+    /**
+     * Attempt to find [androidx.test.uiautomator.UiObject2] in case of [androidx.test.uiautomator.UiObject2] absence or stale
+     */
+    override fun <T> handleUiObjectAbsence(interaction: UiObjectInteraction, action: () -> T): T {
         return try {
             action.invoke()
         } catch (error: Throwable) {
