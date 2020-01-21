@@ -1,9 +1,7 @@
 package com.kaspersky.kaspresso.testcases.core.testcontext
 
-import com.kaspersky.kaspresso.compose.ComposeProvider
-import com.kaspersky.kaspresso.compose.ComposeProviderImpl
-import com.kaspersky.kaspresso.compose.WebComposeProvider
-import com.kaspersky.kaspresso.compose.WebComposeProviderImpl
+import com.agoda.kakao.common.views.KBaseView
+import com.kaspersky.kaspresso.compose.*
 import com.kaspersky.kaspresso.device.Device
 import com.kaspersky.kaspresso.device.server.AdbServer
 import com.kaspersky.kaspresso.flakysafety.ContinuouslyProvider
@@ -24,6 +22,7 @@ open class BaseTestContext internal constructor(
     kaspresso: Kaspresso
 ) : FlakySafetyProvider by FlakySafetyProviderImpl(kaspresso.params.flakySafetyParams, kaspresso.libLogger),
     ContinuouslyProvider by ContinuouslyProviderImpl(kaspresso.params.continuouslyParams, kaspresso.libLogger),
-    ComposeProvider by ComposeProviderImpl(kaspresso),
+    ViewComposeProvider by ViewComposeProviderImpl(kaspresso),
+    ObjectComposeProvider by ObjectComposeProviderImpl(kaspresso),
     WebComposeProvider by WebComposeProviderImpl(kaspresso),
     TestAssistantsProvider by TestAssistantsProviderImpl(kaspresso)

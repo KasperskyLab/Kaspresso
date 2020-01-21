@@ -20,8 +20,8 @@ interface UiSystemActions {
     fun openNotification() {
         view.perform(SystemActionType.OPEN_NOTIFICATION) {
             checkBooleanAction(SystemActionType.OPEN_NOTIFICATION) {
-
-                openNotification() }
+                openNotification()
+            }
         }
     }
 

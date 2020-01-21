@@ -55,14 +55,15 @@ import com.kaspersky.kaspresso.interceptors.behavior.impl.systemsafety.SystemDia
 import com.kaspersky.kaspresso.interceptors.behavior.impl.systemsafety.SystemDialogSafetyWebBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behaviorKautomator.DeviceBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behaviorKautomator.ObjectBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.behaviorKautomator.impl.FlakySafeDeviceBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.behaviorKautomator.impl.FlakySafeObjectBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.behaviorKautomator.impl.UiObjectLoaderBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behaviorKautomator.impl.failure.FailureLoggingObjectBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behaviorKautomator.impl.flakysafety.FlakySafeDeviceBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behaviorKautomator.impl.flakysafety.FlakySafeObjectBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behaviorKautomator.impl.loader.UiObjectLoaderBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.tolibrary.kakao.impl.KakaoDataInterceptor
 import com.kaspersky.kaspresso.interceptors.tolibrary.kakao.impl.KakaoViewInterceptor
 import com.kaspersky.kaspresso.interceptors.tolibrary.kakao.impl.KakaoWebInterceptor
-import com.kaspersky.kaspresso.interceptors.tolibrary.kautomator.KautomatorDeviceInterceptor
-import com.kaspersky.kaspresso.interceptors.tolibrary.kautomator.KautomatorObjectInterceptor
+import com.kaspersky.kaspresso.interceptors.tolibrary.kautomator.impl.KautomatorDeviceInterceptor
+import com.kaspersky.kaspresso.interceptors.tolibrary.kautomator.impl.KautomatorObjectInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.kautomator.DeviceWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.kautomator.ObjectWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.kautomator.impl.logging.LoggingDeviceWatcherInterceptor
@@ -625,12 +626,23 @@ data class Kaspresso(
             )
 
             if (!::objectBehaviorInterceptors.isInitialized) objectBehaviorInterceptors = mutableListOf(
-                UiObjectLoaderBehaviorInterceptor(libLogger),
-                FlakySafeObjectBehaviorInterceptor(kautomatorFlakySafetyParams, libLogger)
+                UiObjectLoaderBehaviorInterceptor(
+                    libLogger
+                ),
+                FlakySafeObjectBehaviorInterceptor(
+                    kautomatorFlakySafetyParams,
+                    libLogger
+                ),
+                FailureLoggingObjectBehaviorInterceptor(
+                    libLogger
+                )
             )
 
             if (!::deviceBehaviorInterceptors.isInitialized) deviceBehaviorInterceptors = mutableListOf(
-                FlakySafeDeviceBehaviorInterceptor(kautomatorFlakySafetyParams, libLogger)
+                FlakySafeDeviceBehaviorInterceptor(
+                    kautomatorFlakySafetyParams,
+                    libLogger
+                )
             )
 
             if (!::stepWatcherInterceptors.isInitialized) stepWatcherInterceptors = mutableListOf(
@@ -669,8 +681,14 @@ data class Kaspresso(
         }
 
         private fun initKautomatorInterception(kaspresso: Kaspresso) {
-            val objectInterceptor = KautomatorObjectInterceptor(kaspresso)
-            val deviceInterceptor = KautomatorDeviceInterceptor(kaspresso)
+            val objectInterceptor =
+                KautomatorObjectInterceptor(
+                    kaspresso
+                )
+            val deviceInterceptor =
+                KautomatorDeviceInterceptor(
+                    kaspresso
+                )
             KautomatorConfigurator.intercept {
                 onUiInteraction {
                     onCheck(isOverride = true, interceptor = objectInterceptor::interceptCheck)

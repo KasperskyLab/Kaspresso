@@ -1,12 +1,10 @@
 package com.kaspersky.kaspresso.compose
 
+import com.kaspersky.components.kautomator.dsl.common.views.UiBaseView
 import com.kaspersky.kaspresso.compose.pack.ActionsOnElementsPack
 import com.kaspersky.kaspresso.compose.pack.ActionsPack
 
-/**
- * The interface to provide composing actions and assertions functionality.
- */
-interface ComposeProvider<ElementType> {
+interface ObjectComposeProvider {
 
     /**
      * Composes a [block] of actions with their views to invoke on in one composite action that succeeds if at least
@@ -14,7 +12,7 @@ interface ComposeProvider<ElementType> {
      *
      * @param block the actions to compose.
      */
-    fun compose(block: ActionsOnElementsPack<ElementType>.() -> Unit)
+    fun composeExternal(block: ActionsOnElementsPack<UiBaseView<*>>.() -> Unit)
 
     /**
      * Composes a [block] of actions on the given view of type [T] in one composite action that succeeds if at least
@@ -22,5 +20,6 @@ interface ComposeProvider<ElementType> {
      *
      * @param block the actions to compose.
      */
-    fun <T : ElementType> T.compose(block: ActionsPack<T>.() -> Unit)
+    fun <T : UiBaseView<*>> T.composeExternal(block: ActionsPack<T>.() -> Unit)
+
 }

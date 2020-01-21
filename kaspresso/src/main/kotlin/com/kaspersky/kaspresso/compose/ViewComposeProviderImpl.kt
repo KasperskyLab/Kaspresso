@@ -3,8 +3,7 @@ package com.kaspersky.kaspresso.compose
 import androidx.test.espresso.ViewAction
 import androidx.test.espresso.ViewAssertion
 import androidx.test.espresso.ViewInteraction
-import com.agoda.kakao.common.actions.BaseActions
-import com.agoda.kakao.common.assertions.BaseAssertions
+import com.agoda.kakao.common.views.KBaseView
 import com.agoda.kakao.intercept.Interceptable
 import com.kaspersky.kaspresso.compose.pack.ActionsOnElementsPack
 import com.kaspersky.kaspresso.compose.pack.ActionsPack
@@ -22,9 +21,9 @@ import com.kaspersky.kaspresso.kaspresso.Kaspresso
 /**
  * The implementation of the [ComposeProvider] interface.
  */
-class ComposeProviderImpl(
+class ViewComposeProviderImpl(
     private val kaspresso: Kaspresso
-) : ComposeProvider {
+) : ViewComposeProvider {
 
     /**
      * Composes a [block] of actions with their views to invoke on in one composite action that succeeds if at least
@@ -32,10 +31,10 @@ class ComposeProviderImpl(
      *
      * @param block the actions to compose.
      */
-    override fun compose(block: ActionsOnElementsPack.() -> Unit) {
-        val (elements, actions) = ActionsOnElementsPack().apply(block).build()
+    override fun compose(block: ActionsOnElementsPack<KBaseView<*>>.() -> Unit) {
+        val (elements, actions) = ActionsOnElementsPack<KBaseView<*>>().apply(block).build()
 
-        elements.forEach { it.setComposeInterception() }
+        elements.forEach { it.rollComposeInterception() }
 
         val (flakySafetyProvider, failureLoggingProvider) = getProviders()
 
@@ -45,7 +44,7 @@ class ComposeProviderImpl(
             }
         }
 
-        elements.forEach { it.setInterception() }
+        elements.forEach { it.rollbackPreviousInterception() }
     }
 
     /**
@@ -54,12 +53,11 @@ class ComposeProviderImpl(
      *
      * @param block the actions to compose.
      */
-    override fun <T> T.compose(block: ActionsPack<T>.() -> Unit)
-            where T : BaseActions, T : BaseAssertions, T : Interceptable<ViewInteraction, ViewAssertion, ViewAction> {
+    override fun <T : KBaseView<*>> T.compose(block: ActionsPack<T>.() -> Unit) {
 
         val actions: List<() -> Unit> = ActionsPack(this).apply(block).build()
 
-        setComposeInterception()
+        rollComposeInterception()
 
         val (flakySafetyProvider, failureLoggingProvider) = getProviders()
 
@@ -69,7 +67,7 @@ class ComposeProviderImpl(
             }
         }
 
-        setInterception()
+        rollbackPreviousInterception()
     }
 
     private fun getProviders(): Pair<FlakySafetyProvider?, FailureLoggingProvider?> {
@@ -86,7 +84,7 @@ class ComposeProviderImpl(
         return Pair(flakySafetyProvider, failureLoggingProvider)
     }
 
-    private fun Interceptable<ViewInteraction, ViewAssertion, ViewAction>.setComposeInterception() {
+    private fun Interceptable<ViewInteraction, ViewAssertion, ViewAction>.rollComposeInterception() {
         val interceptor = ComposeKakaoViewInterceptor(kaspresso)
 
         intercept {
@@ -95,7 +93,7 @@ class ComposeProviderImpl(
         }
     }
 
-    private fun Interceptable<ViewInteraction, ViewAssertion, ViewAction>.setInterception() {
+    private fun Interceptable<ViewInteraction, ViewAssertion, ViewAction>.rollbackPreviousInterception() {
         val interceptor = KakaoViewInterceptor(kaspresso)
 
         intercept {
