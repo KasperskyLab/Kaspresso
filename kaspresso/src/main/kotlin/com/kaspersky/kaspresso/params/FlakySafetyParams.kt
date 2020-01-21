@@ -2,28 +2,57 @@ package com.kaspersky.kaspresso.params
 
 import androidx.test.espresso.NoMatchingViewException
 import androidx.test.espresso.PerformException
+import androidx.test.uiautomator.StaleObjectException
+import com.kaspersky.components.kautomator.intercepting.exception.UnfoundedUiObjectException
+import junit.framework.AssertionFailedError
 
 /**
  * The class that holds all the necessary for [com.kaspersky.kaspresso.flakysafety.FlakySafetyProviderImpl] parameters.
  */
-class FlakySafetyParams(
-    timeoutMs: Long = DEFAULT_TIMEOUT_MS,
-    intervalMs: Long = DEFAULT_INTERVAL_MS,
+class FlakySafetyParams private constructor(
+    timeoutMs: Long,
+    intervalMs: Long,
 
     /**
      * The set of exceptions, if caught, the [com.kaspersky.kaspresso.flakysafety.FlakySafetyProviderImpl] will continue
      * to attempt.
      */
-    val allowedExceptions: Set<Class<out Throwable>> = DEFAULT_ALLOWED_EXCEPTIONS
+    val allowedExceptions: Set<Class<out Throwable>>
 ) {
+
     companion object {
-        private const val DEFAULT_TIMEOUT_MS: Long = 5_000L
-        private const val DEFAULT_INTERVAL_MS: Long = 500L
-        private val DEFAULT_ALLOWED_EXCEPTIONS = setOf(
-            PerformException::class.java,
-            NoMatchingViewException::class.java,
-            AssertionError::class.java
-        )
+        fun kakaoInstance(): FlakySafetyParams {
+            return FlakySafetyParams(
+                timeoutMs = 5_000L,
+                intervalMs = 500L,
+                allowedExceptions = setOf(
+                    PerformException::class.java,
+                    NoMatchingViewException::class.java,
+                    AssertionError::class.java,
+                    AssertionFailedError::class.java
+                )
+            )
+        }
+
+        fun kautomatorInstance(): FlakySafetyParams {
+            return FlakySafetyParams(
+                timeoutMs = 15_000L,
+                intervalMs = 1_000L,
+                allowedExceptions = setOf(
+                    PerformException::class.java,
+                    AssertionError::class.java,
+                    AssertionFailedError::class.java,
+                    UnfoundedUiObjectException::class.java,
+                    StaleObjectException::class.java
+                )
+            )
+        }
+
+        fun customInstance(
+            timeoutMs: Long,
+            intervalMs: Long,
+            allowedExceptions: Set<Class<out Throwable>>
+        ): FlakySafetyParams = FlakySafetyParams(timeoutMs, intervalMs, allowedExceptions)
     }
 
     /**

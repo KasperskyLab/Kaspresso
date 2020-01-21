@@ -7,7 +7,7 @@ buildscript {
     }
 
     dependencies {
-        classpath "com.android.tools.build:gradle:$versions.androidPlugin"
+        classpath "com.android.tools.build:gradle:${versions.androidPlugin}"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
         classpath "org.jetbrains.dokka:dokka-android-gradle-plugin:$versions.dokka"
         classpath "com.jfrog.bintray.gradle:gradle-bintray-plugin:$versions.bintrayPlugin"

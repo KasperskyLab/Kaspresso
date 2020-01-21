@@ -13,6 +13,7 @@ import com.kaspersky.kaspresso.logger.UiTestLogger
 internal class ActivityMetadata(
     private val logger: UiTestLogger
 ) {
+
     companion object {
         private const val INDEX_SEPARATOR = '_'
     }

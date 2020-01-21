@@ -1,45 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="16dp">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
 
     <TextView
-            android:id="@+id/upgrade_version"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            tools:text="v.1" />
+        android:id="@+id/upgrade_version"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        tools:text="v.1" />
 
     <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/upgrade_label_value"
-            android:textColor="@android:color/black"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/upgrade_label_value"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
     <EditText
-            android:id="@+id/upgrade_value_input"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:hint="@string/upgrade_value_input_hint"
-            android:inputType="text"
-            tools:ignore="Autofill" />
+        android:id="@+id/upgrade_value_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:hint="@string/upgrade_value_input_hint"
+        android:inputType="text"
+        tools:ignore="Autofill" />
 
     <Button
-            android:id="@+id/upgrade_apply_btn"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:text="@string/upgrade_apply_button" />
+        android:id="@+id/upgrade_apply_btn"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="@string/upgrade_apply_button" />
 
     <TextView
-            android:id="@+id/upgrade_value_current"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="Current value is: Kaspresso" />
+        android:id="@+id/upgrade_value_current"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Current value is: Kaspresso" />
 
 </LinearLayout>

@@ -9,7 +9,7 @@ import com.kaspersky.kaspresso.kaspresso.Kaspresso
  * [com.kaspersky.kaspresso.testcases.api.scenario.Scenario] instead.
  */
 abstract class TestCase(
-    kaspressoBuilder: Kaspresso.Builder = Kaspresso.Builder.default()
+    kaspressoBuilder: Kaspresso.Builder = Kaspresso.Builder.advanced()
 ) : BaseTestCase<Unit, Unit>(
     kaspressoBuilder = kaspressoBuilder,
     dataProducer = { action -> action?.invoke(Unit) }

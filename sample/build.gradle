@@ -43,7 +43,6 @@ dependencies {
     implementation "com.google.android.material:material:$versions.androidMaterial"
     implementation "androidx.constraintlayout:constraintlayout:$versions.constraint"
 
-
     testImplementation "junit:junit:$versions.junit"
 
     androidTestImplementation "androidx.test:runner:$versions.runner"
@@ -56,4 +55,5 @@ dependencies {
 
     androidTestImplementation project(':kaspresso')
     androidTestImplementation "com.agoda.kakao:kakao:$versions.kakao"
+    androidTestImplementation project(':kautomator')
 }

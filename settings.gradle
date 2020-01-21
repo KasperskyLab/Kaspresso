@@ -1,1 +1,6 @@
-include ':kaspresso', ':sample', ':allure-model', ':uiautomator_dsl', ':foreign-process-tests'
+include':kaspresso',
+        ':sample',
+        ':allure-model',
+        ':kautomator',
+        ':sample_upgrade_tests',
+        ':sample_kautomator'

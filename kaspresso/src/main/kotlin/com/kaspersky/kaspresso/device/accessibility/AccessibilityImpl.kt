@@ -4,6 +4,7 @@ import android.annotation.TargetApi
 import android.app.UiAutomation
 import android.os.Build
 import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.uiautomator.Configurator
 
 /**
  * The implementation of the [Accessibility] interface.
@@ -20,6 +21,9 @@ class AccessibilityImpl : Accessibility {
     override fun enable(packageName: String, className: String) {
         val string = "enabled_accessibility_services"
         val cmd = "settings put secure $string $packageName/$className"
+
+        val flags = UiAutomation.FLAG_DONT_SUPPRESS_ACCESSIBILITY_SERVICES
+        Configurator.getInstance().uiAutomationFlags = flags
 
         InstrumentationRegistry.getInstrumentation()
             .getUiAutomation(UiAutomation.FLAG_DONT_SUPPRESS_ACCESSIBILITY_SERVICES)

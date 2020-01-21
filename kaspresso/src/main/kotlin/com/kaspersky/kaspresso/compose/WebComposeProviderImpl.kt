@@ -10,8 +10,8 @@ import com.kaspersky.kaspresso.flakysafety.flakySafelyIfNotNull
 import com.kaspersky.kaspresso.interceptors.behavior.WebBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.impl.failure.FailureLoggingWebBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.impl.flakysafety.FlakySafeWebBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.tokakao.compose.ComposeKakaoWebInterceptor
-import com.kaspersky.kaspresso.interceptors.tokakao.impl.KakaoWebInterceptor
+import com.kaspersky.kaspresso.interceptors.tolibrary.kakao.compose.ComposeKakaoWebInterceptor
+import com.kaspersky.kaspresso.interceptors.tolibrary.kakao.impl.KakaoWebInterceptor
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 
 /**

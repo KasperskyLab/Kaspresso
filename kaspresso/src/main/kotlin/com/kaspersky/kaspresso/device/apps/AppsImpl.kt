@@ -25,7 +25,6 @@ class AppsImpl(
 ) : Apps {
 
     companion object {
-
         const val LAUNCH_RECENT_TIMEOUT = 1_000L
         const val LAUNCH_APP_TIMEOUT = 5_000L
     }
@@ -55,7 +54,7 @@ class AppsImpl(
      * @param packageName an android package name of the app to be checked.
      * @param apkPath a path to the apk to be installed. The apk is hosted on the test server.
      */
-    override fun installIfNotExist(packageName: String, apkPath: String) {
+    override fun installIfNotExists(packageName: String, apkPath: String) {
         if (!isInstalled(packageName)) {
             install(apkPath)
         }
@@ -79,7 +78,7 @@ class AppsImpl(
      *
      * @param packageName an android package name of an app to be deleted.
      */
-    override fun uninstallIfExist(packageName: String) {
+    override fun uninstallIfExists(packageName: String) {
         if (isInstalled(packageName)) {
             uninstall(packageName)
         }

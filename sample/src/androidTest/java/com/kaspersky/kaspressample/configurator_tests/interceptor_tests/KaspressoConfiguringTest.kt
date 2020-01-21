@@ -25,7 +25,7 @@ import org.junit.runner.RunWith
  */
 @RunWith(AndroidJUnit4::class)
 class KaspressoConfiguringTest : TestCase(
-    kaspressoBuilder = Kaspresso.Builder.default().apply {
+    kaspressoBuilder = Kaspresso.Builder.advanced().apply {
         viewActionWatcherInterceptors.add(CustomViewActionWatcherInterceptor())
         viewAssertionWatcherInterceptors.add(CustomViewAssertionWatcherInterceptor())
         stepWatcherInterceptors.add(CustomStepWatcherInterceptor())

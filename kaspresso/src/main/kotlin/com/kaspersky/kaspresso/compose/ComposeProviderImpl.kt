@@ -15,8 +15,8 @@ import com.kaspersky.kaspresso.flakysafety.flakySafelyIfNotNull
 import com.kaspersky.kaspresso.interceptors.behavior.ViewBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.impl.failure.FailureLoggingViewBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.impl.flakysafety.FlakySafeViewBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.tokakao.compose.ComposeKakaoViewInterceptor
-import com.kaspersky.kaspresso.interceptors.tokakao.impl.KakaoViewInterceptor
+import com.kaspersky.kaspresso.interceptors.tolibrary.kakao.compose.ComposeKakaoViewInterceptor
+import com.kaspersky.kaspresso.interceptors.tolibrary.kakao.impl.KakaoViewInterceptor
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 
 /**
