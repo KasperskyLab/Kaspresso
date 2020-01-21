@@ -349,7 +349,7 @@ data class Kaspresso(
         /**
          * Holds an implementation of [Logcat] interface. If it was not specified, the default implementation is used.
          */
-        var logcat: Logcat = LogcatImpl()
+        lateinit var logcat: Logcat
 
         /**
          * Holds the [FlakySafetyParams] for [com.kaspersky.kaspresso.flakysafety.FlakySafetyProvider]'s usage.
@@ -527,6 +527,7 @@ data class Kaspresso(
             if (!::hackPermissions.isInitialized) hackPermissions = HackPermissionsImpl(instrumentation.uiAutomation, libLogger)
             if (!::exploit.isInitialized) exploit = ExploitImpl(activities, uiDevice, adbServer)
             if (!::language.isInitialized) language = LanguageImpl(libLogger, instrumentation.targetContext)
+            if (!::logcat.isInitialized) logcat = LogcatImpl()
 
             if (!::flakySafetyParams.isInitialized) flakySafetyParams = FlakySafetyParams.kakaoInstance()
             if (!::kautomatorFlakySafetyParams.isInitialized) kautomatorFlakySafetyParams = FlakySafetyParams.kautomatorInstance()
