@@ -4,6 +4,7 @@ import com.agoda.kakao.text.KButton
 import com.agoda.kakao.text.KTextView
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.R
+import com.kaspersky.kaspresso.screens.KScreen
 
 object MainScreen : KScreen<MainScreen>() {
 

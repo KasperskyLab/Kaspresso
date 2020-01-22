@@ -1,4 +1,4 @@
-package com.kaspersky.kaspressample.screen
+package com.kaspersky.kaspresso.screens
 
 import com.agoda.kakao.screen.Screen
 

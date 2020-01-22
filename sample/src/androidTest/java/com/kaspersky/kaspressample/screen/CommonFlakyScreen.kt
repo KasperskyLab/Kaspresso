@@ -4,6 +4,7 @@ import com.agoda.kakao.scroll.KScrollView
 import com.agoda.kakao.text.KButton
 import com.kaspersky.kaspressample.R
 import com.kaspersky.kaspressample.flaky.CommonFlakyActivity
+import com.kaspersky.kaspresso.screens.KScreen
 
 object CommonFlakyScreen : KScreen<CommonFlakyScreen>() {
 

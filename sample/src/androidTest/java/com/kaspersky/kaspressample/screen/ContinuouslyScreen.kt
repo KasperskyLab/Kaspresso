@@ -4,6 +4,7 @@ import com.agoda.kakao.text.KButton
 import com.agoda.kakao.text.KTextView
 import com.kaspersky.kaspressample.R
 import com.kaspersky.kaspressample.continuously.ContinuouslySampleActivity
+import com.kaspersky.kaspresso.screens.KScreen
 
 object ContinuouslyScreen : KScreen<ContinuouslyScreen>() {
     override val layoutId = R.layout.activity_continuously
