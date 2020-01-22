@@ -1,4 +1,4 @@
-package com.kaspersky.kaspressample.flaky_tests
+package com.kaspersky.kaspressample.compose_tests
 
 import android.Manifest
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -17,7 +17,7 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class ComposeTest : TestCase(
     kaspressoBuilder = Kaspresso.Builder.advanced().apply {
-        flakySafetyParams.timeoutMs = 8_000
+        flakySafetyParams.timeoutMs = 11_000
     }
 ) {
 
@@ -47,6 +47,14 @@ class ComposeTest : TestCase(
             step("Check ScrollView screen is visible") {
                 CommonFlakyScreen {
                     scrollView.isVisible()
+                }
+            }
+
+            step("Choose the Kakao mode") {
+                CommonFlakyScreen {
+                    kakaoMode {
+                        click()
+                    }
                 }
             }
 
