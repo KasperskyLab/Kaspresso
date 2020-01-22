@@ -67,10 +67,10 @@ class LogcatImpl : Logcat {
             command += "-m $rowLimit "
         }
         if (excludePattern != null) {
-            command += """| grep -${if(excludeIgnoreCase) "i" else ""}Ev '${excludePattern.replace("\"", "\\")}' """
+            command += """| grep -${ if (excludeIgnoreCase) "i" else "" }Ev '${excludePattern.replace("\"", "\\")}' """
         }
         if (includePattern != null) {
-            command += """| grep -${if(includeIgnoreCase) "i" else ""}E '${includePattern.replace("\"", "\\")}' """
+            command += """| grep -${ if (includeIgnoreCase) "i" else "" }E '${includePattern.replace("\"", "\\")}' """
         }
         val process = executeCommand(command)
         val logcatStream = InputStreamReader(process.inputStream)
