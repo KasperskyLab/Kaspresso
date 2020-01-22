@@ -1,4 +1,4 @@
-package com.kaspersky.kaspressample.flaky_tests
+package com.kaspersky.kaspressample.continuously_tests
 
 import android.Manifest
 import android.os.Build
