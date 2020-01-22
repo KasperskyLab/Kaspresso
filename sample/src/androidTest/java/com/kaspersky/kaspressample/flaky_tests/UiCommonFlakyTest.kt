@@ -1,4 +1,4 @@
-package com.kaspersky.kaspressample.kautomator_tests
+package com.kaspersky.kaspressample.flaky_tests
 
 import android.Manifest
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -8,6 +8,7 @@ import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.R
 import com.kaspersky.kaspressample.external_screens.UiCommonFlakyScreen
 import com.kaspersky.kaspressample.external_screens.UiMainScreen
+import com.kaspersky.kaspressample.screen.CommonFlakyScreen
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.junit.Rule
 import org.junit.Test
@@ -41,10 +42,23 @@ class UiCommonFlakyTest : TestCase() {
 
             step("Check ScrollView screen is visible") {
                 UiCommonFlakyScreen {
-                    // todo the same check in Kakao is called as isVisible.
-                    // todo maybe we need to add isVisible to UiAutomator DSL
                     scrollView {
                         isDisplayed()
+                    }
+                }
+            }
+
+            step("Choose the Kautomator mode") {
+                CommonFlakyScreen {
+                    kautomatorMode {
+                        click()
+                    }
+                }
+            }
+
+            step("temp step") {
+                UiCommonFlakyScreen {
+                    scrollView {
                         // todo In UiAutomator DSL there is not autoscroll feature of all Scrollable views.
                         // todo That's why we are forced to make scrolls manually
                         // todo maybe to fix it somehow
@@ -56,6 +70,13 @@ class UiCommonFlakyTest : TestCase() {
             step("Check btn5's text") {
                 UiCommonFlakyScreen {
                     btn5 {
+                        // automate flaky safety handling is in action
+                        // the text is changing during 3 seconds
+                        // the default value of flaky safety timeout in Kautomator = 15 seconds
+                        // So, we want to show the beauty of Kautomator
+                        // where all of this magic is doing under the hood and you don't need to
+                        // keep in your head all potential flakies of UiAutomator
+                        // God save the Kautomator =)
                         hasText(device.targetContext.getString(R.string.common_flaky_final_button).toUpperCase())
                     }
                 }
@@ -64,7 +85,12 @@ class UiCommonFlakyTest : TestCase() {
             step("Check tv6's text") {
                 UiCommonFlakyScreen {
                     tv6 {
-                        hasText(device.targetContext.getString(R.string.common_flaky_final_textview))
+                        // here, the text will be changing longer(summary = 12 seconds) than
+                        //     the default value of flaky safety timeout in Kautomator = 15 seconds
+                        // that's why we use flakySafely method obviously
+                        flakySafely(timeoutMs = 20_000) {
+                            hasText(device.targetContext.getString(R.string.common_flaky_final_textview))
+                        }
                     }
                 }
             }

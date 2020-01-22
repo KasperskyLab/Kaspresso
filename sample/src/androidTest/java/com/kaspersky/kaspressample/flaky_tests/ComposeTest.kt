@@ -10,7 +10,6 @@ import com.kaspersky.kaspressample.screen.CommonFlakyScreen
 import com.kaspersky.kaspressample.screen.MainScreen
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
-import java.util.concurrent.TimeUnit
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -18,7 +17,7 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class ComposeTest : TestCase(
     kaspressoBuilder = Kaspresso.Builder.advanced().apply {
-        flakySafetyParams.timeoutMs = TimeUnit.SECONDS.toMillis(8)
+        flakySafetyParams.timeoutMs = 8_000
     }
 ) {
 

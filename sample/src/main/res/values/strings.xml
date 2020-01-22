@@ -26,6 +26,8 @@
     <string name="counter_value">Current value: %d</string>
 
     <!-- Flakysafety sample test -->
+    <string name="common_flaky_kautomator_mode">Kautomator mode on</string>
+    <string name="common_flaky_kakao_mode">Kakao mode on</string>
     <string name="common_flaky_final_textview">TextView</string>
     <string name="common_flaky_final_button">Button</string>
     <string name="common_flaky_start_1">1</string>
