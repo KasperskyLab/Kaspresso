@@ -7,26 +7,39 @@ import java.lang.IllegalArgumentException
  */
 class ActionsOnElementsPack<ElementType> {
 
-    private val elements: MutableList<ElementType> = mutableListOf()
-    private val actions: MutableList<() -> Unit> = mutableListOf()
+    private val actionElements: MutableList<ActionElement<out ElementType>> = mutableListOf()
 
     /**
-     * Adds the [element] of type [T] and the [action] to [elements] and [actions] for future composing.
+     * Adds the [element] of type [T] and the [action] to [actionElements] and [actions] for future composing.
      *
      * @param element the interacted view.
      * @param action actions or assertions on the interacted view.
      */
-    fun <T : ElementType> or(element: T, action: T.() -> Unit) {
-
-        elements += element
-        actions += { action.invoke(element) }
+    fun <T : ElementType> or(element: T, action: T.() -> Unit): Beta {
+        actionElements += ActionElement(element, { action.invoke(element) })
+        return Beta()
     }
 
     /**
      * @return the built parameters for [com.kaspersky.kaspresso.compose.ComposeProvider.compose] method.
      */
-    internal fun build(): Pair<List<ElementType>, List<() -> Unit>> {
-        if (elements.isEmpty() || actions.isEmpty()) throw IllegalArgumentException("Nothing to compose")
-        return Pair(elements, actions)
+    internal fun build(): List<ActionElement<out ElementType>> {
+        if (actionElements.isEmpty()) throw IllegalArgumentException("Nothing to compose")
+        return actionElements
     }
+}
+
+data class ActionElement<ElementType>(
+    val element: ElementType,
+    val actions: () -> Unit
+)
+
+class Beta {
+
+    infix fun then(action: () -> Unit) {
+        action.invoke()
+    }
+
+
+
 }
