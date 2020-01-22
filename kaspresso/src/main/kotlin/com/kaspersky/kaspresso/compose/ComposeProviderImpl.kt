@@ -35,13 +35,9 @@ import com.kaspersky.kaspresso.kaspresso.Kaspresso
 /**
  * The implementation of the [ComposeProvider] interface.
  */
-class ComposeProviderImpl<Type>(
+class ComposeProviderImpl(
     private val kaspresso: Kaspresso
-) : ComposeProvider<Type>
-        where Type : BaseActions, Type : BaseAssertions,
-              Type : Interceptable<ViewInteraction, ViewAssertion, ViewAction>,
-              Type : UiBaseActions, Type : UiBaseAssertions,
-              Type : UiInterceptable<UiObjectInteraction, UiObjectAssertion, UiObjectAction> {
+) : ComposeProvider {
 
     /**
      * Composes a [block] of actions with their views to invoke on in one composite action that succeeds if at least
@@ -49,8 +45,8 @@ class ComposeProviderImpl<Type>(
      *
      * @param block the actions to compose.
      */
-    override fun compose(block: ActionsOnElementsPack<Type>.() -> Unit) {
-        val actionElements = ActionsOnElementsPack<Type>().apply(block).build()
+    override fun compose(block: ActionsOnElementsPack.() -> Unit) {
+        val actionElements = ActionsOnElementsPack().apply(block).build()
         // elements preparing
         actionElements.forEach { rollComposeInterception(it.element) }
         // action
@@ -68,23 +64,42 @@ class ComposeProviderImpl<Type>(
      *
      * @param block the actions to compose.
      */
-    override fun <T : Type> T.compose(block: ActionsPack<T>.() -> Unit) {
-        val actions: List<() -> Unit> = ActionsPack(this).apply(block).build()
+    override fun <Type> Type.compose(block: ActionsPack<Type>.() -> Unit)
+            where Type : BaseActions, Type : BaseAssertions,
+                  Type : Interceptable<ViewInteraction, ViewAssertion, ViewAction> = innerCompose(this, block)
+
+    /**
+     * Composes a [block] of actions on the given view of type [T] in one composite action that succeeds if at least
+     * one of it's parts succeeds.
+     *
+     * @param block the actions to compose.
+     */
+    override fun <Type> Type.compose(block: ActionsPack<Type>.() -> Unit)
+            where Type : UiBaseActions, Type : UiBaseAssertions,
+                  Type : UiInterceptable<UiObjectInteraction, UiObjectAssertion, UiObjectAction> = innerCompose(this, block)
+
+    private fun <Type> innerCompose(element: Type, block: ActionsPack<Type>.() -> Unit) {
+        val actions: List<() -> Unit> = ActionsPack(element).apply(block).build()
         // preparing
-        rollComposeInterception(this)
+        rollComposeInterception(element as Any)
         // action
         callComposeActionsIntoFlakySafety(
-            isKautomatorHere = this is UiBaseView<*>,
+            isKautomatorHere = element is UiBaseView<*>,
             actions = actions
         )
         // restoring the previous state
-        rollbackPreviousInterception(this)
+        rollbackPreviousInterception(element as Any)
     }
 
-    private fun rollComposeInterception(element: Type) {
+    private fun rollComposeInterception(element: Any) {
         when (element) {
             is KBaseView<*> -> element.rollKakaoComposeInterception()
             is UiBaseView<*> -> element.rollKautomatorComposeInterception()
+            else -> throw RuntimeException(
+                "Incorrect type of the element is using in compose functionality." +
+                        "You can use only KBaseView with its inheritors or UiBaseView with its inheritors." +
+                        "Your Element here=$element."
+            )
         }
     }
 
@@ -106,10 +121,15 @@ class ComposeProviderImpl<Type>(
         }
     }
 
-    private fun rollbackPreviousInterception(element: Type) {
+    private fun rollbackPreviousInterception(element: Any) {
         when (element) {
             is KBaseView<*> -> element.rollbackKakaoPreviousInterception()
             is UiBaseView<*> -> element.rollbackKautomatorPreviousInterception()
+            else -> throw RuntimeException(
+                "Incorrect type of the element is using in compose functionality." +
+                        "You can use only KBaseView with its inheritors or UiBaseView with its inheritors." +
+                        "Your Element here=$element."
+            )
         }
     }
 
