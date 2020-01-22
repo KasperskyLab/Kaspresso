@@ -9,7 +9,6 @@ import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.screen.ContinuouslyScreen
 import com.kaspersky.kaspressample.screen.MainScreen
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
-import java.util.concurrent.TimeUnit
 import org.junit.Assume
 import org.junit.Rule
 import org.junit.Test
@@ -19,7 +18,7 @@ import org.junit.runner.RunWith
 class ContinuouslyTest : TestCase() {
 
     companion object {
-        private val FAKE_MAX_DELAY = TimeUnit.SECONDS.toMillis(5)
+        private const val FAKE_MAX_DELAY_MS: Long = 5_000
     }
 
     @get:Rule
@@ -57,7 +56,7 @@ class ContinuouslyTest : TestCase() {
             }
             step("Check dialog appeared") {
                 ContinuouslyScreen {
-                    flakySafely(FAKE_MAX_DELAY) {
+                    flakySafely(FAKE_MAX_DELAY_MS) {
                         dialogTitle {
                             isVisible()
                         }
@@ -93,7 +92,7 @@ class ContinuouslyTest : TestCase() {
             }
             step("Check dialog not appeared") {
                 ContinuouslyScreen {
-                    continuously(FAKE_MAX_DELAY) {
+                    continuously(FAKE_MAX_DELAY_MS) {
                         dialogTitle {
                             doesNotExist()
                         }
