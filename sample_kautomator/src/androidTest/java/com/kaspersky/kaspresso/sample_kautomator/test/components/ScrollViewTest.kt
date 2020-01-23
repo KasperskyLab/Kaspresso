@@ -1,16 +1,19 @@
 package com.kaspersky.kaspresso.sample_kautomator.test.components
 
 import androidx.test.rule.ActivityTestRule
-import com.kaspersky.kaspresso.sample_kautomator.recycler.RecyclerActivity
-import com.kaspersky.kaspresso.sample_kautomator.screen.RecyclerScreen
+import com.kaspersky.kaspresso.sample_kautomator.screen.ScrollScreen
+import com.kaspersky.kaspresso.sample_kautomator.scroll.ScrollActivity
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.junit.Rule
 import org.junit.Test
 
-class RecyclerTest : TestCase() {
+/**
+ * This sample shows how to work with UiScrollView
+ */
+class ScrollViewTest : TestCase() {
 
     @get:Rule
-    val rule = ActivityTestRule(RecyclerActivity::class.java, true, true)
+    val rule = ActivityTestRule(ScrollActivity::class.java, true, true)
 
     @Test
     fun test() {
@@ -19,7 +22,7 @@ class RecyclerTest : TestCase() {
              * An example of the use swipe gestures
              */
             step("Swipe actions") {
-                RecyclerScreen {
+                ScrollScreen {
                     /**
                      * Swipes up for about one screen
                      */
@@ -40,7 +43,7 @@ class RecyclerTest : TestCase() {
             }
 
             step("Scroll actions") {
-                RecyclerScreen {
+                ScrollScreen {
                     /**
                      * Scrolls the view to the bottom
                      */
@@ -52,11 +55,11 @@ class RecyclerTest : TestCase() {
                     /**
                      * Scrolls the view to selected UiBaseView
                      */
-                    scroll { scrollToView(this@RecyclerScreen.toSearch) }
+                    scroll { scrollToView(this@ScrollScreen.center) }
                     /**
                      * toSearch view should be displayed
                      */
-                    toSearch { isDisplayed() }
+                    center { isDisplayed() }
                     /**
                      * Scroll to top
                      */

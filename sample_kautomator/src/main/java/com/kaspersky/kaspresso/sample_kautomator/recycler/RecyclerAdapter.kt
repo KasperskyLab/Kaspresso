@@ -6,9 +6,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.kaspersky.kaspresso.sample_kautomator.R
+import com.kaspersky.kaspresso.sample_kautomator.model.SimpleModel
 
 class RecyclerAdapter(
-    private val collection: List<RecyclerModel>
+    private val collection: List<SimpleModel>
 ) : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

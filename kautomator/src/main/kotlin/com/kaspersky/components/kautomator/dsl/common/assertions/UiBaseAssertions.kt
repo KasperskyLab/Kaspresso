@@ -1,3 +1,4 @@
+@file:Suppress("unused")
 package com.kaspersky.components.kautomator.dsl.common.assertions
 
 import com.google.common.truth.Truth.assertThat
@@ -25,7 +26,8 @@ interface UiBaseAssertions {
      * Checks if the view is not completely displayed
      */
     fun isNotDisplayed() {
-        view.check(DisplayedObjectAssertion.assertNotDisplayed())
+        // TODO: use interceptors
+        assertThat(view.loadView()).isFalse()
     }
 
     /**

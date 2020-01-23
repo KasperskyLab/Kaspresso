@@ -2,7 +2,6 @@ package com.kaspersky.components.kautomator.intercepting.interaction
 
 import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.UiObject2
-import com.kaspersky.components.kautomator.dsl.common.assertions.DisplayedObjectAssertion
 import com.kaspersky.components.kautomator.dsl.common.builders.UiViewSelector
 import com.kaspersky.components.kautomator.intercepting.exception.UnfoundedUiObjectException
 import com.kaspersky.components.kautomator.intercepting.operation.UiObjectAction
@@ -21,17 +20,20 @@ class UiObjectInteraction(
     var uiObject2: UiObject2? = null
         private set
 
-    fun tryToFindUiObject() {
+    /**
+     * Tries to find UiObject2 with given selector
+     * @return true if object was found, false otherwise
+     */
+    fun tryToFindUiObject(): Boolean {
         val uiObjects = device.findObjects(selector.bySelector)
-        if (uiObjects.isNotEmpty() && selector.index < uiObjects.size)
+        if (uiObjects.isNotEmpty() && selector.index < uiObjects.size) {
             uiObject2 = uiObjects[selector.index]
+            return true
+        }
+        return false
     }
 
     override fun check(assertion: UiObjectAssertion) {
-        if (assertion.type == DisplayedObjectAssertion.DisplayedAssertionType.IS_NOT_DISPLAYED) {
-            (assertion as DisplayedObjectAssertion).execute(uiObject2)
-            return
-        }
         assertion.execute(uiObject2 ?: throw UnfoundedUiObjectException(selector))
     }
 

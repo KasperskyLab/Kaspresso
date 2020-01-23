@@ -28,9 +28,7 @@ class UiObjectDelegate(
     override val interaction: UiObjectInteraction = UiObjectInteraction(device, selector, elementClassName)
     override var interceptor: UiInterceptor<UiObjectInteraction, UiObjectAssertion, UiObjectAction>? = null
 
-    fun loadView() {
-        interaction.tryToFindUiObject()
-    }
+    fun loadView(): Boolean = interaction.tryToFindUiObject()
 
     fun check(
         type: UiOperationType,
