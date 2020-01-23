@@ -9,6 +9,10 @@ import kotlinx.android.synthetic.main.activity_recycler.*
 
 class RecyclerActivity : AppCompatActivity() {
 
+    companion object {
+        private const val ITEM_COUNT = 100
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recycler)
@@ -21,12 +25,8 @@ class RecyclerActivity : AppCompatActivity() {
     }
 
     private fun generateItems(): List<SimpleModel> {
-        return (1..100).map { SimpleModel.randomizeNewItem() }.toMutableList().apply {
-            add(0, SimpleModel("Beginning", 0))
-            add(50,
-                SimpleModel("Scroll to me", 1)
-            )
-            add(SimpleModel("End", 2))
+        return (0..ITEM_COUNT).map { SimpleModel.randomizeNewItem() }.toMutableList().apply {
+            SimpleModel.richWithLabels(this)
         }
     }
 }

@@ -21,10 +21,10 @@ class ScrollActivity : AppCompatActivity() {
             .map { SimpleModel.randomizeNewItem() }
             .toMutableList()
             .apply { SimpleModel.richWithLabels(this) }
-            .map {
+            .map { model ->
                 val view = layoutInflater.inflate(R.layout.item_recycler, layout, false)
-                view.findViewById<TextView>(R.id.title).text = it.text
-                view.findViewById<TextView>(R.id.subtitle).text = it.number.toString()
+                view.findViewById<TextView>(R.id.title).text = model.text
+                view.findViewById<TextView>(R.id.subtitle).text = model.number.toString()
                 view
             }
             .forEach {
