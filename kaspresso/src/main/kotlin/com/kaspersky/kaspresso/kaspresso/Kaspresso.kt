@@ -7,6 +7,8 @@ import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.UiDevice
 import com.agoda.kakao.Kakao
 import com.kaspersky.components.kautomator.KautomatorConfigurator
+import com.kaspersky.components.kautomator.intercepting.interaction.UiDeviceInteraction
+import com.kaspersky.components.kautomator.intercepting.interaction.UiObjectInteraction
 import com.kaspersky.kaspresso.device.Device
 import com.kaspersky.kaspresso.device.accessibility.Accessibility
 import com.kaspersky.kaspresso.device.accessibility.AccessibilityImpl
@@ -51,11 +53,11 @@ import com.kaspersky.kaspresso.interceptors.behavior.impl.flakysafety.FlakySafeW
 import com.kaspersky.kaspresso.interceptors.behavior.impl.systemsafety.SystemDialogSafetyDataBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.impl.systemsafety.SystemDialogSafetyViewBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.impl.systemsafety.SystemDialogSafetyWebBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.behavior_uia.DeviceBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.behavior_uia.ObjectBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.behavior_uia.impl.FlakySafeDeviceBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.behavior_uia.impl.FlakySafeObjectBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.behavior_uia.impl.ObjectLoaderBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behaviorkautomator.DeviceBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behaviorkautomator.ObjectBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.FlakySafeDeviceBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.FlakySafeObjectBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.UiObjectLoaderBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.tolibrary.kakao.impl.KakaoDataInterceptor
 import com.kaspersky.kaspresso.interceptors.tolibrary.kakao.impl.KakaoViewInterceptor
 import com.kaspersky.kaspresso.interceptors.tolibrary.kakao.impl.KakaoWebInterceptor
@@ -345,12 +347,15 @@ data class Kaspresso(
         lateinit var language: Language
 
         /**
-         * Holds the [FlakySafetyParams] for [com.kaspersky.kaspresso.flakysafety.FlakySafetyProvider]'s usage.
+         * Holds the Kakao [FlakySafetyParams] for [com.kaspersky.kaspresso.flakysafety.FlakySafetyProvider]'s usage.
          * If it was not specified, the default implementation for Kakao is used.
          */
         lateinit var flakySafetyParams: FlakySafetyParams
 
-        // todo comment
+        /**
+         * Holds the Kautomator [FlakySafetyParams] for [com.kaspersky.kaspresso.flakysafety.FlakySafetyProvider]'s usage.
+         * If it was not specified, the default implementation for Kautomastor is used.
+         */
         lateinit var kautomatorFlakySafetyParams: FlakySafetyParams
 
         /**
@@ -403,10 +408,20 @@ data class Kaspresso(
          */
         lateinit var webAssertionWatcherInterceptors: MutableList<WebAssertionWatcherInterceptor>
 
-        // todo comments
+        /**
+         * Holds the list of [ObjectWatcherInterceptor]s.
+         * If it was not specified, Kaspresso will use no [ObjectWatcherInterceptor]s.
+         * These interceptors are called by [KautomatorObjectInterceptor]
+         * before actual [UiObjectInteraction.check] and [UiObjectInteraction.perform] call.
+         */
         lateinit var objectWatcherInterceptors: List<ObjectWatcherInterceptor>
 
-        // todo comments
+        /**
+         * Holds the list of [DeviceWatcherInterceptor]s.
+         * If it was not specified, Kaspresso will use no [DeviceWatcherInterceptor]s.
+         * These interceptors are called by [KautomatorDeviceInterceptor]
+         * before actual [UiDeviceInteraction.check] and [UiDeviceInteraction.perform] call.
+         */
         lateinit var deviceWatcherInterceptors: List<DeviceWatcherInterceptor>
 
         /**
@@ -447,10 +462,28 @@ data class Kaspresso(
          */
         lateinit var webBehaviorInterceptors: MutableList<WebBehaviorInterceptor>
 
-        // todo comments
+        /**
+         * Holds the list of [ObjectBehaviorInterceptor]s.
+         * If it was not specified, Kaspresso will use no [ObjectBehaviorInterceptor]s.
+         * These interceptors are called by [KautomatorDeviceInterceptor]
+         * before actual [UiDeviceInteraction.check] and [UiDeviceInteraction.perform] call.
+         * Note that the order of [ObjectBehaviorInterceptor]s in this list is significant: the first item wil be
+         * at the lowest level of intercepting chain, and the last item will be at the highest level.
+         * For example: the first item actually wraps the [UiDeviceInteraction.check] or [UiDeviceInteraction.perform]
+         * call, the second item wraps the first item, and so on.
+         */
         lateinit var objectBehaviorInterceptors: List<ObjectBehaviorInterceptor>
 
-        // todo comments
+        /**
+         * Holds the list of [DeviceBehaviorInterceptor]s.
+         * If it was not specified, Kaspresso will use no [DeviceBehaviorInterceptor]s.
+         * These interceptors are called by [KautomatorObjectInterceptor]
+         * before actual [UiObjectInteraction.check] and [UiObjectInteraction.perform] call.
+         * Note that the order of [DeviceBehaviorInterceptor]s in this list is significant: the first item wil be
+         * at the lowest level of intercepting chain, and the last item will be at the highest level.
+         * For example: the first item actually wraps the [UiObjectInteraction.check] or [UiObjectInteraction.perform]
+         * call, the second item wraps the first item, and so on.
+         */
         lateinit var deviceBehaviorInterceptors: List<DeviceBehaviorInterceptor>
 
         /**
@@ -592,7 +625,7 @@ data class Kaspresso(
             )
 
             if (!::objectBehaviorInterceptors.isInitialized) objectBehaviorInterceptors = mutableListOf(
-                ObjectLoaderBehaviorInterceptor(libLogger),
+                UiObjectLoaderBehaviorInterceptor(libLogger),
                 FlakySafeObjectBehaviorInterceptor(kautomatorFlakySafetyParams, libLogger)
             )
 

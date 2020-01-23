@@ -54,7 +54,7 @@ class ComposeProviderImpl(
      *
      * @param block the actions to compose.
      */
-    override fun <T> T.compose(block: ActionsPack<T>.() -> Unit): Unit
+    override fun <T> T.compose(block: ActionsPack<T>.() -> Unit)
             where T : BaseActions, T : BaseAssertions, T : Interceptable<ViewInteraction, ViewAssertion, ViewAction> {
 
         val actions: List<() -> Unit> = ActionsPack(this).apply(block).build()

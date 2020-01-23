@@ -28,6 +28,6 @@ interface ComposeProvider {
      *
      * @param block the actions to compose.
      */
-    fun <T> T.compose(block: ActionsPack<T>.() -> Unit): Unit
+    fun <T> T.compose(block: ActionsPack<T>.() -> Unit)
             where T : BaseActions, T : BaseAssertions, T : Interceptable<ViewInteraction, ViewAssertion, ViewAction>
 }
