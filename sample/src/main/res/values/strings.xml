@@ -50,4 +50,15 @@
     <string name="upgrade_value_input_hint" translatable="false">Type new value here</string>
     <string name="upgrade_apply_button" translatable="false">Apply</string>
 
+    <!-- Complex compose scenario -->
+    <string name="compose_screen_title" translatable="false">Complex compose screen</string>
+    <string name="compose_screen_button_start" translatable="false">Start</string>
+    <string name="compose_screen_button_stage11" translatable="false">Stage #1.1</string>
+    <string name="compose_screen_button_stage12" translatable="false">Stage #1.2</string>
+    <string name="compose_screen_button_stage22" translatable="false">Stage #2.2</string>
+    <string name="compose_screen_button_finish" translatable="false">Finish</string>
+    <string name="compose_screen_dialog_title" translatable="false">Dialog</string>
+    <string name="compose_screen_dialog_message" translatable="false">Some unexpected text</string>
+    <string name="compose_screen_dialog_pos_button" translatable="false">OK</string>
+
 </resources>

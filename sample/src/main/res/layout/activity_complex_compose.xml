@@ -9,7 +9,7 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/activity_main_title"
+        android:id="@+id/activity_compose_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -18,52 +18,42 @@
         android:textSize="18pt" />
 
     <Button
-        android:id="@+id/activity_main_button_simple"
+        android:id="@+id/activity_compose_start"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/activity_main_title"
-        android:text="@string/simple_fragment" />
+        android:layout_below="@+id/activity_compose_title"
+        android:text="@string/compose_screen_button_start" />
 
     <Button
-        android:id="@+id/activity_main_button_webview"
+        android:id="@+id/activity_compose_stage_1_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/activity_main_button_simple"
-        android:text="@string/webview" />
+        android:layout_below="@+id/activity_compose_start"
+        android:visibility="gone"
+        android:text="@string/compose_screen_button_stage11" />
 
     <Button
-        android:id="@+id/activity_main_button_scroll_view_sample"
+        android:id="@+id/activity_compose_stage_1_2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/activity_main_button_webview"
-        android:text="@string/scroll_view_sample" />
+        android:layout_below="@+id/activity_compose_stage_1_1"
+        android:visibility="gone"
+        android:text="@string/compose_screen_button_stage12" />
 
     <Button
-        android:id="@+id/activity_main_button_continuously_sample"
+        android:id="@+id/activity_compose_stage_2_2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/activity_main_button_scroll_view_sample"
-        android:text="@string/continuously_sample" />
+        android:layout_below="@+id/activity_compose_stage_1_2"
+        android:visibility="gone"
+        android:text="@string/compose_screen_button_stage22" />
 
     <Button
-        android:id="@+id/activity_main_button_upgrade_scenario"
+        android:id="@+id/activity_compose_finish"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/activity_main_button_continuously_sample"
-        android:text="@string/upgrade_title" />
-
-    <Button
-        android:id="@+id/activity_main_button_complex_compose_sample"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/activity_main_button_upgrade_scenario"
-        android:text="@string/complex_compose_sample" />
-
-    <TextView
-        android:id="@+id/activity_main_text_view_description"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/activity_main_button_upgrade_scenario"
-        android:text="@string/main_screen_description" />
+        android:layout_below="@+id/activity_compose_stage_2_2"
+        android:visibility="gone"
+        android:text="@string/compose_screen_button_finish" />
 
 </RelativeLayout>
