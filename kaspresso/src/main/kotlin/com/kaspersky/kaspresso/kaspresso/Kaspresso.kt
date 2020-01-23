@@ -7,8 +7,8 @@ import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.UiDevice
 import com.agoda.kakao.Kakao
 import com.kaspersky.components.kautomator.KautomatorConfigurator
-import com.kaspersky.components.kautomator.intercepting.interaction.UiObjectInteraction
 import com.kaspersky.components.kautomator.intercepting.interaction.UiDeviceInteraction
+import com.kaspersky.components.kautomator.intercepting.interaction.UiObjectInteraction
 import com.kaspersky.kaspresso.device.Device
 import com.kaspersky.kaspresso.device.accessibility.Accessibility
 import com.kaspersky.kaspresso.device.accessibility.AccessibilityImpl
@@ -53,11 +53,11 @@ import com.kaspersky.kaspresso.interceptors.behavior.impl.flakysafety.FlakySafeW
 import com.kaspersky.kaspresso.interceptors.behavior.impl.systemsafety.SystemDialogSafetyDataBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.impl.systemsafety.SystemDialogSafetyViewBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.impl.systemsafety.SystemDialogSafetyWebBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.behaviorKautomator.DeviceBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.behaviorKautomator.ObjectBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.behaviorKautomator.impl.FlakySafeDeviceBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.behaviorKautomator.impl.FlakySafeObjectBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.behaviorKautomator.impl.UiObjectLoaderBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behaviorkautomator.DeviceBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behaviorkautomator.ObjectBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.FlakySafeDeviceBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.FlakySafeObjectBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.UiObjectLoaderBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.tolibrary.kakao.impl.KakaoDataInterceptor
 import com.kaspersky.kaspresso.interceptors.tolibrary.kakao.impl.KakaoViewInterceptor
 import com.kaspersky.kaspresso.interceptors.tolibrary.kakao.impl.KakaoWebInterceptor

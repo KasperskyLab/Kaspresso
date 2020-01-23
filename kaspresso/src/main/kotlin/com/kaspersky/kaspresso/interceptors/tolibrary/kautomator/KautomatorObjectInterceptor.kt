@@ -3,7 +3,7 @@ package com.kaspersky.kaspresso.interceptors.tolibrary.kautomator
 import com.kaspersky.components.kautomator.intercepting.interaction.UiObjectInteraction
 import com.kaspersky.components.kautomator.intercepting.operation.UiObjectAction
 import com.kaspersky.components.kautomator.intercepting.operation.UiObjectAssertion
-import com.kaspersky.kaspresso.interceptors.behaviorKautomator.ObjectBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behaviorkautomator.ObjectBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.tolibrary.LibraryInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.kautomator.ObjectWatcherInterceptor
 import com.kaspersky.kaspresso.kaspresso.Kaspresso

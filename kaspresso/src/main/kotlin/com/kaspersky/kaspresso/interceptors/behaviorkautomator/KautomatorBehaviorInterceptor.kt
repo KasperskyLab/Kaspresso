@@ -1,4 +1,4 @@
-package com.kaspersky.kaspresso.interceptors.behaviorKautomator
+package com.kaspersky.kaspresso.interceptors.behaviorkautomator
 
 /**
  * The interface for all interceptors that change the default interaction in Kautomator. Often it wraps the interaction calls.
