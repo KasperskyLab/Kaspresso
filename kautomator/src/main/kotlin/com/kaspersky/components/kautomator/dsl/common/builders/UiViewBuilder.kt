@@ -1,3 +1,4 @@
+@file:Suppress("unused")
 package com.kaspersky.components.kautomator.dsl.common.builders
 
 import androidx.test.uiautomator.BySelector

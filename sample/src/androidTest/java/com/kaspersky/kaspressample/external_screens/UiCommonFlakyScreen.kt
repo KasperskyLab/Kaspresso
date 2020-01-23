@@ -1,12 +1,12 @@
 package com.kaspersky.kaspressample.external_screens
 
-import com.kaspersky.components.kautomator.dsl.swipe.UiSwipeView
+import com.kaspersky.components.kautomator.dsl.scroll.UiScrollView
 import com.kaspersky.components.kautomator.dsl.text.UiButton
 
 object UiCommonFlakyScreen : UiSampleScreen<UiCommonFlakyScreen>() {
 
     // todo create UiScrollView
-    val scrollView = UiSwipeView {
+    val scrollView = UiScrollView {
         withId(this@UiCommonFlakyScreen.packageName, "scroll_view")
     }
 
