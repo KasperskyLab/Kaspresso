@@ -19,5 +19,7 @@ object MainScreen : KScreen<MainScreen>() {
 
     val continuouslyButton = KButton { withId(R.id.activity_main_button_continuously_sample) }
 
+    val composeButton = KButton { withId(R.id.activity_main_button_complex_compose_sample) }
+
     val descriptionText = KTextView { withId(R.id.activity_main_title) }
 }

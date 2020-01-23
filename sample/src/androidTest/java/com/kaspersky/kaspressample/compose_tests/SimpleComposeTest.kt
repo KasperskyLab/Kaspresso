@@ -15,7 +15,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class ComposeTest : TestCase(
+class SimpleComposeTest : TestCase(
     kaspressoBuilder = Kaspresso.Builder.advanced().apply {
         flakySafetyParams.timeoutMs = 11_000
     }
@@ -46,7 +46,9 @@ class ComposeTest : TestCase(
 
             step("Check ScrollView screen is visible") {
                 CommonFlakyScreen {
-                    scrollView.isVisible()
+                    scrollView {
+                        isVisible()
+                    }
                 }
             }
 

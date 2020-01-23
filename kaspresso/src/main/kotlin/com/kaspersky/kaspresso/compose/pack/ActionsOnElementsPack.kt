@@ -12,6 +12,8 @@ import com.kaspersky.components.kautomator.intercepting.interaction.UiObjectInte
 import com.kaspersky.components.kautomator.intercepting.intercept.UiInterceptable
 import com.kaspersky.components.kautomator.intercepting.operation.UiObjectAction
 import com.kaspersky.components.kautomator.intercepting.operation.UiObjectAssertion
+import com.kaspersky.kaspresso.compose.pack.element.ActionBuilder
+import com.kaspersky.kaspresso.compose.pack.element.ActionElement
 import java.lang.IllegalArgumentException
 
 /**
@@ -19,50 +21,43 @@ import java.lang.IllegalArgumentException
  */
 class ActionsOnElementsPack {
 
-    private val actionElements: MutableList<ActionElement<out Any>> = mutableListOf()
+    private val actionBuilders: MutableList<ActionBuilder<out Any>> = mutableListOf()
 
     /**
-     * Adds the [element] of type [T] and the [action] to [actionElements] and [actions] for future composing.
+     * Adds the [element] of type [T] and the [action] to [actionBuilders] and [actions] for future composing.
      *
      * @param element the interacted view.
      * @param action actions or assertions on the interacted view.
      */
-    fun <Type> or(element: Type, action: Type.() -> Unit): Beta
+    fun <Type> or(element: Type, action: Type.() -> Unit): ActionBuilder<Type>
             where Type : BaseActions, Type : BaseAssertions,
                   Type : Interceptable<ViewInteraction, ViewAssertion, ViewAction>
     {
-        actionElements += ActionElement(element, { action.invoke(element) })
-        return Beta()
+        val builder = ActionBuilder(element, { action.invoke(element) })
+        actionBuilders += builder
+        return builder
     }
 
-    fun <Type> or(element: Type, action: Type.() -> Unit): Beta
+    fun <Type> or(element: Type, action: Type.() -> Unit): ActionBuilder<Type>
             where Type : UiBaseActions, Type : UiBaseAssertions,
                   Type : UiInterceptable<UiObjectInteraction, UiObjectAssertion, UiObjectAction>
     {
-        actionElements += ActionElement(element, { action.invoke(element) })
-        return Beta()
+        val builder = ActionBuilder(element, { action.invoke(element) })
+        actionBuilders += builder
+        return builder
     }
 
     /**
      * @return the built parameters for [com.kaspersky.kaspresso.compose.ComposeProvider.compose] method.
      */
     internal fun build(): List<ActionElement<out Any>> {
-        if (actionElements.isEmpty()) throw IllegalArgumentException("Nothing to compose")
+        require(actionBuilders.isNotEmpty()) { "Nothing to compose" }
+
+        val actionElements = mutableListOf<ActionElement<out Any>>()
+        actionBuilders.forEach {
+            actionElements += it.build()
+        }
+
         return actionElements
     }
-}
-
-data class ActionElement<ElementType> (
-    val element: ElementType,
-    val actions: () -> Unit
-)
-
-class Beta {
-
-    infix fun then(action: () -> Unit) {
-        action.invoke()
-    }
-
-
-
 }

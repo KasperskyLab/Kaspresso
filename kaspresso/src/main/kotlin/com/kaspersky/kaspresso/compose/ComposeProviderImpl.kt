@@ -50,12 +50,14 @@ class ComposeProviderImpl(
         // elements preparing
         actionElements.forEach { rollComposeInterception(it.element) }
         // action
-        callComposeActionsIntoFlakySafety(
+        val succeedBranchOrderNumber = callComposeActionsIntoFlakySafety(
             isKautomatorHere = actionElements.find { it.element is UiBaseView<*> } != null,
-            actions = actionElements.map { it.actions }
+            actions = actionElements.map { it.action }
         )
         // elements restoring the previous state
         actionElements.forEach { rollbackPreviousInterception(it.element) }
+        // execution `then` section of a success branch
+        actionElements[succeedBranchOrderNumber].postAction?.invoke()
     }
 
     /**
@@ -95,7 +97,7 @@ class ComposeProviderImpl(
         when (element) {
             is KBaseView<*> -> element.rollKakaoComposeInterception()
             is UiBaseView<*> -> element.rollKautomatorComposeInterception()
-            else -> throw RuntimeException(
+            else -> throw IllegalArgumentException(
                 "Incorrect type of the element is using in compose functionality." +
                         "You can use only KBaseView with its inheritors or UiBaseView with its inheritors." +
                         "Your Element here=$element."
@@ -151,14 +153,21 @@ class ComposeProviderImpl(
         }
     }
 
-    private fun callComposeActionsIntoFlakySafety(isKautomatorHere: Boolean, actions: List<() -> Unit>) {
+    /**
+     * @param isKautomatorHere
+     * @return the order number of a succeed branch
+     */
+    private fun callComposeActionsIntoFlakySafety(isKautomatorHere: Boolean, actions: List<() -> Unit>): Int {
+        // the choosing of FlakySafetyProvider and FailureLoggingProvider
+        // if there is Kautomator here then we will use Kautomator providers to guarantee defending from flakiness
         val (kakaoFlakySafetyProvider, kakaoFailureLoggingProvider) = getKakaoProviders()
         val (kautomatorFlakySafetyProvider, kautomatorFailureLoggingProvider) = getKautomatorProviders()
-
-        val resultFlakySafetyProvider = if (isKautomatorHere) kautomatorFlakySafetyProvider else kakaoFlakySafetyProvider
-        val resultFailureLoggingProvider = if (isKautomatorHere) kautomatorFailureLoggingProvider else kakaoFailureLoggingProvider
-
-        resultFailureLoggingProvider.withLoggingOnFailureIfNotNull {
+        val resultFlakySafetyProvider =
+            if (isKautomatorHere && kautomatorFlakySafetyProvider != null) kautomatorFlakySafetyProvider else kakaoFlakySafetyProvider
+        val resultFailureLoggingProvider = if (isKautomatorHere && kautomatorFailureLoggingProvider != null)
+            kautomatorFailureLoggingProvider else kakaoFailureLoggingProvider
+        // call compose actions inside providers
+        return resultFailureLoggingProvider.withLoggingOnFailureIfNotNull {
             resultFlakySafetyProvider.flakySafelyIfNotNull {
                 invokeComposed(actions, kaspresso.libLogger)
             }
