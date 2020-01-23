@@ -1,3 +1,4 @@
+@file:Suppress("unused")
 package com.kaspersky.components.kautomator.dsl.edit
 
 import com.kaspersky.components.kautomator.dsl.common.actions.UiBaseActions

@@ -4,8 +4,8 @@
     package="com.kaspersky.kaspresso.sample_kautomator">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -15,6 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+
         <activity android:name="com.kaspersky.kaspresso.sample_kautomator.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,8 +23,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".ComponentsActivity"/>
+        <activity android:name=".ComponentsActivity" />
+        <activity android:name=".recycler.RecyclerActivity" />
+        <activity android:name=".scroll.ScrollActivity" />
     </application>
 
 </manifest>

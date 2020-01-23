@@ -1,3 +1,4 @@
+@file:Suppress("unused")
 package com.kaspersky.components.kautomator.dsl.common.views
 
 import com.kaspersky.components.kautomator.dsl.common.builders.UiViewBuilder

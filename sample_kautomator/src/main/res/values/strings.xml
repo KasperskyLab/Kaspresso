@@ -6,4 +6,8 @@
 
     <string name="menu_item_1">Menu Item 1</string>
     <string name="menu_item_2">Menu Item 2</string>
+    <string name="chip_1">Chip 1</string>
+    <string name="chip_2">Chip 2</string>
+    <string name="chip_3">Chip 3</string>
+    <string name="dialog">Dialog</string>
 </resources>

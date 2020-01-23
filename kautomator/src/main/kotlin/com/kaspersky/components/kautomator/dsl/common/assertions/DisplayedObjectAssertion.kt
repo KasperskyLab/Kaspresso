@@ -14,6 +14,8 @@ class DisplayedObjectAssertion private constructor(
 
     companion object {
         fun assertDisplayed() = DisplayedObjectAssertion(DisplayedAssertionType.IS_DISPLAYED)
+
+        @Deprecated("It does not work for now. This assertion will throw UnfoundedObjectException")
         fun assertNotDisplayed() = DisplayedObjectAssertion(DisplayedAssertionType.IS_NOT_DISPLAYED)
     }
 
@@ -22,6 +24,9 @@ class DisplayedObjectAssertion private constructor(
     override fun execute(innerView: UiObject2) {
         when (type) {
             DisplayedAssertionType.IS_DISPLAYED -> assertThat(innerView).isNotNull()
+            /**
+             * This check will never fail because [innerView] is not nullable
+             */
             DisplayedAssertionType.IS_NOT_DISPLAYED -> assertThat(innerView).isNull()
         }
     }
