@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import com.kaspersky.kaspressample.R
-import java.util.concurrent.TimeUnit
 import kotlinx.android.synthetic.main.activity_common_flaky.*
 
 class CommonFlakyActivity : AppCompatActivity() {
