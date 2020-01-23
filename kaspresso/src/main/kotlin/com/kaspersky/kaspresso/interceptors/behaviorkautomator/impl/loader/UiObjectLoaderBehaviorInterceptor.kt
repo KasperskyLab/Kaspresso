@@ -1,26 +1,24 @@
-package com.kaspersky.kaspresso.interceptors.behaviorKautomator.impl.flakysafety
+package com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.loader
 
 import com.kaspersky.components.kautomator.intercepting.interaction.UiObjectInteraction
 import com.kaspersky.components.kautomator.intercepting.operation.UiObjectAction
 import com.kaspersky.components.kautomator.intercepting.operation.UiObjectAssertion
-import com.kaspersky.kaspresso.flakysafety.FlakySafetyProvider
-import com.kaspersky.kaspresso.flakysafety.FlakySafetyProviderImpl
-import com.kaspersky.kaspresso.interceptors.behaviorKautomator.ObjectBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behaviorkautomator.ObjectBehaviorInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
-import com.kaspersky.kaspresso.params.FlakySafetyParams
+import com.kaspersky.kaspresso.uiobjectloader.UiObjectLoaderProvider
+import com.kaspersky.kaspresso.uiobjectloader.UiObjectLoaderProviderImpl
 
 /**
- * The implementation of [ObjectBehaviorInterceptor] and [FlakySafetyProvider] interfaces.
+ * The implementation of [ObjectBehaviorInterceptor] and [UiObjectLoaderProvider] interfaces.
  * Provides system flaky safety functionality for [UiObjectInteraction.perform] and [UiObjectInteraction.check] calls.
  */
-class FlakySafeObjectBehaviorInterceptor(
-    params: FlakySafetyParams,
-    logger: UiTestLogger
+class UiObjectLoaderBehaviorInterceptor(
+    private val logger: UiTestLogger
 ) : ObjectBehaviorInterceptor,
-    FlakySafetyProvider by FlakySafetyProviderImpl(params, logger) {
+    UiObjectLoaderProvider by UiObjectLoaderProviderImpl(logger) {
 
     /**
-     * Wraps the given [activity] invocation with the flaky safety.
+     * Wraps the given [activity] invocation with the UiObject2 repeated loading.
      *
      * @param interaction the intercepted [UiObjectInteraction].
      * @param assertion the intercepted [UiObjectAssertion].
@@ -30,10 +28,10 @@ class FlakySafeObjectBehaviorInterceptor(
         interaction: UiObjectInteraction,
         assertion: UiObjectAssertion,
         activity: () -> T
-    ): T = flakySafely(action = activity)
+    ): T = handleUiObjectAbsence(interaction = interaction, action = activity)
 
     /**
-     * Wraps the given [activity] invocation with the flaky safety.
+     * Wraps the given [activity] invocation with the UiObject2 repeated loading.
      *
      * @param interaction the intercepted [UiObjectInteraction].
      * @param action the intercepted [UiObjectAction].
@@ -43,5 +41,5 @@ class FlakySafeObjectBehaviorInterceptor(
         interaction: UiObjectInteraction,
         action: UiObjectAction,
         activity: () -> T
-    ): T = flakySafely(action = activity)
+    ): T = handleUiObjectAbsence(interaction = interaction, action = activity)
 }

@@ -3,7 +3,7 @@ package com.kaspersky.kaspresso.interceptors.tolibrary.kautomator.compose
 import com.kaspersky.components.kautomator.intercepting.interaction.UiDeviceInteraction
 import com.kaspersky.components.kautomator.intercepting.operation.UiDeviceAction
 import com.kaspersky.components.kautomator.intercepting.operation.UiDeviceAssertion
-import com.kaspersky.kaspresso.interceptors.behaviorKautomator.impl.flakysafety.FlakySafeDeviceBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.flakysafety.FlakySafeDeviceBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.tolibrary.LibraryInterceptor
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 
