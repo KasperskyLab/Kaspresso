@@ -415,7 +415,7 @@ data class Kaspresso(
          * These interceptors are called by [KautomatorObjectInterceptor]
          * before actual [UiObjectInteraction.check] and [UiObjectInteraction.perform] call.
          */
-        lateinit var objectWatcherInterceptors: List<ObjectWatcherInterceptor>
+        lateinit var objectWatcherInterceptors: MutableList<ObjectWatcherInterceptor>
 
         /**
          * Holds the list of [DeviceWatcherInterceptor]s.
@@ -423,7 +423,7 @@ data class Kaspresso(
          * These interceptors are called by [KautomatorDeviceInterceptor]
          * before actual [UiDeviceInteraction.check] and [UiDeviceInteraction.perform] call.
          */
-        lateinit var deviceWatcherInterceptors: List<DeviceWatcherInterceptor>
+        lateinit var deviceWatcherInterceptors: MutableList<DeviceWatcherInterceptor>
 
         /**
          * Holds the list of [ViewBehaviorInterceptor]s.
@@ -473,7 +473,7 @@ data class Kaspresso(
          * For example: the first item actually wraps the [UiDeviceInteraction.check] or [UiDeviceInteraction.perform]
          * call, the second item wraps the first item, and so on.
          */
-        lateinit var objectBehaviorInterceptors: List<ObjectBehaviorInterceptor>
+        lateinit var objectBehaviorInterceptors: MutableList<ObjectBehaviorInterceptor>
 
         /**
          * Holds the list of [DeviceBehaviorInterceptor]s.
@@ -485,7 +485,7 @@ data class Kaspresso(
          * For example: the first item actually wraps the [UiObjectInteraction.check] or [UiObjectInteraction.perform]
          * call, the second item wraps the first item, and so on.
          */
-        lateinit var deviceBehaviorInterceptors: List<DeviceBehaviorInterceptor>
+        lateinit var deviceBehaviorInterceptors: MutableList<DeviceBehaviorInterceptor>
 
         /**
          * Holds the list of [StepWatcherInterceptor]s.

@@ -1,4 +1,4 @@
-package com.kaspersky.kaspressample.flaky_tests
+package com.kaspersky.kaspressample.compose_tests
 
 class ComplexComposeTest {
 
