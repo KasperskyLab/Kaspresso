@@ -1,17 +1,14 @@
-package com.kaspersky.components.kautomator.dsl.swipe
+@file:Suppress("unused")
+package com.kaspersky.components.kautomator.dsl.scroll
 
-import com.kaspersky.components.kautomator.dsl.common.assertions.UiBaseAssertions
+import com.kaspersky.components.kautomator.dsl.common.actions.UiScrollableActions
+import com.kaspersky.components.kautomator.dsl.common.actions.UiSwipeableActions
 import com.kaspersky.components.kautomator.dsl.common.builders.UiViewBuilder
 import com.kaspersky.components.kautomator.dsl.common.builders.UiViewSelector
 import com.kaspersky.components.kautomator.dsl.common.views.UiBaseView
 
-/**
- * Ui View with [UiSwipeableActions] and [UiBaseAssertions]
- *
- * @see UiSwipeableActions
- * @see UiBaseAssertions
- */
-class UiSwipeView : UiBaseView<UiSwipeView>, UiSwipeableActions, UiBaseAssertions {
+class UiScrollView : UiBaseView<UiScrollView>, UiSwipeableActions, UiScrollableActions {
+
     constructor(selector: UiViewSelector) : super(selector)
     constructor(builder: UiViewBuilder.() -> Unit) : super(builder)
 }

@@ -1,3 +1,4 @@
+@file:Suppress("unused")
 package com.kaspersky.components.kautomator.dsl.common.actions
 
 import com.kaspersky.components.kautomator.intercepting.delegate.UiObjectDelegate

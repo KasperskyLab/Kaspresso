@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.kaspersky.kaspresso.sample_kautomator"
-        minSdkVersion versions.minSdk
+        minSdkVersion 21
         targetSdkVersion versions.targetSdk
         versionCode 1
         versionName "undefined"

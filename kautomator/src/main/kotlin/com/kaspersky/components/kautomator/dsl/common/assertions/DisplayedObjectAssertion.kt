@@ -10,7 +10,7 @@ import com.kaspersky.components.kautomator.intercepting.operation.UiOperationTyp
  */
 class DisplayedObjectAssertion private constructor(
     override val type: DisplayedAssertionType
-) : UiOperation<UiObject2> {
+) : UiOperation<UiObject2?> {
 
     companion object {
         fun assertDisplayed() = DisplayedObjectAssertion(DisplayedAssertionType.IS_DISPLAYED)
@@ -19,7 +19,7 @@ class DisplayedObjectAssertion private constructor(
 
     override val description: String? = null
 
-    override fun execute(innerView: UiObject2) {
+    override fun execute(innerView: UiObject2?) {
         when (type) {
             DisplayedAssertionType.IS_DISPLAYED -> assertThat(innerView).isNotNull()
             DisplayedAssertionType.IS_NOT_DISPLAYED -> assertThat(innerView).isNull()
