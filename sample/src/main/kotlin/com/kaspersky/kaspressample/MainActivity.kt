@@ -45,5 +45,11 @@ class MainActivity : AppCompatActivity() {
                 Intent(this, UpgradeTestActivity::class.java)
             )
         }
+
+        activity_main_button_complex_compose_sample.setOnClickListener {
+            startActivity(
+                Intent(this, UpgradeTestActivity::class.java)
+            )
+        }
     }
 }

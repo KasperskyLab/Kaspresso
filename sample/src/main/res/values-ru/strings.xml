@@ -11,6 +11,7 @@
     <string name="simple_screen">Simple screen</string>
     <string name="scroll_view_sample">Scroll View Stub</string>
     <string name="continuously_sample">Coninuously пример</string>
+    <string name="complex_compose_sample">Complex compose пример</string>
 
     <!-- Screenshooter sample test -->
     <string name="increment">Прибавить</string>

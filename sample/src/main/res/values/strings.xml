@@ -11,6 +11,7 @@
     <string name="simple_screen">Simple screen</string>
     <string name="scroll_view_sample">Scroll View Stub</string>
     <string name="continuously_sample">Continuously sample</string>
+    <string name="complex_compose_sample">Complex compose sample</string>
 
     <!-- Device Sample Activity -->
     <string name="device_sample_title" translatable="false">Device Sample</string>
@@ -26,20 +27,20 @@
     <string name="counter_value">Current value: %d</string>
 
     <!-- Flakysafety sample test -->
-    <string name="common_flaky_kautomator_mode">Kautomator mode on</string>
-    <string name="common_flaky_kakao_mode">Kakao mode on</string>
-    <string name="common_flaky_final_textview">TextView</string>
-    <string name="common_flaky_final_button">Button</string>
-    <string name="common_flaky_start_1">1</string>
-    <string name="common_flaky_start_2">2</string>
-    <string name="common_flaky_start_3">3</string>
-    <string name="common_flaky_start_4">4</string>
-    <string name="common_flaky_start_5">5</string>
-    <string name="common_flaky_start_6">6</string>
+    <string name="common_flaky_kautomator_mode" translatable="false">Kautomator mode on</string>
+    <string name="common_flaky_kakao_mode" translatable="false">Kakao mode on</string>
+    <string name="common_flaky_final_textview" translatable="false">TextView</string>
+    <string name="common_flaky_final_button" translatable="false">Button</string>
+    <string name="common_flaky_start_1" translatable="false">1</string>
+    <string name="common_flaky_start_2" translatable="false">2</string>
+    <string name="common_flaky_start_3" translatable="false">3</string>
+    <string name="common_flaky_start_4" translatable="false">4</string>
+    <string name="common_flaky_start_5" translatable="false">5</string>
+    <string name="common_flaky_start_6" translatable="false">6</string>
 
     <!-- Continuously sample test -->
-    <string name="continuously_start_button">Start some work with the success dialog at the end</string>
-    <string name="continuously_dialog_title">Some work finished</string>
+    <string name="continuously_start_button" translatable="false">Start some work with the success dialog at the end</string>
+    <string name="continuously_dialog_title" translatable="false">Some work finished</string>
 
     <!-- Upgrade scenario -->
     <string name="upgrade_title" translatable="false">Upgrade scenario</string>
