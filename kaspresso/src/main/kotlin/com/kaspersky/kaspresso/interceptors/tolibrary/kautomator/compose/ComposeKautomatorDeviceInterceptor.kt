@@ -3,6 +3,7 @@ package com.kaspersky.kaspresso.interceptors.tolibrary.kautomator.compose
 import com.kaspersky.components.kautomator.intercepting.interaction.UiDeviceInteraction
 import com.kaspersky.components.kautomator.intercepting.operation.UiDeviceAction
 import com.kaspersky.components.kautomator.intercepting.operation.UiDeviceAssertion
+import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.failure.FailureLoggingDeviceBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.flakysafety.FlakySafeDeviceBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.tolibrary.LibraryInterceptor
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
@@ -13,7 +14,7 @@ internal class ComposeKautomatorDeviceInterceptor(
 
     override fun interceptCheck(interaction: UiDeviceInteraction, assertion: UiDeviceAssertion) {
         kaspresso.deviceBehaviorInterceptors
-            .filter { it !is FlakySafeDeviceBehaviorInterceptor }
+            .filter { it !is FlakySafeDeviceBehaviorInterceptor && it !is FailureLoggingDeviceBehaviorInterceptor }
             .fold(
                 initial = {
                     kaspresso.deviceWatcherInterceptors.forEach {
@@ -30,7 +31,7 @@ internal class ComposeKautomatorDeviceInterceptor(
 
     override fun interceptPerform(interaction: UiDeviceInteraction, action: UiDeviceAction) {
         kaspresso.deviceBehaviorInterceptors
-            .filter { it !is FlakySafeDeviceBehaviorInterceptor }
+            .filter { it !is FlakySafeDeviceBehaviorInterceptor && it !is FailureLoggingDeviceBehaviorInterceptor }
             .fold(
                 initial = {
                     kaspresso.deviceWatcherInterceptors.forEach {

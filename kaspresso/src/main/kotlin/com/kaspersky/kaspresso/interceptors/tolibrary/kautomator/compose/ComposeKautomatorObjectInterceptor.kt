@@ -3,6 +3,7 @@ package com.kaspersky.kaspresso.interceptors.tolibrary.kautomator.compose
 import com.kaspersky.components.kautomator.intercepting.interaction.UiObjectInteraction
 import com.kaspersky.components.kautomator.intercepting.operation.UiObjectAction
 import com.kaspersky.components.kautomator.intercepting.operation.UiObjectAssertion
+import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.failure.FailureLoggingObjectBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.flakysafety.FlakySafeObjectBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.tolibrary.LibraryInterceptor
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
@@ -13,7 +14,7 @@ internal class ComposeKautomatorObjectInterceptor(
 
     override fun interceptCheck(interaction: UiObjectInteraction, assertion: UiObjectAssertion) {
         kaspresso.objectBehaviorInterceptors
-            .filter { it !is FlakySafeObjectBehaviorInterceptor }
+            .filter { it !is FlakySafeObjectBehaviorInterceptor && it !is FailureLoggingObjectBehaviorInterceptor }
             .fold(
                 initial = {
                     kaspresso.objectWatcherInterceptors.forEach {
@@ -30,7 +31,7 @@ internal class ComposeKautomatorObjectInterceptor(
 
     override fun interceptPerform(interaction: UiObjectInteraction, action: UiObjectAction) {
         kaspresso.objectBehaviorInterceptors
-            .filter { it !is FlakySafeObjectBehaviorInterceptor }
+            .filter { it !is FlakySafeObjectBehaviorInterceptor && it !is FailureLoggingObjectBehaviorInterceptor }
             .fold(
                 initial = {
                     kaspresso.objectWatcherInterceptors.forEach {

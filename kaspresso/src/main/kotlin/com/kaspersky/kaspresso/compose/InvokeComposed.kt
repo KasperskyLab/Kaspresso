@@ -18,14 +18,14 @@ internal fun invokeComposed(actions: List<() -> Unit>, logger: UiTestLogger): In
     actions.forEachIndexed { index, action ->
         try {
             action.invoke()
-            logger.i("Composed action succeeded.")
+            logger.i("Composed action #$index succeeded.")
             return index
         } catch (error: Throwable) {
             cachedErrors += error
-            logger.i("One part of composed action failed.")
+            logger.e("Composed action #$index failed. The reason is ${error.javaClass.simpleName}")
         }
     }
 
-    logger.i("Composed action totally failed.")
+    logger.i("All composed actions totally failed.")
     throw ExtCompositeException(cachedErrors)
 }
