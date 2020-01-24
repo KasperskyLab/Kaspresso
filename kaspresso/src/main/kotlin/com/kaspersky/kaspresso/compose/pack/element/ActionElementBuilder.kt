@@ -1,6 +1,9 @@
 package com.kaspersky.kaspresso.compose.pack.element
 
-class ActionBuilder<ElementType>(
+/**
+ * Builder of ActionElement's using in compose
+ */
+class ActionElementBuilder<ElementType>(
     private val element: ElementType,
     private val action: () -> Unit
 ) {

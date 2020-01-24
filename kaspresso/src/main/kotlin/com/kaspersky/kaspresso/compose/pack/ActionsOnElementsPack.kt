@@ -12,38 +12,45 @@ import com.kaspersky.components.kautomator.intercepting.interaction.UiObjectInte
 import com.kaspersky.components.kautomator.intercepting.intercept.UiInterceptable
 import com.kaspersky.components.kautomator.intercepting.operation.UiObjectAction
 import com.kaspersky.components.kautomator.intercepting.operation.UiObjectAssertion
-import com.kaspersky.kaspresso.compose.pack.element.ActionBuilder
+import com.kaspersky.kaspresso.compose.pack.element.ActionElementBuilder
 import com.kaspersky.kaspresso.compose.pack.element.ActionElement
-import java.lang.IllegalArgumentException
 
 /**
  * The builder class for parameters of [com.kaspersky.kaspresso.compose.ComposeProvider.compose] method.
  */
 class ActionsOnElementsPack {
 
-    private val actionBuilders: MutableList<ActionBuilder<out Any>> = mutableListOf()
+    private val actionElementBuilders: MutableList<ActionElementBuilder<out Any>> = mutableListOf()
 
     /**
-     * Adds the [element] of type [T] and the [action] to [actionBuilders] and [actions] for future composing.
+     * Adds the [element] of type [Type] and the [action] to [actionElementBuilders] and [action] for future composing
+     * where [Type] is bounding by KBaseView (Kakao)
      *
      * @param element the interacted view.
      * @param action actions or assertions on the interacted view.
      */
-    fun <Type> or(element: Type, action: Type.() -> Unit): ActionBuilder<Type>
+    fun <Type> or(element: Type, action: Type.() -> Unit): ActionElementBuilder<Type>
             where Type : BaseActions, Type : BaseAssertions,
                   Type : Interceptable<ViewInteraction, ViewAssertion, ViewAction>
     {
-        val builder = ActionBuilder(element, { action.invoke(element) })
-        actionBuilders += builder
+        val builder = ActionElementBuilder(element, { action.invoke(element) })
+        actionElementBuilders += builder
         return builder
     }
 
-    fun <Type> or(element: Type, action: Type.() -> Unit): ActionBuilder<Type>
+    /**
+     * Adds the [element] of type [Type] and the [action] to [actionElementBuilders] and [action] for future composing
+     * where [Type] is bounding by UiBaseView (Kautomator)
+     *
+     * @param element the interacted view.
+     * @param action actions or assertions on the interacted view.
+     */
+    fun <Type> or(element: Type, action: Type.() -> Unit): ActionElementBuilder<Type>
             where Type : UiBaseActions, Type : UiBaseAssertions,
                   Type : UiInterceptable<UiObjectInteraction, UiObjectAssertion, UiObjectAction>
     {
-        val builder = ActionBuilder(element, { action.invoke(element) })
-        actionBuilders += builder
+        val builder = ActionElementBuilder(element, { action.invoke(element) })
+        actionElementBuilders += builder
         return builder
     }
 
@@ -51,10 +58,10 @@ class ActionsOnElementsPack {
      * @return the built parameters for [com.kaspersky.kaspresso.compose.ComposeProvider.compose] method.
      */
     internal fun build(): List<ActionElement<out Any>> {
-        require(actionBuilders.isNotEmpty()) { "Nothing to compose" }
+        require(actionElementBuilders.isNotEmpty()) { "Nothing to compose" }
 
         val actionElements = mutableListOf<ActionElement<out Any>>()
-        actionBuilders.forEach {
+        actionElementBuilders.forEach {
             actionElements += it.build()
         }
 

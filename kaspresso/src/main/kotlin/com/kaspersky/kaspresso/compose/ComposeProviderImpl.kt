@@ -42,6 +42,7 @@ class ComposeProviderImpl(
     /**
      * Composes a [block] of actions with their views to invoke on in one composite action that succeeds if at least
      * one of it's parts succeeds.
+     * Allows to use in one compose block views from Kakao and Kautomator simultaneously
      *
      * @param block the actions to compose.
      */
@@ -55,7 +56,7 @@ class ComposeProviderImpl(
             actions = actionElements.map { it.action }
         )
         // elements restoring the previous state
-        actionElements.forEach { rollbackPreviousInterception(it.element) }
+        actionElements.forEach { rollbackSystemInterception(it.element) }
         // execution `then` section of a success branch
         actionElements[succeedBranchOrderNumber].postAction?.invoke()
     }
@@ -90,7 +91,7 @@ class ComposeProviderImpl(
             actions = actions
         )
         // restoring the previous state
-        rollbackPreviousInterception(element as Any)
+        rollbackSystemInterception(element as Any)
     }
 
     private fun rollComposeInterception(element: Any) {
@@ -123,10 +124,10 @@ class ComposeProviderImpl(
         }
     }
 
-    private fun rollbackPreviousInterception(element: Any) {
+    private fun rollbackSystemInterception(element: Any) {
         when (element) {
-            is KBaseView<*> -> element.rollbackKakaoPreviousInterception()
-            is UiBaseView<*> -> element.rollbackKautomatorPreviousInterception()
+            is KBaseView<*> -> element.rollbackKakaoInterception()
+            is UiBaseView<*> -> element.rollbackKautomatorInterception()
             else -> throw RuntimeException(
                 "Incorrect type of the element is using in compose functionality." +
                         "You can use only KBaseView with its inheritors or UiBaseView with its inheritors." +
@@ -135,7 +136,7 @@ class ComposeProviderImpl(
         }
     }
 
-    private fun Interceptable<ViewInteraction, ViewAssertion, ViewAction>.rollbackKakaoPreviousInterception() {
+    private fun Interceptable<ViewInteraction, ViewAssertion, ViewAction>.rollbackKakaoInterception() {
         val interceptor = KakaoViewInterceptor(kaspresso)
 
         intercept {
@@ -144,7 +145,7 @@ class ComposeProviderImpl(
         }
     }
 
-    private fun UiInterceptable<UiObjectInteraction, UiObjectAssertion, UiObjectAction>.rollbackKautomatorPreviousInterception() {
+    private fun UiInterceptable<UiObjectInteraction, UiObjectAssertion, UiObjectAction>.rollbackKautomatorInterception() {
         val interceptor = KautomatorObjectInterceptor(kaspresso)
 
         intercept {
@@ -154,18 +155,21 @@ class ComposeProviderImpl(
     }
 
     /**
-     * @param isKautomatorHere
-     * @return the order number of a succeed branch
+     * @param isKautomatorHere boolean parameter showing whether there are actions with Kautomator views among @parameter actions
+     * @param actions list of actions with views participating in compose
+     * @return the order number of a succeed branch in compose
      */
     private fun callComposeActionsIntoFlakySafety(isKautomatorHere: Boolean, actions: List<() -> Unit>): Int {
         // the choosing of FlakySafetyProvider and FailureLoggingProvider
         // if there is Kautomator here then we will use Kautomator providers to guarantee defending from flakiness
         val (kakaoFlakySafetyProvider, kakaoFailureLoggingProvider) = getKakaoProviders()
         val (kautomatorFlakySafetyProvider, kautomatorFailureLoggingProvider) = getKautomatorProviders()
+
         val resultFlakySafetyProvider =
             if (isKautomatorHere && kautomatorFlakySafetyProvider != null) kautomatorFlakySafetyProvider else kakaoFlakySafetyProvider
         val resultFailureLoggingProvider = if (isKautomatorHere && kautomatorFailureLoggingProvider != null)
             kautomatorFailureLoggingProvider else kakaoFailureLoggingProvider
+
         // call compose actions inside providers
         return resultFailureLoggingProvider.withLoggingOnFailureIfNotNull {
             resultFlakySafetyProvider.flakySafelyIfNotNull {

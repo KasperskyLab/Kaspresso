@@ -51,9 +51,11 @@ class ComplexComposeTest : TestCase() {
 
             step("Handle potential unexpected behavior") {
                 compose {
+                    // the first potential branch when ComplexComposeScreen.stage1Button is visible
                     or(ComplexComposeScreen.stage1Button) {
                         isVisible()
                     } then {
+                        // if the first branch was succeed then we execute some special flow
                         step("Flow is over the product") {
                             ComplexComposeScreen {
                                 stage1Button {
@@ -66,9 +68,12 @@ class ComplexComposeTest : TestCase() {
                             }
                         }
                     }
+                    // the second potential branch when UiComposeDialog1.title is visible
+                    // just imagine that is some unexpected system or product behavior and we cannot fix it now
                     or(UiComposeDialog1.title) {
                         isDisplayed()
                     } then {
+                        // if the second branch was succeed then we execute some special flow
                         step("Flow is over dialogs") {
                             UiComposeDialog1 {
                                 okButton {
