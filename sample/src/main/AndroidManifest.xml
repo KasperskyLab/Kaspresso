@@ -33,20 +33,20 @@
 
         <activity
             android:name=".simple.SimpleActivity"
-            android:label="@string/simple_screen"/>
+            android:label="@string/simple_fragment_title"/>
 
         <activity
             android:name=".web.WebViewActivity"
-            android:label="@string/webview"
+            android:label="@string/main_screen_webview_button"
             android:theme="@style/Theme.AppCompat.NoActionBar"/>
 
         <activity
             android:name=".flaky.CommonFlakyActivity"
-            android:label="@string/scroll_view_sample"/>
+            android:label="@string/main_screen_scroll_view_sample_button"/>
 
         <activity
             android:name=".continuously.ContinuouslySampleActivity"
-            android:label="@string/continuously_sample"/>
+            android:label="@string/main_screen_continuously_sample_button"/>
 
         <activity
             android:name=".docloc.FragmentTestActivity"
@@ -62,7 +62,7 @@
 
         <activity
             android:name=".compose.ComplexComposeSampleActivity"
-            android:label="@string/complex_compose_sample"/>
+            android:label="@string/main_screen_complex_compose_sample_button"/>
 
         <service
             android:name=".device.DeviceSampleAccessibilityService"

@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text="@string/main_screen_description"
+        android:text="@string/main_screen_title"
         android:textSize="18pt" />
 
     <Button
