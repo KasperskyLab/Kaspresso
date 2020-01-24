@@ -1,12 +1,10 @@
 package com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.systemsafety
 
-import androidx.test.espresso.ViewInteraction
 import androidx.test.uiautomator.UiDevice
 import com.kaspersky.components.kautomator.intercepting.interaction.UiObjectInteraction
 import com.kaspersky.components.kautomator.intercepting.operation.UiObjectAction
 import com.kaspersky.components.kautomator.intercepting.operation.UiObjectAssertion
 import com.kaspersky.kaspresso.device.server.AdbServer
-import com.kaspersky.kaspresso.interceptors.behavior.ViewBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.ObjectBehaviorInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.systemsafety.SystemDialogSafetyProvider
