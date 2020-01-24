@@ -93,7 +93,6 @@ class ComplexComposeTest : TestCase() {
                         }
                     }
                 }
-
             }
 
             step("Click finish button") {

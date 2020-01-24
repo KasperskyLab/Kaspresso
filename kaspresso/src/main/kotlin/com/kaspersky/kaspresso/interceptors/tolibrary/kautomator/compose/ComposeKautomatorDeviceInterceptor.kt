@@ -7,7 +7,7 @@ import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.flakysafety.
 import com.kaspersky.kaspresso.interceptors.tolibrary.LibraryInterceptor
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 
-internal class ComposeKautomatorDeviceInterceptor (
+internal class ComposeKautomatorDeviceInterceptor(
     kaspresso: Kaspresso
 ) : LibraryInterceptor<UiDeviceInteraction, UiDeviceAssertion, UiDeviceAction>(kaspresso) {
 
@@ -44,5 +44,4 @@ internal class ComposeKautomatorDeviceInterceptor (
                 }
             ).invoke()
     }
-
 }

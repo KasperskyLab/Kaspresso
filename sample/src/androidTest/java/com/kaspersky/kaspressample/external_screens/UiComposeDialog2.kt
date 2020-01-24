@@ -13,5 +13,4 @@ object UiComposeDialog2 : UiSampleScreen<UiComposeDialog2>() {
     val okButton = UiButton {
         withText(this@UiComposeDialog2.context.getString(R.string.compose_screen_dialog_pos_button))
     }
-
 }

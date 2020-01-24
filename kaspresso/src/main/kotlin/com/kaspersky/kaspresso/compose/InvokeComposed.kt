@@ -15,7 +15,7 @@ internal fun invokeComposed(actions: List<() -> Unit>, logger: UiTestLogger): In
     logger.i("Composed action started.")
     val cachedErrors: MutableList<Throwable> = mutableListOf()
 
-    actions.forEachIndexed { index, action  ->
+    actions.forEachIndexed { index, action ->
         try {
             action.invoke()
             logger.i("Composed action succeeded.")

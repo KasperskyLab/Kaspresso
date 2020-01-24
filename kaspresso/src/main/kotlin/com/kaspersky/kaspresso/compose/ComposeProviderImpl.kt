@@ -196,7 +196,7 @@ class ComposeProviderImpl(
         var flakySafetyProvider: FlakySafetyProvider? = null
         var failureLoggingProvider: FailureLoggingProvider? = null
 
-        kaspresso.objectBehaviorInterceptors.forEach { objectBehaviorInterceptor : ObjectBehaviorInterceptor ->
+        kaspresso.objectBehaviorInterceptors.forEach { objectBehaviorInterceptor: ObjectBehaviorInterceptor ->
             when (objectBehaviorInterceptor) {
                 is FlakySafeObjectBehaviorInterceptor -> flakySafetyProvider = objectBehaviorInterceptor
                 is FailureLoggingObjectBehaviorInterceptor -> failureLoggingProvider = objectBehaviorInterceptor

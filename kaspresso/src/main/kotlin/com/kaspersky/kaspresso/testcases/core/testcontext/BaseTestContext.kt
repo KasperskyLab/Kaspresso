@@ -1,6 +1,9 @@
 package com.kaspersky.kaspresso.testcases.core.testcontext
 
-import com.kaspersky.kaspresso.compose.*
+import com.kaspersky.kaspresso.compose.ComposeProvider
+import com.kaspersky.kaspresso.compose.ComposeProviderImpl
+import com.kaspersky.kaspresso.compose.WebComposeProvider
+import com.kaspersky.kaspresso.compose.WebComposeProviderImpl
 import com.kaspersky.kaspresso.device.Device
 import com.kaspersky.kaspresso.device.server.AdbServer
 import com.kaspersky.kaspresso.flakysafety.ContinuouslyProvider

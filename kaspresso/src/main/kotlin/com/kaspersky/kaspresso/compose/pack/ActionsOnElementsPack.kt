@@ -12,8 +12,8 @@ import com.kaspersky.components.kautomator.intercepting.interaction.UiObjectInte
 import com.kaspersky.components.kautomator.intercepting.intercept.UiInterceptable
 import com.kaspersky.components.kautomator.intercepting.operation.UiObjectAction
 import com.kaspersky.components.kautomator.intercepting.operation.UiObjectAssertion
-import com.kaspersky.kaspresso.compose.pack.element.ActionElementBuilder
 import com.kaspersky.kaspresso.compose.pack.element.ActionElement
+import com.kaspersky.kaspresso.compose.pack.element.ActionElementBuilder
 
 /**
  * The builder class for parameters of [com.kaspersky.kaspresso.compose.ComposeProvider.compose] method.

@@ -27,5 +27,4 @@ class ActionElementBuilder<ElementType>(
             action = action,
             postAction = postAction
         )
-
 }

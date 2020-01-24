@@ -3,21 +3,23 @@ package com.kaspersky.kaspressample.compose
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
-import androidx.annotation.IntegerRes
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.kaspersky.kaspressample.R
 import kotlinx.android.synthetic.main.activity_complex_compose.*
-import androidx.appcompat.app.AlertDialog
-
 
 class ComplexComposeSampleActivity : AppCompatActivity() {
+
+    companion object {
+        private const val DELAY = 2_000L
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_complex_compose)
 
         activity_compose_start.setOnClickListener {
-            when((0..1).random()) {
+            when ((0..1).random()) {
                 0 -> makeVisibleSlightly(activity_compose_stage_1)
                 1 -> showAlertDialogSlightly(R.string.compose_screen_dialog_title_1) {
                     showAlertDialogSlightly(R.string.compose_screen_dialog_title_2) {
@@ -35,7 +37,7 @@ class ComplexComposeSampleActivity : AppCompatActivity() {
     }
 
     private fun makeVisibleSlightly(view: View) {
-        Handler(mainLooper).postDelayed({ view.visibility = View.VISIBLE }, 2_000)
+        Handler(mainLooper).postDelayed({ view.visibility = View.VISIBLE }, DELAY)
     }
 
     private fun showAlertDialogSlightly(title: Int, action: () -> Unit) {
@@ -45,6 +47,6 @@ class ComplexComposeSampleActivity : AppCompatActivity() {
             setMessage(R.string.compose_screen_dialog_message)
             setPositiveButton(R.string.compose_screen_dialog_pos_button) { _, _ -> action.invoke() }
         }
-        Handler(mainLooper).postDelayed({ builder.create().show() }, 2_000)
+        Handler(mainLooper).postDelayed({ builder.create().show() }, DELAY)
     }
 }
