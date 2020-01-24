@@ -55,10 +55,13 @@ import com.kaspersky.kaspresso.interceptors.behavior.impl.systemsafety.SystemDia
 import com.kaspersky.kaspresso.interceptors.behavior.impl.systemsafety.SystemDialogSafetyWebBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.DeviceBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.ObjectBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.failure.FailureLoggingDeviceBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.failure.FailureLoggingObjectBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.flakysafety.FlakySafeDeviceBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.flakysafety.FlakySafeObjectBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.loader.UiObjectLoaderBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.systemsafety.SystemDialogSafetyDeviceBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.systemsafety.SystemDialogSafetyObjectBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.tolibrary.kakao.impl.KakaoDataInterceptor
 import com.kaspersky.kaspresso.interceptors.tolibrary.kakao.impl.KakaoViewInterceptor
 import com.kaspersky.kaspresso.interceptors.tolibrary.kakao.impl.KakaoWebInterceptor
@@ -626,23 +629,16 @@ data class Kaspresso(
             )
 
             if (!::objectBehaviorInterceptors.isInitialized) objectBehaviorInterceptors = mutableListOf(
-                UiObjectLoaderBehaviorInterceptor(
-                    libLogger
-                ),
-                FlakySafeObjectBehaviorInterceptor(
-                    kautomatorFlakySafetyParams,
-                    libLogger
-                ),
-                FailureLoggingObjectBehaviorInterceptor(
-                    libLogger
-                )
+                UiObjectLoaderBehaviorInterceptor(libLogger),
+                SystemDialogSafetyObjectBehaviorInterceptor(libLogger, uiDevice, adbServer),
+                FlakySafeObjectBehaviorInterceptor(kautomatorFlakySafetyParams, libLogger),
+                FailureLoggingObjectBehaviorInterceptor(libLogger)
             )
 
             if (!::deviceBehaviorInterceptors.isInitialized) deviceBehaviorInterceptors = mutableListOf(
-                FlakySafeDeviceBehaviorInterceptor(
-                    kautomatorFlakySafetyParams,
-                    libLogger
-                )
+                SystemDialogSafetyDeviceBehaviorInterceptor(libLogger, uiDevice, adbServer),
+                FlakySafeDeviceBehaviorInterceptor(kautomatorFlakySafetyParams, libLogger),
+                FailureLoggingDeviceBehaviorInterceptor(libLogger)
             )
 
             if (!::stepWatcherInterceptors.isInitialized) stepWatcherInterceptors = mutableListOf(

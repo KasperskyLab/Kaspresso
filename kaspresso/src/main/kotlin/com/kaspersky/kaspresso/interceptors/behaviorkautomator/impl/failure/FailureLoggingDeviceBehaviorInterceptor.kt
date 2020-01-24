@@ -1,47 +1,49 @@
 package com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.failure
 
-import androidx.test.espresso.ViewInteraction
+import com.kaspersky.components.kautomator.intercepting.interaction.UiDeviceInteraction
 import com.kaspersky.components.kautomator.intercepting.interaction.UiObjectInteraction
+import com.kaspersky.components.kautomator.intercepting.operation.UiDeviceAction
+import com.kaspersky.components.kautomator.intercepting.operation.UiDeviceAssertion
 import com.kaspersky.components.kautomator.intercepting.operation.UiObjectAction
 import com.kaspersky.components.kautomator.intercepting.operation.UiObjectAssertion
 import com.kaspersky.kaspresso.failure.FailureLoggingProvider
 import com.kaspersky.kaspresso.failure.FailureLoggingProviderImpl
-import com.kaspersky.kaspresso.interceptors.behavior.ViewBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behaviorkautomator.DeviceBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.ObjectBehaviorInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
 
 /**
- * The implementation of [ObjectBehaviorInterceptor] and [FailureLoggingProvider] interfaces.
- * Provides failure logging functionality for [UiObjectInteraction.perform] and [UiObjectInteraction.check] calls.
+ * The implementation of [DeviceBehaviorInterceptor] and [FailureLoggingProvider] interfaces.
+ * Provides failure logging functionality for [UiDeviceInteraction.perform] and [UiDeviceInteraction.check] calls.
  */
-class FailureLoggingObjectBehaviorInterceptor(
+class FailureLoggingDeviceBehaviorInterceptor(
     logger: UiTestLogger
-) : ObjectBehaviorInterceptor,
+) : DeviceBehaviorInterceptor,
     FailureLoggingProvider by FailureLoggingProviderImpl(logger) {
 
     /**
      * Wraps the given [activity] invocation with the failure logging.
      *
-     * @param interaction the intercepted [UiObjectInteraction].
-     * @param assertion the intercepted [UiObjectAssertion].
+     * @param interaction the intercepted [UiDeviceInteraction].
+     * @param assertion the intercepted [UiDeviceAssertion].
      * @param activity the activity to invoke.
      */
     override fun <T> interceptCheck(
-        interaction: UiObjectInteraction,
-        assertion: UiObjectAssertion,
+        interaction: UiDeviceInteraction,
+        assertion: UiDeviceAssertion,
         activity: () -> T
     ): T = withLoggingOnFailure(action = activity)
 
     /**
      * Wraps the given [activity] invocation with the failure logging.
      *
-     * @param interaction the intercepted [UiObjectInteraction].
-     * @param action the intercepted [UiObjectAction].
+     * @param interaction the intercepted [UiDeviceInteraction].
+     * @param action the intercepted [UiDeviceAction].
      * @param activity the activity to invoke.
      */
     override fun <T> interceptPerform(
-        interaction: UiObjectInteraction,
-        action: UiObjectAction,
+        interaction: UiDeviceInteraction,
+        action: UiDeviceAction,
         activity: () -> T
     ): T = withLoggingOnFailure(action = activity)
 }
