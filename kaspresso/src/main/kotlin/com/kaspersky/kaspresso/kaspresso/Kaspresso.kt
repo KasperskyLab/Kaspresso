@@ -55,6 +55,7 @@ import com.kaspersky.kaspresso.interceptors.behavior.impl.systemsafety.SystemDia
 import com.kaspersky.kaspresso.interceptors.behavior.impl.systemsafety.SystemDialogSafetyWebBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.DeviceBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.ObjectBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.autoscroll.AutoScrollObjectBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.failure.FailureLoggingDeviceBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.failure.FailureLoggingObjectBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.flakysafety.FlakySafeDeviceBehaviorInterceptor
@@ -629,6 +630,7 @@ data class Kaspresso(
             )
 
             if (!::objectBehaviorInterceptors.isInitialized) objectBehaviorInterceptors = mutableListOf(
+                AutoScrollObjectBehaviorInterceptor(libLogger),
                 UiObjectLoaderBehaviorInterceptor(libLogger),
                 SystemDialogSafetyObjectBehaviorInterceptor(libLogger, uiDevice, adbServer),
                 FlakySafeObjectBehaviorInterceptor(kautomatorFlakySafetyParams, libLogger),
