@@ -1,4 +1,4 @@
-package com.kaspersky.kaspresso.compose.pack.element
+package com.kaspersky.kaspresso.compose.pack.branch
 
 import com.kaspersky.kaspresso.compose.ComposeProviderImpl
 

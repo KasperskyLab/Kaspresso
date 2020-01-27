@@ -53,7 +53,7 @@ class ComposeProviderImpl(
         // action
         val succeedBranchOrderNumber = callComposeActionsIntoFlakySafety(
             isKautomatorHere = actionElements.find { it.element is UiBaseView<*> } != null,
-            actions = actionElements.map { it.action }
+            actions = actionElements.map { it.check }
         )
         // elements restoring the previous state
         actionElements.forEach { rollbackSystemInterception(it.element) }
@@ -69,7 +69,18 @@ class ComposeProviderImpl(
      */
     override fun <Type> Type.compose(block: ActionsPack<Type>.() -> Unit)
             where Type : BaseActions, Type : BaseAssertions,
-                  Type : Interceptable<ViewInteraction, ViewAssertion, ViewAction> = innerCompose(this, block)
+                  Type : Interceptable<ViewInteraction, ViewAssertion, ViewAction> {
+        val actions: List<() -> Unit> = ActionsPack(this).apply(block).build()
+        // preparing
+        rollKakaoComposeInterception()
+        // action
+        callComposeActionsIntoFlakySafety(
+            isKautomatorHere = this is UiBaseView<*>,
+            actions = actions
+        )
+        // restoring the previous state
+        rollbackKakaoInterception()
+    }
 
     /**
      * Composes a [block] of actions on the given view of type [T] in one composite action that succeeds if at least
@@ -79,19 +90,17 @@ class ComposeProviderImpl(
      */
     override fun <Type> Type.compose(block: ActionsPack<Type>.() -> Unit)
             where Type : UiBaseActions, Type : UiBaseAssertions,
-                  Type : UiInterceptable<UiObjectInteraction, UiObjectAssertion, UiObjectAction> = innerCompose(this, block)
-
-    private fun <Type> innerCompose(element: Type, block: ActionsPack<Type>.() -> Unit) {
-        val actions: List<() -> Unit> = ActionsPack(element).apply(block).build()
+                  Type : UiInterceptable<UiObjectInteraction, UiObjectAssertion, UiObjectAction> {
+        val actions: List<() -> Unit> = ActionsPack(this).apply(block).build()
         // preparing
-        rollComposeInterception(element as Any)
+        rollKautomatorComposeInterception()
         // action
         callComposeActionsIntoFlakySafety(
-            isKautomatorHere = element is UiBaseView<*>,
+            isKautomatorHere = this is UiBaseView<*>,
             actions = actions
         )
         // restoring the previous state
-        rollbackSystemInterception(element as Any)
+        rollbackKautomatorInterception()
     }
 
     private fun rollComposeInterception(element: Any) {

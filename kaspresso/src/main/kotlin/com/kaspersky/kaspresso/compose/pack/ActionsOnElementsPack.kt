@@ -12,59 +12,59 @@ import com.kaspersky.components.kautomator.intercepting.interaction.UiObjectInte
 import com.kaspersky.components.kautomator.intercepting.intercept.UiInterceptable
 import com.kaspersky.components.kautomator.intercepting.operation.UiObjectAction
 import com.kaspersky.components.kautomator.intercepting.operation.UiObjectAssertion
-import com.kaspersky.kaspresso.compose.pack.element.ActionElement
-import com.kaspersky.kaspresso.compose.pack.element.ActionElementBuilder
+import com.kaspersky.kaspresso.compose.pack.branch.ComplexComposeBranch
+import com.kaspersky.kaspresso.compose.pack.branch.ComplexComposeBranchBuilder
 
 /**
  * The builder class for parameters of [com.kaspersky.kaspresso.compose.ComposeProvider.compose] method.
  */
 class ActionsOnElementsPack {
 
-    private val actionElementBuilders: MutableList<ActionElementBuilder<out Any>> = mutableListOf()
+    private val complexComposeBranchBuilders: MutableList<ComplexComposeBranchBuilder<out Any>> = mutableListOf()
 
     /**
-     * Adds the [element] of type [Type] and the [action] to [actionElementBuilders] and [action] for future composing
+     * Adds the [element] of type [Type] and the [action] to [complexComposeBranchBuilders] and [action] for future composing
      * where [Type] is bounding by KBaseView (Kakao)
      *
      * @param element the interacted view.
      * @param action actions or assertions on the interacted view.
      */
-    fun <Type> or(element: Type, action: Type.() -> Unit): ActionElementBuilder<Type>
+    fun <Type> or(element: Type, action: Type.() -> Unit): ComplexComposeBranchBuilder<Type>
             where Type : BaseActions, Type : BaseAssertions,
                   Type : Interceptable<ViewInteraction, ViewAssertion, ViewAction>
     {
-        val builder = ActionElementBuilder(element, { action.invoke(element) })
-        actionElementBuilders += builder
-        return builder
+        return ComplexComposeBranchBuilder(element, { action.invoke(element) }).also {
+            complexComposeBranchBuilders += it
+        }
     }
 
     /**
-     * Adds the [element] of type [Type] and the [action] to [actionElementBuilders] and [action] for future composing
+     * Adds the [element] of type [Type] and the [action] to [complexComposeBranchBuilders] and [action] for future composing
      * where [Type] is bounding by UiBaseView (Kautomator)
      *
      * @param element the interacted view.
      * @param action actions or assertions on the interacted view.
      */
-    fun <Type> or(element: Type, action: Type.() -> Unit): ActionElementBuilder<Type>
+    fun <Type> or(element: Type, action: Type.() -> Unit): ComplexComposeBranchBuilder<Type>
             where Type : UiBaseActions, Type : UiBaseAssertions,
                   Type : UiInterceptable<UiObjectInteraction, UiObjectAssertion, UiObjectAction>
     {
-        val builder = ActionElementBuilder(element, { action.invoke(element) })
-        actionElementBuilders += builder
-        return builder
+        return ComplexComposeBranchBuilder(element, { action.invoke(element) }).also {
+            complexComposeBranchBuilders += it
+        }
     }
 
     /**
      * @return the built parameters for [com.kaspersky.kaspresso.compose.ComposeProvider.compose] method.
      */
-    internal fun build(): List<ActionElement<out Any>> {
-        require(actionElementBuilders.isNotEmpty()) { "Nothing to compose" }
+    internal fun build(): List<ComplexComposeBranch<out Any>> {
+        require(complexComposeBranchBuilders.isNotEmpty()) { "Nothing to compose" }
 
-        val actionElements = mutableListOf<ActionElement<out Any>>()
-        actionElementBuilders.forEach {
-            actionElements += it.build()
+        val composeBranches = mutableListOf<ComplexComposeBranch<out Any>>()
+        complexComposeBranchBuilders.forEach {
+            composeBranches += it.build()
         }
 
-        return actionElements
+        return composeBranches
     }
 }
