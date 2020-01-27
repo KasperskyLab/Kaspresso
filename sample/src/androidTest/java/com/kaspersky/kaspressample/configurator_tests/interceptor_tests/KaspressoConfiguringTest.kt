@@ -76,7 +76,7 @@ class KaspressoConfiguringTest : TestCase(
                     }
                     edit {
                         flakySafely(timeoutMs = 5000) { isVisible() }
-                        hasText(R.string.text_edit_text)
+                        hasText(R.string.simple_fragment_text_edittext)
                     }
                 }
             }

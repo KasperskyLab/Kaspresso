@@ -3,6 +3,7 @@ package com.kaspersky.kaspressample
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.kaspersky.kaspressample.compose.ComplexComposeSampleActivity
 import com.kaspersky.kaspressample.continuously.ContinuouslySampleActivity
 import com.kaspersky.kaspressample.flaky.CommonFlakyActivity
 import com.kaspersky.kaspressample.simple.SimpleActivity
@@ -43,6 +44,12 @@ class MainActivity : AppCompatActivity() {
         activity_main_button_upgrade_scenario.setOnClickListener {
             startActivity(
                 Intent(this, UpgradeTestActivity::class.java)
+            )
+        }
+
+        activity_main_button_complex_compose_sample.setOnClickListener {
+            startActivity(
+                Intent(this, ComplexComposeSampleActivity::class.java)
             )
         }
     }

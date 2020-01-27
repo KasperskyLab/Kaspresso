@@ -1,26 +1,24 @@
-package com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl
+package com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.failure
 
 import com.kaspersky.components.kautomator.intercepting.interaction.UiDeviceInteraction
 import com.kaspersky.components.kautomator.intercepting.operation.UiDeviceAction
 import com.kaspersky.components.kautomator.intercepting.operation.UiDeviceAssertion
-import com.kaspersky.kaspresso.flakysafety.FlakySafetyProvider
-import com.kaspersky.kaspresso.flakysafety.FlakySafetyProviderImpl
+import com.kaspersky.kaspresso.failure.FailureLoggingProvider
+import com.kaspersky.kaspresso.failure.FailureLoggingProviderImpl
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.DeviceBehaviorInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
-import com.kaspersky.kaspresso.params.FlakySafetyParams
 
 /**
- * The implementation of [DeviceBehaviorInterceptor] and [FlakySafetyProvider] interfaces.
- * Provides system flaky safety functionality for [UiDeviceInteraction.perform] and [UiDeviceInteraction.check] calls.
+ * The implementation of [DeviceBehaviorInterceptor] and [FailureLoggingProvider] interfaces.
+ * Provides failure logging functionality for [UiDeviceInteraction.perform] and [UiDeviceInteraction.check] calls.
  */
-class FlakySafeDeviceBehaviorInterceptor(
-    params: FlakySafetyParams,
+class FailureLoggingDeviceBehaviorInterceptor(
     logger: UiTestLogger
 ) : DeviceBehaviorInterceptor,
-    FlakySafetyProvider by FlakySafetyProviderImpl(params, logger) {
+    FailureLoggingProvider by FailureLoggingProviderImpl(logger) {
 
     /**
-     * Wraps the given [activity] invocation with the flaky safety.
+     * Wraps the given [activity] invocation with the failure logging.
      *
      * @param interaction the intercepted [UiDeviceInteraction].
      * @param assertion the intercepted [UiDeviceAssertion].
@@ -30,10 +28,10 @@ class FlakySafeDeviceBehaviorInterceptor(
         interaction: UiDeviceInteraction,
         assertion: UiDeviceAssertion,
         activity: () -> T
-    ): T = flakySafely(action = activity)
+    ): T = withLoggingOnFailure(action = activity)
 
     /**
-     * Wraps the given [activity] invocation with the flaky safety.
+     * Wraps the given [activity] invocation with the failure logging.
      *
      * @param interaction the intercepted [UiDeviceInteraction].
      * @param action the intercepted [UiDeviceAction].
@@ -43,5 +41,5 @@ class FlakySafeDeviceBehaviorInterceptor(
         interaction: UiDeviceInteraction,
         action: UiDeviceAction,
         activity: () -> T
-    ): T = flakySafely(action = activity)
+    ): T = withLoggingOnFailure(action = activity)
 }

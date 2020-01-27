@@ -26,12 +26,14 @@ import java.util.LinkedList
  */
 @Suppress("UNCHECKED_CAST")
 @KautomatorMarker
-open class UiScreen<out T : UiScreen<T>> : UiScreenActions {
+abstract class UiScreen<out T : UiScreen<T>> : UiScreenActions {
 
     companion object {
         internal val UI_OBJECT_INTERCEPTORS: Deque<UiInterceptor<UiObjectInteraction, UiObjectAssertion, UiObjectAction>> = LinkedList()
         internal val UI_DEVICE_INTERCEPTORS: Deque<UiInterceptor<UiDeviceInteraction, UiDeviceAssertion, UiDeviceAction>> = LinkedList()
     }
+
+    abstract val packageName: String
 
     override val view: UiDeviceDelegate = UiDeviceDelegate(
         UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())

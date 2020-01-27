@@ -1,4 +1,4 @@
-package com.kaspersky.kaspresso.interceptors.tolibrary.kautomator
+package com.kaspersky.kaspresso.interceptors.tolibrary.kautomator.impl
 
 import com.kaspersky.components.kautomator.intercepting.interaction.UiDeviceInteraction
 import com.kaspersky.components.kautomator.intercepting.operation.UiDeviceAction

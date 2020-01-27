@@ -55,14 +55,18 @@ import com.kaspersky.kaspresso.interceptors.behavior.impl.systemsafety.SystemDia
 import com.kaspersky.kaspresso.interceptors.behavior.impl.systemsafety.SystemDialogSafetyWebBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.DeviceBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.ObjectBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.FlakySafeDeviceBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.FlakySafeObjectBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.UiObjectLoaderBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.failure.FailureLoggingDeviceBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.failure.FailureLoggingObjectBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.flakysafety.FlakySafeDeviceBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.flakysafety.FlakySafeObjectBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.loader.UiObjectLoaderBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.systemsafety.SystemDialogSafetyDeviceBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.systemsafety.SystemDialogSafetyObjectBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.tolibrary.kakao.impl.KakaoDataInterceptor
 import com.kaspersky.kaspresso.interceptors.tolibrary.kakao.impl.KakaoViewInterceptor
 import com.kaspersky.kaspresso.interceptors.tolibrary.kakao.impl.KakaoWebInterceptor
-import com.kaspersky.kaspresso.interceptors.tolibrary.kautomator.KautomatorDeviceInterceptor
-import com.kaspersky.kaspresso.interceptors.tolibrary.kautomator.KautomatorObjectInterceptor
+import com.kaspersky.kaspresso.interceptors.tolibrary.kautomator.impl.KautomatorDeviceInterceptor
+import com.kaspersky.kaspresso.interceptors.tolibrary.kautomator.impl.KautomatorObjectInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.kautomator.DeviceWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.kautomator.ObjectWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.kautomator.impl.logging.LoggingDeviceWatcherInterceptor
@@ -414,7 +418,7 @@ data class Kaspresso(
          * These interceptors are called by [KautomatorObjectInterceptor]
          * before actual [UiObjectInteraction.check] and [UiObjectInteraction.perform] call.
          */
-        lateinit var objectWatcherInterceptors: List<ObjectWatcherInterceptor>
+        lateinit var objectWatcherInterceptors: MutableList<ObjectWatcherInterceptor>
 
         /**
          * Holds the list of [DeviceWatcherInterceptor]s.
@@ -422,7 +426,7 @@ data class Kaspresso(
          * These interceptors are called by [KautomatorDeviceInterceptor]
          * before actual [UiDeviceInteraction.check] and [UiDeviceInteraction.perform] call.
          */
-        lateinit var deviceWatcherInterceptors: List<DeviceWatcherInterceptor>
+        lateinit var deviceWatcherInterceptors: MutableList<DeviceWatcherInterceptor>
 
         /**
          * Holds the list of [ViewBehaviorInterceptor]s.
@@ -472,7 +476,7 @@ data class Kaspresso(
          * For example: the first item actually wraps the [UiDeviceInteraction.check] or [UiDeviceInteraction.perform]
          * call, the second item wraps the first item, and so on.
          */
-        lateinit var objectBehaviorInterceptors: List<ObjectBehaviorInterceptor>
+        lateinit var objectBehaviorInterceptors: MutableList<ObjectBehaviorInterceptor>
 
         /**
          * Holds the list of [DeviceBehaviorInterceptor]s.
@@ -484,7 +488,7 @@ data class Kaspresso(
          * For example: the first item actually wraps the [UiObjectInteraction.check] or [UiObjectInteraction.perform]
          * call, the second item wraps the first item, and so on.
          */
-        lateinit var deviceBehaviorInterceptors: List<DeviceBehaviorInterceptor>
+        lateinit var deviceBehaviorInterceptors: MutableList<DeviceBehaviorInterceptor>
 
         /**
          * Holds the list of [StepWatcherInterceptor]s.
@@ -626,11 +630,15 @@ data class Kaspresso(
 
             if (!::objectBehaviorInterceptors.isInitialized) objectBehaviorInterceptors = mutableListOf(
                 UiObjectLoaderBehaviorInterceptor(libLogger),
-                FlakySafeObjectBehaviorInterceptor(kautomatorFlakySafetyParams, libLogger)
+                SystemDialogSafetyObjectBehaviorInterceptor(libLogger, uiDevice, adbServer),
+                FlakySafeObjectBehaviorInterceptor(kautomatorFlakySafetyParams, libLogger),
+                FailureLoggingObjectBehaviorInterceptor(libLogger)
             )
 
             if (!::deviceBehaviorInterceptors.isInitialized) deviceBehaviorInterceptors = mutableListOf(
-                FlakySafeDeviceBehaviorInterceptor(kautomatorFlakySafetyParams, libLogger)
+                SystemDialogSafetyDeviceBehaviorInterceptor(libLogger, uiDevice, adbServer),
+                FlakySafeDeviceBehaviorInterceptor(kautomatorFlakySafetyParams, libLogger),
+                FailureLoggingDeviceBehaviorInterceptor(libLogger)
             )
 
             if (!::stepWatcherInterceptors.isInitialized) stepWatcherInterceptors = mutableListOf(
@@ -669,8 +677,14 @@ data class Kaspresso(
         }
 
         private fun initKautomatorInterception(kaspresso: Kaspresso) {
-            val objectInterceptor = KautomatorObjectInterceptor(kaspresso)
-            val deviceInterceptor = KautomatorDeviceInterceptor(kaspresso)
+            val objectInterceptor =
+                KautomatorObjectInterceptor(
+                    kaspresso
+                )
+            val deviceInterceptor =
+                KautomatorDeviceInterceptor(
+                    kaspresso
+                )
             KautomatorConfigurator.intercept {
                 onUiInteraction {
                     onCheck(isOverride = true, interceptor = objectInterceptor::interceptCheck)

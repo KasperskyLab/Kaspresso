@@ -8,22 +8,24 @@ import io.reactivex.exceptions.ExtCompositeException
  *
  * @param actions the list of actions to invoke.
  * @param logger the logger
+ *
+ * @return the order number of a succeed branch
  */
-internal fun invokeComposed(actions: List<() -> Unit>, logger: UiTestLogger) {
+internal fun invokeComposed(actions: List<() -> Unit>, logger: UiTestLogger): Int {
     logger.i("Composed action started.")
     val cachedErrors: MutableList<Throwable> = mutableListOf()
 
-    actions.forEach { action: () -> Unit ->
+    actions.forEachIndexed { index, action ->
         try {
             action.invoke()
-            logger.i("Composed action succeeded.")
-            return
+            logger.i("Composed action #$index succeeded.")
+            return index
         } catch (error: Throwable) {
             cachedErrors += error
-            logger.i("One part of composed action failed.")
+            logger.e("Composed action #$index failed. The reason is ${error.javaClass.simpleName}")
         }
     }
 
-    logger.i("Composed action totally failed.")
+    logger.i("All composed actions totally failed.")
     throw ExtCompositeException(cachedErrors)
 }

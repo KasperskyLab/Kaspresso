@@ -1,50 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/background"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
         android:padding="16dp">
 
     <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/app_name"
-            android:textColor="@android:color/black"
-            android:textSize="16sp"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"/>
 
     <TextView
-            android:id="@+id/counter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
-            tools:text="Current value: 0"/>
+        android:id="@+id/counter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        tools:text="Current value: 0"/>
 
     <Button
-            android:layout_marginTop="16dp"
-            android:id="@+id/increment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/increment"/>
+        android:layout_marginTop="16dp"
+        android:id="@+id/increment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/increment"/>
 
     <Button
-            android:id="@+id/decrement"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/decrement"/>
+        android:id="@+id/decrement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/decrement"/>
 
     <Button
-            android:id="@+id/set_black_background"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/change_color_to_black"/>
+        android:id="@+id/set_black_background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/change_color_to_black"/>
 
     <Button
-            android:id="@+id/set_red_background"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/change_color_to_red"/>
+        android:id="@+id/set_red_background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/change_color_to_red"/>
 
 </LinearLayout>

@@ -6,34 +6,65 @@ import androidx.test.espresso.ViewInteraction
 import com.agoda.kakao.common.actions.BaseActions
 import com.agoda.kakao.common.assertions.BaseAssertions
 import com.agoda.kakao.intercept.Interceptable
-import java.lang.IllegalArgumentException
+import com.kaspersky.components.kautomator.dsl.common.actions.UiBaseActions
+import com.kaspersky.components.kautomator.dsl.common.assertions.UiBaseAssertions
+import com.kaspersky.components.kautomator.intercepting.interaction.UiObjectInteraction
+import com.kaspersky.components.kautomator.intercepting.intercept.UiInterceptable
+import com.kaspersky.components.kautomator.intercepting.operation.UiObjectAction
+import com.kaspersky.components.kautomator.intercepting.operation.UiObjectAssertion
+import com.kaspersky.kaspresso.compose.pack.branch.ComplexComposeBranch
+import com.kaspersky.kaspresso.compose.pack.branch.ComplexComposeBranchBuilder
 
 /**
  * The builder class for parameters of [com.kaspersky.kaspresso.compose.ComposeProvider.compose] method.
  */
 class ActionsOnElementsPack {
 
-    private val elements: MutableList<Interceptable<ViewInteraction, ViewAssertion, ViewAction>> = mutableListOf()
-    private val actions: MutableList<() -> Unit> = mutableListOf()
+    private val complexComposeBranchBuilders: MutableList<ComplexComposeBranchBuilder<out Any>> = mutableListOf()
 
     /**
-     * Adds the [element] of type [T] and the [action] to [elements] and [actions] for future composing.
+     * Adds the [element] of type [Type] and the [action] to [complexComposeBranchBuilders] and [action] for future composing
+     * where [Type] is bounding by KBaseView (Kakao)
      *
      * @param element the interacted view.
      * @param action actions or assertions on the interacted view.
      */
-    fun <T> or(element: T, action: T.() -> Unit): Unit
-            where T : BaseActions, T : BaseAssertions, T : Interceptable<ViewInteraction, ViewAssertion, ViewAction> {
+    fun <Type> or(element: Type, action: Type.() -> Unit): ComplexComposeBranchBuilder<Type>
+            where Type : BaseActions, Type : BaseAssertions,
+                  Type : Interceptable<ViewInteraction, ViewAssertion, ViewAction>
+    {
+        return ComplexComposeBranchBuilder(element, { action.invoke(element) }).also {
+            complexComposeBranchBuilders += it
+        }
+    }
 
-        elements += element
-        actions += { action.invoke(element) }
+    /**
+     * Adds the [element] of type [Type] and the [action] to [complexComposeBranchBuilders] and [action] for future composing
+     * where [Type] is bounding by UiBaseView (Kautomator)
+     *
+     * @param element the interacted view.
+     * @param action actions or assertions on the interacted view.
+     */
+    fun <Type> or(element: Type, action: Type.() -> Unit): ComplexComposeBranchBuilder<Type>
+            where Type : UiBaseActions, Type : UiBaseAssertions,
+                  Type : UiInterceptable<UiObjectInteraction, UiObjectAssertion, UiObjectAction>
+    {
+        return ComplexComposeBranchBuilder(element, { action.invoke(element) }).also {
+            complexComposeBranchBuilders += it
+        }
     }
 
     /**
      * @return the built parameters for [com.kaspersky.kaspresso.compose.ComposeProvider.compose] method.
      */
-    internal fun build(): Pair<List<Interceptable<ViewInteraction, ViewAssertion, ViewAction>>, List<() -> Unit>> {
-        if (elements.isEmpty() || actions.isEmpty()) throw IllegalArgumentException("Nothing to compose")
-        return Pair(elements, actions)
+    internal fun build(): List<ComplexComposeBranch<out Any>> {
+        require(complexComposeBranchBuilders.isNotEmpty()) { "Nothing to compose" }
+
+        val composeBranches = mutableListOf<ComplexComposeBranch<out Any>>()
+        complexComposeBranchBuilders.forEach {
+            composeBranches += it.build()
+        }
+
+        return composeBranches
     }
 }

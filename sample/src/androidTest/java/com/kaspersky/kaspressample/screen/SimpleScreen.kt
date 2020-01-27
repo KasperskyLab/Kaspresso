@@ -4,6 +4,7 @@ import com.agoda.kakao.edit.KEditText
 import com.agoda.kakao.text.KButton
 import com.kaspersky.kaspressample.R
 import com.kaspersky.kaspressample.simple.SimpleActivity
+import com.kaspersky.kaspresso.screens.KScreen
 
 object SimpleScreen : KScreen<SimpleScreen>() {
 
