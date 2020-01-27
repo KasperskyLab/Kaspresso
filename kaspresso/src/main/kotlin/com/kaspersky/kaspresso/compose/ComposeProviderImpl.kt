@@ -47,18 +47,18 @@ class ComposeProviderImpl(
      * @param block the actions to compose.
      */
     override fun compose(block: ActionsOnElementsPack.() -> Unit) {
-        val actionElements = ActionsOnElementsPack().apply(block).build()
+        val composeBranches = ActionsOnElementsPack().apply(block).build()
         // elements preparing
-        actionElements.forEach { rollComposeInterception(it.element) }
+        composeBranches.forEach { rollComposeInterception(it.element) }
         // action
         val succeedBranchOrderNumber = callComposeActionsIntoFlakySafety(
-            isKautomatorHere = actionElements.find { it.element is UiBaseView<*> } != null,
-            actions = actionElements.map { it.check }
+            isKautomatorHere = composeBranches.find { it.element is UiBaseView<*> } != null,
+            actions = composeBranches.map { it.check }
         )
         // elements restoring the previous state
-        actionElements.forEach { rollbackSystemInterception(it.element) }
+        composeBranches.forEach { rollbackSystemInterception(it.element) }
         // execution `then` section of a success branch
-        actionElements[succeedBranchOrderNumber].postAction?.invoke()
+        composeBranches[succeedBranchOrderNumber].postAction?.invoke()
     }
 
     /**
