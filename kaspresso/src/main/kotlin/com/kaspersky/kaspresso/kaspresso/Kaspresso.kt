@@ -4,6 +4,7 @@ import android.app.Instrumentation
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.FailureHandler
 import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.uiautomator.Configurator
 import androidx.test.uiautomator.UiDevice
 import com.agoda.kakao.Kakao
 import com.kaspersky.components.kautomator.KautomatorConfigurator
@@ -59,6 +60,7 @@ import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.failure.Fail
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.failure.FailureLoggingObjectBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.flakysafety.FlakySafeDeviceBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.flakysafety.FlakySafeObjectBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.idlingwait.WaitForIdleObjectBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.loader.UiObjectLoaderBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.systemsafety.SystemDialogSafetyDeviceBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.systemsafety.SystemDialogSafetyObjectBehaviorInterceptor
@@ -89,11 +91,7 @@ import com.kaspersky.kaspresso.interceptors.watcher.view.impl.logging.LoggingVie
 import com.kaspersky.kaspresso.interceptors.watcher.view.impl.logging.LoggingWebAssertionWatcherInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.logger.UiTestLoggerImpl
-import com.kaspersky.kaspresso.params.AutoScrollParams
-import com.kaspersky.kaspresso.params.ContinuouslyParams
-import com.kaspersky.kaspresso.params.FlakySafetyParams
-import com.kaspersky.kaspresso.params.Params
-import com.kaspersky.kaspresso.params.StepParams
+import com.kaspersky.kaspresso.params.*
 import com.kaspersky.kaspresso.report.impl.AllureReportWriter
 import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
 
@@ -279,6 +277,7 @@ data class Kaspresso(
 
         private val instrumentation: Instrumentation = InstrumentationRegistry.getInstrumentation()
         private val uiDevice = UiDevice.getInstance(instrumentation)
+        private val configurator = Configurator.getInstance()
 
         /**
          * Holds an implementation of [AdbServer] interface. If it was not specified, the default implementation is used.
@@ -379,6 +378,12 @@ data class Kaspresso(
          * If it was not specified, the default implementation is used.
          */
         lateinit var stepParams: StepParams
+
+        /**
+         * Holds the [WaitForIdleParams] for [com.kaspersky.kaspresso.idlewaiting.WaitForIdleProvider]'s usage.
+         * If it was not specified, the default implementation is used.
+         */
+        lateinit var waitForIdleParams: WaitForIdleParams
 
         /**
          * Holds the list of [ViewActionWatcherInterceptor]s.
@@ -563,6 +568,7 @@ data class Kaspresso(
             if (!::continuouslyParams.isInitialized) continuouslyParams = ContinuouslyParams()
             if (!::autoScrollParams.isInitialized) autoScrollParams = AutoScrollParams()
             if (!::stepParams.isInitialized) stepParams = StepParams()
+            if (!::waitForIdleParams.isInitialized) waitForIdleParams = WaitForIdleParams()
         }
 
         @Suppress("detekt.ComplexMethod")
@@ -629,6 +635,7 @@ data class Kaspresso(
             )
 
             if (!::objectBehaviorInterceptors.isInitialized) objectBehaviorInterceptors = mutableListOf(
+                WaitForIdleObjectBehaviorInterceptor(configurator, waitForIdleParams, libLogger),
                 UiObjectLoaderBehaviorInterceptor(libLogger),
                 SystemDialogSafetyObjectBehaviorInterceptor(libLogger, uiDevice, adbServer),
                 FlakySafeObjectBehaviorInterceptor(kautomatorFlakySafetyParams, libLogger),
@@ -734,7 +741,8 @@ data class Kaspresso(
                     flakySafetyParams = flakySafetyParams,
                     continuouslyParams = continuouslyParams,
                     autoScrollParams = autoScrollParams,
-                    stepParams = stepParams
+                    stepParams = stepParams,
+                    waitForIdleParams = waitForIdleParams
                 ),
 
                 viewActionWatcherInterceptors = viewActionWatcherInterceptors,

@@ -7,7 +7,7 @@ import junit.framework.AssertionFailedError
  * The class that holds all the necessary for [com.kaspersky.kaspresso.autoscroll.AutoScrollProviderImpl] and
  * [com.kaspersky.kaspresso.autoscroll.WebAutoScrollProviderImpl] parameters.
  */
-class AutoScrollParams(
+data class AutoScrollParams(
 
     /**
      * The set of exceptions, if caught, the [com.kaspersky.kaspresso.autoscroll.AutoScrollProviderImpl] or
