@@ -91,7 +91,12 @@ import com.kaspersky.kaspresso.interceptors.watcher.view.impl.logging.LoggingVie
 import com.kaspersky.kaspresso.interceptors.watcher.view.impl.logging.LoggingWebAssertionWatcherInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.logger.UiTestLoggerImpl
-import com.kaspersky.kaspresso.params.*
+import com.kaspersky.kaspresso.params.AutoScrollParams
+import com.kaspersky.kaspresso.params.ContinuouslyParams
+import com.kaspersky.kaspresso.params.FlakySafetyParams
+import com.kaspersky.kaspresso.params.Params
+import com.kaspersky.kaspresso.params.StepParams
+import com.kaspersky.kaspresso.params.WaitForIdleParams
 import com.kaspersky.kaspresso.report.impl.AllureReportWriter
 import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
 

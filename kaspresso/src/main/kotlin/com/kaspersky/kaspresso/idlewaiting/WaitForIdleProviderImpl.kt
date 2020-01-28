@@ -57,5 +57,4 @@ class WaitForIdleProviderImpl(
             logger.i("Restoring of configurator.waitForIdleTimeout to default value.")
         }
     }
-
 }
