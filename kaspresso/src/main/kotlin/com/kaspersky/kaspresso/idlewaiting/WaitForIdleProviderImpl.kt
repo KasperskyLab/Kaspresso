@@ -35,26 +35,31 @@ class WaitForIdleProviderImpl(
     private val defaultWaitForIdleTimeout = configurator.waitForIdleTimeout
 
     override fun <T> handleLongIdlingWait(action: () -> T): T {
-        var passed = false
+        var actionCompleted = false
+        var idlingProblemWasDetected = false
+
         Timer().schedule(waitForIdleParams.timeoutMs) {
-            if (!passed) {
+            if (!actionCompleted) {
                 logger.i(
                     "The potential problem caused UiAutomator Idling specific was detected." +
                             "We try to struggle this problem resetting configurator.waitForIdleTimeout."
                 )
+                idlingProblemWasDetected = true
                 configurator.waitForIdleTimeout = ZERO_IDLE_TIME
             }
         }
 
         return try {
             action.invoke()
-        } catch (error: Throwable) {
-            if (passed) throw error
-            action.invoke()
+        } catch (throwable: Throwable) {
+            if (idlingProblemWasDetected) action.invoke() else throw throwable
         }.also {
-            passed = true
-            configurator.waitForIdleTimeout = defaultWaitForIdleTimeout
-            logger.i("Restoring of configurator.waitForIdleTimeout to default value.")
+            actionCompleted = true
+            if (idlingProblemWasDetected) {
+                idlingProblemWasDetected = false
+                configurator.waitForIdleTimeout = defaultWaitForIdleTimeout
+                logger.i("Restoring of configurator.waitForIdleTimeout to default value.")
+            }
         }
     }
 }
