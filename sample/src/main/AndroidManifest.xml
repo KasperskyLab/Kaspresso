@@ -64,6 +64,10 @@
             android:name=".compose.ComplexComposeSampleActivity"
             android:label="@string/main_screen_complex_compose_sample_button"/>
 
+        <activity
+            android:name=".idlingwait.WaitForIdleActivity"
+            android:label="@string/main_screen_idlewaiting_sample_button"/>
+
         <service
             android:name=".device.DeviceSampleAccessibilityService"
             android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"

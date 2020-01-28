@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.kaspersky.kaspressample.compose.ComplexComposeSampleActivity
 import com.kaspersky.kaspressample.continuously.ContinuouslySampleActivity
 import com.kaspersky.kaspressample.flaky.CommonFlakyActivity
+import com.kaspersky.kaspressample.idlingwait.WaitForIdleActivity
 import com.kaspersky.kaspressample.simple.SimpleActivity
 import com.kaspersky.kaspressample.upgrade.UpgradeTestActivity
 import com.kaspersky.kaspressample.web.WebViewActivity
@@ -50,6 +51,12 @@ class MainActivity : AppCompatActivity() {
         activity_main_button_complex_compose_sample.setOnClickListener {
             startActivity(
                 Intent(this, ComplexComposeSampleActivity::class.java)
+            )
+        }
+
+        activity_main_button_idlewaiting_sample.setOnClickListener {
+            startActivity(
+                Intent(this, WaitForIdleActivity::class.java)
             )
         }
     }
