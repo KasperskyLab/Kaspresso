@@ -12,7 +12,7 @@ class CommonFlakyActivity : AppCompatActivity() {
         private const val FIRST_KAKAO_DELAY = 2_000L
         private const val FIRST_KAUTOMATOR_DELAY = 3_000L
         private const val SECOND_KAKAO_DELAY = 12_000L
-        private const val SECOND_KAUTOMATOR_DELAY = 20_000L
+        private const val SECOND_KAUTOMATOR_DELAY = 19_000L
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
