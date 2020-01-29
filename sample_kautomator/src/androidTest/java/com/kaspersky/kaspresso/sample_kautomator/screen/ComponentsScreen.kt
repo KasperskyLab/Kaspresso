@@ -8,12 +8,12 @@ import com.kaspersky.components.kautomator.dsl.screen.UiScreen
 import com.kaspersky.components.kautomator.dsl.text.UiButton
 
 object ComponentsScreen : UiScreen<ComponentsScreen>() {
-
-    private const val MAIN_APP_PACKAGE_ID = "com.kaspersky.kaspresso.sample_kautomator"
-
-    val bottomNav = UiBottomNavigationView { withId(this@ComponentsScreen.MAIN_APP_PACKAGE_ID, "bottomNav") }
-    val checkbox = UiCheckBox { withId(this@ComponentsScreen.MAIN_APP_PACKAGE_ID, "checkBox") }
-    val chipGroup = UiChipGroup { withId(this@ComponentsScreen.MAIN_APP_PACKAGE_ID, "chipGroup") }
-    val showDialogBtn = UiButton { withId(this@ComponentsScreen.MAIN_APP_PACKAGE_ID, "showDialogBtn") }
-    val dialog = UiAlertDialog(this@ComponentsScreen.MAIN_APP_PACKAGE_ID)
+    
+    override val packageName: String = "com.kaspersky.kaspresso.sample_kautomator"
+    
+    val bottomNav = UiBottomNavigationView { withId(this@ComponentsScreen.packageName, "bottomNav") }
+    val checkbox = UiCheckBox { withId(this@ComponentsScreen.packageName, "checkBox") }
+    val chipGroup = UiChipGroup { withId(this@ComponentsScreen.packageName, "chipGroup") }
+    val showDialogBtn = UiButton { withId(this@ComponentsScreen.packageName, "showDialogBtn") }
+    val dialog = UiAlertDialog(packageName)
 }

@@ -64,7 +64,7 @@ class ObjectAutoScrollProviderImpl(
          * Scrolls to the bottom and looks for the given view. Invokes the action if the view was found.
          */
         do {
-            if (interaction.device.findObject(interaction.selector.bySelector) != null) {
+            if (interaction.tryToFindUiObject()) {
                 logger.i("UiView autoscroll successfully performed.")
                 return action.invoke()
             }
@@ -74,7 +74,7 @@ class ObjectAutoScrollProviderImpl(
          * Scrolls to the beginning and looks for the given view. Invokes the action if the view was found.
          */
         do {
-            if (interaction.device.findObject(interaction.selector.bySelector) != null) {
+            if (interaction.tryToFindUiObject()) {
                 logger.i("UiView autoscroll successfully performed.")
                 return action.invoke()
             }
