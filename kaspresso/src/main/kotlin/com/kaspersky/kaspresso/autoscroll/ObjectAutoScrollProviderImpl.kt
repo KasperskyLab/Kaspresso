@@ -36,8 +36,7 @@ class ObjectAutoScrollProviderImpl(
         return try {
             action.invoke()
         } catch (error: Throwable) {
-            val isScrollable = UiScrollable(UiSelector().scrollable(true)).exists()
-            if (error.isAllowed(ALLOWED_EXCEPTIONS) && isScrollable) {
+            if (error.isAllowed(ALLOWED_EXCEPTIONS) && UiScrollable(UiSelector().scrollable(true)).exists()) {
                 return scroll(interaction, action, error)
             }
             throw error
