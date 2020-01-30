@@ -7,20 +7,15 @@ import com.kaspersky.components.kautomator.intercepting.exception.UnfoundedUiObj
 import com.kaspersky.components.kautomator.intercepting.interaction.UiObjectInteraction
 import com.kaspersky.kaspresso.internal.extensions.other.isAllowed
 import com.kaspersky.kaspresso.logger.UiTestLogger
+import com.kaspersky.kaspresso.params.AutoScrollParams
 
 /**
  * The implementation of the [AutoScrollProvider] interface for [UiObjectInteraction]
  */
 class ObjectAutoScrollProviderImpl(
-    private val logger: UiTestLogger
+    private val logger: UiTestLogger,
+    private val autoScrollParams: AutoScrollParams
 ) : AutoScrollProvider<UiObjectInteraction> {
-
-    companion object {
-        private val ALLOWED_EXCEPTIONS = setOf(
-            UiObjectNotFoundException::class.java,
-            UnfoundedUiObjectException::class.java
-        )
-    }
 
     /**
      * Invokes the given [action] and calls [scroll] if it fails. Helps in cases when test fails because of the
@@ -36,7 +31,7 @@ class ObjectAutoScrollProviderImpl(
         return try {
             action.invoke()
         } catch (error: Throwable) {
-            if (error.isAllowed(ALLOWED_EXCEPTIONS) && UiScrollable(UiSelector().scrollable(true)).exists()) {
+            if (error.isAllowed(autoScrollParams.allowedExceptions) && UiScrollable(UiSelector().scrollable(true)).exists()) {
                 return scroll(interaction, action, error)
             }
             throw error

@@ -374,16 +374,28 @@ data class Kaspresso(
         lateinit var kautomatorFlakySafetyParams: FlakySafetyParams
 
         /**
-         * Holds the [ContinuouslyParams] for [com.kaspersky.kaspresso.flakysafety.ContinuouslyProvider]'s usage.
-         * If it was not specified, the default implementation is used.
+         * Holds the Kakao [ContinuouslyParams] for [com.kaspersky.kaspresso.flakysafety.ContinuouslyProvider]'s usage.
+         * If it was not specified, the default implementation for Kakao is used.
          */
         lateinit var continuouslyParams: ContinuouslyParams
 
         /**
-         * Holds the [AutoScrollParams] for [com.kaspersky.kaspresso.autoscroll.AutoScrollProvider]'s usage.
-         * If it was not specified, the default implementation is used.
+         * Holds the Kautomator [ContinuouslyParams] for [com.kaspersky.kaspresso.flakysafety.ContinuouslyProvider]'s usage.
+         * If it was not specified, the default implementation for Kautomator is used.
+         */
+        lateinit var kautomatorContinuouslyParams: ContinuouslyParams
+
+        /**
+         * Holds the Kakao [AutoScrollParams] for [com.kaspersky.kaspresso.autoscroll.AutoScrollProvider]'s usage.
+         * If it was not specified, the default implementation for Kakao is used.
          */
         lateinit var autoScrollParams: AutoScrollParams
+
+        /**
+         * Holds the Kautomator [AutoScrollParams] for [com.kaspersky.kaspresso.autoscroll.AutoScrollProvider]'s usage.
+         * If it was not specified, the default implementation for Kautomator is used.
+         */
+        lateinit var kautomatorAutoScrollParams: AutoScrollParams
 
         /**
          * Holds the [StepParams] for [com.kaspersky.kaspresso.testcases.core.step.StepsManager]'s usage.
@@ -579,8 +591,10 @@ data class Kaspresso(
 
             if (!::flakySafetyParams.isInitialized) flakySafetyParams = FlakySafetyParams.kakaoInstance()
             if (!::kautomatorFlakySafetyParams.isInitialized) kautomatorFlakySafetyParams = FlakySafetyParams.kautomatorInstance()
-            if (!::continuouslyParams.isInitialized) continuouslyParams = ContinuouslyParams()
-            if (!::autoScrollParams.isInitialized) autoScrollParams = AutoScrollParams()
+            if (!::continuouslyParams.isInitialized) continuouslyParams = ContinuouslyParams.kakaoInstance()
+            if (!::kautomatorContinuouslyParams.isInitialized) kautomatorContinuouslyParams = ContinuouslyParams.kautomatorInstance()
+            if (!::autoScrollParams.isInitialized) autoScrollParams = AutoScrollParams.kakaoInstance()
+            if (!::kautomatorAutoScrollParams.isInitialized) kautomatorAutoScrollParams = AutoScrollParams.kautomatorInstance()
             if (!::stepParams.isInitialized) stepParams = StepParams()
             if (!::waitForIdleParams.isInitialized) waitForIdleParams = WaitForIdleParams()
         }
@@ -649,7 +663,7 @@ data class Kaspresso(
             )
 
             if (!::objectBehaviorInterceptors.isInitialized) objectBehaviorInterceptors = mutableListOf(
-                AutoScrollObjectBehaviorInterceptor(libLogger),
+                AutoScrollObjectBehaviorInterceptor(libLogger, kautomatorAutoScrollParams),
                 UiObjectLoaderBehaviorInterceptor(libLogger),
                 SystemDialogSafetyObjectBehaviorInterceptor(libLogger, uiDevice, adbServer),
                 FlakySafeObjectBehaviorInterceptor(kautomatorFlakySafetyParams, libLogger),
@@ -753,8 +767,11 @@ data class Kaspresso(
 
                 params = Params(
                     flakySafetyParams = flakySafetyParams,
+                    kautomatorFlakySafetyParams = kautomatorFlakySafetyParams,
                     continuouslyParams = continuouslyParams,
+                    kautomatorContinuouslyParams = kautomatorContinuouslyParams,
                     autoScrollParams = autoScrollParams,
+                    kautomatorAutoScrollParams = kautomatorAutoScrollParams,
                     stepParams = stepParams,
                     waitForIdleParams = waitForIdleParams
                 ),

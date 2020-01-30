@@ -7,15 +7,17 @@ import com.kaspersky.kaspresso.autoscroll.AutoScrollProvider
 import com.kaspersky.kaspresso.autoscroll.ObjectAutoScrollProviderImpl
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.ObjectBehaviorInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
+import com.kaspersky.kaspresso.params.AutoScrollParams
 
 /**
  * The implementation of [ObjectBehaviorInterceptor] and [AutoScrollProvider] interfaces.
  * Provides autoscroll on failure functionality for [UiObjectInteraction.perform] and [UiObjectInteraction.check] calls.
  */
 class AutoScrollObjectBehaviorInterceptor(
-    logger: UiTestLogger
+    logger: UiTestLogger,
+    autoScrollParams: AutoScrollParams
 ) : ObjectBehaviorInterceptor,
-    AutoScrollProvider<UiObjectInteraction> by ObjectAutoScrollProviderImpl(logger) {
+    AutoScrollProvider<UiObjectInteraction> by ObjectAutoScrollProviderImpl(logger, autoScrollParams) {
 
     /**
      * Wraps the given [assertion] invocation with the autoscrolling on failure.
