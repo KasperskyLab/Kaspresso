@@ -5,7 +5,7 @@
     <string name="main_screen_title">Main Screen</string>
     <string name="main_screen_simple_fragment_button">Simple fragment</string>
     <string name="main_screen_webview_button">WebView</string>
-    <string name="main_screen_scroll_view_sample_button">Scroll View Stub</string>
+    <string name="main_screen_scroll_view_sample_button">Flaky sample</string>
     <string name="main_screen_continuously_sample_button">Continuously sample</string>
     <string name="main_screen_complex_compose_sample_button">Complex compose sample</string>
     <string name="main_screen_idlewaiting_sample_button">Waiting for idle sample</string>

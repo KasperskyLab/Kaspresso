@@ -4,7 +4,11 @@ import com.kaspersky.components.kautomator.dsl.text.UiButton
 
 object UiMainScreen : UiSampleScreen<UiMainScreen>() {
 
-    val scrollViewStubButton = UiButton { withId(this@UiMainScreen.packageName, "activity_main_button_scroll_view_sample") }
+    val simpleButton = UiButton { withId(this@UiMainScreen.packageName, "activity_main_simple_sample_button") }
 
-    val idleWaitingButton = UiButton { withId(this@UiMainScreen.packageName, "activity_main_button_idlewaiting_sample") }
+    val flakyButton = UiButton { withId(this@UiMainScreen.packageName, "activity_main_flaky_sample_button") }
+
+    val composeButton = UiButton { withId(this@UiMainScreen.packageName, "activity_main_complex_compose_sample_button") }
+
+    val idleWaitingButton = UiButton { withId(this@UiMainScreen.packageName, "activity_main_idlewaiting_sample_button") }
 }

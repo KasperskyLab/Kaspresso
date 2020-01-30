@@ -34,7 +34,7 @@ class UiCommonFlakyTest : TestCase() {
         }.run {
             step("Open Scroll View Stub Screen") {
                 UiMainScreen {
-                    scrollViewStubButton {
+                    flakyButton {
                         click()
                     }
                 }
