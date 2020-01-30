@@ -31,7 +31,7 @@ open class UiBaseView<out T>(selector: UiViewSelector) : UiBaseActions, UiBaseAs
         val delegate = UiObjectDelegate(
             UiDevice.getInstance(InstrumentationRegistry.getInstrumentation()),
             selector,
-            this::class.java.simpleName
+            "Object type=${this::class.java.simpleName}"
         )
         delegate.loadView()
         delegate

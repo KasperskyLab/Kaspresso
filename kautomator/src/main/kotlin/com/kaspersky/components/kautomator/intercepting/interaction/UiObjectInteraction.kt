@@ -13,8 +13,7 @@ import com.kaspersky.components.kautomator.intercepting.operation.UiObjectAssert
 class UiObjectInteraction(
     val device: UiDevice,
     val selector: UiViewSelector,
-    // UiButton, UiTextView, UiEditText, etc.
-    val elementClassName: String
+    val description: String
 ) : UiInteraction<UiObjectAssertion, UiObjectAction> {
 
     var uiObject2: UiObject2? = null

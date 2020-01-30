@@ -21,8 +21,9 @@ class LoggingObjectWatcherInterceptor(
      * @param assertion responsible for performing an activity (assertion) on the given [interaction]
      */
     override fun interceptCheck(interaction: UiObjectInteraction, assertion: UiObjectAssertion) {
-        logger.i("Check=${assertion.type}(description={${assertion.description}} is executing on " +
-                "${interaction.elementClassName}) that was founded by selector=${interaction.selector.bySelector}")
+        logger.i("The object: ${interaction.description}. " +
+                "The operation: Check=${assertion.type}(description={${assertion.description}}. " +
+                "Additional info: the object was founded by selector=${interaction.selector.bySelector}")
     }
 
     /**
@@ -32,7 +33,8 @@ class LoggingObjectWatcherInterceptor(
      * @param action responsible for performing an activity (action) on the given [interaction]
      */
     override fun interceptPerform(interaction: UiObjectInteraction, action: UiObjectAction) {
-        logger.i("Action=${action.type}(description={${action.description}} is executing on " +
-                "${interaction.elementClassName}) that was founded by selector=${interaction.selector.bySelector}")
+        logger.i("The object: ${interaction.description}. " +
+                "The operation: Action=${action.type}(description={${action.description}}. " +
+                "Additional info: the object was founded by selector=${interaction.selector.bySelector}")
     }
 }
