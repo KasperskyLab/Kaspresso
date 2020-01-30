@@ -74,9 +74,9 @@ class UiCommonFlakyTest : TestCase() {
             step("Check tv6's text") {
                 UiCommonFlakyScreen {
                     tv6 {
-                        // here, the text will be changing longer(summary = 12 seconds) than
+                        // here, the text will be changing longer(summary = 19+ seconds) than
                         //     the default value of flaky safety timeout in Kautomator = 15 seconds
-                        // that's why we use flakySafely method obviously
+                        // that's why we use flakySafely method obviously with timeout = 20 seconds
                         flakySafely(timeoutMs = 20_000) {
                             hasText(device.targetContext.getString(R.string.common_flaky_final_textview))
                         }
