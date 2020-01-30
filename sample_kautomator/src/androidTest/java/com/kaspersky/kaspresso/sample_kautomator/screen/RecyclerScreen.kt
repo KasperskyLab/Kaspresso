@@ -6,9 +6,9 @@ import com.kaspersky.components.kautomator.dsl.text.UiTextView
 
 object RecyclerScreen : UiScreen<RecyclerScreen>() {
 
-    private const val MAIN_APP_PACKAGE_ID = "com.kaspersky.kaspresso.sample_kautomator"
+    override val packageName: String = "com.kaspersky.kaspresso.sample_kautomator"
 
-    val scroll = UiScrollView { withId(this@RecyclerScreen.MAIN_APP_PACKAGE_ID, "recycler") }
+    val scroll = UiScrollView { withId(this@RecyclerScreen.packageName, "recycler") }
 
     val toSearch = UiTextView { withText("Scroll to me") }
     val top = UiTextView { withText("Beginning") }

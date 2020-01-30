@@ -7,9 +7,9 @@ import com.kaspersky.components.kautomator.dsl.text.UiButton
 
 object MainScreen : UiScreen<MainScreen>() {
 
-    private const val MAIN_APP_PACKAGE_ID = "com.kaspersky.kaspresso.sample_kautomator"
+    override val packageName: String = "com.kaspersky.kaspresso.sample_kautomator"
 
-    val simpleEditText = UiEditText { withId(this@MainScreen.MAIN_APP_PACKAGE_ID, "editText") }
-    val simpleButton = UiButton { withId(this@MainScreen.MAIN_APP_PACKAGE_ID, "button") }
-    val checkBox = UiCheckBox { withId(this@MainScreen.MAIN_APP_PACKAGE_ID, "checkBox") }
+    val simpleEditText = UiEditText { withId(this@MainScreen.packageName, "editText") }
+    val simpleButton = UiButton { withId(this@MainScreen.packageName, "button") }
+    val checkBox = UiCheckBox { withId(this@MainScreen.packageName, "checkBox") }
 }
