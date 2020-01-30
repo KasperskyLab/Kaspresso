@@ -30,8 +30,6 @@ interface UiTextViewAssertions : UiBaseAssertions {
         view.check(
             TextViewAssertionType.HAS_TEXT,
             "hasText(text=$text)"
-        // todo isEqualTo doesn't support auto-capitalization
-        // todo but Kakao does
         ) { assertThat(this.text).isEqualTo(text) }
     }
 

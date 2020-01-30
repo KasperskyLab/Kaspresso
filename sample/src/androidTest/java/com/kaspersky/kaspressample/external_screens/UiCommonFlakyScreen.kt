@@ -5,7 +5,6 @@ import com.kaspersky.components.kautomator.dsl.text.UiButton
 
 object UiCommonFlakyScreen : UiSampleScreen<UiCommonFlakyScreen>() {
 
-    // todo create UiScrollView
     val scrollView = UiScrollView {
         withId(this@UiCommonFlakyScreen.packageName, "scroll_view")
     }

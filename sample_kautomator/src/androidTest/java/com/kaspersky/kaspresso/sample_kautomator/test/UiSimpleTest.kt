@@ -43,7 +43,6 @@ class UiSimpleTest : TestCase() {
                 MainScreen {
                     simpleButton {
                         click()
-                        // todo put some assertion
                     }
                 }
             }
