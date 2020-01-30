@@ -6,6 +6,7 @@ import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.R
+import com.kaspersky.kaspressample.external_screens.UiCommonFlakyScreen
 import com.kaspersky.kaspressample.external_screens.UiMainScreen
 import com.kaspersky.kaspressample.external_screens.UiSimpleScreen
 import com.kaspersky.kaspressample.external_screens.UiWaitForIdleScreen
@@ -90,37 +91,30 @@ class KautomatorMeasureTest : TestCase(
                 }
             }
 
-//            step("MainScreen. Check `flaky sample` button existence") {
-//                UiMainScreen {
-//                    flakyButton {
-//                        isDisplayed()
-//                        hasText(device.targetContext.getString(R.string.main_screen_scroll_view_sample_button).toUpperCase())
-//                    }
-//                }
-//            }
-//
-//            step("MainScreen. Click on `flaky fragment` button") {
-//                UiMainScreen {
-//                    flakyButton {
-//                        click()
-//                    }
-//                }
-//            }
-//
-//            step("FlakyScreen. Check btn5") {
-//                UiCommonFlakyScreen {
-//                    btn5 {
-//                        isDisplayed()
-//                        hasText(device.targetContext.getString(R.string.common_flaky_final_button).toUpperCase())
-//                    }
-//                }
-//            }
-//
-//            step("Return to MainScreen") {
-//                UiCommonFlakyScreen {
-//                    pressBack()
-//                }
-//            }
+            step("MainScreen. Check `flaky sample` button existence and click") {
+                UiMainScreen {
+                    flakyButton {
+                        isDisplayed()
+                        hasText(device.targetContext.getString(R.string.main_screen_scroll_view_sample_button).toUpperCase())
+                        click()
+                    }
+                }
+            }
+
+            step("FlakyScreen. Check btn5") {
+                UiCommonFlakyScreen {
+                    btn5 {
+                        isDisplayed()
+                        hasText("5")
+                    }
+                }
+            }
+
+            step("Return to MainScreen") {
+                UiCommonFlakyScreen {
+                    pressBack()
+                }
+            }
 
             step("MainScreen. Check `waiting for idle sample` button existence and click") {
                 UiMainScreen {
