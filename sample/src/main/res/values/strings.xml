@@ -8,6 +8,7 @@
     <string name="main_screen_scroll_view_sample_button">Scroll View Stub</string>
     <string name="main_screen_continuously_sample_button">Continuously sample</string>
     <string name="main_screen_complex_compose_sample_button">Complex compose sample</string>
+    <string name="main_screen_idlewaiting_sample_button">Waiting for idle sample</string>
 
     <!-- Simple fragment screen -->
     <string name="simple_fragment_title">Simple Fragment</string>
@@ -62,5 +63,9 @@
     <string name="compose_screen_dialog_title_2" translatable="false">Dialog #2</string>
     <string name="compose_screen_dialog_message" translatable="false">Some unexpected text</string>
     <string name="compose_screen_dialog_pos_button" translatable="false">OK</string>
+
+    <!-- Idle waiting fragment screen -->
+    <string name="idlewaiting_fragment_title" translatable="false">Wait for idle Fragment</string>
+    <string name="idlewaiting_fragment_text_edittext" translatable="false">Some text</string>
 
 </resources>
