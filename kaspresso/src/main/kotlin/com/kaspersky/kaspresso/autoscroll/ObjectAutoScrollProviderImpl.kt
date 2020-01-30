@@ -1,9 +1,7 @@
 package com.kaspersky.kaspresso.autoscroll
 
-import androidx.test.uiautomator.UiObjectNotFoundException
 import androidx.test.uiautomator.UiScrollable
 import androidx.test.uiautomator.UiSelector
-import com.kaspersky.components.kautomator.intercepting.exception.UnfoundedUiObjectException
 import com.kaspersky.components.kautomator.intercepting.interaction.UiObjectInteraction
 import com.kaspersky.kaspresso.internal.extensions.other.isAllowed
 import com.kaspersky.kaspresso.logger.UiTestLogger
