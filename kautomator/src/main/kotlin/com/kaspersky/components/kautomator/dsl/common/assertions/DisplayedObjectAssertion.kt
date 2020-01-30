@@ -31,6 +31,10 @@ class DisplayedObjectAssertion private constructor(
         }
     }
 
+    override fun toString(): String {
+        return "DisplayedObjectAssertion(type=$type, description=$description)"
+    }
+
     enum class DisplayedAssertionType : UiOperationType {
         IS_DISPLAYED,
         IS_NOT_DISPLAYED,

@@ -18,4 +18,8 @@ class UiDeviceInteraction(
     override fun perform(action: UiDeviceAction) {
         action.execute(device)
     }
+
+    override fun toString(): String {
+        return "UiDeviceInteraction(device=$device)"
+    }
 }

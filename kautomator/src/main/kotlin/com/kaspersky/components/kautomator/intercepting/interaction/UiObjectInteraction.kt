@@ -39,4 +39,8 @@ class UiObjectInteraction(
     override fun perform(action: UiObjectAction) {
         action.execute(uiObject2 ?: throw UnfoundedUiObjectException(selector))
     }
+
+    override fun toString(): String {
+        return "UiObjectInteraction(device=$device, selector=$selector, description='$description', uiObject2=$uiObject2)"
+    }
 }

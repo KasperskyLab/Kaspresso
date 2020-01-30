@@ -4,6 +4,7 @@ import android.Manifest
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
+import com.kaspersky.components.kautomator.KautomatorConfigurator
 import com.kaspersky.kaspresso.sample_kautomator.MainActivity
 
 import com.kaspersky.kaspresso.sample_kautomator.screen.MainScreen
@@ -12,6 +13,10 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
+/**
+ * The simple sample of how Kautomator looks and
+ *     its beautiful possibility to intercept all actions and assertions as Kakao does
+ */
 @RunWith(AndroidJUnit4::class)
 class UiSimpleTest : TestCase() {
 
@@ -27,6 +32,19 @@ class UiSimpleTest : TestCase() {
     @Test
     fun upgradeTest() {
         before {
+            KautomatorConfigurator {
+                intercept {
+                    onUiInteraction {
+                        onCheck { uiInteraction, uiAssert ->
+                            testLogger.i("KautomatorIntercept", "interaction=$uiInteraction, assertion=$uiAssert")
+                        }
+                        onPerform { uiInteraction, uiAction ->
+                            testLogger.i("KautomatorIntercept", "interaction=$uiInteraction, action=$uiAction")
+                        }
+                    }
+                }
+            }
+
             activityTestRule.launchActivity(null)
         }.after {
         }.run {
