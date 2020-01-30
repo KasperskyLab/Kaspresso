@@ -56,17 +56,6 @@ class UiCommonFlakyTest : TestCase() {
                 }
             }
 
-            step("temp step") {
-                UiCommonFlakyScreen {
-                    scrollView {
-                        // todo In UiAutomator DSL there is not autoscroll feature of all Scrollable views.
-                        // todo That's why we are forced to make scrolls manually
-                        // todo maybe to fix it somehow
-                        swipeUp()
-                    }
-                }
-            }
-
             step("Check btn5's text") {
                 UiCommonFlakyScreen {
                     btn5 {

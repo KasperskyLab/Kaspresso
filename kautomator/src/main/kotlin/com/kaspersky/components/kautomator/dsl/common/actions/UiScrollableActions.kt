@@ -12,7 +12,7 @@ interface UiScrollableActions : UiBaseActions {
         view.perform(UiScrollableActionType.SCROLL_TO_START) {
             val scrollable = UiScrollable(UiSelector().resourceId(resourceName))
             scrollable.setAsVerticalList()
-            scrollable.scrollToBeginning(Int.MAX_VALUE)
+            scrollable.flingToBeginning(Int.MAX_VALUE)
         }
     }
 
@@ -20,7 +20,7 @@ interface UiScrollableActions : UiBaseActions {
         view.perform(UiScrollableActionType.SCROLL_TO_END) {
             val scrollable = UiScrollable(UiSelector().resourceId(resourceName))
             scrollable.setAsVerticalList()
-            scrollable.scrollToEnd(Int.MAX_VALUE)
+            scrollable.flingToEnd(Int.MAX_VALUE)
         }
     }
 
