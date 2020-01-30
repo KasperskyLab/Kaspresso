@@ -11,10 +11,6 @@ object ContinuouslyScreen : KScreen<ContinuouslyScreen>() {
     override val viewClass = ContinuouslySampleActivity::class.java
 
     val startButton = KButton {
-        withId(R.id.coninuously_start_btn)
-    }
-
-    val dialogTitle = KTextView {
-        withText(R.string.continuously_dialog_title)
+        withId(R.id.continuously_start_btn)
     }
 }

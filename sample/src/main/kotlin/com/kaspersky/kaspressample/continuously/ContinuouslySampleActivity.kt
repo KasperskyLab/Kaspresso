@@ -21,8 +21,8 @@ class ContinuouslySampleActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_continuously)
 
-        coninuously_start_btn.setOnClickListener {
-            coninuously_start_btn.isEnabled = false
+        continuously_start_btn.setOnClickListener {
+            continuously_start_btn.isEnabled = false
 
             Handler(mainLooper)
                 .apply {
@@ -36,7 +36,7 @@ class ContinuouslySampleActivity : AppCompatActivity() {
                                     show()
                                 }
                             }
-                            coninuously_start_btn.isEnabled = true
+                            continuously_start_btn.isEnabled = true
                         },
                         // This timeout emulates real background work of application, like fetching from Internet, or computing some device taken data, we can't influence on time of which in E2E tests
                         Random.Default.nextLong(FAKE_MIN_DELAY, FAKE_MAX_DELAY)
