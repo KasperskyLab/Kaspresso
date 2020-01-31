@@ -19,7 +19,7 @@ class LocaleRule internal constructor(
 ) : TestRule {
 
     private val systemLanguage: SystemLanguage =
-        SystemLanguage(device.context, logger, device.hackPermissions)
+        SystemLanguage(device.targetContext, logger, device.hackPermissions)
 
     private val deviceLocale: Locale = Locale.getDefault()
     private var currentLocale: Locale? = null
