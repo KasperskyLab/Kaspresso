@@ -2,7 +2,7 @@
     <string name="app_name">Kaspresso Пример</string>
 
     <!-- Main Activity -->
-    <string name="main_screen_simple_fragment_button">Далее</string>
+    <string name="main_screen_simple_fragment_button">Простой пример</string>
     <string name="main_screen_webview_button">ВебОкно</string>
     <string name="main_screen_title">Главный экран</string>
     <string name="main_screen_scroll_view_sample_button">Flaky пример</string>
