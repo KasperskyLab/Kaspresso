@@ -72,7 +72,7 @@ class FlakySafetyParams private constructor(
             field = value
         }
 
-    fun createByMerging(flakySafetyParams: FlakySafetyParams): FlakySafetyParams {
+    fun merge(flakySafetyParams: FlakySafetyParams): FlakySafetyParams {
         return FlakySafetyParams(
             timeoutMs = max(this.timeoutMs, flakySafetyParams.timeoutMs),
             intervalMs = max(this.intervalMs, flakySafetyParams.intervalMs),

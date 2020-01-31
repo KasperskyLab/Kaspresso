@@ -44,7 +44,7 @@ class ContinuouslyParams private constructor(
             field = value
         }
 
-    fun createByMerging(continuouslyParams: ContinuouslyParams): ContinuouslyParams {
+    fun merge(continuouslyParams: ContinuouslyParams): ContinuouslyParams {
         return ContinuouslyParams(
             timeoutMs = max(this.timeoutMs, continuouslyParams.timeoutMs),
             intervalMs = max(this.intervalMs, continuouslyParams.intervalMs)
