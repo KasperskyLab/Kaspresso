@@ -7,4 +7,8 @@ class UiOperationBaseImpl<View>(
 ) : UiOperation<View> {
 
     override fun execute(innerView: View) = action.invoke(innerView)
+
+    override fun toString(): String {
+        return "UiOperationBaseImpl(type=$type, description=$description, action=$action)"
+    }
 }

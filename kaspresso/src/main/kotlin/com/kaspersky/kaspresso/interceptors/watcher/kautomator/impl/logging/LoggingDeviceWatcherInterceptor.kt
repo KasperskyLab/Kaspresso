@@ -21,8 +21,7 @@ class LoggingDeviceWatcherInterceptor(
      * @param assertion responsible for performing an activity (assertion) on the given [interaction]
      */
     override fun interceptCheck(interaction: UiDeviceInteraction, assertion: UiDeviceAssertion) {
-        logger.i("Check=${assertion.type}(description={${assertion.description}} is executing on " +
-                "global layout") // todo think about global layout
+        logger.i("Check=${assertion.type}(description={${assertion.description}} is executing")
     }
 
     /**
@@ -32,7 +31,6 @@ class LoggingDeviceWatcherInterceptor(
      * @param action responsible for performing an activity (action) on the given [interaction]
      */
     override fun interceptPerform(interaction: UiDeviceInteraction, action: UiDeviceAction) {
-        logger.i("Action=${action.type}(description={${action.description}} is executing on " +
-                "global layout") // todo think about global layout
+        logger.i("Action=${action.type}(description={${action.description}} is executing")
     }
 }

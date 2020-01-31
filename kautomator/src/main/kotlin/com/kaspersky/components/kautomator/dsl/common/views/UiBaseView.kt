@@ -31,7 +31,7 @@ open class UiBaseView<out T>(selector: UiViewSelector) : UiBaseActions, UiBaseAs
         val delegate = UiObjectDelegate(
             UiDevice.getInstance(InstrumentationRegistry.getInstrumentation()),
             selector,
-            this::class.java.simpleName
+            "Object type=${this::class.java.simpleName}"
         )
         delegate.loadView()
         delegate
@@ -48,15 +48,9 @@ open class UiBaseView<out T>(selector: UiViewSelector) : UiBaseActions, UiBaseAs
 
     /**
      * Operator that allows usage of DSL style
-     *
-     * @param safely - Set to true only when you are not sure if the [innerView] is null or not.
-     * If true, the function invocation will be skipped if the view does not exist, so Exception
-     * won't be thrown.
      */
-    operator fun invoke(safely: Boolean = false, function: T.() -> Unit) {
+    operator fun invoke(function: T.() -> Unit) {
         view.loadView()
-        // todo remove it?
-        if (safely && view.interaction.uiObject2 == null) return
         function(this as T)
     }
 }

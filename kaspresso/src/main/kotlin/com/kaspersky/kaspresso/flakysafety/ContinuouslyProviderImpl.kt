@@ -50,7 +50,7 @@ class ContinuouslyProviderImpl(
         failureMessage: String?,
         action: () -> T
     ): T = invokeContinuously(
-        params = ContinuouslyParams(
+        params = ContinuouslyParams.customInstance(
             timeoutMs ?: params.timeoutMs,
             intervalMs ?: params.intervalMs
         ),

@@ -38,7 +38,7 @@ class SimpleComposeTest : TestCase(
         }.run {
             step("Open Scroll View Stub Screen") {
                 MainScreen {
-                    scrollViewStubButton {
+                    flakyButton {
                         click()
                     }
                 }
