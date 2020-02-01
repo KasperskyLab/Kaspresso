@@ -281,6 +281,13 @@ class UiViewBuilder {
     fun withClassName(clazz: Pattern) = addSelector { clazz(clazz) }
 
     /**
+     * Matches the view which class matches given name
+     *
+     * @param clazz The class to match
+     */
+    fun withClassName(clazz: Class<*>) = addSelector { clazz(clazz) }
+
+    /**
      * Matches the view by class instance
      *
      * @param clazz Class to match
