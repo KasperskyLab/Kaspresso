@@ -34,5 +34,4 @@ object UpdateManager {
     fun BaseTestContext.uninstallMainApp() {
         device.apps.uninstallIfExists(MAIN_APP_PACKAGE_ID)
     }
-
 }

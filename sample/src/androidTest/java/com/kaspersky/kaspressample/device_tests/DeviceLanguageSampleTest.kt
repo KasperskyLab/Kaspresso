@@ -7,10 +7,10 @@ import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.screen.MainScreen
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
+import java.util.Locale
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import java.util.*
 
 @RunWith(AndroidJUnit4::class)
 class DeviceLanguageSampleTest : TestCase() {
@@ -39,6 +39,8 @@ class DeviceLanguageSampleTest : TestCase() {
 
             step("change language") {
                 device.language.switchInApp(Locale("ru"))
+                // it's so important to reload current active Activity
+                // you can do it using activityTestRule or manipulating in the Application through great Kaspresso
                 activityTestRule.finishActivity()
                 activityTestRule.launchActivity(null)
                 Thread.sleep(2_000)
