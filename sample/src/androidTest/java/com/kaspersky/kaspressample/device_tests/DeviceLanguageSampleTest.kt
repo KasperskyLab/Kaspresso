@@ -25,7 +25,7 @@ class DeviceLanguageSampleTest : TestCase() {
     val activityTestRule = ActivityTestRule(MainActivity::class.java, true, true)
 
     @Test
-    fun keyboardSampleTest() {
+    fun languageSampleTest() {
         run {
 
             step("Start MainScreen in default locale") {
@@ -39,9 +39,9 @@ class DeviceLanguageSampleTest : TestCase() {
 
             step("change language") {
                 device.language.switchInApp(Locale("ru"))
-//                activityTestRule.finishActivity()
+                activityTestRule.finishActivity()
                 activityTestRule.launchActivity(null)
-                Thread.sleep(5_000)
+                Thread.sleep(2_000)
             }
 
             step("Start MainScreen in russian locale") {
