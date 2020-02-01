@@ -4,6 +4,7 @@ import android.view.KeyEvent
 import androidx.test.espresso.action.ViewActions
 import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.UiObject
+import com.kaspersky.kaspresso.annotations.AdbServerMust
 
 /**
  * Use this API only if neither Espresso, nor UiAutomator
@@ -11,6 +12,12 @@ import androidx.test.uiautomator.UiObject
  *
  * Using this API is highly discouraged. Consider to use the built-in API
  * whenever it's possible as it described in the documentation for methods.
+ *
+ * Required: Started AdbServer
+ *     1. Download a file "kaspresso/artifacts/desktop.jar"
+ *     2. Start AdbServer => input in cmd "java jar path_to_file/desktop.jar"
+ * Methods demanding to use AdbServer in the default implementation of this interface are marked.
+ *     But nobody can't deprecate you to write implementation that doesn't require AdbServer.
  */
 interface Keyboard {
 
@@ -23,6 +30,7 @@ interface Keyboard {
      *
      * Required Permissions: INTERNET
      */
+    @AdbServerMust
     fun typeText(text: String)
 
     /**
@@ -37,5 +45,6 @@ interface Keyboard {
      *
      * @param keyEvent the code from a [KeyEvent] constant to send on device.
      */
+    @AdbServerMust
     fun sendEvent(keyEvent: Int)
 }

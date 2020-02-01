@@ -9,6 +9,9 @@ import androidx.test.runner.lifecycle.Stage
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import java.util.Locale
 
+/**
+ * The implementation of [Language]
+ */
 class LanguageImpl(
     private val logger: UiTestLogger,
     private val context: Context
