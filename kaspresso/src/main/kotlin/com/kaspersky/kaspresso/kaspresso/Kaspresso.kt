@@ -7,7 +7,6 @@ import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.Configurator
 import androidx.test.uiautomator.UiDevice
 import com.agoda.kakao.Kakao
-import com.kaspersky.components.kautomator.KautomatorConfigurator
 import com.kaspersky.components.kautomator.intercepting.interaction.UiDeviceInteraction
 import com.kaspersky.components.kautomator.intercepting.interaction.UiObjectInteraction
 import com.kaspersky.kaspresso.device.Device
@@ -46,9 +45,6 @@ import com.kaspersky.kaspresso.interceptors.behavior.ViewBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.WebBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.impl.autoscroll.AutoScrollViewBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.impl.autoscroll.AutoScrollWebBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.behavior.impl.failure.FailureLoggingDataBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.behavior.impl.failure.FailureLoggingViewBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.behavior.impl.failure.FailureLoggingWebBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.impl.flakysafety.FlakySafeDataBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.impl.flakysafety.FlakySafeViewBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.impl.flakysafety.FlakySafeWebBehaviorInterceptor
@@ -58,18 +54,15 @@ import com.kaspersky.kaspresso.interceptors.behavior.impl.systemsafety.SystemDia
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.DeviceBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.ObjectBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.autoscroll.AutoScrollObjectBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.failure.FailureLoggingDeviceBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.failure.FailureLoggingObjectBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.flakysafety.FlakySafeDeviceBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.flakysafety.FlakySafeObjectBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.loader.UiObjectLoaderBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.systemsafety.SystemDialogSafetyDeviceBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.systemsafety.SystemDialogSafetyObjectBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.tolibrary.kakao.impl.KakaoDataInterceptor
-import com.kaspersky.kaspresso.interceptors.tolibrary.kakao.impl.KakaoViewInterceptor
-import com.kaspersky.kaspresso.interceptors.tolibrary.kakao.impl.KakaoWebInterceptor
-import com.kaspersky.kaspresso.interceptors.tolibrary.kautomator.impl.KautomatorDeviceInterceptor
-import com.kaspersky.kaspresso.interceptors.tolibrary.kautomator.impl.KautomatorObjectInterceptor
+import com.kaspersky.kaspresso.interceptors.tolibrary.LibraryInterceptorsImplementer.implementKaspressoInKakao
+import com.kaspersky.kaspresso.interceptors.tolibrary.LibraryInterceptorsImplementer.implementKaspressoInKautomator
+import com.kaspersky.kaspresso.interceptors.tolibrary.kautomator.KautomatorDeviceInterceptor
+import com.kaspersky.kaspresso.interceptors.tolibrary.kautomator.KautomatorObjectInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.kautomator.DeviceWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.kautomator.ObjectWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.kautomator.impl.logging.LoggingDeviceWatcherInterceptor
@@ -645,35 +638,30 @@ data class Kaspresso(
             if (!::viewBehaviorInterceptors.isInitialized) viewBehaviorInterceptors = mutableListOf(
                 AutoScrollViewBehaviorInterceptor(autoScrollParams, libLogger),
                 SystemDialogSafetyViewBehaviorInterceptor(libLogger, uiDevice, adbServer),
-                FlakySafeViewBehaviorInterceptor(flakySafetyParams, libLogger),
-                FailureLoggingViewBehaviorInterceptor(libLogger)
+                FlakySafeViewBehaviorInterceptor(flakySafetyParams, libLogger)
             )
 
             if (!::dataBehaviorInterceptors.isInitialized) dataBehaviorInterceptors = mutableListOf(
                 SystemDialogSafetyDataBehaviorInterceptor(libLogger, uiDevice, adbServer),
-                FlakySafeDataBehaviorInterceptor(flakySafetyParams, libLogger),
-                FailureLoggingDataBehaviorInterceptor(libLogger)
+                FlakySafeDataBehaviorInterceptor(flakySafetyParams, libLogger)
             )
 
             if (!::webBehaviorInterceptors.isInitialized) webBehaviorInterceptors = mutableListOf(
                 AutoScrollWebBehaviorInterceptor(autoScrollParams, libLogger),
                 SystemDialogSafetyWebBehaviorInterceptor(libLogger, uiDevice, adbServer),
-                FlakySafeWebBehaviorInterceptor(flakySafetyParams, libLogger),
-                FailureLoggingWebBehaviorInterceptor(libLogger)
+                FlakySafeWebBehaviorInterceptor(flakySafetyParams, libLogger)
             )
 
             if (!::objectBehaviorInterceptors.isInitialized) objectBehaviorInterceptors = mutableListOf(
                 AutoScrollObjectBehaviorInterceptor(libLogger, kautomatorAutoScrollParams),
                 UiObjectLoaderBehaviorInterceptor(libLogger),
                 SystemDialogSafetyObjectBehaviorInterceptor(libLogger, uiDevice, adbServer),
-                FlakySafeObjectBehaviorInterceptor(kautomatorFlakySafetyParams, libLogger),
-                FailureLoggingObjectBehaviorInterceptor(libLogger)
+                FlakySafeObjectBehaviorInterceptor(kautomatorFlakySafetyParams, libLogger)
             )
 
             if (!::deviceBehaviorInterceptors.isInitialized) deviceBehaviorInterceptors = mutableListOf(
                 SystemDialogSafetyDeviceBehaviorInterceptor(libLogger, uiDevice, adbServer),
-                FlakySafeDeviceBehaviorInterceptor(kautomatorFlakySafetyParams, libLogger),
-                FailureLoggingDeviceBehaviorInterceptor(libLogger)
+                FlakySafeDeviceBehaviorInterceptor(kautomatorFlakySafetyParams, libLogger)
             )
 
             if (!::stepWatcherInterceptors.isInitialized) stepWatcherInterceptors = mutableListOf(
@@ -685,51 +673,6 @@ data class Kaspresso(
                 BuildStepReportWatcherInterceptor(AllureReportWriter(libLogger)),
                 defaultsTestRunWatcherInterceptor
             )
-        }
-
-        /**
-         * Sets the Kaspressos's implementations of Kakao's [androidx.test.espresso.ViewInteraction] interceptor,
-         * [androidx.test.espresso.DataInteraction] interceptor and [androidx.test.espresso.WebInteraction] interceptor.
-         */
-        private fun initInterception(kaspresso: Kaspresso) {
-            val viewInterceptor = KakaoViewInterceptor(kaspresso)
-            val dataInterceptor = KakaoDataInterceptor(kaspresso)
-            val webInterceptor = KakaoWebInterceptor(kaspresso)
-
-            Kakao.intercept {
-                onViewInteraction {
-                    onCheck(isOverride = true, interceptor = viewInterceptor::interceptCheck)
-                    onPerform(isOverride = true, interceptor = viewInterceptor::interceptPerform)
-                }
-                onDataInteraction {
-                    onCheck(isOverride = true, interceptor = dataInterceptor::interceptCheck)
-                }
-                onWebInteraction {
-                    onCheck(isOverride = true, interceptor = webInterceptor::interceptCheck)
-                    onPerform(isOverride = true, interceptor = webInterceptor::interceptPerform)
-                }
-            }
-        }
-
-        private fun initKautomatorInterception(kaspresso: Kaspresso) {
-            val objectInterceptor =
-                KautomatorObjectInterceptor(
-                    kaspresso
-                )
-            val deviceInterceptor =
-                KautomatorDeviceInterceptor(
-                    kaspresso
-                )
-            KautomatorConfigurator.intercept {
-                onUiInteraction {
-                    onCheck(isOverride = true, interceptor = objectInterceptor::interceptCheck)
-                    onPerform(isOverride = true, interceptor = objectInterceptor::interceptPerform)
-                }
-                onUiDeviceInteraction {
-                    onCheck(isOverride = true, interceptor = deviceInterceptor::interceptCheck)
-                    onPerform(isOverride = true, interceptor = deviceInterceptor::interceptPerform)
-                }
-            }
         }
 
         /**
@@ -798,8 +741,22 @@ data class Kaspresso(
             configurator.waitForIdleTimeout = kautomatorWaitForIdleSettings.waitForIdleTimeout
             configurator.waitForSelectorTimeout = kautomatorWaitForIdleSettings.waitForSelectorTimeout
 
-            initInterception(kaspresso)
-            initKautomatorInterception(kaspresso)
+            implementKaspressoInKakao(
+                kaspresso.viewBehaviorInterceptors,
+                kaspresso.dataBehaviorInterceptors,
+                kaspresso.webBehaviorInterceptors,
+                kaspresso.viewActionWatcherInterceptors,
+                kaspresso.viewAssertionWatcherInterceptors,
+                kaspresso.atomWatcherInterceptors,
+                kaspresso.webAssertionWatcherInterceptors
+            )
+
+            implementKaspressoInKautomator(
+                kaspresso.objectBehaviorInterceptors,
+                kaspresso.deviceBehaviorInterceptors,
+                kaspresso.objectWatcherInterceptors,
+                kaspresso.deviceWatcherInterceptors
+            )
 
             failureHandler?.let { Espresso.setFailureHandler(it) }
 

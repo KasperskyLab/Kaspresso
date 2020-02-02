@@ -33,13 +33,3 @@ interface FlakySafetyProvider {
         action: () -> T
     ): T
 }
-
-/**
- * The function to call [FlakySafetyProvider.flakySafely] with null-safety.
- *
- * @param action the action to invoke.
- *
- * @return the result of the [action] invocation.
- */
-internal fun <T> FlakySafetyProvider?.flakySafelyIfNotNull(action: () -> T): T =
-    this?.flakySafely(action) ?: action.invoke()
