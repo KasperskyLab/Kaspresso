@@ -25,9 +25,9 @@ class WebComposeProviderImpl(
      *
      * @param block the actions to compose.
      */
-    override fun WebElementBuilder.compose(block: ActionsOnWebElementsPack.() -> Unit) {
+    override fun WebElementBuilder.compose(timeoutMs: Long?, block: ActionsOnWebElementsPack.() -> Unit) {
         val actions: List<() -> Unit> = ActionsOnWebElementsPack(this).apply(block).build()
-        invokeWebComposed(actions)
+        invokeWebComposed(actions = actions)
     }
 
     /**
@@ -37,22 +37,25 @@ class WebComposeProviderImpl(
      * @param block the actions to compose.
      */
     override fun WebElementBuilder.KWebInteraction.compose(
+        timeoutMs: Long?,
         webElementBuilder: WebElementBuilder,
         block: ActionsPack<WebElementBuilder.KWebInteraction>.() -> Unit
     ) {
         val actions: List<() -> Unit> = ActionsPack(this).apply(block).build()
-        invokeWebComposed(actions)
+        invokeWebComposed(actions = actions)
     }
 
-    private fun invokeWebComposed(actions: List<() -> Unit>) {
+    private fun invokeWebComposed(timeoutMs: Long? = null, actions: List<() -> Unit>) {
         scalpFlakySafeInterceptorFromLibs(kaspresso)
 
+        val flakySafetyParams = kaspresso.params.flakySafetyParams
+        flakySafetyParams.timeoutMs = timeoutMs ?: flakySafetyParams.timeoutMs
         invokeComposed(
             actions = actions,
             logger = kaspresso.libLogger,
             failureLoggingProvider = failureLoggingProvider,
             flakySafetyProvider = FlakySafetyProviderImpl(
-                kaspresso.params.flakySafetyParams,
+                flakySafetyParams,
                 kaspresso.libLogger
             )
         )

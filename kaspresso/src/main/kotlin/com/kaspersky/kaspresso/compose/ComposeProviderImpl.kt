@@ -39,7 +39,7 @@ class ComposeProviderImpl(
      *
      * @param block the actions to compose.
      */
-    override fun compose(block: ActionsOnElementsPack.() -> Unit) {
+    override fun compose(timeoutMs: Long?, block: ActionsOnElementsPack.() -> Unit) {
         val composeBranches = ActionsOnElementsPack().apply(block).build()
         val composeElements = composeBranches.map { it.element }
         val composeChecks = composeBranches.map { it.check }
@@ -62,18 +62,21 @@ class ComposeProviderImpl(
         composeBranches[succeedBranchOrderNumber].postAction?.invoke()
     }
 
-    private fun determineFlakySafetyParams(elements: List<Any>? = null): FlakySafetyParams {
+    private fun determineFlakySafetyParams(elements: List<Any>? = null, timeoutMs: Long? = null): FlakySafetyParams {
         // if there is no information about elements or there are `UiBaseView` (Kautomator) objects among elements
         // then we need to use expanded to maximum FlakySafetyParams (with increased `timeout`, `interval`, expanded `exceptions` and etc)
         val expandToMax: Boolean = elements == null || elements.filterIsInstance<UiBaseView<*>>().isNotEmpty()
 
-        return if (expandToMax) {
+        val flakySafetyParams = if (expandToMax) {
             kaspresso.params.flakySafetyParams.merge(
                 kaspresso.params.kautomatorFlakySafetyParams
             )
         } else {
             kaspresso.params.flakySafetyParams
         }
+
+        flakySafetyParams.timeoutMs = timeoutMs ?: flakySafetyParams.timeoutMs
+        return flakySafetyParams
     }
 
     /**
@@ -82,19 +85,21 @@ class ComposeProviderImpl(
      *
      * @param block the actions to compose.
      */
-    override fun <Type> Type.compose(block: ActionsPack<Type>.() -> Unit)
+    override fun <Type> Type.compose(timeoutMs: Long?, block: ActionsPack<Type>.() -> Unit)
             where Type : BaseActions, Type : BaseAssertions,
                   Type : Interceptable<ViewInteraction, ViewAssertion, ViewAction> {
         val actions: List<() -> Unit> = ActionsPack(this).apply(block).build()
 
         scalpFlakySafeInterceptorFromLibs(kaspresso)
 
+        val flakySafetyParams = kaspresso.params.flakySafetyParams
+        flakySafetyParams.timeoutMs = timeoutMs ?: flakySafetyParams.timeoutMs
         invokeComposed(
             actions = actions,
             logger = kaspresso.libLogger,
             failureLoggingProvider = failureLoggingProvider,
             flakySafetyProvider = FlakySafetyProviderImpl(
-                kaspresso.params.flakySafetyParams,
+                flakySafetyParams,
                 kaspresso.libLogger
             )
         )
@@ -108,19 +113,21 @@ class ComposeProviderImpl(
      *
      * @param block the actions to compose.
      */
-    override fun <Type> Type.compose(block: ActionsPack<Type>.() -> Unit)
+    override fun <Type> Type.compose(timeoutMs: Long?, block: ActionsPack<Type>.() -> Unit)
             where Type : UiBaseActions, Type : UiBaseAssertions,
                   Type : UiInterceptable<UiObjectInteraction, UiObjectAssertion, UiObjectAction> {
         val actions: List<() -> Unit> = ActionsPack(this).apply(block).build()
 
         scalpFlakySafeInterceptorFromLibs(kaspresso)
 
+        val flakySafetyParams = kaspresso.params.kautomatorFlakySafetyParams
+        flakySafetyParams.timeoutMs = timeoutMs ?: flakySafetyParams.timeoutMs
         invokeComposed(
             actions = actions,
             logger = kaspresso.libLogger,
             failureLoggingProvider = failureLoggingProvider,
             flakySafetyProvider = FlakySafetyProviderImpl(
-                kaspresso.params.kautomatorFlakySafetyParams,
+                flakySafetyParams,
                 kaspresso.libLogger
             )
         )
