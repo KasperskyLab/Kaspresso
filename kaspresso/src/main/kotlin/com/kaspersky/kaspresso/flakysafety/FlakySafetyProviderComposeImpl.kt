@@ -34,13 +34,8 @@ class FlakySafetyProviderComposeImpl(
     ): T {
         scalpFlakySafeInterceptorFromLibs(kaspresso)
 
-        val defaultParams = getParams()
         val result = flakySafetyAlgorithm.invokeFlakySafely(
-            params = FlakySafetyParams.customInstance(
-                timeoutMs ?: defaultParams.timeoutMs,
-                intervalMs ?: defaultParams.intervalMs,
-                allowedExceptions ?: defaultParams.allowedExceptions
-            ),
+            params = getParams(timeoutMs, intervalMs, allowedExceptions),
             failureMessage = failureMessage,
             action = action
         )
@@ -50,8 +45,18 @@ class FlakySafetyProviderComposeImpl(
         return result
     }
 
-    private fun getParams(): FlakySafetyParams =
-        kaspresso.params.flakySafetyParams.merge(
+    private fun getParams(
+        timeoutMs: Long? = null,
+        intervalMs: Long? = null,
+        allowedExceptions: Set<Class<out Throwable>>? = null
+    ): FlakySafetyParams {
+        val defaultParams = kaspresso.params.flakySafetyParams.merge(
             kaspresso.params.kautomatorFlakySafetyParams
         )
+        return FlakySafetyParams.customInstance(
+            timeoutMs ?: defaultParams.timeoutMs,
+            intervalMs ?: defaultParams.intervalMs,
+            allowedExceptions ?: defaultParams.allowedExceptions
+        )
+    }
 }

@@ -10,8 +10,8 @@ import com.kaspersky.kaspresso.interceptors.behaviorkautomator.DeviceBehaviorInt
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.ObjectBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.flakysafety.FlakySafeDeviceBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.flakysafety.FlakySafeObjectBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.tolibrary.LibraryInterceptorsImplementer
-import com.kaspersky.kaspresso.interceptors.tolibrary.LibraryInterceptorsImplementer.implementKaspressoInKakao
+import com.kaspersky.kaspresso.interceptors.tolibrary.LibraryInterceptorsInjector
+import com.kaspersky.kaspresso.interceptors.tolibrary.LibraryInterceptorsInjector.injectKaspressoInKakao
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 
 internal object FlakySafeInterceptorScalpel {
@@ -35,7 +35,7 @@ internal object FlakySafeInterceptorScalpel {
                 it !is FlakySafeWebBehaviorInterceptor
             }
 
-        implementKaspressoInKakao(
+        injectKaspressoInKakao(
             scalpedViewBehaviorInterceptors,
             scalpedDataBehaviorInterceptors,
             scalpedWebBehaviorInterceptors,
@@ -56,7 +56,7 @@ internal object FlakySafeInterceptorScalpel {
                 it !is FlakySafeDeviceBehaviorInterceptor
             }
 
-        LibraryInterceptorsImplementer.implementKaspressoInKautomator(
+        LibraryInterceptorsInjector.injectKaspressoInKautomator(
             scalpedObjectBehaviorInterceptors,
             scalpedDeviceBehaviorInterceptors,
             kaspresso.objectWatcherInterceptors,
@@ -65,7 +65,7 @@ internal object FlakySafeInterceptorScalpel {
     }
 
     fun restoreFlakySafeInterceptorToLibs(kaspresso: Kaspresso) {
-        implementKaspressoInKakao(
+        injectKaspressoInKakao(
             kaspresso.viewBehaviorInterceptors,
             kaspresso.dataBehaviorInterceptors,
             kaspresso.webBehaviorInterceptors,
@@ -75,7 +75,7 @@ internal object FlakySafeInterceptorScalpel {
             kaspresso.webAssertionWatcherInterceptors
         )
 
-        LibraryInterceptorsImplementer.implementKaspressoInKautomator(
+        LibraryInterceptorsInjector.injectKaspressoInKautomator(
             kaspresso.objectBehaviorInterceptors,
             kaspresso.deviceBehaviorInterceptors,
             kaspresso.objectWatcherInterceptors,

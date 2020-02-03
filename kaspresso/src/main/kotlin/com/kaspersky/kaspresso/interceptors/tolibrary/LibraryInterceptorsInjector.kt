@@ -19,10 +19,10 @@ import com.kaspersky.kaspresso.interceptors.watcher.view.ViewActionWatcherInterc
 import com.kaspersky.kaspresso.interceptors.watcher.view.ViewAssertionWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.view.WebAssertionWatcherInterceptor
 
-internal object LibraryInterceptorsImplementer {
+internal object LibraryInterceptorsInjector {
 
     @Suppress("LongParameterList")
-    fun implementKaspressoInKakao(
+    fun injectKaspressoInKakao(
         viewBehaviorInterceptors: List<ViewBehaviorInterceptor>,
         dataBehaviorInterceptors: List<DataBehaviorInterceptor>,
         webBehaviorInterceptors: List<WebBehaviorInterceptor>,
@@ -64,7 +64,7 @@ internal object LibraryInterceptorsImplementer {
         }
     }
 
-    fun implementKaspressoInKautomator(
+    fun injectKaspressoInKautomator(
         objectBehaviorInterceptors: List<ObjectBehaviorInterceptor>,
         deviceBehaviorInterceptors: List<DeviceBehaviorInterceptor>,
         objectWatcherInterceptors: List<ObjectWatcherInterceptor>,

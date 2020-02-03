@@ -49,21 +49,21 @@ class ContinuouslyProviderImpl(
         failureMessage: String?,
         action: () -> T
     ): T {
-        val defaultParams = getParams()
         return invokeContinuously(
-            params = ContinuouslyParams.customInstance(
-                timeoutMs ?: defaultParams.timeoutMs,
-                intervalMs ?: defaultParams.intervalMs
-            ),
+            params = getParams(timeoutMs, intervalMs),
             failureMessage = failureMessage,
             action = action
         )
     }
 
-    private fun getParams(): ContinuouslyParams =
-        kaspresso.params.continuouslyParams.merge(
+    private fun getParams(timeoutMs: Long? = null, intervalMs: Long? = null): ContinuouslyParams {
+        val params = kaspresso.params.continuouslyParams.merge(
             kaspresso.params.kautomatorContinuouslyParams
         )
+        params.timeoutMs = timeoutMs ?: params.timeoutMs
+        params.intervalMs = intervalMs ?: params.intervalMs
+        return params
+    }
 
     /**
      * Attempts to invoke the given [action].

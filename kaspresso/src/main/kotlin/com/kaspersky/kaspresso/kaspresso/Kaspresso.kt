@@ -59,8 +59,8 @@ import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.flakysafety.
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.loader.UiObjectLoaderBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.systemsafety.SystemDialogSafetyDeviceBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.systemsafety.SystemDialogSafetyObjectBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.tolibrary.LibraryInterceptorsImplementer.implementKaspressoInKakao
-import com.kaspersky.kaspresso.interceptors.tolibrary.LibraryInterceptorsImplementer.implementKaspressoInKautomator
+import com.kaspersky.kaspresso.interceptors.tolibrary.LibraryInterceptorsInjector.injectKaspressoInKakao
+import com.kaspersky.kaspresso.interceptors.tolibrary.LibraryInterceptorsInjector.injectKaspressoInKautomator
 import com.kaspersky.kaspresso.interceptors.tolibrary.kautomator.KautomatorDeviceInterceptor
 import com.kaspersky.kaspresso.interceptors.tolibrary.kautomator.KautomatorObjectInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.kautomator.DeviceWatcherInterceptor
@@ -741,7 +741,7 @@ data class Kaspresso(
             configurator.waitForIdleTimeout = kautomatorWaitForIdleSettings.waitForIdleTimeout
             configurator.waitForSelectorTimeout = kautomatorWaitForIdleSettings.waitForSelectorTimeout
 
-            implementKaspressoInKakao(
+            injectKaspressoInKakao(
                 kaspresso.viewBehaviorInterceptors,
                 kaspresso.dataBehaviorInterceptors,
                 kaspresso.webBehaviorInterceptors,
@@ -751,7 +751,7 @@ data class Kaspresso(
                 kaspresso.webAssertionWatcherInterceptors
             )
 
-            implementKaspressoInKautomator(
+            injectKaspressoInKautomator(
                 kaspresso.objectBehaviorInterceptors,
                 kaspresso.deviceBehaviorInterceptors,
                 kaspresso.objectWatcherInterceptors,
