@@ -23,13 +23,13 @@ import com.kaspersky.kaspresso.testcases.core.testassistants.TestAssistantsProvi
 open class BaseTestContext internal constructor(
     kaspresso: Kaspresso
 ) : FlakySafetyProvider by FlakySafetyProviderImpl(
-        kaspresso.params.flakySafetyParams.createByMerging(
+        kaspresso.params.flakySafetyParams.merge(
             kaspresso.params.kautomatorFlakySafetyParams
         ),
         kaspresso.libLogger
     ),
     ContinuouslyProvider by ContinuouslyProviderImpl(
-        kaspresso.params.continuouslyParams.createByMerging(
+        kaspresso.params.continuouslyParams.merge(
             kaspresso.params.kautomatorContinuouslyParams
         ),
         kaspresso.libLogger

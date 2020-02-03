@@ -1,15 +1,13 @@
 package com.kaspersky.kaspresso.sample_upgrade_tests.common
 
-import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
 
-open class UpgradeTestCase : TestCase() {
+object UpdateManager {
 
-    companion object {
-        private const val MAIN_APP_PACKAGE_ID = "com.kaspersky.kaspressample"
-        private const val OLD_VERSION_FILE = "artifacts/upgrade_test_v1.apk"
-        private const val NEW_VERSION_FILE = "artifacts/upgrade_test_v2.apk"
-    }
+    private const val MAIN_APP_PACKAGE_ID = "com.kaspersky.kaspressample"
+    private const val OLD_VERSION_FILE = "artifacts/upgrade_test_v1.apk"
+    private const val NEW_VERSION_FILE = "artifacts/upgrade_test_v2.apk"
+    private const val TIMEOUT = 5_000L
 
     fun BaseTestContext.installAndLaunchMainApp() {
         device.apps.install(OLD_VERSION_FILE)
@@ -19,7 +17,7 @@ open class UpgradeTestCase : TestCase() {
             startActivity(intent)
         }
 
-        Thread.sleep(5_000)
+        Thread.sleep(TIMEOUT)
     }
 
     fun BaseTestContext.updateAndLaunchMainApp() {
@@ -30,7 +28,7 @@ open class UpgradeTestCase : TestCase() {
             startActivity(intent)
         }
 
-        Thread.sleep(5_000)
+        Thread.sleep(TIMEOUT)
     }
 
     fun BaseTestContext.uninstallMainApp() {

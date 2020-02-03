@@ -9,10 +9,25 @@ import androidx.test.runner.lifecycle.Stage
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import java.util.Locale
 
+/**
+ * The implementation of [Language]
+ */
 class LanguageImpl(
     private val logger: UiTestLogger,
     private val context: Context
 ) : Language {
+
+    private var cachedActivity: Activity? = null
+    private val lifecycleCallback: ActivityLifecycleCallback =
+        ActivityLifecycleCallback { activity, stage ->
+            if (stage == Stage.CREATED) {
+                cachedActivity = activity
+            }
+        }
+
+    init {
+        ActivityLifecycleMonitorRegistry.getInstance().addLifecycleCallback(lifecycleCallback)
+    }
 
     override fun switchInApp(locale: Locale) {
         logger.i("Switch the language in the Application to $locale: start")
@@ -23,13 +38,6 @@ class LanguageImpl(
             )
             return
         }
-        var cachedActivity: Activity? = null
-        val callback = ActivityLifecycleCallback { activity, stage ->
-            if (stage == Stage.CREATED) {
-                cachedActivity = activity
-            }
-        }
-        ActivityLifecycleMonitorRegistry.getInstance().addLifecycleCallback(callback)
 
         try {
             applyCurrentLocaleToContext(
@@ -41,7 +49,7 @@ class LanguageImpl(
             logger.e("Switch the language in the Application to $locale: failed with the error: $error")
             throw error
         } finally {
-            ActivityLifecycleMonitorRegistry.getInstance().removeLifecycleCallback(callback)
+            cachedActivity = null
         }
     }
 
