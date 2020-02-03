@@ -37,8 +37,8 @@ class WebComposeProviderImpl(
      * @param block the actions to compose.
      */
     override fun WebElementBuilder.KWebInteraction.compose(
-        timeoutMs: Long?,
         webElementBuilder: WebElementBuilder,
+        timeoutMs: Long?,
         block: ActionsPack<WebElementBuilder.KWebInteraction>.() -> Unit
     ) {
         val actions: List<() -> Unit> = ActionsPack(this).apply(block).build()

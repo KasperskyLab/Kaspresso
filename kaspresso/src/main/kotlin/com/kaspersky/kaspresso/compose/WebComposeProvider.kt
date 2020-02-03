@@ -24,8 +24,8 @@ interface WebComposeProvider {
      * @param block the actions to compose.
      */
     fun WebElementBuilder.KWebInteraction.compose(
-        timeoutMs: Long? = null,
         webElementBuilder: WebElementBuilder,
+        timeoutMs: Long? = null,
         block: ActionsPack<WebElementBuilder.KWebInteraction>.() -> Unit
     )
 }

@@ -18,8 +18,8 @@ import io.reactivex.exceptions.ExtCompositeException
 internal fun invokeComposed(
     actions: List<() -> Unit>,
     logger: UiTestLogger,
-    failureLoggingProvider: FailureLoggingProvider? = null,
-    flakySafetyProvider: FlakySafetyProvider? = null
+    failureLoggingProvider: FailureLoggingProvider,
+    flakySafetyProvider: FlakySafetyProvider
 ): Int {
 
     val composeAction: () -> Int = {
@@ -42,29 +42,9 @@ internal fun invokeComposed(
         successBranchIndex ?: throw ExtCompositeException(cachedErrors)
     }
 
-    return failureLoggingProvider.withLoggingOnFailureIfNotNull {
-        flakySafetyProvider.flakySafelyIfNotNull {
+    return failureLoggingProvider.withLoggingOnFailure {
+        flakySafetyProvider.flakySafely(
             composeAction
-        }
-    }.invoke()
+        )
+    }
 }
-
-/**
- * The function to call [FailureLoggingProvider.withLoggingOnFailure] with null-safety.
- *
- * @param action the action to invoke.
- *
- * @return the result of the [action] invocation.
- */
-internal fun <T> FailureLoggingProvider?.withLoggingOnFailureIfNotNull(action: () -> T): T =
-    if (this != null) withLoggingOnFailure(action) else action.invoke()
-
-/**
- * The function to call [FlakySafetyProvider.flakySafely] with null-safety.
- *
- * @param action the action to invoke.
- *
- * @return the result of the [action] invocation.
- */
-internal fun <T> FlakySafetyProvider?.flakySafelyIfNotNull(action: () -> T): T =
-    this?.flakySafely(action) ?: action.invoke()
