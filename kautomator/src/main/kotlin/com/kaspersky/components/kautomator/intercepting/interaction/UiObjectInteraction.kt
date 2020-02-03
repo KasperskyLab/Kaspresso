@@ -13,17 +13,23 @@ import com.kaspersky.components.kautomator.intercepting.operation.UiObjectAssert
 class UiObjectInteraction(
     val device: UiDevice,
     val selector: UiViewSelector,
-    // UiButton, UiTextView, UiEditText, etc.
-    val elementClassName: String
+    val description: String
 ) : UiInteraction<UiObjectAssertion, UiObjectAction> {
 
     var uiObject2: UiObject2? = null
         private set
 
-    fun tryToFindUiObject() {
+    /**
+     * Tries to find UiObject2 with given selector
+     * @return true if object was found, false otherwise
+     */
+    fun tryToFindUiObject(): Boolean {
         val uiObjects = device.findObjects(selector.bySelector)
-        if (uiObjects.isNotEmpty() && selector.index < uiObjects.size)
+        if (uiObjects.isNotEmpty() && selector.index < uiObjects.size) {
             uiObject2 = uiObjects[selector.index]
+            return true
+        }
+        return false
     }
 
     override fun check(assertion: UiObjectAssertion) {
@@ -32,5 +38,9 @@ class UiObjectInteraction(
 
     override fun perform(action: UiObjectAction) {
         action.execute(uiObject2 ?: throw UnfoundedUiObjectException(selector))
+    }
+
+    override fun toString(): String {
+        return "UiObjectInteraction(device=$device, selector=$selector, description='$description', uiObject2=$uiObject2)"
     }
 }

@@ -1,3 +1,4 @@
+@file:Suppress("unused")
 package com.kaspersky.components.kautomator.dsl.edit
 
 import com.kaspersky.components.kautomator.dsl.common.actions.UiBaseActions
@@ -17,7 +18,7 @@ interface UiEditableActions : UiBaseActions {
         view.perform(
             EditableUiActionType.TYPE_TEXT,
             "typeText(text=$text)"
-        ) { this.text = this.text + text }
+        ) { this.text = this.text ?: "" + text }
     }
 
     /**

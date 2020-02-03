@@ -1,7 +1,7 @@
 package com.kaspersky.kaspresso.interceptors.behavior
 
 /**
- * The interface for all interceptors that change the default interaction. Often it wraps the interaction calls.
+ * The interface for all interceptors that change the default interaction in Kakao=>Espresso. Often it wraps the interaction calls.
  */
 interface BehaviorInterceptor<Interaction> {
 

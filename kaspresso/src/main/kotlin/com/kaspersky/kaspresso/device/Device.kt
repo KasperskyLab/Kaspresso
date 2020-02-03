@@ -25,6 +25,10 @@ data class Device(
 
     /**
      * Holds the reference to the implementation of [Apps] interface.
+     *
+     * Required: Started AdbServer
+     *     1. Download a file "kaspresso/artifacts/desktop.jar"
+     *     2. Start AdbServer => input in cmd "java jar path_to_file/desktop.jar"
      */
     val apps: Apps,
 
@@ -35,26 +39,46 @@ data class Device(
 
     /**
      * Holds the reference to the implementation of [Files] interface.
+     *
+     * Required: Started AdbServer
+     *     1. Download a file "kaspresso/artifacts/desktop.jar"
+     *     2. Start AdbServer => input in cmd "java jar path_to_file/desktop.jar"
      */
     val files: Files,
 
     /**
      * Holds the reference to the implementation of [Network] interface.
+     *
+     * Required: Started AdbServer
+     *     1. Download a file "kaspresso/artifacts/desktop.jar"
+     *     2. Start AdbServer => input in cmd "java jar path_to_file/desktop.jar"
      */
     val network: Network,
 
     /**
      * Holds the reference to the implementation of [Phone] interface.
+     *
+     * Required: Started AdbServer
+     *     1. Download a file "kaspresso/artifacts/desktop.jar"
+     *     2. Start AdbServer => input in cmd "java jar path_to_file/desktop.jar"
      */
     val phone: Phone,
 
     /**
      * Holds the reference to the implementation of [Location] interface.
+     *
+     * Required: Started AdbServer
+     *     1. Download a file "kaspresso/artifacts/desktop.jar"
+     *     2. Start AdbServer => input in cmd "java jar path_to_file/desktop.jar"
      */
     val location: Location,
 
     /**
      * Holds the reference to the implementation of [Keyboard] interface.
+     *
+     * Required: Started AdbServer
+     *     1. Download a file "kaspresso/artifacts/desktop.jar"
+     *     2. Start AdbServer => input in cmd "java jar path_to_file/desktop.jar"
      */
     val keyboard: Keyboard,
 
@@ -80,6 +104,10 @@ data class Device(
 
     /**
      * Holds the reference to the implementation of [Exploit] interface.
+     *
+     * Required: Started AdbServer
+     *     1. Download a file "kaspresso/artifacts/desktop.jar"
+     *     2. Start AdbServer => input in cmd "java jar path_to_file/desktop.jar"
      */
     val exploit: Exploit,
 

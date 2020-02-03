@@ -20,17 +20,15 @@ import com.kaspersky.components.kautomator.intercepting.operation.UiOperationTyp
  * @see UiInterceptor
  */
 class UiObjectDelegate(
-    device: UiDevice,
-    selector: UiViewSelector,
-    elementClassName: String
+    val device: UiDevice,
+    val selector: UiViewSelector,
+    description: String
 ) : UiDelegate<UiObjectInteraction, UiObjectAssertion, UiObjectAction> {
 
-    override val interaction: UiObjectInteraction = UiObjectInteraction(device, selector, elementClassName)
+    override val interaction: UiObjectInteraction = UiObjectInteraction(device, selector, description)
     override var interceptor: UiInterceptor<UiObjectInteraction, UiObjectAssertion, UiObjectAction>? = null
 
-    fun loadView() {
-        interaction.tryToFindUiObject()
-    }
+    fun loadView(): Boolean = interaction.tryToFindUiObject()
 
     fun check(
         type: UiOperationType,

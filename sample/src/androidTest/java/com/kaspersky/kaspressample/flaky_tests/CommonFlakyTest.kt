@@ -9,7 +9,6 @@ import com.kaspersky.kaspressample.R
 import com.kaspersky.kaspressample.screen.CommonFlakyScreen
 import com.kaspersky.kaspressample.screen.MainScreen
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
-import java.util.concurrent.TimeUnit
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -34,30 +33,48 @@ class CommonFlakyTest : TestCase() {
         }.run {
             step("Open Scroll View Stub Screen") {
                 MainScreen {
-                    scrollViewStubButton {
+                    flakyButton {
                         click()
                     }
                 }
             }
 
-            step("Check ScrollView screen is visible") {
+            step("Check ScrollView screen is displayed") {
                 CommonFlakyScreen {
-                    scrollView.isVisible()
+                    scrollView {
+                        isDisplayed()
+                    }
+                }
+            }
+
+            step("Choose the Kakao mode") {
+                CommonFlakyScreen {
+                    kakaoMode {
+                        click()
+                    }
                 }
             }
 
             step("Check btn5's text") {
                 CommonFlakyScreen {
-                    flakySafely(timeoutMs = TimeUnit.SECONDS.toMillis(7)) {
-                        btn5.hasText(R.string.common_flaky_final_button)
+                    btn5 {
+                        // automate flaky safety handling is in action
+                        // the text is changing during 3 seconds
+                        // the default value of flaky safety timeout = 5 seconds
+                        hasText(R.string.common_flaky_final_button)
                     }
                 }
             }
 
             step("Check tv6's text") {
                 CommonFlakyScreen {
-                    flakySafely(timeoutMs = TimeUnit.SECONDS.toMillis(7)) {
-                        tv6.hasText(R.string.common_flaky_final_textview)
+                    tv6 {
+                        // here, the text will be changing longer(summary = 12 seconds) than
+                        //     the default value of flaky safety timeout(5 seconds)
+                        // that's why we use flakySafely method obviously
+                        flakySafely(timeoutMs = 10_000) {
+                            hasText(R.string.common_flaky_final_textview)
+                        }
                     }
                 }
             }

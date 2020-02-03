@@ -1,9 +1,16 @@
 package com.kaspersky.kaspresso.device.apps
 
 import android.net.Uri
+import com.kaspersky.kaspresso.annotations.AdbServerMust
 
 /**
  * The interface to work with installer, launcher and package manager.
+ *
+ * Required: Started AdbServer
+ *     1. Download a file "kaspresso/artifacts/desktop.jar"
+ *     2. Start AdbServer => input in cmd "java jar path_to_file/desktop.jar"
+ * Methods demanding to use AdbServer in the default implementation of this interface are marked.
+ *     But nobody can't deprecate you to write implementation that doesn't require AdbServer.
  */
 interface Apps {
 
@@ -21,6 +28,7 @@ interface Apps {
      *
      * @param apkPath a path to the apk to be installed. The apk is hosted on the test server.
      */
+    @AdbServerMust
     fun install(apkPath: String)
 
     /**
@@ -31,6 +39,7 @@ interface Apps {
      * @param packageName an android package name of the app to be checked.
      * @param apkPath a path to the apk to be installed. The apk is hosted on the test server.
      */
+    @AdbServerMust
     fun installIfNotExists(packageName: String, apkPath: String)
 
     /**
@@ -40,6 +49,7 @@ interface Apps {
      *
      * @param packageName an android package name of the app to be deleted.
      */
+    @AdbServerMust
     fun uninstall(packageName: String)
 
     /**
@@ -49,6 +59,7 @@ interface Apps {
      *
      * @param packageName an android package name of an app to be deleted.
      */
+    @AdbServerMust
     fun uninstallIfExists(packageName: String)
 
     /**

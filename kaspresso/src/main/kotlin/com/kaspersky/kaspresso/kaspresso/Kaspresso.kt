@@ -4,9 +4,12 @@ import android.app.Instrumentation
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.FailureHandler
 import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.uiautomator.Configurator
 import androidx.test.uiautomator.UiDevice
 import com.agoda.kakao.Kakao
 import com.kaspersky.components.kautomator.KautomatorConfigurator
+import com.kaspersky.components.kautomator.intercepting.interaction.UiDeviceInteraction
+import com.kaspersky.components.kautomator.intercepting.interaction.UiObjectInteraction
 import com.kaspersky.kaspresso.device.Device
 import com.kaspersky.kaspresso.device.accessibility.Accessibility
 import com.kaspersky.kaspresso.device.accessibility.AccessibilityImpl
@@ -39,6 +42,7 @@ import com.kaspersky.kaspresso.device.screenshots.ScreenshotsImpl
 import com.kaspersky.kaspresso.device.server.AdbServer
 import com.kaspersky.kaspresso.device.server.AdbServerImpl
 import com.kaspersky.kaspresso.failure.LoggingFailureHandler
+import com.kaspersky.kaspresso.idlewaiting.KautomatorWaitForIdleSettings
 import com.kaspersky.kaspresso.interceptors.behavior.DataBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.ViewBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.WebBehaviorInterceptor
@@ -53,16 +57,21 @@ import com.kaspersky.kaspresso.interceptors.behavior.impl.flakysafety.FlakySafeW
 import com.kaspersky.kaspresso.interceptors.behavior.impl.systemsafety.SystemDialogSafetyDataBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.impl.systemsafety.SystemDialogSafetyViewBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.impl.systemsafety.SystemDialogSafetyWebBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.behavior_uia.DeviceBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.behavior_uia.ObjectBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.behavior_uia.impl.FlakySafeDeviceBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.behavior_uia.impl.FlakySafeObjectBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.behavior_uia.impl.ObjectLoaderBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behaviorkautomator.DeviceBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behaviorkautomator.ObjectBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.autoscroll.AutoScrollObjectBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.failure.FailureLoggingDeviceBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.failure.FailureLoggingObjectBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.flakysafety.FlakySafeDeviceBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.flakysafety.FlakySafeObjectBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.loader.UiObjectLoaderBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.systemsafety.SystemDialogSafetyDeviceBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.systemsafety.SystemDialogSafetyObjectBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.tolibrary.kakao.impl.KakaoDataInterceptor
 import com.kaspersky.kaspresso.interceptors.tolibrary.kakao.impl.KakaoViewInterceptor
 import com.kaspersky.kaspresso.interceptors.tolibrary.kakao.impl.KakaoWebInterceptor
-import com.kaspersky.kaspresso.interceptors.tolibrary.kautomator.KautomatorDeviceInterceptor
-import com.kaspersky.kaspresso.interceptors.tolibrary.kautomator.KautomatorObjectInterceptor
+import com.kaspersky.kaspresso.interceptors.tolibrary.kautomator.impl.KautomatorDeviceInterceptor
+import com.kaspersky.kaspresso.interceptors.tolibrary.kautomator.impl.KautomatorObjectInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.kautomator.DeviceWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.kautomator.ObjectWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.kautomator.impl.logging.LoggingDeviceWatcherInterceptor
@@ -90,6 +99,7 @@ import com.kaspersky.kaspresso.params.ContinuouslyParams
 import com.kaspersky.kaspresso.params.FlakySafetyParams
 import com.kaspersky.kaspresso.params.Params
 import com.kaspersky.kaspresso.params.StepParams
+import com.kaspersky.kaspresso.params.WaitForIdleParams
 import com.kaspersky.kaspresso.report.impl.AllureReportWriter
 import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
 
@@ -262,6 +272,12 @@ data class Kaspresso(
         }
 
         /**
+         * Holds an implementation of [KautomatorWaitForIdleSettings] interface for inner Kaspresso usage.
+         * If it was not specified, the default implementation is used.
+         */
+        lateinit var kautomatorWaitForIdleSettings: KautomatorWaitForIdleSettings
+
+        /**
          * Holds an implementation of [UiTestLogger] interface for inner Kaspresso usage.
          * If it was not specified, the default implementation with default tag is used.
          */
@@ -275,6 +291,7 @@ data class Kaspresso(
 
         private val instrumentation: Instrumentation = InstrumentationRegistry.getInstrumentation()
         private val uiDevice = UiDevice.getInstance(instrumentation)
+        private val configurator = Configurator.getInstance()
 
         /**
          * Holds an implementation of [AdbServer] interface. If it was not specified, the default implementation is used.
@@ -352,31 +369,52 @@ data class Kaspresso(
         lateinit var logcat: Logcat
 
         /**
-         * Holds the [FlakySafetyParams] for [com.kaspersky.kaspresso.flakysafety.FlakySafetyProvider]'s usage.
+         * Holds the Kakao [FlakySafetyParams] for [com.kaspersky.kaspresso.flakysafety.FlakySafetyProvider]'s usage.
          * If it was not specified, the default implementation for Kakao is used.
          */
         lateinit var flakySafetyParams: FlakySafetyParams
 
-        // todo comment
+        /**
+         * Holds the Kautomator [FlakySafetyParams] for [com.kaspersky.kaspresso.flakysafety.FlakySafetyProvider]'s usage.
+         * If it was not specified, the default implementation for Kautomastor is used.
+         */
         lateinit var kautomatorFlakySafetyParams: FlakySafetyParams
 
         /**
-         * Holds the [ContinuouslyParams] for [com.kaspersky.kaspresso.flakysafety.ContinuouslyProvider]'s usage.
-         * If it was not specified, the default implementation is used.
+         * Holds the Kakao [ContinuouslyParams] for [com.kaspersky.kaspresso.flakysafety.ContinuouslyProvider]'s usage.
+         * If it was not specified, the default implementation for Kakao is used.
          */
         lateinit var continuouslyParams: ContinuouslyParams
 
         /**
-         * Holds the [AutoScrollParams] for [com.kaspersky.kaspresso.autoscroll.AutoScrollProvider]'s usage.
-         * If it was not specified, the default implementation is used.
+         * Holds the Kautomator [ContinuouslyParams] for [com.kaspersky.kaspresso.flakysafety.ContinuouslyProvider]'s usage.
+         * If it was not specified, the default implementation for Kautomator is used.
+         */
+        lateinit var kautomatorContinuouslyParams: ContinuouslyParams
+
+        /**
+         * Holds the Kakao [AutoScrollParams] for [com.kaspersky.kaspresso.autoscroll.AutoScrollProvider]'s usage.
+         * If it was not specified, the default implementation for Kakao is used.
          */
         lateinit var autoScrollParams: AutoScrollParams
+
+        /**
+         * Holds the Kautomator [AutoScrollParams] for [com.kaspersky.kaspresso.autoscroll.AutoScrollProvider]'s usage.
+         * If it was not specified, the default implementation for Kautomator is used.
+         */
+        lateinit var kautomatorAutoScrollParams: AutoScrollParams
 
         /**
          * Holds the [StepParams] for [com.kaspersky.kaspresso.testcases.core.step.StepsManager]'s usage.
          * If it was not specified, the default implementation is used.
          */
         lateinit var stepParams: StepParams
+
+        /**
+         * Holds the [WaitForIdleParams] for [com.kaspersky.kaspresso.idlewaiting.WaitForIdleProvider]'s usage.
+         * If it was not specified, the default implementation is used.
+         */
+        lateinit var waitForIdleParams: WaitForIdleParams
 
         /**
          * Holds the list of [ViewActionWatcherInterceptor]s.
@@ -410,11 +448,21 @@ data class Kaspresso(
          */
         lateinit var webAssertionWatcherInterceptors: MutableList<WebAssertionWatcherInterceptor>
 
-        // todo comments
-        lateinit var objectWatcherInterceptors: List<ObjectWatcherInterceptor>
+        /**
+         * Holds the list of [ObjectWatcherInterceptor]s.
+         * If it was not specified, Kaspresso will use no [ObjectWatcherInterceptor]s.
+         * These interceptors are called by [KautomatorObjectInterceptor]
+         * before actual [UiObjectInteraction.check] and [UiObjectInteraction.perform] call.
+         */
+        lateinit var objectWatcherInterceptors: MutableList<ObjectWatcherInterceptor>
 
-        // todo comments
-        lateinit var deviceWatcherInterceptors: List<DeviceWatcherInterceptor>
+        /**
+         * Holds the list of [DeviceWatcherInterceptor]s.
+         * If it was not specified, Kaspresso will use no [DeviceWatcherInterceptor]s.
+         * These interceptors are called by [KautomatorDeviceInterceptor]
+         * before actual [UiDeviceInteraction.check] and [UiDeviceInteraction.perform] call.
+         */
+        lateinit var deviceWatcherInterceptors: MutableList<DeviceWatcherInterceptor>
 
         /**
          * Holds the list of [ViewBehaviorInterceptor]s.
@@ -454,11 +502,29 @@ data class Kaspresso(
          */
         lateinit var webBehaviorInterceptors: MutableList<WebBehaviorInterceptor>
 
-        // todo comments
-        lateinit var objectBehaviorInterceptors: List<ObjectBehaviorInterceptor>
+        /**
+         * Holds the list of [ObjectBehaviorInterceptor]s.
+         * If it was not specified, Kaspresso will use no [ObjectBehaviorInterceptor]s.
+         * These interceptors are called by [KautomatorDeviceInterceptor]
+         * before actual [UiDeviceInteraction.check] and [UiDeviceInteraction.perform] call.
+         * Note that the order of [ObjectBehaviorInterceptor]s in this list is significant: the first item wil be
+         * at the lowest level of intercepting chain, and the last item will be at the highest level.
+         * For example: the first item actually wraps the [UiDeviceInteraction.check] or [UiDeviceInteraction.perform]
+         * call, the second item wraps the first item, and so on.
+         */
+        lateinit var objectBehaviorInterceptors: MutableList<ObjectBehaviorInterceptor>
 
-        // todo comments
-        lateinit var deviceBehaviorInterceptors: List<DeviceBehaviorInterceptor>
+        /**
+         * Holds the list of [DeviceBehaviorInterceptor]s.
+         * If it was not specified, Kaspresso will use no [DeviceBehaviorInterceptor]s.
+         * These interceptors are called by [KautomatorObjectInterceptor]
+         * before actual [UiObjectInteraction.check] and [UiObjectInteraction.perform] call.
+         * Note that the order of [DeviceBehaviorInterceptor]s in this list is significant: the first item wil be
+         * at the lowest level of intercepting chain, and the last item will be at the highest level.
+         * For example: the first item actually wraps the [UiObjectInteraction.check] or [UiObjectInteraction.perform]
+         * call, the second item wraps the first item, and so on.
+         */
+        lateinit var deviceBehaviorInterceptors: MutableList<DeviceBehaviorInterceptor>
 
         /**
          * Holds the list of [StepWatcherInterceptor]s.
@@ -510,6 +576,8 @@ data class Kaspresso(
 
         @Suppress("detekt.ComplexMethod")
         private fun postInitVariables() {
+            if (!::kautomatorWaitForIdleSettings.isInitialized) kautomatorWaitForIdleSettings = KautomatorWaitForIdleSettings.default()
+
             if (!::libLogger.isInitialized) libLogger = UiTestLoggerImpl(DEFAULT_LIB_LOGGER_TAG)
             if (!::testLogger.isInitialized) testLogger = UiTestLoggerImpl(DEFAULT_TEST_LOGGER_TAG)
 
@@ -531,9 +599,12 @@ data class Kaspresso(
 
             if (!::flakySafetyParams.isInitialized) flakySafetyParams = FlakySafetyParams.kakaoInstance()
             if (!::kautomatorFlakySafetyParams.isInitialized) kautomatorFlakySafetyParams = FlakySafetyParams.kautomatorInstance()
-            if (!::continuouslyParams.isInitialized) continuouslyParams = ContinuouslyParams()
-            if (!::autoScrollParams.isInitialized) autoScrollParams = AutoScrollParams()
+            if (!::continuouslyParams.isInitialized) continuouslyParams = ContinuouslyParams.kakaoInstance()
+            if (!::kautomatorContinuouslyParams.isInitialized) kautomatorContinuouslyParams = ContinuouslyParams.kautomatorInstance()
+            if (!::autoScrollParams.isInitialized) autoScrollParams = AutoScrollParams.kakaoInstance()
+            if (!::kautomatorAutoScrollParams.isInitialized) kautomatorAutoScrollParams = AutoScrollParams.kautomatorInstance()
             if (!::stepParams.isInitialized) stepParams = StepParams()
+            if (!::waitForIdleParams.isInitialized) waitForIdleParams = WaitForIdleParams()
         }
 
         @Suppress("detekt.ComplexMethod")
@@ -600,12 +671,17 @@ data class Kaspresso(
             )
 
             if (!::objectBehaviorInterceptors.isInitialized) objectBehaviorInterceptors = mutableListOf(
-                ObjectLoaderBehaviorInterceptor(libLogger),
-                FlakySafeObjectBehaviorInterceptor(kautomatorFlakySafetyParams, libLogger)
+                AutoScrollObjectBehaviorInterceptor(libLogger, kautomatorAutoScrollParams),
+                UiObjectLoaderBehaviorInterceptor(libLogger),
+                SystemDialogSafetyObjectBehaviorInterceptor(libLogger, uiDevice, adbServer),
+                FlakySafeObjectBehaviorInterceptor(kautomatorFlakySafetyParams, libLogger),
+                FailureLoggingObjectBehaviorInterceptor(libLogger)
             )
 
             if (!::deviceBehaviorInterceptors.isInitialized) deviceBehaviorInterceptors = mutableListOf(
-                FlakySafeDeviceBehaviorInterceptor(kautomatorFlakySafetyParams, libLogger)
+                SystemDialogSafetyDeviceBehaviorInterceptor(libLogger, uiDevice, adbServer),
+                FlakySafeDeviceBehaviorInterceptor(kautomatorFlakySafetyParams, libLogger),
+                FailureLoggingDeviceBehaviorInterceptor(libLogger)
             )
 
             if (!::stepWatcherInterceptors.isInitialized) stepWatcherInterceptors = mutableListOf(
@@ -644,8 +720,14 @@ data class Kaspresso(
         }
 
         private fun initKautomatorInterception(kaspresso: Kaspresso) {
-            val objectInterceptor = KautomatorObjectInterceptor(kaspresso)
-            val deviceInterceptor = KautomatorDeviceInterceptor(kaspresso)
+            val objectInterceptor =
+                KautomatorObjectInterceptor(
+                    kaspresso
+                )
+            val deviceInterceptor =
+                KautomatorDeviceInterceptor(
+                    kaspresso
+                )
             KautomatorConfigurator.intercept {
                 onUiInteraction {
                     onCheck(isOverride = true, interceptor = objectInterceptor::interceptCheck)
@@ -694,9 +776,13 @@ data class Kaspresso(
 
                 params = Params(
                     flakySafetyParams = flakySafetyParams,
+                    kautomatorFlakySafetyParams = kautomatorFlakySafetyParams,
                     continuouslyParams = continuouslyParams,
+                    kautomatorContinuouslyParams = kautomatorContinuouslyParams,
                     autoScrollParams = autoScrollParams,
-                    stepParams = stepParams
+                    kautomatorAutoScrollParams = kautomatorAutoScrollParams,
+                    stepParams = stepParams,
+                    waitForIdleParams = waitForIdleParams
                 ),
 
                 viewActionWatcherInterceptors = viewActionWatcherInterceptors,
@@ -717,6 +803,9 @@ data class Kaspresso(
                 stepWatcherInterceptors = stepWatcherInterceptors,
                 testRunWatcherInterceptors = testRunWatcherInterceptors
             )
+
+            configurator.waitForIdleTimeout = kautomatorWaitForIdleSettings.waitForIdleTimeout
+            configurator.waitForSelectorTimeout = kautomatorWaitForIdleSettings.waitForSelectorTimeout
 
             initInterception(kaspresso)
             initKautomatorInterception(kaspresso)

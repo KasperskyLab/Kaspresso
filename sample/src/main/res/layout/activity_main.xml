@@ -1,61 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/activity_main_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/main_screen_title"
+        android:textSize="18pt" />
+
+    <Button
+        android:id="@+id/activity_main_simple_sample_button"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/activity_main_title"
+        android:text="@string/main_screen_simple_fragment_button" />
+
+    <Button
+        android:id="@+id/activity_main_webview_sample_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/activity_main_simple_sample_button"
+        android:text="@string/main_screen_webview_button" />
+
+    <Button
+        android:id="@+id/activity_main_flaky_sample_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/activity_main_webview_sample_button"
+        android:text="@string/main_screen_scroll_view_sample_button" />
+
+    <Button
+        android:id="@+id/activity_main_continuously_sample_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/activity_main_flaky_sample_button"
+        android:text="@string/main_screen_continuously_sample_button" />
+
+    <Button
+        android:id="@+id/activity_main_upgrade_scenario_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/activity_main_continuously_sample_button"
+        android:text="@string/upgrade_title" />
+
+    <Button
+        android:id="@+id/activity_main_complex_compose_sample_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/activity_main_upgrade_scenario_button"
+        android:text="@string/main_screen_complex_compose_sample_button" />
+
+    <Button
+        android:id="@+id/activity_main_idlewaiting_sample_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/activity_main_complex_compose_sample_button"
+        android:text="@string/main_screen_idlewaiting_sample_button" />
+
+    <TextView
+        android:id="@+id/activity_main_description_textview"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="16dp"
-        tools:context=".MainActivity">
-
-    <TextView
-            android:id="@+id/activity_main_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:text="@string/main_screen_description"
-            android:textSize="18pt" />
-
-    <Button
-            android:id="@+id/activity_main_button_simple"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/activity_main_title"
-            android:text="@string/simple_fragment" />
-
-    <Button
-            android:id="@+id/activity_main_button_webview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/activity_main_button_simple"
-            android:text="@string/webview" />
-
-    <Button
-            android:id="@+id/activity_main_button_scroll_view_sample"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/activity_main_button_webview"
-            android:text="@string/scroll_view_sample" />
-
-    <Button
-            android:id="@+id/activity_main_button_continuously_sample"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/activity_main_button_scroll_view_sample"
-            android:text="@string/continuously_sample" />
-
-    <Button
-            android:id="@+id/activity_main_button_upgrade_scenario"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/activity_main_button_continuously_sample"
-            android:text="@string/upgrade_title" />
-
-    <TextView
-            android:id="@+id/activity_main_text_view_description"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/activity_main_button_upgrade_scenario"
-            android:text="@string/main_screen_description" />
+        android:layout_below="@+id/activity_main_idlewaiting_sample_button"
+        android:text="@string/main_screen_title" />
 
 </RelativeLayout>

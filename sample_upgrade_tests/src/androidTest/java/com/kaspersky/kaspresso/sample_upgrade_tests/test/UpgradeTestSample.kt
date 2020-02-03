@@ -3,17 +3,19 @@ package com.kaspersky.kaspresso.sample_upgrade_tests.test
 import android.Manifest
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.GrantPermissionRule
+import com.kaspersky.kaspresso.sample_upgrade_tests.common.UpdateManager.installAndLaunchMainApp
+import com.kaspersky.kaspresso.sample_upgrade_tests.common.UpdateManager.uninstallMainApp
+import com.kaspersky.kaspresso.sample_upgrade_tests.common.UpdateManager.updateAndLaunchMainApp
 
-import com.kaspersky.components.kautomator.KautomatorConfigurator
-import com.kaspersky.kaspresso.sample_upgrade_tests.common.UpgradeTestCase
 import com.kaspersky.kaspresso.sample_upgrade_tests.screen.MainScreen
 import com.kaspersky.kaspresso.sample_upgrade_tests.screen.UpgradeScreen
+import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class UpgradeTestSample : UpgradeTestCase() {
+class UpgradeTestSample : TestCase() {
 
     companion object {
         private const val VERSION_TEXT_BEFORE_UPDATE = "v.1"
@@ -29,20 +31,7 @@ class UpgradeTestSample : UpgradeTestCase() {
 
     @Test
     fun upgradeTest() {
-        before {
-            KautomatorConfigurator {
-                intercept {
-                    onUiInteraction {
-                        onCheck { uiInteraction, uiAssert ->
-                            testLogger.i("UIA", "type=${uiAssert.type}, description=${uiAssert.description}")
-                        }
-                        onPerform { uiInteraction, uiAction ->
-                            testLogger.i("UIA", "type=${uiAction.type}, description=${uiAction.description}")
-                        }
-                    }
-                }
-            }
-        }.after {
+        before { }.after {
             uninstallMainApp()
         }.run {
 

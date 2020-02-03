@@ -1,16 +1,20 @@
 <resources>
     <string name="app_name">Kaspresso Пример</string>
-    <string name="simple_fragment">Далее</string>
-    <string name="webview">ВебОкно</string>
-    <string name="home_fragment_title">Простой фрагмент</string>
-    <string name="text_button_1">Кнопка 1</string>
-    <string name="text_button_2">Кнопка 2</string>
-    <string name="text_edit_text">Какой-то текст</string>
-    <string name="add_fragment_error">Уже добавлено</string>
-    <string name="main_screen_description">Главный экран</string>
-    <string name="simple_screen">Simple screen</string>
-    <string name="scroll_view_sample">Scroll View Stub</string>
-    <string name="continuously_sample">Coninuously пример</string>
+
+    <!-- Main Activity -->
+    <string name="main_screen_simple_fragment_button">Простой пример</string>
+    <string name="main_screen_webview_button">ВебОкно</string>
+    <string name="main_screen_title">Главный экран</string>
+    <string name="main_screen_scroll_view_sample_button">Flaky пример</string>
+    <string name="main_screen_continuously_sample_button">Coninuously пример</string>
+    <string name="main_screen_complex_compose_sample_button">Complex compose пример</string>
+    <string name="main_screen_idlewaiting_sample_button">Waiting for idle пример</string>
+
+    <!-- Simple fragment screen -->
+    <string name="simple_fragment_title">Простой фрагмент</string>
+    <string name="simple_fragment_text_button_1">Кнопка 1</string>
+    <string name="simple_fragment_text_button_2">Кнопка 2</string>
+    <string name="simple_fragment_text_edittext">Какой-то текст</string>
 
     <!-- Screenshooter sample test -->
     <string name="increment">Прибавить</string>
