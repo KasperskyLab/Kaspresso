@@ -51,7 +51,7 @@ class ComposeProviderImpl(
             logger = kaspresso.libLogger,
             failureLoggingProvider = failureLoggingProvider,
             flakySafetyProvider = FlakySafetyProviderImpl(
-                determineFlakySafetyParams(composeElements),
+                determineFlakySafetyParams(composeElements, timeoutMs),
                 kaspresso.libLogger
             )
         )

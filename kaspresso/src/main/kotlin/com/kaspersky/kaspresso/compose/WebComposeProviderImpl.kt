@@ -27,7 +27,7 @@ class WebComposeProviderImpl(
      */
     override fun WebElementBuilder.compose(timeoutMs: Long?, block: ActionsOnWebElementsPack.() -> Unit) {
         val actions: List<() -> Unit> = ActionsOnWebElementsPack(this).apply(block).build()
-        invokeWebComposed(actions = actions)
+        invokeWebComposed(timeoutMs, actions)
     }
 
     /**
@@ -42,7 +42,7 @@ class WebComposeProviderImpl(
         block: ActionsPack<WebElementBuilder.KWebInteraction>.() -> Unit
     ) {
         val actions: List<() -> Unit> = ActionsPack(this).apply(block).build()
-        invokeWebComposed(actions = actions)
+        invokeWebComposed(timeoutMs, actions)
     }
 
     private fun invokeWebComposed(timeoutMs: Long? = null, actions: List<() -> Unit>) {
