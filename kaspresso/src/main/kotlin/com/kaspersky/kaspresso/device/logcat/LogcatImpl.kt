@@ -3,7 +3,10 @@ package com.kaspersky.kaspresso.device.logcat
 import java.io.BufferedReader
 import java.io.InputStreamReader
 
-class LogcatImpl(override val defaultBufferSize: String = "64K") : Logcat {
+class LogcatImpl(
+    override val defaultBufferSize: String = "64K",
+    override val printExecutedCommand: Boolean = false
+) : Logcat {
 
     /**
      * Set new logcat buffer size
@@ -41,7 +44,10 @@ class LogcatImpl(override val defaultBufferSize: String = "64K") : Logcat {
      * @param includePattern logcat will contains ONLY rows that match the pattern
      * @param includeIgnoreCase boolean is include pattern must ignore string case
      * @param buffer one of available logcat buffers
-     * @param rowLimit limiter of logcat output, if -1 return all rows
+     * @param rowLimit limiter of logcat output, starts FROM BEGINNING of logcat dump
+     * with extra row of buffer beginning, if null return all rows
+     *
+     * @return [List<String>] with logcat rows
      */
     override fun readLogcatRows(
         excludePattern: String?,
@@ -52,20 +58,69 @@ class LogcatImpl(override val defaultBufferSize: String = "64K") : Logcat {
         rowLimit: Int?
     ): List<String> {
         val logcatOutput = mutableListOf<String>()
-        val command = prepareCommand(excludePattern, excludeIgnoreCase, includePattern, includeIgnoreCase, buffer, rowLimit)
+        readLogcatRows(
+            excludePattern,
+            excludeIgnoreCase,
+            includePattern,
+            includeIgnoreCase,
+            buffer,
+            rowLimit
+        ) { logcatRow ->
+            logcatOutput.add(logcatRow)
+            false
+        }
+        return logcatOutput
+    }
+
+    /**
+     * Get logcat dump and analyze each row.
+     * Logcat reading stops if analyzerBlock returns false on some row
+     *
+     * @param excludePattern logcat will EXCLUDE rows that match the pattern
+     * @param excludeIgnoreCase boolean is exclude pattern must ignore string case
+     * @param includePattern logcat will contains ONLY rows that match the pattern
+     * @param includeIgnoreCase boolean is include pattern must ignore string case
+     * @param buffer one of available logcat buffers
+     * @param rowLimit limiter of logcat output, starts FROM BEGINNING of logcat dump
+     * with extra row of buffer beginning, if null return all rows
+     * @param analyzerBlock lambda with String input and Boolean output. Invokes on
+     * every readed logcat row. Stop reading logcat if lambda returns false. If you needed
+     * all rows of log always return false
+     */
+    override fun readLogcatRows(
+        excludePattern: String?,
+        excludeIgnoreCase: Boolean,
+        includePattern: String?,
+        includeIgnoreCase: Boolean,
+        buffer: Logcat.Buffer,
+        rowLimit: Int?,
+        analyzerBlock: (logcatRow: String) -> Boolean
+    ): Boolean {
+        val command = prepareCommand(
+            excludePattern,
+            excludeIgnoreCase,
+            includePattern,
+            includeIgnoreCase,
+            buffer,
+            rowLimit
+        )
         val process = executeCommand(command)
         val logcatStream = InputStreamReader(process.inputStream)
         val bufferedReader = BufferedReader(logcatStream)
         var logcatReadedLine = bufferedReader.readLine()
-        while (logcatReadedLine != null) {
-            logcatOutput += logcatReadedLine
-            logcatReadedLine = bufferedReader.readLine()
+        try {
+            while (logcatReadedLine != null) {
+                if (analyzerBlock.invoke(logcatReadedLine)) {
+                    return true
+                }
+                logcatReadedLine = bufferedReader.readLine()
+            }
+        } finally {
+            bufferedReader.close()
+            logcatStream.close()
+            process.destroy()
         }
-        bufferedReader.close()
-        logcatStream.close()
-        process.destroy()
-
-        return logcatOutput
+        return false
     }
 
     /**
@@ -85,10 +140,16 @@ class LogcatImpl(override val defaultBufferSize: String = "64K") : Logcat {
             command += "-m $rowLimit "
         }
         if (excludePattern != null) {
-            command += """| grep -${ if (excludeIgnoreCase) "i" else "" }Ev '${excludePattern.replace("\"", "\\")}' """
+            command += """| grep -${if (excludeIgnoreCase) "i" else ""}Ev '${excludePattern.replace(
+                "\"",
+                "\\\""
+            )}' """
         }
         if (includePattern != null) {
-            command += """| grep -${ if (includeIgnoreCase) "i" else "" }E '${includePattern.replace("\"", "\\")}' """
+            command += """| grep -${if (includeIgnoreCase) "i" else ""}E '${includePattern.replace(
+                "\"",
+                "\\\""
+            )}' """
         }
         return command
     }
@@ -98,7 +159,7 @@ class LogcatImpl(override val defaultBufferSize: String = "64K") : Logcat {
      */
     private fun executeCommand(command: String): Process {
         val process = Runtime.getRuntime().exec(arrayOf("sh", "-c", command))
-        println("Executed command: $command")
+        if (printExecutedCommand) println("Executed command: $command")
         return process
     }
 }
