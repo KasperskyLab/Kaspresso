@@ -22,4 +22,5 @@ ext.versions = [
         gson           : "2.8.5",
         adbserver      : "1.0.0",
         truth          : "1.0",
+        material       : "1.0.0",
 ]
