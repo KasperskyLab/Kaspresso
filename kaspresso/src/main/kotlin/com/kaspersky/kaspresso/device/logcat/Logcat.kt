@@ -6,7 +6,7 @@ package com.kaspersky.kaspresso.device.logcat
 interface Logcat {
 
     val defaultBufferSize: String
-    val printExecutedCommand: Boolean
+    val isNeededToPrintExecutedCommand: Boolean
 
     /**
      * Set new logcat buffer size
@@ -39,9 +39,9 @@ interface Logcat {
      * Get logcat dump as list of strings
      *
      * @param excludePattern logcat will EXCLUDE rows that match the pattern
-     * @param excludeIgnoreCase boolean is exclude pattern must ignore string case
+     * @param excludePatternIgnoreCase boolean is exclude pattern must ignore string case
      * @param includePattern logcat will contains ONLY rows that match the pattern
-     * @param includeIgnoreCase boolean is include pattern must ignore string case
+     * @param includePatternIgnoreCase boolean is include pattern must ignore string case
      * @param buffer one of available logcat buffers
      * @param rowLimit limiter of logcat output, starts FROM BEGINNING of logcat dump
      * with extra row of buffer beginning, if null return all rows
@@ -50,9 +50,9 @@ interface Logcat {
      */
     fun readLogcatRows(
         excludePattern: String? = null,
-        excludeIgnoreCase: Boolean = false,
+        excludePatternIgnoreCase: Boolean = false,
         includePattern: String? = null,
-        includeIgnoreCase: Boolean = false,
+        includePatternIgnoreCase: Boolean = false,
         buffer: Buffer = Buffer.DEFAULT,
         rowLimit: Int? = null
     ): List<String>
@@ -62,9 +62,9 @@ interface Logcat {
      * Logcat reading stops if analyzerBlock returns false on some row
      *
      * @param excludePattern logcat will EXCLUDE rows that match the pattern
-     * @param excludeIgnoreCase boolean is exclude pattern must ignore string case
+     * @param excludePatternIgnoreCase boolean is exclude pattern must ignore string case
      * @param includePattern logcat will contains ONLY rows that match the pattern
-     * @param includeIgnoreCase boolean is include pattern must ignore string case
+     * @param includePatternIgnoreCase boolean is include pattern must ignore string case
      * @param buffer one of available logcat buffers
      * @param rowLimit limiter of logcat output, starts FROM BEGINNING of logcat dump
      * with extra row of buffer beginning, if null return all rows
@@ -74,9 +74,9 @@ interface Logcat {
      */
     fun readLogcatRows(
         excludePattern: String? = null,
-        excludeIgnoreCase: Boolean = false,
+        excludePatternIgnoreCase: Boolean = false,
         includePattern: String? = null,
-        includeIgnoreCase: Boolean = false,
+        includePatternIgnoreCase: Boolean = false,
         buffer: Buffer = Buffer.DEFAULT,
         rowLimit: Int? = null,
         analyzerBlock: (logcatRow: String) -> Boolean

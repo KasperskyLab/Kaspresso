@@ -5,7 +5,7 @@ import java.io.InputStreamReader
 
 class LogcatImpl(
     override val defaultBufferSize: String = "64K",
-    override val printExecutedCommand: Boolean = false
+    override val isNeededToPrintExecutedCommand: Boolean = false
 ) : Logcat {
 
     /**
@@ -40,9 +40,9 @@ class LogcatImpl(
      * Get logcat dump as list of strings
      *
      * @param excludePattern logcat will EXCLUDE rows that match the pattern
-     * @param excludeIgnoreCase boolean is exclude pattern must ignore string case
+     * @param excludePatternIsIgnoreCase boolean is exclude pattern must ignore string case
      * @param includePattern logcat will contains ONLY rows that match the pattern
-     * @param includeIgnoreCase boolean is include pattern must ignore string case
+     * @param includePatternIsIgnoreCase boolean is include pattern must ignore string case
      * @param buffer one of available logcat buffers
      * @param rowLimit limiter of logcat output, starts FROM BEGINNING of logcat dump
      * with extra row of buffer beginning, if null return all rows
@@ -51,18 +51,18 @@ class LogcatImpl(
      */
     override fun readLogcatRows(
         excludePattern: String?,
-        excludeIgnoreCase: Boolean,
+        excludePatternIsIgnoreCase: Boolean,
         includePattern: String?,
-        includeIgnoreCase: Boolean,
+        includePatternIsIgnoreCase: Boolean,
         buffer: Logcat.Buffer,
         rowLimit: Int?
     ): List<String> {
         val logcatOutput = mutableListOf<String>()
         readLogcatRows(
             excludePattern,
-            excludeIgnoreCase,
+            excludePatternIsIgnoreCase,
             includePattern,
-            includeIgnoreCase,
+            includePatternIsIgnoreCase,
             buffer,
             rowLimit
         ) { logcatRow ->
@@ -77,9 +77,9 @@ class LogcatImpl(
      * Logcat reading stops if analyzerBlock returns false on some row
      *
      * @param excludePattern logcat will EXCLUDE rows that match the pattern
-     * @param excludeIgnoreCase boolean is exclude pattern must ignore string case
+     * @param excludePatternIgnoreCase boolean is exclude pattern must ignore string case
      * @param includePattern logcat will contains ONLY rows that match the pattern
-     * @param includeIgnoreCase boolean is include pattern must ignore string case
+     * @param includePatternIgnoreCase boolean is include pattern must ignore string case
      * @param buffer one of available logcat buffers
      * @param rowLimit limiter of logcat output, starts FROM BEGINNING of logcat dump
      * with extra row of buffer beginning, if null return all rows
@@ -89,18 +89,18 @@ class LogcatImpl(
      */
     override fun readLogcatRows(
         excludePattern: String?,
-        excludeIgnoreCase: Boolean,
+        excludePatternIgnoreCase: Boolean,
         includePattern: String?,
-        includeIgnoreCase: Boolean,
+        includePatternIgnoreCase: Boolean,
         buffer: Logcat.Buffer,
         rowLimit: Int?,
         analyzerBlock: (logcatRow: String) -> Boolean
     ): Boolean {
         val command = prepareCommand(
             excludePattern,
-            excludeIgnoreCase,
+            excludePatternIgnoreCase,
             includePattern,
-            includeIgnoreCase,
+            includePatternIgnoreCase,
             buffer,
             rowLimit
         )
@@ -159,7 +159,7 @@ class LogcatImpl(
      */
     private fun executeCommand(command: String): Process {
         val process = Runtime.getRuntime().exec(arrayOf("sh", "-c", command))
-        if (printExecutedCommand) println("Executed command: $command")
+        if (isNeededToPrintExecutedCommand) println("Executed command: $command")
         return process
     }
 }
