@@ -22,38 +22,62 @@ class WebComposeProviderImpl(
     private val flakySafetyProvider: FlakySafetyProvider =
         FlakySafetyProviderGlobalImpl(kaspresso)
 
-    /**
-     * Composes a [block] of actions with their web views to invoke on in one composite action that succeeds if at least
-     * one of it's parts succeeds.
-     *
-     * @param block the actions to compose.
-     */
-    override fun WebElementBuilder.compose(block: ActionsOnWebElementsPack.() -> Unit) {
+    override fun WebElementBuilder.compose(
+        timeoutMs: Long?,
+        intervalMs: Long?,
+        allowedExceptions: Set<Class<out Throwable>>?,
+        block: ActionsOnWebElementsPack.() -> Unit)
+    {
         val checks: List<() -> Unit> = ActionsOnWebElementsPack(this).apply(block).build()
-        invokeWebComposed(checks)
+        invokeWebComposeByProviders(timeoutMs, intervalMs, allowedExceptions, checks)
     }
 
-    /**
-     * Composes a [block] of actions on the given web view in one composite action that succeeds if at least
-     * one of it's parts succeeds.
-     *
-     * @param block the actions to compose.
-     */
+    override fun WebElementBuilder.unsafeCompose(block: ActionsOnWebElementsPack.() -> Unit) {
+        invokeWebComposeByProvidersUnsafely(
+            checks = ActionsOnWebElementsPack(this).apply(block).build()
+        )
+    }
+
     override fun WebElementBuilder.KWebInteraction.compose(
         webElementBuilder: WebElementBuilder,
+        timeoutMs: Long?,
+        intervalMs: Long?,
+        allowedExceptions: Set<Class<out Throwable>>?,
         block: ActionsPack<WebElementBuilder.KWebInteraction>.() -> Unit
     ) {
         val checks: List<() -> Unit> = ActionsPack(this).apply(block).build()
-        invokeWebComposed(checks)
+        invokeWebComposeByProviders(timeoutMs, intervalMs, allowedExceptions, checks)
     }
 
-    private fun invokeWebComposed(checks: List<() -> Unit>) {
+    override fun WebElementBuilder.KWebInteraction.unsafeCompose(
+        webElementBuilder: WebElementBuilder,
+        block: ActionsPack<WebElementBuilder.KWebInteraction>.() -> Unit
+    ) {
+        invokeWebComposeByProvidersUnsafely(
+            checks = ActionsPack(this).apply(block).build()
+        )
+    }
+
+    private fun invokeWebComposeByProviders(
+        timeoutMs: Long?,
+        intervalMs: Long?,
+        allowedExceptions: Set<Class<out Throwable>>?,
+        checks: List<() -> Unit>
+    ) {
         val unitedComposedAction = getUnitedComposedAction(checks, kaspresso.libLogger)
 
         failureLoggingProvider.withLoggingOnFailure {
             flakySafetyProvider.flakySafely(
-                unitedComposedAction
+                timeoutMs = timeoutMs,
+                intervalMs = intervalMs,
+                allowedExceptions = allowedExceptions,
+                action = unitedComposedAction
             )
         }
+    }
+
+    private fun invokeWebComposeByProvidersUnsafely(checks: List<() -> Unit>) {
+        val unitedComposedAction = getUnitedComposedAction(checks, kaspresso.libLogger)
+        unitedComposedAction.invoke()
     }
 }
