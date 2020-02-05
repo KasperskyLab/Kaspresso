@@ -30,8 +30,6 @@
     <string name="counter_value">Current value: %d</string>
 
     <!-- Flakysafety sample test -->
-    <string name="common_flaky_kautomator_mode" translatable="false">Kautomator mode on</string>
-    <string name="common_flaky_kakao_mode" translatable="false">Kakao mode on</string>
     <string name="common_flaky_final_textview" translatable="false">TextView</string>
     <string name="common_flaky_final_button" translatable="false">Button</string>
     <string name="common_flaky_start_1" translatable="false">1</string>

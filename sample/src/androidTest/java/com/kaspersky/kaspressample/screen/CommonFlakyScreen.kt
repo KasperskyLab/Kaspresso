@@ -13,9 +13,6 @@ object CommonFlakyScreen : KScreen<CommonFlakyScreen>() {
 
     val scrollView = KScrollView { withId(R.id.scroll_view) }
 
-    val kautomatorMode = KButton { withId(R.id.kautomator_mode) }
-    val kakaoMode = KButton { withId(R.id.kakao_mode) }
-
     val btn1 = KButton { withId(R.id.scroll_view_btn1) }
     val btn3 = KButton { withId(R.id.scroll_view_btn3) }
     val btn5 = KButton { withId(R.id.scroll_view_btn5) }

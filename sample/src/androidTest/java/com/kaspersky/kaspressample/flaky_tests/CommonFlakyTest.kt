@@ -47,20 +47,12 @@ class CommonFlakyTest : TestCase() {
                 }
             }
 
-            step("Choose the Kakao mode") {
-                CommonFlakyScreen {
-                    kakaoMode {
-                        click()
-                    }
-                }
-            }
-
             step("Check btn5's text") {
                 CommonFlakyScreen {
                     btn5 {
                         // automate flaky safety handling is in action
                         // the text is changing during 3 seconds
-                        // the default value of flaky safety timeout = 5 seconds
+                        // the default value of flaky safety timeout = 10 seconds
                         hasText(R.string.common_flaky_final_button)
                     }
                 }
@@ -69,10 +61,10 @@ class CommonFlakyTest : TestCase() {
             step("Check tv6's text") {
                 CommonFlakyScreen {
                     tv6 {
-                        // here, the text will be changing longer(summary = 12 seconds) than
-                        //     the default value of flaky safety timeout(5 seconds)
+                        // here, the text will be changing longer(summary = 15 seconds) than
+                        //     the default value of flaky safety timeout(10 seconds)
                         // that's why we use flakySafely method obviously
-                        flakySafely(timeoutMs = 10_000) {
+                        flakySafely(timeoutMs = 16_000) {
                             hasText(R.string.common_flaky_final_textview)
                         }
                     }
