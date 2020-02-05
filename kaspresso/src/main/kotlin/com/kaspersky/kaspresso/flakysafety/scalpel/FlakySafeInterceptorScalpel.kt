@@ -14,14 +14,28 @@ import com.kaspersky.kaspresso.interceptors.tolibrary.LibraryInterceptorsInjecto
 import com.kaspersky.kaspresso.interceptors.tolibrary.LibraryInterceptorsInjector.injectKaspressoInKakao
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 
-internal object FlakySafeInterceptorScalpel {
+internal class FlakySafeInterceptorScalpel(
+    private val kaspresso: Kaspresso
+) {
 
-    fun scalpFlakySafeInterceptorFromLibs(kaspresso: Kaspresso) {
-        scalpKakaoInterceptors(kaspresso)
-        scalpKautomatorInterceptors(kaspresso)
+    private var scalpExistsInKaspressoByDefault: Boolean? = null
+
+    fun scalpFromLibs() {
+        if (scalpExistsInKaspressoByDefault == null) {
+            scalpExistsInKaspressoByDefault = determineScalpExistingInKaspresso()
+        }
+        scalpKakaoInterceptors()
+        scalpKautomatorInterceptors()
     }
 
-    private fun scalpKakaoInterceptors(kaspresso: Kaspresso) {
+    private fun determineScalpExistingInKaspresso() =
+        kaspresso.viewBehaviorInterceptors.filterIsInstance<FlakySafeViewBehaviorInterceptor>().isNotEmpty() ||
+                kaspresso.dataBehaviorInterceptors.filterIsInstance<FlakySafeDataBehaviorInterceptor>().isNotEmpty() ||
+                kaspresso.webBehaviorInterceptors.filterIsInstance<FlakySafeWebBehaviorInterceptor>().isNotEmpty() ||
+                kaspresso.objectBehaviorInterceptors.filterIsInstance<FlakySafeObjectBehaviorInterceptor>().isNotEmpty() ||
+                kaspresso.deviceBehaviorInterceptors.filterIsInstance<FlakySafeDeviceBehaviorInterceptor>().isNotEmpty()
+
+    private fun scalpKakaoInterceptors() {
         val scalpedViewBehaviorInterceptors: List<ViewBehaviorInterceptor> =
             kaspresso.viewBehaviorInterceptors.filter {
                 it !is FlakySafeViewBehaviorInterceptor
@@ -46,7 +60,7 @@ internal object FlakySafeInterceptorScalpel {
         )
     }
 
-    private fun scalpKautomatorInterceptors(kaspresso: Kaspresso) {
+    private fun scalpKautomatorInterceptors() {
         val scalpedObjectBehaviorInterceptors: List<ObjectBehaviorInterceptor> =
             kaspresso.objectBehaviorInterceptors.filter {
                 it !is FlakySafeObjectBehaviorInterceptor
@@ -64,7 +78,11 @@ internal object FlakySafeInterceptorScalpel {
         )
     }
 
-    fun restoreFlakySafeInterceptorToLibs(kaspresso: Kaspresso) {
+    fun restoreScalpToLibs() {
+        if (scalpExistsInKaspressoByDefault == false) {
+            scalpExistsInKaspressoByDefault = null
+            return
+        }
         injectKaspressoInKakao(
             kaspresso.viewBehaviorInterceptors,
             kaspresso.dataBehaviorInterceptors,
@@ -81,5 +99,6 @@ internal object FlakySafeInterceptorScalpel {
             kaspresso.objectWatcherInterceptors,
             kaspresso.deviceWatcherInterceptors
         )
+        scalpExistsInKaspressoByDefault = null
     }
 }

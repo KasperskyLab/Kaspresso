@@ -57,12 +57,11 @@ class ContinuouslyProviderImpl(
     }
 
     private fun getParams(timeoutMs: Long? = null, intervalMs: Long? = null): ContinuouslyParams {
-        val params = kaspresso.params.continuouslyParams.merge(
-            kaspresso.params.kautomatorContinuouslyParams
+        val defaultParams = kaspresso.params.continuouslyParams
+        return ContinuouslyParams.custom(
+            timeoutMs = timeoutMs ?: defaultParams.timeoutMs,
+            intervalMs = intervalMs ?: defaultParams.intervalMs
         )
-        params.timeoutMs = timeoutMs ?: params.timeoutMs
-        params.intervalMs = intervalMs ?: params.intervalMs
-        return params
     }
 
     /**

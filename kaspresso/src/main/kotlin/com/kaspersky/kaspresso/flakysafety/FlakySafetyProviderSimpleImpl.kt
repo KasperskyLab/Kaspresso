@@ -7,7 +7,7 @@ import com.kaspersky.kaspresso.params.FlakySafetyParams
 /**
  * The implementation of the [FlakySafetyProvider] interface.
  */
-class FlakySafetyProviderImpl(
+class FlakySafetyProviderSimpleImpl(
     private val params: FlakySafetyParams,
     logger: UiTestLogger
 ) : FlakySafetyProvider {
@@ -49,7 +49,7 @@ class FlakySafetyProviderImpl(
         failureMessage: String?,
         action: () -> T
     ): T = flakySafetyAlgorithm.invokeFlakySafely(
-        params = FlakySafetyParams.customInstance(
+        params = FlakySafetyParams.custom(
             timeoutMs ?: params.timeoutMs,
             intervalMs ?: params.intervalMs,
             allowedExceptions ?: params.allowedExceptions

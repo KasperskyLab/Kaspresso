@@ -1,26 +1,26 @@
 package com.kaspersky.kaspresso.flakysafety
 
 import com.kaspersky.kaspresso.flakysafety.algorithm.FlakySafetyAlgorithm
-import com.kaspersky.kaspresso.flakysafety.scalpel.FlakySafeInterceptorScalpel.restoreFlakySafeInterceptorToLibs
-import com.kaspersky.kaspresso.flakysafety.scalpel.FlakySafeInterceptorScalpel.scalpFlakySafeInterceptorFromLibs
+import com.kaspersky.kaspresso.flakysafety.scalpel.FlakySafeInterceptorScalpel
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.params.FlakySafetyParams
 
-class FlakySafetyProviderComposeImpl(
+class FlakySafetyProviderGlobalImpl(
     private val kaspresso: Kaspresso
 ) : FlakySafetyProvider {
 
     private val flakySafetyAlgorithm = FlakySafetyAlgorithm(kaspresso.libLogger)
+    private val flakySafeInterceptorScalpel = FlakySafeInterceptorScalpel(kaspresso)
 
     override fun <T> flakySafely(action: () -> T): T {
-        scalpFlakySafeInterceptorFromLibs(kaspresso)
+        flakySafeInterceptorScalpel.scalpFromLibs()
 
         val result = flakySafetyAlgorithm.invokeFlakySafely(
             params = getParams(),
             action = action
         )
 
-        restoreFlakySafeInterceptorToLibs(kaspresso)
+        flakySafeInterceptorScalpel.restoreScalpToLibs()
 
         return result
     }
@@ -32,7 +32,7 @@ class FlakySafetyProviderComposeImpl(
         failureMessage: String?,
         action: () -> T
     ): T {
-        scalpFlakySafeInterceptorFromLibs(kaspresso)
+        flakySafeInterceptorScalpel.scalpFromLibs()
 
         val result = flakySafetyAlgorithm.invokeFlakySafely(
             params = getParams(timeoutMs, intervalMs, allowedExceptions),
@@ -40,7 +40,7 @@ class FlakySafetyProviderComposeImpl(
             action = action
         )
 
-        restoreFlakySafeInterceptorToLibs(kaspresso)
+        flakySafeInterceptorScalpel.restoreScalpToLibs()
 
         return result
     }
@@ -50,10 +50,8 @@ class FlakySafetyProviderComposeImpl(
         intervalMs: Long? = null,
         allowedExceptions: Set<Class<out Throwable>>? = null
     ): FlakySafetyParams {
-        val defaultParams = kaspresso.params.flakySafetyParams.merge(
-            kaspresso.params.kautomatorFlakySafetyParams
-        )
-        return FlakySafetyParams.customInstance(
+        val defaultParams = kaspresso.params.flakySafetyParams
+        return FlakySafetyParams.custom(
             timeoutMs ?: defaultParams.timeoutMs,
             intervalMs ?: defaultParams.intervalMs,
             allowedExceptions ?: defaultParams.allowedExceptions

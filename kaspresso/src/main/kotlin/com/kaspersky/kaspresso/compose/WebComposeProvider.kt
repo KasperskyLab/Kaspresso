@@ -15,7 +15,7 @@ interface WebComposeProvider {
      *
      * @param block the actions to compose.
      */
-    fun WebElementBuilder.compose(timeoutMs: Long? = null, block: ActionsOnWebElementsPack.() -> Unit)
+    fun WebElementBuilder.compose(block: ActionsOnWebElementsPack.() -> Unit)
 
     /**
      * Composes a [block] of actions on the given web view in one composite action that succeeds if at least
@@ -25,7 +25,6 @@ interface WebComposeProvider {
      */
     fun WebElementBuilder.KWebInteraction.compose(
         webElementBuilder: WebElementBuilder,
-        timeoutMs: Long? = null,
         block: ActionsPack<WebElementBuilder.KWebInteraction>.() -> Unit
     )
 }

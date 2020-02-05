@@ -9,7 +9,7 @@ import com.kaspersky.kaspresso.device.server.AdbServer
 import com.kaspersky.kaspresso.flakysafety.ContinuouslyProvider
 import com.kaspersky.kaspresso.flakysafety.ContinuouslyProviderImpl
 import com.kaspersky.kaspresso.flakysafety.FlakySafetyProvider
-import com.kaspersky.kaspresso.flakysafety.FlakySafetyProviderComposeImpl
+import com.kaspersky.kaspresso.flakysafety.FlakySafetyProviderGlobalImpl
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.testcases.core.testassistants.TestAssistantsProvider
@@ -22,7 +22,7 @@ import com.kaspersky.kaspresso.testcases.core.testassistants.TestAssistantsProvi
  */
 open class BaseTestContext internal constructor(
     kaspresso: Kaspresso
-) : FlakySafetyProvider by FlakySafetyProviderComposeImpl(kaspresso),
+) : FlakySafetyProvider by FlakySafetyProviderGlobalImpl(kaspresso),
     ContinuouslyProvider by ContinuouslyProviderImpl(kaspresso),
     ComposeProvider by ComposeProviderImpl(kaspresso),
     WebComposeProvider by WebComposeProviderImpl(kaspresso),

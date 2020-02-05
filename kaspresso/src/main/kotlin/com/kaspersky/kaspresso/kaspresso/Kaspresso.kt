@@ -263,7 +263,7 @@ data class Kaspresso(
         }
 
         /**
-         * Holds an implementation of [KautomatorWaitForIdleSettings] interface for inner Kaspresso usage.
+         * Holds an implementation of [KautomatorWaitForIdleSettings] for external developer's usage in tests.
          * If it was not specified, the default implementation is used.
          */
         lateinit var kautomatorWaitForIdleSettings: KautomatorWaitForIdleSettings
@@ -355,40 +355,22 @@ data class Kaspresso(
         lateinit var language: Language
 
         /**
-         * Holds the Kakao [FlakySafetyParams] for [com.kaspersky.kaspresso.flakysafety.FlakySafetyProvider]'s usage.
-         * If it was not specified, the default implementation for Kakao is used.
+         * Holds the [FlakySafetyParams] for [com.kaspersky.kaspresso.flakysafety.FlakySafetyProvider]'s usage.
+         * If it was not specified, the default implementation is used.
          */
         lateinit var flakySafetyParams: FlakySafetyParams
 
         /**
-         * Holds the Kautomator [FlakySafetyParams] for [com.kaspersky.kaspresso.flakysafety.FlakySafetyProvider]'s usage.
-         * If it was not specified, the default implementation for Kautomastor is used.
-         */
-        lateinit var kautomatorFlakySafetyParams: FlakySafetyParams
-
-        /**
-         * Holds the Kakao [ContinuouslyParams] for [com.kaspersky.kaspresso.flakysafety.ContinuouslyProvider]'s usage.
-         * If it was not specified, the default implementation for Kakao is used.
+         * Holds the [ContinuouslyParams] for [com.kaspersky.kaspresso.flakysafety.ContinuouslyProvider]'s usage.
+         * If it was not specified, the default implementation is used.
          */
         lateinit var continuouslyParams: ContinuouslyParams
 
         /**
-         * Holds the Kautomator [ContinuouslyParams] for [com.kaspersky.kaspresso.flakysafety.ContinuouslyProvider]'s usage.
-         * If it was not specified, the default implementation for Kautomator is used.
-         */
-        lateinit var kautomatorContinuouslyParams: ContinuouslyParams
-
-        /**
-         * Holds the Kakao [AutoScrollParams] for [com.kaspersky.kaspresso.autoscroll.AutoScrollProvider]'s usage.
-         * If it was not specified, the default implementation for Kakao is used.
+         * Holds the [AutoScrollParams] for [com.kaspersky.kaspresso.autoscroll.AutoScrollProvider]'s usage.
+         * If it was not specified, the default implementation is used.
          */
         lateinit var autoScrollParams: AutoScrollParams
-
-        /**
-         * Holds the Kautomator [AutoScrollParams] for [com.kaspersky.kaspresso.autoscroll.AutoScrollProvider]'s usage.
-         * If it was not specified, the default implementation for Kautomator is used.
-         */
-        lateinit var kautomatorAutoScrollParams: AutoScrollParams
 
         /**
          * Holds the [StepParams] for [com.kaspersky.kaspresso.testcases.core.step.StepsManager]'s usage.
@@ -582,12 +564,9 @@ data class Kaspresso(
             if (!::exploit.isInitialized) exploit = ExploitImpl(activities, uiDevice, adbServer)
             if (!::language.isInitialized) language = LanguageImpl(libLogger, instrumentation.targetContext)
 
-            if (!::flakySafetyParams.isInitialized) flakySafetyParams = FlakySafetyParams.kakaoInstance()
-            if (!::kautomatorFlakySafetyParams.isInitialized) kautomatorFlakySafetyParams = FlakySafetyParams.kautomatorInstance()
-            if (!::continuouslyParams.isInitialized) continuouslyParams = ContinuouslyParams.kakaoInstance()
-            if (!::kautomatorContinuouslyParams.isInitialized) kautomatorContinuouslyParams = ContinuouslyParams.kautomatorInstance()
-            if (!::autoScrollParams.isInitialized) autoScrollParams = AutoScrollParams.kakaoInstance()
-            if (!::kautomatorAutoScrollParams.isInitialized) kautomatorAutoScrollParams = AutoScrollParams.kautomatorInstance()
+            if (!::flakySafetyParams.isInitialized) flakySafetyParams = FlakySafetyParams.default()
+            if (!::continuouslyParams.isInitialized) continuouslyParams = ContinuouslyParams.default()
+            if (!::autoScrollParams.isInitialized) autoScrollParams = AutoScrollParams.default()
             if (!::stepParams.isInitialized) stepParams = StepParams()
             if (!::waitForIdleParams.isInitialized) waitForIdleParams = WaitForIdleParams()
         }
@@ -653,15 +632,15 @@ data class Kaspresso(
             )
 
             if (!::objectBehaviorInterceptors.isInitialized) objectBehaviorInterceptors = mutableListOf(
-                AutoScrollObjectBehaviorInterceptor(libLogger, kautomatorAutoScrollParams),
+                AutoScrollObjectBehaviorInterceptor(libLogger, autoScrollParams),
                 UiObjectLoaderBehaviorInterceptor(libLogger),
                 SystemDialogSafetyObjectBehaviorInterceptor(libLogger, uiDevice, adbServer),
-                FlakySafeObjectBehaviorInterceptor(kautomatorFlakySafetyParams, libLogger)
+                FlakySafeObjectBehaviorInterceptor(flakySafetyParams, libLogger)
             )
 
             if (!::deviceBehaviorInterceptors.isInitialized) deviceBehaviorInterceptors = mutableListOf(
                 SystemDialogSafetyDeviceBehaviorInterceptor(libLogger, uiDevice, adbServer),
-                FlakySafeDeviceBehaviorInterceptor(kautomatorFlakySafetyParams, libLogger)
+                FlakySafeDeviceBehaviorInterceptor(flakySafetyParams, libLogger)
             )
 
             if (!::stepWatcherInterceptors.isInitialized) stepWatcherInterceptors = mutableListOf(
@@ -710,11 +689,8 @@ data class Kaspresso(
 
                 params = Params(
                     flakySafetyParams = flakySafetyParams,
-                    kautomatorFlakySafetyParams = kautomatorFlakySafetyParams,
                     continuouslyParams = continuouslyParams,
-                    kautomatorContinuouslyParams = kautomatorContinuouslyParams,
                     autoScrollParams = autoScrollParams,
-                    kautomatorAutoScrollParams = kautomatorAutoScrollParams,
                     stepParams = stepParams,
                     waitForIdleParams = waitForIdleParams
                 ),

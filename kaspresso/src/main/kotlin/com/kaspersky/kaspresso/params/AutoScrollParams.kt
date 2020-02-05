@@ -18,15 +18,10 @@ class AutoScrollParams private constructor(
 ) {
 
     companion object {
-        fun kakaoInstance() = AutoScrollParams(
+        fun default() = AutoScrollParams(
             allowedExceptions = setOf(
                 PerformException::class.java,
-                AssertionFailedError::class.java
-            )
-        )
-
-        fun kautomatorInstance() = AutoScrollParams(
-            allowedExceptions = setOf(
+                AssertionFailedError::class.java,
                 UiObjectNotFoundException::class.java,
                 UnfoundedUiObjectException::class.java
             )

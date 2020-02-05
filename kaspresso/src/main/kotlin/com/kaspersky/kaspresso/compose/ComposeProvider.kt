@@ -26,7 +26,7 @@ interface ComposeProvider {
      *
      * @param block the actions to compose.
      */
-    fun compose(timeoutMs: Long? = null, block: ActionsOnElementsPack.() -> Unit)
+    fun compose(block: ActionsOnElementsPack.() -> Unit)
 
     /**
      * Composes a [block] of actions on the given view of type [T] in one composite action that succeeds if at least
@@ -34,7 +34,7 @@ interface ComposeProvider {
      *
      * @param block the actions to compose.
      */
-    fun <Type> Type.compose(timeoutMs: Long? = null, block: ActionsPack<Type>.() -> Unit)
+    fun <Type> Type.compose(block: ActionsPack<Type>.() -> Unit)
             where Type : BaseActions, Type : BaseAssertions,
                   Type : Interceptable<ViewInteraction, ViewAssertion, ViewAction>
 
@@ -44,7 +44,7 @@ interface ComposeProvider {
      *
      * @param block the actions to compose.
      */
-    fun <Type> Type.compose(timeoutMs: Long? = null, block: ActionsPack<Type>.() -> Unit)
+    fun <Type> Type.compose(block: ActionsPack<Type>.() -> Unit)
             where Type : UiBaseActions, Type : UiBaseAssertions,
                   Type : UiInterceptable<UiObjectInteraction, UiObjectAssertion, UiObjectAction>
 }
