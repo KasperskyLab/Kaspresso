@@ -26,8 +26,8 @@ class WebComposeProviderImpl(
         timeoutMs: Long?,
         intervalMs: Long?,
         allowedExceptions: Set<Class<out Throwable>>?,
-        block: ActionsOnWebElementsPack.() -> Unit)
-    {
+        block: ActionsOnWebElementsPack.() -> Unit
+    ) {
         val checks: List<() -> Unit> = ActionsOnWebElementsPack(this).apply(block).build()
         invokeWebComposeByProviders(timeoutMs, intervalMs, allowedExceptions, checks)
     }
