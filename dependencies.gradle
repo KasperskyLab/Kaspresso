@@ -1,7 +1,7 @@
 ext.versions = [
         minSdk         : "18",
         // please, be aware of the fact that sdk version increasing (up to 29 version, for example)
-        //     brakes DocLoc scenario changing system language
+        //     brakes DocLoc scenario changing system language (com.kaspersky.kaspresso.device.permissions.HackPermissionsImpl)
         compileSdk     : "28",
         targetSdk      : "27",
         buildTools     : "28.0.3",
