@@ -9,18 +9,18 @@ import kotlinx.android.synthetic.main.activity_common_flaky.*
 class CommonFlakyActivity : AppCompatActivity() {
 
     companion object {
-        private const val FIRST_KAKAO_DELAY = 2_000L
-        private const val FIRST_KAUTOMATOR_DELAY = 3_000L
-        private const val SECOND_KAKAO_DELAY = 12_000L
-        private const val SECOND_KAUTOMATOR_DELAY = 19_000L
+        private const val FIRST_DELAY = 2_000L
+        private const val SECOND_DELAY = 15_000L
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_common_flaky)
+    }
 
-        kautomator_mode.setOnClickListener { startAsync(FIRST_KAUTOMATOR_DELAY, SECOND_KAUTOMATOR_DELAY) }
-        kakao_mode.setOnClickListener { startAsync(FIRST_KAKAO_DELAY, SECOND_KAKAO_DELAY) }
+    override fun onResume() {
+        super.onResume()
+        startAsync(FIRST_DELAY, SECOND_DELAY)
     }
 
     private fun startAsync(firstDelayMs: Long, secondDelayMs: Long) {

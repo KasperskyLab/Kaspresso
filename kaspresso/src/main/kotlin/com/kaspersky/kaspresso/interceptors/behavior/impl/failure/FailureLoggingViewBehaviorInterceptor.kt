@@ -9,6 +9,9 @@ import com.kaspersky.kaspresso.logger.UiTestLogger
 /**
  * The implementation of [ViewBehaviorInterceptor] and [FailureLoggingProvider] interfaces.
  * Provides failure logging functionality for [ViewInteraction.perform] and [ViewInteraction.check] calls.
+ *
+ * By default, this interceptor is not used in Kaspresso.
+ * If you desire to change result log (especially in case of an error) we recommend to use [FailureLoggingProvider] directly
  */
 class FailureLoggingViewBehaviorInterceptor(
     logger: UiTestLogger

@@ -9,6 +9,9 @@ import com.kaspersky.kaspresso.logger.UiTestLogger
 /**
  * The implementation of [WebBehaviorInterceptor] and [FailureLoggingProvider] interfaces.
  * Provides failure logging functionality for [Web.WebInteraction.perform] and [Web.WebInteraction.check] calls.
+ *
+ * By default, this interceptor is not used in Kaspresso.
+ * If you desire to change result log (especially in case of an error) we recommend to use [FailureLoggingProvider] directly
  */
 class FailureLoggingWebBehaviorInterceptor(
     logger: UiTestLogger

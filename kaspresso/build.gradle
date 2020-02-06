@@ -35,6 +35,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
 
     testImplementation "junit:junit:$versions.junit"
+    testImplementation "com.google.truth:truth:$versions.truth"
 
     implementation "androidx.test:runner:$versions.runner"
     implementation "androidx.test.espresso:espresso-web:$versions.espresso"

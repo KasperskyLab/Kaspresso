@@ -11,6 +11,9 @@ import com.kaspersky.kaspresso.logger.UiTestLogger
 /**
  * The implementation of [ObjectBehaviorInterceptor] and [FailureLoggingProvider] interfaces.
  * Provides failure logging functionality for [UiObjectInteraction.perform] and [UiObjectInteraction.check] calls.
+ *
+ * By default, this interceptor is not used in Kaspresso.
+ * If you desire to change result log (especially in case of an error) we recommend to use [FailureLoggingProvider] directly
  */
 class FailureLoggingObjectBehaviorInterceptor(
     logger: UiTestLogger

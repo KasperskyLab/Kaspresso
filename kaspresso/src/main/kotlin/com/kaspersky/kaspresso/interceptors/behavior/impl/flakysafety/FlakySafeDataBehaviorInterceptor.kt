@@ -2,7 +2,7 @@ package com.kaspersky.kaspresso.interceptors.behavior.impl.flakysafety
 
 import androidx.test.espresso.DataInteraction
 import com.kaspersky.kaspresso.flakysafety.FlakySafetyProvider
-import com.kaspersky.kaspresso.flakysafety.FlakySafetyProviderImpl
+import com.kaspersky.kaspresso.flakysafety.FlakySafetyProviderSimpleImpl
 import com.kaspersky.kaspresso.interceptors.behavior.DataBehaviorInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.params.FlakySafetyParams
@@ -15,7 +15,7 @@ class FlakySafeDataBehaviorInterceptor(
     params: FlakySafetyParams,
     logger: UiTestLogger
 ) : DataBehaviorInterceptor,
-    FlakySafetyProvider by FlakySafetyProviderImpl(params, logger) {
+    FlakySafetyProvider by FlakySafetyProviderSimpleImpl(params, logger) {
 
     /**
      * Wraps the given [action] invocation with the flaky safety.

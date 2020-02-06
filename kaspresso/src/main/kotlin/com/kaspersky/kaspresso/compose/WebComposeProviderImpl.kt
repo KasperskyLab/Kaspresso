@@ -1,17 +1,13 @@
 package com.kaspersky.kaspresso.compose
 
 import com.agoda.kakao.web.WebElementBuilder
+import com.kaspersky.kaspresso.compose.Composer.getUnitedComposedAction
 import com.kaspersky.kaspresso.compose.pack.ActionsOnWebElementsPack
 import com.kaspersky.kaspresso.compose.pack.ActionsPack
 import com.kaspersky.kaspresso.failure.FailureLoggingProvider
-import com.kaspersky.kaspresso.failure.withLoggingOnFailureIfNotNull
+import com.kaspersky.kaspresso.failure.FailureLoggingProviderImpl
 import com.kaspersky.kaspresso.flakysafety.FlakySafetyProvider
-import com.kaspersky.kaspresso.flakysafety.flakySafelyIfNotNull
-import com.kaspersky.kaspresso.interceptors.behavior.WebBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.behavior.impl.failure.FailureLoggingWebBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.behavior.impl.flakysafety.FlakySafeWebBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.tolibrary.kakao.compose.ComposeKakaoWebInterceptor
-import com.kaspersky.kaspresso.interceptors.tolibrary.kakao.impl.KakaoWebInterceptor
+import com.kaspersky.kaspresso.flakysafety.FlakySafetyProviderGlobalImpl
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 
 /**
@@ -21,82 +17,67 @@ class WebComposeProviderImpl(
     private val kaspresso: Kaspresso
 ) : WebComposeProvider {
 
-    /**
-     * Composes a [block] of actions with their web views to invoke on in one composite action that succeeds if at least
-     * one of it's parts succeeds.
-     *
-     * @param block the actions to compose.
-     */
-    override fun WebElementBuilder.compose(block: ActionsOnWebElementsPack.() -> Unit) {
-        val actions: List<() -> Unit> = ActionsOnWebElementsPack(this).apply(block).build()
+    private val failureLoggingProvider: FailureLoggingProvider =
+        FailureLoggingProviderImpl(kaspresso.libLogger)
+    private val flakySafetyProvider: FlakySafetyProvider =
+        FlakySafetyProviderGlobalImpl(kaspresso)
 
-        setComposeInterception()
-
-        val (flakySafetyProvider, failureLoggingProvider) = getProviders()
-
-        failureLoggingProvider.withLoggingOnFailureIfNotNull {
-            flakySafetyProvider.flakySafelyIfNotNull {
-                invokeComposed(actions, kaspresso.libLogger)
-            }
-        }
-
-        setInterception()
+    override fun WebElementBuilder.compose(
+        timeoutMs: Long?,
+        intervalMs: Long?,
+        allowedExceptions: Set<Class<out Throwable>>?,
+        block: ActionsOnWebElementsPack.() -> Unit
+    ) {
+        val checks: List<() -> Unit> = ActionsOnWebElementsPack(this).apply(block).build()
+        invokeWebComposeByProviders(timeoutMs, intervalMs, allowedExceptions, checks)
     }
 
-    /**
-     * Composes a [block] of actions on the given web view in one composite action that succeeds if at least
-     * one of it's parts succeeds.
-     *
-     * @param block the actions to compose.
-     */
+    override fun WebElementBuilder.unsafeCompose(block: ActionsOnWebElementsPack.() -> Unit) {
+        invokeWebComposeUnsafely(
+            checks = ActionsOnWebElementsPack(this).apply(block).build()
+        )
+    }
+
     override fun WebElementBuilder.KWebInteraction.compose(
+        webElementBuilder: WebElementBuilder,
+        timeoutMs: Long?,
+        intervalMs: Long?,
+        allowedExceptions: Set<Class<out Throwable>>?,
+        block: ActionsPack<WebElementBuilder.KWebInteraction>.() -> Unit
+    ) {
+        val checks: List<() -> Unit> = ActionsPack(this).apply(block).build()
+        invokeWebComposeByProviders(timeoutMs, intervalMs, allowedExceptions, checks)
+    }
+
+    override fun WebElementBuilder.KWebInteraction.unsafeCompose(
         webElementBuilder: WebElementBuilder,
         block: ActionsPack<WebElementBuilder.KWebInteraction>.() -> Unit
     ) {
-        val actions: List<() -> Unit> = ActionsPack(this).apply(block).build()
-
-        webElementBuilder.setComposeInterception()
-
-        val (flakySafetyProvider, failureLoggingProvider) = getProviders()
-
-        failureLoggingProvider.withLoggingOnFailureIfNotNull {
-            flakySafetyProvider.flakySafelyIfNotNull {
-                invokeComposed(actions, kaspresso.libLogger)
-            }
-        }
-
-        webElementBuilder.setInterception()
+        invokeWebComposeUnsafely(
+            checks = ActionsPack(this).apply(block).build()
+        )
     }
 
-    private fun getProviders(): Pair<FlakySafetyProvider?, FailureLoggingProvider?> {
-        var flakySafetyProvider: FlakySafetyProvider? = null
-        var failureLoggingProvider: FailureLoggingProvider? = null
+    private fun invokeWebComposeByProviders(
+        timeoutMs: Long?,
+        intervalMs: Long?,
+        allowedExceptions: Set<Class<out Throwable>>?,
+        checks: List<() -> Unit>
+    ) {
+        val unitedComposedAction = getUnitedComposedAction(checks, kaspresso.libLogger)
 
-        kaspresso.webBehaviorInterceptors.forEach { webBehaviorInterceptor: WebBehaviorInterceptor ->
-            when (webBehaviorInterceptor) {
-                is FlakySafeWebBehaviorInterceptor -> flakySafetyProvider = webBehaviorInterceptor
-                is FailureLoggingWebBehaviorInterceptor -> failureLoggingProvider = webBehaviorInterceptor
-            }
-        }
-
-        return Pair(flakySafetyProvider, failureLoggingProvider)
-    }
-
-    private fun WebElementBuilder.setComposeInterception() {
-        val interceptor = ComposeKakaoWebInterceptor(kaspresso)
-
-        intercept {
-            onCheck(true, interceptor::interceptCheck)
-            onPerform(true, interceptor::interceptPerform)
+        failureLoggingProvider.withLoggingOnFailure {
+            flakySafetyProvider.flakySafely(
+                timeoutMs = timeoutMs,
+                intervalMs = intervalMs,
+                allowedExceptions = allowedExceptions,
+                action = unitedComposedAction
+            )
         }
     }
 
-    private fun WebElementBuilder.setInterception() {
-        val interceptor = KakaoWebInterceptor(kaspresso)
-
-        intercept {
-            onCheck(true, interceptor::interceptCheck)
-            onPerform(true, interceptor::interceptPerform)
-        }
+    private fun invokeWebComposeUnsafely(checks: List<() -> Unit>) {
+        val unitedComposedAction = getUnitedComposedAction(checks, kaspresso.libLogger)
+        unitedComposedAction.invoke()
     }
 }
