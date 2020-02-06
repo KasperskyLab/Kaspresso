@@ -144,7 +144,7 @@ For all information check [Kaspresso wiki](https://github.com/KasperskyLab/Kaspr
 
 ## Integration
 
-To use AdbServer device library, include the `jcenter` repository to your root `build.gradle` file (if it does not exist already):
+To use Kaspresso, include the `jcenter` repository to your root `build.gradle` file (if it does not exist already):
 
 ```
 allprojects {
