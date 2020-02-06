@@ -33,7 +33,7 @@ class WebComposeProviderImpl(
     }
 
     override fun WebElementBuilder.unsafeCompose(block: ActionsOnWebElementsPack.() -> Unit) {
-        invokeWebComposeByProvidersUnsafely(
+        invokeWebComposeUnsafely(
             checks = ActionsOnWebElementsPack(this).apply(block).build()
         )
     }
@@ -53,7 +53,7 @@ class WebComposeProviderImpl(
         webElementBuilder: WebElementBuilder,
         block: ActionsPack<WebElementBuilder.KWebInteraction>.() -> Unit
     ) {
-        invokeWebComposeByProvidersUnsafely(
+        invokeWebComposeUnsafely(
             checks = ActionsPack(this).apply(block).build()
         )
     }
@@ -76,7 +76,7 @@ class WebComposeProviderImpl(
         }
     }
 
-    private fun invokeWebComposeByProvidersUnsafely(checks: List<() -> Unit>) {
+    private fun invokeWebComposeUnsafely(checks: List<() -> Unit>) {
         val unitedComposedAction = getUnitedComposedAction(checks, kaspresso.libLogger)
         unitedComposedAction.invoke()
     }

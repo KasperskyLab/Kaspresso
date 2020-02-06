@@ -81,7 +81,7 @@ class ComposeProviderImpl(
     override fun <Type> Type.unsafeCompose(block: ActionsPack<Type>.() -> Unit)
             where Type : BaseActions, Type : BaseAssertions,
                   Type : Interceptable<ViewInteraction, ViewAssertion, ViewAction> {
-        invokeViewComposeByProvidersUnsafely(
+        invokeViewComposeUnsafely(
             checks = ActionsPack(this).apply(block).build()
         )
     }
@@ -100,7 +100,7 @@ class ComposeProviderImpl(
     override fun <Type> Type.unsafeCompose(block: ActionsPack<Type>.() -> Unit)
             where Type : UiBaseActions, Type : UiBaseAssertions,
                   Type : UiInterceptable<UiObjectInteraction, UiObjectAssertion, UiObjectAction> {
-        invokeViewComposeByProvidersUnsafely(
+        invokeViewComposeUnsafely(
             checks = ActionsPack(this).apply(block).build()
         )
     }
@@ -123,7 +123,7 @@ class ComposeProviderImpl(
         }
     }
 
-    private fun invokeViewComposeByProvidersUnsafely(checks: List<() -> Unit>) {
+    private fun invokeViewComposeUnsafely(checks: List<() -> Unit>) {
         val unitedComposedAction = getUnitedComposedAction(checks, kaspresso.libLogger)
         unitedComposedAction.invoke()
     }

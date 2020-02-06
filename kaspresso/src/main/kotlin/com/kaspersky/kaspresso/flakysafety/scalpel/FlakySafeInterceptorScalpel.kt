@@ -18,14 +18,16 @@ internal class FlakySafeInterceptorScalpel(
     private val kaspresso: Kaspresso
 ) {
 
-    private var scalpExistsInKaspressoByDefault: Boolean? = null
+    private val scalpelSwitcher: ScalpelSwitcher = ScalpelSwitcher()
 
     fun scalpFromLibs() {
-        if (scalpExistsInKaspressoByDefault == null) {
-            scalpExistsInKaspressoByDefault = determineScalpExistingInKaspresso()
-        }
-        scalpKakaoInterceptors()
-        scalpKautomatorInterceptors()
+        scalpelSwitcher.attemptTakeScalp(
+            actionToDetermineScalp = { determineScalpExistingInKaspresso() },
+            actionToTakeScalp = {
+                scalpKakaoInterceptors()
+                scalpKautomatorInterceptors()
+            }
+        )
     }
 
     private fun determineScalpExistingInKaspresso() =
@@ -79,26 +81,23 @@ internal class FlakySafeInterceptorScalpel(
     }
 
     fun restoreScalpToLibs() {
-        if (scalpExistsInKaspressoByDefault == false) {
-            scalpExistsInKaspressoByDefault = null
-            return
-        }
-        injectKaspressoInKakao(
-            kaspresso.viewBehaviorInterceptors,
-            kaspresso.dataBehaviorInterceptors,
-            kaspresso.webBehaviorInterceptors,
-            kaspresso.viewActionWatcherInterceptors,
-            kaspresso.viewAssertionWatcherInterceptors,
-            kaspresso.atomWatcherInterceptors,
-            kaspresso.webAssertionWatcherInterceptors
-        )
+        scalpelSwitcher.attemptRestoreScalp {
+            injectKaspressoInKakao(
+                kaspresso.viewBehaviorInterceptors,
+                kaspresso.dataBehaviorInterceptors,
+                kaspresso.webBehaviorInterceptors,
+                kaspresso.viewActionWatcherInterceptors,
+                kaspresso.viewAssertionWatcherInterceptors,
+                kaspresso.atomWatcherInterceptors,
+                kaspresso.webAssertionWatcherInterceptors
+            )
 
-        LibraryInterceptorsInjector.injectKaspressoInKautomator(
-            kaspresso.objectBehaviorInterceptors,
-            kaspresso.deviceBehaviorInterceptors,
-            kaspresso.objectWatcherInterceptors,
-            kaspresso.deviceWatcherInterceptors
-        )
-        scalpExistsInKaspressoByDefault = null
+            LibraryInterceptorsInjector.injectKaspressoInKautomator(
+                kaspresso.objectBehaviorInterceptors,
+                kaspresso.deviceBehaviorInterceptors,
+                kaspresso.objectWatcherInterceptors,
+                kaspresso.deviceWatcherInterceptors
+            )
+        }
     }
 }
