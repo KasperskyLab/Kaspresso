@@ -54,6 +54,8 @@ Let's expand mentioned Kaspresso interceptors types: <br>
     4. ```webAssertionWatcherInterceptors``` - do some stuff before ```android.support.test.espresso.web.assertion.WebAssertion.checkResult``` is actually called
     5. ```objectWatcherInterceptors``` - do some stuff before ```UiObjectInteraction.perform``` or ```UiObjectInteraction.check``` is actually called
     6. ```deviceWatcherInterceptors``` - do some stuff before ```UiDeviceInteraction.perform``` or ```UiDeviceInteraction.check``` is actually called
+    
+**Please, remember! Behavior and watcher interceptors work under the hood in every action and assertion of every View of Kakao and Kautomator by default in Kaspresso.**
 
 #### Special Kaspresso interceptors
 These interceptors are not based on some lib. Short description:
@@ -191,6 +193,20 @@ Pretty good.
 #### Screenshots
 A developer receives a screenshot after each Step and after any error. Screenshots are saving at Device in "sdcard/screenshots/". <br>
 But you can turn off this feature using ```Kaspresso.Builder.simple``` builder.
+
+#### Defense from flaky tests
+If a failure occurs then Kaspresso tries to fix it using a big set of diverse ways. <br>
+**This defense works for every action and assertion of each View of Kakao and Kautomator!** You just need to extend your test class from ```TestCase``` (```BaseTestCase```) or to set ```TestCaseRule```(```BaseTestCaseRule```) in your test. <br>
+More detailed info about some ways of defense is [below](./03_Kaspresso_configurator.md#some-words-about-behavior-interceptors)
+
+#### Interceptors
+Interceptors turned by default:
+1. Watcher interceptors
+2. Behavior interceptors
+3. Kaspresso interceptors
+4. BuildStepReportWatcherInterceptor
+
+So, all features described above are available thanks to these interceptors.
 
 ### Some words about Behavior Interceptors
 Any lib for ui-tests is flaky. It's a hard truth of life. Any action/assert in your test may fail for some undefined reason.
