@@ -27,6 +27,24 @@ Also **Device** provides application and test contexts - `targetContext` and `co
 ### **Usage**
 
 Device instance is available in `BaseTestContext` scope and `BaseTestCase` via ```device``` property.
+```
+@Test
+fun test() =
+    run {
+        step("Open Simple Screen") {
+            activityTestRule.launchActivity(null)
+  ======>   device.screenshots.take("Additional_screenshot")  <======
+
+            MainScreen {
+                simpleButton {
+                    isVisible()
+                    click()
+                }
+            }
+        }
+        // ....
+}
+```
 
 ### **Limitations**
 
