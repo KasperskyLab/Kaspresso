@@ -27,7 +27,7 @@ Also **Device** provides application and test contexts - `targetContext` and `co
 ### **Usage**
 
 Device instance is available in `BaseTestContext` scope and `BaseTestCase` via ```device``` property.
-```
+```kotlin
 @Test
 fun test() =
     run {
