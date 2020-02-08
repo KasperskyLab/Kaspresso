@@ -1,4 +1,4 @@
-# Wrapper over UI Automator
+# Kautomator: wrapper over UI Automator
 
 **Kautomator** - Nice and simple DSL for UI Automator in Kotlin. <br>
 Inspired by [Kakao](https://github.com/agoda-com/Kakao)
@@ -45,7 +45,7 @@ If you are using [Page Object pattern](https://martinfowler.com/bliki/PageObject
 ```Kotlin
 class FormScreen : UiScreen<FormScreen>() {
     val phone = UiView { withId(this@FormScreen.packageName, "phone" }
-    val email = UiEditText { withId(this@FormScreen.packageName, "email_edit }
+    val email = UiEditText { withId(this@FormScreen.packageName, "email_edit" }
     val submit = UiButton { withId(this@FormScreen.packageName, "submit_button" }
 }
 ```
@@ -79,7 +79,7 @@ val email = UiEditText {
 }
 ```
 
-#### Write the interaction.
+#### Write the interaction
 
 The syntax of the test with Kautomator is very easy, once you have the `UiScreen` and the `UiView` defined, you only have to apply
 the actions or assertions like in UI Automator:
@@ -98,12 +98,12 @@ FormScreen {
 
 In Espresso, all interaction with a `View` is processing through `ViewInteraction` that has two main methods:
 `onCheck` and `onPerform` which take `ViewAction` and `ViewAssertion` as arguments. Kakao was written based on this architecture.
-So, we have set a goal to write Kautomator which would be like Kakao as much as possible. That's why we have introduced an additional layer
-over UiObject2 and UiDevice and that is so similar to `ViewInteraction`. This layer is represented by `UiObjectInteraction` and `UiDeviceInteraction`
-that have two methods: `onCheck` and `onPerform` taking UiObjectAssertion and UiObjectAction or UiDeviceAssertion and UiDeviceAction as arguments.
-`UiObjectInteraction` is designed to work with concrete `View` like `ViewInteraction`. `UiDeviceInteraction` has been created because UI Automator has a feature
-allowing you to do some system things like a click on Home button or on hard Back button, open Quick Setttings, open Notifications and so on.
-All such things are hidden by `UiSystem` class. So, enjoy it =)
+
+So, we have set a goal to write Kautomator which would be like Kakao as much as possible. That's why we have introduced an additional layer over UiObject2 and UiDevice and that is so similar to `ViewInteraction`. This layer is represented by `UiObjectInteraction` and `UiDeviceInteraction` that have two methods: `onCheck` and `onPerform` taking UiObjectAssertion and UiObjectAction or UiDeviceAssertion and UiDeviceAction as arguments.
+
+`UiObjectInteraction` is designed to work with concrete `View` like `ViewInteraction`. `UiDeviceInteraction` has been created because UI Automator has a featureallowing you to do some system things like a click on Home button or on hard Back button, open Quick Setttings, open Notifications and so on. All such things are hidden by `UiSystem` class. 
+
+So, enjoy it =)
 
 #### Advanced
 
