@@ -125,7 +125,7 @@ class KautomatorMeasureTest : TestCase(
                     }
                 }
             }
-
+            // todo describe the problem
             step("UiWaitForIdleScreen. Check text in EditText") {
                 UiWaitForIdleScreen {
                     edit {
