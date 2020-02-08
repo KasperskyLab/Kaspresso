@@ -34,8 +34,7 @@ class ScreenshotsImpl(
      */
     override fun take(tag: String) {
         runCatching {
-            val appContext = InstrumentationRegistry.getInstrumentation().targetContext.applicationContext
-            val file = fileProvider.getScreenshotFile(appContext, tag)
+            val file = fileProvider.getScreenshotFile(tag)
             screenshotMaker.takeScreenshot(file)
         }.onFailure { e ->
             logger.e("An error while making screenshot occurred: ${e.getStackTraceAsString()}")

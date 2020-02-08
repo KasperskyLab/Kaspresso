@@ -38,8 +38,7 @@ internal class DocLocScreenshotCapturer(
      */
     fun captureScreenshot(screenshotName: String) {
         wait(timeoutMs = SCREENSHOT_CAPTURE_DELAY_MS, logger = logger) {
-            val appContext = InstrumentationRegistry.getInstrumentation().targetContext.applicationContext
-            val screenshotFile = fileProvider.getScreenshotFile(appContext, screenshotName)
+            val screenshotFile = fileProvider.getScreenshotFile(screenshotName)
             screenshotMaker.takeScreenshot(screenshotFile)
             metadataSaver.saveScreenshotMetadata(screenshotFile.parentFile, screenshotName)
         }
@@ -51,8 +50,7 @@ internal class DocLocScreenshotCapturer(
      */
     fun captureScreenshotOnFail(screenshotName: String) {
         wait(timeoutMs = SCREENSHOT_CAPTURE_DELAY_MS, logger = logger) {
-            val appContext = InstrumentationRegistry.getInstrumentation().targetContext.applicationContext
-            val screenshotFile = fileProvider.getScreenshotFile(appContext, screenshotName, "fails")
+            val screenshotFile = fileProvider.getScreenshotFile(screenshotName, "fails")
             screenshotMaker.takeScreenshot(screenshotFile)
         }
     }

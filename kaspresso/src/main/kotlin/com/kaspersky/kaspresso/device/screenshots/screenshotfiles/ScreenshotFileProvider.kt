@@ -23,12 +23,11 @@ internal class ScreenshotFileProvider(
      *   If you have multiple places where you want to use this location,
      *   you MUST share the same instance of this class among the occurrences.
      *
-     * @param context a context to get directory on pre-lollipop.
      * @param tag a name for the screenshot
      * @return [File] which represents a file for screenshot
      */
-    fun getScreenshotFile(context: Context, tag: String, subDirectory: String? = null): File {
-        val screenshotRootDirectory = directoryStorage.getRootScreenshotDirectory(context, screenshotDir)
+    fun getScreenshotFile(tag: String, subDirectory: String? = null): File {
+        val screenshotRootDirectory = directoryStorage.getRootScreenshotDirectory(screenshotDir)
         val screenshotTestDirectory = directoryStorage.obtainDirectory(getDirectoryForTest(screenshotRootDirectory, subDirectory))
         val screenshotName = screenshotNameProvider.getScreenshotName(tag)
         return screenshotTestDirectory.resolve(screenshotName)
