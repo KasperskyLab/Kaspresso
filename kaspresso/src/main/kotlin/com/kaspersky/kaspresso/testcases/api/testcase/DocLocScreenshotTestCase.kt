@@ -6,6 +6,7 @@ import com.kaspersky.kaspresso.device.locales.Locales
 import com.kaspersky.kaspresso.device.screenshots.screenshotfiles.DefaultScreenshotDirectoryProvider
 import com.kaspersky.kaspresso.device.screenshots.screenshotfiles.DefaultScreenshotNameProvider
 import com.kaspersky.kaspresso.docloc.DocLocScreenshotCapturer
+import com.kaspersky.kaspresso.docloc.MetadataSaver
 import com.kaspersky.kaspresso.docloc.rule.LocaleRule
 import com.kaspersky.kaspresso.docloc.rule.TestFailRule
 import com.kaspersky.kaspresso.internal.extensions.other.getAllInterfaces
@@ -86,7 +87,6 @@ abstract class DocLocScreenshotTestCase(
     kaspressoBuilder: Kaspresso.Builder = Kaspresso.Builder.advanced()
 ) : TestCase(kaspressoBuilder = kaspressoBuilder) {
 
-    private lateinit var screenshotsDir: File
     private lateinit var screenshotCapturer: DocLocScreenshotCapturer
 
     @PublishedApi
@@ -110,15 +110,14 @@ abstract class DocLocScreenshotTestCase(
 
     @Before
     fun setup() {
-        screenshotsDir = screenshotsDirectory.resolve(localeRule.currentLocaleName)
+      val  screenshotsDir = screenshotsDirectory.resolve(localeRule.currentLocaleName)
 
         screenshotCapturer = DocLocScreenshotCapturer(
+            logger,
+            MetadataSaver(kaspresso.device.activities, kaspresso.device.apps, logger),
             DefaultScreenshotDirectoryProvider(),
             DefaultScreenshotNameProvider(addTimestamps = false),
-            screenshotsDir,
-            logger,
-            kaspresso.device.activities,
-            kaspresso.device.apps
+            screenshotsDir
         )
 
         testFailRule.screenshotCapturer = screenshotCapturer

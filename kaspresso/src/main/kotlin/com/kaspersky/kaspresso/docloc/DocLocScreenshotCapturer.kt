@@ -19,12 +19,11 @@ import java.io.File
  * @param screenshotsDir directory to save screenshots and metadata.
  */
 internal class DocLocScreenshotCapturer(
+    private val logger: UiTestLogger,
+    private val metadataSaver: MetadataSaver,
     screenshotDirectoryProvider: ScreenshotDirectoryProvider,
     screenshotNameProvider: ScreenshotNameProvider,
-    private val screenshotsDir: File,
-    private val logger: UiTestLogger,
-    private val activities: Activities,
-    private val apps: Apps
+    private val screenshotsDir: File
 ) {
     private companion object {
         private const val SCREENSHOT_CAPTURE_DELAY_MS: Long = 500
@@ -32,7 +31,6 @@ internal class DocLocScreenshotCapturer(
 
     private val screenshotMaker = ExternalScreenshotMaker()
     private val fileProvider = ScreenshotFileProvider(screenshotDirectoryProvider, screenshotNameProvider, screenshotsDir)
-    private val activityMetadata = ActivityMetadata(logger)
 
     /**
      * Captures a screenshot and save it with metadata to [screenshotsDir].
@@ -43,7 +41,7 @@ internal class DocLocScreenshotCapturer(
             val appContext = InstrumentationRegistry.getInstrumentation().targetContext.applicationContext
             val screenshotFile = fileProvider.getScreenshotFile(appContext, screenshotName)
             screenshotMaker.takeScreenshot(screenshotFile)
-            saveScreenshotMetadata(screenshotFile.parentFile, screenshotName)
+            metadataSaver.saveScreenshotMetadata(screenshotFile.parentFile, screenshotName)
         }
     }
 
@@ -56,19 +54,6 @@ internal class DocLocScreenshotCapturer(
             val appContext = InstrumentationRegistry.getInstrumentation().targetContext.applicationContext
             val screenshotFile = fileProvider.getScreenshotFile(appContext, screenshotName, "fails")
             screenshotMaker.takeScreenshot(screenshotFile)
-        }
-    }
-
-    private fun saveScreenshotMetadata(folderPath: File, stepName: String) {
-        val activity = activities.getResumed()
-        if (activity == null) {
-            logger.e("Activity is null on $stepName")
-            return
-        }
-        runCatching {
-            val metadata = activityMetadata.getFromActivity(activity)
-                .toXml(apps.targetAppPackageName)
-            folderPath.resolve("$stepName.xml").safeWrite(logger, metadata)
         }
     }
 }
