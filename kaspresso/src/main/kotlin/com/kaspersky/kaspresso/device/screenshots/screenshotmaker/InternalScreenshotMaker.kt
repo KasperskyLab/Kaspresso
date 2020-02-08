@@ -11,7 +11,7 @@ import java.io.FileOutputStream
 import java.util.concurrent.CountDownLatch
 
 /**
- * Captures the view of the current activity
+ * Captures the view of a current activity
  */
 class InternalScreenshotMaker(
     private val activities: Activities

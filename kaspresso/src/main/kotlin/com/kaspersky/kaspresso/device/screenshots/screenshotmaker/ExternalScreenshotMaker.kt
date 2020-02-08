@@ -5,7 +5,7 @@ import androidx.test.uiautomator.UiDevice
 import java.io.File
 
 /**
- * The class for capturing spoon-compatible screenshots by uiautomator.
+ * Captures spoon-compatible screenshots by uiautomator.
  */
 class ExternalScreenshotMaker: ScreenshotMaker {
 

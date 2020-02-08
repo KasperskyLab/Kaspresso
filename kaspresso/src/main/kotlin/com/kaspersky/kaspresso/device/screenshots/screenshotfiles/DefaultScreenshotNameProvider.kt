@@ -1,5 +1,11 @@
 package com.kaspersky.kaspresso.device.screenshots.screenshotfiles
 
+/**
+ * Default implementation of [ScreenshotFileProvider]
+ * If [addTimestamps] is true it adds System.currentTimeMillis() at the beginning of a name to save all screenshots of a test
+ * running several times per the same suite. That's why a name will look like "1570158949869_ScreenshotSampleTest_step_1.png".
+ */
+
 class DefaultScreenshotNameProvider(
     private val addTimestamps: Boolean
 ) : ScreenshotNameProvider {

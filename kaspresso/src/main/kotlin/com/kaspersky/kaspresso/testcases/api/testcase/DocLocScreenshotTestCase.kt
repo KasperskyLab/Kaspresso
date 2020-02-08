@@ -5,6 +5,7 @@ import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspresso.device.locales.Locales
 import com.kaspersky.kaspresso.device.screenshots.screenshotfiles.DefaultScreenshotDirectoryProvider
 import com.kaspersky.kaspresso.device.screenshots.screenshotfiles.DefaultScreenshotNameProvider
+import com.kaspersky.kaspresso.device.screenshots.screenshotmaker.ExternalScreenshotMaker
 import com.kaspersky.kaspresso.docloc.DocLocScreenshotCapturer
 import com.kaspersky.kaspresso.docloc.MetadataSaver
 import com.kaspersky.kaspresso.docloc.rule.LocaleRule
@@ -13,10 +14,10 @@ import com.kaspersky.kaspresso.internal.extensions.other.getAllInterfaces
 import com.kaspersky.kaspresso.internal.invocation.UiInvocationHandler
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.logger.UiTestLogger
-import java.io.File
-import java.lang.reflect.Proxy
 import org.junit.Before
 import org.junit.Rule
+import java.io.File
+import java.lang.reflect.Proxy
 
 /**
  *  The base class for all docloc screenshot tests.
@@ -75,7 +76,7 @@ import org.junit.Rule
  *      }
  *  ```
  *
- *  @param screenshotsDirectory directory to save screenshot. Will be cleared before launching the test.
+ *  @param screenshotsDirectory directory to save screenshot.
  *  @param locales comma-separated string with locales to run test with.
  *  @param changeSystemLocale change the system language, i.e. system dialogs (e.g. runtime permissions) will also be localized.
  *      Need permission in manifest file for a target app android.permission.CHANGE_CONFIGURATION
@@ -110,10 +111,11 @@ abstract class DocLocScreenshotTestCase(
 
     @Before
     fun setup() {
-      val  screenshotsDir = screenshotsDirectory.resolve(localeRule.currentLocaleName)
+        val screenshotsDir = screenshotsDirectory.resolve(localeRule.currentLocaleName)
 
         screenshotCapturer = DocLocScreenshotCapturer(
             logger,
+            ExternalScreenshotMaker(),
             MetadataSaver(kaspresso.device.activities, kaspresso.device.apps, logger),
             DefaultScreenshotDirectoryProvider(),
             DefaultScreenshotNameProvider(addTimestamps = false),

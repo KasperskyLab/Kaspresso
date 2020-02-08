@@ -2,6 +2,9 @@ package com.kaspersky.kaspresso.device.screenshots.screenshotmaker
 
 import java.io.File
 
+/**
+ * Calls [preferredScreenshotMaker] and fallbacks to [fallbackScreenshotMaker] on fail
+ */
 class CombinedScreenshotMaker(
     private val preferredScreenshotMaker: ScreenshotMaker,
     private val fallbackScreenshotMaker: ScreenshotMaker

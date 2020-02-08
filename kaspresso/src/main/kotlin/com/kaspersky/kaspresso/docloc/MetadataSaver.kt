@@ -15,16 +15,16 @@ internal class MetadataSaver(
 ) {
     private val activityMetadata = ActivityMetadata(logger)
 
-    fun saveScreenshotMetadata(folderPath: File, stepName: String) {
+    fun saveScreenshotMetadata(folderPath: File, name: String) {
         val activity = activities.getResumed()
         if (activity == null) {
-            logger.e("Activity is null on $stepName")
+            logger.e("Activity is null when saving metadata $name")
             return
         }
         runCatching {
             val metadata = activityMetadata.getFromActivity(activity)
                 .toXml(apps.targetAppPackageName)
-            folderPath.resolve("$stepName.xml").safeWrite(logger, metadata)
+            folderPath.resolve("$name.xml").safeWrite(logger, metadata)
         }
     }
 }
