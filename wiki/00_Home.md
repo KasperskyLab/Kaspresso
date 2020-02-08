@@ -12,7 +12,7 @@ If you are looking forward of a wiki for old versions then follow links: <br>
 [01. Wrapper over Espresso](./01_Wrapper_over_Espresso.md) <br>
 [02. Kautomator: wrapper over UI Automator](./02_Wrapper_over_UiAutomator.md) <br>
 [03. Kaspresso configurator](./03_Kaspresso_configurator.md) <br>
-[04. How to write autotests and appropriate test structure](./04_How_to_write_autotests_and_appropriate_test_structure.md) <br>
+[04. How to write autotests](./04_How_to_write_autotests.md) <br>
 [05. Device](./05_Device.md) <br>
 [06. AdbServer](./06_AdbServer.md) <br>
 [07. DocLoc](./07_DocLoc.md) <br>

@@ -1,4 +1,4 @@
-# How to write autotests and appropriate test structure
+# How to write autotests
 
 Anyone who starts to write UI-tests is facing with a problem of how to write UI-tests correctly.
 At the beginning of our great path, we had three absolutely different UI-test code styles from four developers. It was amazing.
