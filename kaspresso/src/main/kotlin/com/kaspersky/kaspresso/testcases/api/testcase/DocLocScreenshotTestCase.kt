@@ -3,6 +3,8 @@ package com.kaspersky.kaspresso.testcases.api.testcase
 import android.Manifest
 import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspresso.device.locales.Locales
+import com.kaspersky.kaspresso.device.screenshots.screenshotfiles.DefaultScreenshotDirectoryProvider
+import com.kaspersky.kaspresso.device.screenshots.screenshotfiles.DefaultScreenshotNameProvider
 import com.kaspersky.kaspresso.docloc.DocLocScreenshotCapturer
 import com.kaspersky.kaspresso.docloc.rule.LocaleRule
 import com.kaspersky.kaspresso.docloc.rule.TestFailRule
@@ -111,6 +113,8 @@ abstract class DocLocScreenshotTestCase(
         screenshotsDir = screenshotsDirectory.resolve(localeRule.currentLocaleName)
 
         screenshotCapturer = DocLocScreenshotCapturer(
+            DefaultScreenshotDirectoryProvider(),
+            DefaultScreenshotNameProvider(addTimestamps = false),
             screenshotsDir,
             logger,
             kaspresso.device.activities,

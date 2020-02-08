@@ -1,4 +1,4 @@
-package com.kaspersky.kaspresso.device.screenshots.screenshoter
+package com.kaspersky.kaspresso.device.screenshots.screenshotfiles
 
 import android.content.Context
 import android.os.Build
