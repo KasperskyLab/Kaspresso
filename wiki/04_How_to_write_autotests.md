@@ -1,21 +1,21 @@
 # How to write autotests
 
 Anyone who starts to write UI-tests is facing with a problem of how to write UI-tests correctly.
-At the beginning of our great path, we had three absolutely different UI-test code styles from four developers. It was amazing.
+At the beginning of our great way, we had three absolutely different UI-test code styles from four developers. It was amazing.
 At that moment, we decided to do something to prevent it. <br>
-That's why we have created rules on how to write UI-tests. These rules are divided into two groups: abstractions and structure.
+That's why we have created rules on how to write UI-tests and we have tried to make Kaspresso helping to follow these rules. All rules are divided into two groups: abstractions and structure. Also, we have added a third part containing convenient things resolving the most common problems.
 
 ### **Abstractions**
 
 #### How many abstractions can you have in your tests?
 Only one! It's a page object (PO), the term explained well by Martin Fowler in [this article](https://martinfowler.com/bliki/PageObject.html). <br>
-In Kakao a ```Screen``` class is the implementation of PO. Each screen visible by the user even a simple dialog is a separate PO. <br>
+In Kakao a ```Screen``` class (in Kautomator a ```UiScreen```) is the implementation of PO. Each screen visible by the user even a simple dialog is a separate PO. <br>
 Yes, there are cases when you need new abstraction and it's ok. But our advice is to think well before you introduce new abstraction.
 
 #### How to determine whether View (fragment, dialog, anything) in the project has its description in some Kakao ```Screen```?
 In a big project with a lot of UI-tests it's not an easy challenge.
-That's why we have implemented an extended version of the Kakao ```Screen``` in our sample - ```KScreen``` ([KScreen](../sample/src/androidTest/java/com/kaspersky/kaspressample/screen/KScreen.kt)). <br>
-In ```KScreen``` you have to implement two properties: ```layoutId``` and ```viewClass```. So your search if the View has its description in some Kakao ```Screen``` becomes easier.
+That's why we have implemented an extended version of the Kakao ```Screen``` - ```KScreen``` ([KScreen](../kaspresso/src/main/kotlin/com/kaspersky/kaspresso/screens/KScreen.kt)). In ```KScreen``` you have to implement two properties: ```layoutId``` and ```viewClass```. So your search if the View has its description in some Kakao ```Screen``` becomes easier. <br>
+In Kautomator, there is general ```UiScreen```([UiScreen](../kautomator/src/main/kotlin/com/kaspersky/components/kautomator/dsl/screen/UiScreen.kt)) that has an obligatory field - ```packageName```.
 
 #### Is it ok that your PO contains helper methods?
 If these methods help to understand what the test is doing then it's ok. <br>
