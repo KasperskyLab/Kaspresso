@@ -84,11 +84,11 @@ MainScreen {
 }
 ```
 As you mentioned Kakao and Kautomator offer almost identical API to work.
-So, a developer doesn't feel the difference while he/she writes a test and uses Espresso or UiAutomator under the hood. <br><br>
+So, a developer doesn't feel the difference while he/she writes a test and uses Espresso or UiAutomator under the hood. <br>
 
 But, the existance of only suitable Kotlin DSL wrappers over libraries doesn't help to correlate your test with the test-case
 on which this test is based. Also, the long test often transforms into an inseparable code wall. It's a problem.
-That's why we have created an additional Kotlin DSL allowing you to make the perception of your test at absolutely another level.<br><br>
+That's why we have created an additional Kotlin DSL allowing you to make the perception of your test at absolutely another level.<br>
 
 Please, observe the code below:
 ```kotlin
