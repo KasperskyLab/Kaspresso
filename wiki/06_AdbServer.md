@@ -6,7 +6,7 @@ As it was mentioned at [Device wiki](./05_Device.md), ```device``` uses **AdbSer
 
 ## Usage
 **AdbServer** instance is available in ```BaseTestContext``` scope and ```BaseTestCase``` via ```adbServer``` property. <br> 
-```
+```kotlin
 @Test
 fun test() =
     run {
