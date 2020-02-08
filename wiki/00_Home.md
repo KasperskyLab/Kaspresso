@@ -9,11 +9,13 @@ If you are looking forward of a wiki for old versions then follow links: <br>
 [Release 1.0.1 support](https://github.com/KasperskyLab/Kaspresso/blob/release/1.0.1/wiki/00.%20Home.md) <br>
 
 ## Content
-[01. Kaspresso configurator](./01.%20Kaspresso%20configurator.md) <br>
-[02. How to write autotests and appropriate test structure](./02.%20How%20to%20write%20autotests%20and%20appropriate%20test%20structure.md) <br>
-[03. Device](./03.%20Device.md) <br>
-[04. AdbServer](./04.%20AdbServer.md) <br>
-[05. DocLoc](./05.%20DocLoc.md) <br>
+[01. Wrapper over Espresso](./01_Wrapper_over_Espresso.md) <br>
+[02. Kautomator: wrapper over UI Automator](./02_Wrapper_over_UiAutomator.md) <br>
+[03. Kaspresso configurator](./03_Kaspresso_configurator.md) <br>
+[04. How to write autotests and appropriate test structure](./04_How_to_write_autotests_and_appropriate_test_structure.md) <br>
+[05. Device](./05_Device.md) <br>
+[06. AdbServer](./06_AdbServer.md) <br>
+[07. DocLoc](./07_DocLoc.md) <br>
 
 ## References
 
