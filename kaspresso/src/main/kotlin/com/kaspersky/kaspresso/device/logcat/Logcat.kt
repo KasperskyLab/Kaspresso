@@ -33,7 +33,7 @@ interface Logcat {
      * @param includePatternIsIgnoreCase boolean is include pattern must ignore string case
      * @param buffer one of available logcat buffers
      * @param rowLimit limiter of logcat output, starts FROM BEGINNING of logcat dump
-     * with extra row of buffer beginning, if null return all rows
+     * WITH EXTRA ROW of buffer beginning, if null return all rows
      *
      * @return [List<String>] with logcat rows
      */
@@ -56,7 +56,7 @@ interface Logcat {
      * @param includePatternIsIgnoreCase boolean is include pattern must ignore string case
      * @param buffer one of available logcat buffers
      * @param rowLimit limiter of logcat output, starts FROM BEGINNING of logcat dump
-     * with extra row of buffer beginning, if null return all rows
+     * WITH EXTRA ROW of buffer beginning, if null return all rows
      * @param readingBlock lambda with String input and Boolean output. Invokes on
      * every readed logcat row. Stop reading logcat if lambda returns false. If you needed
      * all rows of log always return false
@@ -72,6 +72,10 @@ interface Logcat {
     ): Boolean
 
     enum class Buffer(val bufferName: String) {
+        /**
+         * Represents logcat buffer names
+         * https://developer.android.com/studio/command-line/logcat#alternativeBuffers
+         */
         RADIO("radio"), // View the buffer that contains radio/telephony related messages.
         EVENTS("events"), // View the interpreted binary system event buffer messages.
         MAIN("main"), // View the main log buffer (default) does not contain system and crash log messages.

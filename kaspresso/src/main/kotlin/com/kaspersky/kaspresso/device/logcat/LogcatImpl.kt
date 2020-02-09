@@ -3,15 +3,17 @@ package com.kaspersky.kaspresso.device.logcat
 import java.io.BufferedReader
 import java.io.InputStreamReader
 
-const val DEFAULT_BUFFER_SIZE = 64
-const val DEFAULT_LOGCAT_CLEAR_DELAY: Long = 1_000
-
 class LogcatImpl(
     // If needed to print executed command to System.out set isNeededToPrintExecutedCommand = true
     private val isNeededToPrintExecutedCommand: Boolean = false,
     private val defaultBufferSize: LogcatBufferSize = LogcatBufferSize(DEFAULT_BUFFER_SIZE, LogcatBufferSize.Dimension.KILOBYTES),
     isNeededToDisableChatty: Boolean = true
 ) : Logcat {
+
+    companion object {
+        const val DEFAULT_BUFFER_SIZE = 64
+        const val DEFAULT_LOGCAT_CLEAR_DELAY: Long = 1_000
+    }
 
     /**
      * Whitelisting all PIDs for disabling chatty
@@ -63,7 +65,7 @@ class LogcatImpl(
      * @param includePatternIsIgnoreCase boolean is include pattern must ignore string case
      * @param buffer one of available logcat buffers
      * @param rowLimit limiter of logcat output, starts FROM BEGINNING of logcat dump
-     * with extra row of buffer beginning, if null return all rows
+     * WITH EXTRA ROW of buffer beginning, if null return all rows
      *
      * @return [List<String>] with logcat rows
      */
@@ -100,7 +102,7 @@ class LogcatImpl(
      * @param includePatternIsIgnoreCase boolean is include pattern must ignore string case
      * @param buffer one of available logcat buffers
      * @param rowLimit limiter of logcat output, starts FROM BEGINNING of logcat dump
-     * with extra row of buffer beginning, if null return all rows
+     * WITH EXTRA ROW of buffer beginning, if null return all rows
      * @param readingBlock lambda with String input and Boolean output. Invokes on
      * every readed logcat row. Stop reading logcat if lambda returns false. If you needed
      * all rows of log always return false

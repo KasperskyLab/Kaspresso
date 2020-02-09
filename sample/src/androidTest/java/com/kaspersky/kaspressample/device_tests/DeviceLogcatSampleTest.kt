@@ -117,7 +117,7 @@ class DeviceLogcatSampleTest : TestCase() {
                 assertTrue(logcatList50Limit.size == 51)
             }
 
-            step("Using analyzer block") {
+            step("Using reader block") {
                 repeat(100) { testLogger.i("Test6Row$it") }
 
                 var fullLogcatList = device.logcat.readLogcatRows()
