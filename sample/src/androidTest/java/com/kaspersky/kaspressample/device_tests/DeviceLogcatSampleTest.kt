@@ -3,6 +3,7 @@ package com.kaspersky.kaspressample.device_tests
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import com.kaspersky.kaspressample.MainActivity
+import com.kaspersky.kaspresso.device.logcat.LogcatBufferSize
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.junit.Assert.assertTrue
 import org.junit.Rule
@@ -19,6 +20,7 @@ class DeviceLogcatSampleTest : TestCase() {
     fun logcatTest() {
         before {
             device.logcat.clear()
+            device.logcat.setBufferSize(LogcatBufferSize(8, LogcatBufferSize.Dimension.MEGABYTES))
             Thread.sleep(1000)
         }.after {
         }.run {
@@ -42,7 +44,7 @@ class DeviceLogcatSampleTest : TestCase() {
 
                 val logcatListCaseInsensitive = device.logcat.readLogcatRows(
                     excludePattern = "test1row",
-                    excludePatternIgnoreCase = true
+                    excludePatternIsIgnoreCase = true
                 )
                 assertTrue(logcatListCaseInsensitive.none { logcatRow ->
                     logcatRow.contains("Test1Row")
@@ -79,7 +81,7 @@ class DeviceLogcatSampleTest : TestCase() {
 
                 val logcatList = device.logcat.readLogcatRows(
                     includePattern = "test3row",
-                    includePatternIgnoreCase = true
+                    includePatternIsIgnoreCase = true
                 )
                 assertTrue(logcatList.filter { logcatRow ->
                     logcatRow.contains("Test3Row")
@@ -92,9 +94,9 @@ class DeviceLogcatSampleTest : TestCase() {
 
                 val logcatList = device.logcat.readLogcatRows(
                     includePattern = "test4row",
-                    includePatternIgnoreCase = true,
+                    includePatternIsIgnoreCase = true,
                     excludePattern = "test4row[0-9]",
-                    excludePatternIgnoreCase = true
+                    excludePatternIsIgnoreCase = true
                 )
                 assertTrue(
                     logcatList.size == 1 &&
