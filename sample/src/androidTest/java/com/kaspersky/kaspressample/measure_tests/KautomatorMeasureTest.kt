@@ -8,6 +8,7 @@ import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.R
 import com.kaspersky.kaspressample.external_screens.UiMainScreen
 import com.kaspersky.kaspressample.external_screens.UiMeasureScreen
+import com.kaspersky.kaspresso.idlewaiting.KautomatorWaitForIdleSettings
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.junit.Rule
@@ -17,7 +18,7 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class KautomatorMeasureTest : TestCase(
     kaspressoBuilder = Kaspresso.Builder.advanced {
-//        kautomatorWaitForIdleSettings = KautomatorWaitForIdleSettings.boost()
+        kautomatorWaitForIdleSettings = KautomatorWaitForIdleSettings.boost()
     }
 ) {
 
