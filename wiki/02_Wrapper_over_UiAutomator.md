@@ -1,7 +1,7 @@
 # Kautomator: wrapper over UI Automator
 
 **Kautomator** - Nice and simple DSL for UI Automator in Kotlin that allows to accelerate UI Automator to amazing. <br>
-Inspired by [Kakao](https://github.com/agoda-com/Kakao) and [russian talk about UI Automator](https://youtu.be/bqNguUHK3SM)(thanks to Svetlana Smelchakova).
+Inspired by [Kakao](https://github.com/agoda-com/Kakao) and [russian talk about UI Automator](https://youtu.be/bqNguUHK3SM) (thanks to Svetlana Smelchakova).
 
 ### Introduction
 Tests written with UI Automator are so complex, non-readble and hard to maintain especially for testers.
@@ -25,9 +25,10 @@ assertEquals(uiObject.text, "Kaspresso")
 ```
 This is an example just to input and check the text. Because we have a successful experience of Kakao using we decided to wrap UI Automator over in the same manner and called it **Kautomator**. 
 
-Another big advantage of **Kautomator** is a possibility to accelerate UI Automator. Have a glance at video below:
-// todo
-Why is it possible? The details are available a little bit later.
+Another big advantage of **Kautomator** is a possibility to accelerate UI Automator. <br>
+Have a glance at video below: <br>
+// todo <br>
+Why is it possible? The details are [available a little bit later](./02_Wrapper_over_UiAutomator.md#accelerate-ui-automator).
 
 #### Benefits
 - Readability
