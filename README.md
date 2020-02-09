@@ -20,7 +20,7 @@ In case of UiAutomator, we get **10x** acceleration for some commands!
 
 ![](https://habrastorage.org/webt/dw/jh/9k/dwjh9kypjl637kxj8tiaxwjvtp0.png)
 
-Deep in dive into capabilities of Kaspresso!
+Deep dive into capabilities of Kaspresso!
 
 ## Capabilities
 
