@@ -27,7 +27,9 @@ This is an example just to input and check the text. Because we have a successfu
 
 Another big advantage of **Kautomator** is a possibility to accelerate UI Automator. <br>
 Have a glance at video below: <br>
-// todo <br>
+![](https://habrastorage.org/webt/ti/kv/ki/tikvkij1vjesnacrxqm-lk0coly.gif) <br>
+The left video is boosted UI Automator, the right video is default UI Automator.
+
 Why is it possible? The details are [available a little bit later](./02_Wrapper_over_UiAutomator.md#accelerate-ui-automator).
 
 #### Benefits
