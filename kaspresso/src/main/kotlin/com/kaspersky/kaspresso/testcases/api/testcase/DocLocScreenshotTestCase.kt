@@ -117,7 +117,7 @@ abstract class DocLocScreenshotTestCase(
             logger,
             ExternalScreenshotMaker(),
             MetadataSaver(kaspresso.device.activities, kaspresso.device.apps, logger),
-            DefaultScreenshotDirectoryProvider(),
+            DefaultScreenshotDirectoryProvider(groupByRunNumbers = false),
             DefaultScreenshotNameProvider(addTimestamps = false),
             screenshotsDir
         )

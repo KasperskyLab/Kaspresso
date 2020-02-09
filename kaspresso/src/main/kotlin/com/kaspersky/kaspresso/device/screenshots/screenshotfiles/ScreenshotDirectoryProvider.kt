@@ -1,9 +1,13 @@
 package com.kaspersky.kaspresso.device.screenshots.screenshotfiles
 
 /**
- * Returns a directory for screenshots of a separate test
+ * Provides a directory for screenshots of a separate test
  */
 interface ScreenshotDirectoryProvider {
 
-    fun getDirectoryForTest(testMethod: TestMethod): String
+    /**
+     * @param testMethod specifies what test is running
+     * @param runNumber specifies how many times a given test have already run
+     */
+    fun getDirectoryForTest(testMethod: TestMethod, runNumber: Int): String
 }

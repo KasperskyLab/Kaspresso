@@ -573,8 +573,8 @@ data class Kaspresso(
                 screenshots = ScreenshotsImpl(
                     libLogger,
                     CombinedScreenshotMaker(InternalScreenshotMaker(activities), ExternalScreenshotMaker()),
-                    DefaultScreenshotDirectoryProvider(),
-                    DefaultScreenshotNameProvider(addTimestamps = true)
+                    DefaultScreenshotDirectoryProvider(groupByRunNumbers = true),
+                    DefaultScreenshotNameProvider(addTimestamps = false)
                 )
             }
             if (!::accessibility.isInitialized) accessibility = AccessibilityImpl()

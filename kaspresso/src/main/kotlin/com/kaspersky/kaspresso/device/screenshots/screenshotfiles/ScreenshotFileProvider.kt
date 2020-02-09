@@ -9,6 +9,9 @@ internal class ScreenshotFileProvider(
 ) {
     private val directoryStorage = ScreenshotsDirectoryStorage()
 
+    // stores how many times a given test was started
+    private val testRunNumbers = mutableMapOf<TestMethod, Int>()
+
     /**
      * Returns a non-existing file for screenshot.
      * Even though the file won't exist after the method call, all the parent directories will created if necessary.
@@ -32,11 +35,17 @@ internal class ScreenshotFileProvider(
 
     private fun getDirectoryForTest(screenshotRootDirectory: File, subDirectory: String? = null): File {
         val testMethod = Thread.currentThread().stackTrace.findTestMethod()
-        val directory = screenshotDirectoryProvider.getDirectoryForTest(testMethod)
+        val runNumber = testRunNumbers[testMethod] ?: 1
+        val directory = screenshotDirectoryProvider.getDirectoryForTest(testMethod, runNumber)
         return if(subDirectory != null) {
             screenshotRootDirectory.resolve(subDirectory).resolve(directory)
         } else {
             screenshotRootDirectory.resolve(directory)
         }
+    }
+
+    fun incrementRunNumberOfCurrentTest() {
+        val testMethod = Thread.currentThread().stackTrace.findTestMethod()
+        testRunNumbers[testMethod] = (testRunNumbers[testMethod] ?: 0) + 1
     }
 }

@@ -12,6 +12,10 @@ class TestRunnerScreenshotWatcherInterceptor(
     private val screenshots: Screenshots
 ) : TestRunWatcherInterceptor {
 
+    override fun onTestStarted(testInfo: TestInfo) {
+        screenshots.onTestStarted()
+    }
+
     /**
      * Takes a screenshot of the screen on which the "after" section failed.
      *
