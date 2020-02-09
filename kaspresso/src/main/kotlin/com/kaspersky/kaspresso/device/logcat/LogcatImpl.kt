@@ -4,6 +4,7 @@ import java.io.BufferedReader
 import java.io.InputStreamReader
 
 const val DEFAULT_BUFFER_SIZE = 64
+const val DEFAULT_LOGCAT_CLEAR_DELAY: Long = 1_000
 
 class LogcatImpl(
     // If needed to print executed command to System.out set isNeededToPrintExecutedCommand = true
@@ -50,6 +51,7 @@ class LogcatImpl(
      */
     override fun clear(buffer: Logcat.Buffer) {
         executeCommand("logcat -b ${buffer.bufferName} -c")
+        Thread.sleep(DEFAULT_LOGCAT_CLEAR_DELAY)
     }
 
     /**

@@ -19,9 +19,8 @@ class DeviceLogcatSampleTest : TestCase() {
     @Test
     fun logcatTest() {
         before {
-            device.logcat.clear()
             device.logcat.setBufferSize(LogcatBufferSize(8, LogcatBufferSize.Dimension.MEGABYTES))
-            Thread.sleep(1000)
+            device.logcat.clear()
         }.after {
         }.run {
             step("Get logcat from device as list of strings") {
