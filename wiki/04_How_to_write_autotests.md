@@ -5,7 +5,7 @@ At the beginning of our great way, we had three absolutely different UI-test cod
 At that moment, we decided to do something to prevent it. <br>
 That's why we have created rules on how to write UI-tests and we have tried to make Kaspresso helping to follow these rules. All rules are divided into two groups: abstractions and structure. Also, we have added a third part containing convenient things resolving the most common problems.
 
-### **Abstractions**
+### Abstractions
 
 #### How many abstractions can you have in your tests?
 Only one! It's a page object (PO), the term explained well by Martin Fowler in [this article](https://martinfowler.com/bliki/PageObject.html). <br>
@@ -13,7 +13,7 @@ In Kakao a ```Screen``` class (in Kautomator a ```UiScreen```) is the implementa
 Yes, there are cases when you need new abstraction and it's ok. But our advice is to think well before you introduce new abstraction.
 
 #### How to determine whether View (fragment, dialog, anything) in the project has its description in some Kakao ```Screen```?
-In a big project with a lot of UI-tests it's not an easy challenge.
+In a big project with a lot of UI-tests, it's not an easy challenge.
 That's why we have implemented an extended version of the Kakao ```Screen``` - ```KScreen``` ([KScreen](../kaspresso/src/main/kotlin/com/kaspersky/kaspresso/screens/KScreen.kt)). In ```KScreen``` you have to implement two properties: ```layoutId``` and ```viewClass```. So your search if the View has its description in some Kakao ```Screen``` becomes easier. <br>
 In Kautomator, there is general ```UiScreen```([UiScreen](../kautomator/src/main/kotlin/com/kaspersky/components/kautomator/dsl/screen/UiScreen.kt)) that has an obligatory field - ```packageName```.
 
@@ -253,37 +253,111 @@ Finally, let's look at all available Test DSL in Kaspresso:
 6. ```init-run```
 7. ```run```
 
+#### Examples
+You can have a look at examples of how to [use and configure Kaspresso](../sample/src/androidTest/java/com/kaspersky/kaspressample/configurator_tests)
+and how to [use different forms of DSL](../sample/src/androidTest/java/com/kaspersky/kaspressample/dsl_tests).
+
+### Sweet additional features
+
 #### Some words about *BaseTestContext* method
-You can notice an existing of some BaseTestContext in `before`, `after` and `run` methods. BaseTestContext gives you access to all Kaspresso's entities that a developer can need during the test. Also, BaseTestContext gives you insurance that all of these entities were created correctly for the current session and with actual Kaspresso configurator. <br>
-So, the next things are available in BaseTestContext:
-1. ```data``` <br>
-If you set your test data by ```init-transform``` methods using then this test data is available by a ```data``` field.
-2. ```flakySafely``` <br>
-It's a method that receives a lambda and invokes it in the same manner as FlakySafeBehaviorInterceptors do.
-If you disable this interceptor or if you want to set some special flaky safety params for any view, you can use this method.
-The example is [here](../sample/src/androidTest/java/com/kaspersky/kaspressample/flaky_tests/CommonFlakyTest.kt).
-3. `continuously` <br>
-It's a method that receives a lambda and invokes it in the same manner as `ContinuouslyProviderImpl` does.
-It is similar to what `flakySafely` does, but for negative scenarios, where you need all the time to check that something does not happen.
-The example is [here](../sample/src/androidTest/java/com/kaspersky/kaspressample/flaky_tests/ContinuouslyTest.kt).
-4. ```compose``` <br>
-This is a method to make a composed action from multiple actions or assertions, and this action succeeds if at least one of its components succeeds.
-It is available as an extension function for any KView (any that implements both BaseActions, BaseAssertions and Interceptable interfaces),
-and as just a regular method (in this case it can take actions on different views as well).
-The example is [here](../sample/src/androidTest/java/com/kaspersky/kaspressample/flaky_tests/ComposeTest.kt)
-5. ```testAssistants``` <br>
-Special assistants to write tests. Pay attention to the fact that these assistants are available in ```BaseTestCase``` also.
-    1. ```testLogger``` <br>
-    It's a logger for tests allowed to output logs by a more appropriate and readable form.
-    2. ```device``` <br>
-    An instance of ```Device``` class is available in this context. <br>
-    It's a special interface given beautiful possibilities to do a lot of useful things at the test.
-    Implementations of ```device``` use UiAutomator and AdbServer under the hood. <br>
-    More detailed info about ```Device``` is [here](./03.%20Device.md)
-    3. ```adbServer``` <br>
-    You have access to AdbServer instance used in ```Device```'s interfaces via ```adbServer``` property.
+You can notice an existing of some `BaseTestContext` in `before`, `after` and `run` methods. `BaseTestContext` gives you access to all Kaspresso's entities that a developer can need during the test. Also, `BaseTestContext` gives you insurance that all of these entities were created correctly for the current session and with actual Kaspresso configurator. <br>
+So, let's consider what `BaseTestContext` offers.
 
+#### flakySafely
+It's a method that receives a lambda and invokes it in the same manner as FlakySafeInterceptors group. <br>
+If you disabled this interceptor or if you want to set some special flaky safety params for any view, you can use this method. The most common case is when the default timeout (10 seconds) for flakySafety is not enough, because, for example, the appearance of a view is blocked by long background operation.
+```kotlin
+step("Check tv6's text") {
+    CommonFlakyScreen {
+        tv6 {
+            flakySafely(timeoutMs = 16_000) {
+                hasText(R.string.common_flaky_final_textview)
+            }
+        }
+    }
+}
+```
+More detailed examples are [here](../sample/src/androidTest/java/com/kaspersky/kaspressample/flaky_tests). Please, observe a [documentation](../kaspresso/src/main/kotlin/com/kaspersky/kaspresso/flakysafety/FlakySafetyProviderGlobalImpl.kt) about implementation details.
 
-### Examples
-You can look at examples of how to [use and configure Kaspresso](../sample/src/androidTest/java/com/kaspersky/kaspressample/configurator_tests)
-and use [different forms of DSL](../sample/src/androidTest/java/com/kaspersky/kaspressample/dsl_tests).
+### continuously
+This function is similar to what `flakySafely` does, but for negative scenarios, where you need all the time to check that something does not happen.
+```kotlin
+ContinuouslyDialogScreen {
+    continuously() {
+        dialogTitle {
+            doesNotExist()
+        }
+    }
+}
+```
+The example is [here](../sample/src/androidTest/java/com/kaspersky/kaspressample/continuously_tests).
+
+### compose
+This is a method to make a composed action from multiple actions or assertions, and this action succeeds if at least one of its components succeeds. `compose` is useful in cases when we don't know an accurate sequence of events and can't influence it. Such cases are possible when a test is performed outside the application. When a test is performed inside the application we strongly recommend to make your test linear and don't put any conditions in tests that are possible thanks to `compose`. <br>
+It is available as an extension function for any `KView`, `UiBaseView` and as just a regular method (in this case it can take actions on different views as well).
+```kotlin
+step("Handle potential unexpected behavior") {
+    compose {
+        // the first potential branch when ComplexComposeScreen.stage1Button is visible
+        or(ComplexComposeScreen.stage1Button) {
+            isVisible()
+        } then {
+            // if the first branch was succeed then we execute some special flow
+            step("Flow is over the product") {
+                ComplexComposeScreen {
+                    stage1Button {
+                        click()
+                    }
+                    stage2Button {
+                        isVisible()
+                        click()
+                    }
+                }
+            }
+        }
+        // the second potential branch when UiComposeDialog1.title is visible
+        // just imagine that is some unexpected system or product behavior and we cannot fix it now
+        or(UiComposeDialog1.title) {
+            isDisplayed()
+        } then {
+            // if the second branch was succeed then we execute some special flow
+            step("Flow is over dialogs") {
+                UiComposeDialog1 {
+                    okButton {
+                        isDisplayed()
+                        click()
+                    }
+                }
+                UiComposeDialog2 {
+                    title {
+                        isDisplayed()
+                    }
+                    okButton {
+                        isDisplayed()
+                        click()
+                    }
+                }
+            }
+        }
+    }
+}
+```
+The example is [here](../sample/src/androidTest/java/com/kaspersky/kaspressample/compose_tests). <br>
+Please, observe additional opportunities and documentation: [common info](../kaspresso/src/main/kotlin/com/kaspersky/kaspresso/compose) [ComposeProvider](../kaspresso/src/main/kotlin/com/kaspersky/kaspresso/compose/ComposeProvider.kt) and [WebComposeProvider](../kaspresso/src/main/kotlin/com/kaspersky/kaspresso/compose/WebComposeProvider.kt).
+
+#### data
+If you set your test data by ```init-transform``` methods then this test data is available by a `data` field.
+
+#### testAssistants
+Special assistants to write tests. Pay attention to the fact that these assistants are available in `BaseTestCase` also. <br>
+1. `testLogger` <br>
+It's a logger for tests allowed to output logs by a more appropriate and readable form.
+2. `device` <br>
+An instance of `Device` class is available in this context. It's a special interface given beautiful possibilities to do a lot of useful things at the test. <br>
+More detailed info about `Device` is [here](./05_Device.md).
+3. `adbServer` <br>
+You have access to AdbServer instance used in `Device`'s interfaces via `adbServer` property. <br>
+More detailed info about `AdbServer` is [here](./06_AdbServer.md).
+4. `params` <br>
+`Params` is the facade class for all Kaspresso parameters. <br>
+Please, observe the [source code](../kaspresso/src/main/kotlin/com/kaspersky/kaspresso/params/Params.kt).
