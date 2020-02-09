@@ -8,7 +8,6 @@ import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.R
 import com.kaspersky.kaspressample.external_screens.UiMainScreen
 import com.kaspersky.kaspressample.external_screens.UiMeasureScreen
-import com.kaspersky.kaspresso.idlewaiting.KautomatorWaitForIdleSettings
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.junit.Rule
@@ -62,14 +61,14 @@ class KautomatorMeasureTest : TestCase(
 
             step("Measure screen. Button_2 clicks and TextView changes comparing") {
                 UiMeasureScreen {
-                    RANGE.forEach { it ->
+                    RANGE.forEach { index ->
                         button2 {
                             click()
                             hasText(device.targetContext.getString(R.string.measure_fragment_text_button_2).toUpperCase())
                         }
                         textView {
                             hasText(
-                                "${device.targetContext.getString(R.string.measure_fragment_text_textview)}${it + 1}"
+                                "${device.targetContext.getString(R.string.measure_fragment_text_textview)}${index + 1}"
                             )
                         }
                     }
@@ -96,9 +95,9 @@ class KautomatorMeasureTest : TestCase(
 
             step("Measure fragment. Checkbox clicks comparing") {
                 UiMeasureScreen {
-                    RANGE.forEach {
+                    RANGE.forEach { index ->
                         checkBox {
-                            if (it % 2 == 0) {
+                            if (index % 2 == 0) {
                                 setChecked(true)
                                 isChecked()
                             } else {
@@ -107,7 +106,6 @@ class KautomatorMeasureTest : TestCase(
                             }
                         }
                     }
-
                 }
             }
         }

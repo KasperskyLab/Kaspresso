@@ -13,10 +13,8 @@ import com.kaspersky.components.kautomator.KautomatorConfigurator
 import com.kaspersky.kaspresso.sample_kautomator.MainActivity
 
 import com.kaspersky.kaspresso.sample_kautomator.screen.MainScreen
-import com.kaspersky.kaspresso.systemsafety.SystemDialogSafetyProviderImpl
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.junit.Assert.assertEquals
-import org.junit.Assert.assertThat
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith

@@ -62,7 +62,7 @@ class InterceptorTest : TestCase(
                     }
                 }
             }
-            
+
             step("Check Intercepting correctness") {
                 assertEquals(mutableListOf("ALL", "CHECK", "ALL", "PERFORM"), list)
             }
@@ -83,7 +83,7 @@ class InterceptorTest : TestCase(
                     }
                 }
             }
-            
+
             step("Check Intercepting correctness") {
                 InterceptedMainScreen {
                     assertEquals(mutableListOf("ALL", "CHECK", "ALL", "PERFORM"), screenList)
@@ -114,7 +114,7 @@ class InterceptorTest : TestCase(
                     }
                 }
             }
-            
+
             step("Check Intercepting correctness") {
                 assertEquals(mutableListOf("ALL", "CHECK", "ALL", "PERFORM"), list)
             }
@@ -152,7 +152,7 @@ class InterceptorTest : TestCase(
                     }
                 }
             }
-            
+
             step("Check Intercepting correctness") {
                 InterceptedMainScreen {
                     assert(screenList == mutableListOf("ALL", "CHECK", "ALL", "PERFORM"))
@@ -206,7 +206,7 @@ class InterceptorTest : TestCase(
                     }
                 }
             }
-            
+
             step("Check Intercepting correctness") {
                 InterceptedMainScreen {
                     assert(screenList.isEmpty())
@@ -237,5 +237,4 @@ class InterceptorTest : TestCase(
             screenList.clear()
         }
     }
-
 }

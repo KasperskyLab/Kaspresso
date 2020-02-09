@@ -2,11 +2,9 @@ package com.kaspersky.kaspressample.measure
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.kaspersky.kaspressample.R
 import kotlinx.android.synthetic.main.activity_measure.*
-import java.util.concurrent.Executors
 import kotlinx.android.synthetic.main.activity_simple.*
 import kotlinx.android.synthetic.main.activity_simple.button_2
 
