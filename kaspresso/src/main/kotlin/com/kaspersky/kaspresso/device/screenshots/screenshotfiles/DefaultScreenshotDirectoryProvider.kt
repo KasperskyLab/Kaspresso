@@ -8,8 +8,8 @@ class DefaultScreenshotDirectoryProvider : ScreenshotDirectoryProvider {
         private const val NAME_SEPARATOR = "_"
     }
 
-    override fun getDirectoryForTest(testClassName: String, testMethodName: String): String {
-        val clearedClassName = testClassName.replace("[^A-Za-z0-9._-]".toRegex(), NAME_SEPARATOR)
-        return clearedClassName + File.separator + testMethodName
+    override fun getDirectoryForTest(testMethod: TestMethod): String {
+        val clearedClassName = testMethod.className.replace("[^A-Za-z0-9._-]".toRegex(), NAME_SEPARATOR)
+        return clearedClassName + File.separator + testMethod.methodName
     }
 }

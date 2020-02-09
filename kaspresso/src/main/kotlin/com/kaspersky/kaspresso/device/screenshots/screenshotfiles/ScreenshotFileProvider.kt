@@ -31,8 +31,8 @@ internal class ScreenshotFileProvider(
     }
 
     private fun getDirectoryForTest(screenshotRootDirectory: File, subDirectory: String? = null): File {
-        val testClass = Thread.currentThread().stackTrace.findTestClassTraceElement()
-        val directory = screenshotDirectoryProvider.getDirectoryForTest(testClass.className, testClass.methodName)
+        val testMethod = Thread.currentThread().stackTrace.findTestMethod()
+        val directory = screenshotDirectoryProvider.getDirectoryForTest(testMethod)
         return if(subDirectory != null) {
             screenshotRootDirectory.resolve(subDirectory).resolve(directory)
         } else {
