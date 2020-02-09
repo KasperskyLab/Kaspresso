@@ -26,7 +26,8 @@ assertEquals(uiObject.text, "Kaspresso")
 This is an example just to input and check the text. Because we have a successful experience of Kakao using we decided to wrap UI Automator over in the same manner and called it **Kautomator**. 
 
 Another big advantage of **Kautomator** is a possibility to accelerate UI Automator. <br>
-Have a glance at video below: <br>
+Have a glance at video below: 
+
 ![](https://habrastorage.org/webt/ti/kv/ki/tikvkij1vjesnacrxqm-lk0coly.gif) <br>
 The left video is boosted UI Automator, the right video is default UI Automator.
 
