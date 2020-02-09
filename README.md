@@ -149,10 +149,12 @@ More detailed info about interceptors is [here](/wiki/03_Kaspresso_configurator.
 
 #### UI-test libraries acceleration
 
-Shut up and watch the video! 
+Shut up and watch the video =)
 
 ![](https://habrastorage.org/webt/ti/kv/ki/tikvkij1vjesnacrxqm-lk0coly.gif) <br>
 The left video is boosted UI Automator, the right video is default UI Automator.
+
+How is it possible? Please, review [the short explanation](./wiki/02_Wrapper_over_UiAutomator.md#accelerate-ui-automator).
 
 #### Interceptors
 
