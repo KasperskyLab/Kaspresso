@@ -6,6 +6,7 @@ import com.kaspersky.kaspresso.params.FlakySafetyParams
 
 /**
  * The implementation of the [FlakySafetyProvider] interface.
+ * By default, this implementation is using to struggle with flaky UI libs inside a View
  */
 class FlakySafetyProviderSimpleImpl(
     private val params: FlakySafetyParams,
