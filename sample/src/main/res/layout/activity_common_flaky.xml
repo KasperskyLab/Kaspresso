@@ -15,20 +15,6 @@
             android:orientation="vertical">
 
             <Button
-                android:id="@+id/kautomator_mode"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:backgroundTint="@android:color/holo_green_light"
-                android:text="@string/common_flaky_kautomator_mode"/>
-
-            <Button
-                android:id="@+id/kakao_mode"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:backgroundTint="@android:color/holo_green_light"
-                android:text="@string/common_flaky_kakao_mode"/>
-
-            <Button
                 android:id="@+id/scroll_view_btn1"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"

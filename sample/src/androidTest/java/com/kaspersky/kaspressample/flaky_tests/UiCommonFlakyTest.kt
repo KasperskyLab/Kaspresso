@@ -8,7 +8,6 @@ import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.R
 import com.kaspersky.kaspressample.external_screens.UiCommonFlakyScreen
 import com.kaspersky.kaspressample.external_screens.UiMainScreen
-import com.kaspersky.kaspressample.screen.CommonFlakyScreen
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.junit.Rule
 import org.junit.Test
@@ -48,24 +47,13 @@ class UiCommonFlakyTest : TestCase() {
                 }
             }
 
-            step("Choose the Kautomator mode") {
-                CommonFlakyScreen {
-                    kautomatorMode {
-                        click()
-                    }
-                }
-            }
-
             step("Check btn5's text") {
                 UiCommonFlakyScreen {
                     btn5 {
                         // automate flaky safety handling is in action
+                        // even UiAutomator is using under the hood =)
                         // the text is changing during 3 seconds
-                        // the default value of flaky safety timeout in Kautomator = 15 seconds
-                        // So, we want to show the beauty of Kautomator
-                        // where all of this magic is doing under the hood and you don't need to
-                        // keep in your head all potential flakies of UiAutomator
-                        // God save the Kautomator =)
+                        // the default value of flaky safety timeout = 10 seconds
                         hasText(device.targetContext.getString(R.string.common_flaky_final_button).toUpperCase())
                     }
                 }
@@ -74,10 +62,10 @@ class UiCommonFlakyTest : TestCase() {
             step("Check tv6's text") {
                 UiCommonFlakyScreen {
                     tv6 {
-                        // here, the text will be changing longer(summary = 19+ seconds) than
-                        //     the default value of flaky safety timeout in Kautomator = 15 seconds
-                        // that's why we use flakySafely method obviously with timeout = 20 seconds
-                        flakySafely(timeoutMs = 20_000) {
+                        // here, the text will be changing longer(summary = 15 seconds) than
+                        //     the default value of flaky safety timeout(10 seconds)
+                        // that's why we use flakySafely method obviously
+                        flakySafely(timeoutMs = 16_000) {
                             hasText(device.targetContext.getString(R.string.common_flaky_final_textview))
                         }
                     }

@@ -32,13 +32,3 @@ interface FailureLoggingProvider {
      */
     fun logDescriptionAndThrow(error: Throwable?, viewMatcher: Matcher<View>?)
 }
-
-/**
- * The function to call [FailureLoggingProvider.withLoggingOnFailure] with null-safety.
- *
- * @param action the action to invoke.
- *
- * @return the result of the [action] invocation.
- */
-internal fun <T> FailureLoggingProvider?.withLoggingOnFailureIfNotNull(action: () -> T): T =
-    if (this != null) withLoggingOnFailure(action) else action.invoke()

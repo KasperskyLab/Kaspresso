@@ -1,7 +1,7 @@
 package com.kaspersky.kaspresso.flakysafety
 
 import com.kaspersky.kaspresso.internal.extensions.other.withMessage
-import com.kaspersky.kaspresso.logger.UiTestLogger
+import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.params.ContinuouslyParams
 import java.util.Timer
 import java.util.concurrent.locks.ReentrantLock
@@ -12,8 +12,7 @@ import kotlin.concurrent.withLock
  * The implementation of the [ContinuouslyProvider] interface.
  */
 class ContinuouslyProviderImpl(
-    private val params: ContinuouslyParams,
-    private val logger: UiTestLogger
+    private val kaspresso: Kaspresso
 ) : ContinuouslyProvider {
 
     private val lock = ReentrantLock()
@@ -29,7 +28,7 @@ class ContinuouslyProviderImpl(
      * @throws Throwable if any of attempts failed.
      */
     @Throws(Throwable::class)
-    override fun <T> continuously(action: () -> T): T = invokeContinuously(params, null, action)
+    override fun <T> continuously(action: () -> T): T = invokeContinuously(getParams(), null, action)
 
     /**
      * Invokes the given [action] during set timeout.
@@ -49,14 +48,21 @@ class ContinuouslyProviderImpl(
         intervalMs: Long?,
         failureMessage: String?,
         action: () -> T
-    ): T = invokeContinuously(
-        params = ContinuouslyParams.customInstance(
-            timeoutMs ?: params.timeoutMs,
-            intervalMs ?: params.intervalMs
-        ),
-        failureMessage = failureMessage,
-        action = action
-    )
+    ): T {
+        return invokeContinuously(
+            params = getParams(timeoutMs, intervalMs),
+            failureMessage = failureMessage,
+            action = action
+        )
+    }
+
+    private fun getParams(timeoutMs: Long? = null, intervalMs: Long? = null): ContinuouslyParams {
+        val defaultParams = kaspresso.params.continuouslyParams
+        return ContinuouslyParams.custom(
+            timeoutMs = timeoutMs ?: defaultParams.timeoutMs,
+            intervalMs = intervalMs ?: defaultParams.intervalMs
+        )
+    }
 
     /**
      * Attempts to invoke the given [action].
@@ -68,7 +74,7 @@ class ContinuouslyProviderImpl(
             try {
                 action.invoke()
             } catch (error: Throwable) {
-                logger.e(
+                kaspresso.libLogger.e(
                     "Continuous interaction for ${params.timeoutMs} ms failed " +
                             "because of ${error.javaClass.simpleName}"
                 )
@@ -82,7 +88,7 @@ class ContinuouslyProviderImpl(
             }
         } while (System.currentTimeMillis() - startTime <= params.timeoutMs)
 
-        logger.i(
+        kaspresso.libLogger.i(
             "Continuous interaction during the ${params.timeoutMs} succeeded"
         )
 

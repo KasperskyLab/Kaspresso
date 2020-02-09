@@ -8,18 +8,13 @@ import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.R
 import com.kaspersky.kaspressample.screen.CommonFlakyScreen
 import com.kaspersky.kaspressample.screen.MainScreen
-import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class SimpleComposeTest : TestCase(
-    kaspressoBuilder = Kaspresso.Builder.advanced().apply {
-        flakySafetyParams.timeoutMs = 11_000
-    }
-) {
+class SimpleComposeTest : TestCase() {
 
     @get:Rule
     val runtimePermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
@@ -52,14 +47,6 @@ class SimpleComposeTest : TestCase(
                 }
             }
 
-            step("Choose the Kakao mode") {
-                CommonFlakyScreen {
-                    kakaoMode {
-                        click()
-                    }
-                }
-            }
-
             step("Check btn5's text") {
                 CommonFlakyScreen {
                     compose {
@@ -71,7 +58,7 @@ class SimpleComposeTest : TestCase(
 
             step("Check tv6's text") {
                 CommonFlakyScreen {
-                    compose {
+                    compose(timeoutMs = 16_000) {
                         or(tv6) { hasText(R.string.common_flaky_final_textview) }
                         or(btn1) { hasText(R.string.common_flaky_final_textview) }
                     }

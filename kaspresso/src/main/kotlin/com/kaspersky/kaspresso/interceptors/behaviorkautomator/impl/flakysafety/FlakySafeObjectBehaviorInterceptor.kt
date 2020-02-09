@@ -4,7 +4,7 @@ import com.kaspersky.components.kautomator.intercepting.interaction.UiObjectInte
 import com.kaspersky.components.kautomator.intercepting.operation.UiObjectAction
 import com.kaspersky.components.kautomator.intercepting.operation.UiObjectAssertion
 import com.kaspersky.kaspresso.flakysafety.FlakySafetyProvider
-import com.kaspersky.kaspresso.flakysafety.FlakySafetyProviderImpl
+import com.kaspersky.kaspresso.flakysafety.FlakySafetyProviderSimpleImpl
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.ObjectBehaviorInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.params.FlakySafetyParams
@@ -17,7 +17,7 @@ class FlakySafeObjectBehaviorInterceptor(
     params: FlakySafetyParams,
     logger: UiTestLogger
 ) : ObjectBehaviorInterceptor,
-    FlakySafetyProvider by FlakySafetyProviderImpl(params, logger) {
+    FlakySafetyProvider by FlakySafetyProviderSimpleImpl(params, logger) {
 
     /**
      * Wraps the given [activity] invocation with the flaky safety.

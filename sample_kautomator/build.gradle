@@ -28,7 +28,7 @@ android {
 
 dependencies {
     implementation "androidx.appcompat:appcompat:$versions.androidSupport"
-    implementation 'com.google.android.material:material:1.0.0'
+    implementation "com.google.android.material:material:$versions.material"
     implementation "androidx.constraintlayout:constraintlayout:$versions.constraint"
 
     testImplementation "junit:junit:$versions.junit"

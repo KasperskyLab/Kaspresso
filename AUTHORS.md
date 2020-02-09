@@ -15,3 +15,6 @@ Nikolay Nesterov <nikolaynesterov@gmail.com> <br>
 Dmitriy Voronin <dsvoronin@gmail.com> <br>
 Amit Barjatya <lavibarjatya@gmail.com> <br>
 Vyacheslav Rodionov <Vyacheslav.Rodionov@kaspersky.com> <br>
+Andrey Beryukhov <Andrey.Beryukhov@kaspersky.com> <br>
+Mansur Biryukov <Mansur.Biryukov@kaspersky.com> <br>
+Darran Kelinske <darran.kelinske@gmail.com> <br>
