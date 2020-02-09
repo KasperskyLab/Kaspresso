@@ -36,6 +36,10 @@
             android:label="@string/simple_fragment_title"/>
 
         <activity
+            android:name=".measure.MeasureActivity"
+            android:label="@string/simple_fragment_title"/>
+
+        <activity
             android:name=".web.WebViewActivity"
             android:label="@string/main_screen_webview_button"
             android:theme="@style/Theme.AppCompat.NoActionBar"/>

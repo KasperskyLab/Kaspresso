@@ -6,10 +6,8 @@ import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.R
-import com.kaspersky.kaspressample.external_screens.UiCommonFlakyScreen
 import com.kaspersky.kaspressample.external_screens.UiMainScreen
-import com.kaspersky.kaspressample.external_screens.UiSimpleScreen
-import com.kaspersky.kaspressample.external_screens.UiWaitForIdleScreen
+import com.kaspersky.kaspressample.external_screens.UiMeasureScreen
 import com.kaspersky.kaspresso.idlewaiting.KautomatorWaitForIdleSettings
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
@@ -20,7 +18,7 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class KautomatorMeasureTest : TestCase(
     kaspressoBuilder = Kaspresso.Builder.advanced {
-        kautomatorWaitForIdleSettings = KautomatorWaitForIdleSettings.boost()
+//        kautomatorWaitForIdleSettings = KautomatorWaitForIdleSettings.boost()
     }
 ) {
 
@@ -42,37 +40,48 @@ class KautomatorMeasureTest : TestCase(
         before {
             activityTestRule.launchActivity(null)
         }.after { }.run {
-            step("MainScreen. Check `simple fragment` button existence and click") {
+            step("MainScreen. Click on `measure fragment` button") {
                 UiMainScreen {
-                    simpleButton {
+                    measureButton {
                         isDisplayed()
-                        hasText(device.targetContext.getString(R.string.main_screen_simple_fragment_button).toUpperCase())
                         click()
                     }
                 }
             }
 
-            step("Simple fragment. Work with buttons") {
-                UiSimpleScreen {
-                    button1 {
-                        isDisplayed()
-                        hasText(device.targetContext.getString(R.string.simple_fragment_text_button_1).toUpperCase())
-                        click()
-                    }
-                    button2 {
-                        isDisplayed()
-                        hasText(device.targetContext.getString(R.string.simple_fragment_text_button_2).toUpperCase())
-                        click()
+            step("Measure screen. Button_1 clicks comparing") {
+                UiMeasureScreen {
+                    RANGE.forEach { _ ->
+                        button1 {
+                            click()
+                            hasText(device.targetContext.getString(R.string.measure_fragment_text_button_1).toUpperCase())
+                        }
                     }
                 }
             }
 
-            step("Simple fragment. Work with EditText in the cycle") {
-                UiSimpleScreen {
+            step("Measure screen. Button_2 clicks and TextView changes comparing") {
+                UiMeasureScreen {
+                    RANGE.forEach { it ->
+                        button2 {
+                            click()
+                            hasText(device.targetContext.getString(R.string.measure_fragment_text_button_2).toUpperCase())
+                        }
+                        textView {
+                            hasText(
+                                "${device.targetContext.getString(R.string.measure_fragment_text_textview)}${it + 1}"
+                            )
+                        }
+                    }
+                }
+            }
+
+            step("Measure fragment. EditText updates comparing") {
+                UiMeasureScreen {
                     edit {
                         isDisplayed()
-                        hasText(device.targetContext.getString(R.string.simple_fragment_text_edittext))
-                        (RANGE).forEach { _ ->
+                        hasText(device.targetContext.getString(R.string.measure_fragment_text_edittext))
+                        RANGE.forEach { _ ->
                             clearText()
                             typeText("bla-bla-bla")
                             hasText("bla-bla-bla")
@@ -85,53 +94,20 @@ class KautomatorMeasureTest : TestCase(
                 }
             }
 
-            step("Return to MainScreen") {
-                UiSimpleScreen {
-                    pressBack()
-                }
-            }
-
-            step("MainScreen. Check `flaky sample` button existence and click") {
-                UiMainScreen {
-                    flakyButton {
-                        isDisplayed()
-                        hasText(device.targetContext.getString(R.string.main_screen_scroll_view_sample_button).toUpperCase())
-                        click()
+            step("Measure fragment. Checkbox clicks comparing") {
+                UiMeasureScreen {
+                    RANGE.forEach {
+                        checkBox {
+                            if (it % 2 == 0) {
+                                setChecked(true)
+                                isChecked()
+                            } else {
+                                setChecked(false)
+                                isNotChecked()
+                            }
+                        }
                     }
-                }
-            }
 
-            step("FlakyScreen. Check btn5") {
-                UiCommonFlakyScreen {
-                    btn5 {
-                        isDisplayed()
-                        hasText(device.targetContext.getString(R.string.common_flaky_final_button).toUpperCase())
-                    }
-                }
-            }
-
-            step("Return to MainScreen") {
-                UiCommonFlakyScreen {
-                    pressBack()
-                }
-            }
-
-            step("MainScreen. Check `waiting for idle sample` button existence and click") {
-                UiMainScreen {
-                    idleWaitingButton {
-                        isDisplayed()
-                        hasText(device.targetContext.getString(R.string.main_screen_idlewaiting_sample_button).toUpperCase())
-                        click()
-                    }
-                }
-            }
-            // todo describe the problem
-            step("UiWaitForIdleScreen. Check text in EditText") {
-                UiWaitForIdleScreen {
-                    edit {
-                        isDisplayed()
-                        containsText(device.targetContext.getString(R.string.idlewaiting_fragment_text_edittext))
-                    }
                 }
             }
         }
