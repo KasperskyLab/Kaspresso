@@ -41,7 +41,7 @@ class KautomatorMeasureTest : TestCase(
     fun test() =
         before {
             activityTestRule.launchActivity(null)
-        }.after {}.run {
+        }.after { }.run {
             step("MainScreen. Check `simple fragment` button existence and click") {
                 UiMainScreen {
                     simpleButton {
@@ -105,7 +105,7 @@ class KautomatorMeasureTest : TestCase(
                 UiCommonFlakyScreen {
                     btn5 {
                         isDisplayed()
-                        hasText("5")
+                        hasText(device.targetContext.getString(R.string.common_flaky_final_button).toUpperCase())
                     }
                 }
             }
