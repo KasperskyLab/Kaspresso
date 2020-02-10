@@ -14,8 +14,8 @@ import com.kaspersky.components.kautomator.intercept.operation.UiOperationType
  * Delegation class for [androidx.test.uiautomator.UiDevice].
  * Wraps all available public calls and intercepts into [check] and [perform].
  *
- * @see Delegate
- * @see Interceptor
+ * @see UiDelegate
+ * @see UiInterceptor
  */
 class UiDeviceDelegate(
     device: UiDevice

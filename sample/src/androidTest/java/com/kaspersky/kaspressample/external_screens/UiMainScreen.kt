@@ -13,4 +13,6 @@ object UiMainScreen : UiSampleScreen<UiMainScreen>() {
     val composeButton = UiButton { withId(this@UiMainScreen.packageName, "activity_main_complex_compose_sample_button") }
 
     val idleWaitingButton = UiButton { withId(this@UiMainScreen.packageName, "activity_main_idlewaiting_sample_button") }
+
+    val measureButton = UiButton { withId(this@UiMainScreen.packageName, "activity_main_measure_sample_button") }
 }

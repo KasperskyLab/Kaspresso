@@ -14,6 +14,10 @@ import com.kaspersky.kaspresso.interceptors.tolibrary.LibraryInterceptorsInjecto
 import com.kaspersky.kaspresso.interceptors.tolibrary.LibraryInterceptorsInjector.injectKaspressoInKakao
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 
+/**
+ * The special class that removes all interceptors related to FlakySafety from Kautomator settings
+ * and restore them by demand
+ */
 internal class FlakySafeInterceptorScalpel(
     private val kaspresso: Kaspresso
 ) {

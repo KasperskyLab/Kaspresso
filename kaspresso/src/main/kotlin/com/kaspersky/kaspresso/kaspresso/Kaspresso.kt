@@ -26,6 +26,8 @@ import com.kaspersky.kaspresso.device.languages.Language
 import com.kaspersky.kaspresso.device.languages.LanguageImpl
 import com.kaspersky.kaspresso.device.location.Location
 import com.kaspersky.kaspresso.device.location.LocationImpl
+import com.kaspersky.kaspresso.device.logcat.Logcat
+import com.kaspersky.kaspresso.device.logcat.LogcatImpl
 import com.kaspersky.kaspresso.device.network.Network
 import com.kaspersky.kaspresso.device.network.NetworkImpl
 import com.kaspersky.kaspresso.device.permissions.HackPermissions
@@ -355,6 +357,11 @@ data class Kaspresso(
         lateinit var language: Language
 
         /**
+         * Holds an implementation of [Logcat] interface. If it was not specified, the default implementation is used.
+         */
+        lateinit var logcat: Logcat
+
+        /**
          * Holds the [FlakySafetyParams] for [com.kaspersky.kaspresso.flakysafety.FlakySafetyProvider]'s usage.
          * If it was not specified, the default implementation is used.
          */
@@ -563,6 +570,7 @@ data class Kaspresso(
             if (!::hackPermissions.isInitialized) hackPermissions = HackPermissionsImpl(instrumentation.uiAutomation, libLogger)
             if (!::exploit.isInitialized) exploit = ExploitImpl(activities, uiDevice, adbServer)
             if (!::language.isInitialized) language = LanguageImpl(libLogger, instrumentation.targetContext)
+            if (!::logcat.isInitialized) logcat = LogcatImpl()
 
             if (!::flakySafetyParams.isInitialized) flakySafetyParams = FlakySafetyParams.default()
             if (!::continuouslyParams.isInitialized) continuouslyParams = ContinuouslyParams.default()
@@ -684,7 +692,8 @@ data class Kaspresso(
                     permissions = permissions,
                     hackPermissions = hackPermissions,
                     exploit = exploit,
-                    language = language
+                    language = language,
+                    logcat = logcat
                 ),
 
                 params = Params(

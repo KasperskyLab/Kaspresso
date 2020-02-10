@@ -31,4 +31,16 @@ class FilesImpl(
     override fun remove(path: String) {
         adbServer.performShell("rm -f $path")
     }
+
+    /**
+     * Performs adb pull.
+     *
+     * Required Permissions: INTERNET.
+     *
+     * @param devicePath a file path relative to the device directory.
+     * @param serverPath a path to copy. (If empty - pulls in adbServer directory (folder with file "desktop.jar"))
+     */
+    override fun pull(devicePath: String, serverPath: String) {
+        adbServer.performAdb("pull $devicePath $serverPath")
+    }
 }

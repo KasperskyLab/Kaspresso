@@ -8,13 +8,19 @@ import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.R
 import com.kaspersky.kaspressample.external_screens.UiMainScreen
 import com.kaspersky.kaspressample.external_screens.UiWaitForIdleScreen
+import com.kaspersky.kaspresso.idlewaiting.KautomatorWaitForIdleSettings
+import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class WaitForIdleTest : TestCase() {
+class WaitForIdleTest : TestCase(
+    kaspressoBuilder = Kaspresso.Builder.advanced {
+        kautomatorWaitForIdleSettings = KautomatorWaitForIdleSettings.boost()
+    }
+) {
 
     @get:Rule
     val runtimePermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
