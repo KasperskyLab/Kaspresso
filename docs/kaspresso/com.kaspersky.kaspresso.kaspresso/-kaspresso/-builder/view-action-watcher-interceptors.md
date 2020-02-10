@@ -2,7 +2,7 @@
 
 # viewActionWatcherInterceptors
 
-`var viewActionWatcherInterceptors: `[`MutableList`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html)`<`[`ViewActionWatcherInterceptor`](../../../com.kaspersky.kaspresso.interceptors.watcher.view/-view-action-watcher-interceptor/index.md)`>`
+`lateinit var viewActionWatcherInterceptors: `[`MutableList`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html)`<`[`ViewActionWatcherInterceptor`](../../../com.kaspersky.kaspresso.interceptors.watcher.view/-view-action-watcher-interceptor/index.md)`>`
 
 Holds the list of [ViewActionWatcherInterceptor](../../../com.kaspersky.kaspresso.interceptors.watcher.view/-view-action-watcher-interceptor/index.md)s.
 If it was not specified, Kaspresso will use no [ViewActionWatcherInterceptor](../../../com.kaspersky.kaspresso.interceptors.watcher.view/-view-action-watcher-interceptor/index.md)s.

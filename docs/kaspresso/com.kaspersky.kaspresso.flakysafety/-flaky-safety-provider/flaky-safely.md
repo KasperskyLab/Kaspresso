@@ -23,7 +23,7 @@ Invokes the given [action](flaky-safely.md#com.kaspersky.kaspresso.flakysafety.F
 
 `intervalMs` - the interval at which attempts will be made.
 
-`allowedExceptions` - the set of exceptions, if caught, attempt will continue.
+`allowedExceptions` - the set of exceptions that allow to continue an attempt of execution.
 
 `failureMessage` - the message to log on failure.
 

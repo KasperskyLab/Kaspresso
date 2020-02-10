@@ -2,7 +2,7 @@
 
 # language
 
-`var language: `[`Language`](../../../com.kaspersky.kaspresso.device.languages/-language/index.md)
+`lateinit var language: `[`Language`](../../../com.kaspersky.kaspresso.device.languages/-language/index.md)
 
 Holds an implementation of [Language](../../../com.kaspersky.kaspresso.device.languages/-language/index.md) interface. If it was not specified, the default implementation is used.
 

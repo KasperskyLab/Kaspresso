@@ -13,7 +13,7 @@ exception caused by re-initialization of the [Kaspresso](../../com.kaspersky.kas
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | `TestCase(kaspressoBuilder: `[`Kaspresso.Builder`](../../com.kaspersky.kaspresso.kaspresso/-kaspresso/-builder/index.md)` = Kaspresso.Builder.default())`<br>The base class for all test cases. Extend this class with a single base project-wide inheritor of [TestCase](./index.md) as a parent for all actual project-wide test cases. Nesting test cases are not permitted because they may produce an exception caused by re-initialization of the [Kaspresso](../../com.kaspersky.kaspresso.kaspresso/-kaspresso/index.md), use [com.kaspersky.kaspresso.testcases.api.scenario.Scenario](../../com.kaspersky.kaspresso.testcases.api.scenario/-scenario/index.md) instead. |
+| [&lt;init&gt;](-init-.md) | `TestCase(kaspressoBuilder: `[`Kaspresso.Builder`](../../com.kaspersky.kaspresso.kaspresso/-kaspresso/-builder/index.md)` = Kaspresso.Builder.advanced())`<br>The base class for all test cases. Extend this class with a single base project-wide inheritor of [TestCase](./index.md) as a parent for all actual project-wide test cases. Nesting test cases are not permitted because they may produce an exception caused by re-initialization of the [Kaspresso](../../com.kaspersky.kaspresso.kaspresso/-kaspresso/index.md), use [com.kaspersky.kaspresso.testcases.api.scenario.Scenario](../../com.kaspersky.kaspresso.testcases.api.scenario/-scenario/index.md) instead. |
 
 ### Inherited Properties
 
@@ -21,6 +21,7 @@ exception caused by re-initialization of the [Kaspresso](../../com.kaspersky.kas
 |---|---|
 | [adbServer](../-base-test-case/adb-server.md) | `open val adbServer: `[`AdbServer`](../../com.kaspersky.kaspresso.device.server/-adb-server/index.md) |
 | [device](../-base-test-case/device.md) | `open val device: `[`Device`](../../com.kaspersky.kaspresso.device/-device/index.md) |
+| [params](../-base-test-case/params.md) | `open val params: `[`Params`](../../com.kaspersky.kaspresso.params/-params/index.md) |
 | [testLogger](../-base-test-case/test-logger.md) | `open val testLogger: `[`UiTestLogger`](../../com.kaspersky.kaspresso.logger/-ui-test-logger.md) |
 
 ### Inherited Functions

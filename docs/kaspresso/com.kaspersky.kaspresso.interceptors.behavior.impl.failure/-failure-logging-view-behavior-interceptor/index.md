@@ -7,6 +7,9 @@
 The implementation of [ViewBehaviorInterceptor](../../com.kaspersky.kaspresso.interceptors.behavior/-view-behavior-interceptor.md) and [FailureLoggingProvider](../../com.kaspersky.kaspresso.failure/-failure-logging-provider/index.md) interfaces.
 Provides failure logging functionality for [ViewInteraction.perform](#) and [ViewInteraction.check](#) calls.
 
+By default, this interceptor is not used in Kaspresso.
+If you desire to change result log (especially in case of an error) we recommend to use [FailureLoggingProvider](../../com.kaspersky.kaspresso.failure/-failure-logging-provider/index.md) directly
+
 ### Constructors
 
 | Name | Summary |

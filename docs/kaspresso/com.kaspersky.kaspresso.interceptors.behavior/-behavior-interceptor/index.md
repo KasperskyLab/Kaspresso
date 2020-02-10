@@ -4,7 +4,7 @@
 
 `interface BehaviorInterceptor<Interaction>`
 
-The interface for all interceptors that change the default interaction. Often it wraps the interaction calls.
+The interface for all interceptors that change the default interaction in Kakao=&gt;Espresso. Often it wraps the interaction calls.
 
 ### Functions
 
