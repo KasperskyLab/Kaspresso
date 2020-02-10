@@ -1,7 +1,7 @@
 package com.kaspersky.components.kautomator.dsl.system
 
 import com.kaspersky.components.kautomator.dsl.system.UiSystemAssertions.SystemAssertionType.IS_SCREEN_ON
-import com.kaspersky.components.kautomator.intercepting.delegate.UiDeviceDelegate
+import com.kaspersky.components.kautomator.intercepting.delegate.UiDeviceInteractionDelegate
 import com.kaspersky.components.kautomator.intercepting.operation.UiOperationType
 
 /**
@@ -13,7 +13,7 @@ import com.kaspersky.components.kautomator.intercepting.operation.UiOperationTyp
  */
 interface UiSystemAssertions {
 
-    val view: UiDeviceDelegate
+    val view: UiDeviceInteractionDelegate
 
     fun isScreenOn() {
         view.check(IS_SCREEN_ON) {

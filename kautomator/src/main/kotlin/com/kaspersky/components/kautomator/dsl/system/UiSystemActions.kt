@@ -1,6 +1,6 @@
 package com.kaspersky.components.kautomator.dsl.system
 
-import com.kaspersky.components.kautomator.intercepting.delegate.UiDeviceDelegate
+import com.kaspersky.components.kautomator.intercepting.delegate.UiDeviceInteractionDelegate
 import com.kaspersky.components.kautomator.intercepting.operation.UiOperationType
 
 /**
@@ -12,7 +12,7 @@ import com.kaspersky.components.kautomator.intercepting.operation.UiOperationTyp
  */
 interface UiSystemActions {
 
-    val view: UiDeviceDelegate
+    val view: UiDeviceInteractionDelegate
 
     /**
      * Opens the notification shade

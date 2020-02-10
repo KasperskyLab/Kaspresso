@@ -1,7 +1,7 @@
 @file:Suppress("unused")
 package com.kaspersky.components.kautomator.dsl.common.actions
 
-import com.kaspersky.components.kautomator.intercepting.delegate.UiObjectDelegate
+import com.kaspersky.components.kautomator.intercepting.delegate.UiObjectInteractionDelegate
 import com.kaspersky.components.kautomator.intercepting.operation.UiOperationType
 
 /**
@@ -12,7 +12,7 @@ import com.kaspersky.components.kautomator.intercepting.operation.UiOperationTyp
  * @see com.kaspersky.components.kautomator.dsl.edit.UiEditableActions
  */
 interface UiBaseActions {
-    val view: UiObjectDelegate
+    val view: UiObjectInteractionDelegate
 
     /**
      * Performs click on view

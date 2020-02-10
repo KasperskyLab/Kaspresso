@@ -19,7 +19,7 @@ import com.kaspersky.components.kautomator.intercepting.operation.UiOperationTyp
  * @see UiDelegate
  * @see UiInterceptor
  */
-class UiObjectDelegate(
+class UiObjectInteractionDelegate(
     device: UiDevice,
     selector: UiViewSelector,
     description: String

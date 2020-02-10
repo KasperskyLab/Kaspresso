@@ -7,7 +7,7 @@ import com.kaspersky.components.kautomator.dsl.common.actions.UiBaseActions
 import com.kaspersky.components.kautomator.dsl.common.assertions.UiBaseAssertions
 import com.kaspersky.components.kautomator.dsl.common.builders.UiViewBuilder
 import com.kaspersky.components.kautomator.dsl.common.builders.UiViewSelector
-import com.kaspersky.components.kautomator.intercepting.delegate.UiObjectDelegate
+import com.kaspersky.components.kautomator.intercepting.delegate.UiObjectInteractionDelegate
 import com.kaspersky.components.kautomator.intercepting.interaction.UiObjectInteraction
 import com.kaspersky.components.kautomator.intercepting.intercept.UiInterceptable
 import com.kaspersky.components.kautomator.intercepting.operation.UiObjectAction
@@ -27,8 +27,8 @@ import com.kaspersky.components.kautomator.intercepting.operation.UiObjectAssert
 open class UiBaseView<out T>(selector: UiViewSelector) : UiBaseActions, UiBaseAssertions,
     UiInterceptable<UiObjectInteraction, UiObjectAssertion, UiObjectAction> {
 
-    final override val view: UiObjectDelegate by lazy {
-        val delegate = UiObjectDelegate(
+    final override val view: UiObjectInteractionDelegate by lazy {
+        val delegate = UiObjectInteractionDelegate(
             UiDevice.getInstance(InstrumentationRegistry.getInstrumentation()),
             selector,
             "Object type=${this::class.java.simpleName}"

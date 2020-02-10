@@ -17,7 +17,7 @@ import com.kaspersky.components.kautomator.intercepting.operation.UiOperationTyp
  * @see UiDelegate
  * @see UiInterceptor
  */
-class UiDeviceDelegate(
+class UiDeviceInteractionDelegate(
     device: UiDevice
 ) : UiDelegate<UiDeviceInteraction, UiDeviceAssertion, UiDeviceAction> {
 
