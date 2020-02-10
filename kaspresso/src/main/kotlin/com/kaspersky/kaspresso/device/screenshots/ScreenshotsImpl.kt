@@ -17,7 +17,7 @@ class ScreenshotsImpl(
     screenshotDirectoryProvider: ScreenshotDirectoryProvider,
     screenshotNameProvider: ScreenshotNameProvider,
     screenshotRootDir: File = File("screenshots")
-) : Screenshots, TestStartListener {
+) : Screenshots, ScreenshotTestStartListener {
 
     private val fileProvider = ScreenshotFileProvider(screenshotDirectoryProvider, screenshotNameProvider, screenshotRootDir)
 
