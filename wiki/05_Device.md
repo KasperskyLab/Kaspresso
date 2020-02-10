@@ -20,7 +20,8 @@ All examples are located in [device_tests](../sample/src/androidTest/java/com/ka
 11. `hackPermissions` provides the possibility of allowing any permission requests without default Android permission dialog. See the example [DeviceHackPermissionsSampleTest](../sample/src/androidTest/java/com/kaspersky/kaspressample/device_tests/DeviceHackPermissionsSampleTest.kt).
 12. `exploit` allows to rotate device or press system buttons. See the example [DeviceExploitSampleTest](../sample/src/androidTest/java/com/kaspersky/kaspressample/device_tests/DeviceExploitSampleTest.kt).
 13. `language` allows to switch language. See the example [DeviceLanguageSampleTest](../sample/src/androidTest/java/com/kaspersky/kaspressample/device_tests/DeviceLanguageSampleTest.kt).
-14. `uiDevice` returns an instance of ```android.support.test.uiautomator.UiDevice```. We don't recommend to use it directly because there is **Kautomator** that offers a more readable, predictable and stable API to work outside your application.
+14. `logcat` provides access to adb logcat. See the example [DeviceLogcatSampleTest](../sample/src/androidTest/java/com/kaspersky/kaspressample/device_tests/DeviceLogcatSampleTest.kt).
+15. `uiDevice` returns an instance of ```android.support.test.uiautomator.UiDevice```. We don't recommend to use it directly because there is **Kautomator** that offers a more readable, predictable and stable API to work outside your application.
 
 Also **Device** provides application and test contexts - `targetContext` and `context`. 
 
