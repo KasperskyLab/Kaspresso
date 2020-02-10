@@ -4,8 +4,13 @@ import com.kaspersky.components.kautomator.dsl.check.UiCheckBox
 import com.kaspersky.components.kautomator.dsl.edit.UiEditText
 import com.kaspersky.components.kautomator.dsl.text.UiButton
 import com.kaspersky.components.kautomator.dsl.text.UiTextView
+import com.kaspersky.kaspressample.R
+import com.kaspersky.kaspressample.measure.MeasureActivity
 
 object UiMeasureScreen : UiSampleScreen<UiMeasureScreen>() {
+
+    override val layoutId: Int? = R.layout.activity_measure
+    override val viewClass: Class<*>? = MeasureActivity::class.java
 
     val button1 = UiButton { withId(this@UiMeasureScreen.packageName, "button_1") }
 
