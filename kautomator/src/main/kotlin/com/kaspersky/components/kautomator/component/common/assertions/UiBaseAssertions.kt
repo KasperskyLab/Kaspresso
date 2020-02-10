@@ -2,7 +2,7 @@
 package com.kaspersky.components.kautomator.component.common.assertions
 
 import com.google.common.truth.Truth.assertThat
-import com.kaspersky.components.kautomator.intercept.delegate.UiObjectDelegate
+import com.kaspersky.components.kautomator.intercept.delegate.UiObjectInteractionDelegate
 import com.kaspersky.components.kautomator.intercept.operation.UiOperationType
 
 /**
@@ -13,7 +13,7 @@ import com.kaspersky.components.kautomator.intercept.operation.UiOperationType
  * @see com.kaspersky.components.kautomator.component.text.UiTextViewAssertions
  */
 interface UiBaseAssertions {
-    val view: UiObjectDelegate
+    val view: UiObjectInteractionDelegate
 
     /**
      * Checks if the view is completely displayed

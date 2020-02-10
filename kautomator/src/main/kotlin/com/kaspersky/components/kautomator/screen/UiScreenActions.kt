@@ -1,7 +1,7 @@
 @file:Suppress("unused")
 package com.kaspersky.components.kautomator.screen
 
-import com.kaspersky.components.kautomator.intercept.delegate.UiDeviceDelegate
+import com.kaspersky.components.kautomator.intercept.delegate.UiDeviceInteractionDelegate
 import com.kaspersky.components.kautomator.intercept.operation.UiOperationType
 
 /**
@@ -13,7 +13,7 @@ import com.kaspersky.components.kautomator.intercept.operation.UiOperationType
  */
 interface UiScreenActions {
 
-    val view: UiDeviceDelegate
+    val view: UiDeviceInteractionDelegate
 
     /**
      * Simulates a short press on the BACK button.
