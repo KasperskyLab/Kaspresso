@@ -37,7 +37,7 @@ internal class ScreenshotFileProvider(
         val testMethod = Thread.currentThread().stackTrace.findTestMethod()
         val runNumber = testRunNumbers[testMethod] ?: 1
         val directory = screenshotDirectoryProvider.getDirectoryForTest(testMethod, runNumber)
-        return if(subDirectory != null) {
+        return if (subDirectory != null) {
             screenshotRootDirectory.resolve(subDirectory).resolve(directory)
         } else {
             screenshotRootDirectory.resolve(directory)

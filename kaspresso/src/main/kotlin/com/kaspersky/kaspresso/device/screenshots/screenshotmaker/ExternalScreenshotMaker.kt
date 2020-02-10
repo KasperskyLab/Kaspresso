@@ -7,7 +7,7 @@ import java.io.File
 /**
  * Captures spoon-compatible screenshots by uiautomator.
  */
-class ExternalScreenshotMaker: ScreenshotMaker {
+class ExternalScreenshotMaker : ScreenshotMaker {
 
     override fun takeScreenshot(file: File) {
         UiDevice.getInstance(InstrumentationRegistry.getInstrumentation()).takeScreenshot(file)

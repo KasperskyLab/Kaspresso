@@ -17,7 +17,7 @@ class DefaultScreenshotDirectoryProvider(
 
     override fun getDirectoryForTest(testMethod: TestMethod, runNumber: Int): String {
         val clearedClassName = testMethod.className.replace("[^A-Za-z0-9._-]".toRegex(), NAME_SEPARATOR)
-        return if(groupByRunNumbers) {
+        return if (groupByRunNumbers) {
             "run_$runNumber" + File.separator + clearedClassName + File.separator + testMethod.methodName
         } else {
             clearedClassName + File.separator + testMethod.methodName

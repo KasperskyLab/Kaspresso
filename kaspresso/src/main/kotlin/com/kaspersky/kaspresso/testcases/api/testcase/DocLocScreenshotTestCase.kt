@@ -14,10 +14,10 @@ import com.kaspersky.kaspresso.internal.extensions.other.getAllInterfaces
 import com.kaspersky.kaspresso.internal.invocation.UiInvocationHandler
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.logger.UiTestLogger
-import org.junit.Before
-import org.junit.Rule
 import java.io.File
 import java.lang.reflect.Proxy
+import org.junit.Before
+import org.junit.Rule
 
 /**
  *  The base class for all docloc screenshot tests.
