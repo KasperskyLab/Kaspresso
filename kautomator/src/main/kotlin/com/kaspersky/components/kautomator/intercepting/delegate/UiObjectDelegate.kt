@@ -20,8 +20,8 @@ import com.kaspersky.components.kautomator.intercepting.operation.UiOperationTyp
  * @see UiInterceptor
  */
 class UiObjectDelegate(
-    val device: UiDevice,
-    val selector: UiViewSelector,
+    device: UiDevice,
+    selector: UiViewSelector,
     description: String
 ) : UiDelegate<UiObjectInteraction, UiObjectAssertion, UiObjectAction> {
 

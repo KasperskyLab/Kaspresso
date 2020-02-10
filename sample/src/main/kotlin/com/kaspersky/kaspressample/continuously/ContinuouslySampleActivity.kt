@@ -38,7 +38,9 @@ class ContinuouslySampleActivity : AppCompatActivity() {
                             }
                             continuously_start_btn.isEnabled = true
                         },
-                        // This timeout emulates real background work of application, like fetching from Internet, or computing some device taken data, we can't influence on time of which in E2E tests
+                        // This timeout emulating real background work of application,
+                        // like fetching from Internet, or computing some device taken data,
+                        // is the thing we can't influence in E2E tests
                         Random.Default.nextLong(FAKE_MIN_DELAY, FAKE_MAX_DELAY)
                     )
                 }

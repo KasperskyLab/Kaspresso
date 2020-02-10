@@ -5,23 +5,23 @@
 
 # Kaspresso
 
-Kaspresso is a UiTest framework based on [Espresso](https://developer.android.com/training/testing/espresso), 
-[UIAutomator](https://developer.android.com/training/testing/ui-automator) and 
+Kaspresso is a UiTest framework based on [Espresso](https://developer.android.com/training/testing/espresso),
+[UIAutomator](https://developer.android.com/training/testing/ui-automator) and
 [Kakao](https://github.com/agoda-com/Kakao) and assisting to write right and no-pain ui tests.
 
 ![](https://habrastorage.org/webt/dw/jh/9k/dwjh9kypjl637kxj8tiaxwjvtp0.png)
 
 ## Capabilities
 
-#### Stability 
+#### Stability
 
-Kaspresso provides a mechanism to handle a flakiness of Espresso. 
+Kaspresso provides a mechanism to handle a flakiness of Espresso.
 
-Flakiness in ui tests is when one test passes 50 times but breaks at 51 attempt without any understandable reason. 
-Unfortunately, it's a disease of all ui-tests libraries.  
+Flakiness in ui tests is when one test passes 50 times but breaks at 51 attempt without any understandable reason.
+Unfortunately, it's a disease of all ui-tests libraries.
 #### Readability
 
-We like a syntax to write ui-tests providing by Kakao. Just compare: 
+We like a syntax to write ui-tests providing by Kakao. Just compare:
 
 Espresso:
 ```kotlin
@@ -46,7 +46,7 @@ fun testFirstFeature() {
     }
 }
 ```
-But we went even further and made Kakao syntax wider and correlated with the test-case you are writing the test on. 
+But we went even further and made Kakao syntax wider and correlated with the test-case you are writing the test on.
 
 Attention on the code below:
 ```kotlin
@@ -105,23 +105,23 @@ Kaspresso transform your tests' logs into understandable and pleasant text:
 
 #### Flexibility
 
-We have introduced a mechanism of interceptors giving an ability to catch all actions going to Espresso. 
+We have introduced a mechanism of interceptors giving an ability to catch all actions going to Espresso.
 
-Thanks to this mechanism, the developer can add additional custom actions at each action of Espresso (a logging, a screenshoting), 
-handle results of actions of Espresso and re-run failed actions (flaky tests handling), for example, and do other interesting things. 
+Thanks to this mechanism, the developer can add additional custom actions at each action of Espresso (a logging, a screenshoting),
+handle results of actions of Espresso and re-run failed actions (flaky tests handling), for example, and do other interesting things.
 
 Part of interceptors was introduced in Kakao version 2.1, another part of interceptors was introduced in Kaspresso.
 #### Ability to call Adb commands
 
-Espresso or UiAutomator doesn't allow to call adb commands inside a test. 
-That's why we have written special [AdbServer repository](https://github.com/KasperskyLab/AdbServer) fixing mentioned problem. 
+Espresso or UiAutomator doesn't allow to call adb commands inside a test.
+That's why we have written special [AdbServer repository](https://github.com/KasperskyLab/AdbServer) fixing mentioned problem.
 
-In Kaspresso, the developer can call adb and cmd commands by ```AdbServer``` class.  
+In Kaspresso, the developer can call adb and cmd commands by ```AdbServer``` class.
 #### Ability to work with Android System
 
-There are a lot of useful classes in Kaspresso to work with Android System. 
+There are a lot of useful classes in Kaspresso to work with Android System.
 
-Examples of such work: <br> 
+Examples of such work: <br>
     1. push files, <br>
     2. enable/disable network, <br>
     3. permissions' giving, <br>
@@ -131,7 +131,7 @@ Examples of such work: <br>
 #### Feature's screenshoting
 
 Sometimes when developing new features, there is a need to check if the application works properly in all supported languages.
-Kaspresso offers a possibility make feature's screenshots fast and automatically. 
+Kaspresso offers a possibility make feature's screenshots fast and automatically.
 #### Configurability
 
 The developer can tune any part of Kaspresso thanks to ```Kaspresso.Builder```.

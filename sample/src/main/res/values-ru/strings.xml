@@ -9,6 +9,7 @@
     <string name="main_screen_continuously_sample_button">Coninuously пример</string>
     <string name="main_screen_complex_compose_sample_button">Complex compose пример</string>
     <string name="main_screen_idlewaiting_sample_button">Waiting for idle пример</string>
+    <string name="main_screen_measure_sample_button">Measure пример</string>
 
     <!-- Simple fragment screen -->
     <string name="simple_fragment_title">Простой фрагмент</string>
