@@ -38,6 +38,11 @@ import com.kaspersky.kaspresso.device.phone.Phone
 import com.kaspersky.kaspresso.device.phone.PhoneImpl
 import com.kaspersky.kaspresso.device.screenshots.Screenshots
 import com.kaspersky.kaspresso.device.screenshots.ScreenshotsImpl
+import com.kaspersky.kaspresso.device.screenshots.screenshotfiles.DefaultScreenshotDirectoryProvider
+import com.kaspersky.kaspresso.device.screenshots.screenshotfiles.DefaultScreenshotNameProvider
+import com.kaspersky.kaspresso.device.screenshots.screenshotmaker.CombinedScreenshotMaker
+import com.kaspersky.kaspresso.device.screenshots.screenshotmaker.ExternalScreenshotMaker
+import com.kaspersky.kaspresso.device.screenshots.screenshotmaker.InternalScreenshotMaker
 import com.kaspersky.kaspresso.device.server.AdbServer
 import com.kaspersky.kaspresso.device.server.AdbServerImpl
 import com.kaspersky.kaspresso.failure.LoggingFailureHandler
@@ -564,7 +569,14 @@ data class Kaspresso(
             if (!::phone.isInitialized) phone = PhoneImpl(adbServer)
             if (!::location.isInitialized) location = LocationImpl(adbServer)
             if (!::keyboard.isInitialized) keyboard = KeyboardImpl(adbServer)
-            if (!::screenshots.isInitialized) screenshots = ScreenshotsImpl(libLogger, activities)
+            if (!::screenshots.isInitialized) {
+                screenshots = ScreenshotsImpl(
+                    libLogger,
+                    CombinedScreenshotMaker(InternalScreenshotMaker(activities), ExternalScreenshotMaker()),
+                    DefaultScreenshotDirectoryProvider(groupByRunNumbers = true),
+                    DefaultScreenshotNameProvider(addTimestamps = false)
+                )
+            }
             if (!::accessibility.isInitialized) accessibility = AccessibilityImpl()
             if (!::permissions.isInitialized) permissions = PermissionsImpl(libLogger, uiDevice)
             if (!::hackPermissions.isInitialized) hackPermissions = HackPermissionsImpl(instrumentation.uiAutomation, libLogger)

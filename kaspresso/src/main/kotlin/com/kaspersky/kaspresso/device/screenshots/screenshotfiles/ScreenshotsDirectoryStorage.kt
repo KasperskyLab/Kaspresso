@@ -1,8 +1,9 @@
-package com.kaspersky.kaspresso.device.screenshots.screenshoter
+package com.kaspersky.kaspresso.device.screenshots.screenshotfiles
 
 import android.content.Context
 import android.os.Build
 import android.os.Environment
+import androidx.test.platform.app.InstrumentationRegistry
 import com.kaspersky.kaspresso.internal.extensions.other.createDirectoryRWX
 import java.io.File
 
@@ -14,15 +15,11 @@ class ScreenshotsDirectoryStorage {
      * Returns the directory for screenshots resolved by storage's root.
      * If the directory doesn't exist, it will be created.
      *
-     * @param context a context to get directory on pre-lollipop.
      * @param screenshotDir desired root directory.
      * @return [File] which represents an existing directory.
      */
-    fun getRootScreenshotDirectory(
-        context: Context,
-        screenshotDir: File
-    ): File {
-        val screenshotDeviceDir: File = getScreenshotDirectory(context, screenshotDir)
+    fun getRootScreenshotDirectory(screenshotDir: File): File {
+        val screenshotDeviceDir: File = getScreenshotDirectory(screenshotDir)
         if (!screenshotDeviceDir.exists()) {
             screenshotDeviceDir.createDirectoryRWX()
         }
@@ -37,9 +34,7 @@ class ScreenshotsDirectoryStorage {
      * @param screenshotTestDir desired directory resolved by the root dir.
      * @return [File] which represents an existing directory.
      */
-    fun obtainDirectory(
-        screenshotTestDir: File
-    ): File {
+    fun obtainDirectory(screenshotTestDir: File): File {
 
         if (!clearedOutputDirectories.contains(screenshotTestDir)) {
             deletePath(screenshotTestDir, inclusive = false)
@@ -53,12 +48,13 @@ class ScreenshotsDirectoryStorage {
         return screenshotTestDir
     }
 
-    private fun getScreenshotDirectory(context: Context, screenshotDir: File): File {
+    private fun getScreenshotDirectory(screenshotDir: File): File {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             // Use external storage.
             Environment.getExternalStorageDirectory().resolve(screenshotDir)
         } else {
             // Use internal storage.
+            val context = InstrumentationRegistry.getInstrumentation().targetContext.applicationContext
             context.getDir(screenshotDir.canonicalPath, Context.MODE_WORLD_READABLE)
         }
     }

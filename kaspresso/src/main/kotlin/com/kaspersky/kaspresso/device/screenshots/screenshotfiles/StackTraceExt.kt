@@ -1,4 +1,4 @@
-package com.kaspersky.kaspresso.device.screenshots.screenshoter
+package com.kaspersky.kaspresso.device.screenshots.screenshotfiles
 
 import android.os.Build
 
@@ -9,7 +9,12 @@ private const val TEST_CASE_METHOD_JUNIT_4 = "runReflectiveCall"
 private const val TEST_CASE_CLASS_CUCUMBER_JVM = "cucumber.runtime.model.CucumberFeature"
 private const val TEST_CASE_METHOD_CUCUMBER_JVM = "run"
 
-internal fun Array<StackTraceElement>.findTestClassTraceElement(): StackTraceElement {
+internal fun Array<StackTraceElement>.findTestMethod(): TestMethod {
+    return findTestClassTraceElement()
+        .let { TestMethod(it.className, it.methodName) }
+}
+
+private fun Array<StackTraceElement>.findTestClassTraceElement(): StackTraceElement {
     return this.withIndex().reversed()
         .find { (_, element) -> element.isJunit3() || element.isJunit4() || element.isCucumber() }
         ?.let { (i, _) -> extractStackElement(i) }

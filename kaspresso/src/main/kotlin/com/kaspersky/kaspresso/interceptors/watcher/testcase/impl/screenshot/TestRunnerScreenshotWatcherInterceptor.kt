@@ -1,5 +1,6 @@
 package com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.screenshot
 
+import com.kaspersky.kaspresso.device.screenshots.ScreenshotTestStartListener
 import com.kaspersky.kaspresso.device.screenshots.Screenshots
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.TestRunWatcherInterceptor
 import com.kaspersky.kaspresso.testcases.models.info.TestInfo
@@ -11,6 +12,12 @@ import com.kaspersky.kaspresso.testcases.models.info.TestInfo
 class TestRunnerScreenshotWatcherInterceptor(
     private val screenshots: Screenshots
 ) : TestRunWatcherInterceptor {
+
+    override fun onTestStarted(testInfo: TestInfo) {
+        if (screenshots is ScreenshotTestStartListener) {
+            screenshots.onTestStarted()
+        }
+    }
 
     /**
      * Takes a screenshot of the screen on which the "after" section failed.
