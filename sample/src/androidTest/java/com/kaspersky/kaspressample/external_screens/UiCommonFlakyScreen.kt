@@ -1,7 +1,7 @@
 package com.kaspersky.kaspressample.external_screens
 
-import com.kaspersky.components.kautomator.dsl.scroll.UiScrollView
-import com.kaspersky.components.kautomator.dsl.text.UiButton
+import com.kaspersky.components.kautomator.component.scroll.UiScrollView
+import com.kaspersky.components.kautomator.component.text.UiButton
 
 object UiCommonFlakyScreen : UiSampleScreen<UiCommonFlakyScreen>() {
 

@@ -7,8 +7,8 @@ import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.Configurator
 import androidx.test.uiautomator.UiDevice
 import com.agoda.kakao.Kakao
-import com.kaspersky.components.kautomator.intercepting.interaction.UiDeviceInteraction
-import com.kaspersky.components.kautomator.intercepting.interaction.UiObjectInteraction
+import com.kaspersky.components.kautomator.intercept.interaction.UiDeviceInteraction
+import com.kaspersky.components.kautomator.intercept.interaction.UiObjectInteraction
 import com.kaspersky.kaspresso.device.Device
 import com.kaspersky.kaspresso.device.accessibility.Accessibility
 import com.kaspersky.kaspresso.device.accessibility.AccessibilityImpl

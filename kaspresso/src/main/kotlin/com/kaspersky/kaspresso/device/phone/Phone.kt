@@ -1,6 +1,6 @@
 package com.kaspersky.kaspresso.device.phone
 
-import com.kaspersky.kaspresso.annotations.AdbServerMust
+import com.kaspersky.kaspresso.annotations.RequiresAdbServer
 
 /**
  * The interface to work with telephony.
@@ -18,7 +18,7 @@ interface Phone {
      *
      * Required Permissions: INTERNET
      */
-    @AdbServerMust
+    @RequiresAdbServer
     fun emulateCall(number: String)
 
     /**
@@ -26,7 +26,7 @@ interface Phone {
      *
      * Required Permissions: INTERNET
      */
-    @AdbServerMust
+    @RequiresAdbServer
     fun cancelCall(number: String)
 
     /**
@@ -34,6 +34,6 @@ interface Phone {
      *
      * Required Permissions: INTERNET
      */
-    @AdbServerMust
+    @RequiresAdbServer
     fun receiveSms(number: String, text: String)
 }

@@ -1,6 +1,6 @@
 package com.kaspersky.kaspresso.device.files
 
-import com.kaspersky.kaspresso.annotations.AdbServerMust
+import com.kaspersky.kaspresso.annotations.RequiresAdbServer
 
 /**
  * The interface to work with file permissions.
@@ -21,7 +21,7 @@ interface Files {
      * @param serverPath a file path relative to the server directory.
      * @param devicePath a path to copy.
      */
-    @AdbServerMust
+    @RequiresAdbServer
     fun push(serverPath: String, devicePath: String)
 
     /**
@@ -31,7 +31,7 @@ interface Files {
      *
      * @param path a path to remove
      */
-    @AdbServerMust
+    @RequiresAdbServer
     fun remove(path: String)
 
     /**

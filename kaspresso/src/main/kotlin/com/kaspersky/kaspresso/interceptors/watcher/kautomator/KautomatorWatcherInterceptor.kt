@@ -1,6 +1,6 @@
 package com.kaspersky.kaspresso.interceptors.watcher.kautomator
 
-import com.kaspersky.components.kautomator.intercepting.interaction.UiInteraction
+import com.kaspersky.components.kautomator.intercept.interaction.UiInteraction
 
 /**
  * The interface for all interceptors that are watching the default interaction in Kautomator.

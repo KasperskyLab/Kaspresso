@@ -1,8 +1,8 @@
 package com.kaspersky.kaspresso.uiobjectloader
 
 import androidx.test.uiautomator.StaleObjectException
-import com.kaspersky.components.kautomator.intercepting.exception.UnfoundedUiObjectException
-import com.kaspersky.components.kautomator.intercepting.interaction.UiObjectInteraction
+import com.kaspersky.components.kautomator.intercept.exception.UnfoundedUiObjectException
+import com.kaspersky.components.kautomator.intercept.interaction.UiObjectInteraction
 import com.kaspersky.kaspresso.internal.extensions.other.isAllowed
 import com.kaspersky.kaspresso.logger.UiTestLogger
 

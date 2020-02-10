@@ -1,8 +1,8 @@
 package com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.autoscroll
 
-import com.kaspersky.components.kautomator.intercepting.interaction.UiObjectInteraction
-import com.kaspersky.components.kautomator.intercepting.operation.UiObjectAction
-import com.kaspersky.components.kautomator.intercepting.operation.UiObjectAssertion
+import com.kaspersky.components.kautomator.intercept.interaction.UiObjectInteraction
+import com.kaspersky.components.kautomator.intercept.operation.UiObjectAction
+import com.kaspersky.components.kautomator.intercept.operation.UiObjectAssertion
 import com.kaspersky.kaspresso.autoscroll.AutoScrollProvider
 import com.kaspersky.kaspresso.autoscroll.ObjectAutoScrollProviderImpl
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.ObjectBehaviorInterceptor

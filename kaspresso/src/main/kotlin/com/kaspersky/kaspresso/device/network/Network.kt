@@ -1,6 +1,6 @@
 package com.kaspersky.kaspresso.device.network
 
-import com.kaspersky.kaspresso.annotations.AdbServerMust
+import com.kaspersky.kaspresso.annotations.RequiresAdbServer
 
 /**
  * The interface to work with network settings.
@@ -18,7 +18,7 @@ interface Network {
      *
      * Required Permissions: INTERNET.
      */
-    @AdbServerMust
+    @RequiresAdbServer
     fun enable()
 
     /**
@@ -26,7 +26,7 @@ interface Network {
      *
      * Required Permissions: INTERNET.
      */
-    @AdbServerMust
+    @RequiresAdbServer
     fun disable()
 
     /**

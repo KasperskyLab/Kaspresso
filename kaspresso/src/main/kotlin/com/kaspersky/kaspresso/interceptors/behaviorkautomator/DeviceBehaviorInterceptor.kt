@@ -1,8 +1,8 @@
 package com.kaspersky.kaspresso.interceptors.behaviorkautomator
 
-import com.kaspersky.components.kautomator.intercepting.interaction.UiDeviceInteraction
-import com.kaspersky.components.kautomator.intercepting.operation.UiDeviceAction
-import com.kaspersky.components.kautomator.intercepting.operation.UiDeviceAssertion
+import com.kaspersky.components.kautomator.intercept.interaction.UiDeviceInteraction
+import com.kaspersky.components.kautomator.intercept.operation.UiDeviceAction
+import com.kaspersky.components.kautomator.intercept.operation.UiDeviceAssertion
 
 /**
  * The derived from [KautomatorBehaviorInterceptor] interface for intercepting [UiDeviceInteraction.perform] and
