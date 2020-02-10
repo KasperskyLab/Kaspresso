@@ -1,8 +1,8 @@
 package com.kaspersky.kaspresso.interceptors.watcher.kautomator.impl.logging
 
-import com.kaspersky.components.kautomator.intercepting.interaction.UiDeviceInteraction
-import com.kaspersky.components.kautomator.intercepting.operation.UiDeviceAction
-import com.kaspersky.components.kautomator.intercepting.operation.UiDeviceAssertion
+import com.kaspersky.components.kautomator.intercept.interaction.UiDeviceInteraction
+import com.kaspersky.components.kautomator.intercept.operation.UiDeviceAction
+import com.kaspersky.components.kautomator.intercept.operation.UiDeviceAssertion
 import com.kaspersky.kaspresso.interceptors.watcher.kautomator.DeviceWatcherInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
 

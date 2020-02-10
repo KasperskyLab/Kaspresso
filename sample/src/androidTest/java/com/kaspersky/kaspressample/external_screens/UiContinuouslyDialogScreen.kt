@@ -1,6 +1,6 @@
 package com.kaspersky.kaspressample.external_screens
 
-import com.kaspersky.components.kautomator.dsl.text.UiTextView
+import com.kaspersky.components.kautomator.component.text.UiTextView
 import com.kaspersky.kaspressample.R
 
 object UiContinuouslyDialogScreen : UiSampleScreen<UiContinuouslyDialogScreen>() {

@@ -1,7 +1,7 @@
 package com.kaspersky.kaspresso.device.apps
 
 import android.net.Uri
-import com.kaspersky.kaspresso.annotations.AdbServerMust
+import com.kaspersky.kaspresso.annotations.RequiresAdbServer
 
 /**
  * The interface to work with installer, launcher and package manager.
@@ -28,7 +28,7 @@ interface Apps {
      *
      * @param apkPath a path to the apk to be installed. The apk is hosted on the test server.
      */
-    @AdbServerMust
+    @RequiresAdbServer
     fun install(apkPath: String)
 
     /**
@@ -39,7 +39,7 @@ interface Apps {
      * @param packageName an android package name of the app to be checked.
      * @param apkPath a path to the apk to be installed. The apk is hosted on the test server.
      */
-    @AdbServerMust
+    @RequiresAdbServer
     fun installIfNotExists(packageName: String, apkPath: String)
 
     /**
@@ -49,7 +49,7 @@ interface Apps {
      *
      * @param packageName an android package name of the app to be deleted.
      */
-    @AdbServerMust
+    @RequiresAdbServer
     fun uninstall(packageName: String)
 
     /**
@@ -59,7 +59,7 @@ interface Apps {
      *
      * @param packageName an android package name of an app to be deleted.
      */
-    @AdbServerMust
+    @RequiresAdbServer
     fun uninstallIfExists(packageName: String)
 
     /**

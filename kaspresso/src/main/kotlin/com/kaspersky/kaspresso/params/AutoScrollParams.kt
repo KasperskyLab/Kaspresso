@@ -2,7 +2,7 @@ package com.kaspersky.kaspresso.params
 
 import androidx.test.espresso.PerformException
 import androidx.test.uiautomator.UiObjectNotFoundException
-import com.kaspersky.components.kautomator.intercepting.exception.UnfoundedUiObjectException
+import com.kaspersky.components.kautomator.intercept.exception.UnfoundedUiObjectException
 import junit.framework.AssertionFailedError
 
 /**

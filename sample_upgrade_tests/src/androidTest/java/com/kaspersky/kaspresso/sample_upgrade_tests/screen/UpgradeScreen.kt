@@ -1,8 +1,8 @@
 package com.kaspersky.kaspresso.sample_upgrade_tests.screen
 
-import com.kaspersky.components.kautomator.dsl.edit.UiEditText
-import com.kaspersky.components.kautomator.dsl.text.UiButton
-import com.kaspersky.components.kautomator.dsl.text.UiTextView
+import com.kaspersky.components.kautomator.component.edit.UiEditText
+import com.kaspersky.components.kautomator.component.text.UiButton
+import com.kaspersky.components.kautomator.component.text.UiTextView
 
 object UpgradeScreen : UpgradeUiScreen<UpgradeScreen>() {
 

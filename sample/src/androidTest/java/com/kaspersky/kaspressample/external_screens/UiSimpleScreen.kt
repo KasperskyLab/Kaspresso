@@ -1,7 +1,7 @@
 package com.kaspersky.kaspressample.external_screens
 
-import com.kaspersky.components.kautomator.dsl.edit.UiEditText
-import com.kaspersky.components.kautomator.dsl.text.UiButton
+import com.kaspersky.components.kautomator.component.edit.UiEditText
+import com.kaspersky.components.kautomator.component.text.UiButton
 
 object UiSimpleScreen : UiSampleScreen<UiSimpleScreen>() {
 

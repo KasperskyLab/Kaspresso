@@ -1,6 +1,6 @@
 package com.kaspersky.kaspressample.external_screens
 
-import com.kaspersky.components.kautomator.dsl.edit.UiEditText
+import com.kaspersky.components.kautomator.component.edit.UiEditText
 
 object UiWaitForIdleScreen : UiSampleScreen<UiWaitForIdleScreen>() {
 
