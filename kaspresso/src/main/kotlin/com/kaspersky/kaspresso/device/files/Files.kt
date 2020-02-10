@@ -42,6 +42,6 @@ interface Files {
      * @param devicePath a file path relative to the device directory.
      * @param serverPath a path to copy. (If empty - pulls in adbServer directory (folder with file "desktop.jar"))
      */
-    @AdbServerMust
+    @RequiresAdbServer
     fun pull(devicePath: String, serverPath: String = "")
 }

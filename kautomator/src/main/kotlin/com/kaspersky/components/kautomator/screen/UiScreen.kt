@@ -35,6 +35,8 @@ abstract class UiScreen<out T : UiScreen<T>> : UiScreenActions {
     }
 
     abstract val packageName: String
+    abstract val layoutId: Int?
+    abstract val viewClass: Class<*>?
 
     override val view: UiDeviceInteractionDelegate = UiDeviceInteractionDelegate(
         UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())

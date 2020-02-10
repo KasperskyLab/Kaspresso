@@ -1,8 +1,13 @@
 package com.kaspersky.kaspressample.external_screens
 
 import com.kaspersky.components.kautomator.component.text.UiButton
+import com.kaspersky.kaspressample.MainActivity
+import com.kaspersky.kaspressample.R
 
 object UiMainScreen : UiSampleScreen<UiMainScreen>() {
+
+    override val layoutId: Int? = R.layout.activity_main
+    override val viewClass: Class<*>? = MainActivity::class.java
 
     val simpleButton = UiButton { withId(this@UiMainScreen.packageName, "activity_main_simple_sample_button") }
 
