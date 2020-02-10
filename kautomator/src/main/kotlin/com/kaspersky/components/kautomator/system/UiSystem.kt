@@ -3,9 +3,9 @@ package com.kaspersky.components.kautomator.system
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.UiDevice
+import com.kaspersky.components.kautomator.intercept.base.UiInterceptable
 import com.kaspersky.components.kautomator.intercept.delegate.UiDeviceInteractionDelegate
 import com.kaspersky.components.kautomator.intercept.interaction.UiDeviceInteraction
-import com.kaspersky.components.kautomator.intercept.base.UiInterceptable
 import com.kaspersky.components.kautomator.intercept.operation.UiDeviceAction
 import com.kaspersky.components.kautomator.intercept.operation.UiDeviceAssertion
 

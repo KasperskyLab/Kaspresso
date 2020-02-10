@@ -7,9 +7,9 @@ import com.kaspersky.components.kautomator.component.common.actions.UiBaseAction
 import com.kaspersky.components.kautomator.component.common.assertions.UiBaseAssertions
 import com.kaspersky.components.kautomator.component.common.builders.UiViewBuilder
 import com.kaspersky.components.kautomator.component.common.builders.UiViewSelector
+import com.kaspersky.components.kautomator.intercept.base.UiInterceptable
 import com.kaspersky.components.kautomator.intercept.delegate.UiObjectInteractionDelegate
 import com.kaspersky.components.kautomator.intercept.interaction.UiObjectInteraction
-import com.kaspersky.components.kautomator.intercept.base.UiInterceptable
 import com.kaspersky.components.kautomator.intercept.operation.UiObjectAction
 import com.kaspersky.components.kautomator.intercept.operation.UiObjectAssertion
 

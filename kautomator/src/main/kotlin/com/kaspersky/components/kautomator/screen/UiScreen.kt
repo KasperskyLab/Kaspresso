@@ -4,10 +4,10 @@ package com.kaspersky.components.kautomator.screen
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.UiDevice
 import com.kaspersky.components.kautomator.component.common.KautomatorMarker
+import com.kaspersky.components.kautomator.intercept.base.UiInterceptor
 import com.kaspersky.components.kautomator.intercept.delegate.UiDeviceInteractionDelegate
 import com.kaspersky.components.kautomator.intercept.interaction.UiDeviceInteraction
 import com.kaspersky.components.kautomator.intercept.interaction.UiObjectInteraction
-import com.kaspersky.components.kautomator.intercept.base.UiInterceptor
 import com.kaspersky.components.kautomator.intercept.operation.UiDeviceAction
 import com.kaspersky.components.kautomator.intercept.operation.UiDeviceAssertion
 import com.kaspersky.components.kautomator.intercept.operation.UiObjectAction
@@ -35,8 +35,6 @@ abstract class UiScreen<out T : UiScreen<T>> : UiScreenActions {
     }
 
     abstract val packageName: String
-    abstract val layoutId: Int?
-    abstract val viewClass: Class<*>?
 
     override val view: UiDeviceInteractionDelegate = UiDeviceInteractionDelegate(
         UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())

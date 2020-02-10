@@ -1,9 +1,9 @@
 @file:Suppress("unused")
 package com.kaspersky.components.kautomator.system
 
-import com.kaspersky.components.kautomator.system.UiSystemAssertions.UiSystemAssertionType.IS_SCREEN_ON
 import com.kaspersky.components.kautomator.intercept.delegate.UiDeviceInteractionDelegate
 import com.kaspersky.components.kautomator.intercept.operation.UiOperationType
+import com.kaspersky.components.kautomator.system.UiSystemAssertions.UiSystemAssertionType.IS_SCREEN_ON
 
 /**
  * Interface with common assertions providing by UiAutomator and executing in the System

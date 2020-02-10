@@ -4,13 +4,13 @@ import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.UiObject2
 import com.kaspersky.components.kautomator.KautomatorConfigurator
 import com.kaspersky.components.kautomator.component.common.builders.UiViewSelector
-import com.kaspersky.components.kautomator.screen.UiScreen
-import com.kaspersky.components.kautomator.intercept.interaction.UiObjectInteraction
 import com.kaspersky.components.kautomator.intercept.base.UiInterceptor
+import com.kaspersky.components.kautomator.intercept.interaction.UiObjectInteraction
 import com.kaspersky.components.kautomator.intercept.operation.UiObjectAction
 import com.kaspersky.components.kautomator.intercept.operation.UiObjectAssertion
 import com.kaspersky.components.kautomator.intercept.operation.UiOperationBaseImpl
 import com.kaspersky.components.kautomator.intercept.operation.UiOperationType
+import com.kaspersky.components.kautomator.screen.UiScreen
 
 /**
  * Delegation class for [androidx.test.uiautomator.UiObject2].

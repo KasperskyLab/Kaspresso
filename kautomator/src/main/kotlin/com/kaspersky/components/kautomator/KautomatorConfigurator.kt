@@ -1,8 +1,8 @@
 package com.kaspersky.components.kautomator
 
+import com.kaspersky.components.kautomator.intercept.base.UiInterceptor
 import com.kaspersky.components.kautomator.intercept.interaction.UiDeviceInteraction
 import com.kaspersky.components.kautomator.intercept.interaction.UiObjectInteraction
-import com.kaspersky.components.kautomator.intercept.base.UiInterceptor
 import com.kaspersky.components.kautomator.intercept.operation.UiDeviceAction
 import com.kaspersky.components.kautomator.intercept.operation.UiDeviceAssertion
 import com.kaspersky.components.kautomator.intercept.operation.UiObjectAction
