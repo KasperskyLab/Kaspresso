@@ -19,9 +19,9 @@ internal class ScreenshotFileProvider(
      * A screenshot path is formed by [screenshotDirectoryProvider], [screenshotNameProvider] and [screenshotRootDir]
      * Note:
      * + [screenshotRootDir] will be created if doesn't exist.
-     * + A directory for test will be removed on the first method call.
-     *   If you have multiple places where you want to use this location,
-     *   you MUST share the same instance of this class among the occurrences.
+     * + A directory returned by [screenshotDirectoryProvider] will be cleared before any screenshot has been done there.
+     * + Don't use multiple instances of [ScreenshotFileProvider] referencing to the same [screenshotRootDir], because
+     * it will cause unexpected clearing of screenshots.
      *
      * @param tag a tag for the screenshot
      * @return [File] which represents a file for screenshot

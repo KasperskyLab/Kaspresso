@@ -2,7 +2,7 @@ package com.kaspersky.kaspresso.device.screenshots.screenshotfiles
 
 /**
  * Default implementation of [ScreenshotFileProvider]
- * If [addTimestamps] is true it adds System.currentTimeMillis() at the beginning of a name.
+ * If [addTimestamps] is true it adds timestamps to names like that "1570158949869_ScreenshotSampleTest_step_1.png"
  */
 
 class DefaultScreenshotNameProvider(
