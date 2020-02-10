@@ -1,6 +1,7 @@
 package com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.screenshot
 
 import com.kaspersky.kaspresso.device.screenshots.Screenshots
+import com.kaspersky.kaspresso.device.screenshots.TestStartListener
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.TestRunWatcherInterceptor
 import com.kaspersky.kaspresso.testcases.models.info.TestInfo
 
@@ -13,7 +14,9 @@ class TestRunnerScreenshotWatcherInterceptor(
 ) : TestRunWatcherInterceptor {
 
     override fun onTestStarted(testInfo: TestInfo) {
-        screenshots.onTestStarted()
+        if (screenshots is TestStartListener) {
+            screenshots.onTestStarted()
+        }
     }
 
     /**
