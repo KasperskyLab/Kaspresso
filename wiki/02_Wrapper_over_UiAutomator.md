@@ -23,7 +23,15 @@ val uiObject = uiDevice.wait(
 uiObject.text = "Kaspresso"
 assertEquals(uiObject.text, "Kaspresso")
 ```
-This is an example just to input and check the text. Because we have a successful experience of Kakao using we decided to wrap UI Automator over in the same manner and called it **Kautomator**. 
+This is an example just to input and check the text. Because we have a successful experience of Kakao using we decided to wrap UI Automator over in the same manner and called it **Kautomator**:
+```kotlin
+MainScreen {
+    simpleEditText {
+        replaceText("Kaspresso")
+        hasText("Kaspresso")
+    }
+}
+```
 
 Another big advantage of **Kautomator** is a possibility to accelerate UI Automator. <br>
 Have a glance at video below: 
