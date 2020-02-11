@@ -97,7 +97,6 @@ import com.kaspersky.kaspresso.params.ContinuouslyParams
 import com.kaspersky.kaspresso.params.FlakySafetyParams
 import com.kaspersky.kaspresso.params.Params
 import com.kaspersky.kaspresso.params.StepParams
-import com.kaspersky.kaspresso.params.WaitForIdleParams
 import com.kaspersky.kaspresso.report.impl.AllureReportWriter
 import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
 
@@ -391,12 +390,6 @@ data class Kaspresso(
         lateinit var stepParams: StepParams
 
         /**
-         * Holds the [WaitForIdleParams] for [com.kaspersky.kaspresso.idlewaiting.WaitForIdleProvider]'s usage.
-         * If it was not specified, the default implementation is used.
-         */
-        lateinit var waitForIdleParams: WaitForIdleParams
-
-        /**
          * Holds the list of [ViewActionWatcherInterceptor]s.
          * If it was not specified, Kaspresso will use no [ViewActionWatcherInterceptor]s.
          * These interceptors are called by [com.kaspersky.kaspresso.proxy.ViewActionProxy]
@@ -588,7 +581,6 @@ data class Kaspresso(
             if (!::continuouslyParams.isInitialized) continuouslyParams = ContinuouslyParams.default()
             if (!::autoScrollParams.isInitialized) autoScrollParams = AutoScrollParams.default()
             if (!::stepParams.isInitialized) stepParams = StepParams()
-            if (!::waitForIdleParams.isInitialized) waitForIdleParams = WaitForIdleParams()
         }
 
         @Suppress("detekt.ComplexMethod")
@@ -712,8 +704,7 @@ data class Kaspresso(
                     flakySafetyParams = flakySafetyParams,
                     continuouslyParams = continuouslyParams,
                     autoScrollParams = autoScrollParams,
-                    stepParams = stepParams,
-                    waitForIdleParams = waitForIdleParams
+                    stepParams = stepParams
                 ),
 
                 viewActionWatcherInterceptors = viewActionWatcherInterceptors,
