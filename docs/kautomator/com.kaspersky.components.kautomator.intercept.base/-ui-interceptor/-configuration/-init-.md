@@ -1,0 +1,5 @@
+[kautomator](../../../index.md) / [com.kaspersky.components.kautomator.intercept.base](../../index.md) / [UiInterceptor](../index.md) / [Configuration](index.md) / [&lt;init&gt;](./-init-.md)
+
+# &lt;init&gt;
+
+`Configuration(uiUiObjectObjectInterceptor: `[`UiInterceptor`](../index.md)`<`[`UiObjectInteraction`](../../../com.kaspersky.components.kautomator.intercept.interaction/-ui-object-interaction/index.md)`, `[`UiObjectAssertion`](../../../com.kaspersky.components.kautomator.intercept.operation/-ui-object-assertion.md)`, `[`UiObjectAction`](../../../com.kaspersky.components.kautomator.intercept.operation/-ui-object-action.md)`>?, uiDeviceInterceptor: `[`UiInterceptor`](../index.md)`<`[`UiDeviceInteraction`](../../../com.kaspersky.components.kautomator.intercept.interaction/-ui-device-interaction/index.md)`, `[`UiDeviceAssertion`](../../../com.kaspersky.components.kautomator.intercept.operation/-ui-device-assertion.md)`, `[`UiDeviceAction`](../../../com.kaspersky.components.kautomator.intercept.operation/-ui-device-action.md)`>?)`
