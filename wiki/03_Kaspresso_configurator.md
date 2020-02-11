@@ -3,7 +3,7 @@
 **Kaspresso** class - is a single point to set Kaspresso parameters. <br>
 A developer can customize **Kaspresso** by setting ```Kaspresso.Builder``` at constructors of ```TestCase```, ```BaseTestCase```, ```TestCaseRule```, ```BaseTestCaseRule```.<br>
 The example:
-```
+```kotlin
 class SomeTest : TestCase(
     kaspressoBuilder = Kaspresso.Builder.advanced {
         beforeEachTest {
@@ -86,7 +86,7 @@ Sometimes, a developer wishes to put some actions repeating in all tests before/
 You can make a remark that there are ```@beforeTest/@afterTest``` annotations to resolve mentioned tasks. But the developer doesn't have an access to ```BaseTestContext``` in those methods. 
 That's why we have introduced special default actions that you can set in constructor by ```Kaspresso.Builder```. <br>
 The example how to implement default actions in ```Kaspresso.Builder``` is: <br>
-```
+```kotlin
 open class YourTestCase : TestCase(
     kaspressoBuilder = Kaspresso.Builder.advanced {
         beforeEachTest {
@@ -99,7 +99,7 @@ open class YourTestCase : TestCase(
 )
 ```
 The full signature of ```beforeEachTest``` is:
-```
+```kotlin
 beforeEachTest(override = true, action = {
     testLogger.i("beforeTestFirstAction")
 })
