@@ -2,7 +2,7 @@
 
 # ScreenshotsImpl
 
-`class ScreenshotsImpl : `[`Screenshots`](../-screenshots/index.md)
+`class ScreenshotsImpl : `[`Screenshots`](../-screenshots/index.md)`, `[`ScreenshotTestStartListener`](../-screenshot-test-start-listener/index.md)
 
 The implementation of the [Screenshots](../-screenshots/index.md) interface.
 
@@ -10,10 +10,11 @@ The implementation of the [Screenshots](../-screenshots/index.md) interface.
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | `ScreenshotsImpl(logger: `[`UiTestLogger`](../../com.kaspersky.kaspresso.logger/-ui-test-logger.md)`, activities: `[`Activities`](../../com.kaspersky.kaspresso.device.activities/-activities/index.md)`, screenshotDir: `[`File`](https://developer.android.com/reference/java/io/File.html)` = File("screenshots"))`<br>The implementation of the [Screenshots](../-screenshots/index.md) interface. |
+| [&lt;init&gt;](-init-.md) | `ScreenshotsImpl(logger: `[`UiTestLogger`](../../com.kaspersky.kaspresso.logger/-ui-test-logger.md)`, screenshotMaker: `[`ScreenshotMaker`](../../com.kaspersky.kaspresso.device.screenshots.screenshotmaker/-screenshot-maker/index.md)`, screenshotDirectoryProvider: `[`ScreenshotDirectoryProvider`](../../com.kaspersky.kaspresso.device.screenshots.screenshotfiles/-screenshot-directory-provider/index.md)`, screenshotNameProvider: `[`ScreenshotNameProvider`](../../com.kaspersky.kaspresso.device.screenshots.screenshotfiles/-screenshot-name-provider/index.md)`, screenshotRootDir: `[`File`](https://developer.android.com/reference/java/io/File.html)` = File("screenshots"))`<br>The implementation of the [Screenshots](../-screenshots/index.md) interface. |
 
 ### Functions
 
 | Name | Summary |
 |---|---|
-| [take](take.md) | `fun take(tag: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Takes screenshot if it is possible, otherwise logs the error. The method adds System.currentTimeMillis() to the tag to save all screenshots of a test     running several times per the same suite. That's why a name will look     like "1570158949869_ScreenshotSampleTest_step_1". |
+| [onTestStarted](on-test-started.md) | `fun onTestStarted(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [take](take.md) | `fun take(tag: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Takes a screenshot if it is possible, otherwise logs the error. By default a screenshot name looks like /screenshotRootDir////[tag](take.md#com.kaspersky.kaspresso.device.screenshots.ScreenshotsImpl$take(kotlin.String)/tag).png See [ScreenshotFileProvider](#), [ScreenshotDirectoryProvider](../../com.kaspersky.kaspresso.device.screenshots.screenshotfiles/-screenshot-directory-provider/index.md) for more details |
