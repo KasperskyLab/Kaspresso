@@ -2,7 +2,7 @@
 
 # hackPermissions
 
-`var hackPermissions: `[`HackPermissions`](../../../com.kaspersky.kaspresso.device.permissions/-hack-permissions/index.md)
+`lateinit var hackPermissions: `[`HackPermissions`](../../../com.kaspersky.kaspresso.device.permissions/-hack-permissions/index.md)
 
 Holds an implementation of [HackPermissions](../../../com.kaspersky.kaspresso.device.permissions/-hack-permissions/index.md) interface. If it was not specified, the default implementation is used.
 

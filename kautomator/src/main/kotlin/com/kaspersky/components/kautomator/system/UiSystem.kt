@@ -3,9 +3,9 @@ package com.kaspersky.components.kautomator.system
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.UiDevice
-import com.kaspersky.components.kautomator.intercept.delegate.UiDeviceDelegate
-import com.kaspersky.components.kautomator.intercept.interaction.UiDeviceInteraction
 import com.kaspersky.components.kautomator.intercept.base.UiInterceptable
+import com.kaspersky.components.kautomator.intercept.delegate.UiDeviceInteractionDelegate
+import com.kaspersky.components.kautomator.intercept.interaction.UiDeviceInteraction
 import com.kaspersky.components.kautomator.intercept.operation.UiDeviceAction
 import com.kaspersky.components.kautomator.intercept.operation.UiDeviceAssertion
 
@@ -17,7 +17,7 @@ import com.kaspersky.components.kautomator.intercept.operation.UiDeviceAssertion
 object UiSystem : UiSystemActions, UiSystemAssertions,
     UiInterceptable<UiDeviceInteraction, UiDeviceAssertion, UiDeviceAction> {
 
-    override val view: UiDeviceDelegate = UiDeviceDelegate(
+    override val view: UiDeviceInteractionDelegate = UiDeviceInteractionDelegate(
         UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
     )
 

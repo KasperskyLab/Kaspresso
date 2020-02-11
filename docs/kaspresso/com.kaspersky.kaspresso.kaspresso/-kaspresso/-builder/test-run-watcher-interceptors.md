@@ -2,7 +2,7 @@
 
 # testRunWatcherInterceptors
 
-`var testRunWatcherInterceptors: `[`MutableList`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html)`<`[`TestRunWatcherInterceptor`](../../../com.kaspersky.kaspresso.interceptors.watcher.testcase/-test-run-watcher-interceptor/index.md)`>`
+`lateinit var testRunWatcherInterceptors: `[`MutableList`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html)`<`[`TestRunWatcherInterceptor`](../../../com.kaspersky.kaspresso.interceptors.watcher.testcase/-test-run-watcher-interceptor/index.md)`>`
 
 Holds the list of [TestRunWatcherInterceptor](../../../com.kaspersky.kaspresso.interceptors.watcher.testcase/-test-run-watcher-interceptor/index.md)s.
 If it was not specified, Kaspresso will use no [TestRunWatcherInterceptor](../../../com.kaspersky.kaspresso.interceptors.watcher.testcase/-test-run-watcher-interceptor/index.md)s.

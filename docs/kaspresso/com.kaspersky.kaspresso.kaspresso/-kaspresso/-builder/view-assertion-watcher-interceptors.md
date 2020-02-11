@@ -2,7 +2,7 @@
 
 # viewAssertionWatcherInterceptors
 
-`var viewAssertionWatcherInterceptors: `[`MutableList`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html)`<`[`ViewAssertionWatcherInterceptor`](../../../com.kaspersky.kaspresso.interceptors.watcher.view/-view-assertion-watcher-interceptor/index.md)`>`
+`lateinit var viewAssertionWatcherInterceptors: `[`MutableList`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html)`<`[`ViewAssertionWatcherInterceptor`](../../../com.kaspersky.kaspresso.interceptors.watcher.view/-view-assertion-watcher-interceptor/index.md)`>`
 
 Holds the list of [ViewAssertionWatcherInterceptor](../../../com.kaspersky.kaspresso.interceptors.watcher.view/-view-assertion-watcher-interceptor/index.md)s.
 If it was not specified, Kaspresso will use no [ViewAssertionWatcherInterceptor](../../../com.kaspersky.kaspresso.interceptors.watcher.view/-view-assertion-watcher-interceptor/index.md)s.

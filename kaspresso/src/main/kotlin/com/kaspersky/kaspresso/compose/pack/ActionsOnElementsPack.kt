@@ -8,8 +8,8 @@ import com.agoda.kakao.common.assertions.BaseAssertions
 import com.agoda.kakao.intercept.Interceptable
 import com.kaspersky.components.kautomator.component.common.actions.UiBaseActions
 import com.kaspersky.components.kautomator.component.common.assertions.UiBaseAssertions
-import com.kaspersky.components.kautomator.intercept.interaction.UiObjectInteraction
 import com.kaspersky.components.kautomator.intercept.base.UiInterceptable
+import com.kaspersky.components.kautomator.intercept.interaction.UiObjectInteraction
 import com.kaspersky.components.kautomator.intercept.operation.UiObjectAction
 import com.kaspersky.components.kautomator.intercept.operation.UiObjectAssertion
 import com.kaspersky.kaspresso.compose.pack.branch.ComplexComposeBranch

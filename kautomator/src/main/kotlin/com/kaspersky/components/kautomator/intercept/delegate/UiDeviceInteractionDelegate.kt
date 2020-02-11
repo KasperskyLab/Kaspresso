@@ -2,13 +2,13 @@ package com.kaspersky.components.kautomator.intercept.delegate
 
 import androidx.test.uiautomator.UiDevice
 import com.kaspersky.components.kautomator.KautomatorConfigurator
-import com.kaspersky.components.kautomator.screen.UiScreen
-import com.kaspersky.components.kautomator.intercept.interaction.UiDeviceInteraction
 import com.kaspersky.components.kautomator.intercept.base.UiInterceptor
+import com.kaspersky.components.kautomator.intercept.interaction.UiDeviceInteraction
 import com.kaspersky.components.kautomator.intercept.operation.UiDeviceAction
 import com.kaspersky.components.kautomator.intercept.operation.UiDeviceAssertion
 import com.kaspersky.components.kautomator.intercept.operation.UiOperationBaseImpl
 import com.kaspersky.components.kautomator.intercept.operation.UiOperationType
+import com.kaspersky.components.kautomator.screen.UiScreen
 
 /**
  * Delegation class for [androidx.test.uiautomator.UiDevice].
@@ -17,7 +17,7 @@ import com.kaspersky.components.kautomator.intercept.operation.UiOperationType
  * @see UiDelegate
  * @see UiInterceptor
  */
-class UiDeviceDelegate(
+class UiDeviceInteractionDelegate(
     device: UiDevice
 ) : UiDelegate<UiDeviceInteraction, UiDeviceAssertion, UiDeviceAction> {
 

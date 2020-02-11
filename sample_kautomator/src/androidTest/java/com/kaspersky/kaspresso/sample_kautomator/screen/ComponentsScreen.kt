@@ -4,8 +4,8 @@ import com.kaspersky.components.kautomator.component.bottomnav.UiBottomNavigatio
 import com.kaspersky.components.kautomator.component.check.UiCheckBox
 import com.kaspersky.components.kautomator.component.chip.UiChipGroup
 import com.kaspersky.components.kautomator.component.dialog.UiAlertDialog
-import com.kaspersky.components.kautomator.screen.UiScreen
 import com.kaspersky.components.kautomator.component.text.UiButton
+import com.kaspersky.components.kautomator.screen.UiScreen
 
 object ComponentsScreen : UiScreen<ComponentsScreen>() {
 

@@ -10,6 +10,12 @@ work for some reasons. E.g. because of animations.
 Using this API is highly discouraged. Consider to use the built-in API
 whenever it's possible as it described in the documentation for methods.
 
+Required: Started AdbServer
+    1. Download a file "kaspresso/artifacts/desktop.jar"
+    2. Start AdbServer =&gt; input in cmd "java jar path_to_file/desktop.jar"
+Methods demanding to use AdbServer in the default implementation of this interface are marked.
+    But nobody can't deprecate you to write implementation that doesn't require AdbServer.
+
 ### Functions
 
 | Name | Summary |

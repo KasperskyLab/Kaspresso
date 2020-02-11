@@ -5,10 +5,11 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.components.kautomator.KautomatorConfigurator
-import com.kaspersky.components.kautomator.dsl.screen.UiScreen
-import com.kaspersky.components.kautomator.dsl.text.UiButton
+import com.kaspersky.components.kautomator.component.text.UiButton
+import com.kaspersky.components.kautomator.screen.UiScreen
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.sample_kautomator.MainActivity
+import com.kaspersky.kaspresso.sample_kautomator.R
 import com.kaspersky.kaspresso.sample_kautomator.screen.MainScreen
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.junit.Assert.assertEquals
@@ -219,6 +220,8 @@ class InterceptorTest : TestCase(
     object InterceptedMainScreen : UiScreen<InterceptedMainScreen>() {
 
         override val packageName: String = "com.kaspersky.kaspresso.sample_kautomator"
+        override val layoutId: Int? = R.layout.activity_main
+        override val viewClass: Class<*>? = MainActivity::class.java
 
         val screenList = mutableListOf<String>()
         val simpleButton = UiButton { withId(this@InterceptedMainScreen.packageName, "button") }

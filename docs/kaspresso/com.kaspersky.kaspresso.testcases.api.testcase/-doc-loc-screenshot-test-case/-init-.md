@@ -2,7 +2,7 @@
 
 # &lt;init&gt;
 
-`DocLocScreenshotTestCase(screenshotsDirectory: `[`File`](https://developer.android.com/reference/java/io/File.html)`, changeSystemLocale: `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)` = false, locales: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`?, kaspressoBuilder: `[`Kaspresso.Builder`](../../com.kaspersky.kaspresso.kaspresso/-kaspresso/-builder/index.md)` = Kaspresso.Builder.default())`
+`DocLocScreenshotTestCase(screenshotsDirectory: `[`File`](https://developer.android.com/reference/java/io/File.html)`, changeSystemLocale: `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)` = false, locales: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`?, kaspressoBuilder: `[`Kaspresso.Builder`](../../com.kaspersky.kaspresso.kaspresso/-kaspresso/-builder/index.md)` = Kaspresso.Builder.advanced())`
 
 The base class for all docloc screenshot tests.
 

@@ -6,6 +6,12 @@
 
 The interface to work with telephony.
 
+Required: Started AdbServer
+    1. Download a file "kaspresso/artifacts/desktop.jar"
+    2. Start AdbServer =&gt; input in cmd "java jar path_to_file/desktop.jar"
+Methods demanding to use AdbServer in the default implementation of this interface are marked.
+    But nobody can't deprecate you to write implementation that doesn't require AdbServer.
+
 ### Functions
 
 | Name | Summary |

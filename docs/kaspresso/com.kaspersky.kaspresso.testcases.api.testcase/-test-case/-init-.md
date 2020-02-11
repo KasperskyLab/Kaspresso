@@ -2,7 +2,7 @@
 
 # &lt;init&gt;
 
-`TestCase(kaspressoBuilder: `[`Kaspresso.Builder`](../../com.kaspersky.kaspresso.kaspresso/-kaspresso/-builder/index.md)` = Kaspresso.Builder.default())`
+`TestCase(kaspressoBuilder: `[`Kaspresso.Builder`](../../com.kaspersky.kaspresso.kaspresso/-kaspresso/-builder/index.md)` = Kaspresso.Builder.advanced())`
 
 The base class for all test cases. Extend this class with a single base project-wide inheritor of [TestCase](index.md) as a
 parent for all actual project-wide test cases. Nesting test cases are not permitted because they may produce an
