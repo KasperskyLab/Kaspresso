@@ -11,4 +11,3 @@
 | [FlakySafetyParams](-flaky-safety-params/index.md) | `class FlakySafetyParams`<br>The class that holds all the necessary for [com.kaspersky.kaspresso.flakysafety.FlakySafetyProviderSimpleImpl](../com.kaspersky.kaspresso.flakysafety/-flaky-safety-provider-simple-impl/index.md) parameters. |
 | [Params](-params/index.md) | `data class Params`<br>The facade class for all Kaspresso parameters. |
 | [StepParams](-step-params/index.md) | `data class StepParams`<br>The class that holds all the necessary for [com.kaspersky.kaspresso.testcases.core.step.StepsManager](#) parameters. |
-| [WaitForIdleParams](-wait-for-idle-params/index.md) | `data class WaitForIdleParams` |

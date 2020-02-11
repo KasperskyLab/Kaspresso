@@ -65,7 +65,7 @@ E.g:
 
 ### Parameters
 
-`screenshotsDirectory` - directory to save screenshot. Will be cleared before launching the test.
+`screenshotsDirectory` - directory to save screenshot.
 
 `locales` - comma-separated string with locales to run test with.
 
