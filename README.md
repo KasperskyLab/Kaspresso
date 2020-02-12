@@ -20,7 +20,7 @@ In case of UiAutomator, we get **10x** acceleration for some commands!
 
 ![](https://habrastorage.org/webt/dw/jh/9k/dwjh9kypjl637kxj8tiaxwjvtp0.png)
 
-Deep dive into capabilities of Kaspresso!
+Dive deep into capabilities of Kaspresso!
 
 ## Capabilities
 
@@ -81,8 +81,8 @@ MainScreen {
     }
 }
 ```
-As you mentioned Kakao and Kautomator offer almost identical API to work.
-So, a developer doesn't feel the difference while he/she writes a test and uses Espresso or UiAutomator under the hood. <br>
+As we mentioned Kakao and Kautomator offer almost identical API to work.
+So, a developer doesn't feel the difference while they write a test and use Espresso or UiAutomator under the hood. <br>
 Please, read about [Kakao](/wiki/01_Wrapper_over_Espresso.md) and [Kautomator](/wiki/02_Wrapper_over_UiAutomator.md) in details.
 
 But, the existance of only suitable Kotlin DSL wrappers over libraries doesn't help to correlate your test with the test-case
@@ -142,24 +142,24 @@ A great manual about how to write tests correctly is availbable [here](/wiki/04_
 
 #### Stability 
 
-Flakiness in UI tests means that one test can pass 10 times in a row, but breaks on the eleventh attempt. The reason for failure is so mysterious and unpredictable, and all of these magic sometimes forces you to cry when nobody sees you. Unfortunately, the most popular reason for such behavior is the instability of ui-tests libraries (Espresso and UI Automator). <br>
+Flakiness in UI tests means that one test can pass 10 times in a row, but breaks on the eleventh attempt. The reason for failure is so mysterious and unpredictable, and all of this magic sometimes forces you to cry when nobody sees you. Unfortunately, the most popular reason for such behavior is the instability of ui-tests libraries (Espresso and UI Automator). <br>
 **Kaspresso eliminates instability of ui-tests libraries** thanks to DSL wrappers and the new mechanism of interceptors
 where all failures are caught. <br>
-More detailed info about interceptors is [here](/wiki/03_Kaspresso_configurator.md#kaspresso-interceptors-based-on-kakaokautomator-interceptors) and [here](/wiki/03_Kaspresso_configurator.md#some-words-about-behavior-interceptors). Also, [some sweety features](/wiki/04_How_to_write_autotests.md#sweet-additional-features) helping to resolve a lot of typical problems are available in Kaspresso.
+More detailed info about interceptors is [here](/wiki/03_Kaspresso_configurator.md#kaspresso-interceptors-based-on-kakaokautomator-interceptors) and [here](/wiki/03_Kaspresso_configurator.md#some-words-about-behavior-interceptors). Also, [some sweet features](/wiki/04_How_to_write_autotests.md#sweet-additional-features) helping to resolve a lot of typical problems are available in Kaspresso.
 
 #### UI-test libraries acceleration
 
 Shut up and watch the video =)
 
 ![](https://habrastorage.org/webt/ti/kv/ki/tikvkij1vjesnacrxqm-lk0coly.gif) <br>
-The left video is boosted UI Automator, the right video is default UI Automator.
+The left video is a boosted UI Automator, the right video is a default UI Automator.
 
 How is it possible? Please, review [the short explanation](./wiki/02_Wrapper_over_UiAutomator.md#accelerate-ui-automator).
 
 #### Interceptors
 
 We have introduced a mechanism of interceptors giving an ability to catch all actions going to Espresso or UI Automator. <br>
-Thanks to this mechanism, a developer can add additional custom actions to each library operation (a logging, a screenshoting), try to struggle flaky library operations (re-run failed actions, scroll the parent layout, remove the android system dialog) and do other interesting things. <br>
+Thanks to this mechanism, a developer can add additional custom actions to each library operation (a logging, a screenshot), try to overcome flaky library operations (re-run failed actions, scroll the parent layout, remove the android system dialog) and do other interesting things. <br>
 Please, read the [comprehensive manual](/wiki/03_Kaspresso_configurator.md#kaspresso-interceptors-based-on-kakaokautomator-interceptors).
 
 #### Logging
@@ -173,7 +173,7 @@ Kaspresso transform your tests' logs into understandable and pleasant text:
 Espresso and UI Automator don't allow to call adb commands inside a test. <br>
 That's why we have written special [AdbServer repository](https://github.com/KasperskyLab/AdbServer) fixing mentioned problem. <br>
 
-In Kaspresso, the developer can call adb and cmd commands by ```AdbServer``` class. <br>
+In Kaspresso, the developer can call ADB and CMD commands by ```AdbServer``` class. <br>
 The manual is [here](/wiki/06_AdbServer.md)
 
 #### Ability to work with Android System
@@ -195,12 +195,12 @@ Examples of such work: <br>
 
 A developer can use all of this through [Device class](/wiki/05_Device.md).
 
-#### Feature's screenshoting
+#### Feature's screenshotting
 
-If you develop an application that is available across the world then you have to support a lot of localizations. Translation of a word or a phrase is not a big challenge. But, the most important task is to translate in according to
-context of a specific screen and language culture. That's why a translator must have not only the set of new words/phrases but, also, a set of screens where these words/phrases are using. <br>
-Kaspresso offers a possibility to make screenshots fastly and automatically. <br>
-Also, we prepared a [comprehensive manual and an example](/wiki/07_DocLoc.md) how to make screenshots even for legacy screens almost immediately. <br>
+If you develop an application that is available across the world then you have to support a lot of localizations. Translation of a word or a phrase is not a big challenge. But, the most important task is to translate according to
+context of a specific screen and language culture. That's why a translator must not only have the set of new words/phrases but, also, a set of screens where these words/phrases are used. <br>
+Kaspresso offers a possibility to make screenshots fast and automatically. <br>
+Also, we prepared a [comprehensive manual and an example](/wiki/07_DocLoc.md) of how to make screenshots even for legacy screens almost immediately. <br>
 The spoiler: you don't have to refactor or to mock all of this =)
 
 #### Configurability
@@ -209,7 +209,7 @@ We give broad opportunities to tune any part of Kaspresso. Read [info](/wiki/03_
 
 #### The philosophy
 
-The suitable tool to write UI-tests is a necessary requirement but only tool doesn't resolve all problems. Another big bunch of questions is how to write tests and how to organize the entire process. Our team has great experience in introducing autotests in different companies. That's why we have prepared a lot of articles which are devoted to these problems. <br>
+The suitable tool to write UI-tests is a necessary requirement but this tool doesn't resolve all problems. Another big bunch of questions is how to write tests and how to organize the entire process. Our team has great experience in introducing autotests in different companies. That's why we have prepared a lot of articles which are devoted to these problems. <br>
 Welcome to [learn our lessons](/wiki/04_How_to_write_autotests.md) =)
 
 ## Wiki
