@@ -13,26 +13,34 @@ internal object Composer {
      *
      * @return the order number of a succeed branch
      */
-    fun getUnitedComposedAction(
+    @Throws(ExtCompositeException::class)
+    fun getCompositeAction(
         actions: List<() -> Unit>,
         logger: UiTestLogger
     ): () -> Int = {
-        logger.i("Composed action started.")
-        var successBranchIndex: Int? = null
+        logger.i("Composite action started.")
+        var branchIndex = 0
+        var success = false
         val cachedErrors: MutableList<Throwable> = mutableListOf()
 
-        actions.forEachIndexed { index, action ->
+        for (action in actions) {
             try {
                 action.invoke()
-                logger.i("Composed action #$index succeeded.")
-                successBranchIndex = index
+                success = true
+                logger.i("Composed action #$branchIndex succeeded.")
+                break
             } catch (error: Throwable) {
                 cachedErrors += error
-                logger.e("Composed action #$index failed. The reason is ${error.javaClass.simpleName}")
+                logger.e("Composed action #$branchIndex failed. The reason is ${error.javaClass.simpleName}")
+                branchIndex++
             }
         }
 
-        logger.i("All composed actions totally failed.")
-        successBranchIndex ?: throw ExtCompositeException(cachedErrors)
+        if (success) {
+            branchIndex
+        } else {
+            logger.i("All composed actions totally failed.")
+            throw ExtCompositeException(cachedErrors)
+        }
     }
 }
