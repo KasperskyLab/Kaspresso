@@ -22,7 +22,7 @@ import org.junit.runner.RunWith
  */
 @RunWith(AndroidJUnit4::class)
 class InterceptorTest : TestCase(
-    kaspressoBuilder = Kaspresso.Builder.advanced {
+    kaspressoBuilder = Kaspresso.Builder.simple {
         afterEachTest {
             InterceptedMainScreen.resetScreenList()
         }
@@ -220,8 +220,6 @@ class InterceptorTest : TestCase(
     object InterceptedMainScreen : UiScreen<InterceptedMainScreen>() {
 
         override val packageName: String = "com.kaspersky.kaspresso.sample_kautomator"
-        override val layoutId: Int? = R.layout.activity_main
-        override val viewClass: Class<*>? = MainActivity::class.java
 
         val screenList = mutableListOf<String>()
         val simpleButton = UiButton { withId(this@InterceptedMainScreen.packageName, "button") }

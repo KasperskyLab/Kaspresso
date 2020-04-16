@@ -5,7 +5,7 @@ A developer can customize **Kaspresso** by setting ```Kaspresso.Builder``` at co
 The example:
 ```kotlin
 class SomeTest : TestCase(
-    kaspressoBuilder = Kaspresso.Builder.advanced {
+    kaspressoBuilder = Kaspresso.Builder.simple {
         beforeEachTest {
             testLogger.i("The beginning")
         }
@@ -88,7 +88,7 @@ That's why we have introduced special default actions that you can set in constr
 The example how to implement default actions in ```Kaspresso.Builder``` is: <br>
 ```kotlin
 open class YourTestCase : TestCase(
-    kaspressoBuilder = Kaspresso.Builder.advanced {
+    kaspressoBuilder = Kaspresso.Builder.simple {
         beforeEachTest {
             testLogger.i("beforeTestFirstAction")
         }
