@@ -120,7 +120,7 @@ observe the [example](../sample/src/androidTest/java/com/kaspersky/kaspressample
 The example of how to configure Kaspresso and how to use Kaspresso interceptors is in [here](../sample/src/androidTest/java/com/kaspersky/kaspressample/configurator_tests).
 
 ### Default Kaspresso settings
-```BaseTestCase```, ```TestCase```, ```BaseTestCaseRule```, ```TestCaseRule``` are using default customized **Kaspresso** (```Kaspresso.Builder.advanced``` builder). <br>
+```BaseTestCase```, ```TestCase```, ```BaseTestCaseRule```, ```TestCaseRule``` are using default customized **Kaspresso** (```Kaspresso.Builder.simple``` builder). <br>
 Most valuable features of default customized **Kaspresso** are below.
 
 #### Logging

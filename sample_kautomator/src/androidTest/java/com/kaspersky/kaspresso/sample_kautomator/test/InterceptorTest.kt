@@ -9,7 +9,6 @@ import com.kaspersky.components.kautomator.component.text.UiButton
 import com.kaspersky.components.kautomator.screen.UiScreen
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.sample_kautomator.MainActivity
-import com.kaspersky.kaspresso.sample_kautomator.R
 import com.kaspersky.kaspresso.sample_kautomator.screen.MainScreen
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.junit.Assert.assertEquals
