@@ -1,6 +1,6 @@
 package com.kaspersky.kaspresso.device.location
 
-import com.kaspersky.kaspresso.annotations.AdbServerMust
+import com.kaspersky.kaspresso.annotations.RequiresAdbServer
 
 /**
  * The interface to work with device's location.
@@ -18,7 +18,7 @@ interface Location {
      *
      * Required Permissions: INTERNET
      */
-    @AdbServerMust
+    @RequiresAdbServer
     fun enableGps()
 
     /**
@@ -26,7 +26,7 @@ interface Location {
      *
      * Required Permissions: INTERNET
      */
-    @AdbServerMust
+    @RequiresAdbServer
     fun disableGps()
 
     /**
@@ -34,6 +34,6 @@ interface Location {
      *
      * Required Permissions: INTERNET
      */
-    @AdbServerMust
+    @RequiresAdbServer
     fun setLocation(lat: Double, lon: Double)
 }

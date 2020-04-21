@@ -16,4 +16,4 @@ The interface to work with languages
 
 | Name | Summary |
 |---|---|
-| [LanguageImpl](../-language-impl/index.md) | `class LanguageImpl : `[`Language`](./index.md) |
+| [LanguageImpl](../-language-impl/index.md) | `class LanguageImpl : `[`Language`](./index.md)<br>The implementation of [Language](./index.md) |

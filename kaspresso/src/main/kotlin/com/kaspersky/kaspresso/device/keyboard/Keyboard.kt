@@ -4,7 +4,7 @@ import android.view.KeyEvent
 import androidx.test.espresso.action.ViewActions
 import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.UiObject
-import com.kaspersky.kaspresso.annotations.AdbServerMust
+import com.kaspersky.kaspresso.annotations.RequiresAdbServer
 
 /**
  * Use this API only if neither Espresso, nor UiAutomator
@@ -30,7 +30,7 @@ interface Keyboard {
      *
      * Required Permissions: INTERNET
      */
-    @AdbServerMust
+    @RequiresAdbServer
     fun typeText(text: String)
 
     /**
@@ -45,6 +45,6 @@ interface Keyboard {
      *
      * @param keyEvent the code from a [KeyEvent] constant to send on device.
      */
-    @AdbServerMust
+    @RequiresAdbServer
     fun sendEvent(keyEvent: Int)
 }

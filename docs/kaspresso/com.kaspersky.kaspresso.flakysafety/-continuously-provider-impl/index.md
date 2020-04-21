@@ -10,7 +10,7 @@ The implementation of the [ContinuouslyProvider](../-continuously-provider/index
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | `ContinuouslyProviderImpl(params: `[`ContinuouslyParams`](../../com.kaspersky.kaspresso.params/-continuously-params/index.md)`, logger: `[`UiTestLogger`](../../com.kaspersky.kaspresso.logger/-ui-test-logger.md)`)`<br>The implementation of the [ContinuouslyProvider](../-continuously-provider/index.md) interface. |
+| [&lt;init&gt;](-init-.md) | `ContinuouslyProviderImpl(kaspresso: `[`Kaspresso`](../../com.kaspersky.kaspresso.kaspresso/-kaspresso/index.md)`)`<br>The implementation of the [ContinuouslyProvider](../-continuously-provider/index.md) interface. |
 
 ### Functions
 

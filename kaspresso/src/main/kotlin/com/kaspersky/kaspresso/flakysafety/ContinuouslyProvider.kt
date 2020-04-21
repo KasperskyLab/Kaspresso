@@ -10,7 +10,7 @@ interface ContinuouslyProvider {
      *
      * It can be helpful for checking of negative scenarios.
      *
-     * In opposite to [FlakySafetyProvider.flakySafely] it does not skips last attempt after first success
+     * In opposite to [FlakySafetyProvider.flakySafely] it does not skip last attempt after first success
      * and throws inside exception outside as soon as it was thrown
      *
      * @param action the action to invoke.

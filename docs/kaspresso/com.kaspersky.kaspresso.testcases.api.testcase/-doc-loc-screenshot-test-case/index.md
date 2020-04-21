@@ -65,7 +65,7 @@ E.g:
 
 ### Parameters
 
-`screenshotsDirectory` - directory to save screenshot. Will be cleared before launching the test.
+`screenshotsDirectory` - directory to save screenshot.
 
 `locales` - comma-separated string with locales to run test with.
 
@@ -76,7 +76,7 @@ E.g:
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | `DocLocScreenshotTestCase(screenshotsDirectory: `[`File`](https://developer.android.com/reference/java/io/File.html)`, changeSystemLocale: `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)` = false, locales: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`?, kaspressoBuilder: `[`Kaspresso.Builder`](../../com.kaspersky.kaspresso.kaspresso/-kaspresso/-builder/index.md)` = Kaspresso.Builder.default())`<br>The base class for all docloc screenshot tests. |
+| [&lt;init&gt;](-init-.md) | `DocLocScreenshotTestCase(screenshotsDirectory: `[`File`](https://developer.android.com/reference/java/io/File.html)`, changeSystemLocale: `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)` = false, locales: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`?, kaspressoBuilder: `[`Kaspresso.Builder`](../../com.kaspersky.kaspresso.kaspresso/-kaspresso/-builder/index.md)` = Kaspresso.Builder.advanced())`<br>The base class for all docloc screenshot tests. |
 
 ### Properties
 

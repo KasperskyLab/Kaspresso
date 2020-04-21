@@ -6,10 +6,9 @@
 
 Overrides [Screenshots.take](../-screenshots/take.md)
 
-Takes screenshot if it is possible, otherwise logs the error.
-The method adds System.currentTimeMillis() to the tag to save all screenshots of a test
-    running several times per the same suite. That's why a name will look
-    like "1570158949869_ScreenshotSampleTest_step_1".
+Takes a screenshot if it is possible, otherwise logs the error.
+By default a screenshot name looks like /screenshotRootDir////[tag](take.md#com.kaspersky.kaspresso.device.screenshots.ScreenshotsImpl$take(kotlin.String)/tag).png
+See [ScreenshotFileProvider](#), [ScreenshotDirectoryProvider](../../com.kaspersky.kaspresso.device.screenshots.screenshotfiles/-screenshot-directory-provider/index.md) for more details
 
 Required Permissions: WRITE_EXTERNAL_STORAGE.
 

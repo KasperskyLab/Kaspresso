@@ -7,8 +7,8 @@ import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.Configurator
 import androidx.test.uiautomator.UiDevice
 import com.agoda.kakao.Kakao
-import com.kaspersky.components.kautomator.intercepting.interaction.UiDeviceInteraction
-import com.kaspersky.components.kautomator.intercepting.interaction.UiObjectInteraction
+import com.kaspersky.components.kautomator.intercept.interaction.UiDeviceInteraction
+import com.kaspersky.components.kautomator.intercept.interaction.UiObjectInteraction
 import com.kaspersky.kaspresso.device.Device
 import com.kaspersky.kaspresso.device.accessibility.Accessibility
 import com.kaspersky.kaspresso.device.accessibility.AccessibilityImpl
@@ -38,6 +38,11 @@ import com.kaspersky.kaspresso.device.phone.Phone
 import com.kaspersky.kaspresso.device.phone.PhoneImpl
 import com.kaspersky.kaspresso.device.screenshots.Screenshots
 import com.kaspersky.kaspresso.device.screenshots.ScreenshotsImpl
+import com.kaspersky.kaspresso.device.screenshots.screenshotfiles.DefaultScreenshotDirectoryProvider
+import com.kaspersky.kaspresso.device.screenshots.screenshotfiles.DefaultScreenshotNameProvider
+import com.kaspersky.kaspresso.device.screenshots.screenshotmaker.CombinedScreenshotMaker
+import com.kaspersky.kaspresso.device.screenshots.screenshotmaker.ExternalScreenshotMaker
+import com.kaspersky.kaspresso.device.screenshots.screenshotmaker.InternalScreenshotMaker
 import com.kaspersky.kaspresso.device.server.AdbServer
 import com.kaspersky.kaspresso.device.server.AdbServerImpl
 import com.kaspersky.kaspresso.failure.LoggingFailureHandler
@@ -92,7 +97,6 @@ import com.kaspersky.kaspresso.params.ContinuouslyParams
 import com.kaspersky.kaspresso.params.FlakySafetyParams
 import com.kaspersky.kaspresso.params.Params
 import com.kaspersky.kaspresso.params.StepParams
-import com.kaspersky.kaspresso.params.WaitForIdleParams
 import com.kaspersky.kaspresso.report.impl.AllureReportWriter
 import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
 
@@ -386,12 +390,6 @@ data class Kaspresso(
         lateinit var stepParams: StepParams
 
         /**
-         * Holds the [WaitForIdleParams] for [com.kaspersky.kaspresso.idlewaiting.WaitForIdleProvider]'s usage.
-         * If it was not specified, the default implementation is used.
-         */
-        lateinit var waitForIdleParams: WaitForIdleParams
-
-        /**
          * Holds the list of [ViewActionWatcherInterceptor]s.
          * If it was not specified, Kaspresso will use no [ViewActionWatcherInterceptor]s.
          * These interceptors are called by [com.kaspersky.kaspresso.proxy.ViewActionProxy]
@@ -564,7 +562,14 @@ data class Kaspresso(
             if (!::phone.isInitialized) phone = PhoneImpl(adbServer)
             if (!::location.isInitialized) location = LocationImpl(adbServer)
             if (!::keyboard.isInitialized) keyboard = KeyboardImpl(adbServer)
-            if (!::screenshots.isInitialized) screenshots = ScreenshotsImpl(libLogger, activities)
+            if (!::screenshots.isInitialized) {
+                screenshots = ScreenshotsImpl(
+                    libLogger,
+                    CombinedScreenshotMaker(InternalScreenshotMaker(activities), ExternalScreenshotMaker()),
+                    DefaultScreenshotDirectoryProvider(groupByRunNumbers = true),
+                    DefaultScreenshotNameProvider(addTimestamps = false)
+                )
+            }
             if (!::accessibility.isInitialized) accessibility = AccessibilityImpl()
             if (!::permissions.isInitialized) permissions = PermissionsImpl(libLogger, uiDevice)
             if (!::hackPermissions.isInitialized) hackPermissions = HackPermissionsImpl(instrumentation.uiAutomation, libLogger)
@@ -576,7 +581,6 @@ data class Kaspresso(
             if (!::continuouslyParams.isInitialized) continuouslyParams = ContinuouslyParams.default()
             if (!::autoScrollParams.isInitialized) autoScrollParams = AutoScrollParams.default()
             if (!::stepParams.isInitialized) stepParams = StepParams()
-            if (!::waitForIdleParams.isInitialized) waitForIdleParams = WaitForIdleParams()
         }
 
         @Suppress("detekt.ComplexMethod")
@@ -700,8 +704,7 @@ data class Kaspresso(
                     flakySafetyParams = flakySafetyParams,
                     continuouslyParams = continuouslyParams,
                     autoScrollParams = autoScrollParams,
-                    stepParams = stepParams,
-                    waitForIdleParams = waitForIdleParams
+                    stepParams = stepParams
                 ),
 
                 viewActionWatcherInterceptors = viewActionWatcherInterceptors,

@@ -2,7 +2,7 @@
 
 # stepWatcherInterceptors
 
-`var stepWatcherInterceptors: `[`MutableList`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html)`<`[`StepWatcherInterceptor`](../../../com.kaspersky.kaspresso.interceptors.watcher.testcase/-step-watcher-interceptor/index.md)`>`
+`lateinit var stepWatcherInterceptors: `[`MutableList`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html)`<`[`StepWatcherInterceptor`](../../../com.kaspersky.kaspresso.interceptors.watcher.testcase/-step-watcher-interceptor/index.md)`>`
 
 Holds the list of [StepWatcherInterceptor](../../../com.kaspersky.kaspresso.interceptors.watcher.testcase/-step-watcher-interceptor/index.md)s.
 If it was not specified, Kaspresso will use no [StepWatcherInterceptor](../../../com.kaspersky.kaspresso.interceptors.watcher.testcase/-step-watcher-interceptor/index.md)s.

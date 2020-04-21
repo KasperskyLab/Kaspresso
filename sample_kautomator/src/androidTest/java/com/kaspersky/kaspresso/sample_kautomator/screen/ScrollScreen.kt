@@ -1,8 +1,8 @@
 package com.kaspersky.kaspresso.sample_kautomator.screen
 
-import com.kaspersky.components.kautomator.dsl.screen.UiScreen
-import com.kaspersky.components.kautomator.dsl.scroll.UiScrollView
-import com.kaspersky.components.kautomator.dsl.text.UiTextView
+import com.kaspersky.components.kautomator.component.scroll.UiScrollView
+import com.kaspersky.components.kautomator.component.text.UiTextView
+import com.kaspersky.components.kautomator.screen.UiScreen
 
 object ScrollScreen : UiScreen<ScrollScreen>() {
 

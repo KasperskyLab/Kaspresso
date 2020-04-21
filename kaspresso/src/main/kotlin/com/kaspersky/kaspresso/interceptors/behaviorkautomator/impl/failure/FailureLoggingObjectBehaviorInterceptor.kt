@@ -1,8 +1,8 @@
 package com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.failure
 
-import com.kaspersky.components.kautomator.intercepting.interaction.UiObjectInteraction
-import com.kaspersky.components.kautomator.intercepting.operation.UiObjectAction
-import com.kaspersky.components.kautomator.intercepting.operation.UiObjectAssertion
+import com.kaspersky.components.kautomator.intercept.interaction.UiObjectInteraction
+import com.kaspersky.components.kautomator.intercept.operation.UiObjectAction
+import com.kaspersky.components.kautomator.intercept.operation.UiObjectAssertion
 import com.kaspersky.kaspresso.failure.FailureLoggingProvider
 import com.kaspersky.kaspresso.failure.FailureLoggingProviderImpl
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.ObjectBehaviorInterceptor

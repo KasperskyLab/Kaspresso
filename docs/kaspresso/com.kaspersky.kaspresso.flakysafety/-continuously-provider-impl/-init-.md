@@ -2,7 +2,7 @@
 
 # &lt;init&gt;
 
-`ContinuouslyProviderImpl(params: `[`ContinuouslyParams`](../../com.kaspersky.kaspresso.params/-continuously-params/index.md)`, logger: `[`UiTestLogger`](../../com.kaspersky.kaspresso.logger/-ui-test-logger.md)`)`
+`ContinuouslyProviderImpl(kaspresso: `[`Kaspresso`](../../com.kaspersky.kaspresso.kaspresso/-kaspresso/index.md)`)`
 
 The implementation of the [ContinuouslyProvider](../-continuously-provider/index.md) interface.
 

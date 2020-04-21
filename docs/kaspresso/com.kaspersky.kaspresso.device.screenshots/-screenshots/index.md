@@ -16,4 +16,4 @@ The interface to make screenshots.
 
 | Name | Summary |
 |---|---|
-| [ScreenshotsImpl](../-screenshots-impl/index.md) | `class ScreenshotsImpl : `[`Screenshots`](./index.md)<br>The implementation of the [Screenshots](./index.md) interface. |
+| [ScreenshotsImpl](../-screenshots-impl/index.md) | `class ScreenshotsImpl : `[`Screenshots`](./index.md)`, `[`ScreenshotTestStartListener`](../-screenshot-test-start-listener/index.md)<br>The implementation of the [Screenshots](./index.md) interface. |

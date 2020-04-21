@@ -37,6 +37,7 @@ class UiSimpleTest : TestCase() {
                     onUiInteraction {
                         onCheck { uiInteraction, uiAssert ->
                             testLogger.i("KautomatorIntercept", "interaction=$uiInteraction, assertion=$uiAssert")
+                            uiInteraction.check(uiAssert)
                         }
                         onPerform { uiInteraction, uiAction ->
                             testLogger.i("KautomatorIntercept", "interaction=$uiInteraction, action=$uiAction")

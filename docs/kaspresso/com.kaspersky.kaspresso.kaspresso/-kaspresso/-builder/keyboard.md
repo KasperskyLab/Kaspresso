@@ -2,7 +2,7 @@
 
 # keyboard
 
-`var keyboard: `[`Keyboard`](../../../com.kaspersky.kaspresso.device.keyboard/-keyboard/index.md)
+`lateinit var keyboard: `[`Keyboard`](../../../com.kaspersky.kaspresso.device.keyboard/-keyboard/index.md)
 
 Holds an implementation of [Keyboard](../../../com.kaspersky.kaspresso.device.keyboard/-keyboard/index.md) interface. If it was not specified, the default implementation is used.
 

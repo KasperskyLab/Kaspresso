@@ -8,7 +8,7 @@ Invokes the given [action](continuously.md#com.kaspersky.kaspresso.flakysafety.C
 
 It can be helpful for checking of negative scenarios.
 
-In opposite to [FlakySafetyProvider.flakySafely](../-flaky-safety-provider/flaky-safely.md) it does not skips last attempt after first success
+In opposite to [FlakySafetyProvider.flakySafely](../-flaky-safety-provider/flaky-safely.md) it does not skip last attempt after first success
 and throws inside exception outside as soon as it was thrown
 
 ### Parameters

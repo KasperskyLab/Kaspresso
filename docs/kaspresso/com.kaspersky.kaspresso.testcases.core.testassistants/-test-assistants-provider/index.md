@@ -13,6 +13,7 @@ Provider of test assistants allowed in [com.kaspersky.kaspresso.testcases.core.t
 |---|---|
 | [adbServer](adb-server.md) | `abstract val adbServer: `[`AdbServer`](../../com.kaspersky.kaspresso.device.server/-adb-server/index.md) |
 | [device](device.md) | `abstract val device: `[`Device`](../../com.kaspersky.kaspresso.device/-device/index.md) |
+| [params](params.md) | `abstract val params: `[`Params`](../../com.kaspersky.kaspresso.params/-params/index.md) |
 | [testLogger](test-logger.md) | `abstract val testLogger: `[`UiTestLogger`](../../com.kaspersky.kaspresso.logger/-ui-test-logger.md) |
 
 ### Inheritors

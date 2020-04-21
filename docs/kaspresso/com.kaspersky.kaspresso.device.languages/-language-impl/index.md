@@ -4,11 +4,13 @@
 
 `class LanguageImpl : `[`Language`](../-language/index.md)
 
+The implementation of [Language](../-language/index.md)
+
 ### Constructors
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | `LanguageImpl(logger: `[`UiTestLogger`](../../com.kaspersky.kaspresso.logger/-ui-test-logger.md)`, context: `[`Context`](https://developer.android.com/reference/android/content/Context.html)`)` |
+| [&lt;init&gt;](-init-.md) | `LanguageImpl(logger: `[`UiTestLogger`](../../com.kaspersky.kaspresso.logger/-ui-test-logger.md)`, context: `[`Context`](https://developer.android.com/reference/android/content/Context.html)`)`<br>The implementation of [Language](../-language/index.md) |
 
 ### Functions
 

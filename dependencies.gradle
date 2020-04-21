@@ -20,7 +20,7 @@ ext.versions = [
         dokka          : "0.9.18",
         kakao          : "2.2.0",
         gson           : "2.8.5",
-        adbserver      : "1.0.0",
+        adbserver      : "1.0.1",
         truth          : "1.0",
         material       : "1.0.0",
 ]

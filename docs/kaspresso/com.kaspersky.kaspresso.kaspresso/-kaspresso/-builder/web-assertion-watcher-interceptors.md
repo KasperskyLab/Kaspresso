@@ -2,7 +2,7 @@
 
 # webAssertionWatcherInterceptors
 
-`var webAssertionWatcherInterceptors: `[`MutableList`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html)`<`[`WebAssertionWatcherInterceptor`](../../../com.kaspersky.kaspresso.interceptors.watcher.view/-web-assertion-watcher-interceptor/index.md)`>`
+`lateinit var webAssertionWatcherInterceptors: `[`MutableList`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html)`<`[`WebAssertionWatcherInterceptor`](../../../com.kaspersky.kaspresso.interceptors.watcher.view/-web-assertion-watcher-interceptor/index.md)`>`
 
 Holds the list of [WebAssertionWatcherInterceptor](../../../com.kaspersky.kaspresso.interceptors.watcher.view/-web-assertion-watcher-interceptor/index.md)s.
 If it was not specified, Kaspresso will use no [WebAssertionWatcherInterceptor](../../../com.kaspersky.kaspresso.interceptors.watcher.view/-web-assertion-watcher-interceptor/index.md)s.

@@ -2,7 +2,7 @@
 
 # permissions
 
-`var permissions: `[`Permissions`](../../../com.kaspersky.kaspresso.device.permissions/-permissions/index.md)
+`lateinit var permissions: `[`Permissions`](../../../com.kaspersky.kaspresso.device.permissions/-permissions/index.md)
 
 Holds an implementation of [Permissions](../../../com.kaspersky.kaspresso.device.permissions/-permissions/index.md) interface. If it was not specified, the default implementation is used.
 
