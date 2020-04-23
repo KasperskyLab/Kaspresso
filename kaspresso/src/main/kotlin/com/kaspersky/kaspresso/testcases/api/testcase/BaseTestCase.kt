@@ -25,7 +25,7 @@ import com.kaspersky.kaspresso.testcases.models.TestBody
  * @param Data data transformed from [InitData] by special function.
  */
 abstract class BaseTestCase<InitData, Data>(
-    kaspressoBuilder: Kaspresso.Builder = Kaspresso.Builder.advanced(),
+    kaspressoBuilder: Kaspresso.Builder = Kaspresso.Builder.simple(),
     private val dataProducer: (((InitData.() -> Unit)?) -> Data),
     private val mainSectionEnrichers: List<MainSectionEnricher<Data>> = emptyList()
 ) : TestAssistantsProvider {

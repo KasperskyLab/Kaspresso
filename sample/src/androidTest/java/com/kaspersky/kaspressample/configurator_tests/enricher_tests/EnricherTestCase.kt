@@ -12,7 +12,7 @@ import com.kaspersky.kaspresso.testcases.api.testcase.BaseTestCase
  * Example of base class with not default TestContext and main section enrichers.
  */
 abstract class EnricherTestCase : BaseTestCase<EnricherTestDsl, EnricherTestData>(
-    kaspressoBuilder = Kaspresso.Builder.advanced(),
+    kaspressoBuilder = Kaspresso.Builder.simple(),
     dataProducer = { action ->
         EnricherTestCaseDataProducer()
             .initData(action)

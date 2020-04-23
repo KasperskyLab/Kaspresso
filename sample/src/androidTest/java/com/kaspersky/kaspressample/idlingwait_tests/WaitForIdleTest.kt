@@ -17,7 +17,7 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class WaitForIdleTest : TestCase(
-    kaspressoBuilder = Kaspresso.Builder.advanced {
+    kaspressoBuilder = Kaspresso.Builder.simple {
         kautomatorWaitForIdleSettings = KautomatorWaitForIdleSettings.boost()
     }
 ) {

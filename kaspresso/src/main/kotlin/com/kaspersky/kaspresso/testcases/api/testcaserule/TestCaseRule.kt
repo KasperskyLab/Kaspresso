@@ -10,7 +10,7 @@ import com.kaspersky.kaspresso.kaspresso.Kaspresso
  */
 class TestCaseRule(
     testClassName: String,
-    kaspressoBuilder: Kaspresso.Builder = Kaspresso.Builder.advanced()
+    kaspressoBuilder: Kaspresso.Builder = Kaspresso.Builder.simple()
 ) : BaseTestCaseRule<Unit, Unit>(
     testClassName = testClassName,
     kaspressoBuilder = kaspressoBuilder,
