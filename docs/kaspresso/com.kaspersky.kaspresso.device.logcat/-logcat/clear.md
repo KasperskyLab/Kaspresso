@@ -2,7 +2,7 @@
 
 # clear
 
-`abstract fun clear(buffer: `[`Logcat.Buffer`](-buffer/index.md)` = Buffer.DEFAULT): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`abstract fun clear(buffer: Buffer = Buffer.DEFAULT): Unit`
 
 Clear (flush) the selected buffers and exit.
 The default buffer set is main, system and crash.

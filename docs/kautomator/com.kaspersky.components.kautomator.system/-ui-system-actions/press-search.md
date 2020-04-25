@@ -2,7 +2,7 @@
 
 # pressSearch
 
-`open fun pressSearch(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`open fun pressSearch(): Unit`
 
 Simulates a short press on the SEARCH button
 

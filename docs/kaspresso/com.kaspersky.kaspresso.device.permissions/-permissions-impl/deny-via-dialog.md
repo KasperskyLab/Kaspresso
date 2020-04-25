@@ -2,9 +2,7 @@
 
 # denyViaDialog
 
-`fun denyViaDialog(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
-
-Overrides [Permissions.denyViaDialog](../-permissions/deny-via-dialog.md)
+`fun denyViaDialog(): Unit`
 
 Waits for 1 sec, passes the permission-requesting permissions dialog and denies permissions.
 

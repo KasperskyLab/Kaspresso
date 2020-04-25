@@ -2,7 +2,7 @@
 
 # deviceWatcherInterceptors
 
-`lateinit var deviceWatcherInterceptors: `[`MutableList`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html)`<`[`DeviceWatcherInterceptor`](../../../com.kaspersky.kaspresso.interceptors.watcher.kautomator/-device-watcher-interceptor.md)`>`
+`lateinit var deviceWatcherInterceptors: MutableList<`[`DeviceWatcherInterceptor`](../../../com.kaspersky.kaspresso.interceptors.watcher.kautomator/-device-watcher-interceptor.md)`>`
 
 Holds the list of [DeviceWatcherInterceptor](../../../com.kaspersky.kaspresso.interceptors.watcher.kautomator/-device-watcher-interceptor.md)s.
 If it was not specified, Kaspresso will use no [DeviceWatcherInterceptor](../../../com.kaspersky.kaspresso.interceptors.watcher.kautomator/-device-watcher-interceptor.md)s.

@@ -2,7 +2,7 @@
 
 # pressMenu
 
-`open fun pressMenu(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`open fun pressMenu(): Unit`
 
 Simulates a short press on the MENU button
 

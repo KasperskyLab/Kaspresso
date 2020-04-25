@@ -6,5 +6,5 @@
 
 | Name | Summary |
 |---|---|
-| [Network](-network/index.md) | `interface Network`<br>The interface to work with network settings. |
-| [NetworkImpl](-network-impl/index.md) | `class NetworkImpl : `[`Network`](-network/index.md)<br>The implementation of the [Network](-network/index.md) interface. |
+| [Network](-network/index.md) | The interface to work with network settings.`interface Network` |
+| [NetworkImpl](-network-impl/index.md) | The implementation of the [Network](-network/index.md) interface.`class NetworkImpl : `[`Network`](-network/index.md) |

@@ -20,11 +20,11 @@ Methods demanding to use AdbServer in the default implementation of this interfa
 
 | Name | Summary |
 |---|---|
-| [sendEvent](send-event.md) | `abstract fun sendEvent(keyEvent: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Sends a key event. Use constants from [KeyEvent](https://developer.android.com/reference/android/view/KeyEvent.html) to get the code. |
-| [typeText](type-text.md) | `abstract fun typeText(text: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Types text char by char in the focused text field. Use it only when Espresso or UiAutomator are not appropriate (e.g. when you are on the lock screen). |
+| [sendEvent](send-event.md) | Sends a key event. Use constants from [KeyEvent](#) to get the code.`abstract fun sendEvent(keyEvent: Int): Unit` |
+| [typeText](type-text.md) | Types text char by char in the focused text field. Use it only when Espresso or UiAutomator are not appropriate (e.g. when you are on the lock screen).`abstract fun typeText(text: String): Unit` |
 
 ### Inheritors
 
 | Name | Summary |
 |---|---|
-| [KeyboardImpl](../-keyboard-impl/index.md) | `class KeyboardImpl : `[`Keyboard`](./index.md)<br>The implementation of the [Keyboard](./index.md) interface. |
+| [KeyboardImpl](../-keyboard-impl/index.md) | The implementation of the [Keyboard](./index.md) interface.`class KeyboardImpl : `[`Keyboard`](./index.md) |

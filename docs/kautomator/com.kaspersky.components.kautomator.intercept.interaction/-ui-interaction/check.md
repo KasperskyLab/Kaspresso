@@ -2,4 +2,4 @@
 
 # check
 
-`abstract fun check(assertion: `[`Assertion`](index.md#Assertion)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`abstract fun check(assertion: Assertion): Unit`

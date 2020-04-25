@@ -6,6 +6,6 @@
 
 | Name | Summary |
 |---|---|
-| [UiBaseActions](-ui-base-actions/index.md) | `interface UiBaseActions`<br>Base interface for performing actions on UiAutomator view |
+| [UiBaseActions](-ui-base-actions/index.md) | Base interface for performing actions on UiAutomator view`interface UiBaseActions` |
 | [UiScrollableActions](-ui-scrollable-actions/index.md) | `interface UiScrollableActions : `[`UiBaseActions`](-ui-base-actions/index.md) |
-| [UiSwipeableActions](-ui-swipeable-actions/index.md) | `interface UiSwipeableActions : `[`UiBaseActions`](-ui-base-actions/index.md)<br>Provides swipeable actions for UiSwipeView |
+| [UiSwipeableActions](-ui-swipeable-actions/index.md) | Provides swipeable actions for UiSwipeView`interface UiSwipeableActions : `[`UiBaseActions`](-ui-base-actions/index.md) |

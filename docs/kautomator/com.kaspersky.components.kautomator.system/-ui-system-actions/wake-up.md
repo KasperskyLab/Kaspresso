@@ -2,7 +2,7 @@
 
 # wakeUp
 
-`open fun wakeUp(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`open fun wakeUp(): Unit`
 
 This method simulates pressing the power button if the screen is OFF else
 it does nothing if the screen is already ON.

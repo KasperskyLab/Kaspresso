@@ -15,4 +15,4 @@
 
 | Name | Summary |
 |---|---|
-| [stringValue](string-value.md) | `val stringValue: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html) |
+| [stringValue](string-value.md) | `val stringValue: String` |

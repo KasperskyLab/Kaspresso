@@ -11,11 +11,11 @@ and [UiObjectInteraction](#) on which its activities are performing.
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | `LoggingObjectWatcherInterceptor(logger: `[`UiTestLogger`](../../com.kaspersky.kaspresso.logger/-ui-test-logger.md)`)`<br>The implementation of [ObjectWatcherInterceptor](../../com.kaspersky.kaspresso.interceptors.watcher.kautomator/-object-watcher-interceptor.md) that logs info about [UiObjectAssertion](#) or [UiObjectAction](#) and [UiObjectInteraction](#) on which its activities are performing. |
+| [&lt;init&gt;](-init-.md) | The implementation of [ObjectWatcherInterceptor](../../com.kaspersky.kaspresso.interceptors.watcher.kautomator/-object-watcher-interceptor.md) that logs info about [UiObjectAssertion](#) or [UiObjectAction](#) and [UiObjectInteraction](#) on which its activities are performing.`LoggingObjectWatcherInterceptor(logger: `[`UiTestLogger`](../../com.kaspersky.kaspresso.logger/-ui-test-logger.md)`)` |
 
 ### Functions
 
 | Name | Summary |
 |---|---|
-| [interceptCheck](intercept-check.md) | `fun interceptCheck(interaction: UiObjectInteraction, assertion: UiObjectAssertion): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Writes info to [logger](#). |
-| [interceptPerform](intercept-perform.md) | `fun interceptPerform(interaction: UiObjectInteraction, action: UiObjectAction): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Writes info to [logger](#). |
+| [interceptCheck](intercept-check.md) | Writes info to [logger](#).`fun interceptCheck(interaction: UiObjectInteraction, assertion: UiObjectAssertion): Unit` |
+| [interceptPerform](intercept-perform.md) | Writes info to [logger](#).`fun interceptPerform(interaction: UiObjectInteraction, action: UiObjectAction): Unit` |

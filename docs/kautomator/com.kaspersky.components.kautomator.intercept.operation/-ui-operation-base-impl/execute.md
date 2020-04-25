@@ -2,7 +2,4 @@
 
 # execute
 
-`fun execute(innerView: `[`View`](index.md#View)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
-
-Overrides [UiOperation.execute](../-ui-operation/execute.md)
-
+`fun execute(innerView: View): Unit`

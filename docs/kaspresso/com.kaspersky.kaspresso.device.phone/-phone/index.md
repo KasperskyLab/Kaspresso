@@ -16,12 +16,12 @@ Methods demanding to use AdbServer in the default implementation of this interfa
 
 | Name | Summary |
 |---|---|
-| [cancelCall](cancel-call.md) | `abstract fun cancelCall(number: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Cancels incoming call. |
-| [emulateCall](emulate-call.md) | `abstract fun emulateCall(number: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Emulates incoming call. |
-| [receiveSms](receive-sms.md) | `abstract fun receiveSms(number: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, text: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Emulates receiving an SMS from [number](receive-sms.md#com.kaspersky.kaspresso.device.phone.Phone$receiveSms(kotlin.String, kotlin.String)/number). |
+| [cancelCall](cancel-call.md) | Cancels incoming call.`abstract fun cancelCall(number: String): Unit` |
+| [emulateCall](emulate-call.md) | Emulates incoming call.`abstract fun emulateCall(number: String): Unit` |
+| [receiveSms](receive-sms.md) | Emulates receiving an SMS from [number](receive-sms.md#com.kaspersky.kaspresso.device.phone.Phone$receiveSms(kotlin.String, kotlin.String)/number).`abstract fun receiveSms(number: String, text: String): Unit` |
 
 ### Inheritors
 
 | Name | Summary |
 |---|---|
-| [PhoneImpl](../-phone-impl/index.md) | `class PhoneImpl : `[`Phone`](./index.md)<br>The implementation of the [Phone](./index.md) interface. |
+| [PhoneImpl](../-phone-impl/index.md) | The implementation of the [Phone](./index.md) interface.`class PhoneImpl : `[`Phone`](./index.md) |

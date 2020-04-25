@@ -2,7 +2,7 @@
 
 # enable
 
-`abstract fun enable(packageName: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, className: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`abstract fun enable(packageName: String, className: String): Unit`
 
 Enables accessibility. Available since api 24.
 

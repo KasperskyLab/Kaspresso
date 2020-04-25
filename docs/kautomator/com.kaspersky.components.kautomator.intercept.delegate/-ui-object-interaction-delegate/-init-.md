@@ -2,7 +2,7 @@
 
 # &lt;init&gt;
 
-`UiObjectInteractionDelegate(device: UiDevice, selector: `[`UiViewSelector`](../../com.kaspersky.components.kautomator.component.common.builders/-ui-view-selector/index.md)`, description: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`)`
+`UiObjectInteractionDelegate(device: UiDevice, selector: `[`UiViewSelector`](../../com.kaspersky.components.kautomator.component.common.builders/-ui-view-selector/index.md)`, description: String)`
 
 Delegation class for [androidx.test.uiautomator.UiObject2](#).
 Wraps all available public calls and intercepts into [check](check.md) and [perform](perform.md).

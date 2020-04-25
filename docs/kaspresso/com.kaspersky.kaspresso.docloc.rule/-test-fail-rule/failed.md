@@ -2,4 +2,4 @@
 
 # failed
 
-`protected fun failed(throwable: `[`Throwable`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html)`?, description: Description?): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`protected fun failed(throwable: Throwable?, description: Description?): Unit`

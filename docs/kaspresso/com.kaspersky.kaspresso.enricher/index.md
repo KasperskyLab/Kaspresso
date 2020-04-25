@@ -6,4 +6,4 @@
 
 | Name | Summary |
 |---|---|
-| [MainSectionEnricher](-main-section-enricher/index.md) | `interface MainSectionEnricher<Data>`<br>Special object for enriching 'run'-block functionality. With this object you can add some additional test steps for each TestCase, that has this enricher, like this: |
+| [MainSectionEnricher](-main-section-enricher/index.md) | Special object for enriching 'run'-block functionality. With this object you can add some additional test steps for each TestCase, that has this enricher, like this:`interface MainSectionEnricher<Data>` |

@@ -2,7 +2,7 @@
 
 # onAll
 
-`fun onAll(isOverride: `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)` = false, interceptor: (`[`Interaction`](index.md#Interaction)`) -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`fun onAll(isOverride: Boolean = false, interceptor: (Interaction) -> Unit): Unit`
 
 Sets the interceptor for the `check` and `execute` operations for a given interaction.
 If overridden, breaks the call chain of operation and transfers the responsibility

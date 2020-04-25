@@ -2,4 +2,4 @@
 
 # &lt;init&gt;
 
-`KautomatorWaitForIdleSettings(waitForSelectorTimeout: `[`Long`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html)`, waitForIdleTimeout: `[`Long`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html)`)`
+`KautomatorWaitForIdleSettings(waitForSelectorTimeout: Long, waitForIdleTimeout: Long)`

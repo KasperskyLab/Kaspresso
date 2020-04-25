@@ -2,7 +2,7 @@
 
 # remove
 
-`abstract fun remove(path: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`abstract fun remove(path: String): Unit`
 
 Removes a file by given path.
 

@@ -11,7 +11,7 @@ The class that holds all the necessary for [com.kaspersky.kaspresso.autoscroll.A
 
 | Name | Summary |
 |---|---|
-| [allowedExceptions](allowed-exceptions.md) | `val allowedExceptions: `[`Set`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html)`<`[`Class`](https://developer.android.com/reference/java/lang/Class.html)`<out `[`Throwable`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html)`>>`<br>The set of exceptions, if caught, the [com.kaspersky.kaspresso.autoscroll.AutoScrollProviderImpl](../../com.kaspersky.kaspresso.autoscroll/-auto-scroll-provider-impl/index.md) or [com.kaspersky.kaspresso.autoscroll.WebAutoScrollProviderImpl](../../com.kaspersky.kaspresso.autoscroll/-web-auto-scroll-provider-impl/index.md) will autoscroll. |
+| [allowedExceptions](allowed-exceptions.md) | The set of exceptions, if caught, the [com.kaspersky.kaspresso.autoscroll.AutoScrollProviderImpl](../../com.kaspersky.kaspresso.autoscroll/-auto-scroll-provider-impl/index.md) or [com.kaspersky.kaspresso.autoscroll.WebAutoScrollProviderImpl](../../com.kaspersky.kaspresso.autoscroll/-web-auto-scroll-provider-impl/index.md) will autoscroll.`val allowedExceptions: Set<Class<out Throwable>>` |
 
 ### Companion Object Functions
 

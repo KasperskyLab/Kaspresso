@@ -2,13 +2,13 @@
 
 # hasChipWithText
 
-`open fun hasChipWithText(text: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`open fun hasChipWithText(text: String): Unit`
 
 Checks if chip with given text exists
 
 ### Parameters
 
-`text` - Chip text`open fun hasChipWithText(pattern: `[`Pattern`](https://developer.android.com/reference/java/util/regex/Pattern.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`text` - Chip text`open fun hasChipWithText(pattern: Pattern): Unit`
 
 Checks if chip with given text exists
 

@@ -2,7 +2,4 @@
 
 # waitForAppLaunchAndReady
 
-`fun waitForAppLaunchAndReady(timeout: `[`Long`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html)`, packageName: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
-
-Overrides [Apps.waitForAppLaunchAndReady](../-apps/wait-for-app-launch-and-ready.md)
-
+`fun waitForAppLaunchAndReady(timeout: Long, packageName: String): Unit`

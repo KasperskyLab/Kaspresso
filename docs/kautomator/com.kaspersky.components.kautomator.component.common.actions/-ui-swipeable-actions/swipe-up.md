@@ -2,7 +2,7 @@
 
 # swipeUp
 
-`open fun swipeUp(percent: `[`Float`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html)` = 0.95f): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`open fun swipeUp(percent: Float = 0.95f): Unit`
 
 Swipes up on the view
 

@@ -11,7 +11,7 @@ Converts [com.kaspersky.kaspresso.testcases.models.info.StepInfo](../../com.kasp
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | `StepInfoConverter()`<br>Converts [com.kaspersky.kaspresso.testcases.models.info.StepInfo](../../com.kaspersky.kaspresso.testcases.models.info/-step-info/index.md) into [io.qameta.allure.model.StepResult](#) JSON model. |
+| [&lt;init&gt;](-init-.md) | Converts [com.kaspersky.kaspresso.testcases.models.info.StepInfo](../../com.kaspersky.kaspresso.testcases.models.info/-step-info/index.md) into [io.qameta.allure.model.StepResult](#) JSON model.`StepInfoConverter()` |
 
 ### Functions
 

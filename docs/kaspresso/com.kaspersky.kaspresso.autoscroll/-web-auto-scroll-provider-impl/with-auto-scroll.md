@@ -2,9 +2,7 @@
 
 # withAutoScroll
 
-`fun <T> withAutoScroll(interaction: WebInteraction<*>, action: () -> `[`T`](with-auto-scroll.md#T)`): `[`T`](with-auto-scroll.md#T)
-
-Overrides [AutoScrollProvider.withAutoScroll](../-auto-scroll-provider/with-auto-scroll.md)
+`fun <T> withAutoScroll(interaction: WebInteraction<*>, action: () -> T): T`
 
 Invokes the given [action](with-auto-scroll.md#com.kaspersky.kaspresso.autoscroll.WebAutoScrollProviderImpl$withAutoScroll(androidx.test.espresso.web.sugar.Web.WebInteraction((kotlin.Any)), kotlin.Function0((com.kaspersky.kaspresso.autoscroll.WebAutoScrollProviderImpl.withAutoScroll.T)))/action) and calls [scroll](scroll.md) if it fails. Helps in cases when test fails because of the
 need to scroll to interacted view.

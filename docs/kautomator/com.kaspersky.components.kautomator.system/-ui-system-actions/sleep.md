@@ -2,7 +2,7 @@
 
 # sleep
 
-`open fun sleep(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`open fun sleep(): Unit`
 
 This method simply presses the power button if the screen is ON else
 it does nothing if the screen is already OFF.

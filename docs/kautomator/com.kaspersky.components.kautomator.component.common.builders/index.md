@@ -6,5 +6,5 @@
 
 | Name | Summary |
 |---|---|
-| [UiViewBuilder](-ui-view-builder/index.md) | `class UiViewBuilder`<br>Class for building UiAutomator selectors |
+| [UiViewBuilder](-ui-view-builder/index.md) | Class for building UiAutomator selectors`class UiViewBuilder` |
 | [UiViewSelector](-ui-view-selector/index.md) | `data class UiViewSelector` |

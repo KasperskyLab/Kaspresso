@@ -2,7 +2,4 @@
 
 # check
 
-`fun check(assertion: `[`UiDeviceAssertion`](../../com.kaspersky.components.kautomator.intercept.operation/-ui-device-assertion.md)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
-
-Overrides [UiInteraction.check](../-ui-interaction/check.md)
-
+`fun check(assertion: `[`UiDeviceAssertion`](../../com.kaspersky.components.kautomator.intercept.operation/-ui-device-assertion.md)`): Unit`

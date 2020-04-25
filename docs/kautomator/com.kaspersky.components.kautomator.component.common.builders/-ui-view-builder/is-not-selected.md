@@ -2,7 +2,7 @@
 
 # isNotSelected
 
-`fun isNotSelected(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`fun isNotSelected(): Unit`
 
 Matches the view if it is not selected
 

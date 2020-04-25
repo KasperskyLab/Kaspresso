@@ -2,7 +2,7 @@
 
 # getDirectoryForTest
 
-`abstract fun getDirectoryForTest(testMethod: `[`TestMethod`](../-test-method/index.md)`, runNumber: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`): `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)
+`abstract fun getDirectoryForTest(testMethod: `[`TestMethod`](../-test-method/index.md)`, runNumber: Int): String`
 
 ### Parameters
 

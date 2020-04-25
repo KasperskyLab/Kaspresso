@@ -10,13 +10,13 @@ The interface for formatted logging.
 
 | Name | Summary |
 |---|---|
-| [footer](footer.md) | `abstract fun footer(text: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Draws up the text as a header block. |
-| [header](header.md) | `abstract fun header(text: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Draws up the text as a header block. |
-| [line](line.md) | `abstract fun line(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Draws a line. |
-| [section](section.md) | `abstract fun section(text: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Draws up the text as a section block. |
+| [footer](footer.md) | Draws up the text as a header block.`abstract fun footer(text: String): Unit` |
+| [header](header.md) | Draws up the text as a header block.`abstract fun header(text: String): Unit` |
+| [line](line.md) | Draws a line.`abstract fun line(): Unit` |
+| [section](section.md) | Draws up the text as a section block.`abstract fun section(text: String): Unit` |
 
 ### Inheritors
 
 | Name | Summary |
 |---|---|
-| [UiTestLogger](../-ui-test-logger.md) | `interface UiTestLogger : `[`FormattedLogger`](./index.md)`, `[`Logger`](../-logger/index.md)<br>Base interface for all loggers used in Kaspresso. |
+| [UiTestLogger](../-ui-test-logger.md) | Base interface for all loggers used in Kaspresso.`interface UiTestLogger : `[`FormattedLogger`](./index.md)`, `[`Logger`](../-logger/index.md) |

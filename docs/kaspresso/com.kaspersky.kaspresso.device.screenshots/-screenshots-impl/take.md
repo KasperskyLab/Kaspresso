@@ -2,9 +2,7 @@
 
 # take
 
-`fun take(tag: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
-
-Overrides [Screenshots.take](../-screenshots/take.md)
+`fun take(tag: String): Unit`
 
 Takes a screenshot if it is possible, otherwise logs the error.
 By default a screenshot name looks like /screenshotRootDir////[tag](take.md#com.kaspersky.kaspresso.device.screenshots.ScreenshotsImpl$take(kotlin.String)/tag).png

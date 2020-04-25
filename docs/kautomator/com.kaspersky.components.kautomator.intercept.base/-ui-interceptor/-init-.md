@@ -2,7 +2,7 @@
 
 # &lt;init&gt;
 
-`UiInterceptor(onCheck: `[`UiInterception`](../-ui-interception/index.md)`<(`[`Interaction`](index.md#Interaction)`, `[`Assertion`](index.md#Assertion)`) -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`>?, onPerform: `[`UiInterception`](../-ui-interception/index.md)`<(`[`Interaction`](index.md#Interaction)`, `[`Action`](index.md#Action)`) -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`>?, onAll: `[`UiInterception`](../-ui-interception/index.md)`<(`[`Interaction`](index.md#Interaction)`) -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`>?)`
+`UiInterceptor(onCheck: `[`UiInterception`](../-ui-interception/index.md)`<(Interaction, Assertion) -> Unit>?, onPerform: `[`UiInterception`](../-ui-interception/index.md)`<(Interaction, Action) -> Unit>?, onAll: `[`UiInterception`](../-ui-interception/index.md)`<(Interaction) -> Unit>?)`
 
 Base class for intercepting the call chain from Kautomator to UiAutomator.
 

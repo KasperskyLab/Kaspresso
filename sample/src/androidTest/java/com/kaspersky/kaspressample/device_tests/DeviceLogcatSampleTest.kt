@@ -1,6 +1,5 @@
 package com.kaspersky.kaspressample.device_tests
 
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspresso.device.logcat.LogcatBufferSize
@@ -8,9 +7,7 @@ import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
 
-@RunWith(AndroidJUnit4::class)
 class DeviceLogcatSampleTest : TestCase() {
 
     @get:Rule

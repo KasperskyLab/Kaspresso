@@ -2,4 +2,4 @@
 
 # atom
 
-`val atom: Atom<`[`T`](index.md#T)`>`
+`val atom: Atom<T>`

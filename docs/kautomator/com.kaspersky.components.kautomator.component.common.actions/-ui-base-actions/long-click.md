@@ -2,7 +2,7 @@
 
 # longClick
 
-`open fun longClick(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`open fun longClick(): Unit`
 
 Performs long click on view
 

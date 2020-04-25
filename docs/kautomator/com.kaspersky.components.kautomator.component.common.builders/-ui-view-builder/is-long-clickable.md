@@ -2,7 +2,7 @@
 
 # isLongClickable
 
-`fun isLongClickable(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`fun isLongClickable(): Unit`
 
 Matches the view if it is long clickable
 

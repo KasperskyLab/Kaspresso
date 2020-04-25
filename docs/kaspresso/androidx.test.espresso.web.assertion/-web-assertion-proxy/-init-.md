@@ -2,7 +2,7 @@
 
 # &lt;init&gt;
 
-`WebAssertionProxy(webAssertion: WebAssertion<`[`E`](index.md#E)`>, matcher: Matcher<*>, watcherInterceptors: `[`List`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)`<`[`WebAssertionWatcherInterceptor`](../../com.kaspersky.kaspresso.interceptors.watcher.view/-web-assertion-watcher-interceptor/index.md)`>)`
+`WebAssertionProxy(webAssertion: WebAssertion<E>, matcher: Matcher<*>, watcherInterceptors: List<`[`WebAssertionWatcherInterceptor`](../../com.kaspersky.kaspresso.interceptors.watcher.view/-web-assertion-watcher-interceptor/index.md)`>)`
 
 A proxy-wrapper of [WebAssertion](#) for [watcherInterceptors](#) calls.
 

@@ -2,12 +2,12 @@
 
 # intercept
 
-`abstract fun intercept(viewAction: ViewAction, view: `[`View`](https://developer.android.com/reference/android/view/View.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`abstract fun intercept(viewAction: ViewAction, view: View): Unit`
 
 Called to do some stuff before [ViewAction.perform](#) is actually called.
 
 ### Parameters
 
-`viewAction` - responsible for performing an interaction on the given [View](https://developer.android.com/reference/android/view/View.html) element.
+`viewAction` - responsible for performing an interaction on the given [View](#) element.
 
-`view` - an Android [View](https://developer.android.com/reference/android/view/View.html), on which [viewAction](intercept.md#com.kaspersky.kaspresso.interceptors.watcher.view.ViewActionWatcherInterceptor$intercept(androidx.test.espresso.ViewAction, android.view.View)/viewAction) is performed.
+`view` - an Android [View](#), on which [viewAction](intercept.md#com.kaspersky.kaspresso.interceptors.watcher.view.ViewActionWatcherInterceptor$intercept(androidx.test.espresso.ViewAction, android.view.View)/viewAction) is performed.

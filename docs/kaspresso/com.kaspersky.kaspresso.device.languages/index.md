@@ -6,5 +6,5 @@
 
 | Name | Summary |
 |---|---|
-| [Language](-language/index.md) | `interface Language`<br>The interface to work with languages |
-| [LanguageImpl](-language-impl/index.md) | `class LanguageImpl : `[`Language`](-language/index.md)<br>The implementation of [Language](-language/index.md) |
+| [Language](-language/index.md) | The interface to work with languages`interface Language` |
+| [LanguageImpl](-language-impl/index.md) | The implementation of [Language](-language/index.md)`class LanguageImpl : `[`Language`](-language/index.md) |

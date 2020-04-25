@@ -2,7 +2,7 @@
 
 # containsText
 
-`open fun containsText(text: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`open fun containsText(text: String): Unit`
 
 Checks if the view contains concrete text
 

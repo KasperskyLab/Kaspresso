@@ -2,7 +2,7 @@
 
 # &lt;init&gt;
 
-`ComplexComposeBranch(element: `[`ElementType`](index.md#ElementType)`, check: () -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`, postAction: (() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`)?)`
+`ComplexComposeBranch(element: ElementType, check: () -> Unit, postAction: (() -> Unit)?)`
 
 The base data class using in compose
 

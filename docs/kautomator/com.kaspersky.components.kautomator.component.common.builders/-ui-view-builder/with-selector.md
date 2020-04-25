@@ -2,7 +2,7 @@
 
 # withSelector
 
-`fun withSelector(selector: BySelector.() -> BySelector): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`fun withSelector(selector: BySelector.() -> BySelector): Unit`
 
 Matches the view with given custom [BySelector](#)
 

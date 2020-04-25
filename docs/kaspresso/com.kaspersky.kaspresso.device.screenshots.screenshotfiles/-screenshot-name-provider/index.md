@@ -10,10 +10,10 @@ Provides names for screenshots
 
 | Name | Summary |
 |---|---|
-| [getScreenshotName](get-screenshot-name.md) | `abstract fun getScreenshotName(tag: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html) |
+| [getScreenshotName](get-screenshot-name.md) | `abstract fun getScreenshotName(tag: String): String` |
 
 ### Inheritors
 
 | Name | Summary |
 |---|---|
-| [DefaultScreenshotNameProvider](../-default-screenshot-name-provider/index.md) | `class DefaultScreenshotNameProvider : `[`ScreenshotNameProvider`](./index.md)<br>Default implementation of [ScreenshotFileProvider](#) If [addTimestamps](#) is true it adds timestamps to names like that "1570158949869_ScreenshotSampleTest_step_1.png" |
+| [DefaultScreenshotNameProvider](../-default-screenshot-name-provider/index.md) | Default implementation of [ScreenshotFileProvider](#) If [addTimestamps](#) is true it adds timestamps to names like that "1570158949869_ScreenshotSampleTest_step_1.png"`class DefaultScreenshotNameProvider : `[`ScreenshotNameProvider`](./index.md) |

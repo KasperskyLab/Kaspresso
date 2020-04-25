@@ -2,7 +2,7 @@
 
 # hasNotSelectedItemWithIndex
 
-`open fun hasNotSelectedItemWithIndex(index: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`open fun hasNotSelectedItemWithIndex(index: Int): Unit`
 
 Checks if the view's selected menu item index does not match given one.
 Note that this method uses view hierarchy which could be changed at any time.

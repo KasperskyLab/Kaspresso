@@ -2,7 +2,7 @@
 
 # isNotScrollable
 
-`fun isNotScrollable(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`fun isNotScrollable(): Unit`
 
 Matches the view if it is not scrollable
 

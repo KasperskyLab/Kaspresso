@@ -6,4 +6,4 @@
 
 | Name | Summary |
 |---|---|
-| [TestAssistantsProvider](-test-assistants-provider/index.md) | `interface TestAssistantsProvider`<br>Provider of test assistants allowed in [com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext](../com.kaspersky.kaspresso.testcases.core.testcontext/-base-test-context.md), [com.kaspersky.kaspresso.testcases.api.testcase.BaseTestCase](../com.kaspersky.kaspresso.testcases.api.testcase/-base-test-case/index.md) and their inheritors |
+| [TestAssistantsProvider](-test-assistants-provider/index.md) | Provider of test assistants allowed in [com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext](../com.kaspersky.kaspresso.testcases.core.testcontext/-base-test-context.md), [com.kaspersky.kaspresso.testcases.api.testcase.BaseTestCase](../com.kaspersky.kaspresso.testcases.api.testcase/-base-test-case/index.md) and their inheritors`interface TestAssistantsProvider` |

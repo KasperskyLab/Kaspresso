@@ -2,10 +2,10 @@
 
 # DocLocException
 
-`class DocLocException : `[`RuntimeException`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-runtime-exception/index.html)
+`class DocLocException : RuntimeException`
 
 ### Constructors
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | `DocLocException(message: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`?)` |
+| [&lt;init&gt;](-init-.md) | `DocLocException(message: String?)` |

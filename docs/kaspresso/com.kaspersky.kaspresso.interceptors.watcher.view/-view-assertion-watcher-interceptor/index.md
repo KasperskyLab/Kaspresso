@@ -10,10 +10,10 @@ The interface for all view action interceptors, used in [com.kaspersky.kaspresso
 
 | Name | Summary |
 |---|---|
-| [intercept](intercept.md) | `abstract fun intercept(viewAssertion: ViewAssertion, view: `[`View`](https://developer.android.com/reference/android/view/View.html)`?, exception: NoMatchingViewException?): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Called to do some stuff before [androidx.test.espresso.ViewAssertion.check](#) is actually called. |
+| [intercept](intercept.md) | Called to do some stuff before [androidx.test.espresso.ViewAssertion.check](#) is actually called.`abstract fun intercept(viewAssertion: ViewAssertion, view: View?, exception: NoMatchingViewException?): Unit` |
 
 ### Inheritors
 
 | Name | Summary |
 |---|---|
-| [LoggingViewAssertionWatcherInterceptor](../../com.kaspersky.kaspresso.interceptors.watcher.view.impl.logging/-logging-view-assertion-watcher-interceptor/index.md) | `class LoggingViewAssertionWatcherInterceptor : `[`ViewAssertionWatcherInterceptor`](./index.md)<br>The implementation of [ViewAssertionWatcherInterceptor](./index.md) that logs info about [ViewAssertion](#). |
+| [LoggingViewAssertionWatcherInterceptor](../../com.kaspersky.kaspresso.interceptors.watcher.view.impl.logging/-logging-view-assertion-watcher-interceptor/index.md) | The implementation of [ViewAssertionWatcherInterceptor](./index.md) that logs info about [ViewAssertion](#).`class LoggingViewAssertionWatcherInterceptor : `[`ViewAssertionWatcherInterceptor`](./index.md) |

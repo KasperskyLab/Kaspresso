@@ -2,7 +2,7 @@
 
 # pressBack
 
-`open fun pressBack(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`open fun pressBack(): Unit`
 
 Simulates a short press on the BACK button.
 

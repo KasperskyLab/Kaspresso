@@ -2,4 +2,4 @@
 
 # packageName
 
-`abstract val packageName: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)
+`abstract val packageName: String`

@@ -2,7 +2,7 @@
 
 # isNotClickable
 
-`open fun isNotClickable(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`open fun isNotClickable(): Unit`
 
 Checks if the view is not clickable
 

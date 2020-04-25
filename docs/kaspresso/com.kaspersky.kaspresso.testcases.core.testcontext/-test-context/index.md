@@ -15,11 +15,11 @@ Provides [step](step.md) and [scenario](scenario.md) methods in "run" section to
 
 | Name | Summary |
 |---|---|
-| [data](data.md) | `val data: `[`Data`](index.md#Data) |
+| [data](data.md) | `val data: Data` |
 
 ### Functions
 
 | Name | Summary |
 |---|---|
-| [scenario](scenario.md) | `fun scenario(scenario: `[`BaseScenario`](../../com.kaspersky.kaspresso.testcases.api.scenario/-base-scenario/index.md)`<`[`Data`](index.md#Data)`>): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>The representation of a composed [TestContext](./index.md)'s steps. |
-| [step](step.md) | `fun step(description: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, actions: () -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>The representation of a [TestContext](./index.md)'s step. |
+| [scenario](scenario.md) | The representation of a composed [TestContext](./index.md)'s steps.`fun scenario(scenario: `[`BaseScenario`](../../com.kaspersky.kaspresso.testcases.api.scenario/-base-scenario/index.md)`<Data>): Unit` |
+| [step](step.md) | The representation of a [TestContext](./index.md)'s step.`fun step(description: String, actions: () -> Unit): Unit` |

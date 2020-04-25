@@ -10,16 +10,16 @@ Captures the view of a current activity
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | `InternalScreenshotMaker(activities: `[`Activities`](../../com.kaspersky.kaspresso.device.activities/-activities/index.md)`)`<br>Captures the view of a current activity |
+| [&lt;init&gt;](-init-.md) | Captures the view of a current activity`InternalScreenshotMaker(activities: `[`Activities`](../../com.kaspersky.kaspresso.device.activities/-activities/index.md)`)` |
 
 ### Functions
 
 | Name | Summary |
 |---|---|
-| [takeScreenshot](take-screenshot.md) | `fun takeScreenshot(file: `[`File`](https://developer.android.com/reference/java/io/File.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [takeScreenshot](take-screenshot.md) | `fun takeScreenshot(file: File): Unit` |
 
 ### Companion Object Properties
 
 | Name | Summary |
 |---|---|
-| [PICTURE_QUALITY](-p-i-c-t-u-r-e_-q-u-a-l-i-t-y.md) | `const val PICTURE_QUALITY: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html) |
+| [PICTURE_QUALITY](-p-i-c-t-u-r-e_-q-u-a-l-i-t-y.md) | `const val PICTURE_QUALITY: Int` |

@@ -2,15 +2,11 @@
 
 # e
 
-`fun e(text: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
-
-Overrides [Logger.e](../-logger/e.md)
+`fun e(text: String): Unit`
 
 Error level of logging.
 
-`fun e(tag: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, text: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
-
-Overrides [Logger.e](../-logger/e.md)
+`fun e(tag: String, text: String): Unit`
 
 Error level of logging with tag.
 

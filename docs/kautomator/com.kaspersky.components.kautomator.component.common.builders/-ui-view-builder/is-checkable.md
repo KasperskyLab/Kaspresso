@@ -2,7 +2,7 @@
 
 # isCheckable
 
-`fun isCheckable(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`fun isCheckable(): Unit`
 
 Matches the view if it is checkable
 

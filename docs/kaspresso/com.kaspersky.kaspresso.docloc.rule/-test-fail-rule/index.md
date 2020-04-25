@@ -10,4 +10,4 @@ The test rule to capture a screenshot in case of unexpected docloc screenshot te
 
 | Name | Summary |
 |---|---|
-| [failed](failed.md) | `fun failed(throwable: `[`Throwable`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html)`?, description: Description?): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [failed](failed.md) | `fun failed(throwable: Throwable?, description: Description?): Unit` |

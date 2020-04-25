@@ -2,9 +2,7 @@
 
 # setLocation
 
-`fun setLocation(lat: `[`Double`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html)`, lon: `[`Double`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
-
-Overrides [Location.setLocation](../-location/set-location.md)
+`fun setLocation(lat: Double, lon: Double): Unit`
 
 Sets current location.
 

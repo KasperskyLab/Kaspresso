@@ -2,8 +2,8 @@
 
 # withText
 
-`fun withText(text: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
-`fun withText(text: `[`Pattern`](https://developer.android.com/reference/java/util/regex/Pattern.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`fun withText(text: String): Unit`
+`fun withText(text: Pattern): Unit`
 
 Matches the view with given text
 

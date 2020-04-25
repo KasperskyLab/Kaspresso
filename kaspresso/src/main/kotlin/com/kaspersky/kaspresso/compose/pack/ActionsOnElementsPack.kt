@@ -31,8 +31,7 @@ class ActionsOnElementsPack {
      */
     fun <Type> or(element: Type, action: Type.() -> Unit): ComplexComposeBranchBuilder<Type>
             where Type : BaseActions, Type : BaseAssertions,
-                  Type : Interceptable<ViewInteraction, ViewAssertion, ViewAction>
-    {
+                  Type : Interceptable<ViewInteraction, ViewAssertion, ViewAction> {
         return ComplexComposeBranchBuilder(element, { action.invoke(element) }).also {
             complexComposeBranchBuilders += it
         }
@@ -47,8 +46,7 @@ class ActionsOnElementsPack {
      */
     fun <Type> or(element: Type, action: Type.() -> Unit): ComplexComposeBranchBuilder<Type>
             where Type : UiBaseActions, Type : UiBaseAssertions,
-                  Type : UiInterceptable<UiObjectInteraction, UiObjectAssertion, UiObjectAction>
-    {
+                  Type : UiInterceptable<UiObjectInteraction, UiObjectAssertion, UiObjectAction> {
         return ComplexComposeBranchBuilder(element, { action.invoke(element) }).also {
             complexComposeBranchBuilders += it
         }

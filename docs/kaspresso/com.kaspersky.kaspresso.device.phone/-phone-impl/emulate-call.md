@@ -2,9 +2,7 @@
 
 # emulateCall
 
-`fun emulateCall(number: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
-
-Overrides [Phone.emulateCall](../-phone/emulate-call.md)
+`fun emulateCall(number: String): Unit`
 
 Emulates incoming call.
 

@@ -76,7 +76,7 @@ E.g:
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | `DocLocScreenshotTestCase(screenshotsDirectory: `[`File`](https://developer.android.com/reference/java/io/File.html)`, changeSystemLocale: `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)` = false, locales: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`?, kaspressoBuilder: `[`Kaspresso.Builder`](../../com.kaspersky.kaspresso.kaspresso/-kaspresso/-builder/index.md)` = Kaspresso.Builder.advanced())`<br>The base class for all docloc screenshot tests. |
+| [&lt;init&gt;](-init-.md) | The base class for all docloc screenshot tests.`DocLocScreenshotTestCase(screenshotsDirectory: File, changeSystemLocale: Boolean = false, locales: String?, kaspressoBuilder: Builder = Kaspresso.Builder.advanced())` |
 
 ### Properties
 
@@ -90,7 +90,7 @@ E.g:
 
 | Name | Summary |
 |---|---|
-| [captureScreenshot](capture-screenshot.md) | `open fun captureScreenshot(name: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Captures a screenshot with a given [name](capture-screenshot.md#com.kaspersky.kaspresso.testcases.api.testcase.DocLocScreenshotTestCase$captureScreenshot(kotlin.String)/name) and saves it to //. |
-| [getUiSafeProxy](get-ui-safe-proxy.md) | `fun <I : `[`Any`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)`> getUiSafeProxy(view: `[`I`](get-ui-safe-proxy.md#I)`): `[`I`](get-ui-safe-proxy.md#I)<br>Return a dynamic proxy for a given view. [I](get-ui-safe-proxy.md#I) must be interface. |
-| [getUiSafeProxyFromImplementation](get-ui-safe-proxy-from-implementation.md) | `fun <T : `[`Any`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)`> getUiSafeProxyFromImplementation(view: `[`T`](get-ui-safe-proxy-from-implementation.md#T)`): `[`Any`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)<br>Return a dynamic proxy over all interfaces that [view](get-ui-safe-proxy-from-implementation.md#com.kaspersky.kaspresso.testcases.api.testcase.DocLocScreenshotTestCase$getUiSafeProxyFromImplementation(com.kaspersky.kaspresso.testcases.api.testcase.DocLocScreenshotTestCase.getUiSafeProxyFromImplementation.T)/view) implements. |
-| [setup](setup.md) | `fun setup(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [captureScreenshot](capture-screenshot.md) | Captures a screenshot with a given [name](capture-screenshot.md#com.kaspersky.kaspresso.testcases.api.testcase.DocLocScreenshotTestCase$captureScreenshot(kotlin.String)/name) and saves it to //.`open fun captureScreenshot(name: String): Unit` |
+| [getUiSafeProxy](get-ui-safe-proxy.md) | Return a dynamic proxy for a given view. [I](get-ui-safe-proxy.md#I) must be interface.`fun <I : Any> getUiSafeProxy(view: I): I` |
+| [getUiSafeProxyFromImplementation](get-ui-safe-proxy-from-implementation.md) | Return a dynamic proxy over all interfaces that [view](get-ui-safe-proxy-from-implementation.md#com.kaspersky.kaspresso.testcases.api.testcase.DocLocScreenshotTestCase$getUiSafeProxyFromImplementation(com.kaspersky.kaspresso.testcases.api.testcase.DocLocScreenshotTestCase.getUiSafeProxyFromImplementation.T)/view) implements.`fun <T : Any> getUiSafeProxyFromImplementation(view: T): Any` |
+| [setup](setup.md) | `fun setup(): Unit` |

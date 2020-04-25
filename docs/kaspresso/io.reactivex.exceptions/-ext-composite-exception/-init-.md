@@ -2,23 +2,23 @@
 
 # &lt;init&gt;
 
-`ExtCompositeException(@NonNull vararg exceptions: `[`Throwable`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html)`!)`
+`ExtCompositeException(@NonNull vararg exceptions: Throwable!)`
 
 Constructs a ExtCompositeException with the given array of Throwables as the list of suppressed exceptions.
 
 ### Parameters
 
-`exceptions` - [Throwable](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html)!: the Throwables to have as initially suppressed exceptions
+`exceptions` - Throwable!: the Throwables to have as initially suppressed exceptions
 
 ### Exceptions
 
-`IllegalArgumentException` - if `exceptions` is empty.`ExtCompositeException(@NonNull errors: `[`MutableIterable`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-iterable/index.html)`<`[`Throwable`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html)`!>)`
+`IllegalArgumentException` - if `exceptions` is empty.`ExtCompositeException(@NonNull errors: MutableIterable<Throwable!>)`
 
 Constructs a ExtCompositeException with the given array of Throwables as the list of suppressed exceptions.
 
 ### Parameters
 
-`errors` - [MutableIterable](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-iterable/index.html)&lt;[Throwable](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html)!&gt;: the Throwables to have as initially suppressed exceptions
+`errors` - MutableIterable&lt;Throwable!&gt;: the Throwables to have as initially suppressed exceptions
 
 ### Exceptions
 

@@ -2,4 +2,4 @@
 
 # isScreenOn
 
-`open fun isScreenOn(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`open fun isScreenOn(): Unit`

@@ -3,6 +3,3 @@
 # device
 
 `open val device: `[`Device`](../../com.kaspersky.kaspresso.device/-device/index.md)
-
-Overrides [TestAssistantsProvider.device](../../com.kaspersky.kaspresso.testcases.core.testassistants/-test-assistants-provider/device.md)
-

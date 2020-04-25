@@ -2,7 +2,7 @@
 
 # isNotChecked
 
-`open fun isNotChecked(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`open fun isNotChecked(): Unit`
 
 Checks if the view is not checked
 

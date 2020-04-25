@@ -2,7 +2,7 @@
 
 # pressHome
 
-`open fun pressHome(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`open fun pressHome(): Unit`
 
 Simulates a short press on the HOME button
 

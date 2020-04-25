@@ -2,7 +2,7 @@
 
 # clearText
 
-`open fun clearText(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`open fun clearText(): Unit`
 
 Clears the text content into the view
 

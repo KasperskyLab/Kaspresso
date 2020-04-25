@@ -2,7 +2,7 @@
 
 # hasNotSelectedItemWithTitle
 
-`open fun hasNotSelectedItemWithTitle(title: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`open fun hasNotSelectedItemWithTitle(title: String): Unit`
 
 Checks if the view's selected menu item title does not match given one.
 Note that this method uses view hierarchy which could be changed at any time.

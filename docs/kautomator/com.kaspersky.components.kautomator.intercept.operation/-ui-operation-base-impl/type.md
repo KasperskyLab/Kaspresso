@@ -3,6 +3,3 @@
 # type
 
 `val type: `[`UiOperationType`](../-ui-operation-type/index.md)
-
-Overrides [UiOperation.type](../-ui-operation/type.md)
-

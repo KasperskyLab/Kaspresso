@@ -2,7 +2,4 @@
 
 # processTestResults
 
-`fun processTestResults(testInfo: `[`TestInfo`](../../com.kaspersky.kaspresso.testcases.models.info/-test-info/index.md)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
-
-Overrides [ReportWriter.processTestResults](../../com.kaspersky.kaspresso.report/-report-writer/process-test-results.md)
-
+`fun processTestResults(testInfo: `[`TestInfo`](../../com.kaspersky.kaspresso.testcases.models.info/-test-info/index.md)`): Unit`

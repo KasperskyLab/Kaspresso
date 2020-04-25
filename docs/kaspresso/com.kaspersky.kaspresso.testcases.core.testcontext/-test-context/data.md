@@ -2,4 +2,4 @@
 
 # data
 
-`val data: `[`Data`](index.md#Data)
+`val data: Data`

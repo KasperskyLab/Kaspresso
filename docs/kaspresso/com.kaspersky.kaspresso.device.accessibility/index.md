@@ -6,5 +6,5 @@
 
 | Name | Summary |
 |---|---|
-| [Accessibility](-accessibility/index.md) | `interface Accessibility`<br>The interface to work with accessibility. |
-| [AccessibilityImpl](-accessibility-impl/index.md) | `class AccessibilityImpl : `[`Accessibility`](-accessibility/index.md)<br>The implementation of the [Accessibility](-accessibility/index.md) interface. |
+| [Accessibility](-accessibility/index.md) | The interface to work with accessibility.`interface Accessibility` |
+| [AccessibilityImpl](-accessibility-impl/index.md) | The implementation of the [Accessibility](-accessibility/index.md) interface.`class AccessibilityImpl : `[`Accessibility`](-accessibility/index.md) |

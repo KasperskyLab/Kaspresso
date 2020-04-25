@@ -2,7 +2,7 @@
 
 # &lt;init&gt;
 
-`LanguageImpl(logger: `[`UiTestLogger`](../../com.kaspersky.kaspresso.logger/-ui-test-logger.md)`, context: `[`Context`](https://developer.android.com/reference/android/content/Context.html)`)`
+`LanguageImpl(logger: `[`UiTestLogger`](../../com.kaspersky.kaspresso.logger/-ui-test-logger.md)`, context: Context)`
 
 The implementation of [Language](../-language/index.md)
 

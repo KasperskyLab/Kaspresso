@@ -14,5 +14,5 @@
 
 | Name | Summary |
 |---|---|
-| [getRootScreenshotDirectory](get-root-screenshot-directory.md) | `fun getRootScreenshotDirectory(screenshotDir: `[`File`](https://developer.android.com/reference/java/io/File.html)`): `[`File`](https://developer.android.com/reference/java/io/File.html)<br>Returns the directory for screenshots resolved by storage's root. If the directory doesn't exist, it will be created. |
-| [obtainDirectory](obtain-directory.md) | `fun obtainDirectory(screenshotTestDir: `[`File`](https://developer.android.com/reference/java/io/File.html)`): `[`File`](https://developer.android.com/reference/java/io/File.html)<br>Returns directory for a particular test. If the directory exists, it will be deleted on the first method call. If the directory doesn't exist, it will be created. |
+| [getRootScreenshotDirectory](get-root-screenshot-directory.md) | Returns the directory for screenshots resolved by storage's root. If the directory doesn't exist, it will be created.`fun getRootScreenshotDirectory(screenshotDir: File): File` |
+| [obtainDirectory](obtain-directory.md) | Returns directory for a particular test. If the directory exists, it will be deleted on the first method call. If the directory doesn't exist, it will be created.`fun obtainDirectory(screenshotTestDir: File): File` |

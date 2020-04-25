@@ -2,7 +2,7 @@
 
 # context
 
-`val context: `[`Context`](https://developer.android.com/reference/android/content/Context.html)
+`val context: Context`
 
-A not caching property to get [Context](https://developer.android.com/reference/android/content/Context.html).
+A not caching property to get [Context](#).
 

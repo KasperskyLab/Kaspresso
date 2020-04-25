@@ -2,7 +2,6 @@ package com.kaspersky.kaspressample.device_tests
 
 import android.Manifest
 import android.view.KeyEvent
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspressample.device.DeviceSampleActivity
@@ -11,9 +10,7 @@ import com.kaspersky.kaspresso.device.keyboard.Keyboard
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
 
-@RunWith(AndroidJUnit4::class)
 class DeviceKeyboardSampleTest : TestCase() {
 
     companion object {

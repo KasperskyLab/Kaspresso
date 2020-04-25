@@ -2,4 +2,4 @@
 
 # methodName
 
-`val methodName: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)
+`val methodName: String`

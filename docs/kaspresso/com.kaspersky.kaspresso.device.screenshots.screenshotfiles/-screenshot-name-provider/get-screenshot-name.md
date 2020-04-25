@@ -2,7 +2,7 @@
 
 # getScreenshotName
 
-`abstract fun getScreenshotName(tag: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)
+`abstract fun getScreenshotName(tag: String): String`
 
 ### Parameters
 

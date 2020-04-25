@@ -2,9 +2,7 @@
 
 # interceptPerform
 
-`fun interceptPerform(interaction: UiDeviceInteraction, action: UiDeviceAction): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
-
-Overrides [KautomatorWatcherInterceptor.interceptPerform](../../com.kaspersky.kaspresso.interceptors.watcher.kautomator/-kautomator-watcher-interceptor/intercept-perform.md)
+`fun interceptPerform(interaction: UiDeviceInteraction, action: UiDeviceAction): Unit`
 
 Writes info to [logger](#).
 

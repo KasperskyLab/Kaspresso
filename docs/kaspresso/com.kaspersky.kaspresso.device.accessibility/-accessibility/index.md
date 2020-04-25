@@ -10,11 +10,11 @@ The interface to work with accessibility.
 
 | Name | Summary |
 |---|---|
-| [disable](disable.md) | `abstract fun disable(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Disables accessibility. Available since api 24. |
-| [enable](enable.md) | `abstract fun enable(packageName: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, className: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Enables accessibility. Available since api 24. |
+| [disable](disable.md) | Disables accessibility. Available since api 24.`abstract fun disable(): Unit` |
+| [enable](enable.md) | Enables accessibility. Available since api 24.`abstract fun enable(packageName: String, className: String): Unit` |
 
 ### Inheritors
 
 | Name | Summary |
 |---|---|
-| [AccessibilityImpl](../-accessibility-impl/index.md) | `class AccessibilityImpl : `[`Accessibility`](./index.md)<br>The implementation of the [Accessibility](./index.md) interface. |
+| [AccessibilityImpl](../-accessibility-impl/index.md) | The implementation of the [Accessibility](./index.md) interface.`class AccessibilityImpl : `[`Accessibility`](./index.md) |

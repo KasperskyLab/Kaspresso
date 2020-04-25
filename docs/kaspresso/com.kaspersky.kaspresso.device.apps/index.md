@@ -6,5 +6,5 @@
 
 | Name | Summary |
 |---|---|
-| [Apps](-apps/index.md) | `interface Apps`<br>The interface to work with installer, launcher and package manager. |
-| [AppsImpl](-apps-impl/index.md) | `class AppsImpl : `[`Apps`](-apps/index.md)<br>The implementation of the [Apps](-apps/index.md) interface. |
+| [Apps](-apps/index.md) | The interface to work with installer, launcher and package manager.`interface Apps` |
+| [AppsImpl](-apps-impl/index.md) | The implementation of the [Apps](-apps/index.md) interface.`class AppsImpl : `[`Apps`](-apps/index.md) |

@@ -2,7 +2,7 @@
 
 # take
 
-`abstract fun take(tag: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`abstract fun take(tag: String): Unit`
 
 Takes screenshot if it is possible.
 

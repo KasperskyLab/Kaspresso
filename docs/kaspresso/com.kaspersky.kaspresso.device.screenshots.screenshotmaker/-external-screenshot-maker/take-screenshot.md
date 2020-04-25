@@ -2,7 +2,4 @@
 
 # takeScreenshot
 
-`fun takeScreenshot(file: `[`File`](https://developer.android.com/reference/java/io/File.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
-
-Overrides [ScreenshotMaker.takeScreenshot](../-screenshot-maker/take-screenshot.md)
-
+`fun takeScreenshot(file: File): Unit`

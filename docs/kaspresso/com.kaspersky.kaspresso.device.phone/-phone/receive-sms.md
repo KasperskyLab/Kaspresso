@@ -2,7 +2,7 @@
 
 # receiveSms
 
-`abstract fun receiveSms(number: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, text: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`abstract fun receiveSms(number: String, text: String): Unit`
 
 Emulates receiving an SMS from [number](receive-sms.md#com.kaspersky.kaspresso.device.phone.Phone$receiveSms(kotlin.String, kotlin.String)/number).
 

@@ -2,7 +2,7 @@
 
 # hasAnyText
 
-`open fun hasAnyText(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`open fun hasAnyText(): Unit`
 
 Checks if the view has any text
 

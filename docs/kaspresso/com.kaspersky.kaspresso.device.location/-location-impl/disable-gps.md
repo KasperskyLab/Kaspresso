@@ -2,9 +2,7 @@
 
 # disableGps
 
-`fun disableGps(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
-
-Overrides [Location.disableGps](../-location/disable-gps.md)
+`fun disableGps(): Unit`
 
 Disables GPS on the device.
 

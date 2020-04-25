@@ -2,7 +2,7 @@
 
 # viewBehaviorInterceptors
 
-`lateinit var viewBehaviorInterceptors: `[`MutableList`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html)`<`[`ViewBehaviorInterceptor`](../../../com.kaspersky.kaspresso.interceptors.behavior/-view-behavior-interceptor.md)`>`
+`lateinit var viewBehaviorInterceptors: MutableList<`[`ViewBehaviorInterceptor`](../../../com.kaspersky.kaspresso.interceptors.behavior/-view-behavior-interceptor.md)`>`
 
 Holds the list of [ViewBehaviorInterceptor](../../../com.kaspersky.kaspresso.interceptors.behavior/-view-behavior-interceptor.md)s.
 If it was not specified, Kaspresso will use no [ViewBehaviorInterceptor](../../../com.kaspersky.kaspresso.interceptors.behavior/-view-behavior-interceptor.md)s.

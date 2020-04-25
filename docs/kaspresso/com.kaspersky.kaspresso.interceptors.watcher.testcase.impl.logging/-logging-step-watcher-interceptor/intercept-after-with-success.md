@@ -2,9 +2,7 @@
 
 # interceptAfterWithSuccess
 
-`fun interceptAfterWithSuccess(stepInfo: `[`StepInfo`](../../com.kaspersky.kaspresso.testcases.models.info/-step-info/index.md)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
-
-Overrides [StepWatcherInterceptor.interceptAfterWithSuccess](../../com.kaspersky.kaspresso.interceptors.watcher.testcase/-step-watcher-interceptor/intercept-after-with-success.md)
+`fun interceptAfterWithSuccess(stepInfo: `[`StepInfo`](../../com.kaspersky.kaspresso.testcases.models.info/-step-info/index.md)`): Unit`
 
 Logs the given [stepInfo](intercept-after-with-success.md#com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.logging.LoggingStepWatcherInterceptor$interceptAfterWithSuccess(com.kaspersky.kaspresso.testcases.models.info.StepInfo)/stepInfo) on step finishes with success.
 

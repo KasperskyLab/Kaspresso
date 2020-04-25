@@ -2,7 +2,7 @@
 
 # setSelectedItemWithTitle
 
-`open fun setSelectedItemWithTitle(title: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`open fun setSelectedItemWithTitle(title: String): Unit`
 
 Selects menu item with given title. Note that this method uses view hierarchy which could be changed at any time.
 

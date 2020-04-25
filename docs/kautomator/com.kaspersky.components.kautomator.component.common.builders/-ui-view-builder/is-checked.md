@@ -2,7 +2,7 @@
 
 # isChecked
 
-`fun isChecked(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`fun isChecked(): Unit`
 
 Matches the view if it is in CHECKED state
 

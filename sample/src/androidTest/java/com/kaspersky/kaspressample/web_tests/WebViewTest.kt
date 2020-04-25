@@ -3,7 +3,6 @@ package com.kaspersky.kaspressample.web_tests
 import android.Manifest
 import androidx.test.espresso.web.webdriver.DriverAtoms
 import androidx.test.espresso.web.webdriver.Locator
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspressample.MainActivity
@@ -12,9 +11,7 @@ import com.kaspersky.kaspressample.screen.WebViewScreen
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
 
-@RunWith(AndroidJUnit4::class)
 class WebViewTest : TestCase() {
 
     @get:Rule

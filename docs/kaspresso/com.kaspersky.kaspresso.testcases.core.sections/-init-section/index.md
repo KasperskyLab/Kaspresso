@@ -8,11 +8,11 @@
 
 | Name | Summary |
 |---|---|
-| [init](init.md) | `abstract fun init(actions: `[`InitData`](index.md#InitData)`.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`TransformSection`](../-transform-section/index.md)`<`[`Data`](index.md#Data)`>`<br>Can be invoked after [BeforeTestSection](../-before-test-section/index.md). Running to init test data using dsl. |
-| [run](run.md) | `abstract fun run(steps: `[`TestContext`](../../com.kaspersky.kaspresso.testcases.core.testcontext/-test-context/index.md)`<`[`Data`](index.md#Data)`>.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Runs: |
+| [init](init.md) | Can be invoked after [BeforeTestSection](../-before-test-section/index.md). Running to init test data using dsl.`abstract fun init(actions: InitData.() -> Unit): `[`TransformSection`](../-transform-section/index.md)`<Data>` |
+| [run](run.md) | Runs:`abstract fun run(steps: `[`TestContext`](../../com.kaspersky.kaspresso.testcases.core.testcontext/-test-context/index.md)`<Data>.() -> Unit): Unit` |
 
 ### Inheritors
 
 | Name | Summary |
 |---|---|
-| [MainTestSection](../-main-test-section/index.md) | `class MainTestSection<InitData, Data> : `[`InitSection`](./index.md)`<`[`InitData`](../-main-test-section/index.md#InitData)`, `[`Data`](../-main-test-section/index.md#Data)`>, `[`TransformSection`](../-transform-section/index.md)`<`[`Data`](../-main-test-section/index.md#Data)`>`<br>The representation of an actual test. |
+| [MainTestSection](../-main-test-section/index.md) | The representation of an actual test.`class MainTestSection<InitData, Data> : `[`InitSection`](./index.md)`<InitData, Data>, `[`TransformSection`](../-transform-section/index.md)`<Data>` |

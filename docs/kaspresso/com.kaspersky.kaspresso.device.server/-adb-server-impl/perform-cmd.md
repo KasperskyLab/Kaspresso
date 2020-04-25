@@ -2,9 +2,7 @@
 
 # performCmd
 
-`fun performCmd(vararg commands: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`List`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)`<`[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`>`
-
-Overrides [AdbServer.performCmd](../-adb-server/perform-cmd.md)
+`fun performCmd(vararg commands: String): List<String>`
 
 Executes shell commands blocking current thread.
 Please be aware! If any command that is in @param commands failed then AdbServerException will be thrown

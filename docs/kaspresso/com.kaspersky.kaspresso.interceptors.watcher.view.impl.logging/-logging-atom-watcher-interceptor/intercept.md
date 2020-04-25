@@ -2,9 +2,7 @@
 
 # intercept
 
-`fun intercept(atomProxy: `[`AtomProxy`](../../com.kaspersky.kaspresso.proxy/-atom-proxy/index.md)`<*>, evaluation: Evaluation?): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
-
-Overrides [AtomWatcherInterceptor.intercept](../../com.kaspersky.kaspresso.interceptors.watcher.view/-atom-watcher-interceptor/intercept.md)
+`fun intercept(atomProxy: `[`AtomProxy`](../../com.kaspersky.kaspresso.proxy/-atom-proxy/index.md)`<*>, evaluation: Evaluation?): Unit`
 
 Writes info to [logger](#).
 

@@ -2,7 +2,7 @@
 
 # interceptCheck
 
-`open fun interceptCheck(assertion: `[`Assertion`](index.md#Assertion)`): `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)
+`open fun interceptCheck(assertion: Assertion): Boolean`
 
 Runs the interceptors available for the given delegate during the `check` operation.
 

@@ -2,7 +2,7 @@
 
 # isEnabled
 
-`open fun isEnabled(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`open fun isEnabled(): Unit`
 
 Checks if the view is enabled
 

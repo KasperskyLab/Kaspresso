@@ -2,4 +2,4 @@
 
 # DEFAULT_LOGCAT_CLEAR_DELAY
 
-`const val DEFAULT_LOGCAT_CLEAR_DELAY: `[`Long`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html)
+`const val DEFAULT_LOGCAT_CLEAR_DELAY: Long`

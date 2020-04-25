@@ -17,16 +17,4 @@ Simple view with [UiBaseAction](../../com.kaspersky.components.kautomator.compon
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | `UiView(selector: `[`UiViewSelector`](../../com.kaspersky.components.kautomator.component.common.builders/-ui-view-selector/index.md)`)`<br>`UiView(func: `[`UiViewBuilder`](../../com.kaspersky.components.kautomator.component.common.builders/-ui-view-builder/index.md)`.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`)` |
-
-### Inherited Properties
-
-| Name | Summary |
-|---|---|
-| [view](../-ui-base-view/view.md) | `val view: `[`UiObjectInteractionDelegate`](../../com.kaspersky.components.kautomator.intercept.delegate/-ui-object-interaction-delegate/index.md) |
-
-### Inherited Functions
-
-| Name | Summary |
-|---|---|
-| [invoke](../-ui-base-view/invoke.md) | `operator fun invoke(function: `[`T`](../-ui-base-view/index.md#T)`.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Operator that allows usage of DSL style |
+| [&lt;init&gt;](-init-.md) | `UiView(selector: `[`UiViewSelector`](../../com.kaspersky.components.kautomator.component.common.builders/-ui-view-selector/index.md)`)`<br>`UiView(func: `[`UiViewBuilder`](../../com.kaspersky.components.kautomator.component.common.builders/-ui-view-builder/index.md)`.() -> Unit)` |

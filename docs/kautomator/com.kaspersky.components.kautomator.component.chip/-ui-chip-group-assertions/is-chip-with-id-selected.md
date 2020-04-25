@@ -2,7 +2,7 @@
 
 # isChipWithIdSelected
 
-`open fun isChipWithIdSelected(id: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`open fun isChipWithIdSelected(id: String): Unit`
 
 Checks if chip with given id is selected
 

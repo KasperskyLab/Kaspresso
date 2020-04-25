@@ -2,4 +2,4 @@
 
 # element
 
-`val element: `[`ElementType`](index.md#ElementType)
+`val element: ElementType`

@@ -2,7 +2,7 @@
 
 # isNotFocused
 
-`open fun isNotFocused(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`open fun isNotFocused(): Unit`
 
 Checks if the view is not focused
 

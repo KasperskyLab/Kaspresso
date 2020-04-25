@@ -2,7 +2,7 @@
 
 # deviceBehaviorInterceptors
 
-`lateinit var deviceBehaviorInterceptors: `[`MutableList`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html)`<`[`DeviceBehaviorInterceptor`](../../../com.kaspersky.kaspresso.interceptors.behaviorkautomator/-device-behavior-interceptor.md)`>`
+`lateinit var deviceBehaviorInterceptors: MutableList<`[`DeviceBehaviorInterceptor`](../../../com.kaspersky.kaspresso.interceptors.behaviorkautomator/-device-behavior-interceptor.md)`>`
 
 Holds the list of [DeviceBehaviorInterceptor](../../../com.kaspersky.kaspresso.interceptors.behaviorkautomator/-device-behavior-interceptor.md)s.
 If it was not specified, Kaspresso will use no [DeviceBehaviorInterceptor](../../../com.kaspersky.kaspresso.interceptors.behaviorkautomator/-device-behavior-interceptor.md)s.

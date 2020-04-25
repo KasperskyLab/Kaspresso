@@ -2,7 +2,7 @@
 
 # intercept
 
-`abstract fun <T> intercept(interaction: `[`Interaction`](index.md#Interaction)`, action: () -> `[`T`](intercept.md#T)`): `[`T`](intercept.md#T)
+`abstract fun <T> intercept(interaction: Interaction, action: () -> T): T`
 
 Called to do some stuff and actually perform an interaction with element.
 

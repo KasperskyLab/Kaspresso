@@ -2,7 +2,4 @@
 
 # type
 
-`val type: `[`DisplayedObjectAssertion.UiDisplayedAssertionType`](-ui-displayed-assertion-type/index.md)
-
-Overrides [UiOperation.type](../../com.kaspersky.components.kautomator.intercept.operation/-ui-operation/type.md)
-
+`val type: UiDisplayedAssertionType`

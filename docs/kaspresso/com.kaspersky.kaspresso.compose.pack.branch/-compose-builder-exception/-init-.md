@@ -2,7 +2,7 @@
 
 # &lt;init&gt;
 
-`ComposeBuilderException(message: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`)`
+`ComposeBuilderException(message: String)`
 
 Exception throwing in case of incorrect [ComposeProviderImpl.compose](../../com.kaspersky.kaspresso.compose/-compose-provider-impl/compose.md) expression building
 

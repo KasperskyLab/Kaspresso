@@ -2,7 +2,7 @@
 
 # steps
 
-`protected abstract val steps: `[`TestContext`](../../com.kaspersky.kaspresso.testcases.core.testcontext/-test-context/index.md)`<`[`ScenarioData`](index.md#ScenarioData)`>.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`protected abstract val steps: `[`TestContext`](../../com.kaspersky.kaspresso.testcases.core.testcontext/-test-context/index.md)`<ScenarioData>.() -> Unit`
 
 Steps to run. Need to be implemented in derived [Scenario](../-scenario/index.md).
 

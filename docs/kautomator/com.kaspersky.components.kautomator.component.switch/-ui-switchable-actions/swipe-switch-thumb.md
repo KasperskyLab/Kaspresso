@@ -2,7 +2,7 @@
 
 # swipeSwitchThumb
 
-`open fun swipeSwitchThumb(direction: `[`UiSwitchableActions.Direction`](-direction/index.md)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`open fun swipeSwitchThumb(direction: Direction): Unit`
 
 Moves the thumb of the switch to the right
 

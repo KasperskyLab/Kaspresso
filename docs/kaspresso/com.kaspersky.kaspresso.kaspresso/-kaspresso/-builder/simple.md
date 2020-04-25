@@ -2,7 +2,7 @@
 
 # simple
 
-`fun simple(customize: `[`Kaspresso.Builder`](index.md)`.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)` = {}): `[`Kaspresso.Builder`](index.md)
+`fun simple(customize: Builder.() -> Unit = {}): Builder`
 
 Simple (preconfigured with logging and flaky-safe features) [Builder](index.md) for test environment configuration.
 

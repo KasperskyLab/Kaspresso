@@ -2,9 +2,7 @@
 
 # switchInApp
 
-`fun switchInApp(locale: `[`Locale`](https://developer.android.com/reference/java/util/Locale.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
-
-Overrides [Language.switchInApp](../-language/switch-in-app.md)
+`fun switchInApp(locale: Locale): Unit`
 
 Switches language only in the current Application (not in OS!).
 Please, keep in mind the following fact:

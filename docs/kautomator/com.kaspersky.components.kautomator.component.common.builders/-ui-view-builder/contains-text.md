@@ -2,7 +2,7 @@
 
 # containsText
 
-`fun containsText(text: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`fun containsText(text: String): Unit`
 
 Matches the view which contain given text
 

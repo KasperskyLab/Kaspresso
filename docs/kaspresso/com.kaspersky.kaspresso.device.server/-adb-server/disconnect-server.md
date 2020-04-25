@@ -2,7 +2,7 @@
 
 # disconnectServer
 
-`abstract fun disconnectServer(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`abstract fun disconnectServer(): Unit`
 
 Disconnect from AdbServer.
 The method is called by Kaspresso after each test.

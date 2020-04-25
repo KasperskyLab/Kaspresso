@@ -2,9 +2,7 @@
 
 # getScreenshotName
 
-`fun getScreenshotName(tag: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)
-
-Overrides [ScreenshotNameProvider.getScreenshotName](../-screenshot-name-provider/get-screenshot-name.md)
+`fun getScreenshotName(tag: String): String`
 
 ### Parameters
 

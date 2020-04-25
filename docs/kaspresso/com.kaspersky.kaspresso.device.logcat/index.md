@@ -6,6 +6,6 @@
 
 | Name | Summary |
 |---|---|
-| [Logcat](-logcat/index.md) | `interface Logcat`<br>The interface to work with logcat. |
+| [Logcat](-logcat/index.md) | The interface to work with logcat.`interface Logcat` |
 | [LogcatBufferSize](-logcat-buffer-size/index.md) | `data class LogcatBufferSize` |
 | [LogcatImpl](-logcat-impl/index.md) | `class LogcatImpl : `[`Logcat`](-logcat/index.md) |

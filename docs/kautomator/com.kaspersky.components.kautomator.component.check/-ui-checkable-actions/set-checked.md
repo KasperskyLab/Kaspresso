@@ -2,7 +2,7 @@
 
 # setChecked
 
-`open fun setChecked(checked: `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`open fun setChecked(checked: Boolean): Unit`
 
 Sets checked state of the view
 

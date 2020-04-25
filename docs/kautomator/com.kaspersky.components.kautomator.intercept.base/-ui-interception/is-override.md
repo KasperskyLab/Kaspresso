@@ -2,4 +2,4 @@
 
 # isOverride
 
-`val isOverride: `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)
+`val isOverride: Boolean`

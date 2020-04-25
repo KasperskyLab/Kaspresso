@@ -6,4 +6,4 @@
 
 | Name | Summary |
 |---|---|
-| [KScreen](-k-screen/index.md) | `abstract class KScreen<out T : `[`KScreen`](-k-screen/index.md)`<`[`T`](-k-screen/index.md#T)`>> : Screen<`[`T`](-k-screen/index.md#T)`>` |
+| [KScreen](-k-screen/index.md) | `abstract class KScreen<out T : `[`KScreen`](-k-screen/index.md)`<T>> : Screen<T>` |

@@ -2,7 +2,7 @@
 
 # onUiDeviceInteraction
 
-`fun onUiDeviceInteraction(builder: `[`UiInterceptor.Builder`](../-builder/index.md)`<`[`UiDeviceInteraction`](../../../com.kaspersky.components.kautomator.intercept.interaction/-ui-device-interaction/index.md)`, `[`UiDeviceAssertion`](../../../com.kaspersky.components.kautomator.intercept.operation/-ui-device-assertion.md)`, `[`UiDeviceAction`](../../../com.kaspersky.components.kautomator.intercept.operation/-ui-device-action.md)`>.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`fun onUiDeviceInteraction(builder: Builder<`[`UiDeviceInteraction`](../../../com.kaspersky.components.kautomator.intercept.interaction/-ui-device-interaction/index.md)`, `[`UiDeviceAssertion`](../../../com.kaspersky.components.kautomator.intercept.operation/-ui-device-assertion.md)`, `[`UiDeviceAction`](../../../com.kaspersky.components.kautomator.intercept.operation/-ui-device-action.md)`>.() -> Unit): Unit`
 
 Setups the interceptor for `check` and `execute` operations happening through [UiDeviceInteraction](../../../com.kaspersky.components.kautomator.intercept.interaction/-ui-device-interaction/index.md)
 

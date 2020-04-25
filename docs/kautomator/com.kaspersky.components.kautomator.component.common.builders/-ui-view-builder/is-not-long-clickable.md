@@ -2,7 +2,7 @@
 
 # isNotLongClickable
 
-`fun isNotLongClickable(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`fun isNotLongClickable(): Unit`
 
 Matches the view if it is not long clickable
 

@@ -8,4 +8,4 @@
 |---|---|
 | [UiInterceptable](-ui-interceptable/index.md) | `interface UiInterceptable<Interaction, Assertion, Action>` |
 | [UiInterception](-ui-interception/index.md) | `data class UiInterception<T>` |
-| [UiInterceptor](-ui-interceptor/index.md) | `class UiInterceptor<Interaction, Assertion, Action>`<br>Base class for intercepting the call chain from Kautomator to UiAutomator. |
+| [UiInterceptor](-ui-interceptor/index.md) | Base class for intercepting the call chain from Kautomator to UiAutomator.`class UiInterceptor<Interaction, Assertion, Action>` |

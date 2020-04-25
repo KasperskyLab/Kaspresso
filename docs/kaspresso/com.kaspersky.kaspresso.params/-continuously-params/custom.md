@@ -2,4 +2,4 @@
 
 # custom
 
-`fun custom(timeoutMs: `[`Long`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html)`, intervalMs: `[`Long`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html)`): `[`ContinuouslyParams`](index.md)
+`fun custom(timeoutMs: Long, intervalMs: Long): `[`ContinuouslyParams`](index.md)

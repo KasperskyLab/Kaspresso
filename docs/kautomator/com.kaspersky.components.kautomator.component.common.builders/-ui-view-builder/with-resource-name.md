@@ -2,19 +2,19 @@
 
 # withResourceName
 
-`fun withResourceName(name: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`fun withResourceName(name: String): Unit`
 
 Matches the view with given resource name
 
 ### Parameters
 
-`name` - Resource name to match`fun withResourceName(pattern: `[`Pattern`](https://developer.android.com/reference/java/util/regex/Pattern.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`name` - Resource name to match`fun withResourceName(pattern: Pattern): Unit`
 
 Matches the view with given resource name
 
 ### Parameters
 
-`pattern` - Pattern for resource name`fun withResourceName(packageName: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, name: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`pattern` - Pattern for resource name`fun withResourceName(packageName: String, name: String): Unit`
 
 Matches the view with given resource name
 

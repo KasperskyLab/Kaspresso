@@ -10,12 +10,12 @@ The interface for base logging with 3 levels: info, debug and error.
 
 | Name | Summary |
 |---|---|
-| [d](d.md) | `abstract fun d(text: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Debug level of logging.`abstract fun d(tag: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, text: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Debug level of logging with tag. |
-| [e](e.md) | `abstract fun e(text: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Error level of logging.`abstract fun e(tag: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, text: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Error level of logging with tag. |
-| [i](i.md) | `abstract fun i(text: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Info level of logging.`abstract fun i(tag: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, text: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Info level of logging with tag. |
+| [d](d.md) | Debug level of logging.`abstract fun d(text: String): Unit`<br>Debug level of logging with tag.`abstract fun d(tag: String, text: String): Unit` |
+| [e](e.md) | Error level of logging.`abstract fun e(text: String): Unit`<br>Error level of logging with tag.`abstract fun e(tag: String, text: String): Unit` |
+| [i](i.md) | Info level of logging.`abstract fun i(text: String): Unit`<br>Info level of logging with tag.`abstract fun i(tag: String, text: String): Unit` |
 
 ### Inheritors
 
 | Name | Summary |
 |---|---|
-| [UiTestLogger](../-ui-test-logger.md) | `interface UiTestLogger : `[`FormattedLogger`](../-formatted-logger/index.md)`, `[`Logger`](./index.md)<br>Base interface for all loggers used in Kaspresso. |
+| [UiTestLogger](../-ui-test-logger.md) | Base interface for all loggers used in Kaspresso.`interface UiTestLogger : `[`FormattedLogger`](../-formatted-logger/index.md)`, `[`Logger`](./index.md) |

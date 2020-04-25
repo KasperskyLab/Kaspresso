@@ -6,5 +6,5 @@
 
 | Name | Summary |
 |---|---|
-| [Location](-location/index.md) | `interface Location`<br>The interface to work with device's location. |
-| [LocationImpl](-location-impl/index.md) | `class LocationImpl : `[`Location`](-location/index.md)<br>The implementation of the [Location](-location/index.md) interface. |
+| [Location](-location/index.md) | The interface to work with device's location.`interface Location` |
+| [LocationImpl](-location-impl/index.md) | The implementation of the [Location](-location/index.md) interface.`class LocationImpl : `[`Location`](-location/index.md) |

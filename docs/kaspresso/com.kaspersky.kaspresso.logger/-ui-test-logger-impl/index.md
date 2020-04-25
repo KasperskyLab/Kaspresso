@@ -4,22 +4,22 @@
 
 `class UiTestLoggerImpl : `[`UiTestLogger`](../-ui-test-logger.md)
 
-The default implementation of [UiTestLogger](../-ui-test-logger.md) using [android.util.Log](https://developer.android.com/reference/android/util/Log.html).
+The default implementation of [UiTestLogger](../-ui-test-logger.md) using [android.util.Log](#).
 
 ### Constructors
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | `UiTestLoggerImpl(tag: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`)`<br>The default implementation of [UiTestLogger](../-ui-test-logger.md) using [android.util.Log](https://developer.android.com/reference/android/util/Log.html). |
+| [&lt;init&gt;](-init-.md) | The default implementation of [UiTestLogger](../-ui-test-logger.md) using [android.util.Log](#).`UiTestLoggerImpl(tag: String)` |
 
 ### Functions
 
 | Name | Summary |
 |---|---|
-| [d](d.md) | `fun d(text: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Debug level of logging.`fun d(tag: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, text: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Debug level of logging with tag. |
-| [e](e.md) | `fun e(text: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Error level of logging.`fun e(tag: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, text: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Error level of logging with tag. |
-| [footer](footer.md) | `fun footer(text: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Draws up info [i](i.md) as header block. |
-| [header](header.md) | `fun header(text: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Draws up info [i](i.md) as header block. |
-| [i](i.md) | `fun i(text: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Info level of logging.`fun i(tag: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, text: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Info level of logging with tag. |
-| [line](line.md) | `fun line(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Draws line info. |
-| [section](section.md) | `fun section(text: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Draws up info [i](i.md) as section block. |
+| [d](d.md) | Debug level of logging.`fun d(text: String): Unit`<br>Debug level of logging with tag.`fun d(tag: String, text: String): Unit` |
+| [e](e.md) | Error level of logging.`fun e(text: String): Unit`<br>Error level of logging with tag.`fun e(tag: String, text: String): Unit` |
+| [footer](footer.md) | Draws up info [i](i.md) as header block.`fun footer(text: String): Unit` |
+| [header](header.md) | Draws up info [i](i.md) as header block.`fun header(text: String): Unit` |
+| [i](i.md) | Info level of logging.`fun i(text: String): Unit`<br>Info level of logging with tag.`fun i(tag: String, text: String): Unit` |
+| [line](line.md) | Draws line info.`fun line(): Unit` |
+| [section](section.md) | Draws up info [i](i.md) as section block.`fun section(text: String): Unit` |

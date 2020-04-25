@@ -2,7 +2,7 @@
 
 # isInstalled
 
-`abstract fun isInstalled(packageName: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)
+`abstract fun isInstalled(packageName: String): Boolean`
 
 Checks app is installed on device
 
@@ -11,5 +11,5 @@ Checks app is installed on device
 `packageName` - an android package name of the app to be checked.
 
 **Return**
-a [Boolean](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html) of installation state
+a [Boolean](#) of installation state
 

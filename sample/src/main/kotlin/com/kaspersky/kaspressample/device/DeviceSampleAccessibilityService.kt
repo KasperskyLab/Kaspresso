@@ -5,7 +5,11 @@ import android.view.accessibility.AccessibilityEvent
 
 class DeviceSampleAccessibilityService : AccessibilityService() {
 
-    override fun onInterrupt() {}
+    override fun onInterrupt() {
+        // nothing
+    }
 
-    override fun onAccessibilityEvent(event: AccessibilityEvent?) {}
+    override fun onAccessibilityEvent(event: AccessibilityEvent?) {
+        // nothing
+    }
 }

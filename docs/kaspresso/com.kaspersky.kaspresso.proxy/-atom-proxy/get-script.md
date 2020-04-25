@@ -2,7 +2,7 @@
 
 # getScript
 
-`fun getScript(): `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)
+`fun getScript(): String`
 
 Simply calls [Atom.getScript](#) on wrapped [atom](atom.md).
 

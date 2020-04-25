@@ -2,9 +2,7 @@
 
 # disable
 
-`fun disable(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
-
-Overrides [Accessibility.disable](../-accessibility/disable.md)
+`fun disable(): Unit`
 
 Disables accessibility. Available since api 24.
 

@@ -2,4 +2,4 @@
 
 # startTime
 
-`abstract val startTime: `[`Long`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html)
+`abstract val startTime: Long`

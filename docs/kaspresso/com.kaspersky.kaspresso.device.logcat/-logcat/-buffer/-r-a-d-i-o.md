@@ -7,8 +7,3 @@
 Represents logcat buffer names
 https://developer.android.com/studio/command-line/logcat#alternativeBuffers
 
-### Inherited Properties
-
-| Name | Summary |
-|---|---|
-| [bufferName](buffer-name.md) | `val bufferName: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html) |

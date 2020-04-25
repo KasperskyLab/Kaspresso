@@ -2,4 +2,4 @@
 
 # invoke
 
-`operator fun invoke(function: `[`UiSystem`](index.md)`.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`operator fun invoke(function: `[`UiSystem`](index.md)`.() -> Unit): Unit`

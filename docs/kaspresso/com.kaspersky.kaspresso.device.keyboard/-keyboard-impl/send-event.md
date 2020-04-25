@@ -2,12 +2,10 @@
 
 # sendEvent
 
-`fun sendEvent(keyEvent: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
-
-Overrides [Keyboard.sendEvent](../-keyboard/send-event.md)
+`fun sendEvent(keyEvent: Int): Unit`
 
 Sends a key event.
-Use constants from [KeyEvent](https://developer.android.com/reference/android/view/KeyEvent.html) to get the code.
+Use constants from [KeyEvent](#) to get the code.
 
 Consider to use [ViewActions.pressKey](#).
 Also, consider to use [UiDevice.pressKeyCode](#),
@@ -17,4 +15,4 @@ Required Permissions: INTERNET
 
 ### Parameters
 
-`keyEvent` - the code from a [KeyEvent](https://developer.android.com/reference/android/view/KeyEvent.html) constant to send on device.
+`keyEvent` - the code from a [KeyEvent](#) constant to send on device.

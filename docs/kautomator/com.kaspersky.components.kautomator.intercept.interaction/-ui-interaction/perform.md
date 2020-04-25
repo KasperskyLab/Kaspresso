@@ -2,4 +2,4 @@
 
 # perform
 
-`abstract fun perform(action: `[`Action`](index.md#Action)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`abstract fun perform(action: Action): Unit`

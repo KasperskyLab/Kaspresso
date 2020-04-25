@@ -2,9 +2,7 @@
 
 # push
 
-`fun push(serverPath: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, devicePath: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
-
-Overrides [Files.push](../-files/push.md)
+`fun push(serverPath: String, devicePath: String): Unit`
 
 Performs adb push.
 

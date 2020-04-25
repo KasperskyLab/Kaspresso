@@ -2,7 +2,7 @@
 
 # tryToFindUiObject
 
-`fun tryToFindUiObject(): `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)
+`fun tryToFindUiObject(): Boolean`
 
 Tries to find UiObject2 with given selector
 

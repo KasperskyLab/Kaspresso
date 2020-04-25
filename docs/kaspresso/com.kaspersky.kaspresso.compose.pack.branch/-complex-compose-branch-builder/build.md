@@ -2,4 +2,4 @@
 
 # build
 
-`fun build(): `[`ComplexComposeBranch`](../-complex-compose-branch/index.md)`<`[`ElementType`](index.md#ElementType)`>`
+`fun build(): `[`ComplexComposeBranch`](../-complex-compose-branch/index.md)`<ElementType>`

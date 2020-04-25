@@ -2,7 +2,7 @@
 
 # isInstanceOf
 
-`fun isInstanceOf(clazz: `[`Class`](https://developer.android.com/reference/java/lang/Class.html)`<*>): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`fun isInstanceOf(clazz: Class<*>): Unit`
 
 Matches the view by class instance
 

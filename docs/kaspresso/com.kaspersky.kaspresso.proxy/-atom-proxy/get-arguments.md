@@ -2,7 +2,7 @@
 
 # getArguments
 
-`fun getArguments(elementContext: ElementReference?): `[`MutableList`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html)`<`[`Any`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)`>`
+`fun getArguments(elementContext: ElementReference?): MutableList<Any>`
 
 Simply calls [Atom.getArguments](#) on wrapped [atom](atom.md).
 
@@ -11,5 +11,5 @@ Simply calls [Atom.getArguments](#) on wrapped [atom](atom.md).
 `elementContext` - null unless an ElementReference has been supplied to interact this atom with.
 
 **Return**
-a [List](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html) of objects to pass to the script as arguments.
+a [List](#) of objects to pass to the script as arguments.
 

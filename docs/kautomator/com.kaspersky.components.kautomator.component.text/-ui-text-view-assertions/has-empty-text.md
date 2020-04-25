@@ -2,7 +2,7 @@
 
 # hasEmptyText
 
-`open fun hasEmptyText(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`open fun hasEmptyText(): Unit`
 
 Checks if the view has empty text
 

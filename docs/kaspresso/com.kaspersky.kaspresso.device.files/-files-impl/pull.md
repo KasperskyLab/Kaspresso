@@ -2,9 +2,7 @@
 
 # pull
 
-`fun pull(devicePath: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, serverPath: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
-
-Overrides [Files.pull](../-files/pull.md)
+`fun pull(devicePath: String, serverPath: String): Unit`
 
 Performs adb pull.
 

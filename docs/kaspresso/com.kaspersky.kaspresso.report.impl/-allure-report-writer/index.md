@@ -18,10 +18,10 @@ This logs should be processed by your's tests orchestrator (e.g. Marathon).
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | `AllureReportWriter(uiTestLogger: `[`UiTestLogger`](../../com.kaspersky.kaspresso.logger/-ui-test-logger.md)`)`<br>This [com.kaspersky.kaspresso.report.ReportWriter](../../com.kaspersky.kaspresso.report/-report-writer/index.md) processes [com.kaspersky.kaspresso.testcases.models.info.TestInfo](../../com.kaspersky.kaspresso.testcases.models.info/-test-info/index.md) for generating LogCat logs with Allure's steps info JSON. |
+| [&lt;init&gt;](-init-.md) | This [com.kaspersky.kaspresso.report.ReportWriter](../../com.kaspersky.kaspresso.report/-report-writer/index.md) processes [com.kaspersky.kaspresso.testcases.models.info.TestInfo](../../com.kaspersky.kaspresso.testcases.models.info/-test-info/index.md) for generating LogCat logs with Allure's steps info JSON.`AllureReportWriter(uiTestLogger: `[`UiTestLogger`](../../com.kaspersky.kaspresso.logger/-ui-test-logger.md)`)` |
 
 ### Functions
 
 | Name | Summary |
 |---|---|
-| [processTestResults](process-test-results.md) | `fun processTestResults(testInfo: `[`TestInfo`](../../com.kaspersky.kaspresso.testcases.models.info/-test-info/index.md)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [processTestResults](process-test-results.md) | `fun processTestResults(testInfo: `[`TestInfo`](../../com.kaspersky.kaspresso.testcases.models.info/-test-info/index.md)`): Unit` |

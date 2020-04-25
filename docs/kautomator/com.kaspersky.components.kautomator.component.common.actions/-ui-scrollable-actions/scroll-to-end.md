@@ -2,4 +2,4 @@
 
 # scrollToEnd
 
-`open fun scrollToEnd(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`open fun scrollToEnd(): Unit`

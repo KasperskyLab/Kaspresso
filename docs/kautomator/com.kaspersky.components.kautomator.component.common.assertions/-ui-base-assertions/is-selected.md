@@ -2,7 +2,7 @@
 
 # isSelected
 
-`open fun isSelected(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`open fun isSelected(): Unit`
 
 Checks if the view is selected
 

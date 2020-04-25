@@ -2,4 +2,4 @@
 
 # check
 
-`val check: () -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`val check: () -> Unit`

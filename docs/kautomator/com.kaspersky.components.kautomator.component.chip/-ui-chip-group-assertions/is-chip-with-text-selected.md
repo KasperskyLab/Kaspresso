@@ -2,13 +2,13 @@
 
 # isChipWithTextSelected
 
-`open fun isChipWithTextSelected(text: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`open fun isChipWithTextSelected(text: String): Unit`
 
 Checks if chip with given text is selected
 
 ### Parameters
 
-`text` - Chip text`open fun isChipWithTextSelected(pattern: `[`Pattern`](https://developer.android.com/reference/java/util/regex/Pattern.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`text` - Chip text`open fun isChipWithTextSelected(pattern: Pattern): Unit`
 
 Checks if chip with given text pattern is selected
 

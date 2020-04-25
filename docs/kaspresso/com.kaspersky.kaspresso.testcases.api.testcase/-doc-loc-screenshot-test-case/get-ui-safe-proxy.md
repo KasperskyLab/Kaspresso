@@ -2,7 +2,7 @@
 
 # getUiSafeProxy
 
-`inline fun <reified I : `[`Any`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)`> getUiSafeProxy(view: `[`I`](get-ui-safe-proxy.md#I)`): `[`I`](get-ui-safe-proxy.md#I)
+`fun <reified I : Any> getUiSafeProxy(view: I): I`
 
 Return a dynamic proxy for a given view.
 [I](get-ui-safe-proxy.md#I) must be interface.

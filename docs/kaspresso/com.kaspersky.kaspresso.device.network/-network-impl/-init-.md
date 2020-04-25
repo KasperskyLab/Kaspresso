@@ -2,7 +2,7 @@
 
 # &lt;init&gt;
 
-`NetworkImpl(targetContext: `[`Context`](https://developer.android.com/reference/android/content/Context.html)`, adbServer: `[`AdbServer`](../../com.kaspersky.kaspresso.device.server/-adb-server/index.md)`)`
+`NetworkImpl(targetContext: Context, adbServer: `[`AdbServer`](../../com.kaspersky.kaspresso.device.server/-adb-server/index.md)`)`
 
 The implementation of the [Network](../-network/index.md) interface.
 

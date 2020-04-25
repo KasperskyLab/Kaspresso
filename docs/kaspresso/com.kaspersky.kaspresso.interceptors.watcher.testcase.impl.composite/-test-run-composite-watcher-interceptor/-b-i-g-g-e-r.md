@@ -2,4 +2,4 @@
 
 # BIGGER
 
-`const val BIGGER: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)
+`const val BIGGER: Int`

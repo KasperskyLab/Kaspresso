@@ -2,4 +2,4 @@
 
 # handleUiObjectAbsence
 
-`abstract fun <T> handleUiObjectAbsence(interaction: UiObjectInteraction, action: () -> `[`T`](handle-ui-object-absence.md#T)`): `[`T`](handle-ui-object-absence.md#T)
+`abstract fun <T> handleUiObjectAbsence(interaction: UiObjectInteraction, action: () -> T): T`

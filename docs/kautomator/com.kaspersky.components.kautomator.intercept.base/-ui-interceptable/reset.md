@@ -2,7 +2,7 @@
 
 # reset
 
-`open fun reset(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`open fun reset(): Unit`
 
 Removes the interceptors from the instance.
 

@@ -2,7 +2,7 @@
 
 # passSystemDialogs
 
-`abstract fun <T> passSystemDialogs(action: () -> `[`T`](pass-system-dialogs.md#T)`): `[`T`](pass-system-dialogs.md#T)
+`abstract fun <T> passSystemDialogs(action: () -> T): T`
 
 Invokes the given [action](pass-system-dialogs.md#com.kaspersky.kaspresso.systemsafety.SystemDialogSafetyProvider$passSystemDialogs(kotlin.Function0((com.kaspersky.kaspresso.systemsafety.SystemDialogSafetyProvider.passSystemDialogs.T)))/action) and hides the system dialog if the invocation is failed and the system
 dialog is actually shown via [suppressSystemDialogs](#) call.

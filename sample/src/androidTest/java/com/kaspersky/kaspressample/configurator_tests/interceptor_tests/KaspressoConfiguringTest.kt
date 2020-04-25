@@ -1,7 +1,6 @@
 package com.kaspersky.kaspressample.configurator_tests.interceptor_tests
 
 import android.Manifest
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspressample.MainActivity
@@ -16,14 +15,12 @@ import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
 
 /**
  * In this test we show how to configure your custom Kaspresso interceptors.
  * Besides in the test there are some assertions to check a work of interceptors.
  *
  */
-@RunWith(AndroidJUnit4::class)
 class KaspressoConfiguringTest : TestCase(
     kaspressoBuilder = Kaspresso.Builder.advanced().apply {
         viewActionWatcherInterceptors.add(CustomViewActionWatcherInterceptor())

@@ -2,4 +2,4 @@
 
 # waitForIdleTimeout
 
-`val waitForIdleTimeout: `[`Long`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html)
+`val waitForIdleTimeout: Long`

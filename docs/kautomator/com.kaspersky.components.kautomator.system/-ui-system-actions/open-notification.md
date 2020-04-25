@@ -2,7 +2,7 @@
 
 # openNotification
 
-`open fun openNotification(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`open fun openNotification(): Unit`
 
 Opens the notification shade
 

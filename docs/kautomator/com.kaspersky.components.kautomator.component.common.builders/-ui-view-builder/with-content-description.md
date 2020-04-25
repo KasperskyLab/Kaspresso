@@ -2,8 +2,8 @@
 
 # withContentDescription
 
-`fun withContentDescription(contentDescription: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
-`fun withContentDescription(contentDescription: `[`Pattern`](https://developer.android.com/reference/java/util/regex/Pattern.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`fun withContentDescription(contentDescription: String): Unit`
+`fun withContentDescription(contentDescription: Pattern): Unit`
 
 Matches the view with given content description
 

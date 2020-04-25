@@ -2,7 +2,7 @@
 
 # withAnyText
 
-`fun withAnyText(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`fun withAnyText(): Unit`
 
 Matches the view which contains any text
 

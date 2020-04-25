@@ -2,4 +2,4 @@
 
 # dimension
 
-`val dimension: `[`LogcatBufferSize.Dimension`](-dimension/index.md)
+`val dimension: Dimension`

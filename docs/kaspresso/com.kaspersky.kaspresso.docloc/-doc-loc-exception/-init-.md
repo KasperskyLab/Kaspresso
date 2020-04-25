@@ -2,4 +2,4 @@
 
 # &lt;init&gt;
 
-`DocLocException(message: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`?)`
+`DocLocException(message: String?)`

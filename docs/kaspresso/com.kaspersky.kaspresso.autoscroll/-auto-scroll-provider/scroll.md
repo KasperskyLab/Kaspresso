@@ -2,7 +2,7 @@
 
 # scroll
 
-`abstract fun <T> scroll(interaction: `[`Interaction`](index.md#Interaction)`, action: () -> `[`T`](scroll.md#T)`, cachedError: `[`Throwable`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html)`): `[`T`](scroll.md#T)
+`abstract fun <T> scroll(interaction: Interaction, action: () -> T, cachedError: Throwable): T`
 
 Performs the autoscrolling functionality. Performs scroll and re-invokes the given [action](scroll.md#com.kaspersky.kaspresso.autoscroll.AutoScrollProvider$scroll(com.kaspersky.kaspresso.autoscroll.AutoScrollProvider.Interaction, kotlin.Function0((com.kaspersky.kaspresso.autoscroll.AutoScrollProvider.scroll.T)), kotlin.Throwable)/action).
 

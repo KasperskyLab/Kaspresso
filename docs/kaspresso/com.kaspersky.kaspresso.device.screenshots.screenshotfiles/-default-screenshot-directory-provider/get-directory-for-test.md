@@ -2,9 +2,7 @@
 
 # getDirectoryForTest
 
-`fun getDirectoryForTest(testMethod: `[`TestMethod`](../-test-method/index.md)`, runNumber: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`): `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)
-
-Overrides [ScreenshotDirectoryProvider.getDirectoryForTest](../-screenshot-directory-provider/get-directory-for-test.md)
+`fun getDirectoryForTest(testMethod: `[`TestMethod`](../-test-method/index.md)`, runNumber: Int): String`
 
 ### Parameters
 

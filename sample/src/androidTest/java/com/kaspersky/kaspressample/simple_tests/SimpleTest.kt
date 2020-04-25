@@ -1,7 +1,6 @@
 package com.kaspersky.kaspressample.simple_tests
 
 import android.Manifest
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspressample.MainActivity
@@ -11,7 +10,6 @@ import com.kaspersky.kaspressample.screen.SimpleScreen
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
 
 /**
  * In this example you can observe a test tuned by default Kaspresso configuration.
@@ -21,7 +19,6 @@ import org.junit.runner.RunWith
  * - screenshots in the device
  * * Also you can observe the test dsl simplifying a writing of any test
  */
-@RunWith(AndroidJUnit4::class)
 class SimpleTest : TestCase() {
 
     @get:Rule

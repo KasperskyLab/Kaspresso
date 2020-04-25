@@ -2,7 +2,7 @@
 
 # step
 
-`fun step(description: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, actions: () -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`fun step(description: String, actions: () -> Unit): Unit`
 
 The representation of a [TestContext](index.md)'s step.
 

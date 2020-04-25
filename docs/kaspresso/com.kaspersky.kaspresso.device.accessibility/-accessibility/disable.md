@@ -2,7 +2,7 @@
 
 # disable
 
-`abstract fun disable(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`abstract fun disable(): Unit`
 
 Disables accessibility. Available since api 24.
 

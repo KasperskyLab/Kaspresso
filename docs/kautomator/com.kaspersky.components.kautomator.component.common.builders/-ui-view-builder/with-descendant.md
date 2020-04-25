@@ -2,13 +2,13 @@
 
 # withDescendant
 
-`fun withDescendant(function: `[`UiViewBuilder`](index.md)`.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`fun withDescendant(function: `[`UiViewBuilder`](index.md)`.() -> Unit): Unit`
 
 Matches the view which has descendant of given matcher
 
 ### Parameters
 
-`function` - ViewBuilder which will result in descendant matcher`fun withDescendant(maxDepth: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`, function: `[`UiViewBuilder`](index.md)`.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`function` - ViewBuilder which will result in descendant matcher`fun withDescendant(maxDepth: Int, function: `[`UiViewBuilder`](index.md)`.() -> Unit): Unit`
 
 Matches the view which has descendant of given matcher with the maximum depth under the
 element to search the descendant

@@ -11,10 +11,10 @@ The builder class for parameters of [com.kaspersky.kaspresso.compose.ComposeProv
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | `ActionsPack(element: `[`T`](index.md#T)`)`<br>The builder class for parameters of [com.kaspersky.kaspresso.compose.ComposeProvider.compose](../../com.kaspersky.kaspresso.compose/-compose-provider/compose.md) and [com.kaspersky.kaspresso.compose.WebComposeProvider.compose](../../com.kaspersky.kaspresso.compose/-web-compose-provider/compose.md)] methods. |
+| [&lt;init&gt;](-init-.md) | The builder class for parameters of [com.kaspersky.kaspresso.compose.ComposeProvider.compose](../../com.kaspersky.kaspresso.compose/-compose-provider/compose.md) and [com.kaspersky.kaspresso.compose.WebComposeProvider.compose](../../com.kaspersky.kaspresso.compose/-web-compose-provider/compose.md)] methods.`ActionsPack(element: T)` |
 
 ### Functions
 
 | Name | Summary |
 |---|---|
-| [or](or.md) | `fun or(action: `[`T`](index.md#T)`.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Builds the lambda to add to [actions](#) that invokes the given [action](or.md#com.kaspersky.kaspresso.compose.pack.ActionsPack$or(kotlin.Function1((com.kaspersky.kaspresso.compose.pack.ActionsPack.T, kotlin.Unit)))/action) on the interacted view of type [T](index.md#T). |
+| [or](or.md) | Builds the lambda to add to [actions](#) that invokes the given [action](or.md#com.kaspersky.kaspresso.compose.pack.ActionsPack$or(kotlin.Function1((com.kaspersky.kaspresso.compose.pack.ActionsPack.T, kotlin.Unit)))/action) on the interacted view of type [T](index.md#T).`fun or(action: T.() -> Unit): Unit` |
