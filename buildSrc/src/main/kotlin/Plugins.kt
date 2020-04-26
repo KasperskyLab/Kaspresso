@@ -1,4 +1,5 @@
 import org.gradle.kotlin.dsl.`java-library`
+import org.gradle.kotlin.dsl.`maven-publish`
 import org.gradle.kotlin.dsl.kotlin
 import org.gradle.kotlin.dsl.version
 import org.gradle.plugin.use.PluginDependenciesSpec
@@ -27,3 +28,9 @@ val PluginDependenciesSpec.javaLibrary: PluginDependencySpec
 
 val PluginDependenciesSpec.kotlin: PluginDependencySpec
         get() = kotlin("jvm")
+
+val PluginDependenciesSpec.bintray: PluginDependencySpec
+        get() = id("com.jfrog.bintray") version Dependencies.Versions.bintray
+
+val PluginDependenciesSpec.mavenPublish: PluginDependencySpec
+        get() = `maven-publish`

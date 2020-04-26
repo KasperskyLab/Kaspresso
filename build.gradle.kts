@@ -1,8 +1,14 @@
+import groovy.xml.QName
+import publishing.setup
+
 buildscript {
 
     repositories {
         jcenter()
         google()
+        maven {
+            url = uri("https://plugins.gradle.org/m2/")
+        }
     }
 
     dependencies {
@@ -10,11 +16,14 @@ buildscript {
         classpath(Dependencies.Classpath.kotlinGradlePlugin)
         classpath(Dependencies.Classpath.dokkaPlugin)
         classpath(Dependencies.Classpath.bintrayPlugin)
+        classpath(Dependencies.Classpath.artifactoryPlugin)
     }
 }
 
 plugins {
     detekt
+    mavenPublish
+    bintray
 }
 
 subprojects {
@@ -37,8 +46,32 @@ subprojects {
             }
         }
     }
-}
 
+    if (name == "kaspresso" || name == "kautomator") {
+        apply(plugin = "maven-publish")
+        apply(plugin = "com.jfrog.bintray")
+
+        publishing {
+            setup(this@subprojects)
+        }
+
+        bintray {
+            user = findProperty("bintrayuser").toString()
+            key = findProperty("bintraykey").toString()
+            setPublications(name)
+
+            pkg.apply {
+                repo = "Kaspresso"
+                name = "Kaspresso"
+                userOrg = user
+                vcsUrl = "https://github.com/KasperskyLab/Kaspresso.git"
+                setLicenses("Apache-2.0")
+            }
+
+            version = findProperty("stableVersion").toString()
+        }
+    }
+}
 
 allprojects {
     repositories {
