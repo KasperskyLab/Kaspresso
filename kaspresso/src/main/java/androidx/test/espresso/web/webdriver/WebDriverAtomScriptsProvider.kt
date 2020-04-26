@@ -3,7 +3,7 @@ package androidx.test.espresso.web.webdriver
 /**
  * Provides [WebDriverAtomScripts] types to descendants as they are with package-local access.
  */
-internal open class WebDriverAtomScriptsProvider private constructor() {
+internal open class WebDriverAtomScriptsProvider {
 
     protected val CLEAR_ANDROID: String = WebDriverAtomScripts.CLEAR_ANDROID
 
