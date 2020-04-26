@@ -16,7 +16,7 @@ The base class for all parametrized test cases rules.
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | The base class for all parametrized test cases rules.`BaseTestCaseRule(kaspressoBuilder: Builder = Kaspresso.Builder.advanced(), testClassName: String, dataProducer: ((InitData.() -> Unit)?) -> Data, mainSectionEnrichers: List<`[`MainSectionEnricher`](../../com.kaspersky.kaspresso.enricher/-main-section-enricher/index.md)`<Data>> = emptyList())` |
+| [&lt;init&gt;](-init-.md) | The base class for all parametrized test cases rules.`BaseTestCaseRule(kaspressoBuilder: Builder = Kaspresso.Builder.simple(), testClassName: String, dataProducer: ((InitData.() -> Unit)?) -> Data, mainSectionEnrichers: List<`[`MainSectionEnricher`](../../com.kaspersky.kaspresso.enricher/-main-section-enricher/index.md)`<Data>> = emptyList())` |
 
 ### Functions
 

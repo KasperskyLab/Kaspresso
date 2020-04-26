@@ -13,7 +13,7 @@ exception caused by re-initialization of the [Kaspresso](../../com.kaspersky.kas
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | The base class for all test cases. Extend this class with a single base project-wide inheritor of [TestCase](./index.md) as a parent for all actual project-wide test cases. Nesting test cases are not permitted because they may produce an exception caused by re-initialization of the [Kaspresso](../../com.kaspersky.kaspresso.kaspresso/-kaspresso/index.md), use [com.kaspersky.kaspresso.testcases.api.scenario.Scenario](../../com.kaspersky.kaspresso.testcases.api.scenario/-scenario/index.md) instead.`TestCase(kaspressoBuilder: Builder = Kaspresso.Builder.advanced())` |
+| [&lt;init&gt;](-init-.md) | The base class for all test cases. Extend this class with a single base project-wide inheritor of [TestCase](./index.md) as a parent for all actual project-wide test cases. Nesting test cases are not permitted because they may produce an exception caused by re-initialization of the [Kaspresso](../../com.kaspersky.kaspresso.kaspresso/-kaspresso/index.md), use [com.kaspersky.kaspresso.testcases.api.scenario.Scenario](../../com.kaspersky.kaspresso.testcases.api.scenario/-scenario/index.md) instead.`TestCase(kaspressoBuilder: Builder = Kaspresso.Builder.simple())` |
 
 ### Inheritors
 

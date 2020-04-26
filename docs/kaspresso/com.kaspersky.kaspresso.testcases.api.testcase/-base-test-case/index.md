@@ -18,7 +18,7 @@ The base class for all parametrized test cases. Extend this class with a single 
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | The base class for all parametrized test cases. Extend this class with a single base project-wide inheritor of [TestCase](../-test-case/index.md) as a parent for all actual project-wide test cases. Nesting test cases are not recommended, use [com.kaspersky.kaspresso.testcases.api.scenario.Scenario](../../com.kaspersky.kaspresso.testcases.api.scenario/-scenario/index.md) instead.`BaseTestCase(kaspressoBuilder: Builder = Kaspresso.Builder.advanced(), dataProducer: ((InitData.() -> Unit)?) -> Data, mainSectionEnrichers: List<`[`MainSectionEnricher`](../../com.kaspersky.kaspresso.enricher/-main-section-enricher/index.md)`<Data>> = emptyList())` |
+| [&lt;init&gt;](-init-.md) | The base class for all parametrized test cases. Extend this class with a single base project-wide inheritor of [TestCase](../-test-case/index.md) as a parent for all actual project-wide test cases. Nesting test cases are not recommended, use [com.kaspersky.kaspresso.testcases.api.scenario.Scenario](../../com.kaspersky.kaspresso.testcases.api.scenario/-scenario/index.md) instead.`BaseTestCase(kaspressoBuilder: Builder = Kaspresso.Builder.simple(), dataProducer: ((InitData.() -> Unit)?) -> Data, mainSectionEnrichers: List<`[`MainSectionEnricher`](../../com.kaspersky.kaspresso.enricher/-main-section-enricher/index.md)`<Data>> = emptyList())` |
 
 ### Properties
 

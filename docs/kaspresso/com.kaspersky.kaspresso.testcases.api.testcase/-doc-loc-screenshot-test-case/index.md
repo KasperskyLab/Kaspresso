@@ -76,7 +76,7 @@ E.g:
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | The base class for all docloc screenshot tests.`DocLocScreenshotTestCase(screenshotsDirectory: File, changeSystemLocale: Boolean = false, locales: String?, kaspressoBuilder: Builder = Kaspresso.Builder.advanced())` |
+| [&lt;init&gt;](-init-.md) | The base class for all docloc screenshot tests.`DocLocScreenshotTestCase(screenshotsDirectory: File, changeSystemLocale: Boolean = false, locales: String?, kaspressoBuilder: Builder = Kaspresso.Builder.simple())` |
 
 ### Properties
 

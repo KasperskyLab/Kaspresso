@@ -2,7 +2,7 @@
 
 # &lt;init&gt;
 
-`DocLocScreenshotTestCase(screenshotsDirectory: File, changeSystemLocale: Boolean = false, locales: String?, kaspressoBuilder: Builder = Kaspresso.Builder.advanced())`
+`DocLocScreenshotTestCase(screenshotsDirectory: File, changeSystemLocale: Boolean = false, locales: String?, kaspressoBuilder: Builder = Kaspresso.Builder.simple())`
 
 The base class for all docloc screenshot tests.
 
