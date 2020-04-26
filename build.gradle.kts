@@ -62,7 +62,7 @@ subprojects {
 
             pkg.apply {
                 repo = "Kaspresso"
-                name = "Kaspresso"
+                name = this@subprojects.name.capitalize()
                 userOrg = user
                 vcsUrl = "https://github.com/KasperskyLab/Kaspresso.git"
                 setLicenses("Apache-2.0")
