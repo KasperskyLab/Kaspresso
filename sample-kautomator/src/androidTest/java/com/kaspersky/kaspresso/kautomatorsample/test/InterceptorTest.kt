@@ -18,7 +18,7 @@ import org.junit.Test
  * The test demonstrating and checking work of interceptors concept in Kautomator
  */
 class InterceptorTest : TestCase(
-    kaspressoBuilder = Kaspresso.Builder.advanced {
+    kaspressoBuilder = Kaspresso.Builder.simple {
         afterEachTest {
             InterceptedMainScreen.resetScreenList()
         }

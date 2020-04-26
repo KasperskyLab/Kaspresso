@@ -14,7 +14,7 @@ import org.junit.Rule
 import org.junit.Test
 
 class WaitForIdleTest : TestCase(
-    kaspressoBuilder = Kaspresso.Builder.advanced {
+    kaspressoBuilder = Kaspresso.Builder.simple {
         kautomatorWaitForIdleSettings = KautomatorWaitForIdleSettings.boost()
     }
 ) {

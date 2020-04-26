@@ -213,7 +213,7 @@ After some time, we thought why we need to save artificial timeouts inside UI Au
 ```kotlin
 @RunWith(AndroidJUnit4::class)
 class KautomatorMeasureTest : TestCase(
-    kaspressoBuilder = Kaspresso.Builder.advanced {
+    kaspressoBuilder = Kaspresso.Builder.simple {
         kautomatorWaitForIdleSettings = KautomatorWaitForIdleSettings.boost()
     }
 ) {
@@ -326,5 +326,7 @@ Also, there are cases when UI Automator can't catch 500ms window. For example, w
 As you see, we have introduced a special `kautomatorWaitForIdleSettings` property in Kaspresso configurator. By default, this property is **not** boost. Why? Because:
 1. You can have tests where you use UI Automator directly. But mentioned timeouts are global parameters. Resetting of these timeouts can lead to an undetermined state.
 2. We want to take time collecting data from the world and then to analyze potential problems of our solutions (but, we believe it's a stable and brilliant solution).
+
+Another important remark is about `kaspressoBuilder = Kaspresso.Builder.simple` configuration. This configuration is faster than `advanced` because of each step's screenshots interceptor absence. If you need, add them manually.
 
 Anyway, it's a small change for a developer, but it's a big step for the world =)

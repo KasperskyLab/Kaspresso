@@ -7,7 +7,7 @@ import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.testcases.api.testcase.BaseTestCase
 
 open class BaseParametrizedTest(
-    kaspressoBuilder: Kaspresso.Builder = Kaspresso.Builder.advanced()
+    kaspressoBuilder: Kaspresso.Builder = Kaspresso.Builder.simple()
 ) : BaseTestCase<TestCaseDsl, TestCaseData>(
     kaspressoBuilder = kaspressoBuilder,
     dataProducer = provideMainDataProducer()

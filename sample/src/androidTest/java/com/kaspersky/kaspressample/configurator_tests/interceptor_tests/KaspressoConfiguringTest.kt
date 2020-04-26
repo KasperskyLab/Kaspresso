@@ -22,7 +22,7 @@ import org.junit.Test
  *
  */
 class KaspressoConfiguringTest : TestCase(
-    kaspressoBuilder = Kaspresso.Builder.advanced().apply {
+    kaspressoBuilder = Kaspresso.Builder.simple().apply {
         viewActionWatcherInterceptors.add(CustomViewActionWatcherInterceptor())
         viewAssertionWatcherInterceptors.add(CustomViewAssertionWatcherInterceptor())
         stepWatcherInterceptors.add(CustomStepWatcherInterceptor())

@@ -13,7 +13,7 @@ import org.junit.Rule
 import org.junit.Test
 
 class DisabledStepAutoNumberingTest : TestCase(
-    kaspressoBuilder = Kaspresso.Builder.advanced().apply {
+    kaspressoBuilder = Kaspresso.Builder.simple().apply {
         stepParams.autonumber = false
     }
 ) {

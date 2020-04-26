@@ -5,7 +5,7 @@ A developer can customize **Kaspresso** by setting ```Kaspresso.Builder``` at co
 The example:
 ```kotlin
 class SomeTest : TestCase(
-    kaspressoBuilder = Kaspresso.Builder.advanced {
+    kaspressoBuilder = Kaspresso.Builder.simple {
         beforeEachTest {
             testLogger.i("The beginning")
         }
@@ -88,7 +88,7 @@ That's why we have introduced special default actions that you can set in constr
 The example how to implement default actions in ```Kaspresso.Builder``` is: <br>
 ```kotlin
 open class YourTestCase : TestCase(
-    kaspressoBuilder = Kaspresso.Builder.advanced {
+    kaspressoBuilder = Kaspresso.Builder.simple {
         beforeEachTest {
             testLogger.i("beforeTestFirstAction")
         }
@@ -120,7 +120,7 @@ observe the [example](../sample/src/androidTest/java/com/kaspersky/kaspressample
 The example of how to configure Kaspresso and how to use Kaspresso interceptors is in [here](../sample/src/androidTest/java/com/kaspersky/kaspressample/configurator_tests).
 
 ### Default Kaspresso settings
-```BaseTestCase```, ```TestCase```, ```BaseTestCaseRule```, ```TestCaseRule``` are using default customized **Kaspresso** (```Kaspresso.Builder.advanced``` builder). <br>
+```BaseTestCase```, ```TestCase```, ```BaseTestCaseRule```, ```TestCaseRule``` are using default customized **Kaspresso** (```Kaspresso.Builder.simple``` builder). <br>
 Most valuable features of default customized **Kaspresso** are below.
 
 #### Logging

@@ -575,7 +575,7 @@ data class Kaspresso(
             if (!::hackPermissions.isInitialized) hackPermissions = HackPermissionsImpl(instrumentation.uiAutomation, libLogger)
             if (!::exploit.isInitialized) exploit = ExploitImpl(activities, uiDevice, adbServer)
             if (!::language.isInitialized) language = LanguageImpl(libLogger, instrumentation.targetContext)
-            if (!::logcat.isInitialized) logcat = LogcatImpl()
+            if (!::logcat.isInitialized) logcat = LogcatImpl(adbServer)
 
             if (!::flakySafetyParams.isInitialized) flakySafetyParams = FlakySafetyParams.default()
             if (!::continuouslyParams.isInitialized) continuouslyParams = ContinuouslyParams.default()

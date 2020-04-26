@@ -1,7 +1,7 @@
 package com.kaspersky.kaspresso.compose
 
 import com.agoda.kakao.web.WebElementBuilder
-import com.kaspersky.kaspresso.compose.Composer.getUnitedComposedAction
+import com.kaspersky.kaspresso.compose.Composer.getCompositeAction
 import com.kaspersky.kaspresso.compose.pack.ActionsOnWebElementsPack
 import com.kaspersky.kaspresso.compose.pack.ActionsPack
 import com.kaspersky.kaspresso.failure.FailureLoggingProvider
@@ -64,20 +64,20 @@ class WebComposeProviderImpl(
         allowedExceptions: Set<Class<out Throwable>>?,
         checks: List<() -> Unit>
     ) {
-        val unitedComposedAction = getUnitedComposedAction(checks, kaspresso.libLogger)
+        val compositeAction = getCompositeAction(checks, kaspresso.libLogger)
 
         failureLoggingProvider.withLoggingOnFailure {
             flakySafetyProvider.flakySafely(
                 timeoutMs = timeoutMs,
                 intervalMs = intervalMs,
                 allowedExceptions = allowedExceptions,
-                action = unitedComposedAction
+                action = compositeAction
             )
         }
     }
 
     private fun invokeWebComposeUnsafely(checks: List<() -> Unit>) {
-        val unitedComposedAction = getUnitedComposedAction(checks, kaspresso.libLogger)
-        unitedComposedAction.invoke()
+        val compositeAction = getCompositeAction(checks, kaspresso.libLogger)
+        compositeAction.invoke()
     }
 }

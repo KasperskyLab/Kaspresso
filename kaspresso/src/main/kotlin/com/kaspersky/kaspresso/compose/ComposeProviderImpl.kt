@@ -12,7 +12,7 @@ import com.kaspersky.components.kautomator.intercept.base.UiInterceptable
 import com.kaspersky.components.kautomator.intercept.interaction.UiObjectInteraction
 import com.kaspersky.components.kautomator.intercept.operation.UiObjectAction
 import com.kaspersky.components.kautomator.intercept.operation.UiObjectAssertion
-import com.kaspersky.kaspresso.compose.Composer.getUnitedComposedAction
+import com.kaspersky.kaspresso.compose.Composer.getCompositeAction
 import com.kaspersky.kaspresso.compose.pack.ActionsOnElementsPack
 import com.kaspersky.kaspresso.compose.pack.ActionsPack
 import com.kaspersky.kaspresso.failure.FailureLoggingProvider
@@ -30,6 +30,7 @@ class ComposeProviderImpl(
 
     private val failureLoggingProvider: FailureLoggingProvider =
         FailureLoggingProviderImpl(kaspresso.libLogger)
+
     private val flakySafetyProvider: FlakySafetyProvider =
         FlakySafetyProviderGlobalImpl(kaspresso)
 
@@ -41,14 +42,14 @@ class ComposeProviderImpl(
     ) {
         val composeBranches = ActionsOnElementsPack().apply(block).build()
         val composeChecks = composeBranches.map { it.check }
-        val unitedComposedAction = getUnitedComposedAction(composeChecks, kaspresso.libLogger)
+        val compositeAction = getCompositeAction(composeChecks, kaspresso.libLogger)
 
         val succeedBranchOrderNumber = failureLoggingProvider.withLoggingOnFailure {
             flakySafetyProvider.flakySafely(
                 timeoutMs = timeoutMs,
                 intervalMs = intervalMs,
                 allowedExceptions = allowedExceptions,
-                action = unitedComposedAction
+                action = compositeAction
             )
         }
 
@@ -59,9 +60,9 @@ class ComposeProviderImpl(
     override fun unsafeCompose(block: ActionsOnElementsPack.() -> Unit) {
         val composeBranches = ActionsOnElementsPack().apply(block).build()
         val composeChecks = composeBranches.map { it.check }
-        val unitedComposedAction = getUnitedComposedAction(composeChecks, kaspresso.libLogger)
+        val compositeAction = getCompositeAction(composeChecks, kaspresso.libLogger)
 
-        val succeedBranchOrderNumber = unitedComposedAction.invoke()
+        val succeedBranchOrderNumber = compositeAction.invoke()
 
         // execution `then` section of a success branch
         composeBranches[succeedBranchOrderNumber].postAction?.invoke()
@@ -72,15 +73,19 @@ class ComposeProviderImpl(
         intervalMs: Long?,
         allowedExceptions: Set<Class<out Throwable>>?,
         block: ActionsPack<Type>.() -> Unit
-    ) where Type : BaseActions, Type : BaseAssertions,
+    ) where Type : BaseActions,
+            Type : BaseAssertions,
             Type : Interceptable<ViewInteraction, ViewAssertion, ViewAction> {
+
         val checks: List<() -> Unit> = ActionsPack(this).apply(block).build()
         invokeViewComposeByProviders(timeoutMs, intervalMs, allowedExceptions, checks)
     }
 
     override fun <Type> Type.unsafeCompose(block: ActionsPack<Type>.() -> Unit)
-            where Type : BaseActions, Type : BaseAssertions,
+            where Type : BaseActions,
+                  Type : BaseAssertions,
                   Type : Interceptable<ViewInteraction, ViewAssertion, ViewAction> {
+
         invokeViewComposeUnsafely(
             checks = ActionsPack(this).apply(block).build()
         )
@@ -91,15 +96,19 @@ class ComposeProviderImpl(
         intervalMs: Long?,
         allowedExceptions: Set<Class<out Throwable>>?,
         block: ActionsPack<Type>.() -> Unit
-    ) where Type : UiBaseActions, Type : UiBaseAssertions,
+    ) where Type : UiBaseActions,
+            Type : UiBaseAssertions,
             Type : UiInterceptable<UiObjectInteraction, UiObjectAssertion, UiObjectAction> {
+
         val checks: List<() -> Unit> = ActionsPack(this).apply(block).build()
         invokeViewComposeByProviders(timeoutMs, intervalMs, allowedExceptions, checks)
     }
 
     override fun <Type> Type.unsafeCompose(block: ActionsPack<Type>.() -> Unit)
-            where Type : UiBaseActions, Type : UiBaseAssertions,
+            where Type : UiBaseActions,
+                  Type : UiBaseAssertions,
                   Type : UiInterceptable<UiObjectInteraction, UiObjectAssertion, UiObjectAction> {
+
         invokeViewComposeUnsafely(
             checks = ActionsPack(this).apply(block).build()
         )
@@ -111,20 +120,20 @@ class ComposeProviderImpl(
         allowedExceptions: Set<Class<out Throwable>>?,
         checks: List<() -> Unit>
     ) {
-        val unitedComposedAction = getUnitedComposedAction(checks, kaspresso.libLogger)
+        val compositeAction = getCompositeAction(checks, kaspresso.libLogger)
 
         failureLoggingProvider.withLoggingOnFailure {
             flakySafetyProvider.flakySafely(
                 timeoutMs = timeoutMs,
                 intervalMs = intervalMs,
                 allowedExceptions = allowedExceptions,
-                action = unitedComposedAction
+                action = compositeAction
             )
         }
     }
 
     private fun invokeViewComposeUnsafely(checks: List<() -> Unit>) {
-        val unitedComposedAction = getUnitedComposedAction(checks, kaspresso.libLogger)
-        unitedComposedAction.invoke()
+        val compositeAction = getCompositeAction(checks, kaspresso.libLogger)
+        compositeAction.invoke()
     }
 }
