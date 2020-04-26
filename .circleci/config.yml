@@ -3,9 +3,9 @@ jobs:
   build:
     working_directory: ~/code
     docker:
-      - image: circleci/android:api-29
+      - image: circleci/android:api-28
     environment:
-      JVM_OPTS: -Xmx4g -XX:MaxPermSize=4g -XX:+HeapDumpOnOutOfMemoryError
+      JVM_OPTS: -Xmx4g -Xms256m -XX:MaxPermSize=4g -XX:+HeapDumpOnOutOfMemoryError
     steps:
       - checkout
       - restore_cache:
