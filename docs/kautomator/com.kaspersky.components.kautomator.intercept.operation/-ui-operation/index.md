@@ -10,14 +10,14 @@ Responsible for executing an interaction on the element of UiAutomator
 
 | Name | Summary |
 |---|---|
-| [description](description.md) | `abstract val description: String?` |
+| [description](description.md) | `abstract val description: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`?` |
 | [type](type.md) | `abstract val type: `[`UiOperationType`](../-ui-operation-type/index.md) |
 
 ### Functions
 
 | Name | Summary |
 |---|---|
-| [execute](execute.md) | `abstract fun execute(innerView: View): Unit` |
+| [execute](execute.md) | `abstract fun execute(innerView: View): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
 
 ### Inheritors
 

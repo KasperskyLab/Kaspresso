@@ -2,7 +2,7 @@
 
 # footer
 
-`fun footer(text: String): Unit`
+`fun footer(text: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Draws up info [i](i.md) as header block.
 

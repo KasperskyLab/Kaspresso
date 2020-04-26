@@ -2,7 +2,7 @@
 
 # enable
 
-`fun enable(): Unit`
+`fun enable(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Enables wi-fi and mobile data using adb.
 

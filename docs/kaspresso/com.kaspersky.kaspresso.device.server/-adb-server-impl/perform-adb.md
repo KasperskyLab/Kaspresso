@@ -2,7 +2,7 @@
 
 # performAdb
 
-`fun performAdb(vararg commands: String): List<String>`
+`fun performAdb(vararg commands: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`List`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)`<`[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`>`
 
 Performs adb commands blocking current thread.
 Please be aware! If any command that is in @param commands failed then AdbServerException will be thrown

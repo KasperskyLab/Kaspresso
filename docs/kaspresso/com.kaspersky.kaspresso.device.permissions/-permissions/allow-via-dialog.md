@@ -2,7 +2,7 @@
 
 # allowViaDialog
 
-`abstract fun allowViaDialog(): Unit`
+`abstract fun allowViaDialog(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Passes the permission-requesting permissions dialog and allows permissions.
 

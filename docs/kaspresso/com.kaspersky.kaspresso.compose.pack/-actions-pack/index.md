@@ -17,4 +17,4 @@ The builder class for parameters of [com.kaspersky.kaspresso.compose.ComposeProv
 
 | Name | Summary |
 |---|---|
-| [or](or.md) | Builds the lambda to add to [actions](#) that invokes the given [action](or.md#com.kaspersky.kaspresso.compose.pack.ActionsPack$or(kotlin.Function1((com.kaspersky.kaspresso.compose.pack.ActionsPack.T, kotlin.Unit)))/action) on the interacted view of type [T](index.md#T).`fun or(action: T.() -> Unit): Unit` |
+| [or](or.md) | Builds the lambda to add to [actions](#) that invokes the given [action](or.md#com.kaspersky.kaspresso.compose.pack.ActionsPack$or(kotlin.Function1((com.kaspersky.kaspresso.compose.pack.ActionsPack.T, kotlin.Unit)))/action) on the interacted view of type [T](index.md#T).`fun or(action: T.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |

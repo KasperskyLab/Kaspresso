@@ -10,7 +10,7 @@ Holder of BaseTestContext
 
 | Name | Summary |
 |---|---|
-| [setBaseTestContext](set-base-test-context.md) | `open fun setBaseTestContext(context: `[`BaseTestContext`](../../com.kaspersky.kaspresso.testcases.core.testcontext/-base-test-context.md)`): Unit` |
+| [setBaseTestContext](set-base-test-context.md) | `open fun setBaseTestContext(context: `[`BaseTestContext`](../../com.kaspersky.kaspresso.testcases.core.testcontext/-base-test-context.md)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
 
 ### Inheritors
 

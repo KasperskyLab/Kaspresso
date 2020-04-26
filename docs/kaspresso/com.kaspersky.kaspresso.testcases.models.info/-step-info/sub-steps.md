@@ -2,4 +2,4 @@
 
 # subSteps
 
-`abstract val subSteps: List<`[`StepInfo`](index.md)`>`
+`abstract val subSteps: `[`List`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)`<`[`StepInfo`](index.md)`>`

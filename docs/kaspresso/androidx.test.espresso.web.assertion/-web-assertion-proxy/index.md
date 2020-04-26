@@ -13,7 +13,7 @@ in the same package.
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | A proxy-wrapper of [WebAssertion](#) for [watcherInterceptors](#) calls.`WebAssertionProxy(webAssertion: WebAssertion<E>, matcher: Matcher<*>, watcherInterceptors: List<`[`WebAssertionWatcherInterceptor`](../../com.kaspersky.kaspresso.interceptors.watcher.view/-web-assertion-watcher-interceptor/index.md)`>)` |
+| [&lt;init&gt;](-init-.md) | A proxy-wrapper of [WebAssertion](#) for [watcherInterceptors](#) calls.`WebAssertionProxy(webAssertion: WebAssertion<E>, matcher: Matcher<*>, watcherInterceptors: `[`List`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)`<`[`WebAssertionWatcherInterceptor`](../../com.kaspersky.kaspresso.interceptors.watcher.view/-web-assertion-watcher-interceptor/index.md)`>)` |
 
 ### Properties
 
@@ -26,4 +26,4 @@ in the same package.
 
 | Name | Summary |
 |---|---|
-| [checkResult](check-result.md) | Calls [watcherInterceptors](#) before [WebViewAssertions.ResultCheckingWebAssertion.checkResult](#) on wrapped [webAssertion](web-assertion.md) is called.`fun checkResult(view: WebView?, result: E): Unit` |
+| [checkResult](check-result.md) | Calls [watcherInterceptors](#) before [WebViewAssertions.ResultCheckingWebAssertion.checkResult](#) on wrapped [webAssertion](web-assertion.md) is called.`fun checkResult(view: `[`WebView`](https://developer.android.com/reference/android/webkit/WebView.html)`?, result: E): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |

@@ -2,7 +2,7 @@
 
 # interceptPerform
 
-`open fun interceptPerform(action: Action): Boolean`
+`open fun interceptPerform(action: Action): `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)
 
 Runs the interceptors available for the given delegate during the `execute` operation.
 

@@ -8,8 +8,8 @@
 
 | Name | Summary |
 |---|---|
-| [check](check.md) | `abstract fun check(assertion: Assertion): Unit` |
-| [perform](perform.md) | `abstract fun perform(action: Action): Unit` |
+| [check](check.md) | `abstract fun check(assertion: Assertion): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [perform](perform.md) | `abstract fun perform(action: Action): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
 
 ### Inheritors
 

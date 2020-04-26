@@ -2,16 +2,16 @@
 
 # AdbServerException
 
-`class AdbServerException : RuntimeException`
+`class AdbServerException : `[`RuntimeException`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-runtime-exception/index.html)
 
 ### Constructors
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | `AdbServerException(message: String)` |
+| [&lt;init&gt;](-init-.md) | `AdbServerException(message: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`)` |
 
 ### Properties
 
 | Name | Summary |
 |---|---|
-| [message](message.md) | `val message: String` |
+| [message](message.md) | `val message: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html) |

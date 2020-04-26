@@ -2,7 +2,7 @@
 
 # pressRecentApps
 
-`open fun pressRecentApps(): Unit`
+`open fun pressRecentApps(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Simulates a short press on the Recent Apps button
 

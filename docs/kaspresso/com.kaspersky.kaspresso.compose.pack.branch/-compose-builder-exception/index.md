@@ -2,7 +2,7 @@
 
 # ComposeBuilderException
 
-`class ComposeBuilderException : RuntimeException`
+`class ComposeBuilderException : `[`RuntimeException`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-runtime-exception/index.html)
 
 Exception throwing in case of incorrect [ComposeProviderImpl.compose](../../com.kaspersky.kaspresso.compose/-compose-provider-impl/compose.md) expression building
 
@@ -10,10 +10,10 @@ Exception throwing in case of incorrect [ComposeProviderImpl.compose](../../com.
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | Exception throwing in case of incorrect [ComposeProviderImpl.compose](../../com.kaspersky.kaspresso.compose/-compose-provider-impl/compose.md) expression building`ComposeBuilderException(message: String)` |
+| [&lt;init&gt;](-init-.md) | Exception throwing in case of incorrect [ComposeProviderImpl.compose](../../com.kaspersky.kaspresso.compose/-compose-provider-impl/compose.md) expression building`ComposeBuilderException(message: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`)` |
 
 ### Properties
 
 | Name | Summary |
 |---|---|
-| [message](message.md) | `val message: String` |
+| [message](message.md) | `val message: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html) |

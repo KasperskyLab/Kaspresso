@@ -2,4 +2,4 @@
 
 # loadView
 
-`fun loadView(): Boolean`
+`fun loadView(): `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)

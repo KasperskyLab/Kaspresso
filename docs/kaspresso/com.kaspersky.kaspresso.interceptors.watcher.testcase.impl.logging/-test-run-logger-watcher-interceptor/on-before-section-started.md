@@ -2,7 +2,7 @@
 
 # onBeforeSectionStarted
 
-`fun onBeforeSectionStarted(testInfo: `[`TestInfo`](../../com.kaspersky.kaspresso.testcases.models.info/-test-info/index.md)`): Unit`
+`fun onBeforeSectionStarted(testInfo: `[`TestInfo`](../../com.kaspersky.kaspresso.testcases.models.info/-test-info/index.md)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Logs the given [testInfo](on-before-section-started.md#com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.logging.TestRunLoggerWatcherInterceptor$onBeforeSectionStarted(com.kaspersky.kaspresso.testcases.models.info.TestInfo)/testInfo) on "before" section starts.
 

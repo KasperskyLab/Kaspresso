@@ -2,7 +2,7 @@
 
 # isFocusable
 
-`open fun isFocusable(): Unit`
+`open fun isFocusable(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Checks if the view is focusable
 

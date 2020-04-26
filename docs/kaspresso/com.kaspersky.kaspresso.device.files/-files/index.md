@@ -16,9 +16,9 @@ Methods demanding to use AdbServer in the default implementation of this interfa
 
 | Name | Summary |
 |---|---|
-| [pull](pull.md) | Performs adb pull.`abstract fun pull(devicePath: String, serverPath: String = ""): Unit` |
-| [push](push.md) | Performs adb push.`abstract fun push(serverPath: String, devicePath: String): Unit` |
-| [remove](remove.md) | Removes a file by given path.`abstract fun remove(path: String): Unit` |
+| [pull](pull.md) | Performs adb pull.`abstract fun pull(devicePath: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, serverPath: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)` = ""): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [push](push.md) | Performs adb push.`abstract fun push(serverPath: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, devicePath: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [remove](remove.md) | Removes a file by given path.`abstract fun remove(path: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
 
 ### Inheritors
 

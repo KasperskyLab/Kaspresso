@@ -2,4 +2,4 @@
 
 # &lt;init&gt;
 
-`AdbServerException(message: String)`
+`AdbServerException(message: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`)`

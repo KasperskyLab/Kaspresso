@@ -2,7 +2,7 @@
 
 # &lt;init&gt;
 
-`UiTestLoggerImpl(tag: String)`
+`UiTestLoggerImpl(tag: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`)`
 
-The default implementation of [UiTestLogger](../-ui-test-logger.md) using [android.util.Log](#).
+The default implementation of [UiTestLogger](../-ui-test-logger.md) using [android.util.Log](https://developer.android.com/reference/android/util/Log.html).
 

@@ -2,4 +2,4 @@
 
 # DEFAULT_BUFFER_SIZE
 
-`const val DEFAULT_BUFFER_SIZE: Int`
+`const val DEFAULT_BUFFER_SIZE: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)

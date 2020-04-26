@@ -2,7 +2,7 @@
 
 # pressEnter
 
-`open fun pressEnter(): Unit`
+`open fun pressEnter(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Simulates a short press on the ENTER key
 

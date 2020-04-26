@@ -2,7 +2,7 @@
 
 # UnfoundedUiObjectException
 
-`class UnfoundedUiObjectException : RuntimeException`
+`class UnfoundedUiObjectException : `[`RuntimeException`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-runtime-exception/index.html)
 
 The exception is thrown in case if UiObject2 is not found on the screen
 

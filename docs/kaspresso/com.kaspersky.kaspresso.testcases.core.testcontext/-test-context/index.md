@@ -21,5 +21,5 @@ Provides [step](step.md) and [scenario](scenario.md) methods in "run" section to
 
 | Name | Summary |
 |---|---|
-| [scenario](scenario.md) | The representation of a composed [TestContext](./index.md)'s steps.`fun scenario(scenario: `[`BaseScenario`](../../com.kaspersky.kaspresso.testcases.api.scenario/-base-scenario/index.md)`<Data>): Unit` |
-| [step](step.md) | The representation of a [TestContext](./index.md)'s step.`fun step(description: String, actions: () -> Unit): Unit` |
+| [scenario](scenario.md) | The representation of a composed [TestContext](./index.md)'s steps.`fun scenario(scenario: `[`BaseScenario`](../../com.kaspersky.kaspresso.testcases.api.scenario/-base-scenario/index.md)`<Data>): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [step](step.md) | The representation of a [TestContext](./index.md)'s step.`fun step(description: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, actions: () -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |

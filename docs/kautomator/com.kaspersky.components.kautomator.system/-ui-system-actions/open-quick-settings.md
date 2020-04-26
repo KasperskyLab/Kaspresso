@@ -2,7 +2,7 @@
 
 # openQuickSettings
 
-`open fun openQuickSettings(): Unit`
+`open fun openQuickSettings(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Opens the Quick Settings shade
 

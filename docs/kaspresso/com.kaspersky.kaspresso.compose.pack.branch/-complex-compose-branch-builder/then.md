@@ -2,4 +2,4 @@
 
 # then
 
-`infix fun then(postAction: () -> Unit): Unit`
+`infix fun then(postAction: () -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)

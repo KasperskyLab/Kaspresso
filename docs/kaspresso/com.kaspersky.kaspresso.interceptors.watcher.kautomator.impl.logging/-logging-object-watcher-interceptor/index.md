@@ -17,5 +17,5 @@ and [UiObjectInteraction](#) on which its activities are performing.
 
 | Name | Summary |
 |---|---|
-| [interceptCheck](intercept-check.md) | Writes info to [logger](#).`fun interceptCheck(interaction: UiObjectInteraction, assertion: UiObjectAssertion): Unit` |
-| [interceptPerform](intercept-perform.md) | Writes info to [logger](#).`fun interceptPerform(interaction: UiObjectInteraction, action: UiObjectAction): Unit` |
+| [interceptCheck](intercept-check.md) | Writes info to [logger](#).`fun interceptCheck(interaction: UiObjectInteraction, assertion: UiObjectAssertion): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [interceptPerform](intercept-perform.md) | Writes info to [logger](#).`fun interceptPerform(interaction: UiObjectInteraction, action: UiObjectAction): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |

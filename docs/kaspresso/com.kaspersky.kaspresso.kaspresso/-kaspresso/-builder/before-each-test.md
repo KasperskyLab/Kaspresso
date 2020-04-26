@@ -2,7 +2,7 @@
 
 # beforeEachTest
 
-`fun beforeEachTest(override: Boolean = false, action: `[`BaseTestContext`](../../../com.kaspersky.kaspresso.testcases.core.testcontext/-base-test-context.md)`.() -> Unit): Unit`
+`fun beforeEachTest(override: `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)` = false, action: `[`BaseTestContext`](../../../com.kaspersky.kaspresso.testcases.core.testcontext/-base-test-context.md)`.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Set the action which will be executed before the test.
 The action has access to BaseTestContext.

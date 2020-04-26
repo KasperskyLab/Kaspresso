@@ -2,7 +2,7 @@
 
 # readLogcatRows
 
-`abstract fun readLogcatRows(excludePattern: String? = null, excludePatternIsIgnoreCase: Boolean = false, includePattern: String? = null, includePatternIsIgnoreCase: Boolean = false, buffer: Buffer = Buffer.DEFAULT, rowLimit: Int? = null): List<String>`
+`abstract fun readLogcatRows(excludePattern: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`? = null, excludePatternIsIgnoreCase: `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)` = false, includePattern: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`? = null, includePatternIsIgnoreCase: `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)` = false, buffer: Buffer = Buffer.DEFAULT, rowLimit: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`? = null): `[`List`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)`<`[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`>`
 
 Get logcat dump as list of strings
 
@@ -22,9 +22,9 @@ Get logcat dump as list of strings
 WITH EXTRA ROW of buffer beginning, if null return all rows
 
 **Return**
-[List](#) with logcat rows
+[List](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html) with logcat rows
 
-`abstract fun readLogcatRows(excludePattern: String? = null, excludePatternIsIgnoreCase: Boolean = false, includePattern: String? = null, includePatternIsIgnoreCase: Boolean = false, buffer: Buffer = Buffer.DEFAULT, rowLimit: Int? = null, readingBlock: (logcatRow: String) -> Boolean): Boolean`
+`abstract fun readLogcatRows(excludePattern: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`? = null, excludePatternIsIgnoreCase: `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)` = false, includePattern: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`? = null, includePatternIsIgnoreCase: `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)` = false, buffer: Buffer = Buffer.DEFAULT, rowLimit: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`? = null, readingBlock: (logcatRow: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`) -> `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)`): `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)
 
 Get logcat dump and analyze each row.
 Logcat reading stops if analyzerBlock returns false on some row

@@ -2,7 +2,7 @@
 
 # setSelectedItemWithIndex
 
-`open fun setSelectedItemWithIndex(index: Int): Unit`
+`open fun setSelectedItemWithIndex(index: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Selects menu item with given index. Note that this method uses view hierarchy which could be changed at any time.
 

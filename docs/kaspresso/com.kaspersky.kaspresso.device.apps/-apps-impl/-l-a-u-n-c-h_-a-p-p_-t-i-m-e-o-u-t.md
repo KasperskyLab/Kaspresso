@@ -2,4 +2,4 @@
 
 # LAUNCH_APP_TIMEOUT
 
-`const val LAUNCH_APP_TIMEOUT: Long`
+`const val LAUNCH_APP_TIMEOUT: `[`Long`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html)

@@ -8,11 +8,11 @@
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | `UiViewSelector(index: Int, bySelector: BySelector)` |
+| [&lt;init&gt;](-init-.md) | `UiViewSelector(index: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`, bySelector: BySelector)` |
 
 ### Properties
 
 | Name | Summary |
 |---|---|
 | [bySelector](by-selector.md) | `val bySelector: BySelector` |
-| [index](--index--.md) | `val index: Int` |
+| [index](--index--.md) | `val index: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html) |

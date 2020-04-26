@@ -2,7 +2,7 @@
 
 # pressDelete
 
-`open fun pressDelete(): Unit`
+`open fun pressDelete(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Simulates a short press on the DELETE key
 

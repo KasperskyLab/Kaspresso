@@ -24,7 +24,7 @@ Provides basic assertions that can be checked everywhere
 
 | Name | Summary |
 |---|---|
-| [isScreenOn](is-screen-on.md) | `open fun isScreenOn(): Unit` |
+| [isScreenOn](is-screen-on.md) | `open fun isScreenOn(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
 
 ### Inheritors
 

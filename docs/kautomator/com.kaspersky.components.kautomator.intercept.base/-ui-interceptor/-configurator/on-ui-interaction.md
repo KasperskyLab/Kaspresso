@@ -2,7 +2,7 @@
 
 # onUiInteraction
 
-`fun onUiInteraction(builder: Builder<`[`UiObjectInteraction`](../../../com.kaspersky.components.kautomator.intercept.interaction/-ui-object-interaction/index.md)`, `[`UiObjectAssertion`](../../../com.kaspersky.components.kautomator.intercept.operation/-ui-object-assertion.md)`, `[`UiObjectAction`](../../../com.kaspersky.components.kautomator.intercept.operation/-ui-object-action.md)`>.() -> Unit): Unit`
+`fun onUiInteraction(builder: Builder<`[`UiObjectInteraction`](../../../com.kaspersky.components.kautomator.intercept.interaction/-ui-object-interaction/index.md)`, `[`UiObjectAssertion`](../../../com.kaspersky.components.kautomator.intercept.operation/-ui-object-assertion.md)`, `[`UiObjectAction`](../../../com.kaspersky.components.kautomator.intercept.operation/-ui-object-action.md)`>.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Setups the interceptor for `check` and `execute` operations happening through [UiObjectInteraction](../../../com.kaspersky.components.kautomator.intercept.interaction/-ui-object-interaction/index.md)
 

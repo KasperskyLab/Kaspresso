@@ -2,4 +2,4 @@
 
 # autonumber
 
-`var autonumber: Boolean`
+`var autonumber: `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)

@@ -2,7 +2,7 @@
 
 # interceptCheck
 
-`fun interceptCheck(interaction: UiObjectInteraction, assertion: UiObjectAssertion): Unit`
+`fun interceptCheck(interaction: UiObjectInteraction, assertion: UiObjectAssertion): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Writes info to [logger](#).
 

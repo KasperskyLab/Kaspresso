@@ -2,7 +2,7 @@
 
 # simple
 
-`fun simple(customize: Builder.() -> Unit = {}): Builder`
+`fun simple(customize: Builder.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)` = {}): Builder`
 
 Simple (preconfigured with logging and flaky-safe features) [Builder](index.md) for test environment configuration.
 

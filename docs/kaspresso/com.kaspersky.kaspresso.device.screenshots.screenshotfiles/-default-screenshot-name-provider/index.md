@@ -11,10 +11,10 @@ If [addTimestamps](#) is true it adds timestamps to names like that "15701589498
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | Default implementation of [ScreenshotFileProvider](#) If [addTimestamps](#) is true it adds timestamps to names like that "1570158949869_ScreenshotSampleTest_step_1.png"`DefaultScreenshotNameProvider(addTimestamps: Boolean)` |
+| [&lt;init&gt;](-init-.md) | Default implementation of [ScreenshotFileProvider](#) If [addTimestamps](#) is true it adds timestamps to names like that "1570158949869_ScreenshotSampleTest_step_1.png"`DefaultScreenshotNameProvider(addTimestamps: `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)`)` |
 
 ### Functions
 
 | Name | Summary |
 |---|---|
-| [getScreenshotName](get-screenshot-name.md) | `fun getScreenshotName(tag: String): String` |
+| [getScreenshotName](get-screenshot-name.md) | `fun getScreenshotName(tag: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html) |

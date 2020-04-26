@@ -16,10 +16,10 @@ The interface to work with permissions fairly by real permission dialogs.
 
 | Name | Summary |
 |---|---|
-| [allowViaDialog](allow-via-dialog.md) | Passes the permission-requesting permissions dialog and allows permissions.`abstract fun allowViaDialog(): Unit` |
-| [clickOn](click-on.md) | Passes the permission-requesting permissions dialog`abstract fun clickOn(button: Button): Unit` |
-| [denyViaDialog](deny-via-dialog.md) | Passes the permission-requesting permissions dialog and denies permissions.`abstract fun denyViaDialog(): Unit` |
-| [isDialogVisible](is-dialog-visible.md) | Check the permission-requesting permissions dialog is visible.`abstract fun isDialogVisible(): Boolean` |
+| [allowViaDialog](allow-via-dialog.md) | Passes the permission-requesting permissions dialog and allows permissions.`abstract fun allowViaDialog(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [clickOn](click-on.md) | Passes the permission-requesting permissions dialog`abstract fun clickOn(button: Button): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [denyViaDialog](deny-via-dialog.md) | Passes the permission-requesting permissions dialog and denies permissions.`abstract fun denyViaDialog(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [isDialogVisible](is-dialog-visible.md) | Check the permission-requesting permissions dialog is visible.`abstract fun isDialogVisible(): `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html) |
 
 ### Inheritors
 

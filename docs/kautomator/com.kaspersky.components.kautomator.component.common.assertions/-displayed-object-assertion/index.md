@@ -16,15 +16,15 @@ Special separate Assertion to determine UiAutomator View is displayed or not
 
 | Name | Summary |
 |---|---|
-| [description](description.md) | `val description: String?` |
+| [description](description.md) | `val description: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`?` |
 | [type](type.md) | `val type: UiDisplayedAssertionType` |
 
 ### Functions
 
 | Name | Summary |
 |---|---|
-| [execute](execute.md) | `fun execute(innerView: UiObject2): Unit` |
-| [toString](to-string.md) | `fun toString(): String` |
+| [execute](execute.md) | `fun execute(innerView: UiObject2): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [toString](to-string.md) | `fun toString(): `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html) |
 
 ### Companion Object Functions
 

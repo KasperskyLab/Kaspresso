@@ -2,7 +2,7 @@
 
 # &lt;init&gt;
 
-`ComplexComposeBranchBuilder(element: ElementType, check: () -> Unit)`
+`ComplexComposeBranchBuilder(element: ElementType, check: () -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`)`
 
 Builder of ComplexComposeBranch's using in compose
 

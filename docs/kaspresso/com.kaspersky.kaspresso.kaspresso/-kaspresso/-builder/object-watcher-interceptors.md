@@ -2,7 +2,7 @@
 
 # objectWatcherInterceptors
 
-`lateinit var objectWatcherInterceptors: MutableList<`[`ObjectWatcherInterceptor`](../../../com.kaspersky.kaspresso.interceptors.watcher.kautomator/-object-watcher-interceptor.md)`>`
+`lateinit var objectWatcherInterceptors: `[`MutableList`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html)`<`[`ObjectWatcherInterceptor`](../../../com.kaspersky.kaspresso.interceptors.watcher.kautomator/-object-watcher-interceptor.md)`>`
 
 Holds the list of [ObjectWatcherInterceptor](../../../com.kaspersky.kaspresso.interceptors.watcher.kautomator/-object-watcher-interceptor.md)s.
 If it was not specified, Kaspresso will use no [ObjectWatcherInterceptor](../../../com.kaspersky.kaspresso.interceptors.watcher.kautomator/-object-watcher-interceptor.md)s.

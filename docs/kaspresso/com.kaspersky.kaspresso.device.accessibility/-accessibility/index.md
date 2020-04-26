@@ -10,8 +10,8 @@ The interface to work with accessibility.
 
 | Name | Summary |
 |---|---|
-| [disable](disable.md) | Disables accessibility. Available since api 24.`abstract fun disable(): Unit` |
-| [enable](enable.md) | Enables accessibility. Available since api 24.`abstract fun enable(packageName: String, className: String): Unit` |
+| [disable](disable.md) | Disables accessibility. Available since api 24.`abstract fun disable(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [enable](enable.md) | Enables accessibility. Available since api 24.`abstract fun enable(packageName: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, className: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
 
 ### Inheritors
 

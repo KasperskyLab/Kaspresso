@@ -2,7 +2,7 @@
 
 # &lt;init&gt;
 
-`BaseTestCaseRule(kaspressoBuilder: Builder = Kaspresso.Builder.simple(), testClassName: String, dataProducer: ((InitData.() -> Unit)?) -> Data, mainSectionEnrichers: List<`[`MainSectionEnricher`](../../com.kaspersky.kaspresso.enricher/-main-section-enricher/index.md)`<Data>> = emptyList())`
+`BaseTestCaseRule(kaspressoBuilder: Builder = Kaspresso.Builder.simple(), testClassName: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, dataProducer: ((InitData.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`)?) -> Data, mainSectionEnrichers: `[`List`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)`<`[`MainSectionEnricher`](../../com.kaspersky.kaspresso.enricher/-main-section-enricher/index.md)`<Data>> = emptyList())`
 
 The base class for all parametrized test cases rules.
 

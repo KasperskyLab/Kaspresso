@@ -2,4 +2,4 @@
 
 # onTestStarted
 
-`abstract fun onTestStarted(): Unit`
+`abstract fun onTestStarted(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)

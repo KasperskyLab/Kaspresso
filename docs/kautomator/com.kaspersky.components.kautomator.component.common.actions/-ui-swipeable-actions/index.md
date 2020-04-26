@@ -16,10 +16,10 @@ Provides swipeable actions for UiSwipeView
 
 | Name | Summary |
 |---|---|
-| [swipeDown](swipe-down.md) | Swipes down on the view`open fun swipeDown(percent: Float = 0.95f): Unit` |
-| [swipeLeft](swipe-left.md) | Swipes left on the view`open fun swipeLeft(percent: Float = 0.95f): Unit` |
-| [swipeRight](swipe-right.md) | Swipes right on the view`open fun swipeRight(percent: Float = 0.95f): Unit` |
-| [swipeUp](swipe-up.md) | Swipes up on the view`open fun swipeUp(percent: Float = 0.95f): Unit` |
+| [swipeDown](swipe-down.md) | Swipes down on the view`open fun swipeDown(percent: `[`Float`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html)` = 0.95f): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [swipeLeft](swipe-left.md) | Swipes left on the view`open fun swipeLeft(percent: `[`Float`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html)` = 0.95f): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [swipeRight](swipe-right.md) | Swipes right on the view`open fun swipeRight(percent: `[`Float`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html)` = 0.95f): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [swipeUp](swipe-up.md) | Swipes up on the view`open fun swipeUp(percent: `[`Float`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html)` = 0.95f): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
 
 ### Inheritors
 

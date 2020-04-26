@@ -10,7 +10,7 @@ Provides names for screenshots
 
 | Name | Summary |
 |---|---|
-| [getScreenshotName](get-screenshot-name.md) | `abstract fun getScreenshotName(tag: String): String` |
+| [getScreenshotName](get-screenshot-name.md) | `abstract fun getScreenshotName(tag: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html) |
 
 ### Inheritors
 

@@ -2,4 +2,4 @@
 
 # description
 
-`val description: String?`
+`val description: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`?`

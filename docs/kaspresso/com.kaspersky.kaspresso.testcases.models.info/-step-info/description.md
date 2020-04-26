@@ -2,4 +2,4 @@
 
 # description
 
-`abstract val description: String`
+`abstract val description: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)

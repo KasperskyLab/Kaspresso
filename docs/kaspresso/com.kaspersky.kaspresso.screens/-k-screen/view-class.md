@@ -2,4 +2,4 @@
 
 # viewClass
 
-`abstract val viewClass: Class<*>?`
+`abstract val viewClass: `[`Class`](https://docs.oracle.com/javase/6/docs/api/java/lang/Class.html)`<*>?`

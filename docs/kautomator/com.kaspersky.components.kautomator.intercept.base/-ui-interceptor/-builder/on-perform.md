@@ -2,7 +2,7 @@
 
 # onPerform
 
-`fun onPerform(isOverride: Boolean = false, interceptor: (Interaction, Action) -> Unit): Unit`
+`fun onPerform(isOverride: `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)` = false, interceptor: (Interaction, Action) -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Sets the interceptor for the `execute` operation for a given interaction.
 If overridden, breaks the call chain of operation and transfers the responsibility

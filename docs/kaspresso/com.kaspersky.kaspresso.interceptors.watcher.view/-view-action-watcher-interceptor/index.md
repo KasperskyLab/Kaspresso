@@ -10,7 +10,7 @@ The interface for all view action interceptors, used in [com.kaspersky.kaspresso
 
 | Name | Summary |
 |---|---|
-| [intercept](intercept.md) | Called to do some stuff before [ViewAction.perform](#) is actually called.`abstract fun intercept(viewAction: ViewAction, view: View): Unit` |
+| [intercept](intercept.md) | Called to do some stuff before [ViewAction.perform](#) is actually called.`abstract fun intercept(viewAction: ViewAction, view: `[`View`](https://developer.android.com/reference/android/view/View.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
 
 ### Inheritors
 

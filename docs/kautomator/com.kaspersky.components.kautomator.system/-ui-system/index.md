@@ -20,4 +20,4 @@ Container class for UiAutomator action and assertions executing in the UiSystem.
 
 | Name | Summary |
 |---|---|
-| [invoke](invoke.md) | `operator fun invoke(function: `[`UiSystem`](./index.md)`.() -> Unit): Unit` |
+| [invoke](invoke.md) | `operator fun invoke(function: `[`UiSystem`](./index.md)`.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |

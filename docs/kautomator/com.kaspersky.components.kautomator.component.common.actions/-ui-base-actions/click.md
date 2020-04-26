@@ -2,7 +2,7 @@
 
 # click
 
-`open fun click(): Unit`
+`open fun click(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Performs click on view
 

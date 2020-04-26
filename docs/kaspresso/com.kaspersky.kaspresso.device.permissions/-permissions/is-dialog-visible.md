@@ -2,7 +2,7 @@
 
 # isDialogVisible
 
-`abstract fun isDialogVisible(): Boolean`
+`abstract fun isDialogVisible(): `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)
 
 Check the permission-requesting permissions dialog is visible.
 

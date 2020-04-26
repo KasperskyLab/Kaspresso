@@ -2,7 +2,7 @@
 
 # scroll
 
-`fun <T> scroll(interaction: ViewInteraction, action: () -> T, cachedError: Throwable): T`
+`fun <T> scroll(interaction: ViewInteraction, action: () -> T, cachedError: `[`Throwable`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html)`): T`
 
 Performs the autoscrolling functionality. Performs scroll and re-invokes the given [action](scroll.md#com.kaspersky.kaspresso.autoscroll.AutoScrollProviderImpl$scroll(androidx.test.espresso.ViewInteraction, kotlin.Function0((com.kaspersky.kaspresso.autoscroll.AutoScrollProviderImpl.scroll.T)), kotlin.Throwable)/action).
 

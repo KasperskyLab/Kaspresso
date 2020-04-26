@@ -2,7 +2,7 @@
 
 # withId
 
-`fun withId(packageName: String, resourceId: String): Unit`
+`fun withId(packageName: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, resourceId: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Matches the view with given package name and resource id
 

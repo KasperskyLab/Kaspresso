@@ -2,7 +2,7 @@
 
 # swipeDown
 
-`open fun swipeDown(percent: Float = 0.95f): Unit`
+`open fun swipeDown(percent: `[`Float`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html)` = 0.95f): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Swipes down on the view
 

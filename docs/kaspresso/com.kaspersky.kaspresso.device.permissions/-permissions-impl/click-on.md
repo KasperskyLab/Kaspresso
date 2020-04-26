@@ -2,7 +2,7 @@
 
 # clickOn
 
-`fun clickOn(button: Button): Unit`
+`fun clickOn(button: Button): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Waits for 1 sec, passes the permission-requesting permissions dialog
 

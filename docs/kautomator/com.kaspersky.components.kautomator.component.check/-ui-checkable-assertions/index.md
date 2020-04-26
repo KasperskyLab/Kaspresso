@@ -16,8 +16,8 @@ Provides assertions for checkable views
 
 | Name | Summary |
 |---|---|
-| [isChecked](is-checked.md) | Checks if the view is checked`open fun isChecked(): Unit` |
-| [isNotChecked](is-not-checked.md) | Checks if the view is not checked`open fun isNotChecked(): Unit` |
+| [isChecked](is-checked.md) | Checks if the view is checked`open fun isChecked(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [isNotChecked](is-not-checked.md) | Checks if the view is not checked`open fun isNotChecked(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
 
 ### Inheritors
 

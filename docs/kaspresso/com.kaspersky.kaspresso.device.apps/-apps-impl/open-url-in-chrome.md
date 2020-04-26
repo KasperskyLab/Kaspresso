@@ -2,7 +2,7 @@
 
 # openUrlInChrome
 
-`fun openUrlInChrome(url: String): Unit`
+`fun openUrlInChrome(url: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Opens the given [url](open-url-in-chrome.md#com.kaspersky.kaspresso.device.apps.AppsImpl$openUrlInChrome(kotlin.String)/url) on Chrome.
 

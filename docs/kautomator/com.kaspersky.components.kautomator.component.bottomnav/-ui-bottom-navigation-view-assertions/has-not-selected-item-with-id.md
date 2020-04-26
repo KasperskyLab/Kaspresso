@@ -2,7 +2,7 @@
 
 # hasNotSelectedItemWithId
 
-`open fun hasNotSelectedItemWithId(id: String): Unit`
+`open fun hasNotSelectedItemWithId(id: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Checks if the view's selected menu item id does not match given one.
 

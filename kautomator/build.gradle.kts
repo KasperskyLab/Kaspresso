@@ -36,9 +36,6 @@ tasks {
 
         configuration {
             reportUndocumented = true
-            noStdlibLink = true
-            noJdkLink = true
-            noAndroidSdkLink = true
         }
     }
 

@@ -17,5 +17,5 @@ Takes screenshots if step succeeds or fails.
 
 | Name | Summary |
 |---|---|
-| [interceptAfterWithError](intercept-after-with-error.md) | Takes a screenshot of the screen on which the step falied.`fun interceptAfterWithError(stepInfo: `[`StepInfo`](../../com.kaspersky.kaspresso.testcases.models.info/-step-info/index.md)`, error: Throwable): Unit` |
-| [interceptAfterWithSuccess](intercept-after-with-success.md) | Takes a screenshot of the screen on which the step succeeded.`fun interceptAfterWithSuccess(stepInfo: `[`StepInfo`](../../com.kaspersky.kaspresso.testcases.models.info/-step-info/index.md)`): Unit` |
+| [interceptAfterWithError](intercept-after-with-error.md) | Takes a screenshot of the screen on which the step falied.`fun interceptAfterWithError(stepInfo: `[`StepInfo`](../../com.kaspersky.kaspresso.testcases.models.info/-step-info/index.md)`, error: `[`Throwable`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [interceptAfterWithSuccess](intercept-after-with-success.md) | Takes a screenshot of the screen on which the step succeeded.`fun interceptAfterWithSuccess(stepInfo: `[`StepInfo`](../../com.kaspersky.kaspresso.testcases.models.info/-step-info/index.md)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |

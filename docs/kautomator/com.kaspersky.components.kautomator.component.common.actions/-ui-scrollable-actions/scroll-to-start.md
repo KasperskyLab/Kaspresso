@@ -2,4 +2,4 @@
 
 # scrollToStart
 
-`open fun scrollToStart(): Unit`
+`open fun scrollToStart(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)

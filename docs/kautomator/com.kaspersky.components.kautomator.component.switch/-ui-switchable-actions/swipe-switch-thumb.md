@@ -2,7 +2,7 @@
 
 # swipeSwitchThumb
 
-`open fun swipeSwitchThumb(direction: Direction): Unit`
+`open fun swipeSwitchThumb(direction: Direction): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Moves the thumb of the switch to the right
 

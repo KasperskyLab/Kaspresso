@@ -2,4 +2,4 @@
 
 # currentLocaleName
 
-`val currentLocaleName: String`
+`val currentLocaleName: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)

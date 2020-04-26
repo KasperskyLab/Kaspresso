@@ -8,8 +8,8 @@
 
 | Name | Summary |
 |---|---|
-| [run](run.md) | Runs:`abstract fun run(steps: `[`TestContext`](../../com.kaspersky.kaspresso.testcases.core.testcontext/-test-context/index.md)`<Data>.() -> Unit): Unit` |
-| [transform](transform.md) | Can be invoked after [BeforeTestSection](../-before-test-section/index.md) and [InitSection.init](../-init-section/init.md) but before [MainTestSection](../-main-test-section/index.md). It's possible to add multiple transform blocks.`abstract fun transform(actions: Data.() -> Unit): `[`TransformSection`](./index.md)`<Data>` |
+| [run](run.md) | Runs:`abstract fun run(steps: `[`TestContext`](../../com.kaspersky.kaspresso.testcases.core.testcontext/-test-context/index.md)`<Data>.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [transform](transform.md) | Can be invoked after [BeforeTestSection](../-before-test-section/index.md) and [InitSection.init](../-init-section/init.md) but before [MainTestSection](../-main-test-section/index.md). It's possible to add multiple transform blocks.`abstract fun transform(actions: Data.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`TransformSection`](./index.md)`<Data>` |
 
 ### Inheritors
 

@@ -28,18 +28,18 @@ Provides basic assertions that can be performed on any view
 
 | Name | Summary |
 |---|---|
-| [isClickable](is-clickable.md) | Checks if the view is clickable`open fun isClickable(): Unit` |
-| [isDisabled](is-disabled.md) | Checks if the view is disabled`open fun isDisabled(): Unit` |
-| [isDisplayed](is-displayed.md) | Checks if the view is completely displayed`open fun isDisplayed(): Unit` |
-| [isEnabled](is-enabled.md) | Checks if the view is enabled`open fun isEnabled(): Unit` |
-| [isFocusable](is-focusable.md) | Checks if the view is focusable`open fun isFocusable(): Unit` |
-| [isFocused](is-focused.md) | Checks if the view is focused`open fun isFocused(): Unit` |
-| [isNotClickable](is-not-clickable.md) | Checks if the view is not clickable`open fun isNotClickable(): Unit` |
-| [isNotDisplayed](is-not-displayed.md) | Checks if the view is not completely displayed`open fun isNotDisplayed(): Unit` |
-| [isNotFocusable](is-not-focusable.md) | Checks if the view is not focusable`open fun isNotFocusable(): Unit` |
-| [isNotFocused](is-not-focused.md) | Checks if the view is not focused`open fun isNotFocused(): Unit` |
-| [isNotSelected](is-not-selected.md) | Checks if the view is not selected`open fun isNotSelected(): Unit` |
-| [isSelected](is-selected.md) | Checks if the view is selected`open fun isSelected(): Unit` |
+| [isClickable](is-clickable.md) | Checks if the view is clickable`open fun isClickable(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [isDisabled](is-disabled.md) | Checks if the view is disabled`open fun isDisabled(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [isDisplayed](is-displayed.md) | Checks if the view is completely displayed`open fun isDisplayed(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [isEnabled](is-enabled.md) | Checks if the view is enabled`open fun isEnabled(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [isFocusable](is-focusable.md) | Checks if the view is focusable`open fun isFocusable(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [isFocused](is-focused.md) | Checks if the view is focused`open fun isFocused(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [isNotClickable](is-not-clickable.md) | Checks if the view is not clickable`open fun isNotClickable(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [isNotDisplayed](is-not-displayed.md) | Checks if the view is not completely displayed`open fun isNotDisplayed(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [isNotFocusable](is-not-focusable.md) | Checks if the view is not focusable`open fun isNotFocusable(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [isNotFocused](is-not-focused.md) | Checks if the view is not focused`open fun isNotFocused(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [isNotSelected](is-not-selected.md) | Checks if the view is not selected`open fun isNotSelected(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [isSelected](is-selected.md) | Checks if the view is selected`open fun isSelected(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
 
 ### Inheritors
 

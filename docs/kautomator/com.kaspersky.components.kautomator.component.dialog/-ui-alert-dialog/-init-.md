@@ -2,7 +2,7 @@
 
 # &lt;init&gt;
 
-`UiAlertDialog(packageName: String)`
+`UiAlertDialog(packageName: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`)`
 
 View for acting and asserting on default AlertDialog
 

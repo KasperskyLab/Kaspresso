@@ -24,7 +24,7 @@ Provides basic actions that can be performed on each and every screen
 
 | Name | Summary |
 |---|---|
-| [pressBack](press-back.md) | Simulates a short press on the BACK button.`open fun pressBack(): Unit` |
+| [pressBack](press-back.md) | Simulates a short press on the BACK button.`open fun pressBack(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
 
 ### Inheritors
 

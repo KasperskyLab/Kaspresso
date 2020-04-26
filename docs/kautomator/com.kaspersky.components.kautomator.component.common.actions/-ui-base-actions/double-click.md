@@ -2,7 +2,7 @@
 
 # doubleClick
 
-`open fun doubleClick(): Unit`
+`open fun doubleClick(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Performs double click on view
 

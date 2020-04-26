@@ -14,5 +14,5 @@
 
 | Name | Summary |
 |---|---|
-| [layoutId](layout-id.md) | `abstract val layoutId: Int?` |
-| [viewClass](view-class.md) | `abstract val viewClass: Class<*>?` |
+| [layoutId](layout-id.md) | `abstract val layoutId: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`?` |
+| [viewClass](view-class.md) | `abstract val viewClass: `[`Class`](https://docs.oracle.com/javase/6/docs/api/java/lang/Class.html)`<*>?` |

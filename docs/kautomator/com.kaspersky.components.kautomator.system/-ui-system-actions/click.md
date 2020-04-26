@@ -2,7 +2,7 @@
 
 # click
 
-`open fun click(x: Int, y: Int): Unit`
+`open fun click(x: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`, y: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Perform a click at arbitrary coordinates specified by the user (click by System)
 

@@ -10,7 +10,7 @@ View for acting and asserting on default AlertDialog
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | View for acting and asserting on default AlertDialog`UiAlertDialog(packageName: String)` |
+| [&lt;init&gt;](-init-.md) | View for acting and asserting on default AlertDialog`UiAlertDialog(packageName: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`)` |
 
 ### Properties
 

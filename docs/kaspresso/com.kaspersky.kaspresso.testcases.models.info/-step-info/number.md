@@ -2,4 +2,4 @@
 
 # number
 
-`abstract val number: String?`
+`abstract val number: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`?`

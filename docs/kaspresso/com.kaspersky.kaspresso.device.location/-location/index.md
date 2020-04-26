@@ -16,9 +16,9 @@ Methods demanding to use AdbServer in the default implementation of this interfa
 
 | Name | Summary |
 |---|---|
-| [disableGps](disable-gps.md) | Disables GPS on the device.`abstract fun disableGps(): Unit` |
-| [enableGps](enable-gps.md) | Enables GPS on the device.`abstract fun enableGps(): Unit` |
-| [setLocation](set-location.md) | Sets current location.`abstract fun setLocation(lat: Double, lon: Double): Unit` |
+| [disableGps](disable-gps.md) | Disables GPS on the device.`abstract fun disableGps(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [enableGps](enable-gps.md) | Enables GPS on the device.`abstract fun enableGps(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [setLocation](set-location.md) | Sets current location.`abstract fun setLocation(lat: `[`Double`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html)`, lon: `[`Double`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
 
 ### Inheritors
 

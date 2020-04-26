@@ -2,7 +2,7 @@
 
 # getDescription
 
-`fun getDescription(): String`
+`fun getDescription(): `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)
 
 Simply calls [ViewAction.getDescription](#) on wrapped [viewAction](#).
 

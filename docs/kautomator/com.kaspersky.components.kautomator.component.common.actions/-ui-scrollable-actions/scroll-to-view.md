@@ -2,4 +2,4 @@
 
 # scrollToView
 
-`open fun <T> scrollToView(to: `[`UiBaseView`](../../com.kaspersky.components.kautomator.component.common.views/-ui-base-view/index.md)`<T>): Unit`
+`open fun <T> scrollToView(to: `[`UiBaseView`](../../com.kaspersky.components.kautomator.component.common.views/-ui-base-view/index.md)`<T>): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)

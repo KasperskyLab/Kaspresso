@@ -2,7 +2,7 @@
 
 # &lt;init&gt;
 
-`DocLocScreenshotTestCase(screenshotsDirectory: File, changeSystemLocale: Boolean = false, locales: String?, kaspressoBuilder: Builder = Kaspresso.Builder.simple())`
+`DocLocScreenshotTestCase(screenshotsDirectory: `[`File`](https://docs.oracle.com/javase/6/docs/api/java/io/File.html)`, changeSystemLocale: `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)` = false, locales: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`?, kaspressoBuilder: Builder = Kaspresso.Builder.simple())`
 
 The base class for all docloc screenshot tests.
 

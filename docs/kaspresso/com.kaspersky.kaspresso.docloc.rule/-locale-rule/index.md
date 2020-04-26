@@ -10,7 +10,7 @@ The test rule to switch locales.
 
 | Name | Summary |
 |---|---|
-| [currentLocaleName](current-locale-name.md) | `val currentLocaleName: String` |
+| [currentLocaleName](current-locale-name.md) | `val currentLocaleName: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html) |
 
 ### Functions
 

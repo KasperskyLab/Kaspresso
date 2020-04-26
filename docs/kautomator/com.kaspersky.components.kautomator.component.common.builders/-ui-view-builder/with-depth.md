@@ -2,13 +2,13 @@
 
 # withDepth
 
-`fun withDepth(exactDepth: Int): Unit`
+`fun withDepth(exactDepth: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Matches the view that is at a certain depth
 
 ### Parameters
 
-`exactDepth` - Exact depth`fun withDepth(min: Int, max: Int): Unit`
+`exactDepth` - Exact depth`fun withDepth(min: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`, max: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Matches the view that is in a range of depths
 

@@ -10,7 +10,7 @@ The interface to make screenshots.
 
 | Name | Summary |
 |---|---|
-| [take](take.md) | Takes screenshot if it is possible.`abstract fun take(tag: String): Unit` |
+| [take](take.md) | Takes screenshot if it is possible.`abstract fun take(tag: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
 
 ### Inheritors
 

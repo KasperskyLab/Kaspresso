@@ -17,7 +17,7 @@ Provides switchable actions for UiSwitch
 
 | Name | Summary |
 |---|---|
-| [swipeSwitchThumb](swipe-switch-thumb.md) | Moves the thumb of the switch to the right`open fun swipeSwitchThumb(direction: Direction): Unit` |
+| [swipeSwitchThumb](swipe-switch-thumb.md) | Moves the thumb of the switch to the right`open fun swipeSwitchThumb(direction: Direction): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
 
 ### Inheritors
 

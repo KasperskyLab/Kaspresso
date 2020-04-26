@@ -2,7 +2,7 @@
 
 # advanced
 
-`fun advanced(customize: Builder.() -> Unit = {}): Builder`
+`fun advanced(customize: Builder.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)` = {}): Builder`
 
 Advanced (full-featured with screenshot functionality) [Builder](index.md) for test environment configuration.
 

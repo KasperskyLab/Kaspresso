@@ -2,4 +2,4 @@
 
 # PICTURE_QUALITY
 
-`const val PICTURE_QUALITY: Int`
+`const val PICTURE_QUALITY: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)

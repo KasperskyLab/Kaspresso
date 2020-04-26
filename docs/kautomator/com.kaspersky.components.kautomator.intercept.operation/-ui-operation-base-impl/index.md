@@ -8,18 +8,18 @@
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | `UiOperationBaseImpl(type: `[`UiOperationType`](../-ui-operation-type/index.md)`, description: String?, action: View.() -> Unit)` |
+| [&lt;init&gt;](-init-.md) | `UiOperationBaseImpl(type: `[`UiOperationType`](../-ui-operation-type/index.md)`, description: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`?, action: View.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`)` |
 
 ### Properties
 
 | Name | Summary |
 |---|---|
-| [description](description.md) | `val description: String?` |
+| [description](description.md) | `val description: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`?` |
 | [type](type.md) | `val type: `[`UiOperationType`](../-ui-operation-type/index.md) |
 
 ### Functions
 
 | Name | Summary |
 |---|---|
-| [execute](execute.md) | `fun execute(innerView: View): Unit` |
-| [toString](to-string.md) | `fun toString(): String` |
+| [execute](execute.md) | `fun execute(innerView: View): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [toString](to-string.md) | `fun toString(): `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html) |

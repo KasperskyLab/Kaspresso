@@ -2,7 +2,7 @@
 
 # disable
 
-`abstract fun disable(): Unit`
+`abstract fun disable(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Disables wi-fi and mobile data using adb.
 

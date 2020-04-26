@@ -10,7 +10,7 @@ The interface to provide the flaky safety functionality.
 
 | Name | Summary |
 |---|---|
-| [continuously](continuously.md) | Invokes the given [action](continuously.md#com.kaspersky.kaspresso.flakysafety.ContinuouslyProvider$continuously(kotlin.Function0((com.kaspersky.kaspresso.flakysafety.ContinuouslyProvider.continuously.T)))/action) during set timeout.`abstract fun <T> continuously(action: () -> T): T`<br>`abstract fun <T> continuously(timeoutMs: Long? = null, intervalMs: Long? = null, failureMessage: String? = null, action: () -> T): T` |
+| [continuously](continuously.md) | Invokes the given [action](continuously.md#com.kaspersky.kaspresso.flakysafety.ContinuouslyProvider$continuously(kotlin.Function0((com.kaspersky.kaspresso.flakysafety.ContinuouslyProvider.continuously.T)))/action) during set timeout.`abstract fun <T> continuously(action: () -> T): T`<br>`abstract fun <T> continuously(timeoutMs: `[`Long`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html)`? = null, intervalMs: `[`Long`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html)`? = null, failureMessage: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`? = null, action: () -> T): T` |
 
 ### Inheritors
 

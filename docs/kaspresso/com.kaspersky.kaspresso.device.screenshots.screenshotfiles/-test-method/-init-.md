@@ -2,4 +2,4 @@
 
 # &lt;init&gt;
 
-`TestMethod(className: String, methodName: String)`
+`TestMethod(className: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, methodName: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`)`

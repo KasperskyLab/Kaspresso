@@ -2,7 +2,7 @@
 
 # textEndsWith
 
-`fun textEndsWith(text: String): Unit`
+`fun textEndsWith(text: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Matches if the view which text ends with given text
 

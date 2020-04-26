@@ -2,7 +2,7 @@
 
 # invoke
 
-`operator fun invoke(function: T.() -> Unit): Unit`
+`operator fun invoke(function: T.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Operator that allows usage of DSL style
 

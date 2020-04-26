@@ -2,7 +2,7 @@
 
 # withMaxDepth
 
-`fun withMaxDepth(max: Int): Unit`
+`fun withMaxDepth(max: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Matches the view that is no more than a certain depth
 

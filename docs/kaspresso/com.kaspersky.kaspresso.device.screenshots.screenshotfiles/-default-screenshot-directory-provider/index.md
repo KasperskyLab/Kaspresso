@@ -12,10 +12,10 @@ running several times per the same suite.
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | Default implementation of [ScreenshotDirectoryProvider](../-screenshot-directory-provider/index.md) If [groupByRunNumbers](#) is true it groups screenshots by run numbers of tests. It allows to save all screenshots of a test running several times per the same suite.`DefaultScreenshotDirectoryProvider(groupByRunNumbers: Boolean)` |
+| [&lt;init&gt;](-init-.md) | Default implementation of [ScreenshotDirectoryProvider](../-screenshot-directory-provider/index.md) If [groupByRunNumbers](#) is true it groups screenshots by run numbers of tests. It allows to save all screenshots of a test running several times per the same suite.`DefaultScreenshotDirectoryProvider(groupByRunNumbers: `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)`)` |
 
 ### Functions
 
 | Name | Summary |
 |---|---|
-| [getDirectoryForTest](get-directory-for-test.md) | `fun getDirectoryForTest(testMethod: `[`TestMethod`](../-test-method/index.md)`, runNumber: Int): String` |
+| [getDirectoryForTest](get-directory-for-test.md) | `fun getDirectoryForTest(testMethod: `[`TestMethod`](../-test-method/index.md)`, runNumber: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`): `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html) |

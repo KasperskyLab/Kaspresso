@@ -10,4 +10,4 @@ Type of the concrete action executing on the given element of UiAutomator
 
 | Name | Summary |
 |---|---|
-| [name](name.md) | `abstract val name: String` |
+| [name](name.md) | `abstract val name: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html) |

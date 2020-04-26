@@ -2,7 +2,7 @@
 
 # withChild
 
-`fun withChild(function: `[`UiViewBuilder`](index.md)`.() -> Unit): Unit`
+`fun withChild(function: `[`UiViewBuilder`](index.md)`.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Matches the view which has child of given matcher
 

@@ -2,7 +2,7 @@
 
 # transform
 
-`abstract fun transform(actions: Data.() -> Unit): `[`TransformSection`](index.md)`<Data>`
+`abstract fun transform(actions: Data.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`TransformSection`](index.md)`<Data>`
 
 Can be invoked after [BeforeTestSection](../-before-test-section/index.md) and [InitSection.init](../-init-section/init.md) but before [MainTestSection](../-main-test-section/index.md).
 It's possible to add multiple transform blocks.

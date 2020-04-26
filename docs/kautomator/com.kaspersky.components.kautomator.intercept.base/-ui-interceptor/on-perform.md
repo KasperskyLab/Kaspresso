@@ -2,4 +2,4 @@
 
 # onPerform
 
-`val onPerform: `[`UiInterception`](../-ui-interception/index.md)`<(Interaction, Action) -> Unit>?`
+`val onPerform: `[`UiInterception`](../-ui-interception/index.md)`<(Interaction, Action) -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`>?`

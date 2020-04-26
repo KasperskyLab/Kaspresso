@@ -2,7 +2,7 @@
 
 # TestCase
 
-`abstract class TestCase : `[`BaseTestCase`](../-base-test-case/index.md)`<Unit, Unit>`
+`abstract class TestCase : `[`BaseTestCase`](../-base-test-case/index.md)`<`[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`, `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`>`
 
 The base class for all test cases. Extend this class with a single base project-wide inheritor of [TestCase](./index.md) as a
 parent for all actual project-wide test cases. Nesting test cases are not permitted because they may produce an

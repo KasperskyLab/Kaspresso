@@ -10,10 +10,10 @@ The interface for formatted logging.
 
 | Name | Summary |
 |---|---|
-| [footer](footer.md) | Draws up the text as a header block.`abstract fun footer(text: String): Unit` |
-| [header](header.md) | Draws up the text as a header block.`abstract fun header(text: String): Unit` |
-| [line](line.md) | Draws a line.`abstract fun line(): Unit` |
-| [section](section.md) | Draws up the text as a section block.`abstract fun section(text: String): Unit` |
+| [footer](footer.md) | Draws up the text as a header block.`abstract fun footer(text: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [header](header.md) | Draws up the text as a header block.`abstract fun header(text: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [line](line.md) | Draws a line.`abstract fun line(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [section](section.md) | Draws up the text as a section block.`abstract fun section(text: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
 
 ### Inheritors
 

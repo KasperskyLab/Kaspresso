@@ -2,7 +2,7 @@
 
 # getConstraints
 
-`fun getConstraints(): Matcher<View>`
+`fun getConstraints(): Matcher<`[`View`](https://developer.android.com/reference/android/view/View.html)`>`
 
 Simply calls [ViewAction.getConstraints](#) on wrapped [viewAction](#).
 

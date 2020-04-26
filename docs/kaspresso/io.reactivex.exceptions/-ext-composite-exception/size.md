@@ -2,10 +2,10 @@
 
 # size
 
-`fun size(): Int`
+`fun size(): `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)
 
 Returns the number of suppressed exceptions.
 
 **Return**
-Int: the number of suppressed exceptions
+[Int](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html): the number of suppressed exceptions
 

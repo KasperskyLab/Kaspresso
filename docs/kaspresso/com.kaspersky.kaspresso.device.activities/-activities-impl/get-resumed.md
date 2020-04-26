@@ -2,7 +2,7 @@
 
 # getResumed
 
-`fun getResumed(): Activity?`
+`fun getResumed(): `[`Activity`](https://developer.android.com/reference/android/app/Activity.html)`?`
 
 Finds and returns resumed activity if it exists, otherwise logs error.
 

@@ -2,7 +2,7 @@
 
 # &lt;init&gt;
 
-`AtomProxy(atom: Atom<T>, matcher: Matcher<*>, watcherInterceptors: List<`[`AtomWatcherInterceptor`](../../com.kaspersky.kaspresso.interceptors.watcher.view/-atom-watcher-interceptor/index.md)`>)`
+`AtomProxy(atom: Atom<T>, matcher: Matcher<*>, watcherInterceptors: `[`List`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)`<`[`AtomWatcherInterceptor`](../../com.kaspersky.kaspresso.interceptors.watcher.view/-atom-watcher-interceptor/index.md)`>)`
 
 The proxy-wrapper of [Atom](#) for watcher interceptors calls.
 

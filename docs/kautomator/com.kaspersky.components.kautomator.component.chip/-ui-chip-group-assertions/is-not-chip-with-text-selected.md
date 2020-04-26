@@ -2,13 +2,13 @@
 
 # isNotChipWithTextSelected
 
-`open fun isNotChipWithTextSelected(text: String): Unit`
+`open fun isNotChipWithTextSelected(text: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Checks if chip with given text is not selected
 
 ### Parameters
 
-`text` - Chip text`open fun isNotChipWithTextSelected(pattern: Pattern): Unit`
+`text` - Chip text`open fun isNotChipWithTextSelected(pattern: `[`Pattern`](https://docs.oracle.com/javase/6/docs/api/java/util/regex/Pattern.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Checks if chip with given text pattern is not selected
 

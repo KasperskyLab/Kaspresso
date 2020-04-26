@@ -16,4 +16,4 @@ The implementation of [ViewAssertionWatcherInterceptor](../../com.kaspersky.kasp
 
 | Name | Summary |
 |---|---|
-| [intercept](intercept.md) | Writes info to [logger](#).`fun intercept(viewAssertion: ViewAssertion, view: View?, exception: NoMatchingViewException?): Unit` |
+| [intercept](intercept.md) | Writes info to [logger](#).`fun intercept(viewAssertion: ViewAssertion, view: `[`View`](https://developer.android.com/reference/android/view/View.html)`?, exception: NoMatchingViewException?): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |

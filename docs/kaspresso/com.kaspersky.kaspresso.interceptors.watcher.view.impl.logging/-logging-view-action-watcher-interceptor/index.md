@@ -16,4 +16,4 @@ The implementation of [ViewActionWatcherInterceptor](../../com.kaspersky.kaspres
 
 | Name | Summary |
 |---|---|
-| [intercept](intercept.md) | Writes info to [logger](#).`fun intercept(viewAction: ViewAction, view: View): Unit` |
+| [intercept](intercept.md) | Writes info to [logger](#).`fun intercept(viewAction: ViewAction, view: `[`View`](https://developer.android.com/reference/android/view/View.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |

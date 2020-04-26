@@ -2,7 +2,7 @@
 
 # reset
 
-`fun reset(): Unit`
+`fun reset(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Removes the interceptors from the screen.
 

@@ -2,4 +2,4 @@
 
 # targetAppLauncherPackageName
 
-`abstract val targetAppLauncherPackageName: String`
+`abstract val targetAppLauncherPackageName: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)

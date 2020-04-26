@@ -2,7 +2,7 @@
 
 # &lt;init&gt;
 
-`DefaultScreenshotNameProvider(addTimestamps: Boolean)`
+`DefaultScreenshotNameProvider(addTimestamps: `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)`)`
 
 Default implementation of [ScreenshotFileProvider](#)
 If [addTimestamps](#) is true it adds timestamps to names like that "1570158949869_ScreenshotSampleTest_step_1.png"

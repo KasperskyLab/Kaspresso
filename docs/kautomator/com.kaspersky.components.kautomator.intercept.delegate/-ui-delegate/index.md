@@ -25,9 +25,9 @@ and `perform` invocations.
 | Name | Summary |
 |---|---|
 | [globalInterceptor](global-interceptor.md) | `abstract fun globalInterceptor(): `[`UiInterceptor`](../../com.kaspersky.components.kautomator.intercept.base/-ui-interceptor/index.md)`<Interaction, Assertion, Action>?` |
-| [interceptCheck](intercept-check.md) | Runs the interceptors available for the given delegate during the `check` operation.`open fun interceptCheck(assertion: Assertion): Boolean` |
-| [interceptPerform](intercept-perform.md) | Runs the interceptors available for the given delegate during the `execute` operation.`open fun interceptPerform(action: Action): Boolean` |
-| [screenInterceptors](screen-interceptors.md) | `abstract fun screenInterceptors(): Iterable<`[`UiInterceptor`](../../com.kaspersky.components.kautomator.intercept.base/-ui-interceptor/index.md)`<Interaction, Assertion, Action>>` |
+| [interceptCheck](intercept-check.md) | Runs the interceptors available for the given delegate during the `check` operation.`open fun interceptCheck(assertion: Assertion): `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html) |
+| [interceptPerform](intercept-perform.md) | Runs the interceptors available for the given delegate during the `execute` operation.`open fun interceptPerform(action: Action): `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html) |
+| [screenInterceptors](screen-interceptors.md) | `abstract fun screenInterceptors(): `[`Iterable`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterable/index.html)`<`[`UiInterceptor`](../../com.kaspersky.components.kautomator.intercept.base/-ui-interceptor/index.md)`<Interaction, Assertion, Action>>` |
 
 ### Inheritors
 

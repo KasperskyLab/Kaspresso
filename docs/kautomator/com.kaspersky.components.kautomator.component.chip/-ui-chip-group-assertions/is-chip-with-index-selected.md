@@ -2,7 +2,7 @@
 
 # isChipWithIndexSelected
 
-`open fun isChipWithIndexSelected(index: Int): Unit`
+`open fun isChipWithIndexSelected(index: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Checks if chip with given index is selected
 

@@ -1144,7 +1144,7 @@ Base interface for all loggers used in Kaspresso.
 
 ##### [com.kaspersky.kaspresso.logger.UiTestLoggerImpl](../com.kaspersky.kaspresso.logger/-ui-test-logger-impl/index.md)
 
-The default implementation of [UiTestLogger](../com.kaspersky.kaspresso.logger/-ui-test-logger.md) using [android.util.Log](#).
+The default implementation of [UiTestLogger](../com.kaspersky.kaspresso.logger/-ui-test-logger.md) using [android.util.Log](https://developer.android.com/reference/android/util/Log.html).
 
 
 |

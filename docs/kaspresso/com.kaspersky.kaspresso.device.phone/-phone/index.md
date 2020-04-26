@@ -16,9 +16,9 @@ Methods demanding to use AdbServer in the default implementation of this interfa
 
 | Name | Summary |
 |---|---|
-| [cancelCall](cancel-call.md) | Cancels incoming call.`abstract fun cancelCall(number: String): Unit` |
-| [emulateCall](emulate-call.md) | Emulates incoming call.`abstract fun emulateCall(number: String): Unit` |
-| [receiveSms](receive-sms.md) | Emulates receiving an SMS from [number](receive-sms.md#com.kaspersky.kaspresso.device.phone.Phone$receiveSms(kotlin.String, kotlin.String)/number).`abstract fun receiveSms(number: String, text: String): Unit` |
+| [cancelCall](cancel-call.md) | Cancels incoming call.`abstract fun cancelCall(number: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [emulateCall](emulate-call.md) | Emulates incoming call.`abstract fun emulateCall(number: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [receiveSms](receive-sms.md) | Emulates receiving an SMS from [number](receive-sms.md#com.kaspersky.kaspresso.device.phone.Phone$receiveSms(kotlin.String, kotlin.String)/number).`abstract fun receiveSms(number: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, text: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
 
 ### Inheritors
 

@@ -2,7 +2,7 @@
 
 # readLogcatRowsViaAdb
 
-`fun readLogcatRowsViaAdb(excludePattern: Regex? = null, includePattern: Regex? = null, buffer: Buffer = Logcat.Buffer.DEFAULT, logcatFilePath: String, readingBlock: (logRow: String) -> Boolean): Boolean`
+`fun readLogcatRowsViaAdb(excludePattern: `[`Regex`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.text/-regex/index.html)`? = null, includePattern: `[`Regex`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.text/-regex/index.html)`? = null, buffer: Buffer = Logcat.Buffer.DEFAULT, logcatFilePath: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, readingBlock: (logRow: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`) -> `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)`): `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)
 
 Required Permissions: READ_EXTERNAL_STORAGE.
 Required: Started AdbServer

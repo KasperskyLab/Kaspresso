@@ -10,8 +10,8 @@ The interface for all interceptors that are watching the default interaction in 
 
 | Name | Summary |
 |---|---|
-| [interceptCheck](intercept-check.md) | Called to do some stuff before [UiInteraction.check](#) is actually called.`abstract fun interceptCheck(interaction: Interaction, assertion: Assertion): Unit` |
-| [interceptPerform](intercept-perform.md) | Called to do some stuff before [UiInteraction.perform](#) is actually called.`abstract fun interceptPerform(interaction: Interaction, action: Action): Unit` |
+| [interceptCheck](intercept-check.md) | Called to do some stuff before [UiInteraction.check](#) is actually called.`abstract fun interceptCheck(interaction: Interaction, assertion: Assertion): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [interceptPerform](intercept-perform.md) | Called to do some stuff before [UiInteraction.perform](#) is actually called.`abstract fun interceptPerform(interaction: Interaction, action: Action): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
 
 ### Inheritors
 

@@ -16,9 +16,9 @@ Provides editable actions for UiEditText
 
 | Name | Summary |
 |---|---|
-| [clearText](clear-text.md) | Clears the text content into the view`open fun clearText(): Unit` |
-| [replaceText](replace-text.md) | Replaces the current view text with given`open fun replaceText(text: String): Unit` |
-| [typeText](type-text.md) | Types the given text into the view`open fun typeText(text: String): Unit` |
+| [clearText](clear-text.md) | Clears the text content into the view`open fun clearText(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [replaceText](replace-text.md) | Replaces the current view text with given`open fun replaceText(text: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [typeText](type-text.md) | Types the given text into the view`open fun typeText(text: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
 
 ### Inheritors
 

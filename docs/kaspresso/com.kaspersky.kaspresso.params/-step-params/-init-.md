@@ -2,7 +2,7 @@
 
 # &lt;init&gt;
 
-`StepParams(autonumber: Boolean = true)`
+`StepParams(autonumber: `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)` = true)`
 
 The class that holds all the necessary for [com.kaspersky.kaspresso.testcases.core.step.StepsManager](#) parameters.
 

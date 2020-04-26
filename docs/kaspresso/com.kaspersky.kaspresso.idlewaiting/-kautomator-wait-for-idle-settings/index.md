@@ -8,14 +8,14 @@
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | `KautomatorWaitForIdleSettings(waitForSelectorTimeout: Long, waitForIdleTimeout: Long)` |
+| [&lt;init&gt;](-init-.md) | `KautomatorWaitForIdleSettings(waitForSelectorTimeout: `[`Long`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html)`, waitForIdleTimeout: `[`Long`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html)`)` |
 
 ### Properties
 
 | Name | Summary |
 |---|---|
-| [waitForIdleTimeout](wait-for-idle-timeout.md) | `val waitForIdleTimeout: Long` |
-| [waitForSelectorTimeout](wait-for-selector-timeout.md) | `val waitForSelectorTimeout: Long` |
+| [waitForIdleTimeout](wait-for-idle-timeout.md) | `val waitForIdleTimeout: `[`Long`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html) |
+| [waitForSelectorTimeout](wait-for-selector-timeout.md) | `val waitForSelectorTimeout: `[`Long`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html) |
 
 ### Companion Object Functions
 

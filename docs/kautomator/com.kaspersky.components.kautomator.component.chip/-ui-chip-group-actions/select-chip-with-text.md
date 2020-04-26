@@ -2,13 +2,13 @@
 
 # selectChipWithText
 
-`open fun selectChipWithText(text: String): Unit`
+`open fun selectChipWithText(text: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Selects a chip with given text
 
 ### Parameters
 
-`text` - Chip text to match`open fun selectChipWithText(pattern: Pattern): Unit`
+`text` - Chip text to match`open fun selectChipWithText(pattern: `[`Pattern`](https://docs.oracle.com/javase/6/docs/api/java/util/regex/Pattern.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Selects a chip with give text pattern
 

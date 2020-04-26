@@ -16,7 +16,7 @@ Provides actions for checkable views
 
 | Name | Summary |
 |---|---|
-| [setChecked](set-checked.md) | Sets checked state of the view`open fun setChecked(checked: Boolean): Unit` |
+| [setChecked](set-checked.md) | Sets checked state of the view`open fun setChecked(checked: `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
 
 ### Inheritors
 

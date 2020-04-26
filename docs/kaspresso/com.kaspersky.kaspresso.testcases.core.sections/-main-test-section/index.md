@@ -10,6 +10,6 @@ The representation of an actual test.
 
 | Name | Summary |
 |---|---|
-| [init](init.md) | Can be invoked after [BeforeTestSection](../-before-test-section/index.md). Running to init test data using dsl.`fun init(actions: InitData.() -> Unit): `[`TransformSection`](../-transform-section/index.md)`<Data>` |
-| [run](run.md) | Runs:`fun run(steps: `[`TestContext`](../../com.kaspersky.kaspresso.testcases.core.testcontext/-test-context/index.md)`<Data>.() -> Unit): Unit` |
-| [transform](transform.md) | Can be invoked after [BeforeTestSection](../-before-test-section/index.md) and [init](init.md) but before [MainTestSection](./index.md).`fun transform(actions: Data.() -> Unit): `[`TransformSection`](../-transform-section/index.md)`<Data>` |
+| [init](init.md) | Can be invoked after [BeforeTestSection](../-before-test-section/index.md). Running to init test data using dsl.`fun init(actions: InitData.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`TransformSection`](../-transform-section/index.md)`<Data>` |
+| [run](run.md) | Runs:`fun run(steps: `[`TestContext`](../../com.kaspersky.kaspresso.testcases.core.testcontext/-test-context/index.md)`<Data>.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [transform](transform.md) | Can be invoked after [BeforeTestSection](../-before-test-section/index.md) and [init](init.md) but before [MainTestSection](./index.md).`fun transform(actions: Data.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`TransformSection`](../-transform-section/index.md)`<Data>` |

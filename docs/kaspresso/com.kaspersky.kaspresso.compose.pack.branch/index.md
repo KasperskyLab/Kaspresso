@@ -13,4 +13,4 @@
 
 | Name | Summary |
 |---|---|
-| [ComposeBuilderException](-compose-builder-exception/index.md) | Exception throwing in case of incorrect [ComposeProviderImpl.compose](../com.kaspersky.kaspresso.compose/-compose-provider-impl/compose.md) expression building`class ComposeBuilderException : RuntimeException` |
+| [ComposeBuilderException](-compose-builder-exception/index.md) | Exception throwing in case of incorrect [ComposeProviderImpl.compose](../com.kaspersky.kaspresso.compose/-compose-provider-impl/compose.md) expression building`class ComposeBuilderException : `[`RuntimeException`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-runtime-exception/index.html) |

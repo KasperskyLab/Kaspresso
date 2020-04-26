@@ -2,4 +2,4 @@
 
 # layoutId
 
-`abstract val layoutId: Int?`
+`abstract val layoutId: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`?`

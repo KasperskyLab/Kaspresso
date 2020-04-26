@@ -18,7 +18,7 @@ actions/assertions interfaces and override necessary constructors
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | Constructs view class with UiObject interaction from given UiViewBuilder`UiBaseView(function: `[`UiViewBuilder`](../../com.kaspersky.components.kautomator.component.common.builders/-ui-view-builder/index.md)`.() -> Unit)`<br>Base class for all UiAutomator DSL views`UiBaseView(selector: `[`UiViewSelector`](../../com.kaspersky.components.kautomator.component.common.builders/-ui-view-selector/index.md)`)` |
+| [&lt;init&gt;](-init-.md) | Constructs view class with UiObject interaction from given UiViewBuilder`UiBaseView(function: `[`UiViewBuilder`](../../com.kaspersky.components.kautomator.component.common.builders/-ui-view-builder/index.md)`.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`)`<br>Base class for all UiAutomator DSL views`UiBaseView(selector: `[`UiViewSelector`](../../com.kaspersky.components.kautomator.component.common.builders/-ui-view-selector/index.md)`)` |
 
 ### Properties
 
@@ -30,7 +30,7 @@ actions/assertions interfaces and override necessary constructors
 
 | Name | Summary |
 |---|---|
-| [invoke](invoke.md) | Operator that allows usage of DSL style`operator fun invoke(function: T.() -> Unit): Unit` |
+| [invoke](invoke.md) | Operator that allows usage of DSL style`operator fun invoke(function: T.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
 
 ### Inheritors
 

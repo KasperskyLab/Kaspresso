@@ -10,4 +10,4 @@ Base interface for all loggers used in Kaspresso.
 
 | Name | Summary |
 |---|---|
-| [UiTestLoggerImpl](-ui-test-logger-impl/index.md) | The default implementation of [UiTestLogger](./-ui-test-logger.md) using [android.util.Log](#).`class UiTestLoggerImpl : `[`UiTestLogger`](./-ui-test-logger.md) |
+| [UiTestLoggerImpl](-ui-test-logger-impl/index.md) | The default implementation of [UiTestLogger](./-ui-test-logger.md) using [android.util.Log](https://developer.android.com/reference/android/util/Log.html).`class UiTestLoggerImpl : `[`UiTestLogger`](./-ui-test-logger.md) |

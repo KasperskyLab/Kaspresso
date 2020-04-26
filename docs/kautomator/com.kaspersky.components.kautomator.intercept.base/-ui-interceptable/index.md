@@ -14,8 +14,8 @@
 
 | Name | Summary |
 |---|---|
-| [intercept](intercept.md) | Sets the interceptors for the instance. Interceptors will be invoked on the interaction with the UiView.`open fun intercept(builder: Builder<Interaction, Assertion, Action>.() -> Unit): Unit` |
-| [reset](reset.md) | Removes the interceptors from the instance.`open fun reset(): Unit` |
+| [intercept](intercept.md) | Sets the interceptors for the instance. Interceptors will be invoked on the interaction with the UiView.`open fun intercept(builder: Builder<Interaction, Assertion, Action>.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [reset](reset.md) | Removes the interceptors from the instance.`open fun reset(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
 
 ### Inheritors
 

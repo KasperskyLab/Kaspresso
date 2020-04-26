@@ -2,7 +2,7 @@
 
 # disableGps
 
-`abstract fun disableGps(): Unit`
+`abstract fun disableGps(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Disables GPS on the device.
 

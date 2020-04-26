@@ -2,7 +2,7 @@
 
 # interceptPerform
 
-`fun interceptPerform(interaction: UiObjectInteraction, action: UiObjectAction): Unit`
+`fun interceptPerform(interaction: UiObjectInteraction, action: UiObjectAction): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Writes info to [logger](#).
 

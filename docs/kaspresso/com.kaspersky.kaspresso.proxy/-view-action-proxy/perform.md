@@ -2,7 +2,7 @@
 
 # perform
 
-`fun perform(uiController: UiController, view: View): Unit`
+`fun perform(uiController: UiController, view: `[`View`](https://developer.android.com/reference/android/view/View.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Calls watcher interceptors before [ViewAction.perform](#) on wrapped [viewAction](#) is called.
 

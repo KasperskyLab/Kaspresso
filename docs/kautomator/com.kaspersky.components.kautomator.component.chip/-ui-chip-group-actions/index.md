@@ -16,9 +16,9 @@ Provides actions for a ChipGroup
 
 | Name | Summary |
 |---|---|
-| [selectChipWithId](select-chip-with-id.md) | Selects a chip in ChipGroup with given id`open fun selectChipWithId(id: String): Unit` |
-| [selectChipWithIndex](select-chip-with-index.md) | Selects a chip with given index`open fun selectChipWithIndex(index: Int): Unit` |
-| [selectChipWithText](select-chip-with-text.md) | Selects a chip with given text`open fun selectChipWithText(text: String): Unit`<br>Selects a chip with give text pattern`open fun selectChipWithText(pattern: Pattern): Unit` |
+| [selectChipWithId](select-chip-with-id.md) | Selects a chip in ChipGroup with given id`open fun selectChipWithId(id: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [selectChipWithIndex](select-chip-with-index.md) | Selects a chip with given index`open fun selectChipWithIndex(index: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [selectChipWithText](select-chip-with-text.md) | Selects a chip with given text`open fun selectChipWithText(text: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Selects a chip with give text pattern`open fun selectChipWithText(pattern: `[`Pattern`](https://docs.oracle.com/javase/6/docs/api/java/util/regex/Pattern.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
 
 ### Inheritors
 

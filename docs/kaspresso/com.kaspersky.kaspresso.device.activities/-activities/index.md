@@ -10,8 +10,8 @@ The interface to work with activities.
 
 | Name | Summary |
 |---|---|
-| [getResumed](get-resumed.md) | Finds and returns resumed activity if it exists.`abstract fun getResumed(): Activity?` |
-| [isCurrent](is-current.md) | Checks if passed activity is resumed.`abstract fun isCurrent(clazz: Class<out Activity>): Unit` |
+| [getResumed](get-resumed.md) | Finds and returns resumed activity if it exists.`abstract fun getResumed(): `[`Activity`](https://developer.android.com/reference/android/app/Activity.html)`?` |
+| [isCurrent](is-current.md) | Checks if passed activity is resumed.`abstract fun isCurrent(clazz: `[`Class`](https://docs.oracle.com/javase/6/docs/api/java/lang/Class.html)`<out `[`Activity`](https://developer.android.com/reference/android/app/Activity.html)`>): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
 
 ### Inheritors
 

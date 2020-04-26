@@ -2,4 +2,4 @@
 
 # &lt;init&gt;
 
-`LogcatBufferSize(size: Int, dimension: Dimension)`
+`LogcatBufferSize(size: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`, dimension: Dimension)`

@@ -2,7 +2,7 @@
 
 # objectBehaviorInterceptors
 
-`lateinit var objectBehaviorInterceptors: MutableList<`[`ObjectBehaviorInterceptor`](../../../com.kaspersky.kaspresso.interceptors.behaviorkautomator/-object-behavior-interceptor.md)`>`
+`lateinit var objectBehaviorInterceptors: `[`MutableList`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html)`<`[`ObjectBehaviorInterceptor`](../../../com.kaspersky.kaspresso.interceptors.behaviorkautomator/-object-behavior-interceptor.md)`>`
 
 Holds the list of [ObjectBehaviorInterceptor](../../../com.kaspersky.kaspresso.interceptors.behaviorkautomator/-object-behavior-interceptor.md)s.
 If it was not specified, Kaspresso will use no [ObjectBehaviorInterceptor](../../../com.kaspersky.kaspresso.interceptors.behaviorkautomator/-object-behavior-interceptor.md)s.

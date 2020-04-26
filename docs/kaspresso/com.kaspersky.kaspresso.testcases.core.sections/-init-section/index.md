@@ -8,8 +8,8 @@
 
 | Name | Summary |
 |---|---|
-| [init](init.md) | Can be invoked after [BeforeTestSection](../-before-test-section/index.md). Running to init test data using dsl.`abstract fun init(actions: InitData.() -> Unit): `[`TransformSection`](../-transform-section/index.md)`<Data>` |
-| [run](run.md) | Runs:`abstract fun run(steps: `[`TestContext`](../../com.kaspersky.kaspresso.testcases.core.testcontext/-test-context/index.md)`<Data>.() -> Unit): Unit` |
+| [init](init.md) | Can be invoked after [BeforeTestSection](../-before-test-section/index.md). Running to init test data using dsl.`abstract fun init(actions: InitData.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`TransformSection`](../-transform-section/index.md)`<Data>` |
+| [run](run.md) | Runs:`abstract fun run(steps: `[`TestContext`](../../com.kaspersky.kaspresso.testcases.core.testcontext/-test-context/index.md)`<Data>.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
 
 ### Inheritors
 

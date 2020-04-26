@@ -2,7 +2,7 @@
 
 # &lt;init&gt;
 
-`UiBaseView(function: `[`UiViewBuilder`](../../com.kaspersky.components.kautomator.component.common.builders/-ui-view-builder/index.md)`.() -> Unit)`
+`UiBaseView(function: `[`UiViewBuilder`](../../com.kaspersky.components.kautomator.component.common.builders/-ui-view-builder/index.md)`.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`)`
 
 Constructs view class with UiObject interaction from given UiViewBuilder
 

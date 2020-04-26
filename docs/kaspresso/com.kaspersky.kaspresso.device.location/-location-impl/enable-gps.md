@@ -2,7 +2,7 @@
 
 # enableGps
 
-`fun enableGps(): Unit`
+`fun enableGps(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Enables GPS on the device.
 

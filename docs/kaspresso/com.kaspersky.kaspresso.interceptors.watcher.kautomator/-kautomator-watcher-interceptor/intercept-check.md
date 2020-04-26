@@ -2,7 +2,7 @@
 
 # interceptCheck
 
-`abstract fun interceptCheck(interaction: Interaction, assertion: Assertion): Unit`
+`abstract fun interceptCheck(interaction: Interaction, assertion: Assertion): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Called to do some stuff before [UiInteraction.check](#) is actually called.
 

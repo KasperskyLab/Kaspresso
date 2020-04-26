@@ -2,7 +2,7 @@
 
 # targetContext
 
-`val targetContext: Context`
+`val targetContext: `[`Context`](https://developer.android.com/reference/android/content/Context.html)
 
-A not caching property to get target [Context](#).
+A not caching property to get target [Context](https://developer.android.com/reference/android/content/Context.html).
 

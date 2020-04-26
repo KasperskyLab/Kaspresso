@@ -10,7 +10,7 @@ The interface that allows implementations of [Screenshots](../-screenshots/index
 
 | Name | Summary |
 |---|---|
-| [onTestStarted](on-test-started.md) | `abstract fun onTestStarted(): Unit` |
+| [onTestStarted](on-test-started.md) | `abstract fun onTestStarted(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
 
 ### Inheritors
 

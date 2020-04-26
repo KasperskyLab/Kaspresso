@@ -2,7 +2,7 @@
 
 # line
 
-`abstract fun line(): Unit`
+`abstract fun line(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Draws a line.
 

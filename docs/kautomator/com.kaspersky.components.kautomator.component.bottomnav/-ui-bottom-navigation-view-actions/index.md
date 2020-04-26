@@ -16,9 +16,9 @@ Provides actions for BottomNavigationView
 
 | Name | Summary |
 |---|---|
-| [setSelectedItemWithId](set-selected-item-with-id.md) | Selects menu item with given id`open fun setSelectedItemWithId(id: String): Unit` |
-| [setSelectedItemWithIndex](set-selected-item-with-index.md) | Selects menu item with given index. Note that this method uses view hierarchy which could be changed at any time.`open fun setSelectedItemWithIndex(index: Int): Unit` |
-| [setSelectedItemWithTitle](set-selected-item-with-title.md) | Selects menu item with given title. Note that this method uses view hierarchy which could be changed at any time.`open fun setSelectedItemWithTitle(title: String): Unit` |
+| [setSelectedItemWithId](set-selected-item-with-id.md) | Selects menu item with given id`open fun setSelectedItemWithId(id: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [setSelectedItemWithIndex](set-selected-item-with-index.md) | Selects menu item with given index. Note that this method uses view hierarchy which could be changed at any time.`open fun setSelectedItemWithIndex(index: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [setSelectedItemWithTitle](set-selected-item-with-title.md) | Selects menu item with given title. Note that this method uses view hierarchy which could be changed at any time.`open fun setSelectedItemWithTitle(title: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
 
 ### Inheritors
 

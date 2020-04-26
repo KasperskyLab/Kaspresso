@@ -2,4 +2,4 @@
 
 # index
 
-`val index: Int`
+`val index: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)

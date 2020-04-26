@@ -2,7 +2,7 @@
 
 # interceptAfterFinally
 
-`fun interceptAfterFinally(stepInfo: `[`StepInfo`](../../com.kaspersky.kaspresso.testcases.models.info/-step-info/index.md)`): Unit`
+`fun interceptAfterFinally(stepInfo: `[`StepInfo`](../../com.kaspersky.kaspresso.testcases.models.info/-step-info/index.md)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Logs the given [stepInfo](intercept-after-finally.md#com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.logging.LoggingStepWatcherInterceptor$interceptAfterFinally(com.kaspersky.kaspresso.testcases.models.info.StepInfo)/stepInfo) on step finally finishes.
 

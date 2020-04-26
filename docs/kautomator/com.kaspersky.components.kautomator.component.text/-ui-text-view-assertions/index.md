@@ -16,11 +16,11 @@ Provides assertions for UiTextView
 
 | Name | Summary |
 |---|---|
-| [containsText](contains-text.md) | Checks if the view contains concrete text`open fun containsText(text: String): Unit` |
-| [hasAnyText](has-any-text.md) | Checks if the view has any text`open fun hasAnyText(): Unit` |
-| [hasEmptyText](has-empty-text.md) | Checks if the view has empty text`open fun hasEmptyText(): Unit` |
-| [hasNoText](has-no-text.md) | Checks if the view has not concrete text`open fun hasNoText(text: String): Unit` |
-| [hasText](has-text.md) | Checks if the view has concrete text`open fun hasText(text: String): Unit` |
+| [containsText](contains-text.md) | Checks if the view contains concrete text`open fun containsText(text: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [hasAnyText](has-any-text.md) | Checks if the view has any text`open fun hasAnyText(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [hasEmptyText](has-empty-text.md) | Checks if the view has empty text`open fun hasEmptyText(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [hasNoText](has-no-text.md) | Checks if the view has not concrete text`open fun hasNoText(text: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [hasText](has-text.md) | Checks if the view has concrete text`open fun hasText(text: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
 
 ### Inheritors
 

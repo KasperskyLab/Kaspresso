@@ -2,7 +2,7 @@
 
 # typeText
 
-`open fun typeText(text: String): Unit`
+`open fun typeText(text: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Types the given text into the view
 

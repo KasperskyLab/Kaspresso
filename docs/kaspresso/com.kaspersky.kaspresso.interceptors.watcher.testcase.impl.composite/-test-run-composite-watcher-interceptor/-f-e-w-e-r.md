@@ -2,4 +2,4 @@
 
 # FEWER
 
-`const val FEWER: Int`
+`const val FEWER: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)

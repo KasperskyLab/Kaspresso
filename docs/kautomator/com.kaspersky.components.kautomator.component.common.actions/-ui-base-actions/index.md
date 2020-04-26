@@ -28,9 +28,9 @@ Provides a lot of basic action methods, such as click(), etc.
 
 | Name | Summary |
 |---|---|
-| [click](click.md) | Performs click on view`open fun click(): Unit` |
-| [doubleClick](double-click.md) | Performs double click on view`open fun doubleClick(): Unit` |
-| [longClick](long-click.md) | Performs long click on view`open fun longClick(): Unit` |
+| [click](click.md) | Performs click on view`open fun click(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [doubleClick](double-click.md) | Performs double click on view`open fun doubleClick(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [longClick](long-click.md) | Performs long click on view`open fun longClick(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
 
 ### Inheritors
 

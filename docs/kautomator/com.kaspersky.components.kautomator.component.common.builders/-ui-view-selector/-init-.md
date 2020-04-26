@@ -2,4 +2,4 @@
 
 # &lt;init&gt;
 
-`UiViewSelector(index: Int, bySelector: BySelector)`
+`UiViewSelector(index: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`, bySelector: BySelector)`

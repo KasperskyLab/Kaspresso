@@ -2,4 +2,4 @@
 
 # targetAppPackageName
 
-`val targetAppPackageName: String`
+`val targetAppPackageName: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)

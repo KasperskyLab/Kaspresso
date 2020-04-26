@@ -2,4 +2,4 @@
 
 # &lt;init&gt;
 
-`UiInterception(isOverride: Boolean, interceptor: T)`
+`UiInterception(isOverride: `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)`, interceptor: T)`

@@ -50,12 +50,12 @@ onPerform?.invoke()
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | Base class for intercepting the call chain from Kautomator to UiAutomator.`UiInterceptor(onCheck: `[`UiInterception`](../-ui-interception/index.md)`<(Interaction, Assertion) -> Unit>?, onPerform: `[`UiInterception`](../-ui-interception/index.md)`<(Interaction, Action) -> Unit>?, onAll: `[`UiInterception`](../-ui-interception/index.md)`<(Interaction) -> Unit>?)` |
+| [&lt;init&gt;](-init-.md) | Base class for intercepting the call chain from Kautomator to UiAutomator.`UiInterceptor(onCheck: `[`UiInterception`](../-ui-interception/index.md)`<(Interaction, Assertion) -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`>?, onPerform: `[`UiInterception`](../-ui-interception/index.md)`<(Interaction, Action) -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`>?, onAll: `[`UiInterception`](../-ui-interception/index.md)`<(Interaction) -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`>?)` |
 
 ### Properties
 
 | Name | Summary |
 |---|---|
-| [onAll](on-all.md) | `val onAll: `[`UiInterception`](../-ui-interception/index.md)`<(Interaction) -> Unit>?` |
-| [onCheck](on-check.md) | `val onCheck: `[`UiInterception`](../-ui-interception/index.md)`<(Interaction, Assertion) -> Unit>?` |
-| [onPerform](on-perform.md) | `val onPerform: `[`UiInterception`](../-ui-interception/index.md)`<(Interaction, Action) -> Unit>?` |
+| [onAll](on-all.md) | `val onAll: `[`UiInterception`](../-ui-interception/index.md)`<(Interaction) -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`>?` |
+| [onCheck](on-check.md) | `val onCheck: `[`UiInterception`](../-ui-interception/index.md)`<(Interaction, Assertion) -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`>?` |
+| [onPerform](on-perform.md) | `val onPerform: `[`UiInterception`](../-ui-interception/index.md)`<(Interaction, Action) -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`>?` |

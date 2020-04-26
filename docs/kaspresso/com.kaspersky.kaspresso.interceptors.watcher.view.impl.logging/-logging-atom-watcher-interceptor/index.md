@@ -16,4 +16,4 @@ The implementation of [AtomWatcherInterceptor](../../com.kaspersky.kaspresso.int
 
 | Name | Summary |
 |---|---|
-| [intercept](intercept.md) | Writes info to [logger](#).`fun intercept(atomProxy: `[`AtomProxy`](../../com.kaspersky.kaspresso.proxy/-atom-proxy/index.md)`<*>, evaluation: Evaluation?): Unit` |
+| [intercept](intercept.md) | Writes info to [logger](#).`fun intercept(atomProxy: `[`AtomProxy`](../../com.kaspersky.kaspresso.proxy/-atom-proxy/index.md)`<*>, evaluation: Evaluation?): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |

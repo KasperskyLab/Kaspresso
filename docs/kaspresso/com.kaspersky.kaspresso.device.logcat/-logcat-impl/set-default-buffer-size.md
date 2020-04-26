@@ -2,7 +2,7 @@
 
 # setDefaultBufferSize
 
-`fun setDefaultBufferSize(): Unit`
+`fun setDefaultBufferSize(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Set default buffer size
 

@@ -10,7 +10,7 @@ The interface to grant any permissions (i.e. signature permissions) unfairly wit
 
 | Name | Summary |
 |---|---|
-| [grant](grant.md) | `abstract fun grant(packageName: String, permission: String): Boolean` |
+| [grant](grant.md) | `abstract fun grant(packageName: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, permission: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html) |
 
 ### Inheritors
 

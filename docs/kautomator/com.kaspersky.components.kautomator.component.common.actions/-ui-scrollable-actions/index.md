@@ -14,9 +14,9 @@
 
 | Name | Summary |
 |---|---|
-| [scrollToEnd](scroll-to-end.md) | `open fun scrollToEnd(): Unit` |
-| [scrollToStart](scroll-to-start.md) | `open fun scrollToStart(): Unit` |
-| [scrollToView](scroll-to-view.md) | `open fun <T> scrollToView(to: `[`UiBaseView`](../../com.kaspersky.components.kautomator.component.common.views/-ui-base-view/index.md)`<T>): Unit` |
+| [scrollToEnd](scroll-to-end.md) | `open fun scrollToEnd(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [scrollToStart](scroll-to-start.md) | `open fun scrollToStart(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [scrollToView](scroll-to-view.md) | `open fun <T> scrollToView(to: `[`UiBaseView`](../../com.kaspersky.components.kautomator.component.common.views/-ui-base-view/index.md)`<T>): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
 
 ### Inheritors
 

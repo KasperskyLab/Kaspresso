@@ -10,7 +10,7 @@ Provides a directory for screenshots of a separate test
 
 | Name | Summary |
 |---|---|
-| [getDirectoryForTest](get-directory-for-test.md) | `abstract fun getDirectoryForTest(testMethod: `[`TestMethod`](../-test-method/index.md)`, runNumber: Int): String` |
+| [getDirectoryForTest](get-directory-for-test.md) | `abstract fun getDirectoryForTest(testMethod: `[`TestMethod`](../-test-method/index.md)`, runNumber: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`): `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html) |
 
 ### Inheritors
 

@@ -2,7 +2,7 @@
 
 # logStackTrace
 
-`fun logStackTrace(error: Throwable): Unit`
+`fun logStackTrace(error: `[`Throwable`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Logs the [error](log-stack-trace.md#com.kaspersky.kaspresso.failure.FailureLoggingProviderImpl$logStackTrace(kotlin.Throwable)/error)'s stacktrace.
 

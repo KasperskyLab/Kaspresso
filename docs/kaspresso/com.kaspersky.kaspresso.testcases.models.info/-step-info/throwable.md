@@ -2,4 +2,4 @@
 
 # throwable
 
-`abstract val throwable: Throwable?`
+`abstract val throwable: `[`Throwable`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html)`?`

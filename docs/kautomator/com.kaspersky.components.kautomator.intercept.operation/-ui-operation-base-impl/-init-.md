@@ -2,4 +2,4 @@
 
 # &lt;init&gt;
 
-`UiOperationBaseImpl(type: `[`UiOperationType`](../-ui-operation-type/index.md)`, description: String?, action: View.() -> Unit)`
+`UiOperationBaseImpl(type: `[`UiOperationType`](../-ui-operation-type/index.md)`, description: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`?, action: View.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`)`

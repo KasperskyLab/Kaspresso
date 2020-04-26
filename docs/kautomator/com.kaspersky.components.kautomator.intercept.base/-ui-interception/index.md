@@ -8,11 +8,11 @@
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | `UiInterception(isOverride: Boolean, interceptor: T)` |
+| [&lt;init&gt;](-init-.md) | `UiInterception(isOverride: `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)`, interceptor: T)` |
 
 ### Properties
 
 | Name | Summary |
 |---|---|
 | [interceptor](interceptor.md) | `val interceptor: T` |
-| [isOverride](is-override.md) | `val isOverride: Boolean` |
+| [isOverride](is-override.md) | `val isOverride: `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html) |
