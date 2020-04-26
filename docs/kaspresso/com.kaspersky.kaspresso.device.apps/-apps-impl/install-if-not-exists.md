@@ -4,8 +4,6 @@
 
 `fun installIfNotExists(packageName: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, apkPath: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
-Overrides [Apps.installIfNotExists](../-apps/install-if-not-exists.md)
-
 Installs an app via ADB only if [packageName](install-if-not-exists.md#com.kaspersky.kaspresso.device.apps.AppsImpl$installIfNotExists(kotlin.String, kotlin.String)/packageName) is not installed
 
 Required Permissions: INTERNET.

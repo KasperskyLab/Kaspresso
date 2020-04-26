@@ -10,10 +10,10 @@ Calls [preferredScreenshotMaker](#) and fallbacks to [fallbackScreenshotMaker](#
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | `CombinedScreenshotMaker(preferredScreenshotMaker: `[`ScreenshotMaker`](../-screenshot-maker/index.md)`, fallbackScreenshotMaker: `[`ScreenshotMaker`](../-screenshot-maker/index.md)`)`<br>Calls [preferredScreenshotMaker](#) and fallbacks to [fallbackScreenshotMaker](#) on fail |
+| [&lt;init&gt;](-init-.md) | Calls [preferredScreenshotMaker](#) and fallbacks to [fallbackScreenshotMaker](#) on fail`CombinedScreenshotMaker(preferredScreenshotMaker: `[`ScreenshotMaker`](../-screenshot-maker/index.md)`, fallbackScreenshotMaker: `[`ScreenshotMaker`](../-screenshot-maker/index.md)`)` |
 
 ### Functions
 
 | Name | Summary |
 |---|---|
-| [takeScreenshot](take-screenshot.md) | `fun takeScreenshot(file: `[`File`](https://developer.android.com/reference/java/io/File.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [takeScreenshot](take-screenshot.md) | `fun takeScreenshot(file: `[`File`](https://docs.oracle.com/javase/6/docs/api/java/io/File.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |

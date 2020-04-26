@@ -10,7 +10,7 @@ Exception throwing in case of incorrect [ComposeProviderImpl.compose](../../com.
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | `ComposeBuilderException(message: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`)`<br>Exception throwing in case of incorrect [ComposeProviderImpl.compose](../../com.kaspersky.kaspresso.compose/-compose-provider-impl/compose.md) expression building |
+| [&lt;init&gt;](-init-.md) | Exception throwing in case of incorrect [ComposeProviderImpl.compose](../../com.kaspersky.kaspresso.compose/-compose-provider-impl/compose.md) expression building`ComposeBuilderException(message: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`)` |
 
 ### Properties
 

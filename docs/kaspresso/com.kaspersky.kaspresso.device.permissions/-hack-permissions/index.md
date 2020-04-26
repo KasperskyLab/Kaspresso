@@ -16,4 +16,4 @@ The interface to grant any permissions (i.e. signature permissions) unfairly wit
 
 | Name | Summary |
 |---|---|
-| [HackPermissionsImpl](../-hack-permissions-impl/index.md) | `class HackPermissionsImpl : `[`HackPermissions`](./index.md)<br>The implementation of the [HackPermissions](./index.md) interface. |
+| [HackPermissionsImpl](../-hack-permissions-impl/index.md) | The implementation of the [HackPermissions](./index.md) interface.`class HackPermissionsImpl : `[`HackPermissions`](./index.md) |

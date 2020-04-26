@@ -2,7 +2,7 @@
 
 # interceptPerform
 
-`abstract fun interceptPerform(interaction: `[`Interaction`](index.md#Interaction)`, action: `[`Action`](index.md#Action)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`abstract fun interceptPerform(interaction: Interaction, action: Action): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Called to do some stuff before [UiInteraction.perform](#) is actually called.
 

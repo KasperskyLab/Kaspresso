@@ -2,4 +2,4 @@
 
 # view
 
-`abstract val view: `[`UiDelegate`](../../com.kaspersky.components.kautomator.intercept.delegate/-ui-delegate/index.md)`<`[`Interaction`](index.md#Interaction)`, `[`Assertion`](index.md#Assertion)`, `[`Action`](index.md#Action)`>`
+`abstract val view: `[`UiDelegate`](../../com.kaspersky.components.kautomator.intercept.delegate/-ui-delegate/index.md)`<Interaction, Assertion, Action>`

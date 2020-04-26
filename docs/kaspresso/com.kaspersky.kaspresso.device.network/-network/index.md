@@ -16,12 +16,12 @@ Methods demanding to use AdbServer in the default implementation of this interfa
 
 | Name | Summary |
 |---|---|
-| [disable](disable.md) | `abstract fun disable(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Disables wi-fi and mobile data using adb. |
-| [enable](enable.md) | `abstract fun enable(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Enables wi-fi and mobile data using adb. |
-| [toggleWiFi](toggle-wi-fi.md) | `abstract fun toggleWiFi(enable: `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Toggles only wi-fi. Note: it works only if flight mode is off. |
+| [disable](disable.md) | Disables wi-fi and mobile data using adb.`abstract fun disable(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [enable](enable.md) | Enables wi-fi and mobile data using adb.`abstract fun enable(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [toggleWiFi](toggle-wi-fi.md) | Toggles only wi-fi. Note: it works only if flight mode is off.`abstract fun toggleWiFi(enable: `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
 
 ### Inheritors
 
 | Name | Summary |
 |---|---|
-| [NetworkImpl](../-network-impl/index.md) | `class NetworkImpl : `[`Network`](./index.md)<br>The implementation of the [Network](./index.md) interface. |
+| [NetworkImpl](../-network-impl/index.md) | The implementation of the [Network](./index.md) interface.`class NetworkImpl : `[`Network`](./index.md) |

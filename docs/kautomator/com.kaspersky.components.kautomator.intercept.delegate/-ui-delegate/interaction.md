@@ -2,4 +2,4 @@
 
 # interaction
 
-`abstract val interaction: `[`Interaction`](index.md#Interaction)
+`abstract val interaction: Interaction`

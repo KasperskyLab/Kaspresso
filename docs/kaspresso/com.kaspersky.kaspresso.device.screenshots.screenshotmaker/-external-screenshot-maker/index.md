@@ -10,10 +10,10 @@ Captures spoon-compatible screenshots by uiautomator.
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | `ExternalScreenshotMaker()`<br>Captures spoon-compatible screenshots by uiautomator. |
+| [&lt;init&gt;](-init-.md) | Captures spoon-compatible screenshots by uiautomator.`ExternalScreenshotMaker()` |
 
 ### Functions
 
 | Name | Summary |
 |---|---|
-| [takeScreenshot](take-screenshot.md) | `fun takeScreenshot(file: `[`File`](https://developer.android.com/reference/java/io/File.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [takeScreenshot](take-screenshot.md) | `fun takeScreenshot(file: `[`File`](https://docs.oracle.com/javase/6/docs/api/java/io/File.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |

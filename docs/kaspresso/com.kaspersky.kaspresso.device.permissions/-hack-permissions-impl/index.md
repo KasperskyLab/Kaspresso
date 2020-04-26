@@ -10,7 +10,7 @@ The implementation of the [HackPermissions](../-hack-permissions/index.md) inter
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | `HackPermissionsImpl(uiAutomation: `[`UiAutomation`](https://developer.android.com/reference/android/app/UiAutomation.html)`, logger: `[`UiTestLogger`](../../com.kaspersky.kaspresso.logger/-ui-test-logger.md)`)`<br>The implementation of the [HackPermissions](../-hack-permissions/index.md) interface. |
+| [&lt;init&gt;](-init-.md) | The implementation of the [HackPermissions](../-hack-permissions/index.md) interface.`HackPermissionsImpl(uiAutomation: `[`UiAutomation`](https://developer.android.com/reference/android/app/UiAutomation.html)`, logger: `[`UiTestLogger`](../../com.kaspersky.kaspresso.logger/-ui-test-logger.md)`)` |
 
 ### Functions
 

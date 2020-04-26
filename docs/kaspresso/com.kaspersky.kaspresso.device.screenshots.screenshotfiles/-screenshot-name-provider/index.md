@@ -16,4 +16,4 @@ Provides names for screenshots
 
 | Name | Summary |
 |---|---|
-| [DefaultScreenshotNameProvider](../-default-screenshot-name-provider/index.md) | `class DefaultScreenshotNameProvider : `[`ScreenshotNameProvider`](./index.md)<br>Default implementation of [ScreenshotFileProvider](#) If [addTimestamps](#) is true it adds timestamps to names like that "1570158949869_ScreenshotSampleTest_step_1.png" |
+| [DefaultScreenshotNameProvider](../-default-screenshot-name-provider/index.md) | Default implementation of [ScreenshotFileProvider](#) If [addTimestamps](#) is true it adds timestamps to names like that "1570158949869_ScreenshotSampleTest_step_1.png"`class DefaultScreenshotNameProvider : `[`ScreenshotNameProvider`](./index.md) |

@@ -23,6 +23,7 @@ internal class UiInvocationHandler(
 
         UiThreadStatement.runOnUiThread {
             try {
+                @Suppress("SpreadOperator")
                 result = method(target, *(args ?: emptyArray()))
             } catch (e: Exception) {
                 val ex = if (e is InvocationTargetException) e.cause else e

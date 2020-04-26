@@ -2,7 +2,7 @@
 
 # UiScreen
 
-`abstract class UiScreen<out T : `[`UiScreen`](./index.md)`<`[`T`](index.md#T)`>> : `[`UiScreenActions`](../-ui-screen-actions/index.md)
+`abstract class UiScreen<out T : `[`UiScreen`](./index.md)`<T>> : `[`UiScreenActions`](../-ui-screen-actions/index.md)
 
 Container class for UiAutomator elements.
 
@@ -21,25 +21,19 @@ such as pressBack
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | `UiScreen()`<br>Container class for UiAutomator elements. |
+| [&lt;init&gt;](-init-.md) | Container class for UiAutomator elements.`UiScreen()` |
 
 ### Properties
 
 | Name | Summary |
 |---|---|
 | [packageName](package-name.md) | `abstract val packageName: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html) |
-| [view](view.md) | `open val view: `[`UiDeviceInteractionDelegate`](../../com.kaspersky.components.kautomator.intercept.delegate/-ui-device-interaction-delegate/index.md)<br>UiDeviceDelegate on which all actions are performed |
+| [view](view.md) | UiDeviceDelegate on which all actions are performed`open val view: `[`UiDeviceInteractionDelegate`](../../com.kaspersky.components.kautomator.intercept.delegate/-ui-device-interaction-delegate/index.md) |
 
 ### Functions
 
 | Name | Summary |
 |---|---|
-| [intercept](intercept.md) | `fun intercept(configurator: `[`UiInterceptor.Configurator`](../../com.kaspersky.components.kautomator.intercept.base/-ui-interceptor/-configurator/index.md)`.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Sets the interceptors for the screen. Interceptors will be invoked on all interactions while the screen is active. |
-| [invoke](invoke.md) | `operator fun invoke(function: `[`T`](index.md#T)`.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Operator that allows usage of DSL style |
-| [reset](reset.md) | `fun reset(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Removes the interceptors from the screen. |
-
-### Inherited Functions
-
-| Name | Summary |
-|---|---|
-| [pressBack](../-ui-screen-actions/press-back.md) | `open fun pressBack(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Simulates a short press on the BACK button. |
+| [intercept](intercept.md) | Sets the interceptors for the screen. Interceptors will be invoked on all interactions while the screen is active.`fun intercept(configurator: Configurator.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [invoke](invoke.md) | Operator that allows usage of DSL style`operator fun invoke(function: T.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [reset](reset.md) | Removes the interceptors from the screen.`fun reset(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |

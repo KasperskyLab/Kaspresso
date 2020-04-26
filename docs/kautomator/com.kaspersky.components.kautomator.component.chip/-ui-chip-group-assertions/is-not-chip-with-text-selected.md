@@ -8,7 +8,7 @@ Checks if chip with given text is not selected
 
 ### Parameters
 
-`text` - Chip text`open fun isNotChipWithTextSelected(pattern: `[`Pattern`](https://developer.android.com/reference/java/util/regex/Pattern.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`text` - Chip text`open fun isNotChipWithTextSelected(pattern: `[`Pattern`](https://docs.oracle.com/javase/6/docs/api/java/util/regex/Pattern.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Checks if chip with given text pattern is not selected
 

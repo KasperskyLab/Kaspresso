@@ -16,4 +16,4 @@ Provides a directory for screenshots of a separate test
 
 | Name | Summary |
 |---|---|
-| [DefaultScreenshotDirectoryProvider](../-default-screenshot-directory-provider/index.md) | `class DefaultScreenshotDirectoryProvider : `[`ScreenshotDirectoryProvider`](./index.md)<br>Default implementation of [ScreenshotDirectoryProvider](./index.md) If [groupByRunNumbers](#) is true it groups screenshots by run numbers of tests. It allows to save all screenshots of a test running several times per the same suite. |
+| [DefaultScreenshotDirectoryProvider](../-default-screenshot-directory-provider/index.md) | Default implementation of [ScreenshotDirectoryProvider](./index.md) If [groupByRunNumbers](#) is true it groups screenshots by run numbers of tests. It allows to save all screenshots of a test running several times per the same suite.`class DefaultScreenshotDirectoryProvider : `[`ScreenshotDirectoryProvider`](./index.md) |

@@ -14,4 +14,4 @@ Required: Started AdbServer
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | `RequiresAdbServer()`<br>Special annotation to mark methods or classes that require AdbServer to be started for execution |
+| [&lt;init&gt;](-init-.md) | Special annotation to mark methods or classes that require AdbServer to be started for execution`RequiresAdbServer()` |

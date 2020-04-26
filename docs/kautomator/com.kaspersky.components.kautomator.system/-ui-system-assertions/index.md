@@ -18,7 +18,7 @@ Provides basic assertions that can be checked everywhere
 
 | Name | Summary |
 |---|---|
-| [view](view.md) | `abstract val view: `[`UiDeviceInteractionDelegate`](../../com.kaspersky.components.kautomator.intercept.delegate/-ui-device-interaction-delegate/index.md)<br>UiDeviceDelegate on which all actions are checked |
+| [view](view.md) | UiDeviceDelegate on which all actions are checked`abstract val view: `[`UiDeviceInteractionDelegate`](../../com.kaspersky.components.kautomator.intercept.delegate/-ui-device-interaction-delegate/index.md) |
 
 ### Functions
 
@@ -30,4 +30,4 @@ Provides basic assertions that can be checked everywhere
 
 | Name | Summary |
 |---|---|
-| [UiSystem](../-ui-system/index.md) | `object UiSystem : `[`UiSystemActions`](../-ui-system-actions/index.md)`, `[`UiSystemAssertions`](./index.md)`, `[`UiInterceptable`](../../com.kaspersky.components.kautomator.intercept.base/-ui-interceptable/index.md)`<`[`UiDeviceInteraction`](../../com.kaspersky.components.kautomator.intercept.interaction/-ui-device-interaction/index.md)`, `[`UiDeviceAssertion`](../../com.kaspersky.components.kautomator.intercept.operation/-ui-device-assertion.md)`, `[`UiDeviceAction`](../../com.kaspersky.components.kautomator.intercept.operation/-ui-device-action.md)`>`<br>Container class for UiAutomator action and assertions executing in the UiSystem. |
+| [UiSystem](../-ui-system/index.md) | Container class for UiAutomator action and assertions executing in the UiSystem.`object UiSystem : `[`UiSystemActions`](../-ui-system-actions/index.md)`, `[`UiSystemAssertions`](./index.md)`, `[`UiInterceptable`](../../com.kaspersky.components.kautomator.intercept.base/-ui-interceptable/index.md)`<`[`UiDeviceInteraction`](../../com.kaspersky.components.kautomator.intercept.interaction/-ui-device-interaction/index.md)`, `[`UiDeviceAssertion`](../../com.kaspersky.components.kautomator.intercept.operation/-ui-device-assertion.md)`, `[`UiDeviceAction`](../../com.kaspersky.components.kautomator.intercept.operation/-ui-device-action.md)`>` |

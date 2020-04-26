@@ -4,8 +4,6 @@
 
 `fun remove(path: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
-Overrides [Files.remove](../-files/remove.md)
-
 Removes a file by given path.
 
 Required Permissions: INTERNET

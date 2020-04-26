@@ -16,4 +16,4 @@ The interface that allows implementations of [Screenshots](../-screenshots/index
 
 | Name | Summary |
 |---|---|
-| [ScreenshotsImpl](../-screenshots-impl/index.md) | `class ScreenshotsImpl : `[`Screenshots`](../-screenshots/index.md)`, `[`ScreenshotTestStartListener`](./index.md)<br>The implementation of the [Screenshots](../-screenshots/index.md) interface. |
+| [ScreenshotsImpl](../-screenshots-impl/index.md) | The implementation of the [Screenshots](../-screenshots/index.md) interface.`class ScreenshotsImpl : `[`Screenshots`](../-screenshots/index.md)`, `[`ScreenshotTestStartListener`](./index.md) |

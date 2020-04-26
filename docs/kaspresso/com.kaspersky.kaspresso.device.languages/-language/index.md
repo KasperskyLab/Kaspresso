@@ -10,10 +10,10 @@ The interface to work with languages
 
 | Name | Summary |
 |---|---|
-| [switchInApp](switch-in-app.md) | `abstract fun switchInApp(locale: `[`Locale`](https://developer.android.com/reference/java/util/Locale.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Switches language only in the current Application (not in OS!). Please, keep in mind the following fact: If you have switched languages then you need to refresh current screen to get the screen with new language! Also, don't forget to restore the previous language if you don't clean the state of the Application after each test. |
+| [switchInApp](switch-in-app.md) | Switches language only in the current Application (not in OS!). Please, keep in mind the following fact: If you have switched languages then you need to refresh current screen to get the screen with new language! Also, don't forget to restore the previous language if you don't clean the state of the Application after each test.`abstract fun switchInApp(locale: `[`Locale`](https://docs.oracle.com/javase/6/docs/api/java/util/Locale.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
 
 ### Inheritors
 
 | Name | Summary |
 |---|---|
-| [LanguageImpl](../-language-impl/index.md) | `class LanguageImpl : `[`Language`](./index.md)<br>The implementation of [Language](./index.md) |
+| [LanguageImpl](../-language-impl/index.md) | The implementation of [Language](./index.md)`class LanguageImpl : `[`Language`](./index.md) |

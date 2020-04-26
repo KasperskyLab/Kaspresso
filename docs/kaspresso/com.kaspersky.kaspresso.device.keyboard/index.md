@@ -6,5 +6,5 @@
 
 | Name | Summary |
 |---|---|
-| [Keyboard](-keyboard/index.md) | `interface Keyboard`<br>Use this API only if neither Espresso, nor UiAutomator work for some reasons. E.g. because of animations. |
-| [KeyboardImpl](-keyboard-impl/index.md) | `class KeyboardImpl : `[`Keyboard`](-keyboard/index.md)<br>The implementation of the [Keyboard](-keyboard/index.md) interface. |
+| [Keyboard](-keyboard/index.md) | Use this API only if neither Espresso, nor UiAutomator work for some reasons. E.g. because of animations.`interface Keyboard` |
+| [KeyboardImpl](-keyboard-impl/index.md) | The implementation of the [Keyboard](-keyboard/index.md) interface.`class KeyboardImpl : `[`Keyboard`](-keyboard/index.md) |

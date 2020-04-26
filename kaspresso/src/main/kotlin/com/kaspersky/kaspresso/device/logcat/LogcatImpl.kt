@@ -181,6 +181,7 @@ class LogcatImpl(
         val logcatFile = File("$logcatFilePath/logcat_dump_$id.txt")
         adbServer.performShell("logcat -b ${buffer.bufferName} -d > ${logcatFile.absolutePath} ")
         try {
+            @Suppress("LoopWithTooManyJumpStatements")
             for (logRow in logcatFile.readLines()) {
                 if (excludePattern != null && logRow.contains(excludePattern)) continue
                 if (includePattern != null && !logRow.contains(includePattern)) continue
@@ -197,7 +198,6 @@ class LogcatImpl(
     /**
      * Prepare logcat command for execution over "sh -c COMMAND"
      */
-    @Suppress("LongParameterList")
     private fun prepareCommand(
         excludePattern: String?,
         excludePatternIsIgnoreCase: Boolean,

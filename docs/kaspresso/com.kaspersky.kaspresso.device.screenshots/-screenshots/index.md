@@ -10,10 +10,10 @@ The interface to make screenshots.
 
 | Name | Summary |
 |---|---|
-| [take](take.md) | `abstract fun take(tag: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Takes screenshot if it is possible. |
+| [take](take.md) | Takes screenshot if it is possible.`abstract fun take(tag: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
 
 ### Inheritors
 
 | Name | Summary |
 |---|---|
-| [ScreenshotsImpl](../-screenshots-impl/index.md) | `class ScreenshotsImpl : `[`Screenshots`](./index.md)`, `[`ScreenshotTestStartListener`](../-screenshot-test-start-listener/index.md)<br>The implementation of the [Screenshots](./index.md) interface. |
+| [ScreenshotsImpl](../-screenshots-impl/index.md) | The implementation of the [Screenshots](./index.md) interface.`class ScreenshotsImpl : `[`Screenshots`](./index.md)`, `[`ScreenshotTestStartListener`](../-screenshot-test-start-listener/index.md) |

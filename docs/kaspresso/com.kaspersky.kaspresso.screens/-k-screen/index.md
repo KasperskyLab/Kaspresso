@@ -2,7 +2,7 @@
 
 # KScreen
 
-`abstract class KScreen<out T : `[`KScreen`](./index.md)`<`[`T`](index.md#T)`>> : Screen<`[`T`](index.md#T)`>`
+`abstract class KScreen<out T : `[`KScreen`](./index.md)`<T>> : Screen<T>`
 
 ### Constructors
 
@@ -15,4 +15,4 @@
 | Name | Summary |
 |---|---|
 | [layoutId](layout-id.md) | `abstract val layoutId: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`?` |
-| [viewClass](view-class.md) | `abstract val viewClass: `[`Class`](https://developer.android.com/reference/java/lang/Class.html)`<*>?` |
+| [viewClass](view-class.md) | `abstract val viewClass: `[`Class`](https://docs.oracle.com/javase/6/docs/api/java/lang/Class.html)`<*>?` |

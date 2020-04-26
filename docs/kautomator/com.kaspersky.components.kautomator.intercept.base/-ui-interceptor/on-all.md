@@ -2,4 +2,4 @@
 
 # onAll
 
-`val onAll: `[`UiInterception`](../-ui-interception/index.md)`<(`[`Interaction`](index.md#Interaction)`) -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`>?`
+`val onAll: `[`UiInterception`](../-ui-interception/index.md)`<(Interaction) -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`>?`

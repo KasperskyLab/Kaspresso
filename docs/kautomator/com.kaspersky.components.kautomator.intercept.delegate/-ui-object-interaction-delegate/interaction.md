@@ -3,6 +3,3 @@
 # interaction
 
 `val interaction: `[`UiObjectInteraction`](../../com.kaspersky.components.kautomator.intercept.interaction/-ui-object-interaction/index.md)
-
-Overrides [UiDelegate.interaction](../-ui-delegate/interaction.md)
-

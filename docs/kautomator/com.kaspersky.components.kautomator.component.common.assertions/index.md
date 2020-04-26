@@ -6,5 +6,5 @@
 
 | Name | Summary |
 |---|---|
-| [DisplayedObjectAssertion](-displayed-object-assertion/index.md) | `class DisplayedObjectAssertion : `[`UiOperation`](../com.kaspersky.components.kautomator.intercept.operation/-ui-operation/index.md)`<UiObject2>`<br>Special separate Assertion to determine UiAutomator View is displayed or not |
-| [UiBaseAssertions](-ui-base-assertions/index.md) | `interface UiBaseAssertions`<br>Base interface for asserting UiAutomator views |
+| [DisplayedObjectAssertion](-displayed-object-assertion/index.md) | Special separate Assertion to determine UiAutomator View is displayed or not`class DisplayedObjectAssertion : `[`UiOperation`](../com.kaspersky.components.kautomator.intercept.operation/-ui-operation/index.md)`<UiObject2>` |
+| [UiBaseAssertions](-ui-base-assertions/index.md) | Base interface for asserting UiAutomator views`interface UiBaseAssertions` |

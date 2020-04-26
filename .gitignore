@@ -16,7 +16,7 @@
 bin/
 gen/
 out/
-static_analysis/reports
+static-analysis/reports
 
 # Gradle files
 .gradle/

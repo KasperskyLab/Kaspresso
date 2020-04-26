@@ -3,6 +3,3 @@
 # onTestStarted
 
 `fun onTestStarted(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
-
-Overrides [ScreenshotTestStartListener.onTestStarted](../-screenshot-test-start-listener/on-test-started.md)
-

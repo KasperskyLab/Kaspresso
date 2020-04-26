@@ -2,4 +2,4 @@
 
 # interceptor
 
-`val interceptor: `[`T`](index.md#T)
+`val interceptor: T`

@@ -10,13 +10,13 @@ Captures the view of a current activity
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | `InternalScreenshotMaker(activities: `[`Activities`](../../com.kaspersky.kaspresso.device.activities/-activities/index.md)`)`<br>Captures the view of a current activity |
+| [&lt;init&gt;](-init-.md) | Captures the view of a current activity`InternalScreenshotMaker(activities: `[`Activities`](../../com.kaspersky.kaspresso.device.activities/-activities/index.md)`)` |
 
 ### Functions
 
 | Name | Summary |
 |---|---|
-| [takeScreenshot](take-screenshot.md) | `fun takeScreenshot(file: `[`File`](https://developer.android.com/reference/java/io/File.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [takeScreenshot](take-screenshot.md) | `fun takeScreenshot(file: `[`File`](https://docs.oracle.com/javase/6/docs/api/java/io/File.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
 
 ### Companion Object Properties
 

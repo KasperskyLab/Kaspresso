@@ -10,12 +10,12 @@ Creates and saves a screenshot
 
 | Name | Summary |
 |---|---|
-| [takeScreenshot](take-screenshot.md) | `abstract fun takeScreenshot(file: `[`File`](https://developer.android.com/reference/java/io/File.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [takeScreenshot](take-screenshot.md) | `abstract fun takeScreenshot(file: `[`File`](https://docs.oracle.com/javase/6/docs/api/java/io/File.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
 
 ### Inheritors
 
 | Name | Summary |
 |---|---|
-| [CombinedScreenshotMaker](../-combined-screenshot-maker/index.md) | `class CombinedScreenshotMaker : `[`ScreenshotMaker`](./index.md)<br>Calls [preferredScreenshotMaker](#) and fallbacks to [fallbackScreenshotMaker](#) on fail |
-| [ExternalScreenshotMaker](../-external-screenshot-maker/index.md) | `class ExternalScreenshotMaker : `[`ScreenshotMaker`](./index.md)<br>Captures spoon-compatible screenshots by uiautomator. |
-| [InternalScreenshotMaker](../-internal-screenshot-maker/index.md) | `class InternalScreenshotMaker : `[`ScreenshotMaker`](./index.md)<br>Captures the view of a current activity |
+| [CombinedScreenshotMaker](../-combined-screenshot-maker/index.md) | Calls [preferredScreenshotMaker](#) and fallbacks to [fallbackScreenshotMaker](#) on fail`class CombinedScreenshotMaker : `[`ScreenshotMaker`](./index.md) |
+| [ExternalScreenshotMaker](../-external-screenshot-maker/index.md) | Captures spoon-compatible screenshots by uiautomator.`class ExternalScreenshotMaker : `[`ScreenshotMaker`](./index.md) |
+| [InternalScreenshotMaker](../-internal-screenshot-maker/index.md) | Captures the view of a current activity`class InternalScreenshotMaker : `[`ScreenshotMaker`](./index.md) |

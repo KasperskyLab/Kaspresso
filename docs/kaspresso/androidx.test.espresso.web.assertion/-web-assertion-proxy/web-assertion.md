@@ -2,4 +2,4 @@
 
 # webAssertion
 
-`val webAssertion: WebAssertion<`[`E`](index.md#E)`>`
+`val webAssertion: WebAssertion<E>`

@@ -8,7 +8,7 @@ Selects a chip with given text
 
 ### Parameters
 
-`text` - Chip text to match`open fun selectChipWithText(pattern: `[`Pattern`](https://developer.android.com/reference/java/util/regex/Pattern.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`text` - Chip text to match`open fun selectChipWithText(pattern: `[`Pattern`](https://docs.oracle.com/javase/6/docs/api/java/util/regex/Pattern.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Selects a chip with give text pattern
 

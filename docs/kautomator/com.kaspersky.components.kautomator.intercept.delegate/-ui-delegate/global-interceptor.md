@@ -2,4 +2,4 @@
 
 # globalInterceptor
 
-`abstract fun globalInterceptor(): `[`UiInterceptor`](../../com.kaspersky.components.kautomator.intercept.base/-ui-interceptor/index.md)`<`[`Interaction`](index.md#Interaction)`, `[`Assertion`](index.md#Assertion)`, `[`Action`](index.md#Action)`>?`
+`abstract fun globalInterceptor(): `[`UiInterceptor`](../../com.kaspersky.components.kautomator.intercept.base/-ui-interceptor/index.md)`<Interaction, Assertion, Action>?`

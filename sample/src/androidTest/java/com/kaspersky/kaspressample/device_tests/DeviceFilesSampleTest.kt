@@ -2,7 +2,6 @@ package com.kaspersky.kaspressample.device_tests
 
 import android.Manifest
 import android.os.Environment
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspressample.MainActivity
@@ -13,14 +12,12 @@ import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
 
 /**
  * Pushes and then removes a file file placed at /artifacts directory.
  * [Files.push] uses the [FILE_PATH] relative path to push the file.
  * So, you should run the server with command `cd /absolute/path/to/project/directory & java -jar artifacts/desktop.jar`
  */
-@RunWith(AndroidJUnit4::class)
 class DeviceFilesSampleTest : TestCase() {
 
     companion object {

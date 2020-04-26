@@ -3,7 +3,6 @@ package com.kaspersky.kaspressample.device_tests
 import android.Manifest
 import android.net.ConnectivityManager
 import android.net.wifi.WifiManager
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
 import com.agoda.kakao.screen.Screen
@@ -14,9 +13,7 @@ import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
 
-@RunWith(AndroidJUnit4::class)
 class DeviceInternetSampleTest : TestCase() {
 
     companion object {

@@ -3,6 +3,3 @@
 # targetAppLauncherPackageName
 
 `val targetAppLauncherPackageName: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)
-
-Overrides [Apps.targetAppLauncherPackageName](../-apps/target-app-launcher-package-name.md)
-

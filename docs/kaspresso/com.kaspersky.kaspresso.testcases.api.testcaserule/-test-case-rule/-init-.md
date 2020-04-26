@@ -2,7 +2,7 @@
 
 # &lt;init&gt;
 
-`TestCaseRule(testClassName: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, kaspressoBuilder: `[`Kaspresso.Builder`](../../com.kaspersky.kaspresso.kaspresso/-kaspresso/-builder/index.md)` = Kaspresso.Builder.simple())`
+`TestCaseRule(testClassName: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, kaspressoBuilder: Builder = Kaspresso.Builder.simple())`
 
 The base class for all test cases. Extend this class with a single base project-wide inheritor of
 [com.kaspersky.kaspresso.testcases.api.testcase.TestCase](../../com.kaspersky.kaspresso.testcases.api.testcase/-test-case/index.md) as a parent for all actual project-wide test cases.

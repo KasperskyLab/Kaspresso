@@ -4,8 +4,6 @@
 
 `fun getResumed(): `[`Activity`](https://developer.android.com/reference/android/app/Activity.html)`?`
 
-Overrides [Activities.getResumed](../-activities/get-resumed.md)
-
 Finds and returns resumed activity if it exists, otherwise logs error.
 
 **Return**

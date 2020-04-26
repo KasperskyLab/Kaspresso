@@ -6,6 +6,6 @@
 
 | Name | Summary |
 |---|---|
-| [ActionsOnElementsPack](-actions-on-elements-pack/index.md) | `class ActionsOnElementsPack`<br>The builder class for parameters of [com.kaspersky.kaspresso.compose.ComposeProvider.compose](../com.kaspersky.kaspresso.compose/-compose-provider/compose.md) method. |
-| [ActionsOnWebElementsPack](-actions-on-web-elements-pack/index.md) | `class ActionsOnWebElementsPack`<br>The builder class for parameters of [com.kaspersky.kaspresso.compose.WebComposeProvider.compose](../com.kaspersky.kaspresso.compose/-web-compose-provider/compose.md) method. |
-| [ActionsPack](-actions-pack/index.md) | `class ActionsPack<T>`<br>The builder class for parameters of [com.kaspersky.kaspresso.compose.ComposeProvider.compose](../com.kaspersky.kaspresso.compose/-compose-provider/compose.md) and [com.kaspersky.kaspresso.compose.WebComposeProvider.compose](../com.kaspersky.kaspresso.compose/-web-compose-provider/compose.md)] methods. |
+| [ActionsOnElementsPack](-actions-on-elements-pack/index.md) | The builder class for parameters of [com.kaspersky.kaspresso.compose.ComposeProvider.compose](../com.kaspersky.kaspresso.compose/-compose-provider/compose.md) method.`class ActionsOnElementsPack` |
+| [ActionsOnWebElementsPack](-actions-on-web-elements-pack/index.md) | The builder class for parameters of [com.kaspersky.kaspresso.compose.WebComposeProvider.compose](../com.kaspersky.kaspresso.compose/-web-compose-provider/compose.md) method.`class ActionsOnWebElementsPack` |
+| [ActionsPack](-actions-pack/index.md) | The builder class for parameters of [com.kaspersky.kaspresso.compose.ComposeProvider.compose](../com.kaspersky.kaspresso.compose/-compose-provider/compose.md) and [com.kaspersky.kaspresso.compose.WebComposeProvider.compose](../com.kaspersky.kaspresso.compose/-web-compose-provider/compose.md)] methods.`class ActionsPack<T>` |

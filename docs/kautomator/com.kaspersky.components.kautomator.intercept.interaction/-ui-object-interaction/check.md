@@ -3,6 +3,3 @@
 # check
 
 `fun check(assertion: `[`UiObjectAssertion`](../../com.kaspersky.components.kautomator.intercept.operation/-ui-object-assertion.md)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
-
-Overrides [UiInteraction.check](../-ui-interaction/check.md)
-

@@ -2,9 +2,7 @@
 
 # clickOn
 
-`fun clickOn(button: `[`Permissions.Button`](../-permissions/-button/index.md)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
-
-Overrides [Permissions.clickOn](../-permissions/click-on.md)
+`fun clickOn(button: Button): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Waits for 1 sec, passes the permission-requesting permissions dialog
 

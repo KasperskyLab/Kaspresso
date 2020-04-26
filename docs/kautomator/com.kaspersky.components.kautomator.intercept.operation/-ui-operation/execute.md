@@ -2,4 +2,4 @@
 
 # execute
 
-`abstract fun execute(innerView: `[`View`](index.md#View)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`abstract fun execute(innerView: View): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)

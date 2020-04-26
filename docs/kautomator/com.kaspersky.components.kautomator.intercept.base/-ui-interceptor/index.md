@@ -42,20 +42,20 @@ onPerform?.invoke()
 
 | Name | Summary |
 |---|---|
-| [Builder](-builder/index.md) | `class Builder<Interaction, Assertion, Action>`<br>Builder class that is used to build a single instance of [UiInterceptor](./index.md). |
+| [Builder](-builder/index.md) | Builder class that is used to build a single instance of [UiInterceptor](./index.md).`class Builder<Interaction, Assertion, Action>` |
 | [Configuration](-configuration/index.md) | `data class Configuration` |
-| [Configurator](-configurator/index.md) | `class Configurator`<br>Configuration class that is used for building interceptors on the [KautomatorConfigurator](../../com.kaspersky.components.kautomator/-kautomator-configurator/index.md) runtime and [UiScreens](#) levels. |
+| [Configurator](-configurator/index.md) | Configuration class that is used for building interceptors on the [KautomatorConfigurator](../../com.kaspersky.components.kautomator/-kautomator-configurator/index.md) runtime and [UiScreens](#) levels.`class Configurator` |
 
 ### Constructors
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | `UiInterceptor(onCheck: `[`UiInterception`](../-ui-interception/index.md)`<(`[`Interaction`](index.md#Interaction)`, `[`Assertion`](index.md#Assertion)`) -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`>?, onPerform: `[`UiInterception`](../-ui-interception/index.md)`<(`[`Interaction`](index.md#Interaction)`, `[`Action`](index.md#Action)`) -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`>?, onAll: `[`UiInterception`](../-ui-interception/index.md)`<(`[`Interaction`](index.md#Interaction)`) -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`>?)`<br>Base class for intercepting the call chain from Kautomator to UiAutomator. |
+| [&lt;init&gt;](-init-.md) | Base class for intercepting the call chain from Kautomator to UiAutomator.`UiInterceptor(onCheck: `[`UiInterception`](../-ui-interception/index.md)`<(Interaction, Assertion) -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`>?, onPerform: `[`UiInterception`](../-ui-interception/index.md)`<(Interaction, Action) -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`>?, onAll: `[`UiInterception`](../-ui-interception/index.md)`<(Interaction) -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`>?)` |
 
 ### Properties
 
 | Name | Summary |
 |---|---|
-| [onAll](on-all.md) | `val onAll: `[`UiInterception`](../-ui-interception/index.md)`<(`[`Interaction`](index.md#Interaction)`) -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`>?` |
-| [onCheck](on-check.md) | `val onCheck: `[`UiInterception`](../-ui-interception/index.md)`<(`[`Interaction`](index.md#Interaction)`, `[`Assertion`](index.md#Assertion)`) -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`>?` |
-| [onPerform](on-perform.md) | `val onPerform: `[`UiInterception`](../-ui-interception/index.md)`<(`[`Interaction`](index.md#Interaction)`, `[`Action`](index.md#Action)`) -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`>?` |
+| [onAll](on-all.md) | `val onAll: `[`UiInterception`](../-ui-interception/index.md)`<(Interaction) -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`>?` |
+| [onCheck](on-check.md) | `val onCheck: `[`UiInterception`](../-ui-interception/index.md)`<(Interaction, Assertion) -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`>?` |
+| [onPerform](on-perform.md) | `val onPerform: `[`UiInterception`](../-ui-interception/index.md)`<(Interaction, Action) -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`>?` |

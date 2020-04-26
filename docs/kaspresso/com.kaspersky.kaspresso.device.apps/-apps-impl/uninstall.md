@@ -4,8 +4,6 @@
 
 `fun uninstall(packageName: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
-Overrides [Apps.uninstall](../-apps/uninstall.md)
-
 Uninstalls an app via ADB.
 
 Required Permissions: INTERNET.

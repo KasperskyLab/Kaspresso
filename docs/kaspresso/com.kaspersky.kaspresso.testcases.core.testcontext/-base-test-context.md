@@ -12,4 +12,4 @@ implementing [FlakySafetyProvider](../com.kaspersky.kaspresso.flakysafety/-flaky
 
 | Name | Summary |
 |---|---|
-| [TestContext](-test-context/index.md) | `class TestContext<Data> : `[`BaseTestContext`](./-base-test-context.md)<br>The special class to operate with in user scenario. Provides [step](-test-context/step.md) and [scenario](-test-context/scenario.md) methods in "run" section to build a test. |
+| [TestContext](-test-context/index.md) | The special class to operate with in user scenario. Provides [step](-test-context/step.md) and [scenario](-test-context/scenario.md) methods in "run" section to build a test.`class TestContext<Data> : `[`BaseTestContext`](./-base-test-context.md) |

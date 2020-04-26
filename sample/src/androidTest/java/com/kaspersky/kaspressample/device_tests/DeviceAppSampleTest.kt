@@ -1,7 +1,6 @@
 package com.kaspersky.kaspressample.device_tests
 
 import android.Manifest
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspressample.MainActivity
@@ -12,14 +11,12 @@ import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
 
 /**
  * Installs and then uninstalls an apk file placed at /artifacts directory.
  * [Apps.install] uses the [TEST_APK_FILE_RELATIVE_PATH] relative path to install the apk.
  * So, you should run the server with command `cd /absolute/path/to/project/directory & java -jar artifacts/desktop.jar`
  */
-@RunWith(AndroidJUnit4::class)
 class DeviceAppSampleTest : TestCase() {
 
     companion object {

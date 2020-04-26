@@ -10,11 +10,11 @@ The interface to work with activities.
 
 | Name | Summary |
 |---|---|
-| [getResumed](get-resumed.md) | `abstract fun getResumed(): `[`Activity`](https://developer.android.com/reference/android/app/Activity.html)`?`<br>Finds and returns resumed activity if it exists. |
-| [isCurrent](is-current.md) | `abstract fun isCurrent(clazz: `[`Class`](https://developer.android.com/reference/java/lang/Class.html)`<out `[`Activity`](https://developer.android.com/reference/android/app/Activity.html)`>): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Checks if passed activity is resumed. |
+| [getResumed](get-resumed.md) | Finds and returns resumed activity if it exists.`abstract fun getResumed(): `[`Activity`](https://developer.android.com/reference/android/app/Activity.html)`?` |
+| [isCurrent](is-current.md) | Checks if passed activity is resumed.`abstract fun isCurrent(clazz: `[`Class`](https://docs.oracle.com/javase/6/docs/api/java/lang/Class.html)`<out `[`Activity`](https://developer.android.com/reference/android/app/Activity.html)`>): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
 
 ### Inheritors
 
 | Name | Summary |
 |---|---|
-| [ActivitiesImpl](../-activities-impl/index.md) | `class ActivitiesImpl : `[`Activities`](./index.md)<br>The implementation of the [Activities](./index.md) interface. |
+| [ActivitiesImpl](../-activities-impl/index.md) | The implementation of the [Activities](./index.md) interface.`class ActivitiesImpl : `[`Activities`](./index.md) |

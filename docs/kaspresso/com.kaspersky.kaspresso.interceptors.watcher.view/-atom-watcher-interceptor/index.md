@@ -10,10 +10,10 @@ The interface for all atom interceptors, used in [com.kaspersky.kaspresso.proxy.
 
 | Name | Summary |
 |---|---|
-| [intercept](intercept.md) | `abstract fun intercept(atomProxy: `[`AtomProxy`](../../com.kaspersky.kaspresso.proxy/-atom-proxy/index.md)`<*>, evaluation: Evaluation?): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Called to do some stuff before [androidx.test.espresso.web.model.Atom.transform](#) is actually called. |
+| [intercept](intercept.md) | Called to do some stuff before [androidx.test.espresso.web.model.Atom.transform](#) is actually called.`abstract fun intercept(atomProxy: `[`AtomProxy`](../../com.kaspersky.kaspresso.proxy/-atom-proxy/index.md)`<*>, evaluation: Evaluation?): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
 
 ### Inheritors
 
 | Name | Summary |
 |---|---|
-| [LoggingAtomWatcherInterceptor](../../com.kaspersky.kaspresso.interceptors.watcher.view.impl.logging/-logging-atom-watcher-interceptor/index.md) | `class LoggingAtomWatcherInterceptor : `[`AtomWatcherInterceptor`](./index.md)<br>The implementation of [AtomWatcherInterceptor](./index.md) that logs info about web action. |
+| [LoggingAtomWatcherInterceptor](../../com.kaspersky.kaspresso.interceptors.watcher.view.impl.logging/-logging-atom-watcher-interceptor/index.md) | The implementation of [AtomWatcherInterceptor](./index.md) that logs info about web action.`class LoggingAtomWatcherInterceptor : `[`AtomWatcherInterceptor`](./index.md) |

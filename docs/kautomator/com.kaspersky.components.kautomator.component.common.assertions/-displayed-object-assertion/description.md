@@ -3,6 +3,3 @@
 # description
 
 `val description: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`?`
-
-Overrides [UiOperation.description](../../com.kaspersky.components.kautomator.intercept.operation/-ui-operation/description.md)
-

@@ -10,12 +10,12 @@ The implementation of the [Phone](../-phone/index.md) interface.
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | `PhoneImpl(adbServer: `[`AdbServer`](../../com.kaspersky.kaspresso.device.server/-adb-server/index.md)`)`<br>The implementation of the [Phone](../-phone/index.md) interface. |
+| [&lt;init&gt;](-init-.md) | The implementation of the [Phone](../-phone/index.md) interface.`PhoneImpl(adbServer: `[`AdbServer`](../../com.kaspersky.kaspresso.device.server/-adb-server/index.md)`)` |
 
 ### Functions
 
 | Name | Summary |
 |---|---|
-| [cancelCall](cancel-call.md) | `fun cancelCall(number: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Cancels incoming call. |
-| [emulateCall](emulate-call.md) | `fun emulateCall(number: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Emulates incoming call. |
-| [receiveSms](receive-sms.md) | `fun receiveSms(number: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, text: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Emulates receiving an SMS from [number](receive-sms.md#com.kaspersky.kaspresso.device.phone.PhoneImpl$receiveSms(kotlin.String, kotlin.String)/number). |
+| [cancelCall](cancel-call.md) | Cancels incoming call.`fun cancelCall(number: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [emulateCall](emulate-call.md) | Emulates incoming call.`fun emulateCall(number: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [receiveSms](receive-sms.md) | Emulates receiving an SMS from [number](receive-sms.md#com.kaspersky.kaspresso.device.phone.PhoneImpl$receiveSms(kotlin.String, kotlin.String)/number).`fun receiveSms(number: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, text: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |

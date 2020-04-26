@@ -8,7 +8,7 @@ Matches the view with given resource name
 
 ### Parameters
 
-`name` - Resource name to match`fun withResourceName(pattern: `[`Pattern`](https://developer.android.com/reference/java/util/regex/Pattern.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`name` - Resource name to match`fun withResourceName(pattern: `[`Pattern`](https://docs.oracle.com/javase/6/docs/api/java/util/regex/Pattern.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Matches the view with given resource name
 

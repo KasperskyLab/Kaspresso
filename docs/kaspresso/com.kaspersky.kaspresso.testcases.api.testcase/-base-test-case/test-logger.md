@@ -3,6 +3,3 @@
 # testLogger
 
 `open val testLogger: `[`UiTestLogger`](../../com.kaspersky.kaspresso.logger/-ui-test-logger.md)
-
-Overrides [TestAssistantsProvider.testLogger](../../com.kaspersky.kaspresso.testcases.core.testassistants/-test-assistants-provider/test-logger.md)
-

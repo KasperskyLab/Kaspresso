@@ -12,7 +12,7 @@ running several times per the same suite.
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | `DefaultScreenshotDirectoryProvider(groupByRunNumbers: `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)`)`<br>Default implementation of [ScreenshotDirectoryProvider](../-screenshot-directory-provider/index.md) If [groupByRunNumbers](#) is true it groups screenshots by run numbers of tests. It allows to save all screenshots of a test running several times per the same suite. |
+| [&lt;init&gt;](-init-.md) | Default implementation of [ScreenshotDirectoryProvider](../-screenshot-directory-provider/index.md) If [groupByRunNumbers](#) is true it groups screenshots by run numbers of tests. It allows to save all screenshots of a test running several times per the same suite.`DefaultScreenshotDirectoryProvider(groupByRunNumbers: `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)`)` |
 
 ### Functions
 

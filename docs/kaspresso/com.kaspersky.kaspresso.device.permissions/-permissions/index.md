@@ -16,13 +16,13 @@ The interface to work with permissions fairly by real permission dialogs.
 
 | Name | Summary |
 |---|---|
-| [allowViaDialog](allow-via-dialog.md) | `abstract fun allowViaDialog(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Passes the permission-requesting permissions dialog and allows permissions. |
-| [clickOn](click-on.md) | `abstract fun clickOn(button: `[`Permissions.Button`](-button/index.md)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Passes the permission-requesting permissions dialog |
-| [denyViaDialog](deny-via-dialog.md) | `abstract fun denyViaDialog(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Passes the permission-requesting permissions dialog and denies permissions. |
-| [isDialogVisible](is-dialog-visible.md) | `abstract fun isDialogVisible(): `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)<br>Check the permission-requesting permissions dialog is visible. |
+| [allowViaDialog](allow-via-dialog.md) | Passes the permission-requesting permissions dialog and allows permissions.`abstract fun allowViaDialog(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [clickOn](click-on.md) | Passes the permission-requesting permissions dialog`abstract fun clickOn(button: Button): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [denyViaDialog](deny-via-dialog.md) | Passes the permission-requesting permissions dialog and denies permissions.`abstract fun denyViaDialog(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [isDialogVisible](is-dialog-visible.md) | Check the permission-requesting permissions dialog is visible.`abstract fun isDialogVisible(): `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html) |
 
 ### Inheritors
 
 | Name | Summary |
 |---|---|
-| [PermissionsImpl](../-permissions-impl/index.md) | `class PermissionsImpl : `[`Permissions`](./index.md)<br>The implementation of the [Permissions](./index.md) interface. |
+| [PermissionsImpl](../-permissions-impl/index.md) | The implementation of the [Permissions](./index.md) interface.`class PermissionsImpl : `[`Permissions`](./index.md) |

@@ -6,4 +6,4 @@
 
 | Name | Summary |
 |---|---|
-| [Device](-device/index.md) | `data class Device`<br>The provider of managers for all off-screen work. |
+| [Device](-device/index.md) | The provider of managers for all off-screen work.`data class Device` |

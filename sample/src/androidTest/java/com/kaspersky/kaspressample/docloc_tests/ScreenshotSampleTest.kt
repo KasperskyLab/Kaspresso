@@ -1,7 +1,6 @@
 package com.kaspersky.kaspressample.docloc_tests
 
 import android.Manifest
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
 import com.agoda.kakao.screen.Screen
@@ -12,13 +11,11 @@ import com.kaspersky.kaspresso.testcases.api.testcase.DocLocScreenshotTestCase
 import java.io.File
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
 
 /**
  * An example of [DocLocScreenshotTestCase] usage.
  * For more information see DocLoc wiki page.
  */
-@RunWith(AndroidJUnit4::class)
 class ScreenshotSampleTest : DocLocScreenshotTestCase(
     screenshotsDirectory = File("screenshots"),
     locales = "en,ru"

@@ -4,8 +4,6 @@
 
 `fun interceptPerform(interaction: UiObjectInteraction, action: UiObjectAction): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
-Overrides [KautomatorWatcherInterceptor.interceptPerform](../../com.kaspersky.kaspresso.interceptors.watcher.kautomator/-kautomator-watcher-interceptor/intercept-perform.md)
-
 Writes info to [logger](#).
 
 ### Parameters

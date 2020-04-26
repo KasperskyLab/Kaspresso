@@ -2,7 +2,7 @@
 
 # default
 
-`fun ~~default~~(customize: `[`Kaspresso.Builder`](index.md)`.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)` = {}): `[`Kaspresso.Builder`](index.md)
+`fun ~~default~~(customize: Builder.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)` = {}): Builder`
 **Deprecated:** Use `advanced()` builder.
 
 Default (preconfigured full-featured with screenshot functionality) [Builder](index.md) for test environment configuration.

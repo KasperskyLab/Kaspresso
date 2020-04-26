@@ -2,7 +2,7 @@
 
 # transform
 
-`fun transform(evaluation: Evaluation?): `[`T`](index.md#T)
+`fun transform(evaluation: Evaluation?): T`
 
 Calls watcher interceptors before [Atom.transform](#) on wrapped [atom](atom.md) is called.
 

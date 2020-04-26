@@ -4,8 +4,6 @@
 
 `fun sendEvent(keyEvent: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
-Overrides [Keyboard.sendEvent](../-keyboard/send-event.md)
-
 Sends a key event.
 Use constants from [KeyEvent](https://developer.android.com/reference/android/view/KeyEvent.html) to get the code.
 

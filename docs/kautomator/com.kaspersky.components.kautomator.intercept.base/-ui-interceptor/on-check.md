@@ -2,4 +2,4 @@
 
 # onCheck
 
-`val onCheck: `[`UiInterception`](../-ui-interception/index.md)`<(`[`Interaction`](index.md#Interaction)`, `[`Assertion`](index.md#Assertion)`) -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`>?`
+`val onCheck: `[`UiInterception`](../-ui-interception/index.md)`<(Interaction, Assertion) -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`>?`

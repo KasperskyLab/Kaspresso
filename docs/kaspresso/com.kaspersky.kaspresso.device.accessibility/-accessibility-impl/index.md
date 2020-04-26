@@ -10,11 +10,11 @@ The implementation of the [Accessibility](../-accessibility/index.md) interface.
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | `AccessibilityImpl()`<br>The implementation of the [Accessibility](../-accessibility/index.md) interface. |
+| [&lt;init&gt;](-init-.md) | The implementation of the [Accessibility](../-accessibility/index.md) interface.`AccessibilityImpl()` |
 
 ### Functions
 
 | Name | Summary |
 |---|---|
-| [disable](disable.md) | `fun disable(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Disables accessibility. Available since api 24. |
-| [enable](enable.md) | `fun enable(packageName: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, className: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Enables accessibility. Available since api 24. |
+| [disable](disable.md) | Disables accessibility. Available since api 24.`fun disable(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [enable](enable.md) | Enables accessibility. Available since api 24.`fun enable(packageName: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, className: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |

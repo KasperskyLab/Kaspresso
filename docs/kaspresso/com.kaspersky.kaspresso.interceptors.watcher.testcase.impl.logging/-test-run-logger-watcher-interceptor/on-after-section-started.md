@@ -4,8 +4,6 @@
 
 `fun onAfterSectionStarted(testInfo: `[`TestInfo`](../../com.kaspersky.kaspresso.testcases.models.info/-test-info/index.md)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
-Overrides [TestRunWatcherInterceptor.onAfterSectionStarted](../../com.kaspersky.kaspresso.interceptors.watcher.testcase/-test-run-watcher-interceptor/on-after-section-started.md)
-
 Logs the given [testInfo](on-after-section-started.md#com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.logging.TestRunLoggerWatcherInterceptor$onAfterSectionStarted(com.kaspersky.kaspresso.testcases.models.info.TestInfo)/testInfo) on "after" section starts.
 
 ### Parameters

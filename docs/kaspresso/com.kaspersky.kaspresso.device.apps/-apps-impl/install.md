@@ -4,8 +4,6 @@
 
 `fun install(apkPath: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
-Overrides [Apps.install](../-apps/install.md)
-
 Installs an app via ADB.
 
 Required Permissions: INTERNET.

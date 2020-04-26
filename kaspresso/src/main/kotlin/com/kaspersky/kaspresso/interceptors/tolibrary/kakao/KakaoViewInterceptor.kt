@@ -17,7 +17,7 @@ internal class KakaoViewInterceptor(
     private val viewBehaviorInterceptors: List<ViewBehaviorInterceptor>,
     private val viewActionWatcherInterceptors: List<ViewActionWatcherInterceptor>,
     private val viewAssertionWatcherInterceptors: List<ViewAssertionWatcherInterceptor>
-) : LibraryInterceptor<ViewInteraction, ViewAssertion, ViewAction>() {
+) : LibraryInterceptor<ViewInteraction, ViewAssertion, ViewAction> {
 
     /**
      * Folds all [ViewBehaviorInterceptor]'s one into another in the order from the first to the last with the actual

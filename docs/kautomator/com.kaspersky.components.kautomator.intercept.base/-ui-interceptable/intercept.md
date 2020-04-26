@@ -2,7 +2,7 @@
 
 # intercept
 
-`open fun intercept(builder: `[`UiInterceptor.Builder`](../-ui-interceptor/-builder/index.md)`<`[`Interaction`](index.md#Interaction)`, `[`Assertion`](index.md#Assertion)`, `[`Action`](index.md#Action)`>.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`open fun intercept(builder: Builder<Interaction, Assertion, Action>.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Sets the interceptors for the instance.
 Interceptors will be invoked on the interaction with the UiView.

@@ -1,6 +1,0 @@
-include':kaspresso',
-        ':sample',
-        ':allure-model',
-        ':kautomator',
-        ':sample_upgrade_tests',
-        ':sample_kautomator'

@@ -4,8 +4,6 @@
 
 `fun interceptCheck(interaction: UiDeviceInteraction, assertion: UiDeviceAssertion): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
-Overrides [KautomatorWatcherInterceptor.interceptCheck](../../com.kaspersky.kaspresso.interceptors.watcher.kautomator/-kautomator-watcher-interceptor/intercept-check.md)
-
 Writes info to [logger](#).
 
 ### Parameters

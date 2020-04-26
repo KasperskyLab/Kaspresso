@@ -2,7 +2,7 @@
 
 # withAutoScroll
 
-`abstract fun <T> withAutoScroll(interaction: `[`Interaction`](index.md#Interaction)`, action: () -> `[`T`](with-auto-scroll.md#T)`): `[`T`](with-auto-scroll.md#T)
+`abstract fun <T> withAutoScroll(interaction: Interaction, action: () -> T): T`
 
 Invokes the given [action](with-auto-scroll.md#com.kaspersky.kaspresso.autoscroll.AutoScrollProvider$withAutoScroll(com.kaspersky.kaspresso.autoscroll.AutoScrollProvider.Interaction, kotlin.Function0((com.kaspersky.kaspresso.autoscroll.AutoScrollProvider.withAutoScroll.T)))/action) and calls [scroll](scroll.md) if it fails. Helps in cases when test fails because of the
 need to scroll to interacted view.

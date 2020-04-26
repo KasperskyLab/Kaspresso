@@ -13,7 +13,7 @@ import com.kaspersky.kaspresso.interceptors.watcher.kautomator.ObjectWatcherInte
 internal class KautomatorObjectInterceptor(
     private val objectBehaviorInterceptors: List<ObjectBehaviorInterceptor>,
     private val objectWatcherInterceptors: List<ObjectWatcherInterceptor>
-) : LibraryInterceptor<UiObjectInteraction, UiObjectAssertion, UiObjectAction>() {
+) : LibraryInterceptor<UiObjectInteraction, UiObjectAssertion, UiObjectAction> {
 
     /**
      * Folds all [ObjectBehaviorInterceptor]'s one into another in the order from the first to the last with the actual

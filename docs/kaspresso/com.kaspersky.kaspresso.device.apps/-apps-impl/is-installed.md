@@ -4,8 +4,6 @@
 
 `fun isInstalled(packageName: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)
 
-Overrides [Apps.isInstalled](../-apps/is-installed.md)
-
 Checks app is installed on device
 
 ### Parameters

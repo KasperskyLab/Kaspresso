@@ -2,7 +2,7 @@
 
 # withLoggingOnFailure
 
-`abstract fun <T> withLoggingOnFailure(action: () -> `[`T`](with-logging-on-failure.md#T)`): `[`T`](with-logging-on-failure.md#T)
+`abstract fun <T> withLoggingOnFailure(action: () -> T): T`
 
 Invokes the given [action](with-logging-on-failure.md#com.kaspersky.kaspresso.failure.FailureLoggingProvider$withLoggingOnFailure(kotlin.Function0((com.kaspersky.kaspresso.failure.FailureLoggingProvider.withLoggingOnFailure.T)))/action) and logs if it fails.
 

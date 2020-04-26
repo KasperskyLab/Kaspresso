@@ -4,8 +4,6 @@
 
 `fun setBufferSize(size: `[`LogcatBufferSize`](../-logcat-buffer-size/index.md)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
-Overrides [Logcat.setBufferSize](../-logcat/set-buffer-size.md)
-
 Set new logcat buffer size
 
 ### Parameters

@@ -6,6 +6,6 @@
 
 | Name | Summary |
 |---|---|
-| [StepWatcherInterceptor](-step-watcher-interceptor/index.md) | `interface StepWatcherInterceptor`<br>The interface for all interceptors intercepting step events. |
-| [TestContextHolder](-test-context-holder/index.md) | `interface TestContextHolder`<br>Holder of BaseTestContext |
-| [TestRunWatcherInterceptor](-test-run-watcher-interceptor/index.md) | `interface TestRunWatcherInterceptor : `[`TestContextHolder`](-test-context-holder/index.md)<br>The interface for all interceptors intercepting test run events. |
+| [StepWatcherInterceptor](-step-watcher-interceptor/index.md) | The interface for all interceptors intercepting step events.`interface StepWatcherInterceptor` |
+| [TestContextHolder](-test-context-holder/index.md) | Holder of BaseTestContext`interface TestContextHolder` |
+| [TestRunWatcherInterceptor](-test-run-watcher-interceptor/index.md) | The interface for all interceptors intercepting test run events.`interface TestRunWatcherInterceptor : `[`TestContextHolder`](-test-context-holder/index.md) |

@@ -10,4 +10,4 @@ The exception is thrown in case if UiObject2 is not found on the screen
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | `UnfoundedUiObjectException(selector: `[`UiViewSelector`](../../com.kaspersky.components.kautomator.component.common.builders/-ui-view-selector/index.md)`)`<br>The exception is thrown in case if UiObject2 is not found on the screen |
+| [&lt;init&gt;](-init-.md) | The exception is thrown in case if UiObject2 is not found on the screen`UnfoundedUiObjectException(selector: `[`UiViewSelector`](../../com.kaspersky.components.kautomator.component.common.builders/-ui-view-selector/index.md)`)` |

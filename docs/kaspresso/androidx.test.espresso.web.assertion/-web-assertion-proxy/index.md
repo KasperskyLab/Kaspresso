@@ -2,7 +2,7 @@
 
 # WebAssertionProxy
 
-`class WebAssertionProxy<E> : WebAssertion<`[`E`](index.md#E)`>`
+`class WebAssertionProxy<E> : WebAssertion<E>`
 
 A proxy-wrapper of [WebAssertion](#) for [watcherInterceptors](#) calls.
 
@@ -13,17 +13,17 @@ in the same package.
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | `WebAssertionProxy(webAssertion: WebAssertion<`[`E`](index.md#E)`>, matcher: Matcher<*>, watcherInterceptors: `[`List`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)`<`[`WebAssertionWatcherInterceptor`](../../com.kaspersky.kaspresso.interceptors.watcher.view/-web-assertion-watcher-interceptor/index.md)`>)`<br>A proxy-wrapper of [WebAssertion](#) for [watcherInterceptors](#) calls. |
+| [&lt;init&gt;](-init-.md) | A proxy-wrapper of [WebAssertion](#) for [watcherInterceptors](#) calls.`WebAssertionProxy(webAssertion: WebAssertion<E>, matcher: Matcher<*>, watcherInterceptors: `[`List`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)`<`[`WebAssertionWatcherInterceptor`](../../com.kaspersky.kaspresso.interceptors.watcher.view/-web-assertion-watcher-interceptor/index.md)`>)` |
 
 ### Properties
 
 | Name | Summary |
 |---|---|
 | [matcher](matcher.md) | `val matcher: Matcher<*>` |
-| [webAssertion](web-assertion.md) | `val webAssertion: WebAssertion<`[`E`](index.md#E)`>` |
+| [webAssertion](web-assertion.md) | `val webAssertion: WebAssertion<E>` |
 
 ### Functions
 
 | Name | Summary |
 |---|---|
-| [checkResult](check-result.md) | `fun checkResult(view: `[`WebView`](https://developer.android.com/reference/android/webkit/WebView.html)`?, result: `[`E`](index.md#E)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Calls [watcherInterceptors](#) before [WebViewAssertions.ResultCheckingWebAssertion.checkResult](#) on wrapped [webAssertion](web-assertion.md) is called. |
+| [checkResult](check-result.md) | Calls [watcherInterceptors](#) before [WebViewAssertions.ResultCheckingWebAssertion.checkResult](#) on wrapped [webAssertion](web-assertion.md) is called.`fun checkResult(view: `[`WebView`](https://developer.android.com/reference/android/webkit/WebView.html)`?, result: E): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |

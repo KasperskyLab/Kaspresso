@@ -18,16 +18,16 @@ Provides basic actions that can be performed on each and every screen
 
 | Name | Summary |
 |---|---|
-| [view](view.md) | `abstract val view: `[`UiDeviceInteractionDelegate`](../../com.kaspersky.components.kautomator.intercept.delegate/-ui-device-interaction-delegate/index.md)<br>UiDeviceDelegate on which all actions are performed |
+| [view](view.md) | UiDeviceDelegate on which all actions are performed`abstract val view: `[`UiDeviceInteractionDelegate`](../../com.kaspersky.components.kautomator.intercept.delegate/-ui-device-interaction-delegate/index.md) |
 
 ### Functions
 
 | Name | Summary |
 |---|---|
-| [pressBack](press-back.md) | `open fun pressBack(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Simulates a short press on the BACK button. |
+| [pressBack](press-back.md) | Simulates a short press on the BACK button.`open fun pressBack(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
 
 ### Inheritors
 
 | Name | Summary |
 |---|---|
-| [UiScreen](../-ui-screen/index.md) | `abstract class UiScreen<out T : `[`UiScreen`](../-ui-screen/index.md)`<`[`T`](../-ui-screen/index.md#T)`>> : `[`UiScreenActions`](./index.md)<br>Container class for UiAutomator elements. |
+| [UiScreen](../-ui-screen/index.md) | Container class for UiAutomator elements.`abstract class UiScreen<out T : `[`UiScreen`](../-ui-screen/index.md)`<T>> : `[`UiScreenActions`](./index.md) |

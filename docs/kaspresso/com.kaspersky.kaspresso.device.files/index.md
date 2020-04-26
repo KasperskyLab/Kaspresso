@@ -6,5 +6,5 @@
 
 | Name | Summary |
 |---|---|
-| [Files](-files/index.md) | `interface Files`<br>The interface to work with file permissions. |
-| [FilesImpl](-files-impl/index.md) | `class FilesImpl : `[`Files`](-files/index.md)<br>The implementation of the [Files](-files/index.md) interface. |
+| [Files](-files/index.md) | The interface to work with file permissions.`interface Files` |
+| [FilesImpl](-files-impl/index.md) | The implementation of the [Files](-files/index.md) interface.`class FilesImpl : `[`Files`](-files/index.md) |

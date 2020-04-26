@@ -3,6 +3,3 @@
 # targetAppPackageName
 
 `val targetAppPackageName: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)
-
-Overrides [Apps.targetAppPackageName](../-apps/target-app-package-name.md)
-

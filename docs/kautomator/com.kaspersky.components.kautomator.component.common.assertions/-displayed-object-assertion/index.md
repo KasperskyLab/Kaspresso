@@ -17,7 +17,7 @@ Special separate Assertion to determine UiAutomator View is displayed or not
 | Name | Summary |
 |---|---|
 | [description](description.md) | `val description: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`?` |
-| [type](type.md) | `val type: `[`DisplayedObjectAssertion.UiDisplayedAssertionType`](-ui-displayed-assertion-type/index.md) |
+| [type](type.md) | `val type: UiDisplayedAssertionType` |
 
 ### Functions
 

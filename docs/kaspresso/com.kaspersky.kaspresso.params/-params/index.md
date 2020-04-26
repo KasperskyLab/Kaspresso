@@ -10,7 +10,7 @@ The facade class for all Kaspresso parameters.
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | `Params(flakySafetyParams: `[`FlakySafetyParams`](../-flaky-safety-params/index.md)`, continuouslyParams: `[`ContinuouslyParams`](../-continuously-params/index.md)`, autoScrollParams: `[`AutoScrollParams`](../-auto-scroll-params/index.md)`, stepParams: `[`StepParams`](../-step-params/index.md)`)`<br>The facade class for all Kaspresso parameters. |
+| [&lt;init&gt;](-init-.md) | The facade class for all Kaspresso parameters.`Params(flakySafetyParams: `[`FlakySafetyParams`](../-flaky-safety-params/index.md)`, continuouslyParams: `[`ContinuouslyParams`](../-continuously-params/index.md)`, autoScrollParams: `[`AutoScrollParams`](../-auto-scroll-params/index.md)`, stepParams: `[`StepParams`](../-step-params/index.md)`)` |
 
 ### Properties
 

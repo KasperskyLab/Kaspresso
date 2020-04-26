@@ -18,7 +18,7 @@ internal class KakaoWebInterceptor(
     private val webBehaviorInterceptors: List<WebBehaviorInterceptor>,
     private val webAssertionWatcherInterceptors: List<WebAssertionWatcherInterceptor>,
     private val atomWatcherInterceptors: List<AtomWatcherInterceptor>
-) : LibraryInterceptor<Web.WebInteraction<*>, WebAssertion<*>, Atom<*>>() {
+) : LibraryInterceptor<Web.WebInteraction<*>, WebAssertion<*>, Atom<*>> {
 
     /**
      * Folds all [Web.WebInteraction]'s one into another in the order from the first to the last with the actual

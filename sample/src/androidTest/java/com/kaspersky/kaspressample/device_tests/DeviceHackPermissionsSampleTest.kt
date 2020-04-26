@@ -3,7 +3,6 @@ package com.kaspersky.kaspressample.device_tests
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Build
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspressample.device.DeviceSampleActivity
@@ -13,7 +12,6 @@ import org.junit.Assert.assertTrue
 import org.junit.Assume.assumeTrue
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
 
 /**
  * Attention please!
@@ -22,7 +20,6 @@ import org.junit.runner.RunWith
  * to reset permissions granted before.
  * It's needed measure because of AndroidJUnit Runner specific that doesn't reset state of app between tests.
  */
-@RunWith(AndroidJUnit4::class)
 class DeviceHackPermissionsSampleTest : TestCase() {
 
     @get:Rule

@@ -4,8 +4,6 @@
 
 `fun enable(packageName: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, className: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
-Overrides [Accessibility.enable](../-accessibility/enable.md)
-
 Enables accessibility. Available since api 24.
 
 ### Parameters

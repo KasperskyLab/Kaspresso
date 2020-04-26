@@ -2,4 +2,4 @@
 
 # viewClass
 
-`abstract val viewClass: `[`Class`](https://developer.android.com/reference/java/lang/Class.html)`<*>?`
+`abstract val viewClass: `[`Class`](https://docs.oracle.com/javase/6/docs/api/java/lang/Class.html)`<*>?`

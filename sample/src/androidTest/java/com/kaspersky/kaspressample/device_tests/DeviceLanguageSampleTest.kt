@@ -1,7 +1,6 @@
 package com.kaspersky.kaspressample.device_tests
 
 import android.Manifest
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspressample.MainActivity
@@ -10,9 +9,7 @@ import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import java.util.Locale
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
 
-@RunWith(AndroidJUnit4::class)
 class DeviceLanguageSampleTest : TestCase() {
 
     @get:Rule
