@@ -13,7 +13,7 @@ import com.kaspersky.kaspresso.interceptors.watcher.kautomator.DeviceWatcherInte
 internal class KautomatorDeviceInterceptor(
     private val deviceBehaviorInterceptors: List<DeviceBehaviorInterceptor>,
     private val deviceWatcherInterceptors: List<DeviceWatcherInterceptor>
-) : LibraryInterceptor<UiDeviceInteraction, UiDeviceAssertion, UiDeviceAction>() {
+) : LibraryInterceptor<UiDeviceInteraction, UiDeviceAssertion, UiDeviceAction> {
 
     /**
      * Folds all [DeviceBehaviorInterceptor]'s one into another in the order from the first to the last with the actual

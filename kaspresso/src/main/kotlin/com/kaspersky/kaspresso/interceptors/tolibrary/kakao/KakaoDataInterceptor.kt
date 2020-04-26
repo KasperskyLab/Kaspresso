@@ -14,7 +14,7 @@ import com.kaspersky.kaspresso.proxy.DataAssertionProxy
 internal class KakaoDataInterceptor(
     private val dataBehaviorInterceptors: List<DataBehaviorInterceptor>,
     private val viewAssertionWatcherInterceptors: List<ViewAssertionWatcherInterceptor>
-) : LibraryInterceptor<DataInteraction, ViewAssertion, ViewAction>() {
+) : LibraryInterceptor<DataInteraction, ViewAssertion, ViewAction> {
 
     /**
      * Folds all [DataBehaviorInterceptor]'s one into another in the order from the first to the last with the actual
