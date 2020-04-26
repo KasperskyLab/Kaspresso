@@ -15,12 +15,12 @@ private const val UNSPECIFIED_DEPENDENCY = "unspecified"
 private const val DEPENDENCY_GROUP = "groupId"
 private const val DEPENDENCY_ARTIFACT = "artifactId"
 private const val DEPENDENCY_VERSION = "version"
+private const val DEPENDENCY_KAUTOMATOR = "kautomator"
 
 private const val PROPERTY_VERSION = "stableVersion"
 private const val PROPERTY_GROUP_ID = "publish.artifactGroup"
 
 fun PublishingExtension.setup(project: Project) {
-
     publications {
         create(project.name, MavenPublication::class.java) {
             project.afterEvaluate {
@@ -41,7 +41,12 @@ fun PublishingExtension.setup(project: Project) {
                     project.configurations.getByName(DEPENDENCIES_CONFIGURATION).allDependencies.forEach {
                         if (it.name != UNSPECIFIED_DEPENDENCY && it.version != null) {
                             val dependencyNode = dependenciesNode.appendNode(NODE_DEPENDENCY)
-                            dependencyNode.appendNode(DEPENDENCY_GROUP, it.group)
+
+                            if (it.name != DEPENDENCY_KAUTOMATOR) { // TODO: Move to project settings
+                                dependencyNode.appendNode(DEPENDENCY_GROUP, it.group)
+                            } else {
+                                dependencyNode.appendNode(DEPENDENCY_GROUP, groupId)
+                            }
                             dependencyNode.appendNode(DEPENDENCY_ARTIFACT, it.name)
                             dependencyNode.appendNode(DEPENDENCY_VERSION, it.version)
                         }
