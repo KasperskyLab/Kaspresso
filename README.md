@@ -2,7 +2,7 @@
 [![Android Weekly](https://img.shields.io/badge/Android%20Weekly-383-green.svg)](http://androidweekly.net/issues/issue-383)
 [![Android Weekly](https://img.shields.io/badge/Android%20Weekly-392-green.svg)](http://androidweekly.net/issues/issue-392)
 [![Download](https://api.bintray.com/packages/ruslanmingaliev/Kaspresso/Kaspresso/images/download.svg?version=1.1.0) ](https://bintray.com/ruslanmingaliev/Kaspresso/Kaspresso/1.1.0/link)
-[![CircleCI](https://circleci.com/gh/KasperskyLab/Kaspresso.svg?style=svg)](https://circleci.com/gh/KasperskyLab/Kaspresso)
+[![CircleCI](https://circleci.com/gh/KasperskyLab/Kaspresso.svg?style=shield)](https://circleci.com/gh/KasperskyLab/Kaspresso)
 
 # Kaspresso
 
