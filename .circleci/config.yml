@@ -16,6 +16,12 @@ jobs:
           name: Run Tests
           command: ./gradlew test
       - run:
+          name: Save test results
+          command: |
+            mkdir -p ~/test-results/junit/
+            find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/test-results/junit/ \;
+          when: always
+      - run:
           name: Run Code Analysis
           command: ./gradlew detekt
       - run:
@@ -28,7 +34,7 @@ jobs:
           path: kautomator/build/reports
           destination: reports/kautomator
       - store_test_results:
-          path: kaspresso/build/test-results
+          path: ~/test-results
   deploy:
     working_directory: ~/code
     docker:
@@ -69,8 +75,8 @@ workflows:
   main_workflow:
     jobs:
       - analyze
-      - deploy #:
-#          filters:
-#            branches:
-#              only:
-#                - master
+      - deploy:
+          filters:
+            branches:
+              only:
+                - master
