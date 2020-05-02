@@ -51,11 +51,11 @@ jobs:
           name: Build
           command: ./gradlew assemble
       - run:
-          name: Deploy Kautomator
-          command: ./gradlew :kautomator:artifactoryPublish
-      - run:
           name: Deploy Kaspresso
           command: ./gradlew :kaspresso:artifactoryPublish
+      - run:
+          name: Deploy Kautomator
+          command: ./gradlew :kautomator:artifactoryPublish
       - store_artifacts:
           path: kautomator/build/reports
           destination: reports/kautomator
@@ -69,4 +69,8 @@ workflows:
   main_workflow:
     jobs:
       - analyze
-      - deploy
+#      - deploy:
+#          filters:
+#            branches:
+#              only:
+#                - master
