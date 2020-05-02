@@ -54,25 +54,8 @@ jobs:
             echo $'\n'bintraykey=$bintraykey >> ${HOME}/.gradle/gradle.properties
             echo $'\n'artifactoryPassword=$artifactoryPassword >> ${HOME}/.gradle/gradle.properties
       - run:
-          name: Clean
-          command: ./gradlew clean
-      - run:
-          name: Deploy Kaspresso
-          command: ./gradlew :kaspresso:artifactoryPublish
-      - run:
-          name: Clean
-          command: ./gradlew clean
-      - run:
           name: Deploy Kautomator
-          command: ./gradlew :kautomator:artifactoryPublish
-      - store_artifacts:
-          path: kautomator/build/reports
-          destination: reports/kautomator
-      - store_artifacts:
-          path: kaspresso/build/reports
-          destination: reports/kaspresso
-      - store_test_results:
-          path: kaspresso/build/test-results
+          command: ./gradlew artifactoryPublish
 workflows:
   version: 2
   main_workflow:
