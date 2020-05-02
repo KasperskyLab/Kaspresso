@@ -54,15 +54,15 @@ jobs:
             echo $'\n'bintraykey=$bintraykey >> ${HOME}/.gradle/gradle.properties
             echo $'\n'artifactoryPassword=$artifactoryPassword >> ${HOME}/.gradle/gradle.properties
       - run:
-          name: Deploy Kautomator
+          name: Deploy
           command: ./gradlew artifactoryPublish
 workflows:
   version: 2
   main_workflow:
     jobs:
       - analyze
-      - deploy #:
-#          filters:
-#            branches:
-#              only:
-#                - master
+      - deploy:
+          filters:
+            branches:
+              only:
+                - master
