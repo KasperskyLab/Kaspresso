@@ -69,8 +69,4 @@ workflows:
   main_workflow:
     jobs:
       - analyze
-      - deploy:
-          filters:
-            branches:
-              only:
-                - master
+      - deploy
