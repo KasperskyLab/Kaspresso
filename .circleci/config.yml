@@ -54,11 +54,14 @@ jobs:
             echo $'\n'bintraykey=$bintraykey >> ${HOME}/.gradle/gradle.properties
             echo $'\n'artifactoryPassword=$artifactoryPassword >> ${HOME}/.gradle/gradle.properties
       - run:
-          name: Build
-          command: ./gradlew assemble
+          name: Clean
+          command: ./gradlew clean
       - run:
           name: Deploy Kaspresso
           command: ./gradlew :kaspresso:artifactoryPublish
+      - run:
+          name: Clean
+          command: ./gradlew clean
       - run:
           name: Deploy Kautomator
           command: ./gradlew :kautomator:artifactoryPublish
@@ -75,8 +78,8 @@ workflows:
   main_workflow:
     jobs:
       - analyze
-      - deploy:
-          filters:
-            branches:
-              only:
-                - master
+      - deploy #:
+#          filters:
+#            branches:
+#              only:
+#                - master
