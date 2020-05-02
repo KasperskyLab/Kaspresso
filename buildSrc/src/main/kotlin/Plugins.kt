@@ -34,3 +34,6 @@ val PluginDependenciesSpec.bintray: PluginDependencySpec
 
 val PluginDependenciesSpec.mavenPublish: PluginDependencySpec
         get() = `maven-publish`
+
+val PluginDependenciesSpec.artifactory: PluginDependencySpec
+        get() = id("com.jfrog.artifactory") version Dependencies.Versions.artifactory

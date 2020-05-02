@@ -1,5 +1,7 @@
-import groovy.xml.QName
+import groovy.lang.GroovyObject
+import org.jfrog.gradle.plugin.artifactory.dsl.PublisherConfig
 import publishing.setup
+import publishing.shouldBePublished
 
 buildscript {
 
@@ -24,6 +26,7 @@ plugins {
     detekt
     mavenPublish
     bintray
+    artifactory
 }
 
 subprojects {
@@ -47,9 +50,10 @@ subprojects {
         }
     }
 
-    if (name == "kaspresso" || name == "kautomator") {
-        apply(plugin = "maven-publish")
-        apply(plugin = "com.jfrog.bintray")
+    if (shouldBePublished) {
+        apply(plugin = Dependencies.Publishing.mavenPlugin)
+        apply(plugin = Dependencies.Publishing.bintrayPlugin)
+        apply(plugin = Dependencies.Publishing.artifactoryPlugin)
 
         publishing {
             setup(this@subprojects)
@@ -69,6 +73,35 @@ subprojects {
             }
 
             version = findProperty("stableVersion").toString()
+        }
+
+        artifactory {
+            publish(delegateClosureOf<PublisherConfig> {
+                setContextUrl("https://oss.jfrog.org/artifactory")
+                repository(delegateClosureOf<GroovyObject> {
+                    setProperty("repoKey", "oss-snapshot-local")
+                    setProperty("username", findProperty("bintrayuser").toString())
+                    setProperty("password", findProperty("artifactoryPassword").toString())
+                    setProperty("maven", true)
+                })
+
+                defaults(delegateClosureOf<GroovyObject> {
+                    invokeMethod("publications", "${this@subprojects.name}Snapshot")
+                    setProperty("publishArtifacts", true)
+                    setProperty("publishPom", true)
+                })
+            })
+
+            resolve(delegateClosureOf<GroovyObject> {
+                setProperty("repoKey", "libs-snapshot")
+                setProperty("username", findProperty("bintrayuser").toString())
+                setProperty("password", findProperty("artifactoryPassword").toString())
+                setProperty("maven", true)
+            })
+        }
+
+        tasks.named("artifactoryPublish") {
+            dependsOn(":${this@subprojects.name}:assemble")
         }
     }
 }
