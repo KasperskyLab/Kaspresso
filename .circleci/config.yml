@@ -69,7 +69,7 @@ workflows:
   main_workflow:
     jobs:
       - analyze
-#      - deploy:
+      - deploy #:
 #          filters:
 #            branches:
 #              only:
