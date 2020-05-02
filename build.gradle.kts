@@ -78,6 +78,7 @@ subprojects {
         artifactory {
             publish(delegateClosureOf<PublisherConfig> {
                 setContextUrl("https://oss.jfrog.org/artifactory")
+
                 repository(delegateClosureOf<GroovyObject> {
                     setProperty("repoKey", "oss-snapshot-local")
                     setProperty("username", findProperty("bintrayuser").toString())
