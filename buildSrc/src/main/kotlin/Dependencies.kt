@@ -26,6 +26,9 @@ object Dependencies {
 
         const val detekt = "1.8.0"
         const val dokka = "0.10.1"
+
+        const val bintray = "1.8.4"
+        const val artifactory = "4.15.2"
     }
 
     object Detect {
@@ -37,8 +40,15 @@ object Dependencies {
     object Classpath {
         const val gradlePlugin = "com.android.tools.build:gradle:3.6.3"
         const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
-        const val dokkaPlugin = "org.jetbrains.dokka:dokka-gradle-plugin:${Dependencies.Versions.dokka}"
-        const val bintrayPlugin = "com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.5"
+        const val dokkaPlugin = "org.jetbrains.dokka:dokka-gradle-plugin:${Versions.dokka}"
+        const val bintrayPlugin = "com.jfrog.bintray.gradle:gradle-bintray-plugin:${Versions.bintray}"
+        const val artifactoryPlugin = "org.jfrog.buildinfo:build-info-extractor-gradle:${Versions.artifactory}"
+    }
+
+    object Publishing {
+        const val mavenPlugin = "maven-publish"
+        const val bintrayPlugin = "com.jfrog.bintray"
+        const val artifactoryPlugin = "com.jfrog.artifactory"
     }
 
     const val kotlinStdlib = "org.jetbrains.kotlin:kotlin-stdlib"
