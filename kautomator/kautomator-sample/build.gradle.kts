@@ -1,0 +1,31 @@
+import Dependencies.Versions
+
+plugins {
+    androidApplication
+    kotlinAndroid
+    kotlinAndroidExtensions
+}
+
+android {
+    compileSdkVersion(Versions.compileSdk)
+    buildToolsVersion(Versions.buildTools)
+
+    defaultConfig {
+        applicationId = "com.kaspersky.kaspresso.samplekautomator"
+        minSdkVersion(Versions.minSdk)
+        targetSdkVersion(Versions.targetSdk)
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+}
+
+dependencies {
+    implementation(Dependencies.appcompat)
+    implementation(Dependencies.material)
+    implementation(Dependencies.constraint)
+
+    androidTestImplementation(Dependencies.uiAutomator)
+    androidTestImplementation(Dependencies.rules)
+    androidTestImplementation(project(Projects.KASPRESSO_FRAMEWORK))
+    androidTestImplementation(project(Projects.KAUTOMATOR_FRAMEWORK))
+}
