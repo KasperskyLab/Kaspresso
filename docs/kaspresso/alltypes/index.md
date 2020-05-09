@@ -938,7 +938,7 @@ The interface that allows implementations of [Screenshots](../com.kaspersky.kasp
 ##### [com.kaspersky.kaspresso.report.impl.StepInfoConverter](../com.kaspersky.kaspresso.report.impl/-step-info-converter/index.md)
 
 Converts [com.kaspersky.kaspresso.testcases.models.info.StepInfo](../com.kaspersky.kaspresso.testcases.models.info/-step-info/index.md) into
-[io.qameta.allure.model.StepResult](#) JSON model.
+[StepResult](#) JSON model.
 
 
 |

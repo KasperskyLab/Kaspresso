@@ -28,10 +28,10 @@ jobs:
           name: Build
           command: ./gradlew assemble
       - store_artifacts:
-          path: kaspresso/build/reports
+          path: kaspresso/kaspresso-framework/build/reports
           destination: reports/kaspresso
       - store_artifacts:
-          path: kautomator/build/reports
+          path: kautomator/kautomator-framework/build/reports
           destination: reports/kautomator
       - store_test_results:
           path: ~/test-results

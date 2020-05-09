@@ -1,0 +1,27 @@
+apply plugin: 'kotlin'
+apply plugin: 'application'
+apply from: '../dependencies.gradle'
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlin"
+    implementation project(":adb-server:common")
+    implementation project(":adb-server:command-types")
+    implementation project(":adb-server:connection")
+    implementation project(":adb-server:desktop-device-connection")
+}
+
+mainClassName = "com.kaspersky.testserver.MainKt"
+
+repositories {
+    mavenCentral()
+}
+
+jar {
+    manifest {
+        attributes('Main-Class': 'com.kaspersky.testserver.MainKt')
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
