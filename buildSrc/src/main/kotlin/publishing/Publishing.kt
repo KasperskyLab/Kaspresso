@@ -23,8 +23,8 @@ private const val PROPERTY_VERSION_SNAPSHOT = "snapshotVersion"
 private const val PROPERTY_GROUP_ID = "publish.artifactGroup"
 private const val PROPERTY_ARTIFACT_NAME = "publish.artifactName"
 
-val Project.shouldBePublished get() = name == Projects.KASPRESSO_FRAMEWORK ||
-        name == Projects.KAUTOMATOR_FRAMEWORK
+val Project.shouldBePublished get() = name == Projects.Kaspresso.framework ||
+        name == Projects.Kautomator.framework
 
 fun PublishingExtension.setup(project: Project) {
     publications {

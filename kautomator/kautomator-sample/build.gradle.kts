@@ -26,6 +26,6 @@ dependencies {
 
     androidTestImplementation(Dependencies.uiAutomator)
     androidTestImplementation(Dependencies.rules)
-    androidTestImplementation(project(Projects.KASPRESSO_FRAMEWORK))
-    androidTestImplementation(project(Projects.KAUTOMATOR_FRAMEWORK))
+    androidTestImplementation(project(Projects.Kaspresso.framework))
+    androidTestImplementation(project(Projects.Kautomator.framework))
 }
