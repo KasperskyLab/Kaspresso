@@ -6,7 +6,7 @@ android {
     compileSdkVersion Integer.parseInt(versions.compileSdk)
 
     defaultConfig {
-        applicationId "com.kaspersky.test_server"
+        applicationId "com.kaspersky.testserver"
         minSdkVersion versions.minSdk
         targetSdkVersion versions.targetSdk
         versionCode 1

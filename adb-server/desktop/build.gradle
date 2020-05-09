@@ -11,8 +11,17 @@ dependencies {
     implementation project(":adb-server:desktop-device-connection")
 }
 
-mainClassName = "com.kaspersky.test_server.MainKt"
+mainClassName = "com.kaspersky.testserver.MainKt"
 
 repositories {
     mavenCentral()
+}
+
+jar {
+    manifest {
+        attributes('Main-Class': 'com.kaspersky.testserver.MainKt')
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
 }
