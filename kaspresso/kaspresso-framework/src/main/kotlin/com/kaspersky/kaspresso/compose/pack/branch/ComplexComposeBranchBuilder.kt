@@ -28,7 +28,7 @@ class ComplexComposeBranchBuilder<ElementType>(
         }
         throw ComposeBuilderException(
             "Please, use compose functionality correctly! " +
-                    "Keep the rule: one `or` <=> one `then`!"
+                    "Keep the rule: one `or` <=> one `thenInto`!"
         )
     }
 
