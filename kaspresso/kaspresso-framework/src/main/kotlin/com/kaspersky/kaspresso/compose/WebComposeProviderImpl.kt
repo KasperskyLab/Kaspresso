@@ -1,7 +1,7 @@
 package com.kaspersky.kaspresso.compose
 
 import com.agoda.kakao.web.WebElementBuilder
-import com.kaspersky.kaspresso.compose.Composer.getCompositeAction
+import com.kaspersky.kaspresso.compose.ComposerUtils.getCompositeAction
 import com.kaspersky.kaspresso.compose.pack.ActionsOnWebElementsPack
 import com.kaspersky.kaspresso.compose.pack.ActionsPack
 import com.kaspersky.kaspresso.failure.FailureLoggingProvider
@@ -16,6 +16,8 @@ import com.kaspersky.kaspresso.kaspresso.Kaspresso
 class WebComposeProviderImpl(
     private val kaspresso: Kaspresso
 ) : WebComposeProvider {
+
+    private val composeExecutor = ComposeExecutor(kaspresso)
 
     private val failureLoggingProvider: FailureLoggingProvider =
         FailureLoggingProviderImpl(kaspresso.libLogger)
@@ -45,17 +47,16 @@ class WebComposeProviderImpl(
         allowedExceptions: Set<Class<out Throwable>>?,
         block: ActionsPack<WebElementBuilder.KWebInteraction>.() -> Unit
     ) {
-        val checks: List<() -> Unit> = ActionsPack(this).apply(block).build()
-        invokeWebComposeByProviders(timeoutMs, intervalMs, allowedExceptions, checks)
+        val composeBranches = ActionsPack(this).apply(block).build()
+        composeExecutor.executeComposeBranches(timeoutMs, intervalMs, allowedExceptions, composeBranches)
     }
 
     override fun WebElementBuilder.KWebInteraction.unsafeCompose(
         webElementBuilder: WebElementBuilder,
         block: ActionsPack<WebElementBuilder.KWebInteraction>.() -> Unit
     ) {
-        invokeWebComposeUnsafely(
-            checks = ActionsPack(this).apply(block).build()
-        )
+        val composeBranches = ActionsPack(this).apply(block).build()
+        composeExecutor.executeComposeBranchesUnsafely(composeBranches)
     }
 
     private fun invokeWebComposeByProviders(
