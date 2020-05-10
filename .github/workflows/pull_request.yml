@@ -5,7 +5,7 @@ name: PullRequest Checks
 on: pull_request
 
 jobs:
-  run-unit-tests:
+  pull-request-checks:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
