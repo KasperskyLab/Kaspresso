@@ -19,9 +19,9 @@ jobs:
           java-version: 1.8
       - name: Set up environment variables
         env:
-          BINTRAY_USER: {{ secrets.bintray_user }}
-          BINTRAY_KEY: {{ secrets.bintray_key }}
-          ARTIFACTORY_PASS: {{ secrets.artifactory_password }}
+          BINTRAY_USER: ${{ secrets.bintray_user }}
+          BINTRAY_KEY: ${{ secrets.bintray_key }}
+          ARTIFACTORY_PASS: ${{ secrets.artifactory_password }}
         run: |
           echo $'\n'bintrayuser=$BINTRAY_USER >> ${HOME}/.gradle/gradle.properties
           echo $'\n'bintraykey=$BINTRAY_KEY >> ${HOME}/.gradle/gradle.properties
