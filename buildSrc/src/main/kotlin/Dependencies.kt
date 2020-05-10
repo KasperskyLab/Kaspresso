@@ -64,6 +64,7 @@ object Dependencies {
     const val rules = "androidx.test:rules:${Versions.runner}"
 
     const val junit = "junit:junit:${Versions.junit}"
+    const val junitJupiter = "org.junit.jupiter:junit-jupiter:5.6.2"
     const val truth = "com.google.truth:truth:${Versions.truth}"
 
     const val espressoCore = "androidx.test.espresso:espresso-core:${Versions.espresso}"

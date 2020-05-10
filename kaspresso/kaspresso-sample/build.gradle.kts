@@ -37,6 +37,6 @@ dependencies {
     androidTestImplementation(Dependencies.espressoCore)
     androidTestImplementation(Dependencies.espressoWeb)
     androidTestImplementation(Dependencies.kakao)
-    androidTestImplementation(project(Projects.KASPRESSO_FRAMEWORK))
-    androidTestImplementation(project(Projects.KAUTOMATOR_FRAMEWORK))
+    androidTestImplementation(project(Projects.Kaspresso.framework))
+    androidTestImplementation(project(Projects.Kautomator.framework))
 }

@@ -33,7 +33,7 @@ dependencies {
     implementation(Dependencies.kakao)
     implementation(Dependencies.gson)
     implementation(Dependencies.androidXCore)
-    implementation(project(Projects.KAUTOMATOR_FRAMEWORK))
+    implementation(project(Projects.Kautomator.framework))
 
     testImplementation(Dependencies.junit)
     testImplementation(Dependencies.truth)
