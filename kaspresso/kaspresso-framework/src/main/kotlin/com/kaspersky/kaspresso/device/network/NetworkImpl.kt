@@ -5,13 +5,15 @@ import android.content.Context
 import android.net.wifi.WifiManager
 import android.os.Build
 import com.kaspersky.kaspresso.device.server.AdbServer
+import com.kaspersky.kaspresso.logger.UiTestLogger
 
 /**
  * The implementation of the [Network] interface.
  */
 class NetworkImpl(
     private val targetContext: Context,
-    private val adbServer: AdbServer
+    private val adbServer: AdbServer,
+    private val logger: UiTestLogger
 ) : Network {
 
     /**
@@ -46,7 +48,8 @@ class NetworkImpl(
                 targetContext.applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
             }
 
-        wifiManager.isWifiEnabled = enable
+        val requestState = wifiManager.setWifiEnabled(enable)
+        logger.i("Device method: NetworkImpl.toggleWifi(enable=$enable). The request state=$requestState")
     }
 
     /**

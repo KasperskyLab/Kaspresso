@@ -14,7 +14,7 @@ import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
 
-class DeviceInternetSampleTest : TestCase() {
+class DeviceNetworkSampleTest : TestCase() {
 
     companion object {
         private const val NETWORK_ESTABLISHMENT_DELAY = 1_500L
@@ -30,23 +30,25 @@ class DeviceInternetSampleTest : TestCase() {
     val activityTestRule = ActivityTestRule(DeviceSampleActivity::class.java, true, true)
 
     @Test
-    fun internetSampleTest() {
+    fun networkSampleTest() {
         before {
             device.network.enable()
         }.after {
             device.network.enable()
         }.run {
 
-            step("Disable internet") {
+            step("Disable network") {
                 device.network.disable()
                 Screen.idle(NETWORK_ESTABLISHMENT_DELAY)
-                assertTrue(isDisconnected())
+                assertFalse(isDataConnected())
+                assertFalse(isWiFiEnabled())
             }
 
-            step("Enable internet") {
+            step("Enable network") {
                 device.network.enable()
                 Screen.idle(NETWORK_ESTABLISHMENT_DELAY)
-                assertFalse(isDisconnected())
+                assertTrue(isDataConnected())
+                assertTrue(isWiFiEnabled())
             }
 
             step("Toggle WiFi") {
@@ -61,8 +63,8 @@ class DeviceInternetSampleTest : TestCase() {
         }
     }
 
-    private fun BaseTestContext.isDisconnected(): Boolean =
-        device.context.getSystemService(ConnectivityManager::class.java).activeNetworkInfo == null
+    private fun BaseTestContext.isDataConnected(): Boolean =
+        device.context.getSystemService(ConnectivityManager::class.java).activeNetworkInfo != null
 
     private fun BaseTestContext.isWiFiEnabled(): Boolean =
         device.context.getSystemService(WifiManager::class.java).isWifiEnabled
