@@ -52,6 +52,9 @@ class ComplexComposeTest : TestCase() {
                     or(ComplexComposeScreen.stage1Button) {
                         isVisible()
                     } then {
+                        // here, there is not any special context of this lambda
+                        // that's why we can't call ComplexComposeScreen.stage1Button's methods inside the lambda directly
+
                         // if the first branch was succeed then we execute some special flow
                         step("Flow is over the product") {
                             ComplexComposeScreen {
