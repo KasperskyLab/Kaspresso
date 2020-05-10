@@ -4,7 +4,6 @@ import androidx.test.espresso.web.webdriver.Locator
 import com.agoda.kakao.web.WebElementBuilder
 import com.kaspersky.kaspresso.compose.pack.branch.ComplexComposeBranch
 import com.kaspersky.kaspresso.compose.pack.branch.ComplexComposeBranchBuilder
-import java.lang.IllegalArgumentException
 import kotlin.properties.Delegates
 
 /**
