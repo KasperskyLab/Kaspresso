@@ -59,14 +59,17 @@ subprojects {
             setup(this@subprojects)
         }
 
+        val publicationName = findProperty("publish.publicationName").toString()
+
         bintray {
+
             user = findProperty("bintrayuser").toString()
             key = findProperty("bintraykey").toString()
-            setPublications(name)
+            setPublications(publicationName)
 
             pkg.apply {
                 repo = "Kaspresso"
-                name = this@subprojects.name.capitalize()
+                name = publicationName
                 userOrg = user
                 vcsUrl = "https://github.com/KasperskyLab/Kaspresso.git"
                 setLicenses("Apache-2.0")
@@ -87,7 +90,7 @@ subprojects {
                 })
 
                 defaults(delegateClosureOf<GroovyObject> {
-                    invokeMethod("publications", "${this@subprojects.name}Snapshot")
+                    invokeMethod("publications", "${publicationName}Snapshot")
                     setProperty("publishArtifacts", true)
                     setProperty("publishPom", true)
                 })
@@ -102,7 +105,7 @@ subprojects {
         }
 
         tasks.named("artifactoryPublish") {
-            dependsOn(":${this@subprojects.name}:assemble")
+            dependsOn("assemble")
         }
     }
 }
