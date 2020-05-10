@@ -5,6 +5,7 @@ import com.agoda.kakao.web.WebElementBuilder
 import com.kaspersky.kaspresso.compose.pack.branch.ComplexComposeBranch
 import com.kaspersky.kaspresso.compose.pack.branch.ComplexComposeBranchBuilder
 import java.lang.IllegalArgumentException
+import kotlin.properties.Delegates
 
 /**
  * The builder class for parameters of [com.kaspersky.kaspresso.compose.WebComposeProvider.compose] method.
@@ -22,11 +23,13 @@ class ActionsOnWebElementsPack(
      * @param value the value to be searched for in web view.
      * @param action actions or assertions on the interacted view.
      */
-    fun orWithElement(locator: Locator, value: String, action: WebElementBuilder.KWebInteraction.() -> Unit) {
+    fun orWithElement(locator: Locator, value: String, action: WebElementBuilder.KWebInteraction.() -> Unit): ComplexComposeBranchBuilder<WebElementBuilder.KWebInteraction> {
+        var complexComposeBranchBuilder by Delegates.notNull<ComplexComposeBranchBuilder<WebElementBuilder.KWebInteraction>>()
         webElementBuilder.withElement(locator, value) {
-            ComplexComposeBranchBuilder(this, { action.invoke(this) })
+            complexComposeBranchBuilder = ComplexComposeBranchBuilder(this, { action.invoke(this) })
                 .also { complexComposeBranchBuilders += it }
         }
+        return complexComposeBranchBuilder
     }
 
     /**
