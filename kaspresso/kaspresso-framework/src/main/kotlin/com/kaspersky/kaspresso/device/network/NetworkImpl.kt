@@ -20,7 +20,8 @@ class NetworkImpl(
      * Required Permissions: INTERNET.
      */
     override fun enable() {
-        adbServer.performAdb("shell svc data enable", "shell svc wifi enable")
+        adbServer.performAdb("shell svc data enable")
+        toggleWiFi(true)
     }
 
     /**
@@ -29,7 +30,8 @@ class NetworkImpl(
      * Required Permissions: INTERNET.
      */
     override fun disable() {
-        adbServer.performAdb("shell svc data disable", "shell svc wifi disable")
+        adbServer.performAdb("shell svc data disable")
+        toggleWiFi(false)
     }
 
     /**
