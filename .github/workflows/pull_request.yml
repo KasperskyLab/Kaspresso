@@ -1,6 +1,6 @@
 # This workflow runs all the checks on pull requests
 
-name: PullRequest Checks
+name: Pull Request Checks
 
 on: pull_request
 
