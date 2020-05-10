@@ -23,6 +23,7 @@ jobs:
           BINTRAY_KEY: ${{ secrets.bintray_key }}
           ARTIFACTORY_PASS: ${{ secrets.artifactory_password }}
         run: |
+          mkdir -p ${HOME}/.gradle
           touch ${HOME}/.gradle/gradle.properties
           echo $'\n'bintrayuser=$BINTRAY_USER >> ${HOME}/.gradle/gradle.properties
           echo $'\n'bintraykey=$BINTRAY_KEY >> ${HOME}/.gradle/gradle.properties
