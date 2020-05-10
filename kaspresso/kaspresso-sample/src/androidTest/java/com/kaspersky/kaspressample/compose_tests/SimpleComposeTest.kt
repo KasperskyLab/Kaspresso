@@ -65,14 +65,8 @@ class SimpleComposeTest : TestCase() {
             step("Check btn5's text again and click on it") {
                 CommonFlakyScreen {
                     btn5.compose {
-                        or {
-                            hasText("Something wrong")
-                            click()
-                        }
-                        or {
-                            hasText(R.string.common_flaky_final_button)
-                            click()
-                        }
+                        or { hasText("Something wrong") } then { btn5.click() }
+                        or { hasText(R.string.common_flaky_final_button) } then { btn5.click() }
                     }
                 }
             }
