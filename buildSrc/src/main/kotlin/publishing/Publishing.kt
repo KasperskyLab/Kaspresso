@@ -22,21 +22,22 @@ private const val PROPERTY_VERSION = "stableVersion"
 private const val PROPERTY_VERSION_SNAPSHOT = "snapshotVersion"
 private const val PROPERTY_GROUP_ID = "publish.artifactGroup"
 private const val PROPERTY_ARTIFACT_NAME = "publish.artifactName"
+private const val PROPERTY_PUBLICATION_NAME = "publish.publicationName"
 
-val Project.shouldBePublished get() = name == Projects.Kaspresso.framework ||
-        name == Projects.Kautomator.framework
+val Project.shouldBePublished get() = name == "kaspresso-framework" ||
+        name == "kautomator-framework"
 
 fun PublishingExtension.setup(project: Project) {
     publications {
         createWithNameAndVersion(
             project = project,
-            publicationName = project.findProperty(PROPERTY_ARTIFACT_NAME).toString(),
+            publicationName = project.findProperty(PROPERTY_PUBLICATION_NAME).toString(),
             publicationVersion = project.findProject(PROPERTY_VERSION).toString()
         )
 
         createWithNameAndVersion(
             project = project,
-            publicationName = "${project.findProperty(PROPERTY_ARTIFACT_NAME)}Snapshot",
+            publicationName = "${project.findProperty(PROPERTY_PUBLICATION_NAME)}Snapshot",
             publicationVersion = project.findProperty(PROPERTY_VERSION_SNAPSHOT).toString()
         )
     }

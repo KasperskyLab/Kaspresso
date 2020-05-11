@@ -7,6 +7,7 @@ Please, be aware of the fact that it's a wiki for the current master. <br>
 If you are looking forward of a wiki for old versions then follow links: <br>
 [Release 1.0.1](https://github.com/KasperskyLab/Kaspresso/blob/release/1.0.1/wiki/00.%20Home.md) <br>
 [Release 1.0.1 support](https://github.com/KasperskyLab/Kaspresso/blob/release/1.0.1/wiki/00.%20Home.md) <br>
+[Release 1.1.0](https://github.com/KasperskyLab/Kaspresso/tree/release/1.1.0/wiki/00.%20Home.md) <br>
 
 ## Content
 [01. Wrapper over Espresso](./01_Wrapper_over_Espresso.md) <br>
