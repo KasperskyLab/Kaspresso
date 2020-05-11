@@ -5,7 +5,7 @@ include(
     ":adb-server:desktop",
     ":adb-server:desktop-device-connection",
     ":adb-server:device",
-    ":adb-server:example",
+    ":adb-server:sample",
 
     ":kaspresso:kaspresso-framework",
     ":kaspresso:allure-model",
