@@ -297,11 +297,13 @@ This is a method to make a composed action from multiple actions or assertions, 
 `compose` is useful in cases when we don't know an accurate sequence of events and can't influence it. Such cases are possible when a test is performed outside the application.
 When a test is performed inside the application we strongly recommend to make your test linear and don't put any conditions in tests that are possible thanks to `compose`. <br>
 It is available as an extension function for any `KView`, `UiBaseView` and as just a regular method (in this case it can take actions on different views as well). <br>
+
 The key words using in compose:
   - `compose` - marks the beginning of "compose", turn on all needed logic
   - `or` - marks the possible branches. The lambda after `or` has a context of concrete element. Just have a look at the simple below.
   - `thenContinue` - is an action that will be executed if a branch (the code into lambda of `or`) is completed successfully. The context of a lambda after `thenContinue` is a context of concrete element described in `or` section.
   - `then` - is almost the same construction as `thenContinue` excepting the context after `then`. The context after `then` is not restricted.
+
 Have a glance at the example below:
 ```kotlin
 step("Handle potential unexpected behavior") {
