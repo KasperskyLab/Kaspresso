@@ -293,13 +293,46 @@ ContinuouslyDialogScreen {
 The example is [here](../sample/src/androidTest/java/com/kaspersky/kaspressample/continuously_tests).
 
 ### compose
-This is a method to make a composed action from multiple actions or assertions, and this action succeeds if at least one of its components succeeds. `compose` is useful in cases when we don't know an accurate sequence of events and can't influence it. Such cases are possible when a test is performed outside the application. When a test is performed inside the application we strongly recommend to make your test linear and don't put any conditions in tests that are possible thanks to `compose`. <br>
-It is available as an extension function for any `KView`, `UiBaseView` and as just a regular method (in this case it can take actions on different views as well).
+This is a method to make a composed action from multiple actions or assertions, and this action succeeds if at least one of its components succeeds.
+`compose` is useful in cases when we don't know an accurate sequence of events and can't influence it. Such cases are possible when a test is performed outside the application.
+When a test is performed inside the application we strongly recommend to make your test linear and don't put any conditions in tests that are possible thanks to `compose`. <br>
+It is available as an extension function for any `KView`, `UiBaseView` and as just a regular method (in this case it can take actions on different views as well). <br>
+
+The key words using in compose:
+  - `compose` - marks the beginning of "compose", turn on all needed logic
+  - `or` - marks the possible branches. The lambda after `or` has a context of concrete element. Just have a look at the simple below.
+  - `thenContinue` - is an action that will be executed if a branch (the code into lambda of `or`) is completed successfully. The context of a lambda after `thenContinue` is a context of concrete element described in `or` section.
+  - `then` - is almost the same construction as `thenContinue` excepting the context after `then`. The context after `then` is not restricted.
+
+Have a glance at the example below:
 ```kotlin
 step("Handle potential unexpected behavior") {
+    // simple compose
+    CommonFlakyScreen {
+        btn5.compose {
+            or {
+                // the context of this lambda is `btn5`
+                hasText("Something wrong")
+            } thenContinue {
+                // here, the context of this lambda is a context of KButton(btn5),
+                // that's why we can call KButton's methods inside the lambda directly
+                click()
+            }
+            or {
+                // the context of this lambda is `btn5`
+                hasText(R.string.common_flaky_final_button)
+            } then {
+                // here, there is not any special context of this lambda
+                // that's why we can't call KButton's methods inside the lambda directly
+                btn5.click()
+            }
+        }
+    }
+    // complex compose
     compose {
         // the first potential branch when ComplexComposeScreen.stage1Button is visible
         or(ComplexComposeScreen.stage1Button) {
+            // the context of this lambda is `ComplexComposeScreen.stage1Button`
             isVisible()
         } then {
             // if the first branch was succeed then we execute some special flow
@@ -318,6 +351,7 @@ step("Handle potential unexpected behavior") {
         // the second potential branch when UiComposeDialog1.title is visible
         // just imagine that is some unexpected system or product behavior and we cannot fix it now
         or(UiComposeDialog1.title) {
+            // the context of this lambda is `UiComposeDialog1.title`
             isDisplayed()
         } then {
             // if the second branch was succeed then we execute some special flow

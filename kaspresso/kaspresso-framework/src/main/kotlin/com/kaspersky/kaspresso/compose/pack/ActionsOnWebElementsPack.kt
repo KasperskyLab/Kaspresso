@@ -2,7 +2,9 @@ package com.kaspersky.kaspresso.compose.pack
 
 import androidx.test.espresso.web.webdriver.Locator
 import com.agoda.kakao.web.WebElementBuilder
-import java.lang.IllegalArgumentException
+import com.kaspersky.kaspresso.compose.pack.branch.ComplexComposeBranch
+import com.kaspersky.kaspresso.compose.pack.branch.ComplexComposeBranchBuilder
+import kotlin.properties.Delegates
 
 /**
  * The builder class for parameters of [com.kaspersky.kaspresso.compose.WebComposeProvider.compose] method.
@@ -10,7 +12,7 @@ import java.lang.IllegalArgumentException
 class ActionsOnWebElementsPack(
     private val webElementBuilder: WebElementBuilder
 ) {
-    private val actions: MutableList<() -> Unit> = mutableListOf()
+    private val complexComposeBranchBuilders: MutableList<ComplexComposeBranchBuilder<WebElementBuilder.KWebInteraction>> = mutableListOf()
 
     /**
      * Builds the lambda to add to [actions] that invokes the given [action] on the web element built by
@@ -20,17 +22,26 @@ class ActionsOnWebElementsPack(
      * @param value the value to be searched for in web view.
      * @param action actions or assertions on the interacted view.
      */
-    fun orWithElement(locator: Locator, value: String, action: WebElementBuilder.KWebInteraction.() -> Unit) {
+    fun orWithElement(locator: Locator, value: String, action: WebElementBuilder.KWebInteraction.() -> Unit): ComplexComposeBranchBuilder<WebElementBuilder.KWebInteraction> {
+        var complexComposeBranchBuilder by Delegates.notNull<ComplexComposeBranchBuilder<WebElementBuilder.KWebInteraction>>()
         webElementBuilder.withElement(locator, value) {
-            actions += { action.invoke(this) }
+            complexComposeBranchBuilder = ComplexComposeBranchBuilder(this, { action.invoke(this) })
+                .also { complexComposeBranchBuilders += it }
         }
+        return complexComposeBranchBuilder
     }
 
     /**
      * @return the built parameters for [com.kaspersky.kaspresso.compose.WebComposeProvider.compose] method.
      */
-    internal fun build(): List<() -> Unit> {
-        if (actions.isEmpty()) throw IllegalArgumentException("Nothing to compose")
-        return actions
+    internal fun build(): List<ComplexComposeBranch<WebElementBuilder.KWebInteraction>> {
+        require(complexComposeBranchBuilders.isNotEmpty()) { "Nothing to compose" }
+
+        val composeBranches = mutableListOf<ComplexComposeBranch<WebElementBuilder.KWebInteraction>>()
+        complexComposeBranchBuilders.forEach {
+            composeBranches += it.build()
+        }
+
+        return composeBranches
     }
 }

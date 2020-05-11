@@ -69,13 +69,12 @@ class WebComposeTest : TestCase() {
                 }
             }
 
-            step("Click \"Ask question\" button") {
+            step("Click \"Contacts\" button") {
                 WebViewScreen {
                     webView {
-
                         withElement(
                             Locator.XPATH,
-                            "//*[@id=\"app\"]/section[5]/div/div/div[2]/div[3]/button"
+                            "//*[@id=\"app\"]/footer/div/div/div[1]/nav/div[1]/a"
                         ) {
                             compose(this@webView) {
                                 or {
@@ -84,15 +83,15 @@ class WebComposeTest : TestCase() {
                                 }
                                 or {
                                     containsText("Ask questiop")
-                                    hasText("Ask questio")
+                                    hasText("Ask questiop")
                                 }
                                 or {
                                     containsText("Ask question")
                                     hasText("Ask question")
                                 }
                                 or {
-                                    containsText("Get Support")
-                                    hasText("Get Support")
+                                    containsText("Contacts")
+                                    hasText("Contacts")
                                 }
                             }
                         }
@@ -100,22 +99,24 @@ class WebComposeTest : TestCase() {
                         compose {
                             orWithElement(
                                 Locator.XPATH,
-                                "//*[@id=\"app\"]/section[5]/div/div/div[2]/div[3]/button"
+                                "//*[@id=\"app\"]/footer/div/div/div[1]/nav/div[1]/a"
                             ) {
                                 hasText("TRATATATA")
                             }
                             orWithElement(
                                 Locator.XPATH,
-                                "//*[@id=\"app\"]/section[5]/div/div/div[2]/div[3]/button"
+                                "//*[@id=\"app\"]/footer/div/div/div[1]/nav/div[1]/a"
                             ) {
                                 hasText("Ask question")
+                            } thenContinue {
                                 click()
                             }
                             orWithElement(
                                 Locator.XPATH,
-                                "//*[@id=\"app\"]/section[5]/div/div/div[2]/div[3]/button"
+                                "//*[@id=\"app\"]/footer/div/div/div[1]/nav/div[1]/a"
                             ) {
-                                hasText("Get Support")
+                                hasText("Contacts")
+                            } thenContinue {
                                 click()
                             }
                         }

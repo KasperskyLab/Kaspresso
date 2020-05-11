@@ -21,6 +21,17 @@ class ComplexComposeBranchBuilder<ElementType>(
         )
     }
 
+    infix fun thenContinue(postAction: ElementType.() -> Unit) {
+        if (this.postAction == null) {
+            this.postAction = { postAction.invoke(element) }
+            return
+        }
+        throw ComposeBuilderException(
+            "Please, use compose functionality correctly! " +
+                    "Keep the rule: one `or` <=> one `thenContinue`!"
+        )
+    }
+
     fun build(): ComplexComposeBranch<ElementType> =
         ComplexComposeBranch(
             element = element,
