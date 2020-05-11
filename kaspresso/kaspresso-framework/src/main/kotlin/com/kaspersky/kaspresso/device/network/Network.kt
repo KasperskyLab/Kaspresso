@@ -1,7 +1,6 @@
 package com.kaspersky.kaspresso.device.network
 
 import android.os.Build
-import com.kaspersky.kaspresso.annotations.MaximumSupportedVersion
 import com.kaspersky.kaspresso.annotations.RequiresAdbServer
 
 /**
@@ -19,32 +18,20 @@ interface Network {
      * Enables wi-fi and mobile data using adb.
      *
      * Required Permissions: INTERNET.
-     *
-     * This method is supported only for Android P or below.
-     * There is an [issue-139](https://github.com/KasperskyLab/Kaspresso/issues/139) to improve the current solution.
      */
     @RequiresAdbServer
-    @MaximumSupportedVersion(Build.VERSION_CODES.P)
     fun enable()
 
     /**
      * Disables wi-fi and mobile data using adb.
      *
      * Required Permissions: INTERNET.
-     *
-     * This method is supported only for Android P or below.
-     * There is an [issue-139](https://github.com/KasperskyLab/Kaspresso/issues/139) to improve the current solution.
      */
     @RequiresAdbServer
-    @MaximumSupportedVersion(Build.VERSION_CODES.P)
     fun disable()
 
     /**
      * Toggles only wi-fi. Note: it works only if flight mode is off.
-     *
-     * This method is supported only for Android P or below.
-     * There is an [issue-139](https://github.com/KasperskyLab/Kaspresso/issues/139) to improve the current solution.
      */
-    @MaximumSupportedVersion(Build.VERSION_CODES.P)
     fun toggleWiFi(enable: Boolean)
 }

@@ -5,6 +5,7 @@ import com.kaspersky.components.kautomator.component.common.assertions.UiBaseAss
 import com.kaspersky.components.kautomator.component.common.builders.UiViewBuilder
 import com.kaspersky.components.kautomator.component.common.builders.UiViewSelector
 import com.kaspersky.components.kautomator.component.common.views.UiBaseView
+import com.kaspersky.components.kautomator.component.text.UiTextViewAssertions
 
 /**
  * Ui View with [UiSwitchableActions] and [UiBaseAssertions]
@@ -12,7 +13,7 @@ import com.kaspersky.components.kautomator.component.common.views.UiBaseView
  * @see UiSwitchableActions
  * @see UiBaseAssertions
  */
-class UiSwitch : UiBaseView<UiSwitch>, UiSwitchableActions, UiBaseAssertions {
+class UiSwitch : UiBaseView<UiSwitch>, UiSwitchableActions, UiTextViewAssertions {
     constructor(selector: UiViewSelector) : super(selector)
     constructor(builder: UiViewBuilder.() -> Unit) : super(builder)
 }
