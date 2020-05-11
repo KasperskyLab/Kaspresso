@@ -60,6 +60,16 @@ class DeviceNetworkSampleTest : TestCase() {
                 Screen.idle(NETWORK_ESTABLISHMENT_DELAY)
                 assertTrue(isWiFiEnabled())
             }
+
+            step("Toggle Mobile data") {
+                device.network.toggleMobileData(false)
+                Screen.idle(NETWORK_ESTABLISHMENT_DELAY)
+                assertFalse(isDataConnected())
+
+                device.network.toggleMobileData(true)
+                Screen.idle(NETWORK_ESTABLISHMENT_DELAY)
+                assertTrue(isDataConnected())
+            }
         }
     }
 

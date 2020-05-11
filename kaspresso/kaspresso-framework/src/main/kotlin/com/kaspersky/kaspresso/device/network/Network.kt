@@ -1,6 +1,5 @@
 package com.kaspersky.kaspresso.device.network
 
-import android.os.Build
 import com.kaspersky.kaspresso.annotations.RequiresAdbServer
 
 /**
@@ -29,6 +28,11 @@ interface Network {
      */
     @RequiresAdbServer
     fun disable()
+
+    /**
+     * Toggles only mobile data. Note: it works only if flight mode is off.
+     */
+    fun toggleMobileData(enable: Boolean)
 
     /**
      * Toggles only wi-fi. Note: it works only if flight mode is off.

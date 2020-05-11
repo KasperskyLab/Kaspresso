@@ -10,7 +10,6 @@ import com.kaspersky.kaspresso.device.server.AdbServer
 import com.kaspersky.kaspresso.internal.outscreens.NotificationScreen
 import com.kaspersky.kaspresso.logger.UiTestLogger
 
-
 /**
  * The implementation of the [Network] interface.
  */
@@ -26,7 +25,7 @@ class NetworkImpl(
      * Required Permissions: INTERNET.
      */
     override fun enable() {
-        adbServer.performAdb("shell svc data enable")
+        toggleMobileData(true)
         toggleWiFi(true)
     }
 
@@ -36,13 +35,22 @@ class NetworkImpl(
      * Required Permissions: INTERNET.
      */
     override fun disable() {
-        adbServer.performAdb("shell svc data disable")
+        toggleMobileData(false)
         toggleWiFi(false)
+    }
+
+    /**
+     * Toggles only mobile data. Note: it works only if flight mode is off.
+     */
+    override fun toggleMobileData(enable: Boolean) {
+        if (enable) adbServer.performAdb("shell svc data enable")
+        else adbServer.performAdb("shell svc data disable")
     }
 
     /**
      * Toggles only wi-fi. Note: it works only if flight mode is off.
      */
+    @Suppress("detekt.ComplexCondition")
     override fun toggleWiFi(enable: Boolean) {
         logger.i("NetworkImpl.toggleWifi(enable=$enable) starting...")
 
@@ -70,7 +78,7 @@ class NetworkImpl(
     }
 
     private fun toggleWifiViaUi(enable: Boolean) {
-        val finalText = if(enable) "On" else "Off"
+        val finalText = if (enable) "On" else "Off"
         UiSystem {
             openNotification()
         }
