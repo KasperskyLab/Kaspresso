@@ -67,14 +67,14 @@ class SimpleComposeTest : TestCase() {
                     btn5.compose {
                         or {
                             hasText("Something wrong")
-                        } thenInto {
+                        } thenContinue {
                             // here, the context of this lambda is a context of KButton(btn5),
                             // that's why we can call KButton's methods inside the lambda
                             click()
                         }
                         or {
                             hasText(R.string.common_flaky_final_button)
-                        } thenInto {
+                        } thenContinue {
                             // here, the context of this lambda is a context of KButton(btn5),
                             // that's why we can call KButton's methods inside the lambda
                             click()

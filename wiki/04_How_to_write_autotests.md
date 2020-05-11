@@ -300,8 +300,8 @@ It is available as an extension function for any `KView`, `UiBaseView` and as ju
 The key words using in compose:
   - `compose` - marks the beginning of "compose", turn on all needed logic
   - `or` - marks the possible branches. The lambda after `or` has a context of concrete element. Just have a look at the simple below.
-  - `thenInto` - is an action that will be executed if a branch (the code into lambda of `or`) is completed successfully. The context of a lambda after `thenInto` is a context of concrete element described in `or` section.
-  - `then` - is almost the same construction as `thenInto` excepting the context after `then`. The context after `then` is not restricted.
+  - `thenContinue` - is an action that will be executed if a branch (the code into lambda of `or`) is completed successfully. The context of a lambda after `thenContinue` is a context of concrete element described in `or` section.
+  - `then` - is almost the same construction as `thenContinue` excepting the context after `then`. The context after `then` is not restricted.
 Have a glance at the example below:
 ```kotlin
 step("Handle potential unexpected behavior") {
@@ -311,7 +311,7 @@ step("Handle potential unexpected behavior") {
             or {
                 // the context of this lambda is `btn5`
                 hasText("Something wrong")
-            } thenInto {
+            } thenContinue {
                 // here, the context of this lambda is a context of KButton(btn5),
                 // that's why we can call KButton's methods inside the lambda directly
                 click()

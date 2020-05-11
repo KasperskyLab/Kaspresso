@@ -108,7 +108,7 @@ class WebComposeTest : TestCase() {
                                 "//*[@id=\"app\"]/footer/div/div/div[1]/nav/div[1]/a"
                             ) {
                                 hasText("Ask question")
-                            } thenInto {
+                            } thenContinue {
                                 click()
                             }
                             orWithElement(
@@ -116,7 +116,7 @@ class WebComposeTest : TestCase() {
                                 "//*[@id=\"app\"]/footer/div/div/div[1]/nav/div[1]/a"
                             ) {
                                 hasText("Contacts")
-                            } thenInto {
+                            } thenContinue {
                                 click()
                             }
                         }

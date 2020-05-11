@@ -21,14 +21,14 @@ class ComplexComposeBranchBuilder<ElementType>(
         )
     }
 
-    infix fun thenInto(postAction: ElementType.() -> Unit) {
+    infix fun thenContinue(postAction: ElementType.() -> Unit) {
         if (this.postAction == null) {
             this.postAction = { postAction.invoke(element) }
             return
         }
         throw ComposeBuilderException(
             "Please, use compose functionality correctly! " +
-                    "Keep the rule: one `or` <=> one `thenInto`!"
+                    "Keep the rule: one `or` <=> one `thenContinue`!"
         )
     }
 
