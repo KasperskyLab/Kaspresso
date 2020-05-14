@@ -1,7 +1,7 @@
 object Dependencies {
 
     object Versions {
-        const val targetSdk = 27
+        const val targetSdk = 29
         const val compileSdk = 29
         const val minSdk = 18
         const val buildTools = "29.0.3"

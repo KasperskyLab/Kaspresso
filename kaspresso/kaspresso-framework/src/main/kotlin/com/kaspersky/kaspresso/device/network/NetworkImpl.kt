@@ -1,13 +1,14 @@
 package com.kaspersky.kaspresso.device.network
 
+import android.Manifest
 import android.content.Context
-import android.net.ConnectivityManager
-import android.net.NetworkInfo
+import android.content.pm.PackageManager
 import android.net.wifi.WifiManager
 import android.os.Build
-import com.kaspersky.components.kautomator.system.UiSystem
+import androidx.core.content.ContextCompat
 import com.kaspersky.kaspresso.device.server.AdbServer
-import com.kaspersky.kaspresso.internal.outscreens.NotificationScreen
+import com.kaspersky.kaspresso.internal.exceptions.AdbServerException
+import com.kaspersky.kaspresso.internal.systemscreen.WiFiSettingsScreen
 import com.kaspersky.kaspresso.logger.UiTestLogger
 
 /**
@@ -18,6 +19,16 @@ class NetworkImpl(
     private val adbServer: AdbServer,
     private val logger: UiTestLogger
 ) : Network {
+
+    companion object {
+        private const val CMD_STATE_ENABLE = "enable"
+        private const val CMD_STATE_DISABLE = "disable"
+        private const val NETWORK_STATE_CMD = "svc data"
+        private const val WIFI_STATE_CMD = "svc wifi"
+        private const val WIFI_STATE_CHECK_CMD = "dumpsys wifi | grep \"Wi-Fi is\""
+        private const val WIFI_STATE_CHECK_RESULT_ENABLED = "Wi-Fi is enabled"
+        private const val WIFI_STATE_CHECK_RESULT_DISABLED = "Wi-Fi is disabled"
+    }
 
     /**
      * Enables wi-fi and mobile data using adb.
@@ -43,63 +54,71 @@ class NetworkImpl(
      * Toggles only mobile data. Note: it works only if flight mode is off.
      */
     override fun toggleMobileData(enable: Boolean) {
-        if (enable) adbServer.performAdb("shell svc data enable")
-        else adbServer.performAdb("shell svc data disable")
+        val state = when(enable) {
+            true -> CMD_STATE_ENABLE
+            false -> CMD_STATE_DISABLE
+        }
+        adbServer.performShell("$NETWORK_STATE_CMD $state")
     }
 
     /**
-     * Toggles only wi-fi. Note: it works only if flight mode is off.
+     * Toggles only wi-fi
      */
-    @Suppress("detekt.ComplexCondition")
     override fun toggleWiFi(enable: Boolean) {
-        logger.i("NetworkImpl.toggleWifi(enable=$enable) starting...")
-
-        val wifiState = isWifiEnabled()
-        logger.i("NetworkImpl.toggleWifi(enable=$enable): current wi-fi state = $wifiState")
-        if ((wifiState && enable) || (!wifiState && !enable)) {
-            logger.i("NetworkImpl.toggleWifi(enable=$enable): wi-fi state has not been changed because this state is in the actual value")
-            return
-        }
-
-        logger.i("NetworkImpl.toggleWifi(enable=$enable): program way (via WFiManager) started")
-        val wifiManager = targetContext.applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
-        val requestState = wifiManager.setWifiEnabled(enable)
-        logger.i("NetworkImpl.toggleWifi(enable=$enable): program way (via WFiManager) result = $requestState")
-        if (requestState) {
-            logger.i("NetworkImpl.toggleWifi(enable=$enable) finished.")
-            return
-        }
-
-        logger.i("NetworkImpl.toggleWifi(enable=$enable): program way (via WFiManager) failed")
-        logger.i("NetworkImpl.toggleWifi(enable=$enable): UI way (via Kautomator) started")
-        toggleWifiViaUi(enable)
-
-        logger.i("NetworkImpl.toggleWifi(enable=$enable) finished.")
+        if (!changeWiFiStateUsingAndroidApi(enable) || !changeWiFiStateUsingAdbServer(enable))
+            changeWifiStateUsingAndroidSettings(enable)
     }
 
-    private fun toggleWifiViaUi(enable: Boolean) {
-        val finalText = if (enable) "On" else "Off"
-        UiSystem {
-            openNotification()
-        }
-        NotificationScreen {
-            wifiSwitcher {
-                click()
-                // verify success network turning
-                hasText(finalText)
+    /**
+     * Tries to change WiFi state if application has [Manifest.permission.CHANGE_WIFI_STATE] and
+     * target api is below [Build.VERSION_CODES.Q]
+     * @return true if wifi state changed or false otherwise
+     */
+    private fun changeWiFiStateUsingAndroidApi(isEnabled: Boolean): Boolean {
+        val targetSdkVersion = targetContext.applicationInfo.targetSdkVersion
+
+        if (targetSdkVersion >= Build.VERSION_CODES.Q) return false
+        if (ContextCompat.checkSelfPermission(targetContext, Manifest.permission.CHANGE_WIFI_STATE) == PackageManager.PERMISSION_DENIED) return false
+
+        val manager = (targetContext.applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager)
+        if (manager.isWifiEnabled == isEnabled) return true
+
+        @Suppress("DEPRECATION")
+        manager.isWifiEnabled = isEnabled
+
+        return manager.isWifiEnabled == isEnabled
+    }
+
+    /**
+     * Tries to change WiFi state using AdbServer if it is available
+     * @return true if wifi state changed or false otherwise
+     */
+    private fun changeWiFiStateUsingAdbServer(isEnabled: Boolean): Boolean {
+        return try {
+            val (state, expectedResult) = when (isEnabled) {
+                true -> CMD_STATE_ENABLE to WIFI_STATE_CHECK_RESULT_ENABLED
+                false -> CMD_STATE_DISABLE to WIFI_STATE_CHECK_RESULT_DISABLED
             }
-            pressBack()
+            adbServer.performShell("$WIFI_STATE_CMD $state")
+            val result = adbServer.performShell(WIFI_STATE_CHECK_CMD).firstOrNull()
+            return expectedResult == result
+        } catch (e: AdbServerException) {
+            false
         }
     }
 
-    private fun isWifiEnabled(): Boolean {
-        return if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-            val connectivityManager: ConnectivityManager? = targetContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?
-            val wifiNetworkInfo: NetworkInfo = connectivityManager?.getNetworkInfo(ConnectivityManager.TYPE_WIFI)
-                ?: throw DeviceNetworkException("targetContext.getSystemService(Context.CONNECTIVITY_SERVICE) is null")
-            wifiNetworkInfo.isConnected
-        } else {
-            targetContext.getSystemService(WifiManager::class.java)?.isWifiEnabled ?: false
+    /**
+     * The last chance. Tries to change WiFi state using Android settings
+     */
+    private fun changeWifiStateUsingAndroidSettings(isEnabled: Boolean) {
+        WiFiSettingsScreen {
+            open(targetContext)
+            if (isEnabled) {
+                enableWifi()
+            } else {
+                disableWifi()
+            }
+            close(targetContext)
         }
     }
 }
