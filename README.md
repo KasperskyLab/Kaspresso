@@ -145,21 +145,24 @@ The most popular reason for flakiness is the instability of the UI tests librari
 
 Also, [some Kaspresso features](/wiki/04_How_to_write_autotests.md#sweet-additional-features) can help you resolve a lot of typical problems in UI testing.
 
-#### UI-test libraries acceleration
+#### UI test libraries acceleration
 
-Shut up and watch the video =)
+Let’s watch some short video that shows the difference between the original UI Automator (on the right) and the accelerated one (on the left).
 
-![](https://habrastorage.org/webt/ti/kv/ki/tikvkij1vjesnacrxqm-lk0coly.gif) <br>
-The left video is a boosted UI Automator, the right video is a default UI Automator.
+![](https://habrastorage.org/webt/ti/kv/ki/tikvkij1vjesnacrxqm-lk0coly.gif)
 
-How is it possible? Please, review [the short explanation](./wiki/02_Wrapper_over_UiAutomator.md#accelerate-ui-automator).
+Here is [a short explanation](./wiki/02_Wrapper_over_UiAutomator.md#accelerate-ui-automator) of why it is possible.
 
 <a name="Interceptors"></a>
 #### Interceptors
 
-We have introduced a mechanism of interceptors giving an ability to catch all actions going to Espresso or UI Automator. <br>
-Thanks to this mechanism, a developer can add additional custom actions to each library operation (a logging, a screenshot), try to overcome flaky library operations (re-run failed actions, scroll the parent layout, remove the android system dialog) and do other interesting things. <br>
-Please, read the [comprehensive manual](/wiki/03_Kaspresso_configurator.md#kaspresso-interceptors-based-on-kakaokautomator-interceptors).
+We developed [Kaspresso behavior interceptors](/wiki/03_Kaspresso_configurator.md#some-words-about-behavior-interceptors) on the base of [Kakao/Kautomator Interceptors](/wiki/03_Kaspresso_configurator.md#kaspresso-interceptors-based-on-kakaokautomator-interceptors) to catch failures.
+
+Thanks to interceptors, you can do a lot of useful things, such as:
+* add custom actions to each library operation like writing a log or taking a screenshot;
+* overcome flaky library operations by re-running failed actions, scrolling the parent layout or removing the android system dialog;
+
+and many more (see [the manual](/wiki/03_Kaspresso_configurator.md#kaspresso-interceptors-based-on-kakaokautomator-interceptors)).
 
 #### Logging
 Kaspresso transform your tests' logs into understandable and pleasant text:
