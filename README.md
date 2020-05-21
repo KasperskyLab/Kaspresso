@@ -139,10 +139,11 @@ fun shouldPassOnNoInternetScanTest() =
 
 #### Stability 
 
-Flakiness in UI tests means that one test can pass 10 times in a row, but breaks on the eleventh attempt. The reason for failure is so mysterious and unpredictable, and all of this magic sometimes forces you to cry when nobody sees you. Unfortunately, the most popular reason for such behavior is the instability of ui-tests libraries (Espresso and UI Automator). <br>
-**Kaspresso eliminates instability of ui-tests libraries** thanks to DSL wrappers and the new mechanism of interceptors
-where all failures are caught. <br>
-More detailed info about interceptors is [here](/wiki/03_Kaspresso_configurator.md#kaspresso-interceptors-based-on-kakaokautomator-interceptors) and [here](/wiki/03_Kaspresso_configurator.md#some-words-about-behavior-interceptors). Also, [some sweet features](/wiki/04_How_to_write_autotests.md#sweet-additional-features) helping to resolve a lot of typical problems are available in Kaspresso.
+Sometimes your UI test passes ten times, then breaks on the eleventh attempt for some mysterious reason. It’s called *flakiness*. 
+
+The most popular reason for flakiness is the instability of the UI tests libraries, such as Espresso and UI Automator. To eliminate this instability, Kaspresso uses DSL wrappers and [interceptors](#Interceptors). 
+
+Also, [some Kaspresso features](/wiki/04_How_to_write_autotests.md#sweet-additional-features) can help you resolve a lot of typical problems in UI testing.
 
 #### UI-test libraries acceleration
 
@@ -153,6 +154,7 @@ The left video is a boosted UI Automator, the right video is a default UI Automa
 
 How is it possible? Please, review [the short explanation](./wiki/02_Wrapper_over_UiAutomator.md#accelerate-ui-automator).
 
+<a name="Interceptors"></a>
 #### Interceptors
 
 We have introduced a mechanism of interceptors giving an ability to catch all actions going to Espresso or UI Automator. <br>
