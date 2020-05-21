@@ -21,12 +21,11 @@ And many more!
 
 ![Kaspresso](https://habrastorage.org/webt/dw/jh/9k/dwjh9kypjl637kxj8tiaxwjvtp0.png)
 
-## Capabilities
+## Capabilities of Kaspresso
 
 #### Readability
 
-We like a syntax to write ui-tests providing by [Kakao](https://github.com/agoda-com/Kakao) (a wrapper over Espresso offering Kotlin DSL approach). 
-Just compare.
+We like the syntax that [Kakao](https://github.com/agoda-com/Kakao) applies to write UI tests. This wrapper over Espresso uses the Kotlin DSL approach, that makes the code significantly shorter and more readable. See the difference:
 
 **Espresso**:
 ```kotlin
@@ -51,9 +50,9 @@ fun testFirstFeature() {
     }
 }
 ```
-In according to this approach, we decided to write the same wrapper over UI Automator and called it **Kautomator**.
-Have a look at the code below. <br>
-**UiAutomator**:
+We used the same approach to develop our own wrapper over UI Automator, and we called it *Kautomator*. Take a look at the code below:
+
+**UI Automator**:
 ```kotlin
 val instrumentation: Instrumentation = InstrumentationRegistry.getInstrumentation()
 val uiDevice = UiDevice.getInstance(instrumentation)
@@ -71,7 +70,7 @@ val uiObject = uiDevice.wait(
 uiObject.text = "Kaspresso"
 assertEquals(uiObject.text, "Kaspresso")
 ```
-**Kautomator**
+**Kautomator**:
 ```kotlin
 MainScreen {
     simpleEditText {
@@ -80,15 +79,15 @@ MainScreen {
     }
 }
 ```
-As we mentioned Kakao and Kautomator offer almost identical API to work.
-So, a developer doesn't feel the difference while they write a test and use Espresso or UiAutomator under the hood. <br>
-Please, read about [Kakao](/wiki/01_Wrapper_over_Espresso.md) and [Kautomator](/wiki/02_Wrapper_over_UiAutomator.md) in details.
+Since Kakao and Kautomator provide almost identical APIs, you don’t have to care about what is under the hood of your tests, either Espresso or UI Automator. With Kaspresso, you write the same tests for both.
 
-But, the existance of only suitable Kotlin DSL wrappers over libraries doesn't help to correlate your test with the test-case
-on which this test is based. Also, the long test often transforms into an inseparable code wall. It's a problem.
-That's why we have created an additional Kotlin DSL allowing you to make the perception of your test at absolutely another level.<br>
+Read about [Kakao](/wiki/01_Wrapper_over_Espresso.md) and [Kautomator](/wiki/02_Wrapper_over_UiAutomator.md) in details.
 
-Please, observe the code below:
+However, Kakao and Kautomator themselves don't help you to see the relation between the test and the corresponding test case. Also, a long test often becomes a giant piece of code that is impossible to split into smaller parts.
+That's why we have created an additional Kotlin DSL that allows you to read your test more easily. 
+
+See the example below:
+
 ```kotlin
 @Test
 fun shouldPassOnNoInternetScanTest() =
@@ -137,7 +136,6 @@ fun shouldPassOnNoInternetScanTest() =
         }
     }
 ```
-A great manual about how to write tests correctly is availbable [here](/wiki/04_How_to_write_autotests.md).
 
 #### Stability 
 
