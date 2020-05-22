@@ -194,22 +194,19 @@ For example, with the ```Device``` class you can:
 
 (see more about the [Device class](/wiki/05_Device.md)).
 
-#### Feature's screenshotting
+#### Features screenshotting
 
-If you develop an application that is available across the world then you have to support a lot of localizations. Translation of a word or a phrase is not a big challenge. But, the most important task is to translate according to
-context of a specific screen and language culture. That's why a translator must not only have the set of new words/phrases but, also, a set of screens where these words/phrases are used. <br>
-Kaspresso offers a possibility to make screenshots fast and automatically. <br>
-Also, we prepared a [comprehensive manual and an example](/wiki/07_DocLoc.md) of how to make screenshots even for legacy screens almost immediately. <br>
-The spoiler: you don't have to refactor or to mock all of this =)
+If you develop an application that is available across the world, you have to *localize* it into different languages. When UI is localized, it’s important for the translator to see the context of a word or a phrase, that is the specific screen. 
+
+With Kaspresso, translators can automatically take a screenshot of any screen. It’s incredibly fast, even for legacy screens, and you don't have to refactor or mock anything (see [the manual](/wiki/07_DocLoc.md)).
 
 #### Configurability
 
-We give broad opportunities to tune any part of Kaspresso. Read [info](/wiki/03_Kaspresso_configurator.md) and enjoy it =)
+You can tune any part of Kaspresso (read [more](/wiki/03_Kaspresso_configurator.md))
 
-#### The philosophy
+## Philosophy
 
-The suitable tool to write UI-tests is a necessary requirement but this tool doesn't resolve all problems. Another big bunch of questions is how to write tests and how to organize the entire process. Our team has great experience in introducing autotests in different companies. That's why we have prepared a lot of articles which are devoted to these problems. <br>
-Welcome to [learn our lessons](/wiki/04_How_to_write_autotests.md) =)
+The tool itself, even the perfect one, can not solve all the problems in writing UI tests. It’s important to know how to write tests and how to organize the entire process. Our team has great experience in introducing autotests in different companies. We shared our knowledge on [writing autotests](/wiki/04_How_to_write_autotests.md).
 
 ## Wiki
 
