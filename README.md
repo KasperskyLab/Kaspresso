@@ -164,38 +164,35 @@ Thanks to interceptors, you can do a lot of useful things, such as:
 
 and many more (see [the manual](/wiki/03_Kaspresso_configurator.md#kaspresso-interceptors-based-on-kakaokautomator-interceptors)).
 
-#### Logging
-Kaspresso transform your tests' logs into understandable and pleasant text:
+#### Writing readable logs
+Kaspresso writes its own logs, detailed and readable:
 
 <img src="https://habrastorage.org/webt/03/nn/qg/03nnqgupdqnwa_i4jwyz1uqq6r0.png" />
 <img src="https://habrastorage.org/webt/tq/az/3v/tqaz3vjsgpw0-ivylrfbnuqyiqa.png" />
 
-#### Ability to call Adb commands
+#### Ability to call ADB commands
 
-Espresso and UI Automator don't allow to call adb commands inside a test. <br>
-That's why we have written special [AdbServer repository](https://github.com/KasperskyLab/AdbServer) fixing mentioned problem. <br>
+Espresso and UI Automator don't allow to call ADB commands from inside a test. To fix this problem, we developed AdbServer (see the [repository on GitHub](https://github.com/KasperskyLab/AdbServer)).
 
-In Kaspresso, the developer can call ADB and CMD commands by ```AdbServer``` class. <br>
-The manual is [here](/wiki/06_AdbServer.md)
+In Kaspresso, you can call ADB and CMD commands using the ```AdbServer``` class (see [the manual](/wiki/06_AdbServer.md)).
 
 #### Ability to work with Android System
 
-There are a lot of useful classes in Kaspresso to work with Android System. 
+You can use Kaspresso classes to work with Android System.
 
-Examples of such work: <br> 
-    1. push/pull files, <br>
-    2. enable/disable network, <br>
-    3. give permissions like a user does, <br>
-    4. emulate phone calls, <br>
-    5. make screenshots, <br>
-    6. enable/disable gps, <br>
-    7. set geo location, <br>
-    8. enable/disable accessibility, <br>
-    9. change app language, <br>
-    10. collect and parse logcat, <br>
-    11. etc.<br>
+For example, with the ```Device``` class you can:
+* push/pull files,
+* enable/disable network,
+* give permissions like a user does,
+* emulate phone calls,
+* take screenshots,
+* enable/disable GPS,
+* set geolocation,
+* enable/disable accessibility,
+* change the app language,
+* collect and parse the logcat output.
 
-A developer can use all of this through [Device class](/wiki/05_Device.md).
+(see more about the [Device class](/wiki/05_Device.md)).
 
 #### Feature's screenshotting
 
