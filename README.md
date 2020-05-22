@@ -23,7 +23,7 @@ And many more!
 
 ## Capabilities of Kaspresso
 
-#### Readability
+### Readability
 
 We like the syntax that [Kakao](https://github.com/agoda-com/Kakao) applies to write UI tests. This wrapper over Espresso uses the Kotlin DSL approach, that makes the code significantly shorter and more readable. See the difference:
 
@@ -137,7 +137,7 @@ fun shouldPassOnNoInternetScanTest() =
     }
 ```
 
-#### Stability 
+### Stability 
 
 Sometimes your UI test passes ten times, then breaks on the eleventh attempt for some mysterious reason. It’s called *flakiness*. 
 
@@ -145,7 +145,7 @@ The most popular reason for flakiness is the instability of the UI tests librari
 
 Also, [some Kaspresso features](/wiki/04_How_to_write_autotests.md#sweet-additional-features) can help you resolve a lot of typical problems in UI testing.
 
-#### UI test libraries acceleration
+### UI test libraries acceleration
 
 Let’s watch some short video that shows the difference between the original UI Automator (on the right) and the accelerated one (on the left).
 
@@ -154,7 +154,7 @@ Let’s watch some short video that shows the difference between the original UI
 Here is [a short explanation](./wiki/02_Wrapper_over_UiAutomator.md#accelerate-ui-automator) of why it is possible.
 
 <a name="Interceptors"></a>
-#### Interceptors
+### Interceptors
 
 We developed [Kaspresso behavior interceptors](/wiki/03_Kaspresso_configurator.md#some-words-about-behavior-interceptors) on the base of [Kakao/Kautomator Interceptors](/wiki/03_Kaspresso_configurator.md#kaspresso-interceptors-based-on-kakaokautomator-interceptors) to catch failures.
 
@@ -164,19 +164,19 @@ Thanks to interceptors, you can do a lot of useful things, such as:
 
 and many more (see [the manual](/wiki/03_Kaspresso_configurator.md#kaspresso-interceptors-based-on-kakaokautomator-interceptors)).
 
-#### Writing readable logs
+### Writing readable logs
 Kaspresso writes its own logs, detailed and readable:
 
 <img src="https://habrastorage.org/webt/03/nn/qg/03nnqgupdqnwa_i4jwyz1uqq6r0.png" />
 <img src="https://habrastorage.org/webt/tq/az/3v/tqaz3vjsgpw0-ivylrfbnuqyiqa.png" />
 
-#### Ability to call ADB commands
+### Ability to call ADB commands
 
 Espresso and UI Automator don't allow to call ADB commands from inside a test. To fix this problem, we developed AdbServer (see the [repository on GitHub](https://github.com/KasperskyLab/AdbServer)).
 
 In Kaspresso, you can call ADB and CMD commands using the ```AdbServer``` class (see [the manual](/wiki/06_AdbServer.md)).
 
-#### Ability to work with Android System
+### Ability to work with Android System
 
 You can use Kaspresso classes to work with Android System.
 
@@ -194,13 +194,13 @@ For example, with the ```Device``` class you can:
 
 (see more about the [Device class](/wiki/05_Device.md)).
 
-#### Features screenshotting
+### Features screenshotting
 
 If you develop an application that is available across the world, you have to *localize* it into different languages. When UI is localized, it’s important for the translator to see the context of a word or a phrase, that is the specific screen. 
 
 With Kaspresso, translators can automatically take a screenshot of any screen. It’s incredibly fast, even for legacy screens, and you don't have to refactor or mock anything (see [the manual](/wiki/07_DocLoc.md)).
 
-#### Configurability
+### Configurability
 
 You can tune any part of Kaspresso (read [more](/wiki/03_Kaspresso_configurator.md))
 
