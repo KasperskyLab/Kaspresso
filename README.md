@@ -214,7 +214,8 @@ For all information check [Kaspresso wiki](/wiki/00_Home.md)
 
 ## Integration
 
-Include the `jcenter` repository to your root `build.gradle` file (if it does not exist already):
+To integrate Kaspresso into your project:
+1. If the `jcenter` repository does not exist, include it to your root `build.gradle` file:
 
 ```
 allprojects {
@@ -224,13 +225,14 @@ allprojects {
 }
 ```
 
-And then add dependency to your module `build.gradle`:
+2. Add a dependency to `build.gradle`:
 
 ```
 androidTestImplementation 'com.kaspersky.android-components:kaspresso:1.1.0'
 ```
 
-If you are still using old Android Support libraries we strongly recommend to migrate to AndroidX. <br>
+If you are still using the old Android Support libraries, we strongly recommend to migrate to AndroidX.
+
 The last version with Android Support libraries is:
 
 ```
@@ -238,12 +240,13 @@ androidTestImplementation 'com.kaspersky.android-components:kaspresso:1.0.1-supp
 ```
 
 ## Support
-English support in telegram - t.me/kaspresso_en <br>
-Russian support in telegram - t.me/kaspresso
+Ask your question on Telegram:
+* In English: t.me/kaspresso_en
+* In Russian: t.me/kaspresso
 
-## Contribution Policy
-Kaspresso is an open source project, and depends on its users to improve it. We are more than happy to find you interested in taking the project forward. <br>
-Kindly refer to the [Contribution Guidelines](https://github.com/KasperskyLab/Kaspresso/blob/master/CONTRIBUTING.md) for detailed information. <br>
+
+## Contribution
+Kaspresso is an open source project, so you are welcome to contribute (see the [Contribution Guidelines](https://github.com/KasperskyLab/Kaspresso/blob/master/CONTRIBUTING.md)).
 
 ## License
-Kaspresso is open source and available under the [Apache License, Version 2.0](https://github.com/KasperskyLab/Kaspresso/blob/master/LICENSE).
+Kaspresso is available under the [Apache License, Version 2.0](https://github.com/KasperskyLab/Kaspresso/blob/master/LICENSE).
