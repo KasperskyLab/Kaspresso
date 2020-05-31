@@ -24,7 +24,7 @@ object DataUsageSettingsScreen : UiScreen<DataUsageSettingsScreen>() {
 
     fun open(context: Context) {
         context.startActivity(Intent().apply {
-            component = ComponentName(packageName,"com.android.settings.Settings\$DataUsageSummaryActivity")
+            component = ComponentName(packageName, "com.android.settings.Settings\$DataUsageSummaryActivity")
             addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         })
         uiDevice.waitForWindowUpdate(packageName, TIMEOUT)
