@@ -1,22 +1,21 @@
-@file:Suppress("unused")
 package com.kaspersky.kaspresso.internal.systemscreen
 
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import android.provider.Settings
 import android.widget.Switch
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.UiDevice
 import com.kaspersky.components.kautomator.component.switch.UiSwitch
 import com.kaspersky.components.kautomator.screen.UiScreen
 
-object WiFiSettingsScreen : UiScreen<WiFiSettingsScreen>() {
+object DataUsageSettingsScreen : UiScreen<DataUsageSettingsScreen>() {
 
     private const val TIMEOUT = 5_000L
 
     override val packageName: String = "com.android.settings"
 
-    val wifiSwitch: UiSwitch = UiSwitch {
+    val mobileDataSwitch: UiSwitch = UiSwitch {
         withClassName(Switch::class.java)
     }
 
@@ -24,7 +23,8 @@ object WiFiSettingsScreen : UiScreen<WiFiSettingsScreen>() {
         get() = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
 
     fun open(context: Context) {
-        context.startActivity(Intent(Settings.ACTION_WIFI_SETTINGS).apply {
+        context.startActivity(Intent().apply {
+            component = ComponentName(packageName,"com.android.settings.Settings\$DataUsageSummaryActivity")
             addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         })
         uiDevice.waitForWindowUpdate(packageName, TIMEOUT)
@@ -35,11 +35,11 @@ object WiFiSettingsScreen : UiScreen<WiFiSettingsScreen>() {
         uiDevice.waitForWindowUpdate(context.packageName, TIMEOUT)
     }
 
-    fun enableWifi() {
-        wifiSwitch.setChecked(true)
+    fun enableMobileData() {
+        mobileDataSwitch.setChecked(true)
     }
 
-    fun disableWifi() {
-        wifiSwitch.setChecked(false)
+    fun disableMobileData() {
+        mobileDataSwitch.setChecked(false)
     }
 }

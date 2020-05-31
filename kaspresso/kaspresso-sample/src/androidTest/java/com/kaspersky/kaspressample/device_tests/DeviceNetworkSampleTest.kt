@@ -1,7 +1,11 @@
 package com.kaspersky.kaspressample.device_tests
 
 import android.Manifest
+import android.content.Context
 import android.net.ConnectivityManager
+import android.net.Network
+import android.net.NetworkCapabilities
+import android.net.NetworkRequest
 import android.net.wifi.WifiManager
 import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
@@ -13,12 +17,10 @@ import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
+import java.util.concurrent.CountDownLatch
+import java.util.concurrent.TimeUnit
 
 class DeviceNetworkSampleTest : TestCase() {
-
-    companion object {
-        private const val NETWORK_ESTABLISHMENT_DELAY = 1_500L
-    }
 
     @get:Rule
     val runtimePermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
@@ -39,43 +41,62 @@ class DeviceNetworkSampleTest : TestCase() {
 
             step("Disable network") {
                 device.network.disable()
-                Screen.idle(NETWORK_ESTABLISHMENT_DELAY)
                 assertFalse(isDataConnected())
                 assertFalse(isWiFiEnabled())
             }
 
             step("Enable network") {
                 device.network.enable()
-                Screen.idle(NETWORK_ESTABLISHMENT_DELAY)
                 assertTrue(isDataConnected())
                 assertTrue(isWiFiEnabled())
             }
 
             step("Toggle WiFi") {
                 device.network.toggleWiFi(false)
-                Screen.idle(NETWORK_ESTABLISHMENT_DELAY)
                 assertFalse(isWiFiEnabled())
-
                 device.network.toggleWiFi(true)
-                Screen.idle(NETWORK_ESTABLISHMENT_DELAY)
                 assertTrue(isWiFiEnabled())
             }
 
             step("Toggle Mobile data") {
                 device.network.toggleMobileData(false)
-                Screen.idle(NETWORK_ESTABLISHMENT_DELAY)
                 assertFalse(isDataConnected())
-
                 device.network.toggleMobileData(true)
-                Screen.idle(NETWORK_ESTABLISHMENT_DELAY)
                 assertTrue(isDataConnected())
             }
         }
     }
 
-    private fun BaseTestContext.isDataConnected(): Boolean =
-        device.context.getSystemService(ConnectivityManager::class.java).activeNetworkInfo != null
+    private fun BaseTestContext.isDataConnected(): Boolean {
+        val manager = device.context.getSystemService(ConnectivityManager::class.java) as ConnectivityManager
+        val cdl = CountDownLatch(1)
+        var isConnected: Boolean = false
+
+        val request = NetworkRequest.Builder()
+            .addTransportType(NetworkCapabilities.TRANSPORT_CELLULAR)
+            .addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+            .build()
+
+        manager.requestNetwork(request, object : ConnectivityManager.NetworkCallback() {
+            override fun onLost(network: Network) {
+                super.onLost(network)
+                manager.unregisterNetworkCallback(this)
+                isConnected = false
+                cdl.countDown()
+            }
+
+            override fun onAvailable(network: Network) {
+                super.onAvailable(network)
+                manager.unregisterNetworkCallback(this)
+                isConnected = true
+                cdl.countDown()
+            }
+        })
+
+        cdl.await(10L, TimeUnit.SECONDS)
+        return isConnected;
+    }
 
     private fun BaseTestContext.isWiFiEnabled(): Boolean =
-        device.context.getSystemService(WifiManager::class.java).isWifiEnabled
+        (device.context.getSystemService(Context.WIFI_SERVICE) as? WifiManager)?.isWifiEnabled ?: throw IllegalStateException("WifiManager is unavailable")
 }
