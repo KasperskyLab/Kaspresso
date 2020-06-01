@@ -6,6 +6,10 @@
 
 # Kaspresso
 
+**This framework is a part of [Avokado Project](https://avokadoproject.github.io/)**.
+
+---
+
 Kaspresso is a great framework for UI testing. Based on [Espresso](https://developer.android.com/training/testing/espresso) and [UI Automator](https://developer.android.com/training/testing/ui-automator), Kaspresso provides a wide range of additional amazing features, such as:
 * 100% stability, no flakiness.
 * Significantly faster execution of UI Automator commands.
