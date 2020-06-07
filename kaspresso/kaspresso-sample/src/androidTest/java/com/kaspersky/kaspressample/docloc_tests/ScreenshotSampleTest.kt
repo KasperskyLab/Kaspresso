@@ -4,20 +4,9 @@ import android.Manifest
 import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
 import com.agoda.kakao.screen.Screen
-import com.kaspersky.kaspressample.MainActivity
-import com.kaspersky.kaspressample.compose.ComplexComposeSampleActivity
-import com.kaspersky.kaspressample.external_screens.UiMainScreen
 import com.kaspersky.kaspressample.screen.SimpleScreen
 import com.kaspersky.kaspressample.simple.SimpleActivity
 import com.kaspersky.kaspresso.annotations.ScreenShooterTest
-import com.kaspersky.kaspresso.device.screenshots.ScreenshotsImpl
-import com.kaspersky.kaspresso.device.screenshots.screenshotfiles.DefaultScreenshotDirectoryProvider
-import com.kaspersky.kaspresso.device.screenshots.screenshotfiles.DefaultScreenshotNameProvider
-import com.kaspersky.kaspresso.device.screenshots.screenshotmaker.CombinedScreenshotMaker
-import com.kaspersky.kaspresso.device.screenshots.screenshotmaker.ExternalScreenshotMaker
-import com.kaspersky.kaspresso.device.screenshots.screenshotmaker.InternalScreenshotMaker
-import com.kaspersky.kaspresso.device.screenshots.screenshotmaker.ScrollScreenshotMaker
-import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.testcases.api.testcase.DocLocScreenshotTestCase
 import java.io.File
 import org.junit.Rule
@@ -39,7 +28,7 @@ class ScreenshotSampleTest : DocLocScreenshotTestCase(
     )
 
     @get:Rule
-    val activityRule = ActivityTestRule(MainActivity::class.java, false, true)
+    val activityRule = ActivityTestRule(SimpleActivity::class.java, false, true)
 
     @ScreenShooterTest
     @Test
@@ -47,10 +36,8 @@ class ScreenshotSampleTest : DocLocScreenshotTestCase(
         before {
         }.after {
         }.run {
+
             step("1. Launch activity") {
-                UiMainScreen {
-                    flakyButton { click() }
-                }
                 captureScreenshot("1. Simple screen")
             }
 
