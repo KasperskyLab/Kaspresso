@@ -17,7 +17,7 @@ object Dependencies {
         const val junit = "4.12"
         const val testCore = "1.2.0"
         const val espresso = "3.2.0"
-        const val kakao = "2.3.0"
+        const val kakao = "2.3.2"
         const val uiAutomator = "2.2.0"
         const val adbServer = "1.0.1"
 
@@ -64,6 +64,7 @@ object Dependencies {
     const val rules = "androidx.test:rules:${Versions.runner}"
 
     const val junit = "junit:junit:${Versions.junit}"
+    const val junitJupiter = "org.junit.jupiter:junit-jupiter:5.6.2"
     const val truth = "com.google.truth:truth:${Versions.truth}"
 
     const val espressoCore = "androidx.test.espresso:espresso-core:${Versions.espresso}"

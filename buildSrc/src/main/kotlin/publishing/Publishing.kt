@@ -21,20 +21,23 @@ private const val DEPENDENCY_KAUTOMATOR = "kautomator"
 private const val PROPERTY_VERSION = "stableVersion"
 private const val PROPERTY_VERSION_SNAPSHOT = "snapshotVersion"
 private const val PROPERTY_GROUP_ID = "publish.artifactGroup"
+private const val PROPERTY_ARTIFACT_NAME = "publish.artifactName"
+private const val PROPERTY_PUBLICATION_NAME = "publish.publicationName"
 
-val Project.shouldBePublished get() = name == "kaspresso" || name == "kautomator"
+val Project.shouldBePublished get() = name == "kaspresso-framework" ||
+        name == "kautomator-framework"
 
 fun PublishingExtension.setup(project: Project) {
     publications {
         createWithNameAndVersion(
             project = project,
-            publicationName = project.name,
+            publicationName = project.findProperty(PROPERTY_PUBLICATION_NAME).toString(),
             publicationVersion = project.findProject(PROPERTY_VERSION).toString()
         )
 
         createWithNameAndVersion(
             project = project,
-            publicationName = "${project.name}Snapshot",
+            publicationName = "${project.findProperty(PROPERTY_PUBLICATION_NAME)}Snapshot",
             publicationVersion = project.findProperty(PROPERTY_VERSION_SNAPSHOT).toString()
         )
     }
@@ -48,8 +51,8 @@ private fun PublicationContainer.createWithNameAndVersion(project: Project, publ
             artifact(tasks.getByName(JAVADOC_TASK))
         }
 
-        artifactId = project.name
-        groupId = project.findProperty(PROPERTY_GROUP_ID) as? String
+        artifactId = project.findProperty(PROPERTY_ARTIFACT_NAME).toString()
+        groupId = project.findProperty(PROPERTY_GROUP_ID).toString()
         version = publicationVersion
 
         pom {
