@@ -16,7 +16,7 @@ private const val UNSPECIFIED_DEPENDENCY = "unspecified"
 private const val DEPENDENCY_GROUP = "groupId"
 private const val DEPENDENCY_ARTIFACT = "artifactId"
 private const val DEPENDENCY_VERSION = "version"
-private const val DEPENDENCY_KAUTOMATOR = "kautomator"
+private const val DEPENDENCY_KAUTOMATOR = "kautomator-framework"
 
 private const val PROPERTY_VERSION = "stableVersion"
 private const val PROPERTY_VERSION_SNAPSHOT = "snapshotVersion"
