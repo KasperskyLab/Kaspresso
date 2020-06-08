@@ -17,6 +17,7 @@ private const val DEPENDENCY_GROUP = "groupId"
 private const val DEPENDENCY_ARTIFACT = "artifactId"
 private const val DEPENDENCY_VERSION = "version"
 private const val DEPENDENCY_KAUTOMATOR = "kautomator-framework"
+private const val DEPENDENCY_KAUTOMATOR_SHORT = "kautomator"
 
 private const val PROPERTY_VERSION = "stableVersion"
 private const val PROPERTY_VERSION_SNAPSHOT = "snapshotVersion"
@@ -67,11 +68,12 @@ private fun PublicationContainer.createWithNameAndVersion(project: Project, publ
                         if (it.name != DEPENDENCY_KAUTOMATOR) { // TODO: Move to project settings
                             dependencyNode.appendNode(DEPENDENCY_GROUP, it.group)
                             dependencyNode.appendNode(DEPENDENCY_VERSION, it.version)
+                            dependencyNode.appendNode(DEPENDENCY_ARTIFACT, it.name)
                         } else {
                             dependencyNode.appendNode(DEPENDENCY_GROUP, groupId)
                             dependencyNode.appendNode(DEPENDENCY_VERSION, publicationVersion)
+                            dependencyNode.appendNode(DEPENDENCY_ARTIFACT, DEPENDENCY_KAUTOMATOR_SHORT)
                         }
-                        dependencyNode.appendNode(DEPENDENCY_ARTIFACT, it.name)
                     }
                 }
             }
