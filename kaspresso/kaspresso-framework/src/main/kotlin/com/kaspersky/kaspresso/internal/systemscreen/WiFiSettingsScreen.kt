@@ -5,8 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.provider.Settings
 import android.widget.Switch
-import androidx.test.platform.app.InstrumentationRegistry
-import androidx.test.uiautomator.UiDevice
 import com.kaspersky.components.kautomator.component.switch.UiSwitch
 import com.kaspersky.components.kautomator.screen.UiScreen
 
@@ -20,19 +18,16 @@ object WiFiSettingsScreen : UiScreen<WiFiSettingsScreen>() {
         withClassName(Switch::class.java)
     }
 
-    private val uiDevice: UiDevice
-        get() = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
-
     fun open(context: Context) {
         context.startActivity(Intent(Settings.ACTION_WIFI_SETTINGS).apply {
             addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         })
-        uiDevice.waitForWindowUpdate(packageName, TIMEOUT)
+        waitForWindowUpdate(packageName, TIMEOUT)
     }
 
     fun close(context: Context) {
-        uiDevice.pressBack()
-        uiDevice.waitForWindowUpdate(context.packageName, TIMEOUT)
+        pressBack()
+        waitForWindowUpdate(context.packageName, TIMEOUT)
     }
 
     fun enableWifi() {
