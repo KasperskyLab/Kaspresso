@@ -1,10 +1,11 @@
 package com.kaspersky.kaspresso.testcases.models.info
 
 import com.kaspersky.kaspresso.testcases.models.StepStatus
+import com.kaspersky.kaspresso.testcases.models.TestIdentifier
 
 internal class InternalStepInfo(
     override val description: String,
-    override val testClassName: String,
+    override val testIdentifier: TestIdentifier,
     override val number: String?,
     override val ordinal: Int,
     override val startTime: Long,
@@ -33,7 +34,7 @@ internal class InternalStepInfo(
     override fun toString(): String {
         return "StepInfo(" +
                 "description=$description, " +
-                "testClassName=$testClassName, " +
+                "testIdentifier=$testIdentifier, " +
                 "number=$number, " +
                 "ordinal=$ordinal, " +
                 "stepNumber=$stepNumber, " +

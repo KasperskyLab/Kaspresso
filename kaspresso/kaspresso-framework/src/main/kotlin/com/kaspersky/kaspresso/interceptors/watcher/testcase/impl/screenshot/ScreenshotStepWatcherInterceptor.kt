@@ -31,5 +31,5 @@ class ScreenshotStepWatcherInterceptor(
         screenshots.take("${makeScreenshotTag(stepInfo)}_failure_${error.javaClass.simpleName}")
     }
 
-    private fun makeScreenshotTag(stepInfo: StepInfo) = "${stepInfo.testClassName}_step_${stepInfo.ordinal}"
+    private fun makeScreenshotTag(stepInfo: StepInfo) = "${stepInfo.testIdentifier}_step_${stepInfo.ordinal}"
 }

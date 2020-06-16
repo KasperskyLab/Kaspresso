@@ -79,7 +79,6 @@ import com.kaspersky.kaspresso.interceptors.watcher.testcase.TestRunWatcherInter
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.defaults.DefaultTestRunWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.logging.LoggingStepWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.logging.TestRunLoggerWatcherInterceptor
-import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.report.BuildStepReportWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.screenshot.ScreenshotStepWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.screenshot.TestRunnerScreenshotWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.view.AtomWatcherInterceptor
@@ -97,18 +96,21 @@ import com.kaspersky.kaspresso.params.ContinuouslyParams
 import com.kaspersky.kaspresso.params.FlakySafetyParams
 import com.kaspersky.kaspresso.params.Params
 import com.kaspersky.kaspresso.params.StepParams
-import com.kaspersky.kaspresso.report.impl.AllureReportWriter
+import com.kaspersky.kaspresso.steps.StepsResultsConsumer
 import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
+import com.kaspersky.kaspresso.testcases.models.TestIdentifier
 
 /**
  * The storage of all Kaspresso preferences and entities, such as [AdbServer], [Device] and different interceptors.
  */
 data class Kaspresso(
+    internal val testIdentifier: TestIdentifier,
     internal val libLogger: UiTestLogger,
     internal val testLogger: UiTestLogger,
     internal val adbServer: AdbServer,
     internal val device: Device,
     internal val params: Params,
+    internal val stepsResultsConsumers: List<StepsResultsConsumer>,
     internal val viewActionWatcherInterceptors: List<ViewActionWatcherInterceptor>,
     internal val viewAssertionWatcherInterceptors: List<ViewAssertionWatcherInterceptor>,
     internal val atomWatcherInterceptors: List<AtomWatcherInterceptor>,
@@ -267,6 +269,16 @@ data class Kaspresso(
                 }
             }
         }
+
+        /**
+         * Holds unique identifier for current test case.
+         */
+        var testIdentifier: TestIdentifier = TestIdentifier("", "")
+
+        /**
+         * Holds the list of StepsResultsConsumers
+         */
+        var stepsResultsConsumers: List<StepsResultsConsumer> = emptyList()
 
         /**
          * Holds an implementation of [KautomatorWaitForIdleSettings] for external developer's usage in tests.
@@ -440,7 +452,7 @@ data class Kaspresso(
         /**
          * Holds the list of [ViewBehaviorInterceptor]s.
          * If it was not specified, Kaspresso will use no [ViewBehaviorInterceptor]s.
-         * These interceptors are called by [com.kaspersky.kaspresso.interceptors.tolibrary.impl.KakaoViewInterceptor]
+         * These interceptors are called by [com.kaspersky.kaspresso.interceptors.tolibrary.kakao.KakaoViewInterceptor]
          * before actual [androidx.test.espresso.ViewInteraction.perform] and
          * [androidx.test.espresso.ViewInteraction.check] calls.
          * Note that the order of [ViewBehaviorInterceptor]s in this list is significant: the first item wil be
@@ -453,7 +465,7 @@ data class Kaspresso(
         /**
          * Holds the list of [DataBehaviorInterceptor]s.
          * If it was not specified, Kaspresso will use no [DataBehaviorInterceptor]s.
-         * These interceptors are called by [com.kaspersky.kaspresso.interceptors.tolibrary.impl.KakaoDataInterceptor]
+         * These interceptors are called by [com.kaspersky.kaspresso.interceptors.tolibrary.kakao.KakaoDataInterceptor]
          * before actual [androidx.test.espresso.DataInteraction.check] call.
          * Note that the order of [DataBehaviorInterceptor]s in this list is significant: the first item wil be
          * at the lowest level of intercepting chain, and the last item will be at the highest level.
@@ -465,7 +477,7 @@ data class Kaspresso(
         /**
          * Holds the list of [WebBehaviorInterceptor]s.
          * If it was not specified, Kaspresso will use no [WebBehaviorInterceptor]s.
-         * These interceptors are called by [com.kaspersky.kaspresso.interceptors.tolibrary.impl.KakaoWebInterceptor]
+         * These interceptors are called by [com.kaspersky.kaspresso.interceptors.tolibrary.kakao.KakaoWebInterceptor]
          * before actual [androidx.test.espresso.web.sugar.Web.WebInteraction.perform] and
          * [androidx.test.espresso.web.sugar.Web.WebInteraction.check] calls.
          * Note that the order of [WebBehaviorInterceptor]s in this list is significant: the first item wil be
@@ -661,7 +673,6 @@ data class Kaspresso(
 
             if (!::testRunWatcherInterceptors.isInitialized) testRunWatcherInterceptors = mutableListOf(
                 TestRunLoggerWatcherInterceptor(libLogger),
-                BuildStepReportWatcherInterceptor(AllureReportWriter(libLogger)),
                 defaultsTestRunWatcherInterceptor
             )
         }
@@ -678,6 +689,7 @@ data class Kaspresso(
             postBaseInitInterceptors()
 
             val kaspresso = Kaspresso(
+                testIdentifier = testIdentifier,
                 libLogger = libLogger,
                 testLogger = testLogger,
 
@@ -707,6 +719,7 @@ data class Kaspresso(
                     stepParams = stepParams
                 ),
 
+                stepsResultsConsumers = stepsResultsConsumers,
                 viewActionWatcherInterceptors = viewActionWatcherInterceptors,
                 viewAssertionWatcherInterceptors = viewAssertionWatcherInterceptors,
                 atomWatcherInterceptors = atomWatcherInterceptors,
