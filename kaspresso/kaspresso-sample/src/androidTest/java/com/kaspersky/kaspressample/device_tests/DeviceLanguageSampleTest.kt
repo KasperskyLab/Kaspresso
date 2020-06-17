@@ -6,9 +6,9 @@ import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.screen.MainScreen
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
-import java.util.Locale
 import org.junit.Rule
 import org.junit.Test
+import java.util.*
 
 class DeviceLanguageSampleTest : TestCase() {
 
