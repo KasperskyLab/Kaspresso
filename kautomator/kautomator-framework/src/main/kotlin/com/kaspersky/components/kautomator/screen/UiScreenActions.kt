@@ -22,7 +22,25 @@ interface UiScreenActions {
         view.perform(UiScreenActionType.PRESS_BACK) { pressBack() }
     }
 
+    /**
+     * Waits for window update for specified package name
+     */
+    fun waitForWindowUpdate(packageName: String, timeout: Long) {
+        view.perform(UiScreenActionType.WAIT_FOR_WINDOW_UPDATE) {
+            waitForWindowUpdate(packageName, timeout)
+        }
+    }
+
+    /**
+     * Waits for window update
+     */
+    fun waitForWindowUpdate(timeout: Long) {
+        view.perform(UiScreenActionType.WAIT_FOR_WINDOW_UPDATE) {
+            waitForWindowUpdate(timeout)
+        }
+    }
+
     enum class UiScreenActionType : UiOperationType {
-        PRESS_BACK
+        PRESS_BACK, WAIT_FOR_WINDOW_UPDATE
     }
 }

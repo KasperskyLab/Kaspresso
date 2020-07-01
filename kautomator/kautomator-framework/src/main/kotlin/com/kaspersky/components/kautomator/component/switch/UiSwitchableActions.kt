@@ -2,6 +2,7 @@
 package com.kaspersky.components.kautomator.component.switch
 
 import com.kaspersky.components.kautomator.component.common.actions.UiBaseActions
+import com.kaspersky.components.kautomator.component.switch.UiSwitchableActions.SwitchableUiActionType.SET_CHECKED
 import com.kaspersky.components.kautomator.component.switch.UiSwitchableActions.SwitchableUiActionType.SWITCH
 import com.kaspersky.components.kautomator.intercept.operation.UiOperationType
 
@@ -28,7 +29,15 @@ interface UiSwitchableActions : UiBaseActions {
         }
     }
 
+    fun setChecked(isChecked: Boolean) {
+        view.perform(SET_CHECKED, "setChecked=$isChecked") {
+            if (isChecked() != isChecked) {
+                click()
+            }
+        }
+    }
+
     enum class SwitchableUiActionType : UiOperationType {
-        SWITCH
+        SWITCH, SET_CHECKED
     }
 }

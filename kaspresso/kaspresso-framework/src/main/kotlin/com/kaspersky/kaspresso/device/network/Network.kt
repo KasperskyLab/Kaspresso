@@ -1,7 +1,5 @@
 package com.kaspersky.kaspresso.device.network
 
-import com.kaspersky.kaspresso.annotations.RequiresAdbServer
-
 /**
  * The interface to work with network settings.
  *
@@ -15,18 +13,12 @@ interface Network {
 
     /**
      * Enables wi-fi and mobile data using adb.
-     *
-     * Required Permissions: INTERNET.
      */
-    @RequiresAdbServer
     fun enable()
 
     /**
      * Disables wi-fi and mobile data using adb.
-     *
-     * Required Permissions: INTERNET.
      */
-    @RequiresAdbServer
     fun disable()
 
     /**
