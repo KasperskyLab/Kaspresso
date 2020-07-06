@@ -7,16 +7,20 @@ import android.net.wifi.WifiManager
 import android.os.Build
 import androidx.core.content.ContextCompat
 import com.kaspersky.kaspresso.device.server.AdbServer
+import com.kaspersky.kaspresso.flakysafety.algorithm.FlakySafetyAlgorithm
 import com.kaspersky.kaspresso.internal.exceptions.AdbServerException
 import com.kaspersky.kaspresso.internal.systemscreen.DataUsageSettingsScreen
 import com.kaspersky.kaspresso.internal.systemscreen.WiFiSettingsScreen
+import com.kaspersky.kaspresso.logger.UiTestLogger
+import com.kaspersky.kaspresso.params.FlakySafetyParams
 
 /**
  * The implementation of the [Network] interface.
  */
 class NetworkImpl(
     private val targetContext: Context,
-    private val adbServer: AdbServer
+    private val adbServer: AdbServer,
+    logger: UiTestLogger
 ) : Network {
 
     companion object {
@@ -33,6 +37,8 @@ class NetworkImpl(
         private val WIFI_STATE_CHECK_RESULT_DISABLED = Regex("Wi-Fi is disabl(ing|ed)")
         private val ADB_RESULT_REGEX = Regex("exitCode=(\\d+), message=(.+)")
     }
+
+    private val flakySafetyAlgorithm = FlakySafetyAlgorithm(logger)
 
     /**
      * Enables both Wi-Fi and mobile data.
@@ -69,10 +75,21 @@ class NetworkImpl(
             false -> CMD_STATE_DISABLE to NETWORK_STATE_CHECK_RESULT_DISABLED
         }
         adbServer.performShell("$NETWORK_STATE_CMD $state")
-        val result = adbServer.performShell(NETWORK_STATE_CHECK_CMD)
+        val result = flakySafetyAlgorithm.invokeFlakySafely(
+            params = getParams(),
+            action = { adbServer.performShell(NETWORK_STATE_CHECK_CMD) }
+        )
         expectedResult == parseAdbResponse(result)?.trim()
     } catch (ex: AdbServerException) {
         false
+    }
+
+    private fun getParams(): FlakySafetyParams {
+        return FlakySafetyParams.custom(
+            timeoutMs = 500,
+            intervalMs = 50,
+            allowedExceptions = setOf(AdbServerException::class.java)
+        )
     }
 
     private fun toggleMobileDataUsingAndroidSettings(enable: Boolean) {
@@ -132,7 +149,10 @@ class NetworkImpl(
             false -> CMD_STATE_DISABLE to WIFI_STATE_CHECK_RESULT_DISABLED
         }
         adbServer.performShell("$WIFI_STATE_CMD $state")
-        val result = adbServer.performShell(WIFI_STATE_CHECK_CMD)
+        val result = flakySafetyAlgorithm.invokeFlakySafely(
+            params = getParams(),
+            action = { adbServer.performShell(WIFI_STATE_CHECK_CMD) }
+        )
         val succeed = expectedResult.matches(parseAdbResponse(result) ?: "")
         if (succeed) true else throw AdbServerException("Failed to change Wi-Fi state using ABD")
     } catch (e: AdbServerException) {
