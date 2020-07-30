@@ -19,15 +19,15 @@ internal class FullLoggerOptimiser(
     private var logRecorder: LogRecorder = LogRecorder(recordingStackMaxSize)
 
     override fun log(
-        logType: FullLogger.LogType?,
+        logLevel: FullLogger.LogLevel?,
         deviceName: String?,
         tag: String?,
         method: String?,
         text: String?
     ) {
         handleLog(
-            key = "$logType$deviceName$tag$method$text",
-            action = { originalFullLogger.log(logType, deviceName, tag, method, text) }
+            key = "$logLevel$deviceName$tag$method$text",
+            action = { originalFullLogger.log(logLevel, deviceName, tag, method, text) }
         )
     }
 

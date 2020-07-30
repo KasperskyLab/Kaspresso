@@ -7,13 +7,13 @@ internal class FullLoggerForTest : FullLogger {
     val list: MutableList<String> = mutableListOf()
 
     override fun log(
-        logType: FullLogger.LogType?,
+        logLevel: FullLogger.LogLevel?,
         deviceName: String?,
         tag: String?,
         method: String?,
         text: String?
     ) {
-        val entry = "${logType ?: ""}${deviceName ?: ""}${tag ?: ""}${method ?: ""}${text ?: ""}"
+        val entry = "${logLevel ?: ""}${deviceName ?: ""}${tag ?: ""}${method ?: ""}${text ?: ""}"
         list.add(entry)
     }
 }

@@ -55,7 +55,7 @@ internal class DeviceMirror private constructor(
 
     private inner class WatchdogThread : Thread() {
         override fun run() {
-            logger.i("WatchdogThread.run", "WatchdogThread is started from Desktop to Device=$deviceName")
+            logger.d("WatchdogThread.run", "WatchdogThread is started from Desktop to Device=$deviceName")
             while (isRunning.get()) {
                 if (!connectionServer.isConnected()) {
                     try {

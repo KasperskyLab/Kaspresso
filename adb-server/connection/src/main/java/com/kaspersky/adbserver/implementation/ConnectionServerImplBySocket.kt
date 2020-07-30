@@ -29,15 +29,15 @@ internal class ConnectionServerImplBySocket(
     private val backgroundExecutor = Executors.newCachedThreadPool()
 
     override fun tryConnect() {
-        logger.i("tryConnect", "start")
+        logger.d("tryConnect", "start")
         connectionMaker.connect(
             connectAction = { _socket = socketCreation.invoke() },
             successConnectAction = {
-                logger.i("tryConnect", "start handleMessages")
+                logger.d("tryConnect", "start handleMessages")
                 handleMessages()
             }
         )
-        logger.i("tryConnect", "attempt completed")
+        logger.d("tryConnect", "attempt completed")
     }
 
     private fun handleMessages() {
@@ -49,10 +49,10 @@ internal class ConnectionServerImplBySocket(
             deviceName = deviceName
         )
         socketMessagesTransferring.startListening { taskMessage ->
-            logger.i("handleMessages", "received taskMessage=$taskMessage")
+            logger.d("handleMessages", "received taskMessage=$taskMessage")
             backgroundExecutor.execute {
                 val result = commandExecutor.execute(taskMessage.command)
-                logger.i("handleMessages.backgroundExecutor", "result of taskMessage=$taskMessage => result=$result")
+                logger.d("handleMessages.backgroundExecutor", "result of taskMessage=$taskMessage => result=$result")
                 socketMessagesTransferring.sendMessage(
                     ResultMessage(
                         taskMessage.command,
@@ -64,12 +64,12 @@ internal class ConnectionServerImplBySocket(
     }
 
     override fun tryDisconnect() {
-        logger.i("tryDisconnect", "start")
+        logger.d("tryDisconnect", "start")
         connectionMaker.disconnect {
             socketMessagesTransferring.stopListening()
             socket.close()
         }
-        logger.i("tryDisconnect", "attempt completed")
+        logger.d("tryDisconnect", "attempt completed")
     }
 
     override fun isConnected(): Boolean =

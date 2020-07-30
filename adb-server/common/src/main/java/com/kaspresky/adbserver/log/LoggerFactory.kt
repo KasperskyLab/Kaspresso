@@ -10,8 +10,19 @@ import com.kaspresky.adbserver.log.logger.LoggerImpl
  */
 object LoggerFactory {
 
-    private val fullLogger: FullLogger =
-        FullLoggerFilteringByDeviceProvider()
+    private val fullLogger = FullLoggerFilteringByDeviceProvider()
+
+    fun setRunMode(runMode: String?) {
+        if (runMode.equals("debug", true)) {
+            fullLogger.setRunMode(FullLogger.LogLevel.DEBUG)
+        }
+    }
+
+    fun setDesktopName(desktopName: String?) {
+        if (!desktopName.isNullOrEmpty()) {
+            fullLogger.setDesktopName(desktopName)
+        }
+    }
 
     fun getLogger(tag: String, deviceName: String? = null): Logger =
         LoggerImpl(tag, deviceName,

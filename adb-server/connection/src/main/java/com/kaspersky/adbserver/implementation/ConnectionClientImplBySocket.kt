@@ -36,15 +36,15 @@ internal class ConnectionClientImplBySocket(
     private val commandsInProgress = ConcurrentHashMap<Command, ResultWaiter<ResultMessage<CommandResult>>>()
 
     override fun tryConnect() {
-        logger.i("tryConnect", "start")
+        logger.d("tryConnect", "start")
         connectionMaker.connect(
             connectAction = { _socket = socketCreation.invoke() },
             successConnectAction = {
-                logger.i("tryConnect", "start handleMessages")
+                logger.d("tryConnect", "start handleMessages")
                 handleMessages()
             }
         )
-        logger.i("tryConnect", "attempt completed")
+        logger.d("tryConnect", "attempt completed")
     }
 
     private fun handleMessages() {
@@ -55,19 +55,19 @@ internal class ConnectionClientImplBySocket(
             disruptAction = { tryDisconnect() }
         )
         socketMessagesTransferring.startListening { resultMessage ->
-            logger.i("handleMessages", "received resultMessage=$resultMessage")
+            logger.d("handleMessages", "received resultMessage=$resultMessage")
             commandsInProgress[resultMessage.command]?.latchResult(resultMessage)
         }
     }
 
     override fun tryDisconnect() {
-        logger.i("tryDisconnect", "start")
+        logger.d("tryDisconnect", "start")
         connectionMaker.disconnect {
             socketMessagesTransferring.stopListening()
             socket.close()
             resetCommandsInProgress()
         }
-        logger.i("tryDisconnect", "attempt completed")
+        logger.d("tryDisconnect", "attempt completed")
     }
 
     private fun resetCommandsInProgress() {

@@ -17,6 +17,13 @@ internal fun main(args: Array<String>) {
         ?.removeSurrounding(prefix = "adbServerPort", suffix = "")
         ?.replace("=", "")
         ?.trim()
+    val runMode = argsList
+            .firstOrNull { arg -> arg.contains("runMode") }
+            ?.removeSurrounding(prefix = "runMode=", suffix = "")
+            ?.trim()
+
+    LoggerFactory.setRunMode(runMode)
+    LoggerFactory.setDesktopName(adbServerPort)
 
     val logger = LoggerFactory.getLogger(tag = "Desktop")
     logger.i("MAIN", "arguments: emulators=$emulators, adbServerPort=$adbServerPort")

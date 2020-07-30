@@ -23,15 +23,15 @@ internal class DesktopDeviceSocketConnectionForwardImpl(
 
     override fun getDesktopSocketLoad(executor: CommandExecutor): () -> Socket {
         val clientPort = getFreePort()
-        desktopLogger.i("getDesktopSocketLoad", "calculated desktop client port=$clientPort")
+        desktopLogger.d("getDesktopSocketLoad", "calculated desktop client port=$clientPort")
         forwardPorts(executor, clientPort,
             DEVICE_PORT
         )
-        desktopLogger.i("getDesktopSocketLoad", "desktop client port=$clientPort is forwarding with device server port=$DEVICE_PORT")
+        desktopLogger.d("getDesktopSocketLoad", "desktop client port=$clientPort is forwarding with device server port=$DEVICE_PORT")
         return {
-            desktopLogger.i("getDesktopSocketLoad", "started with ip=$LOCAL_HOST, port=$clientPort")
+            desktopLogger.d("getDesktopSocketLoad", "started with ip=$LOCAL_HOST, port=$clientPort")
             val readyClientSocket = Socket(LOCAL_HOST, clientPort)
-            desktopLogger.i("getDesktopSocketLoad", "completed with ip=$LOCAL_HOST, port=$clientPort")
+            desktopLogger.d("getDesktopSocketLoad", "completed with ip=$LOCAL_HOST, port=$clientPort")
             readyClientSocket
         }
     }
@@ -52,16 +52,16 @@ internal class DesktopDeviceSocketConnectionForwardImpl(
     }
 
     private fun forwardPorts(executor: CommandExecutor, fromPort: Int, toPort: Int) {
-        desktopLogger.i("forwardPorts(fromPort=$fromPort, toPort=$toPort)", "started")
+        desktopLogger.d("forwardPorts(fromPort=$fromPort, toPort=$toPort)", "started")
         val result = executor.execute(AdbCommand("forward tcp:$fromPort tcp:$toPort"))
-        desktopLogger.i("forwardPorts(fromPort=$fromPort, toPort=$toPort)", "result=$result")
+        desktopLogger.d("forwardPorts(fromPort=$fromPort, toPort=$toPort)", "result=$result")
     }
 
     override fun getDeviceSocketLoad(): () -> Socket = {
-        deviceLogger.i("getDeviceSocketLoad", "started")
+        deviceLogger.d("getDeviceSocketLoad", "started")
         val serverSocket = ServerSocket(DEVICE_PORT)
         val readyServerSocket = serverSocket.accept()
-        deviceLogger.i("getDeviceSocketLoad", "completed")
+        deviceLogger.d("getDeviceSocketLoad", "completed")
         readyServerSocket
     }
 }

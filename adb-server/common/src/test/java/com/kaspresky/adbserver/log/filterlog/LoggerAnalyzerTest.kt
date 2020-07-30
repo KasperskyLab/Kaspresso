@@ -88,13 +88,13 @@ class LoggerAnalyzerTest {
         fullLoggerTest.list.clear()
         // logs
         loggerAnalyzer.log(text = "text1")
-        loggerAnalyzer.log(logType = FullLogger.LogType.INFO, text = "text1")
-        loggerAnalyzer.log(logType = FullLogger.LogType.DEBUG, text = "text1")
-        loggerAnalyzer.log(logType = FullLogger.LogType.INFO, deviceName = "device1", text = "text1")
-        loggerAnalyzer.log(logType = FullLogger.LogType.INFO, deviceName = "device1", tag = "tag1", text = "text1")
-        loggerAnalyzer.log(logType = FullLogger.LogType.INFO, deviceName = "device1", tag = "tag1", method = "method1", text = "text1")
-        loggerAnalyzer.log(logType = FullLogger.LogType.INFO, deviceName = "device1", tag = "tag2", method = "method1", text = "text1")
-        loggerAnalyzer.log(logType = FullLogger.LogType.INFO, deviceName = "device1", tag = "tag1", method = "method2", text = "text1")
+        loggerAnalyzer.log(logLevel = FullLogger.LogLevel.INFO, text = "text1")
+        loggerAnalyzer.log(logLevel = FullLogger.LogLevel.DEBUG, text = "text1")
+        loggerAnalyzer.log(logLevel = FullLogger.LogLevel.INFO, deviceName = "device1", text = "text1")
+        loggerAnalyzer.log(logLevel = FullLogger.LogLevel.INFO, deviceName = "device1", tag = "tag1", text = "text1")
+        loggerAnalyzer.log(logLevel = FullLogger.LogLevel.INFO, deviceName = "device1", tag = "tag1", method = "method1", text = "text1")
+        loggerAnalyzer.log(logLevel = FullLogger.LogLevel.INFO, deviceName = "device1", tag = "tag2", method = "method1", text = "text1")
+        loggerAnalyzer.log(logLevel = FullLogger.LogLevel.INFO, deviceName = "device1", tag = "tag1", method = "method2", text = "text1")
         // verify
         val outputLogs = fullLoggerTest.list
         assertThat(outputLogs[0]).isEqualTo("text1")

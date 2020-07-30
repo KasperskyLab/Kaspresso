@@ -11,7 +11,7 @@ internal class LoggerImpl(
 
     override fun i(text: String) {
         fullLogger.log(
-            logType = FullLogger.LogType.INFO,
+            logLevel = FullLogger.LogLevel.INFO,
             deviceName = deviceName,
             tag = tag,
             text = text
@@ -20,7 +20,7 @@ internal class LoggerImpl(
 
     override fun i(method: String, text: String) {
         fullLogger.log(
-            logType = FullLogger.LogType.INFO,
+            logLevel = FullLogger.LogLevel.INFO,
             deviceName = deviceName,
             tag = tag,
             method = method,
@@ -30,7 +30,7 @@ internal class LoggerImpl(
 
     override fun d(text: String) {
         fullLogger.log(
-            logType = FullLogger.LogType.DEBUG,
+            logLevel = FullLogger.LogLevel.DEBUG,
             deviceName = deviceName,
             tag = tag,
             text = text
@@ -39,7 +39,7 @@ internal class LoggerImpl(
 
     override fun d(method: String, text: String) {
         fullLogger.log(
-            logType = FullLogger.LogType.DEBUG,
+            logLevel = FullLogger.LogLevel.DEBUG,
             deviceName = deviceName,
             tag = tag,
             method = method,
@@ -49,7 +49,7 @@ internal class LoggerImpl(
 
     override fun e(exception: Exception) {
         fullLogger.log(
-            logType = FullLogger.LogType.ERROR,
+            logLevel = FullLogger.LogLevel.ERROR,
             deviceName = deviceName,
             tag = tag,
             text = exception.toString()
@@ -58,7 +58,7 @@ internal class LoggerImpl(
 
     override fun e(method: String, exception: Exception) {
         fullLogger.log(
-            logType = FullLogger.LogType.ERROR,
+            logLevel = FullLogger.LogLevel.ERROR,
             deviceName = deviceName,
             tag = tag,
             method = method,

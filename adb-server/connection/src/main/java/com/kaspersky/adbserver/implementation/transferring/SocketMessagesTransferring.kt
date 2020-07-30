@@ -39,14 +39,13 @@ internal class SocketMessagesTransferring<ReceiveModel, SendModel> private const
     private val isRunning: AtomicBoolean = AtomicBoolean(false)
 
     fun startListening(listener: (ReceiveModel) -> Unit) {
-        logger.i("startListening", "start")
+        logger.d("startListening", "start")
         messagesListener = listener
         try {
             outputStream = ObjectOutputStream(lightSocketWrapper.getOutputStream())
             inputStream = ObjectInputStream(lightSocketWrapper.getInputStream())
-            logger.i("startListening", "IO Streams were created")
+            logger.d("startListening", "IO Streams were created")
         } catch (exception: Exception) {
-            logger.e("startListening", exception)
             disruptAction.invoke()
             return
         }
@@ -59,7 +58,7 @@ internal class SocketMessagesTransferring<ReceiveModel, SendModel> private const
     }
 
     fun sendMessage(sendModel: SendModel) {
-        logger.i("sendMessage", "where sendModel=$sendModel")
+        logger.d("sendMessage", "where sendModel=$sendModel")
         try {
             outputStream.writeObject(sendModel)
             outputStream.flush()
@@ -74,7 +73,7 @@ internal class SocketMessagesTransferring<ReceiveModel, SendModel> private const
 
     private inner class MessagesListeningThread : Thread() {
         override fun run() {
-            logger.i("MessagesListeningThread.run", "start to work")
+            logger.d("MessagesListeningThread.run", "start to work")
             while (isRunning.get()) {
                 peekNextMessage()
             }
@@ -86,10 +85,10 @@ internal class SocketMessagesTransferring<ReceiveModel, SendModel> private const
         try {
             obj = inputStream.readObject()
             if (obj.javaClass == receiveModelClass) {
-                logger.i("MessagesListeningThread.peekNextMessage", "with message=$obj")
+                logger.d("MessagesListeningThread.peekNextMessage", "with message=$obj")
                 messagesListener.invoke(obj as ReceiveModel)
             } else {
-                logger.i("MessagesListeningThread.peekNextMessage", "with message=$obj" +
+                logger.d("MessagesListeningThread.peekNextMessage", "with message=$obj" +
                         " but this message type is not $receiveModelClass"
                 )
                 disruptAction.invoke()
