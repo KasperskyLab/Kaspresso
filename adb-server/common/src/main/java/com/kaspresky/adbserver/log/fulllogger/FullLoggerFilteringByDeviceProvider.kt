@@ -18,8 +18,8 @@ internal class FullLoggerFilteringByDeviceProvider : FullLogger {
         getFullLogger(deviceName).log(logLevel, deviceName, tag, method, text)
     }
 
-    fun setRunMode(logMode_: FullLogger.LogLevel) {
-        logMode = logMode_
+    fun setRunMode(logMode: FullLogger.LogLevel) {
+        this.logMode = logMode
     }
 
     fun setDesktopName(desktop: String) {

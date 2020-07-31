@@ -1,7 +1,7 @@
 package com.kaspresky.adbserver.log.fulllogger
 
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
 
 /**
  * Presents logs in the form like:
@@ -42,22 +42,40 @@ internal class FullLoggerSystemImpl(
     }
 
     private fun getLogType(logLevel: FullLogger.LogLevel?): String =
-        if (logLevel != null) { getFieldString("[${logLevel.name}]", TAG_FIELD_LENGTH) } else { "" }
+            if (logLevel != null) {
+                getFieldString("[${logLevel.name}]", TAG_FIELD_LENGTH)
+            } else {
+                ""
+            }
 
     private fun getDevice(deviceName: String?): String =
-        if (deviceName != null) { "$DEVICE${deviceName}    " } else { "" }
+            if (deviceName != null) {
+                "$DEVICE${deviceName}    "
+            } else {
+                ""
+            }
 
     private fun getDesktop(): String =
-            if (desktopName != null) { "$DESKTOP${desktopName}    " } else { "" }
+            if (desktopName != null) {
+                "$DESKTOP${desktopName}    "
+            } else {
+                ""
+            }
 
     private fun getTag(tag: String?): String =
-        if (tag != null) { "$TAG${getFieldString(tag)}" } else ""
+            if (tag != null) {
+                "$TAG${getFieldString(tag)}"
+            } else ""
 
     private fun getMethod(method: String?): String =
-        if (method != null) { "$METHOD${getFieldString(method)}" } else ""
+            if (method != null) {
+                "$METHOD${getFieldString(method)}"
+            } else ""
 
     private fun getText(text: String?): String =
-        if (text != null) { "$MESSAGE$text" } else ""
+            if (text != null) {
+                "$MESSAGE$text"
+            } else ""
 
     private fun getFieldString(text: String, length: Int = COMMON_FIELD_LENGTH): String {
         if (text.length >= length) {
