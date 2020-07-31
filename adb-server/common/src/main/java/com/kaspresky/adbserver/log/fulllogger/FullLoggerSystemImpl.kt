@@ -8,8 +8,8 @@ import java.util.Date
  * [INFO] 05/07/2020 14:55:05 device=emulator-5554 tag=ConnectionMaker method=connect message => updated state=CONNECTED
  */
 internal class FullLoggerSystemImpl(
-        private val logMode: FullLogger.LogLevel,
-        private val desktopName: String?
+    private val logMode: FullLogger.LogLevel,
+    private val desktopName: String?
 ) : FullLogger {
     private val formatter = SimpleDateFormat("dd/MM/yyyy HH:mm:ss")
 
@@ -24,11 +24,11 @@ internal class FullLoggerSystemImpl(
     }
 
     override fun log(
-            logLevel: FullLogger.LogLevel?,
-            deviceName: String?,
-            tag: String?,
-            method: String?,
-            text: String?
+        logLevel: FullLogger.LogLevel?,
+        deviceName: String?,
+        tag: String?,
+        method: String?,
+        text: String?
     ) {
         if (logLevel != null && logMode <= logLevel) {
             val fullLog = "${getLogType(logLevel)}${getDate()}${getDesktop()}${getDevice(deviceName)}${getTag(tag)}" +
@@ -50,14 +50,14 @@ internal class FullLoggerSystemImpl(
 
     private fun getDevice(deviceName: String?): String =
             if (deviceName != null) {
-                "$DEVICE${deviceName}    "
+                "$DEVICE$deviceName    "
             } else {
                 ""
             }
 
     private fun getDesktop(): String =
             if (desktopName != null) {
-                "$DESKTOP${desktopName}    "
+                "$DESKTOP$desktopName    "
             } else {
                 ""
             }
