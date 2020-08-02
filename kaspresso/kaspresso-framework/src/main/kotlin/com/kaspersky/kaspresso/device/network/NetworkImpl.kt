@@ -26,15 +26,15 @@ class NetworkImpl(
     companion object {
         private const val CMD_STATE_ENABLE = "enable"
         private const val CMD_STATE_DISABLE = "disable"
-        private const val NETWORK_STATE_CMD = "svc data"
+        private const val NETWORK_STATE_CHANGE_CMD = "svc data"
         private const val NETWORK_STATE_CHECK_CMD =
             "dumpsys telephony.registry | grep \"mDataConnectionState\""
-        private const val WIFI_STATE_CMD = "svc wifi"
-        private const val WIFI_STATE_CHECK_CMD = "dumpsys wifi | grep \"Wi-Fi is\""
+        private const val WIFI_STATE_CHANGE_CMD = "svc wifi"
+        private const val WIFI_STATE_CHECK_CMD = "settings get global wifi_on"
         private const val NETWORK_STATE_CHECK_RESULT_ENABLED = "mDataConnectionState=2"
         private const val NETWORK_STATE_CHECK_RESULT_DISABLED = "mDataConnectionState=0"
-        private val WIFI_STATE_CHECK_RESULT_ENABLED = Regex("Wi-Fi is enabl(ing|ed)")
-        private val WIFI_STATE_CHECK_RESULT_DISABLED = Regex("Wi-Fi is disabl(ing|ed)")
+        private const val WIFI_STATE_CHECK_RESULT_ENABLED = "1"
+        private const val WIFI_STATE_CHECK_RESULT_DISABLED = "0"
         private val ADB_RESULT_REGEX = Regex("exitCode=(\\d+), message=(.+)")
     }
 
@@ -74,20 +74,22 @@ class NetworkImpl(
             true -> CMD_STATE_ENABLE to NETWORK_STATE_CHECK_RESULT_ENABLED
             false -> CMD_STATE_DISABLE to NETWORK_STATE_CHECK_RESULT_DISABLED
         }
-        adbServer.performShell("$NETWORK_STATE_CMD $state")
-        val result = flakySafetyAlgorithm.invokeFlakySafely(
+        adbServer.performShell("$NETWORK_STATE_CHANGE_CMD $state")
+        flakySafetyAlgorithm.invokeFlakySafely(
             params = getParams(),
-            action = { adbServer.performShell(NETWORK_STATE_CHECK_CMD) }
+            action = {
+                val result = adbServer.performShell(NETWORK_STATE_CHECK_CMD)
+                if (expectedResult == parseAdbResponse(result)?.trim()) true else throw AdbServerException("Failed to change network state using ABD")
+            }
         )
-        expectedResult == parseAdbResponse(result)?.trim()
     } catch (ex: AdbServerException) {
         false
     }
 
     private fun getParams(): FlakySafetyParams {
         return FlakySafetyParams.custom(
-            timeoutMs = 500,
-            intervalMs = 50,
+            timeoutMs = 1000,
+            intervalMs = 10,
             allowedExceptions = setOf(AdbServerException::class.java)
         )
     }
@@ -148,13 +150,14 @@ class NetworkImpl(
             true -> CMD_STATE_ENABLE to WIFI_STATE_CHECK_RESULT_ENABLED
             false -> CMD_STATE_DISABLE to WIFI_STATE_CHECK_RESULT_DISABLED
         }
-        adbServer.performShell("$WIFI_STATE_CMD $state")
-        val result = flakySafetyAlgorithm.invokeFlakySafely(
+        adbServer.performShell("$WIFI_STATE_CHANGE_CMD $state")
+        flakySafetyAlgorithm.invokeFlakySafely(
             params = getParams(),
-            action = { adbServer.performShell(WIFI_STATE_CHECK_CMD) }
+            action = {
+                val result = adbServer.performShell(WIFI_STATE_CHECK_CMD)
+                if (parseAdbResponse(result)?.trim() == expectedResult) true else throw AdbServerException("Failed to change Wi-Fi state using ABD")
+            }
         )
-        val succeed = expectedResult.matches(parseAdbResponse(result) ?: "")
-        if (succeed) true else throw AdbServerException("Failed to change Wi-Fi state using ABD")
     } catch (e: AdbServerException) {
         false
     }

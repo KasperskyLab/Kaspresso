@@ -9,12 +9,11 @@ import android.net.NetworkRequest
 import android.net.wifi.WifiManager
 import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
-import com.agoda.kakao.screen.Screen
 import com.kaspersky.kaspressample.device.DeviceSampleActivity
+import com.kaspersky.kaspressample.utils.SafeAssert.assertFalseSafely
+import com.kaspersky.kaspressample.utils.SafeAssert.assertTrueSafely
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
-import org.junit.Assert.assertFalse
-import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
 import java.util.concurrent.CountDownLatch
@@ -41,28 +40,28 @@ class DeviceNetworkSampleTest : TestCase() {
 
             step("Disable network") {
                 device.network.disable()
-                assertFalse(isDataConnected())
-                assertFalse(isWiFiEnabled())
+                assertFalseSafely { isDataConnected() }
+                assertFalseSafely { isWiFiEnabled() }
             }
 
             step("Enable network") {
                 device.network.enable()
-                assertTrue(isDataConnected())
-                assertTrue(isWiFiEnabled())
+                assertTrueSafely { isDataConnected() }
+                assertTrueSafely { isWiFiEnabled() }
             }
 
             step("Toggle WiFi") {
                 device.network.toggleWiFi(false)
-                assertFalse(isWiFiEnabled())
+                assertFalseSafely { isWiFiEnabled() }
                 device.network.toggleWiFi(true)
-                assertTrue(isWiFiEnabled())
+                assertTrueSafely { isWiFiEnabled() }
             }
 
             step("Toggle Mobile data") {
                 device.network.toggleMobileData(false)
-                assertFalse(isDataConnected())
+                assertFalseSafely { isDataConnected() }
                 device.network.toggleMobileData(true)
-                assertTrue(isDataConnected())
+                assertTrueSafely { isDataConnected() }
             }
         }
     }
