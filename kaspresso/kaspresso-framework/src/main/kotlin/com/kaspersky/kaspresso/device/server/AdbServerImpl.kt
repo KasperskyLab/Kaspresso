@@ -2,9 +2,9 @@ package com.kaspersky.kaspresso.device.server
 
 import com.kaspersky.kaspresso.internal.exceptions.AdbServerException
 import com.kaspersky.kaspresso.logger.UiTestLogger
-import com.kaspersky.adbserver.AdbTerminal
-import com.kaspersky.adbserver.api.CommandResult
-import com.kaspersky.adbserver.api.ExecutorResultStatus
+import com.kaspersky.test_server.AdbTerminal
+import com.kaspersky.test_server.api.CommandResult
+import com.kaspersky.test_server.api.ExecutorResultStatus
 
 /**
  * The implementation of [AdbServer] interface. Encapsulates all work with adb server.
