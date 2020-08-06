@@ -4,6 +4,18 @@ package com.kaspersky.kaspresso.device.logcat
  * The interface to work with logcat.
  */
 interface Logcat {
+
+    /**
+     * NOT WORKING ON ANDROID 8+
+     *
+     * The problem: Android OS has a special introduced mechanism to filter and collapse of some bunches of logs produced by applications.
+     * The name of the such mechanism is Chatty. Chatty turns on when an application writes a lot of logs.
+     * The goal of Logcat interface is to analyze all logs. But Chatty prevents achievement of the mentioned goal.
+     * That's why, there is this method to disable Chatty.
+     * Please, call the method in "before" section of a test.
+     */
+    fun disableChatty()
+
     /**
      * Set new logcat buffer size
      *

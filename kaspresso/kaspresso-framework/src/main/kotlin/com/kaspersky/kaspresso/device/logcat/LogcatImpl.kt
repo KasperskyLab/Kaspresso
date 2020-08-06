@@ -9,8 +9,7 @@ import java.io.InputStreamReader
 class LogcatImpl(
     private val adbServer: AdbServer,
     private val isNeededToPrintExecutedCommand: Boolean = false,
-    private val defaultBufferSize: LogcatBufferSize = LogcatBufferSize(DEFAULT_BUFFER_SIZE, LogcatBufferSize.Dimension.KILOBYTES),
-    isNeededToDisableChatty: Boolean = true
+    private val defaultBufferSize: LogcatBufferSize = LogcatBufferSize(DEFAULT_BUFFER_SIZE, LogcatBufferSize.Dimension.KILOBYTES)
 ) : Logcat {
 
     companion object {
@@ -21,15 +20,14 @@ class LogcatImpl(
     /**
      * NOT WORKING ON ANDROID 8+
      *
-     * Whitelisting all PIDs for disabling chatty
-     * who can skip some rows when logging is very heavy
-     *
-     * I think if you analyze logcat you need all logcat rows.
-     * If chatty is needed to be enabled - pass LogcatImpl to Kaspresso.Builder
-     * with parameter isNeededToDisableChatty = false
+     * The problem: Android OS has a special introduced mechanism to filter and collapse of some bunches of logs produced by applications.
+     * The name of the such mechanism is Chatty. Chatty turns on when an application writes a lot of logs.
+     * The goal of Logcat interface is to analyze all logs. But Chatty prevents achievement of the mentioned goal.
+     * That's why, there is this method to disable Chatty.
+     * Please, call the method in "before" section of a test.
      */
-    init {
-        if (isNeededToDisableChatty && Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+    override fun disableChatty() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
             adbServer.performShell("setprop ro.logd.filter disable")
             adbServer.performShell("setprop persist.logd.filter disable")
         }

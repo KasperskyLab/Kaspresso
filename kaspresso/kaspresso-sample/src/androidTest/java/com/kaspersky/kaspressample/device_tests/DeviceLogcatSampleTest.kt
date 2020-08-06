@@ -17,6 +17,7 @@ class DeviceLogcatSampleTest : TestCase() {
     fun logcatTest() {
         before {
             device.logcat.setBufferSize(LogcatBufferSize(8, LogcatBufferSize.Dimension.MEGABYTES))
+            device.logcat.disableChatty()
             device.logcat.clear()
         }.after {
         }.run {
