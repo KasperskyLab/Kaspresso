@@ -10,5 +10,4 @@ object NotificationsShortScreen : UiScreen<NotificationsShortScreen>() {
     val mainNotification: UiView = UiView {
         withId(this@NotificationsShortScreen.packageName, "header")
     }
-
 }

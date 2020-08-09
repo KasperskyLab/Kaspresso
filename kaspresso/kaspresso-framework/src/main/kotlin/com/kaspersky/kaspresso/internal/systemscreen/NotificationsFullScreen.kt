@@ -11,5 +11,4 @@ object NotificationsFullScreen : UiScreen<NotificationsFullScreen>() {
     val mobileDataSwitch: UiView = UiView {
         withContentDescription(Pattern.compile(".*Mobile Phone.*"))
     }
-
 }

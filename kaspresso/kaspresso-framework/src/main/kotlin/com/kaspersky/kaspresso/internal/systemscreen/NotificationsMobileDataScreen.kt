@@ -11,5 +11,4 @@ object NotificationsMobileDataScreen : UiScreen<NotificationsMobileDataScreen>()
     val mobileDataSwitch: UiSwitch = UiSwitch {
         withClassName(Switch::class.java)
     }
-
 }

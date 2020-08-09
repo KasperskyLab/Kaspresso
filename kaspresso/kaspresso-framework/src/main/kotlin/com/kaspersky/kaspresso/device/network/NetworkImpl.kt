@@ -53,6 +53,12 @@ class NetworkImpl(
 
     private val flakySafetyAlgorithm = FlakySafetyAlgorithm(logger)
     private val currentOsVersion = Build.VERSION.SDK_INT
+    private val flakySafetyParams: FlakySafetyParams
+        get() = FlakySafetyParams.custom(
+            timeoutMs = 1000,
+            intervalMs = 100,
+            allowedExceptions = setOf(AdbServerException::class.java)
+        )
 
     /**
      * Enables both Wi-Fi and mobile data.
@@ -90,24 +96,13 @@ class NetworkImpl(
             false -> CMD_STATE_DISABLE to NETWORK_STATE_CHECK_RESULT_DISABLED
         }
         adbServer.performShell("$changeCommand $state")
-        flakySafetyAlgorithm.invokeFlakySafely(
-            params = getParams(),
-            action = {
-                val result = adbServer.performShell(NETWORK_STATE_CHECK_CMD)
-                if (parseAdbResponse(result)?.trim() == expectedResult) true else
-                    throw AdbServerException("Failed to change network state using ABD")
-            }
-        )
+        flakySafetyAlgorithm.invokeFlakySafely(flakySafetyParams) {
+            val result = adbServer.performShell(NETWORK_STATE_CHECK_CMD)
+            if (parseAdbResponse(result)?.trim() == expectedResult) true else
+                throw AdbServerException("Failed to change network state using ABD")
+        }
     } catch (ex: AdbServerException) {
         false
-    }
-
-    private fun getParams(): FlakySafetyParams {
-        return FlakySafetyParams.custom(
-            timeoutMs = 1000,
-            intervalMs = 10,
-            allowedExceptions = setOf(AdbServerException::class.java)
-        )
     }
 
     private fun toggleMobileDataUsingAndroidSettings(enable: Boolean) {
@@ -129,6 +124,7 @@ class NetworkImpl(
         }
     }
 
+    @Suppress("MagicNumber")
     private fun toggleMobileDataUsingAndroidSettingsOnLowAndroid(enable: Boolean) {
         val height = targetContext.resources.displayMetrics.heightPixels
         val width = targetContext.resources.displayMetrics.widthPixels
@@ -175,8 +171,6 @@ class NetworkImpl(
                 throw throwable
             }
         }
-
-
     }
 
     /**
@@ -214,14 +208,11 @@ class NetworkImpl(
             false -> CMD_STATE_DISABLE to WIFI_STATE_CHECK_RESULT_DISABLED
         }
         adbServer.performShell("$changeCommand $state")
-        flakySafetyAlgorithm.invokeFlakySafely(
-            params = getParams(),
-            action = {
-                val result = adbServer.performShell(WIFI_STATE_CHECK_CMD)
-                if (parseAdbResponse(result)?.trim() == expectedResult) true else
-                    throw AdbServerException("Failed to change Wi-Fi state using ABD")
-            }
-        )
+        flakySafetyAlgorithm.invokeFlakySafely(flakySafetyParams) {
+            val result = adbServer.performShell(WIFI_STATE_CHECK_CMD)
+            if (parseAdbResponse(result)?.trim() == expectedResult) true else
+                throw AdbServerException("Failed to change Wi-Fi state using ABD")
+        }
     } catch (e: AdbServerException) {
         false
     }
