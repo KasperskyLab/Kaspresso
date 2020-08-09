@@ -7,11 +7,16 @@ import android.net.Network
 import android.net.NetworkCapabilities
 import android.net.NetworkRequest
 import android.net.wifi.WifiManager
+import android.os.Build
+import android.provider.Settings
+import android.telephony.TelephonyManager
 import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspressample.device.DeviceSampleActivity
 import com.kaspersky.kaspressample.utils.SafeAssert.assertFalseSafely
 import com.kaspersky.kaspressample.utils.SafeAssert.assertTrueSafely
+import com.kaspersky.kaspresso.device.network.NetworkImpl
+import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
 import org.junit.Rule
@@ -19,7 +24,19 @@ import org.junit.Test
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 
-class DeviceNetworkSampleTest : TestCase() {
+
+class DeviceNetworkSampleTest : TestCase(
+    kaspressoBuilder = Kaspresso.Builder.simple().apply {
+        network = NetworkImpl(
+            targetContext = instrumentation.targetContext,
+            adbServer = adbServer,
+            logger = libLogger,
+            // this flag is true because the sample is testing on an android emulator
+            // more details read in the docs of the flag
+            suppressAbsentWifiOnLowAndroidEmulator = true
+        )
+    }
+) {
 
     @get:Rule
     val runtimePermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
@@ -29,6 +46,8 @@ class DeviceNetworkSampleTest : TestCase() {
 
     @get:Rule
     val activityTestRule = ActivityTestRule(DeviceSampleActivity::class.java, true, true)
+
+    private val currentOsVersion = Build.VERSION.SDK_INT
 
     @Test
     fun networkSampleTest() {
@@ -41,20 +60,20 @@ class DeviceNetworkSampleTest : TestCase() {
             step("Disable network") {
                 device.network.disable()
                 assertFalseSafely { isDataConnected() }
-                assertFalseSafely { isWiFiEnabled() }
+                checkWifi(desiredState = false)
             }
 
             step("Enable network") {
                 device.network.enable()
                 assertTrueSafely { isDataConnected() }
-                assertTrueSafely { isWiFiEnabled() }
+                checkWifi(desiredState = true)
             }
 
             step("Toggle WiFi") {
                 device.network.toggleWiFi(false)
-                assertFalseSafely { isWiFiEnabled() }
+                checkWifi(desiredState = false)
                 device.network.toggleWiFi(true)
-                assertTrueSafely { isWiFiEnabled() }
+                checkWifi(desiredState = true)
             }
 
             step("Toggle Mobile data") {
@@ -66,10 +85,13 @@ class DeviceNetworkSampleTest : TestCase() {
         }
     }
 
-    private fun BaseTestContext.isDataConnected(): Boolean {
+    private fun BaseTestContext.isDataConnected(): Boolean =
+        if (currentOsVersion < Build.VERSION_CODES.N_MR1) isDataConnectedInLowAndroid() else isDataConnectedInHighAndroid()
+
+    private fun BaseTestContext.isDataConnectedInHighAndroid(): Boolean {
         val manager = device.context.getSystemService(ConnectivityManager::class.java) as ConnectivityManager
         val cdl = CountDownLatch(1)
-        var isConnected: Boolean = false
+        var isConnected = false
 
         val request = NetworkRequest.Builder()
             .addTransportType(NetworkCapabilities.TRANSPORT_CELLULAR)
@@ -93,9 +115,27 @@ class DeviceNetworkSampleTest : TestCase() {
         })
 
         cdl.await(10L, TimeUnit.SECONDS)
-        return isConnected;
+        return isConnected
+    }
+
+    private fun BaseTestContext.isDataConnectedInLowAndroid(): Boolean {
+        val telephonyManager: TelephonyManager? =
+            device.context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager?
+        if (telephonyManager?.simState != TelephonyManager.SIM_STATE_READY) {
+            return false
+        }
+        return Settings.Global.getInt(device.context.contentResolver, "mobile_data", 0) == 1
+    }
+
+    private fun BaseTestContext.checkWifi(desiredState: Boolean) {
+        // There is no mind to check wi-fi in Android emulators before Android 7.1 because
+        // wi-fi is not enabled on such emulators
+        // that's why we just skip the wi-fi check
+        if (currentOsVersion < Build.VERSION_CODES.N_MR1) return
+        if (desiredState) assertTrueSafely { isWiFiEnabled() } else assertFalseSafely { isWiFiEnabled() }
     }
 
     private fun BaseTestContext.isWiFiEnabled(): Boolean =
-        (device.context.getSystemService(Context.WIFI_SERVICE) as? WifiManager)?.isWifiEnabled ?: throw IllegalStateException("WifiManager is unavailable")
+        (device.context.getSystemService(Context.WIFI_SERVICE) as? WifiManager)?.isWifiEnabled
+            ?: throw IllegalStateException("WifiManager is unavailable")
 }

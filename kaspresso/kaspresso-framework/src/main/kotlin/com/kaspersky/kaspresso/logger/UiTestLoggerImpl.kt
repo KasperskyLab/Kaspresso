@@ -17,6 +17,10 @@ class UiTestLoggerImpl(
         Log.d(tag, text)
     }
 
+    override fun w(text: String) {
+        Log.w(tag, text)
+    }
+
     override fun e(text: String) {
         Log.e(tag, text)
     }
@@ -27,6 +31,10 @@ class UiTestLoggerImpl(
 
     override fun d(tag: String, text: String) {
         Log.d(tag, text)
+    }
+
+    override fun w(tag: String, text: String) {
+        Log.w(tag, text)
     }
 
     override fun e(tag: String, text: String) {
