@@ -38,7 +38,6 @@ internal class Desktop(
             devices.removeIf { client ->
                 if (client.deviceName !in namesOfAttachedDevicesByAdb) {
                     logger.i(
-
                         "startDevicesObserving",
                         "Adb connection to ${client.deviceName} has been missed. Stop connection."
                     )

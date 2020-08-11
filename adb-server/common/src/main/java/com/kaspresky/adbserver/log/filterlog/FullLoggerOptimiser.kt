@@ -27,24 +27,25 @@ internal class FullLoggerOptimiser(
     ) {
         handleLog(
             key = "$logLevel$deviceName$tag$method$text",
-            action = { originalFullLogger.log(logLevel, deviceName, tag, method, text) }
+            action = { originalFullLogger.log(logLevel, deviceName, tag, method, text) },
+            logLevel = logLevel
         )
     }
 
-    private fun handleLog(key: String, action: () -> Unit) {
+    private fun handleLog(key: String, logLevel: FullLogger.LogLevel?, action: () -> Unit) {
         val logData = LogData(key, action)
         val position = logStack.indexOf(logData)
         val answer = logRecorder.put(position, LogData(key, action))
         when (answer) {
             is RecordInProgress -> { return }
             is ReadyRecord -> {
-                outputRecord(answer)
+                outputRecord(answer, logLevel)
                 updateState(answer)
             }
         }
     }
 
-    private fun outputRecord(readyRecord: ReadyRecord) {
+    private fun outputRecord(readyRecord: ReadyRecord, logLevel: FullLogger.LogLevel?) {
         // prepare the first and the last log for recorded Fragment if it's needed
         var fragmentStartString: String? = null
         var fragmentEndString: String? = null
@@ -55,9 +56,9 @@ internal class FullLoggerOptimiser(
             fragmentEndString = "/".repeat(SLASH_AT_THE_END)
         }
         // output record
-        fragmentStartString?.let { originalFullLogger.log(text = fragmentStartString) }
+        fragmentStartString?.let { originalFullLogger.log(logLevel = logLevel, text = fragmentStartString) }
         readyRecord.recordingStack.descendingIterator().forEach { it.logOutput.invoke() }
-        fragmentEndString?.let { originalFullLogger.log(text = fragmentEndString) }
+        fragmentEndString?.let { originalFullLogger.log(logLevel = logLevel, text = fragmentEndString) }
         // output remained part
         readyRecord.remainedStack.descendingIterator().forEach { it.logOutput.invoke() }
     }

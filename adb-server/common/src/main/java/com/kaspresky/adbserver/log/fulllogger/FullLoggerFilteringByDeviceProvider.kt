@@ -2,6 +2,8 @@ package com.kaspresky.adbserver.log.fulllogger
 
 import com.kaspresky.adbserver.log.filterlog.FullLoggerOptimiser
 
+private const val DESKTOP = "Desktop-"
+
 internal class FullLoggerFilteringByDeviceProvider : FullLogger {
 
     private val loggersMap: MutableMap<String?, FullLogger> = hashMapOf()
@@ -23,7 +25,7 @@ internal class FullLoggerFilteringByDeviceProvider : FullLogger {
     }
 
     fun setDesktopName(desktop: String) {
-        desktopName = desktop
+        desktopName = DESKTOP + desktop
     }
 
     private fun getFullLogger(deviceName: String?): FullLogger {

@@ -14,12 +14,10 @@ internal class FullLoggerSystemImpl(
     private val formatter = SimpleDateFormat("dd/MM/yyyy HH:mm:ss")
 
     companion object {
-        private const val COMMON_FIELD_LENGTH = 43
-        private const val TAG_FIELD_LENGTH = 8
         private const val DEVICE = "device="
         private const val TAG = "tag="
         private const val METHOD = "method="
-        private const val MESSAGE = "message => "
+        private const val MESSAGE = "message:"
         private const val DESKTOP = "desktop="
     }
 
@@ -31,7 +29,7 @@ internal class FullLoggerSystemImpl(
         text: String?
     ) {
         if (logLevel != null && logMode <= logLevel) {
-            val fullLog = "${getLogType(logLevel)}${getDate()}${getDesktop()}${getDevice(deviceName)}${getTag(tag)}" +
+            val fullLog = "${getLogType(logLevel)} ${getDate()}${getDesktop()}${getDevice(deviceName)}${getTag(tag)}" +
                     "${getMethod(method)}${getText(text)}"
             if (logLevel == FullLogger.LogLevel.ERROR) {
                 System.err.println(fullLog)
@@ -42,47 +40,36 @@ internal class FullLoggerSystemImpl(
     }
 
     private fun getLogType(logLevel: FullLogger.LogLevel?): String =
-            if (logLevel != null) {
-                getFieldString("[${logLevel.name}]", TAG_FIELD_LENGTH)
-            } else {
-                ""
-            }
+            logLevel?.name ?: ""
 
     private fun getDevice(deviceName: String?): String =
             if (deviceName != null) {
-                "$DEVICE$deviceName    "
+                "$DEVICE$deviceName "
             } else {
                 ""
             }
 
     private fun getDesktop(): String =
             if (desktopName != null) {
-                "$DESKTOP$desktopName    "
+                "$DESKTOP$desktopName "
             } else {
                 ""
             }
 
     private fun getTag(tag: String?): String =
-            if (tag != null) {
-                "$TAG${getFieldString(tag)}"
+            if (logMode == FullLogger.LogLevel.DEBUG && tag != null) {
+                "$TAG$tag "
             } else ""
 
     private fun getMethod(method: String?): String =
-            if (method != null) {
-                "$METHOD${getFieldString(method)}"
+            if (logMode == FullLogger.LogLevel.DEBUG && method != null) {
+                "$METHOD$method "
             } else ""
 
     private fun getText(text: String?): String =
             if (text != null) {
                 "$MESSAGE$text"
             } else ""
-
-    private fun getFieldString(text: String, length: Int = COMMON_FIELD_LENGTH): String {
-        if (text.length >= length) {
-            return "$text "
-        }
-        return text + " ".repeat(length - text.length)
-    }
 
     private fun getDate(): String {
         val date = formatter.format(Date())
