@@ -15,8 +15,6 @@ import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspressample.device.DeviceSampleActivity
 import com.kaspersky.kaspressample.utils.SafeAssert.assertFalseSafely
 import com.kaspersky.kaspressample.utils.SafeAssert.assertTrueSafely
-import com.kaspersky.kaspresso.device.network.NetworkImpl
-import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
 import org.junit.Rule
@@ -25,18 +23,7 @@ import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 
 
-class DeviceNetworkSampleTest : TestCase(
-    kaspressoBuilder = Kaspresso.Builder.simple().apply {
-        network = NetworkImpl(
-            targetContext = instrumentation.targetContext,
-            adbServer = adbServer,
-            logger = libLogger,
-            // this flag is true because the sample is testing on an android emulator
-            // more details read in the docs of the flag
-            suppressAbsentWifiOnLowAndroidEmulator = true
-        )
-    }
-) {
+class DeviceNetworkSampleTest : TestCase() {
 
     @get:Rule
     val runtimePermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
@@ -128,11 +115,15 @@ class DeviceNetworkSampleTest : TestCase(
     }
 
     private fun BaseTestContext.checkWifi(desiredState: Boolean) {
-        // There is no mind to check wi-fi in Android emulators before Android 7.1 because
-        // wi-fi is not enabled on such emulators
-        // that's why we just skip the wi-fi check
-        if (currentOsVersion < Build.VERSION_CODES.N_MR1) return
-        if (desiredState) assertTrueSafely { isWiFiEnabled() } else assertFalseSafely { isWiFiEnabled() }
+        try {
+            if (desiredState) assertTrueSafely { isWiFiEnabled() } else assertFalseSafely { isWiFiEnabled() }
+        } catch (assertionError: AssertionError) {
+            // There is no mind to check wi-fi in Android emulators before Android 7.1 because
+            // wi-fi doesn't have a simulated Wi-Fi access point on such emulators
+            // that's why we just skip the wi-fi check on Android below 7.1
+            if (currentOsVersion < Build.VERSION_CODES.N_MR1) return
+            else throw assertionError
+        }
     }
 
     private fun BaseTestContext.isWiFiEnabled(): Boolean =

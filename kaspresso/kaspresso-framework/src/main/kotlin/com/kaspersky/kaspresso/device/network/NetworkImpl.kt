@@ -24,15 +24,7 @@ import com.kaspersky.kaspresso.params.FlakySafetyParams
 class NetworkImpl(
     private val targetContext: Context,
     private val adbServer: AdbServer,
-    private val logger: UiTestLogger,
-    /**
-     * Wi-Fi is not emulated on Android emulators before 7.1 version (proof - https://developer.android.com/studio/run/emulator#wifi).
-     * That's why any attempts to change wi-fi state on an emulator with low version will cause crashes.
-     * Sometimes, it's an inappropriate behavior forcing a developer to write wrappers handling such cases.
-     * Therefore, there is an option to suppress crashes while trying to change wi-fi state on emulators with low OS.
-     * By default, this option is turned off, because a developer must understand a purpose and consequences of changed behavior
-     */
-    private val suppressAbsentWifiOnLowAndroidEmulator: Boolean
+    logger: UiTestLogger
 ) : Network {
 
     companion object {
@@ -130,7 +122,7 @@ class NetworkImpl(
         val width = targetContext.resources.displayMetrics.widthPixels
 
         UiSystem {
-            drag(width / 2, 0, width / 2, height / 3, 50)
+            drag(width / 2, 0, width / 2, (height * 0.67).toInt(), 50)
         }
         NotificationsShortScreen {
             mainNotification.click()
@@ -157,20 +149,10 @@ class NetworkImpl(
      * to switch Wi-Fi setting thumb.
      */
     override fun toggleWiFi(enable: Boolean) {
-        try {
-            if (!changeWiFiStateUsingAndroidApi(enable) &&
-                !changeWiFiStateUsingAdbServer(enable, WIFI_STATE_CHANGE_ROOT_CMD) &&
-                !changeWiFiStateUsingAdbServer(enable, WIFI_STATE_CHANGE_CMD))
-                changeWifiStateUsingAndroidSettings(enable)
-        } catch (throwable: Throwable) {
-            if (suppressAbsentWifiOnLowAndroidEmulator && currentOsVersion < Build.VERSION_CODES.N_MR1) {
-                logger.w("Network.toggleWiFi doesn't work on this device. " +
-                        "But, `suppressAbsentWifiOnLowAndroidEmulator` is true and OS version is $currentOsVersion. " +
-                        "That's why we ignore the problem. The full problem is here => $throwable")
-            } else {
-                throw throwable
-            }
-        }
+        if (!changeWiFiStateUsingAndroidApi(enable) &&
+            !changeWiFiStateUsingAdbServer(enable, WIFI_STATE_CHANGE_ROOT_CMD) &&
+            !changeWiFiStateUsingAdbServer(enable, WIFI_STATE_CHANGE_CMD))
+            changeWifiStateUsingAndroidSettings(enable)
     }
 
     /**
