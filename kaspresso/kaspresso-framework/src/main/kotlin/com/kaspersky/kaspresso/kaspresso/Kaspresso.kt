@@ -286,7 +286,13 @@ data class Kaspresso(
          */
         lateinit var testLogger: UiTestLogger
 
-        private val instrumentation: Instrumentation = InstrumentationRegistry.getInstrumentation()
+        /**
+         * Holds an instance of [Instrumentation] class.
+         * The public access was set up just for more convenient way to use.
+         * For example, in [Builder] you can use `instrumentation.targetContext` instead of `InstrumentationRegistry.getInstrumentation().targetContext`
+         */
+        val instrumentation: Instrumentation = InstrumentationRegistry.getInstrumentation()
+
         private val uiDevice = UiDevice.getInstance(instrumentation)
         private val configurator = Configurator.getInstance()
 
@@ -558,7 +564,7 @@ data class Kaspresso(
             if (!::apps.isInitialized) apps = AppsImpl(libLogger, instrumentation.context, uiDevice, adbServer)
             if (!::activities.isInitialized) activities = ActivitiesImpl(libLogger)
             if (!::files.isInitialized) files = FilesImpl(adbServer)
-            if (!::network.isInitialized) network = NetworkImpl(instrumentation.targetContext, adbServer)
+            if (!::network.isInitialized) network = NetworkImpl(instrumentation.targetContext, adbServer, libLogger)
             if (!::phone.isInitialized) phone = PhoneImpl(adbServer)
             if (!::location.isInitialized) location = LocationImpl(adbServer)
             if (!::keyboard.isInitialized) keyboard = KeyboardImpl(adbServer)
