@@ -11,7 +11,6 @@ import com.kaspresky.adbserver.log.logger.LoggerImpl
 object LoggerFactory {
 
     private val fullLogger = FullLoggerFilteringByDeviceProvider()
-    private const val DEFAULT_ADB_PORT = "5037"
 
     fun setRunMode(runMode: String?) {
         if (runMode.equals("debug", true)) {
@@ -19,12 +18,8 @@ object LoggerFactory {
         }
     }
 
-    fun setDesktopName(desktopName: String?) {
-        if (!desktopName.isNullOrEmpty()) {
-            fullLogger.setDesktopName(desktopName)
-        } else {
-            fullLogger.setDesktopName(DEFAULT_ADB_PORT)
-        }
+    fun setDesktopName(desktopName: String) {
+        fullLogger.setDesktopName(desktopName)
     }
 
     fun getLogger(tag: String, deviceName: String? = null): Logger =

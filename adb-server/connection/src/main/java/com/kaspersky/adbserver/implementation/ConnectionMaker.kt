@@ -14,8 +14,8 @@ internal class ConnectionMaker(deviceName: String? = null) {
 
     @Synchronized
     fun connect(connectAction: () -> Unit, successConnectAction: () -> Unit) {
-        logger.i("connect", "start")
-        logger.i("connect", "current state=$connectionState")
+        logger.d("connect", "start")
+        logger.d("connect", "current state=$connectionState")
         if (connectionState == ConnectionState.CONNECTING || connectionState == ConnectionState.DISCONNECTING) {
             logger.i("connect", "Unexpected connection state appeared during connect")
             return
@@ -40,8 +40,8 @@ internal class ConnectionMaker(deviceName: String? = null) {
 
     @Synchronized
     fun disconnect(connectAction: () -> Unit) {
-        logger.i("disconnect", "start")
-        logger.i("disconnect", "current state=$connectionState")
+        logger.d("disconnect", "start")
+        logger.d("disconnect", "current state=$connectionState")
         if (connectionState == ConnectionState.CONNECTING || connectionState == ConnectionState.DISCONNECTING) {
             logger.i("disconnect", "Unexpected connection state appeared during disconnect")
             return

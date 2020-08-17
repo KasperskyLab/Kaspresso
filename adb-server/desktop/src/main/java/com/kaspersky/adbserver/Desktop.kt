@@ -18,7 +18,7 @@ internal class Desktop(
     private val devices: MutableCollection<DeviceMirror> = mutableListOf()
 
     fun startDevicesObserving() {
-        logger.i("startDevicesObserving", "start")
+        logger.d("startDevicesObserving", "start")
         while (true) {
             val namesOfAttachedDevicesByAdb = getAttachedDevicesByAdb()
             namesOfAttachedDevicesByAdb.forEach { deviceName ->
@@ -28,7 +28,7 @@ internal class Desktop(
                         "New device has been found: $deviceName. Initialize connection to it..."
                     )
                     val deviceMirror =
-                        DeviceMirror.Companion.create(
+                        DeviceMirror.create(
                             deviceName, adbServerPort, cmdCommandPerformer
                         )
                     deviceMirror.startConnectionToDevice()

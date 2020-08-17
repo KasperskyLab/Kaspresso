@@ -42,7 +42,7 @@ internal class DeviceMirror private constructor(
     private val isRunning = AtomicReference<Boolean>()
 
     fun startConnectionToDevice() {
-        logger.i("startConnectionToDevice", "connect to device=$deviceName start")
+        logger.d("startConnectionToDevice", "connect to device=$deviceName start")
         isRunning.set(true)
         WatchdogThread().start()
     }
@@ -59,10 +59,10 @@ internal class DeviceMirror private constructor(
             while (isRunning.get()) {
                 if (!connectionServer.isConnected()) {
                     try {
-                        logger.i("WatchdogThread.run", "Try to connect to Device=$deviceName...")
+                        logger.d("WatchdogThread.run", "Try to connect to Device=$deviceName...")
                         connectionServer.tryConnect()
                     } catch (exception: Exception) {
-                        logger.i("WatchdogThread,run", "The attempt to connect to Device=$deviceName was with exception: $exception")
+                        logger.d("WatchdogThread,run", "The attempt to connect to Device=$deviceName was with exception: $exception")
                     }
                 }
                 sleep(CONNECTION_WAIT_MS)

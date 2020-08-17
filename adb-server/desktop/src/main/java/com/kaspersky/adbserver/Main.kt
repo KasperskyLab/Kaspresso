@@ -2,6 +2,8 @@ package com.kaspersky.adbserver
 
 import com.kaspresky.adbserver.log.LoggerFactory
 
+private const val DEFAULT_ADB_PORT = "5037"
+
 internal fun main(args: Array<String>) {
     val argsList = args.toList()
     val emulators = argsList
@@ -23,7 +25,12 @@ internal fun main(args: Array<String>) {
             ?.trim()
 
     LoggerFactory.setRunMode(runMode)
-    LoggerFactory.setDesktopName(adbServerPort)
+
+    if (!adbServerPort.isNullOrEmpty()) {
+        LoggerFactory.setDesktopName(adbServerPort)
+    } else {
+        LoggerFactory.setDesktopName(DEFAULT_ADB_PORT)
+    }
 
     val logger = LoggerFactory.getLogger(tag = "Desktop")
     logger.i("MAIN", "arguments: emulators=$emulators, adbServerPort=$adbServerPort")
