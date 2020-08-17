@@ -5,7 +5,7 @@ import java.util.Date
 
 /**
  * Presents logs in the form like:
- * [INFO] 05/07/2020 14:55:05 device=emulator-5554 tag=ConnectionMaker method=connect message => updated state=CONNECTED
+ * INFO 17/08/2020 09:53:52 desktop=Desktop-5037 device=emulator-5554 message:updated state=CONNECTED
  */
 internal class FullLoggerSystemImpl(
     private val logMode: FullLogger.LogLevel,
