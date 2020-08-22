@@ -24,7 +24,6 @@ android {
 
 dependencies {
     api(fileTree("libs").matching{ include("*.jar") })
-    api(Dependencies.adbServer)
 
     implementation(Dependencies.rules)
     implementation(Dependencies.espressoCore)
@@ -34,6 +33,7 @@ dependencies {
     implementation(Dependencies.gson)
     implementation(Dependencies.androidXCore)
     implementation(project(Projects.Kautomator.framework))
+    implementation(project(Projects.AdbServer.device))
 
     testImplementation(Dependencies.junit)
     testImplementation(Dependencies.truth)
