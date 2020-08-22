@@ -6,13 +6,12 @@ import android.provider.Settings
 import android.provider.Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES
 import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
-import com.agoda.kakao.screen.Screen
 import com.kaspersky.kaspressample.device.DeviceSampleAccessibilityService
 import com.kaspersky.kaspressample.device.DeviceSampleActivity
+import com.kaspersky.kaspressample.utils.SafeAssert.assertFalseSafely
+import com.kaspersky.kaspressample.utils.SafeAssert.assertTrueSafely
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
-import org.junit.Assert.assertFalse
-import org.junit.Assert.assertTrue
 import org.junit.Assume.assumeTrue
 import org.junit.Rule
 import org.junit.Test
@@ -20,7 +19,6 @@ import org.junit.Test
 class DeviceAccessibilitySampleTest : TestCase() {
 
     companion object {
-        private const val SETTINGS_UPDATE_DELAY = 1_000L
         private val SERVICE_CLASS_NAME = DeviceSampleAccessibilityService::class.java.canonicalName!!
     }
 
@@ -47,16 +45,12 @@ class DeviceAccessibilitySampleTest : TestCase() {
                     device.targetContext.packageName,
                     SERVICE_CLASS_NAME
                 )
-                Screen.idle(SETTINGS_UPDATE_DELAY)
-
-                assertTrue(isAccessibilityServiceEnabled())
+                assertTrueSafely { isAccessibilityServiceEnabled() }
             }
 
             step("Disable accessibility service") {
                 device.accessibility.disable()
-                Screen.idle(SETTINGS_UPDATE_DELAY)
-
-                assertFalse(isAccessibilityServiceEnabled())
+                assertFalseSafely { isAccessibilityServiceEnabled() }
             }
         }
     }
