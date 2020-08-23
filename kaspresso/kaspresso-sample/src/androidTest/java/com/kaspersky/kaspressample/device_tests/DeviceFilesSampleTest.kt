@@ -22,7 +22,7 @@ class DeviceFilesSampleTest : TestCase() {
 
     companion object {
         private const val FILE_NAME = "hello_world.apk"
-        private const val FILE_RELATIVE_PATH = FILE_NAME
+        private const val FILE_RELATIVE_PATH = "artifacts/$FILE_NAME"
     }
 
     @get:Rule
