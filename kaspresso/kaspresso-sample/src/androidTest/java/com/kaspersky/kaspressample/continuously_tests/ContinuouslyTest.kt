@@ -30,9 +30,10 @@ class ContinuouslyTest : TestCase() {
 
     @Test
     fun testDialogPresentUntilAndroidO() {
+        // Don`t allow to run this test on Android >= Oreo
+        Assume.assumeTrue(Build.VERSION.SDK_INT < Build.VERSION_CODES.O)
+
         before {
-            // Don`t allow to run this test on Android >= Oreo
-            Assume.assumeTrue(Build.VERSION.SDK_INT < Build.VERSION_CODES.O)
             activityTestRule.launchActivity(null)
         }.after {
         }.run {
@@ -65,9 +66,10 @@ class ContinuouslyTest : TestCase() {
 
     @Test
     fun testDialogNotPresentAfterAndroidO() {
+        // Don`t allow to run this test on Android < Oreo
+        Assume.assumeTrue(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+
         before {
-            // Don`t allow to run this test on Android < Oreo
-            Assume.assumeTrue(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
             activityTestRule.launchActivity(null)
         }.after {
         }.run {

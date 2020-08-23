@@ -37,8 +37,9 @@ class DeviceAccessibilitySampleTest : TestCase() {
 
     @Test
     fun accessibilitySampleTest() {
+        assumeTrue(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
+
         before {
-            assumeTrue(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
             device.accessibility.disable()
         }.after {
             device.accessibility.disable()

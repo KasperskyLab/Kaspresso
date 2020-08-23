@@ -28,9 +28,10 @@ class DevicePermissionsSampleTest : TestCase() {
 
     @Test
     fun permissionsSampleTest() {
+        // Run only on devices with Android M or later and skip the test otherwise.
+        assumeTrue(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+
         before {
-            // Run only on devices with Android M or later and skip the test otherwise.
-            assumeTrue(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
             adbServer.performShell("pm revoke ${device.targetContext.packageName} ${Manifest.permission.READ_CALL_LOG}")
         }.after {
         }.run {
