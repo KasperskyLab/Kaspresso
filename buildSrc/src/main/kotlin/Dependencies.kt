@@ -1,4 +1,4 @@
-object  Dependencies {
+object Dependencies {
 
     object Versions {
         const val targetSdk = 29
