@@ -16,6 +16,10 @@ import org.junit.Assume.assumeTrue
 import org.junit.Rule
 import org.junit.Test
 
+/**
+ * Sometimes, this test is unstable.
+ * The possible reason is a slow (not immediate) update of ContentResolver by which the test is checking
+ */
 class DeviceAccessibilitySampleTest : TestCase() {
 
     companion object {

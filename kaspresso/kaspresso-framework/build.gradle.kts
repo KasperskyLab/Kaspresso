@@ -25,6 +25,7 @@ android {
 dependencies {
     api(fileTree("libs").matching{ include("*.jar") })
 
+    implementation(Dependencies.kotlinStdlib)
     implementation(Dependencies.rules)
     implementation(Dependencies.espressoCore)
     implementation(Dependencies.espressoWeb)
@@ -34,6 +35,7 @@ dependencies {
     implementation(Dependencies.androidXCore)
     implementation(project(Projects.Kautomator.framework))
     implementation(project(Projects.AdbServer.device))
+    implementation(project(Projects.AdbServer.common))
 
     testImplementation(Dependencies.junit)
     testImplementation(Dependencies.truth)

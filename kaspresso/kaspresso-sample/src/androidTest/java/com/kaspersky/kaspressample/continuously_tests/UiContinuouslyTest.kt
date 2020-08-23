@@ -53,10 +53,8 @@ class UiContinuouslyTest : TestCase() {
             }
             step("Check dialog appeared") {
                 UiContinuouslyDialogScreen {
-                    flakySafely(FAKE_MAX_DELAY_MS) {
-                        dialogTitle {
-                            isDisplayed()
-                        }
+                    dialogTitle {
+                        isDisplayed()
                     }
                 }
             }
