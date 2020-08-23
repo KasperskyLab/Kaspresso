@@ -215,7 +215,7 @@ class InterceptorTest : TestCase(
 
     object InterceptedMainScreen : UiScreen<InterceptedMainScreen>() {
 
-        override val packageName: String = "com.kaspersky.kaspresso.sample_kautomator"
+        override val packageName: String = "com.kaspersky.kaspresso.kautomatorsample"
 
         val screenList = mutableListOf<String>()
         val simpleButton = UiButton { withId(this@InterceptedMainScreen.packageName, "button") }
