@@ -60,7 +60,7 @@ internal class Device private constructor(
             connectionClient.executeCommand(command)
         } catch (exception: ConnectionTimeException) {
             CommandResult(
-                ExecutorResultStatus.FAILED,
+                ExecutorResultStatus.TIMEOUT,
                 "The time for the connection establishment is over"
             )
         }
