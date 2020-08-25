@@ -37,7 +37,7 @@ class AccessibilityImpl : Accessibility {
     @TargetApi(Build.VERSION_CODES.N)
     override fun disable() {
         val string = "enabled_accessibility_services"
-        val cmd = "settings put secure $string ' '"
+        val cmd = "settings put secure $string null"
 
         InstrumentationRegistry.getInstrumentation()
             .getUiAutomation(UiAutomation.FLAG_DONT_SUPPRESS_ACCESSIBILITY_SERVICES)

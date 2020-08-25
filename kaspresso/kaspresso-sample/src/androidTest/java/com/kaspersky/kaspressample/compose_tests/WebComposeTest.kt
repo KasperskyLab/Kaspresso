@@ -40,28 +40,20 @@ class WebComposeTest : TestCase() {
                 }
             }
 
-            step("Find \"Sign in\" button") {
+            step("Find \"Sign in\" button and \"Protect your data\" title") {
                 WebViewScreen {
 
                     webView {
                         withElement(
-                            Locator.CLASS_NAME,
-                            "btn"
-                        ) {
-                            containsText("Sign in")
-                            web.withElement(ref).perform(DriverAtoms.getText())
-                        }
-
-                        withElement(
                             Locator.XPATH,
-                            "//*[@id=\"app\"]/section[1]/div/div/h2"
+                            "/html/body/div[1]/section[1]/div/div/h2"
                         ) {
                             containsText("Protect your data")
                         }
 
                         withElement(
                             Locator.XPATH,
-                            "//*[@id=\"app\"]/header/section/div[3]/div[2]/button"
+                            "/html/body/div[1]/header/section/div[3]/div[2]/button"
                         ) {
                             hasText("Sign in")
                         }
@@ -74,7 +66,7 @@ class WebComposeTest : TestCase() {
                     webView {
                         withElement(
                             Locator.XPATH,
-                            "//*[@id=\"app\"]/footer/div/div/div[1]/nav/div[1]/a"
+                            "/html/body/div[1]/footer/div/div/div[1]/nav/div[1]/a"
                         ) {
                             compose(this@webView) {
                                 or {
@@ -99,13 +91,13 @@ class WebComposeTest : TestCase() {
                         compose {
                             orWithElement(
                                 Locator.XPATH,
-                                "//*[@id=\"app\"]/footer/div/div/div[1]/nav/div[1]/a"
+                                "/html/body/div[1]/footer/div/div/div[1]/nav/div[1]/a"
                             ) {
                                 hasText("TRATATATA")
                             }
                             orWithElement(
                                 Locator.XPATH,
-                                "//*[@id=\"app\"]/footer/div/div/div[1]/nav/div[1]/a"
+                                "/html/body/div[1]/footer/div/div/div[1]/nav/div[1]/a"
                             ) {
                                 hasText("Ask question")
                             } thenContinue {
@@ -113,7 +105,7 @@ class WebComposeTest : TestCase() {
                             }
                             orWithElement(
                                 Locator.XPATH,
-                                "//*[@id=\"app\"]/footer/div/div/div[1]/nav/div[1]/a"
+                                "/html/body/div[1]/footer/div/div/div[1]/nav/div[1]/a"
                             ) {
                                 hasText("Contacts")
                             } thenContinue {

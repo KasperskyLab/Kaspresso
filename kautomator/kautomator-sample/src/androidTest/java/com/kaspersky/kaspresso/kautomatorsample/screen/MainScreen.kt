@@ -7,7 +7,7 @@ import com.kaspersky.components.kautomator.screen.UiScreen
 
 object MainScreen : UiScreen<MainScreen>() {
 
-    override val packageName: String = "com.kaspersky.kaspresso.sample_kautomator"
+    override val packageName: String = "com.kaspersky.kaspresso.kautomatorsample"
 
     val simpleEditText = UiEditText { withId(this@MainScreen.packageName, "editText") }
     val simpleButton = UiButton { withId(this@MainScreen.packageName, "button") }

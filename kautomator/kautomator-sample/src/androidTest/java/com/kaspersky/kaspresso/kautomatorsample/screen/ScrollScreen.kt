@@ -10,7 +10,7 @@ object ScrollScreen : UiScreen<ScrollScreen>() {
     private const val CENTER_TEXT = "Center"
     private const val BOTTOM_TEXT = "End"
 
-    override val packageName: String = "com.kaspersky.kaspresso.sample_kautomator"
+    override val packageName: String = "com.kaspersky.kaspresso.kautomatorsample"
 
     val scroll = UiScrollView { withId(this@ScrollScreen.packageName, "scroll") }
     val top = UiTextView { withText(this@ScrollScreen.TOP_TEXT) }

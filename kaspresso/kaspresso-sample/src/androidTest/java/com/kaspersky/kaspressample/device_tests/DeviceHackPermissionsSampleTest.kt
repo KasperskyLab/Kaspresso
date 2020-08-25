@@ -33,12 +33,10 @@ class DeviceHackPermissionsSampleTest : TestCase() {
 
     @Test
     fun permissionsSampleTest() {
-        before {
-            // Run only on devices with Android M or later and skip the test otherwise.
-            assumeTrue(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-        }.after {
-        }.run {
+        // Run only on devices with Android M or later and skip the test otherwise.
+        assumeTrue(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
 
+        run {
             step("Request permissions") {
                 device.hackPermissions.grant(device.targetContext.packageName, Manifest.permission.READ_CALL_LOG)
                 // Contacts permission should be granted now

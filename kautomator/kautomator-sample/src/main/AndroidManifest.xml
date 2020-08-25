@@ -16,16 +16,15 @@
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
 
-        <activity android:name="com.kaspersky.kaspresso.kautomatorsample.MainActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.kaspersky.kaspresso.kautomatorsample.ComponentsActivity" />
-        <activity android:name="com.kaspersky.kaspresso.kautomatorsample.recycler.RecyclerActivity" />
-        <activity android:name="com.kaspersky.kaspresso.kautomatorsample.scroll.ScrollActivity" />
+        <activity android:name=".ComponentsActivity" />
+        <activity android:name=".recycler.RecyclerActivity" />
+        <activity android:name=".scroll.ScrollActivity" />
     </application>
 
 </manifest>

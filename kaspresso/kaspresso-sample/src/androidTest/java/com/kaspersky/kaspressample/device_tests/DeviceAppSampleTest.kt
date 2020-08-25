@@ -39,7 +39,6 @@ class DeviceAppSampleTest : TestCase() {
     @Test
     fun test() {
         run {
-
             step("Install hello world apk") {
                 device.apps.install(TEST_APK_FILE_RELATIVE_PATH)
                 assertTrue(isAppInstalled(adbServer, TEST_APK_PACKAGE_NAME))

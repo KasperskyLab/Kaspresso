@@ -11,7 +11,7 @@ android {
     buildToolsVersion(Versions.buildTools)
 
     defaultConfig {
-        applicationId = "com.kaspersky.kaspresso.samplekautomator"
+        applicationId = "com.kaspersky.kaspresso.kautomatorsample"
         minSdkVersion(Versions.minSdk)
         targetSdkVersion(Versions.targetSdk)
 
