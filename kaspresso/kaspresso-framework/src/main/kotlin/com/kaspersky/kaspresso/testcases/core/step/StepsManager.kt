@@ -2,6 +2,7 @@ package com.kaspersky.kaspresso.testcases.core.step
 
 import com.kaspersky.kaspresso.params.StepParams
 import com.kaspersky.kaspresso.testcases.models.StepStatus
+import com.kaspersky.kaspresso.testcases.models.TestIdentifier
 import com.kaspersky.kaspresso.testcases.models.info.InternalStepInfo
 import com.kaspersky.kaspresso.testcases.models.info.StepInfo
 
@@ -59,7 +60,7 @@ import com.kaspersky.kaspresso.testcases.models.info.StepInfo
  */
 
 internal class StepsManager(
-    private val testName: String,
+    private val testIdentifier: TestIdentifier,
     private val stepParams: StepParams
 ) : StepInfoProducer {
 
@@ -170,7 +171,7 @@ internal class StepsManager(
 
         return InternalStepInfo(
             description = description,
-            testClassName = testName,
+            testIdentifier = testIdentifier,
             number = stepNumber?.joinToString(separator = "."),
             ordinal = ++stepsCounter,
             stepNumber = stepNumber,

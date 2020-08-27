@@ -91,17 +91,19 @@ abstract class DocLocScreenshotTestCase(
     private lateinit var screenshotCapturer: DocLocScreenshotCapturer
 
     @PublishedApi
-    internal val logger: UiTestLogger = kaspresso.libLogger
+    internal val logger: UiTestLogger by lazy { kaspresso.libLogger }
 
-    private val confLocales: Locales = Locales(logger)
+    private val confLocales: Locales by lazy { Locales(logger) }
 
     @get:Rule
-    val localeRule = LocaleRule(
-        locales = locales?.let { confLocales.parseLocales(it) } ?: confLocales.getSupportedLocales(),
-        changeSystemLocale = changeSystemLocale,
-        device = kaspresso.device,
-        logger = kaspresso.libLogger
-    )
+    val localeRule by lazy {
+        LocaleRule(
+            locales = locales?.let { confLocales.parseLocales(it) } ?: confLocales.getSupportedLocales(),
+            changeSystemLocale = changeSystemLocale,
+            device = kaspresso.device,
+            logger = kaspresso.libLogger
+        )
+    }
 
     @get:Rule
     val storagePermissionRule = GrantPermissionRule.grant(Manifest.permission.WRITE_EXTERNAL_STORAGE)!!

@@ -38,8 +38,8 @@ internal class TestRunner<InitData, Data>(
                 exceptions
             )
 
-        val stepsManager = StepsManager(testBody.testName, kaspresso.params.stepParams)
-        var testInfo = TestInfo(testBody.testName)
+        val stepsManager = StepsManager(kaspresso.testIdentifier, kaspresso.params.stepParams)
+        var testInfo = TestInfo(kaspresso.testIdentifier)
         var testPassed = true
 
         try {

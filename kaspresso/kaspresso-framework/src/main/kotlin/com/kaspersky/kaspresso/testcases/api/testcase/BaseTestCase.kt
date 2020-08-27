@@ -3,9 +3,12 @@ package com.kaspersky.kaspresso.testcases.api.testcase
 import com.kaspersky.kaspresso.device.Device
 import com.kaspersky.kaspresso.device.server.AdbServer
 import com.kaspersky.kaspresso.enricher.MainSectionEnricher
+import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.report.BuildStepReportWatcherInterceptor
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.params.Params
+import com.kaspersky.kaspresso.report.impl.AllureReportWriter
+import com.kaspersky.kaspresso.steps.StepsResultsConsumerImpl
 import com.kaspersky.kaspresso.testcases.core.sections.AfterTestSection
 import com.kaspersky.kaspresso.testcases.core.sections.BeforeTestSection
 import com.kaspersky.kaspresso.testcases.core.sections.MainTestSection
@@ -15,6 +18,10 @@ import com.kaspersky.kaspresso.testcases.core.testassistants.TestAssistantsProvi
 import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
 import com.kaspersky.kaspresso.testcases.core.testcontext.TestContext
 import com.kaspersky.kaspresso.testcases.models.TestBody
+import com.kaspersky.kaspresso.testcases.models.extensions.toTestIdentifier
+import org.junit.Rule
+import org.junit.rules.TestWatcher
+import org.junit.runner.Description
 
 /**
  * The base class for all parametrized test cases. Extend this class with a single base project-wide inheritor of
@@ -30,15 +37,44 @@ abstract class BaseTestCase<InitData, Data>(
     private val mainSectionEnrichers: List<MainSectionEnricher<Data>> = emptyList()
 ) : TestAssistantsProvider {
 
-    internal val kaspresso: Kaspresso = kaspressoBuilder.build()
+    internal lateinit var kaspresso: Kaspresso
+
+    /**
+     * This rule is using for writing steps information from test method into adb shell output, when test
+     * was ended successfully or failed.
+     */
+    @get:Rule
+    internal val stepsResultsConsumer = StepsResultsConsumerImpl()
+
+    /**
+     * This rule is using for binding [com.kaspersky.kaspresso.testcases.models.TestIdentifier] with each test method
+     * in the current test case. With this identifier we can write additional information into adb shell output
+     * correctly, e.g. steps information.
+     */
+    @get:Rule
+    internal val testWatcher = object : TestWatcher() {
+        override fun starting(description: Description) {
+            super.starting(description)
+
+            kaspresso = kaspressoBuilder
+                .apply {
+                    testIdentifier = description.toTestIdentifier()
+                    stepsResultsConsumers = listOf(stepsResultsConsumer)
+                    testRunWatcherInterceptors.add(
+                        BuildStepReportWatcherInterceptor(AllureReportWriter(kaspressoBuilder.stepsResultsConsumers))
+                    )
+                }
+                .build()
+        }
+    }
 
     private val testCaseName = javaClass.simpleName
-    private val testAssistantsProvider = TestAssistantsProviderImpl(kaspresso)
+    private val testAssistantsProvider by lazy { TestAssistantsProviderImpl(kaspresso) }
 
-    override val adbServer: AdbServer = testAssistantsProvider.adbServer
-    override val device: Device = testAssistantsProvider.device
-    override val testLogger: UiTestLogger = testAssistantsProvider.testLogger
-    override val params: Params = testAssistantsProvider.params
+    override val adbServer: AdbServer by lazy { testAssistantsProvider.adbServer }
+    override val device: Device by lazy { testAssistantsProvider.device }
+    override val testLogger: UiTestLogger by lazy { testAssistantsProvider.testLogger }
+    override val params: Params by lazy { testAssistantsProvider.params }
 
     /**
      * Starts the building of a test, sets the [BeforeTestSection] actions and returns an existing instance of

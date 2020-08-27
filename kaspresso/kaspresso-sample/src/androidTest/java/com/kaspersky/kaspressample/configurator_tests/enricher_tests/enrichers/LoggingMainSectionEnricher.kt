@@ -8,12 +8,12 @@ import com.kaspersky.kaspresso.testcases.models.info.TestInfo
 class LoggingMainSectionEnricher : MainSectionEnricher<EnricherTestData> {
 
     override fun TestContext<EnricherTestData>.beforeMainSectionRun(testInfo: TestInfo) {
-        testLogger.d("Before main section run... | ${testInfo.testName}")
+        testLogger.d("Before main section run... | ${testInfo.testIdentifier}")
         testLogger.d("Check users count: ${data.users.size}")
     }
 
     override fun TestContext<EnricherTestData>.afterMainSectionRun(testInfo: TestInfo) {
-        testLogger.d("After main section run... | ${testInfo.testName}")
+        testLogger.d("After main section run... | ${testInfo.testIdentifier}")
         testLogger.d("Check posts count: ${data.posts.size}")
     }
 }

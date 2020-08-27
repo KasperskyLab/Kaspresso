@@ -8,7 +8,7 @@ import com.kaspersky.kaspresso.testcases.models.info.TestInfo
 class AssertionMainSectionEnricher : MainSectionEnricher<EnricherTestData> {
 
     override fun TestContext<EnricherTestData>.afterMainSectionRun(testInfo: TestInfo) {
-        step("Real step after 'run' block --> assert posts count | ${testInfo.testName}") {
+        step("Real step after 'run' block --> assert posts count | ${testInfo.testIdentifier}") {
             assert(data.posts.size == 2)
         }
     }
