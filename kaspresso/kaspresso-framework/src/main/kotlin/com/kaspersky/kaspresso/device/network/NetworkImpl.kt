@@ -165,9 +165,9 @@ class NetworkImpl(
 
         if (targetSdkVersion >= Build.VERSION_CODES.Q) return false
         if (ContextCompat.checkSelfPermission(
-                targetContext,
-                Manifest.permission.CHANGE_WIFI_STATE
-            ) == PackageManager.PERMISSION_DENIED
+            targetContext,
+            Manifest.permission.CHANGE_WIFI_STATE
+        ) == PackageManager.PERMISSION_DENIED
         ) return false
 
         val manager =

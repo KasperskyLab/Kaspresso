@@ -116,7 +116,8 @@ interface UiSystemActions {
     fun drag(startX: Int, startY: Int, endX: Int, endY: Int, steps: Int) {
         view.perform(UiSystemActionType.DRAG) {
             checkBooleanAction(
-                "${UiSystemActionType.DRAG}(startX=$startX, startY=$startY, endX=$endX, endY=$endY, steps=$steps)") {
+                "${UiSystemActionType.DRAG}(startX=$startX, startY=$startY, endX=$endX, endY=$endY, steps=$steps)"
+            ) {
                 drag(startX, startY, endX, endY, steps)
             }
         }

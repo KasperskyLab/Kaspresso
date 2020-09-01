@@ -24,7 +24,9 @@ internal class DesktopDeviceSocketConnectionForwardImpl(
     override fun getDesktopSocketLoad(executor: CommandExecutor): () -> Socket {
         val clientPort = getFreePort()
         desktopLogger.i("getDesktopSocketLoad", "calculated desktop client port=$clientPort")
-        forwardPorts(executor, clientPort,
+        forwardPorts(
+            executor,
+            clientPort,
             DEVICE_PORT
         )
         desktopLogger.i("getDesktopSocketLoad", "desktop client port=$clientPort is forwarding with device server port=$DEVICE_PORT")

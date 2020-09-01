@@ -76,8 +76,10 @@ internal class ConnectionClientImplBySocket(
                 ExecutorResultStatus.FAILED,
                 "tryDisconnect was called"
             )
-            logger.i("resetCommandsInProgress", "command=$adbCommand was failed because of disconnecting. " +
-                    "result=$commandResult"
+            logger.i(
+                "resetCommandsInProgress",
+                "command=$adbCommand was failed because of disconnecting. " +
+                                    "result=$commandResult"
             )
             resultWaiter.latchResult(
                 ResultMessage(
