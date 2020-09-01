@@ -9,10 +9,8 @@ internal class ConnectionMaker(deviceName: String? = null) {
 
     private val logger = LoggerFactory.getLogger(tag = javaClass.simpleName, deviceName = deviceName)
     @Volatile
-    private var connectionState: ConnectionState =
-        ConnectionState.DISCONNECTED
+    private var connectionState: ConnectionState = ConnectionState.DISCONNECTED
 
-    @Synchronized
     fun connect(connectAction: () -> Unit, successConnectAction: () -> Unit) {
         logger.i("connect", "start")
         logger.i("connect", "current state=$connectionState")
@@ -23,12 +21,10 @@ internal class ConnectionMaker(deviceName: String? = null) {
         if (connectionState == ConnectionState.CONNECTED) {
             return
         }
-        connectionState =
-            ConnectionState.CONNECTING
+        connectionState = ConnectionState.CONNECTING
         try {
             connectAction.invoke()
-            connectionState =
-                ConnectionState.CONNECTED
+            connectionState = ConnectionState.CONNECTED
             logger.i("connect", "updated state=$connectionState")
             successConnectAction.invoke()
         } catch (exception: Exception) {
@@ -38,11 +34,10 @@ internal class ConnectionMaker(deviceName: String? = null) {
         }
     }
 
-    @Synchronized
     fun disconnect(connectAction: () -> Unit) {
         logger.i("disconnect", "start")
         logger.i("disconnect", "current state=$connectionState")
-        if (connectionState == ConnectionState.CONNECTING || connectionState == ConnectionState.DISCONNECTING) {
+        if (connectionState == ConnectionState.DISCONNECTING) {
             logger.i("disconnect", "Unexpected connection state appeared during disconnect")
             return
         }
@@ -50,13 +45,11 @@ internal class ConnectionMaker(deviceName: String? = null) {
             return
         }
         try {
-            connectionState =
-                ConnectionState.DISCONNECTING
+            connectionState = ConnectionState.DISCONNECTING
             logger.i("disconnect", "updated state=$connectionState")
             connectAction.invoke()
         } finally {
-            connectionState =
-                ConnectionState.DISCONNECTED
+            connectionState = ConnectionState.DISCONNECTED
             logger.i("disconnect", "updated state=$connectionState")
         }
     }
