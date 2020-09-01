@@ -94,7 +94,7 @@ class AdbServerImpl(
                 if (result.status == ExecutorResultStatus.TIMEOUT) {
                     throw AdbServerException(
                         "Command=$command was performed with timeout exception. \n" +
-                                "The possible reason (99.9%) is absence of started 'desktop.jar'. \n" +
+                                "The possible reason (99.9%) is absence of started 'desktop.jar' (AdbServer). \n" +
                                 "Please, follow the instruction: \n" +
                                 "1. Find the last 'desktop.jar' here - https://github.com/KasperskyLab/Kaspresso/tree/master/artifacts \n" +
                                 "2. Copy 'desktop.jar' to your machine. For example, /Users/yuri.gagarin/Desktop/desktop.jar. \n" +
