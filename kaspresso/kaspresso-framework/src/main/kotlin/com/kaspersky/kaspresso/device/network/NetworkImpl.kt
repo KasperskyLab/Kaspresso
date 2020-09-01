@@ -77,7 +77,8 @@ class NetworkImpl(
      * Settings then.
      */
     override fun toggleMobileData(enable: Boolean) {
-        if (!toggleMobileDataUsingAdbServer(enable, NETWORK_STATE_CHANGE_ROOT_CMD) &&
+        if (
+            !toggleMobileDataUsingAdbServer(enable, NETWORK_STATE_CHANGE_ROOT_CMD) &&
             !toggleMobileDataUsingAdbServer(enable, NETWORK_STATE_CHANGE_CMD)
         )
             return toggleMobileDataUsingAndroidSettings(enable)
@@ -151,7 +152,8 @@ class NetworkImpl(
      * to switch Wi-Fi setting thumb.
      */
     override fun toggleWiFi(enable: Boolean) {
-        if (!changeWiFiStateUsingAndroidApi(enable) &&
+        if (
+            !changeWiFiStateUsingAndroidApi(enable) &&
             !changeWiFiStateUsingAdbServer(enable, WIFI_STATE_CHANGE_ROOT_CMD) &&
             !changeWiFiStateUsingAdbServer(enable, WIFI_STATE_CHANGE_CMD)
         )
