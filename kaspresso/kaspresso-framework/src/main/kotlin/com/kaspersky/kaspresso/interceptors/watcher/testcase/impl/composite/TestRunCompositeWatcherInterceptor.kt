@@ -53,9 +53,10 @@ class TestRunCompositeWatcherInterceptor(
                 .isEmpty()
         ) {
             logger.e(
-                "Please, revert back DefaultTestRunWatcherInterceptor to " +
-               "Kaspresso.Builder.testRunWatcherInterceptors. " +
-               "Otherwise Kaspresso.Builder.beforeEachTest and Kaspresso.Biulder.afterEachTest will not work!"
+                """Please, revert back DefaultTestRunWatcherInterceptor to 
+                        Kaspresso.Builder.testRunWatcherInterceptors.
+                        Otherwise Kaspresso.Builder.beforeEachTest and Kaspresso.Biulder.afterEachTest will not work!
+                        """.trimIndent()
             )
         }
     }
@@ -67,10 +68,10 @@ class TestRunCompositeWatcherInterceptor(
         return watcherInterceptors.sortedWith(
             Comparator { o1, o2 ->
                 when {
-o1 is DefaultTestRunWatcherInterceptor -> return@Comparator BIGGER
-o2 is DefaultTestRunWatcherInterceptor -> return@Comparator FEWER
-else -> return@Comparator DOES_NOT_MATTER
-}
+                    o1 is DefaultTestRunWatcherInterceptor -> return@Comparator BIGGER
+                    o2 is DefaultTestRunWatcherInterceptor -> return@Comparator FEWER
+                    else -> return@Comparator DOES_NOT_MATTER
+                }
             }
         )
     }
@@ -91,7 +92,12 @@ else -> return@Comparator DOES_NOT_MATTER
      * @param throwable the error occured to pass to  [watcherInterceptors].
      */
     override fun onBeforeSectionFinishedFailed(testInfo: TestInfo, throwable: Throwable) {
-        watcherInterceptors.forEachSafely(exceptions) { it.onBeforeSectionFinishedFailed(testInfo, throwable) }
+        watcherInterceptors.forEachSafely(exceptions) {
+            it.onBeforeSectionFinishedFailed(
+                testInfo,
+                throwable
+            )
+        }
     }
 
     /**
@@ -119,7 +125,12 @@ else -> return@Comparator DOES_NOT_MATTER
      * @param throwable the error occured to pass to  [watcherInterceptors].
      */
     override fun onMainSectionFinishedFailed(testInfo: TestInfo, throwable: Throwable) {
-        watcherInterceptors.forEachSafely(exceptions) { it.onMainSectionFinishedFailed(testInfo, throwable) }
+        watcherInterceptors.forEachSafely(exceptions) {
+            it.onMainSectionFinishedFailed(
+                testInfo,
+                throwable
+            )
+        }
     }
 
     /**
@@ -149,7 +160,12 @@ else -> return@Comparator DOES_NOT_MATTER
      */
     override fun onAfterSectionFinishedFailed(testInfo: TestInfo, throwable: Throwable) {
         checkIfDefaultWatcherInterceptorsExist()
-        getAfterSectionList().forEachSafely(exceptions) { it.onAfterSectionFinishedFailed(testInfo, throwable) }
+        getAfterSectionList().forEachSafely(exceptions) {
+            it.onAfterSectionFinishedFailed(
+                testInfo,
+                throwable
+            )
+        }
     }
 
     /**
@@ -159,10 +175,10 @@ else -> return@Comparator DOES_NOT_MATTER
         return watcherInterceptors.sortedWith(
             Comparator { o1, o2 ->
                 when {
-o1 is DefaultTestRunWatcherInterceptor -> return@Comparator FEWER
-o2 is DefaultTestRunWatcherInterceptor -> return@Comparator BIGGER
-else -> return@Comparator DOES_NOT_MATTER
-}
+                    o1 is DefaultTestRunWatcherInterceptor -> return@Comparator FEWER
+                    o2 is DefaultTestRunWatcherInterceptor -> return@Comparator BIGGER
+                    else -> return@Comparator DOES_NOT_MATTER
+                }
             }
         )
     }

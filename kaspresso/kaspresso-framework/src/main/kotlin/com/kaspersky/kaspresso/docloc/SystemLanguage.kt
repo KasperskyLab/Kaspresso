@@ -53,8 +53,7 @@ internal class SystemLanguage(
         val attemptToGrantPermissionResult = hackPermissions.grant(context.packageName, Manifest.permission.CHANGE_CONFIGURATION)
         if (!attemptToGrantPermissionResult) {
             throw DocLocException(
-                "SystemLanguage: The attempt to grant Manifest.permission.CHANGE_CONFIGURATION " +
-  "for SystemLanguage failed"
+                "SystemLanguage: The attempt to grant Manifest.permission.CHANGE_CONFIGURATION for SystemLanguage failed"
             )
         }
     }

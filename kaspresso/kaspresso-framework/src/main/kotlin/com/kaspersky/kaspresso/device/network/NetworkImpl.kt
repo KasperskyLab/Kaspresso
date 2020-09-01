@@ -78,24 +78,26 @@ class NetworkImpl(
      */
     override fun toggleMobileData(enable: Boolean) {
         if (!toggleMobileDataUsingAdbServer(enable, NETWORK_STATE_CHANGE_ROOT_CMD) &&
-            !toggleMobileDataUsingAdbServer(enable, NETWORK_STATE_CHANGE_CMD))
+            !toggleMobileDataUsingAdbServer(enable, NETWORK_STATE_CHANGE_CMD)
+        )
             return toggleMobileDataUsingAndroidSettings(enable)
     }
 
-    private fun toggleMobileDataUsingAdbServer(enable: Boolean, changeCommand: String): Boolean = try {
-        val (state, expectedResult) = when (enable) {
-            true -> CMD_STATE_ENABLE to NETWORK_STATE_CHECK_RESULT_ENABLED
-            false -> CMD_STATE_DISABLE to NETWORK_STATE_CHECK_RESULT_DISABLED
+    private fun toggleMobileDataUsingAdbServer(enable: Boolean, changeCommand: String): Boolean =
+        try {
+            val (state, expectedResult) = when (enable) {
+                true -> CMD_STATE_ENABLE to NETWORK_STATE_CHECK_RESULT_ENABLED
+                false -> CMD_STATE_DISABLE to NETWORK_STATE_CHECK_RESULT_DISABLED
+            }
+            adbServer.performShell("$changeCommand $state")
+            flakySafetyAlgorithm.invokeFlakySafely(flakySafetyParams) {
+                val result = adbServer.performShell(NETWORK_STATE_CHECK_CMD)
+                if (parseAdbResponse(result)?.trim() == expectedResult) true else
+                    throw AdbServerException("Failed to change network state using ABD")
+            }
+        } catch (ex: AdbServerException) {
+            false
         }
-        adbServer.performShell("$changeCommand $state")
-        flakySafetyAlgorithm.invokeFlakySafely(flakySafetyParams) {
-            val result = adbServer.performShell(NETWORK_STATE_CHECK_CMD)
-            if (parseAdbResponse(result)?.trim() == expectedResult) true else
-                throw AdbServerException("Failed to change network state using ABD")
-        }
-    } catch (ex: AdbServerException) {
-        false
-    }
 
     private fun toggleMobileDataUsingAndroidSettings(enable: Boolean) {
         if (currentOsVersion < Build.VERSION_CODES.N) {
@@ -151,7 +153,8 @@ class NetworkImpl(
     override fun toggleWiFi(enable: Boolean) {
         if (!changeWiFiStateUsingAndroidApi(enable) &&
             !changeWiFiStateUsingAdbServer(enable, WIFI_STATE_CHANGE_ROOT_CMD) &&
-            !changeWiFiStateUsingAdbServer(enable, WIFI_STATE_CHANGE_CMD))
+            !changeWiFiStateUsingAdbServer(enable, WIFI_STATE_CHANGE_CMD)
+        )
             changeWifiStateUsingAndroidSettings(enable)
     }
 
@@ -164,10 +167,11 @@ class NetworkImpl(
         val targetSdkVersion = targetContext.applicationInfo.targetSdkVersion
 
         if (targetSdkVersion >= Build.VERSION_CODES.Q) return false
-        if (ContextCompat.checkSelfPermission(
-            targetContext,
-            Manifest.permission.CHANGE_WIFI_STATE
-        ) == PackageManager.PERMISSION_DENIED
+        if (
+            ContextCompat.checkSelfPermission(
+                targetContext,
+                Manifest.permission.CHANGE_WIFI_STATE
+            ) == PackageManager.PERMISSION_DENIED
         ) return false
 
         val manager =
@@ -184,20 +188,21 @@ class NetworkImpl(
      * Tries to change Wi-Fi state using AdbServer if it is available
      * @return true if Wi-Fi state changed or false otherwise
      */
-    private fun changeWiFiStateUsingAdbServer(isEnabled: Boolean, changeCommand: String): Boolean = try {
-        val (state, expectedResult) = when (isEnabled) {
-            true -> CMD_STATE_ENABLE to WIFI_STATE_CHECK_RESULT_ENABLED
-            false -> CMD_STATE_DISABLE to WIFI_STATE_CHECK_RESULT_DISABLED
+    private fun changeWiFiStateUsingAdbServer(isEnabled: Boolean, changeCommand: String): Boolean =
+        try {
+            val (state, expectedResult) = when (isEnabled) {
+                true -> CMD_STATE_ENABLE to WIFI_STATE_CHECK_RESULT_ENABLED
+                false -> CMD_STATE_DISABLE to WIFI_STATE_CHECK_RESULT_DISABLED
+            }
+            adbServer.performShell("$changeCommand $state")
+            flakySafetyAlgorithm.invokeFlakySafely(flakySafetyParams) {
+                val result = adbServer.performShell(WIFI_STATE_CHECK_CMD)
+                if (parseAdbResponse(result)?.trim() == expectedResult) true else
+                    throw AdbServerException("Failed to change Wi-Fi state using ABD")
+            }
+        } catch (e: AdbServerException) {
+            false
         }
-        adbServer.performShell("$changeCommand $state")
-        flakySafetyAlgorithm.invokeFlakySafely(flakySafetyParams) {
-            val result = adbServer.performShell(WIFI_STATE_CHECK_CMD)
-            if (parseAdbResponse(result)?.trim() == expectedResult) true else
-                throw AdbServerException("Failed to change Wi-Fi state using ABD")
-        }
-    } catch (e: AdbServerException) {
-        false
-    }
 
     /**
      * Toggles Wi-Fi thumb in Android settings.

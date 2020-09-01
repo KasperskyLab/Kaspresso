@@ -8,5 +8,5 @@ import com.kaspersky.components.kautomator.component.common.builders.UiViewSelec
 class UnfoundedUiObjectException(selector: UiViewSelector) :
     RuntimeException(
         "The UiObject2 was not found on the screen. " +
-"The selector=${selector.bySelector}, index=${selector.index}"
+                "The selector=${selector.bySelector}, index=${selector.index}"
     )

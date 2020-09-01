@@ -91,8 +91,7 @@ internal class SocketMessagesTransferring<ReceiveModel, SendModel> private const
             } else {
                 logger.i(
                     "MessagesListeningThread.peekNextMessage",
-                    "with message=$obj" +
-                                            " but this message type is not $receiveModelClass"
+                    "with message=$obj but this message type is not $receiveModelClass"
                 )
                 disruptAction.invoke()
             }
