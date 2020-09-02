@@ -34,14 +34,14 @@ internal class Device private constructor(
 
     fun startConnectionToDesktop() {
         if (isRunning.compareAndSet(false, true)) {
-            logger.i("start", "start")
+            logger.i("startConnectionToDesktop", "start")
             WatchdogThread().start()
         }
     }
 
     fun stopConnectionToDesktop() {
         if (isRunning.compareAndSet(true, false)) {
-            logger.i("stop", "stop")
+            logger.i("stopConnectionToDesktop", "stop")
             connectionClient.tryDisconnect()
         }
     }
@@ -54,13 +54,13 @@ internal class Device private constructor(
      * 2. the adb command execution time
      */
     fun fulfill(command: Command): CommandResult {
-        logger.i("execute", "Start to execute the command=$command")
+        logger.i("fulfill", "Start to execute the command=$command")
         val commandResult = try {
             awaitConnectionEstablished(CONNECTION_ESTABLISH_TIMEOUT_SEC, TimeUnit.SECONDS)
             connectionClient.executeCommand(command)
         } catch (exception: ConnectionTimeException) {
             CommandResult(
-                ExecutorResultStatus.FAILED,
+                ExecutorResultStatus.TIMEOUT,
                 "The time for the connection establishment is over"
             )
         }
