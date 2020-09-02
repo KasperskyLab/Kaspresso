@@ -21,9 +21,9 @@ internal fun main(args: Array<String>) {
         ?.replace("=", "")
         ?.trim()
     val runMode = argsList
-            .firstOrNull { arg -> arg.contains("runMode") }
-            ?.removeSurrounding(prefix = "runMode=", suffix = "")
-            ?.trim()
+        .firstOrNull { arg -> arg.contains("runMode") }
+        ?.removeSurrounding(prefix = "runMode=", suffix = "")
+        ?.trim()
 
     LoggerFactory.setRunMode(runMode)
 

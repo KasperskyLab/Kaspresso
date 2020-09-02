@@ -7,6 +7,7 @@ import java.util.Date
  * Presents logs in the form like:
  * INFO 17/08/2020 09:53:52 desktop=Desktop-5037 device=emulator-5554 message:updated state=CONNECTED
  */
+private const val EMPTY_STRING = ""
 internal class FullLoggerSystemImpl(
     private val logMode: FullLogger.LogLevel,
     private val desktopName: String?
@@ -40,43 +41,43 @@ internal class FullLoggerSystemImpl(
     }
 
     private fun getLogType(logLevel: FullLogger.LogLevel?): String =
-            logLevel?.name ?: ""
+            logLevel?.name ?: EMPTY_STRING
 
     private fun getDevice(deviceName: String?): String =
             if (deviceName != null) {
-                "$DEVICE$deviceName "
+                "$DEVICE$deviceName"
             } else {
-                ""
+                EMPTY_STRING
             }
 
     private fun getDesktop(): String =
             if (desktopName != null) {
-                "$DESKTOP$desktopName "
+                "$DESKTOP$desktopName"
             } else {
-                ""
+                EMPTY_STRING
             }
 
     private fun getTag(tag: String?): String =
             if (logMode == FullLogger.LogLevel.DEBUG && tag != null) {
                 "$TAG$tag "
-            } else ""
+            } else EMPTY_STRING
 
     private fun getMethod(method: String?): String =
             if (logMode == FullLogger.LogLevel.DEBUG && method != null) {
                 "$METHOD$method "
-            } else ""
+            } else EMPTY_STRING
 
     private fun getText(text: String?): String =
             if (text != null) {
                 "$MESSAGE$text"
-            } else ""
+            } else EMPTY_STRING
 
     private fun getDate(): String {
         val date = formatter.format(Date())
         return if (date != null) {
             "$date "
         } else {
-            ""
+            EMPTY_STRING
         }
     }
 }
