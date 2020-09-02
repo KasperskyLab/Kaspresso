@@ -12,12 +12,14 @@ object ConnectionFactory {
     fun createServer(
         socketCreation: () -> Socket,
         commandExecutor: CommandExecutor,
-        deviceName: String
+        deviceName: String,
+        desktopName: String
     ): ConnectionServer =
         ConnectionServerImplBySocket(
             socketCreation,
             commandExecutor,
-            deviceName
+            deviceName,
+            desktopName
         )
 
     fun createClient(

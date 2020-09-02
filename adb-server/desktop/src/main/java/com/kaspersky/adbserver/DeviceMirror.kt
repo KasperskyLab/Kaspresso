@@ -16,7 +16,8 @@ internal class DeviceMirror private constructor(
         fun create(
             deviceName: String,
             adbServerPort: String?,
-            cmdCommandPerformer: CmdCommandPerformer
+            cmdCommandPerformer: CmdCommandPerformer,
+            desktopName: String
         ): DeviceMirror {
             val desktopDeviceSocketConnection =
                 DesktopDeviceSocketConnectionFactory.getSockets(
@@ -29,7 +30,8 @@ internal class DeviceMirror private constructor(
             val connectionServer = ConnectionFactory.createServer(
                 desktopDeviceSocketConnection.getDesktopSocketLoad(commandExecutor),
                 commandExecutor,
-                deviceName
+                deviceName,
+                desktopName
             )
             return DeviceMirror(
                 deviceName,

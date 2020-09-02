@@ -1,8 +1,9 @@
 package com.kaspersky.adbserver
 
 import com.kaspresky.adbserver.log.LoggerFactory
+import java.lang.management.ManagementFactory
 
-private const val DEFAULT_ADB_PORT = "5037"
+private const val DESKTOP = "Desktop-"
 
 internal fun main(args: Array<String>) {
     val argsList = args.toList()
@@ -26,11 +27,10 @@ internal fun main(args: Array<String>) {
 
     LoggerFactory.setRunMode(runMode)
 
-    if (!adbServerPort.isNullOrEmpty()) {
-        LoggerFactory.setDesktopName(adbServerPort)
-    } else {
-        LoggerFactory.setDesktopName(DEFAULT_ADB_PORT)
-    }
+    val processName = ManagementFactory.getRuntimeMXBean().name
+    val pid = processName.split("@".toRegex()).toTypedArray()[0].toLong()
+    val desktopName = DESKTOP + pid
+    LoggerFactory.setDesktopName(desktopName)
 
     val logger = LoggerFactory.getLogger(tag = "Desktop")
     logger.i("MAIN", "arguments: emulators=$emulators, adbServerPort=$adbServerPort")
@@ -39,7 +39,8 @@ internal fun main(args: Array<String>) {
     val desktop = Desktop(
         cmdCommandPerformer = cmdCommandPerformer,
         presetEmulators = emulators,
-        adbServerPort = adbServerPort
+        adbServerPort = adbServerPort,
+        desktopName = desktopName
     )
     desktop.startDevicesObserving()
 }

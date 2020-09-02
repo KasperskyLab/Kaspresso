@@ -14,7 +14,8 @@ import java.util.concurrent.Executors
 internal class ConnectionServerImplBySocket(
     private val socketCreation: () -> Socket,
     private val commandExecutor: CommandExecutor,
-    private val deviceName: String
+    private val deviceName: String,
+    private val desktopName: String
 ) : ConnectionServer {
 
     private val logger = LoggerFactory.getLogger(tag = javaClass.simpleName, deviceName = deviceName)
@@ -48,6 +49,7 @@ internal class ConnectionServerImplBySocket(
             disruptAction = { tryDisconnect() },
             deviceName = deviceName
         )
+        socketMessagesTransferring.sendDesktopName(desktopName)
         socketMessagesTransferring.startListening { taskMessage ->
             logger.d("handleMessages", "received taskMessage=$taskMessage")
             backgroundExecutor.execute {

@@ -67,6 +67,16 @@ internal class SocketMessagesTransferring<ReceiveModel, SendModel> private const
         }
     }
 
+    fun sendDesktopName(desktopName: String) {
+        logger.d("sendDesktopName", "where desktopName=$desktopName")
+        try {
+            outputStream.writeObject(desktopName)
+            outputStream.flush()
+        } catch (exception: Exception) {
+            logger.e("sendDesktopName", exception)
+        }
+    }
+
     fun stopListening() {
         isRunning.set(false)
     }
@@ -87,6 +97,8 @@ internal class SocketMessagesTransferring<ReceiveModel, SendModel> private const
             if (obj.javaClass == receiveModelClass) {
                 logger.d("MessagesListeningThread.peekNextMessage", "with message=$obj")
                 messagesListener.invoke(obj as ReceiveModel)
+            } else if (obj.javaClass == String::class.java) {
+                LoggerFactory.setDesktopName(obj as String)
             } else {
                 logger.d("MessagesListeningThread.peekNextMessage", "with message=$obj" +
                         " but this message type is not $receiveModelClass"

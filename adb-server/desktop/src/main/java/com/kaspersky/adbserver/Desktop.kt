@@ -7,7 +7,8 @@ import java.util.regex.Pattern
 internal class Desktop(
     private val cmdCommandPerformer: CmdCommandPerformer,
     private val presetEmulators: List<String>,
-    private val adbServerPort: String?
+    private val adbServerPort: String?,
+    private val desktopName: String
 ) {
 
     companion object {
@@ -29,7 +30,7 @@ internal class Desktop(
                     )
                     val deviceMirror =
                         DeviceMirror.create(
-                            deviceName, adbServerPort, cmdCommandPerformer
+                            deviceName, adbServerPort, cmdCommandPerformer, desktopName
                         )
                     deviceMirror.startConnectionToDevice()
                     devices += deviceMirror
