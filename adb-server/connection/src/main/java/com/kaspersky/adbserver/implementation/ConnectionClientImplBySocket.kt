@@ -89,8 +89,10 @@ internal class ConnectionClientImplBySocket(
     private fun resetCommandsInProgress(failureReason: String) {
         for ((adbCommand, resultWaiter) in commandsInProgress) {
             val commandResult = CommandResult(ExecutorResultStatus.FAILED, failureReason)
-            logger.i("resetCommandsInProgress", "command=$adbCommand was failed because of disconnecting. " +
-                    "result=$commandResult"
+            logger.i(
+                "resetCommandsInProgress",
+                "command=$adbCommand was failed because of disconnecting. " +
+                                    "result=$commandResult"
             )
             resultWaiter.latchResult(
                 ResultMessage(
