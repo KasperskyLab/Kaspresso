@@ -100,8 +100,9 @@ internal class SocketMessagesTransferring<ReceiveModel, SendModel> private const
             } else if (obj.javaClass == String::class.java) {
                 LoggerFactory.setDesktopName(obj as String)
             } else {
-                logger.d("MessagesListeningThread.peekNextMessage", "with message=$obj" +
-                        " but this message type is not $receiveModelClass"
+                logger.d(
+                    "MessagesListeningThread.peekNextMessage",
+                    "with message=$obj but this message type is not $receiveModelClass"
                 )
                 disruptAction.invoke()
             }

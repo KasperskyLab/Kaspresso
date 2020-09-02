@@ -19,9 +19,11 @@ object WiFiSettingsScreen : UiScreen<WiFiSettingsScreen>() {
     }
 
     fun open(context: Context) {
-        context.startActivity(Intent(Settings.ACTION_WIFI_SETTINGS).apply {
-            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        })
+        context.startActivity(
+            Intent(Settings.ACTION_WIFI_SETTINGS).apply {
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            }
+        )
         waitForWindowUpdate(packageName, TIMEOUT)
     }
 

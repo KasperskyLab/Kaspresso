@@ -7,6 +7,7 @@ import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspressample.device.DeviceSampleActivity
 import com.kaspersky.kaspressample.screen.DeviceSampleScreen
+import com.kaspersky.kaspressample.utils.SafeAssert.assertTrueSafely
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
 import org.junit.Assert.assertTrue
@@ -14,13 +15,6 @@ import org.junit.Assume.assumeTrue
 import org.junit.Rule
 import org.junit.Test
 
-/**
- * Attention please!
- * Before you start this test you must remove Kaspresso sample application at the device or
- * execute adb shell commands like "pm clear com.kaspersky.kaspressample"
- * to reset permissions granted before.
- * It's needed measure because of AndroidJUnit Runner specific that doesn't reset state of app between tests.
- */
 class DevicePermissionsSampleTest : TestCase() {
 
     @get:Rule
@@ -34,9 +28,11 @@ class DevicePermissionsSampleTest : TestCase() {
 
     @Test
     fun permissionsSampleTest() {
+        // Run only on devices with Android M or later and skip the test otherwise.
+        assumeTrue(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+
         before {
-            // Run only on devices with Android M or later and skip the test otherwise.
-            assumeTrue(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+            adbServer.performShell("pm revoke ${device.targetContext.packageName} ${Manifest.permission.READ_CALL_LOG}")
         }.after {
         }.run {
 
@@ -49,12 +45,12 @@ class DevicePermissionsSampleTest : TestCase() {
                 }
 
                 device.permissions.apply {
-                    flakySafely { assertTrue(isDialogVisible()) }
+                    assertTrueSafely { isDialogVisible() }
                     allowViaDialog()
                 }
 
                 // Contacts permission should be granted now
-                assertTrue(hasCallLogPermission())
+                assertTrueSafely { hasCallLogPermission() }
             }
         }
     }

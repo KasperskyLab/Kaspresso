@@ -1,10 +1,10 @@
 package com.kaspersky.kaspresso.device.server
 
+import com.kaspersky.adbserver.AdbTerminal
+import com.kaspersky.adbserver.api.CommandResult
+import com.kaspersky.adbserver.api.ExecutorResultStatus
 import com.kaspersky.kaspresso.internal.exceptions.AdbServerException
 import com.kaspersky.kaspresso.logger.UiTestLogger
-import com.kaspersky.test_server.AdbTerminal
-import com.kaspersky.test_server.api.CommandResult
-import com.kaspersky.test_server.api.ExecutorResultStatus
 
 /**
  * The implementation of [AdbServer] interface. Encapsulates all work with adb server.
@@ -85,11 +85,22 @@ class AdbServerImpl(
         return commands.asSequence()
             .map { command -> command to executor.invoke(command) }
             .onEach { (command, result) ->
-                logger.i("command=$command was performed with result=$result")
+                logger.i("Command=$command was performed with result=$result")
             }
             .onEach { (command, result) ->
-                if (result.status == ExecutorResultStatus.FAILED)
-                    throw AdbServerException("command=$command was performed with failed result=$result")
+                if (result.status == ExecutorResultStatus.FAILED) {
+                    throw AdbServerException("Command=$command was performed with failed result=$result")
+                }
+                if (result.status == ExecutorResultStatus.TIMEOUT) {
+                    throw AdbServerException(
+                        "Command=$command was performed with timeout exception. \n" +
+                                "The possible reason (99.9%) is absence of started 'desktop.jar' (AdbServer). \n" +
+                                "Please, follow the instruction: \n" +
+                                "1. Find the last 'desktop.jar' here - https://github.com/KasperskyLab/Kaspresso/tree/master/artifacts \n" +
+                                "2. Copy 'desktop.jar' to your machine. For example, /Users/yuri.gagarin/Desktop/desktop.jar. \n" +
+                                "3. Start 'desktop.jar' with the command in Terminal - 'java -jar /Users/yuri.gagarin/Desktop/desktop.jar"
+                    )
+                }
             }
             .map { (_, result) -> result.description }
             .toList()

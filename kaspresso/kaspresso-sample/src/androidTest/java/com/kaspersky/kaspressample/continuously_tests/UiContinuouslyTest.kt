@@ -31,8 +31,6 @@ class UiContinuouslyTest : TestCase() {
     @Test
     fun testDialogPresentUntilAndroidO() {
         before {
-            // Don`t allow to run this test on Android >= Oreo
-            Assume.assumeTrue(Build.VERSION.SDK_INT < Build.VERSION_CODES.O)
             activityTestRule.launchActivity(null)
         }.after {
         }.run {
@@ -53,10 +51,8 @@ class UiContinuouslyTest : TestCase() {
             }
             step("Check dialog appeared") {
                 UiContinuouslyDialogScreen {
-                    flakySafely(FAKE_MAX_DELAY_MS) {
-                        dialogTitle {
-                            isDisplayed()
-                        }
+                    dialogTitle {
+                        isDisplayed()
                     }
                 }
             }
@@ -65,9 +61,10 @@ class UiContinuouslyTest : TestCase() {
 
     @Test
     fun testDialogNotPresentAfterAndroidO() {
+        // Don`t allow to run this test on Android < Oreo
+        Assume.assumeTrue(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+
         before {
-            // Don`t allow to run this test on Android < Oreo
-            Assume.assumeTrue(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
             activityTestRule.launchActivity(null)
         }.after {
         }.run {

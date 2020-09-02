@@ -40,28 +40,20 @@ class WebViewTest : TestCase() {
                 }
             }
 
-            step("Find \"Sign in\" button") {
+            step("Find \"Sign in\" button and \"Protect your data\" title") {
                 WebViewScreen {
 
                     webView {
                         withElement(
-                            Locator.CLASS_NAME,
-                            "btn"
-                        ) {
-                            containsText("Sign in")
-                            web.withElement(ref).perform(DriverAtoms.getText())
-                        }
-
-                        withElement(
                             Locator.XPATH,
-                            "//*[@id=\"app\"]/section[1]/div/div/h2"
+                            "/html/body/div[1]/section[1]/div/div/h2"
                         ) {
                             containsText("Protect your data")
                         }
 
                         withElement(
                             Locator.XPATH,
-                            "//*[@id=\"app\"]/header/section/div[3]/div[2]/button"
+                            "/html/body/div[1]/header/section/div[3]/div[2]/button"
                         ) {
                             hasText("Sign in")
                         }
@@ -69,13 +61,13 @@ class WebViewTest : TestCase() {
                 }
             }
 
-            step("Click \"Ask question\" button") {
+            step("Click \"Get Support\" button") {
                 WebViewScreen {
                     webView {
 
                         withElement(
                             Locator.XPATH,
-                            "//*[@id=\"app\"]/section[5]/div/div/div[2]/div[3]/button"
+                            "/html/body/div[1]/section[5]/div/div/div[2]/div[3]/button"
                         ) {
                             compose(this@webView) {
                                 or {
@@ -100,22 +92,22 @@ class WebViewTest : TestCase() {
                         compose {
                             orWithElement(
                                 Locator.XPATH,
-                                "//*[@id=\"app\"]/section[5]/div/div/div[2]/div[3]/button"
+                                "/html/body/div[1]/section[5]/div/div/div[2]/div[3]/button"
                             ) {
                                 hasText("TRATATATA")
                             }
                             orWithElement(
                                 Locator.XPATH,
-                                "//*[@id=\"app\"]/section[5]/div/div/div[2]/div[3]/button"
+                                "/html/body/div[1]/section[5]/div/div/div[2]/div[3]/button"
                             ) {
-                                hasText("Ask question")
+                                hasText("Get Support")
                                 click()
                             }
                             orWithElement(
                                 Locator.XPATH,
                                 "//*[@id=\"app\"]/section[5]/div/div/div[2]/div[3]/button"
                             ) {
-                                hasText("Get Support")
+                                hasText("Ask question")
                                 click()
                             }
                         }

@@ -30,7 +30,8 @@ class FlakySafetyParams private constructor(
                 AssertionError::class.java,
                 AssertionFailedError::class.java,
                 UnfoundedUiObjectException::class.java,
-                StaleObjectException::class.java
+                StaleObjectException::class.java,
+                IllegalStateException::class.java
             )
         )
 

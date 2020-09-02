@@ -25,7 +25,9 @@ internal class DeviceMirror private constructor(
                     deviceName
                 )
             val commandExecutor = CommandExecutorImpl(
-                cmdCommandPerformer, deviceName, adbServerPort
+                cmdCommandPerformer,
+                deviceName,
+                adbServerPort
             )
             val connectionServer = ConnectionFactory.createServer(
                 desktopDeviceSocketConnection.getDesktopSocketLoad(commandExecutor),

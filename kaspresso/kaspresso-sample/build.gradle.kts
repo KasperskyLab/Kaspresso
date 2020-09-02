@@ -17,12 +17,17 @@ android {
         targetSdkVersion(Versions.targetSdk)
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunnerArguments = mapOf("clearPackageData" to "true")
     }
 
     sourceSets {
         val main by getting {
             java.srcDir("src/main/kotlin")
         }
+    }
+
+    testOptions {
+        execution = "ANDROIDX_TEST_ORCHESTRATOR"
     }
 }
 
@@ -39,4 +44,6 @@ dependencies {
     androidTestImplementation(Dependencies.kakao)
     androidTestImplementation(project(Projects.Kaspresso.framework))
     androidTestImplementation(project(Projects.Kautomator.framework))
+
+    androidTestUtil(Dependencies.orchestrator)
 }

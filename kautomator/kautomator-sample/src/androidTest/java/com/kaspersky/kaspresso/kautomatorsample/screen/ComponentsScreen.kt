@@ -9,7 +9,7 @@ import com.kaspersky.components.kautomator.screen.UiScreen
 
 object ComponentsScreen : UiScreen<ComponentsScreen>() {
 
-    override val packageName: String = "com.kaspersky.kaspresso.sample_kautomator"
+    override val packageName: String = "com.kaspersky.kaspresso.kautomatorsample"
 
     val bottomNav = UiBottomNavigationView { withId(this@ComponentsScreen.packageName, "bottomNav") }
     val checkbox = UiCheckBox { withId(this@ComponentsScreen.packageName, "checkBox") }

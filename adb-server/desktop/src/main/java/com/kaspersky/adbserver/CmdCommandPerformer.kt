@@ -33,7 +33,7 @@ internal class CmdCommandPerformer {
                 }
             }
             return CommandResult(
-                ExecutorResultStatus.FAILED,
+                ExecutorResultStatus.TIMEOUT,
                 "Command execution timeout ($EXECUTION_TIMEOUT_SECONDS sec) overhead"
             )
         } finally {

@@ -4,6 +4,7 @@ import androidx.test.rule.ActivityTestRule
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspresso.device.logcat.LogcatBufferSize
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
+import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
@@ -17,6 +18,7 @@ class DeviceLogcatSampleTest : TestCase() {
     fun logcatTest() {
         before {
             device.logcat.setBufferSize(LogcatBufferSize(8, LogcatBufferSize.Dimension.MEGABYTES))
+            device.logcat.disableChatty()
             device.logcat.clear()
         }.after {
         }.run {
@@ -106,12 +108,12 @@ class DeviceLogcatSampleTest : TestCase() {
                 val logcatList10Limit = device.logcat.readLogcatRows(
                     rowLimit = 10
                 )
-                assertTrue(logcatList10Limit.size == 11)
+                assertEquals(11, logcatList10Limit.size)
 
                 val logcatList50Limit = device.logcat.readLogcatRows(
                     rowLimit = 50
                 )
-                assertTrue(logcatList50Limit.size == 51)
+                assertEquals(51, logcatList50Limit.size)
             }
 
             step("Using reader block") {

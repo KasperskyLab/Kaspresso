@@ -6,29 +6,28 @@ object Dependencies {
         const val minSdk = 18
         const val buildTools = "29.0.3"
 
-        const val kotlin = "1.3.72"
+        const val kotlin = "1.4.0"
 
-        const val appcompat = "1.1.0"
-        const val androidXCore = "1.2.0"
-        const val material = "1.1.0"
-        const val constraint = "1.1.3"
+        const val appcompat = "1.2.0"
+        const val androidXCore = "1.3.1"
+        const val material = "1.2.0"
+        const val constraint = "2.0.0"
 
-        const val runner = "1.2.0"
-        const val junit = "4.12"
-        const val testCore = "1.2.0"
-        const val espresso = "3.2.0"
-        const val kakao = "2.3.2"
+        const val runner = "1.3.0"
+        const val junit = "4.13"
+        const val testCore = "1.3.0"
+        const val espresso = "3.3.0"
+        const val kakao = "2.3.4"
         const val uiAutomator = "2.2.0"
-        const val adbServer = "1.0.1"
 
         const val truth = "1.0"
         const val gson = "2.8.6"
 
-        const val detekt = "1.8.0"
+        const val detekt = "1.12.0"
         const val dokka = "0.10.1"
 
-        const val bintray = "1.8.4"
-        const val artifactory = "4.15.2"
+        const val bintray = "1.8.5"
+        const val artifactory = "4.17.2"
     }
 
     object Detect {
@@ -61,6 +60,7 @@ object Dependencies {
 
     const val testCore = "androidx.test:core:${Versions.testCore}"
     const val runner = "androidx.test:runner:${Versions.runner}"
+    const val orchestrator = "androidx.test:orchestrator:${Versions.runner}"
     const val rules = "androidx.test:rules:${Versions.runner}"
 
     const val junit = "junit:junit:${Versions.junit}"
@@ -72,5 +72,4 @@ object Dependencies {
     const val kakao = "com.agoda.kakao:kakao:${Versions.kakao}"
 
     const val uiAutomator = "androidx.test.uiautomator:uiautomator:${Versions.uiAutomator}"
-    const val adbServer = "com.kaspersky.android-components:adbserver-device:${Versions.adbServer}"
 }

@@ -19,13 +19,15 @@ internal class ConnectionServerImplBySocket(
 ) : ConnectionServer {
 
     private val logger = LoggerFactory.getLogger(tag = javaClass.simpleName, deviceName = deviceName)
-    private var connectionMaker: ConnectionMaker =
-        ConnectionMaker(deviceName)
-    private lateinit var socketMessagesTransferring: SocketMessagesTransferring<TaskMessage, ResultMessage<CommandResult>>
+    private var connectionMaker: ConnectionMaker = ConnectionMaker(deviceName)
 
     private var _socket: Socket? = null
     private val socket: Socket
-        get() = _socket ?: throw IllegalStateException("tryConnect must be called first")
+        get() = _socket ?: throw IllegalStateException("Socket is not initialised. Please call `tryConnect` function at first.")
+
+    private var _socketMessagesTransferring: SocketMessagesTransferring<TaskMessage, ResultMessage<CommandResult>>? = null
+    private val socketMessagesTransferring: SocketMessagesTransferring<TaskMessage, ResultMessage<CommandResult>>
+        get() = _socketMessagesTransferring ?: throw IllegalStateException("Socket transferring is not initialised. Please call `tryConnect` function at first.")
 
     private val backgroundExecutor = Executors.newCachedThreadPool()
 
@@ -42,7 +44,7 @@ internal class ConnectionServerImplBySocket(
     }
 
     private fun handleMessages() {
-        socketMessagesTransferring = SocketMessagesTransferring.createTransferring(
+        _socketMessagesTransferring = SocketMessagesTransferring.createTransferring(
             lightSocketWrapper = LightSocketWrapperImpl(
                 socket
             ),
@@ -68,8 +70,10 @@ internal class ConnectionServerImplBySocket(
     override fun tryDisconnect() {
         logger.d("tryDisconnect", "start")
         connectionMaker.disconnect {
-            socketMessagesTransferring.stopListening()
-            socket.close()
+            // there is a chance that `tryDisconnect` method may be called while the connection process is is progress
+            // that's why socket and socket transferring may be not initialised
+            _socketMessagesTransferring?.stopListening()
+            _socket?.close()
         }
         logger.d("tryDisconnect", "attempt completed")
     }
