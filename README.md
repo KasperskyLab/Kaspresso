@@ -228,7 +228,9 @@ allprojects {
 2. Add a dependency to `build.gradle`:
 
 ```
-androidTestImplementation 'com.kaspersky.android-components:kaspresso:1.1.0'
+dependencies {
+    androidTestImplementation 'com.kaspersky.android-components:kaspresso:1.1.0'
+}
 ```
 
 If you are still using the old Android Support libraries, we strongly recommend to migrate to AndroidX.
@@ -236,7 +238,23 @@ If you are still using the old Android Support libraries, we strongly recommend 
 The last version with Android Support libraries is:
 
 ```
-androidTestImplementation 'com.kaspersky.android-components:kaspresso:1.0.1-support'
+dependencies {
+    androidTestImplementation 'com.kaspersky.android-components:kaspresso:1.0.1-support'
+}
+```
+
+## Snapshots
+
+Snapshots are available via https://oss.jfrog.org/artifactory/libs-snapshot/com/kaspersky/android-components/
+
+```
+repositories {
+    maven { url 'https://oss.jfrog.org/libs-snapshot' }
+}
+
+dependencies {
+    androidTestImplementation 'com.kaspersky.android-components:kaspresso:1.1.1-SNAPSHOT'
+}
 ```
 
 ## Support

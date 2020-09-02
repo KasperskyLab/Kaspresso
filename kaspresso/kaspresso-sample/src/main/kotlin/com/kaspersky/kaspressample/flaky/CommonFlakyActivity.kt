@@ -25,10 +25,12 @@ class CommonFlakyActivity : AppCompatActivity() {
 
     private fun startAsync(firstDelayMs: Long, secondDelayMs: Long) {
         Handler(mainLooper)
-            .apply { postDelayed({ scroll_view_btn5.text = getString(R.string.common_flaky_final_button) },
+            .apply { postDelayed(
+                { scroll_view_btn5.text = getString(R.string.common_flaky_final_button) },
                 firstDelayMs
             ) }
-            .apply { postDelayed({ scroll_view_tv6.text = getString(R.string.common_flaky_final_textview) },
+            .apply { postDelayed(
+                { scroll_view_tv6.text = getString(R.string.common_flaky_final_textview) },
                 secondDelayMs
             ) }
     }

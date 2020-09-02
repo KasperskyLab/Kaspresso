@@ -26,8 +26,9 @@ class UiObjectLoaderProviderImpl(
             action.invoke()
         } catch (error: Throwable) {
             if (error.isAllowed(OBJECT_ABSENCE_EXCEPTIONS)) {
-                logger.i("UiView loaded by selector=${interaction.selector} is obsolete. " +
-                        "The next action is to attempt to reload UiView")
+                logger.i(
+                    "UiView loaded by selector=${interaction.selector} is obsolete. The next action is to attempt to reload UiView"
+                )
                 interaction.tryToFindUiObject()
                 return action.invoke()
             }

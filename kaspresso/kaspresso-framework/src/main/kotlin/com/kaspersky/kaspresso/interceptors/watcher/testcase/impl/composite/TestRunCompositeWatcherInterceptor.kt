@@ -52,9 +52,12 @@ class TestRunCompositeWatcherInterceptor(
                 .filterIsInstance<DefaultTestRunWatcherInterceptor>()
                 .isEmpty()
         ) {
-            logger.e("Please, revert back DefaultTestRunWatcherInterceptor to " +
-                    "Kaspresso.Builder.testRunWatcherInterceptors. " +
-                    "Otherwise Kaspresso.Builder.beforeEachTest and Kaspresso.Biulder.afterEachTest will not work!")
+            logger.e(
+                """Please, revert back DefaultTestRunWatcherInterceptor to 
+                        Kaspresso.Builder.testRunWatcherInterceptors.
+                        Otherwise Kaspresso.Builder.beforeEachTest and Kaspresso.Biulder.afterEachTest will not work!
+                        """.trimIndent()
+            )
         }
     }
 
@@ -62,13 +65,15 @@ class TestRunCompositeWatcherInterceptor(
      * First of all, call DefaultTestRunWatcherInterceptor because it's beforeEachTest is very first in the test
      */
     private fun getBeforeSectionList(): List<TestRunWatcherInterceptor> {
-        return watcherInterceptors.sortedWith(Comparator { o1, o2 ->
-            when {
-                o1 is DefaultTestRunWatcherInterceptor -> return@Comparator BIGGER
-                o2 is DefaultTestRunWatcherInterceptor -> return@Comparator FEWER
-                else -> return@Comparator DOES_NOT_MATTER
+        return watcherInterceptors.sortedWith(
+            Comparator { o1, o2 ->
+                when {
+                    o1 is DefaultTestRunWatcherInterceptor -> return@Comparator BIGGER
+                    o2 is DefaultTestRunWatcherInterceptor -> return@Comparator FEWER
+                    else -> return@Comparator DOES_NOT_MATTER
+                }
             }
-        })
+        )
     }
 
     /**
@@ -87,7 +92,12 @@ class TestRunCompositeWatcherInterceptor(
      * @param throwable the error occured to pass to  [watcherInterceptors].
      */
     override fun onBeforeSectionFinishedFailed(testInfo: TestInfo, throwable: Throwable) {
-        watcherInterceptors.forEachSafely(exceptions) { it.onBeforeSectionFinishedFailed(testInfo, throwable) }
+        watcherInterceptors.forEachSafely(exceptions) {
+            it.onBeforeSectionFinishedFailed(
+                testInfo,
+                throwable
+            )
+        }
     }
 
     /**
@@ -115,7 +125,12 @@ class TestRunCompositeWatcherInterceptor(
      * @param throwable the error occured to pass to  [watcherInterceptors].
      */
     override fun onMainSectionFinishedFailed(testInfo: TestInfo, throwable: Throwable) {
-        watcherInterceptors.forEachSafely(exceptions) { it.onMainSectionFinishedFailed(testInfo, throwable) }
+        watcherInterceptors.forEachSafely(exceptions) {
+            it.onMainSectionFinishedFailed(
+                testInfo,
+                throwable
+            )
+        }
     }
 
     /**
@@ -145,20 +160,27 @@ class TestRunCompositeWatcherInterceptor(
      */
     override fun onAfterSectionFinishedFailed(testInfo: TestInfo, throwable: Throwable) {
         checkIfDefaultWatcherInterceptorsExist()
-        getAfterSectionList().forEachSafely(exceptions) { it.onAfterSectionFinishedFailed(testInfo, throwable) }
+        getAfterSectionList().forEachSafely(exceptions) {
+            it.onAfterSectionFinishedFailed(
+                testInfo,
+                throwable
+            )
+        }
     }
 
     /**
      * In last turn, call DefaultTestRunWatcherInterceptor because it's afterEachTest is very last in the test
      */
     private fun getAfterSectionList(): List<TestRunWatcherInterceptor> {
-        return watcherInterceptors.sortedWith(Comparator { o1, o2 ->
-            when {
-                o1 is DefaultTestRunWatcherInterceptor -> return@Comparator FEWER
-                o2 is DefaultTestRunWatcherInterceptor -> return@Comparator BIGGER
-                else -> return@Comparator DOES_NOT_MATTER
+        return watcherInterceptors.sortedWith(
+            Comparator { o1, o2 ->
+                when {
+                    o1 is DefaultTestRunWatcherInterceptor -> return@Comparator FEWER
+                    o2 is DefaultTestRunWatcherInterceptor -> return@Comparator BIGGER
+                    else -> return@Comparator DOES_NOT_MATTER
+                }
             }
-        })
+        )
     }
 
     /**

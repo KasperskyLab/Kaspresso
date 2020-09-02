@@ -29,7 +29,9 @@ internal class Desktop(
                     )
                     val deviceMirror =
                         DeviceMirror.Companion.create(
-                            deviceName, adbServerPort, cmdCommandPerformer
+                            deviceName,
+                            adbServerPort,
+                            cmdCommandPerformer
                         )
                     deviceMirror.startConnectionToDevice()
                     devices += deviceMirror

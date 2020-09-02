@@ -7,6 +7,7 @@ import com.kaspersky.kaspresso.internal.extensions.other.throwAll
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.testcases.api.scenario.BaseScenario
 import com.kaspersky.kaspresso.testcases.core.step.StepInfoProducer
+import com.kaspersky.kaspresso.testcases.models.info.StepInfo
 
 /**
  * The special class to operate with in user scenario.
@@ -28,14 +29,14 @@ class TestContext<Data> internal constructor(
      * @param description a description of a step.
      * @param actions a set of actions of a step.
      */
-    fun step(description: String, actions: () -> Unit) {
+    fun step(description: String, actions: (StepInfo) -> Unit) {
         val exceptions: MutableList<Throwable> = mutableListOf()
         val stepInfo = stepInfoProducer.produceStepInfo(description)
 
         stepInterceptors.forEachSafely(exceptions) { it.interceptBefore(stepInfo) }
 
         try {
-            actions.invoke()
+            actions.invoke(stepInfo)
             stepInfoProducer.onStepFinished(stepInfo)
 
             stepInterceptors.forEach {
