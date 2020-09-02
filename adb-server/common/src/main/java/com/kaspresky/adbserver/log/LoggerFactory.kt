@@ -14,7 +14,9 @@ object LoggerFactory {
         FullLoggerFilteringByDeviceProvider()
 
     fun getLogger(tag: String, deviceName: String? = null): Logger =
-        LoggerImpl(tag, deviceName,
+        LoggerImpl(
+            tag,
+            deviceName,
             fullLogger
         )
 }
