@@ -45,9 +45,7 @@ internal class ConnectionServerImplBySocket(
 
     private fun handleMessages() {
         _socketMessagesTransferring = SocketMessagesTransferring.createTransferring(
-            lightSocketWrapper = LightSocketWrapperImpl(
-                socket
-            ),
+            lightSocketWrapper = LightSocketWrapperImpl(socket),
             disruptAction = { tryDisconnect() },
             deviceName = deviceName
         )

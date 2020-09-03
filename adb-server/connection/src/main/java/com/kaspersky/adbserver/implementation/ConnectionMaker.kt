@@ -15,7 +15,7 @@ internal class ConnectionMaker(deviceName: String? = null) {
         logger.d("connect", "start")
         logger.d("connect", "current state=$connectionState")
         if (connectionState == ConnectionState.CONNECTING || connectionState == ConnectionState.DISCONNECTING) {
-            logger.i("connect", "Unexpected connection state appeared during connect")
+            logger.i("connect", "Unexpected connection state appeared during connect. Do nothing")
             return
         }
         if (connectionState == ConnectionState.CONNECTED) {
@@ -29,8 +29,7 @@ internal class ConnectionMaker(deviceName: String? = null) {
             successConnectAction.invoke()
         } catch (exception: Exception) {
             logger.e("connect", exception)
-            connectionState =
-                ConnectionState.DISCONNECTED
+            connectionState = ConnectionState.DISCONNECTED
         }
     }
 
@@ -38,7 +37,7 @@ internal class ConnectionMaker(deviceName: String? = null) {
         logger.d("disconnect", "start")
         logger.d("disconnect", "current state=$connectionState")
         if (connectionState == ConnectionState.DISCONNECTING) {
-            logger.i("disconnect", "Unexpected connection state appeared during disconnect")
+            logger.i("disconnect", "Unexpected connection state appeared during disconnect. Do nothing")
             return
         }
         if (connectionState == ConnectionState.DISCONNECTED) {

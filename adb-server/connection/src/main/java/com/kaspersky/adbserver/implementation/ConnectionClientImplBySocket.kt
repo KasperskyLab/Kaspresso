@@ -48,9 +48,7 @@ internal class ConnectionClientImplBySocket(
 
     private fun handleMessages() {
         _socketMessagesTransferring = SocketMessagesTransferring.createTransferring(
-            lightSocketWrapper = LightSocketWrapperImpl(
-                socket
-            ),
+            lightSocketWrapper = LightSocketWrapperImpl(socket),
             disruptAction = { tryDisconnectBySocketProblems() }
         )
         socketMessagesTransferring.startListening { resultMessage ->
@@ -114,9 +112,7 @@ internal class ConnectionClientImplBySocket(
         val resultWaiter = ResultWaiter<ResultMessage<CommandResult>>()
         commandsInProgress[command] = resultWaiter
         socketMessagesTransferring.sendMessage(
-            TaskMessage(
-                command
-            )
+            TaskMessage(command)
         )
 
         val resultMessage: ResultMessage<CommandResult>?
@@ -127,7 +123,7 @@ internal class ConnectionClientImplBySocket(
                 ExecutorResultStatus.FAILED,
                 "Waiting thread was interrupted"
             )
-            logger.i("executeAdbCommand", "command=$command failed with commandResult=$failedCommandResult")
+            logger.i("executeCommand", "command=$command failed with commandResult=$failedCommandResult")
             return failedCommandResult
         } finally {
             commandsInProgress.remove(command)
@@ -138,10 +134,10 @@ internal class ConnectionClientImplBySocket(
                 ExecutorResultStatus.FAILED,
                 "Waiting result timeout was expired"
             )
-            logger.i("executeAdbCommand", "command=$command failed with commandResult=$failedCommandResult")
+            logger.i("executeCommand", "command=$command failed with commandResult=$failedCommandResult")
             return failedCommandResult
         }
-        logger.i("executeAdbCommand", "command=$command completed with commandResult=${resultMessage.data}")
+        logger.i("executeCommand", "command=$command completed with commandResult=${resultMessage.data}")
 
         return resultMessage.data
     }

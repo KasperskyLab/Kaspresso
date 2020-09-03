@@ -30,8 +30,8 @@ internal class FullLoggerSystemImpl(
         text: String?
     ) {
         if (logLevel != null && logMode <= logLevel) {
-            val fullLog = "${getLogType(logLevel)} ${getDate()}${getDesktop()}${getDevice(deviceName)}${getTag(tag)}" +
-                    "${getMethod(method)}${getText(text)}"
+            val fullLog = "${getLogType(logLevel)} ${getDate()} ${getDesktop()} ${getDevice(deviceName)} ${getTag(tag)} " +
+                    "${getMethod(method)} ${getText(text)}"
             if (logLevel == FullLogger.LogLevel.ERROR) {
                 System.err.println(fullLog)
                 return
