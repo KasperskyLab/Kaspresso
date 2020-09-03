@@ -33,7 +33,7 @@ internal fun main(args: Array<String>) {
     LoggerFactory.setDesktopName(desktopName)
 
     val logger = LoggerFactory.getLogger(tag = "Desktop")
-    logger.i("MAIN", "arguments: emulators=$emulators, adbServerPort=$adbServerPort")
+    logger.i("Desktop started with arguments: emulators=$emulators, adbServerPort=$adbServerPort")
 
     val cmdCommandPerformer = CmdCommandPerformer()
     val desktop = Desktop(

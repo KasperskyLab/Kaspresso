@@ -34,14 +34,14 @@ internal class Device private constructor(
 
     fun startConnectionToDesktop() {
         if (isRunning.compareAndSet(false, true)) {
-            logger.i("startConnectionToDesktop", "start")
+            logger.i("Connection to desktop started")
             WatchdogThread().start()
         }
     }
 
     fun stopConnectionToDesktop() {
         if (isRunning.compareAndSet(true, false)) {
-            logger.i("stopConnectionToDesktop", "stop")
+            logger.i("Connection to desktop stopped")
             connectionClient.tryDisconnect()
         }
     }
@@ -54,7 +54,7 @@ internal class Device private constructor(
      * 2. the adb command execution time
      */
     fun fulfill(command: Command): CommandResult {
-        logger.i("fulfill", "Start to execute the command=$command")
+        logger.i("Start to execute the command=$command")
         val commandResult = try {
             awaitConnectionEstablished(CONNECTION_ESTABLISH_TIMEOUT_SEC, TimeUnit.SECONDS)
             connectionClient.executeCommand(command)
@@ -64,7 +64,7 @@ internal class Device private constructor(
                 "The time for the connection establishment is over"
             )
         }
-        logger.i("execute", "The result of command=$command => $commandResult")
+        logger.i("The result of command=$command => $commandResult")
         return commandResult
     }
 
@@ -86,14 +86,14 @@ internal class Device private constructor(
     // todo get name of the device?
     private inner class WatchdogThread : Thread("Connection watchdog thread from Device to Desktop") {
         override fun run() {
-            logger.i("WatchdogThread.run", "WatchdogThread starts from Device to Desktop")
+            logger.i("WatchdogThread is started from Device to Desktop")
             while (isRunning.get()) {
                 if (!connectionClient.isConnected()) {
                     try {
-                        logger.i("WatchdogThread.run", "Try to connect to Desktop...")
+                        logger.i("The attempt to connect to Desktop...")
                         connectionClient.tryConnect()
                     } catch (exception: Exception) {
-                        logger.i("WatchdogThread.run", "The attempt to connect to Desktop was with exception: $exception")
+                        logger.i("The attempt to connect to Desktop was with exception: $exception")
                     }
                 }
             }

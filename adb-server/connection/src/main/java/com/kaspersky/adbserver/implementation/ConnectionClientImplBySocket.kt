@@ -5,6 +5,7 @@ import com.kaspersky.adbserver.api.CommandResult
 import com.kaspersky.adbserver.api.ConnectionClient
 import com.kaspersky.adbserver.api.ExecutorResultStatus
 import com.kaspersky.adbserver.implementation.lightsocket.LightSocketWrapperImpl
+import com.kaspersky.adbserver.implementation.transferring.ExpectedEOFException
 import com.kaspersky.adbserver.implementation.transferring.ResultMessage
 import com.kaspersky.adbserver.implementation.transferring.SocketMessagesTransferring
 import com.kaspersky.adbserver.implementation.transferring.TaskMessage
@@ -35,51 +36,60 @@ internal class ConnectionClientImplBySocket(
     private val commandsInProgress = ConcurrentHashMap<Command, ResultWaiter<ResultMessage<CommandResult>>>()
 
     override fun tryConnect() {
-        logger.d("tryConnect", "start")
+        logger.d("tryConnect", "Start the process")
         connectionMaker.connect(
-            connectAction = { _socket = socketCreation.invoke() },
+            connectAction = {
+                _socket = socketCreation.invoke()
+                _socketMessagesTransferring = SocketMessagesTransferring.createTransferring(
+                    lightSocketWrapper = LightSocketWrapperImpl(socket),
+                    disruptAction = { tryDisconnectBySocketProblems() }
+                )
+                socketMessagesTransferring.prepareListening()
+            },
             successConnectAction = {
-                logger.d("tryConnect", "start handleMessages")
+                logger.d("tryConnect", "The connection is ready. Start messages listening")
                 handleMessages()
+            },
+            failureConnectAction = { exception ->
+                _socket = null
+                _socketMessagesTransferring = null
+
+                val errorReasonMessage = if (exception is ExpectedEOFException)
+                    "The most possible reason is the opposite socket is not ready yet"
+                else "The exception=$exception"
+                logger.d("tryConnect", "The connection establishment attempt failed. \n$errorReasonMessage")
             }
         )
-        logger.d("tryConnect", "attempt completed")
     }
 
     private fun handleMessages() {
-        _socketMessagesTransferring = SocketMessagesTransferring.createTransferring(
-            lightSocketWrapper = LightSocketWrapperImpl(socket),
-            disruptAction = { tryDisconnectBySocketProblems() }
-        )
         socketMessagesTransferring.startListening { resultMessage ->
-            logger.d("handleMessages", "received resultMessage=$resultMessage")
+            logger.d("handleMessages", "Received resultMessage=$resultMessage")
             commandsInProgress[resultMessage.command]?.latchResult(resultMessage)
         }
     }
 
     private fun tryDisconnectBySocketProblems() {
-        logger.i("tryDisconnectBySocketProblems", "start")
+        logger.d("tryDisconnectBySocketProblems", "Start the process")
         val failureReason = "There was some problem inside a Socket creation process or during a Socket connection. \n" +
                 "The most possible reason is using of old version of 'desktop.jar'. \n" +
                 "Please, use the most modern version of 'desktop.jar' located in https://github.com/KasperskyLab/Kaspresso/tree/master/artifacts."
         tryDisconnectCommon(failureReason)
-        logger.i("tryDisconnectBySocketProblems", "attempt completed")
+        logger.d("tryDisconnectBySocketProblems", "The disconnection was completed")
     }
 
     override fun tryDisconnect() {
-        logger.d("tryDisconnect", "start")
+        logger.d("tryDisconnect", "Start the process")
         val failureReason = "`ConnectionClientImplBySocket.tryDisconnect` function was called earlier. " +
                 "Please, observe code points and relative logs where this function started."
         tryDisconnectCommon(failureReason)
-        logger.d("tryDisconnect", "attempt completed")
+        logger.d("tryDisconnect", "The disconnection was completed")
     }
 
     private fun tryDisconnectCommon(failureReason: String) {
         connectionMaker.disconnect {
-            // there is a chance that `tryDisconnect` method may be called while the connection process is is progress
-            // that's why socket and socket transferring may be not initialised
-            _socketMessagesTransferring?.stopListening()
-            _socket?.close()
+            socketMessagesTransferring.stopListening()
+            socket.close()
             resetCommandsInProgress(failureReason)
         }
     }
@@ -87,10 +97,10 @@ internal class ConnectionClientImplBySocket(
     private fun resetCommandsInProgress(failureReason: String) {
         for ((adbCommand, resultWaiter) in commandsInProgress) {
             val commandResult = CommandResult(ExecutorResultStatus.FAILED, failureReason)
-            logger.i(
+            logger.d(
                 "resetCommandsInProgress",
-                "command=$adbCommand was failed because of disconnecting. " +
-                                    "result=$commandResult"
+                "The command=$adbCommand was failed because the socket connection had broken up. \n" +
+                                    "Result=$commandResult"
             )
             resultWaiter.latchResult(
                 ResultMessage(
@@ -107,7 +117,7 @@ internal class ConnectionClientImplBySocket(
 
     @Suppress("ReturnCount")
     override fun executeCommand(command: Command): CommandResult {
-        logger.i("executeAdbCommand", "started command=$command")
+        logger.d("executeCommand", "Started command=$command")
 
         val resultWaiter = ResultWaiter<ResultMessage<CommandResult>>()
         commandsInProgress[command] = resultWaiter
@@ -123,7 +133,7 @@ internal class ConnectionClientImplBySocket(
                 ExecutorResultStatus.FAILED,
                 "Waiting thread was interrupted"
             )
-            logger.i("executeCommand", "command=$command failed with commandResult=$failedCommandResult")
+            logger.d("executeCommand", "Command=$command failed with commandResult=$failedCommandResult")
             return failedCommandResult
         } finally {
             commandsInProgress.remove(command)
@@ -134,10 +144,10 @@ internal class ConnectionClientImplBySocket(
                 ExecutorResultStatus.FAILED,
                 "Waiting result timeout was expired"
             )
-            logger.i("executeCommand", "command=$command failed with commandResult=$failedCommandResult")
+            logger.d("executeCommand", "command=$command failed with commandResult=$failedCommandResult")
             return failedCommandResult
         }
-        logger.i("executeCommand", "command=$command completed with commandResult=${resultMessage.data}")
+        logger.d("executeCommand", "command=$command completed with commandResult=${resultMessage.data}")
 
         return resultMessage.data
     }

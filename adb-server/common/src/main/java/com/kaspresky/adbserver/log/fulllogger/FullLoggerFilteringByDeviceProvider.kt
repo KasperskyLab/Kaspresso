@@ -30,9 +30,7 @@ internal class FullLoggerFilteringByDeviceProvider : FullLogger {
         if (loggersMap.containsKey(deviceName)) {
             return loggersMap[deviceName] ?: throw RuntimeException("It's unbelievable!")
         }
-        val fullLogger = FullLoggerOptimiser(
-            FullLoggerSystemImpl(logMode, desktopName)
-        )
+        val fullLogger = FullLoggerSystemImpl(logMode, desktopName)
         loggersMap[deviceName] = fullLogger
         return fullLogger
     }

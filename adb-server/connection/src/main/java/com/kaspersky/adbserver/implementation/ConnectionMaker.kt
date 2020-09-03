@@ -11,45 +11,53 @@ internal class ConnectionMaker(deviceName: String? = null) {
     @Volatile
     private var connectionState: ConnectionState = ConnectionState.DISCONNECTED
 
-    fun connect(connectAction: () -> Unit, successConnectAction: () -> Unit) {
-        logger.d("connect", "start")
-        logger.d("connect", "current state=$connectionState")
-        if (connectionState == ConnectionState.CONNECTING || connectionState == ConnectionState.DISCONNECTING) {
-            logger.i("connect", "Unexpected connection state appeared during connect. Do nothing")
+    fun connect(connectAction: () -> Unit, successConnectAction: () -> Unit, failureConnectAction: (Exception) -> Unit) {
+        logger.d("connect", "Start a connection establishment. The current state=$connectionState")
+        if (connectionState == ConnectionState.CONNECTING) {
+            logger.d("connect", "The connection establishment process is in progress. Skip the new attempt")
+            return
+        }
+        if (connectionState == ConnectionState.DISCONNECTING) {
+            logger.d("connect", "The connection disconnection process is in progress. Skip the new attempt")
             return
         }
         if (connectionState == ConnectionState.CONNECTED) {
+            logger.d("connect", "The connection has been established. Skip the new attempt")
             return
         }
+
         connectionState = ConnectionState.CONNECTING
+        logger.d("connect", "The current state=$connectionState")
         try {
             connectAction.invoke()
             connectionState = ConnectionState.CONNECTED
-            logger.i("connect", "updated state=$connectionState")
+            logger.d("connect", "The connection is established. The current state=$connectionState")
             successConnectAction.invoke()
         } catch (exception: Exception) {
-            logger.e("connect", exception)
             connectionState = ConnectionState.DISCONNECTED
+            logger.d("connect", "The connection establishment process failed. The current state=$connectionState")
+            failureConnectAction.invoke(exception)
         }
     }
 
     fun disconnect(connectAction: () -> Unit) {
-        logger.d("disconnect", "start")
-        logger.d("disconnect", "current state=$connectionState")
+        logger.d("disconnect", "Start a connection disconnection. The current state=$connectionState")
         if (connectionState == ConnectionState.DISCONNECTING) {
-            logger.i("disconnect", "Unexpected connection state appeared during disconnect. Do nothing")
+            logger.d("disconnect", "The connection disconnection process is in progress. Skip the new attempt")
             return
         }
         if (connectionState == ConnectionState.DISCONNECTED) {
+            logger.d("disconnect", "The connection has been disconnected. Skip the new attempt")
             return
         }
+
+        connectionState = ConnectionState.DISCONNECTING
+        logger.d("disconnect", "The current state=$connectionState")
         try {
-            connectionState = ConnectionState.DISCONNECTING
-            logger.i("disconnect", "updated state=$connectionState")
             connectAction.invoke()
         } finally {
             connectionState = ConnectionState.DISCONNECTED
-            logger.i("disconnect", "updated state=$connectionState")
+            logger.d("disconnect", "The connection is disconnected. The current state=$connectionState")
         }
     }
 

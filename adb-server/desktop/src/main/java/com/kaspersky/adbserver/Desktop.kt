@@ -24,10 +24,7 @@ internal class Desktop(
             val namesOfAttachedDevicesByAdb = getAttachedDevicesByAdb()
             namesOfAttachedDevicesByAdb.forEach { deviceName ->
                 if (devices.find { client -> client.deviceName == deviceName } == null) {
-                    logger.i(
-                        "startDevicesObserving",
-                        "New device has been found: $deviceName. Initialize connection to it..."
-                    )
+                    logger.i("New device has been found: $deviceName. Initialize connection to the device...")
                     val deviceMirror =
                         DeviceMirror.create(
                             deviceName,
@@ -41,10 +38,7 @@ internal class Desktop(
             }
             devices.removeIf { client ->
                 if (client.deviceName !in namesOfAttachedDevicesByAdb) {
-                    logger.i(
-                        "startDevicesObserving",
-                        "Adb connection to ${client.deviceName} has been missed. Stop connection."
-                    )
+                    logger.i("Adb connection to ${client.deviceName} has been missed. Stop connection.")
                     client.stopConnectionToDevice()
                     return@removeIf true
                 } else {

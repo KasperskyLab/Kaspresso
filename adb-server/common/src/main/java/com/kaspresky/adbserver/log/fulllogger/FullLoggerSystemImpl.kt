@@ -18,7 +18,7 @@ internal class FullLoggerSystemImpl(
         private const val DEVICE = "device="
         private const val TAG = "tag="
         private const val METHOD = "method="
-        private const val MESSAGE = "message:"
+        private const val MESSAGE = "message: "
         private const val DESKTOP = "desktop="
     }
 

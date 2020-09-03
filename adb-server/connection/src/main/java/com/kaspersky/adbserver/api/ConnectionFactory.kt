@@ -13,13 +13,15 @@ object ConnectionFactory {
         socketCreation: () -> Socket,
         commandExecutor: CommandExecutor,
         deviceName: String,
-        desktopName: String
+        desktopName: String,
+        connectionServerLifecycle: ConnectionServerLifecycle
     ): ConnectionServer =
         ConnectionServerImplBySocket(
             socketCreation,
             commandExecutor,
             deviceName,
-            desktopName
+            desktopName,
+            connectionServerLifecycle
         )
 
     fun createClient(
