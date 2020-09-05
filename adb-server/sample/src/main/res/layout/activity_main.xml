@@ -3,22 +3,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <EditText
-        android:id="@+id/et_adb_command"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:hint="Adb command"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/et_adb_command"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Adb command"
+            tools:ignore="HardcodedText" />
+
+        <Button
+            android:id="@+id/btn_execute_adb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="execute adb!"
+            tools:ignore="HardcodedText" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_connect_adb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="connect adb!"
+        android:layout_marginTop="32dp"
         tools:ignore="HardcodedText" />
 
     <Button
-        android:id="@+id/btn_execute_adb"
+        android:id="@+id/btn_disconnect_adb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="execute adb!"
+        android:layout_gravity="center"
+        android:text="disconnect adb!"
         tools:ignore="HardcodedText" />
 
 </LinearLayout>

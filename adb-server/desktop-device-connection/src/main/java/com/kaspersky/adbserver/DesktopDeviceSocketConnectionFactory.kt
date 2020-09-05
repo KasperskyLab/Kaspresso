@@ -3,13 +3,9 @@ package com.kaspersky.adbserver
 object DesktopDeviceSocketConnectionFactory {
 
     fun getSockets(
-        desktopDeviceSocketConnectionType: DesktopDeviceSocketConnectionType,
-        deviceName: String? = null
-    ): DesktopDeviceSocketConnection {
+        desktopDeviceSocketConnectionType: DesktopDeviceSocketConnectionType): DesktopDeviceSocketConnection {
         return when (desktopDeviceSocketConnectionType) {
-            DesktopDeviceSocketConnectionType.FORWARD -> DesktopDeviceSocketConnectionForwardImpl(
-                deviceName
-            )
+            DesktopDeviceSocketConnectionType.FORWARD -> DesktopDeviceSocketConnectionForwardImpl()
             DesktopDeviceSocketConnectionType.REVERSE -> throw UnsupportedOperationException("Please implement REVERSE DesktopDeviceSocketConnection")
         }
     }

@@ -1,6 +1,7 @@
 package com.kaspersky.adbserver
 
 import com.kaspresky.adbserver.log.LoggerFactory
+import com.kaspresky.adbserver.log.fulllogger.LogPolicy
 import java.lang.management.ManagementFactory
 
 private const val DESKTOP = "Desktop-"
@@ -20,27 +21,31 @@ internal fun main(args: Array<String>) {
         ?.removeSurrounding(prefix = "adbServerPort", suffix = "")
         ?.replace("=", "")
         ?.trim()
-    val runMode = argsList
-        .firstOrNull { arg -> arg.contains("runMode") }
-        ?.removeSurrounding(prefix = "runMode=", suffix = "")
-        ?.trim()
+    val logPolicy = LogPolicy.valueOf(
+        argsList
+            .firstOrNull { arg -> arg.contains("logPolicy") }
+            ?.removeSurrounding(prefix = "logPolicy=", suffix = "")
+            ?.trim()
+            ?: LogPolicy.INFO.name
+    )
 
-    LoggerFactory.setRunMode(runMode)
+    val desktopName = getDesktopName()
+    val desktopLogger = LoggerFactory.getDesktopLogger(logPolicy, desktopName)
 
-    val processName = ManagementFactory.getRuntimeMXBean().name
-    val pid = processName.split("@".toRegex()).toTypedArray()[0].toLong()
-    val desktopName = DESKTOP + pid
-    LoggerFactory.setDesktopName(desktopName)
+    desktopLogger.i("Desktop started with arguments: emulators=$emulators, adbServerPort=$adbServerPort")
 
-    val logger = LoggerFactory.getLogger(tag = "Desktop")
-    logger.i("MAIN", "arguments: emulators=$emulators, adbServerPort=$adbServerPort")
-
-    val cmdCommandPerformer = CmdCommandPerformer()
+    val cmdCommandPerformer = CmdCommandPerformer(desktopName)
     val desktop = Desktop(
         cmdCommandPerformer = cmdCommandPerformer,
         presetEmulators = emulators,
         adbServerPort = adbServerPort,
-        desktopName = desktopName
+        logger = desktopLogger
     )
     desktop.startDevicesObserving()
+}
+
+private fun getDesktopName(): String {
+    val processName = ManagementFactory.getRuntimeMXBean().name
+    val pid = processName.split("@".toRegex()).toTypedArray()[0].toLong()
+    return DESKTOP + pid
 }

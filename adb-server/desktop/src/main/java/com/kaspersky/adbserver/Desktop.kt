@@ -2,38 +2,35 @@ package com.kaspersky.adbserver
 
 import com.kaspersky.adbserver.api.ExecutorResultStatus
 import com.kaspresky.adbserver.log.LoggerFactory
+import com.kaspresky.adbserver.log.logger.DesktopLogger
 import java.util.regex.Pattern
 
 internal class Desktop(
     private val cmdCommandPerformer: CmdCommandPerformer,
     private val presetEmulators: List<String>,
     private val adbServerPort: String?,
-    private val desktopName: String
+    private val logger: DesktopLogger
 ) {
 
     companion object {
         private const val PAUSE_MS = 500L
     }
 
-    private val logger = LoggerFactory.getLogger(tag = javaClass.simpleName)
     private val devices: MutableCollection<DeviceMirror> = mutableListOf()
 
     fun startDevicesObserving() {
-        logger.d("startDevicesObserving", "start")
+        logger.d("start")
         while (true) {
             val namesOfAttachedDevicesByAdb = getAttachedDevicesByAdb()
             namesOfAttachedDevicesByAdb.forEach { deviceName ->
                 if (devices.find { client -> client.deviceName == deviceName } == null) {
-                    logger.i(
-                        "startDevicesObserving",
-                        "New device has been found: $deviceName. Initialize connection to it..."
-                    )
+                    logger.i("New device has been found: $deviceName. Initialize connection to the device...")
                     val deviceMirror =
-                        DeviceMirror.Companion.create(
+                        DeviceMirror.create(
+                            cmdCommandPerformer,
                             deviceName,
                             adbServerPort,
-                            cmdCommandPerformer,
-                            desktopName
+                            LoggerFactory.getDesktopLoggerReflectingDevice(logger, deviceName)
                         )
                     deviceMirror.startConnectionToDevice()
                     devices += deviceMirror
@@ -41,10 +38,7 @@ internal class Desktop(
             }
             devices.removeIf { client ->
                 if (client.deviceName !in namesOfAttachedDevicesByAdb) {
-                    logger.i(
-                        "startDevicesObserving",
-                        "Adb connection to ${client.deviceName} has been missed. Stop connection."
-                    )
+                    logger.i("Adb connection to ${client.deviceName} has been missed. Stop connection.")
                     client.stopConnectionToDevice()
                     return@removeIf true
                 } else {

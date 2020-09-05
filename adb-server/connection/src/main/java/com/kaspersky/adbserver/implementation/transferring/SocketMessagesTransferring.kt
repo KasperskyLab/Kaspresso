@@ -1,7 +1,8 @@
 package com.kaspersky.adbserver.implementation.transferring
 
 import com.kaspersky.adbserver.implementation.lightsocket.LightSocketWrapper
-import com.kaspresky.adbserver.log.LoggerFactory
+import com.kaspresky.adbserver.log.logger.Logger
+import java.io.EOFException
 import java.io.ObjectInputStream
 import java.io.ObjectOutputStream
 import java.util.concurrent.atomic.AtomicBoolean
@@ -11,26 +12,24 @@ internal class SocketMessagesTransferring<ReceiveModel, SendModel> private const
     private val receiveModelClass: Class<ReceiveModel>,
     private val sendModelClass: Class<SendModel>,
     private val disruptAction: () -> Unit,
-    deviceName: String?
+    private val logger: Logger
 ) {
 
     companion object {
         inline fun <reified Receive, reified Send> createTransferring(
             lightSocketWrapper: LightSocketWrapper,
             noinline disruptAction: () -> Unit,
-            deviceName: String? = null
+            logger: Logger
         ): SocketMessagesTransferring<Receive, Send> {
             return SocketMessagesTransferring(
                 lightSocketWrapper,
                 Receive::class.java,
                 Send::class.java,
                 disruptAction,
-                deviceName
+                logger
             )
         }
     }
-
-    private val logger = LoggerFactory.getLogger(tag = javaClass.simpleName, deviceName = deviceName)
 
     private lateinit var inputStream: ObjectInputStream
     private lateinit var outputStream: ObjectOutputStream
@@ -38,42 +37,32 @@ internal class SocketMessagesTransferring<ReceiveModel, SendModel> private const
 
     private val isRunning: AtomicBoolean = AtomicBoolean(false)
 
-    fun startListening(listener: (ReceiveModel) -> Unit) {
-        logger.d("startListening", "start")
-        messagesListener = listener
+    fun prepareListening() {
+        logger.d("Start")
         try {
             outputStream = ObjectOutputStream(lightSocketWrapper.getOutputStream())
             inputStream = ObjectInputStream(lightSocketWrapper.getInputStream())
-            logger.d("startListening", "IO Streams were created")
-        } catch (exception: Exception) {
-            disruptAction.invoke()
-            return
+            logger.d("IO Streams were created")
+        } catch (exception: EOFException) {
+            throw ExpectedEOFException()
         }
-        startHandleMessages()
     }
 
-    private fun startHandleMessages() {
+    fun startListening(listener: (ReceiveModel) -> Unit) {
+        logger.d("Started")
+        messagesListener = listener
         isRunning.set(true)
         MessagesListeningThread().start()
     }
 
     fun sendMessage(sendModel: SendModel) {
-        logger.d("sendMessage", "where sendModel=$sendModel")
+        logger.d("Input sendModel=$sendModel")
         try {
             outputStream.writeObject(sendModel)
             outputStream.flush()
         } catch (exception: Exception) {
-            logger.e("sendMessage", exception)
-        }
-    }
-
-    fun sendDesktopName(desktopName: String) {
-        logger.d("sendDesktopName", "where desktopName=$desktopName")
-        try {
-            outputStream.writeObject(desktopName)
-            outputStream.flush()
-        } catch (exception: Exception) {
-            logger.e("sendDesktopName", exception)
+            logger.e(exception)
+            disruptAction.invoke()
         }
     }
 
@@ -83,7 +72,7 @@ internal class SocketMessagesTransferring<ReceiveModel, SendModel> private const
 
     private inner class MessagesListeningThread : Thread() {
         override fun run() {
-            logger.d("MessagesListeningThread.run", "start to work")
+            logger.d("Start listening")
             while (isRunning.get()) {
                 peekNextMessage()
             }
@@ -95,19 +84,23 @@ internal class SocketMessagesTransferring<ReceiveModel, SendModel> private const
         try {
             obj = inputStream.readObject()
             if (obj.javaClass == receiveModelClass) {
-                logger.d("MessagesListeningThread.peekNextMessage", "with message=$obj")
+                logger.d("The message=$obj")
                 messagesListener.invoke(obj as ReceiveModel)
-            } else if (obj.javaClass == String::class.java) {
-                LoggerFactory.setDesktopName(obj as String)
             } else {
-                logger.d(
-                    "MessagesListeningThread.peekNextMessage",
-                    "with message=$obj but this message type is not $receiveModelClass"
-                )
+                logger.e("The message=$obj but this message type is not $receiveModelClass")
                 disruptAction.invoke()
             }
         } catch (exception: Exception) {
-            logger.e("MessagesListeningThread.peekNextMessage", exception)
+            if (!isRunning.get()) {
+                // there is no mind to analyse exceptions after the socket connection was interrupted
+                return
+            }
+            if (exception is EOFException) {
+                logger.d("EOFException occurred in Socket inputStream. The most possible reason is the opposite socket just broke up the connection. " +
+                            "Additional info: exception=$exception")
+            } else {
+                logger.e(exception)
+            }
             disruptAction.invoke()
         }
     }

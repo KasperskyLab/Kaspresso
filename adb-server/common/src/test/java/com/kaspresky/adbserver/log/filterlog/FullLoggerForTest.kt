@@ -8,12 +8,11 @@ internal class FullLoggerForTest : FullLogger {
 
     override fun log(
         logLevel: FullLogger.LogLevel?,
-        deviceName: String?,
         tag: String?,
         method: String?,
         text: String?
     ) {
-        val entry = "${logLevel ?: ""}${deviceName ?: ""}${tag ?: ""}${method ?: ""}${text ?: ""}"
+        val entry = "${logLevel ?: ""}${tag ?: ""}${method ?: ""}${text ?: ""}"
         list.add(entry)
     }
 }
