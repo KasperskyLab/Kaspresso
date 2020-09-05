@@ -12,7 +12,7 @@ internal class FullLoggerOptimiser(
     private companion object {
         private const val SLASH_AT_THE_BEGINNING: Int = 40
         private const val SLASH_AT_THE_END: Int = 100
-        private const val DEFAULT_RECORDING_STACK_MAX_SIZE: Int = 200
+        private const val DEFAULT_RECORDING_STACK_MAX_SIZE: Int = 50
     }
 
     private val logStack: Deque<LogData> = ArrayDeque()
@@ -20,14 +20,13 @@ internal class FullLoggerOptimiser(
 
     override fun log(
         logLevel: FullLogger.LogLevel?,
-        deviceName: String?,
         tag: String?,
         method: String?,
         text: String?
     ) {
         handleLog(
-            key = "$logLevel$deviceName$tag$method$text",
-            action = { originalFullLogger.log(logLevel, deviceName, tag, method, text) },
+            key = "$logLevel$tag$method$text",
+            action = { originalFullLogger.log(logLevel, tag, method, text) },
             logLevel = logLevel
         )
     }

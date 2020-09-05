@@ -1,10 +1,12 @@
 package com.kaspersky.adbserver
 
 import com.kaspersky.adbserver.api.CommandResult
+import com.kaspresky.adbserver.log.LoggerFactory
+import com.kaspresky.adbserver.log.fulllogger.LogPolicy
 
 object AdbTerminal {
 
-    private val device = Device.create()
+    private val device = Device.create(LoggerFactory.getDeviceLogger(LogPolicy.INFO))
 
     fun connect() {
         device.startConnectionToDesktop()

@@ -9,20 +9,18 @@ import com.kaspersky.adbserver.implementation.transferring.ExpectedEOFException
 import com.kaspersky.adbserver.implementation.transferring.ResultMessage
 import com.kaspersky.adbserver.implementation.transferring.SocketMessagesTransferring
 import com.kaspersky.adbserver.implementation.transferring.TaskMessage
-import com.kaspresky.adbserver.log.LoggerFactory
+import com.kaspresky.adbserver.log.logger.Logger
 import java.net.Socket
 import java.util.concurrent.Executors
 
 internal class ConnectionServerImplBySocket(
     private val socketCreation: () -> Socket,
     private val commandExecutor: CommandExecutor,
-    private val deviceName: String,
-    private val desktopName: String,
+    private val logger: Logger,
     private val connectionServerLifecycle: ConnectionServerLifecycle
 ) : ConnectionServer {
 
-    private val logger = LoggerFactory.getLogger(tag = javaClass.simpleName, deviceName = deviceName)
-    private var connectionMaker: ConnectionMaker = ConnectionMaker(deviceName)
+    private var connectionMaker: ConnectionMaker = ConnectionMaker(logger)
 
     private var _socket: Socket? = null
     private val socket: Socket
@@ -35,7 +33,7 @@ internal class ConnectionServerImplBySocket(
     private val backgroundExecutor = Executors.newCachedThreadPool()
 
     override fun tryConnect() {
-        logger.d("tryConnect", "Start the process")
+        logger.d("Start the process")
         connectionMaker.connect(
             connectAction = {
                 _socket = socketCreation.invoke()
@@ -45,12 +43,12 @@ internal class ConnectionServerImplBySocket(
                         tryDisconnect()
                         connectionServerLifecycle.onDisconnectedBySocketProblems()
                     },
-                    deviceName = deviceName
+                    logger = logger
                 )
                 socketMessagesTransferring.prepareListening()
             },
             successConnectAction = {
-                logger.d("tryConnect", "The connection is ready. Start messages listening")
+                logger.d("The connection is ready. Start messages listening")
                 handleMessages()
             },
             failureConnectAction = { exception ->
@@ -60,20 +58,19 @@ internal class ConnectionServerImplBySocket(
                 val errorReasonMessage = if (exception is ExpectedEOFException)
                     "The most possible reason is the opposite socket is not ready yet"
                 else "The exception=$exception"
-                logger.d("tryConnect", "The connection establishment attempt failed. $errorReasonMessage")
+                logger.d("The connection establishment attempt failed. $errorReasonMessage")
             }
         )
     }
 
     private fun handleMessages() {
-//        socketMessagesTransferring.sendDesktopName(desktopName)
         socketMessagesTransferring.startListening { taskMessage ->
             connectionServerLifecycle.onReceivedTask(taskMessage.command)
-            logger.d("handleMessages", "Received taskMessage=$taskMessage")
+            logger.d("Received taskMessage=$taskMessage")
             backgroundExecutor.execute {
                 val result = commandExecutor.execute(taskMessage.command)
                 connectionServerLifecycle.onExecutedTask(taskMessage.command, result)
-                logger.d("handleMessages", "Result of taskMessage=$taskMessage => result=$result")
+                logger.d("Result of taskMessage=$taskMessage => result=$result")
                 socketMessagesTransferring.sendMessage(
                     ResultMessage(
                         taskMessage.command,
@@ -85,12 +82,12 @@ internal class ConnectionServerImplBySocket(
     }
 
     override fun tryDisconnect() {
-        logger.d("tryDisconnect", "Start the process")
+        logger.d("Start the process")
         connectionMaker.disconnect {
             socketMessagesTransferring.stopListening()
             socket.close()
         }
-        logger.d("tryDisconnect", "Success disconnection")
+        logger.d("Success disconnection")
     }
 
     override fun isConnected(): Boolean =

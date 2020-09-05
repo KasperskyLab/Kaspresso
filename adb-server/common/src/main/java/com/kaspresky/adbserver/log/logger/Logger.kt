@@ -18,9 +18,9 @@ interface Logger {
     fun d(text: String)
 
     /**
-     * Debug level of logging with tag.
+     * Warning level of logging.
      */
-    fun d(method: String, text: String)
+    fun w(text: String)
 
     /**
      * Error level of logging with tag.
@@ -31,14 +31,4 @@ interface Logger {
      * Error level of logging with tag.
      */
     fun e(text: String)
-
-    /**
-     * Error level of logging with tag.
-     */
-    fun e(method: String, exception: Exception)
-
-    /**
-     * Error level of logging with tag.
-     */
-    fun e(method: String, text: String)
 }

@@ -1,36 +1,36 @@
 package com.kaspersky.adbserver
 
-import com.kaspersky.adbserver.api.*
-import com.kaspresky.adbserver.log.LoggerFactory
+import com.kaspersky.adbserver.api.Command
+import com.kaspersky.adbserver.api.CommandResult
+import com.kaspersky.adbserver.api.ConnectionServer
+import com.kaspersky.adbserver.api.ConnectionServerLifecycle
+import com.kaspersky.adbserver.api.ConnectionFactory
 import com.kaspresky.adbserver.log.logger.Logger
 import java.util.concurrent.atomic.AtomicReference
 
 internal class DeviceMirror private constructor(
-    val deviceName: String,
-    private val logger: Logger,
-    private val connectionServer: ConnectionServer
+    private val connectionServer: ConnectionServer,
+    internal val deviceName: String,
+    private val logger: Logger
 ) {
 
     companion object {
         private const val CONNECTION_WAIT_MS = 2_000L
 
         fun create(
+            cmdCommandPerformer: CmdCommandPerformer,
             deviceName: String,
             adbServerPort: String?,
-            cmdCommandPerformer: CmdCommandPerformer,
-            desktopName: String
+            logger: Logger
         ): DeviceMirror {
             val desktopDeviceSocketConnection =
-                DesktopDeviceSocketConnectionFactory.getSockets(
-                    DesktopDeviceSocketConnectionType.FORWARD,
-                    deviceName
-                )
+                DesktopDeviceSocketConnectionFactory.getSockets(DesktopDeviceSocketConnectionType.FORWARD)
             val commandExecutor = CommandExecutorImpl(
                 cmdCommandPerformer,
                 deviceName,
-                adbServerPort
+                adbServerPort,
+                logger
             )
-            val logger = LoggerFactory.getLogger(tag = "DeviceMirror", deviceName = deviceName)
             val connectionServerLifecycle = object : ConnectionServerLifecycle {
                 override fun onReceivedTask(command: Command) {
                     logger.i("The received command to execute: $command")
@@ -44,16 +44,15 @@ internal class DeviceMirror private constructor(
                 }
             }
             val connectionServer = ConnectionFactory.createServer(
-                desktopDeviceSocketConnection.getDesktopSocketLoad(commandExecutor),
+                desktopDeviceSocketConnection.getDesktopSocketLoad(commandExecutor, logger),
                 commandExecutor,
-                deviceName,
-                desktopName,
+                logger,
                 connectionServerLifecycle
             )
             return DeviceMirror(
+                connectionServer,
                 deviceName,
-                logger,
-                connectionServer
+                logger
             )
         }
     }
@@ -61,32 +60,32 @@ internal class DeviceMirror private constructor(
     private val isRunning = AtomicReference<Boolean>()
 
     fun startConnectionToDevice() {
-        logger.i("The connection establishment to device=$deviceName started")
+        logger.i("The connection establishment to device started")
         isRunning.set(true)
         WatchdogThread().start()
     }
 
     fun stopConnectionToDevice() {
-        logger.i("The connection disconnection to device=$deviceName started")
+        logger.i("The connection disconnection to device started")
         isRunning.set(false)
         connectionServer.tryDisconnect()
-        logger.i("The connection disconnection to device=$deviceName completed")
+        logger.i("The connection disconnection to device completed")
     }
 
     private inner class WatchdogThread : Thread() {
         override fun run() {
-            logger.i("WatchdogThread is started from Desktop to Device=$deviceName")
+            logger.i("WatchdogThread is started from Desktop to Device")
             while (isRunning.get()) {
                 if (!connectionServer.isConnected()) {
                     try {
-                        logger.d("WatchdogThread.run", "The attempt to connect to Device=$deviceName. " +
+                        logger.d("The attempt to connect to Device. " +
                                 "It may take time because the device can be not ready (for example, a kaspresso test was not started).")
                         connectionServer.tryConnect()
                         if (connectionServer.isConnected()) {
-                            logger.i("The attempt to connect to Device=$deviceName was success")
+                            logger.i("The attempt to connect to Device was success")
                         }
                     } catch (exception: Exception) {
-                        logger.i("The attempt to connect to Device=$deviceName failed with exception: $exception")
+                        logger.i("The attempt to connect to Device failed with exception: $exception")
                     }
                 }
                 sleep(CONNECTION_WAIT_MS)

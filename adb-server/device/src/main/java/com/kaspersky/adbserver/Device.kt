@@ -5,31 +5,32 @@ import com.kaspersky.adbserver.api.CommandResult
 import com.kaspersky.adbserver.api.ConnectionClient
 import com.kaspersky.adbserver.api.ConnectionFactory
 import com.kaspersky.adbserver.api.ExecutorResultStatus
-import com.kaspresky.adbserver.log.LoggerFactory
+import com.kaspresky.adbserver.log.logger.Logger
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicBoolean
 
 internal class Device private constructor(
-    private val connectionClient: ConnectionClient
+    private val connectionClient: ConnectionClient,
+    private val logger: Logger
 ) {
 
     companion object {
         private const val CONNECTION_ESTABLISH_TIMEOUT_SEC = 5L
         private const val CONNECTION_WAIT_MS = 200L
 
-        fun create(): Device {
+        fun create(logger: Logger): Device {
             val desktopDeviceSocketConnection =
                 DesktopDeviceSocketConnectionFactory.getSockets(
                     DesktopDeviceSocketConnectionType.FORWARD
                 )
             val connectionClient = ConnectionFactory.createClient(
-                desktopDeviceSocketConnection.getDeviceSocketLoad()
+                desktopDeviceSocketConnection.getDeviceSocketLoad(logger),
+                logger
             )
-            return Device(connectionClient)
+            return Device(connectionClient, logger)
         }
     }
 
-    private val logger = LoggerFactory.getLogger(tag = javaClass.simpleName)
     private val isRunning = AtomicBoolean(false)
 
     fun startConnectionToDesktop() {

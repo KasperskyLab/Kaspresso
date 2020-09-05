@@ -4,7 +4,6 @@ internal interface FullLogger {
 
     fun log(
         logLevel: LogLevel? = null,
-        deviceName: String? = null,
         tag: String? = null,
         method: String? = null,
         text: String? = null
@@ -13,6 +12,7 @@ internal interface FullLogger {
     enum class LogLevel {
         DEBUG,
         INFO,
+        WARNING,
         ERROR
     }
 }
