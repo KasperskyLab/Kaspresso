@@ -6,6 +6,7 @@ import com.kaspersky.adbserver.api.ConnectionServer
 import com.kaspersky.adbserver.api.ConnectionServerLifecycle
 import com.kaspersky.adbserver.api.ConnectionFactory
 import com.kaspresky.adbserver.log.logger.Logger
+import java.util.concurrent.atomic.AtomicBoolean
 import java.util.concurrent.atomic.AtomicReference
 
 internal class DeviceMirror private constructor(
@@ -58,6 +59,7 @@ internal class DeviceMirror private constructor(
     }
 
     private val isRunning = AtomicReference<Boolean>()
+    private val startScanningTrigger = AtomicBoolean(false)
 
     fun startConnectionToDevice() {
         logger.i("The connection establishment to device started")
@@ -80,8 +82,13 @@ internal class DeviceMirror private constructor(
                     try {
                         logger.d("The attempt to connect to Device. " +
                                 "It may take time because the device can be not ready (for example, a kaspresso test was not started).")
+                        if (startScanningTrigger.compareAndSet(false, true)) {
+                            logger.i("Desktop tries to connect to the Device. " +
+                                    "It may take time because the device can be not ready (for example, a kaspresso test was not started).")
+                        }
                         connectionServer.tryConnect()
                         if (connectionServer.isConnected()) {
+                            startScanningTrigger.set(false)
                             logger.i("The attempt to connect to Device was success")
                         }
                     } catch (exception: Exception) {
