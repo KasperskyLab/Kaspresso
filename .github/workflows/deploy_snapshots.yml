@@ -33,6 +33,6 @@ jobs:
           echo $'\n'bintraykey=$BINTRAY_KEY >> $HOME/.gradle/gradle.properties
           echo $'\n'artifactoryPassword=$ARTIFACTORY_PASS >> $HOME/.gradle/gradle.properties
       - name: Build
-        run: ./gradlew assemble --full-stacktrace
+        run: ./gradlew clean assemble --full-stacktrace
       - name: Deploy snapshots to artifactory
         run: ./gradlew artifactoryPublish
