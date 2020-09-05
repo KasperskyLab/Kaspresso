@@ -42,28 +42,28 @@ dependencies {
 }
 
 tasks {
-    val dokka by getting(DokkaTask::class) {
-        outputFormat = "gfm"
-        outputDirectory = "$rootDir/docs"
-
-        configuration {
-            reportUndocumented = true
-        }
-    }
+//    val dokka by getting(DokkaTask::class) {
+//        outputFormat = "gfm"
+//        outputDirectory = "$rootDir/docs"
+//
+//        configuration {
+//            reportUndocumented = true
+//        }
+//    }
 
     val sourcesJar by registering(Jar::class) {
         archiveClassifier.set("sources")
         from(android.sourceSets.getByName("main").java.srcDirs)
     }
 
-    val javadocJar by registering(Jar::class) {
-        dependsOn(dokka)
-        archiveClassifier.set("javadoc")
-        from(dokka.outputDirectory)
-    }
+//    val javadocJar by registering(Jar::class) {
+//        dependsOn(dokka)
+//        archiveClassifier.set("javadoc")
+//        from(dokka.outputDirectory)
+//    }
 }
 
 artifacts {
     archives(tasks.getByName("sourcesJar"))
-    archives(tasks.getByName("javadocJar"))
+//    archives(tasks.getByName("javadocJar"))
 }

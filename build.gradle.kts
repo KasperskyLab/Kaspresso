@@ -1,4 +1,5 @@
 import groovy.lang.GroovyObject
+import org.jetbrains.dokka.gradle.DokkaTask
 import org.jfrog.gradle.plugin.artifactory.dsl.PublisherConfig
 import publishing.setup
 import publishing.shouldBePublished
@@ -51,9 +52,18 @@ subprojects {
     }
 
     if (shouldBePublished) {
+        apply(plugin = Dependencies.Dokka.plugin)
         apply(plugin = Dependencies.Publishing.mavenPlugin)
         apply(plugin = Dependencies.Publishing.bintrayPlugin)
         apply(plugin = Dependencies.Publishing.artifactoryPlugin)
+
+        tasks.withType<DokkaTask>().configureEach {
+            outputDirectory.set(File("$rootDir${File.separator}docs"))
+
+            dokkaSourceSets {
+
+            }
+        }
 
         publishing {
             setup(this@subprojects)
