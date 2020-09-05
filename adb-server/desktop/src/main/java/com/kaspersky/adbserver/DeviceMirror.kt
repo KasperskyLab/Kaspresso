@@ -16,7 +16,7 @@ internal class DeviceMirror private constructor(
 ) {
 
     companion object {
-        private const val CONNECTION_WAIT_MS = 2_000L
+        private const val WATCHDOG_CONNECTION_WAIT_MS = 1_000L
 
         fun create(
             cmdCommandPerformer: CmdCommandPerformer,
@@ -95,7 +95,7 @@ internal class DeviceMirror private constructor(
                         logger.i("The attempt to connect to Device failed with exception: $exception")
                     }
                 }
-                sleep(CONNECTION_WAIT_MS)
+                sleep(WATCHDOG_CONNECTION_WAIT_MS)
             }
         }
     }

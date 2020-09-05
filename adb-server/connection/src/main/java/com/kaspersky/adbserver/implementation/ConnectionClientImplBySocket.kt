@@ -51,6 +51,7 @@ internal class ConnectionClientImplBySocket(
                 handleMessages()
             },
             failureConnectAction = { exception ->
+                _socket?.close()
                 _socket = null
                 _socketMessagesTransferring = null
 

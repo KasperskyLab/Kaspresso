@@ -32,7 +32,7 @@ object LoggerFactory {
             if (logPolicy == LogPolicy.INFO) FullLogger.LogLevel.INFO else FullLogger.LogLevel.DEBUG
         val fullLogger = FullLoggerSystemImpl(logMode, desktopName, deviceName)
         val fullLoggerWrapper =
-            if (logPolicy == LogPolicy.CUT_DEBUG) FullLoggerOptimiser(fullLogger) else fullLogger
+            if (logPolicy == LogPolicy.DEBUG_CUT) FullLoggerOptimiser(fullLogger) else fullLogger
         return LoggerImpl(fullLoggerWrapper)
     }
 

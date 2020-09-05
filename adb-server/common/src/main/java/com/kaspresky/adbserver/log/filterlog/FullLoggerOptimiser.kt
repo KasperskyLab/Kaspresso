@@ -12,7 +12,7 @@ internal class FullLoggerOptimiser(
     private companion object {
         private const val SLASH_AT_THE_BEGINNING: Int = 40
         private const val SLASH_AT_THE_END: Int = 100
-        private const val DEFAULT_RECORDING_STACK_MAX_SIZE: Int = 50
+        private const val DEFAULT_RECORDING_STACK_MAX_SIZE: Int = 100
     }
 
     private val logStack: Deque<LogData> = ArrayDeque()

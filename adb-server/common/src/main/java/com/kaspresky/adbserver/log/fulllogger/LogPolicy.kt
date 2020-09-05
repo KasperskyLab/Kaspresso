@@ -2,7 +2,7 @@ package com.kaspresky.adbserver.log.fulllogger
 
 enum class LogPolicy {
 
-    FULL_DEBUG,
-    CUT_DEBUG,
+    DEBUG_FULL,
+    DEBUG_CUT,
     INFO
 }

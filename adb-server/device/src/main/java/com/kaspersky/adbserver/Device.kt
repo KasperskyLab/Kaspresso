@@ -17,6 +17,7 @@ internal class Device private constructor(
     companion object {
         private const val CONNECTION_ESTABLISH_TIMEOUT_SEC = 5L
         private const val CONNECTION_WAIT_MS = 200L
+        private const val WATCHDOG_CONNECTION_WAIT_MS = 1_000L
 
         fun create(logger: Logger): Device {
             val desktopDeviceSocketConnection =
@@ -32,6 +33,7 @@ internal class Device private constructor(
     }
 
     private val isRunning = AtomicBoolean(false)
+    private val startScanningTrigger = AtomicBoolean(false)
 
     fun startConnectionToDesktop() {
         if (isRunning.compareAndSet(false, true)) {
@@ -90,12 +92,23 @@ internal class Device private constructor(
             while (isRunning.get()) {
                 if (!connectionClient.isConnected()) {
                     try {
-                        logger.i("The attempt to connect to Desktop...")
+                        if (startScanningTrigger.compareAndSet(false, true)) {
+                            logger.i(
+                                "Device tries to connect to the Desktop. " +
+                                        "It may take time because the Desktop can be not ready " +
+                                        "(for example, there is no active Desktop instance in the local network)."
+                            )
+                        }
                         connectionClient.tryConnect()
+                        if (connectionClient.isConnected()) {
+                            startScanningTrigger.set(false)
+                            logger.i("The attempt to connect to Desktop was success")
+                        }
                     } catch (exception: Exception) {
                         logger.i("The attempt to connect to Desktop was with exception: $exception")
                     }
                 }
+                sleep(WATCHDOG_CONNECTION_WAIT_MS)
             }
         }
     }
