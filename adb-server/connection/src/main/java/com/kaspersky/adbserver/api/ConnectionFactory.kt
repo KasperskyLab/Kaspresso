@@ -25,7 +25,8 @@ object ConnectionFactory {
 
     fun createClient(
         socketCreation: () -> Socket,
-        logger: Logger
+        logger: Logger,
+        connectionClientLifecycle: ConnectionClientLifecycle
     ): ConnectionClient =
-        ConnectionClientImplBySocket(socketCreation, logger)
+        ConnectionClientImplBySocket(socketCreation, logger, connectionClientLifecycle)
 }

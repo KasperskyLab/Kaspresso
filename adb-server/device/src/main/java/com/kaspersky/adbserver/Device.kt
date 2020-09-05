@@ -1,10 +1,6 @@
 package com.kaspersky.adbserver
 
-import com.kaspersky.adbserver.api.Command
-import com.kaspersky.adbserver.api.CommandResult
-import com.kaspersky.adbserver.api.ConnectionClient
-import com.kaspersky.adbserver.api.ConnectionFactory
-import com.kaspersky.adbserver.api.ExecutorResultStatus
+import com.kaspersky.adbserver.api.*
 import com.kaspresky.adbserver.log.logger.Logger
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicBoolean
@@ -24,9 +20,16 @@ internal class Device private constructor(
                 DesktopDeviceSocketConnectionFactory.getSockets(
                     DesktopDeviceSocketConnectionType.FORWARD
                 )
+            val connectionClientLifecycle = object : ConnectionClientLifecycle {
+                override fun onDisconnectedBySocketProblems() {
+                    logger.i("The socket connection was interrupted. " +
+                            "The possible reason is the Desktop was killed")
+                }
+            }
             val connectionClient = ConnectionFactory.createClient(
                 desktopDeviceSocketConnection.getDeviceSocketLoad(logger),
-                logger
+                logger,
+                connectionClientLifecycle
             )
             return Device(connectionClient, logger)
         }

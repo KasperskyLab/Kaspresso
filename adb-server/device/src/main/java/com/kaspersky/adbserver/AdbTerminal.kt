@@ -7,28 +7,28 @@ import com.kaspresky.adbserver.log.logger.Logger
 
 object AdbTerminal {
 
-    private lateinit var device: Device
+    private var device: Device? = null
 
-    fun connect(logger: Logger = LoggerFactory.getDeviceLogger(LogPolicy.INFO)) {
-        device = Device.create(logger)
-        device.startConnectionToDesktop()
+    fun connect(logger: Logger = LoggerFactory.getDeviceLogger(LogPolicy.DEBUG_FULL)) {
+        if (device == null) device = Device.create(logger)
+        device?.startConnectionToDesktop()
     }
 
     fun disconnect() {
-        device.stopConnectionToDesktop()
+        device?.stopConnectionToDesktop()
     }
 
     /**
      * Please first of all call [connect] method to establish a connection
      */
-    fun executeAdb(command: String): CommandResult = device.fulfill(
+    fun executeAdb(command: String): CommandResult = device?.fulfill(
         AdbCommand(command)
-    )
+    ) ?: throw IllegalStateException("Please first of all call [connect] method to establish a connection")
 
     /**
      * Please first of all call [connect] method to establish a connection
      */
-    fun executeCmd(command: String): CommandResult = device.fulfill(
+    fun executeCmd(command: String): CommandResult = device?.fulfill(
         CmdCommand(command)
-    )
+    ) ?: throw IllegalStateException("Please first of all call [connect] method to establish a connection")
 }

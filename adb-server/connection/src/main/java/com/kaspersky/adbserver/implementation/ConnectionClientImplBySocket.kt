@@ -1,9 +1,6 @@
 package com.kaspersky.adbserver.implementation
 
-import com.kaspersky.adbserver.api.Command
-import com.kaspersky.adbserver.api.CommandResult
-import com.kaspersky.adbserver.api.ConnectionClient
-import com.kaspersky.adbserver.api.ExecutorResultStatus
+import com.kaspersky.adbserver.api.*
 import com.kaspersky.adbserver.implementation.lightsocket.LightSocketWrapperImpl
 import com.kaspersky.adbserver.implementation.transferring.ExpectedEOFException
 import com.kaspersky.adbserver.implementation.transferring.ResultMessage
@@ -16,7 +13,8 @@ import java.util.concurrent.TimeUnit
 
 internal class ConnectionClientImplBySocket(
     private val socketCreation: () -> Socket,
-    private val logger: Logger
+    private val logger: Logger,
+    private val connectionClientLifecycle: ConnectionClientLifecycle
 ) : ConnectionClient {
 
     companion object {
@@ -41,7 +39,10 @@ internal class ConnectionClientImplBySocket(
                 _socket = socketCreation.invoke()
                 _socketMessagesTransferring = SocketMessagesTransferring.createTransferring(
                     lightSocketWrapper = LightSocketWrapperImpl(socket),
-                    disruptAction = { tryDisconnectBySocketProblems() },
+                    disruptAction = {
+                        tryDisconnectBySocketProblems()
+                        connectionClientLifecycle.onDisconnectedBySocketProblems()
+                    },
                     logger = logger
                 )
                 socketMessagesTransferring.prepareListening()

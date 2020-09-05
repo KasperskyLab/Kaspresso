@@ -15,9 +15,15 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         val btnExecuteAdb = findViewById<Button>(R.id.btn_execute_adb)
         val editTextAdb = findViewById<EditText>(R.id.et_adb_command)
+        val btnConnectAdb = findViewById<Button>(R.id.btn_connect_adb)
+        val btnDisconnectAdb = findViewById<Button>(R.id.btn_disconnect_adb)
+
         btnExecuteAdb.setOnClickListener { onBtnClick(editTextAdb) }
+        btnConnectAdb.setOnClickListener { AdbTerminal.connect() }
+        btnDisconnectAdb.setOnClickListener { AdbTerminal.disconnect() }
     }
 
     override fun onResume() {
