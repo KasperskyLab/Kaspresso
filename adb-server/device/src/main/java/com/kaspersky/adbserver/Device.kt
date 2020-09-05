@@ -83,7 +83,7 @@ internal class Device private constructor(
             )
         }
     }
-    
+
     private inner class WatchdogThread : Thread("Connection watchdog thread from Device to Desktop") {
         override fun run() {
             logger.i("WatchdogThread is started from Device to Desktop")

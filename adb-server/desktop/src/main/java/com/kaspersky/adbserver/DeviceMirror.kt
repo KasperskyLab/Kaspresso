@@ -66,10 +66,10 @@ internal class DeviceMirror private constructor(
     }
 
     fun stopConnectionToDevice() {
-        logger.i("The connection disconnection to device started")
+        logger.i("The connection interruption to device started")
         isRunning.set(false)
         connectionServer.tryDisconnect()
-        logger.i("The connection disconnection to device completed")
+        logger.i("The connection interruption to device completed")
     }
 
     private inner class WatchdogThread : Thread() {

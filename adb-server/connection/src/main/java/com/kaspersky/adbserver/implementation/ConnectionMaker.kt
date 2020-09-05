@@ -17,7 +17,7 @@ internal class ConnectionMaker(private val logger: Logger) {
             return
         }
         if (connectionState == ConnectionState.DISCONNECTING) {
-            logger.d("The connection disconnection process is in progress. Skip the new attempt")
+            logger.d("The connection interruption process is in progress. Skip the new attempt")
             return
         }
         if (connectionState == ConnectionState.CONNECTED) {
@@ -40,9 +40,9 @@ internal class ConnectionMaker(private val logger: Logger) {
     }
 
     fun disconnect(connectAction: () -> Unit) {
-        logger.d("Start a connection disconnection. The current state=$connectionState")
+        logger.d("Start a connection interruption. The current state=$connectionState")
         if (connectionState == ConnectionState.DISCONNECTING) {
-            logger.d("The connection disconnection process is in progress. Skip the new attempt")
+            logger.d("The connection interruption process is in progress. Skip the new attempt")
             return
         }
         if (connectionState == ConnectionState.DISCONNECTED) {
