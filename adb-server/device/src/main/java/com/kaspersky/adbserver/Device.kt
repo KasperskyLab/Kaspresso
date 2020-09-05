@@ -40,14 +40,14 @@ internal class Device private constructor(
 
     fun startConnectionToDesktop() {
         if (isRunning.compareAndSet(false, true)) {
-            logger.i("Connection to desktop started")
+            logger.i("User called a start of connection to Desktop")
             WatchdogThread().start()
         }
     }
 
     fun stopConnectionToDesktop() {
         if (isRunning.compareAndSet(true, false)) {
-            logger.i("Connection to desktop stopped")
+            logger.i("User called a stop of connection to Desktop")
             connectionClient.tryDisconnect()
         }
     }
