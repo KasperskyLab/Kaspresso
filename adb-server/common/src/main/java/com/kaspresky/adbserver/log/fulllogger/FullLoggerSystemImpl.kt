@@ -5,7 +5,12 @@ import java.util.Date
 
 /**
  * Presents logs in the form like:
- * INFO 17/08/2020 09:53:52 desktop=Desktop-5037 device=emulator-5554 message:updated state=CONNECTED
+ * INFO 17/08/2020 09:53:52.234 desktop=Desktop-48633 device=emulator-5554 message: updated state=CONNECTED.
+ * There are two kinds of logs:
+ * 1. INFO 17/08/2020 09:53:52.234 desktop=Desktop-48633 device=emulator-5554 message: updated state=CONNECTED
+ * This form is using when logMode (the field) == INFO. Also, a user watches only INFO, WARNING and ERROR logs.
+ * 2. INFO 17/08/2020 09:53:52.234 desktop=Desktop-48633 device=emulator-5554 tag=ConnectionMaker method=connect message: updated state=CONNECTED
+ * This form is using when logMode (the field) == DEBUG. Also, a user watches all logs.
  */
 internal class FullLoggerSystemImpl(
     private val logMode: FullLogger.LogLevel,
