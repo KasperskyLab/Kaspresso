@@ -34,7 +34,7 @@ internal fun main(args: Array<String>) {
 
     desktopLogger.i("Desktop started with arguments: emulators=$emulators, adbServerPort=$adbServerPort")
 
-    val cmdCommandPerformer = CmdCommandPerformer()
+    val cmdCommandPerformer = CmdCommandPerformer(desktopName)
     val desktop = Desktop(
         cmdCommandPerformer = cmdCommandPerformer,
         presetEmulators = emulators,

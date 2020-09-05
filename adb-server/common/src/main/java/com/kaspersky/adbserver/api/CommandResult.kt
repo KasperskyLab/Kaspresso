@@ -7,7 +7,8 @@ import java.io.Serializable
  */
 data class CommandResult(
     val status: ExecutorResultStatus,
-    val description: String
+    val description: String,
+    val serviceInfo: String? = null
 ) : Serializable
 
 enum class ExecutorResultStatus {

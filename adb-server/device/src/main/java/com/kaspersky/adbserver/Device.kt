@@ -83,8 +83,7 @@ internal class Device private constructor(
             )
         }
     }
-
-    // todo get name of the device?
+    
     private inner class WatchdogThread : Thread("Connection watchdog thread from Device to Desktop") {
         override fun run() {
             logger.i("WatchdogThread is started from Device to Desktop")
