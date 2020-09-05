@@ -91,6 +91,10 @@ internal class SocketMessagesTransferring<ReceiveModel, SendModel> private const
                 disruptAction.invoke()
             }
         } catch (exception: Exception) {
+            if (!isRunning.get()) {
+                // there is no mind to analyse exceptions after the socket connection was interrupted
+                return
+            }
             if (exception is EOFException) {
                 logger.d("EOFException occurred in Socket inputStream. The most possible reason is the opposite socket just broke up the connection. " +
                             "Additional info: exception=$exception")
