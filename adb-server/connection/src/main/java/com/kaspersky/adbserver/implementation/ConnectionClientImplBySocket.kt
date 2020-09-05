@@ -96,7 +96,7 @@ internal class ConnectionClientImplBySocket(
 
     private fun resetCommandsInProgress(failureReason: String) {
         for ((adbCommand, resultWaiter) in commandsInProgress) {
-            val commandResult = CommandResult(ExecutorResultStatus.FAILED, failureReason)
+            val commandResult = CommandResult(ExecutorResultStatus.FAILURE, failureReason)
             logger.d("The command=$adbCommand was failed because the socket connection had broken up. \n" +
                     "Result=$commandResult"
             )
@@ -128,7 +128,7 @@ internal class ConnectionClientImplBySocket(
             resultMessage = resultWaiter.waitResult(COMMAND_TIMEOUT_MIN, TimeUnit.SECONDS)
         } catch (exception: InterruptedException) {
             val failedCommandResult = CommandResult(
-                ExecutorResultStatus.FAILED,
+                ExecutorResultStatus.FAILURE,
                 "Waiting thread was interrupted"
             )
             logger.d("Command=$command failed with commandResult=$failedCommandResult")
@@ -139,7 +139,7 @@ internal class ConnectionClientImplBySocket(
 
         if (resultMessage == null) {
             val failedCommandResult = CommandResult(
-                ExecutorResultStatus.FAILED,
+                ExecutorResultStatus.FAILURE,
                 "Waiting result timeout was expired"
             )
             logger.d("Command=$command failed with commandResult=$failedCommandResult")

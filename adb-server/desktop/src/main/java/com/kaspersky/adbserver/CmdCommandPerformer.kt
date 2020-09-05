@@ -21,7 +21,7 @@ internal class CmdCommandPerformer {
                 return if (exitCode != 0) {
                     val error = "exitCode=$exitCode, message=${process.errorStream.bufferedReader().readText()}"
                     CommandResult(
-                        ExecutorResultStatus.FAILED,
+                        ExecutorResultStatus.FAILURE,
                         error
                     )
                 } else {

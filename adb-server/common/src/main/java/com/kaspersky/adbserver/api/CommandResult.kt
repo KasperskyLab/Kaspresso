@@ -15,7 +15,7 @@ enum class ExecutorResultStatus {
     SUCCESS,
     // if something went wrong.
     // Possible reasons are problems of server-client connection, wrong command to execute
-    FAILED,
+    FAILURE,
     // the time to establish a connection or to execute a command is over timeout
     TIMEOUT
 }
