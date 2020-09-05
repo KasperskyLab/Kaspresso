@@ -23,7 +23,7 @@ internal class FullLoggerSystemImpl(
         private const val IGNORE_CLASSES = "com.kaspresky.adbserver.log"
     }
 
-    private val formatter = SimpleDateFormat("dd/MM/yyyy HH:mm:ss")
+    private val formatter = SimpleDateFormat("dd/MM/yyyy HH:mm:ss.SSS")
 
     override fun log(
         logLevel: FullLogger.LogLevel?,
