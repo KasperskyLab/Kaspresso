@@ -7,6 +7,7 @@ plugins {
 
 dependencies {
     implementation(Dependencies.kotlinStdlib)
+    implementation(Dependencies.kotlinCli)
     implementation(project(Projects.AdbServer.common))
     implementation(project(Projects.AdbServer.commandTypes))
     implementation(project(Projects.AdbServer.connection))

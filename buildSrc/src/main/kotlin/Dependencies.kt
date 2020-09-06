@@ -7,6 +7,7 @@ object Dependencies {
         const val buildTools = "29.0.3"
 
         const val kotlin = "1.4.0"
+        const val kotlinCli = "0.3"
 
         const val appcompat = "1.2.0"
         const val androidXCore = "1.3.1"
@@ -51,6 +52,7 @@ object Dependencies {
     }
 
     const val kotlinStdlib = "org.jetbrains.kotlin:kotlin-stdlib"
+    const val kotlinCli = "org.jetbrains.kotlinx:kotlinx-cli:${Versions.kotlinCli}"
 
     const val appcompat = "androidx.appcompat:appcompat:${Versions.appcompat}"
     const val androidXCore = "androidx.core:core:${Versions.androidXCore}"
