@@ -1,6 +1,10 @@
 package com.kaspersky.adbserver.implementation
 
-import com.kaspersky.adbserver.api.*
+import com.kaspersky.adbserver.api.Command
+import com.kaspersky.adbserver.api.CommandResult
+import com.kaspersky.adbserver.api.ConnectionClient
+import com.kaspersky.adbserver.api.ConnectionClientLifecycle
+import com.kaspersky.adbserver.api.ExecutorResultStatus
 import com.kaspersky.adbserver.implementation.lightsocket.LightSocketWrapperImpl
 import com.kaspersky.adbserver.implementation.transferring.ExpectedEOFException
 import com.kaspersky.adbserver.implementation.transferring.ResultMessage
@@ -23,14 +27,18 @@ internal class ConnectionClientImplBySocket(
 
     private var _socket: Socket? = null
     private val socket: Socket
-        get() = _socket ?: throw IllegalStateException("Socket is not initialised. Please call `tryConnect` function at first.")
+        get() = _socket
+            ?: throw IllegalStateException("Socket is not initialised. Please call `tryConnect` function at first.")
 
-    private var _socketMessagesTransferring: SocketMessagesTransferring<ResultMessage<CommandResult>, TaskMessage>? = null
+    private var _socketMessagesTransferring: SocketMessagesTransferring<ResultMessage<CommandResult>, TaskMessage>? =
+        null
     private val socketMessagesTransferring: SocketMessagesTransferring<ResultMessage<CommandResult>, TaskMessage>
-        get() = _socketMessagesTransferring ?: throw IllegalStateException("Socket transferring is not initialised. Please call `tryConnect` function at first.")
+        get() = _socketMessagesTransferring
+            ?: throw IllegalStateException("Socket transferring is not initialised. Please call `tryConnect` function at first.")
 
     private var connectionMaker: ConnectionMaker = ConnectionMaker(logger)
-    private val commandsInProgress = ConcurrentHashMap<Command, ResultWaiter<ResultMessage<CommandResult>>>()
+    private val commandsInProgress =
+        ConcurrentHashMap<Command, ResultWaiter<ResultMessage<CommandResult>>>()
 
     override fun tryConnect() {
         logger.d("Start the process")
@@ -66,24 +74,26 @@ internal class ConnectionClientImplBySocket(
 
     private fun handleMessages() {
         socketMessagesTransferring.startListening { resultMessage ->
-            logger.d( "Received resultMessage=$resultMessage")
+            logger.d("Received resultMessage=$resultMessage")
             commandsInProgress[resultMessage.command]?.latchResult(resultMessage)
         }
     }
 
     private fun tryDisconnectBySocketProblems() {
         logger.d("Start the process")
-        val failureReason = "There was some problem inside a Socket creation process or during a Socket connection. \n" +
-                "The most possible reason is using of old version of 'desktop.jar'. \n" +
-                "Please, use the most modern version of 'desktop.jar' located in https://github.com/KasperskyLab/Kaspresso/tree/master/artifacts."
+        val failureReason =
+            "There was some problem inside a Socket creation process or during a Socket connection. \n" +
+                    "The most possible reason is using of old version of 'desktop.jar'. \n" +
+                    "Please, use the most modern version of 'desktop.jar' located in https://github.com/KasperskyLab/Kaspresso/tree/master/artifacts."
         tryDisconnectCommon(failureReason)
         logger.d("The disconnection was completed")
     }
 
     override fun tryDisconnect() {
         logger.d("Start the process")
-        val failureReason = "`ConnectionClientImplBySocket.tryDisconnect` function was called earlier. " +
-                "Please, observe code points and relative logs where this function started."
+        val failureReason =
+            "`ConnectionClientImplBySocket.tryDisconnect` function was called earlier. " +
+                    "Please, observe code points and relative logs where this function started."
         tryDisconnectCommon(failureReason)
         logger.d("The disconnection was completed")
     }
@@ -99,8 +109,9 @@ internal class ConnectionClientImplBySocket(
     private fun resetCommandsInProgress(failureReason: String) {
         for ((adbCommand, resultWaiter) in commandsInProgress) {
             val commandResult = CommandResult(ExecutorResultStatus.FAILURE, failureReason)
-            logger.d("The command=$adbCommand was failed because the socket connection had broken up. \n" +
-                    "Result=$commandResult"
+            logger.d(
+                "The command=$adbCommand was failed because the socket connection had broken up. \n" +
+                        "Result=$commandResult"
             )
             resultWaiter.latchResult(
                 ResultMessage(

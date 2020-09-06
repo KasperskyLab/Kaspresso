@@ -36,12 +36,16 @@ internal class DeviceMirror private constructor(
                 override fun onReceivedTask(command: Command) {
                     logger.i("The received command to execute: $command")
                 }
+
                 override fun onExecutedTask(command: Command, commandResult: CommandResult) {
                     logger.i("The executed command: $command. The result: $commandResult")
                 }
+
                 override fun onDisconnectedBySocketProblems() {
-                    logger.i("The socket connection was interrupted. " +
-                            "The possible reason is killed Kaspresso application on the device")
+                    logger.i(
+                        "The socket connection was interrupted. " +
+                                "The possible reason is killed Kaspresso application on the device"
+                    )
                 }
             }
             val connectionServer = ConnectionFactory.createServer(
@@ -80,13 +84,17 @@ internal class DeviceMirror private constructor(
             while (isRunning.get()) {
                 if (!connectionServer.isConnected()) {
                     try {
-                        logger.d("The attempt to connect to Device. " +
-                                "It may take time because the device can be not ready (for example, a kaspresso test was not started).")
+                        logger.d(
+                            "The attempt to connect to Device. " +
+                                    "It may take time because the device can be not ready (for example, a kaspresso test was not started)."
+                        )
                         if (startScanningTrigger.compareAndSet(false, true)) {
-                            logger.i("Desktop tries to connect to the Device.\n " +
-                                    "It may take time because the device can be not ready. Possible reasons:\n " +
-                                    "1. A kaspresso test has not been started.\n " +
-                                    "2. The device port has not been released because Android OS has some time gap to turn the port state.")
+                            logger.i(
+                                "Desktop tries to connect to the Device.\n " +
+                                        "It may take time because the device can be not ready. Possible reasons:\n " +
+                                        "1. A kaspresso test has not been started.\n " +
+                                        "2. The device port has not been released because Android OS has some time gap to turn the port state."
+                            )
                         }
                         connectionServer.tryConnect()
                         if (connectionServer.isConnected()) {

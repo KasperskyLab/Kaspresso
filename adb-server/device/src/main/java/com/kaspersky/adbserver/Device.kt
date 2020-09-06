@@ -1,6 +1,11 @@
 package com.kaspersky.adbserver
 
-import com.kaspersky.adbserver.api.*
+import com.kaspersky.adbserver.api.Command
+import com.kaspersky.adbserver.api.CommandResult
+import com.kaspersky.adbserver.api.ConnectionClient
+import com.kaspersky.adbserver.api.ConnectionClientLifecycle
+import com.kaspersky.adbserver.api.ConnectionFactory
+import com.kaspersky.adbserver.api.ExecutorResultStatus
 import com.kaspresky.adbserver.log.logger.Logger
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicBoolean
@@ -22,8 +27,10 @@ internal class Device private constructor(
                 )
             val connectionClientLifecycle = object : ConnectionClientLifecycle {
                 override fun onDisconnectedBySocketProblems() {
-                    logger.i("The socket connection was interrupted. " +
-                            "The possible reason is the Desktop was killed")
+                    logger.i(
+                        "The socket connection was interrupted. " +
+                                "The possible reason is the Desktop was killed"
+                    )
                 }
             }
             val connectionClient = ConnectionFactory.createClient(
@@ -89,7 +96,9 @@ internal class Device private constructor(
         }
     }
 
-    private inner class WatchdogThread : Thread("Connection watchdog thread from Device to Desktop") {
+    private inner class WatchdogThread : Thread(
+        "Connection watchdog thread from Device to Desktop"
+    ) {
         override fun run() {
             logger.i("WatchdogThread is started from Device to Desktop")
             while (isRunning.get()) {

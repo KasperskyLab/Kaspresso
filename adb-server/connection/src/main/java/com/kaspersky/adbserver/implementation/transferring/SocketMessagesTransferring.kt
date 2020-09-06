@@ -96,8 +96,10 @@ internal class SocketMessagesTransferring<ReceiveModel, SendModel> private const
                 return
             }
             if (exception is EOFException) {
-                logger.d("EOFException occurred in Socket inputStream. The most possible reason is the opposite socket just broke up the connection. " +
-                            "Additional info: exception=$exception")
+                logger.d(
+                    "EOFException occurred in Socket inputStream. The most possible reason is the opposite socket just broke up the connection. " +
+                            "Additional info: exception=$exception"
+                )
             } else {
                 logger.e(exception)
             }

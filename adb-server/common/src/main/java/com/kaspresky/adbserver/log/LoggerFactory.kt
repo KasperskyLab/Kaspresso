@@ -35,5 +35,4 @@ object LoggerFactory {
             if (logPolicy == LogPolicy.DEBUG_CUT) FullLoggerOptimiser(fullLogger) else fullLogger
         return LoggerImpl(fullLoggerWrapper)
     }
-
 }
