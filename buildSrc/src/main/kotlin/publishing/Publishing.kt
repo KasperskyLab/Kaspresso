@@ -49,7 +49,7 @@ private fun PublicationContainer.createWithNameAndVersion(project: Project, publ
         project.afterEvaluate {
             artifact(file("$buildDir/outputs/aar/$name-release.aar"))
             artifact(tasks.getByName(SOURCES_TASK))
-//            artifact(tasks.getByName(JAVADOC_TASK))
+            artifact(tasks.getByName(JAVADOC_TASK))
         }
 
         artifactId = project.findProperty(PROPERTY_ARTIFACT_NAME).toString()
