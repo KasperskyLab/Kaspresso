@@ -16,7 +16,7 @@ import org.junit.Test
 /**
  * Pushes and then removes a file file placed at /artifacts directory.
  * [Files.push] uses the [FILE_PATH] relative path to push the file.
- * So, you should run the server with command `cd /absolute/path/to/project/directory & java -jar artifacts/desktop.jar`
+ * So, you should run the server with command `cd /absolute/path/to/project/directory & java -jar artifacts/adbserver-desktop.jar`
  */
 class DeviceFilesSampleTest : TestCase() {
 

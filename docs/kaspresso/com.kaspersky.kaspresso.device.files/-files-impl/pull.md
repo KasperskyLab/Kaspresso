@@ -12,4 +12,4 @@ Required Permissions: INTERNET.
 
 `devicePath` - a file path relative to the device directory.
 
-`serverPath` - a path to copy. (If empty - pulls in adbServer directory (folder with file "desktop.jar"))
+`serverPath` - a path to copy. (If empty - pulls in adbServer directory (folder with file "adbserver-desktop.jar"))

@@ -83,8 +83,8 @@ internal class ConnectionClientImplBySocket(
         logger.d("Start the process")
         val failureReason =
             "There was some problem inside a Socket creation process or during a Socket connection. \n" +
-                    "The most possible reason is using of old version of 'desktop.jar'. \n" +
-                    "Please, use the most modern version of 'desktop.jar' located in https://github.com/KasperskyLab/Kaspresso/tree/master/artifacts."
+                    "The most possible reason is using of old version of 'adbserver-desktop.jar (desktop.jar)'. \n" +
+                    "Please, use the most modern version of 'adbserver-desktop.jar' located in https://github.com/KasperskyLab/Kaspresso/tree/master/artifacts."
         tryDisconnectCommon(failureReason)
         logger.d("The disconnection was completed")
     }

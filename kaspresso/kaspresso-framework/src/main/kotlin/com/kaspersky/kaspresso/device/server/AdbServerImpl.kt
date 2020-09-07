@@ -94,11 +94,11 @@ class AdbServerImpl(
                 if (result.status == ExecutorResultStatus.TIMEOUT) {
                     throw AdbServerException(
                         "Command=$command was performed with timeout exception. \n" +
-                                "The possible reason (99.9%) is absence of started 'desktop.jar' (AdbServer). \n" +
+                                "The possible reason (99.9%) is absence of started 'adbserver-desktop.jar'. \n" +
                                 "Please, follow the instruction: \n" +
-                                "1. Find the last 'desktop.jar' here - https://github.com/KasperskyLab/Kaspresso/tree/master/artifacts \n" +
-                                "2. Copy 'desktop.jar' to your machine. For example, /Users/yuri.gagarin/Desktop/desktop.jar. \n" +
-                                "3. Start 'desktop.jar' with the command in Terminal - 'java -jar /Users/yuri.gagarin/Desktop/desktop.jar"
+                                "1. Find the last 'adbserver-desktop.jar' here - https://github.com/KasperskyLab/Kaspresso/tree/master/artifacts \n" +
+                                "2. Copy 'adbserver-desktop.jar' to your machine. For example, /Users/yuri.gagarin/Desktop/adbserver-desktop.jar. \n" +
+                                "3. Start 'adbserver-desktop.jar' with the command in Terminal - 'java -jar /Users/yuri.gagarin/Desktop/adbserver-desktop.jar"
                     )
                 }
             }

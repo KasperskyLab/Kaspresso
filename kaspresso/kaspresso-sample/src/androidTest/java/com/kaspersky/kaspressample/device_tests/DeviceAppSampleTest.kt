@@ -15,7 +15,7 @@ import org.junit.Test
 /**
  * Installs and then uninstalls an apk file placed at /artifacts directory.
  * [Apps.install] uses the [TEST_APK_FILE_RELATIVE_PATH] relative path to install the apk.
- * So, you should run the server with command `cd /absolute/path/to/project/directory & java -jar artifacts/desktop.jar`
+ * So, you should run the server with command `cd /absolute/path/to/project/directory & java -jar artifacts/adbserver-desktop.jar`
  */
 class DeviceAppSampleTest : TestCase() {
 

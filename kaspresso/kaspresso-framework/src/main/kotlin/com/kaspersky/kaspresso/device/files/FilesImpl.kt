@@ -38,7 +38,7 @@ class FilesImpl(
      * Required Permissions: INTERNET.
      *
      * @param devicePath a file path relative to the device directory.
-     * @param serverPath a path to copy. (If empty - pulls in adbServer directory (folder with file "desktop.jar"))
+     * @param serverPath a path to copy. (If empty - pulls in adbServer directory (folder with file "adbserver-desktop.jar"))
      */
     override fun pull(devicePath: String, serverPath: String) {
         adbServer.performAdb("pull $devicePath $serverPath")
