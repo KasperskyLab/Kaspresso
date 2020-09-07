@@ -1,7 +1,7 @@
 package com.kaspersky.adbserver.desktop
 
 import com.kaspersky.adbserver.common.log.LoggerFactory
-import com.kaspersky.adbserver.common.log.fulllogger.LogPolicy
+import com.kaspersky.adbserver.common.log.logger.LogPolicy
 import kotlinx.cli.ArgParser
 import kotlinx.cli.ArgType
 import kotlinx.cli.default
@@ -32,7 +32,7 @@ internal fun main(args: Array<String>) {
         shortName = "l",
         fullName = "logs",
         description = "Logs policy"
-    ).default(LogPolicy.INFO)
+    ).default(LogPolicy.INFO_ONLY)
 
     parser.parse(args)
 

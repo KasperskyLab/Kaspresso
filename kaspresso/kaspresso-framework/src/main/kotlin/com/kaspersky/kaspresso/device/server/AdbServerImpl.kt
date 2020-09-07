@@ -3,6 +3,7 @@ package com.kaspersky.kaspresso.device.server
 import com.kaspersky.adbserver.device.AdbTerminal
 import com.kaspersky.adbserver.common.api.CommandResult
 import com.kaspersky.adbserver.common.api.ExecutorResultStatus
+import com.kaspersky.adbserver.common.log.logger.Logger
 import com.kaspersky.kaspresso.internal.exceptions.AdbServerException
 import com.kaspersky.kaspresso.logger.UiTestLogger
 
@@ -10,15 +11,19 @@ import com.kaspersky.kaspresso.logger.UiTestLogger
  * The implementation of [AdbServer] interface. Encapsulates all work with adb server.
  */
 class AdbServerImpl(
+    adbServerLogsType: AdbServerLogsType,
     private val logger: UiTestLogger
 ) : AdbServer {
 
-    private var initialized: Boolean = false
+    private val adbServerLogger: Logger = LoggerKaspressoImpl(adbServerLogsType, logger)
+    private var connected: Boolean = false
 
     private val adbTerminal: AdbTerminal
         get() {
-            if (!initialized) AdbTerminal.connect()
-            initialized = true
+            if (!connected) {
+                AdbTerminal.connect(logger = adbServerLogger)
+                connected = true
+            }
             return AdbTerminal
         }
 
@@ -75,25 +80,28 @@ class AdbServerImpl(
      * The method is called by Kaspresso after each test.
      */
     override fun disconnectServer() {
-        if (initialized) {
+        if (connected) {
             adbTerminal.disconnect()
-            initialized = false
+            connected = false
         }
     }
 
     private fun perform(commands: Array<out String>, executor: (String) -> CommandResult): List<String> {
         return commands.asSequence()
+            .onEach { command ->
+                logger.i("AdbServer. The command to execute=$command")
+            }
             .map { command -> command to executor.invoke(command) }
             .onEach { (command, result) ->
-                logger.i("Command=$command was performed with result=$result")
+                logger.i("AdbServer. The command=$command was performed with result=$result")
             }
             .onEach { (command, result) ->
                 if (result.status == ExecutorResultStatus.FAILURE) {
-                    throw AdbServerException("Command=$command was performed with failed result=$result")
+                    throw AdbServerException("AdbServer. The command=$command was performed with failed result=$result")
                 }
                 if (result.status == ExecutorResultStatus.TIMEOUT) {
                     throw AdbServerException(
-                        "Command=$command was performed with timeout exception. \n" +
+                        "AdbServer. The command=$command was performed with timeout exception. \n" +
                                 "The possible reason (99.9%) is absence of started 'adbserver-desktop.jar'. \n" +
                                 "Please, follow the instruction: \n" +
                                 "1. Find the last 'adbserver-desktop.jar' here - https://github.com/KasperskyLab/Kaspresso/tree/master/artifacts \n" +

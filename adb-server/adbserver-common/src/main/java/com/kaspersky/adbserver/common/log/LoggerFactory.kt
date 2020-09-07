@@ -3,7 +3,7 @@ package com.kaspersky.adbserver.common.log
 import com.kaspersky.adbserver.common.log.filterlog.FullLoggerOptimiser
 import com.kaspersky.adbserver.common.log.fulllogger.FullLogger
 import com.kaspersky.adbserver.common.log.fulllogger.FullLoggerSystemImpl
-import com.kaspersky.adbserver.common.log.fulllogger.LogPolicy
+import com.kaspersky.adbserver.common.log.logger.LogPolicy
 import com.kaspersky.adbserver.common.log.logger.DesktopLogger
 import com.kaspersky.adbserver.common.log.logger.Logger
 import com.kaspersky.adbserver.common.log.logger.LoggerImpl
@@ -29,7 +29,7 @@ object LoggerFactory {
 
     private fun getCommonLogger(logPolicy: LogPolicy, desktopName: String? = null, deviceName: String? = null): Logger {
         val logMode: FullLogger.LogLevel =
-            if (logPolicy == LogPolicy.INFO) FullLogger.LogLevel.INFO else FullLogger.LogLevel.DEBUG
+            if (logPolicy == LogPolicy.INFO_ONLY) FullLogger.LogLevel.INFO else FullLogger.LogLevel.DEBUG
         val fullLogger = FullLoggerSystemImpl(logMode, desktopName, deviceName)
         val fullLoggerWrapper =
             if (logPolicy == LogPolicy.DEBUG_CUT) FullLoggerOptimiser(fullLogger) else fullLogger

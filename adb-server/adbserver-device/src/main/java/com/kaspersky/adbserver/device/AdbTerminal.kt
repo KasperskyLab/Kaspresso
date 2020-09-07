@@ -4,7 +4,7 @@ import com.kaspersky.adbserver.common.api.CommandResult
 import com.kaspersky.adbserver.commandtypes.AdbCommand
 import com.kaspersky.adbserver.commandtypes.CmdCommand
 import com.kaspersky.adbserver.common.log.LoggerFactory
-import com.kaspersky.adbserver.common.log.fulllogger.LogPolicy
+import com.kaspersky.adbserver.common.log.logger.LogPolicy
 import com.kaspersky.adbserver.common.log.logger.Logger
 
 object AdbTerminal {

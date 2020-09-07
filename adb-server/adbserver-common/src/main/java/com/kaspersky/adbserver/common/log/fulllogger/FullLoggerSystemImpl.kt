@@ -1,5 +1,6 @@
 package com.kaspersky.adbserver.common.log.fulllogger
 
+import com.kaspersky.adbserver.common.log.utils.AdbLoggerReflection
 import java.text.SimpleDateFormat
 import java.util.Date
 
@@ -25,7 +26,6 @@ internal class FullLoggerSystemImpl(
         private const val MESSAGE = "message: "
         private const val DESKTOP = "desktop="
         private const val EMPTY_STRING = ""
-        private const val IGNORE_CLASSES = "com.kaspresky.adbserver.log"
     }
 
     private val formatter = SimpleDateFormat("dd/MM/yyyy HH:mm:ss.SSS")
@@ -67,14 +67,14 @@ internal class FullLoggerSystemImpl(
     private fun getTag(tag: String?): String {
         if (logMode != FullLogger.LogLevel.DEBUG) return EMPTY_STRING
         if (tag != null) return "$TAG$tag "
-        val generatedTagName = getStackElement().className.substringAfterLast('.')
+        val generatedTagName = AdbLoggerReflection.getGeneratedClass()
         return "$TAG$generatedTagName "
     }
 
     private fun getMethod(method: String?): String {
         if (logMode != FullLogger.LogLevel.DEBUG) return EMPTY_STRING
         if (method != null) return "$METHOD$method "
-        val generatedMethodName = getStackElement().methodName
+        val generatedMethodName = AdbLoggerReflection.getGeneratedMethod()
         return "$METHOD$generatedMethodName "
     }
 
@@ -91,8 +91,4 @@ internal class FullLoggerSystemImpl(
             EMPTY_STRING
         }
     }
-
-    private fun getStackElement(): StackTraceElement =
-        Throwable().stackTrace
-            .first { !it.className.contains(IGNORE_CLASSES) }
 }
