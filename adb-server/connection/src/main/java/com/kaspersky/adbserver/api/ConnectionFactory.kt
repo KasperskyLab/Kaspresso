@@ -2,6 +2,7 @@ package com.kaspersky.adbserver.api
 
 import com.kaspersky.adbserver.implementation.ConnectionClientImplBySocket
 import com.kaspersky.adbserver.implementation.ConnectionServerImplBySocket
+import com.kaspresky.adbserver.log.logger.Logger
 import java.net.Socket
 
 /**
@@ -12,18 +13,20 @@ object ConnectionFactory {
     fun createServer(
         socketCreation: () -> Socket,
         commandExecutor: CommandExecutor,
-        deviceName: String
+        logger: Logger,
+        connectionServerLifecycle: ConnectionServerLifecycle
     ): ConnectionServer =
         ConnectionServerImplBySocket(
             socketCreation,
             commandExecutor,
-            deviceName
+            logger,
+            connectionServerLifecycle
         )
 
     fun createClient(
-        socketCreation: () -> Socket
+        socketCreation: () -> Socket,
+        logger: Logger,
+        connectionClientLifecycle: ConnectionClientLifecycle
     ): ConnectionClient =
-        ConnectionClientImplBySocket(
-            socketCreation
-        )
+        ConnectionClientImplBySocket(socketCreation, logger, connectionClientLifecycle)
 }

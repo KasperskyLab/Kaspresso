@@ -1,73 +1,111 @@
 package com.kaspersky.adbserver
 
-import com.kaspersky.adbserver.api.ConnectionFactory
+import com.kaspersky.adbserver.api.Command
+import com.kaspersky.adbserver.api.CommandResult
 import com.kaspersky.adbserver.api.ConnectionServer
-import com.kaspresky.adbserver.log.LoggerFactory
+import com.kaspersky.adbserver.api.ConnectionServerLifecycle
+import com.kaspersky.adbserver.api.ConnectionFactory
+import com.kaspresky.adbserver.log.logger.Logger
+import java.util.concurrent.atomic.AtomicBoolean
 import java.util.concurrent.atomic.AtomicReference
 
 internal class DeviceMirror private constructor(
-    val deviceName: String,
-    private val connectionServer: ConnectionServer
+    private val connectionServer: ConnectionServer,
+    internal val deviceName: String,
+    private val logger: Logger
 ) {
 
     companion object {
-        private const val CONNECTION_WAIT_MS = 500L
+        private const val WATCHDOG_CONNECTION_WAIT_MS = 1_000L
 
         fun create(
+            cmdCommandPerformer: CmdCommandPerformer,
             deviceName: String,
             adbServerPort: String?,
-            cmdCommandPerformer: CmdCommandPerformer
+            logger: Logger
         ): DeviceMirror {
             val desktopDeviceSocketConnection =
-                DesktopDeviceSocketConnectionFactory.getSockets(
-                    DesktopDeviceSocketConnectionType.FORWARD,
-                    deviceName
-                )
+                DesktopDeviceSocketConnectionFactory.getSockets(DesktopDeviceSocketConnectionType.FORWARD)
             val commandExecutor = CommandExecutorImpl(
                 cmdCommandPerformer,
                 deviceName,
-                adbServerPort
+                adbServerPort,
+                logger
             )
+            val connectionServerLifecycle = object : ConnectionServerLifecycle {
+                override fun onReceivedTask(command: Command) {
+                    logger.i("The received command to execute: $command")
+                }
+
+                override fun onExecutedTask(command: Command, commandResult: CommandResult) {
+                    logger.i("The executed command: $command. The result: $commandResult")
+                }
+
+                override fun onDisconnectedBySocketProblems() {
+                    logger.i(
+                        "The socket connection was interrupted. " +
+                                "The possible reason is killed Kaspresso application on the device"
+                    )
+                }
+            }
             val connectionServer = ConnectionFactory.createServer(
-                desktopDeviceSocketConnection.getDesktopSocketLoad(commandExecutor),
+                desktopDeviceSocketConnection.getDesktopSocketLoad(commandExecutor, logger),
                 commandExecutor,
-                deviceName
+                logger,
+                connectionServerLifecycle
             )
             return DeviceMirror(
+                connectionServer,
                 deviceName,
-                connectionServer
+                logger
             )
         }
     }
 
-    private val logger = LoggerFactory.getLogger(tag = javaClass.simpleName, deviceName = deviceName)
     private val isRunning = AtomicReference<Boolean>()
+    private val startScanningTrigger = AtomicBoolean(false)
 
     fun startConnectionToDevice() {
-        logger.i("startConnectionToDevice", "connect to device=$deviceName start")
+        logger.i("The connection establishment to device started")
         isRunning.set(true)
         WatchdogThread().start()
     }
 
     fun stopConnectionToDevice() {
-        logger.i("stopConnectionToDevice", "connection to device=$deviceName was stopped")
+        logger.i("The connection interruption to device started")
         isRunning.set(false)
         connectionServer.tryDisconnect()
+        logger.i("The connection interruption to device completed")
     }
 
     private inner class WatchdogThread : Thread() {
         override fun run() {
-            logger.i("WatchdogThread.run", "WatchdogThread is started from Desktop to Device=$deviceName")
+            logger.i("WatchdogThread is started from Desktop to Device")
             while (isRunning.get()) {
                 if (!connectionServer.isConnected()) {
                     try {
-                        logger.i("WatchdogThread.run", "Try to connect to Device=$deviceName...")
+                        logger.d(
+                            "The attempt to connect to Device. " +
+                                    "It may take time because the device can be not ready (for example, a kaspresso test was not started)."
+                        )
+                        if (startScanningTrigger.compareAndSet(false, true)) {
+                            logger.i(
+                                "Desktop tries to connect to the Device.\n " +
+                                        "It may take time because the device can be not ready. Possible reasons:\n " +
+                                        "1. A kaspresso test has not been started.\n " +
+                                        "2. The device port has not been released because Android OS has some time gap to turn the port state."
+                            )
+                        }
                         connectionServer.tryConnect()
+                        if (connectionServer.isConnected()) {
+                            startScanningTrigger.set(false)
+                            logger.i("The attempt to connect to Device was success")
+                        }
                     } catch (exception: Exception) {
-                        logger.i("WatchdogThread,run", "The attempt to connect to Device=$deviceName was with exception: $exception")
+                        logger.i("The attempt to connect to Device failed with exception: $exception")
                     }
                 }
-                sleep(CONNECTION_WAIT_MS)
+                sleep(WATCHDOG_CONNECTION_WAIT_MS)
             }
         }
     }

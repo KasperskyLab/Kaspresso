@@ -1,56 +1,98 @@
 package com.kaspresky.adbserver.log.fulllogger
 
+import java.text.SimpleDateFormat
+import java.util.Date
+
 /**
  * Presents logs in the form like:
- * INFO:_____tag=ConnectionMaker____________method=connect()_________________message => start
- * INFO:_____tag=ConnectionMaker____________method=connect()_________________message => current state=DISCONNECTED
+ * INFO 17/08/2020 09:53:52.234 desktop=Desktop-48633 device=emulator-5554 message: updated state=CONNECTED.
+ * There are two kinds of logs:
+ * 1. INFO 17/08/2020 09:53:52.234 desktop=Desktop-48633 device=emulator-5554 message: updated state=CONNECTED
+ * This form is using when logMode (the field) == INFO. Also, a user watches only INFO, WARNING and ERROR logs.
+ * 2. INFO 17/08/2020 09:53:52.234 desktop=Desktop-48633 device=emulator-5554 tag=ConnectionMaker method=connect message: updated state=CONNECTED
+ * This form is using when logMode (the field) == DEBUG. Also, a user watches all logs.
  */
-internal class FullLoggerSystemImpl : FullLogger {
+internal class FullLoggerSystemImpl(
+    private val logMode: FullLogger.LogLevel,
+    private val desktopName: String?,
+    private val deviceName: String?
+) : FullLogger {
 
     companion object {
-        private const val COMMON_FIELD_LENGTH = 43
-        private const val TAG_FIELD_LENGTH = 5
         private const val DEVICE = "device="
         private const val TAG = "tag="
         private const val METHOD = "method="
-        private const val MESSAGE = "message => "
+        private const val MESSAGE = "message: "
+        private const val DESKTOP = "desktop="
+        private const val EMPTY_STRING = ""
+        private const val IGNORE_CLASSES = "com.kaspresky.adbserver.log"
     }
 
+    private val formatter = SimpleDateFormat("dd/MM/yyyy HH:mm:ss.SSS")
+
     override fun log(
-        logType: FullLogger.LogType?,
-        deviceName: String?,
+        logLevel: FullLogger.LogLevel?,
         tag: String?,
         method: String?,
         text: String?
     ) {
-        val fullLog = "${getLogType(logType)}${getDevice(deviceName)}${getTag(tag)}" +
-                "${getMethod(method)}${getText(text)}"
-        if (logType == FullLogger.LogType.ERROR) {
-            System.err.println(fullLog)
-            return
+        if (logLevel != null && logMode <= logLevel) {
+            val fullLog = "${getLogType(logLevel)} ${getDate()} ${getDesktop()} ${getDevice()} ${getTag(tag)} " +
+                    "${getMethod(method)} ${getText(text)}"
+            if (logLevel == FullLogger.LogLevel.ERROR) {
+                System.err.println(fullLog)
+                return
+            }
+            println(fullLog)
         }
-        println(fullLog)
     }
 
-    private fun getLogType(logType: FullLogger.LogType?): String =
-        if (logType != null) { "${getFieldString(logType.name, TAG_FIELD_LENGTH)}____" } else { "" }
+    private fun getLogType(logLevel: FullLogger.LogLevel?): String =
+            logLevel?.name ?: EMPTY_STRING
 
-    private fun getDevice(deviceName: String?): String =
-        if (deviceName != null) { "$DEVICE${deviceName}____" } else { "" }
+    private fun getDevice(): String =
+            if (deviceName != null) {
+                "$DEVICE$deviceName"
+            } else {
+                EMPTY_STRING
+            }
 
-    private fun getTag(tag: String?): String =
-        if (tag != null) { "$TAG${getFieldString(tag)}" } else ""
+    private fun getDesktop(): String =
+            if (desktopName != null) {
+                "$DESKTOP$desktopName"
+            } else {
+                EMPTY_STRING
+            }
 
-    private fun getMethod(method: String?): String =
-        if (method != null) { "$METHOD${getFieldString(method)}" } else ""
+    private fun getTag(tag: String?): String {
+        if (logMode != FullLogger.LogLevel.DEBUG) return EMPTY_STRING
+        if (tag != null) return "$TAG$tag "
+        val generatedTagName = getStackElement().className.substringAfterLast('.')
+        return "$TAG$generatedTagName "
+    }
+
+    private fun getMethod(method: String?): String {
+        if (logMode != FullLogger.LogLevel.DEBUG) return EMPTY_STRING
+        if (method != null) return "$METHOD$method "
+        val generatedMethodName = getStackElement().methodName
+        return "$METHOD$generatedMethodName "
+    }
 
     private fun getText(text: String?): String =
-        if (text != null) { "$MESSAGE$text" } else ""
+            if (text != null) {
+                "$MESSAGE$text"
+            } else EMPTY_STRING
 
-    private fun getFieldString(text: String, length: Int = COMMON_FIELD_LENGTH): String {
-        if (text.length >= length) {
-            return text + "_"
+    private fun getDate(): String {
+        val date = formatter.format(Date())
+        return if (date != null) {
+            "$date "
+        } else {
+            EMPTY_STRING
         }
-        return text + "_".repeat(length - text.length)
     }
+
+    private fun getStackElement(): StackTraceElement =
+        Throwable().stackTrace
+            .first { !it.className.contains(IGNORE_CLASSES) }
 }

@@ -88,7 +88,7 @@ class AdbServerImpl(
                 logger.i("Command=$command was performed with result=$result")
             }
             .onEach { (command, result) ->
-                if (result.status == ExecutorResultStatus.FAILED) {
+                if (result.status == ExecutorResultStatus.FAILURE) {
                     throw AdbServerException("Command=$command was performed with failed result=$result")
                 }
                 if (result.status == ExecutorResultStatus.TIMEOUT) {

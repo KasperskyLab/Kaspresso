@@ -8,9 +8,7 @@ buildscript {
     repositories {
         jcenter()
         google()
-        maven {
-            url = uri("https://plugins.gradle.org/m2/")
-        }
+        maven { url = uri("https://plugins.gradle.org/m2/") }
     }
 
     dependencies {
@@ -114,5 +112,6 @@ allprojects {
     repositories {
         jcenter()
         google()
+        maven { url = uri("https://kotlin.bintray.com/kotlinx") }
     }
 }

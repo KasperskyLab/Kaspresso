@@ -3,45 +3,58 @@ package com.kaspersky.adbserver
 import com.kaspersky.adbserver.api.Command
 import com.kaspersky.adbserver.api.CommandResult
 import com.kaspersky.adbserver.api.ConnectionClient
+import com.kaspersky.adbserver.api.ConnectionClientLifecycle
 import com.kaspersky.adbserver.api.ConnectionFactory
 import com.kaspersky.adbserver.api.ExecutorResultStatus
-import com.kaspresky.adbserver.log.LoggerFactory
+import com.kaspresky.adbserver.log.logger.Logger
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicBoolean
 
 internal class Device private constructor(
-    private val connectionClient: ConnectionClient
+    private val connectionClient: ConnectionClient,
+    private val logger: Logger
 ) {
 
     companion object {
         private const val CONNECTION_ESTABLISH_TIMEOUT_SEC = 5L
         private const val CONNECTION_WAIT_MS = 200L
+        private const val WATCHDOG_CONNECTION_WAIT_MS = 1_000L
 
-        fun create(): Device {
+        fun create(logger: Logger): Device {
             val desktopDeviceSocketConnection =
                 DesktopDeviceSocketConnectionFactory.getSockets(
                     DesktopDeviceSocketConnectionType.FORWARD
                 )
+            val connectionClientLifecycle = object : ConnectionClientLifecycle {
+                override fun onDisconnectedBySocketProblems() {
+                    logger.i(
+                        "The socket connection was interrupted. " +
+                                "The possible reason is the Desktop was killed"
+                    )
+                }
+            }
             val connectionClient = ConnectionFactory.createClient(
-                desktopDeviceSocketConnection.getDeviceSocketLoad()
+                desktopDeviceSocketConnection.getDeviceSocketLoad(logger),
+                logger,
+                connectionClientLifecycle
             )
-            return Device(connectionClient)
+            return Device(connectionClient, logger)
         }
     }
 
-    private val logger = LoggerFactory.getLogger(tag = javaClass.simpleName)
     private val isRunning = AtomicBoolean(false)
+    private val startScanningTrigger = AtomicBoolean(false)
 
     fun startConnectionToDesktop() {
         if (isRunning.compareAndSet(false, true)) {
-            logger.i("startConnectionToDesktop", "start")
+            logger.i("User called a start of connection to Desktop")
             WatchdogThread().start()
         }
     }
 
     fun stopConnectionToDesktop() {
         if (isRunning.compareAndSet(true, false)) {
-            logger.i("stopConnectionToDesktop", "stop")
+            logger.i("User called a stop of connection to Desktop")
             connectionClient.tryDisconnect()
         }
     }
@@ -54,7 +67,7 @@ internal class Device private constructor(
      * 2. the adb command execution time
      */
     fun fulfill(command: Command): CommandResult {
-        logger.i("fulfill", "Start to execute the command=$command")
+        logger.i("Start to execute the command=$command")
         val commandResult = try {
             awaitConnectionEstablished(CONNECTION_ESTABLISH_TIMEOUT_SEC, TimeUnit.SECONDS)
             connectionClient.executeCommand(command)
@@ -64,7 +77,7 @@ internal class Device private constructor(
                 "The time for the connection establishment is over"
             )
         }
-        logger.i("execute", "The result of command=$command => $commandResult")
+        logger.i("The result of command=$command => $commandResult")
         return commandResult
     }
 
@@ -83,19 +96,31 @@ internal class Device private constructor(
         }
     }
 
-    // todo get name of the device?
-    private inner class WatchdogThread : Thread("Connection watchdog thread from Device to Desktop") {
+    private inner class WatchdogThread : Thread(
+        "Connection watchdog thread from Device to Desktop"
+    ) {
         override fun run() {
-            logger.i("WatchdogThread.run", "WatchdogThread starts from Device to Desktop")
+            logger.i("WatchdogThread is started from Device to Desktop")
             while (isRunning.get()) {
                 if (!connectionClient.isConnected()) {
                     try {
-                        logger.i("WatchdogThread.run", "Try to connect to Desktop...")
+                        if (startScanningTrigger.compareAndSet(false, true)) {
+                            logger.i(
+                                "Device tries to connect to the Desktop. " +
+                                        "It may take time because the Desktop can be not ready " +
+                                        "(for example, there is no active Desktop instance in the local network)."
+                            )
+                        }
                         connectionClient.tryConnect()
+                        if (connectionClient.isConnected()) {
+                            startScanningTrigger.set(false)
+                            logger.i("The attempt to connect to Desktop was success")
+                        }
                     } catch (exception: Exception) {
-                        logger.i("WatchdogThread.run", "The attempt to connect to Desktop was with exception: $exception")
+                        logger.i("The attempt to connect to Desktop was with exception: $exception")
                     }
                 }
+                sleep(WATCHDOG_CONNECTION_WAIT_MS)
             }
         }
     }

@@ -7,7 +7,8 @@ import java.io.Serializable
  */
 data class CommandResult(
     val status: ExecutorResultStatus,
-    val description: String
+    val description: String,
+    val serviceInfo: String? = null
 ) : Serializable
 
 enum class ExecutorResultStatus {
@@ -15,7 +16,7 @@ enum class ExecutorResultStatus {
     SUCCESS,
     // if something went wrong.
     // Possible reasons are problems of server-client connection, wrong command to execute
-    FAILED,
+    FAILURE,
     // the time to establish a connection or to execute a command is over timeout
     TIMEOUT
 }
