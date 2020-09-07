@@ -14,7 +14,7 @@ dependencies {
     implementation(project(Projects.AdbServer.desktopDeviceConnection))
 }
 
-setProperty("mainClassName", "com.kaspersky.adbserver.MainKt")
+setProperty("mainClassName", "com.kaspersky.adbserver.desktop.MainKt")
 
 tasks {
     val jar by getting(Jar::class) {
