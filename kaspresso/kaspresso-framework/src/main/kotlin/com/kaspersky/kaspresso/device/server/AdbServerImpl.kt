@@ -1,8 +1,8 @@
 package com.kaspersky.kaspresso.device.server
 
-import com.kaspersky.adbserver.AdbTerminal
-import com.kaspersky.adbserver.api.CommandResult
-import com.kaspersky.adbserver.api.ExecutorResultStatus
+import com.kaspersky.adbserver.device.AdbTerminal
+import com.kaspersky.adbserver.common.api.CommandResult
+import com.kaspersky.adbserver.common.api.ExecutorResultStatus
 import com.kaspersky.kaspresso.internal.exceptions.AdbServerException
 import com.kaspersky.kaspresso.logger.UiTestLogger
 
