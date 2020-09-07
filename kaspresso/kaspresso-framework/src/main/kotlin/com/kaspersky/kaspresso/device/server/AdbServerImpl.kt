@@ -9,6 +9,8 @@ import com.kaspersky.kaspresso.logger.UiTestLogger
 
 /**
  * The implementation of [AdbServer] interface. Encapsulates all work with adb server.
+ * Please, pay attention to the field [AdbServerLogsType] that provides several types to show logs from adb-server (device part).
+ * More details are available in [AdbServerLogsType].
  */
 class AdbServerImpl(
     adbServerLogsType: AdbServerLogsType,
