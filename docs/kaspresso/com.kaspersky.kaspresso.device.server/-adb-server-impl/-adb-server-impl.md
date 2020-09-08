@@ -5,7 +5,7 @@
 # AdbServerImpl  
 [androidJvm]  
 Content  
-fun [AdbServerImpl](-adb-server-impl.md)(logger: [UiTestLogger](../../com.kaspersky.kaspresso.logger/-ui-test-logger/index.md))  
+fun [AdbServerImpl](-adb-server-impl.md)(adbServerLogsType: [AdbServerLogsType](../-adb-server-logs-type/index.md), logger: [UiTestLogger](../../com.kaspersky.kaspresso.logger/-ui-test-logger/index.md))  
 
 
 

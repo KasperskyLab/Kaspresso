@@ -7,9 +7,17 @@
 
 
 
-This is a comfortable wrapper to work with AdbServer repository. Important notes:
+This is a comfortable wrapper to work with AdbServer repository.
 
-<ol><li>Real connection is established only after a call one of methods of the interface except disconnectServer(). So it's lazy wrapper. Keep it in your mind when you decide to put custom implementation od AdbServer.</li><li>After each test a developer has to disconnect AdbServer. There is disconnectServer() method to complete the disconnection. But Kaspresso calls disconnectServer() after each test if the connection was established during the test. What's why don't worry =)</li></ol>
+
+
+Required: Started AdbServer     1. Download a file "kaspresso/artifacts/adbserver-desktop.jar"     2. Start AdbServer => input in cmd "java -jar path_to_file/adbserver-desktop.jar"
+
+
+
+Important notes:
+
+<ol><li>Real connection is established only after a call one of methods of the interface except disconnectServer(). So it's lazy wrapper. Keep it in your mind when you decide to put custom implementation od AdbServer.</li><li>Kaspresso calls disconnectServer() after each test if the connection was established during the test.</li></ol>
 
 interface [AdbServer](index.md)   
 

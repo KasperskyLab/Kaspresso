@@ -22,6 +22,7 @@ data class [Kaspresso](index.md)(**libLogger**: [UiTestLogger](../../com.kaspers
 |  Name|  Summary| 
 |---|---|
 | [Builder](-builder/index.md)| [androidJvm]  <br>Brief description  <br><br><br>The class for [Kaspresso](index.md) configuration and initialization. This is the way to set Kaspresso preferences.<br><br>  <br>Content  <br>class [Builder](-builder/index.md)  <br><br><br>
+| [Companion](-companion/index.md)| [androidJvm]  <br>Content  <br>object [Companion](-companion/index.md)  <br><br><br>
 
 
 ## Functions  

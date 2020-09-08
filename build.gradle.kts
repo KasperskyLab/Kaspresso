@@ -1,4 +1,5 @@
 import groovy.lang.GroovyObject
+import org.jetbrains.dokka.gradle.DokkaMultiModuleTask
 import org.jfrog.gradle.plugin.artifactory.dsl.PublisherConfig
 import publishing.setup
 import publishing.shouldBePublished
@@ -38,7 +39,11 @@ subprojects {
     }
 
     tasks.dokkaGfm.configure {
-        outputDirectory.set(File("$rootDir${File.separator}docs"))
+        val parentDir = when {
+            parent != rootProject || parent != null -> File.separator + parent?.name
+            else -> ""
+        }
+        outputDirectory.set(File(rootDir.path + File.separator + "docs" + parentDir))
     }
 
     detekt {

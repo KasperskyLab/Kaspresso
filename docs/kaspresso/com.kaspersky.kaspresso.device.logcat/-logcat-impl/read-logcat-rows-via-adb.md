@@ -9,7 +9,7 @@ Brief description
 
 
 
-Required Permissions: READ_EXTERNAL_STORAGE. Required: Started AdbServer     1. Download a file "kaspresso/artifacts/desktop.jar"     2. Start AdbServer => input in cmd "java jar path_to_file/desktop.jar"
+Required Permissions: READ_EXTERNAL_STORAGE. Required: Started AdbServer     1. Download a file "kaspresso/artifacts/adbserver-desktop.jar"     2. Start AdbServer => input in cmd "java jar path_to_file/adbserver-desktop.jar"
 
 
 

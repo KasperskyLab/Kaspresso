@@ -26,7 +26,7 @@ androidJvm
 |  Name|  Summary| 
 |---|---|
 | devicePath| <br><br>a file path relative to the device directory.<br><br>
-| serverPath| <br><br>a path to copy. (If empty - pulls in adbServer directory (folder with file "desktop.jar"))<br><br>
+| serverPath| <br><br>a path to copy. (If empty - pulls in adbServer directory (folder with file "adbserver-desktop.jar"))<br><br>
   
   
 Content  

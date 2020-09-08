@@ -11,7 +11,7 @@ Special annotation to mark methods or classes that require AdbServer to be start
 
 
 
-Required: Started AdbServer     1. Download a file "kaspresso/artifacts/desktop.jar"     2. Start AdbServer => input in cmd "java -jar path_to_file/desktop.jar"
+Required: Started AdbServer     1. Download a file "kaspresso/artifacts/adbserver-desktop.jar"     2. Start AdbServer => input in cmd "java -jar path_to_file/adbserver-desktop.jar"
 
 
 

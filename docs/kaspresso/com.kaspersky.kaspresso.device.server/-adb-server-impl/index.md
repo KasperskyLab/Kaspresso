@@ -5,16 +5,16 @@
 # AdbServerImpl  
  [androidJvm] 
 
-The implementation of [AdbServer](../-adb-server/index.md) interface. Encapsulates all work with adb server.
+The implementation of [AdbServer](../-adb-server/index.md) interface. Encapsulates all work with adb server. Please, pay attention to the field [AdbServerLogsType](../-adb-server-logs-type/index.md) that provides several types to show logs from adb-server (device part). More details are available in [AdbServerLogsType](../-adb-server-logs-type/index.md).
 
-class [AdbServerImpl](index.md)(**logger**: [UiTestLogger](../../com.kaspersky.kaspresso.logger/-ui-test-logger/index.md)) : [AdbServer](../-adb-server/index.md)   
+class [AdbServerImpl](index.md)(**adbServerLogsType**: [AdbServerLogsType](../-adb-server-logs-type/index.md), **logger**: [UiTestLogger](../../com.kaspersky.kaspresso.logger/-ui-test-logger/index.md)) : [AdbServer](../-adb-server/index.md)   
 
 
 ## Constructors  
   
 |  Name|  Summary| 
 |---|---|
-| [AdbServerImpl](-adb-server-impl.md)|  [androidJvm] fun [AdbServerImpl](-adb-server-impl.md)(logger: [UiTestLogger](../../com.kaspersky.kaspresso.logger/-ui-test-logger/index.md))   <br>
+| [AdbServerImpl](-adb-server-impl.md)|  [androidJvm] fun [AdbServerImpl](-adb-server-impl.md)(adbServerLogsType: [AdbServerLogsType](../-adb-server-logs-type/index.md), logger: [UiTestLogger](../../com.kaspersky.kaspresso.logger/-ui-test-logger/index.md))   <br>
 
 
 ## Functions  
