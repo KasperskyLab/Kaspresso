@@ -3,22 +3,24 @@ package com.kaspersky.adbserver.implementation
 import com.kaspersky.adbserver.api.CommandExecutor
 import com.kaspersky.adbserver.api.CommandResult
 import com.kaspersky.adbserver.api.ConnectionServer
+import com.kaspersky.adbserver.api.ConnectionServerLifecycle
 import com.kaspersky.adbserver.implementation.lightsocket.LightSocketWrapperImpl
+import com.kaspersky.adbserver.implementation.transferring.ExpectedEOFException
 import com.kaspersky.adbserver.implementation.transferring.ResultMessage
 import com.kaspersky.adbserver.implementation.transferring.SocketMessagesTransferring
 import com.kaspersky.adbserver.implementation.transferring.TaskMessage
-import com.kaspresky.adbserver.log.LoggerFactory
+import com.kaspresky.adbserver.log.logger.Logger
 import java.net.Socket
 import java.util.concurrent.Executors
 
 internal class ConnectionServerImplBySocket(
     private val socketCreation: () -> Socket,
     private val commandExecutor: CommandExecutor,
-    private val deviceName: String
+    private val logger: Logger,
+    private val connectionServerLifecycle: ConnectionServerLifecycle
 ) : ConnectionServer {
 
-    private val logger = LoggerFactory.getLogger(tag = javaClass.simpleName, deviceName = deviceName)
-    private var connectionMaker: ConnectionMaker = ConnectionMaker(deviceName)
+    private var connectionMaker: ConnectionMaker = ConnectionMaker(logger)
 
     private var _socket: Socket? = null
     private val socket: Socket
@@ -31,30 +33,45 @@ internal class ConnectionServerImplBySocket(
     private val backgroundExecutor = Executors.newCachedThreadPool()
 
     override fun tryConnect() {
-        logger.i("tryConnect", "start")
+        logger.d("Start the process")
         connectionMaker.connect(
-            connectAction = { _socket = socketCreation.invoke() },
+            connectAction = {
+                _socket = socketCreation.invoke()
+                _socketMessagesTransferring = SocketMessagesTransferring.createTransferring(
+                    lightSocketWrapper = LightSocketWrapperImpl(socket),
+                    disruptAction = {
+                        tryDisconnect()
+                        connectionServerLifecycle.onDisconnectedBySocketProblems()
+                    },
+                    logger = logger
+                )
+                socketMessagesTransferring.prepareListening()
+            },
             successConnectAction = {
-                logger.i("tryConnect", "start handleMessages")
+                logger.d("The connection is ready. Start messages listening")
                 handleMessages()
+            },
+            failureConnectAction = { exception ->
+                _socket?.close()
+                _socket = null
+                _socketMessagesTransferring = null
+
+                val errorReasonMessage = if (exception is ExpectedEOFException)
+                    "The most possible reason is the opposite socket is not ready yet"
+                else "The exception=$exception"
+                logger.d("The connection establishment attempt failed. $errorReasonMessage")
             }
         )
-        logger.i("tryConnect", "attempt completed")
     }
 
     private fun handleMessages() {
-        _socketMessagesTransferring = SocketMessagesTransferring.createTransferring(
-            lightSocketWrapper = LightSocketWrapperImpl(
-                socket
-            ),
-            disruptAction = { tryDisconnect() },
-            deviceName = deviceName
-        )
         socketMessagesTransferring.startListening { taskMessage ->
-            logger.i("handleMessages", "received taskMessage=$taskMessage")
+            connectionServerLifecycle.onReceivedTask(taskMessage.command)
+            logger.d("Received taskMessage=$taskMessage")
             backgroundExecutor.execute {
                 val result = commandExecutor.execute(taskMessage.command)
-                logger.i("handleMessages.backgroundExecutor", "result of taskMessage=$taskMessage => result=$result")
+                connectionServerLifecycle.onExecutedTask(taskMessage.command, result)
+                logger.d("Result of taskMessage=$taskMessage => result=$result")
                 socketMessagesTransferring.sendMessage(
                     ResultMessage(
                         taskMessage.command,
@@ -66,14 +83,12 @@ internal class ConnectionServerImplBySocket(
     }
 
     override fun tryDisconnect() {
-        logger.i("tryDisconnect", "start")
+        logger.d("Start the process")
         connectionMaker.disconnect {
-            // there is a chance that `tryDisconnect` method may be called while the connection process is is progress
-            // that's why socket and socket transferring may be not initialised
-            _socketMessagesTransferring?.stopListening()
-            _socket?.close()
+            socketMessagesTransferring.stopListening()
+            socket.close()
         }
-        logger.i("tryDisconnect", "attempt completed")
+        logger.d("Success disconnection")
     }
 
     override fun isConnected(): Boolean =

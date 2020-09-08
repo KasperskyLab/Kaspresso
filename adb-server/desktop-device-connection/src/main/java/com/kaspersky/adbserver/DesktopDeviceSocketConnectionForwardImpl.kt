@@ -1,14 +1,12 @@
 package com.kaspersky.adbserver
 
 import com.kaspersky.adbserver.api.CommandExecutor
-import com.kaspresky.adbserver.log.LoggerFactory
+import com.kaspresky.adbserver.log.logger.Logger
 import java.net.ServerSocket
 import java.net.Socket
 import kotlin.random.Random
 
-internal class DesktopDeviceSocketConnectionForwardImpl(
-    deviceName: String?
-) : DesktopDeviceSocketConnection {
+internal class DesktopDeviceSocketConnectionForwardImpl : DesktopDeviceSocketConnection {
 
     companion object {
         private const val DEVICE_PORT: Int = 8500
@@ -17,23 +15,22 @@ internal class DesktopDeviceSocketConnectionForwardImpl(
         private const val LOCAL_HOST: String = "127.0.0.1"
     }
 
-    private val desktopLogger = LoggerFactory.getLogger(tag = javaClass.simpleName, deviceName = deviceName)
-    private val deviceLogger = LoggerFactory.getLogger(tag = javaClass.simpleName)
     private val clientPortsList: MutableList<Int> = mutableListOf()
 
-    override fun getDesktopSocketLoad(executor: CommandExecutor): () -> Socket {
+    override fun getDesktopSocketLoad(executor: CommandExecutor, logger: Logger): () -> Socket {
         val clientPort = getFreePort()
-        desktopLogger.i("getDesktopSocketLoad", "calculated desktop client port=$clientPort")
+        logger.d("calculated desktop client port=$clientPort")
         forwardPorts(
             executor,
             clientPort,
-            DEVICE_PORT
+            DEVICE_PORT,
+            logger
         )
-        desktopLogger.i("getDesktopSocketLoad", "desktop client port=$clientPort is forwarding with device server port=$DEVICE_PORT")
+        logger.d("desktop client port=$clientPort is forwarding with device server port=$DEVICE_PORT")
         return {
-            desktopLogger.i("getDesktopSocketLoad", "started with ip=$LOCAL_HOST, port=$clientPort")
+            logger.d("started with ip=$LOCAL_HOST, port=$clientPort")
             val readyClientSocket = Socket(LOCAL_HOST, clientPort)
-            desktopLogger.i("getDesktopSocketLoad", "completed with ip=$LOCAL_HOST, port=$clientPort")
+            logger.d("completed with ip=$LOCAL_HOST, port=$clientPort")
             readyClientSocket
         }
     }
@@ -53,17 +50,17 @@ internal class DesktopDeviceSocketConnectionForwardImpl(
         return newClientPort
     }
 
-    private fun forwardPorts(executor: CommandExecutor, fromPort: Int, toPort: Int) {
-        desktopLogger.i("forwardPorts(fromPort=$fromPort, toPort=$toPort)", "started")
+    private fun forwardPorts(executor: CommandExecutor, fromPort: Int, toPort: Int, logger: Logger) {
+        logger.d("fromPort=$fromPort, toPort=$toPort started")
         val result = executor.execute(AdbCommand("forward tcp:$fromPort tcp:$toPort"))
-        desktopLogger.i("forwardPorts(fromPort=$fromPort, toPort=$toPort)", "result=$result")
+        logger.d("fromPort=$fromPort, toPort=$toPort) finished with result=$result")
     }
 
-    override fun getDeviceSocketLoad(): () -> Socket = {
-        deviceLogger.i("getDeviceSocketLoad", "started")
+    override fun getDeviceSocketLoad(logger: Logger): () -> Socket = {
+        logger.d("Started")
         val serverSocket = ServerSocket(DEVICE_PORT)
         val readyServerSocket = serverSocket.accept()
-        deviceLogger.i("getDeviceSocketLoad", "completed")
+        logger.d("Completed")
         readyServerSocket
     }
 }

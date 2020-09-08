@@ -1,6 +1,7 @@
 package com.kaspersky.adbserver
 
 import com.kaspersky.adbserver.api.CommandExecutor
+import com.kaspresky.adbserver.log.logger.Logger
 import java.net.Socket
 
 /**
@@ -12,7 +13,7 @@ import java.net.Socket
  */
 interface DesktopDeviceSocketConnection {
 
-    fun getDesktopSocketLoad(executor: CommandExecutor): () -> Socket
+    fun getDesktopSocketLoad(executor: CommandExecutor, logger: Logger): () -> Socket
 
-    fun getDeviceSocketLoad(): () -> Socket
+    fun getDeviceSocketLoad(logger: Logger): () -> Socket
 }

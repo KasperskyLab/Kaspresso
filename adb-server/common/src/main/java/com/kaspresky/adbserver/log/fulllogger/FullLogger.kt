@@ -3,16 +3,16 @@ package com.kaspresky.adbserver.log.fulllogger
 internal interface FullLogger {
 
     fun log(
-        logType: LogType? = null,
-        deviceName: String? = null,
+        logLevel: LogLevel? = null,
         tag: String? = null,
         method: String? = null,
         text: String? = null
     )
 
-    enum class LogType {
-        INFO,
+    enum class LogLevel {
         DEBUG,
+        INFO,
+        WARNING,
         ERROR
     }
 }
