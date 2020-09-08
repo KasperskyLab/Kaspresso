@@ -1,13 +1,13 @@
 include(
     ":allure-model",
 
-    ":adb-server:command-types",
-    ":adb-server:common",
-    ":adb-server:connection",
-    ":adb-server:desktop",
-    ":adb-server:desktop-device-connection",
-    ":adb-server:device",
-    ":adb-server:sample",
+    ":adb-server:adbserver-command-types",
+    ":adb-server:adbserver-common",
+    ":adb-server:adbserver-connection",
+    ":adb-server:adbserver-desktop",
+    ":adb-server:adbserver-desktop-device-connection",
+    ":adb-server:adbserver-device",
+    ":adb-server:adbserver-sample",
 
     ":kaspresso",
     ":kautomator",
