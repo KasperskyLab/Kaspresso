@@ -1,4 +1,6 @@
 include(
+    ":allure-model",
+
     ":adb-server:command-types",
     ":adb-server:common",
     ":adb-server:connection",
@@ -7,11 +9,10 @@ include(
     ":adb-server:device",
     ":adb-server:sample",
 
-    ":kaspresso:kaspresso-framework",
-    ":kaspresso:allure-model",
-    ":kaspresso:kaspresso-sample",
+    ":kaspresso",
+    ":kautomator",
 
-    ":kautomator:kautomator-framework",
-    ":kautomator:kautomator-sample",
-    ":kautomator:kautomator-sample-app-upgrade"
+    ":samples:kaspresso-sample",
+    ":samples:kautomator-sample",
+    ":samples:kautomator-sample-app-upgrade"
 )

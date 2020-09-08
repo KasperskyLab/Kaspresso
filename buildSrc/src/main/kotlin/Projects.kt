@@ -9,10 +9,10 @@ object Projects {
     }
 
     object Kaspresso {
-        const val framework = ":kaspresso:kaspresso-framework"
+        const val framework = ":kaspresso"
     }
 
     object Kautomator {
-        const val framework = ":kautomator:kautomator-framework"
+        const val framework = ":kautomator"
     }
 }
