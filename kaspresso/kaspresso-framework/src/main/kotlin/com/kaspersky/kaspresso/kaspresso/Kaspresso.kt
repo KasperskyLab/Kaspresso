@@ -45,6 +45,7 @@ import com.kaspersky.kaspresso.device.screenshots.screenshotmaker.ExternalScreen
 import com.kaspersky.kaspresso.device.screenshots.screenshotmaker.InternalScreenshotMaker
 import com.kaspersky.kaspresso.device.server.AdbServer
 import com.kaspersky.kaspresso.device.server.AdbServerImpl
+import com.kaspersky.kaspresso.device.server.AdbServerLogsType
 import com.kaspersky.kaspresso.failure.LoggingFailureHandler
 import com.kaspersky.kaspresso.idlewaiting.KautomatorWaitForIdleSettings
 import com.kaspersky.kaspresso.interceptors.behavior.DataBehaviorInterceptor
@@ -124,9 +125,9 @@ data class Kaspresso(
     internal val testRunWatcherInterceptors: List<TestRunWatcherInterceptor>
 ) {
 
-    private companion object {
-        private const val DEFAULT_LIB_LOGGER_TAG: String = "KASPRESSO"
-        private const val DEFAULT_TEST_LOGGER_TAG: String = "KASPRESSO_TEST"
+    companion object {
+        const val DEFAULT_LIB_LOGGER_TAG: String = "KASPRESSO"
+        const val DEFAULT_TEST_LOGGER_TAG: String = "KASPRESSO_TEST"
     }
 
     /**
@@ -560,7 +561,7 @@ data class Kaspresso(
             if (!::libLogger.isInitialized) libLogger = UiTestLoggerImpl(DEFAULT_LIB_LOGGER_TAG)
             if (!::testLogger.isInitialized) testLogger = UiTestLoggerImpl(DEFAULT_TEST_LOGGER_TAG)
 
-            if (!::adbServer.isInitialized) adbServer = AdbServerImpl(libLogger)
+            if (!::adbServer.isInitialized) adbServer = AdbServerImpl(AdbServerLogsType.NO_LOGS, libLogger)
             if (!::apps.isInitialized) apps = AppsImpl(libLogger, instrumentation.context, uiDevice, adbServer)
             if (!::activities.isInitialized) activities = ActivitiesImpl(libLogger)
             if (!::files.isInitialized) files = FilesImpl(adbServer)

@@ -6,8 +6,8 @@
 
 Required Permissions: READ_EXTERNAL_STORAGE.
 Required: Started AdbServer
-    1. Download a file "kaspresso/artifacts/desktop.jar"
-    2. Start AdbServer =&gt; input in cmd "java jar path_to_file/desktop.jar"
+    1. Download a file "kaspresso/artifacts/adbserver-desktop.jar"
+    2. Start AdbServer =&gt; input in cmd "java jar path_to_file/adbserver-desktop.jar"
 
 Get logcat dump via ADB and analyze each row.
 Logcat reading stops if analyzerBlock returns false on some row

@@ -7,6 +7,6 @@
 Holds the reference to the implementation of [Apps](../../com.kaspersky.kaspresso.device.apps/-apps/index.md) interface.
 
 Required: Started AdbServer
-    1. Download a file "kaspresso/artifacts/desktop.jar"
-    2. Start AdbServer =&gt; input in cmd "java jar path_to_file/desktop.jar"
+    1. Download a file "kaspresso/artifacts/adbserver-desktop.jar"
+    2. Start AdbServer =&gt; input in cmd "java jar path_to_file/adbserver-desktop.jar"
 

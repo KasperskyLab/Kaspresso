@@ -25,7 +25,7 @@ fun test() =
 }
 ```
 
-**AdbServer** requires started server side that is called ```desktop.jar```. <br>
-How to start ```desktop.jar```:
-1. Download a file "kaspresso/artifacts/desktop.jar"
-2. Start AdbServer => input in cmd ```java jar path_to_file/desktop.jar```
+**AdbServer** requires started server side that is called ```adbserver-desktop.jar```. <br>
+How to start ```adbserver-desktop.jar```:
+1. Download a file "kaspresso/artifacts/adbserver-desktop.jar"
+2. Start AdbServer => input in cmd ```java jar path_to_file/adbserver-desktop.jar```
