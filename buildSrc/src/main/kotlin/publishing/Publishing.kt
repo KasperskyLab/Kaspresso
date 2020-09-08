@@ -16,7 +16,7 @@ private const val UNSPECIFIED_DEPENDENCY = "unspecified"
 private const val DEPENDENCY_GROUP = "groupId"
 private const val DEPENDENCY_ARTIFACT = "artifactId"
 private const val DEPENDENCY_VERSION = "version"
-private const val DEPENDENCY_KAUTOMATOR = "kautomator-framework"
+private const val DEPENDENCY_KAUTOMATOR = "kautomator"
 private const val DEPENDENCY_KAUTOMATOR_SHORT = "kautomator"
 
 private const val PROPERTY_VERSION = "stableVersion"
@@ -25,8 +25,8 @@ private const val PROPERTY_GROUP_ID = "publish.artifactGroup"
 private const val PROPERTY_ARTIFACT_NAME = "publish.artifactName"
 private const val PROPERTY_PUBLICATION_NAME = "publish.publicationName"
 
-val Project.shouldBePublished get() = name == "kaspresso-framework" ||
-        name == "kautomator-framework"
+val Project.shouldBePublished get() = name == "kaspresso" ||
+        name == "kautomator"
 
 fun PublishingExtension.setup(project: Project) {
     publications {
