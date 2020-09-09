@@ -93,9 +93,8 @@ internal class DeviceMirror private constructor(
                         if (startScanningTrigger.compareAndSet(false, true)) {
                             logger.i(
                                 "Desktop tries to connect to the Device.\n " +
-                                        "It may take time because the device can be not ready. Possible reasons:\n " +
-                                        "1. A kaspresso test has not been started.\n " +
-                                        "2. The device port has not been released because Android OS has some time gap to turn the port state."
+                                        "It may take time because the device can be not ready. Possible reason: " +
+                                        "a kaspresso test has not been started"
                             )
                         }
                         connectionServer.tryConnect()
