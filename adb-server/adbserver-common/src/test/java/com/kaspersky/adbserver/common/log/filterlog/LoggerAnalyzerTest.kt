@@ -2,6 +2,7 @@ package com.kaspersky.adbserver.common.log.filterlog
 
 import com.google.common.truth.Truth.assertThat
 import com.kaspersky.adbserver.common.log.fulllogger.FullLogger
+import com.kaspersky.adbserver.common.log.logger.LogLevel
 import org.junit.jupiter.api.Test
 
 class LoggerAnalyzerTest {
@@ -9,6 +10,7 @@ class LoggerAnalyzerTest {
     private val fullLoggerTest = FullLoggerForTest()
     private val loggerAnalyzer = FullLoggerOptimiser(
         originalFullLogger = fullLoggerTest,
+        generateLogs = false,
         recordingStackMaxSize = 5
     )
 
@@ -88,13 +90,13 @@ class LoggerAnalyzerTest {
         fullLoggerTest.list.clear()
         // logs
         loggerAnalyzer.log(text = "text1")
-        loggerAnalyzer.log(logLevel = FullLogger.LogLevel.INFO, text = "text1")
-        loggerAnalyzer.log(logLevel = FullLogger.LogLevel.DEBUG, text = "text1")
-        loggerAnalyzer.log(logLevel = FullLogger.LogLevel.INFO, text = "text1")
-        loggerAnalyzer.log(logLevel = FullLogger.LogLevel.INFO, tag = "tag1", text = "text1")
-        loggerAnalyzer.log(logLevel = FullLogger.LogLevel.INFO, tag = "tag1", method = "method1", text = "text1")
-        loggerAnalyzer.log(logLevel = FullLogger.LogLevel.INFO, tag = "tag2", method = "method1", text = "text1")
-        loggerAnalyzer.log(logLevel = FullLogger.LogLevel.INFO, tag = "tag1", method = "method2", text = "text1")
+        loggerAnalyzer.log(logLevel = LogLevel.INFO, text = "text1")
+        loggerAnalyzer.log(logLevel = LogLevel.DEBUG, text = "text1")
+        loggerAnalyzer.log(logLevel = LogLevel.INFO, text = "text1")
+        loggerAnalyzer.log(logLevel = LogLevel.INFO, tag = "tag1", text = "text1")
+        loggerAnalyzer.log(logLevel = LogLevel.INFO, tag = "tag1", method = "method1", text = "text1")
+        loggerAnalyzer.log(logLevel = LogLevel.INFO, tag = "tag2", method = "method1", text = "text1")
+        loggerAnalyzer.log(logLevel = LogLevel.INFO, tag = "tag1", method = "method2", text = "text1")
         // verify
         val outputLogs = fullLoggerTest.list
         assertThat(outputLogs[0]).isEqualTo("text1")

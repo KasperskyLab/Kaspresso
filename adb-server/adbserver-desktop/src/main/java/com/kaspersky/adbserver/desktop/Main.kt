@@ -30,8 +30,8 @@ internal fun main(args: Array<String>) {
     val logLevel by parser.option(
         type = ArgType.Choice<LogLevel>(),
         shortName = "l",
-        fullName = "logs",
-        description = "Logs policy"
+        fullName = "logLevel",
+        description = "Logs Level"
     ).default(LogLevel.INFO)
 
     parser.parse(args)

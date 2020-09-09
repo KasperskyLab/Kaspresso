@@ -29,7 +29,7 @@ object LoggerFactory {
     private fun getCommonLogger(logLevel: LogLevel, desktopName: String? = null, deviceName: String? = null): Logger {
         val fullLogger = FullLoggerSystemImpl(logLevel, desktopName, deviceName)
         val fullLoggerWrapper =
-            if (logLevel == LogLevel.DEBUG) FullLoggerOptimiser(fullLogger) else fullLogger
+            if (logLevel == LogLevel.DEBUG) FullLoggerOptimiser(originalFullLogger = fullLogger, generateLogs = true) else fullLogger
         return LoggerImpl(fullLoggerWrapper)
     }
 }

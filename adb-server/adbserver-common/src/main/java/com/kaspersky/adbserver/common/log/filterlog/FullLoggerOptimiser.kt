@@ -8,6 +8,7 @@ import java.util.Deque
 
 internal class FullLoggerOptimiser(
     private val originalFullLogger: FullLogger,
+    private val generateLogs: Boolean,
     recordingStackMaxSize: Int = DEFAULT_RECORDING_STACK_MAX_SIZE
 ) : FullLogger {
 
@@ -26,8 +27,8 @@ internal class FullLoggerOptimiser(
         method: String?,
         text: String?
     ) {
-        val formattedTag = tag ?: AdbLoggerReflection.getGeneratedClass()
-        val formattedMethod = tag ?: AdbLoggerReflection.getGeneratedMethod()
+        val formattedTag = tag ?: if (generateLogs) AdbLoggerReflection.getGeneratedClass() else null
+        val formattedMethod = method ?: if (generateLogs) AdbLoggerReflection.getGeneratedMethod() else null
         handleLog(
             key = "$logLevel$tag$method$text",
             action = { originalFullLogger.log(logLevel, formattedTag, formattedMethod, text) },
