@@ -1,27 +1,11 @@
-//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.testcases.core.testcontext](../index.md)/[TestContext](index.md)/[scenario](scenario.md)
+[kaspresso](../../index.md) / [com.kaspersky.kaspresso.testcases.core.testcontext](../index.md) / [TestContext](index.md) / [scenario](./scenario.md)
 
+# scenario
 
-
-# scenario  
-[androidJvm]  
-Brief description  
-
+`fun scenario(scenario: `[`BaseScenario`](../../com.kaspersky.kaspresso.testcases.api.scenario/-base-scenario/index.md)`<Data>): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 The representation of a composed [TestContext](index.md)'s steps.
 
+### Parameters
 
-
-## Parameters  
-  
-androidJvm  
-  
-|  Name|  Summary| 
-|---|---|
-| scenario| <br><br>the implementation of [BaseScenario](../../com.kaspersky.kaspresso.testcases.api.scenario/-base-scenario/index.md).<br><br>
-  
-  
-Content  
-fun [scenario](scenario.md)(scenario: [BaseScenario](../../com.kaspersky.kaspresso.testcases.api.scenario/-base-scenario/index.md)<[Data](index.md)>)  
-
-
-
+`scenario` - the implementation of [BaseScenario](../../com.kaspersky.kaspresso.testcases.api.scenario/-base-scenario/index.md).

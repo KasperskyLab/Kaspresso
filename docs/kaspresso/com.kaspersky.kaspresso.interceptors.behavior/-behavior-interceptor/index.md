@@ -1,30 +1,21 @@
-//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.interceptors.behavior](../index.md)/[BehaviorInterceptor](index.md)
+[kaspresso](../../index.md) / [com.kaspersky.kaspresso.interceptors.behavior](../index.md) / [BehaviorInterceptor](./index.md)
 
+# BehaviorInterceptor
 
+`interface BehaviorInterceptor<Interaction>`
 
-# BehaviorInterceptor  
- [androidJvm] 
+The interface for all interceptors that change the default interaction in Kakao=&gt;Espresso. Often it wraps the interaction calls.
 
-The interface for all interceptors that change the default interaction in Kakao=>Espresso. Often it wraps the interaction calls.
+### Functions
 
-interface [BehaviorInterceptor](index.md)<[Interaction](index.md)>   
-
-
-## Functions  
-  
-|  Name|  Summary| 
+| Name | Summary |
 |---|---|
-| [equals](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/equals.html)| [androidJvm]  <br>Content  <br>open operator override fun [equals](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/equals.html)(other: [Any](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)?): [Boolean](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)  <br><br><br>
-| [hashCode](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/hash-code.html)| [androidJvm]  <br>Content  <br>open override fun [hashCode](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/hash-code.html)(): [Int](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)  <br><br><br>
-| [intercept](intercept.md)| [androidJvm]  <br>Brief description  <br><br><br>Called to do some stuff and actually perform an interaction with element.<br><br>  <br>Content  <br>abstract fun <[T](intercept.md)> [intercept](intercept.md)(interaction: [Interaction](index.md), action: () -> [T](intercept.md)): [T](intercept.md)  <br><br><br>
-| [toString](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/to-string.html)| [androidJvm]  <br>Content  <br>open override fun [toString](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/to-string.html)(): [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)  <br><br><br>
+| [intercept](intercept.md) | Called to do some stuff and actually perform an interaction with element.`abstract fun <T> intercept(interaction: Interaction, action: () -> T): T` |
 
+### Inheritors
 
-## Inheritors  
-  
-|  Name| 
-|---|
-| [DataBehaviorInterceptor](../-data-behavior-interceptor/index.md)
-| [ViewBehaviorInterceptor](../-view-behavior-interceptor/index.md)
-| [WebBehaviorInterceptor](../-web-behavior-interceptor/index.md)
-
+| Name | Summary |
+|---|---|
+| [DataBehaviorInterceptor](../-data-behavior-interceptor.md) | The derived from [BehaviorInterceptor](./index.md) interface for intercepting [DataInteraction.check](#) behavior.`interface DataBehaviorInterceptor : `[`BehaviorInterceptor`](./index.md)`<DataInteraction>` |
+| [ViewBehaviorInterceptor](../-view-behavior-interceptor.md) | The derived from [BehaviorInterceptor](./index.md) interface for intercepting [ViewInteraction.perform](#) and [ViewInteraction.check](#) behavior.`interface ViewBehaviorInterceptor : `[`BehaviorInterceptor`](./index.md)`<ViewInteraction>` |
+| [WebBehaviorInterceptor](../-web-behavior-interceptor.md) | The derived from [BehaviorInterceptor](./index.md) interface for intercepting [Web.WebInteraction.perform](#) and [Web.WebInteraction.check](#) behavior.`interface WebBehaviorInterceptor : `[`BehaviorInterceptor`](./index.md)`<WebInteraction<*>>` |

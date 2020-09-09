@@ -1,34 +1,16 @@
-//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.testcases.api.testcase](../index.md)/[DocLocScreenshotTestCase](index.md)/[getUiSafeProxy](get-ui-safe-proxy.md)
+[kaspresso](../../index.md) / [com.kaspersky.kaspresso.testcases.api.testcase](../index.md) / [DocLocScreenshotTestCase](index.md) / [getUiSafeProxy](./get-ui-safe-proxy.md)
 
+# getUiSafeProxy
 
+`fun <reified I : `[`Any`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)`> getUiSafeProxy(view: I): I`
 
-# getUiSafeProxy  
-[androidJvm]  
-Brief description  
+Return a dynamic proxy for a given view.
+[I](get-ui-safe-proxy.md#I) must be interface.
 
+### Parameters
 
-Return a dynamic proxy for a given view. [I](get-ui-safe-proxy.md) must be interface.
+`view` - proxy target.
 
-
-
-#### Return  
-
-
+**Return**
 a proxy over the given view.
-
-
-
-## Parameters  
-  
-androidJvm  
-  
-|  Name|  Summary| 
-|---|---|
-| view| <br><br>proxy target.<br><br>
-  
-  
-Content  
-inline fun <[I](get-ui-safe-proxy.md) : [Any](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)> [getUiSafeProxy](get-ui-safe-proxy.md)(view: [I](get-ui-safe-proxy.md)): [I](get-ui-safe-proxy.md)  
-
-
 

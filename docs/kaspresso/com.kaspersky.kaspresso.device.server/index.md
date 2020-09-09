@@ -1,15 +1,10 @@
-//[kaspresso](../index.md)/[com.kaspersky.kaspresso.device.server](index.md)
+[kaspresso](../index.md) / [com.kaspersky.kaspresso.device.server](./index.md)
 
+## Package com.kaspersky.kaspresso.device.server
 
+### Types
 
-# Package com.kaspersky.kaspresso.device.server  
-
-
-## Types  
-  
-|  Name|  Summary| 
+| Name | Summary |
 |---|---|
-| [AdbServer](-adb-server/index.md)| [androidJvm]  <br>Brief description  <br><br><br><br><br>This is a comfortable wrapper to work with AdbServer repository.<br><br><br><br>Required: Started AdbServer     1. Download a file "kaspresso/artifacts/adbserver-desktop.jar"     2. Start AdbServer => input in cmd "java -jar path_to_file/adbserver-desktop.jar"<br><br><br><br>Important notes:<br><br><ol><li>Real connection is established only after a call one of methods of the interface except disconnectServer(). So it's lazy wrapper. Keep it in your mind when you decide to put custom implementation od AdbServer.</li><li>Kaspresso calls disconnectServer() after each test if the connection was established during the test.</li></ol><br><br>  <br>Content  <br>interface [AdbServer](-adb-server/index.md)  <br><br><br>
-| [AdbServerImpl](-adb-server-impl/index.md)| [androidJvm]  <br>Brief description  <br><br><br>The implementation of [AdbServer](-adb-server/index.md) interface. Encapsulates all work with adb server. Please, pay attention to the field [AdbServerLogsType](-adb-server-logs-type/index.md) that provides several types to show logs from adb-server (device part). More details are available in [AdbServerLogsType](-adb-server-logs-type/index.md).<br><br>  <br>Content  <br>class [AdbServerImpl](-adb-server-impl/index.md)(**adbServerLogsType**: [AdbServerLogsType](-adb-server-logs-type/index.md), **logger**: [UiTestLogger](../com.kaspersky.kaspresso.logger/-ui-test-logger/index.md)) : [AdbServer](-adb-server/index.md)  <br><br><br>
-| [AdbServerLogsType](-adb-server-logs-type/index.md)| [androidJvm]  <br>Content  <br>enum [AdbServerLogsType](-adb-server-logs-type/index.md) : [Enum](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html)<[AdbServerLogsType](-adb-server-logs-type/index.md)>   <br><br><br>
-
+| [AdbServer](-adb-server/index.md) | This is a comfortable wrapper to work with AdbServer repository. Important notes:`interface AdbServer` |
+| [AdbServerImpl](-adb-server-impl/index.md) | The implementation of [AdbServer](-adb-server/index.md) interface. Encapsulates all work with adb server.`class AdbServerImpl : `[`AdbServer`](-adb-server/index.md) |

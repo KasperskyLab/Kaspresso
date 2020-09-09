@@ -1,24 +1,11 @@
-//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.proxy](../index.md)/[ViewActionProxy](index.md)/[getConstraints](get-constraints.md)
+[kaspresso](../../index.md) / [com.kaspersky.kaspresso.proxy](../index.md) / [ViewActionProxy](index.md) / [getConstraints](./get-constraints.md)
 
+# getConstraints
 
+`fun getConstraints(): Matcher<`[`View`](https://developer.android.com/reference/android/view/View.html)`>`
 
-# getConstraints  
-[androidJvm]  
-Brief description  
+Simply calls [ViewAction.getConstraints](#) on wrapped [viewAction](#).
 
-
-Simply calls ViewAction.getConstraints on wrapped viewAction.
-
-
-
-#### Return  
-
-
+**Return**
 a matcher that will be tested prior to calling perform.
-
-  
-Content  
-open override fun [getConstraints](get-constraints.md)(): Matcher<[View](https://developer.android.com/reference/kotlin/android/view/View.html)>  
-
-
 

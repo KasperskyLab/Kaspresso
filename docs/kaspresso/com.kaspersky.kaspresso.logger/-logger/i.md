@@ -1,28 +1,12 @@
-//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.logger](../index.md)/[Logger](index.md)/[i](i.md)
+[kaspresso](../../index.md) / [com.kaspersky.kaspresso.logger](../index.md) / [Logger](index.md) / [i](./i.md)
 
+# i
 
-
-# i  
-[androidJvm]  
-Brief description  
-
+`abstract fun i(text: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Info level of logging.
 
-  
-Content  
-abstract fun [i](i.md)(text: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html))  
-
-
-[androidJvm]  
-Brief description  
-
+`abstract fun i(tag: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, text: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Info level of logging with tag.
-
-  
-Content  
-abstract fun [i](i.md)(tag: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html), text: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html))  
-
-
 

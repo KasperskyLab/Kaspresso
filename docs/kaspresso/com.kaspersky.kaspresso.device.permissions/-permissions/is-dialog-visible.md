@@ -1,17 +1,8 @@
-//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.device.permissions](../index.md)/[Permissions](index.md)/[isDialogVisible](is-dialog-visible.md)
+[kaspresso](../../index.md) / [com.kaspersky.kaspresso.device.permissions](../index.md) / [Permissions](index.md) / [isDialogVisible](./is-dialog-visible.md)
 
+# isDialogVisible
 
-
-# isDialogVisible  
-[androidJvm]  
-Brief description  
-
+`abstract fun isDialogVisible(): `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)
 
 Check the permission-requesting permissions dialog is visible.
-
-  
-Content  
-abstract fun [isDialogVisible](is-dialog-visible.md)(): [Boolean](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)  
-
-
 

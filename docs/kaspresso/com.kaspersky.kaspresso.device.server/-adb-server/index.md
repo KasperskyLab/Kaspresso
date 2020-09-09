@@ -1,43 +1,28 @@
-//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.device.server](../index.md)/[AdbServer](index.md)
+[kaspresso](../../index.md) / [com.kaspersky.kaspresso.device.server](../index.md) / [AdbServer](./index.md)
 
+# AdbServer
 
-
-# AdbServer  
- [androidJvm] 
-
-
+`interface AdbServer`
 
 This is a comfortable wrapper to work with AdbServer repository.
-
-
-
-Required: Started AdbServer     1. Download a file "kaspresso/artifacts/adbserver-desktop.jar"     2. Start AdbServer => input in cmd "java -jar path_to_file/adbserver-desktop.jar"
-
-
-
 Important notes:
 
-<ol><li>Real connection is established only after a call one of methods of the interface except disconnectServer(). So it's lazy wrapper. Keep it in your mind when you decide to put custom implementation od AdbServer.</li><li>Kaspresso calls disconnectServer() after each test if the connection was established during the test.</li></ol>
+1. Real connection is established only after a call one of methods of the interface except disconnectServer().
+So it's lazy wrapper. Keep it in your mind when you decide to put custom implementation od AdbServer.
+2. After each test a developer has to disconnect AdbServer. There is disconnectServer() method to complete the disconnection.
+But Kaspresso calls disconnectServer() after each test if the connection was established during the test. What's why don't worry =)
 
-interface [AdbServer](index.md)   
+### Functions
 
-
-## Functions  
-  
-|  Name|  Summary| 
+| Name | Summary |
 |---|---|
-| [disconnectServer](disconnect-server.md)| [androidJvm]  <br>Brief description  <br><br><br>Disconnect from AdbServer. The method is called by Kaspresso after each test.<br><br>  <br>Content  <br>abstract fun [disconnectServer](disconnect-server.md)()  <br><br><br>
-| [equals](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/equals.html)| [androidJvm]  <br>Content  <br>open operator override fun [equals](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/equals.html)(other: [Any](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)?): [Boolean](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)  <br><br><br>
-| [hashCode](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/hash-code.html)| [androidJvm]  <br>Content  <br>open override fun [hashCode](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/hash-code.html)(): [Int](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)  <br><br><br>
-| [performAdb](perform-adb.md)| [androidJvm]  <br>Brief description  <br><br><br><br><br>Performs adb commands blocking current thread. Please be aware! If any command that is in @param commands failed then AdbServerException will be thrown<br><br><br><br>Required Permissions: INTERNET.<br><br><br><br>  <br>Content  <br>abstract fun [performAdb](perform-adb.md)(vararg commands: [Array](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html)<Out [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)>): [List](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)<[String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)>  <br><br><br>
-| [performCmd](perform-cmd.md)| [androidJvm]  <br>Brief description  <br><br><br><br><br>Executes shell commands blocking current thread. Please be aware! If any command that is in @param commands failed then AdbServerException will be thrown<br><br><br><br>Required Permissions: INTERNET.<br><br><br><br>  <br>Content  <br>abstract fun [performCmd](perform-cmd.md)(vararg commands: [Array](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html)<Out [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)>): [List](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)<[String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)>  <br><br><br>
-| [performShell](perform-shell.md)| [androidJvm]  <br>Brief description  <br><br><br><br><br>Performs shell commands blocking current thread. Please be aware! If any command that is in @param commands failed then AdbServerException will be thrown<br><br><br><br>Required Permissions: INTERNET.<br><br><br><br>  <br>Content  <br>abstract fun [performShell](perform-shell.md)(vararg commands: [Array](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html)<Out [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)>): [List](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)<[String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)>  <br><br><br>
-| [toString](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/to-string.html)| [androidJvm]  <br>Content  <br>open override fun [toString](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/to-string.html)(): [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)  <br><br><br>
+| [disconnectServer](disconnect-server.md) | Disconnect from AdbServer. The method is called by Kaspresso after each test.`abstract fun disconnectServer(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [performAdb](perform-adb.md) | Performs adb commands blocking current thread. Please be aware! If any command that is in @param commands failed then AdbServerException will be thrown`abstract fun performAdb(vararg commands: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`List`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)`<`[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`>` |
+| [performCmd](perform-cmd.md) | Executes shell commands blocking current thread. Please be aware! If any command that is in @param commands failed then AdbServerException will be thrown`abstract fun performCmd(vararg commands: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`List`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)`<`[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`>` |
+| [performShell](perform-shell.md) | Performs shell commands blocking current thread. Please be aware! If any command that is in @param commands failed then AdbServerException will be thrown`abstract fun performShell(vararg commands: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`List`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)`<`[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`>` |
 
+### Inheritors
 
-## Inheritors  
-  
-|  Name| 
-|---|
-| [AdbServerImpl](../-adb-server-impl/index.md)
-
+| Name | Summary |
+|---|---|
+| [AdbServerImpl](../-adb-server-impl/index.md) | The implementation of [AdbServer](./index.md) interface. Encapsulates all work with adb server.`class AdbServerImpl : `[`AdbServer`](./index.md) |

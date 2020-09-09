@@ -1,17 +1,8 @@
-//[kautomator](../../index.md)/[com.kaspersky.components.kautomator.component.common.assertions](../index.md)/[UiBaseAssertions](index.md)/[isSelected](is-selected.md)
+[kautomator](../../index.md) / [com.kaspersky.components.kautomator.component.common.assertions](../index.md) / [UiBaseAssertions](index.md) / [isSelected](./is-selected.md)
 
+# isSelected
 
-
-# isSelected  
-[androidJvm]  
-Brief description  
-
+`open fun isSelected(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Checks if the view is selected
-
-  
-Content  
-open fun [isSelected](is-selected.md)()  
-
-
 

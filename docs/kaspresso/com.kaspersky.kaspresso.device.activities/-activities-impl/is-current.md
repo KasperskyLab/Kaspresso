@@ -1,17 +1,8 @@
-//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.device.activities](../index.md)/[ActivitiesImpl](index.md)/[isCurrent](is-current.md)
+[kaspresso](../../index.md) / [com.kaspersky.kaspresso.device.activities](../index.md) / [ActivitiesImpl](index.md) / [isCurrent](./is-current.md)
 
+# isCurrent
 
-
-# isCurrent  
-[androidJvm]  
-Brief description  
-
+`fun isCurrent(clazz: `[`Class`](https://docs.oracle.com/javase/6/docs/api/java/lang/Class.html)`<out `[`Activity`](https://developer.android.com/reference/android/app/Activity.html)`>): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Checks if passed activity is resumed.
-
-  
-Content  
-open override fun [isCurrent](is-current.md)(clazz: [Class](https://developer.android.com/reference/kotlin/java/lang/Class.html)<Out [Activity](https://developer.android.com/reference/kotlin/android/app/Activity.html)>)  
-
-
 

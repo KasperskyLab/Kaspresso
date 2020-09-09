@@ -1,17 +1,8 @@
-//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.logger](../index.md)/[UiTestLoggerImpl](index.md)/[footer](footer.md)
+[kaspresso](../../index.md) / [com.kaspersky.kaspresso.logger](../index.md) / [UiTestLoggerImpl](index.md) / [footer](./footer.md)
 
+# footer
 
-
-# footer  
-[androidJvm]  
-Brief description  
-
+`fun footer(text: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Draws up info [i](i.md) as header block.
-
-  
-Content  
-open override fun [footer](footer.md)(text: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html))  
-
-
 

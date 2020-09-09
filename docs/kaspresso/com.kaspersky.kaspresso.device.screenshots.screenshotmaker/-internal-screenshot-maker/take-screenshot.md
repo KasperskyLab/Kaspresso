@@ -1,11 +1,5 @@
-//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.device.screenshots.screenshotmaker](../index.md)/[InternalScreenshotMaker](index.md)/[takeScreenshot](take-screenshot.md)
+[kaspresso](../../index.md) / [com.kaspersky.kaspresso.device.screenshots.screenshotmaker](../index.md) / [InternalScreenshotMaker](index.md) / [takeScreenshot](./take-screenshot.md)
 
+# takeScreenshot
 
-
-# takeScreenshot  
-[androidJvm]  
-Content  
-open override fun [takeScreenshot](take-screenshot.md)(file: [File](https://developer.android.com/reference/kotlin/java/io/File.html))  
-
-
-
+`fun takeScreenshot(file: `[`File`](https://docs.oracle.com/javase/6/docs/api/java/io/File.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)

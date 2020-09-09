@@ -1,38 +1,24 @@
-//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.testcases.core.testassistants](../index.md)/[TestAssistantsProvider](index.md)
+[kaspresso](../../index.md) / [com.kaspersky.kaspresso.testcases.core.testassistants](../index.md) / [TestAssistantsProvider](./index.md)
 
+# TestAssistantsProvider
 
+`interface TestAssistantsProvider`
 
-# TestAssistantsProvider  
- [androidJvm] 
+Provider of test assistants allowed in [com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext](../../com.kaspersky.kaspresso.testcases.core.testcontext/-base-test-context.md),
+[com.kaspersky.kaspresso.testcases.api.testcase.BaseTestCase](../../com.kaspersky.kaspresso.testcases.api.testcase/-base-test-case/index.md) and their inheritors
 
-Provider of test assistants allowed in [com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext](../../com.kaspersky.kaspresso.testcases.core.testcontext/-base-test-context/index.md), [com.kaspersky.kaspresso.testcases.api.testcase.BaseTestCase](../../com.kaspersky.kaspresso.testcases.api.testcase/-base-test-case/index.md) and their inheritors
+### Properties
 
-interface [TestAssistantsProvider](index.md)   
-
-
-## Functions  
-  
-|  Name|  Summary| 
+| Name | Summary |
 |---|---|
-| [equals](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/equals.html)| [androidJvm]  <br>Content  <br>open operator override fun [equals](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/equals.html)(other: [Any](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)?): [Boolean](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)  <br><br><br>
-| [hashCode](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/hash-code.html)| [androidJvm]  <br>Content  <br>open override fun [hashCode](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/hash-code.html)(): [Int](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)  <br><br><br>
-| [toString](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/to-string.html)| [androidJvm]  <br>Content  <br>open override fun [toString](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/to-string.html)(): [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)  <br><br><br>
+| [adbServer](adb-server.md) | `abstract val adbServer: `[`AdbServer`](../../com.kaspersky.kaspresso.device.server/-adb-server/index.md) |
+| [device](device.md) | `abstract val device: `[`Device`](../../com.kaspersky.kaspresso.device/-device/index.md) |
+| [params](params.md) | `abstract val params: `[`Params`](../../com.kaspersky.kaspresso.params/-params/index.md) |
+| [testLogger](test-logger.md) | `abstract val testLogger: `[`UiTestLogger`](../../com.kaspersky.kaspresso.logger/-ui-test-logger.md) |
 
+### Inheritors
 
-## Properties  
-  
-|  Name|  Summary| 
+| Name | Summary |
 |---|---|
-| [adbServer](index.md#com.kaspersky.kaspresso.testcases.core.testassistants/TestAssistantsProvider/adbServer/#/PointingToDeclaration/)|  [androidJvm] abstract val [adbServer](index.md#com.kaspersky.kaspresso.testcases.core.testassistants/TestAssistantsProvider/adbServer/#/PointingToDeclaration/): [AdbServer](../../com.kaspersky.kaspresso.device.server/-adb-server/index.md)   <br>
-| [device](index.md#com.kaspersky.kaspresso.testcases.core.testassistants/TestAssistantsProvider/device/#/PointingToDeclaration/)|  [androidJvm] abstract val [device](index.md#com.kaspersky.kaspresso.testcases.core.testassistants/TestAssistantsProvider/device/#/PointingToDeclaration/): [Device](../../com.kaspersky.kaspresso.device/-device/index.md)   <br>
-| [params](index.md#com.kaspersky.kaspresso.testcases.core.testassistants/TestAssistantsProvider/params/#/PointingToDeclaration/)|  [androidJvm] abstract val [params](index.md#com.kaspersky.kaspresso.testcases.core.testassistants/TestAssistantsProvider/params/#/PointingToDeclaration/): [Params](../../com.kaspersky.kaspresso.params/-params/index.md)   <br>
-| [testLogger](index.md#com.kaspersky.kaspresso.testcases.core.testassistants/TestAssistantsProvider/testLogger/#/PointingToDeclaration/)|  [androidJvm] abstract val [testLogger](index.md#com.kaspersky.kaspresso.testcases.core.testassistants/TestAssistantsProvider/testLogger/#/PointingToDeclaration/): [UiTestLogger](../../com.kaspersky.kaspresso.logger/-ui-test-logger/index.md)   <br>
-
-
-## Inheritors  
-  
-|  Name| 
-|---|
-| [BaseTestCase](../../com.kaspersky.kaspresso.testcases.api.testcase/-base-test-case/index.md)
-| [BaseTestContext](../../com.kaspersky.kaspresso.testcases.core.testcontext/-base-test-context/index.md)
-
+| [BaseTestCase](../../com.kaspersky.kaspresso.testcases.api.testcase/-base-test-case/index.md) | The base class for all parametrized test cases. Extend this class with a single base project-wide inheritor of [TestCase](../../com.kaspersky.kaspresso.testcases.api.testcase/-test-case/index.md) as a parent for all actual project-wide test cases. Nesting test cases are not recommended, use [com.kaspersky.kaspresso.testcases.api.scenario.Scenario](../../com.kaspersky.kaspresso.testcases.api.scenario/-scenario/index.md) instead.`abstract class BaseTestCase<InitData, Data> : `[`TestAssistantsProvider`](./index.md) |
+| [BaseTestContext](../../com.kaspersky.kaspresso.testcases.core.testcontext/-base-test-context.md) | Provides the Kaspresso functionality for "run" section: [Device](../../com.kaspersky.kaspresso.device/-device/index.md), [AdbServer](../../com.kaspersky.kaspresso.device.server/-adb-server/index.md), the [UiTestLogger](../../com.kaspersky.kaspresso.logger/-ui-test-logger.md) implementation for external developers. Also provides flaky safety, composing and web composing functionalities via implementing [FlakySafetyProvider](../../com.kaspersky.kaspresso.flakysafety/-flaky-safety-provider/index.md), [ComposeProvider](../../com.kaspersky.kaspresso.compose/-compose-provider/index.md) and [WebComposeProvider](../../com.kaspersky.kaspresso.compose/-web-compose-provider/index.md) interfaces.`open class BaseTestContext : `[`FlakySafetyProvider`](../../com.kaspersky.kaspresso.flakysafety/-flaky-safety-provider/index.md)`, `[`ContinuouslyProvider`](../../com.kaspersky.kaspresso.flakysafety/-continuously-provider/index.md)`, `[`ComposeProvider`](../../com.kaspersky.kaspresso.compose/-compose-provider/index.md)`, `[`WebComposeProvider`](../../com.kaspersky.kaspresso.compose/-web-compose-provider/index.md)`, `[`TestAssistantsProvider`](./index.md) |

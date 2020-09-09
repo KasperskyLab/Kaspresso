@@ -1,35 +1,25 @@
-//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.device.screenshots.screenshotmaker](../index.md)/[InternalScreenshotMaker](index.md)
+[kaspresso](../../index.md) / [com.kaspersky.kaspresso.device.screenshots.screenshotmaker](../index.md) / [InternalScreenshotMaker](./index.md)
 
+# InternalScreenshotMaker
 
-
-# InternalScreenshotMaker  
- [androidJvm] 
+`class InternalScreenshotMaker : `[`ScreenshotMaker`](../-screenshot-maker/index.md)
 
 Captures the view of a current activity
 
-class [InternalScreenshotMaker](index.md)(**activities**: [Activities](../../com.kaspersky.kaspresso.device.activities/-activities/index.md)) : [ScreenshotMaker](../-screenshot-maker/index.md)   
+### Constructors
 
-
-## Constructors  
-  
-|  Name|  Summary| 
+| Name | Summary |
 |---|---|
-| [InternalScreenshotMaker](-internal-screenshot-maker.md)|  [androidJvm] fun [InternalScreenshotMaker](-internal-screenshot-maker.md)(activities: [Activities](../../com.kaspersky.kaspresso.device.activities/-activities/index.md))   <br>
+| [&lt;init&gt;](-init-.md) | Captures the view of a current activity`InternalScreenshotMaker(activities: `[`Activities`](../../com.kaspersky.kaspresso.device.activities/-activities/index.md)`)` |
 
+### Functions
 
-## Types  
-  
-|  Name|  Summary| 
+| Name | Summary |
 |---|---|
-| [Companion](-companion/index.md)| [androidJvm]  <br>Content  <br>object [Companion](-companion/index.md)  <br><br><br>
+| [takeScreenshot](take-screenshot.md) | `fun takeScreenshot(file: `[`File`](https://docs.oracle.com/javase/6/docs/api/java/io/File.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
 
+### Companion Object Properties
 
-## Functions  
-  
-|  Name|  Summary| 
+| Name | Summary |
 |---|---|
-| [equals](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/equals.html)| [androidJvm]  <br>Content  <br>open operator override fun [equals](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/equals.html)(other: [Any](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)?): [Boolean](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)  <br><br><br>
-| [hashCode](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/hash-code.html)| [androidJvm]  <br>Content  <br>open override fun [hashCode](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/hash-code.html)(): [Int](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)  <br><br><br>
-| [takeScreenshot](take-screenshot.md)| [androidJvm]  <br>Content  <br>open override fun [takeScreenshot](take-screenshot.md)(file: [File](https://developer.android.com/reference/kotlin/java/io/File.html))  <br><br><br>
-| [toString](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/to-string.html)| [androidJvm]  <br>Content  <br>open override fun [toString](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/to-string.html)(): [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)  <br><br><br>
-
+| [PICTURE_QUALITY](-p-i-c-t-u-r-e_-q-u-a-l-i-t-y.md) | `const val PICTURE_QUALITY: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html) |

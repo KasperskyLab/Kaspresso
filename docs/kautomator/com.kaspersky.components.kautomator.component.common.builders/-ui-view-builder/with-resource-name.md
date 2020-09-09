@@ -1,70 +1,25 @@
-//[kautomator](../../index.md)/[com.kaspersky.components.kautomator.component.common.builders](../index.md)/[UiViewBuilder](index.md)/[withResourceName](with-resource-name.md)
+[kautomator](../../index.md) / [com.kaspersky.components.kautomator.component.common.builders](../index.md) / [UiViewBuilder](index.md) / [withResourceName](./with-resource-name.md)
 
+# withResourceName
 
-
-# withResourceName  
-[androidJvm]  
-Brief description  
-
+`fun withResourceName(name: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Matches the view with given resource name
 
+### Parameters
 
-
-## Parameters  
-  
-androidJvm  
-  
-|  Name|  Summary| 
-|---|---|
-| name| <br><br>Resource name to match<br><br>
-  
-  
-Content  
-fun [withResourceName](with-resource-name.md)(name: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html))  
-
-
-[androidJvm]  
-Brief description  
-
+`name` - Resource name to match`fun withResourceName(pattern: `[`Pattern`](https://docs.oracle.com/javase/6/docs/api/java/util/regex/Pattern.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Matches the view with given resource name
 
+### Parameters
 
-
-## Parameters  
-  
-androidJvm  
-  
-|  Name|  Summary| 
-|---|---|
-| pattern| <br><br>Pattern for resource name<br><br>
-  
-  
-Content  
-fun [withResourceName](with-resource-name.md)(pattern: [Pattern](https://developer.android.com/reference/kotlin/java/util/regex/Pattern.html))  
-
-
-[androidJvm]  
-Brief description  
-
+`pattern` - Pattern for resource name`fun withResourceName(packageName: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, name: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Matches the view with given resource name
 
+### Parameters
 
+`packageName` - package name to match
 
-## Parameters  
-  
-androidJvm  
-  
-|  Name|  Summary| 
-|---|---|
-| name| <br><br>Resource name to match<br><br>
-| packageName| <br><br>package name to match<br><br>
-  
-  
-Content  
-fun [withResourceName](with-resource-name.md)(packageName: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html), name: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html))  
-
-
-
+`name` - Resource name to match

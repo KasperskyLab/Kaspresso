@@ -1,4 +1,4 @@
-$dokka.format:gfm-v1
+$dokka.format:gfm
 $dokka.linkExtension:md
 
 androidx.test.uiautomator
@@ -23,4 +23,3 @@ com.kaspersky.components.kautomator.intercept.interaction
 com.kaspersky.components.kautomator.intercept.operation
 com.kaspersky.components.kautomator.screen
 com.kaspersky.components.kautomator.system
-

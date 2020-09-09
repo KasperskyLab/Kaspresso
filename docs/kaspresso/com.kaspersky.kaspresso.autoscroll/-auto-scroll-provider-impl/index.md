@@ -1,29 +1,20 @@
-//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.autoscroll](../index.md)/[AutoScrollProviderImpl](index.md)
+[kaspresso](../../index.md) / [com.kaspersky.kaspresso.autoscroll](../index.md) / [AutoScrollProviderImpl](./index.md)
 
+# AutoScrollProviderImpl
 
+`class AutoScrollProviderImpl : `[`AutoScrollProvider`](../-auto-scroll-provider/index.md)`<ViewInteraction>`
 
-# AutoScrollProviderImpl  
- [androidJvm] 
+The implementation of the [AutoScrollProvider](../-auto-scroll-provider/index.md) interface for [ViewInteraction](#)
 
-The implementation of the [AutoScrollProvider](../-auto-scroll-provider/index.md) interface for ViewInteraction
+### Constructors
 
-class [AutoScrollProviderImpl](index.md)(**params**: [AutoScrollParams](../../com.kaspersky.kaspresso.params/-auto-scroll-params/index.md), **logger**: [UiTestLogger](../../com.kaspersky.kaspresso.logger/-ui-test-logger/index.md)) : [AutoScrollProvider](../-auto-scroll-provider/index.md)<ViewInteraction>    
-
-
-## Constructors  
-  
-|  Name|  Summary| 
+| Name | Summary |
 |---|---|
-| [AutoScrollProviderImpl](-auto-scroll-provider-impl.md)|  [androidJvm] fun [AutoScrollProviderImpl](-auto-scroll-provider-impl.md)(params: [AutoScrollParams](../../com.kaspersky.kaspresso.params/-auto-scroll-params/index.md), logger: [UiTestLogger](../../com.kaspersky.kaspresso.logger/-ui-test-logger/index.md))   <br>
+| [&lt;init&gt;](-init-.md) | The implementation of the [AutoScrollProvider](../-auto-scroll-provider/index.md) interface for [ViewInteraction](#)`AutoScrollProviderImpl(params: `[`AutoScrollParams`](../../com.kaspersky.kaspresso.params/-auto-scroll-params/index.md)`, logger: `[`UiTestLogger`](../../com.kaspersky.kaspresso.logger/-ui-test-logger.md)`)` |
 
+### Functions
 
-## Functions  
-  
-|  Name|  Summary| 
+| Name | Summary |
 |---|---|
-| [equals](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/equals.html)| [androidJvm]  <br>Content  <br>open operator override fun [equals](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/equals.html)(other: [Any](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)?): [Boolean](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)  <br><br><br>
-| [hashCode](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/hash-code.html)| [androidJvm]  <br>Content  <br>open override fun [hashCode](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/hash-code.html)(): [Int](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)  <br><br><br>
-| [scroll](scroll.md)| [androidJvm]  <br>Brief description  <br><br><br>Performs the autoscrolling functionality. Performs scroll and re-invokes the given action.<br><br>  <br>Content  <br>open override fun <[T](scroll.md)> [scroll](scroll.md)(interaction: ViewInteraction, action: () -> [T](scroll.md), cachedError: [Throwable](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html)): [T](scroll.md)  <br><br><br>
-| [toString](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/to-string.html)| [androidJvm]  <br>Content  <br>open override fun [toString](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/to-string.html)(): [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)  <br><br><br>
-| [withAutoScroll](with-auto-scroll.md)| [androidJvm]  <br>Brief description  <br><br><br>Invokes the given action and calls [scroll](scroll.md) if it fails. Helps in cases when test fails because of the need to scroll to interacted view.<br><br>  <br>Content  <br>open override fun <[T](with-auto-scroll.md)> [withAutoScroll](with-auto-scroll.md)(interaction: ViewInteraction, action: () -> [T](with-auto-scroll.md)): [T](with-auto-scroll.md)  <br><br><br>
-
+| [scroll](scroll.md) | Performs the autoscrolling functionality. Performs scroll and re-invokes the given [action](scroll.md#com.kaspersky.kaspresso.autoscroll.AutoScrollProviderImpl$scroll(androidx.test.espresso.ViewInteraction, kotlin.Function0((com.kaspersky.kaspresso.autoscroll.AutoScrollProviderImpl.scroll.T)), kotlin.Throwable)/action).`fun <T> scroll(interaction: ViewInteraction, action: () -> T, cachedError: `[`Throwable`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html)`): T` |
+| [withAutoScroll](with-auto-scroll.md) | Invokes the given [action](with-auto-scroll.md#com.kaspersky.kaspresso.autoscroll.AutoScrollProviderImpl$withAutoScroll(androidx.test.espresso.ViewInteraction, kotlin.Function0((com.kaspersky.kaspresso.autoscroll.AutoScrollProviderImpl.withAutoScroll.T)))/action) and calls [scroll](scroll.md) if it fails. Helps in cases when test fails because of the need to scroll to interacted view.`fun <T> withAutoScroll(interaction: ViewInteraction, action: () -> T): T` |

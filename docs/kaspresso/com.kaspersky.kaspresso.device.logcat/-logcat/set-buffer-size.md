@@ -1,27 +1,11 @@
-//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.device.logcat](../index.md)/[Logcat](index.md)/[setBufferSize](set-buffer-size.md)
+[kaspresso](../../index.md) / [com.kaspersky.kaspresso.device.logcat](../index.md) / [Logcat](index.md) / [setBufferSize](./set-buffer-size.md)
 
+# setBufferSize
 
-
-# setBufferSize  
-[androidJvm]  
-Brief description  
-
+`abstract fun setBufferSize(size: `[`LogcatBufferSize`](../-logcat-buffer-size/index.md)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Set new logcat buffer size
 
+### Parameters
 
-
-## Parameters  
-  
-androidJvm  
-  
-|  Name|  Summary| 
-|---|---|
-| size| <br><br>a LogcatBufferSize value<br><br>
-  
-  
-Content  
-abstract fun [setBufferSize](set-buffer-size.md)(size: [LogcatBufferSize](../-logcat-buffer-size/index.md))  
-
-
-
+`size` - a LogcatBufferSize value

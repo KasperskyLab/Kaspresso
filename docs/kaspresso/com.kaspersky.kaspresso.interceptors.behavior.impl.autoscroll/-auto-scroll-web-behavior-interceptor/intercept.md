@@ -1,28 +1,13 @@
-//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.interceptors.behavior.impl.autoscroll](../index.md)/[AutoScrollWebBehaviorInterceptor](index.md)/[intercept](intercept.md)
+[kaspresso](../../index.md) / [com.kaspersky.kaspresso.interceptors.behavior.impl.autoscroll](../index.md) / [AutoScrollWebBehaviorInterceptor](index.md) / [intercept](./intercept.md)
 
+# intercept
 
+`fun <T> intercept(interaction: WebInteraction<*>, action: () -> T): T`
 
-# intercept  
-[androidJvm]  
-Brief description  
+Wraps the given [action](intercept.md#com.kaspersky.kaspresso.interceptors.behavior.impl.autoscroll.AutoScrollWebBehaviorInterceptor$intercept(androidx.test.espresso.web.sugar.Web.WebInteraction((kotlin.Any)), kotlin.Function0((com.kaspersky.kaspresso.interceptors.behavior.impl.autoscroll.AutoScrollWebBehaviorInterceptor.intercept.T)))/action) invocation with the autoscrolling on failure.
 
+### Parameters
 
-Wraps the given action invocation with the autoscrolling on failure.
+`interaction` - the intercepted [Web.WebInteraction](#).
 
-
-
-## Parameters  
-  
-androidJvm  
-  
-|  Name|  Summary| 
-|---|---|
-| action| <br><br>the action to invoke.<br><br>
-| interaction| <br><br>the intercepted Web.WebInteraction.<br><br>
-  
-  
-Content  
-open override fun <[T](intercept.md)> [intercept](intercept.md)(interaction: Web.WebInteraction<*>, action: () -> [T](intercept.md)): [T](intercept.md)  
-
-
-
+`action` - the action to invoke.

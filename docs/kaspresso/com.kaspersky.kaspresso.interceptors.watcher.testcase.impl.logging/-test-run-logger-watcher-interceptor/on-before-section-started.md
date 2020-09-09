@@ -1,27 +1,11 @@
-//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.logging](../index.md)/[TestRunLoggerWatcherInterceptor](index.md)/[onBeforeSectionStarted](on-before-section-started.md)
+[kaspresso](../../index.md) / [com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.logging](../index.md) / [TestRunLoggerWatcherInterceptor](index.md) / [onBeforeSectionStarted](./on-before-section-started.md)
 
+# onBeforeSectionStarted
 
+`fun onBeforeSectionStarted(testInfo: `[`TestInfo`](../../com.kaspersky.kaspresso.testcases.models.info/-test-info/index.md)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
-# onBeforeSectionStarted  
-[androidJvm]  
-Brief description  
+Logs the given [testInfo](on-before-section-started.md#com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.logging.TestRunLoggerWatcherInterceptor$onBeforeSectionStarted(com.kaspersky.kaspresso.testcases.models.info.TestInfo)/testInfo) on "before" section starts.
 
+### Parameters
 
-Logs the given testInfo on "before" section starts.
-
-
-
-## Parameters  
-  
-androidJvm  
-  
-|  Name|  Summary| 
-|---|---|
-| testInfo| <br><br>the test info to log.<br><br>
-  
-  
-Content  
-open override fun [onBeforeSectionStarted](on-before-section-started.md)(testInfo: [TestInfo](../../com.kaspersky.kaspresso.testcases.models.info/-test-info/index.md))  
-
-
-
+`testInfo` - the test info to log.

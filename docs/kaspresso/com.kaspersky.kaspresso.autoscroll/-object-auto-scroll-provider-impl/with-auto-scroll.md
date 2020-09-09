@@ -1,35 +1,22 @@
-//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.autoscroll](../index.md)/[ObjectAutoScrollProviderImpl](index.md)/[withAutoScroll](with-auto-scroll.md)
+[kaspresso](../../index.md) / [com.kaspersky.kaspresso.autoscroll](../index.md) / [ObjectAutoScrollProviderImpl](index.md) / [withAutoScroll](./with-auto-scroll.md)
 
+# withAutoScroll
 
+`fun <T> withAutoScroll(interaction: UiObjectInteraction, action: () -> T): T`
 
-# withAutoScroll  
-[androidJvm]  
-Brief description  
+Invokes the given [action](with-auto-scroll.md#com.kaspersky.kaspresso.autoscroll.ObjectAutoScrollProviderImpl$withAutoScroll(com.kaspersky.components.kautomator.intercept.interaction.UiObjectInteraction, kotlin.Function0((com.kaspersky.kaspresso.autoscroll.ObjectAutoScrollProviderImpl.withAutoScroll.T)))/action) and calls [scroll](scroll.md) if it fails. Helps in cases when test fails because of the
+need to scroll to interacted view.
 
+### Parameters
 
-Invokes the given action and calls [scroll](scroll.md) if it fails. Helps in cases when test fails because of the need to scroll to interacted view.
+`interaction` - the instance of [UiObjectInteraction](#) interface to perform actions and assertions.
 
+`action` - the actual action on the interacted view.
 
+### Exceptions
 
-#### Return  
+`Throwable` - if the exception caught while invoking [action](with-auto-scroll.md#com.kaspersky.kaspresso.autoscroll.ObjectAutoScrollProviderImpl$withAutoScroll(com.kaspersky.components.kautomator.intercept.interaction.UiObjectInteraction, kotlin.Function0((com.kaspersky.kaspresso.autoscroll.ObjectAutoScrollProviderImpl.withAutoScroll.T)))/action) is not allowed via [ALLOWED_EXCEPTIONS](#).
 
-
-the result of action invocation.
-
-
-
-## Parameters  
-  
-androidJvm  
-  
-|  Name|  Summary| 
-|---|---|
-| action| <br><br>the actual action on the interacted view.<br><br>
-| interaction| <br><br>the instance of UiObjectInteraction interface to perform actions and assertions.<br><br>
-  
-  
-Content  
-open override fun <[T](with-auto-scroll.md)> [withAutoScroll](with-auto-scroll.md)(interaction: UiObjectInteraction, action: () -> [T](with-auto-scroll.md)): [T](with-auto-scroll.md)  
-
-
+**Return**
+the result of [action](with-auto-scroll.md#com.kaspersky.kaspresso.autoscroll.ObjectAutoScrollProviderImpl$withAutoScroll(com.kaspersky.components.kautomator.intercept.interaction.UiObjectInteraction, kotlin.Function0((com.kaspersky.kaspresso.autoscroll.ObjectAutoScrollProviderImpl.withAutoScroll.T)))/action) invocation.
 

@@ -1,13 +1,9 @@
-//[kautomator](../index.md)/[com.kaspersky.components.kautomator](index.md)
+[kautomator](../index.md) / [com.kaspersky.components.kautomator](./index.md)
 
+## Package com.kaspersky.components.kautomator
 
+### Types
 
-# Package com.kaspersky.components.kautomator  
-
-
-## Types  
-  
-|  Name|  Summary| 
+| Name | Summary |
 |---|---|
-| [KautomatorConfigurator](-kautomator-configurator/index.md)| [androidJvm]  <br>Content  <br>object [KautomatorConfigurator](-kautomator-configurator/index.md)  <br><br><br>
-
+| [KautomatorConfigurator](-kautomator-configurator/index.md) | `object KautomatorConfigurator` |

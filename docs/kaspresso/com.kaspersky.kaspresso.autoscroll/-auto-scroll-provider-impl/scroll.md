@@ -1,36 +1,23 @@
-//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.autoscroll](../index.md)/[AutoScrollProviderImpl](index.md)/[scroll](scroll.md)
+[kaspresso](../../index.md) / [com.kaspersky.kaspresso.autoscroll](../index.md) / [AutoScrollProviderImpl](index.md) / [scroll](./scroll.md)
 
+# scroll
 
+`fun <T> scroll(interaction: ViewInteraction, action: () -> T, cachedError: `[`Throwable`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html)`): T`
 
-# scroll  
-[androidJvm]  
-Brief description  
+Performs the autoscrolling functionality. Performs scroll and re-invokes the given [action](scroll.md#com.kaspersky.kaspresso.autoscroll.AutoScrollProviderImpl$scroll(androidx.test.espresso.ViewInteraction, kotlin.Function0((com.kaspersky.kaspresso.autoscroll.AutoScrollProviderImpl.scroll.T)), kotlin.Throwable)/action).
 
+### Parameters
 
-Performs the autoscrolling functionality. Performs scroll and re-invokes the given action.
+`interaction` - the instance of [ViewInteraction](#) interface to perform actions and assertions.
 
+`action` - the actual action on the interacted view.
 
+`cachedError` - the error to be thrown if autoscroll would not help.
 
-#### Return  
+### Exceptions
 
+`cachedError` - if autoscroll action did not help.
 
-the result of action invocation.
-
-
-
-## Parameters  
-  
-androidJvm  
-  
-|  Name|  Summary| 
-|---|---|
-| action| <br><br>the actual action on the interacted view.<br><br>
-| cachedError| <br><br>the error to be thrown if autoscroll would not help.<br><br>
-| interaction| <br><br>the instance of ViewInteraction interface to perform actions and assertions.<br><br>
-  
-  
-Content  
-open override fun <[T](scroll.md)> [scroll](scroll.md)(interaction: ViewInteraction, action: () -> [T](scroll.md), cachedError: [Throwable](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html)): [T](scroll.md)  
-
-
+**Return**
+the result of [action](scroll.md#com.kaspersky.kaspresso.autoscroll.AutoScrollProviderImpl$scroll(androidx.test.espresso.ViewInteraction, kotlin.Function0((com.kaspersky.kaspresso.autoscroll.AutoScrollProviderImpl.scroll.T)), kotlin.Throwable)/action) invocation.
 

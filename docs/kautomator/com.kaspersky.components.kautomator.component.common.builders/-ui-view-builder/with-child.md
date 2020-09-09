@@ -1,27 +1,11 @@
-//[kautomator](../../index.md)/[com.kaspersky.components.kautomator.component.common.builders](../index.md)/[UiViewBuilder](index.md)/[withChild](with-child.md)
+[kautomator](../../index.md) / [com.kaspersky.components.kautomator.component.common.builders](../index.md) / [UiViewBuilder](index.md) / [withChild](./with-child.md)
 
+# withChild
 
-
-# withChild  
-[androidJvm]  
-Brief description  
-
+`fun withChild(function: `[`UiViewBuilder`](index.md)`.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Matches the view which has child of given matcher
 
+### Parameters
 
-
-## Parameters  
-  
-androidJvm  
-  
-|  Name|  Summary| 
-|---|---|
-| function| <br><br>ViewBuilder which will result in child matcher<br><br>
-  
-  
-Content  
-fun [withChild](with-child.md)(function: [UiViewBuilder](index.md).() -> [Unit](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html))  
-
-
-
+`function` - ViewBuilder which will result in child matcher

@@ -1,28 +1,12 @@
-//[kautomator](../../index.md)/[com.kaspersky.components.kautomator.component.common.builders](../index.md)/[UiViewBuilder](index.md)/[withPackage](with-package.md)
+[kautomator](../../index.md) / [com.kaspersky.components.kautomator.component.common.builders](../index.md) / [UiViewBuilder](index.md) / [withPackage](./with-package.md)
 
+# withPackage
 
-
-# withPackage  
-[androidJvm]  
-Brief description  
-
+`fun withPackage(packageName: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`fun withPackage(packageName: `[`Pattern`](https://docs.oracle.com/javase/6/docs/api/java/util/regex/Pattern.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Matches the view with given package name
 
+### Parameters
 
-
-## Parameters  
-  
-androidJvm  
-  
-|  Name|  Summary| 
-|---|---|
-| packageName| <br><br>package name to match<br><br>
-  
-  
-Content  
-fun [withPackage](with-package.md)(packageName: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html))  
-fun [withPackage](with-package.md)(packageName: [Pattern](https://developer.android.com/reference/kotlin/java/util/regex/Pattern.html))  
-
-
-
+`packageName` - package name to match

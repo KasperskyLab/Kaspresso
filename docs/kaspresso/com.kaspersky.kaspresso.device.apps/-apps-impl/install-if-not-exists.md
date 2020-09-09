@@ -1,36 +1,15 @@
-//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.device.apps](../index.md)/[AppsImpl](index.md)/[installIfNotExists](install-if-not-exists.md)
+[kaspresso](../../index.md) / [com.kaspersky.kaspresso.device.apps](../index.md) / [AppsImpl](index.md) / [installIfNotExists](./install-if-not-exists.md)
 
+# installIfNotExists
 
+`fun installIfNotExists(packageName: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, apkPath: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
-# installIfNotExists  
-[androidJvm]  
-Brief description  
-
-
-
-
-Installs an app via ADB only if packageName is not installed
-
-
+Installs an app via ADB only if [packageName](install-if-not-exists.md#com.kaspersky.kaspresso.device.apps.AppsImpl$installIfNotExists(kotlin.String, kotlin.String)/packageName) is not installed
 
 Required Permissions: INTERNET.
 
+### Parameters
 
+`packageName` - an android package name of the app to be checked.
 
-
-
-## Parameters  
-  
-androidJvm  
-  
-|  Name|  Summary| 
-|---|---|
-| apkPath| <br><br>a path to the apk to be installed. The apk is hosted on the test server.<br><br>
-| packageName| <br><br>an android package name of the app to be checked.<br><br>
-  
-  
-Content  
-open override fun [installIfNotExists](install-if-not-exists.md)(packageName: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html), apkPath: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html))  
-
-
-
+`apkPath` - a path to the apk to be installed. The apk is hosted on the test server.

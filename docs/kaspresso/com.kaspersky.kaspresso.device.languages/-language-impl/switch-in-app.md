@@ -1,17 +1,14 @@
-//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.device.languages](../index.md)/[LanguageImpl](index.md)/[switchInApp](switch-in-app.md)
+[kaspresso](../../index.md) / [com.kaspersky.kaspresso.device.languages](../index.md) / [LanguageImpl](index.md) / [switchInApp](./switch-in-app.md)
 
+# switchInApp
 
+`fun switchInApp(locale: `[`Locale`](https://docs.oracle.com/javase/6/docs/api/java/util/Locale.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
-# switchInApp  
-[androidJvm]  
-Brief description  
+Switches language only in the current Application (not in OS!).
+Please, keep in mind the following fact:
+If you have switched languages then you need to refresh current screen to get the screen with new language!
+Also, don't forget to restore the previous language if you don't clean the state of the Application after each test.
 
+### Exceptions
 
-Switches language only in the current Application (not in OS!). Please, keep in mind the following fact: If you have switched languages then you need to refresh current screen to get the screen with new language! Also, don't forget to restore the previous language if you don't clean the state of the Application after each test.
-
-  
-Content  
-open override fun [switchInApp](switch-in-app.md)(locale: [Locale](https://developer.android.com/reference/kotlin/java/util/Locale.html))  
-
-
-
+`Throwable` - if something went wrong

@@ -1,27 +1,11 @@
-//[kautomator](../../index.md)/[com.kaspersky.components.kautomator.component.common.actions](../index.md)/[UiSwipeableActions](index.md)/[swipeLeft](swipe-left.md)
+[kautomator](../../index.md) / [com.kaspersky.components.kautomator.component.common.actions](../index.md) / [UiSwipeableActions](index.md) / [swipeLeft](./swipe-left.md)
 
+# swipeLeft
 
-
-# swipeLeft  
-[androidJvm]  
-Brief description  
-
+`open fun swipeLeft(percent: `[`Float`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html)` = 0.95f): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Swipes left on the view
 
+### Parameters
 
-
-## Parameters  
-  
-androidJvm  
-  
-|  Name|  Summary| 
-|---|---|
-| percent| <br><br>The length of the swipe as a percentage of this object's size.<br><br>
-  
-  
-Content  
-open fun [swipeLeft](swipe-left.md)(percent: [Float](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html))  
-
-
-
+`percent` - The length of the swipe as a percentage of this object's size.

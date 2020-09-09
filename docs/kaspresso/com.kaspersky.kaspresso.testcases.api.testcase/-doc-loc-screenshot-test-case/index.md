@@ -1,113 +1,96 @@
-//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.testcases.api.testcase](../index.md)/[DocLocScreenshotTestCase](index.md)
+[kaspresso](../../index.md) / [com.kaspersky.kaspresso.testcases.api.testcase](../index.md) / [DocLocScreenshotTestCase](./index.md)
 
+# DocLocScreenshotTestCase
 
-
-# DocLocScreenshotTestCase  
- [androidJvm] 
-
-
+`abstract class DocLocScreenshotTestCase : `[`TestCase`](../-test-case/index.md)
 
 The base class for all docloc screenshot tests.
 
-
-
 Project-wide ScreenshotTestCase should be implemented as following:
 
-    open class ProductDocLocScreenshotTestCase(testName: String) : DocLocScreenshotTestCase(  
-        File(testName), "comma-separated string of locales"  
-    ) {  
-  
-        @get:Rule  
-        val activityTestRule = ActivityTestRule(FragmentTestActivity::class.java, true, false)  
-  
-        protected lateinit var activity: FragmentTestActivity  
-  
-        @Before  
-        open fun setUp() {  
-            activity = activityTestRule.launchActivity(null)  
-        }  
+``` kotlin
+    open class ProductDocLocScreenshotTestCase(testName: String) : DocLocScreenshotTestCase(
+        File(testName), "comma-separated string of locales"
+    ) {
+
+        @get:Rule
+        val activityTestRule = ActivityTestRule(FragmentTestActivity::class.java, true, false)
+
+        protected lateinit var activity: FragmentTestActivity
+
+        @Before
+        open fun setUp() {
+            activity = activityTestRule.launchActivity(null)
+        }
     }
+```
 
 Screenshoter test extends the project-wide class:
 
-    @ScreenShooterTest  
-    class FeatureScreenshot : ProductDocLocScreenshotTestCase("feature_screenshot") {  
-  
-        @Test  
-        fun featureScreen() {  
-            val featureView = FeatureFragment.newInstance()  
-            activity.setFragment(featureView)  
-            val view = getUiSafeProxy<FeatureView>(featureView) // Explicit type is important and must be interface  
-  
-            view.showLoading()  
-            captureScreenshot("screenshot_description")  
-        }  
+``` kotlin
+    @ScreenShooterTest
+    class FeatureScreenshot : ProductDocLocScreenshotTestCase("feature_screenshot") {
+
+        @Test
+        fun featureScreen() {
+            val featureView = FeatureFragment.newInstance()
+            activity.setFragment(featureView)
+            val view = getUiSafeProxy<FeatureView>(featureView) // Explicit type is important and must be interface
+
+            view.showLoading()
+            captureScreenshot("screenshot_description")
+        }
     }
+```
 
-As you might have noticed, activity test rule is launched with ``FragmentTestActivity``. It's a special per-project empty activity for test with ``setFragment(Fragment)`` method. E.g:
+As you might have noticed, activity test rule is launched with `FragmentTestActivity`.
+It's a special per-project empty activity for test with `setFragment(Fragment)` method.
+E.g:
 
-    class FragmentTestActivity : AppCompatActivity() {  
-  
-        override fun onCreate(savedInstanceState: Bundle?) {  
-            super.onCreate(savedInstanceState)  
-            setContentView(R.layout.activity_fragment_container)  
-        }  
-  
-        fun setFragment(fragment: Fragment) {  
-            val fragmentTransaction = supportFragmentManager.beginTransaction()  
-            fragmentTransaction.replace(R.id.content_container, fragment, "")  
-            fragmentTransaction.build()  
-        }  
+``` kotlin
+    class FragmentTestActivity : AppCompatActivity() {
+
+        override fun onCreate(savedInstanceState: Bundle?) {
+            super.onCreate(savedInstanceState)
+            setContentView(R.layout.activity_fragment_container)
+        }
+
+        fun setFragment(fragment: Fragment) {
+            val fragmentTransaction = supportFragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.content_container, fragment, "")
+            fragmentTransaction.build()
+        }
     }
+```
 
-abstract class [DocLocScreenshotTestCase](index.md)(**screenshotsDirectory**: [File](https://developer.android.com/reference/kotlin/java/io/File.html), **changeSystemLocale**: [Boolean](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html), **locales**: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)?, **kaspressoBuilder**: [Kaspresso.Builder](../../com.kaspersky.kaspresso.kaspresso/-kaspresso/-builder/index.md)) : [TestCase](../-test-case/index.md)   
+### Parameters
 
+`screenshotsDirectory` - directory to save screenshot.
 
-## Parameters  
-  
-androidJvm  
-  
-|  Name|  Summary| 
+`locales` - comma-separated string with locales to run test with.
+
+`changeSystemLocale` - change the system language, i.e. system dialogs (e.g. runtime permissions) will also be localized.
+    Need permission in manifest file for a target app android.permission.CHANGE_CONFIGURATION
+
+### Constructors
+
+| Name | Summary |
 |---|---|
-| changeSystemLocale| <br><br>change the system language, i.e. system dialogs (e.g. runtime permissions) will also be localized.     Need permission in manifest file for a target app android.permission.CHANGE_CONFIGURATION<br><br>
-| locales| <br><br>comma-separated string with locales to run test with.<br><br>
-| screenshotsDirectory| <br><br>directory to save screenshot.<br><br>
-  
+| [&lt;init&gt;](-init-.md) | The base class for all docloc screenshot tests.`DocLocScreenshotTestCase(screenshotsDirectory: `[`File`](https://docs.oracle.com/javase/6/docs/api/java/io/File.html)`, changeSystemLocale: `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)` = false, locales: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`?, kaspressoBuilder: Builder = Kaspresso.Builder.simple())` |
 
+### Properties
 
-## Constructors  
-  
-|  Name|  Summary| 
+| Name | Summary |
 |---|---|
-| [DocLocScreenshotTestCase](-doc-loc-screenshot-test-case.md)|  [androidJvm] <br><br>directory to save screenshot.<br><br>fun [DocLocScreenshotTestCase](-doc-loc-screenshot-test-case.md)(screenshotsDirectory: [File](https://developer.android.com/reference/kotlin/java/io/File.html), changeSystemLocale: [Boolean](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html), locales: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)?, kaspressoBuilder: [Kaspresso.Builder](../../com.kaspersky.kaspresso.kaspresso/-kaspresso/-builder/index.md))   <br>
+| [localeRule](locale-rule.md) | `val localeRule: `[`LocaleRule`](../../com.kaspersky.kaspresso.docloc.rule/-locale-rule/index.md) |
+| [storagePermissionRule](storage-permission-rule.md) | `val storagePermissionRule: GrantPermissionRule` |
+| [testFailRule](test-fail-rule.md) | `val testFailRule: `[`TestFailRule`](../../com.kaspersky.kaspresso.docloc.rule/-test-fail-rule/index.md) |
 
+### Functions
 
-## Functions  
-  
-|  Name|  Summary| 
+| Name | Summary |
 |---|---|
-| createBaseTestBodyBuilder| [androidJvm]  <br>Content  <br>override fun createBaseTestBodyBuilder(testName: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)): TestBody.Builder<[Unit](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html), [Unit](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)>  <br><br><br>
-| [equals](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/equals.html)| [androidJvm]  <br>Content  <br>open operator override fun [equals](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/equals.html)(other: [Any](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)?): [Boolean](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)  <br><br><br>
-| [getUiSafeProxy](get-ui-safe-proxy.md)| [androidJvm]  <br>Brief description  <br><br><br>Return a dynamic proxy for a given view. [I](get-ui-safe-proxy.md) must be interface.<br><br>  <br>Content  <br>inline fun <[I](get-ui-safe-proxy.md) : [Any](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)> [getUiSafeProxy](get-ui-safe-proxy.md)(view: [I](get-ui-safe-proxy.md)): [I](get-ui-safe-proxy.md)  <br><br><br>
-| [getUiSafeProxyFromImplementation](get-ui-safe-proxy-from-implementation.md)| [androidJvm]  <br>Brief description  <br><br><br>Return a dynamic proxy over all interfaces that view implements.<br><br>  <br>Content  <br>inline fun <[T](get-ui-safe-proxy-from-implementation.md) : [Any](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)> [getUiSafeProxyFromImplementation](get-ui-safe-proxy-from-implementation.md)(view: [T](get-ui-safe-proxy-from-implementation.md)): [Any](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)  <br><br><br>
-| [hashCode](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/hash-code.html)| [androidJvm]  <br>Content  <br>open override fun [hashCode](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/hash-code.html)(): [Int](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)  <br><br><br>
-| [setup](setup.md)| [androidJvm]  <br>Content  <br>fun [setup](setup.md)()  <br><br><br>
-| [toString](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/to-string.html)| [androidJvm]  <br>Content  <br>open override fun [toString](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/to-string.html)(): [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)  <br><br><br>
-
-
-## Properties  
-  
-|  Name|  Summary| 
-|---|---|
-| [adbServer](index.md#com.kaspersky.kaspresso.testcases.api.testcase/DocLocScreenshotTestCase/adbServer/#/PointingToDeclaration/)|  [androidJvm] open override val [adbServer](index.md#com.kaspersky.kaspresso.testcases.api.testcase/DocLocScreenshotTestCase/adbServer/#/PointingToDeclaration/): [AdbServer](../../com.kaspersky.kaspresso.device.server/-adb-server/index.md)   <br>
-| [dataProducer](index.md#com.kaspersky.kaspresso.testcases.api.testcase/DocLocScreenshotTestCase/dataProducer/#/PointingToDeclaration/)|  [androidJvm] override val [dataProducer](index.md#com.kaspersky.kaspresso.testcases.api.testcase/DocLocScreenshotTestCase/dataProducer/#/PointingToDeclaration/): ([Unit](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html).() -> [Unit](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)?) -> [Unit](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)   <br>
-| [device](index.md#com.kaspersky.kaspresso.testcases.api.testcase/DocLocScreenshotTestCase/device/#/PointingToDeclaration/)|  [androidJvm] open override val [device](index.md#com.kaspersky.kaspresso.testcases.api.testcase/DocLocScreenshotTestCase/device/#/PointingToDeclaration/): [Device](../../com.kaspersky.kaspresso.device/-device/index.md)   <br>
-| [localeRule](index.md#com.kaspersky.kaspresso.testcases.api.testcase/DocLocScreenshotTestCase/localeRule/#/PointingToDeclaration/)|  [androidJvm] val [localeRule](index.md#com.kaspersky.kaspresso.testcases.api.testcase/DocLocScreenshotTestCase/localeRule/#/PointingToDeclaration/): [LocaleRule](../../com.kaspersky.kaspresso.docloc.rule/-locale-rule/index.md)   <br>
-| [mainSectionEnrichers](index.md#com.kaspersky.kaspresso.testcases.api.testcase/DocLocScreenshotTestCase/mainSectionEnrichers/#/PointingToDeclaration/)|  [androidJvm] override val [mainSectionEnrichers](index.md#com.kaspersky.kaspresso.testcases.api.testcase/DocLocScreenshotTestCase/mainSectionEnrichers/#/PointingToDeclaration/): [List](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)<[MainSectionEnricher](../../com.kaspersky.kaspresso.enricher/-main-section-enricher/index.md)<[Unit](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)>>   <br>
-| [params](index.md#com.kaspersky.kaspresso.testcases.api.testcase/DocLocScreenshotTestCase/params/#/PointingToDeclaration/)|  [androidJvm] open override val [params](index.md#com.kaspersky.kaspresso.testcases.api.testcase/DocLocScreenshotTestCase/params/#/PointingToDeclaration/): [Params](../../com.kaspersky.kaspresso.params/-params/index.md)   <br>
-| [storagePermissionRule](index.md#com.kaspersky.kaspresso.testcases.api.testcase/DocLocScreenshotTestCase/storagePermissionRule/#/PointingToDeclaration/)|  [androidJvm] val [storagePermissionRule](index.md#com.kaspersky.kaspresso.testcases.api.testcase/DocLocScreenshotTestCase/storagePermissionRule/#/PointingToDeclaration/): GrantPermissionRule   <br>
-| [testAssistantsProvider](index.md#com.kaspersky.kaspresso.testcases.api.testcase/DocLocScreenshotTestCase/testAssistantsProvider/#/PointingToDeclaration/)|  [androidJvm] override val [testAssistantsProvider](index.md#com.kaspersky.kaspresso.testcases.api.testcase/DocLocScreenshotTestCase/testAssistantsProvider/#/PointingToDeclaration/): TestAssistantsProviderImpl   <br>
-| [testCaseName](index.md#com.kaspersky.kaspresso.testcases.api.testcase/DocLocScreenshotTestCase/testCaseName/#/PointingToDeclaration/)|  [androidJvm] override val [testCaseName](index.md#com.kaspersky.kaspresso.testcases.api.testcase/DocLocScreenshotTestCase/testCaseName/#/PointingToDeclaration/): [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)   <br>
-| [testFailRule](index.md#com.kaspersky.kaspresso.testcases.api.testcase/DocLocScreenshotTestCase/testFailRule/#/PointingToDeclaration/)|  [androidJvm] val [testFailRule](index.md#com.kaspersky.kaspresso.testcases.api.testcase/DocLocScreenshotTestCase/testFailRule/#/PointingToDeclaration/): [TestFailRule](../../com.kaspersky.kaspresso.docloc.rule/-test-fail-rule/index.md)   <br>
-| [testLogger](index.md#com.kaspersky.kaspresso.testcases.api.testcase/DocLocScreenshotTestCase/testLogger/#/PointingToDeclaration/)|  [androidJvm] open override val [testLogger](index.md#com.kaspersky.kaspresso.testcases.api.testcase/DocLocScreenshotTestCase/testLogger/#/PointingToDeclaration/): [UiTestLogger](../../com.kaspersky.kaspresso.logger/-ui-test-logger/index.md)   <br>
-
+| [captureScreenshot](capture-screenshot.md) | Captures a screenshot with a given [name](capture-screenshot.md#com.kaspersky.kaspresso.testcases.api.testcase.DocLocScreenshotTestCase$captureScreenshot(kotlin.String)/name) and saves it to //.`open fun captureScreenshot(name: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [getUiSafeProxy](get-ui-safe-proxy.md) | Return a dynamic proxy for a given view. [I](get-ui-safe-proxy.md#I) must be interface.`fun <I : `[`Any`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)`> getUiSafeProxy(view: I): I` |
+| [getUiSafeProxyFromImplementation](get-ui-safe-proxy-from-implementation.md) | Return a dynamic proxy over all interfaces that [view](get-ui-safe-proxy-from-implementation.md#com.kaspersky.kaspresso.testcases.api.testcase.DocLocScreenshotTestCase$getUiSafeProxyFromImplementation(com.kaspersky.kaspresso.testcases.api.testcase.DocLocScreenshotTestCase.getUiSafeProxyFromImplementation.T)/view) implements.`fun <T : `[`Any`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)`> getUiSafeProxyFromImplementation(view: T): `[`Any`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html) |
+| [setup](setup.md) | `fun setup(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |

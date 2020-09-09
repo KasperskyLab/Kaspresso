@@ -1,28 +1,13 @@
-//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.logging](../index.md)/[LoggingStepWatcherInterceptor](index.md)/[interceptAfterWithError](intercept-after-with-error.md)
+[kaspresso](../../index.md) / [com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.logging](../index.md) / [LoggingStepWatcherInterceptor](index.md) / [interceptAfterWithError](./intercept-after-with-error.md)
 
+# interceptAfterWithError
 
+`fun interceptAfterWithError(stepInfo: `[`StepInfo`](../../com.kaspersky.kaspresso.testcases.models.info/-step-info/index.md)`, error: `[`Throwable`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
-# interceptAfterWithError  
-[androidJvm]  
-Brief description  
+Logs the given [stepInfo](intercept-after-with-error.md#com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.logging.LoggingStepWatcherInterceptor$interceptAfterWithError(com.kaspersky.kaspresso.testcases.models.info.StepInfo, kotlin.Throwable)/stepInfo) on step finishes with failure.
 
+### Parameters
 
-Logs the given stepInfo on step finishes with failure.
+`stepInfo` - the step info to log.
 
-
-
-## Parameters  
-  
-androidJvm  
-  
-|  Name|  Summary| 
-|---|---|
-| error| <br><br>the error occurred to log.<br><br>
-| stepInfo| <br><br>the step info to log.<br><br>
-  
-  
-Content  
-open override fun [interceptAfterWithError](intercept-after-with-error.md)(stepInfo: [StepInfo](../../com.kaspersky.kaspresso.testcases.models.info/-step-info/index.md), error: [Throwable](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html))  
-
-
-
+`error` - the error occurred to log.

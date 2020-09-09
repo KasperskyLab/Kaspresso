@@ -1,36 +1,27 @@
-//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.failure](../index.md)/[FailureLoggingProvider](index.md)
+[kaspresso](../../index.md) / [com.kaspersky.kaspresso.failure](../index.md) / [FailureLoggingProvider](./index.md)
 
+# FailureLoggingProvider
 
-
-# FailureLoggingProvider  
- [androidJvm] 
+`interface FailureLoggingProvider`
 
 An interface to provide the logging failures functionality.
 
-interface [FailureLoggingProvider](index.md)   
+### Functions
 
-
-## Functions  
-  
-|  Name|  Summary| 
+| Name | Summary |
 |---|---|
-| [equals](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/equals.html)| [androidJvm]  <br>Content  <br>open operator override fun [equals](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/equals.html)(other: [Any](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)?): [Boolean](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)  <br><br><br>
-| [hashCode](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/hash-code.html)| [androidJvm]  <br>Content  <br>open override fun [hashCode](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/hash-code.html)(): [Int](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)  <br><br><br>
-| [logDescriptionAndThrow](log-description-and-throw.md)| [androidJvm]  <br>Brief description  <br><br><br>Logs the error description got by viewMatcher and throws the error.<br><br>  <br>Content  <br>abstract fun [logDescriptionAndThrow](log-description-and-throw.md)(error: [Throwable](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html)?, viewMatcher: Matcher<[View](https://developer.android.com/reference/kotlin/android/view/View.html)>?)  <br><br><br>
-| [logStackTrace](log-stack-trace.md)| [androidJvm]  <br>Brief description  <br><br><br>Logs the error's stacktrace.<br><br>  <br>Content  <br>abstract fun [logStackTrace](log-stack-trace.md)(error: [Throwable](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html))  <br><br><br>
-| [toString](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/to-string.html)| [androidJvm]  <br>Content  <br>open override fun [toString](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/to-string.html)(): [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)  <br><br><br>
-| [withLoggingOnFailure](with-logging-on-failure.md)| [androidJvm]  <br>Brief description  <br><br><br>Invokes the given action and logs if it fails.<br><br>  <br>Content  <br>abstract fun <[T](with-logging-on-failure.md)> [withLoggingOnFailure](with-logging-on-failure.md)(action: () -> [T](with-logging-on-failure.md)): [T](with-logging-on-failure.md)  <br><br><br>
+| [logDescriptionAndThrow](log-description-and-throw.md) | Logs the [error](log-description-and-throw.md#com.kaspersky.kaspresso.failure.FailureLoggingProvider$logDescriptionAndThrow(kotlin.Throwable, org.hamcrest.Matcher((android.view.View)))/error) description got by [viewMatcher](log-description-and-throw.md#com.kaspersky.kaspresso.failure.FailureLoggingProvider$logDescriptionAndThrow(kotlin.Throwable, org.hamcrest.Matcher((android.view.View)))/viewMatcher) and throws the [error](log-description-and-throw.md#com.kaspersky.kaspresso.failure.FailureLoggingProvider$logDescriptionAndThrow(kotlin.Throwable, org.hamcrest.Matcher((android.view.View)))/error).`abstract fun logDescriptionAndThrow(error: `[`Throwable`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html)`?, viewMatcher: Matcher<`[`View`](https://developer.android.com/reference/android/view/View.html)`>?): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [logStackTrace](log-stack-trace.md) | Logs the [error](log-stack-trace.md#com.kaspersky.kaspresso.failure.FailureLoggingProvider$logStackTrace(kotlin.Throwable)/error)'s stacktrace.`abstract fun logStackTrace(error: `[`Throwable`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [withLoggingOnFailure](with-logging-on-failure.md) | Invokes the given [action](with-logging-on-failure.md#com.kaspersky.kaspresso.failure.FailureLoggingProvider$withLoggingOnFailure(kotlin.Function0((com.kaspersky.kaspresso.failure.FailureLoggingProvider.withLoggingOnFailure.T)))/action) and logs if it fails.`abstract fun <T> withLoggingOnFailure(action: () -> T): T` |
 
+### Inheritors
 
-## Inheritors  
-  
-|  Name| 
-|---|
-| [FailureLoggingProviderImpl](../-failure-logging-provider-impl/index.md)
-| [LoggingFailureHandler](../-logging-failure-handler/index.md)
-| [FailureLoggingDataBehaviorInterceptor](../../com.kaspersky.kaspresso.interceptors.behavior.impl.failure/-failure-logging-data-behavior-interceptor/index.md)
-| [FailureLoggingViewBehaviorInterceptor](../../com.kaspersky.kaspresso.interceptors.behavior.impl.failure/-failure-logging-view-behavior-interceptor/index.md)
-| [FailureLoggingWebBehaviorInterceptor](../../com.kaspersky.kaspresso.interceptors.behavior.impl.failure/-failure-logging-web-behavior-interceptor/index.md)
-| [FailureLoggingDeviceBehaviorInterceptor](../../com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.failure/-failure-logging-device-behavior-interceptor/index.md)
-| [FailureLoggingObjectBehaviorInterceptor](../../com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.failure/-failure-logging-object-behavior-interceptor/index.md)
-
+| Name | Summary |
+|---|---|
+| [FailureLoggingDataBehaviorInterceptor](../../com.kaspersky.kaspresso.interceptors.behavior.impl.failure/-failure-logging-data-behavior-interceptor/index.md) | The implementation of [DataBehaviorInterceptor](../../com.kaspersky.kaspresso.interceptors.behavior/-data-behavior-interceptor.md) and [FailureLoggingProvider](./index.md) interfaces. Provides failure logging functionality for [DataInteraction.check](#) calls.`class FailureLoggingDataBehaviorInterceptor : `[`DataBehaviorInterceptor`](../../com.kaspersky.kaspresso.interceptors.behavior/-data-behavior-interceptor.md)`, `[`FailureLoggingProvider`](./index.md) |
+| [FailureLoggingDeviceBehaviorInterceptor](../../com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.failure/-failure-logging-device-behavior-interceptor/index.md) | The implementation of [DeviceBehaviorInterceptor](../../com.kaspersky.kaspresso.interceptors.behaviorkautomator/-device-behavior-interceptor.md) and [FailureLoggingProvider](./index.md) interfaces. Provides failure logging functionality for [UiDeviceInteraction.perform](#) and [UiDeviceInteraction.check](#) calls.`class FailureLoggingDeviceBehaviorInterceptor : `[`DeviceBehaviorInterceptor`](../../com.kaspersky.kaspresso.interceptors.behaviorkautomator/-device-behavior-interceptor.md)`, `[`FailureLoggingProvider`](./index.md) |
+| [FailureLoggingObjectBehaviorInterceptor](../../com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.failure/-failure-logging-object-behavior-interceptor/index.md) | The implementation of [ObjectBehaviorInterceptor](../../com.kaspersky.kaspresso.interceptors.behaviorkautomator/-object-behavior-interceptor.md) and [FailureLoggingProvider](./index.md) interfaces. Provides failure logging functionality for [UiObjectInteraction.perform](#) and [UiObjectInteraction.check](#) calls.`class FailureLoggingObjectBehaviorInterceptor : `[`ObjectBehaviorInterceptor`](../../com.kaspersky.kaspresso.interceptors.behaviorkautomator/-object-behavior-interceptor.md)`, `[`FailureLoggingProvider`](./index.md) |
+| [FailureLoggingProviderImpl](../-failure-logging-provider-impl/index.md) | The implementation of the [FailureLoggingProvider](./index.md) interface.`class FailureLoggingProviderImpl : `[`FailureLoggingProvider`](./index.md) |
+| [FailureLoggingViewBehaviorInterceptor](../../com.kaspersky.kaspresso.interceptors.behavior.impl.failure/-failure-logging-view-behavior-interceptor/index.md) | The implementation of [ViewBehaviorInterceptor](../../com.kaspersky.kaspresso.interceptors.behavior/-view-behavior-interceptor.md) and [FailureLoggingProvider](./index.md) interfaces. Provides failure logging functionality for [ViewInteraction.perform](#) and [ViewInteraction.check](#) calls.`class FailureLoggingViewBehaviorInterceptor : `[`ViewBehaviorInterceptor`](../../com.kaspersky.kaspresso.interceptors.behavior/-view-behavior-interceptor.md)`, `[`FailureLoggingProvider`](./index.md) |
+| [FailureLoggingWebBehaviorInterceptor](../../com.kaspersky.kaspresso.interceptors.behavior.impl.failure/-failure-logging-web-behavior-interceptor/index.md) | The implementation of [WebBehaviorInterceptor](../../com.kaspersky.kaspresso.interceptors.behavior/-web-behavior-interceptor.md) and [FailureLoggingProvider](./index.md) interfaces. Provides failure logging functionality for [Web.WebInteraction.perform](#) and [Web.WebInteraction.check](#) calls.`class FailureLoggingWebBehaviorInterceptor : `[`WebBehaviorInterceptor`](../../com.kaspersky.kaspresso.interceptors.behavior/-web-behavior-interceptor.md)`, `[`FailureLoggingProvider`](./index.md) |
+| [LoggingFailureHandler](../-logging-failure-handler/index.md) | The implementation of the [FailureHandler](#) interface that logs rich description of failure.`class LoggingFailureHandler : FailureHandler, `[`FailureLoggingProvider`](./index.md) |

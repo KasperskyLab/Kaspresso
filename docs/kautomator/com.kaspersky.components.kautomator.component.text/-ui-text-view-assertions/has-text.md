@@ -1,17 +1,8 @@
-//[kautomator](../../index.md)/[com.kaspersky.components.kautomator.component.text](../index.md)/[UiTextViewAssertions](index.md)/[hasText](has-text.md)
+[kautomator](../../index.md) / [com.kaspersky.components.kautomator.component.text](../index.md) / [UiTextViewAssertions](index.md) / [hasText](./has-text.md)
 
+# hasText
 
-
-# hasText  
-[androidJvm]  
-Brief description  
-
+`open fun hasText(text: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Checks if the view has concrete text
-
-  
-Content  
-open fun [hasText](has-text.md)(text: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html))  
-
-
 

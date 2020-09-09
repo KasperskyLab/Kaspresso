@@ -1,17 +1,8 @@
-//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.device.accessibility](../index.md)/[AccessibilityImpl](index.md)/[disable](disable.md)
+[kaspresso](../../index.md) / [com.kaspersky.kaspresso.device.accessibility](../index.md) / [AccessibilityImpl](index.md) / [disable](./disable.md)
 
+# disable
 
-
-# disable  
-[androidJvm]  
-Brief description  
-
+`fun disable(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Disables accessibility. Available since api 24.
-
-  
-Content  
-open override fun [disable](disable.md)()  
-
-
 

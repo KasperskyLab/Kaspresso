@@ -1,17 +1,10 @@
-//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.device.network](../index.md)/[Network](index.md)/[enable](enable.md)
+[kaspresso](../../index.md) / [com.kaspersky.kaspresso.device.network](../index.md) / [Network](index.md) / [enable](./enable.md)
 
+# enable
 
-
-# enable  
-[androidJvm]  
-Brief description  
-
+`abstract fun enable(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Enables wi-fi and mobile data using adb.
 
-  
-Content  
-abstract fun [enable](enable.md)()  
-
-
+Required Permissions: INTERNET.
 

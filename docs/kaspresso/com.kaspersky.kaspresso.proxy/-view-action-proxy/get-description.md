@@ -1,24 +1,11 @@
-//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.proxy](../index.md)/[ViewActionProxy](index.md)/[getDescription](get-description.md)
+[kaspresso](../../index.md) / [com.kaspersky.kaspresso.proxy](../index.md) / [ViewActionProxy](index.md) / [getDescription](./get-description.md)
 
+# getDescription
 
+`fun getDescription(): `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)
 
-# getDescription  
-[androidJvm]  
-Brief description  
+Simply calls [ViewAction.getDescription](#) on wrapped [viewAction](#).
 
-
-Simply calls ViewAction.getDescription on wrapped viewAction.
-
-
-
-#### Return  
-
-
+**Return**
 a description of the view action.
-
-  
-Content  
-open override fun [getDescription](get-description.md)(): [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)  
-
-
 

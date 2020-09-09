@@ -1,28 +1,13 @@
-//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.proxy](../index.md)/[ViewActionProxy](index.md)/[perform](perform.md)
+[kaspresso](../../index.md) / [com.kaspersky.kaspresso.proxy](../index.md) / [ViewActionProxy](index.md) / [perform](./perform.md)
 
+# perform
 
+`fun perform(uiController: UiController, view: `[`View`](https://developer.android.com/reference/android/view/View.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
-# perform  
-[androidJvm]  
-Brief description  
+Calls watcher interceptors before [ViewAction.perform](#) on wrapped [viewAction](#) is called.
 
+### Parameters
 
-Calls watcher interceptors before ViewAction.perform on wrapped viewAction is called.
+`uiController` - the controller to use to interact with the UI.
 
-
-
-## Parameters  
-  
-androidJvm  
-  
-|  Name|  Summary| 
-|---|---|
-| uiController| <br><br>the controller to use to interact with the UI.<br><br>
-| view| <br><br>the view to act upon. never null.<br><br>
-  
-  
-Content  
-open override fun [perform](perform.md)(uiController: UiController, view: [View](https://developer.android.com/reference/kotlin/android/view/View.html))  
-
-
-
+`view` - the view to act upon. never null.

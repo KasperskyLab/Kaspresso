@@ -1,29 +1,15 @@
-//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.systemsafety](../index.md)/[SystemDialogSafetyDeviceBehaviorInterceptor](index.md)/[interceptPerform](intercept-perform.md)
+[kaspresso](../../index.md) / [com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.systemsafety](../index.md) / [SystemDialogSafetyDeviceBehaviorInterceptor](index.md) / [interceptPerform](./intercept-perform.md)
 
+# interceptPerform
 
+`fun <T> interceptPerform(interaction: UiDeviceInteraction, action: UiDeviceAction, activity: () -> T): T`
 
-# interceptPerform  
-[androidJvm]  
-Brief description  
+Wraps the given [activity](intercept-perform.md#com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.systemsafety.SystemDialogSafetyDeviceBehaviorInterceptor$interceptPerform(com.kaspersky.components.kautomator.intercept.interaction.UiDeviceInteraction, com.kaspersky.components.kautomator.intercept.operation.UiOperation((androidx.test.uiautomator.UiDevice)), kotlin.Function0((com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.systemsafety.SystemDialogSafetyDeviceBehaviorInterceptor.interceptPerform.T)))/activity) invocation with the system dialog safety.
 
+### Parameters
 
-Wraps the given activity invocation with the system dialog safety.
+`interaction` - the intercepted [UiDeviceInteraction](#).
 
+`action` - the intercepted [UiDeviceAction](#).
 
-
-## Parameters  
-  
-androidJvm  
-  
-|  Name|  Summary| 
-|---|---|
-| action| <br><br>the intercepted UiDeviceAction.<br><br>
-| activity| <br><br>the activity to invoke.<br><br>
-| interaction| <br><br>the intercepted UiDeviceInteraction.<br><br>
-  
-  
-Content  
-open override fun <[T](intercept-perform.md)> [interceptPerform](intercept-perform.md)(interaction: UiDeviceInteraction, action: UiOperation<UiDevice>, activity: () -> [T](intercept-perform.md)): [T](intercept-perform.md)  
-
-
-
+`activity` - the activity to invoke.

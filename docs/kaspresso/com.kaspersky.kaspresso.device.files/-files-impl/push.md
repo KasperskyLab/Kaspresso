@@ -1,36 +1,15 @@
-//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.device.files](../index.md)/[FilesImpl](index.md)/[push](push.md)
+[kaspresso](../../index.md) / [com.kaspersky.kaspresso.device.files](../index.md) / [FilesImpl](index.md) / [push](./push.md)
 
+# push
 
-
-# push  
-[androidJvm]  
-Brief description  
-
-
-
+`fun push(serverPath: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, devicePath: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Performs adb push.
 
-
-
 Required Permissions: INTERNET.
 
+### Parameters
 
+`serverPath` - a file path relative to the server directory.
 
-
-
-## Parameters  
-  
-androidJvm  
-  
-|  Name|  Summary| 
-|---|---|
-| devicePath| <br><br>a path to copy.<br><br>
-| serverPath| <br><br>a file path relative to the server directory.<br><br>
-  
-  
-Content  
-open override fun [push](push.md)(serverPath: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html), devicePath: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html))  
-
-
-
+`devicePath` - a path to copy.

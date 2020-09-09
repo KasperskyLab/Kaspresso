@@ -1,11 +1,5 @@
-//[kautomator](../../index.md)/[com.kaspersky.components.kautomator.intercept.interaction](../index.md)/[UiDeviceInteraction](index.md)/[check](check.md)
+[kautomator](../../index.md) / [com.kaspersky.components.kautomator.intercept.interaction](../index.md) / [UiDeviceInteraction](index.md) / [check](./check.md)
 
+# check
 
-
-# check  
-[androidJvm]  
-Content  
-open override fun [check](check.md)(assertion: [UiOperation](../../com.kaspersky.components.kautomator.intercept.operation/-ui-operation/index.md)<UiDevice>)  
-
-
-
+`fun check(assertion: `[`UiDeviceAssertion`](../../com.kaspersky.components.kautomator.intercept.operation/-ui-device-assertion.md)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)

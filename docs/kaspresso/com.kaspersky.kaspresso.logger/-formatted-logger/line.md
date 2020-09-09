@@ -1,17 +1,8 @@
-//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.logger](../index.md)/[FormattedLogger](index.md)/[line](line.md)
+[kaspresso](../../index.md) / [com.kaspersky.kaspresso.logger](../index.md) / [FormattedLogger](index.md) / [line](./line.md)
 
+# line
 
-
-# line  
-[androidJvm]  
-Brief description  
-
+`abstract fun line(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Draws a line.
-
-  
-Content  
-abstract fun [line](line.md)()  
-
-
 

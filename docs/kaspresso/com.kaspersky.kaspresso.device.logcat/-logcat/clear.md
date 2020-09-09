@@ -1,27 +1,12 @@
-//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.device.logcat](../index.md)/[Logcat](index.md)/[clear](clear.md)
+[kaspresso](../../index.md) / [com.kaspersky.kaspresso.device.logcat](../index.md) / [Logcat](index.md) / [clear](./clear.md)
 
+# clear
 
+`abstract fun clear(buffer: Buffer = Buffer.DEFAULT): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
-# clear  
-[androidJvm]  
-Brief description  
+Clear (flush) the selected buffers and exit.
+The default buffer set is main, system and crash.
 
+### Parameters
 
-Clear (flush) the selected buffers and exit. The default buffer set is main, system and crash.
-
-
-
-## Parameters  
-  
-androidJvm  
-  
-|  Name|  Summary| 
-|---|---|
-| buffer| <br><br>one of available logcat buffers<br><br>
-  
-  
-Content  
-abstract fun [clear](clear.md)(buffer: [Logcat.Buffer](-buffer/index.md))  
-
-
-
+`buffer` - one of available logcat buffers

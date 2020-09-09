@@ -1,4 +1,4 @@
-$dokka.format:gfm-v1
+$dokka.format:gfm
 $dokka.linkExtension:md
 
 androidx.test.espresso.web.assertion
@@ -54,7 +54,6 @@ com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.screenshot
 com.kaspersky.kaspresso.interceptors.watcher.view
 com.kaspersky.kaspresso.interceptors.watcher.view.impl.logging
 com.kaspersky.kaspresso.internal.exceptions
-com.kaspersky.kaspresso.internal.systemscreen
 com.kaspersky.kaspresso.kaspresso
 com.kaspersky.kaspresso.logger
 com.kaspersky.kaspresso.params
@@ -73,4 +72,3 @@ com.kaspersky.kaspresso.testcases.models
 com.kaspersky.kaspresso.testcases.models.info
 com.kaspersky.kaspresso.uiobjectloader
 io.reactivex.exceptions
-

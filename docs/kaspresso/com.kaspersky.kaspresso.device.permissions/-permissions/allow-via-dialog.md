@@ -1,17 +1,8 @@
-//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.device.permissions](../index.md)/[Permissions](index.md)/[allowViaDialog](allow-via-dialog.md)
+[kaspresso](../../index.md) / [com.kaspersky.kaspresso.device.permissions](../index.md) / [Permissions](index.md) / [allowViaDialog](./allow-via-dialog.md)
 
+# allowViaDialog
 
-
-# allowViaDialog  
-[androidJvm]  
-Brief description  
-
+`abstract fun allowViaDialog(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Passes the permission-requesting permissions dialog and allows permissions.
-
-  
-Content  
-abstract fun [allowViaDialog](allow-via-dialog.md)()  
-
-
 

@@ -1,30 +1,20 @@
-//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.compose.pack.branch](../index.md)/[ComplexComposeBranchBuilder](index.md)
+[kaspresso](../../index.md) / [com.kaspersky.kaspresso.compose.pack.branch](../index.md) / [ComplexComposeBranchBuilder](./index.md)
 
+# ComplexComposeBranchBuilder
 
-
-# ComplexComposeBranchBuilder  
- [androidJvm] 
+`class ComplexComposeBranchBuilder<ElementType>`
 
 Builder of ComplexComposeBranch's using in compose
 
-class [ComplexComposeBranchBuilder](index.md)<[ElementType](index.md)>(**element**: [ElementType](index.md), **check**: () -> [Unit](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html))   
+### Constructors
 
-
-## Constructors  
-  
-|  Name|  Summary| 
+| Name | Summary |
 |---|---|
-| [ComplexComposeBranchBuilder](-complex-compose-branch-builder.md)|  [androidJvm] fun <[ElementType](index.md)> [ComplexComposeBranchBuilder](-complex-compose-branch-builder.md)(element: [ElementType](index.md), check: () -> [Unit](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html))   <br>
+| [&lt;init&gt;](-init-.md) | Builder of ComplexComposeBranch's using in compose`ComplexComposeBranchBuilder(element: ElementType, check: () -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`)` |
 
+### Functions
 
-## Functions  
-  
-|  Name|  Summary| 
+| Name | Summary |
 |---|---|
-| [build](build.md)| [androidJvm]  <br>Content  <br>fun [build](build.md)(): [ComplexComposeBranch](../-complex-compose-branch/index.md)<[ElementType](index.md)>  <br><br><br>
-| [equals](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/equals.html)| [androidJvm]  <br>Content  <br>open operator override fun [equals](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/equals.html)(other: [Any](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)?): [Boolean](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)  <br><br><br>
-| [hashCode](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/hash-code.html)| [androidJvm]  <br>Content  <br>open override fun [hashCode](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/hash-code.html)(): [Int](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)  <br><br><br>
-| [then](then.md)| [androidJvm]  <br>Content  <br>infix fun [then](then.md)(postAction: () -> [Unit](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html))  <br><br><br>
-| [thenContinue](then-continue.md)| [androidJvm]  <br>Content  <br>infix fun [thenContinue](then-continue.md)(postAction: [ElementType](index.md).() -> [Unit](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html))  <br><br><br>
-| [toString](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/to-string.html)| [androidJvm]  <br>Content  <br>open override fun [toString](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/to-string.html)(): [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)  <br><br><br>
-
+| [build](build.md) | `fun build(): `[`ComplexComposeBranch`](../-complex-compose-branch/index.md)`<ElementType>` |
+| [then](then.md) | `infix fun then(postAction: () -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |

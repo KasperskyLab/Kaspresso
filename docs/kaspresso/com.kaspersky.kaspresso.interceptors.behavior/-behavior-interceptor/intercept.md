@@ -1,27 +1,11 @@
-//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.interceptors.behavior](../index.md)/[BehaviorInterceptor](index.md)/[intercept](intercept.md)
+[kaspresso](../../index.md) / [com.kaspersky.kaspresso.interceptors.behavior](../index.md) / [BehaviorInterceptor](index.md) / [intercept](./intercept.md)
 
+# intercept
 
-
-# intercept  
-[androidJvm]  
-Brief description  
-
+`abstract fun <T> intercept(interaction: Interaction, action: () -> T): T`
 
 Called to do some stuff and actually perform an interaction with element.
 
+### Parameters
 
-
-## Parameters  
-  
-androidJvm  
-  
-|  Name|  Summary| 
-|---|---|
-| action| <br><br>a function-wrapper of an action or an assertion to be invoked.<br><br>
-  
-  
-Content  
-abstract fun <[T](intercept.md)> [intercept](intercept.md)(interaction: [Interaction](index.md), action: () -> [T](intercept.md)): [T](intercept.md)  
-
-
-
+`action` - a function-wrapper of an action or an assertion to be invoked.

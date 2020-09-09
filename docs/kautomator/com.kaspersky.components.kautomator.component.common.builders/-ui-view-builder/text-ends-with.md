@@ -1,27 +1,11 @@
-//[kautomator](../../index.md)/[com.kaspersky.components.kautomator.component.common.builders](../index.md)/[UiViewBuilder](index.md)/[textEndsWith](text-ends-with.md)
+[kautomator](../../index.md) / [com.kaspersky.components.kautomator.component.common.builders](../index.md) / [UiViewBuilder](index.md) / [textEndsWith](./text-ends-with.md)
 
+# textEndsWith
 
-
-# textEndsWith  
-[androidJvm]  
-Brief description  
-
+`fun textEndsWith(text: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Matches if the view which text ends with given text
 
+### Parameters
 
-
-## Parameters  
-  
-androidJvm  
-  
-|  Name|  Summary| 
-|---|---|
-| text| <br><br>Text to be matched<br><br>
-  
-  
-Content  
-fun [textEndsWith](text-ends-with.md)(text: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html))  
-
-
-
+`text` - Text to be matched

@@ -1,28 +1,13 @@
-//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.interceptors.behavior.impl.flakysafety](../index.md)/[FlakySafeWebBehaviorInterceptor](index.md)/[intercept](intercept.md)
+[kaspresso](../../index.md) / [com.kaspersky.kaspresso.interceptors.behavior.impl.flakysafety](../index.md) / [FlakySafeWebBehaviorInterceptor](index.md) / [intercept](./intercept.md)
 
+# intercept
 
+`fun <T> intercept(interaction: WebInteraction<*>, action: () -> T): T`
 
-# intercept  
-[androidJvm]  
-Brief description  
+Wraps the given [action](intercept.md#com.kaspersky.kaspresso.interceptors.behavior.impl.flakysafety.FlakySafeWebBehaviorInterceptor$intercept(androidx.test.espresso.web.sugar.Web.WebInteraction((kotlin.Any)), kotlin.Function0((com.kaspersky.kaspresso.interceptors.behavior.impl.flakysafety.FlakySafeWebBehaviorInterceptor.intercept.T)))/action) invocation with the flaky safety.
 
+### Parameters
 
-Wraps the given action invocation with the flaky safety.
+`interaction` - the intercepted [Web.WebInteraction](#).
 
-
-
-## Parameters  
-  
-androidJvm  
-  
-|  Name|  Summary| 
-|---|---|
-| action| <br><br>the action to invoke.<br><br>
-| interaction| <br><br>the intercepted Web.WebInteraction.<br><br>
-  
-  
-Content  
-open override fun <[T](intercept.md)> [intercept](intercept.md)(interaction: Web.WebInteraction<*>, action: () -> [T](intercept.md)): [T](intercept.md)  
-
-
-
+`action` - the action to invoke.

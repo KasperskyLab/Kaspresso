@@ -1,17 +1,8 @@
-//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.failure](../index.md)/[LoggingFailureHandler](index.md)/[handle](handle.md)
+[kaspresso](../../index.md) / [com.kaspersky.kaspresso.failure](../index.md) / [LoggingFailureHandler](index.md) / [handle](./handle.md)
 
+# handle
 
+`fun handle(error: `[`Throwable`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html)`?, viewMatcher: Matcher<`[`View`](https://developer.android.com/reference/android/view/View.html)`>?): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
-# handle  
-[androidJvm]  
-Brief description  
-
-
-Calls logDescriptionAndThrow on each failure.
-
-  
-Content  
-open override fun [handle](handle.md)(error: [Throwable](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html)?, viewMatcher: Matcher<[View](https://developer.android.com/reference/kotlin/android/view/View.html)>?)  
-
-
+Calls [logDescriptionAndThrow](#) on each failure.
 

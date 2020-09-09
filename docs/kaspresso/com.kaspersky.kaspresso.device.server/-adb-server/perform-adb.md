@@ -1,42 +1,22 @@
-//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.device.server](../index.md)/[AdbServer](index.md)/[performAdb](perform-adb.md)
+[kaspresso](../../index.md) / [com.kaspersky.kaspresso.device.server](../index.md) / [AdbServer](index.md) / [performAdb](./perform-adb.md)
 
+# performAdb
 
+`abstract fun performAdb(vararg commands: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`List`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)`<`[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`>`
 
-# performAdb  
-[androidJvm]  
-Brief description  
-
-
-
-
-Performs adb commands blocking current thread. Please be aware! If any command that is in @param commands failed then AdbServerException will be thrown
-
-
+Performs adb commands blocking current thread.
+Please be aware! If any command that is in @param commands failed then AdbServerException will be thrown
 
 Required Permissions: INTERNET.
 
+### Parameters
 
+`commands` - commands to execute.
 
+### Exceptions
 
+`AdbServerException` - if a result status of any command in @param commands is Failed
 
-#### Return  
-
-
+**Return**
 list of answers of commands' execution
-
-
-
-## Parameters  
-  
-androidJvm  
-  
-|  Name|  Summary| 
-|---|---|
-| commands| <br><br>commands to execute.<br><br>
-  
-  
-Content  
-abstract fun [performAdb](perform-adb.md)(vararg commands: [Array](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html)<Out [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)>): [List](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)<[String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)>  
-
-
 

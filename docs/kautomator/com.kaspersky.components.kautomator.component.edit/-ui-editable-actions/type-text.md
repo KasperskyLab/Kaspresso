@@ -1,27 +1,11 @@
-//[kautomator](../../index.md)/[com.kaspersky.components.kautomator.component.edit](../index.md)/[UiEditableActions](index.md)/[typeText](type-text.md)
+[kautomator](../../index.md) / [com.kaspersky.components.kautomator.component.edit](../index.md) / [UiEditableActions](index.md) / [typeText](./type-text.md)
 
+# typeText
 
-
-# typeText  
-[androidJvm]  
-Brief description  
-
+`open fun typeText(text: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Types the given text into the view
 
+### Parameters
 
-
-## Parameters  
-  
-androidJvm  
-  
-|  Name|  Summary| 
-|---|---|
-| text| <br><br>Text to input<br><br>
-  
-  
-Content  
-open fun [typeText](type-text.md)(text: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html))  
-
-
-
+`text` - Text to input

@@ -1,27 +1,11 @@
-//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.device.apps](../index.md)/[Apps](index.md)/[openUrlInChrome](open-url-in-chrome.md)
+[kaspresso](../../index.md) / [com.kaspersky.kaspresso.device.apps](../index.md) / [Apps](index.md) / [openUrlInChrome](./open-url-in-chrome.md)
 
+# openUrlInChrome
 
+`abstract fun openUrlInChrome(url: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
-# openUrlInChrome  
-[androidJvm]  
-Brief description  
+Opens the given [url](open-url-in-chrome.md#com.kaspersky.kaspresso.device.apps.Apps$openUrlInChrome(kotlin.String)/url) on Chrome.
 
+### Parameters
 
-Opens the given url on Chrome.
-
-
-
-## Parameters  
-  
-androidJvm  
-  
-|  Name|  Summary| 
-|---|---|
-| url| <br><br>the url to be opened.<br><br>
-  
-  
-Content  
-abstract fun [openUrlInChrome](open-url-in-chrome.md)(url: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html))  
-
-
-
+`url` - the url to be opened.

@@ -1,11 +1,5 @@
-//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.testcases.api.testcase](../index.md)/[DocLocScreenshotTestCase](index.md)/[setup](setup.md)
+[kaspresso](../../index.md) / [com.kaspersky.kaspresso.testcases.api.testcase](../index.md) / [DocLocScreenshotTestCase](index.md) / [setup](./setup.md)
 
+# setup
 
-
-# setup  
-[androidJvm]  
-Content  
-fun [setup](setup.md)()  
-
-
-
+`fun setup(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)

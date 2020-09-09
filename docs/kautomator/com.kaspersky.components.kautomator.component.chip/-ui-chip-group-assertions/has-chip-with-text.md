@@ -1,48 +1,17 @@
-//[kautomator](../../index.md)/[com.kaspersky.components.kautomator.component.chip](../index.md)/[UiChipGroupAssertions](index.md)/[hasChipWithText](has-chip-with-text.md)
+[kautomator](../../index.md) / [com.kaspersky.components.kautomator.component.chip](../index.md) / [UiChipGroupAssertions](index.md) / [hasChipWithText](./has-chip-with-text.md)
 
+# hasChipWithText
 
-
-# hasChipWithText  
-[androidJvm]  
-Brief description  
-
+`open fun hasChipWithText(text: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Checks if chip with given text exists
 
+### Parameters
 
-
-## Parameters  
-  
-androidJvm  
-  
-|  Name|  Summary| 
-|---|---|
-| text| <br><br>Chip text<br><br>
-  
-  
-Content  
-open fun [hasChipWithText](has-chip-with-text.md)(text: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html))  
-
-
-[androidJvm]  
-Brief description  
-
+`text` - Chip text`open fun hasChipWithText(pattern: `[`Pattern`](https://docs.oracle.com/javase/6/docs/api/java/util/regex/Pattern.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Checks if chip with given text exists
 
+### Parameters
 
-
-## Parameters  
-  
-androidJvm  
-  
-|  Name|  Summary| 
-|---|---|
-| pattern| <br><br>Chip text pattern<br><br>
-  
-  
-Content  
-open fun [hasChipWithText](has-chip-with-text.md)(pattern: [Pattern](https://developer.android.com/reference/kotlin/java/util/regex/Pattern.html))  
-
-
-
+`pattern` - Chip text pattern

@@ -1,27 +1,11 @@
-//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.interceptors.watcher.view.impl.logging](../index.md)/[LoggingAtomWatcherInterceptor](index.md)/[intercept](intercept.md)
+[kaspresso](../../index.md) / [com.kaspersky.kaspresso.interceptors.watcher.view.impl.logging](../index.md) / [LoggingAtomWatcherInterceptor](index.md) / [intercept](./intercept.md)
 
+# intercept
 
+`fun intercept(atomProxy: `[`AtomProxy`](../../com.kaspersky.kaspresso.proxy/-atom-proxy/index.md)`<*>, evaluation: Evaluation?): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
-# intercept  
-[androidJvm]  
-Brief description  
+Writes info to [logger](#).
 
+### Parameters
 
-Writes info to logger.
-
-
-
-## Parameters  
-  
-androidJvm  
-  
-|  Name|  Summary| 
-|---|---|
-| evaluation| <br><br>represents the results of a Javascript execution.<br><br>
-  
-  
-Content  
-open override fun [intercept](intercept.md)(atomProxy: [AtomProxy](../../com.kaspersky.kaspresso.proxy/-atom-proxy/index.md)<*>, evaluation: Evaluation?)  
-
-
-
+`evaluation` - represents the results of a Javascript execution.

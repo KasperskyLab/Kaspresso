@@ -1,11 +1,5 @@
-//[kautomator](../../index.md)/[com.kaspersky.components.kautomator.intercept.interaction](../index.md)/[UiObjectInteraction](index.md)/[toString](to-string.md)
+[kautomator](../../index.md) / [com.kaspersky.components.kautomator.intercept.interaction](../index.md) / [UiObjectInteraction](index.md) / [toString](./to-string.md)
 
+# toString
 
-
-# toString  
-[androidJvm]  
-Content  
-open override fun [toString](to-string.md)(): [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)  
-
-
-
+`fun toString(): `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)

@@ -1,27 +1,11 @@
-//[kautomator](../../index.md)/[com.kaspersky.components.kautomator.component.common.builders](../index.md)/[UiViewBuilder](index.md)/[isInstanceOf](is-instance-of.md)
+[kautomator](../../index.md) / [com.kaspersky.components.kautomator.component.common.builders](../index.md) / [UiViewBuilder](index.md) / [isInstanceOf](./is-instance-of.md)
 
+# isInstanceOf
 
-
-# isInstanceOf  
-[androidJvm]  
-Brief description  
-
+`fun isInstanceOf(clazz: `[`Class`](https://docs.oracle.com/javase/6/docs/api/java/lang/Class.html)`<*>): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Matches the view by class instance
 
+### Parameters
 
-
-## Parameters  
-  
-androidJvm  
-  
-|  Name|  Summary| 
-|---|---|
-| clazz| <br><br>Class to match<br><br>
-  
-  
-Content  
-fun [isInstanceOf](is-instance-of.md)(clazz: [Class](https://developer.android.com/reference/kotlin/java/lang/Class.html)<*>)  
-
-
-
+`clazz` - Class to match

@@ -1,17 +1,8 @@
-//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.logger](../index.md)/[UiTestLoggerImpl](index.md)/[line](line.md)
+[kaspresso](../../index.md) / [com.kaspersky.kaspresso.logger](../index.md) / [UiTestLoggerImpl](index.md) / [line](./line.md)
 
+# line
 
-
-# line  
-[androidJvm]  
-Brief description  
-
+`fun line(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Draws line info.
-
-  
-Content  
-open override fun [line](line.md)()  
-
-
 

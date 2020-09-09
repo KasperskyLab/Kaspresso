@@ -1,49 +1,18 @@
-//[kautomator](../../index.md)/[com.kaspersky.components.kautomator.component.common.builders](../index.md)/[UiViewBuilder](index.md)/[withClassName](with-class-name.md)
+[kautomator](../../index.md) / [com.kaspersky.components.kautomator.component.common.builders](../index.md) / [UiViewBuilder](index.md) / [withClassName](./with-class-name.md)
 
+# withClassName
 
-
-# withClassName  
-[androidJvm]  
-Brief description  
-
+`fun withClassName(clazz: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`fun withClassName(clazz: `[`Pattern`](https://docs.oracle.com/javase/6/docs/api/java/util/regex/Pattern.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Matches the view which class matches given name
 
+### Parameters
 
-
-## Parameters  
-  
-androidJvm  
-  
-|  Name|  Summary| 
-|---|---|
-| clazz| <br><br>Class name<br><br>
-  
-  
-Content  
-fun [withClassName](with-class-name.md)(clazz: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html))  
-fun [withClassName](with-class-name.md)(clazz: [Pattern](https://developer.android.com/reference/kotlin/java/util/regex/Pattern.html))  
-
-
-[androidJvm]  
-Brief description  
-
+`clazz` - Class name`fun withClassName(clazz: `[`Class`](https://docs.oracle.com/javase/6/docs/api/java/lang/Class.html)`<*>): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Matches the view which class matches given name
 
+### Parameters
 
-
-## Parameters  
-  
-androidJvm  
-  
-|  Name|  Summary| 
-|---|---|
-| clazz| <br><br>The class to match<br><br>
-  
-  
-Content  
-fun [withClassName](with-class-name.md)(clazz: [Class](https://developer.android.com/reference/kotlin/java/lang/Class.html)<*>)  
-
-
-
+`clazz` - The class to match

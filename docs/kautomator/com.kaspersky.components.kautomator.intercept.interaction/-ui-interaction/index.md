@@ -1,26 +1,19 @@
-//[kautomator](../../index.md)/[com.kaspersky.components.kautomator.intercept.interaction](../index.md)/[UiInteraction](index.md)
+[kautomator](../../index.md) / [com.kaspersky.components.kautomator.intercept.interaction](../index.md) / [UiInteraction](./index.md)
 
+# UiInteraction
 
+`interface UiInteraction<Assertion, Action>`
 
-# UiInteraction  
- [androidJvm] interface [UiInteraction](index.md)<[Assertion](index.md), [Action](index.md)>   
+### Functions
 
-
-## Functions  
-  
-|  Name|  Summary| 
+| Name | Summary |
 |---|---|
-| [check](check.md)| [androidJvm]  <br>Content  <br>abstract fun [check](check.md)(assertion: [Assertion](index.md))  <br><br><br>
-| [equals](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/equals.html)| [androidJvm]  <br>Content  <br>open operator override fun [equals](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/equals.html)(other: [Any](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)?): [Boolean](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)  <br><br><br>
-| [hashCode](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/hash-code.html)| [androidJvm]  <br>Content  <br>open override fun [hashCode](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/hash-code.html)(): [Int](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)  <br><br><br>
-| [perform](perform.md)| [androidJvm]  <br>Content  <br>abstract fun [perform](perform.md)(action: [Action](index.md))  <br><br><br>
-| [toString](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/to-string.html)| [androidJvm]  <br>Content  <br>open override fun [toString](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/to-string.html)(): [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)  <br><br><br>
+| [check](check.md) | `abstract fun check(assertion: Assertion): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [perform](perform.md) | `abstract fun perform(action: Action): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
 
+### Inheritors
 
-## Inheritors  
-  
-|  Name| 
-|---|
-| [UiDeviceInteraction](../-ui-device-interaction/index.md)
-| [UiObjectInteraction](../-ui-object-interaction/index.md)
-
+| Name | Summary |
+|---|---|
+| [UiDeviceInteraction](../-ui-device-interaction/index.md) | Provides an interaction to work with the UiDevice`class UiDeviceInteraction : `[`UiInteraction`](./index.md)`<`[`UiDeviceAssertion`](../../com.kaspersky.components.kautomator.intercept.operation/-ui-device-assertion.md)`, `[`UiDeviceAction`](../../com.kaspersky.components.kautomator.intercept.operation/-ui-device-action.md)`>` |
+| [UiObjectInteraction](../-ui-object-interaction/index.md) | Provides an interaction to work with the UiView described by [selector](../-ui-object-interaction/selector.md)`class UiObjectInteraction : `[`UiInteraction`](./index.md)`<`[`UiObjectAssertion`](../../com.kaspersky.components.kautomator.intercept.operation/-ui-object-assertion.md)`, `[`UiObjectAction`](../../com.kaspersky.components.kautomator.intercept.operation/-ui-object-action.md)`>` |

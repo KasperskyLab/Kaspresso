@@ -1,17 +1,8 @@
-//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.logger](../index.md)/[FormattedLogger](index.md)/[section](section.md)
+[kaspresso](../../index.md) / [com.kaspersky.kaspresso.logger](../index.md) / [FormattedLogger](index.md) / [section](./section.md)
 
+# section
 
-
-# section  
-[androidJvm]  
-Brief description  
-
+`abstract fun section(text: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Draws up the text as a section block.
-
-  
-Content  
-abstract fun [section](section.md)(text: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html))  
-
-
 

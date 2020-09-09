@@ -1,27 +1,12 @@
-//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.enricher](../index.md)/[MainSectionEnricher](index.md)/[afterMainSectionRun](after-main-section-run.md)
+[kaspresso](../../index.md) / [com.kaspersky.kaspresso.enricher](../index.md) / [MainSectionEnricher](index.md) / [afterMainSectionRun](./after-main-section-run.md)
 
+# afterMainSectionRun
 
-
-# afterMainSectionRun  
-[androidJvm]  
-Brief description  
-
+`open fun `[`TestContext`](../../com.kaspersky.kaspresso.testcases.core.testcontext/-test-context/index.md)`<Data>.afterMainSectionRun(testInfo: `[`TestInfo`](../../com.kaspersky.kaspresso.testcases.models.info/-test-info/index.md)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 This method will be invoked right after execution of "run" block in your test case.
 
+### Parameters
 
-
-## Parameters  
-  
-androidJvm  
-  
-|  Name|  Summary| 
-|---|---|
-| testInfo| <ul><li>test information, such as test identifier</li></ul>
-  
-  
-Content  
-open fun [TestContext](../../com.kaspersky.kaspresso.testcases.core.testcontext/-test-context/index.md)<[Data](index.md)>.[afterMainSectionRun](after-main-section-run.md)(testInfo: [TestInfo](../../com.kaspersky.kaspresso.testcases.models.info/-test-info/index.md))  
-
-
-
+`testInfo` -
+* test information, such as test identifier

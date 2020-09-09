@@ -1,30 +1,21 @@
-//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.failure](../index.md)/[FailureLoggingProviderImpl](index.md)
+[kaspresso](../../index.md) / [com.kaspersky.kaspresso.failure](../index.md) / [FailureLoggingProviderImpl](./index.md)
 
+# FailureLoggingProviderImpl
 
-
-# FailureLoggingProviderImpl  
- [androidJvm] 
+`class FailureLoggingProviderImpl : `[`FailureLoggingProvider`](../-failure-logging-provider/index.md)
 
 The implementation of the [FailureLoggingProvider](../-failure-logging-provider/index.md) interface.
 
-class [FailureLoggingProviderImpl](index.md)(**logger**: [UiTestLogger](../../com.kaspersky.kaspresso.logger/-ui-test-logger/index.md)) : [FailureLoggingProvider](../-failure-logging-provider/index.md)   
+### Constructors
 
-
-## Constructors  
-  
-|  Name|  Summary| 
+| Name | Summary |
 |---|---|
-| [FailureLoggingProviderImpl](-failure-logging-provider-impl.md)|  [androidJvm] fun [FailureLoggingProviderImpl](-failure-logging-provider-impl.md)(logger: [UiTestLogger](../../com.kaspersky.kaspresso.logger/-ui-test-logger/index.md))   <br>
+| [&lt;init&gt;](-init-.md) | The implementation of the [FailureLoggingProvider](../-failure-logging-provider/index.md) interface.`FailureLoggingProviderImpl(logger: `[`UiTestLogger`](../../com.kaspersky.kaspresso.logger/-ui-test-logger.md)`)` |
 
+### Functions
 
-## Functions  
-  
-|  Name|  Summary| 
+| Name | Summary |
 |---|---|
-| [equals](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/equals.html)| [androidJvm]  <br>Content  <br>open operator override fun [equals](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/equals.html)(other: [Any](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)?): [Boolean](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)  <br><br><br>
-| [hashCode](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/hash-code.html)| [androidJvm]  <br>Content  <br>open override fun [hashCode](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/hash-code.html)(): [Int](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)  <br><br><br>
-| [logDescriptionAndThrow](log-description-and-throw.md)| [androidJvm]  <br>Brief description  <br><br><br>Logs the error description got by viewMatcher and throws the error.<br><br>  <br>Content  <br>open override fun [logDescriptionAndThrow](log-description-and-throw.md)(error: [Throwable](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html)?, viewMatcher: Matcher<[View](https://developer.android.com/reference/kotlin/android/view/View.html)>?)  <br><br><br>
-| [logStackTrace](log-stack-trace.md)| [androidJvm]  <br>Brief description  <br><br><br>Logs the error's stacktrace.<br><br>  <br>Content  <br>open override fun [logStackTrace](log-stack-trace.md)(error: [Throwable](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html))  <br><br><br>
-| [toString](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/to-string.html)| [androidJvm]  <br>Content  <br>open override fun [toString](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/to-string.html)(): [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)  <br><br><br>
-| [withLoggingOnFailure](with-logging-on-failure.md)| [androidJvm]  <br>Brief description  <br><br><br>Invokes the given action and logs if it fails.<br><br>  <br>Content  <br>open override fun <[T](with-logging-on-failure.md)> [withLoggingOnFailure](with-logging-on-failure.md)(action: () -> [T](with-logging-on-failure.md)): [T](with-logging-on-failure.md)  <br><br><br>
-
+| [logDescriptionAndThrow](log-description-and-throw.md) | Logs the [error](log-description-and-throw.md#com.kaspersky.kaspresso.failure.FailureLoggingProviderImpl$logDescriptionAndThrow(kotlin.Throwable, org.hamcrest.Matcher((android.view.View)))/error) description got by [viewMatcher](log-description-and-throw.md#com.kaspersky.kaspresso.failure.FailureLoggingProviderImpl$logDescriptionAndThrow(kotlin.Throwable, org.hamcrest.Matcher((android.view.View)))/viewMatcher) and throws the [error](log-description-and-throw.md#com.kaspersky.kaspresso.failure.FailureLoggingProviderImpl$logDescriptionAndThrow(kotlin.Throwable, org.hamcrest.Matcher((android.view.View)))/error).`fun logDescriptionAndThrow(error: `[`Throwable`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html)`?, viewMatcher: Matcher<`[`View`](https://developer.android.com/reference/android/view/View.html)`>?): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [logStackTrace](log-stack-trace.md) | Logs the [error](log-stack-trace.md#com.kaspersky.kaspresso.failure.FailureLoggingProviderImpl$logStackTrace(kotlin.Throwable)/error)'s stacktrace.`fun logStackTrace(error: `[`Throwable`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [withLoggingOnFailure](with-logging-on-failure.md) | Invokes the given [action](with-logging-on-failure.md#com.kaspersky.kaspresso.failure.FailureLoggingProviderImpl$withLoggingOnFailure(kotlin.Function0((com.kaspersky.kaspresso.failure.FailureLoggingProviderImpl.withLoggingOnFailure.T)))/action) and logs if it fails.`fun <T> withLoggingOnFailure(action: () -> T): T` |

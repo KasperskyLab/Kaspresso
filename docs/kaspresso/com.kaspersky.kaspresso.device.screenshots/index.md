@@ -1,15 +1,11 @@
-//[kaspresso](../index.md)/[com.kaspersky.kaspresso.device.screenshots](index.md)
+[kaspresso](../index.md) / [com.kaspersky.kaspresso.device.screenshots](./index.md)
 
+## Package com.kaspersky.kaspresso.device.screenshots
 
+### Types
 
-# Package com.kaspersky.kaspresso.device.screenshots  
-
-
-## Types  
-  
-|  Name|  Summary| 
+| Name | Summary |
 |---|---|
-| [Screenshots](-screenshots/index.md)| [androidJvm]  <br>Brief description  <br><br><br>The interface to make screenshots.<br><br>  <br>Content  <br>interface [Screenshots](-screenshots/index.md)  <br><br><br>
-| [ScreenshotsImpl](-screenshots-impl/index.md)| [androidJvm]  <br>Brief description  <br><br><br>The implementation of the [Screenshots](-screenshots/index.md) interface.<br><br>  <br>Content  <br>class [ScreenshotsImpl](-screenshots-impl/index.md)(**logger**: [UiTestLogger](../com.kaspersky.kaspresso.logger/-ui-test-logger/index.md), **screenshotMaker**: [ScreenshotMaker](../com.kaspersky.kaspresso.device.screenshots.screenshotmaker/-screenshot-maker/index.md), **screenshotDirectoryProvider**: [ScreenshotDirectoryProvider](../com.kaspersky.kaspresso.device.screenshots.screenshotfiles/-screenshot-directory-provider/index.md), **screenshotNameProvider**: [ScreenshotNameProvider](../com.kaspersky.kaspresso.device.screenshots.screenshotfiles/-screenshot-name-provider/index.md), **screenshotRootDir**: [File](https://developer.android.com/reference/kotlin/java/io/File.html)) : [Screenshots](-screenshots/index.md), [ScreenshotTestStartListener](-screenshot-test-start-listener/index.md)  <br><br><br>
-| [ScreenshotTestStartListener](-screenshot-test-start-listener/index.md)| [androidJvm]  <br>Brief description  <br><br><br>The interface that allows implementations of [Screenshots](-screenshots/index.md) to track test starts.<br><br>  <br>Content  <br>interface [ScreenshotTestStartListener](-screenshot-test-start-listener/index.md)  <br><br><br>
-
+| [Screenshots](-screenshots/index.md) | The interface to make screenshots.`interface Screenshots` |
+| [ScreenshotsImpl](-screenshots-impl/index.md) | The implementation of the [Screenshots](-screenshots/index.md) interface.`class ScreenshotsImpl : `[`Screenshots`](-screenshots/index.md)`, `[`ScreenshotTestStartListener`](-screenshot-test-start-listener/index.md) |
+| [ScreenshotTestStartListener](-screenshot-test-start-listener/index.md) | The interface that allows implementations of [Screenshots](-screenshots/index.md) to track test starts.`interface ScreenshotTestStartListener` |

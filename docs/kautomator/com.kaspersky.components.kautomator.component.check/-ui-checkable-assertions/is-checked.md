@@ -1,17 +1,8 @@
-//[kautomator](../../index.md)/[com.kaspersky.components.kautomator.component.check](../index.md)/[UiCheckableAssertions](index.md)/[isChecked](is-checked.md)
+[kautomator](../../index.md) / [com.kaspersky.components.kautomator.component.check](../index.md) / [UiCheckableAssertions](index.md) / [isChecked](./is-checked.md)
 
+# isChecked
 
-
-# isChecked  
-[androidJvm]  
-Brief description  
-
+`open fun isChecked(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Checks if the view is checked
-
-  
-Content  
-open fun [isChecked](is-checked.md)()  
-
-
 

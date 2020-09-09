@@ -1,24 +1,11 @@
-//[kaspresso](../../index.md)/[io.reactivex.exceptions](../index.md)/[ExtCompositeException](index.md)/[size](size.md)
+[kaspresso](../../index.md) / [io.reactivex.exceptions](../index.md) / [ExtCompositeException](index.md) / [size](./size.md)
 
+# size
 
-
-# size  
-[androidJvm]  
-Brief description  
-
+`fun size(): `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)
 
 Returns the number of suppressed exceptions.
 
-
-
-#### Return  
-
-
-the number of suppressed exceptions
-
-  
-Content  
-open fun [size](size.md)(): [Int](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)  
-
-
+**Return**
+[Int](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html): the number of suppressed exceptions
 

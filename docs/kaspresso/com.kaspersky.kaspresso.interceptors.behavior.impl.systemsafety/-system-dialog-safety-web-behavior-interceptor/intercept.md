@@ -1,28 +1,13 @@
-//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.interceptors.behavior.impl.systemsafety](../index.md)/[SystemDialogSafetyWebBehaviorInterceptor](index.md)/[intercept](intercept.md)
+[kaspresso](../../index.md) / [com.kaspersky.kaspresso.interceptors.behavior.impl.systemsafety](../index.md) / [SystemDialogSafetyWebBehaviorInterceptor](index.md) / [intercept](./intercept.md)
 
+# intercept
 
+`fun <T> intercept(interaction: WebInteraction<*>, action: () -> T): T`
 
-# intercept  
-[androidJvm]  
-Brief description  
+Wraps the given [action](intercept.md#com.kaspersky.kaspresso.interceptors.behavior.impl.systemsafety.SystemDialogSafetyWebBehaviorInterceptor$intercept(androidx.test.espresso.web.sugar.Web.WebInteraction((kotlin.Any)), kotlin.Function0((com.kaspersky.kaspresso.interceptors.behavior.impl.systemsafety.SystemDialogSafetyWebBehaviorInterceptor.intercept.T)))/action) invocation with the system dialog safety.
 
+### Parameters
 
-Wraps the given action invocation with the system dialog safety.
+`interaction` - the intercepted [Web.WebInteraction](#).
 
-
-
-## Parameters  
-  
-androidJvm  
-  
-|  Name|  Summary| 
-|---|---|
-| action| <br><br>the action to invoke.<br><br>
-| interaction| <br><br>the intercepted Web.WebInteraction.<br><br>
-  
-  
-Content  
-open override fun <[T](intercept.md)> [intercept](intercept.md)(interaction: Web.WebInteraction<*>, action: () -> [T](intercept.md)): [T](intercept.md)  
-
-
-
+`action` - the action to invoke.

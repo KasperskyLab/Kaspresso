@@ -1,27 +1,11 @@
-//[kautomator](../../index.md)/[com.kaspersky.components.kautomator.component.edit](../index.md)/[UiEditableActions](index.md)/[replaceText](replace-text.md)
+[kautomator](../../index.md) / [com.kaspersky.components.kautomator.component.edit](../index.md) / [UiEditableActions](index.md) / [replaceText](./replace-text.md)
 
+# replaceText
 
-
-# replaceText  
-[androidJvm]  
-Brief description  
-
+`open fun replaceText(text: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
 Replaces the current view text with given
 
+### Parameters
 
-
-## Parameters  
-  
-androidJvm  
-  
-|  Name|  Summary| 
-|---|---|
-| text| <br><br>Text to input instead of current<br><br>
-  
-  
-Content  
-open fun [replaceText](replace-text.md)(text: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html))  
-
-
-
+`text` - Text to input instead of current

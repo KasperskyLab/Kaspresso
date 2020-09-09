@@ -1,28 +1,13 @@
-//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.interceptors.watcher.kautomator.impl.logging](../index.md)/[LoggingDeviceWatcherInterceptor](index.md)/[interceptPerform](intercept-perform.md)
+[kaspresso](../../index.md) / [com.kaspersky.kaspresso.interceptors.watcher.kautomator.impl.logging](../index.md) / [LoggingDeviceWatcherInterceptor](index.md) / [interceptPerform](./intercept-perform.md)
 
+# interceptPerform
 
+`fun interceptPerform(interaction: UiDeviceInteraction, action: UiDeviceAction): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
-# interceptPerform  
-[androidJvm]  
-Brief description  
+Writes info to [logger](#).
 
+### Parameters
 
-Writes info to logger.
+`interaction` - a Kautomator UiInteraction on which [action](intercept-perform.md#com.kaspersky.kaspresso.interceptors.watcher.kautomator.impl.logging.LoggingDeviceWatcherInterceptor$interceptPerform(com.kaspersky.components.kautomator.intercept.interaction.UiDeviceInteraction, com.kaspersky.components.kautomator.intercept.operation.UiOperation((androidx.test.uiautomator.UiDevice)))/action) is performed
 
-
-
-## Parameters  
-  
-androidJvm  
-  
-|  Name|  Summary| 
-|---|---|
-| action| <br><br>responsible for performing an activity (action) on the given interaction<br><br>
-| interaction| <br><br>a Kautomator UiInteraction on which action is performed<br><br>
-  
-  
-Content  
-open override fun [interceptPerform](intercept-perform.md)(interaction: UiDeviceInteraction, action: UiOperation<UiDevice>)  
-
-
-
+`action` - responsible for performing an activity (action) on the given [interaction](intercept-perform.md#com.kaspersky.kaspresso.interceptors.watcher.kautomator.impl.logging.LoggingDeviceWatcherInterceptor$interceptPerform(com.kaspersky.components.kautomator.intercept.interaction.UiDeviceInteraction, com.kaspersky.components.kautomator.intercept.operation.UiOperation((androidx.test.uiautomator.UiDevice)))/interaction)

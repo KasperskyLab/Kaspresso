@@ -1,28 +1,13 @@
-//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.device.apps](../index.md)/[Apps](index.md)/[launch](launch.md)
+[kaspresso](../../index.md) / [com.kaspersky.kaspresso.device.apps](../index.md) / [Apps](index.md) / [launch](./launch.md)
 
+# launch
 
+`abstract fun launch(packageName: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, data: `[`Uri`](https://developer.android.com/reference/android/net/Uri.html)`? = null): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
-# launch  
-[androidJvm]  
-Brief description  
+Launches an app with given [packageName](launch.md#com.kaspersky.kaspresso.device.apps.Apps$launch(kotlin.String, android.net.Uri)/packageName).
 
+### Parameters
 
-Launches an app with given packageName.
+`packageName` - the package name of an app to launch.
 
-
-
-## Parameters  
-  
-androidJvm  
-  
-|  Name|  Summary| 
-|---|---|
-| data| <br><br>the data to put to the launch intent.<br><br>
-| packageName| <br><br>the package name of an app to launch.<br><br>
-  
-  
-Content  
-abstract fun [launch](launch.md)(packageName: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html), data: [Uri](https://developer.android.com/reference/kotlin/android/net/Uri.html)?)  
-
-
-
+`data` - the data to put to the launch intent.
