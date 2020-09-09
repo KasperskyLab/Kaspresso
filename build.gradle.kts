@@ -1,5 +1,4 @@
 import groovy.lang.GroovyObject
-import org.jetbrains.dokka.gradle.DokkaMultiModuleTask
 import org.jfrog.gradle.plugin.artifactory.dsl.PublisherConfig
 import publishing.setup
 import publishing.shouldBePublished
