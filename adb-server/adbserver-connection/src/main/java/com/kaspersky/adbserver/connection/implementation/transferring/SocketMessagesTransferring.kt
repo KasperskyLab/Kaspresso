@@ -61,7 +61,7 @@ internal class SocketMessagesTransferring<ReceiveModel, SendModel> private const
             outputStream.writeObject(sendModel)
             outputStream.flush()
         } catch (exception: Exception) {
-            logger.e(exception)
+            logger.e(exception.localizedMessage)
             disruptAction.invoke()
         }
     }
@@ -101,7 +101,7 @@ internal class SocketMessagesTransferring<ReceiveModel, SendModel> private const
                             "Additional info: exception=$exception"
                 )
             } else {
-                logger.e(exception)
+                logger.e(exception.localizedMessage)
             }
             disruptAction.invoke()
         }

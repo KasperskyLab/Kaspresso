@@ -1,5 +1,6 @@
 package com.kaspersky.adbserver.common.log.fulllogger
 
+import com.kaspersky.adbserver.common.log.logger.LogLevel
 import com.kaspersky.adbserver.common.log.utils.AdbLoggerReflection
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -14,7 +15,7 @@ import java.util.Date
  * This form is using when logMode (the field) == DEBUG. Also, a user watches all logs.
  */
 internal class FullLoggerSystemImpl(
-    private val logMode: FullLogger.LogLevel,
+    private val logLevel: LogLevel,
     private val desktopName: String?,
     private val deviceName: String?
 ) : FullLogger {
@@ -31,15 +32,15 @@ internal class FullLoggerSystemImpl(
     private val formatter = SimpleDateFormat("dd/MM/yyyy HH:mm:ss.SSS")
 
     override fun log(
-        logLevel: FullLogger.LogLevel?,
+        logLevel: LogLevel?,
         tag: String?,
         method: String?,
         text: String?
     ) {
-        if (logLevel != null && logMode <= logLevel) {
+        if (logLevel != null && this.logLevel <= logLevel) {
             val fullLog = "${getLogType(logLevel)} ${getDate()} ${getDesktop()} ${getDevice()} ${getTag(tag)} " +
                     "${getMethod(method)} ${getText(text)}"
-            if (logLevel == FullLogger.LogLevel.ERROR) {
+            if (logLevel == LogLevel.ERROR) {
                 System.err.println(fullLog)
                 return
             }
@@ -47,7 +48,7 @@ internal class FullLoggerSystemImpl(
         }
     }
 
-    private fun getLogType(logLevel: FullLogger.LogLevel?): String =
+    private fun getLogType(logLevel: LogLevel?): String =
             logLevel?.name ?: EMPTY_STRING
 
     private fun getDevice(): String =
@@ -65,14 +66,14 @@ internal class FullLoggerSystemImpl(
             }
 
     private fun getTag(tag: String?): String {
-        if (logMode != FullLogger.LogLevel.DEBUG) return EMPTY_STRING
+        if (logLevel > LogLevel.DEBUG) return EMPTY_STRING
         if (tag != null) return "$TAG$tag "
         val generatedTagName = AdbLoggerReflection.getGeneratedClass()
         return "$TAG$generatedTagName "
     }
 
     private fun getMethod(method: String?): String {
-        if (logMode != FullLogger.LogLevel.DEBUG) return EMPTY_STRING
+        if (logLevel > LogLevel.DEBUG) return EMPTY_STRING
         if (method != null) return "$METHOD$method "
         val generatedMethodName = AdbLoggerReflection.getGeneratedMethod()
         return "$METHOD$generatedMethodName "

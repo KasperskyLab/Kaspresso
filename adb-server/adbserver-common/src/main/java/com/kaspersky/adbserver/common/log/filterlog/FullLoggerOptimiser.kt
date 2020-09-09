@@ -1,6 +1,7 @@
 package com.kaspersky.adbserver.common.log.filterlog
 
 import com.kaspersky.adbserver.common.log.fulllogger.FullLogger
+import com.kaspersky.adbserver.common.log.logger.LogLevel
 import java.util.ArrayDeque
 import java.util.Deque
 
@@ -19,7 +20,7 @@ internal class FullLoggerOptimiser(
     private var logRecorder: LogRecorder = LogRecorder(recordingStackMaxSize)
 
     override fun log(
-        logLevel: FullLogger.LogLevel?,
+        logLevel: LogLevel?,
         tag: String?,
         method: String?,
         text: String?
@@ -31,7 +32,7 @@ internal class FullLoggerOptimiser(
         )
     }
 
-    private fun handleLog(key: String, logLevel: FullLogger.LogLevel?, action: () -> Unit) {
+    private fun handleLog(key: String, logLevel: LogLevel?, action: () -> Unit) {
         val logData = LogData(key, action)
         val position = logStack.indexOf(logData)
         val answer = logRecorder.put(position, LogData(key, action))
@@ -44,7 +45,7 @@ internal class FullLoggerOptimiser(
         }
     }
 
-    private fun outputRecord(readyRecord: ReadyRecord, logLevel: FullLogger.LogLevel?) {
+    private fun outputRecord(readyRecord: ReadyRecord, logLevel: LogLevel?) {
         // prepare the first and the last log for recorded Fragment if it's needed
         var fragmentStartString: String? = null
         var fragmentEndString: String? = null
