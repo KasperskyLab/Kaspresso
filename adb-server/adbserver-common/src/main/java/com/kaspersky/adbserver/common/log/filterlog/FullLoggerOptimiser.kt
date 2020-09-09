@@ -2,6 +2,7 @@ package com.kaspersky.adbserver.common.log.filterlog
 
 import com.kaspersky.adbserver.common.log.fulllogger.FullLogger
 import com.kaspersky.adbserver.common.log.logger.LogLevel
+import com.kaspersky.adbserver.common.log.utils.AdbLoggerReflection
 import java.util.ArrayDeque
 import java.util.Deque
 
@@ -25,9 +26,11 @@ internal class FullLoggerOptimiser(
         method: String?,
         text: String?
     ) {
+        val formattedTag = tag ?: AdbLoggerReflection.getGeneratedClass()
+        val formattedMethod = tag ?: AdbLoggerReflection.getGeneratedMethod()
         handleLog(
             key = "$logLevel$tag$method$text",
-            action = { originalFullLogger.log(logLevel, tag, method, text) },
+            action = { originalFullLogger.log(logLevel, formattedTag, formattedMethod, text) },
             logLevel = logLevel
         )
     }
@@ -56,9 +59,9 @@ internal class FullLoggerOptimiser(
             fragmentEndString = "/".repeat(SLASH_AT_THE_END)
         }
         // output record
-        fragmentStartString?.let { originalFullLogger.log(logLevel = logLevel, text = fragmentStartString) }
+        fragmentStartString?.let { originalFullLogger.log(logLevel = logLevel, tag = "ServiceInfo", method = "Start", text = fragmentStartString) }
         readyRecord.recordingStack.descendingIterator().forEach { it.logOutput.invoke() }
-        fragmentEndString?.let { originalFullLogger.log(logLevel = logLevel, text = fragmentEndString) }
+        fragmentEndString?.let { originalFullLogger.log(logLevel = logLevel, tag = "ServiceInfo", method = "End", text = fragmentEndString) }
         // output remained part
         readyRecord.remainedStack.descendingIterator().forEach { it.logOutput.invoke() }
     }
