@@ -10,7 +10,11 @@ internal class ConnectionMaker(private val logger: Logger) {
     @Volatile
     private var connectionState: ConnectionState = ConnectionState.DISCONNECTED
 
-    fun connect(connectAction: () -> Unit, successConnectAction: () -> Unit, failureConnectAction: (Exception) -> Unit) {
+    fun connect(
+        connectAction: () -> Unit,
+        successConnectAction: () -> Unit,
+        failureConnectAction: (Throwable) -> Unit
+    ) {
         logger.d("Start a connection establishment. The current state=$connectionState")
         if (connectionState == ConnectionState.CONNECTING) {
             logger.d("The connection establishment process is in progress. Skip the new attempt")
@@ -32,7 +36,7 @@ internal class ConnectionMaker(private val logger: Logger) {
             connectionState = ConnectionState.CONNECTED
             logger.d("The connection is established. The current state=$connectionState")
             successConnectAction.invoke()
-        } catch (exception: Exception) {
+        } catch (exception: Throwable) {
             connectionState = ConnectionState.DISCONNECTED
             logger.d("The connection establishment process failed. The current state=$connectionState")
             failureConnectAction.invoke(exception)

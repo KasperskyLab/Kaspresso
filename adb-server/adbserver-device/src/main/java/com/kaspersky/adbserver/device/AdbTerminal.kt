@@ -4,14 +4,14 @@ import com.kaspersky.adbserver.common.api.CommandResult
 import com.kaspersky.adbserver.commandtypes.AdbCommand
 import com.kaspersky.adbserver.commandtypes.CmdCommand
 import com.kaspersky.adbserver.common.log.LoggerFactory
-import com.kaspersky.adbserver.common.log.logger.LogPolicy
+import com.kaspersky.adbserver.common.log.logger.LogLevel
 import com.kaspersky.adbserver.common.log.logger.Logger
 
 object AdbTerminal {
 
     private var device: Device? = null
 
-    fun connect(logger: Logger = LoggerFactory.getDeviceLogger(LogPolicy.DEBUG_FULL)) {
+    fun connect(logger: Logger = LoggerFactory.getDeviceLogger(LogLevel.INFO)) {
         if (device == null) device = Device.create(logger)
         device?.startConnectionToDesktop()
     }

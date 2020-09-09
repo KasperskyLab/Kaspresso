@@ -60,8 +60,8 @@ internal class SocketMessagesTransferring<ReceiveModel, SendModel> private const
         try {
             outputStream.writeObject(sendModel)
             outputStream.flush()
-        } catch (exception: Exception) {
-            logger.e(exception)
+        } catch (exception: Throwable) {
+            logger.e(exception.localizedMessage)
             disruptAction.invoke()
         }
     }
@@ -90,7 +90,7 @@ internal class SocketMessagesTransferring<ReceiveModel, SendModel> private const
                 logger.e("The message=$obj but this message type is not $receiveModelClass")
                 disruptAction.invoke()
             }
-        } catch (exception: Exception) {
+        } catch (exception: Throwable) {
             if (!isRunning.get()) {
                 // there is no mind to analyse exceptions after the socket connection was interrupted
                 return
@@ -101,7 +101,7 @@ internal class SocketMessagesTransferring<ReceiveModel, SendModel> private const
                             "Additional info: exception=$exception"
                 )
             } else {
-                logger.e(exception)
+                logger.e(exception.localizedMessage)
             }
             disruptAction.invoke()
         }

@@ -7,6 +7,7 @@ import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.Configurator
 import androidx.test.uiautomator.UiDevice
 import com.agoda.kakao.Kakao
+import com.kaspersky.adbserver.common.log.logger.LogLevel
 import com.kaspersky.components.kautomator.intercept.interaction.UiDeviceInteraction
 import com.kaspersky.components.kautomator.intercept.interaction.UiObjectInteraction
 import com.kaspersky.kaspresso.device.Device
@@ -45,7 +46,6 @@ import com.kaspersky.kaspresso.device.screenshots.screenshotmaker.ExternalScreen
 import com.kaspersky.kaspresso.device.screenshots.screenshotmaker.InternalScreenshotMaker
 import com.kaspersky.kaspresso.device.server.AdbServer
 import com.kaspersky.kaspresso.device.server.AdbServerImpl
-import com.kaspersky.kaspresso.device.server.AdbServerLogsType
 import com.kaspersky.kaspresso.failure.LoggingFailureHandler
 import com.kaspersky.kaspresso.idlewaiting.KautomatorWaitForIdleSettings
 import com.kaspersky.kaspresso.interceptors.behavior.DataBehaviorInterceptor
@@ -561,7 +561,7 @@ data class Kaspresso(
             if (!::libLogger.isInitialized) libLogger = UiTestLoggerImpl(DEFAULT_LIB_LOGGER_TAG)
             if (!::testLogger.isInitialized) testLogger = UiTestLoggerImpl(DEFAULT_TEST_LOGGER_TAG)
 
-            if (!::adbServer.isInitialized) adbServer = AdbServerImpl(AdbServerLogsType.NO_LOGS, libLogger)
+            if (!::adbServer.isInitialized) adbServer = AdbServerImpl(LogLevel.WARN, libLogger)
             if (!::apps.isInitialized) apps = AppsImpl(libLogger, instrumentation.context, uiDevice, adbServer)
             if (!::activities.isInitialized) activities = ActivitiesImpl(libLogger)
             if (!::files.isInitialized) files = FilesImpl(adbServer)
