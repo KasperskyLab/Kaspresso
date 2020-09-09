@@ -25,8 +25,11 @@ private const val PROPERTY_GROUP_ID = "publish.artifactGroup"
 private const val PROPERTY_ARTIFACT_NAME = "publish.artifactName"
 private const val PROPERTY_PUBLICATION_NAME = "publish.publicationName"
 
-val Project.shouldBePublished get() = name == "kaspresso" ||
-        name == "kautomator"
+val Project.shouldBePublished get() = listOf(
+    "kaspresso",
+    "kautomator",
+    "adbserver-device"
+).contains(name)
 
 fun PublishingExtension.setup(project: Project) {
     publications {
@@ -44,7 +47,11 @@ fun PublishingExtension.setup(project: Project) {
     }
 }
 
-private fun PublicationContainer.createWithNameAndVersion(project: Project, publicationName: String, publicationVersion: String): MavenPublication {
+private fun PublicationContainer.createWithNameAndVersion(
+    project: Project,
+    publicationName: String,
+    publicationVersion: String
+): MavenPublication {
     return create(publicationName, MavenPublication::class.java) {
         project.afterEvaluate {
             artifact(file("$buildDir/outputs/aar/$name-release.aar"))
