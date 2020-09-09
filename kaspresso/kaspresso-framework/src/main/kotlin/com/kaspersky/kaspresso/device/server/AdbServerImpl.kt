@@ -3,6 +3,7 @@ package com.kaspersky.kaspresso.device.server
 import com.kaspersky.adbserver.device.AdbTerminal
 import com.kaspersky.adbserver.common.api.CommandResult
 import com.kaspersky.adbserver.common.api.ExecutorResultStatus
+import com.kaspersky.adbserver.common.log.logger.LogLevel
 import com.kaspersky.adbserver.common.log.logger.Logger
 import com.kaspersky.kaspresso.internal.exceptions.AdbServerException
 import com.kaspersky.kaspresso.logger.UiTestLogger
@@ -13,11 +14,11 @@ import com.kaspersky.kaspresso.logger.UiTestLogger
  * More details are available in [AdbServerLogsType].
  */
 class AdbServerImpl(
-    adbServerLogsType: AdbServerLogsType,
+    logLevel: LogLevel,
     private val logger: UiTestLogger
 ) : AdbServer {
 
-    private val adbServerLogger: Logger = LoggerKaspressoImpl(adbServerLogsType, logger)
+    private val adbServerLogger: Logger = AdbServerLoggerKaspressoImpl(logLevel, logger)
     private var connected: Boolean = false
 
     private val adbTerminal: AdbTerminal

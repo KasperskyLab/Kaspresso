@@ -1,10 +1,9 @@
 package com.kaspersky.adbserver.common.log
 
 import com.kaspersky.adbserver.common.log.filterlog.FullLoggerOptimiser
-import com.kaspersky.adbserver.common.log.fulllogger.FullLogger
 import com.kaspersky.adbserver.common.log.fulllogger.FullLoggerSystemImpl
-import com.kaspersky.adbserver.common.log.logger.LogPolicy
 import com.kaspersky.adbserver.common.log.logger.DesktopLogger
+import com.kaspersky.adbserver.common.log.logger.LogLevel
 import com.kaspersky.adbserver.common.log.logger.Logger
 import com.kaspersky.adbserver.common.log.logger.LoggerImpl
 
@@ -13,26 +12,24 @@ import com.kaspersky.adbserver.common.log.logger.LoggerImpl
  */
 object LoggerFactory {
 
-    fun getDesktopLogger(logPolicy: LogPolicy, desktopName: String): DesktopLogger {
-        val logger = getCommonLogger(logPolicy, desktopName)
-        return DesktopLogger(logger, logPolicy, desktopName)
+    fun getDesktopLogger(logLevel: LogLevel, desktopName: String): DesktopLogger {
+        val logger = getCommonLogger(logLevel, desktopName)
+        return DesktopLogger(logger, logLevel, desktopName)
     }
 
     fun getDesktopLoggerReflectingDevice(desktopLogger: DesktopLogger, deviceName: String): Logger {
-        val logPolicy = desktopLogger.logPolicy
+        val logLevel = desktopLogger.logLevel
         val desktopName = desktopLogger.desktopName
-        return getCommonLogger(logPolicy, desktopName, deviceName)
+        return getCommonLogger(logLevel, desktopName, deviceName)
     }
 
-    fun getDeviceLogger(logPolicy: LogPolicy): Logger =
-        getCommonLogger(logPolicy)
+    fun getDeviceLogger(logLevel: LogLevel): Logger =
+        getCommonLogger(logLevel)
 
-    private fun getCommonLogger(logPolicy: LogPolicy, desktopName: String? = null, deviceName: String? = null): Logger {
-        val logMode: FullLogger.LogLevel =
-            if (logPolicy == LogPolicy.INFO_ONLY) FullLogger.LogLevel.INFO else FullLogger.LogLevel.DEBUG
-        val fullLogger = FullLoggerSystemImpl(logMode, desktopName, deviceName)
+    private fun getCommonLogger(logLevel: LogLevel, desktopName: String? = null, deviceName: String? = null): Logger {
+        val fullLogger = FullLoggerSystemImpl(logLevel, desktopName, deviceName)
         val fullLoggerWrapper =
-            if (logPolicy == LogPolicy.DEBUG_CUT) FullLoggerOptimiser(fullLogger) else fullLogger
+            if (logLevel == LogLevel.DEBUG) FullLoggerOptimiser(originalFullLogger = fullLogger, generateLogs = true) else fullLogger
         return LoggerImpl(fullLoggerWrapper)
     }
 }

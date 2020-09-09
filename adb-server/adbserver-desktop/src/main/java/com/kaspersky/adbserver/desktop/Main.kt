@@ -1,7 +1,7 @@
 package com.kaspersky.adbserver.desktop
 
 import com.kaspersky.adbserver.common.log.LoggerFactory
-import com.kaspersky.adbserver.common.log.logger.LogPolicy
+import com.kaspersky.adbserver.common.log.logger.LogLevel
 import kotlinx.cli.ArgParser
 import kotlinx.cli.ArgType
 import kotlinx.cli.default
@@ -27,17 +27,17 @@ internal fun main(args: Array<String>) {
         description = "Port to use"
     )
 
-    val logPolicy by parser.option(
-        type = ArgType.Choice<LogPolicy>(),
+    val logLevel by parser.option(
+        type = ArgType.Choice<LogLevel>(),
         shortName = "l",
-        fullName = "logs",
-        description = "Logs policy"
-    ).default(LogPolicy.INFO_ONLY)
+        fullName = "logLevel",
+        description = "Logs Level"
+    ).default(LogLevel.INFO)
 
     parser.parse(args)
 
     val desktopName = getDesktopName()
-    val desktopLogger = LoggerFactory.getDesktopLogger(logPolicy, desktopName)
+    val desktopLogger = LoggerFactory.getDesktopLogger(logLevel, desktopName)
 
     desktopLogger.i("Desktop started with arguments: emulators=$emulators, adbServerPort=$port")
 

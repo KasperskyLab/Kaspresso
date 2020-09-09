@@ -1,11 +1,14 @@
 package com.kaspersky.adbserver.common.log.filterlog
 
 import com.kaspersky.adbserver.common.log.fulllogger.FullLogger
+import com.kaspersky.adbserver.common.log.logger.LogLevel
+import com.kaspersky.adbserver.common.log.utils.AdbLoggerReflection
 import java.util.ArrayDeque
 import java.util.Deque
 
 internal class FullLoggerOptimiser(
     private val originalFullLogger: FullLogger,
+    private val generateLogs: Boolean,
     recordingStackMaxSize: Int = DEFAULT_RECORDING_STACK_MAX_SIZE
 ) : FullLogger {
 
@@ -19,19 +22,21 @@ internal class FullLoggerOptimiser(
     private var logRecorder: LogRecorder = LogRecorder(recordingStackMaxSize)
 
     override fun log(
-        logLevel: FullLogger.LogLevel?,
+        logLevel: LogLevel?,
         tag: String?,
         method: String?,
         text: String?
     ) {
+        val formattedTag = tag ?: if (generateLogs) AdbLoggerReflection.getGeneratedClass() else null
+        val formattedMethod = method ?: if (generateLogs) AdbLoggerReflection.getGeneratedMethod() else null
         handleLog(
             key = "$logLevel$tag$method$text",
-            action = { originalFullLogger.log(logLevel, tag, method, text) },
+            action = { originalFullLogger.log(logLevel, formattedTag, formattedMethod, text) },
             logLevel = logLevel
         )
     }
 
-    private fun handleLog(key: String, logLevel: FullLogger.LogLevel?, action: () -> Unit) {
+    private fun handleLog(key: String, logLevel: LogLevel?, action: () -> Unit) {
         val logData = LogData(key, action)
         val position = logStack.indexOf(logData)
         val answer = logRecorder.put(position, LogData(key, action))
@@ -44,7 +49,7 @@ internal class FullLoggerOptimiser(
         }
     }
 
-    private fun outputRecord(readyRecord: ReadyRecord, logLevel: FullLogger.LogLevel?) {
+    private fun outputRecord(readyRecord: ReadyRecord, logLevel: LogLevel?) {
         // prepare the first and the last log for recorded Fragment if it's needed
         var fragmentStartString: String? = null
         var fragmentEndString: String? = null
@@ -55,9 +60,9 @@ internal class FullLoggerOptimiser(
             fragmentEndString = "/".repeat(SLASH_AT_THE_END)
         }
         // output record
-        fragmentStartString?.let { originalFullLogger.log(logLevel = logLevel, text = fragmentStartString) }
+        fragmentStartString?.let { originalFullLogger.log(logLevel = logLevel, tag = "ServiceInfo", method = "Start", text = fragmentStartString) }
         readyRecord.recordingStack.descendingIterator().forEach { it.logOutput.invoke() }
-        fragmentEndString?.let { originalFullLogger.log(logLevel = logLevel, text = fragmentEndString) }
+        fragmentEndString?.let { originalFullLogger.log(logLevel = logLevel, tag = "ServiceInfo", method = "End", text = fragmentEndString) }
         // output remained part
         readyRecord.remainedStack.descendingIterator().forEach { it.logOutput.invoke() }
     }

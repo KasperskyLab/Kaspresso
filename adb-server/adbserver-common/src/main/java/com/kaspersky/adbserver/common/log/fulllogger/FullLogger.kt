@@ -1,5 +1,7 @@
 package com.kaspersky.adbserver.common.log.fulllogger
 
+import com.kaspersky.adbserver.common.log.logger.LogLevel
+
 internal interface FullLogger {
 
     fun log(
@@ -8,11 +10,4 @@ internal interface FullLogger {
         method: String? = null,
         text: String? = null
     )
-
-    enum class LogLevel {
-        DEBUG,
-        INFO,
-        WARNING,
-        ERROR
-    }
 }
