@@ -33,7 +33,6 @@ dependencies {
     implementation(Dependencies.androidXCore)
     implementation(project(Projects.Kautomator.framework))
     implementation(project(Projects.AdbServer.device))
-    implementation(project(Projects.AdbServer.common))
 
     testImplementation(Dependencies.junit)
     testImplementation(Dependencies.truth)
