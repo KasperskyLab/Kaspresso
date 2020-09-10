@@ -44,6 +44,7 @@ dependencies {
     androidTestImplementation(Dependencies.kakao)
     androidTestImplementation(project(Projects.Kaspresso.framework))
     androidTestImplementation(project(Projects.Kautomator.framework))
+    androidTestImplementation(project(Projects.AdbServer.common))
 
     androidTestUtil(Dependencies.orchestrator)
 }
