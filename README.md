@@ -255,25 +255,6 @@ dependencies {
 }
 ```
 
-## Samples
-All samples are available in [kaspresso-sample](./kaspresso/kaspresso-sample). <br>
-The algorithm to execute all ui-tests:
-1. Go to the `kaspresso` folder. For example: 
-```
-cd /User/Gagarin/workspace/Kaspresso
-```
-2. Start `adbserver-desktop.jar`:
-```
-java -jar artifacts/adbserver-desktop.jar
-```
-3. Start an emulator with API=25.
-4. Execute the following command:
-```
-./gradlew connectedAndroidTest
-
-```
-5. Profit!
-
 ## Support
 Ask your question on Telegram:
 * In English: t.me/kaspresso_en
