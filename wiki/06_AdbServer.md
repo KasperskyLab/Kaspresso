@@ -133,9 +133,6 @@ Be aware of mentioned fact.
 5. DEBUG <br>
 It's a VERBOSE type but DEBUG can pack repeating pieces of logs. For example:
 ```
-DEBUG 10/09/2020 12:11:36.001  desktop=Desktop-30548 device=emulator-5554 tag=SocketMessagesTransferring  method=prepareListening  message: Start
-DEBUG 10/09/2020 12:11:36.003  desktop=Desktop-30548 device=emulator-5554 tag=ConnectionMaker  method=connect  message: The connection establishment process failed. The current state=DISCONNECTED
-DEBUG 10/09/2020 12:11:36.003  desktop=Desktop-30548 device=emulator-5554 tag=ConnectionServerImplBySocket$tryConnect$3  method=invoke  message: The connection establishment attempt failed. The most possible reason is the opposite socket is not ready yet
 DEBUG 10/09/2020 12:11:37.006  desktop=Desktop-30548 device=emulator-5554 tag=DeviceMirror$WatchdogThread  method=run  message: The attempt to connect to Device. It may take time because the device can be not ready (for example, a kaspresso test was not started).
 DEBUG 10/09/2020 12:11:44.063  desktop=Desktop-30548 device=emulator-5554 tag=ServiceInfo  method=Start  message: ////////////////////////////////////////FRAGMENT IS REPEATED 7 TIMES////////////////////////////////////////
 DEBUG 10/09/2020 12:11:44.064  desktop=Desktop-30548 device=emulator-5554 tag=ConnectionServerImplBySocket  method=tryConnect  message: Start the process
@@ -150,16 +147,6 @@ DEBUG 10/09/2020 12:11:44.064  desktop=Desktop-30548 device=emulator-5554 tag=De
 DEBUG 10/09/2020 12:11:44.064  desktop=Desktop-30548 device=emulator-5554 tag=ServiceInfo  method=End  message: ////////////////////////////////////////////////////////////////////////////////////////////////////
 DEBUG 10/09/2020 12:11:44.064  desktop=Desktop-30548 device=emulator-5554 tag=ConnectionServerImplBySocket  method=tryConnect  message: Start the process
 DEBUG 10/09/2020 12:11:44.064  desktop=Desktop-30548 device=emulator-5554 tag=ConnectionMaker  method=connect  message: Start a connection establishment. The current state=DISCONNECTED
-DEBUG 10/09/2020 12:11:44.064  desktop=Desktop-30548 device=emulator-5554 tag=ConnectionMaker  method=connect  message: The current state=CONNECTING
-DEBUG 10/09/2020 12:11:44.064  desktop=Desktop-30548 device=emulator-5554 tag=DesktopDeviceSocketConnectionForwardImpl$getDesktopSocketLoad$1  method=invoke  message: started with ip=127.0.0.1, port=37110
-DEBUG 10/09/2020 12:11:44.065  desktop=Desktop-30548 device=emulator-5554 tag=DesktopDeviceSocketConnectionForwardImpl$getDesktopSocketLoad$1  method=invoke  message: completed with ip=127.0.0.1, port=37110
-DEBUG 10/09/2020 12:11:44.065  desktop=Desktop-30548 device=emulator-5554 tag=SocketMessagesTransferring  method=prepareListening  message: Start
-DEBUG 10/09/2020 12:11:44.065  desktop=Desktop-30548 device=emulator-5554 tag=SocketMessagesTransferring  method=prepareListening  message: IO Streams were created
-DEBUG 10/09/2020 12:11:44.065  desktop=Desktop-30548 device=emulator-5554 tag=ConnectionMaker  method=connect  message: The connection is established. The current state=CONNECTED
-DEBUG 10/09/2020 12:11:44.065  desktop=Desktop-30548 device=emulator-5554 tag=ConnectionServerImplBySocket$tryConnect$2  method=invoke  message: The connection is ready. Start messages listening
-DEBUG 10/09/2020 12:11:44.065  desktop=Desktop-30548 device=emulator-5554 tag=SocketMessagesTransferring  method=startListening  message: Started
-INFO 10/09/2020 12:11:44.066  desktop=Desktop-30548 device=emulator-5554 tag=DeviceMirror$WatchdogThread  method=run  message: The attempt to connect to Device was success
-DEBUG 10/09/2020 12:11:44.066  desktop=Desktop-30548 device=emulator-5554 tag=SocketMessagesTransferring$MessagesListeningThread  method=run  message: Start listening
 ``` 
 
 ### Device part
@@ -193,45 +180,6 @@ The logs now:
 2020-09-10 12:24:27.427 10349-10406/com.kaspersky.kaspressample D/KASPRESSO_ADBSERVER: class=ConnectionClientImplBySocket$handleMessages$1 method=invoke message: Received resultMessage=ResultMessage(command=AdbCommand(body=shell su 0 svc data disable), data=CommandResult(status=SUCCESS, description=exitCode=0, message=, serviceInfo=The command was executed on desktop=Desktop-30548))
 2020-09-10 12:24:27.427 10349-10378/com.kaspersky.kaspressample D/KASPRESSO_ADBSERVER: class=ConnectionClientImplBySocket method=executeCommand message: Command=AdbCommand(body=shell su 0 svc data disable) completed with commandResult=CommandResult(status=SUCCESS, description=exitCode=0, message=, serviceInfo=The command was executed on desktop=Desktop-30548)
 2020-09-10 12:24:27.427 10349-10378/com.kaspersky.kaspressample I/KASPRESSO_ADBSERVER: The result of command=AdbCommand(body=shell su 0 svc data disable) => CommandResult(status=SUCCESS, description=exitCode=0, message=, serviceInfo=The command was executed on desktop=Desktop-30548)
-2020-09-10 12:24:27.427 10349-10378/com.kaspersky.kaspressample I/KASPRESSO: AdbServer. The command=su 0 svc data disable was performed with result=CommandResult(status=SUCCESS, description=exitCode=0, message=, serviceInfo=The command was executed on desktop=Desktop-30548)
-2020-09-10 12:24:27.427 10349-10378/com.kaspersky.kaspressample I/KASPRESSO: AdbServer. The command to execute=settings get global mobile_data
-2020-09-10 12:24:27.427 10349-10378/com.kaspersky.kaspressample I/KASPRESSO_ADBSERVER: Start to execute the command=AdbCommand(body=shell settings get global mobile_data)
-2020-09-10 12:24:27.432 10349-10378/com.kaspersky.kaspressample D/KASPRESSO_ADBSERVER: class=ConnectionClientImplBySocket method=executeCommand message: Started command=AdbCommand(body=shell settings get global mobile_data)
-2020-09-10 12:24:27.434 10349-10378/com.kaspersky.kaspressample D/KASPRESSO_ADBSERVER: class=SocketMessagesTransferring method=sendMessage message: Input sendModel=TaskMessage(command=AdbCommand(body=shell settings get global mobile_data))
-2020-09-10 12:24:27.526 10349-10406/com.kaspersky.kaspressample D/KASPRESSO_ADBSERVER: class=SocketMessagesTransferring method=peekNextMessage message: The message=ResultMessage(command=AdbCommand(body=shell settings get global mobile_data), data=CommandResult(status=SUCCESS, description=exitCode=0, message=0
-    , serviceInfo=The command was executed on desktop=Desktop-30548))
-2020-09-10 12:24:27.526 10349-10406/com.kaspersky.kaspressample D/KASPRESSO_ADBSERVER: class=ConnectionClientImplBySocket$handleMessages$1 method=invoke message: Received resultMessage=ResultMessage(command=AdbCommand(body=shell settings get global mobile_data), data=CommandResult(status=SUCCESS, description=exitCode=0, message=0
-    , serviceInfo=The command was executed on desktop=Desktop-30548))
-2020-09-10 12:24:27.527 10349-10378/com.kaspersky.kaspressample D/KASPRESSO_ADBSERVER: class=ConnectionClientImplBySocket method=executeCommand message: Command=AdbCommand(body=shell settings get global mobile_data) completed with commandResult=CommandResult(status=SUCCESS, description=exitCode=0, message=0
-    , serviceInfo=The command was executed on desktop=Desktop-30548)
-2020-09-10 12:24:27.527 10349-10378/com.kaspersky.kaspressample I/KASPRESSO_ADBSERVER: The result of command=AdbCommand(body=shell settings get global mobile_data) => CommandResult(status=SUCCESS, description=exitCode=0, message=0
-    , serviceInfo=The command was executed on desktop=Desktop-30548)
-2020-09-10 12:24:27.527 10349-10378/com.kaspersky.kaspressample I/KASPRESSO: AdbServer. The command=settings get global mobile_data was performed with result=CommandResult(status=SUCCESS, description=exitCode=0, message=0
-    , serviceInfo=The command was executed on desktop=Desktop-30548)
-2020-09-10 12:24:27.527 10349-10378/com.kaspersky.kaspressample I/KASPRESSO: AdbServer. The command to execute=su 0 svc wifi disable
-2020-09-10 12:24:27.527 10349-10378/com.kaspersky.kaspressample I/KASPRESSO_ADBSERVER: Start to execute the command=AdbCommand(body=shell su 0 svc wifi disable)
-2020-09-10 12:24:27.528 10349-10378/com.kaspersky.kaspressample D/KASPRESSO_ADBSERVER: class=ConnectionClientImplBySocket method=executeCommand message: Started command=AdbCommand(body=shell su 0 svc wifi disable)
-2020-09-10 12:24:27.529 10349-10378/com.kaspersky.kaspressample D/KASPRESSO_ADBSERVER: class=SocketMessagesTransferring method=sendMessage message: Input sendModel=TaskMessage(command=AdbCommand(body=shell su 0 svc wifi disable))
-2020-09-10 12:24:27.731 10349-10406/com.kaspersky.kaspressample D/KASPRESSO_ADBSERVER: class=SocketMessagesTransferring method=peekNextMessage message: The message=ResultMessage(command=AdbCommand(body=shell su 0 svc wifi disable), data=CommandResult(status=SUCCESS, description=exitCode=0, message=, serviceInfo=The command was executed on desktop=Desktop-30548))
-2020-09-10 12:24:27.731 10349-10406/com.kaspersky.kaspressample D/KASPRESSO_ADBSERVER: class=ConnectionClientImplBySocket$handleMessages$1 method=invoke message: Received resultMessage=ResultMessage(command=AdbCommand(body=shell su 0 svc wifi disable), data=CommandResult(status=SUCCESS, description=exitCode=0, message=, serviceInfo=The command was executed on desktop=Desktop-30548))
-2020-09-10 12:24:27.732 10349-10378/com.kaspersky.kaspressample D/KASPRESSO_ADBSERVER: class=ConnectionClientImplBySocket method=executeCommand message: Command=AdbCommand(body=shell su 0 svc wifi disable) completed with commandResult=CommandResult(status=SUCCESS, description=exitCode=0, message=, serviceInfo=The command was executed on desktop=Desktop-30548)
-2020-09-10 12:24:27.733 10349-10378/com.kaspersky.kaspressample I/KASPRESSO_ADBSERVER: The result of command=AdbCommand(body=shell su 0 svc wifi disable) => CommandResult(status=SUCCESS, description=exitCode=0, message=, serviceInfo=The command was executed on desktop=Desktop-30548)
-2020-09-10 12:24:27.733 10349-10378/com.kaspersky.kaspressample I/KASPRESSO: AdbServer. The command=su 0 svc wifi disable was performed with result=CommandResult(status=SUCCESS, description=exitCode=0, message=, serviceInfo=The command was executed on desktop=Desktop-30548)
-2020-09-10 12:24:27.733 10349-10378/com.kaspersky.kaspressample I/KASPRESSO: AdbServer. The command to execute=settings get global wifi_on
-2020-09-10 12:24:27.733 10349-10378/com.kaspersky.kaspressample I/KASPRESSO_ADBSERVER: Start to execute the command=AdbCommand(body=shell settings get global wifi_on)
-2020-09-10 12:24:27.733 10349-10378/com.kaspersky.kaspressample D/KASPRESSO_ADBSERVER: class=ConnectionClientImplBySocket method=executeCommand message: Started command=AdbCommand(body=shell settings get global wifi_on)
-2020-09-10 12:24:27.734 10349-10378/com.kaspersky.kaspressample D/KASPRESSO_ADBSERVER: class=SocketMessagesTransferring method=sendMessage message: Input sendModel=TaskMessage(command=AdbCommand(body=shell settings get global wifi_on))
-2020-09-10 12:24:27.787 10349-10406/com.kaspersky.kaspressample D/KASPRESSO_ADBSERVER: class=SocketMessagesTransferring method=peekNextMessage message: The message=ResultMessage(command=AdbCommand(body=shell settings get global wifi_on), data=CommandResult(status=SUCCESS, description=exitCode=0, message=0
-    , serviceInfo=The command was executed on desktop=Desktop-30548))
-2020-09-10 12:24:27.787 10349-10406/com.kaspersky.kaspressample D/KASPRESSO_ADBSERVER: class=ConnectionClientImplBySocket$handleMessages$1 method=invoke message: Received resultMessage=ResultMessage(command=AdbCommand(body=shell settings get global wifi_on), data=CommandResult(status=SUCCESS, description=exitCode=0, message=0
-    , serviceInfo=The command was executed on desktop=Desktop-30548))
-2020-09-10 12:24:27.788 10349-10378/com.kaspersky.kaspressample D/KASPRESSO_ADBSERVER: class=ConnectionClientImplBySocket method=executeCommand message: Command=AdbCommand(body=shell settings get global wifi_on) completed with commandResult=CommandResult(status=SUCCESS, description=exitCode=0, message=0
-    , serviceInfo=The command was executed on desktop=Desktop-30548)
-2020-09-10 12:24:27.788 10349-10378/com.kaspersky.kaspressample I/KASPRESSO_ADBSERVER: The result of command=AdbCommand(body=shell settings get global wifi_on) => CommandResult(status=SUCCESS, description=exitCode=0, message=0
-    , serviceInfo=The command was executed on desktop=Desktop-30548)
-2020-09-10 12:24:27.788 10349-10378/com.kaspersky.kaspressample I/KASPRESSO: AdbServer. The command=settings get global wifi_on was performed with result=CommandResult(status=SUCCESS, description=exitCode=0, message=0
-    , serviceInfo=The command was executed on desktop=Desktop-30548)
-2020-09-10 12:24:37.804 10349-10378/com.kaspersky.kaspressample I/KASPRESSO: TEST STEP: "1. Disable network" in DeviceNetworkSampleTest SUCCEED. It took 0 minutes, 10 seconds and 564 millis. 
 ```
 
 ## Development
