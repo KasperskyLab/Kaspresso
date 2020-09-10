@@ -1,6 +1,7 @@
 package publishing
 
 import org.gradle.api.Project
+import org.gradle.api.plugins.JavaLibraryPlugin
 import org.gradle.api.publish.PublicationContainer
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
@@ -17,7 +18,7 @@ private const val DEPENDENCY_GROUP = "groupId"
 private const val DEPENDENCY_ARTIFACT = "artifactId"
 private const val DEPENDENCY_VERSION = "version"
 private const val DEPENDENCY_KAUTOMATOR = "kautomator"
-private const val DEPENDENCY_KAUTOMATOR_SHORT = "kautomator"
+private const val DEPENDENCY_ADB_SERVER = "adbserver-device"
 
 private const val PROPERTY_VERSION = "stableVersion"
 private const val PROPERTY_VERSION_SNAPSHOT = "snapshotVersion"
@@ -25,11 +26,12 @@ private const val PROPERTY_GROUP_ID = "publish.artifactGroup"
 private const val PROPERTY_ARTIFACT_NAME = "publish.artifactName"
 private const val PROPERTY_PUBLICATION_NAME = "publish.publicationName"
 
-val Project.shouldBePublished get() = listOf(
-    "kaspresso",
-    "kautomator",
-    "adbserver-device"
-).contains(name)
+val Project.shouldBePublished
+    get() = listOf(
+        "kaspresso",
+        "kautomator",
+        "adbserver-device"
+    ).contains(name)
 
 fun PublishingExtension.setup(project: Project) {
     publications {
@@ -54,7 +56,11 @@ private fun PublicationContainer.createWithNameAndVersion(
 ): MavenPublication {
     return create(publicationName, MavenPublication::class.java) {
         project.afterEvaluate {
-            artifact(file("$buildDir/outputs/aar/$name-release.aar"))
+            if (project.plugins.hasPlugin(JavaLibraryPlugin::class.java)) {
+                artifact(file("$buildDir/libs/$name.jar"))
+            }
+            if (project.plugins.hasPlugin("com.android.library"))
+                artifact(file("$buildDir/outputs/aar/$name-release.aar"))
             artifact(tasks.getByName(SOURCES_TASK))
             artifact(tasks.getByName(JAVADOC_TASK))
         }
@@ -70,16 +76,25 @@ private fun PublicationContainer.createWithNameAndVersion(
 
                 project.configurations.getByName(DEPENDENCIES_CONFIGURATION).allDependencies.forEach {
                     if (it.name != UNSPECIFIED_DEPENDENCY && it.version != null) {
+
                         val dependencyNode = dependenciesNode.appendNode(NODE_DEPENDENCY)
 
-                        if (it.name != DEPENDENCY_KAUTOMATOR) { // TODO: Move to project settings
-                            dependencyNode.appendNode(DEPENDENCY_GROUP, it.group)
-                            dependencyNode.appendNode(DEPENDENCY_VERSION, it.version)
-                            dependencyNode.appendNode(DEPENDENCY_ARTIFACT, it.name)
-                        } else {
-                            dependencyNode.appendNode(DEPENDENCY_GROUP, groupId)
-                            dependencyNode.appendNode(DEPENDENCY_VERSION, publicationVersion)
-                            dependencyNode.appendNode(DEPENDENCY_ARTIFACT, DEPENDENCY_KAUTOMATOR_SHORT)
+                        fun appendArtifact(group: String?, version: String?, artifact: String?) {
+                            dependencyNode.appendNode(DEPENDENCY_GROUP, group)
+                            dependencyNode.appendNode(DEPENDENCY_VERSION, version)
+                            dependencyNode.appendNode(DEPENDENCY_ARTIFACT, artifact)
+                        }
+
+                        when {
+                            listOf(
+                                DEPENDENCY_KAUTOMATOR,
+                                DEPENDENCY_ADB_SERVER
+                            ).contains(it.name) -> appendArtifact(
+                                groupId,
+                                publicationVersion,
+                                it.name
+                            )
+                            else -> appendArtifact(it.group, it.version, it.name)
                         }
                     }
                 }

@@ -39,3 +39,7 @@ tasks {
         from(dokkaJavadoc.get().outputDirectory.get())
     }
 }
+artifacts {
+    archives(tasks.getByName("sourcesJar"))
+    archives(tasks.getByName("javadocJar"))
+}
