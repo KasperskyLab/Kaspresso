@@ -277,6 +277,12 @@ java -jar artifacts/adbserver-desktop.jar
 ```
 5. Profit!
 
+## Breaking changes in 1.2.0
+1. Please, use 'artifacts/adbserver-desktop.jar' to start Autotest AdbServer (the Desktop part). 
+Kaspresso 1.2.0 works only with 'artifacts/adbserver-desktop.jar'!<br>
+Otherwise, there is old 'desktop_1_1_0.jar' in the folder 'artifacts' to work with old version of Kaspresso (before 1.2.0).
+2. If you are going to use `device.logcat` in your test then we recommend to call `device.logcat.disableChatty` in `before`-section.
+In the previous version of Kaspresso, `device.logcat.disableChatty` was called automatically under the hood almost always. But this strategy was a mistake.
 
 ## Support
 Ask your question on Telegram:
