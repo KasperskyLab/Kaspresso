@@ -32,7 +32,7 @@ dependencies {
     implementation(Dependencies.gson)
     implementation(Dependencies.androidXCore)
     implementation(project(Projects.Kautomator.framework))
-    implementation(project(Projects.AdbServer.device))
+    implementation(project(Projects.AdbServer.device)) { isTransitive = false }
 
     testImplementation(Dependencies.junit)
     testImplementation(Dependencies.truth)
