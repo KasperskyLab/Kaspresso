@@ -18,7 +18,7 @@ The algorithm how to use Autotest AdbServer:
 In cmd, execute the following command: `java -jar <path-to-kaspresso>/artifacts/adbserver-desktop.jar`
 2. Run the Device part. <br>
 Build and start [adbserver-sample module](../adb-server/adbserver-sample). You will see the following screen:
-![](https://habrastorage.org/webt/zq/rt/ia/zqrtiaglx5a1zc4ned-qykl0t_g.png)
+<img src="https://habrastorage.org/webt/zq/rt/ia/zqrtiaglx5a1zc4ned-qykl0t_g.png" width="432" height="768"/>
 For example, you can input `shell input text abc` in the EditText. As a result you will get `shell input text abcabc` 
 in your EditText because ADB has executed the command and has added symbols `abc` into the focused EditText. <br>
 You may notice that we use `AdbTerminal` in [adbserver-sample module](../adb-server/adbserver-sample) to execute ADB commands.
@@ -49,9 +49,6 @@ Please, don't forget to give a permission:
 <uses-permission android:name="android.permission.INTERNET" />
 ``` 
 
-## Source code
-All details about the Autotest AdbServer code are available in [adb-server module](../adb-server).
-
 ## Options and Logging
 
 ### Desktop part
@@ -69,8 +66,10 @@ You will see only error messages. The example:
 ERROR 10/09/2020 11:37:19.893  desktop=Desktop-25920 device=emulator-5554   message: Incorrect type of the message...
 ```
 Please, have a look at the log format. You can observe the type of a message, date and time, the desktop executing the message and the emulator giving the task, and the message.
+
 2. WARN <br>
 You will see error and warning messages.
+
 3. INFO <br>
 The default value. Such type provides all base events. The example:
 ```
@@ -89,6 +88,7 @@ It could be very useful in debugging. Have a look at the field `serviceInfo` at 
 ```
 INFO 10/09/2020 11:44:49.115  desktop=Desktop-25920 device=emulator-5554   message: The executed command: AdbCommand(body=shell input text abc). The result: CommandResult(status=SUCCESS, description=exitCode=0, message=, serviceInfo=The command was executed on desktop=Desktop-25920)
 ```
+
 4. VERBOSE <br>
 There are cases when a developer wants to debug Desktop part of Autotest AdbServer. That's why there is a special very detailed format - VERBOSE mode. <br>
 Have a glance at logs reflecting similar events presented above (the initialising, the device connecting and the executing of one command):
@@ -233,3 +233,7 @@ The logs now:
     , serviceInfo=The command was executed on desktop=Desktop-30548)
 2020-09-10 12:24:37.804 10349-10378/com.kaspersky.kaspressample I/KASPRESSO: TEST STEP: "1. Disable network" in DeviceNetworkSampleTest SUCCEED. It took 0 minutes, 10 seconds and 564 millis. 
 ```
+
+## Development
+All details about the Autotest AdbServer code are available in [adb-server module](../adb-server). <br>
+If you want to build `adbserver-desktop.jar` then just execute `////`.
