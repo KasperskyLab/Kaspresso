@@ -1,7 +1,7 @@
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Kaspresso-green.svg?style=flat )](https://android-arsenal.com/details/1/7896)
 [![Android Weekly](https://img.shields.io/badge/Android%20Weekly-383-green.svg)](http://androidweekly.net/issues/issue-383)
 [![Android Weekly](https://img.shields.io/badge/Android%20Weekly-392-green.svg)](http://androidweekly.net/issues/issue-392)
-[![Download](https://api.bintray.com/packages/ruslanmingaliev/Kaspresso/Kaspresso/images/download.svg?version=1.1.0) ](https://bintray.com/ruslanmingaliev/Kaspresso/Kaspresso/1.1.0/link)
+[![Download](https://api.bintray.com/packages/ruslanmingaliev/Kaspresso/Kaspresso/images/download.svg?version=1.2.0) ](https://bintray.com/ruslanmingaliev/Kaspresso/Kaspresso/1.2.0/link)
 ![Build and Deploy](https://github.com/KasperskyLab/Kaspresso/workflows/Build%20and%20Deploy/badge.svg)
 
 # Kaspresso
@@ -229,7 +229,7 @@ allprojects {
 
 ```
 dependencies {
-    androidTestImplementation 'com.kaspersky.android-components:kaspresso:1.1.0'
+    androidTestImplementation 'com.kaspersky.android-components:kaspresso:1.2.0'
 }
 ```
 
@@ -253,9 +253,30 @@ repositories {
 }
 
 dependencies {
-    androidTestImplementation 'com.kaspersky.android-components:kaspresso:1.1.1-SNAPSHOT'
+    androidTestImplementation 'com.kaspersky.android-components:kaspresso:1.3.0-SNAPSHOT'
 }
 ```
+
+## Samples
+All samples are available in [kaspresso-sample](./kaspresso/kaspresso-sample). 
+
+The algorithm to execute all ui-tests:
+1. Go to the `kaspresso` folder. For example: 
+```
+cd /User/Gagarin/workspace/Kaspresso
+```
+2. Start `adbserver-desktop.jar`:
+```
+java -jar artifacts/adbserver-desktop.jar
+```
+3. Start an emulator with API=25.
+4. Execute the following command: // NOT READY!!!
+```
+./gradlew connectedAndroidTest
+
+```
+5. Profit!
+
 
 ## Support
 Ask your question on Telegram:
