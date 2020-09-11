@@ -57,4 +57,4 @@ Most of the features that **Device** provides use of adb commands and requires A
 Some of them, such as call emulation or SMS receiving, could be executed only on emulator. All such methods are marked by annotation ```@RequiresAdbServer```.
 
 All the methods which use ADB commands require `android.permission.INTERNET` permission. 
-For more information, see methods JavaDoc description and [AdbServer doc](./06_AdbServer.md)
+For more information, see methods JavaDoc description and [AdbServer](./06_AdbServer.md) documentation.
