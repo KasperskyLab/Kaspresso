@@ -184,4 +184,4 @@ The logs now:
 
 ## Development
 All details about the Autotest AdbServer code are available in [adb-server module](../adb-server). <br>
-If you want to build `adbserver-desktop.jar` then just execute `////`.
+If you want to build `adbserver-desktop.jar` then just execute `./gradlew :adb-server:adbserver-desktop:jar`.
