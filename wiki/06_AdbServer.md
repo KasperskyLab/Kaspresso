@@ -1,31 +1,32 @@
 # Autotest AdbServer
 
-## What is it?
-As you remember from the [previous part devoted to Device interface](./05_Device.md) Device uses the following things under the hood:
-1. Espresso
-2. UI Automator
-3. ADB
+## Description
+As you remember from the [previous part devoted to Device interface](./05_Device.md), Device interface contains the following things under the hood:
+- Espresso
+- UI Automator
+- ADB
 
-Yep, an attentive reader may notice that ADB is not enabled in Espresso tests! But Appium can. That’s really bad news.
-That's why we've written special Autotest AdbServer to compensate for the Espresso and UI Automator disadvantage. <br>
-The main idea of the tool is so similar with the idea of Appium. We just have to build a simple client-server system 
-where the client is a device running a test and the server is a desktop giving the command to execute tests on the device.
-Also, we use a port forwarding to be able to organise a socket tunnel between a device and a desktop through any kind of connection (wi-fi, bluetooth, usb and etc.).
+An attentive reader may notice that ADB is not available in Espresso tests. But using some other frameworks, like Appium, you can execute ADB commands. So we decided to add this important functionality too.<br>
+We've developed a special Autotest's AdbServer to compensate lack of Espresso and UI Automator. 
+The main idea of the tool is similar to the idea in Appium. We just built a simple client-server system which contains two parts: <br>
+- Device that starts up a test acts as client
+- Desktop sends ADB commands to be executed on the device.
+Also, the system uses a port forwarding to be able to organize a socket tunnel between Device and Desktop through any kind of connection (Wi-Fi, Bluetooth, USB and etc.).
 
 ## Usage
 The algorithm how to use Autotest AdbServer:
-1. Run the Desktop part. <br>
-In cmd, execute the following command: `java -jar <path-to-kaspresso>/artifacts/adbserver-desktop.jar`
+1. Run the Desktop part on your work station. <br>
+Execute the following command: `java -jar <path/to/kaspresso>/artifacts/adbserver-desktop.jar` in the terminal
 2. Run the Device part. <br>
-Build and start [adbserver-sample module](../adb-server/adbserver-sample). You will see the following screen:
+Build and start [adbserver-sample module](../samples/adbserver-sample). You should see the following screen:
 <img src="https://habrastorage.org/webt/zq/rt/ia/zqrtiaglx5a1zc4ned-qykl0t_g.png" width="432" height="768"/>
-For example, you can input `shell input text abc` in the EditText. As a result you will get `shell input text abcabc` 
-in your EditText because ADB has executed the command and has added symbols `abc` into the focused EditText. <br>
-You may notice that we use `AdbTerminal` in [adbserver-sample module](../adb-server/adbserver-sample) to execute ADB commands.
+For example, type `shell input text abc` in the app's EditText and click 'Execute' button. As result you will get `shell input text abcabc` 
+in the EditText because ADB command has been executed and `abc` symbols has been added into the focused EditText. <br>
+You can notice that the app uses `AdbTerminal` class [adbserver-sample module](../samples/adbserver-sample) to execute ADB commands.
 
 ## Usage in Kaspresso
 In Kaspresso, we wrap `AdbTerminal` into a special interface `AdbServer`.
-**AdbServer** instance is available in `BaseTestContext` scope and `BaseTestCase` via `adbServer` property: <br>
+`AdbServer`'s instance is available in `BaseTestContext` scope and `BaseTestCase` with `adbServer` property: <br>
 ```kotlin
 @Test
 fun test() =
@@ -44,34 +45,35 @@ fun test() =
         // ....
 }
 ```
-Please, don't forget to give a permission:
-```gradle
+Also, don't forget to grant necessary permission:
+```
 <uses-permission android:name="android.permission.INTERNET" />
 ``` 
 
 ## Options and Logging
 
 ### Desktop part
-A developer can use several special flags when he starts `adbserver-desktop.jar`. <br>
-For example, the possible command: `java -jar adbserver-desktop.jar -e emulator-5554,emulator-5556 -p 5041 -l VERBOSE`. <br>
+You can also use a few special flags when he starts `adbserver-desktop.jar`. <br>
+For example,  `java -jar adbserver-desktop.jar -e emulator-5554,emulator-5556 -p 5041 -l VERBOSE`. <br>
 Flags:
 - `e`, `--emulators` - the list of emulators that can be captured by `adbserver-desktop.jar` (by default, `adbserver-desktop.jar` captures all available emulators)
 - `p`, `--port` - the adb server port number (the default value is 5037)
 - `l`, `--logs` - what type of logs show (the default value is INFO).
+For more information, you can run `java -jar adbserver-desktop.jar --help`
 
-Let's consider available types of logs:
+Consider available types of logs:
 1. ERROR <br>
-You will see only error messages. The example:
+You will see only error messages in the output. For example,
 ```
 ERROR 10/09/2020 11:37:19.893  desktop=Desktop-25920 device=emulator-5554   message: Incorrect type of the message...
 ```
-Please, have a look at the log format. You can observe the type of a message, date and time, the desktop executing the message and the emulator giving the task, and the message.
+Take a look at the log format. You can see the type of a message, date and time, the host name and the emulator which executes the command, and the message.
 
 2. WARN <br>
-You will see error and warning messages.
+Prints error and warning messages.
 
 3. INFO <br>
-The default value. Such type provides all base events. The example:
+Default value, provides all the base events. For example,
 ```
 INFO 10/09/2020 11:37:04.822  desktop=Desktop-25920    message: Desktop started with arguments: emulators=[], adbServerPort=null
 INFO 10/09/2020 11:37:19.859  desktop=Desktop-25920    message: New device has been found: emulator-5554. Initialize connection to the device...
@@ -83,15 +85,15 @@ INFO 10/09/2020 11:37:20.185  desktop=Desktop-25920 device=emulator-5554   messa
 INFO 10/09/2020 11:44:47.810  desktop=Desktop-25920 device=emulator-5554   message: The received command to execute: AdbCommand(body=shell input text abc)
 INFO 10/09/2020 11:44:49.115  desktop=Desktop-25920 device=emulator-5554   message: The executed command: AdbCommand(body=shell input text abc). The result: CommandResult(status=SUCCESS, description=exitCode=0, message=, serviceInfo=The command was executed on desktop=Desktop-25920)
 ```
-Also, the Desktop writes where the concrete command was executed (the information is available on the Desktop and on the Device). 
-It could be very useful in debugging. Have a look at the field `serviceInfo` at the end:
+Also, the Desktop prints an emulator name, where the concrete command has been executed (this information is available on the Desktop and on the Device). 
+It could be very useful in debugging. Take a look at the field `serviceInfo` at the end:
 ```
 INFO 10/09/2020 11:44:49.115  desktop=Desktop-25920 device=emulator-5554   message: The executed command: AdbCommand(body=shell input text abc). The result: CommandResult(status=SUCCESS, description=exitCode=0, message=, serviceInfo=The command was executed on desktop=Desktop-25920)
 ```
 
 4. VERBOSE <br>
-There are cases when a developer wants to debug Desktop part of Autotest AdbServer. That's why there is a special very detailed format - VERBOSE mode. <br>
-Have a glance at logs reflecting similar events presented above (the initialising, the device connecting and the executing of one command):
+There are cases when you might to debug Desktop part of AdbServer. That's why there is a special very detailed format — VERBOSE. <br>
+Have a glance at logs reflecting similar events presented above (initialization, device connection and execution of a command):
 ```
 INFO 10/09/2020 11:48:16.850  desktop=Desktop-27398  tag=MainKt  method=main  message: Desktop started with arguments: emulators=[], adbServerPort=null
 DEBUG 10/09/2020 11:48:16.853  desktop=Desktop-27398  tag=Desktop  method=startDevicesObserving  message: start
@@ -127,11 +129,10 @@ INFO 10/09/2020 11:48:24.389  desktop=Desktop-27398 device=emulator-5554 tag=Dev
 DEBUG 10/09/2020 11:48:24.389  desktop=Desktop-27398 device=emulator-5554 tag=ConnectionServerImplBySocket$handleMessages$1$1  method=run  message: Result of taskMessage=TaskMessage(command=AdbCommand(body=shell input text abc)) => result=CommandResult(status=SUCCESS, description=exitCode=0, message=, serviceInfo=The command was executed on desktop=Desktop-27398)
 DEBUG 10/09/2020 11:48:24.389  desktop=Desktop-27398 device=emulator-5554 tag=SocketMessagesTransferring  method=sendMessage  message: Input sendModel=ResultMessage(command=AdbCommand(body=shell input text abc), data=CommandResult(status=SUCCESS, description=exitCode=0, message=, serviceInfo=The command was executed on desktop=Desktop-27398))
 ```
-Pay attention that a log row now contains two additional fields: `tag` and `method`. Both fields are autogenerated using `Throwable().stacktrace` method. 
-Be aware of mentioned fact.
+Pay attention that the log row also contains two additional fields: `tag` and `method`. Both fields are autogenerated using `Throwable().stacktrace` method. 
 
 5. DEBUG <br>
-It's a VERBOSE type but DEBUG can pack repeating pieces of logs. For example:
+Unlike a VERBOSE type, DEBUG packs repeating pieces of logs. For example,
 ```
 DEBUG 10/09/2020 12:11:37.006  desktop=Desktop-30548 device=emulator-5554 tag=DeviceMirror$WatchdogThread  method=run  message: The attempt to connect to Device. It may take time because the device can be not ready (for example, a kaspresso test was not started).
 DEBUG 10/09/2020 12:11:44.063  desktop=Desktop-30548 device=emulator-5554 tag=ServiceInfo  method=Start  message: ////////////////////////////////////////FRAGMENT IS REPEATED 7 TIMES////////////////////////////////////////
@@ -151,16 +152,16 @@ DEBUG 10/09/2020 12:11:44.064  desktop=Desktop-30548 device=emulator-5554 tag=Co
 
 ### Device part
 
-In Kaspresso, the special interface `AdbServer` has a default implementation `AdbServerImpl`. This implementation set `WARN` log level for Autotest AdbServer.
-So, you can observe such logs in any kaspresso test: <br>
+In Kaspresso, the `AdbServer` interface has a default implementation `AdbServerImpl`. This implementation sets `WARN` log level for AdbServer.
+So, you can see such logs in LogCat: <br>
 ```
 2020-09-10 12:24:27.240 10349-10378/com.kaspersky.kaspressample I/KASPRESSO: ___________________________________________________________________________
 2020-09-10 12:24:27.240 10349-10378/com.kaspersky.kaspressample I/KASPRESSO: TEST STEP: "1. Disable network" in DeviceNetworkSampleTest
 2020-09-10 12:24:27.240 10349-10378/com.kaspersky.kaspressample I/KASPRESSO: AdbServer. The command to execute=su 0 svc data disable
 2020-09-10 12:24:27.240 10349-10378/com.kaspersky.kaspressample W/KASPRESSO_ADBSERVER: Something went wrong (fake message)
 ```
-Tag `KASPRESSO_ADBSERVER` describes logs from Autotest AdbServer with `WARN` log level. <br>
-If you desire to debug the internals of Autotest AdbServer (the device part) then you can set `VERBOSE` log level:
+All the logs are printed with `KASPRESSO_ADBSERVER` tag with `WARN` log level. <br>
+If you want to debug the Device part of Autotest AdbServer (the device part), you can set `VERBOSE` log level:
 ```kotlin
 class DeviceNetworkSampleTest : TestCase(
     kaspressoBuilder = Kaspresso.Builder.simple {
@@ -169,7 +170,7 @@ class DeviceNetworkSampleTest : TestCase(
     }
 ) {...}
 ```
-The logs now:
+Now the logs looks like:
 ```
 2020-09-10 12:24:27.240 10349-10378/com.kaspersky.kaspressample I/KASPRESSO: TEST STEP: "1. Disable network" in DeviceNetworkSampleTest
 2020-09-10 12:24:27.240 10349-10378/com.kaspersky.kaspressample I/KASPRESSO: AdbServer. The command to execute=su 0 svc data disable
@@ -183,5 +184,5 @@ The logs now:
 ```
 
 ## Development
-All details about the Autotest AdbServer code are available in [adb-server module](../adb-server). <br>
-If you want to build `adbserver-desktop.jar` then just execute `./gradlew :adb-server:adbserver-desktop:jar`.
+The source code of AdbServer is available in [adb-server](../adb-server) module. <br>
+If you want to build `adbserver-desktop.jar` manually, just execute `./gradlew :adb-server:adbserver-desktop:assemble`.
