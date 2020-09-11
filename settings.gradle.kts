@@ -7,11 +7,11 @@ include(
     ":adb-server:adbserver-desktop",
     ":adb-server:adbserver-desktop-device-connection",
     ":adb-server:adbserver-device",
-    ":adb-server:adbserver-sample",
 
     ":kaspresso",
     ":kautomator",
 
+    ":samples:adbserver-sample",
     ":samples:kaspresso-sample",
     ":samples:kautomator-sample",
     ":samples:kautomator-sample-app-upgrade"
