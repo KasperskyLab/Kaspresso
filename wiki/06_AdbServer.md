@@ -7,7 +7,7 @@ As you remember from the [previous part devoted to Device interface](./05_Device
 - ADB
 
 An attentive reader could notice that ADB is not available in Espresso tests. But using some other frameworks, like Appium, you can execute ADB commands. So we decided to add this important functionality too.<br>
-We've developed a special Autotest's AdbServer to compensate lack of Espresso and UI Automator. 
+We've developed a special Autotest's AdbServer to compensate lack of this feature. 
 The main idea of the tool is similar to the idea in Appium. We just built a simple client-server system which contains two parts: <br>
 - Device that starts up a test acts as client
 - Desktop sends ADB commands to be executed on the device.
