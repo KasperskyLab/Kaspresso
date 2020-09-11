@@ -25,14 +25,24 @@ plugins {
     mavenPublish
     bintray
     artifactory
+    dokka
 }
 
 subprojects {
     apply(plugin = Dependencies.Detect.plugin)
+    apply(plugin = Dependencies.Dokka.plugin)
 
     dependencies {
         detekt(Dependencies.Detect.cli)
         detekt(Dependencies.Detect.formatting)
+    }
+
+    tasks.dokkaGfm.configure {
+        val parentDir = when {
+            parent != rootProject && parent != null -> File.separator + parent?.name
+            else -> ""
+        }
+        outputDirectory.set(File(rootDir.path + File.separator + "docs" + parentDir))
     }
 
     detekt {

@@ -25,7 +25,7 @@ object Dependencies {
         const val gson = "2.8.6"
 
         const val detekt = "1.12.0"
-        const val dokka = "0.10.1"
+        const val dokka = "1.4.0"
 
         const val bintray = "1.8.5"
         const val artifactory = "4.17.2"
@@ -35,6 +35,10 @@ object Dependencies {
         const val plugin = "io.gitlab.arturbosch.detekt"
         const val cli = "io.gitlab.arturbosch.detekt:detekt-cli:${Versions.detekt}"
         const val formatting = "io.gitlab.arturbosch.detekt:detekt-formatting:${Versions.detekt}"
+    }
+
+    object Dokka {
+        const val plugin = "org.jetbrains.dokka"
     }
 
     object Classpath {

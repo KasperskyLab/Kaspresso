@@ -10,7 +10,6 @@ import com.kaspersky.kaspressample.screen.DeviceSampleScreen
 import com.kaspersky.kaspressample.utils.SafeAssert.assertTrueSafely
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
-import org.junit.Assert.assertTrue
 import org.junit.Assume.assumeTrue
 import org.junit.Rule
 import org.junit.Test
