@@ -1,7 +1,6 @@
-package com.kaspersky.kaspressample.web_tests
+package com.kaspersky.kaspressample.compose_tests
 
 import android.Manifest
-import androidx.test.espresso.web.webdriver.DriverAtoms
 import androidx.test.espresso.web.webdriver.Locator
 import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
@@ -12,7 +11,7 @@ import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.junit.Rule
 import org.junit.Test
 
-class WebViewTest : TestCase() {
+class WebComposeTest : TestCase() {
 
     @get:Rule
     val runtimePermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
@@ -61,13 +60,12 @@ class WebViewTest : TestCase() {
                 }
             }
 
-            step("Click \"Get Support\" button") {
+            step("Click \"Contacts\" button") {
                 WebViewScreen {
                     webView {
-
                         withElement(
                             Locator.XPATH,
-                            "/html/body/div[1]/section[5]/div/div/div[2]/div[3]/button"
+                            "/html/body/div[1]/footer/div/div/div[1]/nav/div[1]/a"
                         ) {
                             compose(this@webView) {
                                 or {
@@ -76,15 +74,15 @@ class WebViewTest : TestCase() {
                                 }
                                 or {
                                     containsText("Ask questiop")
-                                    hasText("Ask questio")
+                                    hasText("Ask questiop")
                                 }
                                 or {
                                     containsText("Ask question")
                                     hasText("Ask question")
                                 }
                                 or {
-                                    containsText("Get Support")
-                                    hasText("Get Support")
+                                    containsText("Contacts")
+                                    hasText("Contacts")
                                 }
                             }
                         }
@@ -92,22 +90,24 @@ class WebViewTest : TestCase() {
                         compose {
                             orWithElement(
                                 Locator.XPATH,
-                                "/html/body/div[1]/section[5]/div/div/div[2]/div[3]/button"
+                                "/html/body/div[1]/footer/div/div/div[1]/nav/div[1]/a"
                             ) {
                                 hasText("TRATATATA")
                             }
                             orWithElement(
                                 Locator.XPATH,
-                                "/html/body/div[1]/section[5]/div/div/div[2]/div[3]/button"
+                                "/html/body/div[1]/footer/div/div/div[1]/nav/div[1]/a"
                             ) {
-                                hasText("Get Support")
+                                hasText("Ask question")
+                            } thenContinue {
                                 click()
                             }
                             orWithElement(
                                 Locator.XPATH,
-                                "//*[@id=\"app\"]/section[5]/div/div/div[2]/div[3]/button"
+                                "/html/body/div[1]/footer/div/div/div[1]/nav/div[1]/a"
                             ) {
-                                hasText("Ask question")
+                                hasText("Contacts")
+                            } thenContinue {
                                 click()
                             }
                         }

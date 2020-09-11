@@ -1,5 +1,3 @@
-import org.gradle.jvm.tasks.Jar
-
 plugins {
     kotlin
     application
@@ -16,13 +14,11 @@ dependencies {
 
 setProperty("mainClassName", "com.kaspersky.adbserver.desktop.MainKt")
 
-tasks {
-    val jar by getting(Jar::class) {
-        manifest {
-            attributes["Main-Class"] = "com.kaspersky.adbserver.desktop.MainKt"
-        }
-        from(configurations.runtimeClasspath.get().map {
-            if (it.isDirectory) it else zipTree(it)
-        })
+tasks.jar.configure {
+    manifest {
+        attributes["Main-Class"] = "com.kaspersky.adbserver.desktop.MainKt"
     }
+    from(configurations.runtimeClasspath.get().map {
+        if (it.isDirectory) it else zipTree(it)
+    })
 }

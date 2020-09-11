@@ -20,6 +20,5 @@ android {
 dependencies {
     implementation(Dependencies.kotlinStdlib)
     implementation(Dependencies.appcompat)
-    implementation(project(Projects.AdbServer.common))
-    implementation(project(Projects.AdbServer.device))
+    implementation(project(Projects.AdbServer.device)) { isTransitive = false }
 }
