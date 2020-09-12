@@ -18,3 +18,5 @@ Vyacheslav Rodionov <Vyacheslav.Rodionov@kaspersky.com> <br>
 Andrey Beryukhov <Andrey.Beryukhov@kaspersky.com> <br>
 Mansur Biryukov <Mansur.Biryukov@kaspersky.com> <br>
 Darran Kelinske <darran.kelinske@gmail.com> <br>
+Nataliya Vikulina <Nataliya.Vikulina@kaspersky.com> <br>
+Azamat Cherchesov <Azamat.Cherchesov@kaspersky.com> <br>
