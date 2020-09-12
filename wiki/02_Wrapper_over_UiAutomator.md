@@ -321,7 +321,7 @@ class KautomatorMeasureTest : TestCase(
 ```
 It's a great deal! 
 
-Also, there are cases when UI Automator can't catch 500ms window. For example, when one element is updating too fast (one update in 100 ms). Just have a look at [this test](../sample/src/androidTest/java/com/kaspersky/kaspressample/idlingwait_tests/WaitForIdleTest.kt). Only `KautomatorWaitForIdleSettings.boost()` allows to pass the test.
+Also, there are cases when UI Automator can't catch 500ms window. For example, when one element is updating too fast (one update in 100 ms). Just have a look at [this test](../samples/kaspresso-sample/src/androidTest/java/com/kaspersky/kaspressample/idlingwait_tests/WaitForIdleTest.kt). Only `KautomatorWaitForIdleSettings.boost()` allows to pass the test.
 
 As you see, we have introduced a special `kautomatorWaitForIdleSettings` property in Kaspresso configurator. By default, this property is **not** boost. Why? Because:
 1. You can have tests where you use UI Automator directly. But mentioned timeouts are global parameters. Resetting of these timeouts can lead to an undetermined state.
