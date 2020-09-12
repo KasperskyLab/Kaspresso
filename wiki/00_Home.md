@@ -27,3 +27,5 @@ If you are looking forward of a wiki for old versions then follow links: <br>
 [RU] [Евгений Мацюк — Kaspresso: фреймворк для автотестирования, который вы ждали](https://habr.com/ru/company/kaspersky/blog/467617/) <br>
 [EN] [Eugene Matsyuk — Kaspresso: The autotest framework that you have been looking forward to. Part I](https://proandroiddev.com/kaspresso-the-autotest-framework-that-you-have-been-looking-forward-to-part-i-e102ed384d11) <br>
 [RU] [Воркшоп по автотестам. 19-12-2019](https://www.youtube.com/watch?v=FExlaWfKENI)
+[RU] ["Kaspresso" с Евгением Мацюком и Егором Курниковым](https://www.youtube.com/watch?v=vHkoxOfwbDg&feature=youtu.be)
+[RU] [Kaspresso: Q&A Session 9.04.20](https://www.youtube.com/watch?v=Jqnn_CDcjK0&feature=youtu.be)
