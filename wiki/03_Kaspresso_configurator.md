@@ -107,7 +107,7 @@ beforeEachTest(override = true, action = {
 ```afterEachTest``` is similar to ```beforeEachTest```. <br>
 If you set ```override``` in ```false``` then the final beforeAction will be beforeAction of the parent TestCase plus current ```action```. Otherwise, final beforeAction will be only current ```action```.
 How it's work and how to override (or just extend) default action, please, 
-observe the [example](../sample/src/androidTest/java/com/kaspersky/kaspressample/configurator_tests/defaultaction_tests).
+observe the [example](../samples/kaspresso-sample/src/androidTest/java/com/kaspersky/kaspressample/configurator_tests/defaultaction_tests).
  
 #### Device
 ```Device``` instance. Detailed info is at [Device wiki](./05_Device.md)
