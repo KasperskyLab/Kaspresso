@@ -117,14 +117,14 @@ observe the [example](../sample/src/androidTest/java/com/kaspersky/kaspressample
 
 ### Kaspresso configuring and Kaspresso interceptors example
 
-The example of how to configure Kaspresso and how to use Kaspresso interceptors is in [here](../sample/src/androidTest/java/com/kaspersky/kaspressample/configurator_tests).
+The example of how to configure Kaspresso and how to use Kaspresso interceptors is in [here](../samples/kaspresso-sample/src/androidTest/java/com/kaspersky/kaspressample/configurator_tests).
 
 ### Default Kaspresso settings
 ```BaseTestCase```, ```TestCase```, ```BaseTestCaseRule```, ```TestCaseRule``` are using default customized **Kaspresso** (```Kaspresso.Builder.simple``` builder). <br>
 Most valuable features of default customized **Kaspresso** are below.
 
 #### Logging
-Just start [SimpleTest](../sample/src/androidTest/java/com/kaspersky/kaspressample/simple_tests/SimpleTest.kt). Next, you will see those logs:
+Just start [SimpleTest](../samples/kaspresso-sample/src/androidTest/java/com/kaspersky/kaspressample/simple_tests/SimpleTest.kt). Next, you will see those logs:
 ```
 I/KASPRESSO: ---------------------------------------------------------------------------
 I/KASPRESSO: BEFORE TEST SECTION
@@ -215,7 +215,7 @@ What general kinds of flaky errors exist:
 1. Common flaky errors that happened because Espresso/UI Automator was in a bad mood =) <br>
 That's why Kaspresso wraps **all** actions/assertions of Kakao/Kautomator and handles set of potential flaky exceptions.
 If an exception happened then Kaspresso attempts to repeat failed actions/assert for 10 seconds. Such handling rescues developers of any flaky action/assert.<br>
-The details are available at [flakysafety](../kaspresso/src/main/kotlin/com/kaspersky/kaspresso/flakysafety) and examples are [here](../sample/src/androidTest/java/com/kaspersky/kaspressample/flaky_tests).
+The details are available at [flakysafety](../kaspresso/src/main/kotlin/com/kaspersky/kaspresso/flakysafety) and examples are [here](../samples/kaspresso-sample/src/androidTest/java/com/kaspersky/kaspressample/flaky_tests).
 2. The reason of a failure is non visibility of a View. In most cases you just need to scroll a parent layout to make the View visible. So, Kaspresso tries to perform it in auto mode. <br>
 The details are available at [autoscroll](../kaspresso/src/main/kotlin/com/kaspersky/kaspresso/autoscroll).
 3. Also, Kaspresso attempts to remove all system dialogs if it prevents the test execution. <br>
