@@ -20,9 +20,10 @@ Execute the following command: `java -jar <path/to/kaspresso>/artifacts/adbserve
 2. Run the Device part. <br>
 Build and start [adbserver-sample module](../samples/adbserver-sample). You should see the following screen:
 <img src="https://habrastorage.org/webt/zq/rt/ia/zqrtiaglx5a1zc4ned-qykl0t_g.png" width="432" height="768"/>
-For example, type `shell input text abc` in the app's EditText and click 'Execute' button. As result you will get `shell input text abcabc` 
+
+For example, type `shell input text abc` in the app's EditText and click *Execute* button. As result you will get `shell input text abcabc` 
 in the EditText because ADB command has been executed and `abc` symbols has been added into the focused EditText. <br>
-You can notice that the app uses `AdbTerminal` class [adbserver-sample module](../samples/adbserver-sample) to execute ADB commands.
+You can notice that the app uses `AdbTerminal` class to execute ADB commands.
 
 ## Usage in Kaspresso
 In Kaspresso, we wrap `AdbTerminal` into a special interface `AdbServer`.
