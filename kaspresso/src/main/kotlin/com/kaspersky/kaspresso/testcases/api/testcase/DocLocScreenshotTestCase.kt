@@ -5,6 +5,8 @@ import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspresso.device.locales.Locales
 import com.kaspersky.kaspresso.device.screenshots.screenshotfiles.DefaultScreenshotDirectoryProvider
 import com.kaspersky.kaspresso.device.screenshots.screenshotfiles.DefaultScreenshotNameProvider
+import com.kaspersky.kaspresso.device.screenshots.screenshotfiles.ScreenshotDirectoryProvider
+import com.kaspersky.kaspresso.device.screenshots.screenshotfiles.ScreenshotNameProvider
 import com.kaspersky.kaspresso.device.screenshots.screenshotmaker.ExternalScreenshotMaker
 import com.kaspersky.kaspresso.docloc.DocLocScreenshotCapturer
 import com.kaspersky.kaspresso.docloc.MetadataSaver
@@ -76,13 +78,17 @@ import org.junit.Rule
  *      }
  *  ```
  *
- *  @param screenshotsDirectory directory to save screenshot.
- *  @param locales comma-separated string with locales to run test with.
+ *  @param screenshotsDirectory root directory to save screenshot.
+ *  @param screenshotDirectoryProvider screenshot directory provider inside the root directory
+ *  @param screenshotNameProvider screenshot file name provider
  *  @param changeSystemLocale change the system language, i.e. system dialogs (e.g. runtime permissions) will also be localized.
  *      Need permission in manifest file for a target app android.permission.CHANGE_CONFIGURATION
+ *  @param locales comma-separated string with locales to run test with.
  */
 abstract class DocLocScreenshotTestCase(
     private val screenshotsDirectory: File,
+    private val screenshotDirectoryProvider: ScreenshotDirectoryProvider = DefaultScreenshotDirectoryProvider(groupByRunNumbers = false),
+    private val screenshotNameProvider: ScreenshotNameProvider = DefaultScreenshotNameProvider(addTimestamps = false),
     private val changeSystemLocale: Boolean = false,
     locales: String?,
     kaspressoBuilder: Kaspresso.Builder = Kaspresso.Builder.simple()
@@ -114,12 +120,12 @@ abstract class DocLocScreenshotTestCase(
         val screenshotsDir = screenshotsDirectory.resolve(localeRule.currentLocaleName)
 
         screenshotCapturer = DocLocScreenshotCapturer(
-            logger,
-            ExternalScreenshotMaker(),
-            MetadataSaver(kaspresso.device.activities, kaspresso.device.apps, logger),
-            DefaultScreenshotDirectoryProvider(groupByRunNumbers = false),
-            DefaultScreenshotNameProvider(addTimestamps = false),
-            screenshotsDir
+            logger = logger,
+            screenshotMaker = ExternalScreenshotMaker(),
+            metadataSaver = MetadataSaver(kaspresso.device.activities, kaspresso.device.apps, logger),
+            screenshotDirectoryProvider = screenshotDirectoryProvider,
+            screenshotNameProvider = screenshotNameProvider,
+            screenshotRootDir = screenshotsDir
         )
 
         testFailRule.screenshotCapturer = screenshotCapturer
