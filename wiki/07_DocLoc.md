@@ -212,7 +212,7 @@ For full example, check [AdvancedScreenshotSampleTest](../samples/kaspresso-samp
  
 ## Modifying screenshots path and name
 
-By default, all screenshots are stored at /sdcard/<screenshots root dir>/<locale>/<full qualified test class name>/<method name>. 
+By default, all screenshots are stored at ```/sdcard/<screenshots root dir>/<locale>/<full qualified test class name>/<method name>.```
 You can change this behavior by providing custom [ScreenshotDirectoryProvider](../kaspresso/src/main/kotlin/com/kaspersky/kaspresso/device/screenshots/screenshotfiles/ScreenshotDirectoryProvider.kt) 
 and [ScreenshotNameProvider](../kaspresso/src/main/kotlin/com/kaspersky/kaspresso/device/screenshots/screenshotfiles/ScreenshotNameProvider.kt) implementations. 
-Find out details [here](../samples/kaspresso-sample/src/androidTest/java/com/kaspersky/kaspressample/docloc_tests/cutomdirectory/CustomDirectoryScreenshotSampleTest.kt)
+Find out details [here](../samples/kaspresso-sample/src/androidTest/java/com/kaspersky/kaspressample/docloc_tests/cutomdirectory/CustomDirectoryScreenshotSampleTest.kt).
