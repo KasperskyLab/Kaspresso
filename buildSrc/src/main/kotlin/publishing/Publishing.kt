@@ -80,8 +80,8 @@ private fun PublicationContainer.createWithNameAndVersion(
 
                     fun appendArtifact(group: String?, version: String?, artifact: String?) {
                         dependencyNode.appendNode(DEPENDENCY_GROUP, group)
-                        dependencyNode.appendNode(DEPENDENCY_VERSION, version)
                         dependencyNode.appendNode(DEPENDENCY_ARTIFACT, artifact)
+                        dependencyNode.appendNode(DEPENDENCY_VERSION, version)
                     }
 
                     when {

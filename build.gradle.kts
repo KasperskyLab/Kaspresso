@@ -1,3 +1,4 @@
+import com.android.build.gradle.internal.tasks.factory.dependsOn
 import groovy.lang.GroovyObject
 import org.jfrog.gradle.plugin.artifactory.dsl.PublisherConfig
 import publishing.setup
@@ -117,9 +118,8 @@ subprojects {
             })
         }
 
-        tasks.named("artifactoryPublish") {
-            dependsOn("assemble")
-        }
+        tasks.artifactoryPublish.dependsOn("assemble")
+        tasks.bintrayUpload.dependsOn("assemble")
     }
 }
 
