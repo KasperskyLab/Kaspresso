@@ -40,26 +40,26 @@ class CustomDirectoryScreenshotSampleTest : DocLocScreenshotTestCase(
         step("1. Launch activity") {
             captureScreenshot("1. Simple screen")
         }
+
         step("2. Press Button 1") {
             SimpleScreen {
                 button1 {
                     click()
                 }
             }
-
             captureScreenshot("2. Simple fragment - two buttons")
         }
+
         step("3. Press Button 2") {
             SimpleScreen {
                 button2 {
                     click()
                 }
             }
-
             Screen.idle(2_500L) // Wait for timeout
-
             captureScreenshot("3. Simple fragment - input")
         }
+
         step("4. Type text") {
             SimpleScreen {
                 edit {
@@ -67,7 +67,6 @@ class CustomDirectoryScreenshotSampleTest : DocLocScreenshotTestCase(
                     typeText("Kaspresso")
                 }
             }
-
             captureScreenshot("4. Simple fragment - typed text")
         }
     }

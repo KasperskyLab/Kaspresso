@@ -33,7 +33,6 @@ class ScreenshotSampleTest : DocLocScreenshotTestCase(
     @ScreenShooterTest
     @Test
     fun test() = run {
-
         step("1. Launch activity") {
             captureScreenshot("1. Simple screen")
         }
@@ -44,7 +43,6 @@ class ScreenshotSampleTest : DocLocScreenshotTestCase(
                     click()
                 }
             }
-
             captureScreenshot("2. Simple fragment - two buttons")
         }
 
@@ -54,9 +52,7 @@ class ScreenshotSampleTest : DocLocScreenshotTestCase(
                     click()
                 }
             }
-
             Screen.idle(2_500L) // Wait for timeout
-
             captureScreenshot("3. Simple fragment - input")
         }
 
@@ -67,7 +63,6 @@ class ScreenshotSampleTest : DocLocScreenshotTestCase(
                     typeText("Kaspresso")
                 }
             }
-
             captureScreenshot("4. Simple fragment - typed text")
         }
     }

@@ -38,6 +38,7 @@ class ChangeSysLanguageTestCase : DocLocScreenshotTestCase(
             device.targetContext.startActivity(intent)
             Thread.sleep(3000)
         }
+
         step("Capture Android OS Settings") {
             captureScreenshot("android_setting")
         }
