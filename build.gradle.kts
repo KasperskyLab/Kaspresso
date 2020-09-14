@@ -2,6 +2,7 @@ import groovy.lang.GroovyObject
 import org.jfrog.gradle.plugin.artifactory.dsl.PublisherConfig
 import publishing.setup
 import publishing.shouldBePublished
+import java.util.Date
 
 buildscript {
 
@@ -70,17 +71,21 @@ subprojects {
         val publicationName = findProperty("publish.publicationName").toString()
 
         bintray {
-
             user = findProperty("bintrayuser").toString()
             key = findProperty("bintraykey").toString()
             setPublications(publicationName)
 
             pkg.apply {
-                repo = "Kaspresso"
+                repo = findProperty("publish.bintrayRepo").toString()
                 name = publicationName
                 userOrg = user
                 vcsUrl = "https://github.com/KasperskyLab/Kaspresso.git"
                 setLicenses("Apache-2.0")
+
+                version.apply {
+                    name = findProperty("stableVersion").toString()
+                    released = Date().toString()
+                }
             }
 
             version = findProperty("stableVersion").toString()
