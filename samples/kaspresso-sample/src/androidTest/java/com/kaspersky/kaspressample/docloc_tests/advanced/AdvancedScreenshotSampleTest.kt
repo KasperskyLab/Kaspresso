@@ -27,28 +27,26 @@ class AdvancedScreenshotSampleTest : ProductDocLocScreenshotTestCase() {
 
     @ScreenShooterTest
     @Test
-    fun test() {
-        before {
-            fragment = ScreenshotSampleFragment()
-            view = getUiSafeProxy(fragment as ScreenshotSampleView)
-            activity.setFragment(fragment)
-        }.after {
-        }.run {
-            step("1. Launch feature screen") {
-                view.setCounterValue(0)
-                view.setBackgroundColor(Color.WHITE)
-                captureScreenshot("1. Startup")
-            }
+    fun test() = before {
+        fragment = ScreenshotSampleFragment()
+        view = getUiSafeProxy(fragment as ScreenshotSampleView)
+        activity.setFragment(fragment)
+    }.after {
+    }.run {
+        step("1. Launch feature screen") {
+            view.setCounterValue(0)
+            view.setBackgroundColor(Color.WHITE)
+            captureScreenshot("1. Startup")
+        }
 
-            step("2. Increase counter by 5") {
-                view.setCounterValue(5)
-                captureScreenshot("2. Value has been increased by 5")
-            }
+        step("2. Increase counter by 5") {
+            view.setCounterValue(5)
+            captureScreenshot("2. Value has been increased by 5")
+        }
 
-            step("3. Set red background color") {
-                view.setBackgroundColor(Color.RED)
-                captureScreenshot("3. Background has been set to red")
-            }
+        step("3. Set red background color") {
+            view.setBackgroundColor(Color.RED)
+            captureScreenshot("3. Background has been set to red")
         }
     }
 }

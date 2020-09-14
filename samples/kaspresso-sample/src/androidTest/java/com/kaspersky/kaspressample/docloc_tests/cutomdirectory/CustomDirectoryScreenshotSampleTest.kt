@@ -1,4 +1,4 @@
-package com.kaspersky.kaspressample.docloc_tests
+package com.kaspersky.kaspressample.docloc_tests.cutomdirectory
 
 import android.Manifest
 import androidx.test.rule.ActivityTestRule
@@ -8,16 +8,20 @@ import com.kaspersky.kaspressample.screen.SimpleScreen
 import com.kaspersky.kaspressample.simple.SimpleActivity
 import com.kaspersky.kaspresso.annotations.ScreenShooterTest
 import com.kaspersky.kaspresso.testcases.api.testcase.DocLocScreenshotTestCase
-import java.io.File
 import org.junit.Rule
 import org.junit.Test
+import java.io.File
 
 /**
- * An example of [DocLocScreenshotTestCase] usage.
- * For more information see DocLoc wiki page.
+ * An example of how to change default screenshots directories and file names.
+ * As result all screenshots will be stored at '/sdcard/custom_directory/<locale>' path.
+ * Screenshot file names will have 'screenshot#<index>' prefix.
+ * See [FlatDirectoryProvider] and [AutoNumeratedNameProvider] implementations.
  */
-class ScreenshotSampleTest : DocLocScreenshotTestCase(
-    screenshotsDirectory = File("screenshots"),
+class CustomDirectoryScreenshotSampleTest : DocLocScreenshotTestCase(
+    screenshotsDirectory = File("custom_directory"),
+    screenshotDirectoryProvider = FlatDirectoryProvider,
+    screenshotNameProvider = AutoNumeratedNameProvider(),
     locales = "en,ru"
 ) {
 
