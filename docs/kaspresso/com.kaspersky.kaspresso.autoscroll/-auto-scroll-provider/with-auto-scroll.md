@@ -1,18 +1,35 @@
-[kaspresso](../../index.md) / [com.kaspersky.kaspresso.autoscroll](../index.md) / [AutoScrollProvider](index.md) / [withAutoScroll](./with-auto-scroll.md)
+//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.autoscroll](../index.md)/[AutoScrollProvider](index.md)/[withAutoScroll](with-auto-scroll.md)
 
-# withAutoScroll
 
-`abstract fun <T> withAutoScroll(interaction: Interaction, action: () -> T): T`
 
-Invokes the given [action](with-auto-scroll.md#com.kaspersky.kaspresso.autoscroll.AutoScrollProvider$withAutoScroll(com.kaspersky.kaspresso.autoscroll.AutoScrollProvider.Interaction, kotlin.Function0((com.kaspersky.kaspresso.autoscroll.AutoScrollProvider.withAutoScroll.T)))/action) and calls [scroll](scroll.md) if it fails. Helps in cases when test fails because of the
-need to scroll to interacted view.
+# withAutoScroll  
+[androidJvm]  
+Brief description  
 
-### Parameters
 
-`interaction` - the interaction interface to perform actions and assertions.
+Invokes the given action and calls [scroll](scroll.md) if it fails. Helps in cases when test fails because of the need to scroll to interacted view.
 
-`action` - the actual action on the interacted view.
 
-**Return**
-the result of [action](with-auto-scroll.md#com.kaspersky.kaspresso.autoscroll.AutoScrollProvider$withAutoScroll(com.kaspersky.kaspresso.autoscroll.AutoScrollProvider.Interaction, kotlin.Function0((com.kaspersky.kaspresso.autoscroll.AutoScrollProvider.withAutoScroll.T)))/action) invocation.
+
+#### Return  
+
+
+the result of action invocation.
+
+
+
+## Parameters  
+  
+androidJvm  
+  
+|  Name|  Summary| 
+|---|---|
+| action| <br><br>the actual action on the interacted view.<br><br>
+| interaction| <br><br>the interaction interface to perform actions and assertions.<br><br>
+  
+  
+Content  
+abstract fun <[T](with-auto-scroll.md)> [withAutoScroll](with-auto-scroll.md)(interaction: [Interaction](index.md), action: () -> [T](with-auto-scroll.md)): [T](with-auto-scroll.md)  
+
+
 

@@ -1,8 +1,17 @@
-[kautomator](../../index.md) / [com.kaspersky.components.kautomator.component.common.assertions](../index.md) / [UiBaseAssertions](index.md) / [isNotDisplayed](./is-not-displayed.md)
+//[kautomator](../../index.md)/[com.kaspersky.components.kautomator.component.common.assertions](../index.md)/[UiBaseAssertions](index.md)/[isNotDisplayed](is-not-displayed.md)
 
-# isNotDisplayed
 
-`open fun isNotDisplayed(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+
+# isNotDisplayed  
+[androidJvm]  
+Brief description  
+
 
 Checks if the view is not completely displayed
+
+  
+Content  
+open fun [isNotDisplayed](is-not-displayed.md)()  
+
+
 

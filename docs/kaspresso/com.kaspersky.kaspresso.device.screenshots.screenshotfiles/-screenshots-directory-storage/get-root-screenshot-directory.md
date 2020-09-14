@@ -1,16 +1,34 @@
-[kaspresso](../../index.md) / [com.kaspersky.kaspresso.device.screenshots.screenshotfiles](../index.md) / [ScreenshotsDirectoryStorage](index.md) / [getRootScreenshotDirectory](./get-root-screenshot-directory.md)
+//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.device.screenshots.screenshotfiles](../index.md)/[ScreenshotsDirectoryStorage](index.md)/[getRootScreenshotDirectory](get-root-screenshot-directory.md)
 
-# getRootScreenshotDirectory
 
-`fun getRootScreenshotDirectory(screenshotDir: `[`File`](https://docs.oracle.com/javase/6/docs/api/java/io/File.html)`): `[`File`](https://docs.oracle.com/javase/6/docs/api/java/io/File.html)
 
-Returns the directory for screenshots resolved by storage's root.
-If the directory doesn't exist, it will be created.
+# getRootScreenshotDirectory  
+[androidJvm]  
+Brief description  
 
-### Parameters
 
-`screenshotDir` - desired root directory.
+Returns the directory for screenshots resolved by storage's root. If the directory doesn't exist, it will be created.
 
-**Return**
-[File](https://docs.oracle.com/javase/6/docs/api/java/io/File.html) which represents an existing directory.
+
+
+#### Return  
+
+
+[File](https://docs.oracle.com/javase/8/docs/api/java/io/File.html) which represents an existing directory.
+
+
+
+## Parameters  
+  
+androidJvm  
+  
+|  Name|  Summary| 
+|---|---|
+| screenshotDir| <br><br>desired root directory.<br><br>
+  
+  
+Content  
+fun [getRootScreenshotDirectory](get-root-screenshot-directory.md)(screenshotDir: [File](https://docs.oracle.com/javase/8/docs/api/java/io/File.html)): [File](https://docs.oracle.com/javase/8/docs/api/java/io/File.html)  
+
+
 

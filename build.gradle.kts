@@ -39,10 +39,10 @@ subprojects {
 
     tasks.dokkaGfm.configure {
         val parentDir = when {
-            parent != rootProject && parent != null -> File.separator + parent?.name
-            else -> ""
+            parent != rootProject && parent != null -> "docs" + File.separator + parent?.name
+            else -> "docs"
         }
-        outputDirectory.set(File(rootDir.path + File.separator + "docs" + parentDir))
+        outputDirectory.set(rootDir.resolve(parentDir))
     }
 
     detekt {

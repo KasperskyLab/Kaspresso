@@ -1,11 +1,27 @@
-[kautomator](../../index.md) / [com.kaspersky.components.kautomator.component.common.actions](../index.md) / [UiSwipeableActions](index.md) / [swipeDown](./swipe-down.md)
+//[kautomator](../../index.md)/[com.kaspersky.components.kautomator.component.common.actions](../index.md)/[UiSwipeableActions](index.md)/[swipeDown](swipe-down.md)
 
-# swipeDown
 
-`open fun swipeDown(percent: `[`Float`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html)` = 0.95f): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+
+# swipeDown  
+[androidJvm]  
+Brief description  
+
 
 Swipes down on the view
 
-### Parameters
 
-`percent` - The length of the swipe as a percentage of this object's size.
+
+## Parameters  
+  
+androidJvm  
+  
+|  Name|  Summary| 
+|---|---|
+| percent| <br><br>The length of the swipe as a percentage of this object's size.<br><br>
+  
+  
+Content  
+open fun [swipeDown](swipe-down.md)(percent: [Float](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html))  
+
+
+

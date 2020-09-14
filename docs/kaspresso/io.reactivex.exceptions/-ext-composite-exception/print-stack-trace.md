@@ -1,14 +1,27 @@
-[kaspresso](../../index.md) / [io.reactivex.exceptions](../index.md) / [ExtCompositeException](index.md) / [printStackTrace](./print-stack-trace.md)
-
-# printStackTrace
-
-`fun printStackTrace(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
-
-All of the following `printStackTrace` functionality is derived from JDK ``[`Throwable`](https://docs.oracle.com/javase/6/docs/api/java/lang/Throwable.html) `printStackTrace`. In particular, the `PrintStreamOrWriter` abstraction is copied wholesale. Changes from the official JDK implementation:
-* no infinite loop detection
- * smaller critical section holding ``[`PrintStream`](https://docs.oracle.com/javase/6/docs/api/java/io/PrintStream.html) lock
- * explicit knowledge about the exceptions ``[`List`](https://docs.oracle.com/javase/6/docs/api/java/util/List.html) that this loops through
+//[kaspresso](../../index.md)/[io.reactivex.exceptions](../index.md)/[ExtCompositeException](index.md)/[printStackTrace](print-stack-trace.md)
 
 
-`fun printStackTrace(s: `[`PrintStream`](https://docs.oracle.com/javase/6/docs/api/java/io/PrintStream.html)`!): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
-`fun printStackTrace(s: `[`PrintWriter`](https://docs.oracle.com/javase/6/docs/api/java/io/PrintWriter.html)`!): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+
+# printStackTrace  
+[androidJvm]  
+Brief description  
+
+
+
+
+All of the following {@code printStackTrace} functionality is derived from JDK [Throwable](https://docs.oracle.com/javase/8/docs/api/java/lang/Throwable.html){@code printStackTrace} . In particular, the {@code PrintStreamOrWriter} abstraction is copied wholesale. Changes from the official JDK implementation:
+
+<ul><li>no infinite loop detection</li><li>smaller critical section holding [PrintStream](https://docs.oracle.com/javase/8/docs/api/java/io/PrintStream.html) lock</li><li>explicit knowledge about the exceptions [List](https://docs.oracle.com/javase/8/docs/api/java/util/List.html) that this loops through</li></ul>
+
+  
+Content  
+open fun [printStackTrace](print-stack-trace.md)()  
+
+
+[androidJvm]  
+Content  
+open fun [printStackTrace](print-stack-trace.md)(s: [PrintStream](https://docs.oracle.com/javase/8/docs/api/java/io/PrintStream.html))  
+open fun [printStackTrace](print-stack-trace.md)(s: [PrintWriter](https://docs.oracle.com/javase/8/docs/api/java/io/PrintWriter.html))  
+
+
+

@@ -1,11 +1,27 @@
-[kautomator](../../index.md) / [com.kaspersky.components.kautomator.component.common.actions](../index.md) / [UiSwipeableActions](index.md) / [swipeRight](./swipe-right.md)
+//[kautomator](../../index.md)/[com.kaspersky.components.kautomator.component.common.actions](../index.md)/[UiSwipeableActions](index.md)/[swipeRight](swipe-right.md)
 
-# swipeRight
 
-`open fun swipeRight(percent: `[`Float`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html)` = 0.95f): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+
+# swipeRight  
+[androidJvm]  
+Brief description  
+
 
 Swipes right on the view
 
-### Parameters
 
-`percent` - The length of the swipe as a percentage of this object's size.
+
+## Parameters  
+  
+androidJvm  
+  
+|  Name|  Summary| 
+|---|---|
+| percent| <br><br>The length of the swipe as a percentage of this object's size.<br><br>
+  
+  
+Content  
+open fun [swipeRight](swipe-right.md)(percent: [Float](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html))  
+
+
+

@@ -1,11 +1,27 @@
-[kautomator](../../index.md) / [com.kaspersky.components.kautomator.component.switch](../index.md) / [UiSwitchableActions](index.md) / [swipeSwitchThumb](./swipe-switch-thumb.md)
+//[kautomator](../../index.md)/[com.kaspersky.components.kautomator.component.switch](../index.md)/[UiSwitchableActions](index.md)/[swipeSwitchThumb](swipe-switch-thumb.md)
 
-# swipeSwitchThumb
 
-`open fun swipeSwitchThumb(direction: Direction): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+
+# swipeSwitchThumb  
+[androidJvm]  
+Brief description  
+
 
 Moves the thumb of the switch to the right
 
-### Parameters
 
-`direction` - for the thumb to move
+
+## Parameters  
+  
+androidJvm  
+  
+|  Name|  Summary| 
+|---|---|
+| direction| <br><br>for the thumb to move<br><br>
+  
+  
+Content  
+open fun [swipeSwitchThumb](swipe-switch-thumb.md)(direction: [UiSwitchableActions.Direction](-direction/index.md))  
+
+
+

@@ -1,8 +1,17 @@
-[kautomator](../../index.md) / [com.kaspersky.components.kautomator.system](../index.md) / [UiSystemActions](index.md) / [openNotification](./open-notification.md)
+//[kautomator](../../index.md)/[com.kaspersky.components.kautomator.system](../index.md)/[UiSystemActions](index.md)/[openNotification](open-notification.md)
 
-# openNotification
 
-`open fun openNotification(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+
+# openNotification  
+[androidJvm]  
+Brief description  
+
 
 Opens the notification shade
+
+  
+Content  
+open fun [openNotification](open-notification.md)()  
+
+
 

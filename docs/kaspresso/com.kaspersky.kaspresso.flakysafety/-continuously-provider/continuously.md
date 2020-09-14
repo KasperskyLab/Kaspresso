@@ -1,42 +1,89 @@
-[kaspresso](../../index.md) / [com.kaspersky.kaspresso.flakysafety](../index.md) / [ContinuouslyProvider](index.md) / [continuously](./continuously.md)
+//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.flakysafety](../index.md)/[ContinuouslyProvider](index.md)/[continuously](continuously.md)
 
-# continuously
 
-`abstract fun <T> continuously(action: () -> T): T`
 
-Invokes the given [action](continuously.md#com.kaspersky.kaspresso.flakysafety.ContinuouslyProvider$continuously(kotlin.Function0((com.kaspersky.kaspresso.flakysafety.ContinuouslyProvider.continuously.T)))/action) during set timeout.
+# continuously  
+[androidJvm]  
+Brief description  
 
-It can be helpful for checking of negative scenarios.
 
-In opposite to [FlakySafetyProvider.flakySafely](../-flaky-safety-provider/flaky-safely.md) it does not skip last attempt after first success
-and throws inside exception outside as soon as it was thrown
 
-### Parameters
 
-`action` - the action to invoke.
+Invokes the given action during set timeout.
 
-**Return**
-the [action](continuously.md#com.kaspersky.kaspresso.flakysafety.ContinuouslyProvider$continuously(kotlin.Function0((com.kaspersky.kaspresso.flakysafety.ContinuouslyProvider.continuously.T)))/action) invocation result.
 
-`abstract fun <T> continuously(timeoutMs: `[`Long`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html)`? = null, intervalMs: `[`Long`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html)`? = null, failureMessage: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`? = null, action: () -> T): T`
-
-Invokes the given [action](continuously.md#com.kaspersky.kaspresso.flakysafety.ContinuouslyProvider$continuously(kotlin.Long, kotlin.Long, kotlin.String, kotlin.Function0((com.kaspersky.kaspresso.flakysafety.ContinuouslyProvider.continuously.T)))/action) during set timeout.
 
 It can be helpful for checking of negative scenarios.
 
-In opposite to [FlakySafetyProvider.flakySafely](../-flaky-safety-provider/flaky-safely.md) it does not skips last attempt after first success
-and throws inside exception outside as soon as it was thrown
 
-### Parameters
 
-`timeoutMs` - the timeout during which attempts will be made.
+In opposite to [FlakySafetyProvider.flakySafely](../-flaky-safety-provider/flaky-safely.md) it does not skip last attempt after first success and throws inside exception outside as soon as it was thrown
 
-`intervalMs` - the interval at which attempts will be made.
 
-`failureMessage` - the message to log on failure.
 
-`action` - the action to invoke.
 
-**Return**
-the [action](continuously.md#com.kaspersky.kaspresso.flakysafety.ContinuouslyProvider$continuously(kotlin.Long, kotlin.Long, kotlin.String, kotlin.Function0((com.kaspersky.kaspresso.flakysafety.ContinuouslyProvider.continuously.T)))/action) invocation result.
+
+#### Return  
+
+
+the action invocation result.
+
+
+
+## Parameters  
+  
+androidJvm  
+  
+|  Name|  Summary| 
+|---|---|
+| action| <br><br>the action to invoke.<br><br>
+  
+  
+Content  
+abstract fun <[T](continuously.md)> [continuously](continuously.md)(action: () -> [T](continuously.md)): [T](continuously.md)  
+
+
+[androidJvm]  
+Brief description  
+
+
+
+
+Invokes the given action during set timeout.
+
+
+
+It can be helpful for checking of negative scenarios.
+
+
+
+In opposite to [FlakySafetyProvider.flakySafely](../-flaky-safety-provider/flaky-safely.md) it does not skips last attempt after first success and throws inside exception outside as soon as it was thrown
+
+
+
+
+
+#### Return  
+
+
+the action invocation result.
+
+
+
+## Parameters  
+  
+androidJvm  
+  
+|  Name|  Summary| 
+|---|---|
+| action| <br><br>the action to invoke.<br><br>
+| failureMessage| <br><br>the message to log on failure.<br><br>
+| intervalMs| <br><br>the interval at which attempts will be made.<br><br>
+| timeoutMs| <br><br>the timeout during which attempts will be made.<br><br>
+  
+  
+Content  
+abstract fun <[T](continuously.md)> [continuously](continuously.md)(timeoutMs: [Long](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html)?, intervalMs: [Long](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html)?, failureMessage: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)?, action: () -> [T](continuously.md)): [T](continuously.md)  
+
+
 

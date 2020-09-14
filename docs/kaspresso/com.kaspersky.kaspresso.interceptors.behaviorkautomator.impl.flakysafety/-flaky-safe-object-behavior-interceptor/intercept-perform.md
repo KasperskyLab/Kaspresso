@@ -1,15 +1,29 @@
-[kaspresso](../../index.md) / [com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.flakysafety](../index.md) / [FlakySafeObjectBehaviorInterceptor](index.md) / [interceptPerform](./intercept-perform.md)
+//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.flakysafety](../index.md)/[FlakySafeObjectBehaviorInterceptor](index.md)/[interceptPerform](intercept-perform.md)
 
-# interceptPerform
 
-`fun <T> interceptPerform(interaction: UiObjectInteraction, action: UiObjectAction, activity: () -> T): T`
 
-Wraps the given [activity](intercept-perform.md#com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.flakysafety.FlakySafeObjectBehaviorInterceptor$interceptPerform(com.kaspersky.components.kautomator.intercept.interaction.UiObjectInteraction, com.kaspersky.components.kautomator.intercept.operation.UiOperation((androidx.test.uiautomator.UiObject2)), kotlin.Function0((com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.flakysafety.FlakySafeObjectBehaviorInterceptor.interceptPerform.T)))/activity) invocation with the flaky safety.
+# interceptPerform  
+[androidJvm]  
+Brief description  
 
-### Parameters
 
-`interaction` - the intercepted [UiObjectInteraction](#).
+Wraps the given activity invocation with the flaky safety.
 
-`action` - the intercepted [UiObjectAction](#).
 
-`activity` - the activity to invoke.
+
+## Parameters  
+  
+androidJvm  
+  
+|  Name|  Summary| 
+|---|---|
+| action| <br><br>the intercepted UiObjectAction.<br><br>
+| activity| <br><br>the activity to invoke.<br><br>
+| interaction| <br><br>the intercepted UiObjectInteraction.<br><br>
+  
+  
+Content  
+open override fun <[T](intercept-perform.md)> [interceptPerform](intercept-perform.md)(interaction: UiObjectInteraction, action: UiOperation<UiObject2>, activity: () -> [T](intercept-perform.md)): [T](intercept-perform.md)  
+
+
+

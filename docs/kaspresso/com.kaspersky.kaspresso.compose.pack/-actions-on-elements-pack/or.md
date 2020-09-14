@@ -1,23 +1,50 @@
-[kaspresso](../../index.md) / [com.kaspersky.kaspresso.compose.pack](../index.md) / [ActionsOnElementsPack](index.md) / [or](./or.md)
+//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.compose.pack](../index.md)/[ActionsOnElementsPack](index.md)/[or](or.md)
 
-# or
 
-`fun <Type> or(element: Type, action: Type.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`ComplexComposeBranchBuilder`](../../com.kaspersky.kaspresso.compose.pack.branch/-complex-compose-branch-builder/index.md)`<Type> where Type : BaseActions, Type : BaseAssertions, Type : Interceptable<ViewInteraction, ViewAssertion, ViewAction>`
 
-Adds the [element](or.md#com.kaspersky.kaspresso.compose.pack.ActionsOnElementsPack$or(com.kaspersky.kaspresso.compose.pack.ActionsOnElementsPack.or.Type, kotlin.Function1((com.kaspersky.kaspresso.compose.pack.ActionsOnElementsPack.or.Type, kotlin.Unit)))/element) of type [Type](or.md#Type) and the [action](or.md#com.kaspersky.kaspresso.compose.pack.ActionsOnElementsPack$or(com.kaspersky.kaspresso.compose.pack.ActionsOnElementsPack.or.Type, kotlin.Function1((com.kaspersky.kaspresso.compose.pack.ActionsOnElementsPack.or.Type, kotlin.Unit)))/action) to [complexComposeBranchBuilders](#) and [action](or.md#com.kaspersky.kaspresso.compose.pack.ActionsOnElementsPack$or(com.kaspersky.kaspresso.compose.pack.ActionsOnElementsPack.or.Type, kotlin.Function1((com.kaspersky.kaspresso.compose.pack.ActionsOnElementsPack.or.Type, kotlin.Unit)))/action) for future composing
-where [Type](or.md#Type) is bounding by KBaseView (Kakao)
+# or  
+[androidJvm]  
+Brief description  
 
-### Parameters
 
-`element` - the interacted view.
+Adds the element of type [Type](or.md) and the action to complexComposeBranchBuilders and action for future composing where [Type](or.md) is bounding by KBaseView (Kakao)
 
-`action` - actions or assertions on the interacted view.`fun <Type> or(element: Type, action: Type.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`ComplexComposeBranchBuilder`](../../com.kaspersky.kaspresso.compose.pack.branch/-complex-compose-branch-builder/index.md)`<Type> where Type : UiBaseActions, Type : UiBaseAssertions, Type : UiInterceptable<UiObjectInteraction, UiObjectAssertion, UiObjectAction>`
 
-Adds the [element](or.md#com.kaspersky.kaspresso.compose.pack.ActionsOnElementsPack$or(com.kaspersky.kaspresso.compose.pack.ActionsOnElementsPack.or.Type, kotlin.Function1((com.kaspersky.kaspresso.compose.pack.ActionsOnElementsPack.or.Type, kotlin.Unit)))/element) of type [Type](or.md#Type) and the [action](or.md#com.kaspersky.kaspresso.compose.pack.ActionsOnElementsPack$or(com.kaspersky.kaspresso.compose.pack.ActionsOnElementsPack.or.Type, kotlin.Function1((com.kaspersky.kaspresso.compose.pack.ActionsOnElementsPack.or.Type, kotlin.Unit)))/action) to [complexComposeBranchBuilders](#) and [action](or.md#com.kaspersky.kaspresso.compose.pack.ActionsOnElementsPack$or(com.kaspersky.kaspresso.compose.pack.ActionsOnElementsPack.or.Type, kotlin.Function1((com.kaspersky.kaspresso.compose.pack.ActionsOnElementsPack.or.Type, kotlin.Unit)))/action) for future composing
-where [Type](or.md#Type) is bounding by UiBaseView (Kautomator)
 
-### Parameters
+## Parameters  
+  
+androidJvm  
+  
+|  Name|  Summary| 
+|---|---|
+| action| <br><br>actions or assertions on the interacted view.<br><br>
+| element| <br><br>the interacted view.<br><br>
+  
+  
+Content  
+fun <[Type](or.md) : BaseActions, BaseAssertions, Interceptable<ViewInteraction, ViewAssertion, ViewAction>> [or](or.md)(element: [Type](or.md), action: [Type](or.md).() -> [Unit](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)): [ComplexComposeBranchBuilder](../../com.kaspersky.kaspresso.compose.pack.branch/-complex-compose-branch-builder/index.md)<[Type](or.md)>  
 
-`element` - the interacted view.
 
-`action` - actions or assertions on the interacted view.
+[androidJvm]  
+Brief description  
+
+
+Adds the element of type [Type](or.md) and the action to complexComposeBranchBuilders and action for future composing where [Type](or.md) is bounding by UiBaseView (Kautomator)
+
+
+
+## Parameters  
+  
+androidJvm  
+  
+|  Name|  Summary| 
+|---|---|
+| action| <br><br>actions or assertions on the interacted view.<br><br>
+| element| <br><br>the interacted view.<br><br>
+  
+  
+Content  
+fun <[Type](or.md) : UiBaseActions, UiBaseAssertions, UiInterceptable<UiObjectInteraction, UiOperation<UiObject2>, UiOperation<UiObject2>>> [or](or.md)(element: [Type](or.md), action: [Type](or.md).() -> [Unit](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)): [ComplexComposeBranchBuilder](../../com.kaspersky.kaspresso.compose.pack.branch/-complex-compose-branch-builder/index.md)<[Type](or.md)>  
+
+
+

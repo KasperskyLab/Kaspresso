@@ -1,8 +1,17 @@
-[kautomator](../../index.md) / [com.kaspersky.components.kautomator.component.common.assertions](../index.md) / [UiBaseAssertions](index.md) / [isClickable](./is-clickable.md)
+//[kautomator](../../index.md)/[com.kaspersky.components.kautomator.component.common.assertions](../index.md)/[UiBaseAssertions](index.md)/[isClickable](is-clickable.md)
 
-# isClickable
 
-`open fun isClickable(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+
+# isClickable  
+[androidJvm]  
+Brief description  
+
 
 Checks if the view is clickable
+
+  
+Content  
+open fun [isClickable](is-clickable.md)()  
+
+
 

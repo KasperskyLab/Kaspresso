@@ -1,8 +1,17 @@
-[kautomator](../../index.md) / [com.kaspersky.components.kautomator.component.common.builders](../index.md) / [UiViewBuilder](index.md) / [isNotFocusable](./is-not-focusable.md)
+//[kautomator](../../index.md)/[com.kaspersky.components.kautomator.component.common.builders](../index.md)/[UiViewBuilder](index.md)/[isNotFocusable](is-not-focusable.md)
 
-# isNotFocusable
 
-`fun isNotFocusable(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+
+# isNotFocusable  
+[androidJvm]  
+Brief description  
+
 
 Matches the view if it is not focusable
+
+  
+Content  
+fun [isNotFocusable](is-not-focusable.md)()  
+
+
 

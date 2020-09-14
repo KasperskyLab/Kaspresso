@@ -1,13 +1,28 @@
-[kaspresso](../../index.md) / [com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.autoscroll](../index.md) / [AutoScrollObjectBehaviorInterceptor](index.md) / [interceptCheck](./intercept-check.md)
+//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.autoscroll](../index.md)/[AutoScrollObjectBehaviorInterceptor](index.md)/[interceptCheck](intercept-check.md)
 
-# interceptCheck
 
-`fun <T> interceptCheck(interaction: UiObjectInteraction, assertion: UiObjectAssertion, activity: () -> T): T`
 
-Wraps the given [assertion](intercept-check.md#com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.autoscroll.AutoScrollObjectBehaviorInterceptor$interceptCheck(com.kaspersky.components.kautomator.intercept.interaction.UiObjectInteraction, com.kaspersky.components.kautomator.intercept.operation.UiOperation((androidx.test.uiautomator.UiObject2)), kotlin.Function0((com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.autoscroll.AutoScrollObjectBehaviorInterceptor.interceptCheck.T)))/assertion) invocation with the autoscrolling on failure.
+# interceptCheck  
+[androidJvm]  
+Brief description  
 
-### Parameters
 
-`interaction` - the intercepted [UiObjectInteraction](#).
+Wraps the given assertion invocation with the autoscrolling on failure.
 
-`assertion` - the assertion to invoke.
+
+
+## Parameters  
+  
+androidJvm  
+  
+|  Name|  Summary| 
+|---|---|
+| assertion| <br><br>the assertion to invoke.<br><br>
+| interaction| <br><br>the intercepted UiObjectInteraction.<br><br>
+  
+  
+Content  
+open override fun <[T](intercept-check.md)> [interceptCheck](intercept-check.md)(interaction: UiObjectInteraction, assertion: UiOperation<UiObject2>, activity: () -> [T](intercept-check.md)): [T](intercept-check.md)  
+
+
+

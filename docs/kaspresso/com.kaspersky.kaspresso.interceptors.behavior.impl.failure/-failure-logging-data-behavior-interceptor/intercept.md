@@ -1,13 +1,28 @@
-[kaspresso](../../index.md) / [com.kaspersky.kaspresso.interceptors.behavior.impl.failure](../index.md) / [FailureLoggingDataBehaviorInterceptor](index.md) / [intercept](./intercept.md)
+//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.interceptors.behavior.impl.failure](../index.md)/[FailureLoggingDataBehaviorInterceptor](index.md)/[intercept](intercept.md)
 
-# intercept
 
-`fun <T> intercept(interaction: DataInteraction, action: () -> T): T`
 
-Wraps the given [action](intercept.md#com.kaspersky.kaspresso.interceptors.behavior.impl.failure.FailureLoggingDataBehaviorInterceptor$intercept(androidx.test.espresso.DataInteraction, kotlin.Function0((com.kaspersky.kaspresso.interceptors.behavior.impl.failure.FailureLoggingDataBehaviorInterceptor.intercept.T)))/action) invocation with the failure logging.
+# intercept  
+[androidJvm]  
+Brief description  
 
-### Parameters
 
-`interaction` - the intercepted [DataInteraction](#).
+Wraps the given action invocation with the failure logging.
 
-`action` - the action to invoke.
+
+
+## Parameters  
+  
+androidJvm  
+  
+|  Name|  Summary| 
+|---|---|
+| action| <br><br>the action to invoke.<br><br>
+| interaction| <br><br>the intercepted DataInteraction.<br><br>
+  
+  
+Content  
+open override fun <[T](intercept.md)> [intercept](intercept.md)(interaction: DataInteraction, action: () -> [T](intercept.md)): [T](intercept.md)  
+
+
+

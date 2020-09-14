@@ -1,19 +1,28 @@
-[kaspresso](../../index.md) / [com.kaspersky.kaspresso.interceptors.watcher.testcase](../index.md) / [TestContextHolder](./index.md)
+//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.interceptors.watcher.testcase](../index.md)/[TestContextHolder](index.md)
 
-# TestContextHolder
 
-`interface TestContextHolder`
+
+# TestContextHolder  
+ [androidJvm] 
 
 Holder of BaseTestContext
 
-### Functions
+interface [TestContextHolder](index.md)   
 
-| Name | Summary |
+
+## Functions  
+  
+|  Name|  Summary| 
 |---|---|
-| [setBaseTestContext](set-base-test-context.md) | `open fun setBaseTestContext(context: `[`BaseTestContext`](../../com.kaspersky.kaspresso.testcases.core.testcontext/-base-test-context.md)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [equals](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/equals.html)| [androidJvm]  <br>Content  <br>open operator override fun [equals](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/equals.html)(other: [Any](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)?): [Boolean](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)  <br><br><br>
+| [hashCode](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/hash-code.html)| [androidJvm]  <br>Content  <br>open override fun [hashCode](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/hash-code.html)(): [Int](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)  <br><br><br>
+| [setBaseTestContext](set-base-test-context.md)| [androidJvm]  <br>Content  <br>open fun [setBaseTestContext](set-base-test-context.md)(context: [BaseTestContext](../../com.kaspersky.kaspresso.testcases.core.testcontext/-base-test-context/index.md))  <br><br><br>
+| [toString](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/to-string.html)| [androidJvm]  <br>Content  <br>open override fun [toString](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/to-string.html)(): [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)  <br><br><br>
 
-### Inheritors
 
-| Name | Summary |
-|---|---|
-| [TestRunWatcherInterceptor](../-test-run-watcher-interceptor/index.md) | The interface for all interceptors intercepting test run events.`interface TestRunWatcherInterceptor : `[`TestContextHolder`](./index.md) |
+## Inheritors  
+  
+|  Name| 
+|---|
+| [TestRunWatcherInterceptor](../-test-run-watcher-interceptor/index.md)
+

@@ -1,13 +1,28 @@
-[kaspresso](../../index.md) / [com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.composite](../index.md) / [TestRunCompositeWatcherInterceptor](index.md) / [onTestFinished](./on-test-finished.md)
+//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.composite](../index.md)/[TestRunCompositeWatcherInterceptor](index.md)/[onTestFinished](on-test-finished.md)
 
-# onTestFinished
 
-`fun onTestFinished(testInfo: `[`TestInfo`](../../com.kaspersky.kaspresso.testcases.models.info/-test-info/index.md)`, success: `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
-Called on the whole test finishes, delegates the interception to [watcherInterceptors](#).
+# onTestFinished  
+[androidJvm]  
+Brief description  
 
-### Parameters
 
-`testInfo` - the test info to pass to [watcherInterceptors](#).
+Called on the whole test finishes, delegates the interception to watcherInterceptors.
 
-`success` - the while test was finished successfully or not, to pass to [watcherInterceptors](#).
+
+
+## Parameters  
+  
+androidJvm  
+  
+|  Name|  Summary| 
+|---|---|
+| success| <br><br>the while test was finished successfully or not, to pass to watcherInterceptors.<br><br>
+| testInfo| <br><br>the test info to pass to watcherInterceptors.<br><br>
+  
+  
+Content  
+open override fun [onTestFinished](on-test-finished.md)(testInfo: [TestInfo](../../com.kaspersky.kaspresso.testcases.models.info/-test-info/index.md), success: [Boolean](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html))  
+
+
+

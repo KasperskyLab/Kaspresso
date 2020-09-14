@@ -1,19 +1,28 @@
-[kaspresso](../../index.md) / [com.kaspersky.kaspresso.device.screenshots.screenshotfiles](../index.md) / [ScreenshotNameProvider](./index.md)
+//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.device.screenshots.screenshotfiles](../index.md)/[ScreenshotNameProvider](index.md)
 
-# ScreenshotNameProvider
 
-`interface ScreenshotNameProvider`
+
+# ScreenshotNameProvider  
+ [androidJvm] 
 
 Provides names for screenshots
 
-### Functions
+interface [ScreenshotNameProvider](index.md)   
 
-| Name | Summary |
+
+## Functions  
+  
+|  Name|  Summary| 
 |---|---|
-| [getScreenshotName](get-screenshot-name.md) | `abstract fun getScreenshotName(tag: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html) |
+| [equals](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/equals.html)| [androidJvm]  <br>Content  <br>open operator override fun [equals](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/equals.html)(other: [Any](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)?): [Boolean](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)  <br><br><br>
+| [getScreenshotName](get-screenshot-name.md)| [androidJvm]  <br>Content  <br>abstract fun [getScreenshotName](get-screenshot-name.md)(tag: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)): [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)  <br><br><br>
+| [hashCode](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/hash-code.html)| [androidJvm]  <br>Content  <br>open override fun [hashCode](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/hash-code.html)(): [Int](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)  <br><br><br>
+| [toString](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/to-string.html)| [androidJvm]  <br>Content  <br>open override fun [toString](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/to-string.html)(): [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)  <br><br><br>
 
-### Inheritors
 
-| Name | Summary |
-|---|---|
-| [DefaultScreenshotNameProvider](../-default-screenshot-name-provider/index.md) | Default implementation of [ScreenshotFileProvider](#) If [addTimestamps](#) is true it adds timestamps to names like that "1570158949869_ScreenshotSampleTest_step_1.png"`class DefaultScreenshotNameProvider : `[`ScreenshotNameProvider`](./index.md) |
+## Inheritors  
+  
+|  Name| 
+|---|
+| [DefaultScreenshotNameProvider](../-default-screenshot-name-provider/index.md)
+

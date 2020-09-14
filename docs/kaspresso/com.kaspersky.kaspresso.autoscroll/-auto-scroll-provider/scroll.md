@@ -1,19 +1,36 @@
-[kaspresso](../../index.md) / [com.kaspersky.kaspresso.autoscroll](../index.md) / [AutoScrollProvider](index.md) / [scroll](./scroll.md)
+//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.autoscroll](../index.md)/[AutoScrollProvider](index.md)/[scroll](scroll.md)
 
-# scroll
 
-`abstract fun <T> scroll(interaction: Interaction, action: () -> T, cachedError: `[`Throwable`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html)`): T`
 
-Performs the autoscrolling functionality. Performs scroll and re-invokes the given [action](scroll.md#com.kaspersky.kaspresso.autoscroll.AutoScrollProvider$scroll(com.kaspersky.kaspresso.autoscroll.AutoScrollProvider.Interaction, kotlin.Function0((com.kaspersky.kaspresso.autoscroll.AutoScrollProvider.scroll.T)), kotlin.Throwable)/action).
+# scroll  
+[androidJvm]  
+Brief description  
 
-### Parameters
 
-`interaction` - the interaction interface to perform actions and assertions.
+Performs the autoscrolling functionality. Performs scroll and re-invokes the given action.
 
-`action` - the actual action on the interacted view.
 
-`cachedError` - the error to be thrown if autoscroll would not help.
 
-**Return**
-the result of [action](scroll.md#com.kaspersky.kaspresso.autoscroll.AutoScrollProvider$scroll(com.kaspersky.kaspresso.autoscroll.AutoScrollProvider.Interaction, kotlin.Function0((com.kaspersky.kaspresso.autoscroll.AutoScrollProvider.scroll.T)), kotlin.Throwable)/action) invocation.
+#### Return  
+
+
+the result of action invocation.
+
+
+
+## Parameters  
+  
+androidJvm  
+  
+|  Name|  Summary| 
+|---|---|
+| action| <br><br>the actual action on the interacted view.<br><br>
+| cachedError| <br><br>the error to be thrown if autoscroll would not help.<br><br>
+| interaction| <br><br>the interaction interface to perform actions and assertions.<br><br>
+  
+  
+Content  
+abstract fun <[T](scroll.md)> [scroll](scroll.md)(interaction: [Interaction](index.md), action: () -> [T](scroll.md), cachedError: [Throwable](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html)): [T](scroll.md)  
+
+
 

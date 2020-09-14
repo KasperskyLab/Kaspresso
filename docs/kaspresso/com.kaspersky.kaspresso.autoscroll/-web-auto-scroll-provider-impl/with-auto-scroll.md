@@ -1,22 +1,35 @@
-[kaspresso](../../index.md) / [com.kaspersky.kaspresso.autoscroll](../index.md) / [WebAutoScrollProviderImpl](index.md) / [withAutoScroll](./with-auto-scroll.md)
+//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.autoscroll](../index.md)/[WebAutoScrollProviderImpl](index.md)/[withAutoScroll](with-auto-scroll.md)
 
-# withAutoScroll
 
-`fun <T> withAutoScroll(interaction: WebInteraction<*>, action: () -> T): T`
 
-Invokes the given [action](with-auto-scroll.md#com.kaspersky.kaspresso.autoscroll.WebAutoScrollProviderImpl$withAutoScroll(androidx.test.espresso.web.sugar.Web.WebInteraction((kotlin.Any)), kotlin.Function0((com.kaspersky.kaspresso.autoscroll.WebAutoScrollProviderImpl.withAutoScroll.T)))/action) and calls [scroll](scroll.md) if it fails. Helps in cases when test fails because of the
-need to scroll to interacted view.
+# withAutoScroll  
+[androidJvm]  
+Brief description  
 
-### Parameters
 
-`interaction` - the instance of [Web.WebInteraction](#) interface to perform actions and assertions.
+Invokes the given action and calls [scroll](scroll.md) if it fails. Helps in cases when test fails because of the need to scroll to interacted view.
 
-`action` - the actual action on the interacted view.
 
-### Exceptions
 
-`Throwable` - if the exception caught while invoking [action](with-auto-scroll.md#com.kaspersky.kaspresso.autoscroll.WebAutoScrollProviderImpl$withAutoScroll(androidx.test.espresso.web.sugar.Web.WebInteraction((kotlin.Any)), kotlin.Function0((com.kaspersky.kaspresso.autoscroll.WebAutoScrollProviderImpl.withAutoScroll.T)))/action) is not allowed via [params](#).
+#### Return  
 
-**Return**
-the result of [action](with-auto-scroll.md#com.kaspersky.kaspresso.autoscroll.WebAutoScrollProviderImpl$withAutoScroll(androidx.test.espresso.web.sugar.Web.WebInteraction((kotlin.Any)), kotlin.Function0((com.kaspersky.kaspresso.autoscroll.WebAutoScrollProviderImpl.withAutoScroll.T)))/action) invocation.
+
+the result of action invocation.
+
+
+
+## Parameters  
+  
+androidJvm  
+  
+|  Name|  Summary| 
+|---|---|
+| action| <br><br>the actual action on the interacted view.<br><br>
+| interaction| <br><br>the instance of Web.WebInteraction interface to perform actions and assertions.<br><br>
+  
+  
+Content  
+open override fun <[T](with-auto-scroll.md)> [withAutoScroll](with-auto-scroll.md)(interaction: Web.WebInteraction<*>, action: () -> [T](with-auto-scroll.md)): [T](with-auto-scroll.md)  
+
+
 

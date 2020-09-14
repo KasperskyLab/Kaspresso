@@ -1,17 +1,48 @@
-[kautomator](../../index.md) / [com.kaspersky.components.kautomator.component.chip](../index.md) / [UiChipGroupActions](index.md) / [selectChipWithText](./select-chip-with-text.md)
+//[kautomator](../../index.md)/[com.kaspersky.components.kautomator.component.chip](../index.md)/[UiChipGroupActions](index.md)/[selectChipWithText](select-chip-with-text.md)
 
-# selectChipWithText
 
-`open fun selectChipWithText(text: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+
+# selectChipWithText  
+[androidJvm]  
+Brief description  
+
 
 Selects a chip with given text
 
-### Parameters
 
-`text` - Chip text to match`open fun selectChipWithText(pattern: `[`Pattern`](https://docs.oracle.com/javase/6/docs/api/java/util/regex/Pattern.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+
+## Parameters  
+  
+androidJvm  
+  
+|  Name|  Summary| 
+|---|---|
+| text| <br><br>Chip text to match<br><br>
+  
+  
+Content  
+open fun [selectChipWithText](select-chip-with-text.md)(text: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html))  
+
+
+[androidJvm]  
+Brief description  
+
 
 Selects a chip with give text pattern
 
-### Parameters
 
-`pattern` - Chip text pattern to match
+
+## Parameters  
+  
+androidJvm  
+  
+|  Name|  Summary| 
+|---|---|
+| pattern| <br><br>Chip text pattern to match<br><br>
+  
+  
+Content  
+open fun [selectChipWithText](select-chip-with-text.md)(pattern: [Pattern](https://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html))  
+
+
+
