@@ -1,23 +1,36 @@
-[kaspresso](../../index.md) / [com.kaspersky.kaspresso.autoscroll](../index.md) / [WebAutoScrollProviderImpl](index.md) / [scroll](./scroll.md)
+//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.autoscroll](../index.md)/[WebAutoScrollProviderImpl](index.md)/[scroll](scroll.md)
 
-# scroll
 
-`fun <T> scroll(interaction: WebInteraction<*>, action: () -> T, cachedError: `[`Throwable`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html)`): T`
 
-Performs the autoscrolling functionality. Performs scroll and re-invokes the given [action](scroll.md#com.kaspersky.kaspresso.autoscroll.WebAutoScrollProviderImpl$scroll(androidx.test.espresso.web.sugar.Web.WebInteraction((kotlin.Any)), kotlin.Function0((com.kaspersky.kaspresso.autoscroll.WebAutoScrollProviderImpl.scroll.T)), kotlin.Throwable)/action).
+# scroll  
+[androidJvm]  
+Brief description  
 
-### Parameters
 
-`interaction` - the instance of [Web.WebInteraction](#) interface to perform actions and assertions.
+Performs the autoscrolling functionality. Performs scroll and re-invokes the given action.
 
-`action` - the actual action on the interacted view.
 
-`cachedError` - the error to be thrown if autoscroll would not help.
 
-### Exceptions
+#### Return  
 
-`cachedError` - if autoscroll action did not help.
 
-**Return**
-the result of [action](scroll.md#com.kaspersky.kaspresso.autoscroll.WebAutoScrollProviderImpl$scroll(androidx.test.espresso.web.sugar.Web.WebInteraction((kotlin.Any)), kotlin.Function0((com.kaspersky.kaspresso.autoscroll.WebAutoScrollProviderImpl.scroll.T)), kotlin.Throwable)/action) invocation.
+the result of action invocation.
+
+
+
+## Parameters  
+  
+androidJvm  
+  
+|  Name|  Summary| 
+|---|---|
+| action| <br><br>the actual action on the interacted view.<br><br>
+| cachedError| <br><br>the error to be thrown if autoscroll would not help.<br><br>
+| interaction| <br><br>the instance of Web.WebInteraction interface to perform actions and assertions.<br><br>
+  
+  
+Content  
+open override fun <[T](scroll.md)> [scroll](scroll.md)(interaction: Web.WebInteraction<*>, action: () -> [T](scroll.md), cachedError: [Throwable](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html)): [T](scroll.md)  
+
+
 

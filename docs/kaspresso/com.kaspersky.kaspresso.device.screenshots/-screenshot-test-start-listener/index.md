@@ -1,19 +1,28 @@
-[kaspresso](../../index.md) / [com.kaspersky.kaspresso.device.screenshots](../index.md) / [ScreenshotTestStartListener](./index.md)
+//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.device.screenshots](../index.md)/[ScreenshotTestStartListener](index.md)
 
-# ScreenshotTestStartListener
 
-`interface ScreenshotTestStartListener`
+
+# ScreenshotTestStartListener  
+ [androidJvm] 
 
 The interface that allows implementations of [Screenshots](../-screenshots/index.md) to track test starts.
 
-### Functions
+interface [ScreenshotTestStartListener](index.md)   
 
-| Name | Summary |
+
+## Functions  
+  
+|  Name|  Summary| 
 |---|---|
-| [onTestStarted](on-test-started.md) | `abstract fun onTestStarted(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [equals](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/equals.html)| [androidJvm]  <br>Content  <br>open operator override fun [equals](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/equals.html)(other: [Any](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)?): [Boolean](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)  <br><br><br>
+| [hashCode](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/hash-code.html)| [androidJvm]  <br>Content  <br>open override fun [hashCode](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/hash-code.html)(): [Int](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)  <br><br><br>
+| [onTestStarted](on-test-started.md)| [androidJvm]  <br>Content  <br>abstract fun [onTestStarted](on-test-started.md)()  <br><br><br>
+| [toString](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/to-string.html)| [androidJvm]  <br>Content  <br>open override fun [toString](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/to-string.html)(): [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)  <br><br><br>
 
-### Inheritors
 
-| Name | Summary |
-|---|---|
-| [ScreenshotsImpl](../-screenshots-impl/index.md) | The implementation of the [Screenshots](../-screenshots/index.md) interface.`class ScreenshotsImpl : `[`Screenshots`](../-screenshots/index.md)`, `[`ScreenshotTestStartListener`](./index.md) |
+## Inheritors  
+  
+|  Name| 
+|---|
+| [ScreenshotsImpl](../-screenshots-impl/index.md)
+

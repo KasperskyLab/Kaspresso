@@ -1,13 +1,28 @@
-[kaspresso](../../index.md) / [com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.composite](../index.md) / [TestRunCompositeWatcherInterceptor](index.md) / [onMainSectionFinishedFailed](./on-main-section-finished-failed.md)
+//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.composite](../index.md)/[TestRunCompositeWatcherInterceptor](index.md)/[onMainSectionFinishedFailed](on-main-section-finished-failed.md)
 
-# onMainSectionFinishedFailed
 
-`fun onMainSectionFinishedFailed(testInfo: `[`TestInfo`](../../com.kaspersky.kaspresso.testcases.models.info/-test-info/index.md)`, throwable: `[`Throwable`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
-Called on "main" section finishes with failure, delegates the interception to [watcherInterceptors](#).
+# onMainSectionFinishedFailed  
+[androidJvm]  
+Brief description  
 
-### Parameters
 
-`testInfo` - the test info to pass to [watcherInterceptors](#).
+Called on "main" section finishes with failure, delegates the interception to watcherInterceptors.
 
-`throwable` - the error occured to pass to  [watcherInterceptors](#).
+
+
+## Parameters  
+  
+androidJvm  
+  
+|  Name|  Summary| 
+|---|---|
+| testInfo| <br><br>the test info to pass to watcherInterceptors.<br><br>
+| throwable| <br><br>the error occured to pass to  watcherInterceptors.<br><br>
+  
+  
+Content  
+open override fun [onMainSectionFinishedFailed](on-main-section-finished-failed.md)(testInfo: [TestInfo](../../com.kaspersky.kaspresso.testcases.models.info/-test-info/index.md), throwable: [Throwable](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html))  
+
+
+

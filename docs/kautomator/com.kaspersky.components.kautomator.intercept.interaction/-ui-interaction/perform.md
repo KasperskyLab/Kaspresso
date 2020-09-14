@@ -1,5 +1,11 @@
-[kautomator](../../index.md) / [com.kaspersky.components.kautomator.intercept.interaction](../index.md) / [UiInteraction](index.md) / [perform](./perform.md)
+//[kautomator](../../index.md)/[com.kaspersky.components.kautomator.intercept.interaction](../index.md)/[UiInteraction](index.md)/[perform](perform.md)
 
-# perform
 
-`abstract fun perform(action: Action): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+
+# perform  
+[androidJvm]  
+Content  
+abstract fun [perform](perform.md)(action: [Action](index.md))  
+
+
+

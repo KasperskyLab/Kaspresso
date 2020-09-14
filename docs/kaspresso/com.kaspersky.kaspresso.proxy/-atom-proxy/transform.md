@@ -1,15 +1,34 @@
-[kaspresso](../../index.md) / [com.kaspersky.kaspresso.proxy](../index.md) / [AtomProxy](index.md) / [transform](./transform.md)
+//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.proxy](../index.md)/[AtomProxy](index.md)/[transform](transform.md)
 
-# transform
 
-`fun transform(evaluation: Evaluation?): T`
 
-Calls watcher interceptors before [Atom.transform](#) on wrapped [atom](atom.md) is called.
+# transform  
+[androidJvm]  
+Brief description  
 
-### Parameters
 
-`evaluation` - represents the results of a Javascript execution.
+Calls watcher interceptors before Atom.transform on wrapped [atom](index.md#com.kaspersky.kaspresso.proxy/AtomProxy/atom/#/PointingToDeclaration/) is called.
 
-**Return**
-[R](#) a result type of the atom.
+
+
+#### Return  
+
+
+R a result type of the atom.
+
+
+
+## Parameters  
+  
+androidJvm  
+  
+|  Name|  Summary| 
+|---|---|
+| evaluation| <br><br>represents the results of a Javascript execution.<br><br>
+  
+  
+Content  
+open override fun [transform](transform.md)(evaluation: Evaluation?): [T](index.md)  
+
+
 

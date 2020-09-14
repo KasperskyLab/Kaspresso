@@ -1,8 +1,17 @@
-[kautomator](../../index.md) / [com.kaspersky.components.kautomator.component.edit](../index.md) / [UiEditableActions](index.md) / [clearText](./clear-text.md)
+//[kautomator](../../index.md)/[com.kaspersky.components.kautomator.component.edit](../index.md)/[UiEditableActions](index.md)/[clearText](clear-text.md)
 
-# clearText
 
-`open fun clearText(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+
+# clearText  
+[androidJvm]  
+Brief description  
+
 
 Clears the text content into the view
+
+  
+Content  
+open fun [clearText](clear-text.md)()  
+
+
 

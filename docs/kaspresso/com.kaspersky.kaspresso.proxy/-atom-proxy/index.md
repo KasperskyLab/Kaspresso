@@ -1,28 +1,38 @@
-[kaspresso](../../index.md) / [com.kaspersky.kaspresso.proxy](../index.md) / [AtomProxy](./index.md)
+//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.proxy](../index.md)/[AtomProxy](index.md)
 
-# AtomProxy
 
-`class AtomProxy<T> : Atom<T>`
 
-The proxy-wrapper of [Atom](#) for watcher interceptors calls.
+# AtomProxy  
+ [androidJvm] 
 
-### Constructors
+The proxy-wrapper of Atom for watcher interceptors calls.
 
-| Name | Summary |
+class [AtomProxy](index.md)<[T](index.md)>(**atom**: Atom<[T](index.md)>, **matcher**: Matcher<*>, **watcherInterceptors**: [List](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)<[AtomWatcherInterceptor](../../com.kaspersky.kaspresso.interceptors.watcher.view/-atom-watcher-interceptor/index.md)>) : Atom<[T](index.md)>    
+
+
+## Constructors  
+  
+|  Name|  Summary| 
 |---|---|
-| [&lt;init&gt;](-init-.md) | The proxy-wrapper of [Atom](#) for watcher interceptors calls.`AtomProxy(atom: Atom<T>, matcher: Matcher<*>, watcherInterceptors: `[`List`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)`<`[`AtomWatcherInterceptor`](../../com.kaspersky.kaspresso.interceptors.watcher.view/-atom-watcher-interceptor/index.md)`>)` |
+| [AtomProxy](-atom-proxy.md)|  [androidJvm] fun <[T](index.md)> [AtomProxy](-atom-proxy.md)(atom: Atom<[T](index.md)>, matcher: Matcher<*>, watcherInterceptors: [List](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)<[AtomWatcherInterceptor](../../com.kaspersky.kaspresso.interceptors.watcher.view/-atom-watcher-interceptor/index.md)>)   <br>
 
-### Properties
 
-| Name | Summary |
+## Functions  
+  
+|  Name|  Summary| 
 |---|---|
-| [atom](atom.md) | `val atom: Atom<T>` |
-| [matcher](matcher.md) | `val matcher: Matcher<*>` |
+| [equals](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/equals.html)| [androidJvm]  <br>Content  <br>open operator override fun [equals](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/equals.html)(other: [Any](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)?): [Boolean](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)  <br><br><br>
+| [getArguments](get-arguments.md)| [androidJvm]  <br>Brief description  <br><br><br>Simply calls Atom.getArguments on wrapped [atom](index.md#com.kaspersky.kaspresso.proxy/AtomProxy/atom/#/PointingToDeclaration/).<br><br>  <br>Content  <br>open override fun [getArguments](get-arguments.md)(elementContext: ElementReference?): [MutableList](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html)<[Any](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)>  <br><br><br>
+| [getScript](get-script.md)| [androidJvm]  <br>Brief description  <br><br><br>Simply calls Atom.getScript on wrapped [atom](index.md#com.kaspersky.kaspresso.proxy/AtomProxy/atom/#/PointingToDeclaration/).<br><br>  <br>Content  <br>open override fun [getScript](get-script.md)(): [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)  <br><br><br>
+| [hashCode](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/hash-code.html)| [androidJvm]  <br>Content  <br>open override fun [hashCode](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/hash-code.html)(): [Int](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)  <br><br><br>
+| [toString](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/to-string.html)| [androidJvm]  <br>Content  <br>open override fun [toString](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/to-string.html)(): [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)  <br><br><br>
+| [transform](transform.md)| [androidJvm]  <br>Brief description  <br><br><br>Calls watcher interceptors before Atom.transform on wrapped [atom](index.md#com.kaspersky.kaspresso.proxy/AtomProxy/atom/#/PointingToDeclaration/) is called.<br><br>  <br>Content  <br>open override fun [transform](transform.md)(evaluation: Evaluation?): [T](index.md)  <br><br><br>
 
-### Functions
 
-| Name | Summary |
+## Properties  
+  
+|  Name|  Summary| 
 |---|---|
-| [getArguments](get-arguments.md) | Simply calls [Atom.getArguments](#) on wrapped [atom](atom.md).`fun getArguments(elementContext: ElementReference?): `[`MutableList`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html)`<`[`Any`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)`>` |
-| [getScript](get-script.md) | Simply calls [Atom.getScript](#) on wrapped [atom](atom.md).`fun getScript(): `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html) |
-| [transform](transform.md) | Calls watcher interceptors before [Atom.transform](#) on wrapped [atom](atom.md) is called.`fun transform(evaluation: Evaluation?): T` |
+| [atom](index.md#com.kaspersky.kaspresso.proxy/AtomProxy/atom/#/PointingToDeclaration/)|  [androidJvm] val [atom](index.md#com.kaspersky.kaspresso.proxy/AtomProxy/atom/#/PointingToDeclaration/): Atom<[T](index.md)>   <br>
+| [matcher](index.md#com.kaspersky.kaspresso.proxy/AtomProxy/matcher/#/PointingToDeclaration/)|  [androidJvm] val [matcher](index.md#com.kaspersky.kaspresso.proxy/AtomProxy/matcher/#/PointingToDeclaration/): Matcher<*>   <br>
+

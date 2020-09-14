@@ -1,8 +1,17 @@
-[kautomator](../../index.md) / [com.kaspersky.components.kautomator.component.text](../index.md) / [UiTextViewAssertions](index.md) / [hasEmptyText](./has-empty-text.md)
+//[kautomator](../../index.md)/[com.kaspersky.components.kautomator.component.text](../index.md)/[UiTextViewAssertions](index.md)/[hasEmptyText](has-empty-text.md)
 
-# hasEmptyText
 
-`open fun hasEmptyText(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+
+# hasEmptyText  
+[androidJvm]  
+Brief description  
+
 
 Checks if the view has empty text
+
+  
+Content  
+open fun [hasEmptyText](has-empty-text.md)()  
+
+
 

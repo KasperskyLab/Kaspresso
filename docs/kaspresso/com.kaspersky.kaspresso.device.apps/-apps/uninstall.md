@@ -1,13 +1,35 @@
-[kaspresso](../../index.md) / [com.kaspersky.kaspresso.device.apps](../index.md) / [Apps](index.md) / [uninstall](./uninstall.md)
+//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.device.apps](../index.md)/[Apps](index.md)/[uninstall](uninstall.md)
 
-# uninstall
 
-`abstract fun uninstall(packageName: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+
+# uninstall  
+[androidJvm]  
+Brief description  
+
+
+
 
 Uninstalls an app via ADB.
 
+
+
 Required Permissions: INTERNET.
 
-### Parameters
 
-`packageName` - an android package name of the app to be deleted.
+
+
+
+## Parameters  
+  
+androidJvm  
+  
+|  Name|  Summary| 
+|---|---|
+| packageName| <br><br>an android package name of the app to be deleted.<br><br>
+  
+  
+Content  
+abstract fun [uninstall](uninstall.md)(packageName: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html))  
+
+
+

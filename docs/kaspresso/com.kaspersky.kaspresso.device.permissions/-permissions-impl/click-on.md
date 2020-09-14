@@ -1,8 +1,17 @@
-[kaspresso](../../index.md) / [com.kaspersky.kaspresso.device.permissions](../index.md) / [PermissionsImpl](index.md) / [clickOn](./click-on.md)
+//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.device.permissions](../index.md)/[PermissionsImpl](index.md)/[clickOn](click-on.md)
 
-# clickOn
 
-`fun clickOn(button: Button): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+
+# clickOn  
+[androidJvm]  
+Brief description  
+
 
 Waits for 1 sec, passes the permission-requesting permissions dialog
+
+  
+Content  
+open override fun [clickOn](click-on.md)(button: [Permissions.Button](../-permissions/-button/index.md))  
+
+
 

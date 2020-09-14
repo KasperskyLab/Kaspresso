@@ -1,13 +1,28 @@
-[kaspresso](../../index.md) / [com.kaspersky.kaspresso.interceptors.watcher.kautomator](../index.md) / [KautomatorWatcherInterceptor](index.md) / [interceptPerform](./intercept-perform.md)
+//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.interceptors.watcher.kautomator](../index.md)/[KautomatorWatcherInterceptor](index.md)/[interceptPerform](intercept-perform.md)
 
-# interceptPerform
 
-`abstract fun interceptPerform(interaction: Interaction, action: Action): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
-Called to do some stuff before [UiInteraction.perform](#) is actually called.
+# interceptPerform  
+[androidJvm]  
+Brief description  
 
-### Parameters
 
-`interaction` - a Kautomator UiInteraction on which [action](intercept-perform.md#com.kaspersky.kaspresso.interceptors.watcher.kautomator.KautomatorWatcherInterceptor$interceptPerform(com.kaspersky.kaspresso.interceptors.watcher.kautomator.KautomatorWatcherInterceptor.Interaction, com.kaspersky.kaspresso.interceptors.watcher.kautomator.KautomatorWatcherInterceptor.Action)/action) is performed
+Called to do some stuff before UiInteraction.perform is actually called.
 
-`action` - responsible for performing an activity (action) on the given [interaction](intercept-perform.md#com.kaspersky.kaspresso.interceptors.watcher.kautomator.KautomatorWatcherInterceptor$interceptPerform(com.kaspersky.kaspresso.interceptors.watcher.kautomator.KautomatorWatcherInterceptor.Interaction, com.kaspersky.kaspresso.interceptors.watcher.kautomator.KautomatorWatcherInterceptor.Action)/interaction)
+
+
+## Parameters  
+  
+androidJvm  
+  
+|  Name|  Summary| 
+|---|---|
+| action| <br><br>responsible for performing an activity (action) on the given interaction<br><br>
+| interaction| <br><br>a Kautomator UiInteraction on which action is performed<br><br>
+  
+  
+Content  
+abstract fun [interceptPerform](intercept-perform.md)(interaction: [Interaction](index.md), action: [Action](index.md))  
+
+
+

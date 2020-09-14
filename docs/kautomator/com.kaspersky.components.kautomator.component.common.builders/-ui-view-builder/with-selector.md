@@ -1,11 +1,27 @@
-[kautomator](../../index.md) / [com.kaspersky.components.kautomator.component.common.builders](../index.md) / [UiViewBuilder](index.md) / [withSelector](./with-selector.md)
+//[kautomator](../../index.md)/[com.kaspersky.components.kautomator.component.common.builders](../index.md)/[UiViewBuilder](index.md)/[withSelector](with-selector.md)
 
-# withSelector
 
-`fun withSelector(selector: BySelector.() -> BySelector): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
-Matches the view with given custom [BySelector](#)
+# withSelector  
+[androidJvm]  
+Brief description  
 
-### Parameters
 
-`selector` - [BySelector](#) public function
+Matches the view with given custom BySelector
+
+
+
+## Parameters  
+  
+androidJvm  
+  
+|  Name|  Summary| 
+|---|---|
+| selector| <br><br>BySelector public function<br><br>
+  
+  
+Content  
+fun [withSelector](with-selector.md)(selector: BySelector.() -> BySelector)  
+
+
+

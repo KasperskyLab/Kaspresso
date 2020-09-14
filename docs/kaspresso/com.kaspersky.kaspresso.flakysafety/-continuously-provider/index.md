@@ -1,20 +1,29 @@
-[kaspresso](../../index.md) / [com.kaspersky.kaspresso.flakysafety](../index.md) / [ContinuouslyProvider](./index.md)
+//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.flakysafety](../index.md)/[ContinuouslyProvider](index.md)
 
-# ContinuouslyProvider
 
-`interface ContinuouslyProvider`
+
+# ContinuouslyProvider  
+ [androidJvm] 
 
 The interface to provide the flaky safety functionality.
 
-### Functions
+interface [ContinuouslyProvider](index.md)   
 
-| Name | Summary |
+
+## Functions  
+  
+|  Name|  Summary| 
 |---|---|
-| [continuously](continuously.md) | Invokes the given [action](continuously.md#com.kaspersky.kaspresso.flakysafety.ContinuouslyProvider$continuously(kotlin.Function0((com.kaspersky.kaspresso.flakysafety.ContinuouslyProvider.continuously.T)))/action) during set timeout.`abstract fun <T> continuously(action: () -> T): T`<br>`abstract fun <T> continuously(timeoutMs: `[`Long`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html)`? = null, intervalMs: `[`Long`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html)`? = null, failureMessage: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`? = null, action: () -> T): T` |
+| [continuously](continuously.md)| [androidJvm]  <br>Brief description  <br><br><br><br><br>Invokes the given action during set timeout.<br><br><br><br>It can be helpful for checking of negative scenarios.<br><br><br><br>In opposite to [FlakySafetyProvider.flakySafely](../-flaky-safety-provider/flaky-safely.md) it does not skip last attempt after first success and throws inside exception outside as soon as it was thrown<br><br><br><br>  <br>Content  <br>abstract fun <[T](continuously.md)> [continuously](continuously.md)(action: () -> [T](continuously.md)): [T](continuously.md)  <br><br><br>[androidJvm]  <br>Brief description  <br><br><br><br><br>Invokes the given action during set timeout.<br><br><br><br>It can be helpful for checking of negative scenarios.<br><br><br><br>In opposite to [FlakySafetyProvider.flakySafely](../-flaky-safety-provider/flaky-safely.md) it does not skips last attempt after first success and throws inside exception outside as soon as it was thrown<br><br><br><br>  <br>Content  <br>abstract fun <[T](continuously.md)> [continuously](continuously.md)(timeoutMs: [Long](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html)?, intervalMs: [Long](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html)?, failureMessage: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)?, action: () -> [T](continuously.md)): [T](continuously.md)  <br><br><br>
+| [equals](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/equals.html)| [androidJvm]  <br>Content  <br>open operator override fun [equals](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/equals.html)(other: [Any](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)?): [Boolean](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)  <br><br><br>
+| [hashCode](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/hash-code.html)| [androidJvm]  <br>Content  <br>open override fun [hashCode](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/hash-code.html)(): [Int](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)  <br><br><br>
+| [toString](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/to-string.html)| [androidJvm]  <br>Content  <br>open override fun [toString](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/to-string.html)(): [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)  <br><br><br>
 
-### Inheritors
 
-| Name | Summary |
-|---|---|
-| [BaseTestContext](../../com.kaspersky.kaspresso.testcases.core.testcontext/-base-test-context.md) | Provides the Kaspresso functionality for "run" section: [Device](../../com.kaspersky.kaspresso.device/-device/index.md), [AdbServer](../../com.kaspersky.kaspresso.device.server/-adb-server/index.md), the [UiTestLogger](../../com.kaspersky.kaspresso.logger/-ui-test-logger.md) implementation for external developers. Also provides flaky safety, composing and web composing functionalities via implementing [FlakySafetyProvider](../-flaky-safety-provider/index.md), [ComposeProvider](../../com.kaspersky.kaspresso.compose/-compose-provider/index.md) and [WebComposeProvider](../../com.kaspersky.kaspresso.compose/-web-compose-provider/index.md) interfaces.`open class BaseTestContext : `[`FlakySafetyProvider`](../-flaky-safety-provider/index.md)`, `[`ContinuouslyProvider`](./index.md)`, `[`ComposeProvider`](../../com.kaspersky.kaspresso.compose/-compose-provider/index.md)`, `[`WebComposeProvider`](../../com.kaspersky.kaspresso.compose/-web-compose-provider/index.md)`, `[`TestAssistantsProvider`](../../com.kaspersky.kaspresso.testcases.core.testassistants/-test-assistants-provider/index.md) |
-| [ContinuouslyProviderImpl](../-continuously-provider-impl/index.md) | The implementation of the [ContinuouslyProvider](./index.md) interface.`class ContinuouslyProviderImpl : `[`ContinuouslyProvider`](./index.md) |
+## Inheritors  
+  
+|  Name| 
+|---|
+| [ContinuouslyProviderImpl](../-continuously-provider-impl/index.md)
+| [BaseTestContext](../../com.kaspersky.kaspresso.testcases.core.testcontext/-base-test-context/index.md)
+
