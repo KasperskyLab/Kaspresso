@@ -172,9 +172,8 @@ Kaspresso writes its own logs, detailed and readable:
 
 ### Ability to call ADB commands
 
-Espresso and UI Automator don't allow to call ADB commands from inside a test. To fix this problem, we developed AdbServer (see the [repository on GitHub](https://github.com/KasperskyLab/AdbServer)).
-
-In Kaspresso, you can call ADB and CMD commands using the ```AdbServer``` class (see [the manual](/wiki/06_AdbServer.md)).
+Espresso and UI Automator don't allow to call ADB commands from inside a test. That's why we have written special Autotest AdbServer. 
+All detailed info is available on [wiki](/wiki/06_AdbServer.md).
 
 ### Ability to work with Android System
 
@@ -253,14 +252,14 @@ repositories {
 }
 
 dependencies {
-    androidTestImplementation 'com.kaspersky.android-components:kaspresso:1.3.0-SNAPSHOT'
+    androidTestImplementation 'com.kaspersky.android-components:kaspresso:1.2.1-SNAPSHOT'
 }
 ```
 
 ## Samples
-All samples are available in [kaspresso-sample](./kaspresso/kaspresso-sample). 
+All samples are available in [samples folder](/samples). 
 
-The algorithm to execute all ui-tests:
+Be aware that a lot of samples require turned on AdbServer. The algorithm to start AdbServer:
 1. Go to the `kaspresso` folder. For example: 
 ```
 cd /User/Gagarin/workspace/Kaspresso
@@ -269,13 +268,7 @@ cd /User/Gagarin/workspace/Kaspresso
 ```
 java -jar artifacts/adbserver-desktop.jar
 ```
-3. Start an emulator with API=25.
-4. Execute the following command: // NOT READY!!!
-```
-./gradlew connectedAndroidTest
-
-```
-5. Profit!
+3. Profit!
 
 ## Breaking changes in 1.2.0
 1. Please, use 'artifacts/adbserver-desktop.jar' to start Autotest AdbServer (the Desktop part). 
