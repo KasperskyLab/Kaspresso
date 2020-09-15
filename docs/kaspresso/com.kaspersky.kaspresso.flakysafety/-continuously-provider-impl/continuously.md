@@ -1,40 +1,65 @@
-[kaspresso](../../index.md) / [com.kaspersky.kaspresso.flakysafety](../index.md) / [ContinuouslyProviderImpl](index.md) / [continuously](./continuously.md)
+//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.flakysafety](../index.md)/[ContinuouslyProviderImpl](index.md)/[continuously](continuously.md)
 
-# continuously
 
-`fun <T> continuously(action: () -> T): T`
 
-Invokes the given [action](continuously.md#com.kaspersky.kaspresso.flakysafety.ContinuouslyProviderImpl$continuously(kotlin.Function0((com.kaspersky.kaspresso.flakysafety.ContinuouslyProviderImpl.continuously.T)))/action) during set timeout.
+# continuously  
+[androidJvm]  
+Brief description  
 
-### Parameters
 
-`action` - the action to invoke.
+Invokes the given action during set timeout.
 
-### Exceptions
 
-`Throwable` - if any of attempts failed.
 
-**Return**
-the [action](continuously.md#com.kaspersky.kaspresso.flakysafety.ContinuouslyProviderImpl$continuously(kotlin.Function0((com.kaspersky.kaspresso.flakysafety.ContinuouslyProviderImpl.continuously.T)))/action) invocation result.
+#### Return  
 
-`fun <T> continuously(timeoutMs: `[`Long`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html)`?, intervalMs: `[`Long`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html)`?, failureMessage: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`?, action: () -> T): T`
 
-Invokes the given [action](continuously.md#com.kaspersky.kaspresso.flakysafety.ContinuouslyProviderImpl$continuously(kotlin.Long, kotlin.Long, kotlin.String, kotlin.Function0((com.kaspersky.kaspresso.flakysafety.ContinuouslyProviderImpl.continuously.T)))/action) during set timeout.
+the action invocation result.
 
-### Parameters
 
-`timeoutMs` - the timeout during which attempts will be made.
 
-`intervalMs` - the interval at which attempts will be made.
+## Parameters  
+  
+androidJvm  
+  
+|  Name|  Summary| 
+|---|---|
+| action| <br><br>the action to invoke.<br><br>
+  
+  
+Content  
+open override fun <[T](continuously.md)> [continuously](continuously.md)(action: () -> [T](continuously.md)): [T](continuously.md)  
 
-`failureMessage` - the message to log on failure.
 
-`action` - the action to invoke.
+[androidJvm]  
+Brief description  
 
-### Exceptions
 
-`Throwable` - if any of attempts failed.
+Invokes the given action during set timeout.
 
-**Return**
-the [action](continuously.md#com.kaspersky.kaspresso.flakysafety.ContinuouslyProviderImpl$continuously(kotlin.Long, kotlin.Long, kotlin.String, kotlin.Function0((com.kaspersky.kaspresso.flakysafety.ContinuouslyProviderImpl.continuously.T)))/action) invocation result.
+
+
+#### Return  
+
+
+the action invocation result.
+
+
+
+## Parameters  
+  
+androidJvm  
+  
+|  Name|  Summary| 
+|---|---|
+| action| <br><br>the action to invoke.<br><br>
+| failureMessage| <br><br>the message to log on failure.<br><br>
+| intervalMs| <br><br>the interval at which attempts will be made.<br><br>
+| timeoutMs| <br><br>the timeout during which attempts will be made.<br><br>
+  
+  
+Content  
+open override fun <[T](continuously.md)> [continuously](continuously.md)(timeoutMs: [Long](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html)?, intervalMs: [Long](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html)?, failureMessage: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)?, action: () -> [T](continuously.md)): [T](continuously.md)  
+
+
 

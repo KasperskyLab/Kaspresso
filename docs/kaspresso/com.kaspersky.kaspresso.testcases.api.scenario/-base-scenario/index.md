@@ -1,30 +1,44 @@
-[kaspresso](../../index.md) / [com.kaspersky.kaspresso.testcases.api.scenario](../index.md) / [BaseScenario](./index.md)
+//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.testcases.api.scenario](../index.md)/[BaseScenario](index.md)
 
-# BaseScenario
 
-`abstract class BaseScenario<ScenarioData>`
 
-The base class for parametrized scenarios. A representation of some repeating steps inside the
-[com.kaspersky.kaspresso.testcases.api.testcase.TestCase](../../com.kaspersky.kaspresso.testcases.api.testcase/-test-case/index.md).
+# BaseScenario  
+ [androidJvm] 
 
-### Parameters
+The base class for parametrized scenarios. A representation of some repeating steps inside the [com.kaspersky.kaspresso.testcases.api.testcase.TestCase](../../com.kaspersky.kaspresso.testcases.api.testcase/-test-case/index.md).
 
-`ScenarioData` - test data created in testcase's before section.
+abstract class [BaseScenario](index.md)<[ScenarioData](index.md)>   
 
-### Constructors
 
-| Name | Summary |
+## Parameters  
+  
+androidJvm  
+  
+|  Name|  Summary| 
 |---|---|
-| [&lt;init&gt;](-init-.md) | The base class for parametrized scenarios. A representation of some repeating steps inside the [com.kaspersky.kaspresso.testcases.api.testcase.TestCase](../../com.kaspersky.kaspresso.testcases.api.testcase/-test-case/index.md).`BaseScenario()` |
+| ScenarioData| <br><br>test data created in testcase's before section.<br><br>
+  
 
-### Properties
 
-| Name | Summary |
+## Constructors  
+  
+|  Name|  Summary| 
 |---|---|
-| [steps](steps.md) | Steps to run. Need to be implemented in derived [Scenario](../-scenario/index.md).`abstract val steps: `[`TestContext`](../../com.kaspersky.kaspresso.testcases.core.testcontext/-test-context/index.md)`<ScenarioData>.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [BaseScenario](-base-scenario.md)|  [androidJvm] <br><br>test data created in testcase's before section.<br><br>fun [BaseScenario](-base-scenario.md)()   <br>
 
-### Inheritors
 
-| Name | Summary |
+## Functions  
+  
+|  Name|  Summary| 
 |---|---|
-| [Scenario](../-scenario/index.md) | The base class for scenarios. A representation of some repeating steps inside the [com.kaspersky.kaspresso.testcases.api.testcase.TestCase](../../com.kaspersky.kaspresso.testcases.api.testcase/-test-case/index.md).`abstract class Scenario : `[`BaseScenario`](./index.md)`<`[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`>` |
+| [equals](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/equals.html)| [androidJvm]  <br>Content  <br>open operator override fun [equals](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/equals.html)(other: [Any](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)?): [Boolean](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)  <br><br><br>
+| [hashCode](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/hash-code.html)| [androidJvm]  <br>Content  <br>open override fun [hashCode](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/hash-code.html)(): [Int](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)  <br><br><br>
+| [toString](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/to-string.html)| [androidJvm]  <br>Content  <br>open override fun [toString](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/to-string.html)(): [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)  <br><br><br>
+
+
+## Inheritors  
+  
+|  Name| 
+|---|
+| [Scenario](../-scenario/index.md)
+

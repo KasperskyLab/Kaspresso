@@ -1,42 +1,61 @@
-[kaspresso](../../index.md) / [com.kaspersky.kaspresso.device.apps](../index.md) / [Apps](./index.md)
+//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.device.apps](../index.md)/[Apps](index.md)
 
-# Apps
 
-`interface Apps`
+
+# Apps  
+ [androidJvm] 
+
+
 
 The interface to work with installer, launcher and package manager.
 
-Required: Started AdbServer
-    1. Download a file "kaspresso/artifacts/adbserver-desktop.jar"
-    2. Start AdbServer =&gt; input in cmd "java jar path_to_file/adbserver-desktop.jar"
-Methods demanding to use AdbServer in the default implementation of this interface are marked.
-    But nobody can't deprecate you to write implementation that doesn't require AdbServer.
 
-### Properties
 
-| Name | Summary |
+Required: Started AdbServer     1. Download a file "kaspresso/artifacts/adbserver-desktop.jar"     2. Start AdbServer => input in cmd "java jar path_to_file/adbserver-desktop.jar" Methods demanding to use AdbServer in the default implementation of this interface are marked.     But nobody can't deprecate you to write implementation that doesn't require AdbServer.
+
+
+
+interface [Apps](index.md)   
+
+
+## Types  
+  
+|  Name|  Summary| 
 |---|---|
-| [targetAppLauncherPackageName](target-app-launcher-package-name.md) | `abstract val targetAppLauncherPackageName: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html) |
-| [targetAppPackageName](target-app-package-name.md) | `abstract val targetAppPackageName: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html) |
+| [Companion](-companion/index.md)| [androidJvm]  <br>Content  <br>object [Companion](-companion/index.md)  <br><br><br>
 
-### Functions
 
-| Name | Summary |
+## Functions  
+  
+|  Name|  Summary| 
 |---|---|
-| [install](install.md) | Installs an app via ADB.`abstract fun install(apkPath: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
-| [installIfNotExists](install-if-not-exists.md) | Installs an app via ADB only if [packageName](install-if-not-exists.md#com.kaspersky.kaspresso.device.apps.Apps$installIfNotExists(kotlin.String, kotlin.String)/packageName) is not installed`abstract fun installIfNotExists(packageName: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, apkPath: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
-| [isInstalled](is-installed.md) | Checks app is installed on device`abstract fun isInstalled(packageName: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html) |
-| [kill](kill.md) | Kills the process of the app by the given [packageName](kill.md#com.kaspersky.kaspresso.device.apps.Apps$kill(kotlin.String)/packageName).`abstract fun kill(packageName: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)` = targetAppPackageName): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
-| [launch](launch.md) | Launches an app with given [packageName](launch.md#com.kaspersky.kaspresso.device.apps.Apps$launch(kotlin.String, android.net.Uri)/packageName).`abstract fun launch(packageName: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, data: `[`Uri`](https://developer.android.com/reference/android/net/Uri.html)`? = null): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
-| [openRecent](open-recent.md) | Opens the app from the recent list by the description.`abstract fun openRecent(contentDescription: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
-| [openUrlInChrome](open-url-in-chrome.md) | Opens the given [url](open-url-in-chrome.md#com.kaspersky.kaspresso.device.apps.Apps$openUrlInChrome(kotlin.String)/url) on Chrome.`abstract fun openUrlInChrome(url: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
-| [uninstall](uninstall.md) | Uninstalls an app via ADB.`abstract fun uninstall(packageName: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
-| [uninstallIfExists](uninstall-if-exists.md) | Uninstalls an app via ADB only if it installed`abstract fun uninstallIfExists(packageName: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
-| [waitForAppLaunchAndReady](wait-for-app-launch-and-ready.md) | `abstract fun waitForAppLaunchAndReady(timeout: `[`Long`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html)` = MAX_LAUNCH_TIME_MS, packageName: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)` = targetAppPackageName): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
-| [waitForLauncher](wait-for-launcher.md) | `abstract fun waitForLauncher(timeout: `[`Long`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html)` = MAX_LAUNCH_TIME_MS, launcherPackageName: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)` = targetAppLauncherPackageName): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [equals](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/equals.html)| [androidJvm]  <br>Content  <br>open operator override fun [equals](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/equals.html)(other: [Any](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)?): [Boolean](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)  <br><br><br>
+| [hashCode](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/hash-code.html)| [androidJvm]  <br>Content  <br>open override fun [hashCode](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/hash-code.html)(): [Int](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)  <br><br><br>
+| [install](install.md)| [androidJvm]  <br>Brief description  <br><br><br><br><br>Installs an app via ADB.<br><br><br><br>Required Permissions: INTERNET.<br><br><br><br>  <br>Content  <br>abstract fun [install](install.md)(apkPath: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html))  <br><br><br>
+| [installIfNotExists](install-if-not-exists.md)| [androidJvm]  <br>Brief description  <br><br><br><br><br>Installs an app via ADB only if packageName is not installed<br><br><br><br>Required Permissions: INTERNET.<br><br><br><br>  <br>Content  <br>abstract fun [installIfNotExists](install-if-not-exists.md)(packageName: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html), apkPath: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html))  <br><br><br>
+| [isInstalled](is-installed.md)| [androidJvm]  <br>Brief description  <br><br><br>Checks app is installed on device<br><br>  <br>Content  <br>abstract fun [isInstalled](is-installed.md)(packageName: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)): [Boolean](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)  <br><br><br>
+| [kill](kill.md)| [androidJvm]  <br>Brief description  <br><br><br>Kills the process of the app by the given packageName.<br><br>  <br>Content  <br>abstract fun [kill](kill.md)(packageName: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html))  <br><br><br>
+| [launch](launch.md)| [androidJvm]  <br>Brief description  <br><br><br>Launches an app with given packageName.<br><br>  <br>Content  <br>abstract fun [launch](launch.md)(packageName: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html), data: [Uri](https://developer.android.com/reference/kotlin/android/net/Uri.html)?)  <br><br><br>
+| [openRecent](open-recent.md)| [androidJvm]  <br>Brief description  <br><br><br>Opens the app from the recent list by the description.<br><br>  <br>Content  <br>abstract fun [openRecent](open-recent.md)(contentDescription: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html))  <br><br><br>
+| [openUrlInChrome](open-url-in-chrome.md)| [androidJvm]  <br>Brief description  <br><br><br>Opens the given url on Chrome.<br><br>  <br>Content  <br>abstract fun [openUrlInChrome](open-url-in-chrome.md)(url: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html))  <br><br><br>
+| [toString](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/to-string.html)| [androidJvm]  <br>Content  <br>open override fun [toString](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/to-string.html)(): [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)  <br><br><br>
+| [uninstall](uninstall.md)| [androidJvm]  <br>Brief description  <br><br><br><br><br>Uninstalls an app via ADB.<br><br><br><br>Required Permissions: INTERNET.<br><br><br><br>  <br>Content  <br>abstract fun [uninstall](uninstall.md)(packageName: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html))  <br><br><br>
+| [uninstallIfExists](uninstall-if-exists.md)| [androidJvm]  <br>Brief description  <br><br><br><br><br>Uninstalls an app via ADB only if it installed<br><br><br><br>Required Permissions: INTERNET.<br><br><br><br>  <br>Content  <br>abstract fun [uninstallIfExists](uninstall-if-exists.md)(packageName: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html))  <br><br><br>
+| [waitForAppLaunchAndReady](wait-for-app-launch-and-ready.md)| [androidJvm]  <br>Content  <br>abstract fun [waitForAppLaunchAndReady](wait-for-app-launch-and-ready.md)(timeout: [Long](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html), packageName: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html))  <br><br><br>
+| [waitForLauncher](wait-for-launcher.md)| [androidJvm]  <br>Content  <br>abstract fun [waitForLauncher](wait-for-launcher.md)(timeout: [Long](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html), launcherPackageName: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html))  <br><br><br>
 
-### Inheritors
 
-| Name | Summary |
+## Properties  
+  
+|  Name|  Summary| 
 |---|---|
-| [AppsImpl](../-apps-impl/index.md) | The implementation of the [Apps](./index.md) interface.`class AppsImpl : `[`Apps`](./index.md) |
+| [targetAppLauncherPackageName](index.md#com.kaspersky.kaspresso.device.apps/Apps/targetAppLauncherPackageName/#/PointingToDeclaration/)|  [androidJvm] abstract val [targetAppLauncherPackageName](index.md#com.kaspersky.kaspresso.device.apps/Apps/targetAppLauncherPackageName/#/PointingToDeclaration/): [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)   <br>
+| [targetAppPackageName](index.md#com.kaspersky.kaspresso.device.apps/Apps/targetAppPackageName/#/PointingToDeclaration/)|  [androidJvm] abstract val [targetAppPackageName](index.md#com.kaspersky.kaspresso.device.apps/Apps/targetAppPackageName/#/PointingToDeclaration/): [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)   <br>
+
+
+## Inheritors  
+  
+|  Name| 
+|---|
+| [AppsImpl](../-apps-impl/index.md)
+

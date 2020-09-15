@@ -1,21 +1,34 @@
-[kaspresso](../../index.md) / [com.kaspersky.kaspresso.systemsafety](../index.md) / [SystemDialogSafetyProviderImpl](index.md) / [passSystemDialogs](./pass-system-dialogs.md)
+//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.systemsafety](../index.md)/[SystemDialogSafetyProviderImpl](index.md)/[passSystemDialogs](pass-system-dialogs.md)
 
-# passSystemDialogs
 
-`fun <T> passSystemDialogs(action: () -> T): T`
 
-Invokes the given [action](pass-system-dialogs.md#com.kaspersky.kaspresso.systemsafety.SystemDialogSafetyProviderImpl$passSystemDialogs(kotlin.Function0((com.kaspersky.kaspresso.systemsafety.SystemDialogSafetyProviderImpl.passSystemDialogs.T)))/action) and hides the system dialog if the invocation is failed and the system
-dialog is actually shown via [suppressSystemDialogs](#) call.
+# passSystemDialogs  
+[androidJvm]  
+Brief description  
 
-### Parameters
 
-`action` - the action to invoke.
+Invokes the given action and hides the system dialog if the invocation is failed and the system dialog is actually shown via suppressSystemDialogs call.
 
-### Exceptions
 
-`Throwable` - if caught while [action](pass-system-dialogs.md#com.kaspersky.kaspresso.systemsafety.SystemDialogSafetyProviderImpl$passSystemDialogs(kotlin.Function0((com.kaspersky.kaspresso.systemsafety.SystemDialogSafetyProviderImpl.passSystemDialogs.T)))/action) invocation error is not allowed
-or if[suppressSystemDialogs](#) throws an exception.
 
-**Return**
-the result of [action](pass-system-dialogs.md#com.kaspersky.kaspresso.systemsafety.SystemDialogSafetyProviderImpl$passSystemDialogs(kotlin.Function0((com.kaspersky.kaspresso.systemsafety.SystemDialogSafetyProviderImpl.passSystemDialogs.T)))/action)'s invocation.
+#### Return  
+
+
+the result of action's invocation.
+
+
+
+## Parameters  
+  
+androidJvm  
+  
+|  Name|  Summary| 
+|---|---|
+| action| <br><br>the action to invoke.<br><br>
+  
+  
+Content  
+open override fun <[T](pass-system-dialogs.md)> [passSystemDialogs](pass-system-dialogs.md)(action: () -> [T](pass-system-dialogs.md)): [T](pass-system-dialogs.md)  
+
+
 

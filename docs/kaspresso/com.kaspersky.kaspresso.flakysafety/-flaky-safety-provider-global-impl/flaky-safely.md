@@ -1,42 +1,66 @@
-[kaspresso](../../index.md) / [com.kaspersky.kaspresso.flakysafety](../index.md) / [FlakySafetyProviderGlobalImpl](index.md) / [flakySafely](./flaky-safely.md)
+//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.flakysafety](../index.md)/[FlakySafetyProviderGlobalImpl](index.md)/[flakySafely](flaky-safely.md)
 
-# flakySafely
 
-`fun <T> flakySafely(action: () -> T): T`
 
-Invokes the given [action](flaky-safely.md#com.kaspersky.kaspresso.flakysafety.FlakySafetyProviderGlobalImpl$flakySafely(kotlin.Function0((com.kaspersky.kaspresso.flakysafety.FlakySafetyProviderGlobalImpl.flakySafely.T)))/action) flaky safely.
+# flakySafely  
+[androidJvm]  
+Brief description  
 
-### Parameters
 
-`action` - the action to invoke.
+Invokes the given action flaky safely.
 
-### Exceptions
 
-`Throwable` - if all attempts failed.
 
-**Return**
-the [action](flaky-safely.md#com.kaspersky.kaspresso.flakysafety.FlakySafetyProviderGlobalImpl$flakySafely(kotlin.Function0((com.kaspersky.kaspresso.flakysafety.FlakySafetyProviderGlobalImpl.flakySafely.T)))/action) invocation result.
+#### Return  
 
-`fun <T> flakySafely(timeoutMs: `[`Long`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html)`?, intervalMs: `[`Long`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html)`?, allowedExceptions: `[`Set`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html)`<`[`Class`](https://docs.oracle.com/javase/6/docs/api/java/lang/Class.html)`<out `[`Throwable`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html)`>>?, failureMessage: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`?, action: () -> T): T`
 
-Invokes the given [action](flaky-safely.md#com.kaspersky.kaspresso.flakysafety.FlakySafetyProviderGlobalImpl$flakySafely(kotlin.Long, kotlin.Long, kotlin.collections.Set((java.lang.Class((kotlin.Throwable)))), kotlin.String, kotlin.Function0((com.kaspersky.kaspresso.flakysafety.FlakySafetyProviderGlobalImpl.flakySafely.T)))/action) flaky safely.
+the action invocation result.
 
-### Parameters
 
-`timeoutMs` - the timeout during which attempts will be made.
 
-`intervalMs` - the interval at which attempts will be made.
+## Parameters  
+  
+androidJvm  
+  
+|  Name|  Summary| 
+|---|---|
+| action| <br><br>the action to invoke.<br><br>
+  
+  
+Content  
+open override fun <[T](flaky-safely.md)> [flakySafely](flaky-safely.md)(action: () -> [T](flaky-safely.md)): [T](flaky-safely.md)  
 
-`allowedExceptions` - the set of exceptions, if caught, attempt will continue.
 
-`failureMessage` - the message to log on failure.
+[androidJvm]  
+Brief description  
 
-`action` - the action to invoke.
 
-### Exceptions
+Invokes the given action flaky safely.
 
-`Throwable` - if all attempts failed.
 
-**Return**
-the [action](flaky-safely.md#com.kaspersky.kaspresso.flakysafety.FlakySafetyProviderGlobalImpl$flakySafely(kotlin.Long, kotlin.Long, kotlin.collections.Set((java.lang.Class((kotlin.Throwable)))), kotlin.String, kotlin.Function0((com.kaspersky.kaspresso.flakysafety.FlakySafetyProviderGlobalImpl.flakySafely.T)))/action) invocation result.
+
+#### Return  
+
+
+the action invocation result.
+
+
+
+## Parameters  
+  
+androidJvm  
+  
+|  Name|  Summary| 
+|---|---|
+| action| <br><br>the action to invoke.<br><br>
+| allowedExceptions| <br><br>the set of exceptions, if caught, attempt will continue.<br><br>
+| failureMessage| <br><br>the message to log on failure.<br><br>
+| intervalMs| <br><br>the interval at which attempts will be made.<br><br>
+| timeoutMs| <br><br>the timeout during which attempts will be made.<br><br>
+  
+  
+Content  
+open override fun <[T](flaky-safely.md)> [flakySafely](flaky-safely.md)(timeoutMs: [Long](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html)?, intervalMs: [Long](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html)?, allowedExceptions: [Set](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html)<[Class](https://docs.oracle.com/javase/8/docs/api/java/lang/Class.html)<Out [Throwable](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html)>>?, failureMessage: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)?, action: () -> [T](flaky-safely.md)): [T](flaky-safely.md)  
+
+
 

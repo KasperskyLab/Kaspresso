@@ -1,21 +1,30 @@
-[kaspresso](../../index.md) / [com.kaspersky.kaspresso.interceptors.watcher.kautomator](../index.md) / [KautomatorWatcherInterceptor](./index.md)
+//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.interceptors.watcher.kautomator](../index.md)/[KautomatorWatcherInterceptor](index.md)
 
-# KautomatorWatcherInterceptor
 
-`interface KautomatorWatcherInterceptor<Interaction, Assertion, Action>`
+
+# KautomatorWatcherInterceptor  
+ [androidJvm] 
 
 The interface for all interceptors that are watching the default interaction in Kautomator.
 
-### Functions
+interface [KautomatorWatcherInterceptor](index.md)<[Interaction](index.md), [Assertion](index.md), [Action](index.md)>   
 
-| Name | Summary |
+
+## Functions  
+  
+|  Name|  Summary| 
 |---|---|
-| [interceptCheck](intercept-check.md) | Called to do some stuff before [UiInteraction.check](#) is actually called.`abstract fun interceptCheck(interaction: Interaction, assertion: Assertion): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
-| [interceptPerform](intercept-perform.md) | Called to do some stuff before [UiInteraction.perform](#) is actually called.`abstract fun interceptPerform(interaction: Interaction, action: Action): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [equals](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/equals.html)| [androidJvm]  <br>Content  <br>open operator override fun [equals](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/equals.html)(other: [Any](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)?): [Boolean](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)  <br><br><br>
+| [hashCode](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/hash-code.html)| [androidJvm]  <br>Content  <br>open override fun [hashCode](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/hash-code.html)(): [Int](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)  <br><br><br>
+| [interceptCheck](intercept-check.md)| [androidJvm]  <br>Brief description  <br><br><br>Called to do some stuff before UiInteraction.check is actually called.<br><br>  <br>Content  <br>abstract fun [interceptCheck](intercept-check.md)(interaction: [Interaction](index.md), assertion: [Assertion](index.md))  <br><br><br>
+| [interceptPerform](intercept-perform.md)| [androidJvm]  <br>Brief description  <br><br><br>Called to do some stuff before UiInteraction.perform is actually called.<br><br>  <br>Content  <br>abstract fun [interceptPerform](intercept-perform.md)(interaction: [Interaction](index.md), action: [Action](index.md))  <br><br><br>
+| [toString](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/to-string.html)| [androidJvm]  <br>Content  <br>open override fun [toString](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/to-string.html)(): [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)  <br><br><br>
 
-### Inheritors
 
-| Name | Summary |
-|---|---|
-| [DeviceWatcherInterceptor](../-device-watcher-interceptor.md) | The derived from [KautomatorWatcherInterceptor](./index.md) interface for intercepting (only watching) [UiDeviceInteraction.perform](#) and [UiDeviceInteraction.check](#) behavior.`interface DeviceWatcherInterceptor : `[`KautomatorWatcherInterceptor`](./index.md)`<UiDeviceInteraction, UiDeviceAssertion, UiDeviceAction>` |
-| [ObjectWatcherInterceptor](../-object-watcher-interceptor.md) | The derived from [KautomatorWatcherInterceptor](./index.md) interface for intercepting (only watching) [UiObjectInteraction.perform](#) and [UiObjectInteraction.check](#) behavior.`interface ObjectWatcherInterceptor : `[`KautomatorWatcherInterceptor`](./index.md)`<UiObjectInteraction, UiObjectAssertion, UiObjectAction>` |
+## Inheritors  
+  
+|  Name| 
+|---|
+| [DeviceWatcherInterceptor](../-device-watcher-interceptor/index.md)
+| [ObjectWatcherInterceptor](../-object-watcher-interceptor/index.md)
+

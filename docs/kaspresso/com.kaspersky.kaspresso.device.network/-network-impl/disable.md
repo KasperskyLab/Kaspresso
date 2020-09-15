@@ -1,10 +1,25 @@
-[kaspresso](../../index.md) / [com.kaspersky.kaspresso.device.network](../index.md) / [NetworkImpl](index.md) / [disable](./disable.md)
+//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.device.network](../index.md)/[NetworkImpl](index.md)/[disable](disable.md)
 
-# disable
 
-`fun disable(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
-Disables wi-fi and mobile data using adb.
+# disable  
+[androidJvm]  
+Brief description  
+
+
+
+
+Disables both Wi-Fi and mobile data.
+
+
 
 Required Permissions: INTERNET.
+
+
+
+  
+Content  
+open override fun [disable](disable.md)()  
+
+
 

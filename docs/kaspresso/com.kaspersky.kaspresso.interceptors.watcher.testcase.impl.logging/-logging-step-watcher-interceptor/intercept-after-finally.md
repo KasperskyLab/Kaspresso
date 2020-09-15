@@ -1,11 +1,27 @@
-[kaspresso](../../index.md) / [com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.logging](../index.md) / [LoggingStepWatcherInterceptor](index.md) / [interceptAfterFinally](./intercept-after-finally.md)
+//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.logging](../index.md)/[LoggingStepWatcherInterceptor](index.md)/[interceptAfterFinally](intercept-after-finally.md)
 
-# interceptAfterFinally
 
-`fun interceptAfterFinally(stepInfo: `[`StepInfo`](../../com.kaspersky.kaspresso.testcases.models.info/-step-info/index.md)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
-Logs the given [stepInfo](intercept-after-finally.md#com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.logging.LoggingStepWatcherInterceptor$interceptAfterFinally(com.kaspersky.kaspresso.testcases.models.info.StepInfo)/stepInfo) on step finally finishes.
+# interceptAfterFinally  
+[androidJvm]  
+Brief description  
 
-### Parameters
 
-`stepInfo` - the step info to log.
+Logs the given stepInfo on step finally finishes.
+
+
+
+## Parameters  
+  
+androidJvm  
+  
+|  Name|  Summary| 
+|---|---|
+| stepInfo| <br><br>the step info to log.<br><br>
+  
+  
+Content  
+open override fun [interceptAfterFinally](intercept-after-finally.md)(stepInfo: [StepInfo](../../com.kaspersky.kaspresso.testcases.models.info/-step-info/index.md))  
+
+
+

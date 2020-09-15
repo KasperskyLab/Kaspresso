@@ -1,17 +1,18 @@
 include(
+    ":allure-model",
+
     ":adb-server:adbserver-command-types",
     ":adb-server:adbserver-common",
     ":adb-server:adbserver-connection",
     ":adb-server:adbserver-desktop",
     ":adb-server:adbserver-desktop-device-connection",
     ":adb-server:adbserver-device",
-    ":adb-server:adbserver-sample",
 
-    ":kaspresso:kaspresso-framework",
-    ":kaspresso:allure-model",
-    ":kaspresso:kaspresso-sample",
+    ":kaspresso",
+    ":kautomator",
 
-    ":kautomator:kautomator-framework",
-    ":kautomator:kautomator-sample",
-    ":kautomator:kautomator-sample-app-upgrade"
+    ":samples:adbserver-sample",
+    ":samples:kaspresso-sample",
+    ":samples:kautomator-sample",
+    ":samples:kautomator-sample-app-upgrade"
 )

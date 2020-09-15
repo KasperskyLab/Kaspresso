@@ -1,12 +1,27 @@
-[kautomator](../../index.md) / [com.kaspersky.components.kautomator.component.bottomnav](../index.md) / [UiBottomNavigationViewAssertions](index.md) / [hasNotSelectedItemWithIndex](./has-not-selected-item-with-index.md)
+//[kautomator](../../index.md)/[com.kaspersky.components.kautomator.component.bottomnav](../index.md)/[UiBottomNavigationViewAssertions](index.md)/[hasNotSelectedItemWithIndex](has-not-selected-item-with-index.md)
 
-# hasNotSelectedItemWithIndex
 
-`open fun hasNotSelectedItemWithIndex(index: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
-Checks if the view's selected menu item index does not match given one.
-Note that this method uses view hierarchy which could be changed at any time.
+# hasNotSelectedItemWithIndex  
+[androidJvm]  
+Brief description  
 
-### Parameters
 
-`index` - Menu item index
+Checks if the view's selected menu item index does not match given one. Note that this method uses view hierarchy which could be changed at any time.
+
+
+
+## Parameters  
+  
+androidJvm  
+  
+|  Name|  Summary| 
+|---|---|
+| index| <br><br>Menu item index<br><br>
+  
+  
+Content  
+open fun [hasNotSelectedItemWithIndex](has-not-selected-item-with-index.md)(index: [Int](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html))  
+
+
+

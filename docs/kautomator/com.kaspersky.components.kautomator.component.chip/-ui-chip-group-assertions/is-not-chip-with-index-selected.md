@@ -1,11 +1,27 @@
-[kautomator](../../index.md) / [com.kaspersky.components.kautomator.component.chip](../index.md) / [UiChipGroupAssertions](index.md) / [isNotChipWithIndexSelected](./is-not-chip-with-index-selected.md)
+//[kautomator](../../index.md)/[com.kaspersky.components.kautomator.component.chip](../index.md)/[UiChipGroupAssertions](index.md)/[isNotChipWithIndexSelected](is-not-chip-with-index-selected.md)
 
-# isNotChipWithIndexSelected
 
-`open fun isNotChipWithIndexSelected(index: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+
+# isNotChipWithIndexSelected  
+[androidJvm]  
+Brief description  
+
 
 Checks if chip with given index is not selected
 
-### Parameters
 
-`index` - Chip index in ChipGroup]
+
+## Parameters  
+  
+androidJvm  
+  
+|  Name|  Summary| 
+|---|---|
+| index| <br><br>Chip index in ChipGroup]<br><br>
+  
+  
+Content  
+open fun [isNotChipWithIndexSelected](is-not-chip-with-index-selected.md)(index: [Int](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html))  
+
+
+

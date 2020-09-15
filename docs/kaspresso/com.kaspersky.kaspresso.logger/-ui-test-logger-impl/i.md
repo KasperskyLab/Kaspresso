@@ -1,12 +1,28 @@
-[kaspresso](../../index.md) / [com.kaspersky.kaspresso.logger](../index.md) / [UiTestLoggerImpl](index.md) / [i](./i.md)
+//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.logger](../index.md)/[UiTestLoggerImpl](index.md)/[i](i.md)
 
-# i
 
-`fun i(text: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+
+# i  
+[androidJvm]  
+Brief description  
+
 
 Info level of logging.
 
-`fun i(tag: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, text: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+  
+Content  
+open override fun [i](i.md)(text: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html))  
+
+
+[androidJvm]  
+Brief description  
+
 
 Info level of logging with tag.
+
+  
+Content  
+open override fun [i](i.md)(tag: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html), text: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html))  
+
+
 

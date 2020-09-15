@@ -1,11 +1,27 @@
-[kautomator](../../index.md) / [com.kaspersky.components.kautomator.component.chip](../index.md) / [UiChipGroupActions](index.md) / [selectChipWithId](./select-chip-with-id.md)
+//[kautomator](../../index.md)/[com.kaspersky.components.kautomator.component.chip](../index.md)/[UiChipGroupActions](index.md)/[selectChipWithId](select-chip-with-id.md)
 
-# selectChipWithId
 
-`open fun selectChipWithId(id: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+
+# selectChipWithId  
+[androidJvm]  
+Brief description  
+
 
 Selects a chip in ChipGroup with given id
 
-### Parameters
 
-`id` - Chip id to match
+
+## Parameters  
+  
+androidJvm  
+  
+|  Name|  Summary| 
+|---|---|
+| id| <br><br>Chip id to match<br><br>
+  
+  
+Content  
+open fun [selectChipWithId](select-chip-with-id.md)(id: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html))  
+
+
+

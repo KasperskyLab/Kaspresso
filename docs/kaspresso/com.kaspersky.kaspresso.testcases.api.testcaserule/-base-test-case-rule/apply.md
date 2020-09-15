@@ -1,5 +1,11 @@
-[kaspresso](../../index.md) / [com.kaspersky.kaspresso.testcases.api.testcaserule](../index.md) / [BaseTestCaseRule](index.md) / [apply](./apply.md)
+//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.testcases.api.testcaserule](../index.md)/[BaseTestCaseRule](index.md)/[apply](apply.md)
 
-# apply
 
-`open fun apply(base: Statement?, description: Description?): Statement`
+
+# apply  
+[androidJvm]  
+Content  
+open override fun [apply](apply.md)(base: Statement?, description: Description?): Statement  
+
+
+

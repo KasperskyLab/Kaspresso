@@ -21,7 +21,7 @@ val PluginDependenciesSpec.detekt: PluginDependencySpec
         get() = id("io.gitlab.arturbosch.detekt") version Dependencies.Versions.detekt
 
 val PluginDependenciesSpec.dokka: PluginDependencySpec
-        get() = id("org.jetbrains.dokka")
+        get() = id("org.jetbrains.dokka") version Dependencies.Versions.dokka
 
 val PluginDependenciesSpec.javaLibrary: PluginDependencySpec
         get() = `java-library`

@@ -1,11 +1,24 @@
-[kaspresso](../../index.md) / [com.kaspersky.kaspresso.device.activities](../index.md) / [ActivitiesImpl](index.md) / [getResumed](./get-resumed.md)
+//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.device.activities](../index.md)/[ActivitiesImpl](index.md)/[getResumed](get-resumed.md)
 
-# getResumed
 
-`fun getResumed(): `[`Activity`](https://developer.android.com/reference/android/app/Activity.html)`?`
+
+# getResumed  
+[androidJvm]  
+Brief description  
+
 
 Finds and returns resumed activity if it exists, otherwise logs error.
 
-**Return**
+
+
+#### Return  
+
+
 nullable resumed activity.
+
+  
+Content  
+open override fun [getResumed](get-resumed.md)(): [Activity](https://developer.android.com/reference/kotlin/android/app/Activity.html)?  
+
+
 

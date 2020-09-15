@@ -1,11 +1,27 @@
-[kautomator](../../index.md) / [com.kaspersky.components.kautomator.component.check](../index.md) / [UiCheckableActions](index.md) / [setChecked](./set-checked.md)
+//[kautomator](../../index.md)/[com.kaspersky.components.kautomator.component.check](../index.md)/[UiCheckableActions](index.md)/[setChecked](set-checked.md)
 
-# setChecked
 
-`open fun setChecked(checked: `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+
+# setChecked  
+[androidJvm]  
+Brief description  
+
 
 Sets checked state of the view
 
-### Parameters
 
-`checked` - True if checked, false otherwise
+
+## Parameters  
+  
+androidJvm  
+  
+|  Name|  Summary| 
+|---|---|
+| checked| <br><br>True if checked, false otherwise<br><br>
+  
+  
+Content  
+open fun [setChecked](set-checked.md)(checked: [Boolean](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html))  
+
+
+

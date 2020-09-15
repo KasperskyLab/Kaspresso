@@ -1,11 +1,24 @@
-[kaspresso](../../index.md) / [com.kaspersky.kaspresso.device.screenshots.screenshotfiles](../index.md) / [ScreenshotDirectoryProvider](index.md) / [getDirectoryForTest](./get-directory-for-test.md)
+//[kaspresso](../../index.md)/[com.kaspersky.kaspresso.device.screenshots.screenshotfiles](../index.md)/[ScreenshotDirectoryProvider](index.md)/[getDirectoryForTest](get-directory-for-test.md)
 
-# getDirectoryForTest
 
-`abstract fun getDirectoryForTest(testMethod: `[`TestMethod`](../-test-method/index.md)`, runNumber: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`): `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)
 
-### Parameters
+# getDirectoryForTest  
+[androidJvm]  
+Brief description  
 
-`testMethod` - specifies what test is running
 
-`runNumber` - specifies how many times a given test have already run
+## Parameters  
+  
+androidJvm  
+  
+|  Name|  Summary| 
+|---|---|
+| runNumber| <br><br>specifies how many times a given test have already run<br><br>
+| testMethod| <br><br>specifies what test is running<br><br>
+  
+  
+Content  
+abstract fun [getDirectoryForTest](get-directory-for-test.md)(testMethod: [TestMethod](../-test-method/index.md), runNumber: [Int](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)): [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)  
+
+
+

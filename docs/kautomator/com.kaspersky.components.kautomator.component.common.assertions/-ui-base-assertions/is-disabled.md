@@ -1,8 +1,17 @@
-[kautomator](../../index.md) / [com.kaspersky.components.kautomator.component.common.assertions](../index.md) / [UiBaseAssertions](index.md) / [isDisabled](./is-disabled.md)
+//[kautomator](../../index.md)/[com.kaspersky.components.kautomator.component.common.assertions](../index.md)/[UiBaseAssertions](index.md)/[isDisabled](is-disabled.md)
 
-# isDisabled
 
-`open fun isDisabled(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+
+# isDisabled  
+[androidJvm]  
+Brief description  
+
 
 Checks if the view is disabled
+
+  
+Content  
+open fun [isDisabled](is-disabled.md)()  
+
+
 

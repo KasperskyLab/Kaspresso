@@ -1,7 +1,9 @@
+import com.android.build.gradle.internal.tasks.factory.dependsOn
 import groovy.lang.GroovyObject
 import org.jfrog.gradle.plugin.artifactory.dsl.PublisherConfig
 import publishing.setup
 import publishing.shouldBePublished
+import java.util.Date
 
 buildscript {
 
@@ -25,14 +27,24 @@ plugins {
     mavenPublish
     bintray
     artifactory
+    dokka
 }
 
 subprojects {
     apply(plugin = Dependencies.Detect.plugin)
+    apply(plugin = Dependencies.Dokka.plugin)
 
     dependencies {
         detekt(Dependencies.Detect.cli)
         detekt(Dependencies.Detect.formatting)
+    }
+
+    tasks.dokkaGfm.configure {
+        val parentDir = when {
+            parent != rootProject && parent != null -> "docs" + File.separator + parent?.name
+            else -> "docs"
+        }
+        outputDirectory.set(rootDir.resolve(parentDir))
     }
 
     detekt {
@@ -60,17 +72,21 @@ subprojects {
         val publicationName = findProperty("publish.publicationName").toString()
 
         bintray {
-
             user = findProperty("bintrayuser").toString()
             key = findProperty("bintraykey").toString()
             setPublications(publicationName)
 
             pkg.apply {
-                repo = "Kaspresso"
+                repo = findProperty("publish.bintrayRepo").toString()
                 name = publicationName
                 userOrg = user
                 vcsUrl = "https://github.com/KasperskyLab/Kaspresso.git"
                 setLicenses("Apache-2.0")
+
+                version.apply {
+                    name = findProperty("stableVersion").toString()
+                    released = Date().toString()
+                }
             }
 
             version = findProperty("stableVersion").toString()
@@ -102,9 +118,8 @@ subprojects {
             })
         }
 
-        tasks.named("artifactoryPublish") {
-            dependsOn("assemble")
-        }
+        tasks.artifactoryPublish.dependsOn("assemble")
+        tasks.bintrayUpload.dependsOn("assemble")
     }
 }
 

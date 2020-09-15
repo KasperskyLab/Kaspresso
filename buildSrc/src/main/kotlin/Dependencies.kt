@@ -24,8 +24,9 @@ object Dependencies {
         const val truth = "1.0"
         const val gson = "2.8.6"
 
+        const val agp = "4.0.1"
         const val detekt = "1.12.0"
-        const val dokka = "0.10.1"
+        const val dokka = "1.4.0"
 
         const val bintray = "1.8.5"
         const val artifactory = "4.17.2"
@@ -37,8 +38,12 @@ object Dependencies {
         const val formatting = "io.gitlab.arturbosch.detekt:detekt-formatting:${Versions.detekt}"
     }
 
+    object Dokka {
+        const val plugin = "org.jetbrains.dokka"
+    }
+
     object Classpath {
-        const val gradlePlugin = "com.android.tools.build:gradle:3.6.3"
+        const val gradlePlugin = "com.android.tools.build:gradle:${Versions.agp}"
         const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
         const val dokkaPlugin = "org.jetbrains.dokka:dokka-gradle-plugin:${Versions.dokka}"
         const val bintrayPlugin = "com.jfrog.bintray.gradle:gradle-bintray-plugin:${Versions.bintray}"
@@ -51,7 +56,7 @@ object Dependencies {
         const val artifactoryPlugin = "com.jfrog.artifactory"
     }
 
-    const val kotlinStdlib = "org.jetbrains.kotlin:kotlin-stdlib"
+    const val kotlinStdlib = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin}"
     const val kotlinCli = "org.jetbrains.kotlinx:kotlinx-cli:${Versions.kotlinCli}"
 
     const val appcompat = "androidx.appcompat:appcompat:${Versions.appcompat}"

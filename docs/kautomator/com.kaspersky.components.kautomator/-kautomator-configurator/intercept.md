@@ -1,17 +1,37 @@
-[kautomator](../../index.md) / [com.kaspersky.components.kautomator](../index.md) / [KautomatorConfigurator](index.md) / [intercept](./intercept.md)
+//[kautomator](../../index.md)/[com.kaspersky.components.kautomator](../index.md)/[KautomatorConfigurator](index.md)/[intercept](intercept.md)
 
-# intercept
 
-`fun intercept(configurator: Configurator.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
 
-Sets the interceptors for the whole UiAutomator DSL runtime.
-Interceptors will be invoked on all of the interactions with the UiView instances.
+# intercept  
+[androidJvm]  
+Brief description  
 
-### Parameters
 
-`configurator` - Configuration of the interceptors
+Sets the interceptors for the whole UiAutomator DSL runtime. Interceptors will be invoked on all of the interactions with the UiView instances.
 
-**See Also**
 
-[UiInterceptor](../../com.kaspersky.components.kautomator.intercept.base/-ui-interceptor/index.md)
+
+## See also  
+  
+androidJvm  
+  
+|  Name|  Summary| 
+|---|---|
+| [UiInterceptor](../../com.kaspersky.components.kautomator.intercept.base/-ui-interceptor/index.md)| <br><br><br><br>
+  
+
+
+## Parameters  
+  
+androidJvm  
+  
+|  Name|  Summary| 
+|---|---|
+| configurator| <br><br>Configuration of the interceptors<br><br>
+  
+  
+Content  
+fun [intercept](intercept.md)(configurator: [UiInterceptor.Configurator](../../com.kaspersky.components.kautomator.intercept.base/-ui-interceptor/-configurator/index.md).() -> [Unit](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html))  
+
+
 

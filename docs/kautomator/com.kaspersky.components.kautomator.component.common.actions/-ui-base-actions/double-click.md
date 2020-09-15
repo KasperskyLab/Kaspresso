@@ -1,8 +1,17 @@
-[kautomator](../../index.md) / [com.kaspersky.components.kautomator.component.common.actions](../index.md) / [UiBaseActions](index.md) / [doubleClick](./double-click.md)
+//[kautomator](../../index.md)/[com.kaspersky.components.kautomator.component.common.actions](../index.md)/[UiBaseActions](index.md)/[doubleClick](double-click.md)
 
-# doubleClick
 
-`open fun doubleClick(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+
+# doubleClick  
+[androidJvm]  
+Brief description  
+
 
 Performs double click on view
+
+  
+Content  
+open fun [doubleClick](double-click.md)()  
+
+
 

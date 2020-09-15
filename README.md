@@ -172,8 +172,7 @@ Kaspresso writes its own logs, detailed and readable:
 
 ### Ability to call ADB commands
 
-Espresso and UI Automator don't allow to call ADB commands from inside a test. That's why we have written special Autotest AdbServer. 
-All detailed info is available on [wiki](/wiki/06_AdbServer.md).
+Espresso and UI Automator don't allow to call ADB commands from inside a test. To fix this problem, we developed Autotest AdbServer (see the [wiki](./wiki/06_AdbServer.md)).
 
 ### Ability to work with Android System
 
