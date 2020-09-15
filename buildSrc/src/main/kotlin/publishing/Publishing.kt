@@ -12,7 +12,7 @@ private const val JAVADOC_TASK = "javadocJar"
 private const val NODE_DEPENDENCIES = "dependencies"
 private const val NODE_DEPENDENCY = "dependency"
 private const val DEPENDENCIES_CONFIGURATION = "implementation"
-private const val UNSPECIFIED_DEPENDENCY = "unspecified"
+private const val UNSPECIFIED = "unspecified"
 
 private const val DEPENDENCY_GROUP = "groupId"
 private const val DEPENDENCY_ARTIFACT = "artifactId"
@@ -38,7 +38,7 @@ fun PublishingExtension.setup(project: Project) {
         createWithNameAndVersion(
             project = project,
             publicationName = project.findProperty(PROPERTY_PUBLICATION_NAME).toString(),
-            publicationVersion = project.findProject(PROPERTY_VERSION).toString()
+            publicationVersion = project.findProperty(PROPERTY_VERSION).toString()
         )
 
         createWithNameAndVersion(
@@ -75,26 +75,24 @@ private fun PublicationContainer.createWithNameAndVersion(
                 val dependenciesNode = root.appendNode(NODE_DEPENDENCIES)
 
                 project.configurations.getByName(DEPENDENCIES_CONFIGURATION).allDependencies.forEach {
-                    if (it.name != UNSPECIFIED_DEPENDENCY && it.version != null) {
 
-                        val dependencyNode = dependenciesNode.appendNode(NODE_DEPENDENCY)
+                    val dependencyNode = dependenciesNode.appendNode(NODE_DEPENDENCY)
 
-                        fun appendArtifact(group: String?, version: String?, artifact: String?) {
-                            dependencyNode.appendNode(DEPENDENCY_GROUP, group)
-                            dependencyNode.appendNode(DEPENDENCY_VERSION, version)
-                            dependencyNode.appendNode(DEPENDENCY_ARTIFACT, artifact)
+                    fun appendArtifact(group: String?, version: String?, artifact: String?) {
+                        dependencyNode.appendNode(DEPENDENCY_GROUP, group)
+                        dependencyNode.appendNode(DEPENDENCY_ARTIFACT, artifact)
+                        dependencyNode.appendNode(DEPENDENCY_VERSION, version)
+                    }
+
+                    when {
+                        listOf(DEPENDENCY_KAUTOMATOR, DEPENDENCY_ADB_SERVER).contains(it.name) -> {
+                            appendArtifact(groupId, publicationVersion, it.name)
                         }
-
-                        when {
-                            listOf(
-                                DEPENDENCY_KAUTOMATOR,
-                                DEPENDENCY_ADB_SERVER
-                            ).contains(it.name) -> appendArtifact(
-                                groupId,
-                                publicationVersion,
-                                it.name
-                            )
-                            else -> appendArtifact(it.group, it.version, it.name)
+                        it.version != UNSPECIFIED && it.version != null -> {
+                            appendArtifact(it.group, it.version, it.name)
+                        }
+                        else -> {
+                            dependenciesNode.remove(dependencyNode)
                         }
                     }
                 }
