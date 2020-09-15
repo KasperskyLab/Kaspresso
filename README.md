@@ -257,31 +257,28 @@ dependencies {
 ```
 
 ## Samples
-All samples are available in [samples folder](/samples). 
+All samples are available in the [samples](/samples) folder. 
 
-Be aware that a lot of samples require turned on AdbServer. The algorithm to start AdbServer:
-1. Go to the `kaspresso` folder. For example: 
+Most of the samples require AdbServer. To start AdbServer you should do the following steps:
+1. Go to the `Kaspresso` folder
 ```
-cd /User/Gagarin/workspace/Kaspresso
+cd ~/Workspace/Kaspresso
 ```
-2. Start `adbserver-desktop.jar`:
+2. Start `adbserver-desktop.jar`
 ```
 java -jar artifacts/adbserver-desktop.jar
 ```
-3. Profit!
 
 ## Breaking changes in 1.2.0
-1. Please, use 'artifacts/adbserver-desktop.jar' to start Autotest AdbServer (the Desktop part). 
-Kaspresso 1.2.0 works only with 'artifacts/adbserver-desktop.jar'!<br>
-Otherwise, there is old 'desktop_1_1_0.jar' in the folder 'artifacts' to work with old version of Kaspresso (before 1.2.0).
-2. If you are going to use `device.logcat` in your test then we recommend to call `device.logcat.disableChatty` in `before`-section.
-In the previous version of Kaspresso, `device.logcat.disableChatty` was called automatically under the hood almost always. But this strategy was a mistake.
+1. We've totally reworked AdbServer and Kaspresso 1.2.0 works only with new `artifacts/adbserver-desktop.jar`<br>
+The old version `artifacts/desktop_1_1_0.jar` is also available for use with older versions of Kaspresso.
+2. If you use `device.logcat` in your tests, you should call `device.logcat.disableChatty` in the `before` section of your test.
+In previous version of Kaspresso, `device.logcat.disableChatty` was called automatically during initialization. This resulted in the need to always run AdbServer before tests.
 
 ## Support
 Ask your question on Telegram:
 * In English: t.me/kaspresso_en
 * In Russian: t.me/kaspresso
-
 
 ## Contribution
 Kaspresso is an open source project, so you are welcome to contribute (see the [Contribution Guidelines](https://github.com/KasperskyLab/Kaspresso/blob/master/CONTRIBUTING.md)).
