@@ -6,7 +6,7 @@ object Dependencies {
         const val minSdk = 18
         const val buildTools = "29.0.3"
 
-        const val kotlin = "1.4.0"
+        const val kotlin = "1.4.10"
         const val kotlinCli = "0.3"
 
         const val appcompat = "1.2.0"
@@ -18,7 +18,7 @@ object Dependencies {
         const val junit = "4.13"
         const val testCore = "1.3.0"
         const val espresso = "3.3.0"
-        const val kakao = "2.3.4"
+        const val kakao = "2.4.0"
         const val uiAutomator = "2.2.0"
 
         const val truth = "1.0"
