@@ -215,7 +215,7 @@ For all information check [Kaspresso wiki](/wiki/00_Home.md)
 To integrate Kaspresso into your project:
 1. If the `jcenter` repository does not exist, include it to your root `build.gradle` file:
 
-```
+```groovy
 allprojects {
     repositories {
         jcenter()
@@ -225,7 +225,7 @@ allprojects {
 
 2. Add a dependency to `build.gradle`:
 
-```
+```groovy
 dependencies {
     androidTestImplementation 'com.kaspersky.android-components:kaspresso:1.2.0'
 }
@@ -235,7 +235,7 @@ If you are still using the old Android Support libraries, we strongly recommend 
 
 The last version with Android Support libraries is:
 
-```
+```groovy
 dependencies {
     androidTestImplementation 'com.kaspersky.android-components:kaspresso:1.0.1-support'
 }
@@ -245,7 +245,7 @@ dependencies {
 
 Snapshots are available via https://oss.jfrog.org/artifactory/libs-snapshot/com/kaspersky/android-components/
 
-```
+```groovy
 repositories {
     maven { url 'https://oss.jfrog.org/libs-snapshot' }
 }
