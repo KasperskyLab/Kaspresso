@@ -40,6 +40,9 @@ class FlakySafetyAlgorithm(
                         condition.await()
                     }
                 } else {
+                    logger.e("There will be no additional attempt for this exception:")
+                    error.printStackTrace()
+
                     throw error
                 }
             }
@@ -49,6 +52,7 @@ class FlakySafetyAlgorithm(
             "All attempts to interact for ${params.timeoutMs} ms totally failed " +
                     "because of ${cachedError.javaClass.simpleName}"
         )
+        cachedError.printStackTrace()
 
         throw cachedError.withMessage(failureMessage)
     }
