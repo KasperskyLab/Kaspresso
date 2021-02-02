@@ -100,8 +100,8 @@ internal class ConnectionClientImplBySocket(
 
     private fun tryDisconnectCommon(failureReason: String) {
         connectionMaker.disconnect {
-            socketMessagesTransferring.stopListening()
-            socket.close()
+            _socketMessagesTransferring?.stopListening()
+            _socket?.close()
             resetCommandsInProgress(failureReason)
         }
     }
