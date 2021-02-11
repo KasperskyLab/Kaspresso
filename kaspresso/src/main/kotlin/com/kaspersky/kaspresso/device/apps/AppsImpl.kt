@@ -112,7 +112,7 @@ class AppsImpl(
             * with test-case=1, this case will only open app.
             * See https://stackoverflow.com/a/25398877
             **/
-            adbServer.performShell("monkey -p $packageName 1")   
+            adbServer.performShell("monkey -p $packageName 1")
         }
 
         val condition = Until.hasObject(By.pkg(packageName).depth(0))
