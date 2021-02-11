@@ -103,7 +103,17 @@ class AppsImpl(
 
         data?.let { intent!!.data = it }
 
-        context.startActivity(intent)
+        try {
+            context.startActivity(intent)
+        } catch (e: SecurityException) {
+            /**
+            * On Android 11 you can't start activity of another app without "exported=true" in activity
+            * manifest, so as we use this method for launching application, we can use "adb shell monkey"
+            * with test-case=1, this case will only open app.
+            * See https://stackoverflow.com/a/25398877
+            **/
+            adbServer.performShell("monkey -p $packageName 1")   
+        }
 
         val condition = Until.hasObject(By.pkg(packageName).depth(0))
 
