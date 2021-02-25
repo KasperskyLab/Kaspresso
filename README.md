@@ -247,7 +247,7 @@ Snapshots are available via https://oss.jfrog.org/artifactory/libs-snapshot/com/
 
 ```groovy
 repositories {
-    maven { url 'https://oss.jfrog.org/libs-snapshot' }
+    maven { url 'https://oss.jfrog.org/artifactory/libs-snapshot' }
 }
 
 dependencies {
