@@ -1,0 +1,21 @@
+root = true
+
+[*]
+indent_style = space
+insert_final_newline = true
+trim_trailing_whitespace = true
+charset = utf-8
+
+[*.java]
+indent_size = 4
+max_line_length = 200
+
+[*.{kt,kts}]
+max_line_length = 200
+
+[*.md]
+# Trailing whitespace is important for Markdown
+trim_trailing_whitespace = false
+
+[*.{yml,yaml}]
+indent_size = 2
