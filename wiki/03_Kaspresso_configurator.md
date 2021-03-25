@@ -44,7 +44,7 @@ Let's expand mentioned Kaspresso interceptors types: <br>
 1. ```Behavior Interceptors```
     1. ```viewBehaviorInterceptors``` - intercept calls to ```ViewInteraction#perform``` and ```ViewInteraction#check```
     2. ```dataBehaviorInterceptors``` - intercept calls to ```DataInteraction#check```
-    3. ```webBehaviorInterceptors``` - intercept calls to ```Web.WebInteraction<R>#perform``` and ```Web.WebInteraction<R>#check``
+    3. ```webBehaviorInterceptors``` - intercept calls to ```Web.WebInteraction<R>#perform``` and ```Web.WebInteraction<R>#check```
     4. ```objectBehaviorInterceptors``` - intercept calls to ```UiObjectInteraction#perform``` and ```UiObjectInteraction#check```
     5. ```deviceBehaviorInterceptors``` - intercept calls to ```UiDeviceInteraction#perform``` and ```UiDeviceInteraction#check```
 2. ```Watcher Interceptors```
