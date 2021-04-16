@@ -17,7 +17,7 @@ android {
         targetSdkVersion(Versions.targetSdk)
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        testInstrumentationRunnerArguments = mapOf("clearPackageData" to "true")
+        testInstrumentationRunnerArguments["clearPackageData"] = "true"
     }
 
     sourceSets {

@@ -24,8 +24,8 @@ object Dependencies {
         const val truth = "1.0"
         const val gson = "2.8.6"
 
-        const val agp = "4.0.1"
-        const val detekt = "1.12.0"
+        const val agp = "4.1.0"
+        const val detekt = "1.16.0"
         const val dokka = "1.4.0"
 
         const val bintray = "1.8.5"

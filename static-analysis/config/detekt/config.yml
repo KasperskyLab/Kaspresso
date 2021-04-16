@@ -213,6 +213,8 @@ formatting:
   AnnotationOnSeparateLine:
     active: false
     autoCorrect: true
+  ArgumentListWrapping:
+    active: false
   ChainWrapping:
     active: true
     autoCorrect: true
@@ -462,6 +464,8 @@ potential-bugs:
 
 style:
   active: true
+  ClassOrdering:
+    active: false
   CollapsibleIfStatements:
     active: false
   DataClassContainsFunctions:
