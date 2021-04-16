@@ -20,10 +20,10 @@ android {
 }
 
 dependencies {
-    implementation(Dependencies.appcompat)
+    implementation(libs.appcompat)
 
-    androidTestImplementation(Dependencies.uiAutomator)
-    androidTestImplementation(Dependencies.rules)
-    androidTestImplementation(project(Projects.Kaspresso.framework))
-    androidTestImplementation(project(Projects.Kautomator.framework))
+    androidTestImplementation(libs.uiAutomator)
+    androidTestImplementation(libs.androidXRules)
+    androidTestImplementation(projects.kaspresso)
+    androidTestImplementation(projects.kautomator)
 }

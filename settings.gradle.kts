@@ -1,13 +1,7 @@
-enableFeaturePreview("VERSION_CATALOGS")
+rootProject.name = "kaspresso-framework"
 
-@Suppress("UnstableApiUsage")
-dependencyResolutionManagement {
-    versionCatalogs {
-        create("libs") {
-             from(files("gradle/libs.versions.toml"))
-        }
-    }
-}
+enableFeaturePreview("VERSION_CATALOGS")
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 include(
     ":allure-model",

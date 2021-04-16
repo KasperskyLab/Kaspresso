@@ -27,8 +27,9 @@ class UpgradeTestActivity : AppCompatActivity() {
 
         prefs = getPreferences(Context.MODE_PRIVATE)
 
+        // TODO: Add version
         upgrade_version.text =
-            getString(R.string.upgrade_version_placeholder, BuildConfig.VERSION_CODE)
+            getString(R.string.upgrade_version_placeholder, BuildConfig.APPLICATION_ID)
 
         upgrade_value_current.text = getString(R.string.upgrade_value_placeholder, currentValue)
         upgrade_apply_btn.setOnClickListener { updateValue() }

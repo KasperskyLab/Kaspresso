@@ -3,8 +3,8 @@ plugins {
 }
 
 dependencies {
-    implementation(Dependencies.kotlinStdlib)
+    implementation(libs.kotlinStdlib)
 
-    testImplementation(Dependencies.junitJupiter)
-    testImplementation(Dependencies.truth)
+    testImplementation(libs.junitJupiter)
+    testImplementation(libs.truth)
 }

@@ -21,21 +21,21 @@ android {
 }
 
 dependencies {
-    api(fileTree("libs").matching{ include("*.jar") })
+    api(fileTree("libs").matching { include("*.jar") })
 
-    implementation(Dependencies.kotlinStdlib)
-    implementation(Dependencies.rules)
-    implementation(Dependencies.espressoCore)
-    implementation(Dependencies.espressoWeb)
-    implementation(Dependencies.uiAutomator)
-    implementation(Dependencies.kakao)
-    implementation(Dependencies.gson)
-    implementation(Dependencies.androidXCore)
-    implementation(project(Projects.Kautomator.framework))
-    implementation(project(Projects.AdbServer.device)) { isTransitive = false }
+    implementation(libs.kotlinStdlib)
+    implementation(libs.uiAutomator)
+    implementation(libs.androidXCore)
+    implementation(libs.androidXRules)
+    implementation(libs.kakao)
+    implementation(libs.gson)
+    implementation(libs.bundles.espresso)
 
-    testImplementation(Dependencies.junit)
-    testImplementation(Dependencies.truth)
+    implementation(projects.kautomator)
+    implementation(projects.adbServer.adbserverDevice) { isTransitive = false }
+
+    testImplementation(libs.junit)
+    testImplementation(libs.truth)
 }
 
 tasks {

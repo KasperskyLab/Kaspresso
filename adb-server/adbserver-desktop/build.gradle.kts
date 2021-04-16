@@ -4,12 +4,12 @@ plugins {
 }
 
 dependencies {
-    implementation(Dependencies.kotlinStdlib)
-    implementation(Dependencies.kotlinCli)
-    implementation(project(Projects.AdbServer.common))
-    implementation(project(Projects.AdbServer.commandTypes))
-    implementation(project(Projects.AdbServer.connection))
-    implementation(project(Projects.AdbServer.desktopDeviceConnection))
+    implementation(libs.kotlinStdlib)
+    implementation(libs.kotlinCli)
+    implementation(projects.adbServer.adbserverCommon)
+    implementation(projects.adbServer.adbserverCommandTypes)
+    implementation(projects.adbServer.adbserverConnection)
+    implementation(projects.adbServer.adbserverDesktopDeviceConnection)
 }
 
 setProperty("mainClassName", "com.kaspersky.adbserver.desktop.MainKt")

@@ -21,10 +21,10 @@ android {
 }
 
 dependencies {
-    implementation(Dependencies.kotlinStdlib)
-    implementation(Dependencies.truth)
-    implementation(Dependencies.testCore)
-    implementation(Dependencies.uiAutomator)
+    implementation(libs.kotlinStdlib)
+    implementation(libs.truth)
+    implementation(libs.testCore)
+    implementation(libs.uiAutomator)
 }
 
 tasks {

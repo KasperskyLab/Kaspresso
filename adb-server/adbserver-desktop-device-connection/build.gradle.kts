@@ -3,7 +3,7 @@ plugins {
 }
 
 dependencies {
-    implementation(Dependencies.kotlinStdlib)
-    implementation(project(Projects.AdbServer.common))
-    implementation(project(Projects.AdbServer.commandTypes))
+    implementation(libs.kotlinStdlib)
+    implementation(projects.adbServer.adbserverCommon)
+    implementation(projects.adbServer.adbserverCommandTypes)
 }
