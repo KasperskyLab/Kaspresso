@@ -1,0 +1,5 @@
+[versions]
+kotlin = "1.4.32"
+
+[libraries]
+kotlinPlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
