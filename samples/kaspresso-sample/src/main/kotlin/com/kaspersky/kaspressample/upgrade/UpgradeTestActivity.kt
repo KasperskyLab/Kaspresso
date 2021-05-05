@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.kaspersky.kaspressample.BuildConfig
 import com.kaspersky.kaspressample.R
 import kotlinx.android.synthetic.main.activity_upgrade_test.*
 
@@ -14,6 +13,9 @@ class UpgradeTestActivity : AppCompatActivity() {
         private const val KEY_VALUE = "upgrade_value"
         private const val DEFAULT_VALUE = "Undefined"
     }
+
+    private val appVersion: String
+        get() = packageManager.getPackageInfo(packageName, 0).versionName
 
     private lateinit var prefs: SharedPreferences
 
@@ -27,9 +29,8 @@ class UpgradeTestActivity : AppCompatActivity() {
 
         prefs = getPreferences(Context.MODE_PRIVATE)
 
-        // TODO: Add version
         upgrade_version.text =
-            getString(R.string.upgrade_version_placeholder, BuildConfig.APPLICATION_ID)
+            getString(R.string.upgrade_version_placeholder, appVersion)
 
         upgrade_value_current.text = getString(R.string.upgrade_value_placeholder, currentValue)
         upgrade_apply_btn.setOnClickListener { updateValue() }

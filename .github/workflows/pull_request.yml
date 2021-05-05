@@ -21,8 +21,8 @@ jobs:
           distribution: 'adopt'
           java-version: 11
       - name: Run static analysis
-        run: ./gradlew detekt
+        run: make static_analysis
       - name: Run unit tests
-        run: ./gradlew test
+        run: make unit_tests
       - name: Build project
         run: ./gradlew assemble

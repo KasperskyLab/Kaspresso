@@ -6,9 +6,13 @@ espresso = "3.3.0"
 [libraries]
 # plugins
 kotlinPlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
-kotlinCli = "org.jetbrains.kotlinx:kotlinx-cli:0.3"
+androidPlugin = "com.android.tools.build:gradle:4.1.0"
 
 # libraries
+kotlinCli = "org.jetbrains.kotlinx:kotlinx-cli:0.3"
+detektCli = { module = "io.gitlab.arturbosch.detekt:detekt-cli", version.ref = "detekt" }
+detektFormatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
+
 kotlinStdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
 espressoCore = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso" }
 espressoWeb = { module = "androidx.test.espresso:espresso-web", version.ref = "espresso" }

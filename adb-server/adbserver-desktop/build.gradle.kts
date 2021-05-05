@@ -1,6 +1,5 @@
 plugins {
-    kotlin
-    application
+    id("convention.kotlin-app")
 }
 
 dependencies {
@@ -14,11 +13,13 @@ dependencies {
 
 setProperty("mainClassName", "com.kaspersky.adbserver.desktop.MainKt")
 
-tasks.jar.configure {
+tasks.withType<Jar>().configureEach {
     manifest {
         attributes["Main-Class"] = "com.kaspersky.adbserver.desktop.MainKt"
     }
     from(configurations.runtimeClasspath.get().map {
         if (it.isDirectory) it else zipTree(it)
-    })
+    }) {
+        exclude("META-INF/**/**/module-info.class")
+    }
 }

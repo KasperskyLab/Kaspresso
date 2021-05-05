@@ -1,29 +1,12 @@
-import Dependencies.Versions
-
 plugins {
-    androidApplication
-    kotlinAndroid
-    kotlinAndroidExtensions
+    id("convention.android-app")
 }
 
 android {
-    compileSdkVersion(Versions.compileSdk)
-    buildToolsVersion(Versions.buildTools)
-
     defaultConfig {
         applicationId = "com.kaspersky.kaspressample"
-
-        minSdkVersion(Versions.minSdk)
-        targetSdkVersion(Versions.targetSdk)
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         testInstrumentationRunnerArguments["clearPackageData"] = "true"
-    }
-
-    sourceSets {
-        val main by getting {
-            java.srcDir("src/main/kotlin")
-        }
     }
 
     testOptions {

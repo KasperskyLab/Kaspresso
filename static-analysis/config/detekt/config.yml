@@ -72,7 +72,7 @@ complexity:
     active: true
     threshold: 600
   LongMethod:
-    active: true
+    active: false # Test methods could have too much code
     threshold: 65
   LongParameterList:
     active: true
@@ -283,7 +283,7 @@ formatting:
   NoWildcardImports:
     active: true
   PackageName:
-    active: true
+    active: false
     autoCorrect: true
   ParameterListWrapping:
     active: true
@@ -486,7 +486,7 @@ style:
     includeLineWrapping: false
   ForbiddenComment:
     active: true
-    values: ['TODO:', 'FIXME:', 'STOPSHIP:']
+    values: ['STOPSHIP:']
     allowedPatterns: ''
   ForbiddenImport:
     active: false

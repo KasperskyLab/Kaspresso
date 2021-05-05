@@ -1,15 +1,8 @@
 plugins {
-    kotlin
-    javaLibrary
-}
-
-sourceSets {
-    val main by getting {
-        java.srcDirs("src/main/kotlin")
-    }
+    id("convention.kotlin-library")
 }
 
 dependencies {
-    compileOnly(Dependencies.kotlinStdlib)
-    compileOnly(Dependencies.gson)
+    compileOnly(libs.kotlinStdlib)
+    compileOnly(libs.gson)
 }

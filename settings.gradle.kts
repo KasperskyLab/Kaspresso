@@ -3,6 +3,24 @@ rootProject.name = "kaspresso-framework"
 enableFeaturePreview("VERSION_CATALOGS")
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+    }
+}
+
+dependencyResolutionManagement {
+    @Suppress("UnstableApiUsage")
+    repositories {
+        mavenCentral()
+        google()
+        maven { url = uri("https://kotlin.bintray.com/kotlinx") }
+    }
+}
+
+includeBuild("build-conventions")
+
 include(
     ":allure-model",
 
