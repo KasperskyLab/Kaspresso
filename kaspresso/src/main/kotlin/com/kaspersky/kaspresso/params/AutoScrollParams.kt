@@ -26,5 +26,12 @@ class AutoScrollParams private constructor(
                 UnfoundedUiObjectException::class.java
             )
         )
+
+        fun nitrogen() = AutoScrollParams(
+            allowedExceptions = setOf(
+                PerformException::class.java,
+                AssertionFailedError::class.java,
+            )
+        )
     }
 }
