@@ -21,6 +21,8 @@ object Dependencies {
         const val kakao = "2.4.0"
         const val uiAutomator = "2.2.0"
 
+        const val roboelectric = "4.5.1"
+
         const val truth = "1.0"
         const val gson = "2.8.6"
 
@@ -30,6 +32,9 @@ object Dependencies {
 
         const val bintray = "1.8.5"
         const val artifactory = "4.17.2"
+
+        const val fragment_testing = "1.3.2"
+        const val androidx_test = "1.1.2"
     }
 
     object Detect {
@@ -79,4 +84,11 @@ object Dependencies {
     const val kakao = "com.agoda.kakao:kakao:${Versions.kakao}"
 
     const val uiAutomator = "androidx.test.uiautomator:uiautomator:${Versions.uiAutomator}"
+
+    const val roboelectric = "org.robolectric:robolectric:${Versions.roboelectric}"
+    const val roboelectric_annotations = "androidTestImplementation 'org.robolectric:annotations:${Versions.roboelectric}"
+
+    const val fragment_testing = "androidx.fragment:fragment-testing:${Versions.fragment_testing}"
+    const val androidx_test = "androidx.test.ext:junit:${Versions.androidx_test}"
+    const val androidx_test_ktx = "androidx.test.ext:junit-ktx:${Versions.androidx_test}"
 }
