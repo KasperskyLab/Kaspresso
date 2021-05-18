@@ -1,8 +1,8 @@
 package com.kaspersky.kaspressonitrogen.kaspresso
 
+import androidx.test.espresso.Espresso
 import androidx.test.espresso.FailureHandler
 import com.agoda.kakao.Kakao
-
 
 import com.kaspersky.kaspresso.failure.LoggingFailureHandler
 import com.kaspersky.kaspresso.interceptors.behavior.DataBehaviorInterceptor
@@ -361,7 +361,7 @@ class KaspressoNitrogen(
                 kaspresso.webAssertionWatcherInterceptors
             )
 
-            //failureHandler?.let { Espresso.setFailureHandler(it) }
+            failureHandler?.let { Espresso.setFailureHandler(it) }
 
             return kaspresso
         }
