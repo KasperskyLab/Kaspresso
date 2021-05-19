@@ -40,7 +40,7 @@ android {
     testOptions {
         execution = "ANDROIDX_TEST_ORCHESTRATOR"
 
-        //enable roboelectric
+        //enable robolectric
         unitTests.isReturnDefaultValues = true
         unitTests.isIncludeAndroidResources = true
     }
