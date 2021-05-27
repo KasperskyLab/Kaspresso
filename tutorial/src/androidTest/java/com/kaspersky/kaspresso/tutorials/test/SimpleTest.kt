@@ -12,12 +12,12 @@ import org.junit.Rule
 import org.junit.Test
 
 /**
- * In this example you can observe a test tuned by default Kaspresso configuration.
+ * In this example you can see a test tuned by default Kaspresso configuration.
  * When you start the test you can see output of default Kaspresso interceptors:
  * - a lot of useful logs
  * - failure handling
  * - screenshots in the device
- * * Also you can observe the test dsl simplifying a writing of any test
+ * Also you can see the test DSL simplifying the writing of any test
  */
 class SimpleTest : TestCase() {
 

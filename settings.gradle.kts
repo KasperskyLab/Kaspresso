@@ -16,5 +16,5 @@ include(
     ":samples:kautomator-sample",
     ":samples:kautomator-sample-app-upgrade",
 
-    ":tutorials"
+    ":tutorial"
 )
