@@ -14,5 +14,7 @@ include(
     ":samples:adbserver-sample",
     ":samples:kaspresso-sample",
     ":samples:kautomator-sample",
-    ":samples:kautomator-sample-app-upgrade"
+    ":samples:kautomator-sample-app-upgrade",
+
+    ":tutorial"
 )
