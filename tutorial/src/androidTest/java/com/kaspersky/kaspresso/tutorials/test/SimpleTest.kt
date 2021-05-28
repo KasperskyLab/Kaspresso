@@ -32,11 +32,16 @@ class SimpleTest : TestCase() {
 
     @Test
     fun test() =
-        run {
+        before {
+            testLogger.i("Before section")
+        }.after {
+            testLogger.i("After section")
+        }.run {
             step("Open Simple Screen") {
+                testLogger.i("Main section")
                 activityTestRule.launchActivity(null)
-                testLogger.i("I am testLogger")
                 device.screenshots.take("Additional_screenshot")
+                
                 MainScreen {
                     simpleButton {
                         isVisible()
