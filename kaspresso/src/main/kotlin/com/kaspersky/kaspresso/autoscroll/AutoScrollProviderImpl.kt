@@ -1,7 +1,7 @@
 package com.kaspersky.kaspresso.autoscroll
 
 import androidx.test.espresso.ViewInteraction
-import androidx.test.espresso.action.ViewActions
+import com.agoda.kakao.common.actions.NestedScrollToAction
 import com.kaspersky.kaspresso.internal.extensions.other.isAllowed
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.params.AutoScrollParams
@@ -49,7 +49,7 @@ class AutoScrollProviderImpl(
     @Throws(Throwable::class)
     override fun <T> scroll(interaction: ViewInteraction, action: () -> T, cachedError: Throwable): T {
         return try {
-            interaction.perform(ViewActions.scrollTo())
+            interaction.perform(NestedScrollToAction())
             logger.i("View autoScroll successfully performed.")
             action.invoke()
         } catch (error: Throwable) {
