@@ -25,7 +25,7 @@ And many more!
 
 ### Readability
 
-We like the syntax that [Kakao](https://github.com/agoda-com/Kakao) applies to write UI tests. This wrapper over Espresso uses the Kotlin DSL approach, that makes the code significantly shorter and more readable. See the difference:
+We like the syntax that [Kakao](https://github.com/KakaoCup/Kakao) applies to write UI tests. This wrapper over Espresso uses the Kotlin DSL approach, that makes the code significantly shorter and more readable. See the difference:
 
 **Espresso**:
 ```kotlin

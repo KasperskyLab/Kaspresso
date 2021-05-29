@@ -1,6 +1,6 @@
 package com.kaspersky.kaspresso.compose
 
-import com.agoda.kakao.web.WebElementBuilder
+import io.github.kakaocup.kakao.web.WebElementBuilder
 import com.kaspersky.kaspresso.compose.pack.ActionsOnWebElementsPack
 import com.kaspersky.kaspresso.compose.pack.ActionsPack
 

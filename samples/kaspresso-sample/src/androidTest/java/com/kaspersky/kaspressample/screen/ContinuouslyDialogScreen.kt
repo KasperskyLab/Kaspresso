@@ -1,6 +1,6 @@
 package com.kaspersky.kaspressample.screen
 
-import com.agoda.kakao.text.KTextView
+import io.github.kakaocup.kakao.text.KTextView
 import com.kaspersky.kaspressample.R
 import com.kaspersky.kaspresso.screens.KScreen
 

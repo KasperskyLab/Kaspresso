@@ -18,7 +18,7 @@ object Dependencies {
         const val junit = "4.13"
         const val testCore = "1.3.0"
         const val espresso = "3.3.0"
-        const val kakao = "2.4.0"
+        const val kakao = "3.0.0"
         const val uiAutomator = "2.2.0"
 
         const val truth = "1.0"
@@ -76,7 +76,7 @@ object Dependencies {
 
     const val espressoCore = "androidx.test.espresso:espresso-core:${Versions.espresso}"
     const val espressoWeb = "androidx.test.espresso:espresso-web:${Versions.espresso}"
-    const val kakao = "com.agoda.kakao:kakao:${Versions.kakao}"
+    const val kakao = "io.github.kakaocup:kakao:${Versions.kakao}"
 
     const val uiAutomator = "androidx.test.uiautomator:uiautomator:${Versions.uiAutomator}"
 }

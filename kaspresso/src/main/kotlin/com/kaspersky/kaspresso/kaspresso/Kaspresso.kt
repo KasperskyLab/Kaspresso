@@ -6,7 +6,7 @@ import androidx.test.espresso.FailureHandler
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.Configurator
 import androidx.test.uiautomator.UiDevice
-import com.agoda.kakao.Kakao
+import io.github.kakaocup.kakao.Kakao
 import com.kaspersky.adbserver.common.log.logger.LogLevel
 import com.kaspersky.components.kautomator.intercept.interaction.UiDeviceInteraction
 import com.kaspersky.components.kautomator.intercept.interaction.UiObjectInteraction

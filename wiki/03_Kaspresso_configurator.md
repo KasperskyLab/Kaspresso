@@ -29,7 +29,7 @@ It's accessible by ```testLogger``` property in test sections (```before, after,
 Also, it is available while setting ```Kaspresso.Builder``` if you want to add it to your custom interceptors, for example.
 
 #### Kaspresso interceptors based on Kakao/Kautomator Interceptors.
-These interceptors were introduced to simplify and uniform using of [Kakao interceptors](https://github.com/agoda-com/Kakao#intercepting) and [Kautomator interceptors](./02_Wrapper_over_UiAutomator.md#intercepting).
+These interceptors were introduced to simplify and uniform using of [Kakao interceptors](https://github.com/KakaoCup/Kakao#intercepting) and [Kautomator interceptors](./02_Wrapper_over_UiAutomator.md#intercepting).
 
 _**Important moment**_ about a mixing of Kaspresso interceptors and Kakao/Kautomator interceptors. <br>
 Kaspresso interceptors will not work if you set your custom Kakao interceptors by calling of ```Kakao.intercept``` method in the test or set your custom Kautomator interceptors by calling of ```Kautomator.intercept``` in the test. <br> 
