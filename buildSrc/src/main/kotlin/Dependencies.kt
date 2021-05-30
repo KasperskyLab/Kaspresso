@@ -18,7 +18,7 @@ object Dependencies {
         const val junit = "4.13"
         const val testCore = "1.3.0"
         const val espresso = "3.3.0"
-        const val kakao = "3.0.1"
+        const val kakao = "3.0.2"
         const val uiAutomator = "2.2.0"
 
         const val truth = "1.0"
