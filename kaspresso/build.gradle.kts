@@ -1,5 +1,6 @@
 plugins {
     id("convention.android-library")
+    id("convention.publication-base")
 }
 
 dependencies {

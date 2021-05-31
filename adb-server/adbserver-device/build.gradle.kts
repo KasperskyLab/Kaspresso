@@ -2,24 +2,18 @@ import org.gradle.jvm.tasks.Jar
 
 plugins {
     id("convention.kotlin-library")
+    id("convention.publication-kotlin-lib")
+}
+publish {
+    artifactId.set("adb-server-device")
 }
 
 dependencies {
     implementation(libs.kotlinStdlib)
-    implementation(projects.adbServer.adbserverCommon)
-    implementation(projects.adbServer.adbserverCommandTypes)
-    implementation(projects.adbServer.adbserverConnection)
-    implementation(projects.adbServer.adbserverDesktopDeviceConnection)
-}
-
-task(name = "sourcesJar", type = Jar::class) {
-    archiveClassifier.set("sources")
-    from(sourceSets.getByName("main").allSource)
-}
-
-task(name = "javadocJar", type = Jar::class) {
-    archiveClassifier.set("javadoc")
-    from(tasks.javadoc.get().destinationDir)
+    api(projects.adbServer.adbserverCommon)
+    api(projects.adbServer.adbserverCommandTypes)
+    api(projects.adbServer.adbserverConnection)
+    api(projects.adbServer.adbserverDesktopDeviceConnection)
 }
 
 tasks.jar.configure {

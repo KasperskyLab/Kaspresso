@@ -4,6 +4,7 @@ rootProject.name = "build-conventions"
 
 include("android-convention")
 include("kotlin-convention")
+include("publication-convention")
 
 pluginManagement {
     repositories {
