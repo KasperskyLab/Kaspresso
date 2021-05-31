@@ -1,8 +1,8 @@
-package com.kaspersky.kaspresso.tutorials.test
+package com.kaspersky.kaspresso.tutorial.test
 
 import com.kaspersky.kaspresso.testcases.api.scenario.BaseScenario
 import com.kaspersky.kaspresso.testcases.core.testcontext.TestContext
-import com.kaspersky.kaspresso.tutorials.screen.SimpleScreen
+import com.kaspersky.kaspresso.tutorial.screen.SimpleScreen
 
 class CheckEditScenario<ScenarioData> : BaseScenario<ScenarioData>() {
 

@@ -1,10 +1,10 @@
-package com.kaspersky.kaspresso.tutorials.screen
+package com.kaspersky.kaspresso.tutorial.screen
 
 import com.agoda.kakao.edit.KEditText
 import com.agoda.kakao.text.KButton
 import com.kaspersky.kaspresso.screens.KScreen
-import com.kaspersky.kaspresso.tutorials.R
-import com.kaspersky.kaspresso.tutorials.simple.SimpleActivity
+import com.kaspersky.kaspresso.tutorial.R
+import com.kaspersky.kaspresso.tutorial.simple.SimpleActivity
 
 object SimpleScreen : KScreen<SimpleScreen>() {
 

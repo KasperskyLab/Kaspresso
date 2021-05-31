@@ -1,9 +1,9 @@
-package com.kaspersky.kaspresso.tutorials
+package com.kaspersky.kaspresso.tutorial
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.kaspersky.kaspresso.tutorials.simple.SimpleActivity
+import com.kaspersky.kaspresso.tutorial.simple.SimpleActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {

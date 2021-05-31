@@ -1,9 +1,9 @@
-package com.kaspersky.kaspresso.tutorials.screen
+package com.kaspersky.kaspresso.tutorial.screen
 
 import com.agoda.kakao.text.KButton
 import com.kaspersky.kaspresso.screens.KScreen
-import com.kaspersky.kaspresso.tutorials.MainActivity
-import com.kaspersky.kaspresso.tutorials.R
+import com.kaspersky.kaspresso.tutorial.MainActivity
+import com.kaspersky.kaspresso.tutorial.R
 
 object MainScreen : KScreen<MainScreen>() {
 

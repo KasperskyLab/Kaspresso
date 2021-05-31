@@ -1,9 +1,9 @@
-package com.kaspersky.kaspresso.tutorials.simple
+package com.kaspersky.kaspresso.tutorial.simple
 
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.kaspersky.kaspresso.tutorials.R
+import com.kaspersky.kaspresso.tutorial.R
 import kotlinx.android.synthetic.main.activity_simple.*
 import java.util.concurrent.Executors
 
