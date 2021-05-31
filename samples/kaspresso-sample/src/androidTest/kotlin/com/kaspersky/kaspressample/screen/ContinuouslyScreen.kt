@@ -1,6 +1,6 @@
 package com.kaspersky.kaspressample.screen
 
-import com.agoda.kakao.text.KButton
+import io.github.kakaocup.kakao.text.KButton
 import com.kaspersky.kaspressample.R
 import com.kaspersky.kaspressample.continuously.ContinuouslySampleActivity
 import com.kaspersky.kaspresso.screens.KScreen

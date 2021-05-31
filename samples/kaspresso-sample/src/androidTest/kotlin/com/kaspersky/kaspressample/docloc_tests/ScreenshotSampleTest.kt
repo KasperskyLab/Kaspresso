@@ -3,7 +3,7 @@ package com.kaspersky.kaspressample.docloc_tests
 import android.Manifest
 import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
-import com.agoda.kakao.screen.Screen
+import io.github.kakaocup.kakao.screen.Screen
 import com.kaspersky.kaspressample.screen.SimpleScreen
 import com.kaspersky.kaspressample.simple.SimpleActivity
 import com.kaspersky.kaspresso.annotations.ScreenShooterTest

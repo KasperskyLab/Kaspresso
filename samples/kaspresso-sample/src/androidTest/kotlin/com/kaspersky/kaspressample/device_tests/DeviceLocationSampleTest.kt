@@ -8,7 +8,7 @@ import android.os.Bundle
 import android.os.Looper
 import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
-import com.agoda.kakao.screen.Screen
+import io.github.kakaocup.kakao.screen.Screen
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.junit.Assert.assertEquals

@@ -3,6 +3,8 @@
 [![Android Weekly](https://img.shields.io/badge/Android%20Weekly-392-green.svg)](http://androidweekly.net/issues/issue-392)
 [![Download](https://api.bintray.com/packages/ruslanmingaliev/Kaspresso/Kaspresso/images/download.svg?version=1.2.0) ](https://bintray.com/ruslanmingaliev/Kaspresso/Kaspresso/1.2.0/link)
 ![Build and Deploy](https://github.com/KasperskyLab/Kaspresso/workflows/Build%20and%20Deploy/badge.svg)
+[![Telegram](https://img.shields.io/static/v1?label=Telegram&message=RU&color=0088CC)](https://t.me/kaspresso)
+[![Telegram](https://img.shields.io/static/v1?label=Telegram&message=EN&color=0088CC)](https://t.me/kaspresso_en)
 
 # Kaspresso
 
@@ -25,7 +27,7 @@ And many more!
 
 ### Readability
 
-We like the syntax that [Kakao](https://github.com/agoda-com/Kakao) applies to write UI tests. This wrapper over Espresso uses the Kotlin DSL approach, that makes the code significantly shorter and more readable. See the difference:
+We like the syntax that [Kakao](https://github.com/KakaoCup/Kakao) applies to write UI tests. This wrapper over Espresso uses the Kotlin DSL approach, that makes the code significantly shorter and more readable. See the difference:
 
 **Espresso**:
 ```kotlin
@@ -273,11 +275,6 @@ java -jar artifacts/adbserver-desktop.jar
 The old version `artifacts/desktop_1_1_0.jar` is also available for use with older versions of Kaspresso.
 2. If you use `device.logcat` in your tests, you should call `device.logcat.disableChatty` in the `before` section of your test.
 In previous version of Kaspresso, `device.logcat.disableChatty` was called automatically during initialization. This resulted in the need to always run AdbServer before tests.
-
-## Support
-Ask your question on Telegram:
-* In English: t.me/kaspresso_en
-* In Russian: t.me/kaspresso
 
 ## Contribution
 Kaspresso is an open source project, so you are welcome to contribute (see the [Contribution Guidelines](https://github.com/KasperskyLab/Kaspresso/blob/master/CONTRIBUTING.md)).

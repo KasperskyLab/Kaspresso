@@ -1,6 +1,6 @@
 package com.kaspersky.kaspresso.interceptors.tolibrary
 
-import com.agoda.kakao.Kakao
+import io.github.kakaocup.kakao.Kakao
 import com.kaspersky.components.kautomator.KautomatorConfigurator
 import com.kaspersky.kaspresso.interceptors.behavior.DataBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.ViewBehaviorInterceptor
