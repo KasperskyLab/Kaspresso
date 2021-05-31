@@ -1,20 +1,16 @@
 plugins {
-    androidApplication
-    kotlinAndroid
-    kotlinAndroidExtensions
+    id("convention.android-app")
 }
 
 android {
-    compileSdkVersion(30)
-
     defaultConfig {
-        applicationId = "com.kaspersky.kaspresso.tutorials"
-        minSdkVersion(18)
-        targetSdkVersion(30)
-        versionCode = 1
-        versionName = "1.0"
-
+        applicationId = "com.kaspersky.kaspresso.tutorial"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunnerArguments["clearPackageData"] = "true"
+    }
+
+    testOptions {
+        execution = "ANDROIDX_TEST_ORCHESTRATOR"
     }
 }
 

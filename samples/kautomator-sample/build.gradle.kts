@@ -1,31 +1,21 @@
-import Dependencies.Versions
-
 plugins {
-    androidApplication
-    kotlinAndroid
-    kotlinAndroidExtensions
+    id("convention.android-app")
 }
 
 android {
-    compileSdkVersion(Versions.compileSdk)
-    buildToolsVersion(Versions.buildTools)
-
     defaultConfig {
         applicationId = "com.kaspersky.kaspresso.kautomatorsample"
-        minSdkVersion(Versions.minSdk)
-        targetSdkVersion(Versions.targetSdk)
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 }
 
 dependencies {
-    implementation(Dependencies.appcompat)
-    implementation(Dependencies.material)
-    implementation(Dependencies.constraint)
+    implementation(libs.appcompat)
+    implementation(libs.material)
+    implementation(libs.constraint)
 
-    androidTestImplementation(Dependencies.uiAutomator)
-    androidTestImplementation(Dependencies.rules)
-    androidTestImplementation(project(Projects.Kaspresso.framework))
-    androidTestImplementation(project(Projects.Kautomator.framework))
+    androidTestImplementation(libs.uiAutomator)
+    androidTestImplementation(libs.androidXRules)
+    androidTestImplementation(projects.kaspresso)
+    androidTestImplementation(projects.kautomator)
 }

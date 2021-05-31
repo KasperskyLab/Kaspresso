@@ -3,7 +3,7 @@ published and distributed by AO Kaspersky Lab as the owner: <br><br>
 Egor Kurnikov <Egor.Kurnikov@kaspersky.com> <br>
 Eugene Matsyuk <Evgeny.Matsyuk@kaspersky.com> <br>
 Andrey Antipov <antipov11.11@gmail.com> <br>
-Ruslan Mingaliev <Ruslan.Mingaliev@kaspersky.com> <br>
+Ruslan Mingaliev <mingaliev.rr@gmail.com> <br>
 Alexander Blinov <xanderblinov@gmail.com> <br>
 Pavel Strelchenko <p.strelchenko@hh.ru> <br>
 Dmitry Movchan <v1sarrus@gmail.com> <br>

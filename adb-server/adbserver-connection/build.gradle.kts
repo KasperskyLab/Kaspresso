@@ -1,8 +1,8 @@
 plugins {
-    kotlin
+    id("convention.kotlin")
 }
 
 dependencies {
-    implementation(Dependencies.kotlinStdlib)
-    implementation(project(Projects.AdbServer.common))
+    implementation(libs.kotlinStdlib)
+    implementation(projects.adbServer.adbserverCommon)
 }

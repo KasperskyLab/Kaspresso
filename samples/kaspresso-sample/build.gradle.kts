@@ -1,29 +1,12 @@
-import Dependencies.Versions
-
 plugins {
-    androidApplication
-    kotlinAndroid
-    kotlinAndroidExtensions
+    id("convention.android-app")
 }
 
 android {
-    compileSdkVersion(Versions.compileSdk)
-    buildToolsVersion(Versions.buildTools)
-
     defaultConfig {
         applicationId = "com.kaspersky.kaspressample"
-
-        minSdkVersion(Versions.minSdk)
-        targetSdkVersion(Versions.targetSdk)
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        testInstrumentationRunnerArguments = mapOf("clearPackageData" to "true")
-    }
-
-    sourceSets {
-        val main by getting {
-            java.srcDir("src/main/kotlin")
-        }
+        testInstrumentationRunnerArguments["clearPackageData"] = "true"
     }
 
     testOptions {
@@ -32,18 +15,18 @@ android {
 }
 
 dependencies {
-    implementation(Dependencies.appcompat)
-    implementation(Dependencies.material)
-    implementation(Dependencies.constraint)
+    implementation(libs.appcompat)
+    implementation(libs.material)
+    implementation(libs.constraint)
 
-    androidTestImplementation(Dependencies.runner)
-    androidTestImplementation(Dependencies.rules)
-    androidTestImplementation(Dependencies.junit)
-    androidTestImplementation(Dependencies.espressoCore)
-    androidTestImplementation(Dependencies.espressoWeb)
-    androidTestImplementation(Dependencies.kakao)
-    androidTestImplementation(project(Projects.Kaspresso.framework))
-    androidTestImplementation(project(Projects.Kautomator.framework))
+    androidTestImplementation(libs.runner)
+    androidTestImplementation(libs.androidXRules)
+    androidTestImplementation(libs.junit)
+    androidTestImplementation(libs.espressoCore)
+    androidTestImplementation(libs.espressoWeb)
+    androidTestImplementation(libs.kakao)
+    androidTestImplementation(projects.kaspresso)
+    androidTestImplementation(projects.kautomator)
 
-    androidTestUtil(Dependencies.orchestrator)
+    androidTestUtil(libs.orchestrator)
 }

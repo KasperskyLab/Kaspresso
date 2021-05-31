@@ -1,16 +1,15 @@
 import org.gradle.jvm.tasks.Jar
 
 plugins {
-    kotlin
-    javaLibrary
+    id("convention.kotlin-library")
 }
 
 dependencies {
-    implementation(Dependencies.kotlinStdlib)
-    implementation(project(Projects.AdbServer.common))
-    implementation(project(Projects.AdbServer.commandTypes))
-    implementation(project(Projects.AdbServer.connection))
-    implementation(project(Projects.AdbServer.desktopDeviceConnection))
+    implementation(libs.kotlinStdlib)
+    implementation(projects.adbServer.adbserverCommon)
+    implementation(projects.adbServer.adbserverCommandTypes)
+    implementation(projects.adbServer.adbserverConnection)
+    implementation(projects.adbServer.adbserverDesktopDeviceConnection)
 }
 
 task(name = "sourcesJar", type = Jar::class) {

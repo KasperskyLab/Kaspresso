@@ -1,7 +1,6 @@
 package com.kaspersky.adbserver.common.log.filterlog
 
 import com.google.common.truth.Truth.assertThat
-import com.kaspersky.adbserver.common.log.fulllogger.FullLogger
 import com.kaspersky.adbserver.common.log.logger.LogLevel
 import org.junit.jupiter.api.Test
 

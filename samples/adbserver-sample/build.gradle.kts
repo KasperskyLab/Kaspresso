@@ -1,24 +1,15 @@
-import Dependencies.Versions
-
 plugins {
-    androidApplication
-    kotlinAndroid
+    id("convention.android-app")
 }
 
 android {
-    compileSdkVersion(Versions.compileSdk)
-    buildToolsVersion(Versions.buildTools)
-
     defaultConfig {
         applicationId = "com.kaspersky.adbserver.sample"
-
-        minSdkVersion(Versions.minSdk)
-        targetSdkVersion(Versions.targetSdk)
     }
 }
 
 dependencies {
-    implementation(Dependencies.kotlinStdlib)
-    implementation(Dependencies.appcompat)
-    implementation(project(Projects.AdbServer.device)) { isTransitive = false }
+    implementation(libs.kotlinStdlib)
+    implementation(libs.appcompat)
+    implementation(projects.adbServer.adbserverDevice) { isTransitive = false }
 }

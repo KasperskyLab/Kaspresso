@@ -1,10 +1,9 @@
 plugins {
-    kotlin
+    id("convention.kotlin")
 }
 
 dependencies {
-    implementation(Dependencies.kotlinStdlib)
-
-    testImplementation(Dependencies.junitJupiter)
-    testImplementation(Dependencies.truth)
+    implementation(libs.kotlinStdlib)
+    testImplementation(libs.junitJupiter)
+    testImplementation(libs.truth)
 }

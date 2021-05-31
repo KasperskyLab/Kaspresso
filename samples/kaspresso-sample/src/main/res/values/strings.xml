@@ -54,7 +54,7 @@
 
     <!-- Upgrade scenario -->
     <string name="upgrade_title" translatable="false">Upgrade scenario</string>
-    <string name="upgrade_version_placeholder" translatable="false">v.%d</string>
+    <string name="upgrade_version_placeholder" translatable="false">v.%s</string>
     <string name="upgrade_value_placeholder" translatable="false">Current value is: %s</string>
     <string name="upgrade_label_value" translatable="false">Value</string>
     <string name="upgrade_value_input_hint" translatable="false">Type new value here</string>

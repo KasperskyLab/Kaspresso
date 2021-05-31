@@ -72,7 +72,7 @@ complexity:
     active: true
     threshold: 600
   LongMethod:
-    active: true
+    active: false # Test methods could have too much code
     threshold: 65
   LongParameterList:
     active: true
@@ -213,6 +213,8 @@ formatting:
   AnnotationOnSeparateLine:
     active: false
     autoCorrect: true
+  ArgumentListWrapping:
+    active: false
   ChainWrapping:
     active: true
     autoCorrect: true
@@ -281,7 +283,7 @@ formatting:
   NoWildcardImports:
     active: true
   PackageName:
-    active: true
+    active: false
     autoCorrect: true
   ParameterListWrapping:
     active: true
@@ -462,6 +464,8 @@ potential-bugs:
 
 style:
   active: true
+  ClassOrdering:
+    active: false
   CollapsibleIfStatements:
     active: false
   DataClassContainsFunctions:
@@ -482,7 +486,7 @@ style:
     includeLineWrapping: false
   ForbiddenComment:
     active: true
-    values: ['TODO:', 'FIXME:', 'STOPSHIP:']
+    values: ['STOPSHIP:']
     allowedPatterns: ''
   ForbiddenImport:
     active: false

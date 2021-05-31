@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Tutorials</string>
+    <string name="app_name">Tutorial</string>
 
     <!-- Main Activity -->
     <string name="main_screen_title">Main Screen</string>
