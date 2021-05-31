@@ -4,6 +4,8 @@
 [![Download](https://api.bintray.com/packages/ruslanmingaliev/Kaspresso/Kaspresso/images/download.svg?version=1.2.0) ](https://bintray.com/ruslanmingaliev/Kaspresso/Kaspresso/1.2.0/link)
 ![Build and Deploy](https://github.com/KasperskyLab/Kaspresso/workflows/Build%20and%20Deploy/badge.svg)
 [![Telegram](https://img.shields.io/static/v1?label=Telegram&message=RU&color=0088CC)](https://t.me/kaspresso)
+[![Telegram](https://img.shields.io/static/v1?label=Telegram&message=EN&color=0088CC)](https://t.me/kaspresso_en)
+
 # Kaspresso
 
 Kaspresso is a great framework for UI testing. Based on [Espresso](https://developer.android.com/training/testing/espresso) and [UI Automator](https://developer.android.com/training/testing/ui-automator), Kaspresso provides a wide range of additional amazing features, such as:
@@ -273,11 +275,6 @@ java -jar artifacts/adbserver-desktop.jar
 The old version `artifacts/desktop_1_1_0.jar` is also available for use with older versions of Kaspresso.
 2. If you use `device.logcat` in your tests, you should call `device.logcat.disableChatty` in the `before` section of your test.
 In previous version of Kaspresso, `device.logcat.disableChatty` was called automatically during initialization. This resulted in the need to always run AdbServer before tests.
-
-## Support
-Ask your question on Telegram:
-* In English: t.me/kaspresso_en
-* In Russian: t.me/kaspresso
 
 ## Contribution
 Kaspresso is an open source project, so you are welcome to contribute (see the [Contribution Guidelines](https://github.com/KasperskyLab/Kaspresso/blob/master/CONTRIBUTING.md)).
