@@ -1,6 +1,6 @@
 package com.kaspersky.kaspresso.screens
 
-import com.agoda.kakao.screen.Screen
+import io.github.kakaocup.kakao.screen.Screen
 
 abstract class KScreen<out T : KScreen<T>> : Screen<T>() {
 

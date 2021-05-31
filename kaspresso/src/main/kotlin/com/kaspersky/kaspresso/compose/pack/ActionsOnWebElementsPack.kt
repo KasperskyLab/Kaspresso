@@ -1,7 +1,7 @@
 package com.kaspersky.kaspresso.compose.pack
 
 import androidx.test.espresso.web.webdriver.Locator
-import com.agoda.kakao.web.WebElementBuilder
+import io.github.kakaocup.kakao.web.WebElementBuilder
 import com.kaspersky.kaspresso.compose.pack.branch.ComplexComposeBranch
 import com.kaspersky.kaspresso.compose.pack.branch.ComplexComposeBranchBuilder
 import kotlin.properties.Delegates

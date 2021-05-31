@@ -1,7 +1,7 @@
 package com.kaspersky.kaspresso.tutorials.screen
 
-import com.agoda.kakao.edit.KEditText
-import com.agoda.kakao.text.KButton
+import io.github.kakaocup.kakao.edit.KEditText
+import io.github.kakaocup.kakao.text.KButton
 import com.kaspersky.kaspresso.screens.KScreen
 import com.kaspersky.kaspresso.tutorials.R
 import com.kaspersky.kaspresso.tutorials.simple.SimpleActivity

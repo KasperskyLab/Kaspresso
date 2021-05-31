@@ -1,6 +1,6 @@
 package com.kaspersky.kaspressample.screen
 
-import com.agoda.kakao.web.KWebView
+import io.github.kakaocup.kakao.web.KWebView
 import com.kaspersky.kaspressample.R
 import com.kaspersky.kaspressample.web.WebViewActivity
 import com.kaspersky.kaspresso.screens.KScreen
