@@ -1,5 +1,3 @@
-import org.gradle.jvm.tasks.Jar
-
 plugins {
     id("convention.kotlin-library")
     id("convention.publication-kotlin-lib")

@@ -5,6 +5,7 @@ import org.gradle.api.provider.Property
 import org.gradle.kotlin.dsl.property
 import javax.inject.Inject
 
+@Suppress("UnnecessaryAbstractClass")
 abstract class AndroidLibraryPublishExtension @Inject constructor(objects: ObjectFactory) {
 
     /**

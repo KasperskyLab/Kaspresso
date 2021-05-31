@@ -15,7 +15,7 @@ dependencies {
     implementation(libs.bundles.espresso)
 
     implementation(projects.kautomator)
-    implementation(projects.adbServer.adbserverDevice) { isTransitive = false }
+    implementation(projects.adbServer.adbserverDevice)
 
     testImplementation(libs.junit)
     testImplementation(libs.truth)
