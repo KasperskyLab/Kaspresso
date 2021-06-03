@@ -48,6 +48,11 @@ import com.kaspersky.kaspresso.device.screenshots.screenshotmaker.ExternalScreen
 import com.kaspersky.kaspresso.device.screenshots.screenshotmaker.InternalScreenshotMaker
 import com.kaspersky.kaspresso.device.server.AdbServer
 import com.kaspersky.kaspresso.device.server.AdbServerImpl
+import com.kaspersky.kaspresso.device.video.Videos
+import com.kaspersky.kaspresso.device.video.VideosImpl
+import com.kaspersky.kaspresso.device.video.videorecorder.VideoRecorderImpl
+import com.kaspersky.kaspresso.device.viewhierarchy.ViewHierarchyDumper
+import com.kaspersky.kaspresso.device.viewhierarchy.ViewHierarchyDumperImpl
 import com.kaspersky.kaspresso.failure.LoggingFailureHandler
 import com.kaspersky.kaspresso.files.DefaultDirsProvider
 import com.kaspersky.kaspresso.files.DirsProvider
@@ -89,6 +94,8 @@ import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.logging.TestRu
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.resource.ResourcesDirsManagingInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.screenshot.ScreenshotStepWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.screenshot.TestRunnerScreenshotWatcherInterceptor
+import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.video.VideoRecordingInterceptor
+import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.views.DumpViewsInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.view.AtomWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.view.ViewActionWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.view.ViewAssertionWatcherInterceptor
@@ -265,10 +272,15 @@ data class Kaspresso(
              */
             fun advanced(customize: Builder.() -> Unit = {}): Builder {
                 return simple(customize).apply {
-                    stepWatcherInterceptors.add(ScreenshotStepWatcherInterceptor(screenshots))
-                    testRunWatcherInterceptors.add(
-                        TestRunnerScreenshotWatcherInterceptor(
-                            screenshots
+                    stepWatcherInterceptors.add(
+                        ScreenshotStepWatcherInterceptor(screenshots)
+                    )
+                    testRunWatcherInterceptors.addAll(
+                        listOf(
+                            TestRunnerScreenshotWatcherInterceptor(screenshots),
+                            VideoRecordingInterceptor(videos),
+                            DumpLogcatInterceptor(logcatDumper),
+                            DumpViewsInterceptor(viewHierarchyDumper)
                         )
                     )
                 }
@@ -348,6 +360,11 @@ data class Kaspresso(
          */
         lateinit var screenshots: Screenshots
 
+        lateinit var videos: Videos
+
+        lateinit var viewHierarchyDumper: ViewHierarchyDumper
+
+        lateinit var logcatDumper: LogcatDumper
         /**
          * Holds an implementation of [Accessibility] interface. If it was not specified, the default implementation is used.
          */
