@@ -2,7 +2,7 @@ package com.kaspersky.kaspressample.screen
 
 import com.agoda.kakao.text.KButton
 import com.agoda.kakao.text.KTextView
-import com.kaspersky.kaspressample.MainActivity
+import com.kaspersky.kaspresso_sample_core.MainActivity
 import com.kaspersky.kaspressample.R
 import com.kaspersky.kaspresso.screens.KScreen
 

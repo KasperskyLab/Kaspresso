@@ -5,7 +5,7 @@ import com.kaspersky.components.kautomator.component.edit.UiEditText
 import com.kaspersky.components.kautomator.component.text.UiButton
 import com.kaspersky.components.kautomator.component.text.UiTextView
 import com.kaspersky.kaspressample.R
-import com.kaspersky.kaspressample.measure.MeasureActivity
+import com.kaspersky.kaspresso_sample_core.measure.MeasureActivity
 
 object UiMeasureScreen : UiSampleScreen<UiMeasureScreen>() {
 

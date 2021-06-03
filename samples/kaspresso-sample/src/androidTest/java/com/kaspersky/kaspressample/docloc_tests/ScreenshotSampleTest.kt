@@ -5,7 +5,7 @@ import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
 import com.agoda.kakao.screen.Screen
 import com.kaspersky.kaspressample.screen.SimpleScreen
-import com.kaspersky.kaspressample.simple.SimpleActivity
+import com.kaspersky.kaspresso_sample_core.simple.SimpleActivity
 import com.kaspersky.kaspresso.annotations.ScreenShooterTest
 import com.kaspersky.kaspresso.testcases.api.testcase.DocLocScreenshotTestCase
 import org.junit.Rule

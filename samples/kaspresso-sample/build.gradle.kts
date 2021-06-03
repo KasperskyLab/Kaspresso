@@ -32,9 +32,13 @@ android {
 }
 
 dependencies {
+    implementation(project(mapOf("path" to ":samples:kaspresso-sample-core")))
     implementation(Dependencies.appcompat)
     implementation(Dependencies.material)
     implementation(Dependencies.constraint)
+
+    androidTestImplementation(project(Projects.Kaspresso.framework))
+    androidTestImplementation(project(Projects.Kautomator.framework))
 
     androidTestImplementation(Dependencies.runner)
     androidTestImplementation(Dependencies.rules)
@@ -42,8 +46,6 @@ dependencies {
     androidTestImplementation(Dependencies.espressoCore)
     androidTestImplementation(Dependencies.espressoWeb)
     androidTestImplementation(Dependencies.kakao)
-    androidTestImplementation(project(Projects.Kaspresso.framework))
-    androidTestImplementation(project(Projects.Kautomator.framework))
 
     androidTestUtil(Dependencies.orchestrator)
 }

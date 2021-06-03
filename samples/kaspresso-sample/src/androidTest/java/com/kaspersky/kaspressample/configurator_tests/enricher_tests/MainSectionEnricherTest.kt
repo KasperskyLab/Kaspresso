@@ -1,7 +1,7 @@
 package com.kaspersky.kaspressample.configurator_tests.enricher_tests
 
 import androidx.test.rule.ActivityTestRule
-import com.kaspersky.kaspressample.MainActivity
+import com.kaspersky.kaspresso_sample_core.MainActivity
 import com.kaspersky.kaspressample.screen.MainScreen
 import com.kaspersky.kaspressample.screen.SimpleScreen
 import org.junit.Rule

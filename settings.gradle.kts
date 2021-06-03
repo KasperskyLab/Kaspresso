@@ -10,6 +10,7 @@ include(
     ":kautomator",
     ":allure_support",
 
+    ":samples:kaspresso-sample-core",
     ":samples:adbserver-sample",
     ":samples:kaspresso-sample",
     ":samples:kautomator-sample",
