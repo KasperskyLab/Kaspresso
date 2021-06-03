@@ -29,6 +29,8 @@ import com.kaspersky.kaspresso.device.location.Location
 import com.kaspersky.kaspresso.device.location.LocationImpl
 import com.kaspersky.kaspresso.device.logcat.Logcat
 import com.kaspersky.kaspresso.device.logcat.LogcatImpl
+import com.kaspersky.kaspresso.device.logcat.dumper.LogcatDumper
+import com.kaspersky.kaspresso.device.logcat.dumper.LogcatDumperImpl
 import com.kaspersky.kaspresso.device.network.Network
 import com.kaspersky.kaspresso.device.network.NetworkImpl
 import com.kaspersky.kaspresso.device.permissions.HackPermissions
@@ -47,6 +49,9 @@ import com.kaspersky.kaspresso.device.screenshots.screenshotmaker.InternalScreen
 import com.kaspersky.kaspresso.device.server.AdbServer
 import com.kaspersky.kaspresso.device.server.AdbServerImpl
 import com.kaspersky.kaspresso.failure.LoggingFailureHandler
+import com.kaspersky.kaspresso.files.DefaultDirsProvider
+import com.kaspersky.kaspresso.files.DirsProvider
+import com.kaspersky.kaspresso.files.resources.*
 import com.kaspersky.kaspresso.idlewaiting.KautomatorWaitForIdleSettings
 import com.kaspersky.kaspresso.interceptors.behavior.DataBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.ViewBehaviorInterceptor
@@ -78,9 +83,10 @@ import com.kaspersky.kaspresso.interceptors.watcher.kautomator.impl.logging.Logg
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.StepWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.TestRunWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.defaults.DefaultTestRunWatcherInterceptor
+import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.logging.DumpLogcatInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.logging.LoggingStepWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.logging.TestRunLoggerWatcherInterceptor
-import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.report.BuildStepReportWatcherInterceptor
+import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.resource.ResourcesDirsManagingInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.screenshot.ScreenshotStepWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.screenshot.TestRunnerScreenshotWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.view.AtomWatcherInterceptor
