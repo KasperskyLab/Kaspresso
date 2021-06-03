@@ -402,6 +402,20 @@ data class Kaspresso(
          */
         lateinit var stepParams: StepParams
 
+        lateinit var screenshotParams: ScreenshotParams
+
+        lateinit var videoParams: VideoParams
+
+        lateinit var dirsProvider: DirsProvider
+
+        lateinit var resourceFilesProvider: ResourceFilesProvider
+
+        lateinit var resourceFileNamesProvider: ResourceFileNamesProvider
+
+        lateinit var resourcesDirsProvider: ResourcesDirsProvider
+
+        lateinit var resourcesRootDirsProvider: ResourcesRootDirsProvider
+
         /**
          * Holds the list of [ViewActionWatcherInterceptor]s.
          * If it was not specified, Kaspresso will use no [ViewActionWatcherInterceptor]s.
@@ -567,6 +581,25 @@ data class Kaspresso(
             if (!::libLogger.isInitialized) libLogger = UiTestLoggerImpl(DEFAULT_LIB_LOGGER_TAG)
             if (!::testLogger.isInitialized) testLogger = UiTestLoggerImpl(DEFAULT_TEST_LOGGER_TAG)
 
+            if (!::dirsProvider.isInitialized) dirsProvider = DefaultDirsProvider()
+            if (!::resourcesRootDirsProvider.isInitialized) resourcesRootDirsProvider = DefaultResourcesRootDirsProvider()
+            if (!::resourcesDirsProvider.isInitialized) {
+                resourcesDirsProvider = DefaultResourcesDirsProvider(
+                    dirsProvider = dirsProvider,
+                    groupByRunNumbers = true
+                )
+            }
+            if (!::resourceFileNamesProvider.isInitialized) {
+                resourceFileNamesProvider = DefaultResourceFileNamesProvider(addTimestamps = false)
+            }
+            if (!::resourceFilesProvider.isInitialized) {
+                resourceFilesProvider = DefaultResourceFilesProvider(
+                    resourcesRootDirsProvider,
+                    resourcesDirsProvider,
+                    resourceFileNamesProvider
+                )
+            }
+
             if (!::adbServer.isInitialized) adbServer = AdbServerImpl(LogLevel.WARN, libLogger)
             if (!::apps.isInitialized) apps = AppsImpl(libLogger, instrumentation.context, uiDevice, adbServer)
             if (!::activities.isInitialized) activities = ActivitiesImpl(libLogger)
@@ -575,14 +608,6 @@ data class Kaspresso(
             if (!::phone.isInitialized) phone = PhoneImpl(adbServer)
             if (!::location.isInitialized) location = LocationImpl(adbServer)
             if (!::keyboard.isInitialized) keyboard = KeyboardImpl(adbServer)
-            if (!::screenshots.isInitialized) {
-                screenshots = ScreenshotsImpl(
-                    libLogger,
-                    CombinedScreenshotMaker(InternalScreenshotMaker(activities), ExternalScreenshotMaker()),
-                    DefaultScreenshotDirectoryProvider(groupByRunNumbers = true),
-                    DefaultScreenshotNameProvider(addTimestamps = false)
-                )
-            }
             if (!::accessibility.isInitialized) accessibility = AccessibilityImpl()
             if (!::permissions.isInitialized) permissions = PermissionsImpl(libLogger, uiDevice)
             if (!::hackPermissions.isInitialized) hackPermissions = HackPermissionsImpl(instrumentation.uiAutomation, libLogger)
@@ -594,6 +619,34 @@ data class Kaspresso(
             if (!::continuouslyParams.isInitialized) continuouslyParams = ContinuouslyParams.default()
             if (!::autoScrollParams.isInitialized) autoScrollParams = AutoScrollParams.default()
             if (!::stepParams.isInitialized) stepParams = StepParams()
+            if (!::screenshotParams.isInitialized) screenshotParams = ScreenshotParams()
+            if (!::videoParams.isInitialized) videoParams = VideoParams()
+
+            if (!::screenshots.isInitialized) {
+                screenshots = ScreenshotsImpl(
+                    logger = libLogger,
+                    resourceFilesProvider = resourceFilesProvider,
+                    screenshotMaker = CombinedScreenshotMaker(
+                        preferredScreenshotMaker = InternalScreenshotMaker(activities, screenshotParams),
+                        fallbackScreenshotMaker = ExternalScreenshotMaker(screenshotParams)
+                    )
+                )
+            }
+
+            if (!::videos.isInitialized) {
+                videos = VideosImpl(
+                    resourceFilesProvider = resourceFilesProvider,
+                    videoRecorder = VideoRecorderImpl(libLogger, videoParams)
+                )
+            }
+
+            if (!::viewHierarchyDumper.isInitialized) {
+                viewHierarchyDumper = ViewHierarchyDumperImpl(libLogger, resourceFilesProvider)
+            }
+
+            if (!::logcatDumper.isInitialized) {
+                logcatDumper = LogcatDumperImpl(libLogger, resourceFilesProvider, logcat)
+            }
         }
 
         @Suppress("detekt.ComplexMethod")
@@ -673,6 +726,7 @@ data class Kaspresso(
             )
 
             if (!::testRunWatcherInterceptors.isInitialized) testRunWatcherInterceptors = mutableListOf(
+                ResourcesDirsManagingInterceptor(resourcesDirsProvider),
                 TestRunLoggerWatcherInterceptor(libLogger),
                 defaultsTestRunWatcherInterceptor
             )
@@ -716,7 +770,9 @@ data class Kaspresso(
                     flakySafetyParams = flakySafetyParams,
                     continuouslyParams = continuouslyParams,
                     autoScrollParams = autoScrollParams,
-                    stepParams = stepParams
+                    stepParams = stepParams,
+                    screenshotParams = screenshotParams,
+                    videoParams = videoParams
                 ),
 
                 viewActionWatcherInterceptors = viewActionWatcherInterceptors,
