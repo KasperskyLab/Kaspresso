@@ -30,6 +30,8 @@ object Dependencies {
 
         const val bintray = "1.8.5"
         const val artifactory = "4.17.2"
+
+        const val allure = "2.0.3"
     }
 
     object Detect {
@@ -79,4 +81,8 @@ object Dependencies {
     const val kakao = "com.agoda.kakao:kakao:${Versions.kakao}"
 
     const val uiAutomator = "androidx.test.uiautomator:uiautomator:${Versions.uiAutomator}"
+
+    const val allureCommons = "io.qameta.allure:allure-android-commons:${Versions.allure}"
+    const val allureModel = "io.qameta.allure:allure-android-model:${Versions.allure}"
+    const val allureEspresso = "io.qameta.allure:allure-espresso:${Versions.allure}"
 }

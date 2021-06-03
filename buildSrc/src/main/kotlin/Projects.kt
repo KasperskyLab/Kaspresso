@@ -15,4 +15,8 @@ object Projects {
     object Kautomator {
         const val framework = ":kautomator"
     }
+
+    object AllureSupport {
+        const val framework = ":allure_support"
+    }
 }
