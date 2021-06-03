@@ -1,5 +1,6 @@
 package com.kaspersky.kaspresso.internal.extensions.other
 
+import android.util.Log
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import java.io.File
 import java.io.FileNotFoundException
@@ -16,7 +17,7 @@ internal fun File.safeWrite(logger: UiTestLogger, data: String) {
     } catch (e: FileNotFoundException) {
         logger.e("Can not create file: ${e.message}")
     } catch (e: IOException) {
-        logger.e(e.getStackTraceAsString())
+        logger.e(Log.getStackTraceString(e))
     }
 }
 
@@ -28,4 +29,10 @@ internal fun File.createDirectoryRWX() {
     setReadable(true, false)
     setWritable(true, false)
     setExecutable(true, false)
+}
+
+internal fun File.createIfNeeded(): File = apply {
+    if (!exists()) {
+        createDirectoryRWX()
+    }
 }
