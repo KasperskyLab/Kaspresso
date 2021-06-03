@@ -8,6 +8,7 @@ include(
 
     ":kaspresso",
     ":kautomator",
+    ":allure_support",
 
     ":samples:adbserver-sample",
     ":samples:kaspresso-sample",
