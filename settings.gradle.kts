@@ -1,6 +1,4 @@
 include(
-    ":allure-model",
-
     ":adb-server:adbserver-command-types",
     ":adb-server:adbserver-common",
     ":adb-server:adbserver-connection",
