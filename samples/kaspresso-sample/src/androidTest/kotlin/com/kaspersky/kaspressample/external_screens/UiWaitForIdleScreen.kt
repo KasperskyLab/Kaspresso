@@ -2,7 +2,7 @@ package com.kaspersky.kaspressample.external_screens
 
 import com.kaspersky.components.kautomator.component.edit.UiEditText
 import com.kaspersky.kaspressample.R
-import com.kaspersky.kaspressample.idlingwait.WaitForIdleActivity
+import com.kaspersky.kaspresso_sample_core.idlingwait.WaitForIdleActivity
 
 object UiWaitForIdleScreen : UiSampleScreen<UiWaitForIdleScreen>() {
 

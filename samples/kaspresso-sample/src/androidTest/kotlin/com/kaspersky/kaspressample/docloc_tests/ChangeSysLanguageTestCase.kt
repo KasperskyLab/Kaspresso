@@ -5,7 +5,7 @@ import android.content.Intent
 import android.provider.Settings
 import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
-import com.kaspersky.kaspressample.MainActivity
+import com.kaspersky.kaspresso_sample_core.MainActivity
 import com.kaspersky.kaspresso.testcases.api.testcase.DocLocScreenshotTestCase
 import org.junit.Rule
 import org.junit.Test

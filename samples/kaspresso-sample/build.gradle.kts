@@ -15,6 +15,7 @@ android {
 }
 
 dependencies {
+    implementation(project(mapOf("path" to ":samples:kaspresso-sample-core")))
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.constraint)
