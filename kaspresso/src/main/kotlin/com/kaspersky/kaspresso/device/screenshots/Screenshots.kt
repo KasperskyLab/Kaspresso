@@ -1,5 +1,7 @@
 package com.kaspersky.kaspresso.device.screenshots
 
+import java.io.File
+
 /**
  * The interface to make screenshots.
  */
