@@ -39,6 +39,7 @@ include(
     ":samples:kaspresso-sample",
     ":samples:kautomator-sample",
     ":samples:kautomator-sample-app-upgrade",
+    ":samples:kaspresso-allure-support-sample",
 
     ":tutorial"
 )
