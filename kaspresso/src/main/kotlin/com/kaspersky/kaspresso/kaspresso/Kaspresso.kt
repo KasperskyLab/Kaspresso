@@ -668,7 +668,6 @@ data class Kaspresso(
 
             if (!::testRunWatcherInterceptors.isInitialized) testRunWatcherInterceptors = mutableListOf(
                 TestRunLoggerWatcherInterceptor(libLogger),
-                BuildStepReportWatcherInterceptor(AllureReportWriter(libLogger)),
                 defaultsTestRunWatcherInterceptor
             )
         }
