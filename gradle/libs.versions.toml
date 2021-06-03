@@ -2,6 +2,7 @@
 kotlin = "1.4.32"
 detekt = "1.16.0"
 espresso = "3.3.0"
+allure = "2.0.3"
 
 [libraries]
 # plugins
@@ -29,6 +30,10 @@ constraint = "androidx.constraintlayout:constraintlayout:2.0.0"
 kakao = "io.github.kakaocup:kakao:3.0.2"
 gson = "com.google.code.gson:gson:2.8.6"
 
+allureCommons = { module = "io.qameta.allure:allure-android-commons", version.ref = "allure" }
+allureModel = { module = "io.qameta.allure:allure-android-model", version.ref = "allure" }
+allureEspresso = { module = "io.qameta.allure:allure-espresso", version.ref = "allure" }
+
 junit = "junit:junit:4.13"
 junitJupiter = "org.junit.jupiter:junit-jupiter:5.6.2"
 truth = "com.google.truth:truth:1.0"
@@ -37,3 +42,4 @@ orchestrator = "androidx.test:orchestrator:1.3.0"
 
 [bundles]
 espresso = ["espressoCore", "espressoWeb"]
+allure = ["allureCommons", "allureModel", "allureEspresso"]

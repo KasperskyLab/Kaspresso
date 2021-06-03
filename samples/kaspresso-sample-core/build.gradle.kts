@@ -1,29 +1,9 @@
-import Dependencies.Versions
-
 plugins {
-    androidLibrary
-    kotlinAndroid
-    kotlinAndroidExtensions
-}
-
-android {
-    compileSdkVersion(Versions.compileSdk)
-    buildToolsVersion(Versions.buildTools)
-
-    defaultConfig {
-        minSdkVersion(Versions.minSdk)
-        targetSdkVersion(Versions.targetSdk)
-    }
-
-    sourceSets {
-        val main by getting {
-            java.srcDir("src/main/kotlin")
-        }
-    }
+    id("convention.android-app")
 }
 
 dependencies {
-    implementation(Dependencies.appcompat)
-    implementation(Dependencies.material)
-    implementation(Dependencies.constraint)
+    implementation(libs.appcompat)
+    implementation(libs.material)
+    implementation(libs.constraint)
 }

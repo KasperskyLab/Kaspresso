@@ -1,24 +1,5 @@
-import Dependencies.Versions
-
 plugins {
-    androidLibrary
-    kotlinAndroid
-    kotlinAndroidExtensions
-}
-
-android {
-    compileSdkVersion(Versions.compileSdk)
-    buildToolsVersion(Versions.buildTools)
-
-    defaultConfig {
-        minSdkVersion(Versions.minSdk)
-    }
-
-    sourceSets {
-        val main by getting {
-            java.srcDirs("src/main/kotlin", "src/main/java")
-        }
-    }
+    id("convention.android-library")
 }
 
 repositories {
@@ -26,20 +7,17 @@ repositories {
 }
 
 dependencies {
-    implementation(project(Projects.Kaspresso.framework))
+    implementation(projects.kaspresso)
 
-    implementation(Dependencies.kotlinStdlib)
-    implementation(Dependencies.truth)
-    implementation(Dependencies.testCore)
-    implementation(Dependencies.uiAutomator)
+    implementation(libs.kotlinStdlib)
+    implementation(libs.truth)
+    implementation(libs.testCore)
+    implementation(libs.uiAutomator)
+    implementation(libs.runner)
 
-    implementation(Dependencies.allureCommons)
-    implementation(Dependencies.allureModel)
-    implementation(Dependencies.allureEspresso)
+    implementation(libs.bundles.allure)
 
-    implementation(Dependencies.runner)
+    testImplementation(libs.junit)
 
-    testImplementation(Dependencies.junit)
-
-    androidTestImplementation(Dependencies.espressoCore)
+    androidTestImplementation(libs.espressoCore)
 }

@@ -1,29 +1,12 @@
-import Dependencies.Versions
-
 plugins {
-    androidApplication
-    kotlinAndroid
-    kotlinAndroidExtensions
+    id("convention.android-app")
 }
 
 android {
-    compileSdkVersion(Versions.compileSdk)
-    buildToolsVersion(Versions.buildTools)
-
     defaultConfig {
         applicationId = "com.kaspersky.kaspresso_allure_support_sample"
-
-        minSdkVersion(Versions.minSdk)
-        targetSdkVersion(Versions.targetSdk)
-
         testInstrumentationRunner = "com.kaspersky.components.allure_support.runner.KaspressoTestRunner"
-        testInstrumentationRunnerArguments = mapOf("clearPackageData" to "true")
-    }
-
-    sourceSets {
-        val main by getting {
-            java.srcDir("src/main/kotlin")
-        }
+        testInstrumentationRunnerArguments["clearPackageData"] = "true"
     }
 
     testOptions {
@@ -37,20 +20,20 @@ repositories {
 
 dependencies {
     implementation(project(mapOf("path" to ":samples:kaspresso-sample-core")))
-    implementation(Dependencies.appcompat)
-    implementation(Dependencies.material)
-    implementation(Dependencies.constraint)
 
-    androidTestImplementation(project(Projects.Kaspresso.framework))
-    androidTestImplementation(project(Projects.Kautomator.framework))
-    androidTestImplementation(project(Projects.AllureSupport.framework))
+    implementation(libs.appcompat)
+    implementation(libs.material)
+    implementation(libs.constraint)
 
-    androidTestImplementation(Dependencies.runner)
-    androidTestImplementation(Dependencies.rules)
-    androidTestImplementation(Dependencies.junit)
-    androidTestImplementation(Dependencies.espressoCore)
-    androidTestImplementation(Dependencies.espressoWeb)
-    androidTestImplementation(Dependencies.kakao)
+    androidTestImplementation(projects.kaspresso)
+    androidTestImplementation(projects.kautomator)
+    androidTestImplementation(projects.allureSupport)
 
-    androidTestUtil(Dependencies.orchestrator)
+    androidTestImplementation(libs.runner)
+    androidTestImplementation(libs.androidXRules)
+    androidTestImplementation(libs.junit)
+    androidTestImplementation(libs.kakao)
+    androidTestImplementation(libs.bundles.espresso)
+
+    androidTestUtil(libs.orchestrator)
 }
