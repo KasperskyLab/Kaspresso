@@ -1,5 +1,5 @@
 plugins {
-    id("convention.kotlin")
+    id("convention.kotlin-library")
     id("convention.publication-kotlin-lib")
 }
 

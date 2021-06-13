@@ -100,6 +100,6 @@ abstract class CreateStagingRepositoryTask : DefaultTask() {
     private companion object {
         const val RESPONSE_BODY_STRING_LIMIT = 128
         const val TIMEOUT_SEC = 300L
-        const val SONATYPE_BASE_URL = "https://oss.sonatype.org/service/local"
+        const val SONATYPE_BASE_URL = "https://s01.oss.sonatype.org/service/local"
     }
 }

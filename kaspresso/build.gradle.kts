@@ -1,6 +1,10 @@
 plugins {
     id("convention.android-library")
-    id("convention.publication-base")
+    id("convention.publication-android-lib")
+}
+
+publish {
+    artifactId.set("kaspresso")
 }
 
 dependencies {

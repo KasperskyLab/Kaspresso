@@ -72,13 +72,13 @@ publishing {
 signing {
     sign(publishing.publications)
 
-    val signingKeyId = providers.gradleProperty("kaspresso.gpg.keyid")
+    val signingKeyId = providers.gradleProperty("kaspresso.pgp.keyid")
         .forUseAtConfigurationTime()
         .orNull
-    val signingKey = providers.gradleProperty("kaspresso.gpg.key")
+    val signingKey = providers.gradleProperty("kaspresso.pgp.key")
         .forUseAtConfigurationTime()
-        .orNull
-    val signingPassword = providers.gradleProperty("kaspresso.gpg.password")
+        .orNull?.toFile()?.readText()
+    val signingPassword = providers.gradleProperty("kaspresso.pgp.password")
         .forUseAtConfigurationTime()
         .orNull
 
@@ -90,3 +90,5 @@ tasks.withType<Sign>().configureEach {
         gradle.taskGraph.hasTask(publishTask.get())
     }
 }
+
+fun String?.toFile() = if (this.isNullOrBlank()) null else File(this)
