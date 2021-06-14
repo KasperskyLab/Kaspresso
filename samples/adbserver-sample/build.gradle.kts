@@ -11,5 +11,5 @@ android {
 dependencies {
     implementation(libs.kotlinStdlib)
     implementation(libs.appcompat)
-    implementation(projects.adbServer.adbserverDevice) { isTransitive = false }
+    implementation(projects.adbServer.adbserverDevice)
 }
