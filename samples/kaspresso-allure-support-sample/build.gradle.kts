@@ -14,10 +14,6 @@ android {
     }
 }
 
-repositories {
-    maven { url = uri("https://dl.bintray.com/qameta/maven") }
-}
-
 dependencies {
     implementation(project(mapOf("path" to ":samples:kaspresso-sample-core")))
 
