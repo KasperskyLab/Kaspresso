@@ -40,6 +40,9 @@ truth = "com.google.truth:truth:1.0"
 runner = "androidx.test:runner:1.3.0"
 orchestrator = "androidx.test:orchestrator:1.3.0"
 
+okhttp = "com.squareup.okhttp3:okhttp:4.9.1"
+kotson = "com.github.salomonbrys.kotson:kotson:2.5.0"
+
 [bundles]
 espresso = ["espressoCore", "espressoWeb"]
 allure = ["allureCommons", "allureModel", "allureEspresso"]
