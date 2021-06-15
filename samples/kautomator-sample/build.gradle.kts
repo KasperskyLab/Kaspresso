@@ -14,8 +14,5 @@ dependencies {
     implementation(libs.material)
     implementation(libs.constraint)
 
-    androidTestImplementation(libs.uiAutomator)
-    androidTestImplementation(libs.androidXRules)
     androidTestImplementation(projects.kaspresso)
-    androidTestImplementation(projects.kautomator)
 }
