@@ -10,15 +10,15 @@ publish {
 dependencies {
     api(fileTree("libs").matching { include("*.jar") })
 
-    implementation(libs.kotlinStdlib)
-    implementation(libs.uiAutomator)
-    implementation(libs.androidXCore)
-    implementation(libs.androidXRules)
-    implementation(libs.kakao)
-    implementation(libs.gson)
-    implementation(libs.bundles.espresso)
+    api(projects.kautomator)
+    api(libs.kakao)
+    api(libs.bundles.espresso)
+    api(libs.uiAutomator)
+    api(libs.androidXCore)
+    api(libs.androidXRules)
 
-    implementation(projects.kautomator)
+    implementation(libs.kotlinStdlib)
+    implementation(libs.gson)
     implementation(projects.adbServer.adbserverDevice)
 
     testImplementation(libs.junit)
