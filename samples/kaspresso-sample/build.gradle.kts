@@ -20,13 +20,8 @@ dependencies {
     implementation(libs.constraint)
 
     androidTestImplementation(libs.runner)
-    androidTestImplementation(libs.androidXRules)
     androidTestImplementation(libs.junit)
-    androidTestImplementation(libs.espressoCore)
-    androidTestImplementation(libs.espressoWeb)
-    androidTestImplementation(libs.kakao)
     androidTestImplementation(projects.kaspresso)
-    androidTestImplementation(projects.kautomator)
 
     androidTestUtil(libs.orchestrator)
 }
