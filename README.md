@@ -1,7 +1,7 @@
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Kaspresso-green.svg?style=flat )](https://android-arsenal.com/details/1/7896)
 [![Android Weekly](https://img.shields.io/badge/Android%20Weekly-383-green.svg)](http://androidweekly.net/issues/issue-383)
 [![Android Weekly](https://img.shields.io/badge/Android%20Weekly-392-green.svg)](http://androidweekly.net/issues/issue-392)
-[![Download](https://api.bintray.com/packages/ruslanmingaliev/Kaspresso/Kaspresso/images/download.svg?version=1.2.0) ](https://bintray.com/ruslanmingaliev/Kaspresso/Kaspresso/1.2.0/link)
+[![MavenCentral](https://img.shields.io/maven-central/v/com.kaspersky.android-components/kaspresso)](https://search.maven.org/artifact/com.kaspersky.android-components/kaspresso)
 ![Build and Deploy](https://github.com/KasperskyLab/Kaspresso/workflows/Build%20and%20Deploy/badge.svg)
 [![Telegram](https://img.shields.io/static/v1?label=Telegram&message=RU&color=0088CC)](https://t.me/kaspresso)
 [![Telegram](https://img.shields.io/static/v1?label=Telegram&message=EN&color=0088CC)](https://t.me/kaspresso_en)
@@ -215,12 +215,12 @@ For all information check [Kaspresso wiki](/wiki/00_Home.md)
 ## Integration
 
 To integrate Kaspresso into your project:
-1. If the `jcenter` repository does not exist, include it to your root `build.gradle` file:
+1. If the `mavenCentral` repository does not exist, include it to your root `build.gradle` file:
 
 ```groovy
 allprojects {
     repositories {
-        jcenter()
+        mavenCentral()
     }
 }
 ```
@@ -229,7 +229,7 @@ allprojects {
 
 ```groovy
 dependencies {
-    androidTestImplementation 'com.kaspersky.android-components:kaspresso:1.2.0'
+    androidTestImplementation 'com.kaspersky.android-components:kaspresso:1.2.1'
 }
 ```
 
@@ -253,7 +253,7 @@ repositories {
 }
 
 dependencies {
-    androidTestImplementation 'com.kaspersky.android-components:kaspresso:1.2.1-SNAPSHOT'
+    androidTestImplementation 'com.kaspersky.android-components:kaspresso:1.2.2-SNAPSHOT'
 }
 ```
 
@@ -270,11 +270,15 @@ cd ~/Workspace/Kaspresso
 java -jar artifacts/adbserver-desktop.jar
 ```
 
-## Breaking changes in 1.2.0
-1. We've totally reworked AdbServer and Kaspresso 1.2.0 works only with new `artifacts/adbserver-desktop.jar`<br>
+## Breaking changes 
+### 1.2.0
+- We've totally reworked AdbServer and Kaspresso 1.2.0 works only with new `artifacts/adbserver-desktop.jar`<br>
 The old version `artifacts/desktop_1_1_0.jar` is also available for use with older versions of Kaspresso.
-2. If you use `device.logcat` in your tests, you should call `device.logcat.disableChatty` in the `before` section of your test.
+- If you use `device.logcat` in your tests, you should call `device.logcat.disableChatty` in the `before` section of your test.
 In previous version of Kaspresso, `device.logcat.disableChatty` was called automatically during initialization. This resulted in the need to always run AdbServer before tests.
+### 1.2.1
+- Kaspresso migrated to a new version of Kakao which has `io.github.kakaocup.kakao` package name. Replace all imports using command 
+`find . -type f \( -name "*.kt" -o -name "*.java" \) -print0 | xargs -0 sed -i '' -e 's/com.agoda/io.github.kakaocup/g'` or using global replacement tool in IDE.
 
 ## Contribution
 Kaspresso is an open source project, so you are welcome to contribute (see the [Contribution Guidelines](https://github.com/KasperskyLab/Kaspresso/blob/master/CONTRIBUTING.md)).

@@ -15,7 +15,6 @@ dependencyResolutionManagement {
     repositories {
         mavenCentral()
         google()
-        jcenter() // Remove after migration to mavenCentral
         maven { url = uri("https://kotlin.bintray.com/kotlinx") }
         maven { url = uri("https://dl.bintray.com/qameta/maven") }
     }
