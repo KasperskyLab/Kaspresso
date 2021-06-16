@@ -60,9 +60,9 @@ If you are using [Page Object pattern](https://martinfowler.com/bliki/PageObject
 `UiScreen` contains `UiView`, these are the Android Framework views where you want to do the interactions:
 ```Kotlin
 class FormScreen : UiScreen<FormScreen>() {
-    val phone = UiView { withId(this@FormScreen.packageName, "phone" }
-    val email = UiEditText { withId(this@FormScreen.packageName, "email_edit" }
-    val submit = UiButton { withId(this@FormScreen.packageName, "submit_button" }
+    val phone = UiView { withId(this@FormScreen.packageName, "phone") }
+    val email = UiEditText { withId(this@FormScreen.packageName, "email_edit") }
+    val submit = UiButton { withId(this@FormScreen.packageName, "submit_button") }
 }
 ```
 Kautomator provides different types depending on the type of view:
