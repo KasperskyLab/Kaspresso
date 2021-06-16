@@ -24,6 +24,5 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        jcenter()
     }
 }

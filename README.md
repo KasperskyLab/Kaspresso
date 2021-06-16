@@ -1,7 +1,6 @@
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Kaspresso-green.svg?style=flat )](https://android-arsenal.com/details/1/7896)
 [![Android Weekly](https://img.shields.io/badge/Android%20Weekly-383-green.svg)](http://androidweekly.net/issues/issue-383)
 [![Android Weekly](https://img.shields.io/badge/Android%20Weekly-392-green.svg)](http://androidweekly.net/issues/issue-392)
-[![Download](https://api.bintray.com/packages/ruslanmingaliev/Kaspresso/Kaspresso/images/download.svg?version=1.2.0) ](https://bintray.com/ruslanmingaliev/Kaspresso/Kaspresso/1.2.0/link)
 ![Build and Deploy](https://github.com/KasperskyLab/Kaspresso/workflows/Build%20and%20Deploy/badge.svg)
 [![Telegram](https://img.shields.io/static/v1?label=Telegram&message=RU&color=0088CC)](https://t.me/kaspresso)
 [![Telegram](https://img.shields.io/static/v1?label=Telegram&message=EN&color=0088CC)](https://t.me/kaspresso_en)
@@ -215,12 +214,12 @@ For all information check [Kaspresso wiki](/wiki/00_Home.md)
 ## Integration
 
 To integrate Kaspresso into your project:
-1. If the `jcenter` repository does not exist, include it to your root `build.gradle` file:
+1. If the `mavenCentral` repository does not exist, include it to your root `build.gradle` file:
 
 ```groovy
 allprojects {
     repositories {
-        jcenter()
+        mavenCentral()
     }
 }
 ```
@@ -229,7 +228,7 @@ allprojects {
 
 ```groovy
 dependencies {
-    androidTestImplementation 'com.kaspersky.android-components:kaspresso:1.2.0'
+    androidTestImplementation 'com.kaspersky.android-components:kaspresso:1.2.1'
 }
 ```
 
@@ -253,7 +252,7 @@ repositories {
 }
 
 dependencies {
-    androidTestImplementation 'com.kaspersky.android-components:kaspresso:1.2.1-SNAPSHOT'
+    androidTestImplementation 'com.kaspersky.android-components:kaspresso:1.2.2-SNAPSHOT'
 }
 ```
 
