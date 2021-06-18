@@ -3,11 +3,12 @@ package com.kaspersky.kaspressample.simple_tests
 import android.Manifest
 import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
-import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.R
 import com.kaspersky.kaspressample.screen.MainScreen
 import com.kaspersky.kaspressample.screen.SimpleScreen
+import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
+import com.kaspersky.kaspresso_sample_core.MainActivity
 import org.junit.Rule
 import org.junit.Test
 
@@ -19,7 +20,7 @@ import org.junit.Test
  * - screenshots in the device
  * * Also you can observe the test dsl simplifying a writing of any test
  */
-class SimpleTest : TestCase() {
+class SimpleTest : TestCase(Kaspresso.Builder.advanced()) {
 
     @get:Rule
     val runtimePermissionRule: GrantPermissionRule = GrantPermissionRule.grant(

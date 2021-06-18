@@ -24,7 +24,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
 
-        <activity android:name=".MainActivity">
+        <activity android:name="com.kaspersky.kaspresso_sample_core.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -33,48 +33,48 @@
         </activity>
 
         <activity
-            android:name=".simple.SimpleActivity"
+            android:name="com.kaspersky.kaspresso_sample_core.simple.SimpleActivity"
             android:label="@string/simple_fragment_title"/>
 
         <activity
-            android:name=".measure.MeasureActivity"
+            android:name="com.kaspersky.kaspresso_sample_core.measure.MeasureActivity"
             android:label="@string/simple_fragment_title"/>
 
         <activity
-            android:name=".web.WebViewActivity"
+            android:name="com.kaspersky.kaspresso_sample_core.web.WebViewActivity"
             android:label="@string/main_screen_webview_button"
             android:theme="@style/Theme.AppCompat.NoActionBar"/>
 
         <activity
-            android:name=".flaky.CommonFlakyActivity"
+            android:name="com.kaspersky.kaspresso_sample_core.flaky.CommonFlakyActivity"
             android:label="@string/main_screen_scroll_view_sample_button"/>
 
         <activity
-            android:name=".continuously.ContinuouslySampleActivity"
+            android:name="com.kaspersky.kaspresso_sample_core.continuously.ContinuouslySampleActivity"
             android:label="@string/main_screen_continuously_sample_button"/>
 
         <activity
-            android:name=".docloc.FragmentTestActivity"
+            android:name="com.kaspersky.kaspresso_sample_core.docloc.FragmentTestActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar"/>
 
         <activity
-            android:name=".device.DeviceSampleActivity"
+            android:name="com.kaspersky.kaspresso_sample_core.device.DeviceSampleActivity"
             android:label="@string/device_sample_title"/>
 
         <activity
-            android:name=".upgrade.UpgradeTestActivity"
+            android:name="com.kaspersky.kaspresso_sample_core.upgrade.UpgradeTestActivity"
             android:label="@string/upgrade_title"/>
 
         <activity
-            android:name=".compose.ComplexComposeSampleActivity"
+            android:name="com.kaspersky.kaspresso_sample_core.compose.ComplexComposeSampleActivity"
             android:label="@string/main_screen_complex_compose_sample_button"/>
 
         <activity
-            android:name=".idlingwait.WaitForIdleActivity"
+            android:name="com.kaspersky.kaspresso_sample_core.idlingwait.WaitForIdleActivity"
             android:label="@string/main_screen_idlewaiting_sample_button"/>
 
         <service
-            android:name=".device.DeviceSampleAccessibilityService"
+            android:name="com.kaspersky.kaspresso_sample_core.device.DeviceSampleAccessibilityService"
             android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"
             android:label="@string/device_sample_accessibility_service_title">
             <intent-filter>

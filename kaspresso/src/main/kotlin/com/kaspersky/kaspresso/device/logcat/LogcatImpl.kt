@@ -60,6 +60,32 @@ class LogcatImpl(
         Thread.sleep(DEFAULT_LOGCAT_CLEAR_DELAY)
     }
 
+    override fun dumpLogcat(
+        file: File,
+        tags: List<String>?,
+        excludePattern: String?,
+        excludePatternIsIgnoreCase: Boolean,
+        includePattern: String?,
+        includePatternIsIgnoreCase: Boolean,
+        buffer: Logcat.Buffer
+    ) {
+        val command = prepareCommand(
+            tags,
+            excludePattern,
+            excludePatternIsIgnoreCase,
+            includePattern,
+            includePatternIsIgnoreCase,
+            buffer,
+            null
+        )
+        val process = executeCommand(command)
+        try {
+            file.outputStream().use { process.inputStream.copyTo(it) }
+        } finally {
+            process.destroy()
+        }
+    }
+
     /**
      * Get logcat dump as list of strings
      *
@@ -121,6 +147,7 @@ class LogcatImpl(
         readingBlock: (logcatRow: String) -> Boolean
     ): Boolean {
         val command = prepareCommand(
+            null,
             excludePattern,
             excludePatternIsIgnoreCase,
             includePattern,
@@ -197,6 +224,7 @@ class LogcatImpl(
      * Prepare logcat command for execution over "sh -c COMMAND"
      */
     private fun prepareCommand(
+        tags: List<String>?,
         excludePattern: String?,
         excludePatternIsIgnoreCase: Boolean,
         includePattern: String?,
@@ -207,6 +235,9 @@ class LogcatImpl(
         var command = "logcat -b ${buffer.bufferName} -d "
         if (rowLimit != null && rowLimit > 0) {
             command += "-m $rowLimit "
+        }
+        if (!tags.isNullOrEmpty()) {
+            command += "-s ${tags.joinToString(separator = "\",\"", prefix = "\"", postfix = "\"")}"
         }
         if (excludePattern != null) {
             command += """| grep -${if (excludePatternIsIgnoreCase) "i" else ""}Ev '${excludePattern.replace(

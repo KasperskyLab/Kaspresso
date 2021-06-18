@@ -6,8 +6,8 @@ import android.provider.Settings
 import android.provider.Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES
 import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
-import com.kaspersky.kaspressample.device.DeviceSampleAccessibilityService
-import com.kaspersky.kaspressample.device.DeviceSampleActivity
+import com.kaspersky.kaspresso_sample_core.device.DeviceSampleAccessibilityService
+import com.kaspersky.kaspresso_sample_core.device.DeviceSampleActivity
 import com.kaspersky.kaspressample.utils.SafeAssert.assertFalseSafely
 import com.kaspersky.kaspressample.utils.SafeAssert.assertTrueSafely
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase

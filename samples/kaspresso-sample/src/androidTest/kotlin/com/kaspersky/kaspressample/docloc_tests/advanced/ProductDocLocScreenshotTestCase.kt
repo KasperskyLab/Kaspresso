@@ -1,15 +1,12 @@
 package com.kaspersky.kaspressample.docloc_tests.advanced
 
 import androidx.test.rule.ActivityTestRule
-import com.kaspersky.kaspressample.docloc.FragmentTestActivity
+import com.kaspersky.kaspresso_sample_core.docloc.FragmentTestActivity
 import com.kaspersky.kaspresso.testcases.api.testcase.DocLocScreenshotTestCase
-import java.io.File
 import org.junit.Rule
 
-open class ProductDocLocScreenshotTestCase : DocLocScreenshotTestCase(
-    screenshotsDirectory = File("screenshots"),
-    locales = "en,ru"
-) {
+open class ProductDocLocScreenshotTestCase : DocLocScreenshotTestCase(locales = "en,ru") {
+
     @get:Rule
     val activityTestRule = ActivityTestRule(FragmentTestActivity::class.java, false, true)
 

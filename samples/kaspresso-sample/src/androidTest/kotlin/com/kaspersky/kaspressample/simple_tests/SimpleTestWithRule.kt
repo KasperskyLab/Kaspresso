@@ -3,11 +3,11 @@ package com.kaspersky.kaspressample.simple_tests
 import android.Manifest
 import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
-import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.R
 import com.kaspersky.kaspressample.screen.MainScreen
 import com.kaspersky.kaspressample.screen.SimpleScreen
 import com.kaspersky.kaspresso.testcases.api.testcaserule.TestCaseRule
+import com.kaspersky.kaspresso_sample_core.MainActivity
 import org.junit.Rule
 import org.junit.Test
 

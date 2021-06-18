@@ -3,7 +3,7 @@ package com.kaspersky.kaspressample.external_screens
 import com.kaspersky.components.kautomator.component.scroll.UiScrollView
 import com.kaspersky.components.kautomator.component.text.UiButton
 import com.kaspersky.kaspressample.R
-import com.kaspersky.kaspressample.flaky.CommonFlakyActivity
+import com.kaspersky.kaspresso_sample_core.flaky.CommonFlakyActivity
 
 object UiCommonFlakyScreen : UiSampleScreen<UiCommonFlakyScreen>() {
 

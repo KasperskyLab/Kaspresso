@@ -3,7 +3,7 @@ package com.kaspersky.kaspressample.external_screens
 import com.kaspersky.components.kautomator.component.edit.UiEditText
 import com.kaspersky.components.kautomator.component.text.UiButton
 import com.kaspersky.kaspressample.R
-import com.kaspersky.kaspressample.simple.SimpleActivity
+import com.kaspersky.kaspresso_sample_core.simple.SimpleActivity
 
 object UiSimpleScreen : UiSampleScreen<UiSimpleScreen>() {
 
