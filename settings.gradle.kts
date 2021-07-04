@@ -23,7 +23,7 @@ includeBuild("build-conventions")
 
 include(
     ":allure-model",
-//    ":allure-interceptors",
+    ":allure-interceptors",
 
     ":adb-server:adbserver-command-types",
     ":adb-server:adbserver-common",
