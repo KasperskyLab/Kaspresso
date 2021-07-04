@@ -9,5 +9,5 @@ publish {
 
 dependencies {
     compileOnly(projects.kaspresso)
-    api(libs.bundles.allure)
+    implementation(libs.bundles.allure)
 }
