@@ -4,4 +4,5 @@ plugins {
 
 dependencies {
     compileOnly(projects.kaspresso)
+    api(libs.bundles.allure)
 }
