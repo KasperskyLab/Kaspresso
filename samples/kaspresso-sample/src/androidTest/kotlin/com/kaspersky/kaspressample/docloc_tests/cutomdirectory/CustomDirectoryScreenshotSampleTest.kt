@@ -10,7 +10,6 @@ import com.kaspersky.kaspresso.annotations.ScreenShooterTest
 import com.kaspersky.kaspresso.testcases.api.testcase.DocLocScreenshotTestCase
 import org.junit.Rule
 import org.junit.Test
-import java.io.File
 
 /**
  * An example of how to change default screenshots directories and file names.
@@ -19,9 +18,6 @@ import java.io.File
  * See [FlatDirectoryProvider] and [AutoNumeratedNameProvider] implementations.
  */
 class CustomDirectoryScreenshotSampleTest : DocLocScreenshotTestCase(
-    screenshotsDirectory = File("custom_directory"),
-    screenshotDirectoryProvider = FlatDirectoryProvider,
-    screenshotNameProvider = AutoNumeratedNameProvider(),
     locales = "en,ru"
 ) {
 

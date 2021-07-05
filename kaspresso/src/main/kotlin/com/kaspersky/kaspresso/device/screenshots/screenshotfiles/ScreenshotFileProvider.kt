@@ -1,5 +1,6 @@
 package com.kaspersky.kaspresso.device.screenshots.screenshotfiles
 
+import com.kaspersky.kaspresso.files.TestMethod
 import java.io.File
 
 internal class ScreenshotFileProvider(

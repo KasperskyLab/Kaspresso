@@ -60,6 +60,32 @@ class LogcatImpl(
         Thread.sleep(DEFAULT_LOGCAT_CLEAR_DELAY)
     }
 
+    override fun dumpLogcat(
+        file: File,
+        tags: List<String>?,
+        excludePattern: String?,
+        excludePatternIsIgnoreCase: Boolean,
+        includePattern: String?,
+        includePatternIsIgnoreCase: Boolean,
+        buffer: Logcat.Buffer
+    ) {
+        val command = prepareCommand(
+            tags = tags,
+            excludePattern = excludePattern,
+            excludePatternIsIgnoreCase = excludePatternIsIgnoreCase,
+            includePattern = includePattern,
+            includePatternIsIgnoreCase = includePatternIsIgnoreCase,
+            buffer = buffer,
+            rowLimit = null
+        )
+        val process = executeCommand(command)
+        try {
+            file.outputStream().use { process.inputStream.copyTo(it) }
+        } finally {
+            process.destroy()
+        }
+    }
+
     /**
      * Get logcat dump as list of strings
      *
@@ -121,12 +147,13 @@ class LogcatImpl(
         readingBlock: (logcatRow: String) -> Boolean
     ): Boolean {
         val command = prepareCommand(
-            excludePattern,
-            excludePatternIsIgnoreCase,
-            includePattern,
-            includePatternIsIgnoreCase,
-            buffer,
-            rowLimit
+            tags = null,
+            excludePattern = excludePattern,
+            excludePatternIsIgnoreCase = excludePatternIsIgnoreCase,
+            includePattern = includePattern,
+            includePatternIsIgnoreCase = includePatternIsIgnoreCase,
+            buffer = buffer,
+            rowLimit = rowLimit
         )
         val process = executeCommand(command)
         val logcatStream = InputStreamReader(process.inputStream)
@@ -197,6 +224,7 @@ class LogcatImpl(
      * Prepare logcat command for execution over "sh -c COMMAND"
      */
     private fun prepareCommand(
+        tags: List<String>? = null,
         excludePattern: String?,
         excludePatternIsIgnoreCase: Boolean,
         includePattern: String?,

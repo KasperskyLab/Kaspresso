@@ -1,5 +1,7 @@
 package com.kaspersky.kaspresso.device.screenshots.screenshotfiles
 
+import com.kaspersky.kaspresso.files.TestMethod
+
 /**
  * Provides a directory for screenshots of a separate test
  */

@@ -8,8 +8,6 @@ publish {
 }
 
 dependencies {
-    api(fileTree("libs").matching { include("*.jar") })
-
     api(projects.kautomator)
     api(libs.kakao)
     api(libs.bundles.espresso)
