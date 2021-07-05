@@ -9,9 +9,11 @@ import java.util.UUID
 
 class AllureMapperStepInterceptor : StepWatcherInterceptor {
 
-    private var _uuid: String? = null
-    private val uuid: String = requireNotNull(_uuid)
     private val lifecycle = AllureAndroidLifecycle
+
+    private var _uuid: String? = null
+    private val uuid: String
+        get() = requireNotNull(_uuid)
 
     override fun interceptBefore(stepInfo: StepInfo) {
         _uuid = UUID.randomUUID().toString()
