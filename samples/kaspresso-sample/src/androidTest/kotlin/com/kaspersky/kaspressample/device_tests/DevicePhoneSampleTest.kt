@@ -39,16 +39,16 @@ class DevicePhoneSampleTest : TestCase() {
         run {
 
             step("Emulate a call") {
-                device.phone.emulateCall(PHONE_NUMBER)
+                device!!.phone.emulateCall(PHONE_NUMBER)
                 Screen.idle(CALL_DURATION)
-                device.phone.cancelCall(PHONE_NUMBER)
+                device!!.phone.cancelCall(PHONE_NUMBER)
                 Screen.idle(CONTENT_UPDATE_DELAY)
 
                 assertEquals(PHONE_NUMBER, getLastCallPhoneNumber())
             }
 
             step("Receive SMS message") {
-                device.phone.receiveSms(
+                device!!.phone.receiveSms(
                     PHONE_NUMBER,
                     SMS_MESSAGE_TEXT
                 )
@@ -63,7 +63,7 @@ class DevicePhoneSampleTest : TestCase() {
     }
 
     private fun BaseTestContext.getLastCallPhoneNumber(): String? {
-        val cursor = device.targetContext.contentResolver.query(
+        val cursor = device!!.targetContext.contentResolver.query(
             CallLog.Calls.CONTENT_URI, null,
             null, null, CallLog.Calls.DATE + " DESC"
         )
@@ -78,7 +78,7 @@ class DevicePhoneSampleTest : TestCase() {
     }
 
     private fun BaseTestContext.getLastSmsInfo(): SmsInfo? {
-        val cursor = device.targetContext.contentResolver.query(
+        val cursor = device!!.targetContext.contentResolver.query(
             Telephony.Sms.Inbox.CONTENT_URI,
             arrayOf(Telephony.TextBasedSmsColumns.ADDRESS, Telephony.TextBasedSmsColumns.BODY),
             null,

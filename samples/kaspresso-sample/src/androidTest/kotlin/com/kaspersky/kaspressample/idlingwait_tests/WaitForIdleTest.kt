@@ -15,8 +15,7 @@ import org.junit.Test
 
 class WaitForIdleTest : TestCase(
     kaspressoBuilder = Kaspresso.Builder.simple {
-        kautomatorWaitForIdleSettings = KautomatorWaitForIdleSettings.boost()
-    }
+        kautomatorWaitForIdleSettings = KautomatorWaitForIdleSettings.boost() }
 ) {
 
     @get:Rule
@@ -46,7 +45,7 @@ class WaitForIdleTest : TestCase(
                 UiWaitForIdleScreen {
                     edit {
                         isDisplayed()
-                        containsText(device.targetContext.getString(R.string.idlewaiting_fragment_text_edittext))
+                        containsText(device!!.targetContext.getString(R.string.idlewaiting_fragment_text_edittext))
                     }
                 }
             }

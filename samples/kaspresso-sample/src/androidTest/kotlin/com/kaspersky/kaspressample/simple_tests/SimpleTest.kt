@@ -36,7 +36,7 @@ class SimpleTest : TestCase() {
             step("Open Simple Screen") {
                 activityTestRule.launchActivity(null)
                 testLogger.i("I am testLogger")
-                device.screenshots.take("Additional_screenshot")
+                device!!.screenshots.take("Additional_screenshot")
                 MainScreen {
                     simpleButton {
                         isVisible()

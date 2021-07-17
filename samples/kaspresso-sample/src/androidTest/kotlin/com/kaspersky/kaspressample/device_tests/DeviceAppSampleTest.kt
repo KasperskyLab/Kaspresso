@@ -40,12 +40,12 @@ class DeviceAppSampleTest : TestCase() {
     fun test() {
         run {
             step("Install hello world apk") {
-                device.apps.install(TEST_APK_FILE_RELATIVE_PATH)
+                device!!.apps.install(TEST_APK_FILE_RELATIVE_PATH)
                 assertTrue(isAppInstalled(adbServer, TEST_APK_PACKAGE_NAME))
             }
 
             step("Delete the application") {
-                device.apps.uninstall(TEST_APK_PACKAGE_NAME)
+                device!!.apps.uninstall(TEST_APK_PACKAGE_NAME)
                 assertFalse(isAppInstalled(adbServer, TEST_APK_PACKAGE_NAME))
             }
         }

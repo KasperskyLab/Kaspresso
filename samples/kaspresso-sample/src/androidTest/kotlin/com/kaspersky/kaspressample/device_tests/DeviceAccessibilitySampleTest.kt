@@ -40,21 +40,21 @@ class DeviceAccessibilitySampleTest : TestCase() {
         assumeTrue(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
 
         before {
-            device.accessibility.disable()
+            device!!.accessibility.disable()
         }.after {
-            device.accessibility.disable()
+            device!!.accessibility.disable()
         }.run {
 
             step("Enable accessibility service") {
-                device.accessibility.enable(
-                    device.targetContext.packageName,
+                device!!.accessibility.enable(
+                    device!!.targetContext.packageName,
                     SERVICE_CLASS_NAME
                 )
                 assertTrueSafely { isAccessibilityServiceEnabled() }
             }
 
             step("Disable accessibility service") {
-                device.accessibility.disable()
+                device!!.accessibility.disable()
                 assertFalseSafely { isAccessibilityServiceEnabled() }
             }
         }
@@ -62,7 +62,7 @@ class DeviceAccessibilitySampleTest : TestCase() {
 
     private fun BaseTestContext.isAccessibilityServiceEnabled(): Boolean {
         return Settings.Secure.getString(
-            device.targetContext.contentResolver,
+            device!!.targetContext.contentResolver,
             ENABLED_ACCESSIBILITY_SERVICES
         )?.contains(SERVICE_CLASS_NAME) ?: false
     }

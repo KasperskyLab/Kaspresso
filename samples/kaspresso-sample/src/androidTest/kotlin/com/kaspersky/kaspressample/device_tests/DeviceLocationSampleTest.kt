@@ -61,26 +61,26 @@ class DeviceLocationSampleTest : TestCase() {
     @Test
     fun locationSampleTest() {
         before {
-            device.location.enableGps()
-            manager = device.targetContext.getSystemService(LocationManager::class.java)
+            device!!.location.enableGps()
+            manager = device!!.targetContext.getSystemService(LocationManager::class.java)
         }.after {
-            device.location.enableGps()
+            device!!.location.enableGps()
         }.run {
 
             step("Disable GPS") {
-                device.location.disableGps()
+                device!!.location.disableGps()
                 Screen.idle(GPS_SWITCH_DELAY)
                 assertFalse(manager.isProviderEnabled(LocationManager.GPS_PROVIDER))
             }
 
             step("Enable GPS") {
-                device.location.enableGps()
+                device!!.location.enableGps()
                 Screen.idle(GPS_SWITCH_DELAY)
                 assertTrue(manager.isProviderEnabled(LocationManager.GPS_PROVIDER))
             }
 
             step("Set fake location") {
-                device.location.setLocation(
+                device!!.location.setLocation(
                     MUNICH_LOCATION_LAT,
                     MUNICH_LOCATION_LNG
                 )

@@ -38,34 +38,34 @@ class DeviceNetworkSampleTest : TestCase() {
     @Test
     fun networkSampleTest() {
         before {
-            device.network.enable()
+            device!!.network.enable()
         }.after {
-            device.network.enable()
+            device!!.network.enable()
         }.run {
 
             step("Disable network") {
-                device.network.disable()
+                device!!.network.disable()
                 assertFalseSafely { isDataConnected() }
                 checkWifi(desiredState = false)
             }
 
             step("Enable network") {
-                device.network.enable()
+                device!!.network.enable()
                 assertTrueSafely { isDataConnected() }
                 checkWifi(desiredState = true)
             }
 
             step("Toggle WiFi") {
-                device.network.toggleWiFi(false)
+                device!!.network.toggleWiFi(false)
                 checkWifi(desiredState = false)
-                device.network.toggleWiFi(true)
+                device!!.network.toggleWiFi(true)
                 checkWifi(desiredState = true)
             }
 
             step("Toggle Mobile data") {
-                device.network.toggleMobileData(false)
+                device!!.network.toggleMobileData(false)
                 assertFalseSafely { isDataConnected() }
-                device.network.toggleMobileData(true)
+                device!!.network.toggleMobileData(true)
                 assertTrueSafely { isDataConnected() }
             }
         }
@@ -75,7 +75,7 @@ class DeviceNetworkSampleTest : TestCase() {
         if (currentOsVersion < Build.VERSION_CODES.N_MR1) isDataConnectedInLowAndroid() else isDataConnectedInHighAndroid()
 
     private fun BaseTestContext.isDataConnectedInHighAndroid(): Boolean {
-        val manager = device.context.getSystemService(ConnectivityManager::class.java) as ConnectivityManager
+        val manager = device!!.context.getSystemService(ConnectivityManager::class.java) as ConnectivityManager
         val cdl = CountDownLatch(1)
         var isConnected = false
 
@@ -106,11 +106,11 @@ class DeviceNetworkSampleTest : TestCase() {
 
     private fun BaseTestContext.isDataConnectedInLowAndroid(): Boolean {
         val telephonyManager: TelephonyManager? =
-            device.context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager?
+            device!!.context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager?
         if (telephonyManager?.simState != TelephonyManager.SIM_STATE_READY) {
             return false
         }
-        return Settings.Global.getInt(device.context.contentResolver, "mobile_data", 0) == 1
+        return Settings.Global.getInt(device!!.context.contentResolver, "mobile_data", 0) == 1
     }
 
     private fun BaseTestContext.checkWifi(desiredState: Boolean) {
@@ -126,6 +126,6 @@ class DeviceNetworkSampleTest : TestCase() {
     }
 
     private fun BaseTestContext.isWiFiEnabled(): Boolean =
-        (device.context.getSystemService(Context.WIFI_SERVICE) as? WifiManager)?.isWifiEnabled
+        (device!!.context.getSystemService(Context.WIFI_SERVICE) as? WifiManager)?.isWifiEnabled
             ?: throw IllegalStateException("WifiManager is unavailable")
 }

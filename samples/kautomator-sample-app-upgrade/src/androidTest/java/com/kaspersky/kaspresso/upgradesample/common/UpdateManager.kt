@@ -10,9 +10,9 @@ object UpdateManager {
     private const val TIMEOUT = 5_000L
 
     fun BaseTestContext.installAndLaunchMainApp() {
-        device.apps.install(OLD_VERSION_FILE)
+        device!!.apps.install(OLD_VERSION_FILE)
 
-        with(device.targetContext) {
+        with(device!!.targetContext) {
             val intent = packageManager.getLaunchIntentForPackage(MAIN_APP_PACKAGE_ID)
             startActivity(intent)
         }
@@ -23,7 +23,7 @@ object UpdateManager {
     fun BaseTestContext.updateAndLaunchMainApp() {
         adbServer.performAdb("install -r $NEW_VERSION_FILE")
 
-        with(device.targetContext) {
+        with(device!!.targetContext) {
             val intent = packageManager.getLaunchIntentForPackage(MAIN_APP_PACKAGE_ID)
             startActivity(intent)
         }
@@ -32,6 +32,6 @@ object UpdateManager {
     }
 
     fun BaseTestContext.uninstallMainApp() {
-        device.apps.uninstallIfExists(MAIN_APP_PACKAGE_ID)
+        device!!.apps.uninstallIfExists(MAIN_APP_PACKAGE_ID)
     }
 }

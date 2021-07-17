@@ -26,11 +26,11 @@ class DeviceActivitiesSampleTest : TestCase() {
         run {
 
             step("Check if MainActivity is currently resumed") {
-                device.activities.isCurrent(MainActivity::class.java)
+                device!!.activities.isCurrent(MainActivity::class.java)
             }
 
             step("Check if currently resumed activity is an instance of MainActivity") {
-                assertThat(device.activities.getResumed(), instanceOf(MainActivity::class.java))
+                assertThat(device!!.activities.getResumed(), instanceOf(MainActivity::class.java))
             }
         }
     }
