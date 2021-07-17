@@ -1,72 +1,32 @@
 package com.kaspersky.kaspresso.kaspresso
 
-import android.app.Instrumentation
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.FailureHandler
-import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.Configurator
 import androidx.test.uiautomator.UiDevice
-import io.github.kakaocup.kakao.Kakao
-import com.kaspersky.adbserver.common.log.logger.LogLevel
-import com.kaspersky.components.kautomator.intercept.interaction.UiDeviceInteraction
-import com.kaspersky.components.kautomator.intercept.interaction.UiObjectInteraction
 import com.kaspersky.kaspresso.device.Device
 import com.kaspersky.kaspresso.device.accessibility.Accessibility
-import com.kaspersky.kaspresso.device.accessibility.AccessibilityImpl
 import com.kaspersky.kaspresso.device.activities.Activities
-import com.kaspersky.kaspresso.device.activities.ActivitiesImpl
 import com.kaspersky.kaspresso.device.apps.Apps
-import com.kaspersky.kaspresso.device.apps.AppsImpl
 import com.kaspersky.kaspresso.device.exploit.Exploit
-import com.kaspersky.kaspresso.device.exploit.ExploitImpl
 import com.kaspersky.kaspresso.device.files.Files
-import com.kaspersky.kaspresso.device.files.FilesImpl
 import com.kaspersky.kaspresso.device.keyboard.Keyboard
-import com.kaspersky.kaspresso.device.keyboard.KeyboardImpl
 import com.kaspersky.kaspresso.device.languages.Language
-import com.kaspersky.kaspresso.device.languages.LanguageImpl
 import com.kaspersky.kaspresso.device.location.Location
-import com.kaspersky.kaspresso.device.location.LocationImpl
 import com.kaspersky.kaspresso.device.logcat.Logcat
-import com.kaspersky.kaspresso.device.logcat.LogcatImpl
 import com.kaspersky.kaspresso.device.network.Network
-import com.kaspersky.kaspresso.device.network.NetworkImpl
 import com.kaspersky.kaspresso.device.permissions.HackPermissions
-import com.kaspersky.kaspresso.device.permissions.HackPermissionsImpl
 import com.kaspersky.kaspresso.device.permissions.Permissions
-import com.kaspersky.kaspresso.device.permissions.PermissionsImpl
 import com.kaspersky.kaspresso.device.phone.Phone
-import com.kaspersky.kaspresso.device.phone.PhoneImpl
 import com.kaspersky.kaspresso.device.screenshots.Screenshots
-import com.kaspersky.kaspresso.device.screenshots.ScreenshotsImpl
-import com.kaspersky.kaspresso.device.screenshots.screenshotfiles.DefaultScreenshotDirectoryProvider
-import com.kaspersky.kaspresso.device.screenshots.screenshotfiles.DefaultScreenshotNameProvider
-import com.kaspersky.kaspresso.device.screenshots.screenshotmaker.CombinedScreenshotMaker
-import com.kaspersky.kaspresso.device.screenshots.screenshotmaker.ExternalScreenshotMaker
-import com.kaspersky.kaspresso.device.screenshots.screenshotmaker.InternalScreenshotMaker
 import com.kaspersky.kaspresso.device.server.AdbServer
-import com.kaspersky.kaspresso.device.server.AdbServerImpl
 import com.kaspersky.kaspresso.failure.LoggingFailureHandler
 import com.kaspersky.kaspresso.idlewaiting.KautomatorWaitForIdleSettings
 import com.kaspersky.kaspresso.interceptors.behavior.DataBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.ViewBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.WebBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.behavior.impl.autoscroll.AutoScrollViewBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.behavior.impl.autoscroll.AutoScrollWebBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.behavior.impl.flakysafety.FlakySafeDataBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.behavior.impl.flakysafety.FlakySafeViewBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.behavior.impl.flakysafety.FlakySafeWebBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.behavior.impl.systemsafety.SystemDialogSafetyDataBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.behavior.impl.systemsafety.SystemDialogSafetyViewBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.behavior.impl.systemsafety.SystemDialogSafetyWebBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.DeviceBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.ObjectBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.autoscroll.AutoScrollObjectBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.flakysafety.FlakySafeDeviceBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.flakysafety.FlakySafeObjectBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.loader.UiObjectLoaderBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.systemsafety.SystemDialogSafetyDeviceBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.systemsafety.SystemDialogSafetyObjectBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.tolibrary.LibraryInterceptorsInjector.injectKaspressoInKakao
 import com.kaspersky.kaspresso.interceptors.tolibrary.LibraryInterceptorsInjector.injectKaspressoInKautomator
 import com.kaspersky.kaspresso.interceptors.tolibrary.kautomator.KautomatorDeviceInterceptor
@@ -93,13 +53,10 @@ import com.kaspersky.kaspresso.interceptors.watcher.view.impl.logging.LoggingVie
 import com.kaspersky.kaspresso.interceptors.watcher.view.impl.logging.LoggingWebAssertionWatcherInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.logger.UiTestLoggerImpl
-import com.kaspersky.kaspresso.params.AutoScrollParams
-import com.kaspersky.kaspresso.params.ContinuouslyParams
-import com.kaspersky.kaspresso.params.FlakySafetyParams
-import com.kaspersky.kaspresso.params.Params
-import com.kaspersky.kaspresso.params.StepParams
+import com.kaspersky.kaspresso.params.*
 import com.kaspersky.kaspresso.report.impl.AllureReportWriter
 import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
+import io.github.kakaocup.kakao.Kakao
 
 /**
  * The storage of all Kaspresso preferences and entities, such as [AdbServer], [Device] and different interceptors.
@@ -107,22 +64,24 @@ import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
 data class Kaspresso(
     internal val libLogger: UiTestLogger,
     internal val testLogger: UiTestLogger,
-    internal val adbServer: AdbServer,
-    internal val device: Device,
     internal val params: Params,
     internal val viewActionWatcherInterceptors: List<ViewActionWatcherInterceptor>,
     internal val viewAssertionWatcherInterceptors: List<ViewAssertionWatcherInterceptor>,
     internal val atomWatcherInterceptors: List<AtomWatcherInterceptor>,
     internal val webAssertionWatcherInterceptors: List<WebAssertionWatcherInterceptor>,
-    internal val objectWatcherInterceptors: List<ObjectWatcherInterceptor>,
-    internal val deviceWatcherInterceptors: List<DeviceWatcherInterceptor>,
     internal val viewBehaviorInterceptors: List<ViewBehaviorInterceptor>,
     internal val dataBehaviorInterceptors: List<DataBehaviorInterceptor>,
     internal val webBehaviorInterceptors: List<WebBehaviorInterceptor>,
+    internal val stepWatcherInterceptors: List<StepWatcherInterceptor>,
+    internal val testRunWatcherInterceptors: List<TestRunWatcherInterceptor>,
+
+    //Kautomator dependent
+    internal val adbServer: AdbServer,
+    internal val device: Device?,
+    internal val objectWatcherInterceptors: List<ObjectWatcherInterceptor>,
+    internal val deviceWatcherInterceptors: List<DeviceWatcherInterceptor>,
     internal val objectBehaviorInterceptors: List<ObjectBehaviorInterceptor>,
     internal val deviceBehaviorInterceptors: List<DeviceBehaviorInterceptor>,
-    internal val stepWatcherInterceptors: List<StepWatcherInterceptor>,
-    internal val testRunWatcherInterceptors: List<TestRunWatcherInterceptor>
 ) {
 
     companion object {
@@ -174,7 +133,7 @@ data class Kaspresso(
              * @return the new instance of [Builder].
              */
             @Deprecated("Use `advanced()` builder.", ReplaceWith("Kaspresso.Builder.advanced(customize)"))
-            fun default(customize: Builder.() -> Unit = {}): Builder = advanced(customize)
+            fun default(sharedTest: Boolean = false, customize: Builder.() -> Unit = {}): Builder = advanced(sharedTest, customize)
 
             /**
              * Simple (preconfigured with logging and flaky-safe features) [Builder] for test environment configuration.
@@ -211,9 +170,10 @@ data class Kaspresso(
              *
              * @return the new instance of [Builder].
              */
-            fun simple(customize: Builder.() -> Unit = {}): Builder {
+            fun simple(sharedTest: Boolean = false, customize: Builder.() -> Unit = {}): Builder {
                 return Builder().apply {
 
+                    kautomatorConfig = KautomatorConfigResolver.build(sharedTest)
                     customize.invoke(this)
                     postInitVariables()
                     postDefaultInitInterceptors()
@@ -257,8 +217,9 @@ data class Kaspresso(
              *
              * @return the new instance of [Builder].
              */
-            fun advanced(customize: Builder.() -> Unit = {}): Builder {
-                return simple(customize).apply {
+            fun advanced(sharedTest: Boolean = false, customize: Builder.() -> Unit = {}): Builder {
+                return simple(sharedTest, customize).apply {
+                    kautomatorConfig = KautomatorConfigResolver.build(sharedTest)
                     stepWatcherInterceptors.add(ScreenshotStepWatcherInterceptor(screenshots))
                     testRunWatcherInterceptors.add(
                         TestRunnerScreenshotWatcherInterceptor(
@@ -281,61 +242,6 @@ data class Kaspresso(
          */
         lateinit var libLogger: UiTestLogger
 
-        /**
-         * Holds an implementation of [UiTestLogger] interface for external developer's usage in tests.
-         * If it was not specified, the default implementation with default tag is used.
-         */
-        lateinit var testLogger: UiTestLogger
-
-        /**
-         * Holds an instance of [Instrumentation] class.
-         * The public access was set up just for more convenient way to use.
-         * For example, in [Builder] you can use `instrumentation.targetContext` instead of `InstrumentationRegistry.getInstrumentation().targetContext`
-         */
-        val instrumentation: Instrumentation = InstrumentationRegistry.getInstrumentation()
-
-        private val uiDevice = UiDevice.getInstance(instrumentation)
-        private val configurator = Configurator.getInstance()
-
-        /**
-         * Holds an implementation of [AdbServer] interface. If it was not specified, the default implementation is used.
-         */
-        lateinit var adbServer: AdbServer
-
-        /**
-         * Holds an implementation of [Apps] interface. If it was not specified, the default implementation is used.
-         */
-        lateinit var apps: Apps
-
-        /**
-         * Holds an implementation of [Activities] interface. If it was not specified, the default implementation is used.
-         */
-        lateinit var activities: Activities
-
-        /**
-         * Holds an implementation of [Files] interface. If it was not specified, the default implementation is used.
-         */
-        lateinit var files: Files
-
-        /**
-         * Holds an implementation of [Network] interface. If it was not specified, the default implementation is used.
-         */
-        lateinit var network: Network
-
-        /**
-         * Holds an implementation of [Phone] interface. If it was not specified, the default implementation is used.
-         */
-        lateinit var phone: Phone
-
-        /**
-         * Holds an implementation of [Location] interface. If it was not specified, the default implementation is used.
-         */
-        lateinit var location: Location
-
-        /**
-         * Holds an implementation of [Keyboard] interface. If it was not specified, the default implementation is used.
-         */
-        lateinit var keyboard: Keyboard
 
         /**
          * Holds an implementation of [Screenshots] interface. If it was not specified, the default implementation is used.
@@ -530,6 +436,12 @@ data class Kaspresso(
          */
         var failureHandler: FailureHandler? = null
 
+        /**
+         * Sets Kautomator based on sharedTest support (whether tests can ALSO run on the JVM or ONLY on as instrumentation test on devices/emulators)
+         * This is necessary since Robolectric is compatible with Espresso but not with UiAutomator
+         */
+        lateinit var kautomatorConfig: KautomatorConfig
+
         private val defaultsTestRunWatcherInterceptor = DefaultTestRunWatcherInterceptor()
 
         /**
@@ -554,61 +466,128 @@ data class Kaspresso(
             defaultsTestRunWatcherInterceptor.afterEachTest(override, action)
         }
 
+        /**
+         * Holds an implementation of [UiTestLogger] interface for external developer's usage in tests.
+         * If it was not specified, the default implementation with default tag is used.
+         */
+        lateinit var testLogger: UiTestLogger
+
+        /**
+         * UiDevice can only be accessed from Instrumentation tests and never from shared test running with Robolectric
+         */
+        var uiDevice: UiDevice? = null
+
+        private val configurator = Configurator.getInstance()
+
+        /**
+         * Holds an implementation of [AdbServer] interface. If it was not specified, the default implementation is used.
+         */
+        lateinit var adbServer: AdbServer
+
+        /**
+         * Holds an implementation of [Apps] interface. If it was not specified, the default implementation is used.
+         */
+        lateinit var apps: Apps
+
+        /**
+         * Holds an implementation of [Activities] interface. If it was not specified, the default implementation is used.
+         */
+        lateinit var activities: Activities
+
+        /**
+         * Holds an implementation of [Files] interface. If it was not specified, the default implementation is used.
+         */
+        lateinit var files: Files
+
+        /**
+         * Holds an implementation of [Network] interface. If it was not specified, the default implementation is used.
+         */
+        lateinit var network: Network
+
+        /**
+         * Holds an implementation of [Phone] interface. If it was not specified, the default implementation is used.
+         */
+        lateinit var phone: Phone
+
+        /**
+         * Holds an implementation of [Location] interface. If it was not specified, the default implementation is used.
+         */
+        lateinit var location: Location
+
+        /**
+         * Holds an implementation of [Keyboard] interface. If it was not specified, the default implementation is used.
+         */
+        lateinit var keyboard: Keyboard
+
+
         @Suppress("detekt.ComplexMethod")
         private fun postInitVariables() {
-            if (!::kautomatorWaitForIdleSettings.isInitialized) kautomatorWaitForIdleSettings = KautomatorWaitForIdleSettings.default()
 
             if (!::libLogger.isInitialized) libLogger = UiTestLoggerImpl(DEFAULT_LIB_LOGGER_TAG)
             if (!::testLogger.isInitialized) testLogger = UiTestLoggerImpl(DEFAULT_TEST_LOGGER_TAG)
-
-            if (!::adbServer.isInitialized) adbServer = AdbServerImpl(LogLevel.WARN, libLogger)
-            if (!::apps.isInitialized) apps = AppsImpl(libLogger, instrumentation.context, uiDevice, adbServer)
-            if (!::activities.isInitialized) activities = ActivitiesImpl(libLogger)
-            if (!::files.isInitialized) files = FilesImpl(adbServer)
-            if (!::network.isInitialized) network = NetworkImpl(instrumentation.targetContext, adbServer, libLogger)
-            if (!::phone.isInitialized) phone = PhoneImpl(adbServer)
-            if (!::location.isInitialized) location = LocationImpl(adbServer)
-            if (!::keyboard.isInitialized) keyboard = KeyboardImpl(adbServer)
-            if (!::screenshots.isInitialized) {
-                screenshots = ScreenshotsImpl(
-                    libLogger,
-                    CombinedScreenshotMaker(InternalScreenshotMaker(activities), ExternalScreenshotMaker()),
-                    DefaultScreenshotDirectoryProvider(groupByRunNumbers = true),
-                    DefaultScreenshotNameProvider(addTimestamps = false)
-                )
-            }
-            if (!::accessibility.isInitialized) accessibility = AccessibilityImpl()
-            if (!::permissions.isInitialized) permissions = PermissionsImpl(libLogger, uiDevice)
-            if (!::hackPermissions.isInitialized) hackPermissions = HackPermissionsImpl(instrumentation.uiAutomation, libLogger)
-            if (!::exploit.isInitialized) exploit = ExploitImpl(activities, uiDevice, adbServer)
-            if (!::language.isInitialized) language = LanguageImpl(libLogger, instrumentation.targetContext)
-            if (!::logcat.isInitialized) logcat = LogcatImpl(adbServer)
 
             if (!::flakySafetyParams.isInitialized) flakySafetyParams = FlakySafetyParams.default()
             if (!::continuouslyParams.isInitialized) continuouslyParams = ContinuouslyParams.default()
             if (!::autoScrollParams.isInitialized) autoScrollParams = AutoScrollParams.default()
             if (!::stepParams.isInitialized) stepParams = StepParams()
+
+            //kautomator
+            if (!::kautomatorWaitForIdleSettings.isInitialized) kautomatorWaitForIdleSettings = KautomatorWaitForIdleSettings.default()
+            if (!::adbServer.isInitialized) adbServer = kautomatorConfig.getAdbServer(libLogger)//AdbServerImpl(LogLevel.WARN, libLogger)
+            if (!::apps.isInitialized) apps = kautomatorConfig.getApps(libLogger, adbServer)//AppsImpl(libLogger, instrumentation.context, uiDevice, adbServer)
+            if (!::activities.isInitialized) activities = kautomatorConfig.getActivities(libLogger)//ActivitiesImpl(libLogger)
+            if (!::files.isInitialized) files = kautomatorConfig.getFiles(adbServer)
+            if (!::network.isInitialized) network = kautomatorConfig.getNetwork(libLogger, adbServer)
+            if (!::phone.isInitialized) phone = kautomatorConfig.getPhone(adbServer)
+            if (!::location.isInitialized) location = kautomatorConfig.getLocation(adbServer)
+            if (!::keyboard.isInitialized) keyboard = kautomatorConfig.getKeyboard(adbServer)
+            if (!::screenshots.isInitialized) {
+                screenshots = kautomatorConfig.getScreenshots(libLogger, activities)
+                if (!::accessibility.isInitialized) accessibility = kautomatorConfig.getAccessibility()
+                if (!::permissions.isInitialized) permissions = kautomatorConfig.getPermissions(libLogger)
+                if (!::hackPermissions.isInitialized) hackPermissions = kautomatorConfig.getHackPermissions(libLogger)//HackPermissionsImpl(instrumentation.uiAutomation, libLogger)
+                if (!::exploit.isInitialized) exploit = kautomatorConfig.getExploit(adbServer, activities)//ExploitImpl(activities, uiDevice, adbServer)
+                if (!::language.isInitialized) language = kautomatorConfig.getLanguage(libLogger)//LanguageImpl(libLogger, instrumentation.targetContext)
+                if (!::logcat.isInitialized) logcat = kautomatorConfig.getLogcat(adbServer)//LogcatImpl(adbServer)
+            }
         }
 
         @Suppress("detekt.ComplexMethod")
         private fun postBaseInitInterceptors() {
+            if (!::objectWatcherInterceptors.isInitialized) objectWatcherInterceptors = mutableListOf()
+            if (!::deviceWatcherInterceptors.isInitialized) deviceWatcherInterceptors = mutableListOf()
+            if (!::objectBehaviorInterceptors.isInitialized) objectBehaviorInterceptors = mutableListOf()
+            if (!::deviceBehaviorInterceptors.isInitialized) deviceBehaviorInterceptors = mutableListOf()
+
             if (!::viewActionWatcherInterceptors.isInitialized) viewActionWatcherInterceptors = mutableListOf()
             if (!::viewAssertionWatcherInterceptors.isInitialized) viewAssertionWatcherInterceptors = mutableListOf()
             if (!::atomWatcherInterceptors.isInitialized) atomWatcherInterceptors = mutableListOf()
             if (!::webAssertionWatcherInterceptors.isInitialized) webAssertionWatcherInterceptors = mutableListOf()
-            if (!::objectWatcherInterceptors.isInitialized) objectWatcherInterceptors = mutableListOf()
-            if (!::deviceWatcherInterceptors.isInitialized) deviceWatcherInterceptors = mutableListOf()
             if (!::viewBehaviorInterceptors.isInitialized) viewBehaviorInterceptors = mutableListOf()
             if (!::dataBehaviorInterceptors.isInitialized) dataBehaviorInterceptors = mutableListOf()
             if (!::webBehaviorInterceptors.isInitialized) webBehaviorInterceptors = mutableListOf()
-            if (!::objectBehaviorInterceptors.isInitialized) objectBehaviorInterceptors = mutableListOf()
-            if (!::deviceBehaviorInterceptors.isInitialized) deviceBehaviorInterceptors = mutableListOf()
             if (!::stepWatcherInterceptors.isInitialized) stepWatcherInterceptors = mutableListOf()
             if (!::testRunWatcherInterceptors.isInitialized) testRunWatcherInterceptors = mutableListOf()
         }
 
         @Suppress("detekt.ComplexMethod")
         private fun postDefaultInitInterceptors() {
+            //val kautomatorConfig = KautomatorConfigResolver.build(sharedTest)
+
+            if (!::objectWatcherInterceptors.isInitialized) objectWatcherInterceptors = mutableListOf(
+                LoggingObjectWatcherInterceptor(libLogger)
+            )
+
+            if (!::deviceWatcherInterceptors.isInitialized) deviceWatcherInterceptors = mutableListOf(
+                LoggingDeviceWatcherInterceptor(libLogger)
+            )
+
+            if (!::objectBehaviorInterceptors.isInitialized) objectBehaviorInterceptors =
+                kautomatorConfig.getObjectBehaviourInterceptors(libLogger, adbServer, autoScrollParams, flakySafetyParams)
+
+            if (!::deviceBehaviorInterceptors.isInitialized) deviceBehaviorInterceptors =
+                kautomatorConfig.getDeviceBehaviourInterceptors(libLogger, adbServer, flakySafetyParams)
+
             if (!::viewActionWatcherInterceptors.isInitialized) viewActionWatcherInterceptors = mutableListOf(
                 LoggingViewActionWatcherInterceptor(libLogger)
             )
@@ -625,42 +604,14 @@ data class Kaspresso(
                 LoggingWebAssertionWatcherInterceptor(libLogger)
             )
 
-            if (!::objectWatcherInterceptors.isInitialized) objectWatcherInterceptors = mutableListOf(
-                LoggingObjectWatcherInterceptor(libLogger)
-            )
+            if (!::viewBehaviorInterceptors.isInitialized) viewBehaviorInterceptors =
+                kautomatorConfig.getViewBehaviourInterceptors(libLogger, adbServer, autoScrollParams, flakySafetyParams)
 
-            if (!::deviceWatcherInterceptors.isInitialized) deviceWatcherInterceptors = mutableListOf(
-                LoggingDeviceWatcherInterceptor(libLogger)
-            )
+            if (!::dataBehaviorInterceptors.isInitialized) dataBehaviorInterceptors =
+                kautomatorConfig.getDataBehaviourInterceptors(libLogger, adbServer, autoScrollParams, flakySafetyParams)
 
-            if (!::viewBehaviorInterceptors.isInitialized) viewBehaviorInterceptors = mutableListOf(
-                AutoScrollViewBehaviorInterceptor(autoScrollParams, libLogger),
-                SystemDialogSafetyViewBehaviorInterceptor(libLogger, uiDevice, adbServer),
-                FlakySafeViewBehaviorInterceptor(flakySafetyParams, libLogger)
-            )
-
-            if (!::dataBehaviorInterceptors.isInitialized) dataBehaviorInterceptors = mutableListOf(
-                SystemDialogSafetyDataBehaviorInterceptor(libLogger, uiDevice, adbServer),
-                FlakySafeDataBehaviorInterceptor(flakySafetyParams, libLogger)
-            )
-
-            if (!::webBehaviorInterceptors.isInitialized) webBehaviorInterceptors = mutableListOf(
-                AutoScrollWebBehaviorInterceptor(autoScrollParams, libLogger),
-                SystemDialogSafetyWebBehaviorInterceptor(libLogger, uiDevice, adbServer),
-                FlakySafeWebBehaviorInterceptor(flakySafetyParams, libLogger)
-            )
-
-            if (!::objectBehaviorInterceptors.isInitialized) objectBehaviorInterceptors = mutableListOf(
-                AutoScrollObjectBehaviorInterceptor(libLogger, autoScrollParams),
-                UiObjectLoaderBehaviorInterceptor(libLogger),
-                SystemDialogSafetyObjectBehaviorInterceptor(libLogger, uiDevice, adbServer),
-                FlakySafeObjectBehaviorInterceptor(flakySafetyParams, libLogger)
-            )
-
-            if (!::deviceBehaviorInterceptors.isInitialized) deviceBehaviorInterceptors = mutableListOf(
-                SystemDialogSafetyDeviceBehaviorInterceptor(libLogger, uiDevice, adbServer),
-                FlakySafeDeviceBehaviorInterceptor(flakySafetyParams, libLogger)
-            )
+            if (!::webBehaviorInterceptors.isInitialized) webBehaviorInterceptors =
+                kautomatorConfig.getWebBehaviourInterceptors(libLogger, adbServer, autoScrollParams, flakySafetyParams)
 
             if (!::stepWatcherInterceptors.isInitialized) stepWatcherInterceptors = mutableListOf(
                 LoggingStepWatcherInterceptor(libLogger)
@@ -688,25 +639,6 @@ data class Kaspresso(
                 libLogger = libLogger,
                 testLogger = testLogger,
 
-                adbServer = adbServer,
-
-                device = Device(
-                    apps = apps,
-                    activities = activities,
-                    files = files,
-                    network = network,
-                    phone = phone,
-                    location = location,
-                    keyboard = keyboard,
-                    screenshots = screenshots,
-                    accessibility = accessibility,
-                    permissions = permissions,
-                    hackPermissions = hackPermissions,
-                    exploit = exploit,
-                    language = language,
-                    logcat = logcat
-                ),
-
                 params = Params(
                     flakySafetyParams = flakySafetyParams,
                     continuouslyParams = continuouslyParams,
@@ -719,18 +651,21 @@ data class Kaspresso(
                 atomWatcherInterceptors = atomWatcherInterceptors,
                 webAssertionWatcherInterceptors = webAssertionWatcherInterceptors,
 
-                objectWatcherInterceptors = objectWatcherInterceptors,
-                deviceWatcherInterceptors = deviceWatcherInterceptors,
-
                 viewBehaviorInterceptors = viewBehaviorInterceptors,
                 dataBehaviorInterceptors = dataBehaviorInterceptors,
                 webBehaviorInterceptors = webBehaviorInterceptors,
 
-                objectBehaviorInterceptors = objectBehaviorInterceptors,
-                deviceBehaviorInterceptors = deviceBehaviorInterceptors,
-
                 stepWatcherInterceptors = stepWatcherInterceptors,
-                testRunWatcherInterceptors = testRunWatcherInterceptors
+                testRunWatcherInterceptors = testRunWatcherInterceptors,
+
+                adbServer = kautomatorConfig.getAdbServer(libLogger),
+                device = kautomatorConfig.getDevice(libLogger, adbServer, activities),
+
+                objectWatcherInterceptors = emptyList(),
+                deviceWatcherInterceptors = emptyList(),
+
+                objectBehaviorInterceptors = emptyList(),
+                deviceBehaviorInterceptors = emptyList(),
             )
 
             configurator.waitForIdleTimeout = kautomatorWaitForIdleSettings.waitForIdleTimeout
