@@ -13,13 +13,13 @@ import org.junit.runners.model.Statement
  */
 class LocaleRule internal constructor(
     private val locales: Set<Locale>,
-    private val device: Device,
+    private val device: Device?,
     private val changeSystemLocale: Boolean,
     private val logger: UiTestLogger
 ) : TestRule {
 
     private val systemLanguage: SystemLanguage =
-        SystemLanguage(device.targetContext, logger, device.hackPermissions)
+        SystemLanguage(device?.targetContext, logger, device?.hackPermissions)
 
     private val deviceLocale: Locale = Locale.getDefault()
     private var currentLocale: Locale? = null
@@ -42,14 +42,14 @@ class LocaleRule internal constructor(
             locales.onEach { locale ->
                 currentLocale = locale
                 logger.i("DocLoc: changeLanguageInApp is processing. New language=$locale is installing")
-                device.language.switchInApp(locale)
+                device?.language?.switchInApp(locale)
                 logger.i("DocLoc: changeLanguageInApp is processing. New language=$locale is installed")
                 base.evaluate()
             }
         } finally {
             logger.i("DocLoc: changeLanguageInApp is finishing. Device language=$deviceLocale is restoring")
             currentLocale = deviceLocale
-            device.language.switchInApp(deviceLocale)
+            device?.language?.switchInApp(deviceLocale)
             logger.i("DocLoc: changeLanguageInApp is finishing. Device language=$deviceLocale is restored")
         }
     }

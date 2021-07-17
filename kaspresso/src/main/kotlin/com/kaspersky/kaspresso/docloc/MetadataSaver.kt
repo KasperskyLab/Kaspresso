@@ -9,22 +9,24 @@ import com.kaspersky.kaspresso.logger.UiTestLogger
 import java.io.File
 
 internal class MetadataSaver(
-    private val activities: Activities,
-    private val apps: Apps,
+    private val activities: Activities?,
+    private val apps: Apps?,
     private val logger: UiTestLogger
 ) {
     private val activityMetadata = ActivityMetadata(logger)
 
     fun saveScreenshotMetadata(folderPath: File, name: String) {
-        val activity = activities.getResumed()
+        val activity = activities?.getResumed()
         if (activity == null) {
             logger.e("Activity is null when saving metadata $name")
             return
         }
         runCatching {
-            val metadata = activityMetadata.getFromActivity(activity)
-                .toXml(apps.targetAppPackageName)
-            folderPath.resolve("$name.xml").safeWrite(logger, metadata)
+            apps?.run {
+                val metadata = activityMetadata.getFromActivity(activity)
+                    .toXml(apps.targetAppPackageName)
+                folderPath.resolve("$name.xml").safeWrite(logger, metadata)
+            }
         }
     }
 }

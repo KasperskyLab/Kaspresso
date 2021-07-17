@@ -11,9 +11,9 @@ import com.kaspersky.kaspresso.logger.UiTestLogger
 import java.util.Locale
 
 internal class SystemLanguage(
-    private val context: Context,
+    private val context: Context?,
     private val logger: UiTestLogger,
-    private val hackPermissions: HackPermissions
+    private val hackPermissions: HackPermissions?
 ) {
 
     /**
@@ -46,12 +46,12 @@ internal class SystemLanguage(
      * @throws DocLocException In case of a failure to grant one
      */
     private fun grantPermissionsIfNeed() {
-        val permissionStateAtTheBeginning = context.checkPermission(Manifest.permission.CHANGE_CONFIGURATION, Process.myPid(), Process.myUid())
+        val permissionStateAtTheBeginning = context?.checkPermission(Manifest.permission.CHANGE_CONFIGURATION, Process.myPid(), Process.myUid())
         if (permissionStateAtTheBeginning == PackageManager.PERMISSION_GRANTED) {
             return
         }
-        val attemptToGrantPermissionResult = hackPermissions.grant(context.packageName, Manifest.permission.CHANGE_CONFIGURATION)
-        if (!attemptToGrantPermissionResult) {
+        val attemptToGrantPermissionResult = hackPermissions?.grant(context?.packageName.orEmpty(), Manifest.permission.CHANGE_CONFIGURATION)
+        if (attemptToGrantPermissionResult == false) {
             throw DocLocException(
                 "SystemLanguage: The attempt to grant Manifest.permission.CHANGE_CONFIGURATION for SystemLanguage failed"
             )
