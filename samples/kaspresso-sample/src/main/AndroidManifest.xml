@@ -74,8 +74,8 @@
             android:label="@string/main_screen_idlewaiting_sample_button"/>
 
         <activity
-            android:name=".robolectric.RobolectricActivity"
-            android:label="@string/main_screen_robolectric"/>
+            android:name=".sharedtest.SharedTestActivity"
+            android:label="@string/main_screen_shared_test"/>
 
         <service
             android:name=".device.DeviceSampleAccessibilityService"

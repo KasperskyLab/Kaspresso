@@ -5,7 +5,7 @@
     android:id="@+id/scrollMe"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".nitrogen.NitrogenActivity">
+    tools:context=".sharedtest.SharedTestActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -114,7 +114,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:layout_marginTop="50dp"
-            android:text="Find me"
+            android:text="FIND ME"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/firstText"

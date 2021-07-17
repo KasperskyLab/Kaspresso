@@ -1,15 +1,15 @@
 package com.kaspersky.kaspressample.screen
 
 import com.kaspersky.kaspressample.R
-import com.kaspersky.kaspressample.robolectric.RobolectricActivity
+import com.kaspersky.kaspressample.sharedtest.SharedTestActivity
 import com.kaspersky.kaspresso.screens.KScreen
 import io.github.kakaocup.kakao.edit.KEditText
 import io.github.kakaocup.kakao.text.KButton
 
-class RobolectricScreen : KScreen<RobolectricScreen>() {
+class SharedTestScreen : KScreen<SharedTestScreen>() {
 
-    override val layoutId: Int = R.layout.activity_robolectric
-    override val viewClass: Class<*> = RobolectricActivity::class.java
+    override val layoutId: Int = R.layout.activity_sharedtest
+    override val viewClass: Class<*> = SharedTestActivity::class.java
 
     val findMeButton = KButton { withId(R.id.findMeButton) }
 

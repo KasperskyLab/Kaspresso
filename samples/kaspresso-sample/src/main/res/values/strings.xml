@@ -10,7 +10,7 @@
     <string name="main_screen_complex_compose_sample_button">Complex compose sample</string>
     <string name="main_screen_idlewaiting_sample_button">Waiting for idle sample</string>
     <string name="main_screen_measure_sample_button">Measure sample</string>
-    <string name="main_screen_robolectric">Shared Test with Robolectric sample</string>
+    <string name="main_screen_shared_test">Shared Test with Robolectric sample</string>
 
     <!-- Simple fragment screen -->
     <string name="simple_fragment_title">Simple Fragment</string>

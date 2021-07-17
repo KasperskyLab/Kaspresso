@@ -1,10 +1,9 @@
-package com.kaspersky.kaspressample.robolectric
+package com.kaspersky.kaspressample.sharedtest
 
 import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.kaspersky.kaspressample.screen.RobolectricScreen
+import com.kaspersky.kaspressample.screen.SharedTestScreen
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
-
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import io.github.kakaocup.kakao.screen.Screen
 import org.junit.Rule
@@ -12,20 +11,20 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class RobolectricTest : TestCase(Kaspresso.Builder.simple(sharedTest = true)) {
+class SharedTest : TestCase(Kaspresso.Builder.simple(sharedTest = true)) {
 
     @get:Rule
-    val activityRule = activityScenarioRule<RobolectricActivity>()
+    val activityRule = activityScenarioRule<SharedTestActivity>()
 
     @Test
     fun test() {
         before {
             activityRule.scenario
         }.after {
-
+            //no-op
         }.run {
             step("Fill info") {
-                Screen.onScreen<RobolectricScreen> {
+                Screen.onScreen<SharedTestScreen> {
                     firstNameEditText{
                         replaceText("Kaspersky")
                     }
@@ -40,8 +39,9 @@ class RobolectricTest : TestCase(Kaspresso.Builder.simple(sharedTest = true)) {
                     }
                 }
             }
+
             step("Verify Full Name info") {
-                Screen.onScreen<RobolectricScreen> {
+                Screen.onScreen<SharedTestScreen> {
                     firstNameEditText {
                         hasText("Kaspersky")
                     }
@@ -52,7 +52,7 @@ class RobolectricTest : TestCase(Kaspresso.Builder.simple(sharedTest = true)) {
             }
 
             step("Click on find me button") {
-                Screen.onScreen<RobolectricScreen> {
+                Screen.onScreen<SharedTestScreen> {
                     findMeButton {
                         click()
                     }
