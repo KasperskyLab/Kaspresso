@@ -31,47 +31,46 @@ class SimpleTest : TestCase() {
     val activityTestRule = ActivityTestRule(MainActivity::class.java, true, false)
 
     @Test
-    fun test() =
-        run {
-            step("Open Simple Screen") {
-                activityTestRule.launchActivity(null)
-                testLogger.i("I am testLogger")
-                device.screenshots.take("Additional_screenshot")
-                MainScreen {
-                    simpleButton {
-                        isVisible()
-                        click()
-                    }
+    fun test() = run {
+        step("Open Simple Screen") {
+            activityTestRule.launchActivity(null)
+            testLogger.i("I am testLogger")
+            device.screenshots.take("Additional_screenshot")
+            MainScreen {
+                simpleButton {
+                    isVisible()
+                    click()
                 }
             }
+        }
 
-            step("Click button_1 and check button_2") {
-                SimpleScreen {
-                    button1 {
-                        click()
-                    }
-                    button2 {
-                        isVisible()
-                    }
+        step("Click button_1 and check button_2") {
+            SimpleScreen {
+                button1 {
+                    click()
+                }
+                button2 {
+                    isVisible()
                 }
             }
+        }
 
-            step("Click button_2 and check edit") {
-                SimpleScreen {
-                    button2 {
-                        click()
-                    }
-                    edit {
-                        flakySafely(timeoutMs = 7000) { isVisible() }
-                        hasText(R.string.simple_fragment_text_edittext)
-                    }
+        step("Click button_2 and check edit") {
+            SimpleScreen {
+                button2 {
+                    click()
+                }
+                edit {
+                    flakySafely(timeoutMs = 7000) { isVisible() }
+                    hasText(R.string.simple_fragment_text_edittext)
                 }
             }
+        }
 
-            step("Check all possibilities of edit") {
-                scenario(
-                    CheckEditScenario()
-                )
-            }
+        step("Check all possibilities of edit") {
+            scenario(
+                CheckEditScenario()
+            )
+        }
     }
 }

@@ -35,6 +35,7 @@ include(
     ":kautomator",
 
     ":samples:adbserver-sample",
+    ":samples:kaspresso-allure-sample",
     ":samples:kaspresso-sample",
     ":samples:kautomator-sample",
     ":samples:kautomator-sample-app-upgrade",

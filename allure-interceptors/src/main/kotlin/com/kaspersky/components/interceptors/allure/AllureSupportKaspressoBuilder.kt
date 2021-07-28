@@ -8,11 +8,12 @@ import com.kaspersky.components.interceptors.allure.interceptors.testrun.Screens
 import com.kaspersky.components.interceptors.allure.interceptors.testrun.VideoRecordingTestInterceptor
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 
-fun withAllureSupport(customize: Kaspresso.Builder.() -> Unit = {}): Kaspresso.Builder = Kaspresso.Builder.simple(customize).apply {
+fun Kaspresso.Builder.withAllureSupport(): Kaspresso.Builder = this.apply {
     stepWatcherInterceptors.addAll(
+        // The order matters here. AllureMapperStepInterceptor should be the last one.
         listOf(
+            ScreenshotStepInterceptor(screenshots),
             AllureMapperStepInterceptor(),
-            ScreenshotStepInterceptor(screenshots)
         )
     )
     testRunWatcherInterceptors.addAll(
