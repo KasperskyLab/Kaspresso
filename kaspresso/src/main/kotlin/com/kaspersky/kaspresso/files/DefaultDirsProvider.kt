@@ -11,7 +11,8 @@ import java.io.File
 class DefaultDirsProvider : DirsProvider {
     private val clearedDirs = HashSet<File>()
 
-    @SuppressLint("WorldReadableFiles")
+    @Suppress("DEPRECATION")
+    @SuppressLint("WorldReadableFiles", "ObsoleteSdkInt")
     override fun provideNew(path: File): File {
         val dir: File = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Environment.getExternalStorageDirectory().resolve(path)

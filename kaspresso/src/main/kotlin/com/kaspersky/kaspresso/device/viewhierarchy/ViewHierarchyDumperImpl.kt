@@ -8,6 +8,7 @@ import com.kaspersky.kaspresso.logger.UiTestLogger
 import java.io.File
 
 class ViewHierarchyDumperImpl(
+    private val device: UiDevice,
     private val logger: UiTestLogger,
     private val resourceFilesProvider: ResourceFilesProvider
 ) : ViewHierarchyDumper {
@@ -19,7 +20,7 @@ class ViewHierarchyDumperImpl(
     private fun doDumpAndApply(tag: String, block: (File.() -> Unit)?) {
         try {
             val logcatFile: File = resourceFilesProvider.provideViewHierarchyFile(tag)
-            UiDevice.getInstance(InstrumentationRegistry.getInstrumentation()).dumpWindowHierarchy(logcatFile)
+            device.dumpWindowHierarchy(logcatFile)
             block?.invoke(logcatFile)
         } catch (e: Throwable) {
             logger.e("View hierarchy dumping error occurred: ${Log.getStackTraceString(e)}")

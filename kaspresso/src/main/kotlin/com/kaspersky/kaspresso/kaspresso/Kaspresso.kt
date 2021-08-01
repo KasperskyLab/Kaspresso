@@ -664,11 +664,11 @@ data class Kaspresso(
             }
 
             if (!::viewHierarchyDumper.isInitialized) {
-                viewHierarchyDumper = ViewHierarchyDumperImpl(libLogger, resourceFilesProvider)
+                viewHierarchyDumper = ViewHierarchyDumperImpl(uiDevice, libLogger, resourceFilesProvider)
             }
 
             if (!::logcatDumper.isInitialized) {
-                logcatDumper = LogcatDumperImpl(libLogger, resourceFilesProvider, logcat)
+                logcatDumper = LogcatDumperImpl(libLogger, resourceFilesProvider, logcat, listOf(DEFAULT_LIB_LOGGER_TAG, DEFAULT_TEST_LOGGER_TAG))
             }
         }
 
