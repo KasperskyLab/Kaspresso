@@ -45,7 +45,7 @@ There are two parameters passed in the base constructor:
 - locales - comma-separated string with locales to run test with;
 - screenshotsDirectory - directory to save screenshot.
 
-For full example, check the [ScreenshotSampleTest](../samples/kaspresso-sample/src/androidTest/java/com/kaspersky/kaspressample/docloc_tests/ScreenshotSampleTest.kt). 
+For full example, check the [ScreenshotSampleTest](../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/docloc_tests/ScreenshotSampleTest.kt). 
 
 Notice, that the test is marked with `@ScreenShooterTest` annotation. This is intended to filter only screenshooter tests to be run. For example, you could pass the 
 annotation to default `AndroidJUnitRunner` with command: 
@@ -121,7 +121,7 @@ class ChangeSysLanguageTestCase : DocLocScreenshotTestCase(
     }        
 }
 ```
-The full example is located at [ChangeSysLanguageTestCase](../samples/kaspresso-sample/src/androidTest/java/com/kaspersky/kaspressample/docloc_tests/ChangeSysLanguageTestCase.kt).
+The full example is located at [ChangeSysLanguageTestCase](../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/docloc_tests/ChangeSysLanguageTestCase.kt).
 
 ## Important note
 
@@ -208,7 +208,7 @@ This method wraps your View interface and returns a proxy on it.
 The proxy guarantees that all the methods of the View interface you called, will be invoked on the main thread. 
 There is also `getUiSafeProxyFromImplementation` which wraps an implementation rather than an interface. 
 
-For full example, check [AdvancedScreenshotSampleTest](../samples/kaspresso-sample/src/androidTest/java/com/kaspersky/kaspressample/docloc_tests/advanced/AdvancedScreenshotSampleTest.kt) class.
+For full example, check [AdvancedScreenshotSampleTest](../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/docloc_tests/advanced/AdvancedScreenshotSampleTest.kt) class.
  
 ## Modifying screenshots path and name
 
@@ -216,4 +216,4 @@ By default, all screenshots are stored at: <br>
 ```/sdcard/<screenshots root dir>/<locale>/<full qualified test class name>/<method name>.``` <br>
 You can change this behavior by providing custom [ScreenshotDirectoryProvider](../kaspresso/src/main/kotlin/com/kaspersky/kaspresso/device/screenshots/screenshotfiles/ScreenshotDirectoryProvider.kt) 
 and [ScreenshotNameProvider](../kaspresso/src/main/kotlin/com/kaspersky/kaspresso/device/screenshots/screenshotfiles/ScreenshotNameProvider.kt) implementations. 
-Find out details [here](../samples/kaspresso-sample/src/androidTest/java/com/kaspersky/kaspressample/docloc_tests/cutomdirectory/CustomDirectoryScreenshotSampleTest.kt).
+Find out details [here](../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/docloc_tests/cutomdirectory/CustomDirectoryScreenshotSampleTest.kt).
