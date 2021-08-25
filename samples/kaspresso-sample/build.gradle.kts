@@ -27,7 +27,7 @@ android {
     testOptions {
         execution = "ANDROIDX_TEST_ORCHESTRATOR"
 
-        //run nitrogen
+        //allow to run tests on JVM
         unitTests.isReturnDefaultValues = true
         unitTests.isIncludeAndroidResources = true
     }

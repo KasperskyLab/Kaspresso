@@ -51,7 +51,7 @@ We also recommend not to define your Screens as `object` but as `class` instead,
 Prefer to define your Screens like this
 
 ```kotlin
-class NitrogenFragmentScrollingScreen : KScreen<NitrogenFragmentScrollingScreen>() {
+class FragmentScrollingScreen : KScreen<FragmentScrollingScreen>() {
 ...
 }
 ```
@@ -59,14 +59,14 @@ class NitrogenFragmentScrollingScreen : KScreen<NitrogenFragmentScrollingScreen>
 to this
 
 ```kotlin
-object NitrogenFragmentScrollingScreen : KScreen<NitrogenFragmentScrollingScreen>() {
+object FragmentScrollingScreen : KScreen<FragmentScrollingScreen>() {
 ...
 }
 ```
 
-In order to run your shared tests as Unit test on the JVM, you need to run a command looking like this:
+In order to run your shared tests as Unit Tests on the JVM, you need to run a command looking like this:
 ```
-./gradlew :MODULE:connectedVARIANTAndroidTest -Pandroid.testInstrumentationRunnerArguments.class=PACKAGE.CLASS
+./gradlew :MODULE:testVARIANTUnitTest --tests "PACKAGE.CLASS"
 ```
 
 For example, to run the sample RobolectricTest on the JVM you need to run:
@@ -76,10 +76,10 @@ For example, to run the sample RobolectricTest on the JVM you need to run:
 
 To run them on a device/emulator, the command to run would look like this:
 ```
-./gradlew :MODULE:testVARIANTUnitTest --tests "PACKAGE.CLASS"
+./gradlew :MODULE:connectedVARIANTAndroidTest -Pandroid.testInstrumentationRunnerArguments.class=PACKAGE.CLASS
 ```
 
-For instance, to run the sample NitrogenSharedTest on a device/emulator, you need to run:
+For instance, to run the sample SharedTest on a device/emulator, you need to run:
 ```
 ./gradlew :samples:kaspresso-sample:connectedAndroidTest -Pandroid.testInstrumentationRunnerArguments.class=com.kaspersky.kaspressample.sharedtest.SharedTest
 ```
