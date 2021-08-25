@@ -8,7 +8,7 @@ import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.screen.kautomator.UiContinuouslyDialogScreen
 import com.kaspersky.kaspressample.screen.kautomator.UiContinuouslyScreen
 import com.kaspersky.kaspressample.screen.kautomator.UiMainScreen
-import com.kaspersky.kaspresso.failure.exceptions.KautomatorOnSharedTestException
+import com.kaspersky.kaspresso.failure.exceptions.KautomatorInSharedTestException
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.junit.Rule
@@ -27,7 +27,7 @@ class FailingKautomatorSharedTest : TestCase(Kaspresso.Builder.simple(sharedTest
     @get:Rule
     val activityTestRule = ActivityTestRule(MainActivity::class.java, true, false)
 
-    @Test(expected = KautomatorOnSharedTestException::class)
+    @Test(expected = KautomatorInSharedTestException::class)
     fun testDialogPresentUntilAndroidO() {
         before {
             activityTestRule.launchActivity(null)

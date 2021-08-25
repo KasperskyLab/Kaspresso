@@ -2,7 +2,7 @@ package com.kaspersky.kaspresso.failure.exceptions
 
 import java.lang.RuntimeException
 
-class KautomatorOnSharedTestException : RuntimeException(
+class KautomatorInSharedTestException : RuntimeException(
     """
 
         You are using Kautomator UiScreen for a 'sharedTest'. Unfortunately, UiScreen<S> is not support in

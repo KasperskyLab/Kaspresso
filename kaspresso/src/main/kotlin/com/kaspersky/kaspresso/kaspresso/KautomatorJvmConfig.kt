@@ -20,6 +20,7 @@ import com.kaspersky.kaspresso.device.permissions.Permissions
 import com.kaspersky.kaspresso.device.phone.Phone
 import com.kaspersky.kaspresso.device.screenshots.Screenshots
 import com.kaspersky.kaspresso.device.server.AdbServer
+import com.kaspersky.kaspresso.failure.exceptions.ActionNotSupportedInSharedTestException
 import com.kaspersky.kaspresso.interceptors.behavior.DataBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.ViewBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.WebBehaviorInterceptor
@@ -51,48 +52,52 @@ class KautomatorJvmConfig : KautomatorConfig {
     override fun getUiDeviceConfig(): UiDeviceConfig = JvmUiDeviceConfig()
 
     override fun getAdbServer(libLogger: UiTestLogger): AdbServer = object : AdbServer {
-        override fun performCmd(vararg commands: String): List<String> = emptyList()
+        override fun performCmd(vararg commands: String): List<String> =
+            throw ActionNotSupportedInSharedTestException("AdbServer")
 
-        override fun performAdb(vararg commands: String): List<String> = emptyList()
+        override fun performAdb(vararg commands: String): List<String> =
+            throw ActionNotSupportedInSharedTestException("AdbServer")
 
-        override fun performShell(vararg commands: String): List<String> = emptyList()
+        override fun performShell(vararg commands: String): List<String> =
+            throw ActionNotSupportedInSharedTestException("AdbServer")
 
         override fun disconnectServer() {
-            //no-op
+            // no-op, this is called everywhere
         }
     }
 
     override fun getPermissions(libLogger: UiTestLogger): Permissions = object : Permissions {
         override fun allowViaDialog() {
-            //no-op
+            throw ActionNotSupportedInSharedTestException("Permissions")
         }
 
         override fun denyViaDialog() {
-            //no-op
+            throw ActionNotSupportedInSharedTestException("Permissions")
         }
 
-        override fun isDialogVisible(): Boolean = false
+        override fun isDialogVisible(): Boolean =
+            throw ActionNotSupportedInSharedTestException("Permissions")
 
         override fun clickOn(button: Permissions.Button) {
-            //no-op
+            throw ActionNotSupportedInSharedTestException("Permissions")
         }
     }
 
     override fun getNetwork(libLogger: UiTestLogger, adbServer: AdbServer): Network = object : Network {
         override fun enable() {
-            //no-op
+            throw ActionNotSupportedInSharedTestException("Network")
         }
 
         override fun disable() {
-            //no-op
+            throw ActionNotSupportedInSharedTestException("Network")
         }
 
         override fun toggleMobileData(enable: Boolean) {
-            //no-op
+            throw ActionNotSupportedInSharedTestException("Network")
         }
 
         override fun toggleWiFi(enable: Boolean) {
-            //no-op
+            throw ActionNotSupportedInSharedTestException("Network")
         }
     }
 
@@ -104,169 +109,173 @@ class KautomatorJvmConfig : KautomatorConfig {
                 get() = "JVM package name"
 
             override fun install(apkPath: String) {
-                //no-op
+                throw ActionNotSupportedInSharedTestException("Apps")
             }
 
             override fun installIfNotExists(packageName: String, apkPath: String) {
-                //no-op
+                throw ActionNotSupportedInSharedTestException("Apps")
             }
 
             override fun uninstall(packageName: String) {
-                //no-op
+                throw ActionNotSupportedInSharedTestException("Apps")
             }
 
             override fun uninstallIfExists(packageName: String) {
-                //no-op
+                throw ActionNotSupportedInSharedTestException("Apps")
             }
 
-            override fun isInstalled(packageName: String): Boolean = false
+            override fun isInstalled(packageName: String): Boolean =
+                throw ActionNotSupportedInSharedTestException("Apps")
 
             override fun waitForLauncher(timeout: Long, launcherPackageName: String) {
-                //no-op
+                throw ActionNotSupportedInSharedTestException("Apps")
             }
 
             override fun waitForAppLaunchAndReady(timeout: Long, packageName: String) {
-                //no-op
+                throw ActionNotSupportedInSharedTestException("Apps")
             }
 
             override fun openUrlInChrome(url: String) {
-                //no-op
+                throw ActionNotSupportedInSharedTestException("Apps")
             }
 
             override fun launch(packageName: String, data: Uri?) {
-                //no-op
+                throw ActionNotSupportedInSharedTestException("Apps")
             }
 
             override fun openRecent(contentDescription: String) {
-                //no-op
+                throw ActionNotSupportedInSharedTestException("Apps")
             }
 
             override fun kill(packageName: String) {
-                //no-op
+                throw ActionNotSupportedInSharedTestException("Apps")
             }
         }
 
     override fun getFiles(adbServer: AdbServer): Files = object : Files {
         override fun push(serverPath: String, devicePath: String) {
-            //no-op
+            throw ActionNotSupportedInSharedTestException("Files")
         }
 
         override fun remove(path: String) {
-            //no-op
+            throw ActionNotSupportedInSharedTestException("Files")
         }
 
         override fun pull(devicePath: String, serverPath: String) {
-            //no-op
+            throw ActionNotSupportedInSharedTestException("Files")
         }
     }
 
     override fun getActivities(libLogger: UiTestLogger): Activities = object : Activities {
-        override fun getResumed(): Activity? = null
+        override fun getResumed(): Activity? =
+            throw ActionNotSupportedInSharedTestException("Activities")
 
         override fun isCurrent(clazz: Class<out Activity>) {
-            //no-op
+            throw ActionNotSupportedInSharedTestException("Activities")
         }
     }
 
     override fun getPhone(adbServer: AdbServer): Phone = object : Phone {
         override fun emulateCall(number: String) {
-            //no-op
+            throw ActionNotSupportedInSharedTestException("Phone")
         }
 
         override fun cancelCall(number: String) {
-            //no-op
+            throw ActionNotSupportedInSharedTestException("Phone")
         }
 
         override fun receiveSms(number: String, text: String) {
-            //no-op
+            throw ActionNotSupportedInSharedTestException("Phone")
         }
     }
 
     override fun getLocation(adbServer: AdbServer): Location = object : Location {
         override fun enableGps() {
-            //no-op
+            throw ActionNotSupportedInSharedTestException("Location")
         }
 
         override fun disableGps() {
-            //no-op
+            throw ActionNotSupportedInSharedTestException("Location")
         }
 
         override fun setLocation(lat: Double, lon: Double) {
-            //no-op
+            throw ActionNotSupportedInSharedTestException("Location")
         }
     }
 
     override fun getKeyboard(adbServer: AdbServer): Keyboard = object : Keyboard {
         override fun typeText(text: String) {
-            //no-op
+            throw ActionNotSupportedInSharedTestException("Keyboard")
         }
 
         override fun sendEvent(keyEvent: Int) {
-            //no-op
+            throw ActionNotSupportedInSharedTestException("Keyboard")
         }
     }
 
     override fun getScreenshots(libLogger: UiTestLogger, activities: Activities): Screenshots = object : Screenshots {
         override fun take(tag: String) {
-            //no-op
+            throw ActionNotSupportedInSharedTestException("Screenshots")
         }
     }
 
     override fun getAccessibility(): Accessibility = object : Accessibility {
         override fun enable(packageName: String, className: String) {
-            //no-op
+            throw ActionNotSupportedInSharedTestException("Accessibility")
         }
 
         override fun disable() {
-            //no-op
+            throw ActionNotSupportedInSharedTestException("Accessibility")
         }
     }
 
     override fun getHackPermissions(libLogger: UiTestLogger): HackPermissions = object : HackPermissions {
-        override fun grant(packageName: String, permission: String): Boolean = false
+        override fun grant(packageName: String, permission: String): Boolean =
+            throw ActionNotSupportedInSharedTestException("HackPermissions")
     }
 
     override fun getExploit(adbServer: AdbServer, activities: Activities): Exploit = object : Exploit {
         override fun rotate() {
-            //no-op
+            throw ActionNotSupportedInSharedTestException("Exploit")
         }
 
         override fun setOrientation(deviceOrientation: Exploit.DeviceOrientation) {
-            //no-op
+            throw ActionNotSupportedInSharedTestException("Exploit")
         }
 
         override fun setAutoRotationEnabled(enabled: Boolean) {
-            //no-op
+            throw ActionNotSupportedInSharedTestException("Exploit")
         }
 
         override fun pressBack(failTestIfAppUnderTestClosed: Boolean) {
-            //no-op
+            throw ActionNotSupportedInSharedTestException("Exploit")
         }
 
-        override fun pressHome(): Boolean = false
+        override fun pressHome(): Boolean =
+            throw ActionNotSupportedInSharedTestException("Exploit")
     }
 
     override fun getLanguage(libLogger: UiTestLogger): Language = object : Language {
         override fun switchInApp(locale: Locale) {
-            //no-op
+            throw ActionNotSupportedInSharedTestException("Language")
         }
     }
 
     override fun getLogcat(adbServer: AdbServer): Logcat = object : Logcat {
         override fun disableChatty() {
-            //no-op
+            throw ActionNotSupportedInSharedTestException("Logcat")
         }
 
         override fun setBufferSize(size: LogcatBufferSize) {
-            //no-op
+            throw ActionNotSupportedInSharedTestException("Logcat")
         }
 
         override fun setDefaultBufferSize() {
-            //no-op
+            throw ActionNotSupportedInSharedTestException("Logcat")
         }
 
         override fun clear(buffer: Logcat.Buffer) {
-            //no-op
+            throw ActionNotSupportedInSharedTestException("Logcat")
         }
 
         override fun readLogcatRows(
@@ -276,7 +285,7 @@ class KautomatorJvmConfig : KautomatorConfig {
             includePatternIsIgnoreCase: Boolean,
             buffer: Logcat.Buffer,
             rowLimit: Int?
-        ): List<String> = emptyList()
+        ): List<String> = throw ActionNotSupportedInSharedTestException("Logcat")
 
         override fun readLogcatRows(
             excludePattern: String?,
@@ -286,7 +295,7 @@ class KautomatorJvmConfig : KautomatorConfig {
             buffer: Logcat.Buffer,
             rowLimit: Int?,
             readingBlock: (logcatRow: String) -> Boolean
-        ): Boolean = false
+        ): Boolean = throw ActionNotSupportedInSharedTestException("Logcat")
     }
 
     override fun getObjectBehaviourInterceptors(

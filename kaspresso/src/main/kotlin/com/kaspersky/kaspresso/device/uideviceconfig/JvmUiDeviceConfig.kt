@@ -1,8 +1,8 @@
 package com.kaspersky.kaspresso.device.uideviceconfig
 
 import androidx.test.uiautomator.UiDevice
-import com.kaspersky.kaspresso.failure.exceptions.KautomatorOnSharedTestException
+import com.kaspersky.kaspresso.failure.exceptions.KautomatorInSharedTestException
 
 class JvmUiDeviceConfig : UiDeviceConfig {
-    override fun uiDevice(): UiDevice = throw KautomatorOnSharedTestException()
+    override fun uiDevice(): UiDevice = throw KautomatorInSharedTestException()
 }

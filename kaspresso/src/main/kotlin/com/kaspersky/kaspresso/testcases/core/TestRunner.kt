@@ -2,7 +2,7 @@ package com.kaspersky.kaspresso.testcases.core
 
 import com.kaspersky.kaspresso.enricher.MainSectionEnricher
 import com.kaspersky.kaspresso.enricher.impl.composite.CompositeMainSectionEnricher
-import com.kaspersky.kaspresso.failure.exceptions.KautomatorOnSharedTestException
+import com.kaspersky.kaspresso.failure.exceptions.KautomatorInSharedTestException
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.TestRunWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.composite.TestRunCompositeWatcherInterceptor
 import com.kaspersky.kaspresso.internal.extensions.other.getException
@@ -151,7 +151,7 @@ internal class TestRunner<InitData, Data>(
 
             testRunWatcherInterceptor.onMainSectionFinishedSuccess(updatedTestInfo)
         } catch (e: ExceptionInInitializerError) {
-            throw KautomatorOnSharedTestException()
+            throw KautomatorInSharedTestException()
         } catch (e: Throwable) {
             val allStepsResult: List<StepInfo> = stepsManager.getAllStepsResult()
             val updatedTestInfo = testInfo.copy(stepInfos = allStepsResult)
