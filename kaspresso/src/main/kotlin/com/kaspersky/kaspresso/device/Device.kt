@@ -17,6 +17,7 @@ import com.kaspersky.kaspresso.device.permissions.HackPermissions
 import com.kaspersky.kaspresso.device.permissions.Permissions
 import com.kaspersky.kaspresso.device.phone.Phone
 import com.kaspersky.kaspresso.device.screenshots.Screenshots
+import com.kaspersky.kaspresso.device.uideviceconfig.UiDeviceConfig
 
 /**
  * The provider of managers for all off-screen work.

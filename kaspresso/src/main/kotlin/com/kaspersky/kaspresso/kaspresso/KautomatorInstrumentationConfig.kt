@@ -3,8 +3,8 @@ package com.kaspersky.kaspresso.kaspresso
 import androidx.test.platform.app.InstrumentationRegistry.getInstrumentation
 import androidx.test.uiautomator.UiDevice
 import com.kaspersky.adbserver.common.log.logger.LogLevel
-import com.kaspersky.kaspresso.device.InstrumentationUiDeviceConfig
-import com.kaspersky.kaspresso.device.UiDeviceConfig
+import com.kaspersky.kaspresso.device.uideviceconfig.InstrumentationUiDeviceConfig
+import com.kaspersky.kaspresso.device.uideviceconfig.UiDeviceConfig
 import com.kaspersky.kaspresso.device.accessibility.Accessibility
 import com.kaspersky.kaspresso.device.accessibility.AccessibilityImpl
 import com.kaspersky.kaspresso.device.activities.Activities

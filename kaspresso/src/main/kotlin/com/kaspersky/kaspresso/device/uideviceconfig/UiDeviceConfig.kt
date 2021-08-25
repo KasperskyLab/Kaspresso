@@ -1,4 +1,4 @@
-package com.kaspersky.kaspresso.device
+package com.kaspersky.kaspresso.device.uideviceconfig
 
 import androidx.test.uiautomator.UiDevice
 

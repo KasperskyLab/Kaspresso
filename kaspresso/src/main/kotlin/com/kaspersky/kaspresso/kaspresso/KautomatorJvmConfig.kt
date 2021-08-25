@@ -2,8 +2,8 @@ package com.kaspersky.kaspresso.kaspresso
 
 import android.app.Activity
 import android.net.Uri
-import com.kaspersky.kaspresso.device.JvmUiDeviceConfig
-import com.kaspersky.kaspresso.device.UiDeviceConfig
+import com.kaspersky.kaspresso.device.uideviceconfig.JvmUiDeviceConfig
+import com.kaspersky.kaspresso.device.uideviceconfig.UiDeviceConfig
 import com.kaspersky.kaspresso.device.accessibility.Accessibility
 import com.kaspersky.kaspresso.device.activities.Activities
 import com.kaspersky.kaspresso.device.apps.Apps
