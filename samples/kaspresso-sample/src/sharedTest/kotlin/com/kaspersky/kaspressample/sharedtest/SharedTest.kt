@@ -2,7 +2,7 @@ package com.kaspersky.kaspressample.sharedtest
 
 import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.kaspersky.kaspressample.screen.SharedTestScreen
+import com.kaspersky.kaspressample.screen.kaspresso.SharedTestScreen
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import io.github.kakaocup.kakao.screen.Screen
