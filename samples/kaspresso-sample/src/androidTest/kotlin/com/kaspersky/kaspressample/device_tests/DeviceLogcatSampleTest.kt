@@ -17,13 +17,13 @@ class DeviceLogcatSampleTest : TestCase() {
     @Test
     fun logcatTest() {
         before {
-            device!!.logcat.setBufferSize(LogcatBufferSize(8, LogcatBufferSize.Dimension.MEGABYTES))
-            device!!.logcat.disableChatty()
-            device!!.logcat.clear()
+            device.logcat.setBufferSize(LogcatBufferSize(8, LogcatBufferSize.Dimension.MEGABYTES))
+            device.logcat.disableChatty()
+            device.logcat.clear()
         }.after {
         }.run {
             step("Get logcat from device as list of strings") {
-                val logcatList = device!!.logcat.readLogcatRows()
+                val logcatList = device.logcat.readLogcatRows()
                 assertTrue(logcatList.isNotEmpty())
                 assertTrue(logcatList.any { logcatRow ->
                     logcatRow.contains("beginning of main")
@@ -33,14 +33,14 @@ class DeviceLogcatSampleTest : TestCase() {
             step("Filter logcat by excludePattern and case sensitivity") {
                 testLogger.i("Test1Row")
 
-                val logcatListCaseSensitive = device!!.logcat.readLogcatRows(
+                val logcatListCaseSensitive = device.logcat.readLogcatRows(
                     excludePattern = "test1row"
                 )
                 assertTrue(logcatListCaseSensitive.any { logcatRow ->
                     logcatRow.contains("Test1Row")
                 })
 
-                val logcatListCaseInsensitive = device!!.logcat.readLogcatRows(
+                val logcatListCaseInsensitive = device.logcat.readLogcatRows(
                     excludePattern = "test1row",
                     excludePatternIsIgnoreCase = true
                 )
@@ -53,7 +53,7 @@ class DeviceLogcatSampleTest : TestCase() {
                 repeat(10) { testLogger.i("test2row$it") }
 
                 // exclude all rows
-                val logcatListIntervalFilter = device!!.logcat.readLogcatRows(
+                val logcatListIntervalFilter = device.logcat.readLogcatRows(
                     excludePattern = "test2row[0-9]"
                 )
                 assertTrue(logcatListIntervalFilter.none { logcatRow ->
@@ -61,7 +61,7 @@ class DeviceLogcatSampleTest : TestCase() {
                 })
 
                 // exclude only 2 rows
-                val logcatListOrFilter = device!!.logcat.readLogcatRows(
+                val logcatListOrFilter = device.logcat.readLogcatRows(
                     excludePattern = "test2row2|test2row4"
                 )
                 assertTrue(logcatListOrFilter.none { logcatRow ->
@@ -77,7 +77,7 @@ class DeviceLogcatSampleTest : TestCase() {
             step("Filter logcat by includePattern") {
                 testLogger.i("Test3Row")
 
-                val logcatList = device!!.logcat.readLogcatRows(
+                val logcatList = device.logcat.readLogcatRows(
                     includePattern = "test3row",
                     includePatternIsIgnoreCase = true
                 )
@@ -90,7 +90,7 @@ class DeviceLogcatSampleTest : TestCase() {
                 repeat(10) { testLogger.i("Test4Row$it") }
                 testLogger.i("Test4RowOnlyYou")
 
-                val logcatList = device!!.logcat.readLogcatRows(
+                val logcatList = device.logcat.readLogcatRows(
                     includePattern = "test4row",
                     includePatternIsIgnoreCase = true,
                     excludePattern = "test4row[0-9]",
@@ -105,12 +105,12 @@ class DeviceLogcatSampleTest : TestCase() {
             step("Limit rows output") {
                 repeat(100) { testLogger.i("Test5Row$it") }
 
-                val logcatList10Limit = device!!.logcat.readLogcatRows(
+                val logcatList10Limit = device.logcat.readLogcatRows(
                     rowLimit = 10
                 )
                 assertEquals(11, logcatList10Limit.size)
 
-                val logcatList50Limit = device!!.logcat.readLogcatRows(
+                val logcatList50Limit = device.logcat.readLogcatRows(
                     rowLimit = 50
                 )
                 assertEquals(51, logcatList50Limit.size)
@@ -119,22 +119,22 @@ class DeviceLogcatSampleTest : TestCase() {
             step("Using reader block") {
                 repeat(100) { testLogger.i("Test6Row$it") }
 
-                var fullLogcatList = device!!.logcat.readLogcatRows()
+                var fullLogcatList = device.logcat.readLogcatRows()
 
                 var inneContainsSize = 0
-                val isContainsBreaked = device!!.logcat.readLogcatRows { logcatRow ->
+                val isContainsBreaked = device.logcat.readLogcatRows { logcatRow ->
                     inneContainsSize++
                     logcatRow.contains("Test6Row42")
                 }
 
                 var innerNotContainsSize = 0
-                val isNotContainsBreaked = device!!.logcat.readLogcatRows { logcatRow ->
+                val isNotContainsBreaked = device.logcat.readLogcatRows { logcatRow ->
                     innerNotContainsSize++
                     logcatRow.contains("LogcatWillNotContainThisRow :)")
                 }
 
                 var indexOfBeginningRow = 0
-                val isBreakedOnBeginningRow = device!!.logcat.readLogcatRows { logcatRow ->
+                val isBreakedOnBeginningRow = device.logcat.readLogcatRows { logcatRow ->
                     indexOfBeginningRow++
                     logcatRow.contains("beginning of")
                 }

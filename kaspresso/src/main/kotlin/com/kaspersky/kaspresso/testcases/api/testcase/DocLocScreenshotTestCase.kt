@@ -122,7 +122,7 @@ abstract class DocLocScreenshotTestCase(
         screenshotCapturer = DocLocScreenshotCapturer(
             logger = logger,
             screenshotMaker = ExternalScreenshotMaker(),
-            metadataSaver = MetadataSaver(kaspresso.device?.activities, kaspresso.device?.apps, logger),
+            metadataSaver = MetadataSaver(kaspresso.device.activities, kaspresso.device.apps, logger),
             screenshotDirectoryProvider = screenshotDirectoryProvider,
             screenshotNameProvider = screenshotNameProvider,
             screenshotRootDir = screenshotsDir

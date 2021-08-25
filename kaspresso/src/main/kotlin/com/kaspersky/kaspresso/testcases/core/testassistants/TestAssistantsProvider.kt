@@ -11,7 +11,7 @@ import com.kaspersky.kaspresso.params.Params
  */
 interface TestAssistantsProvider {
 
-    val device: Device?
+    val device: Device
     val adbServer: AdbServer
     val testLogger: UiTestLogger
     val params: Params

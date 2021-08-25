@@ -51,7 +51,7 @@ class KautomatorMeasureTest : TestCase(
                     RANGE.forEach { _ ->
                         button1 {
                             click()
-                            hasText(device!!.targetContext.getString(R.string.measure_fragment_text_button_1).toUpperCase())
+                            hasText(device.targetContext.getString(R.string.measure_fragment_text_button_1).toUpperCase())
                         }
                     }
                 }
@@ -62,11 +62,11 @@ class KautomatorMeasureTest : TestCase(
                     RANGE.forEach { index ->
                         button2 {
                             click()
-                            hasText(device!!.targetContext.getString(R.string.measure_fragment_text_button_2).toUpperCase())
+                            hasText(device.targetContext.getString(R.string.measure_fragment_text_button_2).toUpperCase())
                         }
                         textView {
                             hasText(
-                                "${device!!.targetContext.getString(R.string.measure_fragment_text_textview)}${index + 1}"
+                                "${device.targetContext.getString(R.string.measure_fragment_text_textview)}${index + 1}"
                             )
                         }
                     }
@@ -77,7 +77,7 @@ class KautomatorMeasureTest : TestCase(
                 UiMeasureScreen {
                     edit {
                         isDisplayed()
-                        hasText(device!!.targetContext.getString(R.string.measure_fragment_text_edittext))
+                        hasText(device.targetContext.getString(R.string.measure_fragment_text_edittext))
                         RANGE.forEach { _ ->
                             clearText()
                             typeText("bla-bla-bla")

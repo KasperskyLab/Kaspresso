@@ -77,7 +77,7 @@ data class Kaspresso(
 
     //Kautomator dependent
     internal val adbServer: AdbServer,
-    internal val device: Device?,
+    internal val device: Device,
     internal val objectWatcherInterceptors: List<ObjectWatcherInterceptor>,
     internal val deviceWatcherInterceptors: List<DeviceWatcherInterceptor>,
     internal val objectBehaviorInterceptors: List<ObjectBehaviorInterceptor>,

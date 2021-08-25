@@ -119,7 +119,12 @@ data class Device(
     /**
      * Holds the reference to the implementation of [Logcat] interface.
      */
-    val logcat: Logcat
+    val logcat: Logcat,
+
+    /**
+     * A handler to get the instance of [UiDevice]
+     */
+    val uiDeviceConfig: UiDeviceConfig
 ) {
     /**
      * A not caching property to get [Context].
@@ -136,5 +141,5 @@ data class Device(
     /**
      * A property to get the instance of [UiDevice].
      */
-    val uiDevice: UiDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
+    fun uiDevice(): UiDevice = uiDeviceConfig.uiDevice()
 }

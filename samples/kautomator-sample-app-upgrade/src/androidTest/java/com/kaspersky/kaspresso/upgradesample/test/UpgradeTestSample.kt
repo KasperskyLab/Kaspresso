@@ -67,7 +67,7 @@ class UpgradeTestSample : TestCase() {
             }
 
             step("Press Home button") {
-                device!!.uiDevice.pressHome()
+                device.uiDevice().pressHome()
             }
 
             step("Upgrade the app and launch then") {

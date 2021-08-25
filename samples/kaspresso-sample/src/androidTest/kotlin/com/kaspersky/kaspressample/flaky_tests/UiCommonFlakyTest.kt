@@ -51,7 +51,7 @@ class UiCommonFlakyTest : TestCase() {
                         // even UiAutomator is using under the hood =)
                         // the text is changing during 3 seconds
                         // the default value of flaky safety timeout = 10 seconds
-                        hasText(device!!.targetContext.getString(R.string.common_flaky_final_button).toUpperCase())
+                        hasText(device.targetContext.getString(R.string.common_flaky_final_button).toUpperCase())
                     }
                 }
             }
@@ -63,7 +63,7 @@ class UiCommonFlakyTest : TestCase() {
                         //     the default value of flaky safety timeout(10 seconds)
                         // that's why we use flakySafely method obviously
                         flakySafely(timeoutMs = 16_000) {
-                            hasText(device!!.targetContext.getString(R.string.common_flaky_final_textview))
+                            hasText(device.targetContext.getString(R.string.common_flaky_final_textview))
                         }
                     }
                 }

@@ -36,7 +36,7 @@ abstract class BaseTestCase<InitData, Data>(
     private val testAssistantsProvider = TestAssistantsProviderImpl(kaspresso)
 
     override val adbServer: AdbServer = testAssistantsProvider.adbServer
-    override val device: Device? = testAssistantsProvider.device
+    override val device: Device = testAssistantsProvider.device
     override val testLogger: UiTestLogger = testAssistantsProvider.testLogger
     override val params: Params = testAssistantsProvider.params
 

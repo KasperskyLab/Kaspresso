@@ -36,7 +36,7 @@ class DeviceKeyboardSampleTest : TestCase() {
             step("Type text using [Keyboard.typeText]") {
                 DeviceSampleScreen {
                     input {
-                        device!!.keyboard.typeText(TEXT_TO_BE_TYPED)
+                        device.keyboard.typeText(TEXT_TO_BE_TYPED)
                         hasText(TEXT_TO_BE_TYPED)
                     }
                 }
@@ -53,15 +53,15 @@ class DeviceKeyboardSampleTest : TestCase() {
                 }
 
                 // Type `kaspresso`
-                device!!.keyboard.sendEvent(KeyEvent.KEYCODE_K)
-                device!!.keyboard.sendEvent(KeyEvent.KEYCODE_A)
-                device!!.keyboard.sendEvent(KeyEvent.KEYCODE_S)
-                device!!.keyboard.sendEvent(KeyEvent.KEYCODE_P)
-                device!!.keyboard.sendEvent(KeyEvent.KEYCODE_R)
-                device!!.keyboard.sendEvent(KeyEvent.KEYCODE_E)
-                device!!.keyboard.sendEvent(KeyEvent.KEYCODE_S)
-                device!!.keyboard.sendEvent(KeyEvent.KEYCODE_S)
-                device!!.keyboard.sendEvent(KeyEvent.KEYCODE_O)
+                device.keyboard.sendEvent(KeyEvent.KEYCODE_K)
+                device.keyboard.sendEvent(KeyEvent.KEYCODE_A)
+                device.keyboard.sendEvent(KeyEvent.KEYCODE_S)
+                device.keyboard.sendEvent(KeyEvent.KEYCODE_P)
+                device.keyboard.sendEvent(KeyEvent.KEYCODE_R)
+                device.keyboard.sendEvent(KeyEvent.KEYCODE_E)
+                device.keyboard.sendEvent(KeyEvent.KEYCODE_S)
+                device.keyboard.sendEvent(KeyEvent.KEYCODE_S)
+                device.keyboard.sendEvent(KeyEvent.KEYCODE_O)
 
                 DeviceSampleScreen {
                     input {

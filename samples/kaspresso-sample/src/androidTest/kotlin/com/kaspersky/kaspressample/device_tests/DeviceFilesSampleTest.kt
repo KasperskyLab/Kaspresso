@@ -39,14 +39,14 @@ class DeviceFilesSampleTest : TestCase() {
         run {
 
             step("Push $FILE_RELATIVE_PATH to device") {
-                device!!.files.push(FILE_RELATIVE_PATH, Environment.getExternalStorageDirectory().absolutePath)
+                device.files.push(FILE_RELATIVE_PATH, Environment.getExternalStorageDirectory().absolutePath)
                 val file = File(Environment.getExternalStorageDirectory(), FILE_NAME)
                 assertTrue(file.exists())
             }
 
             step("Delete pushed file") {
                 val file = File(Environment.getExternalStorageDirectory(), FILE_NAME)
-                device!!.files.remove(file.absolutePath)
+                device.files.remove(file.absolutePath)
                 assertFalse(file.exists())
             }
         }

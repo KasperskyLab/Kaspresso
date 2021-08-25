@@ -1,6 +1,7 @@
 package com.kaspersky.kaspresso.kaspresso
 
 import com.kaspersky.kaspresso.device.Device
+import com.kaspersky.kaspresso.device.UiDeviceConfig
 import com.kaspersky.kaspresso.device.accessibility.Accessibility
 import com.kaspersky.kaspresso.device.activities.Activities
 import com.kaspersky.kaspresso.device.apps.Apps
@@ -29,7 +30,26 @@ interface KautomatorConfig {
 
     val canRunOnJvm: Boolean
 
-    fun getDevice(libLogger: UiTestLogger, adbServer: AdbServer, activities: Activities): Device?
+    fun getDevice(libLogger: UiTestLogger, adbServer: AdbServer, activities: Activities): Device =
+        Device(
+            apps = getApps(libLogger, adbServer),
+            files = getFiles(adbServer),
+            network = getNetwork(libLogger, adbServer),
+            activities = getActivities(libLogger),
+            phone = getPhone(adbServer),
+            location = getLocation(adbServer),
+            keyboard = getKeyboard(adbServer),
+            accessibility = getAccessibility(),
+            screenshots = getScreenshots(libLogger, activities),
+            permissions = getPermissions(libLogger),
+            hackPermissions = getHackPermissions(libLogger),
+            exploit = getExploit(adbServer, activities),
+            language = getLanguage(libLogger),
+            logcat = getLogcat(adbServer),
+            uiDeviceConfig = getUiDeviceConfig()
+        )
+
+    fun getUiDeviceConfig() : UiDeviceConfig
 
     fun getAdbServer(libLogger: UiTestLogger): AdbServer
 

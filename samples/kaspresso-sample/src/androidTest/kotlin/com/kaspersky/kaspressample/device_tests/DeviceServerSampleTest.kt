@@ -39,7 +39,7 @@ class DeviceServerSampleTest : TestCase() {
                 val command = "pm list packages"
 
                 val result = adbServer.performShell(command)
-                assertTrue("package:${device!!.targetContext.packageName}" in result.first())
+                assertTrue("package:${device.targetContext.packageName}" in result.first())
             }
         }
     }

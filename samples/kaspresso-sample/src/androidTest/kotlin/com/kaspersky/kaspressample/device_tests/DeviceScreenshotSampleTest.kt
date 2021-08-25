@@ -39,7 +39,7 @@ class DeviceScreenshotSampleTest : TestCase() {
 
             step("Take a screenshot") {
                 assertFalse(screenshotExists())
-                device!!.screenshots.take(SCREENSHOT_TAG)
+                device.screenshots.take(SCREENSHOT_TAG)
                 assertTrue(screenshotExists())
             }
         }
@@ -54,7 +54,7 @@ class DeviceScreenshotSampleTest : TestCase() {
             Environment.getExternalStorageDirectory().resolve(dir)
         } else {
             // Use internal storage.
-            device!!.targetContext.getDir(dir.canonicalPath, Context.MODE_WORLD_READABLE)
+            device.targetContext.getDir(dir.canonicalPath, Context.MODE_WORLD_READABLE)
         }
     }
 

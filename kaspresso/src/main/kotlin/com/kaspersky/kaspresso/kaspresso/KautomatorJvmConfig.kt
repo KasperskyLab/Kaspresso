@@ -2,7 +2,8 @@ package com.kaspersky.kaspresso.kaspresso
 
 import android.app.Activity
 import android.net.Uri
-import com.kaspersky.kaspresso.device.Device
+import com.kaspersky.kaspresso.device.JvmUiDeviceConfig
+import com.kaspersky.kaspresso.device.UiDeviceConfig
 import com.kaspersky.kaspresso.device.accessibility.Accessibility
 import com.kaspersky.kaspresso.device.activities.Activities
 import com.kaspersky.kaspresso.device.apps.Apps
@@ -47,7 +48,7 @@ class KautomatorJvmConfig : KautomatorConfig {
     override val canRunOnJvm: Boolean
         get() = true
 
-    override fun getDevice(libLogger: UiTestLogger, adbServer: AdbServer, activities: Activities): Device? = null
+    override fun getUiDeviceConfig(): UiDeviceConfig = JvmUiDeviceConfig()
 
     override fun getAdbServer(libLogger: UiTestLogger): AdbServer = object : AdbServer {
         override fun performCmd(vararg commands: String): List<String> = emptyList()

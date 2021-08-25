@@ -8,7 +8,7 @@ import com.kaspersky.kaspresso.params.Params
 
 internal class TestAssistantsProviderImpl(kaspresso: Kaspresso) : TestAssistantsProvider {
 
-    override val device: Device? = kaspresso.device
+    override val device: Device = kaspresso.device
     override val adbServer: AdbServer = kaspresso.adbServer
     override val testLogger: UiTestLogger = kaspresso.testLogger
     override val params: Params = kaspresso.params

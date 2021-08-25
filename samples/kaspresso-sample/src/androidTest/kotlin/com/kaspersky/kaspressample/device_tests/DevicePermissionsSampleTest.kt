@@ -31,7 +31,7 @@ class DevicePermissionsSampleTest : TestCase() {
         assumeTrue(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
 
         before {
-            adbServer.performShell("pm revoke ${device!!.targetContext.packageName} ${Manifest.permission.READ_CALL_LOG}")
+            adbServer.performShell("pm revoke ${device.targetContext.packageName} ${Manifest.permission.READ_CALL_LOG}")
         }.after {
         }.run {
 
@@ -43,7 +43,7 @@ class DevicePermissionsSampleTest : TestCase() {
                     }
                 }
 
-                device!!.permissions.apply {
+                device.permissions.apply {
                     assertTrueSafely { isDialogVisible() }
                     allowViaDialog()
                 }
@@ -55,6 +55,6 @@ class DevicePermissionsSampleTest : TestCase() {
     }
 
     private fun BaseTestContext.hasCallLogPermission(): Boolean =
-        device!!.targetContext.checkSelfPermission(Manifest.permission.READ_CALL_LOG) ==
+        device.targetContext.checkSelfPermission(Manifest.permission.READ_CALL_LOG) ==
                 PackageManager.PERMISSION_GRANTED
 }

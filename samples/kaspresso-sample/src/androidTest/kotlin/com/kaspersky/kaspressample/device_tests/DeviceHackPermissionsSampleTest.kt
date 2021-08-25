@@ -38,7 +38,7 @@ class DeviceHackPermissionsSampleTest : TestCase() {
 
         run {
             step("Request permissions") {
-                device!!.hackPermissions.grant(device!!.targetContext.packageName, Manifest.permission.READ_CALL_LOG)
+                device.hackPermissions.grant(device.targetContext.packageName, Manifest.permission.READ_CALL_LOG)
                 // Contacts permission should be granted now
                 assertTrue(hasCallLogPermission())
             }
@@ -46,6 +46,6 @@ class DeviceHackPermissionsSampleTest : TestCase() {
     }
 
     private fun BaseTestContext.hasCallLogPermission(): Boolean =
-        device!!.targetContext.checkSelfPermission(Manifest.permission.READ_CALL_LOG) ==
+        device.targetContext.checkSelfPermission(Manifest.permission.READ_CALL_LOG) ==
                 PackageManager.PERMISSION_GRANTED
 }

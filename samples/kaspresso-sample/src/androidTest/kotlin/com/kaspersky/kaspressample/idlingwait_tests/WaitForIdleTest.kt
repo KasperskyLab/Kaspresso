@@ -45,7 +45,7 @@ class WaitForIdleTest : TestCase(
                 UiWaitForIdleScreen {
                     edit {
                         isDisplayed()
-                        containsText(device!!.targetContext.getString(R.string.idlewaiting_fragment_text_edittext))
+                        containsText(device.targetContext.getString(R.string.idlewaiting_fragment_text_edittext))
                     }
                 }
             }
