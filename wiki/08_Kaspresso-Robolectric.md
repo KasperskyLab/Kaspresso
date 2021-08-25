@@ -15,7 +15,7 @@ java.lang.NullPointerException
 	at com.kaspersky.kaspresso.kaspresso.Kaspresso$Builder$Companion.simple(Kaspresso.kt:215)
 	...
 ```
-That is because Robolectric is just compatible with Espresso and not with uiAutomator. Kaspresso initializes UiDevice by default, which is an UiAutomator dependency, resulting in such an error.
+That is because Robolectric is just compatible with Espresso and not with uiAutomator.
 
 In order to enable Kaspresso tests to run also on the JVM with Robolectric, apart from all the [configuration required for Robolectric](http://robolectric.org/blog/2018/10/25/robolectric-4-0/),
 the Kaspresso Builder of your test class needs to contain sharedTest = true
@@ -24,8 +24,10 @@ the Kaspresso Builder of your test class needs to contain sharedTest = true
 SharedTest : TestCase(Kaspresso.Builder.simple(sharedTest = true)){...}
 ```
 
-In doing so, Kautomator dependencies making use of UiDevice will be either replaced with empty doubles or safely nullified. This also means, no adb-server possible either, as well as some other interceptors e.g. the "Close System Dialog interceptor"
-or Screens using Kautomator under the hood.
+However, this option have some caveats:
+1. Not possible to use adb-server. Some interceptors that require Kautomator e.g. the "Close System Dialog interceptor" are also disabled.
+2. You cannot use Kautomator `UiScreen<S>` anymore. If you do so, your test will fail with a `KautomatorInSharedTestException`.
+3. All the interactions with `Device` are mocked. This is done to allow Kaspresso tests run on the JVM. If you use call any method from `device`, e.g. `device.hackPermission.grant(permission)`, the test fails with an `ActionNotSupportedInSharedTestException`
 
 
 ## Usage
