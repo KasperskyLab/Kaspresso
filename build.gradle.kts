@@ -2,7 +2,7 @@ import io.gitlab.arturbosch.detekt.Detekt
 
 plugins {
     base
-    id("io.gitlab.arturbosch.detekt") version "1.16.0"
+    id("io.gitlab.arturbosch.detekt") version "1.18.1"
 }
 
 dependencies {
