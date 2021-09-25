@@ -3,7 +3,7 @@ package com.kaspersky.kaspresso_allure_support_sample
 import android.Manifest
 import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
-import com.kaspersky.components.allure_support.withAllureSupport
+import com.kaspersky.components.alluresupport.withAllureSupport
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.params.ScreenshotParams
 import com.kaspersky.kaspresso.params.VideoParams

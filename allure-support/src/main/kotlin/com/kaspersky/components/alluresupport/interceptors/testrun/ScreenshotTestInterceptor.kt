@@ -1,8 +1,8 @@
-package com.kaspersky.components.allure_support.interceptors.testrun
+package com.kaspersky.components.alluresupport.interceptors.testrun
 
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.TestRunWatcherInterceptor
 import com.kaspersky.kaspresso.testcases.models.info.TestInfo
-import com.kaspersky.components.allure_support.files.attachScreenshotToAllureReport
+import com.kaspersky.components.alluresupport.files.attachScreenshotToAllureReport
 import com.kaspersky.kaspresso.device.screenshots.Screenshots
 
 class ScreenshotTestInterceptor(

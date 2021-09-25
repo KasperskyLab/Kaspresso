@@ -1,4 +1,4 @@
-package com.kaspersky.components.allure_support.files
+package com.kaspersky.components.alluresupport.files
 
 import io.qameta.allure.android.AllureAndroidLifecycle
 import java.io.File

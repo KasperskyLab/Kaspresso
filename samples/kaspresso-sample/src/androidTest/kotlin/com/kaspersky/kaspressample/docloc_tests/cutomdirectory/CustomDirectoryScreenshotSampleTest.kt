@@ -22,7 +22,7 @@ import java.io.File
  * See [FlatDirectoryProvider] and [AutoNumeratedNamesProvider] implementations.
  */
 class CustomDirectoryScreenshotSampleTest : DocLocScreenshotTestCase(
-    resourcesRootDirsProvider = object: ResourcesRootDirsProvider by DefaultResourcesRootDirsProvider() {
+    resourcesRootDirsProvider = object : ResourcesRootDirsProvider by DefaultResourcesRootDirsProvider() {
         override val screenshotsRootDir = File("custom_directory")
     },
     resourcesDirsProvider = FlatDirectoryProvider(

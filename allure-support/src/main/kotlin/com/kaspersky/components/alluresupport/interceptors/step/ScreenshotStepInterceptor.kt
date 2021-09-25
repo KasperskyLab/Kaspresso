@@ -1,6 +1,6 @@
-package com.kaspersky.components.allure_support.interceptors.step
+package com.kaspersky.components.alluresupport.interceptors.step
 
-import com.kaspersky.components.allure_support.files.attachScreenshotToAllureReport
+import com.kaspersky.components.alluresupport.files.attachScreenshotToAllureReport
 import com.kaspersky.kaspresso.device.screenshots.Screenshots
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.StepWatcherInterceptor
 import com.kaspersky.kaspresso.testcases.models.info.StepInfo
