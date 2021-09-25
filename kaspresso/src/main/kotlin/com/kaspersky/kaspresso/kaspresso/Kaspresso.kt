@@ -55,6 +55,10 @@ import com.kaspersky.kaspresso.failure.LoggingFailureHandler
 import com.kaspersky.kaspresso.files.DefaultDirsProvider
 import com.kaspersky.kaspresso.files.DirsProvider
 import com.kaspersky.kaspresso.files.resources.*
+import com.kaspersky.kaspresso.files.resources.impl.DefaultResourceFileNamesProvider
+import com.kaspersky.kaspresso.files.resources.impl.DefaultResourceFilesProvider
+import com.kaspersky.kaspresso.files.resources.impl.DefaultResourcesDirsProvider
+import com.kaspersky.kaspresso.files.resources.impl.DefaultResourcesRootDirsProvider
 import com.kaspersky.kaspresso.idlewaiting.KautomatorWaitForIdleSettings
 import com.kaspersky.kaspresso.interceptors.behavior.DataBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.ViewBehaviorInterceptor

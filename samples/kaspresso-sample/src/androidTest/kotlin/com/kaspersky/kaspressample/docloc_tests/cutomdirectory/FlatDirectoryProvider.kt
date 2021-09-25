@@ -1,7 +1,7 @@
 package com.kaspersky.kaspressample.docloc_tests.cutomdirectory
 
 import com.kaspersky.kaspresso.files.DirsProvider
-import com.kaspersky.kaspresso.files.resources.DefaultResourcesDirsProvider
+import com.kaspersky.kaspresso.files.resources.impl.DefaultResourcesDirsProvider
 import com.kaspersky.kaspresso.files.resources.ResourcesDirsProvider
 import java.io.File
 

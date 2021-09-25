@@ -10,6 +10,10 @@ import com.kaspersky.kaspresso.docloc.rule.LocaleRule
 import com.kaspersky.kaspresso.docloc.rule.TestFailRule
 import com.kaspersky.kaspresso.files.DefaultDirsProvider
 import com.kaspersky.kaspresso.files.resources.*
+import com.kaspersky.kaspresso.files.resources.impl.DefaultResourceFileNamesProvider
+import com.kaspersky.kaspresso.files.resources.impl.DefaultResourceFilesProvider
+import com.kaspersky.kaspresso.files.resources.impl.DefaultResourcesDirsProvider
+import com.kaspersky.kaspresso.files.resources.impl.DefaultResourcesRootDirsProvider
 import com.kaspersky.kaspresso.internal.extensions.other.getAllInterfaces
 import com.kaspersky.kaspresso.internal.invocation.UiInvocationHandler
 import com.kaspersky.kaspresso.kaspresso.Kaspresso

@@ -8,10 +8,3 @@ interface ResourcesRootDirsProvider {
     val videoRootDir: File
     val viewHierarchy: File
 }
-
-class DefaultResourcesRootDirsProvider : ResourcesRootDirsProvider {
-    override val logcatRootDir = File("logcat")
-    override val screenshotsRootDir = File("screenshots")
-    override val videoRootDir = File("video")
-    override val viewHierarchy = File("view_hierarchy")
-}

@@ -8,7 +8,7 @@ import com.kaspersky.kaspressample.screen.SimpleScreen
 import com.kaspersky.kaspresso_sample_core.simple.SimpleActivity
 import com.kaspersky.kaspresso.annotations.ScreenShooterTest
 import com.kaspersky.kaspresso.files.DefaultDirsProvider
-import com.kaspersky.kaspresso.files.resources.DefaultResourcesRootDirsProvider
+import com.kaspersky.kaspresso.files.resources.impl.DefaultResourcesRootDirsProvider
 import com.kaspersky.kaspresso.files.resources.ResourcesRootDirsProvider
 import com.kaspersky.kaspresso.testcases.api.testcase.DocLocScreenshotTestCase
 import org.junit.Rule
