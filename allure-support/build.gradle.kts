@@ -4,7 +4,7 @@ plugins {
 }
 
 publish {
-    artifactId.set("kaspresso-allure-interceptors")
+    artifactId.set("kaspresso-allure-support")
 }
 
 dependencies {

@@ -31,7 +31,7 @@ include(
 
     ":kaspresso",
     ":kautomator",
-    ":allure_support",
+    ":allure-support",
 
     ":samples:kaspresso-sample-core",
     ":samples:adbserver-sample",
