@@ -1,8 +1,8 @@
 package com.kaspersky.kaspresso_allure_support_sample.screen
 
-import com.agoda.kakao.text.KTextView
 import com.kaspersky.kaspresso_allure_support_sample.R
 import com.kaspersky.kaspresso.screens.KScreen
+import io.github.kakaocup.kakao.text.KTextView
 
 object ContinuouslyDialogScreen : KScreen<ContinuouslyDialogScreen>() {
     override val layoutId: Int? = null

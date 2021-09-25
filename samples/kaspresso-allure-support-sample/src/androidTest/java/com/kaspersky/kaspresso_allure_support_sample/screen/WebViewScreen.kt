@@ -1,9 +1,9 @@
 package com.kaspersky.kaspresso_allure_support_sample.screen
 
-import com.agoda.kakao.web.KWebView
 import com.kaspersky.kaspresso_allure_support_sample.R
 import com.kaspersky.kaspresso_sample_core.web.WebViewActivity
 import com.kaspersky.kaspresso.screens.KScreen
+import io.github.kakaocup.kakao.web.KWebView
 
 object WebViewScreen : KScreen<WebViewScreen>() {
 
