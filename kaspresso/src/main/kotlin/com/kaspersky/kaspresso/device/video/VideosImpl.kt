@@ -1,6 +1,6 @@
 package com.kaspersky.kaspresso.device.video
 
-import com.kaspersky.kaspresso.device.video.videorecorder.VideoRecorder
+import com.kaspersky.kaspresso.device.video.recorder.VideoRecorder
 import com.kaspersky.kaspresso.files.resources.ResourceFilesProvider
 import java.io.File
 

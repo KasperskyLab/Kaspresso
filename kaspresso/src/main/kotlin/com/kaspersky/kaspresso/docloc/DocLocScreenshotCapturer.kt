@@ -17,6 +17,7 @@ internal class DocLocScreenshotCapturer(
 ) {
     private companion object {
         private const val SCREENSHOT_CAPTURE_DELAY_MS: Long = 500
+        private const val SCREENSHOT_DEFAULT_FAILS_SUB_DIR = "fails"
     }
 
     /**
@@ -37,7 +38,7 @@ internal class DocLocScreenshotCapturer(
      */
     fun captureScreenshotOnFail(screenshotName: String) {
         wait(timeoutMs = SCREENSHOT_CAPTURE_DELAY_MS, logger = logger) {
-            val screenshotFile = resourceFilesProvider.provideScreenshotFile(screenshotName, "fails")
+            val screenshotFile = resourceFilesProvider.provideScreenshotFile(screenshotName, SCREENSHOT_DEFAULT_FAILS_SUB_DIR)
             screenshotMaker.takeScreenshot(screenshotFile)
         }
     }

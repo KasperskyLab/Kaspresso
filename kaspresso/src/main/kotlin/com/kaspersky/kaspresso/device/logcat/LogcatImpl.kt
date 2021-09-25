@@ -70,13 +70,13 @@ class LogcatImpl(
         buffer: Logcat.Buffer
     ) {
         val command = prepareCommand(
-            tags,
-            excludePattern,
-            excludePatternIsIgnoreCase,
-            includePattern,
-            includePatternIsIgnoreCase,
-            buffer,
-            null
+            tags = tags,
+            excludePattern = excludePattern,
+            excludePatternIsIgnoreCase = excludePatternIsIgnoreCase,
+            includePattern = includePattern,
+            includePatternIsIgnoreCase = includePatternIsIgnoreCase,
+            buffer = buffer,
+            rowLimit = null
         )
         val process = executeCommand(command)
         try {
@@ -147,13 +147,13 @@ class LogcatImpl(
         readingBlock: (logcatRow: String) -> Boolean
     ): Boolean {
         val command = prepareCommand(
-            null,
-            excludePattern,
-            excludePatternIsIgnoreCase,
-            includePattern,
-            includePatternIsIgnoreCase,
-            buffer,
-            rowLimit
+            tags = null,
+            excludePattern = excludePattern,
+            excludePatternIsIgnoreCase = excludePatternIsIgnoreCase,
+            includePattern = includePattern,
+            includePatternIsIgnoreCase = includePatternIsIgnoreCase,
+            buffer = buffer,
+            rowLimit = rowLimit
         )
         val process = executeCommand(command)
         val logcatStream = InputStreamReader(process.inputStream)

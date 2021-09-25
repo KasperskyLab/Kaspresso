@@ -8,20 +8,19 @@ import com.kaspersky.components.allure_support.interceptors.testrun.ScreenshotTe
 import com.kaspersky.components.allure_support.interceptors.testrun.VideoRecordingTestInterceptor
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 
-fun withAllureSupport(customize: Kaspresso.Builder.() -> Unit = {}): Kaspresso.Builder =
-    Kaspresso.Builder.simple(customize).apply {
-        stepWatcherInterceptors.addAll(
-            listOf(
-                AllureMapperStepInterceptor(),
-                ScreenshotStepInterceptor(screenshots)
-            )
+fun Kaspresso.Builder.withAllureSupport(): Kaspresso.Builder = apply {
+    stepWatcherInterceptors.addAll(
+        listOf(
+            ScreenshotStepInterceptor(screenshots),
+            AllureMapperStepInterceptor()
         )
-        testRunWatcherInterceptors.addAll(
-            listOf(
-                ScreenshotTestInterceptor(screenshots),
-                VideoRecordingTestInterceptor(videos),
-                DumpLogcatTestInterceptor(logcatDumper),
-                DumpViewsTestInterceptor(viewHierarchyDumper)
-            )
+    )
+    testRunWatcherInterceptors.addAll(
+        listOf(
+            ScreenshotTestInterceptor(screenshots),
+            VideoRecordingTestInterceptor(videos),
+            DumpLogcatTestInterceptor(logcatDumper),
+            DumpViewsTestInterceptor(viewHierarchyDumper)
         )
-    }
+    )
+}

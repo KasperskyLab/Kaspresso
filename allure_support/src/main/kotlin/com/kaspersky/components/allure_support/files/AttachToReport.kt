@@ -1,33 +1,32 @@
 package com.kaspersky.components.allure_support.files
 
-import com.kaspersky.kaspresso.files.FileExtension
 import io.qameta.allure.android.AllureAndroidLifecycle
 import java.io.File
 
 fun File.attachLogcatToAllureReport(): Unit = AllureAndroidLifecycle.addAttachment(
     name = name,
-    type = TEXT_PLAIN,
-    fileExtension = TXT_EXTENSION,
-    file = this
+    stream = this.inputStream(),
+    type = "text/plain",
+    fileExtension = "txt",
 )
 
 fun File.attachViewHierarchyToAllureReport(): Unit = AllureAndroidLifecycle.addAttachment(
-    name,
-    TEXT_XML,
-    XML_EXTENSION,
-    this
+    name = name,
+    stream = this.inputStream(),
+    type = "text/xml",
+    fileExtension = "xml",
 )
 
 fun File.attachScreenshotToAllureReport(): Unit = AllureAndroidLifecycle.addAttachment(
     name = name,
-    type = IMAGE_PNG,
-    fileExtension = PNG_EXTENSION,
-    file = this
+    stream = this.inputStream(),
+    type = "image/png",
+    fileExtension = "png",
 )
 
 fun File.attachVideoToAllureReport(): Unit = AllureAndroidLifecycle.addAttachment(
     name = name,
+    stream = this.inputStream(),
     type = "video/mp4",
-    fileExtension = FileExtension.MP4.toString(),
-    file = this
+    fileExtension = "mp4",
 )

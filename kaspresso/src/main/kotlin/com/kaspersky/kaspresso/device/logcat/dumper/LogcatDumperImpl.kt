@@ -11,7 +11,8 @@ import java.io.File
 class LogcatDumperImpl(
     private val logger: UiTestLogger,
     private val resourceFilesProvider: ResourceFilesProvider,
-    private val logcat: Logcat
+    private val logcat: Logcat,
+    private val loggerTags: List<String>
 ) : LogcatDumper {
 
     override fun dump(tag: String): Unit = doDump(tag, null)

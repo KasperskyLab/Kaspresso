@@ -48,7 +48,7 @@ import com.kaspersky.kaspresso.device.server.AdbServer
 import com.kaspersky.kaspresso.device.server.AdbServerImpl
 import com.kaspersky.kaspresso.device.video.Videos
 import com.kaspersky.kaspresso.device.video.VideosImpl
-import com.kaspersky.kaspresso.device.video.videorecorder.VideoRecorderImpl
+import com.kaspersky.kaspresso.device.video.recorder.VideoRecorderImpl
 import com.kaspersky.kaspresso.device.viewhierarchy.ViewHierarchyDumper
 import com.kaspersky.kaspresso.device.viewhierarchy.ViewHierarchyDumperImpl
 import com.kaspersky.kaspresso.failure.LoggingFailureHandler
