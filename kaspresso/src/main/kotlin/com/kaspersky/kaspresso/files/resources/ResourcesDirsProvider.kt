@@ -6,7 +6,7 @@ import com.kaspersky.kaspresso.files.DirsProvider
 import java.io.File
 
 interface ResourcesDirsProvider {
-    fun provide(path: File, subDir: String? = null): File
+    fun provide(dest: File, subDir: String? = null): File
     fun onNewTestRun()
 }
 
@@ -17,10 +17,10 @@ class DefaultResourcesDirsProvider(
 
     private val testRunsCount = mutableMapOf<TestMethod, Int>()
 
-    override fun provide(path: File, subDir: String?): File {
-        val rootDir: File = dirsProvider.provideNew(path)
-        val resultsDir: File = provideResourcesDir(rootDir, subDir)
-        return dirsProvider.provideCleared(resultsDir)
+    override fun provide(dest: File, subDir: String?): File {
+        val rootDir: File = dirsProvider.provideNew(dest)
+        val resourcesDest: File = resolveResourcesDirDest(rootDir, subDir)
+        return dirsProvider.provideCleared(resourcesDest)
     }
 
     override fun onNewTestRun() {
@@ -28,13 +28,13 @@ class DefaultResourcesDirsProvider(
         testRunsCount[testMethod] = (testRunsCount[testMethod] ?: 0) + 1
     }
 
-    private fun provideResourcesDir(rootDir: File, subDir: String? = null): File {
+    private fun resolveResourcesDirDest(rootDir: File, subDir: String? = null): File {
         val testMethod: TestMethod = Thread.currentThread().stackTrace.findTestMethod()
         val runNumber: Int = testRunsCount[testMethod] ?: 1
-        val resultsDirName: String = getResourcesDirName(testMethod, runNumber)
+        val resourcesDirName: String = getResourcesDirName(testMethod, runNumber)
         return when (subDir) {
-            null -> rootDir.resolve(resultsDirName)
-            else -> rootDir.resolve(subDir).resolve(resultsDirName)
+            null -> rootDir.resolve(resourcesDirName)
+            else -> rootDir.resolve(subDir).resolve(resourcesDirName)
         }
     }
 

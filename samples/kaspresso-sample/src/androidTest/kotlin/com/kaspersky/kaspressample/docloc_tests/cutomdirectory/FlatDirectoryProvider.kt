@@ -11,8 +11,8 @@ internal class FlatDirectoryProvider(
     dirsProvider = dirsProvider,
     groupByRunNumbers = false
 ) {
-    override fun provide(path: File, subDir: String?): File {
-        val rootDir: File = dirsProvider.provideNew(path)
+    override fun provide(dest: File, subDir: String?): File {
+        val rootDir: File = dirsProvider.provideNew(dest)
         val resultsDir: File = when (subDir) {
             null -> rootDir.resolve("")
             else -> rootDir.resolve(subDir).resolve("")

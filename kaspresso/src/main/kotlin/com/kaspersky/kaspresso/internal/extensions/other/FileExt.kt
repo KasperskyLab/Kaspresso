@@ -22,17 +22,27 @@ internal fun File.safeWrite(logger: UiTestLogger, data: String) {
 }
 
 /**
- * Creates a directory with all needed parent dirs, then grants RWX permissions.
+ * Creates a file if it does not exist with all needed parent dirs, then grants RWX permissions.
  */
-internal fun File.createDirectoryRWX() {
-    mkdirs()
+internal fun File.createFileIfNeeded(): File = apply {
+    if (!exists()) {
+        createNewFile()
+        grantRwxPermissions()
+    }
+}
+
+/**
+ * Creates a directory if it does not exist with all needed parent dirs, then grants RWX permissions.
+ */
+internal fun File.createDirIfNeeded(): File = apply {
+    if (!exists()) {
+        mkdirs()
+        grantRwxPermissions()
+    }
+}
+
+internal fun File.grantRwxPermissions(): File = apply {
     setReadable(true, false)
     setWritable(true, false)
     setExecutable(true, false)
-}
-
-internal fun File.createIfNeeded(): File = apply {
-    if (!exists()) {
-        createDirectoryRWX()
-    }
 }

@@ -1,6 +1,7 @@
 package com.kaspersky.kaspresso.files.resources
 
 import com.kaspersky.kaspresso.files.FileExtension
+import com.kaspersky.kaspresso.internal.extensions.other.createFileIfNeeded
 import java.io.File
 
 interface ResourceFilesProvider {
@@ -28,7 +29,7 @@ class DefaultResourceFilesProvider(
 
     override fun provideVideoFile(tag: String, subDir: String?): File {
         val resFileName: String = resourceFileNamesProvider.getFileName(tag, FileExtension.MP4.toString())
-        return resourcesDirsProvider.provide(resourcesRootDirsProvider.videoRootDir, subDir).resolve(resFileName)
+        return resourcesDirsProvider.provide(resourcesRootDirsProvider.videoRootDir, subDir).resolve(resFileName).createFileIfNeeded()
     }
 
     override fun provideViewHierarchyFile(tag: String, subDir: String?): File {
