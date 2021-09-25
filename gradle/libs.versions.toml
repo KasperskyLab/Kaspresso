@@ -2,7 +2,7 @@
 kotlin = "1.4.32"
 detekt = "1.16.0"
 espresso = "3.3.0"
-allure = "2.0.3"
+allure = "2.2.6"
 
 [libraries]
 # plugins
@@ -30,10 +30,6 @@ constraint = "androidx.constraintlayout:constraintlayout:2.0.0"
 kakao = "io.github.kakaocup:kakao:3.0.2"
 gson = "com.google.code.gson:gson:2.8.6"
 
-allureCommons = { module = "io.qameta.allure:allure-android-commons", version.ref = "allure" }
-allureModel = { module = "io.qameta.allure:allure-android-model", version.ref = "allure" }
-allureEspresso = { module = "io.qameta.allure:allure-espresso", version.ref = "allure" }
-
 junit = "junit:junit:4.13"
 junitJupiter = "org.junit.jupiter:junit-jupiter:5.6.2"
 truth = "com.google.truth:truth:1.0"
@@ -43,6 +39,11 @@ orchestrator = "androidx.test:orchestrator:1.3.0"
 okhttp = "com.squareup.okhttp3:okhttp:4.9.1"
 kotson = "com.github.salomonbrys.kotson:kotson:2.5.0"
 
+allureKotlinModel = { module = "io.qameta.allure:allure-kotlin-model", version.ref = "allure" }
+allureKotlinCommons = { module = "io.qameta.allure:allure-kotlin-commons", version.ref = "allure" }
+allureKotlinJunit4 = { module = "io.qameta.allure:allure-kotlin-junit4", version.ref = "allure" }
+allureKotlinAndroid = { module = "io.qameta.allure:allure-kotlin-android", version.ref = "allure" }
+
 [bundles]
 espresso = ["espressoCore", "espressoWeb"]
-allure = ["allureCommons", "allureModel", "allureEspresso"]
+allure = ["allureKotlinModel", "allureKotlinCommons", "allureKotlinJunit4", "allureKotlinAndroid"]
