@@ -1,12 +1,14 @@
-package com.kaspersky.kaspresso.device.video.videorecorder
+package com.kaspersky.kaspresso.device.video.recorder
 
 import android.util.Log
+import androidx.test.uiautomator.UiDevice
 import com.kaspersky.kaspresso.internal.wait.wait
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.params.VideoParams
 import java.io.File
 
 class VideoRecorderImpl(
+    private val device: UiDevice,
     private val logger: UiTestLogger,
     private val params: VideoParams
 ) : VideoRecorder {
@@ -23,7 +25,7 @@ class VideoRecorderImpl(
         }
         logger.i("Starting video recording: ${file.name}")
 
-        videoRecordingThread = VideoRecordingThread(logger, params, file).apply { start() }
+        videoRecordingThread = VideoRecordingThread(device, logger, params, file).apply { start() }
         waitForRecordingToStart()
     }
 

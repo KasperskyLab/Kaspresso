@@ -638,7 +638,7 @@ data class Kaspresso(
                     resourceFilesProvider = resourceFilesProvider,
                     screenshotMaker = CombinedScreenshotMaker(
                         preferredScreenshotMaker = InternalScreenshotMaker(activities, screenshotParams),
-                        fallbackScreenshotMaker = ExternalScreenshotMaker(screenshotParams)
+                        fallbackScreenshotMaker = ExternalScreenshotMaker(uiDevice, screenshotParams)
                     )
                 )
             }
@@ -646,16 +646,29 @@ data class Kaspresso(
             if (!::videos.isInitialized) {
                 videos = VideosImpl(
                     resourceFilesProvider = resourceFilesProvider,
-                    videoRecorder = VideoRecorderImpl(libLogger, videoParams)
+                    videoRecorder = VideoRecorderImpl(
+                        uiDevice,
+                        libLogger,
+                        videoParams
+                    )
                 )
             }
 
             if (!::viewHierarchyDumper.isInitialized) {
-                viewHierarchyDumper = ViewHierarchyDumperImpl(libLogger, resourceFilesProvider)
+                viewHierarchyDumper = ViewHierarchyDumperImpl(
+                    uiDevice,
+                    libLogger,
+                    resourceFilesProvider
+                )
             }
 
             if (!::logcatDumper.isInitialized) {
-                logcatDumper = LogcatDumperImpl(libLogger, resourceFilesProvider, logcat)
+                logcatDumper = LogcatDumperImpl(
+                    libLogger,
+                    resourceFilesProvider,
+                    logcat,
+                    listOf(DEFAULT_LIB_LOGGER_TAG, DEFAULT_TEST_LOGGER_TAG)
+                )
             }
         }
 
