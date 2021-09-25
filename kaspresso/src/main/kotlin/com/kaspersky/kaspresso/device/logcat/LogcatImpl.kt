@@ -56,7 +56,7 @@ class LogcatImpl(
      * @param buffer one of available logcat buffers
      */
     override fun clear(buffer: Logcat.Buffer) {
-        adbServer.performShell("logcat -b ${buffer.bufferName} -c")
+        executeCommand("logcat -b ${buffer.bufferName} -c").destroy()
         Thread.sleep(DEFAULT_LOGCAT_CLEAR_DELAY)
     }
 
