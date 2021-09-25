@@ -1,8 +1,7 @@
 package com.kaspersky.components.allure_support.files
 
 import com.kaspersky.kaspresso.files.FileExtension
-import io.qameta.allure.android.io.*
-import io.qameta.allure.espresso.AllureAndroidLifecycle
+import io.qameta.allure.android.AllureAndroidLifecycle
 import java.io.File
 
 fun File.attachLogcatToAllureReport(): Unit = AllureAndroidLifecycle.addAttachment(

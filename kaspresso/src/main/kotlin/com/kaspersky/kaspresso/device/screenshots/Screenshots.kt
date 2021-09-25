@@ -15,4 +15,6 @@ interface Screenshots {
      * @param tag a unique tag to further identify the screenshot. Must match [a-zA-Z0-9_-]+.
      */
     fun take(tag: String)
+
+    fun takeAndApply(tag: String, block: File.() -> Unit)
 }
