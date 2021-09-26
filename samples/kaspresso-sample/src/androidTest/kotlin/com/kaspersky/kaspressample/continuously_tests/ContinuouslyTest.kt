@@ -4,7 +4,7 @@ import android.Manifest
 import android.os.Build
 import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
-import com.kaspersky.kaspresso_sample_core.MainActivity
+import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.screen.ContinuouslyDialogScreen
 import com.kaspersky.kaspressample.screen.ContinuouslyScreen
 import com.kaspersky.kaspressample.screen.MainScreen

@@ -1,7 +1,7 @@
 package com.kaspersky.kaspressample.external_screens
 
 import com.kaspersky.components.kautomator.component.text.UiButton
-import com.kaspersky.kaspresso_sample_core.MainActivity
+import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.R
 
 object UiMainScreen : UiSampleScreen<UiMainScreen>() {

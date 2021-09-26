@@ -4,7 +4,7 @@ import android.Manifest
 import android.os.Environment
 import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
-import com.kaspersky.kaspresso_sample_core.MainActivity
+import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspresso.device.files.Files
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import java.io.File

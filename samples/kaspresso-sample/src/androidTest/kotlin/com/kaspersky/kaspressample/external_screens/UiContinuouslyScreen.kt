@@ -2,7 +2,7 @@ package com.kaspersky.kaspressample.external_screens
 
 import com.kaspersky.components.kautomator.component.text.UiButton
 import com.kaspersky.kaspressample.R
-import com.kaspersky.kaspresso_sample_core.continuously.ContinuouslySampleActivity
+import com.kaspersky.kaspressample.continuously.ContinuouslySampleActivity
 
 object UiContinuouslyScreen : UiSampleScreen<UiContinuouslyScreen>() {
 

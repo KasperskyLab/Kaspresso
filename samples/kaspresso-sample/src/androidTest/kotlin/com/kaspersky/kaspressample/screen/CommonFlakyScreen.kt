@@ -3,7 +3,7 @@ package com.kaspersky.kaspressample.screen
 import io.github.kakaocup.kakao.scroll.KScrollView
 import io.github.kakaocup.kakao.text.KButton
 import com.kaspersky.kaspressample.R
-import com.kaspersky.kaspresso_sample_core.flaky.CommonFlakyActivity
+import com.kaspersky.kaspressample.flaky.CommonFlakyActivity
 import com.kaspersky.kaspresso.screens.KScreen
 
 object CommonFlakyScreen : KScreen<CommonFlakyScreen>() {

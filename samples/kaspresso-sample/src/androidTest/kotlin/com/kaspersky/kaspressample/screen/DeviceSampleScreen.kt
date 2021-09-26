@@ -3,7 +3,7 @@ package com.kaspersky.kaspressample.screen
 import io.github.kakaocup.kakao.edit.KEditText
 import io.github.kakaocup.kakao.text.KButton
 import com.kaspersky.kaspressample.R
-import com.kaspersky.kaspresso_sample_core.device.DeviceSampleActivity
+import com.kaspersky.kaspressample.device.DeviceSampleActivity
 import com.kaspersky.kaspresso.screens.KScreen
 
 object DeviceSampleScreen : KScreen<DeviceSampleScreen>() {

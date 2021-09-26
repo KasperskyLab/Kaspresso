@@ -3,7 +3,7 @@ package com.kaspersky.kaspressample.device_tests
 import android.Manifest
 import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
-import com.kaspersky.kaspresso_sample_core.MainActivity
+import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspresso.device.apps.Apps
 import com.kaspersky.kaspresso.device.server.AdbServer
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
