@@ -1,27 +1,24 @@
 package com.kaspersky.kaspresso.alluresupport.sample.screen
 
-import com.kaspersky.kaspresso_sample_core.MainActivity
-import com.kaspersky.kaspresso.R
+import com.kaspersky.kaspresso.alluresupport.sample.MainActivity
+import com.kaspersky.kaspresso.alluresupport.sample.R
 import com.kaspersky.kaspresso.screens.KScreen
+import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
 import io.github.kakaocup.kakao.text.KButton
 import io.github.kakaocup.kakao.text.KTextView
 
 object MainScreen : KScreen<MainScreen>() {
 
-    override val layoutId: Int? = R.layout.activity_main
-    override val viewClass: Class<*>? = MainActivity::class.java
+    override val layoutId: Int = R.layout.activity_main
 
-    val simpleButton = KButton { withId(R.id.activity_main_simple_sample_button) }
+    override val viewClass: Class<*> = MainActivity::class.java
 
-    val webViewButton = KButton { withId(R.id.activity_main_webview_sample_button) }
+    val incrementButton = KButton { withId(R.id.increment) }
+    val decrementButton = KButton { withId(R.id.decrement) }
+    val clearButton = KButton { withId(R.id.clear) }
+    val valueText = KTextView { withId(R.id.value) }
 
-    val flakyButton = KButton { withId(R.id.activity_main_flaky_sample_button) }
-
-    val continuouslyButton = KButton { withId(R.id.activity_main_continuously_sample_button) }
-
-    val composeButton = KButton { withId(R.id.activity_main_complex_compose_sample_button) }
-
-    val idleWaitingButton = KButton { withId(R.id.activity_main_idlewaiting_sample_button) }
-
-    val descriptionText = KTextView { withId(R.id.activity_main_title) }
+    fun BaseTestContext.assertValue(value: Int) {
+        valueText.hasText(device.targetContext.getString(R.string.value_placeholder, value))
+    }
 }
