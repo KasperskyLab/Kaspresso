@@ -1,6 +1,6 @@
-package com.kaspersky.kaspresso_allure_support_sample
+package com.kaspersky.kaspresso.alluresupport.sample
 
-import com.kaspersky.kaspresso_allure_support_sample.screen.SimpleScreen
+import com.kaspersky.kaspresso.alluresupport.sample.screen.SimpleScreen
 import com.kaspersky.kaspresso.testcases.api.scenario.BaseScenario
 import com.kaspersky.kaspresso.testcases.core.testcontext.TestContext
 

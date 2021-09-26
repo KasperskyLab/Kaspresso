@@ -4,7 +4,7 @@ plugins {
 
 android {
     defaultConfig {
-        applicationId = "com.kaspersky.kaspresso.allure_support"
+        applicationId = "com.kaspersky.kaspresso.alluresupport.sample"
         // AllureAndroidJUnitRunner must be used as testInstrumentationRunner
         testInstrumentationRunner = "io.qameta.allure.android.runners.AllureAndroidJUnitRunner"
         testInstrumentationRunnerArguments["clearPackageData"] = "true"
@@ -21,14 +21,10 @@ dependencies {
     implementation(libs.constraint)
 
     androidTestImplementation(projects.kaspresso)
-    androidTestImplementation(projects.kautomator)
     androidTestImplementation(projects.allureSupport)
 
     androidTestImplementation(libs.runner)
-    androidTestImplementation(libs.androidXRules)
     androidTestImplementation(libs.junit)
-    androidTestImplementation(libs.kakao)
-    androidTestImplementation(libs.bundles.espresso)
 
     androidTestUtil(libs.orchestrator)
 }

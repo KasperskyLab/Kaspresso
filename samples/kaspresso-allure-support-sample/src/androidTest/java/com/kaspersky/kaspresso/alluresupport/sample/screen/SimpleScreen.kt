@@ -1,6 +1,6 @@
-package com.kaspersky.kaspresso_allure_support_sample.screen
+package com.kaspersky.kaspresso.alluresupport.sample.screen
 
-import com.kaspersky.kaspresso_allure_support_sample.R
+import com.kaspersky.kaspresso.R
 import com.kaspersky.kaspresso_sample_core.simple.SimpleActivity
 import com.kaspersky.kaspresso.screens.KScreen
 import io.github.kakaocup.kakao.edit.KEditText

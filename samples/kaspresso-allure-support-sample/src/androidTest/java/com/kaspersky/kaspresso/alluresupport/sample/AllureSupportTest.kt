@@ -1,26 +1,28 @@
-package com.kaspersky.kaspresso_allure_support_sample
+package com.kaspersky.kaspresso.alluresupport.sample
 
 import android.Manifest
 import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.components.alluresupport.withAllureSupport
+import com.kaspersky.kaspresso.R
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
-import com.kaspersky.kaspresso.testcases.api.testcaserule.TestCaseRule
-import com.kaspersky.kaspresso_allure_support_sample.screen.MainScreen
-import com.kaspersky.kaspresso_allure_support_sample.screen.SimpleScreen
+import com.kaspersky.kaspresso.params.ScreenshotParams
+import com.kaspersky.kaspresso.params.VideoParams
+import com.kaspersky.kaspresso.alluresupport.sample.screen.MainScreen
+import com.kaspersky.kaspresso.alluresupport.sample.screen.SimpleScreen
+import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import com.kaspersky.kaspresso_sample_core.MainActivity
 import org.junit.Rule
 import org.junit.Test
 
-/**
- * In this example you can observe a test tuned by default Kaspresso configuration.
- * When you start the test you can see output of default Kaspresso interceptors:
- * - a lot of useful logs
- * - failure handling
- * - screenshots in the device
- * Also you can observe the test dsl simplifying a writing of any test
- */
-class AllureSupportTestWithRule {
+class AllureSupportTest : TestCase(
+    kaspressoBuilder = Kaspresso.Builder.simple(
+        customize = {
+            videoParams = VideoParams(bitRate = 10_000_000)
+            screenshotParams = ScreenshotParams(quality = 1)
+        }
+    ).withAllureSupport()
+) {
 
     @get:Rule
     val runtimePermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
@@ -31,18 +33,12 @@ class AllureSupportTestWithRule {
     @get:Rule
     val activityTestRule = ActivityTestRule(MainActivity::class.java, true, false)
 
-    @get:Rule
-    val testCaseRule = TestCaseRule(
-        testClassName = javaClass.simpleName,
-        kaspressoBuilder = Kaspresso.Builder.simple().withAllureSupport()
-    )
-
     @Test
     fun test() =
-        testCaseRule.run {
+        run {
             step("Open Simple Screen") {
-                testLogger.i("I am testLogger")
                 activityTestRule.launchActivity(null)
+                testLogger.i("I am testLogger")
                 device.screenshots.take("Additional_screenshot")
                 MainScreen {
                     simpleButton {
