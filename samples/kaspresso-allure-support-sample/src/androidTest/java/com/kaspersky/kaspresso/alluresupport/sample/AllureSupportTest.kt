@@ -11,15 +11,13 @@ import org.junit.Rule
 import org.junit.Test
 
 /**
- * Use [withAllureSupport] function to add the all available interceptors.
+ * Use [withAllureSupport] function to add the all available allure interceptors.
  */
 class AllureSupportTest : TestCase(
-    kaspressoBuilder = Kaspresso.Builder.simple(
-        customize = {
-            videoParams = VideoParams(bitRate = 10_000_000)
-            screenshotParams = ScreenshotParams(quality = 1)
-        }
-    ).withAllureSupport()
+    kaspressoBuilder = Kaspresso.Builder.withAllureSupport {
+        videoParams = VideoParams(bitRate = 10_000_000)
+        screenshotParams = ScreenshotParams(quality = 1)
+    }
 ) {
     @get:Rule
     val activityRule = ActivityTestRule(MainActivity::class.java, true, false)

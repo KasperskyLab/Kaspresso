@@ -11,24 +11,17 @@ import org.junit.Rule
 import org.junit.Test
 
 /**
- * In this example you can observe a test tuned by default Kaspresso configuration.
- * When you start the test you can see output of default Kaspresso interceptors:
- * - a lot of useful logs
- * - failure handling
- * - screenshots in the device
- * Also you can observe the test dsl simplifying a writing of any test
+ * Use [withAllureSupport] function to add the all available allure interceptors.
  */
 class AllureSupportTestWithRule {
 
     @get:Rule
     val testCaseRule = TestCaseRule(
         testClassName = javaClass.simpleName,
-        kaspressoBuilder = Kaspresso.Builder.simple(
-            customize = {
-                videoParams = VideoParams(bitRate = 10_000_000)
-                screenshotParams = ScreenshotParams(quality = 1)
-            }
-        ).withAllureSupport()
+        kaspressoBuilder = Kaspresso.Builder.withAllureSupport {
+            videoParams = VideoParams(bitRate = 10_000_000)
+            screenshotParams = ScreenshotParams(quality = 1)
+        }
     )
 
     @get:Rule

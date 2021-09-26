@@ -8,7 +8,9 @@ import com.kaspersky.components.alluresupport.interceptors.testrun.ScreenshotTes
 import com.kaspersky.components.alluresupport.interceptors.testrun.VideoRecordingTestInterceptor
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 
-fun Kaspresso.Builder.withAllureSupport(): Kaspresso.Builder = apply {
+fun Kaspresso.Builder.Companion.withAllureSupport(
+    customize: Kaspresso.Builder.() -> Unit = {}
+): Kaspresso.Builder = simple(customize).apply {
     stepWatcherInterceptors.addAll(
         listOf(
             ScreenshotStepInterceptor(screenshots),
