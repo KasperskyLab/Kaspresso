@@ -1,6 +1,6 @@
 [versions]
 kotlin = "1.4.32"
-detekt = "1.16.0"
+detekt = "1.18.1"
 espresso = "3.3.0"
 allure = "2.2.6"
 
