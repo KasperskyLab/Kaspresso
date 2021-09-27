@@ -10,7 +10,9 @@ import com.kaspersky.kaspresso.kaspresso.Kaspresso
 
 fun Kaspresso.Builder.Companion.withAllureSupport(
     customize: Kaspresso.Builder.() -> Unit = {}
-): Kaspresso.Builder = simple(customize).apply {
+): Kaspresso.Builder = simple(customize).addAllureSupport()
+
+fun Kaspresso.Builder.addAllureSupport(): Kaspresso.Builder = apply {
     stepWatcherInterceptors.addAll(
         listOf(
             ScreenshotStepInterceptor(screenshots),

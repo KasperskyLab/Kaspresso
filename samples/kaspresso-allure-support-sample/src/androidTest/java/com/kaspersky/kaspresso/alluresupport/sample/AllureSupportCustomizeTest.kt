@@ -1,10 +1,8 @@
 package com.kaspersky.kaspresso.alluresupport.sample
 
 import androidx.test.rule.ActivityTestRule
+import com.kaspersky.components.alluresupport.addAllureSupport
 import com.kaspersky.components.alluresupport.files.attachViewHierarchyToAllureReport
-import com.kaspersky.components.alluresupport.interceptors.testrun.DumpLogcatTestInterceptor
-import com.kaspersky.components.alluresupport.interceptors.testrun.ScreenshotTestInterceptor
-import com.kaspersky.components.alluresupport.interceptors.testrun.VideoRecordingTestInterceptor
 import com.kaspersky.components.alluresupport.withAllureSupport
 import com.kaspersky.kaspresso.alluresupport.sample.screen.MainScreen
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.TestRunWatcherInterceptor
@@ -20,26 +18,18 @@ import org.junit.Test
  * Use [withAllureSupport] function to add the all available allure interceptors.
  */
 class AllureSupportCustomizeTest : TestCase(
-    kaspressoBuilder = Kaspresso.Builder.withAllureSupport(
+    kaspressoBuilder = Kaspresso.Builder.simple(
         customize = {
             videoParams = VideoParams(bitRate = 10_000_000)
             screenshotParams = ScreenshotParams(quality = 1)
         }
-    ).apply {
+    ).addAllureSupport().apply {
         testRunWatcherInterceptors.apply {
-            clear()
-            addAll(
-                listOf(
-                    ScreenshotTestInterceptor(screenshots),
-                    VideoRecordingTestInterceptor(videos),
-                    DumpLogcatTestInterceptor(logcatDumper),
-                    object : TestRunWatcherInterceptor {
-                        override fun onTestFinished(testInfo: TestInfo, success: Boolean) {
-                            viewHierarchyDumper.dumpAndApply("ViewHierarchy") { attachViewHierarchyToAllureReport() }
-                        }
-                    }
-                )
-            )
+            add(object : TestRunWatcherInterceptor {
+                override fun onTestFinished(testInfo: TestInfo, success: Boolean) {
+                    viewHierarchyDumper.dumpAndApply("ViewHierarchy") { attachViewHierarchyToAllureReport() }
+                }
+            })
         }
     }
 ) {
