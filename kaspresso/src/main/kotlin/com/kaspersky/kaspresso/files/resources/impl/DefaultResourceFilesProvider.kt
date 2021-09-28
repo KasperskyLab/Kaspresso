@@ -1,6 +1,6 @@
 package com.kaspersky.kaspresso.files.resources.impl
 
-import com.kaspersky.kaspresso.files.FileExtension
+import com.kaspersky.kaspresso.files.extensions.FileExtension
 import com.kaspersky.kaspresso.files.resources.ResourceFileNamesProvider
 import com.kaspersky.kaspresso.files.resources.ResourceFilesProvider
 import com.kaspersky.kaspresso.files.resources.ResourcesDirsProvider

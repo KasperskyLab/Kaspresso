@@ -8,7 +8,7 @@ import com.kaspersky.kaspresso.docloc.DocLocScreenshotCapturer
 import com.kaspersky.kaspresso.docloc.MetadataSaver
 import com.kaspersky.kaspresso.docloc.rule.LocaleRule
 import com.kaspersky.kaspresso.docloc.rule.TestFailRule
-import com.kaspersky.kaspresso.files.DefaultDirsProvider
+import com.kaspersky.kaspresso.files.dirs.DefaultDirsProvider
 import com.kaspersky.kaspresso.files.resources.ResourcesRootDirsProvider
 import com.kaspersky.kaspresso.files.resources.ResourcesDirsProvider
 import com.kaspersky.kaspresso.files.resources.ResourceFileNamesProvider

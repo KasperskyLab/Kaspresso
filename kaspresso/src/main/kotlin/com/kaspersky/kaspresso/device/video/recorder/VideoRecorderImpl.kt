@@ -30,13 +30,12 @@ class VideoRecorderImpl(
     }
 
     override fun stop(): File? {
-        if (videoRecordingThread == null) {
+        val thread: VideoRecordingThread = videoRecordingThread ?: run {
             logger.i("Can't stop video recording as it was not started")
             return null
         }
-        logger.i("Stopping video recording")
 
-        val thread: VideoRecordingThread = videoRecordingThread!!
+        logger.i("Stopping video recording")
         thread.killRecordingProcess()
         doAfterRecordingStopped {
             thread.interrupt()

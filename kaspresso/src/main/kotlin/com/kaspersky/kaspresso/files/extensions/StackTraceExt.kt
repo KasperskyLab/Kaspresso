@@ -1,6 +1,7 @@
-package com.kaspersky.kaspresso.files
+package com.kaspersky.kaspresso.files.extensions
 
 import android.os.Build
+import com.kaspersky.kaspresso.files.models.TestMethod
 
 private const val TEST_CASE_CLASS_JUNIT_3 = "android.test.InstrumentationTestCase"
 private const val TEST_CASE_METHOD_JUNIT_3 = "runMethod"

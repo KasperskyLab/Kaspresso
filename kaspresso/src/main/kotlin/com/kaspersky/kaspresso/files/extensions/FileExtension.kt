@@ -1,4 +1,4 @@
-package com.kaspersky.kaspresso.files
+package com.kaspersky.kaspresso.files.extensions
 
 enum class FileExtension {
     TXT {

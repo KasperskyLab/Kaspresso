@@ -52,8 +52,8 @@ import com.kaspersky.kaspresso.device.video.recorder.VideoRecorderImpl
 import com.kaspersky.kaspresso.device.viewhierarchy.ViewHierarchyDumper
 import com.kaspersky.kaspresso.device.viewhierarchy.ViewHierarchyDumperImpl
 import com.kaspersky.kaspresso.failure.LoggingFailureHandler
-import com.kaspersky.kaspresso.files.DefaultDirsProvider
-import com.kaspersky.kaspresso.files.DirsProvider
+import com.kaspersky.kaspresso.files.dirs.DefaultDirsProvider
+import com.kaspersky.kaspresso.files.dirs.DirsProvider
 import com.kaspersky.kaspresso.files.resources.ResourceFilesProvider
 import com.kaspersky.kaspresso.files.resources.ResourceFileNamesProvider
 import com.kaspersky.kaspresso.files.resources.ResourcesDirsProvider
@@ -366,11 +366,21 @@ data class Kaspresso(
          */
         lateinit var screenshots: Screenshots
 
+        /**
+         * Holds an implementation of [Videos] interface. If it was not specified, the default implementation is used.
+         */
         lateinit var videos: Videos
 
+        /**
+         * Holds an implementation of [ViewHierarchyDumper] interface. If it was not specified, the default implementation is used.
+         */
         lateinit var viewHierarchyDumper: ViewHierarchyDumper
 
+        /**
+         * Holds an implementation of [LogcatDumper] interface. If it was not specified, the default implementation is used.
+         */
         lateinit var logcatDumper: LogcatDumper
+
         /**
          * Holds an implementation of [Accessibility] interface. If it was not specified, the default implementation is used.
          */
@@ -425,18 +435,42 @@ data class Kaspresso(
          */
         lateinit var stepParams: StepParams
 
+        /**
+         * Holds the [ScreenshotParams] for [com.kaspersky.kaspresso.device.screenshots.screenshotmaker.InternalScreenshotMaker]'s and
+         * [com.kaspersky.kaspresso.device.screenshots.screenshotmaker.ExternalScreenshotMaker] usage.
+         * If it was not specified, the default implementation is used.
+         */
         lateinit var screenshotParams: ScreenshotParams
 
+        /**
+         * Holds the [VideoParams] for [com.kaspersky.kaspresso.device.video.recorder.VideoRecorder]'s usage.
+         * If it was not specified, the default implementation is used.
+         */
         lateinit var videoParams: VideoParams
 
+        /**
+         * Holds an implementation of [DirsProvider] interface. If it was not specified, the default implementation is used.
+         */
         lateinit var dirsProvider: DirsProvider
 
+        /**
+         * Holds an implementation of [ResourceFilesProvider] interface. If it was not specified, the default implementation is used.
+         */
         lateinit var resourceFilesProvider: ResourceFilesProvider
 
+        /**
+         * Holds an implementation of [ResourceFileNamesProvider] interface. If it was not specified, the default implementation is used.
+         */
         lateinit var resourceFileNamesProvider: ResourceFileNamesProvider
 
+        /**
+         * Holds an implementation of [ResourcesDirsProvider] interface. If it was not specified, the default implementation is used.
+         */
         lateinit var resourcesDirsProvider: ResourcesDirsProvider
 
+        /**
+         * Holds an implementation of [ResourcesRootDirsProvider] interface. If it was not specified, the default implementation is used.
+         */
         lateinit var resourcesRootDirsProvider: ResourcesRootDirsProvider
 
         /**

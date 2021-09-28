@@ -1,4 +1,4 @@
-package com.kaspersky.kaspresso.files
+package com.kaspersky.kaspresso.files.dirs
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -7,11 +7,6 @@ import android.os.Environment
 import androidx.test.platform.app.InstrumentationRegistry
 import com.kaspersky.kaspresso.internal.extensions.other.createDirIfNeeded
 import java.io.File
-
-interface DirsProvider {
-    fun provideNew(dest: File): File
-    fun provideCleared(dest: File): File
-}
 
 class DefaultDirsProvider : DirsProvider {
     private val clearedDirs = HashSet<File>()
