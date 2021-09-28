@@ -142,5 +142,6 @@ data class Device(
     /**
      * A property to get the instance of [UiDevice].
      */
-    fun uiDevice(): UiDevice = uiDeviceConfig.uiDevice()
+    val uiDevice: UiDevice
+        get() = uiDeviceConfig.uiDevice()
 }
