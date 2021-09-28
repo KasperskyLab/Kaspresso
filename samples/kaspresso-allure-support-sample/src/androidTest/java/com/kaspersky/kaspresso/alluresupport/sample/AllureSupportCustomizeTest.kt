@@ -1,6 +1,8 @@
 package com.kaspersky.kaspresso.alluresupport.sample
 
+import android.Manifest
 import androidx.test.rule.ActivityTestRule
+import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.components.alluresupport.addAllureSupport
 import com.kaspersky.components.alluresupport.files.attachViewHierarchyToAllureReport
 import com.kaspersky.components.alluresupport.withAllureSupport
@@ -33,6 +35,12 @@ class AllureSupportCustomizeTest : TestCase(
         }
     }
 ) {
+    @get:Rule
+    val runtimePermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
+        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        Manifest.permission.READ_EXTERNAL_STORAGE
+    )
+
     @get:Rule
     val activityRule = ActivityTestRule(MainActivity::class.java, true, false)
 
