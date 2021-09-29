@@ -1,34 +1,23 @@
-package com.kaspersky.kaspressample.docloc_tests.cutomdirectory
+package com.kaspersky.kaspressample.docloc_tests
 
 import android.Manifest
 import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
-import io.github.kakaocup.kakao.screen.Screen
 import com.kaspersky.kaspressample.screen.SimpleScreen
 import com.kaspersky.kaspressample.simple.SimpleActivity
 import com.kaspersky.kaspresso.annotations.ScreenShooterTest
-import com.kaspersky.kaspresso.files.dirs.DefaultDirsProvider
-import com.kaspersky.kaspresso.files.resources.impl.DefaultResourcesRootDirsProvider
-import com.kaspersky.kaspresso.files.resources.ResourcesRootDirsProvider
 import com.kaspersky.kaspresso.testcases.api.testcase.DocLocScreenshotTestCase
+import io.github.kakaocup.kakao.screen.Screen
 import org.junit.Rule
 import org.junit.Test
 import java.io.File
 
 /**
- * An example of how to change default screenshots directories and file names.
- * As result all screenshots will be stored at '/sdcard/custom_directory/<locale>' path.
- * Screenshot file names will have 'screenshot#<index>' prefix.
- * See [FlatDirectoryProvider] and [AutoNumeratedNamesProvider] implementations.
+ * An example of [DocLocScreenshotTestCase] usage.
+ * For more information see DocLoc wiki page.
  */
-class CustomDirectoryScreenshotSampleTest : DocLocScreenshotTestCase(
-    resourcesRootDirsProvider = object : ResourcesRootDirsProvider by DefaultResourcesRootDirsProvider() {
-        override val screenshotsRootDir = File("custom_directory")
-    },
-    resourcesDirsProvider = FlatDirectoryProvider(
-        dirsProvider = DefaultDirsProvider()
-    ),
-    resourceFileNamesProvider = AutoNumeratedNamesProvider(),
+class ScreenshotSampleTestLegacy : DocLocScreenshotTestCase(
+    screenshotsDirectory = File("screenshots"),
     locales = "en,ru"
 ) {
 

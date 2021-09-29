@@ -3,13 +3,14 @@ package com.kaspersky.kaspressample.docloc_tests.cutomdirectory
 import com.kaspersky.kaspresso.files.dirs.DirsProvider
 import com.kaspersky.kaspresso.files.resources.impl.DefaultResourcesDirsProvider
 import com.kaspersky.kaspresso.files.resources.ResourcesDirsProvider
+import com.kaspersky.kaspresso.files.resources.impl.DefaultResourcesDirNameProvider
 import java.io.File
 
 internal class FlatDirectoryProvider(
     private val dirsProvider: DirsProvider
 ) : ResourcesDirsProvider by DefaultResourcesDirsProvider(
     dirsProvider = dirsProvider,
-    groupByRunNumbers = false
+    resourcesDirNameProvider = DefaultResourcesDirNameProvider(groupByRunNumbers = false)
 ) {
     override fun provide(dest: File, subDir: String?): File {
         val rootDir: File = dirsProvider.provideNew(dest)

@@ -3,12 +3,13 @@ package com.kaspersky.kaspresso.files.resources.impl
 import com.kaspersky.kaspresso.files.dirs.DirsProvider
 import com.kaspersky.kaspresso.files.models.TestMethod
 import com.kaspersky.kaspresso.files.extensions.findTestMethod
+import com.kaspersky.kaspresso.files.resources.ResourcesDirNameProvider
 import com.kaspersky.kaspresso.files.resources.ResourcesDirsProvider
 import java.io.File
 
 class DefaultResourcesDirsProvider(
     private val dirsProvider: DirsProvider,
-    private val groupByRunNumbers: Boolean
+    private val resourcesDirNameProvider: ResourcesDirNameProvider,
 ) : ResourcesDirsProvider {
 
     private val testRunsCount = mutableMapOf<TestMethod, Int>()
@@ -27,16 +28,10 @@ class DefaultResourcesDirsProvider(
     private fun resolveResourcesDirDest(rootDir: File, subDir: String? = null): File {
         val testMethod: TestMethod = Thread.currentThread().stackTrace.findTestMethod()
         val runNumber: Int = testRunsCount[testMethod] ?: 1
-        val resourcesDirName: String = getResourcesDirName(testMethod, runNumber)
+        val resourcesDirName: String = resourcesDirNameProvider.getResourcesDirName(testMethod, runNumber)
         return when (subDir) {
             null -> rootDir.resolve(resourcesDirName)
             else -> rootDir.resolve(subDir).resolve(resourcesDirName)
         }
-    }
-
-    private fun getResourcesDirName(testMethod: TestMethod, runNumber: Int): String {
-        val clearedClassName = testMethod.className.replace("[^A-Za-z0-9._-]".toRegex(), "_")
-        val rawDirName = "$clearedClassName${File.separator}${testMethod.methodName}"
-        return "${if (groupByRunNumbers) "run_$runNumber${File.separator}" else ""}$rawDirName"
     }
 }

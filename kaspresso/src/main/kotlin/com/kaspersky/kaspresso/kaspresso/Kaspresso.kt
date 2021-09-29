@@ -54,14 +54,9 @@ import com.kaspersky.kaspresso.device.viewhierarchy.ViewHierarchyDumperImpl
 import com.kaspersky.kaspresso.failure.LoggingFailureHandler
 import com.kaspersky.kaspresso.files.dirs.DefaultDirsProvider
 import com.kaspersky.kaspresso.files.dirs.DirsProvider
-import com.kaspersky.kaspresso.files.resources.ResourceFilesProvider
-import com.kaspersky.kaspresso.files.resources.ResourceFileNamesProvider
-import com.kaspersky.kaspresso.files.resources.ResourcesDirsProvider
-import com.kaspersky.kaspresso.files.resources.ResourcesRootDirsProvider
-import com.kaspersky.kaspresso.files.resources.impl.DefaultResourceFileNamesProvider
-import com.kaspersky.kaspresso.files.resources.impl.DefaultResourceFilesProvider
+import com.kaspersky.kaspresso.files.resources.*
+import com.kaspersky.kaspresso.files.resources.impl.*
 import com.kaspersky.kaspresso.files.resources.impl.DefaultResourcesDirsProvider
-import com.kaspersky.kaspresso.files.resources.impl.DefaultResourcesRootDirsProvider
 import com.kaspersky.kaspresso.idlewaiting.KautomatorWaitForIdleSettings
 import com.kaspersky.kaspresso.interceptors.behavior.DataBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.ViewBehaviorInterceptor
@@ -464,6 +459,11 @@ data class Kaspresso(
         lateinit var resourceFileNamesProvider: ResourceFileNamesProvider
 
         /**
+         * Holds an implementation of [ResourcesDirNameProvider] interface. If it was not specified, the default implementation is used.
+         */
+        lateinit var resourcesDirNameProvider: ResourcesDirNameProvider
+
+        /**
          * Holds an implementation of [ResourcesDirsProvider] interface. If it was not specified, the default implementation is used.
          */
         lateinit var resourcesDirsProvider: ResourcesDirsProvider
@@ -640,10 +640,11 @@ data class Kaspresso(
 
             if (!::dirsProvider.isInitialized) dirsProvider = DefaultDirsProvider()
             if (!::resourcesRootDirsProvider.isInitialized) resourcesRootDirsProvider = DefaultResourcesRootDirsProvider()
+            if (!::resourcesDirNameProvider.isInitialized) resourcesDirNameProvider = DefaultResourcesDirNameProvider(groupByRunNumbers = true)
             if (!::resourcesDirsProvider.isInitialized) {
                 resourcesDirsProvider = DefaultResourcesDirsProvider(
                     dirsProvider = dirsProvider,
-                    groupByRunNumbers = true
+                    resourcesDirNameProvider = resourcesDirNameProvider
                 )
             }
             if (!::resourceFileNamesProvider.isInitialized) {
