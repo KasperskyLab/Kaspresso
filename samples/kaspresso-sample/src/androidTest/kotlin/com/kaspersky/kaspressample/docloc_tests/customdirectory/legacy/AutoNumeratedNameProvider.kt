@@ -1,4 +1,4 @@
-package com.kaspersky.kaspressample.docloc_tests.cutomdirectory.legacy
+package com.kaspersky.kaspressample.docloc_tests.customdirectory.legacy
 
 import com.kaspersky.kaspresso.device.screenshots.screenshotfiles.ScreenshotNameProvider
 

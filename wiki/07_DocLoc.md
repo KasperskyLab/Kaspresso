@@ -217,7 +217,7 @@ You can change this behavior by providing custom
 [ResourcesDirsProvider](../kaspresso/src/main/kotlin/com/kaspersky/kaspresso/files/resources/ResourcesDirsProvider.kt), 
 [ResourceFileNamesProvider](../kaspresso/src/main/kotlin/com/kaspersky/kaspresso/files/resources/ResourceFileNamesProvider.kt) and  
 [ResourcesDirNameProvider](../kaspresso/src/main/kotlin/com/kaspersky/kaspresso/files/resources/ResourcesDirNameProvider.kt) implementations. 
-Find out details [here](../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/docloc_tests/cutomdirectory/CustomDirectoryScreenshotSampleTest.kt).
+Find out details [here](../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/docloc_tests/customdirectory/CustomDirectoryScreenshotSampleTest.kt).
 
 ## Changes
 
