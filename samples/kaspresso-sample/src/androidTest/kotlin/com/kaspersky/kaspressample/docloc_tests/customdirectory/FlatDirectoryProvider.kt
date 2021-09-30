@@ -10,7 +10,7 @@ internal class FlatDirectoryProvider(
     private val dirsProvider: DirsProvider
 ) : ResourcesDirsProvider by DefaultResourcesDirsProvider(
     dirsProvider = dirsProvider,
-    resourcesDirNameProvider = DefaultResourcesDirNameProvider(groupByRunNumbers = false)
+    resourcesDirNameProvider = DefaultResourcesDirNameProvider()
 ) {
     override fun provide(dest: File, subDir: String?): File {
         val rootDir: File = dirsProvider.provideNew(dest)

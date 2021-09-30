@@ -11,11 +11,15 @@ internal class SupportLegacyResourcesDirNameProvider(
     private val screenshotDirectoryProvider: ScreenshotDirectoryProvider,
 ) : ResourcesDirNameProvider {
 
-    override fun provideResourcesDirName(testMethod: TestMethod, runNumber: Int): String {
+    companion object {
+        const val DEFAULT_RUN_NUMBER = 1
+    }
+
+    override fun provideResourcesDirName(testMethod: TestMethod): String {
         val relocatedTestMethod = com.kaspersky.kaspresso.device.screenshots.screenshotfiles.TestMethod(
             className = testMethod.className,
             methodName = testMethod.methodName
         )
-        return screenshotDirectoryProvider.getDirectoryForTest(relocatedTestMethod, runNumber)
+        return screenshotDirectoryProvider.getDirectoryForTest(relocatedTestMethod, DEFAULT_RUN_NUMBER)
     }
 }

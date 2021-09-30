@@ -98,7 +98,6 @@ import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.defaults.Defau
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.logging.DumpLogcatInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.logging.LoggingStepWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.logging.TestRunLoggerWatcherInterceptor
-import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.resource.ResourcesDirsManagingInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.screenshot.ScreenshotStepWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.screenshot.TestRunnerScreenshotWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.video.VideoRecordingInterceptor
@@ -647,7 +646,7 @@ data class Kaspresso(
 
             if (!::dirsProvider.isInitialized) dirsProvider = DefaultDirsProvider()
             if (!::resourcesRootDirsProvider.isInitialized) resourcesRootDirsProvider = DefaultResourcesRootDirsProvider()
-            if (!::resourcesDirNameProvider.isInitialized) resourcesDirNameProvider = DefaultResourcesDirNameProvider(groupByRunNumbers = true)
+            if (!::resourcesDirNameProvider.isInitialized) resourcesDirNameProvider = DefaultResourcesDirNameProvider()
             if (!::resourcesDirsProvider.isInitialized) {
                 resourcesDirsProvider = DefaultResourcesDirsProvider(
                     dirsProvider = dirsProvider,
@@ -804,7 +803,6 @@ data class Kaspresso(
             )
 
             if (!::testRunWatcherInterceptors.isInitialized) testRunWatcherInterceptors = mutableListOf(
-                ResourcesDirsManagingInterceptor(resourcesDirsProvider),
                 TestRunLoggerWatcherInterceptor(libLogger),
                 defaultsTestRunWatcherInterceptor
             )

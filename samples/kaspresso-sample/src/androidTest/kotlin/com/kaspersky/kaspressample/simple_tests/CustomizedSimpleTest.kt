@@ -35,7 +35,7 @@ class CustomizedSimpleTest : TestCase(
             screenshotParams = ScreenshotParams(quality = 1)
 
             dirsProvider = DefaultDirsProvider()
-            resourcesDirNameProvider = DefaultResourcesDirNameProvider(groupByRunNumbers = true)
+            resourcesDirNameProvider = DefaultResourcesDirNameProvider()
 
             resourcesRootDirsProvider = object : ResourcesRootDirsProvider {
                 override val logcatRootDir = File("custom_logcat")

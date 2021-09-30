@@ -51,7 +51,7 @@ abstract class DocLocScreenshotTestCase(
     private val resourcesDirsProvider: ResourcesDirsProvider =
         DefaultResourcesDirsProvider(
             dirsProvider = DefaultDirsProvider(),
-            resourcesDirNameProvider = DefaultResourcesDirNameProvider(groupByRunNumbers = false)
+            resourcesDirNameProvider = DefaultResourcesDirNameProvider()
         ),
     private val resourceFileNamesProvider: ResourceFileNamesProvider =
         DefaultResourceFileNamesProvider(

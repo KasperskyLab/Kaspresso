@@ -12,23 +12,15 @@ class DefaultResourcesDirsProvider(
     private val resourcesDirNameProvider: ResourcesDirNameProvider,
 ) : ResourcesDirsProvider {
 
-    private val testRunsCount = mutableMapOf<TestMethod, Int>()
-
     override fun provide(dest: File, subDir: String?): File {
         val rootDir: File = dirsProvider.provideNew(dest)
         val resourcesDest: File = resolveResourcesDirDest(rootDir, subDir)
         return dirsProvider.provideCleared(resourcesDest)
     }
 
-    override fun onNewTestRun() {
-        val testMethod: TestMethod = Thread.currentThread().stackTrace.findTestMethod()
-        testRunsCount[testMethod] = (testRunsCount[testMethod] ?: 0) + 1
-    }
-
     private fun resolveResourcesDirDest(rootDir: File, subDir: String? = null): File {
         val testMethod: TestMethod = Thread.currentThread().stackTrace.findTestMethod()
-        val runNumber: Int = testRunsCount[testMethod] ?: 1
-        val resourcesDirName: String = resourcesDirNameProvider.provideResourcesDirName(testMethod, runNumber)
+        val resourcesDirName: String = resourcesDirNameProvider.provideResourcesDirName(testMethod)
         return when (subDir) {
             null -> rootDir.resolve(resourcesDirName)
             else -> rootDir.resolve(subDir).resolve(resourcesDirName)
