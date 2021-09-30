@@ -7,6 +7,10 @@ import java.io.File
  * If [groupByRunNumbers] is true it groups screenshots by run numbers of tests. It allows to save all screenshots of a test
  * running several times per the same suite.
  */
+@Deprecated(
+    "The work with screenshots and relative resource providers was redesigned.\n" +
+            "Please migrate to new system of work with resources presented in 'files/resources' folder.\n" +
+            "An example of migration is shown in a secondary constructor of 'DocLocScreenshotTestCase'.")
 class DefaultScreenshotDirectoryProvider(
     private val groupByRunNumbers: Boolean
 ) : ScreenshotDirectoryProvider {

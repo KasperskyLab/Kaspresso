@@ -8,7 +8,6 @@ import com.kaspersky.kaspressample.screen.SimpleScreen
 import com.kaspersky.kaspressample.simple.SimpleActivity
 import com.kaspersky.kaspresso.annotations.ScreenShooterTest
 import com.kaspersky.kaspresso.testcases.api.testcase.DocLocScreenshotTestCase
-import java.io.File
 import org.junit.Rule
 import org.junit.Test
 
@@ -16,10 +15,7 @@ import org.junit.Test
  * An example of [DocLocScreenshotTestCase] usage.
  * For more information see DocLoc wiki page.
  */
-class ScreenshotSampleTest : DocLocScreenshotTestCase(
-    screenshotsDirectory = File("screenshots"),
-    locales = "en,ru"
-) {
+class ScreenshotSampleTest : DocLocScreenshotTestCase(locales = "en,ru") {
 
     @get:Rule
     val runtimePermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
