@@ -1,4 +1,4 @@
-package com.kaspersky.kaspressample.docloc_tests.cutomdirectory
+package com.kaspersky.kaspressample.docloc_tests.customdirectory
 
 import android.Manifest
 import androidx.test.rule.ActivityTestRule
@@ -7,7 +7,7 @@ import io.github.kakaocup.kakao.screen.Screen
 import com.kaspersky.kaspressample.screen.SimpleScreen
 import com.kaspersky.kaspressample.simple.SimpleActivity
 import com.kaspersky.kaspresso.annotations.ScreenShooterTest
-import com.kaspersky.kaspresso.files.DefaultDirsProvider
+import com.kaspersky.kaspresso.files.dirs.DefaultDirsProvider
 import com.kaspersky.kaspresso.files.resources.impl.DefaultResourcesRootDirsProvider
 import com.kaspersky.kaspresso.files.resources.ResourcesRootDirsProvider
 import com.kaspersky.kaspresso.testcases.api.testcase.DocLocScreenshotTestCase

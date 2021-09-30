@@ -7,11 +7,12 @@ import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.R
 import com.kaspersky.kaspressample.screen.MainScreen
 import com.kaspersky.kaspressample.screen.SimpleScreen
-import com.kaspersky.kaspresso.files.DefaultDirsProvider
+import com.kaspersky.kaspresso.files.dirs.DefaultDirsProvider
 import com.kaspersky.kaspresso.files.resources.ResourceFileNamesProvider
 import com.kaspersky.kaspresso.files.resources.ResourcesDirsProvider
 import com.kaspersky.kaspresso.files.resources.ResourcesRootDirsProvider
 import com.kaspersky.kaspresso.files.resources.impl.DefaultResourceFilesProvider
+import com.kaspersky.kaspresso.files.resources.impl.DefaultResourcesDirNameProvider
 import com.kaspersky.kaspresso.files.resources.impl.DefaultResourcesDirsProvider
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.TestRunWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.logging.DumpLogcatInterceptor
@@ -34,6 +35,7 @@ class CustomizedSimpleTest : TestCase(
             screenshotParams = ScreenshotParams(quality = 1)
 
             dirsProvider = DefaultDirsProvider()
+            resourcesDirNameProvider = DefaultResourcesDirNameProvider()
 
             resourcesRootDirsProvider = object : ResourcesRootDirsProvider {
                 override val logcatRootDir = File("custom_logcat")
@@ -44,7 +46,7 @@ class CustomizedSimpleTest : TestCase(
 
             resourcesDirsProvider = object : ResourcesDirsProvider by DefaultResourcesDirsProvider(
                 dirsProvider = dirsProvider,
-                groupByRunNumbers = false
+                resourcesDirNameProvider = resourcesDirNameProvider
             ) {
                 override fun provide(dest: File, subDir: String?): File =
                     dirsProvider.provideCleared(dirsProvider.provideNew(dest))

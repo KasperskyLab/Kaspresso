@@ -54,12 +54,14 @@ import com.kaspersky.kaspresso.device.viewhierarchy.ViewHierarchyDumperImpl
 import com.kaspersky.kaspresso.failure.LoggingFailureHandler
 import com.kaspersky.kaspresso.files.dirs.DefaultDirsProvider
 import com.kaspersky.kaspresso.files.dirs.DirsProvider
-import com.kaspersky.kaspresso.files.resources.ResourceFilesProvider
 import com.kaspersky.kaspresso.files.resources.ResourceFileNamesProvider
+import com.kaspersky.kaspresso.files.resources.ResourceFilesProvider
+import com.kaspersky.kaspresso.files.resources.ResourcesDirNameProvider
 import com.kaspersky.kaspresso.files.resources.ResourcesDirsProvider
 import com.kaspersky.kaspresso.files.resources.ResourcesRootDirsProvider
 import com.kaspersky.kaspresso.files.resources.impl.DefaultResourceFileNamesProvider
 import com.kaspersky.kaspresso.files.resources.impl.DefaultResourceFilesProvider
+import com.kaspersky.kaspresso.files.resources.impl.DefaultResourcesDirNameProvider
 import com.kaspersky.kaspresso.files.resources.impl.DefaultResourcesDirsProvider
 import com.kaspersky.kaspresso.files.resources.impl.DefaultResourcesRootDirsProvider
 import com.kaspersky.kaspresso.idlewaiting.KautomatorWaitForIdleSettings
@@ -96,7 +98,6 @@ import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.defaults.Defau
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.logging.DumpLogcatInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.logging.LoggingStepWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.logging.TestRunLoggerWatcherInterceptor
-import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.resource.ResourcesDirsManagingInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.screenshot.ScreenshotStepWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.screenshot.TestRunnerScreenshotWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.video.VideoRecordingInterceptor
@@ -464,6 +465,11 @@ data class Kaspresso(
         lateinit var resourceFileNamesProvider: ResourceFileNamesProvider
 
         /**
+         * Holds an implementation of [ResourcesDirNameProvider] interface. If it was not specified, the default implementation is used.
+         */
+        lateinit var resourcesDirNameProvider: ResourcesDirNameProvider
+
+        /**
          * Holds an implementation of [ResourcesDirsProvider] interface. If it was not specified, the default implementation is used.
          */
         lateinit var resourcesDirsProvider: ResourcesDirsProvider
@@ -640,10 +646,11 @@ data class Kaspresso(
 
             if (!::dirsProvider.isInitialized) dirsProvider = DefaultDirsProvider()
             if (!::resourcesRootDirsProvider.isInitialized) resourcesRootDirsProvider = DefaultResourcesRootDirsProvider()
+            if (!::resourcesDirNameProvider.isInitialized) resourcesDirNameProvider = DefaultResourcesDirNameProvider()
             if (!::resourcesDirsProvider.isInitialized) {
                 resourcesDirsProvider = DefaultResourcesDirsProvider(
                     dirsProvider = dirsProvider,
-                    groupByRunNumbers = true
+                    resourcesDirNameProvider = resourcesDirNameProvider
                 )
             }
             if (!::resourceFileNamesProvider.isInitialized) {
@@ -796,7 +803,6 @@ data class Kaspresso(
             )
 
             if (!::testRunWatcherInterceptors.isInitialized) testRunWatcherInterceptors = mutableListOf(
-                ResourcesDirsManagingInterceptor(resourcesDirsProvider),
                 TestRunLoggerWatcherInterceptor(libLogger),
                 defaultsTestRunWatcherInterceptor
             )

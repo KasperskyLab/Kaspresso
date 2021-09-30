@@ -3,6 +3,10 @@ package com.kaspersky.kaspresso.testcases.api.testcase
 import android.Manifest
 import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspresso.device.locales.Locales
+import com.kaspersky.kaspresso.device.screenshots.screenshotfiles.DefaultScreenshotDirectoryProvider
+import com.kaspersky.kaspresso.device.screenshots.screenshotfiles.DefaultScreenshotNameProvider
+import com.kaspersky.kaspresso.device.screenshots.screenshotfiles.ScreenshotDirectoryProvider
+import com.kaspersky.kaspresso.device.screenshots.screenshotfiles.ScreenshotNameProvider
 import com.kaspersky.kaspresso.device.screenshots.screenshotmaker.ExternalScreenshotMaker
 import com.kaspersky.kaspresso.docloc.DocLocScreenshotCapturer
 import com.kaspersky.kaspresso.docloc.MetadataSaver
@@ -14,8 +18,10 @@ import com.kaspersky.kaspresso.files.resources.ResourcesDirsProvider
 import com.kaspersky.kaspresso.files.resources.ResourceFileNamesProvider
 import com.kaspersky.kaspresso.files.resources.impl.DefaultResourceFileNamesProvider
 import com.kaspersky.kaspresso.files.resources.impl.DefaultResourceFilesProvider
+import com.kaspersky.kaspresso.files.resources.impl.DefaultResourcesDirNameProvider
 import com.kaspersky.kaspresso.files.resources.impl.DefaultResourcesDirsProvider
 import com.kaspersky.kaspresso.files.resources.impl.DefaultResourcesRootDirsProvider
+import com.kaspersky.kaspresso.files.resources.impl.SupportLegacyResourcesDirNameProvider
 import com.kaspersky.kaspresso.internal.extensions.other.getAllInterfaces
 import com.kaspersky.kaspresso.internal.invocation.UiInvocationHandler
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
@@ -28,63 +34,13 @@ import org.junit.Rule
 /**
  *  The base class for all docloc screenshot tests.
  *
- *  Project-wide ScreenshotTestCase should be implemented as following:
+ *  All detailed information is presented in [wiki](https://github.com/KasperskyLab/Kaspresso/blob/master/wiki/07_DocLoc.md)
  *
- *  ```kotlin
- *      open class ProductDocLocScreenshotTestCase(testName: String) : DocLocScreenshotTestCase(
- *          File(testName), "comma-separated string of locales"
- *      ) {
+ *  @see <a href="https://github.com/KasperskyLab/Kaspresso/blob/master/wiki/07_DocLoc.md">wiki</a>
  *
- *          @get:Rule
- *          val activityTestRule = ActivityTestRule(FragmentTestActivity::class.java, true, false)
- *
- *          protected lateinit var activity: FragmentTestActivity
- *
- *          @Before
- *          open fun setUp() {
- *              activity = activityTestRule.launchActivity(null)
- *          }
- *      }
- *  ```
- *
- *  Screenshoter test extends the project-wide class:
- *  ```kotlin
- *      @ScreenShooterTest
- *      class FeatureScreenshot : ProductDocLocScreenshotTestCase("feature_screenshot") {
- *
- *          @Test
- *          fun featureScreen() {
- *              val featureView = FeatureFragment.newInstance()
- *              activity.setFragment(featureView)
- *              val view = getUiSafeProxy<FeatureView>(featureView) // Explicit type is important and must be interface
- *
- *              view.showLoading()
- *              captureScreenshot("screenshot_description")
- *          }
- *      }
- *  ```
- *  As you might have noticed, activity test rule is launched with ```FragmentTestActivity```.
- *  It's a special per-project empty activity for test with ```setFragment(Fragment)``` method.
- *  E.g:
- *  ```kotlin
- *      class FragmentTestActivity : AppCompatActivity() {
- *
- *          override fun onCreate(savedInstanceState: Bundle?) {
- *              super.onCreate(savedInstanceState)
- *              setContentView(R.layout.activity_fragment_container)
- *          }
- *
- *          fun setFragment(fragment: Fragment) {
- *              val fragmentTransaction = supportFragmentManager.beginTransaction()
- *              fragmentTransaction.replace(R.id.content_container, fragment, "")
- *              fragmentTransaction.build()
- *          }
- *      }
- *  ```
- *
- *  @param screenshotsDirectory root directory to save screenshot.
- *  @param screenshotDirectoryProvider screenshot directory provider inside the root directory
- *  @param screenshotNameProvider screenshot file name provider
+ *  @param resourcesRootDirsProvider provider of root directories to save different data including screenshots.
+ *  @param resourcesDirsProvider directory provider inside the root directory to save different data including screenshots.
+ *  @param resourceFileNamesProvider data file name provider including screenshots.
  *  @param changeSystemLocale change the system language, i.e. system dialogs (e.g. runtime permissions) will also be localized.
  *      Need permission in manifest file for a target app android.permission.CHANGE_CONFIGURATION
  *  @param locales comma-separated string with locales to run test with.
@@ -92,23 +48,53 @@ import org.junit.Rule
 abstract class DocLocScreenshotTestCase(
     private val resourcesRootDirsProvider: ResourcesRootDirsProvider =
         DefaultResourcesRootDirsProvider(),
-
     private val resourcesDirsProvider: ResourcesDirsProvider =
         DefaultResourcesDirsProvider(
             dirsProvider = DefaultDirsProvider(),
-            groupByRunNumbers = false
+            resourcesDirNameProvider = DefaultResourcesDirNameProvider()
         ),
-
     private val resourceFileNamesProvider: ResourceFileNamesProvider =
         DefaultResourceFileNamesProvider(
             addTimestamps = false
         ),
-
     private val changeSystemLocale: Boolean = false,
-
     locales: String?,
     kaspressoBuilder: Kaspresso.Builder = Kaspresso.Builder.simple()
 ) : TestCase(kaspressoBuilder = kaspressoBuilder) {
+
+    @Deprecated(
+        message = "It's a legacy option to create DocLoc Screenshot TestCase. \n " +
+                "Please use the primary constructor. \n" +
+                "See a mapping from old classes to new classes here to migrate your constructor. \n" +
+                "Anyway, we give a guarantee that the old option will work correctly for a while. \n" +
+                "You can check *Legacy screenshot tests in docloc_tests folder."
+    )
+    constructor(
+        screenshotsDirectory: File,
+        screenshotDirectoryProvider: ScreenshotDirectoryProvider = DefaultScreenshotDirectoryProvider(groupByRunNumbers = false),
+        screenshotNameProvider: ScreenshotNameProvider = DefaultScreenshotNameProvider(addTimestamps = false),
+        changeSystemLocale: Boolean = false,
+        locales: String?,
+        kaspressoBuilder: Kaspresso.Builder = Kaspresso.Builder.simple()
+    ) : this(
+        resourcesRootDirsProvider = object : ResourcesRootDirsProvider {
+            override val logcatRootDir: File = File("logcat")
+            override val screenshotsRootDir = screenshotsDirectory
+            override val videoRootDir: File = File("video")
+            override val viewHierarchy: File = File("view_hierarchy")
+        },
+        resourcesDirsProvider = DefaultResourcesDirsProvider(
+            dirsProvider = DefaultDirsProvider(),
+            resourcesDirNameProvider = SupportLegacyResourcesDirNameProvider(screenshotDirectoryProvider)
+        ),
+        resourceFileNamesProvider = object : ResourceFileNamesProvider {
+            override fun getFileName(tag: String, fileExtension: String): String =
+                screenshotNameProvider.getScreenshotName(tag)
+        },
+        changeSystemLocale = changeSystemLocale,
+        locales = locales,
+        kaspressoBuilder = kaspressoBuilder
+    )
 
     private lateinit var screenshotCapturer: DocLocScreenshotCapturer
 

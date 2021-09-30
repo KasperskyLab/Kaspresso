@@ -1,4 +1,4 @@
-package com.kaspersky.kaspressample.docloc_tests.cutomdirectory
+package com.kaspersky.kaspressample.docloc_tests.customdirectory
 
 import com.kaspersky.kaspresso.files.resources.ResourceFileNamesProvider
 
