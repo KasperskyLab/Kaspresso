@@ -46,7 +46,8 @@ import org.junit.Rule
  *  @param locales comma-separated string with locales to run test with.
  */
 abstract class DocLocScreenshotTestCase(
-    private val resourcesRootDirsProvider: ResourcesRootDirsProvider = DefaultResourcesRootDirsProvider(),
+    private val resourcesRootDirsProvider: ResourcesRootDirsProvider =
+        DefaultResourcesRootDirsProvider(),
     private val resourcesDirsProvider: ResourcesDirsProvider =
         DefaultResourcesDirsProvider(
             dirsProvider = DefaultDirsProvider(),
@@ -76,8 +77,11 @@ abstract class DocLocScreenshotTestCase(
         locales: String?,
         kaspressoBuilder: Kaspresso.Builder = Kaspresso.Builder.simple()
     ) : this(
-        resourcesRootDirsProvider = object : DefaultResourcesRootDirsProvider() {
+        resourcesRootDirsProvider = object : ResourcesRootDirsProvider {
+            override val logcatRootDir: File = File("logcat")
             override val screenshotsRootDir = screenshotsDirectory
+            override val videoRootDir: File = File("video")
+            override val viewHierarchy: File = File("view_hierarchy")
         },
         resourcesDirsProvider = DefaultResourcesDirsProvider(
             dirsProvider = DefaultDirsProvider(),
@@ -109,7 +113,6 @@ abstract class DocLocScreenshotTestCase(
 
     @get:Rule
     val storagePermissionRule = GrantPermissionRule.grant(Manifest.permission.WRITE_EXTERNAL_STORAGE)!!
-    // MANAGE_ALL_EXTERNAL_STORAGE
 
     @get:Rule
     val testFailRule = TestFailRule()

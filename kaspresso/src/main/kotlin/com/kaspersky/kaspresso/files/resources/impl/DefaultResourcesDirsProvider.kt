@@ -28,7 +28,7 @@ class DefaultResourcesDirsProvider(
     private fun resolveResourcesDirDest(rootDir: File, subDir: String? = null): File {
         val testMethod: TestMethod = Thread.currentThread().stackTrace.findTestMethod()
         val runNumber: Int = testRunsCount[testMethod] ?: 1
-        val resourcesDirName: String = resourcesDirNameProvider.getResourcesDirName(testMethod, runNumber)
+        val resourcesDirName: String = resourcesDirNameProvider.provideResourcesDirName(testMethod, runNumber)
         return when (subDir) {
             null -> rootDir.resolve(resourcesDirName)
             else -> rootDir.resolve(subDir).resolve(resourcesDirName)

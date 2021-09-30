@@ -11,7 +11,7 @@ internal class SupportLegacyResourcesDirNameProvider(
     private val screenshotDirectoryProvider: ScreenshotDirectoryProvider,
 ) : ResourcesDirNameProvider {
 
-    override fun getResourcesDirName(testMethod: TestMethod, runNumber: Int): String {
+    override fun provideResourcesDirName(testMethod: TestMethod, runNumber: Int): String {
         val relocatedTestMethod = com.kaspersky.kaspresso.device.screenshots.screenshotfiles.TestMethod(
             className = testMethod.className,
             methodName = testMethod.methodName

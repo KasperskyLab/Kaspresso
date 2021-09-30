@@ -7,5 +7,5 @@ import com.kaspersky.kaspresso.files.models.TestMethod
  */
 interface ResourcesDirNameProvider {
 
-    fun getResourcesDirName(testMethod: TestMethod, runNumber: Int): String
+    fun provideResourcesDirName(testMethod: TestMethod, runNumber: Int): String
 }
