@@ -2,7 +2,6 @@
 kotlin = "1.4.32"
 detekt = "1.18.1"
 espresso = "3.3.0"
-allure = "2.2.6"
 
 [libraries]
 # plugins
@@ -39,11 +38,5 @@ orchestrator = "androidx.test:orchestrator:1.3.0"
 okhttp = "com.squareup.okhttp3:okhttp:4.9.1"
 kotson = "com.github.salomonbrys.kotson:kotson:2.5.0"
 
-allureKotlinModel = { module = "io.qameta.allure:allure-kotlin-model", version.ref = "allure" }
-allureKotlinCommons = { module = "io.qameta.allure:allure-kotlin-commons", version.ref = "allure" }
-allureKotlinJunit4 = { module = "io.qameta.allure:allure-kotlin-junit4", version.ref = "allure" }
-allureKotlinAndroid = { module = "io.qameta.allure:allure-kotlin-android", version.ref = "allure" }
-
 [bundles]
 espresso = ["espressoCore", "espressoWeb"]
-allure = ["allureKotlinModel", "allureKotlinCommons", "allureKotlinJunit4", "allureKotlinAndroid"]

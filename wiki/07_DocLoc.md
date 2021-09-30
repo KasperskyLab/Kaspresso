@@ -16,6 +16,7 @@ To create a single test, you should extend `DocLocScreenshotTestCase` class as s
 ```kotlin
 @RunWith(AndroidJUnit4::class)
 class ScreenshotSampleTest : DocLocScreenshotTestCase(
+    screenshotsDirectory = File("screenshots"),
     locales = "en,ru"
 ) {
 
@@ -40,11 +41,11 @@ class ScreenshotSampleTest : DocLocScreenshotTestCase(
 }
 ```
 
-There is one parameter passed in the base constructor: 
-- locales - comma-separated string with locales to run test with.
-Captured screenshots will be available in the device's storage at the path "/sdcard/screenshots/".
+There are two parameters passed in the base constructor: 
+- locales - comma-separated string with locales to run test with;
+- screenshotsDirectory - directory to save screenshot.
 
-For full example, check the [ScreenshotSampleTest](../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/docloc_tests/ScreenshotSampleTest.kt). 
+For full example, check the [ScreenshotSampleTest](../samples/kaspresso-sample/src/androidTest/java/com/kaspersky/kaspressample/docloc_tests/ScreenshotSampleTest.kt). 
 
 Notice, that the test is marked with `@ScreenShooterTest` annotation. This is intended to filter only screenshooter tests to be run. For example, you could pass the 
 annotation to default `AndroidJUnitRunner` with command: 
@@ -55,7 +56,7 @@ adb shell am instrument -w -e annotation com.kaspersky.kaspresso.annotations.Scr
 
 **Screenshot files location**
 
-All screenshot files are stored in "screenshots" directory by default. 
+All screenshot files are stored in the directory, that you passed in the base class constructor. 
 They are sorted by locale and test name:  
 
 `<base directory>/<test class canonical name>/<locale>/<your tag>.png`
@@ -120,7 +121,7 @@ class ChangeSysLanguageTestCase : DocLocScreenshotTestCase(
     }        
 }
 ```
-The full example is located at [ChangeSysLanguageTestCase](../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/docloc_tests/ChangeSysLanguageTestCase.kt).
+The full example is located at [ChangeSysLanguageTestCase](../samples/kaspresso-sample/src/androidTest/java/com/kaspersky/kaspressample/docloc_tests/ChangeSysLanguageTestCase.kt).
 
 ## Important note
 
@@ -148,6 +149,7 @@ Then add a base product screenshot test case:
  
  ```kotlin
 open class ProductDocLocScreenshotTestCase : DocLocScreenshotTestCase(
+    screenshotsDirectory = File("screenshots"),
     locales = "en,ru"
 ) {
 
@@ -206,23 +208,12 @@ This method wraps your View interface and returns a proxy on it.
 The proxy guarantees that all the methods of the View interface you called, will be invoked on the main thread. 
 There is also `getUiSafeProxyFromImplementation` which wraps an implementation rather than an interface. 
 
-For full example, check [AdvancedScreenshotSampleTest](../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/docloc_tests/advanced/AdvancedScreenshotSampleTest.kt) class.
+For full example, check [AdvancedScreenshotSampleTest](../samples/kaspresso-sample/src/androidTest/java/com/kaspersky/kaspressample/docloc_tests/advanced/AdvancedScreenshotSampleTest.kt) class.
  
 ## Modifying screenshots path and name
 
 By default, all screenshots are stored at: <br>
-```/sdcard/screenshots/<locale>/<full qualified test class name>/<method name>.``` <br>
-You can change this behavior by providing custom 
-[ResourcesRootDirsProvider](../kaspresso/src/main/kotlin/com/kaspersky/kaspresso/files/resources/ResourcesRootDirsProvider.kt), 
-[ResourcesDirsProvider](../kaspresso/src/main/kotlin/com/kaspersky/kaspresso/files/resources/ResourcesDirsProvider.kt), 
-[ResourceFileNamesProvider](../kaspresso/src/main/kotlin/com/kaspersky/kaspresso/files/resources/ResourceFileNamesProvider.kt) and  
-[ResourcesDirNameProvider](../kaspresso/src/main/kotlin/com/kaspersky/kaspresso/files/resources/ResourcesDirNameProvider.kt) implementations. 
-Find out details [here](../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/docloc_tests/customdirectory/CustomDirectoryScreenshotSampleTest.kt).
-
-## Changes
-
-We have been forced to redesign our resource providing system to support Allure. 
-That's why we changed the primary constructor of [DocLocScreenshotTestCase](../kaspresso/src/main/kotlin/com/kaspersky/kaspresso/testcases/api/testcase/DocLocScreenshotTestCase.kt).
-But, we've kept the old option of using `DocLocScreenshotTestCase` with old resource providing system as a secondary constructor.
-You can view the secondary constructor as an example of migration from old system to new system.
-Also, we've retained tests using old resource providing system in samples to ensure that nothing is broken.
+```/sdcard/<screenshots root dir>/<locale>/<full qualified test class name>/<method name>.``` <br>
+You can change this behavior by providing custom [ScreenshotDirectoryProvider](../kaspresso/src/main/kotlin/com/kaspersky/kaspresso/device/screenshots/screenshotfiles/ScreenshotDirectoryProvider.kt) 
+and [ScreenshotNameProvider](../kaspresso/src/main/kotlin/com/kaspersky/kaspresso/device/screenshots/screenshotfiles/ScreenshotNameProvider.kt) implementations. 
+Find out details [here](../samples/kaspresso-sample/src/androidTest/java/com/kaspersky/kaspressample/docloc_tests/cutomdirectory/CustomDirectoryScreenshotSampleTest.kt).

@@ -1,7 +1,5 @@
 package com.kaspersky.kaspresso.device.logcat
 
-import java.io.File
-
 /**
  * The interface to work with logcat.
  */
@@ -37,16 +35,6 @@ interface Logcat {
      * @param buffer one of available logcat buffers
      */
     fun clear(buffer: Buffer = Buffer.DEFAULT)
-
-    fun dumpLogcat(
-        file: File,
-        tags: List<String>? = null,
-        excludePattern: String? = null,
-        excludePatternIsIgnoreCase: Boolean = false,
-        includePattern: String? = null,
-        includePatternIsIgnoreCase: Boolean = false,
-        buffer: Buffer = Buffer.DEFAULT
-    )
 
     /**
      * Get logcat dump as list of strings

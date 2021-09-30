@@ -1,9 +1,9 @@
 package com.kaspersky.kaspresso.failure
 
-import android.util.Log
 import android.view.View
 import androidx.test.espresso.PerformException
 import com.kaspersky.kaspresso.internal.extensions.espressoext.describe
+import com.kaspersky.kaspresso.internal.extensions.other.getStackTraceAsString
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import io.reactivex.exceptions.ExtCompositeException
 import junit.framework.AssertionFailedError
@@ -41,12 +41,12 @@ class FailureLoggingProviderImpl(
      * @param error the error to get stacktrace from.
      */
     override fun logStackTrace(error: Throwable) {
-        logger.e(Log.getStackTraceString(error))
+        logger.e(error.getStackTraceAsString())
 
         if (error is ExtCompositeException) {
             error.exceptions.forEachIndexed { i: Int, e: Throwable ->
                 logger.e("Composed exception ${i + 1} :")
-                logger.e(Log.getStackTraceString(e))
+                logger.e(e.getStackTraceAsString())
             }
         }
     }

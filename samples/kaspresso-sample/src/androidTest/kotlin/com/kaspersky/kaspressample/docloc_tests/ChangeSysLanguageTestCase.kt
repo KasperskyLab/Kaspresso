@@ -7,6 +7,7 @@ import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspresso.testcases.api.testcase.DocLocScreenshotTestCase
+import java.io.File
 import org.junit.Rule
 import org.junit.Test
 
@@ -15,6 +16,7 @@ import org.junit.Test
  * For more information see DocLoc wiki page.
  */
 class ChangeSysLanguageTestCase : DocLocScreenshotTestCase(
+    screenshotsDirectory = File("screenshots"),
     locales = "en,es-US,pt-BR,ru",
     changeSystemLocale = true
 ) {

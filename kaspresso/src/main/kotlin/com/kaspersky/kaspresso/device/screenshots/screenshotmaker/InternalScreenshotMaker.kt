@@ -5,7 +5,6 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.os.Looper
 import com.kaspersky.kaspresso.device.activities.Activities
-import com.kaspersky.kaspresso.params.ScreenshotParams
 import java.io.BufferedOutputStream
 import java.io.File
 import java.io.FileOutputStream
@@ -15,9 +14,12 @@ import java.util.concurrent.CountDownLatch
  * Captures the view of a current activity
  */
 class InternalScreenshotMaker(
-    private val activities: Activities,
-    private val params: ScreenshotParams
+    private val activities: Activities
 ) : ScreenshotMaker {
+
+    companion object {
+        const val PICTURE_QUALITY = 100
+    }
 
     override fun takeScreenshot(file: File) {
         val activity = activities.getResumed() ?: throw RuntimeException("There is no resumed activity.")
@@ -33,7 +35,7 @@ class InternalScreenshotMaker(
         fillBitmap(activity, bitmap, file)
 
         BufferedOutputStream(FileOutputStream(file)).use { outputStream ->
-            bitmap.compress(Bitmap.CompressFormat.PNG, params.quality, outputStream)
+            bitmap.compress(Bitmap.CompressFormat.PNG, PICTURE_QUALITY, outputStream)
             file.setReadable(true, false)
         }
         bitmap.recycle()

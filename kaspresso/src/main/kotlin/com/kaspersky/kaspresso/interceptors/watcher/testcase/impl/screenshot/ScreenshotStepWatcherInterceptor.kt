@@ -18,7 +18,7 @@ class ScreenshotStepWatcherInterceptor(
      * @param stepInfo the step info to log.
      */
     override fun interceptAfterWithSuccess(stepInfo: StepInfo) {
-        screenshots.take(makeTag(stepInfo))
+        screenshots.take(makeScreenshotTag(stepInfo))
     }
 
     /**
@@ -28,8 +28,8 @@ class ScreenshotStepWatcherInterceptor(
      * @param error the error occurred to use in screenshots name.
      */
     override fun interceptAfterWithError(stepInfo: StepInfo, error: Throwable) {
-        screenshots.take("${makeTag(stepInfo)}_failure_${error.javaClass.simpleName}")
+        screenshots.take("${makeScreenshotTag(stepInfo)}_failure_${error.javaClass.simpleName}")
     }
 
-    private fun makeTag(stepInfo: StepInfo): String = "${stepInfo.testClassName}_step_${stepInfo.ordinal}"
+    private fun makeScreenshotTag(stepInfo: StepInfo) = "${stepInfo.testClassName}_step_${stepInfo.ordinal}"
 }
