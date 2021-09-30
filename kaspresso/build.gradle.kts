@@ -8,7 +8,12 @@ publish {
 }
 
 dependencies {
-    api(fileTree("libs").matching { include("*.jar") })
+    api(projects.kautomator)
+    api(libs.kakao)
+    api(libs.bundles.espresso)
+    api(libs.uiAutomator)
+    api(libs.androidXCore)
+    api(libs.androidXRules)
 
     api(projects.kautomator)
     api(libs.kakao)

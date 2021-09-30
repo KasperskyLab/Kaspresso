@@ -1,0 +1,30 @@
+plugins {
+    id("convention.android-app")
+}
+
+android {
+    defaultConfig {
+        applicationId = "com.kaspersky.kaspresso.alluresupport.sample"
+        // AllureAndroidJUnitRunner must be used as testInstrumentationRunner
+        testInstrumentationRunner = "io.qameta.allure.android.runners.AllureAndroidJUnitRunner"
+        testInstrumentationRunnerArguments["clearPackageData"] = "true"
+    }
+
+    testOptions {
+        execution = "ANDROIDX_TEST_ORCHESTRATOR"
+    }
+}
+
+dependencies {
+    implementation(libs.appcompat)
+    implementation(libs.material)
+    implementation(libs.constraint)
+
+    androidTestImplementation(projects.kaspresso)
+    androidTestImplementation(projects.allureSupport)
+
+    androidTestImplementation(libs.runner)
+    androidTestImplementation(libs.junit)
+
+    androidTestUtil(libs.orchestrator)
+}
