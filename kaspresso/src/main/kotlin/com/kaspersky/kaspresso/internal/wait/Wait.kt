@@ -1,6 +1,5 @@
 package com.kaspersky.kaspresso.internal.wait
 
-import com.kaspersky.kaspresso.internal.extensions.other.isAllowed
 import com.kaspersky.kaspresso.logger.UiTestLogger
 
 /**
@@ -19,25 +18,4 @@ internal fun <T> wait(
     logger.i("Waiting for $timeoutMs ms")
     Thread.sleep(timeoutMs)
     return action.invoke()
-}
-
-internal fun <T> wait(
-    timeoutMs: Long,
-    logger: UiTestLogger,
-    allowedExceptions: Set<Class<out Throwable>>,
-    failureMessageSource: (Throwable) -> String?,
-    action: (() -> T)?
-): T? {
-    logger.i("Waiting for $timeoutMs ms")
-    return try {
-        Thread.sleep(timeoutMs)
-        action?.invoke()
-    } catch (error: Throwable) {
-        if (error.isAllowed(allowedExceptions)) {
-            logger.e(failureMessageSource(error) ?: "An error occurred while waiting: ${error.javaClass.simpleName}")
-            null
-        } else {
-            throw error
-        }
-    }
 }

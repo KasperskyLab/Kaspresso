@@ -1,7 +1,7 @@
 package com.kaspersky.kaspresso.internal.invocation
 
-import android.util.Log
 import androidx.test.internal.runner.junit4.statement.UiThreadStatement
+import com.kaspersky.kaspresso.internal.extensions.other.getStackTraceAsString
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import java.lang.reflect.InvocationHandler
 import java.lang.reflect.InvocationTargetException
@@ -27,7 +27,7 @@ internal class UiInvocationHandler(
                 result = method(target, *(args ?: emptyArray()))
             } catch (e: Exception) {
                 val ex = if (e is InvocationTargetException) e.cause else e
-                logger.e("Exception during proxy invocation: $ex, ${Log.getStackTraceString(ex)}")
+                logger.e("Exception during proxy invocation: $ex, ${ex?.getStackTraceAsString()}")
             } finally {
                 latch.countDown()
             }

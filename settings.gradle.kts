@@ -22,6 +22,8 @@ dependencyResolutionManagement {
 includeBuild("build-conventions")
 
 include(
+    ":allure-model",
+
     ":adb-server:adbserver-command-types",
     ":adb-server:adbserver-common",
     ":adb-server:adbserver-connection",
@@ -31,13 +33,11 @@ include(
 
     ":kaspresso",
     ":kautomator",
-    ":allure-support",
 
     ":samples:adbserver-sample",
     ":samples:kaspresso-sample",
     ":samples:kautomator-sample",
     ":samples:kautomator-sample-app-upgrade",
-    ":samples:kaspresso-allure-support-sample",
 
     ":tutorial"
 )

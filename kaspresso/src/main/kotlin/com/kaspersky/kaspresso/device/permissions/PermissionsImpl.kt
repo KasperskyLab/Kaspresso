@@ -1,11 +1,11 @@
 package com.kaspersky.kaspresso.device.permissions
 
 import android.os.Build
-import android.util.Log
 import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.UiObject
 import androidx.test.uiautomator.UiObjectNotFoundException
 import androidx.test.uiautomator.UiSelector
+import com.kaspersky.kaspresso.internal.extensions.other.getStackTraceAsString
 import com.kaspersky.kaspresso.internal.wait.wait
 import com.kaspersky.kaspresso.logger.UiTestLogger
 
@@ -92,7 +92,7 @@ class PermissionsImpl(
             logger.e("There are no permissions dialog to interact with.")
             null
         } catch (e: Throwable) {
-            logger.e(Log.getStackTraceString(e))
+            logger.e(e.getStackTraceAsString())
             throw e
         }
     }
