@@ -26,29 +26,32 @@ class FailingKautomatorSharedTest : TestCase(Kaspresso.Builder.simple(sharedTest
     @get:Rule
     val activityTestRule = ActivityTestRule(MainActivity::class.java, true, false)
 
-    // This exception only happens when running the test on the JVM
-    @Test(expected = KautomatorInSharedTestException::class)
+    @Test
     fun errorSampleTest() {
+        try {
+            before {
+                activityTestRule.launchActivity(null)
+            }.after {
+            }.run {
 
-        before {
-            activityTestRule.launchActivity(null)
-        }.after {
-        }.run {
-
-            step("Open Continuously Screen") {
-                UiMainScreen {
-                    continuouslyButton {
-                        click()
+                step("Open Continuously Screen") {
+                    UiMainScreen {
+                        continuouslyButton {
+                            click()
+                        }
+                    }
+                }
+                step("Push start button") {
+                    UiContinuouslyScreen {
+                        startButton {
+                            click()
+                        }
                     }
                 }
             }
-            step("Push start button") {
-                UiContinuouslyScreen {
-                    startButton {
-                        click()
-                    }
-                }
-            }
+        } catch (exception: RuntimeException) {
+            // This exception is expected only when running the test on the JVM
+            assert(exception is KautomatorInSharedTestException)
         }
     }
 }
