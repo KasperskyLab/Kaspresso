@@ -2,14 +2,6 @@ package com.kaspersky.kaspresso.internal.extensions.other
 
 import com.kaspersky.kaspresso.internal.exceptions.KaspressoError
 import io.reactivex.exceptions.ExtCompositeException
-import java.io.PrintWriter
-import java.io.StringWriter
-
-/**
- * @return the stack trace of the [Throwable] as a [String].
- */
-internal fun Throwable.getStackTraceAsString(): String =
-    StringWriter().also { printStackTrace(PrintWriter(it)) }.toString()
 
 internal inline fun <reified T : Throwable> invokeSafely(
     exceptions: MutableList<T>,
