@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Kaspresso-Allure Sample</string>
+    <string name="increment">Increment</string>
+    <string name="decrement">Decrement</string>
+    <string name="clear">Clear</string>
+    <string name="value_placeholder">Current value is: %d</string>
+</resources>

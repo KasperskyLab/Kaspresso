@@ -33,13 +33,17 @@ import com.kaspersky.kaspresso.device.phone.Phone
 import com.kaspersky.kaspresso.device.phone.PhoneImpl
 import com.kaspersky.kaspresso.device.screenshots.Screenshots
 import com.kaspersky.kaspresso.device.screenshots.ScreenshotsImpl
-import com.kaspersky.kaspresso.device.screenshots.screenshotfiles.DefaultScreenshotDirectoryProvider
-import com.kaspersky.kaspresso.device.screenshots.screenshotfiles.DefaultScreenshotNameProvider
 import com.kaspersky.kaspresso.device.screenshots.screenshotmaker.CombinedScreenshotMaker
 import com.kaspersky.kaspresso.device.screenshots.screenshotmaker.ExternalScreenshotMaker
 import com.kaspersky.kaspresso.device.screenshots.screenshotmaker.InternalScreenshotMaker
 import com.kaspersky.kaspresso.device.server.AdbServer
 import com.kaspersky.kaspresso.device.server.AdbServerImpl
+import com.kaspersky.kaspresso.device.video.Videos
+import com.kaspersky.kaspresso.device.video.VideosImpl
+import com.kaspersky.kaspresso.device.video.recorder.VideoRecorderImpl
+import com.kaspersky.kaspresso.device.viewhierarchy.ViewHierarchyDumper
+import com.kaspersky.kaspresso.device.viewhierarchy.ViewHierarchyDumperImpl
+import com.kaspersky.kaspresso.files.resources.ResourceFilesProvider
 import com.kaspersky.kaspresso.interceptors.behavior.DataBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.ViewBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.WebBehaviorInterceptor
@@ -62,6 +66,8 @@ import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.systemsafety
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.params.AutoScrollParams
 import com.kaspersky.kaspresso.params.FlakySafetyParams
+import com.kaspersky.kaspresso.params.ScreenshotParams
+import com.kaspersky.kaspresso.params.VideoParams
 
 class KautomatorInstrumentationConfig : KautomatorConfig {
 
@@ -92,13 +98,37 @@ class KautomatorInstrumentationConfig : KautomatorConfig {
 
     override fun getKeyboard(adbServer: AdbServer): Keyboard = KeyboardImpl(adbServer)
 
-    override fun getScreenshots(libLogger: UiTestLogger, activities: Activities): Screenshots =
+    override fun getScreenshots(
+        resourceFilesProvider: ResourceFilesProvider,
+        libLogger: UiTestLogger,
+        activities: Activities,
+        screenshotParams: ScreenshotParams
+    ): Screenshots =
         ScreenshotsImpl(
             libLogger,
-            CombinedScreenshotMaker(InternalScreenshotMaker(activities), ExternalScreenshotMaker()),
-            DefaultScreenshotDirectoryProvider(groupByRunNumbers = true),
-            DefaultScreenshotNameProvider(addTimestamps = false)
+            resourceFilesProvider,
+            CombinedScreenshotMaker(
+                InternalScreenshotMaker(activities, screenshotParams),
+                ExternalScreenshotMaker(uiDevice, screenshotParams)
+            )
         )
+
+    override fun getVideos(
+        resourceFilesProvider: ResourceFilesProvider,
+        libLogger: UiTestLogger,
+        videoParams: VideoParams
+    ): Videos =
+        VideosImpl(
+            resourceFilesProvider = resourceFilesProvider,
+            videoRecorder = VideoRecorderImpl(
+                uiDevice,
+                libLogger,
+                videoParams
+            )
+        )
+
+    override fun getViewHierarchyDumper(logger: UiTestLogger, resourceFilesProvider: ResourceFilesProvider): ViewHierarchyDumper =
+        ViewHierarchyDumperImpl(uiDevice, logger, resourceFilesProvider)
 
     override fun getAccessibility(): Accessibility = AccessibilityImpl()
 

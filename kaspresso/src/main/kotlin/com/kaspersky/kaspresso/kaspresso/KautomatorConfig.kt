@@ -17,6 +17,9 @@ import com.kaspersky.kaspresso.device.permissions.Permissions
 import com.kaspersky.kaspresso.device.phone.Phone
 import com.kaspersky.kaspresso.device.screenshots.Screenshots
 import com.kaspersky.kaspresso.device.server.AdbServer
+import com.kaspersky.kaspresso.device.video.Videos
+import com.kaspersky.kaspresso.device.viewhierarchy.ViewHierarchyDumper
+import com.kaspersky.kaspresso.files.resources.ResourceFilesProvider
 import com.kaspersky.kaspresso.interceptors.behavior.DataBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.ViewBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.WebBehaviorInterceptor
@@ -25,12 +28,20 @@ import com.kaspersky.kaspresso.interceptors.behaviorkautomator.ObjectBehaviorInt
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.params.AutoScrollParams
 import com.kaspersky.kaspresso.params.FlakySafetyParams
+import com.kaspersky.kaspresso.params.ScreenshotParams
+import com.kaspersky.kaspresso.params.VideoParams
 
 interface KautomatorConfig {
 
     val canRunOnJvm: Boolean
 
-    fun getDevice(libLogger: UiTestLogger, adbServer: AdbServer, activities: Activities): Device =
+    fun getDevice(
+        resourceFilesProvider: ResourceFilesProvider,
+        libLogger: UiTestLogger,
+        adbServer: AdbServer,
+        activities: Activities,
+        screenshotParams: ScreenshotParams
+    ): Device =
         Device(
             apps = getApps(libLogger, adbServer),
             files = getFiles(adbServer),
@@ -40,7 +51,7 @@ interface KautomatorConfig {
             location = getLocation(adbServer),
             keyboard = getKeyboard(adbServer),
             accessibility = getAccessibility(),
-            screenshots = getScreenshots(libLogger, activities),
+            screenshots = getScreenshots(resourceFilesProvider, libLogger, activities, screenshotParams),
             permissions = getPermissions(libLogger),
             hackPermissions = getHackPermissions(libLogger),
             exploit = getExploit(adbServer, activities),
@@ -49,7 +60,7 @@ interface KautomatorConfig {
             uiDeviceConfig = getUiDeviceConfig()
         )
 
-    fun getUiDeviceConfig() : UiDeviceConfig
+    fun getUiDeviceConfig(): UiDeviceConfig
 
     fun getAdbServer(libLogger: UiTestLogger): AdbServer
 
@@ -69,7 +80,23 @@ interface KautomatorConfig {
 
     fun getKeyboard(adbServer: AdbServer): Keyboard
 
-    fun getScreenshots(libLogger: UiTestLogger, activities: Activities): Screenshots
+    fun getScreenshots(
+        resourceFilesProvider: ResourceFilesProvider,
+        libLogger: UiTestLogger,
+        activities: Activities,
+        screenshotParams: ScreenshotParams
+    ): Screenshots
+
+    fun getVideos(
+        resourceFilesProvider: ResourceFilesProvider,
+        libLogger: UiTestLogger,
+        videoParams: VideoParams
+    ): Videos
+
+    fun getViewHierarchyDumper(
+        logger: UiTestLogger,
+        resourceFilesProvider: ResourceFilesProvider
+    ) : ViewHierarchyDumper
 
     fun getAccessibility(): Accessibility
 
