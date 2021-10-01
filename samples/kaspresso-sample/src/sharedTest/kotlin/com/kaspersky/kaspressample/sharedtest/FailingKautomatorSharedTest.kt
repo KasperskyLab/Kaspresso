@@ -5,7 +5,6 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspressample.MainActivity
-import com.kaspersky.kaspressample.screen.kautomator.UiContinuouslyDialogScreen
 import com.kaspersky.kaspressample.screen.kautomator.UiContinuouslyScreen
 import com.kaspersky.kaspressample.screen.kautomator.UiMainScreen
 import com.kaspersky.kaspresso.failure.exceptions.KautomatorInSharedTestException
@@ -27,8 +26,10 @@ class FailingKautomatorSharedTest : TestCase(Kaspresso.Builder.simple(sharedTest
     @get:Rule
     val activityTestRule = ActivityTestRule(MainActivity::class.java, true, false)
 
+    // This exception only happens when running the test on the JVM
     @Test(expected = KautomatorInSharedTestException::class)
-    fun testDialogPresentUntilAndroidO() {
+    fun errorSampleTest() {
+
         before {
             activityTestRule.launchActivity(null)
         }.after {
@@ -45,13 +46,6 @@ class FailingKautomatorSharedTest : TestCase(Kaspresso.Builder.simple(sharedTest
                 UiContinuouslyScreen {
                     startButton {
                         click()
-                    }
-                }
-            }
-            step("Check dialog appeared") {
-                UiContinuouslyDialogScreen {
-                    dialogTitle {
-                        isDisplayed()
                     }
                 }
             }
