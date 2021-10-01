@@ -589,7 +589,6 @@ data class Kaspresso(
          */
         lateinit var keyboard: Keyboard
 
-
         @Suppress("detekt.ComplexMethod")
         private fun postInitVariables() {
 
@@ -601,7 +600,6 @@ data class Kaspresso(
             if (!::autoScrollParams.isInitialized) autoScrollParams = AutoScrollParams.default()
             if (!::stepParams.isInitialized) stepParams = StepParams()
 
-            // allure
             if (!::dirsProvider.isInitialized) dirsProvider = DefaultDirsProvider()
             if (!::resourcesRootDirsProvider.isInitialized) resourcesRootDirsProvider = DefaultResourcesRootDirsProvider()
             if (!::resourcesDirNameProvider.isInitialized) resourcesDirNameProvider = DefaultResourcesDirNameProvider()
@@ -622,7 +620,6 @@ data class Kaspresso(
                 )
             }
 
-            // kautomator
             if (!::kautomatorWaitForIdleSettings.isInitialized) kautomatorWaitForIdleSettings = KautomatorWaitForIdleSettings.default()
             if (!::adbServer.isInitialized) adbServer = kautomatorConfig.getAdbServer(libLogger)
             if (!::apps.isInitialized) apps = kautomatorConfig.getApps(libLogger, adbServer)
@@ -770,7 +767,7 @@ data class Kaspresso(
                 testRunWatcherInterceptors = testRunWatcherInterceptors,
 
                 adbServer = kautomatorConfig.getAdbServer(libLogger),
-                device = kautomatorConfig.getDevice(resourceFilesProvider,libLogger, adbServer, activities, screenshotParams),
+                device = kautomatorConfig.getDevice(resourceFilesProvider, libLogger, adbServer, activities, screenshotParams),
 
                 objectWatcherInterceptors = emptyList(),
                 deviceWatcherInterceptors = emptyList(),

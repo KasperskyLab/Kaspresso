@@ -224,21 +224,47 @@ class KautomatorJvmConfig : KautomatorConfig {
         libLogger: UiTestLogger,
         activities: Activities,
         screenshotParams: ScreenshotParams
-    ): Screenshots {
-        throw ActionNotSupportedInSharedTestException("Screenshots")
-    }
+    ): Screenshots =
+        object : Screenshots {
+            override fun take(tag: String) {
+                // ignore in JVM. Required to avoid breaking sharedTests that take screenshots
+            }
+
+            override fun takeAndApply(tag: String, block: File.() -> Unit) {
+                // ignore in JVM. Required to avoid breaking sharedTests that take screenshots
+            }
+        }
 
     override fun getVideos(
         resourceFilesProvider: ResourceFilesProvider,
         libLogger: UiTestLogger,
         videoParams: VideoParams
-    ): Videos {
-        throw ActionNotSupportedInSharedTestException("Videos")
-    }
+    ): Videos =
+        object : Videos {
+            override fun record(tag: String) {
+                // ignore in JVM. Required to avoid breaking sharedTests that take videos
+            }
 
-    override fun getViewHierarchyDumper(logger: UiTestLogger, resourceFilesProvider: ResourceFilesProvider): ViewHierarchyDumper {
-        throw ActionNotSupportedInSharedTestException("ViewHierarchyDumper")
-    }
+            override fun save() {
+                // ignore in JVM. Required to avoid breaking sharedTests that take videos
+            }
+
+            override fun saveAndApply(block: File.() -> Unit) {
+                // ignore in JVM. Required to avoid breaking sharedTests that take screenshots
+            }
+        }
+
+
+    override fun getViewHierarchyDumper(logger: UiTestLogger, resourceFilesProvider: ResourceFilesProvider): ViewHierarchyDumper =
+        object : ViewHierarchyDumper{
+            override fun dump(tag: String) {
+                // ignore in JVM. Required to avoid breaking sharedTests that dump the view hierarchy
+            }
+
+            override fun dumpAndApply(tag: String, block: File.() -> Unit) {
+                // ignore in JVM. Required to avoid breaking sharedTests that dump the view hierarchy
+            }
+        }
 
     override fun getAccessibility(): Accessibility = object : Accessibility {
         override fun enable(packageName: String, className: String) {
