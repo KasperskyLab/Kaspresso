@@ -5,11 +5,14 @@ import android.app.UiAutomation
 import android.os.Build
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.Configurator
+import com.kaspersky.kaspresso.logger.UiTestLogger
 
 /**
  * The implementation of the [Accessibility] interface.
  */
-class AccessibilityImpl : Accessibility {
+class AccessibilityImpl(
+    private val logger: UiTestLogger
+) : Accessibility {
 
     /**
      * Enables accessibility. Available since api 24.
@@ -29,6 +32,8 @@ class AccessibilityImpl : Accessibility {
             .getUiAutomation(UiAutomation.FLAG_DONT_SUPPRESS_ACCESSIBILITY_SERVICES)
             .executeShellCommand(cmd)
             .close()
+
+        logger.i("Accessibility service $packageName.$className enabled")
     }
 
     /**
@@ -43,5 +48,7 @@ class AccessibilityImpl : Accessibility {
             .getUiAutomation(UiAutomation.FLAG_DONT_SUPPRESS_ACCESSIBILITY_SERVICES)
             .executeShellCommand(cmd)
             .close()
+
+        logger.i("Accessibility services disabled")
     }
 }
