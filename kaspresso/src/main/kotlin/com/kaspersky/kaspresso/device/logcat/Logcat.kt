@@ -41,6 +41,7 @@ interface Logcat {
     fun dumpLogcat(
         file: File,
         tags: List<String>? = null,
+        timeFrom: String? = null,
         excludePattern: String? = null,
         excludePatternIsIgnoreCase: Boolean = false,
         includePattern: String? = null,

@@ -43,6 +43,7 @@ internal class TestRunner<InitData, Data>(
         var testPassed = true
 
         try {
+            kaspresso.libLogger.line()
             testRunWatcherInterceptor.onTestStarted(testInfo)
 
             val data: Data = runBeforeTestSection(
@@ -84,6 +85,7 @@ internal class TestRunner<InitData, Data>(
                 resultException = exceptions.getException()
                 testInfo = testInfo.copy(throwable = resultException)
                 testRunWatcherInterceptor.onTestFinished(testInfo, testPassed)
+                kaspresso.libLogger.line()
                 kaspresso.adbServer.disconnectServer()
                 kaspresso.reset()
             }

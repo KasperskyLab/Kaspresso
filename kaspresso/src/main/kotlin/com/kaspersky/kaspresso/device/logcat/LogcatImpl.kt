@@ -7,6 +7,7 @@ import java.io.File
 import java.io.InputStreamReader
 
 class LogcatImpl(
+    private val logger: UiTestLogger,
     private val adbServer: AdbServer,
     private val isNeededToPrintExecutedCommand: Boolean = false,
     private val defaultBufferSize: LogcatBufferSize = LogcatBufferSize(DEFAULT_BUFFER_SIZE, LogcatBufferSize.Dimension.KILOBYTES)
@@ -63,6 +64,7 @@ class LogcatImpl(
     override fun dumpLogcat(
         file: File,
         tags: List<String>?,
+        timeFrom: String?,
         excludePattern: String?,
         excludePatternIsIgnoreCase: Boolean,
         includePattern: String?,
@@ -71,6 +73,7 @@ class LogcatImpl(
     ) {
         val command = prepareCommand(
             tags = tags,
+            timeFrom = timeFrom,
             excludePattern = excludePattern,
             excludePatternIsIgnoreCase = excludePatternIsIgnoreCase,
             includePattern = includePattern,
@@ -148,6 +151,7 @@ class LogcatImpl(
     ): Boolean {
         val command = prepareCommand(
             tags = null,
+            timeFrom = null,
             excludePattern = excludePattern,
             excludePatternIsIgnoreCase = excludePatternIsIgnoreCase,
             includePattern = includePattern,
@@ -225,6 +229,7 @@ class LogcatImpl(
      */
     private fun prepareCommand(
         tags: List<String>?,
+        timeFrom: String?,
         excludePattern: String?,
         excludePatternIsIgnoreCase: Boolean,
         includePattern: String?,
@@ -233,6 +238,9 @@ class LogcatImpl(
         rowLimit: Int?
     ): String {
         var command = "logcat -b ${buffer.bufferName} -d "
+        if (!timeFrom.isNullOrEmpty()) {
+            command += "-t \"$timeFrom\" "
+        }
         if (rowLimit != null && rowLimit > 0) {
             command += "-m $rowLimit "
         }
