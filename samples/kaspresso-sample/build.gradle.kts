@@ -63,7 +63,6 @@ dependencies {
     testImplementation(libs.androidXRules)
     testImplementation(libs.androidXTestKtx)
     testImplementation(libs.androidXTest)
-    testImplementation(libs.kakao)
     testImplementation(libs.robolectric)
 
     debugImplementation(libs.fragmentTesting)
