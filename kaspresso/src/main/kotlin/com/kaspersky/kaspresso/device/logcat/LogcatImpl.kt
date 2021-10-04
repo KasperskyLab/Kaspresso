@@ -1,12 +1,15 @@
 package com.kaspersky.kaspresso.device.logcat
 
 import android.os.Build
+import android.util.Log
 import com.kaspersky.kaspresso.device.server.AdbServer
+import com.kaspersky.kaspresso.logger.UiTestLogger
 import java.io.BufferedReader
 import java.io.File
 import java.io.InputStreamReader
 
 class LogcatImpl(
+    private val logger: UiTestLogger,
     private val adbServer: AdbServer,
     private val isNeededToPrintExecutedCommand: Boolean = false,
     private val defaultBufferSize: LogcatBufferSize = LogcatBufferSize(DEFAULT_BUFFER_SIZE, LogcatBufferSize.Dimension.KILOBYTES)
@@ -31,6 +34,7 @@ class LogcatImpl(
             adbServer.performShell("setprop ro.logd.filter disable")
             adbServer.performShell("setprop persist.logd.filter disable")
         }
+        logger.i("Chatty disabled")
     }
 
     /**
@@ -40,6 +44,7 @@ class LogcatImpl(
      */
     override fun setBufferSize(size: LogcatBufferSize) {
         adbServer.performShell("logcat -G $size")
+        logger.i("Logcat buffer size set to $size")
     }
 
     /**
@@ -47,6 +52,7 @@ class LogcatImpl(
      */
     override fun setDefaultBufferSize() {
         setBufferSize(defaultBufferSize)
+        logger.i("Logcat buffer size set to default $defaultBufferSize")
     }
 
     /**
@@ -56,13 +62,15 @@ class LogcatImpl(
      * @param buffer one of available logcat buffers
      */
     override fun clear(buffer: Logcat.Buffer) {
-        executeCommand("logcat -b ${buffer.bufferName} -c").destroy()
+        adbServer.performShell("logcat -b ${buffer.bufferName} -c")
         Thread.sleep(DEFAULT_LOGCAT_CLEAR_DELAY)
+        logger.i("Logcat buffer cleared")
     }
 
     override fun dumpLogcat(
         file: File,
         tags: List<String>?,
+        timeFrom: String?,
         excludePattern: String?,
         excludePatternIsIgnoreCase: Boolean,
         includePattern: String?,
@@ -71,6 +79,7 @@ class LogcatImpl(
     ) {
         val command = prepareCommand(
             tags = tags,
+            timeFrom = timeFrom,
             excludePattern = excludePattern,
             excludePatternIsIgnoreCase = excludePatternIsIgnoreCase,
             includePattern = includePattern,
@@ -78,9 +87,13 @@ class LogcatImpl(
             buffer = buffer,
             rowLimit = null
         )
+        logger.i("Dump logcat buffer to $file: $command")
+
         val process = executeCommand(command)
         try {
             file.outputStream().use { process.inputStream.copyTo(it) }
+        } catch (e: Throwable) {
+            logger.e("Dump logcat buffer error: ${Log.getStackTraceString(e)}")
         } finally {
             process.destroy()
         }
@@ -148,6 +161,7 @@ class LogcatImpl(
     ): Boolean {
         val command = prepareCommand(
             tags = null,
+            timeFrom = null,
             excludePattern = excludePattern,
             excludePatternIsIgnoreCase = excludePatternIsIgnoreCase,
             includePattern = includePattern,
@@ -225,6 +239,7 @@ class LogcatImpl(
      */
     private fun prepareCommand(
         tags: List<String>?,
+        timeFrom: String?,
         excludePattern: String?,
         excludePatternIsIgnoreCase: Boolean,
         includePattern: String?,
@@ -233,6 +248,9 @@ class LogcatImpl(
         rowLimit: Int?
     ): String {
         var command = "logcat -b ${buffer.bufferName} -d "
+        if (!timeFrom.isNullOrEmpty()) {
+            command += "-t \"$timeFrom\" "
+        }
         if (rowLimit != null && rowLimit > 0) {
             command += "-m $rowLimit "
         }

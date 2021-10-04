@@ -4,6 +4,8 @@ import java.io.File
 
 interface LogcatDumper {
 
+    fun watch()
+
     /**
      * Dumps logcat output with specific tag.
      */
