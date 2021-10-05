@@ -104,12 +104,24 @@ class AdbServerImpl(
                 }
                 if (result.status == ExecutorResultStatus.TIMEOUT) {
                     throw AdbServerException(
-                        "AdbServer. The command=$command was performed with timeout exception. \n" +
-                                "The possible reason (99.9%) is absence of started 'adbserver-desktop.jar'. \n" +
-                                "Please, follow the instruction: \n" +
-                                "1. Find the last 'adbserver-desktop.jar' here - https://github.com/KasperskyLab/Kaspresso/tree/master/artifacts \n" +
-                                "2. Copy 'adbserver-desktop.jar' to your machine. For example, /Users/yuri.gagarin/Desktop/adbserver-desktop.jar. \n" +
-                                "3. Start 'adbserver-desktop.jar' with the command in Terminal - 'java -jar /Users/yuri.gagarin/Desktop/adbserver-desktop.jar"
+                        """
+
+                            AdbServer. The command=$command was performed with timeout exception.
+                            There are two possible reasons:
+
+                            1. The test is executing in JVM (with Robolectric) environment and the test uses AdbServer. But, Unit tests can't use this implementation of AdbServer.
+                            Possible solutions:
+                            1. Rewrite the test and replace/remove a peace of code where AdbServer is called.
+                            2. Write another implementation of AdbServer.
+                            3. Don't use this test like a JVM(Unit)-test.
+
+                            2. The second reason is absence of started 'adbserver-desktop.jar'.
+                            Please, follow the instruction to resolve this issue:
+                            1. Find the last 'adbserver-desktop.jar' here - https://github.com/KasperskyLab/Kaspresso/tree/master/artifacts.
+                            2. Copy 'adbserver-desktop.jar' to your machine. For example, /Users/yuri.gagarin/Desktop/adbserver-desktop.jar.
+                            3. Start 'adbserver-desktop.jar' with the command in Terminal - 'java -jar /Users/yuri.gagarin/Desktop/adbserver-desktop.jar
+
+                        """.trimIndent()
                     )
                 }
             }

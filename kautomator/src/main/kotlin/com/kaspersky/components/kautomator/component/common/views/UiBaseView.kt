@@ -2,6 +2,7 @@ package com.kaspersky.components.kautomator.component.common.views
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.UiDevice
+import com.kaspersky.components.kautomator.common.KautomatorInUnitTestException
 import com.kaspersky.components.kautomator.component.common.KautomatorMarker
 import com.kaspersky.components.kautomator.component.common.actions.UiBaseActions
 import com.kaspersky.components.kautomator.component.common.assertions.UiBaseAssertions
@@ -12,6 +13,7 @@ import com.kaspersky.components.kautomator.intercept.delegate.UiObjectInteractio
 import com.kaspersky.components.kautomator.intercept.interaction.UiObjectInteraction
 import com.kaspersky.components.kautomator.intercept.operation.UiObjectAction
 import com.kaspersky.components.kautomator.intercept.operation.UiObjectAssertion
+import com.kaspersky.components.kautomator.common.checkInstrumentalStateOfEnvironment
 
 /**
  * Base class for all UiAutomator DSL views
@@ -27,7 +29,9 @@ import com.kaspersky.components.kautomator.intercept.operation.UiObjectAssertion
 open class UiBaseView<out T>(selector: UiViewSelector) : UiBaseActions, UiBaseAssertions,
     UiInterceptable<UiObjectInteraction, UiObjectAssertion, UiObjectAction> {
 
-    final override val view: UiObjectInteractionDelegate by lazy {
+    final override val view: UiObjectInteractionDelegate by lazy(LazyThreadSafetyMode.NONE) {
+        if (!checkInstrumentalStateOfEnvironment()) throw KautomatorInUnitTestException()
+
         val delegate = UiObjectInteractionDelegate(
             UiDevice.getInstance(InstrumentationRegistry.getInstrumentation()),
             selector,

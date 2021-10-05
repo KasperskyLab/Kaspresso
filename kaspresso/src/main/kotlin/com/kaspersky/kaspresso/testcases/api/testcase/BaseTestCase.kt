@@ -37,6 +37,7 @@ abstract class BaseTestCase<InitData, Data>(
 
     override val adbServer: AdbServer = testAssistantsProvider.adbServer
     override val device: Device = testAssistantsProvider.device
+    override val isInstrumentalEnvironment: Boolean = testAssistantsProvider.isInstrumentalEnvironment
     override val testLogger: UiTestLogger = testAssistantsProvider.testLogger
     override val params: Params = testAssistantsProvider.params
 

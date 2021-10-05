@@ -8,23 +8,37 @@ import com.kaspersky.components.alluresupport.interceptors.testrun.ScreenshotTes
 import com.kaspersky.components.alluresupport.interceptors.testrun.VideoRecordingTestInterceptor
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 
+/**
+ * Kaspresso Builder that includes all appropriate interceptors to support rich Allure reports.
+ *
+ * A little note. If a test is executing in JVM (with Robolectric) environment then mentioned above interceptors are not including to prevent crashes.
+ * Sure, Allure reports don't have any sense in non Instrumental environment.
+ */
 fun Kaspresso.Builder.Companion.withAllureSupport(
     customize: Kaspresso.Builder.() -> Unit = {}
 ): Kaspresso.Builder = simple(customize).addAllureSupport()
 
+/**
+ * Kaspresso Builder that includes all appropriate interceptors to support rich Allure reports.
+ *
+ * A little note. If a test is executing in JVM (with Robolectric) environment then mentioned above interceptors are not including to prevent crashes.
+ * Sure, Allure reports don't have any sense in non Instrumental environment.
+ */
 fun Kaspresso.Builder.addAllureSupport(): Kaspresso.Builder = apply {
-    stepWatcherInterceptors.addAll(
-        listOf(
-            ScreenshotStepInterceptor(screenshots),
-            AllureMapperStepInterceptor()
+    if (isInstrumentalEnvironment) {
+        stepWatcherInterceptors.addAll(
+            listOf(
+                ScreenshotStepInterceptor(screenshots),
+                AllureMapperStepInterceptor()
+            )
         )
-    )
-    testRunWatcherInterceptors.addAll(
-        listOf(
-            ScreenshotTestInterceptor(screenshots),
-            VideoRecordingTestInterceptor(videos),
-            DumpLogcatTestInterceptor(logcatDumper),
-            DumpViewsTestInterceptor(viewHierarchyDumper)
+        testRunWatcherInterceptors.addAll(
+            listOf(
+                ScreenshotTestInterceptor(screenshots),
+                VideoRecordingTestInterceptor(videos),
+                DumpLogcatTestInterceptor(logcatDumper),
+                DumpViewsTestInterceptor(viewHierarchyDumper)
+            )
         )
-    )
+    }
 }

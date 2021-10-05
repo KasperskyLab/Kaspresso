@@ -3,14 +3,18 @@ package com.kaspersky.kaspresso.device.viewhierarchy
 import android.util.Log
 import androidx.test.uiautomator.UiDevice
 import com.kaspersky.kaspresso.files.resources.ResourceFilesProvider
+import com.kaspersky.kaspresso.instrumental.InstrumentalDepsAssistant
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import java.io.File
 
 class ViewHierarchyDumperImpl(
-    private val device: UiDevice,
+    private val instrumentalDepsAssistant: InstrumentalDepsAssistant,
     private val logger: UiTestLogger,
     private val resourceFilesProvider: ResourceFilesProvider
 ) : ViewHierarchyDumper {
+
+    private val device: UiDevice
+        get() = instrumentalDepsAssistant.uiDevice
 
     override fun dump(tag: String): Unit = doDumpAndApply(tag, null)
 

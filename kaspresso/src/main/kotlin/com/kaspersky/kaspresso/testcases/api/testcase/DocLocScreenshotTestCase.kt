@@ -1,6 +1,7 @@
 package com.kaspersky.kaspresso.testcases.api.testcase
 
 import android.Manifest
+import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspresso.device.locales.Locales
 import com.kaspersky.kaspresso.device.screenshots.screenshotfiles.DefaultScreenshotDirectoryProvider
@@ -22,6 +23,7 @@ import com.kaspersky.kaspresso.files.resources.impl.DefaultResourcesDirNameProvi
 import com.kaspersky.kaspresso.files.resources.impl.DefaultResourcesDirsProvider
 import com.kaspersky.kaspresso.files.resources.impl.DefaultResourcesRootDirsProvider
 import com.kaspersky.kaspresso.files.resources.impl.SupportLegacyResourcesDirNameProvider
+import com.kaspersky.kaspresso.instrumental.exception.DocLocInUnitTestException
 import com.kaspersky.kaspresso.internal.extensions.other.getAllInterfaces
 import com.kaspersky.kaspresso.internal.invocation.UiInvocationHandler
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
@@ -50,7 +52,7 @@ abstract class DocLocScreenshotTestCase(
         DefaultResourcesRootDirsProvider(),
     private val resourcesDirsProvider: ResourcesDirsProvider =
         DefaultResourcesDirsProvider(
-            dirsProvider = DefaultDirsProvider(),
+            dirsProvider = DefaultDirsProvider(InstrumentationRegistry.getInstrumentation()),
             resourcesDirNameProvider = DefaultResourcesDirNameProvider()
         ),
     private val resourceFileNamesProvider: ResourceFileNamesProvider =
@@ -84,7 +86,7 @@ abstract class DocLocScreenshotTestCase(
             override val viewHierarchy: File = File("view_hierarchy")
         },
         resourcesDirsProvider = DefaultResourcesDirsProvider(
-            dirsProvider = DefaultDirsProvider(),
+            dirsProvider = DefaultDirsProvider(InstrumentationRegistry.getInstrumentation()),
             resourcesDirNameProvider = SupportLegacyResourcesDirNameProvider(screenshotDirectoryProvider)
         ),
         resourceFileNamesProvider = object : ResourceFileNamesProvider {
@@ -119,6 +121,10 @@ abstract class DocLocScreenshotTestCase(
 
     @Before
     fun setup() {
+        if (!kaspresso.instrumentalDepsAssistant.isInstrumentalEnvironment) {
+            throw DocLocInUnitTestException()
+        }
+
         val localedResourcesRootDirsProvider: ResourcesRootDirsProvider =
             object : ResourcesRootDirsProvider by resourcesRootDirsProvider {
                 override val screenshotsRootDir: File =
@@ -132,7 +138,7 @@ abstract class DocLocScreenshotTestCase(
                 resourcesDirsProvider,
                 resourceFileNamesProvider
             ),
-            screenshotMaker = ExternalScreenshotMaker(device.uiDevice),
+            screenshotMaker = ExternalScreenshotMaker(kaspresso.instrumentalDepsAssistant),
             metadataSaver = MetadataSaver(kaspresso.device.activities, kaspresso.device.apps, logger)
         )
 

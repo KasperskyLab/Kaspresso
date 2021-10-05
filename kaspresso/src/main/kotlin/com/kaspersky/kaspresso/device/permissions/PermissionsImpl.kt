@@ -6,6 +6,7 @@ import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.UiObject
 import androidx.test.uiautomator.UiObjectNotFoundException
 import androidx.test.uiautomator.UiSelector
+import com.kaspersky.kaspresso.instrumental.InstrumentalDepsAssistant
 import com.kaspersky.kaspresso.internal.wait.wait
 import com.kaspersky.kaspresso.logger.UiTestLogger
 
@@ -14,13 +15,15 @@ import com.kaspersky.kaspresso.logger.UiTestLogger
  */
 class PermissionsImpl(
     private val logger: UiTestLogger,
-    private val uiDevice: UiDevice
+    private val instrumentalDepsAssistant: InstrumentalDepsAssistant,
 ) : Permissions {
 
     private companion object {
         private const val DIALOG_TIMEOUT_MS: Long = 3_000
     }
 
+    private val uiDevice: UiDevice
+        get() = instrumentalDepsAssistant.uiDevice
     private val packageInstallerPackageName =
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P)
             "com.android.permissioncontroller"
@@ -67,7 +70,7 @@ class PermissionsImpl(
     /**
      * Passes the permission-requesting permissions dialog.
      *
-     * @param buttonResId resource name of permission dialog button
+     * @param button resource name of permission dialog button
      */
     private fun handlePermissionRequest(button: Permissions.Button) {
         val uiObjectButton = getPermissionDialogButtonAsUiObject(button)

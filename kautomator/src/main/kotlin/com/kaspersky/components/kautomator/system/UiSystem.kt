@@ -3,6 +3,8 @@ package com.kaspersky.components.kautomator.system
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.UiDevice
+import com.kaspersky.components.kautomator.common.KautomatorInUnitTestException
+import com.kaspersky.components.kautomator.common.checkInstrumentalStateOfEnvironment
 import com.kaspersky.components.kautomator.intercept.base.UiInterceptable
 import com.kaspersky.components.kautomator.intercept.delegate.UiDeviceInteractionDelegate
 import com.kaspersky.components.kautomator.intercept.interaction.UiDeviceInteraction
@@ -17,9 +19,13 @@ import com.kaspersky.components.kautomator.intercept.operation.UiDeviceAssertion
 object UiSystem : UiSystemActions, UiSystemAssertions,
     UiInterceptable<UiDeviceInteraction, UiDeviceAssertion, UiDeviceAction> {
 
-    override val view: UiDeviceInteractionDelegate = UiDeviceInteractionDelegate(
-        UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
-    )
+    override val view: UiDeviceInteractionDelegate by lazy(LazyThreadSafetyMode.NONE) {
+        if (!checkInstrumentalStateOfEnvironment()) throw KautomatorInUnitTestException()
+
+        UiDeviceInteractionDelegate(
+            UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
+        )
+    }
 
     operator fun invoke(function: UiSystem.() -> Unit) {
         function.invoke(this)

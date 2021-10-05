@@ -1,6 +1,7 @@
 package com.kaspersky.kaspressample.docloc_tests.customdirectory
 
 import android.Manifest
+import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
 import io.github.kakaocup.kakao.screen.Screen
@@ -26,7 +27,7 @@ class CustomDirectoryScreenshotSampleTest : DocLocScreenshotTestCase(
         override val screenshotsRootDir = File("custom_directory")
     },
     resourcesDirsProvider = FlatDirectoryProvider(
-        dirsProvider = DefaultDirsProvider()
+        dirsProvider = DefaultDirsProvider(InstrumentationRegistry.getInstrumentation())
     ),
     resourceFileNamesProvider = AutoNumeratedNamesProvider(),
     locales = "en,ru"

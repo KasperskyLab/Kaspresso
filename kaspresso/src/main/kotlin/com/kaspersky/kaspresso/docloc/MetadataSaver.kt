@@ -25,7 +25,6 @@ internal class MetadataSaver(
             val metadata = activityMetadata.getFromActivity(activity)
                 .toXml(apps.targetAppPackageName)
             folderPath.resolve("$name.xml").safeWrite(logger, metadata)
-
         }
     }
 }

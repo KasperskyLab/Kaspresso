@@ -3,6 +3,8 @@ package com.kaspersky.components.kautomator.screen
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.UiDevice
+import com.kaspersky.components.kautomator.common.KautomatorInUnitTestException
+import com.kaspersky.components.kautomator.common.checkInstrumentalStateOfEnvironment
 import com.kaspersky.components.kautomator.component.common.KautomatorMarker
 import com.kaspersky.components.kautomator.intercept.base.UiInterceptor
 import com.kaspersky.components.kautomator.intercept.delegate.UiDeviceInteractionDelegate
@@ -36,9 +38,13 @@ abstract class UiScreen<out T : UiScreen<T>> : UiScreenActions {
 
     abstract val packageName: String
 
-    override val view: UiDeviceInteractionDelegate = UiDeviceInteractionDelegate(
-        UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
-    )
+    override val view: UiDeviceInteractionDelegate by lazy(LazyThreadSafetyMode.NONE) {
+        if (!checkInstrumentalStateOfEnvironment()) throw KautomatorInUnitTestException()
+
+        UiDeviceInteractionDelegate(
+            UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
+        )
+    }
 
     private var uiObjectInterceptor: UiInterceptor<UiObjectInteraction, UiObjectAssertion, UiObjectAction>? = null
     private var uiDeviceInterceptor: UiInterceptor<UiDeviceInteraction, UiDeviceAssertion, UiDeviceAction>? = null

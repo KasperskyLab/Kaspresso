@@ -39,7 +39,7 @@ sourceSets {
    //configure shared test folder
    val sharedTestFolder = "src/sharedTest/kotlin"
    val androidTest by getting {
-       java.srcDirs("src/andoroidTest/java", sharedTestFolder )
+       java.srcDirs("src/androidTest/java", sharedTestFolder )
    }
    val test by getting {
        java.srcDirs("src/test/java", sharedTestFolder )

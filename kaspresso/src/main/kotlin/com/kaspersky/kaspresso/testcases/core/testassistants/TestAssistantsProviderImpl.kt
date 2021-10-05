@@ -10,6 +10,7 @@ internal class TestAssistantsProviderImpl(kaspresso: Kaspresso) : TestAssistants
 
     override val device: Device = kaspresso.device
     override val adbServer: AdbServer = kaspresso.adbServer
+    override val isInstrumentalEnvironment: Boolean = kaspresso.instrumentalDepsAssistant.isInstrumentalEnvironment
     override val testLogger: UiTestLogger = kaspresso.testLogger
     override val params: Params = kaspresso.params
 }
