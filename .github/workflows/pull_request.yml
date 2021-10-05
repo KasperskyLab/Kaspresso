@@ -25,4 +25,4 @@ jobs:
       - name: Run unit tests
         run: make unit_tests
       - name: Build project
-        run: ./gradlew assemble
+        run: make compile_all
