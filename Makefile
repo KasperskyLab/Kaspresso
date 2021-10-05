@@ -1,5 +1,5 @@
 static_analysis:
-	./gradlew detektAll
+	./gradlew detektAll check
 
 unit_tests:
 	./gradlew test
