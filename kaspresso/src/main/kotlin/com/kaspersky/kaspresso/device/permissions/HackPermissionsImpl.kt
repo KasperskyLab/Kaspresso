@@ -10,8 +10,8 @@ import com.kaspersky.kaspresso.logger.UiTestLogger
  * The implementation of the [HackPermissions] interface.
  */
 class HackPermissionsImpl(
+    private val logger: UiTestLogger,
     private val instrumentalDepsAssistant: InstrumentalDepsAssistant,
-    private val logger: UiTestLogger
 ) : HackPermissions {
 
     private val uiAutomation: UiAutomation

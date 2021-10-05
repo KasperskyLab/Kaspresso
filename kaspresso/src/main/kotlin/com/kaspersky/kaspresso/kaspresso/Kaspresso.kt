@@ -686,27 +686,29 @@ data class Kaspresso(
                 adbServer
             )
             if (!::activities.isInitialized) activities = ActivitiesImpl(libLogger, instrumentation)
-            if (!::files.isInitialized) files = FilesImpl(adbServer)
+            if (!::files.isInitialized) files = FilesImpl(libLogger, adbServer)
             if (!::network.isInitialized) network = NetworkImpl(
+                libLogger,
                 instrumentation.targetContext,
-                adbServer,
-                libLogger
+                adbServer
             )
-            if (!::phone.isInitialized) phone = PhoneImpl(adbServer)
-            if (!::location.isInitialized) location = LocationImpl(adbServer)
-            if (!::keyboard.isInitialized) keyboard = KeyboardImpl(adbServer)
+            if (!::phone.isInitialized) phone = PhoneImpl(libLogger, adbServer)
+            if (!::location.isInitialized) location = LocationImpl(libLogger, adbServer)
+            if (!::keyboard.isInitialized) keyboard = KeyboardImpl(libLogger, adbServer)
             if (!::accessibility.isInitialized) accessibility = AccessibilityImpl(
-                instrumentalDepAssisFactory.getComponentAssistant("AccessibilityImpl", instrumentation)
+                instrumentalDepAssisFactory.getComponentAssistant("AccessibilityImpl", instrumentation),
+                libLogger
             )
             if (!::permissions.isInitialized) permissions = PermissionsImpl(
                 libLogger,
                 instrumentalDepAssisFactory.getComponentAssistant("PermissionsImpl", instrumentation)
             )
             if (!::hackPermissions.isInitialized) hackPermissions = HackPermissionsImpl(
-                instrumentalDepAssisFactory.getComponentAssistant("HackPermissionsImpl", instrumentation),
-                libLogger
+                libLogger,
+                instrumentalDepAssisFactory.getComponentAssistant("HackPermissionsImpl", instrumentation)
             )
             if (!::exploit.isInitialized) exploit = ExploitImpl(
+                libLogger,
                 activities,
                 instrumentalDepAssisFactory.getComponentAssistant("ExploitImpl", instrumentation),
                 adbServer
