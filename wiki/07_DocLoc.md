@@ -1,4 +1,4 @@
-# DocLoc
+# DocLoc Screenshots
 
 ## Main purpose
 

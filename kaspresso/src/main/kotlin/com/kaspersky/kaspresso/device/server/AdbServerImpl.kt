@@ -109,7 +109,7 @@ class AdbServerImpl(
                             AdbServer. The command=$command was performed with timeout exception.
                             There are two possible reasons:
 
-                            1. The test is executing in JVM (with Robolectric) environment and the test uses AdbServer. But, Unit tests can't use this implementation of AdbServer.
+                            1. The test is executing on the JVM (with Robolectric) environment and the test uses AdbServer. But, Unit tests can't use this implementation of AdbServer.
                             Possible solutions:
                             1. Rewrite the test and replace/remove a peace of code where AdbServer is called.
                             2. Write another implementation of AdbServer.

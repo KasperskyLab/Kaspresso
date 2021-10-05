@@ -5,7 +5,7 @@
 Since Robolectric 4.0, we can also run Espresso-like tests also on the JVM with Robolectric.
 That is part of the [Project nitrogen from Google](https://www.youtube.com/watch?v=-_kZC29sWAo) (which became Unified Test Platform), where they want to allow developers to write UI test once, and run them everywhere.
 
-However, if you try to run Kaspresso-like test extending TestCase on the JVM with Robolectric, you will get the following error:
+However, earlier if you tried to run Kaspresso-like test extending TestCase on the JVM with Robolectric, you got the following error:
 ```
 java.lang.NullPointerException
 	at androidx.test.uiautomator.QueryController.<init>(QueryController.java:95)
@@ -17,18 +17,13 @@ java.lang.NullPointerException
 ```
 That is because Robolectric is just compatible with Espresso and not with uiAutomator.
 
-In order to enable Kaspresso tests to run also on the JVM with Robolectric, apart from all the [configuration required for Robolectric](http://robolectric.org/blog/2018/10/25/robolectric-4-0/),
-the Kaspresso Builder of your test class needs to contain sharedTest = true
-
-```kotlin
-SharedTest : TestCase(Kaspresso.Builder.simple(sharedTest = true)){...}
-```
-
-However, this option have some caveats:
-1. Not possible to use adb-server. Some interceptors that require Kautomator e.g. the "Close System Dialog interceptor" are also disabled.
-2. You cannot use Kautomator `UiScreen<S>` anymore. If you do so, your test will fail with a `KautomatorInSharedTestException`.
-3. All the interactions with `Device` are mocked. This is done to allow Kaspresso tests run on the JVM. If you use call any method from `device`, e.g. `device.hackPermission.grant(permission)`, the test fails with an `ActionNotSupportedInSharedTestException`
-
+Now, all Kaspresso tests are allowed to be executed correctly on the JVM with Robolectric with the following restrictions:
+1. Easy configuration of your project according to [Robolectric guideline](http://robolectric.org/blog/2018/10/25/robolectric-4-0/). 
+2. Not possible to use adb-server because there is no a term like "Desktop" on the JVM environment. Tests that use adb-server will crash on the JVM with Robolectric with very explaining error message.
+3. Not possible to work with `UiDevice` and `UiAutomation` classes. That's why a lot of (not all!) implementations in `Device` will crash on the JVM with Robolectric with `NotSupportedInstrumentalTestException`.
+4. Non working Kautomator. Mentioned problem with `UiDevice` and `UiAutomation` classes affect the entire Kautomator. So, tests using Kautomator will crash on the JVM with Robolectric with `KautomatorInUnitTestException`.
+5. Interceptors that use `UiDevice`, `UiAutomation` or adb-server are turning off on the JVM with Robolectric automatically. 
+6. `DocLocScreenshotTestCase` will crash on the JVM with Robolectric with `DocLocInUnitTestException`. 
 
 ## Usage
 To create a test that can run on a device/emulator and on the JVM, we recommend to create a `sharedTest` folder, and configure `sourceSets` in gradle accordingly, similar to what you can see under the `build.gradle.kts` :samples:kaspresso-sample
@@ -47,24 +42,7 @@ sourceSets {
 }
 ```
 
-It is also important that such tests use ``@RunWith(AndroidJUnit4::class)``, since it is required by Robolectric. 
-
-We also recommend not to define your Screens as `object` but as `class` instead, since we've observed some shared tests timing out otherwise.
-Prefer to define your Screens like this
-
-```kotlin
-class FragmentScrollingScreen : KScreen<FragmentScrollingScreen>() {
-...
-}
-```
-
-to this
-
-```kotlin
-object FragmentScrollingScreen : KScreen<FragmentScrollingScreen>() {
-...
-}
-```
+It is also important that such tests use ``@RunWith(AndroidJUnit4::class)``, since it is required by Robolectric.
 
 In order to run your shared tests as Unit Tests on the JVM, you need to run a command looking like this:
 ```
@@ -86,6 +64,84 @@ For instance, to run the sample SharedTest on a device/emulator, you need to run
 ./gradlew :samples:kaspresso-sample:connectedAndroidTest -Pandroid.testInstrumentationRunnerArguments.class=com.kaspersky.kaspressample.sharedtest.SharedTest
 ```
 
+## Accommodation of tests to work on the JVM (with Robolectric) environment
+
+We've prepared a bunch of tools and advices to accommodate your tests for the JVM (with Robolectric) environment.
+
+Let's consider the most popular problem when a test uses a class containing calls to `UiDevice`/`UiAutomation`/`AdbServer` or other not working in JVM environment things.
+
+For example, your test looks like below:
+```kotlin
+@RunWith(AndroidJUnit4::class)
+class FailingSharedTest : TestCase() {
+
+    @get:Rule
+    val runtimePermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
+        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        Manifest.permission.READ_EXTERNAL_STORAGE
+    )
+
+    @get:Rule
+    val activityTestRule = ActivityTestRule(DeviceSampleActivity::class.java, false, true)
+
+    @Test
+    fun exploitSampleTest() =
+        run {
+            step("Press Home button") {
+                device.exploit.pressHome()
+            }
+            //...
+        }
+}
+```
+
+`device.exploit.pressHome()` calls `UiDevice` under the hood and it leads to a crash the JVM environment.
+
+There are following possible solutions:
+``` kotlin
+// change an implementation of Exploit class
+@RunWith(AndroidJUnit4::class)
+class FailingSharedTest : TestCase(
+    kaspressoBuilder = Kaspresso.Builder.simple {
+        exploit = 
+            if (isInstrumentalEnvironment) ExploitImpl() // old implementation
+            else ExploitUnit() // new implementation without UiDevice
+    }
+) { ... }
+
+// handle of device.exploit using in the test
+@RunWith(AndroidJUnit4::class)
+class FailingSharedTest : TestCase() {
+    // ...
+
+    private fun exploitSampleTest() =
+        run {
+            step("Press Home button") {
+                if (isInstrumentalEnvironment) {
+                    device.exploit.pressHome() // execute this section only on the Instrumental environment
+                }
+            }
+        }
+}
+
+// isInstrumentalEnvironment field is available in Kaspresso.Builder and TestContext.
+``` 
+
+Also, if your custom Interceptor uses `UiDevice`/`UiAutomation`/`AdbServer` then you can turn off this Interceptor for JVM. The example:
+```kotlin
+class KaspressoConfiguringTest : TestCase(
+    kaspressoBuilder = Kaspresso.Builder.simple {
+        viewBehaviorInterceptors = if (isInstrumentalEnvironment) mutableListOf(
+           YourCustomInterceptor()
+           FlakySafeViewBehaviorInterceptor(flakySafetyParams, libLogger)
+       ) else mutableListOf(
+           FlakySafeViewBehaviorInterceptor(flakySafetyParams, libLogger)
+       )
+    }
+) { ... }
+``` 
+
+Of course, there is a very obvious last option. Just don't include the test in a set of Unit tests.
 
 **Further remarks**
 

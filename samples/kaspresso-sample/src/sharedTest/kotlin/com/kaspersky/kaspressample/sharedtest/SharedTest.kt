@@ -4,7 +4,6 @@ import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.kaspersky.kaspressample.screen.kaspresso.SharedTestScreen
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
-import io.github.kakaocup.kakao.screen.Screen
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -24,7 +23,7 @@ class SharedTest : TestCase() {
             //no-op
         }.run {
             step("Fill info") {
-                Screen.onScreen<SharedTestScreen> {
+                SharedTestScreen {
                     firstNameEditText{
                         replaceText("Kaspersky")
                     }
@@ -41,7 +40,7 @@ class SharedTest : TestCase() {
             }
 
             step("Verify Full Name info") {
-                Screen.onScreen<SharedTestScreen> {
+                SharedTestScreen {
                     firstNameEditText {
                         hasText("Kaspersky")
                     }
@@ -52,7 +51,7 @@ class SharedTest : TestCase() {
             }
 
             step("Click on find me button") {
-                Screen.onScreen<SharedTestScreen> {
+                SharedTestScreen {
                     findMeButton {
                         click()
                     }

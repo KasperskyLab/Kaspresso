@@ -31,7 +31,7 @@ class FailingSharedTest : TestCase() {
 
     private fun exploitSampleTest() =
         run {
-            step("Wait for Launcher") {
+            step("Press Home button") {
                 device.exploit.pressHome()
             }
         }

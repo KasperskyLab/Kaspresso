@@ -16,7 +16,7 @@ If you are looking forward of a wiki for old versions then follow links: <br>
 [04. How to write autotests](./04_How_to_write_autotests.md) <br>
 [05. Device](./05_Device.md) <br>
 [06. AdbServer](./06_AdbServer.md) <br>
-[07. DocLoc](./07_DocLoc.md) <br>
+[07. DocLoc Screenshots](./07_DocLoc.md) <br>
 [08. Kaspresso tests running on the JVM with Robolectric](./08_Kaspresso-Robolectric.md) <br>
 
 ## References

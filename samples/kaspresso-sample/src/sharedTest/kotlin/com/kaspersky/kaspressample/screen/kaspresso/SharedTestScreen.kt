@@ -6,7 +6,7 @@ import com.kaspersky.kaspresso.screens.KScreen
 import io.github.kakaocup.kakao.edit.KEditText
 import io.github.kakaocup.kakao.text.KButton
 
-class SharedTestScreen : KScreen<SharedTestScreen>() {
+object SharedTestScreen : KScreen<SharedTestScreen>() {
 
     override val layoutId: Int = R.layout.activity_sharedtest
     override val viewClass: Class<*> = SharedTestActivity::class.java

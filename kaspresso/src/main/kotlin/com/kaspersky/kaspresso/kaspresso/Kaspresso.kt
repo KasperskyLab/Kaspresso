@@ -278,7 +278,7 @@ data class Kaspresso(
              * to change the order of interceptors in the list (for example, it are variables like
              * ```viewActionWatcherInterceptors```, ```viewAssertionWatcherInterceptors```, etc).
              *
-             * A little note. If a test is executing in JVM (with Robolectric) environment then advanced interceptors are not including to prevent crashes.
+             * A little note. If a test is executing on the JVM (with Robolectric) environment then advanced interceptors are not including to prevent crashes.
              * Sure, Screenshots, Videos and Dumps don't have any sense in non Instrumental environment.
              *
              * @return the new instance of [Builder].
@@ -328,7 +328,7 @@ data class Kaspresso(
         val instrumentation: Instrumentation = InstrumentationRegistry.getInstrumentation()
 
         /**
-         * Holds an environment state of a test. It's useful in cases to adopt tests for JVM (with Robolectric) environment
+         * Holds an environment state of a test. It's useful in cases to adopt tests for the JVM (with Robolectric) environment
          */
         val isInstrumentalEnvironment = checkInstrumentalStateOfEnvironment()
 
