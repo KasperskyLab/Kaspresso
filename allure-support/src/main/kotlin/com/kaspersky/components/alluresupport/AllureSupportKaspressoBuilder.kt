@@ -34,9 +34,9 @@ fun Kaspresso.Builder.addAllureSupport(): Kaspresso.Builder = apply {
         )
         testRunWatcherInterceptors.addAll(
             listOf(
+                DumpLogcatTestInterceptor(logcatDumper),
                 ScreenshotTestInterceptor(screenshots),
                 VideoRecordingTestInterceptor(videos),
-                DumpLogcatTestInterceptor(logcatDumper),
                 DumpViewsTestInterceptor(viewHierarchyDumper)
             )
         )

@@ -5,12 +5,14 @@ import android.app.UiAutomation
 import android.os.Build
 import androidx.test.uiautomator.Configurator
 import com.kaspersky.kaspresso.instrumental.InstrumentalDepsAssistant
+import com.kaspersky.kaspresso.logger.UiTestLogger
 
 /**
  * The implementation of the [Accessibility] interface.
  */
 class AccessibilityImpl(
-    private val instrumentalDepsAssistant: InstrumentalDepsAssistant
+    private val instrumentalDepsAssistant: InstrumentalDepsAssistant,
+    private val logger: UiTestLogger
 ) : Accessibility {
 
     /**
@@ -31,6 +33,8 @@ class AccessibilityImpl(
             .getUiAutomation(UiAutomation.FLAG_DONT_SUPPRESS_ACCESSIBILITY_SERVICES)
             .executeShellCommand(cmd)
             .close()
+
+        logger.i("Accessibility service $packageName.$className enabled")
     }
 
     /**
@@ -45,5 +49,7 @@ class AccessibilityImpl(
             .getUiAutomation(UiAutomation.FLAG_DONT_SUPPRESS_ACCESSIBILITY_SERVICES)
             .executeShellCommand(cmd)
             .close()
+
+        logger.i("Accessibility services disabled")
     }
 }

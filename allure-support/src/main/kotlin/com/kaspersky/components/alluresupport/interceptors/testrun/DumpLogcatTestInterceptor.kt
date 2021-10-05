@@ -9,6 +9,10 @@ class DumpLogcatTestInterceptor(
     private val logcatDumper: LogcatDumper
 ) : TestRunWatcherInterceptor {
 
+    override fun onTestStarted(testInfo: TestInfo) {
+        logcatDumper.watch()
+    }
+
     override fun onTestFinished(testInfo: TestInfo, success: Boolean) {
         logcatDumper.dumpAndApply("TestLogcat") { attachLogcatToAllureReport() }
     }

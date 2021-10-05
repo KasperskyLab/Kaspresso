@@ -70,9 +70,9 @@ class CustomizedSimpleTest : TestCase(
             clear()
             addAll(
                 listOf(
+                    DumpLogcatInterceptor(logcatDumper),
                     TestRunnerScreenshotWatcherInterceptor(screenshots),
                     VideoRecordingInterceptor(videos),
-                    DumpLogcatInterceptor(logcatDumper),
                     DumpViewsInterceptor(viewHierarchyDumper),
                     object : TestRunWatcherInterceptor {
                         override fun onTestFinished(testInfo: TestInfo, success: Boolean) {

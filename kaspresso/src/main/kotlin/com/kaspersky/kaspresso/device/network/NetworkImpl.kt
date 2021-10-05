@@ -22,9 +22,9 @@ import com.kaspersky.kaspresso.params.FlakySafetyParams
  * The implementation of the [Network] interface.
  */
 class NetworkImpl(
+    private val logger: UiTestLogger,
     private val targetContext: Context,
-    private val adbServer: AdbServer,
-    logger: UiTestLogger
+    private val adbServer: AdbServer
 ) : Network {
 
     companion object {
@@ -60,6 +60,7 @@ class NetworkImpl(
     override fun enable() {
         toggleMobileData(true)
         toggleWiFi(true)
+        logger.i("Enable wi-fi and mobile data")
     }
 
     /**
@@ -70,6 +71,7 @@ class NetworkImpl(
     override fun disable() {
         toggleMobileData(false)
         toggleWiFi(false)
+        logger.i("Disable wi-fi and mobile data")
     }
 
     /**
@@ -77,11 +79,12 @@ class NetworkImpl(
      * Settings then.
      */
     override fun toggleMobileData(enable: Boolean) {
-        if (
-            !toggleMobileDataUsingAdbServer(enable, NETWORK_STATE_CHANGE_ROOT_CMD) &&
+        if (!toggleMobileDataUsingAdbServer(enable, NETWORK_STATE_CHANGE_ROOT_CMD) &&
             !toggleMobileDataUsingAdbServer(enable, NETWORK_STATE_CHANGE_CMD)
-        )
-            return toggleMobileDataUsingAndroidSettings(enable)
+        ) {
+            toggleMobileDataUsingAndroidSettings(enable)
+            logger.i("Mobile data ${if (enable) "en" else "dis"}abled")
+        }
     }
 
     private fun toggleMobileDataUsingAdbServer(enable: Boolean, changeCommand: String): Boolean =
@@ -152,12 +155,13 @@ class NetworkImpl(
      * to switch Wi-Fi setting thumb.
      */
     override fun toggleWiFi(enable: Boolean) {
-        if (
-            !changeWiFiStateUsingAndroidApi(enable) &&
+        if (!changeWiFiStateUsingAndroidApi(enable) &&
             !changeWiFiStateUsingAdbServer(enable, WIFI_STATE_CHANGE_ROOT_CMD) &&
             !changeWiFiStateUsingAdbServer(enable, WIFI_STATE_CHANGE_CMD)
-        )
+        ) {
             changeWifiStateUsingAndroidSettings(enable)
+            logger.i("Wi-fi ${if (enable) "en" else "dis"}abled")
+        }
     }
 
     /**

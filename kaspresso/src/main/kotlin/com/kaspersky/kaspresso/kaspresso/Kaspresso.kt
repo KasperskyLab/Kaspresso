@@ -291,9 +291,9 @@ data class Kaspresso(
                         )
                         testRunWatcherInterceptors.addAll(
                             listOf(
+                                DumpLogcatInterceptor(logcatDumper),
                                 TestRunnerScreenshotWatcherInterceptor(screenshots),
                                 VideoRecordingInterceptor(videos),
-                                DumpLogcatInterceptor(logcatDumper),
                                 DumpViewsInterceptor(viewHierarchyDumper)
                             )
                         )
@@ -712,7 +712,7 @@ data class Kaspresso(
                 adbServer
             )
             if (!::language.isInitialized) language = LanguageImpl(libLogger, instrumentation.targetContext)
-            if (!::logcat.isInitialized) logcat = LogcatImpl(adbServer)
+            if (!::logcat.isInitialized) logcat = LogcatImpl(libLogger, adbServer)
 
             if (!::flakySafetyParams.isInitialized) flakySafetyParams = FlakySafetyParams.default()
             if (!::continuouslyParams.isInitialized) continuouslyParams = ContinuouslyParams.default()
@@ -737,6 +737,7 @@ data class Kaspresso(
 
             if (!::videos.isInitialized) {
                 videos = VideosImpl(
+                    logger = libLogger,
                     resourceFilesProvider = resourceFilesProvider,
                     videoRecorder = VideoRecorderImpl(
                         instrumentalDepAssisFactory.getComponentAssistant("VideosImpl", instrumentation),

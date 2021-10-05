@@ -25,6 +25,7 @@ internal class Locales(
      * @return set of supported locales.
      */
     fun getSupportedLocales(): Set<Locale> {
+        logger.i("Getting supported locales")
         return parseLocales(getLocaleString())
     }
 

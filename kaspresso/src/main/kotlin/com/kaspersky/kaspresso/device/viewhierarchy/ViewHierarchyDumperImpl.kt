@@ -22,9 +22,10 @@ class ViewHierarchyDumperImpl(
 
     private fun doDumpAndApply(tag: String, block: (File.() -> Unit)?) {
         try {
-            val logcatFile: File = resourceFilesProvider.provideViewHierarchyFile(tag)
-            device.dumpWindowHierarchy(logcatFile)
-            block?.invoke(logcatFile)
+            val viewHierarchyFile: File = resourceFilesProvider.provideViewHierarchyFile(tag)
+            device.dumpWindowHierarchy(viewHierarchyFile)
+            block?.invoke(viewHierarchyFile)
+            logger.i("View hierarchy dumped to $viewHierarchyFile")
         } catch (e: Throwable) {
             logger.e("View hierarchy dumping error occurred: ${Log.getStackTraceString(e)}")
         }
