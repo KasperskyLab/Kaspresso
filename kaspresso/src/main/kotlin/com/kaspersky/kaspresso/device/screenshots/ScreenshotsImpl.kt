@@ -1,10 +1,8 @@
 package com.kaspersky.kaspresso.device.screenshots
 
-import com.kaspersky.kaspresso.device.screenshots.screenshotfiles.ScreenshotDirectoryProvider
-import com.kaspersky.kaspresso.device.screenshots.screenshotfiles.ScreenshotFileProvider
-import com.kaspersky.kaspresso.device.screenshots.screenshotfiles.ScreenshotNameProvider
+import android.util.Log
 import com.kaspersky.kaspresso.device.screenshots.screenshotmaker.ScreenshotMaker
-import com.kaspersky.kaspresso.internal.extensions.other.getStackTraceAsString
+import com.kaspersky.kaspresso.files.resources.ResourceFilesProvider
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import java.io.File
 
@@ -13,13 +11,9 @@ import java.io.File
  */
 class ScreenshotsImpl(
     private val logger: UiTestLogger,
+    private val resourceFilesProvider: ResourceFilesProvider,
     private val screenshotMaker: ScreenshotMaker,
-    screenshotDirectoryProvider: ScreenshotDirectoryProvider,
-    screenshotNameProvider: ScreenshotNameProvider,
-    screenshotRootDir: File = File("screenshots")
-) : Screenshots, ScreenshotTestStartListener {
-
-    private val fileProvider = ScreenshotFileProvider(screenshotDirectoryProvider, screenshotNameProvider, screenshotRootDir)
+) : Screenshots {
 
     /**
      * Takes a screenshot if it is possible, otherwise logs the error.
@@ -30,16 +24,18 @@ class ScreenshotsImpl(
      *
      * @param tag a unique tag to further identify the screenshot. Must match [a-zA-Z0-9_-]+.
      */
-    override fun take(tag: String) {
-        runCatching {
-            val file = fileProvider.getScreenshotFile(tag)
-            screenshotMaker.takeScreenshot(file)
-        }.onFailure { e ->
-            logger.e("An error while making screenshot occurred: ${e.getStackTraceAsString()}")
-        }
-    }
+    override fun take(tag: String): Unit = doTakeAndApply(tag, null)
 
-    override fun onTestStarted() {
-        fileProvider.incrementRunNumberOfCurrentTest()
+    override fun takeAndApply(tag: String, block: File.() -> Unit): Unit = doTakeAndApply(tag, block)
+
+    private fun doTakeAndApply(tag: String, block: (File.() -> Unit)?) {
+        try {
+            val screenshotFile: File = resourceFilesProvider.provideScreenshotFile(tag)
+            screenshotMaker.takeScreenshot(screenshotFile)
+            block?.invoke(screenshotFile)
+            logger.i("Screenshot saved to $screenshotFile")
+        } catch (e: Throwable) {
+            logger.e("An error while making screenshot occurred: ${Log.getStackTraceString(e)}")
+        }
     }
 }

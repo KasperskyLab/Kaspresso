@@ -1,12 +1,15 @@
 package com.kaspersky.kaspresso.device.logcat
 
 import android.os.Build
+import android.util.Log
 import com.kaspersky.kaspresso.device.server.AdbServer
+import com.kaspersky.kaspresso.logger.UiTestLogger
 import java.io.BufferedReader
 import java.io.File
 import java.io.InputStreamReader
 
 class LogcatImpl(
+    private val logger: UiTestLogger,
     private val adbServer: AdbServer,
     private val isNeededToPrintExecutedCommand: Boolean = false,
     private val defaultBufferSize: LogcatBufferSize = LogcatBufferSize(DEFAULT_BUFFER_SIZE, LogcatBufferSize.Dimension.KILOBYTES)
@@ -31,6 +34,7 @@ class LogcatImpl(
             adbServer.performShell("setprop ro.logd.filter disable")
             adbServer.performShell("setprop persist.logd.filter disable")
         }
+        logger.i("Chatty disabled")
     }
 
     /**
@@ -40,6 +44,7 @@ class LogcatImpl(
      */
     override fun setBufferSize(size: LogcatBufferSize) {
         adbServer.performShell("logcat -G $size")
+        logger.i("Logcat buffer size set to $size")
     }
 
     /**
@@ -47,6 +52,7 @@ class LogcatImpl(
      */
     override fun setDefaultBufferSize() {
         setBufferSize(defaultBufferSize)
+        logger.i("Logcat buffer size set to default $defaultBufferSize")
     }
 
     /**
@@ -58,6 +64,39 @@ class LogcatImpl(
     override fun clear(buffer: Logcat.Buffer) {
         adbServer.performShell("logcat -b ${buffer.bufferName} -c")
         Thread.sleep(DEFAULT_LOGCAT_CLEAR_DELAY)
+        logger.i("Logcat buffer cleared")
+    }
+
+    override fun dumpLogcat(
+        file: File,
+        tags: List<String>?,
+        timeFrom: String?,
+        excludePattern: String?,
+        excludePatternIsIgnoreCase: Boolean,
+        includePattern: String?,
+        includePatternIsIgnoreCase: Boolean,
+        buffer: Logcat.Buffer
+    ) {
+        val command = prepareCommand(
+            tags = tags,
+            timeFrom = timeFrom,
+            excludePattern = excludePattern,
+            excludePatternIsIgnoreCase = excludePatternIsIgnoreCase,
+            includePattern = includePattern,
+            includePatternIsIgnoreCase = includePatternIsIgnoreCase,
+            buffer = buffer,
+            rowLimit = null
+        )
+        logger.i("Dump logcat buffer to $file: $command")
+
+        val process = executeCommand(command)
+        try {
+            file.outputStream().use { process.inputStream.copyTo(it) }
+        } catch (e: Throwable) {
+            logger.e("Dump logcat buffer error: ${Log.getStackTraceString(e)}")
+        } finally {
+            process.destroy()
+        }
     }
 
     /**
@@ -121,12 +160,14 @@ class LogcatImpl(
         readingBlock: (logcatRow: String) -> Boolean
     ): Boolean {
         val command = prepareCommand(
-            excludePattern,
-            excludePatternIsIgnoreCase,
-            includePattern,
-            includePatternIsIgnoreCase,
-            buffer,
-            rowLimit
+            tags = null,
+            timeFrom = null,
+            excludePattern = excludePattern,
+            excludePatternIsIgnoreCase = excludePatternIsIgnoreCase,
+            includePattern = includePattern,
+            includePatternIsIgnoreCase = includePatternIsIgnoreCase,
+            buffer = buffer,
+            rowLimit = rowLimit
         )
         val process = executeCommand(command)
         val logcatStream = InputStreamReader(process.inputStream)
@@ -197,6 +238,8 @@ class LogcatImpl(
      * Prepare logcat command for execution over "sh -c COMMAND"
      */
     private fun prepareCommand(
+        tags: List<String>?,
+        timeFrom: String?,
         excludePattern: String?,
         excludePatternIsIgnoreCase: Boolean,
         includePattern: String?,
@@ -205,8 +248,14 @@ class LogcatImpl(
         rowLimit: Int?
     ): String {
         var command = "logcat -b ${buffer.bufferName} -d "
+        if (!timeFrom.isNullOrEmpty()) {
+            command += "-t \"$timeFrom\" "
+        }
         if (rowLimit != null && rowLimit > 0) {
             command += "-m $rowLimit "
+        }
+        if (!tags.isNullOrEmpty()) {
+            command += "-s ${tags.joinToString(separator = "\",\"", prefix = "\"", postfix = "\"")}"
         }
         if (excludePattern != null) {
             command += """| grep -${if (excludePatternIsIgnoreCase) "i" else ""}Ev '${excludePattern.replace(

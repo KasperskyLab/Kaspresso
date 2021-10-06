@@ -29,6 +29,8 @@ import com.kaspersky.kaspresso.device.location.Location
 import com.kaspersky.kaspresso.device.location.LocationImpl
 import com.kaspersky.kaspresso.device.logcat.Logcat
 import com.kaspersky.kaspresso.device.logcat.LogcatImpl
+import com.kaspersky.kaspresso.device.logcat.dumper.LogcatDumper
+import com.kaspersky.kaspresso.device.logcat.dumper.LogcatDumperImpl
 import com.kaspersky.kaspresso.device.network.Network
 import com.kaspersky.kaspresso.device.network.NetworkImpl
 import com.kaspersky.kaspresso.device.permissions.HackPermissions
@@ -39,14 +41,29 @@ import com.kaspersky.kaspresso.device.phone.Phone
 import com.kaspersky.kaspresso.device.phone.PhoneImpl
 import com.kaspersky.kaspresso.device.screenshots.Screenshots
 import com.kaspersky.kaspresso.device.screenshots.ScreenshotsImpl
-import com.kaspersky.kaspresso.device.screenshots.screenshotfiles.DefaultScreenshotDirectoryProvider
-import com.kaspersky.kaspresso.device.screenshots.screenshotfiles.DefaultScreenshotNameProvider
 import com.kaspersky.kaspresso.device.screenshots.screenshotmaker.CombinedScreenshotMaker
 import com.kaspersky.kaspresso.device.screenshots.screenshotmaker.ExternalScreenshotMaker
 import com.kaspersky.kaspresso.device.screenshots.screenshotmaker.InternalScreenshotMaker
 import com.kaspersky.kaspresso.device.server.AdbServer
 import com.kaspersky.kaspresso.device.server.AdbServerImpl
+import com.kaspersky.kaspresso.device.video.Videos
+import com.kaspersky.kaspresso.device.video.VideosImpl
+import com.kaspersky.kaspresso.device.video.recorder.VideoRecorderImpl
+import com.kaspersky.kaspresso.device.viewhierarchy.ViewHierarchyDumper
+import com.kaspersky.kaspresso.device.viewhierarchy.ViewHierarchyDumperImpl
 import com.kaspersky.kaspresso.failure.LoggingFailureHandler
+import com.kaspersky.kaspresso.files.dirs.DefaultDirsProvider
+import com.kaspersky.kaspresso.files.dirs.DirsProvider
+import com.kaspersky.kaspresso.files.resources.ResourceFileNamesProvider
+import com.kaspersky.kaspresso.files.resources.ResourceFilesProvider
+import com.kaspersky.kaspresso.files.resources.ResourcesDirNameProvider
+import com.kaspersky.kaspresso.files.resources.ResourcesDirsProvider
+import com.kaspersky.kaspresso.files.resources.ResourcesRootDirsProvider
+import com.kaspersky.kaspresso.files.resources.impl.DefaultResourceFileNamesProvider
+import com.kaspersky.kaspresso.files.resources.impl.DefaultResourceFilesProvider
+import com.kaspersky.kaspresso.files.resources.impl.DefaultResourcesDirNameProvider
+import com.kaspersky.kaspresso.files.resources.impl.DefaultResourcesDirsProvider
+import com.kaspersky.kaspresso.files.resources.impl.DefaultResourcesRootDirsProvider
 import com.kaspersky.kaspresso.idlewaiting.KautomatorWaitForIdleSettings
 import com.kaspersky.kaspresso.interceptors.behavior.DataBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.ViewBehaviorInterceptor
@@ -78,11 +95,13 @@ import com.kaspersky.kaspresso.interceptors.watcher.kautomator.impl.logging.Logg
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.StepWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.TestRunWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.defaults.DefaultTestRunWatcherInterceptor
+import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.logging.DumpLogcatInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.logging.LoggingStepWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.logging.TestRunLoggerWatcherInterceptor
-import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.report.BuildStepReportWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.screenshot.ScreenshotStepWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.screenshot.TestRunnerScreenshotWatcherInterceptor
+import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.video.VideoRecordingInterceptor
+import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.views.DumpViewsInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.view.AtomWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.view.ViewActionWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.view.ViewAssertionWatcherInterceptor
@@ -93,12 +112,13 @@ import com.kaspersky.kaspresso.interceptors.watcher.view.impl.logging.LoggingVie
 import com.kaspersky.kaspresso.interceptors.watcher.view.impl.logging.LoggingWebAssertionWatcherInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.logger.UiTestLoggerImpl
-import com.kaspersky.kaspresso.params.AutoScrollParams
-import com.kaspersky.kaspresso.params.ContinuouslyParams
-import com.kaspersky.kaspresso.params.FlakySafetyParams
 import com.kaspersky.kaspresso.params.Params
+import com.kaspersky.kaspresso.params.FlakySafetyParams
+import com.kaspersky.kaspresso.params.ContinuouslyParams
+import com.kaspersky.kaspresso.params.AutoScrollParams
 import com.kaspersky.kaspresso.params.StepParams
-import com.kaspersky.kaspresso.report.impl.AllureReportWriter
+import com.kaspersky.kaspresso.params.ScreenshotParams
+import com.kaspersky.kaspresso.params.VideoParams
 import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
 
 /**
@@ -259,10 +279,15 @@ data class Kaspresso(
              */
             fun advanced(customize: Builder.() -> Unit = {}): Builder {
                 return simple(customize).apply {
-                    stepWatcherInterceptors.add(ScreenshotStepWatcherInterceptor(screenshots))
-                    testRunWatcherInterceptors.add(
-                        TestRunnerScreenshotWatcherInterceptor(
-                            screenshots
+                    stepWatcherInterceptors.add(
+                        ScreenshotStepWatcherInterceptor(screenshots)
+                    )
+                    testRunWatcherInterceptors.addAll(
+                        listOf(
+                            DumpLogcatInterceptor(logcatDumper),
+                            TestRunnerScreenshotWatcherInterceptor(screenshots),
+                            VideoRecordingInterceptor(videos),
+                            DumpViewsInterceptor(viewHierarchyDumper)
                         )
                     )
                 }
@@ -343,6 +368,21 @@ data class Kaspresso(
         lateinit var screenshots: Screenshots
 
         /**
+         * Holds an implementation of [Videos] interface. If it was not specified, the default implementation is used.
+         */
+        lateinit var videos: Videos
+
+        /**
+         * Holds an implementation of [ViewHierarchyDumper] interface. If it was not specified, the default implementation is used.
+         */
+        lateinit var viewHierarchyDumper: ViewHierarchyDumper
+
+        /**
+         * Holds an implementation of [LogcatDumper] interface. If it was not specified, the default implementation is used.
+         */
+        lateinit var logcatDumper: LogcatDumper
+
+        /**
          * Holds an implementation of [Accessibility] interface. If it was not specified, the default implementation is used.
          */
         lateinit var accessibility: Accessibility
@@ -395,6 +435,49 @@ data class Kaspresso(
          * If it was not specified, the default implementation is used.
          */
         lateinit var stepParams: StepParams
+
+        /**
+         * Holds the [ScreenshotParams] for [com.kaspersky.kaspresso.device.screenshots.screenshotmaker.InternalScreenshotMaker]'s and
+         * [com.kaspersky.kaspresso.device.screenshots.screenshotmaker.ExternalScreenshotMaker] usage.
+         * If it was not specified, the default implementation is used.
+         */
+        lateinit var screenshotParams: ScreenshotParams
+
+        /**
+         * Holds the [VideoParams] for [com.kaspersky.kaspresso.device.video.recorder.VideoRecorder]'s usage.
+         * If it was not specified, the default implementation is used.
+         */
+        lateinit var videoParams: VideoParams
+
+        /**
+         * Holds an implementation of [DirsProvider] interface. If it was not specified, the default implementation is used.
+         */
+        lateinit var dirsProvider: DirsProvider
+
+        /**
+         * Holds an implementation of [ResourceFilesProvider] interface. If it was not specified, the default implementation is used.
+         */
+        lateinit var resourceFilesProvider: ResourceFilesProvider
+
+        /**
+         * Holds an implementation of [ResourceFileNamesProvider] interface. If it was not specified, the default implementation is used.
+         */
+        lateinit var resourceFileNamesProvider: ResourceFileNamesProvider
+
+        /**
+         * Holds an implementation of [ResourcesDirNameProvider] interface. If it was not specified, the default implementation is used.
+         */
+        lateinit var resourcesDirNameProvider: ResourcesDirNameProvider
+
+        /**
+         * Holds an implementation of [ResourcesDirsProvider] interface. If it was not specified, the default implementation is used.
+         */
+        lateinit var resourcesDirsProvider: ResourcesDirsProvider
+
+        /**
+         * Holds an implementation of [ResourcesRootDirsProvider] interface. If it was not specified, the default implementation is used.
+         */
+        lateinit var resourcesRootDirsProvider: ResourcesRootDirsProvider
 
         /**
          * Holds the list of [ViewActionWatcherInterceptor]s.
@@ -561,33 +644,87 @@ data class Kaspresso(
             if (!::libLogger.isInitialized) libLogger = UiTestLoggerImpl(DEFAULT_LIB_LOGGER_TAG)
             if (!::testLogger.isInitialized) testLogger = UiTestLoggerImpl(DEFAULT_TEST_LOGGER_TAG)
 
+            if (!::dirsProvider.isInitialized) dirsProvider = DefaultDirsProvider()
+            if (!::resourcesRootDirsProvider.isInitialized) resourcesRootDirsProvider = DefaultResourcesRootDirsProvider()
+            if (!::resourcesDirNameProvider.isInitialized) resourcesDirNameProvider = DefaultResourcesDirNameProvider()
+            if (!::resourcesDirsProvider.isInitialized) {
+                resourcesDirsProvider = DefaultResourcesDirsProvider(
+                    dirsProvider = dirsProvider,
+                    resourcesDirNameProvider = resourcesDirNameProvider
+                )
+            }
+            if (!::resourceFileNamesProvider.isInitialized) {
+                resourceFileNamesProvider = DefaultResourceFileNamesProvider(addTimestamps = false)
+            }
+            if (!::resourceFilesProvider.isInitialized) {
+                resourceFilesProvider = DefaultResourceFilesProvider(
+                    resourcesRootDirsProvider,
+                    resourcesDirsProvider,
+                    resourceFileNamesProvider
+                )
+            }
+
             if (!::adbServer.isInitialized) adbServer = AdbServerImpl(LogLevel.WARN, libLogger)
             if (!::apps.isInitialized) apps = AppsImpl(libLogger, instrumentation.context, uiDevice, adbServer)
             if (!::activities.isInitialized) activities = ActivitiesImpl(libLogger)
-            if (!::files.isInitialized) files = FilesImpl(adbServer)
-            if (!::network.isInitialized) network = NetworkImpl(instrumentation.targetContext, adbServer, libLogger)
-            if (!::phone.isInitialized) phone = PhoneImpl(adbServer)
-            if (!::location.isInitialized) location = LocationImpl(adbServer)
-            if (!::keyboard.isInitialized) keyboard = KeyboardImpl(adbServer)
-            if (!::screenshots.isInitialized) {
-                screenshots = ScreenshotsImpl(
-                    libLogger,
-                    CombinedScreenshotMaker(InternalScreenshotMaker(activities), ExternalScreenshotMaker()),
-                    DefaultScreenshotDirectoryProvider(groupByRunNumbers = true),
-                    DefaultScreenshotNameProvider(addTimestamps = false)
-                )
-            }
-            if (!::accessibility.isInitialized) accessibility = AccessibilityImpl()
+            if (!::files.isInitialized) files = FilesImpl(libLogger, adbServer)
+            if (!::network.isInitialized) network = NetworkImpl(libLogger, instrumentation.targetContext, adbServer)
+            if (!::phone.isInitialized) phone = PhoneImpl(libLogger, adbServer)
+            if (!::location.isInitialized) location = LocationImpl(libLogger, adbServer)
+            if (!::keyboard.isInitialized) keyboard = KeyboardImpl(libLogger, adbServer)
+            if (!::accessibility.isInitialized) accessibility = AccessibilityImpl(libLogger)
             if (!::permissions.isInitialized) permissions = PermissionsImpl(libLogger, uiDevice)
             if (!::hackPermissions.isInitialized) hackPermissions = HackPermissionsImpl(instrumentation.uiAutomation, libLogger)
-            if (!::exploit.isInitialized) exploit = ExploitImpl(activities, uiDevice, adbServer)
+            if (!::exploit.isInitialized) exploit = ExploitImpl(libLogger, activities, uiDevice, adbServer)
             if (!::language.isInitialized) language = LanguageImpl(libLogger, instrumentation.targetContext)
-            if (!::logcat.isInitialized) logcat = LogcatImpl(adbServer)
+            if (!::logcat.isInitialized) logcat = LogcatImpl(libLogger, adbServer)
 
             if (!::flakySafetyParams.isInitialized) flakySafetyParams = FlakySafetyParams.default()
             if (!::continuouslyParams.isInitialized) continuouslyParams = ContinuouslyParams.default()
             if (!::autoScrollParams.isInitialized) autoScrollParams = AutoScrollParams.default()
             if (!::stepParams.isInitialized) stepParams = StepParams()
+            if (!::screenshotParams.isInitialized) screenshotParams = ScreenshotParams()
+            if (!::videoParams.isInitialized) videoParams = VideoParams()
+
+            if (!::screenshots.isInitialized) {
+                screenshots = ScreenshotsImpl(
+                    logger = libLogger,
+                    resourceFilesProvider = resourceFilesProvider,
+                    screenshotMaker = CombinedScreenshotMaker(
+                        preferredScreenshotMaker = InternalScreenshotMaker(activities, screenshotParams),
+                        fallbackScreenshotMaker = ExternalScreenshotMaker(uiDevice, screenshotParams)
+                    )
+                )
+            }
+
+            if (!::videos.isInitialized) {
+                videos = VideosImpl(
+                    logger = libLogger,
+                    resourceFilesProvider = resourceFilesProvider,
+                    videoRecorder = VideoRecorderImpl(
+                        uiDevice,
+                        libLogger,
+                        videoParams
+                    )
+                )
+            }
+
+            if (!::viewHierarchyDumper.isInitialized) {
+                viewHierarchyDumper = ViewHierarchyDumperImpl(
+                    uiDevice,
+                    libLogger,
+                    resourceFilesProvider
+                )
+            }
+
+            if (!::logcatDumper.isInitialized) {
+                logcatDumper = LogcatDumperImpl(
+                    libLogger,
+                    resourceFilesProvider,
+                    logcat,
+                    listOf(DEFAULT_LIB_LOGGER_TAG, DEFAULT_TEST_LOGGER_TAG)
+                )
+            }
         }
 
         @Suppress("detekt.ComplexMethod")
@@ -668,7 +805,6 @@ data class Kaspresso(
 
             if (!::testRunWatcherInterceptors.isInitialized) testRunWatcherInterceptors = mutableListOf(
                 TestRunLoggerWatcherInterceptor(libLogger),
-                BuildStepReportWatcherInterceptor(AllureReportWriter(libLogger)),
                 defaultsTestRunWatcherInterceptor
             )
         }
@@ -711,7 +847,9 @@ data class Kaspresso(
                     flakySafetyParams = flakySafetyParams,
                     continuouslyParams = continuouslyParams,
                     autoScrollParams = autoScrollParams,
-                    stepParams = stepParams
+                    stepParams = stepParams,
+                    screenshotParams = screenshotParams,
+                    videoParams = videoParams
                 ),
 
                 viewActionWatcherInterceptors = viewActionWatcherInterceptors,
