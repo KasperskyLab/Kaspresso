@@ -14,26 +14,26 @@ android {
             java.srcDir("src/main/kotlin")
         }
 
-        //configure shared test folder
+        // configure shared test folder
         val sharedTestFolder = "src/sharedTest/kotlin"
         val androidTest by getting {
-            java.srcDirs("src/androidTest/kotlin", sharedTestFolder )
+            java.srcDirs("src/androidTest/kotlin", sharedTestFolder)
         }
         val test by getting {
-            java.srcDirs("src/test/java", sharedTestFolder )
+            java.srcDirs("src/test/java", sharedTestFolder)
         }
     }
 
     testOptions {
         execution = "ANDROIDX_TEST_ORCHESTRATOR"
 
-        //allow to run tests on JVM
+        // allow to run tests on JVM
         unitTests.isReturnDefaultValues = true
         unitTests.isIncludeAndroidResources = true
     }
 
-    //This is necessary to use activityScenarioRule in tests
-    compileOptions{
+    // This is necessary to use activityScenarioRule in tests
+    compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
@@ -66,5 +66,4 @@ dependencies {
     testImplementation(libs.robolectric)
 
     debugImplementation(libs.fragmentTesting)
-
 }

@@ -20,20 +20,20 @@ class SharedTest : TestCase() {
             // check non-nullability of `scenario`
             activityRule.scenario
         }.after {
-            //no-op
+            // no-op
         }.run {
             step("Fill info") {
                 SharedTestScreen {
-                    firstNameEditText{
+                    firstNameEditText {
                         replaceText("Kaspersky")
                     }
-                    lastNameEditText{
+                    lastNameEditText {
                         replaceText("Kaspresso")
                     }
-                    ageEditText{
+                    ageEditText {
                         replaceText("8")
                     }
-                    maleButton{
+                    maleButton {
                         click()
                     }
                 }

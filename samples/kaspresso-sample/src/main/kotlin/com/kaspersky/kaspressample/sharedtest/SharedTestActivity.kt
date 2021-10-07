@@ -13,7 +13,6 @@ class SharedTestActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sharedtest)
-
         lifecycleScope.launchWhenResumed {
             delay(2000)
             toggleButton.visibility = View.VISIBLE
