@@ -124,7 +124,7 @@ class FailingSharedTest : TestCase() {
         }
 }
 
-// isInstrumentalEnvironment field is available in Kaspresso.Builder and TestContext.
+// isInstrumentalEnvironment property is available in Kaspresso.Builder and TestContext.
 ``` 
 
 Also, if your custom Interceptor uses `UiDevice`/`UiAutomation`/`AdbServer` then you can turn off this Interceptor for JVM. The example:

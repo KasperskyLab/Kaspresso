@@ -127,12 +127,12 @@ data class Device(
     private val instrumentation: Instrumentation
 ) {
     /**
-     * A not caching property to get [Context].
+     * A caching property to get [Context].
      */
     val context: Context = instrumentation.context
 
     /**
-     * A not caching property to get target [Context].
+     * A caching property to get target [Context].
      */
     val targetContext: Context = instrumentation.targetContext
 
