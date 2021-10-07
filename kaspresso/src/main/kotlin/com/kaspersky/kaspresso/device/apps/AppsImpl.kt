@@ -44,6 +44,7 @@ class AppsImpl(
      */
     override fun install(apkPath: String) {
         adbServer.performAdb("install $apkPath")
+        logger.i("App $apkPath installed")
     }
 
     /**
@@ -69,6 +70,7 @@ class AppsImpl(
      */
     override fun uninstall(packageName: String) {
         adbServer.performAdb("uninstall $packageName")
+        logger.i("App $packageName uninstalled")
     }
 
     /**
@@ -91,8 +93,7 @@ class AppsImpl(
      * @return a [Boolean] of installation state
      */
     override fun isInstalled(packageName: String): Boolean {
-        val packageManager = context.packageManager
-        if (packageManager == null) return false
+        val packageManager = context.packageManager ?: return false
         return try {
             packageManager.getApplicationInfo(packageName, 0)
             true
@@ -108,6 +109,7 @@ class AppsImpl(
         )
 
         val condition = Until.hasObject(By.pkg(launcherPackageName).depth(0))
+        logger.i("Wait $timeout for $launcherPackageName launch")
 
         Assert.assertTrue(
             uiDevice.wait(condition, timeout)
@@ -116,6 +118,7 @@ class AppsImpl(
 
     override fun waitForAppLaunchAndReady(timeout: Long, packageName: String) {
         val condition = Until.hasObject(By.pkg(packageName).depth(0))
+        logger.i("Wait $timeout for $packageName launch and ready")
 
         Assert.assertTrue(
             uiDevice.wait(condition, timeout)
@@ -160,6 +163,7 @@ class AppsImpl(
         }
 
         val condition = Until.hasObject(By.pkg(packageName).depth(0))
+        logger.i("Wait $LAUNCH_APP_TIMEOUT for $packageName launch")
 
         uiDevice.wait(condition, LAUNCH_APP_TIMEOUT)
     }
@@ -170,6 +174,7 @@ class AppsImpl(
      * @param contentDescription the description of the app to launch.
      */
     override fun openRecent(contentDescription: String) {
+        logger.i("Open $contentDescription from recents")
         uiDevice.pressRecentApps()
 
         val appSelector = UiSelector().descriptionContains(contentDescription)
@@ -191,5 +196,6 @@ class AppsImpl(
      */
     override fun kill(packageName: String) {
         Runtime.getRuntime().exec(arrayOf("am", "force-stop", packageName))
+        logger.i("Force stop $packageName")
     }
 }
