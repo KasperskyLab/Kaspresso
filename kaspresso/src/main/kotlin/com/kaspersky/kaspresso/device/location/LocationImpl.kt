@@ -1,11 +1,13 @@
 package com.kaspersky.kaspresso.device.location
 
 import com.kaspersky.kaspresso.device.server.AdbServer
+import com.kaspersky.kaspresso.logger.UiTestLogger
 
 /**
  * The implementation of the [Location] interface.
  */
 class LocationImpl(
+    private val logger: UiTestLogger,
     private val adbServer: AdbServer
 ) : Location {
 
@@ -16,6 +18,7 @@ class LocationImpl(
      */
     override fun enableGps() {
         setLocationProviders("+gps")
+        logger.i("GPS enabled")
     }
 
     /**
@@ -25,6 +28,7 @@ class LocationImpl(
      */
     override fun disableGps() {
         setLocationProviders("-gps")
+        logger.i("GPS disabled")
     }
 
     /**
@@ -34,6 +38,7 @@ class LocationImpl(
      */
     override fun setLocation(lat: Double, lon: Double) {
         adbServer.performAdb("emu geo fix $lon $lat") // geo fix uses Lon-Lat, almost everyone uses Lat-Lon
+        logger.i("Location set to $lat,$lon")
     }
 
     private fun setLocationProviders(providers: String) {

@@ -284,9 +284,9 @@ data class Kaspresso(
                     )
                     testRunWatcherInterceptors.addAll(
                         listOf(
+                            DumpLogcatInterceptor(logcatDumper),
                             TestRunnerScreenshotWatcherInterceptor(screenshots),
                             VideoRecordingInterceptor(videos),
-                            DumpLogcatInterceptor(logcatDumper),
                             DumpViewsInterceptor(viewHierarchyDumper)
                         )
                     )
@@ -667,17 +667,17 @@ data class Kaspresso(
             if (!::adbServer.isInitialized) adbServer = AdbServerImpl(LogLevel.WARN, libLogger)
             if (!::apps.isInitialized) apps = AppsImpl(libLogger, instrumentation.context, uiDevice, adbServer)
             if (!::activities.isInitialized) activities = ActivitiesImpl(libLogger)
-            if (!::files.isInitialized) files = FilesImpl(adbServer)
-            if (!::network.isInitialized) network = NetworkImpl(instrumentation.targetContext, adbServer, libLogger)
-            if (!::phone.isInitialized) phone = PhoneImpl(adbServer)
-            if (!::location.isInitialized) location = LocationImpl(adbServer)
-            if (!::keyboard.isInitialized) keyboard = KeyboardImpl(adbServer)
-            if (!::accessibility.isInitialized) accessibility = AccessibilityImpl()
+            if (!::files.isInitialized) files = FilesImpl(libLogger, adbServer)
+            if (!::network.isInitialized) network = NetworkImpl(libLogger, instrumentation.targetContext, adbServer)
+            if (!::phone.isInitialized) phone = PhoneImpl(libLogger, adbServer)
+            if (!::location.isInitialized) location = LocationImpl(libLogger, adbServer)
+            if (!::keyboard.isInitialized) keyboard = KeyboardImpl(libLogger, adbServer)
+            if (!::accessibility.isInitialized) accessibility = AccessibilityImpl(libLogger)
             if (!::permissions.isInitialized) permissions = PermissionsImpl(libLogger, uiDevice)
             if (!::hackPermissions.isInitialized) hackPermissions = HackPermissionsImpl(instrumentation.uiAutomation, libLogger)
-            if (!::exploit.isInitialized) exploit = ExploitImpl(activities, uiDevice, adbServer)
+            if (!::exploit.isInitialized) exploit = ExploitImpl(libLogger, activities, uiDevice, adbServer)
             if (!::language.isInitialized) language = LanguageImpl(libLogger, instrumentation.targetContext)
-            if (!::logcat.isInitialized) logcat = LogcatImpl(adbServer)
+            if (!::logcat.isInitialized) logcat = LogcatImpl(libLogger, adbServer)
 
             if (!::flakySafetyParams.isInitialized) flakySafetyParams = FlakySafetyParams.default()
             if (!::continuouslyParams.isInitialized) continuouslyParams = ContinuouslyParams.default()
@@ -699,6 +699,7 @@ data class Kaspresso(
 
             if (!::videos.isInitialized) {
                 videos = VideosImpl(
+                    logger = libLogger,
                     resourceFilesProvider = resourceFilesProvider,
                     videoRecorder = VideoRecorderImpl(
                         uiDevice,

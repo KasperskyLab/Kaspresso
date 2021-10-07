@@ -33,6 +33,7 @@ class ScreenshotsImpl(
             val screenshotFile: File = resourceFilesProvider.provideScreenshotFile(tag)
             screenshotMaker.takeScreenshot(screenshotFile)
             block?.invoke(screenshotFile)
+            logger.i("Screenshot saved to $screenshotFile")
         } catch (e: Throwable) {
             logger.e("An error while making screenshot occurred: ${Log.getStackTraceString(e)}")
         }

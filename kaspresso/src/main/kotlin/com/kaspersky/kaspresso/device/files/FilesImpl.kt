@@ -1,11 +1,13 @@
 package com.kaspersky.kaspresso.device.files
 
 import com.kaspersky.kaspresso.device.server.AdbServer
+import com.kaspersky.kaspresso.logger.UiTestLogger
 
 /**
  * The implementation of the [Files] interface.
  */
 class FilesImpl(
+    private val logger: UiTestLogger,
     private val adbServer: AdbServer
 ) : Files {
 
@@ -19,6 +21,7 @@ class FilesImpl(
      */
     override fun push(serverPath: String, devicePath: String) {
         adbServer.performAdb("push $serverPath $devicePath")
+        logger.i("Push file from $serverPath to $devicePath")
     }
 
     /**
@@ -30,6 +33,7 @@ class FilesImpl(
      */
     override fun remove(path: String) {
         adbServer.performShell("rm -f $path")
+        logger.i("Remove file from $path")
     }
 
     /**
@@ -42,5 +46,6 @@ class FilesImpl(
      */
     override fun pull(devicePath: String, serverPath: String) {
         adbServer.performAdb("pull $devicePath $serverPath")
+        logger.i("Pull file from $devicePath to $serverPath")
     }
 }
