@@ -13,7 +13,7 @@ interface TestAssistantsProvider {
 
     val device: Device
     val adbServer: AdbServer
-    val isInstrumentalEnvironment: Boolean
+    val isAndroidRuntime: Boolean
     val testLogger: UiTestLogger
     val params: Params
 }

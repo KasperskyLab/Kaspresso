@@ -7,7 +7,7 @@ import androidx.test.uiautomator.UiDevice
 
 interface InstrumentalDepsAssistant {
 
-    val isInstrumentalEnvironment: Boolean
+    val isAndroidRuntime: Boolean
     val uiDevice: UiDevice
     val uiAutomation: UiAutomation
 

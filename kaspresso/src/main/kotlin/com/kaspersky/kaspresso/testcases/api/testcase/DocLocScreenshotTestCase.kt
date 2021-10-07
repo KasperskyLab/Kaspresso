@@ -121,7 +121,7 @@ abstract class DocLocScreenshotTestCase(
 
     @Before
     fun setup() {
-        if (!kaspresso.instrumentalDepsAssistant.isInstrumentalEnvironment) {
+        if (!kaspresso.instrumentalDepsAssistant.isAndroidRuntime) {
             throw DocLocInUnitTestException()
         }
 

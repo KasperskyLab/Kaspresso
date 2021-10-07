@@ -25,7 +25,7 @@ fun Kaspresso.Builder.Companion.withAllureSupport(
  * Sure, Allure reports don't have any sense in non Instrumental environment.
  */
 fun Kaspresso.Builder.addAllureSupport(): Kaspresso.Builder = apply {
-    if (isInstrumentalEnvironment) {
+    if (isAndroidRuntime) {
         stepWatcherInterceptors.addAll(
             listOf(
                 ScreenshotStepInterceptor(screenshots),

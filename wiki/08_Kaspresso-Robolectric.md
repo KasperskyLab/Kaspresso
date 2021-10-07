@@ -104,7 +104,7 @@ There are following possible solutions:
 class FailingSharedTest : TestCase(
     kaspressoBuilder = Kaspresso.Builder.simple {
         exploit = 
-            if (isInstrumentalEnvironment) ExploitImpl() // old implementation
+            if (isAndroidRuntime) ExploitImpl() // old implementation
             else ExploitUnit() // new implementation without UiDevice
     }
 ) { ... }
@@ -117,21 +117,21 @@ class FailingSharedTest : TestCase() {
     private fun exploitSampleTest() =
         run {
             step("Press Home button") {
-                if (isInstrumentalEnvironment) {
+                if (isAndroidRuntime) {
                     device.exploit.pressHome() // execute this section only on the Instrumental environment
                 }
             }
         }
 }
 
-// isInstrumentalEnvironment property is available in Kaspresso.Builder and TestContext.
+// isAndroidRuntime property is available in Kaspresso.Builder and TestContext.
 ``` 
 
 Also, if your custom Interceptor uses `UiDevice`/`UiAutomation`/`AdbServer` then you can turn off this Interceptor for JVM. The example:
 ```kotlin
 class KaspressoConfiguringTest : TestCase(
     kaspressoBuilder = Kaspresso.Builder.simple {
-        viewBehaviorInterceptors = if (isInstrumentalEnvironment) mutableListOf(
+        viewBehaviorInterceptors = if (isAndroidRuntime) mutableListOf(
            YourCustomInterceptor()
            FlakySafeViewBehaviorInterceptor(flakySafetyParams, libLogger)
        ) else mutableListOf(

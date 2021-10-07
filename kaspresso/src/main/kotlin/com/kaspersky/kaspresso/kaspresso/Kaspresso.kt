@@ -64,9 +64,8 @@ import com.kaspersky.kaspresso.files.resources.impl.DefaultResourcesDirNameProvi
 import com.kaspersky.kaspresso.files.resources.impl.DefaultResourcesDirsProvider
 import com.kaspersky.kaspresso.files.resources.impl.DefaultResourcesRootDirsProvider
 import com.kaspersky.kaspresso.idlewaiting.KautomatorWaitForIdleSettings
+import com.kaspersky.kaspresso.instrumental.*
 import com.kaspersky.kaspresso.instrumental.InstrumentalDepAssisFactory
-import com.kaspersky.kaspresso.instrumental.InstrumentalDepsAssistant
-import com.kaspersky.kaspresso.instrumental.checkInstrumentalStateOfEnvironment
 import com.kaspersky.kaspresso.interceptors.behavior.DataBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.ViewBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.WebBehaviorInterceptor
@@ -285,7 +284,7 @@ data class Kaspresso(
              */
             fun advanced(customize: Builder.() -> Unit = {}): Builder {
                 return simple(customize).apply {
-                    if (isInstrumentalEnvironment) {
+                    if (isAndroidRuntime) {
                         stepWatcherInterceptors.add(
                             ScreenshotStepWatcherInterceptor(screenshots)
                         )
@@ -327,14 +326,16 @@ data class Kaspresso(
          */
         val instrumentation: Instrumentation = InstrumentationRegistry.getInstrumentation()
 
+        private val instrumentalDepAssisFactory: InstrumentalDepAssisFactory = InstrumentalDepAssisFactory()
+
         /**
-         * Holds an environment state of a test. It's useful in cases to adopt tests for the JVM (with Robolectric) environment
+         * Holds an environment state of a test.
+         *
+         * Returns true if it's Android environment or false if it's JVM environment with Robolectric support
          */
-        val isInstrumentalEnvironment = checkInstrumentalStateOfEnvironment()
+        val isAndroidRuntime = instrumentalDepAssisFactory.getComponentAssistant("Kaspresso", instrumentation).isAndroidRuntime
 
         private val configurator = Configurator.getInstance()
-
-        private val instrumentalDepAssisFactory: InstrumentalDepAssisFactory = InstrumentalDepAssisFactory()
 
         /**
          * Holds an implementation of [AdbServer] interface. If it was not specified, the default implementation is used.
@@ -811,7 +812,7 @@ data class Kaspresso(
             )
 
             if (!::viewBehaviorInterceptors.isInitialized) viewBehaviorInterceptors =
-                if (isInstrumentalEnvironment) mutableListOf(
+                if (isAndroidRuntime) mutableListOf(
                     AutoScrollViewBehaviorInterceptor(autoScrollParams, libLogger),
                     SystemDialogSafetyViewBehaviorInterceptor(
                         libLogger,
@@ -825,7 +826,7 @@ data class Kaspresso(
                 )
 
             if (!::dataBehaviorInterceptors.isInitialized) dataBehaviorInterceptors =
-                if (isInstrumentalEnvironment) mutableListOf(
+                if (isAndroidRuntime) mutableListOf(
                     SystemDialogSafetyDataBehaviorInterceptor(
                         libLogger,
                         instrumentalDepAssisFactory.getInterceptorAssistant("SystemDialogSafetyDataBehaviorInterceptor", instrumentation),
@@ -837,7 +838,7 @@ data class Kaspresso(
                 )
 
             if (!::webBehaviorInterceptors.isInitialized) webBehaviorInterceptors =
-                if (isInstrumentalEnvironment) {
+                if (isAndroidRuntime) {
                     mutableListOf(
                         AutoScrollWebBehaviorInterceptor(autoScrollParams, libLogger),
                         SystemDialogSafetyWebBehaviorInterceptor(
