@@ -21,4 +21,3 @@ class SharedTestActivity : AppCompatActivity() {
         }
     }
 }
-
