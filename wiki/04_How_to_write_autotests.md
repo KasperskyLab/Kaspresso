@@ -188,8 +188,8 @@ There are cases when some sentences of steps are absolutely identical and occur 
 For these sentences we have introduced a ```scenario``` where you can replace your sequences of steps.
 
 How is this API enabled? <br>
-Let's look at [SimpleTest](../samples/kaspresso-sample/src/androidTest/java/com/kaspersky/kaspressample/simple_tests/SimpleTest.kt) and
-[SimpleTestWithRule](../samples/kaspresso-sample/src/androidTest/java/com/kaspersky/kaspressample/simple_tests/SimpleTestWithRule.kt). <br>
+Let's look at [SimpleTest](../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/simple_tests/SimpleTest.kt) and
+[SimpleTestWithRule](../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/simple_tests/SimpleTestWithRule.kt). <br>
 In the first example we inherit ```SimpleTest``` from ```TestCase```. In the second example we use ```TestCaseRule``` field.
 Also you can use ```BaseTestCase``` and ```BaseTestCaseRule```. <br>
 
@@ -198,7 +198,7 @@ A developer, while he is writing a test, needs to prepare some data for the test
 Usually, it's the beginning of the test. <br>
 But, first, we want to divide test data preparing and test data usage. Second, we want to guarantee that test data were prepared **before** the test.
 That's why we decided to introduce a special DSL to help and to highlight the work with test data preparing. <br>
-Please look at the example - [InitTransformDataTest](../samples/kaspresso-sample/src/androidTest/java/com/kaspersky/kaspressample/dsl_tests/InitTransformDataTest.kt). <br>
+Please look at the example - [InitTransformDataTest](../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/dsl_tests/InitTransformDataTest.kt). <br>
 Updated DSL looks like:
 ```kotlin
 before {
@@ -254,8 +254,8 @@ Finally, let's look at all available Test DSL in Kaspresso:
 7. ```run```
 
 #### Examples
-You can have a look at examples of how to [use and configure Kaspresso](../samples/kaspresso-sample/src/androidTest/java/com/kaspersky/kaspressample/configurator_tests)
-and how to [use different forms of DSL](../samples/kaspresso-sample/src/androidTest/java/com/kaspersky/kaspressample/dsl_tests).
+You can have a look at examples of how to [use and configure Kaspresso](../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/configurator_tests)
+and how to [use different forms of DSL](../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/dsl_tests).
 
 ### Sweet additional features
 
@@ -277,7 +277,7 @@ step("Check tv6's text") {
     }
 }
 ```
-More detailed examples are [here](../samples/kaspresso-sample/src/androidTest/java/com/kaspersky/kaspressample/flaky_tests). Please, observe a [documentation](../kaspresso/src/main/kotlin/com/kaspersky/kaspresso/flakysafety/FlakySafetyProviderGlobalImpl.kt) about implementation details.
+More detailed examples are [here](../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/flaky_tests). Please, observe a [documentation](../kaspresso/src/main/kotlin/com/kaspersky/kaspresso/flakysafety/FlakySafetyProviderGlobalImpl.kt) about implementation details.
 
 ### continuously
 This function is similar to what `flakySafely` does, but for negative scenarios, where you need all the time to check that something does not happen.
@@ -290,7 +290,7 @@ ContinuouslyDialogScreen {
     }
 }
 ```
-The example is [here](../samples/kaspresso-sample/src/androidTest/java/com/kaspersky/kaspressample/continuously_tests).
+The example is [here](../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/continuously_tests).
 
 ### compose
 This is a method to make a composed action from multiple actions or assertions, and this action succeeds if at least one of its components succeeds.
@@ -376,7 +376,7 @@ step("Handle potential unexpected behavior") {
     }
 }
 ```
-The example is [here](../samples/kaspresso-sample/src/androidTest/java/com/kaspersky/kaspressample/compose_tests). <br>
+The example is [here](../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/compose_tests). <br>
 Please, observe additional opportunities and documentation: [common info](../kaspresso/src/main/kotlin/com/kaspersky/kaspresso/compose), [ComposeProvider](../kaspresso/src/main/kotlin/com/kaspersky/kaspresso/compose/ComposeProvider.kt) and [WebComposeProvider](../kaspresso/src/main/kotlin/com/kaspersky/kaspresso/compose/WebComposeProvider.kt).
 
 #### data
