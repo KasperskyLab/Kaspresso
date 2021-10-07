@@ -9,6 +9,7 @@ import com.kaspersky.kaspressample.screen.kautomator.UiContinuouslyScreen
 import com.kaspersky.kaspressample.screen.kautomator.UiMainScreen
 import com.kaspersky.components.kautomator.common.KautomatorInUnitTestException
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
+import org.junit.Assert
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -26,10 +27,18 @@ class FailingKautomatorSharedTest : TestCase() {
     val activityTestRule = ActivityTestRule(MainActivity::class.java, true, false)
 
     @Test
-    fun instrumentalTest() = kautomatorSampleTest()
+    fun instrumentalTest() {
+        if (isAndroidRuntime) kautomatorSampleTest()
+    }
 
-    @Test(expected = KautomatorInUnitTestException::class)
-    fun unitTest() = kautomatorSampleTest()
+    @Test
+    fun unitTest() {
+        if (isAndroidRuntime) return
+
+        Assert.assertThrows(KautomatorInUnitTestException::class.java) {
+            kautomatorSampleTest()
+        }
+    }
 
     private fun kautomatorSampleTest() =
         before {

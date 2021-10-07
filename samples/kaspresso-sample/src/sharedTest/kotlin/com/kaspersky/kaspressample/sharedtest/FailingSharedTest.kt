@@ -7,6 +7,7 @@ import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspressample.device.DeviceSampleActivity
 import com.kaspersky.kaspresso.instrumental.exception.NotSupportedInstrumentalTestException
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
+import org.junit.Assert.assertThrows
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -24,10 +25,18 @@ class FailingSharedTest : TestCase() {
     val activityTestRule = ActivityTestRule(DeviceSampleActivity::class.java, false, true)
 
     @Test
-    fun instrumentalTest() = exploitSampleTest()
+    fun instrumentalTest() {
+        if (isAndroidRuntime) exploitSampleTest()
+    }
 
-    @Test(expected = NotSupportedInstrumentalTestException::class)
-    fun unitTest() = exploitSampleTest()
+    @Test
+    fun unitTest() {
+        if (isAndroidRuntime) return
+
+        assertThrows(NotSupportedInstrumentalTestException::class.java) {
+            exploitSampleTest()
+        }
+    }
 
     private fun exploitSampleTest() =
         run {
