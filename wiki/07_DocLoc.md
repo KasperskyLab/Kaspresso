@@ -226,3 +226,4 @@ That's why we changed the primary constructor of [DocLocScreenshotTestCase](../k
 But, we've kept the old option of using `DocLocScreenshotTestCase` with old resource providing system as a secondary constructor.
 You can view the secondary constructor as an example of migration from old system to new system.
 Also, we've retained tests using old resource providing system in samples to ensure that nothing is broken.
+
