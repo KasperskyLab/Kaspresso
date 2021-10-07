@@ -3,39 +3,39 @@ package com.kaspersky.kaspresso.params
 /**
  * The class that holds all the necessary for [com.kaspersky.kaspresso.flakysafety.ContinuouslyProviderImpl] parameters.
  */
-class ContinuouslyParams private constructor(
-    timeoutMs: Long,
-    intervalMs: Long
-) {
-
-    companion object {
-        fun default() = ContinuouslyParams(
-            timeoutMs = 10_000,
-            intervalMs = 500
-        )
-
-        fun custom(timeoutMs: Long, intervalMs: Long) = ContinuouslyParams(
-            timeoutMs = timeoutMs,
-            intervalMs = intervalMs
-        )
-    }
-
+class ContinuouslyParams(
     /**
      * The timeout during which attempts will be made by the
      * [com.kaspersky.kaspresso.flakysafety.ContinuouslyProviderImpl].
      */
-    var timeoutMs: Long = timeoutMs
-        set(value) {
-            if (intervalMs >= value) throw IllegalArgumentException("An interval of attempts is shorter than timeout.")
-            field = value
-        }
+    val timeoutMs: Long,
 
     /**
      * The interval at which attempts will be made by the [com.kaspersky.kaspresso.flakysafety.ContinuouslyProviderImpl].
      */
-    var intervalMs: Long = intervalMs
-        set(value) {
-            if (value >= timeoutMs) throw IllegalArgumentException("An interval of attempts is shorter than timeout.")
-            field = value
-        }
+    val intervalMs: Long
+) {
+    init {
+        require(timeoutMs > 0) { "Timeout must be > 0" }
+        require(intervalMs > 0) { "Interval must be > 0" }
+        require(timeoutMs > intervalMs) { "Timeout must be > interval" }
+    }
+
+    companion object {
+        const val defaultTimeoutMs: Long = 10_000L
+        const val defaultIntervalMs: Long = 500L
+
+        fun default() = ContinuouslyParams(
+            timeoutMs = defaultTimeoutMs,
+            intervalMs = defaultIntervalMs
+        )
+
+        fun custom(
+            timeoutMs: Long = defaultTimeoutMs,
+            intervalMs: Long = defaultIntervalMs
+        ) = ContinuouslyParams(
+            timeoutMs = timeoutMs,
+            intervalMs = intervalMs
+        )
+    }
 }

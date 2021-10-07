@@ -9,9 +9,18 @@ import junit.framework.AssertionFailedError
 /**
  * The class that holds all the necessary for [com.kaspersky.kaspresso.flakysafety.FlakySafetyProviderSimpleImpl] parameters.
  */
-class FlakySafetyParams private constructor(
-    timeoutMs: Long,
-    intervalMs: Long,
+class FlakySafetyParams(
+    /**
+     * The timeout during which attempts will be made by the
+     * [com.kaspersky.kaspresso.flakysafety.FlakySafetyProviderSimpleImpl].
+     */
+    val timeoutMs: Long,
+
+    /**
+     * The interval at which attempts will be made by the
+     * [com.kaspersky.kaspresso.flakysafety.FlakySafetyProviderSimpleImpl].
+     */
+    val intervalMs: Long,
 
     /**
      * The set of exceptions, if caught, the [com.kaspersky.kaspresso.flakysafety.FlakySafetyProviderSimpleImpl] will continue
@@ -19,46 +28,39 @@ class FlakySafetyParams private constructor(
      */
     val allowedExceptions: Set<Class<out Throwable>>
 ) {
+    init {
+        require(timeoutMs > 0) { "Timeout must be > 0" }
+        require(intervalMs > 0) { "Interval must be > 0" }
+        require(timeoutMs > intervalMs) { "Timeout must be > interval" }
+    }
 
     companion object {
+        const val defaultTimeoutMs: Long = 10_000L
+        const val defaultIntervalMs: Long = 500L
+        val defaultAllowedExceptions: MutableSet<Class<out Throwable>> = mutableSetOf(
+            PerformException::class.java,
+            NoMatchingViewException::class.java,
+            AssertionError::class.java,
+            AssertionFailedError::class.java,
+            UnfoundedUiObjectException::class.java,
+            StaleObjectException::class.java,
+            IllegalStateException::class.java
+        )
+
         fun default() = FlakySafetyParams(
-            timeoutMs = 10_000L,
-            intervalMs = 500L,
-            allowedExceptions = setOf(
-                PerformException::class.java,
-                NoMatchingViewException::class.java,
-                AssertionError::class.java,
-                AssertionFailedError::class.java,
-                UnfoundedUiObjectException::class.java,
-                StaleObjectException::class.java,
-                IllegalStateException::class.java
-            )
+            timeoutMs = defaultTimeoutMs,
+            intervalMs = defaultIntervalMs,
+            allowedExceptions = defaultAllowedExceptions
         )
 
         fun custom(
-            timeoutMs: Long,
-            intervalMs: Long,
-            allowedExceptions: Set<Class<out Throwable>>
-        ): FlakySafetyParams = FlakySafetyParams(timeoutMs, intervalMs, allowedExceptions)
+            timeoutMs: Long = defaultTimeoutMs,
+            intervalMs: Long = defaultIntervalMs,
+            allowedExceptions: Set<Class<out Throwable>> = defaultAllowedExceptions
+        ): FlakySafetyParams = FlakySafetyParams(
+            timeoutMs = timeoutMs,
+            intervalMs = intervalMs,
+            allowedExceptions = allowedExceptions
+        )
     }
-
-    /**
-     * The timeout during which attempts will be made by the
-     * [com.kaspersky.kaspresso.flakysafety.FlakySafetyProviderSimpleImpl].
-     */
-    var timeoutMs: Long = timeoutMs
-        set(value) {
-            if (intervalMs >= value) throw IllegalArgumentException("An interval of attempts is shorter than timeout.")
-            field = value
-        }
-
-    /**
-     * The interval at which attempts will be made by the
-     * [com.kaspersky.kaspresso.flakysafety.FlakySafetyProviderSimpleImpl].
-     */
-    var intervalMs: Long = intervalMs
-        set(value) {
-            if (value >= timeoutMs) throw IllegalArgumentException("An interval of attempts is shorter than timeout.")
-            field = value
-        }
 }

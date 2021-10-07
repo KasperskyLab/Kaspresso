@@ -9,7 +9,7 @@ import junit.framework.AssertionFailedError
  * The class that holds all the necessary for [com.kaspersky.kaspresso.autoscroll.AutoScrollProviderImpl] and
  * [com.kaspersky.kaspresso.autoscroll.WebAutoScrollProviderImpl] parameters.
  */
-class AutoScrollParams private constructor(
+class AutoScrollParams(
     /**
      * The set of exceptions, if caught, the [com.kaspersky.kaspresso.autoscroll.AutoScrollProviderImpl] or
      * [com.kaspersky.kaspresso.autoscroll.WebAutoScrollProviderImpl] will autoscroll.
@@ -18,13 +18,15 @@ class AutoScrollParams private constructor(
 ) {
 
     companion object {
+        val defaultAllowedExceptions: MutableSet<Class<out Throwable>> = mutableSetOf(
+            PerformException::class.java,
+            AssertionFailedError::class.java,
+            UiObjectNotFoundException::class.java,
+            UnfoundedUiObjectException::class.java
+        )
+
         fun default() = AutoScrollParams(
-            allowedExceptions = setOf(
-                PerformException::class.java,
-                AssertionFailedError::class.java,
-                UiObjectNotFoundException::class.java,
-                UnfoundedUiObjectException::class.java
-            )
+            allowedExceptions = defaultAllowedExceptions
         )
     }
 }
