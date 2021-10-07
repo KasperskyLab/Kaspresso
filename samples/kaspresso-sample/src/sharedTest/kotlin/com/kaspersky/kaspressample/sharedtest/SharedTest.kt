@@ -19,8 +19,7 @@ class SharedTest : TestCase() {
         before {
             // check non-nullability of `scenario`
             activityRule.scenario
-        }.after {
-            // no-op
+        }.after { // no-op
         }.run {
             step("Fill info") {
                 SharedTestScreen {
@@ -59,4 +58,3 @@ class SharedTest : TestCase() {
             }
         }
 }
-

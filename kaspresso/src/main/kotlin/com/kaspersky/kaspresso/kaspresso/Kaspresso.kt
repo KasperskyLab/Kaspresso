@@ -64,8 +64,8 @@ import com.kaspersky.kaspresso.files.resources.impl.DefaultResourcesDirNameProvi
 import com.kaspersky.kaspresso.files.resources.impl.DefaultResourcesDirsProvider
 import com.kaspersky.kaspresso.files.resources.impl.DefaultResourcesRootDirsProvider
 import com.kaspersky.kaspresso.idlewaiting.KautomatorWaitForIdleSettings
-import com.kaspersky.kaspresso.instrumental.*
 import com.kaspersky.kaspresso.instrumental.InstrumentalDepAssisFactory
+import com.kaspersky.kaspresso.instrumental.InstrumentalDepsAssistant
 import com.kaspersky.kaspresso.interceptors.behavior.DataBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.ViewBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.WebBehaviorInterceptor

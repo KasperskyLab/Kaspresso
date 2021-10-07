@@ -1,6 +1,6 @@
 package com.kaspersky.components.kautomator.common
 
-import java.util.*
+import java.util.Locale
 
 internal const val ROBOLECTRIC_TEST_RUNNER = "org.robolectric.RobolectricTestRunner"
 
