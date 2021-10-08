@@ -111,15 +111,15 @@ class AdbServerImpl(
 
                             1. The test is executing on the JVM (with Robolectric) environment and the test uses AdbServer. But, Unit tests can't use this implementation of AdbServer.
                             Possible solutions:
-                            1. Rewrite the test and replace/remove a peace of code where AdbServer is called.
-                            2. Write another implementation of AdbServer.
-                            3. Don't use this test like a JVM(Unit)-test.
+                                a. Rewrite the test and replace/remove a peace of code where AdbServer is called.
+                                b. Write another implementation of AdbServer.
+                                c. Don't use this test like a JVM(Unit)-test.
 
                             2. The second reason is absence of started 'adbserver-desktop.jar'.
                             Please, follow the instruction to resolve this issue:
-                            1. Find the last 'adbserver-desktop.jar' here - https://github.com/KasperskyLab/Kaspresso/tree/master/artifacts.
-                            2. Copy 'adbserver-desktop.jar' to your machine. For example, /Users/yuri.gagarin/Desktop/adbserver-desktop.jar.
-                            3. Start 'adbserver-desktop.jar' with the command in Terminal - 'java -jar /Users/yuri.gagarin/Desktop/adbserver-desktop.jar
+                                a. Find the last 'adbserver-desktop.jar' here - https://github.com/KasperskyLab/Kaspresso/tree/master/artifacts.
+                                b. Copy 'adbserver-desktop.jar' to your machine. For example, /Users/yuri.gagarin/Desktop/adbserver-desktop.jar.
+                                c. Start 'adbserver-desktop.jar' with the command in Terminal - 'java -jar /Users/yuri.gagarin/Desktop/adbserver-desktop.jar
 
                         """.trimIndent()
                     )

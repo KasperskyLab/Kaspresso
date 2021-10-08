@@ -5,7 +5,7 @@ import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.UiDevice
 import com.kaspersky.components.kautomator.common.Environment
 import com.kaspersky.components.kautomator.common.KautomatorInUnitTestException
-import com.kaspersky.components.kautomator.common.getEnvironment
+import com.kaspersky.components.kautomator.common.environment
 import com.kaspersky.components.kautomator.component.common.KautomatorMarker
 import com.kaspersky.components.kautomator.intercept.base.UiInterceptor
 import com.kaspersky.components.kautomator.intercept.delegate.UiDeviceInteractionDelegate
@@ -40,7 +40,7 @@ abstract class UiScreen<out T : UiScreen<T>> : UiScreenActions {
     abstract val packageName: String
 
     override val view: UiDeviceInteractionDelegate by lazy(LazyThreadSafetyMode.NONE) {
-        if (getEnvironment() != Environment.AndroidRuntime) throw KautomatorInUnitTestException()
+        if (environment != Environment.AndroidRuntime) throw KautomatorInUnitTestException()
 
         UiDeviceInteractionDelegate(
             UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())

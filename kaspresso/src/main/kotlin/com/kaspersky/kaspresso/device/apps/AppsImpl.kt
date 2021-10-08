@@ -9,7 +9,7 @@ import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.UiSelector
 import androidx.test.uiautomator.Until
 import com.kaspersky.kaspresso.device.server.AdbServer
-import com.kaspersky.kaspresso.instrumental.InstrumentalDepsAssistant
+import com.kaspersky.kaspresso.instrumental.InstrumentalDependencyProvider
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import org.hamcrest.CoreMatchers
 import org.hamcrest.MatcherAssert
@@ -21,7 +21,7 @@ import org.junit.Assert
 class AppsImpl(
     private val logger: UiTestLogger,
     private val context: Context,
-    private val instrumentalDepsAssistant: InstrumentalDepsAssistant,
+    private val instrumentalDependencyProvider: InstrumentalDependencyProvider,
     private val adbServer: AdbServer
 ) : Apps {
 
@@ -31,7 +31,7 @@ class AppsImpl(
     }
 
     private val uiDevice: UiDevice
-        get() = instrumentalDepsAssistant.uiDevice
+        get() = instrumentalDependencyProvider.uiDevice
     private val chromePackageName: String = "com.android.chrome"
 
     override val targetAppLauncherPackageName: String

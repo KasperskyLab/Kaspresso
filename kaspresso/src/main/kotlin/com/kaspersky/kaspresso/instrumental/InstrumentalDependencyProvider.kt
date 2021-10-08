@@ -5,7 +5,7 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.test.uiautomator.UiDevice
 
-interface InstrumentalDepsAssistant {
+interface InstrumentalDependencyProvider {
 
     val isAndroidRuntime: Boolean
     val uiDevice: UiDevice

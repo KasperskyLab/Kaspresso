@@ -121,7 +121,7 @@ abstract class DocLocScreenshotTestCase(
 
     @Before
     fun setup() {
-        if (!kaspresso.instrumentalDepsAssistant.isAndroidRuntime) {
+        if (!kaspresso.instrumentalDependencyProvider.isAndroidRuntime) {
             throw DocLocInUnitTestException()
         }
 
@@ -138,7 +138,7 @@ abstract class DocLocScreenshotTestCase(
                 resourcesDirsProvider,
                 resourceFileNamesProvider
             ),
-            screenshotMaker = ExternalScreenshotMaker(kaspresso.instrumentalDepsAssistant),
+            screenshotMaker = ExternalScreenshotMaker(kaspresso.instrumentalDependencyProvider),
             metadataSaver = MetadataSaver(kaspresso.device.activities, kaspresso.device.apps, logger)
         )
 

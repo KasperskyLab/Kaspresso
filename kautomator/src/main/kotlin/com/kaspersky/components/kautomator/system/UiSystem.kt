@@ -5,7 +5,7 @@ import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.UiDevice
 import com.kaspersky.components.kautomator.common.Environment
 import com.kaspersky.components.kautomator.common.KautomatorInUnitTestException
-import com.kaspersky.components.kautomator.common.getEnvironment
+import com.kaspersky.components.kautomator.common.environment
 import com.kaspersky.components.kautomator.intercept.base.UiInterceptable
 import com.kaspersky.components.kautomator.intercept.delegate.UiDeviceInteractionDelegate
 import com.kaspersky.components.kautomator.intercept.interaction.UiDeviceInteraction
@@ -21,7 +21,7 @@ object UiSystem : UiSystemActions, UiSystemAssertions,
     UiInterceptable<UiDeviceInteraction, UiDeviceAssertion, UiDeviceAction> {
 
     override val view: UiDeviceInteractionDelegate by lazy(LazyThreadSafetyMode.NONE) {
-        if (getEnvironment() != Environment.AndroidRuntime) throw KautomatorInUnitTestException()
+        if (environment != Environment.AndroidRuntime) throw KautomatorInUnitTestException()
 
         UiDeviceInteractionDelegate(
             UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())

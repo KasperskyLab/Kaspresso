@@ -1,7 +1,7 @@
 package com.kaspersky.kaspresso.device.screenshots.screenshotmaker
 
 import androidx.test.uiautomator.UiDevice
-import com.kaspersky.kaspresso.instrumental.InstrumentalDepsAssistant
+import com.kaspersky.kaspresso.instrumental.InstrumentalDependencyProvider
 import com.kaspersky.kaspresso.params.ScreenshotParams
 import java.io.File
 
@@ -9,12 +9,12 @@ import java.io.File
  * Captures spoon-compatible screenshots by uiautomator.
  */
 class ExternalScreenshotMaker(
-    private val instrumentalDepsAssistant: InstrumentalDepsAssistant,
+    private val instrumentalDependencyProvider: InstrumentalDependencyProvider,
     private val params: ScreenshotParams = ScreenshotParams()
 ) : ScreenshotMaker {
 
     private val device: UiDevice
-        get() = instrumentalDepsAssistant.uiDevice
+        get() = instrumentalDependencyProvider.uiDevice
 
     // Somehow scale param is not used in UiDevice#takeScreenshot method,
     // so just using default here

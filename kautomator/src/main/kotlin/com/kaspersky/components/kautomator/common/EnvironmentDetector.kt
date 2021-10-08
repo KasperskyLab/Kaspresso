@@ -2,23 +2,21 @@ package com.kaspersky.components.kautomator.common
 
 import java.util.Locale
 
-internal const val ROBOLECTRIC_TEST_RUNNER = "org.robolectric.RobolectricTestRunner"
+private const val ROBOLECTRIC_TEST_RUNNER = "org.robolectric.RobolectricTestRunner"
+private const val JAVA_RUNTIME_PROPERTY = "java.runtime.name"
+private const val ANDROID_RUNTIME = "android"
 
-private var cachedEnvironment: Environment? = null
 
 /**
  * Get the [Environment] where the test is executing
  */
-fun getEnvironment(): Environment {
-    if (cachedEnvironment != null) return cachedEnvironment!!
-
-    val runtimeProperty = System.getProperty("java.runtime.name")
-    val environment =
-        if (runtimeProperty?.toLowerCase(Locale.ROOT)?.contains("android") == true) Environment.AndroidRuntime
-        else if (hasClass(ROBOLECTRIC_TEST_RUNNER)) return Environment.Robolectric
-        else Environment.Unknown("Java runtime property: $runtimeProperty. $ROBOLECTRIC_TEST_RUNNER is not found")
-    cachedEnvironment = environment
-    return environment
+val environment: Environment by lazy {
+    val runtimeProperty = System.getProperty(JAVA_RUNTIME_PROPERTY)
+    when {
+        runtimeProperty?.toLowerCase(Locale.ROOT)?.contains(ANDROID_RUNTIME) == true -> Environment.AndroidRuntime
+        hasClass(ROBOLECTRIC_TEST_RUNNER) -> Environment.Robolectric
+        else -> Environment.Unknown("Java runtime property: $runtimeProperty. $ROBOLECTRIC_TEST_RUNNER is not found")
+    }
 }
 
 private fun hasClass(className: String): Boolean {

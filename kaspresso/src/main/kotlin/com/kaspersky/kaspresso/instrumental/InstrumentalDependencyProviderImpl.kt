@@ -6,17 +6,17 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.test.uiautomator.UiDevice
 import com.kaspersky.components.kautomator.common.Environment
-import com.kaspersky.components.kautomator.common.getEnvironment
+import com.kaspersky.components.kautomator.common.environment
 import com.kaspersky.kaspresso.instrumental.exception.NotSupportedEnvironment
 import com.kaspersky.kaspresso.instrumental.exception.NotSupportedInstrumentalTestException
 
-internal class InstrumentalDepsAssistantImpl(
+internal class InstrumentalDependencyProviderImpl(
     private val location: InstrumentalUsage,
     private val instrumentation: Instrumentation
-) : InstrumentalDepsAssistant {
+) : InstrumentalDependencyProvider {
 
     override val isAndroidRuntime: Boolean =
-        when (val environment = getEnvironment()) {
+        when (val environment = environment) {
             is Environment.AndroidRuntime -> true
             is Environment.Robolectric -> false
             is Environment.Unknown -> {

@@ -2,20 +2,20 @@ package com.kaspersky.kaspresso.device.video.recorder
 
 import android.util.Log
 import androidx.test.uiautomator.UiDevice
-import com.kaspersky.kaspresso.instrumental.InstrumentalDepsAssistant
+import com.kaspersky.kaspresso.instrumental.InstrumentalDependencyProvider
 import com.kaspersky.kaspresso.internal.wait.wait
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.params.VideoParams
 import java.io.File
 
 class VideoRecorderImpl(
-    private val instrumentalDepsAssistant: InstrumentalDepsAssistant,
+    private val instrumentalDependencyProvider: InstrumentalDependencyProvider,
     private val logger: UiTestLogger,
     private val params: VideoParams
 ) : VideoRecorder {
 
     private val device: UiDevice
-        get() = instrumentalDepsAssistant.uiDevice
+        get() = instrumentalDependencyProvider.uiDevice
     private var videoRecordingThread: VideoRecordingThread? = null
 
     /**

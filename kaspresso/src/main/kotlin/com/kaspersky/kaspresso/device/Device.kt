@@ -17,7 +17,7 @@ import com.kaspersky.kaspresso.device.permissions.HackPermissions
 import com.kaspersky.kaspresso.device.permissions.Permissions
 import com.kaspersky.kaspresso.device.phone.Phone
 import com.kaspersky.kaspresso.device.screenshots.Screenshots
-import com.kaspersky.kaspresso.instrumental.InstrumentalDepsAssistant
+import com.kaspersky.kaspresso.instrumental.InstrumentalDependencyProvider
 
 /**
  * The provider of managers for all off-screen work.
@@ -122,7 +122,7 @@ data class Device(
      */
     val logcat: Logcat,
 
-    private val instrumentalDepsAssistant: InstrumentalDepsAssistant,
+    private val instrumentalDependencyProvider: InstrumentalDependencyProvider,
 
     private val instrumentation: Instrumentation
 ) {
@@ -140,5 +140,5 @@ data class Device(
      * A property to get the instance of [UiDevice].
      */
     val uiDevice: UiDevice
-        get() = instrumentalDepsAssistant.uiDevice
+        get() = instrumentalDependencyProvider.uiDevice
 }

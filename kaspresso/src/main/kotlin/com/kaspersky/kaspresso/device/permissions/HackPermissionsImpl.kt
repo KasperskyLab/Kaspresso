@@ -3,7 +3,7 @@ package com.kaspersky.kaspresso.device.permissions
 import android.app.UiAutomation
 import android.os.Process
 import android.os.UserHandle
-import com.kaspersky.kaspresso.instrumental.InstrumentalDepsAssistant
+import com.kaspersky.kaspresso.instrumental.InstrumentalDependencyProvider
 import com.kaspersky.kaspresso.logger.UiTestLogger
 
 /**
@@ -11,11 +11,11 @@ import com.kaspersky.kaspresso.logger.UiTestLogger
  */
 class HackPermissionsImpl(
     private val logger: UiTestLogger,
-    private val instrumentalDepsAssistant: InstrumentalDepsAssistant,
+    private val instrumentalDependencyProvider: InstrumentalDependencyProvider,
 ) : HackPermissions {
 
     private val uiAutomation: UiAutomation
-        get() = instrumentalDepsAssistant.uiAutomation
+        get() = instrumentalDependencyProvider.uiAutomation
 
     /**
      * @return result of operation: true is success, false is something went wrong

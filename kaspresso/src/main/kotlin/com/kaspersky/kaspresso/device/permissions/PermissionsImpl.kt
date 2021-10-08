@@ -6,7 +6,7 @@ import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.UiObject
 import androidx.test.uiautomator.UiObjectNotFoundException
 import androidx.test.uiautomator.UiSelector
-import com.kaspersky.kaspresso.instrumental.InstrumentalDepsAssistant
+import com.kaspersky.kaspresso.instrumental.InstrumentalDependencyProvider
 import com.kaspersky.kaspresso.internal.wait.wait
 import com.kaspersky.kaspresso.logger.UiTestLogger
 
@@ -15,7 +15,7 @@ import com.kaspersky.kaspresso.logger.UiTestLogger
  */
 class PermissionsImpl(
     private val logger: UiTestLogger,
-    private val instrumentalDepsAssistant: InstrumentalDepsAssistant,
+    private val instrumentalDependencyProvider: InstrumentalDependencyProvider,
 ) : Permissions {
 
     private companion object {
@@ -23,7 +23,7 @@ class PermissionsImpl(
     }
 
     private val uiDevice: UiDevice
-        get() = instrumentalDepsAssistant.uiDevice
+        get() = instrumentalDependencyProvider.uiDevice
     private val packageInstallerPackageName =
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P)
             "com.android.permissioncontroller"
