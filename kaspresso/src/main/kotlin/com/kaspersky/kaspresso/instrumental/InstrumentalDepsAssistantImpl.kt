@@ -23,7 +23,7 @@ internal class InstrumentalDepsAssistantImpl(
                 throw NotSupportedEnvironment(
                     """
 
-                        The current environment is not supported in Kaspresso.
+                        The current environment is not supported by Kaspresso.
                         Some additional info about the current environment: $environment.
                         Please let us know by creating an issue if you desire to support a new environment that is differ from Android Runtime or JVM with Robolectric support.
 
