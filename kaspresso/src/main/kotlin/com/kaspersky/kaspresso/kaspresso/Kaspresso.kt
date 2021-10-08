@@ -333,7 +333,7 @@ data class Kaspresso(
          *
          * Returns true if it's Android environment or false if it's JVM environment with Robolectric support
          */
-        val isAndroidRuntime = instrumentalDepAssisFactory.getComponentAssistant("Kaspresso", instrumentation).isAndroidRuntime
+        val isAndroidRuntime = instrumentalDepAssisFactory.getComponentAssistant<Kaspresso>(instrumentation).isAndroidRuntime
 
         private val configurator = Configurator.getInstance()
 
@@ -683,7 +683,7 @@ data class Kaspresso(
             if (!::apps.isInitialized) apps = AppsImpl(
                 libLogger,
                 instrumentation.context,
-                instrumentalDepAssisFactory.getComponentAssistant("AppsImpl", instrumentation),
+                instrumentalDepAssisFactory.getComponentAssistant<AppsImpl>(instrumentation),
                 adbServer
             )
             if (!::activities.isInitialized) activities = ActivitiesImpl(libLogger, instrumentation)
@@ -697,21 +697,21 @@ data class Kaspresso(
             if (!::location.isInitialized) location = LocationImpl(libLogger, adbServer)
             if (!::keyboard.isInitialized) keyboard = KeyboardImpl(libLogger, adbServer)
             if (!::accessibility.isInitialized) accessibility = AccessibilityImpl(
-                instrumentalDepAssisFactory.getComponentAssistant("AccessibilityImpl", instrumentation),
+                instrumentalDepAssisFactory.getComponentAssistant<AccessibilityImpl>(instrumentation),
                 libLogger
             )
             if (!::permissions.isInitialized) permissions = PermissionsImpl(
                 libLogger,
-                instrumentalDepAssisFactory.getComponentAssistant("PermissionsImpl", instrumentation)
+                instrumentalDepAssisFactory.getComponentAssistant<PermissionsImpl>(instrumentation)
             )
             if (!::hackPermissions.isInitialized) hackPermissions = HackPermissionsImpl(
                 libLogger,
-                instrumentalDepAssisFactory.getComponentAssistant("HackPermissionsImpl", instrumentation)
+                instrumentalDepAssisFactory.getComponentAssistant<HackPermissionsImpl>(instrumentation)
             )
             if (!::exploit.isInitialized) exploit = ExploitImpl(
                 libLogger,
                 activities,
-                instrumentalDepAssisFactory.getComponentAssistant("ExploitImpl", instrumentation),
+                instrumentalDepAssisFactory.getComponentAssistant<ExploitImpl>(instrumentation),
                 adbServer
             )
             if (!::language.isInitialized) language = LanguageImpl(libLogger, instrumentation.targetContext)
@@ -731,7 +731,7 @@ data class Kaspresso(
                     screenshotMaker = CombinedScreenshotMaker(
                         preferredScreenshotMaker = InternalScreenshotMaker(activities, screenshotParams),
                         fallbackScreenshotMaker = ExternalScreenshotMaker(
-                            instrumentalDepAssisFactory.getComponentAssistant("ScreenshotsImpl", instrumentation),
+                            instrumentalDepAssisFactory.getComponentAssistant<ExternalScreenshotMaker>(instrumentation),
                             screenshotParams
                         )
                     )
@@ -743,7 +743,7 @@ data class Kaspresso(
                     logger = libLogger,
                     resourceFilesProvider = resourceFilesProvider,
                     videoRecorder = VideoRecorderImpl(
-                        instrumentalDepAssisFactory.getComponentAssistant("VideosImpl", instrumentation),
+                        instrumentalDepAssisFactory.getComponentAssistant<VideoRecorderImpl>(instrumentation),
                         libLogger,
                         videoParams
                     )
@@ -752,7 +752,7 @@ data class Kaspresso(
 
             if (!::viewHierarchyDumper.isInitialized) {
                 viewHierarchyDumper = ViewHierarchyDumperImpl(
-                    instrumentalDepAssisFactory.getComponentAssistant("ViewHierarchyDumperImpl", instrumentation),
+                    instrumentalDepAssisFactory.getComponentAssistant<ViewHierarchyDumperImpl>(instrumentation),
                     libLogger,
                     resourceFilesProvider
                 )
@@ -816,7 +816,7 @@ data class Kaspresso(
                     AutoScrollViewBehaviorInterceptor(autoScrollParams, libLogger),
                     SystemDialogSafetyViewBehaviorInterceptor(
                         libLogger,
-                        instrumentalDepAssisFactory.getInterceptorAssistant("SystemDialogSafetyViewBehaviorInterceptor", instrumentation),
+                        instrumentalDepAssisFactory.getInterceptorAssistant<SystemDialogSafetyViewBehaviorInterceptor>(instrumentation),
                         adbServer
                     ),
                     FlakySafeViewBehaviorInterceptor(flakySafetyParams, libLogger)
@@ -829,7 +829,7 @@ data class Kaspresso(
                 if (isAndroidRuntime) mutableListOf(
                     SystemDialogSafetyDataBehaviorInterceptor(
                         libLogger,
-                        instrumentalDepAssisFactory.getInterceptorAssistant("SystemDialogSafetyDataBehaviorInterceptor", instrumentation),
+                        instrumentalDepAssisFactory.getInterceptorAssistant<SystemDialogSafetyViewBehaviorInterceptor>(instrumentation),
                         adbServer
                     ),
                     FlakySafeDataBehaviorInterceptor(flakySafetyParams, libLogger)
@@ -843,7 +843,7 @@ data class Kaspresso(
                         AutoScrollWebBehaviorInterceptor(autoScrollParams, libLogger),
                         SystemDialogSafetyWebBehaviorInterceptor(
                             libLogger,
-                            instrumentalDepAssisFactory.getInterceptorAssistant("SystemDialogSafetyWebBehaviorInterceptor", instrumentation),
+                            instrumentalDepAssisFactory.getInterceptorAssistant<SystemDialogSafetyViewBehaviorInterceptor>(instrumentation),
                             adbServer
                         ),
                         FlakySafeWebBehaviorInterceptor(flakySafetyParams, libLogger)
@@ -860,7 +860,7 @@ data class Kaspresso(
                 UiObjectLoaderBehaviorInterceptor(libLogger),
                 SystemDialogSafetyObjectBehaviorInterceptor(
                     libLogger,
-                    instrumentalDepAssisFactory.getInterceptorAssistant("SystemDialogSafetyObjectBehaviorInterceptor", instrumentation),
+                    instrumentalDepAssisFactory.getInterceptorAssistant<SystemDialogSafetyViewBehaviorInterceptor>(instrumentation),
                     adbServer
                 ),
                 FlakySafeObjectBehaviorInterceptor(flakySafetyParams, libLogger)
@@ -869,7 +869,7 @@ data class Kaspresso(
             if (!::deviceBehaviorInterceptors.isInitialized) deviceBehaviorInterceptors = mutableListOf(
                 SystemDialogSafetyDeviceBehaviorInterceptor(
                     libLogger,
-                    instrumentalDepAssisFactory.getInterceptorAssistant("SystemDialogSafetyDeviceBehaviorInterceptor", instrumentation),
+                    instrumentalDepAssisFactory.getInterceptorAssistant<SystemDialogSafetyViewBehaviorInterceptor>(instrumentation),
                     adbServer
                 ),
                 FlakySafeDeviceBehaviorInterceptor(flakySafetyParams, libLogger)
@@ -917,7 +917,7 @@ data class Kaspresso(
                     exploit = exploit,
                     language = language,
                     logcat = logcat,
-                    instrumentalDepsAssistant = instrumentalDepAssisFactory.getComponentAssistant("Device", instrumentation),
+                    instrumentalDepsAssistant = instrumentalDepAssisFactory.getComponentAssistant<Device>(instrumentation),
                     instrumentation = instrumentation
                 ),
 

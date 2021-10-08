@@ -4,11 +4,11 @@ import android.app.Instrumentation
 
 internal class InstrumentalDepAssisFactory {
 
-    fun getComponentAssistant(componentName: String, instrumentation: Instrumentation): InstrumentalDepsAssistant =
-        InstrumentalDepsAssistantImpl(InstrumentalUsage.ComponentLocation(componentName), instrumentation)
+    inline fun <reified T : Any> getComponentAssistant(instrumentation: Instrumentation): InstrumentalDepsAssistant =
+        InstrumentalDepsAssistantImpl(InstrumentalUsage.ComponentLocation(T::class.java.name), instrumentation)
 
-    fun getInterceptorAssistant(interceptorName: String, instrumentation: Instrumentation): InstrumentalDepsAssistant =
-        InstrumentalDepsAssistantImpl(InstrumentalUsage.InterceptorLocation(interceptorName), instrumentation)
+    inline fun <reified T : Any> getInterceptorAssistant(instrumentation: Instrumentation): InstrumentalDepsAssistant =
+        InstrumentalDepsAssistantImpl(InstrumentalUsage.InterceptorLocation(T::class.java.name), instrumentation)
 
     fun getTestAssistant(instrumentation: Instrumentation): InstrumentalDepsAssistant =
         InstrumentalDepsAssistantImpl(InstrumentalUsage.TestLocation, instrumentation)
