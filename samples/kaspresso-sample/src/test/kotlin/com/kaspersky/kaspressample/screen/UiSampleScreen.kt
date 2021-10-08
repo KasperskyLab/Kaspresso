@@ -1,4 +1,4 @@
-package com.kaspersky.kaspressample.screen.kautomator
+package com.kaspersky.kaspressample.screen
 
 import android.content.Context
 import androidx.test.platform.app.InstrumentationRegistry

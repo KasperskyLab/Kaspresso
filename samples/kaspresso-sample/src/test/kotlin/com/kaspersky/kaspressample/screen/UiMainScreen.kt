@@ -1,4 +1,4 @@
-package com.kaspersky.kaspressample.screen.kautomator
+package com.kaspersky.kaspressample.screen
 
 import com.kaspersky.components.kautomator.component.text.UiButton
 import com.kaspersky.kaspressample.MainActivity

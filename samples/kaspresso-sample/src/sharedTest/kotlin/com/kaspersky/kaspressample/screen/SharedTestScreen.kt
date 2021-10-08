@@ -1,4 +1,4 @@
-package com.kaspersky.kaspressample.screen.kaspresso
+package com.kaspersky.kaspressample.screen
 
 import com.kaspersky.kaspressample.R
 import com.kaspersky.kaspressample.sharedtest.SharedTestActivity

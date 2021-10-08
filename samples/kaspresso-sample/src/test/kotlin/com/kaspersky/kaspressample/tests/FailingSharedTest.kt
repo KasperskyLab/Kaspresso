@@ -1,4 +1,4 @@
-package com.kaspersky.kaspressample.sharedtest
+package com.kaspersky.kaspressample.tests
 
 import android.Manifest
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -25,14 +25,7 @@ class FailingSharedTest : TestCase() {
     val activityTestRule = ActivityTestRule(DeviceSampleActivity::class.java, false, true)
 
     @Test
-    fun instrumentalTest() {
-        if (isAndroidRuntime) exploitSampleTest()
-    }
-
-    @Test
     fun unitTest() {
-        if (isAndroidRuntime) return
-
         assertThrows(NotSupportedInstrumentalTestException::class.java) {
             exploitSampleTest()
         }
