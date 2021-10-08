@@ -9,7 +9,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class SharedTest : TestCase() {
+class SharedSimpleFlakyTest : TestCase() {
 
     @get:Rule
     val activityRule = activityScenarioRule<SharedTestActivity>()
