@@ -22,7 +22,7 @@ fun Kaspresso.Builder.Companion.withAllureSupport(
  * Kaspresso Builder that includes all appropriate interceptors to support rich Allure reports.
  *
  * A little note. If a test is executing on the JVM (with Robolectric) environment then mentioned above interceptors are not including to prevent crashes.
- * Sure, Allure reports don't have any sense in non Instrumental environment.
+ * Allure reports don't have any sense in non Instrumental environment.
  */
 fun Kaspresso.Builder.addAllureSupport(): Kaspresso.Builder = apply {
     if (isAndroidRuntime) {
