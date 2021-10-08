@@ -6,7 +6,6 @@ private const val ROBOLECTRIC_TEST_RUNNER = "org.robolectric.RobolectricTestRunn
 private const val JAVA_RUNTIME_PROPERTY = "java.runtime.name"
 private const val ANDROID_RUNTIME = "android"
 
-
 /**
  * Get the [Environment] where the test is executing
  */
