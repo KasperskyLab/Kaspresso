@@ -97,7 +97,7 @@ class FailingSharedTest : TestCase() {
 
 `device.exploit.pressHome()` calls `UiDevice` under the hood and it leads to a crash the JVM environment.
 
-There are following possible solutions:
+There is following possible solution:
 ``` kotlin
 // change an implementation of Exploit class
 @RunWith(AndroidJUnit4::class)
@@ -109,22 +109,7 @@ class FailingSharedTest : TestCase(
     }
 ) { ... }
 
-// handle of device.exploit using in the test
-@RunWith(AndroidJUnit4::class)
-class FailingSharedTest : TestCase() {
-    // ...
-
-    private fun exploitSampleTest() =
-        run {
-            step("Press Home button") {
-                if (isAndroidRuntime) {
-                    device.exploit.pressHome() // execute this section only on the Instrumental environment
-                }
-            }
-        }
-}
-
-// isAndroidRuntime property is available in Kaspresso.Builder and TestContext.
+// isAndroidRuntime property is available in Kaspresso.Builder.
 ``` 
 
 Also, if your custom Interceptor uses `UiDevice`/`UiAutomation`/`AdbServer` then you can turn off this Interceptor for JVM. The example:
