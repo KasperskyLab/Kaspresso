@@ -17,6 +17,7 @@ If you are looking forward of a wiki for old versions then follow links: <br>
 [05. Device](./05_Device.md) <br>
 [06. AdbServer](./06_AdbServer.md) <br>
 [07. DocLoc](./07_DocLoc.md) <br>
+[08. Best Practices](./08_BestPractices.md) <br>
 
 ## References
 
