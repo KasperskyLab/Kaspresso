@@ -6,6 +6,7 @@ import androidx.test.uiautomator.BySelector
 import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.Until
 import com.kaspersky.kaspresso.device.server.AdbServer
+import com.kaspersky.kaspresso.instrumental.InstrumentalDependencyProvider
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import java.util.concurrent.TimeUnit
 
@@ -14,13 +15,16 @@ import java.util.concurrent.TimeUnit
  */
 class SystemDialogSafetyProviderImpl(
     private val logger: UiTestLogger,
-    private val uiDevice: UiDevice,
+    private val instrumentalDependencyProvider: InstrumentalDependencyProvider,
     private val adbServer: AdbServer
 ) : SystemDialogSafetyProvider {
 
     companion object {
         private const val DEFAULT_TIMEOUT: Long = 2000
     }
+
+    private val uiDevice: UiDevice
+        get() = instrumentalDependencyProvider.uiDevice
 
     private val attemptsToSuppress: List<(UiDevice, AdbServer) -> Unit> = listOf(
         { _, adbServer ->

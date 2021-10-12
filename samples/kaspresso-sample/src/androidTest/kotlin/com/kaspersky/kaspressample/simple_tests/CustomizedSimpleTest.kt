@@ -1,6 +1,7 @@
 package com.kaspersky.kaspressample.simple_tests
 
 import android.Manifest
+import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspressample.MainActivity
@@ -34,7 +35,7 @@ class CustomizedSimpleTest : TestCase(
             videoParams = VideoParams(bitRate = 10_000_000)
             screenshotParams = ScreenshotParams(quality = 1)
 
-            dirsProvider = DefaultDirsProvider()
+            dirsProvider = DefaultDirsProvider(InstrumentationRegistry.getInstrumentation())
             resourcesDirNameProvider = DefaultResourcesDirNameProvider()
 
             resourcesRootDirsProvider = object : ResourcesRootDirsProvider {

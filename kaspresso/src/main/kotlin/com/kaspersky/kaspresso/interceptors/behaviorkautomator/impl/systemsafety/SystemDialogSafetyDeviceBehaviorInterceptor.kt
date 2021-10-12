@@ -1,10 +1,10 @@
 package com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.systemsafety
 
-import androidx.test.uiautomator.UiDevice
 import com.kaspersky.components.kautomator.intercept.interaction.UiDeviceInteraction
 import com.kaspersky.components.kautomator.intercept.operation.UiDeviceAction
 import com.kaspersky.components.kautomator.intercept.operation.UiDeviceAssertion
 import com.kaspersky.kaspresso.device.server.AdbServer
+import com.kaspersky.kaspresso.instrumental.InstrumentalDependencyProvider
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.DeviceBehaviorInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.systemsafety.SystemDialogSafetyProvider
@@ -16,10 +16,10 @@ import com.kaspersky.kaspresso.systemsafety.SystemDialogSafetyProviderImpl
  */
 class SystemDialogSafetyDeviceBehaviorInterceptor(
     logger: UiTestLogger,
-    uiDevice: UiDevice,
+    instrumentalDependencyProvider: InstrumentalDependencyProvider,
     adbServer: AdbServer
 ) : DeviceBehaviorInterceptor,
-    SystemDialogSafetyProvider by SystemDialogSafetyProviderImpl(logger, uiDevice, adbServer) {
+    SystemDialogSafetyProvider by SystemDialogSafetyProviderImpl(logger, instrumentalDependencyProvider, adbServer) {
 
     /**
      * Wraps the given [activity] invocation with the system dialog safety.

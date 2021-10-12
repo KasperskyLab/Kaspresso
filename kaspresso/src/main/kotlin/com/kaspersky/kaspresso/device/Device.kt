@@ -1,7 +1,7 @@
 package com.kaspersky.kaspresso.device
 
+import android.app.Instrumentation
 import android.content.Context
-import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.UiDevice
 import com.kaspersky.kaspresso.device.accessibility.Accessibility
 import com.kaspersky.kaspresso.device.activities.Activities
@@ -17,6 +17,7 @@ import com.kaspersky.kaspresso.device.permissions.HackPermissions
 import com.kaspersky.kaspresso.device.permissions.Permissions
 import com.kaspersky.kaspresso.device.phone.Phone
 import com.kaspersky.kaspresso.device.screenshots.Screenshots
+import com.kaspersky.kaspresso.instrumental.InstrumentalDependencyProvider
 
 /**
  * The provider of managers for all off-screen work.
@@ -119,22 +120,25 @@ data class Device(
     /**
      * Holds the reference to the implementation of [Logcat] interface.
      */
-    val logcat: Logcat
+    val logcat: Logcat,
+
+    private val instrumentalDependencyProvider: InstrumentalDependencyProvider,
+
+    private val instrumentation: Instrumentation
 ) {
     /**
-     * A not caching property to get [Context].
+     * A caching property to get [Context].
      */
-    val context: Context
-        get() = InstrumentationRegistry.getInstrumentation().context
+    val context: Context = instrumentation.context
 
     /**
-     * A not caching property to get target [Context].
+     * A caching property to get target [Context].
      */
-    val targetContext: Context
-        get() = InstrumentationRegistry.getInstrumentation().targetContext
+    val targetContext: Context = instrumentation.targetContext
 
     /**
      * A property to get the instance of [UiDevice].
      */
-    val uiDevice: UiDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
+    val uiDevice: UiDevice
+        get() = instrumentalDependencyProvider.uiDevice
 }
