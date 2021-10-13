@@ -296,7 +296,7 @@ Kaspresso is available under the [Apache License, Version 2.0](https://github.co
         <td><img src="./users/revolut.svg" width="140"></td>
  	</tr> 
  	<tr>
-  		<td><img src="./users/letoile.svg" width="140"></td>
+  		<td><img src="./users/delivery_club.png" width="140"></td>
    		<td><img src="./users/hh.png" width="140"></td>
         <td><img src="./users/tinkoff.svg" width="140"></td>
         <td><img src="./users/x5.svg" width="140"></td>
@@ -304,10 +304,10 @@ Kaspresso is available under the [Apache License, Version 2.0](https://github.co
  	</tr>
  	<tr>
   		<td><img src="./users/psb.jpeg" width="140"></td>
-   		<td><img src="./users/blinklist.png" width="140"></td>
+        <td><img src="./users/letoile.svg" width="140"></td>
         <td><img src="./users/rostelecom.png" width="140"></td>
         <td><img src="./users/profi.png" width="140"></td>
-        <td><img src="./users/delivery_club.png" width="140"></td>
+        <td><img src="./users/blinklist.png" width="140"></td>
  	</tr>    
     <tr>
   		<td><img src="./users/RabotaRu.png" width="140"></td>
