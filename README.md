@@ -285,3 +285,34 @@ Kaspresso is an open source project, so you are welcome to contribute (see the [
 
 ## License
 Kaspresso is available under the [Apache License, Version 2.0](https://github.com/KasperskyLab/Kaspresso/blob/master/LICENSE).
+
+## Our Users
+<table>
+ 	<tr>
+  		<td><img src="./users/kaspersky.svg" width="140"></td>
+   		<td><img src="./users/sberbank.svg" width="140"></td>
+        <td><img src="./users/aliexpress.svg" width="140"></td>
+        <td><img src="./users/vtb.svg" width="140"></td>
+        <td><img src="./users/revolut.svg" width="140"></td>
+ 	</tr> 
+ 	<tr>
+  		<td><img src="./users/letoile.svg" width="140"></td>
+   		<td><img src="./users/hh.png" width="140"></td>
+        <td><img src="./users/tinkoff.svg" width="140"></td>
+        <td><img src="./users/x5.svg" width="140"></td>
+        <td><img src="./users/yandex_zen.svg" width="140"></td>
+ 	</tr>
+ 	<tr>
+  		<td><img src="./users/psb.jpeg" width="140"></td>
+   		<td><img src="./users/blinklist.png" width="140"></td>
+        <td><img src="./users/rostelecom.png" width="140"></td>
+        <td><img src="./users/profi.png" width="140"></td>
+        <td><img src="./users/delivery_club.png" width="140"></td>
+ 	</tr>    
+    <tr>
+  		<td><img src="./users/RabotaRu.png" width="140"></td>
+  		<td><img src="./users/cian.png" width="140"></td>        
+   		<td><img src="./users/aloha.png" width="140"></td>
+        <td><img src="./users/nexign.jpeg" width="140"></td>
+ 	</tr> 
+</table>
