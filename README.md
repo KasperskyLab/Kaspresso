@@ -314,5 +314,6 @@ Kaspresso is available under the [Apache License, Version 2.0](https://github.co
   		<td><img src="./users/cian.png" width="140"></td>        
    		<td><img src="./users/aloha.png" width="140"></td>
         <td><img src="./users/nexign.jpeg" width="140"></td>
+        <td><img src="./users/technology.png" width="140"></td>
  	</tr> 
 </table>
