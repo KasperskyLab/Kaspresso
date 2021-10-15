@@ -347,7 +347,7 @@ Kaspresso is available under the [Apache License, Version 2.0](https://github.co
             <a href="https://www.cian.ru"><img src="./users/cian.png" width="140" alt="www.cian.ru"></a>
         </td>
         <td>
-            <a href="https://squaregps.com"><img src="./users/squaregps.svg" width="140" height="140"  alt="squaregps.com"></a>
+            <a href="https://squaregps.com"><img src="./users/squaregps.svg" width="140" height="140" alt="squaregps.com"></a>
         </td>
         <td>
             <a href="https://nexign.com"><img src="./users/nexign.jpeg" width="140" alt="nexign.com"></a>
@@ -362,6 +362,12 @@ Kaspresso is available under the [Apache License, Version 2.0](https://github.co
         </td>
         <td>
             <a href="https://vivid.money"><img src="./users/vivid.money.png" width="140" alt="vivid.money"></a>
+        </td>
+        <td>
+            <a href="https://www.raiffeisen.ru"><img src="./users/raiffeisen.svg" width="140" height="140" alt="raiffeisen.ru"></a>
+        </td>
+        <td>
+            <a href="https://www.cft.ru"><img src="./users/cft.png" width="140" alt="cft.ru"></a>
         </td>
     </tr>
 </table>
