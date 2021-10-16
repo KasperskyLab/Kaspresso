@@ -10,17 +10,8 @@ import junit.framework.AssertionFailedError
  * The class that holds all the necessary for [com.kaspersky.kaspresso.flakysafety.FlakySafetyProviderSimpleImpl] parameters.
  */
 class FlakySafetyParams(
-    /**
-     * The timeout during which attempts will be made by the
-     * [com.kaspersky.kaspresso.flakysafety.FlakySafetyProviderSimpleImpl].
-     */
-    val timeoutMs: Long,
-
-    /**
-     * The interval at which attempts will be made by the
-     * [com.kaspersky.kaspresso.flakysafety.FlakySafetyProviderSimpleImpl].
-     */
-    val intervalMs: Long,
+    timeoutMs: Long,
+    intervalMs: Long,
 
     /**
      * The set of exceptions, if caught, the [com.kaspersky.kaspresso.flakysafety.FlakySafetyProviderSimpleImpl] will continue
@@ -28,12 +19,6 @@ class FlakySafetyParams(
      */
     val allowedExceptions: Set<Class<out Throwable>>
 ) {
-    init {
-        require(timeoutMs > 0) { "Timeout must be > 0" }
-        require(intervalMs > 0) { "Interval must be > 0" }
-        require(timeoutMs > intervalMs) { "Timeout must be > interval" }
-    }
-
     companion object {
         const val defaultTimeoutMs: Long = 10_000L
         const val defaultIntervalMs: Long = 500L
@@ -63,4 +48,34 @@ class FlakySafetyParams(
             allowedExceptions = allowedExceptions
         )
     }
+
+    init {
+        require(timeoutMs > 0) { "Timeout must be > 0" }
+        require(intervalMs > 0) { "Interval must be > 0" }
+        require(timeoutMs > intervalMs) { "Timeout must be > interval" }
+    }
+
+    /**
+     * The timeout during which attempts will be made by the
+     * [com.kaspersky.kaspresso.flakysafety.FlakySafetyProviderSimpleImpl].
+     */
+    var timeoutMs: Long = timeoutMs
+        @Deprecated("Do not mutate this property, just use public constructor to create new instance")
+        set(value) {
+            require(timeoutMs > 0) { "Timeout must be > 0" }
+            require(timeoutMs > intervalMs) { "Timeout must be > interval" }
+            field = value
+        }
+
+    /**
+     * The interval at which attempts will be made by the
+     * [com.kaspersky.kaspresso.flakysafety.FlakySafetyProviderSimpleImpl].
+     */
+    var intervalMs: Long = intervalMs
+        @Deprecated("Do not mutate this property, just use public constructor to create new instance")
+        set(value) {
+            require(intervalMs > 0) { "Interval must be > 0" }
+            require(timeoutMs > intervalMs) { "Timeout must be > interval" }
+            field = value
+        }
 }
