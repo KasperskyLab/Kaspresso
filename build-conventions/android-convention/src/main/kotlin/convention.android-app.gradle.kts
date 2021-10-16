@@ -19,4 +19,8 @@ android {
             matchingFallbacks += listOf("release")
         }
     }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
 }

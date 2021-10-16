@@ -14,13 +14,20 @@ val environment: Environment by lazy {
     when {
         runtimeProperty?.toLowerCase(Locale.ROOT)?.contains(ANDROID_RUNTIME) == true -> Environment.AndroidRuntime
         hasClass(ROBOLECTRIC_TEST_RUNNER) -> Environment.Robolectric
-        else -> Environment.Unknown("Java runtime property: $runtimeProperty. $ROBOLECTRIC_TEST_RUNNER is not found")
+        else -> throw RuntimeException(
+            """
+                This environment is not supported by Kaspresso.
+                Current environment: [Java runtime property: $runtimeProperty. $ROBOLECTRIC_TEST_RUNNER is not found].
+                Please let us know by creating an issue if you desire to support a new environment that is differ from Android Runtime or JVM with Robolectric support.
+            """.trimIndent()
+        )
     }
 }
 
 private fun hasClass(className: String): Boolean {
     return try {
-        Class.forName(className) != null
+        Class.forName(className)
+        true
     } catch (e: ClassNotFoundException) {
         false
     }
@@ -29,5 +36,4 @@ private fun hasClass(className: String): Boolean {
 sealed class Environment {
     object AndroidRuntime : Environment()
     object Robolectric : Environment()
-    data class Unknown(val additionalInfo: String) : Environment()
 }
