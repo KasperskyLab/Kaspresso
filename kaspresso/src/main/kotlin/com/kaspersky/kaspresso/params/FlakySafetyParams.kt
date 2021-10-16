@@ -22,7 +22,7 @@ class FlakySafetyParams(
     companion object {
         const val defaultTimeoutMs: Long = 10_000L
         const val defaultIntervalMs: Long = 500L
-        val defaultAllowedExceptions: MutableSet<Class<out Throwable>> = mutableSetOf(
+        val defaultAllowedExceptions: Set<Class<out Throwable>> = setOf(
             PerformException::class.java,
             NoMatchingViewException::class.java,
             AssertionError::class.java,

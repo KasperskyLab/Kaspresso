@@ -18,7 +18,7 @@ class AutoScrollParams(
 ) {
 
     companion object {
-        val defaultAllowedExceptions: MutableSet<Class<out Throwable>> = mutableSetOf(
+        val defaultAllowedExceptions: Set<Class<out Throwable>> = setOf(
             PerformException::class.java,
             AssertionFailedError::class.java,
             UiObjectNotFoundException::class.java,
