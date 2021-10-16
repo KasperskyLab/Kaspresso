@@ -1,14 +1,16 @@
 package com.kaspersky.kaspresso.files.dirs
 
 import android.annotation.SuppressLint
+import android.app.Instrumentation
 import android.content.Context
 import android.os.Build
 import android.os.Environment
-import androidx.test.platform.app.InstrumentationRegistry
 import com.kaspersky.kaspresso.internal.extensions.other.createDirIfNeeded
 import java.io.File
 
-class DefaultDirsProvider : DirsProvider {
+class DefaultDirsProvider(
+    private val instrumentation: Instrumentation
+) : DirsProvider {
     private val clearedDirs = HashSet<File>()
 
     @Suppress("DEPRECATION")
@@ -17,7 +19,7 @@ class DefaultDirsProvider : DirsProvider {
         val dir: File = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Environment.getExternalStorageDirectory().resolve(dest)
         } else {
-            InstrumentationRegistry.getInstrumentation().targetContext.applicationContext.getDir(
+            instrumentation.targetContext.applicationContext.getDir(
                 dest.canonicalPath,
                 Context.MODE_WORLD_READABLE
             )

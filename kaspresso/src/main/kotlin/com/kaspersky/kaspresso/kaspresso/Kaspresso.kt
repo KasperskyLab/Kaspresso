@@ -5,7 +5,6 @@ import androidx.test.espresso.Espresso
 import androidx.test.espresso.FailureHandler
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.Configurator
-import androidx.test.uiautomator.UiDevice
 import io.github.kakaocup.kakao.Kakao
 import com.kaspersky.adbserver.common.log.logger.LogLevel
 import com.kaspersky.components.kautomator.intercept.interaction.UiDeviceInteraction
@@ -65,6 +64,8 @@ import com.kaspersky.kaspresso.files.resources.impl.DefaultResourcesDirNameProvi
 import com.kaspersky.kaspresso.files.resources.impl.DefaultResourcesDirsProvider
 import com.kaspersky.kaspresso.files.resources.impl.DefaultResourcesRootDirsProvider
 import com.kaspersky.kaspresso.idlewaiting.KautomatorWaitForIdleSettings
+import com.kaspersky.kaspresso.instrumental.InstrumentalDependencyProviderFactory
+import com.kaspersky.kaspresso.instrumental.InstrumentalDependencyProvider
 import com.kaspersky.kaspresso.interceptors.behavior.DataBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.ViewBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.WebBehaviorInterceptor
@@ -129,6 +130,7 @@ data class Kaspresso(
     internal val testLogger: UiTestLogger,
     internal val adbServer: AdbServer,
     internal val device: Device,
+    internal val instrumentalDependencyProvider: InstrumentalDependencyProvider,
     internal val params: Params,
     internal val viewActionWatcherInterceptors: List<ViewActionWatcherInterceptor>,
     internal val viewAssertionWatcherInterceptors: List<ViewAssertionWatcherInterceptor>,
@@ -275,21 +277,26 @@ data class Kaspresso(
              * to change the order of interceptors in the list (for example, it are variables like
              * ```viewActionWatcherInterceptors```, ```viewAssertionWatcherInterceptors```, etc).
              *
+             * If a test is executing on the JVM (with Robolectric) environment then advanced interceptors are not including to prevent crashes.
+             * Sure, Screenshots, Videos and Dumps don't have any sense in non Instrumental environment.
+             *
              * @return the new instance of [Builder].
              */
             fun advanced(customize: Builder.() -> Unit = {}): Builder {
                 return simple(customize).apply {
-                    stepWatcherInterceptors.add(
-                        ScreenshotStepWatcherInterceptor(screenshots)
-                    )
-                    testRunWatcherInterceptors.addAll(
-                        listOf(
-                            DumpLogcatInterceptor(logcatDumper),
-                            TestRunnerScreenshotWatcherInterceptor(screenshots),
-                            VideoRecordingInterceptor(videos),
-                            DumpViewsInterceptor(viewHierarchyDumper)
+                    if (isAndroidRuntime) {
+                        stepWatcherInterceptors.add(
+                            ScreenshotStepWatcherInterceptor(screenshots)
                         )
-                    )
+                        testRunWatcherInterceptors.addAll(
+                            listOf(
+                                DumpLogcatInterceptor(logcatDumper),
+                                TestRunnerScreenshotWatcherInterceptor(screenshots),
+                                VideoRecordingInterceptor(videos),
+                                DumpViewsInterceptor(viewHierarchyDumper)
+                            )
+                        )
+                    }
                 }
             }
         }
@@ -319,7 +326,15 @@ data class Kaspresso(
          */
         val instrumentation: Instrumentation = InstrumentationRegistry.getInstrumentation()
 
-        private val uiDevice = UiDevice.getInstance(instrumentation)
+        private val instrumentalDependencyProviderFactory: InstrumentalDependencyProviderFactory = InstrumentalDependencyProviderFactory()
+
+        /**
+         * Holds an environment state of a test.
+         *
+         * Returns true if it's Android environment or false if it's JVM environment with Robolectric support
+         */
+        val isAndroidRuntime = instrumentalDependencyProviderFactory.getComponentProvider<Kaspresso>(instrumentation).isAndroidRuntime
+
         private val configurator = Configurator.getInstance()
 
         /**
@@ -644,7 +659,7 @@ data class Kaspresso(
             if (!::libLogger.isInitialized) libLogger = UiTestLoggerImpl(DEFAULT_LIB_LOGGER_TAG)
             if (!::testLogger.isInitialized) testLogger = UiTestLoggerImpl(DEFAULT_TEST_LOGGER_TAG)
 
-            if (!::dirsProvider.isInitialized) dirsProvider = DefaultDirsProvider()
+            if (!::dirsProvider.isInitialized) dirsProvider = DefaultDirsProvider(instrumentation)
             if (!::resourcesRootDirsProvider.isInitialized) resourcesRootDirsProvider = DefaultResourcesRootDirsProvider()
             if (!::resourcesDirNameProvider.isInitialized) resourcesDirNameProvider = DefaultResourcesDirNameProvider()
             if (!::resourcesDirsProvider.isInitialized) {
@@ -665,17 +680,40 @@ data class Kaspresso(
             }
 
             if (!::adbServer.isInitialized) adbServer = AdbServerImpl(LogLevel.WARN, libLogger)
-            if (!::apps.isInitialized) apps = AppsImpl(libLogger, instrumentation.context, uiDevice, adbServer)
-            if (!::activities.isInitialized) activities = ActivitiesImpl(libLogger)
+            if (!::apps.isInitialized) apps = AppsImpl(
+                libLogger,
+                instrumentation.context,
+                instrumentalDependencyProviderFactory.getComponentProvider<AppsImpl>(instrumentation),
+                adbServer
+            )
+            if (!::activities.isInitialized) activities = ActivitiesImpl(libLogger, instrumentation)
             if (!::files.isInitialized) files = FilesImpl(libLogger, adbServer)
-            if (!::network.isInitialized) network = NetworkImpl(libLogger, instrumentation.targetContext, adbServer)
+            if (!::network.isInitialized) network = NetworkImpl(
+                libLogger,
+                instrumentation.targetContext,
+                adbServer
+            )
             if (!::phone.isInitialized) phone = PhoneImpl(libLogger, adbServer)
             if (!::location.isInitialized) location = LocationImpl(libLogger, adbServer)
             if (!::keyboard.isInitialized) keyboard = KeyboardImpl(libLogger, adbServer)
-            if (!::accessibility.isInitialized) accessibility = AccessibilityImpl(libLogger)
-            if (!::permissions.isInitialized) permissions = PermissionsImpl(libLogger, uiDevice)
-            if (!::hackPermissions.isInitialized) hackPermissions = HackPermissionsImpl(instrumentation.uiAutomation, libLogger)
-            if (!::exploit.isInitialized) exploit = ExploitImpl(libLogger, activities, uiDevice, adbServer)
+            if (!::accessibility.isInitialized) accessibility = AccessibilityImpl(
+                instrumentalDependencyProviderFactory.getComponentProvider<AccessibilityImpl>(instrumentation),
+                libLogger
+            )
+            if (!::permissions.isInitialized) permissions = PermissionsImpl(
+                libLogger,
+                instrumentalDependencyProviderFactory.getComponentProvider<PermissionsImpl>(instrumentation)
+            )
+            if (!::hackPermissions.isInitialized) hackPermissions = HackPermissionsImpl(
+                libLogger,
+                instrumentalDependencyProviderFactory.getComponentProvider<HackPermissionsImpl>(instrumentation)
+            )
+            if (!::exploit.isInitialized) exploit = ExploitImpl(
+                libLogger,
+                activities,
+                instrumentalDependencyProviderFactory.getComponentProvider<ExploitImpl>(instrumentation),
+                adbServer
+            )
             if (!::language.isInitialized) language = LanguageImpl(libLogger, instrumentation.targetContext)
             if (!::logcat.isInitialized) logcat = LogcatImpl(libLogger, adbServer)
 
@@ -692,7 +730,10 @@ data class Kaspresso(
                     resourceFilesProvider = resourceFilesProvider,
                     screenshotMaker = CombinedScreenshotMaker(
                         preferredScreenshotMaker = InternalScreenshotMaker(activities, screenshotParams),
-                        fallbackScreenshotMaker = ExternalScreenshotMaker(uiDevice, screenshotParams)
+                        fallbackScreenshotMaker = ExternalScreenshotMaker(
+                            instrumentalDependencyProviderFactory.getComponentProvider<ExternalScreenshotMaker>(instrumentation),
+                            screenshotParams
+                        )
                     )
                 )
             }
@@ -702,7 +743,7 @@ data class Kaspresso(
                     logger = libLogger,
                     resourceFilesProvider = resourceFilesProvider,
                     videoRecorder = VideoRecorderImpl(
-                        uiDevice,
+                        instrumentalDependencyProviderFactory.getComponentProvider<VideoRecorderImpl>(instrumentation),
                         libLogger,
                         videoParams
                     )
@@ -711,7 +752,7 @@ data class Kaspresso(
 
             if (!::viewHierarchyDumper.isInitialized) {
                 viewHierarchyDumper = ViewHierarchyDumperImpl(
-                    uiDevice,
+                    instrumentalDependencyProviderFactory.getComponentProvider<ViewHierarchyDumperImpl>(instrumentation),
                     libLogger,
                     resourceFilesProvider
                 )
@@ -770,32 +811,67 @@ data class Kaspresso(
                 LoggingDeviceWatcherInterceptor(libLogger)
             )
 
-            if (!::viewBehaviorInterceptors.isInitialized) viewBehaviorInterceptors = mutableListOf(
-                AutoScrollViewBehaviorInterceptor(autoScrollParams, libLogger),
-                SystemDialogSafetyViewBehaviorInterceptor(libLogger, uiDevice, adbServer),
-                FlakySafeViewBehaviorInterceptor(flakySafetyParams, libLogger)
-            )
+            if (!::viewBehaviorInterceptors.isInitialized) viewBehaviorInterceptors =
+                if (isAndroidRuntime) mutableListOf(
+                    AutoScrollViewBehaviorInterceptor(autoScrollParams, libLogger),
+                    SystemDialogSafetyViewBehaviorInterceptor(
+                        libLogger,
+                        instrumentalDependencyProviderFactory.getInterceptorProvider<SystemDialogSafetyViewBehaviorInterceptor>(instrumentation),
+                        adbServer
+                    ),
+                    FlakySafeViewBehaviorInterceptor(flakySafetyParams, libLogger)
+                ) else mutableListOf(
+                    AutoScrollViewBehaviorInterceptor(autoScrollParams, libLogger),
+                    FlakySafeViewBehaviorInterceptor(flakySafetyParams, libLogger)
+                )
 
-            if (!::dataBehaviorInterceptors.isInitialized) dataBehaviorInterceptors = mutableListOf(
-                SystemDialogSafetyDataBehaviorInterceptor(libLogger, uiDevice, adbServer),
-                FlakySafeDataBehaviorInterceptor(flakySafetyParams, libLogger)
-            )
+            if (!::dataBehaviorInterceptors.isInitialized) dataBehaviorInterceptors =
+                if (isAndroidRuntime) mutableListOf(
+                    SystemDialogSafetyDataBehaviorInterceptor(
+                        libLogger,
+                        instrumentalDependencyProviderFactory.getInterceptorProvider<SystemDialogSafetyViewBehaviorInterceptor>(instrumentation),
+                        adbServer
+                    ),
+                    FlakySafeDataBehaviorInterceptor(flakySafetyParams, libLogger)
+                ) else mutableListOf(
+                    FlakySafeDataBehaviorInterceptor(flakySafetyParams, libLogger)
+                )
 
-            if (!::webBehaviorInterceptors.isInitialized) webBehaviorInterceptors = mutableListOf(
-                AutoScrollWebBehaviorInterceptor(autoScrollParams, libLogger),
-                SystemDialogSafetyWebBehaviorInterceptor(libLogger, uiDevice, adbServer),
-                FlakySafeWebBehaviorInterceptor(flakySafetyParams, libLogger)
-            )
+            if (!::webBehaviorInterceptors.isInitialized) webBehaviorInterceptors =
+                if (isAndroidRuntime) {
+                    mutableListOf(
+                        AutoScrollWebBehaviorInterceptor(autoScrollParams, libLogger),
+                        SystemDialogSafetyWebBehaviorInterceptor(
+                            libLogger,
+                            instrumentalDependencyProviderFactory.getInterceptorProvider<SystemDialogSafetyViewBehaviorInterceptor>(instrumentation),
+                            adbServer
+                        ),
+                        FlakySafeWebBehaviorInterceptor(flakySafetyParams, libLogger)
+                    )
+                } else {
+                    mutableListOf(
+                        AutoScrollWebBehaviorInterceptor(autoScrollParams, libLogger),
+                        FlakySafeWebBehaviorInterceptor(flakySafetyParams, libLogger)
+                    )
+                }
 
             if (!::objectBehaviorInterceptors.isInitialized) objectBehaviorInterceptors = mutableListOf(
                 AutoScrollObjectBehaviorInterceptor(libLogger, autoScrollParams),
                 UiObjectLoaderBehaviorInterceptor(libLogger),
-                SystemDialogSafetyObjectBehaviorInterceptor(libLogger, uiDevice, adbServer),
+                SystemDialogSafetyObjectBehaviorInterceptor(
+                    libLogger,
+                    instrumentalDependencyProviderFactory.getInterceptorProvider<SystemDialogSafetyViewBehaviorInterceptor>(instrumentation),
+                    adbServer
+                ),
                 FlakySafeObjectBehaviorInterceptor(flakySafetyParams, libLogger)
             )
 
             if (!::deviceBehaviorInterceptors.isInitialized) deviceBehaviorInterceptors = mutableListOf(
-                SystemDialogSafetyDeviceBehaviorInterceptor(libLogger, uiDevice, adbServer),
+                SystemDialogSafetyDeviceBehaviorInterceptor(
+                    libLogger,
+                    instrumentalDependencyProviderFactory.getInterceptorProvider<SystemDialogSafetyViewBehaviorInterceptor>(instrumentation),
+                    adbServer
+                ),
                 FlakySafeDeviceBehaviorInterceptor(flakySafetyParams, libLogger)
             )
 
@@ -840,8 +916,12 @@ data class Kaspresso(
                     hackPermissions = hackPermissions,
                     exploit = exploit,
                     language = language,
-                    logcat = logcat
+                    logcat = logcat,
+                    instrumentalDependencyProvider = instrumentalDependencyProviderFactory.getComponentProvider<Device>(instrumentation),
+                    instrumentation = instrumentation
                 ),
+
+                instrumentalDependencyProvider = instrumentalDependencyProviderFactory.getTestProvider(instrumentation),
 
                 params = Params(
                     flakySafetyParams = flakySafetyParams,
