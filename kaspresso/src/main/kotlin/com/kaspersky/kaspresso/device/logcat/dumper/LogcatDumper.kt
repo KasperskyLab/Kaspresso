@@ -4,7 +4,10 @@ import java.io.File
 
 interface LogcatDumper {
 
-    fun watch()
+    /**
+     * Prepares for future logcat dump to file.
+     */
+    fun charge()
 
     /**
      * Dumps logcat output with specific tag.

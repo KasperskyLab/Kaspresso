@@ -19,7 +19,7 @@ class LogcatDumperImpl(
     private val dateTimeFormat = SimpleDateFormat("MM-dd HH:mm:ss.SSS", Locale.getDefault())
     private var timeDumpFrom: String? = null
 
-    override fun watch() {
+    override fun charge() {
         timeDumpFrom = dateTimeFormat.format(Date())
         logger.i("Logcat buffer may be dumped from $timeDumpFrom")
     }
@@ -31,13 +31,11 @@ class LogcatDumperImpl(
     private fun doDump(tag: String, block: (File.() -> Unit)?) {
         try {
             val logcatFile: File = resourceFilesProvider.provideLogcatFile(tag)
-            logcat.apply {
-                dumpLogcat(
-                    file = logcatFile,
-                    tags = loggerTags,
-                    timeFrom = timeDumpFrom
-                )
-            }
+            logcat.dumpLogcat(
+                file = logcatFile,
+                tags = loggerTags,
+                timeFrom = timeDumpFrom
+            )
             block?.invoke(logcatFile)
         } catch (e: Throwable) {
             logger.e("Logcat dumping error occurred: ${Log.getStackTraceString(e)}")

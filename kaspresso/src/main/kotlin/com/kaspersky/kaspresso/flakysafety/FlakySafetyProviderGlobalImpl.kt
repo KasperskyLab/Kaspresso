@@ -108,7 +108,7 @@ class FlakySafetyProviderGlobalImpl(
         allowedExceptions: Set<Class<out Throwable>>? = null
     ): FlakySafetyParams {
         val defaultParams = kaspresso.params.flakySafetyParams
-        return FlakySafetyParams.custom(
+        return FlakySafetyParams(
             timeoutMs ?: defaultParams.timeoutMs,
             intervalMs ?: defaultParams.intervalMs,
             allowedExceptions ?: defaultParams.allowedExceptions

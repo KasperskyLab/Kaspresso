@@ -9,7 +9,7 @@ import junit.framework.AssertionFailedError
 /**
  * The class that holds all the necessary for [com.kaspersky.kaspresso.flakysafety.FlakySafetyProviderSimpleImpl] parameters.
  */
-class FlakySafetyParams private constructor(
+class FlakySafetyParams(
     timeoutMs: Long,
     intervalMs: Long,
 
@@ -19,27 +19,40 @@ class FlakySafetyParams private constructor(
      */
     val allowedExceptions: Set<Class<out Throwable>>
 ) {
-
     companion object {
+        const val defaultTimeoutMs: Long = 10_000L
+        const val defaultIntervalMs: Long = 500L
+        val defaultAllowedExceptions: Set<Class<out Throwable>> = setOf(
+            PerformException::class.java,
+            NoMatchingViewException::class.java,
+            AssertionError::class.java,
+            AssertionFailedError::class.java,
+            UnfoundedUiObjectException::class.java,
+            StaleObjectException::class.java,
+            IllegalStateException::class.java
+        )
+
         fun default() = FlakySafetyParams(
-            timeoutMs = 10_000L,
-            intervalMs = 500L,
-            allowedExceptions = setOf(
-                PerformException::class.java,
-                NoMatchingViewException::class.java,
-                AssertionError::class.java,
-                AssertionFailedError::class.java,
-                UnfoundedUiObjectException::class.java,
-                StaleObjectException::class.java,
-                IllegalStateException::class.java
-            )
+            timeoutMs = defaultTimeoutMs,
+            intervalMs = defaultIntervalMs,
+            allowedExceptions = defaultAllowedExceptions
         )
 
         fun custom(
-            timeoutMs: Long,
-            intervalMs: Long,
-            allowedExceptions: Set<Class<out Throwable>>
-        ): FlakySafetyParams = FlakySafetyParams(timeoutMs, intervalMs, allowedExceptions)
+            timeoutMs: Long = defaultTimeoutMs,
+            intervalMs: Long = defaultIntervalMs,
+            allowedExceptions: Set<Class<out Throwable>> = defaultAllowedExceptions
+        ): FlakySafetyParams = FlakySafetyParams(
+            timeoutMs = timeoutMs,
+            intervalMs = intervalMs,
+            allowedExceptions = allowedExceptions
+        )
+    }
+
+    init {
+        require(timeoutMs > 0) { "Timeout must be > 0" }
+        require(intervalMs > 0) { "Interval must be > 0" }
+        require(timeoutMs > intervalMs) { "Timeout must be > interval" }
     }
 
     /**
@@ -47,8 +60,10 @@ class FlakySafetyParams private constructor(
      * [com.kaspersky.kaspresso.flakysafety.FlakySafetyProviderSimpleImpl].
      */
     var timeoutMs: Long = timeoutMs
+        @Deprecated("Do not mutate this property, just use public constructor to create new instance")
         set(value) {
-            if (intervalMs >= value) throw IllegalArgumentException("An interval of attempts is shorter than timeout.")
+            require(timeoutMs > 0) { "Timeout must be > 0" }
+            require(timeoutMs > intervalMs) { "Timeout must be > interval" }
             field = value
         }
 
@@ -57,8 +72,10 @@ class FlakySafetyParams private constructor(
      * [com.kaspersky.kaspresso.flakysafety.FlakySafetyProviderSimpleImpl].
      */
     var intervalMs: Long = intervalMs
+        @Deprecated("Do not mutate this property, just use public constructor to create new instance")
         set(value) {
-            if (value >= timeoutMs) throw IllegalArgumentException("An interval of attempts is shorter than timeout.")
+            require(intervalMs > 0) { "Interval must be > 0" }
+            require(timeoutMs > intervalMs) { "Timeout must be > interval" }
             field = value
         }
 }

@@ -46,7 +46,7 @@ class NetworkImpl(
     private val flakySafetyAlgorithm = FlakySafetyAlgorithm(logger)
     private val currentOsVersion = Build.VERSION.SDK_INT
     private val flakySafetyParams: FlakySafetyParams
-        get() = FlakySafetyParams.custom(
+        get() = FlakySafetyParams(
             timeoutMs = 1000,
             intervalMs = 100,
             allowedExceptions = setOf(AdbServerException::class.java)

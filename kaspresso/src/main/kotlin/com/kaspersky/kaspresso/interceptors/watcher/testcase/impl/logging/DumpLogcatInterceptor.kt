@@ -9,7 +9,7 @@ class DumpLogcatInterceptor(
 ) : TestRunWatcherInterceptor {
 
     override fun onTestStarted(testInfo: TestInfo) {
-        logcatDumper.watch()
+        logcatDumper.charge()
     }
 
     override fun onTestFinished(testInfo: TestInfo, success: Boolean) {
