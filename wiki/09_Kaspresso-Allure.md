@@ -109,3 +109,11 @@ And to watch it then in your browser you just call:
 ```
 allure open ~/kaspresso-allure-report
 ```
+After all of this actions you see something like:
+![](https://habrastorage.org/webt/9e/i1/ks/9ei1ks9txbqzquyk5egywvqxj6k.png)
+
+Details for succeeded test:
+![](https://habrastorage.org/webt/tq/t7/ch/tqt7chcdczrgduhoukqhx1ertfc.png)
+
+Details for failed test:
+![](https://habrastorage.org/webt/z_/ml/bj/z_mlbjspdd8uvkw4t3cafh6-g6k.png)
