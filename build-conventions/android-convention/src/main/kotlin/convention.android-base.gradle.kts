@@ -17,8 +17,8 @@ configure<BaseExtension> {
     }
 
     defaultConfig {
-        minSdkVersion(21)
-        targetSdkVersion(29)
+        setMinSdkVersion(21)
+        setTargetSdkVersion(29)
     }
 
     @Suppress("UnstableApiUsage")
@@ -31,5 +31,11 @@ configure<BaseExtension> {
         resValues = false
         shaders = false
         viewBinding = false
+    }
+
+    // This is necessary to use activityScenarioRule in tests
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
 }

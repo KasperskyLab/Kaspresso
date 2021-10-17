@@ -7,7 +7,6 @@ import androidx.annotation.RequiresApi
 import androidx.test.uiautomator.UiDevice
 import com.kaspersky.components.kautomator.common.Environment
 import com.kaspersky.components.kautomator.common.environment
-import com.kaspersky.kaspresso.instrumental.exception.NotSupportedEnvironment
 import com.kaspersky.kaspresso.instrumental.exception.NotSupportedInstrumentalTestException
 
 internal class InstrumentalDependencyProviderImpl(
@@ -19,17 +18,6 @@ internal class InstrumentalDependencyProviderImpl(
         when (val environment = environment) {
             is Environment.AndroidRuntime -> true
             is Environment.Robolectric -> false
-            is Environment.Unknown -> {
-                throw NotSupportedEnvironment(
-                    """
-
-                        The current environment is not supported by Kaspresso.
-                        Some additional info about the current environment: $environment.
-                        Please let us know by creating an issue if you desire to support a new environment that is differ from Android Runtime or JVM with Robolectric support.
-
-                    """.trimIndent()
-                )
-            }
         }
 
     override val uiDevice: UiDevice

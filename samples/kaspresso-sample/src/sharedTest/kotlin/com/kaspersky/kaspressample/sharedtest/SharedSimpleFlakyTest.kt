@@ -15,46 +15,41 @@ class SharedSimpleFlakyTest : TestCase() {
     val activityRule = activityScenarioRule<SharedTestActivity>()
 
     @Test
-    fun test() =
-        before {
-            // check non-nullability of `scenario`
-            activityRule.scenario
-        }.after { // no-op
-        }.run {
-            step("Fill info") {
-                SharedTestScreen {
-                    firstNameEditText {
-                        replaceText("Kaspersky")
-                    }
-                    lastNameEditText {
-                        replaceText("Kaspresso")
-                    }
-                    ageEditText {
-                        replaceText("8")
-                    }
-                    maleButton {
-                        click()
-                    }
+    fun test() = run {
+        step("Fill info") {
+            SharedTestScreen {
+                firstNameEditText {
+                    replaceText("Kaspersky")
                 }
-            }
-
-            step("Verify Full Name info") {
-                SharedTestScreen {
-                    firstNameEditText {
-                        hasText("Kaspersky")
-                    }
-                    lastNameEditText {
-                        hasText("Kaspresso")
-                    }
+                lastNameEditText {
+                    replaceText("Kaspresso")
                 }
-            }
-
-            step("Click on find me button") {
-                SharedTestScreen {
-                    findMeButton {
-                        click()
-                    }
+                ageEditText {
+                    replaceText("8")
+                }
+                maleButton {
+                    click()
                 }
             }
         }
+
+        step("Verify Full Name info") {
+            SharedTestScreen {
+                firstNameEditText {
+                    hasText("Kaspersky")
+                }
+                lastNameEditText {
+                    hasText("Kaspresso")
+                }
+            }
+        }
+
+        step("Click on find me button") {
+            SharedTestScreen {
+                findMeButton {
+                    click()
+                }
+            }
+        }
+    }
 }
