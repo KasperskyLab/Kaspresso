@@ -18,6 +18,8 @@ With Kaspresso, some UI Automator commands run **10 times faster**!
 * Ability to call ADB commands.
 * UI tests writing philosophy, implemented with DSL.
 * Features screenshotting.
+* Robolectric support.
+* Allure support.
 
 And many more!
 
@@ -203,6 +205,17 @@ With Kaspresso, translators can automatically take a screenshot of any screen. I
 ### Configurability
 
 You can tune any part of Kaspresso (read [more](/wiki/03_Kaspresso_configurator.md))
+
+### Robolectric support
+
+You can run your UI-tests on the JVM environment. Additionally, almost all interceptors improving stability, readability and other will work. 
+Read [more](/wiki/08_Kaspresso-Robolectric.md). 
+
+### Allure support
+
+Kaspresso can generate very detailed Allure-reports for each test:
+![](https://habrastorage.org/webt/tq/t7/ch/tqt7chcdczrgduhoukqhx1ertfc.png)
+More information is available [here](/wiki/09_Kaspresso-Allure.md). 
 
 ## Philosophy
 
