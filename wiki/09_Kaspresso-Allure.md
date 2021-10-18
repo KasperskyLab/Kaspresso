@@ -6,7 +6,7 @@ In the new **1.3.0** Kaspresso release the [**allure-framework**](https://github
 In this release, the file-managing classes family that is responsible for providing files for screenshots and logs has been refactored for better usage and extensibility. This change has affected the old classes that are deprecated now (see package com.kaspersky.kaspresso.files). Usage example: [**CustomizedSimpleTest**](../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/simple_tests/CustomizedSimpleTest.kt).
 
 Also, the following interceptors were added:
-1. [**VideoRecordingInterceptor**](../kaspresso/src/main/kotlin/com/kaspersky/kaspresso/interceptors/watcher/testcase/impl/video/VideoRecordingInterceptor.kt). Tests video recording interceptor.
+1. [**VideoRecordingInterceptor**](../kaspresso/src/main/kotlin/com/kaspersky/kaspresso/interceptors/watcher/testcase/impl/video/VideoRecordingInterceptor.kt). Tests video recording interceptor (please not that it was fully tested on emulators with android api 29 and older).
 2. [**DumpViewsInterceptor**](../kaspresso/src/main/kotlin/com/kaspersky/kaspresso/interceptors/watcher/testcase/impl/views/DumpViewsInterceptor.kt). Interceptor that dumps XML-representation of view hierarchy in case of a test failure.
 
 In the package [**com.kaspersky.components.alluresupport.interceptors**](../allure-support/src/main/kotlin/com/kaspersky/components/alluresupport/interceptors), there are special Kaspresso interceptors helping to link and process files for Allure-report.
@@ -43,7 +43,7 @@ class AllureSupportCustomizeTest : TestCase(
 ...
 }
 ```
-If you don't need all of these interceptors providing by [**withAllureSupport**](../allure-support/src/main/kotlin/com/kaspersky/components/alluresupport/AllureSupportKaspressoBuilder.kt) and [**addAllureSupport**](../allure-support/src/main/kotlin/com/kaspersky/components/alluresupport/AllureSupportKaspressoBuilder.kt) functions then you may add only interceptors that you prefer. But please note that [**AllureMapperStepInterceptor.kt**](../allure-support/src/main/kotlin/com/kaspersky/components/alluresupport/interceptors/AllureMapperStepInterceptor.kt) is mandatory for Allure support work. For example, if you don't need videos and view hierarchies after test failures then you can do something like:
+If you don't need all of these interceptors providing by [**withAllureSupport**](../allure-support/src/main/kotlin/com/kaspersky/components/alluresupport/AllureSupportKaspressoBuilder.kt) and [**addAllureSupport**](../allure-support/src/main/kotlin/com/kaspersky/components/alluresupport/AllureSupportKaspressoBuilder.kt) functions then you may add only interceptors that you prefer. But please note that [**AllureMapperStepInterceptor.kt**](../allure-support/src/main/kotlin/com/kaspersky/components/alluresupport/interceptors/step/AllureMapperStepInterceptor.kt) is mandatory for Allure support work. For example, if you don't need videos and view hierarchies after test failures then you can do something like:
 ```kotlin
 class AllureSupportCustomizeTest : TestCase(
     kaspressoBuilder = Kaspresso.Builder.simple().apply {
@@ -64,7 +64,7 @@ class AllureSupportCustomizeTest : TestCase(
 ...
 }
 ```
-[**kaspresso-allure-support-sample**](../samples/kaspresso-allure-support-sample/src/androidTest/kotlin/com/kaspersky/kaspresso/alluresupport/sample) is available to watch, to launch and to experiment with all of this staff.
+[**kaspresso-allure-support-sample**](../samples/kaspresso-allure-support-sample/src/androidTest/java/com/kaspersky/kaspresso/alluresupport/sample) is available to watch, to launch and to experiment with all of this staff.
 
 ## _Watch result_
 So you added the list of needed Allure-supporting interceptors to your Kaspresso configuration and launched the test. After the test finishes there will be **sdcard/allure-results** dir created on the device with all the files processed to be included to Allure-report.
