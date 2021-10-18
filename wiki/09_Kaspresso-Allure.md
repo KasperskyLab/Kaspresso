@@ -64,7 +64,7 @@ class AllureSupportCustomizeTest : TestCase(
 ...
 }
 ```
-[**kaspresso-allure-support-sample**](../samples/kaspresso-allure-support-sample/src/androidTest/java/com/kaspersky/kaspresso/alluresupport/sample) is available to watch, to launch and to experiment with all of this staff.
+[**kaspresso-allure-support-sample**](../samples/kaspresso-allure-support-sample/src/androidTest/kotlin/com/kaspersky/kaspresso/alluresupport/sample) is available to watch, to launch and to experiment with all of this staff.
 
 ## _Watch result_
 So you added the list of needed Allure-supporting interceptors to your Kaspresso configuration and launched the test. After the test finishes there will be **sdcard/allure-results** dir created on the device with all the files processed to be included to Allure-report.
