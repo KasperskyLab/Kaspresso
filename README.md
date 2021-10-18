@@ -212,7 +212,7 @@ Read [more](/wiki/08_Kaspresso-Robolectric.md).
 ### Allure support
 
 Kaspresso can generate very detailed Allure-reports for each test:
-![](https://habrastorage.org/webt/9e/i1/ks/9ei1ks9txbqzquyk5egywvqxj6k.png)
+![](https://habrastorage.org/webt/tq/t7/ch/tqt7chcdczrgduhoukqhx1ertfc.png)
 More information is available [here](/wiki/09_Kaspresso-Allure.md). 
 
 ## Philosophy
