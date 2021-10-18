@@ -229,7 +229,7 @@ allprojects {
 
 ```groovy
 dependencies {
-    androidTestImplementation 'com.kaspersky.android-components:kaspresso:1.2.1'
+    androidTestImplementation 'com.kaspersky.android-components:kaspresso:1.3.0'
 }
 ```
 
@@ -253,7 +253,7 @@ repositories {
 }
 
 dependencies {
-    androidTestImplementation 'com.kaspersky.android-components:kaspresso:1.2.2-SNAPSHOT'
+    androidTestImplementation 'com.kaspersky.android-components:kaspresso:1.3.1-SNAPSHOT'
 }
 ```
 
