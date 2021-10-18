@@ -18,6 +18,8 @@ With Kaspresso, some UI Automator commands run **10 times faster**!
 * Ability to call ADB commands.
 * UI tests writing philosophy, implemented with DSL.
 * Features screenshotting.
+* Robolectric support.
+* Allure support.
 
 And many more!
 
