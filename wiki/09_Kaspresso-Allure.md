@@ -133,4 +133,4 @@ Details for failed test:
 
 ## _Details that you need to know_
 By default, Kaspresso-Allure introduces additional timeouts to assure the correctness of a Video recording as much as possible. To summarize, these timeouts increase a test execution time by 5 seconds.
-You are free to change these values by customizing of `videoParams` in `Kaspresso.Builder`. Please, see the example above.
+You are free to change these values by customizing `videoParams` in `Kaspresso.Builder`. See the example above.
