@@ -204,6 +204,17 @@ With Kaspresso, translators can automatically take a screenshot of any screen. I
 
 You can tune any part of Kaspresso (read [more](/wiki/03_Kaspresso_configurator.md))
 
+### Robolectric support
+
+You can run your UI-tests on the JVM environment. Additionally, almost all interceptors improving stability, readability and other will work. 
+Read [more](/wiki/08_Kaspresso-Robolectric.md). 
+
+### Allure support
+
+Kaspresso can generate very detailed Allure-reports for each test:
+![](https://habrastorage.org/webt/9e/i1/ks/9ei1ks9txbqzquyk5egywvqxj6k.png)
+More information is available [here](/wiki/09_Kaspresso-Allure.md). 
+
 ## Philosophy
 
 The tool itself, even the perfect one, can not solve all the problems in writing UI tests. It’s important to know how to write tests and how to organize the entire process. Our team has great experience in introducing autotests in different companies. We shared our knowledge on [writing autotests](/wiki/04_How_to_write_autotests.md).

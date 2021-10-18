@@ -12,9 +12,20 @@ Also, the following interceptors were added:
 In the package [**com.kaspersky.components.alluresupport.interceptors**](../allure-support/src/main/kotlin/com/kaspersky/components/alluresupport/interceptors), there are special Kaspresso interceptors helping to link and process files for Allure-report.
 
 ## _How to use_
-First of all, add the following Gradle dependency to include **allure-support** Kaspresso module:
-```
-androidTestImplementation "com.kaspersky.android-components:allure-support:1.3.0"
+First of all, add the following Gradle dependency and Allure runner to your project's gradle file to include **allure-support** Kaspresso module:
+```groovy
+android {
+    defaultConfig {
+        //...    
+        testInstrumentationRunner "io.qameta.allure.android.runners.AllureAndroidJUnitRunner"
+    }
+    //...
+}
+
+dependencies {
+    //...
+    androidTestImplementation "com.kaspersky.android-components:kaspresso-allure-support:1.3.0"
+}
 ```
 Next, use special [**withAllureSupport**](../allure-support/src/main/kotlin/com/kaspersky/components/alluresupport/AllureSupportKaspressoBuilder.kt) function in your TestCase constructor or in your TestCaseRule to turn on all available Allure-supporting interceptors:
 ```kotlin
@@ -119,3 +130,7 @@ Details for succeeded test:
 
 Details for failed test:
 ![](https://habrastorage.org/webt/z_/ml/bj/z_mlbjspdd8uvkw4t3cafh6-g6k.png)
+
+## _Details that you need to know_
+By default, Kaspresso-Allure introduces additional timeouts to assure correctness of a Video recording as much as possible. To summarize, these timeouts increase a test execution time to 5 seconds.
+You are free to change these values by customizing of `videoParams` in `Kaspresso.Builder`. Please, see the example above.
