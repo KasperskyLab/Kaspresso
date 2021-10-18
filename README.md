@@ -243,20 +243,6 @@ dependencies {
 }
 ```
 
-## Snapshots
-
-Snapshots are available via https://oss.jfrog.org/artifactory/libs-snapshot/com/kaspersky/android-components/
-
-```groovy
-repositories {
-    maven { url 'https://oss.jfrog.org/libs-snapshot' }
-}
-
-dependencies {
-    androidTestImplementation 'com.kaspersky.android-components:kaspresso:1.3.1-SNAPSHOT'
-}
-```
-
 ## Samples
 All samples are available in the [samples](/samples) folder. 
 
