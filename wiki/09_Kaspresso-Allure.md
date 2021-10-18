@@ -132,5 +132,5 @@ Details for failed test:
 ![](https://habrastorage.org/webt/z_/ml/bj/z_mlbjspdd8uvkw4t3cafh6-g6k.png)
 
 ## _Details that you need to know_
-By default, Kaspresso-Allure introduces additional timeouts to assure correctness of a Video recording as much as possible. To summarize, these timeouts increase a test execution time to 5 seconds.
+By default, Kaspresso-Allure introduces additional timeouts to assure the correctness of a Video recording as much as possible. To summarize, these timeouts increase a test execution time by 5 seconds.
 You are free to change these values by customizing of `videoParams` in `Kaspresso.Builder`. Please, see the example above.
