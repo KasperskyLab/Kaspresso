@@ -18,6 +18,7 @@ If you are looking forward of a wiki for old versions then follow links: <br>
 [06. AdbServer](./06_AdbServer.md) <br>
 [07. DocLoc Screenshots](./07_DocLoc.md) <br>
 [08. Kaspresso tests running on the JVM with Robolectric](./08_Kaspresso-Robolectric.md) <br>
+[09. Allure support in Kaspresso](./09_Kaspresso-Allure.md) <br>
 
 ## References
 
