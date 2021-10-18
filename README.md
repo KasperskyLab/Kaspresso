@@ -229,7 +229,7 @@ allprojects {
 
 ```groovy
 dependencies {
-    androidTestImplementation 'com.kaspersky.android-components:kaspresso:1.2.1'
+    androidTestImplementation 'com.kaspersky.android-components:kaspresso:1.3.0'
 }
 ```
 
@@ -240,20 +240,6 @@ The last version with Android Support libraries is:
 ```groovy
 dependencies {
     androidTestImplementation 'com.kaspersky.android-components:kaspresso:1.0.1-support'
-}
-```
-
-## Snapshots
-
-Snapshots are available via https://oss.jfrog.org/artifactory/libs-snapshot/com/kaspersky/android-components/
-
-```groovy
-repositories {
-    maven { url 'https://oss.jfrog.org/libs-snapshot' }
-}
-
-dependencies {
-    androidTestImplementation 'com.kaspersky.android-components:kaspresso:1.2.2-SNAPSHOT'
 }
 ```
 
