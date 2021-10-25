@@ -32,6 +32,7 @@ material = "com.google.android.material:material:1.2.0"
 constraint = "androidx.constraintlayout:constraintlayout:2.0.0"
 
 kakao = "io.github.kakaocup:kakao:3.0.2"
+kakaoCompose = "io.github.kakaocup:compose:0.0.2"
 gson = "com.google.code.gson:gson:2.8.6"
 
 junit = "junit:junit:4.13"
