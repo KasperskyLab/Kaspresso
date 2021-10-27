@@ -368,5 +368,8 @@ Kaspresso is available under the [Apache License, Version 2.0](https://github.co
         <td>
             <a href="https://www.cft.ru"><img src="./users/cft.png" width="140" alt="cft.ru"></a>
         </td>
+        <td>
+            <a href="https://www.superjob.ru"><img src="./users/superjob.png" width="140" alt="superjob.ru"></a>
+        </td>
     </tr>
 </table>
