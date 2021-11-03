@@ -8,8 +8,25 @@ configure<BaseExtension> {
         named("androidTest").configure { java.srcDir("src/androidTest/kotlin") }
     }
 
-    buildToolsVersion("29.0.3")
-    compileSdkVersion(29)
+    // temp solution of the following bug
+    // https://stackoverflow.com/questions/67358179/android-espresso-test-error-no-static-method-loadsingleserviceornull
+    // in the Kaspresso, it is caused by androidx.compose.ui:ui-test-junit4:1.0.3 in Kakao-compose that uses androidx.test.espresso:espresso-core:3.3.0 under the hood
+    // but we expect using of androidx.test.espresso:espresso-core:3.4.0
+    configurations.all {
+        resolutionStrategy {
+            force("androidx.test:monitor:1.4.0")
+        }
+    }
+
+    // temp solution
+    // appeared with kakao-compose library including
+    // similar to https://github.com/Kotlin/kotlinx.coroutines/issues/2023
+    packagingOptions {
+        exclude("META-INF/*")
+    }
+
+    buildToolsVersion("30.0.2")
+    compileSdkVersion(30)
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
