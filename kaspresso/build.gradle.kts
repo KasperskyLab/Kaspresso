@@ -19,6 +19,7 @@ dependencies {
     implementation(libs.kotlinStdlib)
     implementation(libs.gson)
     implementation(projects.adbServer.adbserverDevice)
+    // todo remove woth kakao-compose 0.0.3
     implementation(libs.composeUiTest)
 
     testImplementation(libs.junit)

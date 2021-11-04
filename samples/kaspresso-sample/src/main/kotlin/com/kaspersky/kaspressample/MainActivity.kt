@@ -66,5 +66,11 @@ class MainActivity : AppCompatActivity() {
                 Intent(this, MeasureActivity::class.java)
             )
         }
+
+        activity_main_jetpack_compose_button.setOnClickListener {
+            startActivity(
+                Intent(this, MeasureActivity::class.java)
+            )
+        }
     }
 }

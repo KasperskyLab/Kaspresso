@@ -1,13 +1,15 @@
 [versions]
-kotlin = "1.4.32"
+kotlin = "1.5.21"
 detekt = "1.18.1"
 espresso = "3.4.0"
 allure = "2.2.7"
+compose = "1.0.2"
+activityCompose = "1.3.1"
 
 [libraries]
 # plugins
 kotlinPlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
-androidPlugin = "com.android.tools.build:gradle:4.1.0"
+androidPlugin = "com.android.tools.build:gradle:4.2.2"
 
 # libraries
 kotlinCli = "org.jetbrains.kotlinx:kotlinx-cli:0.3"
@@ -28,7 +30,16 @@ androidXCore = "androidx.core:core:1.7.0"
 androidXRules = "androidx.test:rules:1.4.0"
 androidXTest = "androidx.test.ext:junit:1.1.3"
 androidXTestKtx = "androidx.test.ext:junit-ktx:1.1.3"
-composeUiTest = "androidx.compose.ui:ui-test:1.0.3"
+
+composeActivity = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
+composeUiTooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
+composeMaterial = { module = "androidx.compose.material:material", version.ref = "compose" }
+composeTestManifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "compose" }
+composeCompiler = { module = "androidx.compose.compiler:compiler", version.ref = "compose" }
+
+composeUiTest = { module = "androidx.compose.ui:ui-test", version.ref = "compose" }
+
+composeJunit = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "compose" }
 
 appcompat = "androidx.appcompat:appcompat:1.3.0"
 material = "com.google.android.material:material:1.2.0"
@@ -55,3 +66,4 @@ allureKotlinAndroid = { module = "io.qameta.allure:allure-kotlin-android", versi
 [bundles]
 espresso = ["espressoCore", "espressoWeb"]
 allure = ["allureKotlinModel", "allureKotlinCommons", "allureKotlinJunit4", "allureKotlinAndroid"]
+compose = ["composeActivity", "composeUiTooling", "composeMaterial", "composeTestManifest", "composeCompiler"]

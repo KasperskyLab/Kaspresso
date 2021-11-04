@@ -10,6 +10,7 @@
     <string name="main_screen_complex_compose_sample_button">Complex compose пример</string>
     <string name="main_screen_idlewaiting_sample_button">Waiting for idle пример</string>
     <string name="main_screen_measure_sample_button">Measure пример</string>
+    <string name="main_screen_jetpack_compose_button">Jetpack Compose примеры</string>
     <string name="main_screen_shared_test">Shared Test with Robolectric пример</string>
 
     <!-- Simple fragment screen -->

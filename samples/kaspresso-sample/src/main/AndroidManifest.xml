@@ -79,6 +79,10 @@
             android:name=".sharedtest.SharedTestActivity"
             android:label="@string/main_screen_shared_test"/>
 
+        <activity
+            android:name=".jetpack_compose.JetpackComposeActivity"
+            android:label="@string/main_screen_jetpack_compose_button"/>
+
         <service
             android:name=".device.DeviceSampleAccessibilityService"
             android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"

@@ -9,6 +9,15 @@ android {
         testInstrumentationRunnerArguments["clearPackageData"] = "true"
     }
 
+    buildFeatures {
+        compose = true
+    }
+
+    composeOptions {
+        kotlinCompilerVersion = libs.versions.kotlin.get()
+        kotlinCompilerExtensionVersion = libs.versions.compose.get()
+    }
+
     sourceSets {
         val main by getting {
             java.srcDir("src/main/kotlin")
@@ -37,6 +46,7 @@ dependencies {
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.constraint)
+    implementation(libs.bundles.compose)
 
     androidTestImplementation(libs.runner)
     androidTestImplementation(libs.junit)
@@ -44,6 +54,7 @@ dependencies {
     androidTestImplementation(libs.androidXRules)
     androidTestImplementation(libs.androidXTestKtx)
     androidTestImplementation(libs.androidXTest)
+    androidTestImplementation(libs.composeJunit)
 
     androidTestUtil(libs.orchestrator)
 
@@ -54,6 +65,7 @@ dependencies {
     testImplementation(libs.androidXTestKtx)
     testImplementation(libs.androidXTest)
     testImplementation(libs.robolectric)
+    testImplementation(libs.composeJunit)
 
     debugImplementation(libs.fragmentTesting)
 }
