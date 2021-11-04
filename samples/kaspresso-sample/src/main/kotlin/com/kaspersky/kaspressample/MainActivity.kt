@@ -7,6 +7,7 @@ import com.kaspersky.kaspressample.compose.ComplexComposeSampleActivity
 import com.kaspersky.kaspressample.continuously.ContinuouslySampleActivity
 import com.kaspersky.kaspressample.flaky.CommonFlakyActivity
 import com.kaspersky.kaspressample.idlingwait.WaitForIdleActivity
+import com.kaspersky.kaspressample.jetpack_compose.JetpackComposeActivity
 import com.kaspersky.kaspressample.measure.MeasureActivity
 import com.kaspersky.kaspressample.simple.SimpleActivity
 import com.kaspersky.kaspressample.upgrade.UpgradeTestActivity
@@ -69,7 +70,7 @@ class MainActivity : AppCompatActivity() {
 
         activity_main_jetpack_compose_button.setOnClickListener {
             startActivity(
-                Intent(this, MeasureActivity::class.java)
+                Intent(this, JetpackComposeActivity::class.java)
             )
         }
     }

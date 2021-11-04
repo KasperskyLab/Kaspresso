@@ -25,8 +25,8 @@ configure<BaseExtension> {
         exclude("META-INF/*")
     }
 
-    buildToolsVersion("30.0.2")
-    compileSdkVersion(30)
+    buildToolsVersion("30.0.3")
+    compileSdkVersion(31)
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8

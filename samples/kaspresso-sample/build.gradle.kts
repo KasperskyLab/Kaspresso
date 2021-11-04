@@ -47,6 +47,11 @@ dependencies {
     implementation(libs.material)
     implementation(libs.constraint)
     implementation(libs.bundles.compose)
+    implementation(libs.lifecycleViewModelKtx)
+    implementation(libs.lifecycleLiveDataKtx)
+    implementation(libs.composeNavigation)
+    implementation(libs.lifecycleViewModelComposeKtx)
+    implementation(libs.composeRuntimeLiveData)
 
     androidTestImplementation(libs.runner)
     androidTestImplementation(libs.junit)
