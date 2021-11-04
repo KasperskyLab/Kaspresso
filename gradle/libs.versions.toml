@@ -28,6 +28,7 @@ androidXCore = "androidx.core:core:1.7.0"
 androidXRules = "androidx.test:rules:1.4.0"
 androidXTest = "androidx.test.ext:junit:1.1.3"
 androidXTestKtx = "androidx.test.ext:junit-ktx:1.1.3"
+composeUiTest = "androidx.compose.ui:ui-test:1.0.3"
 
 appcompat = "androidx.appcompat:appcompat:1.3.0"
 material = "com.google.android.material:material:1.2.0"
