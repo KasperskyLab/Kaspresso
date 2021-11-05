@@ -47,32 +47,16 @@ class ObjectAutoScrollProviderImpl(
      * @return the result of [action] invocation.
      */
     override fun <T> scroll(interaction: UiObjectInteraction, action: () -> T, cachedError: Throwable): T {
-        /**
-         *  Looks for a scrollable content
-         */
-        val scrollable = UiScrollable(UiSelector().scrollable(true))
-
-        /**
-         * Scrolls to the bottom and looks for the given view. Invokes the action if the view was found.
-         */
-        do {
-            if (interaction.tryToFindUiObject()) {
-                logger.i("UiView autoscroll successfully performed.")
-                return action.invoke()
-            }
-        } while (scrollable.scrollForward())
-
-        /**
-         * Scrolls to the beginning and looks for the given view. Invokes the action if the view was found.
-         */
-        do {
-            if (interaction.tryToFindUiObject()) {
-                logger.i("UiView autoscroll successfully performed.")
-                return action.invoke()
-            }
-        } while (scrollable.scrollBackward())
-
-        logger.i("UiObject autoscroll did not help. Throwing exception.")
-        throw cachedError
+        return try {
+            // Looks for a scrollable content
+            val scrollable = UiScrollable(UiSelector().scrollable(true))
+            // Scrolls to the bottom and looks for the given view. Invokes the action if the view was found.
+            scrollable.scrollForward()
+            logger.i("UiView autoscroll successfully performed.")
+            action.invoke()
+        } catch (error: Throwable) {
+            logger.i("UiObject autoscroll did not help. Throwing exception.")
+            throw cachedError
+        }
     }
 }

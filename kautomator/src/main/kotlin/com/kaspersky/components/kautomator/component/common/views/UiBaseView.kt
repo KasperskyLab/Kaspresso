@@ -38,7 +38,6 @@ open class UiBaseView<out T>(selector: UiViewSelector) : UiBaseActions, UiBaseAs
             selector,
             "Object type=${this::class.java.simpleName}"
         )
-        delegate.loadView()
         delegate
     }
 
@@ -55,7 +54,6 @@ open class UiBaseView<out T>(selector: UiViewSelector) : UiBaseActions, UiBaseAs
      * Operator that allows usage of DSL style
      */
     operator fun invoke(function: T.() -> Unit) {
-        view.loadView()
         function(this as T)
     }
 }

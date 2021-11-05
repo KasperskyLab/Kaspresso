@@ -16,21 +16,14 @@ class UiObjectInteraction(
     val description: String
 ) : UiInteraction<UiObjectAssertion, UiObjectAction> {
 
-    var uiObject2: UiObject2? = null
-        private set
-
-    /**
-     * Tries to find UiObject2 with given selector
-     * @return true if object was found, false otherwise
-     */
-    fun tryToFindUiObject(): Boolean {
-        val uiObjects = device.findObjects(selector.bySelector)
-        if (uiObjects.isNotEmpty() && selector.index < uiObjects.size) {
-            uiObject2 = uiObjects[selector.index]
-            return true
+    private val uiObject2: UiObject2?
+        get() {
+            val uiObjects = device.findObjects(selector.bySelector)
+            if (uiObjects.isNotEmpty() && selector.index < uiObjects.size) {
+                return uiObjects[selector.index]
+            }
+            return null
         }
-        return false
-    }
 
     override fun check(assertion: UiObjectAssertion) {
         assertion.execute(uiObject2 ?: throw UnfoundedUiObjectException(selector))
