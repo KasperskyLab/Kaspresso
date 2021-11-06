@@ -16,14 +16,16 @@ class UiObjectInteraction(
     val description: String
 ) : UiInteraction<UiObjectAssertion, UiObjectAction> {
 
-    private val uiObject2: UiObject2?
-        get() {
-            val uiObjects = device.findObjects(selector.bySelector)
-            if (uiObjects.isNotEmpty() && selector.index < uiObjects.size) {
-                return uiObjects[selector.index]
-            }
-            return null
+    var uiObject2: UiObject2? = calculateUiObject()
+        private set
+
+    private fun calculateUiObject(): UiObject2? {
+        val uiObjects = device.findObjects(selector.bySelector)
+        if (uiObjects.isNotEmpty() && selector.index < uiObjects.size) {
+            return uiObjects[selector.index]
         }
+        return null
+    }
 
     override fun check(assertion: UiObjectAssertion) {
         assertion.execute(uiObject2 ?: throw UnfoundedUiObjectException(selector))
@@ -31,6 +33,10 @@ class UiObjectInteraction(
 
     override fun perform(action: UiObjectAction) {
         action.execute(uiObject2 ?: throw UnfoundedUiObjectException(selector))
+    }
+
+    fun reFindUiObject() {
+        uiObject2 = calculateUiObject()
     }
 
     override fun toString(): String {
