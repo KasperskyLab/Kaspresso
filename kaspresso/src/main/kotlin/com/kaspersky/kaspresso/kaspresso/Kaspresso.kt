@@ -71,6 +71,9 @@ import com.kaspersky.kaspresso.interceptors.behavior.ViewBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.WebBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.impl.autoscroll.AutoScrollViewBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.impl.autoscroll.AutoScrollWebBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behavior.impl.failure.FailureLoggingDataBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behavior.impl.failure.FailureLoggingViewBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behavior.impl.failure.FailureLoggingWebBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.impl.flakysafety.FlakySafeDataBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.impl.flakysafety.FlakySafeViewBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.impl.flakysafety.FlakySafeWebBehaviorInterceptor
@@ -78,11 +81,14 @@ import com.kaspersky.kaspresso.interceptors.behavior.impl.systemsafety.SystemDia
 import com.kaspersky.kaspresso.interceptors.behavior.impl.systemsafety.SystemDialogSafetyViewBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.impl.systemsafety.SystemDialogSafetyWebBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behaviorcompose.SemanticsBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behaviorcompose.impl.failure.FailureLoggingSemanticsBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behaviorcompose.impl.flakysafety.FlakySafeSemanticsBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behaviorcompose.impl.systemsafety.SystemDialogSafetySemanticsBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.DeviceBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.ObjectBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.autoscroll.AutoScrollObjectBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.failure.FailureLoggingDeviceBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.failure.FailureLoggingObjectBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.flakysafety.FlakySafeDeviceBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.flakysafety.FlakySafeObjectBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.systemsafety.SystemDialogSafetyDeviceBehaviorInterceptor
@@ -851,10 +857,12 @@ data class Kaspresso(
                         instrumentalDependencyProviderFactory.getInterceptorProvider<SystemDialogSafetyViewBehaviorInterceptor>(instrumentation),
                         adbServer
                     ),
-                    FlakySafeViewBehaviorInterceptor(flakySafetyParams, libLogger)
+                    FlakySafeViewBehaviorInterceptor(flakySafetyParams, libLogger),
+                    FailureLoggingViewBehaviorInterceptor(libLogger)
                 ) else mutableListOf(
                     AutoScrollViewBehaviorInterceptor(autoScrollParams, libLogger),
-                    FlakySafeViewBehaviorInterceptor(flakySafetyParams, libLogger)
+                    FlakySafeViewBehaviorInterceptor(flakySafetyParams, libLogger),
+                    FailureLoggingViewBehaviorInterceptor(libLogger)
                 )
 
             if (!::dataBehaviorInterceptors.isInitialized) dataBehaviorInterceptors =
@@ -864,9 +872,11 @@ data class Kaspresso(
                         instrumentalDependencyProviderFactory.getInterceptorProvider<SystemDialogSafetyViewBehaviorInterceptor>(instrumentation),
                         adbServer
                     ),
-                    FlakySafeDataBehaviorInterceptor(flakySafetyParams, libLogger)
+                    FlakySafeDataBehaviorInterceptor(flakySafetyParams, libLogger),
+                    FailureLoggingDataBehaviorInterceptor(libLogger)
                 ) else mutableListOf(
-                    FlakySafeDataBehaviorInterceptor(flakySafetyParams, libLogger)
+                    FlakySafeDataBehaviorInterceptor(flakySafetyParams, libLogger),
+                    FailureLoggingDataBehaviorInterceptor(libLogger)
                 )
 
             if (!::webBehaviorInterceptors.isInitialized) webBehaviorInterceptors =
@@ -878,12 +888,14 @@ data class Kaspresso(
                             instrumentalDependencyProviderFactory.getInterceptorProvider<SystemDialogSafetyViewBehaviorInterceptor>(instrumentation),
                             adbServer
                         ),
-                        FlakySafeWebBehaviorInterceptor(flakySafetyParams, libLogger)
+                        FlakySafeWebBehaviorInterceptor(flakySafetyParams, libLogger),
+                        FailureLoggingWebBehaviorInterceptor(libLogger)
                     )
                 } else {
                     mutableListOf(
                         AutoScrollWebBehaviorInterceptor(autoScrollParams, libLogger),
-                        FlakySafeWebBehaviorInterceptor(flakySafetyParams, libLogger)
+                        FlakySafeWebBehaviorInterceptor(flakySafetyParams, libLogger),
+                        FailureLoggingWebBehaviorInterceptor(libLogger)
                     )
                 }
 
@@ -894,7 +906,8 @@ data class Kaspresso(
                     instrumentalDependencyProviderFactory.getInterceptorProvider<SystemDialogSafetyViewBehaviorInterceptor>(instrumentation),
                     adbServer
                 ),
-                FlakySafeObjectBehaviorInterceptor(flakySafetyParams, libLogger)
+                FlakySafeObjectBehaviorInterceptor(flakySafetyParams, libLogger),
+                FailureLoggingObjectBehaviorInterceptor(libLogger)
             )
 
             if (!::deviceBehaviorInterceptors.isInitialized) deviceBehaviorInterceptors = mutableListOf(
@@ -903,7 +916,8 @@ data class Kaspresso(
                     instrumentalDependencyProviderFactory.getInterceptorProvider<SystemDialogSafetyViewBehaviorInterceptor>(instrumentation),
                     adbServer
                 ),
-                FlakySafeDeviceBehaviorInterceptor(flakySafetyParams, libLogger)
+                FlakySafeDeviceBehaviorInterceptor(flakySafetyParams, libLogger),
+                FailureLoggingDeviceBehaviorInterceptor(libLogger)
             )
 
             if (!::semanticsBehaviorInterceptors.isInitialized) semanticsBehaviorInterceptors =
@@ -914,11 +928,13 @@ data class Kaspresso(
                             instrumentalDependencyProviderFactory.getInterceptorProvider<SystemDialogSafetyViewBehaviorInterceptor>(instrumentation),
                             adbServer
                         ),
-                        FlakySafeSemanticsBehaviorInterceptor(flakySafetyParams, libLogger)
+                        FlakySafeSemanticsBehaviorInterceptor(flakySafetyParams, libLogger),
+                        FailureLoggingSemanticsBehaviorInterceptor(libLogger)
                     )
                 } else {
                     mutableListOf(
-                        FlakySafeSemanticsBehaviorInterceptor(flakySafetyParams, libLogger)
+                        FlakySafeSemanticsBehaviorInterceptor(flakySafetyParams, libLogger),
+                        FailureLoggingSemanticsBehaviorInterceptor(libLogger)
                     )
                 }
 
