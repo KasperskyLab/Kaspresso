@@ -30,7 +30,10 @@ class FlakySafeObjectBehaviorInterceptor(
         interaction: UiObjectInteraction,
         assertion: UiObjectAssertion,
         activity: () -> T
-    ): T = flakySafely(action = activity)
+    ): T = flakySafely(action = {
+        interaction.reFindUiObject()
+        activity.invoke()
+    })
 
     /**
      * Wraps the given [activity] invocation with the flaky safety.
@@ -43,5 +46,8 @@ class FlakySafeObjectBehaviorInterceptor(
         interaction: UiObjectInteraction,
         action: UiObjectAction,
         activity: () -> T
-    ): T = flakySafely(action = activity)
+    ): T = flakySafely(action = {
+        interaction.reFindUiObject()
+        activity.invoke()
+    })
 }

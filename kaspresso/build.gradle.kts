@@ -10,17 +10,16 @@ publish {
 dependencies {
     api(projects.kautomator)
     api(libs.kakao)
-    api(libs.kakaoCompose)
+//    api(libs.kakaoCompose)
     api(libs.bundles.espresso)
     api(libs.uiAutomator)
     api(libs.androidXCore)
     api(libs.androidXRules)
+    api(files("libs/compose-debug.aar"))
 
     implementation(libs.kotlinStdlib)
     implementation(libs.gson)
     implementation(projects.adbServer.adbserverDevice)
-    // todo remove woth kakao-compose 0.0.3
-    implementation(libs.composeUiTest)
 
     testImplementation(libs.junit)
     testImplementation(libs.truth)
