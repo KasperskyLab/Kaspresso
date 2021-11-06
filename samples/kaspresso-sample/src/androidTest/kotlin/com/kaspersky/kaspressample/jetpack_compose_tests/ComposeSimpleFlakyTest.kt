@@ -16,7 +16,7 @@ class ComposeSimpleFlakyTest : TestCase() {
 
     @Test
     fun test() = run {
-        step("1") {
+        step("Open Flaky screen") {
             ComposeScreen.onComposeScreen<ComposeMainScreen>(composeTestRule) {
                 simpleFlakyButton {
                     performClick()
@@ -24,24 +24,26 @@ class ComposeSimpleFlakyTest : TestCase() {
             }
         }
 
-        step("2") {
+        step("Click on the First button") {
             ComposeScreen.onComposeScreen<ComposeSimpleFlakyScreen>(composeTestRule) {
                 firstButton {
                     assertIsDisplayed()
                     performClick()
                 }
+            }
+        }
 
-                // todo remove it
-                Thread.sleep(5_000)
-
+        step("Click on the Second button") {
+            ComposeScreen.onComposeScreen<ComposeSimpleFlakyScreen>(composeTestRule) {
                 secondButton {
                     assertIsDisplayed()
                     performClick()
                 }
+            }
+        }
 
-                // todo remove it
-                Thread.sleep(5_000)
-
+        step("Interaction with EditText") {
+            ComposeScreen.onComposeScreen<ComposeSimpleFlakyScreen>(composeTestRule) {
                 editText {
                     assertIsDisplayed()
                     assertTextContains("Some text")

@@ -21,8 +21,10 @@ class LoggingSemanticsWatcherInterceptor(
      * @param assertion responsible for performing an activity (assertion) on the given [interaction]
      */
     override fun interceptCheck(interaction: ComposeInteraction, assertion: ComposeAssertion) {
-        // todo
-        logger.i("Compose assertion")
+        logger.i(
+            "Operation: Check=${assertion.type}(description={${assertion.description}}).\n" +
+                    "ComposeInteraction: $interaction."
+        )
     }
 
     /**
@@ -32,7 +34,9 @@ class LoggingSemanticsWatcherInterceptor(
      * @param action responsible for performing an activity (action) on the given [interaction]
      */
     override fun interceptPerform(interaction: ComposeInteraction, action: ComposeAction) {
-        // todo
-        logger.i("Compose action")
+        logger.i(
+            "Operation: Perform=${action.type}(description={${action.description}}).\n" +
+                    "ComposeInteraction: $interaction."
+        )
     }
 }
