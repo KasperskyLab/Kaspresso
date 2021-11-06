@@ -5,7 +5,7 @@ import com.kaspersky.kaspressample.jetpack_compose.JetpackComposeActivity
 import com.kaspersky.kaspressample.jetpack_compose_screen.ComposeMainScreen
 import com.kaspersky.kaspressample.jetpack_compose_screen.ComposeSimpleFlakyScreen
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
-import io.github.kakaocup.compose.node.element.ComposeScreen
+import io.github.kakaocup.compose.node.element.ComposeScreen.Companion.onComposeScreen
 import org.junit.Rule
 import org.junit.Test
 
@@ -17,7 +17,7 @@ class ComposeSimpleFlakyTest : TestCase() {
     @Test
     fun test() = run {
         step("Open Flaky screen") {
-            ComposeScreen.onComposeScreen<ComposeMainScreen>(composeTestRule) {
+            onComposeScreen<ComposeMainScreen>(composeTestRule) {
                 simpleFlakyButton {
                     performClick()
                 }
@@ -25,7 +25,7 @@ class ComposeSimpleFlakyTest : TestCase() {
         }
 
         step("Click on the First button") {
-            ComposeScreen.onComposeScreen<ComposeSimpleFlakyScreen>(composeTestRule) {
+            onComposeScreen<ComposeSimpleFlakyScreen>(composeTestRule) {
                 firstButton {
                     assertIsDisplayed()
                     performClick()
@@ -34,7 +34,7 @@ class ComposeSimpleFlakyTest : TestCase() {
         }
 
         step("Click on the Second button") {
-            ComposeScreen.onComposeScreen<ComposeSimpleFlakyScreen>(composeTestRule) {
+            onComposeScreen<ComposeSimpleFlakyScreen>(composeTestRule) {
                 secondButton {
                     assertIsDisplayed()
                     performClick()
@@ -43,7 +43,7 @@ class ComposeSimpleFlakyTest : TestCase() {
         }
 
         step("Interaction with EditText") {
-            ComposeScreen.onComposeScreen<ComposeSimpleFlakyScreen>(composeTestRule) {
+            onComposeScreen<ComposeSimpleFlakyScreen>(composeTestRule) {
                 editText {
                     assertIsDisplayed()
                     assertTextContains("Some text")
