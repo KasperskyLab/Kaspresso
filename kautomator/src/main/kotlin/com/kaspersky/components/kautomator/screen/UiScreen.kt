@@ -35,6 +35,13 @@ abstract class UiScreen<out T : UiScreen<T>> : UiScreenActions {
     companion object {
         internal val UI_OBJECT_INTERCEPTORS: Deque<UiInterceptor<UiObjectInteraction, UiObjectAssertion, UiObjectAction>> = LinkedList()
         internal val UI_DEVICE_INTERCEPTORS: Deque<UiInterceptor<UiDeviceInteraction, UiDeviceAssertion, UiDeviceAction>> = LinkedList()
+
+        inline fun <reified T : UiScreen<T>> onUiScreen(noinline function: T.() -> Unit): T {
+            return T::class.java
+                .getDeclaredConstructor()
+                .newInstance()
+                .apply { this(function) }
+        }
     }
 
     abstract val packageName: String
