@@ -4,10 +4,15 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 class SimpleFlakyViewModel : ViewModel() {
+
+    // interesting problem on the JVM environment
+    // default viewModelScope doesn't work correctly
+    // quick research has not showed the possible reason
+    // we think it will be fixed on later versions of related libraries
+    private val customScope = viewModelScope + Dispatchers.IO
 
     private val _mutableSimpleFlakyState = MutableLiveData(
         SimpleFlakyState(
@@ -21,16 +26,16 @@ class SimpleFlakyViewModel : ViewModel() {
     val simpleFlakyStateLiveData: LiveData<SimpleFlakyState> = _mutableSimpleFlakyState
 
     fun firstButtonClick() {
-        viewModelScope.launch {
-            delay(3_000)
-            _mutableSimpleFlakyState.value = _mutableSimpleFlakyState.value?.copy(secondButtonVisibility = true)
+        customScope.launch {
+            delay(3000L)
+            _mutableSimpleFlakyState.postValue(_mutableSimpleFlakyState.value?.copy(secondButtonVisibility = true))
         }
     }
 
     fun secondButtonClick() {
-        viewModelScope.launch {
+        customScope.launch {
             delay(3_000)
-            _mutableSimpleFlakyState.value = _mutableSimpleFlakyState.value?.copy(editTextVisibility = true)
+            _mutableSimpleFlakyState.postValue(_mutableSimpleFlakyState.value?.copy(editTextVisibility = true))
         }
     }
 
