@@ -19,18 +19,10 @@ android {
     }
 
     sourceSets {
-        val main by getting {
-            java.srcDir("src/main/kotlin")
-        }
-
         // configure shared test folder
         val sharedTestFolder = "src/sharedTest/kotlin"
-        val androidTest by getting {
-            java.srcDirs("src/androidTest/kotlin", sharedTestFolder)
-        }
-        val test by getting {
-            java.srcDirs("src/test/java", sharedTestFolder)
-        }
+        named("test").configure { java.srcDirs("src/test/kotlin", sharedTestFolder) }
+        named("androidTest").configure { java.srcDirs("src/androidTest/kotlin", sharedTestFolder) }
     }
 
     testOptions {
