@@ -1,7 +1,7 @@
 package com.kaspersky.kaspressample.jetpack_compose_screen
 
 import androidx.compose.ui.test.SemanticsNodeInteractionsProvider
-import com.kaspersky.kaspressample.jetpack_compose.resources.C
+import com.kaspersky.kaspressample.jetpackcompose.resources.C
 import io.github.kakaocup.compose.node.element.ComposeScreen
 import io.github.kakaocup.compose.node.element.KNode
 

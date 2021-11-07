@@ -1,10 +1,12 @@
-package com.kaspersky.kaspressample.jetpack_compose.features.simple_flaky
+package com.kaspersky.kaspressample.jetpackcompose.features.flaky
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.*
+
+private const val TIMEOUT = 1_000L
 
 class SimpleFlakyViewModel : ViewModel() {
 
@@ -27,14 +29,14 @@ class SimpleFlakyViewModel : ViewModel() {
 
     fun firstButtonClick() {
         customScope.launch {
-            delay(3000L)
+            delay(TIMEOUT)
             _mutableSimpleFlakyState.postValue(_mutableSimpleFlakyState.value?.copy(secondButtonVisibility = true))
         }
     }
 
     fun secondButtonClick() {
         customScope.launch {
-            delay(3_000)
+            delay(TIMEOUT)
             _mutableSimpleFlakyState.postValue(_mutableSimpleFlakyState.value?.copy(editTextVisibility = true))
         }
     }

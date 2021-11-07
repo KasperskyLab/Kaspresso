@@ -2,7 +2,7 @@ package com.kaspersky.kaspressample.jetpack_compose_tests
 
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.kaspersky.kaspressample.jetpack_compose.JetpackComposeActivity
+import com.kaspersky.kaspressample.jetpackcompose.JetpackComposeActivity
 import com.kaspersky.kaspressample.jetpack_compose_screen.ComposeMainScreen
 import com.kaspersky.kaspressample.jetpack_compose_screen.ComposeSimpleFlakyScreen
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase

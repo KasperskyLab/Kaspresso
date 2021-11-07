@@ -1,4 +1,4 @@
-package com.kaspersky.kaspressample.jetpack_compose.features.main
+package com.kaspersky.kaspressample.jetpackcompose.features.main
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
@@ -12,7 +12,7 @@ import androidx.compose.ui.semantics.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.kaspersky.kaspressample.R
-import com.kaspersky.kaspressample.jetpack_compose.resources.C
+import com.kaspersky.kaspressample.jetpackcompose.resources.C
 
 @Composable
 fun MainScreen(

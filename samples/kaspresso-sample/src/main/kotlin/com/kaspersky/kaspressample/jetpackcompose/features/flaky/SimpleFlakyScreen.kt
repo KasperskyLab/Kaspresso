@@ -1,4 +1,4 @@
-package com.kaspersky.kaspressample.jetpack_compose.features.simple_flaky
+package com.kaspersky.kaspressample.jetpackcompose.features.flaky
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.kaspersky.kaspressample.R
-import com.kaspersky.kaspressample.jetpack_compose.resources.C
+import com.kaspersky.kaspressample.jetpackcompose.resources.C
 
 @Composable
 fun SimpleFlakyScreen(

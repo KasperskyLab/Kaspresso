@@ -1,4 +1,4 @@
-package com.kaspersky.kaspressample.jetpack_compose.features.simple_flaky
+package com.kaspersky.kaspressample.jetpackcompose.features.flaky
 
 data class SimpleFlakyState(
     val firstButtonVisibility: Boolean,

@@ -1,4 +1,4 @@
-package com.kaspersky.kaspressample.jetpack_compose
+package com.kaspersky.kaspressample.jetpackcompose
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
@@ -8,10 +8,10 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.kaspersky.kaspressample.jetpack_compose.features.main.MainScreen
-import com.kaspersky.kaspressample.jetpack_compose.features.simple_flaky.SimpleFlakyScreen
-import com.kaspersky.kaspressample.jetpack_compose.features.simple_flaky.SimpleFlakyViewModel
-import com.kaspersky.kaspressample.jetpack_compose.resources.C
+import com.kaspersky.kaspressample.jetpackcompose.features.main.MainScreen
+import com.kaspersky.kaspressample.jetpackcompose.features.flaky.SimpleFlakyScreen
+import com.kaspersky.kaspressample.jetpackcompose.features.flaky.SimpleFlakyViewModel
+import com.kaspersky.kaspressample.jetpackcompose.resources.C
 
 class JetpackComposeActivity : AppCompatActivity() {
 

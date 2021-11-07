@@ -1,4 +1,4 @@
-package com.kaspersky.kaspressample.jetpack_compose.resources
+package com.kaspersky.kaspressample.jetpackcompose.resources
 
 // Like R, but C
 object C {

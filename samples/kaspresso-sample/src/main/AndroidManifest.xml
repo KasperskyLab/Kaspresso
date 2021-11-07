@@ -80,7 +80,7 @@
             android:label="@string/main_screen_shared_test"/>
 
         <activity
-            android:name=".jetpack_compose.JetpackComposeActivity"
+            android:name=".jetpackcompose.JetpackComposeActivity"
             android:label="@string/main_screen_jetpack_compose_button"/>
 
         <service
