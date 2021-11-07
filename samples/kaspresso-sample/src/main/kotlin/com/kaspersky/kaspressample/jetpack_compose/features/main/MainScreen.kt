@@ -1,4 +1,4 @@
-package com.kaspersky.kaspressample.jetpack_compose.features
+package com.kaspersky.kaspressample.jetpack_compose.features.main
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button

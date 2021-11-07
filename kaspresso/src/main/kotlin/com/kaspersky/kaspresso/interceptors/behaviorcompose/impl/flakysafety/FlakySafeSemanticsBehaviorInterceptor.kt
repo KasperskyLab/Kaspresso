@@ -30,10 +30,7 @@ class FlakySafeSemanticsBehaviorInterceptor(
         interaction: ComposeInteraction,
         assertion: ComposeAssertion,
         activity: () -> T
-    ): T = flakySafely(action = {
-        interaction.reFindNode()
-        activity.invoke()
-    })
+    ): T = flakySafely(action = activity)
 
     /**
      * Wraps the given [activity] invocation with the flaky safety.
@@ -46,8 +43,5 @@ class FlakySafeSemanticsBehaviorInterceptor(
         interaction: ComposeInteraction,
         action: ComposeAction,
         activity: () -> T
-    ): T = flakySafely(action = {
-        interaction.reFindNode()
-        activity.invoke()
-    })
+    ): T = flakySafely(action = activity)
 }

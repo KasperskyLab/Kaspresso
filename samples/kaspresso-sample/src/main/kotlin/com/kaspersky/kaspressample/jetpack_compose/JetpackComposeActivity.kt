@@ -8,7 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.kaspersky.kaspressample.jetpack_compose.features.MainScreen
+import com.kaspersky.kaspressample.jetpack_compose.features.main.MainScreen
 import com.kaspersky.kaspressample.jetpack_compose.features.simple_flaky.SimpleFlakyScreen
 import com.kaspersky.kaspressample.jetpack_compose.features.simple_flaky.SimpleFlakyViewModel
 import com.kaspersky.kaspressample.jetpack_compose.resources.C
