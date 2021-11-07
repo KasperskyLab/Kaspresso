@@ -1,6 +1,8 @@
 package com.kaspersky.kaspressample.jetpack_compose.features.simple_flaky
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -31,9 +33,10 @@ fun SimpleFlakyScreen(
         modifier = Modifier
             .fillMaxSize()
             .padding(8.dp)
+            .verticalScroll(rememberScrollState())
             .semantics { testTag = C.Tag.simple_flaky_screen_container }
     ) {
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(1000.dp))
 
         if (simpleFlakyState.firstButtonVisibility) {
             Button(

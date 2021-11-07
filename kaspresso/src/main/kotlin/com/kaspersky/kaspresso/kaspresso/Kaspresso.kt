@@ -81,6 +81,7 @@ import com.kaspersky.kaspresso.interceptors.behavior.impl.systemsafety.SystemDia
 import com.kaspersky.kaspresso.interceptors.behavior.impl.systemsafety.SystemDialogSafetyViewBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.impl.systemsafety.SystemDialogSafetyWebBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behaviorcompose.SemanticsBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behaviorcompose.impl.autoscroll.AutoScrollSemanticsBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behaviorcompose.impl.elementloader.ElementLoaderSemanticsBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behaviorcompose.impl.failure.FailureLoggingSemanticsBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behaviorcompose.impl.flakysafety.FlakySafeSemanticsBehaviorInterceptor
@@ -927,6 +928,7 @@ data class Kaspresso(
                 if (isAndroidRuntime) {
                     mutableListOf(
                         ElementLoaderSemanticsBehaviorInterceptor(libLogger),
+                        AutoScrollSemanticsBehaviorInterceptor(libLogger, autoScrollParams),
                         SystemDialogSafetySemanticsBehaviorInterceptor(
                             libLogger,
                             instrumentalDependencyProviderFactory.getInterceptorProvider<SystemDialogSafetyViewBehaviorInterceptor>(instrumentation),
@@ -938,6 +940,7 @@ data class Kaspresso(
                 } else {
                     mutableListOf(
                         ElementLoaderSemanticsBehaviorInterceptor(libLogger),
+                        AutoScrollSemanticsBehaviorInterceptor(libLogger, autoScrollParams),
                         FlakySafeSemanticsBehaviorInterceptor(flakySafetyParams, libLogger),
                         FailureLoggingSemanticsBehaviorInterceptor(libLogger)
                     )

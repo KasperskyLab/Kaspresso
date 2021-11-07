@@ -19,6 +19,7 @@ dependencies {
     implementation(libs.kotlinStdlib)
     implementation(libs.gson)
     implementation(projects.adbServer.adbserverDevice)
+    implementation(libs.composeUiTest)
 
     testImplementation(libs.junit)
     testImplementation(libs.truth)
