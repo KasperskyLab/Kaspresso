@@ -130,6 +130,6 @@ Of course, there is a very obvious last option. Just don't include the test in a
 
 **Further remarks**
 
-As of Robolectric 5.4.1, there are some limitations to sharedTest: those tests run flawless on an emulator/device, but fail on the JVM
+As of Robolectric 4.5.1, there are some limitations to sharedTest: those tests run flawless on an emulator/device, but fail on the JVM
 1) Robolectric-Espresso [does not support Idling resources](https://github.com/robolectric/robolectric/issues/4807) yet
 2) Robolectric-Espresso will not support [tests that start new activities](https://github.com/robolectric/robolectric/issues/5104)(i.e. activity jumping)
