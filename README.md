@@ -280,6 +280,12 @@ Here, it's a detailed instruction:
 <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"/>
+
+<application
+    # storage support for Android API 29         
+    android:requestLegacyExternalStorage="true"
+    ...
+</application>             
 ```
 2. Your test class:
 ```kotlin
