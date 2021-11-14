@@ -903,13 +903,13 @@ data class Kaspresso(
                 }
 
             if (!::objectBehaviorInterceptors.isInitialized) objectBehaviorInterceptors = mutableListOf(
-                ElementLoaderObjectBehaviorInterceptor(libLogger),
                 AutoScrollObjectBehaviorInterceptor(libLogger, autoScrollParams),
                 SystemDialogSafetyObjectBehaviorInterceptor(
                     libLogger,
                     instrumentalDependencyProviderFactory.getInterceptorProvider<SystemDialogSafetyViewBehaviorInterceptor>(instrumentation),
                     adbServer
                 ),
+                ElementLoaderObjectBehaviorInterceptor(libLogger),
                 FlakySafeObjectBehaviorInterceptor(flakySafetyParams, libLogger),
                 FailureLoggingObjectBehaviorInterceptor(libLogger)
             )
@@ -927,20 +927,20 @@ data class Kaspresso(
             if (!::semanticsBehaviorInterceptors.isInitialized) semanticsBehaviorInterceptors =
                 if (isAndroidRuntime) {
                     mutableListOf(
-                        ElementLoaderSemanticsBehaviorInterceptor(libLogger),
                         AutoScrollSemanticsBehaviorInterceptor(libLogger, autoScrollParams),
                         SystemDialogSafetySemanticsBehaviorInterceptor(
                             libLogger,
                             instrumentalDependencyProviderFactory.getInterceptorProvider<SystemDialogSafetyViewBehaviorInterceptor>(instrumentation),
                             adbServer
                         ),
+                        ElementLoaderSemanticsBehaviorInterceptor(libLogger),
                         FlakySafeSemanticsBehaviorInterceptor(flakySafetyParams, libLogger),
                         FailureLoggingSemanticsBehaviorInterceptor(libLogger)
                     )
                 } else {
                     mutableListOf(
-                        ElementLoaderSemanticsBehaviorInterceptor(libLogger),
                         AutoScrollSemanticsBehaviorInterceptor(libLogger, autoScrollParams),
+                        ElementLoaderSemanticsBehaviorInterceptor(libLogger),
                         FlakySafeSemanticsBehaviorInterceptor(flakySafetyParams, libLogger),
                         FailureLoggingSemanticsBehaviorInterceptor(libLogger)
                     )
