@@ -1,12 +1,15 @@
 package com.kaspersky.kaspresso.elementloader
 
+import com.kaspersky.kaspresso.internal.extensions.other.isAllowed
 import com.kaspersky.kaspresso.logger.UiTestLogger
+import com.kaspersky.kaspresso.params.ElementLoaderParams
 
 /**
  * The implementation of the [ElementLoaderProvider] interface
  */
 class ElementLoaderProviderImpl(
     private val logger: UiTestLogger,
+    private val params: ElementLoaderParams,
 ) : ElementLoaderProvider {
 
     /**
@@ -25,11 +28,15 @@ class ElementLoaderProviderImpl(
         return try {
             action.invoke()
         } catch (error: Throwable) {
-            logger.i("Reloading of the element is started")
-            elementLoader.invoke()
-            logger.i("Reloading of the element is finished")
-            logger.i("Repeat action again with the reloaded element")
-            action.invoke()
+            if (error.isAllowed(params.allowedExceptions)) {
+                logger.i("Reloading of the element is started")
+                elementLoader.invoke()
+                logger.i("Reloading of the element is finished")
+                logger.i("Repeat action again with the reloaded element")
+                action.invoke()
+            } else {
+                throw error
+            }
         }
     }
 }

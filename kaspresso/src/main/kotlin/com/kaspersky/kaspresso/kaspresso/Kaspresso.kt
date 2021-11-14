@@ -131,6 +131,7 @@ import com.kaspersky.kaspresso.params.Params
 import com.kaspersky.kaspresso.params.FlakySafetyParams
 import com.kaspersky.kaspresso.params.ContinuouslyParams
 import com.kaspersky.kaspresso.params.AutoScrollParams
+import com.kaspersky.kaspresso.params.ElementLoaderParams
 import com.kaspersky.kaspresso.params.StepParams
 import com.kaspersky.kaspresso.params.ScreenshotParams
 import com.kaspersky.kaspresso.params.VideoParams
@@ -482,6 +483,12 @@ data class Kaspresso(
         lateinit var videoParams: VideoParams
 
         /**
+         * Holds the [ElementLoaderParams] for [com.kaspersky.kaspresso.elementloader.ElementLoaderProvider]'s usage.
+         * If it was not specified, the default implementation is used.
+         */
+        lateinit var elementLoaderParams: ElementLoaderParams
+
+        /**
          * Holds an implementation of [DirsProvider] interface. If it was not specified, the default implementation is used.
          */
         lateinit var dirsProvider: DirsProvider
@@ -760,6 +767,7 @@ data class Kaspresso(
             if (!::stepParams.isInitialized) stepParams = StepParams()
             if (!::screenshotParams.isInitialized) screenshotParams = ScreenshotParams()
             if (!::videoParams.isInitialized) videoParams = VideoParams()
+            if (!::elementLoaderParams.isInitialized) elementLoaderParams = ElementLoaderParams()
 
             if (!::screenshots.isInitialized) {
                 screenshots = ScreenshotsImpl(
@@ -909,7 +917,7 @@ data class Kaspresso(
                     instrumentalDependencyProviderFactory.getInterceptorProvider<SystemDialogSafetyViewBehaviorInterceptor>(instrumentation),
                     adbServer
                 ),
-                ElementLoaderObjectBehaviorInterceptor(libLogger),
+                ElementLoaderObjectBehaviorInterceptor(libLogger, elementLoaderParams),
                 FlakySafeObjectBehaviorInterceptor(flakySafetyParams, libLogger),
                 FailureLoggingObjectBehaviorInterceptor(libLogger)
             )
@@ -933,14 +941,14 @@ data class Kaspresso(
                             instrumentalDependencyProviderFactory.getInterceptorProvider<SystemDialogSafetyViewBehaviorInterceptor>(instrumentation),
                             adbServer
                         ),
-                        ElementLoaderSemanticsBehaviorInterceptor(libLogger),
+                        ElementLoaderSemanticsBehaviorInterceptor(libLogger, elementLoaderParams),
                         FlakySafeSemanticsBehaviorInterceptor(flakySafetyParams, libLogger),
                         FailureLoggingSemanticsBehaviorInterceptor(libLogger)
                     )
                 } else {
                     mutableListOf(
                         AutoScrollSemanticsBehaviorInterceptor(libLogger, autoScrollParams),
-                        ElementLoaderSemanticsBehaviorInterceptor(libLogger),
+                        ElementLoaderSemanticsBehaviorInterceptor(libLogger, elementLoaderParams),
                         FlakySafeSemanticsBehaviorInterceptor(flakySafetyParams, libLogger),
                         FailureLoggingSemanticsBehaviorInterceptor(libLogger)
                     )
@@ -1000,7 +1008,8 @@ data class Kaspresso(
                     autoScrollParams = autoScrollParams,
                     stepParams = stepParams,
                     screenshotParams = screenshotParams,
-                    videoParams = videoParams
+                    videoParams = videoParams,
+                    elementLoaderParams = elementLoaderParams,
                 ),
 
                 viewActionWatcherInterceptors = viewActionWatcherInterceptors,
