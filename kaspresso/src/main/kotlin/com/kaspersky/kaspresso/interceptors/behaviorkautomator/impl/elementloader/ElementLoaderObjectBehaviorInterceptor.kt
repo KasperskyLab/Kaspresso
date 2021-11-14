@@ -30,7 +30,7 @@ class ElementLoaderObjectBehaviorInterceptor(
         assertion: UiObjectAssertion,
         activity: () -> T
     ): T = passAction(
-        elementLoader = { interaction.reCalculateUiObject() },
+        elementLoader = { interaction.reFindUiObject() },
         action = activity
     )
 
@@ -45,7 +45,7 @@ class ElementLoaderObjectBehaviorInterceptor(
         action: UiObjectAction,
         activity: () -> T
     ): T = passAction(
-        elementLoader = { interaction.reCalculateUiObject() },
+        elementLoader = { interaction.reFindUiObject() },
         action = activity
     )
 }

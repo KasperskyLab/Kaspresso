@@ -60,7 +60,7 @@ class ObjectAutoScrollProviderImpl(
                 logger.i("UiObject autoscroll to the bottom successfully performed.")
                 return action.invoke()
             } else {
-                interaction.reCalculateUiObject()
+                interaction.reFindUiObject()
             }
         } while (scrollable.scrollForward())
 
@@ -72,7 +72,7 @@ class ObjectAutoScrollProviderImpl(
                 logger.i("UiObject autoscroll to the beginning successfully performed.")
                 return action.invoke()
             } else {
-                interaction.reCalculateUiObject()
+                interaction.reFindUiObject()
             }
         } while (scrollable.scrollBackward())
 
