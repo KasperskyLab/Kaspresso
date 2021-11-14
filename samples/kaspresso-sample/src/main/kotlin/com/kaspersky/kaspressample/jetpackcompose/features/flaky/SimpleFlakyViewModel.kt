@@ -16,7 +16,7 @@ class SimpleFlakyViewModel : ViewModel() {
     // we think it will be fixed on later versions of related libraries
     private val customScope = viewModelScope + Dispatchers.IO
 
-    private val _mutableSimpleFlakyState = MutableLiveData(
+    private val _simpleFlakyStateLiveData = MutableLiveData(
         SimpleFlakyState(
             firstButtonVisibility = true,
             secondButtonVisibility = false,
@@ -25,23 +25,23 @@ class SimpleFlakyViewModel : ViewModel() {
         )
     )
 
-    val simpleFlakyStateLiveData: LiveData<SimpleFlakyState> = _mutableSimpleFlakyState
+    val simpleFlakyStateLiveData: LiveData<SimpleFlakyState> = _simpleFlakyStateLiveData
 
     fun firstButtonClick() {
         customScope.launch {
             delay(TIMEOUT)
-            _mutableSimpleFlakyState.postValue(_mutableSimpleFlakyState.value?.copy(secondButtonVisibility = true))
+            _simpleFlakyStateLiveData.postValue(_simpleFlakyStateLiveData.value?.copy(secondButtonVisibility = true))
         }
     }
 
     fun secondButtonClick() {
         customScope.launch {
             delay(TIMEOUT)
-            _mutableSimpleFlakyState.postValue(_mutableSimpleFlakyState.value?.copy(editTextVisibility = true))
+            _simpleFlakyStateLiveData.postValue(_simpleFlakyStateLiveData.value?.copy(editTextVisibility = true))
         }
     }
 
     fun editTextChange(text: String) {
-        _mutableSimpleFlakyState.value = _mutableSimpleFlakyState.value?.copy(editText = text)
+        _simpleFlakyStateLiveData.value = _simpleFlakyStateLiveData.value?.copy(editText = text)
     }
 }
