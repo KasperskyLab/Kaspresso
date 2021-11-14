@@ -35,7 +35,7 @@ class UiObjectInteraction(
         action.execute(uiObject2 ?: throw UnfoundedUiObjectException(selector))
     }
 
-    fun reFindUiObject() {
+    fun reCalculateUiObject() {
         uiObject2 = calculateUiObject()
     }
 
