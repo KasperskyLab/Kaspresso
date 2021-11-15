@@ -28,19 +28,11 @@ class DeviceLocationSampleTest : TestCase() {
 
         private val EMPTY_LISTENER = object : LocationListener {
 
-            override fun onLocationChanged(location: Location?) {
+            override fun onLocationChanged(location: Location) {
                 // empty
             }
 
             override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {
-                // empty
-            }
-
-            override fun onProviderEnabled(provider: String?) {
-                // empty
-            }
-
-            override fun onProviderDisabled(provider: String?) {
                 // empty
             }
         }
@@ -99,7 +91,7 @@ class DeviceLocationSampleTest : TestCase() {
 
                 val location = manager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
                 assertEquals(
-                    MUNICH_LOCATION_LAT, location.latitude,
+                    MUNICH_LOCATION_LAT, location!!.latitude,
                     DELTA
                 )
                 assertEquals(

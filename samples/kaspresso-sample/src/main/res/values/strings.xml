@@ -10,6 +10,7 @@
     <string name="main_screen_complex_compose_sample_button">Complex compose sample</string>
     <string name="main_screen_idlewaiting_sample_button">Waiting for idle sample</string>
     <string name="main_screen_measure_sample_button">Measure sample</string>
+    <string name="main_screen_jetpack_compose_button">Jetpack Compose samples</string>
     <string name="main_screen_shared_test">Shared Test with Robolectric sample</string>
 
     <!-- Simple fragment screen -->
@@ -71,6 +72,15 @@
     <string name="compose_screen_dialog_title_2" translatable="false">Dialog #2</string>
     <string name="compose_screen_dialog_message" translatable="false">Some unexpected text</string>
     <string name="compose_screen_dialog_pos_button" translatable="false">OK</string>
+
+    <!-- Jetpack Compose -->
+
+    <!-- Jetpack Compose MainScreen -->
+    <string name="jetpack_compose_main_screen_simple_flaky_button" translatable="false">Simple flaky sample</string>
+
+    <!-- Jetpack Compose SimpleFlakyScreen -->
+    <string name="jetpack_compose_simple_flaky_screen_first_button" translatable="false">First button</string>
+    <string name="jetpack_compose_simple_flaky_screen_second_button" translatable="false">Second button</string>
 
     <!-- Idle waiting fragment screen -->
     <string name="idlewaiting_fragment_title" translatable="false">Wait for idle Fragment</string>

@@ -9,5 +9,6 @@ data class Params(
     val autoScrollParams: AutoScrollParams,
     val stepParams: StepParams,
     val screenshotParams: ScreenshotParams,
-    val videoParams: VideoParams
+    val videoParams: VideoParams,
+    val elementLoaderParams: ElementLoaderParams,
 )

@@ -3,6 +3,7 @@ package com.kaspersky.components.kautomator.component.common.assertions
 
 import com.google.common.truth.Truth.assertThat
 import com.kaspersky.components.kautomator.intercept.delegate.UiObjectInteractionDelegate
+import com.kaspersky.components.kautomator.intercept.exception.UnfoundedUiObjectException
 import com.kaspersky.components.kautomator.intercept.operation.UiOperationType
 
 /**
@@ -26,7 +27,18 @@ interface UiBaseAssertions {
      * Checks if the view is not completely displayed
      */
     fun isNotDisplayed() {
-        assertThat(view.loadView()).isFalse()
+        // the implementation is a little bit tricky because
+        // UiObjectInteractionDelegate throws UnfoundedUiObjectException in case of absence of a related UIObject2
+        // that's why we just catch the mentioned exception and do a final check
+        val notDisplayed = try {
+            isDisplayed()
+            false
+        } catch (exception: UnfoundedUiObjectException) {
+            true
+        } catch (exception: Throwable) {
+            false
+        }
+        assertThat(notDisplayed).isTrue()
     }
 
     /**

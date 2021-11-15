@@ -11,10 +11,11 @@ android {
         }
     }
 
-    @Suppress("UnstableApiUsage")
-    onVariants {
-        androidTest {
-            enabled = false
-        }
-    }
+    // todo doesn't work on AGP 4.2.2
+//    @Suppress("UnstableApiUsage")
+//    onVariants {
+//        androidTest {
+//            enabled = false
+//        }
+//    }
 }

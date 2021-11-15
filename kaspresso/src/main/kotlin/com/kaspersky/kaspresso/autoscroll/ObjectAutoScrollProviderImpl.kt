@@ -56,9 +56,11 @@ class ObjectAutoScrollProviderImpl(
          * Scrolls to the bottom and looks for the given view. Invokes the action if the view was found.
          */
         do {
-            if (interaction.tryToFindUiObject()) {
-                logger.i("UiView autoscroll successfully performed.")
+            if (interaction.uiObject2 != null) {
+                logger.i("UiObject autoscroll to the bottom successfully performed.")
                 return action.invoke()
+            } else {
+                interaction.reFindUiObject()
             }
         } while (scrollable.scrollForward())
 
@@ -66,9 +68,11 @@ class ObjectAutoScrollProviderImpl(
          * Scrolls to the beginning and looks for the given view. Invokes the action if the view was found.
          */
         do {
-            if (interaction.tryToFindUiObject()) {
-                logger.i("UiView autoscroll successfully performed.")
+            if (interaction.uiObject2 != null) {
+                logger.i("UiObject autoscroll to the beginning successfully performed.")
                 return action.invoke()
+            } else {
+                interaction.reFindUiObject()
             }
         } while (scrollable.scrollBackward())
 

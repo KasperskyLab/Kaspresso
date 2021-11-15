@@ -19,6 +19,7 @@ If you are looking forward of a wiki for old versions then follow links: <br>
 [07. DocLoc Screenshots](./07_DocLoc.md) <br>
 [08. Kaspresso tests running on the JVM with Robolectric](./08_Kaspresso-Robolectric.md) <br>
 [09. Allure support in Kaspresso](./09_Kaspresso-Allure.md) <br>
+*[WIP][10. Jetpack Compose support in Kaspresso](./10_Jetpack-Compose.md)* <br>
 
 ## References
 

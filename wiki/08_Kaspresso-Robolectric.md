@@ -51,7 +51,7 @@ In order to run your shared tests as Unit Tests on the JVM, you need to run a co
 
 For example, to run the sample RobolectricTest on the JVM you need to run:
 ```
-./gradlew :samples:kaspresso-sample:testDebugUnitTest --tests "com.kaspersky.kaspressample.sharedtest.SharedTest"
+./gradlew :samples:kaspresso-sample:testDebugUnitTest --tests "com.kaspersky.kaspressample.sharedtest.SharedSimpleFlakyTest"
 ```
 
 To run them on a device/emulator, the command to run would look like this:
@@ -61,7 +61,7 @@ To run them on a device/emulator, the command to run would look like this:
 
 For instance, to run the sample SharedTest on a device/emulator, you need to run:
 ```
-./gradlew :samples:kaspresso-sample:connectedAndroidTest -Pandroid.testInstrumentationRunnerArguments.class=com.kaspersky.kaspressample.sharedtest.SharedTest
+./gradlew :samples:kaspresso-sample:connectedAndroidTest -Pandroid.testInstrumentationRunnerArguments.class=com.kaspersky.kaspressample.sharedtest.SharedSimpleFlakyTest
 ```
 
 ## Accommodation of tests to work on the JVM (with Robolectric) environment

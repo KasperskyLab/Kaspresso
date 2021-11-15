@@ -22,7 +22,8 @@ class AutoScrollParams(
             PerformException::class.java,
             AssertionFailedError::class.java,
             UiObjectNotFoundException::class.java,
-            UnfoundedUiObjectException::class.java
+            UnfoundedUiObjectException::class.java,
+            AssertionError::class.java
         )
 
         fun default() = AutoScrollParams(
