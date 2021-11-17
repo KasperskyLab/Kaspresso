@@ -1,7 +1,7 @@
 package com.kaspersky.kaspresso.tutorial.test
 
 import android.Manifest
-import androidx.test.rule.ActivityTestRule
+import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import com.kaspersky.kaspresso.tutorial.MainActivity
@@ -28,7 +28,7 @@ class SimpleTest : TestCase() {
     )
 
     @get:Rule
-    val activityTestRule = ActivityTestRule(MainActivity::class.java, true, false)
+    val activityRule = activityScenarioRule<MainActivity>()
 
     @Test
     fun test() =
@@ -39,7 +39,6 @@ class SimpleTest : TestCase() {
         }.run {
             step("Open Simple Screen") {
                 testLogger.i("Main section")
-                activityTestRule.launchActivity(null)
                 device.screenshots.take("Additional_screenshot")
 
                 MainScreen {
