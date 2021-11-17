@@ -1,4 +1,4 @@
-package com.kaspersky.kaspresso.tutorial.test
+package com.kaspersky.kaspresso.tutorial.kautomator_test
 
 import android.Manifest
 import androidx.test.ext.junit.rules.activityScenarioRule
@@ -6,8 +6,9 @@ import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import com.kaspersky.kaspresso.tutorial.MainActivity
 import com.kaspersky.kaspresso.tutorial.R
-import com.kaspersky.kaspresso.tutorial.screen.MainScreen
-import com.kaspersky.kaspresso.tutorial.screen.SimpleScreen
+import com.kaspersky.kaspresso.tutorial.kautomator_screen.UiMainScreen
+import com.kaspersky.kaspresso.tutorial.kautomator_screen.UiSimpleScreen
+import io.github.kakaocup.kakao.common.utilities.getResourceString
 import org.junit.Rule
 import org.junit.Test
 
@@ -19,7 +20,7 @@ import org.junit.Test
  * - screenshots in the device
  * Also you can see the test DSL simplifying the writing of any test
  */
-class SimpleTest : TestCase() {
+class UiSimpleTest : TestCase() {
 
     @get:Rule
     val runtimePermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
@@ -41,41 +42,41 @@ class SimpleTest : TestCase() {
                 testLogger.i("Main section")
                 device.screenshots.take("Additional_screenshot")
 
-                MainScreen {
+                UiMainScreen {
                     simpleButton {
-                        isVisible()
+                        isDisplayed()
                         click()
                     }
                 }
             }
 
             step("Click button_1 and check button_2") {
-                SimpleScreen {
+                UiSimpleScreen {
                     button1 {
                         click()
                     }
                     button2 {
-                        isVisible()
+                        isDisplayed()
                     }
                 }
             }
 
             step("Click button_2 and check edit") {
-                SimpleScreen {
+                UiSimpleScreen {
                     button2 {
                         click()
                     }
                     edit {
-                        flakySafely(timeoutMs = 7000) { isVisible() }
-                        hasText(R.string.simple_fragment_text_edittext)
+                        flakySafely(timeoutMs = 7000) { isDisplayed() }
+                        hasText(getResourceString(R.string.simple_fragment_text_edittext))
                     }
                 }
             }
 
             step("Check all possibilities of edit") {
                 scenario(
-                    CheckEditScenario()
+                    UiCheckEditScenario()
                 )
             }
-    }
+        }
 }
