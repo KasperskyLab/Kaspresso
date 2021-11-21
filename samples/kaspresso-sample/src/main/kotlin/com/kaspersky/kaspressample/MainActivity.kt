@@ -3,6 +3,7 @@ package com.kaspersky.kaspressample
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.kaspersky.kaspressample.autoscrollfallback.AutoscrollFallbackActivity
 import com.kaspersky.kaspressample.compose.ComplexComposeSampleActivity
 import com.kaspersky.kaspressample.continuously.ContinuouslySampleActivity
 import com.kaspersky.kaspressample.databinding.ActivityMainBinding

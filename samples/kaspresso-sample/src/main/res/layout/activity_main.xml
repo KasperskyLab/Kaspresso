@@ -18,10 +18,17 @@
         android:textSize="18pt" />
 
     <Button
-        android:id="@+id/activity_main_simple_sample_button"
+        android:id="@+id/activity_main_auto_scroll_fallback_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/activity_main_title"
+        android:text="@string/autoscroll_fallback_title" />
+
+    <Button
+        android:id="@+id/activity_main_simple_sample_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/activity_main_auto_scroll_fallback_button"
         android:text="@string/main_screen_simple_fragment_button" />
 
     <Button
