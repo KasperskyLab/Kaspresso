@@ -3,6 +3,7 @@ package com.kaspersky.kaspressample
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.kaspersky.kaspressample.autoscrollfallback.AutoscrollFallbackActivity
 import com.kaspersky.kaspressample.compose.ComplexComposeSampleActivity
 import com.kaspersky.kaspressample.continuously.ContinuouslySampleActivity
 import com.kaspersky.kaspressample.flaky.CommonFlakyActivity
@@ -19,6 +20,13 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        activity_main_auto_scroll_fallback_button.setOnClickListener {
+            startActivity(
+                Intent(this, AutoscrollFallbackActivity::class.java)
+            )
+        }
+
 
         activity_main_simple_sample_button.setOnClickListener {
             startActivity(
@@ -67,6 +75,7 @@ class MainActivity : AppCompatActivity() {
                 Intent(this, MeasureActivity::class.java)
             )
         }
+
 
         activity_main_jetpack_compose_button.setOnClickListener {
             startActivity(

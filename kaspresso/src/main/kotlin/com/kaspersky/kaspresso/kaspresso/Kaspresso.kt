@@ -70,6 +70,7 @@ import com.kaspersky.kaspresso.interceptors.behavior.DataBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.ViewBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.WebBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.impl.autoscroll.AutoScrollViewBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behavior.impl.autoscroll.AutoScrollViewFallbackInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.impl.autoscroll.AutoScrollWebBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.impl.failure.FailureLoggingDataBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.impl.failure.FailureLoggingViewBehaviorInterceptor
@@ -863,6 +864,7 @@ data class Kaspresso(
             if (!::viewBehaviorInterceptors.isInitialized) viewBehaviorInterceptors =
                 if (isAndroidRuntime) mutableListOf(
                     AutoScrollViewBehaviorInterceptor(autoScrollParams, libLogger),
+                    AutoScrollViewFallbackInterceptor(autoScrollParams, libLogger),
                     SystemDialogSafetyViewBehaviorInterceptor(
                         libLogger,
                         instrumentalDependencyProviderFactory.getInterceptorProvider<SystemDialogSafetyViewBehaviorInterceptor>(instrumentation),
@@ -872,6 +874,7 @@ data class Kaspresso(
                     FailureLoggingViewBehaviorInterceptor(libLogger)
                 ) else mutableListOf(
                     AutoScrollViewBehaviorInterceptor(autoScrollParams, libLogger),
+                    AutoScrollViewFallbackInterceptor(autoScrollParams, libLogger),
                     FlakySafeViewBehaviorInterceptor(flakySafetyParams, libLogger),
                     FailureLoggingViewBehaviorInterceptor(libLogger)
                 )

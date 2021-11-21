@@ -13,6 +13,9 @@
     <string name="main_screen_jetpack_compose_button">Jetpack Compose примеры</string>
     <string name="main_screen_shared_test">Shared Test with Robolectric пример</string>
 
+    <!-- Auto scroll fallback screen -->
+    <string name="autoscroll_fallback_title">Auto scroll fallback</string>
+
     <!-- Simple fragment screen -->
     <string name="simple_fragment_title">Простой фрагмент</string>
     <string name="simple_fragment_text_button_1">Кнопка 1</string>
