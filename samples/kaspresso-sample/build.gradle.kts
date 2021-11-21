@@ -20,8 +20,15 @@ android {
     sourceSets {
         // configure shared test folder
         val sharedTestFolder = "src/sharedTest/kotlin"
-        named("test").configure { java.srcDirs("src/test/kotlin", sharedTestFolder) }
-        named("androidTest").configure { java.srcDirs("src/androidTest/kotlin", sharedTestFolder) }
+        val sharedTestResourcesFolder = "src/sharedTest/resources"
+        named("test").configure {
+            java.srcDirs(sharedTestFolder)
+            resources.srcDirs(sharedTestResourcesFolder)
+        }
+        named("androidTest").configure {
+            java.srcDirs(sharedTestFolder)
+            resources.srcDirs(sharedTestResourcesFolder)
+        }
     }
 
     testOptions {
