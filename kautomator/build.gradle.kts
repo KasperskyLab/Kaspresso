@@ -10,6 +10,6 @@ publish {
 dependencies {
     implementation(libs.kotlinStdlib)
     implementation(libs.truth)
-    implementation(libs.testCore)
+    implementation(libs.androidXTestCore)
     implementation(libs.uiAutomator)
 }

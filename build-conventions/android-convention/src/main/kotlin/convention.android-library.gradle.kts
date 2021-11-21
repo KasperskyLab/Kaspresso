@@ -1,7 +1,13 @@
 plugins {
     id("com.android.library")
     id("kotlin-android")
+    id("convention.kotlin-base")
     id("convention.android-base")
+}
+androidComponents {
+    beforeVariants {
+        it.enableAndroidTest = false
+    }
 }
 
 android {
@@ -10,12 +16,4 @@ android {
             ignore = true
         }
     }
-
-    // todo doesn't work on AGP 4.2.2
-//    @Suppress("UnstableApiUsage")
-//    onVariants {
-//        androidTest {
-//            enabled = false
-//        }
-//    }
 }

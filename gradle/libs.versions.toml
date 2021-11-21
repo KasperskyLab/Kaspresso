@@ -1,68 +1,67 @@
 [versions]
-kotlin = "1.5.21"
+kotlin = "1.5.31"
 detekt = "1.18.1"
 espresso = "3.4.0"
 allure = "2.2.7"
-compose = "1.0.2"
-activityCompose = "1.3.1"
+compose = "1.0.5"
+activityCompose = "1.4.0"
+androidXTest = "1.4.0"
+lifecycle = "2.4.0"
 
 [libraries]
 # plugins
 kotlinPlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
-androidPlugin = "com.android.tools.build:gradle:4.2.2"
+androidPlugin = "com.android.tools.build:gradle:7.0.3"
+versionsPlugin = "com.github.ben-manes:gradle-versions-plugin:0.39.0"
 
 # libraries
-kotlinCli = "org.jetbrains.kotlinx:kotlinx-cli:0.3"
+kotlinStdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
+kotlinCli = "org.jetbrains.kotlinx:kotlinx-cli:0.3.3"
+
 detektCli = { module = "io.gitlab.arturbosch.detekt:detekt-cli", version.ref = "detekt" }
 detektFormatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
 
-kotlinStdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
+androidXCore = "androidx.core:core:1.7.0"
+appcompat = "androidx.appcompat:appcompat:1.4.0"
+material = "com.google.android.material:material:1.4.0"
+constraint = "androidx.constraintlayout:constraintlayout:2.1.2"
+
+lifecycleViewModelKtx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
+lifecycleLiveDataKtx = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "lifecycle" }
+lifecycleViewModelComposeKtx = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycle" }
+
+okhttp = "com.squareup.okhttp3:okhttp:4.9.1"
+gson = "com.google.code.gson:gson:2.8.9"
+kotson = "com.github.salomonbrys.kotson:kotson:2.5.0"
+
 espressoCore = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso" }
 espressoWeb = { module = "androidx.test.espresso:espresso-web", version.ref = "espresso" }
-testCore = "androidx.test:core:1.4.0"
 uiAutomator = "androidx.test.uiautomator:uiautomator:2.2.0"
-fragmentTesting = "androidx.fragment:fragment-testing:1.3.6"
-# upgrading to 4.6.1 is blocked by https://github.com/robolectric/robolectric/issues/6593
-robolectric = "org.robolectric:robolectric:4.5.1"
+robolectric = "org.robolectric:robolectric:4.7.2"
+kakao = "io.github.kakaocup:kakao:3.0.5"
+kakaoCompose = "io.github.kakaocup:compose:0.0.5"
+junit = "junit:junit:4.13.2"
+junitJupiter = "org.junit.jupiter:junit-jupiter:5.8.1"
+truth = "com.google.truth:truth:1.1.3"
 
-androidXCore = "androidx.core:core:1.7.0"
-
-androidXRules = "androidx.test:rules:1.4.0"
-androidXTest = "androidx.test.ext:junit:1.1.3"
-androidXTestKtx = "androidx.test.ext:junit-ktx:1.1.3"
+androidXTestCore = { module = "androidx.test:core", version.ref = "androidXTest" }
+androidXTestRules = { module = "androidx.test:rules", version.ref = "androidXTest" }
+androidXTestFragmentTesting = { module = "androidx.fragment:fragment-testing", version.ref = "androidXTest" }
+androidXTestRunner = { module = "androidx.test:runner", version.ref = "androidXTest" }
+androidXTestOrchestrator = { module = "androidx.test:orchestrator", version.ref = "androidXTest" }
+androidXTestExtJunit = "androidx.test.ext:junit:1.1.3"
+androidXTestExtJunitKtx = "androidx.test.ext:junit-ktx:1.1.3"
 
 composeActivity = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
 composeUiTooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
 composeMaterial = { module = "androidx.compose.material:material", version.ref = "compose" }
 composeTestManifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "compose" }
 composeCompiler = { module = "androidx.compose.compiler:compiler", version.ref = "compose" }
+composeRuntimeLiveData = { module = "androidx.compose.runtime:runtime-livedata", version.ref = "compose" }
+composeNavigation = "androidx.navigation:navigation-compose:2.3.5"
 
 composeUiTest = { module = "androidx.compose.ui:ui-test", version.ref = "compose" }
-
-composeJunit = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "compose" }
-
-lifecycleViewModelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0"
-lifecycleLiveDataKtx = "androidx.lifecycle:lifecycle-livedata-ktx:2.4.0"
-composeNavigation = "androidx.navigation:navigation-compose:2.4.0-beta02"
-lifecycleViewModelComposeKtx = "androidx.lifecycle:lifecycle-viewmodel-compose:2.4.0"
-composeRuntimeLiveData = "androidx.compose.runtime:runtime-livedata:1.0.5"
-
-appcompat = "androidx.appcompat:appcompat:1.3.0"
-material = "com.google.android.material:material:1.2.0"
-constraint = "androidx.constraintlayout:constraintlayout:2.0.0"
-
-kakao = "io.github.kakaocup:kakao:3.0.5"
-kakaoCompose = "io.github.kakaocup:compose:0.0.5"
-gson = "com.google.code.gson:gson:2.8.6"
-
-junit = "junit:junit:4.13"
-junitJupiter = "org.junit.jupiter:junit-jupiter:5.6.2"
-truth = "com.google.truth:truth:1.0"
-runner = "androidx.test:runner:1.3.0"
-orchestrator = "androidx.test:orchestrator:1.4.0"
-
-okhttp = "com.squareup.okhttp3:okhttp:4.9.1"
-kotson = "com.github.salomonbrys.kotson:kotson:2.5.0"
+composeUiTestJunit = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "compose" }
 
 allureKotlinModel = { module = "io.qameta.allure:allure-kotlin-model", version.ref = "allure" }
 allureKotlinCommons = { module = "io.qameta.allure:allure-kotlin-commons", version.ref = "allure" }

@@ -1,6 +1,7 @@
 import org.gradle.kotlin.dsl.application
 
 plugins {
-    id("convention.kotlin")
+    id("kotlin")
+    id("convention.kotlin-base")
     application
 }

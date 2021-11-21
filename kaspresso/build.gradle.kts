@@ -14,7 +14,7 @@ dependencies {
     api(libs.bundles.espresso)
     api(libs.uiAutomator)
     api(libs.androidXCore)
-    api(libs.androidXRules)
+    api(libs.androidXTestRules)
     api(libs.composeUiTest)
 
     implementation(libs.kotlinStdlib)

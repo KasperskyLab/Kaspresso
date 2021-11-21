@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     id("kotlin-android")
     id("kotlin-android-extensions")
+    id("convention.kotlin-base")
     id("convention.android-base")
 }
 
