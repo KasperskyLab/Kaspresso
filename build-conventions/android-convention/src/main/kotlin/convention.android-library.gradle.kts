@@ -4,6 +4,7 @@ plugins {
     id("convention.kotlin-base")
     id("convention.android-base")
 }
+
 androidComponents {
     beforeVariants {
         it.enableAndroidTest = false
