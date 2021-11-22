@@ -2,7 +2,15 @@ import io.gitlab.arturbosch.detekt.Detekt
 
 plugins {
     base
+    id("convention.dependency-updates")
     id("io.gitlab.arturbosch.detekt") version "1.18.1"
+}
+
+buildscript {
+    dependencies {
+        classpath(libs.kotlinPlugin)
+        classpath(libs.androidPlugin)
+    }
 }
 
 dependencies {

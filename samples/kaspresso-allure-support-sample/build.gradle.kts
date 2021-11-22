@@ -23,8 +23,8 @@ dependencies {
     androidTestImplementation(projects.kaspresso)
     androidTestImplementation(projects.allureSupport)
 
-    androidTestImplementation(libs.runner)
+    androidTestImplementation(libs.androidXTestRunner)
     androidTestImplementation(libs.junit)
 
-    androidTestUtil(libs.orchestrator)
+    androidTestUtil(libs.androidXTestOrchestrator)
 }

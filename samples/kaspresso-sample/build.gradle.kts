@@ -14,15 +14,21 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerVersion = libs.versions.kotlin.get()
         kotlinCompilerExtensionVersion = libs.versions.compose.get()
     }
 
     sourceSets {
         // configure shared test folder
         val sharedTestFolder = "src/sharedTest/kotlin"
-        named("test").configure { java.srcDirs("src/test/kotlin", sharedTestFolder) }
-        named("androidTest").configure { java.srcDirs("src/androidTest/kotlin", sharedTestFolder) }
+        val sharedTestResourcesFolder = "src/sharedTest/resources"
+        named("test").configure {
+            java.srcDirs(sharedTestFolder)
+            resources.srcDirs(sharedTestResourcesFolder)
+        }
+        named("androidTest").configure {
+            java.srcDirs(sharedTestFolder)
+            resources.srcDirs(sharedTestResourcesFolder)
+        }
     }
 
     testOptions {
@@ -45,24 +51,24 @@ dependencies {
     implementation(libs.lifecycleViewModelComposeKtx)
     implementation(libs.composeRuntimeLiveData)
 
-    androidTestImplementation(libs.runner)
     androidTestImplementation(libs.junit)
     androidTestImplementation(projects.kaspresso)
-    androidTestImplementation(libs.androidXRules)
-    androidTestImplementation(libs.androidXTestKtx)
-    androidTestImplementation(libs.androidXTest)
-    androidTestImplementation(libs.composeJunit)
+    androidTestImplementation(libs.androidXTestRunner)
+    androidTestImplementation(libs.androidXTestRules)
+    androidTestImplementation(libs.androidXTestExtJunitKtx)
+    androidTestImplementation(libs.androidXTestExtJunit)
+    androidTestImplementation(libs.composeUiTestJunit)
 
-    androidTestUtil(libs.orchestrator)
-
-    testImplementation(libs.runner)
     testImplementation(libs.junit)
     testImplementation(projects.kaspresso)
-    testImplementation(libs.androidXRules)
-    testImplementation(libs.androidXTestKtx)
-    testImplementation(libs.androidXTest)
+    testImplementation(libs.androidXTestRunner)
+    testImplementation(libs.androidXTestRules)
+    testImplementation(libs.androidXTestExtJunitKtx)
+    testImplementation(libs.androidXTestExtJunit)
+    testImplementation(libs.composeUiTestJunit)
     testImplementation(libs.robolectric)
-    testImplementation(libs.composeJunit)
 
-    debugImplementation(libs.fragmentTesting)
+    debugImplementation(libs.androidXTestFragmentTesting)
+
+    androidTestUtil(libs.androidXTestOrchestrator)
 }

@@ -12,9 +12,9 @@ dependencies {
 
     implementation(libs.kotlinStdlib)
     implementation(libs.truth)
-    implementation(libs.testCore)
+    implementation(libs.androidXTestCore)
+    implementation(libs.androidXTestRunner)
     implementation(libs.uiAutomator)
-    implementation(libs.runner)
 
     implementation(libs.bundles.allure)
 
