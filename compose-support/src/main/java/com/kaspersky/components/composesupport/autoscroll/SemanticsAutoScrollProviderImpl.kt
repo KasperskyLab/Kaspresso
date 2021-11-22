@@ -6,7 +6,6 @@ import com.kaspersky.kaspresso.extensions.isAllowed
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.params.AutoScrollParams
 import io.github.kakaocup.compose.intercept.interaction.ComposeInteraction
-import io.reactivex.exceptions.ExtCompositeException
 
 class SemanticsAutoScrollProviderImpl(
     private val logger: UiTestLogger,

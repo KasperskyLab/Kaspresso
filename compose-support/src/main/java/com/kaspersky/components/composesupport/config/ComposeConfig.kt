@@ -61,6 +61,5 @@ class ComposeConfig {
                 semanticsWatcherInterceptors
             )
         }
-
     }
 }
