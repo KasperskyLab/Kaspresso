@@ -1,6 +1,6 @@
 package com.kaspersky.kaspresso.flakysafety
 
-import com.kaspersky.kaspresso.internal.extensions.other.withMessage
+import com.kaspersky.kaspresso.extensions.withMessage
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.params.ContinuouslyParams
 import java.util.Timer

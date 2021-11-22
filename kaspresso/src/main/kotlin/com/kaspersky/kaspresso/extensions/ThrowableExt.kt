@@ -1,9 +1,9 @@
-package com.kaspersky.kaspresso.internal.extensions.other
+package com.kaspersky.kaspresso.extensions
 
 import com.kaspersky.kaspresso.internal.exceptions.KaspressoError
 import io.reactivex.exceptions.ExtCompositeException
 
-internal inline fun <reified T : Throwable> invokeSafely(
+inline fun <reified T : Throwable> invokeSafely(
     exceptions: MutableList<T>,
     action: () -> Unit
 ) {
@@ -18,14 +18,14 @@ internal inline fun <reified T : Throwable> invokeSafely(
     }
 }
 
-internal inline fun <reified ERROR : Throwable, LISTENER> Iterable<LISTENER>.forEachSafely(
+inline fun <reified ERROR : Throwable, LISTENER> Iterable<LISTENER>.forEachSafely(
     exceptions: MutableList<ERROR>,
     action: (LISTENER) -> Unit
 ) {
     forEach { invokeSafely(exceptions) { action.invoke(it) } }
 }
 
-internal fun <T : Throwable> List<T>.getException(): Throwable? {
+fun <T : Throwable> List<T>.getException(): Throwable? {
     return when (this.size) {
         1 -> this[0]
         in 2..Int.MAX_VALUE -> ExtCompositeException(this)
@@ -33,7 +33,7 @@ internal fun <T : Throwable> List<T>.getException(): Throwable? {
     }
 }
 
-internal fun <T : Throwable> List<T>.throwAll() {
+fun <T : Throwable> List<T>.throwAll() {
     when (this.size) {
         1 -> throw this[0]
         in 2..Int.MAX_VALUE -> throw ExtCompositeException(this)
@@ -60,5 +60,5 @@ fun <T : Throwable> T.isAllowed(allowed: Set<Class<out Throwable>>): Boolean {
  * @return the new [KaspressoError] instance with [failureMessage] and given throwable as a cause if [failureMessage]
  * is not null, or just given throwable otherwise.
  */
-internal fun Throwable.withMessage(failureMessage: String?): Throwable =
+fun Throwable.withMessage(failureMessage: String?): Throwable =
     failureMessage?.let { KaspressoError(it, this) } ?: this

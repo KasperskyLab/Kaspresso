@@ -2,7 +2,7 @@ package com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.composite
 
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.TestRunWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.defaults.DefaultTestRunWatcherInterceptor
-import com.kaspersky.kaspresso.internal.extensions.other.forEachSafely
+import com.kaspersky.kaspresso.extensions.forEachSafely
 import com.kaspersky.kaspresso.logger.Logger
 import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
 import com.kaspersky.kaspresso.testcases.models.info.TestInfo
@@ -53,7 +53,7 @@ class TestRunCompositeWatcherInterceptor(
                 .isEmpty()
         ) {
             logger.e(
-                """Please, revert back DefaultTestRunWatcherInterceptor to 
+                """Please, revert back DefaultTestRunWatcherInterceptor to
                         Kaspresso.Builder.testRunWatcherInterceptors.
                         Otherwise Kaspresso.Builder.beforeEachTest and Kaspresso.Biulder.afterEachTest will not work!
                         """.trimIndent()

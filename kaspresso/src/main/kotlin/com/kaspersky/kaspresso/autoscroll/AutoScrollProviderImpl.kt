@@ -2,7 +2,7 @@ package com.kaspersky.kaspresso.autoscroll
 
 import androidx.test.espresso.ViewInteraction
 import io.github.kakaocup.kakao.common.actions.NestedScrollToAction
-import com.kaspersky.kaspresso.internal.extensions.other.isAllowed
+import com.kaspersky.kaspresso.extensions.isAllowed
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.params.AutoScrollParams
 

@@ -1,7 +1,7 @@
 package com.kaspersky.kaspresso.flakysafety.algorithm
 
-import com.kaspersky.kaspresso.internal.extensions.other.isAllowed
-import com.kaspersky.kaspresso.internal.extensions.other.withMessage
+import com.kaspersky.kaspresso.extensions.isAllowed
+import com.kaspersky.kaspresso.extensions.withMessage
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.params.FlakySafetyParams
 import java.util.Timer
