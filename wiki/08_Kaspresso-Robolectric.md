@@ -46,12 +46,12 @@ It is also important that such tests use ``@RunWith(AndroidJUnit4::class)``, sin
 
 In order to run your shared tests as Unit Tests on the JVM, you need to run a command looking like this:
 ```
-./gradlew :MODULE:testVARIANTUnitTest --tests "PACKAGE.CLASS"
+./gradlew :MODULE:testVARIANTUnitTest --info --tests "PACKAGE.CLASS"
 ```
 
 For example, to run the sample RobolectricTest on the JVM you need to run:
 ```
-./gradlew :samples:kaspresso-sample:testDebugUnitTest --tests "com.kaspersky.kaspressample.sharedtest.SharedSimpleFlakyTest"
+./gradlew :samples:kaspresso-sample:testDebugUnitTest --info --tests "com.kaspersky.kaspressample.sharedtest.SharedSimpleFlakyTest"
 ```
 
 To run them on a device/emulator, the command to run would look like this:

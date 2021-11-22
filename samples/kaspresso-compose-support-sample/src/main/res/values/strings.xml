@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Compose support sample</string>
+    <!-- MainScreen -->
+    <string name="main_screen_simple_flaky_button" translatable="false">Simple flaky sample</string>
+    <!-- SimpleFlakyScreen -->
+    <string name="simple_flaky_screen_first_button" translatable="false">First button</string>
+    <string name="simple_flaky_screen_second_button" translatable="false">Second button</string>
+</resources>

@@ -110,7 +110,7 @@ I/KASPRESSO: TEST STEP: "3. Click on the Second button" in ComposeSimpleFlakyTes
 You can run your Compose tests on the JVM environment with Robolectric.<br> 
 Run `ComposeSimpleFlakyTest` (from "kaspresso-sample" module) on the JVM right now:
 ```
-./gradlew :samples:kaspresso-sample:testDebugUnitTest --tests "com.kaspersky.kaspressample.jetpack_compose_tests.ComposeSimpleFlakyTest"   
+./gradlew :samples:kaspresso-compose-support-sample:testDebugUnitTest --info --tests "com.kaspersky.kaspresso.composesupport.sample.test.ComposeSimpleFlakyTest"  
 ```
 All information about Robolectric support is available [here](./08_Kaspresso-Robolectric.md).
 
