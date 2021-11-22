@@ -1,11 +1,11 @@
 enableFeaturePreview("VERSION_CATALOGS")
 
-rootProject.name = "build-conventions"
+rootProject.name = "build-logic"
 
-include("android-convention")
+include("android")
 include("checks")
-include("kotlin-convention")
-include("publication-convention")
+include("kotlin")
+include("publication")
 
 pluginManagement {
     repositories {
