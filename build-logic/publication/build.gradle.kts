@@ -3,7 +3,7 @@ plugins {
 }
 
 dependencies {
-    implementation(projects.kotlinConvention)
-    implementation(libs.kotlinPlugin)
     implementation(libs.androidPlugin)
+    implementation(libs.okhttp)
+    implementation(libs.kotson)
 }

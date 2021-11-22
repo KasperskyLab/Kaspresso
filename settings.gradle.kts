@@ -19,7 +19,7 @@ dependencyResolutionManagement {
     }
 }
 
-includeBuild("build-conventions")
+includeBuild("build-logic")
 
 include(
     ":adb-server:adbserver-command-types",
