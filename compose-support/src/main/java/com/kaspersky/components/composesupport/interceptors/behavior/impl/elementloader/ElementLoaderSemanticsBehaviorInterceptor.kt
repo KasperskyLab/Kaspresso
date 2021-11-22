@@ -1,8 +1,8 @@
-package com.kaspersky.kaspresso.interceptors.behaviorcompose.impl.elementloader
+package com.kaspersky.components.composesupport.interceptors.behavior.impl.elementloader
 
 import com.kaspersky.kaspresso.elementloader.ElementLoaderProvider
 import com.kaspersky.kaspresso.elementloader.ElementLoaderProviderImpl
-import com.kaspersky.kaspresso.interceptors.behaviorcompose.SemanticsBehaviorInterceptor
+import com.kaspersky.components.composesupport.interceptors.behavior.SemanticsBehaviorInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.params.ElementLoaderParams
 import io.github.kakaocup.compose.intercept.interaction.ComposeInteraction

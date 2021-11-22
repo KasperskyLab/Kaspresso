@@ -9,7 +9,7 @@ import com.kaspersky.components.kautomator.common.Environment
 import com.kaspersky.components.kautomator.common.environment
 import com.kaspersky.kaspresso.instrumental.exception.NotSupportedInstrumentalTestException
 
-internal class InstrumentalDependencyProviderImpl(
+class InstrumentalDependencyProviderImpl(
     private val location: InstrumentalUsage,
     private val instrumentation: Instrumentation
 ) : InstrumentalDependencyProvider {
@@ -37,7 +37,7 @@ internal class InstrumentalDependencyProviderImpl(
             else throw NotSupportedInstrumentalTestException(location, "UiAutomation")
 }
 
-internal sealed class InstrumentalUsage {
+sealed class InstrumentalUsage {
     data class ComponentLocation(val componentName: String) : InstrumentalUsage()
     data class InterceptorLocation(val interceptorName: String) : InstrumentalUsage()
     object TestLocation : InstrumentalUsage()

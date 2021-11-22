@@ -1,6 +1,7 @@
-package com.kaspersky.kaspresso.autoscroll
+package com.kaspersky.components.composesupport.autoscroll
 
 import androidx.compose.ui.test.performScrollTo
+import com.kaspersky.kaspresso.autoscroll.AutoScrollProvider
 import com.kaspersky.kaspresso.internal.extensions.other.isAllowed
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.params.AutoScrollParams

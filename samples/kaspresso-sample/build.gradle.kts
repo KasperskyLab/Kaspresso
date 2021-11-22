@@ -53,6 +53,7 @@ dependencies {
 
     androidTestImplementation(libs.junit)
     androidTestImplementation(projects.kaspresso)
+    androidTestImplementation(projects.composeSupport)
     androidTestImplementation(libs.androidXTestRunner)
     androidTestImplementation(libs.androidXTestRules)
     androidTestImplementation(libs.androidXTestExtJunitKtx)
@@ -61,6 +62,7 @@ dependencies {
 
     testImplementation(libs.junit)
     testImplementation(projects.kaspresso)
+    testImplementation(projects.composeSupport)
     testImplementation(libs.androidXTestRunner)
     testImplementation(libs.androidXTestRules)
     testImplementation(libs.androidXTestExtJunitKtx)

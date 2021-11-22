@@ -6,14 +6,11 @@ import com.kaspersky.kaspresso.interceptors.behavior.WebBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.impl.flakysafety.FlakySafeDataBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.impl.flakysafety.FlakySafeViewBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.impl.flakysafety.FlakySafeWebBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.behaviorcompose.SemanticsBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.behaviorcompose.impl.flakysafety.FlakySafeSemanticsBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.DeviceBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.ObjectBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.flakysafety.FlakySafeDeviceBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.flakysafety.FlakySafeObjectBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.tolibrary.LibraryInterceptorsInjector.injectKaspressoInKakao
-import com.kaspersky.kaspresso.interceptors.tolibrary.LibraryInterceptorsInjector.injectKaspressoInKakaoCompose
 import com.kaspersky.kaspresso.interceptors.tolibrary.LibraryInterceptorsInjector.injectKaspressoInKautomator
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 
@@ -33,7 +30,6 @@ internal class FlakySafeInterceptorScalpel(
             actionToTakeScalp = {
                 scalpKakaoInterceptors()
                 scalpKautomatorInterceptors()
-                scalpComposeInterceptors()
             }
         )
     }
@@ -43,8 +39,7 @@ internal class FlakySafeInterceptorScalpel(
                 kaspresso.dataBehaviorInterceptors.filterIsInstance<FlakySafeDataBehaviorInterceptor>().isNotEmpty() ||
                 kaspresso.webBehaviorInterceptors.filterIsInstance<FlakySafeWebBehaviorInterceptor>().isNotEmpty() ||
                 kaspresso.objectBehaviorInterceptors.filterIsInstance<FlakySafeObjectBehaviorInterceptor>().isNotEmpty() ||
-                kaspresso.deviceBehaviorInterceptors.filterIsInstance<FlakySafeDeviceBehaviorInterceptor>().isNotEmpty() ||
-                kaspresso.semanticsBehaviorInterceptors.filterIsInstance<FlakySafeSemanticsBehaviorInterceptor>().isNotEmpty()
+                kaspresso.deviceBehaviorInterceptors.filterIsInstance<FlakySafeDeviceBehaviorInterceptor>().isNotEmpty()
 
     private fun scalpKakaoInterceptors() {
         val scalpedViewBehaviorInterceptors: List<ViewBehaviorInterceptor> =
@@ -89,17 +84,6 @@ internal class FlakySafeInterceptorScalpel(
         )
     }
 
-    private fun scalpComposeInterceptors() {
-        val scalpedSemanticsBehaviorInterceptors: List<SemanticsBehaviorInterceptor> =
-            kaspresso.semanticsBehaviorInterceptors.filter {
-                it !is FlakySafeSemanticsBehaviorInterceptor
-            }
-        injectKaspressoInKakaoCompose(
-            scalpedSemanticsBehaviorInterceptors,
-            kaspresso.semanticsWatcherInterceptors
-        )
-    }
-
     fun restoreScalpToLibs() {
         scalpelSwitcher.attemptRestoreScalp {
             injectKaspressoInKakao(
@@ -117,11 +101,6 @@ internal class FlakySafeInterceptorScalpel(
                 kaspresso.deviceBehaviorInterceptors,
                 kaspresso.objectWatcherInterceptors,
                 kaspresso.deviceWatcherInterceptors
-            )
-
-            injectKaspressoInKakaoCompose(
-                kaspresso.semanticsBehaviorInterceptors,
-                kaspresso.semanticsWatcherInterceptors
             )
         }
     }

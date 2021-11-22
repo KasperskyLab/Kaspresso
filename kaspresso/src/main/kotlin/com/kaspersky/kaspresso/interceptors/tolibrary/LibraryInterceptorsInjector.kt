@@ -5,23 +5,19 @@ import com.kaspersky.components.kautomator.KautomatorConfigurator
 import com.kaspersky.kaspresso.interceptors.behavior.DataBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.ViewBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.WebBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.behaviorcompose.SemanticsBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.DeviceBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.ObjectBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.tolibrary.compose.ComposeSemanticsInterceptor
 import com.kaspersky.kaspresso.interceptors.tolibrary.kakao.KakaoDataInterceptor
 import com.kaspersky.kaspresso.interceptors.tolibrary.kakao.KakaoViewInterceptor
 import com.kaspersky.kaspresso.interceptors.tolibrary.kakao.KakaoWebInterceptor
 import com.kaspersky.kaspresso.interceptors.tolibrary.kautomator.KautomatorDeviceInterceptor
 import com.kaspersky.kaspresso.interceptors.tolibrary.kautomator.KautomatorObjectInterceptor
-import com.kaspersky.kaspresso.interceptors.watcher.compose.SemanticsWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.kautomator.DeviceWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.kautomator.ObjectWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.view.AtomWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.view.ViewActionWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.view.ViewAssertionWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.view.WebAssertionWatcherInterceptor
-import io.github.kakaocup.compose.KakaoCompose
 
 internal object LibraryInterceptorsInjector {
 
@@ -93,24 +89,6 @@ internal object LibraryInterceptorsInjector {
             onUiDeviceInteraction {
                 onCheck(isOverride = true, interceptor = deviceInterceptor::interceptCheck)
                 onPerform(isOverride = true, interceptor = deviceInterceptor::interceptPerform)
-            }
-        }
-    }
-
-    fun injectKaspressoInKakaoCompose(
-        semanticsBehaviorInterceptors: List<SemanticsBehaviorInterceptor>,
-        semanticsWatcherInterceptors: List<SemanticsWatcherInterceptor>
-    ) {
-        val composeInterceptor =
-            ComposeSemanticsInterceptor(
-                semanticsBehaviorInterceptors,
-                semanticsWatcherInterceptors
-            )
-
-        KakaoCompose.intercept {
-            onComposeInteraction {
-                onCheck(isOverride = true, interceptor = composeInterceptor::interceptCheck)
-                onPerform(isOverride = true, interceptor = composeInterceptor::interceptPerform)
             }
         }
     }

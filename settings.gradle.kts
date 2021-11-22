@@ -32,6 +32,7 @@ include(
     ":kaspresso",
     ":kautomator",
     ":allure-support",
+    ":compose-support",
 
     ":samples:adbserver-sample",
     ":samples:kaspresso-sample",

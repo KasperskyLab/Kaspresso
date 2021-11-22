@@ -1,8 +1,8 @@
-package com.kaspersky.kaspresso.interceptors.tolibrary.compose
+package com.kaspersky.components.composesupport.interceptors.tolibrary
 
-import com.kaspersky.kaspresso.interceptors.behaviorcompose.SemanticsBehaviorInterceptor
+import com.kaspersky.components.composesupport.interceptors.behavior.SemanticsBehaviorInterceptor
+import com.kaspersky.components.composesupport.interceptors.watcher.SemanticsWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.tolibrary.LibraryInterceptor
-import com.kaspersky.kaspresso.interceptors.watcher.compose.SemanticsWatcherInterceptor
 import io.github.kakaocup.compose.intercept.interaction.ComposeInteraction
 import io.github.kakaocup.compose.intercept.operation.ComposeAction
 import io.github.kakaocup.compose.intercept.operation.ComposeAssertion

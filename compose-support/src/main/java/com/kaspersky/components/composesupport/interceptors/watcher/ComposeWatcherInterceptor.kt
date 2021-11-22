@@ -1,4 +1,4 @@
-package com.kaspersky.kaspresso.interceptors.watcher.compose
+package com.kaspersky.components.composesupport.interceptors.watcher
 
 import io.github.kakaocup.compose.intercept.interaction.ComposeInteraction
 

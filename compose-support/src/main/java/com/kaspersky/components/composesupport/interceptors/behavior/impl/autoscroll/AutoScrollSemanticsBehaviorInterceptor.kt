@@ -1,8 +1,8 @@
-package com.kaspersky.kaspresso.interceptors.behaviorcompose.impl.autoscroll
+package com.kaspersky.components.composesupport.interceptors.behavior.impl.autoscroll
 
 import com.kaspersky.kaspresso.autoscroll.AutoScrollProvider
-import com.kaspersky.kaspresso.autoscroll.SemanticsAutoScrollProviderImpl
-import com.kaspersky.kaspresso.interceptors.behaviorcompose.SemanticsBehaviorInterceptor
+import com.kaspersky.components.composesupport.autoscroll.SemanticsAutoScrollProviderImpl
+import com.kaspersky.components.composesupport.interceptors.behavior.SemanticsBehaviorInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.params.AutoScrollParams
 import io.github.kakaocup.compose.intercept.interaction.ComposeInteraction

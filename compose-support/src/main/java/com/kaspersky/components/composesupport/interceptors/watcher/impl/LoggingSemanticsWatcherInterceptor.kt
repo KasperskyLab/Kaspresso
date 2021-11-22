@@ -1,6 +1,6 @@
-package com.kaspersky.kaspresso.interceptors.watcher.compose.impl.logging
+package com.kaspersky.components.composesupport.interceptors.watcher.impl
 
-import com.kaspersky.kaspresso.interceptors.watcher.compose.SemanticsWatcherInterceptor
+import com.kaspersky.components.composesupport.interceptors.watcher.SemanticsWatcherInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import io.github.kakaocup.compose.intercept.interaction.ComposeInteraction
 import io.github.kakaocup.compose.intercept.operation.ComposeAction

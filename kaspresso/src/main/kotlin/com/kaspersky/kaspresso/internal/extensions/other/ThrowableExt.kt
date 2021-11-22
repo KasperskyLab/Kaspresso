@@ -43,7 +43,7 @@ internal fun <T : Throwable> List<T>.throwAll() {
 /**
  * @return true if the given throwable is contained by [allowed] set, false otherwise.
  */
-internal fun <T : Throwable> T.isAllowed(allowed: Set<Class<out Throwable>>): Boolean {
+fun <T : Throwable> T.isAllowed(allowed: Set<Class<out Throwable>>): Boolean {
     return when (this) {
         is ExtCompositeException -> {
             exceptions.find { e: Throwable ->

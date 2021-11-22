@@ -1,4 +1,4 @@
-package com.kaspersky.kaspresso.interceptors.behaviorcompose
+package com.kaspersky.components.composesupport.interceptors.behavior
 
 interface ComposeBehaviorInterceptor<Interaction, Assertion, Action> {
 

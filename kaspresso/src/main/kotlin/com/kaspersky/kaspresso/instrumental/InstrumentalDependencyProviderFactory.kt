@@ -2,7 +2,7 @@ package com.kaspersky.kaspresso.instrumental
 
 import android.app.Instrumentation
 
-internal class InstrumentalDependencyProviderFactory {
+class InstrumentalDependencyProviderFactory {
 
     inline fun <reified T : Any> getComponentProvider(instrumentation: Instrumentation): InstrumentalDependencyProvider =
         InstrumentalDependencyProviderImpl(InstrumentalUsage.ComponentLocation(T::class.java.name), instrumentation)

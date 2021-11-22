@@ -1,8 +1,8 @@
-package com.kaspersky.kaspresso.interceptors.behaviorcompose.impl.systemsafety
+package com.kaspersky.components.composesupport.interceptors.behavior.impl.systemsafety
 
 import com.kaspersky.kaspresso.device.server.AdbServer
 import com.kaspersky.kaspresso.instrumental.InstrumentalDependencyProvider
-import com.kaspersky.kaspresso.interceptors.behaviorcompose.SemanticsBehaviorInterceptor
+import com.kaspersky.components.composesupport.interceptors.behavior.SemanticsBehaviorInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.systemsafety.SystemDialogSafetyProvider
 import com.kaspersky.kaspresso.systemsafety.SystemDialogSafetyProviderImpl

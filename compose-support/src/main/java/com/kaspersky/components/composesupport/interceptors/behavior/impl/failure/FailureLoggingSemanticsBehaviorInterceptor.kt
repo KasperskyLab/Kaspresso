@@ -1,8 +1,8 @@
-package com.kaspersky.kaspresso.interceptors.behaviorcompose.impl.failure
+package com.kaspersky.components.composesupport.interceptors.behavior.impl.failure
 
 import com.kaspersky.kaspresso.failure.FailureLoggingProvider
 import com.kaspersky.kaspresso.failure.FailureLoggingProviderImpl
-import com.kaspersky.kaspresso.interceptors.behaviorcompose.SemanticsBehaviorInterceptor
+import com.kaspersky.components.composesupport.interceptors.behavior.SemanticsBehaviorInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import io.github.kakaocup.compose.intercept.interaction.ComposeInteraction
 import io.github.kakaocup.compose.intercept.operation.ComposeAction

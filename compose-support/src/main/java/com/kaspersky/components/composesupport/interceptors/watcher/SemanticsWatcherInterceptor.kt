@@ -1,6 +1,5 @@
-package com.kaspersky.kaspresso.interceptors.watcher.compose
+package com.kaspersky.components.composesupport.interceptors.watcher
 
-import com.kaspersky.kaspresso.interceptors.watcher.kautomator.KautomatorWatcherInterceptor
 import io.github.kakaocup.compose.intercept.interaction.ComposeInteraction
 import io.github.kakaocup.compose.intercept.operation.ComposeAction
 import io.github.kakaocup.compose.intercept.operation.ComposeAssertion
@@ -10,4 +9,4 @@ import io.github.kakaocup.compose.intercept.operation.ComposeAssertion
  * [ComposeInteraction.check] behavior.
  */
 interface SemanticsWatcherInterceptor :
-    KautomatorWatcherInterceptor<ComposeInteraction, ComposeAssertion, ComposeAction>
+    ComposeWatcherInterceptor<ComposeInteraction, ComposeAssertion, ComposeAction>

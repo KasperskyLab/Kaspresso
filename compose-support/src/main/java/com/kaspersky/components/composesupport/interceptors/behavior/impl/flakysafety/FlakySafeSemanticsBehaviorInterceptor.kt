@@ -1,8 +1,8 @@
-package com.kaspersky.kaspresso.interceptors.behaviorcompose.impl.flakysafety
+package com.kaspersky.components.composesupport.interceptors.behavior.impl.flakysafety
 
 import com.kaspersky.kaspresso.flakysafety.FlakySafetyProvider
 import com.kaspersky.kaspresso.flakysafety.FlakySafetyProviderSimpleImpl
-import com.kaspersky.kaspresso.interceptors.behaviorcompose.SemanticsBehaviorInterceptor
+import com.kaspersky.components.composesupport.interceptors.behavior.SemanticsBehaviorInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.params.FlakySafetyParams
 import io.github.kakaocup.compose.intercept.interaction.ComposeInteraction

@@ -1,4 +1,4 @@
-package com.kaspersky.kaspresso.interceptors.behaviorcompose
+package com.kaspersky.components.composesupport.interceptors.behavior
 
 import io.github.kakaocup.compose.intercept.interaction.ComposeInteraction
 import io.github.kakaocup.compose.intercept.operation.ComposeAction
@@ -9,4 +9,4 @@ import io.github.kakaocup.compose.intercept.operation.ComposeAssertion
  * [ComposeInteraction.check] behavior.
  */
 interface SemanticsBehaviorInterceptor :
-        ComposeBehaviorInterceptor<ComposeInteraction, ComposeAssertion, ComposeAction>
+    ComposeBehaviorInterceptor<ComposeInteraction, ComposeAssertion, ComposeAction>
