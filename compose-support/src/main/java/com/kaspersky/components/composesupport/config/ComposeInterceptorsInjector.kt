@@ -1,4 +1,4 @@
-package com.kaspersky.components.composesupport
+package com.kaspersky.components.composesupport.config
 
 import com.kaspersky.components.composesupport.interceptors.behavior.SemanticsBehaviorInterceptor
 import com.kaspersky.components.composesupport.interceptors.tolibrary.ComposeSemanticsInterceptor
