@@ -9,14 +9,6 @@ android {
         testInstrumentationRunnerArguments["clearPackageData"] = "true"
     }
 
-    buildFeatures {
-        compose = true
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.compose.get()
-    }
-
     sourceSets {
         // configure shared test folder
         val sharedTestFolder = "src/sharedTest/kotlin"
@@ -44,30 +36,20 @@ dependencies {
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.constraint)
-    implementation(libs.bundles.compose)
-    implementation(libs.lifecycleViewModelKtx)
-    implementation(libs.lifecycleLiveDataKtx)
-    implementation(libs.composeNavigation)
-    implementation(libs.lifecycleViewModelComposeKtx)
-    implementation(libs.composeRuntimeLiveData)
 
     androidTestImplementation(libs.junit)
     androidTestImplementation(projects.kaspresso)
-    androidTestImplementation(projects.composeSupport)
     androidTestImplementation(libs.androidXTestRunner)
     androidTestImplementation(libs.androidXTestRules)
     androidTestImplementation(libs.androidXTestExtJunitKtx)
     androidTestImplementation(libs.androidXTestExtJunit)
-    androidTestImplementation(libs.composeUiTestJunit)
 
     testImplementation(libs.junit)
     testImplementation(projects.kaspresso)
-    testImplementation(projects.composeSupport)
     testImplementation(libs.androidXTestRunner)
     testImplementation(libs.androidXTestRules)
     testImplementation(libs.androidXTestExtJunitKtx)
     testImplementation(libs.androidXTestExtJunit)
-    testImplementation(libs.composeUiTestJunit)
     testImplementation(libs.robolectric)
 
     debugImplementation(libs.androidXTestFragmentTesting)
