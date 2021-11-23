@@ -1,7 +1,6 @@
 package com.kaspersky.kaspresso.kautomatorsample.test.components
 
 import androidx.test.rule.ActivityTestRule
-import com.kaspersky.components.kautomator.screen.UiScreen.Companion.onUiScreen
 import com.kaspersky.kaspresso.kautomatorsample.screen.ScrollScreen
 import com.kaspersky.kaspresso.kautomatorsample.scroll.ScrollActivity
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
@@ -18,7 +17,7 @@ class ScrollViewTest : TestCase() {
 
     private val scrollScreen = ScrollScreen()
 
-//    @Test
+    @Test
     fun test() {
         run {
             /**
