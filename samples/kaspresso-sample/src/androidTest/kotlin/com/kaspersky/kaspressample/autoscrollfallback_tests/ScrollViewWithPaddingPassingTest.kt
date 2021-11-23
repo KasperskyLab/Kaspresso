@@ -68,4 +68,28 @@ class ScrollViewWithPaddingPassingTest : TestCase() {
                 }
             }
         }
+
+    @Test
+    fun click_hbutton_in_the_end() =
+        run {
+            step("Open Auto Scroll Fallback Screen") {
+                activityTestRule.launchActivity(null)
+                testLogger.i("I am testLogger")
+                device.screenshots.take("Additional_screenshot")
+                MainScreen {
+                    autoScrollFallbackButton {
+                        isVisible()
+                        click()
+                    }
+                }
+            }
+
+            step("Click hbutton_7, last item") {
+                ScrollViewWithPaddingScreen {
+                    hbutton7 {
+                        click()
+                    }
+                }
+            }
+        }
 }
