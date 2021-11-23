@@ -28,6 +28,7 @@ class InterceptorTest : TestCase() {
     val activityTestRule = ActivityTestRule(MainActivity::class.java, true, false)
 
     private val interceptorMainScreen = InterceptedMainScreen()
+    private val mainScreen = MainScreen()
 
     @Test
     fun testKautomatorInterceptors() {
@@ -47,7 +48,7 @@ class InterceptorTest : TestCase() {
         }.after {
         }.run {
             step("Simple action on default Screen") {
-                MainScreen {
+                mainScreen {
                     simpleButton {
                         isDisplayed()
                         click()
@@ -93,7 +94,7 @@ class InterceptorTest : TestCase() {
         }.after {
         }.run {
             step("Simple action on default Screen with intercepted View") {
-                MainScreen {
+                mainScreen {
                     simpleButton {
                         intercept {
                             onAll { list.add("ALL") }

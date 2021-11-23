@@ -20,12 +20,14 @@ class BottomNavigationViewTest : TestCase() {
     @get:Rule
     val rule = ActivityTestRule(ComponentsActivity::class.java, true, true)
 
+    private val componentsScreen = ComponentsScreen()
+
     @Test
     fun test() {
         run {
 
             step("Select item by id") {
-                ComponentsScreen {
+                componentsScreen {
                     bottomNav {
                         setSelectedItemWithId(ITEM_1_ID)
                         hasSelectedItemWithId(ITEM_1_ID)
@@ -35,7 +37,7 @@ class BottomNavigationViewTest : TestCase() {
             }
 
             step("Select item by index") {
-                ComponentsScreen {
+                componentsScreen {
                     bottomNav {
                         setSelectedItemWithIndex(0)
                         hasSelectedItemWithIndex(0)
@@ -45,7 +47,7 @@ class BottomNavigationViewTest : TestCase() {
             }
 
             step("Select item by label") {
-                ComponentsScreen {
+                componentsScreen {
                     bottomNav {
                         setSelectedItemWithTitle(ITEM_1_TEXT)
                         hasSelectedItemWithTitle(ITEM_1_TEXT)

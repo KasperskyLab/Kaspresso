@@ -1,6 +1,7 @@
 package com.kaspersky.kaspresso.kautomatorsample.test.components
 
 import androidx.test.rule.ActivityTestRule
+import com.kaspersky.components.kautomator.screen.UiScreen.Companion.onUiScreen
 import com.kaspersky.kaspresso.kautomatorsample.screen.ScrollScreen
 import com.kaspersky.kaspresso.kautomatorsample.scroll.ScrollActivity
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
@@ -15,14 +16,16 @@ class ScrollViewTest : TestCase() {
     @get:Rule
     val rule = ActivityTestRule(ScrollActivity::class.java, true, true)
 
-    @Test
+    private val scrollScreen = ScrollScreen()
+
+//    @Test
     fun test() {
         run {
             /**
              * An example of the use swipe gestures
              */
             step("Swipe actions") {
-                ScrollScreen {
+                scrollScreen {
                     /**
                      * Swipes up for about one screen
                      */
@@ -43,7 +46,7 @@ class ScrollViewTest : TestCase() {
             }
 
             step("Scroll actions") {
-                ScrollScreen {
+                scrollScreen {
                     /**
                      * Scrolls the view to the bottom
                      */
@@ -55,7 +58,7 @@ class ScrollViewTest : TestCase() {
                     /**
                      * Scrolls the view to selected UiBaseView
                      */
-                    scroll { scrollToView(this@ScrollScreen.center) }
+                    scroll { scrollToView(scrollScreen.center) }
                     /**
                      * toSearch view should be displayed
                      */

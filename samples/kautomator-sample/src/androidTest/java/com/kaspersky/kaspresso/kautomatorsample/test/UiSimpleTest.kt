@@ -26,6 +26,8 @@ class UiSimpleTest : TestCase() {
     @get:Rule
     val activityTestRule = ActivityTestRule(MainActivity::class.java, true, false)
 
+    private val mainScreen = MainScreen()
+
     @Test
     fun upgradeTest() {
         before {
@@ -48,7 +50,7 @@ class UiSimpleTest : TestCase() {
         }.run {
 
             step("Input text in EditText and check it") {
-                MainScreen {
+                mainScreen {
                     simpleEditText {
                         replaceText("Kaspresso")
                         hasText("Kaspresso")
@@ -56,14 +58,14 @@ class UiSimpleTest : TestCase() {
                 }
             }
             step("Click button") {
-                MainScreen {
+                mainScreen {
                     simpleButton {
                         click()
                     }
                 }
             }
             step("Click checkbox and check it") {
-                MainScreen {
+                mainScreen {
                     checkBox {
                         setChecked(true)
                         isChecked()

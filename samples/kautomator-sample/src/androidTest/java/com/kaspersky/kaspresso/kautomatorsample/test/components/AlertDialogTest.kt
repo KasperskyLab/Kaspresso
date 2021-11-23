@@ -12,11 +12,13 @@ class AlertDialogTest : TestCase() {
     @get:Rule
     val activityRule = ActivityTestRule(ComponentsActivity::class.java, true, true)
 
+    private val componentsScreen = ComponentsScreen()
+
     @Test
     fun test() {
         run {
             step("Open dialog") {
-                ComponentsScreen {
+                componentsScreen {
                     showDialogBtn {
                         click()
                     }
@@ -24,7 +26,7 @@ class AlertDialogTest : TestCase() {
             }
 
             step("Check title and message") {
-                ComponentsScreen {
+                componentsScreen {
                     dialog {
                         title {
                             hasText("Title")
@@ -42,7 +44,7 @@ class AlertDialogTest : TestCase() {
             }
 
             step("Negative button click") {
-                ComponentsScreen {
+                componentsScreen {
                     showDialogBtn {
                         click()
                     }
@@ -56,7 +58,7 @@ class AlertDialogTest : TestCase() {
             }
 
             step("Neutral button click") {
-                ComponentsScreen {
+                componentsScreen {
                     showDialogBtn {
                         click()
                     }

@@ -7,7 +7,7 @@ import com.kaspersky.components.kautomator.component.dialog.UiAlertDialog
 import com.kaspersky.components.kautomator.component.text.UiButton
 import com.kaspersky.components.kautomator.screen.UiScreen
 
-object ComponentsScreen : UiScreen<ComponentsScreen>() {
+class ComponentsScreen : UiScreen<ComponentsScreen>() {
 
     override val packageName: String = "com.kaspersky.kaspresso.kautomatorsample"
 
