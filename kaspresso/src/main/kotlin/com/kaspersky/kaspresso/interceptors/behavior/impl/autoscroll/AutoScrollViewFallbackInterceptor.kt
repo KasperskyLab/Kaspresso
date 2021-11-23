@@ -14,7 +14,7 @@ class AutoScrollViewFallbackInterceptor (
     AutoScrollProvider<ViewInteraction> by AutoScrollFallbackProviderImpl(params, logger) {
 
     /**
-     * Wraps the given [action] invocation with the autoscrolling on failure.
+     * Wraps the given [action] invocation with the fallback autoscrolling on failure.
      *
      * @param interaction the intercepted [ViewInteraction].
      * @param action the action to invoke.
