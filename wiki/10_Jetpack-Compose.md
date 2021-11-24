@@ -115,6 +115,40 @@ I/KASPRESSO: ___________________________________________________________________
 I/KASPRESSO: TEST STEP: "3. Click on the Second button" in ComposeSimpleFlakyTest
 ```
 
+## Caveats
+Remember, that Jetpack Compose and all relative tools are developing. 
+It means Jetpack Compose is not learned very well and some things can be unexpected after "Old fashioned View World" experience. 
+Let me show the interesting case.
+
+For example, this code
+```kotlin
+composeSimpleFlakyScreen(composeTestRule) {
+    firstButton {
+        performClick()
+    }
+}
+``` 
+can be the source of flakiness behavior if `firstButton` is located in non visible for a user area 
+(you just need to scroll to see the element).
+
+But, this code will always work stably: 
+```kotlin
+composeSimpleFlakyScreen(composeTestRule) {
+    firstButton {
+        assertIsDisplayed()
+        performClick()
+    }
+}
+``` 
+
+The explanation is in the nature of SemanticsNode Tree and Jetpack Compose. `firstButton` is a Node and presented in the Tree. 
+It means that `performClick()` may work and nothing bad doesn't happen. But, `firstButton` is not visible physically and a real click doesn't occur. 
+Such behavior causes the crash of a test a little bit later.<br>
+But, `assertIsDisplayed()` check doesn't pass on the first try (we don't see the element on the screen) and 
+launches work of all Interceptors including Autoscroll interceptor which scrolls the Screen to the desired element.
+
+Please, [share your experience](https://github.com/KasperskyLab/Kaspresso/issues/new) to help other developers.
+
 ## What else
 
 ### Configuration
@@ -175,6 +209,8 @@ All information about Robolectric support is available [here](./08_Kaspresso-Rob
 
 ### Compose is compatible with all sweet Kaspresso extensions
 Sweet Kaspresso extensions means using of the such constructions as 
-- `flakySafely`,
-- `continuously`,
-- etc.
+- `flakySafely`
+- `continuously`
+
+The support of some constructions is in progress: [issue-317](https://github.com/KasperskyLab/Kaspresso/issues/317).
+
