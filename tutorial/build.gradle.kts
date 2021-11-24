@@ -4,6 +4,9 @@ plugins {
 
 android {
     defaultConfig {
+        // remove after upgrading to 1.4
+        minSdk = 21
+
         applicationId = "com.kaspersky.kaspresso.tutorial"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         testInstrumentationRunnerArguments["clearPackageData"] = "true"
