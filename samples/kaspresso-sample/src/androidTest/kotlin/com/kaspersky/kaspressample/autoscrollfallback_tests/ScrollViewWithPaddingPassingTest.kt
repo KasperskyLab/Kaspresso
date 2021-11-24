@@ -1,33 +1,25 @@
 package com.kaspersky.kaspressample.autoscrollfallback_tests
 
-import android.Manifest
-import androidx.test.rule.ActivityTestRule
-import androidx.test.rule.GrantPermissionRule
+import androidx.test.ext.junit.rules.activityScenarioRule
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.screen.MainScreen
 import com.kaspersky.kaspressample.screen.ScrollViewWithPaddingScreen
+import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.junit.Rule
 import org.junit.Test
 
-class ScrollViewWithPaddingPassingTest : TestCase() {
+class ScrollViewWithPaddingPassingTest : TestCase(
+    kaspressoBuilder = Kaspresso.Builder.simple().withAutoScrollFallback()
+) {
 
     @get:Rule
-    val runtimePermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
-        Manifest.permission.WRITE_EXTERNAL_STORAGE,
-        Manifest.permission.READ_EXTERNAL_STORAGE
-    )
-
-    @get:Rule
-    val activityTestRule = ActivityTestRule(MainActivity::class.java, true, false)
+    val activityRule = activityScenarioRule<MainActivity>()
 
     @Test
     fun click_button_in_the_middle() =
         run {
             step("Open Auto Scroll Fallback Screen") {
-                activityTestRule.launchActivity(null)
-                testLogger.i("I am testLogger")
-                device.screenshots.take("Additional_screenshot")
                 MainScreen {
                     autoScrollFallbackButton {
                         isVisible()
@@ -36,7 +28,7 @@ class ScrollViewWithPaddingPassingTest : TestCase() {
                 }
             }
 
-            step("Click button_18, middle item") {
+            step("Click button_18 in ScrollView, middle item") {
                 ScrollViewWithPaddingScreen {
                     button18 {
                         click()
@@ -49,9 +41,6 @@ class ScrollViewWithPaddingPassingTest : TestCase() {
     fun click_last_button() =
         run {
             step("Open Auto Scroll Fallback Screen") {
-                activityTestRule.launchActivity(null)
-                testLogger.i("I am testLogger")
-                device.screenshots.take("Additional_screenshot")
                 MainScreen {
                     autoScrollFallbackButton {
                         isVisible()
@@ -60,7 +49,7 @@ class ScrollViewWithPaddingPassingTest : TestCase() {
                 }
             }
 
-            step("Click button_20, last item") {
+            step("Click button_20 in ScrollView, last item") {
                 ScrollViewWithPaddingScreen {
                     button20 {
                         click()
@@ -70,12 +59,9 @@ class ScrollViewWithPaddingPassingTest : TestCase() {
         }
 
     @Test
-    fun click_hbutton_in_the_end() =
+    fun click_button_in_the_end_of_HorizontalScrollView() =
         run {
             step("Open Auto Scroll Fallback Screen") {
-                activityTestRule.launchActivity(null)
-                testLogger.i("I am testLogger")
-                device.screenshots.take("Additional_screenshot")
                 MainScreen {
                     autoScrollFallbackButton {
                         isVisible()
@@ -84,7 +70,7 @@ class ScrollViewWithPaddingPassingTest : TestCase() {
                 }
             }
 
-            step("Click hbutton_7, last item") {
+            step("Click hbutton_7 in HorizontalScrollView, last item") {
                 ScrollViewWithPaddingScreen {
                     hbutton7 {
                         click()

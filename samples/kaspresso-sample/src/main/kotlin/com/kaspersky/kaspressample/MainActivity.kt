@@ -27,7 +27,6 @@ class MainActivity : AppCompatActivity() {
             )
         }
 
-
         activity_main_simple_sample_button.setOnClickListener {
             startActivity(
                 Intent(this, SimpleActivity::class.java)
@@ -75,7 +74,6 @@ class MainActivity : AppCompatActivity() {
                 Intent(this, MeasureActivity::class.java)
             )
         }
-
 
         activity_main_jetpack_compose_button.setOnClickListener {
             startActivity(

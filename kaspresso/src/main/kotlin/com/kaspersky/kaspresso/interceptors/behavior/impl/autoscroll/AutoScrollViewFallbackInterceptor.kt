@@ -7,7 +7,7 @@ import com.kaspersky.kaspresso.interceptors.behavior.ViewBehaviorInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.params.AutoScrollParams
 
-class AutoScrollViewFallbackInterceptor (
+class AutoScrollViewFallbackInterceptor(
     params: AutoScrollParams,
     logger: UiTestLogger
 ) : ViewBehaviorInterceptor,
@@ -21,4 +21,3 @@ class AutoScrollViewFallbackInterceptor (
      */
     override fun <T> intercept(interaction: ViewInteraction, action: () -> T): T = withAutoScroll(interaction, action)
 }
-

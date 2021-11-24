@@ -11,4 +11,3 @@ class AutoscrollFallbackActivity : AppCompatActivity() {
         setContentView(R.layout.activity_scrollview_with_padding)
     }
 }
-

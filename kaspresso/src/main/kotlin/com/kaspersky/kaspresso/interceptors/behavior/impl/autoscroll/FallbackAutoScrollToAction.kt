@@ -37,7 +37,7 @@ class FallbackAutoScrollToAction : ViewAction {
         return if (this == lastView) {
             if (this.isScrollable()) this else null
         } else {
-            if (this.isScrollable()){
+            if (this.isScrollable()) {
                 this
             } else {
                 this?.parent?.findFirstView()?.findFirstParentScrollableView(lastView)
@@ -88,4 +88,3 @@ class FallbackAutoScrollToAction : ViewAction {
         private val TAG = FallbackAutoScrollToAction::class.java.simpleName
     }
 }
-

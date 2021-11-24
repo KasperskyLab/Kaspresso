@@ -6,7 +6,6 @@ import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.params.AutoScrollParams
 import com.kaspersky.kaspresso.interceptors.behavior.impl.autoscroll.FallbackAutoScrollToAction
 
-
 class AutoScrollFallbackProviderImpl(
     private val params: AutoScrollParams,
     private val logger: UiTestLogger
@@ -55,5 +54,3 @@ class AutoScrollFallbackProviderImpl(
         }
     }
 }
-
-

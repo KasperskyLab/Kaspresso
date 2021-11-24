@@ -321,6 +321,24 @@ data class Kaspresso(
         }
 
         /**
+         * In some cases, scrolling to the view works, but the action cannot be performed due to padding in
+         * the scrollable view, namely
+         * - ScrollView or NestedScrollView
+         * - ListView
+         * - HorizontalScrollView
+         *
+         * This is a very special case. If any of the screens in your tests contains one of the aforementioned
+         * Views and they have padding, use this in your [Kaspresso.Builder] to avoid scrolling problems
+         */
+        fun withAutoScrollFallback(): Builder =
+            this.apply {
+                viewBehaviorInterceptors = viewBehaviorInterceptors.apply {
+                    val autoScrollIndex = indexOfFirst { it is AutoScrollViewBehaviorInterceptor }
+                    add(autoScrollIndex + 1, AutoScrollViewFallbackInterceptor(autoScrollParams, libLogger))
+                }
+        }
+
+        /**
          * Holds an implementation of [KautomatorWaitForIdleSettings] for external developer's usage in tests.
          * If it was not specified, the default implementation is used.
          */
@@ -864,7 +882,6 @@ data class Kaspresso(
             if (!::viewBehaviorInterceptors.isInitialized) viewBehaviorInterceptors =
                 if (isAndroidRuntime) mutableListOf(
                     AutoScrollViewBehaviorInterceptor(autoScrollParams, libLogger),
-                    AutoScrollViewFallbackInterceptor(autoScrollParams, libLogger),
                     SystemDialogSafetyViewBehaviorInterceptor(
                         libLogger,
                         instrumentalDependencyProviderFactory.getInterceptorProvider<SystemDialogSafetyViewBehaviorInterceptor>(instrumentation),
@@ -874,7 +891,6 @@ data class Kaspresso(
                     FailureLoggingViewBehaviorInterceptor(libLogger)
                 ) else mutableListOf(
                     AutoScrollViewBehaviorInterceptor(autoScrollParams, libLogger),
-                    AutoScrollViewFallbackInterceptor(autoScrollParams, libLogger),
                     FlakySafeViewBehaviorInterceptor(flakySafetyParams, libLogger),
                     FailureLoggingViewBehaviorInterceptor(libLogger)
                 )
