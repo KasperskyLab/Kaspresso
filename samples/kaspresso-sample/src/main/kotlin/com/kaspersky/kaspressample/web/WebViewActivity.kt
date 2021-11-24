@@ -1,5 +1,6 @@
 package com.kaspersky.kaspressample.web
 
+import android.annotation.SuppressLint
 import android.annotation.TargetApi
 import android.os.Build
 import android.os.Bundle
@@ -20,6 +21,7 @@ class WebViewActivity : AppCompatActivity() {
             webViewClient = object : WebViewClient() {
 
                 @TargetApi(Build.VERSION_CODES.N)
+                @SuppressLint("NewApi")
                 override fun shouldOverrideUrlLoading(view: WebView, request: WebResourceRequest): Boolean {
                     view.loadUrl(request.url.toString())
                     return true
