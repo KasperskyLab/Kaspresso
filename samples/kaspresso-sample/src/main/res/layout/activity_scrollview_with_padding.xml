@@ -43,6 +43,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <HorizontalScrollView
+        android:id="@+id/hscrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="20dp">

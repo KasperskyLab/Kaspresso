@@ -16,6 +16,7 @@ import org.hamcrest.Matcher
 import org.hamcrest.Matchers
 
 class FallbackAutoScrollToAction : ViewAction {
+
     override fun getConstraints(): Matcher<View> {
         return Matchers.allOf(
             ViewMatchers.withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE),
@@ -54,7 +55,7 @@ class FallbackAutoScrollToAction : ViewAction {
     }
 
     override fun perform(uiController: UiController, view: View) {
-        if (ViewMatchers.isDisplayingAtLeast(100).matches(view)) {
+        if (ViewMatchers.isDisplayingAtLeast(FULLY_VISIBLE_PERCENTAGE).matches(view)) {
             Log.i(TAG, "View is already displayed. Returning.")
             return
         }
@@ -63,20 +64,29 @@ class FallbackAutoScrollToAction : ViewAction {
 
         when (scrollView is HorizontalScrollView) {
             true -> scrollView.scrollTo(view.right + scrollView.paddingEnd, 0)
-            false -> scrollView?.scrollTo(0, view.top - scrollView.paddingTop)
+            false -> scrollView?.scrollTo(0, view.bottom + scrollView.paddingBottom)
         }
-
         uiController.loopMainThreadUntilIdle()
-        if (!ViewMatchers.isDisplayingAtLeast(100).matches(view)) {
-            throw PerformException.Builder()
-                .withActionDescription(this.description)
-                .withViewDescription(HumanReadables.describe(view))
-                .withCause(
-                    java.lang.RuntimeException(
-                        "Fallback scrolling to view was attempted, but the view is not displayed"
+        if (!ViewMatchers.isDisplayingAtLeast(FULLY_VISIBLE_PERCENTAGE).matches(view)) {
+
+            // Try scroll in the opposite direction before failing: leftwards or upwards
+            when (scrollView is HorizontalScrollView) {
+                true -> scrollView.scrollTo(view.left - scrollView.paddingStart, 0)
+                false -> scrollView?.scrollTo(0, view.top - scrollView.paddingTop)
+            }
+            uiController.loopMainThreadUntilIdle()
+
+            if (!ViewMatchers.isDisplayingAtLeast(FULLY_VISIBLE_PERCENTAGE).matches(view)) {
+                throw PerformException.Builder()
+                    .withActionDescription(this.description)
+                    .withViewDescription(HumanReadables.describe(view))
+                    .withCause(
+                        java.lang.RuntimeException(
+                            "Fallback scrolling to view was attempted, but the view is not displayed"
+                        )
                     )
-                )
-                .build()
+                    .build()
+            }
         }
     }
 
@@ -86,5 +96,6 @@ class FallbackAutoScrollToAction : ViewAction {
 
     companion object {
         private val TAG = FallbackAutoScrollToAction::class.java.simpleName
+        private const val FULLY_VISIBLE_PERCENTAGE = 100
     }
 }
