@@ -10,7 +10,7 @@
 
 Kaspresso is a great framework for UI testing. Based on [Espresso](https://developer.android.com/training/testing/espresso) and [UI Automator](https://developer.android.com/training/testing/ui-automator), Kaspresso provides a wide range of additional amazing features, such as:
 * 100% stability, no flakiness.
-* *[WIP] Jetpack Compose support.*
+* Jetpack Compose support [since version 1.4].
 * Significantly faster execution of UI Automator commands.
 With Kaspresso, some UI Automator commands run **10 times faster**!
 * Excellent readability due to human DSL.
@@ -252,7 +252,7 @@ dependencies {
     androidTestImplementation 'com.kaspersky.android-components:kaspresso:<latest_version>'
     # Allure support
     androidTestImplementation "com.kaspersky.android-components:kaspresso-allure-support:<latest_version>"
-    # Jetpack Compose support
+    # Jetpack Compose support (since version 1.4)
     androidTestImplementation "com.kaspersky.android-components:kaspresso-compose-support:<latest_version>"
 }
 ```
