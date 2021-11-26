@@ -4,7 +4,7 @@ import com.kaspersky.components.kautomator.component.scroll.UiScrollView
 import com.kaspersky.components.kautomator.component.text.UiTextView
 import com.kaspersky.components.kautomator.screen.UiScreen
 
-class RecyclerScreen : UiScreen<RecyclerScreen>() {
+object RecyclerScreen : UiScreen<RecyclerScreen>() {
 
     override val packageName: String = "com.kaspersky.kaspresso.kautomatorsample"
 

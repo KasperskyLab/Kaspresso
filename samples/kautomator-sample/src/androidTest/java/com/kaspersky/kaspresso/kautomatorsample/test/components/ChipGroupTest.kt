@@ -1,7 +1,6 @@
 package com.kaspersky.kaspresso.kautomatorsample.test.components
 
 import androidx.test.rule.ActivityTestRule
-import com.kaspersky.components.kautomator.screen.UiScreen.Companion.onUiScreen
 import com.kaspersky.kaspresso.kautomatorsample.ComponentsActivity
 import com.kaspersky.kaspresso.kautomatorsample.screen.ComponentsScreen
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
@@ -23,7 +22,7 @@ class ChipGroupTest : TestCase() {
     fun test() {
         run {
             step("Select chip with id") {
-                onUiScreen<ComponentsScreen> {
+                ComponentsScreen {
                     chipGroup {
                         isNotChipWithIdSelected(CHIP_ID)
                         selectChipWithId(CHIP_ID)
@@ -33,7 +32,7 @@ class ChipGroupTest : TestCase() {
             }
 
             step("Select chip with text") {
-                onUiScreen<ComponentsScreen> {
+                ComponentsScreen {
                     chipGroup {
                         isNotChipWithTextSelected(CHIP_TEXT)
                         selectChipWithText(CHIP_TEXT)
@@ -43,7 +42,7 @@ class ChipGroupTest : TestCase() {
             }
 
             step("Select chip with index") {
-                onUiScreen<ComponentsScreen> {
+                ComponentsScreen {
                     chipGroup {
                         isNotChipWithIndexSelected(CHIP_INDEX)
                         selectChipWithIndex(CHIP_INDEX)

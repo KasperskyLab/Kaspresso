@@ -1,7 +1,6 @@
 package com.kaspersky.kaspresso.kautomatorsample.test.components
 
 import androidx.test.rule.ActivityTestRule
-import com.kaspersky.components.kautomator.screen.UiScreen.Companion.onUiScreen
 import com.kaspersky.kaspresso.kautomatorsample.ComponentsActivity
 import com.kaspersky.kaspresso.kautomatorsample.screen.ComponentsScreen
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
@@ -17,7 +16,7 @@ class CheckboxTest : TestCase() {
     fun test() {
         run {
             step("Set checked") {
-                onUiScreen<ComponentsScreen> {
+                ComponentsScreen {
                     checkbox {
                         setChecked(true)
                         isChecked()
@@ -26,7 +25,7 @@ class CheckboxTest : TestCase() {
             }
 
             step("Set not checked") {
-                onUiScreen<ComponentsScreen> {
+                ComponentsScreen {
                     checkbox {
                         setChecked(false)
                         isNotChecked()

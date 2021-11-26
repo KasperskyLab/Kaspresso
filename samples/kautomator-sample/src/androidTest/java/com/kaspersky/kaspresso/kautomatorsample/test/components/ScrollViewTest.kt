@@ -15,8 +15,6 @@ class ScrollViewTest : TestCase() {
     @get:Rule
     val rule = ActivityTestRule(ScrollActivity::class.java, true, true)
 
-    private val scrollScreen = ScrollScreen()
-
     @Test
     fun test() {
         run {
@@ -24,7 +22,7 @@ class ScrollViewTest : TestCase() {
              * An example of the use swipe gestures
              */
             step("Swipe actions") {
-                scrollScreen {
+                ScrollScreen {
                     /**
                      * Swipes up for about one screen
                      */
@@ -45,7 +43,7 @@ class ScrollViewTest : TestCase() {
             }
 
             step("Scroll actions") {
-                scrollScreen {
+                ScrollScreen {
                     /**
                      * Scrolls the view to the bottom
                      */
@@ -57,7 +55,7 @@ class ScrollViewTest : TestCase() {
                     /**
                      * Scrolls the view to selected UiBaseView
                      */
-                    scroll { scrollToView(scrollScreen.center) }
+                    scroll { scrollToView(this@ScrollScreen.center) }
                     /**
                      * toSearch view should be displayed
                      */
