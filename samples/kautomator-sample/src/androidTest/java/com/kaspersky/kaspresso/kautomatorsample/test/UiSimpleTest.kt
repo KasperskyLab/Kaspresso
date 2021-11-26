@@ -33,10 +33,18 @@ class UiSimpleTest : TestCase() {
                 intercept {
                     onUiInteraction {
                         onCheck { uiInteraction, uiAssert ->
+                            // reFindUiObject() is called to update elements in MainScreen that could stale because MainScreen is Object.
+                            // Usually, Kautomator interceptors handle such cases. But here, we define our own Interceptors for Kautomator,
+                            // that's why there is a risk to catch an Exception. All of this forces us to put reFindUiObject() manually.
+                            uiInteraction.reFindUiObject()
                             testLogger.i("KautomatorIntercept", "interaction=$uiInteraction, assertion=$uiAssert")
                             uiInteraction.check(uiAssert)
                         }
                         onPerform { uiInteraction, uiAction ->
+                            // reFindUiObject() is called to update elements in MainScreen that could stale because MainScreen is Object.
+                            // Usually, Kautomator interceptors handle such cases. But here, we define our own Interceptors for Kautomator,
+                            // that's why there is a risk to catch an Exception. All of this forces us to put reFindUiObject() manually.
+                            uiInteraction.reFindUiObject()
                             testLogger.i("KautomatorIntercept", "interaction=$uiInteraction, action=$uiAction")
                         }
                     }
