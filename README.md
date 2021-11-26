@@ -10,7 +10,7 @@
 
 Kaspresso is a great framework for UI testing. Based on [Espresso](https://developer.android.com/training/testing/espresso) and [UI Automator](https://developer.android.com/training/testing/ui-automator), Kaspresso provides a wide range of additional amazing features, such as:
 * 100% stability, no flakiness.
-* Jetpack Compose support [since version 1.4].
+* Jetpack Compose support (**Early access**).
 * Significantly faster execution of UI Automator commands.
 With Kaspresso, some UI Automator commands run **10 times faster**!
 * Excellent readability due to human DSL.
@@ -218,11 +218,13 @@ Kaspresso can generate very detailed Allure-reports for each test:
 ![](https://habrastorage.org/webt/tq/t7/ch/tqt7chcdczrgduhoukqhx1ertfc.png)
 More information is available [here](/wiki/09_Kaspresso-Allure.md). 
 
-### Jetpack Compose support
+### Jetpack Compose support (Early access)
 
 Now, you can write your Kaspresso tests for Jetpack Compose screens! DSL and all principles are the same. 
 So, you will not see any difference between tests for View screens and for Compose screens.
 More information is available [here](/wiki/10_Jetpack-Compose.md).
+
+**Be aware of it's an early access that may contain bugs. Also, API can be changed, but we are going to avoid it.**
 
 ## Philosophy
 
@@ -252,7 +254,7 @@ dependencies {
     androidTestImplementation 'com.kaspersky.android-components:kaspresso:<latest_version>'
     # Allure support
     androidTestImplementation "com.kaspersky.android-components:kaspresso-allure-support:<latest_version>"
-    # Jetpack Compose support (since version 1.4)
+    # Jetpack Compose support
     androidTestImplementation "com.kaspersky.android-components:kaspresso-compose-support:<latest_version>"
 }
 ```
