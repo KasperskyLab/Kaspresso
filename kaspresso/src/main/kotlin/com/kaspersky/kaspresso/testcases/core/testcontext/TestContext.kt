@@ -1,9 +1,9 @@
 package com.kaspersky.kaspresso.testcases.core.testcontext
 
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.StepWatcherInterceptor
-import com.kaspersky.kaspresso.extensions.forEachSafely
-import com.kaspersky.kaspresso.extensions.invokeSafely
-import com.kaspersky.kaspresso.extensions.throwAll
+import com.kaspersky.kaspresso.internal.extensions.other.forEachSafely
+import com.kaspersky.kaspresso.internal.extensions.other.invokeSafely
+import com.kaspersky.kaspresso.internal.extensions.other.throwAll
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.testcases.api.scenario.BaseScenario
 import com.kaspersky.kaspresso.testcases.core.step.StepInfoProducer

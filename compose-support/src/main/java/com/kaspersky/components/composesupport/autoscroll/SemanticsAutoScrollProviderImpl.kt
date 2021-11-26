@@ -2,10 +2,10 @@ package com.kaspersky.components.composesupport.autoscroll
 
 import androidx.compose.ui.test.performScrollTo
 import com.kaspersky.kaspresso.autoscroll.AutoScrollProvider
-import com.kaspersky.kaspresso.extensions.isAllowed
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.params.AutoScrollParams
 import io.github.kakaocup.compose.intercept.interaction.ComposeInteraction
+import io.reactivex.exceptions.ExtCompositeException
 
 class SemanticsAutoScrollProviderImpl(
     private val logger: UiTestLogger,
@@ -30,6 +30,21 @@ class SemanticsAutoScrollProviderImpl(
                 return scroll(interaction, action, error)
             }
             throw error
+        }
+    }
+
+    // temp copy-paste of com.kaspersky.kaspresso.internal.extensions.other.isAllowed
+    // probably, we will create an a separate "utils" module to avoid providing of such utils classes to users
+    private fun <T : Throwable> T.isAllowed(allowed: Set<Class<out Throwable>>): Boolean {
+        return when (this) {
+            is ExtCompositeException -> {
+                exceptions.find { e: Throwable ->
+                    allowed.find { it.isAssignableFrom(e.javaClass) } != null
+                } != null
+            }
+            else -> {
+                allowed.find { it.isAssignableFrom(javaClass) } != null
+            }
         }
     }
 

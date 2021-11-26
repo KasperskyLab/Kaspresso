@@ -1,6 +1,6 @@
 package com.kaspersky.kaspresso.internal.wait
 
-import com.kaspersky.kaspresso.extensions.isAllowed
+import com.kaspersky.kaspresso.internal.extensions.other.isAllowed
 import com.kaspersky.kaspresso.logger.UiTestLogger
 
 /**

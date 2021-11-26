@@ -4,7 +4,7 @@ import com.kaspersky.kaspresso.enricher.MainSectionEnricher
 import com.kaspersky.kaspresso.enricher.impl.composite.CompositeMainSectionEnricher
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.TestRunWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.composite.TestRunCompositeWatcherInterceptor
-import com.kaspersky.kaspresso.extensions.getException
+import com.kaspersky.kaspresso.internal.extensions.other.getException
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.testcases.core.step.StepsManager
 import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
