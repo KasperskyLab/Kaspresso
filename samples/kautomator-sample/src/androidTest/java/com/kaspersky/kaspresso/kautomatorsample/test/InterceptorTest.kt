@@ -6,7 +6,6 @@ import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.components.kautomator.KautomatorConfigurator
 import com.kaspersky.components.kautomator.component.text.UiButton
 import com.kaspersky.components.kautomator.screen.UiScreen
-import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.kautomatorsample.MainActivity
 import com.kaspersky.kaspresso.kautomatorsample.screen.MainScreen
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
@@ -17,13 +16,7 @@ import org.junit.Test
 /**
  * The test demonstrating and checking work of interceptors concept in Kautomator
  */
-class InterceptorTest : TestCase(
-    kaspressoBuilder = Kaspresso.Builder.simple {
-        afterEachTest {
-            InterceptedMainScreen.resetScreenList()
-        }
-    }
-) {
+class InterceptorTest : TestCase() {
 
     @get:Rule
     val runtimePermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
@@ -33,6 +26,8 @@ class InterceptorTest : TestCase(
 
     @get:Rule
     val activityTestRule = ActivityTestRule(MainActivity::class.java, true, false)
+
+    private val interceptorMainScreen = InterceptedMainScreen()
 
     @Test
     fun testKautomatorInterceptors() {
@@ -73,7 +68,7 @@ class InterceptorTest : TestCase(
         }.after {
         }.run {
             step("Simple action on Intercepted Screen") {
-                InterceptedMainScreen {
+                interceptorMainScreen {
                     simpleButton {
                         isDisplayed()
                         click()
@@ -82,7 +77,7 @@ class InterceptorTest : TestCase(
             }
 
             step("Check Intercepting correctness") {
-                InterceptedMainScreen {
+                interceptorMainScreen {
                     assertEquals(mutableListOf("ALL", "CHECK", "ALL", "PERFORM"), screenList)
                 }
             }
@@ -136,7 +131,7 @@ class InterceptorTest : TestCase(
         }.after {
         }.run {
             step("Simple action on intercepted Screen with intercepted View") {
-                InterceptedMainScreen {
+                interceptorMainScreen {
                     simpleButton {
                         intercept {
                             onAll { list.add("ALL_VIEW") }
@@ -151,7 +146,7 @@ class InterceptorTest : TestCase(
             }
 
             step("Check Intercepting correctness") {
-                InterceptedMainScreen {
+                interceptorMainScreen {
                     assert(screenList == mutableListOf("ALL", "CHECK", "ALL", "PERFORM"))
                 }
                 assertEquals(
@@ -182,7 +177,7 @@ class InterceptorTest : TestCase(
         }.after {
         }.run {
             step("Simple action on intercepted Screen with intercepted View") {
-                InterceptedMainScreen {
+                interceptorMainScreen {
                     simpleButton {
                         intercept {
                             onAll { list.add("ALL_VIEW") }
@@ -205,7 +200,7 @@ class InterceptorTest : TestCase(
             }
 
             step("Check Intercepting correctness") {
-                InterceptedMainScreen {
+                interceptorMainScreen {
                     assert(screenList.isEmpty())
                 }
                 assertEquals(mutableListOf("ALL_VIEW", "CHECK_VIEW", "ALL_VIEW", "PERFORM_VIEW"), list)
@@ -213,7 +208,7 @@ class InterceptorTest : TestCase(
         }
     }
 
-    object InterceptedMainScreen : UiScreen<InterceptedMainScreen>() {
+    class InterceptedMainScreen : UiScreen<InterceptedMainScreen>() {
 
         override val packageName: String = "com.kaspersky.kaspresso.kautomatorsample"
 
@@ -228,10 +223,6 @@ class InterceptorTest : TestCase(
                     onPerform { _, _ -> screenList.add("PERFORM") }
                 }
             }
-        }
-
-        fun resetScreenList() {
-            screenList.clear()
         }
     }
 }
