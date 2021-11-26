@@ -12,7 +12,7 @@ configure<BaseExtension> {
     }
 
     defaultConfig {
-        minSdk = 21
+        minSdk = 18
         targetSdk = 30
     }
 

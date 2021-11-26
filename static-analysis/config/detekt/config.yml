@@ -514,7 +514,7 @@ style:
     maxJumpCount: 1
   MagicNumber:
     active: true
-    excludes: ['**/test/**', '**/androidTest/**', '**/sharedTest/**', '**/*.Test.kt', '**/*.Spec.kt', '**/*.Spek.kt']
+    excludes: ['**/test/**', '**/androidTest/**', '**/sharedTest/**', '**/*.Test.kt', '**/*.Spec.kt', '**/*.Spek.kt', '**/*.kts']
     ignoreNumbers: ['-1', '0', '1', '2']
     ignoreHashCodeFunction: true
     ignorePropertyDeclaration: false

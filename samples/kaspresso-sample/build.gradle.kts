@@ -36,6 +36,7 @@ dependencies {
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.constraint)
+    implementation(libs.multidex)
 
     androidTestImplementation(libs.junit)
     androidTestImplementation(projects.kaspresso)

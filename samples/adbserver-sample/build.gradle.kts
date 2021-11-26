@@ -12,4 +12,5 @@ dependencies {
     implementation(libs.kotlinStdlib)
     implementation(libs.appcompat)
     implementation(projects.adbServer.adbserverDevice)
+    implementation(libs.multidex)
 }

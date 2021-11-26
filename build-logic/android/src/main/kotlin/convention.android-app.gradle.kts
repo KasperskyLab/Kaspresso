@@ -9,6 +9,10 @@ plugins {
 android {
     testBuildType = "debug"
 
+    defaultConfig {
+        multiDexEnabled = true
+    }
+
     variantFilter {
         if (name != testBuildType) {
             ignore = true
