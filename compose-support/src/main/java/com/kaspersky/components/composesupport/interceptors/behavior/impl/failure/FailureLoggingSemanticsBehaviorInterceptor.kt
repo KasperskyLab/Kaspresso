@@ -12,8 +12,9 @@ import io.github.kakaocup.compose.intercept.operation.ComposeAssertion
  * The implementation of [SemanticsBehaviorInterceptor] and [FailureLoggingProvider] interfaces.
  * Provides failure logging functionality for [ComposeInteraction.perform] and [ComposeInteraction.check] calls.
  *
- * By default, this interceptor is not used in Kaspresso.
- * If you desire to change result log (especially in case of an error) we recommend to use [FailureLoggingProvider] directly
+ * Important!
+ * By default, the interceptor is not used in Kaspresso because this one pollutes logs by error messages that may confuse a user.
+ * If you desire to change result log (especially in case of an error) we recommend to use [FailureLoggingProvider] directly.
  */
 class FailureLoggingSemanticsBehaviorInterceptor(
     logger: UiTestLogger

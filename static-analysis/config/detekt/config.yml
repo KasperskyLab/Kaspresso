@@ -281,7 +281,7 @@ formatting:
     active: true
     autoCorrect: true
   NoWildcardImports:
-    active: false
+    active: true
   PackageName:
     active: false
     autoCorrect: true
@@ -619,4 +619,4 @@ style:
   VarCouldBeVal:
     active: false
   WildcardImport:
-    active: false
+    active: true

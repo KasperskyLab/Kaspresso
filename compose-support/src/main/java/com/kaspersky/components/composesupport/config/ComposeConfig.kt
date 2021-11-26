@@ -3,7 +3,6 @@ package com.kaspersky.components.composesupport.config
 import com.kaspersky.components.composesupport.interceptors.behavior.SemanticsBehaviorInterceptor
 import com.kaspersky.components.composesupport.interceptors.behavior.impl.autoscroll.AutoScrollSemanticsBehaviorInterceptor
 import com.kaspersky.components.composesupport.interceptors.behavior.impl.elementloader.ElementLoaderSemanticsBehaviorInterceptor
-import com.kaspersky.components.composesupport.interceptors.behavior.impl.failure.FailureLoggingSemanticsBehaviorInterceptor
 import com.kaspersky.components.composesupport.interceptors.behavior.impl.flakysafety.FlakySafeSemanticsBehaviorInterceptor
 import com.kaspersky.components.composesupport.interceptors.behavior.impl.systemsafety.SystemDialogSafetySemanticsBehaviorInterceptor
 import com.kaspersky.components.composesupport.interceptors.watcher.SemanticsWatcherInterceptor
@@ -42,15 +41,13 @@ class ComposeConfig {
                             adbServer
                         ),
                         ElementLoaderSemanticsBehaviorInterceptor(libLogger, elementLoaderParams),
-                        FlakySafeSemanticsBehaviorInterceptor(flakySafetyParams, libLogger),
-                        FailureLoggingSemanticsBehaviorInterceptor(libLogger)
+                        FlakySafeSemanticsBehaviorInterceptor(flakySafetyParams, libLogger)
                     )
                 } else {
                     mutableListOf(
                         AutoScrollSemanticsBehaviorInterceptor(libLogger, autoScrollParams),
                         ElementLoaderSemanticsBehaviorInterceptor(libLogger, elementLoaderParams),
-                        FlakySafeSemanticsBehaviorInterceptor(flakySafetyParams, libLogger),
-                        FailureLoggingSemanticsBehaviorInterceptor(libLogger)
+                        FlakySafeSemanticsBehaviorInterceptor(flakySafetyParams, libLogger)
                     )
                 }
         }
