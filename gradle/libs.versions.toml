@@ -39,7 +39,7 @@ espressoWeb = { module = "androidx.test.espresso:espresso-web", version.ref = "e
 uiAutomator = "androidx.test.uiautomator:uiautomator:2.2.0"
 robolectric = "org.robolectric:robolectric:4.7.2"
 kakao = "io.github.kakaocup:kakao:3.0.5"
-kakaoCompose = "io.github.kakaocup:compose:0.0.5"
+kakaoCompose = "io.github.kakaocup:compose:0.0.6"
 junit = "junit:junit:4.13.2"
 junitJupiter = "org.junit.jupiter:junit-jupiter:5.8.1"
 truth = "com.google.truth:truth:1.0"

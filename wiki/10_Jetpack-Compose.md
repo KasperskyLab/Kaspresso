@@ -5,6 +5,15 @@ Jetpack Compose support consists of two parts: [Kakao Compose library](https://g
 ## Kakao Compose library
 All detailed information is available in the [README](https://github.com/KakaoCup/Compose) of the library.
 
+Jetpack Compose support is provided by a separate module to not force developers to up their minSDK version to 21.
+
+So, first of all, add a dependency to `build.gradle`:
+```groovy
+dependencies {
+    androidTestImplementation "com.kaspersky.android-components:kaspresso-compose-support:<latest_version>"
+}
+```
+
 In a nutshell, let's see at how Kakao Compose DSL looks like:
 ```kotlin
 // Screen class
@@ -25,8 +34,10 @@ class ComposeMainScreen(semanticsProvider: SemanticsNodeInteractionsProvider) :
 
 // This annotation is here to make the test is appropriate for JVM environment (with Robolectric)
 @RunWith(AndroidJUnit4::class)
-// Test class declaration. Nothing new
-class ComposeSimpleFlakyTest : TestCase() {
+// Test class declaration
+class ComposeSimpleFlakyTest : TestCase(
+    kaspressoBuilder = Kaspresso.Builder.withComposeSupport()
+) {
 
     // Special rule for Compose tests
     @get:Rule
@@ -106,17 +117,64 @@ I/KASPRESSO: TEST STEP: "3. Click on the Second button" in ComposeSimpleFlakyTes
 
 ## What else
 
+### Configuration
+Jetpack Compose support is fully configurable. Have a look at various options to configure:
+```kotlin
+// We edit only semanticsBehaviorInterceptors
+// Now, semanticsBehaviorInterceptors contains only FailureLoggingSemanticsBehaviorInterceptor
+class ComposeCustomizeTest : TestCase(
+    kaspressoBuilder = Kaspresso.Builder.withComposeSupport { composeBuilder ->
+        composeBuilder.semanticsBehaviorInterceptors = composeBuilder.semanticsBehaviorInterceptors.filter {
+            it is FailureLoggingSemanticsBehaviorInterceptor
+        }.toMutableList()
+    }
+)
+
+// We edit flakySafetyParams and semanticsBehaviorInterceptors
+// Also, we change semanticsBehaviorInterceptors where we exclude SystemDialogSafetySemanticsBehaviorInterceptor
+class ComposeCustomizeTest : TestCase(
+    kaspressoBuilder = Kaspresso.Builder.withComposeSupport(
+        // It's very important to change flakySafetyParams in customize section
+        // Otherwise, all interceptors will use a default version of flakySafetyParams
+        customize = {
+            flakySafetyParams = FlakySafetyParams.custom(timeoutMs = 5000, intervalMs = 1000)
+        },
+        lateComposeCustomize = { composeBuilder ->
+            composeBuilder.semanticsBehaviorInterceptors = composeBuilder.semanticsBehaviorInterceptors.filter {
+                it !is SystemDialogSafetySemanticsBehaviorInterceptor
+            }.toMutableList()
+        }
+    ).apply {
+        // Remember, It's better to customize ComposeSupport only after Kaspresso customizing
+        // Because ComposeSupport interceptors can be dependent on some Kaspresso entities
+        // For example, changing flakySafetyParams in this section will not affect ComposeSupport interceptors
+    }
+)
+
+// There is another way to do exactly the same
+class ComposeCustomizeTest : TestCase(
+    kaspressoBuilder = Kaspresso.Builder.simple {
+        flakySafetyParams = FlakySafetyParams.custom(timeoutMs = 5000, intervalMs = 1000)
+    }.apply {
+        addComposeSupport { composeBuilder ->
+            composeBuilder.semanticsBehaviorInterceptors = composeBuilder.semanticsBehaviorInterceptors.filter {
+                it !is SystemDialogSafetySemanticsBehaviorInterceptor
+            }.toMutableList()
+        }
+    }
+)
+```
+
 ### Robolectric support
 You can run your Compose tests on the JVM environment with Robolectric.<br> 
 Run `ComposeSimpleFlakyTest` (from "kaspresso-sample" module) on the JVM right now:
 ```
-./gradlew :samples:kaspresso-sample:testDebugUnitTest --tests "com.kaspersky.kaspressample.jetpack_compose_tests.ComposeSimpleFlakyTest"   
+./gradlew :samples:kaspresso-compose-support-sample:testDebugUnitTest --info --tests "com.kaspersky.kaspresso.composesupport.sample.test.ComposeSimpleFlakyTest"  
 ```
 All information about Robolectric support is available [here](./08_Kaspresso-Robolectric.md).
 
 ### Compose is compatible with all sweet Kaspresso extensions
 Sweet Kaspresso extensions means using of the such constructions as 
 - `flakySafely`,
-- `continuously`, 
-- `compose` (sorry for name clashing, here, it's an implementation of if-else logic in a test, see `JetpackComposeSimpleKaspressoComposeTest`),
+- `continuously`,
 - etc.

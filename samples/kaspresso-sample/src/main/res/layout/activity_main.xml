@@ -73,13 +73,6 @@
         android:layout_below="@id/activity_main_idlewaiting_sample_button"
         android:text="@string/main_screen_measure_sample_button" />
 
-    <Button
-        android:id="@+id/activity_main_jetpack_compose_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/activity_main_measure_sample_button"
-        android:text="@string/main_screen_jetpack_compose_button" />
-
     <TextView
         android:id="@+id/activity_main_description_textview"
         android:layout_width="wrap_content"

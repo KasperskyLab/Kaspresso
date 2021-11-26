@@ -53,7 +53,7 @@ class TestRunCompositeWatcherInterceptor(
                 .isEmpty()
         ) {
             logger.e(
-                """Please, revert back DefaultTestRunWatcherInterceptor to 
+                """Revert back DefaultTestRunWatcherInterceptor to
                         Kaspresso.Builder.testRunWatcherInterceptors.
                         Otherwise Kaspresso.Builder.beforeEachTest and Kaspresso.Biulder.afterEachTest will not work!
                         """.trimIndent()

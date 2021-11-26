@@ -24,7 +24,7 @@ android {
 
 dependencies {
     //...
-    androidTestImplementation "com.kaspersky.android-components:kaspresso-allure-support:1.3.0"
+    androidTestImplementation "com.kaspersky.android-components:kaspresso-allure-support:<latest_version>"
 }
 ```
 Next, use special [**withAllureSupport**](../allure-support/src/main/kotlin/com/kaspersky/components/alluresupport/AllureSupportKaspressoBuilder.kt) function in your TestCase constructor or in your TestCaseRule to turn on all available Allure-supporting interceptors:

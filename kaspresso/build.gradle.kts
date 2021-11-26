@@ -10,12 +10,10 @@ publish {
 dependencies {
     api(projects.kautomator)
     api(libs.kakao)
-    api(libs.kakaoCompose)
     api(libs.bundles.espresso)
     api(libs.uiAutomator)
     api(libs.androidXCore)
     api(libs.androidXTestRules)
-    api(libs.composeUiTest)
 
     implementation(libs.kotlinStdlib)
     implementation(libs.gson)

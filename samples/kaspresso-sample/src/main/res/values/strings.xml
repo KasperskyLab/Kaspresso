@@ -73,15 +73,6 @@
     <string name="compose_screen_dialog_message" translatable="false">Some unexpected text</string>
     <string name="compose_screen_dialog_pos_button" translatable="false">OK</string>
 
-    <!-- Jetpack Compose -->
-
-    <!-- Jetpack Compose MainScreen -->
-    <string name="jetpack_compose_main_screen_simple_flaky_button" translatable="false">Simple flaky sample</string>
-
-    <!-- Jetpack Compose SimpleFlakyScreen -->
-    <string name="jetpack_compose_simple_flaky_screen_first_button" translatable="false">First button</string>
-    <string name="jetpack_compose_simple_flaky_screen_second_button" translatable="false">Second button</string>
-
     <!-- Idle waiting fragment screen -->
     <string name="idlewaiting_fragment_title" translatable="false">Wait for idle Fragment</string>
     <string name="idlewaiting_fragment_text_edittext" translatable="false">Some text</string>
