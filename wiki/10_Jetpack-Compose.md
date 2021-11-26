@@ -1,6 +1,6 @@
 # Jetpack Compose support [Early access]
 
-**Be aware of it's an early access that may contain bugs. Also, API can be changed, but we are going to avoid it. Please, be free to create relative issues if you've encountered with any kind of problem.**
+**Keep in mind it's early access that may contain bugs. Also, API can be changed, but we are going to avoid it. Be free to create relative issues if you've encountered with any kind of problem.**
 
 Jetpack Compose support consists of two parts: [Kakao Compose library](https://github.com/KakaoCup/Compose) and Kaspresso Interceptors mechanism.
 
