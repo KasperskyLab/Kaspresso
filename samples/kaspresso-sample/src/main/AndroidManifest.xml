@@ -17,6 +17,7 @@
     <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" tools:ignore="ProtectedPermissions"/>
 
     <application
+        android:name="androidx.multidex.MultiDexApplication"
         android:requestLegacyExternalStorage="true"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"

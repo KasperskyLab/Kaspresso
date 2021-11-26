@@ -25,6 +25,7 @@ androidXCore = "androidx.core:core:1.7.0"
 appcompat = "androidx.appcompat:appcompat:1.4.0"
 material = "com.google.android.material:material:1.4.0"
 constraint = "androidx.constraintlayout:constraintlayout:2.1.2"
+multidex = "androidx.multidex:multidex:2.0.1"
 
 lifecycleViewModelKtx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
 lifecycleLiveDataKtx = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "lifecycle" }
