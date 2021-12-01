@@ -6,7 +6,7 @@ android {
     defaultConfig {
         minSdk = 21
 
-        applicationId = "com.kaspersky.kaspresso.composesupport.com.kaspersky.kaspresso.composesupport.sample"
+        applicationId = "com.kaspersky.kaspresso.composesupport.sample"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         testInstrumentationRunnerArguments["clearPackageData"] = "true"
     }
