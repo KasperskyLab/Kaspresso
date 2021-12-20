@@ -18,15 +18,12 @@ import org.hamcrest.Matchers
 class FallbackAutoScrollToAction : ViewAction {
 
     override fun getConstraints(): Matcher<View> {
-        return Matchers.allOf(
-            ViewMatchers.withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE),
-            ViewMatchers.isDescendantOfA(
-                Matchers.anyOf(
-                    ViewMatchers.isAssignableFrom(NestedScrollView::class.java),
-                    ViewMatchers.isAssignableFrom(ScrollView::class.java),
-                    ViewMatchers.isAssignableFrom(HorizontalScrollView::class.java),
-                    ViewMatchers.isAssignableFrom(ListView::class.java)
-                )
+        return ViewMatchers.isDescendantOfA(
+            Matchers.anyOf(
+                ViewMatchers.isAssignableFrom(NestedScrollView::class.java),
+                ViewMatchers.isAssignableFrom(ScrollView::class.java),
+                ViewMatchers.isAssignableFrom(HorizontalScrollView::class.java),
+                ViewMatchers.isAssignableFrom(ListView::class.java)
             )
         )
     }
