@@ -13,8 +13,8 @@
     <string name="main_screen_jetpack_compose_button">Jetpack Compose samples</string>
     <string name="main_screen_shared_test">Shared Test with Robolectric sample</string>
 
-    <!-- Auto scroll fallback screen -->
-    <string name="autoscroll_fallback_title">Auto scroll fallback</string>
+    <!-- Scroll resolver screen -->
+    <string name="scroll_resolver_title">Scroll resolver sample</string>
 
     <!-- Simple fragment screen -->
     <string name="simple_fragment_title">Simple Fragment</string>

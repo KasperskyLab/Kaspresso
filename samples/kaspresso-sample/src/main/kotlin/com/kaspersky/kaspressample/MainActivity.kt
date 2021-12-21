@@ -3,7 +3,7 @@ package com.kaspersky.kaspressample
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.kaspersky.kaspressample.autoscrollfallback.AutoscrollFallbackActivity
+import com.kaspersky.kaspressample.scrollresolver.ScrollResolverActivity
 import com.kaspersky.kaspressample.compose.ComplexComposeSampleActivity
 import com.kaspersky.kaspressample.continuously.ContinuouslySampleActivity
 import com.kaspersky.kaspressample.flaky.CommonFlakyActivity
@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
 
         activity_main_auto_scroll_fallback_button.setOnClickListener {
             startActivity(
-                Intent(this, AutoscrollFallbackActivity::class.java)
+                Intent(this, ScrollResolverActivity::class.java)
             )
         }
 

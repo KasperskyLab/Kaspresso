@@ -1,10 +1,10 @@
-package com.kaspersky.kaspressample.autoscrollfallback
+package com.kaspersky.kaspressample.scrollresolver
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.kaspersky.kaspressample.R
 
-class AutoscrollFallbackActivity : AppCompatActivity() {
+class ScrollResolverActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
