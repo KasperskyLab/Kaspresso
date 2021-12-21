@@ -8,10 +8,12 @@ import com.kaspersky.components.kautomator.intercept.operation.UiOperationType
 
 interface UiScrollableActions : UiBaseActions {
 
+    val setUiScrollableOrientation: UiScrollable.() -> UiScrollable
+
     fun scrollToStart() {
         view.perform(UiScrollableActionType.SCROLL_TO_START) {
             val scrollable = UiScrollable(UiSelector().resourceId(resourceName))
-            scrollable.setAsVerticalList()
+            scrollable.setUiScrollableOrientation()
             scrollable.flingToBeginning(Int.MAX_VALUE)
         }
     }
@@ -19,7 +21,7 @@ interface UiScrollableActions : UiBaseActions {
     fun scrollToEnd() {
         view.perform(UiScrollableActionType.SCROLL_TO_END) {
             val scrollable = UiScrollable(UiSelector().resourceId(resourceName))
-            scrollable.setAsVerticalList()
+            scrollable.setUiScrollableOrientation()
             scrollable.flingToEnd(Int.MAX_VALUE)
         }
     }
@@ -27,13 +29,15 @@ interface UiScrollableActions : UiBaseActions {
     fun <T> scrollToView(to: UiBaseView<T>) {
         view.perform(UiScrollableActionType.SCROLL_TO_VIEW) {
             val scrollable = UiScrollable(UiSelector().resourceId(resourceName))
+            scrollable.setUiScrollableOrientation()
             do {
-                if (findObject(to.view.interaction.selector.bySelector) != null)
+                if (findObject(to.view.interaction.selector.bySelector) != null) {
                     return@perform
+                }
             } while (scrollable.scrollForward())
             do {
                 if (findObject(to.view.interaction.selector.bySelector) != null)
-                return@perform
+                    return@perform
             } while (scrollable.scrollBackward())
             to.isDisplayed()
         }
