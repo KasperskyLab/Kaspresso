@@ -8,10 +8,12 @@ import com.kaspersky.components.kautomator.intercept.operation.UiOperationType
 
 interface UiScrollableActions : UiBaseActions {
 
+    val uiScrollableTransformation : UiScrollable.() -> UiScrollable
+
     fun scrollToStart() {
         view.perform(UiScrollableActionType.SCROLL_TO_START) {
             val scrollable = UiScrollable(UiSelector().resourceId(resourceName))
-            scrollable.setAsVerticalList()
+            scrollable.uiScrollableTransformation()
             scrollable.flingToBeginning(Int.MAX_VALUE)
         }
     }
@@ -19,7 +21,7 @@ interface UiScrollableActions : UiBaseActions {
     fun scrollToEnd() {
         view.perform(UiScrollableActionType.SCROLL_TO_END) {
             val scrollable = UiScrollable(UiSelector().resourceId(resourceName))
-            scrollable.setAsVerticalList()
+            scrollable.uiScrollableTransformation()
             scrollable.flingToEnd(Int.MAX_VALUE)
         }
     }
@@ -27,6 +29,7 @@ interface UiScrollableActions : UiBaseActions {
     fun <T> scrollToView(to: UiBaseView<T>) {
         view.perform(UiScrollableActionType.SCROLL_TO_VIEW) {
             val scrollable = UiScrollable(UiSelector().resourceId(resourceName))
+            scrollable.uiScrollableTransformation()
             do {
                 if (findObject(to.view.interaction.selector.bySelector) != null)
                     return@perform
