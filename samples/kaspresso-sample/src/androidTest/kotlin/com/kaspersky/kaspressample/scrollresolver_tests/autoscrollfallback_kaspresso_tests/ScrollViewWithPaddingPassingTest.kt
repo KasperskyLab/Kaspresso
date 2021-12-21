@@ -1,9 +1,9 @@
-package com.kaspersky.kaspressample.autoscrollfallback_tests
+package com.kaspersky.kaspressample.scrollresolver_tests.autoscrollfallback_kaspresso_tests
 
 import androidx.test.ext.junit.rules.activityScenarioRule
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.screen.MainScreen
-import com.kaspersky.kaspressample.screen.ScrollViewWithPaddingScreen
+import com.kaspersky.kaspressample.screen.KScrollViewWithPaddingScreen
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.junit.Rule
@@ -21,7 +21,7 @@ class ScrollViewWithPaddingPassingTest : TestCase(
         run {
             step("Open Auto Scroll Fallback Screen") {
                 MainScreen {
-                    autoScrollFallbackButton {
+                    scrollResolverButton {
                         isVisible()
                         click()
                     }
@@ -29,7 +29,7 @@ class ScrollViewWithPaddingPassingTest : TestCase(
             }
 
             step("Click button_18 in ScrollView, middle item") {
-                ScrollViewWithPaddingScreen {
+                KScrollViewWithPaddingScreen {
                     button18 {
                         click()
                     }
@@ -42,7 +42,7 @@ class ScrollViewWithPaddingPassingTest : TestCase(
         run {
             step("Open Auto Scroll Fallback Screen") {
                 MainScreen {
-                    autoScrollFallbackButton {
+                    scrollResolverButton {
                         isVisible()
                         click()
                     }
@@ -50,7 +50,7 @@ class ScrollViewWithPaddingPassingTest : TestCase(
             }
 
             step("Click button_20 in ScrollView, last item") {
-                ScrollViewWithPaddingScreen {
+                KScrollViewWithPaddingScreen {
                     button20 {
                         click()
                     }
@@ -58,7 +58,7 @@ class ScrollViewWithPaddingPassingTest : TestCase(
             }
 
             step("Click button_1 in ScrollView, first item from last one (upwards)") {
-                ScrollViewWithPaddingScreen {
+                KScrollViewWithPaddingScreen {
                     button1 {
                         click()
                     }
@@ -71,7 +71,7 @@ class ScrollViewWithPaddingPassingTest : TestCase(
         run {
             step("Open Auto Scroll Fallback Screen") {
                 MainScreen {
-                    autoScrollFallbackButton {
+                    scrollResolverButton {
                         isVisible()
                         click()
                     }
@@ -79,14 +79,14 @@ class ScrollViewWithPaddingPassingTest : TestCase(
             }
 
             step("Click hbutton_7 in HorizontalScrollView, last item") {
-                ScrollViewWithPaddingScreen {
+                KScrollViewWithPaddingScreen {
                     hbutton7 {
                         click()
                     }
                 }
             }
             step("Click hbutton_1 in HorizontalScrollView, first item from last one (leftwards)") {
-                ScrollViewWithPaddingScreen {
+                KScrollViewWithPaddingScreen {
                     hbutton1 {
                         click()
                     }
