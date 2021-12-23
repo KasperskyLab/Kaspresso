@@ -16,7 +16,7 @@ import org.junit.Test
  * To overcome such issues, you should avoid relying on autoscroll and perform the necessary
  * scrolling before executing the desired action, as seen in the examples below.
  */
-class MultipleScrollablesPassingTest: TestCase() {
+class MultipleScrollablesPassingTest : TestCase() {
 
     @get:Rule
     val activityRule = activityScenarioRule<MainActivity>()
@@ -41,8 +41,7 @@ class MultipleScrollablesPassingTest: TestCase() {
                     }
                 }
             }
-            step("Click hbutton_1 in HorizontalScrollView, first item from last one (leftwards)")
-            {
+            step("Click hbutton_1 in HorizontalScrollView, first item from last one (leftwards)") {
                 UiScrollViewWithPaddingScreen {
                     hScrollView.scrollToView(hbutton1)
                     hbutton1 {
@@ -70,7 +69,6 @@ class MultipleScrollablesPassingTest: TestCase() {
                     button20 {
                         click()
                     }
-
                 }
             }
 

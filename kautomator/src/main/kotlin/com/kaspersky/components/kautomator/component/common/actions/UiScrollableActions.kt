@@ -8,7 +8,7 @@ import com.kaspersky.components.kautomator.intercept.operation.UiOperationType
 
 interface UiScrollableActions : UiBaseActions {
 
-    val uiScrollableTransformation : UiScrollable.() -> UiScrollable
+    val uiScrollableTransformation: UiScrollable.() -> UiScrollable
 
     fun scrollToStart() {
         view.perform(UiScrollableActionType.SCROLL_TO_START) {

@@ -16,7 +16,7 @@ import org.junit.Test
  *
  * This showcases the problem
  */
-class MultipleScrollablesFailingTest: TestCase() {
+class MultipleScrollablesFailingTest : TestCase() {
 
     @get:Rule
     val activityRule = activityScenarioRule<MainActivity>()
@@ -37,7 +37,6 @@ class MultipleScrollablesFailingTest: TestCase() {
                 UiScrollViewWithPaddingScreen {
                     hbutton7 {
                         click()
-
                     }
                 }
             }
@@ -60,9 +59,7 @@ class MultipleScrollablesFailingTest: TestCase() {
                     button20 {
                         click()
                     }
-
                 }
             }
         }
 }
-

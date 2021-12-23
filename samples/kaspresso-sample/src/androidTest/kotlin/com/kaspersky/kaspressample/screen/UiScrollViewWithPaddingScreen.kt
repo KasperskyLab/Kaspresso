@@ -9,9 +9,9 @@ object UiScrollViewWithPaddingScreen : UiScreen<UiScrollViewWithPaddingScreen>()
 
     override val packageName: String = "com.kaspersky.kaspressample"
 
-    val hScrollView = UiHorizontalScrollView { withId(this@UiScrollViewWithPaddingScreen.packageName,"hscroll_view") }
+    val hScrollView = UiHorizontalScrollView { withId(this@UiScrollViewWithPaddingScreen.packageName, "hscroll_view") }
 
-    val scrollView = UiScrollView { withId(this@UiScrollViewWithPaddingScreen.packageName,"scroll_view") }
+    val scrollView = UiScrollView { withId(this@UiScrollViewWithPaddingScreen.packageName, "scroll_view") }
 
     val hbutton1 = UiButton { withId(this@UiScrollViewWithPaddingScreen.packageName, "hvText1") }
     val hbutton7 = UiButton { withId(this@UiScrollViewWithPaddingScreen.packageName, "hvText7") }
