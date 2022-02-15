@@ -4,8 +4,9 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.edit
 import com.kaspersky.kaspressample.R
-import kotlinx.android.synthetic.main.activity_upgrade_test.*
+import com.kaspersky.kaspressample.databinding.ActivityUpgradeTestBinding
 
 class UpgradeTestActivity : AppCompatActivity() {
 
@@ -17,31 +18,32 @@ class UpgradeTestActivity : AppCompatActivity() {
     private val appVersion: String
         get() = packageManager.getPackageInfo(packageName, 0).versionName
 
+    private lateinit var binding: ActivityUpgradeTestBinding
     private lateinit var prefs: SharedPreferences
 
     private var currentValue: String?
         get() = prefs.getString(KEY_VALUE, DEFAULT_VALUE)
-        set(value) = prefs.edit().putString(KEY_VALUE, value).apply()
+        set(value) = prefs.edit { putString(KEY_VALUE, value) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_upgrade_test)
+        binding = ActivityUpgradeTestBinding.inflate(layoutInflater)
 
         prefs = getPreferences(Context.MODE_PRIVATE)
 
-        upgrade_version.text =
-            getString(R.string.upgrade_version_placeholder, appVersion)
+        binding.upgradeVersion.text = getString(R.string.upgrade_version_placeholder, appVersion)
+        binding.upgradeValueCurrent.text = getString(R.string.upgrade_value_placeholder, currentValue)
+        binding.upgradeApplyBtn.setOnClickListener { updateValue() }
 
-        upgrade_value_current.text = getString(R.string.upgrade_value_placeholder, currentValue)
-        upgrade_apply_btn.setOnClickListener { updateValue() }
+        setContentView(binding.root)
     }
 
     private fun updateValue() {
-        val text = upgrade_value_input.text.toString()
+        val text = binding.upgradeValueInput.text.toString()
 
         if (text.isNotBlank()) {
             currentValue = text
-            upgrade_value_current.text = getString(R.string.upgrade_value_placeholder, text)
+            binding.upgradeValueCurrent.text = getString(R.string.upgrade_value_placeholder, text)
         }
     }
 }

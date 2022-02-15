@@ -8,16 +8,17 @@ import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.appcompat.app.AppCompatActivity
-import com.kaspersky.kaspressample.R
-import kotlinx.android.synthetic.main.activity_webview.*
+import com.kaspersky.kaspressample.databinding.ActivityWebviewBinding
 
 class WebViewActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityWebviewBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_webview)
+        binding = ActivityWebviewBinding.inflate(layoutInflater)
 
-        with(webView) {
+        with(binding.webView) {
             webViewClient = object : WebViewClient() {
 
                 @TargetApi(Build.VERSION_CODES.N)
@@ -37,11 +38,13 @@ class WebViewActivity : AppCompatActivity() {
 
             loadUrl("https://my.kaspersky.com/en/")
         }
+
+        setContentView(binding.root)
     }
 
     override fun onBackPressed() {
-        if (webView.canGoBack()) {
-            webView.goBack()
+        if (binding.webView.canGoBack()) {
+            binding.webView.goBack()
         } else {
             super.onBackPressed()
         }

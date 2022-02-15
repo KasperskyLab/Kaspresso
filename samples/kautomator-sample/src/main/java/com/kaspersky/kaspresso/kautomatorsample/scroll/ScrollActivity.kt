@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.kaspersky.kaspresso.kautomatorsample.R
+import com.kaspersky.kaspresso.kautomatorsample.databinding.ActivityScrollBinding
 import com.kaspersky.kaspresso.kautomatorsample.model.SimpleModel
-import kotlinx.android.synthetic.main.activity_scroll.*
 
 class ScrollActivity : AppCompatActivity() {
 
@@ -17,18 +17,22 @@ class ScrollActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_scroll)
 
+        val binding = ActivityScrollBinding.inflate(layoutInflater)
+
         (0..ITEM_COUNT)
             .map { SimpleModel.randomizeNewItem() }
             .toMutableList()
             .apply { SimpleModel.richWithLabels(this) }
             .map { model ->
-                val view = layoutInflater.inflate(R.layout.item_recycler, layout, false)
+                val view = layoutInflater.inflate(R.layout.item_recycler, binding.layout, false)
                 view.findViewById<TextView>(R.id.title).text = model.text
                 view.findViewById<TextView>(R.id.subtitle).text = model.number.toString()
                 view
             }
             .forEach {
-                layout.addView(it)
+                binding.layout.addView(it)
             }
+
+        setContentView(binding.root)
     }
 }
