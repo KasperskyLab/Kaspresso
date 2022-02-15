@@ -13,5 +13,8 @@ fast_check:
 	make unit_tests
 	make compile_all
 
+publish_to_maven_local:
+	./gradlew publishToMavenLocal -PstableVersion=local --no-configuration-cache
+
 publish_release:
 	./gradlew publishRelease --no-parallel --stacktrace

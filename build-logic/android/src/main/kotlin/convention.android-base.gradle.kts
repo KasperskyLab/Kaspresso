@@ -17,7 +17,10 @@ configure<BaseExtension> {
     }
 
     packagingOptions {
-        excludes.add("META-INF/*")
+        merges.apply {
+            add("META-INF/LGPL2.1")
+            add("META-INF/AL2.0")
+        }
     }
 
     @Suppress("UnstableApiUsage")
