@@ -5,9 +5,9 @@ import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import com.kaspersky.kaspressample.R
+import com.kaspersky.kaspressample.databinding.ActivityIdlewaitingBinding
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
-import kotlinx.android.synthetic.main.activity_idlewaiting.*
 
 class WaitForIdleActivity : AppCompatActivity() {
 
@@ -17,16 +17,19 @@ class WaitForIdleActivity : AppCompatActivity() {
         private const val TOTAL_TIME: Long = 20_000
     }
 
+    private lateinit var binding: ActivityIdlewaitingBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_idlewaiting)
+        binding = ActivityIdlewaitingBinding.inflate(layoutInflater)
+        setContentView(binding.root)
     }
 
     override fun onResume() {
         super.onResume()
         val scheduler = Executors.newScheduledThreadPool(1)
         val periodicTask = scheduler.scheduleAtFixedRate(
-            { Handler(Looper.getMainLooper()).post { edit.setText(R.string.idlewaiting_fragment_text_edittext) } },
+            { Handler(Looper.getMainLooper()).post { binding.edit.setText(R.string.idlewaiting_fragment_text_edittext) } },
             INIT_DELAY,
             PERIOD,
             TimeUnit.MILLISECONDS

@@ -4,8 +4,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kaspersky.kaspresso.kautomatorsample.R
+import com.kaspersky.kaspresso.kautomatorsample.databinding.ActivityRecyclerBinding
 import com.kaspersky.kaspresso.kautomatorsample.model.SimpleModel
-import kotlinx.android.synthetic.main.activity_recycler.*
 
 class RecyclerActivity : AppCompatActivity() {
 
@@ -17,11 +17,14 @@ class RecyclerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recycler)
 
-        recycler.run {
+        val binding = ActivityRecyclerBinding.inflate(layoutInflater)
+        binding.recycler.run {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(this@RecyclerActivity)
             adapter = RecyclerAdapter(generateItems())
         }
+
+        setContentView(binding.root)
     }
 
     private fun generateItems(): List<SimpleModel> {
