@@ -3,6 +3,15 @@ plugins {
     id("convention.publication-android-lib")
 }
 
+android {
+    libraryVariants.configureEach {
+        packageLibraryProvider.configure {
+            from("legal_docs/LICENSE.txt")
+            from("legal_docs/NOTICE.txt")
+        }
+    }
+}
+
 publish {
     artifactId.set("kaspresso")
 }
