@@ -6,7 +6,7 @@ import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.kaspersky.kaspressample.R
-import kotlinx.android.synthetic.main.activity_complex_compose.*
+import com.kaspersky.kaspressample.databinding.ActivityComplexComposeBinding
 
 class ComplexComposeSampleActivity : AppCompatActivity() {
 
@@ -16,24 +16,26 @@ class ComplexComposeSampleActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_complex_compose)
 
-        activity_compose_start.setOnClickListener {
+        val binding = ActivityComplexComposeBinding.inflate(layoutInflater)
+        binding.activityComposeStart.setOnClickListener {
             when ((0..1).random()) {
-                0 -> makeVisibleSlightly(activity_compose_stage_1)
+                0 -> makeVisibleSlightly(binding.activityComposeStage1)
                 1 -> showAlertDialogSlightly(R.string.compose_screen_dialog_title_1) {
                     showAlertDialogSlightly(R.string.compose_screen_dialog_title_2) {
-                        makeVisibleSlightly(activity_compose_finish)
+                        makeVisibleSlightly(binding.activityComposeFinish)
                     }
                 }
             }
         }
-        activity_compose_stage_1.setOnClickListener {
-            makeVisibleSlightly(activity_compose_stage_2)
+        binding.activityComposeStage1.setOnClickListener {
+            makeVisibleSlightly(binding.activityComposeStage2)
         }
-        activity_compose_stage_2.setOnClickListener {
-            makeVisibleSlightly(activity_compose_finish)
+        binding.activityComposeStage2.setOnClickListener {
+            makeVisibleSlightly(binding.activityComposeFinish)
         }
+
+        setContentView(binding.root)
     }
 
     private fun makeVisibleSlightly(view: View) {

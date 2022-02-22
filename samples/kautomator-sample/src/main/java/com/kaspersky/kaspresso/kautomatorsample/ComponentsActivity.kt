@@ -3,15 +3,17 @@ package com.kaspersky.kaspresso.kautomatorsample
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_ui_components.*
+import com.kaspersky.kaspresso.kautomatorsample.databinding.ActivityUiComponentsBinding
 
 class ComponentsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_ui_components)
 
-        showDialogBtn.setOnClickListener { showDialog() }
+        val binding = ActivityUiComponentsBinding.inflate(layoutInflater)
+        binding.showDialogBtn.setOnClickListener { showDialog() }
+
+        setContentView(binding.root)
     }
 
     private fun showDialog() {

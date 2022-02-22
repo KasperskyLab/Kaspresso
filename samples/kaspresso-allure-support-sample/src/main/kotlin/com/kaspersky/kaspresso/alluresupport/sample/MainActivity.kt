@@ -2,35 +2,29 @@ package com.kaspersky.kaspresso.alluresupport.sample
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.kaspersky.kaspresso.alluresupport.sample.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var incrementButton: Button
-    private lateinit var decrementButton: Button
-    private lateinit var clearButton: Button
-    private lateinit var valueText: TextView
+    private lateinit var binding: ActivityMainBinding
 
     private var currentValue = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
-        incrementButton = findViewById(R.id.increment)
-        decrementButton = findViewById(R.id.decrement)
-        clearButton = findViewById(R.id.clear)
-        valueText = findViewById(R.id.value)
+        binding = ActivityMainBinding.inflate(layoutInflater)
 
-        incrementButton.setOnClickListener(::incrementAction)
-        decrementButton.setOnClickListener(::decrementAction)
-        clearButton.setOnClickListener(::clearAction)
+        binding.increment.setOnClickListener(::incrementAction)
+        binding.decrement.setOnClickListener(::decrementAction)
+        binding.clear.setOnClickListener(::clearAction)
 
         if (savedInstanceState == null) {
             updateText(currentValue)
         }
+
+        setContentView(binding.root)
     }
 
     private fun incrementAction(view: View) {
@@ -47,6 +41,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateText(value: Int) {
-        valueText.text = getString(R.string.value_placeholder, value)
+        binding.value.text = getString(R.string.value_placeholder, value)
     }
 }
