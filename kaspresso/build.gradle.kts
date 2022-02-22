@@ -3,11 +3,12 @@ plugins {
     id("convention.publication-android-lib")
 }
 
+// TODO: move to publishing convention
 android {
     libraryVariants.configureEach {
         packageLibraryProvider.configure {
-            from("legal_docs/LICENSE.txt")
-            from("legal_docs/NOTICE.txt")
+            from("$rootDir/LICENSE.txt")
+            from("$rootDir/NOTICE.txt")
         }
     }
 }
