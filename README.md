@@ -252,9 +252,9 @@ allprojects {
 ```groovy
 dependencies {
     androidTestImplementation 'com.kaspersky.android-components:kaspresso:<latest_version>'
-    # Allure support
+    // Allure support
     androidTestImplementation "com.kaspersky.android-components:kaspresso-allure-support:<latest_version>"
-    # Jetpack Compose support
+    // Jetpack Compose support
     androidTestImplementation "com.kaspersky.android-components:kaspresso-compose-support:<latest_version>"
 }
 ```
