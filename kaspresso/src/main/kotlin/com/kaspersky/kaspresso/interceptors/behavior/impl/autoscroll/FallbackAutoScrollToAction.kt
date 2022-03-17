@@ -32,14 +32,10 @@ class FallbackAutoScrollToAction : ViewAction {
         (this is ScrollView || this is NestedScrollView || this is HorizontalScrollView || this is ListView)
 
     private tailrec fun View?.findFirstParentScrollableView(lastView: View): View? {
-        return if (this == lastView) {
-            if (this.isScrollable()) this else null
-        } else {
-            if (this.isScrollable()) {
-                this
-            } else {
-                this?.parent?.findFirstView()?.findFirstParentScrollableView(lastView)
-            }
+        return when {
+            this.isScrollable() -> this
+            this == lastView -> null
+            else -> this?.parent?.findFirstView()?.findFirstParentScrollableView(lastView)
         }
     }
 
