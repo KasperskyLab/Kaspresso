@@ -22,6 +22,10 @@ class MainActivity : AppCompatActivity() {
 
         val binding = ActivityMainBinding.inflate(layoutInflater)
 
+        binding.activityMainAutoScrollFallbackButton.setOnClickListener {
+            startActivity(Intent(this, AutoscrollFallbackActivity::class.java))
+        }
+
         binding.activityMainSimpleSampleButton.setOnClickListener {
             startActivity(Intent(this, SimpleActivity::class.java))
         }
