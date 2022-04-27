@@ -10,7 +10,7 @@ import java.util.UUID
 
 class AllureMapperStepInterceptor : StepWatcherInterceptor {
 
-    private val lifecycle = AllureAndroidLifecycle
+    private val lifecycle = AllureAndroidLifecycle()
 
     private val uuids: Stack<String> = Stack()
 
