@@ -9,7 +9,7 @@ import com.kaspersky.components.kautomator.component.common.builders.UiViewBuild
 import com.kaspersky.components.kautomator.component.common.builders.UiViewSelector
 import com.kaspersky.components.kautomator.component.common.views.UiBaseView
 
-class UiHorizontalScrollView : UiBaseView<UiScrollView>, UiSwipeableActions, UiScrollableActions {
+class UiHorizontalScrollView : UiBaseView<UiHorizontalScrollView>, UiSwipeableActions, UiScrollableActions {
     constructor(selector: UiViewSelector) : super(selector)
     constructor(builder: UiViewBuilder.() -> Unit) : super(builder)
 

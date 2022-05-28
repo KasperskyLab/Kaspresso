@@ -17,4 +17,5 @@ object UiScrollViewWithPaddingScreen : UiScreen<UiScrollViewWithPaddingScreen>()
     val hbutton7 = UiButton { withId(this@UiScrollViewWithPaddingScreen.packageName, "hvText7") }
     val button1 = UiButton { withId(this@UiScrollViewWithPaddingScreen.packageName, "tvText1") }
     val button20 = UiButton { withId(this@UiScrollViewWithPaddingScreen.packageName, "tvText20") }
+    val button21 = UiButton { withId(this@UiScrollViewWithPaddingScreen.packageName, "tvText21") }
 }
