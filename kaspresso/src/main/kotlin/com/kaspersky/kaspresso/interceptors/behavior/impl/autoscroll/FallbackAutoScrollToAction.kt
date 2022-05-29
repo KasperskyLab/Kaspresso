@@ -1,6 +1,5 @@
 package com.kaspersky.kaspresso.interceptors.behavior.impl.autoscroll
 
-import android.util.Log
 import android.view.View
 import android.view.ViewParent
 import android.widget.HorizontalScrollView
@@ -12,10 +11,13 @@ import androidx.test.espresso.UiController
 import androidx.test.espresso.ViewAction
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.util.HumanReadables
+import com.kaspersky.kaspresso.logger.UiTestLogger
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers
 
-class FallbackAutoScrollToAction : ViewAction {
+class FallbackAutoScrollToAction(
+    private val logger: UiTestLogger,
+) : ViewAction {
 
     override fun getConstraints(): Matcher<View> {
         return ViewMatchers.isDescendantOfA(
@@ -49,37 +51,64 @@ class FallbackAutoScrollToAction : ViewAction {
 
     override fun perform(uiController: UiController, view: View) {
         if (ViewMatchers.isDisplayingAtLeast(FULLY_VISIBLE_PERCENTAGE).matches(view)) {
-            Log.i(TAG, "View is already displayed. Returning.")
+            logger.i(TAG, "View is already displayed. Returning.")
             return
         }
 
         val scrollView = view.findFirstParentScrollableView(view.rootView)
 
-        when (scrollView is HorizontalScrollView) {
-            true -> scrollView.scrollTo(view.right + scrollView.paddingEnd, 0)
-            false -> scrollView?.scrollTo(0, view.bottom + scrollView.paddingBottom)
+        if (scrollView == null) {
+            logger.i(TAG, "No scrolling views found. Returning.")
+            return
         }
+
+        /**
+         * Scroll forwards and try to find view
+         */
+        scrollView.scrollForwardsTo(view)
         uiController.loopMainThreadUntilIdle()
-        if (!ViewMatchers.isDisplayingAtLeast(FULLY_VISIBLE_PERCENTAGE).matches(view)) {
 
-            // Try scroll in the opposite direction before failing: leftwards or upwards
-            when (scrollView is HorizontalScrollView) {
-                true -> scrollView.scrollTo(view.left - scrollView.paddingStart, 0)
-                false -> scrollView?.scrollTo(0, view.top - scrollView.paddingTop)
-            }
-            uiController.loopMainThreadUntilIdle()
+        if (ViewMatchers.isDisplayingAtLeast(FULLY_VISIBLE_PERCENTAGE).matches(view)) {
+            logger.i(TAG, "View is already displayed after scrolling forwards. Returning.")
+            return
+        }
 
-            if (!ViewMatchers.isDisplayingAtLeast(FULLY_VISIBLE_PERCENTAGE).matches(view)) {
-                throw PerformException.Builder()
-                    .withActionDescription(this.description)
-                    .withViewDescription(HumanReadables.describe(view))
-                    .withCause(
-                        java.lang.RuntimeException(
-                            "Fallback scrolling to view was attempted, but the view is not displayed"
-                        )
-                    )
-                    .build()
-            }
+        /**
+         * Scroll backwards and try to find view
+         */
+        scrollView.scrollBackwardsTo(view)
+        uiController.loopMainThreadUntilIdle()
+
+        if (ViewMatchers.isDisplayingAtLeast(FULLY_VISIBLE_PERCENTAGE).matches(view)) {
+            logger.i(TAG, "View is already displayed after scrolling backwards. Returning.")
+            return
+        }
+
+        /**
+         * Throw error if view not found at this point
+         */
+        throw PerformException.Builder()
+            .withActionDescription(this.description)
+            .withViewDescription(HumanReadables.describe(view))
+            .withCause(
+                java.lang.RuntimeException(
+                    "Fallback scrolling to view was attempted, but the view is not displayed"
+                )
+            )
+            .build()
+    }
+
+    private fun View.scrollForwardsTo(view: View) {
+        when (this is HorizontalScrollView) {
+            true -> scrollTo(view.right + paddingEnd, 0)
+            false -> scrollTo(0, view.bottom + paddingBottom)
+        }
+    }
+
+    private fun View.scrollBackwardsTo(view: View) {
+        when (this is HorizontalScrollView) {
+            true -> scrollTo(view.left - paddingStart, 0)
+            false -> scrollTo(0, view.top - paddingTop)
         }
     }
 

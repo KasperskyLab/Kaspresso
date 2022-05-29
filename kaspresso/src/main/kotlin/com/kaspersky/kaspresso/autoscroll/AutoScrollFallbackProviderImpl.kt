@@ -46,7 +46,7 @@ class AutoScrollFallbackProviderImpl(
     @Throws(Throwable::class)
     override fun <T> scroll(interaction: ViewInteraction, action: () -> T, cachedError: Throwable): T {
         return try {
-            interaction.perform(FallbackAutoScrollToAction())
+            interaction.perform(FallbackAutoScrollToAction(logger))
             logger.i("View fallback autoScroll successfully performed.")
             action.invoke()
         } catch (error: Throwable) {
