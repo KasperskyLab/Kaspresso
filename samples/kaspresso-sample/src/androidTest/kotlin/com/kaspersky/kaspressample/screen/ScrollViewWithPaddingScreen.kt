@@ -15,4 +15,5 @@ object ScrollViewWithPaddingScreen : KScreen<ScrollViewWithPaddingScreen>() {
     val button1 = KButton { withId(R.id.tvText1) }
     val button18 = KButton { withId(R.id.tvText18) }
     val button20 = KButton { withId(R.id.tvText20) }
+    val nnbutton1 = KButton { withId(R.id.nntvText1) }
 }

@@ -17,27 +17,6 @@ class ScrollViewWithPaddingPassingTest : TestCase(
     val activityRule = activityScenarioRule<MainActivity>()
 
     @Test
-    fun click_button_in_the_middle_of_ScrollView() =
-        run {
-            step("Open Auto Scroll Fallback Screen") {
-                MainScreen {
-                    autoScrollFallbackButton {
-                        isVisible()
-                        click()
-                    }
-                }
-            }
-
-            step("Click button_18 in ScrollView, middle item") {
-                ScrollViewWithPaddingScreen {
-                    button18 {
-                        click()
-                    }
-                }
-            }
-        }
-
-    @Test
     fun click_last_button_in_ScrollView_and_then_first_one() =
         run {
             step("Open Auto Scroll Fallback Screen") {
@@ -57,9 +36,38 @@ class ScrollViewWithPaddingPassingTest : TestCase(
                 }
             }
 
-            step("Click button_1 in ScrollView, first item from last one (upwards)") {
+            step("Click button_1 in ScrollView, first item") {
                 ScrollViewWithPaddingScreen {
                     button1 {
+                        click()
+                    }
+                }
+            }
+        }
+
+    @Test
+    fun click_last_button_in_ScrollView_and_then_last_one_in_HorizontalScrollView() =
+        run {
+            step("Open Auto Scroll Fallback Screen") {
+                MainScreen {
+                    autoScrollFallbackButton {
+                        isVisible()
+                        click()
+                    }
+                }
+            }
+
+            step("Click button_20 in ScrollView, last item") {
+                ScrollViewWithPaddingScreen {
+                    button20 {
+                        click()
+                    }
+                }
+            }
+
+            step("Click hbutton_7 in HorizontalScrollView, first item") {
+                ScrollViewWithPaddingScreen {
+                    hbutton7 {
                         click()
                     }
                 }
@@ -85,9 +93,38 @@ class ScrollViewWithPaddingPassingTest : TestCase(
                     }
                 }
             }
-            step("Click hbutton_1 in HorizontalScrollView, first item from last one (leftwards)") {
+            step("Click hbutton_1 in HorizontalScrollView, first item") {
                 ScrollViewWithPaddingScreen {
                     hbutton1 {
+                        click()
+                    }
+                }
+            }
+        }
+
+    @Test
+    fun click_button_in_3LevelNestedScrollView_and_then_last_one_in_HorizontalScrollView() =
+        run {
+            step("Open Auto Scroll Fallback Screen") {
+                MainScreen {
+                    autoScrollFallbackButton {
+                        isVisible()
+                        click()
+                    }
+                }
+            }
+
+            step("Click nnbutton_1 in 3LevelNestedScrollView, middle item") {
+                ScrollViewWithPaddingScreen {
+                    nnbutton1 {
+                        click()
+                    }
+                }
+            }
+
+            step("Click button_7 in HorizontalScrollView, last item") {
+                ScrollViewWithPaddingScreen {
+                    hbutton7 {
                         click()
                     }
                 }

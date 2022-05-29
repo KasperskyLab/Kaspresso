@@ -12,23 +12,11 @@ import androidx.test.espresso.ViewAction
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.util.HumanReadables
 import com.kaspersky.kaspresso.logger.UiTestLogger
-import org.hamcrest.Matcher
-import org.hamcrest.Matchers
+import io.github.kakaocup.kakao.common.actions.NestedScrollToAction
 
 class FallbackAutoScrollToAction(
     private val logger: UiTestLogger,
-) : ViewAction {
-
-    override fun getConstraints(): Matcher<View> {
-        return ViewMatchers.isDescendantOfA(
-            Matchers.anyOf(
-                ViewMatchers.isAssignableFrom(NestedScrollView::class.java),
-                ViewMatchers.isAssignableFrom(ScrollView::class.java),
-                ViewMatchers.isAssignableFrom(HorizontalScrollView::class.java),
-                ViewMatchers.isAssignableFrom(ListView::class.java)
-            )
-        )
-    }
+) : ViewAction by NestedScrollToAction() {
 
     private fun View?.isScrollable(): Boolean =
         (this is ScrollView || this is NestedScrollView || this is HorizontalScrollView || this is ListView)
@@ -50,37 +38,25 @@ class FallbackAutoScrollToAction(
     }
 
     override fun perform(uiController: UiController, view: View) {
-        if (ViewMatchers.isDisplayingAtLeast(FULLY_VISIBLE_PERCENTAGE).matches(view)) {
+        if (ViewMatchers.isDisplayingAtLeast(VISIBLE_AREA_PERCENTAGE).matches(view)) {
             logger.i(TAG, "View is already displayed. Returning.")
             return
         }
 
         val scrollView = view.findFirstParentScrollableView(view.rootView)
-
         if (scrollView == null) {
             logger.i(TAG, "No scrolling views found. Returning.")
             return
         }
 
         /**
-         * Scroll forwards and try to find view
+         * Scroll till view and try to find view
          */
-        scrollView.scrollForwardsTo(view)
+        scrollView.scrollTo(view)
         uiController.loopMainThreadUntilIdle()
 
-        if (ViewMatchers.isDisplayingAtLeast(FULLY_VISIBLE_PERCENTAGE).matches(view)) {
-            logger.i(TAG, "View is already displayed after scrolling forwards. Returning.")
-            return
-        }
-
-        /**
-         * Scroll backwards and try to find view
-         */
-        scrollView.scrollBackwardsTo(view)
-        uiController.loopMainThreadUntilIdle()
-
-        if (ViewMatchers.isDisplayingAtLeast(FULLY_VISIBLE_PERCENTAGE).matches(view)) {
-            logger.i(TAG, "View is already displayed after scrolling backwards. Returning.")
+        if (ViewMatchers.isDisplayingAtLeast(VISIBLE_AREA_PERCENTAGE).matches(view)) {
+            logger.i(TAG, "View is already displayed after scrolling to view. Returning.")
             return
         }
 
@@ -98,17 +74,16 @@ class FallbackAutoScrollToAction(
             .build()
     }
 
-    private fun View.scrollForwardsTo(view: View) {
-        when (this is HorizontalScrollView) {
-            true -> scrollTo(view.right + paddingEnd, 0)
-            false -> scrollTo(0, view.bottom + paddingBottom)
-        }
+    private fun View.scrollTo(view: View) {
+        makeFirstParentScrollableViewScroll()
+        scrollTo(view.x.toInt(), view.y.toInt())
     }
 
-    private fun View.scrollBackwardsTo(view: View) {
-        when (this is HorizontalScrollView) {
-            true -> scrollTo(view.left - paddingStart, 0)
-            false -> scrollTo(0, view.top - paddingTop)
+    private fun View.makeFirstParentScrollableViewScroll() {
+        val nextView = this.parent.findFirstView() ?: return
+        nextView.findFirstParentScrollableView(nextView.rootView)?.also { scrollableParent ->
+            nextView.makeFirstParentScrollableViewScroll()
+            scrollableParent.scrollTo(this.x.toInt(), this.y.toInt())
         }
     }
 
@@ -118,6 +93,6 @@ class FallbackAutoScrollToAction(
 
     companion object {
         private val TAG = FallbackAutoScrollToAction::class.java.simpleName
-        private const val FULLY_VISIBLE_PERCENTAGE = 100
+        private const val VISIBLE_AREA_PERCENTAGE = 90 // This is the default required by Espresso to be able to perform a click
     }
 }
