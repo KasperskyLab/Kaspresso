@@ -5,7 +5,7 @@
 Since Robolectric 4.0, we can also run Espresso-like tests also on the JVM with Robolectric.
 That is part of the [Project nitrogen from Google](https://www.youtube.com/watch?v=-_kZC29sWAo) (which became Unified Test Platform), where they want to allow developers to write UI test once, and run them everywhere.
 
-However, earlier if you tried to run Kaspresso-like test extending TestCase on the JVM with Robolectric, you got the following error:
+However, before Kaspresso 1.3.0, if you tried to run Kaspresso-like test extending TestCase on the JVM with Robolectric, you got the following error:
 ```
 java.lang.NullPointerException
 	at androidx.test.uiautomator.QueryController.<init>(QueryController.java:95)
@@ -23,7 +23,7 @@ Now, all Kaspresso tests are allowed to be executed correctly on the JVM with Ro
 3. Not possible to work with `UiDevice` and `UiAutomation` classes. That's why a lot of (not all!) implementations in `Device` will crash on the JVM with Robolectric with `NotSupportedInstrumentalTestException`.
 4. Non working Kautomator. Mentioned problem with `UiDevice` and `UiAutomation` classes affect the entire Kautomator. So, tests using Kautomator will crash on the JVM with Robolectric with `KautomatorInUnitTestException`.
 5. Interceptors that use `UiDevice`, `UiAutomation` or adb-server are turning off on the JVM with Robolectric automatically. 
-6. `DocLocScreenshotTestCase` will crash on the JVM with Robolectric with `DocLocInUnitTestException`. 
+6. `DocLocScreenshotTestCase` will crash on the JVM with Robolectric with `DocLocInUnitTestException`.
 
 ## Usage
 To create a test that can run on a device/emulator and on the JVM, we recommend to create a `sharedTest` folder, and configure `sourceSets` in gradle accordingly, similar to what you can see under the `build.gradle.kts` :samples:kaspresso-sample
@@ -130,6 +130,6 @@ Of course, there is a very obvious last option. Just don't include the test in a
 
 **Further remarks**
 
-As of Robolectric 4.5.1, there are some limitations to sharedTest: those tests run flawless on an emulator/device, but fail on the JVM
-1) Robolectric-Espresso [does not support Idling resources](https://github.com/robolectric/robolectric/issues/4807) yet
+As of Robolectric 4.8.1, there are some limitations to sharedTest: those tests run flawless on an emulator/device, but fail on the JVM
+1) Robolectric-Espresso supports Idling resources, but [doesn't support posting delayed messages to the looper](https://github.com/robolectric/robolectric/issues/4807#issuecomment-1075863097)
 2) Robolectric-Espresso will not support [tests that start new activities](https://github.com/robolectric/robolectric/issues/5104)(i.e. activity jumping)
