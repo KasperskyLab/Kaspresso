@@ -244,6 +244,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:orientation="vertical">
 
                     <Button
@@ -256,27 +257,82 @@
                         android:text="NItem 1"
                         android:textSize="32sp" />
 
-                    <androidx.core.widget.NestedScrollView
+                    <HorizontalScrollView
+                        android:id="@+id/nnhscroll_view"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:paddingHorizontal="20dp"
+                        tools:ignore="HardcodedText">
 
                         <LinearLayout
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
+                            android:gravity="center"
+                            android:orientation="horizontal">
 
                             <Button
-                                android:id="@+id/nntvText1"
+                                android:id="@+id/nnhtvText1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:layout_marginBottom="4dp"
+                                android:layout_marginHorizontal="4dp"
+                                android:paddingHorizontal="10dp"
+                                android:layout_gravity="center_horizontal"
+                                android:text="NNHItem 1"
+                                android:textSize="32sp" />
+
+                            <Button
+                                android:id="@+id/nnhtvText2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:layout_marginBottom="4dp"
+                                android:layout_marginHorizontal="4dp"
+                                android:paddingHorizontal="10dp"
+                                android:layout_gravity="center_horizontal"
+                                android:text="NNHItem 2"
+                                android:textSize="32sp" />
+
+                            <Button
+                                android:id="@+id/nnhtvText3"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="4dp"
                                 android:layout_marginBottom="4dp"
                                 android:layout_gravity="center_horizontal"
-                                android:text="NNItem 1"
+                                android:layout_marginHorizontal="4dp"
+                                android:paddingHorizontal="10dp"
+                                android:text="NNHItem 3"
+                                android:textSize="32sp" />
+
+                            <Button
+                                android:id="@+id/nnhtvText4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:layout_marginBottom="4dp"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginHorizontal="4dp"
+                                android:paddingHorizontal="10dp"
+                                android:text="NNHItem 4"
+                                android:textSize="32sp" />
+
+                            <Button
+                                android:id="@+id/nnhtvText5"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:layout_marginBottom="4dp"
+                                android:layout_marginHorizontal="4dp"
+                                android:paddingHorizontal="10dp"
+                                android:layout_gravity="center_horizontal"
+                                android:text="NNHItem 5"
                                 android:textSize="32sp" />
                         </LinearLayout>
 
-                    </androidx.core.widget.NestedScrollView>
+                    </HorizontalScrollView>
                 </LinearLayout>
             </androidx.core.widget.NestedScrollView>
 

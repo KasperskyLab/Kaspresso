@@ -16,7 +16,8 @@ import io.github.kakaocup.kakao.common.actions.NestedScrollToAction
 
 class FallbackAutoScrollToAction(
     private val logger: UiTestLogger,
-) : ViewAction by NestedScrollToAction() {
+    private val viewAction: ViewAction = NestedScrollToAction(),
+) : ViewAction by viewAction {
 
     private fun View?.isScrollable(): Boolean =
         (this is ScrollView || this is NestedScrollView || this is HorizontalScrollView || this is ListView)
@@ -38,25 +39,24 @@ class FallbackAutoScrollToAction(
     }
 
     override fun perform(uiController: UiController, view: View) {
-        if (ViewMatchers.isDisplayingAtLeast(VISIBLE_AREA_PERCENTAGE).matches(view)) {
-            logger.i(TAG, "View is already displayed. Returning.")
-            return
+        try {
+            viewAction.perform(uiController, view)
+        } catch (exception: PerformException){
+            fallbackAutoScroll(uiController, view)
         }
+    }
 
+    private fun fallbackAutoScroll(uiController: UiController, view: View){
         val scrollView = view.findFirstParentScrollableView(view.rootView)
-        if (scrollView == null) {
-            logger.i(TAG, "No scrolling views found. Returning.")
-            return
-        }
 
         /**
          * Scroll till view and try to find view
          */
-        scrollView.scrollTo(view)
+        scrollView?.scrollTo(view)
         uiController.loopMainThreadUntilIdle()
 
         if (ViewMatchers.isDisplayingAtLeast(VISIBLE_AREA_PERCENTAGE).matches(view)) {
-            logger.i(TAG, "View is already displayed after scrolling to view. Returning.")
+            logger.i(TAG, "View is already displayed after fallback scrolling to view. Returning.")
             return
         }
 
@@ -85,10 +85,6 @@ class FallbackAutoScrollToAction(
             nextView.makeFirstParentScrollableViewScroll()
             scrollableParent.scrollTo(this.x.toInt(), this.y.toInt())
         }
-    }
-
-    override fun getDescription(): String {
-        return "fallback scroll to"
     }
 
     companion object {

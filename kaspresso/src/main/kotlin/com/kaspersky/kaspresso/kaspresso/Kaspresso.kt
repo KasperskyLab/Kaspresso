@@ -70,7 +70,6 @@ import com.kaspersky.kaspresso.interceptors.behavior.DataBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.ViewBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.WebBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.impl.autoscroll.AutoScrollViewBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.behavior.impl.autoscroll.AutoScrollViewFallbackInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.impl.autoscroll.AutoScrollWebBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.impl.flakysafety.FlakySafeDataBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.impl.flakysafety.FlakySafeViewBehaviorInterceptor
@@ -301,24 +300,6 @@ data class Kaspresso(
                     }
                 }
             }
-        }
-
-        /**
-         * In some cases, scrolling to the view works, but the action cannot be performed due to padding in
-         * the scrollable view, namely
-         * - ScrollView or NestedScrollView
-         * - ListView
-         * - HorizontalScrollView
-         *
-         * This is a very special case. If any of the screens in your tests contains one of the aforementioned
-         * Views and they have padding, use this in your [Kaspresso.Builder] to avoid scrolling problems
-         */
-        fun withAutoScrollFallback(): Builder =
-            this.apply {
-                viewBehaviorInterceptors = viewBehaviorInterceptors.apply {
-                    val autoScrollIndex = indexOfFirst { it is AutoScrollViewBehaviorInterceptor }
-                    add(autoScrollIndex + 1, AutoScrollViewFallbackInterceptor(autoScrollParams, libLogger))
-                }
         }
 
         /**

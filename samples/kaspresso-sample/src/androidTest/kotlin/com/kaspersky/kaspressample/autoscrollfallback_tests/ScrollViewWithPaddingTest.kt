@@ -4,14 +4,11 @@ import androidx.test.ext.junit.rules.activityScenarioRule
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.screen.MainScreen
 import com.kaspersky.kaspressample.screen.ScrollViewWithPaddingScreen
-import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.junit.Rule
 import org.junit.Test
 
-class ScrollViewWithPaddingPassingTest : TestCase(
-    kaspressoBuilder = Kaspresso.Builder.simple().withAutoScrollFallback()
-) {
+class ScrollViewWithPaddingTest : TestCase() {
 
     @get:Rule
     val activityRule = activityScenarioRule<MainActivity>()
@@ -103,7 +100,7 @@ class ScrollViewWithPaddingPassingTest : TestCase(
         }
 
     @Test
-    fun click_button_in_3LevelNestedScrollView_and_then_last_one_in_HorizontalScrollView() =
+    fun click_last_button_in_3LevelNestedHorizontalScrollView_and_then_last_one_in_1LevelNestedHorizontalScrollView() =
         run {
             step("Open Auto Scroll Fallback Screen") {
                 MainScreen {
@@ -114,9 +111,9 @@ class ScrollViewWithPaddingPassingTest : TestCase(
                 }
             }
 
-            step("Click nnbutton_1 in 3LevelNestedScrollView, middle item") {
+            step("Click nnhbutton_5 in 3LevelNestedScrollView, middle item") {
                 ScrollViewWithPaddingScreen {
-                    nnbutton1 {
+                    nnhbutton5 {
                         click()
                     }
                 }
