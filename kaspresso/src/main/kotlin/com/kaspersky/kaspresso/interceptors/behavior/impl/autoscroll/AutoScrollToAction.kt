@@ -14,7 +14,7 @@ import androidx.test.espresso.util.HumanReadables
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import io.github.kakaocup.kakao.common.actions.NestedScrollToAction
 
-class FallbackAutoScrollToAction(
+class AutoScrollToAction(
     private val logger: UiTestLogger,
     private val viewAction: ViewAction = NestedScrollToAction(),
 ) : ViewAction by viewAction {
@@ -41,12 +41,12 @@ class FallbackAutoScrollToAction(
     override fun perform(uiController: UiController, view: View) {
         try {
             viewAction.perform(uiController, view)
-        } catch (exception: PerformException){
+        } catch (exception: PerformException) {
             fallbackAutoScroll(uiController, view)
         }
     }
 
-    private fun fallbackAutoScroll(uiController: UiController, view: View){
+    private fun fallbackAutoScroll(uiController: UiController, view: View) {
         val scrollView = view.findFirstParentScrollableView(view.rootView)
 
         /**
@@ -88,7 +88,7 @@ class FallbackAutoScrollToAction(
     }
 
     companion object {
-        private val TAG = FallbackAutoScrollToAction::class.java.simpleName
+        private val TAG = AutoScrollToAction::class.java.simpleName
         private const val VISIBLE_AREA_PERCENTAGE = 90 // This is the default required by Espresso to be able to perform a click
     }
 }
