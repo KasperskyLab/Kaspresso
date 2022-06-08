@@ -77,7 +77,7 @@ signing {
         .orNull
     val signingKey = providers.gradleProperty("kaspresso.pgp.key")
         .forUseAtConfigurationTime()
-        .orNull?.toFile()?.readText()
+        .orNull
     val signingPassword = providers.gradleProperty("kaspresso.pgp.password")
         .forUseAtConfigurationTime()
         .orNull

@@ -1,0 +1,53 @@
+name: Publication to MavenCentral
+
+on:
+  workflow_dispatch:
+    inputs:
+      stableVersion:
+        required: true
+        type: string
+        description: 'Stable version'
+      snapshotVersion:
+        required: true
+        type: string
+        description: 'Snapshot version'
+
+jobs:
+  publication:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v1
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: 11
+      - name: Set up environment variables
+        env:
+          OSSRH_USER: ${{ secrets.ossrh_user }}
+          OSSRH_PASSWORD: ${{ secrets.ossrh_password }}
+          OSSRH_STAGING_PROFILE_ID: ${{ secrets.ossrh_staging_profile_id }}
+          PGP_KEYID: ${{ secrets.pgp_keyid }}
+          PGP_KEY: ${{ secrets.pgp_key }}
+          PGP_PASSWORD: ${{ secrets.pgp_password }}
+          STABLE_VERSION: ${{ github.event.inputs.stableVersion }}
+          SNAPSHOT_VERSION: ${{ github.event.inputs.snapshotVersion }}
+        run: |
+          mkdir -p $HOME/.gradle
+          touch $HOME/.gradle/gradle.properties
+          echo $'\n'kaspresso.ossrh.user=$OSSRH_USER >> $HOME/.gradle/gradle.properties
+          echo $'\n'kaspresso.ossrh.password=$OSSRH_PASSWORD >> $HOME/.gradle/gradle.properties
+          echo $'\n'kaspresso.ossrh.stagingProfileId=$OSSRH_STAGING_PROFILE_ID >> $HOME/.gradle/gradle.properties
+          echo $'\n'kaspresso.pgp.keyid=$PGP_KEYID >> $HOME/.gradle/gradle.properties
+          echo $'\n'kaspresso.pgp.key=$PGP_KEY >> $HOME/.gradle/gradle.properties
+          echo $'\n'kaspresso.pgp.password=$PGP_PASSWORD >> $HOME/.gradle/gradle.properties
+          echo $'\n'stableVersion=$STABLE_VERSION >> $HOME/.gradle/gradle.properties
+          echo $'\n'snapshotVersion=$SNAPSHOT_VERSION-SNAPSHOT >> $HOME/.gradle/gradle.properties
+      - name: Publish
+        run: ./gradlew publishRelease
