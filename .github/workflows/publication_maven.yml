@@ -49,5 +49,11 @@ jobs:
           echo $'\n'kaspresso.pgp.password=$PGP_PASSWORD >> $HOME/.gradle/gradle.properties
           echo $'\n'stableVersion=$STABLE_VERSION >> $HOME/.gradle/gradle.properties
           echo $'\n'snapshotVersion=$SNAPSHOT_VERSION-SNAPSHOT >> $HOME/.gradle/gradle.properties
+      - name: Static analysis
+        run: ./gradlew detektAll lint
+      - name: Tests
+        run: ./gradlew test
+      - name: Assemble build
+        run: ./gradlew assemble assembleAndroidTest
       - name: Publish
         run: ./gradlew publishRelease
