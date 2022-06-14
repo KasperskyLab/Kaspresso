@@ -40,5 +40,4 @@ jobs:
           PGP_KEY: ${{ secrets.pgp_key }}
           PGP_PASSWORD: ${{ secrets.pgp_password }}
           STABLE_VERSION: ${{ github.event.inputs.stableVersion }}
-          SNAPSHOT_VERSION: ${{ github.event.inputs.snapshotVersion }}
         run: ./gradlew publishRelease -Pkaspresso.ossrh.user=${OSSRH_USER} -Pkaspresso.ossrh.password=${OSSRH_PASSWORD} -Pkaspresso.ossrh.stagingProfileId=${OSSRH_STAGING_PROFILE_ID} -Pkaspresso.pgp.keyid=${PGP_KEYID} -Pkaspresso.pgp.key=${PGP_KEY} -Pkaspresso.pgp.password=${PGP_PASSWORD} -PstableVersion=${STABLE_VERSION}
