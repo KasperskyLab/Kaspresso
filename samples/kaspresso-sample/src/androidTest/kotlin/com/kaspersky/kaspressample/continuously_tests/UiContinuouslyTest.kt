@@ -58,7 +58,6 @@ class UiContinuouslyTest : TestCase() {
         }
     }
 
-
     @Test
     fun testDialogNotPresentAfterAndroidO() {
         // Don`t allow to run this test on Android < Oreo

@@ -229,13 +229,11 @@ class KautomatorMeasureTest : TestCase(
     )
 
     @get:Rule
-    val activityTestRule = ActivityTestRule(MainActivity::class.java, true, false)
+    val activityRule = activityScenarioRule<MainActivity>()
 
     @Test
     fun test() =
-        before {
-            activityTestRule.launchActivity(null)
-        }.after { }.run {
+        before { }.after { }.run {
     
     ======> UI Automator:        0 minutes, 1 seconds and 252 millis
     ======> UI Automator boost:  0 minutes, 0 seconds and 310 millis

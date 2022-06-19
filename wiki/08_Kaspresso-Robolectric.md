@@ -82,7 +82,7 @@ class FailingSharedTest : TestCase() {
     )
 
     @get:Rule
-    val activityTestRule = ActivityTestRule(DeviceSampleActivity::class.java, false, true)
+    val activityRule = activityScenarioRule<DeviceSampleActivity>()
 
     @Test
     fun exploitSampleTest() =

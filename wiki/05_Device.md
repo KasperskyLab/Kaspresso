@@ -36,8 +36,7 @@ Device instance is available in `BaseTestContext` scope and `BaseTestCase` via `
 @Test
 fun test() =
     run {
-        step("Open Simple Screen") {
-            activityTestRule.launchActivity(null)
+        step("On Simple Screen opened") {
   ======>   device.screenshots.take("Additional_screenshot")  <======
 
             MainScreen {

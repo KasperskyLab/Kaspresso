@@ -60,4 +60,3 @@ class InitTransformDataTest : BaseParametrizedTest() {
         }
     }
 }
-
