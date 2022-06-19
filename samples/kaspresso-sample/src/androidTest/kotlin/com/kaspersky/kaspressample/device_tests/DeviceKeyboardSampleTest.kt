@@ -2,7 +2,7 @@ package com.kaspersky.kaspressample.device_tests
 
 import android.Manifest
 import android.view.KeyEvent
-import androidx.test.rule.ActivityTestRule
+import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspressample.device.DeviceSampleActivity
 import com.kaspersky.kaspressample.screen.DeviceSampleScreen
@@ -24,7 +24,7 @@ class DeviceKeyboardSampleTest : TestCase() {
     )
 
     @get:Rule
-    val activityTestRule = ActivityTestRule(DeviceSampleActivity::class.java, true, true)
+    val activityRule = activityScenarioRule<DeviceSampleActivity>()
 
     @Test
     fun keyboardSampleTest() {

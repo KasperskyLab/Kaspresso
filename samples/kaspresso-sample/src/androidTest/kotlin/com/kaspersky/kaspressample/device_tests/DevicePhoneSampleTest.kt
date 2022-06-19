@@ -3,7 +3,7 @@ package com.kaspersky.kaspressample.device_tests
 import android.Manifest
 import android.provider.CallLog
 import android.provider.Telephony
-import androidx.test.rule.ActivityTestRule
+import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.rule.GrantPermissionRule
 import io.github.kakaocup.kakao.screen.Screen
 import com.kaspersky.kaspressample.device.DeviceSampleActivity
@@ -32,7 +32,7 @@ class DevicePhoneSampleTest : TestCase() {
     )
 
     @get:Rule
-    val activityTestRule = ActivityTestRule(DeviceSampleActivity::class.java, false, true)
+    val activityRule = activityScenarioRule<DeviceSampleActivity>()
 
     @Test
     fun phoneSampleTest() {

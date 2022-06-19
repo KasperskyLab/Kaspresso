@@ -1,7 +1,7 @@
 package com.kaspersky.kaspressample.simple_tests
 
 import android.Manifest
-import androidx.test.rule.ActivityTestRule
+import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.R
@@ -28,7 +28,7 @@ class SimpleTestWithRule {
     )
 
     @get:Rule
-    val activityTestRule = ActivityTestRule(MainActivity::class.java, true, false)
+    val activityRule = activityScenarioRule<MainActivity>()
 
     @get:Rule
     val testCaseRule = TestCaseRule(javaClass.simpleName)
@@ -38,7 +38,6 @@ class SimpleTestWithRule {
         testCaseRule.run {
             step("Open Simple Screen") {
                 testLogger.i("I am testLogger")
-                activityTestRule.launchActivity(null)
                 device.screenshots.take("Additional_screenshot")
                 MainScreen {
                     simpleButton {
@@ -76,5 +75,5 @@ class SimpleTestWithRule {
                     CheckEditScenario()
                 )
             }
-    }
+        }
 }

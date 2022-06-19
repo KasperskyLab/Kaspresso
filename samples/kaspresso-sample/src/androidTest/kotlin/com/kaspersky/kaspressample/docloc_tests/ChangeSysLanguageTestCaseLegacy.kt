@@ -3,7 +3,7 @@ package com.kaspersky.kaspressample.docloc_tests
 import android.Manifest
 import android.content.Intent
 import android.provider.Settings
-import androidx.test.rule.ActivityTestRule
+import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspresso.testcases.api.testcase.DocLocScreenshotTestCase
@@ -28,7 +28,7 @@ class ChangeSysLanguageTestCaseLegacy : DocLocScreenshotTestCase(
     )
 
     @get:Rule
-    val activityTestRule = ActivityTestRule(MainActivity::class.java, true, false)
+    val activityRule = activityScenarioRule<MainActivity>()
 
     @Test
     fun showAndroidSettings() = run {

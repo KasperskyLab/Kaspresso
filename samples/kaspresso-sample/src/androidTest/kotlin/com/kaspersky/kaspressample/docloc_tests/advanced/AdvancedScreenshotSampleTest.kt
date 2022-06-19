@@ -2,7 +2,9 @@ package com.kaspersky.kaspressample.docloc_tests.advanced
 
 import android.Manifest
 import android.graphics.Color
+import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.rule.GrantPermissionRule
+import com.kaspersky.kaspressample.docloc.FragmentTestActivity
 import com.kaspersky.kaspressample.docloc.ScreenshotSampleFragment
 import com.kaspersky.kaspressample.docloc.ScreenshotSampleView
 import com.kaspersky.kaspresso.annotations.ScreenShooterTest
@@ -14,7 +16,7 @@ import org.junit.Test
  * An example of advanced [DocLocScreenshotTestCase] usage.
  * For more information see DocLoc wiki page.
  */
-class AdvancedScreenshotSampleTest : ProductDocLocScreenshotTestCase() {
+class AdvancedScreenshotSampleTest : DocLocScreenshotTestCase(locales = "en,ru") {
 
     private lateinit var fragment: ScreenshotSampleFragment
     private lateinit var view: ScreenshotSampleView
@@ -25,12 +27,17 @@ class AdvancedScreenshotSampleTest : ProductDocLocScreenshotTestCase() {
         Manifest.permission.READ_EXTERNAL_STORAGE
     )
 
+    @get:Rule
+    val activityRule = activityScenarioRule<FragmentTestActivity>()
+
     @ScreenShooterTest
     @Test
     fun test() = before {
         fragment = ScreenshotSampleFragment()
         view = getUiSafeProxy(fragment as ScreenshotSampleView)
-        activity.setFragment(fragment)
+        activityRule.scenario.onActivity { activity ->
+            activity.setFragment(fragment)
+        }
     }.after {
     }.run {
         step("1. Launch feature screen") {

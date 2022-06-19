@@ -4,7 +4,7 @@ import android.Manifest
 import android.os.Build
 import android.provider.Settings
 import android.provider.Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES
-import androidx.test.rule.ActivityTestRule
+import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspressample.device.DeviceSampleAccessibilityService
 import com.kaspersky.kaspressample.device.DeviceSampleActivity
@@ -35,7 +35,7 @@ class DeviceAccessibilitySampleTest : TestCase() {
     )
 
     @get:Rule
-    val activityRule = ActivityTestRule(DeviceSampleActivity::class.java, false, true)
+    val activityRule = activityScenarioRule<DeviceSampleActivity>()
 
     @Test
     fun accessibilitySampleTest() {

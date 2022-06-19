@@ -1,7 +1,7 @@
 package com.kaspersky.kaspressample.device_tests
 
+import androidx.test.ext.junit.rules.activityScenarioRule
 import android.os.Build
-import androidx.test.rule.ActivityTestRule
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspresso.device.logcat.LogcatBufferSize
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
@@ -14,7 +14,7 @@ import org.junit.Test
 class DeviceLogcatSampleTest : TestCase() {
 
     @get:Rule
-    val activityTestRule = ActivityTestRule(MainActivity::class.java, true, true)
+    val activityRule = activityScenarioRule<MainActivity>()
 
     @Test
     fun logcatTest() {

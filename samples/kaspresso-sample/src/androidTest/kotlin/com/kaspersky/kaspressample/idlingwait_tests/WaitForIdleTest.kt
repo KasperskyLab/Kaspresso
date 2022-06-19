@@ -1,7 +1,7 @@
 package com.kaspersky.kaspressample.idlingwait_tests
 
 import android.Manifest
-import androidx.test.rule.ActivityTestRule
+import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.R
@@ -15,7 +15,8 @@ import org.junit.Test
 
 class WaitForIdleTest : TestCase(
     kaspressoBuilder = Kaspresso.Builder.simple {
-        kautomatorWaitForIdleSettings = KautomatorWaitForIdleSettings.boost() }
+        kautomatorWaitForIdleSettings = KautomatorWaitForIdleSettings.boost()
+    }
 ) {
 
     @get:Rule
@@ -25,28 +26,23 @@ class WaitForIdleTest : TestCase(
     )
 
     @get:Rule
-    val activityTestRule = ActivityTestRule(MainActivity::class.java, true, false)
+    val activityRule = activityScenarioRule<MainActivity>()
 
     @Test
-    fun test() {
-        before {
-            activityTestRule.launchActivity(null)
-        }.after {
-        }.run {
-            step("Open Wait for Idle Screen") {
-                UiMainScreen {
-                    idleWaitingButton {
-                        click()
-                    }
+    fun test() = run {
+        step("Open Wait for Idle Screen") {
+            UiMainScreen {
+                idleWaitingButton {
+                    click()
                 }
             }
+        }
 
-            step("Check text in EditText") {
-                UiWaitForIdleScreen {
-                    edit {
-                        isDisplayed()
-                        containsText(device.targetContext.getString(R.string.idlewaiting_fragment_text_edittext))
-                    }
+        step("Check text in EditText") {
+            UiWaitForIdleScreen {
+                edit {
+                    isDisplayed()
+                    containsText(device.targetContext.getString(R.string.idlewaiting_fragment_text_edittext))
                 }
             }
         }

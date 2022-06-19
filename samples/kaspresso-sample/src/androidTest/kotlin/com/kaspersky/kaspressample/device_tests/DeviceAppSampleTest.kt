@@ -1,7 +1,7 @@
 package com.kaspersky.kaspressample.device_tests
 
 import android.Manifest
-import androidx.test.rule.ActivityTestRule
+import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspresso.device.apps.Apps
@@ -34,7 +34,7 @@ class DeviceAppSampleTest : TestCase() {
     )
 
     @get:Rule
-    val activityTestRule = ActivityTestRule(MainActivity::class.java, true, true)
+    val activityRule = activityScenarioRule<MainActivity>()
 
     @Test
     fun test() {

@@ -1,8 +1,8 @@
 package com.kaspersky.kaspressample.tests
 
 import android.Manifest
+import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspressample.device.DeviceSampleActivity
 import com.kaspersky.kaspresso.instrumental.exception.NotSupportedInstrumentalTestException
@@ -22,7 +22,7 @@ class FailingDeviceRobolectricTest : TestCase() {
     )
 
     @get:Rule
-    val activityTestRule = ActivityTestRule(DeviceSampleActivity::class.java, false, true)
+    val activityRule = activityScenarioRule<DeviceSampleActivity>()
 
     @Test
     fun unitTest() {
@@ -31,10 +31,9 @@ class FailingDeviceRobolectricTest : TestCase() {
         }
     }
 
-    private fun exploitSampleTest() =
-        run {
-            step("Press Home button") {
-                device.exploit.pressHome()
-            }
+    private fun exploitSampleTest() = run {
+        step("Press Home button") {
+            device.exploit.pressHome()
         }
+    }
 }

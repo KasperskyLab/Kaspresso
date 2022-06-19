@@ -1,7 +1,7 @@
 package com.kaspersky.kaspressample.device_tests
 
 import android.Manifest
-import androidx.test.rule.ActivityTestRule
+import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.screen.MainScreen
@@ -23,7 +23,7 @@ class DeviceLanguageSampleTest : TestCase() {
     )
 
     @get:Rule
-    val activityTestRule = ActivityTestRule(MainActivity::class.java, true, true)
+    val activityRule = activityScenarioRule<MainActivity>()
 
     private lateinit var default: Locale
 
@@ -38,9 +38,10 @@ class DeviceLanguageSampleTest : TestCase() {
             step("Change locale to english") {
                 device.language.switchInApp(Locale.ENGLISH)
                 // it's so important to reload current active Activity
-                // you can do it using activityTestRule or manipulating in the Application through great Kaspresso
-                activityTestRule.finishActivity()
-                activityTestRule.launchActivity(null)
+                // you can do it recreating the activity or manipulating in the Application through great Kaspresso
+                activityRule.scenario.onActivity { activity ->
+                    activity.recreate()
+                }
                 Thread.sleep(SLEEP_TIME)
             }
 
@@ -56,9 +57,10 @@ class DeviceLanguageSampleTest : TestCase() {
             step("Change locale to russian") {
                 device.language.switchInApp(Locale("ru"))
                 // it's so important to reload current active Activity
-                // you can do it using activityTestRule or manipulating in the Application through great Kaspresso
-                activityTestRule.finishActivity()
-                activityTestRule.launchActivity(null)
+                // you can do it recreating the activity or manipulating in the Application through great Kaspresso
+                activityRule.scenario.onActivity { activity ->
+                    activity.recreate()
+                }
                 Thread.sleep(SLEEP_TIME)
             }
 
