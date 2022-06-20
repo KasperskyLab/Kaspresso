@@ -1,12 +1,6 @@
 name: Publication to MavenCentral
 
-on:
-  workflow_dispatch:
-    inputs:
-      stableVersion:
-        required: true
-        type: string
-        description: 'Stable version'
+on: workflow_dispatch
 
 jobs:
   publication:
@@ -25,12 +19,10 @@ jobs:
         with:
           distribution: 'adopt'
           java-version: 11
-      - name: Static analysis
-        run: ./gradlew detektAll lint
       - name: Tests
-        run: ./gradlew test
+        run: make unit_tests
       - name: Assemble build
-        run: ./gradlew assemble assembleAndroidTest
+        run: make compile_all
       - name: Publish
         env:
           OSSRH_USER: ${{ secrets.ossrh_user }}
@@ -39,5 +31,4 @@ jobs:
           PGP_KEYID: ${{ secrets.pgp_keyid }}
           PGP_KEY: ${{ secrets.pgp_key }}
           PGP_PASSWORD: ${{ secrets.pgp_password }}
-          STABLE_VERSION: ${{ github.event.inputs.stableVersion }}
-        run: ./gradlew publishRelease -Pkaspresso.ossrh.user=${OSSRH_USER} -Pkaspresso.ossrh.password=${OSSRH_PASSWORD} -Pkaspresso.ossrh.stagingProfileId=${OSSRH_STAGING_PROFILE_ID} -Pkaspresso.pgp.keyid=${PGP_KEYID} -Pkaspresso.pgp.key=${PGP_KEY} -Pkaspresso.pgp.password=${PGP_PASSWORD} -PstableVersion=${STABLE_VERSION}
+        run: ./gradlew publishRelease -Pkaspresso.ossrh.user=${OSSRH_USER} -Pkaspresso.ossrh.password=${OSSRH_PASSWORD} -Pkaspresso.ossrh.stagingProfileId=${OSSRH_STAGING_PROFILE_ID} -Pkaspresso.pgp.keyid=${PGP_KEYID} -Pkaspresso.pgp.key=${PGP_KEY} -Pkaspresso.pgp.password=${PGP_PASSWORD}
