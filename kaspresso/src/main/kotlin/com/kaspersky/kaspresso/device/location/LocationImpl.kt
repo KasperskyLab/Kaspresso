@@ -20,7 +20,7 @@ class LocationImpl(
      * Required Permissions: INTERNET
      */
     override fun enableGps() {
-        setLocationGpsState(true)
+        setLocationGpsEnabled(true)
         logger.i("GPS enabled")
     }
 
@@ -30,7 +30,7 @@ class LocationImpl(
      * Required Permissions: INTERNET
      */
     override fun disableGps() {
-        setLocationGpsState(false)
+        setLocationGpsEnabled(false)
         logger.i("GPS disabled")
     }
 
@@ -44,7 +44,7 @@ class LocationImpl(
         logger.i("Location set to $lat,$lon")
     }
 
-    private fun setLocationGpsState(enabled: Boolean) {
+    private fun setLocationGpsEnabled(enabled: Boolean) {
         if (currentOsVersion >= Build.VERSION_CODES.R) {
             val gpsEnabled = if (enabled) "3" else "0"
             adbServer.performShell("settings put secure location_mode $gpsEnabled")
