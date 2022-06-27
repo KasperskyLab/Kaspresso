@@ -1,5 +1,6 @@
 package com.kaspersky.kaspresso.device.location
 
+import android.os.Build
 import com.kaspersky.kaspresso.device.server.AdbServer
 import com.kaspersky.kaspresso.logger.UiTestLogger
 
@@ -11,13 +12,15 @@ class LocationImpl(
     private val adbServer: AdbServer
 ) : Location {
 
+    private val currentOsVersion = Build.VERSION.SDK_INT
+
     /**
      * Enables GPS on the device.
      *
      * Required Permissions: INTERNET
      */
     override fun enableGps() {
-        setLocationProviders("+gps")
+        setLocationGpsEnabled(true)
         logger.i("GPS enabled")
     }
 
@@ -27,7 +30,7 @@ class LocationImpl(
      * Required Permissions: INTERNET
      */
     override fun disableGps() {
-        setLocationProviders("-gps")
+        setLocationGpsEnabled(false)
         logger.i("GPS disabled")
     }
 
@@ -41,7 +44,13 @@ class LocationImpl(
         logger.i("Location set to $lat,$lon")
     }
 
-    private fun setLocationProviders(providers: String) {
-        adbServer.performShell("settings put secure location_providers_allowed $providers")
+    private fun setLocationGpsEnabled(enabled: Boolean) {
+        if (currentOsVersion >= Build.VERSION_CODES.R) {
+            val gpsEnabled = if (enabled) "3" else "0"
+            adbServer.performShell("settings put secure location_mode $gpsEnabled")
+        } else {
+            val gpsEnabled = if (enabled) "+gps" else "-gps"
+            adbServer.performShell("settings put secure location_providers_allowed $gpsEnabled")
+        }
     }
 }
