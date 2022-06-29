@@ -62,7 +62,7 @@ class FallbackAutoScrollAction : ViewAction {
         }
     }
 
-    override fun getDescription() = "alternative scroll to"
+    override fun getDescription() = "fallback scroll to"
 
     override fun perform(uiController: UiController, view: View) {
         try {
