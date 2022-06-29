@@ -5,7 +5,6 @@ import androidx.test.espresso.Espresso
 import androidx.test.espresso.FailureHandler
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.Configurator
-import io.github.kakaocup.kakao.Kakao
 import com.kaspersky.adbserver.common.log.logger.LogLevel
 import com.kaspersky.components.kautomator.intercept.interaction.UiDeviceInteraction
 import com.kaspersky.components.kautomator.intercept.interaction.UiObjectInteraction
@@ -64,13 +63,14 @@ import com.kaspersky.kaspresso.files.resources.impl.DefaultResourcesDirNameProvi
 import com.kaspersky.kaspresso.files.resources.impl.DefaultResourcesDirsProvider
 import com.kaspersky.kaspresso.files.resources.impl.DefaultResourcesRootDirsProvider
 import com.kaspersky.kaspresso.idlewaiting.KautomatorWaitForIdleSettings
-import com.kaspersky.kaspresso.instrumental.InstrumentalDependencyProviderFactory
 import com.kaspersky.kaspresso.instrumental.InstrumentalDependencyProvider
+import com.kaspersky.kaspresso.instrumental.InstrumentalDependencyProviderFactory
 import com.kaspersky.kaspresso.interceptors.behavior.DataBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.ViewBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.WebBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.impl.autoscroll.AutoScrollViewBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.impl.autoscroll.AutoScrollWebBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behavior.impl.autoscroll.FallbackAutoScrollViewBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.impl.flakysafety.FlakySafeDataBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.impl.flakysafety.FlakySafeViewBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behavior.impl.flakysafety.FlakySafeWebBehaviorInterceptor
@@ -113,15 +113,16 @@ import com.kaspersky.kaspresso.interceptors.watcher.view.impl.logging.LoggingVie
 import com.kaspersky.kaspresso.interceptors.watcher.view.impl.logging.LoggingWebAssertionWatcherInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.logger.UiTestLoggerImpl
-import com.kaspersky.kaspresso.params.Params
-import com.kaspersky.kaspresso.params.FlakySafetyParams
-import com.kaspersky.kaspresso.params.ContinuouslyParams
 import com.kaspersky.kaspresso.params.AutoScrollParams
+import com.kaspersky.kaspresso.params.ContinuouslyParams
 import com.kaspersky.kaspresso.params.ElementLoaderParams
-import com.kaspersky.kaspresso.params.StepParams
+import com.kaspersky.kaspresso.params.FlakySafetyParams
+import com.kaspersky.kaspresso.params.Params
 import com.kaspersky.kaspresso.params.ScreenshotParams
+import com.kaspersky.kaspresso.params.StepParams
 import com.kaspersky.kaspresso.params.VideoParams
 import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
+import io.github.kakaocup.kakao.Kakao
 
 /**
  * The storage of all Kaspresso preferences and entities, such as [AdbServer], [Device] and different interceptors.
@@ -822,6 +823,7 @@ data class Kaspresso(
             if (!::viewBehaviorInterceptors.isInitialized) viewBehaviorInterceptors =
                 if (isAndroidRuntime) mutableListOf(
                     AutoScrollViewBehaviorInterceptor(autoScrollParams, libLogger),
+                    FallbackAutoScrollViewBehaviorInterceptor(autoScrollParams, libLogger),
                     SystemDialogSafetyViewBehaviorInterceptor(
                         libLogger,
                         instrumentalDependencyProviderFactory.getInterceptorProvider<SystemDialogSafetyViewBehaviorInterceptor>(instrumentation),
