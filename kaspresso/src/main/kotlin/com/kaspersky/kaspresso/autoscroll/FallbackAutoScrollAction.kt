@@ -168,13 +168,13 @@ class FallbackAutoScrollAction : ViewAction {
     private fun findFirstScrollableParentOf(view: View): ViewGroup? {
         var parent = view.parent
         while (parent != null) {
-            if (parent is ScrollView
-                || parent is HorizontalScrollView
-                || parent is RecyclerView
-                || parent is NestedScrollView
-                || parent is ListView
-                || parent is CoordinatorLayout
-            ) {
+            val isParentScrollable = parent is ScrollView ||
+                    parent is HorizontalScrollView ||
+                    parent is RecyclerView ||
+                    parent is NestedScrollView ||
+                    parent is ListView ||
+                    parent is CoordinatorLayout
+            if (isParentScrollable) {
                 return parent as ViewGroup?
             }
             parent = parent.parent
