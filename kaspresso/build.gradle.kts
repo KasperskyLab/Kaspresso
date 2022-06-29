@@ -28,6 +28,8 @@ dependencies {
     implementation(libs.kotlinStdlib)
     implementation(libs.gson)
     implementation(projects.adbServer.adbserverDevice)
+    implementation(libs.coordinatorLayout)
+    implementation(libs.material)
 
     testImplementation(libs.junit)
     testImplementation(libs.truth)
