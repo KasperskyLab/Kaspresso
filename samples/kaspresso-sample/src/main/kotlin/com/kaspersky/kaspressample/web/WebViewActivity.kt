@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.annotation.TargetApi
 import android.os.Build
 import android.os.Bundle
+import android.webkit.CookieManager
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
@@ -35,6 +36,8 @@ class WebViewActivity : AppCompatActivity() {
             }
 
             settings.javaScriptEnabled = true
+            val cookieManager: CookieManager = CookieManager.getInstance()
+            cookieManager.setAcceptCookie(false)
 
             loadUrl("https://my.kaspersky.com/en/")
         }

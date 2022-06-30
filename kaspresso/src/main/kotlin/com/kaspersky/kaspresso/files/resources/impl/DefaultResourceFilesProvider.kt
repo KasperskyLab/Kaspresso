@@ -5,6 +5,7 @@ import com.kaspersky.kaspresso.files.resources.ResourceFileNamesProvider
 import com.kaspersky.kaspresso.files.resources.ResourceFilesProvider
 import com.kaspersky.kaspresso.files.resources.ResourcesDirsProvider
 import com.kaspersky.kaspresso.files.resources.ResourcesRootDirsProvider
+import com.kaspersky.kaspresso.internal.extensions.other.createDirIfNeeded
 import com.kaspersky.kaspresso.internal.extensions.other.createFileIfNeeded
 import java.io.File
 
@@ -44,7 +45,7 @@ class DefaultResourceFilesProvider(
         return resourcesDirsProvider.provide(
             resourcesRootDirsProvider.videoRootDir,
             subDir
-        ).resolve(resFileName).createFileIfNeeded()
+        ).resolve(resFileName).createDirIfNeeded().createFileIfNeeded()
     }
 
     override fun provideViewHierarchyFile(tag: String, subDir: String?): File {

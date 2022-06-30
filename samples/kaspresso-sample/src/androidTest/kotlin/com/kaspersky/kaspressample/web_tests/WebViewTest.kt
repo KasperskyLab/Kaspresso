@@ -39,34 +39,33 @@ class WebViewTest : TestCase() {
                 }
             }
 
-            step("Find \"Sign in\" button and \"Protect your data\" title") {
+            step("Find \"Sign in\" button and title") {
                 WebViewScreen {
 
                     webView {
                         withElement(
                             Locator.XPATH,
-                            "/html/body/div[1]/section[1]/div/div/h2"
+                            "/html/body/div[1]/div[2]/app/welcome-page/wp-content/div[2]/wp-entry-panel/div/wp-form-tabs/div/div[1]"
                         ) {
-                            containsText("Protect your data")
+                            containsText("Sign in")
                         }
 
                         withElement(
                             Locator.XPATH,
-                            "/html/body/div[1]/header/section/div[3]/div[2]/button"
+                            "/html/body/div[1]/div[2]/app/welcome-page/wp-content/div[2]/wp-entry-panel/div/wp-panel/div/div/ab-test-sign-in-form/div/form/kl-button/button"
                         ) {
-                            hasText("Sign in")
+                            containsText("Sign in")
                         }
                     }
                 }
             }
 
-            step("Click \"Get Support\" button") {
+            step("Click \"Contacts\" button") {
                 WebViewScreen {
                     webView {
-
                         withElement(
                             Locator.XPATH,
-                            "/html/body/div[1]/section[5]/div/div/div[2]/div[3]/button"
+                            "/html/body/div[1]/div[2]/footer/div[2]/ul/li[1]/a"
                         ) {
                             compose(this@webView) {
                                 or {
@@ -75,15 +74,15 @@ class WebViewTest : TestCase() {
                                 }
                                 or {
                                     containsText("Ask questiop")
-                                    hasText("Ask questio")
+                                    hasText("Ask questiop")
                                 }
                                 or {
                                     containsText("Ask question")
                                     hasText("Ask question")
                                 }
                                 or {
-                                    containsText("Get Support")
-                                    hasText("Get Support")
+                                    containsText("Contacts")
+                                    hasText("Contacts")
                                 }
                             }
                         }
@@ -91,22 +90,24 @@ class WebViewTest : TestCase() {
                         compose {
                             orWithElement(
                                 Locator.XPATH,
-                                "/html/body/div[1]/section[5]/div/div/div[2]/div[3]/button"
+                                "/html/body/div[1]/div[2]/footer/div[2]/ul/li[1]/a"
                             ) {
                                 hasText("TRATATATA")
                             }
                             orWithElement(
                                 Locator.XPATH,
-                                "/html/body/div[1]/section[5]/div/div/div[2]/div[3]/button"
+                                "/html/body/div[1]/div[2]/footer/div[2]/ul/li[1]/a"
                             ) {
-                                hasText("Get Support")
+                                hasText("Ask question")
+                            } thenContinue {
                                 click()
                             }
                             orWithElement(
                                 Locator.XPATH,
-                                "//*[@id=\"app\"]/section[5]/div/div/div[2]/div[3]/button"
+                                "/html/body/div[1]/div[2]/footer/div[2]/ul/li[1]/a"
                             ) {
-                                hasText("Ask question")
+                                hasText("Contacts")
+                            } thenContinue {
                                 click()
                             }
                         }

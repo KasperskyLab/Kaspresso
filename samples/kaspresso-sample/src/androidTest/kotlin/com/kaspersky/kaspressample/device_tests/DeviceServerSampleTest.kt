@@ -36,7 +36,7 @@ class DeviceServerSampleTest : TestCase() {
             }
 
             step("Execute ADB Shell command") {
-                val command = "pm list packages"
+                val command = "pm list packages ${device.targetContext.packageName}"
 
                 val result = adbServer.performShell(command)
                 assertTrue("package:${device.targetContext.packageName}" in result.first())
