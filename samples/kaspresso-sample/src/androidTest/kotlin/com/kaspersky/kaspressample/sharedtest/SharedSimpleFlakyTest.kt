@@ -2,6 +2,7 @@ package com.kaspersky.kaspressample.sharedtest
 
 import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.kaspersky.kaspressample.screen.SharedTestScreen
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.junit.Rule
 import org.junit.Test
@@ -16,7 +17,7 @@ class SharedSimpleFlakyTest : TestCase() {
     @Test
     fun test() = run {
         step("Fill info") {
-            com.kaspersky.kaspressample.screen.SharedTestScreen {
+            SharedTestScreen {
                 firstNameEditText {
                     replaceText("Kaspersky")
                 }
@@ -33,7 +34,7 @@ class SharedSimpleFlakyTest : TestCase() {
         }
 
         step("Verify Full Name info") {
-            com.kaspersky.kaspressample.screen.SharedTestScreen {
+            SharedTestScreen {
                 firstNameEditText {
                     hasText("Kaspersky")
                 }
@@ -44,7 +45,7 @@ class SharedSimpleFlakyTest : TestCase() {
         }
 
         step("Click on find me button") {
-            com.kaspersky.kaspressample.screen.SharedTestScreen {
+            SharedTestScreen {
                 findMeButton {
                     click()
                 }
