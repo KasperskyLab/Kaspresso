@@ -4,6 +4,7 @@ plugins {
     base
     id("convention.dependency-updates")
     id("io.gitlab.arturbosch.detekt") version "1.18.1"
+    id("convention.air")
 }
 
 buildscript {
