@@ -1,4 +1,4 @@
-package com.kaspersky.kaspresso.composesupport.sample.screen
+package com.kaspresky.kaspresso.composesupport.sample.screen
 
 import androidx.compose.ui.test.SemanticsNodeInteractionsProvider
 import com.kaspersky.kaspresso.composesupport.sample.resources.C

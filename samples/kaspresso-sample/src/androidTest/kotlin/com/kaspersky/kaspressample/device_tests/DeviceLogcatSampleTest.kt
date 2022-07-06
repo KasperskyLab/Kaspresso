@@ -1,11 +1,13 @@
 package com.kaspersky.kaspressample.device_tests
 
+import android.os.Build
 import androidx.test.rule.ActivityTestRule
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspresso.device.logcat.LogcatBufferSize
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
+import org.junit.Assume
 import org.junit.Rule
 import org.junit.Test
 
@@ -16,6 +18,8 @@ class DeviceLogcatSampleTest : TestCase() {
 
     @Test
     fun logcatTest() {
+        Assume.assumeTrue(Build.VERSION.SDK_INT != Build.VERSION_CODES.O) // "logcat -c" fails on android 8 for some reason
+
         before {
             device.logcat.setBufferSize(LogcatBufferSize(8, LogcatBufferSize.Dimension.MEGABYTES))
             device.logcat.disableChatty()
