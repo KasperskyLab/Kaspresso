@@ -50,5 +50,4 @@ class DeviceScreenshotSampleTest : TestCase() {
         }
         dir.delete()
     }
-
 }
