@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scroll_view_flaky"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/first_element_btn"
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:text="1"
+            android:textSize="32sp" />
+
+        <TextView
+            android:id="@+id/second_element_tv"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:textColor="@color/customTextColor"
+            android:textSize="32sp"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:text="second element text"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/third_element_btn"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:text="3"
+            android:textSize="32sp" />
+
+        <Button
+            android:id="@+id/fourth_element_btn"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:text="4"
+            android:textSize="32sp" />
+
+        <Button
+            android:id="@+id/fifth_element_btn"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:background="@color/colorPrimary"
+            android:text="5"
+            android:textColor="@color/customTextColor"
+            android:textSize="32sp"/>
+
+        <Button
+            android:id="@+id/sixth_element_btn"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:text="sixth element text"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/sevens_element_btn"
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:textColor="@color/customTextColor"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:background="@color/colorPrimary"
+            android:text="7" />
+
+    </LinearLayout>
+
+</ScrollView>

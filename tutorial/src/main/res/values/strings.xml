@@ -1,13 +1,15 @@
 <resources>
     <string name="app_name">Tutorial</string>
 
-    <!-- Main Activity -->
-    <string name="main_screen_title">Main Screen</string>
-    <string name="main_screen_simple_fragment_button">Simple fragment</string>
-
     <!-- Simple fragment screen -->
     <string name="simple_fragment_title">Simple Fragment</string>
     <string name="simple_fragment_text_button_1">Button 1</string>
     <string name="simple_fragment_text_button_2">Button 2</string>
     <string name="simple_fragment_text_edittext">Some text</string>
+
+    <!-- Simple Activity screen -->
+    <string name="simple_activity_default_title">Default title</string>
+    <string name="simple_activity_input_hint">input text</string>
+    <string name="simple_activity_change_title_button">Change title</string>
+
 </resources>

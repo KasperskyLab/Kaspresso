@@ -1,13 +1,13 @@
 package com.kaspersky.kaspresso.tutorial.test
 
 import android.Manifest
+import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
-import com.kaspersky.kaspresso.tutorial.MainActivity
 import com.kaspersky.kaspresso.tutorial.R
-import com.kaspersky.kaspresso.tutorial.screen.MainScreen
 import com.kaspersky.kaspresso.tutorial.screen.SimpleScreen
+import com.kaspersky.kaspresso.tutorial.simple.SimpleActivity
 import org.junit.Rule
 import org.junit.Test
 
@@ -22,60 +22,48 @@ import org.junit.Test
 class SimpleTest : TestCase() {
 
     @get:Rule
-    val runtimePermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
-        Manifest.permission.WRITE_EXTERNAL_STORAGE,
-        Manifest.permission.READ_EXTERNAL_STORAGE
-    )
-
-    @get:Rule
-    val activityRule = activityScenarioRule<MainActivity>()
+    val activityRule = activityScenarioRule<SimpleActivity>()
 
     @Test
     fun test() =
         before {
-            testLogger.i("Before section")
+
         }.after {
-            testLogger.i("After section")
+
         }.run {
             step("Open Simple Screen") {
-                testLogger.i("Main section")
-                device.screenshots.take("Additional_screenshot")
-
-                MainScreen {
-                    simpleButton {
-                        isVisible()
-                        click()
-                    }
-                }
-            }
-
-            step("Click button_1 and check button_2") {
                 SimpleScreen {
-                    button1 {
-                        click()
-                    }
-                    button2 {
+                    title {
                         isVisible()
+                        hasText(R.string.simple_activity_default_title)
+                        hasTextColor(R.color.black)
+                    }
+
+                    button {
+                        isVisible()
+                        withText(R.string.simple_activity_change_title_button)
+                        isClickable()
+                    }
+                    input {
+                        isVisible()
+                        hasHint(R.string.simple_activity_input_hint)
+                        hasEmptyText()
                     }
                 }
             }
 
-            step("Click button_2 and check edit") {
+            step("Type \" Kaspresso \"") {
                 SimpleScreen {
-                    button2 {
-                        click()
-                    }
-                    edit {
-                        flakySafely(timeoutMs = 7000) { isVisible() }
-                        hasText(R.string.simple_fragment_text_edittext)
-                    }
+                    input.typeText("Kaspresso")
+                    closeSoftKeyboard()
+                    button.click()
                 }
             }
 
-            step("Check all possibilities of edit") {
-                scenario(
-                    CheckEditScenario()
-                )
+            step("Check title content") {
+                SimpleScreen {
+                    title.hasText("Kaspresso")
+                }
             }
-    }
+        }
 }
