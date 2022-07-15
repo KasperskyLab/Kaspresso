@@ -2,13 +2,11 @@ package com.kaspersky.kaspressample.docloc_tests
 
 import android.Manifest
 import android.content.Intent
-import android.os.Build
 import android.provider.Settings
 import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspresso.testcases.api.testcase.DocLocScreenshotTestCase
-import org.junit.Assume
 import org.junit.Rule
 import org.junit.Test
 
@@ -32,8 +30,6 @@ class ChangeSysLanguageTestCase : DocLocScreenshotTestCase(
 
     @Test
     fun showAndroidSettings() {
-        Assume.assumeTrue(Build.VERSION.SDK_INT <= Build.VERSION_CODES.O) // Can't change system locale on newer versions
-
         run {
             step("Start Android OS Settings") {
                 val intent = Intent(Settings.ACTION_SETTINGS)

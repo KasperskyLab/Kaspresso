@@ -37,6 +37,8 @@ class DefaultResourceFilesProvider(
         ).resolve(resFileName)
     }
 
+    override fun provideScreenshotDir(): File = resourcesRootDirsProvider.screenshotsRootDir
+
     override fun provideVideoFile(tag: String, subDir: String?): File {
         val resFileName: String = resourceFileNamesProvider.getFileName(
             tag,

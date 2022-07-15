@@ -13,7 +13,6 @@ import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import io.github.kakaocup.kakao.screen.Screen
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
-import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
@@ -83,11 +82,6 @@ class DeviceLocationSampleTest : TestCase() {
                     EMPTY_LISTENER,
                     Looper.getMainLooper()
                 )
-
-                flakySafely(timeoutMs = 10_000, intervalMs = 500) {
-                    val location = manager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-                    assertNotNull(location)
-                }
 
                 flakySafely(timeoutMs = 10_000, intervalMs = 500) {
                     val location = manager.getLastKnownLocation(LocationManager.GPS_PROVIDER)

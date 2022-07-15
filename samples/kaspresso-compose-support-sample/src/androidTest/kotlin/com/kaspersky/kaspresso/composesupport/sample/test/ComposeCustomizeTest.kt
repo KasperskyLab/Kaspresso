@@ -1,4 +1,4 @@
-package com.kaspresky.kaspresso.composesupport.sample.test
+package com.kaspersky.kaspresso.composesupport.sample.test
 
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -8,8 +8,8 @@ import com.kaspersky.kaspresso.composesupport.sample.MainActivity
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.params.FlakySafetyParams
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
-import com.kaspresky.kaspresso.composesupport.sample.screen.ComposeMainScreen
-import com.kaspresky.kaspresso.composesupport.sample.screen.ComposeSimpleFlakyScreen
+import com.kaspersky.kaspresso.composesupport.sample.screen.ComposeMainScreen
+import com.kaspersky.kaspresso.composesupport.sample.screen.ComposeSimpleFlakyScreen
 import io.github.kakaocup.compose.node.element.ComposeScreen
 import org.junit.Rule
 import org.junit.Test
