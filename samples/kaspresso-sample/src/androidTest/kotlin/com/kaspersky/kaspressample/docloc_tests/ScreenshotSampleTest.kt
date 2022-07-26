@@ -1,6 +1,7 @@
 package com.kaspersky.kaspressample.docloc_tests
 
 import android.Manifest
+import androidx.test.espresso.Espresso.closeSoftKeyboard
 import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
 import io.github.kakaocup.kakao.screen.Screen
@@ -54,6 +55,7 @@ class ScreenshotSampleTest : DocLocScreenshotTestCase(locales = "en,ru") {
 
         step("4. Type text") {
             SimpleScreen {
+                closeSoftKeyboard()
                 edit {
                     clearText()
                     typeText("Kaspresso")

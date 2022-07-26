@@ -20,26 +20,9 @@ class WebViewActivity : AppCompatActivity() {
         binding = ActivityWebviewBinding.inflate(layoutInflater)
 
         with(binding.webView) {
-            webViewClient = object : WebViewClient() {
-
-                @TargetApi(Build.VERSION_CODES.N)
-                @SuppressLint("NewApi")
-                override fun shouldOverrideUrlLoading(view: WebView, request: WebResourceRequest): Boolean {
-                    view.loadUrl(request.url.toString())
-                    return true
-                }
-
-                override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
-                    view.loadUrl(url)
-                    return true
-                }
-            }
-
             settings.javaScriptEnabled = true
-            val cookieManager: CookieManager = CookieManager.getInstance()
-            cookieManager.setAcceptCookie(false)
 
-            loadUrl("https://my.kaspersky.com/en/")
+            loadUrl("file:///android_asset/index.html")
         }
 
         setContentView(binding.root)

@@ -55,7 +55,7 @@ class DeviceAccessibilitySampleTest : TestCase() {
 
             step("Disable accessibility service") {
                 device.accessibility.disable()
-                assertFalseSafely { isAccessibilityServiceEnabled() }
+                assertFalseSafely(timeoutMs = 30_000L, intervalMs = 1_000L) { isAccessibilityServiceEnabled() }
             }
         }
     }

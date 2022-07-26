@@ -39,76 +39,53 @@ class WebViewTest : TestCase() {
                 }
             }
 
-            step("Find \"Sign in\" button and title") {
+            step("Find \"Interceptors\" and \"Logs\" title") {
                 WebViewScreen {
-
                     webView {
-                        withElement(
-                            Locator.XPATH,
-                            "/html/body/div[1]/div[2]/app/welcome-page/wp-content/div[2]/wp-entry-panel/div/wp-form-tabs/div/div[1]"
-                        ) {
-                            containsText("Sign in")
+                        withElement(Locator.ID, "interceptors") {
+                            containsText("Interceptors")
                         }
 
-                        withElement(
-                            Locator.XPATH,
-                            "/html/body/div[1]/div[2]/app/welcome-page/wp-content/div[2]/wp-entry-panel/div/wp-panel/div/div/ab-test-sign-in-form/div/form/kl-button/button"
-                        ) {
-                            containsText("Sign in")
+                        withElement(Locator.ID, "writing-readable-logs") {
+                            containsText("Writing readable logs")
                         }
                     }
                 }
             }
 
-            step("Click \"Contacts\" button") {
+            step("Find \"Kaspresso wiki\" link") {
                 WebViewScreen {
                     webView {
-                        withElement(
-                            Locator.XPATH,
-                            "/html/body/div[1]/div[2]/footer/div[2]/ul/li[1]/a"
-                        ) {
+                        withElement(Locator.XPATH, "/html/body/p[39]/a") {
                             compose(this@webView) {
                                 or {
                                     containsText("fffuuuuu")
                                     hasText("fuuuu")
                                 }
                                 or {
-                                    containsText("Ask questiop")
-                                    hasText("Ask questiop")
+                                    containsText("Kaspresso kiwi")
+                                    hasText("kiwi")
                                 }
                                 or {
-                                    containsText("Ask question")
-                                    hasText("Ask question")
-                                }
-                                or {
-                                    containsText("Contacts")
-                                    hasText("Contacts")
+                                    containsText("Kaspresso wiki")
+                                    hasText("Kaspresso wiki")
                                 }
                             }
                         }
 
                         compose {
-                            orWithElement(
-                                Locator.XPATH,
-                                "/html/body/div[1]/div[2]/footer/div[2]/ul/li[1]/a"
-                            ) {
+                            orWithElement(Locator.XPATH, "/html/body/p[39]/a") {
                                 hasText("TRATATATA")
                             }
-                            orWithElement(
-                                Locator.XPATH,
-                                "/html/body/div[1]/div[2]/footer/div[2]/ul/li[1]/a"
-                            ) {
-                                hasText("Ask question")
+                            orWithElement(Locator.XPATH, "/html/body/p[39]/a") {
+                                hasText("Kaspresso kiwi")
                             } thenContinue {
                                 click()
                             }
-                            orWithElement(
-                                Locator.XPATH,
-                                "/html/body/div[1]/div[2]/footer/div[2]/ul/li[1]/a"
-                            ) {
-                                hasText("Contacts")
+                            orWithElement(Locator.XPATH, "/html/body/p[39]/a") {
+                                hasText("Kaspresso wiki")
                             } thenContinue {
-                                click()
+                                // click()
                             }
                         }
                     }

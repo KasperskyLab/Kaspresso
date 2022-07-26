@@ -83,7 +83,7 @@ class DeviceLocationSampleTest : TestCase() {
                     Looper.getMainLooper()
                 )
 
-                flakySafely(timeoutMs = 10_000, intervalMs = 500) {
+                flakySafely(timeoutMs = 30_000, intervalMs = 500) {
                     val location = manager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
                     assertEquals(
                         MUNICH_LOCATION_LAT, location!!.latitude,
