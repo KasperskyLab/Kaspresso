@@ -27,13 +27,12 @@ class DeviceScreenshotSampleTest : TestCase() {
 
     @Test
     fun screenshotSampleTest() {
-        val screenshotsDir = device.screenshots.getScreenshotDir()
         before {
-            deleteDir(screenshotsDir)
+            deleteDir(resourcesRootDirsProvider.screenshotsRootDir)
         }.after {
         }.run {
             step("Take a screenshot") {
-                assertTrue(screenshotsDir.list()?.isEmpty() ?: true)
+                assertTrue(resourcesRootDirsProvider.screenshotsRootDir.list()?.isEmpty() ?: true)
                 device.screenshots.takeAndApply(SCREENSHOT_TAG) {
                     assertTrue(exists())
                 }

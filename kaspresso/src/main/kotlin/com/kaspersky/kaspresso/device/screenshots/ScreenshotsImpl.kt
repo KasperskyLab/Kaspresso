@@ -28,8 +28,6 @@ class ScreenshotsImpl(
 
     override fun takeAndApply(tag: String, block: File.() -> Unit): Unit = doTakeAndApply(tag, block)
 
-    override fun getScreenshotDir(): File = resourceFilesProvider.provideScreenshotDir()
-
     private fun doTakeAndApply(tag: String, block: (File.() -> Unit)?) {
         try {
             val screenshotFile: File = resourceFilesProvider.provideScreenshotFile(tag)
