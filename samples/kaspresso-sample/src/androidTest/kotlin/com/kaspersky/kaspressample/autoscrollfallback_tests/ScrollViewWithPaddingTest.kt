@@ -16,16 +16,16 @@ class ScrollViewWithPaddingTest : TestCase() {
     @Test
     fun click_last_button_in_ScrollView_and_then_first_one() =
         run {
-            step("Open Auto Scroll Fallback Screen") {
+            step("Open scrollView with padding screen") {
                 MainScreen {
-                    autoScrollFallbackButton {
+                    autoScrollScrollViewWithPaddingButton {
                         isVisible()
                         click()
                     }
                 }
             }
 
-            step("Click button_20 in ScrollView, last item") {
+            step("Click button20 in ScrollView, last item") {
                 ScrollViewWithPaddingScreen {
                     button20 {
                         click()
@@ -33,7 +33,7 @@ class ScrollViewWithPaddingTest : TestCase() {
                 }
             }
 
-            step("Click button_1 in ScrollView, first item") {
+            step("Click button1 in ScrollView, first item") {
                 ScrollViewWithPaddingScreen {
                     button1 {
                         click()
@@ -45,16 +45,16 @@ class ScrollViewWithPaddingTest : TestCase() {
     @Test
     fun click_last_button_in_ScrollView_and_then_last_one_in_HorizontalScrollView() =
         run {
-            step("Open Auto Scroll Fallback Screen") {
+            step("Open scrollView with padding screen") {
                 MainScreen {
-                    autoScrollFallbackButton {
+                    autoScrollScrollViewWithPaddingButton {
                         isVisible()
                         click()
                     }
                 }
             }
 
-            step("Click button_20 in ScrollView, last item") {
+            step("Click button20 in ScrollView, last item") {
                 ScrollViewWithPaddingScreen {
                     button20 {
                         click()
@@ -62,7 +62,7 @@ class ScrollViewWithPaddingTest : TestCase() {
                 }
             }
 
-            step("Click hbutton_7 in HorizontalScrollView, first item") {
+            step("Click hbutton7 in HorizontalScrollView, first item") {
                 ScrollViewWithPaddingScreen {
                     hbutton7 {
                         click()
@@ -74,23 +74,23 @@ class ScrollViewWithPaddingTest : TestCase() {
     @Test
     fun click_last_button_in_HorizontalScrollView_and_then_first_one() =
         run {
-            step("Open Auto Scroll Fallback Screen") {
+            step("Open scrollView with padding screen") {
                 MainScreen {
-                    autoScrollFallbackButton {
+                    autoScrollScrollViewWithPaddingButton {
                         isVisible()
                         click()
                     }
                 }
             }
 
-            step("Click hbutton_7 in HorizontalScrollView, last item") {
+            step("Click hbutton7 in HorizontalScrollView, last item") {
                 ScrollViewWithPaddingScreen {
                     hbutton7 {
                         click()
                     }
                 }
             }
-            step("Click hbutton_1 in HorizontalScrollView, first item") {
+            step("Click hbutton1 in HorizontalScrollView, first item") {
                 ScrollViewWithPaddingScreen {
                     hbutton1 {
                         click()
@@ -102,24 +102,24 @@ class ScrollViewWithPaddingTest : TestCase() {
     @Test
     fun click_last_button_in_3LevelNestedHorizontalScrollView_and_then_last_one_in_1LevelNestedHorizontalScrollView() =
         run {
-            step("Open Auto Scroll Fallback Screen") {
+            step("Open scrollView with padding screen") {
                 MainScreen {
-                    autoScrollFallbackButton {
+                    autoScrollScrollViewWithPaddingButton {
                         isVisible()
                         click()
                     }
                 }
             }
 
-            step("Click nnhbutton_5 in 3LevelNestedScrollView, middle item") {
+            step("Click nnHbutton5 in 3LevelNestedScrollView, middle item") {
                 ScrollViewWithPaddingScreen {
-                    nnhbutton5 {
+                    nnHbutton5 {
                         click()
                     }
                 }
             }
 
-            step("Click button_7 in HorizontalScrollView, last item") {
+            step("Click button7 in HorizontalScrollView, last item") {
                 ScrollViewWithPaddingScreen {
                     hbutton7 {
                         click()

@@ -3,7 +3,7 @@ package com.kaspersky.kaspressample
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.kaspersky.kaspressample.autoscrollfallback.AutoscrollFallbackActivity
+import com.kaspersky.kaspressample.autoscrollfallback.AutoscrollScrollViewWithPaddingActivity
 import com.kaspersky.kaspressample.compose.ComplexComposeSampleActivity
 import com.kaspersky.kaspressample.continuously.ContinuouslySampleActivity
 import com.kaspersky.kaspressample.databinding.ActivityMainBinding
@@ -22,8 +22,8 @@ class MainActivity : AppCompatActivity() {
 
         val binding = ActivityMainBinding.inflate(layoutInflater)
 
-        binding.activityMainAutoScrollFallbackButton.setOnClickListener {
-            startActivity(Intent(this, AutoscrollFallbackActivity::class.java))
+        binding.activityMainAutoScrollScrollViewWithPaddingButton.setOnClickListener {
+            startActivity(Intent(this, AutoscrollScrollViewWithPaddingActivity::class.java))
         }
 
         binding.activityMainSimpleSampleButton.setOnClickListener {

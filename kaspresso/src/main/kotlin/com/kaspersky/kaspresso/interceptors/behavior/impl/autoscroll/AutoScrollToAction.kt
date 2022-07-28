@@ -42,15 +42,22 @@ class AutoScrollToAction(
         try {
             viewAction.perform(uiController, view)
         } catch (exception: PerformException) {
-            fallbackAutoScroll(uiController, view)
+            autoScrollForScrollViewsWithPadding(uiController, view)
+        } catch (exception: Exception) {
+            throw exception
         }
     }
 
-    private fun fallbackAutoScroll(uiController: UiController, view: View) {
+    private fun autoScrollForScrollViewsWithPadding(uiController: UiController, view: View) {
+        if (ViewMatchers.isDisplayingAtLeast(VISIBLE_AREA_PERCENTAGE).matches(view)) {
+            logger.i(TAG, "View is displayed. Returning.")
+            return
+        }
+
         val scrollView = view.findFirstParentScrollableView(view.rootView)
 
         /**
-         * Scroll till view and try to find view
+         * Scroll till view and try to find it
          */
         scrollView?.scrollTo(view)
         uiController.loopMainThreadUntilIdle()

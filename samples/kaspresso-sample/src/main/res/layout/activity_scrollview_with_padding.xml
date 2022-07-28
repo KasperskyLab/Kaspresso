@@ -16,7 +16,7 @@
         android:orientation="vertical">
 
         <HorizontalScrollView
-            android:id="@+id/hscroll_view"
+            android:id="@+id/hscrollView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
@@ -258,7 +258,7 @@
                         android:textSize="32sp" />
 
                     <HorizontalScrollView
-                        android:id="@+id/nnhscroll_view"
+                        android:id="@+id/nnHscrollView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="bottom"
@@ -272,7 +272,7 @@
                             android:orientation="horizontal">
 
                             <Button
-                                android:id="@+id/nnhtvText1"
+                                android:id="@+id/nnHtvText1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="4dp"
@@ -284,7 +284,7 @@
                                 android:textSize="32sp" />
 
                             <Button
-                                android:id="@+id/nnhtvText2"
+                                android:id="@+id/nnHtvText2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="4dp"
@@ -296,7 +296,7 @@
                                 android:textSize="32sp" />
 
                             <Button
-                                android:id="@+id/nnhtvText3"
+                                android:id="@+id/nnHtvText3"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="4dp"
@@ -308,7 +308,7 @@
                                 android:textSize="32sp" />
 
                             <Button
-                                android:id="@+id/nnhtvText4"
+                                android:id="@+id/nnHtvText4"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="4dp"
@@ -320,7 +320,7 @@
                                 android:textSize="32sp" />
 
                             <Button
-                                android:id="@+id/nnhtvText5"
+                                android:id="@+id/nnHtvText5"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="4dp"
