@@ -3,8 +3,7 @@ package com.kaspersky.kaspresso.testcases.api.testcase
 import com.kaspersky.kaspresso.device.Device
 import com.kaspersky.kaspresso.device.server.AdbServer
 import com.kaspersky.kaspresso.enricher.MainSectionEnricher
-import com.kaspersky.kaspresso.files.resources.ResourcesDirsProvider
-import com.kaspersky.kaspresso.files.resources.ResourcesRootDirsProvider
+import com.kaspersky.kaspresso.files.resources.ResourceFilesProvider
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.params.Params
@@ -41,7 +40,7 @@ abstract class BaseTestCase<InitData, Data>(
     override val device: Device = testAssistantsProvider.device
     override val testLogger: UiTestLogger = testAssistantsProvider.testLogger
     override val params: Params = testAssistantsProvider.params
-    override val resourcesRootDirsProvider: ResourcesRootDirsProvider = testAssistantsProvider.resourcesRootDirsProvider
+    override val resourceFilesProvider: ResourceFilesProvider = testAssistantsProvider.resourceFilesProvider
 
     /**
      * Starts the building of a test, sets the [BeforeTestSection] actions and returns an existing instance of

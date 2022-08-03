@@ -27,15 +27,17 @@ class DeviceScreenshotSampleTest : TestCase() {
 
     @Test
     fun screenshotSampleTest() {
+        val screenshotDir = resourceFilesProvider.provideScreenshotFile(SCREENSHOT_TAG).parentFile
+            ?: throw Exception("Invalid screenshot file, no parent dir")
+
         before {
-            deleteDir(resourcesRootDirsProvider.screenshotsRootDir)
+            deleteDir(screenshotDir)
         }.after {
         }.run {
             step("Take a screenshot") {
-                assertTrue(resourcesRootDirsProvider.screenshotsRootDir.list()?.isEmpty() ?: true)
-                device.screenshots.takeAndApply(SCREENSHOT_TAG) {
-                    assertTrue(exists())
-                }
+                assertTrue(screenshotDir.list()?.isEmpty() ?: true)
+                device.screenshots.take(SCREENSHOT_TAG)
+                assertTrue(resourceFilesProvider.provideScreenshotFile(SCREENSHOT_TAG).exists())
             }
         }
     }

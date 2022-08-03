@@ -48,7 +48,7 @@ import org.junit.Rule
  *  @param locales comma-separated string with locales to run test with.
  */
 abstract class DocLocScreenshotTestCase(
-    override val resourcesRootDirsProvider: ResourcesRootDirsProvider =
+    private val resourcesRootDirsProvider: ResourcesRootDirsProvider =
         DefaultResourcesRootDirsProvider(),
     private val resourcesDirsProvider: ResourcesDirsProvider =
         DefaultResourcesDirsProvider(

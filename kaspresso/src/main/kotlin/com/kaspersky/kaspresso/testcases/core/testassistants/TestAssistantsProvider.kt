@@ -2,8 +2,7 @@ package com.kaspersky.kaspresso.testcases.core.testassistants
 
 import com.kaspersky.kaspresso.device.Device
 import com.kaspersky.kaspresso.device.server.AdbServer
-import com.kaspersky.kaspresso.files.resources.ResourcesDirsProvider
-import com.kaspersky.kaspresso.files.resources.ResourcesRootDirsProvider
+import com.kaspersky.kaspresso.files.resources.ResourceFilesProvider
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.params.Params
 
@@ -17,5 +16,5 @@ interface TestAssistantsProvider {
     val adbServer: AdbServer
     val testLogger: UiTestLogger
     val params: Params
-    val resourcesRootDirsProvider: ResourcesRootDirsProvider
+    val resourceFilesProvider: ResourceFilesProvider
 }

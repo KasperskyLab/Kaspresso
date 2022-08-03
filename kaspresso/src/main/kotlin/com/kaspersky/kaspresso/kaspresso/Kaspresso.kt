@@ -146,7 +146,7 @@ data class Kaspresso(
     internal val deviceBehaviorInterceptors: List<DeviceBehaviorInterceptor>,
     internal val stepWatcherInterceptors: List<StepWatcherInterceptor>,
     internal val testRunWatcherInterceptors: List<TestRunWatcherInterceptor>,
-    internal val resourcesRootDirsProvider: ResourcesRootDirsProvider
+    internal val resourceFilesProvider: ResourceFilesProvider
 ) {
 
     companion object {
@@ -931,7 +931,7 @@ data class Kaspresso(
                 ),
 
                 instrumentalDependencyProvider = instrumentalDependencyProviderFactory.getTestProvider(instrumentation),
-                resourcesRootDirsProvider = resourcesRootDirsProvider,
+                resourceFilesProvider = resourceFilesProvider,
 
                 params = Params(
                     flakySafetyParams = flakySafetyParams,

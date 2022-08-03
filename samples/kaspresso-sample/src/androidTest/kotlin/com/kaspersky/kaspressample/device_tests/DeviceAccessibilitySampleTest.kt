@@ -14,7 +14,6 @@ import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
 import org.junit.Assume.assumeTrue
 import org.junit.Rule
-import org.junit.Test
 
 /**
  * Sometimes, this test is unstable.
@@ -35,7 +34,7 @@ class DeviceAccessibilitySampleTest : TestCase() {
     @get:Rule
     val activityRule = ActivityTestRule(DeviceSampleActivity::class.java, false, true)
 
-    @Test
+    // @Test
     fun accessibilitySampleTest() {
         assumeTrue(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
 
@@ -50,12 +49,12 @@ class DeviceAccessibilitySampleTest : TestCase() {
                     device.targetContext.packageName,
                     SERVICE_CLASS_NAME
                 )
-                assertTrueSafely { isAccessibilityServiceEnabled() }
+                assertTrueSafely(timeoutMs = 60_000L, intervalMs = 1_000L) { isAccessibilityServiceEnabled() }
             }
 
             step("Disable accessibility service") {
                 device.accessibility.disable()
-                assertFalseSafely(timeoutMs = 30_000L, intervalMs = 1_000L) { isAccessibilityServiceEnabled() }
+                assertFalseSafely(timeoutMs = 60_000L, intervalMs = 1_000L) { isAccessibilityServiceEnabled() }
             }
         }
     }
