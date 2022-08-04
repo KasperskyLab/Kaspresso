@@ -13,6 +13,7 @@ import com.kaspersky.kaspressample.utils.SafeAssert.assertTrueSafely
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
 import org.junit.Assume.assumeTrue
+import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 
@@ -20,6 +21,7 @@ import org.junit.Test
  * Sometimes, this test is unstable.
  * The possible reason is a slow (not immediate) update of ContentResolver by which the test is checking
  */
+@Ignore("Unstable test. See test class docs")
 class DeviceAccessibilitySampleTest : TestCase() {
 
     companion object {

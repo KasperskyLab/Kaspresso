@@ -30,6 +30,9 @@ class UiContinuouslyTest : TestCase() {
 
     @Test
     fun testDialogPresentUntilAndroidO() {
+        // Don`t allow to run this test on Android >= Oreo
+        Assume.assumeTrue(Build.VERSION.SDK_INT < Build.VERSION_CODES.O)
+
         before {
             activityTestRule.launchActivity(null)
         }.after {

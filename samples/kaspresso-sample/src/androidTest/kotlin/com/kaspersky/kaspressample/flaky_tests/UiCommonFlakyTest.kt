@@ -3,7 +3,6 @@ package com.kaspersky.kaspressample.flaky_tests
 import android.Manifest
 import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
-import com.kaspersky.components.kautomator.screen.UiScreen.Companion.onUiScreen
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.R
 import com.kaspersky.kaspressample.external_screens.UiCommonFlakyScreen
@@ -38,7 +37,7 @@ class UiCommonFlakyTest : TestCase() {
             }
 
             step("Check ScrollView screen is visible") {
-                onUiScreen<UiCommonFlakyScreen> {
+                UiCommonFlakyScreen {
                     scrollView {
                         isDisplayed()
                     }
@@ -46,7 +45,7 @@ class UiCommonFlakyTest : TestCase() {
             }
 
             step("Check btn5's text") {
-                onUiScreen<UiCommonFlakyScreen> {
+                UiCommonFlakyScreen {
                     btn5 {
                         // automate flaky safety handling is in action
                         // even UiAutomator is using under the hood =)
@@ -58,7 +57,7 @@ class UiCommonFlakyTest : TestCase() {
             }
 
             step("Check tv6's text") {
-                onUiScreen<UiCommonFlakyScreen> {
+                UiCommonFlakyScreen {
                     tv6 {
                         // here, the text will be changing longer(summary = 15 seconds) than
                         //     the default value of flaky safety timeout(10 seconds)

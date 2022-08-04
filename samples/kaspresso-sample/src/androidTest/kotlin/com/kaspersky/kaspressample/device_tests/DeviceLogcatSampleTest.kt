@@ -1,11 +1,13 @@
 package com.kaspersky.kaspressample.device_tests
 
+import android.os.Build
 import androidx.test.rule.ActivityTestRule
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspresso.device.logcat.LogcatBufferSize
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
+import org.junit.Assume
 import org.junit.Rule
 import org.junit.Test
 
@@ -16,6 +18,11 @@ class DeviceLogcatSampleTest : TestCase() {
 
     @Test
     fun logcatTest() {
+        Assume.assumeTrue(
+            "Due to Android 8 bug 'logcat -c' fails. To run this test please use another device",
+            Build.VERSION.SDK_INT != Build.VERSION_CODES.O
+        )
+
         before {
             device.logcat.setBufferSize(LogcatBufferSize(8, LogcatBufferSize.Dimension.MEGABYTES))
             device.logcat.disableChatty()
@@ -119,11 +126,11 @@ class DeviceLogcatSampleTest : TestCase() {
             step("Using reader block") {
                 repeat(100) { testLogger.i("Test6Row$it") }
 
-                var fullLogcatList = device.logcat.readLogcatRows()
+                val fullLogcatList = device.logcat.readLogcatRows()
 
-                var inneContainsSize = 0
-                val isContainsBreaked = device.logcat.readLogcatRows { logcatRow ->
-                    inneContainsSize++
+                var innerContainsSize = 0
+                val doesContainBreaked = device.logcat.readLogcatRows { logcatRow ->
+                    innerContainsSize++
                     logcatRow.contains("Test6Row42")
                 }
 
@@ -139,7 +146,7 @@ class DeviceLogcatSampleTest : TestCase() {
                     logcatRow.contains("beginning of")
                 }
 
-                assertTrue(isContainsBreaked && fullLogcatList.size > inneContainsSize)
+                assertTrue(doesContainBreaked && fullLogcatList.size > innerContainsSize)
                 assertTrue(!isNotContainsBreaked && fullLogcatList.size <= innerNotContainsSize)
 
                 assertTrue(isBreakedOnBeginningRow && indexOfBeginningRow == 1)

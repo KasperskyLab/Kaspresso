@@ -39,76 +39,53 @@ class WebComposeTest : TestCase() {
                 }
             }
 
-            step("Find \"Sign in\" button and \"Protect your data\" title") {
+            step("Find \"Interceptors\" and \"Logs\" title") {
                 WebViewScreen {
-
                     webView {
-                        withElement(
-                            Locator.XPATH,
-                            "/html/body/div[1]/section[1]/div/div/h2"
-                        ) {
-                            containsText("Protect your data")
+                        withElement(Locator.ID, "interceptors") {
+                            containsText("Interceptors")
                         }
 
-                        withElement(
-                            Locator.XPATH,
-                            "/html/body/div[1]/header/section/div[3]/div[2]/button"
-                        ) {
-                            hasText("Sign in")
+                        withElement(Locator.ID, "writing-readable-logs") {
+                            containsText("Writing readable logs")
                         }
                     }
                 }
             }
 
-            step("Click \"Contacts\" button") {
+            step("Find \"Kaspresso wiki\" link") {
                 WebViewScreen {
                     webView {
-                        withElement(
-                            Locator.XPATH,
-                            "/html/body/div[1]/footer/div/div/div[1]/nav/div[1]/a"
-                        ) {
+                        withElement(Locator.XPATH, "/html/body/p[39]/a") {
                             compose(this@webView) {
                                 or {
                                     containsText("fffuuuuu")
                                     hasText("fuuuu")
                                 }
                                 or {
-                                    containsText("Ask questiop")
-                                    hasText("Ask questiop")
+                                    containsText("Kaspresso kiwi")
+                                    hasText("kiwi")
                                 }
                                 or {
-                                    containsText("Ask question")
-                                    hasText("Ask question")
-                                }
-                                or {
-                                    containsText("Contacts")
-                                    hasText("Contacts")
+                                    containsText("Kaspresso wiki")
+                                    hasText("Kaspresso wiki")
                                 }
                             }
                         }
 
                         compose {
-                            orWithElement(
-                                Locator.XPATH,
-                                "/html/body/div[1]/footer/div/div/div[1]/nav/div[1]/a"
-                            ) {
+                            orWithElement(Locator.XPATH, "/html/body/p[39]/a") {
                                 hasText("TRATATATA")
                             }
-                            orWithElement(
-                                Locator.XPATH,
-                                "/html/body/div[1]/footer/div/div/div[1]/nav/div[1]/a"
-                            ) {
-                                hasText("Ask question")
+                            orWithElement(Locator.XPATH, "/html/body/p[39]/a") {
+                                hasText("Kaspresso kiwi")
                             } thenContinue {
                                 click()
                             }
-                            orWithElement(
-                                Locator.XPATH,
-                                "/html/body/div[1]/footer/div/div/div[1]/nav/div[1]/a"
-                            ) {
-                                hasText("Contacts")
+                            orWithElement(Locator.XPATH, "/html/body/p[39]/a") {
+                                hasText("Kaspresso wiki")
                             } thenContinue {
-                                click()
+                                // click()
                             }
                         }
                     }

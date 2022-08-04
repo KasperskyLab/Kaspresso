@@ -8,12 +8,11 @@ import android.os.Bundle
 import android.os.Looper
 import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
-import io.github.kakaocup.kakao.screen.Screen
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
+import io.github.kakaocup.kakao.screen.Screen
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
-import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
@@ -84,20 +83,17 @@ class DeviceLocationSampleTest : TestCase() {
                     Looper.getMainLooper()
                 )
 
-                flakySafely(timeoutMs = 10_000, intervalMs = 500) {
+                flakySafely(timeoutMs = 30_000, intervalMs = 500) {
                     val location = manager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-                    assertNotNull(location)
+                    assertEquals(
+                        MUNICH_LOCATION_LAT, location!!.latitude,
+                        DELTA
+                    )
+                    assertEquals(
+                        MUNICH_LOCATION_LAT, location.latitude,
+                        DELTA
+                    )
                 }
-
-                val location = manager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-                assertEquals(
-                    MUNICH_LOCATION_LAT, location!!.latitude,
-                    DELTA
-                )
-                assertEquals(
-                    MUNICH_LOCATION_LAT, location.latitude,
-                    DELTA
-                )
             }
         }
     }

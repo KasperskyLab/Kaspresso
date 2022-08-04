@@ -42,7 +42,7 @@ class ScreenshotSampleTest : DocLocScreenshotTestCase(
 
 There is one parameter passed in the base constructor: 
 - locales - comma-separated string with locales to run test with.
-Captured screenshots will be available in the device's storage at the path "/sdcard/screenshots/".
+Captured screenshots will be available in the device's storage at the path "/sdcard/screenshots/" for pre Android 11 devices and /data/data/<your_app_dir>/files/screenshots otherwise.
 
 For full example, check the [ScreenshotSampleTest](../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/docloc_tests/ScreenshotSampleTest.kt). 
 

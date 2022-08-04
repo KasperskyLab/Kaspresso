@@ -5,11 +5,11 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.kaspersky.components.composesupport.config.withComposeSupport
 import com.kaspersky.components.composesupport.interceptors.behavior.impl.systemsafety.SystemDialogSafetySemanticsBehaviorInterceptor
 import com.kaspersky.kaspresso.composesupport.sample.MainActivity
-import com.kaspersky.kaspresso.composesupport.sample.screen.ComposeMainScreen
-import com.kaspersky.kaspresso.composesupport.sample.screen.ComposeSimpleFlakyScreen
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.params.FlakySafetyParams
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
+import com.kaspersky.kaspresso.composesupport.sample.screen.ComposeMainScreen
+import com.kaspersky.kaspresso.composesupport.sample.screen.ComposeSimpleFlakyScreen
 import io.github.kakaocup.compose.node.element.ComposeScreen
 import org.junit.Rule
 import org.junit.Test

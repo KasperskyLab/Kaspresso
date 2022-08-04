@@ -33,7 +33,7 @@ internal class SystemLanguage(
             val configuration = amService.javaClass.getDeclaredMethod("getConfiguration").invoke(amService) as Configuration
             configuration.javaClass.getDeclaredField("userSetLocale").setBoolean(configuration, true)
             configuration.javaClass.getDeclaredField("locale").set(configuration, locale)
-            amService.javaClass.getDeclaredMethod("updateConfiguration", Configuration::class.java).invoke(amService, configuration)
+            amService.javaClass.getMethod("updateConfiguration", Configuration::class.java).invoke(amService, configuration)
             logger.i("SystemLanguage: Installing new system language=$locale completed")
         } catch (error: Throwable) {
             logger.e("SystemLanguage: Installing new system language=$locale failed with error=$error")

@@ -39,75 +39,53 @@ class WebViewTest : TestCase() {
                 }
             }
 
-            step("Find \"Sign in\" button and \"Protect your data\" title") {
+            step("Find \"Interceptors\" and \"Logs\" title") {
                 WebViewScreen {
-
                     webView {
-                        withElement(
-                            Locator.XPATH,
-                            "/html/body/div[1]/section[1]/div/div/h2"
-                        ) {
-                            containsText("Protect your data")
+                        withElement(Locator.ID, "interceptors") {
+                            containsText("Interceptors")
                         }
 
-                        withElement(
-                            Locator.XPATH,
-                            "/html/body/div[1]/header/section/div[3]/div[2]/button"
-                        ) {
-                            hasText("Sign in")
+                        withElement(Locator.ID, "writing-readable-logs") {
+                            containsText("Writing readable logs")
                         }
                     }
                 }
             }
 
-            step("Click \"Get Support\" button") {
+            step("Find \"Kaspresso wiki\" link") {
                 WebViewScreen {
                     webView {
-
-                        withElement(
-                            Locator.XPATH,
-                            "/html/body/div[1]/section[5]/div/div/div[2]/div[3]/button"
-                        ) {
+                        withElement(Locator.XPATH, "/html/body/p[39]/a") {
                             compose(this@webView) {
                                 or {
                                     containsText("fffuuuuu")
                                     hasText("fuuuu")
                                 }
                                 or {
-                                    containsText("Ask questiop")
-                                    hasText("Ask questio")
+                                    containsText("Kaspresso kiwi")
+                                    hasText("kiwi")
                                 }
                                 or {
-                                    containsText("Ask question")
-                                    hasText("Ask question")
-                                }
-                                or {
-                                    containsText("Get Support")
-                                    hasText("Get Support")
+                                    containsText("Kaspresso wiki")
+                                    hasText("Kaspresso wiki")
                                 }
                             }
                         }
 
                         compose {
-                            orWithElement(
-                                Locator.XPATH,
-                                "/html/body/div[1]/section[5]/div/div/div[2]/div[3]/button"
-                            ) {
+                            orWithElement(Locator.XPATH, "/html/body/p[39]/a") {
                                 hasText("TRATATATA")
                             }
-                            orWithElement(
-                                Locator.XPATH,
-                                "/html/body/div[1]/section[5]/div/div/div[2]/div[3]/button"
-                            ) {
-                                hasText("Get Support")
+                            orWithElement(Locator.XPATH, "/html/body/p[39]/a") {
+                                hasText("Kaspresso kiwi")
+                            } thenContinue {
                                 click()
                             }
-                            orWithElement(
-                                Locator.XPATH,
-                                "//*[@id=\"app\"]/section[5]/div/div/div[2]/div[3]/button"
-                            ) {
-                                hasText("Ask question")
-                                click()
+                            orWithElement(Locator.XPATH, "/html/body/p[39]/a") {
+                                hasText("Kaspresso wiki")
+                            } thenContinue {
+                                // click()
                             }
                         }
                     }
