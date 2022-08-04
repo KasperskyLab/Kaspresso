@@ -13,12 +13,15 @@ import com.kaspersky.kaspressample.utils.SafeAssert.assertTrueSafely
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
 import org.junit.Assume.assumeTrue
+import org.junit.Ignore
 import org.junit.Rule
+import org.junit.Test
 
 /**
  * Sometimes, this test is unstable.
  * The possible reason is a slow (not immediate) update of ContentResolver by which the test is checking
  */
+@Ignore("Unstable test. See test class docs")
 class DeviceAccessibilitySampleTest : TestCase() {
 
     companion object {
@@ -34,7 +37,7 @@ class DeviceAccessibilitySampleTest : TestCase() {
     @get:Rule
     val activityRule = ActivityTestRule(DeviceSampleActivity::class.java, false, true)
 
-    // @Test
+    @Test
     fun accessibilitySampleTest() {
         assumeTrue(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
 
@@ -49,12 +52,12 @@ class DeviceAccessibilitySampleTest : TestCase() {
                     device.targetContext.packageName,
                     SERVICE_CLASS_NAME
                 )
-                assertTrueSafely(timeoutMs = 60_000L, intervalMs = 1_000L) { isAccessibilityServiceEnabled() }
+                assertTrueSafely { isAccessibilityServiceEnabled() }
             }
 
             step("Disable accessibility service") {
                 device.accessibility.disable()
-                assertFalseSafely(timeoutMs = 60_000L, intervalMs = 1_000L) { isAccessibilityServiceEnabled() }
+                assertFalseSafely { isAccessibilityServiceEnabled() }
             }
         }
     }
