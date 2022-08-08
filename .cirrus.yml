@@ -1,0 +1,38 @@
+check_android_task:
+  name: Run Android instrumented tests
+  env:
+    SCREENSHOTS_ROOT_DIR: /data/data/com.kaspersky.kaspressample/files/screenshots
+  only_if: $CIRRUS_PR != '' && $CIRRUS_BASE_BRANCH == 'master'
+
+  container:
+    image: cirrusci/android-sdk:30
+    kvm: true
+    cpu: 6
+    memory: 24G
+  accept_licenses_script:
+    echo yes | sdkmanager --licenses
+  install_emulator_script:
+    sdkmanager --install "system-images;android-30;default;x86_64"
+  create_avd_script:
+    echo no | avdmanager create avd --force
+    -n test
+    -k "system-images;android-30;default;x86_64"
+  start_avd_background_script:
+    $ANDROID_HOME/emulator/emulator
+    -avd test
+    -no-audio
+    -no-window
+  assemble_instrumented_tests_script:
+    ./gradlew assembleDebugAndroidTest
+  wait_for_avd_script:
+    adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 3; done; input keyevent 82'
+  disable_animations_script: |
+    adb shell settings put global window_animation_scale 0.0
+    adb shell settings put global transition_animation_scale 0.0
+    adb shell settings put global animator_duration_scale 0.0
+  run_tests_script: ./gradlew connectedDebugAndroidTest || mkdir screenshots && adb root && for i in {1..5}; do adb pull $SCREENSHOTS_ROOT_DIR screenshots && break || sleep 5; done && return 1
+  on_failure :
+    report_artifacts:
+      path: "app/build/reports/androidTests/connected/**/*"
+    screenshots_artifacts:
+      path: "screenshots/**/*"
