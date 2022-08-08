@@ -2,7 +2,7 @@ check_android_task:
   name: Run Android instrumented tests
   env:
     SCREENSHOTS_ROOT_DIR: /data/data/com.kaspersky.kaspressample/files/screenshots
-#  only_if: $CIRRUS_PR != '' && $CIRRUS_BASE_BRANCH == 'master'
+  only_if: $CIRRUS_PR != '' && $CIRRUS_BASE_BRANCH == 'master'
 
   container:
     image: cirrusci/android-sdk:30
