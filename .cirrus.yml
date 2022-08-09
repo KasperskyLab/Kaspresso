@@ -31,7 +31,7 @@ check_android_task:
     adb shell settings put global transition_animation_scale 0.0
     adb shell settings put global animator_duration_scale 0.0
   start_adb_server_background_script:
-    java -jar artifacts/adbserver-desktop.jar
+    java -jar artifacts/adbserver-desktop.jar || true
   run_tests_script: ./gradlew connectedDebugAndroidTest || mkdir screenshots && adb root && for i in {1..5}; do adb pull $SCREENSHOTS_ROOT_DIR screenshots && break || sleep 5; done && return 1
   on_failure :
     report_artifacts:
