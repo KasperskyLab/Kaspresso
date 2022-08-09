@@ -3,6 +3,8 @@ check_android_task:
   env:
     SCREENSHOTS_ROOT_DIR: /data/data/com.kaspersky.kaspressample/files/screenshots
     TUTORIAL_SCREENSHOTS_ROOT_DIR: /data/data/com.kaspersky.kaspresso.tutorial/files/screenshots
+    ALLURE_SAMPLE_SCREENSHOTS_ROOT_DIR: /data/data/com.kaspersky.kaspresso.tutorial/files/screenshots
+    ALLURE_SAMPLE_FAIL_SCREENSHOTS_ROOT_DIR: /data/user/0/com.kaspersky.kaspresso.alluresupport.sample/files/screenshots
   only_if: $CIRRUS_PR != '' && $CIRRUS_BASE_BRANCH == 'master'
 
   container:
@@ -13,11 +15,11 @@ check_android_task:
   accept_licenses_script:
     echo yes | sdkmanager --licenses
   install_emulator_script:
-    sdkmanager --install "system-images;android-30;default;x86_64"
+    sdkmanager --install "system-images;android-26;default;x86_64"
   create_avd_script:
     echo no | avdmanager create avd --force
     -n test
-    -k "system-images;android-30;default;x86_64"
+    -k "system-images;android-26;default;x86_64"
   start_avd_background_script:
     $ANDROID_HOME/emulator/emulator
     -avd test
@@ -33,13 +35,20 @@ check_android_task:
     adb shell settings put global animator_duration_scale 0.0
   start_adb_server_background_script:
     java -jar artifacts/adbserver-desktop.jar || true
-  run_tests_script: ./gradlew connectedDebugAndroidTest || mkdir screenshots && adb root && for i in {1..5}; do adb pull $SCREENSHOTS_ROOT_DIR screenshots; adb pull $SCREENSHOTS_ROOT_DIR tutorial_screenshots && break || sleep 5; done && return 1
+  run_tests_script: ./gradlew connectedDebugAndroidTest || mkdir screenshots && adb root && for i in {1..5}; do adb pull $SCREENSHOTS_ROOT_DIR sample_screenshots; \
+    adb pull $SCREENSHOTS_ROOT_DIR tutorial_screenshots; \
+    adb pull $ALLURE_SAMPLE_FAIL_SCREENSHOTS_ROOT_DIR allure_screenshots; \
+    adb pull $ALLURE_SAMPLE_SCREENSHOTS_ROOT_DIR allure_screenshots && break || sleep 5; done && return 1
   on_failure :
-    report_artifacts:
+    sample_report_artifacts:
       path: "app/build/reports/androidTests/connected/**/*"
-    tutorial_artifacts:
+    tutorial_report_artifacts:
       path: "tutorial/build/reports/androidTests/connected/**/*"
-    screenshots_artifacts:
-      path: "screenshots/**/*"
+    allure_report_artifacts:
+      path: "kaspresso-allure-support-sample/build/reports/androidTests/connected/**/*"
+    sample_screenshots_artifacts:
+      path: "sample_screenshots/**/*"
     tutorial_screenshots_artifacts:
       path: "tutorial_screenshots/**/*"
+    allure_screenshots_artifacts:
+      path: "allure_screenshots/**/*"
