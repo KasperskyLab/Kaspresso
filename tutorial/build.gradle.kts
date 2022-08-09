@@ -21,4 +21,6 @@ dependencies {
 
     androidTestImplementation("com.kaspersky.android-components:kaspresso:1.4.1")
     androidTestImplementation("androidx.test.ext:junit-ktx:1.1.3")
+
+    androidTestUtil("androidx.test:orchestrator:1.4.1")
 }

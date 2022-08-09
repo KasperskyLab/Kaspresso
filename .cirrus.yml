@@ -2,6 +2,7 @@ check_android_task:
   name: Run Android instrumented tests
   env:
     SCREENSHOTS_ROOT_DIR: /data/data/com.kaspersky.kaspressample/files/screenshots
+    TUTORIAL_SCREENSHOTS_ROOT_DIR: /data/data/com.kaspersky.kaspresso.tutorial/files/screenshots
   only_if: $CIRRUS_PR != '' && $CIRRUS_BASE_BRANCH == 'master'
 
   container:
@@ -32,9 +33,13 @@ check_android_task:
     adb shell settings put global animator_duration_scale 0.0
   start_adb_server_background_script:
     java -jar artifacts/adbserver-desktop.jar || true
-  run_tests_script: ./gradlew connectedDebugAndroidTest || mkdir screenshots && adb root && for i in {1..5}; do adb pull $SCREENSHOTS_ROOT_DIR screenshots && break || sleep 5; done && return 1
+  run_tests_script: ./gradlew connectedDebugAndroidTest || mkdir screenshots && adb root && for i in {1..5}; do adb pull $SCREENSHOTS_ROOT_DIR screenshots; adb pull $SCREENSHOTS_ROOT_DIR tutorial_screenshots && break || sleep 5; done && return 1
   on_failure :
     report_artifacts:
       path: "app/build/reports/androidTests/connected/**/*"
+    tutorial_artifacts:
+      path: "tutorial/build/reports/androidTests/connected/**/*"
     screenshots_artifacts:
       path: "screenshots/**/*"
+    tutorial_screenshots_artifacts:
+      path: "tutorial_screenshots/**/*"
