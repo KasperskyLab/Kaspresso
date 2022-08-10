@@ -32,8 +32,7 @@ In Kaspresso, we wrap `AdbTerminal` into a special interface `AdbServer`.
 @Test
 fun test() =
     run {
-        step("Open Simple Screen") {
-            activityTestRule.launchActivity(null)
+        step("On Simple Screen opened") {
  ======>    adbServer.performShell("input text 1")   <======
 
             MainScreen {

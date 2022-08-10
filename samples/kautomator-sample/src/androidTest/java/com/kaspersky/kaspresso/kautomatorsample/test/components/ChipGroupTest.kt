@@ -1,6 +1,6 @@
 package com.kaspersky.kaspresso.kautomatorsample.test.components
 
-import androidx.test.rule.ActivityTestRule
+import androidx.test.ext.junit.rules.activityScenarioRule
 import com.kaspersky.kaspresso.kautomatorsample.ComponentsActivity
 import com.kaspersky.kaspresso.kautomatorsample.screen.ComponentsScreen
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
@@ -16,38 +16,36 @@ class ChipGroupTest : TestCase() {
     }
 
     @get:Rule
-    val activityRule = ActivityTestRule(ComponentsActivity::class.java, true, true)
+    val activityRule = activityScenarioRule<ComponentsActivity>()
 
     @Test
-    fun test() {
-        run {
-            step("Select chip with id") {
-                ComponentsScreen {
-                    chipGroup {
-                        isNotChipWithIdSelected(CHIP_ID)
-                        selectChipWithId(CHIP_ID)
-                        isChipWithIdSelected(CHIP_ID)
-                    }
+    fun test() = run {
+        step("Select chip with id") {
+            ComponentsScreen {
+                chipGroup {
+                    isNotChipWithIdSelected(CHIP_ID)
+                    selectChipWithId(CHIP_ID)
+                    isChipWithIdSelected(CHIP_ID)
                 }
             }
+        }
 
-            step("Select chip with text") {
-                ComponentsScreen {
-                    chipGroup {
-                        isNotChipWithTextSelected(CHIP_TEXT)
-                        selectChipWithText(CHIP_TEXT)
-                        isChipWithTextSelected(CHIP_TEXT)
-                    }
+        step("Select chip with text") {
+            ComponentsScreen {
+                chipGroup {
+                    isNotChipWithTextSelected(CHIP_TEXT)
+                    selectChipWithText(CHIP_TEXT)
+                    isChipWithTextSelected(CHIP_TEXT)
                 }
             }
+        }
 
-            step("Select chip with index") {
-                ComponentsScreen {
-                    chipGroup {
-                        isNotChipWithIndexSelected(CHIP_INDEX)
-                        selectChipWithIndex(CHIP_INDEX)
-                        isChipWithIndexSelected(CHIP_INDEX)
-                    }
+        step("Select chip with index") {
+            ComponentsScreen {
+                chipGroup {
+                    isNotChipWithIndexSelected(CHIP_INDEX)
+                    selectChipWithIndex(CHIP_INDEX)
+                    isChipWithIndexSelected(CHIP_INDEX)
                 }
             }
         }

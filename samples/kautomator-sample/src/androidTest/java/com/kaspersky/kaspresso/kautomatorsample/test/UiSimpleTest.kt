@@ -1,7 +1,7 @@
 package com.kaspersky.kaspresso.kautomatorsample.test
 
 import android.Manifest
-import androidx.test.rule.ActivityTestRule
+import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.components.kautomator.KautomatorConfigurator
 import com.kaspersky.kaspresso.kautomatorsample.MainActivity
@@ -24,7 +24,7 @@ class UiSimpleTest : TestCase() {
     )
 
     @get:Rule
-    val activityTestRule = ActivityTestRule(MainActivity::class.java, true, false)
+    val activityRule = activityScenarioRule<MainActivity>()
 
     @Test
     fun upgradeTest() {
@@ -50,8 +50,6 @@ class UiSimpleTest : TestCase() {
                     }
                 }
             }
-
-            activityTestRule.launchActivity(null)
         }.after {
         }.run {
 

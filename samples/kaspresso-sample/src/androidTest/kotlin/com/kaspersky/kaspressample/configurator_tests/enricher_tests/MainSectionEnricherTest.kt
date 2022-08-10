@@ -1,6 +1,6 @@
 package com.kaspersky.kaspressample.configurator_tests.enricher_tests
 
-import androidx.test.rule.ActivityTestRule
+import androidx.test.ext.junit.rules.activityScenarioRule
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.screen.MainScreen
 import com.kaspersky.kaspressample.screen.SimpleScreen
@@ -10,7 +10,7 @@ import org.junit.Test
 class MainSectionEnricherTest : EnricherTestCase() {
 
     @get:Rule
-    val activityTestRule = ActivityTestRule(MainActivity::class.java, true, true)
+    val activityRule = activityScenarioRule<MainActivity>()
 
     @Test
     fun enricherTestCase() {

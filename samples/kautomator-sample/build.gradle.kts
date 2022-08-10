@@ -21,6 +21,8 @@ dependencies {
     implementation(libs.multidex)
 
     androidTestImplementation(projects.kaspresso)
+    androidTestImplementation(libs.androidXTestExtJunitKtx)
+    androidTestImplementation(libs.androidXTestExtJunit)
 
     androidTestUtil(libs.androidXTestOrchestrator)
 }

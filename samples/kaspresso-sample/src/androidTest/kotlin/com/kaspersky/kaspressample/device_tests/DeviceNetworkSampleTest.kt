@@ -11,7 +11,7 @@ import android.net.wifi.WifiManager
 import android.os.Build
 import android.provider.Settings
 import android.telephony.TelephonyManager
-import androidx.test.rule.ActivityTestRule
+import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspressample.device.DeviceSampleActivity
 import com.kaspersky.kaspressample.utils.SafeAssert.assertFalseSafely
@@ -32,7 +32,7 @@ class DeviceNetworkSampleTest : TestCase() {
     )
 
     @get:Rule
-    val activityTestRule = ActivityTestRule(DeviceSampleActivity::class.java, true, true)
+    val activityRule = activityScenarioRule<DeviceSampleActivity>()
 
     private val currentOsVersion = Build.VERSION.SDK_INT
 

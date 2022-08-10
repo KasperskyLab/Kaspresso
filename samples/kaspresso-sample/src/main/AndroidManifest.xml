@@ -61,10 +61,6 @@
             android:label="@string/main_screen_continuously_sample_button"/>
 
         <activity
-            android:name=".docloc.FragmentTestActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
-
-        <activity
             android:name=".device.DeviceSampleActivity"
             android:label="@string/device_sample_title"/>
 

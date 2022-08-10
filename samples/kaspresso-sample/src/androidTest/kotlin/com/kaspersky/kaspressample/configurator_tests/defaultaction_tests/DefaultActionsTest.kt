@@ -1,7 +1,7 @@
 package com.kaspersky.kaspressample.configurator_tests.defaultaction_tests
 
 import android.Manifest
-import androidx.test.rule.ActivityTestRule
+import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.R
@@ -30,7 +30,7 @@ class DefaultActionsTest : ParentTestCase(
     )
 
     @get:Rule
-    val activityTestRule = ActivityTestRule(MainActivity::class.java, true, false)
+    val activityRule = activityScenarioRule<MainActivity>()
 
     @After
     fun afterTest() {
@@ -41,7 +41,6 @@ class DefaultActionsTest : ParentTestCase(
     @Test
     fun test() {
         before {
-            activityTestRule.launchActivity(null)
             testLogger.i("beforeSection")
             DefaultActionsChecker.putBeforeInBeforeSection()
             DefaultActionsChecker.assertBefore()

@@ -6,7 +6,7 @@ import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
 import android.os.Looper
-import androidx.test.rule.ActivityTestRule
+import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
@@ -45,7 +45,7 @@ class DeviceLocationSampleTest : TestCase() {
     )
 
     @get:Rule
-    val rule = ActivityTestRule(MainActivity::class.java, false, true)
+    val activityRule = activityScenarioRule<MainActivity>()
 
     private lateinit var manager: LocationManager
 

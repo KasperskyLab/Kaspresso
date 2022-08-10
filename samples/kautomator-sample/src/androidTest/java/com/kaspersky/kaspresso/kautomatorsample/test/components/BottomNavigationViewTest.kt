@@ -1,6 +1,6 @@
 package com.kaspersky.kaspresso.kautomatorsample.test.components
 
-import androidx.test.rule.ActivityTestRule
+import androidx.test.ext.junit.rules.activityScenarioRule
 import com.kaspersky.kaspresso.kautomatorsample.ComponentsActivity
 import com.kaspersky.kaspresso.kautomatorsample.screen.ComponentsScreen
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
@@ -18,39 +18,37 @@ class BottomNavigationViewTest : TestCase() {
     }
 
     @get:Rule
-    val rule = ActivityTestRule(ComponentsActivity::class.java, true, true)
+    val activityRule = activityScenarioRule<ComponentsActivity>()
 
     @Test
-    fun test() {
-        run {
+    fun test() = run {
 
-            step("Select item by id") {
-                ComponentsScreen {
-                    bottomNav {
-                        setSelectedItemWithId(ITEM_1_ID)
-                        hasSelectedItemWithId(ITEM_1_ID)
-                        hasNotSelectedItemWithId(ITEM_0_ID)
-                    }
+        step("Select item by id") {
+            ComponentsScreen {
+                bottomNav {
+                    setSelectedItemWithId(ITEM_1_ID)
+                    hasSelectedItemWithId(ITEM_1_ID)
+                    hasNotSelectedItemWithId(ITEM_0_ID)
                 }
             }
+        }
 
-            step("Select item by index") {
-                ComponentsScreen {
-                    bottomNav {
-                        setSelectedItemWithIndex(0)
-                        hasSelectedItemWithIndex(0)
-                        hasNotSelectedItemWithIndex(1)
-                    }
+        step("Select item by index") {
+            ComponentsScreen {
+                bottomNav {
+                    setSelectedItemWithIndex(0)
+                    hasSelectedItemWithIndex(0)
+                    hasNotSelectedItemWithIndex(1)
                 }
             }
+        }
 
-            step("Select item by label") {
-                ComponentsScreen {
-                    bottomNav {
-                        setSelectedItemWithTitle(ITEM_1_TEXT)
-                        hasSelectedItemWithTitle(ITEM_1_TEXT)
-                        hasNotSelectedItemWithTitle(ITEM_0_TEXT)
-                    }
+        step("Select item by label") {
+            ComponentsScreen {
+                bottomNav {
+                    setSelectedItemWithTitle(ITEM_1_TEXT)
+                    hasSelectedItemWithTitle(ITEM_1_TEXT)
+                    hasNotSelectedItemWithTitle(ITEM_0_TEXT)
                 }
             }
         }

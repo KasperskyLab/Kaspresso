@@ -1,7 +1,7 @@
 package com.kaspersky.kaspressample.docloc_tests
 
 import android.Manifest
-import androidx.test.rule.ActivityTestRule
+import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspressample.screen.SimpleScreen
 import com.kaspersky.kaspressample.simple.SimpleActivity
@@ -28,7 +28,7 @@ class ScreenshotSampleTestLegacy : DocLocScreenshotTestCase(
     )
 
     @get:Rule
-    val activityRule = ActivityTestRule(SimpleActivity::class.java, false, true)
+    val activityRule = activityScenarioRule<SimpleActivity>()
 
     @ScreenShooterTest
     @Test
