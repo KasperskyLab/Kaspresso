@@ -15,11 +15,11 @@ check_android_task:
   accept_licenses_script:
     echo yes | sdkmanager --licenses
   install_emulator_script:
-    sdkmanager --install "system-images;android-28;google_apis;x86_64"
+    sdkmanager --install "system-images;android-30;google_apis;x86"
   create_avd_script:
     echo no | avdmanager create avd --force
     -n test
-    -k "system-images;android-28;google_apis;x86_64"
+    -k "system-images;android-30;google_apis;x86"
   start_avd_background_script:
     $ANDROID_HOME/emulator/emulator
     -avd test
