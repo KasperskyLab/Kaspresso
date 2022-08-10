@@ -36,6 +36,10 @@
         </activity>
 
         <activity
+            android:name=".autoscrollfallback.AutoscrollScrollViewWithPaddingActivity"
+            android:label="@string/simple_fragment_title"/>
+
+        <activity
             android:name=".simple.SimpleActivity"
             android:label="@string/simple_fragment_title"/>
 

@@ -831,7 +831,7 @@ data class Kaspresso(
                     FlakySafeViewBehaviorInterceptor(flakySafetyParams, libLogger)
                 ) else mutableListOf(
                     AutoScrollViewBehaviorInterceptor(autoScrollParams, libLogger),
-                    FlakySafeViewBehaviorInterceptor(flakySafetyParams, libLogger)
+                    FlakySafeViewBehaviorInterceptor(flakySafetyParams, libLogger),
                 )
 
             if (!::dataBehaviorInterceptors.isInitialized) dataBehaviorInterceptors =
