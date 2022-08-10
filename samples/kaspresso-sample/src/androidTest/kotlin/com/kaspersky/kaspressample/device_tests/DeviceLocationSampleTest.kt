@@ -77,14 +77,14 @@ class DeviceLocationSampleTest : TestCase() {
                     MUNICH_LOCATION_LNG
                 )
 
-                /** Request single update to apply changes */
-                manager.requestSingleUpdate(
-                    LocationManager.GPS_PROVIDER,
-                    EMPTY_LISTENER,
-                    Looper.getMainLooper()
-                )
-
                 flakySafely(timeoutMs = 60_000, intervalMs = 500) {
+                    /** Request single update to apply changes */
+                    manager.requestSingleUpdate(
+                        LocationManager.GPS_PROVIDER,
+                        EMPTY_LISTENER,
+                        Looper.getMainLooper()
+                    )
+
                     val location = manager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
                     assertNotNull(location) // flakySafely doesn't retry after NPE
                     assertEquals(

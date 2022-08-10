@@ -3,14 +3,14 @@ check_android_task:
   env:
     SCREENSHOTS_ROOT_DIR: /data/data/com.kaspersky.kaspressample/files/screenshots
     TUTORIAL_SCREENSHOTS_ROOT_DIR: /data/data/com.kaspersky.kaspresso.tutorial/files/screenshots
-    ALLURE_SAMPLE_SCREENSHOTS_ROOT_DIR: /data/data/com.kaspersky.kaspresso.tutorial/files/screenshots
+    ALLURE_SAMPLE_SCREENSHOTS_ROOT_DIR: /data/data/com.kaspersky.kaspresso.alluresupport.sample/files/screenshots
     ALLURE_SAMPLE_FAIL_SCREENSHOTS_ROOT_DIR: /data/user/0/com.kaspersky.kaspresso.alluresupport.sample/files/screenshots
   only_if: $CIRRUS_PR != '' && $CIRRUS_BASE_BRANCH == 'master'
 
   container:
     image: cirrusci/android-sdk:30
     kvm: true
-    cpu: 6
+    cpu: 8
     memory: 24G
   accept_licenses_script:
     echo yes | sdkmanager --licenses
@@ -25,19 +25,24 @@ check_android_task:
     -avd test
     -no-audio
     -no-window
+    -no-boot-anim
+    -gpu swiftshader_indirect
+    -no-snapshot
   assemble_instrumented_tests_script:
     ./gradlew assembleDebugAndroidTest
   wait_for_avd_script:
     adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 3; done; input keyevent 82'
-  disable_animations_script: |
+  configure_avd_script: |
     adb shell settings put global window_animation_scale 0.0
     adb shell settings put global transition_animation_scale 0.0
     adb shell settings put global animator_duration_scale 0.0
+    adb shell settings put secure spell_checker_enabled 0
+    adb shell settings put secure show_ime_with_hard_keyboard 1
   start_adb_server_background_script:
     java -jar artifacts/adbserver-desktop.jar || true
-  run_tests_script: ./gradlew connectedDebugAndroidTest || mkdir screenshots && adb root && for i in {1..5}; do adb pull $SCREENSHOTS_ROOT_DIR sample_screenshots; \
-    adb pull $SCREENSHOTS_ROOT_DIR tutorial_screenshots; \
-    adb pull $ALLURE_SAMPLE_FAIL_SCREENSHOTS_ROOT_DIR allure_screenshots; \
+  run_tests_script: ./gradlew connectedDebugAndroidTest || mkdir sample_screenshots && adb root && for i in {1..5}; do adb pull $SCREENSHOTS_ROOT_DIR sample_screenshots; \
+    mkdir tutorial_screenshots && adb pull $SCREENSHOTS_ROOT_DIR tutorial_screenshots; \
+    mkdir allure_screenshots && adb pull $ALLURE_SAMPLE_FAIL_SCREENSHOTS_ROOT_DIR allure_screenshots; \
     adb pull $ALLURE_SAMPLE_SCREENSHOTS_ROOT_DIR allure_screenshots && break || sleep 5; done && return 1
   on_failure :
     sample_report_artifacts:
