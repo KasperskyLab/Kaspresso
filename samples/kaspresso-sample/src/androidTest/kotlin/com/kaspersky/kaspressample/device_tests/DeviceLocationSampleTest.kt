@@ -84,7 +84,7 @@ class DeviceLocationSampleTest : TestCase() {
                     Looper.getMainLooper()
                 )
 
-                flakySafely(timeoutMs = 30_000, intervalMs = 500) {
+                flakySafely(timeoutMs = 60_000, intervalMs = 500) {
                     val location = manager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
                     assertNotNull(location) // flakySafely doesn't retry after NPE
                     assertEquals(
