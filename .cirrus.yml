@@ -12,33 +12,14 @@ check_android_task:
     kvm: true
     cpu: 8
     memory: 24G
-  tmp_script:
-    echo `whoami`
   install_de_script: |
-    addgroup --system xusers && adduser \
-    			--home /home/xclient \
-    			--disabled-password \
-    			--shell /bin/bash \
-    			--gecos "user for running an xclient application" \
-    			--ingroup xusers \
-    			--quiet \
-    			cirrusci
-    apt-get update && apt-get install -y --no-install-recommends \
-    				xvfb \
-    				rxvt \
-    				xauth \
-    				x11vnc \
-    				x11-utils \
-    				x11-xserver-utils
-    mkdir -p /Xauthority && chown -R xclient:xusers /Xauthority
-    export DISPLAY=:0.0
-    mcookie | sed -e 's/^/add :0 MIT-MAGIC-COOKIE-1 /' | xauth -q
-    xauth nlist :0 | sed -e 's/^..../ffff/' | xauth -f /Xauthority/xserver.xauth nmerge -
-    Xvfb :0 -auth ~/.Xauthority -screen 0 $XFB_SCREEN >>~/xvfb.log 2>&1 &
-    sleep 2
-    x11vnc -forever -passwd $VNC_PASSWORD -display :0 &
-    export DISPLAY=localhost:0
-    xauth merge /Xauthority/xserver.xauth
+    export DEBIAN_FRONTEND=noninteractive
+    apt-get update
+    apt-get install xfce4 -y
+    apt-get install xfce4-goodies -y
+    apt-get purge -y pm-utils xscreensaver*
+  start_de_background_script:
+    startx
   accept_licenses_script:
     echo yes | sdkmanager --licenses
   install_emulator_script:
