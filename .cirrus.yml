@@ -8,7 +8,8 @@ check_android_task:
   only_if: $CIRRUS_PR != '' && $CIRRUS_BASE_BRANCH == 'master'
 
   container:
-    image: cirrusci/android-sdk:30
+    #image: cirrusci/android-sdk:30
+    dockerfile: ci/Dockerfile
     kvm: true
     cpu: 8
     memory: 24G
@@ -24,7 +25,9 @@ check_android_task:
     $ANDROID_HOME/emulator/emulator
     -avd test
     -no-audio
+    #-no-window
     -no-boot-anim
+    -gpu swiftshader_indirect
     -no-snapshot
   assemble_instrumented_tests_script:
     ./gradlew assembleDebugAndroidTest
