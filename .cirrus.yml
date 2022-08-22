@@ -12,6 +12,13 @@ check_android_task:
     kvm: true
     cpu: 8
     memory: 24G
+  install_de_script: |
+    DEBIAN_FRONTEND=noninteractive
+    apt-get install xfce4 -y
+    apt-get install xfce4-goodies -y
+    apt-get purge -y pm-utils xscreensaver*
+  start_de_background_script:
+    startxfce4
   accept_licenses_script:
     echo yes | sdkmanager --licenses
   install_emulator_script:
