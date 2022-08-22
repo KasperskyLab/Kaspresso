@@ -12,10 +12,6 @@ check_android_task:
     kvm: true
     cpu: 8
     memory: 24G
-  install_de_script: |
-    export DEBIAN_FRONTEND=noninteractive
-    apt update
-    apt install xfce4 -y
   accept_licenses_script:
     echo yes | sdkmanager --licenses
   install_emulator_script:
@@ -31,6 +27,7 @@ check_android_task:
     -no-boot-anim
     -gpu swiftshader_indirect
     -no-snapshot
+    -no-window
   assemble_instrumented_tests_script:
     ./gradlew assembleDebugAndroidTest
   wait_for_avd_script:
