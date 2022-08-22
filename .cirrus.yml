@@ -8,11 +8,14 @@ check_android_task:
   only_if: $CIRRUS_PR != '' && $CIRRUS_BASE_BRANCH == 'master'
 
   container:
-    #image: cirrusci/android-sdk:30
-    dockerfile: ci/Dockerfile
+    image: cirrusci/android-sdk:30
+    #dockerfile: ci/Dockerfile
     kvm: true
     cpu: 8
     memory: 24G
+  install_de_script:
+    apt update
+    apt install xfce4 -y
   accept_licenses_script:
     echo yes | sdkmanager --licenses
   install_emulator_script:
