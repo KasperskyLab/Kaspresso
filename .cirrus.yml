@@ -14,6 +14,7 @@ check_android_task:
     memory: 24G
   install_de_script: |
     DEBIAN_FRONTEND=noninteractive
+    apt-get update
     apt-get install xfce4 -y
     apt-get install xfce4-goodies -y
     apt-get purge -y pm-utils xscreensaver*
