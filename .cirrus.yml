@@ -13,7 +13,7 @@ check_android_task:
     cpu: 8
     memory: 24G
   install_de_script: |
-    DEBIAN_FRONTEND=noninteractive
+    export DEBIAN_FRONTEND=noninteractive
     apt-get update
     apt-get install xfce4 -y
     apt-get install xfce4-goodies -y
