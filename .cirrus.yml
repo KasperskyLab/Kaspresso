@@ -9,7 +9,6 @@ check_android_task:
 
   container:
     image: cirrusci/android-sdk:30
-    #dockerfile: ci/Dockerfile
     kvm: true
     cpu: 8
     memory: 24G
