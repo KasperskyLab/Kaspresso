@@ -27,7 +27,6 @@ check_android_task:
     -no-boot-anim
     -gpu swiftshader_indirect
     -no-snapshot
-    -no-window
   assemble_instrumented_tests_script:
     ./gradlew assembleDebugAndroidTest
   wait_for_avd_script:
