@@ -52,10 +52,14 @@ check_android_task:
     adb shell settings put secure show_ime_with_hard_keyboard 1
   start_adb_server_background_script:
     java -jar artifacts/adbserver-desktop.jar || true
-  run_tests_script: ./gradlew connectedDebugAndroidTest || { mkdir sample_screenshots && adb root && for i in {1..5}; do adb pull $SCREENSHOTS_ROOT_DIR sample_screenshots; \
-    mkdir tutorial_screenshots && adb pull $SCREENSHOTS_ROOT_DIR tutorial_screenshots; \
-    mkdir allure_screenshots && adb pull $ALLURE_SAMPLE_FAIL_SCREENSHOTS_ROOT_DIR allure_screenshots; \
-    adb pull $ALLURE_SAMPLE_SCREENSHOTS_ROOT_DIR allure_screenshots && break || sleep 5; done && return 1 }
+  run_tests_script: |
+    ./gradlew connectedDebugAndroidTest
+    if [[ $? != 0 ]]; then
+      mkdir sample_screenshots && adb root && for i in {1..5}; do adb pull $SCREENSHOTS_ROOT_DIR sample_screenshots; \
+          mkdir tutorial_screenshots && adb pull $TUTORIAL_SCREENSHOTS_ROOT_DIR tutorial_screenshots; \
+          mkdir allure_screenshots && adb pull $ALLURE_SAMPLE_FAIL_SCREENSHOTS_ROOT_DIR allure_screenshots; \
+          adb pull $ALLURE_SAMPLE_SCREENSHOTS_ROOT_DIR allure_screenshots && break || sleep 5; done && return 1
+    fi
   on_failure :
     sample_report_artifacts:
       path: "app/build/reports/androidTests/connected/**/*"
