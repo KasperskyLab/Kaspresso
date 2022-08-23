@@ -3,8 +3,7 @@ check_android_task:
   env:
     SCREENSHOTS_ROOT_DIR: /data/data/com.kaspersky.kaspressample/files/screenshots
     TUTORIAL_SCREENSHOTS_ROOT_DIR: /data/data/com.kaspersky.kaspresso.tutorial/files/screenshots
-    ALLURE_SAMPLE_SCREENSHOTS_ROOT_DIR: /data/data/com.kaspersky.kaspresso.alluresupport.sample/files/screenshots
-    ALLURE_SAMPLE_FAIL_SCREENSHOTS_ROOT_DIR: /data/user/0/com.kaspersky.kaspresso.alluresupport.sample/files/screenshots
+    ALLURE_SAMPLE_SCREENSHOTS_ROOT_DIR: /data/user/0/com.kaspersky.kaspresso.alluresupport.sample/files/screenshots
     DISPLAY: :99
   only_if: $CIRRUS_PR != '' && $CIRRUS_BASE_BRANCH == 'master'
 
@@ -22,9 +21,8 @@ check_android_task:
     apt-get install xvfb -y
   start_de_background_script: |
     Xvfb :99 -screen 0 1000x1000x16 &
-    xrandr -–query
     sleep 5
-    nohup startxfce4 &
+    startxfce4
   accept_licenses_script:
     echo yes | sdkmanager --licenses
   install_emulator_script:
@@ -57,7 +55,6 @@ check_android_task:
     if [[ $? != 0 ]]; then
       mkdir sample_screenshots && adb root && for i in {1..5}; do adb pull $SCREENSHOTS_ROOT_DIR sample_screenshots; \
           mkdir tutorial_screenshots && adb pull $TUTORIAL_SCREENSHOTS_ROOT_DIR tutorial_screenshots; \
-          mkdir allure_screenshots && adb pull $ALLURE_SAMPLE_FAIL_SCREENSHOTS_ROOT_DIR allure_screenshots; \
           adb pull $ALLURE_SAMPLE_SCREENSHOTS_ROOT_DIR allure_screenshots && break || sleep 5; done && return 1
     fi
   on_failure :
