@@ -5,6 +5,7 @@ check_android_task:
     TUTORIAL_SCREENSHOTS_ROOT_DIR: /data/data/com.kaspersky.kaspresso.tutorial/files/screenshots
     ALLURE_SAMPLE_SCREENSHOTS_ROOT_DIR: /data/data/com.kaspersky.kaspresso.alluresupport.sample/files/screenshots
     ALLURE_SAMPLE_FAIL_SCREENSHOTS_ROOT_DIR: /data/user/0/com.kaspersky.kaspresso.alluresupport.sample/files/screenshots
+    DISPLAY: :99
   only_if: $CIRRUS_PR != '' && $CIRRUS_BASE_BRANCH == 'master'
 
   container:
@@ -18,8 +19,12 @@ check_android_task:
     apt-get install xfce4 -y
     apt-get install xfce4-goodies -y
     apt-get purge -y pm-utils xscreensaver*
+    apt-get install xvfb -y
   start_de_background_script:
-    startx
+    Xvfb :99 -screen 0 1000x1000x16 &
+    xrandr –query
+    sleep 5
+    nohup startxfce4 &
   accept_licenses_script:
     echo yes | sdkmanager --licenses
   install_emulator_script:
