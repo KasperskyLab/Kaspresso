@@ -20,7 +20,7 @@ check_android_task:
     apt-get install xfce4-goodies -y
     apt-get purge -y pm-utils xscreensaver*
     apt-get install xvfb -y
-  start_de_background_script:
+  start_de_background_script: |
     Xvfb :99 -screen 0 1000x1000x16 &
     xrandr –query
     sleep 5
