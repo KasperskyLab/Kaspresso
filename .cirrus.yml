@@ -22,7 +22,7 @@ check_android_task:
     apt-get install xvfb -y
   start_de_background_script: |
     Xvfb :99 -screen 0 1000x1000x16 &
-    xrandr –query
+    xrandr -–query
     sleep 5
     nohup startxfce4 &
   accept_licenses_script:
