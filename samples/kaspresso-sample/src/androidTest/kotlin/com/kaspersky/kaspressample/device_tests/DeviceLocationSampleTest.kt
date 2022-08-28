@@ -13,6 +13,7 @@ import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import io.github.kakaocup.kakao.screen.Screen
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
+import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
@@ -24,16 +25,16 @@ class DeviceLocationSampleTest : TestCase() {
         private const val MUNICH_LOCATION_LAT = 48.136414
         private const val MUNICH_LOCATION_LNG = 11.588115
         private const val DELTA = 0.001
+    }
 
-        private val EMPTY_LISTENER = object : LocationListener {
+    private val EMPTY_LISTENER = object : LocationListener {
 
-            override fun onLocationChanged(location: Location) {
-                // empty
-            }
+        override fun onLocationChanged(location: Location) {
+            // empty
+        }
 
-            override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {
-                // empty
-            }
+        override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {
+            // empty
         }
     }
 
@@ -76,15 +77,16 @@ class DeviceLocationSampleTest : TestCase() {
                     MUNICH_LOCATION_LNG
                 )
 
-                /** Request single update to apply changes */
-                manager.requestSingleUpdate(
-                    LocationManager.GPS_PROVIDER,
-                    EMPTY_LISTENER,
-                    Looper.getMainLooper()
-                )
+                flakySafely(timeoutMs = 60_000, intervalMs = 500) {
+                    /** Request single update to apply changes */
+                    manager.requestSingleUpdate(
+                        LocationManager.GPS_PROVIDER,
+                        EMPTY_LISTENER,
+                        Looper.getMainLooper()
+                    )
 
-                flakySafely(timeoutMs = 30_000, intervalMs = 500) {
                     val location = manager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+                    assertNotNull(location) // flakySafely doesn't retry after NPE
                     assertEquals(
                         MUNICH_LOCATION_LAT, location!!.latitude,
                         DELTA
