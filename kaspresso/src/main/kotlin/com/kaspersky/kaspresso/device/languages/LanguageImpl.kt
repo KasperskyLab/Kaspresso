@@ -8,6 +8,7 @@ import androidx.test.runner.lifecycle.ActivityLifecycleMonitorRegistry
 import androidx.test.runner.lifecycle.Stage
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import java.util.Locale
+
 /**
  * The implementation of [Language]
  */
@@ -33,7 +34,7 @@ class LanguageImpl(
         if (getCurrentLocale() == locale) {
             logger.i(
                 "Switch the language in the Application to $locale is not needed " +
-                    "because it's a current app's language"
+                        "because it's a current app's language"
             )
             return
         }
@@ -70,4 +71,3 @@ class LanguageImpl(
         resources.updateConfiguration(configuration, resources.displayMetrics)
     }
 }
-
