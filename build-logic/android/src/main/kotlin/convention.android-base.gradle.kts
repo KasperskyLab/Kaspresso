@@ -4,7 +4,7 @@ import com.android.build.gradle.BaseExtension
 configure<BaseExtension> {
 
     buildToolsVersion("30.0.3")
-    compileSdkVersion(31)
+    compileSdkVersion(32)
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8

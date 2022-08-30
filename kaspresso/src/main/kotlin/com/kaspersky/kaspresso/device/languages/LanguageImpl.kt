@@ -8,7 +8,6 @@ import androidx.test.runner.lifecycle.ActivityLifecycleMonitorRegistry
 import androidx.test.runner.lifecycle.Stage
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import java.util.Locale
-
 /**
  * The implementation of [Language]
  */
@@ -53,7 +52,7 @@ class LanguageImpl(
         }
     }
 
-    private fun getCurrentLocale(): Locale =
+    private fun getCurrentLocale(): Locale? =
         ConfigurationCompat.getLocales(context.resources.configuration).get(0)
 
     @Suppress("DEPRECATION")
@@ -71,3 +70,4 @@ class LanguageImpl(
         resources.updateConfiguration(configuration, resources.displayMetrics)
     }
 }
+
