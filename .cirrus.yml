@@ -12,11 +12,11 @@ check_android_task:
     kvm: true
     cpu: 8
     memory: 24G
+  # xfce4 somehow helps to pass "Geolocation" test
   install_de_script: |
     export DEBIAN_FRONTEND=noninteractive
     apt-get update
     apt-get install xfce4 -y
-    apt-get install xfce4-goodies -y
     apt-get purge -y pm-utils xscreensaver*
     apt-get install xvfb -y
   start_de_background_script: |
@@ -26,18 +26,20 @@ check_android_task:
   accept_licenses_script:
     echo yes | sdkmanager --licenses
   install_emulator_script:
+    # x86_64 somehow affect the "call" test
     sdkmanager --install "system-images;android-30;google_apis;x86"
   create_avd_script:
     echo no | avdmanager create avd --force
-    -n test
+    -n emulator
     -k "system-images;android-30;google_apis;x86"
   start_avd_background_script:
     $ANDROID_HOME/emulator/emulator
-    -avd test
+    -avd emulator
     -no-audio
     -no-boot-anim
     -gpu swiftshader_indirect
     -no-snapshot
+    # -no-window is not used here because the flag somehow affects the "GPS" test. actual for API=30
   assemble_instrumented_tests_script:
     ./gradlew assembleDebugAndroidTest
   wait_for_avd_script:
