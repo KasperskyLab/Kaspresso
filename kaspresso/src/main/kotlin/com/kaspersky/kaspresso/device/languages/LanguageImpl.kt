@@ -34,7 +34,7 @@ class LanguageImpl(
         if (getCurrentLocale() == locale) {
             logger.i(
                 "Switch the language in the Application to $locale is not needed " +
-                    "because it's a current app's language"
+                        "because it's a current app's language"
             )
             return
         }
@@ -53,7 +53,7 @@ class LanguageImpl(
         }
     }
 
-    private fun getCurrentLocale(): Locale =
+    private fun getCurrentLocale(): Locale? =
         ConfigurationCompat.getLocales(context.resources.configuration).get(0)
 
     @Suppress("DEPRECATION")
