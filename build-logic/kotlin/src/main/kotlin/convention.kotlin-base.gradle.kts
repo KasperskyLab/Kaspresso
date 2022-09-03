@@ -1,6 +1,6 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-val kotlinLanguageVersion = "1.5"
+val kotlinLanguageVersion = "1.6"
 
 tasks.withType<KotlinCompile>().configureEach {
     kotlinOptions {

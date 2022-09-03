@@ -25,9 +25,9 @@ interface UiSystemAssertions {
     private fun checkAssertAction(methodName: UiOperationType, action: () -> Boolean) {
         try {
             val result = action.invoke()
-            if (!result) throw AssertionError("$methodName method in UiAutomator hasn't checked")
+            if (!result) throw AssertionError("$methodName method in UiAutomator hasn't been checked")
         } catch (exception: Exception) {
-            throw AssertionError("$methodName method in UiAutomator hasn't checked", exception)
+            throw AssertionError("$methodName method in UiAutomator hasn't been checked")
         }
     }
 
