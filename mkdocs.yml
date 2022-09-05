@@ -83,7 +83,7 @@ nav:
     - Kaspresso Allure: Wiki/09_Kaspresso-Allure.md
     - Jetpack Compose: Wiki/10_Jetpack-Compose.md
   - Issues:
-    - Storage issues: Storage_issue.md
+    - Storage issues: Issues/Storage_issue.md
 #  - Documentation:
 #    - Kaspresso docs: Documentation/kaspresso/index.md
 #    - KAutomator docs: Documentation/kautomator/index.md
