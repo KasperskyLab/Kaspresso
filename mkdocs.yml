@@ -1,4 +1,4 @@
-site_name: "Kaspresso"
+site_name: "Kaspresso_tutorial"
 repo_url: https://github.com/KasperskyLab/Kaspresso
 repo_name: Kaspresso
 edit_uri: tree/main/docs/content
@@ -43,7 +43,7 @@ theme:
     text: Roboto
     code: Roboto Mono
  # favicon: assets/favicon.png
-  
+
   features:
     - navigation.tabs
     - content.code.annotate
@@ -66,27 +66,27 @@ nav:
     - Flaky safely. Сontinuously, compose.: Tutorial/Flaky safely.md
     - Использование сценариев в Kaspresso: Tutorial/Kaspresso_scenario.md
     - Выполнение adb-команд: Tutorial/adb_commands.md
-    - Взаимодействуем с Android вне приложения: Tutorial/Device.md 
+    - Взаимодействуем с Android вне приложения: Tutorial/Device.md
     - Конфигурирование Kaspresso: Tutorial/Kaspresso_configurator.md
     - Скриншот-тесты: Tutorial/Kaspresso_screenshots.md
     - Использование Allure: Tutorial/Kaspresso_with_allure.md
-  - Wiki:
-    - Page object in Kaspresso: Wiki/Page object in Kaspresso.md
-    - Wrapper over Espresso: Wiki/01_Wrapper_over_Espresso.md
-    - Wrapper over UiAutomator: Wiki/02_Wrapper_over_UiAutomator.md
-    - Kaspresso configurator: Wiki/03_Kaspresso_configurator.md
-    - How to write autotests: Wiki/04_How_to_write_autotests.md
-    - Device: Wiki/05_Device.md
-    - AdbServer: Wiki/06_AdbServer.md
-    - DocLoc: Wiki/07_DocLoc.md
-    - Kaspresso Robolectric: Wiki/08_Kaspresso-Robolectric.md
-    - Kaspresso Allure: Wiki/09_Kaspresso-Allure.md
-    - Jetpack Compose: Wiki/10_Jetpack-Compose.md
-  - Documentation:
-    - Kaspresso docs: Documentation/kaspresso/index.md
-    - KAutomator docs: Documentation/kautomator/index.md
-    - ADB Server: Documentation/adb-server/index.md
-    
+#  - Wiki:
+#    - Page object in Kaspresso: Wiki/Page object in Kaspresso.md
+#    - Wrapper over Espresso: Wiki/01_Wrapper_over_Espresso.md
+#    - Wrapper over UiAutomator: Wiki/02_Wrapper_over_UiAutomator.md
+#    - Kaspresso configurator: Wiki/03_Kaspresso_configurator.md
+#    - How to write autotests: Wiki/04_How_to_write_autotests.md
+#    - Device: Wiki/05_Device.md
+#    - AdbServer: Wiki/06_AdbServer.md
+#    - DocLoc: Wiki/07_DocLoc.md
+#    - Kaspresso Robolectric: Wiki/08_Kaspresso-Robolectric.md
+#    - Kaspresso Allure: Wiki/09_Kaspresso-Allure.md
+#    - Jetpack Compose: Wiki/10_Jetpack-Compose.md
+#  - Documentation:
+#    - Kaspresso docs: Documentation/kaspresso/index.md
+#    - KAutomator docs: Documentation/kautomator/index.md
+#    - ADB Server: Documentation/adb-server/index.md
+
 markdown_extensions:
   - admonition
   - pymdownx.details
