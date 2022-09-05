@@ -294,7 +294,7 @@ Breaking changes can be found [here](https://kasperskylab.github.io/Kaspresso/Ho
 
 ## Storage issue
 
-Storage issue can be found [hear](https://kasperskylab.github.io/Kaspresso/Issues/Storage_issue/)
+More details can be found [hear](https://kasperskylab.github.io/Kaspresso/Issues/Storage_issue/)
 
 ## Contribution
 Kaspresso is an open source project, so you are welcome to contribute (see the [Contribution Guidelines](https://github.com/KasperskyLab/Kaspresso/blob/master/CONTRIBUTING.md)).
