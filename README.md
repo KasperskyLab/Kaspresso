@@ -86,7 +86,7 @@ MainScreen {
 ```
 Since Kakao and Kautomator provide almost identical APIs, you don’t have to care about what is under the hood of your tests, either Espresso or UI Automator. With Kaspresso, you write the same tests for both.
 
-Read about [Kakao](/wiki/01_Wrapper_over_Espresso.md) and [Kautomator](/wiki/02_Wrapper_over_UiAutomator.md) in details.
+Read about [Kakao](/docs/Wiki/01_Wrapper_over_Espresso.md) and [Kautomator](/docs/Wiki/02_Wrapper_over_UiAutomator.md) in details.
 
 However, Kakao and Kautomator themselves don't help you to see the relation between the test and the corresponding test case. Also, a long test often becomes a giant piece of code that is impossible to split into smaller parts.
 That's why we have created an additional Kotlin DSL that allows you to read your test more easily. 
@@ -147,7 +147,7 @@ Sometimes your UI test passes ten times, then breaks on the eleventh attempt for
 
 The most popular reason for flakiness is the instability of the UI tests libraries, such as Espresso and UI Automator. To eliminate this instability, Kaspresso uses DSL wrappers and [interceptors](#Interceptors). 
 
-Also, [some Kaspresso features](/wiki/04_How_to_write_autotests.md#sweet-additional-features) can help you resolve a lot of typical problems in UI testing.
+Also, [some Kaspresso features](/docs/Wiki/04_How_to_write_autotests.md#sweet-additional-features) can help you resolve a lot of typical problems in UI testing.
 
 ### UI test libraries acceleration
 
@@ -155,18 +155,18 @@ Let’s watch some short video that shows the difference between the original UI
 
 ![](https://habrastorage.org/webt/ti/kv/ki/tikvkij1vjesnacrxqm-lk0coly.gif)
 
-Here is [a short explanation](./wiki/02_Wrapper_over_UiAutomator.md#accelerate-ui-automator) of why it is possible.
+Here is [a short explanation](./docs/Wiki/02_Wrapper_over_UiAutomator.md#accelerate-ui-automator) of why it is possible.
 
 <a name="Interceptors"></a>
 ### Interceptors
 
-We developed [Kaspresso behavior interceptors](/wiki/03_Kaspresso_configurator.md#some-words-about-behavior-interceptors) on the base of [Kakao/Kautomator Interceptors](/wiki/03_Kaspresso_configurator.md#kaspresso-interceptors-based-on-kakaokautomator-interceptors) to catch failures.
+We developed [Kaspresso behavior interceptors](/docs/Wiki/03_Kaspresso_configurator.md#some-words-about-behavior-interceptors) on the base of [Kakao/Kautomator Interceptors](/wiki/03_Kaspresso_configurator.md#kaspresso-interceptors-based-on-kakaokautomator-interceptors) to catch failures.
 
 Thanks to interceptors, you can do a lot of useful things, such as:
 * add custom actions to each library operation like writing a log or taking a screenshot;
 * overcome flaky library operations by re-running failed actions, scrolling the parent layout or removing the android system dialog;
 
-and many more (see [the manual](/wiki/03_Kaspresso_configurator.md#kaspresso-interceptors-based-on-kakaokautomator-interceptors)).
+and many more (see [the manual](/docs/Wiki/03_Kaspresso_configurator.md#kaspresso-interceptors-based-on-kakaokautomator-interceptors)).
 
 ### Writing readable logs
 Kaspresso writes its own logs, detailed and readable:
@@ -176,7 +176,7 @@ Kaspresso writes its own logs, detailed and readable:
 
 ### Ability to call ADB commands
 
-Espresso and UI Automator don't allow to call ADB commands from inside a test. To fix this problem, we developed Autotest AdbServer (see the [wiki](./wiki/06_AdbServer.md)).
+Espresso and UI Automator don't allow to call ADB commands from inside a test. To fix this problem, we developed Autotest AdbServer (see the [wiki](./docs/Wiki/06_AdbServer.md)).
 
 ### Ability to work with Android System
 
@@ -194,7 +194,7 @@ For example, with the ```Device``` class you can:
 * change the app language,
 * collect and parse the logcat output.
 
-(see more about the [Device class](/wiki/05_Device.md)).
+(see more about the [Device class](/docs/Wiki/05_Device.md)).
 
 ### Features screenshotting
 
@@ -204,7 +204,7 @@ With Kaspresso, translators can automatically take a screenshot of any screen. I
 
 ### Configurability
 
-You can tune any part of Kaspresso (read [more](/wiki/03_Kaspresso_configurator.md))
+You can tune any part of Kaspresso (read [more](/docs/Wiki/03_Kaspresso_configurator.md))
 
 ### Robolectric support
 
@@ -215,13 +215,13 @@ Read [more](/wiki/08_Kaspresso-Robolectric.md).
 
 Kaspresso can generate very detailed Allure-reports for each test:
 ![](https://habrastorage.org/webt/tq/t7/ch/tqt7chcdczrgduhoukqhx1ertfc.png)
-More information is available [here](/wiki/09_Kaspresso-Allure.md). 
+More information is available [here](/docs/Wiki/09_Kaspresso-Allure.md). 
 
 ### Jetpack Compose support (Early access)
 
 Now, you can write your Kaspresso tests for Jetpack Compose screens! DSL and all principles are the same. 
 So, you will not see any difference between tests for View screens and for Compose screens.
-More information is available [here](/wiki/10_Jetpack-Compose.md).
+More information is available [here](/docs/Wiki/10_Jetpack-Compose.md).
 
 **Keep in mind it's early access that may contain bugs. Also, API can be changed, but we are going to avoid it. Be free to create relative issues if you've encountered with any kind of problem.**
 
@@ -231,7 +231,7 @@ The tool itself, even the perfect one, can not solve all the problems in writing
 
 ## Wiki
 
-For all information check [Kaspresso wiki](/wiki/00_Home.md)
+For all information check [Kaspresso wiki](/docs/Wiki/)
 
 ## Integration
 
@@ -280,52 +280,6 @@ cd ~/Workspace/Kaspresso
 ```
 java -jar artifacts/adbserver-desktop.jar
 ```
-
-## Storage issues
-Kaspresso can use external storage to save various data about executed tests. The example of such data is screenshots, xml dumps, logs, video and anymore.
-But, new Android OS provides absolutely new way to work with external storage - Scoped Storage. Currently, we are working on the support of Scoped Storage.
-While Scoped Storage support is on the way, there is an option to request different permissions to make an access to saved data possible on any Android OS. 
-Here, it's a detailed instruction:
-1. AndroidManifest.xml (in your debug build variant to keep production manifest without any changes)
-```xml
-# Please, add these permissions
-<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-<uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"/>
-
-<application
-    # storage support for Android API 29         
-    android:requestLegacyExternalStorage="true"
-    ...
-</application>             
-```
-2. Your test class:
-```kotlin
-class SampleTest : TestCase(
-    kaspressoBuilder = Kaspresso.Builder.simple( // simple/advanced - it doesn't matter
-        customize = { 
-            // storage support for Android API 30+
-            if (isAndroidRuntime) {
-                UiDevice
-                    .getInstance(instrumentation)
-                    .executeShellCommand("appops set --uid ${InstrumentationRegistry.getInstrumentation().targetContext.packageName} MANAGE_EXTERNAL_STORAGE allow")
-            }
-        }
-    )
-) {
-
-    // storage support for Android API 29-
-    @get:Rule
-    val runtimePermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
-        Manifest.permission.WRITE_EXTERNAL_STORAGE,
-        Manifest.permission.READ_EXTERNAL_STORAGE
-    )
-    
-    //...
-}    
-```
-Remember, it's a temporary working solution. 
-A little bit later, Kaspresso will use external storage only through Scoped Storage and you will not be forced to request all mentioned permissions.
 
 ## Breaking changes 
 ### 1.2.0
