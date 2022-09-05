@@ -160,7 +160,7 @@ Here is [a short explanation](./docs/Wiki/02_Wrapper_over_UiAutomator.md#acceler
 <a name="Interceptors"></a>
 ### Interceptors
 
-We developed [Kaspresso behavior interceptors](/docs/Wiki/03_Kaspresso_configurator.md#some-words-about-behavior-interceptors) on the base of [Kakao/Kautomator Interceptors](/wiki/03_Kaspresso_configurator.md#kaspresso-interceptors-based-on-kakaokautomator-interceptors) to catch failures.
+We developed [Kaspresso behavior interceptors](/docs/Wiki/03_Kaspresso_configurator.md#some-words-about-behavior-interceptors) on the base of [Kakao/Kautomator Interceptors](/docs/Wiki/03_Kaspresso_configurator.md#kaspresso-interceptors-based-on-kakaokautomator-interceptors) to catch failures.
 
 Thanks to interceptors, you can do a lot of useful things, such as:
 * add custom actions to each library operation like writing a log or taking a screenshot;
@@ -200,7 +200,7 @@ For example, with the ```Device``` class you can:
 
 If you develop an application that is available across the world, you have to *localize* it into different languages. When UI is localized, it’s important for the translator to see the context of a word or a phrase, that is the specific screen. 
 
-With Kaspresso, translators can automatically take a screenshot of any screen. It’s incredibly fast, even for legacy screens, and you don't have to refactor or mock anything (see [the manual](/wiki/07_DocLoc.md)).
+With Kaspresso, translators can automatically take a screenshot of any screen. It’s incredibly fast, even for legacy screens, and you don't have to refactor or mock anything (see [the manual](/docs/Wiki/07_DocLoc.md)).
 
 ### Configurability
 
@@ -209,7 +209,7 @@ You can tune any part of Kaspresso (read [more](/docs/Wiki/03_Kaspresso_configur
 ### Robolectric support
 
 You can run your UI-tests on the JVM environment. Additionally, almost all interceptors improving stability, readability and other will work. 
-Read [more](/wiki/08_Kaspresso-Robolectric.md). 
+Read [more](/docs/Wiki/08_Kaspresso-Robolectric.md). 
 
 ### Allure support
 
@@ -227,7 +227,7 @@ More information is available [here](/docs/Wiki/10_Jetpack-Compose.md).
 
 ## Philosophy
 
-The tool itself, even the perfect one, can not solve all the problems in writing UI tests. It’s important to know how to write tests and how to organize the entire process. Our team has great experience in introducing autotests in different companies. We shared our knowledge on [writing autotests](/wiki/04_How_to_write_autotests.md).
+The tool itself, even the perfect one, can not solve all the problems in writing UI tests. It’s important to know how to write tests and how to organize the entire process. Our team has great experience in introducing autotests in different companies. We shared our knowledge on [writing autotests](/docs/Wiki/04_How_to_write_autotests.md).
 
 ## Wiki
 
