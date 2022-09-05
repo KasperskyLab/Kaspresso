@@ -26,6 +26,8 @@ And many more!
 
 ![Kaspresso](https://habrastorage.org/webt/dw/jh/9k/dwjh9kypjl637kxj8tiaxwjvtp0.png)
 
+## Visit our [site](https://kasperskylab.github.io/Kaspresso/Home/Kaspresso/) to get more info
+
 ## Capabilities of Kaspresso
 
 ### Readability
@@ -229,10 +231,6 @@ More information is available [here](/docs/Wiki/10_Jetpack-Compose.md).
 
 The tool itself, even the perfect one, can not solve all the problems in writing UI tests. It’s important to know how to write tests and how to organize the entire process. Our team has great experience in introducing autotests in different companies. We shared our knowledge on [writing autotests](/docs/Wiki/04_How_to_write_autotests.md).
 
-## Wiki
-
-For all information check [Kaspresso wiki](/docs/Wiki/)
-
 ## Integration
 
 To integrate Kaspresso into your project:
@@ -268,7 +266,16 @@ dependencies {
 }
 ```
 
+## Wiki
+
+For all information check [Kaspresso wiki](/docs/Wiki/)
+
+## Tutorial
+
+You can find tutorial [hear](https://kasperskylab.github.io/Kaspresso/Tutorial/simple_test/)
+
 ## Samples
+
 All samples are available in the [samples](/samples) folder. 
 
 Most of the samples require AdbServer. To start AdbServer you should do the following steps:
@@ -282,14 +289,12 @@ java -jar artifacts/adbserver-desktop.jar
 ```
 
 ## Breaking changes 
-### 1.2.0
-- We've totally reworked AdbServer and Kaspresso 1.2.0 works only with new `artifacts/adbserver-desktop.jar`<br>
-The old version `artifacts/desktop_1_1_0.jar` is also available for use with older versions of Kaspresso.
-- If you use `device.logcat` in your tests, you should call `device.logcat.disableChatty` in the `before` section of your test.
-In previous version of Kaspresso, `device.logcat.disableChatty` was called automatically during initialization. This resulted in the need to always run AdbServer before tests.
-### 1.2.1
-- Kaspresso migrated to a new version of Kakao which has `io.github.kakaocup.kakao` package name. Replace all imports using command 
-`find . -type f \( -name "*.kt" -o -name "*.java" \) -print0 | xargs -0 sed -i '' -e 's/com.agoda/io.github.kakaocup/g'` or using global replacement tool in IDE.
+
+Breaking changes can be found [here](https://kasperskylab.github.io/Kaspresso/Home/Breaking-changes/)
+
+## Storage issue
+
+Storage issue can be found [hear](https://kasperskylab.github.io/Kaspresso/Issues/Storage_issue/)
 
 ## Contribution
 Kaspresso is an open source project, so you are welcome to contribute (see the [Contribution Guidelines](https://github.com/KasperskyLab/Kaspresso/blob/master/CONTRIBUTING.md)).
