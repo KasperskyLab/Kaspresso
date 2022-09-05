@@ -7,5 +7,5 @@
 [EN] [Eugene Matsyuk — Kaspresso: The autotest framework that you have been looking forward to. Part I](https://proandroiddev.com/kaspresso-the-autotest-framework-that-you-have-been-looking-forward-to-part-i-e102ed384d11) <br>
 
 
-> Do you want your article to be included in this list? Everything is simple! Write an article, send it to us, and we will gladly add it to this list!
+> Do you want your article to be included in this list? Everything is simple! Write an article, send it to us and we will add it to this list!
 <br/>
