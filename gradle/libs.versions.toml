@@ -13,7 +13,7 @@ lifecycle = "2.5.1"
 [libraries]
 # plugins
 kotlinPlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
-androidPlugin = "com.android.tools.build:gradle:7.2.1"
+androidPlugin = "com.android.tools.build:gradle:7.2.2"
 versionsPlugin = "com.github.ben-manes:gradle-versions-plugin:0.39.0"
 
 # libraries
