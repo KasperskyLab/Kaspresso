@@ -352,6 +352,7 @@ naming:
     functionPattern: '^([a-z$][a-zA-Z$0-9]*)|(`.*`)$'
     excludeClassPattern: '$^'
     ignoreOverridden: true
+    ignoreAnnotated: ['Composable']
   FunctionParameterNaming:
     active: true
     excludes: ['**/test/**', '**/androidTest/**', '**/sharedTest/**', '**/*.Test.kt', '**/*.Spec.kt', '**/*.Spek.kt']

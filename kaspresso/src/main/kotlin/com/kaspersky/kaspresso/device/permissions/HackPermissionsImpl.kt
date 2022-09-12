@@ -20,6 +20,7 @@ class HackPermissionsImpl(
     /**
      * @return result of operation: true is success, false is something went wrong
      */
+    @Suppress("BlockedPrivateApi") // TODO: remove this method, it doesn't work any more
     override fun grant(packageName: String, permission: String): Boolean {
         logger.i("Attempt to grant permission=$permission for packageName=$packageName unfairly")
         return try {

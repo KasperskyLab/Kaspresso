@@ -11,6 +11,7 @@ import com.kaspersky.kaspresso.testcases.api.testcase.BaseTestCase
 /**
  * Example of base class with not default TestContext and main section enrichers.
  */
+@Suppress("UnnecessaryAbstractClass")
 abstract class EnricherTestCase : BaseTestCase<EnricherTestDsl, EnricherTestData>(
     kaspressoBuilder = Kaspresso.Builder.simple(),
     dataProducer = { action ->
