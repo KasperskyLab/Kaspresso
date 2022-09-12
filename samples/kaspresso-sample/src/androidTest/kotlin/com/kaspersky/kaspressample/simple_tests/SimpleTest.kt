@@ -44,6 +44,7 @@ class SimpleTest : TestCase() {
         }
 
         step("Click button_1 and check button_2") {
+            // some draft log
             SimpleScreen {
                 button1 {
                     click()
