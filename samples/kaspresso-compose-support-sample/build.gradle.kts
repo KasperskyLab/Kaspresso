@@ -31,6 +31,7 @@ android {
             java.srcDirs(sharedTestFolder)
             resources.srcDirs(sharedTestResourcesFolder)
         }
+
     }
 
     testOptions {
