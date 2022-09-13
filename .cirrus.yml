@@ -56,21 +56,19 @@ check_android_task:
   # That's why we make 5 attempts to pull folders  
   run_tests_script: |
     ./gradlew connectedDebugAndroidTest
-    if [[ $? != 0 ]]; then
-      mkdir sample_screenshots && adb root && for i in {1..5}; do adb pull $SCREENSHOTS_ROOT_DIR sample_screenshots; \
+    mkdir sample_screenshots && adb root && for i in {1..5}; do adb pull $SCREENSHOTS_ROOT_DIR sample_screenshots; \
           mkdir tutorial_screenshots && adb pull $TUTORIAL_SCREENSHOTS_ROOT_DIR tutorial_screenshots; \
-          adb pull $ALLURE_SAMPLE_SCREENSHOTS_ROOT_DIR allure_screenshots && break || sleep 5; done && return 1
-    fi
-  on_failure :
-    sample_report_artifacts:
-      path: "app/build/reports/androidTests/connected/**/*"
-    tutorial_report_artifacts:
-      path: "tutorial/build/reports/androidTests/connected/**/*"
-    allure_report_artifacts:
-      path: "kaspresso-allure-support-sample/build/reports/androidTests/connected/**/*"
-    sample_screenshots_artifacts:
-      path: "sample_screenshots/**/*"
-    tutorial_screenshots_artifacts:
-      path: "tutorial_screenshots/**/*"
-    allure_screenshots_artifacts:
-      path: "allure_screenshots/**/*"
+          adb pull $ALLURE_SAMPLE_SCREENSHOTS_ROOT_DIR allure_screenshots && break || sleep 5; done
+  sample_report_artifacts:
+    path: "app/build/reports/androidTests/connected/**/*"
+  tutorial_report_artifacts:
+    path: "tutorial/build/reports/androidTests/connected/**/*"
+  allure_report_artifacts:
+    path: "kaspresso-allure-support-sample/build/reports/androidTests/connected/**/*"
+  sample_screenshots_artifacts:
+    path: "sample_screenshots/**/*"
+  tutorial_screenshots_artifacts:
+    path: "tutorial_screenshots/**/*"
+  allure_screenshots_artifacts:
+    path: "allure_screenshots/**/*"
+    
