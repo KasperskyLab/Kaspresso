@@ -58,7 +58,7 @@ check_android_task:
     ./gradlew connectedDebugAndroidTest || true
   pull_screenshots_script: |
     adb root
-    adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 3; done';
+    for i in {1..100}; do adb && break || sleep 3; done
     mkdir sample_screenshots
     adb pull $SCREENSHOTS_ROOT_DIR sample_screenshots
     mkdir tutorial_screenshots
