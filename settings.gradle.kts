@@ -4,9 +4,11 @@ enableFeaturePreview("VERSION_CATALOGS")
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
+    val kasperskyRepoUrl: String? by settings
     repositories {
         gradlePluginPortal()
         google()
+        kasperskyRepoUrl?.let { maven { setUrl(it) } }
     }
 }
 

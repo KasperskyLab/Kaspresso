@@ -9,12 +9,15 @@ activityCompose = "1.4.0"
 androidXTest = "1.4.0"
 testOrchestrator = "1.4.1"
 lifecycle = "2.5.1"
+thirdPartyReport = "0.14.618"
 
 [libraries]
 # plugins
 kotlinPlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 androidPlugin = "com.android.tools.build:gradle:7.2.2"
 versionsPlugin = "com.github.ben-manes:gradle-versions-plugin:0.39.0"
+thirdPartyReportPlugin = { module = "com.kaspersky.gradle:third-party-report", version.ref = "thirdPartyReport" }
+airPlugin = { module = "com.kaspersky.gradle:air", version.ref = "thirdPartyReport" }
 
 # libraries
 kotlinStdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
