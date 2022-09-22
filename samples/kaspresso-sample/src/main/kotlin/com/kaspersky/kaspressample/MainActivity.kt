@@ -3,6 +3,7 @@ package com.kaspersky.kaspressample
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.kaspersky.kaspressample.autoscrollfallback.AutoscrollScrollViewWithPaddingActivity
 import com.kaspersky.kaspressample.compose.ComplexComposeSampleActivity
 import com.kaspersky.kaspressample.continuously.ContinuouslySampleActivity
 import com.kaspersky.kaspressample.databinding.ActivityMainBinding
@@ -20,6 +21,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val binding = ActivityMainBinding.inflate(layoutInflater)
+
+        binding.activityMainAutoScrollScrollViewWithPaddingButton.setOnClickListener {
+            startActivity(Intent(this, AutoscrollScrollViewWithPaddingActivity::class.java))
+        }
 
         binding.activityMainSimpleSampleButton.setOnClickListener {
             startActivity(Intent(this, SimpleActivity::class.java))

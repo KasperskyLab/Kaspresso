@@ -229,13 +229,11 @@ class KautomatorMeasureTest : TestCase(
     )
 
     @get:Rule
-    val activityTestRule = ActivityTestRule(MainActivity::class.java, true, false)
+    val activityRule = activityScenarioRule<MainActivity>()
 
     @Test
     fun test() =
-        before {
-            activityTestRule.launchActivity(null)
-        }.after { }.run {
+        before { }.after { }.run {
     
     ======> UI Automator:        0 minutes, 1 seconds and 252 millis
     ======> UI Automator boost:  0 minutes, 0 seconds and 310 millis
@@ -255,7 +253,7 @@ class KautomatorMeasureTest : TestCase(
                     RANGE.forEach { _ ->
                         button1 {
                             click()
-                            hasText(device.targetContext.getString(R.string.measure_fragment_text_button_1).toUpperCase())
+                            hasText(device.targetContext.getString(R.string.measure_fragment_text_button_1).uppercase())
                         }
                     }
                 }
@@ -268,7 +266,7 @@ class KautomatorMeasureTest : TestCase(
                     RANGE.forEach { index ->
                         button2 {
                             click()
-                            hasText(device.targetContext.getString(R.string.measure_fragment_text_button_2).toUpperCase())
+                            hasText(device.targetContext.getString(R.string.measure_fragment_text_button_2).uppercase())
                         }
                         textView {
                             hasText(

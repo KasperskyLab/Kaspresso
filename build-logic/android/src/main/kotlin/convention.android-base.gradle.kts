@@ -3,8 +3,7 @@ import com.android.build.gradle.BaseExtension
 @Suppress("MagicNumber")
 configure<BaseExtension> {
 
-    buildToolsVersion("30.0.3")
-    compileSdkVersion(31)
+    compileSdkVersion(33)
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8

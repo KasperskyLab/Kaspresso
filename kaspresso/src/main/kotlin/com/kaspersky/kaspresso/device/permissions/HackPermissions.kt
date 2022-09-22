@@ -8,5 +8,6 @@ interface HackPermissions {
     /**
      * @return result of operation: true is success, false is something went wrong
      */
+    @Deprecated("Private API usage is forbidden when targeting API 30 and above")
     fun grant(packageName: String, permission: String): Boolean
 }

@@ -134,7 +134,6 @@ All of the above mentioned inspired us to create the test's structure like below
 @Test
 fun shouldPassOnNoInternetScanTest() =
     before {
-        activityTestRule.launchActivity(null)
         // some things with the state
     }.after {
         // some things with the state

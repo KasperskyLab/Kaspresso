@@ -145,7 +145,7 @@ interface UiSystemActions {
 
     private fun checkBooleanAction(methodName: String, action: () -> Boolean) {
         val result = action.invoke()
-        if (!result) throw AssertionError("$methodName method in UiAutomator hasn't performed")
+        if (!result) throw AssertionError("$methodName method in UiAutomator hasn't been performed")
     }
 
     private fun checkBooleanAction(methodName: UiOperationType, action: () -> Boolean) =
@@ -155,7 +155,7 @@ interface UiSystemActions {
         try {
             action.invoke()
         } catch (exception: Exception) {
-            throw AssertionError("$methodName method in UiAutomator hasn't performed", exception)
+            throw AssertionError("$methodName method in UiAutomator hasn't been performed")
         }
     }
 

@@ -2,13 +2,12 @@ package com.kaspersky.kaspresso.upgradesample.test
 
 import android.Manifest
 import androidx.test.rule.GrantPermissionRule
+import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import com.kaspersky.kaspresso.upgradesample.common.UpdateManager.installAndLaunchMainApp
 import com.kaspersky.kaspresso.upgradesample.common.UpdateManager.uninstallMainApp
 import com.kaspersky.kaspresso.upgradesample.common.UpdateManager.updateAndLaunchMainApp
-
 import com.kaspersky.kaspresso.upgradesample.screen.MainScreen
 import com.kaspersky.kaspresso.upgradesample.screen.UpgradeScreen
-import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.junit.Rule
 import org.junit.Test
 
@@ -28,7 +27,9 @@ class UpgradeTestSample : TestCase() {
 
     @Test
     fun upgradeTest() {
-        before { }.after {
+        before {
+            uninstallMainApp()
+        }.after {
             uninstallMainApp()
         }.run {
 

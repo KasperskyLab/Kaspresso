@@ -1,7 +1,7 @@
 package com.kaspersky.kaspressample.docloc_tests
 
 import android.Manifest
-import androidx.test.rule.ActivityTestRule
+import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.rule.GrantPermissionRule
 import io.github.kakaocup.kakao.screen.Screen
 import com.kaspersky.kaspressample.screen.SimpleScreen
@@ -24,7 +24,7 @@ class ScreenshotSampleTest : DocLocScreenshotTestCase(locales = "en,ru") {
     )
 
     @get:Rule
-    val activityRule = ActivityTestRule(SimpleActivity::class.java, false, true)
+    val activityRule = activityScenarioRule<SimpleActivity>()
 
     @ScreenShooterTest
     @Test
@@ -54,6 +54,7 @@ class ScreenshotSampleTest : DocLocScreenshotTestCase(locales = "en,ru") {
 
         step("4. Type text") {
             SimpleScreen {
+                closeSoftKeyboard()
                 edit {
                     clearText()
                     typeText("Kaspresso")

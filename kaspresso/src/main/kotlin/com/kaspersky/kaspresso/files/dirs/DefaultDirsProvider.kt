@@ -16,13 +16,10 @@ class DefaultDirsProvider(
     @Suppress("DEPRECATION")
     @SuppressLint("WorldReadableFiles", "ObsoleteSdkInt")
     override fun provideNew(dest: File): File {
-        val dir: File = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Environment.getExternalStorageDirectory().resolve(dest)
-        } else {
-            instrumentation.targetContext.applicationContext.getDir(
-                dest.canonicalPath,
-                Context.MODE_WORLD_READABLE
-            )
+        val dir: File = when {
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q -> instrumentation.targetContext.applicationContext.filesDir.resolve(dest)
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP -> Environment.getExternalStorageDirectory().resolve(dest)
+            else -> instrumentation.targetContext.applicationContext.getDir(dest.canonicalPath, Context.MODE_WORLD_READABLE)
         }
         return dir.createDirIfNeeded()
     }

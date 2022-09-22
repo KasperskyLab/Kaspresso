@@ -2,7 +2,7 @@ package com.kaspersky.kaspressample.continuously_tests
 
 import android.Manifest
 import android.os.Build
-import androidx.test.rule.ActivityTestRule
+import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.screen.ContinuouslyDialogScreen
@@ -26,17 +26,14 @@ class ContinuouslyTest : TestCase() {
     )
 
     @get:Rule
-    val activityTestRule = ActivityTestRule(MainActivity::class.java, true, false)
+    val activityRule = activityScenarioRule<MainActivity>()
 
     @Test
     fun testDialogPresentUntilAndroidO() {
         // Don`t allow to run this test on Android >= Oreo
         Assume.assumeTrue(Build.VERSION.SDK_INT < Build.VERSION_CODES.O)
 
-        before {
-            activityTestRule.launchActivity(null)
-        }.after {
-        }.run {
+        run {
 
             step("Open Continuously Screen") {
                 MainScreen {
@@ -69,10 +66,7 @@ class ContinuouslyTest : TestCase() {
         // Don`t allow to run this test on Android < Oreo
         Assume.assumeTrue(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
 
-        before {
-            activityTestRule.launchActivity(null)
-        }.after {
-        }.run {
+        run {
 
             step("Open Continuously Screen") {
                 MainScreen {

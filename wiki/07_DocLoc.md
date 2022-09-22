@@ -42,7 +42,7 @@ class ScreenshotSampleTest : DocLocScreenshotTestCase(
 
 There is one parameter passed in the base constructor: 
 - locales - comma-separated string with locales to run test with.
-Captured screenshots will be available in the device's storage at the path "/sdcard/screenshots/".
+Captured screenshots will be available in the device's storage at the path "/sdcard/screenshots/" for pre Android 11 devices and /data/data/<your_app_dir>/files/screenshots otherwise.
 
 For full example, check the [ScreenshotSampleTest](../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/docloc_tests/ScreenshotSampleTest.kt). 
 
@@ -132,53 +132,22 @@ In most cases, there is no need to launch certain activity, do a lot of steps be
 Also, when you use Model-View-Presenter architectural pattern, you are able to control UI state
 directly through the View interface. So, there is no need to interact with the application interface and wait for changes. 
  
-First create a base test activity with `setFragment(Fragment)` method in your application:
- 
-```kotlin
-class FragmentTestActivity : AppCompatActivity() {
-
-    fun setFragment(fragment: Fragment) = with(supportFragmentManager.beginTransaction()) {
-        replace(android.R.id.content, fragment)
-        commit()
-    }
-}
-```
-
-Then add a base product screenshot test case: 
- 
- ```kotlin
-open class ProductDocLocScreenshotTestCase : DocLocScreenshotTestCase(
-    locales = "en,ru"
-) {
-
-    @get:Rule
-    val activityTestRule = ActivityTestRule(FragmentTestActivity::class.java, false, true)
-
-    protected val activity: FragmentTestActivity
-        get() = activityTestRule.activity
-
-}
-```  
-
-This test case would run your `FragmentTestActivity` on startup. Now you are able to write your screenshooter tests. 
-For example, create a new test class which extends `ProductDocLocScreenshotTestCase`: 
+We can achieve that by using a `FragmentScenario`, like in the example below:
 
 ```kotlin
 @RunWith(AndroidJUnit4::class)
-class AdvancedScreenshotSampleTest : ProductDocLocScreenshotTestCase() {
-
-    private lateinit var fragment: FeatureFragment
-    private lateinit var view: FeatureView
+class AdvancedScreenshotSampleTest : DocLocScreenshotTestCase(locales = "en,ru") {
+    private lateinit var view: ScreenshotSampleView
 
     @ScreenShooterTest
     @Test
-    fun test() {
-        before {
-            fragment = FeatureFragment()
-            view = getUiSafeProxy(fragment as FeatureView)
-            activity.setFragment(fragment)
-        }.after {
-        }.run {
+    fun test() = before {
+        val scenario = launchFragmentInContainer<ScreenshotSampleFragment>()
+        scenario.onFragment {
+            view = getUiSafeProxy(it as ScreenshotSampleView)
+        }
+    }.after {
+    }.run {
 
             step("1. Step 1") {
                 // ... [view] calls
@@ -201,7 +170,7 @@ class AdvancedScreenshotSampleTest : ProductDocLocScreenshotTestCase() {
 }
 ```
 
-As you might notice, the `getUiSafeProxy` method called to get an instance of `FeatureView`. 
+As you might notice, the `getUiSafeProxy` method called to get an instance of `ScreenshotSampleView`. 
 This method wraps your View interface and returns a proxy on it. 
 The proxy guarantees that all the methods of the View interface you called, will be invoked on the main thread. 
 There is also `getUiSafeProxyFromImplementation` which wraps an implementation rather than an interface. 

@@ -2,7 +2,7 @@ package com.kaspersky.kaspressample.compose_tests
 
 import android.Manifest
 import androidx.test.espresso.web.webdriver.Locator
-import androidx.test.rule.ActivityTestRule
+import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.screen.MainScreen
@@ -20,96 +20,67 @@ class WebComposeTest : TestCase() {
     )
 
     @get:Rule
-    val activityTestRule = ActivityTestRule(MainActivity::class.java, true, false)
+    val activityRule = activityScenarioRule<MainActivity>()
 
     @Test
-    fun test() {
+    fun test() = run {
 
-        before {
-            activityTestRule.launchActivity(null)
-        }.after {
-        }.run {
+        step("Open WebView Screen") {
+            MainScreen {
+                webViewButton {
+                    hasAnyText()
+                    click()
+                }
+            }
+        }
 
-            step("Open WebView Screen") {
-                MainScreen {
-                    webViewButton {
-                        hasAnyText()
-                        click()
+        step("Find \"Interceptors\" and \"Logs\" title") {
+            WebViewScreen {
+                webView {
+                    withElement(Locator.ID, "interceptors") {
+                        containsText("Interceptors")
+                    }
+
+                    withElement(Locator.ID, "writing-readable-logs") {
+                        containsText("Writing readable logs")
                     }
                 }
             }
+        }
 
-            step("Find \"Sign in\" button and \"Protect your data\" title") {
-                WebViewScreen {
-
-                    webView {
-                        withElement(
-                            Locator.XPATH,
-                            "/html/body/div[1]/section[1]/div/div/h2"
-                        ) {
-                            containsText("Protect your data")
-                        }
-
-                        withElement(
-                            Locator.XPATH,
-                            "/html/body/div[1]/header/section/div[3]/div[2]/button"
-                        ) {
-                            hasText("Sign in")
+        step("Find \"Kaspresso wiki\" link") {
+            WebViewScreen {
+                webView {
+                    withElement(Locator.XPATH, "/html/body/p[39]/a") {
+                        compose(this@webView) {
+                            or {
+                                containsText("fffuuuuu")
+                                hasText("fuuuu")
+                            }
+                            or {
+                                containsText("Kaspresso kiwi")
+                                hasText("kiwi")
+                            }
+                            or {
+                                containsText("Kaspresso wiki")
+                                hasText("Kaspresso wiki")
+                            }
                         }
                     }
-                }
-            }
 
-            step("Click \"Contacts\" button") {
-                WebViewScreen {
-                    webView {
-                        withElement(
-                            Locator.XPATH,
-                            "/html/body/div[1]/footer/div/div/div[1]/nav/div[1]/a"
-                        ) {
-                            compose(this@webView) {
-                                or {
-                                    containsText("fffuuuuu")
-                                    hasText("fuuuu")
-                                }
-                                or {
-                                    containsText("Ask questiop")
-                                    hasText("Ask questiop")
-                                }
-                                or {
-                                    containsText("Ask question")
-                                    hasText("Ask question")
-                                }
-                                or {
-                                    containsText("Contacts")
-                                    hasText("Contacts")
-                                }
-                            }
+                    compose {
+                        orWithElement(Locator.XPATH, "/html/body/p[39]/a") {
+                            hasText("TRATATATA")
                         }
-
-                        compose {
-                            orWithElement(
-                                Locator.XPATH,
-                                "/html/body/div[1]/footer/div/div/div[1]/nav/div[1]/a"
-                            ) {
-                                hasText("TRATATATA")
-                            }
-                            orWithElement(
-                                Locator.XPATH,
-                                "/html/body/div[1]/footer/div/div/div[1]/nav/div[1]/a"
-                            ) {
-                                hasText("Ask question")
-                            } thenContinue {
-                                click()
-                            }
-                            orWithElement(
-                                Locator.XPATH,
-                                "/html/body/div[1]/footer/div/div/div[1]/nav/div[1]/a"
-                            ) {
-                                hasText("Contacts")
-                            } thenContinue {
-                                click()
-                            }
+                        orWithElement(Locator.XPATH, "/html/body/p[39]/a") {
+                            hasText("Kaspresso kiwi")
+                        } thenContinue {
+                            click()
+                        }
+                        orWithElement(Locator.XPATH, "/html/body/p[39]/a") {
+                            hasText("Kaspresso wiki")
+                        } thenContinue {
+                            // click()
                         }
                     }
                 }

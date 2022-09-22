@@ -24,7 +24,8 @@ dependencies {
     androidTestImplementation(projects.kaspresso)
     androidTestImplementation(projects.allureSupport)
 
-    androidTestImplementation(libs.androidXTestRunner)
+    androidTestImplementation(libs.androidXTestExtJunitKtx)
+    androidTestImplementation(libs.androidXTestExtJunit)
     androidTestImplementation(libs.junit)
 
     androidTestUtil(libs.androidXTestOrchestrator)

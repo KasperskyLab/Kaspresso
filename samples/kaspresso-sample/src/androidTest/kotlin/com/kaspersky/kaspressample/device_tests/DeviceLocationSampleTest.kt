@@ -6,11 +6,11 @@ import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
 import android.os.Looper
-import androidx.test.rule.ActivityTestRule
+import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.rule.GrantPermissionRule
-import io.github.kakaocup.kakao.screen.Screen
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
+import io.github.kakaocup.kakao.screen.Screen
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotNull
@@ -25,16 +25,16 @@ class DeviceLocationSampleTest : TestCase() {
         private const val MUNICH_LOCATION_LAT = 48.136414
         private const val MUNICH_LOCATION_LNG = 11.588115
         private const val DELTA = 0.001
+    }
 
-        private val EMPTY_LISTENER = object : LocationListener {
+    private val EMPTY_LISTENER = object : LocationListener {
 
-            override fun onLocationChanged(location: Location) {
-                // empty
-            }
+        override fun onLocationChanged(location: Location) {
+            // empty
+        }
 
-            override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {
-                // empty
-            }
+        override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {
+            // empty
         }
     }
 
@@ -46,7 +46,7 @@ class DeviceLocationSampleTest : TestCase() {
     )
 
     @get:Rule
-    val rule = ActivityTestRule(MainActivity::class.java, false, true)
+    val activityRule = activityScenarioRule<MainActivity>()
 
     private lateinit var manager: LocationManager
 
@@ -77,27 +77,25 @@ class DeviceLocationSampleTest : TestCase() {
                     MUNICH_LOCATION_LNG
                 )
 
-                /** Request single update to apply changes */
-                manager.requestSingleUpdate(
-                    LocationManager.GPS_PROVIDER,
-                    EMPTY_LISTENER,
-                    Looper.getMainLooper()
-                )
+                flakySafely(timeoutMs = 60_000, intervalMs = 500) {
+                    /** Request single update to apply changes */
+                    manager.requestSingleUpdate(
+                        LocationManager.GPS_PROVIDER,
+                        EMPTY_LISTENER,
+                        Looper.getMainLooper()
+                    )
 
-                flakySafely(timeoutMs = 10_000, intervalMs = 500) {
                     val location = manager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-                    assertNotNull(location)
+                    assertNotNull(location) // flakySafely doesn't retry after NPE
+                    assertEquals(
+                        MUNICH_LOCATION_LAT, location!!.latitude,
+                        DELTA
+                    )
+                    assertEquals(
+                        MUNICH_LOCATION_LAT, location.latitude,
+                        DELTA
+                    )
                 }
-
-                val location = manager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-                assertEquals(
-                    MUNICH_LOCATION_LAT, location!!.latitude,
-                    DELTA
-                )
-                assertEquals(
-                    MUNICH_LOCATION_LAT, location.latitude,
-                    DELTA
-                )
             }
         }
     }

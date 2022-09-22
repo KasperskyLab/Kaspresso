@@ -1,0 +1,76 @@
+check_android_task:
+  name: Run Android instrumented tests
+  env:
+    SCREENSHOTS_ROOT_DIR: /data/data/com.kaspersky.kaspressample/files/screenshots
+    TUTORIAL_SCREENSHOTS_ROOT_DIR: /data/data/com.kaspersky.kaspresso.tutorial/files/screenshots
+    ALLURE_SAMPLE_SCREENSHOTS_ROOT_DIR: /data/user/0/com.kaspersky.kaspresso.alluresupport.sample/files/screenshots
+    DISPLAY: :99
+  only_if: $CIRRUS_PR != '' && $CIRRUS_BASE_BRANCH == 'master'
+
+  container:
+    image: cirrusci/android-sdk:30
+    kvm: true
+    cpu: 8
+    memory: 24G
+  # xfce4 somehow helps to pass "Geolocation" test
+  install_de_script: |
+    export DEBIAN_FRONTEND=noninteractive
+    apt-get update
+    apt-get install xfce4 -y
+    apt-get purge -y pm-utils xscreensaver*
+    apt-get install xvfb -y
+  start_de_background_script: |
+    Xvfb :99 -screen 0 1000x1000x16 &
+    sleep 5
+    startxfce4
+  accept_licenses_script:
+    echo yes | sdkmanager --licenses
+  install_emulator_script:
+    # x86_64 somehow affect the "call" test
+    sdkmanager --install "system-images;android-30;google_apis;x86"
+  create_avd_script:
+    echo no | avdmanager create avd --force
+    -n emulator
+    -k "system-images;android-30;google_apis;x86"
+  start_avd_background_script:
+    $ANDROID_HOME/emulator/emulator
+    -avd emulator
+    -no-audio
+    -no-boot-anim
+    -gpu swiftshader_indirect
+    -no-snapshot
+    # -no-window is not used here because the flag somehow affects the "GPS" test. actual for API=30
+  assemble_instrumented_tests_script:
+    ./gradlew assembleDebugAndroidTest
+  wait_for_avd_script:
+    adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 3; done; input keyevent 82'
+  configure_avd_script: |
+    adb shell settings put global window_animation_scale 0.0
+    adb shell settings put global transition_animation_scale 0.0
+    adb shell settings put global animator_duration_scale 0.0
+    adb shell settings put secure spell_checker_enabled 0
+    adb shell settings put secure show_ime_with_hard_keyboard 1
+  start_adb_server_background_script:
+    java -jar artifacts/adbserver-desktop.jar || true
+  # After we do "adb root" connection is closed for a moment. So first attempt to pull screenshots usually fails
+  # That's why we make 5 attempts to pull folders  
+  run_tests_script: |
+    ./gradlew connectedDebugAndroidTest
+    if [[ $? != 0 ]]; then
+      mkdir sample_screenshots && adb root && for i in {1..5}; do adb pull $SCREENSHOTS_ROOT_DIR sample_screenshots; \
+          mkdir tutorial_screenshots && adb pull $TUTORIAL_SCREENSHOTS_ROOT_DIR tutorial_screenshots; \
+          adb pull $ALLURE_SAMPLE_SCREENSHOTS_ROOT_DIR allure_screenshots && break || sleep 5; done && return 1
+    fi
+  on_failure :
+    sample_report_artifacts:
+      path: "app/build/reports/androidTests/connected/**/*"
+    tutorial_report_artifacts:
+      path: "tutorial/build/reports/androidTests/connected/**/*"
+    allure_report_artifacts:
+      path: "kaspresso-allure-support-sample/build/reports/androidTests/connected/**/*"
+    sample_screenshots_artifacts:
+      path: "sample_screenshots/**/*"
+    tutorial_screenshots_artifacts:
+      path: "tutorial_screenshots/**/*"
+    allure_screenshots_artifacts:
+      path: "allure_screenshots/**/*"

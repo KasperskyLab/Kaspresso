@@ -1,7 +1,7 @@
 package com.kaspersky.kaspresso.alluresupport.sample
 
 import android.Manifest
-import androidx.test.rule.ActivityTestRule
+import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.components.alluresupport.addAllureSupport
 import com.kaspersky.components.alluresupport.files.attachViewHierarchyToAllureReport
@@ -42,12 +42,11 @@ class AllureSupportCustomizeTest : TestCase(
     )
 
     @get:Rule
-    val activityRule = ActivityTestRule(MainActivity::class.java, true, false)
+    val activityRule = activityScenarioRule<MainActivity>()
 
     @Test
     fun counter() = run {
         step("Launch the app") {
-            activityRule.launchActivity(null)
 
             MainScreen {
                 incrementButton.isDisplayed()

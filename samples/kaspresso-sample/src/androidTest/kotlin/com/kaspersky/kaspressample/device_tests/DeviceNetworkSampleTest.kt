@@ -1,6 +1,7 @@
 package com.kaspersky.kaspressample.device_tests
 
 import android.Manifest
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.Network
@@ -10,7 +11,7 @@ import android.net.wifi.WifiManager
 import android.os.Build
 import android.provider.Settings
 import android.telephony.TelephonyManager
-import androidx.test.rule.ActivityTestRule
+import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspressample.device.DeviceSampleActivity
 import com.kaspersky.kaspressample.utils.SafeAssert.assertFalseSafely
@@ -31,35 +32,35 @@ class DeviceNetworkSampleTest : TestCase() {
     )
 
     @get:Rule
-    val activityTestRule = ActivityTestRule(DeviceSampleActivity::class.java, true, true)
+    val activityRule = activityScenarioRule<DeviceSampleActivity>()
 
     private val currentOsVersion = Build.VERSION.SDK_INT
 
     @Test
     fun networkSampleTest() {
         before {
-            device.network.enable()
+            tryToggleNetwork(shouldEnable = true)
         }.after {
-            device.network.enable()
+            tryToggleNetwork(shouldEnable = true)
         }.run {
 
             step("Disable network") {
-                device.network.disable()
+                tryToggleNetwork(shouldEnable = false)
                 assertFalseSafely { isDataConnected() }
-                checkWifi(desiredState = false)
+                checkWifi(shouldBeEnabled = false)
             }
 
             step("Enable network") {
-                device.network.enable()
+                tryToggleNetwork(shouldEnable = true)
                 assertTrueSafely { isDataConnected() }
-                checkWifi(desiredState = true)
+                checkWifi(shouldBeEnabled = true)
             }
 
             step("Toggle WiFi") {
-                device.network.toggleWiFi(false)
-                checkWifi(desiredState = false)
-                device.network.toggleWiFi(true)
-                checkWifi(desiredState = true)
+                tryToggleWifi(shouldEnable = false)
+                checkWifi(shouldBeEnabled = false)
+                tryToggleWifi(shouldEnable = true)
+                checkWifi(shouldBeEnabled = true)
             }
 
             step("Toggle Mobile data") {
@@ -113,9 +114,9 @@ class DeviceNetworkSampleTest : TestCase() {
         return Settings.Global.getInt(device.context.contentResolver, "mobile_data", 0) == 1
     }
 
-    private fun BaseTestContext.checkWifi(desiredState: Boolean) {
+    private fun BaseTestContext.checkWifi(shouldBeEnabled: Boolean) {
         try {
-            if (desiredState) assertTrueSafely { isWiFiEnabled() } else assertFalseSafely { isWiFiEnabled() }
+            if (shouldBeEnabled) assertTrueSafely { isWiFiEnabled() } else assertFalseSafely { isWiFiEnabled() }
         } catch (assertionError: AssertionError) {
             // There is no mind to check wi-fi in Android emulators before Android 7.1 because
             // wi-fi doesn't have a simulated Wi-Fi access point on such emulators
@@ -128,4 +129,26 @@ class DeviceNetworkSampleTest : TestCase() {
     private fun BaseTestContext.isWiFiEnabled(): Boolean =
         (device.context.getSystemService(Context.WIFI_SERVICE) as? WifiManager)?.isWifiEnabled
             ?: throw IllegalStateException("WifiManager is unavailable")
+
+    private fun tryToggleNetwork(shouldEnable: Boolean) {
+        try {
+            if (shouldEnable) {
+                device.network.enable()
+            } else {
+                device.network.disable()
+            }
+        } catch (ex: ActivityNotFoundException) { // There's no WIFI activity on AVD with API < 25
+            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.N) return
+            throw ex
+        }
+    }
+
+    private fun tryToggleWifi(shouldEnable: Boolean) {
+        try {
+            device.network.toggleWiFi(shouldEnable)
+        } catch (ex: ActivityNotFoundException) { // There's no WIFI activity on AVD with API < 25
+            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.N) return
+            throw ex
+        }
+    }
 }

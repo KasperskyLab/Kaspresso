@@ -145,7 +145,8 @@ data class Kaspresso(
     internal val objectBehaviorInterceptors: List<ObjectBehaviorInterceptor>,
     internal val deviceBehaviorInterceptors: List<DeviceBehaviorInterceptor>,
     internal val stepWatcherInterceptors: List<StepWatcherInterceptor>,
-    internal val testRunWatcherInterceptors: List<TestRunWatcherInterceptor>
+    internal val testRunWatcherInterceptors: List<TestRunWatcherInterceptor>,
+    internal val resourceFilesProvider: ResourceFilesProvider
 ) {
 
     companion object {
@@ -830,7 +831,7 @@ data class Kaspresso(
                     FlakySafeViewBehaviorInterceptor(flakySafetyParams, libLogger)
                 ) else mutableListOf(
                     AutoScrollViewBehaviorInterceptor(autoScrollParams, libLogger),
-                    FlakySafeViewBehaviorInterceptor(flakySafetyParams, libLogger)
+                    FlakySafeViewBehaviorInterceptor(flakySafetyParams, libLogger),
                 )
 
             if (!::dataBehaviorInterceptors.isInitialized) dataBehaviorInterceptors =
@@ -930,6 +931,7 @@ data class Kaspresso(
                 ),
 
                 instrumentalDependencyProvider = instrumentalDependencyProviderFactory.getTestProvider(instrumentation),
+                resourceFilesProvider = resourceFilesProvider,
 
                 params = Params(
                     flakySafetyParams = flakySafetyParams,
@@ -957,7 +959,7 @@ data class Kaspresso(
                 deviceBehaviorInterceptors = deviceBehaviorInterceptors,
 
                 stepWatcherInterceptors = stepWatcherInterceptors,
-                testRunWatcherInterceptors = testRunWatcherInterceptors
+                testRunWatcherInterceptors = testRunWatcherInterceptors,
             )
 
             configurator.waitForIdleTimeout = kautomatorWaitForIdleSettings.waitForIdleTimeout

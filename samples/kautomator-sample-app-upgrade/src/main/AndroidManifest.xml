@@ -7,6 +7,10 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
+    <queries>
+        <package android:name="com.kaspersky.kaspressample" />
+    </queries>
+
     <application
         android:name="androidx.multidex.MultiDexApplication"
         android:allowBackup="true"

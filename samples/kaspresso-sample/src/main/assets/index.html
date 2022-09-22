@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <p><a href="https://android-arsenal.com/details/1/7896"><img src="https://img.shields.io/badge/Android%20Arsenal-Kaspresso-green.svg?style=flat" alt="Android Arsenal"></a>
+        <a href="http://androidweekly.net/issues/issue-383"><img src="https://img.shields.io/badge/Android%20Weekly-383-green.svg" alt="Android Weekly"></a>
+        <a href="http://androidweekly.net/issues/issue-392"><img src="https://img.shields.io/badge/Android%20Weekly-392-green.svg" alt="Android Weekly"></a>
+        <a href="https://search.maven.org/artifact/com.kaspersky.android-components/kaspresso"><img src="https://img.shields.io/maven-central/v/com.kaspersky.android-components/kaspresso" alt="MavenCentral"></a>
+        <img src="https://github.com/KasperskyLab/Kaspresso/workflows/Build%20and%20Deploy/badge.svg" alt="Build and Deploy">
+        <a href="https://t.me/kaspresso"><img src="https://img.shields.io/static/v1?label=Telegram&amp;message=RU&amp;color=0088CC" alt="Telegram"></a>
+        <a href="https://t.me/kaspresso_en"><img src="https://img.shields.io/static/v1?label=Telegram&amp;message=EN&amp;color=0088CC" alt="Telegram"></a></p>
+        <h1 id="kaspresso">Kaspresso</h1>
+        <p>Kaspresso is a great framework for UI testing. Based on <a href="https://developer.android.com/training/testing/espresso">Espresso</a> and <a href="https://developer.android.com/training/testing/ui-automator">UI Automator</a>, Kaspresso provides a wide range of additional amazing features, such as:</p>
+        <ul>
+        <li>100% stability, no flakiness.</li>
+        <li>Jetpack Compose support <strong>[Early access]</strong>.</li>
+        <li>Significantly faster execution of UI Automator commands.
+        With Kaspresso, some UI Automator commands run <strong>10 times faster</strong>!</li>
+        <li>Excellent readability due to human DSL.</li>
+        <li>Incredible mechanism of interceptors that allows you to catch all actions and assertions in one place.</li>
+        <li>Full logging.</li>
+        <li>Ability to call ADB commands.</li>
+        <li>UI tests writing philosophy, implemented with DSL.</li>
+        <li>Features screenshotting.</li>
+        <li>Robolectric support.</li>
+        <li>Allure support.</li>
+        </ul>
+        <p>And many more!</p>
+        <p><img src="https://habrastorage.org/webt/dw/jh/9k/dwjh9kypjl637kxj8tiaxwjvtp0.png" alt="Kaspresso"></p>
+        <h2 id="capabilities-of-kaspresso">Capabilities of Kaspresso</h2>
+        <h3 id="readability">Readability</h3>
+        <p>We like the syntax that <a href="https://github.com/KakaoCup/Kakao">Kakao</a> applies to write UI tests. This wrapper over Espresso uses the Kotlin DSL approach, that makes the code significantly shorter and more readable. See the difference:</p>
+        <p><strong>Espresso</strong>:</p>
+        <pre><code class="lang-kotlin">@<span class="hljs-keyword">Test</span>
+        fun testFirstFeature() {
+            <span class="hljs-selector-tag">onView</span>(<span class="hljs-selector-tag">withId</span>(<span class="hljs-selector-tag">R</span><span class="hljs-selector-class">.id</span><span class="hljs-selector-class">.toFirstFeature</span>))
+                <span class="hljs-selector-class">.check</span>(<span class="hljs-selector-tag">ViewAssertions</span><span class="hljs-selector-class">.matches</span>(
+                       <span class="hljs-selector-tag">ViewMatchers</span><span class="hljs-selector-class">.withEffectiveVisibility</span>(
+                               <span class="hljs-selector-tag">ViewMatchers</span><span class="hljs-selector-class">.Visibility</span><span class="hljs-selector-class">.VISIBLE</span>)))
+            <span class="hljs-selector-tag">onView</span>(<span class="hljs-selector-tag">withId</span>(<span class="hljs-selector-tag">R</span><span class="hljs-selector-class">.id</span><span class="hljs-selector-class">.toFirstFeature</span>))<span class="hljs-selector-class">.perform</span>(<span class="hljs-selector-tag">click</span>())
+        }
+        </code></pre>
+        <p><strong>Kakao</strong>:</p>
+        <pre><code class="lang-kotlin"><span class="hljs-meta">@Test</span>
+        <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">testFirstFeature</span><span class="hljs-params">()</span></span> {
+            mainScreen {
+                toFirstFeatureButton {
+                    isVisible()
+                    click()
+                }
+            }
+        }
+        </code></pre>
+        <p>We used the same approach to develop our own wrapper over UI Automator, and we called it <em>Kautomator</em>. Take a look at the code below:</p>
+        <p><strong>UI Automator</strong>:</p>
+        <pre><code class="lang-kotlin">val <span class="hljs-keyword">instrumentation: </span><span class="hljs-keyword">Instrumentation </span>= <span class="hljs-keyword">InstrumentationRegistry.getInstrumentation()
+        </span>val uiDevice = UiDevice.getInstance(<span class="hljs-keyword">instrumentation)
+        </span>
+        val uiObject = uiDevice.<span class="hljs-keyword">wait(
+        </span>    Until.findObject(
+                <span class="hljs-keyword">By.res(
+        </span>            <span class="hljs-string">"com.kaspersky.kaspresso.sample_kautomator"</span>,
+                    <span class="hljs-string">"editText"</span>
+                )
+            ),
+            <span class="hljs-number">2</span>_000
+        )
+        
+        uiObject<span class="hljs-meta">.text</span> = <span class="hljs-string">"Kaspresso"</span>
+        assertEquals(uiObject<span class="hljs-meta">.text</span>, <span class="hljs-string">"Kaspresso"</span>)
+        </code></pre>
+        <p><strong>Kautomator</strong>:</p>
+        <pre><code class="lang-kotlin"><span class="hljs-class">MainScreen </span>{
+            <span class="hljs-class">simpleEditText </span>{
+                replaceText(<span class="hljs-string">"Kaspresso"</span>)
+                hasText(<span class="hljs-string">"Kaspresso"</span>)
+            }
+        }
+        </code></pre>
+        <p>Since Kakao and Kautomator provide almost identical APIs, you don’t have to care about what is under the hood of your tests, either Espresso or UI Automator. With Kaspresso, you write the same tests for both.</p>
+        <p>Read about <a href="/wiki/01_Wrapper_over_Espresso.md">Kakao</a> and <a href="/wiki/02_Wrapper_over_UiAutomator.md">Kautomator</a> in details.</p>
+        <p>However, Kakao and Kautomator themselves don&#39;t help you to see the relation between the test and the corresponding test case. Also, a long test often becomes a giant piece of code that is impossible to split into smaller parts.
+        That&#39;s why we have created an additional Kotlin DSL that allows you to read your test more easily. </p>
+        <p>See the example below:</p>
+        <pre><code class="lang-kotlin"><span class="hljs-variable">@Test</span>
+        fun shouldPassOnNoInternetScanTest() =
+            beforeTest {
+                <span class="hljs-selector-tag">activityTestRule</span><span class="hljs-selector-class">.launchActivity</span>(null)
+                <span class="hljs-comment">// some things with the state</span>
+            }<span class="hljs-selector-class">.afterTest</span> {
+                <span class="hljs-comment">// some things with the state</span>
+            }.run {
+                <span class="hljs-selector-tag">step</span>(<span class="hljs-string">"Open Simple Screen"</span>) {
+                    <span class="hljs-selector-tag">MainScreen</span> {
+                        <span class="hljs-selector-tag">nextButton</span> {
+                            <span class="hljs-selector-tag">isVisible</span>()
+                            <span class="hljs-selector-tag">click</span>()
+                        }
+                    }
+                }
+        
+                <span class="hljs-selector-tag">step</span>(<span class="hljs-string">"Click button_1 and check button_2"</span>) {
+                    <span class="hljs-selector-tag">SimpleScreen</span> {
+                        <span class="hljs-selector-tag">button1</span> {
+                            <span class="hljs-selector-tag">click</span>()
+                        }
+                        <span class="hljs-selector-tag">button2</span> {
+                            <span class="hljs-selector-tag">isVisible</span>()
+                        }
+                    }
+                }
+        
+                <span class="hljs-selector-tag">step</span>(<span class="hljs-string">"Click button_2 and check edit"</span>) {
+                    <span class="hljs-selector-tag">SimpleScreen</span> {
+                        <span class="hljs-selector-tag">button2</span> {
+                            <span class="hljs-selector-tag">click</span>()
+                        }
+                        <span class="hljs-selector-tag">edit</span> {
+                            <span class="hljs-selector-tag">flakySafely</span>(timeoutMs = <span class="hljs-number">7000</span>) { <span class="hljs-selector-tag">isVisible</span>() }
+                            <span class="hljs-selector-tag">hasText</span>(R.string.text_edit_text)
+                        }
+                    }
+                }
+        
+                <span class="hljs-selector-tag">step</span>(<span class="hljs-string">"Check all possibilities of edit"</span>) {
+                    <span class="hljs-selector-tag">scenario</span>(
+                        CheckEditScenario()
+                    )
+                }
+            }
+        </code></pre>
+        <h3 id="stability">Stability</h3>
+        <p>Sometimes your UI test passes ten times, then breaks on the eleventh attempt for some mysterious reason. It’s called <em>flakiness</em>. </p>
+        <p>The most popular reason for flakiness is the instability of the UI tests libraries, such as Espresso and UI Automator. To eliminate this instability, Kaspresso uses DSL wrappers and <a href="#Interceptors">interceptors</a>. </p>
+        <p>Also, <a href="/wiki/04_How_to_write_autotests.md#sweet-additional-features">some Kaspresso features</a> can help you resolve a lot of typical problems in UI testing.</p>
+        <h3 id="ui-test-libraries-acceleration">UI test libraries acceleration</h3>
+        <p>Let’s watch some short video that shows the difference between the original UI Automator (on the right) and the accelerated one (on the left).</p>
+        <p><img src="https://habrastorage.org/webt/ti/kv/ki/tikvkij1vjesnacrxqm-lk0coly.gif" alt=""></p>
+        <p>Here is <a href="./wiki/02_Wrapper_over_UiAutomator.md#accelerate-ui-automator">a short explanation</a> of why it is possible.</p>
+        <p><a name="Interceptors"></a></p>
+        <h3 id="interceptors">Interceptors</h3>
+        <p>We developed <a href="/wiki/03_Kaspresso_configurator.md#some-words-about-behavior-interceptors">Kaspresso behavior interceptors</a> on the base of <a href="/wiki/03_Kaspresso_configurator.md#kaspresso-interceptors-based-on-kakaokautomator-interceptors">Kakao/Kautomator Interceptors</a> to catch failures.</p>
+        <p>Thanks to interceptors, you can do a lot of useful things, such as:</p>
+        <ul>
+        <li>add custom actions to each library operation like writing a log or taking a screenshot;</li>
+        <li>overcome flaky library operations by re-running failed actions, scrolling the parent layout or removing the android system dialog;</li>
+        </ul>
+        <p>and many more (see <a href="/wiki/03_Kaspresso_configurator.md#kaspresso-interceptors-based-on-kakaokautomator-interceptors">the manual</a>).</p>
+        <h3 id="writing-readable-logs">Writing readable logs</h3>
+        <p>Kaspresso writes its own logs, detailed and readable:</p>
+        <p><img src="https://habrastorage.org/webt/03/nn/qg/03nnqgupdqnwa_i4jwyz1uqq6r0.png" />
+        <img src="https://habrastorage.org/webt/tq/az/3v/tqaz3vjsgpw0-ivylrfbnuqyiqa.png" /></p>
+        <h3 id="ability-to-call-adb-commands">Ability to call ADB commands</h3>
+        <p>Espresso and UI Automator don&#39;t allow to call ADB commands from inside a test. To fix this problem, we developed Autotest AdbServer (see the <a href="./wiki/06_AdbServer.md">wiki</a>).</p>
+        <h3 id="ability-to-work-with-android-system">Ability to work with Android System</h3>
+        <p>You can use Kaspresso classes to work with Android System.</p>
+        <p>For example, with the <code>Device</code> class you can:</p>
+        <ul>
+        <li>push/pull files,</li>
+        <li>enable/disable network,</li>
+        <li>give permissions like a user does,</li>
+        <li>emulate phone calls,</li>
+        <li>take screenshots,</li>
+        <li>enable/disable GPS,</li>
+        <li>set geolocation,</li>
+        <li>enable/disable accessibility,</li>
+        <li>change the app language,</li>
+        <li>collect and parse the logcat output.</li>
+        </ul>
+        <p>(see more about the <a href="/wiki/05_Device.md">Device class</a>).</p>
+        <h3 id="features-screenshotting">Features screenshotting</h3>
+        <p>If you develop an application that is available across the world, you have to <em>localize</em> it into different languages. When UI is localized, it’s important for the translator to see the context of a word or a phrase, that is the specific screen. </p>
+        <p>With Kaspresso, translators can automatically take a screenshot of any screen. It’s incredibly fast, even for legacy screens, and you don&#39;t have to refactor or mock anything (see <a href="/wiki/07_DocLoc.md">the manual</a>).</p>
+        <h3 id="configurability">Configurability</h3>
+        <p>You can tune any part of Kaspresso (read <a href="/wiki/03_Kaspresso_configurator.md">more</a>)</p>
+        <h3 id="robolectric-support">Robolectric support</h3>
+        <p>You can run your UI-tests on the JVM environment. Additionally, almost all interceptors improving stability, readability and other will work. 
+        Read <a href="/wiki/08_Kaspresso-Robolectric.md">more</a>. </p>
+        <h3 id="allure-support">Allure support</h3>
+        <p>Kaspresso can generate very detailed Allure-reports for each test:
+        <img src="https://habrastorage.org/webt/tq/t7/ch/tqt7chcdczrgduhoukqhx1ertfc.png" alt="">
+        More information is available <a href="/wiki/09_Kaspresso-Allure.md">here</a>. </p>
+        <h3 id="jetpack-compose-support-early-access-">Jetpack Compose support (Early access)</h3>
+        <p>Now, you can write your Kaspresso tests for Jetpack Compose screens! DSL and all principles are the same. 
+        So, you will not see any difference between tests for View screens and for Compose screens.
+        More information is available <a href="/wiki/10_Jetpack-Compose.md">here</a>.</p>
+        <p><strong>Keep in mind it&#39;s early access that may contain bugs. Also, API can be changed, but we are going to avoid it. Be free to create relative issues if you&#39;ve encountered with any kind of problem.</strong></p>
+        <h2 id="philosophy">Philosophy</h2>
+        <p>The tool itself, even the perfect one, can not solve all the problems in writing UI tests. It’s important to know how to write tests and how to organize the entire process. Our team has great experience in introducing autotests in different companies. We shared our knowledge on <a href="/wiki/04_How_to_write_autotests.md">writing autotests</a>.</p>
+        <h2 id="wiki">Wiki</h2>
+        <p>For all information check <a href="/wiki/00_Home.md">Kaspresso wiki</a></p>
+        <h2 id="integration">Integration</h2>
+        <p>To integrate Kaspresso into your project:</p>
+        <ol>
+        <li>If the <code>mavenCentral</code> repository does not exist, include it to your root <code>build.gradle</code> file:</li>
+        </ol>
+        <pre><code class="lang-groovy"><span class="hljs-class">allprojects </span>{
+            <span class="hljs-class">repositories </span>{
+                mavenCentral()
+            }
+        }
+        </code></pre>
+        <ol>
+        <li>Add a dependency to <code>build.gradle</code>:</li>
+        </ol>
+        <pre><code class="lang-groovy"><span class="hljs-keyword">dependencies</span> {
+            androidTestImplementation <span class="hljs-string">'com.kaspersky.android-components:kaspresso:&lt;latest_version&gt;'</span>
+            <span class="hljs-comment">// Allure support</span>
+            androidTestImplementation <span class="hljs-string">"com.kaspersky.android-components:kaspresso-allure-support:&lt;latest_version&gt;"</span>
+            <span class="hljs-comment">// Jetpack Compose support</span>
+            androidTestImplementation <span class="hljs-string">"com.kaspersky.android-components:kaspresso-compose-support:&lt;latest_version&gt;"</span>
+        }
+        </code></pre>
+        <p>If you are still using the old Android Support libraries, we strongly recommend to migrate to AndroidX.</p>
+        <p>The last version with Android Support libraries is:</p>
+        <pre><code class="lang-groovy"><span class="hljs-section">dependencies</span> {
+            <span class="hljs-attribute">androidTestImplementation</span> <span class="hljs-string">'com.kaspersky.android-components:kaspresso:1.0.1-support'</span>
+        }
+        </code></pre>
+        <h2 id="samples">Samples</h2>
+        <p>All samples are available in the <a href="/samples">samples</a> folder. </p>
+        <p>Most of the samples require AdbServer. To start AdbServer you should do the following steps:</p>
+        <ol>
+        <li>Go to the <code>Kaspresso</code> folder<pre><code>cd ~<span class="hljs-regexp">/Workspace/</span>Kaspresso
+        </code></pre></li>
+        <li>Start <code>adbserver-desktop.jar</code><pre><code>java -jar <span class="hljs-keyword">artifacts</span><span class="hljs-regexp">/adbserver-desktop.jar</span>
+        </code></pre></li>
+        </ol>
+        <h2 id="storage-issues">Storage issues</h2>
+        <p>Kaspresso can use external storage to save various data about executed tests. The example of such data is screenshots, xml dumps, logs, video and anymore.
+        But, new Android OS provides absolutely new way to work with external storage - Scoped Storage. Currently, we are working on the support of Scoped Storage.
+        While Scoped Storage support is on the way, there is an option to request different permissions to make an access to saved data possible on any Android OS. 
+        Here, it&#39;s a detailed instruction:</p>
+        <ol>
+        <li>AndroidManifest.xml (in your debug build variant to keep production manifest without any changes)
+        ```xml<h1 id="please-add-these-permissions">Please, add these permissions</h1>
+        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+        <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/><uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"/>
+        
+        </li>
+        </ol>
+        <p>&lt;application</p>
+        <pre><code><span class="hljs-meta"># storage support for Android API 29         </span>
+        <span class="hljs-symbol">android:</span>requestLegacyExternalStorage=<span class="hljs-string">"true"</span>
+        ...
+        </code></pre><p></application>             </p>
+        <pre><code><span class="hljs-selector-tag">2</span>. <span class="hljs-selector-tag">Your</span> <span class="hljs-selector-tag">test</span> <span class="hljs-selector-tag">class</span>:
+        ```<span class="hljs-selector-tag">kotlin</span>
+        <span class="hljs-selector-tag">class</span> <span class="hljs-selector-tag">SampleTest</span> : <span class="hljs-selector-tag">TestCase</span>(
+            kaspressoBuilder = Kaspresso.Builder.simple( <span class="hljs-comment">// simple/advanced - it doesn't matter</span>
+                customize = { 
+                    <span class="hljs-comment">// storage support for Android API 30+</span>
+                    if (isAndroidRuntime) {
+                        UiDevice
+                            .getInstance(instrumentation)
+                            .executeShellCommand(<span class="hljs-string">"appops set --uid ${InstrumentationRegistry.getInstrumentation().targetContext.packageName} MANAGE_EXTERNAL_STORAGE allow"</span>)
+                    }
+                }
+            )
+        ) {
+        
+            <span class="hljs-comment">// storage support for Android API 29-</span>
+            <span class="hljs-variable">@get:</span>Rule
+            val <span class="hljs-attribute">runtimePermissionRule</span>: GrantPermissionRule = GrantPermissionRule.grant(
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            )
+        
+            <span class="hljs-comment">//...</span>
+        }
+        </code></pre><p>Remember, it&#39;s a temporary working solution. 
+        A little bit later, Kaspresso will use external storage only through Scoped Storage and you will not be forced to request all mentioned permissions.</p>
+        <h2 id="breaking-changes">Breaking changes</h2>
+        <h3 id="1-2-0">1.2.0</h3>
+        <ul>
+        <li>We&#39;ve totally reworked AdbServer and Kaspresso 1.2.0 works only with new <code>artifacts/adbserver-desktop.jar</code><br>
+        The old version <code>artifacts/desktop_1_1_0.jar</code> is also available for use with older versions of Kaspresso.</li>
+        <li>If you use <code>device.logcat</code> in your tests, you should call <code>device.logcat.disableChatty</code> in the <code>before</code> section of your test.
+        In previous version of Kaspresso, <code>device.logcat.disableChatty</code> was called automatically during initialization. This resulted in the need to always run AdbServer before tests.<h3 id="1-2-1">1.2.1</h3>
+        </li>
+        <li>Kaspresso migrated to a new version of Kakao which has <code>io.github.kakaocup.kakao</code> package name. Replace all imports using command 
+        <code>find . -type f \( -name &quot;*.kt&quot; -o -name &quot;*.java&quot; \) -print0 | xargs -0 sed -i &#39;&#39; -e &#39;s/com.agoda/io.github.kakaocup/g&#39;</code> or using global replacement tool in IDE.</li>
+        </ul>
+        <h2 id="contribution">Contribution</h2>
+        <p>Kaspresso is an open source project, so you are welcome to contribute (see the <a href="https://github.com/KasperskyLab/Kaspresso/blob/master/CONTRIBUTING.md">Contribution Guidelines</a>).</p>
+        <h2 id="license">License</h2>
+        <p>Kaspresso is available under the <a href="https://github.com/KasperskyLab/Kaspresso/blob/master/LICENSE">Apache License, Version 2.0</a>.</p>
+</body>
+</html>

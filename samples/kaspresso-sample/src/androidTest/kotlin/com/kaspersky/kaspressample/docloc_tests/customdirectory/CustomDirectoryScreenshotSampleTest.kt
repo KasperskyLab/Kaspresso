@@ -1,8 +1,8 @@
 package com.kaspersky.kaspressample.docloc_tests.customdirectory
 
 import android.Manifest
+import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.platform.app.InstrumentationRegistry
-import androidx.test.rule.ActivityTestRule
 import androidx.test.rule.GrantPermissionRule
 import io.github.kakaocup.kakao.screen.Screen
 import com.kaspersky.kaspressample.screen.SimpleScreen
@@ -40,7 +40,7 @@ class CustomDirectoryScreenshotSampleTest : DocLocScreenshotTestCase(
     )
 
     @get:Rule
-    val activityRule = ActivityTestRule(SimpleActivity::class.java, false, true)
+    val activityRule = activityScenarioRule<SimpleActivity>()
 
     @ScreenShooterTest
     @Test

@@ -13,51 +13,24 @@ The base class for all docloc screenshot tests.
 
 Project-wide ScreenshotTestCase should be implemented as following:
 
-    open class ProductDocLocScreenshotTestCase(testName: String) : DocLocScreenshotTestCase(  
-        File(testName), "comma-separated string of locales"  
-    ) {  
+    class AdvancedScreenshotSampleTest : DocLocScreenshotTestCase(locales = "en,ru") {
+        private lateinit var view: ScreenshotSampleView
   
-        @get:Rule  
-        val activityTestRule = ActivityTestRule(FragmentTestActivity::class.java, true, false)  
-  
-        protected lateinit var activity: FragmentTestActivity  
-  
-        @Before  
-        open fun setUp() {  
-            activity = activityTestRule.launchActivity(null)  
-        }  
-    }
-
-Screenshoter test extends the project-wide class:
-
-    @ScreenShooterTest  
-    class FeatureScreenshot : ProductDocLocScreenshotTestCase("feature_screenshot") {  
-  
-        @Test  
-        fun featureScreen() {  
-            val featureView = FeatureFragment.newInstance()  
-            activity.setFragment(featureView)  
-            val view = getUiSafeProxy<FeatureView>(featureView) // Explicit type is important and must be interface  
-  
-            view.showLoading()  
-            captureScreenshot("screenshot_description")  
-        }  
-    }
-
-As you might have noticed, activity test rule is launched with ``FragmentTestActivity``. It's a special per-project empty activity for test with ``setFragment(Fragment)`` method. E.g:
-
-    class FragmentTestActivity : AppCompatActivity() {  
-  
-        override fun onCreate(savedInstanceState: Bundle?) {  
-            super.onCreate(savedInstanceState)  
-            setContentView(R.layout.activity_fragment_container)  
-        }  
-  
-        fun setFragment(fragment: Fragment) {  
-            val fragmentTransaction = supportFragmentManager.beginTransaction()  
-            fragmentTransaction.replace(R.id.content_container, fragment, "")  
-            fragmentTransaction.build()  
-        }  
+        @ScreenShooterTest
+        @Test
+        fun test() = before {
+            val scenario = launchFragmentInContainer<ScreenshotSampleFragment>()
+            scenario.onFragment {
+                view = getUiSafeProxy(it as ScreenshotSampleView)
+            }
+        }.after {
+        }.run {
+             step("1. Step 1") {
+                // ... [view] calls
+                captureScreenshot("Step 1")
+            }
+            ...
+        }
     }
 
 abstract class [DocLocScreenshotTestCase](index.md)(**screenshotsDirectory**: [File](https://docs.oracle.com/javase/8/docs/api/java/io/File.html), **screenshotDirectoryProvider**: [ScreenshotDirectoryProvider](../../com.kaspersky.kaspresso.device.screenshots.screenshotfiles/-screenshot-directory-provider/index.md), **screenshotNameProvider**: [ScreenshotNameProvider](../../com.kaspersky.kaspresso.device.screenshots.screenshotfiles/-screenshot-name-provider/index.md), **changeSystemLocale**: [Boolean](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html), **locales**: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)?, **kaspressoBuilder**: [Kaspresso.Builder](../../com.kaspersky.kaspresso.kaspresso/-kaspresso/-builder/index.md)) : [TestCase](../-test-case/index.md)   

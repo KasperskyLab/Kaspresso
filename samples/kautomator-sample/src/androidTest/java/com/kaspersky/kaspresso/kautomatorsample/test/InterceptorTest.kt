@@ -1,7 +1,7 @@
 package com.kaspersky.kaspresso.kautomatorsample.test
 
 import android.Manifest
-import androidx.test.rule.ActivityTestRule
+import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.components.kautomator.KautomatorConfigurator
 import com.kaspersky.components.kautomator.component.text.UiButton
@@ -25,7 +25,7 @@ class InterceptorTest : TestCase() {
     )
 
     @get:Rule
-    val activityTestRule = ActivityTestRule(MainActivity::class.java, true, false)
+    val activityRule = activityScenarioRule<MainActivity>()
 
     private val interceptorMainScreen = InterceptedMainScreen()
 
@@ -43,7 +43,6 @@ class InterceptorTest : TestCase() {
                     }
                 }
             }
-            activityTestRule.launchActivity(null)
         }.after {
         }.run {
             step("Simple action on default Screen") {
@@ -62,24 +61,19 @@ class InterceptorTest : TestCase() {
     }
 
     @Test
-    fun testScreenInterceptors() {
-        before {
-            activityTestRule.launchActivity(null)
-        }.after {
-        }.run {
-            step("Simple action on Intercepted Screen") {
-                interceptorMainScreen {
-                    simpleButton {
-                        isDisplayed()
-                        click()
-                    }
+    fun testScreenInterceptors() = run {
+        step("Simple action on Intercepted Screen") {
+            interceptorMainScreen {
+                simpleButton {
+                    isDisplayed()
+                    click()
                 }
             }
+        }
 
-            step("Check Intercepting correctness") {
-                interceptorMainScreen {
-                    assertEquals(mutableListOf("ALL", "CHECK", "ALL", "PERFORM"), screenList)
-                }
+        step("Check Intercepting correctness") {
+            interceptorMainScreen {
+                assertEquals(mutableListOf("ALL", "CHECK", "ALL", "PERFORM"), screenList)
             }
         }
     }
@@ -88,10 +82,7 @@ class InterceptorTest : TestCase() {
     fun testViewInterceptors() {
         val list = mutableListOf<String>()
 
-        before {
-            activityTestRule.launchActivity(null)
-        }.after {
-        }.run {
+        run {
             step("Simple action on default Screen with intercepted View") {
                 MainScreen {
                     simpleButton {
@@ -127,7 +118,6 @@ class InterceptorTest : TestCase() {
                     }
                 }
             }
-            activityTestRule.launchActivity(null)
         }.after {
         }.run {
             step("Simple action on intercepted Screen with intercepted View") {
@@ -173,7 +163,6 @@ class InterceptorTest : TestCase() {
                     }
                 }
             }
-            activityTestRule.launchActivity(null)
         }.after {
         }.run {
             step("Simple action on intercepted Screen with intercepted View") {

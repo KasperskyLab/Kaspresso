@@ -97,7 +97,6 @@ See the example below:
 @Test
 fun shouldPassOnNoInternetScanTest() =
     beforeTest {
-        activityTestRule.launchActivity(null)
         // some things with the state
     }.afterTest {
         // some things with the state
