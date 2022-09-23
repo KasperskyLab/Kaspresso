@@ -66,11 +66,11 @@ check_android_task:
     adb pull $ALLURE_SAMPLE_SCREENSHOTS_ROOT_DIR allure_screenshots || true;
   always:
     sample_report_artifacts:
-      path: "app/build/reports/androidTests/connected/**/*"
+      path: "samples/kaspresso-sample/build/reports/androidTests/connected/**/*"
     tutorial_report_artifacts:
       path: "tutorial/build/reports/androidTests/connected/**/*"
     allure_report_artifacts:
-      path: "kaspresso-allure-support-sample/build/reports/androidTests/connected/**/*"
+      path: "allure-support-sample/build/reports/androidTests/connected/**/*"
     sample_screenshots_artifacts:
       path: "sample_screenshots/**/*"
     tutorial_screenshots_artifacts:
