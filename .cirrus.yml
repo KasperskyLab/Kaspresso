@@ -59,11 +59,11 @@ check_android_task:
   pull_screenshots_script: |
     adb root
     mkdir sample_screenshots
-    for i in {1..25}; do adb pull $SCREENSHOTS_ROOT_DIR sample_screenshots && break || sleep 5; done
+    for i in {1..5}; do adb pull $SCREENSHOTS_ROOT_DIR sample_screenshots && break || sleep 5; done
     mkdir tutorial_screenshots
-    adb pull $TUTORIAL_SCREENSHOTS_ROOT_DIR tutorial_screenshots
+    adb pull $TUTORIAL_SCREENSHOTS_ROOT_DIR tutorial_screenshots;
     mkdir allure_screenshots
-    adb pull $ALLURE_SAMPLE_SCREENSHOTS_ROOT_DIR allure_screenshots
+    adb pull $ALLURE_SAMPLE_SCREENSHOTS_ROOT_DIR allure_screenshots || true;
   always:
     sample_report_artifacts:
       path: "app/build/reports/androidTests/connected/**/*"
