@@ -3,7 +3,7 @@ check_android_task:
   env:
     SCREENSHOTS_ROOT_DIR: /data/data/com.kaspersky.kaspressample/files/screenshots
     TUTORIAL_SCREENSHOTS_ROOT_DIR: /data/data/com.kaspersky.kaspresso.tutorial/files/screenshots
-    ALLURE_SAMPLE_SCREENSHOTS_ROOT_DIR: /data/user/0/com.kaspersky.kaspresso.alluresupport.sample/files/screenshots
+    ALLURE_SAMPLE_RESULTS_ROOT_DIR: /data/data/com.kaspersky.kaspresso.alluresupport.sample/files/allure-results
     DISPLAY: :99
   only_if: $CIRRUS_PR != '' && $CIRRUS_BASE_BRANCH == 'master'
 
@@ -61,20 +61,20 @@ check_android_task:
     mkdir sample_screenshots
     for i in {1..5}; do adb pull $SCREENSHOTS_ROOT_DIR sample_screenshots && break || sleep 5; done
     mkdir tutorial_screenshots
-    adb pull $TUTORIAL_SCREENSHOTS_ROOT_DIR tutorial_screenshots;
-    mkdir allure_screenshots
-    adb pull $ALLURE_SAMPLE_SCREENSHOTS_ROOT_DIR allure_screenshots || true;
+    adb pull $TUTORIAL_SCREENSHOTS_ROOT_DIR tutorial_screenshots
+    mkdir allure_results
+    adb pull $ALLURE_SAMPLE_RESULTS_ROOT_DIR allure_results
   always:
     sample_report_artifacts:
       path: "samples/kaspresso-sample/build/reports/androidTests/connected/**/*"
     tutorial_report_artifacts:
       path: "tutorial/build/reports/androidTests/connected/**/*"
     allure_report_artifacts:
-      path: "allure-support-sample/build/reports/androidTests/connected/**/*"
+      path: "samples/kaspresso-allure-support-sample/build/reports/androidTests/connected/**/*"
     sample_screenshots_artifacts:
       path: "sample_screenshots/**/*"
     tutorial_screenshots_artifacts:
       path: "tutorial_screenshots/**/*"
-    allure_screenshots_artifacts:
-      path: "allure_screenshots/**/*"
-
+    allure_results_artifacts:
+      path: "allure_results/**/*"
+    
