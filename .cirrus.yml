@@ -61,7 +61,7 @@ check_android_task:
     mkdir sample_screenshots
     for i in {1..5}; do adb pull $SCREENSHOTS_ROOT_DIR sample_screenshots && break || sleep 5; done
     mkdir tutorial_screenshots
-    adb pull $TUTORIAL_SCREENSHOTS_ROOT_DIR tutorial_screenshots;
+    adb pull $TUTORIAL_SCREENSHOTS_ROOT_DIR tutorial_screenshots || true
     mkdir allure_results
     adb pull $ALLURE_SAMPLE_RESULTS_ROOT_DIR allure_results
   always:
