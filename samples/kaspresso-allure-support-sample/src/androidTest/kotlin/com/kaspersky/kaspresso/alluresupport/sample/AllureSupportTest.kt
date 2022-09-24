@@ -46,7 +46,7 @@ class AllureSupportTest : TestCase(
                         }
                     }
 
-                    assertValue(5)
+                    assertValue(6) // TODO revert to 5 after CI test
                 }
             }
 
