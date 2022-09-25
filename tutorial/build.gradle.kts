@@ -19,7 +19,7 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.5.1")
     implementation("com.google.android.material:material:1.6.1")
 
-    androidTestImplementation("com.kaspersky.android-components:kaspresso:1.4.1")
+    androidTestImplementation("com.kaspersky.android-components:kaspresso:1.4.1") // TODO Update to new release to fix screenshots path
     androidTestImplementation("androidx.test.ext:junit-ktx:1.1.3")
 
     androidTestUtil("androidx.test:orchestrator:1.4.1")

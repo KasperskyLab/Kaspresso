@@ -1,8 +1,8 @@
 check_android_task:
   name: Run Android instrumented tests
   env:
-    SCREENSHOTS_ROOT_DIR: /data/data/com.kaspersky.kaspressample/files/screenshots
-    TUTORIAL_SCREENSHOTS_ROOT_DIR: /data/data/com.kaspersky.kaspresso.tutorial/files/screenshots
+    SCREENSHOTS_ROOT_DIR: /data/user/0/com.kaspersky.kaspressample/files/screenshots
+    TUTORIAL_SCREENSHOTS_ROOT_DIR: /data/user/0/com.kaspersky.kaspresso.tutorial/files/screenshots
     ALLURE_SAMPLE_RESULTS_ROOT_DIR: /data/data/com.kaspersky.kaspresso.alluresupport.sample/files/allure-results
     DISPLAY: :99
   only_if: $CIRRUS_PR != '' && $CIRRUS_BASE_BRANCH == 'master'
