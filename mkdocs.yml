@@ -63,6 +63,7 @@ nav:
     - Breaking changes: Home/Breaking-changes.md
   - Tutorial:
     - Скачиваем проект и Android Studio: Tutorial/Android_studio.md
+    - Запуск первого теста: Running_the_first_test.md
     - Ваш первый тест на Kaspresso: Tutorial/simple_test.md
     - Тестирование за рамками приложения: Tutorial/off-screen_work.md
     - Flaky safely. Сontinuously, compose.: Tutorial/Flaky safely.md
