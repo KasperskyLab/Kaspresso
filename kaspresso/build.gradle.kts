@@ -1,6 +1,7 @@
 plugins {
     id("convention.android-library")
     id("convention.publication-android-lib")
+    id("convention.third-party-report")
 }
 
 // TODO: move to publishing convention
