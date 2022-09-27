@@ -27,19 +27,14 @@ publishing.publications.withType<MavenPublication> {
 
         developers {
             developer {
-                id.set("matzuk")
-                name.set("Eugene Matsyuk")
-                url.set("https://github.com/matzuk")
-            }
-            developer {
                 id.set("AzamatCherchesov")
                 name.set("Azamat Cherchesov")
                 url.set("https://github.com/AzamatCherchesov")
             }
             developer {
-                id.set("Nikitae57")
-                name.set("Nikita Evdokimov")
-                url.set("https://github.com/Nikitae57")
+                id.set("eakurnikov")
+                name.set("Egor Kurnikov")
+                url.set("https://github.com/eakurnikov")
             }
             developer {
                 id.set("Fullik")
@@ -47,14 +42,14 @@ publishing.publications.withType<MavenPublication> {
                 url.set("https://github.com/Fullik")
             }
             developer {
-                id.set("maxsurovtsev")
-                name.set("Maxim Surovtsev")
-                url.set("https://github.com/maxsurovtsev")
+                id.set("matzuk")
+                name.set("Eugene Matsyuk")
+                url.set("https://github.com/matzuk")
             }
             developer {
-                id.set("eakurnikov")
-                name.set("Egor Kurnikov")
-                url.set("https://github.com/eakurnikov")
+                id.set("Nikitae57")
+                name.set("Nikita Evdokimov")
+                url.set("https://github.com/Nikitae57")
             }
             developer {
                 id.set("RuslanMingaliev")
