@@ -6,7 +6,7 @@
 
 <img src="../images/launch_test.png" alt="launch_test"/>
 
-<br> Выбираем устройство, на котором будем запускать приложение (а в последствии и тесты). В моем случае - Kasspresso device. 
+<br> Выбираем устройство, на котором будем запускать приложение (а впоследствии и тесты). В моем случае - Kasspresso device. 
 
 <img src="../images/device_select.png" alt="device_select"/>
 
