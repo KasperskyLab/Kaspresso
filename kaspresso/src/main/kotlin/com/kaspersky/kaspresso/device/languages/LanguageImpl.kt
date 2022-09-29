@@ -23,6 +23,9 @@ class LanguageImpl(
             if (stage == Stage.CREATED) {
                 cachedActivity = activity
             }
+            if ((stage == Stage.DESTROYED) and (cachedActivity == activity)) {
+                cachedActivity = null
+            }
         }
 
     init {
