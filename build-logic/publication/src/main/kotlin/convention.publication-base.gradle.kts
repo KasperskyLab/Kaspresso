@@ -21,7 +21,7 @@ publishing.publications.withType<MavenPublication> {
         licenses {
             license {
                 name.set("Apache License, Version 2.0")
-                url.set("https://github.com/KasperskyLab/Kaspresso/blob/master/LICENSE")
+                url.set("https://github.com/KasperskyLab/Kaspresso/blob/master/LICENSE.txt")
             }
         }
 
