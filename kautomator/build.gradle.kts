@@ -4,6 +4,16 @@ plugins {
     id("convention.third-party-report")
 }
 
+// TODO: move to publishing convention
+android {
+    libraryVariants.configureEach {
+        packageLibraryProvider.configure {
+            from("LICENSE.txt")
+            from("NOTICE.txt")
+        }
+    }
+}
+
 publish {
     artifactId.set("kautomator")
 }
