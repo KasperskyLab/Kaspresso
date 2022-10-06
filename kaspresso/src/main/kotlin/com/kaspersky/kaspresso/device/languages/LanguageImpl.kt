@@ -7,7 +7,8 @@ import androidx.test.runner.lifecycle.ActivityLifecycleCallback
 import androidx.test.runner.lifecycle.ActivityLifecycleMonitorRegistry
 import androidx.test.runner.lifecycle.Stage
 import com.kaspersky.kaspresso.logger.UiTestLogger
-import java.util.Locale
+import java.lang.ref.WeakReference
+import java.util.*
 
 /**
  * The implementation of [Language]
@@ -17,11 +18,11 @@ class LanguageImpl(
     private val context: Context
 ) : Language {
 
-    private var cachedActivity: Activity? = null
+    private var wRefCachedActivity: WeakReference<Activity>? = null
     private val lifecycleCallback: ActivityLifecycleCallback =
         ActivityLifecycleCallback { activity, stage ->
             if (stage == Stage.CREATED) {
-                cachedActivity = activity
+                wRefCachedActivity = WeakReference(activity)
             }
         }
 
@@ -41,7 +42,7 @@ class LanguageImpl(
 
         try {
             applyCurrentLocaleToContext(
-                context = cachedActivity ?: context,
+                context = wRefCachedActivity?.get() ?: context,
                 locale = locale
             )
             logger.i("Switch the language in the Application to $locale: success")
@@ -49,7 +50,7 @@ class LanguageImpl(
             logger.e("Switch the language in the Application to $locale: failed with the error: $error")
             throw error
         } finally {
-            cachedActivity = null
+            wRefCachedActivity = null
         }
     }
 
