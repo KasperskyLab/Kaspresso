@@ -2,6 +2,7 @@ package com.kaspersky.kaspresso.device.languages
 
 import android.app.Activity
 import android.content.Context
+import android.os.Build
 import androidx.core.os.ConfigurationCompat
 import androidx.test.runner.lifecycle.ActivityLifecycleCallback
 import androidx.test.runner.lifecycle.ActivityLifecycleMonitorRegistry
@@ -69,6 +70,14 @@ class LanguageImpl(
         Locale.setDefault(locale)
         val configuration = resources.configuration
         configuration.setLocale(locale)
+        // For issue DocLocScreenshotTestCase does not change locale to sr-Latn-RS: https://github.com/KasperskyLab/Kaspresso/issues/389
+        // added hotfix. For next releases we will find more correct solution.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            if (locale.country.equals("Latn", true) &&
+                locale.language.equals("sr", true)) {
+                configuration.setLocale(Locale.Builder().setLanguage("sr").setScript("Latn").build())
+            }
+        }
         resources.updateConfiguration(configuration, resources.displayMetrics)
     }
 }
