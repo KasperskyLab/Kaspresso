@@ -8,7 +8,7 @@ plugins {
 android {
     libraryVariants.configureEach {
         packageLibraryProvider.configure {
-            from("LICENSE.txt")
+            from("$rootDir/LICENSE.txt")
             from("NOTICE.txt")
         }
     }
