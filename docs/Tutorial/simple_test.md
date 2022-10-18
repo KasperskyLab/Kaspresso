@@ -1,18 +1,18 @@
 # Ваш первый тест на Kaspresso
 
-В прошлом уроке мы запустили первый автотест, который уже был написан за нас. Давайте посмотрим, что там внутри:
+<br> В прошлом уроке мы запустили первый автотест, который уже был написан за нас. Давайте посмотрим, что там внутри:
 
-Открываем выбор конфигурации (1) и выбираем tutorial (2):
-<img src="../images/simple_test/Select_tutorial.png" alt="Select tutorial" width="200"/>
+<br> Открываем выбор конфигурации (1) и выбираем tutorial (2):
+<img src="../images/simple_test/Select_tutorial.png" alt="Select tutorial"/>
 
-Проверяем, что выбран нужный девайс (1) и запускаем приложение (2):
-<img src="../images/simple_test/Launch_tutorial.png" alt="Launch tutorial" width="200"/>
+<br> Проверяем, что выбран нужный девайс (1) и запускаем приложение (2):
+<img src="../images/simple_test/Launch_tutorial.png" alt="Launch tutorial"/>
 
-После успешного запуска приложения мы видим основной экран приложения Tutorial. 
-<img src="../images/simple_test/Tutorial_main.png" alt="Tutorial main" width="200"/>
+<br> После успешного запуска приложения мы видим основной экран приложения Tutorial. 
+<img src="../images/simple_test/Tutorial_main.png" alt="Tutorial main"/>
 
-Нажимаем на кнопку с текстом "Simple test":
-<img src="../images/simple_test/First_tutorial_screen.png" alt="Page object example" width="200"/>
+<br> Нажимаем на кнопку с текстом "Simple test":
+<img src="../images/simple_test/First_tutorial_screen.png" alt="Page object example"/>
 
 <br> Экран состоит из:
 <br> 1. *Заголовка `TextView`*
@@ -21,11 +21,11 @@
 
 <br> При нажатии на кнопку текст в заголовке меняется на введенный в поле ввода.
 
-Чтобы покрыть приложение тестами Kaspresso, необходимо начать с подключения Kaspresso в зависимостях проекта.
+<br> Чтобы покрыть приложение тестами Kaspresso, необходимо начать с подключения Kaspresso в зависимостях проекта.
 
 ## Подключаем Kaspresso к проекту
 
-1. Подключаем в файл `build.gradle` проекта репозиторий `mavenCentral`
+<br> 1. Подключаем в файл `build.gradle` проекта репозиторий `mavenCentral`
 
 ```groovy
 allprojects {
@@ -35,9 +35,9 @@ allprojects {
 }
 ```
 
-2. Переключаем отображение файлов проекта как Project (1) и добавляем зависимость в файл `build.gradle` главного модуля:
+<br> 2. Переключаем отображение файлов проекта как Project (1) и добавляем зависимость в файл `build.gradle` главного модуля:
 
-<img src="../images/simple_test/Tutorial_build_gradle.png" alt="Tutorial build gradle" width="200"/>
+<img src="../images/simple_test/Tutorial_build_gradle.png" alt="Tutorial build gradle"/>
 
 
 ```groovy
