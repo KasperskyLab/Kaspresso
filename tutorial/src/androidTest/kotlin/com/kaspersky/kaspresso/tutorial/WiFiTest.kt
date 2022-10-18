@@ -1,4 +1,4 @@
-package com.kaspersky.kaspresso.tutorial.test
+package com.kaspersky.kaspresso.tutorial
 
 import android.content.res.Configuration
 import androidx.test.ext.junit.rules.activityScenarioRule

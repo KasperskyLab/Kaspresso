@@ -1,11 +1,8 @@
-package com.kaspersky.kaspresso.tutorial.test
+package com.kaspersky.kaspresso.tutorial
 
-import android.Manifest
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.rules.activityScenarioRule
-import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
-import com.kaspersky.kaspresso.tutorial.R
 import com.kaspersky.kaspresso.tutorial.screen.SimpleScreen
 import com.kaspersky.kaspresso.tutorial.simple.SimpleActivity
 import org.junit.Rule
