@@ -2,7 +2,17 @@
 
 В прошлом уроке мы запустили первый автотест, который уже был написан за нас. Давайте посмотрим, что там внутри:
 
-<img src="../images/First_tutorial_screen.png" alt="Page object example" width="200"/>
+Открываем выбор конфигурации (1) и выбираем tutorial (2):
+<img src="../images/simple_test/Select_tutorial.png" alt="Select tutorial" width="200"/>
+
+Проверяем, что выбран нужный девайс (1) и запускаем приложение (2):
+<img src="../images/simple_test/Launch_tutorial.png" alt="Launch tutorial" width="200"/>
+
+После успешного запуска приложения мы видим основной экран приложения Tutorial. 
+<img src="../images/simple_test/Tutorial_main.png" alt="Tutorial main" width="200"/>
+
+Нажимаем на кнопку с текстом "Simple test":
+<img src="../images/simple_test/First_tutorial_screen.png" alt="Page object example" width="200"/>
 
 <br> Экран состоит из:
 <br> 1. *Заголовка `TextView`*
@@ -10,6 +20,8 @@
 <br> 3. *Кнопки `Button`*
 
 <br> При нажатии на кнопку текст в заголовке меняется на введенный в поле ввода.
+
+Чтобы покрыть приложение тестами Kaspresso, необходимо начать с подключения Kaspresso в зависимостях проекта.
 
 ## Подключаем Kaspresso к проекту
 
@@ -23,7 +35,10 @@ allprojects {
 }
 ```
 
-2. Добавляем зависимость в файл `build.gradle` главного модуля
+2. Переключаем отображение файлов проекта как Project (1) и добавляем зависимость в файл `build.gradle` главного модуля:
+
+<img src="../images/simple_test/Tutorial_build_gradle.png" alt="Tutorial build gradle" width="200"/>
+
 
 ```groovy
 dependencies {
@@ -40,8 +55,8 @@ dependencies {
 ```
 
 ## Написание теста начнем с создания Page object для текущего экрана.
-<br/> Про паттерн PageObject в Kaspresso можно прочитать в [документации](https://azamatcherchesov.github.io/github_pages/Documentation/PageObject/).<br/>
-<br/> В папке `androidTest` создаем объект `SimpleScreen`
+<br/> Про паттерн PageObject в Kaspresso можно прочитать в [документации](https://kasperskylab.github.io/Kaspresso/Wiki/Page%20object%20in%20Kaspresso/).<br/>
+<br/> В папке `androidTest` создаем создаем папку screen и кладем туда объект `SimpleScreen`
 
 ```kotlin
 object SimpleScreen : KScreen<SimpleScreen>() {
@@ -54,7 +69,7 @@ object SimpleScreen : KScreen<SimpleScreen>() {
     val input = KEditText { withId(R.id.input_text) }
 }
 ```
-<br> В этом объекте мы описываем элементы интерфейса, с которым будет взаимодействовать тест. Здесь стоит обратить внимание на то, что мы один раз кладем matcher-ы в конструктор `View`. В самом тесте мы сможем обращаться к SimpleScreen и его элементам напрямую.
+<br> В этом объекте мы описываем элементы интерфейса, с которым будет взаимодействовать тест. Здесь стоит обратить внимание на то, что мы один раз кладем matcher-ы в конструктор `View` ({ withId(R.id...)}). В самом тесте мы сможем обращаться к SimpleScreen и его элементам напрямую.
 <br> Для поиска нужного `View` можно использовать сразу несколько matcher-ов. Например, если у какого-то элемента нет `id`, мы можем найти его с помощью нескольких matcher-ов. 
 <br> В объекте SimpleScreen переопределены `layoutId` и `ViewClass`. Если их корректно не проинициализировать (например, присвоить `null`), то на работоспособность теста это влиять не будет. Но мы рекомендуем не игнорировать их и корректно инициализировать. Это поможет при разработке и дальнейшей поддержки понимать, с каким `ViewClass` и `layoutId` связан конкретный Screen.
 
