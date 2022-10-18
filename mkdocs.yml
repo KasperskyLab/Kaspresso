@@ -56,7 +56,6 @@ theme:
 
 nav:
   - Home:
-#     - About Kaspresso: Home/Kaspresso.md
     - About Kaspresso: index.md
     - Kaspresso in articles: Home/Kaspresso-in-articles.md
     - Kasspresso in videos: Home/Kaspresso-in-videos.md
@@ -93,6 +92,7 @@ nav:
    - KAutomator docs: Documentation/kautomator/index.md
    - ADB Server: Documentation/adb-server/index.md
 
+#     - About Kaspresso: Home/Kaspresso.md
 markdown_extensions:
   - admonition
   - pymdownx.details
