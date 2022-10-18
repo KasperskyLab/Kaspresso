@@ -12,11 +12,11 @@
 
 <br> После успешного запуска приложения мы видим основной экран приложения Tutorial.
 
-<img src="../images/simple_test/Tutorial_main.png" alt="Tutorial main"/>
+<img src="../images/simple_test/Tutorial_main.png" alt="Tutorial main" width="200"/>
 
-<br> Нажимаем на кнопку с текстом "Simple test":
+<br> Нажимаем на кнопку с текстом "Simple test" и видим следующий экран:
 
-<img src="../images/simple_test/First_tutorial_screen.png" alt="Page object example"/>
+<img src="../images/simple_test/First_tutorial_screen.png" alt="Page object example" width="200"/>
 
 <br> Экран состоит из:
 <br> 1. *Заголовка `TextView`*
