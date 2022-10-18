@@ -44,15 +44,16 @@ theme:
     code: Roboto Mono
  # favicon: assets/favicon.png
 
-  features:
-    - navigation.tabs
-    - content.code.annotate
-    - navigation.tabs.sticky
-    - navigation.instant
-    - navigation.tracking
-    - navigation.top
-    - search.suggest
-    - search.highlight
+  features:   
+    - tabs
+#     - navigation.tabs
+#     - content.code.annotate
+#     - navigation.tabs.sticky
+#     - navigation.instant
+#     - navigation.tracking
+#     - navigation.top
+#     - search.suggest
+#     - search.highlight
 
 nav:
   - 'About Kaspresso': Home/Kaspresso.md
