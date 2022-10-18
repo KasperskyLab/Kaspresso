@@ -1,4 +1,4 @@
-package com.kaspersky.kaspresso.tutorial.test
+package com.kaspersky.kaspresso.tutorial
 
 import com.kaspersky.kaspresso.internal.exceptions.AdbServerException
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase

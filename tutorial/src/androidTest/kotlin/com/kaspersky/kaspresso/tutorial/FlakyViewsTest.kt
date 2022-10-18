@@ -1,4 +1,4 @@
-package com.kaspersky.kaspresso.tutorial.test
+package com.kaspersky.kaspresso.tutorial
 
 import androidx.test.ext.junit.rules.activityScenarioRule
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
