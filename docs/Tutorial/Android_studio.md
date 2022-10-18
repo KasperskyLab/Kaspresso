@@ -64,3 +64,5 @@
 <img src="../images/Hyper_Visor_next.png" alt="Hyper_Visor_next"/>
 
 <br> Итог: Android Studio скачена, эмулятор настроен, проект Kaspresso скачен. В следующем уроке запустим первые тесты.
+
+<br> Test
