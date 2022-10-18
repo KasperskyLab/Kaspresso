@@ -29,7 +29,8 @@
 
 ## Подключаем Kaspresso к проекту
 
-<br> 1. Подключаем в файл `build.gradle` проекта репозиторий `mavenCentral`
+<br> 1. Переключаем отображение файлов проекта как Project (1) и подключаем в файл `build.gradle` проекта репозиторий `mavenCentral` (2):
+<img src="../images/simple_test/Project_build_gradle.png" alt="Project build gradle"/>
 
 ```groovy
 allprojects {
@@ -39,7 +40,7 @@ allprojects {
 }
 ```
 
-<br> 2. Переключаем отображение файлов проекта как Project (1) и добавляем зависимость в файл `build.gradle` главного модуля:
+<br> 2. Переключаем отображение файлов проекта как Project (1) и добавляем зависимость в файл `build.gradle` модуля `Tutorial`:
 
 <img src="../images/simple_test/Tutorial_build_gradle.png" alt="Tutorial build gradle"/>
 
@@ -47,14 +48,6 @@ allprojects {
 ```groovy
 dependencies {
     androidTestImplementation 'com.kaspersky.android-components:kaspresso:<latest_version>'
-}
-```
-
-<br> Если Вы используете Android Support, мы рекомендуем мигрировать на AndroidX. Последняя поддерживаемая версия для Android Supprot:
-
-```groovy
-dependencies {
-    androidTestImplementation 'com.kaspersky.android-components:kaspresso:1.0.1-support'
 }
 ```
 
