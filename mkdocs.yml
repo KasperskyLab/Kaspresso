@@ -56,7 +56,7 @@ theme:
 
 nav:
   - Home:
-    - About Kaspresso: index.md
+    - About Kaspresso: Home/Kaspresso.md
     - Kaspresso in articles: Home/Kaspresso-in-articles.md
     - Kasspresso in videos: Home/Kaspresso-in-videos.md
     - Our users: Home/Kaspresso users.md
