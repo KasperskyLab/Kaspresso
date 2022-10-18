@@ -3,15 +3,19 @@
 <br> В прошлом уроке мы запустили первый автотест, который уже был написан за нас. Давайте посмотрим, что там внутри:
 
 <br> Открываем выбор конфигурации (1) и выбираем tutorial (2):
+
 <img src="../images/simple_test/Select_tutorial.png" alt="Select tutorial"/>
 
 <br> Проверяем, что выбран нужный девайс (1) и запускаем приложение (2):
+
 <img src="../images/simple_test/Launch_tutorial.png" alt="Launch tutorial"/>
 
-<br> После успешного запуска приложения мы видим основной экран приложения Tutorial. 
+<br> После успешного запуска приложения мы видим основной экран приложения Tutorial.
+
 <img src="../images/simple_test/Tutorial_main.png" alt="Tutorial main"/>
 
 <br> Нажимаем на кнопку с текстом "Simple test":
+
 <img src="../images/simple_test/First_tutorial_screen.png" alt="Page object example"/>
 
 <br> Экран состоит из:
