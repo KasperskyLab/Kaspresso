@@ -46,14 +46,14 @@ theme:
 
   features:   
     - tabs
-#     - navigation.tabs
-#     - content.code.annotate
-#     - navigation.tabs.sticky
-#     - navigation.instant
-#     - navigation.tracking
-#     - navigation.top
-#     - search.suggest
-#     - search.highlight
+    - navigation.tabs
+    - content.code.annotate
+    - navigation.tabs.sticky
+    - navigation.instant
+    - navigation.tracking
+    - navigation.top
+    - search.suggest
+    - search.highlight
 
 nav:
   - 'About Kaspresso': index.md
