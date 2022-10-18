@@ -53,7 +53,9 @@ dependencies {
 
 ## Написание теста начнем с создания Page object для текущего экрана.
 <br/> Про паттерн PageObject в Kaspresso можно прочитать в [документации](https://kasperskylab.github.io/Kaspresso/Wiki/Page%20object%20in%20Kaspresso/).<br/>
-<br/> В папке `androidTest` создаем создаем папку screen и кладем туда объект `SimpleScreen`
+<br/> В папке `androidTest` создаем папку `screen` и кладем туда объект `SimpleScreen`:
+
+<br> Имея доступ к исходному коду `Tutorial` мы можем увидеть, что интересующий нас экран отображается в `SimpleActivity`, а сама верстка лежит в файле `activity_simple`. Поэтому, в данном случае мы можем воспользоваться `white-box тестированием` (детальнее про этот тип тестирования можно узнать [здесь](https://ru.wikipedia.org/wiki/%D0%A2%D0%B5%D1%81%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5_%D0%B1%D0%B5%D0%BB%D0%BE%D0%B3%D0%BE_%D1%8F%D1%89%D0%B8%D0%BA%D0%B0)).
 
 ```kotlin
 object SimpleScreen : KScreen<SimpleScreen>() {
@@ -61,7 +63,7 @@ object SimpleScreen : KScreen<SimpleScreen>() {
     override val layoutId: Int = R.layout.activity_simple
     override val viewClass: Class<*> = SimpleActivity::class.java
 
-    val title = KButton { withId(R.id.simple_title) }
+    val title = KTextView { withId(R.id.simple_title) }
     val button = KButton { withId(R.id.change_title_btn) }
     val input = KEditText { withId(R.id.input_text) }
 }
@@ -71,6 +73,76 @@ object SimpleScreen : KScreen<SimpleScreen>() {
 <br> В объекте SimpleScreen переопределены `layoutId` и `ViewClass`. Если их корректно не проинициализировать (например, присвоить `null`), то на работоспособность теста это влиять не будет. Но мы рекомендуем не игнорировать их и корректно инициализировать. Это поможет при разработке и дальнейшей поддержки понимать, с каким `ViewClass` и `layoutId` связан конкретный Screen.
 
 ## Приступаем с коду самого теста
+
+<br> В папке `androidTest` создаем класс `SimpleTest`:
+
+```kotlin
+class SimpleTest : TestCase() {
+
+    @get:Rule
+    val activityRule = activityScenarioRule<SimpleActivity>()
+
+    @Test
+    fun test() {
+
+    }
+}
+```
+
+<br> Тест `SimpleTest` можно запустить. Информацию по запуску тестов в Android Studio можно найти в  [предыдущем уроке](https://kasperskylab.github.io/Kaspresso/Tutorial/Running_the_first_test/)
+<br> Этот тест осуществит запуск указанной activity `SimpleActivity` перед запуском теста и закроет после прогона теста. За это отвечает:
+
+```kotlin
+    @get:Rule
+    val activityRule = activityScenarioRule<SimpleActivity>()
+```
+
+<br> Подробнее про `activityScenarioRule` можно почитать [здесь](https://developer.android.com/reference/androidx/test/ext/junit/rules/ActivityScenarioRule)
+
+<br> SimpleTest унаследован от TestCase. Это не единственный способ создать тестовый класс. В случае, когда невозможно отнаследоваться от TestCase (в Java и Kotlin запрещено множественное наследование), можно использовать TestCaseRule. 
+
+```kotlin
+ @get:Rule
+ val testCaseRule = TestCaseRule(javaClass.simpleName)
+```
+
+<br>В этом случае тело тестового метода должно начинаться с обращения к этому инстансу:
+
+```kotlin
+@Test
+fun test() =
+  testCaseRule.run {
+      ...
+  }
+```
+
+<br> Расширим код теста `test()` в `SimpleTest` проверкой, что заголовок отображается и отображает ожидаемый текст.
+
+```kotlin
+class SimpleTest : TestCase() {
+
+    @get:Rule
+    val activityRule = activityScenarioRule<SimpleActivity>()
+
+    @Test
+    fun test() {
+        SimpleScreen {
+            title {
+                isVisible()
+                hasText(R.string.simple_activity_default_title)
+            }
+        }
+    }
+}
+```
+
+<br> Обращаемся к созданному нами выше PageObject-у `SimpleScreen`. У этого объекта мы объявили поле заголовка `title`. Внутри блока `title{ }` доступны различные методы. 
+<br> Сейчас нас интересуют методы `isVisible()` и `hasText()`. 
+<br> Элемент `title` объявлен с типом `KTextView`. Это класс-обертка в `Kaspresso`, которая реализует интерфейсы `TextViewActions` и `TextViewAssertions`. Первый определяет набор действий, которые могут быть выполнены над заголовком, а второй - набор проверок. 
+<br> Рекомендуем посмотреть код этих интерфейсов, их родителей и аналогичные интерфейсы для других элементов.
+
+## Расширим код теста
+
 ```kotlin
 class SimpleTest : TestCase() {
 
@@ -111,21 +183,7 @@ class SimpleTest : TestCase() {
 }
 ```
 
-<br> SimpleTest унаследован от TestCase. Это не единственный способ создать тестовый класс. В случае, когда невозможно отнаследоваться от TestCase, можно использовать TestCaseRule. 
-```kotlin
- @get:Rule
- val testCaseRule = TestCaseRule(javaClass.simpleName)
-```
-В этом случае тело тестового метода должно начинаться с обращения к этому инстансу:
-```kotlin
-@Test
-fun test() =
-  testCaseRule.run {
-      ...  
-  }
-```
-
-<br> Рассмотрим сам тест. Благодаря реализации паттерна Page object и Kotlin DSL код теста становится простым и понятным: сперва мы проверили корректность отображения нужных элементов, затем ввели текст в поле ввода, нажали кнопку и проверили, что заголовок изменился. Однако, код любого теста - это реализация определенных тест-кейсов. Сам же тест-кейс - это некий сценарий (последовательность шагов), написанный на человеческом языке тестировщиком. Этот набор шагов может со временем меняться, поэтому спустя какое-то время возникнет потребность в редактировании теста. Помимо этого, тест может не всегда проходить успешно. Чтобы тест было легко поддерживать и он оставался понятным спустя долгое время, он должен быть разделен на шаги, идентичные указанным в тест-кейсах. Комментарии будут не самым лучшим решением, так как в логах не будет понятно, на каком шаге упал тест. Для этого можно воспользоваться специальными методами Kaspresso.
+<br> Рассмотрим сам тест. Благодаря реализации паттерна Page object и Kotlin DSL код теста становится простым и понятным: сперва мы проверили корректность отображения нужных элементов, затем ввели текст в поле ввода, нажали кнопку и проверили, что заголовок изменился. Однако, код любого теста - это реализация определенных тест-кейсов. Сам же тест-кейс - это некий сценарий (последовательность шагов), написанный на человеческом языке тестировщиком. Этот набор шагов может со временем меняться, поэтому спустя какое-то время возникнет потребность в редактировании теста. Помимо этого, тест может не всегда проходить успешно. Чтобы тест было легко поддерживать и он оставался понятным спустя долгое время, он должен быть разделен на шаги, идентичные указанным в тест-кейсах. Комментарии будут не самым лучшим решением, так как в логах не будет понятно, на каком шаге упал тест. Для этого можно воспользоваться специальными методами Kaspresso (например, `step()`).
 
 ```kotlin
 class SimpleTest : TestCase() {
