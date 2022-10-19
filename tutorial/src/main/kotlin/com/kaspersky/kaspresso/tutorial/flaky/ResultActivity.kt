@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.kaspersky.kaspresso.tutorial.databinding.ResultActivityBinding
 
-class ResultActivity: AppCompatActivity() {
+class ResultActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

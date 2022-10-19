@@ -7,7 +7,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.kaspersky.kaspresso.tutorial.databinding.ActivityWifiBinding
 
-class WiFiActivity: AppCompatActivity() {
+class WiFiActivity : AppCompatActivity() {
     private lateinit var binding: ActivityWifiBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

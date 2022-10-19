@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.kaspersky.kaspresso.tutorial.databinding.FlakyActivityBinding
 import java.util.concurrent.TimeUnit
 
-class FlakyActivity: AppCompatActivity() {
+class FlakyActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

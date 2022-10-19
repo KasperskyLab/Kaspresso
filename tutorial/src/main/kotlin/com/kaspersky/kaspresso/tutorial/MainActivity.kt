@@ -8,7 +8,7 @@ import com.kaspersky.kaspresso.tutorial.flaky.FlakyActivity
 import com.kaspersky.kaspresso.tutorial.simple.SimpleActivity
 import com.kaspersky.kaspresso.tutorial.wifi.WiFiActivity
 
-class MainActivity: AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
