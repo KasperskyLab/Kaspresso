@@ -9,35 +9,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.4"/>
+        app:layout_constraintGuide_percent="0.5"/>
+
 
     <TextView
-        android:id="@+id/simple_title"
+        android:id="@+id/wifi_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/guideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="40sp"
+        android:text="unknown"/>
+
+    <Button
+        android:id="@+id/check_wifi_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/guideline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="@string/simple_activity_default_title"
-        android:textColor="@color/black"
-        android:textSize="30sp"/>
+        android:text="check WiFi status"/>
 
-    <EditText
-        android:id="@+id/input_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/simple_title"
-        android:hint="@string/simple_activity_input_hint"/>
 
-    <Button
-        android:id="@+id/change_title_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/input_text"
-        android:text="@string/simple_activity_change_title_button"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
