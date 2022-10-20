@@ -44,7 +44,7 @@ theme:
     code: Roboto Mono
  # favicon: assets/favicon.png
 
-  features:   
+  features:
     - tabs
     - navigation.tabs
     - content.code.annotate
@@ -62,7 +62,7 @@ nav:
     - Kasspresso in videos: Home/Kaspresso-in-videos.md
     - Our users: Home/Kaspresso users.md
     - Breaking changes: Home/Breaking-changes.md
-  - Tutorial:
+  - Tutorial (old):
     - Скачиваем проект и Android Studio: Tutorial/Android_studio.md
     - Запуск первого теста: Tutorial/Running_the_first_test.md
     - Ваш первый тест на Kaspresso: Tutorial/simple_test.md
@@ -74,6 +74,24 @@ nav:
     - Конфигурирование Kaspresso: Tutorial/Kaspresso_configurator.md
     - Скриншот-тесты: Tutorial/Kaspresso_screenshots.md
     - Использование Allure: Tutorial/Kaspresso_with_allure.md
+
+  - Tutorial:
+      - Введение: Tutorial2/Введение.md
+      - Скачиваем проект и Android studio: Скачиваем проект и Android studio.md
+      - Запуск первого теста: Запуск первого теста.md
+      - Пишем первый автотест с Kaspresso: Пишем первый автотест с Kaspresso.md
+      - Выполнение adb-команд: Выполнение adb-команд.md
+      - Выделение секций и шагов: Выделение секций и шагов.md
+      - Вынесение дублирующихся шагов в Scenario: Вынесение дублирующихся шагов в Scenario.md
+      - Тестирование за рамками приложения: Тестирование за рамками приложения.md
+      - Работа с разрешениями и тестовыми Rules: Работа с разрешениями и тестовыми Rules.md
+      - Работа с Android OS: Работа с Android OS.md
+      - Скриншот-тесты: Скриншот-тесты.md
+      - Flaky safety: Flaky safety.md
+      - Работа с WebView: Работа с WebView.md
+      - Конфигурирование Kaspresso: Конфигурирование Kaspresso.md
+      - Использование Allure: Использование Allure.md
+
   - Wiki:
     - Page object in Kaspresso: Wiki/Page object in Kaspresso.md
     - Wrapper over Espresso: Wiki/01_Wrapper_over_Espresso.md
