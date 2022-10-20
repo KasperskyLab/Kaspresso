@@ -93,7 +93,7 @@ nav:
       - Конфигурирование Kaspresso: Конфигурирование Kaspresso.md
       - Использование Allure: Использование Allure.md
 
-  - Wiki:
+  - Wiki(old):
     - Page object in Kaspresso: Wiki/Page object in Kaspresso.md
     - Wrapper over Espresso: Wiki/01_Wrapper_over_Espresso.md
     - Wrapper over UiAutomator: Wiki/02_Wrapper_over_UiAutomator.md
@@ -105,6 +105,24 @@ nav:
     - Kaspresso Robolectric: Wiki/08_Kaspresso-Robolectric.md
     - Kaspresso Allure: Wiki/09_Kaspresso-Allure.md
     - Jetpack Compose: Wiki/10_Jetpack-Compose.md
+  - Wiki:
+      - PageObject in Kaspresso
+      - Espresso as the basis
+      - Why Espresso is not enought
+      - Migrate from Espresso
+      - Migrate from Kakao
+      - Migrate from KAutomator
+      - Supported Android UI-elements
+      - View matchers, actions and assertions
+      - Working with system dialogs and elements
+      - Executing adb commands
+      - Screenshot tests
+      - Kaspresso configuration
+      - Working with Android OS
+      - Kaspresso Robolectric
+      - Kaspresso Allure
+      - E2e and Functional tests. All in one
+      - Jetpack Compose
   - Issues:
     - Storage issues: Issues/Storage_issue.md
 #  - Documentation:
