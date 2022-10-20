@@ -106,6 +106,7 @@ nav:
     - Kaspresso Allure: Wiki/09_Kaspresso-Allure.md
     - Jetpack Compose: Wiki/10_Jetpack-Compose.md
   - Wiki:
+      - Introduction: Wiki2/index.md
       - PageObject in Kaspresso
       - Espresso as the basis
       - Why Espresso is not enought
