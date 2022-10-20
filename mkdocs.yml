@@ -79,7 +79,7 @@ nav:
   - Tutorial:
       - Введение: Tutorial2/Introduction.md
       - Скачиваем проект и Android studio: Tutorial2/Download_Kaspresso_project_and_Android_studio.md
-      - Запуск первого теста: Запуск первого теста.md
+      - Запуск первого теста: Running_the_first_test.md
       - Пишем первый автотест с Kaspresso: Пишем первый автотест с Kaspresso.md
       - Выполнение adb-команд: Выполнение adb-команд.md
       - Выделение секций и шагов: Выделение секций и шагов.md
