@@ -77,8 +77,8 @@ nav:
     - Использование Allure: Tutorial/Kaspresso_with_allure.md
 
   - Tutorial:
-      - Введение: Tutorial2/Введение.md
-      - Скачиваем проект и Android studio: Скачиваем проект и Android studio.md
+      - Введение: Tutorial2/Introduction.md
+      - Скачиваем проект и Android studio: Tutorial2/Download_Kaspresso_project_and_Android_studio.md
       - Запуск первого теста: Запуск первого теста.md
       - Пишем первый автотест с Kaspresso: Пишем первый автотест с Kaspresso.md
       - Выполнение adb-команд: Выполнение adb-команд.md
