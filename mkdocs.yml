@@ -63,6 +63,7 @@ nav:
     - Our users: Home/Kaspresso users.md
     - Breaking changes: Home/Breaking-changes.md
   - Tutorial (old):
+    - Index: index.md
     - Скачиваем проект и Android Studio: Tutorial/Android_studio.md
     - Запуск первого теста: Tutorial/Running_the_first_test.md
     - Ваш первый тест на Kaspresso: Tutorial/simple_test.md
