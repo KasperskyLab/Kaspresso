@@ -17,7 +17,7 @@
 ## Скачиваем Android Studio
 Android Studio используется для разработки программ. Нам она понадобится для написания и запуска автотестов.
 <br>Если у вас уже установлена Android Studio, то пропустите этот шаг. Если нет, то переходим по [ссылке](https://developer.android.com/studio) и нажимаем Download Android Studio:
-<br>Запускаем скаченный файл и проходим все шаги первичной настройки студии. Можно воспользоваться [официальной инструкцией](https://developer.android.com/codelabs/basic-android-kotlin-compose-install-android-studio#0) как пошаговой инструкцией.
+<br>Запускаем скаченный файл и проходим все шаги первичной настройки студии. Можно воспользоваться [официальной инструкцией](https://developer.android.com/studio/install) или [официальной инструкцией в формате codelabs](https://developer.android.com/codelabs/basic-android-kotlin-compose-install-android-studio#0) в случае возникновения проблем.
 <br>После того как Android Studio будет скачена, запускаем ее. Выбираем "Open", находим в списке папку Kaspresso-master. После того как откроете проект, нужно подождать некоторое время, чтобы Android Studio проиндексировала файлы проекта.
 
 ## Настройка эмулятора
