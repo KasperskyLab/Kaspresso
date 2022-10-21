@@ -100,7 +100,7 @@ nav:
 #      - Migrate from Kakao
 #      - Migrate from KAutomator
 #      - Supported Android UI-elements
-#      - View matchers, actions and assertions
+      - View matchers, actions and assertions: Wiki2/Matchers_actions_assertions.md
 #      - Working with system dialogs and elements
 #      - Executing adb commands
 #      - Screenshot tests
