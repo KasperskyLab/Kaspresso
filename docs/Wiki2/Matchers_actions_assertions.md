@@ -1,8 +1,8 @@
 #Matchers, Actions and Assertions
 
-As you all know Kaspresso is based on Espresso (if you're not familiar with espresso, check out the [official docs](https://developer.android.com/training/testing/espresso).
+As you all know Kaspresso is based on Espresso (if you're not familiar with espresso, check out the [official docs](https://developer.android.com/training/testing/espresso)).
 
-<br> According to [official docs](https://developer.android.com/training/testing/espresso/basics) the main components of Espresso include the following:
+According to [official docs](https://developer.android.com/training/testing/espresso/basics) the main components of Espresso include the following:
 * `Espresso` – Entry point to interactions with views (via `onView()` and `onData()`). Also exposes APIs that are not necessarily tied to any view, such as `pressBack()`.
 * `ViewMatchers` – A collection of objects that implement the `Matcher<? super View>` interface. You can pass one or more of these to the `onView()` method to locate a view within the current view hierarchy.
 * `ViewActions` – A collection of ViewAction objects that can be passed to the `ViewInteraction.perform()` method, such as `click()`.
@@ -16,7 +16,7 @@ onView(withId(R.id.my_view))
     .perform(click())
     .check(matches(isDisplayed()))
 ```
-<br> Most available instances of Matcher, ViewActions and ViewAssertions can be found in the [Google cheat-sheet](https://developer.android.com/training/testing/espresso/cheat-sheet)
+Most available instances of Matcher, ViewActions and ViewAssertions can be found in the [Google cheat-sheet](https://developer.android.com/training/testing/espresso/cheat-sheet)
 <img src="../Images/Matchers_actions_assertions/Espresso_cheat_sheet.png" alt="Espresso cheat sheet"/>
 
 In Kakao, the results of calling `onView()` methods (`ViewInteractors`) are cashed. You can get references to ViewInteractors and reuse them in your code. This makes your code in tests more readable and understandable.
