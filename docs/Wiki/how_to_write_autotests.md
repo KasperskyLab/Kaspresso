@@ -180,12 +180,12 @@ fun shouldPassOnNoInternetScanTest() =
 ```
 Let's describe the structure: <br>
 1. ``` before - after - run``` <br>
-In the beginning, we think about a state. After the state, we begin to consider the test body.
+   In the beginning, we think about a state. After the state, we begin to consider the test body.
 2. ```step``` <br>
-```step``` in the test is similar to *step* in the test-case. That's why test reading is easier and understandable.
+   ```step``` in the test is similar to *step* in the test-case. That's why test reading is easier and understandable.
 3. ```scenario``` <br>
-There are cases when some sentences of steps are absolutely identical and occur very often in tests.
-For these sentences we have introduced a ```scenario``` where you can replace your sequences of steps.
+   There are cases when some sentences of steps are absolutely identical and occur very often in tests.
+   For these sentences we have introduced a ```scenario``` where you can replace your sequences of steps.
 
 How is this API enabled? <br>
 Let's look at [SimpleTest](../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/simple_tests/SimpleTest.kt) and
@@ -234,11 +234,11 @@ before {
 }
 ```
 1. ```init``` <br>
-Here, you prepare only sets of data without any transforms and connections. Also, you can make requests to your test server, for example. <br>
-It's an optional block.
+   Here, you prepare only sets of data without any transforms and connections. Also, you can make requests to your test server, for example. <br>
+   It's an optional block.
 2. ```transform``` <br>
-This construction is for transforming of our test data. In our example we join the *owner* and *company*. <br>
-It's an optional block. The block is enabled only after the ```init``` block.
+   This construction is for transforming of our test data. In our example we join the *owner* and *company*. <br>
+   It's an optional block. The block is enabled only after the ```init``` block.
 
 Alexander Blinov wrote a good article about *init-transform* DSL in [russian article](https://habr.com/ru/company/hh/blog/455042/) where he explains all DSL details very well. You are welcome!
 
@@ -299,10 +299,10 @@ When a test is performed inside the application we strongly recommend to make yo
 It is available as an extension function for any `KView`, `UiBaseView` and as just a regular method (in this case it can take actions on different views as well). <br>
 
 The key words using in compose:
-  - `compose` - marks the beginning of "compose", turn on all needed logic
-  - `or` - marks the possible branches. The lambda after `or` has a context of concrete element. Just have a look at the simple below.
-  - `thenContinue` - is an action that will be executed if a branch (the code into lambda of `or`) is completed successfully. The context of a lambda after `thenContinue` is a context of concrete element described in `or` section.
-  - `then` - is almost the same construction as `thenContinue` excepting the context after `then`. The context after `then` is not restricted.
+- `compose` - marks the beginning of "compose", turn on all needed logic
+- `or` - marks the possible branches. The lambda after `or` has a context of concrete element. Just have a look at the simple below.
+- `thenContinue` - is an action that will be executed if a branch (the code into lambda of `or`) is completed successfully. The context of a lambda after `thenContinue` is a context of concrete element described in `or` section.
+- `then` - is almost the same construction as `thenContinue` excepting the context after `then`. The context after `then` is not restricted.
 
 Have a glance at the example below:
 ```kotlin
@@ -385,13 +385,13 @@ If you set your test data by ```init-transform``` methods then this test data is
 #### testAssistants
 Special assistants to write tests. Pay attention to the fact that these assistants are available in `BaseTestCase` also. <br>
 1. `testLogger` <br>
-It's a logger for tests allowed to output logs by a more appropriate and readable form.
+   It's a logger for tests allowed to output logs by a more appropriate and readable form.
 2. `device` <br>
-An instance of `Device` class is available in this context. It's a special interface given beautiful possibilities to do a lot of useful things at the test. <br>
-More detailed info about `Device` is [here](./05_Device.md).
+   An instance of `Device` class is available in this context. It's a special interface given beautiful possibilities to do a lot of useful things at the test. <br>
+   More detailed info about `Device` is [here](./05_Device.md).
 3. `adbServer` <br>
-You have access to AdbServer instance used in `Device`'s interfaces via `adbServer` property. <br>
-More detailed info about `AdbServer` is [here](./06_AdbServer.md).
+   You have access to AdbServer instance used in `Device`'s interfaces via `adbServer` property. <br>
+   More detailed info about `AdbServer` is [here](./06_AdbServer.md).
 4. `params` <br>
-`Params` is the facade class for all Kaspresso parameters. <br>
-Please, observe the [source code](../kaspresso/src/main/kotlin/com/kaspersky/kaspresso/params/Params.kt).
+   `Params` is the facade class for all Kaspresso parameters. <br>
+   Please, observe the [source code](../kaspresso/src/main/kotlin/com/kaspersky/kaspresso/params/Params.kt).
