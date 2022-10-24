@@ -67,5 +67,6 @@ Existing analogs (with links):
 ```
 
 ### Pull requests are allways welcome
-If you have not only an issue, but also a ready implementation, you can always submit the pull request on Github
-<br> Thanks!
+If you have not only an issue, but also a ready implementation, you can always submit the pull request on Github.
+
+## Thanks!
