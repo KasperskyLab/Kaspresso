@@ -1,6 +1,6 @@
 #Matchers, Actions and Assertions
 
-As you all know Kaspresso is based on Espresso (if you're not familiar with espresso, check out the [official docs](https://developer.android.com/training/testing/espresso)).
+As you all know Kaspresso is based on Espresso (if you're not familiar with Espresso, check out the [official docs](https://developer.android.com/training/testing/espresso)).
 <br>According to [official docs](https://developer.android.com/training/testing/espresso/basics) the main components of Espresso include the following:
 <br>* `Espresso` – Entry point to interactions with views (via `onView()` and `onData()`). Also exposes APIs that are not necessarily tied to any view, such as `pressBack()`.
 <br>* `ViewMatchers` – A collection of objects that implement the `Matcher<? super View>` interface. You can pass one or more of these to the `onView()` method to locate a view within the current view hierarchy.
@@ -18,8 +18,8 @@ onView(withId(R.id.my_view))
 Most available instances of Matcher, ViewActions and ViewAssertions can be found in the [Google cheat-sheet](https://developer.android.com/training/testing/espresso/cheat-sheet)
 <img src="../Images/Matchers_actions_assertions/Espresso_cheat_sheet.png" alt="Espresso cheat sheet"/>
 
-In Kakao, the results of calling `onView()` methods (`ViewInteractors`) are cashed. You can get references to ViewInteractors and reuse them in your code. This makes your code in tests more readable and understandable.
-<br>Kakao also allows you to separate the search for an element and actions on it.
-<br>Kakao has introduced KView and various implementations for the most available Android widgets. This KView implements the BaseAssertions and BaseActions interfaces with some additional methods. Every inheritor of KView implements its own interfaces for assertions and actions for some widget-specific methods.
+The results of calling `onView()` methods (`ViewInteractors`) can be cashed. In (Kakao)[https://github.com/KakaoCup/Kakao] you can get references to ViewInteractors and reuse them in your code. This makes your code in tests more readable and understandable.
+<br>This framework also allows you to separate the search for an element and actions on it. Kakao has introduced KView and various implementations for the most available Android widgets. This KView implements the BaseAssertions and BaseActions interfaces with some additional methods. Every inheritor of KView implements its own interfaces for assertions and actions for some widget-specific methods.
 <br>As a result, you can get a reference to specific views from your test code and make the necessary assertions and actions on it in the view block.
+
 <br>Since Kasresso inherits all the best from these two frameworks, everything described above is available to you.

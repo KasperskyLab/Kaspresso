@@ -1,15 +1,4 @@
 # Page object pattern in Kaspresso.
-
-Page object pattern is explained well by Martin Fowler in [this article](https://martinfowler.com/bliki/PageObject.html). Long in short this is a test abstraction that describes the screen with some view elements. These view items can be interacted with during tests. As a result the description of the screen elements will be in a separate class. You no longer need to constantly look for the desired UI element with several matchers in tests. This can be done once by saving a link to the screen.
-
-Page object gives you an ability to reuse Screens and views in different tests, more flexibility with a small redesign.
-
-Kaspresso is a wrapper over Espresso and UI Automator. It uses Kakao as a wrapper over Espresso (All detailed information is here). For UIAutomator Kaspresso provides Kautomator with UiScreen class. So you can implement this page object pattern by extending UiScreen or KScreen.
-
-
-1) Возможность разделить ответственность между разработчиками и автотестерами
-
-
 ## What is a Page object pattern?
 <br>Page object pattern is explained well by Martin Fowler in [this article](https://martinfowler.com/bliki/PageObject.html). Long in short this is a test abstraction that describes the screen with some view elements. These view items can be interacted with during tests. As a result the description of the screen elements will be in a separate class. You no longer need to constantly look for the desired UI element with several matchers in tests. This can be done once by saving a link to the screen.
 ## How is the page object pattern implemented in Kaspresso?
@@ -44,6 +33,6 @@ object MainScreen : UiScreen<MainScreen>() {
 <br>In KScreen's inheritors we should initialize the `layoutId` (layout file of a screen) and `viewClass`(screen activity class name) fields. But this is optional. These fields will help in cases of code refactoring not to forget about the associated tests screens
 <br>In UiScreen's inheritors we must initialize `packageName` field (the full name of the application's package). 
 ## Benefits of the page object for refactoring
-<br>Page object pattern allows you to exclude the description of the screen in a separate file. When you have some changes in the UX of the application you can only change the code in the screen file without the need for a lot of refactoring of the tests. 
-## Benefits of the Page Object for Teamwork
-<br>In some teams autotests are written only by developers, in others by QA engineers. When a developer needs to write autotests for an application he wrote himself everything is clear for him. But in some cases autotests are written by someone else who does not know details of the code (source code is available, but is bad understandable). In this case developers can write Screens for additional autotests. Having Screens helps another person to write tests using Kotlin DSL. 
+<br>Page object pattern allows you to exclude the description of the screen in a separate file and to reuse Screens and views in different tests. When you have some changes in the UI of the application you can only change the code in the Screen file without the need for a lot of refactoring of the tests. 
+## Benefits of the Page Object for a work in a team
+<br>In some teams autotests are written only by developers, in others by QA engineers. In some cases autotests are written by someone who does not know details of the code (source code is available, but is bad understandable). In this case developers can write Screens for additional autotests. Having Screens helps another person to write tests using Kotlin DSL. 
