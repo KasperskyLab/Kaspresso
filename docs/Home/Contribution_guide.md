@@ -12,7 +12,7 @@
 9.	Once everything is done, your pull request gets merged. Your feature will be available with the next release and your name will be added to [AUTHORS](https://github.com/KasperskyLab/Kaspresso/blob/master/AUTHORS.md).
 
 ## Branch naming
-issue-***/detail_description. Example: issue-306/fix-padding-breaks-autoscroll-interceptor
+issue-***/detailed_description. Example: issue-306/fix-padding-breaks-autoscroll-interceptor
 
 ## Commits
 The commit message should begin with: "Issue #***: ...". Example: "Issue #306: Fixed padding-breaks autoscroll interceptor".
