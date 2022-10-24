@@ -95,7 +95,7 @@ nav:
   - Wiki:
       - Introduction: Wiki2/Index.md
       - PageObject in Kaspresso: Wiki2/Page_object_in_Kaspresso.md
-#      - Espresso as the basis
+      - Espresso as the basis: Wiki2/Espresso_as_the_basic.md
 #      - Why Espresso is not enought
 #      - Migrate from Espresso
 #      - Migrate from Kakao
