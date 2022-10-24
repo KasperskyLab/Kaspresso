@@ -2,10 +2,10 @@
 Kaspresso has a great community that helps make it better by suggesting new ideas, reporting bugs with detailed descriptions and making pull requests.
 
 ## Issue template
-In our (Issues tab)[https://github.com/KasperskyLab/Kaspresso/issues] you can create a new one. There are two most popular types of issues: bug and enhancement.
+In our [Issues tab](https://github.com/KasperskyLab/Kaspresso/issues) you can create a new one. There are two most popular types of issues: bug and enhancement.
 
 ### Template for bugs
-If you found a bug you can (create new issue)[https://github.com/KasperskyLab/Kaspresso/issues/new/choose]. Enter a title and provide a description (bug details) in the input fields. We will be very grateful if you use this template:
+If you found a bug you can [create new issue](https://github.com/KasperskyLab/Kaspresso/issues/new/choose). Enter a title and provide a description (bug details) in the input fields. We will be very grateful if you use this template:
 
 ```text
 Description:
@@ -55,7 +55,7 @@ I haven't tested on all versions, but sources were able to be downloaded at leas
 ```
 
 ### Template for enhancements
-If you have an idea of a new enhancement you can (create new issue)[https://github.com/KasperskyLab/Kaspresso/issues/new/choose]. Enter a title and provide a description in the input fields. We will be very grateful if you use this template:
+If you have an idea of a new enhancement you can [create new issue](https://github.com/KasperskyLab/Kaspresso/issues/new/choose). Enter a title and provide a description in the input fields. We will be very grateful if you use this template:
 
 ```text
 Description:
