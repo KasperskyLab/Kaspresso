@@ -93,23 +93,23 @@ nav:
       - Конфигурирование Kaspresso: Конфигурирование Kaspresso.md
       - Использование Allure: Использование Allure.md
   - Wiki:
-      - Introduction: Wiki2/Index.md
-      - PageObject in Kaspresso: Wiki2/Page_object_in_Kaspresso.md
-      - Espresso as the basis: Wiki2/Espresso_as_the_basis.md
-#      - Migrate from Espresso
-#      - Migrate from Kakao
-#      - Migrate from KAutomator
-#      - Supported Android UI-elements
-      - View matchers, actions and assertions: Wiki2/Matchers_actions_assertions.md
-      - Kautomator. Wrapper over UI Automator: Wiki2/Kautomator-wrapper_over_UI_Automator.md
-      - Executing adb commands: Wiki2/Executing_adb_commands.md
-      - Screenshot tests: Wiki2/Screenshot_tests.md
-#      - Kaspresso configuration
-      - Working with Android OS: Wiki2/Working_with_Android_OS.md
-      - Kaspresso with Robolectric: Wiki2/Kaspresso_Robolectric.md
-      - Kaspresso with Allure: Wiki2/Kaspresso_Allure.md
+      - Introduction: Wiki/Index.md
+      - PageObject in Kaspresso: Wiki/Page_object_in_Kaspresso.md
+      - Espresso as the basis: Wiki/Espresso_as_the_basis.md
+      - Migrate from Espresso: Wiki/Migrate_from_Espresso.md
+      - Migrate from Kakao: Wiki/Migrate_from_Kakao.md
+      - Migrate from KAutomator: Wiki/Migrate_from_KAutomator.md
+      - Supported Android UI-elements: Wiki/Supported_Android_UI_elements.md
+      - View matchers, actions and assertions: Wiki/Matchers_actions_assertions.md
+      - Kautomator. Wrapper over UI Automator: Wiki/Kautomator-wrapper_over_UI_Automator.md
+      - Executing adb commands: Wiki/Executing_adb_commands.md
+      - Screenshot tests: Wiki/Screenshot_tests.md
+      - Kaspresso configuration: Wiki/Kaspresso_configuration.md
+      - Working with Android OS: Wiki/Working_with_Android_OS.md
+      - Kaspresso with Robolectric: Wiki/Kaspresso_Robolectric.md
+      - Kaspresso with Allure: Wiki/Kaspresso_Allure.md
 #      - E2e and Functional tests. All in one
-      - Jetpack Compose in Kaspresso: Wiki2/Jetpack_Compose.md
+      - Jetpack Compose in Kaspresso: Wiki/Jetpack_Compose.md
   - Issues:
     - Storage issues: Issues/Storage_issue.md
     - Found an issue?: Issues/Found_an_issue.md
