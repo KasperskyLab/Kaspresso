@@ -93,7 +93,7 @@ nav:
       - Конфигурирование Kaspresso: Конфигурирование Kaspresso.md
       - Использование Allure: Использование Allure.md
   - Wiki:
-      - Introduction: Wiki/index.md
+      - Introduction: Wiki/Index.md
       - PageObject in Kaspresso: Wiki/Page_object_in_Kaspresso.md
       - Espresso as the basis: Wiki/Espresso_as_the_basis.md
       - Migrate from Espresso: Wiki/Migrate_from_Espresso.md
