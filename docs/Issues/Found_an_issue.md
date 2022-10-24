@@ -1,23 +1,23 @@
 # Found an issue?
-<br> Kaspresso has a great community that helps make it better by suggesting new ideas, reporting bugs with detailed descriptions and making pull requests.
+Kaspresso has a great community that helps make it better by suggesting new ideas, reporting bugs with detailed descriptions and making pull requests.
 
 ## Issue template
-<br> In our (Issues tab)[https://github.com/KasperskyLab/Kaspresso/issues] you can create a new one. There are two most popular types of issues: bug and enhancement.
+In our (Issues tab)[https://github.com/KasperskyLab/Kaspresso/issues] you can create a new one. There are two most popular types of issues: bug and enhancement.
 
 ### Template for bugs
-<br> If you found a bug you can (create new issue)[https://github.com/KasperskyLab/Kaspresso/issues/new/choose]. Enter a title and provide a description (bug details) in the input fields. We will be very grateful if you use this template:
+If you found a bug you can (create new issue)[https://github.com/KasperskyLab/Kaspresso/issues/new/choose]. Enter a title and provide a description (bug details) in the input fields. We will be very grateful if you use this template:
 
 ```text
-<br> Description:
-<br> ...
-<br> Expected Behavior:
-<br> ...
-<br> Actual Behavior:
-<br> ...
-<br> Steps to Reproduce the Problem:
-<br> ...
-<br> Specifications:
-<br> ...
+Description:
+...
+Expected Behavior:
+...
+Actual Behavior:
+...
+Steps to Reproduce the Problem:
+...
+Specifications:
+...
 ```
 
 For example:
@@ -39,6 +39,7 @@ Execution failed for task ':app:DownloadSources'.
        - https://repo.maven.apache.org/maven2/com/kaspersky/android-components/kaspresso/1.4.1@aar/kaspresso-1.4.1@aar.pom
      Required by:
          project :app
+         
 Steps to Reproduce the Problem
 Create an empty project;
 Add the dependency androidTestImplementation "com.kaspersky.android-components:kaspresso:1.4.1";
@@ -48,23 +49,23 @@ You will only be able to see the decompiled bytecode.
 Specifications
 Library version: at least >= 1.4.1
 IDE used: Android Studio
+
 Observations
 I haven't tested on all versions, but sources were able to be downloaded at least up to version 1.2.1.
 ```
 
 ### Template for enhancements
-<br> If you have an idea of a new enhancement you can (create new issue)[https://github.com/KasperskyLab/Kaspresso/issues/new/choose]. Enter a title and provide a description in the input fields. We will be very grateful if you use this template:
+If you have an idea of a new enhancement you can (create new issue)[https://github.com/KasperskyLab/Kaspresso/issues/new/choose]. Enter a title and provide a description in the input fields. We will be very grateful if you use this template:
 
 ```text
-<br> Description:
-<br> ...
-<br> How the new enhancement will help?:
-<br> ...
-<br> Existing analogs (with links):
-<br> ...
+Description:
+...
+How the new enhancement will help?:
+...
+Existing analogs (with links):
+...
 ```
 
 ### Pull requests are allways welcome
-<br> If you have not only an issue, but also a ready implementation, you can always submit the pull request on Github
-
+If you have not only an issue, but also a ready implementation, you can always submit the pull request on Github
 <br> Thanks!
