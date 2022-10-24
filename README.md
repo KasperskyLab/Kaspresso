@@ -390,3 +390,5 @@ Kaspresso is available under the [Apache License, Version 2.0](https://github.co
         </td>
     </tr>
 </table>
+
+#include "CONTRIBUTING.md"
