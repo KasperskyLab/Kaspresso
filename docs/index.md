@@ -299,7 +299,7 @@ Breaking changes can be found [hear](https://kasperskylab.github.io/Kaspresso/Ho
 
 ## Contribution
 Kaspresso is an open source project, so you are welcome to contribute (see the [Contribution 
-Guidelines](https://github.com/KasperskyLab/Kaspresso/blob/master/CONTRIBUTING.md)).
+Guidelines](https://kasperskylab.github.io/Kaspresso/Home/Contribution_guide/).
 
 ## License
 Kaspresso is available under the [Apache License, Version 2.0](https://github.com/KasperskyLab/Kaspresso/blob/master/LICENSE).
