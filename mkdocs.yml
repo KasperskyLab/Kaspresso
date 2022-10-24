@@ -62,6 +62,7 @@ nav:
     - Kasspresso in videos: Home/Kaspresso-in-videos.md
     - Our users: Home/Kaspresso users.md
     - Breaking changes: Home/Breaking-changes.md
+    - Contribution guide: Home/Contribution_guide.md
   - Tutorial (old):
     - Index: Tutorial/index.md
     - Скачиваем проект и Android Studio: Tutorial/Android_studio.md
