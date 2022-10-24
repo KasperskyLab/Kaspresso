@@ -96,21 +96,20 @@ nav:
       - Introduction: Wiki2/Index.md
       - PageObject in Kaspresso: Wiki2/Page_object_in_Kaspresso.md
       - Espresso as the basis: Wiki2/Espresso_as_the_basis.md
-#      - Why Espresso is not enought
 #      - Migrate from Espresso
 #      - Migrate from Kakao
 #      - Migrate from KAutomator
 #      - Supported Android UI-elements
       - View matchers, actions and assertions: Wiki2/Matchers_actions_assertions.md
-#      - Working with system dialogs and elements
-#      - Executing adb commands
-#      - Screenshot tests
+      - Kautomator. Wrapper over UI Automator: Wiki2/Kautomator-wrapper_over_UI_Automator.md
+      - Executing adb commands: Wiki2/Executing_adb_commands.md
+      - Screenshot tests: Wiki2/Screenshot_tests.md
 #      - Kaspresso configuration
-#      - Working with Android OS
-#      - Kaspresso Robolectric
-#      - Kaspresso Allure
+      - Working with Android OS: Wiki2/Working_with_Android_OS.md
+      - Kaspresso with Robolectric: Wiki2/Kaspresso_Robolectric.md
+      - Kaspresso with Allure: Wiki2/Kaspresso_Allure.md
 #      - E2e and Functional tests. All in one
-#      - Jetpack Compose
+      - Jetpack Compose in Kaspresso: Wiki2/Jetpack_Compose.md
   - Issues:
     - Storage issues: Issues/Storage_issue.md
     - Found an issue?: Issues/Found_an_issue.md
