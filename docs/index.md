@@ -288,10 +288,10 @@ java -jar artifacts/adbserver-desktop.jar
 ```
 
 ## Existing issues
-All existing issues in Kaspresso can be found [hear](https://kasperskylab.github.io/Kaspresso/Issues/Storage_issue/)
+All existing issues in Kaspresso can be found [here](https://kasperskylab.github.io/Kaspresso/Issues/Storage_issue/)
 
 ## Breaking changes 
-Breaking changes can be found [hear](https://kasperskylab.github.io/Kaspresso/Home/Breaking-changes/)
+Breaking changes can be found [here](https://kasperskylab.github.io/Kaspresso/Home/Breaking-changes/)
 
 ## Contribution
 Kaspresso is an open source project, so you are welcome to contribute (see the [Contribution 
