@@ -134,11 +134,11 @@ markdown_extensions:
   - pymdownx.details
   - pymdownx.superfences
 
-# extra:
-#  alternate:
-#    - name: English
-#      link: /en/
-#      lang: en
-#    - name: Russian
-#      link: /ru/
-#      lang: ru
+extra:
+  alternate:
+    - name: English
+      link: /en/
+      lang: en
+    - name: Russian
+      link: /ru/
+      lang: ru
