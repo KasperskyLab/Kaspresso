@@ -96,9 +96,7 @@ nav:
       - Introduction: Wiki/index.md
       - PageObject in Kaspresso: Wiki/Page_object_in_Kaspresso.md
       - Espresso as the basis: Wiki/Espresso_as_the_basis.md
-      - Migrate from Espresso: Wiki/Migrate_from_Espresso.md
-      - Migrate from Kakao: Wiki/Migrate_from_Kakao.md
-      - Migrate from KAutomator: Wiki/Migrate_from_KAutomator.md
+      - Migrate from Espresso, Kakao or KAutomator: Wiki/Migrate_from_Espresso.md
       - Supported Android UI-elements: Wiki/Supported_Android_UI_elements.md
       - View matchers, actions and assertions: Wiki/Matchers_actions_assertions.md
       - Kautomator. Wrapper over UI Automator: Wiki/Kautomator-wrapper_over_UI_Automator.md
