@@ -77,21 +77,21 @@ nav:
 #    - Скриншот-тесты: Tutorial/Kaspresso_screenshots.md
 #    - Использование Allure: Tutorial/Kaspresso_with_allure.md
   - Tutorial:
-      - Введение: Tutorial2/index.md
-      - Скачиваем проект и Android studio: Tutorial2/Download_Kaspresso_project_and_Android_studio.md
-      - Запуск первого теста: Tutorial2/Running_the_first_test.md
-      - Пишем первый автотест с Kaspresso: Tutorial2/Writing_simple_test.md
-      - Выполнение adb-команд: Tutorial2/Выполнение adb-команд.md
-      - Выделение секций и шагов: Tutorial2/Выделение секций и шагов.md
-      - Вынесение дублирующихся шагов в Scenario: Tutorial2/Вынесение дублирующихся шагов в Scenario.md
-      - Тестирование за рамками приложения: Tutorial2/Тестирование за рамками приложения.md
-      - Работа с разрешениями и тестовыми Rules: Tutorial2/Работа с разрешениями и тестовыми Rules.md
-      - Работа с Android OS: Tutorial2/Работа с Android OS.md
-      - Скриншот-тесты: Tutorial2/Скриншот-тесты.md
-      - Flaky safety: Tutorial2/Flaky safety.md
-      - Работа с WebView: Tutorial2/Работа с WebView.md
-      - Конфигурирование Kaspresso: Tutorial2/Конфигурирование Kaspresso.md
-      - Использование Allure: Tutorial2/Использование Allure.md
+      - Введение: Tutorial/index.md
+      - Скачиваем проект и Android studio: Tutorial/Download_Kaspresso_project_and_Android_studio.md
+      - Запуск первого теста: Tutorial/Running_the_first_test.md
+      - Пишем первый автотест с Kaspresso: Tutorial/Writing_simple_test.md
+      - Выполнение adb-команд: Tutorial/Выполнение adb-команд.md
+      - Выделение секций и шагов: Tutorial/Выделение секций и шагов.md
+      - Вынесение дублирующихся шагов в Scenario: Tutorial/Вынесение дублирующихся шагов в Scenario.md
+      - Тестирование за рамками приложения: Tutorial/Тестирование за рамками приложения.md
+      - Работа с разрешениями и тестовыми Rules: Tutorial/Работа с разрешениями и тестовыми Rules.md
+      - Работа с Android OS: Tutorial/Работа с Android OS.md
+      - Скриншот-тесты: Tutorial/Скриншот-тесты.md
+      - Flaky safety: Tutorial/Flaky safety.md
+      - Работа с WebView: Tutorial/Работа с WebView.md
+      - Конфигурирование Kaspresso: Tutorial/Конфигурирование Kaspresso.md
+      - Использование Allure: Tutorial/Использование Allure.md
   - Wiki:
       - Introduction: Wiki/index.md
       - PageObject in Kaspresso: Wiki/Page_object_in_Kaspresso.md
