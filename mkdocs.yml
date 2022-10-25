@@ -106,7 +106,7 @@ nav:
       - Working with Android OS: Wiki/Working_with_Android_OS.md
       - Kaspresso with Robolectric: Wiki/Kaspresso_Robolectric.md
       - Kaspresso with Allure: Wiki/Kaspresso_Allure.md
-#      - E2e and Functional tests. All in one
+      - E2e and Functional tests. All in one: Wiki/E2e_and_Functional_tests.md
       - Jetpack Compose in Kaspresso: Wiki/Jetpack_Compose.md
   - Issues:
     - Storage issues: Issues/Storage_issue.md
