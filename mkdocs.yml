@@ -63,19 +63,19 @@ nav:
     - Our users: Home/Kaspresso users.md
     - Breaking changes: Home/Breaking-changes.md
     - Contribution guide: Home/Contribution_guide.md
-  - Tutorial (old):
-    - Index: Tutorial/index.md
-    - Скачиваем проект и Android Studio: Tutorial/Android_studio.md
-    - Запуск первого теста: Tutorial/Running_the_first_test.md
-    - Ваш первый тест на Kaspresso: Tutorial/simple_test.md
-    - Тестирование за рамками приложения: Tutorial/off-screen_work.md
-    - Flaky safely. Сontinuously, compose.: Tutorial/Flaky safely.md
-    - Использование сценариев в Kaspresso: Tutorial/Kaspresso_scenario.md
-    - Выполнение adb-команд: Tutorial/adb_commands.md
-    - Взаимодействуем с Android вне приложения: Tutorial/Device.md
-    - Конфигурирование Kaspresso: Tutorial/Kaspresso_configurator.md
-    - Скриншот-тесты: Tutorial/Kaspresso_screenshots.md
-    - Использование Allure: Tutorial/Kaspresso_with_allure.md
+#  - Tutorial (old):
+#    - Index: Tutorial/index.md
+#    - Скачиваем проект и Android Studio: Tutorial/Android_studio.md
+#    - Запуск первого теста: Tutorial/Running_the_first_test.md
+#    - Ваш первый тест на Kaspresso: Tutorial/simple_test.md
+#    - Тестирование за рамками приложения: Tutorial/off-screen_work.md
+#    - Flaky safely. Сontinuously, compose.: Tutorial/Flaky safely.md
+#    - Использование сценариев в Kaspresso: Tutorial/Kaspresso_scenario.md
+#    - Выполнение adb-команд: Tutorial/adb_commands.md
+#    - Взаимодействуем с Android вне приложения: Tutorial/Device.md
+#    - Конфигурирование Kaspresso: Tutorial/Kaspresso_configurator.md
+#    - Скриншот-тесты: Tutorial/Kaspresso_screenshots.md
+#    - Использование Allure: Tutorial/Kaspresso_with_allure.md
   - Tutorial:
       - Введение: Tutorial2/Introduction.md
       - Скачиваем проект и Android studio: Tutorial2/Download_Kaspresso_project_and_Android_studio.md
