@@ -109,8 +109,8 @@ nav:
       - E2e and Functional tests. All in one: Wiki/E2e_and_Functional_tests.md
       - Jetpack Compose in Kaspresso: Wiki/Jetpack_Compose.md
   - Issues:
+    - Found an issue?: Issues/index.md
     - Storage issues: Issues/Storage_issue.md
-    - Found an issue?: Issues/Found_an_issue.md
 #  - Wiki(old):
 #      - Page object in Kaspresso: Wiki/Page object in Kaspresso.md
 #      - Wrapper over Espresso: Wiki/01_Wrapper_over_Espresso.md
