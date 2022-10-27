@@ -1,7 +1,7 @@
 # Found an issue?
 Kaspresso has a great community that helps make it better by suggesting new ideas, reporting bugs with detailed descriptions and making pull requests.
 
-## Issue template
+## Creating new issues
 In our [Issues tab](https://github.com/KasperskyLab/Kaspresso/issues) you can create a new one. There are two most popular types of issues: bug and enhancement.
 
 ### Template for bugs
