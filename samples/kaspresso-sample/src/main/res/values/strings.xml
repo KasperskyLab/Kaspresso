@@ -36,6 +36,11 @@
     <string name="device_sample_input_hint" translatable="false">Type text here…</string>
     <string name="device_request_permission" translatable="false">Request Permission</string>
 
+    <!-- Device Full Activity -->
+    <string name="device_full_title">Device Full</string>
+    <string name="device_full_start">START</string>
+    <string name="device_full_end">END</string>
+
     <!-- Screenshooter sample test -->
     <string name="increment">Increment</string>
     <string name="decrement">Decrement</string>

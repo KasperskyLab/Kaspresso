@@ -28,4 +28,9 @@
     <string name="change_color_to_black">Сделать фон чёрным</string>
     <string name="change_color_to_red">Сделать фон красным</string>
     <string name="counter_value">Текущее значение: %d</string>
+
+    <!-- Device Full Activity -->
+    <string name="device_full_title">Полный скриншот</string>
+    <string name="device_full_start">НАЧАЛО</string>
+    <string name="device_full_end">КОНЕЦ</string>
 </resources>

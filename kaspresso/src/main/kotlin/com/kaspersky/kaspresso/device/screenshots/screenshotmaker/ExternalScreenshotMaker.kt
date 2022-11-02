@@ -23,4 +23,8 @@ class ExternalScreenshotMaker(
     override fun takeScreenshot(file: File) {
         device.takeScreenshot(file, scale, params.quality)
     }
+
+    override fun takeFullScreenshot(file: File) {
+        takeScreenshot(file)
+    }
 }

@@ -8,4 +8,6 @@ import java.io.File
 interface ScreenshotMaker {
 
     fun takeScreenshot(file: File)
+
+    fun takeFullScreenshot(file: File)
 }

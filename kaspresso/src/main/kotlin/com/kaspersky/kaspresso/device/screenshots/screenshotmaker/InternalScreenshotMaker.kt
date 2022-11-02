@@ -4,6 +4,7 @@ import android.app.Activity
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.os.Looper
+import android.view.View
 import com.kaspersky.kaspresso.device.activities.Activities
 import com.kaspersky.kaspresso.params.ScreenshotParams
 import java.io.BufferedOutputStream
@@ -37,6 +38,38 @@ class InternalScreenshotMaker(
             file.setReadable(true, false)
         }
         bitmap.recycle()
+    }
+
+    override fun takeFullScreenshot(file: File) {
+        val activity = activities.getResumed() ?: throw RuntimeException("There is no resumed activity.")
+        val latch = CountDownLatch(1)
+        val view = activity.window.decorView.rootView
+        val originalHeight = view.height
+        val heightMeasureSpec: Int = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
+        val widthMeasureSpec: Int = View.MeasureSpec.makeMeasureSpec(view.width, View.MeasureSpec.EXACTLY)
+        activity.runOnUiThread {
+            view.measure(widthMeasureSpec, heightMeasureSpec)
+            if (originalHeight < view.measuredHeight) {
+                try {
+                    view.layout(0, 0, view.measuredWidth, view.measuredHeight)
+                } finally {
+                    latch.countDown()
+                }
+            } else {
+                latch.countDown()
+            }
+        }
+        latch.runCatching {
+            await()
+            val bitmap: Bitmap = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
+            val bitmapHolder = Canvas(bitmap)
+            view.draw(bitmapHolder)
+            BufferedOutputStream(FileOutputStream(file)).use { outputStream ->
+                bitmap.compress(Bitmap.CompressFormat.PNG, params.quality, outputStream)
+                file.setReadable(true, false)
+            }
+            bitmap.recycle()
+        }
     }
 
     private fun fillBitmap(activity: Activity, bitmap: Bitmap, file: File) {

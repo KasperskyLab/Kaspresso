@@ -24,14 +24,22 @@ class ScreenshotsImpl(
      *
      * @param tag a unique tag to further identify the screenshot. Must match [a-zA-Z0-9_-]+.
      */
-    override fun take(tag: String): Unit = doTakeAndApply(tag, null)
+    override fun take(tag: String): Unit = doTakeAndApply(tag, false, null)
 
-    override fun takeAndApply(tag: String, block: File.() -> Unit): Unit = doTakeAndApply(tag, block)
+    override fun takeFull(tag: String) = doTakeAndApply(tag, true, null)
 
-    private fun doTakeAndApply(tag: String, block: (File.() -> Unit)?) {
+    override fun takeAndApply(tag: String, block: File.() -> Unit): Unit = doTakeAndApply(tag, false, block)
+
+    override fun takeFullAndApply(tag: String, block: File.() -> Unit) = doTakeAndApply(tag, true, block)
+
+    private fun doTakeAndApply(tag: String, isFull: Boolean, block: (File.() -> Unit)?) {
         try {
             val screenshotFile: File = resourceFilesProvider.provideScreenshotFile(tag)
-            screenshotMaker.takeScreenshot(screenshotFile)
+            if (isFull) {
+                screenshotMaker.takeFullScreenshot(screenshotFile)
+            } else {
+                screenshotMaker.takeScreenshot(screenshotFile)
+            }
             block?.invoke(screenshotFile)
             logger.i("Screenshot saved to $screenshotFile")
         } catch (e: Throwable) {
