@@ -3,7 +3,7 @@ package com.kaspersky.kaspressample.device_tests
 import android.Manifest
 import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.rule.GrantPermissionRule
-import com.kaspersky.kaspressample.device_full.DeviceFullSampleActivity
+import com.kaspersky.kaspressample.devicefull.DeviceFullSampleActivity
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.junit.Assert
 import org.junit.Rule

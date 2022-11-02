@@ -1,4 +1,4 @@
-package com.kaspersky.kaspressample.device_full
+package com.kaspersky.kaspressample.devicefull
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
