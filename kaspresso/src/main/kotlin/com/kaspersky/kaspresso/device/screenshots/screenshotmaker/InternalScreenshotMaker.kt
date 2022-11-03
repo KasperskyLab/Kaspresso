@@ -76,7 +76,7 @@ class InternalScreenshotMaker(
         latch.runCatching {
             await()
         }
-        return bitmap!!;
+        return bitmap!!
     }
 
     private fun drawBitmap(view: View): Bitmap {
