@@ -7,6 +7,8 @@ import com.kaspersky.kaspressample.autoscrollfallback.AutoscrollScrollViewWithPa
 import com.kaspersky.kaspressample.compose.ComplexComposeSampleActivity
 import com.kaspersky.kaspressample.continuously.ContinuouslySampleActivity
 import com.kaspersky.kaspressample.databinding.ActivityMainBinding
+import com.kaspersky.kaspressample.device.DeviceSampleActivity
+import com.kaspersky.kaspressample.devicefull.DeviceFullWindowSampleActivity
 import com.kaspersky.kaspressample.flaky.CommonFlakyActivity
 import com.kaspersky.kaspressample.idlingwait.WaitForIdleActivity
 import com.kaspersky.kaspressample.measure.MeasureActivity
@@ -56,6 +58,14 @@ class MainActivity : AppCompatActivity() {
 
         binding.activityMainMeasureSampleButton.setOnClickListener {
             startActivity(Intent(this, MeasureActivity::class.java))
+        }
+
+        binding.activityMainDeviceButton.setOnClickListener {
+            startActivity(Intent(this, DeviceSampleActivity::class.java))
+        }
+
+        binding.activityMainDeviceFullButton.setOnClickListener {
+            startActivity(Intent(this, DeviceFullWindowSampleActivity::class.java))
         }
 
         setContentView(binding.root)

@@ -12,6 +12,8 @@
     <string name="main_screen_measure_sample_button">Measure sample</string>
     <string name="main_screen_jetpack_compose_button">Jetpack Compose samples</string>
     <string name="main_screen_shared_test">Shared Test with Robolectric sample</string>
+    <string name="main_screen_device_button">Device Sample</string>
+    <string name="main_screen_full_device_button">Full Window Device Sample</string>
 
     <!-- Auto scroll fallback screen -->
     <string name="autoscroll_scrollview_with_padding_title">Auto scroll ScrollView with padding</string>
@@ -35,6 +37,11 @@
     <string name="device_sample_accessibility_service_title" translatable="false">Kaspresso Sample Accessibility Service</string>
     <string name="device_sample_input_hint" translatable="false">Type text here…</string>
     <string name="device_request_permission" translatable="false">Request Permission</string>
+
+    <!-- Device Full Activity -->
+    <string name="device_full_title">Device Full</string>
+    <string name="device_full_start">START</string>
+    <string name="device_full_end">END</string>
 
     <!-- Screenshooter sample test -->
     <string name="increment">Increment</string>

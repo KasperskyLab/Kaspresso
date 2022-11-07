@@ -65,6 +65,10 @@
             android:label="@string/device_sample_title"/>
 
         <activity
+            android:name=".devicefull.DeviceFullWindowSampleActivity"
+            android:label="@string/device_full_title"/>
+
+        <activity
             android:name=".upgrade.UpgradeTestActivity"
             android:label="@string/upgrade_title"/>
 
