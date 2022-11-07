@@ -12,11 +12,10 @@ import com.kaspersky.kaspresso.device.screenshots.screenshotmaker.ExternalScreen
 import com.kaspersky.kaspresso.docloc.DocLocScreenshotCapturer
 import com.kaspersky.kaspresso.docloc.MetadataSaver
 import com.kaspersky.kaspresso.docloc.rule.LocaleRule
-import com.kaspersky.kaspresso.docloc.rule.TestFailRule
 import com.kaspersky.kaspresso.files.dirs.DefaultDirsProvider
-import com.kaspersky.kaspresso.files.resources.ResourcesRootDirsProvider
-import com.kaspersky.kaspresso.files.resources.ResourcesDirsProvider
 import com.kaspersky.kaspresso.files.resources.ResourceFileNamesProvider
+import com.kaspersky.kaspresso.files.resources.ResourcesDirsProvider
+import com.kaspersky.kaspresso.files.resources.ResourcesRootDirsProvider
 import com.kaspersky.kaspresso.files.resources.impl.DefaultResourceFileNamesProvider
 import com.kaspersky.kaspresso.files.resources.impl.DefaultResourceFilesProvider
 import com.kaspersky.kaspresso.files.resources.impl.DefaultResourcesDirNameProvider
@@ -24,14 +23,16 @@ import com.kaspersky.kaspresso.files.resources.impl.DefaultResourcesDirsProvider
 import com.kaspersky.kaspresso.files.resources.impl.DefaultResourcesRootDirsProvider
 import com.kaspersky.kaspresso.files.resources.impl.SupportLegacyResourcesDirNameProvider
 import com.kaspersky.kaspresso.instrumental.exception.DocLocInUnitTestException
+import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.screenshot.ScreenshotStepWatcherInterceptor
+import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.screenshot.TestRunnerScreenshotWatcherInterceptor
 import com.kaspersky.kaspresso.internal.extensions.other.getAllInterfaces
 import com.kaspersky.kaspresso.internal.invocation.UiInvocationHandler
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.logger.UiTestLogger
-import java.io.File
-import java.lang.reflect.Proxy
 import org.junit.Before
 import org.junit.Rule
+import java.io.File
+import java.lang.reflect.Proxy
 
 /**
  *  The base class for all docloc screenshot tests.
