@@ -30,7 +30,9 @@ class ScreenshotSampleTest : DocLocScreenshotTestCase(locales = "en,ru") {
     @Test
     fun test() = run {
         step("1. Launch activity") {
-            captureScreenshot("1. Simple screen")
+            activityRule.scenario.onActivity { // Test that screenshot shooter works in app's main thread
+                captureScreenshot("1. Simple screen")
+            }
         }
 
         step("2. Press Button 1") {
