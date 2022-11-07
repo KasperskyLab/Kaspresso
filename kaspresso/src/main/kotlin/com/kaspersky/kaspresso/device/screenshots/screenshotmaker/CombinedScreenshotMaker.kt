@@ -17,4 +17,12 @@ class CombinedScreenshotMaker(
             fallbackScreenshotMaker.takeScreenshot(file)
         }
     }
+
+    override fun takeFullWindowScreenshot(file: File) {
+        runCatching {
+            preferredScreenshotMaker.takeFullWindowScreenshot(file)
+        }.onFailure {
+            fallbackScreenshotMaker.takeFullWindowScreenshot(file)
+        }
+    }
 }
