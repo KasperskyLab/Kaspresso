@@ -19,8 +19,7 @@
         app:layout_constraintBottom_toTopOf="@id/guideline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:textSize="40sp"
-        android:text="unknown"/>
+        android:textSize="40sp"/>
 
     <Button
         android:id="@+id/check_wifi_btn"

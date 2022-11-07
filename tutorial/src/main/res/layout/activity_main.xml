@@ -1,50 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="16dp">
 
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="40dp"
+        android:text="Tutorial"
         android:textSize="30sp"
-        android:text="Tutorial"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/simple_activity_btn"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/title"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp"
-        android:text="Simple test"/>
+        android:text="Simple test"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title" />
 
     <Button
-        android:id="@+id/flaky_activity_btn"
-        android:layout_width="match_parent"
+        android:id="@+id/wifi_activity_btn"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/simple_activity_btn"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp"
-        android:text="Flaky test"/>
+        android:text="Internet availability"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/simple_activity_btn" />
 
     <Button
-        android:id="@+id/internet_availability"
-        android:layout_width="wrap_content"
+        android:id="@+id/alert_dialog_activity_btn"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/flaky_activity_btn"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp"
-        android:text="Internet availability"/>
-
+        android:text="Alert dialog activity"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/wifi_activity_btn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

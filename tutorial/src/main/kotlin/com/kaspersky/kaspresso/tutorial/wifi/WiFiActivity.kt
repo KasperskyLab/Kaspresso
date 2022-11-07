@@ -5,6 +5,7 @@ import android.content.Context
 import android.net.wifi.WifiManager
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.kaspersky.kaspresso.tutorial.R
 import com.kaspersky.kaspresso.tutorial.databinding.ActivityWifiBinding
 
 class WiFiActivity : AppCompatActivity() {
@@ -16,10 +17,10 @@ class WiFiActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.checkWifiBtn.setOnClickListener {
-            binding.wifiStatus.text = if (isWiFiEnabled(application)) {
-                "enabled"
+            if (isWiFiEnabled(application)) {
+                binding.wifiStatus.setText(R.string.enabled_status)
             } else {
-                "disabled"
+                binding.wifiStatus.setText(R.string.disabled_status)
             }
         }
     }
