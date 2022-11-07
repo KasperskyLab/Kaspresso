@@ -26,17 +26,17 @@ class ScreenshotsImpl(
      */
     override fun take(tag: String): Unit = doTakeAndApply(tag, false, null)
 
-    override fun takeFull(tag: String) = doTakeAndApply(tag, true, null)
+    override fun takeFullWindow(tag: String) = doTakeAndApply(tag, true, null)
 
     override fun takeAndApply(tag: String, block: File.() -> Unit): Unit = doTakeAndApply(tag, false, block)
 
-    override fun takeFullAndApply(tag: String, block: File.() -> Unit) = doTakeAndApply(tag, true, block)
+    override fun takeFullWindowAndApply(tag: String, block: File.() -> Unit) = doTakeAndApply(tag, true, block)
 
     private fun doTakeAndApply(tag: String, isFull: Boolean, block: (File.() -> Unit)?) {
         try {
             val screenshotFile: File = resourceFilesProvider.provideScreenshotFile(tag)
             if (isFull) {
-                screenshotMaker.takeFullScreenshot(screenshotFile)
+                screenshotMaker.takeFullWindowScreenshot(screenshotFile)
             } else {
                 screenshotMaker.takeScreenshot(screenshotFile)
             }

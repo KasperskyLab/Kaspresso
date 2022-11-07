@@ -24,7 +24,7 @@ class ExternalScreenshotMaker(
         device.takeScreenshot(file, scale, params.quality)
     }
 
-    override fun takeFullScreenshot(file: File) {
-        takeScreenshot(file)
+    override fun takeFullWindowScreenshot(file: File) {
+        TODO("External Full Window Screenshot not yet implemented")
     }
 }

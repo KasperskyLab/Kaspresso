@@ -12,6 +12,8 @@
     <string name="main_screen_measure_sample_button">Measure пример</string>
     <string name="main_screen_jetpack_compose_button">Jetpack Compose примеры</string>
     <string name="main_screen_shared_test">Shared Test with Robolectric пример</string>
+    <string name="main_screen_device_button">Device пример</string>
+    <string name="main_screen_full_device_button">Full Window Device пример</string>
 
     <!-- Auto scroll fallback screen -->
     <string name="autoscroll_scrollview_with_padding_title">Auto scroll ScrollView with padding</string>

@@ -2,14 +2,14 @@ package com.kaspersky.kaspressample.devicefull
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.kaspersky.kaspressample.databinding.ActivityDeviceFullSampleBinding
+import com.kaspersky.kaspressample.databinding.ActivityDeviceFullWindowSampleBinding
 
-class DeviceFullSampleActivity : AppCompatActivity() {
+class DeviceFullWindowSampleActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val binding = ActivityDeviceFullSampleBinding.inflate(layoutInflater)
+        val binding = ActivityDeviceFullWindowSampleBinding.inflate(layoutInflater)
         setContentView(binding.root)
     }
 }

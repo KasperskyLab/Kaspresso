@@ -3,7 +3,7 @@ package com.kaspersky.kaspressample.device_tests
 import android.Manifest
 import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.rule.GrantPermissionRule
-import com.kaspersky.kaspressample.devicefull.DeviceFullSampleActivity
+import com.kaspersky.kaspressample.devicefull.DeviceFullWindowSampleActivity
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.junit.Assert
 import org.junit.Rule
@@ -23,7 +23,7 @@ class DeviceFullScreenshotSampleTest : TestCase() {
     )
 
     @get:Rule
-    val activityRule = activityScenarioRule<DeviceFullSampleActivity>()
+    val activityRule = activityScenarioRule<DeviceFullWindowSampleActivity>()
 
     @Test
     fun screenshotSampleTest() {
@@ -36,7 +36,7 @@ class DeviceFullScreenshotSampleTest : TestCase() {
         }.run {
             step("Take a screenshot") {
                 Assert.assertTrue(screenshotDir.list()?.isEmpty() ?: true)
-                device.screenshots.takeFull(SCREENSHOT_TAG)
+                device.screenshots.takeFullWindow(SCREENSHOT_TAG)
                 Assert.assertTrue(resourceFilesProvider.provideScreenshotFile(SCREENSHOT_TAG).exists())
             }
         }

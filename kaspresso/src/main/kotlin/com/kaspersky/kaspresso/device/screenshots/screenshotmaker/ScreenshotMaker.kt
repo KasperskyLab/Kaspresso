@@ -9,5 +9,5 @@ interface ScreenshotMaker {
 
     fun takeScreenshot(file: File)
 
-    fun takeFullScreenshot(file: File)
+    fun takeFullWindowScreenshot(file: File)
 }

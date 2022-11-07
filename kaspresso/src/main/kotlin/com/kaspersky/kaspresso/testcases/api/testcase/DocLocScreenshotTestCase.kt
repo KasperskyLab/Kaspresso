@@ -8,7 +8,9 @@ import com.kaspersky.kaspresso.device.screenshots.screenshotfiles.DefaultScreens
 import com.kaspersky.kaspresso.device.screenshots.screenshotfiles.DefaultScreenshotNameProvider
 import com.kaspersky.kaspresso.device.screenshots.screenshotfiles.ScreenshotDirectoryProvider
 import com.kaspersky.kaspresso.device.screenshots.screenshotfiles.ScreenshotNameProvider
+import com.kaspersky.kaspresso.device.screenshots.screenshotmaker.CombinedScreenshotMaker
 import com.kaspersky.kaspresso.device.screenshots.screenshotmaker.ExternalScreenshotMaker
+import com.kaspersky.kaspresso.device.screenshots.screenshotmaker.InternalScreenshotMaker
 import com.kaspersky.kaspresso.docloc.DocLocScreenshotCapturer
 import com.kaspersky.kaspresso.docloc.MetadataSaver
 import com.kaspersky.kaspresso.docloc.rule.LocaleRule
@@ -28,6 +30,7 @@ import com.kaspersky.kaspresso.internal.extensions.other.getAllInterfaces
 import com.kaspersky.kaspresso.internal.invocation.UiInvocationHandler
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.logger.UiTestLogger
+import com.kaspersky.kaspresso.params.ScreenshotParams
 import java.io.File
 import java.lang.reflect.Proxy
 import org.junit.Before
@@ -60,6 +63,7 @@ abstract class DocLocScreenshotTestCase(
             addTimestamps = false
         ),
     private val changeSystemLocale: Boolean = false,
+    private val screenshotParams: ScreenshotParams = ScreenshotParams(),
     locales: String?,
     kaspressoBuilder: Kaspresso.Builder = Kaspresso.Builder.simple()
 ) : TestCase(kaspressoBuilder = kaspressoBuilder) {
@@ -77,6 +81,7 @@ abstract class DocLocScreenshotTestCase(
         screenshotNameProvider: ScreenshotNameProvider = DefaultScreenshotNameProvider(addTimestamps = false),
         changeSystemLocale: Boolean = false,
         locales: String?,
+        screenshotParams: ScreenshotParams = ScreenshotParams(),
         kaspressoBuilder: Kaspresso.Builder = Kaspresso.Builder.simple()
     ) : this(
         resourcesRootDirsProvider = object : ResourcesRootDirsProvider {
@@ -93,6 +98,7 @@ abstract class DocLocScreenshotTestCase(
             override fun getFileName(tag: String, fileExtension: String): String =
                 screenshotNameProvider.getScreenshotName(tag)
         },
+        screenshotParams = screenshotParams,
         changeSystemLocale = changeSystemLocale,
         locales = locales,
         kaspressoBuilder = kaspressoBuilder
@@ -138,7 +144,13 @@ abstract class DocLocScreenshotTestCase(
                 resourcesDirsProvider,
                 resourceFileNamesProvider
             ),
-            screenshotMaker = ExternalScreenshotMaker(kaspresso.instrumentalDependencyProvider),
+            screenshotMaker = CombinedScreenshotMaker(
+                preferredScreenshotMaker = InternalScreenshotMaker(kaspresso.device.activities, screenshotParams),
+                fallbackScreenshotMaker = ExternalScreenshotMaker(
+                    kaspresso.instrumentalDependencyProvider,
+                    screenshotParams
+                )
+            ),
             metadataSaver = MetadataSaver(kaspresso.device.activities, kaspresso.device.apps, logger)
         )
 
@@ -153,6 +165,16 @@ abstract class DocLocScreenshotTestCase(
      */
     protected open fun captureScreenshot(name: String) {
         screenshotCapturer.captureScreenshot(name.replace(Regex("[. ]"), "_").replace(".", "_"))
+    }
+
+    /**
+     * Captures a full window screenshot with a given [name] and saves it to
+     * <device path for pictures>/<locale>/<screenshotsDirectory>.
+     *
+     * @param name screenshot name. English letters, spaces, numbers and dots are allowed.
+     */
+    protected open fun captureFullWindowScreenshot(name: String) {
+        screenshotCapturer.captureFullWindowScreenshot(name.replace(Regex("[. ]"), "_").replace(".", "_"))
     }
 
     /**

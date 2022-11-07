@@ -65,7 +65,7 @@
             android:label="@string/device_sample_title"/>
 
         <activity
-            android:name=".devicefull.DeviceFullSampleActivity"
+            android:name=".devicefull.DeviceFullWindowSampleActivity"
             android:label="@string/device_full_title"/>
 
         <activity

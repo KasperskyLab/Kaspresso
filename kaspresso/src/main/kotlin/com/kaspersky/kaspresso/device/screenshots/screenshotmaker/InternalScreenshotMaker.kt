@@ -40,7 +40,7 @@ class InternalScreenshotMaker(
         bitmap.recycle()
     }
 
-    override fun takeFullScreenshot(file: File) {
+    override fun takeFullWindowScreenshot(file: File) {
         val activity = activities.getResumed() ?: throw RuntimeException("There is no resumed activity.")
 
         val bitmap = fillFullBitmap(activity, file)
