@@ -12,7 +12,7 @@ import org.junit.runner.Description
     replaceWith = ReplaceWith(
         """
     Kaspresso.Builder.simple().apply {
-        stepWatcherInterceptors.add(ScreenshotStepWatcherInterceptor(screenshots))
+        testRunWatcherInterceptors.add(TestRunnerScreenshotWatcherInterceptor(screenshots))
     }
 """
     )
