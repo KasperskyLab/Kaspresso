@@ -61,7 +61,9 @@ abstract class DocLocScreenshotTestCase(
         ),
     private val changeSystemLocale: Boolean = false,
     locales: String?,
-    kaspressoBuilder: Kaspresso.Builder = Kaspresso.Builder.simple()
+    kaspressoBuilder: Kaspresso.Builder = Kaspresso.Builder.simple().apply {
+        testRunWatcherInterceptors.add(TestRunnerScreenshotWatcherInterceptor(screenshots))
+    }
 ) : TestCase(kaspressoBuilder = kaspressoBuilder) {
 
     @Deprecated(
@@ -77,7 +79,9 @@ abstract class DocLocScreenshotTestCase(
         screenshotNameProvider: ScreenshotNameProvider = DefaultScreenshotNameProvider(addTimestamps = false),
         changeSystemLocale: Boolean = false,
         locales: String?,
-        kaspressoBuilder: Kaspresso.Builder = Kaspresso.Builder.simple()
+        kaspressoBuilder: Kaspresso.Builder = Kaspresso.Builder.simple().apply {
+            stepWatcherInterceptors.add(ScreenshotStepWatcherInterceptor(screenshots))
+        }
     ) : this(
         resourcesRootDirsProvider = object : ResourcesRootDirsProvider {
             override val logcatRootDir: File = File("logcat")
@@ -116,9 +120,6 @@ abstract class DocLocScreenshotTestCase(
     @get:Rule
     val storagePermissionRule = GrantPermissionRule.grant(Manifest.permission.WRITE_EXTERNAL_STORAGE)!!
 
-    @get:Rule
-    val testFailRule = TestFailRule()
-
     @Before
     fun setup() {
         if (!kaspresso.instrumentalDependencyProvider.isAndroidRuntime) {
@@ -141,8 +142,6 @@ abstract class DocLocScreenshotTestCase(
             screenshotMaker = ExternalScreenshotMaker(kaspresso.instrumentalDependencyProvider),
             metadataSaver = MetadataSaver(kaspresso.device.activities, kaspresso.device.apps, logger)
         )
-
-        testFailRule.screenshotCapturer = screenshotCapturer
     }
 
     /**
