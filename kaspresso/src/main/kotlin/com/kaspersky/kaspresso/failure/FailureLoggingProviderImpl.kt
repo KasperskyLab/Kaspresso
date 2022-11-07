@@ -77,17 +77,26 @@ class FailureLoggingProviderImpl(
      * @return transformed [error].
      */
     private fun Throwable.describedWith(viewMatcher: Matcher<View>?): Throwable {
-        return when (this) {
-            is PerformException -> {
+        return when {
+            this is PerformException -> {
                 PerformException.Builder()
                     .from(this)
                     .apply { viewMatcher?.let { withViewDescription(it.toString()) } }
                     .build()
             }
-            is AssertionError -> {
+            this is AssertionError -> {
                 AssertionFailedError(message).initCause(this)
+            }
+            isWebViewException(this) -> {
+                val message = StringBuilder("Failed to interact with web view! Usually it means that desired element is not found or JavaScript is disabled in web view")
+                viewMatcher?.let { message.append("\nView description: ${it.describe()}") }
+                RuntimeException(message.toString())
             }
             else -> this
         }.apply { stackTrace = Thread.currentThread().stackTrace }
+    }
+
+    private fun isWebViewException(throwable: Throwable): Boolean {
+        return throwable is RuntimeException && throwable.message?.contains("atom evaluation returned null", ignoreCase = true) ?: false
     }
 }
