@@ -10,6 +10,7 @@ import java.io.File
 class DefaultResourcesDirsProvider(
     private val dirsProvider: DirsProvider,
     private val resourcesDirNameProvider: ResourcesDirNameProvider,
+    private val testThread: Thread = Thread.currentThread()
 ) : ResourcesDirsProvider {
 
     override fun provide(dest: File, subDir: String?): File {
@@ -19,7 +20,7 @@ class DefaultResourcesDirsProvider(
     }
 
     private fun resolveResourcesDirDest(rootDir: File, subDir: String? = null): File {
-        val testMethod: TestMethod = Thread.currentThread().stackTrace.findTestMethod()
+        val testMethod: TestMethod = testThread.stackTrace.findTestMethod()
         val resourcesDirName: String = resourcesDirNameProvider.provideResourcesDirName(testMethod)
         return when (subDir) {
             null -> rootDir.resolve(resourcesDirName)
