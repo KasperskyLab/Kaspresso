@@ -256,6 +256,18 @@ Finally, let's look at all available Test DSL in Kaspresso:
 You can have a look at examples of how to [use and configure Kaspresso](../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/configurator_tests)
 and how to [use different forms of DSL](../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/dsl_tests).
 
+#### Google maps interaction
+To interact with google maps through Kaspresso you need to define your screen like below. Please, notice that map elements and map itself are found using **withContentDescription** qualifier.  
+```kotlin
+object MapsScreen : KScreen<MapsScreen>() {
+    override val layoutId: Int? = R.layout.activity_maps
+    override val viewClass: Class<*>? = MapsActivity::class.java
+
+    val map: UiView = UiView { withContentDescription("Sample Map Content Description") }
+    val marker: UiView = UiView { withContentDescription(Pattern.compile(".*Sample Marker Title.*")) }
+}
+```
+
 ### Sweet additional features
 
 #### Some words about *BaseTestContext* method

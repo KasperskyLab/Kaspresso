@@ -1,5 +1,6 @@
 plugins {
     id("convention.kotlin-app")
+    id("convention.third-party-report")
 }
 
 dependencies {
