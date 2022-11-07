@@ -38,14 +38,11 @@
         <activity android:name=".simple.SimpleActivity"
             android:exported="true"/>
 
-        <activity android:name=".flaky.FlakyActivity"
-            android:exported="true"/>
-
-        <activity android:name=".flaky.ResultActivity"
-            android:exported="true"/>
-
         <activity android:name=".wifi.WiFiActivity"
             android:exported="true"/>
+
+        <activity android:name=".dialog.AlertDialogActivity"
+            android:exported="false"/>
 
     </application>
 

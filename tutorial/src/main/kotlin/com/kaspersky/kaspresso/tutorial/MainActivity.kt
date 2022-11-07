@@ -3,8 +3,8 @@ package com.kaspersky.kaspresso.tutorial
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.kaspersky.kaspresso.tutorial.dialog.AlertDialogActivity
 import com.kaspersky.kaspresso.tutorial.databinding.ActivityMainBinding
-import com.kaspersky.kaspresso.tutorial.flaky.FlakyActivity
 import com.kaspersky.kaspresso.tutorial.simple.SimpleActivity
 import com.kaspersky.kaspresso.tutorial.wifi.WiFiActivity
 
@@ -22,11 +22,12 @@ class MainActivity : AppCompatActivity() {
         binding.simpleActivityBtn.setOnClickListener {
             startActivity(Intent(this, SimpleActivity::class.java))
         }
-        binding.flakyActivityBtn.setOnClickListener {
-            startActivity(Intent(this, FlakyActivity::class.java))
-        }
-        binding.internetAvailability.setOnClickListener {
+        binding.wifiActivityBtn.setOnClickListener {
             startActivity(Intent(this, WiFiActivity::class.java))
+        }
+
+        binding.alertDialogActivityBtn.setOnClickListener {
+            startActivity(Intent(this, AlertDialogActivity::class.java))
         }
     }
 }
