@@ -26,7 +26,7 @@
 <br> 3. *Кнопки `Button`*
 
 !!! info
-Полный список виджетов в android с подробной информацией можно найти [здесь](https://developer.android.com/reference/android/widget/package-summary)
+    Полный список виджетов в android с подробной информацией можно найти [здесь](https://developer.android.com/reference/android/widget/package-summary)
 
 <br> При нажатии на кнопку текст в заголовке меняется на введенный в поле ввода.
 
