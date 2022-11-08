@@ -58,34 +58,42 @@ dependencies {
 
 ## Написание теста начнем с создания Page object для текущего экрана.
 <br> Про паттерн PageObject в Kaspresso можно прочитать в [документации](https://kasperskylab.github.io/Kaspresso/Wiki/Page_object_in_Kaspresso/).<br/>
-<br> В папке `androidTest` создаем папку `screen` и кладем туда объект `SimpleScreen`:
-<br> Имея доступ к исходному коду `Tutorial` мы можем увидеть, что интересующий нас экран отображается в `SimpleActivity`, а сама верстка лежит в файле `activity_simple`. Поэтому, в данном случае мы можем воспользоваться `white-box тестированием` (детальнее про этот тип тестирования можно узнать [здесь](https://ru.wikipedia.org/wiki/%D0%A2%D0%B5%D1%81%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5_%D0%B1%D0%B5%D0%BB%D0%BE%D0%B3%D0%BE_%D1%8F%D1%89%D0%B8%D0%BA%D0%B0)). Альтернативный способ тестирования (black-box) будет рассмотрен в следующих уроках.
+<br> Попасть на SimpleActivity можно из MainActivity. Поэтому, чтобы протестировать SimpleActivity, нам нужно описать два PageObject-а. В папке `androidTest` создаем папку `screen` и кладем туда объекты `MainScreen` и `SimpleScreen`:
+
+```kotlin
+object MainScreen: KScreen<MainScreen>() {
+
+    override val layoutId: Int? = null
+    override val viewClass: Class<*>? = null
+    
+    val simpleActivityButton = KButton { withId(R.id.simple_activity_btn) }
+}
+```
+
+<br> Основной экран состоит из нескольких UI-элементов, но нас в рамках первого теста интересует только одна кнопка - кнопка перехода на экран SimpleActivty.
 
 ```kotlin
 object SimpleScreen : KScreen<SimpleScreen>() {
 
-    override val layoutId: Int = R.layout.activity_simple
-    override val viewClass: Class<*> = SimpleActivity::class.java
-
+    override val layoutId: Int? = null
+    override val viewClass: Class<*>? = null
+    
     val title = KTextView { withId(R.id.simple_title) }
     val button = KButton { withId(R.id.change_title_btn) }
     val input = KEditText { withId(R.id.input_text) }
 }
 ```
-<br> В этом объекте мы описываем элементы интерфейса, с которым будет взаимодействовать тест. Здесь стоит обратить внимание на то, что мы один раз кладем matcher-ы в конструктор `View` ({ withId(R.id...)}). В самом тесте мы сможем обращаться к SimpleScreen и его элементам напрямую.
-<br> Если автотест пишет тот же человек, кто и писал код самого приложения, то не должно возникнуть вопросов по указанным выше `id` в методах `withId`, `layoutId` и `viewClass`. В нашем же случае код Tutorial был написан до нас, поэтому нам важно понять, как их найти. При помощи [Layout inspector](https://medium.com/androiddevelopers/layout-inspector-1f8d446d048) можно проанализировать структуру элементов на экране, узнать id нужных элементов. В дальнейшем, глобальным поиском по проекту можно найти файлы `layoutId` и `viewClass`, с которыми связаны найденные `id`. Подход PageObject позволяет разделить работу по написанию автотестов между разработчиками приложения и разработчиками тестов: разработчики приложения могут создавать объекты `Screen` для нужных экранов со всеми идентификаторами элементов, а разработчики автотестов по готовым объектам моделей экранов реализовывать тесткейсы. 
-<br> Для поиска нужного `View` можно использовать сразу несколько matcher-ов. Например, если у какого-то элемента нет `id`, мы можем найти его с помощью нескольких matcher-ов. 
-<br> В объекте SimpleScreen переопределены `layoutId` и `ViewClass`. Если их корректно не проинициализировать (например, присвоить `null`), то на работоспособность теста это влиять не будет. Но мы рекомендуем не игнорировать их и корректно инициализировать. Это поможет при разработке и дальнейшей поддержки понимать, с каким `ViewClass` и `layoutId` связан конкретный Screen.
-
-## Приступаем с коду самого теста
+<br> В этом объекте мы описываем элементы интерфейса, с которым будет взаимодействовать тест. Здесь стоит обратить внимание на то, что мы один раз кладем matcher-ы в конструктор `View` ({ withId(R.id...)}). В самом тесте мы сможем обращаться к MainScreen и SimpleScreen и их элементам напрямую.
+<br> В наследниках KScreen рекомендуется корректно переопределять `layoutId` и `ViewClass`, но это не обязательно. В следующих тестах мы вернемся к обсуждению этих полей, но в этом тесте для упрощения мы оставим инициализацию `null`. 
+## Приступаем к коду самого теста
 
 <br> В папке `androidTest` создаем класс `SimpleTest`:
 
 ```kotlin
-class SimpleTest : TestCase() {
+class SimpleActivityTest : TestCase() {
 
     @get:Rule
-    val activityRule = activityScenarioRule<SimpleActivity>()
+    val activityRule = activityScenarioRule<MainActivity>()
 
     @Test
     fun test() {
@@ -94,17 +102,17 @@ class SimpleTest : TestCase() {
 }
 ```
 
-<br> Тест `SimpleTest` можно запустить. Информацию по запуску тестов в Android Studio можно найти в  [предыдущем уроке](https://kasperskylab.github.io/Kaspresso/Tutorial/Running_the_first_test/)
-<br> Этот тест осуществит запуск указанной activity `SimpleActivity` перед запуском теста и закроет после прогона теста. За это отвечает:
+<br> Тест `SimpleActivityTest` можно запустить. Информацию по запуску тестов в Android Studio можно найти в  [предыдущем уроке](https://kasperskylab.github.io/Kaspresso/Tutorial/Running_the_first_test/)
+<br> Этот тест осуществит запуск указанной activity `MainActivity` перед запуском теста и закроет после прогона теста. За это отвечает:
 
 ```kotlin
     @get:Rule
-    val activityRule = activityScenarioRule<SimpleActivity>()
+    val activityRule = activityScenarioRule<MainActivity>()
 ```
 
 <br> Подробнее про `activityScenarioRule` можно почитать [здесь](https://developer.android.com/reference/androidx/test/ext/junit/rules/ActivityScenarioRule)
 
-<br> SimpleTest унаследован от TestCase. Это не единственный способ создать тестовый класс. В случае, когда невозможно отнаследоваться от TestCase (в Java и Kotlin запрещено множественное наследование), можно использовать TestCaseRule. 
+<br> SimpleActivityTest унаследован от TestCase. Это не единственный способ создать тестовый класс. В случае, когда невозможно отнаследоваться от TestCase (в Java и Kotlin запрещено множественное наследование), можно использовать TestCaseRule. 
 
 ```kotlin
  @get:Rule
@@ -121,125 +129,74 @@ fun test() =
   }
 ```
 
-<br> Расширим код теста `test()` в `SimpleTest` проверкой, что заголовок отображается и содержит ожидаемый текст.
+<br> Расширим код теста `test()` в `SimpleActivityTest` проверками, что кнопка перехода на экран SimpleActivity отображается и она кликабельна.
 
 ```kotlin
-class SimpleTest : TestCase() {
+class SimpleActivityTest: TestCase() {
 
     @get:Rule
-    val activityRule = activityScenarioRule<SimpleActivity>()
+    val activityRule = activityScenarioRule<MainActivity>()
 
     @Test
     fun test() {
-        SimpleScreen {
-            title {
+        MainScreen {
+            simpleActivityButton {
                 isVisible()
-                hasText(R.string.simple_activity_default_title)
-            }
-        }
-    }
-}
-```
-
-<br> Обращаемся к созданному нами выше PageObject-у `SimpleScreen`. У этого объекта мы объявили поле заголовка `title`. Внутри блока `title{ }` доступны различные методы. 
-<br> Сейчас нас интересуют методы `isVisible()` и `hasText()`. 
-<br> Элемент `title` объявлен с типом `KTextView`. Это класс-обертка в `Kaspresso`, которая реализует интерфейсы `TextViewActions` и `TextViewAssertions`. Первый определяет набор действий, которые могут быть выполнены над заголовком, а второй - набор проверок. 
-<br> Рекомендуем посмотреть код этих интерфейсов, их родителей и аналогичные интерфейсы для других элементов.
-
-## Расширим код теста
-
-```kotlin
-class SimpleTest : TestCase() {
-
-    @get:Rule
-    val activityRule = activityScenarioRule<SimpleActivity>()
-
-    @Test
-    fun test() {
-        SimpleScreen {
-            title {
-                isVisible()
-                hasText(R.string.simple_activity_default_title)
-                hasTextColor(R.color.black)
-            }
-
-            button {
-                isVisible()
-                withText(R.string.simple_activity_change_title_button)
-                isClickable()
-            }
-            input {
-                isVisible()
-                hasHint(R.string.simple_activity_input_hint)
-                hasEmptyText()
-
-                typeText("Kaspresso")
-                hasText("Kaspresso")
-            }
-            closeSoftKeyboard()
-            button {
                 click()
             }
-            title {
-                hasText("Kaspresso")
-            }
         }
     }
 }
 ```
 
-<br> Рассмотрим сам тест. Благодаря реализации паттерна Page object и Kotlin DSL код теста становится простым и понятным: сперва мы проверили корректность отображения нужных элементов, затем ввели текст в поле ввода, нажали кнопку и проверили, что заголовок изменился. Однако, код любого теста - это реализация определенных тест-кейсов. Сам же тест-кейс - это некий сценарий (последовательность шагов), написанный на человеческом языке тестировщиком. Этот набор шагов может со временем меняться, поэтому спустя какое-то время возникнет потребность в редактировании теста. Помимо этого, тест может не всегда проходить успешно. Чтобы тест было легко поддерживать и он оставался понятным спустя долгое время, он должен быть разделен на шаги, идентичные указанным в тест-кейсах. Комментарии будут не самым лучшим решением, так как в логах не будет понятно, на каком шаге упал тест. Для этого можно воспользоваться специальными методами Kaspresso (например, `step()`).
+<br> Расширим код теста `test()` в `SimpleActivityTest` проверкой, что заголовок отображается и содержит ожидаемый текст.
 
 ```kotlin
-class SimpleTest : TestCase() {
+class SimpleActivityTest : TestCase() {
 
     @get:Rule
     val activityRule = activityScenarioRule<SimpleActivity>()
 
     @Test
-    fun test() =
-        before {
-
-        }.after {
-
-        }.run {
-            step("Open Simple Screen") {
-                SimpleScreen {
-                    title {
-                        isVisible()
-                        hasText(R.string.simple_activity_default_title)
-                        hasTextColor(R.color.black)
-                    }
-
-                    button {
-                        isVisible()
-                        withText(R.string.simple_activity_change_title_button)
-                        isClickable()
-                    }
-                    input {
-                        isVisible()
-                        hasHint(R.string.simple_activity_input_hint)
-                        hasEmptyText()
-                    }
-                }
-            }
-
-            step("Type \" Kaspresso \"") {
-                SimpleScreen {
-                    input.typeText("Kaspresso")
-                    closeSoftKeyboard()
-                    button.click()
-                }
-            }
-
-            step("Check title content") {
-                SimpleScreen {
-                    title.hasText("Kaspresso")
-                }
+    fun test() {
+        SimpleScreen {
+            title {
+                isVisible()
+                hasText(R.string.simple_activity_default_title)
             }
         }
+    }
 }
 ```
-<br> У каждого теста могут быть свои предусловия (определенные состояния девайса), а после его выполнения состояние девайса должно быть возвращено в исходное. Секции before и after нужны для настройки состояния до и после прогона теста. Например, это может быть включение Bluetooth. До выполнения теста необходимо включить его, а после - выключить. Более подробно эти секции описаны в следующих примерах. 
-<br> Step представляет собой абстракцию, которая реагирует на все события шага (например: шаг стартует, шаг завершается успехом или неудачей). Внутри одной секции step может быть объявлены другие секции step. По умолчанию, абстракция step добавляет логирование и скриншотинг (возможность кастомизаций набора действий описаны в следующих примерах). Таким образом, после прогона теста можно будет посмотреть подробные записи логирования, которые будут полезны для дальнейшей поддержки тестов в рабочем состоянии и устранении проблем. Скришоты будут делаться по окончании шага (по одному на каждую step-секцию) и перед завершением теста в случае возникновения ошибки. Данное поведение основывается на философии Kaspresso о возможном изменении состояния после каждого шага. Если необходимо больше скриншотов, то их можно сделать с помощью вызова метода `device.screenshots.take("Additional_screenshot")`. Доступный функционал `device` описан в следующих примерах.
+<br> Помимо матчеров, которые используются для поиска нужных элементов на экране, можно использовать реализацию классов-наследников BaseActions и BaseAssertions. Первый определяет набор действий, которые могут быть выполнены над элементом, а второй - набор проверок. 
+<br> Более подробно про action и assertion можно почитать в [документации](https://kasperskylab.github.io/Kaspresso/Wiki/Matchers_actions_assertions/)
+<br> Давайте запустим тест и проверим, что написанный код запускает приложение, открывает главный экран, успешно проверяет видимость кнопки и осуществляет переход на экран SimpleActivity по клику на эту кнопку.
+<br> Вернемся к тесту. После перехода на экран SimpleActivity работа с PageObject-ом MainScreen завершена и пора использовать SimpleActivityScreen:
 
+```kotlin
+class SimpleActivityTest: TestCase() {
+
+    @get:Rule
+    val activityRule = activityScenarioRule<MainActivity>()
+
+    @Test
+    fun test() {
+        MainScreen {
+            simpleActivityButton {
+                isVisible()
+                click()
+            }
+        }
+        SimpleActivityScreen {
+            simpleTitle.isVisible()
+            changeTitleButton.isClickable()
+            simpleTitle.hasText(R.string.simple_activity_default_title)
+            inputText.replaceText("new title")
+            changeTitleButton.click()
+            simpleTitle.hasText("new title")
+        }
+    }
+}
+```
+<br>Рассмотрим код этого теста. После перехода на экран SimpleActivityScreen мы проверили видимость заголовка (simpleTitle.isVisible()), кликабельность кнопки смены текста в заголовке (changeTitleButton.isClickable()) и отображения в заголовке ожидаемого текста по умолчанию(simpleTitle.hasText(R.string.simple_activity_default_title)).
+<br>Затем мы в поле ввода помещаем сообщение "new title" (inputText.replaceText("new title")), нажимаем на кнопку смены заголовка и убеждаемся, что текст поменялся на "new title" (simpleTitle.hasText("new title"))
