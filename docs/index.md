@@ -26,7 +26,7 @@ With Kaspresso, some UI Automator commands run **10 times faster**!
 
 And many more!
 
-<img src="../kaspresso.png" alt="Kaspresso"/>
+<img src="kaspresso.png" alt="Kaspresso"/>
 [//]: # (![Kaspresso]&#40;https://habrastorage.org/webt/dw/jh/9k/dwjh9kypjl637kxj8tiaxwjvtp0.png&#41;)
 
 ## Tutorial *NEW*
