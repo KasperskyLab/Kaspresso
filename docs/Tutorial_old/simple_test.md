@@ -58,7 +58,7 @@ dependencies {
 
 ## Написание теста начнем с создания Page object для текущего экрана.
 <br> Про паттерн PageObject в Kaspresso можно прочитать в [документации](https://kasperskylab.github.io/Kaspresso/Wiki/Page_object_in_Kaspresso/).<br/>
-<br> Попасть на SimpleActivity можно из MainActivity. Поэтому, чтобы протестировать SimpleActivity, нам нужно описать два PageObject-а. В папке `androidTest` создаем папку `screen` и кладем туда объекты `MainScreen` и `SimpleScreen`:
+<br> Попасть на SimpleActivity можно из MainActivity. Поэтому, чтобы протестировать SimpleActivity, нам нужно описать два PageObject-а. В папке `androidTest` создаем папку `screen` и кладем туда объекты `MainScreen` и `SimpleActivityScreen`:
 
 ```kotlin
 object MainScreen: KScreen<MainScreen>() {
@@ -73,7 +73,7 @@ object MainScreen: KScreen<MainScreen>() {
 <br> Основной экран состоит из нескольких UI-элементов, но нас в рамках первого теста интересует только одна кнопка - кнопка перехода на экран SimpleActivty.
 
 ```kotlin
-object SimpleScreen : KScreen<SimpleScreen>() {
+object SimpleActivityScreen : KScreen<SimpleActivityScreen>() {
 
     override val layoutId: Int? = null
     override val viewClass: Class<*>? = null
@@ -83,7 +83,7 @@ object SimpleScreen : KScreen<SimpleScreen>() {
     val input = KEditText { withId(R.id.input_text) }
 }
 ```
-<br> В этом объекте мы описываем элементы интерфейса, с которым будет взаимодействовать тест. Здесь стоит обратить внимание на то, что мы один раз кладем matcher-ы в конструктор `View` ({ withId(R.id...)}). В самом тесте мы сможем обращаться к MainScreen и SimpleScreen и их элементам напрямую.
+<br> В этом объекте мы описываем элементы интерфейса, с которым будет взаимодействовать тест. Здесь стоит обратить внимание на то, что мы один раз кладем matcher-ы в конструктор `View` ({ withId(R.id...)}). В самом тесте мы сможем обращаться к MainScreen и SimpleActivityScreen и их элементам напрямую.
 <br> В наследниках KScreen рекомендуется корректно переопределять `layoutId` и `ViewClass`, но это не обязательно. В следующих тестах мы вернемся к обсуждению этих полей, но в этом тесте для упрощения мы оставим инициализацию `null`. 
 ## Приступаем к коду самого теста
 
@@ -149,25 +149,6 @@ class SimpleActivityTest: TestCase() {
 }
 ```
 
-<br> Расширим код теста `test()` в `SimpleActivityTest` проверкой, что заголовок отображается и содержит ожидаемый текст.
-
-```kotlin
-class SimpleActivityTest : TestCase() {
-
-    @get:Rule
-    val activityRule = activityScenarioRule<SimpleActivity>()
-
-    @Test
-    fun test() {
-        SimpleScreen {
-            title {
-                isVisible()
-                hasText(R.string.simple_activity_default_title)
-            }
-        }
-    }
-}
-```
 <br> Помимо матчеров, которые используются для поиска нужных элементов на экране, можно использовать реализацию классов-наследников BaseActions и BaseAssertions. Первый определяет набор действий, которые могут быть выполнены над элементом, а второй - набор проверок. 
 <br> Более подробно про action и assertion можно почитать в [документации](https://kasperskylab.github.io/Kaspresso/Wiki/Matchers_actions_assertions/)
 <br> Давайте запустим тест и проверим, что написанный код запускает приложение, открывает главный экран, успешно проверяет видимость кнопки и осуществляет переход на экран SimpleActivity по клику на эту кнопку.
