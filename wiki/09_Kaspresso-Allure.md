@@ -82,11 +82,13 @@ So you added the list of needed Allure-supporting interceptors to your Kaspresso
 
 This dir should be moved from the device to the host machine which will do generate the report.
 
-For example, you can use **adb pull** command on your host for this. Let say you want to locate the data for the report at **/Users/username/Desktop/allure-results**, so you call:
+Assuming your package is com.example
 ```
-adb pull /sdcard/allure-results /Users/username/Desktop
+adb exec-out run-as com.example sh -c 'cd /data/data/com.example/files && tar cf - allure-results' > ~/allure-results.tar
 ```
-If there are few devices connected to yout host you should specify the needed device id. To watch the list of connected devices you can call:
+`exec-out` runs passed command and returns result as a file which we save by `> allure-results.tar` in the end 
+
+If there are few devices connected to your host you should specify the needed device id. To watch the list of connected devices you can call:
 ```
 adb devices
 ```
@@ -98,9 +100,9 @@ emulator-5554	device
 ```
 Select the needed device and call:
 ```
-adb -s emulator-5554 pull /sdcard/allure-results /Users/username/Desktop
+adb -s emulator-5554 exec-out run-as com.example sh -c 'cd /data/data/com.example/files && tar cf - allure-results' > ~/allure-results.tar
 ```
-And that's it, the **allure-results** dir with all the test resources is now at **/Users/username/Desktop**.
+And that's it, the **allure-results** archive with all the test resources is now at your home directory.
 
 Now, we want to generate and watch the report. The Allure server must be installed on our machine for this. To find out how to do it with all the details please follow the [**Allure docs**](https://docs.qameta.io/allure/).
 
