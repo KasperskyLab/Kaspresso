@@ -82,6 +82,7 @@ nav:
       - Запуск первого теста: Tutorial/Running_the_first_test.md
       - Пишем первый автотест с Kaspresso: Tutorial/Writing_simple_test.md
       - Выполнение adb-команд: Tutorial/Выполнение adb-команд.md
+      - Выполнение adb-команд: Tutorial/Wii_sample_test.md
       - Выделение секций и шагов: Tutorial/Выделение секций и шагов.md
       - Вынесение дублирующихся шагов в Scenario: Tutorial/Вынесение дублирующихся шагов в Scenario.md
       - Тестирование за рамками приложения: Tutorial/Тестирование за рамками приложения.md
