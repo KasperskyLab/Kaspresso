@@ -8,8 +8,8 @@ import com.kaspersky.kaspresso.screens.KScreen
 
 object MainScreen : KScreen<MainScreen>() {
 
-    override val layoutId: Int? = R.layout.activity_main
-    override val viewClass: Class<*>? = MainActivity::class.java
+    override val layoutId: Int = R.layout.activity_main
+    override val viewClass: Class<*> = MainActivity::class.java
 
     val autoScrollScrollViewWithPaddingButton = KButton { withId(R.id.activity_main_auto_scroll_scrollView_with_padding_button) }
 
