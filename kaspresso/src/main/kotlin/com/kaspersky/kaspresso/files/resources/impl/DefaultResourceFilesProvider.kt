@@ -42,10 +42,10 @@ class DefaultResourceFilesProvider(
             tag,
             FileExtension.MP4.toString()
         )
-        return resourcesDirsProvider.provide(
-            resourcesRootDirsProvider.videoRootDir,
-            subDir
-        ).resolve(resFileName).createDirIfNeeded().createFileIfNeeded()
+        val resourceDir = resourcesDirsProvider.provide(resourcesRootDirsProvider.videoRootDir, subDir)
+        return resourceDir.createDirIfNeeded()
+            .resolve(resFileName)
+            .createFileIfNeeded()
     }
 
     override fun provideViewHierarchyFile(tag: String, subDir: String?): File {

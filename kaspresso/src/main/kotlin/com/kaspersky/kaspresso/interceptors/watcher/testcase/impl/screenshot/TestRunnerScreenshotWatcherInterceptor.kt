@@ -31,4 +31,14 @@ class TestRunnerScreenshotWatcherInterceptor(
     override fun onBeforeSectionFinishedFailed(testInfo: TestInfo, throwable: Throwable) {
         screenshots.take("BeforeTestSection_failure_${throwable.javaClass.simpleName}")
     }
+
+    /**
+     * Takes a screenshot of the screen on which the "main" section failed.
+     *
+     * @param testInfo the test info to use in screenshots name.
+     * @param throwable the error occurred to use in screenshots name.
+     */
+    override fun onMainSectionFinishedFailed(testInfo: TestInfo, throwable: Throwable) {
+        screenshots.take("MainTestSection_failure_${throwable.javaClass.simpleName}")
+    }
 }
