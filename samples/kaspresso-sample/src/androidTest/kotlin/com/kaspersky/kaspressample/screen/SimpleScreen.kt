@@ -8,8 +8,8 @@ import com.kaspersky.kaspresso.screens.KScreen
 
 object SimpleScreen : KScreen<SimpleScreen>() {
 
-    override val layoutId: Int? = R.layout.activity_simple
-    override val viewClass: Class<*>? = SimpleActivity::class.java
+    override val layoutId: Int = R.layout.activity_simple
+    override val viewClass: Class<*> = SimpleActivity::class.java
 
     val button1 = KButton { withId(R.id.button_1) }
 

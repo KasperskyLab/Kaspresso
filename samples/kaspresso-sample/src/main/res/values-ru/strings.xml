@@ -35,4 +35,5 @@
     <string name="device_full_title">Полный скриншот</string>
     <string name="device_full_start">НАЧАЛО</string>
     <string name="device_full_end">КОНЕЦ</string>
+    <string name="device_full_show_dialog">ПОКАЗАТЬ ДИАЛОГ</string>
 </resources>

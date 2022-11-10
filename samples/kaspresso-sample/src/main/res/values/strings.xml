@@ -42,6 +42,7 @@
     <string name="device_full_title">Device Full</string>
     <string name="device_full_start">START</string>
     <string name="device_full_end">END</string>
+    <string name="device_full_show_dialog">SHOW DIALOG</string>
 
     <!-- Screenshooter sample test -->
     <string name="increment">Increment</string>

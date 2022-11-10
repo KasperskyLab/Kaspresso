@@ -7,8 +7,8 @@ import com.kaspersky.kaspresso.screens.KScreen
 
 object WebViewScreen : KScreen<WebViewScreen>() {
 
-    override val layoutId: Int? = R.layout.activity_webview
-    override val viewClass: Class<*>? = WebViewActivity::class.java
+    override val layoutId: Int = R.layout.activity_webview
+    override val viewClass: Class<*> = WebViewActivity::class.java
 
     val webView = KWebView {
         withId(R.id.webView)

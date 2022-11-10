@@ -8,7 +8,7 @@ import com.kaspersky.kaspresso.device.screenshots.screenshotfiles.DefaultScreens
 import com.kaspersky.kaspresso.device.screenshots.screenshotfiles.DefaultScreenshotNameProvider
 import com.kaspersky.kaspresso.device.screenshots.screenshotfiles.ScreenshotDirectoryProvider
 import com.kaspersky.kaspresso.device.screenshots.screenshotfiles.ScreenshotNameProvider
-import com.kaspersky.kaspresso.device.screenshots.screenshotmaker.CombinedScreenshotMaker
+import com.kaspersky.kaspresso.device.screenshots.screenshotmaker.DocLocScreenshotMaker
 import com.kaspersky.kaspresso.device.screenshots.screenshotmaker.ExternalScreenshotMaker
 import com.kaspersky.kaspresso.device.screenshots.screenshotmaker.InternalScreenshotMaker
 import com.kaspersky.kaspresso.docloc.DocLocScreenshotCapturer
@@ -16,9 +16,9 @@ import com.kaspersky.kaspresso.docloc.MetadataSaver
 import com.kaspersky.kaspresso.docloc.rule.LocaleRule
 import com.kaspersky.kaspresso.docloc.rule.TestFailRule
 import com.kaspersky.kaspresso.files.dirs.DefaultDirsProvider
-import com.kaspersky.kaspresso.files.resources.ResourcesRootDirsProvider
-import com.kaspersky.kaspresso.files.resources.ResourcesDirsProvider
 import com.kaspersky.kaspresso.files.resources.ResourceFileNamesProvider
+import com.kaspersky.kaspresso.files.resources.ResourcesDirsProvider
+import com.kaspersky.kaspresso.files.resources.ResourcesRootDirsProvider
 import com.kaspersky.kaspresso.files.resources.impl.DefaultResourceFileNamesProvider
 import com.kaspersky.kaspresso.files.resources.impl.DefaultResourceFilesProvider
 import com.kaspersky.kaspresso.files.resources.impl.DefaultResourcesDirNameProvider
@@ -31,10 +31,10 @@ import com.kaspersky.kaspresso.internal.invocation.UiInvocationHandler
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.params.ScreenshotParams
-import java.io.File
-import java.lang.reflect.Proxy
 import org.junit.Before
 import org.junit.Rule
+import java.io.File
+import java.lang.reflect.Proxy
 
 /**
  *  The base class for all docloc screenshot tests.
@@ -144,12 +144,12 @@ abstract class DocLocScreenshotTestCase(
                 resourcesDirsProvider,
                 resourceFileNamesProvider
             ),
-            screenshotMaker = CombinedScreenshotMaker(
-                preferredScreenshotMaker = InternalScreenshotMaker(kaspresso.device.activities, screenshotParams),
-                fallbackScreenshotMaker = ExternalScreenshotMaker(
+            screenshotMaker = DocLocScreenshotMaker(
+                screenshotMaker = ExternalScreenshotMaker(
                     kaspresso.instrumentalDependencyProvider,
                     screenshotParams
-                )
+                ),
+                fullWindowScreenshotMaker = InternalScreenshotMaker(kaspresso.device.activities, screenshotParams)
             ),
             metadataSaver = MetadataSaver(kaspresso.device.activities, kaspresso.device.apps, logger)
         )
