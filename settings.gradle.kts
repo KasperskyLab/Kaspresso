@@ -33,8 +33,8 @@ include(
 
     ":kaspresso",
     ":kautomator",
-    ":allure-support",
-    ":compose-support",
+    ":kaspresso-allure-support",
+    ":kaspresso-compose-support",
 
     ":tutorial"
 )

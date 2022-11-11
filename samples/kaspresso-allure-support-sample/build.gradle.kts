@@ -22,7 +22,7 @@ dependencies {
     implementation(libs.multidex)
 
     androidTestImplementation("com.kaspersky.android-components:kaspresso")
-    androidTestImplementation("com.kaspersky.android-components:allure-support")
+    androidTestImplementation("com.kaspersky.android-components:kaspresso-allure-support")
 
     androidTestImplementation(libs.androidXTestExtJunitKtx)
     androidTestImplementation(libs.androidXTestExtJunit)

@@ -53,13 +53,13 @@ dependencies {
     implementation(libs.composeRuntimeLiveData)
 
     androidTestImplementation("com.kaspersky.android-components:kaspresso")
-    androidTestImplementation("com.kaspersky.android-components:compose-support")
+    androidTestImplementation("com.kaspersky.android-components:kaspresso-compose-support")
     androidTestImplementation(libs.androidXTestRunner)
     androidTestImplementation(libs.junit)
     androidTestImplementation(libs.composeUiTestJunit)
 
     testImplementation("com.kaspersky.android-components:kaspresso")
-    testImplementation("com.kaspersky.android-components:compose-support")
+    testImplementation("com.kaspersky.android-components:kaspresso-compose-support")
     testImplementation(libs.androidXTestRunner)
     testImplementation(libs.junit)
     testImplementation(libs.composeUiTestJunit)
