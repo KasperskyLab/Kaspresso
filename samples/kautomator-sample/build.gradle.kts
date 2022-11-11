@@ -20,7 +20,7 @@ dependencies {
     implementation(libs.constraint)
     implementation(libs.multidex)
 
-    androidTestImplementation(projects.kaspresso)
+    androidTestImplementation("com.kaspersky.android-components:kaspresso")
     androidTestImplementation(libs.androidXTestExtJunitKtx)
     androidTestImplementation(libs.androidXTestExtJunit)
 

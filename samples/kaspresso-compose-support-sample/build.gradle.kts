@@ -52,14 +52,14 @@ dependencies {
     implementation(libs.lifecycleViewModelComposeKtx)
     implementation(libs.composeRuntimeLiveData)
 
-    androidTestImplementation(projects.kaspresso)
-    androidTestImplementation(projects.composeSupport)
+    androidTestImplementation("com.kaspersky.android-components:kaspresso")
+    androidTestImplementation("com.kaspersky.android-components:compose-support")
     androidTestImplementation(libs.androidXTestRunner)
     androidTestImplementation(libs.junit)
     androidTestImplementation(libs.composeUiTestJunit)
 
-    testImplementation(projects.kaspresso)
-    testImplementation(projects.composeSupport)
+    testImplementation("com.kaspersky.android-components:kaspresso")
+    testImplementation("com.kaspersky.android-components:compose-support")
     testImplementation(libs.androidXTestRunner)
     testImplementation(libs.junit)
     testImplementation(libs.composeUiTestJunit)

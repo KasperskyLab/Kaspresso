@@ -13,5 +13,5 @@ dependencies {
     implementation(libs.appcompat)
     implementation(libs.multidex)
 
-    androidTestImplementation(projects.kaspresso)
+    androidTestImplementation("com.kaspersky.android-components:kaspresso")
 }
