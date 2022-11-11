@@ -35,6 +35,7 @@ include(
     ":kautomator",
     ":kaspresso-allure-support",
     ":kaspresso-compose-support",
+    ":kaspresso-plugin",
 
     ":tutorial"
 )
