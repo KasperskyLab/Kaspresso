@@ -3,6 +3,10 @@ plugins {
     `java-gradle-plugin`
 }
 
+dependencies {
+    implementation(libs.androidPlugin)
+}
+
 // TODO setup maven publication
 group = "com.kaspersky.kaspresso"
 gradlePlugin {
