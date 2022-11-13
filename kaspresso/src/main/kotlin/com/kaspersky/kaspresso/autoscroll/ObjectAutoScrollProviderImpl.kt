@@ -1,5 +1,6 @@
 package com.kaspersky.kaspresso.autoscroll
 
+import androidx.test.uiautomator.UiObject2
 import androidx.test.uiautomator.UiScrollable
 import androidx.test.uiautomator.UiSelector
 import com.kaspersky.components.kautomator.intercept.interaction.UiObjectInteraction
@@ -27,6 +28,7 @@ class ObjectAutoScrollProviderImpl(
      */
     override fun <T> withAutoScroll(interaction: UiObjectInteraction, action: () -> T): T {
         return try {
+            interaction.findUiObject()
             action.invoke()
         } catch (error: Throwable) {
             if (error.isAllowed(autoScrollParams.allowedExceptions) && UiScrollable(UiSelector().scrollable(true)).exists()) {
@@ -56,7 +58,7 @@ class ObjectAutoScrollProviderImpl(
          * Scrolls to the bottom and looks for the given view. Invokes the action if the view was found.
          */
         do {
-            if (interaction.uiObject2 != null) {
+            if (interaction.findUiObject() != null) {
                 logger.i("UiObject autoscroll to the bottom successfully performed.")
                 return action.invoke()
             } else {
@@ -68,7 +70,7 @@ class ObjectAutoScrollProviderImpl(
          * Scrolls to the beginning and looks for the given view. Invokes the action if the view was found.
          */
         do {
-            if (interaction.uiObject2 != null) {
+            if (interaction.findUiObject() != null) {
                 logger.i("UiObject autoscroll to the beginning successfully performed.")
                 return action.invoke()
             } else {
@@ -78,5 +80,13 @@ class ObjectAutoScrollProviderImpl(
 
         logger.i("UiObject autoscroll did not help. Throwing exception.")
         throw cachedError
+    }
+
+    private fun UiObjectInteraction.findUiObject(): UiObject2? {
+        if (uiObject2 != null) {
+            return uiObject2
+        }
+        reFindUiObject()
+        return null
     }
 }
