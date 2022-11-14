@@ -54,7 +54,7 @@ dependencies {
 8. Если ввести какой-то текст в поле ввода и кликнуть на кнопку, то текст в заголовке меняется на введенный
 
 <br>Теперь нам нужно все те же проверки написать в коде, чтобы они осуществлялись в автоматическом режиме. 
-<br>Чтобы это сделать, необходимо для каждого экрана, который участвует в тесте, создать модель (класс), внутри которого объявить все важные элементы интерфейса (кнопки, текстовые поля и т.д.), из которых состоит экран и с которыми будет взаимодействовать тест. Такой подход называется `Page Object` и подробнее о нем вы можете почитать в [документации](https://kasperskylab.github.io/Kaspresso/Wiki/Page_object_in_Kaspresso/)
+<br>Чтобы это сделать, необходимо для каждого экрана, который участвует в тесте, создать модель (класс), внутри которого объявить все элементы интерфейса (кнопки, текстовые поля и т.д.), из которых состоит экран, с которыми будет взаимодействовать тест. Такой подход называется `Page Object` и подробнее о нем вы можете почитать в [документации](https://kasperskylab.github.io/Kaspresso/Wiki/Page_object_in_Kaspresso/)
 
 <br>В первых четырех пунктах теста мы взаимодействуем с главным экраном, поэтому первым делом необходимо создать Page Object главного экрана. 
 <br>Работать мы будем в папке androidTest в модуле tutorial. Если у вас этой папки нет, то ее необходимо создать, для этого кликаем правой кнопкой мыши на папку src и выбираем пункт New -> Directory 
@@ -69,7 +69,15 @@ dependencies {
 
 <img src="../images/simple_test/create_package.png" alt="Create package" width="200"/>
 
-<br>Создание отдельного пакета на функциональность не влияет, мы это делаем просто для удобства, чтобы все модели экранов лежали в одном месте. Даем имя пакету screen и внутри создаем новый класс, 
+<br>Создание отдельного пакета на функциональность не влияет, мы это делаем просто для удобства, чтобы все модели экранов лежали в одном месте. Вы можете дать пакету любое имя (за некоторым исключением), но обычно в тестах используют такие же названия, как в самом приложении. Мы можем перейти в файл MainActivity и тут сверху будет указано имя пакета. 
+
+<img src="../images/simple_test/package_name_main_activity.png" alt="MainActivity Package name" width="200"/>
+
+Копируем это имя и вставляем в название пакета. Конкретно в этом пакете мы будем хранить только модели экранов (Page Object-ы), поэтому в конце давайте добавим `.screen`.
+
+<img src="../images/simple_test/package_name_screen.png" alt="Screen Package name" width="200"/>
+
+Когда мы будем добавлять другие классы в папку с тестами, то будем класть их уже в другие пакеты, но при этом первая часть их названия будет такой же `com.kaspersky.kaspresso.tutorial`
 
 <img src="../images/simple_test/create_class.png" alt="Create class" width="200"/>
 
@@ -80,7 +88,7 @@ dependencies {
 <br>MainScreen представляет собой модель главного экрана. Для того чтобы эту модель можно было использовать в автотестах, необходимо унаследоваться от класса KScreen, и в угловых скобках указать название этого класса.
 
 ```kotlin
-package screen
+package com.kaspersky.kaspresso.tutorial.screen
 
 import com.kaspersky.kaspresso.screens.KScreen
 
@@ -96,7 +104,7 @@ object MainScreen : KScreen<MainScreen>() {
 <br>Удерживая `ctrl` выбираем все пункты и нажимаем OK. 
 
 ```kotlin
-package screen
+package com.kaspersky.kaspresso.tutorial.screen
 
 import com.kaspersky.kaspresso.screens.KScreen
 
@@ -110,10 +118,10 @@ object MainScreen : KScreen<MainScreen>() {
 
 ```
 
-<br>Здесь вместо TODO нужно написать корректную реализацию - id макета, который установлен на экране и название класса. В будущем мы разберем, для чего это нужно и напишем правильную реализацию, а сейчас просто вернем null. Наш тест будет работать и так.
+<br>Здесь вместо TODO нужно написать корректную реализацию - id макета, который установлен на экране и название класса для связывания теста с конкретным файлом верстки и классом activity. Это нужно для удобства дальнейшей поддержки и разработки теста, но пока перед нами стоит задача написать первый тест, поэтому оставим значение null
 
 ```kotlin
-package screen
+package com.kaspersky.kaspresso.tutorial.screen
 
 import com.kaspersky.kaspresso.screens.KScreen
 
@@ -139,7 +147,7 @@ object MainScreen : KScreen<MainScreen>() {
 
 <img src="../images/simple_test/loaded_inspector.png" alt="Layout inspector loaded" width="200"/>
 
-4. Если экран не загрузился, то проверьте, что вас выбран нужный процесс
+4. Если экран не загрузился, то проверьте, что у вас выбран нужный процесс
 
 <img src="../images/simple_test/choose_pocess.png" alt="Choose process" width="200"/>
 
@@ -158,7 +166,7 @@ object MainScreen : KScreen<MainScreen>() {
 <br>Можем добавлять эту кнопку в MainScreen, обычно название переменной дают такое же, как id, но без нижних подчеркиваний, какждое следующее слово с заглавной буквы (это называется camelCase)
 
 ```kotlin
-package screen
+package com.kaspersky.kaspresso.tutorial.screen
 
 import com.kaspersky.kaspresso.screens.KScreen
 
@@ -174,7 +182,7 @@ object MainScreen : KScreen<MainScreen>() {
 Пременной simpleActivityButton нужно присвоить значение, она представляет собой кнопку, которую можно протестировать - за это отвечает class KButton. Вот так будет выглядеть установка значения в эту переменную, сейчас мы подробно разберем, что делает этот код.
 
 ```kotlin
-package screen
+package com.kaspersky.kaspresso.tutorial.screen
 
 import com.kaspersky.kaspresso.screens.KScreen
 import com.kaspersky.kaspresso.tutorial.R
@@ -215,14 +223,24 @@ import com.kaspersky.kaspresso.tutorial.R
 
 ## Добавляем SimpleActivityTest
 
-<br> В папке `androidTest` - `kotlin` создаем класс `SimpleActivityTest` наследуемся от `TestCase()`. 
+<br> В папке `androidTest` - `kotlin`, в созданном нами пакете добавляем класс `SimpleActivityTest`.
 
 <img src="../images/simple_test/create_test_1.png" alt="Creating Test First part" width="200"/>
 <img src="../images/simple_test/create_test_2.png" alt="Creating Test Second part" width="200"/>
 
+<br> Новый класс был размещен в пакете `screen`, но мы хотели бы, чтобы в нем лежали только модели экранов, поэтому созданный тест мы переместим в корень пакета `com.kaspersky.kaspresso.tutorial`. Для того, чтобы это сделать, кликаем на название класса правой кнопкой мыши и выбираем Refactor -> Move
+
+// Вставить картинку move_to_package
+
+<br> И убираем из названия пакета последнюю часть `.screen`
+
+// Вставить картинку change_package
+
 <br> Обратите внимание на импорты, класс TestCase должен быть импортирован из пакета `import com.kaspersky.kaspresso.testcases.api.testcase.TestCase`.
 
 ```kotlin
+package com.kaspersky.kaspresso.tutorial
+
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 
 class SimpleActivityTest: TestCase() {
@@ -232,6 +250,8 @@ class SimpleActivityTest: TestCase() {
 <br> И добавляем метод test(), в котором будем проверять работу приложения. У него может быть любое имя, необязательно "test", но важно, чтобы он был помечен аннотацией @Test (import org.junit.Test).
 
 ```kotlin
+package com.kaspersky.kaspresso.tutorial
+
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.junit.Test
 
@@ -251,9 +271,11 @@ class SimpleActivityTest : TestCase() {
 <br> Сейчас этот тест ничего не делает, поэтому и завершается успешно. Давайте добавим ему логики и протестируем MainScreen. 
 
 ```kotlin
+package com.kaspersky.kaspresso.tutorial
+
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.junit.Test
-import screen.MainScreen
+import com.kaspersky.kaspresso.tutorial.screen.MainScreen
 
 class SimpleActivityTest : TestCase() {
 
@@ -286,12 +308,14 @@ class SimpleActivityTest : TestCase() {
 <br>Тогда весь код теста будет выглядеть следующим образом:
 
 ```kotlin
+package com.kaspersky.kaspresso.tutorial
+
 import androidx.test.ext.junit.rules.activityScenarioRule
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import com.kaspersky.kaspresso.tutorial.MainActivity
 import org.junit.Rule
 import org.junit.Test
-import screen.MainScreen
+import com.kaspersky.kaspresso.tutorial.screen.MainScreen
 
 class SimpleActivityTest : TestCase() {
 
@@ -391,13 +415,15 @@ object SimpleActivityScreen : KScreen<SimpleActivityScreen>() {
 <br>Добавляем проверки для этого экрана
 
 ```kotlin
+package com.kaspersky.kaspresso.tutorial
+
 import androidx.test.ext.junit.rules.activityScenarioRule
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import com.kaspersky.kaspresso.tutorial.MainActivity
 import org.junit.Rule
 import org.junit.Test
-import screen.MainScreen
-import screen.SimpleActivityScreen
+import com.kaspersky.kaspresso.tutorial.screen.MainScreen
+import com.kaspersky.kaspresso.tutorial.screen.SimpleActivityScreen
 
 class SimpleActivityTest : TestCase() {
 
@@ -443,14 +469,16 @@ class SimpleActivityTest : TestCase() {
 Финальный код теста выглядит вот так:
 
 ```kotlin
+package com.kaspersky.kaspresso.tutorial
+
 import androidx.test.ext.junit.rules.activityScenarioRule
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import com.kaspersky.kaspresso.tutorial.MainActivity
 import com.kaspersky.kaspresso.tutorial.R
 import org.junit.Rule
 import org.junit.Test
-import screen.MainScreen
-import screen.SimpleActivityScreen
+import com.kaspersky.kaspresso.tutorial.screen.MainScreen
+import com.kaspersky.kaspresso.tutorial.screen.SimpleActivityScreen
 
 class SimpleActivityTest : TestCase() {
 
