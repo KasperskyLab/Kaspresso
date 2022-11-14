@@ -17,7 +17,7 @@ class KaspressoPlugin : Plugin<Project> {
     private lateinit var extension: KaspressoExtension
     private lateinit var startServerTaskProvider: TaskProvider<Task>
     private lateinit var stopServerTaskProvider: TaskProvider<Task>
-    private val desktopServerHolder = DesktopServerHolder()
+    private val desktopServerHolder by lazy { DesktopServerHolder(project.logger) }
 
     override fun apply(target: Project) {
         project = target

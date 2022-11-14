@@ -5,9 +5,10 @@ import com.kaspersky.adbserver.common.log.logger.LogLevel
 import com.kaspersky.adbserver.desktop.AdbCommandPerformer
 import com.kaspersky.adbserver.desktop.CmdCommandPerformer
 import com.kaspersky.adbserver.desktop.Desktop
+import org.gradle.api.logging.Logger
 import java.nio.file.Path
 
-internal class DesktopServerHolder {
+internal class DesktopServerHolder(private val logger: Logger) {
     companion object {
         private const val DESKTOP_NAME = "kaspresso-plugin-adb-server"
     }
@@ -19,12 +20,13 @@ internal class DesktopServerHolder {
         check(desktop == null) { "Desktop already started" }
         val cmdCommandPerformer = CmdCommandPerformer(DESKTOP_NAME, workingDirectory)
         val adbCommandPerformer = AdbCommandPerformer(adbPath, cmdCommandPerformer)
+        val logger = LoggerFactory.getDesktopLogger(LogLevel.VERBOSE, DESKTOP_NAME, GradleFullLogger(logger))
         desktop = Desktop(
             cmdCommandPerformer = cmdCommandPerformer,
             adbCommandPerformer = adbCommandPerformer,
             presetEmulators = emptyList(),
             adbServerPort = null,
-            logger = LoggerFactory.getDesktopLogger(LogLevel.INFO, DESKTOP_NAME)
+            logger = logger
         )
             .apply { startDevicesObservingAsync() }
     }
