@@ -23,8 +23,6 @@ check_android_task:
     Xvfb :99 -screen 0 1000x1000x16 &
     sleep 5
     startxfce4
-  start_adb_server_background_script:
-    java -jar artifacts/adbserver-desktop.jar || true
   accept_licenses_script:
     echo yes | sdkmanager --licenses
   install_emulator_script:
