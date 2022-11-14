@@ -7,6 +7,7 @@ import kotlinx.cli.ArgType
 import kotlinx.cli.default
 import kotlinx.cli.delimiter
 import java.lang.management.ManagementFactory
+import java.nio.file.Path
 
 private const val DESKTOP = "Desktop-"
 
@@ -34,6 +35,12 @@ internal fun main(args: Array<String>) {
         description = "Logs Level"
     ).default(LogLevel.INFO)
 
+    val adbPath by parser.option(
+        type = ArgType.String,
+        fullName = "adbPath",
+        description = "Path to adb binary, if not set when use 'adb' from process environment"
+    )
+
     parser.parse(args)
 
     val desktopName = getDesktopName()
@@ -42,8 +49,10 @@ internal fun main(args: Array<String>) {
     desktopLogger.i("Desktop started with arguments: emulators=$emulators, adbServerPort=$port")
 
     val cmdCommandPerformer = CmdCommandPerformer(desktopName)
+    val adbCommandPerformer = AdbCommandPerformer(adbPath?.let { Path.of(it) }, cmdCommandPerformer)
     val desktop = Desktop(
         cmdCommandPerformer = cmdCommandPerformer,
+        adbCommandPerformer = adbCommandPerformer,
         presetEmulators = emulators,
         adbServerPort = port,
         logger = desktopLogger

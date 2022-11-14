@@ -9,6 +9,7 @@ import kotlin.concurrent.thread
 
 class Desktop(
     private val cmdCommandPerformer: CmdCommandPerformer,
+    private val adbCommandPerformer: AdbCommandPerformer,
     private val presetEmulators: List<String>,
     private val adbServerPort: String?,
     private val logger: DesktopLogger
@@ -47,6 +48,7 @@ class Desktop(
                     val deviceMirror =
                         DeviceMirror.create(
                             cmdCommandPerformer,
+                            adbCommandPerformer,
                             deviceName,
                             adbServerPort,
                             LoggerFactory.getDesktopLoggerReflectingDevice(logger, deviceName)
@@ -75,7 +77,7 @@ class Desktop(
 
     private fun getAttachedDevicesByAdb(): List<String> {
         val pattern = Pattern.compile("^([a-zA-Z0-9\\-:.]+)(\\s+)(device)")
-        val commandResult = cmdCommandPerformer.perform("adb devices")
+        val commandResult = adbCommandPerformer.perform("devices")
         if (commandResult.status != ExecutorResultStatus.SUCCESS) {
             return emptyList()
         }

@@ -2,6 +2,7 @@ package com.kaspersky.kaspresso.plugin
 
 import com.kaspersky.adbserver.common.log.LoggerFactory
 import com.kaspersky.adbserver.common.log.logger.LogLevel
+import com.kaspersky.adbserver.desktop.AdbCommandPerformer
 import com.kaspersky.adbserver.desktop.CmdCommandPerformer
 import com.kaspersky.adbserver.desktop.Desktop
 import java.nio.file.Path
@@ -14,11 +15,13 @@ internal class DesktopServerHolder {
     private var desktop: Desktop? = null
 
     @Synchronized
-    fun start(workingDirectory: Path) {
+    fun start(workingDirectory: Path, adbPath: Path) {
         check(desktop == null) { "Desktop already started" }
         val cmdCommandPerformer = CmdCommandPerformer(DESKTOP_NAME, workingDirectory)
+        val adbCommandPerformer = AdbCommandPerformer(adbPath, cmdCommandPerformer)
         desktop = Desktop(
             cmdCommandPerformer = cmdCommandPerformer,
+            adbCommandPerformer = adbCommandPerformer,
             presetEmulators = emptyList(),
             adbServerPort = null,
             logger = LoggerFactory.getDesktopLogger(LogLevel.INFO, DESKTOP_NAME)
