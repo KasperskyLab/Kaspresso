@@ -8,7 +8,7 @@ import java.util.regex.Pattern
 import kotlin.concurrent.thread
 
 class Desktop(
-    desktopName: String,
+    private val cmdCommandPerformer: CmdCommandPerformer,
     private val presetEmulators: List<String>,
     private val adbServerPort: String?,
     private val logger: DesktopLogger
@@ -18,7 +18,6 @@ class Desktop(
         private const val PAUSE_MS = 500L
     }
 
-    private val cmdCommandPerformer = CmdCommandPerformer(desktopName)
     private val devices: MutableCollection<DeviceMirror> = mutableListOf()
     private var isRunning = AtomicBoolean(false)
 
