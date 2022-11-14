@@ -28,11 +28,11 @@ class KaspressoPlugin : Plugin<Project> {
         val android = project.extensions.getByName("android") as TestedExtension
 
         stopServerTaskProvider = project.tasks.register(STOP_ADB_SERVER_TASK_NAME) {
-            doLast { println("Stop adb server") }
+            doLast { AdbServerUtils.stop() }
         }
 
         startServerTaskProvider = project.tasks.register(START_ADB_SERVER_TASK_NAME) {
-            doLast { println("Start adb server") }
+            doLast { AdbServerUtils.start() }
             finalizedBy(stopServerTaskProvider)
         }
 

@@ -41,14 +41,13 @@ internal fun main(args: Array<String>) {
 
     desktopLogger.i("Desktop started with arguments: emulators=$emulators, adbServerPort=$port")
 
-    val cmdCommandPerformer = CmdCommandPerformer(desktopName)
     val desktop = Desktop(
-        cmdCommandPerformer = cmdCommandPerformer,
+        desktopName = desktopName,
         presetEmulators = emulators,
         adbServerPort = port,
         logger = desktopLogger
     )
-    desktop.startDevicesObserving()
+    desktop.startDevicesObservingSync()
 }
 
 private fun getDesktopName(): String {

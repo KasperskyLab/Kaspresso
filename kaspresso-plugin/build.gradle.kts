@@ -5,6 +5,8 @@ plugins {
 
 dependencies {
     implementation(libs.androidPlugin)
+    implementation(projects.adbServer.adbserverCommon)
+    implementation(projects.adbServer.adbserverDesktop)
 }
 
 // TODO setup maven publication
