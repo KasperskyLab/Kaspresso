@@ -64,7 +64,6 @@ class KaspressoPlugin : Plugin<Project> {
         }
     }
 
-
     companion object {
         const val EXTENSION_NAME = "kaspresso"
         const val START_ADB_SERVER_TASK_NAME = "kaspressoStartAdbServer"

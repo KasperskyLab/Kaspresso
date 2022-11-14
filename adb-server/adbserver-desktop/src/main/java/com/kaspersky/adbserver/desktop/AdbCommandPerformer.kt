@@ -1,10 +1,7 @@
 package com.kaspersky.adbserver.desktop
 
 import com.kaspersky.adbserver.common.api.CommandResult
-import com.kaspersky.adbserver.common.api.ExecutorResultStatus
-import java.io.File
 import java.nio.file.Path
-import java.util.concurrent.TimeUnit
 
 /**
  * @param adbPath - path to adb binary if null when used "adb" command
