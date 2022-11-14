@@ -87,6 +87,9 @@ dependencies {
 
 <br>MainScreen представляет собой модель главного экрана. Для того чтобы эту модель можно было использовать в автотестах, необходимо унаследоваться от класса KScreen, и в угловых скобках указать название этого класса.
 
+!!! info
+    Указание типа в угловых скобках в Java и Kotlin называется Generics. Подробнее об этом вы можете почитать в [документации по Java](https://docs.oracle.com/javase/tutorial/java/generics/types.html) и [Kotlin](https://kotlinlang.org/docs/generics.html)
+
 ```kotlin
 package com.kaspersky.kaspresso.tutorial.screen
 
