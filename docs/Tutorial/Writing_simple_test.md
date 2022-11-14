@@ -161,7 +161,7 @@ object MainScreen : KScreen<MainScreen>() {
 
 <img src="../images/simple_test/find_layout.png" alt="Find layout"/>
 
-<br>В данном случае это элемент Button c вот таким id 'simple_activity_btn'
+<br>В данном случае это элемент Button c вот таким id `simple_activity_btn`
 
 <img src="../images/simple_test/button_in_layout.png" alt="Find button in layout"/>
 
@@ -239,7 +239,7 @@ import com.kaspersky.kaspresso.tutorial.R
 
 <img src="../images/simple_test/change_package.png" alt="Change package name"/>
 
-<br> Обратите внимание на импорты, класс TestCase должен быть импортирован из пакета `import com.kaspersky.kaspresso.testcases.api.testcase.TestCase`.
+<br> Класс тестов должен быть унаследован от класса TestCase. Обратите внимание на импорты, класс TestCase должен быть импортирован из пакета `import com.kaspersky.kaspresso.testcases.api.testcase.TestCase`.
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -454,13 +454,12 @@ class SimpleActivityTest : TestCase() {
 
 <img src="../images/simple_test/find_string_in_layout.png" alt="Find string in layout"/>
 
-<br>Переходим в строковые ресурсы (файл values/strings.xml)
+<br>Переходим в строковые ресурсы (файл values/strings.xml) и копируем id строки
 
 <img src="../images/simple_test/string_in_values.png" alt="Find string in values folder"/>
 
-<br>Копируем id строки
-<br>Вместо использования строки используем ее id. `R.string.simple_activity_default_title`
-<br>Импортируем класс ресурсов R
+<br>Теперь в методе hasText вместо использования строки "Default title" используем ее id. `R.string.simple_activity_default_title`
+<br>Не забываем импортировать класс ресурсов R `import com.kaspersky.kaspresso.tutorial.R`
 
 Финальный код теста выглядит вот так:
 
