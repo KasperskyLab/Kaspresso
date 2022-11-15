@@ -53,8 +53,9 @@ check_android_task:
   start_logcat_background_script:
     adb logcat > log.log
   run_tests_script:
+    ./gradlew :samples:kautomator-sample:connectedDebugAndroidTest
 #    ./gradlew connectedDebugAndroidTest
-    ./gradlew :samples:kautomator-sample:installDebugAndroidTest && sleep 30 && adb shell am instrument -w -e class com.kaspersky.kaspresso.kautomatorsample.test.InterceptorTest com.kaspersky.kaspresso.kautomatorsample.test/androidx.test.runner.AndroidJUnitRunner
+#    ./gradlew :samples:kautomator-sample:installDebugAndroidTest && sleep 30 && adb shell am instrument -w -e class com.kaspersky.kaspresso.kautomatorsample.test.InterceptorTest com.kaspersky.kaspresso.kautomatorsample.test/androidx.test.runner.AndroidJUnitRunner
   always:
     stop_logcat_script:
       adb logcat -c
