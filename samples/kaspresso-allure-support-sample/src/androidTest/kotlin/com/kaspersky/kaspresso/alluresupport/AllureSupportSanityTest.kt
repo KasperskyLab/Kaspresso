@@ -29,7 +29,7 @@ private const val JSON_EXTENSION = "json"
 /**
  * Checks that allure support is sane
  */
-class SanityTest : TestCase(
+class AllureSupportSanityTest : TestCase(
     kaspressoBuilder = Kaspresso.Builder.withAllureSupport().apply {
         testDirsProvider = dirsProvider
         testRootDirsProvider = resourcesRootDirsProvider
