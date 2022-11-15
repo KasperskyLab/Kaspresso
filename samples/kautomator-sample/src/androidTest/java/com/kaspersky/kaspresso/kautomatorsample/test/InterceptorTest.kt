@@ -1,33 +1,44 @@
 package com.kaspersky.kaspresso.kautomatorsample.test
 
-import android.Manifest
 import androidx.test.ext.junit.rules.activityScenarioRule
-import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.components.kautomator.KautomatorConfigurator
 import com.kaspersky.components.kautomator.component.text.UiButton
 import com.kaspersky.components.kautomator.screen.UiScreen
+import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.elementloader.ElementLoaderObjectBehaviorInterceptor
+import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.flakysafety.FlakySafeObjectBehaviorInterceptor
+import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.kautomatorsample.MainActivity
 import com.kaspersky.kaspresso.kautomatorsample.screen.MainScreen
+import com.kaspersky.kaspresso.logger.UiTestLogger
+import com.kaspersky.kaspresso.params.ElementLoaderParams
+import com.kaspersky.kaspresso.params.FlakySafetyParams
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.junit.Assert.assertEquals
+import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
+
+private lateinit var testElementLoaderParams: ElementLoaderParams
+private lateinit var testFlakySafetyParams: FlakySafetyParams
+private lateinit var logger: UiTestLogger
 
 /**
  * The test demonstrating and checking work of interceptors concept in Kautomator
  */
-class InterceptorTest : TestCase() {
-
-    @get:Rule
-    val runtimePermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
-        Manifest.permission.WRITE_EXTERNAL_STORAGE,
-        Manifest.permission.READ_EXTERNAL_STORAGE
-    )
+class InterceptorTest : TestCase(kaspressoBuilder = Kaspresso.Builder.simple().apply {
+    testElementLoaderParams = elementLoaderParams
+    testFlakySafetyParams = flakySafetyParams
+    logger = testLogger
+}) {
 
     @get:Rule
     val activityRule = activityScenarioRule<MainActivity>()
 
     private val interceptorMainScreen = InterceptedMainScreen()
+    private val objectBehaviorInterceptors = listOf(
+        ElementLoaderObjectBehaviorInterceptor(testLogger, testElementLoaderParams),
+        FlakySafeObjectBehaviorInterceptor(testFlakySafetyParams, testLogger)
+    )
 
     @Test
     fun testKautomatorInterceptors() {
@@ -37,9 +48,32 @@ class InterceptorTest : TestCase() {
             KautomatorConfigurator {
                 intercept {
                     onUiInteraction {
-                        onAll { list.add("ALL") }
-                        onCheck { _, _ -> list.add("CHECK") }
-                        onPerform { _, _ -> list.add("PERFORM") }
+                        onAll {
+                            list.add("ALL")
+                        }
+                        onCheck { interaction, assertion ->
+                            objectBehaviorInterceptors.fold(
+                                initial = {
+                                    interaction.check(assertion)
+                                },
+                                operation = { acc, objectBehaviorInterceptor ->
+                                    { objectBehaviorInterceptor.interceptCheck(interaction, assertion, acc) }
+                                }
+                            ).invoke()
+                            list.add("CHECK")
+                        }
+                        onPerform { interaction, action ->
+                            objectBehaviorInterceptors.fold(
+                                initial = {
+                                    interaction.perform(action)
+                                },
+                                operation = {
+                                        acc, objectBehaviorInterceptor ->
+                                    { objectBehaviorInterceptor.interceptPerform(interaction, action, acc) }
+                                }
+                            ).invoke()
+                            list.add("PERFORM")
+                        }
                     }
                 }
             }
@@ -88,8 +122,29 @@ class InterceptorTest : TestCase() {
                     simpleButton {
                         intercept {
                             onAll { list.add("ALL") }
-                            onCheck { _, _ -> list.add("CHECK") }
-                            onPerform { _, _ -> list.add("PERFORM") }
+                            onCheck { interaction, assertion ->
+                                objectBehaviorInterceptors.fold(
+                                    initial = {
+                                        interaction.check(assertion)
+                                    },
+                                    operation = { acc, objectBehaviorInterceptor ->
+                                        { objectBehaviorInterceptor.interceptCheck(interaction, assertion, acc) }
+                                    }
+                                ).invoke()
+                                list.add("CHECK")
+                            }
+                            onPerform { interaction, action ->
+                                objectBehaviorInterceptors.fold(
+                                    initial = {
+                                        interaction.perform(action)
+                                    },
+                                    operation = {
+                                            acc, objectBehaviorInterceptor ->
+                                        { objectBehaviorInterceptor.interceptPerform(interaction, action, acc) }
+                                    }
+                                ).invoke()
+                                list.add("PERFORM")
+                            }
                         }
 
                         isDisplayed()
@@ -113,8 +168,29 @@ class InterceptorTest : TestCase() {
                 intercept {
                     onUiInteraction {
                         onAll { list.add("ALL_KAUTOMATOR") }
-                        onCheck { _, _ -> list.add("CHECK_KAUTOMATOR") }
-                        onPerform { _, _ -> list.add("PERFORM_KAUTOMATOR") }
+                        onCheck { interaction, assertion ->
+                            objectBehaviorInterceptors.fold(
+                                initial = {
+                                    interaction.check(assertion)
+                                },
+                                operation = { acc, objectBehaviorInterceptor ->
+                                    { objectBehaviorInterceptor.interceptCheck(interaction, assertion, acc) }
+                                }
+                            ).invoke()
+                            list.add("CHECK_KAUTOMATOR")
+                        }
+                        onPerform { interaction, action ->
+                            objectBehaviorInterceptors.fold(
+                                initial = {
+                                    interaction.perform(action)
+                                },
+                                operation = {
+                                        acc, objectBehaviorInterceptor ->
+                                    { objectBehaviorInterceptor.interceptPerform(interaction, action, acc) }
+                                }
+                            ).invoke()
+                            list.add("PERFORM_KAUTOMATOR")
+                        }
                     }
                 }
             }
@@ -149,6 +225,7 @@ class InterceptorTest : TestCase() {
         }
     }
 
+    @Ignore("Previous interceptors are overridden when KautomatorConfigurator is used, so are default flaky safety interceptors, so this test may fail")
     @Test
     fun testOverridingInterceptors() {
         val list = mutableListOf<String>()
@@ -204,12 +281,38 @@ class InterceptorTest : TestCase() {
         val screenList = mutableListOf<String>()
         val simpleButton = UiButton { withId(this@InterceptedMainScreen.packageName, "button") }
 
+        private val objectBehaviorInterceptors = listOf(
+            ElementLoaderObjectBehaviorInterceptor(logger, testElementLoaderParams),
+            FlakySafeObjectBehaviorInterceptor(testFlakySafetyParams, logger)
+        )
+
         init {
             intercept {
                 onUiInteraction {
                     onAll { screenList.add("ALL") }
-                    onCheck { _, _ -> screenList.add("CHECK") }
-                    onPerform { _, _ -> screenList.add("PERFORM") }
+                    onCheck { interaction, assertion ->
+                        objectBehaviorInterceptors.fold(
+                            initial = {
+                                interaction.check(assertion)
+                            },
+                            operation = { acc, objectBehaviorInterceptor ->
+                                { objectBehaviorInterceptor.interceptCheck(interaction, assertion, acc) }
+                            }
+                        ).invoke()
+                        screenList.add("CHECK")
+                    }
+                    onPerform { interaction, action ->
+                        objectBehaviorInterceptors.fold(
+                            initial = {
+                                interaction.perform(action)
+                            },
+                            operation = {
+                                    acc, objectBehaviorInterceptor ->
+                                { objectBehaviorInterceptor.interceptPerform(interaction, action, acc) }
+                            }
+                        ).invoke()
+                        screenList.add("PERFORM")
+                    }
                 }
             }
         }

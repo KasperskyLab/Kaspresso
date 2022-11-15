@@ -1,9 +1,6 @@
 check_android_task:
   name: Run Android instrumented tests
   env:
-    SCREENSHOTS_ROOT_DIR: /data/user/0/com.kaspersky.kaspressample/files/screenshots
-    TUTORIAL_SCREENSHOTS_ROOT_DIR: /data/user/0/com.kaspersky.kaspresso.tutorial/files/screenshots
-    ALLURE_SAMPLE_RESULTS_ROOT_DIR: /data/data/com.kaspersky.kaspresso.alluresupport.sample/files/allure-results
     DISPLAY: :99
   only_if: $CIRRUS_PR != '' && $CIRRUS_BASE_BRANCH == 'master'
 
@@ -52,29 +49,25 @@ check_android_task:
     adb shell settings put global animator_duration_scale 0.0
     adb shell settings put secure spell_checker_enabled 0
     adb shell settings put secure show_ime_with_hard_keyboard 1
+  start_logcat_background_script:
+    adb logcat > log.log
   run_tests_script:
     ./gradlew connectedDebugAndroidTest
-  # After we do "adb root" connection is closed for a moment. So first attempt to pull screenshots usually fails
-  # That's why we make 5 attempts to pull folders
   always:
-    pull_screenshots_script: |
-      adb root
-      mkdir sample_screenshots
-      for i in {1..5}; do adb pull $SCREENSHOTS_ROOT_DIR sample_screenshots && break || sleep 5; done
-      mkdir tutorial_screenshots
-      adb pull $TUTORIAL_SCREENSHOTS_ROOT_DIR tutorial_screenshots || true
-      mkdir allure_results
-      adb pull $ALLURE_SAMPLE_RESULTS_ROOT_DIR allure_results
+    stop_logcat_script:
+      adb logcat -c
+    pull_artifacts_script:
+      adb exec-out sh -c "cd /sdcard && tar cf - Documents" > artifacts.tar
+    logs_artifacts:
+      path: log.log
+    artifacts_artifacts:
+      path: "artifacts.tar"
     sample_report_artifacts:
       path: "samples/kaspresso-sample/build/reports/androidTests/connected/**/*"
+    kautomator_sample_report_artifacts:
+      path: "samples/kautomator-sample/build/reports/androidTests/connected/**/*"
     tutorial_report_artifacts:
       path: "tutorial/build/reports/androidTests/connected/**/*"
     allure_report_artifacts:
       path: "samples/kaspresso-allure-support-sample/build/reports/androidTests/connected/**/*"
-    sample_screenshots_artifacts:
-      path: "sample_screenshots/**/*"
-    tutorial_screenshots_artifacts:
-      path: "tutorial_screenshots/**/*"
-    allure_results_artifacts:
-      path: "allure_results/**/*"
 
