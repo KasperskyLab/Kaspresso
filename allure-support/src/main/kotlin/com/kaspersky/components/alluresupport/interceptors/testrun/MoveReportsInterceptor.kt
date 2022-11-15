@@ -4,7 +4,6 @@ import android.app.Instrumentation
 import androidx.test.uiautomator.UiDevice
 import com.google.common.io.CharStreams
 import com.kaspersky.kaspresso.files.dirs.DirsProvider
-import com.kaspersky.kaspresso.files.resources.ResourcesDirsProvider
 import com.kaspersky.kaspresso.files.resources.ResourcesRootDirsProvider
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.TestRunWatcherInterceptor
 import com.kaspersky.kaspresso.testcases.models.info.TestInfo
@@ -23,7 +22,6 @@ private const val MP4_EXTENSION = "mp4"
 class MoveReportsInterceptor(
     private val instrumentation: Instrumentation,
     private val dirsProvider: DirsProvider,
-    private val resourcesDirsProvider: ResourcesDirsProvider,
     private val rootDirsProvider: ResourcesRootDirsProvider,
     private val stateHolder: TestRunStateHolder,
     private val device: UiDevice
