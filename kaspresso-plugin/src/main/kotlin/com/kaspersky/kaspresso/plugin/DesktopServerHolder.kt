@@ -18,6 +18,9 @@ internal class DesktopServerHolder(private val logger: Logger) {
     @Synchronized
     fun start(workingDirectory: Path, adbPath: Path) {
         check(desktop == null) { "Desktop already started" }
+
+        logger.debug("Starting Desktop server. workingDir=$workingDirectory, adbPath=$adbPath")
+
         val cmdCommandPerformer = CmdCommandPerformer(DESKTOP_NAME, workingDirectory)
         val adbCommandPerformer = AdbCommandPerformer(adbPath, cmdCommandPerformer)
         val logger = LoggerFactory.getDesktopLogger(LogLevel.VERBOSE, DESKTOP_NAME, GradleFullLogger(logger))

@@ -4,10 +4,10 @@ import com.kaspersky.adbserver.common.api.CommandResult
 import java.nio.file.Path
 
 /**
- * @param adbPath - path to adb binary if null when used "adb" command
+ * @param adbPath - path to adb binary
  */
 class AdbCommandPerformer(
-    private val adbPath: Path?,
+    private val adbPath: Path,
     private val cmdCommandPerformer: CmdCommandPerformer,
 ) {
 
@@ -16,7 +16,6 @@ class AdbCommandPerformer(
      * @param command - adb command without path to adb binaries
      */
     fun perform(command: String): CommandResult {
-        val adbPath = adbPath?.toString() ?: "adb"
         return cmdCommandPerformer.perform("$adbPath $command")
     }
 }
