@@ -4,6 +4,7 @@ import android.Manifest
 import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.GrantPermissionRule
+import androidx.test.uiautomator.UiDevice
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.R
 import com.kaspersky.kaspressample.screen.MainScreen
@@ -35,7 +36,7 @@ class CustomizedSimpleTest : TestCase(
             videoParams = VideoParams(bitRate = 10_000_000)
             screenshotParams = ScreenshotParams(quality = 1)
 
-            dirsProvider = DefaultDirsProvider(InstrumentationRegistry.getInstrumentation())
+            dirsProvider = DefaultDirsProvider(InstrumentationRegistry.getInstrumentation(), UiDevice.getInstance(InstrumentationRegistry.getInstrumentation()))
             resourcesDirNameProvider = DefaultResourcesDirNameProvider()
 
             resourcesRootDirsProvider = object : ResourcesRootDirsProvider {
@@ -43,6 +44,7 @@ class CustomizedSimpleTest : TestCase(
                 override val screenshotsRootDir = File("custom_screenshots")
                 override val videoRootDir = File("custom_video")
                 override val viewHierarchy = File("custom_view_hierarchy")
+                override val allureRootDir: File = File("allure-results")
             }
 
             resourcesDirsProvider = object : ResourcesDirsProvider by DefaultResourcesDirsProvider(

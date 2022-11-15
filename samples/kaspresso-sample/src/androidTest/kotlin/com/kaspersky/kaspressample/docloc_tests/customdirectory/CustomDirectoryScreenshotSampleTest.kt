@@ -4,14 +4,15 @@ import android.Manifest
 import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.GrantPermissionRule
-import io.github.kakaocup.kakao.screen.Screen
+import androidx.test.uiautomator.UiDevice
 import com.kaspersky.kaspressample.screen.SimpleScreen
 import com.kaspersky.kaspressample.simple.SimpleActivity
 import com.kaspersky.kaspresso.annotations.ScreenShooterTest
 import com.kaspersky.kaspresso.files.dirs.DefaultDirsProvider
-import com.kaspersky.kaspresso.files.resources.impl.DefaultResourcesRootDirsProvider
 import com.kaspersky.kaspresso.files.resources.ResourcesRootDirsProvider
+import com.kaspersky.kaspresso.files.resources.impl.DefaultResourcesRootDirsProvider
 import com.kaspersky.kaspresso.testcases.api.testcase.DocLocScreenshotTestCase
+import io.github.kakaocup.kakao.screen.Screen
 import org.junit.Rule
 import org.junit.Test
 import java.io.File
@@ -27,7 +28,7 @@ class CustomDirectoryScreenshotSampleTest : DocLocScreenshotTestCase(
         override val screenshotsRootDir = File("custom_directory")
     },
     resourcesDirsProvider = FlatDirectoryProvider(
-        dirsProvider = DefaultDirsProvider(InstrumentationRegistry.getInstrumentation())
+        dirsProvider = DefaultDirsProvider(InstrumentationRegistry.getInstrumentation(), UiDevice.getInstance(InstrumentationRegistry.getInstrumentation()))
     ),
     resourceFileNamesProvider = AutoNumeratedNamesProvider(),
     locales = "en,ru"

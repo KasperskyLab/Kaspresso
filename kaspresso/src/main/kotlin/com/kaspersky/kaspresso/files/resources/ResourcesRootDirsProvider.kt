@@ -10,4 +10,5 @@ interface ResourcesRootDirsProvider {
     val screenshotsRootDir: File
     val videoRootDir: File
     val viewHierarchy: File
+    val allureRootDir: File
 }

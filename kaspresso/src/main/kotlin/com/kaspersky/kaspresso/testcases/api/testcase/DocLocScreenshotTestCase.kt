@@ -3,6 +3,7 @@ package com.kaspersky.kaspresso.testcases.api.testcase
 import android.Manifest
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.GrantPermissionRule
+import androidx.test.uiautomator.UiDevice
 import com.kaspersky.kaspresso.device.locales.Locales
 import com.kaspersky.kaspresso.device.screenshots.screenshotfiles.DefaultScreenshotDirectoryProvider
 import com.kaspersky.kaspresso.device.screenshots.screenshotfiles.DefaultScreenshotNameProvider
@@ -56,7 +57,7 @@ abstract class DocLocScreenshotTestCase(
         DefaultResourcesRootDirsProvider(),
     private val resourcesDirsProvider: ResourcesDirsProvider =
         DefaultResourcesDirsProvider(
-            dirsProvider = DefaultDirsProvider(InstrumentationRegistry.getInstrumentation()),
+            dirsProvider = DefaultDirsProvider(InstrumentationRegistry.getInstrumentation(), UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())),
             resourcesDirNameProvider = DefaultResourcesDirNameProvider()
         ),
     private val resourceFileNamesProvider: ResourceFileNamesProvider =
@@ -94,9 +95,10 @@ abstract class DocLocScreenshotTestCase(
             override val screenshotsRootDir = screenshotsDirectory
             override val videoRootDir: File = File("video")
             override val viewHierarchy: File = File("view_hierarchy")
+            override val allureRootDir: File = File("allure-results")
         },
         resourcesDirsProvider = DefaultResourcesDirsProvider(
-            dirsProvider = DefaultDirsProvider(InstrumentationRegistry.getInstrumentation()),
+            dirsProvider = DefaultDirsProvider(InstrumentationRegistry.getInstrumentation(), UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())),
             resourcesDirNameProvider = SupportLegacyResourcesDirNameProvider(screenshotDirectoryProvider)
         ),
         resourceFileNamesProvider = object : ResourceFileNamesProvider {
