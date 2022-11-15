@@ -43,6 +43,7 @@ class DefaultResourceFilesProvider(
             FileExtension.MP4.toString()
         )
         val resourceDir = resourcesDirsProvider.provide(resourcesRootDirsProvider.videoRootDir, subDir)
+            .createDirIfNeeded()
         return resourceDir.createDirIfNeeded()
             .resolve(resFileName)
             .createFileIfNeeded()

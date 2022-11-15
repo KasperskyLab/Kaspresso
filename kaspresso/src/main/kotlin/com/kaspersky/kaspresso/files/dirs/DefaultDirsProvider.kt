@@ -5,36 +5,54 @@ import android.app.Instrumentation
 import android.content.Context
 import android.os.Build
 import android.os.Environment
+import androidx.test.uiautomator.UiDevice
 import com.kaspersky.kaspresso.internal.extensions.other.createDirIfNeeded
 import java.io.File
 
-class DefaultDirsProvider(
-    private val instrumentation: Instrumentation
+open class DefaultDirsProvider(
+    private val instrumentation: Instrumentation,
+    private val device: UiDevice
 ) : DirsProvider {
     private val clearedDirs = HashSet<File>()
 
     @Suppress("DEPRECATION")
     @SuppressLint("WorldReadableFiles", "ObsoleteSdkInt")
     override fun provideNew(dest: File): File {
-        val dir: File = when {
-            Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q -> instrumentation.targetContext.applicationContext.filesDir.resolve(dest)
-            Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP -> Environment.getExternalStorageDirectory().resolve(dest)
-            else -> instrumentation.targetContext.applicationContext.getDir(dest.canonicalPath, Context.MODE_WORLD_READABLE)
+        val dir = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).resolve(dest)
+        } else {
+            instrumentation.targetContext.applicationContext.getDir(dest.canonicalPath, Context.MODE_WORLD_READABLE)
         }
+
         return dir.createDirIfNeeded()
     }
 
     override fun provideCleared(dest: File): File {
         if (!clearedDirs.contains(dest)) {
-            clearDir(path = dest, inclusive = false)
+            clearDir(dest, inclusive = false)
             clearedDirs.add(dest)
         }
         return dest.createDirIfNeeded()
     }
+    @Suppress("SameParameterValue")
+    private fun clearDir(dest: File, inclusive: Boolean) {
+        clearDirManually(dest, inclusive)
+        if (dest.exists() && dest.list()?.isNotEmpty() == true) {
+            clearDirThroughShell(dest, inclusive)
+        }
+    }
 
-    private fun clearDir(path: File, inclusive: Boolean) {
+    private fun clearDirThroughShell(dest: File, inclusive: Boolean) {
+        if (inclusive) {
+            device.executeShellCommand("rm -r ${dest.absolutePath}")
+        } else {
+            device.executeShellCommand("find ${dest.absolutePath} -type f -delete")
+        }
+    }
+
+    private fun clearDirManually(path: File, inclusive: Boolean) {
         if (path.isDirectory) {
-            path.listFiles()?.forEach { clearDir(path = it, inclusive = true) }
+            path.listFiles()?.forEach { clearDirManually(path = it, inclusive = true) }
         }
         if (inclusive) {
             path.delete()
