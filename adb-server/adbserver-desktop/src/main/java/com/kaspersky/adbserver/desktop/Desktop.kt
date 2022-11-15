@@ -17,16 +17,26 @@ class Desktop(
 
     companion object {
         private const val PAUSE_MS = 500L
+        private val DEVICE_PATTERN = Pattern.compile("^([a-zA-Z0-9\\-:.]+)(\\s+)(device)")
     }
 
     private val devices: MutableCollection<DeviceMirror> = mutableListOf()
     private var isRunning = AtomicBoolean(false)
 
+    /**
+     * Start Desktop server.
+     * Blocking current thread while server working
+     * @throws IllegalStateException - if server already running
+     */
     fun startDevicesObservingSync() {
         if (!isRunning.compareAndSet(false, true)) error("Desktop already running")
         startDevicesObservingInternal()
     }
 
+    /**
+     * Start Desktop server asynchronously
+     * @throws IllegalStateException - if server already running
+     */
     fun startDevicesObservingAsync() {
         if (!isRunning.compareAndSet(false, true)) error("Desktop already running")
         thread {
@@ -34,6 +44,10 @@ class Desktop(
         }
     }
 
+    /**
+     * Stop Desktop server
+     * @throws IllegalStateException - if server already stopped
+     */
     fun stopDevicesObserving() {
         if (!isRunning.compareAndSet(true, false)) error("Desktop already stopped")
     }
@@ -76,7 +90,6 @@ class Desktop(
     }
 
     private fun getAttachedDevicesByAdb(): List<String> {
-        val pattern = Pattern.compile("^([a-zA-Z0-9\\-:.]+)(\\s+)(device)")
         val commandResult = adbCommandPerformer.perform("devices")
         if (commandResult.status != ExecutorResultStatus.SUCCESS) {
             return emptyList()
@@ -84,7 +97,7 @@ class Desktop(
         val adbDevicesCommandResult: String = commandResult.description
         return adbDevicesCommandResult.lines()
             .asSequence()
-            .map { pattern.matcher(it) }
+            .map { DEVICE_PATTERN.matcher(it) }
             .filter { matcher -> matcher.find() }
             .map { matcher -> matcher.group(1) }
             .filter { foundEmulator -> presetEmulators.isEmpty() || presetEmulators.contains(foundEmulator) }
