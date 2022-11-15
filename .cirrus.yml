@@ -40,7 +40,8 @@ check_android_task:
     -no-snapshot
   # -no-window is not used here because the flag somehow affects the "GPS" test. actual for API=30
   assemble_instrumented_tests_script:
-    ./gradlew assembleDebugAndroidTest
+#    ./gradlew assembleDebugAndroidTest
+    ./gradlew  :samples:kautomator-sample:assembleDebugAndroidTest
   wait_for_avd_script:
     adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 3; done; input keyevent 82'
   configure_avd_script: |
@@ -52,15 +53,17 @@ check_android_task:
   start_logcat_background_script:
     adb logcat > log.log
   run_tests_script:
-    ./gradlew connectedDebugAndroidTest
+#    ./gradlew connectedDebugAndroidTest
+    ./gradlew :samples:kautomator-sample:installDebugAndroidTest
+    adb shell am instrument -w -e class com.kaspersky.kaspresso.kautomatorsample.test.InterceptorTest com.kaspersky.kaspresso.kautomatorsample.test/androidx.test.runner.AndroidJUnitRunner
   always:
     stop_logcat_script:
       adb logcat -c
     pull_artifacts_script:
       adb exec-out sh -c "cd /sdcard && tar cf - Documents" > artifacts.tar
-    log_artifacts:
+    logs_artifacts:
       path: log.log
-    on_device_artifacts:
+    artifacts_artifacts:
       path: "artifacts.tar"
     sample_report_artifacts:
       path: "samples/kaspresso-sample/build/reports/androidTests/connected/**/*"

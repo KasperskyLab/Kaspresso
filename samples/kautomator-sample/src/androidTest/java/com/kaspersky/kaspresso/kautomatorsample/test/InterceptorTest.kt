@@ -6,6 +6,8 @@ import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.components.kautomator.KautomatorConfigurator
 import com.kaspersky.components.kautomator.component.text.UiButton
 import com.kaspersky.components.kautomator.screen.UiScreen
+import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.video.VideoRecordingInterceptor
+import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.kautomatorsample.MainActivity
 import com.kaspersky.kaspresso.kautomatorsample.screen.MainScreen
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
@@ -16,7 +18,11 @@ import org.junit.Test
 /**
  * The test demonstrating and checking work of interceptors concept in Kautomator
  */
-class InterceptorTest : TestCase() {
+class InterceptorTest : TestCase(
+    kaspressoBuilder = Kaspresso.Builder.simple().apply {
+        testRunWatcherInterceptors.add(VideoRecordingInterceptor(videos))
+    }
+) {
 
     @get:Rule
     val runtimePermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
