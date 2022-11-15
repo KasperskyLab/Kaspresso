@@ -2,23 +2,33 @@ package com.kaspersky.components.alluresupport.interceptors.testrun
 
 import org.junit.Test
 import java.io.File
+import java.util.UUID
 
 class AllureTestRunStateHolderTest {
 
     @Test
-    fun test() {
-        val allureReportFile = JSON.byteInputStream()
+    fun shouldRememberAttachedVideos() {
         val holder = TestRunStateHolder()
         val stubFile = File("stub/path/video.mp4")
         val actualFile = File("actual/path/video.mp4")
 
-        // holder.addAttachedVideo(allureReportInputStream = allureReportFile, attachedStubFile = stubFile, actualFile = actualFile)
+        holder.rememberAttachedVideo(stubFile = stubFile, actualFile = actualFile)
 
         assert(holder.attachedVideos.size == 1)
         assert(holder.attachedVideos.contains(AttachedVideo(
             attachedStubFile = stubFile,
             actualFile = actualFile
         )))
+    }
+
+    @Test
+    fun shouldSaveLastTestUuid() {
+        val holder = TestRunStateHolder()
+
+        val uuid = UUID.randomUUID()
+        holder.lastTestCaseUuid = uuid.toString()
+
+        assert(holder.lastTestCaseUuid == uuid.toString())
     }
 }
 

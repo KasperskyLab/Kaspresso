@@ -37,9 +37,13 @@ open class DefaultDirsProvider(
     @Suppress("SameParameterValue")
     private fun clearDir(dest: File, inclusive: Boolean) {
         clearDirManually(dest, inclusive)
-        if (dest.exists() && dest.list()?.isNotEmpty() == true) {
+        if (shouldClearDirThroughShell(dest)) {
             clearDirThroughShell(dest, inclusive)
         }
+    }
+
+    private fun shouldClearDirThroughShell(dest: File): Boolean {
+        return device.executeShellCommand("ls ${dest.absolutePath}").isNotEmpty()
     }
 
     private fun clearDirThroughShell(dest: File, inclusive: Boolean) {
@@ -53,6 +57,8 @@ open class DefaultDirsProvider(
     private fun clearDirManually(path: File, inclusive: Boolean) {
         if (path.isDirectory) {
             path.listFiles()?.forEach { clearDirManually(path = it, inclusive = true) }
+        } else {
+            path.delete()
         }
         if (inclusive) {
             path.delete()

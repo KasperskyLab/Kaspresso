@@ -47,7 +47,7 @@ fun Kaspresso.Builder.addAllureSupport(): Kaspresso.Builder = apply {
                 ScreenshotTestInterceptor(screenshots),
                 DumpViewsTestInterceptor(viewHierarchyDumper),
                 VideoRecordingTestInterceptor(videos, allureDirsProvider, stateHolder),
-                MoveReportsInterceptor(instrumentation, dirsProvider, resourcesDirsProvider, resourcesRootDirsProvider, stateHolder, device)
+                MoveReportsInterceptor(instrumentation, dirsProvider, resourcesRootDirsProvider, stateHolder, device)
             )
         )
     }
