@@ -52,7 +52,7 @@ check_android_task:
     adb shell settings put secure show_ime_with_hard_keyboard 1
   start_logcat_background_script:
     adb logcat > log.log
-  run_tests_script:
+  run_tests_script: |
 #    ./gradlew connectedDebugAndroidTest
     ./gradlew :samples:kautomator-sample:installDebugAndroidTest
     adb shell am instrument -w -e class com.kaspersky.kaspresso.kautomatorsample.test.InterceptorTest com.kaspersky.kaspresso.kautomatorsample.test/androidx.test.runner.AndroidJUnitRunner
