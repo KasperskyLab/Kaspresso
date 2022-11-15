@@ -26,27 +26,29 @@
 
 <br> На Windows - комбинация клавиш `Win + R`, в открывшемся окне вводим `cmd` и нажимаем `Enter`
 
-// image.. windows_cmd_open_1 windows_cmd_open_1
+<img src="../images/adb_lesson/windows_cmd_open_1.png" alt="Open cmd on windows 1"/>
+
+<img src="../images/adb_lesson/windows_cmd_open_2.png" alt="Open cmd on windows 2"/>
 
 <br> Сначала проверяем, что путь к java прописан корректно. Для этого пишем `java -version`.
 
 <br> Если все хорошо, то вы увидите вашу версию Java
 
-// image.. java_version_success
+<img src="../images/adb_lesson/java_version_success.png" alt="Java version showed"/>
 
 <br> Если же пути прописаны некорректно, то вы увидите что-то похожее на это
 
-// image.. java_version_failed
+<img src="../images/adb_lesson/java_version_failed.png" alt="Java version failed"/>
 
 <br> Теперь делаем такую же проверку для adb. Печатаем в консоли `adb version`
 
 <br> Если все хорошо, то вы увидите вашу версию ADB
 
-// image.. adb_version_success
+<img src="../images/adb_lesson/adb_version_success.png" alt="Adb version success"/>
 
 <br> В противном случае вы увидите примерно вот такую ошибку:
 
-// image.. adb_version_failed
+<img src="../images/adb_lesson/adb_version_failed.png" alt="Adb version failed"/>
 
 <br> Если по обоим пунктам у вас все работает, то следующий шаг можете пропустить.
 
@@ -60,21 +62,21 @@
 
 <br> Если нашли - копируйте этот путь, если нет - открывайте Android Studio. Переходите в `File` -> `Settings` -> `Build, Execution, Deployment` -> `Build Tools` -> `Gradle`
 
-// ..image jdk_in_android_studio
+<img src="../images/adb_lesson/jdk_in_android_studio.png" alt="Show jsdk path in android studio"/>
 
 <br> Тут будет прописан путь к нужной папке - скопируйте его.
 
 <br> Теперь его нужно прописать в переменных среды, для этого кликаем `win + x` -> выбираем `System` -> `Advanced System Settings` -> `Advanced` -> `Environment Variables`
 
-// ..image system_variables
+<img src="../images/adb_lesson/system_variables.png" alt="Show system variables" />
 
 <br> В разделе `System Variables` выбираем `Path` и нажимаем `Edit` -> `New` -> Вставляем скопированный путь к папке с `java` -> Нажимаем `OK`
 
-// ..image bin_path
+<img src="../images/adb_lesson/bin_path.png" alt="Java bin path"/>                                                      
 
 <br> Перезапускаем компьютер, чтобы изменения вступили в силу и снова проверяем команду java -version
 
-// ..image java_version_success
+<img src="../images/adb_lesson/java_version_success.png" alt="Java version success"/>     
 
 <br> Нам осталось проделать все то же самое для adb. Ищем путь к папке `platform-tools`, в которой лежит `adb`.
 
@@ -82,11 +84,11 @@
 
 <br> Копируем этот путь и добавляем в System Variables, как мы это делали ранее с `java`
 
-// ..image adb_path
+<img src="../images/adb_lesson/adb_path.png" alt="Adb path"/>     
 
 <br> Перезапускаем компьютер и проверям команду `adb version`
 
-// ..image adb_version_success
+<img src="../images/adb_lesson/adb_version_success.png" alt="Adb version success"/>   
 
 <br> Теперь можем приступить к запуску adb-server. Если у вас все еще команды `java` и `adb` не работают, то погуглите, вариантов решения проблемы достаточно много. Все, что нужно сделать - найти путь к java и adb и прописать их в переменные среды.
 
@@ -96,11 +98,11 @@
 
 <br> Во-первых, можем посмотреть, какие устройства сейчас подключены к adb. Для этого вводим команду `adb devices`
 
-// ..image empty_devices_list
+<img src="../images/adb_lesson/empty_devices_list.png" alt="Empty devices list"/>   
 
 <br> Сейчас мы не подключили никакое устройство к adb, поэтому список пустой, давайте запустим приложение на эмуляторе и выполним команду еще раз
 
-// ..image devices_list
+<img src="../images/adb_lesson/devices_list.png" alt="Devices list"/>   
 
 <br> С помощью adb-команд мы можем:
 <ul>
@@ -113,35 +115,35 @@
 
 <br> Для практики давайте удалим приложение tutorial, которое мы только что запустили.
 
-// ..image uninstall_app
+<img src="../images/adb_lesson/uninstall_app.png" alt="Uninstall app"/>   
 
 <br> Наиболее интересные задачи можно выполнять, если запустить команду `adb shell`. Она вызывает консоль Android (shell) для выполнения Linux-команд на устройстве. 
 
-// ..image open_shell_console
+<img src="../images/adb_lesson/open_shell_console.png" alt="Open shell console"/>   
 
 <br> Приведем несколько примеров таких команд.
 
 <br> Получение списка всех установленных приложений `pm list packages`.
 
-// ..image list_packages
+<img src="../images/adb_lesson/list_packages.png" alt="List packages"/>   
 
 <br> Обратите внимане, что мы сначала запустили shell-консоль, а потом писали команды, уже находясь в ней. Поэтому на текущем этапе другие adb команды у вас работать не будут, пока вы не закроете shell-консоль через команду exit
 
-// ..image exit_shell_console
+<img src="../images/adb_lesson/exit_shell_console.png" alt="Exit shell console"/> 
 
 <br> При этом выполнять shell-команды можно и не открывая shell-консоль, для этого достаточно указывать полное наименование команды вместе с `adb shell`. <br> Например, давайте попробуем сделать скриншот и сохраним его на устройстве. В Android Studio можно открыть File Explorer, в котором отображаются все файлы и папки на девайсе. 
 
-// ..image device_file_explorer
+<img src="../images/adb_lesson/device_file_explorer.png" alt="Device file explorer"/> 
 
 <br> Обычно скришоты сохраняют на sdcard, мы поступим также. 
 
 <br> Для создания скриншота используется команда `adb shell screencap /{pathToFile}/{name_of_image.png}`. В нашем случае она будет выглядеть так: `adb shell screencap /sdcard/my_screen.png`
 
-// ..image create_screenshot
+<img src="../images/adb_lesson/create_screenshot.png" alt="Create screenshot"/> 
 
 <br> В `Device File Explorer` кликаем правой кнопкой мыши и нажимаем `Synchronize`, после чего в папке отобразится созданный нами скриншот
 
-// ..image success_screenshot
+<img src="../images/adb_lesson/success_screenshot.png" alt="Success screenshot"/> 
 
 ## Работаем с adb в автотестах
 
@@ -155,11 +157,11 @@ java -jar <path/to/file>/adbserver-desktop.jar
 
 <br> Для того, чтобы в консоли был корректно прописан путь к файлу, достаточно написать команду `java -jar ` и просто перетянуть файл `adbserver-desctop.jar` в консоль, путь к файлу будет подставлен автоматически.
 
-// ..image drag_server
+<img src="../images/adb_lesson/drag_server.png" alt="Drag server"/> 
 
 <br> После ввода команды, нажмите `Enter`. Запустится AdbServer - реализация десктопной части взаимодействия. При запуске теста девайс сообщит десктопу необходимые для выполнения теста adb команды.
 
-// ..image launch_server
+<img src="../images/adb_lesson/launch_server.png" alt="Launch Server"/> 
 
 <br> Можем приступить к созданию автотеста. 
 
@@ -225,7 +227,7 @@ class AdbTest : TestCase() {
 
 <br> С первым пунктом мы разобрались раньше, сейчас давайте разберемся со вторым. Каждое приложение, которое взаимодействует с интернетом должно содержать разрешение на использование интернета. Оно прописывается в манифесте.
 
-// ..image manifest_location
+<img src="../images/adb_lesson/manifest_location.png" alt="Manifest Location"/> 
 
 <br> Если вы забудете указать это разрешение, тест работать не будет.
 
@@ -257,7 +259,7 @@ class AdbTest : TestCase() {
 !!! info
     Обращаем ваше внимание, что в терминале сейчас запущен adb-server, если мы хотим работать с ним, нужно запустить еще одно окно терминала и работать в нем, чтобы не останавливать и не перезапускать сервер
     
-// ..image undefined_command
+<img src="../images/adb_lesson/undefined_command.png" alt="Undefined command"/> 
 
 <br> При выполнении этой команды внутри теста у нас будет брошено исключение `AdbServerException` и в поле message будет содержаться строка с текстом, который мы видели в консоли `unknown command undefined_command`. Чтобы тест не завершился с ошибкой, нам нужно обработать это исключение в блоке `try catch` и внутри блока `catch` можем добавить проверку, что сообщение об ошибке действительно содержит текст, указанный выше.
 
@@ -315,7 +317,7 @@ Assert.assertTrue("emulator" in result.first())
 
 <br> Для практики можем выполнить какую-нибудь cmd-команду. Например, `hostname` выводит название хоста (вашего компьютера). Если мы запустим ее в консоли, то результат будет примерно следующим:
 
-// ..image hostname
+<img src="../images/adb_lesson/hostname.png" alt="Hostname"/> 
 
 <br> Давайте эту же команду выполним внутри теста и проверим, что результат не пустой.
 
