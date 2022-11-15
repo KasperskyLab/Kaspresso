@@ -9,12 +9,12 @@
 
 # Kaspresso
 
-Kaspresso is a great framework for UI testing. Based on [Espresso](https://developer.android.com/training/testing/espresso) and [UI 
-Automator](https://developer.android.com/training/testing/ui-automator), Kaspresso provides a wide range of additional amazing features, such as:
+Kaspresso is a framework for Android UI testing. Based on [Espresso](https://developer.android.com/training/testing/espresso) and [UI 
+Automator](https://developer.android.com/training/testing/ui-automator), Kaspresso provides a wide range of additional features, such as:
+
 * 100% stability, no flakiness.
 * Jetpack Compose support **[Early access]**.
-* Significantly faster execution of UI Automator commands.
-With Kaspresso, some UI Automator commands run **10 times faster**!
+* Significantly faster execution of UI Automator commands. With Kaspresso, some UI Automator commands run **10 times faster**!
 * Excellent readability due to human DSL.
 * Incredible mechanism of interceptors that allows you to catch all actions and assertions in one place.
 * Full logging.
@@ -28,6 +28,42 @@ And many more!
 
 <img src="kaspresso.png" alt="Kaspresso"/>
 [//]: # (![Kaspresso]&#40;https://habrastorage.org/webt/dw/jh/9k/dwjh9kypjl637kxj8tiaxwjvtp0.png&#41;)
+
+
+## Integration
+
+To integrate Kaspresso into your project:
+1. If the `mavenCentral` repository does not exist, include it to your root `build.gradle` file:
+
+```groovy
+allprojects {
+    repositories {
+        mavenCentral()
+    }
+}
+```
+
+2. Add a dependency to `build.gradle`:
+
+```groovy
+dependencies {
+    androidTestImplementation 'com.kaspersky.android-components:kaspresso:<latest_version>'
+    // Allure support
+    androidTestImplementation "com.kaspersky.android-components:kaspresso-allure-support:<latest_version>"
+    // Jetpack Compose support
+    androidTestImplementation "com.kaspersky.android-components:kaspresso-compose-support:<latest_version>"
+}
+```
+
+If you are still using the old Android Support libraries, we strongly recommend to migrate to AndroidX.
+
+The last version with Android Support libraries is:
+
+```groovy
+dependencies {
+    androidTestImplementation 'com.kaspersky.android-components:kaspresso:1.0.1-support'
+}
+```
 
 ## Tutorial *NEW*
 See [our website](https://kasperskylab.github.io/Kaspresso/Tutorial/) for a step by step guide. 
@@ -239,41 +275,6 @@ Our team has great experience in introducing autotests in different companies. W
 ## Wiki
 
 For all information check [Kaspresso wiki](https://kasperskylab.github.io/Kaspresso/Wiki/)
-
-## Integration
-
-To integrate Kaspresso into your project:
-1. If the `mavenCentral` repository does not exist, include it to your root `build.gradle` file:
-
-```groovy
-allprojects {
-    repositories {
-        mavenCentral()
-    }
-}
-```
-
-2. Add a dependency to `build.gradle`:
-
-```groovy
-dependencies {
-    androidTestImplementation 'com.kaspersky.android-components:kaspresso:<latest_version>'
-    // Allure support
-    androidTestImplementation "com.kaspersky.android-components:kaspresso-allure-support:<latest_version>"
-    // Jetpack Compose support
-    androidTestImplementation "com.kaspersky.android-components:kaspresso-compose-support:<latest_version>"
-}
-```
-
-If you are still using the old Android Support libraries, we strongly recommend to migrate to AndroidX.
-
-The last version with Android Support libraries is:
-
-```groovy
-dependencies {
-    androidTestImplementation 'com.kaspersky.android-components:kaspresso:1.0.1-support'
-}
-```
 
 ## Samples
 All samples are available in the [samples](https://github.com/KasperskyLab/Kaspresso/tree/issue-372/tutorial/samples) folder. 
