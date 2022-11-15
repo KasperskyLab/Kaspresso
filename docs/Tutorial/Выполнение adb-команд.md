@@ -104,16 +104,18 @@
 
 <img src="../images/adb_lesson/devices_list.png" alt="Devices list"/>   
 
+<br> Теперь в списке устройств отображается наш эмулятор.
+
 <br> С помощью adb-команд мы можем:
 <ul>
     <li>Перезагрузить устройство</li>
     <li>Установить какое-то приложение</li>
     <li>Удалить приложение</li>
     <li>Загрузить файлы с телефона/на телефон</li>
-    <li>И многое другое...</li>
+    <li>И многое другое</li>
 </ul>
 
-<br> Для практики давайте удалим приложение tutorial, которое мы только что запустили.
+<br> Для практики давайте удалим приложение tutorial, которое мы только что запустили. Это делается при помощи команды `adb uninstall package_name`
 
 <img src="../images/adb_lesson/uninstall_app.png" alt="Uninstall app"/>   
 
@@ -137,13 +139,13 @@
 
 <br> Обычно скришоты сохраняют на sdcard, мы поступим также. 
 
-<br> Для создания скриншота используется команда `adb shell screencap /{pathToFile}/{name_of_image.png}`. В нашем случае она будет выглядеть так: `adb shell screencap /sdcard/my_screen.png`
+<br> Для создания скриншота используется команда `adb shell screencap/{pathToFile}/{name_of_image.png}`. В нашем случае она будет выглядеть так: `adb shell screencap/sdcard/my_screen.png`
 
 <img src="../images/adb_lesson/create_screenshot.png" alt="Create screenshot"/> 
 
 <br> В `Device File Explorer` кликаем правой кнопкой мыши и нажимаем `Synchronize`, после чего в папке отобразится созданный нами скриншот
 
-<img src="../images/adb_lesson/success_screenshot.png" alt="Success screenshot"/> 
+<img src="../images/adb_lesson/success_screen.png" alt="Success screenshot"/> 
 
 ## Работаем с adb в автотестах
 
@@ -159,7 +161,7 @@ java -jar <path/to/file>/adbserver-desktop.jar
 
 <img src="../images/adb_lesson/drag_server.png" alt="Drag server"/> 
 
-<br> После ввода команды, нажмите `Enter`. Запустится AdbServer - реализация десктопной части взаимодействия. При запуске теста девайс сообщит десктопу необходимые для выполнения теста adb команды.
+<br> После ввода команды, нажмите `Enter`. Запустится AdbServer. При запуске теста девайс сообщит десктопу необходимые для выполнения теста adb команды.
 
 <img src="../images/adb_lesson/launch_server.png" alt="Launch Server"/> 
 
@@ -257,7 +259,7 @@ class AdbTest : TestCase() {
 <br> Теперь давайте попробуем выполнить несуществующию adb команду. Сначала посмотрим, как ее выполнение выглядит в терминале. Выполним `adb undefined_command`.
 
 !!! info
-    Обращаем ваше внимание, что в терминале сейчас запущен adb-server, если мы хотим работать с ним, нужно запустить еще одно окно терминала и работать в нем, чтобы не останавливать и не перезапускать сервер
+    Обращаем ваше внимание, что в терминале сейчас запущен adb-server, если мы хотим работать с командной строкой, пока запущен сервер, нужно запустить еще одно окно терминала и работать в нем
     
 <img src="../images/adb_lesson/undefined_command.png" alt="Undefined command"/> 
 
@@ -364,8 +366,14 @@ class AdbTest : TestCase() {
 }
 ```
 
+
+
+
 # Итог
 
 <br> В сегодняшнем уроке мы узнали, что такое adb, настроили работу adb-server, научились выполнять различные типы команд (cmd, adb, shell) в консоли и в автотестах, а также узнали про объект Device, у которого мы можем получать различную информацию об устройстве и приложении, которое мы тестируем.
+
+
+
 
 
