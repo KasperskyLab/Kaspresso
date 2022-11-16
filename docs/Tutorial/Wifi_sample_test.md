@@ -196,6 +196,61 @@ class WifiSampleTest : TestCase() {
 
 Вспоминаем, что использовать захардкоженные строки не стоит, лучше вместо них использовать строковые ресурсы.
 
+```kotlin
+package com.kaspersky.kaspresso.tutorial
+
+import androidx.test.ext.junit.rules.activityScenarioRule
+import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
+import com.kaspersky.kaspresso.tutorial.screen.MainScreen
+import com.kaspersky.kaspresso.tutorial.screen.WifiScreen
+import org.junit.Rule
+import org.junit.Test
+
+class WifiSampleTest : TestCase() {
+
+    @get:Rule
+    val activityRule = activityScenarioRule<MainActivity>()
+
+    @Test
+    fun test() {
+        MainScreen {
+            wifiActivityButton {
+                isVisible()
+                isClickable()
+                click()
+            }
+        }
+        WifiScreen {
+            checkWifiButton.isVisible()
+            checkWifiButton.isClickable()
+            wifiStatus.hasEmptyText()
+            checkWifiButton.click()
+            wifiStatus.hasText(R.string.enabled_status)
+            device.network.toggleWiFi(false)
+            checkWifiButton.click()
+            wifiStatus.hasText(R.string.disabled_status)
+        }
+    }
+}
+```
+
+Теперь нам нужно научиться переворачивать устройство, чтобы выполнить остальные проверки. За переворот устройства отвечает объект `exploit` из класса `Device`, про который вы также можете подробнее почитать в [документации](https://kasperskylab.github.io/Kaspresso/Wiki/Working_with_Android_OS/)
+
+Весь процесс теста теперь будет выглядеть следующим образом:
+
+<ol>
+    <li>Устанавливаем на устройстве книжную ориентацию</li>
+    <li>Включаем автоповорт, чтобы при следующем перевороте устройства ориентация сменилась автоматически</li>
+    <li>Проверяем, что кнопка видима и кликабельна</li>
+    <li>Проверяем, что заголовок не содержит текст</li>
+    <li>Кликаем по кнопке</li>
+    <li>Проверяем, что текст в заголовке стал "enabled"</li>
+    <li>Отключаем Wifi</li>
+    <li>Кликаем по кнопке</li>
+    <li>Проверяем, что текст в заголовке стал "disabled"</li>
+    <li>Переворачиваем устройство</li>
+    <li>Проверяем, что текст на кнопке сохранился "disabled"</li>
+</ol>
 
 <br> Сославшись на прошлый урок рассказать о device. Описать его возможности (https://kasperskylab.github.io/Kaspresso/Wiki/Working_with_Android_OS/)
 <br> Рассказать, что часть команд под копотом использует adb, поэтому adbserver должен быть запущен (полезно сразу его запускать, даже если тест не связан с adb. Сказать, что мы планируем добавить автозапуск adbserver при старте теста
