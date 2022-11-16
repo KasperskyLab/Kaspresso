@@ -34,14 +34,14 @@ class InterceptorTest : TestCase(kaspressoBuilder = Kaspresso.Builder.simple().a
     val activityRule = activityScenarioRule<MainActivity>()
 
     private val interceptorMainScreen = InterceptedMainScreen()
+    private val objectBehaviorInterceptors = listOf(
+        ElementLoaderObjectBehaviorInterceptor(testLogger, testElementLoaderParams),
+        FlakySafeObjectBehaviorInterceptor(testFlakySafetyParams, testLogger)
+    )
 
     @Test
     fun testKautomatorInterceptors() {
         val list = mutableListOf<String>()
-        val objectBehaviorInterceptors = listOf(
-            ElementLoaderObjectBehaviorInterceptor(testLogger, testElementLoaderParams),
-            FlakySafeObjectBehaviorInterceptor(testFlakySafetyParams, testLogger)
-        )
 
         before {
             KautomatorConfigurator {
@@ -121,8 +121,29 @@ class InterceptorTest : TestCase(kaspressoBuilder = Kaspresso.Builder.simple().a
                     simpleButton {
                         intercept {
                             onAll { list.add("ALL") }
-                            onCheck { _, _ -> list.add("CHECK") }
-                            onPerform { _, _ -> list.add("PERFORM") }
+                            onCheck { interaction, assertion ->
+                                objectBehaviorInterceptors.fold(
+                                    initial = {
+                                        interaction.check(assertion)
+                                    },
+                                    operation = { acc, objectBehaviorInterceptor ->
+                                        { objectBehaviorInterceptor.interceptCheck(interaction, assertion, acc) }
+                                    }
+                                ).invoke()
+                                list.add("CHECK")
+                            }
+                            onPerform { interaction, action ->
+                                objectBehaviorInterceptors.fold(
+                                    initial = {
+                                        interaction.perform(action)
+                                    },
+                                    operation = {
+                                            acc, objectBehaviorInterceptor ->
+                                        { objectBehaviorInterceptor.interceptPerform(interaction, action, acc) }
+                                    }
+                                ).invoke()
+                                list.add("PERFORM")
+                            }
                         }
 
                         isDisplayed()
@@ -146,8 +167,29 @@ class InterceptorTest : TestCase(kaspressoBuilder = Kaspresso.Builder.simple().a
                 intercept {
                     onUiInteraction {
                         onAll { list.add("ALL_KAUTOMATOR") }
-                        onCheck { _, _ -> list.add("CHECK_KAUTOMATOR") }
-                        onPerform { _, _ -> list.add("PERFORM_KAUTOMATOR") }
+                        onCheck { interaction, assertion ->
+                            objectBehaviorInterceptors.fold(
+                                initial = {
+                                    interaction.check(assertion)
+                                },
+                                operation = { acc, objectBehaviorInterceptor ->
+                                    { objectBehaviorInterceptor.interceptCheck(interaction, assertion, acc) }
+                                }
+                            ).invoke()
+                            list.add("CHECK_KAUTOMATOR")
+                        }
+                        onPerform { interaction, action ->
+                            objectBehaviorInterceptors.fold(
+                                initial = {
+                                    interaction.perform(action)
+                                },
+                                operation = {
+                                        acc, objectBehaviorInterceptor ->
+                                    { objectBehaviorInterceptor.interceptPerform(interaction, action, acc) }
+                                }
+                            ).invoke()
+                            list.add("PERFORM_KAUTOMATOR")
+                        }
                     }
                 }
             }
@@ -191,8 +233,29 @@ class InterceptorTest : TestCase(kaspressoBuilder = Kaspresso.Builder.simple().a
                 intercept {
                     onUiInteraction {
                         onAll { list.add("ALL_KAUTOMATOR") }
-                        onCheck { _, _ -> list.add("CHECK_KAUTOMATOR") }
-                        onPerform { _, _ -> list.add("PERFORM_KAUTOMATOR") }
+                        onCheck { interaction, assertion ->
+                            objectBehaviorInterceptors.fold(
+                                initial = {
+                                    interaction.check(assertion)
+                                },
+                                operation = { acc, objectBehaviorInterceptor ->
+                                    { objectBehaviorInterceptor.interceptCheck(interaction, assertion, acc) }
+                                }
+                            ).invoke()
+                            list.add("CHECK_KAUTOMATOR")
+                        }
+                        onPerform { interaction, action ->
+                            objectBehaviorInterceptors.fold(
+                                initial = {
+                                    interaction.perform(action)
+                                },
+                                operation = {
+                                        acc, objectBehaviorInterceptor ->
+                                    { objectBehaviorInterceptor.interceptPerform(interaction, action, acc) }
+                                }
+                            ).invoke()
+                            list.add("PERFORM_KAUTOMATOR")
+                        }
                     }
                 }
             }
