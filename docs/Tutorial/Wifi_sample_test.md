@@ -1,4 +1,4 @@
-# Wifi Test and work with devices
+# Тестирование интернет-соединения и работа с классом Device
 
 В сегодняшнем уроке мы создадим тест, который проверяет работу экрана Internet Availability (`WifiActivity`)
 
@@ -18,7 +18,7 @@
 
 !!! image wifi_enabled
 
-Эта кнопка кликабельно, после клика отображается корректный статус состояния Wifi - enabled. Отключаем Wifi
+Эта кнопка кликабельна, после клика отображается корректный статус состояния Wifi - enabled. Отключаем Wifi
 
 !!! image turn_off_wifi
 
@@ -123,7 +123,7 @@ device.network.toggleWiFi(false)
 
 !!! image available_methods
 
-Давайте напишем тест, который выполнит все необходимые проверки, кроме переворота устройства - им займемся чуть позже. Первым делом нужно создать Page Object экрана проверки интернет-подключения `WifiScreen`
+Давайте напишем тест, который выполнит все необходимые проверки, кроме переворота устройства - переворотм мы займемся чуть позже. Первым делом нужно создать Page Object экрана проверки интернет-подключения `WifiScreen`. Добавляем его в пакете `com.kaspersky.kaspresso.tutorial.screen`
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial.screen
@@ -233,6 +233,8 @@ class WifiSampleTest : TestCase() {
     }
 }
 ```
+!!! info
+    Не забывайте перед запуском теста включить Wifi на устройстве, т.к. после каждого запуска он у вас будет выключен и при втором прогоне тест не пройдет.
 
 Теперь нам нужно научиться переворачивать устройство, чтобы выполнить остальные проверки. За переворот устройства отвечает объект `exploit` из класса `Device`, про который вы также можете подробнее почитать в [документации](https://kasperskylab.github.io/Kaspresso/Wiki/Working_with_Android_OS/)
 
@@ -240,7 +242,6 @@ class WifiSampleTest : TestCase() {
 
 <ol>
     <li>Устанавливаем на устройстве книжную ориентацию</li>
-    <li>Включаем автоповорт, чтобы при следующем перевороте устройства ориентация сменилась автоматически</li>
     <li>Проверяем, что кнопка видима и кликабельна</li>
     <li>Проверяем, что заголовок не содержит текст</li>
     <li>Кликаем по кнопке</li>
@@ -251,6 +252,59 @@ class WifiSampleTest : TestCase() {
     <li>Переворачиваем устройство</li>
     <li>Проверяем, что текст на кнопке сохранился "disabled"</li>
 </ol>
+
+```kotlin
+package com.kaspersky.kaspresso.tutorial
+
+import androidx.test.ext.junit.rules.activityScenarioRule
+import com.kaspersky.kaspresso.device.exploit.Exploit
+import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
+import com.kaspersky.kaspresso.tutorial.screen.MainScreen
+import com.kaspersky.kaspresso.tutorial.screen.WifiScreen
+import org.junit.Rule
+import org.junit.Test
+
+class WifiSampleTest : TestCase() {
+
+    @get:Rule
+    val activityRule = activityScenarioRule<MainActivity>()
+
+    @Test
+    fun test() {
+        MainScreen {
+            wifiActivityButton {
+                isVisible()
+                isClickable()
+                click()
+            }
+        }
+        WifiScreen {
+            device.exploit.setOrientation(Exploit.DeviceOrientation.Portrait)
+            checkWifiButton.isVisible()
+            checkWifiButton.isClickable()
+            wifiStatus.hasEmptyText()
+            checkWifiButton.click()
+            wifiStatus.hasText(R.string.enabled_status)
+            device.network.toggleWiFi(false)
+            checkWifiButton.click()
+            wifiStatus.hasText(R.string.disabled_status)
+            device.exploit.rotate()
+            wifiStatus.hasText(R.string.disabled_status)
+        }
+    }
+}
+```
+
+# Итог
+
+Итак, сегодня мы попрактиковались с объектом `device`, научились менять стейт интернет-соединения и ориентацию экрана из тестового класса. При этом тест запускается, все проверки завершаются успешно, но в нашем коде есть несколько серьезных проблем:
+
+<ul>
+    <li>Тест не разбит на шаги. В итоге мы имеем большое полотно кода, в котором достаточно сложно разобраться</li>
+    <li>Тест выполняется успешно только в том случае, если мы предварительно включили интернет на устройстве. При этом, при каждом следующем запуске тест будет падать из-за того, что внутри него Wifi отключается</li>
+    <li></li>
+    <li></li>
+</ul>
 
 <br> Сославшись на прошлый урок рассказать о device. Описать его возможности (https://kasperskylab.github.io/Kaspresso/Wiki/Working_with_Android_OS/)
 <br> Рассказать, что часть команд под копотом использует adb, поэтому adbserver должен быть запущен (полезно сразу его запускать, даже если тест не связан с adb. Сказать, что мы планируем добавить автозапуск adbserver при старте теста
