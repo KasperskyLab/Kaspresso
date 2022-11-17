@@ -4,7 +4,7 @@
 
 Запускаем наше приложение tutorial и кликаем по кнопке `Internet Availability`
 
-<img src="../images/wifi_test/internet_availability_button.png" alt="Button Internet Availability"/>
+<img src="../images/wifi_test/internet_availability_button.png" alt="Button Internet Availability" width="300"/>
 
 ## Ручное тестирование
 
@@ -12,21 +12,21 @@
 
 Изначально у нас есть кнопка `CHECK WIFI STATUS`, больше никакого текста на экране нет. На текущий момент Wifi на устройстве включен
 
-<img src="../images/wifi_test/first_launch_1.png" alt="Launch Wifi Test Activity"/>
+<img src="../images/wifi_test/first_launch_1.png" alt="Launch Wifi Test Activity" width="300"/>
 
-<img src="../images/wifi_test/first_launch_2.png" alt="Launch Wifi Test Activity"/>
+<img src="../images/wifi_test/first_launch_2.png" alt="Launch Wifi Test Activity" width="300"/>
 
 Кликаем на кнопку
 
-<img src="../images/wifi_test/image wifi_enabled.png" alt="Wifi enabled"/>
+<img src="../images/wifi_test/wifi_enabled.png" alt="Wifi enabled" width="300"/>
 
 Эта кнопка кликабельна, после клика отображается корректный статус состояния Wifi - enabled. Отключаем Wifi
 
-<img src="../images/wifi_test/turn_off_wifi.png" alt="Turn-off wifi"/>
+<img src="../images/wifi_test/turn_off_wifi.png" alt="Turn-off wifi" width="300"/>
 
 Кликаем на кнопку снова и проверям статус Wifi сейчас
 
-<img src="../images/wifi_test/image wifi_disabled.png" alt="Wifi disabled"/>
+<img src="../images/wifi_test/wifi_disabled.png" alt="Wifi disabled" width="300"/>
 
 Состояние определяется корректно. Последняя проверка - давайте перевернем устройство и убедимся, что текст на экране сохраняется
 
