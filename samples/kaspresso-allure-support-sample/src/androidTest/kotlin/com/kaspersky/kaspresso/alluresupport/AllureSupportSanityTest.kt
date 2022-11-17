@@ -119,15 +119,17 @@ class AllureSupportSanityTest : TestCase(
         assertEquals("There should be 3 root steps", 3, reportJson.getJSONArray(STEPS_JSON_FIELD).length()) // 3 main steps
         reportJson.getJSONArray(STEPS_JSON_FIELD).run { // validate steps
             for (i in 0 until length()) {
-                checkStepAttachments(getJSONObject(1))
-                if (i == 1) {
-                    getJSONObject(1).getJSONArray(STEPS_JSON_FIELD).run {
-                        assertEquals("Second step should contain 2 inner steps", 2, length()) // second main step has 2 inner steps
-                        for (j in 0 until length()) {
-                            checkStepAttachments(getJSONObject(j))
-                        }
-                    }
-                }
+                checkStepAttachments(getJSONObject(i))
+            }
+            validateNestedStep(getJSONObject(1))
+        }
+    }
+
+    private fun validateNestedStep(stepJSONObject: JSONObject) {
+        stepJSONObject.getJSONArray(STEPS_JSON_FIELD).run {
+            assertEquals("Second step should contain 2 inner steps", 2, length()) // second main step has 2 inner steps
+            for (j in 0 until length()) {
+                checkStepAttachments(getJSONObject(j))
             }
         }
     }
