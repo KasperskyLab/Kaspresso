@@ -125,7 +125,7 @@ device.network.toggleWiFi(false)
 
 <img src="../images/wifi_test/available_methods.png" alt="Available methods"/>
 
-Давайте напишем тест, который выполнит все необходимые проверки, кроме переворота устройства - переворотм мы займемся чуть позже. Первым делом нужно создать Page Object экрана проверки интернет-подключения `WifiScreen`. Добавляем его в пакете `com.kaspersky.kaspresso.tutorial.screen`
+Давайте напишем тест, который выполнит все необходимые проверки, кроме переворота устройства - переворотом мы займемся чуть позже. Первым делом нужно создать Page Object экрана проверки интернет-подключения `WifiScreen`. Добавляем его в пакете `com.kaspersky.kaspresso.tutorial.screen`
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial.screen
@@ -296,6 +296,7 @@ class WifiSampleTest : TestCase() {
     }
 }
 ```
+Запускаем. Тест пройден успешно.
 
 # Итог
 
