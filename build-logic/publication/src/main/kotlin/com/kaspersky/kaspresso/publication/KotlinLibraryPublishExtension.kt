@@ -1,17 +1,14 @@
 package com.kaspersky.kaspresso.publication
 
-import org.gradle.api.model.ObjectFactory
 import org.gradle.api.provider.Property
-import org.gradle.kotlin.dsl.property
-import javax.inject.Inject
 
 @Suppress("UnnecessaryAbstractClass")
-abstract class KotlinLibraryPublishExtension @Inject constructor(objects: ObjectFactory) {
+abstract class KotlinLibraryPublishExtension {
 
     /**
      * non blank value will modify artifact id of maven coordinates
      *
      * default: project.name
      */
-    val artifactId: Property<String> = objects.property()
+    abstract val artifactId: Property<String>
 }

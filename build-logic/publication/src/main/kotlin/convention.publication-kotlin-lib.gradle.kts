@@ -5,8 +5,6 @@ plugins {
 }
 
 plugins.withId("kotlin") {
-
-    @Suppress("UnstableApiUsage")
     extensions.getByType<JavaPluginExtension>().run {
         withSourcesJar()
         withJavadocJar()
@@ -14,6 +12,7 @@ plugins.withId("kotlin") {
 }
 
 val publishExtension = extensions.create<KotlinLibraryPublishExtension>("publish")
+publishExtension.artifactId.convention(project.name)
 
 publishing {
     publications {
@@ -21,7 +20,7 @@ publishing {
             from(components["java"])
 
             afterEvaluate {
-                artifactId = publishExtension.artifactId.getOrElse(project.name)
+                artifactId = publishExtension.artifactId.get()
             }
         }
     }
