@@ -1,27 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
-    tools:context=".MainActivity">
+    android:padding="16dp">
 
     <TextView
-        android:id="@+id/activity_main_title"
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="@string/main_screen_title"
-        android:textSize="18pt" />
+        android:layout_marginTop="40dp"
+        android:text="Tutorial"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/activity_main_simple_sample_button"
-        android:layout_width="match_parent"
+        android:id="@+id/simple_activity_btn"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/activity_main_title"
-        android:text="@string/main_screen_simple_fragment_button" />
+        android:layout_marginTop="16dp"
+        android:text="Simple test"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title" />
 
-</RelativeLayout>
+    <Button
+        android:id="@+id/wifi_activity_btn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Internet availability"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/simple_activity_btn" />
+
+    <Button
+        android:id="@+id/alert_dialog_activity_btn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Alert dialog activity"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/wifi_activity_btn" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
