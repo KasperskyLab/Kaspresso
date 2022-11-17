@@ -41,7 +41,7 @@
         <activity android:name=".wifi.WiFiActivity"
             android:exported="true"/>
 
-        <activity android:name=".alert_dialog.AlertDialogActivity"
+        <activity android:name=".dialog.AlertDialogActivity"
             android:exported="false"/>
 
     </application>

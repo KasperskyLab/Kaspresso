@@ -1,11 +1,11 @@
-package com.kaspersky.kaspresso.tutorial.alert_dialog
+package com.kaspersky.kaspresso.tutorial.dialog
 
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.kaspersky.kaspresso.tutorial.databinding.ActivityWithAlertDialogBinding
 
-class AlertDialogActivity: AppCompatActivity() {
+class AlertDialogActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityWithAlertDialogBinding
 
