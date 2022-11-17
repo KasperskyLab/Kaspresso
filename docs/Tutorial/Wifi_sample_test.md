@@ -4,6 +4,8 @@
 
 Запускаем наше приложение tutorial и кликаем по кнопке `Internet Availability`
 
+<img src="../images/simple_test/Select_tutorial.png" alt="Select tutorial"/>
+
 !!! image internet_availability_button
 
 ## Ручное тестирование
@@ -12,23 +14,25 @@
 
 Изначально у нас есть кнопка `CHECK WIFI STATUS`, больше никакого текста на экране нет. На текущий момент Wifi на устройстве включен
 
-!!! image first_launch_1 и first_launch_2
+<img src="../images/simple_test/first_launch_1.png" alt="Launch Wifi Test Activity"/>
+
+<img src="../images/simple_test/first_launch_2.png" alt="Launch Wifi Test Activity"/>
 
 Кликаем на кнопку
 
-!!! image wifi_enabled
+<img src="../images/simple_test/image wifi_enabled.png" alt="Wifi enabled"/>
 
 Эта кнопка кликабельна, после клика отображается корректный статус состояния Wifi - enabled. Отключаем Wifi
 
-!!! image turn_off_wifi
+<img src="../images/simple_test/turn_off_wifi.png" alt="Turn-off wifi"/>
 
 Кликаем на кнопку снова и проверям статус Wifi сейчас
 
-!!! image wifi_disabled
+<img src="../images/simple_test/image wifi_disabled.png" alt="Wifi disabled"/>
 
 Состояние определяется корректно. Последняя проверка - давайте перевернем устройство и убедимся, что текст на экране сохраняется
 
-!!! image wifi_disabled_portrait
+<img src="../images/simple_test/wifi_disabled_portrait.png" alt="Wifi disabled landscape"/>
 
 Текст сохраняется успешно, все тесты пройдены. Теперь нам необходимо добиться такого результата, чтобы все те же проверки выполнялись в автоматическом режиме. 
 
@@ -121,7 +125,7 @@ device.network.toggleWiFi(false)
 
 Кроме WIFI мы можем также управлять мобильной сетью, а также интернет-подключением на устройстве в целом (Wifi + мобильная сеть). Для того чтобы посмотреть все доступные методы можно перейти в документацию, указанную выше, но есть способ проще - после названия объекта поставить точку и посмотреть, какие методы можно вызвать у этого объекта. По их названию обычно понятно, что они делают.
 
-!!! image available_methods
+<img src="../images/simple_test/available_methods.png" alt="Available methods"/>
 
 Давайте напишем тест, который выполнит все необходимые проверки, кроме переворота устройства - переворотм мы займемся чуть позже. Первым делом нужно создать Page Object экрана проверки интернет-подключения `WifiScreen`. Добавляем его в пакете `com.kaspersky.kaspresso.tutorial.screen`
 
