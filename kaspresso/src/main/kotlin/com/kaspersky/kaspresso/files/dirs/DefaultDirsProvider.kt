@@ -5,13 +5,13 @@ import android.app.Instrumentation
 import android.content.Context
 import android.os.Build
 import android.os.Environment
-import androidx.test.uiautomator.UiDevice
+import com.kaspersky.kaspresso.instrumental.InstrumentalDependencyProvider
 import com.kaspersky.kaspresso.internal.extensions.other.createDirIfNeeded
 import java.io.File
 
 open class DefaultDirsProvider(
     private val instrumentation: Instrumentation,
-    private val device: UiDevice
+    private val instrumentationDependencyProvider: InstrumentalDependencyProvider
 ) : DirsProvider {
     private val clearedDirs = HashSet<File>()
 
@@ -43,10 +43,12 @@ open class DefaultDirsProvider(
     }
 
     private fun shouldClearDirThroughShell(dest: File): Boolean {
+        val device = instrumentationDependencyProvider.uiDevice
         return device.executeShellCommand("ls ${dest.absolutePath}").isNotEmpty()
     }
 
     private fun clearDirThroughShell(dest: File, inclusive: Boolean) {
+        val device = instrumentationDependencyProvider.uiDevice
         if (inclusive) {
             device.executeShellCommand("rm -r ${dest.absolutePath}")
         } else {

@@ -30,8 +30,8 @@ fun Kaspresso.Builder.Companion.withAllureSupport(
  */
 fun Kaspresso.Builder.addAllureSupport(): Kaspresso.Builder = apply {
     if (isAndroidRuntime) {
-        val device = instrumentalDependencyProviderFactory.getComponentProvider<Kaspresso>(instrumentation).uiDevice
-        val allureDirsProvider = AllureDirsProvider(instrumentation, resourcesRootDirsProvider, device)
+        val instrumentalDependencyProvider = instrumentalDependencyProviderFactory.getComponentProvider<Kaspresso>(instrumentation)
+        val allureDirsProvider = AllureDirsProvider(instrumentation, resourcesRootDirsProvider, instrumentalDependencyProvider)
         val stateHolder = TestRunStateHolder()
 
         stepWatcherInterceptors.addAll(
@@ -47,7 +47,7 @@ fun Kaspresso.Builder.addAllureSupport(): Kaspresso.Builder = apply {
                 ScreenshotTestInterceptor(screenshots),
                 DumpViewsTestInterceptor(viewHierarchyDumper),
                 VideoRecordingTestInterceptor(videos, allureDirsProvider, stateHolder),
-                MoveReportsInterceptor(instrumentation, dirsProvider, resourcesRootDirsProvider, stateHolder, device)
+                MoveReportsInterceptor(instrumentation, dirsProvider, resourcesRootDirsProvider, stateHolder, instrumentalDependencyProvider.uiDevice)
             )
         )
     }

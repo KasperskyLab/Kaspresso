@@ -5,8 +5,8 @@ import android.app.Instrumentation
 import android.content.Context
 import android.os.Build
 import android.os.Environment
-import androidx.test.uiautomator.UiDevice
 import com.kaspersky.kaspresso.files.resources.ResourcesRootDirsProvider
+import com.kaspersky.kaspresso.instrumental.InstrumentalDependencyProvider
 import com.kaspersky.kaspresso.internal.extensions.other.createDirIfNeeded
 import com.kaspersky.kaspresso.internal.extensions.other.createFileIfNeeded
 import java.io.File
@@ -14,8 +14,8 @@ import java.io.File
 class AllureDirsProvider(
     private val instrumentation: Instrumentation,
     private val resourcesRootDirsProvider: ResourcesRootDirsProvider,
-    device: UiDevice
-) : DefaultDirsProvider(instrumentation, device) {
+    instrumentationDependencyProvider: InstrumentalDependencyProvider
+) : DefaultDirsProvider(instrumentation, instrumentationDependencyProvider) {
 
     @Suppress("DEPRECATION")
     @SuppressLint("WorldReadableFiles", "ObsoleteSdkInt")
