@@ -4,11 +4,9 @@ plugins {
 
 group = "com.kaspersky.android-components"
 
-version = providers.gradleProperty("stableVersion")
-    .forUseAtConfigurationTime()
-    .get()
+version = property("stableVersion") ?: error("stableVersion property not set")
 
-publishing.publications.withType<MavenPublication> {
+publishing.publications.withType<MavenPublication>().configureEach {
     pom {
         name.set("Kaspresso")
         description.set("Android framework for UI testing")
@@ -55,6 +53,11 @@ publishing.publications.withType<MavenPublication> {
                 id.set("RuslanMingaliev")
                 name.set("Ruslan Mingaliev")
                 url.set("https://github.com/RuslanMingaliev")
+            }
+            developer {
+                id.set("VladislavSumin")
+                name.set("Vladislav Sumin")
+                url.set("https://github.com/VladislavSumin")
             }
         }
     }
