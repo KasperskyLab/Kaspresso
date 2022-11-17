@@ -2,7 +2,6 @@ package com.kaspersky.kaspresso.files.dirs
 
 import android.annotation.SuppressLint
 import android.app.Instrumentation
-import android.content.Context
 import android.os.Build
 import android.os.Environment
 import com.kaspersky.kaspresso.instrumental.InstrumentalDependencyProvider
@@ -21,7 +20,8 @@ open class DefaultDirsProvider(
         val dir = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).resolve(dest)
         } else {
-            instrumentation.targetContext.applicationContext.getDir(dest.canonicalPath, Context.MODE_WORLD_READABLE)
+            Environment.getExternalStorageDirectory().resolve(dest)
+            // instrumentation.targetContext.applicationContext.getDir(dest.canonicalPath, Context.MODE_WORLD_READABLE)
         }
 
         return dir.createDirIfNeeded()
@@ -37,7 +37,7 @@ open class DefaultDirsProvider(
     @Suppress("SameParameterValue")
     private fun clearDir(dest: File, inclusive: Boolean) {
         clearDirManually(dest, inclusive)
-        if (shouldClearDirThroughShell(dest)) {
+        if (dest.exists() && dest.list()?.size == 0 && shouldClearDirThroughShell(dest)) {
             clearDirThroughShell(dest, inclusive)
         }
     }

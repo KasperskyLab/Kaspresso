@@ -84,7 +84,7 @@ This dir should be moved from the device to the host machine which will do gener
 
 Assuming your package is com.example
 ```
-adb exec-out run-as com.example sh -c 'cd /data/data/com.example/files && tar cf - allure-results' > ~/allure-results.tar
+adb exec-out sh -c "cd /sdcard/Documents && tar cf - allure-results" > ~/allure-results.tar
 ```
 `exec-out` runs passed command and returns result as a file which we save by `> allure-results.tar` in the end 
 
@@ -100,7 +100,7 @@ emulator-5554	device
 ```
 Select the needed device and call:
 ```
-adb -s emulator-5554 exec-out run-as com.example sh -c 'cd /data/data/com.example/files && tar cf - allure-results' > ~/allure-results.tar
+adb -s emulator-5554 exec-out sh -c "cd /sdcard/Documents && tar cf - allure-results" > ~/allure-results.tar
 ```
 And that's it, the **allure-results** archive with all the test resources is now at your home directory.
 
@@ -112,7 +112,8 @@ brew install allure
 ```
 Now we are ready to generate and watch the report, just call:
 ```
-allure serve /Users/username/Desktop/allure-results
+tar -xvf allure-results.tar
+allure serve ~/allure-results
 ```
 Next, the Allure server generates the html-page representing the report and puts it to temp dir in your system. You will see the report opening in the new tab in your browser (the tab is opening automatically).
 
