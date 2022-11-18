@@ -667,7 +667,7 @@ data class Kaspresso(
             if (!::libLogger.isInitialized) libLogger = UiTestLoggerImpl(DEFAULT_LIB_LOGGER_TAG)
             if (!::testLogger.isInitialized) testLogger = UiTestLoggerImpl(DEFAULT_TEST_LOGGER_TAG)
 
-            if (!::dirsProvider.isInitialized) dirsProvider = DefaultDirsProvider(instrumentation, instrumentalDependencyProviderFactory.getComponentProvider<Kaspresso>(instrumentation))
+            if (!::dirsProvider.isInitialized) dirsProvider = DefaultDirsProvider(instrumentalDependencyProviderFactory.getComponentProvider<Kaspresso>(instrumentation))
             if (!::resourcesRootDirsProvider.isInitialized) resourcesRootDirsProvider = DefaultResourcesRootDirsProvider()
             if (!::resourcesDirNameProvider.isInitialized) resourcesDirNameProvider = DefaultResourcesDirNameProvider()
             if (!::resourcesDirsProvider.isInitialized) {

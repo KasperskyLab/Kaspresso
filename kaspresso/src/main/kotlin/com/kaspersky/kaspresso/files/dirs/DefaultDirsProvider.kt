@@ -1,7 +1,6 @@
 package com.kaspersky.kaspresso.files.dirs
 
 import android.annotation.SuppressLint
-import android.app.Instrumentation
 import android.os.Build
 import android.os.Environment
 import com.kaspersky.kaspresso.instrumental.InstrumentalDependencyProvider
@@ -9,19 +8,16 @@ import com.kaspersky.kaspresso.internal.extensions.other.createDirIfNeeded
 import java.io.File
 
 open class DefaultDirsProvider(
-    private val instrumentation: Instrumentation,
     private val instrumentationDependencyProvider: InstrumentalDependencyProvider
 ) : DirsProvider {
     private val clearedDirs = HashSet<File>()
 
-    @Suppress("DEPRECATION")
     @SuppressLint("WorldReadableFiles", "ObsoleteSdkInt")
     override fun provideNew(dest: File): File {
         val dir = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).resolve(dest)
         } else {
             Environment.getExternalStorageDirectory().resolve(dest)
-            // instrumentation.targetContext.applicationContext.getDir(dest.canonicalPath, Context.MODE_WORLD_READABLE)
         }
 
         return dir.createDirIfNeeded()

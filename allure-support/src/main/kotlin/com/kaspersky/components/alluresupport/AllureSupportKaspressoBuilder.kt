@@ -7,7 +7,6 @@ import com.kaspersky.components.alluresupport.interceptors.testrun.DumpViewsTest
 import com.kaspersky.components.alluresupport.interceptors.testrun.MoveReportsInterceptor
 import com.kaspersky.components.alluresupport.interceptors.testrun.ScreenshotTestInterceptor
 import com.kaspersky.components.alluresupport.interceptors.testrun.TestRunStateHolder
-import com.kaspersky.components.alluresupport.interceptors.testrun.TestRunUuidInterceptor
 import com.kaspersky.components.alluresupport.interceptors.testrun.VideoRecordingTestInterceptor
 import com.kaspersky.kaspresso.files.dirs.AllureDirsProvider
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
@@ -42,7 +41,6 @@ fun Kaspresso.Builder.addAllureSupport(): Kaspresso.Builder = apply {
         )
         testRunWatcherInterceptors.addAll(
             listOf(
-                TestRunUuidInterceptor(stateHolder),
                 DumpLogcatTestInterceptor(logcatDumper),
                 ScreenshotTestInterceptor(screenshots),
                 DumpViewsTestInterceptor(viewHierarchyDumper),

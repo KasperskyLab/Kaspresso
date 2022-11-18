@@ -7,6 +7,7 @@ import com.kaspersky.kaspresso.files.dirs.DirsProvider
 import com.kaspersky.kaspresso.files.resources.ResourcesRootDirsProvider
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.TestRunWatcherInterceptor
 import com.kaspersky.kaspresso.testcases.models.info.TestInfo
+import io.qameta.allure.kotlin.Allure
 import org.json.JSONObject
 import java.io.File
 
@@ -14,6 +15,7 @@ private const val ATTACHMENTS_JSON_FIELD = "attachments"
 private const val NAME_JSON_FIELD = "name"
 private const val SOURCE_JSON_FIELD = "source"
 private const val MP4_EXTENSION = "mp4"
+private const val ALLURE_DIR = "allure-results"
 
 /**
  * Current allure version stores reports to /data/data/your.package.name/files/allure-results.
@@ -26,6 +28,13 @@ class MoveReportsInterceptor(
     private val stateHolder: TestRunStateHolder,
     private val device: UiDevice
 ) : TestRunWatcherInterceptor {
+
+    private var lastTestCaseUuid: String? = null
+
+    override fun onMainSectionStarted(testInfo: TestInfo) {
+        lastTestCaseUuid = Allure.lifecycle.getCurrentTestCase()
+    }
+
     override fun onTestFinished(testInfo: TestInfo, success: Boolean) {
         val allureTargetDir = moveAllureReportToSdCard()
         removeStubs(allureTargetDir)
@@ -49,7 +58,7 @@ class MoveReportsInterceptor(
     /**
      * @return allure results dir under /data/data/your.package.name/files
      */
-    private fun getOriginalAllureDir(): File = instrumentation.targetContext.filesDir.resolve("allure-results")
+    private fun getOriginalAllureDir(): File = instrumentation.targetContext.filesDir.resolve(ALLURE_DIR)
 
     /**
      * Moves allure report from /data/data/your.package.name/files/allure-report to external storage e.g.
@@ -101,13 +110,13 @@ class MoveReportsInterceptor(
      * @param allureTargetDir allure directory under /sdcard
      */
     private fun saveAttachedVideo(attachedVideo: AttachedVideo, allureTargetDir: File) {
-        val allureReportFile = allureTargetDir.resolve("${stateHolder.lastTestCaseUuid ?: ""}-result.json")
+        val allureReportFile = allureTargetDir.resolve("${lastTestCaseUuid ?: ""}-result.json")
         if (!allureReportFile.exists()) {
             throw IllegalStateException("Can't attach video to report because the latter not found. Tried path ${allureReportFile.absolutePath}")
         }
 
-        allureReportFile.inputStream().use {
-            val json = JSONObject(CharStreams.toString(it.reader()))
+        allureReportFile.inputStream().use { inputStream ->
+            val json = JSONObject(CharStreams.toString(inputStream.reader()))
             val attachments = json.getJSONArray(ATTACHMENTS_JSON_FIELD)
             for (i in 0 until attachments.length()) {
                 val attachment = attachments.getJSONObject(i)

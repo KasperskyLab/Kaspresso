@@ -58,7 +58,6 @@ abstract class DocLocScreenshotTestCase(
     private val resourcesDirsProvider: ResourcesDirsProvider =
         DefaultResourcesDirsProvider(
             dirsProvider = DefaultDirsProvider(
-                InstrumentationRegistry.getInstrumentation(),
                 InstrumentalDependencyProviderFactory().getComponentProvider<Kaspresso>(InstrumentationRegistry.getInstrumentation())
             ),
             resourcesDirNameProvider = DefaultResourcesDirNameProvider()
@@ -102,7 +101,6 @@ abstract class DocLocScreenshotTestCase(
         },
         resourcesDirsProvider = DefaultResourcesDirsProvider(
             dirsProvider = DefaultDirsProvider(
-                InstrumentationRegistry.getInstrumentation(),
                 InstrumentalDependencyProviderFactory().getComponentProvider<Kaspresso>(InstrumentationRegistry.getInstrumentation())
             ),
             resourcesDirNameProvider = SupportLegacyResourcesDirNameProvider(screenshotDirectoryProvider)

@@ -30,7 +30,6 @@ class CustomDirectoryScreenshotSampleTest : DocLocScreenshotTestCase(
     },
     resourcesDirsProvider = FlatDirectoryProvider(
         dirsProvider = DefaultDirsProvider(
-            InstrumentationRegistry.getInstrumentation(),
             InstrumentalDependencyProviderFactory().getComponentProvider<Kaspresso>(InstrumentationRegistry.getInstrumentation())
         )
     ),
