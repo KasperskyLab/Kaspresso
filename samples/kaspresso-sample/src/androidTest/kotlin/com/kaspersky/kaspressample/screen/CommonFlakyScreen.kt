@@ -8,8 +8,8 @@ import com.kaspersky.kaspresso.screens.KScreen
 
 object CommonFlakyScreen : KScreen<CommonFlakyScreen>() {
 
-    override val layoutId: Int? = R.layout.activity_common_flaky
-    override val viewClass: Class<*>? = CommonFlakyActivity::class.java
+    override val layoutId: Int = R.layout.activity_common_flaky
+    override val viewClass: Class<*> = CommonFlakyActivity::class.java
 
     val scrollView = KScrollView { withId(R.id.scroll_view) }
 

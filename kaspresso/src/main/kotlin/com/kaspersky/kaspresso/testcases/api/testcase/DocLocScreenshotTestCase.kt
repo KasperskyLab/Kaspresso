@@ -8,7 +8,7 @@ import com.kaspersky.kaspresso.device.screenshots.screenshotfiles.DefaultScreens
 import com.kaspersky.kaspresso.device.screenshots.screenshotfiles.DefaultScreenshotNameProvider
 import com.kaspersky.kaspresso.device.screenshots.screenshotfiles.ScreenshotDirectoryProvider
 import com.kaspersky.kaspresso.device.screenshots.screenshotfiles.ScreenshotNameProvider
-import com.kaspersky.kaspresso.device.screenshots.screenshotmaker.CombinedScreenshotMaker
+import com.kaspersky.kaspresso.device.screenshots.screenshotmaker.DocLocScreenshotMaker
 import com.kaspersky.kaspresso.device.screenshots.screenshotmaker.ExternalScreenshotMaker
 import com.kaspersky.kaspresso.device.screenshots.screenshotmaker.InternalScreenshotMaker
 import com.kaspersky.kaspresso.docloc.DocLocScreenshotCapturer
@@ -146,12 +146,12 @@ abstract class DocLocScreenshotTestCase(
                 resourcesDirsProvider,
                 resourceFileNamesProvider
             ),
-            screenshotMaker = CombinedScreenshotMaker(
-                preferredScreenshotMaker = InternalScreenshotMaker(kaspresso.device.activities, screenshotParams),
-                fallbackScreenshotMaker = ExternalScreenshotMaker(
+            screenshotMaker = DocLocScreenshotMaker(
+                screenshotMaker = ExternalScreenshotMaker(
                     kaspresso.instrumentalDependencyProvider,
                     screenshotParams
-                )
+                ),
+                fullWindowScreenshotMaker = InternalScreenshotMaker(kaspresso.device.activities, screenshotParams)
             ),
             metadataSaver = MetadataSaver(kaspresso.device.activities, kaspresso.device.apps, logger)
         )
