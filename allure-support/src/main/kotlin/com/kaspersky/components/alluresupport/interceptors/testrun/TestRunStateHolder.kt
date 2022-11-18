@@ -10,8 +10,6 @@ class TestRunStateHolder {
     val attachedVideos: List<AttachedVideo>
         get() = _attachedVideos.toList()
 
-    var lastTestCaseUuid: String? = null
-
     fun rememberAttachedVideo(stubFile: File, actualFile: File) {
         val attachedVideo = AttachedVideo(attachedStubFile = stubFile, actualFile = actualFile)
         _attachedVideos.add(attachedVideo)

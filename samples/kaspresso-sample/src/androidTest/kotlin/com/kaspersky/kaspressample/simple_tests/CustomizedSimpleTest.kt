@@ -37,7 +37,6 @@ class CustomizedSimpleTest : TestCase(
             screenshotParams = ScreenshotParams(quality = 1)
 
             dirsProvider = DefaultDirsProvider(
-                InstrumentationRegistry.getInstrumentation(),
                 InstrumentalDependencyProviderFactory().getComponentProvider<Kaspresso>(InstrumentationRegistry.getInstrumentation())
             )
             resourcesDirNameProvider = DefaultResourcesDirNameProvider()

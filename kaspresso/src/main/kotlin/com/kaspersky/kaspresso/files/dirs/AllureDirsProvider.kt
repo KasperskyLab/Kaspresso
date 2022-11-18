@@ -15,7 +15,7 @@ class AllureDirsProvider(
     private val instrumentation: Instrumentation,
     private val resourcesRootDirsProvider: ResourcesRootDirsProvider,
     instrumentationDependencyProvider: InstrumentalDependencyProvider
-) : DefaultDirsProvider(instrumentation, instrumentationDependencyProvider) {
+) : DefaultDirsProvider(instrumentationDependencyProvider) {
 
     @Suppress("DEPRECATION")
     @SuppressLint("WorldReadableFiles", "ObsoleteSdkInt")
