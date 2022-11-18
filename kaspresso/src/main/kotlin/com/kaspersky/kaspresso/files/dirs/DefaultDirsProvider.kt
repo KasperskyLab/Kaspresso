@@ -33,7 +33,7 @@ open class DefaultDirsProvider(
     @Suppress("SameParameterValue")
     private fun clearDir(dest: File, inclusive: Boolean) {
         clearDirManually(dest, inclusive)
-        if (dest.exists() && dest.list()?.size == 0 && shouldClearDirThroughShell(dest)) {
+        if (dest.exists() && shouldClearDirThroughShell(dest)) {
             clearDirThroughShell(dest, inclusive)
         }
     }
