@@ -63,36 +63,30 @@ nav:
     - Our users: Home/Kaspresso users.md
     - Breaking changes: Home/Breaking-changes.md
     - Contribution guide: Home/Contribution_guide.md
-#  - Tutorial (old):
-#    - Index: Tutorial/index.md
-#    - Скачиваем проект и Android Studio: Tutorial/Android_studio.md
-#    - Запуск первого теста: Tutorial/Running_the_first_test.md
-#    - Ваш первый тест на Kaspresso: Tutorial/simple_test.md
-#    - Тестирование за рамками приложения: Tutorial/off-screen_work.md
-#    - Flaky safely. Сontinuously, compose.: Tutorial/Flaky safely.md
-#    - Использование сценариев в Kaspresso: Tutorial/Kaspresso_scenario.md
-#    - Выполнение adb-команд: Tutorial/adb_commands.md
-#    - Взаимодействуем с Android вне приложения: Tutorial/Device.md
-#    - Конфигурирование Kaspresso: Tutorial/Kaspresso_configurator.md
-#    - Скриншот-тесты: Tutorial/Kaspresso_screenshots.md
-#    - Использование Allure: Tutorial/Kaspresso_with_allure.md
   - Tutorial:
       - Введение: Tutorial/index.md
       - Скачиваем проект и Android studio: Tutorial/Download_Kaspresso_project_and_Android_studio.md
-      - Запуск первого теста: Tutorial/Running_the_first_test.md
       - Пишем первый автотест с Kaspresso: Tutorial/Writing_simple_test.md
       - Выполнение adb-команд: Tutorial/Выполнение adb-команд.md
       - Wifi_sample_test: Tutorial/Wifi_sample_test.md
       - Выделение секций и шагов: Tutorial/Выделение секций и шагов.md
       - Вынесение дублирующихся шагов в Scenario: Tutorial/Вынесение дублирующихся шагов в Scenario.md
-      - Тестирование за рамками приложения: Tutorial/Тестирование за рамками приложения.md
-      - Работа с разрешениями и тестовыми Rules: Tutorial/Работа с разрешениями и тестовыми Rules.md
-      - Работа с Android OS: Tutorial/Работа с Android OS.md
-      - Скриншот-тесты: Tutorial/Скриншот-тесты.md
-      - Flaky safety: Tutorial/Flaky safety.md
-      - Работа с WebView: Tutorial/Работа с WebView.md
-      - Конфигурирование Kaspresso: Tutorial/Конфигурирование Kaspresso.md
-      - Использование Allure: Tutorial/Использование Allure.md
+      - UiAutomator. Тестирование за рамками приложения: Tutorial/UiAutomator.md
+      - Работа с Android permissions: Tutorial/Android_permissions.md
+      - flakySafely: Tutorial/FlakySafely.md
+      - RecyclerView: Tutorial/Recyclerview.md
+      - Логирование и скриншоты: Tutorial/Logger_and_screenshots.md
+      - LayoutId и ViewClass: Tutorial/LayoutId_and_viewClass.md
+      - Screenshot-тесты: Tutorial/Screenshot_tests.md
+      - Работа с WebView: Tutorial/WebView.md
+      - Секции init и transform: Tutorial/Init_and_transform.md
+      - Методы compose и continuously: Tutorial/Compose_and_continuously.md
+      - Custom views: Tutorial/Customviews.md
+      - Интерсепторы и режимы работы: Tutorial/Interceptors.md
+      - Compose support: Tutorial/Compose_support.md
+      - Работа с Allure: Tutorial/Allure.md
+      - E2e и функциональные тесты с моками: Tutorial/E2e_and_functional_tests.md
+      - Поддержка Robolectic: Tutorial/Robolectic.md
   - Wiki:
       - Introduction: Wiki/index.md
       - PageObject in Kaspresso: Wiki/Page_object_in_Kaspresso.md
