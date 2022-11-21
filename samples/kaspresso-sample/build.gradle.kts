@@ -37,6 +37,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.constraint)
     implementation(libs.multidex)
+    implementation(libs.androidXLifecycleRuntimeKtx)
 
     androidTestImplementation(libs.junit)
     androidTestImplementation(projects.kaspresso)
@@ -53,7 +54,9 @@ dependencies {
     testImplementation(libs.androidXTestExtJunit)
     testImplementation(libs.robolectric)
 
-    debugImplementation(libs.androidXTestFragmentTesting)
+    debugImplementation(libs.androidXTestFragmentTesting) {
+        isTransitive = false
+    }
 
     androidTestUtil(libs.androidXTestOrchestrator)
 }
