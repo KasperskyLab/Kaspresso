@@ -1,9 +1,7 @@
 package com.kaspersky.kaspressample.device_tests
 
-import android.Manifest
 import android.view.KeyEvent
 import androidx.test.ext.junit.rules.activityScenarioRule
-import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspressample.device.DeviceSampleActivity
 import com.kaspersky.kaspressample.screen.DeviceSampleScreen
 import com.kaspersky.kaspresso.device.keyboard.Keyboard
@@ -16,12 +14,6 @@ class DeviceKeyboardSampleTest : TestCase() {
     companion object {
         const val TEXT_TO_BE_TYPED = "Kaspresso"
     }
-
-    @get:Rule
-    val runtimePermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
-        Manifest.permission.WRITE_EXTERNAL_STORAGE,
-        Manifest.permission.READ_EXTERNAL_STORAGE
-    )
 
     @get:Rule
     val activityRule = activityScenarioRule<DeviceSampleActivity>()

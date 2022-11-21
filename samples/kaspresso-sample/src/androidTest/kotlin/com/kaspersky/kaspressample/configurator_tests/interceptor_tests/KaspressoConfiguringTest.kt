@@ -1,8 +1,6 @@
 package com.kaspersky.kaspressample.configurator_tests.interceptor_tests
 
-import android.Manifest
 import androidx.test.ext.junit.rules.activityScenarioRule
-import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.R
 import com.kaspersky.kaspressample.configurator_tests.interceptor_tests.helpers.CheckCustomInterceptorsStorage
@@ -28,12 +26,6 @@ class KaspressoConfiguringTest : TestCase(
         stepWatcherInterceptors.add(CustomStepWatcherInterceptor())
     }
 ) {
-
-    @get:Rule
-    val runtimePermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
-        Manifest.permission.WRITE_EXTERNAL_STORAGE,
-        Manifest.permission.READ_EXTERNAL_STORAGE
-    )
 
     @get:Rule
     val activityRule = activityScenarioRule<MainActivity>()
