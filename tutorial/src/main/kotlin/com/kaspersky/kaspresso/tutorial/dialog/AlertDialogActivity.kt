@@ -1,21 +1,22 @@
-package com.kaspersky.kaspressample.devicefull
+package com.kaspersky.kaspresso.tutorial.dialog
 
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.kaspersky.kaspressample.databinding.ActivityDeviceFullWindowSampleBinding
+import com.kaspersky.kaspresso.tutorial.databinding.ActivityWithAlertDialogBinding
 
-class DeviceFullWindowSampleActivity : AppCompatActivity() {
+class AlertDialogActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityWithAlertDialogBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityWithAlertDialogBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val binding = ActivityDeviceFullWindowSampleBinding.inflate(layoutInflater)
-        binding.showDialog.setOnClickListener {
+        binding.showDialogButton.setOnClickListener {
             showDialog()
         }
-
-        setContentView(binding.root)
     }
 
     private fun showDialog() {
