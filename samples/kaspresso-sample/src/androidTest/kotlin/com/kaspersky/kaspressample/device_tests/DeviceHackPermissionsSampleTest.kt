@@ -4,7 +4,6 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Build
 import androidx.test.ext.junit.rules.activityScenarioRule
-import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspressample.device.DeviceSampleActivity
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
@@ -21,12 +20,6 @@ import org.junit.Test
  * It's needed measure because of AndroidJUnit Runner specific that doesn't reset state of app between tests.
  */
 class DeviceHackPermissionsSampleTest : TestCase() {
-
-    @get:Rule
-    val runtimePermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
-        Manifest.permission.WRITE_EXTERNAL_STORAGE,
-        Manifest.permission.READ_EXTERNAL_STORAGE
-    )
 
     @get:Rule
     val activityRule = activityScenarioRule<DeviceSampleActivity>()

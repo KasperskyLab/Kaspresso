@@ -1,8 +1,6 @@
 package com.kaspersky.kaspresso.tutorial.kautomator_test
 
-import android.Manifest
 import androidx.test.ext.junit.rules.activityScenarioRule
-import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import com.kaspersky.kaspresso.tutorial.MainActivity
 import com.kaspersky.kaspresso.tutorial.R
@@ -21,12 +19,6 @@ import org.junit.Test
  * Also you can see the test DSL simplifying the writing of any test
  */
 class UiSimpleTest : TestCase() {
-
-    @get:Rule
-    val runtimePermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
-        Manifest.permission.WRITE_EXTERNAL_STORAGE,
-        Manifest.permission.READ_EXTERNAL_STORAGE
-    )
 
     @get:Rule
     val activityRule = activityScenarioRule<MainActivity>()

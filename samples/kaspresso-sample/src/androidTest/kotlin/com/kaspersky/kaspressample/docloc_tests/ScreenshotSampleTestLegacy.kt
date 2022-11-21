@@ -1,8 +1,6 @@
 package com.kaspersky.kaspressample.docloc_tests
 
-import android.Manifest
 import androidx.test.ext.junit.rules.activityScenarioRule
-import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspressample.screen.SimpleScreen
 import com.kaspersky.kaspressample.simple.SimpleActivity
 import com.kaspersky.kaspresso.annotations.ScreenShooterTest
@@ -20,12 +18,6 @@ class ScreenshotSampleTestLegacy : DocLocScreenshotTestCase(
     screenshotsDirectory = File("screenshots"),
     locales = "en,ru"
 ) {
-
-    @get:Rule
-    val runtimePermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
-        Manifest.permission.WRITE_EXTERNAL_STORAGE,
-        Manifest.permission.READ_EXTERNAL_STORAGE
-    )
 
     @get:Rule
     val activityRule = activityScenarioRule<SimpleActivity>()
