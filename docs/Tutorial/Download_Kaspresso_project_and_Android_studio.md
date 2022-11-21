@@ -7,9 +7,34 @@ Android Studio используется для разработки програ
 <br>Если у вас уже установлена Android Studio, то пропустите этот шаг. Если нет, то переходим по [ссылке](https://developer.android.com/studio) и нажимаем Download Android Studio.
 
 <br>Запускаем скачанный файл и проходим все шаги первичной настройки студии. Можно воспользоваться [официальной инструкцией](https://developer.android.com/studio/install) или [официальной инструкцией в формате codelabs](https://developer.android.com/codelabs/basic-android-kotlin-compose-install-android-studio#0) в случае возникновения проблем.
-<br>После того как Android Studio будет скачена, запускаем ее. Выбираем "Open", находим в списке папку Kaspresso-master. После того как откроете проект, нужно подождать некоторое время, чтобы Android Studio проиндексировала файлы проекта.
+<br>После того как Android Studio будет скачена, запускаем ее.
+
+## Скачиваем проект Kaspresso
+
+Для загрузки проекта необходимо, чтобы на вашем компьютера была установлена система контроля версий GIT. Загрузить GIT и узнать о нем подробнее вы можете [здесь](https://git-scm.com/)
+
+Когда GIT будет установлен, то вы сможете скачать проект. Для этого переходим по [ссылке](https://github.com/KasperskyLab/Kaspresso).
+
+Нажимаем кнопку Code и копируем ссылку на репозиторий
+
+<img src="../images/Download_Kaspresso_project_and_Android_studio/download_by_git.png" alt="Download Kaspresso button"/>
+
+Открываем Android Studio.
+
+Если у вас ранее не был открыт никакой проект в студии, то необходимо выбрать пункт Get From VCS
+
+<img src="../images/Download_Kaspresso_project_and_Android_studio/get_from_vcs.png" alt="Get Project from VCS"/>
+
+Если какой-то проект уже был запущен, то загрузить новый с GIT можно следующим образом: `File` -> `New` -> `Project From Version Control`
+
+<img src="../images/Download_Kaspresso_project_and_Android_studio/new_project_from_vcs.png" alt="Get Project from VCS"/>
+
+В открывшемся окне введите скопированный URL проекта, выберите папку, в которой будет размещен Kaspresso и нажмите clone
+
+<img src="../images/Download_Kaspresso_project_and_Android_studio/clone_project.png" alt="Clone Project"/>
 
 ## Настройка эмулятора
+
 В верхнем меню Android Studio выбираем Tools -> Device Manager
 
 <img src="../images/Download_Kaspresso_project_and_Android_studio/Tools_Device_Manager.png" alt="Tools Device Manager"/>
@@ -51,31 +76,6 @@ Android Studio используется для разработки програ
 <img src="../images/Download_Kaspresso_project_and_Android_studio/Hyper_Visor.png" alt="Hyper_Visor"/>
 
 <img src="../images/Download_Kaspresso_project_and_Android_studio/Hyper_Visor_next.png" alt="Hyper_Visor_next"/>
-
-## Скачиваем проект Kaspresso
-
-Для загрузки проекта необходимо, чтобы на вашем компьютера была установлена система контроля версий GIT. Загрузить GIT и узнать о нем подробнее вы можете [здесь](https://git-scm.com/) 
-
-Когда GIT будет установлен, то вы сможете скачать проект. Для этого переходим по [ссылке](https://github.com/KasperskyLab/Kaspresso). 
-
-Нажимаем кнопку Code и копируем ссылку на репозиторий
-
-<img src="../images/Download_Kaspresso_project_and_Android_studio/download_by_git.png" alt="Download Kaspresso button"/>
-
-Открываем Android Studio.
-
-Если у вас ранее не был открыт никакой проект в студии, то необходимо выбрать пункт Get From VCS
-
-<img src="../images/Download_Kaspresso_project_and_Android_studio/get_from_vcs.png" alt="Get Project from VCS"/>
-
-Если какой-то проект уже был запущен, то загрузить новый с GIT можно следующим образом: `File` -> `New` -> `Project From Version Control`
-
-<img src="../images/Download_Kaspresso_project_and_Android_studio/new_project_from_vcs.png" alt="Get Project from VCS"/>
-
-В открывшемся окне введите скопированный URL проекта, выберите папку, в которой будет размещен Kaspresso и нажмите clone
-
-<img src="../images/Download_Kaspresso_project_and_Android_studio/clone_project.png" alt="Clone Project"/>
-
 
 ## Итог
 
