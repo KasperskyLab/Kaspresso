@@ -8,5 +8,4 @@ class DefaultResourcesRootDirsProvider : ResourcesRootDirsProvider {
     override val screenshotsRootDir = File("screenshots")
     override val videoRootDir = File("video")
     override val viewHierarchy = File("view_hierarchy")
-    override val allureRootDir = File("allure-results")
 }

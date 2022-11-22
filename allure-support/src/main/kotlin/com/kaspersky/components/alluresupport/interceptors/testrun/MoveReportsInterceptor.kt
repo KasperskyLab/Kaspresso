@@ -3,8 +3,8 @@ package com.kaspersky.components.alluresupport.interceptors.testrun
 import android.app.Instrumentation
 import androidx.test.uiautomator.UiDevice
 import com.google.common.io.CharStreams
+import com.kaspersky.components.alluresupport.files.resources.AllureResourcesRootDirsProvider
 import com.kaspersky.kaspresso.files.dirs.DirsProvider
-import com.kaspersky.kaspresso.files.resources.ResourcesRootDirsProvider
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.TestRunWatcherInterceptor
 import com.kaspersky.kaspresso.testcases.models.info.TestInfo
 import io.qameta.allure.kotlin.Allure
@@ -24,7 +24,7 @@ private const val ALLURE_DIR = "allure-results"
 class MoveReportsInterceptor(
     private val instrumentation: Instrumentation,
     private val dirsProvider: DirsProvider,
-    private val rootDirsProvider: ResourcesRootDirsProvider,
+    private val rootDirsProvider: AllureResourcesRootDirsProvider,
     private val stateHolder: AttachedAllureVideosHolder,
     private val device: UiDevice
 ) : TestRunWatcherInterceptor {

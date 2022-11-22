@@ -1,10 +1,11 @@
-package com.kaspersky.kaspresso.files.dirs
+package com.kaspersky.components.alluresupport.files.dirs
 
 import android.annotation.SuppressLint
 import android.app.Instrumentation
 import android.content.Context
 import android.os.Build
 import android.os.Environment
+import com.kaspersky.kaspresso.files.dirs.DefaultDirsProvider
 import com.kaspersky.kaspresso.files.resources.ResourcesRootDirsProvider
 import com.kaspersky.kaspresso.instrumental.InstrumentalDependencyProvider
 import com.kaspersky.kaspresso.internal.extensions.other.createDirIfNeeded

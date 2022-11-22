@@ -97,7 +97,6 @@ abstract class DocLocScreenshotTestCase(
             override val screenshotsRootDir = screenshotsDirectory
             override val videoRootDir: File = File("video")
             override val viewHierarchy: File = File("view_hierarchy")
-            override val allureRootDir: File = File("allure-results")
         },
         resourcesDirsProvider = DefaultResourcesDirsProvider(
             dirsProvider = DefaultDirsProvider(
