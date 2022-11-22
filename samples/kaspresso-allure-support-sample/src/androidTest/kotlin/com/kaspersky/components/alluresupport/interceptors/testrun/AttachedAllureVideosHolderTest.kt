@@ -3,7 +3,7 @@ package com.kaspersky.components.alluresupport.interceptors.testrun
 import org.junit.Test
 import java.io.File
 
-class AllureTestRunStateHolderTest {
+class AttachedAllureVideosHolderTest {
 
     @Test
     fun shouldRememberAttachedVideos() {

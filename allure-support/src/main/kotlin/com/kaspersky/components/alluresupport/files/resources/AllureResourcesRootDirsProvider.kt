@@ -5,4 +5,5 @@ import java.io.File
 
 interface AllureResourcesRootDirsProvider : ResourcesRootDirsProvider {
     val allureRootDir: File
+    val stubVideoDir: File
 }

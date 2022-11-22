@@ -1,7 +1,7 @@
 package com.kaspersky.components.alluresupport.interceptors.testrun
 
 import com.kaspersky.components.alluresupport.files.attachVideoToAllureReport
-import com.kaspersky.components.alluresupport.files.dirs.AllureDirsProvider
+import com.kaspersky.components.alluresupport.files.resources.AllureResourceFilesProvider
 import com.kaspersky.kaspresso.device.video.Videos
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.TestRunWatcherInterceptor
 import com.kaspersky.kaspresso.testcases.models.info.TestInfo
@@ -16,8 +16,8 @@ import io.qameta.allure.kotlin.model.Status
  */
 class VideoRecordingTestInterceptor(
     private val videos: Videos,
-    private val allureDirsProvider: AllureDirsProvider,
-    private val stateHolder: AttachedAllureVideosHolder
+    private val resourceFilesProvider: AllureResourceFilesProvider,
+    private val videosHolder: AttachedAllureVideosHolder
 ) : TestRunWatcherInterceptor {
 
     override fun onTestStarted(testInfo: TestInfo) {
@@ -26,7 +26,8 @@ class VideoRecordingTestInterceptor(
 
     override fun onTestFinished(testInfo: TestInfo, success: Boolean) {
         videos.saveAndApply {
-            val stubFile = allureDirsProvider.provideReportVideoAttachmentStub(this)
+
+            val stubFile = resourceFilesProvider.provideStubVideoFile(this)
             stubFile.attachVideoToAllureReport()
             val uuid = Allure.lifecycle.getCurrentTestCase() ?: ""
             Allure.lifecycle.updateTestCase {
@@ -34,7 +35,7 @@ class VideoRecordingTestInterceptor(
             }
             Allure.lifecycle.stopTestCase(uuid)
             Allure.lifecycle.writeTestCase(uuid)
-            stateHolder.rememberAttachedVideo(stubFile = stubFile, actualFile = this)
+            videosHolder.rememberAttachedVideo(stubFile = stubFile, actualFile = this)
         }
     }
 }

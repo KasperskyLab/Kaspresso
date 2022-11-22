@@ -8,10 +8,10 @@ import com.kaspersky.kaspresso.files.resources.ResourcesRootDirsProvider
 import com.kaspersky.kaspresso.internal.extensions.other.createFileIfNeeded
 import java.io.File
 
-class DefaultResourceFilesProvider(
+open class DefaultResourceFilesProvider(
     private val resourcesRootDirsProvider: ResourcesRootDirsProvider,
     private val resourcesDirsProvider: ResourcesDirsProvider,
-    private val resourceFileNamesProvider: ResourceFileNamesProvider,
+    private val resourceFileNamesProvider: ResourceFileNamesProvider
 ) : ResourceFilesProvider {
 
     override fun provideLogcatFile(tag: String, subDir: String?): File {
