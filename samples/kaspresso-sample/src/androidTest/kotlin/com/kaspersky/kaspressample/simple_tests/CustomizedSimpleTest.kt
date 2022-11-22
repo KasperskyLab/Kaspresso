@@ -44,7 +44,6 @@ class CustomizedSimpleTest : TestCase(
                 override val screenshotsRootDir = File("custom_screenshots")
                 override val videoRootDir = File("custom_video")
                 override val viewHierarchy = File("custom_view_hierarchy")
-                override val allureRootDir: File = File("allure-results")
             }
 
             resourcesDirsProvider = object : ResourcesDirsProvider by DefaultResourcesDirsProvider(

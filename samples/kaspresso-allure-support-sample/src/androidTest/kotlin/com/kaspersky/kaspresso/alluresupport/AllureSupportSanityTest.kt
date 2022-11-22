@@ -1,11 +1,11 @@
 package com.kaspersky.kaspresso.alluresupport
 
 import androidx.test.ext.junit.rules.activityScenarioRule
+import com.kaspersky.components.alluresupport.files.resources.AllureResourcesRootDirsProvider
 import com.kaspersky.components.alluresupport.withAllureSupport
 import com.kaspersky.kaspresso.alluresupport.sample.MainActivity
 import com.kaspersky.kaspresso.alluresupport.sample.screen.MainScreen
 import com.kaspersky.kaspresso.files.dirs.DirsProvider
-import com.kaspersky.kaspresso.files.resources.ResourcesRootDirsProvider
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.json.JSONObject
@@ -18,7 +18,7 @@ import org.junit.Test
 import java.io.File
 
 private lateinit var testDirsProvider: DirsProvider
-private lateinit var testRootDirsProvider: ResourcesRootDirsProvider
+private lateinit var testRootDirsProvider: AllureResourcesRootDirsProvider
 
 private const val STEPS_JSON_FIELD = "steps"
 private const val ATTACHMENTS_JSON_FIELD = "attachments"
@@ -32,7 +32,7 @@ private const val JSON_EXTENSION = "json"
 class AllureSupportSanityTest : TestCase(
     kaspressoBuilder = Kaspresso.Builder.withAllureSupport().apply {
         testDirsProvider = dirsProvider
-        testRootDirsProvider = resourcesRootDirsProvider
+        testRootDirsProvider = resourcesRootDirsProvider as AllureResourcesRootDirsProvider
     }
 ) {
 

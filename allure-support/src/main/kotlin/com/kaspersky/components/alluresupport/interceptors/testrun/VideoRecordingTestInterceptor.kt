@@ -1,8 +1,8 @@
 package com.kaspersky.components.alluresupport.interceptors.testrun
 
 import com.kaspersky.components.alluresupport.files.attachVideoToAllureReport
+import com.kaspersky.components.alluresupport.files.dirs.AllureDirsProvider
 import com.kaspersky.kaspresso.device.video.Videos
-import com.kaspersky.kaspresso.files.dirs.AllureDirsProvider
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.TestRunWatcherInterceptor
 import com.kaspersky.kaspresso.testcases.models.info.TestInfo
 import io.qameta.allure.kotlin.Allure

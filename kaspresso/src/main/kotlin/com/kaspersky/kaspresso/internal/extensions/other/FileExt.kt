@@ -24,7 +24,7 @@ internal fun File.safeWrite(logger: UiTestLogger, data: String) {
 /**
  * Creates a file if it does not exist with all needed parent dirs, then grants RWX permissions.
  */
-internal fun File.createFileIfNeeded(): File = apply {
+fun File.createFileIfNeeded(): File = apply {
     if (!exists()) {
         createNewFile()
         grantRwxPermissions()
@@ -34,7 +34,7 @@ internal fun File.createFileIfNeeded(): File = apply {
 /**
  * Creates a directory if it does not exist with all needed parent dirs, then grants RWX permissions.
  */
-internal fun File.createDirIfNeeded(): File = apply {
+fun File.createDirIfNeeded(): File = apply {
     if (!exists()) {
         mkdirs()
         grantRwxPermissions()
