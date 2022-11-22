@@ -135,6 +135,10 @@ Details for failed test:
 ![](https://habrastorage.org/webt/z_/ml/bj/z_mlbjspdd8uvkw4t3cafh6-g6k.png)
 
 ## _Details that you need to know_
+
+Kaspresso expects to find allure report in default **allure-results** directory. If you configured allure report directory name
+through `allure.properties`, please, use default allure report dir name.
+
 By default, Kaspresso-Allure introduces additional timeouts to assure the correctness of a Video recording as much as possible. To summarize, these timeouts increase a test execution time by 5 seconds.
 You are free to change these values by customizing `videoParams` in `Kaspresso.Builder`. See the example above.
 
@@ -152,3 +156,7 @@ This fact makes implementing screen recordings attachments rather tedious. Here'
 UUID and saves it's initial name in report)
 4. Report is moved to external storage (/sdcard)
 5. Kaspresso calls adb shell to move actual files into allure report dir to replace stubs
+
+Here's a scheme describing this process:
+
+![](img/allure_report_workaround.svg)
