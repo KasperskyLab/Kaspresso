@@ -25,7 +25,7 @@ class MoveReportsInterceptor(
     private val instrumentation: Instrumentation,
     private val dirsProvider: DirsProvider,
     private val rootDirsProvider: ResourcesRootDirsProvider,
-    private val stateHolder: TestRunStateHolder,
+    private val stateHolder: AttachedAllureVideosHolder,
     private val device: UiDevice
 ) : TestRunWatcherInterceptor {
 

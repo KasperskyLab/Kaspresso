@@ -17,7 +17,7 @@ import io.qameta.allure.kotlin.model.Status
 class VideoRecordingTestInterceptor(
     private val videos: Videos,
     private val allureDirsProvider: AllureDirsProvider,
-    private val stateHolder: TestRunStateHolder
+    private val stateHolder: AttachedAllureVideosHolder
 ) : TestRunWatcherInterceptor {
 
     override fun onTestStarted(testInfo: TestInfo) {

@@ -7,7 +7,7 @@ class AllureTestRunStateHolderTest {
 
     @Test
     fun shouldRememberAttachedVideos() {
-        val holder = TestRunStateHolder()
+        val holder = AttachedAllureVideosHolder()
         val stubFile = File("stub/path/video.mp4")
         val actualFile = File("actual/path/video.mp4")
 
