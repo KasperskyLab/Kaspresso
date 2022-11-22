@@ -2,11 +2,11 @@ package com.kaspersky.components.alluresupport
 
 import com.kaspersky.components.alluresupport.interceptors.step.AllureMapperStepInterceptor
 import com.kaspersky.components.alluresupport.interceptors.step.ScreenshotStepInterceptor
+import com.kaspersky.components.alluresupport.interceptors.testrun.AttachedAllureVideosHolder
 import com.kaspersky.components.alluresupport.interceptors.testrun.DumpLogcatTestInterceptor
 import com.kaspersky.components.alluresupport.interceptors.testrun.DumpViewsTestInterceptor
 import com.kaspersky.components.alluresupport.interceptors.testrun.MoveReportsInterceptor
 import com.kaspersky.components.alluresupport.interceptors.testrun.ScreenshotTestInterceptor
-import com.kaspersky.components.alluresupport.interceptors.testrun.TestRunStateHolder
 import com.kaspersky.components.alluresupport.interceptors.testrun.VideoRecordingTestInterceptor
 import com.kaspersky.kaspresso.files.dirs.AllureDirsProvider
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
@@ -31,7 +31,7 @@ fun Kaspresso.Builder.addAllureSupport(): Kaspresso.Builder = apply {
     if (isAndroidRuntime) {
         val instrumentalDependencyProvider = instrumentalDependencyProviderFactory.getComponentProvider<Kaspresso>(instrumentation)
         val allureDirsProvider = AllureDirsProvider(instrumentation, resourcesRootDirsProvider, instrumentalDependencyProvider)
-        val stateHolder = TestRunStateHolder()
+        val videosHolder = AttachedAllureVideosHolder()
 
         stepWatcherInterceptors.addAll(
             listOf(
@@ -44,8 +44,8 @@ fun Kaspresso.Builder.addAllureSupport(): Kaspresso.Builder = apply {
                 DumpLogcatTestInterceptor(logcatDumper),
                 ScreenshotTestInterceptor(screenshots),
                 DumpViewsTestInterceptor(viewHierarchyDumper),
-                VideoRecordingTestInterceptor(videos, allureDirsProvider, stateHolder),
-                MoveReportsInterceptor(instrumentation, dirsProvider, resourcesRootDirsProvider, stateHolder, instrumentalDependencyProvider.uiDevice)
+                VideoRecordingTestInterceptor(videos, allureDirsProvider, videosHolder),
+                MoveReportsInterceptor(instrumentation, dirsProvider, resourcesRootDirsProvider, videosHolder, instrumentalDependencyProvider.uiDevice)
             )
         )
     }

@@ -5,10 +5,9 @@ import java.io.File
 /**
  * Used to store shared state used by multiple interceptors
  */
-class TestRunStateHolder {
+class AttachedAllureVideosHolder {
     private val _attachedVideos = mutableListOf<AttachedVideo>()
-    val attachedVideos: List<AttachedVideo>
-        get() = _attachedVideos.toList()
+    val attachedVideos: List<AttachedVideo> = _attachedVideos
 
     fun rememberAttachedVideo(stubFile: File, actualFile: File) {
         val attachedVideo = AttachedVideo(attachedStubFile = stubFile, actualFile = actualFile)
