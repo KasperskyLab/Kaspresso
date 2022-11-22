@@ -140,7 +140,7 @@ You are free to change these values by customizing `videoParams` in `Kaspresso.B
 
 ### _How kaspresso attaches videos to allure report_
 
-To support storage restrictions allure saves reports to package provate directory e.g. /data/data/your.package.name/files/allure-report whereas screen recordings are created by calling "screenrecord" utility through adb shell which is unable to
+To support storage restrictions allure saves reports to package private directory e.g. /data/data/your.package.name/files/allure-report whereas screen recordings are created by calling "screenrecord" utility through adb shell which is unable to
 save video files to package private directories (see this [issue](https://issuetracker.google.com/issues/258277873)).
 Because report created by one user (your package), but videos are created by another one leads to inability to attach videos 
 to report because your package has no rights on vide files.
