@@ -1,6 +1,7 @@
 package com.kaspersky.components.alluresupport
 
 import com.kaspersky.components.alluresupport.files.dirs.AllureDirsProvider
+import com.kaspersky.components.alluresupport.files.resources.AllureResourceFilesProvider
 import com.kaspersky.components.alluresupport.files.resources.impl.DefaultAllureResourcesRootDirsProvider
 import com.kaspersky.components.alluresupport.interceptors.step.AllureMapperStepInterceptor
 import com.kaspersky.components.alluresupport.interceptors.step.ScreenshotStepInterceptor
@@ -33,8 +34,9 @@ fun Kaspresso.Builder.addAllureSupport(): Kaspresso.Builder = apply {
         val allureResourcesRootDirsProvider = DefaultAllureResourcesRootDirsProvider()
         resourcesRootDirsProvider = allureResourcesRootDirsProvider
         val instrumentalDependencyProvider = instrumentalDependencyProviderFactory.getComponentProvider<Kaspresso>(instrumentation)
-        val allureDirsProvider = AllureDirsProvider(instrumentation, resourcesRootDirsProvider, instrumentalDependencyProvider)
+        val allureDirsProvider = AllureDirsProvider(instrumentation, allureResourcesRootDirsProvider, instrumentalDependencyProvider)
         val videosHolder = AttachedAllureVideosHolder()
+        val allureResourcesFilesProvider = AllureResourceFilesProvider(allureResourcesRootDirsProvider, resourcesDirsProvider, resourceFileNamesProvider, allureDirsProvider)
 
         stepWatcherInterceptors.addAll(
             listOf(
@@ -47,7 +49,7 @@ fun Kaspresso.Builder.addAllureSupport(): Kaspresso.Builder = apply {
                 DumpLogcatTestInterceptor(logcatDumper),
                 ScreenshotTestInterceptor(screenshots),
                 DumpViewsTestInterceptor(viewHierarchyDumper),
-                VideoRecordingTestInterceptor(videos, allureDirsProvider, videosHolder),
+                VideoRecordingTestInterceptor(videos, allureResourcesFilesProvider, videosHolder),
                 MoveReportsInterceptor(instrumentation, dirsProvider, allureResourcesRootDirsProvider, videosHolder, instrumentalDependencyProvider.uiDevice)
             )
         )

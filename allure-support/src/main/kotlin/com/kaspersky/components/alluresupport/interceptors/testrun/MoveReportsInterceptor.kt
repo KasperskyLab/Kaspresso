@@ -8,6 +8,7 @@ import com.kaspersky.kaspresso.files.dirs.DirsProvider
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.TestRunWatcherInterceptor
 import com.kaspersky.kaspresso.testcases.models.info.TestInfo
 import io.qameta.allure.kotlin.Allure
+import io.qameta.allure.kotlin.util.PropertiesUtils
 import org.json.JSONObject
 import java.io.File
 
@@ -15,7 +16,6 @@ private const val ATTACHMENTS_JSON_FIELD = "attachments"
 private const val NAME_JSON_FIELD = "name"
 private const val SOURCE_JSON_FIELD = "source"
 private const val MP4_EXTENSION = "mp4"
-private const val ALLURE_DIR = "allure-results"
 
 /**
  * Current allure version stores reports to /data/data/your.package.name/files/allure-results.
@@ -25,7 +25,7 @@ class MoveReportsInterceptor(
     private val instrumentation: Instrumentation,
     private val dirsProvider: DirsProvider,
     private val rootDirsProvider: AllureResourcesRootDirsProvider,
-    private val stateHolder: AttachedAllureVideosHolder,
+    private val videosHolder: AttachedAllureVideosHolder,
     private val device: UiDevice
 ) : TestRunWatcherInterceptor {
 
@@ -58,7 +58,7 @@ class MoveReportsInterceptor(
     /**
      * @return allure results dir under /data/data/your.package.name/files
      */
-    private fun getOriginalAllureDir(): File = instrumentation.targetContext.filesDir.resolve(ALLURE_DIR)
+    private fun getOriginalAllureDir(): File = instrumentation.targetContext.filesDir.resolve(PropertiesUtils.resultsDirectoryPath)
 
     /**
      * Moves allure report from /data/data/your.package.name/files/allure-report to external storage e.g.
@@ -95,7 +95,7 @@ class MoveReportsInterceptor(
      * @param allureTargetDir allure directory under /sdcard
      */
     private fun moveAttachedVideosToProperDirectories(allureTargetDir: File) {
-        stateHolder.attachedVideos.forEach {
+        videosHolder.attachedVideos.forEach {
             saveAttachedVideo(it, allureTargetDir)
         }
     }
