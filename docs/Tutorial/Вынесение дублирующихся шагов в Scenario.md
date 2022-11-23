@@ -228,7 +228,7 @@ fun loginUnsuccessfulIfUsernameIncorrect() {
 
 ```
 
-И такой же тест на то что логин введен верно, а пароль неверно
+И такой же тест на то, что логин введен верно, а пароль неверно
 
 ```kotlin
 @Test
@@ -463,7 +463,7 @@ step("Check unsuccessful login if password is too short") {
 
 В названии step-а мы написали, что на данном этапе проверяем результат, если пароль слишком короткий, но теперь здесь этой проверки нет, поэтому давайте укажем, что тут мы пытаемся залогиниться с какими-то данными:
 
- ```kotlin
+```kotlin
  step("Attempt to login. Username: $username, Password: $password") {
     LoginScreen {
         inputUsername {
@@ -477,7 +477,7 @@ step("Check unsuccessful login if password is too short") {
         }
     }
 }
- ```
+```
  
 Тогда общий код сценария будет выглядеть так:
 
