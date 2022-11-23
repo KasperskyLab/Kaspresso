@@ -12,4 +12,12 @@
 
     <!-- Dialog Activity screen -->
     <string name="show_dialog_button">show dialog</string>
+
+    <!-- Login Activity screen -->
+    <string name="login_activity_hint_username">Username:</string>
+    <string name="login_activity_hint_password">Password:</string>
+    <string name="login_activity_button_login">Login</string>
+
+    <!-- After Login screens -->
+    <string name="screen_after_login">Screen after authorization</string>
 </resources>
