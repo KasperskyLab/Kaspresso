@@ -44,6 +44,14 @@
         <activity android:name=".dialog.AlertDialogActivity"
             android:exported="false"/>
 
+        <activity
+            android:name=".login.LoginActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".afterlogin.AfterLoginActivity"
+            android:exported="true" />
     </application>
 
 </manifest>
