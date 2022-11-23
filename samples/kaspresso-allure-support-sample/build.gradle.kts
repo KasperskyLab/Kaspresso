@@ -6,7 +6,8 @@ android {
     defaultConfig {
         applicationId = "com.kaspersky.kaspresso.alluresupport.sample"
         // AllureAndroidJUnitRunner must be used as testInstrumentationRunner
-        testInstrumentationRunner = "io.qameta.allure.android.runners.AllureAndroidJUnitRunner"
+//        testInstrumentationRunner = "io.qameta.allure.android.runners.AllureAndroidJUnitRunner"
+        testInstrumentationRunner = "com.kaspersky.components.alluresupport.runner.KaspressoRunner"
         testInstrumentationRunnerArguments["clearPackageData"] = "true"
     }
 

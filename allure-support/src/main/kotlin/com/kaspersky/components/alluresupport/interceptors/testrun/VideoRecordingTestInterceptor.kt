@@ -6,7 +6,6 @@ import com.kaspersky.kaspresso.device.video.Videos
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.TestRunWatcherInterceptor
 import com.kaspersky.kaspresso.testcases.models.info.TestInfo
 import io.qameta.allure.kotlin.Allure
-import io.qameta.allure.kotlin.model.Status
 
 /**
  * Due to screen recorder bug we have to perform a workaround which requires VideoRecordingTestInterceptor
@@ -26,16 +25,10 @@ class VideoRecordingTestInterceptor(
 
     override fun onTestFinished(testInfo: TestInfo, success: Boolean) {
         videos.saveAndApply {
-
             val stubFile = resourceFilesProvider.provideStubVideoFile(this)
             stubFile.attachVideoToAllureReport()
             val uuid = Allure.lifecycle.getCurrentTestCase() ?: ""
-            Allure.lifecycle.updateTestCase {
-                it.status = if (success) Status.PASSED else Status.FAILED
-            }
-            Allure.lifecycle.stopTestCase(uuid)
-            Allure.lifecycle.writeTestCase(uuid)
-            videosHolder.rememberAttachedVideo(stubFile = stubFile, actualFile = this)
+            videosHolder.rememberAttachedVideo(stubFile = stubFile, actualFile = this, uuid = uuid)
         }
     }
 }

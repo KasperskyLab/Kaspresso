@@ -2,6 +2,7 @@ package com.kaspersky.kaspresso.alluresupport
 
 import androidx.test.ext.junit.rules.activityScenarioRule
 import com.kaspersky.components.alluresupport.files.resources.AllureResourcesRootDirsProvider
+import com.kaspersky.components.alluresupport.runner.KaspressoAndroidJUnit4
 import com.kaspersky.components.alluresupport.withAllureSupport
 import com.kaspersky.kaspresso.alluresupport.sample.MainActivity
 import com.kaspersky.kaspresso.alluresupport.sample.screen.MainScreen
@@ -15,6 +16,7 @@ import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.junit.runner.RunWith
 import java.io.File
 
 private lateinit var testDirsProvider: DirsProvider
@@ -29,6 +31,7 @@ private const val JSON_EXTENSION = "json"
 /**
  * Checks that allure support is sane
  */
+//@RunWith(KaspressoAndroidJUnit4::class)
 class AllureSupportSanityTest : TestCase(
     kaspressoBuilder = Kaspresso.Builder.withAllureSupport().apply {
         testDirsProvider = dirsProvider

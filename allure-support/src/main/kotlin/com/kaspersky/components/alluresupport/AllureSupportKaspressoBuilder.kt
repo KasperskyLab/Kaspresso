@@ -8,7 +8,6 @@ import com.kaspersky.components.alluresupport.interceptors.step.ScreenshotStepIn
 import com.kaspersky.components.alluresupport.interceptors.testrun.AttachedAllureVideosHolder
 import com.kaspersky.components.alluresupport.interceptors.testrun.DumpLogcatTestInterceptor
 import com.kaspersky.components.alluresupport.interceptors.testrun.DumpViewsTestInterceptor
-import com.kaspersky.components.alluresupport.interceptors.testrun.MoveReportsInterceptor
 import com.kaspersky.components.alluresupport.interceptors.testrun.ScreenshotTestInterceptor
 import com.kaspersky.components.alluresupport.interceptors.testrun.VideoRecordingTestInterceptor
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
@@ -35,7 +34,7 @@ fun Kaspresso.Builder.addAllureSupport(): Kaspresso.Builder = apply {
         resourcesRootDirsProvider = allureResourcesRootDirsProvider
         val instrumentalDependencyProvider = instrumentalDependencyProviderFactory.getComponentProvider<Kaspresso>(instrumentation)
         val allureDirsProvider = AllureDirsProvider(instrumentation, allureResourcesRootDirsProvider, instrumentalDependencyProvider)
-        val videosHolder = AttachedAllureVideosHolder()
+        val videosHolder = AttachedAllureVideosHolder
         val allureResourcesFilesProvider = AllureResourceFilesProvider(allureResourcesRootDirsProvider, resourcesDirsProvider, resourceFileNamesProvider, allureDirsProvider)
 
         stepWatcherInterceptors.addAll(
@@ -49,8 +48,7 @@ fun Kaspresso.Builder.addAllureSupport(): Kaspresso.Builder = apply {
                 DumpLogcatTestInterceptor(logcatDumper),
                 ScreenshotTestInterceptor(screenshots),
                 DumpViewsTestInterceptor(viewHierarchyDumper),
-                VideoRecordingTestInterceptor(videos, allureResourcesFilesProvider, videosHolder),
-                MoveReportsInterceptor(instrumentation, dirsProvider, allureResourcesRootDirsProvider, videosHolder, instrumentalDependencyProvider.uiDevice)
+                VideoRecordingTestInterceptor(videos, allureResourcesFilesProvider, videosHolder)
             )
         )
     }

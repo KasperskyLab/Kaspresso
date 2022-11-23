@@ -26,7 +26,7 @@ dependencies {
     implementation(libs.androidXTestCore)
     implementation(libs.androidXTestRunner)
     implementation(libs.uiAutomator)
-
+    implementation(libs.androidXTestExtJunitKtx)
     implementation(libs.bundles.allure)
 
     testImplementation(libs.junit)
