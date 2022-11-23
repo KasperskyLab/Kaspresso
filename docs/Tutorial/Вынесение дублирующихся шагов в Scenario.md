@@ -279,14 +279,14 @@ fun loginUnsuccessfulIfPasswordIncorrect() {
 
 ```kotlin
 @Test
-    fun test() 
+fun test() 
 ```
 
 Меняем на
 
 ```kotlin
 @Test
-    fun loginSuccessfulIfUsernameAndPasswordCorrect()
+fun loginSuccessfulIfUsernameAndPasswordCorrect()
 ```
 
 Запускаем тесты – они все пройдены успешно.
