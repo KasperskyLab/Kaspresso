@@ -55,7 +55,7 @@ dependencies {
     testImplementation(libs.robolectric)
 
     debugImplementation(libs.androidXTestFragmentTesting) {
-        isTransitive = false
+        isTransitive = false // Disable transitive dependencies here to avoid runtime crash caused by presence of different versions of the same libs
     }
 
     androidTestUtil(libs.androidXTestOrchestrator)
