@@ -22,4 +22,6 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.5.1")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1")
     androidTestImplementation("androidx.test.ext:junit-ktx:1.1.4")
+    androidTestImplementation("com.kaspersky.android-components:kaspresso:1.4.3")
+    androidTestUtil("androidx.test:orchestrator:1.4.2")
 }
