@@ -136,9 +136,11 @@ class LoginActivityTest : TestCase() {
                 LoginScreen {
                     inputUsername {
                         isVisible()
+                        hasHint(R.string.login_activity_hint_username)
                     }
                     inputPassword {
                         isVisible()
+                        hasHint(R.string.login_activity_hint_password)
                     }
                     loginButton {
                         isVisible()
@@ -192,9 +194,11 @@ fun loginUnsuccessfulIfUsernameIncorrect() {
             LoginScreen {
                 inputUsername {
                     isVisible()
+                    hasHint(R.string.login_activity_hint_username)
                 }
                 inputPassword {
                     isVisible()
+                    hasHint(R.string.login_activity_hint_password)
                 }
                 loginButton {
                     isVisible()
@@ -243,9 +247,11 @@ fun loginUnsuccessfulIfPasswordIncorrect() {
             LoginScreen {
                 inputUsername {
                     isVisible()
+                    hasHint(R.string.login_activity_hint_username)
                 }
                 inputPassword {
                     isVisible()
+                    hasHint(R.string.login_activity_hint_password)
                 }
                 loginButton {
                     isVisible()
@@ -358,9 +364,11 @@ class LoginScenario : Scenario() {
             LoginScreen {
                 inputUsername {
                     isVisible()
+                    hasHint(R.string.login_activity_hint_username)
                 }
                 inputPassword {
                     isVisible()
+                    hasHint(R.string.login_activity_hint_password)
                 }
                 loginButton {
                     isVisible()
@@ -500,9 +508,11 @@ class LoginScenario(
             LoginScreen {
                 inputUsername {
                     isVisible()
+                    hasHint(R.string.login_activity_hint_username)
                 }
                 inputPassword {
                     isVisible()
+                    hasHint(R.string.login_activity_hint_password)
                 }
                 loginButton {
                     isVisible()
