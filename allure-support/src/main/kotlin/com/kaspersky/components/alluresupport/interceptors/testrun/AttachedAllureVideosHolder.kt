@@ -5,12 +5,12 @@ import java.io.File
 /**
  * Used to store shared state used by multiple interceptors
  */
-class AttachedAllureVideosHolder {
+object AttachedAllureVideosHolder {
     private val _attachedVideos = mutableListOf<AttachedVideo>()
     val attachedVideos: List<AttachedVideo> = _attachedVideos
 
-    fun rememberAttachedVideo(stubFile: File, actualFile: File) {
-        val attachedVideo = AttachedVideo(attachedStubFile = stubFile, actualFile = actualFile)
+    fun rememberAttachedVideo(stubFile: File, actualFile: File, uuid: String) {
+        val attachedVideo = AttachedVideo(attachedStubFile = stubFile, actualFile = actualFile, uuid = uuid)
         _attachedVideos.add(attachedVideo)
     }
 }
@@ -27,5 +27,7 @@ data class AttachedVideo(
     /**
      * Actual screen record file which has been saved into /sdcard. Should be used to replace a stub in allure report
      */
-    val actualFile: File
+    val actualFile: File,
+
+    val uuid: String
 )
