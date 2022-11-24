@@ -76,7 +76,7 @@ class LoginActivityTest : TestCase() {
     @Test
     fun test() {
         run {
-            step("Open target screen") {
+            step("Open login screen") {
                 MainScreen {
                     loginActivityButton {
                         isVisible()
@@ -123,7 +123,10 @@ class LoginActivityTest : TestCase() {
     @Test
     fun test() {
         run {
-            step("Open target screen") {
+            val username = "123456"
+            val password = "123456"
+
+            step("Open login screen") {
                 MainScreen {
                     loginActivityButton {
                         isVisible()
@@ -148,10 +151,7 @@ class LoginActivityTest : TestCase() {
                     }
                 }
             }
-            step("Check successful login if password and login are correct") {
-                val username = "123456"
-                val password = "123456"
-
+            step("Try to login") {
                 LoginScreen {
                     inputUsername {
                         replaceText(username)
@@ -162,8 +162,10 @@ class LoginActivityTest : TestCase() {
                     loginButton {
                         click()
                     }
-                    device.activities.isCurrent(AfterLoginActivity::class.java)
                 }
+            }
+            step("Check current screen") {
+                device.activities.isCurrent(AfterLoginActivity::class.java)
             }
         }
     }
@@ -181,7 +183,10 @@ class LoginActivityTest : TestCase() {
 @Test
 fun loginUnsuccessfulIfUsernameIncorrect() {
     run {
-        step("Open target screen") {
+        val username = "12"
+        val password = "123456"
+
+        step("Open login screen") {
             MainScreen {
                 loginActivityButton {
                     isVisible()
@@ -206,10 +211,7 @@ fun loginUnsuccessfulIfUsernameIncorrect() {
                 }
             }
         }
-        step("Check unsuccessful login if username is too short") {
-            val username = "12"
-            val password = "123456"
-
+        step("Try to login") {
             LoginScreen {
                 inputUsername {
                     replaceText(username)
@@ -220,8 +222,10 @@ fun loginUnsuccessfulIfUsernameIncorrect() {
                 loginButton {
                     click()
                 }
-                device.activities.isCurrent(LoginActivity::class.java)
             }
+        }
+        step("Check current screen") {
+            device.activities.isCurrent(LoginActivity::class.java)
         }
     }
 }
@@ -234,7 +238,10 @@ fun loginUnsuccessfulIfUsernameIncorrect() {
 @Test
 fun loginUnsuccessfulIfPasswordIncorrect() {
     run {
-        step("Open target screen") {
+        val username = "123456"
+        val password = "12345"
+
+        step("Open login screen") {
             MainScreen {
                 loginActivityButton {
                     isVisible()
@@ -259,10 +266,7 @@ fun loginUnsuccessfulIfPasswordIncorrect() {
                 }
             }
         }
-        step("Check unsuccessful login if password is too short") {
-            val username = "123456"
-            val password = "12345"
-
+        step("Try to login") {
             LoginScreen {
                 inputUsername {
                     replaceText(username)
@@ -273,8 +277,10 @@ fun loginUnsuccessfulIfPasswordIncorrect() {
                 loginButton {
                     click()
                 }
-                device.activities.isCurrent(LoginActivity::class.java)
             }
+        }
+        step("Check current screen") {
+            device.activities.isCurrent(LoginActivity::class.java)
         }
     }
 }
@@ -297,9 +303,18 @@ fun loginSuccessfulIfUsernameAndPasswordCorrect()
 
 Запускаем тесты – они все пройдены успешно.
 
-Обратите внимание на код, который мы используем внутри этих тестов – для каждого теста мы сначала открываем главный экран и кликаем на кнопку логин, затем проверяем видимость элементов на экране `LoginActivity`, потом вводим логин и пароль, после этого проверяем на каком экране находится пользователь.
+Обратите внимание на код, который мы используем внутри этих тестов. Для каждого теста мы делаем следующее:
+<ol>
+    <li>Объявляем переменные `username` и `password`, присваиваем им разные значения в зависимости от проверки, которую будем производить</li>
+    <li>Открываем экран авторизации</li>
+    <li>Проверяем видимость элементов</li>
+    <li>Вводим логин и пароль в соответствующие поля и кликаем на кнопку "Login"</li>
+    <li>Проверяем, что у нас открывается нужный экран</li>
+</ol>
 
-Получается, что мы пишем несколько одинаковых шагов для каждого теста. Это один из случаев, когда мы можем использовать сценарии.
+В зависимости от того, что мы проверяем в каждом конкретном тесте, у нас отличаются шаги первый и последний. На первом шаге мы присваиваем разные значения переменным `username` и `password`, на последнем шаге мы делаем разные проверки на то, какой экран открыт - `LoginActivity` или `AfterLoginActivity`.
+
+При этом шаги со второго по четвертый абсолютно одинаковые для всех тестов. Это один из случаев, когда мы можем использовать класс Scenario.
 
 ## Создание Scenario
 
@@ -340,21 +355,20 @@ class LoginScenario : Scenario() {
 !!! info
     В качестве возвращаемого типа у `steps` указано лямбда-выражение, которое является extension-функцией класса TestContext. Подробнее про [лямбда-выражения](https://kotlinlang.ru/docs/lambdas.html) и [extension-функции](https://kotlinlang.ru/docs/extensions.html) вы можете почитать в официальной документации Kotlin.
 
-Скопируем их из какого-нибудь предыдущего теста.
+Скопируем шаги, которые повторяются в каждом тесте.
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
 
 import com.kaspersky.kaspresso.testcases.api.scenario.Scenario
 import com.kaspersky.kaspresso.testcases.core.testcontext.TestContext
-import com.kaspersky.kaspresso.tutorial.login.LoginActivity
 import com.kaspersky.kaspresso.tutorial.screen.LoginScreen
 import com.kaspersky.kaspresso.tutorial.screen.MainScreen
 
 class LoginScenario : Scenario() {
 
     override val steps: TestContext<Unit>.() -> Unit = {
-        step("Open target screen") {
+        step("Open login screen") {
             MainScreen {
                 loginActivityButton {
                     isVisible()
@@ -379,10 +393,7 @@ class LoginScenario : Scenario() {
                 }
             }
         }
-        step("Check unsuccessful login if password is too short") {
-            val username = "123456"
-            val password = "12345"
-
+        step("Try to login") {
             LoginScreen {
                 inputUsername {
                     replaceText(username)
@@ -393,7 +404,6 @@ class LoginScenario : Scenario() {
                 loginButton {
                     click()
                 }
-                device.activities.isCurrent(LoginActivity::class.java)
             }
         }
     }
@@ -401,7 +411,23 @@ class LoginScenario : Scenario() {
 
 ```
 
-Сценарий логина практически готов, но с ним есть проблема – в разных тестах мы вводим разные пары логин/пароль, при этом экран, на который попадает пользователь, может также отличаться в зависимости от введенных данных. А мы в сценарии явно указали какие данные будут введены в поля ввода.
+Теперь у нас есть сценарий авторизации, в котором мы открываем экран логина, проверяем видимость всех элементов, вводим значения логина и пароля и кликаем на кнопку `Login`. 
+
+Но возникает одна проблема - в этом классе нет переменных `username` и `password`, которые нужно ввести в поля ввода. Мы могли бы объявить их прямо здесь внутри теста, как делали в классе `LoginActivityTest`, 
+
+```kotlin
+override val steps: TestContext<Unit>.() -> Unit = {
+        val username = "123456" // Можно объявить переменные здесь
+        val password = "123456"
+        
+        step("Open login screen") {
+            ...
+        
+```
+
+но в зависимости от проводимого теста эти значения должны отличаться, поэтому присвоить значение внутри теста мы не можем.
+
+практически готов, но с ним есть проблема – в разных тестах мы вводим разные пары логин/пароль, при этом экран, на который попадает пользователь, может также отличаться в зависимости от введенных данных. А мы в сценарии явно указали какие данные будут введены в поля ввода.
 
 ```kotlin
 val username = "123456"
