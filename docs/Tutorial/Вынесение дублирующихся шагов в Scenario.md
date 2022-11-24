@@ -417,11 +417,11 @@ class LoginScenario : Scenario() {
 
 ```kotlin
 override val steps: TestContext<Unit>.() -> Unit = {
-        val username = "123456" // Можно объявить переменные здесь
-        val password = "123456"
-        
-        step("Open login screen") {
-            ...
+    val username = "123456" // Можно объявить переменные здесь
+    val password = "123456"
+
+    step("Open login screen") {
+    ...
         
 ```
 
