@@ -23,7 +23,7 @@ class LoginActivityTest : TestCase() {
                     )
                 )
             }
-            step("Check screen after login attempt") {
+            step("Check current screen") {
                 device.activities.isCurrent(AfterLoginActivity::class.java)
             }
         }
@@ -40,7 +40,7 @@ class LoginActivityTest : TestCase() {
                     )
                 )
             }
-            step("Check screen after login attempt") {
+            step("Check current screen") {
                 device.activities.isCurrent(LoginActivity::class.java)
             }
         }
@@ -53,11 +53,11 @@ class LoginActivityTest : TestCase() {
                 scenario(
                     LoginScenario(
                         username = "123456",
-                        password = "12345"
+                        password = "12345",
                     )
                 )
             }
-            step("Check screen after login attempt") {
+            step("Check current screen") {
                 device.activities.isCurrent(LoginActivity::class.java)
             }
         }

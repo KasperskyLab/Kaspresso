@@ -14,7 +14,7 @@ class AfterLoginActivityTest : TestCase() {
     @Test
     fun test() {
         run {
-            step("Open target screen") {
+            step("Open AfterLogin screen") {
                 scenario(
                     LoginScenario(
                         username = "123456",

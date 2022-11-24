@@ -11,7 +11,7 @@ class LoginScenario(
 ) : Scenario() {
 
     override val steps: TestContext<Unit>.() -> Unit = {
-        step("Open target screen") {
+        step("Open login screen") {
             MainScreen {
                 loginActivityButton {
                     isVisible()
@@ -36,7 +36,7 @@ class LoginScenario(
                 }
             }
         }
-        step("Attempt to login. Username: $username, Password: $password") {
+        step("Try to login") {
             LoginScreen {
                 inputUsername {
                     replaceText(username)
