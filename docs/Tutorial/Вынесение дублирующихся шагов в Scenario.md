@@ -1,20 +1,20 @@
 # Scenario
 
-В сегодняшнем уроке мы познакомимся со сценариями, узнаем, что это, для чего они нужны, когда их стоит использовать, а когда лучше избегать.
+В этом уроке мы познакомимся со сценариями (класс `Scenario` из библиотеки Kaspresso), узнаем, что это, для чего они нужны, когда их стоит использовать, а когда лучше избегать.
 
 Открываем приложение tutorial и кликаем по кнопке `Login Acitivity`.
 
-<img src="../images/scenario/main_screen_login_button.png" alt="Main Screen login button"/>
+<img src="../images/scenario/main_screen_login_button.png" alt="Main Screen login button" width="300"/>
 
 У нас открывается экран авторизации, где пользователь может ввести логин и пароль и нажать на кнопку `Login`
 
-<img src="../images/scenario/login_activity.png" alt="Login activity "/>
+<img src="../images/scenario/login_activity.png" alt="Login activity"  width="300"/>
 
 Если поле `username` будет содержать менее трех символов или поле `password` менее шести символов, то при клике на кнопку `LOGIN` ничего не произойдет.
 
 Если же данные заполнены корректно, то авторизация проходит успешно и у нас открывается экран `AfterLoginActivity`
 
-<img src="../images/scenario/screen_after_login.png" alt="Screen After Login "/>
+<img src="../images/scenario/screen_after_login.png" alt="Screen After Login" width="300"/>
 
 Получается, что для проверки экрана AfterLoginActivity пользователь должен быть авторизован в приложении. Поэтому давайте первым делом протестируем авторизацию - `LoginActivity`
 
@@ -335,7 +335,10 @@ class LoginScenario : Scenario() {
 
 ```
 
-Теперь после указания типа `Unit` удаляем строчку ` get() = TODO("Not yet implemented")`, ставим знак `=` и открываем фигурные скобки, в которых перечислим все необходимые шаги. 
+Теперь после указания типа `TestContext<Unit>.() -> Unit` удаляем строчку ` get() = TODO("Not yet implemented")`, ставим знак `=` и открываем фигурные скобки, в которых перечислим все необходимые шаги. 
+
+!!! info
+    В качестве возвращаемого типа у `steps` указано лямбда-выражение, которое является extension-функцией класса TestContext. Подробнее про [лямбда-выражения](https://kotlinlang.ru/docs/lambdas.html) и [extesion-функции](https://kotlinlang.ru/docs/extensions.html) вы можете почитать в официальной документации Kotlin.
 
 Скопируем их из какого-нибудь предыдущего теста.
 
