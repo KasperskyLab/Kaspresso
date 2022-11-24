@@ -427,14 +427,7 @@ override val steps: TestContext<Unit>.() -> Unit = {
 
 но в зависимости от проводимого теста эти значения должны отличаться, поэтому присвоить значение внутри теста мы не можем.
 
-практически готов, но с ним есть проблема – в разных тестах мы вводим разные пары логин/пароль, при этом экран, на который попадает пользователь, может также отличаться в зависимости от введенных данных. А мы в сценарии явно указали какие данные будут введены в поля ввода.
-
-```kotlin
-val username = "123456"
-val password = "12345"
-```
-
-Вместо того, чтобы указывать логин и пароль прямо здесь, мы можем их указать в качестве параметра в классе Scenario внутри конструктора. Тогда эта часть кода:
+Поэтому вместо того, чтобы указывать логин и пароль прямо внутри сценария, мы можем их указать в качестве параметра в классе Scenario внутри конструктора. Тогда эта часть кода:
 
 ```kotlin
 
@@ -456,44 +449,7 @@ class LoginScenario(
 Теперь внутри теста мы не создаем логин и пароль, а используем те, что были переданы нам в качестве параметра в конструктор
 
 ```kotlin
-step("Check unsuccessful login if password is too short") {
-    LoginScreen {
-        inputUsername {
-            replaceText(username)
-        }
-        inputPassword {
-            replaceText(password)
-        }
-        loginButton {
-            click()
-        }
-        device.activities.isCurrent(LoginActivity::class.java)
-    }
-}
-```
-
-В этом сценарии мы просто проходим процесс авторизации, поэтому проверять, какой экран открыт на текущий момент, мы не будем. Удаляем данную проверку
-
-```kotlin
-step("Check unsuccessful login if password is too short") {
-    LoginScreen {
-        inputUsername {
-            replaceText(username)
-        }
-        inputPassword {
-            replaceText(password)
-        }
-        loginButton {
-            click()
-        }
-    }
-}
-```
-
-В названии step-а мы написали, что на данном этапе проверяем результат, если пароль слишком короткий, но теперь здесь этой проверки нет, поэтому давайте укажем, что тут мы пытаемся залогиниться с какими-то данными:
-
-```kotlin
- step("Attempt to login. Username: $username, Password: $password") {
+step("Try to login") {
     LoginScreen {
         inputUsername {
             replaceText(username)
@@ -524,7 +480,7 @@ class LoginScenario(
 ) : Scenario() {
 
     override val steps: TestContext<Unit>.() -> Unit = {
-        step("Open target screen") {
+        step("Open login screen") {
             MainScreen {
                 loginActivityButton {
                     isVisible()
@@ -549,7 +505,7 @@ class LoginScenario(
                 }
             }
         }
-        step("Attempt to login. Username: $username, Password: $password") {
+        step("Try to login") {
             LoginScreen {
                 inputUsername {
                     replaceText(username)
@@ -591,12 +547,11 @@ fun loginSuccessfulIfUsernameAndPasswordCorrect() {
                 )
             )
         }
-        step("Check screen after login attempt") {
+        step("Check current screen") {
             device.activities.isCurrent(AfterLoginActivity::class.java)
         }
     }
 }
-
 ```
 
 Для остальных тестов делаем по аналогии:
@@ -623,11 +578,11 @@ class LoginActivityTest : TestCase() {
                 scenario(
                     LoginScenario(
                         username = "123456",
-                        password = "123456"
+                        password = "123456",
                     )
                 )
             }
-            step("Check screen after login attempt") {
+            step("Check current screen") {
                 device.activities.isCurrent(AfterLoginActivity::class.java)
             }
         }
@@ -640,11 +595,11 @@ class LoginActivityTest : TestCase() {
                 scenario(
                     LoginScenario(
                         username = "12",
-                        password = "123456"
+                        password = "123456",
                     )
                 )
             }
-            step("Check screen after login attempt") {
+            step("Check current screen") {
                 device.activities.isCurrent(LoginActivity::class.java)
             }
         }
@@ -657,11 +612,11 @@ class LoginActivityTest : TestCase() {
                 scenario(
                     LoginScenario(
                         username = "123456",
-                        password = "12345"
+                        password = "12345",
                     )
                 )
             }
-            step("Check screen after login attempt") {
+            step("Check current screen") {
                 device.activities.isCurrent(LoginActivity::class.java)
             }
         }
@@ -737,7 +692,7 @@ class AfterLoginActivityTest : TestCase() {
     @Test
     fun test() {
         run {
-            step("Open target screen") {
+            step("Open AfterLogin screen") {
                 scenario(
                     LoginScenario(
                         username = "123456",
