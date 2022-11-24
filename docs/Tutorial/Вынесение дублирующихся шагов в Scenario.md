@@ -338,7 +338,7 @@ class LoginScenario : Scenario() {
 Теперь после указания типа `TestContext<Unit>.() -> Unit` удаляем строчку ` get() = TODO("Not yet implemented")`, ставим знак `=` и открываем фигурные скобки, в которых перечислим все необходимые шаги. 
 
 !!! info
-    В качестве возвращаемого типа у `steps` указано лямбда-выражение, которое является extension-функцией класса TestContext. Подробнее про [лямбда-выражения](https://kotlinlang.ru/docs/lambdas.html) и [extesion-функции](https://kotlinlang.ru/docs/extensions.html) вы можете почитать в официальной документации Kotlin.
+    В качестве возвращаемого типа у `steps` указано лямбда-выражение, которое является extension-функцией класса TestContext. Подробнее про [лямбда-выражения](https://kotlinlang.ru/docs/lambdas.html) и [extension-функции](https://kotlinlang.ru/docs/extensions.html) вы можете почитать в официальной документации Kotlin.
 
 Скопируем их из какого-нибудь предыдущего теста.
 
