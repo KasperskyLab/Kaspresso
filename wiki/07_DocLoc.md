@@ -127,6 +127,38 @@ The full example is located at [ChangeSysLanguageTestCase](../samples/kaspresso-
 
 Please keep the strategy "one docloc test == one screen". If you will seek to capture screenshots from more than one screen during one test consequences may be unpredictable. Be aware.
 
+## Full Window
+
+To create a full window test, you should extend like before `DocLocScreenshotTestCase` class as shown below and use `captureFullWindowScreenshot()`.
+
+```kotlin
+class ScreenshotFullWindowSampleTest : DocLocScreenshotTestCase(locales = "en,ru") {
+
+    @get:Rule
+    val runtimePermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
+        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        Manifest.permission.READ_EXTERNAL_STORAGE
+    )
+
+    @get:Rule
+    val activityRule = activityScenarioRule<DeviceFullWindowSampleActivity>()
+
+    @ScreenShooterTest
+    @Test
+    fun test() = run {
+        step("1. Launch activity") {
+            captureFullWindowScreenshot("1. Simple screen")
+        }
+    }
+}
+```
+
+Note that system dialogs are not captured, method captures only on-screen views.
+
+For full example, check the [ScreenshotFullWindowSampleTest](../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/docloc_tests/ScreenshotFullWindowSampleTest.kt). 
+
+
+
 ## Advanced usage
 
 In most cases, there is no need to launch certain activity, do a lot of steps before reaching necessary functionality. Often showing fragments will be sufficient to make required screenshots.
