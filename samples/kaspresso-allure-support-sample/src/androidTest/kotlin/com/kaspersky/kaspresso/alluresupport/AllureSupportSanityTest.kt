@@ -2,7 +2,7 @@ package com.kaspersky.kaspresso.alluresupport
 
 import androidx.test.ext.junit.rules.activityScenarioRule
 import com.kaspersky.components.alluresupport.files.resources.AllureResourcesRootDirsProvider
-import com.kaspersky.components.alluresupport.withAllureSupport
+import com.kaspersky.components.alluresupport.withForcedAllureSupport
 import com.kaspersky.kaspresso.alluresupport.sample.MainActivity
 import com.kaspersky.kaspresso.alluresupport.sample.screen.MainScreen
 import com.kaspersky.kaspresso.files.dirs.DirsProvider
@@ -30,7 +30,7 @@ private const val JSON_EXTENSION = "json"
  * Checks that allure support is sane
  */
 class AllureSupportSanityTest : TestCase(
-    kaspressoBuilder = Kaspresso.Builder.withAllureSupport().apply {
+    kaspressoBuilder = Kaspresso.Builder.withForcedAllureSupport().apply {
         testDirsProvider = dirsProvider
         testRootDirsProvider = resourcesRootDirsProvider as AllureResourcesRootDirsProvider
     }

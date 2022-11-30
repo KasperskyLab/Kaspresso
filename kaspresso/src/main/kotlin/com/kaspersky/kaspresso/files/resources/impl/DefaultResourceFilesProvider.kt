@@ -8,7 +8,7 @@ import com.kaspersky.kaspresso.files.resources.ResourcesRootDirsProvider
 import com.kaspersky.kaspresso.internal.extensions.other.createFileIfNeeded
 import java.io.File
 
-open class DefaultResourceFilesProvider(
+class DefaultResourceFilesProvider(
     private val resourcesRootDirsProvider: ResourcesRootDirsProvider,
     private val resourcesDirsProvider: ResourcesDirsProvider,
     private val resourceFileNamesProvider: ResourceFileNamesProvider
