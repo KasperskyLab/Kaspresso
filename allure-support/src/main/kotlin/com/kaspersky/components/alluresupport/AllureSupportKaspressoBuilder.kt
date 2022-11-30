@@ -5,7 +5,11 @@ import com.kaspersky.components.alluresupport.files.resources.impl.AllureResourc
 import com.kaspersky.components.alluresupport.files.resources.impl.DefaultAllureResourcesRootDirsProvider
 import com.kaspersky.components.alluresupport.interceptors.step.AllureMapperStepInterceptor
 import com.kaspersky.components.alluresupport.interceptors.step.ScreenshotStepInterceptor
-import com.kaspersky.components.alluresupport.interceptors.testrun.*
+import com.kaspersky.components.alluresupport.interceptors.testrun.DumpLogcatTestInterceptor
+import com.kaspersky.components.alluresupport.interceptors.testrun.DumpViewsTestInterceptor
+import com.kaspersky.components.alluresupport.interceptors.testrun.HackyVideoRecordingTestInterceptor
+import com.kaspersky.components.alluresupport.interceptors.testrun.ScreenshotTestInterceptor
+import com.kaspersky.components.alluresupport.interceptors.testrun.VideoRecordingTestInterceptor
 import com.kaspersky.components.alluresupport.results.AllureResultsHack
 import com.kaspersky.components.alluresupport.runlisteners.AllureRunListener
 import com.kaspersky.kaspresso.files.dirs.DefaultDirsProvider
@@ -63,8 +67,7 @@ fun Kaspresso.Builder.Companion.withForcedAllureSupport(
         return@simple
     }
     customize.invoke(this)
-    val instrumentalDependencyProvider =
-        instrumentalDependencyProviderFactory.getComponentProvider<Kaspresso>(instrumentation)
+    val instrumentalDependencyProvider = instrumentalDependencyProviderFactory.getComponentProvider<Kaspresso>(instrumentation)
     forceAllureSupportFileProviders(instrumentalDependencyProvider)
     addRunListenersIfNeeded(instrumentalDependencyProvider)
 }.apply(::addAllureSupportInterceptors)
