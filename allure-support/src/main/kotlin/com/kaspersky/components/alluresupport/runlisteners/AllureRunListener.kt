@@ -11,6 +11,15 @@ import org.junit.runner.Description
 import org.junit.runner.Result
 import org.junit.runner.notification.Failure
 
+/**
+ * This type is a proxy between kaspresso runner and allure listener.
+ * Since kaspresso uses it's own runner it need to create allure lifecycle
+ * and notify allure about test progress from our side.
+ *
+ * @property allureJunit4 allure listener
+ * @property externalStoragePermissionsListener used to notify allure that
+ * external storage should be used depending on allure.results.useTestStorage property
+ */
 class AllureRunListener : KaspressoLateRunListener {
     private val allureJunit4: AllureJunit4
     private val externalStoragePermissionsListener: ExternalStoragePermissionsListener?
