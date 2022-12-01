@@ -4,8 +4,10 @@
 
 В качестве примера давайте проверим стартовый экран приложения Google Play в неавторизованном состоянии. 
 
-1.	Открываем Google Play
-2.	Проверяем, что на экране есть кнопка Sign In
+<ol>
+    <li>Открываем Google Play</li>
+    <li>Проверяем, что на экране есть кнопка Sign In</li>
+</ol>
 
 <img src="../images/uiautomator/google_play_unauth.png" alt="Google play unauthorized"/>
 
@@ -326,12 +328,13 @@ class GooglePlayTest : TestCase() {
 
 Кликаем по кнопке “Show notification” – сверху отображается уведомление
 
-
+<img src="../images/uiautomator/notification.png" alt="Notification Shown"/>
 
 Давайте попробуем протестировать этот экран.
 
 Сначала создадим Page Object для экрана с кнопкой «Показать уведомление». Этот экран находится в нашем приложении, значит можем унаследоваться от `KScreen`. Id кнопки можем найти через Layout Inspector
 
+```kotlin
 package com.kaspersky.kaspresso.tutorial.screen
 
 import com.kaspersky.kaspresso.screens.KScreen
@@ -345,9 +348,11 @@ object NotificationActivityScreen : KScreen<NotificationActivityScreen>() {
 
     val showNotificationButton = KButton { withId(R.id.show_notification_button) }
 }
+```
 
-В Page Object главного экрана добавим кнопку открытия NotificationActivity 
+В Page Object главного экрана добавим кнопку открытия `NotificationActivity`
 
+```kotlin
 package com.kaspersky.kaspresso.tutorial.screen
 
 import com.kaspersky.kaspresso.screens.KScreen
@@ -364,11 +369,11 @@ object MainScreen : KScreen<MainScreen>() {
     val loginActivityButton = KButton { withId(R.id.login_activity_btn) }
     val notificationActivityButton = KButton { withId(R.id.notification_activity_btn) }
 }
-
+```
 
 Можно создавать тест, сначала просто покажем уведомление, кликнув на кнопку на главном экране
 
-
+```kotlin
 package com.kaspersky.kaspresso.tutorial
 
 import androidx.test.ext.junit.rules.activityScenarioRule
@@ -403,19 +408,23 @@ class NotificationActivityTest : TestCase() {
         }
     }
 }
+```
 
 Запускаем. Тест пройден успешно, уведомление отображается.
 
 Теперь давайте проверим тексты в самом уведомлении, что заголовок и контент содержат необходимый текст. 
 
-Найти id элементов при помощи Layout Inspector или Developer Assistant не получится, т.к. отображение уведомлений относится к системному UI. В этом случае нам придется запустить Ui Automator Viewer и посмотреть через него.
+Найти id элементов при помощи "Layout Inspector" или "Developer Assistant" не получится, т.к. отображение уведомлений относится к системному UI. В этом случае нам придется запустить Ui Automator Viewer и посмотреть через него.
 
 Открываем список уведомлений и делаем скриншот
 
-Здесь вы можете видеть, что шторка уведомлений не относится к нашему приложению, поэтому для тестирования необходимо унаследоваться от класса UiScreen и использовать Kautomator.
+<img src="../images/uiautomator/uiautomator_notification.png" alt="Ui automator notification"/>
+
+Здесь по названию пакета вы можете видеть, что шторка уведомлений не относится к нашему приложению, поэтому для тестирования необходимо унаследоваться от класса UiScreen и использовать Kautomator.
 
 Создаем Page Object экрана уведомления:
 
+```kotlin
 package com.kaspersky.kaspresso.tutorial.screen
 
 import com.kaspersky.components.kautomator.screen.UiScreen
@@ -424,11 +433,13 @@ object NotificationScreen : UiScreen<NotificationScreen>() {
 
     override val packageName: String = "com.android.systemui"
 }
+```
 
-В качестве packageName было указано значение, полученное через Ui Automator Viewer.
+В качестве `packageName` было указано значение, полученное через Ui Automator Viewer.
 
 Объявляем элементы, с которыми будем взаимодействовать.
 
+```kotlin
 package com.kaspersky.kaspresso.tutorial.screen
 
 import com.kaspersky.components.kautomator.component.text.UiTextView
@@ -441,9 +452,11 @@ object NotificationScreen : UiScreen<NotificationScreen>() {
     val title = UiTextView { }
     val content = UiTextView { }
 }
+```
 
-Найти элементы можно по разным критериям, например по тексту или по id. Давайте найдем элемент по его id. Вызываем matcher withId
+Найти элементы можно по разным критериям, например по тексту или по id. Давайте найдем элемент по его id. Вызываем matcher `withId`
 
+```kotlin
 package com.kaspersky.kaspresso.tutorial.screen
 
 import com.kaspersky.components.kautomator.component.text.UiTextView
@@ -456,9 +469,11 @@ object NotificationScreen : UiScreen<NotificationScreen>() {
     val title = UiTextView { withId("", "") }
     val content = UiTextView { withId("", "") }
 }
+```
 
-Первым параметром нужно передать название пакета, в ресурсах которого будет осуществлен поиск элемента. Мы могли бы передать значение переменной packageName и id, который получили через Ui Automator Viewer
+Первым параметром нужно передать название пакета, в ресурсах которого будет осуществлен поиск элемента. Мы могли бы передать значение переменной `packageName` и `resource_id`, который получили через Ui Automator Viewer
 
+```
 package com.kaspersky.kaspresso.tutorial.screen
 
 import com.kaspersky.components.kautomator.component.text.UiTextView
@@ -471,18 +486,19 @@ object NotificationScreen : UiScreen<NotificationScreen>() {
     val title = UiTextView { withId(this@NotificationScreen.packageName, "android:id/title") }
     val content = UiTextView { withId(this@NotificationScreen.packageName, "android:id/text") }
 }
+```
 
-Но в таком случае элементы найдены не будут и вот по какое причине.
+Но в таком случае элементы найдены не будут и вот по какое причине:
 
-Схема id элемента, который мы ищем на экране другого приложения выглядит так: `package_name:id/resource_id`
+Схема `id` элемента, который мы ищем на экране другого приложения выглядит так: `package_name:id/resource_id`
 
 Эта строка будет сформирована из двух параметров, которые мы передали в метод `withId`. Вместо package_name будет подставлено имя пакета ` com.android.systemui `, вместо resource_id – идентификатор `android:id/title`
 
-В итоге получившийся resource_id будет выглядеть так: ` com.android.systemui:id/android:id/title
-`
+В итоге получившийся resource_id будет выглядеть так: `com.android.systemui:id/android:id/title`
 
-Получается, что `:id/` будет добавлено за нас и передавать нам нужно только то, что правее косой черты, это и есть идентификатор:
+Получается, что символы `:id/` будут добавлены за нас, а передавать нам нужно только то, что правее косой черты, это и есть идентификатор:
 
+```kotlin
 package com.kaspersky.kaspresso.tutorial.screen
 
 import com.kaspersky.components.kautomator.component.text.UiTextView
@@ -495,15 +511,19 @@ object NotificationScreen : UiScreen<NotificationScreen>() {
     val title = UiTextView { withId(this@NotificationScreen.packageName, "title") }
     val content = UiTextView { withId(this@NotificationScreen.packageName, "text") }
 }
+```
 
-Теперь полный resource_id выглядит так: ` com.android.systemui:id/title
-` и ` com.android.systemui:id/text
-`
+Теперь полный resource_id выглядит так: `com.android.systemui:id/title` и ` com.android.systemui:id/text`
 
-Теперь обратите внимание на то, что первая часть (package_name) отличается от того, что указано в Ui Automator Viewer, мы указали название пакета `com.android.systemui`, а в программе написано `android`. Дело в том, что в каждом приложении могут быть свои ресурсы, и в этом случае первая часть resource_id будет содержать имя пакета того приложения, но при этом приложение может использовать ресурсы системы Android. Они являются общими для разных приложений и содержат название пакета `android`. 
+Обратите внимание на то, что первая часть (package_name) отличается от того, что указано в Ui Automator Viewer, мы указали название пакета `com.android.systemui`, а в программе написано `android`. 
+
+<img src="../images/uiautomator/uiautomator_package.png" alt="Ui automator package" />
+
+Дело в том, что в каждом приложении могут быть свои ресурсы, и в этом случае первая часть идентификатора ресурса будет содержать имя пакета того приложения, где ресурс создан, а также приложение может использовать ресурсы системы Android. Они являются общими для разных приложений и содержат название пакета `android`. 
 
 Это как раз такой случай, поэтому в качестве первого параметра мы указываем `android`.
 
+```kotlin
 package com.kaspersky.kaspresso.tutorial.screen
 
 import com.kaspersky.components.kautomator.component.text.UiTextView
@@ -516,10 +536,11 @@ object NotificationScreen : UiScreen<NotificationScreen>() {
     val title = UiTextView { withId("android", "title") }
     val content = UiTextView { withId("android", "text") }
 }
-
+```
 
 Теперь можем добавлять проверки на данный экран. Убедимся, что в заголовке и в теле уведомления установлены правильные тексты:
 
+```kotlin
 package com.kaspersky.kaspresso.tutorial
 
 import androidx.test.ext.junit.rules.activityScenarioRule
@@ -563,11 +584,14 @@ class NotificationActivityTest : TestCase() {
         }
     }
 }
-
+```
 
 Запускаем. Тест пройден успешно.
-
 
 ## Итог
 
 В этом уроке мы научились запускать тесты в сторонних приложениях, а также узнали, как можно проверить системный UI при помощи UiAutomator, а точнее его обертки - Kautomator. Кроме того, мы познакомились с программами, позволяющими анализировать UI приложений, даже если у нас нет доступа к их исходному коду – это Ui Automator Viewer и Developer Assistant.
+
+
+<br>
+
