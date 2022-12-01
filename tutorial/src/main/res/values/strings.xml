@@ -10,8 +10,10 @@
     <string name="enabled_status">enabled</string>
     <string name="disabled_status">disabled</string>
 
-    <!-- Dialog Activity screen -->
-    <string name="show_dialog_button">show dialog</string>
+    <!-- Notification Activity screen -->
+    <string name="show_dialog_button">show notification</string>
+    <string name="notification_title">Notification Title</string>
+    <string name="notification_content">Notification Content</string>
 
     <!-- Login Activity screen -->
     <string name="login_activity_hint_username">Username:</string>

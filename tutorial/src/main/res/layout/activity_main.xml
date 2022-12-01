@@ -37,11 +37,11 @@
         app:layout_constraintTop_toBottomOf="@id/simple_activity_btn" />
 
     <Button
-        android:id="@+id/alert_dialog_activity_btn"
+        android:id="@+id/notification_activity_btn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Alert dialog activity"
+        android:text="notification activity"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/wifi_activity_btn" />
@@ -54,5 +54,5 @@
         android:text="Login activity"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/alert_dialog_activity_btn" />
+        app:layout_constraintTop_toBottomOf="@id/notification_activity_btn" />
 </androidx.constraintlayout.widget.ConstraintLayout>
