@@ -1,5 +1,6 @@
 plugins {
     id("convention.android-app")
+    id("com.kaspersky.kaspresso")
 }
 
 android {
@@ -21,8 +22,8 @@ dependencies {
     implementation(libs.constraint)
     implementation(libs.multidex)
 
-    androidTestImplementation(projects.kaspresso)
-    androidTestImplementation(projects.allureSupport)
+    androidTestImplementation("com.kaspersky.android-components:kaspresso")
+    androidTestImplementation("com.kaspersky.android-components:kaspresso-allure-support")
 
     androidTestImplementation(libs.androidXTestExtJunitKtx)
     androidTestImplementation(libs.androidXTestExtJunit)

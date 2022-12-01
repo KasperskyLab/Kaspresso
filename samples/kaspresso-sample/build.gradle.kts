@@ -1,5 +1,6 @@
 plugins {
     id("convention.android-app")
+    id("com.kaspersky.kaspresso")
 }
 
 android {
@@ -39,14 +40,14 @@ dependencies {
     implementation(libs.multidex)
 
     androidTestImplementation(libs.junit)
-    androidTestImplementation(projects.kaspresso)
+    androidTestImplementation("com.kaspersky.android-components:kaspresso")
     androidTestImplementation(libs.androidXTestRunner)
     androidTestImplementation(libs.androidXTestRules)
     androidTestImplementation(libs.androidXTestExtJunitKtx)
     androidTestImplementation(libs.androidXTestExtJunit)
 
     testImplementation(libs.junit)
-    testImplementation(projects.kaspresso)
+    testImplementation("com.kaspersky.android-components:kaspresso")
     testImplementation(libs.androidXTestRunner)
     testImplementation(libs.androidXTestRules)
     testImplementation(libs.androidXTestExtJunitKtx)
