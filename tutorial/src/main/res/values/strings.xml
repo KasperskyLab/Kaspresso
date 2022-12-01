@@ -11,7 +11,7 @@
     <string name="disabled_status">disabled</string>
 
     <!-- Notification Activity screen -->
-    <string name="show_dialog_button">show notification</string>
+    <string name="show_notification_button">show notification</string>
     <string name="notification_title">Notification Title</string>
     <string name="notification_content">Notification Content</string>
 
