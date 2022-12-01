@@ -9,7 +9,7 @@
     <li>Проверяем, что на экране есть кнопка Sign In</li>
 </ol>
 
-<img src="../images/uiautomator/google_play_unauth.png" alt="Google play unauthorized"/>
+<img src="../images/uiautomator/google_play_unauth.png" alt="Google play unauthorized" width="300"/>
 
 Не забудьте перед запуском теста разлогиниться в приложении.
 
@@ -89,11 +89,11 @@ device.targetContext.startActivity(intent)
 В этом коде мы дважды получаем `targetContext` у объекта `device`. Чтобы не дублировать код, можно эту запись сократить, использовав функцию `with`
 
 !!! info
-    Подробнее про `with` и другие функции области видимости (англ. scope functions) вы можете почитать [в документации]( https://kotlinlang.ru/docs/scope-functions.html)
+    Подробнее про `with` и другие функции области видимости (англ. scope functions) вы можете почитать [в документации](https://kotlinlang.ru/docs/scope-functions.html)
 
 Тогда код теста будет выглядеть так:
 
- ```kotlin
+```kotlin
 package com.kaspersky.kaspresso.tutorial
 
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
@@ -170,29 +170,29 @@ UI Automator – это библиотека для поиска компоне�
 
 После установки и запуска вам нужно в настройках установить его, как приложение-ассистент по умолчанию. Кликните на кнопку “Choose” и следуйте инструкциям:
 
-<img src="../images/uiautomator/da_1_settings.png" alt="Developer Assistant Settings"/>
+<img src="../images/uiautomator/da_1_settings.png" alt="Developer Assistant Settings" width="300"/>
 
-<img src="../images/uiautomator/da_2_settings.png" alt="Developer Assistant Settings"/>
+<img src="../images/uiautomator/da_2_settings.png" alt="Developer Assistant Settings" width="300"/>
 
-<img src="../images/uiautomator/da_3_settings.png" alt="Developer Assistant Settings"/>
+<img src="../images/uiautomator/da_3_settings.png" alt="Developer Assistant Settings" width="300"/>
 
-<img src="../images/uiautomator/da_4_settings.png" alt="Developer Assistant Settings"/>
+<img src="../images/uiautomator/da_4_settings.png" alt="Developer Assistant Settings" width="300"/>
 
-<img src="../images/uiautomator/da_5_settings.png" alt="Developer Assistant Settings"/>
+<img src="../images/uiautomator/da_5_settings.png" alt="Developer Assistant Settings" width="300"/>
 
-<img src="../images/uiautomator/da_6_settings.png" alt="Developer Assistant Settings"/>
+<img src="../images/uiautomator/da_6_settings.png" alt="Developer Assistant Settings" width="300"/>
 
 После настройки вы можете запускать анализ приложений. Открывайте приложение Google Play и осуществите долгое нажатие по кнопке `Home`
 
-<img src="../images/uiautomator/da_gplay_1.png" alt="Developer Assistant Google play"/>
+<img src="../images/uiautomator/da_gplay_1.png" alt="Developer Assistant Google play" width="300"/>
 
 У вас появится окно с информацией о приложении, которое можно при необходимости переместить или расширить. На вкладке `App` есть информация о приложении – название пакета, запущенная в настоящий момент Activity и т.д. 
 
-<img src="../images/uiautomator/da_gplay_2.png" alt="Developer Assistant Google play"/>
+<img src="../images/uiautomator/da_gplay_2.png" alt="Developer Assistant Google play" width="300">
 
 На вкладке `Element` можно исследовать элементы пользовательского интерфейса.
 
-<img src="../images/uiautomator/da_gplay_3.png" alt="Developer Assistant Google play"/>
+<img src="../images/uiautomator/da_gplay_3.png" alt="Developer Assistant Google play" width="300"/>
 
 Здесь есть все те же атрибуты, которые мы видели в `Ui Automator Viewer`
 
@@ -324,11 +324,11 @@ class GooglePlayTest : TestCase() {
 
 Давайте откроем наше приложение `tutorial` и перейдем на экран `Notification Activity`
 
-<img src="../images/uiautomator/notification_activity_btn.png" alt="Notification Activity Button"/>
+<img src="../images/uiautomator/notification_activity_btn.png" alt="Notification Activity Button" width="300"/>
 
 Кликаем по кнопке “Show notification” – сверху отображается уведомление
 
-<img src="../images/uiautomator/notification.png" alt="Notification Shown"/>
+<img src="../images/uiautomator/notification.png" alt="Notification Shown" width="300"/>
 
 Давайте попробуем протестировать этот экран.
 
