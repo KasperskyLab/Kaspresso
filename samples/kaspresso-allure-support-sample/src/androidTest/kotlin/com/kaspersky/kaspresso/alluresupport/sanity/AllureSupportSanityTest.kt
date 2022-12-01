@@ -1,4 +1,4 @@
-package com.kaspersky.kaspresso.alluresupport
+package com.kaspersky.kaspresso.alluresupport.sanity
 
 import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.uiautomator.UiDevice
@@ -11,8 +11,7 @@ import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.runner.listener.KaspressoRunListener
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.json.JSONObject
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertTrue
+import org.junit.Assert
 import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
@@ -114,17 +113,17 @@ class AllureSupportSanityTest : TestCase(
         private fun validateReport(reportJson: JSONObject, reportDirFilesList: List<String>) {
             validateSteps(reportJson)
 
-            assertEquals(PASSED, reportJson.getString(STATUS_JSON_FIELD))
-            assertEquals("Report itself should contain 2 attachments: log and video", 2, reportJson.getJSONArray(ATTACHMENTS_JSON_FIELD).length())
+            Assert.assertEquals(PASSED, reportJson.getString(STATUS_JSON_FIELD))
+            Assert.assertEquals("Report itself should contain 2 attachments: log and video", 2, reportJson.getJSONArray(ATTACHMENTS_JSON_FIELD).length())
             reportJson.toString().let { reportText ->
                 reportDirFilesList
                     .filter { !it.endsWith(JSON_EXTENSION) }
-                    .forEach { assertTrue("Report doesn't contain $it", reportText.contains(it)) }
+                    .forEach { Assert.assertTrue("Report doesn't contain $it", reportText.contains(it)) }
             }
         }
 
         private fun validateSteps(reportJson: JSONObject) {
-            assertEquals("There should be 3 root steps", 3, reportJson.getJSONArray(STEPS_JSON_FIELD).length()) // 3 main steps
+            Assert.assertEquals("There should be 3 root steps", 3, reportJson.getJSONArray(STEPS_JSON_FIELD).length()) // 3 main steps
             reportJson.getJSONArray(STEPS_JSON_FIELD).run { // validate steps
                 for (i in 0 until length()) {
                     checkStepAttachments(getJSONObject(i))
@@ -135,7 +134,7 @@ class AllureSupportSanityTest : TestCase(
 
         private fun validateNestedStep(stepJSONObject: JSONObject) {
             stepJSONObject.getJSONArray(STEPS_JSON_FIELD).run {
-                assertEquals("Second step should contain 2 inner steps", 2, length()) // second main step has 2 inner steps
+                Assert.assertEquals("Second step should contain 2 inner steps", 2, length()) // second main step has 2 inner steps
                 for (j in 0 until length()) {
                     checkStepAttachments(getJSONObject(j))
                 }
@@ -145,7 +144,7 @@ class AllureSupportSanityTest : TestCase(
         private fun getReportDirFilesList(reportDir: File): List<String> {
             return uiDevice.executeShellCommand("ls ${reportDir.absolutePath}").run {
                 val filesList = split('\n').filter { it.isNotEmpty() }
-                assertEquals("There should be 8 files in report dir: video, 5 screenshots, logs and report itself", 8, filesList.size)
+                Assert.assertEquals("There should be 8 files in report dir: video, 5 screenshots, logs and report itself", 8, filesList.size)
                 filesList
             }
         }
@@ -158,7 +157,7 @@ class AllureSupportSanityTest : TestCase(
         }
 
         private fun checkStepAttachments(stepJSONObject: JSONObject) {
-            assertEquals("Each step should have 1 attachment - screenshot", 1, stepJSONObject.getJSONArray(ATTACHMENTS_JSON_FIELD).length())
+            Assert.assertEquals("Each step should have 1 attachment - screenshot", 1, stepJSONObject.getJSONArray(ATTACHMENTS_JSON_FIELD).length())
         }
 
         fun cleanUpReportDir() {

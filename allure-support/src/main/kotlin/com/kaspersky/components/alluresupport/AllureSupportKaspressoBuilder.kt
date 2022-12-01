@@ -58,7 +58,7 @@ fun Kaspresso.Builder.addAllureSupport(): Kaspresso.Builder = apply {
 }
 
 /**
- * Forces file providers needed fpr foxed allure support
+ * Forces file providers needed for fixed allure support
  */
 fun Kaspresso.Builder.Companion.withForcedAllureSupport(
     customize: Kaspresso.Builder.() -> Unit = {}
