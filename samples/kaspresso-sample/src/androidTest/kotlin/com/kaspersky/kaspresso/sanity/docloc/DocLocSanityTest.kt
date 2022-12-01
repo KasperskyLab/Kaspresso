@@ -1,4 +1,4 @@
-package com.kaspersky.kaspressample.docloc_tests
+package com.kaspersky.kaspresso.sanity.docloc
 
 import androidx.test.ext.junit.rules.activityScenarioRule
 import com.kaspersky.kaspressample.screen.SimpleScreen
@@ -22,7 +22,7 @@ private lateinit var testRootDirsProvider: ResourcesRootDirsProvider
 
 private const val EN = "en"
 private const val RU = "ru"
-private const val SCREENSHOTS_SUBDIR = "com.kaspersky.kaspressample.docloc_tests.DocLocSanityTest/test"
+private const val SCREENSHOTS_SUBDIR = "com.kaspersky.kaspresso.sanity.docloc.DocLocSanityTest/test"
 private const val PNG_EXTENSION = ".png"
 private const val XML_EXTENSION = ".xml"
 private val ARTIFACTS_BASE_NAMES = listOf(
@@ -46,7 +46,7 @@ class DocLocSanityTest : DocLocScreenshotTestCase(
     @After
     fun after() {
         checkSanity()
-        cleanUpScreenshotsDir()
+        // cleanUpScreenshotsDir()
     }
 
     @get:Rule
