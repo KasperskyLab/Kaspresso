@@ -7,7 +7,6 @@ branchNamePattern="^(ISSUE-\d+(-[^\W_]+)*|TECH(-[^\W_]+)+|HEAD)$"
 
 if ! echo "$currentBranch" | grep "$branchNamePattern" -qE; then
   echo >&2 "ERROR: pre-commit git hook failed."
-  "Commit message must start with prefix containing issue id or the word TECH and match the pattern: \"{ISSUE-1234|TECH}: git commit message\"."
   echo >&2 "Branch name must:"
   echo >&2 "- start with the issue id: \"ISSUE-1234{-optional-description}\""
   echo >&2 "- or match the pattern: \"TECH-required-description\""
