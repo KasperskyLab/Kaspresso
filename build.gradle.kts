@@ -36,3 +36,19 @@ val detektAll = tasks.register<Detekt>("detektAll") {
         html.enabled = false
     }
 }
+
+tasks.register<Exec>("installGitHooks") {
+    description = "Install local git hooks"
+    group = "Build Setup"
+
+    commandLine("chmod")
+    args("-R", "u+x", ".githooks")
+
+    commandLine("git")
+    args("config", "core.hooksPath", ".githooks")
+
+    onlyIf { !project.hasProperty("CI") }
+}
+
+val initialTaskNames: List<String> = project.gradle.startParameter.taskNames
+project.gradle.startParameter.setTaskNames(initialTaskNames + listOf("installGitHooks"))
