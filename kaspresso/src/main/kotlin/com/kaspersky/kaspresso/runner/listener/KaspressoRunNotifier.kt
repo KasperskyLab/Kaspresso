@@ -9,31 +9,6 @@ import org.junit.runner.notification.Failure
 interface KaspressoRunNotifier : KaspressoRunListener {
     val listeners: List<KaspressoRunListener>
     fun addListener(listener: KaspressoRunListener)
-
-    /**
-     * "Late" listeners don't receive first testRunStarted and testStarted calls.
-     * This cache is used to store the first test and the first test run descriptions
-     * to pass them into late listeners later
-     */
-    class Cache {
-        lateinit var testRunStartedDescription: Description
-            private set
-
-        lateinit var firstTestStartedDescription: Description
-            private set
-
-        fun testRunStarted(description: Description) {
-            if (!::testRunStartedDescription.isInitialized) {
-                testRunStartedDescription = description
-            }
-        }
-
-        fun testStarted(description: Description) {
-            if (!::firstTestStartedDescription.isInitialized) {
-                firstTestStartedDescription = description
-            }
-        }
-    }
 }
 
 inline fun <reified L : KaspressoRunListener> KaspressoRunNotifier.addUniqueListener(createListener: () -> L) {
@@ -53,7 +28,7 @@ fun Instrumentation.getKaspressoRunNotifier(): KaspressoRunNotifier =
     }
 
 internal class KaspressoRunNotifierImpl : KaspressoRunNotifier {
-    private val cache = KaspressoRunNotifier.Cache()
+    private val cache = KaspressoLateRunListener.Cache()
     override val listeners: MutableList<KaspressoRunListener> = arrayListOf()
 
     override fun addListener(listener: KaspressoRunListener) {
