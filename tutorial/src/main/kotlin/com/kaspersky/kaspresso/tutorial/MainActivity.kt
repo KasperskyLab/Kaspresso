@@ -4,8 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.kaspersky.kaspresso.tutorial.databinding.ActivityMainBinding
-import com.kaspersky.kaspresso.tutorial.notification.NotificationActivity
 import com.kaspersky.kaspresso.tutorial.login.LoginActivity
+import com.kaspersky.kaspresso.tutorial.notification.NotificationActivity
+import com.kaspersky.kaspresso.tutorial.permission.MakeCallActivity
 import com.kaspersky.kaspresso.tutorial.simple.SimpleActivity
 import com.kaspersky.kaspresso.tutorial.wifi.WiFiActivity
 
@@ -31,6 +32,9 @@ class MainActivity : AppCompatActivity() {
         }
         binding.loginActivityBtn.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
+        }
+        binding.makeCallActivityBtn.setOnClickListener {
+            startActivity(Intent(this, MakeCallActivity::class.java))
         }
     }
 }

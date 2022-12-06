@@ -13,6 +13,7 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.READ_CALL_LOG"/>
+    <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.READ_SMS"/>
     <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" tools:ignore="ProtectedPermissions"/>
 
@@ -51,6 +52,9 @@
 
         <activity
             android:name=".afterlogin.AfterLoginActivity"
+            android:exported="true" />
+
+        <activity android:name=".permission.MakeCallActivity"
             android:exported="true" />
     </application>
 
