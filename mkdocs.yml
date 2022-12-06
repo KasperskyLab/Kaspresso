@@ -1,0 +1,139 @@
+site_name: "Kaspresso"
+repo_url: https://github.com/KasperskyLab/Kaspresso
+repo_name: Kaspresso
+edit_uri: tree/main/docs/content
+docs_dir: 'docs'
+remote_branch: gh-pages
+language: en
+
+theme:
+  favicon: kaspresso.png
+  logo: kaspresso.png
+  icon:
+    logo: fontawesome/brands/android
+
+  palette:
+    - scheme: default
+      primary: teal
+      accent: light blue
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to dark mode
+    - scheme: slate
+      primary: black
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode
+
+
+  name: 'material'
+#  custom_dir: ../mkdocs-material/material
+
+  # 404 page
+  static_templates:
+    - ../mkdocs-material/material/404.html
+
+  # Necessary for search to work properly
+  include_search_page: false
+  search_index_only: true
+
+  # Default values, taken from mkdocs_theme.yml
+  language: en
+  font:
+    text: Roboto
+    code: Roboto Mono
+ # favicon: assets/favicon.png
+
+  features:
+    - tabs
+    - navigation.tabs
+    - content.code.annotate
+    - navigation.tabs.sticky
+    - navigation.instant
+    - navigation.tracking
+    - navigation.top
+    - search.suggest
+    - search.highlight
+
+nav:
+  - Home:
+    - About Kaspresso: index.md
+    - Kaspresso in articles: Home/Kaspresso-in-articles.md
+    - Kasspresso in videos: Home/Kaspresso-in-videos.md
+    - Our users: Home/Kaspresso users.md
+    - Breaking changes: Home/Breaking-changes.md
+    - Contribution guide: Home/Contribution_guide.md
+  - Tutorial:
+      - Введение: Tutorial/index.md
+      - Скачиваем проект и Android studio: Tutorial/Download_Kaspresso_project_and_Android_studio.md
+      - Пишем первый автотест с Kaspresso: Tutorial/Writing_simple_test.md
+      - Выполнение adb-команд: Tutorial/Выполнение adb-команд.md
+      - Wifi_sample_test: Tutorial/Wifi_sample_test.md
+      - Выделение секций и шагов: Tutorial/Выделение секций и шагов.md
+      - Вынесение дублирующихся шагов в Scenario: Tutorial/Вынесение дублирующихся шагов в Scenario.md
+      - UiAutomator. Тестирование за рамками приложения: Tutorial/UiAutomator.md
+      - Работа с Android permissions: Tutorial/Android_permissions.md
+      - flakySafely: Tutorial/FlakySafely.md
+      - RecyclerView: Tutorial/Recyclerview.md
+      - Логирование и скриншоты: Tutorial/Logger_and_screenshots.md
+      - LayoutId и ViewClass: Tutorial/LayoutId_and_viewClass.md
+      - Screenshot-тесты: Tutorial/Screenshot_tests.md
+      - Работа с WebView: Tutorial/WebView.md
+      - Секции init и transform: Tutorial/Init_and_transform.md
+      - Методы compose и continuously: Tutorial/Compose_and_continuously.md
+      - Custom views: Tutorial/Customviews.md
+      - Интерсепторы и режимы работы: Tutorial/Interceptors.md
+      - Compose support: Tutorial/Compose_support.md
+      - Работа с Allure: Tutorial/Allure.md
+      - E2e и функциональные тесты с моками: Tutorial/E2e_and_functional_tests.md
+      - Поддержка Robolectic: Tutorial/Robolectic.md
+  - Wiki:
+      - Introduction: Wiki/index.md
+      - PageObject in Kaspresso: Wiki/Page_object_in_Kaspresso.md
+      - Espresso as the basis: Wiki/Espresso_as_the_basis.md
+      - Migrate from Espresso, Kakao or KAutomator: Wiki/Migrate_from_Espresso.md
+      - Supported Android UI-elements: Wiki/Supported_Android_UI_elements.md
+      - View matchers, actions and assertions: Wiki/Matchers_actions_assertions.md
+      - Kautomator. Wrapper over UI Automator: Wiki/Kautomator-wrapper_over_UI_Automator.md
+      - Executing adb commands: Wiki/Executing_adb_commands.md
+      - Screenshot tests: Wiki/Screenshot_tests.md
+      - Kaspresso configuration: Wiki/Kaspresso_configuration.md
+      - Working with Android OS: Wiki/Working_with_Android_OS.md
+      - Kaspresso with Robolectric: Wiki/Kaspresso_Robolectric.md
+      - Kaspresso with Allure: Wiki/Kaspresso_Allure.md
+      - E2e and Functional tests. All in one: Wiki/E2e_and_Functional_tests.md
+      - Jetpack Compose in Kaspresso: Wiki/Jetpack_Compose.md
+  - Issues:
+    - Found an issue?: Issues/index.md
+    - Storage issues: Issues/Storage_issue.md
+#  - Wiki(old):
+#      - Page object in Kaspresso: Wiki/Page object in Kaspresso.md
+#      - Wrapper over Espresso: Wiki/01_Wrapper_over_Espresso.md
+#      - Wrapper over UiAutomator: Wiki/02_Wrapper_over_UiAutomator.md
+#      - Kaspresso configurator: Wiki/03_Kaspresso_configurator.md
+#      - How to write autotests: Wiki/04_How_to_write_autotests.md
+#      - Device: Wiki/05_Device.md
+#      - AdbServer: Wiki/06_AdbServer.md
+#      - DocLoc: Wiki/07_DocLoc.md
+#      - Kaspresso Robolectric: Wiki/08_Kaspresso-Robolectric.md
+#      - Kaspresso Allure: Wiki/09_Kaspresso-Allure.md
+#      - Jetpack Compose: Wiki/10_Jetpack-Compose.md
+#  - Documentation:
+#    - Kaspresso docs: Documentation/kaspresso/index.md
+#    - KAutomator docs: Documentation/kautomator/index.md
+#    - ADB Server: Documentation/adb-server/index.md
+#   Home/Kaspresso.md
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+
+extra:
+  alternate:
+    - name: English
+      link: /en/
+      lang: en
+    - name: Russian
+      link: /ru/
+      lang: ru
