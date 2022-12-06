@@ -22,4 +22,8 @@
 
     <!-- After Login screens -->
     <string name="screen_after_login">Screen after authorization</string>
+
+    <!-- Make call screen-->
+    <string name="phone_number_hint">Phone number:</string>
+    <string name="make_call_btn">Make Call</string>
 </resources>
