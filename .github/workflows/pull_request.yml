@@ -24,5 +24,3 @@ jobs:
         run: make static_analysis
       - name: Run unit tests
         run: make unit_tests
-      - name: Build project
-        run: make compile_all
