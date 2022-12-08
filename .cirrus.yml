@@ -11,11 +11,12 @@ check_android_task:
     memory: 24G
   # xfce4 somehow helps to pass "Geolocation" test
   install_de_script: |
-    export DEBIAN_FRONTEND=noninteractive
-    apt-get update
-    apt-get install xfce4 -y
-    apt-get purge -y pm-utils xscreensaver*
-    apt-get install xvfb -y
+    return 1
+#    export DEBIAN_FRONTEND=noninteractive
+#    apt-get update
+#    apt-get install xfce4 -y
+#    apt-get purge -y pm-utils xscreensaver*
+#    apt-get install xvfb -y
   start_de_background_script: |
     Xvfb :99 -screen 0 1000x1000x16 &
     sleep 5
