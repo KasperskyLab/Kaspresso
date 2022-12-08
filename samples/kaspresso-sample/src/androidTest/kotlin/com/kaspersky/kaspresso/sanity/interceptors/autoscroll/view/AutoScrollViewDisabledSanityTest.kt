@@ -1,21 +1,19 @@
-package com.kaspersky.kaspresso.sanity.interceptors.autoscroll
+package com.kaspersky.kaspresso.sanity.interceptors.autoscroll.view
 
+import androidx.test.espresso.PerformException
 import androidx.test.ext.junit.rules.activityScenarioRule
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.screen.MainScreen
 import com.kaspersky.kaspressample.screen.ScrollViewWithPaddingScreen
-import com.kaspersky.kaspresso.interceptors.behavior.impl.autoscroll.AutoScrollViewBehaviorInterceptor
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
-import com.kaspersky.kaspresso.kaspresso.Kaspresso.Companion.DEFAULT_TEST_LOGGER_TAG
-import com.kaspersky.kaspresso.logger.UiTestLoggerImpl
-import com.kaspersky.kaspresso.params.AutoScrollParams
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
+import org.junit.Assert
 import org.junit.Rule
 import org.junit.Test
 
-class AutoScrollEnabledSanityTest: TestCase(
+class AutoScrollViewDisabledSanityTest: TestCase(
     kaspressoBuilder = Kaspresso.Builder.simple {
-        viewBehaviorInterceptors = mutableListOf(AutoScrollViewBehaviorInterceptor(AutoScrollParams.default(), UiTestLoggerImpl(DEFAULT_TEST_LOGGER_TAG)))
+        viewBehaviorInterceptors = mutableListOf()
     }
 ) {
 
@@ -36,8 +34,13 @@ class AutoScrollEnabledSanityTest: TestCase(
 
             step("Click button20 in ScrollView, last item") {
                 ScrollViewWithPaddingScreen {
+                    Assert.assertThrows(null, PerformException::class.java) {
+                        button20 {
+                            click()
+                        }
+                    }
                     button20 {
-                        click()
+                        isNotDisplayed()
                     }
                 }
             }

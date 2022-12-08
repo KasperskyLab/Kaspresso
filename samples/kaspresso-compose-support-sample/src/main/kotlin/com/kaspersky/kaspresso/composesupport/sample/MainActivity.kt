@@ -11,6 +11,7 @@ import androidx.navigation.compose.rememberNavController
 import com.kaspersky.kaspresso.composesupport.sample.features.flaky.SimpleFlakyScreen
 import com.kaspersky.kaspresso.composesupport.sample.features.flaky.SimpleFlakyViewModel
 import com.kaspersky.kaspresso.composesupport.sample.features.main.MainScreen
+import com.kaspersky.kaspresso.composesupport.sample.features.scroll.ScrollScreen
 import com.kaspersky.kaspresso.composesupport.sample.resources.C
 
 class MainActivity : AppCompatActivity() {
@@ -30,7 +31,8 @@ class MainActivity : AppCompatActivity() {
         NavHost(navController = navController, startDestination = C.Screen.main_screen) {
             composable(C.Screen.main_screen) {
                 MainScreen(
-                    simpleFlakyClick = { navController.navigate(C.Screen.simple_flaky_screen) }
+                    simpleFlakyClick = { navController.navigate(C.Screen.simple_flaky_screen) },
+                    scrollClick = { navController.navigate(C.Screen.scroll_screen) }
                 )
             }
 
@@ -41,6 +43,10 @@ class MainActivity : AppCompatActivity() {
                     secondButtonClick = { simpleFlakyViewModel.secondButtonClick() },
                     editTextChange = { simpleFlakyViewModel.editTextChange(it) }
                 )
+            }
+
+            composable(C.Screen.scroll_screen) {
+                ScrollScreen()
             }
         }
     }

@@ -14,4 +14,8 @@ class ComposeMainScreen(semanticsProvider: SemanticsNodeInteractionsProvider) :
     val simpleFlakyButton: KNode = child {
         hasTestTag(C.Tag.main_screen_simple_flaky_button)
     }
+
+    val scrollButton: KNode = child {
+        hasTestTag(C.Tag.main_screen_scroll_button)
+    }
 }
