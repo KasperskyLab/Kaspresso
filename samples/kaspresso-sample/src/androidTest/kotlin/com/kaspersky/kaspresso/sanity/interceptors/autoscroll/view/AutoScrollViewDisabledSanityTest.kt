@@ -11,7 +11,7 @@ import org.junit.Assert
 import org.junit.Rule
 import org.junit.Test
 
-class AutoScrollViewDisabledSanityTest: TestCase(
+class AutoScrollViewDisabledSanityTest : TestCase(
     kaspressoBuilder = Kaspresso.Builder.simple {
         viewBehaviorInterceptors = mutableListOf()
     }

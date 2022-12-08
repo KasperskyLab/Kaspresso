@@ -2,14 +2,11 @@ package com.kaspersky.kaspresso.composesupport.kaspresso.sanity.autoscroll
 
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.kaspersky.components.composesupport.config.addComposeSupport
 import com.kaspersky.components.composesupport.config.withComposeSupport
-import com.kaspersky.components.composesupport.interceptors.behavior.SemanticsBehaviorInterceptor
 import com.kaspersky.components.composesupport.interceptors.behavior.impl.autoscroll.AutoScrollSemanticsBehaviorInterceptor
 import com.kaspersky.kaspresso.composesupport.sample.MainActivity
 import com.kaspersky.kaspresso.composesupport.sample.screen.ComposeMainScreen
 import com.kaspersky.kaspresso.composesupport.sample.screen.ComposeScrollScreen
-import com.kaspersky.kaspresso.composesupport.sample.screen.ComposeSimpleFlakyScreen
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.logger.UiTestLoggerImpl
 import com.kaspersky.kaspresso.params.AutoScrollParams

@@ -6,7 +6,6 @@ import com.kaspersky.components.composesupport.config.withComposeSupport
 import com.kaspersky.kaspresso.composesupport.sample.MainActivity
 import com.kaspersky.kaspresso.composesupport.sample.screen.ComposeMainScreen
 import com.kaspersky.kaspresso.composesupport.sample.screen.ComposeScrollScreen
-import com.kaspersky.kaspresso.composesupport.sample.screen.ComposeSimpleFlakyScreen
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import io.github.kakaocup.compose.node.element.ComposeScreen
@@ -15,7 +14,6 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import java.lang.AssertionError
-
 
 @RunWith(AndroidJUnit4::class)
 class AutoScrollSemanticsDisabledSanityTest : TestCase(

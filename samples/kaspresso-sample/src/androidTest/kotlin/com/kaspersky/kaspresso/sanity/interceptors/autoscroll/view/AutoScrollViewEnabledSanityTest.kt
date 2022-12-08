@@ -12,7 +12,7 @@ import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.junit.Rule
 import org.junit.Test
 
-class AutoScrollViewEnabledSanityTest: TestCase(
+class AutoScrollViewEnabledSanityTest : TestCase(
     kaspressoBuilder = Kaspresso.Builder.simple {
         viewBehaviorInterceptors = mutableListOf(
             AutoScrollViewBehaviorInterceptor(
