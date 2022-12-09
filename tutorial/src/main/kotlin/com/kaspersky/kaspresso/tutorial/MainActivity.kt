@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.kaspersky.kaspresso.tutorial.databinding.ActivityMainBinding
+import com.kaspersky.kaspresso.tutorial.flaky.FlakyActivity
 import com.kaspersky.kaspresso.tutorial.login.LoginActivity
 import com.kaspersky.kaspresso.tutorial.notification.NotificationActivity
 import com.kaspersky.kaspresso.tutorial.permission.MakeCallActivity
@@ -35,6 +36,9 @@ class MainActivity : AppCompatActivity() {
         }
         binding.makeCallActivityBtn.setOnClickListener {
             startActivity(Intent(this, MakeCallActivity::class.java))
+        }
+        binding.flakyActivityBtn.setOnClickListener {
+            startActivity(Intent(this, FlakyActivity::class.java))
         }
     }
 }

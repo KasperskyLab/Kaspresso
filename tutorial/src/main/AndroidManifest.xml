@@ -56,6 +56,10 @@
 
         <activity android:name=".permission.MakeCallActivity"
             android:exported="true" />
+
+        <activity
+            android:name=".flaky.FlakyActivity"
+            android:exported="true" />
     </application>
 
 </manifest>

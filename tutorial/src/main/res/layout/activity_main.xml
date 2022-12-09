@@ -48,4 +48,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Make call activity" />
+
+    <Button
+        android:id="@+id/flaky_activity_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Flaky activity" />
 </LinearLayout>

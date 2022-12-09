@@ -26,4 +26,14 @@
     <!-- Make call screen-->
     <string name="phone_number_hint">Phone number:</string>
     <string name="make_call_btn">Make Call</string>
+
+    <!-- Flaky Screen -->
+    <string name="button_1_changed">Button 1 text changed</string>
+    <string name="button_5_changed">Button 5 text changed</string>
+    <string name="button_1">Button 1</string>
+    <string name="button_2">Button 2</string>
+    <string name="button_3">Button 3</string>
+    <string name="button_4">Button 4</string>
+    <string name="button_5">Button 5</string>
+    <string name="button_6">Button 6</string>
 </resources>
