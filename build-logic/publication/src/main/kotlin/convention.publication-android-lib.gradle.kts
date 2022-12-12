@@ -2,7 +2,7 @@ import com.android.build.gradle.LibraryExtension
 import com.kaspersky.kaspresso.publication.KotlinLibraryPublishExtension
 
 plugins {
-    id("convention.publication-release")
+    id("convention.publication-base")
 }
 
 val publishExtension = extensions.create<KotlinLibraryPublishExtension>("publish")

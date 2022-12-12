@@ -32,7 +32,8 @@ jobs:
           PGP_KEY: ${{ secrets.pgp_key }}
           PGP_PASSWORD: ${{ secrets.pgp_password }}
         run: >
-          ./gradlew publishRelease -Pkaspresso.ossrh.user=${OSSRH_USER}
+          ./gradlew publishAllPublicationsToSonatypeReleasesRepository
+          -Pkaspresso.ossrh.user=${OSSRH_USER}
           -Pkaspresso.ossrh.password=${OSSRH_PASSWORD}
           -Pkaspresso.ossrh.stagingProfileId=${OSSRH_STAGING_PROFILE_ID}
           -Pkaspresso.pgp.keyid=${PGP_KEYID}

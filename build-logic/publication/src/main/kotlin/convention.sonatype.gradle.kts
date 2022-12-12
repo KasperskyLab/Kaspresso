@@ -3,37 +3,29 @@ plugins {
     signing
 }
 
-val ossrhUsername: Provider<String> = providers.gradleProperty("kaspresso.ossrh.user")
-    .forUseAtConfigurationTime()
+val ossrhUsername = findProperty("kaspresso.ossrh.user")?.toString()
+val ossrhPassword = findProperty("kaspresso.ossrh.password")?.toString()
 
-val ossrhPassword: Provider<String> = providers.gradleProperty("kaspresso.ossrh.password")
-    .forUseAtConfigurationTime()
-
-val sonatypeRepoName = "SonatypeReleases"
-
-tasks.withType<PublishToMavenRepository>().configureEach {
-
-    // https://docs.gradle.org/current/userguide/publishing_customization.html#sec:configuring_publishing_tasks
-    if (name.contains(sonatypeRepoName)) {
-        doFirst {
-            repository = repository.apply { setUrl("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/") }
-        }
-    }
-}
-
-val publishTask = tasks.register<Task>("publishToSonatype") {
-    group = "publication"
-
-    dependsOn(tasks.named("publishAllPublicationsTo${sonatypeRepoName}Repository"))
-}
+val sonatypeReleasesRepoName = "SonatypeReleases"
+val sonatypeSnapshotsRepoName = "SonatypeSnapshots"
 
 publishing {
     repositories {
         maven {
-            name = sonatypeRepoName
+            name = sonatypeReleasesRepoName
+            setUrl("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
             credentials {
-                username = ossrhUsername.orNull
-                password = ossrhPassword.orNull
+                username = ossrhUsername
+                password = ossrhPassword
+            }
+        }
+
+        maven {
+            name = sonatypeSnapshotsRepoName
+            setUrl("https://s01.oss.sonatype.org/content/repositories/snapshots/")
+            credentials {
+                username = ossrhUsername
+                password = ossrhPassword
             }
         }
     }
@@ -42,23 +34,26 @@ publishing {
 signing {
     sign(publishing.publications)
 
-    val signingKeyId = providers.gradleProperty("kaspresso.pgp.keyid")
-        .forUseAtConfigurationTime()
-        .orNull
-    val signingKey = providers.gradleProperty("kaspresso.pgp.key")
-        .forUseAtConfigurationTime()
-        .orNull
-    val signingPassword = providers.gradleProperty("kaspresso.pgp.password")
-        .forUseAtConfigurationTime()
-        .orNull
+    val signingKeyId = findProperty("kaspresso.pgp.keyid")?.toString()
+    val signingKey = findProperty("kaspresso.pgp.key")?.toString()
+    val signingPassword = findProperty("kaspresso.pgp.password")?.toString()
 
     useInMemoryPgpKeys(signingKeyId, signingKey, signingPassword)
 }
 
 tasks.withType<Sign>().configureEach {
     onlyIf {
-        gradle.taskGraph.hasTask(publishTask.get())
+        val isReleaseQueued = gradle.taskGraph.hasTask("publishAllPublicationsTo${sonatypeReleasesRepoName}Repository")
+        val isSnapshotQueued = gradle.taskGraph.hasTask("publishAllPublicationsTo${sonatypeSnapshotsRepoName}Repository")
+        isReleaseQueued || isSnapshotQueued
     }
 }
 
-fun String?.toFile() = if (this.isNullOrBlank()) null else File(this)
+tasks.withType<PublishToMavenRepository>().configureEach {
+    if (name.contains(sonatypeReleasesRepoName)) {
+        this.publication.version = property("stableVersion").toString()
+    }
+    if (name.contains(sonatypeSnapshotsRepoName)) {
+        this.publication.version = property("snapshotVersion").toString()
+    }
+}

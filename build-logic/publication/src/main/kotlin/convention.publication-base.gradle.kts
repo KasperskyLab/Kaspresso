@@ -1,5 +1,6 @@
 plugins {
     `maven-publish`
+    id("convention.sonatype")
 }
 
 group = "com.kaspersky.android-components"
