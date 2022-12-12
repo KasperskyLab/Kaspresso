@@ -48,12 +48,3 @@ tasks.withType<Sign>().configureEach {
         isReleaseQueued || isSnapshotQueued
     }
 }
-
-tasks.withType<PublishToMavenRepository>().configureEach {
-    if (name.contains(sonatypeReleasesRepoName)) {
-        this.publication.version = property("stableVersion").toString()
-    }
-    if (name.contains(sonatypeSnapshotsRepoName)) {
-        this.publication.version = property("snapshotVersion").toString()
-    }
-}

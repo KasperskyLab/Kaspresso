@@ -5,7 +5,7 @@ plugins {
 
 group = "com.kaspersky.android-components"
 
-version = property("stableVersion") ?: error("stableVersion property not set")
+version = property("version") ?: error("version property not set")
 
 publishing.publications.withType<MavenPublication>().configureEach {
     pom {
