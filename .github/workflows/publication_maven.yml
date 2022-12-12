@@ -51,3 +51,4 @@ jobs:
           -Pkaspresso.pgp.keyid=${PGP_KEYID}
           -Pkaspresso.pgp.key=${PGP_KEY}
           -Pkaspresso.pgp.password=${PGP_PASSWORD}
+          --no-parallel
