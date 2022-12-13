@@ -60,6 +60,10 @@
         <activity
             android:name=".flaky.FlakyActivity"
             android:exported="true" />
+
+        <activity
+            android:name=".lists.NoteListActivity"
+            android:exported="true" />
     </application>
 
 </manifest>
