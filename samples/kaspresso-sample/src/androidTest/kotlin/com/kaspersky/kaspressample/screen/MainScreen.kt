@@ -25,5 +25,7 @@ object MainScreen : KScreen<MainScreen>() {
 
     val idleWaitingButton = KButton { withId(R.id.activity_main_idlewaiting_sample_button) }
 
+    val systemDialogsButton = KButton { withId(R.id.activity_main_system_dialogs_button) }
+
     val descriptionText = KTextView { withId(R.id.activity_main_title) }
 }

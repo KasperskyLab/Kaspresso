@@ -26,7 +26,8 @@
         <activity android:name=".ComponentsActivity" />
         <activity android:name=".recycler.RecyclerActivity" />
         <activity android:name=".scroll.ScrollActivity" />
-        <activity android:name=".autoscroll.AutoScrollActivity"/>
+        <activity android:name=".autoscroll.AutoScrollActivity" />
+        <activity android:name=".flaky.FlakyActivity" />
     </application>
 
 </manifest>

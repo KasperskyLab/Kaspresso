@@ -14,9 +14,8 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
-
 @RunWith(AndroidJUnit4::class)
-class FlakyComposeDisabledSanityTest: TestCase(
+class FlakyComposeDisabledSanityTest : TestCase(
     kaspressoBuilder = Kaspresso.Builder.withComposeSupport(
         lateComposeCustomize = { composeBuilder ->
             composeBuilder.semanticsBehaviorInterceptors = mutableListOf()

@@ -8,7 +8,7 @@ import org.junit.Rule
 import org.junit.Test
 import java.io.File
 
-class DeviceScreenshotSampleTest : TestCase() {
+class DeviceScreenshotSanityTest : TestCase() {
 
     companion object {
         private const val FULL_SCREENSHOT_TAG = "full_screenshot"
@@ -72,7 +72,6 @@ class DeviceScreenshotSampleTest : TestCase() {
                 }
             }
         }
-
     }
 
     private fun deleteDir(dir: File?) {
