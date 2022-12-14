@@ -44,7 +44,7 @@ jobs:
           PGP_PASSWORD: ${{ secrets.pgp_password }}
         run: >
           ./gradlew publishAllPublicationsTo${{ inputs.releaseType }}Repository
-          -Pversion=${{ inputs.version }}
+          -Pkaspresso.version=${{ inputs.version }}
           -Pkaspresso.ossrh.user=${OSSRH_USER}
           -Pkaspresso.ossrh.password=${OSSRH_PASSWORD}
           -Pkaspresso.pgp.keyid=${PGP_KEYID}
