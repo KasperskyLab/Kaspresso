@@ -14,13 +14,15 @@
 
 Также имеется возможность удалять элементы списка при помощи свайпа.
 
+<img src="../images/recycler_view/swiped.png" alt="Swipe element" width="300"/>
+
 <img src="../images/recycler_view/removed.png" alt="Remove element" width="300"/>
 
 Давайте напишем тесты на этот экран. Нам понадобится id элементов списка, для их поиска воспользуемся LayoutInspector
 
 <img src="../images/recycler_view/layout_inspector.png" alt="Layout Inspector"/>
 
-Обратите внимание, что все элементы списка лежат внутри `RecyclerView`, у которого id `rv_notes`. Внутри него лежит 3 объекта, у которых одинаковые идентификаторы: `note_container`, содержащий `tv_note_id` и `tv_note_text`.
+Обратите внимание, что все элементы списка лежат внутри `RecyclerView`, у которого id `rv_notes`. Внутри него лежит три объекта, у которых одинаковые идентификаторы: `note_container`, содержащий `tv_note_id` и `tv_note_text`.
 
 Получается, что протестировать экран обычным способом у нас не получится, так как у всех элементов один и тот же id, вместо этого мы используем другой подход – PageObject экрана со списком заметок будет содержать всего один элемент – `RecyclerView`, а элементы списка будут представлять собой отдельные PageObject-ы, данные которых мы будем проверять.
 
@@ -138,6 +140,7 @@ object NoteListScreen : KScreen<NoteListScreen>() {
 
 <ol>
 <li>В конструктор View-элементов теперь необходимо передать matcher, в котором будем произведен поиск необходимого объекта. Если этого не сделать, тест завершится неудачно</li>
+    
 <li>Если мы проверяем какое-то специфичное поведение элемента UI, то указываем конкретного наследника KView. Например, если мы хотим проверить наличие текста, то создаем KTextView, у которого есть возможность получить текст. А если мы проверяем какие-то общие вещи – видимость элемента, цвет фона, размеры, то можно создать родительский элемент KView. В данном случае мы будем проверять тексты у tvNoteId и tvNoteText, поэтому указали тип KTextView. А контейнер, в котором лежат эти TextView является экземпляром CardView, у него мы будем проверять только цвет фона, каких-то специфичных вещей проверять у него нет необходимости, поэтому в качестве типа мы указали родительский - KView</li>
 </ol> 
 
@@ -165,9 +168,9 @@ val rvNotes = KRecyclerView(
 В качестве параметра функция `itemType` принимает лямбда выражение, в которое передается объект `Matcher`, этот объект мы передаем в конструктор `NoteItemScreen`
 
 !!! info
-     Подробнее про лямбда-выражения можно почитать [здесь]( https://kotlinlang.org/docs/lambdas.html)
+     Подробнее про лямбда-выражения можно почитать [здесь](https://kotlinlang.org/docs/lambdas.html)
 
-Эту запись можно сократить, используя [Method Reference]( https://docs.oracle.com/javase/tutorial/java/javaOO/methodreferences.html)
+Эту запись можно сократить, используя [Method Reference](https://docs.oracle.com/javase/tutorial/java/javaOO/methodreferences.html), тогда финальная версия класса будет выглядеть так:
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial.screen
@@ -199,7 +202,7 @@ object NoteListScreen : KScreen<NoteListScreen>() {
     }
 }
 ```
-Так выглядит финальная версия Page Object `NoteListScreen`. Давайте в Page Object `Main Screen` добавим кнопку перехода на данный экран
+Теперь давайте в Page Object `Main Screen` добавим кнопку перехода на данный экран
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial.screen
