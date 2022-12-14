@@ -15,4 +15,5 @@ object MainScreen : KScreen<MainScreen>() {
     val notificationActivityButton = KButton { withId(R.id.notification_activity_btn) }
     val makeCallActivityButton = KButton { withId(R.id.make_call_activity_btn) }
     val flakyActivityButton = KButton { withId(R.id.flaky_activity_btn) }
+    val listActivityButton = KButton { withId(R.id.list_activity_btn) }
 }
