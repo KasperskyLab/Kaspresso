@@ -1,7 +1,7 @@
 import com.kaspersky.kaspresso.publication.KotlinLibraryPublishExtension
 
 plugins {
-    id("convention.publication-release")
+    id("convention.publication-base")
 }
 
 plugins.withId("kotlin") {
