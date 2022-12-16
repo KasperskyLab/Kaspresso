@@ -1,11 +1,13 @@
 package com.kaspersky.kaspresso.tutorial
 
+import android.content.Context
+import android.media.AudioManager
 import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import com.kaspersky.kaspresso.tutorial.screen.MainScreen
 import com.kaspersky.kaspresso.tutorial.screen.MakeCallActivityScreen
-import com.kaspersky.kaspresso.tutorial.screen.PhoneCallScreen
+import org.junit.Assert
 import org.junit.Rule
 import org.junit.Test
 
@@ -19,13 +21,12 @@ class MakeCallActivityRuleTest : TestCase() {
     @get:Rule
     val activityRule = activityScenarioRule<MainActivity>()
 
+    private val testNumber = "111"
+
     @Test
     fun checkSuccessCall() = before {
-
     }.after {
-        PhoneCallScreen {
-            endCallButton.click()
-        }
+        device.phone.cancelCall(testNumber)
     }.run {
         step("Open make call activity") {
             MainScreen {
@@ -47,16 +48,14 @@ class MakeCallActivityRuleTest : TestCase() {
         }
         step("Try to call number") {
             MakeCallActivityScreen {
-                inputNumber.replaceText("111")
+                inputNumber.replaceText(testNumber)
                 makeCallButton.click()
             }
         }
-        step("Check call screen") {
-            PhoneCallScreen {
-                contactName.isDisplayed()
-                contactName.hasText("111")
-                endCallButton.isDisplayed()
-                endCallButton.isClickable()
+        step("Check phone is calling") {
+            flakySafely {
+                val manager = device.context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
+                Assert.assertTrue(manager.mode == AudioManager.MODE_IN_CALL)
             }
         }
     }
