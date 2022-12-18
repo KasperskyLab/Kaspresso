@@ -5,11 +5,24 @@ import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.R
 import com.kaspersky.kaspressample.screen.CommonFlakyScreen
 import com.kaspersky.kaspressample.screen.MainScreen
+import com.kaspersky.kaspresso.interceptors.behavior.impl.flakysafety.FlakySafeViewBehaviorInterceptor
+import com.kaspersky.kaspresso.kaspresso.Kaspresso
+import com.kaspersky.kaspresso.logger.UiTestLoggerImpl
+import com.kaspersky.kaspresso.params.FlakySafetyParams
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.junit.Rule
 import org.junit.Test
 
-class FlakyViewEnabledSanityTest : TestCase() {
+class FlakyViewEnabledSanityTest : TestCase(
+    kaspressoBuilder = Kaspresso.Builder.simple {
+        viewBehaviorInterceptors = mutableListOf(
+            FlakySafeViewBehaviorInterceptor(
+                FlakySafetyParams.default(),
+                UiTestLoggerImpl(Kaspresso.DEFAULT_TEST_LOGGER_TAG)
+            )
+        )
+    }
+) {
 
     @get:Rule
     val activityRule = activityScenarioRule<MainActivity>()

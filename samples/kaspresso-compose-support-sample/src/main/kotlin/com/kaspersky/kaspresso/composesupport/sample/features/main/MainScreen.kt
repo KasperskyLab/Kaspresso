@@ -22,6 +22,7 @@ import com.kaspersky.kaspresso.composesupport.sample.resources.C
 @Composable
 fun MainScreen(
     simpleFlakyClick: () -> Unit,
+    sanityFlakyClick: () -> Unit,
     scrollClick: () -> Unit
 ) {
     Column(
@@ -45,6 +46,16 @@ fun MainScreen(
         Button(
             modifier = Modifier
                 .fillMaxWidth()
+                .semantics { testTag = C.Tag.main_screen_sanity_flaky_button },
+            content = {
+                Text(text = stringResource(id = R.string.main_screen_sanity_flaky_button))
+            },
+            onClick = sanityFlakyClick,
+        )
+
+        Button(
+            modifier = Modifier
+                .fillMaxWidth()
                 .semantics { testTag = C.Tag.main_screen_scroll_button },
             content = {
                 Text(text = stringResource(id = R.string.main_screen_scroll_button))
@@ -60,6 +71,7 @@ private fun MainScreenPreview() {
     MaterialTheme {
         MainScreen(
             simpleFlakyClick = { },
+            sanityFlakyClick = { },
             scrollClick = { }
         )
     }

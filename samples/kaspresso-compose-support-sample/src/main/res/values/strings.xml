@@ -2,6 +2,7 @@
     <string name="app_name">Compose support sample</string>
     <!-- MainScreen -->
     <string name="main_screen_simple_flaky_button" translatable="false">Simple flaky sample</string>
+    <string name="main_screen_sanity_flaky_button" translatable="false">Sanity flaky sample</string>
     <string name="main_screen_scroll_button" translatable="false">Scroll button</string>
     <!-- SimpleFlakyScreen -->
     <string name="simple_flaky_screen_first_button" translatable="false">First button</string>

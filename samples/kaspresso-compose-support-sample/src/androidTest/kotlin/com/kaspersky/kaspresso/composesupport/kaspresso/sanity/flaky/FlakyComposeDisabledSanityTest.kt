@@ -5,7 +5,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.kaspersky.components.composesupport.config.withComposeSupport
 import com.kaspersky.kaspresso.composesupport.sample.MainActivity
 import com.kaspersky.kaspresso.composesupport.sample.screen.ComposeMainScreen
-import com.kaspersky.kaspresso.composesupport.sample.screen.ComposeSimpleFlakyScreen
+import com.kaspersky.kaspresso.composesupport.sample.screen.ComposeSanityFlakyScreen
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import io.github.kakaocup.compose.node.element.ComposeScreen
@@ -30,15 +30,24 @@ class FlakyComposeDisabledSanityTest : TestCase(
     fun test() = run {
         step("Open Flaky screen") {
             ComposeScreen.onComposeScreen<ComposeMainScreen>(composeTestRule) {
-                simpleFlakyButton {
+                sanityFlakyButton {
                     performClick()
                 }
             }
         }
 
         step("Click on the First button") {
-            ComposeScreen.onComposeScreen<ComposeSimpleFlakyScreen>(composeTestRule) {
+            ComposeScreen.onComposeScreen<ComposeSanityFlakyScreen>(composeTestRule) {
                 firstButton {
+                    assertIsDisplayed()
+                    performClick()
+                }
+            }
+        }
+
+        step("Click on the Second button") {
+            ComposeScreen.onComposeScreen<ComposeSanityFlakyScreen>(composeTestRule) {
+                secondButton {
                     Assert.assertThrows(null, AssertionError::class.java) {
                         assertIsDisplayed()
                         performClick()
