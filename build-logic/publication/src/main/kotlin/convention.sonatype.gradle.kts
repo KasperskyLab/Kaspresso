@@ -1,5 +1,5 @@
 plugins {
-    id("convention.publication-base")
+    id("maven-publish")
     signing
 }
 
