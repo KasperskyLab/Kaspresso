@@ -1,10 +1,11 @@
 plugins {
     `maven-publish`
+    id("convention.sonatype")
 }
 
 group = "com.kaspersky.android-components"
 
-version = property("stableVersion") ?: error("stableVersion property not set")
+version = property("kaspresso.version") ?: error("kaspresso.version property not set")
 
 publishing.publications.withType<MavenPublication>().configureEach {
     pom {
