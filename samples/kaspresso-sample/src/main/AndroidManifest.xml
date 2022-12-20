@@ -84,9 +84,6 @@
             android:name=".sharedtest.SharedTestActivity"
             android:label="@string/main_screen_shared_test"/>
 
-        <activity android:name=".systemdialogs.SystemDialogsActivity"
-            android:label="@string/system_dialogs_sanity"/>
-
         <service
             android:name=".device.DeviceSampleAccessibilityService"
             android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"

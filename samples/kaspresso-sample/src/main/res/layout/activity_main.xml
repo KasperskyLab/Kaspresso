@@ -95,13 +95,6 @@
         android:layout_below="@id/activity_main_device_button"
         android:text="@string/main_screen_full_device_button" />
 
-    <Button
-        android:id="@+id/activity_main_system_dialogs_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/activity_main_device_full_button"
-        android:text="@string/main_screen_system_dialogs_button" />
-
     <TextView
         android:id="@+id/activity_main_description_textview"
         android:layout_width="wrap_content"
