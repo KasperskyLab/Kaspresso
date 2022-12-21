@@ -1,5 +1,5 @@
 plugins {
-    id("maven-publish")
+    `maven-publish`
     signing
 }
 
