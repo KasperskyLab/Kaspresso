@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_CALL_LOG" />
 
     <application
         android:name="androidx.multidex.MultiDexApplication"
@@ -28,6 +29,7 @@
         <activity android:name=".scroll.ScrollActivity" />
         <activity android:name=".autoscroll.AutoScrollActivity" />
         <activity android:name=".flaky.FlakyActivity" />
+        <activity android:name=".systemdialogs.SystemDialogsActivity" />
     </application>
 
 </manifest>
