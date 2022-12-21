@@ -10,25 +10,21 @@
 
 <img src="../images/flaky/flaky_activity_btn.png" alt="Flaky activity button" width="300"/>
 
-На этом экране отображаются кнопки с исходными текстами
+На этом экране отображаются несколько `TextView`, для которых загружаются какие-то данные
 
 <img src="../images/flaky/flaky_1.png" alt="Flaky screen 1" width="300"/>
 
-Через 3 секунды будет выполнен скролл до конца списка
+Через одну секунду загружается текст для первого элемента
 
 <img src="../images/flaky/flaky_2.png" alt="Flaky screen 2" width="300"/>
 
-Еще через 3 секунд текст в 5-ой кнопке изменится на `Button 5 text changed`
+Еще через три секунды появляется текст у второго элемента
 
 <img src="../images/flaky/flaky_3.png" alt="Flaky screen 3" width="300"/>
 
-Спустя 10 секунд произойдет прокрутка списка к самому началу
+Спустя 10 секунд произойдет загрузка остальных данных и тексты появятся у всех `TextView`
 
 <img src="../images/flaky/flaky_4.png" alt="Flaky screen 4" width="300"/>
-
-И еще через секунду изменится текст у первой кнопки
-
-<img src="../images/flaky/flaky_5.png" alt="Flaky screen 5" width="300"/>
 
 ## Тестирование FlakyScreen
 
@@ -39,20 +35,27 @@ package com.kaspersky.kaspresso.tutorial.screen
 
 import com.kaspersky.kaspresso.screens.KScreen
 import com.kaspersky.kaspresso.tutorial.R
+import io.github.kakaocup.kakao.progress.KProgressBar
 import io.github.kakaocup.kakao.text.KButton
 
 object FlakyScreen : KScreen<FlakyScreen>() {
-    
+
     override val layoutId: Int? = null
     override val viewClass: Class<*>? = null
 
-    val button1 = KButton { withId(R.id.button_1) }
-    val button2 = KButton { withId(R.id.button_2) }
-    val button3 = KButton { withId(R.id.button_3) }
-    val button4 = KButton { withId(R.id.button_4) }
-    val button5 = KButton { withId(R.id.button_5) }
-    val button6 = KButton { withId(R.id.button_6) }
+    val text1 = KButton { withId(R.id.text_1) }
+    val text2 = KButton { withId(R.id.text_2) }
+    val text3 = KButton { withId(R.id.text_3) }
+    val text4 = KButton { withId(R.id.text_4) }
+    val text5 = KButton { withId(R.id.text_5) }
+
+    val progressBar1 = KProgressBar { withId(R.id.progress_bar_1) }
+    val progressBar2 = KProgressBar { withId(R.id.progress_bar_2) }
+    val progressBar3 = KProgressBar { withId(R.id.progress_bar_3) }
+    val progressBar4 = KProgressBar { withId(R.id.progress_bar_4) }
+    val progressBar5 = KProgressBar { withId(R.id.progress_bar_5) }
 }
+
 ```
 Для перехода на `FlakyActivity` нужно кликнуть кнопку на главном экране. Добавляем ее в PageObject `MainScreen`
 
@@ -76,10 +79,7 @@ object MainScreen : KScreen<MainScreen>() {
     val flakyActivityButton = KButton { withId(R.id.flaky_activity_btn) }
 }
 ```
-Можем писать тест. Давайте сначала проверим, что экран открывается, все кнопки содержат исходный текст, первая кнопка полностью отображается, а последняя кнопка не отображается совсем.
-
-!!! info
-     Обратите внимание на отличие методов `isVisible` и `isDisplayed`. В случае, когда экран можно скроллить, элемент может быть видимым, но при этом не отображаться на экране, из-за того, что пользователь до него не долистал.
+Можем писать тест. Давайте сначала проверим, что экран открывается, все элементы видимы и на них отображается `ProgressBar`
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -109,23 +109,26 @@ class FlakyScreenTest : TestCase() {
         }
         step("Check initial elements") {
             FlakyScreen {
-                button1.hasText(R.string.button_1)
-                button2.hasText(R.string.button_2)
-                button3.hasText(R.string.button_3)
-                button4.hasText(R.string.button_4)
-                button5.hasText(R.string.button_5)
-                button6.hasText(R.string.button_6)
-                button1.isDisplayed()
-                button6.isNotDisplayed()
+                text1.isVisible()
+                text2.isVisible()
+                text3.isVisible()
+                text4.isVisible()
+                text5.isVisible()
+                progressBar1.isVisible()
+                progressBar2.isVisible()
+                progressBar3.isVisible()
+                progressBar4.isVisible()
+                progressBar5.isVisible()
             }
         }
     }
 }
+
 ```
 
-Следующее действие, происходящее на экране – скролл в конец списка. Нам нужно проверить, что на данном этапе `button1` не отображается на экране, а `button6` отображается. Эту проверку нужно сделать после того, как прокрутка будет завершена.
+Следующее действие, происходящее на экране – загрузка текста для первого элемента. Нам нужно проверить, что на данном этапе первый `TextView` содержит текст “TEXT 1”. Эту проверку нужно сделать после того, как прокрутка будет завершена.
 
-Получается, что следующим шагом мы должны добавить необходимые проверки, и, если они завершатся неудачно, то нужно выполнять их снова в течение какого-то времени. В данном случае прокрутка экрана произойдет через 3 секунды после открытия экрана, поэтому мы можем добавить таймаут в 3-5 секунд, в течение которых проверки будут повторяться. Если в течение этого времени методы вернут корректное значение, то тест завершится успешно, если же по истечении таймаута условие так и не будет выполнено, то тест будет «красным».
+Получается, что следующим шагом мы должны добавить необходимые проверки, и, если они завершатся неудачно, то нужно выполнять их снова в течение какого-то времени. В данном случае загрузка первого текста занимаете около одной секунды после открытия экрана, поэтому мы можем добавить таймаут в 1-3 секунды, в течение которых проверки будут повторяться. Если в течение этого времени методы вернут корректное значение, то тест завершится успешно, если же по истечении таймаута условие так и не будет выполнено, то тест будет «красным».
 
 Для того, чтобы добавить таймаут, необходимо использовать метод `flakySafely`, где в круглых скобках указывается время в миллисекундах, в течение которого будут происходить попытки пройти тест. Тогда код теста будет выглядеть следующим образом:
 
@@ -157,21 +160,23 @@ class FlakyScreenTest : TestCase() {
         }
         step("Check initial elements") {
             FlakyScreen {
-                button1.hasText(R.string.button_1)
-                button2.hasText(R.string.button_2)
-                button3.hasText(R.string.button_3)
-                button4.hasText(R.string.button_4)
-                button5.hasText(R.string.button_5)
-                button6.hasText(R.string.button_6)
-                button1.isDisplayed()
-                button6.isNotDisplayed()
+                text1.isVisible()
+                text2.isVisible()
+                text3.isVisible()
+                text4.isVisible()
+                text5.isVisible()
+                progressBar1.isVisible()
+                progressBar2.isVisible()
+                progressBar3.isVisible()
+                progressBar4.isVisible()
+                progressBar5.isVisible()
             }
         }
-        step("Check first scroll") {
-            flakySafely(5000) {
-                FlakyScreen {
-                    button1.isNotDisplayed()
-                    button6.isDisplayed()
+        step("Check first element after loading") {
+            FlakyScreen {
+                flakySafely {
+                    text1.hasText(R.string.text_1)
+                    progressBar1.isGone() // Проверяем, что ProgressBar невидимый
                 }
             }
         }
@@ -212,20 +217,22 @@ class FlakyScreenTest : TestCase() {
         }
         step("Check initial elements") {
             FlakyScreen {
-                button1.hasText(R.string.button_1)
-                button2.hasText(R.string.button_2)
-                button3.hasText(R.string.button_3)
-                button4.hasText(R.string.button_4)
-                button5.hasText(R.string.button_5)
-                button6.hasText(R.string.button_6)
-                button1.isDisplayed()
-                button6.isNotDisplayed()
+                text1.isVisible()
+                text2.isVisible()
+                text3.isVisible()
+                text4.isVisible()
+                text5.isVisible()
+                progressBar1.isVisible()
+                progressBar2.isVisible()
+                progressBar3.isVisible()
+                progressBar4.isVisible()
+                progressBar5.isVisible()
             }
         }
-        step("Check first scroll") {
+        step("Check first element after loading") {
             FlakyScreen {
-                button1.isNotDisplayed()
-                button6.isDisplayed()
+                text1.hasText(R.string.text_1)
+                progressBar1.isGone() // Проверяем, что ProgressBar невидимый
             }
         }
     }
@@ -233,13 +240,13 @@ class FlakyScreenTest : TestCase() {
 ```
 Запускаем. Тест все равно завершается успешно.
 
-Казалось бы, мы не установили никакой таймаут, проверка должна была завершиться неудачей, но тест «зеленый». Дело в том, что в Kaspresso все проверки неявно используют метод `flakySafely` с каким-то таймаутом (в текущей версии Kaspresso таймаут составляет 5 секунд).
+Казалось бы, мы не установили никакой таймаут, проверка должна была завершиться неудачей, но тест «зеленый». Дело в том, что в Kaspresso все проверки неявно используют метод `flakySafely` с каким-то таймаутом (в текущей версии Kaspresso таймаут составляет 10 секунд).
 
-Вы могли обратить внимание, что если какой-то тест выполняется успешно, то приложение сразу закрывается, и Android Studio выводит сообщение об успешном прогоне тестов. Но если какая-то проверка завершается неудачей, то сообщение об ошибке появляется не сразу, а через несколько секунд – причина заключается в использовании flakySafely. Тест завершился неудачно и в течение 5 секунд еще несколько раз перезапускается.
+Вы могли обратить внимание, что если какой-то тест выполняется успешно, то приложение сразу закрывается, и Android Studio выводит сообщение об успешном прогоне тестов. Но если какая-то проверка завершается неудачей, то сообщение об ошибке появляется не сразу, а через несколько секунд – причина заключается в использовании flakySafely. Тест завершился неудачно и в течение 10 секунд еще несколько раз перезапускается.
 
-Поэтому `flakySafely` добавлять нужно только в том случае, если дефолтный таймаут вам не подходит, и его нужно изменить на какой-то другой. Хороший случай использования увеличенного таймаута – когда на экране происходит загрузка данных из сети. Сервер может долго возвращать ответ, при этом тест не должен падать из-за медленно работающего backend-а.
+Поэтому `flakySafely` добавлять нужно только в том случае, если дефолтный таймаут вам по каким-то причинам не подходит, и его нужно изменить на другой. Хороший случай использования увеличенного таймаута – когда на экране происходит загрузка данных из сети. Сервер может долго возвращать ответ, при этом тест не должен падать из-за медленно работающего backend-а.
 
-На следующем шаге, через 3 секунды после скролла, должен быть изменен текст на пятой кнопке. 3 секунды укладывается в дефолтный таймаут, значит явно использовать `flakeSafely` с другим таймаутом не имеет смысла
+На следующем шаге, через 3 секунды загружается второй текст. Три секунды укладывается в дефолтный таймаут, значит явно использовать `flakeSafely` с другим таймаутом не имеет смысла
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -269,31 +276,34 @@ class FlakyScreenTest : TestCase() {
         }
         step("Check initial elements") {
             FlakyScreen {
-                button1.hasText(R.string.button_1)
-                button2.hasText(R.string.button_2)
-                button3.hasText(R.string.button_3)
-                button4.hasText(R.string.button_4)
-                button5.hasText(R.string.button_5)
-                button6.hasText(R.string.button_6)
-                button1.isDisplayed()
-                button6.isNotDisplayed()
+                text1.isVisible()
+                text2.isVisible()
+                text3.isVisible()
+                text4.isVisible()
+                text5.isVisible()
+                progressBar1.isVisible()
+                progressBar2.isVisible()
+                progressBar3.isVisible()
+                progressBar4.isVisible()
+                progressBar5.isVisible()
             }
         }
-        step("Check first scroll") {
+        step("Check first element after loading") {
             FlakyScreen {
-                button1.isNotDisplayed()
-                button6.isDisplayed()
+                text1.hasText(R.string.text_1)
+                progressBar1.isGone()
             }
         }
-        step("Check button 5 text changed") {
+        step("Check second element after loading") {
             FlakyScreen {
-                button5.hasText(R.string.button_5_changed)
+                text2.hasText(R.string.text_2)
+                progressBar2.isGone()
             }
         }
     }
 }
 ```
-Следующий шаг – через 10 секунд после изменения текста на пятой кнопке, экран должен быть проскроллен в самое начало. 10 секунд – больше таймаута по умолчанию и в таких случаях стоит использовать метод `flakySafely`. Через 10 секунд начнется процесс прокрукти экрана, поэтому завершится он немного позже, укажем таймаут 15 секунд.
+Следующий шаг – через 10 секунд после загрузки данных для второго элемента, текст появляется во всех остальных `TextView`. 10 секунд – приблизительное время загрузки данных, оно может быть больше или меньше этого значения, поэтому стандартный таймаут нам не подойдет. В таких случаях нужно явно вызывать `flakySafely`, передавая увеличенный таймаут, давайте передадим 15 секунд
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -323,32 +333,39 @@ class FlakyScreenTest : TestCase() {
         }
         step("Check initial elements") {
             FlakyScreen {
-                button1.hasText(R.string.button_1)
-                button2.hasText(R.string.button_2)
-                button3.hasText(R.string.button_3)
-                button4.hasText(R.string.button_4)
-                button5.hasText(R.string.button_5)
-                button6.hasText(R.string.button_6)
-                button1.isDisplayed()
-                button6.isNotDisplayed()
+                text1.isVisible()
+                text2.isVisible()
+                text3.isVisible()
+                text4.isVisible()
+                text5.isVisible()
+                progressBar1.isVisible()
+                progressBar2.isVisible()
+                progressBar3.isVisible()
+                progressBar4.isVisible()
+                progressBar5.isVisible()
             }
         }
-        step("Check scroll to end") {
+        step("Check first element after loading") {
             FlakyScreen {
-                button1.isNotDisplayed()
-                button6.isDisplayed()
+                text1.hasText(R.string.text_1)
+                progressBar1.isGone()
             }
         }
-        step("Check button 5 text changed") {
+        step("Check second element after loading") {
             FlakyScreen {
-                button5.hasText(R.string.button_5_changed)
+                text2.hasText(R.string.text_2)
+                progressBar2.isGone()
             }
         }
-        step("Check scroll to start") {
-            flakySafely(15_000) {
-                FlakyScreen {
-                    button6.isNotDisplayed()
-                    button1.isDisplayed()
+        step("Check left elements after loading") {
+            FlakyScreen {
+                flakySafely(15000) {
+                    text3.hasText(R.string.text_3)
+                    progressBar3.isGone()
+                    text4.hasText(R.string.text_4)
+                    progressBar4.isGone()
+                    text5.hasText(R.string.text_5)
+                    progressBar5.isGone()
                 }
             }
         }
@@ -362,7 +379,7 @@ class FlakyScreenTest : TestCase() {
 
 На первый взгляд может показаться, что в этих способах нет разницы, и делают они одно и то же. Но на самом деле в них есть существенное отличие. Если вы используете `flakySafely`, то независимо от таймаута после успешного прохождения проверки тест продолжит выполняться. А при использовании `Thread.sleep` в любом случае тест будет ждать, пока таймаут не завершится. 
 
-В обычном случае все проверки в Kaspresso используют `flakySafely` с таймаутом 5 секунд, но, несмотря на это, тесты завершаются очень быстро, потому что, если метод вернул корректное значение, то никакого ожидания не будет. Если же все эти методы заменить на `Thread.sleep`, то каждая такая проверка будет занимать минимум 5 секунд и тесты будут прогоняться очень длительное время.
+В обычном случае все проверки в Kaspresso используют `flakySafely` с таймаутом 10 секунд, но, несмотря на это, тесты завершаются очень быстро, потому что, если метод вернул корректное значение, то никакого ожидания не будет. Если же все эти методы заменить на `Thread.sleep`, то каждая такая проверка будет занимать минимум 10 секунд и тесты будут прогоняться очень длительное время.
 
 ## Какой таймаут указывать?
 
@@ -376,7 +393,11 @@ class FlakyScreenTest : TestCase() {
 
 ## Особенности работы со ScrollView
 
-Давайте завершим наш тест. Еще через секунду после последнего скролла текст в первой кнопке должен измениться
+Вы могли обратить внимание, что все элементы на экране не помещаются, поскольку занимают довольно много места по высоте, поэтому весь контент был добавлен в [ScrollView]( https://developer.android.com/reference/android/widget/ScrollView), чтобы экран можно было скроллить. 
+
+Мы можем добавить проверку на то, что при открытии экрана первый элемент отображается, а последний – нет. Использовать метод `isVisible` в данном случае будет неправильно, поскольку даже если на экране объект не поместился, но он видимый, то проверка вернет `true`. Вместо этого можно использовать методы `isDisplayed` и `isNotDisplayed`, которые нужны как раз в таких случаях – когда нужно узнать, что элемент действительно видно на экране.
+
+Тогда код теста будет выглядеть так:
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -404,88 +425,134 @@ class FlakyScreenTest : TestCase() {
                 }
             }
         }
+        step("Check display of elements") {
+            FlakyScreen {
+                text1.isDisplayed()
+                text5.isNotDisplayed()
+            }
+        }
         step("Check initial elements") {
             FlakyScreen {
-                button1.hasText(R.string.button_1)
-                button2.hasText(R.string.button_2)
-                button3.hasText(R.string.button_3)
-                button4.hasText(R.string.button_4)
-                button5.hasText(R.string.button_5)
-                button6.hasText(R.string.button_6)
-                button1.isDisplayed()
-                button6.isNotDisplayed()
+                text1.isVisible()
+                text2.isVisible()
+                text3.isVisible()
+                text4.isVisible()
+                text5.isVisible()
+                progressBar1.isVisible()
+                progressBar2.isVisible()
+                progressBar3.isVisible()
+                progressBar4.isVisible()
+                progressBar5.isVisible()
             }
         }
-        step("Check scroll to end") {
+        step("Check first element after loading") {
             FlakyScreen {
-                button1.isNotDisplayed()
-                button6.isDisplayed()
+                text1.hasText(R.string.text_1)
+                progressBar1.isGone()
             }
         }
-        step("Check button 5 text changed") {
+        step("Check second element after loading") {
             FlakyScreen {
-                button5.hasText(R.string.button_5_changed)
+                text2.hasText(R.string.text_2)
+                progressBar2.isGone()
             }
         }
-        step("Check scroll to start") {
-            flakySafely(12_000) {
-                FlakyScreen {
-                    button6.isNotDisplayed()
-                    button1.isDisplayed()
+        step("Check left elements after loading") {
+            FlakyScreen {
+                flakySafely(15000) {
+                    text3.hasText(R.string.text_3)
+                    progressBar3.isGone()
+                    text4.hasText(R.string.text_4)
+                    progressBar4.isGone()
+                    text5.hasText(R.string.text_5)
+                    progressBar5.isGone()
                 }
             }
         }
-        step("Check button 1 text changed") {
+    }
+}
+``` 
+Тест пройден успешно. Теперь давайте изменим проверку пятого элемента списка. Теперь вместо метода `isNotDisplayed` мы используем `isDisplayed`. 
+
+```kotlin
+package com.kaspersky.kaspresso.tutorial
+
+import androidx.test.ext.junit.rules.activityScenarioRule
+import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
+import com.kaspersky.kaspresso.tutorial.screen.FlakyScreen
+import com.kaspersky.kaspresso.tutorial.screen.MainScreen
+import org.junit.Rule
+import org.junit.Test
+
+class FlakyScreenTest : TestCase() {
+
+    @get:Rule
+    val activityRule = activityScenarioRule<MainActivity>()
+
+    @Test
+    fun checkFlakyScreen() = run {
+        step("Open flaky screen") {
+            MainScreen {
+                flakyActivityButton {
+                    isVisible()
+                    isClickable()
+                    click()
+                }
+            }
+        }
+        step("Check display of elements") {
             FlakyScreen {
-                button1.hasText(R.string.button_1_changed)
+                text1.isDisplayed()
+                text5.isDisplayed()
+            }
+        }
+        step("Check initial elements") {
+            FlakyScreen {
+                text1.isVisible()
+                text2.isVisible()
+                text3.isVisible()
+                text4.isVisible()
+                text5.isVisible()
+                progressBar1.isVisible()
+                progressBar2.isVisible()
+                progressBar3.isVisible()
+                progressBar4.isVisible()
+                progressBar5.isVisible()
+            }
+        }
+        step("Check first element after loading") {
+            FlakyScreen {
+                text1.hasText(R.string.text_1)
+                progressBar1.isGone()
+            }
+        }
+        step("Check second element after loading") {
+            FlakyScreen {
+                text2.hasText(R.string.text_2)
+                progressBar2.isGone()
+            }
+        }
+        step("Check left elements after loading") {
+            FlakyScreen {
+                flakySafely(15000) {
+                    text3.hasText(R.string.text_3)
+                    progressBar3.isGone()
+                    text4.hasText(R.string.text_4)
+                    progressBar4.isGone()
+                    text5.hasText(R.string.text_5)
+                    progressBar5.isGone()
+                }
             }
         }
     }
 }
+
 ```
+Кажется, что тест должен завершиться неудачно, так как изначально пятого элемента на экране не видно. Запускаем. Тест пройден успешно.
 
-Нам осталось рассмотреть один важный момент, с которым вы можете столкнуться. Давайте в этом шаге
+Причина такого поведения в реализации проверок в библиотеке Kaspresso. Если мы проверяем элемент, который находится внутри [ScrollView]( https://developer.android.com/reference/android/widget/ScrollView), и эта проверка завершается неудачно, то внутри теста автоматически будет осуществлен скролл до данного элемента, и проверка выполнится снова. Таким образом была решена проблема, когда при нормальном поведении приложения тесты падали, только потому что не смогли проверить элемент, который в данный момент не виден на экране.
 
-```kotlin
-step("Check scroll to end") {
-    FlakyScreen {
-        button1.isNotDisplayed()
-        button6.isDisplayed()
-    }
-}
-```
-
-после проверки шестой кнопки, добавим вызов метода `button1.isDisplayed()`
-
-```kotlin
-step("Check scroll to end") {
-    FlakyScreen {
-        button1.isNotDisplayed()
-        button6.isDisplayed()
-        button1.isDisplayed()
-    }
-}
-```
-Кажется, что тест должен упасть на этом шаге, так как мы проскроллили вниз, проверили, что первая кнопка невидима, а последняя видима, и после этого проверяем, что первая кнопка отображается на экране. Давайте запустим, проверим
-
-Тест действительно завершается с ошибкой, но если вы посмотрите в логи, то увидите, что тест упал только на последнем шаге, где была проверка текста:
-
-<img src="../images/flaky/scroll_test_failed.png" alt="Scroll test failed "/>
-
-Получается, что проверка на то, что первая кнопка отображается на экране, выполнилась успешно. Причина такого поведения в реализации проверок в библиотеке Kaspresso.
-
-Если мы проверяем элемент, который находится внутри [ScrollView]( https://developer.android.com/reference/android/widget/ScrollView), и эта проверка завершается неудачно, то внутри теста автоматически будет осуществлен скролл до данного элемента, и проверка выполнится снова. Таким образом была решена проблема, когда при нормальном поведении приложения тесты падали, только потому что не смогли проверить элемент, который в данный момент не виден на экране.
-
-Получается, что в последней реализации произошло следующее:
-
-<ol>
-	<li>Экран был прокручен до самого конца</li>
-	<li>Проверка на то, что первая кнопка видима, выполнилась неудачно и произошел автоматический скролл к началу списка</li>
-	<li>Проверка на отображение первой кнопки теперь выполнилась успешно</li>
-<li>На следующем шаге мы проверили текст на пятой кнопке – успешная проверка</li>
-<li>Дальше мы проверяем, что шестая кнопка не видна на экране, а первая видна. Так как до этого произошел автоматический скролл к началу списка, то эта проверка сразу возвращает успешный результат. Теперь мы не ждем 10 секунд, пока произойдет скролл и сразу переходим к следующему шагу с проверкой текста</li>
-<li>Текст не успевает измениться и тест падает</li>
-</ol>
+Получается, что была выполнена проверка `text5.isDisplayed`, она завершилась неудачно и экран был прокручен вниз и проверка запустилась снова. Теперь элемент действительно был виден на экране, поэтому тест завершился успешно.
 
 При написании тестов на экраны, которые можно скроллить, учитывайте особенности работы с ними в Kaspresso.
 
