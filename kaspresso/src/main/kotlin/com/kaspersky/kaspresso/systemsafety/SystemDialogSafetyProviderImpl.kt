@@ -101,11 +101,12 @@ class SystemDialogSafetyProviderImpl(
 
     /**
      * Checks if error is allowed and android system dialogs/windows are overlaying the app.
-     * Aware to use By.pkg with String, cause it will cause to use Pattern.quote in internal code
+     * Aware to use By.pkg with String, cause it will cause to use Pattern.quote in internal code,
+     * internal use Pattern.match() method, so we need regex that will match full string, not part.
      */
     private fun isAndroidSystemDetected(): Boolean {
         with(uiDevice) {
-            if (isVisible(By.pkg(Pattern.compile("\\S*android\\S*")).clazz(FrameLayout::class.java))) {
+            if (isVisible(By.pkg(Pattern.compile("\\S*google.android\\S*")).clazz(FrameLayout::class.java))) {
                 logger.i("The android system dialog/window was detected")
                 return true
             }
