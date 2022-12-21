@@ -9,6 +9,7 @@ import com.kaspersky.kaspresso.device.server.AdbServer
 import com.kaspersky.kaspresso.instrumental.InstrumentalDependencyProvider
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import java.util.concurrent.TimeUnit
+import java.util.regex.Pattern
 
 /**
  * The implementation of the [SystemDialogSafetyProvider] interface.
@@ -100,10 +101,11 @@ class SystemDialogSafetyProviderImpl(
 
     /**
      * Checks if error is allowed and android system dialogs/windows are overlaying the app.
+     * Aware to use By.pkg with String, cause it will cause to use Pattern.quote in internal code
      */
     private fun isAndroidSystemDetected(): Boolean {
         with(uiDevice) {
-            if (isVisible(By.pkg("android").clazz(FrameLayout::class.java))) {
+            if (isVisible(By.pkg(Pattern.compile("\\S*android\\S*")).clazz(FrameLayout::class.java))) {
                 logger.i("The android system dialog/window was detected")
                 return true
             }
