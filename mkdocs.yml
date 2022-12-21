@@ -72,8 +72,8 @@ nav:
       - Выделение секций и шагов: Tutorial/Выделение секций и шагов.md
       - Вынесение дублирующихся шагов в Scenario: Tutorial/Вынесение дублирующихся шагов в Scenario.md
       - UiAutomator. Тестирование за рамками приложения: Tutorial/UiAutomator.md
-      - Работа с Android permissions: Tutorial/Android_permissions.md
       - flakySafely: Tutorial/FlakySafely.md
+      - Работа с Android permissions: Tutorial/Android_permissions.md
       - RecyclerView: Tutorial/Recyclerview.md
       - Логирование и скриншоты: Tutorial/Logger_and_screenshots.md
       - LayoutId и ViewClass: Tutorial/LayoutId_and_viewClass.md
