@@ -29,7 +29,7 @@ class FlakyViewEnabledSanityTest : TestCase(
 
     @Test
     fun test() = run {
-        step("Open Scroll View Stub Screen") {
+        step("Open Flaky screen") {
             MainScreen {
                 flakyButton {
                     click()
