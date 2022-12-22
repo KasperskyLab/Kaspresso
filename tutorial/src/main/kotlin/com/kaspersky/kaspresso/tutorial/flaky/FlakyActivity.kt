@@ -2,6 +2,7 @@ package com.kaspersky.kaspresso.tutorial.flaky
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import com.kaspersky.kaspresso.tutorial.R
 import com.kaspersky.kaspresso.tutorial.databinding.ActivityFlakyBinding
@@ -15,27 +16,28 @@ class FlakyActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityFlakyBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        startAnimation()
+        startLoading()
     }
 
-    private fun startAnimation() {
+    private fun startLoading() {
         lifecycleScope.launchWhenResumed {
-            delay(MEDIUM_TIMEOUT_MILLIS)
-            binding.rootScrollView.smoothScrollBy(START_OF_SCREEN_X, END_OF_SCREEN_Y)
-            delay(MEDIUM_TIMEOUT_MILLIS)
-            binding.button5.text = getString(R.string.button_5_changed)
-            delay(BIG_TIMEOUT_MILLIS)
-            binding.rootScrollView.smoothScrollTo(START_OF_SCREEN_X, START_OF_SCREEN_Y)
             delay(LITTLE_TIMEOUT_MILLIS)
-            binding.button1.text = getString(R.string.button_1_changed)
+            binding.text1.text = getString(R.string.text_1)
+            binding.progressBar1.isVisible = false
+            delay(MEDIUM_TIMEOUT_MILLIS)
+            binding.text2.text = getString(R.string.text_2)
+            binding.progressBar2.isVisible = false
+            delay(BIG_TIMEOUT_MILLIS)
+            binding.text3.text = getString(R.string.text_3)
+            binding.progressBar3.isVisible = false
+            binding.text4.text = getString(R.string.text_4)
+            binding.progressBar4.isVisible = false
+            binding.text5.text = getString(R.string.text_5)
+            binding.progressBar5.isVisible = false
         }
     }
 
     companion object {
-        private const val START_OF_SCREEN_X = 0
-        private const val START_OF_SCREEN_Y = 0
-        private const val END_OF_SCREEN_Y = 10000
-
         private const val LITTLE_TIMEOUT_MILLIS = 1000L
         private const val MEDIUM_TIMEOUT_MILLIS = 3000L
         private const val BIG_TIMEOUT_MILLIS = 10000L
