@@ -23,40 +23,48 @@ class FlakyScreenTest : TestCase() {
                 }
             }
         }
+        step("Check display of elements") {
+            FlakyScreen {
+                text1.isDisplayed()
+                text5.isDisplayed()
+            }
+        }
         step("Check initial elements") {
             FlakyScreen {
-                button1.hasText(R.string.button_1)
-                button2.hasText(R.string.button_2)
-                button3.hasText(R.string.button_3)
-                button4.hasText(R.string.button_4)
-                button5.hasText(R.string.button_5)
-                button6.hasText(R.string.button_6)
-                button1.isDisplayed()
-                button6.isNotDisplayed()
+                text1.isVisible()
+                text2.isVisible()
+                text3.isVisible()
+                text4.isVisible()
+                text5.isVisible()
+                progressBar1.isVisible()
+                progressBar2.isVisible()
+                progressBar3.isVisible()
+                progressBar4.isVisible()
+                progressBar5.isVisible()
             }
         }
-        step("Check scroll to end") {
+        step("Check first element after loading") {
             FlakyScreen {
-                button1.isNotDisplayed()
-                button6.isDisplayed()
+                text1.hasText(R.string.text_1)
+                progressBar1.isGone()
             }
         }
-        step("Check button 5 text changed") {
+        step("Check second element after loading") {
             FlakyScreen {
-                button5.hasText(R.string.button_5_changed)
+                text2.hasText(R.string.text_2)
+                progressBar2.isGone()
             }
         }
-        step("Check scroll to start") {
-            flakySafely(12_000) {
-                FlakyScreen {
-                    button6.isNotDisplayed()
-                    button1.isDisplayed()
+        step("Check left elements after loading") {
+            FlakyScreen {
+                flakySafely(15000) {
+                    text3.hasText(R.string.text_3)
+                    progressBar3.isGone()
+                    text4.hasText(R.string.text_4)
+                    progressBar4.isGone()
+                    text5.hasText(R.string.text_5)
+                    progressBar5.isGone()
                 }
-            }
-        }
-        step("Check button 1 text changed") {
-            FlakyScreen {
-                button1.hasText(R.string.button_1_changed)
             }
         }
     }
