@@ -12,6 +12,14 @@ dependencies {
     implementation(projects.adbServer.adbserverDesktopDeviceConnection)
 }
 
+sourceSets {
+    main {
+        resources {
+            srcDirs("$rootDir/adb-server/license/")
+        }
+    }
+}
+
 setProperty("mainClassName", "com.kaspersky.adbserver.desktop.MainKt")
 
 tasks.withType<Jar>().configureEach {

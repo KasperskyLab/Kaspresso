@@ -7,6 +7,14 @@ publish {
     artifactId.set("adb-server-device")
 }
 
+sourceSets {
+    main {
+        resources {
+            srcDirs("$rootDir/adb-server/license/")
+        }
+    }
+}
+
 dependencies {
     implementation(libs.kotlinStdlib)
     api(projects.adbServer.adbserverCommon)
