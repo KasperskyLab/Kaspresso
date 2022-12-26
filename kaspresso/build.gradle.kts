@@ -1,6 +1,6 @@
 plugins {
     id("convention.android-library")
-    id("convention.publication-android-lib")
+//    id("convention.publication-android-lib")
     id("convention.third-party-report")
 }
 
@@ -14,9 +14,9 @@ android {
     }
 }
 
-publish {
-    artifactId.set("kaspresso")
-}
+//publish {
+//    artifactId.set("kaspresso")
+//}
 
 dependencies {
     api(projects.kautomator)

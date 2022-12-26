@@ -1,12 +1,12 @@
 plugins {
     id("convention.kotlin-library")
-    id("convention.publication-kotlin-lib")
+//    id("convention.publication-kotlin-lib")
     id("convention.third-party-report")
 }
 
-publish {
-    artifactId.set("adb-server-common")
-}
+//publish {
+//    artifactId.set("adb-server-common")
+//}
 
 sourceSets {
     main {
