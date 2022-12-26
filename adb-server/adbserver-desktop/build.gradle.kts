@@ -24,5 +24,4 @@ tasks.withType<Jar>().configureEach {
         exclude("META-INF/**/**/module-info.class")
     }
     exclude("*/NOTICE.txt")
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
