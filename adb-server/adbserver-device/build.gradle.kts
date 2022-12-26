@@ -10,7 +10,7 @@ publish {
 sourceSets {
     main {
         resources {
-            srcDirs("$rootDir/adb-server/license/")
+            srcDirs("$rootDir/adb-server/adbserver-device/license")
         }
     }
 }
