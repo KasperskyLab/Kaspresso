@@ -40,3 +40,12 @@ signing {
 
     useInMemoryPgpKeys(signingKeyId, signingKey, signingPassword)
 }
+
+TODO("need to be fixed. Signing stage is skipping ")
+tasks.withType<Sign>().configureEach {
+    onlyIf {
+        val isReleaseQueued = gradle.taskGraph.hasTask("publishAllPublicationsTo${sonatypeReleasesRepoName}Repository")
+        val isSnapshotQueued = gradle.taskGraph.hasTask("publishAllPublicationsTo${sonatypeSnapshotsRepoName}Repository")
+        isReleaseQueued || isSnapshotQueued
+    }
+}
