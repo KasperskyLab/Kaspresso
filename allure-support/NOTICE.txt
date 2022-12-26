@@ -1,4 +1,4 @@
-﻿﻿This file contains information about dependencies which are used in the Kaspresso/allure-support.
+﻿﻿This file contains information about dependencies which are used in the Kaspresso/kaspresso-allure-support.
 
 
 androidx.activity:activity 1.2.3
@@ -652,7 +652,7 @@ Sun License
 
 Developed at SunSoft, a Sun Microsystems, Inc. business.
 Permission to use, copy, modify, and distribute this
-software is freely granted, provided that this notice 
+software is freely granted, provided that this notice
 is preserved.
 
 org.jetbrains.kotlin:kotlin-stdlib-common 1.7.21
@@ -718,7 +718,7 @@ Distributed under the terms of the Apache License Version 2.0
 
 Apache License
 Version 2.0, January 2004
-http://www.apache.org/licenses/ 
+http://www.apache.org/licenses/
 TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
 1. Definitions.
 "License" shall mean the terms and conditions for use, reproduction, and distribution as defined by Sections 1 through 9 of this document.
@@ -794,7 +794,7 @@ Distributed under the terms of the BSD License (three-clause)
 
 
 ==
-the BSD License (three-clause) 
+the BSD License (three-clause)
 ==
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
