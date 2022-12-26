@@ -337,6 +337,12 @@ In previous version of Kaspresso, `device.logcat.disableChatty` was called autom
 - Kaspresso migrated to a new version of Kakao which has `io.github.kakaocup.kakao` package name. Replace all imports using command 
 `find . -type f \( -name "*.kt" -o -name "*.java" \) -print0 | xargs -0 sed -i '' -e 's/com.agoda/io.github.kakaocup/g'` or using global replacement tool in IDE.
 
+### 1.5.0
+- In order to support the system storage restrictions artifacts are saved under /sdcard/Documents folder
+- Video recording in the allure tests requires using new kaspresso builder: `Kaspresso.Builder.withForcedAllureSupport()` and replacing the test runner
+  (`io.qameta.allure.android.runners.AllureAndroidJUnitRunner`) with `com.kaspersky.kaspresso.runner.KaspressoRunner`
+- Deprecated TestFailRule. Fixed fail test screenshotting 
+
 ## Contribution
 Kaspresso is an open source project, so you are welcome to contribute (see the [Contribution Guidelines](https://github.com/KasperskyLab/Kaspresso/blob/master/CONTRIBUTING.md)).
 
