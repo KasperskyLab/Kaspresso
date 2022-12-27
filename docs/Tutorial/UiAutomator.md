@@ -248,7 +248,8 @@ adb shell uiautomator dump
 
 На вашем эмуляторе должен был появиться файл `window_dump.xml`, который можно найти через `Device Explorer`. Если он у вас не отображается, то выберите папку `sdcard` и нажмите `Synchronize`
 
- <img src="../images/uiautomator/dump_2.png" alt="Uiautomator Dump"/>
+<img src="../images/uiautomator/dump_2.png" alt="Uiautomator Dump"/>
+
 Если после этих шагов файл все равно не появился, то выполните еще одну команду в консоли
 
 ```
