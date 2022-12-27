@@ -142,9 +142,9 @@ class GooglePlayTest : TestCase() {
     @Test
     fun testNotSignIn() = run {
         step("Open Google Play") {
-                val intent = device.targetContext.packageManager.getLaunchIntentForPackage(GOOGLE_PLAY_PACKAGE)
-                device.targetContext.startActivity(intent)
-            }
+            val intent = device.targetContext.packageManager.getLaunchIntentForPackage(GOOGLE_PLAY_PACKAGE)
+            device.targetContext.startActivity(intent)
+        }
     }
 
     companion object {
