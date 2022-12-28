@@ -21,6 +21,7 @@ publishing {
         register<MavenPublication>("release") {
             afterEvaluate {
                 from(components["release"])
+                artifactId = publishExtension.artifactId.get()
             }
         }
     }
