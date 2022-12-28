@@ -11,7 +11,7 @@ activityCompose = "1.4.0"
 androidXTest = "1.5.0"
 testOrchestrator = "1.4.1"
 lifecycle = "2.5.1"
-thirdPartyReport = "0.16.756"
+thirdPartyReport = "0.17.798"
 
 [libraries]
 # plugins
