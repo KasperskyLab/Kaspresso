@@ -3,8 +3,17 @@ plugins {
     id("convention.publication-kotlin-lib")
     id("convention.third-party-report")
 }
+
 publish {
     artifactId.set("adb-server-device")
+}
+
+sourceSets {
+    main {
+        resources {
+            srcDirs("$rootDir/adb-server/license")
+        }
+    }
 }
 
 dependencies {

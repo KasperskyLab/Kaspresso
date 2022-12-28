@@ -8,6 +8,14 @@ publish {
     artifactId.set("adb-server-desktop-device-connection")
 }
 
+sourceSets {
+    main {
+        resources {
+            srcDirs("$rootDir/adb-server/license")
+        }
+    }
+}
+
 dependencies {
     implementation(libs.kotlinStdlib)
     implementation(projects.adbServer.adbserverCommon)
