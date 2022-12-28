@@ -7,7 +7,7 @@ import com.kaspersky.kaspresso.runner.listener.KaspressoRunNotifierImpl
 import com.kaspersky.kaspresso.runner.listener.SpyRunListener
 
 @Suppress("UNUSED")
-class KaspressoRunner : AndroidJUnitRunner() {
+open class KaspressoRunner : AndroidJUnitRunner() {
 
     val runNotifier: KaspressoRunNotifier = KaspressoRunNotifierImpl()
 
