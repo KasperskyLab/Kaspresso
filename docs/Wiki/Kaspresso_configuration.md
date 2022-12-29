@@ -190,10 +190,6 @@ I/KASPRESSO: -------------------------------------------------------------------
 ```
 Pretty good.
 
-#### Screenshots
-A developer receives a screenshot after each Step and after any error. Screenshots are saving at Device in "sdcard/screenshots/". <br>
-But you can turn off this feature using ```Kaspresso.Builder.simple``` builder.
-
 #### Defense from flaky tests
 If a failure occurs then Kaspresso tries to fix it using a big set of diverse ways. <br>
 **This defense works for every action and assertion of each View of Kakao and Kautomator!** You just need to extend your test class from ```TestCase``` (```BaseTestCase```) or to set ```TestCaseRule```(```BaseTestCaseRule```) in your test. <br>
