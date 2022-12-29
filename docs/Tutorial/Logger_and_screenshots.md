@@ -94,11 +94,11 @@ class LoginActivityTest : TestCase() {
 
 <img src="../images/logs/create_package.png" alt="Create package 1"/>
 
-<img src="../images/logs/create_package.png" alt="Create package 2"/>
+<img src="../images/logs/create_package_2.png" alt="Create package 2"/>
 
 В созданном пакете добавляем класс `TestData`, тип выбираем `Object`
 
-<img src="../images/logs/create_package.png" alt="Create class"/>
+<img src="../images/logs/create_class.png" alt="Create class"/>
 
 Как мы уже говорили ранее – здесь мы будем только моделировать ситуацию, когда данные для теста получаем из внешней системы. В созданном классе у нас будет два метода: один из них возвращает логин, другой – пароль. В реальных проектах эти данные мы бы запрашивали с сервера, и менять внутреннюю реализацию возможности у нас бы не было. То есть сейчас мы сами укажем, какие логин и пароль вернет система, но представляем, что для нас это «черный ящик», и мы не знаем, какие значения будут получены.
 
