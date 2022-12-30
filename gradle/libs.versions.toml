@@ -9,7 +9,7 @@ compose = "1.3.1"
 composeCompiler = "1.3.1"
 activityCompose = "1.4.0"
 androidXTest = "1.5.0"
-testOrchestrator = "1.4.1"
+testOrchestrator = "1.4.2"
 lifecycle = "2.5.1"
 thirdPartyReport = "0.17.798"
 
