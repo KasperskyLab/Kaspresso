@@ -5,7 +5,7 @@ set -eo pipefail
 currentBranch="$(git rev-parse --abbrev-ref HEAD)"
 branchNamePattern="^(ISSUE-\d+(-[^\W_]+)*|TECH(-[^\W_]+)+|HEAD)$"
 
-if ! echo "$currentBranch" | grep "$branchNamePattern" -qE; then
+if ! echo "$currentBranch" | grep "$branchNamePattern" -qP; then
   echo >&2 "ERROR: pre-commit git hook failed."
   echo >&2 "Branch name must:"
   echo >&2 "- start with the issue id: \"ISSUE-1234{-optional-description}\""
