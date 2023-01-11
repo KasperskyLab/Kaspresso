@@ -20,8 +20,14 @@ dependencies {
     implementation(libs.constraint)
     implementation(libs.multidex)
 
-    androidTestImplementation(projects.kaspresso)
-    androidTestImplementation(projects.allureSupport)
+    // kaspresso
+    if (hasProperty("snapshotTesting")) {
+        androidTestImplementation(libs.kaspressoSnapshot)
+        androidTestImplementation(libs.allureSupportSnapshot)
+    } else {
+        androidTestImplementation(projects.kaspresso)
+        androidTestImplementation(projects.allureSupport)
+    }
 
     androidTestImplementation(libs.androidXTestExtJunitKtx)
     androidTestImplementation(libs.androidXTestExtJunit)

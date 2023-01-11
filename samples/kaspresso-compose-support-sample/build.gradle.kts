@@ -52,14 +52,23 @@ dependencies {
     implementation(libs.lifecycleViewModelComposeKtx)
     implementation(libs.composeRuntimeLiveData)
 
-    androidTestImplementation(projects.kaspresso)
-    androidTestImplementation(projects.composeSupport)
+    // kaspresso
+    if (hasProperty("snapshotTesting")) {
+        testImplementation(libs.kaspressoSnapshot)
+        testImplementation(libs.composeSupportSnapshot)
+        androidTestImplementation(libs.kaspressoSnapshot)
+        androidTestImplementation(libs.composeSupportSnapshot)
+    } else {
+        testImplementation(projects.kaspresso)
+        testImplementation(projects.composeSupport)
+        androidTestImplementation(projects.kaspresso)
+        androidTestImplementation(projects.composeSupport)
+    }
+
     androidTestImplementation(libs.androidXTestRunner)
     androidTestImplementation(libs.junit)
     androidTestImplementation(libs.composeUiTestJunit)
 
-    testImplementation(projects.kaspresso)
-    testImplementation(projects.composeSupport)
     testImplementation(libs.androidXTestRunner)
     testImplementation(libs.junit)
     testImplementation(libs.composeUiTestJunit)

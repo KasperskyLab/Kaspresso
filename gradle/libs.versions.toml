@@ -12,8 +12,14 @@ androidXTest = "1.5.0"
 testOrchestrator = "1.4.2"
 lifecycle = "2.5.1"
 thirdPartyReport = "0.17.798"
+kaspressoSnapshotVersion = "1.5.1-SNAPSHOT"
 
 [libraries]
+# kaspresso snapshots for release checks
+kaspressoSnapshot = { module =  "com.kaspersky.android-components:kaspresso", version.ref = "kaspressoSnapshotVersion" }
+allureSupportSnapshot = { module =  "com.kaspersky.android-components:kaspresso-allure-support", version.ref = "kaspressoSnapshotVersion" }
+composeSupportSnapshot = { module =  "com.kaspersky.android-components:kaspresso-compose-support", version.ref = "kaspressoSnapshotVersion" }
+
 # plugins
 kotlinPlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 androidPlugin = "com.android.tools.build:gradle:7.2.2"
