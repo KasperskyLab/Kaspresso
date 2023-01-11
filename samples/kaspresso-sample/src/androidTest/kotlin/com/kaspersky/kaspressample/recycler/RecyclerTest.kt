@@ -12,11 +12,14 @@ class RecyclerTest : TestCase() {
     }.after {
     }.run {
         RecyclerScreen {
-            recycler {
-                scrollTo(15)
-                scrollToEnd()
-                scrollToStart()
-            }
+            recycler { scrollTo(15) }
+            element14 { isDisplayed() }
+
+            recycler { scrollToEnd() }
+            element29 { isDisplayed() }
+
+            recycler { scrollToStart() }
+            element0 { isDisplayed() }
         }
     }
 }
