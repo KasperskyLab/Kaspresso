@@ -1,7 +1,9 @@
 package com.kaspersky.kaspressample.continuously_tests
 
+import android.Manifest
 import android.os.Build
 import androidx.test.ext.junit.rules.activityScenarioRule
+import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.screen.ContinuouslyDialogScreen
 import com.kaspersky.kaspressample.screen.ContinuouslyScreen
@@ -16,6 +18,12 @@ class ContinuouslyTest : TestCase() {
     companion object {
         private const val FAKE_MAX_DELAY_MS: Long = 5_000
     }
+
+    @get:Rule
+    val runtimePermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
+        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        Manifest.permission.READ_EXTERNAL_STORAGE
+    )
 
     @get:Rule
     val activityRule = activityScenarioRule<MainActivity>()
