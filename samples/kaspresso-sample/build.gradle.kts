@@ -42,9 +42,10 @@ dependencies {
     androidTestImplementation(libs.junit)
 
     // kaspresso
-    if (hasProperty("snapshotTesting")) {
-        androidTestImplementation(libs.kaspressoSnapshot)
-        testImplementation(libs.kaspressoSnapshot)
+    if (hasProperty("kaspresso.snapshotVersion")) {
+        val kaspressoVersion = property("kaspresso.snapshotVersion")
+        testImplementation("com.kaspersky.android-components:kaspresso:$kaspressoVersion")
+        androidTestImplementation("com.kaspersky.android-components:kaspresso:$kaspressoVersion")
     } else {
         androidTestImplementation(projects.kaspresso)
         testImplementation(projects.kaspresso)

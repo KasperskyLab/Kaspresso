@@ -21,9 +21,10 @@ dependencies {
     implementation(libs.multidex)
 
     // kaspresso
-    if (hasProperty("snapshotTesting")) {
-        androidTestImplementation(libs.kaspressoSnapshot)
-        androidTestImplementation(libs.allureSupportSnapshot)
+    if (hasProperty("kaspresso.snapshotVersion")) {
+        val kaspressoVersion = property("kaspresso.snapshotVersion")
+        androidTestImplementation("com.kaspersky.android-components:kaspresso:$kaspressoVersion")
+        androidTestImplementation("com.kaspersky.android-components:kaspresso-allure-support:$kaspressoVersion")
     } else {
         androidTestImplementation(projects.kaspresso)
         androidTestImplementation(projects.allureSupport)

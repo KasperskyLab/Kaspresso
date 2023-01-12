@@ -2,7 +2,13 @@
 
 name: Snapshot Checks
 
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      kaspressoVersion:
+        description: 'Kaspresso Version (for example 1.5.1-SNAPSHOT)'
+        required: true
+        type: string
 
 jobs:
   snapshot-check:
@@ -21,4 +27,4 @@ jobs:
           distribution: 'adopt'
           java-version: 11
       - name: Assemble projects
-        run: ./gradlew -PsnapshotTesting=true assembleDebugAndroidTest
+        run: ./gradlew -Pkaspresso.snapshotVersion=${{ inputs.kaspressoVersion }} assembleDebugAndroidTest

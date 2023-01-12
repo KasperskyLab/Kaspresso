@@ -53,11 +53,12 @@ dependencies {
     implementation(libs.composeRuntimeLiveData)
 
     // kaspresso
-    if (hasProperty("snapshotTesting")) {
-        testImplementation(libs.kaspressoSnapshot)
-        testImplementation(libs.composeSupportSnapshot)
-        androidTestImplementation(libs.kaspressoSnapshot)
-        androidTestImplementation(libs.composeSupportSnapshot)
+    if (hasProperty("kaspresso.snapshotVersion")) {
+        val kaspressoVersion = property("kaspresso.snapshotVersion")
+        testImplementation("com.kaspersky.android-components:kaspresso:$kaspressoVersion")
+        testImplementation("com.kaspersky.android-components:kaspresso-compose-support:$kaspressoVersion")
+        androidTestImplementation("com.kaspersky.android-components:kaspresso:$kaspressoVersion")
+        androidTestImplementation("com.kaspersky.android-components:kaspresso-compose-support:$kaspressoVersion")
     } else {
         testImplementation(projects.kaspresso)
         testImplementation(projects.composeSupport)
