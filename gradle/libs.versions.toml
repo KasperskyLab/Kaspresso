@@ -12,10 +12,8 @@ androidXTest = "1.5.0"
 testOrchestrator = "1.4.2"
 lifecycle = "2.5.1"
 thirdPartyReport = "0.17.798"
-kaspressoSnapshotVersion = "1.5.1-SNAPSHOT"
 
 [libraries]
-
 # plugins
 kotlinPlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 androidPlugin = "com.android.tools.build:gradle:7.2.2"
