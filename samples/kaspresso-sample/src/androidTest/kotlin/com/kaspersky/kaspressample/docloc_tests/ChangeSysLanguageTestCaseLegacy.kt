@@ -1,8 +1,10 @@
 package com.kaspersky.kaspressample.docloc_tests
 
+import android.Manifest
 import android.content.Intent
 import android.provider.Settings
 import androidx.test.ext.junit.rules.activityScenarioRule
+import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspresso.testcases.api.testcase.DocLocScreenshotTestCase
 import org.junit.Rule
@@ -18,6 +20,12 @@ class ChangeSysLanguageTestCaseLegacy : DocLocScreenshotTestCase(
     locales = "en,es-US,pt-BR,ru",
     changeSystemLocale = true
 ) {
+
+    @get:Rule
+    val runtimePermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
+        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        Manifest.permission.READ_EXTERNAL_STORAGE
+    )
 
     @get:Rule
     val activityRule = activityScenarioRule<MainActivity>()

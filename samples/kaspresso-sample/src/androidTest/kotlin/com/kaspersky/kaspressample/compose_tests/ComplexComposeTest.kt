@@ -1,6 +1,8 @@
 package com.kaspersky.kaspressample.compose_tests
 
+import android.Manifest
 import androidx.test.ext.junit.rules.activityScenarioRule
+import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.external_screens.UiComposeDialog1
 import com.kaspersky.kaspressample.external_screens.UiComposeDialog2
@@ -11,6 +13,12 @@ import org.junit.Rule
 import org.junit.Test
 
 class ComplexComposeTest : TestCase() {
+
+    @get:Rule
+    val runtimePermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
+        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        Manifest.permission.READ_EXTERNAL_STORAGE
+    )
 
     @get:Rule
     val activityRule = activityScenarioRule<MainActivity>()
