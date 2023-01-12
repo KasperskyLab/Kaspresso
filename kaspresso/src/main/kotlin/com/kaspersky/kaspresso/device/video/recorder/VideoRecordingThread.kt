@@ -67,6 +67,9 @@ class VideoRecordingThread(
                 "Failed to start video recording with respect to resolution supported by codec. Using native resolution. " +
                         "NOTE: not all devices support native resolution video recording: https://developer.android.com/studio/command-line/adb.html#screenrecord"
             )
+            ex.message?.let { logger.e(it) }
+            logger.e(ex.stackTraceToString())
+
             startVideoRecordingWithNativeResolution()
         }
     }
