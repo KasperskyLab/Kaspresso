@@ -31,7 +31,7 @@ class DeviceLanguageSampleTest : TestCase() {
     @Test
     fun languageSampleTest() {
         before {
-            default = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
+            default = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 device.targetContext.resources.configuration.locales[0]
             } else {
                 device.targetContext.resources.configuration.locale
