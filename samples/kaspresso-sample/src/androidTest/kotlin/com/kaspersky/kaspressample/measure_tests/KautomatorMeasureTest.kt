@@ -48,7 +48,7 @@ class KautomatorMeasureTest : TestCase(
                 RANGE.forEach { _ ->
                     button1 {
                         click()
-                        hasText(device.targetContext.getString(R.string.measure_fragment_text_button_1).uppercase())
+                        hasText(device.targetContext.getString(R.string.measure_fragment_text_button_1))
                     }
                 }
             }
@@ -59,7 +59,7 @@ class KautomatorMeasureTest : TestCase(
                 RANGE.forEach { index ->
                     button2 {
                         click()
-                        hasText(device.targetContext.getString(R.string.measure_fragment_text_button_2).uppercase())
+                        hasText(device.targetContext.getString(R.string.measure_fragment_text_button_2))
                     }
                     textView {
                         hasText(

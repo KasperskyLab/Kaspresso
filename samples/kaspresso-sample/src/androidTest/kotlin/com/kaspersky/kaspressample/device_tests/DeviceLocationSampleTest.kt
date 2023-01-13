@@ -1,6 +1,7 @@
 package com.kaspersky.kaspressample.device_tests
 
 import android.Manifest
+import android.content.Context
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
@@ -54,7 +55,7 @@ class DeviceLocationSampleTest : TestCase() {
     fun locationSampleTest() {
         before {
             device.location.enableGps()
-            manager = device.targetContext.getSystemService(LocationManager::class.java)
+            manager = device.targetContext.getSystemService(Context.LOCATION_SERVICE) as LocationManager
         }.after {
             device.location.enableGps()
         }.run {

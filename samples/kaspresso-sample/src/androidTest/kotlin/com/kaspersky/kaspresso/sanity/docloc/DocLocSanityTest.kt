@@ -1,5 +1,6 @@
 package com.kaspersky.kaspresso.sanity.docloc
 
+import android.os.Build
 import androidx.test.ext.junit.rules.activityScenarioRule
 import com.kaspersky.kaspressample.screen.SimpleScreen
 import com.kaspersky.kaspressample.simple.SimpleActivity
@@ -10,9 +11,9 @@ import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.screenshot.Tes
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.testcases.api.testcase.DocLocScreenshotTestCase
 import io.github.kakaocup.kakao.screen.Screen
-import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
+import org.junit.Assume
 import org.junit.Rule
 import org.junit.Test
 import java.io.File
@@ -43,18 +44,21 @@ class DocLocSanityTest : DocLocScreenshotTestCase(
         testRootDirsProvider = resourcesRootDirsProvider
     }
 ) {
-    @After
-    fun after() {
-        checkSanity()
-        // cleanUpScreenshotsDir()
-    }
 
     @get:Rule
     val activityRule = activityScenarioRule<SimpleActivity>()
 
     @ScreenShooterTest
     @Test
-    fun test() = run {
+    fun test() = before {
+        Assume.assumeTrue(
+            "Due to the bug in the UiAutomation this test doesn't work and API <= 22",
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
+        )
+    }.after {
+        checkSanity()
+        cleanUpScreenshotsDir()
+    }.run {
         step("1. Launch activity") {
             activityRule.scenario.onActivity { // Test that screenshot shooter works in app's main thread
                 captureScreenshot("1. Simple screen")

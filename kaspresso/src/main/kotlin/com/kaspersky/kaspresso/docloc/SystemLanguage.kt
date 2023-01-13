@@ -52,6 +52,10 @@ internal class SystemLanguage(
         }
         val attemptToGrantPermissionResult = hackPermissions.grant(context.packageName, Manifest.permission.CHANGE_CONFIGURATION)
         if (!attemptToGrantPermissionResult) {
+            hackPermissions.grantThroughAdb(context.packageName, Manifest.permission.CHANGE_CONFIGURATION)
+        }
+
+        if (PackageManager.PERMISSION_GRANTED != context.checkPermission(Manifest.permission.CHANGE_CONFIGURATION, Process.myPid(), Process.myUid())) {
             throw DocLocException(
                 "SystemLanguage: The attempt to grant Manifest.permission.CHANGE_CONFIGURATION for SystemLanguage failed"
             )
