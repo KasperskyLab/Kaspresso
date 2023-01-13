@@ -201,7 +201,9 @@ check_android_21_task:
     ./gradlew -PCI=true connectedDebugAndroidTest
   always:
     stop_logcat_script:
-      adb logcat -c
+      if [[ $(adb devices | awk 'NR>1 {print $1}') =~ "emulator.*" ]]; then
+        adb logcat -c
+      fi
     pull_artifacts_script:
       adb exec-out sh -c "cd /sdcard && tar cf - Documents" > artifacts.tar
     logs_artifacts:
