@@ -714,7 +714,8 @@ data class Kaspresso(
             )
             if (!::hackPermissions.isInitialized) hackPermissions = HackPermissionsImpl(
                 libLogger,
-                instrumentalDependencyProviderFactory.getComponentProvider<HackPermissionsImpl>(instrumentation)
+                instrumentalDependencyProviderFactory.getComponentProvider<HackPermissionsImpl>(instrumentation),
+                adbServer
             )
             if (!::exploit.isInitialized) exploit = ExploitImpl(
                 libLogger,

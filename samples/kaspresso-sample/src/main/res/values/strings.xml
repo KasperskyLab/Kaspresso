@@ -53,7 +53,7 @@
 
     <!-- Flakysafety sample test -->
     <string name="common_flaky_final_textview" translatable="false">TextView</string>
-    <string name="common_flaky_final_button" translatable="false">Button</string>
+    <string name="common_flaky_final_button" translatable="false">BUTTON</string>
     <string name="common_flaky_start_1" translatable="false">1</string>
     <string name="common_flaky_start_2" translatable="false">2</string>
     <string name="common_flaky_start_3" translatable="false">3</string>
