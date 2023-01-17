@@ -1,6 +1,16 @@
 <resources>
     <string name="app_name">Tutorial</string>
 
+    <!-- Main screen -->
+    <string name="main_screen_title">Tutorial</string>
+    <string name="simple_test_button" translatable="false">Simple test</string>
+    <string name="internet_availability_button" translatable="false">Internet availability</string>
+    <string name="notification_activity_button" translatable="false">notification activity</string>
+    <string name="login_activity_button" translatable="false">Login activity</string>
+    <string name="make_call_activity_button" translatable="false">Make call activity</string>
+    <string name="flaky_activity_button" translatable="false">Flaky activity</string>
+    <string name="list_activity_button" translatable="false">List activity</string>
+
     <!-- Simple Activity screen -->
     <string name="simple_activity_default_title">Default title</string>
     <string name="simple_activity_input_hint">input text</string>

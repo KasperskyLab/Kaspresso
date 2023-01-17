@@ -13,4 +13,10 @@ object LoginScreen : KScreen<LoginScreen>() {
     val inputUsername = KEditText { withId(R.id.input_username) }
     val inputPassword = KEditText { withId(R.id.input_password) }
     val loginButton = KButton { withId(R.id.login_btn) }
+
+    fun waitForScreen() {
+        inputUsername.isVisible()
+        inputPassword.isVisible()
+        loginButton.isVisible()
+    }
 }

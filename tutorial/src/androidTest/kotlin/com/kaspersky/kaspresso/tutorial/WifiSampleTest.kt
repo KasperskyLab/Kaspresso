@@ -5,6 +5,7 @@ import com.kaspersky.kaspresso.device.exploit.Exploit
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import com.kaspersky.kaspresso.tutorial.screen.MainScreen
 import com.kaspersky.kaspresso.tutorial.screen.WifiScreen
+import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 
@@ -13,6 +14,7 @@ class WifiSampleTest : TestCase() {
     @get:Rule
     val activityRule = activityScenarioRule<MainActivity>()
 
+    @Ignore("Bad test for example. Good test in WifiSampleWithStepsTest")
     @Test
     fun test() {
         MainScreen {
