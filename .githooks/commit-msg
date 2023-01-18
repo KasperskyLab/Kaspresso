@@ -4,7 +4,7 @@ set -eo pipefail
 
 gitMessageFile="$1"
 gitMessage=$(cat $gitMessageFile)
-gitMessagePattern="^(Revert \")?(ISSUE-\d+|TECH):\s\w+.*"
+gitMessagePattern="^(Revert|Merge|ISSUE-\d+:|TECH:).*"
 currentBranch="$(git rev-parse --abbrev-ref HEAD)"
 
 if ! grep -qP "$gitMessagePattern" "$gitMessageFile"; then
