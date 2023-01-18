@@ -755,7 +755,8 @@ data class Kaspresso(
                     videoRecorder = VideoRecorderImpl(
                         instrumentalDependencyProviderFactory.getComponentProvider<VideoRecorderImpl>(instrumentation),
                         libLogger,
-                        videoParams
+                        videoParams,
+                        instrumentation
                     )
                 )
             }

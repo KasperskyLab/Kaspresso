@@ -26,8 +26,8 @@
 
     <!-- Measure fragment screen -->
     <string name="measure_fragment_title" translatable="false">Measure Fragment</string>
-    <string name="measure_fragment_text_button_1" translatable="false">Button 1</string>
-    <string name="measure_fragment_text_button_2" translatable="false">Button 2</string>
+    <string name="measure_fragment_text_button_1" translatable="false">BUTTON 1</string>
+    <string name="measure_fragment_text_button_2" translatable="false">BUTTON 2</string>
     <string name="measure_fragment_text_textview" translatable="false">Button_2 clicks count = </string>
     <string name="measure_fragment_text_edittext" translatable="false">Some text</string>
     <string name="measure_fragment_text_checkbox" translatable="false">Checkbox</string>
