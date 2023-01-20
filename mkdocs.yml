@@ -88,7 +88,6 @@ nav:
       - Работа с Android permissions: Tutorial/Android_permissions.md
       - RecyclerView: Tutorial/Recyclerview.md
       - Логирование и скриншоты: Tutorial/Logger_and_screenshots.md
-      - LayoutId и ViewClass: Tutorial/LayoutId_and_viewClass.md
       - Screenshot-тесты: Tutorial/Screenshot_tests.md
       - Работа с WebView: Tutorial/WebView.md
       - Секции init и transform: Tutorial/Init_and_transform.md
