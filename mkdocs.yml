@@ -4,7 +4,7 @@ repo_name: Kaspresso
 edit_uri: tree/main/docs/content
 docs_dir: 'docs'
 remote_branch: gh-pages
-language: en
+language: ru
 
 theme:
   favicon: kaspresso.png
@@ -38,7 +38,7 @@ theme:
   search_index_only: true
 
   # Default values, taken from mkdocs_theme.yml
-  language: en
+  language: ru
   font:
     text: Roboto
     code: Roboto Mono
@@ -54,6 +54,18 @@ theme:
     - navigation.top
     - search.suggest
     - search.highlight
+
+plugins:
+  - i18n:
+      default_language: ru
+      docs_structure: suffix
+      languages:
+        ru:
+          name: Russian
+          build: true
+        en:
+          name: English
+          build: true
 
 nav:
   - Home:
@@ -132,8 +144,8 @@ markdown_extensions:
 extra:
   alternate:
     - name: English
-      link: /en/
+      link: /Kaspresso/en/
       lang: en
-    - name: Russian
-      link: /ru/
+    - name: Русский
+      link: /Kaspresso/ru/
       lang: ru
