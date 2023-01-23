@@ -76,28 +76,28 @@ nav:
     - Breaking changes: Home/Breaking-changes.md
     - Contribution guide: Home/Contribution_guide.md
   - Tutorial:
-      - Введение: Tutorial/index.md
-      - Скачиваем проект и Android studio: Tutorial/Download_Kaspresso_project_and_Android_studio.md
-      - Пишем первый автотест с Kaspresso: Tutorial/Writing_simple_test.md
-      - Выполнение adb-команд: Tutorial/Выполнение adb-команд.md
-      - Wifi_sample_test: Tutorial/Wifi_sample_test.md
-      - Выделение секций и шагов: Tutorial/Выделение секций и шагов.md
-      - Вынесение дублирующихся шагов в Scenario: Tutorial/Вынесение дублирующихся шагов в Scenario.md
-      - UiAutomator. Тестирование за рамками приложения: Tutorial/UiAutomator.md
-      - flakySafely: Tutorial/FlakySafely.md
-      - Работа с Android permissions: Tutorial/Android_permissions.md
-      - RecyclerView: Tutorial/Recyclerview.md
-      - Логирование и скриншоты: Tutorial/Logger_and_screenshots.md
-      - Screenshot-тесты: Tutorial/Screenshot_tests.md
-      - Работа с WebView: Tutorial/WebView.md
-      - Секции init и transform: Tutorial/Init_and_transform.md
-      - Методы compose и continuously: Tutorial/Compose_and_continuously.md
-      - Custom views: Tutorial/Customviews.md
-      - Интерсепторы и режимы работы: Tutorial/Interceptors.md
-      - Compose support: Tutorial/Compose_support.md
-      - Работа с Allure: Tutorial/Allure.md
-      - E2e и функциональные тесты с моками: Tutorial/E2e_and_functional_tests.md
-      - Поддержка Robolectic: Tutorial/Robolectic.md
+      - 1. Введение: Tutorial/index.md
+      - 2. Скачиваем проект и Android studio: Tutorial/Download_Kaspresso_project_and_Android_studio.md
+      - 3. Пишем первый автотест с Kaspresso: Tutorial/Writing_simple_test.md
+      - 4. Выполнение adb-команд: Tutorial/Выполнение adb-команд.md
+      - 5. Wifi_sample_test: Tutorial/Wifi_sample_test.md
+      - 6. Выделение секций и шагов: Tutorial/Выделение секций и шагов.md
+      - 7. Вынесение дублирующихся шагов в Scenario: Tutorial/Вынесение дублирующихся шагов в Scenario.md
+      - 8. UiAutomator. Тестирование за рамками приложения: Tutorial/UiAutomator.md
+      - 9. flakySafely: Tutorial/FlakySafely.md
+      - 10. Работа с Android permissions: Tutorial/Android_permissions.md
+      - 11. RecyclerView: Tutorial/Recyclerview.md
+      - 12. Логирование и скриншоты: Tutorial/Logger_and_screenshots.md
+      - 13. Screenshot-тесты: Tutorial/Screenshot_tests.md
+      - 14. Работа с WebView: Tutorial/WebView.md
+      - 15. Секции init и transform: Tutorial/Init_and_transform.md
+      - 16. Методы compose и continuously: Tutorial/Compose_and_continuously.md
+      - 17. Custom views: Tutorial/Customviews.md
+      - 18. Интерсепторы и режимы работы: Tutorial/Interceptors.md
+      - 19. Compose support: Tutorial/Compose_support.md
+      - 20. Работа с Allure: Tutorial/Allure.md
+      - 21. E2e и функциональные тесты с моками: Tutorial/E2e_and_functional_tests.md
+      - 22. Поддержка Robolectic: Tutorial/Robolectic.md
   - Wiki:
       - Introduction: Wiki/index.md
       - PageObject in Kaspresso: Wiki/Page_object_in_Kaspresso.md
