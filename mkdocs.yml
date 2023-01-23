@@ -66,6 +66,13 @@ plugins:
         en:
           name: English
           build: true
+      nav_translations:
+        en:
+          Home: Home
+          About Kaspresso: About Kaspresso
+        ru:
+          Home: Главная
+          About Kaspresso: О Kaspresso
 
 nav:
   - Home:
