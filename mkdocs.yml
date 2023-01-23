@@ -27,7 +27,7 @@ theme:
 
 
   name: 'material'
-#  custom_dir: ../mkdocs-material/material
+  #  custom_dir: ../mkdocs-material/material
 
   # 404 page
   static_templates:
@@ -42,7 +42,7 @@ theme:
   font:
     text: Roboto
     code: Roboto Mono
- # favicon: assets/favicon.png
+  # favicon: assets/favicon.png
 
   features:
     - tabs
@@ -70,18 +70,111 @@ plugins:
         en:
           Home: Home
           About Kaspresso: About Kaspresso
+          Kaspresso in articles: Kaspresso in articles
+          Kasspresso in videos: Kasspresso in videos
+          Our users: Our users
+          Breaking changes: Breaking changes
+          Contribution guide: Contribution guide
+          Tutorial: Tutorial
+          1. Введение: 1. Введение
+          2. Скачиваем проект и Android studio: 2. Скачиваем проект и Android studio
+          3. Пишем первый автотест с Kaspresso: 3. Пишем первый автотест с Kaspresso
+          4. Выполнение adb-команд: 4. Выполнение adb-команд
+          5. Wifi_sample_test: 5. Wifi_sample_test
+          6. Выделение секций и шагов: 6. Выделение секций и шагов
+          7. Вынесение дублирующихся шагов в Scenario: 7. Вынесение дублирующихся шагов в Scenario
+          8. UiAutomator. Тестирование за рамками приложения: 8. UiAutomator. Тестирование за рамками приложения
+          9. flakySafely: 9. flakySafely
+          10. Работа с Android permissions: 10. Работа с Android permissions
+          11. RecyclerView: 11. RecyclerView
+          12. Логирование и скриншоты: 12. Логирование и скриншоты
+          13. Screenshot-тесты: 13. Screenshot-тесты
+          14. Работа с WebView: 14. Работа с WebView
+          15. Секции init и transform: 15. Секции init и transform
+          16. Методы compose и continuously: 16. Методы compose и continuously
+          17. Custom views: 17. Custom views
+          18. Интерсепторы и режимы работы: 18. Интерсепторы и режимы работы
+          19. Compose support: 19. Compose support
+          20. Работа с Allure: 20. Работа с Allure
+          21. E2e и функциональные тесты с моками: 21. E2e и функциональные тесты с моками
+          22. Поддержка Robolectic: 22. Поддержка Robolectic
+          Wiki: Wiki
+          Introduction: Introduction
+          PageObject in Kaspresso: PageObject in Kaspresso
+          Espresso as the basis: Espresso as the basis
+          Migrate from Espresso, Kakao or KAutomator: Migrate from Espresso, Kakao or KAutomator
+          Supported Android UI-elements: Supported Android UI-elements
+          View matchers, actions and assertions: View matchers, actions and assertions
+          Kautomator. Wrapper over UI Automator: Kautomator. Wrapper over UI Automator
+          Executing adb commands: Executing adb commands
+          Screenshot tests: Screenshot tests
+          Kaspresso configuration: Kaspresso configuration
+          Working with Android OS: Working with Android OS
+          Kaspresso with Robolectric: Kaspresso with Robolectric
+          Kaspresso with Allure: Kaspresso with Allure
+          E2e and Functional tests. All in one: E2e and Functional tests. All in one
+          Jetpack Compose in Kaspresso: Jetpack Compose in Kaspresso
+          Issues: Issues
+          Found an issue?: Found an issue?
+          Storage issues: Storage issues
         ru:
-          Home: Главная
-          About Kaspresso: О Kaspresso
-
+          Home: Home
+          About Kaspresso: About Kaspresso
+          Kaspresso in articles: Kaspresso in articles
+          Kasspresso in videos: Kasspresso in videos
+          Our users: Our users
+          Breaking changes: Breaking changes
+          Contribution guide: Contribution guide
+          Tutorial: Tutorial
+          1. Введение: 1. Введение
+          2. Скачиваем проект и Android studio: 2. Скачиваем проект и Android studio
+          3. Пишем первый автотест с Kaspresso: 3. Пишем первый автотест с Kaspresso
+          4. Выполнение adb-команд: 4. Выполнение adb-команд
+          5. Wifi_sample_test: 5. Wifi_sample_test
+          6. Выделение секций и шагов: 6. Выделение секций и шагов
+          7. Вынесение дублирующихся шагов в Scenario: 7. Вынесение дублирующихся шагов в Scenario
+          8. UiAutomator. Тестирование за рамками приложения: 8. UiAutomator. Тестирование за рамками приложения
+          9. flakySafely: 9. flakySafely
+          10. Работа с Android permissions: 10. Работа с Android permissions
+          11. RecyclerView: 11. RecyclerView
+          12. Логирование и скриншоты: 12. Логирование и скриншоты
+          13. Screenshot-тесты: 13. Screenshot-тесты
+          14. Работа с WebView: 14. Работа с WebView
+          15. Секции init и transform: 15. Секции init и transform
+          16. Методы compose и continuously: 16. Методы compose и continuously
+          17. Custom views: 17. Custom views
+          18. Интерсепторы и режимы работы: 18. Интерсепторы и режимы работы
+          19. Compose support: 19. Compose support
+          20. Работа с Allure: 20. Работа с Allure
+          21. E2e и функциональные тесты с моками: 21. E2e и функциональные тесты с моками
+          22. Поддержка Robolectic: 22. Поддержка Robolectic
+          Wiki: Wiki
+          Introduction: Introduction
+          PageObject in Kaspresso: PageObject in Kaspresso
+          Espresso as the basis: Espresso as the basis
+          Migrate from Espresso, Kakao or KAutomator: Migrate from Espresso, Kakao or KAutomator
+          Supported Android UI-elements: Supported Android UI-elements
+          View matchers, actions and assertions: View matchers, actions and assertions
+          Kautomator. Wrapper over UI Automator: Kautomator. Wrapper over UI Automator
+          Executing adb commands: Executing adb commands
+          Screenshot tests: Screenshot tests
+          Kaspresso configuration: Kaspresso configuration
+          Working with Android OS: Working with Android OS
+          Kaspresso with Robolectric: Kaspresso with Robolectric
+          Kaspresso with Allure: Kaspresso with Allure
+          E2e and Functional tests. All in one: E2e and Functional tests. All in one
+          Jetpack Compose in Kaspresso: Jetpack Compose in Kaspresso
+          Issues: Issues
+          Found an issue?: Found an issue?
+          Storage issues: Storage issues
 nav:
   - Home:
-    - About Kaspresso: index.md
-    - Kaspresso in articles: Home/Kaspresso-in-articles.md
-    - Kasspresso in videos: Home/Kaspresso-in-videos.md
-    - Our users: Home/Kaspresso users.md
-    - Breaking changes: Home/Breaking-changes.md
-    - Contribution guide: Home/Contribution_guide.md
+      - About Kaspresso: index.md
+      - Kaspresso in articles: Home/Kaspresso-in-articles.md
+      - Kasspresso in videos: Home/Kaspresso-in-videos.md
+      - Our users: Home/Kaspresso users.md
+      - Breaking changes: Home/Breaking-changes.md
+      - Contribution guide: Home/Contribution_guide.md
   - Tutorial:
       - 1. Введение: Tutorial/index.md
       - 2. Скачиваем проект и Android studio: Tutorial/Download_Kaspresso_project_and_Android_studio.md
@@ -122,8 +215,8 @@ nav:
       - E2e and Functional tests. All in one: Wiki/E2e_and_Functional_tests.md
       - Jetpack Compose in Kaspresso: Wiki/Jetpack_Compose.md
   - Issues:
-    - Found an issue?: Issues/index.md
-    - Storage issues: Issues/Storage_issue.md
+      - Found an issue?: Issues/index.md
+      - Storage issues: Issues/Storage_issue.md
 
 markdown_extensions:
   - admonition
