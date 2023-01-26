@@ -84,6 +84,10 @@
             android:name=".sharedtest.SharedTestActivity"
             android:label="@string/main_screen_shared_test"/>
 
+        <activity
+            android:name=".systemlanguage.ChangeLocaleActivity"
+            android:label="@string/main_screen_change_language_mid_test_button"/>
+
         <service
             android:name=".device.DeviceSampleAccessibilityService"
             android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"

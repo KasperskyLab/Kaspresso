@@ -27,10 +27,13 @@ check_android_task:
   install_emulator_script:
     # x86_64 somehow affect the "call" test
     sdkmanager --install "system-images;android-30;google_apis;x86"
-  create_avd_script:
-    echo no | avdmanager create avd --force
-    -n emulator
-    -k "system-images;android-30;google_apis;x86"
+  create_avd_script: |
+    echo no | avdmanager create avd --force -n emulator -k "system-images;android-30;google_apis;x86"
+    echo skin.name=768x1280 >> ~/.android/avd/emulator.avd/config.ini
+    echo skin.path=_no_skin >> ~/.android/avd/emulator.avd/config.ini
+    echo hw.lcd.density=320 >> ~/.android/avd/emulator.avd/config.ini
+    echo hw.lcd.height=1280 >> ~/.android/avd/emulator.avd/config.ini
+    echo hw.lcd.width=768 >> ~/.android/avd/emulator.avd/config.ini
   start_avd_background_script:
     while ! [[ $(adb devices | awk 'NR>1 {print $1}') =~ "emulator.*" ]]; do sleep 5 && $ANDROID_HOME/emulator/emulator
     -avd emulator
