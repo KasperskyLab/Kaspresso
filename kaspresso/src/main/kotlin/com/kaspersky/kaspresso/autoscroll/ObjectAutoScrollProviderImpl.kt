@@ -62,7 +62,7 @@ class ObjectAutoScrollProviderImpl(
             } else {
                 interaction.reFindUiObject()
             }
-        } while (scrollable.scrollForward())
+        } while (scrollable.exists() && scrollable.scrollForward())
 
         /**
          * Scrolls to the beginning and looks for the given view. Invokes the action if the view was found.
@@ -74,7 +74,7 @@ class ObjectAutoScrollProviderImpl(
             } else {
                 interaction.reFindUiObject()
             }
-        } while (scrollable.scrollBackward())
+        } while (scrollable.exists() && scrollable.scrollBackward())
 
         logger.i("UiObject autoscroll did not help. Throwing exception.")
         throw cachedError
