@@ -83,16 +83,16 @@ check_android_33_task:
     cpu: 8
     memory: 24G
   # xfce4 somehow helps to pass "Geolocation" test
-#  install_de_script: |
-#    export DEBIAN_FRONTEND=noninteractive
-#    apt-get update
-#    apt-get install xfce4 -y
-#    apt-get purge -y pm-utils xscreensaver*
-#    apt-get install xvfb -y
-#  start_de_background_script: |
-#    Xvfb :99 -screen 0 1000x1000x16 &
-#    sleep 5
-#    startxfce4
+  install_de_script: |
+    export DEBIAN_FRONTEND=noninteractive
+    apt-get update
+    apt-get install xfce4 -y
+    apt-get purge -y pm-utils xscreensaver*
+    apt-get install xvfb -y
+  start_de_background_script: |
+    Xvfb :99 -screen 0 1000x1000x16 &
+    sleep 5
+    startxfce4
   start_adb_server_background_script:
     java -jar artifacts/adbserver-desktop.jar || true
   accept_licenses_script:
@@ -156,16 +156,16 @@ check_android_21_task:
     cpu: 8
     memory: 24G
   # xfce4 somehow helps to pass "Geolocation" test
-#  install_de_script: |
-#    export DEBIAN_FRONTEND=noninteractive
-#    apt-get update
-#    apt-get install xfce4 -y
-#    apt-get purge -y pm-utils xscreensaver*
-#    apt-get install xvfb -y
-#  start_de_background_script: |
-#    Xvfb :99 -screen 0 1000x1000x16 &
-#    sleep 5
-#    startxfce4
+  install_de_script: |
+    export DEBIAN_FRONTEND=noninteractive
+    apt-get update
+    apt-get install xfce4 -y
+    apt-get purge -y pm-utils xscreensaver*
+    apt-get install xvfb -y
+  start_de_background_script: |
+    Xvfb :99 -screen 0 1000x1000x16 &
+    sleep 5
+    startxfce4
   start_adb_server_background_script:
     java -jar artifacts/adbserver-desktop.jar || true
   accept_licenses_script:
