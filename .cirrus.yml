@@ -173,6 +173,7 @@ check_android_21_task:
   install_emulator_script:
     # x86_64 somehow affect the "call" test
     sdkmanager --install "system-images;android-21;google_apis;x86"
+    sdkmanager emulator
   create_avd_script:
     echo no | avdmanager create avd --force
     -n emulator
