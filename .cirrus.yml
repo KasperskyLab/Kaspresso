@@ -173,11 +173,11 @@ check_android_21_task:
   install_emulator_script: |
     # x86_64 somehow affect the "call" test
     sdkmanager emulator
-    sdkmanager --install "system-images;android-21;google_apis;x86"
+    sdkmanager --install "system-images;android-21;default;x86"
   create_avd_script:
     echo no | avdmanager create avd --force
     -n emulator
-    -k "system-images;android-21;google_apis;x86"
+    -k "system-images;android-21;default;x86"
   start_avd_background_script:
     while ! [[ $(adb devices | awk 'NR>1 {print $1}') =~ "emulator.*" ]]; do sleep 5 && $ANDROID_HOME/emulator/emulator
     -avd emulator
