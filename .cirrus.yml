@@ -170,10 +170,10 @@ check_android_21_task:
     java -jar artifacts/adbserver-desktop.jar || true
   accept_licenses_script:
     echo yes | sdkmanager --licenses
-  install_emulator_script:
+  install_emulator_script: |
     # x86_64 somehow affect the "call" test
-    sdkmanager --install "system-images;android-21;google_apis;x86"
     sdkmanager emulator
+    sdkmanager --install "system-images;android-21;google_apis;x86"
   create_avd_script:
     echo no | avdmanager create avd --force
     -n emulator
