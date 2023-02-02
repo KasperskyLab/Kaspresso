@@ -14,6 +14,7 @@
     <string name="main_screen_shared_test">Shared Test with Robolectric sample</string>
     <string name="main_screen_device_button">Device Sample</string>
     <string name="main_screen_full_device_button">Full Window Device Sample</string>
+    <string name="main_screen_change_language_mid_test_button">Change locale mid-test</string>
 
     <!-- Auto scroll fallback screen -->
     <string name="autoscroll_scrollview_with_padding_title">Auto scroll ScrollView with padding</string>
@@ -87,6 +88,9 @@
     <!-- Idle waiting fragment screen -->
     <string name="idlewaiting_fragment_title" translatable="false">Wait for idle Fragment</string>
     <string name="idlewaiting_fragment_text_edittext" translatable="false">Some text</string>
+
+    <!--  Change locale fragment  -->
+    <string name="change_locale_screen_text">For en locale the value is 123</string>
 
     <string name="large_text" translatable="false">
         "Material is the metaphor.\n\n"

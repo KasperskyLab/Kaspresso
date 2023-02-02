@@ -1,10 +1,10 @@
 package com.kaspersky.kaspressample.screen
 
-import io.github.kakaocup.kakao.text.KButton
-import io.github.kakaocup.kakao.text.KTextView
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.R
 import com.kaspersky.kaspresso.screens.KScreen
+import io.github.kakaocup.kakao.text.KButton
+import io.github.kakaocup.kakao.text.KTextView
 
 object MainScreen : KScreen<MainScreen>() {
 
@@ -24,6 +24,8 @@ object MainScreen : KScreen<MainScreen>() {
     val composeButton = KButton { withId(R.id.activity_main_complex_compose_sample_button) }
 
     val idleWaitingButton = KButton { withId(R.id.activity_main_idlewaiting_sample_button) }
+
+    val changeLocaleButton = KButton { withId(R.id.activity_main_change_locale_mid_test_button) }
 
     val descriptionText = KTextView { withId(R.id.activity_main_title) }
 }
