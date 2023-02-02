@@ -16,7 +16,7 @@ import org.junit.Test
 class ContinuouslyTest : TestCase() {
 
     companion object {
-        private const val FAKE_MAX_DELAY_MS: Long = 5_000
+        private const val FAKE_MAX_DELAY_MS: Long = 15_000
     }
 
     @get:Rule
