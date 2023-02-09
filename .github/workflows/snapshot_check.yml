@@ -28,3 +28,5 @@ jobs:
           java-version: 11
       - name: Assemble projects
         run: ./gradlew -Pkaspresso.snapshotVersion=${{ inputs.kaspressoVersion }} assembleDebugAndroidTest
+      - name: Check legal documents
+        run: ./gradlew -Pkaspresso.snapshotVersion=${{ inputs.kaspressoVersion }} checkLegalDocuments

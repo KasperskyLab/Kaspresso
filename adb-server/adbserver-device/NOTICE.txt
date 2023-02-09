@@ -1,4 +1,4 @@
-﻿﻿This file contains information about dependencies which are used in the Kaspresso/adb-server.
+﻿﻿This file contains information about dependencies which are used in the Kaspresso/adbserver-device. This file is made for Kaspresso release 1.5.1
 
 
 org.jetbrains.kotlin:kotlin-stdlib 1.7.10
