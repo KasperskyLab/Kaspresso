@@ -88,21 +88,10 @@ plugins:
           10. Работа с Android permissions: 10. Работа с Android permissions
           11. RecyclerView: 11. RecyclerView
           12. Логирование и скриншоты: 12. Логирование и скриншоты
-          13. Screenshot-тесты: 13. Screenshot-тесты
-          14. Работа с WebView: 14. Работа с WebView
-          15. Секции init и transform: 15. Секции init и transform
-          16. Методы compose и continuously: 16. Методы compose и continuously
-          17. Custom views: 17. Custom views
-          18. Интерсепторы и режимы работы: 18. Интерсепторы и режимы работы
-          19. Compose support: 19. Compose support
-          20. Работа с Allure: 20. Работа с Allure
-          21. E2e и функциональные тесты с моками: 21. E2e и функциональные тесты с моками
-          22. Поддержка Robolectic: 22. Поддержка Robolectic
           Wiki: Wiki
           Introduction: Introduction
           PageObject in Kaspresso: PageObject in Kaspresso
           Espresso as the basis: Espresso as the basis
-          Migrate from Espresso, Kakao or KAutomator: Migrate from Espresso, Kakao or KAutomator
           Supported Android UI-elements: Supported Android UI-elements
           View matchers, actions and assertions: View matchers, actions and assertions
           Kautomator. Wrapper over UI Automator: Kautomator. Wrapper over UI Automator
@@ -112,7 +101,6 @@ plugins:
           Working with Android OS: Working with Android OS
           Kaspresso with Robolectric: Kaspresso with Robolectric
           Kaspresso with Allure: Kaspresso with Allure
-          E2e and Functional tests. All in one: E2e and Functional tests. All in one
           Jetpack Compose in Kaspresso: Jetpack Compose in Kaspresso
           Issues: Issues
           Found an issue?: Found an issue?
