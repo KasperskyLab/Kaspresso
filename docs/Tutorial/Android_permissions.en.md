@@ -1,52 +1,50 @@
-# TODO: добавить английский перевод
+﻿# Test apps that require permissions
 
-# Тестирование приложений, требующих разрешений
+In this tutorial, we will learn how to work with permissions ([Permissions](https://developer.android.com/guide/topics/permissions/overview)).
 
-В этом уроке мы научимся работать с разрешениями ([Permissions]( https://developer.android.com/guide/topics/permissions/overview)). 
+Often, in order to work correctly, an application needs access to certain functions of the mobile device: to the camera, voice recording, making calls, sending SMS messages, etc. The application can access and use them only if the user gives permission to do so.
 
-Часто для корректной работы приложению нужен доступ к определенным функциям мобильного устройства: к камере, записи голоса, совершению звонков, отправке SMS-сообщений и т.д. Приложение может получить доступ к ним и использовать только в том случае, если пользователь даст на это разрешение.
+On older devices below the sixth version of Android (API level 23), such permissions were requested at the time the application was installed, and if the user installed it, it was considered that he agreed with all the permissions, and the application would be able to use all the necessary functions. This was unsafe, as it opened up the possibility for unscrupulous developers to gain access to the microphone, camera, calls and other important components without the user noticing and use it for their own purposes.
 
-На старых устройствах ниже шестой версии Android (API level 23) такие разрешения запрашивались в момент установки приложения и, если пользователь установил его, то считалось, что он согласен со всеми разрешениями, и приложение будет иметь возможность использовать все необходимые функции. Это было небезопасно, так как открывало возможность недобросовестным разработчикам незаметно для пользователя получать доступ к микрофону, камере, звонкам и другим важным компонентам и использовать в своих целях. 
+For this reason, on newer versions, the so-called "dangerous" permissions began to be requested not at the time of installation, but while the application was running. Now the user will clearly see a dialog with a proposal to allow or deny a request to use some functionality.
 
-По этой причине на более новых версиях так называемые «опасные» разрешения стали запрашиваться не в момент установки, а во время работы приложения. Теперь пользователь явно будет видеть диалог с предложением разрешить или отклонить запрос на использование какой-то функциональности.
-
-Для примера запустите приложение `tutorial` на одной из последних версий Android (API 23 и выше) и нажмите кнопку `Make Call Activity` 
+For example, run the `tutorial` application on one of the latest versions of Android (API 23 and above) and press the `Make Call Activity` button
 
 <img src="../images/permissions/main_screen.png" alt="Main Screen" width="300"/>
 
-У вас откроется экран, на котором есть два элемента – поле ввода и кнопка. В поле ввода можно указать какой-то номер телефона и кликнуть на кнопку `Make Call` для осуществления вызова
+You will see a screen on which there are two elements - an input field and a button. In the input field, you can specify some phone number and click on the `Make Call` button to make a call
 
 <img src="../images/permissions/make_call_screen.png" alt="Make call screen" width="300"/>
 
-Совершение звонков – одна из функций, для работы которой требуется запросить разрешение у пользователя. Поэтому у вас отобразится диалог с предложением позволить приложению управлять звонками, на котором есть кнопки «Разрешить» и «Отклонить»
+Making calls is one of the features that requires permission from the user to work. Therefore, you will see a dialog asking you to allow the application to control calls, which has "Allow" and "Reject" buttons.
 
 <img src="../images/permissions/request_permission_1.png" alt="Request permissions" width="300"/>
 
-Если мы нажмем “Allow”, то начнется вызов абонента по тому номеру, который вы указали в поле ввода
+If we click “Allow”, then the call will begin to the subscriber at the number that you specified in the input field
 
 <img src="../images/permissions/call_1.png" alt="Calling" width="300"/>
 
-При следующем открытии приложения разрешение больше не будет запрашиваться, оно сохраняется на устройстве. Если вы хотите отозвать разрешение, то можно это сделать в настройках. Для этого перейдите в раздел приложения, найдите нужное вам и заходите в раздел `Permissions`
+The next time you open the application, the permission will no longer be requested, it is saved on the device. If you want to revoke permission, you can do so in the settings. To do this, go to the application section, find the one you need and go to the `Permissions` section
 
 <img src="../images/permissions/deny_permission_settings.png" alt="Deny permission" width="300"/>
 
-Здесь вы сможете зайти в любое разрешение и изменить значение с `Allow` на `Deny` или наоборот.
+Here you can go to any permission and change the value from `Allow` to `Deny` or vice versa.
 
-Второй способ, как это можно сделать – при помощи adb shell команды: 
+The second way to do this is with the adb shell command:
 
 `adb shell pm revoke package_name permission_name`
 
-Для нашего приложения команда будет выглядеть так:
+For our application, the command will look like this:
 
 `adb shell pm revoke com.kaspersky.kaspresso.tutorial android.permission.CALL_PHONE`
 
-После выполнения команды приложение снова запросит разрешение при следующей попытке совершить звонок.
+After executing the command, the application will ask for permission again the next time you try to make a call.
 
-## Создаем тест
+## Create a test
 
-При тестировании приложений, которое требует разрешений, есть определенные особенности. Давайте напишем тест на данный экран.
+When testing applications that require permissions, there are certain considerations. Let's write a test for this screen.
 
-Первым делом создадим Page Object экрана с кнопкой `Make Call`
+First of all, let's create a Page Object of the screen with the `Make Call` button
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial.screen
@@ -65,7 +63,8 @@ object MakeCallActivityScreen : KScreen<MakeCallActivityScreen>() {
     val makeCallButton = KButton { withId(R.id.make_call_btn) }
 }
 ```
-Чтобы попасть на этот экран, нужно будет в `MainActivity` кликнуть по соответствующей кнопке, добавляем эту кнопку в `MainScreen` 
+
+To get to this screen, you will need to click on the corresponding button in `MainActivity`, add this button to `MainScreen`
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial.screen
@@ -87,7 +86,7 @@ object MainScreen : KScreen<MainScreen>() {
 }
 ```
 
-Можем создавать тест. Давайте пока просто откроем экран совершения звонка, введем какой-то номер и кликнем по кнопке
+We can create a test. For now, let's just open the screen for making a call, enter some number and click on the button
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -134,17 +133,18 @@ class MakeCallActivityTest : TestCase() {
 }
 ```
 
-Запускаем тест. Тест пройден успешно.
+Let's run the test. Test passed successfully.
 
-В зависимости от того, дали вы разрешение или нет, у вас может отобразиться диалог с запросом разрешения на совершение звонков.
+Depending on whether you have given permission or not, you may see a dialog asking permission to make calls.
 
-На данном этапе мы проверили работу нашего экрана, что есть возможность ввести номер и кликнуть на кнопку, но никак не проверили, происходит вызов по введенному номеру или нет. Для того чтобы проверить, происходит ли в данный момент вызов можно использовать `AudioManager`, делается это следующим образом:
+At this stage, we have checked the operation of our screen, that it is possible to enter a number and click on the button, but we have not checked in any way whether a call is being made to the entered number or not. To check if a call is currently in progress, you can use `AudioManager`, this is done as follows:
 
 ```kotlin
 val manager = device.context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
 Assert.assertTrue(manager.mode == AudioManager.MODE_IN_CALL)
 ```
-Можем добавить эту проверку отдельным шагом:
+
+We can add this check in a separate step:
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -198,17 +198,17 @@ class MakeCallActivityTest : TestCase() {
 ```
 
 !!! info
-     Перед запуском теста удалите приложение с устройства или отзовите разрешения при помощи adb shell команды. Также убедитесь, что вы запускаете тест на устройстве с API 23 и выше
+Before running the test, remove the application from the device or revoke permissions using the adb shell command. Also make sure you are running the test on a device with API 23 and higher.
 
-Запускаем тест. Тест провален.
+Let's run the test. Test failed.
 
-Это произошло, потому что после клика по кнопке у пользователя было запрошено разрешение. Никто этого разрешения не дал, и следующий экран открыт не был. 
+This happened because after clicking on the button, the user was asked for permission. No one gave this permission, and the next screen was not opened.
 
-## Тестирование при помощи TestRule
+## Testing with the TestRule
 
-Есть несколько вариантов решения проблемы. Первый вариант – использовать `GrantPermissionRule`. Суть этого способа заключается в том, что мы создаем список разрешений, которые будут автоматически разрешены на тестируемом устройстве.
+There are several options for solving the problem. The first option is to use `GrantPermissionRule`. The essence of this method is that we create a list of permissions that will be automatically allowed on the device under test.
 
-Для этого перед тестовым методом мы добавляем новое правило:
+To do this, we add a new rule before the test method:
 
 ```kotlin
 @get:Rule
@@ -217,7 +217,7 @@ val grantPermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
 )
 ```
 
-В методе `grant` в круглых скобках мы через запятую перечисляем все требуемые разрешения, в данном случае оно всего одно, поэтому оставляем в таком виде. Тогда весь код теста будет выглядеть так:
+In the `grant` method, in parentheses, we list all the required permissions separated by commas, in this case there is only one, so we leave it as it is. Then the whole test code will look like this:
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -279,19 +279,19 @@ class MakeCallActivityTest : TestCase() {
 ```
 
 !!! info
-      Перед запуском теста не забудьте отозвать все разрешения у приложения или удалить его с устройства.
+Remember to revoke all permissions from the app or remove it from the device before running the test.
 
-Запускаем. В некоторых случаях этот тест будет пройдет успешно, а в некоторых – нет. Причину мы сейчас разберем.
+Let's run the test. In some cases, this test will pass, and in others it will not. We will now analyze the reason.
 
-## FlakySafely для assertions
+## FlakySafely for assertions
 
-Вспомните урок про метод `flakySafely`. Там мы говорили о том, что в случае неудачи все проверки в Kaspresso будут запускаться заново в течение определенного таймаута.
+Remember the lesson about the `flakySafely` method. There we talked about the fact that in case of failure, all checks in Kaspresso will be restarted within a certain timeout.
 
-В нашем случае мы стартуем звонок и следующим шагом проверяем, что телефон действительно звонит. Делаем это мы через метод `Assert.assertTrue(…)`. Иногда устройство успевает осуществить набор номера до этой проверки, а иногда нет. Кажется, что в такой ситуации должен отрабатывать метод `flakySafely` и проверка должна быть проведена заново в течение десяти секунд, но почему-то этого не происходит.
+In our case, we start the call and the next step is to check that the phone is really ringing. We do this through the `Assert.assertTrue(…)` method. Sometimes the device manages to dial the number before this check, and sometimes it does not. It seems that in such a situation the `flakySafely` method should work and the check should be carried out again within ten seconds, but for some reason this does not happen.
 
-Дело в том, что все проверки view-элементов в Kaspresso (isVisible, isClickable…) «под капотом» используют метод `flakySafely`, но если мы сами вызываем различные проверки через `assert`, то `flakySafely` использован не будет и, если проверка выполнится неудачно, то тест сразу завершится с ошибкой.
+The fact is that all checks of view-elements in Kaspresso (isVisible, isClickable ...) "under the hood" use the `flakySafely` method, but if we ourselves call various checks through `assert`, then `flakySafely` will not be used and if the check fails, the test will immediately finished with failure.
 
-Такие случаи – это еще один пример, когда стоит явно вызывать `flakySafely`
+Cases like this are another example of when you should explicitly call `flakySafely`
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -353,13 +353,13 @@ class MakeCallActivityTest : TestCase() {
 }
 
 ```
-Сейчас тест работает, но в нем есть несколько проблем. 
+Now the test works, but it has several problems.
 
-Во-первых, после окончания теста на устройстве все еще продолжается вызов абонента. Давайте добавим секции `before` и `after` и в секции, которая выполняется после теста, завершим вызов. Это можно сделать при помощи следующего кода:  `device.phone.cancelCall("111")`. Работает этот метод посредством adb-команд, поэтому не забывайте запускать adb-сервер. 
+Firstly, after the end of the test, the call to the subscriber is still ongoing on the device. Let's add the `before` and `after` sections and in the section that runs after the test, complete the call. This can be done with the following code: `device.phone.cancelCall("111")`. This method works through adb commands, so do not forget to start the adb server.
 
-Теоретически, вы могли бы сброс звонка вынести в отдельный step и запускать его последним шагом, не вынося в секцию after. Но это было бы плохим решением, поскольку в случае, если какой-то шаг завершится с ошибкой, и тест будет провален, то на устройстве будет продолжен вызов и никогда не сбросится. Преимущество секции after в том, что код внутри этого блока выполнится независимо от результата теста.
+Theoretically, you could put the call reset in a separate step and run it as the last step without moving it to the after section. But this would be a bad decision, because if any step fails and the test fails, then the device will continue the call and never reset. The advantage of the after section is that the code inside this block will be executed regardless of the result of the test.
 
-Чтобы не дублировать один и тот же номер в двух местах, давайте вынесем его в отдельную переменную, тогда код теста будет выглядеть так:
+In order not to duplicate the same number in two places, let's move it to a separate variable, then the test code will look like this:
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -426,25 +426,25 @@ class MakeCallActivityTest : TestCase() {
 }
 ```
 
-Теперь после выполнения теста звонок завершается. 
+Now, after the test is completed, the call ends.
 
-Вторая проблема – при использовании `GrantPermissionRule` мы можем проверить приложение только в состоянии, когда пользователь дал разрешение. При этом есть вероятность, что разработчики не предусмотрели вариант, когда запрос разрешения был отклонен, тогда результат может быть неожиданным вплоть до того, что приложение будет крашиться. Необходимо проверять и такие сценарии, но использовать для этого `GrantPermissionRule` не получится, так как в этом случае разрешение всегда будет одобрено, и в тестах мы никогда не узнаем, какое будет поведение, если запрос отклонить.
+The second problem is that when using `GrantPermissionRule` we can only check the application in the state where the user has given the permission. At the same time, it is possible that the developers did not foresee the option when the permission request was rejected, then the result may be unexpected up to the point that the application will crash. We need to check these scenarios too, but using `GrantPermissionRule` for this will not work, because in this case the permission will always be approved, and in tests we will never know what the behavior will be if the request is denied.
 
-## Тестирование при помощи Device.Permissions
+## Testing with Device.Permissions
 
-Один из вариантов решения проблемы - взаимодействовать с диалогом при помощи KAutomator, предварительно найдя все необходимые элементы интерфейса, но это не слишком удобно, и в Kaspresso был добавлен намного более удобный способ - `Device.Permissions`. Он позволяет очень просто проверять диалоги разрешений, а также соглашаться с ними или отклонять. 
+One of the solutions to the problem is to interact with the dialog using KAutomator, having previously found all the necessary interface elements, but this is not very convenient, and a much more convenient way has been added to the Kaspresso - `Device.Permissions`. It makes it very easy to check permission dialogs, as well as accept or reject them.
 
-Поэтому вместо `Rule` мы будем использовать объект `Permissions`, который можно получить у `Device`. Давайте сделаем это в отдельном классе, чтобы у вас сохранились оба варианта тестов. Класс, в котором мы сейчас работаем, переименуем в `MakeCallActivityRuleTest`. 
+Therefore, instead of `Rule` we will use the `Permissions` object, which can be obtained from `Device`. Let's do this in a separate class so that you can keep both test cases. The class in which we are currently working will be renamed to `MakeCallActivityRuleTest`.
 
-Чтобы это сделать, кликните правой кнопкой на название файла и выберите `Refactor` -> `Rename`
+To do this, right-click on the file name and select `Refactor` -> `Rename`
 
- <img src="../images/permissions/rename.png" alt="Rename" />
+<img src="../images/permissions/rename.png" alt="Rename" />
 
-И введите новое название класса:
+And enter a new class name:
 
 <img src="../images/permissions/rename_2.png" alt="Rename" />
 
-И создаем новый класс `MakeCallActivityDevicePermissionsTest`. Код можно скопировать из текущего теста, за исключением `GrantPermissionRule`
+And create a new class `MakeCallActivityDevicePermissionsTest`. Code can be copied from the current test, except for `GrantPermissionRule`
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -505,11 +505,11 @@ class MakeCallActivityDevicePermissionsTest : TestCase() {
 }
 ```
 
-Если мы запустим тест сейчас, то он завершится неудачно, т.к. мы не дали разрешений на совершение звонков. Давайте добавим еще один step, в котором дадим соответствующее разрешение через `device.permissions`. После указания объекта можно поставить точку и посмотреть, какие у него есть методы:
+If we run the test now, it will fail because we do not have needed permission to make calls. Let's add one more step in which we will give the appropriate permission through `device.permissions`. After specifying an object, you can put a dot and see what methods it has:
 
 <img src="../images/permissions/device_perm_methods.png" alt="Device permission methods"/>
 
-Есть возможность проверить, отображается ли диалог, а также отклонить или дать разрешение.
+It is possible to check if the dialog is displayed, as well as to reject or grant permission.
 
 ```kotlin
 step("Accept permission") {
@@ -518,12 +518,12 @@ step("Accept permission") {
 }
 ```
 
-Таким образом мы убедимся, что диалог отображается и дадим согласие на осуществление звонков. 
+In this way, we will make sure that the dialog is displayed and agree to making calls.
 
 !!! info
-     Напоминаем, что диалог будет показан на версии Android API 23 и выше, как выполнять эти тесты на более ранних версиях, мы разберем в конце этого урока
+As a reminder, the dialog will be shown on Android API version 23 and above, how to run these tests on earlier versions, we will explain at the end of this tutorial.
 
-Тут мы дважды написали `device.permissions`, давайте немного сократим код, применив функцию [apply]( https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/apply.html). А также проверку через `assert` давайте вынесем в метод `flakySafely`. Тогда весь код теста будет выглядеть так:
+Here we have written `device.permissions` twice, let's shorten the code a bit by using the [apply](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/apply.html) function. And let's move the check through `assert` to the `flakySafely` method. Then the whole test code will look like this:
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -593,11 +593,11 @@ class MakeCallActivityDevicePermissionsTest : TestCase() {
 
 ```
 
-Запускаем. Тест пройден успешно.
+Let's run the test. Test passed successfully.
 
-Теперь мы можем с легкостью написать тест на то, что звонок не осуществляется, если разрешение дано не было. Для этого вместо `allowViaDialog` нужно указать `denyViaDialog`. 
+Now we can easily write a test for the fact that the call is not made if permission was not given. To do this, instead of `allowViaDialog` you need to specify `denyViaDialog`.
 
-Также нужно изменить проверки в самом тесте, и не забудьте в новом методе удалить код из функции `after`, так как после отклонения разрешения звонок осуществлен не будет, и после теста сбрасывать звонок больше не нужно.
+You also need to change the checks in the test itself, and do not forget to remove the code from the `after` function in the new method, since after the permission is denied, the call will not be made, and after the test, you no longer need to reset the call.
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -708,16 +708,15 @@ class MakeCallActivityDevicePermissionsTest : TestCase() {
 }
 ```
 
+## Testing against different API versions
 
-## Тестирование на разных версиях API
+On modern versions of the Android OS (API 23 and higher), permissions are requested from the user during the application through a dialog. But in earlier versions, they were requested at the time of installation of the application, and during operation it was considered that the user agreed with all the required permissions.
 
-На современных версиях ОС Android (API 23 и выше) разрешения у пользователя запрашиваются во время работы приложения посредством диалога. Но в более ранних версиях они запрашивались в момент установки приложения, а во время работы считалось, что пользователь согласился со всеми требуемыми разрешениями.
+Therefore, if you run the test on devices with API below version 23, then there will be no request for permissions, so the dialog check is not required.
 
-Поэтому, если вы запускаете тест на устройствах с API ниже 23-ой версии, то никакого запроса разрешений не будет, соответственно проверка диалога не требуется. 
+In the test using `GrantPermissionRule` no changes are required, on older versions the permission is always there, so this annotation will not affect the test in any way. But in the test using `device.permissions`, changes need to be made, because here we are explicitly checking the operation of the dialog.
 
-В тесте с использованием `GrantPermissionRule` никаких изменений не требуется, на старых версиях разрешение всегда есть, поэтому данная аннотация на работе теста никак не скажется. Но в тесте с использованием `device.permissions` изменения сделать необходимо, так как здесь мы явно проверяем работу диалога.
-
-Вариантов здесь несколько. Во-первых, на таких устройствах нет смысла проверять работу приложения, если разрешение было отклонено, поэтому данный тест нужно просто пропускать. Для этого можно воспользоваться аннотацией `@SuppressSdk`. Тогда код метода `checkCallIfPermissionDenied` изменится на:
+There are several options here. Firstly, on such devices it makes no sense to test the application if the permission was denied, so this test should simply be skipped. To do this, you can use the `@SuppressSdk` annotation. Then the code of the `checkCallIfPermissionDenied` method will change to:
 
 ```kotlin
 @SdkSuppress(minSdkVersion = 23)
@@ -763,9 +762,10 @@ fun checkCallIfPermissionDenied() = run {
     }
 }
 ```
-Теперь данный тест будет выполняться только на новых версиях ОС Android, а на старых будет пропускаться.
 
-Второй вариант решения проблемы – пропускать какие-то определенные шаги или заменять их другими в зависимости от уровня API. Например, в методе `checkSuccessCall` на старых девайсах мы можем пропустить шаг с проверкой диалога, для этого использовать такой код:
+Now this test will be performed only on new versions of the Android OS, and on older versions it will be skipped.
+
+The second solution for the problem is to skip certain steps or replace them with others, depending on the API level. For example, in the `checkSuccessCall` method on old devices, we can skip the step with checking the dialog, for this use the following code:
 
 ```kotlin
 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -779,9 +779,10 @@ if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
     }
 }
 ```
-Остальную часть кода можно не трогать и тест будет успешно прогоняться, как на новых, так и на старых устройствах, просто в одном случае разрешение будет запрошено, в другом – нет.
 
-Финальный код теста теперь будет выглядеть так:
+The rest of the code can be left untouched and the test will run successfully on both new and old devices, just in one case permission will be requested, in the other it won't.
+
+The final test code will now look like this:
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -898,17 +899,16 @@ class MakeCallActivityDevicePermissionsTest : TestCase() {
 
 ```
 
+## Summary
 
-## Итог
+In this tutorial, we have looked at two options for working with Permissions: `GrantPermissionRule` and `device.permissions`.
 
-В этом уроке мы рассмотрели два варианта работы с Permissions: `GrantPermissionRule` и `device.permissions`. 
-
-Также мы узнали, что второй вариант предпочтительнее по ряду причин:
+We also learned that the second option is preferable for a number of reasons:
 
 <ol>
-<li>Объект Permissions дает возможность проверять отображение диалога с запросом разрешения</li>
-<li>При использовании Permissions мы можем проверить поведение приложения не только при принятии разрешения, но также и при его отклонении</li> 
-<li>Тесты с применением GrantPermissionRule не будут работать, если разрешение было ранее отклонено. Потребуется переустановка приложения либо отмена выданных ранее разрешений через adb shell команду</li> 
-<li>Если во время выполнения теста отозвать разрешение при помощи adb shell команды, то в случае использования объекта Permissions тест будет работать корректно, а в случае использования GrantPermissionRule произойдет краш</li> 
+<li>The Permissions object makes it possible to test whether a dialog requesting permission is displayed</li>
+<li>When using Permissions, we can test the application's behavior not only when accepting a permission, but also when denying it</li>
+<li>Tests with the GrantPermissionRule will fail if the permission was previously denied. You will need to reinstall the application or cancel previously issued permissions through the adb shell command </li>
+<li>If you revoke the permission using the adb shell command while the test is running, then the test will work correctly if the Permissions object is used, but a crash will occur if the GrantPermissionRule is used</li>
 </ol>
 
