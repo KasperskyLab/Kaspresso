@@ -11,7 +11,7 @@ Android Studio используется для разработки програ
 
 ## Скачиваем проект Kaspresso
 
-Для загрузки проекта необходимо, чтобы на вашем компьютера была установлена система контроля версий GIT. Загрузить GIT и узнать о нем подробнее вы можете [здесь](https://git-scm.com/)
+Для загрузки проекта необходимо, чтобы на вашем компьютера была установлена система контроля версий GIT. Загрузить GIT и узнать о нем подробнее вы можете [здесь](https://git-scm.com/).
 
 Когда GIT будет установлен, то вы сможете скачать проект. Для этого переходим по [ссылке](https://github.com/KasperskyLab/Kaspresso).
 
@@ -29,17 +29,17 @@ Android Studio используется для разработки програ
 
 <img src="../images/Download_Kaspresso_project_and_Android_studio/new_project_from_vcs.png" alt="Get Project from VCS"/>
 
-В открывшемся окне введите скопированный URL проекта, выберите папку, в которой будет размещен Kaspresso и нажмите clone
+В открывшемся окне введите скопированный URL проекта, выберите папку, в которой будет размещен Kaspresso и нажмите clone.
 
 <img src="../images/Download_Kaspresso_project_and_Android_studio/clone_project.png" alt="Clone Project"/>
 
-## Настройка эмулятора
+## Настройка эмулятора.
 
-В верхнем меню Android Studio выбираем Tools -> Device Manager
+В верхнем меню Android Studio выбираем 'Tools' -> 'Device Manager'
 
 <img src="../images/Download_Kaspresso_project_and_Android_studio/Tools_Device_Manager.png" alt="Tools Device Manager"/>
 
-На экране появися вкладка управления эмуляторами и реальными устройствами. Нажимаем Create Device
+На экране появися вкладка управления эмуляторами и реальными устройствами. Нажимаем 'Create Device':
 
 <img src="../images/Download_Kaspresso_project_and_Android_studio/Create_device.png" alt="Create Device"/>
 
@@ -47,27 +47,27 @@ Android Studio используется для разработки програ
 
 <img src="../images/Download_Kaspresso_project_and_Android_studio/Select_hardware.png" alt="Select hardware"/>
 
-На этом экране можно задать характеристики "железа", эмуляцию которого хотим получить. В секции "1" можно выбрать телефон, планшет, телевизор и так далее. Нас интересует Телефон. В секции "2" - конкретную модель. В рамках туториала нет разницы, что выбрать. Выбираем Pixel 6. Нажимаем Next и попадаем на окно выбора образа операционной системы:
+На этом экране можно задать характеристики "железа", эмуляцию которого хотим получить. В секции "1" можно выбрать телефон, планшет, телевизор и так далее. Нас интересует Телефон. В секции "2" - конкретную модель. В рамках туториала нет разницы, что выбрать. Выбираем 'Pixel 6'. Нажимаем 'Next' и попадаем на окно выбора образа операционной системы:
 
 <img src="../images/Download_Kaspresso_project_and_Android_studio/System_Image.png" alt="System image"/>
 
-Этот экран более важен в регулярной работе - здесь выбираем, какую версию Android установить на эмулятор. Давайте выберем R. Нажимаем на иконку скачать справа от буквы R, проходим процесс установки и ожидаем.
+Этот экран более важен в регулярной работе - здесь выбираем, какую версию Android установить на эмулятор. Давайте выберем 'R'. Нажимаем на иконку скачать справа от буквы 'R', проходим процесс установки и ожидаем.
 
 <img src="../images/Download_Kaspresso_project_and_Android_studio/SDK_component_isntaller.png" alt="SDK_component_isntaller"/>
 
-Когда процесс установки будет окончен нажимаем кнопку Finish:
+Когда процесс установки будет окончен нажимаем кнопку 'Finish':
 
 <img src="../images/Download_Kaspresso_project_and_Android_studio/SDK_component_installer_finish.png" alt="SDK_component_isntaller_finish"/>
 
-Выбираем установленную версию R и нажимает Next:
+Выбираем установленную версию 'R' и нажимает 'Next':
 
 <img src="../images/Download_Kaspresso_project_and_Android_studio/SDK_component_installer_next.png" alt="SDK_component_installer_next"/>
 
-На экране ниже можно сменить название создаваеого эмулятора, чтоб их было легко отличать между собой. Дефолтное значение для наших целей подходит. Нажимаем Finish.
+На экране ниже можно сменить название создаваеого эмулятора, чтоб их было легко отличать между собой. Дефолтное значение для наших целей подходит. Нажимаем 'Finish'.
 
 <img src="../images/Download_Kaspresso_project_and_Android_studio/Device_name.png" alt="Device_name"/>
 
-Устройство настроено и готово к работе. Запускаем его по иконке Play правее названия девайса:
+Устройство настроено и готово к работе. Запускаем его по иконке 'Play' правее названия девайса:
 
 <img src="../images/Download_Kaspresso_project_and_Android_studio/Launch_device.png" alt="Launch_device"/>
 
