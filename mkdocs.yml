@@ -77,7 +77,7 @@ plugins:
           Contribution guide: Contribution guide
           Tutorial: Tutorial
           1. Введение: 1. Введение
-          2. Скачиваем проект и Android studio: 2. Скачиваем проект и Android studio
+          2. Скачиваем проект и Android studio: 2. Download Kaspresso project and Android studio
           3. Пишем первый автотест с Kaspresso: 3. Пишем первый автотест с Kaspresso
           4. Выполнение adb-команд: 4. Выполнение adb-команд
           5. Wifi_sample_test: 5. Wifi_sample_test
@@ -85,7 +85,7 @@ plugins:
           7. Вынесение дублирующихся шагов в Scenario: 7. Вынесение дублирующихся шагов в Scenario
           8. UiAutomator. Тестирование за рамками приложения: 8. UiAutomator. Тестирование за рамками приложения
           9. flakySafely: 9. flakySafely
-          10. Работа с Android permissions: 10. Работа с Android permissions
+          10. Работа с Android permissions: 10. Working with Android permissions
           11. RecyclerView: 11. RecyclerView
           12. Логирование и скриншоты: 12. Логирование и скриншоты
           Wiki: Wiki
