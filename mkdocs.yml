@@ -76,7 +76,7 @@ plugins:
           Breaking changes: Breaking changes
           Contribution guide: Contribution guide
           Tutorial: Tutorial
-          1. Введение: 1. Введение
+          1. Введение: 1. Introduction
           2. Скачиваем проект и Android studio: 2. Download Kaspresso project and Android studio
           3. Пишем первый автотест с Kaspresso: 3. Пишем первый автотест с Kaspresso
           4. Выполнение adb-команд: 4. Выполнение adb-команд
