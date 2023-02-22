@@ -1,24 +1,22 @@
-# TODO: добавить английский перевод
+# Logging and screenshots
 
-# Логирование и скриншоты
+In this tutorial, we will learn how to identify the causes of failing tests by adding additional logs and screenshots.
 
-В этом уроке мы научимся выявлять причины падающих тестов путем добавления дополнительных логов и скриншотов.
-
-Вспомним пример, который уже использовался в одном из предыдущих уроков. Открываем приложение tutorial 
+Let's recall an example that was already used in one of the previous lessons. Opening the tutorial app 
 
 <img src="../images/logs/main_screen.png" alt="Tutorial main screen" width="300"/>
 
-и кликаем на кнопку `Login Activity`
+and click on the `Login Activity` button
 
 <img src="../images/logs/login_activity.png" alt="Login Activity" width="300"/>
 
-На этом экране можно ввести логин и пароль, и, если они будут корректные, то откроется экран после авторизации. Корректными в данном случае считаются: логин длиной от трех символов, пароль – от шести.
+On this screen, you can enter your login and password, and if they are correct, the screen after authorization will open. In this case, the following are considered correct: a login with a length of three characters, a password - from six.
 
 <img src="../images/logs/after_auth.png" alt="Screen after auth" width="300"/>
 
-## Внешняя система для тестовых данных
+## External system for test data
 
-Мы уже писали тесты для этого экрана, они находятся в классе `LoginActivityTest`
+We have already written tests for this screen, they are in the class `LoginActivityTest`
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -88,23 +86,23 @@ class LoginActivityTest : TestCase() {
 }
 ```
 
-В этом тесте мы сами создаем логин и пароль, с которыми будем авторизоваться. Но бывают случаи, когда данные для теста мы получаем из какой-то внешней системы. Например, в проекте может быть какой-то сервис, который генерирует логин и пароль для входа, возвращает нам, и мы их используем для тестирования.
+In this test, we ourselves create a username and password with which we will log in. But there are times when we get the data for the test from some external system. For example, a project may have some kind of service that generates a login and password for logging in, returns it to us, and we use them for testing.
 
-Давайте смоделируем эту ситуацию. Создадим класс, который возвращает данные для входа – логин и пароль.
+Let's simulate this situation. Let's create a class that returns login data - login and password.
 
-В пакете `com.kaspersky.kaspresso.tutorial` создадим еще один пакет `data`
+Let's create another package `data` in the `com.kaspersky.kaspresso.tutorial` package
 
 <img src="../images/logs/create_package.png" alt="Create package 1"/>
 
 <img src="../images/logs/create_package_2.png" alt="Create package 2"/>
 
-В созданном пакете добавляем класс `TestData`, тип выбираем `Object`
+In the created package, add the `TestData` class, select the type `Object`
 
 <img src="../images/logs/create_class.png" alt="Create class"/>
 
-Как мы уже говорили ранее – здесь мы будем только моделировать ситуацию, когда данные для теста получаем из внешней системы. В созданном классе у нас будет два метода: один из них возвращает логин, другой – пароль. В реальных проектах эти данные мы бы запрашивали с сервера, и менять внутреннюю реализацию возможности у нас бы не было. То есть сейчас мы сами укажем, какие логин и пароль вернет система, но представляем, что для нас это «черный ящик», и мы не знаем, какие значения будут получены.
+As we said earlier, here we will only simulate the situation when we receive data for the test from an external system. In the created class, we will have two methods: one of them returns the login, the other returns the password. In real projects, we would request this data from the server, and we would not have been able to change the internal implementation of the possibility. That is, now we ourselves will indicate which login and password the system will return, but we imagine that this is a “black box” for us, and we do not know what values will be received.
 
-Добавляем в этом классе два метода и пусть они возвращают корректные логин и пароль:
+We add two methods in this class and let them return the correct login and password:
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial.data
@@ -116,7 +114,7 @@ object TestData {
     fun generatePassword(): String = "123456"
 }
 ```
-Теперь давайте создадим отдельный класс теста, в котором будем выполнять проверку успешного логина с помощью данных, полученных от класса `TestData`. Тестовый класс назовем `LoginActivityGeneratedDataTest`. Можем скопировать проверку успешного логина из класса `LoginActivityTest`
+Now let's create a separate test class in which we will check for a successful login using the data received from the `TestData` class. Let's call the test class `LoginActivityGeneratedDataTest`. We can copy the successful login test from the `LoginActivityTest` class
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -152,7 +150,7 @@ class LoginActivityGeneratedDataTest : TestCase() {
 
 ```
 
-Здесь мы используем захардкоженные логин и пароль, давайте получим их из класса `TestData`
+Here we use a hardcoded username and password, let's get them from the `TestData` class
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -190,11 +188,11 @@ class LoginActivityGeneratedDataTest : TestCase() {
 }
 
 ```
-Запускаем. Тест пройден успешно.
+We launch. Test passed successfully.
 
-## Анализ проваленных тестов
+## Analysis of failed tests
 
-Мы проверили, что, если система возвращает корректные данные, то тест проходит успешно. Давайте внесем изменения в класс `TestData`, чтобы он возвращал неверные значения
+We checked that if the system returns correct data, then the test passes. Let's change the `TestData` class so that it returns incorrect values
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial.data
@@ -207,21 +205,21 @@ object TestData {
 }
 
 ```
-Запускаем тест еще раз. На этот раз тест падает. 
+Let's run the test again. This time the test fails. 
 
-Мы уже говорили о том, что в реальных проектах влиять на внешнюю систему мы не можем, и иногда она может возвращать некорректные данные, из-за чего тест будет падать. Если тест упал, то нужно провести анализ и определить, в чем была проблема: в тестах, в неправильно работающем приложении или во внешней системе. Давайте попробуем определить это из логов. Открываем Logcat и фильтруем лог по тэгу `KASPRESSO`
+We have already said that in real projects we cannot influence the external system, and sometimes it can return incorrect data, which will cause the test to fail. If the test fails, then you need to analyze and determine what the problem was: in the tests, in a malfunctioning application, or in an external system. Let's try to determine this from the logs. Open Logcat and filter the log by tag `KASPRESSO`
 
 <img src="../images/logs/logcat.png" alt="Test failed"/>
 
-Что мы отсюда видим? Попытка залогиниться прошла успешно, а проверка на то, что после успешного логина открыт нужный экран – провалилась.
+What do we see from here? The attempt to log in was successful, but the check that the correct screen was opened after a successful login failed.
 
-При этом, отсюда совершенно неясно, почему проблема возникла. Мы не видим, с какими данными была попытка залогиниться, действительно ли они корректные, и непонятно, как решать возникшую проблему. Результат был бы более понятный, если бы в логах содержалась информация – какие конкретно логин и пароль были использованы во время тестирования. 
+At the same time, it is completely unclear from here why the problem arose. We do not see what data was used to log in, whether they are really correct, and it is not clear how to solve the problem that has arisen. The result would be more understandable if the logs contained information - which particular login and password were used during testing. 
 
-## Добавление логов
+## Adding logs
 
-Если нам нужно добавить какую-то свою информацию в логи, то можем использовать объект `testLogger`, у которого необходимо вызвать метод `i` (от слова `info)`, и в качестве параметра передать текст, который нужно залогировать.
+If we need to add some of our information to the logs, we can use the `testLogger` object, on which we need to call the `i` method (from the word `info)`, and pass the text to be logged as a parameter.
 
-Логин и пароль у нас генерируются перед шагом ` step("Try to login with correct username and password")` можем в этом месте вывести в лог сообщение о том, какие именно данные были сгенерированы
+Our login and password are generated before the step ` step("Try to login with correct username and password")` we can display a message in the log at this point about what data was generated
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -243,9 +241,9 @@ class LoginActivityGeneratedDataTest : TestCase() {
         run {
             val username = TestData.generateUsername()
             val password = TestData.generatePassword()
-            
+
             testLogger.i("Generated data. Username: $username, Password: $password")
-            
+
             step("Try to login with correct username and password") {
                 scenario(
                     LoginScenario(
@@ -263,27 +261,27 @@ class LoginActivityGeneratedDataTest : TestCase() {
 
 ```
 
-В этой строчке `testLogger.i("Generated data. Username: $username, Password: $password")
-` мы вызываем метод `i` у объекта `testLogger`, в качестве параметра передаем строку `"Generated data. Username: $username, Password: $password")`, где вместо `$username` и `$password` будут подставлены значения переменных логин и пароль.
+In this line `testLogger.i("Generated data. Username: $username, Password: $password")
+` we call the `i` method on the `testLogger` object, passing the string `"Generated data. Username: $username, Password: $password")` as a parameter, where instead of `$username` and `$password` the values will be substituted login and password variables.
 
 !!! info
-    Подробнее о том, как формировать строку с использованием переменных и методов, можно почитать в [документации]( https://kotlinlang.org/docs/strings.html#string-templates)
+    You can read more about how to form a string using variables and methods in [documentation]( https://kotlinlang.org/docs/strings.html#string-templates)
 
-Давайте запустим тест еще раз и посмотрим логи:
+Let's run the test again and see the logs:
 
 <img src="../images/logs/custom_log.png" alt="Custom Log"/>
 
-После `TEST SECTION` видно наш лог, который выводится с тэгом `KASPRESSO_TEST`. В этом логе видно, что сгенерированные данные некорректные (пароль слишком короткий), а значит тест падает из-за внешней системы, и решать проблему нужно именно в ней. 
+After `TEST SECTION` you can see our log, which is displayed with the `KASPRESSO_TEST` tag. This log shows that the generated data is incorrect (the password is too short), which means that the test fails due to an external system, and the problem needs to be solved in it. 
 
-Если вы не хотите смотреть полностью весь лог, и вас интересуют только сообщения, добавленные вами, то можете отфильтровать журнал по тэгу `KASPRESSO_TEST`
+If you don't want to watch the entire log, and you are only interested in messages added by you, you can filter the log by the tag `KASPRESSO_TEST`
 
 <img src="../images/logs/kaspresso_test_tag.png" alt="Kaspresso test tag"/>
 
-## Скриншоты
+## Screenshots
 
-Логи действительно очень полезны при анализе тестов и поиске ошибок, но бывают случаи, когда гораздо проще найти проблему по скриншотам. Если бы во время теста на каждом шаге сохранялся скриншот, и потом мы могли бы посмотреть их в какой-то папке, то поиск ошибок был бы намного проще.
+Logs are really very useful when analyzing tests and finding bugs, but there are times when it's much easier to find a problem from screenshots. If during the test a screenshot was saved at each step, and then we could look at them in some folder, then finding errors would be much easier.
 
-В Kaspresso есть возможность во время теста делать скриншоты на любом шаге, для этого достаточно вызвать метод `device.screenshots.take("file_name")`. Вместо `file_name` нужно указать название файла скриншота, по которому вы сможете его найти. Давайте в каждый шаг `LoginScenario` мы добавим скриншоты, чтобы потом проанализировать все, что происходило на экране.
+In Kaspresso, it is possible to take screenshots at any step during the test, for this it is enough to call the `device.screenshots.take("file_name")` method. Instead of `file_name`, you need to specify the name of the screenshot file, by which you can find it. Let's add screenshots to each `LoginScenario` step so that we can analyze everything that happened on the screen later.
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -348,7 +346,7 @@ class LoginScenario(
 
 ```
 
-Для того чтобы скриншоты сохранились на устройстве, у приложения должно быть дано разрешение на чтение и запись в файловую систему смартфона. Поэтому в тестовом классе мы дадим соответствующее разрешение через `GrantPermissionRule`
+In order for screenshots to be saved on the device, the application must have permission to read and write to the smartphone's file system. Therefore, in the test class, we will give the appropriate permission through `GrantPermissionRule`
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -397,41 +395,41 @@ class LoginActivityGeneratedDataTest : TestCase() {
 
 ```
 
-Запускаем тест еще раз.
+Let's run the test again.
 
-После выполнения теста перейдите в `Device File Explorer` и откройте папку `sdcard/Documents/screenshots`. Если она у вас не отображается, то кликните правой кнопкой по папке `sdcard` и нажмите `Synchronize`
+After running the test, go to `Device File Explorer` and open the `sdcard/Documents/screenshots` folder. If it is not displayed for you, then right-click on the `sdcard` folder and click `Synchronize`
 
 <img src="../images/logs/screenshots.png" alt="Screenshots"/>
 
-Здесь по скриншотам можно определить, в чем проблема – на этапе установки пароля количество введенных символов – 3
+Here, from the screenshots, you can determine what the problem is - at the stage of setting the password, the number of characters entered is 3
 
 <img src="../images/logs/setup_password.png" alt="Setup password"/>
 
-Так, проанализировав скриншоты, можно определить, какая ошибка возникла в момент проведения тестов.
+So, after analyzing the screenshots, you can determine which error occurred at the time of the tests.
 
 !!! info
-    Один из способов сделать скриншот – вызвать метод `device.uiDevice.takeScreenshot`. Это метод из библиотеки `uiautomator` и использовать его напрямую никогда не следует. 
+    One way to take a screenshot is to call the `device.uiDevice.takeScreenshot` method. This is a method from the `uiautomator` library and should never be used directly. 
 
-    Во-первых, скриншот, сделанный при помощи Kaspresso (`device.screenshots.take`), будет лежать в нужной папке, которую легко найти по названию теста, и файлы для каждого теста и шага будут находиться в своих папках с понятными названиями, а в случае с `uiautomator` находить нужные скриншоты будет проблематично. 
+    Firstly, a screenshot taken with Kaspresso (`device.screenshots.take`) will be in the correct folder, which is easy to find by the name of the test, and the files for each test and step will be in their own folders with understandable names, and in the case of `uiautomator`, finding the right screenshots will be problematic. 
 
-    Во-вторых, в Kaspresso сделано множество удобных доработок по работе со скриншотами таких как: масштабирование, настройка качества фото, полноэкранные скрины (когда весь контент не помещается на экране) и так далее. 
+    Secondly, Kaspresso has made a lot of convenient improvements for working with screenshots, such as scaling, photo quality settings, full-screen screenshots (when all the content does not fit on the screen), and so on. 
 
-    Поэтому для скриншотов всегда используйте только объекты Kaspresso `device.screenshots`.
+    Therefore, for screenshots, always use only the Kaspresso `device.screenshots` objects.
 
-## Настройка Kaspresso.Builder
+## Setting up Kaspresso.Builder
 
-Теоретически, все тесты, которые вы пишете, могут упасть. В таких случаях хотелось бы всегда иметь возможность посмотреть скриншоты, чтобы понять, что пошло не так. Как этого добиться? Как вариант – во все шаги всех тестов добавлять вызов метода, который делает скриншот, но это не слишком удобно.
+Theoretically, all tests you write can fail. In such cases, I would like to always be able to look at screenshots to understand what went wrong. How to achieve this? As an option, add a method call that takes a screenshot to all steps of all tests, but this is not very convenient.
 
-Поэтому в Kaspresso была добавлена возможность настройки параметров теста при создании тестового класса. Для этого в конструктор `TestCase` можно передать объект `Kaspresso.Builder`, который по умолчанию принимает значение `Kaspresso.Builder.simple()`.
+Therefore, Kaspresso has added the ability to configure test parameters when creating a test class. To do this, you can pass the `Kaspresso.Builder` object to the `TestCase` constructor, which by default takes the value `Kaspresso.Builder.simple()`.
 
 <img src="../images/logs/test_case_params.png" alt="Test Case Params"/>
 
 !!! info
-    Чтобы посмотреть параметры, которые принимает метод или конструктор, можно кликнуть левой кнопкой мыши внутри круглых скобок и нажать комбинацию клавиш `ctrl + P` (или `cmd + P` на Mac)
+    To see the parameters a method or constructor takes, you can left-click inside the parentheses and press `ctrl + P` (or `cmd + P` on Mac)
 
-Мы можем добавить множество разных настроек, подробнее о которых можно почитать в [Wiki](https://kasperskylab.github.io/Kaspresso/Wiki/Kaspresso_configuration/).
+We can add many different settings, you can read more about them in the [Wiki](https://kasperskylab.github.io/Kaspresso/Wiki/Kaspresso_configuration/).
 
-Сейчас нас интересует добавление скриншотов, если тесты упали. Самый простой вариант сделать это – использовать `advanced` builder вместо `simple`. Делается это следующим образом:
+Now we are interested in adding screenshots if the tests have failed. The easiest way to do this is to use `advanced` builder instead of `simple`. This is done as follows:
 
 ```kotlin
 class LoginActivityGeneratedDataTest : TestCase(
@@ -439,10 +437,10 @@ class LoginActivityGeneratedDataTest : TestCase(
 )
 
 ```
-В этом случае вызов методов, которые делают скриншоты, можно убрать, они будут сохранены автоматически, если тест упадет.
+In this case, the call to methods that take screenshots can be removed, they will be saved automatically if the test fails.
 
 !!! info
-    Обратите внимание, что разрешения на доступ к файловой системе нужны обязательно, без них скриншоты сохранены не будут
+    Please note that permissions to access the file system are required, without them screenshots will not be saved.
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -501,35 +499,35 @@ class LoginScenario(
 
 ```
 
-Запускаем тест. Тесты упали, и на устройстве появились скриншоты (не забывайте нажимать `Synchronize`):
+Let's start the test. Tests failed and screenshots appeared on the device (don't forget to press `Synchronize`):
 
 <img src="../images/logs/advanced_builder.png" alt="Advanced Builder"/>
 
-При использовании `advanced` builder-а появляется еще несколько изменений. Кроме скриншотов добавляются также файлы с логами, иерархией View и другое.
+When using the `advanced` builder, there are a few more changes. In addition to screenshots, files with logs, the View hierarchy, and more are also added.
 
-Если все эти изменения вам не нужны, то можно изменить только определенные настройки простого builder-а. 
+If you do not need all these changes, then you can only change certain settings of a simple builder. 
 
 !!! info
-    Если вы не разработчик, то кастомизация builder-а по умолчанию может быть достаточно сложной. В случае, если разобраться с настройкой не удалось, используйте `advanced` builder для получения скриншотов
+    If you're not a developer, customizing the default builder can be quite tricky. In case it was not possible to figure out the setting, use the `advanced` builder to get screenshots
 
 ## Interceptors
 
-Вы должны помнить, что в предыдущих тестах, кроме выполнения наших методов, «под капотом» происходило много дополнительных действий: запись логов для каждого шага, неявный вызов flakySafely, автоматический скролл до элемента, если проверка выполнилась неуспешно и так далее.
+You should remember that in the previous tests, in addition to executing our methods, there were many additional actions “under the hood”: writing logs for each step, implicitly calling flakySafely, automatically scrolling to the element if the check was unsuccessful, and so on.
 
-Все это работало благодаря `Interceptor`-ам. `Interceptors` — это классы, которые перехватывают вызываемые нами действия и добавляют в них какую-то функциональность. Таких классов в Kaspresso достаточно много, подробнее о них вы можете почитать в [документации]( https://kasperskylab.github.io/Kaspresso/Wiki/Kaspresso_configuration/)
+All this worked thanks to `Interceptors`. `Interceptors` are classes that intercept the actions we call and add some functionality to them. There are a lot of such classes in Kaspresso, you can read more about them in [documentation]( https://kasperskylab.github.io/Kaspresso/Wiki/Kaspresso_configuration/)
 
-Нас интересует добавление скриншотов, за это отвечают классы `ScreenshotStepWatcherInterceptor`, `ScreenshotFailStepWatcherInterceptor` и `TestRunnerScreenshotWatcherInterceptor`.
+We are interested in adding screenshots, the `ScreenshotStepWatcherInterceptor`, `ScreenshotFailStepWatcherInterceptor` and `TestRunnerScreenshotWatcherInterceptor` classes are responsible for this.
 
 <ul>
-<li>ScreenshotStepWatcherInterceptor – добавляет скриншоты независимо от того, шаг завершился с ошибкой или нет
+<li>ScreenshotStepWatcherInterceptor - adds screenshots whether the step failed or not
 </li>
-<li>ScreenshotFailStepWatcherInterceptor – добавляет скриншот только того шага, который завершился с ошибкой
+<li>ScreenshotFailStepWatcherInterceptor - adds a screenshot of only the step that failed
 </li>
-<li>TestRunnerScreenshotWatcherInterceptor – добавляет скриншот, если произошла ошибка в секции `before` или `after`
+<li>TestRunnerScreenshotWatcherInterceptor - adds a screenshot if an error occurs in the `before` or `after` section
 </li>
 </ul>
 
-Если тест падает, то удобно смотреть не только шаг, на котором произошла ошибка, но и предыдущие – таким образом разобраться в проблеме бывает гораздо проще. Поэтому мы добавим первый вариант `Interceptor`-а, который скриншотит все шаги, независимо от результата. Делается это следующим образом:
+If the test fails, it is convenient to look not only at the step at which the error occurred, but also at the previous ones - this way it is much easier to figure out the problem. Therefore, we will add the first `Interceptor` option, which will screenshot all the steps, regardless of the result. This is done as follows:
 
 ```kotlin
 class LoginActivityGeneratedDataTest : TestCase(
@@ -538,16 +536,16 @@ class LoginActivityGeneratedDataTest : TestCase(
     }
 )
 ```
-Здесь мы сначала получаем builder по умолчанию, вызываем у него метод `apply` и в фигурных скобках добавляем все необходимые настройки. В данном случае мы получаем все `Interceptor`-ы, которые перехватывают событие выполнения шагов (`step`) и добавляем туда `ScreenshotStepWatcherInterceptor`, передавая ему в конструктор объект `screenshots`.
+Here we first get the default builder, call its `apply` method, and add all the necessary settings in curly braces. In this case, we get all the `Interceptors` that intercept the step event (`step`) and add a `ScreenshotStepWatcherInterceptor` there, passing the `screenshots` object to the constructor.
 
-Теперь, когда мы добавили данный `Interceptor`, после каждого шага теста, независимо от результата его выполнения, на устройстве будут сохранены скриншоты.
+Now that we have added this `Interceptor`, after each test step, regardless of the result of its execution, screenshots will be saved on the device.
 
-Запускаем. Тест завершился неудачно, и на устройстве были сохранены скриншоты
+We launch. The test failed and screenshots were saved to the device
 
 <img src="../images/logs/customized_builder.png" alt="Customized Builder"/>
 
 
-Давайте вернем корректную реализацию класса `TestData`
+Let's return the correct implementation of the `TestData` class
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial.data
@@ -561,12 +559,8 @@ object TestData {
 
 ```
 
-Запустим тест еще раз. Тест пройден успешно, и все скриншоты сохранены на устройстве.
+Let's run the test again. The test passed successfully and all screenshots are saved on the device.
 
-## Итог
-
-В этом уроке мы узнали, как в наши тесты добавить логирование и скриншоты. Узнали, в каких случаях стандартных логов бывает недостаточно, научились настраивать `Kaspresso.Builder`, добавляя в него различные `Interceptor`-ы.
-Также мы рассмотрели способы, как создавать скриншоты вручную, и как этот процесс можно автоматизировать. 
-
-
-<br>
+## Summary
+In this tutorial, we learned how to add logging and screenshots to our tests. We found out when standard logs are not enough, learned how to customize `Kaspresso.Builder` by adding various `Interceptors` to it.
+We also looked at ways to create screenshots manually, and how this process can be automated. 
