@@ -1,34 +1,32 @@
-# TODO: добавить английский перевод
+# RecyclerView. Testing list of elements
 
-# RecyclerView. Тестирование списков
+In practice, we often have to work with screens that contain lists of elements, and these lists are dynamic, and their size and content can change. When testing such screens, there are some peculiarities. We will talk about them in this lesson.
 
-На практике часто приходится работать с экранами, которые содержат списки элементов, причем эти списки динамические, и их размер и содержимое могут изменяться. При тестировании таких экранов есть свои особенности. О них мы поговорим в этом уроке.
-
-Откройте приложение `tutorial` и кликните по кнопке `List Activity`
+Open the `tutorial` application and click on the `List Activity` button.
 
 <img src="../images/recycler_view/main_screen.png" alt="Main Screen" width="300"/>
 
-У вас откроется следующий экран
+You will see the following screen:
 
 <img src="../images/recycler_view/todo_list.png" alt="Todo List " width="300"/>
 
-На нем отображается список дел пользователя. У каждого элемента списка есть порядковый номер, текст и цвет, который устанавливается в зависимости от приоритета. Если приоритет низкий, то цвет фона зеленый, если средний, то оранжевый, если высокий, то красный.
+It displays the user's to-do list. Each element of the list has a serial number, text and color, which is set depending on the priority. If the priority is low, then the background color is green, if medium, then orange, if high, then red.
 
-Также имеется возможность удалять элементы списка при помощи свайпа.
+It is also possible to delete list items with a swipe action.
 
 <img src="../images/recycler_view/swiped.png" alt="Swipe element" width="300"/>
 
 <img src="../images/recycler_view/removed.png" alt="Remove element" width="300"/>
 
-Давайте напишем тесты на этот экран. Нам понадобится id элементов списка, для их поиска воспользуемся LayoutInspector
+Let's write tests for this screen. We need the IDs of the list elements, we will use the LayoutInspector to find them.
 
 <img src="../images/recycler_view/layout_inspector.png" alt="Layout Inspector"/>
 
-Обратите внимание, что все элементы списка лежат внутри `RecyclerView`, у которого id `rv_notes`. Внутри него лежит три объекта, у которых одинаковые идентификаторы: `note_container`, содержащий `tv_note_id` и `tv_note_text`.
+Note that all list items are inside RecyclerView with id rv_notes. The recycler has three objects that have the same IDs: `note_container`, `tv_note_id` and `tv_note_text`.
 
-Получается, что протестировать экран обычным способом у нас не получится, так как у всех элементов один и тот же id, вместо этого мы используем другой подход. PageObject экрана со списком заметок будет содержать всего один элемент – `RecyclerView`, а элементы списка будут представлять собой отдельные PageObject-ы, данные которых мы будем проверять.
+It turns out that we will not be able to test the screen in the usual way, since all elements have the same ID, instead we use a different approach. The PageObject of the screen with the list of notes will contain only one element - `RecyclerView`, and the elements of the list will be separate PageObjects, whose content we will check.
 
-Начинаем создавать тест. Первым делом добавляем PageObject `NoteListScreen`
+Let's start writing a test. First of all let's add PageObject `NoteListScreen`.
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial.screen
@@ -45,15 +43,14 @@ object NoteListScreen : KScreen<NoteListScreen>() {
     val rvNotes = KRecyclerView { withId(R.id.rv_notes) }
 }
 ```
- 
-Если мы напишем такой код, то у нас возникнут ошибки. Дело в том, что если вы тестируете `RecyclerView`, то предполагается, что проверять вы будете элементы списка, а не контейнер с этими элементами. Поэтому при создании экземпляра `KRecyclerView` недостаточно передать только matcher, по которому объект будет найден, необходимо передать второй параметр, который называется `itemTypeBuilder`.
+If we write such code, then we will have some errors. The fact is that if you are testing a `RecyclerView`, then it is assumed that you will be checking the elements of the list, and not the container with these elements. Therefore, when creating an instance of `KRecyclerView`, it is not enough to pass only the matcher by which the object will be found, you must pass the second parameter, which is called `itemTypeBuilder`.
 
 !!! info
-     Если вы хотите узнать, какие параметры нужно передать в определенный метод или конструктор, то можно нажать комбинацию клавиш `ctrl + P` (`cmd + P` на Mac OS), и у вас отобразится подсказка, в которой будут указаны необходимые аргументы
+     If you want to know what parameters to pass to a particular method or constructor, you can press the key combination `ctrl + P` (`cmd + P` on Mac OS), and you will see a tooltip that will indicate the necessary arguments.
 
-Мы уже говорили ранее о том, что Page Object нам понадобится для каждого элемента списка, поэтому необходимо создать соответствующий класс, экземпляр этого класса мы будем передавать в `itemTypeBuilder`.
+We have already said earlier that we will need a Page Object for each list item, so we need to create an appropriate class, we will pass an instance of this class to `itemTypeBuilder`.
 
-В этом же файле добавляем класс `NoteItemScreen`, в этот раз наследуемся не от `KScreen`, а от `KRecyclerViewItem`, так как сейчас это не обычный Page Object, а элемент списка `RecyclerView`
+In the same file, add the `NoteItemScreen` class, this time we inherit not from `KScreen`, but from `KRecyclerViewItem`, since now it is not a regular Page Object, but a list item `RecyclerView`
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial.screen
@@ -76,16 +73,16 @@ object NoteListScreen : KScreen<NoteListScreen>() {
 }
 ```
 
-Обратите внимание на то, что раньше при создании Page Object мы писали ключевое слово `object`, а здесь нужно написать `class`. Причина в том, что все тестируемые экраны до сих пор были в единственном экземпляре, а здесь у нас будет несколько элементов списка, каждый из которых будет Page Object-ом, поэтому мы создаем класс, и для каждого элемента будем получать экземпляр этого класса.
+Please note that earlier when creating the Page Object we wrote the `object` keyword, but here we need to write `class`. The reason is that all the tested screens so far have been in a single instance, and here we will have several list elements, each of which will be a Page Object, so we create a class, and for each element we will receive an instance of this class.
 
 !!! info
-     Подробнее про [классы]( https://kotlinlang.org/docs/classes.html) и [объекты]( https://kotlinlang.org/docs/object-declarations.html) вы можете почитать в официальной документации Kotlin.
+     You can read more about [classes]( https://kotlinlang.org/docs/classes.html) and [objects]( https://kotlinlang.org/docs/object-declarations.html) in the official Kotlin documentation.
 
-В заметках нам нужны будут элементы - корневой `note_container` и два `TextView`. Если мы попытаемся найти их на экране по id, то возникнет ошибка, так как на экране таких элементов несколько и непонятно, какой конкретно нам нужен. 
+In the notes, we will need the root `note_container` and two `TextView`. If we try to find them on the screen by id, then an error will occur, since there are several such elements on the screen and it is not clear which one we need. 
 
-Эта проблема решается следующим образом - каждая заметка представляет собой отдельный экземпляр View и поиск элементов мы будем осуществлять не на всем экране, а только внутри этих самых View (заметок). Для реализации такой логики в качестве параметра конструктора `KRecyclerViewItem` необходимо передать объект `matcher`. Во время тестирования для каждого объекта будет передан свой `matcher`, в котором мы найдем необходимые View-элементы.
+This problem is solved as follows - each note is a separate View instance and we will search for elements not on the entire screen, but only inside these same View (notes). To implement such logic, the `matcher` object must be passed as a parameter to the `KRecyclerViewItem` constructor. During testing, a `matcher` will be passed for each object, in which we will find the necessary View elements.
 
-Поэтому в качестве параметра передаем `matcher`
+Therefore, we pass `matcher` as a parameter:
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial.screen
@@ -105,11 +102,11 @@ object NoteListScreen : KScreen<NoteListScreen>() {
     val rvNotes = KRecyclerView { withId(R.id.rv_notes) }
 
     class NoteItemScreen(matcher: Matcher<View>) : KRecyclerItem<NoteItemScreen>(matcher) {
-        
+
     }
 }
 ```
-Можем в NoteItemScreen добавлять элементы интерфейса, которые будем тестировать.
+We can add interface elements to NoteItemScreen that we will test.
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial.screen
@@ -138,24 +135,24 @@ object NoteListScreen : KScreen<NoteListScreen>() {
     }
 }
 ```
-Обратите внимание на два важных момента:
+Pay attention to two important points:
 
-Первое - в конструктор View-элементов теперь необходимо передать matcher, в котором будем произведен поиск необходимого объекта. Если этого не сделать, тест завершится неудачно
-    
-Второе - если мы проверяем какое-то специфичное поведение элемента UI, то указываем конкретного наследника `KView` (`KTextView`, `KEditText`, `KButton`...). Например, если мы хотим проверить наличие текста, то создаем `KTextView`, у которого есть возможность получить текст. 
+First, it is now necessary to pass a matcher to the View-element constructor, in which we will search for the required object. If this is not done, the test will fail.
 
-А если мы проверяем какие-то общие вещи, которые доступны во всех элементах интерфейса – элемента, цвет фона, размеры, то можно использовать родительский KView. В данном случае мы будем проверять тексты у `tvNoteId` и `tvNoteText`, поэтому указали тип `KTextView`. А контейнер, в котором лежат эти `TextView` является экземпляром `CardView`, у него мы будем проверять только цвет фона, каких-то специфичных вещей проверять у него нет необходимости, поэтому в качестве типа мы указали родительский - `KView`
+Secondly, if we check some specific behavior of the UI element, then we specify a specific inheritor of `KView` (`KTextView`, `KEditText`, `KButton`...). For example, if we want to check for text, we create a `KTextView` that has the ability to get the text. 
 
-Когда PageObject элемента списка готов, можно создавать экземпляр `KRecyclerView`, для этого передаем два параметра: 
+And if we are checking some common things that are available in all interface elements (background color, size, visibility, etc.), then we can use the parent `KView`. In this case, we will check the texts of `tvNoteId` and `tvNoteText`, so we specified the type `KTextView`. And the container in which these `TextView` are located is an instance of `CardView`, we will only check the background color for it, it does not need to check any specific things, so we specified the parent type as `KView`
 
-Первый – `builder`, в котором найдем `RecyclerView` по его id
+When the PageObject of the list item is ready, you can create an instance of `KRecyclerView`, for this we pass two parameters: 
+
+The first is `builder`, in which we will find `RecyclerView` by its id:
 
 ```kotlin
 val rvNotes = KRecyclerView(
     builder = { withId(R.id.rv_notes) },
 )
 ```
-Второй – `itemTypeBuilder`, здесь необходимо вызвать функцию `itemType`, где создать экземпляр `NoteItemScreen`
+The second is `itemTypeBuilder`, here you need to call the `itemType` function and to create an instance of `NoteItemScreen` here:
 
 ```kotlin
 val rvNotes = KRecyclerView(
@@ -169,9 +166,9 @@ val rvNotes = KRecyclerView(
 ```
 
 !!! info
-     Подробнее про лямбда-выражения можно почитать [здесь](https://kotlinlang.org/docs/lambdas.html)
+     You can read more about lambda expressions [here](https://kotlinlang.org/docs/lambdas.html).
 
-Эту запись можно сократить, используя [Method Reference](https://docs.oracle.com/javase/tutorial/java/javaOO/methodreferences.html), тогда финальная версия класса будет выглядеть так:
+This entry can be shortened using [Method Reference](https://docs.oracle.com/javase/tutorial/java/javaOO/methodreferences.html), then the final version of the class will look like this:
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial.screen
@@ -203,7 +200,7 @@ object NoteListScreen : KScreen<NoteListScreen>() {
     }
 }
 ```
-Теперь давайте в Page Object `Main Screen` добавим кнопку перехода на данный экран
+Now let's add a button to go to this screen in Page Object `Main Screen`
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial.screen
@@ -226,11 +223,11 @@ object MainScreen : KScreen<MainScreen>() {
     val listActivityButton = KButton { withId(R.id.list_activity_btn) }
 }
 ```
-Теперь можно приступать к проверке экрана со списком заметок
+Now you can start checking the screen with a list of notes
 
-## Тестирование NoteListScreen
+## Testing NoteListScreen
 
-Создаем класс для тестирования, и, как обычно, добавляем переход на данный экран
+We create a class for testing, and, as usual, add a transition to this screen:
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -261,7 +258,7 @@ class NoteListTest : TestCase() {
 }
 ```
 
-Теперь давайте проверим, что на экране со списком заметок отображается три элемента, для этого у `KRecyclerView` можно вызвать метод `getSize`
+Now let's check that three items are displayed on the screen with the list of notes, for this we can call the `getSize` method on `KRecyclerView`:
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -299,9 +296,9 @@ class NoteListTest : TestCase() {
 }
 ```
 
-У `KRecyclerView` есть множество полезных методов, можете поставить точку после названия объекта и посмотреть все возможности. Например, при помощи `firstChild` или `lastChild` можно получить соответственно первый или последний элемент `NoteItemScreen`. Также можно найти элемент по его позиции или выполнить проверки для абсолютно всех заметок при помощи метода `children`. Для их использования в угловых скобках нужно указать тип `KRecyclerViewItem`, в нашем случае это `NoteItemScreen`
+`KRecyclerView` has many useful methods, you can put a dot after the object name and see all the possibilities. For example, using `firstChild` or `lastChild` you can get the first or last element of `NoteItemScreen` respectively. You can also find an element by its position, or perform checks on absolutely all notes using the `children` method. To use them in angle brackets, you need to specify the type `KRecyclerViewItem`, in our case it is `NoteItemScreen`.
 
-Давайте проверим видимость всех элементов и что все они содержат какой-то текст
+Let's check the visibility of all elements and that they all contain some text:
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -352,7 +349,7 @@ class NoteListTest : TestCase() {
     }
 }
 ```
-Также можем протестировать каждый элемент в отдельности. Давайте проверим, что каждая заметка содержит правильные тексты и цвета фона
+We can also test each element separately. Let's check that each note contains the correct texts and background colors:
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -425,11 +422,11 @@ class NoteListTest : TestCase() {
 }
 ```
 
-## Проверка свайпа
+## Swipe check
 
-В приложении есть возможность удалять заметки при помощи свайпа. Давайте проверим этот момент – удалим первую заметку и убедимся, что на экране осталось два элемента с соответствующим контентом.
+The application has the ability to delete notes with a swipe action. Let's check this point - remove the first note and make sure that two elements with the corresponding content remain on the screen.
 
-Чтобы выполнять какие-то действия с View-элементами, мы можем получить объект `view` и вызвать у него метод `perform` в качестве параметра передав нужное действие. В данном случае выполняем swipe влево, тогда код будет выглдяеть следующим образом:
+To perform some actions with View elements, we can get the `view` object and call its `perform` method as a parameter, passing the desired action. In this case, we swipe to the left, then the code will look like this:
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -522,16 +519,15 @@ class NoteListTest : TestCase() {
 }
 ```
 
-В последнем шаге мы удаляем элемент по индексу 0 и проверяем, что теперь по этому индексу лежит “Note number 1”. 
-
+In the last step, we remove the element at index 0 and check that “Note number 1” now lies at this index.
 
 ## Wait for idle
 
-Вы могли обратить внимание, что все проверки выполняются сразу после свайпа, даже не дожидаясь завершения анимации. Сейчас тест проходит успешно, но иногда это может привести к ошибкам. 
+You may have noticed that all checks are performed immediately after the swipe, without even waiting for the animation to complete. Now the test passes successfully, but sometimes it can lead to errors. 
 
-Поэтому в случаях, когда какое-то действие выполняется с анимацией и для его завершения требуется время, можно вызвать метод `device.uiDevice.waitForIdle`. Этот метод остановит выполнения теста до тех пор, пока экран не перейдет в состояние idle (бездействующее) – когда не происходит никаких действий и не выполняются анимации.
+Therefore, in cases where some action is performed with animation and it takes time to complete, you can call the `device.uiDevice.waitForIdle` method. This method will stop the test execution until the screen enters the idle state - when no action is taking place and no animations are being performed.
 
-Добавляем эту строчку в тест после свайпа, и проверим, что количество элементов стало равно двум
+We add this line to the test after the swipe, and check that the number of elements has become two:
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -630,13 +626,13 @@ class NoteListTest : TestCase() {
 ```
 ## Extract methods to Page Object
 
-Остался еще один момент, который мы рассмотрим в этом уроке. 
+There is one more point that we will consider in this lesson. 
 
-Бывают случаи, когда в Page Object нужно добавить какое-то поведение. Например, сейчас можно делать свайп по элементам списка. В тесте это делается при помощи этой строчки кода `view.perform(ViewActions.swipeLeft())`
+There are times when you need to add some behavior to the Page Object. For example, now you can swipe through the elements of the list. In the test, this is done with this line of code `view.perform(ViewActions.swipeLeft())`.
 
-Каждый раз, когда нам понадобится сделать свайп, придется выполнять те же действия – получать объект `view`, вызывать метод передавая параметр. Вместо этого мы можем в классе Page Object добавить необходимую функциональность и затем использовать ее, где необходимо.
+Every time we need to swipe, we will have to perform the same actions - get the `view` object, call the method passing the parameter. Instead, we can add the necessary functionality in the Page Object class and then use it where necessary.
 
-Добавляем метод в класс NoteItemScreen, назовем swipeLeft
+Add a method to the NoteItemScreen class, let's call it swipeLeft:
 
 ```kotlin
 class NoteItemScreen(matcher: Matcher<View>) : KRecyclerItem<NoteItemScreen>(matcher) {
@@ -650,7 +646,7 @@ class NoteItemScreen(matcher: Matcher<View>) : KRecyclerItem<NoteItemScreen>(mat
     }
 }
 ```
- Теперь в любом месте, где необходимо сделать свайп, мы просто у объекта `NoteItemScreen` вызовем созданный нами метод
+Now, in any place where we need to make a swipe, we simply call the method we created on the `NoteItemScreen` object:
 
 ```kotlin
 childAt<NoteListScreen.NoteItemScreen>(0) {
@@ -658,7 +654,7 @@ childAt<NoteListScreen.NoteItemScreen>(0) {
     device.uiDevice.waitForIdle()
 }
 ```
-Тогда весь код теста будет выглядеть так:
+Then the whole test code will look like this:
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -756,12 +752,7 @@ class NoteListTest : TestCase() {
 ```
 
 !!! info
-    Обратите внимание, что никакой бизнес-логики добавлять в Page Object не нужно. Вы можете наделить эти объекты определенными свойствами, добавить функциональность, но добавлять сложную логику не следует. Page Object должен оставаться моделью экрана с описанными элементами интерфейса и функциями по взаимодействию с этими элементами.
+    Note that no business logic needs to be added to the Page Object. You can give these objects certain properties, add functionality, but you should not add complex logic. The Page Object should remain a screen model with described interface elements and functions for interacting with these elements.
 
-## Итог
-
-В этом уроке мы научились тестировать списки элементов, установленные в RecyclerView. Узнали, как можно найти элементы, как взаимодействовать с ними и проверять их поведение на соответствие ожидаемому результату. 
-
-
-
-<br>
+## Summary
+In this tutorial, we learned how to test lists of items set in RecyclerView. We learned how to find elements, how to interact with them and check their behavior for compliance with the expected result.
