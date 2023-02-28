@@ -1,23 +1,21 @@
-# TODO: добавить английский перевод
+﻿# Kautomator. Third Party Application Testing
 
-# Kautomator. Тестирование сторонних приложений
+In previous lessons, we learned how to write tests for user interface elements that are located in our application. But there are often cases when this is not enough for full-fledged testing, and in addition to our application, we need to perform some actions outside of it.
 
-В предыдущих уроках мы научились писать тесты для элементов пользовательского интерфейса, которые расположены в нашем приложении. Но часто бывают случаи, когда для полноценного тестирования этого недостаточно, и помимо нашего приложения нужно выполнить какие-то действия за его пределами. 
-
-В качестве примера давайте проверим стартовый экран приложения Google Play в неавторизованном состоянии. 
+As an example, let's check the start screen of the Google Play app in an unauthorized state.
 
 <ol>
-    <li>Открываем Google Play</li>
-    <li>Проверяем, что на экране есть кнопка Sign In</li>
+    <li>Open Google Play</li>
+    <li>Checking that there is a `Sign In` button on the screen</li>
 </ol>
 
 <img src="../images/uiautomator/google_play_unauth.png" alt="Google play unauthorized" width="300"/>
 
-Не забудьте перед запуском теста разлогиниться в приложении.
+Do not forget to log out before starting the test.
 
-## Автотест Google Play
+## Autotest for Google Play functionality
 
-Приступаем к написанию теста – создаем класс `GooglePlayTest` и наследуемся от `TestCase`
+Let's start writing a test - create a class `GooglePlayTest` and inherit it from `TestCase`:
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -25,10 +23,11 @@ package com.kaspersky.kaspresso.tutorial
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 
 class GooglePlayTest : TestCase() {
+
 }
 ```
 
-Добавляем тестовый метод
+Adding a test method:
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -45,9 +44,9 @@ class GooglePlayTest : TestCase() {
 }
 ```
 
-Первый шаг, который нам нужно сделать – запустить Google Play, для этого нам понадобится название пакета приложения. У Google Play это `com.android.vending`, позже мы покажем, где можно узнать эту информацию.
+The first step we need to take is to launch the Google Play application, for this we need the name of the its package. Google Play has `com.android.vending`, later we will show where you can find this information.
 
-Это название пакета в тесте мы будем использовать несколько раз, поэтому, чтобы не дублировать код, создадим константу, куда вынесем это название:
+We will use this name of the package in the test several times, therefore, in order not to duplicate the code, we will create a constant where we will put this name:
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -69,42 +68,42 @@ class GooglePlayTest : TestCase() {
 }
 ```
 
-Для запуска любого экрана в Android нам нужен объект `Intent`. Чтобы получить необходимый Intent мы будем использовать следующий код:
+To launch any screen in Android, we need an `Intent` object. To get the required Intent we will use the following code:
 
 ```kotlin
 val intent = device.targetContext.packageManager.getLaunchIntentForPackage(GOOGLE_PLAY_PACKAGE)
 ```
-Здесь используется сразу несколько возможно незнакомых для вас объектов: [Context]( https://developer.android.com/reference/android/content/Context), [PackageManager]( https://developer.android.com/reference/android/content/pm/PackageManager) и [Intent]( https://developer.android.com/reference/android/content/Intent). Подробнее о них можно почитать в документации.
 
-Если говорить коротко, то Context предоставляет доступ к различным ресурсам приложения и позволяет выполнять множество действий в том числе открывать экраны при помощи Intent-ов. Intent содержит информацию о том, какой именно экран мы хотим открыть, а PackageManager в данном случае позволяет получить Intent для открытия стартового экрана конкретного приложения по названию пакета.
+Here several objects that may be unfamiliar to you are used at once: [Context]( https://developer.android.com/reference/android/content/Context), [PackageManager]( https://developer.android.com/reference/android/content/pm/PackageManager) and [Intent](https://developer.android.com/reference/android/content/Intent). You can read more about them in the documentation.
+
+In short, Context provides access to various application resources and allows you to perform many actions, including opening screens using Intents. The Intent contains information about which screen we want to open, and the PackageManager in this case allows you to get an Intent to open the start screen of a particular application by the name of the package.
 
 !!! info
-    Для получения `Context` можно воспользоваться методами `targetContext` и `context` у объекта `device`. У них есть одно существенное отличие.
-    Когда мы хотим проверить работу какого-то приложения и запускаем автотест, то на самом деле на устройство устанавливается два приложения: то, которое мы тестируем (в данном случае tutorial) и второе, которое запускает все тестовые сценарии. 
-    Когда мы вызываем метод `targetContext`, то обращаемся к тестируемому приложению (tutorial), а если мы вызываем метод `context`, то обращение будет уже ко второму приложению, которое запускает тесты.
-
-В приведенном коде
+    To get the `Context`, you can use the `targetContext` and `context` methods of the `device` object. They have one significant difference.
+    When we want to check the operation of some application and run an autotest, in fact, two applications are installed on the device: the one that we are testing (in this case, the tutorial) and the second, which runs all the test scripts.
+    When we call the `targetContext` method, we refer to the application under test (tutorial), and if we call the `context` method, then the call will be to the second application that runs the tests.
 
 ```kotlin
 val intent = device.targetContext.packageManager.getLaunchIntentForPackage(GOOGLE_PLAY_PACKAGE)
 ```
-мы первым делом получаем `targetContext` у объекта `device` – мы это уже делали в одном из предыдущих уроков. Затем, у `targetContext` мы получаем `packageManager`, из которого можно получить `Intent` для запуска экрана Google Play при помощи метода `getLaunchIntentForPackage`. 
 
-Данный метод возвращает `Intent` для запуска стартового экрана приложения, пакет которого был передан в качестве параметра. Для этого мы передаем название пакета того приложения, которое хотим запустить, в данном случае Google Play.
+In the above code we first get the `targetContext` from the `device` object - we already did this in one of the previous lessons. Then, from `targetContext` we get `packageManager`, from which we can get `Intent` to launch the Google Play screen using the `getLaunchIntentForPackage` method.
 
-Мы получили `Intent`, теперь с его помощью запустить экран. Для этого у объекта `targetContext` нужно вызвать метод `startActivity` и передать intent в качестве параметра:
+This method returns an `Intent` to launch the start screen of the application whose package was passed as a parameter. To do this, we pass the package name of the application we want to run, in this case Google Play.
+
+We got `Intent`, now use it to launch the screen. To do this, call the `startActivity` method on the `targetContext` object and pass intent as a parameter:
 
 ```kotlin
 val intent = device.targetContext.packageManager.getLaunchIntentForPackage(GOOGLE_PLAY_PACKAGE)
 device.targetContext.startActivity(intent)
 ```
 
-В этом коде мы дважды получаем `targetContext` у объекта `device`. Чтобы не дублировать код, можно эту запись сократить, использовав функцию `with`
+In this code, we get the `targetContext` twice from the `device` object. In order not to duplicate code, you can shorten this entry by using the `with` function
 
 !!! info
-    Подробнее про `with` и другие функции области видимости (англ. scope functions) вы можете почитать [в документации](https://kotlinlang.ru/docs/scope-functions.html)
+    You can read more about `with` and other scope functions in [documentation](https://kotlinlang.ru/docs/scope-functions.html).
 
-Тогда код теста будет выглядеть так:
+Then the test code will look like this:
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -129,9 +128,9 @@ class GooglePlayTest : TestCase() {
         private const val GOOGLE_PLAY_PACKAGE = "com.android.vending"
     }
 }
-
 ```
-Если вы не знакомы с функциями `with`, `apply`, и другими функциями области видимости, то можно обойтись и без них, в этом случае код теста будет выглядеть так:
+
+If you are not familiar with the `with`, `apply`, and other scope functions, you can rewrite code without them, in which case the test code will look like this:
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -157,57 +156,56 @@ class GooglePlayTest : TestCase() {
 
 ```
 
+Let's launch the test. Test passed successfully, the Google Play app opens on the device.
 
-Запускаем. Тест пройден успешно, на устройстве открывается приложение Google Play.
+Now we need to check that on the opened screen there is a button with the text `Sign in`. This is not our application, we do not have access to the source code, so getting the button id through the Layout Inspector will not work. You need to use other tools.
 
-Теперь нам нужно проверить, что на открывшемся экране есть кнопка с текстом `Sign in`. Это не наше приложение, у нас нет доступа к исходному коду, поэтому получить id кнопки через Layout Inspector не получится. Нужно использовать другие инструменты.
-
-## Инструменты для работы с другими приложениями
+## Tools for working with other applications
 
 ### UIAutomator
 
-UI Automator – это библиотека для поиска компонентов на экране и эмуляции действий пользователя (клики, свайпы, ввод текста и т.д.). Он позволяет управлять приложением так, как бы это делал пользователь – взаимодействовать с любыми его элементами.
+UI Automator is a library for finding components on the screen and emulating user actions (clicks, swipes, text input, etc.). It allows you to manage the application the way the user would do it - to interact with any of its elements.
 
-Благодаря этой библиотеке, мы можем тестировать любые приложения, выполнять в них различные действия, несмотря на то что у нас нет доступа к его исходному коду.
+Thanks to this library, we can test any applications, perform various actions in them, despite the fact that we do not have access to its source code.
 
 !!! info
-    Более подробно про UiAutomator и его возможности вы можете почитать в [документации]( https://developer.android.com/training/testing/other-components/ui-automator)
+    You can read more about UiAutomator and its capabilities in [documentation]( https://developer.android.com/training/testing/other-components/ui-automator).
 
-В Android SDK также встроена программа Ui Automator Viewer. Она позволяет найти id элементов, с которыми мы хотим взаимодействовать, их позицию и другие полезные атрибуты.
+The Android SDK also includes the Ui Automator Viewer. It allows us to find the IDs of the elements we want to interact with, their position and other useful attributes.
 
-Для того чтобы запустить Ui Automator Viewer, нужно открыть командную строку в папке `../Android/sdk/tools/bin` и выполнить команду `uiautomatorviewer`
+In order to launch Ui Automator Viewer, you need to open a command line in the `../Android/sdk/tools/bin` folder and execute the command `uiautomatorviewer`.
 
-У вас должно открыться вот такое окно:
+You should have a window like this:
 
 <img src="../images/uiautomator/uiautomatorviewer_1.png" alt="UiAutomatorViewer first launch"/>
 
-Если этого не произошло и в консоли отобразилась какая-то ошибка, то следует погуглить текст ошибки. 
+If this did not happen and some error was displayed in the console, then you should google the error text.
 
-Наиболее распространенная проблема – версия Java не совместима с uiautomatorviewer. В таком случае следует установить Java 8 (важно, чтобы данная версия была выпущена компанией Oracle) и прописать к ней путь в переменных среды. Как это сделать, мы разбирали в уроке [Выполнение adb-команд]( https://kasperskylab.github.io/Kaspresso/Tutorial/%D0%92%D1%8B%D0%BF%D0%BE%D0%BB%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5%20adb-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4/#java-adb)
+The most common problem is that the Java version is not compatible with uiautomatorviewer. In this case, you should install Java 8 (use only released by Oracle) and set the path to it in environment variables. How to do this, we discussed in the lesson [Executing adb commands]( https://kasperskylab.github.io/Kaspresso/Tutorial/%D0%92%D1%8B%D0%BF%D0%BE%D0%BB%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5%20adb-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4/#java-adb).
 
-Вернемся к написанию теста. Проверять мы будем приложение Google Play, и, чтобы взаимодействовать с ним из Ui Automator Viewer, необходимо запустить его на эмуляторе и кликнуть на кнопку `Device Screenshot`
+Let's get back to writing the test. We will check the Google Play application, and in order to interact with it from the Ui Automator Viewer, you need to run it on the emulator and click on the `Device Screenshot` button:
 
 <img src="../images/uiautomator/uiautomatorviewer_2.png" alt="UiAutomatorViewer create screenshot"/>
 
-На некоторых версиях ОС эти иконки изначально скрыты, поэтому, если они у вас не видны, просто растяните экран.
+On some versions of the OS, these icons are initially hidden, so if you don't see them, just stretch the screen.
 
-В правой части видно всю информацию об элементах пользовательского интерфейса. Сейчас нас интересует кнопка `Sign in`. Кликаем на этот элемент и смотрим информацию о кнопке:
+On the right side, you can see all the information about the user interface elements. Now we are interested in the `Sign in` button. We click on this element and look at the information about the button:
 
 <img src="../images/uiautomator/uiautomator_button.png" alt="UiAutomatorViewer button info"/>
 
-Здесь вы можете видеть некоторую полезную информацию:
+Here you can see some useful information:
 
 <ol>
-    <li>Package – название пакета приложения, которое мы указывали в тесте. Один из способов узнать его – посмотреть через эту программу</li>
-    <li>Resource-id – здесь можно найти id элемента, чтобы потом по этому id найти кнопку и взаимодействовать с ней из теста. В нашем случае это невозможно, потому что в значении id указано, что имя ресурса было обфусцировано, то есть зашифровано. Поэтому поиск элемента по id для этого экрана невозможен</li>
-    <li>Text – один из способов найти элемент на экране – по тексту, который на нем отображается. Получается, что сейчас найти кнопку на этом экране мы можем по атрибуту text</li>
+    <li>Package is the name of the application package that we specified in the test. One way to find out is to look through this program</li>
+    <li>Resource-id - here you can find the id element for frequently searching for buttons and interacting with it from the test. In our case, it is not possible, because the id value indicates that the resource name has been obfuscated, that is, encrypted. Therefore, it is not possible to search for an element by id for this screen</li>
+    <li>Text - one way to find an element on the screen is by the text that is displayed on it. It turns out that now we can find the button on this screen by the text attribute</li>
 </ol>
 
 ### Developer Assistant
 
-Если по какой-то причине вам неудобно пользоваться Ui Automator Viewer, или вы не смогли его запустить, то можно воспользоваться приложением Developer Assistant. Его можно [скачать](https://play.google.com/store/apps/details?id=com.appsisle.developerassistant) в Google Play.
+If for some reason you are not comfortable using the Ui Automator Viewer, or you are unable to launch it, then you can use the Developer Assistant application. It can be [downloaded](https://play.google.com/store/apps/details?id=com.appsisle.developerassistant) on Google Play.
 
-После установки и запуска Developer Assistant необходимо в настройках выбрать его, как приложение-ассистент по умолчанию. Для этого кликните на кнопку “Choose” и следуйте инструкциям:
+After installing and launching Developer Assistant, you need to select it in the settings as the default assistant application. To do this, click on the `Choose` button and follow the instructions:
 
 <img src="../images/uiautomator/da_1_settings.png" alt="Developer Assistant Settings" width="300"/>
 
@@ -221,26 +219,25 @@ UI Automator – это библиотека для поиска компоне�
 
 <img src="../images/uiautomator/da_6_settings.png" alt="Developer Assistant Settings" width="300"/>
 
-После настройки вы можете запускать анализ приложений. Открывайте приложение Google Play и осуществите долгое нажатие по кнопке `Home`
+Once configured, you can run application analysis. Open the Google Play app and long press the `Home` button:
 
 <img src="../images/uiautomator/da_gplay_1.png" alt="Developer Assistant Google play" width="300"/>
 
-У вас появится окно с информацией о приложении, которое можно при необходимости переместить или расширить. На вкладке `App` есть информация о приложении – название пакета, запущенная в настоящий момент Activity и т.д. 
+You will see a window with information about the application, which you can move or expand if necessary. The `App` tab contains information about the application - the name of the package, the currently running Activity, etc.
 
 <img src="../images/uiautomator/da_gplay_2.png" alt="Developer Assistant Google play" width="300">
 
-На вкладке `Element` можно исследовать элементы пользовательского интерфейса.
+The `Element` tab allows you to explore the user interface elements.
 
 <img src="../images/uiautomator/da_gplay_3.png" alt="Developer Assistant Google play" width="300"/>
 
-Здесь есть все те же атрибуты, которые мы видели в `Ui Automator Viewer`
-
+It has all the same attributes that we saw in `Ui Automator Viewer`.
 
 ### Dump
 
-В некоторых случаях, о которых мы поговорим дальше в этом уроке, использовать Developer Assistant не получится, поскольку он не умеет отображать информацию о системном UI (уведомления, диалоги и т.д.). Если вы оказались в такой ситуации, что возможностей Developer Assistant недостаточно, а Ui Automator Viewer запустить не удалось, то есть третий вариант – выполнить adb shell-команду `uiautomator dump`.
+In some cases, which we'll talk about later in this tutorial, you won't be able to use the Developer Assistant because it can't display information about the system UI (notifications, dialogs, etc.). If you find yourself in such a situation that the Developer Assistant capabilities are not enough, and the Ui Automator Viewer failed to start, then there is a third option - run the adb shell command `uiautomator dump`.
 
-Для этого на эмуляторе откройте экран, информацию о котором вам нужно получить (в данном случае Google Play). Откройте консоль и выполните команду:
+To do this, on the emulator, open the screen that you need to get information about (in this case, Google Play). Open the console and run the command:
 
 ```
 adb shell uiautomator dump
@@ -248,32 +245,31 @@ adb shell uiautomator dump
 
 <img src="../images/uiautomator/dump_1.png" alt="Uiautomator Dump"/>
 
-На вашем эмуляторе должен был появиться файл `window_dump.xml`, который можно найти через `Device Explorer`. Если он у вас не отображается, то выберите папку `sdcard` и нажмите `Synchronize`
+A `window_dump.xml` file should have appeared on your emulator, which can be found through the `Device Explorer`. If it is not displayed for you, then select the `sdcard` folder and click `Synchronize`:
 
 <img src="../images/uiautomator/dump_2.png" alt="Uiautomator Dump"/>
 
-Если после этих шагов файл все равно не появился, то выполните еще одну команду в консоли
+If after these steps the file still does not appear, then run one more command in the console:
 
 ```
 adb pull /sdcard/window_dump.xml
 ```
 
-После этого найдите файл через `Device File Explorer` и откройте его в Android Studio
+After that find the file on your computer via `Device File Explorer` and open it in Android Studio:
 
 <img src="../images/uiautomator/dump_3.png" alt="Uiautomator Dump"/>
 
-Этот файл представляет собой описание экрана в формате xml. Тут можно также найти все необходимые объекты, их свойства и id. Если он у вас отображается в одну строчку, то следует сделать автоформатирование, чтобы было легче читать код. Для этого нажмите комбинацию клавиш `ctrl + alt + L` на Windows или `cmd + option + L` на Mac.
+This file is a description of the screen in xml format. Here you can also find all the necessary objects, their properties and IDs. If you have it displayed in one line, then you should do auto-formatting to make it easier to read the code. To do this, press the key combination `ctrl + alt + L` on Windows or `cmd + option + L` on Mac.
 
 <img src="../images/uiautomator/dump_4.png" alt="Uiautomator Dump"/>
 
-Можно найти кнопку логина и посмотреть все ее атрибуты. Для этого нажимаем комбинацию клавиш `ctrl + F` (или `cmd + F` на Mac) и вводим текст, который установлен на кнопке «Sign in»
+You can find the login button and see all its attributes. To do this, press the key combination `ctrl + F` (or `cmd + F` on Mac) and enter the text that is set on the "Sign in" button.
 
 <img src="../images/uiautomator/dump_5.png" alt="Uiautomator Dump"/>
 
+## Writing a test
 
-## Написание теста
-
-Теперь, когда мы нашли нужные нам элементы интерфейса, можем приступать к тестированию. Как обычно мы начнем с создания Page Object экрана Google Play
+We have found the interface elements we need, and now we can start testing. As usual, we'll start by creating a Page Object for the Google Play screen.
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial.screen
@@ -281,21 +277,20 @@ package com.kaspersky.kaspresso.tutorial.screen
 object GooglePlayScreen {
     
 }
-
 ```
 
-Ранее все Page Object-ы мы наследовали от класса `KScreen`. В этом случае нам нужно было переопределить два метода `layoutId` и `viewClass`
+Previously, we inherited all Page Objects from the `KScreen` class. In this case, we needed to override two methods `layoutId` and `viewClass`
 
 ```kotlin
 override val layoutId: Int? = null
 override val viewClass: Class<*>? = null
 ```
 
-Мы так делали, потому что тестировали экран, который находится внутри нашего приложения, у нас был доступ к исходному коду, макету и Activity, с которой работаем. Но сейчас мы хотим протестировать экран из стороннего приложения, поэтому искать какие-то элементы в нем, кликать по кнопкам и выполнять любые другие действия с ним тем способом, который применяли в прошлых уроках, невозможно.
+We did this because we were testing the screen that is inside our application, we had access to the source code, the layout and the Activity we are working with. But now we want to test the screen from a third-party application, so it is impossible to search for some elements in it, click on buttons and perform any other actions with it in the way that we used in previous lessons.
 
-Для этих целей в Kaspresso есть компонент Kautomator - обертка над известным инструментом UiAutomator. Kautomator позволяет значительно упростить написание тестов, а также добавляет ряд преимуществ в сравнении с UiAutomator, о которых подробно можно почитать в [Wiki]( https://kasperskylab.github.io/Kaspresso/Wiki/Kautomator-wrapper_over_UI_Automator/).
+For these purposes, Kaspresso has the Kautomator component - a wrapper over the well-known UiAutomator tool. Kautomator makes writing tests much easier, and also adds a number of advantages compared to UiAutomator, which you can read about in detail in the [Wiki](https://kasperskylab.github.io/Kaspresso/Wiki/Kautomator-wrapper_over_UI_Automator/).
 
-Page object-ы для экранов сторонних приложений нужно наследовать не от `KScreen`, а от `UiScreen`. Дополнительно требуется переопределить метод `packageName`, чтобы он возвращал название пакета тестируемого приложения
+Page objects for screens of third-party applications should not inherit from `KScreen`, but from `UiScreen`. Additionally, you need to override the `packageName` method so that it returns the package name of the application under test:
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial.screen
@@ -308,9 +303,9 @@ object GooglePlayScreen : UiScreen<GooglePlayScreen>() {
 }
 ```
 
-Далее все элементы пользовательского интерфейса будут представлять собой экземпляры классов с приставкой `Ui` (`UiButton`, `UiTextView`, `UiEditText`...), а не `K` (`KButton`, `KTextView`, `KEditText`...), как это было раньше. Дело в том, что сейчас мы тестируем другое приложение и нам нужна функциональность, доступная в компонентах Kautomator.
+Further, all user interface elements will be instances of classes with the prefix `Ui` (`UiButton`, `UiTextView`, `UiEditText`...), and not `K` (`KButton`, `KTextView`, `KEditText`. ..) as it was before. The point is that we are currently testing another application and we need the functionality available in the Kautomator components.
 
-На этом экране нас интересует кнопка `signIn`, добавляем ее:
+On this screen, we are interested in the `signIn` button, add it:
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial.screen
@@ -326,19 +321,19 @@ object GooglePlayScreen : UiScreen<GooglePlayScreen>() {
 }
 ```
 
-В фигурных скобках `UiButton {…}` нужно использовать какой-то matcher, благодаря которому мы найдем элемент на экране. Ранее мы использовали только `withId`, но сейчас id кнопки не доступен и придется использовать какой-то другой. 
+In curly brackets `UiButton {...}` we need to use some kind of matcher, thanks to which we will find the element on the screen. Previously, we used only `withId`, but now the id of the button is not available and we will have to use some other one.
 
-Чтобы посмотреть все доступные matcher-ы, можно перейти в определение `UiButton` (удерживая `ctrl`, кликаем левой кнопкой мыши по названию класса). Внутри него вы увидите класс `UiViewBuilder` – переходите в него
+To see all available matchers, you can go to the `UiButton` definition (hold `ctrl` and left-click on the class name). Inside it you will see the class `UiViewBuilder`.
 
 <img src="../images/uiautomator/ui_button.png" alt="UI Button"/>
 
-Здесь находится множество matcher-ов, которые вы можете использовать. 
+The `UiViewBuilder` class contains many matchers that you can use. By going to its definition (holding `ctrl`, left-clicking on the class name), you can see the full up-to-date list:
 
 <img src="../images/uiautomator/matchers.png" alt="Matchers"/>
 
-Например, можно использовать `withText`, чтобы найти элемент, содержащий этот текст, или при помощи `withClassName` найти экземпляр какого-то класса.
+For example, you can use `withText` to find the element containing specific text, or use `withClassName` to find an instance of some class.
 
-Давайте найдем кнопку по тексту, который на ней указан
+Let's find the button by the text that is indicated on it
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial.screen
@@ -354,7 +349,7 @@ object GooglePlayScreen : UiScreen<GooglePlayScreen>() {
 }
 ```
 
-Можем добавлять тест – проверим, что на экране Google Play отображается кнопка логина
+We can add a test - let's check that the login button is displayed on the Google Play screen:
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -387,26 +382,26 @@ class GooglePlayTest : TestCase() {
 }
 ```
 
-Запускаем. Тест пройден успешно.
+Let's launch the test. It passed successfully.
 
-## Тестирование системного UI
+## Testing the system UI
 
-Мы рассмотрели один вариант, когда для тестирования нужно использовать UI automator – если мы взаимодействуем со сторонним приложением. Но это не единственный случай, когда его стоит применять.
+We have considered one option when we need to use the UI automator for testing - if we are interacting with a third-party application. But this is not the only case when it should be used.
 
-Давайте откроем наше приложение `tutorial` и перейдем на экран `Notification Activity`
+Let's open our `tutorial` application and go to the `Notification Activity` screen:
 
 <img src="../images/uiautomator/notification_activity_btn.png" alt="Notification Activity Button" width="300"/>
 
-Кликаем по кнопке “Show notification” – сверху отображается уведомление
+Click on the “Show notification” button - a notification is displayed on top.
 
 !!! info
-     Подробнее про уведомления (notifications) в Android можно почитать [здесь]( https://developer.android.com/develop/ui/views/notifications)
+    You can read more about notifications in Android [here](https://developer.android.com/develop/ui/views/notifications).
 
 <img src="../images/uiautomator/notification.png" alt="Notification Shown" width="300"/>
 
-Давайте попробуем протестировать этот экран.
+Let's try to test this screen.
 
-Сначала создадим Page Object для экрана с кнопкой «Показать уведомление». Этот экран находится в нашем приложении, значит можем унаследоваться от `KScreen`. Id кнопки можем найти через Layout Inspector
+First, let's create a Page Object for the screen with the "Show Notification" button. This screen is in our application, so we can inherit from `KScreen`. Button id can be found through the Layout Inspector:
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial.screen
@@ -424,7 +419,7 @@ object NotificationActivityScreen : KScreen<NotificationActivityScreen>() {
 }
 ```
 
-В Page Object главного экрана добавим кнопку открытия `NotificationActivity`
+In the Page Object of the main screen, add a button to open `NotificationActivity`:
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial.screen
@@ -445,7 +440,7 @@ object MainScreen : KScreen<MainScreen>() {
 }
 ```
 
-Можно создавать тест, сначала просто покажем уведомление, кликнув на кнопку на главном экране
+You can create a test, first just show a notification by clicking on the button on the main screen:
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -484,29 +479,27 @@ class NotificationActivityTest : TestCase() {
 }
 ```
 
-Запускаем. Тест пройден успешно, уведомление отображается.
+Let's launch the test. It passed successfully, notification is displayed.
 
-Теперь давайте проверим тексты в самом уведомлении, что заголовок и контент содержат необходимый текст. 
+Now let's check the texts in the notification itself that the title and content contain the required text.
 
-Найти id элементов при помощи "Layout Inspector" или "Developer Assistant" не получится, т.к. отображение уведомлений относится к системному UI. В этом случае нам придется использовать один из двух вариантов : запустить Ui Automator Viewer и посмотреть через него, либо выполнить команду `adb shell uiautomator dump`.
+Finding the id of the elements using the `Layout Inspector` or `Developer Assistant` will not work, because display of notifications belongs to the system UI. In this case, we will have to use one of two options: launch the Ui Automator Viewer and look through it, or run the `adb shell uiautomator dump` command.
 
-Далее мы покажем решение через Ui Automator Viewer, а также прикрепим скриншот, где найти View-элементы в файле `window_dump.xml`
+Next, we will show the solution through the `Ui Automator Viewer`, and also attach a screenshot of where to find the View elements in the `window_dump.xml` file
 
-Открываем список уведомлений и делаем скриншот
+Open the list of notifications and take a screenshot:
 
 <img src="../images/uiautomator/uiautomator_notification.png" alt="Ui automator notification"/>
 
-При помощи dump необходимые элементы можно найти следующим образом
+Using the `dump` command, the necessary elements can be found as follows
 
 <img src="../images/uiautomator/dump_6.png" alt="Dump "/>
 
 <img src="../images/uiautomator/dump_7.png" alt="Dump"/>
 
+Here, by the name of the package, you can see that the notification shade does not apply to our application, so for testing it is necessary to inherit from the UiScreen class and use Kautomator.
 
-
-Здесь по названию пакета вы можете видеть, что шторка уведомлений не относится к нашему приложению, поэтому для тестирования необходимо унаследоваться от класса UiScreen и использовать Kautomator.
-
-Создаем Page Object экрана уведомления:
+Create a Page Object of the notification screen:
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial.screen
@@ -519,9 +512,9 @@ object NotificationScreen : UiScreen<NotificationScreen>() {
 }
 ```
 
-В качестве `packageName` было указано значение, полученное с помощью `dump` или `Ui Automator Viewer`.
+`packageName` was set to the value obtained by `dump` or `Ui Automator Viewer`.
 
-Объявляем элементы, с которыми будем взаимодействовать.
+We declare the elements with which we will interact.
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial.screen
@@ -538,7 +531,7 @@ object NotificationScreen : UiScreen<NotificationScreen>() {
 }
 ```
 
-Найти элементы можно по разным критериям, например по тексту или по id. Давайте найдем элемент по его id. Вызываем matcher `withId`
+You can find elements by different criteria, for example, by text or by id. Let's find an element by its id. Call matcher `withId`:
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial.screen
@@ -555,9 +548,9 @@ object NotificationScreen : UiScreen<NotificationScreen>() {
 }
 ```
 
-Первым параметром нужно передать название пакета, в ресурсах которого будет осуществлен поиск элемента. Мы могли бы передать ранее полученные значения `packageName` и `resource_id`
+The first parameter is to pass the name of the package in whose resources the element will be searched. We could pass in the previously obtained `packageName` and `resource_id` values:
 
-```
+```kotlin
 package com.kaspersky.kaspresso.tutorial.screen
 
 import com.kaspersky.components.kautomator.component.text.UiTextView
@@ -572,15 +565,7 @@ object NotificationScreen : UiScreen<NotificationScreen>() {
 }
 ```
 
-Но в таком случае элементы найдены не будут и вот по какой причине:
-
-Схема `id` элемента, который мы ищем на экране другого приложения выглядит так: `package_name:id/resource_id`
-
-Эта строка будет сформирована из двух параметров, которые мы передали в метод `withId`. Вместо package_name будет подставлено имя пакета ` com.android.systemui `, вместо resource_id – идентификатор `android:id/title`
-
-В итоге получившийся resource_id будет выглядеть так: `com.android.systemui:id/android:id/title`
-
-Получается, что символы `:id/` будут добавлены за нас, а передавать нам нужно только то, что правее косой черты, это и есть идентификатор:
+But in this case, the elements will not be found. The `id` scheme of the element we are looking for on the screen of another application looks like this: `package_name:id/resource_id`. This string will be formed from the two parameters that we passed to the `withId` method. Instead of `package_name` the package name ` com.android.systemui ` will be substituted, instead of `resource_id` the identifier `android:id/title` will be substituted. The resulting resource_id will look like this: `com.android.systemui:id/android:id/title`. It turns out that the characters `:id/` will be added for us, and we only need to pass what is to the right of the slash, this is the identifier:
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial.screen
@@ -597,15 +582,15 @@ object NotificationScreen : UiScreen<NotificationScreen>() {
 }
 ```
 
-Теперь полный resource_id выглядит так: `com.android.systemui:id/title` и ` com.android.systemui:id/text`
+Now the full `resource_id` looks like this: `com.android.systemui:id/title` and ` com.android.systemui:id/text`.
 
-Обратите внимание на то, что первая часть (package_name) отличается от того, что указано в Ui Automator Viewer, мы указали название пакета `com.android.systemui`, а в программе написано `android`. 
+Please note that the first part (`package_name`) is different from what is specified in the `Ui Automator Viewer`, we specified the package name `com.android.systemui`, and the program says `android`.
 
 <img src="../images/uiautomator/uiautomator_package.png" alt="Ui automator package" />
 
-Дело в том, что в каждом приложении могут быть свои ресурсы, и в этом случае первая часть идентификатора ресурса будет содержать имя пакета того приложения, где ресурс создан, а также приложение может использовать ресурсы системы Android. Они являются общими для разных приложений и содержат название пакета `android`. 
+The fact is that each application can have its own resources, in which case the first part of the resource identifier will contain the package name of the application where the resource was created, and the application can also use the resources of the Android system. They are common to different applications and contain the package name `android`.
 
-Это как раз такой случай, поэтому в качестве первого параметра мы указываем `android`.
+This is exactly the case, so we specify `android` as the first parameter.
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial.screen
@@ -622,7 +607,7 @@ object NotificationScreen : UiScreen<NotificationScreen>() {
 }
 ```
 
-Теперь можем добавлять проверки на данный экран. Убедимся, что в заголовке и в теле уведомления установлены правильные тексты:
+Now we can add checks to this screen. Let's make sure that the correct texts are set in the title and in the body of the notification:
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -670,12 +655,8 @@ class NotificationActivityTest : TestCase() {
 }
 ```
 
-Запускаем. Тест пройден успешно.
+Let's launch the test. It passed successfully.
 
-## Итог
+## Summary
 
-В этом уроке мы научились запускать тесты в сторонних приложениях, а также узнали, как можно проверить системный UI при помощи UiAutomator, а точнее его обертки - Kautomator. Кроме того, мы познакомились с программами, позволяющими анализировать UI приложений, даже если у нас нет доступа к их исходному коду – это Ui Automator Viewer, Developer Assistant и UiAutomator Dump.
-
-
-<br>
-
+In this lesson, we learned how to run tests for a third-party applications, and also learned how you can test the system UI using `UiAutomator`, or rather its wrapper - `Kautomator`. In addition, we got to know the programs that allow us to analyze the UI of applications, even if we do not have access to their source code - these are `Ui Automator Viewer`, `Developer Assistant` and `UiAutomator Dump`.
