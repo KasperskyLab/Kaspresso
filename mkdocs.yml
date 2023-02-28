@@ -83,7 +83,7 @@ plugins:
           5. Wifi_sample_test: 5. Wifi_sample_test
           6. Выделение секций и шагов: 6. Выделение секций и шагов
           7. Вынесение дублирующихся шагов в Scenario: 7. Вынесение дублирующихся шагов в Scenario
-          8. UiAutomator. Тестирование за рамками приложения: 8. UiAutomator. Тестирование за рамками приложения
+          8. UiAutomator. Тестирование за рамками приложения: 8. Kautomator. Third Party Application Testing
           9. flakySafely: 9. flakySafely
           10. Работа с Android permissions: 10. Working with Android permissions
           11. RecyclerView: 11. RecyclerView
