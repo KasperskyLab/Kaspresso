@@ -1,46 +1,44 @@
-# TODO: добавить английский перевод
+# Testing the Internet connection and working with the Device class
 
-# Тестирование интернет-соединения и работа с классом Device
+In this tutorial we'll create a test that tests the Internet Availability (`WifiActivity`) screen.
 
-В сегодняшнем уроке мы создадим тест, который проверяет работу экрана Internet Availability (`WifiActivity`)
-
-Запускаем наше приложение tutorial и кликаем по кнопке `Internet Availability`
+Run our tutorial application and click on the `Internet Availability` button
 
 <img src="../images/wifi_test/internet_availability_button.png" alt="Button Internet Availability" width="300"/>
 
-## Ручное тестирование
+## Manual testing
 
-Давайте сначала протестируем этот экран руками
+Let's manually test this screen first.
 
-Изначально у нас есть кнопка `CHECK WIFI STATUS`, больше никакого текста на экране нет. На текущий момент Wifi на устройстве включен
+Initially, we have a `CHECK WIFI STATUS` button, there is no more text on the screen. Wifi is currently enabled on the device.
 
 <img src="../images/wifi_test/first_launch_1.png" alt="Launch Wifi Test Activity" width="300"/>
 
 <img src="../images/wifi_test/first_launch_2.png" alt="Launch Wifi Test Activity" width="300"/>
 
-Кликаем на кнопку
+Let's click on the button.
 
 <img src="../images/wifi_test/wifi_enabled.png" alt="Wifi enabled" width="300"/>
 
-Эта кнопка кликабельна, после клика отображается корректный статус состояния Wifi - enabled. Отключаем Wifi
+This button is clickable, after clicking, the correct Wifi state status is displayed - enabled. Disable WiFi.
 
 <img src="../images/wifi_test/turn_off_wifi.png" alt="Turn-off wifi" width="300"/>
 
-Кликаем на кнопку снова и проверям статус Wifi сейчас
+Click on the button again and check the Wifi status now:
 
 <img src="../images/wifi_test/wifi_disabled.png" alt="Wifi disabled" width="300"/>
 
-Состояние определяется корректно. Последняя проверка - давайте перевернем устройство и убедимся, что текст на экране сохраняется
+The state is determined correctly. One last check - let's flip the device over and make sure the text on the screen is preserved.
 
 <img src="../images/wifi_test/wifi_disabled_portrait.png" alt="Wifi disabled landscape"/>
 
-Текст сохраняется успешно, все тесты пройдены. Теперь нам необходимо добиться такого результата, чтобы все те же проверки выполнялись в автоматическом режиме. 
+The text is saved successfully, all tests passed. Now we need to achieve such a result that all the same checks are performed automatically. 
 
-## Автотесты
+## Writing autotests
 
-Сейчас во время теста нужно будет автоматически включать и выключать интернет, а также менять ориентацию устройства на альбомную. Это выходит за рамки ответственности нашего приложения, а значит для тестов нам придется использовать adb-команды. Для этого необходимо, чтобы был запущен ADB-сервер. Мы разбирали этот момент в [предыдущем уроке](https://kasperskylab.github.io/Kaspresso/Tutorial/%D0%92%D1%8B%D0%BF%D0%BE%D0%BB%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5%20adb-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4/). Если вдруг забыли, как это делается, пересмотрите его.
+Now during the test, you will need to automatically turn the Internet on and off, as well as change the orientation of the device to landscape. This is beyond the responsibility of our application, which means that we will have to use adb commands for tests. This requires the ADB server to be running. We discussed this point in the [previous lesson](https://kasperskylab.github.io/Kaspresso/en/Tutorial/%D0%92%D1%8B%D0%BF%D0%BE%D0%BB%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5%20adb-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4/). If you suddenly forgot how to do it, review it.
 
-Сейчас в нашем тесте нужно будет на главном экране кликнуть по кнопке `Internet Availability`. А значит необходимо доработать Page Object главного экрана, добавив туда еще одну кнопку:
+Now in our test, you will need to click on the `Internet Availability` button on the main screen. This means that it is necessary to modify the Page Object of the main screen by adding one more button there:
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial.screen
@@ -59,7 +57,7 @@ object MainScreen : KScreen<MainScreen>() {
 }
 ```
 
-Теперь можем добавлять новый тестовый класс. В том же пакете, где у нас лежат другие тесты, мы добавляем WifiSampleTest
+Now we can add a new test class. In the same package where we have other tests, we add WifiSampleTest:
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -71,12 +69,12 @@ class WifiSampleTest: TestCase() {
 }
 ```
 
-Для проверки экрана с доступностью Wifi на него нужно перейти. Для этого мы проделаем такие же шаги, как в [уроке](https://kasperskylab.github.io/Kaspresso/Tutorial/Writing_simple_test/), в котором писали наш первый автотест:
+To check the Internet availability screen, you need to go to it. To do this, we will follow the same steps as in [tutorial](https://kasperskylab.github.io/Kaspresso/Tutorial/Writing_simple_test/), in which we wrote our first autotest:
 
 <ol>
-    <li>Добавим activityRule, чтобы при запуске теста у нас открывалась MainActivity</li>
-    <li>Проверим, что кнопка для перехода на экран провеки Wifi видима и кликабельна</li>
-    <li>Кликнем по кнопке "Internet Availability"</li>
+    <li>Let's add an activityRule so that when the test starts, we open MainActivity</li>
+    <li>Check that the button to go to the Internet check screen is visible and clickable</li>
+    <li>Click on the "Internet Availability" button</li>
 </ol>
 
 ```kotlin
@@ -106,28 +104,28 @@ class WifiSampleTest : TestCase() {
 }
 ```
 
-Запускаем. Тест пройден успешно и экран проверки Wifi запускается. Теперь можем тестировать его.
+Let's launch the test. It passed successfully. The Wifi test screen starts. Now we can test it.
 
-Для полноценного тестирования этого экрана нам понадобится менять состояние подключения к Wifi, а также менять ориентацию устройства. Для этого в классе BaseTestCase (от которого унаследован наш класс WifiSampleTest) есть экземпляр класса `Device`, который так и называется `device`. Мы уже сталкивались с ним в предыдущем уроке, когда получали packageName нашего приложения.
+To fully test this screen, we will need to change the Wifi connection state, as well as change the orientation of the device. To do this, in the `BaseTestCase` class (from which our `WifiSampleTest` class is inherited) there is an instance of the `Device` class, which is called `device`. We already encountered it in the previous lesson when we got the packageName of our application.
 
-У этого объекта есть множество полезных методов, подробно про которые вы можете почитать [тут](https://kasperskylab.github.io/Kaspresso/Wiki/Working_with_Android_OS/)
+This object has many useful methods, which you can read in detail [here](https://kasperskylab.github.io/Kaspresso/Wiki/Working_with_Android_OS/).
 
-Первым делом нас интересует метод, который включает/отключает интернет. За работу с сетью отвечает объект `network`, который есть в классе `Device`.
+First of all, we are interested in a method that enables / disables the Internet. The `network` object, which is in the `Device` class, is responsible for working with the network.
 
-Если мы хотим изменить состояние Wifi, то можем это сделать следующим образом:
+If we want to change the Wifi state, we can do it like this:
 
 ```kotlin
 /**
-* В качестве параметра передаем тип boolean, false если хотим выключить WIFI, true - если хотим включить
+* As a parameter, we pass the boolean type, false if we want to turn off WIFI, true - if we want to turn it on
 */
 device.network.toggleWiFi(false)
 ```
 
-Кроме WIFI мы можем также управлять мобильной сетью, а также интернет-подключением на устройстве в целом (Wifi + мобильная сеть). Для того чтобы посмотреть все доступные методы можно перейти в документацию, указанную выше, но есть способ проще - после названия объекта поставить точку и посмотреть, какие методы можно вызвать у этого объекта. По их названию обычно понятно, что они делают.
+In addition to WIFI, we can also manage the mobile network, as well as the Internet connection on the device as a whole (Wifi + mobile network). In order to see all the available methods, you can go to the documentation above, but there is an easier way - put a dot after the name of the object and see which methods can be called on this object. By their name it is usually clear what they do.
 
 <img src="../images/wifi_test/available_methods.png" alt="Available methods"/>
 
-Давайте напишем тест, который выполнит все необходимые проверки, кроме переворота устройства - переворотом мы займемся чуть позже. Первым делом нужно создать Page Object экрана проверки интернет-подключения `WifiScreen`. Добавляем его в пакете `com.kaspersky.kaspresso.tutorial.screen`
+Let's write a test that performs all the necessary checks, except for flipping the device - we'll deal with flipping a bit later. The first step is to create a Page Object for the `WifiScreen` internet connection test screen. Add it in the `com.kaspersky.kaspresso.tutorial.screen` package
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial.screen
@@ -147,16 +145,16 @@ object WifiScreen : KScreen<WifiScreen>() {
 }
 ```
 
-Теперь добавляем шаги:
+Now add steps:
 
 <ol>
-    <li>Проверяем, что кнопка видима и кликабельна</li>
-    <li>Проверяем, что заголовок не содержит текст</li>
-    <li>Кликаем по кнопке</li>
-    <li>Проверяем, что текст в заголовке стал "enabled"</li>
-    <li>Отключаем Wifi</li>
-    <li>Кликаем по кнопке</li>
-    <li>Проверяем, что текст в заголовке стал "disabled"</li>
+    <li>Check if the button is visible and clickable</li>
+    <li>Check that the title contains no text</li>
+    <li>Click on the button</li>
+    <li>Checking that the title text is "enabled"</li>
+    <li>Disable Wifi</li>
+    <li>Click on the button</li>
+    <li>Checking that the text in the header is "disabled"</li>
 </ol>
 
 ```kotlin
@@ -198,7 +196,7 @@ class WifiSampleTest : TestCase() {
 }
 ```
 
-Вспоминаем, что использовать захардкоженные строки не стоит, лучше вместо них использовать строковые ресурсы.
+We remember that it is not worth using hardcoded strings, it is better to use string resources instead.
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -238,23 +236,23 @@ class WifiSampleTest : TestCase() {
 }
 ```
 !!! info
-    Не забывайте перед запуском теста включить Wifi на устройстве, т.к. после каждого запуска он у вас будет выключен и при втором прогоне тест не пройдет.
+    Do not forget to turn on Wifi on the device before starting the test, because after each launch, it will be turned off for you and the test will fail on the second run.
 
-Теперь нам нужно научиться переворачивать устройство, чтобы выполнить остальные проверки. За переворот устройства отвечает объект `exploit` из класса `Device`, про который вы также можете подробнее почитать в [документации](https://kasperskylab.github.io/Kaspresso/Wiki/Working_with_Android_OS/)
+Now we need to learn how to flip the device in order to perform the rest of the checks. The `exploit` object from the `Device` class is responsible for flipping the device, about which you can also read more in [documentation](https://kasperskylab.github.io/Kaspresso/Wiki/Working_with_Android_OS/).
 
-Весь процесс теста теперь будет выглядеть следующим образом:
+The whole test process will now look like this:
 
 <ol>
-    <li>Устанавливаем на устройстве книжную ориентацию</li>
-    <li>Проверяем, что кнопка видима и кликабельна</li>
-    <li>Проверяем, что заголовок не содержит текст</li>
-    <li>Кликаем по кнопке</li>
-    <li>Проверяем, что текст в заголовке стал "enabled"</li>
-    <li>Отключаем Wifi</li>
-    <li>Кликаем по кнопке</li>
-    <li>Проверяем, что текст в заголовке стал "disabled"</li>
-    <li>Переворачиваем устройство</li>
-    <li>Проверяем, что текст на кнопке сохранился "disabled"</li>
+    <li>Set device to portrait orientation</li>
+    <li>Checking that the button is visible and clickable</li>
+    <li>Checking that the title does not contain text</li>
+    <li>Click on the button</li>
+    <li>Checking that the title text is "enabled"</li>
+    <li>Disable Wifi</li>
+    <li>Click on the button</li>
+    <li>Checking that the text in the header is "disabled"</li>
+    <li>Flip the device</li>
+    <li>Check that the text on the button is still "disabled"</li>
 </ol>
 
 ```kotlin
@@ -298,19 +296,15 @@ class WifiSampleTest : TestCase() {
     }
 }
 ```
-Запускаем. Тест пройден успешно.
+Let's launch the test. It passed successfully.
 
-# Итог
+# Summary
 
-Итак, сегодня мы попрактиковались с объектом `device`, научились менять стейт интернет-соединения и ориентацию экрана из тестового класса. При этом тест запускается, все проверки завершаются успешно, но в нашем коде есть несколько серьезных проблем:
+So, in this lesson we practiced with the `device` object, learned how to change the status of the Internet connection and the screen orientation from the test class. Test passed and all checks completed successfully, but there are several serious problems in our code:
 
 <ul>
-    <li>Тест не разбит на шаги. В итоге мы имеем большое полотно кода, в котором достаточно сложно разобраться</li>
-    <li>Тест выполняется успешно только в том случае, если мы предварительно включили интернет на устройстве. При этом, при каждом следующем запуске тест будет падать из-за того, что внутри него Wifi отключается</li>
+    <li>The test is not broken into steps. As a result, we have a large canvas of code, which is quite difficult to understand</li>
+    <li>The test only succeeds if we have previously enabled internet on the device. At the same time, at each next start, the test will fall due to the fact that Wifi is turned off inside it</li>
 </ul>
 
-В следующих уроках мы узнаем, как можно улучшить этот код и решить возникшие проблемы.
-
-<br>
-<br>
-
+In the following lessons, we will learn how we can improve this code and solve the problems that have arisen.
