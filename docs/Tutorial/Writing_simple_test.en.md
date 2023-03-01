@@ -1,71 +1,72 @@
-# TODO: добавить английский перевод
+﻿# Writing your first Kaspresso test
 
-# Ваш первый тест на Kaspresso
+## Switch to the desired branch in GIT
 
-## Переключаемся на нужную ветку в GIT
-
-<br> В Android Studio вы можете переключаться между ветками и таким обазом видеть разные версии проекта. Изначально, после загрузки Kaspresso вы будете находиться в главной ветке - `master`
+In Android Studio you can switch between branches and thus see different versions of a project. Initially, after downloading Kaspresso, you will be in the master branch - `master`.
 
 <img src="../images/simple_test/master_branch.png" alt="Master branch"/>
 
-<br> В этой ветке находится исходный код приложения, которое мы будем покрывать тестами. В текущем и последующих уроках будет приведена пошаговая инструкция в формате codelabs по написанию автотестов. Итоговый результат со всеми написанными тестами доступен в ветке `TECH-tutorial-results`, вы в любой момент сможете переключиться на нее и посмотреть решение.
+This branch contains the source code of the application, which we will cover with tests. In the current and subsequent lessons, step-by-step instructions will be given in codelabs format for writing autotests. The final result with all written tests is available in the `TECH-tutorial-results` branch, you can switch to it at any time and see the solution.
 
-<br> Для этого кликните на название ветки, в которой находитесь и в поиске введите название инетересующей вас ветки.
+To do this, click on the name of the branch you are in, and in the search, enter the name of the branch you are interested in.
 
 <img src="../images/simple_test/switch_to_results.png" alt="Switch to results"/>
 
-## Ручное тестирование
+## Manual testing
 
-<br> Прежде чем приступать к написанию теста, давайте поближе познакомимся с функционалом, который мы будем покрывать автотестами. Для этого переключаемся на master-ветку.
+Before we start writing a test, let's take a closer look at the functionality that we will cover with autotests. To do this, switch to the master branch.
 
-<br> Открываем выбор конфигурации (1) и выбираем tutorial (2):
+Open configuration selection (1) and select tutorial (2):
 
 <img src="../images/simple_test/Select_tutorial.png" alt="Select tutorial"/>
 
-<br> Проверяем, что выбран нужный девайс (1) и запускаем приложение (2):
+Check that the desired device is selected (1) and run the application (2):
 
 <img src="../images/simple_test/Launch_tutorial.png" alt="Launch tutorial"/>
 
-<br> После успешного запуска приложения мы видим основной экран приложения Tutorial.
+After successfully launching the application, we see the main screen of the Tutorial application.
 
 <img src="../images/simple_test/Tutorial_main.png" alt="Tutorial main" width="200"/>
 
-<br> Нажимаем на кнопку с текстом "Simple test" и видим следующий экран:
+Click on the button with the text "Simple test" and see the following screen:
 
 <img src="../images/simple_test/First_tutorial_screen.png" alt="Page object example" width="200"/>
 
-<br> Экран состоит из:
-<br> 1. *Заголовка `TextView`*
-<br> 2. *Поля ввода `EditText`*
-<br> 3. *Кнопки `Button`*
+The screen consists of:
+
+1. *Header `TextView`*
+
+2. *EditText input fields*
+
+3. *Buttons*
 
 !!! info
-    Полный список виджетов в android с подробной информацией можно найти [здесь](https://developer.android.com/reference/android/widget/package-summary)
+    A full list of widgets in android with detailed information can be found [here](https://developer.android.com/reference/android/widget/package-summary).
 
-<br> При нажатии на кнопку текст в заголовке меняется на введенный в поле ввода.
+When you click on the button, the text in the header changes to the one entered in the input field.
 
-## Автоматическое тестирование
+## Automatic testing
 
-<br> Мы вручную проверили, что результат работы приложения соответствует ожиданиям:
+We manually checked that the result of the application meets the expectations:
 
 <ol>
-    <li>На главном экране есть кнопка перехода на экран SimpleTest (остальные элементы этого экрана нас сейчас не интересуют)</li>
-    <li>Эта кнопка видима</li>
-    <li>На нее можно кликнуть</li>
-    <li>При клике на нее мы переходим на экран SimpleTest</li>
-    <li>На экране SimpleTest есть элементы - заголовок, поле ввода и кнопка</li>
-    <li>Все эти элементы видимы</li>
-    <li>Заголовок содержит тест по умолчанию</li>
-    <li>Если ввести какой-то текст в поле ввода и кликнуть на кнопку, то текст в заголовке меняется на введенный</li>
+    <li>On the main screen there is a button to go to the `SimpleTest` screen (the rest of the elements of this screen do not interest us now)</li>
+    <li>This button is visible</li>
+    <li>This button is clickable</li>
+    <li>Clicking on it takes us to the SimpleTest screen</li>
+    <li>`SimpleTest` screen has three UI elements - title, input field and button</li>
+    <li>All these elements are visible</li>
+    <li>Header contains default text</li>
+    <li>If you enter some text in the input field and click on the button, then the text in the title changes to the entered one</li>
 </ol>
 
-<br> Теперь нам нужно все те же проверки написать в коде, чтобы они осуществлялись в автоматическом режиме. 
+Now we need to write all the same checks in the code so that they are performed automatically.
 
-<br> Чтобы покрыть приложение тестами Kaspresso, необходимо начать с подключения библиотеки Kaspresso в зависимостях проекта.
+To cover the application with Kaspresso tests, you need to start by including the Kaspresso library in the project dependencies.
 
-## Подключаем Kaspresso к проекту
+## Including Kaspresso in the project
 
-<br> Переключаем отображение файлов проекта как Project (1) и добавляем зависимость в существующую секцию `dependencies` в файле `build.gradle` модуля `Tutorial`:
+Switching the display of the project files as Project (1) and adding the dependency to the existing `dependencies` section in the `build.gradle` file of the `Tutorial` module:
 
 <img src="../images/simple_test/Tutorial_build_gradle.png" alt="Tutorial build gradle"/>
 
@@ -76,45 +77,46 @@ dependencies {
 }
 ```
 
-## Написание теста начнем с создания Page object для текущего экрана.
+## Let's start writing the test by creating a Page object for the current screen.
 
-<br>Можем писать код нашего теста. Чтобы это сделать, необходимо для каждого экрана, который участвует в тесте, создать модель (класс), внутри которого объявить все элементы интерфейса (кнопки, текстовые поля и т.д.), из которых состоит экран, с которыми будет взаимодействовать тест. Такой подход называется `Page Object` и подробнее о нем вы можете почитать в [документации](https://kasperskylab.github.io/Kaspresso/Wiki/Page_object_in_Kaspresso/)
+We can start writing the code of our test. To do this, it is necessary to create a model (class) for each screen that participates in the test, inside which to declare all the interface elements (buttons, text fields, etc.) that make up the screen that the test will interact with. This approach is called `Page Object` and you can read more about it in [documentation](https://kasperskylab.github.io/Kaspresso/Wiki/Page_object_in_Kaspresso/).
 
-<br>В первых четырех пунктах теста мы взаимодействуем с главным экраном, поэтому первым делом необходимо создать Page Object главного экрана. 
-<br>Работать мы будем в папке androidTest в модуле tutorial. Если у вас этой папки нет, то ее необходимо создать, для этого кликаем правой кнопкой мыши на папку src и выбираем пункт New -> Directory 
+In the first four steps of the test, we are interacting with the main screen, so the first step is to create a Page Object for the main screen.
+
+We will work in the `androidTest` folder in the tutorial module. If you do not have this folder, then you need to create it, for this we right-click on the `src` folder and select `New` -> `Directory`.
 
 <img src="../images/simple_test/create_directory.png" alt="Create directory"/>
 
-<br>Выбираем пункт `androidTest/kotlin`
+Select the item `androidTest/kotlin`:
 
 <img src="../images/simple_test/name_android_test.png" alt="Name directory androidTest"/>
 
-<br>Внутри папки kotlin давайте создадим отдельный пакет (package), в котором будем хранить все Page Object-ы. 
+Inside the kotlin folder, let's create a separate package in which we will store all Page Objects:
 
 <img src="../images/simple_test/create_package.png" alt="Create package"/>
 
-<br>Создание отдельного пакета на функциональность не влияет, мы это делаем просто для удобства, чтобы все модели экранов лежали в одном месте. Вы можете дать пакету любое имя (за некоторым исключением), но обычно в тестах используют такие же названия, как в самом приложении. Мы можем перейти в файл MainActivity и тут сверху будет указано имя пакета. 
+Creating a separate package does not affect the functionality, we do it just for convenience, so that all screen models are in one place. You can give the package any name (with a few exceptions), but it's common for tests to use the same name as the application itself. We can go to the MainActivity file and the package name will be listed at the top.
 
 <img src="../images/simple_test/package_name_main_activity.png" alt="MainActivity Package name"/>
 
-<br>Копируем это имя и вставляем в название пакета. Конкретно в этом пакете мы будем хранить только модели экранов (Page Object-ы), поэтому в конце давайте добавим `.screen`.
+Copy this name and paste it into the package name. Specifically, in this package we will store only screen models (Page Objects), so let's add `.screen` at the end.
 
 <img src="../images/simple_test/package_name_screen.png" alt="Screen Package name"/>
 
-<br>Когда мы будем добавлять другие классы в папку с тестами, то будем класть их уже в другие пакеты, но при этом первая часть их названия будет такой же `com.kaspersky.kaspresso.tutorial`.
+When we add other classes to the folder with tests, we will put them in other packages, but the first part of their name will be the same `com.kaspersky.kaspresso.tutorial`.
 
-<br>Теперь в созданном пакете мы добавляем модель экрана (класс) 
+Now in the created package we add a screen model (class):
 
 <img src="../images/simple_test/create_class.png" alt="Create class"/>
 
-<br>Выбираем тип Object и именуем MainScreen.
+Choose the type Object and name it MainScreen.
 
 <img src="../images/simple_test/create_main_screen.png" alt="Create MainScreen"/>
 
-<br>MainScreen представляет собой модель главного экрана. Для того чтобы эту модель можно было использовать в автотестах, необходимо унаследоваться от класса KScreen, и в угловых скобках указать название этого класса.
+MainScreen is a model of the main screen. In order for this model to be used in autotests, it is necessary to inherit from the KScreen class and specify the name of this class in angle brackets.
 
 !!! info
-    Указание типа в угловых скобках в Java и Kotlin называется Generics. Подробнее об этом вы можете почитать в [документации по Java](https://docs.oracle.com/javase/tutorial/java/generics/types.html) и [Kotlin](https://kotlinlang.org/docs/generics.html)
+    Specifying the type in angle brackets in Java and Kotlin is called Generics. You can read more about this in [Java documentation](https://docs.oracle.com/javase/tutorial/java/generics/types.html) and [Kotlin](https://kotlinlang.org/docs/generics.html).
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial.screen
@@ -123,13 +125,13 @@ import com.kaspersky.kaspresso.screens.KScreen
 
 object MainScreen : KScreen<MainScreen>() {
 }
-
 ```
-<br>У нас возникает ошибка - раз мы унаследовались от класса KScreen, то нужно обязательно переопределить два метода. для того чтобы сделать это быстро в Android Studio можно нажать комбинацию клавиш `ctrl + i` и выбрать элементы, которые мы хотим переопределить. 
+
+An error occurred - the KScreen class contains two elements that need to be redefined when inheriting. In order to do this quickly in Android Studio, we can press the key combination `ctrl + i` and select the elements that we want to override.
 
 <img src="../images/simple_test/override.png" alt="Override methods"/>
 
-<br>Удерживая `ctrl` выбираем все пункты и нажимаем OK. 
+Holding `ctrl` select all items and press `OK`.
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial.screen
@@ -143,10 +145,9 @@ object MainScreen : KScreen<MainScreen>() {
     override val viewClass: Class<*>?
         get() = TODO("Not yet implemented")
 }
-
 ```
 
-<br>Здесь вместо TODO нужно написать корректную реализацию - id макета, который установлен на экране и название класса для связывания теста с конкретным файлом верстки и классом activity. Это нужно для удобства дальнейшей поддержки и разработки теста, но пока перед нами стоит задача написать первый тест, поэтому оставим значение null
+New lines of code appeared in the file. Instead of `TODO`, you need to write the correct implementation - the id of the layout (`layoutId`) that is set on the screen, and the name of the class (`viewClass`). This is necessary to associate the test with a specific layout file and activity class. This binding will make further support and refinement of the test more convenient, but for now we are faced with the task of writing the first test, so we will leave the `null` value.
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial.screen
@@ -160,33 +161,34 @@ object MainScreen : KScreen<MainScreen>() {
 }
 ```
 
-<br>Теперь внутри класса KScreen мы будем объявлять все элементы пользовательского интерфейса, с которыми будет взаимодействовать тест. В нашем случае на главном экране нас интересует только кнопка SimpleTest. 
+Now inside the KScreen class we will declare all the user interface elements with which the test will interact. In our case, we are only interested in the `SimpleTest` button on the main screen.
 
 <img src="../images/simple_test/simple_test_button.png" alt="Override methods" width="300"/>
 
-<br> Чтобы тест мог с ней взаимодйствовать, нужно знать id, по которому эту кнопку можно найти на экране. Эти идентификаторы присваивает разработчик при написании приложения. 
+In order for the test to interact with it, you need to know the id by which this button can be found on the screen. These identifiers are assigned by a developer when writing the application.
 
-<br>Чтобы узнать, какой id был присвоен какому-то элементу интерфейса, можно воспользоваться инструментом, встроенным в Android Studio - LayoutInspector.
+To find out what id has been assigned to some interface element, you can use the tool built into Android Studio - `LayoutInspector`.
 
 <ol>
-    <li>Запускаем приложение</li>
-    <li>В правом нижнем углу Android Studio выбираем пункт Layout Inspector <img src="../images/simple_test/bottom_layout_inspector.png" alt="Find bottom layout inspector"/></li>
-    <li>Ждем пока загрузится экран <img src="../images/simple_test/loaded_inspector.png" alt="Layout inspector loaded"/></li>
-    <li>Если экран не загрузился, то проверьте, что у вас выбран нужный процесс <img src="../images/simple_test/choose_process.png" alt="Choose process"/></li>
+    <li>Launching the application</li>
+    <li>In the bottom right corner of Android Studio select Layout Inspector <img src="../images/simple_test/bottom_layout_inspector.png" alt="Find bottom layout inspector"/></li>
+    <li>Wait for screen to load <img src="../images/simple_test/loaded_inspector.png" alt="Layout inspector loaded"/></li>
+    <li>If the screen does not load, then check that you have the desired process selected <img src="../images/simple_test/choose_process.png" alt="Choose process"/></li>
 </ol>
-<br>Ищем пункт id - это тот идентификатор, который нас интересует. 
+
+Looking for an item id - this is the identifier that interests us.
 
 <img src="../images/simple_test/button_id_search.png" alt="Search for button id"/>
 
-<br>Также важно понимать, с каким элементом UI мы работаем. Для этого можно перейти в макет, где элемент был объявлен и посмотреть всю информацию о нем.
+It is also important to understand what UI element we are working with. To do this, you can go to the layout where the element was declared and see all the information about it.
 
 <img src="../images/simple_test/find_layout.png" alt="Find layout"/>
 
-<br>В данном случае это элемент Button c вот таким id `simple_activity_btn`
+In this case, it's a Button element with id `simple_activity_btn`
 
 <img src="../images/simple_test/button_in_layout.png" alt="Find button in layout"/>
 
-<br>Можем добавлять эту кнопку в MainScreen, обычно название переменной дают такое же, как id, но без нижних подчеркиваний, какждое следующее слово с заглавной буквы (это называется camelCase)
+We can add this button to the `MainScreen`, usually the name of the variable is given the same as id, but without underscores, each next word is capitalized (this is called camelCase)
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial.screen
@@ -201,7 +203,8 @@ object MainScreen : KScreen<MainScreen>() {
     val simpleActivityButton = 
 }
 ```
-Пременной simpleActivityButton нужно присвоить значение, она представляет собой кнопку, которую можно протестировать - за это отвечает class KButton. Вот так будет выглядеть установка значения в эту переменную, сейчас мы подробно разберем, что делает этот код.
+
+The simpleActivityButton variable needs to be assigned a value, it represents a button that can be tested - class KButton is responsible for this. This is how setting the value to this variable will look like, now we will analyze in detail what this code does.
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial.screen
@@ -217,50 +220,51 @@ object MainScreen : KScreen<MainScreen>() {
 
     val simpleActivityButton = KButton { withId(R.id.simple_activity_btn) }
 }
-
 ```
-<br>Во-первых, давайте перейдем в определение KButton и посмотрим, что это. Для этого, удерживая ctrl, кликаем на название класса KButton левой кнопкой мыши.
+
+First, let's jump into the definition of KButton and see what it is. To do this, holding `ctrl`, click on the name of the KButton class with the left mouse button.
 
 <img src="../images/simple_test/show_kbutton_source.png" alt="Find source of KButton"/>
 
-<br>Видим, что это класс, который наследуется от KBaseView и реализует интерфейс TextViewAssertions. Можем перейти в определение KBaseView и посмотреть всех наследников этого класса, их тут достаточно много. 
+We see that this is a class that inherits from KBaseView and implements the TextViewAssertions interface. We can go to the definition of KBaseView and see all the inheritors of this class, there are quite a lot of them.
 
 <img src="../images/simple_test/kbaseview_children.png" alt="Find kbaseview children"/>
 
-<br>Зачем они все нужны?
+Why are they all needed?
 
-<br>Дело в том, что каждый элемент пользовательского интерфейса можно протестировать по разному. К примеру, у TextView мы можем проверить, какой текст сейчас в него установлен, можем установить новый текст, в то же время ProgressBar - не содержит никакой текст и осуществлять проверку на то, какой текст в него установлен, нет смысла. 
+The fact is that each element of the user interface can be tested in different ways. For example, in a TextView we can check what text is currently set in it, we can set a new text, while the ProgressBar does not contain any text and it makes no sense to check what text is set in it.
 
-<br>Поэтому в зависимости от того, какой элемент интерфейса мы тестируем, нужно выбирать правильную реализацию KBaseView. Сейчас мы тестируем кнопку, поэтому выбрали KButton. На следующем экране мы будем тестировать заголовок (TextView) и поле ввода (EditText) и выберем соответствующие реализации KBaseView.
+Therefore, depending on which interface element we are testing, we need to choose the correct implementation of KBaseView. Now we are testing a button, so we chose KButton. On the next screen, we will test the title (TextView) and input field (EditText) and select the appropriate KBaseView implementations.
 
 <img src="../images/simple_test/needed_children.png" alt="Show children which we need"/>
 
-<br>Идем дальше, эту кнопку тест должен найти на экране по какому-то критерию. В данном случае мы осуществим поиск элемента по id, поэтому используем матчер withId, куда в качестве параметра передаем идентификатор кнопки, который мы нашли благодаря Layout Inpector.
+Go ahead, the test should find this button on the screen according to some criterion. In this case, we will search for an element by id, so we use the `withId` matcher, where we pass the button ID as a parameter, which we found thanks to the `Layout Inpector`.
 
-<br>Для того чтобы указать этот id мы использовали синтаксис R.id..., где R - это класс со всеми ресурсами приложения. Благодаря нему, можно находить id элементов интерфейса, строк, которые есть в проекте, картинок и т.д. При вводе названия этого класса Android Studio должна импортировать его автоматически, но иногда этого не происходит, тогда нужно ввести этот импорт вручную
+In order to specify this id, we used the R.id... syntax, where `R` is the class with all the resources of the application. Thanks to it, you can find the id of interface elements, lines that are in the project, pictures, etc. When you enter the name of this class, Android Studio should import it automatically, but sometimes this does not happen, then you need to enter this import manually.
 
 ```kotlin
 import com.kaspersky.kaspresso.tutorial.R
 ```
-Все, теперь у нас есть модель главного экрана и эта модель содержит кнопку, которую можно тестировать. Можем писать сам тест
 
-## Добавляем SimpleActivityTest
+That's it, now we have a model of the main screen and this model contains a button that can be tested. We can start writing the test itself.
 
-<br> В папке `androidTest` - `kotlin`, в созданном нами пакете добавляем класс `SimpleActivityTest`.
+## Add SimpleActivityTest
+
+In the folder `androidTest` -> `kotlin`, in the package we created, add the class `SimpleActivityTest`.
 
 <img src="../images/simple_test/create_test_1.png" alt="Creating Test First part"/>
 
 <img src="../images/simple_test/create_test_2.png" alt="Creating Test Second part"/>
 
-<br> Новый класс был размещен в пакете `screen`, но мы хотели бы, чтобы в нем лежали только модели экранов, поэтому созданный тест мы переместим в корень пакета `com.kaspersky.kaspresso.tutorial`. Для того, чтобы это сделать, кликаем на название класса правой кнопкой мыши и выбираем Refactor -> Move
+The new class was placed in the `screen` package, but we would like it to contains only screen models, so we will move the created test to the root of the `com.kaspersky.kaspresso.tutorial` package. In order to do this, right-click on the class name and select `Refactor` -> `Move`
 
 <img src="../images/simple_test/move_to_package.png" alt="Move to another package"/>
 
-<br> И убираем из названия пакета последнюю часть `.screen`
+And remove the last part `.screen` from the package name.
 
 <img src="../images/simple_test/change_package.png" alt="Change package name"/>
 
-<br> Класс тестов должен быть унаследован от класса TestCase. Обратите внимание на импорты, класс TestCase должен быть импортирован из пакета `import com.kaspersky.kaspresso.testcases.api.testcase.TestCase`.
+The test class must be inherited from the `TestCase` class. Pay attention to imports, the TestCase class must be imported from the `import com.kaspersky.kaspresso.testcases.api.testcase.TestCase` package.
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -269,9 +273,9 @@ import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 
 class SimpleActivityTest: TestCase() {
 }
-
 ```
-<br> И добавляем метод test(), в котором будем проверять работу приложения. У него может быть любое имя, необязательно "test", но важно, чтобы он был помечен аннотацией @Test (import org.junit.Test).
+
+And we add the `test()` method, in which we will check the operation of the application. It can have any name, not necessarily "test", but it is important that it be annotated with `@Test` (`import org.junit.Test`).
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -287,11 +291,12 @@ class SimpleActivityTest : TestCase() {
     }
 }
 ```
-<br> Тест `SimpleActivityTest` можно запустить. Информацию по запуску тестов в Android Studio можно найти в  [предыдущем уроке](https://kasperskylab.github.io/Kaspresso/Tutorial/Running_the_first_test/)
+
+The `SimpleActivityTest` test can be run. Information on how to run tests in Android Studio can be found in the [previous tutorial](https://kasperskylab.github.io/Kaspresso/Tutorial/Running_the_first_test/).
 
 <img src="../images/simple_test/success_1.png" alt="Success passed test"/>
 
-<br> Сейчас этот тест ничего не делает, поэтому и завершается успешно. Давайте добавим ему логики и протестируем MainScreen. 
+Now this test does nothing, so it succeeds. Let's add logic to it and test the MainScreen.
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -313,21 +318,23 @@ class SimpleActivityTest : TestCase() {
     }
 }
 ```
-<br>Внутри метода test мы получаем объект MainScreen, открываем фигурные скобки и обращаемся к кнопке, которую будем тестировать, дальше открываем еще раз фигурные скобки и тут пишем все проверки. Сейчас, благодаря методам `isVisible()` и `isClickable()` мы проверяем, что кнопка видима и по ней можно кликнуть. Запускаем и наш тест падает.
+
+Inside the test method, we get the MainScreen object, open the curly brackets and refer to the button that we will test, then open the curly brackets again and write all the checks here. Now, thanks to the `isVisible()` and `isClickable()` methods, we check that the button is visible and clickable. Let's launch the test. It falls.
 
 <img src="../images/simple_test/test_failed_1.png" alt="Feailed test"/>
 
-<br>Дело в том, что Page Object `MainScreen` относится к `MainActivity` (именно эту активити видит пользователь, когда запускает приложение) и, для того чтобы элементы отобразились на экране, эту активити нужно запустить перед выполнением теста. Для того, чтобы перед тестом была запущена какая-то активити, ножно добавить следующие строки:
+The matter is that Page Object `MainScreen` refers to `MainActivity` (this is the activity that the user sees when he launches the application) and, in order for the elements to be displayed on the screen, this activity must be launched before the test is executed. In order for some kind of activity to be launched before the test, you can add the following lines:
 
 ```kotlin
     @get:Rule
     val activityRule = activityScenarioRule<MainActivity>()
 ```
 
-<br> Этот тест осуществит запуск указанной activity `MainActivity` перед запуском теста и закроет после прогона теста.
-<br> Подробнее про `activityScenarioRule` можно почитать [здесь](https://developer.android.com/reference/androidx/test/ext/junit/rules/ActivityScenarioRule)
+This test will launch the specified `MainActivity` activity before running the test and close it after the test runs.
 
-<br>Тогда весь код теста будет выглядеть следующим образом:
+You can read more about `activityScenarioRule` [here](https://developer.android.com/reference/androidx/test/ext/junit/rules/ActivityScenarioRule).
+
+Then the entire test code will look like this:
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -355,11 +362,12 @@ class SimpleActivityTest : TestCase() {
     }
 }
 ```
-<br>Запускаем. Все отлично, у нас тест проходит успешно и вы можете увидеть на девайсе, что во время теста открывается нужная нам активити и закрывается после прогона.
+
+Launching. Everything is fine, our test is successful, and you can see on the device that during the test the activity we need opens and closes after the run.
 
 <img src="../images/simple_test/sucess_2.png" alt="Success test"/>
 
-<br>Хорошей практикой во время написания тестов является проверка, что тест не только успешно выполняется, но и падает, если условие не выполняется. Так вы исключите ситуацию, когда тесты "зеленые", но на самом деле из-за какой-то ошибки в коде проверки вообще не выполнялись. Давайте это сделаем, проверим, что кнопка содержит некорректный текст. 
+It's a good practice when writing tests to make sure that the test not only passes, but also fails if the condition is not met. This way you eliminate the situation when the tests are "green", but in fact, due to some error in the code, the tests were not performed at all. Let's do this, check that the button contains invalid text.
 
 ```kotlin
 class SimpleActivityTest : TestCase() {
@@ -379,7 +387,8 @@ class SimpleActivityTest : TestCase() {
     }
 }
 ```
-<br>Тест падает, меняем текст на корректный.
+
+The test fails, let's change the text to the correct one.
 
 ```kotlin
 class SimpleActivityTest : TestCase() {
@@ -399,8 +408,11 @@ class SimpleActivityTest : TestCase() {
     }
 }
 ```
-<br>Тест проходит успешно. 
-<br>Теперь нам нужно протестировать SimpleActivity. Делаем по аналогии с MainScreen - создаем Page Object
+
+The test is successful.
+
+Now we need to test the `SimpleActivity`. We do it by analogy with `MainScreen` - create a Page Object.
+
 ```kotlin
 object SimpleActivityScreen : KScreen<SimpleActivityScreen>() {
 
@@ -408,7 +420,8 @@ object SimpleActivityScreen : KScreen<SimpleActivityScreen>() {
     override val viewClass: Class<*>? = null
 }
 ```
-<br>Ищем айди элементов через Layout Inspector
+
+Looking for id elements through the `Layout Inspector`:
 
 <img src="../images/simple_test/title_inspect.png" alt="Title id in inspector"/>
 
@@ -416,7 +429,7 @@ object SimpleActivityScreen : KScreen<SimpleActivityScreen>() {
 
 <img src="../images/simple_test/button_inspect.png" alt="Button id in inspector"/>
 
-<br>Не забываем указывать корректные View элементы, для заголовка - KTextView, для поля ввода - KEditText, для кнопки - KButton
+Do not forget to specify correct View elements, for the title - KTextView, for the input field - KEditText, for the button - KButton
 
 ```kotlin
 object SimpleActivityScreen : KScreen<SimpleActivityScreen>() {
@@ -429,8 +442,10 @@ object SimpleActivityScreen : KScreen<SimpleActivityScreen>() {
     val changeTitleButton = KButton { withId(R.id.change_title_btn) }
 }
 ```
-<br>И теперь можем тестировать этот экран. Для того, чтобы на него перейти, на главном экране нужно кликнуть на кнопку, вызываем `click()`
-<br>Добавляем проверки для этого экрана
+
+And now we can test this screen. In order to go to it, on the main screen you need to click on the button, call `click()`.
+
+Add checks for this screen:
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -469,20 +484,22 @@ class SimpleActivityTest : TestCase() {
     }
 }
 ```
-<br>Наш первый тест практически готов. Единственное изменение, которое стоит сделать - тут мы используем захардкоженный текст "Default title". При этом тест успешно проходит, но если вдруг приложение будет локализовано на разные языки, то при запуске теста с английской локалью тест может проходить успешно, а если запустим на устройстве с российской локалью, то тест упадет. 
 
-<br>Поэтому вместо того, чтобы хардкодить строку, мы возьмем ее из ресурсов приложения. В макете активити мы можем посмотреть, какая строка использовалась в этом TextView.
+Our first test is almost ready. The only change worth making is that we're using the hardcoded "Default title" text here. At the same time, the test passes successfully, but if suddenly the application is localized into different languages, then when the test is launched with the English locale, the test can pass successfully, and if we run it on a device with the Russian locale, the test will fail.
+
+So instead of hardcoding the string, we'll take it from the application's resources. In the activity's layout, we can see which line was used in this TextView.
 
 <img src="../images/simple_test/find_string_in_layout.png" alt="Find string in layout"/>
 
-<br>Переходим в строковые ресурсы (файл values/strings.xml) и копируем id строки
+Go to string resources (file `values/strings.xml`) and copy the string id.
 
 <img src="../images/simple_test/string_in_values.png" alt="Find string in values folder"/>
 
-<br>Теперь в методе hasText вместо использования строки "Default title" используем ее id. `R.string.simple_activity_default_title`
-<br>Не забываем импортировать класс ресурсов R `import com.kaspersky.kaspresso.tutorial.R`
+Now in the hasText method, instead of using the "Default title" string, we use its id `R.string.simple_activity_default_title`.
 
-Финальный код теста выглядит вот так:
+Don't forget to import the R resource class `import com.kaspersky.kaspresso.tutorial.R`.
+
+The final test code looks like this:
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -523,7 +540,6 @@ class SimpleActivityTest : TestCase() {
 }
 ```
 
-# Итог
-В этом уроке мы написали наш первый тест на Kaspresso. На практике познакомились с подходом PageObject. Научились получать идентификаторы элементов интерфейса при помощи Layout instector. 
+# Summary
 
-
+In this tutorial, we have written our first Kaspresso test. In practice, we got acquainted with the PageObject approach. We learned how to get interface element IDs using the `Layout instector`.
