@@ -543,3 +543,7 @@ class SimpleActivityTest : TestCase() {
 # Summary
 
 In this tutorial, we have written our first Kaspresso test. In practice, we got acquainted with the PageObject approach. We learned how to get interface element IDs using the `Layout inspector`.
+
+<br>
+
+

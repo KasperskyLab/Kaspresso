@@ -1,28 +1,26 @@
-# TODO: добавить английский перевод
+# Reduce duplicate steps the Scenario
 
-# Scenario
+In this lesson, we will learn what scenarios are (the `Scenario` class from the Kaspresso library), find out what they are for, when they should be used, and when it is better to avoid them.
 
-В этом уроке мы познакомимся со сценариями (класс `Scenario` из библиотеки Kaspresso), узнаем, что это, для чего они нужны, когда их стоит использовать, а когда лучше избегать.
-
-Открываем приложение tutorial и кликаем по кнопке `Login Acitivity`.
+Open the tutorial application and click on the `Login Acitivity` button.
 
 <img src="../images/scenario/main_screen_login_button.png" alt="Main Screen login button" width="300"/>
 
-У нас открывается экран авторизации, где пользователь может ввести логин и пароль и нажать на кнопку `Login`
+We have an authorization screen where the user can enter a login and password and click on the `Login` button
 
 <img src="../images/scenario/login_activity.png" alt="Login activity"  width="300"/>
 
-Если поле `username` будет содержать менее трех символов или поле `password` менее шести символов, то при клике на кнопку `LOGIN` ничего не произойдет.
+If the `username` field contains less than three characters or the `password` field contains less than six characters, then nothing will happen when the `LOGIN` button is clicked.
 
-Если же данные заполнены корректно, то авторизация проходит успешно и у нас открывается экран `AfterLoginActivity`
+If the data is filled in correctly, then the authorization is successful and the `AfterLoginActivity` screen opens.
 
 <img src="../images/scenario/screen_after_login.png" alt="Screen After Login" width="300"/>
 
-Получается, что для проверки экрана AfterLoginActivity пользователь должен быть авторизован в приложении. Поэтому давайте первым делом протестируем авторизацию - `LoginActivity`
+It turns out that in order to check the `AfterLoginActivity` screen, the user must be authorized in the application. Therefore, let's first test the authorization - `LoginActivity`.
 
-## Тестирование LoginActivity
+## Test LoginActivity
 
-Для проверки `LoginActivity` необходимо внутри PageObject главного экрана объявить еще одну кнопку - кнопка для перехода в экран авторизации
+To check `LoginActivity` it is necessary to declare one more button inside the PageObject of the main screen - a button to go to the authorization screen.
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial.screen
@@ -42,7 +40,7 @@ object MainScreen : KScreen<MainScreen>() {
 }
 ```
 
-Теперь создаем PageObject для `LoginActivity`, назовем `LoginScreen`
+Now create a PageObject for `LoginActivity`, let's call it `LoginScreen`:
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial.screen
@@ -64,7 +62,7 @@ object LoginScreen : KScreen<LoginScreen>() {
 
 ```
 
-Можем создавать тест `LoginActivityTest`. Сразу добавляем шаг – открытие целевого экрана `LoginActivity`
+We can create a `LoginActivityTest` test. Let's add a step - opening the target screen `LoginActivity`
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -93,17 +91,17 @@ class LoginActivityTest : TestCase() {
 
 ```
 
-Теперь, когда целевой экран открыт, можем тестировать его. На текущем этапе добавим только проверку позитивного сценария, когда пользователь успешно ввел логин и пароль:
+When the target screen is open, we can test it. At the current stage, we will only add a check for a positive scenario when the user has successfully entered a login and password:
 
 <ol>
-  <li>Все элементы видимы и кнопка кликабельна</li>
-  <li>Поля ввода содержат соответствующие подсказки</li>
-  <li>Если поля ввода содержат валидные данные, то происходит переход на следующий экран</li>
+  <li>All elements are visible and the button is clickable</li>
+  <li>Input fields contain appropriate hints</li>
+  <li>If the input fields contain valid data, then the transition to the next screen</li>
 </ol>
 
-Для того, чтобы проверить, какая активити сейчас открыта можно воспользоваться методом: `device.activities.isCurrent(LoginActivity::class.java)`
+In order to check which activity is currently open, you can use the method: `device.activities.isCurrent(LoginActivity::class.java)`.
 
-Тогда общий код тестового класса будет выглядеть так:
+Then the general code of the test class will look like this:
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -175,11 +173,11 @@ class LoginActivityTest : TestCase() {
 
 ```
 
-Запускаем тест. Тест пройден успешно.
+Let's start the test. Test passed successfully.
 
-Теперь давайте добавим проверки негативного сценария - если пользователь ввел логин или пароль меньше допустимой длины. 
+Now let's add checks for a negative scenario - if the user entered a login or password that is less than the allowed length. 
 
-Здесь нужно придерживаться правила – на каждый test-case свой тестовый метод. То есть проверку на поведение при вводе некорректного логина и пароля мы будем делать не в этом же методе, а создадим отдельные в том же классе `LoginActivityTest`.
+Here you need to follow the rule - each test-case has its own test method. That is, we will not check for behavior when entering an incorrect login and password in the same method, but we will create separate ones in the same `LoginActivityTest` class.
 
 ```kotlin
 @Test
@@ -234,7 +232,7 @@ fun loginUnsuccessfulIfUsernameIncorrect() {
 
 ```
 
-И такой же тест на то, что логин введен верно, а пароль неверно
+And the same test that the login is correct and the password is wrong.
 
 ```kotlin
 @Test
@@ -289,40 +287,40 @@ fun loginUnsuccessfulIfPasswordIncorrect() {
 
 ```
 
-Давайте переименуем первый тест, чтобы по его названию было понятно, что мы проверяем именно успешную авторизацию.
+Let's rename the first test so that by its name it is clear that we are checking for successful authorization.
 
 ```kotlin
 @Test
 fun test() 
 ```
 
-Меняем на
+Change to:
 
 ```kotlin
 @Test
 fun loginSuccessfulIfUsernameAndPasswordCorrect()
 ```
 
-Запускаем тесты – они все пройдены успешно.
+We run the tests - they are all passed successfully.
 
-Обратите внимание на код, который мы используем внутри этих тестов. Для каждого теста мы делаем следующее:
+Take a look at the code we're using inside these tests. For each test we do the following:
 <ol>
-    <li>Объявляем переменные `username` и `password`, присваиваем им разные значения в зависимости от проверки, которую будем производить</li>
-    <li>Открываем экран авторизации</li>
-    <li>Проверяем видимость элементов</li>
-    <li>Вводим логин и пароль в соответствующие поля и кликаем на кнопку "Login"</li>
-    <li>Проверяем, что у нас открывается нужный экран</li>
+    <li>We declare the variables `username` and `password`, assigning different values to them depending on the check we will perform</li>
+    <li>Opening the login screen</li>
+    <li>Checking the visibility of elements</li>
+    <li>Enter your login and password in the appropriate fields and click on the "Login" button</li>
+    <li>Checking that we have the desired screen</li>
 </ol>
 
-В зависимости от того, что мы проверяем в каждом конкретном тесте, у нас отличаются шаги первый и последний. На первом шаге мы присваиваем разные значения переменным `username` и `password`, на последнем шаге мы делаем разные проверки на то, какой экран открыт - `LoginActivity` или `AfterLoginActivity`.
+Depending on what we check in each specific test, we have different first and last steps. In the first step we assign different values to the `username` and `password` variables, in the last step we make different checks to see if the screen is `LoginActivity` or `AfterLoginActivity`.
 
-При этом шаги со второго по четвертый абсолютно одинаковые для всех тестов. Это один из случаев, когда мы можем использовать класс Scenario.
+At the same time, steps from the second to the fourth are absolutely the same for all tests. This is one of the cases where we can use the Scenario class.
 
-## Создание Scenario
+## Create Scenario
 
-Сценарии – это классы, которые позволяют объединить в себе несколько step-ов. Например, в данном случае мы можем создать сценарий авторизации, в котором будет пройден весь процесс от старта главного экрана до клика по кнопке `Login` после ввода логина и пароля.
+Scenarios are classes that allow you to combine several steps into one. For example, in this case, we can create an authorization script that will go through the entire process from starting the main screen to clicking on the `Login` button after entering the login and password.
 
-В пакете со всеми тестами `com.kaspersky.kaspresso.tutorial` создаем новый класс `LoginScenario` и наследуемся от класса Scenario из пакета `com.kaspersky.kaspresso.testcases.api.scenario`
+In the package with all tests `com.kaspersky.kaspresso.tutorial` create a new class `LoginScenario` and inherit from the class `Scenario` from the package `com.kaspersky.kaspresso.testcases.api.scenario`
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -335,9 +333,9 @@ class LoginScenario : Scenario() {
 
 ```
 
-Здесь возникает ошибка, поскольку класс Scenario является абстрактным, и у него нужно переопределить один метод `steps`, в котором мы должны перечислить все шаги данного сценария. 
+There is an error here, because the Scenario class is abstract, and it needs to override one `steps` method, in which we must list all the steps of this scenario. 
 
-Нажимаем комбинацию клавиш `ctrl + i`, выбираем метод, который нужно переопределить и нажимаем `OK`
+Press the key combination `ctrl + i`, select the method you want to override and press `OK`.
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -352,12 +350,12 @@ class LoginScenario : Scenario() {
 
 ```
 
-Теперь после указания типа `TestContext<Unit>.() -> Unit` удаляем строчку ` get() = TODO("Not yet implemented")`, ставим знак `=` и открываем фигурные скобки, в которых перечислим все необходимые шаги. 
+Now, after specifying the type `TestContext<Unit>.() -> Unit`, delete the line ` get() = TODO("Not yet implemented")`, put the `=` sign and open curly brackets, in which we list all the necessary steps. 
 
 !!! info
-    В качестве возвращаемого типа у `steps` указано лямбда-выражение, которое является extension-функцией класса TestContext. Подробнее про [лямбда-выражения](https://kotlinlang.ru/docs/lambdas.html) и [extension-функции](https://kotlinlang.ru/docs/extensions.html) вы можете почитать в официальной документации Kotlin.
+    The return type of `steps` is a lambda expression, which is an extension function of the TestContext class. You can read more about [lambda expressions](https://kotlinlang.ru/docs/lambdas.html) and [extension functions](https://kotlinlang.ru/docs/extensions.html) in the official Kotlin documentation .
 
-Скопируем шаги, которые повторяются в каждом тесте.
+Let's copy the steps that are repeated in each test.
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -413,13 +411,13 @@ class LoginScenario : Scenario() {
 
 ```
 
-Теперь у нас есть сценарий авторизации, в котором мы открываем экран логина, проверяем видимость всех элементов, вводим значения логина и пароля и кликаем на кнопку `Login`. 
+Now we have an authorization script in which we open the login screen, check the visibility of all elements, enter the login and password values and click on the `Login` button. 
 
-Но возникает одна проблема - в этом классе нет переменных `username` и `password`, которые нужно ввести в поля ввода. Мы могли бы объявить их прямо здесь внутри теста, как делали в классе `LoginActivityTest`, 
+But there is one problem - in this class there are no `username` and `password` variables that need to be entered in the input fields. We could declare them right here inside the test, as we did in the `LoginActivityTest` class, 
 
 ```kotlin
 override val steps: TestContext<Unit>.() -> Unit = {
-    val username = "123456" // Можно объявить переменные здесь
+    val username = "123456" // You can declare variables here
     val password = "123456"
 
     step("Open login screen") {
@@ -427,9 +425,9 @@ override val steps: TestContext<Unit>.() -> Unit = {
         
 ```
 
-но в зависимости от проводимого теста эти значения должны отличаться, поэтому присвоить значение внутри теста мы не можем.
+but depending on the test being run, these values should be different, so we cannot assign a value inside the test.
 
-Поэтому вместо того, чтобы указывать логин и пароль прямо внутри сценария, мы можем их указать в качестве параметра в классе Scenario внутри конструктора. Тогда эта часть кода:
+Therefore, instead of specifying the login and password directly inside the script, we can specify them as a parameter in the Scenario class inside the constructor. Then this piece of code:
 
 ```kotlin
 
@@ -437,7 +435,7 @@ class LoginScenario : Scenario()
 
 ```
 
-меняется на:
+changes to:
 
 ```kotlin
 
@@ -448,7 +446,7 @@ class LoginScenario(
 
 ```
 
-Теперь внутри теста мы не создаем логин и пароль, а используем те, что были переданы нам в качестве параметра в конструктор
+Now, inside the test, we do not create a login and password, but use those that were passed to us as a parameter to the constructor:
 
 ```kotlin
 step("Try to login") {
@@ -465,8 +463,8 @@ step("Try to login") {
     }
 }
 ```
- 
-Тогда общий код сценария будет выглядеть так:
+
+Then the general Scenario code will look like this:
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -525,16 +523,16 @@ class LoginScenario(
 
 ```
 
-## Использование Scenario
+## Using Scenario
 
-Сценарий готов, можем его использовать в тестах. Давайте сначала используем сценарий в первом тестовом методе, а потом по аналогии сделаем и в остальных
+The Scenario is ready, we can use it in tests. Let's first use the Scenario in the first test method, and then by analogy we will do it in the rest:
 
 <ol>
-  <li>Создаем step, в котором пытаемся залогиниться с корректными данными</li>
-  <li>Вызываем функцию `scenario`</li>
-  <li>В качестве параметра этой функции мы передаем объект LoginScenario</li>
-  <li>В конструктор LoginScenario передаем корректные логин и пароль</li>
-  <li>Добавляем step, в котором проверяем, что после логина открывается экран AfterLoginActivity</li>
+  <li>Create a step in which we try to log in with the correct data</li>
+  <li>Calling the `scenario` function</li>
+  <li>We pass the LoginScenario object as a parameter to this function</li>
+  <li>We pass the correct login and password to the LoginScenario constructor</li>
+  <li>Add a step in which we check that the `AfterLoginActivity` screen opens after login</li>
 </ol>
 
 ```kotlin
@@ -556,7 +554,7 @@ fun loginSuccessfulIfUsernameAndPasswordCorrect() {
 }
 ```
 
-Для остальных тестов делаем по аналогии:
+For the rest of the tests, we do by analogy:
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -627,13 +625,13 @@ class LoginActivityTest : TestCase() {
 
 ```
 
-Мы рассмотрели один случай, когда сценариями удобно пользоваться – когда одни и те же шаги используются в разных тестах в рамках тестирования одного экрана. Но это не единственное их предназначение. 
+We have considered one case when Scenario are convenient to use - when the same steps are used in different tests within the framework of testing one screen. But this is not their only purpose. 
 
-В приложении может быть множество экранов, попасть на которые можно только будучи авторизованным. В этом случае для каждого такого экрана придется заново описывать все шаги авторизации. Но при использовании сценариев это становится очень простой задачей.
+An application can have multiple screens that can only be accessed by being logged in. In this case, for each such screen, you will have to re-describe all the authorization steps. But when using Scenario, this becomes a very simple task.
 
-Сейчас после входа у нас открывается экран `AfterLoginActivity`.  Давайте напишем тест для этого экрана. 
+Now after logging in, we have the `AfterLoginActivity` screen. Let's write a test for this screen. 
 
-Первым делом создаем Page Object
+First of all, we create a Page Object
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial.screen
@@ -652,7 +650,7 @@ object AfterLoginScreen : KScreen<LoginScreen>() {
 
 ```
 
-Добавляем тест:
+Adding a test:
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -675,7 +673,7 @@ class AfterLoginActivityTest : TestCase() {
 
 ```
 
-Для того чтобы попасть на этот экран нам нужно пройти процесс авторизации. Без использования сценариев нам бы пришлось заново выполнять все шаги – запускать главный экран, кликать на кнопку, затем вводить логин и пароль и снова кликать на кнопку. Но сейчас весь этот процесс сводится к использованию `LoginScenario`
+In order to get to this screen, we need to go through the authorization process. Without the use of Scenario, we would have to repeat all the steps - launch the main screen, click on the button, then enter the username and password and click on the button again. But now this whole process comes down to using `LoginScenario`:
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -716,21 +714,21 @@ class AfterLoginActivityTest : TestCase() {
 
 ```
 
-Таким образом, благодаря использованию сценариев, код становится чистым, понятным и переиспользуемым. А для проверки экранов, доступных только авторизованным пользователям, теперь не нужно делать множество одинаковых шагов.
+Thus, through the use of Scenario, the code becomes clean, understandable and reusable. And to check the screens available only to authorized users, now you do not need to take many identical steps.
 
 ## Best practices
 
-Сценарии очень удобная вещь, если ими правильно пользоваться.
+Scenario is very handy if you use it correctly.
 
 <ul>
-    <li>Если для выполнения разных тестов приходится делать одни и те же шаги, то это тот случай, когда стоит создать сценарий. Примеры: экраны авторизации, онбординга, оплаты покупок и т.д.</li>
-    <li>Не следует использовать одни сценарии внутри других – такой код может стать сильно запутанным, это усложнит его переиспользование, ухудшит читаемость, и вы потеряете все преимущества сценариев.</li>
-    <li>Создавайте сценарии только по мере необходимости. Не следует их создавать, только потому что когда-то в будущем эти шаги могут использоваться в других тестах. Если вы видите, что шаги повторяются в разных тестах, то можно создать сценарий, если нет – не стоит этого делать. Их количество в проекте должно быть минимальным.</li>
+    <li>If you have to follow the same steps to run different tests, then this is the case when it is worth creating a Scenario. Examples: screens for authorization, payment for purchases, etc.</li>
+    <li>You shouldn't use one Scenario inside another - this code can become very confusing, making it harder to reuse, impair readability, and you lose all the benefits of scripting.</li>
+    <li>Use Scenario only when needed. You should not create them just because sometime in the future these steps may be used in other tests. If you see that the steps are repeated in different tests, then you can create a `Scenario`, if not, you should not do this. Their number in the project should be minimal.</li>
 </ul>
 
-## Итог
+## Summary
 
-В сегодняшнем уроке мы узнали, что такое сценарии, научились их создавать, использовать и передавать параметры в их конструктор. Также мы рассмотрели случаи, когда их использование приносит пользу проекту, а когда наоборот – ухудшает читаемость кода, увеличивает его связность и усложняет переиспользование.
+In this lesson, we learned what Scenario are, how to create them, use them, and pass parameters to their constructor. We also considered cases when their use benefits the project, and when, on the contrary, it worsens the readability of the code, increases its coherence and complicates reuse.
 
 <br>
 

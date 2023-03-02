@@ -660,3 +660,7 @@ Let's launch the test. It passed successfully.
 ## Summary
 
 In this lesson, we learned how to run tests for a third-party applications, and also learned how you can test the system UI using `UiAutomator`, or rather its wrapper - `Kautomator`. In addition, we got to know the programs that allow us to analyze the UI of applications, even if we do not have access to their source code - these are `Ui Automator Viewer`, `Developer Assistant` and `UiAutomator Dump`.
+
+<br>
+
+

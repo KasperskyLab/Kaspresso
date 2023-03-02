@@ -308,3 +308,7 @@ So, in this lesson we practiced with the `device` object, learned how to change 
 </ul>
 
 In the following lessons, we will learn how we can improve this code and solve the problems that have arisen.
+
+<br>
+
+
