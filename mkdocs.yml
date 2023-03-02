@@ -81,7 +81,7 @@ plugins:
           3. Writing your first Kaspresso test: 3. Writing your first Kaspresso test
           4. Выполнение adb-команд: 4. Выполнение adb-команд
           5. Wifi_sample_test: 5. Testing the Internet connection and working with the Device class
-          6. Выделение секций и шагов: 6. Выделение секций и шагов
+          6. Steps and sections: 6. Steps and sections
           7. Вынесение дублирующихся шагов в Scenario: 7. Вынесение дублирующихся шагов в Scenario
           8. UiAutomator. Тестирование за рамками приложения: 8. Kautomator. Third Party Application Testing
           9. flakySafely: 9. flakySafely
@@ -119,7 +119,7 @@ plugins:
           3. Writing your first Kaspresso test: 3. Пишем первый автотест с Kaspresso
           4. Выполнение adb-команд: 4. Выполнение adb-команд
           5. Wifi_sample_test: 5. Тестирование интернет-соединения и работа с классом Device
-          6. Выделение секций и шагов: 6. Выделение секций и шагов
+          6. Steps and sections: 6. Steps and sections
           7. Вынесение дублирующихся шагов в Scenario: 7. Вынесение дублирующихся шагов в Scenario
           8. UiAutomator. Тестирование за рамками приложения: 8. UiAutomator. Тестирование за рамками приложения
           9. flakySafely: 9. flakySafely
@@ -157,7 +157,7 @@ nav:
       - 3. Writing your first Kaspresso test: Tutorial/Writing_simple_test.md
       - 4. Выполнение adb-команд: Tutorial/Выполнение adb-команд.md
       - 5. Wifi_sample_test: Tutorial/Wifi_sample_test.md
-      - 6. Выделение секций и шагов: Tutorial/Выделение секций и шагов.md
+      - 6. Steps and sections: Tutorial/Steps_and_sections.md
       - 7. Вынесение дублирующихся шагов в Scenario: Tutorial/Вынесение дублирующихся шагов в Scenario.md
       - 8. UiAutomator. Тестирование за рамками приложения: Tutorial/UiAutomator.md
       - 9. flakySafely: Tutorial/FlakySafely.md

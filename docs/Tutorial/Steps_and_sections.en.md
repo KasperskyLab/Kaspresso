@@ -1,10 +1,8 @@
-# TODO: добавить английский перевод
+﻿# Sections and steps
 
-# Steps
+## Improve the code
 
-## Улучшаем код
-
-В прошлом уроке мы написали тест на экран проверки доступности интернета, код тестового класса выглядел вот так:
+In the last lesson, we wrote a test for the Internet availability screen, the test class code looked like this:
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -48,11 +46,11 @@ class WifiSampleTest : TestCase() {
 }
 ```
 
-И мы говорили о том, что одна из проблем этого кода заключается в том, что его сложно читать и поддерживать даже на данном этапе, а если функциональность экрана расширится и нам придется добавлять еще тесты, то код станет абсолютно нечитаемым.
+And we talked about how one of the problems with this code is that it is difficult to read and maintain even at this stage, and if the functionality of the screen expands and we have to add more tests, then the code will become completely unreadable.
 
-На самом деле обычно любые тесты (в т.ч. ручные) выполняются по test-кейсам. То есть у тестировщика есть последовательность шагов, которые он выполняет для проверки работоспособности экрана. В нашем случае у нас есть эта последовательность шагов, но записана она сплошным текстом и непонятно, где завершается один шаг и начинается другой. Мы можем решить эту проблему при помощи комментариев. 
+In fact, usually any tests (including manual ones) are performed on test cases. That is, the tester has a sequence of steps that he performs to check the performance of the screen. In our case, we have this sequence of steps, but it is written in one block of code and it is not clear where one step ends and another begins. We can solve this problem with comments.
 
-Давайте скопируем этот класс `WifiSampleTest` и вставим в этот же пакет, но уже с другим названием `WifiSampleWithStepsTest`. Это нужно для того чтобы вы потом смогли сравнить новую и старую реализации этого теста. Код `WifiSampleTest` мы сегодня менять не будем. Теперь в новом классе `WifiSampleWithStepsTest` мы добавляем комментарии к каждому шагу.
+Let's copy this `WifiSampleTest` class and paste it into the same package, but with a different name `WifiSampleWithStepsTest`. This is necessary so that you can then compare the new and old implementations of this test. We will not change the `WifiSampleTest` code today. Now in the new class `WifiSampleWithStepsTest` we add comments to each step.
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -100,9 +98,9 @@ class WifiSampleWithStepsTest : TestCase() {
 }
 ```
 
-Это немного улучшит читаемость кода, но всех проблем не решит. Например, у вас какой-то тест упадет, как вы узнаете, на каком шаге это произошло? Вам придется исследовать логи, пытаясь понять, что пошло не так. Было бы гораздо лучше, если бы в логах отображались записи вроде `Step 1 started -> ... -> Step 1 succeed` или `Step 2 started -> ... -> Step 2 failed`. Тогда по логам вы сразу определите, на каком этапе возникла проблема. 
+This slightly improved the readability of the code, but did not solve all the problems. For example, if your test fails, how do you know at what step it happened? You will have to examine the logs, trying to figure out what went wrong. It would be much better if the logs showed entries like `Step 1 started -> ... -> Step 1 succeed` or `Step 2 started -> ... -> Step 2 failed`. This will allow you to immediately determine by the notes in the log at what stage the problem arose.
 
-Для этого мы можем сами добавить вывод в лог перед каждым шагом, что он начал выполнение, затем, что он завершил выполнение и обернуть это все в блок `try catch`, чтобы, если тест упал, мы это также зафиксировали в логах. В этом случае наш тест выглядел бы следующим образом:
+To do this, we ourselves can add output to the log for each step before and after its execution and wrap it all in a `try catch` block to make the dough fall also recorded in logs. In this case, our test would look like this:
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -169,49 +167,49 @@ class WifiSampleWithStepsTest : TestCase() {
 }
 ```
 
-Давайте включим интернет на устройстве и проверим работу нашего теста.
+Let's turn on the Internet on the device and check the operation of our test.
 
-Запускаем. Тест пройден успешно. 
+Let's launch the test. It passed successfully.
 
-Теперь давайте посмотрим логи. Для этого откройте вкладку Logcat в нижней части Android Studio
+Now let's see the logs. To do this, open the `Logcat` tab at the bottom of Android Studio
 
 <img src="../images/steps/logcat.png" alt="Logcat"/>
 
-Здесь отображается множество логов и найти наши довольно сложно. Мы можем отфильтровать логи по тэгу, который указали ("KASPRESSO"). Для этого кликните на стрелку в правой верхней части Logcat и выберите пункт `Edit Configuration`
+There are a lot of logs displayed here and finding ours is quite difficult. We can filter the logs by the tag we specified ("KASPRESSO"). To do this, click on the arrow at the top right of `Logcat` and select `Edit Configuration`
 
 <img src="../images/steps/edit_configuration.png" alt="Edit configuration"/>
 
-У вас откроется окно создания фильтра. Добавьте название фильтра, а также тэг, который нас интересует
+A filter creation window will open. Add the name of the filter and the tag that we are interested in:
 
 <img src="../images/steps/create_filter.png" alt="Create filter"/>
 
-Теперь у нас отображается только полезная информация. Давайте очистим лог
+Now we can see only useful information. Let's clear the log
 
 <img src="../images/steps/clear_logcat.png" alt="Clear logcat"/>
 
-и запустим тест еще раз. Не забываем перед этим включать интернет на устройстве. Читаем логи:
+and run the test again. Do not forget to turn on the Internet on the device before this. Reading the logs:
 
 <img src="../images/steps/log_step_1.png" alt="Log step 1"/>
 
-Здесь идут логи, которые мы добавили - шаг 1 запущен, затем выполняются проверки, затем шаг 1 завершился успешно.
+Here are the logs we added - step 1 is run, then checks are done, then step 1 succeeds.
 
-Смотрим дальше
+Looking further:
 
 <img src="../images/steps/log_step_2.png" alt="Log step 2"/>
 
 <img src="../images/steps/log_step_3.png" alt="Log step 2"/>
 
-Со вторым и третьим шагами также все хорошо. Нам понятно, когда и какой шаг начинает выполнение, видны конкретные действия, которые в данный момент выполняет тест и виден результат работы тесты.
+With the second and third steps, everything is also fine. We understand when and what step starts the execution, we can see the specific actions that the test is currently performing, and we can see the result of the test.
 
-Теперь давайте выключим интернет и запустим тест еще раз. По нашей логике тест должен завершиться неудачно.
+Now let's turn off the Internet and run the test again. According to our logic, the test should fail.
 
-Несмотря на то, что тест должен был завершиться с ошибкой, все тесты зеленые. Смотрим в лог - сейчас нас интересует step 2, который должен был завершиться неудачано из-за того что изначально интернет на устройстве выключен
+Even though the test should have failed, all tests are green. We look at the log - now we are interested in step 2, which should have failed due to the fact that the Internet was initially turned off on the device
 
 <img src="../images/steps/log_step_2_failed.png" alt="Log step 2 failed"/>
 
-Судя по логам `step 2` действительно завершился неудачно. Был проверен статус заголовка, текст не совпал, программа осуществила еще несколько попыток проверить, что текст на заголовке содержит текст `enabled`, но все эти попытки не увенчались успехом и шаг завершился с ошибкой. Почему в этом случае тесты у нас зеленые?
+Judging by the logs, `step 2` really failed. The status of the header was checked, the text did not match, the program made several more attempts to check that the text on the header contains the text `enabled`, but all these attempts were unsuccessful and the step ended with an error. Why do we have green tests in this case?
 
-Дело в том, что если тест завершается неудачно, то бросается исключение, и если это исключение никто не обработал в блоке try catch, то тесты будут красными. А мы в коде обрабатываем все исключения для того, чтобы сделать запись в лог о том, что тест завершился с ошибкой.
+The fact is that if the test fails, then an exception is thrown, and if no one handled this exception in the try catch block, then the tests will be red. And we handle all exceptions in the code in order to make an entry in the log that the test ended with an error.
 
 ```kotlin
 try {
@@ -223,10 +221,9 @@ try {
      */
     Log.i("KASPRESSO", "Step 2. Check correct wifi status -> failed")
 }
-
 ```
 
-Для решения этой проблемы необходимо после вывода в лог сообщения об ошибке бросить это исключение дальше, чтобы тест упал. Делается это при помощи ключевого слова `throw`. Тогда код теста будет выглядеть следующим образом:
+To solve this problem, it is necessary to throw this exception further after the error message is output to the log so that the test fails. This is done using the `throw` keyword. Then the test code will look like this:
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -292,17 +289,18 @@ class WifiSampleWithStepsTest : TestCase() {
     }
 }
 ```
-Запускаем тест еще раз. Теперь он завершается с ошибкой и мы имеем понятные логи, где сразу видно, на каком шаге произошла ошибка. После `step 2` в логах больше ничего нет.
 
-Код, который мы написали, рабочий, но очень громоздкий, и нам приходится для каждого шага писать целое полотно одинакового кода (логи, блоки try catch и т.д). 
+Let's run the test again. Now it ends with an error and we have understandable logs, where you can immediately see at which step the error occurred. After `step 2` there is nothing else in the logs.
+
+The code that we wrote is working, but very cumbersome, and we have to write a whole canvas of the same code for each step (logs, try catch blocks, etc.).
 
 ## Steps
 
-Для того чтобы упростить написание тестов и сделать код более читаемым и расширяемым в Kaspresso были добавлены step-ы. У них "под капотом" реализовано все то, что мы сейчас писали вручную.
+In order to simplify writing tests and make the code more readable and extendable, steps have been added to Kaspresso. They "under the hood" implemented everything that we just wrote by hand.
 
-Чтобы использовать step-ы необходимо вызвать метод `run {}` и в фигурных скобках перечислить все шаги, которые будут выполнены во время теста. Каждый шаг нужно вызывать внутри функции step.
+To use steps, you need to call the `run {}` method and list in curly brackets all the steps that will be performed during the test. Each step must be called inside the step function.
 
-Давайте напишем это в коде. Для начала удаляем все лишнее - логи и блоки try catch.
+Let's write it in code. To begin with, we remove all unnecessary - logs and try catch blocks.
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -348,7 +346,7 @@ class WifiSampleWithStepsTest : TestCase() {
 }
 ```
 
-Теперь в начале теста мы вызываем метод run, внутри которого для каждого шага вызываем функцию `step`. Этой функции в качестве параметра передаем название шага 
+Now, at the beginning of the test, we call the run method, inside which we call the `step` function for each step. We pass the name of the step as a parameter to this function.
 
 ```kotlin
 @Test
@@ -367,7 +365,7 @@ class WifiSampleWithStepsTest : TestCase() {
     }
 ```
 
-Внутри каждого step-а мы указываем действия, которые требуются на этом шаге. То же самое, что мы делали раньше. Тогда код теста будет выглядеть следующим образом:
+Within each step, we specify the actions that are required for that step. The same thing we did before. Then the test code will look like this:
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -421,25 +419,25 @@ class WifiSampleWithStepsTest : TestCase() {
 }
 ```
 
-Включаем интернет на устройстве и запускаем тест. Тест пройден успешно. Смотрим логи:
+Turn on the Internet on the device and run the test. Test passed successfully. Let's look at the logs:
 
 <img src="../images/steps/log_with_steps.png" alt="Log with steps"/>
 
-Таким образом, благодаря использованию step-ов, не только наш код стал более понятный и легкий для воспроиятия, но также и логи имеют понятную структру и позволяют быстро определить, какие этапы выполнялись и какой результат этих операций.
+Thus, thanks to the use of steps, not only our code has become more understandable and easy to understand, but also the logs have a clear structure and allow you to quickly determine which steps were performed and what the result of these operations is.
 
-Давайте еще раз запустим этот тест теперь уже с выключенным интернетом. Тест падает. Смотрим логи.
+Let's run this test again now with the internet off. The test falls. Let's look at the logs.
 
 <img src="../images/steps/test_failed_with_steps.png" alt="Test fail with steps"/>
 
-Теперь искать ошибку в тесте становится гораздо проще, благодаря понятным логам.
+Now it becomes much easier to find an error in the test, thanks to understandable logs.
 
-## Before и After
+## Before and After sections
 
-Наш код стал гораздо лучше, но осталась одна важная проблема - необходимо, чтобы перед каждым тестом устройство приходило в дефолтное состояние - интернет должен быть включен и установлена книжная ориентация.
+Our code has become much better, but one important problem remains - it is necessary that before each test the device comes to a default state - the Internet must be turned on and the portrait orientation must be set.
 
-В Kaspresso есть возможность добавить блоки `before` и `after`. Код внутри блока `before` будет выполняться перед тестом - здесь мы можем установить настройки по умолчанию. Код внутри блока `after` будет выполнен после теста. Во время выполнения теста состояние телефона может меняться: мы можем выключить интернет, сменить ориентацию, но после теста нужно вернуть исходное состояние. Делать это мы будем внутри блока `after`.
+Kaspresso has the ability to add `before` and `after` blocks. The code inside the `before` block will be executed before the test - this is where we can set the defaults. The code inside the `after` block will be executed after the test. During the test, the state of the phone may change: we can turn off the Internet, change orientation, but after the test we need to return the original state. We will do this inside the `after` block.
 
-Тогда код теста будет выглядеть следующим образом:
+Then the test code will look like this:
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -504,11 +502,11 @@ class WifiSampleWithStepsTest : TestCase() {
 }
 ```
 
-Тест практически готов, можем добавить одно небольшое улучшение. Сейчас после переворота устройства мы проверяем, что текст остался прежним, но не проверям, что ориентация действительно поменялась. Получается, что если метод `device.expoit.rotate()` по какой-то причине не сработал, то ориентация не поменяется и проверка на текст будет бесполезной. Давайте добавим проверку, что ориентация девайса стала альбомной.
+The test is almost ready, we can add one small improvement. Now after flipping the device, we check that the text is still the same, but we don't check that the orientation has actually changed. It turns out that if the `device.expoit.rotate()` method did not work for some reason, then the orientation will not change and the check for text will be useless. Let's add a check that the device's orientation is landscape.
 
 `Assert.assertTrue(device.context.resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE)`
 
-Теперь полный код теста выглядит так:
+Now the complete test code looks like this:
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -570,9 +568,9 @@ class WifiSampleWithStepsTest : TestCase() {
 }
 ```
 
-## Итог
+## Summary
 
-В сегодняшнем уроке мы значительно улучшили наш код, он стал чище, понятнее, и его стало легче поддерживать. Это стало возможным благодаря таким функциям Kaspresso, как step, before и after. Также мы научились выводить сообщения в лог, а также читать логи, фильтровать их и анализировать.
+In this lesson, we've significantly improved our code, making it cleaner, clearer, and easier to maintain. This is made possible by Kaspresso's `step`, `before` and `after` functions. We also learned how to output messages to the log, as well as read the logs, filter them and analyze them.
 
 <br>
 
