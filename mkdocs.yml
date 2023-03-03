@@ -79,7 +79,7 @@ plugins:
           1. Введение: 1. Introduction
           2. Скачиваем проект и Android studio: 2. Download Kaspresso project and Android studio
           3. Writing your first Kaspresso test: 3. Writing your first Kaspresso test
-          4. Выполнение adb-команд: 4. Выполнение adb-команд
+          4. Working with adb: 4. Working with adb
           5. Wifi_sample_test: 5. Testing the Internet connection and working with the Device class
           6. Steps and sections: 6. Steps and sections
           7. Reduce duplicate steps the Scenario: 7. Reduce duplicate steps the Scenario
@@ -117,7 +117,7 @@ plugins:
           1. Введение: 1. Введение
           2. Скачиваем проект и Android studio: 2. Скачиваем проект и Android studio
           3. Writing your first Kaspresso test: 3. Пишем первый автотест с Kaspresso
-          4. Выполнение adb-команд: 4. Выполнение adb-команд
+          4. Working with adb: 4. Выполнение adb-команд
           5. Wifi_sample_test: 5. Тестирование интернет-соединения и работа с классом Device
           6. Steps and sections: 6. Steps and sections
           7. Reduce duplicate steps the Scenario: 7. Вынесение дублирующихся шагов в Scenario
@@ -155,7 +155,7 @@ nav:
       - 1. Введение: Tutorial/index.md
       - 2. Скачиваем проект и Android studio: Tutorial/Download_Kaspresso_project_and_Android_studio.md
       - 3. Writing your first Kaspresso test: Tutorial/Writing_simple_test.md
-      - 4. Выполнение adb-команд: Tutorial/Выполнение adb-команд.md
+      - 4. Working with adb: Tutorial/Working_with_adb.md
       - 5. Wifi_sample_test: Tutorial/Wifi_sample_test.md
       - 6. Steps and sections: Tutorial/Steps_and_sections.md
       - 7. Reduce duplicate steps the Scenario: Tutorial/Scenario.md
