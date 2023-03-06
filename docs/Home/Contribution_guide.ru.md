@@ -1,18 +1,18 @@
-# Contribution guide
+# Инструкция для разработчиков
 
-## Сode contribution workflow
-1.	Find an open issue or create a new issue on issue tracker for the feature you want to contribute.
-2.	Fork the project on GitHub. You need to create a feature-branch for your work on your fork, as this way you be able to submit a pull request.
-3.	Make any necessary changes to the source code.
-4.	Add tests that verify that your contribution works as expected and modify existing tests if required.
-5.	Run all unit and UI tests and make sure all of them pass.
-6.	Run code coverage to check if the lines of code you added are covered by unit tests.
-7.	Once your feature is complete, prepare the commit with appropriate message and the issue number.
-8.	Create a [pull request](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests) and wait for the users to review. When you submit a pull request, please, agree to the terms of [CLA](https://github.com/KasperskyLab/Kaspresso/blob/master/CLA.md).
-9.	Once everything is done, your pull request gets merged. Your feature will be available with the next release and your name will be added to [AUTHORS](https://github.com/KasperskyLab/Kaspresso/blob/master/AUTHORS.md).
+## Инструкция по внесению изменений в проект
+1. Выберите существующую задачу или заведите новую на нашем Github для фичи, которую вы хотите доработать.
+2. Форкните проект на Github. Необходимо создать отдельную ветку для работы над форком. Это позволит отправить доработки на Pull request в основной проект Kaspresso.
+3. Сделайте необходимые дорабтки в исходном коде.
+4. Покройте новые доработки необходимыми тестами, которые проверят стабильность и соответствие ожидаемому поведению написанного кода, или исправьте существующие тесты на этот функционал.
+5. Запустите все Unit и UI тесты и убедитесь в их успешном прохождении.
+6. Запустите проверку покрытия кода Unit-тестами, чтобы убедиться, что для нового кода были написаны Unit-тесты.
+7. После завершения разработки подготовьте commit с соответствующим и понятным комментарием и номером issue (задачи из списка).
+8. Создайте [pull request](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests) и дождитесь, пока другие участники посмотрят изменения.Необходимо принять соглашения [CLA](https://github.com/KasperskyLab/Kaspresso/blob/master/CLA.md).
+9. После получения подтверждения от других участников, можно вливать дорабтки в основной код. Обновленный код будет доступен пользователям в следующем релизе, а ваше имя будет добавлено в список [авторов](https://github.com/KasperskyLab/Kaspresso/blob/master/AUTHORS.md).
 
-## Branch naming
-issue-***/detailed_description. Example: issue-306/fix-padding-breaks-autoscroll-interceptor
+## Именование веток
+issue-***/detailed_description. Пример: issue-306/fix-padding-breaks-autoscroll-interceptor
 
-## Commits
-The commit message should begin with: "Issue #***: ...". Example: "Issue #306: Fixed padding-breaks autoscroll interceptor".
+## Коммиты
+Сообщения к коммитам должны начинаться с: "Issue #***: ...". Пример: "Issue #306: Fixed padding-breaks autoscroll interceptor".

@@ -107,12 +107,12 @@ plugins:
           Storage issues: Storage issues
         ru:
           Home: Home
-          About Kaspresso: About Kaspresso
-          Kaspresso in articles: Kaspresso in articles
-          Kasspresso in videos: Kasspresso in videos
-          Our users: Our users
+          About Kaspresso: О Kaspresso
+          Kaspresso in articles: Kaspresso в статьях
+          Kasspresso in videos: Kaspresso в видео
+          Our users: Наши пользователи
           Breaking changes: Breaking changes
-          Contribution guide: Contribution guide
+          Contribution guide: Инструкция для разработчиков
           Tutorial: Tutorial
           1. Введение: 1. Введение
           2. Скачиваем проект и Android studio: 2. Скачиваем проект и Android studio
