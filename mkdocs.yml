@@ -57,7 +57,7 @@ theme:
 
 plugins:
   - i18n:
-      default_language: ru
+      default_language: en
       docs_structure: suffix
       languages:
         ru:
