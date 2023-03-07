@@ -4,7 +4,7 @@ repo_name: Kaspresso
 edit_uri: tree/main/docs/content
 docs_dir: 'docs'
 remote_branch: gh-pages
-language: ru
+language: en
 
 theme:
   favicon: kaspresso.png
