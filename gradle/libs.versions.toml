@@ -1,7 +1,7 @@
 [versions]
 kotlin = "1.7.10"
 detekt = "1.21.0"
-espresso = "3.5.0"
+espresso = "3.5.1"
 kakao = "3.2.2"
 kakaoCompose = "0.2.1"
 allure = "2.4.0"
