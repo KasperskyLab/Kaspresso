@@ -1,25 +1,36 @@
-# Espresso as the basis
-Kaspresso is based on Google testing framework Espresso (if you're not familiar with Espresso, check out the [official docs](https://developer.android.com/training/testing/espresso)
-<br>Espresso allows you to work with the elements of your application as a white box ([white box testing](https://en.wikipedia.org/wiki/White-box_testing)). You can find the desired element on the screen using matchers, perform different actions or checks.
-## Espresso is not enough
-<br>This framework has a lot of drawbacks and not all things in Android autotesting can be done with Espresso alone.
-## What do we want:
-<br>* `Good readability`. Espresso has a problem with this because of the huge hierarchy of matchers. When we have a lot of matches, the code becomes difficult to read. Poor readability means difficult to maintain
-<br>* `Hight stability`. Espresso does not work well with interfaces whose elements are displayed asynchronously. You can configure Idling, but that still won't solve all problems. 
-<br>* `Logging`. After completing the test with Espresso, you do not have a step-by-step workflow sequence of actions.
-<br>* `Screenshots`. We also want to have some screenshots for the test report.
-<br>* `Working with Android OS`. In some cases, we need to interact with the device. In this case you need UiAutomator (as a variant).
-<br>* `Сode architecture`. We want to have a clean code architecture in our tests, the ability to reuse code, move some blocks in abstractions. One code style for all developers.
-## How does Kaspresso solve all these problems?
-### Readability
-Kaspresso is based on [Kakao](https://github.com/KakaoCup/Kakao) - Android framework for UI autotests. It is also based on Espresso. Kakao provides a simple Kotlin DSL. This makes the tests more readable. You no longer need to put long constructors with matchers for finding elements on the screen in the code of your test. The result of calling the `onView()` Espresso method is cached. You can then get the required view as a property.
-<br> Kakao also provides an implementation of Page object pattern with a `Screen` object. You can describe all the interface elements that your test will interact with in one place (in one Screen object).
-### Stability
-Kaspresso has wrapped some Espresso calls into a more stable implementation. For example you can find `flakySafely()` method in the Kaspresso.
-### Logging
-Kaspresso has wrapped some Espresso calls not only for higher stability. We have also implemented an interceptor that prints more logs.
-### Working with Android OS
-We have created the Device interface as a facade for all devices to work with. UiAutomator can only help you in some cases, but more often you need the ability to execute various commands (adb, shell). For example, with the adb emu command, you can emulate various actions or events.
-<br> Espresso tests are run directly on the android device, so we need some kind of external server to send the commands. In Kaspresso you can use `AdbServer`.
-### Code architecture
-Having described above implementations of Page object pattern, you can make your code in your test files more readable, maintainable, reusable, and understandable. Kaspresso also provides various methods and abstractions to improve the architecture (such as `step`, `Scenario`, test sections and more).
+# Espresso как основа
+
+Kaspresso основан на фреймворке Espresso от Google (если вы не знакомы с Espresso, подробности можно найти в [официальной документации](https://developer.android.com/training/testing/espresso)).
+Espresso позволяет вам работать с элементами вашего приложения нативно и методом белого ящика ([тестирование белого ящика](https://en.wikipedia.org/wiki/White-box_testing)). Найти нужный элемент на экране можно с помощью matcher-ов, а затем выполнить с ними различные действия или проверки.
+
+## Использование только фреймворка Espresso недостаточно
+
+У этого фреймворка есть несколько недостатков, и невозможно покрыть все потребности в автотестировании Android только с помощью Espresso из-за отсутствия определенных фич.
+
+## Что мы хотим:
+<ol>
+    <li>`Хорошая читабельность`. У Espresso с этим проблема из-за огромной иерархии matcher-ов. Когда у нас много matcher-ов, код становится трудно читаемым. Плохая читаемость означает сложность в дальнейшей поддержке теста.</li>
+    <li>`Высокая стабильность`. Espresso плохо работает с интерфейсами, элементы которых отображаются асинхронно. Можно настроить Idling, но это все равно не решит всех проблем.</li>
+    <li>`Логирование`. После прохождения теста с Espresso у вас нет пошаговой последовательности выполненных действий.</li>
+    <li>`Скриншоты`. Мы также хотим иметь несколько скриншотов в отчетах о прохождении теста.</li>
+    <li>`Работа с ОС Android`. В некоторых случаях нам нужно взаимодействовать с устройством, системными окнами и ОС Android. В этом случае функционала Espresso будет недостаточно. Вам понадобится UiAutomator.</li>
+    <li>`Архитектура кода`. Мы хотим иметь чистую архитектуру кода не только в основном коде, но и в наших тестах, возможность повторного использования кода, перемещение некоторых блоков в абстракции. Иметь единый стиль кода для всех разработчиков.</li>
+</ol>
+
+## Как Kaspresso решает все эти проблемы?
+### Читаемость
+Kaspresso основан на [Kakao](https://github.com/KakaoCup/Kakao) - Android фреймворке для автотестов пользовательского интерфейса. Он основан на Espresso. Kakao предоставляет простой Kotlin DSL. Это делает тесты более читабельными. Вам больше не нужно использовать длинные конструкции с matcher-ами для поиска элементов на экране для взаимодействия из теста. Результат вызова метода Espresso `onView()` кэшируется. Затем вы можете обратиться к необходимому элементу как к свойству по ссылке.
+Kakao также предоставляет реализацию паттерна Page object с объектом `Screen`. Вы можете описать все элементы интерфейса, с которыми будет взаимодействовать ваш тест, в одном месте (в одном объекте Screen).
+
+### Стабильность
+Kaspresso обернул некоторые вызовы Espresso в более стабильную реализацию. Например, метод flakySafely().
+
+### Логирование
+Kaspresso обернул некоторые вызовы Espresso не только для большей стабильности. Мы также внедрили перехватчик, который печатает больше отладочных сообщений в логи.
+
+### Работа с ОС Android
+Мы создали интерфейс `Device` как фасад для всех интерфейсов, с которыми можно работать. UiAutomator может помочь вам только в некоторых случаях, но чаще вам нужна возможность выполнять различные команды (adb, shell). Например, с помощью команды `adb emu` вы можете эмулировать различные действия или события.
+Тесты Espresso запускаются непосредственно на устройстве Android, поэтому нам нужен какой-то внешний сервер для отправки команд. В Kaspresso вы можете использовать AdbServer.
+
+### Архитектура кода
+Используя описанную выше реализацию паттерна Page object, вы можете сделать свой код в тестовых файлах более читабельным, удобным для дальнейшей поддержки, повторно используемым и понятным. Kaspresso также предоставляет различные методы и абстракции для улучшения архитектуры (такие как `step`, `Scenario`, тестовые разделы и многое другое).

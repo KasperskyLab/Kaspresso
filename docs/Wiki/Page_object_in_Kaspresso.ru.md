@@ -1,13 +1,20 @@
-# Page object pattern in Kaspresso.
-## What is a Page object pattern?
-<br>Page object pattern is explained well by Martin Fowler in [this article](https://martinfowler.com/bliki/PageObject.html). Long in short this is a test abstraction that describes the screen with some view elements. These view items can be interacted with during tests. As a result the description of the screen elements will be in a separate class. You no longer need to constantly look for the desired UI element with several matchers in tests. This can be done once by saving a link to the screen.
-## How is the page object pattern implemented in Kaspresso?
-<br>Kaspresso provides `KScreen` and `UiScreen` as implementations for Page object pattern. 
-### What is the difference between KScreen and UiScreen
-<br>Kaspresso is based on Kakao and UiAutomator. 
-<br>When we have all info about the application code(`white-box testing` cases) we should use KScreen to describe the structure of PageObject as Kakao does. This is a class in Kaspresso - extension for Kakao Screen class.
-<br>When we don't have access to a source code of an application (it can be some system dialogs, windows or apps) we should use UiScreen.
-<br>Here are two samples:
+# Паттерн Page object в Kaspresso.
+
+## Что такое Page object? 
+
+Паттерн Page object хорошо объяснен Мартином Фаулером в [статье](https://martinfowler.com/bliki/PageObject.html). Если коротко, то это тестовая абстракция, которая описывает экран с некоторыми элементами интерфейса. С этими элементами можно взаимодействовать во время тестов. В результате описание элементов экрана будет в отдельном классе. Вам больше не нужно постоянно искать нужный UI-элемент с несколькими matcher-ами в тестах. Это можно сделать один раз, сохранив ссылку на экран.
+
+## Как реализован паттерн Page object в Kaspresso?
+
+Kaspresso предоставляет `KScreen` и `UiScreen` в качестве реализации паттерна Page object.
+
+### В чем разница между KScreen и UiScreen?
+
+Kaspresso основан на Kakao и UiAutomator. 
+Когда у нас есть вся информация о коде приложения (случай «тестирования белого ящика»), мы должны использовать KScreen для описания структуры PageObject, как это делает Kakao. Это класс в Kaspresso - расширение для класса Screen из Kakao.
+Когда у нас нет доступа к исходному коду приложения (это могут быть какие-то системные диалоги, окна или приложения), мы должны использовать UiScreen.
+Вот два примера:
+
 ```kotlin
 object SimpleScreen : KScreen<SimpleScreen>() {
 
@@ -30,9 +37,12 @@ object MainScreen : UiScreen<MainScreen>() {
     val checkBox = UiCheckBox { withId(this@MainScreen.packageName, "checkBox") }
 }
 ```
-<br>In KScreen's inheritors we should initialize the `layoutId` (layout file of a screen) and `viewClass`(screen activity class name) fields. But this is optional. These fields will help in cases of code refactoring not to forget about the associated tests screens
-<br>In UiScreen's inheritors we must initialize `packageName` field (the full name of the application's package). 
-## Benefits of the page object for refactoring
-<br>Page object pattern allows you to exclude the description of the screen in a separate file and to reuse Screens and views in different tests. When you have some changes in the UI of the application you can only change the code in the Screen file without the need for a lot of refactoring of the tests. 
-## Benefits of the Page Object for a work in a team
-<br>In some teams autotests are written only by developers, in others by QA engineers. In some cases autotests are written by someone who does not know details of the code (source code is available, but is bad understandable). In this case developers can write Screens for additional autotests. Having Screens helps another person to write tests using Kotlin DSL. 
+
+В наследниках KScreen мы должны инициализировать поля `layoutId` (файл макета экрана) и `viewClass`(имя класса экрана - activity или fragment). Эти поля можно проинициализировать значением `null`, но рекомендуется присвоить им корректные значения. Они помогут поддерживать, модифицировать и отлаживать тесты, сохраняя информацию о связанных с конкретным тестом файлах в основом коде приложения. В случае рефакторинга основного кода приложения, разработчик также увидит, что некоторые тесты завязаны на этот код.
+В наследниках UiScreen мы должны инициализировать поле `packageName` (полное имя пакета приложения). 
+
+## Преимущества паттерна Page object для рефакторинга
+Применение этого паттерна позволяет вынести описание экрана в отдельный файл и повторно использовать экраны и ссылки на UI-элементы в разных тестах. Когда у вас есть некоторые изменения в пользовательском интерфейсе приложения, вы можете изменить только код в файле экрана без необходимости большого рефакторинга тестов. 
+
+## Преимущества Page Object для работы в команде
+В одних командах автотесты пишут только разработчики, в других QA инженеры. В некоторых случаях автотесты пишет кто-то, кто не знает деталей кода (исходный код есть, но плохо понятен). В этом случае разработчики могут написать сущности Screen для дальнейших автотестов. Наличие реализованных экранов (Page object Screen) помогает другому человеку писать тесты с использованием Kotlin DSL. 

@@ -1,37 +1,37 @@
-# Working with Android OS. Kaspresso `Device` abstraction.
+# Взаимодействие с ОС Android. Класс `Device`.
 
-**Device** is a provider of managers for all off-screen work.
+**Device** — это поставщик менеджеров для всей работы за кадром.
 
-### **Structure**
+### **Состав**
 
-All examples are located in [device_tests](../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/device_tests).
-**Device** provides these managers:
+Все примеры находятся в [device_tests](https://github.com/KasperskyLab/Kaspresso/tree/master/samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/device_tests).
+**Device** предоставляет следующие свойства:
 
-1. `apps` allows to install or uninstall applications. Uses `adb install` and `adb uninstall` commands. See the example [DeviceAppSampleTest](../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/device_tests/DeviceAppSampleTest.kt).
-2. `activities` is an interface to work with currently resumed Activities. AdbServer not required. See the example [DeviceActivitiesSampleTest](../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/device_tests/DeviceActivitiesSampleTest.kt).
-3. `files` provides the possibility of pushing or removing files from the device. Uses `adb push` and `adb rm` commands and does not require `android.permission.WRITE_EXTERNAL_STORAGE` permission. See the example [DeviceFilesSampleTest](../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/device_tests/DeviceFilesSampleTest.kt).
-4. `internet` allows toggling WiFi and network data transfer settings. Be careful of using this interface, WiFi settings changes could not work with some Android versions. See the example [DeviceNetworkSampleTest](../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/device_tests/DeviceNetworkSampleTest.kt).
-5. `keyboard` is an interface to send key events via adb. Use it only when Espresso or UiAutomator are not appropriate (e.g. screen is locked). See the example [DeviceKeyboardSampleTest](../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/device_tests/DeviceKeyboardSampleTest.kt).
-6. `location` emulates fake location and allows to toggle GPS setting. See the example [DeviceLocationSampleTest](../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/device_tests/DeviceLocationSampleTest.kt).
-7. `phone` allows to emulate incoming calls and receive SMS messages. Works only on emulators since uses `adb emu` commands. See the example [DevicePhoneSampleTest](../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/device_tests/DevicePhoneSampleTest.kt).
-8. `screenshots` is an interface screenshots of currently resumed activity. Requires `android.permission.WRITE_EXTERNAL_STORAGE permission`. See the example [DeviceScreenshotSampleTest](../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/device_tests/DeviceScreenshotSampleTest.kt).
-9. `accessibility` allows to enable or disable accessibility services. Available since api 24. See the example [DeviceAccessibilitySampleTest](../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/device_tests/DeviceAccessibilitySampleTest.kt).
-10. `permissions` provides the possibility of allowing or denying permission requests via default Android permission dialog. See the example [DevicePermissionsSampleTest](../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/device_tests/DevicePermissionsSampleTest.kt).
-11. `hackPermissions` provides the possibility of allowing any permission requests without default Android permission dialog. See the example [DeviceHackPermissionsSampleTest](../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/device_tests/DeviceHackPermissionsSampleTest.kt).
-12. `exploit` allows to rotate device or press system buttons. See the example [DeviceExploitSampleTest](../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/device_tests/DeviceExploitSampleTest.kt).
-13. `language` allows to switch language. See the example [DeviceLanguageSampleTest](../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/device_tests/DeviceLanguageSampleTest.kt).
-14. `logcat` provides access to adb logcat. See the example [DeviceLogcatSampleTest](../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/device_tests/DeviceLogcatSampleTest.kt). <br>
-    The purpose of `logcat`: <br>
-    If you have not heard about [GDPR](https://gdpr-info.eu/) and [high-profile lawsuits](https://www.theverge.com/2019/1/21/18191591/google-gdpr-fine-50-million-euros-data-consent-cnil) then you are lucky. But, if your application works in Europe then it's so important to enable/disable all analytics/statistics according to acceptance of the agreements.
-    One of the most reliable ways to check analytics/statistics sending is to verify logcat where all analytics/statistics write their logs (in debug mode, sure).
-    That's why we have created a special `Logcat` class providing a wide variety of ways to check logcat.
-15. `uiDevice` returns an instance of ```android.support.test.uiautomator.UiDevice```. We don't recommend to use it directly because there is **Kautomator** that offers a more readable, predictable and stable API to work outside your application.
+1. `apps` позволяет устанавливать или удалять приложения. Использует команды `adb install` и `adb uninstall`. См. пример [DeviceAppSampleTest](https://github.com/KasperskyLab/Kaspresso/blob/master/samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/device_tests/DeviceAppSampleTest.kt).
+2. `activities` — это интерфейс для работы с отображаемыми в данный момент Activity. AdbServer не требуется. См. пример [DeviceActivitiesSampleTest](https://github.com/KasperskyLab/Kaspresso/blob/master/samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/device_tests/DeviceActivitiesSampleTest.kt).
+3. `files` обеспечивает возможность загрузки или удаления файлов с устройства. Использует команды `adb push` и `adb rm` и не требует разрешения `android.permission.WRITE_EXTERNAL_STORAGE`. См. пример [DeviceFilesSampleTest](https://github.com/KasperskyLab/Kaspresso/blob/master/samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/device_tests/DeviceFilesSampleTest.kt).
+4. `internet` позволяет переключать настройки Wi-Fi и передачи данных по сети. Будьте осторожны при использовании этого интерфейса, изменения настроек Wi-Fi могут не работать с некоторыми версиями Android. См. пример [DeviceNetworkSampleTest](https://github.com/KasperskyLab/Kaspresso/blob/master/samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/device_tests/DeviceNetworkSampleTest.kt).
+5. `keyboard` — это интерфейс для отправки ключевых событий через adb. Используйте его только тогда, когда Espresso или UiAutomator не подходят (например, экран заблокирован). См. пример [DeviceKeyboardSampleTest](https://github.com/KasperskyLab/Kaspresso/blob/master/samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/device_tests/DeviceKeyboardSampleTest.kt).
+6. `location` имитирует поддельное местоположение и позволяет переключать настройки GPS. См. пример [DeviceLocationSampleTest](https://github.com/KasperskyLab/Kaspresso/blob/master/samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/device_tests/DeviceLocationSampleTest.kt).
+7. `phone` позволяет эмулировать входящие звонки и принимать SMS-сообщения. Работает только на эмуляторах, так как использует команды `adb emu`. См. пример [DevicePhoneSampleTest](https://github.com/KasperskyLab/Kaspresso/blob/master/samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/device_tests/DevicePhoneSampleTest.kt).
+8. `screenshots` — интерфейс для скриншотов пользовательского интерфейса. Требуется разрешение `android.permission.WRITE_EXTERNAL_STORAGE`. См. пример [DeviceScreenshotSampleTest](https://github.com/KasperskyLab/Kaspresso/blob/master/samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/device_tests/DeviceScreenshotSampleTest.kt).
+9. `accessibility` - позволяет включать или отключать специальные возможности. Доступно с API 24. См. пример [DeviceAccessibilitySampleTest](https://github.com/KasperskyLab/Kaspresso/blob/master/samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/device_tests/DeviceAccessibilitySampleTest.kt).
+10. `permissions` - предоставляет возможность выдавать или отклонять запросы разрешений через диалоговое окно разрешений Android по умолчанию. См. пример [DevicePermissionsSampleTest](https://github.com/KasperskyLab/Kaspresso/blob/master/samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/device_tests/DevicePermissionsSampleTest.kt).
+11. `hackPermissions` предоставляет возможность выдавать любые разрешения без системного диалога Android по умолчанию. См. пример [DeviceHackPermissionsSampleTest](https://github.com/KasperskyLab/Kaspresso/blob/master/samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/device_tests/DeviceHackPermissionsSampleTest.kt).
+12. `exploit` позволяет менять ориентацию устройства или нажимать системные кнопки. См. пример [DeviceExploitSampleTest](https://github.com/KasperskyLab/Kaspresso/blob/master/samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/device_tests/DeviceExploitSampleTest.kt).
+13. `language` позволяет переключать язык. См. пример [DeviceLanguageSampleTest](https://github.com/KasperskyLab/Kaspresso/blob/master/samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/device_tests/DeviceLanguageSampleTest.kt).
+14. `logcat` обеспечивает доступ к adb logcat. См. пример [DeviceLogcatSampleTest](https://github.com/KasperskyLab/Kaspresso/blob/master/samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/device_tests/DeviceLogcatSampleTest.kt). <br>
+    Назначение `logcat`: <br>
+    Если вы не слышали о [GDPR](https://gdpr-info.eu/) и [громких судебных процессах](https://www.theverge.com/2019/1/21/18191591/google-gdpr-fine-50-million-euro-data-consent-cnil) то вам повезло. Но, если ваше приложение работает в Европе, то очень важно включить/отключить всю аналитику/статистику согласно принятым соглашениям.
+    Один из самых надежных способов проверить отправку аналитики/статистики — это проверить logcat, в котором все аналитики/статистика пишут свои журналы (конечно, в режиме отладки).
+    Вот почему мы создали специальный класс `Logcat`, предоставляющий множество способов проверки logcat.
+15. `uiDevice` возвращает экземпляр ```android.support.test.uiautomator.UiDevice```. Мы не рекомендуем использовать его напрямую, потому что есть **Kautomator**, который предлагает более читаемый, предсказуемый и стабильный API для работы вне вашего приложения.
 
-Also **Device** provides application and test contexts - `targetContext` and `context`.
+Также **Device** предоставляет контексты приложений и тестов — `targetContext` и `context`.
 
-### **Usage**
+### **Использование**
 
-Device instance is available in `BaseTestContext` scope and `BaseTestCase` via ```device``` property.
+Экземпляр `Device` доступен в области `BaseTestContext` и `BaseTestCase` через свойство ``device```.
 ```kotlin
 @Test
 fun test() =
@@ -40,7 +40,7 @@ fun test() =
             activityTestRule.launchActivity(null)
   ======>   device.screenshots.take("Additional_screenshot")  <======
 
-            MainScreen {
+            mainScreen {
                 simpleButton {
                     isVisible()
                     click()
@@ -51,10 +51,10 @@ fun test() =
 }
 ```
 
-### **Restrictions**
+### **Ограничения**
 
-Most of the features that **Device** provides use of adb commands and requires AdbServer to be run.
-Some of them, such as call emulation or SMS receiving, could be executed only on emulator. All such methods are marked by annotation ```@RequiresAdbServer```.
+Большинство функций, которые предоставляет **Device**, используют команды adb и требуют запуска AdbServer.
+Некоторые из них, такие как эмуляция звонков или прием СМС, могли выполняться только на эмуляторе. Все такие методы отмечены аннотацией ```@RequiresAdbServer```.
 
-All the methods which use ADB commands require `android.permission.INTERNET` permission.
-For more information, see methods JavaDoc description and [AdbServer](./06_AdbServer.md) documentation.
+Все методы, использующие команды ADB, требуют разрешения `android.permission.INTERNET`.
+Для получения дополнительной информации см. описание методов JavaDoc и документацию [AdbServer](https://kasperskylab.github.io/Kaspresso/ru/Wiki/Executing_adb_commands/).

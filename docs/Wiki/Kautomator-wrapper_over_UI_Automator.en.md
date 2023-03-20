@@ -66,6 +66,7 @@ class FormScreen : UiScreen<FormScreen>() {
 }
 ```
 Kautomator provides different types depending on the type of view:
+
 * `UiView`
 * `UiEditText`
 * `UiTextView`
@@ -198,7 +199,6 @@ class SomeTest {
     }
 }
 ```
-For more detailed info please refer to the documentation.
 
 ### Accelerate UI Automator
 As you remember we told about the possible acceleration of UI Automator. How does it become a reality? <br>

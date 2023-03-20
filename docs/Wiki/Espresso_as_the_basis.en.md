@@ -4,12 +4,15 @@ Kaspresso is based on Google testing framework Espresso (if you're not familiar 
 ## Espresso is not enough
 <br>This framework has a lot of drawbacks and not all things in Android autotesting can be done with Espresso alone.
 ## What do we want:
-<br>* `Good readability`. Espresso has a problem with this because of the huge hierarchy of matchers. When we have a lot of matches, the code becomes difficult to read. Poor readability means difficult to maintain
-<br>* `Hight stability`. Espresso does not work well with interfaces whose elements are displayed asynchronously. You can configure Idling, but that still won't solve all problems. 
-<br>* `Logging`. After completing the test with Espresso, you do not have a step-by-step workflow sequence of actions.
-<br>* `Screenshots`. We also want to have some screenshots for the test report.
-<br>* `Working with Android OS`. In some cases, we need to interact with the device. In this case you need UiAutomator (as a variant).
-<br>* `Сode architecture`. We want to have a clean code architecture in our tests, the ability to reuse code, move some blocks in abstractions. One code style for all developers.
+<ol>
+    <li>`Good readability`. Espresso has a problem with this because of the huge hierarchy of matchers. When we have a lot of matches, the code becomes difficult to read. Poor readability means difficult to maintain</li>
+    <li>`Hight stability`. Espresso does not work well with interfaces whose elements are displayed asynchronously. You can configure Idling, but that still won't solve all problems.</li>
+    <li>`Logging`. After completing the test with Espresso, you do not have a step-by-step workflow sequence of actions.</li>
+    <li>`Screenshots`. We also want to have some screenshots for the test report.</li>
+    <li>`Working with Android OS`. In some cases, we need to interact with the device. In this case you need UiAutomator (as a variant).</li>
+    <li>`Сode architecture`. We want to have a clean code architecture in our tests, the ability to reuse code, move some blocks in abstractions. One code style for all developers.</li>
+</ol>
+
 ## How does Kaspresso solve all these problems?
 ### Readability
 Kaspresso is based on [Kakao](https://github.com/KakaoCup/Kakao) - Android framework for UI autotests. It is also based on Espresso. Kakao provides a simple Kotlin DSL. This makes the tests more readable. You no longer need to put long constructors with matchers for finding elements on the screen in the code of your test. The result of calling the `onView()` Espresso method is cached. You can then get the required view as a property.

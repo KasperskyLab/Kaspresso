@@ -95,10 +95,10 @@ plugins:
           Supported Android UI-elements: Supported Android UI-elements
           View matchers, actions and assertions: View matchers, actions and assertions
           Kautomator. Wrapper over UI Automator: Kautomator. Wrapper over UI Automator
+          Working with Android OS. Class Device: Working with Android OS
           Executing adb commands: Executing adb commands
           Screenshot tests: Screenshot tests
           Kaspresso configuration: Kaspresso configuration
-          Working with Android OS: Working with Android OS
           Kaspresso with Robolectric: Kaspresso with Robolectric
           Kaspresso with Allure: Kaspresso with Allure
           Jetpack Compose in Kaspresso: Jetpack Compose in Kaspresso
@@ -127,16 +127,16 @@ plugins:
           11. RecyclerView: 11. RecyclerView
           12. Логирование и скриншоты: 12. Логирование и скриншоты
           Wiki: Wiki
-          Introduction: Introduction
-          PageObject in Kaspresso: PageObject in Kaspresso
-          Espresso as the basis: Espresso as the basis
-          Supported Android UI-elements: Supported Android UI-elements
-          View matchers, actions and assertions: View matchers, actions and assertions
-          Kautomator. Wrapper over UI Automator: Kautomator. Wrapper over UI Automator
-          Executing adb commands: Executing adb commands
+          Введение: Introduction
+          Паттерн PageObject в Kaspresso: PageObject in Kaspresso
+          Espresso как основа: Espresso as the basis
+          Поддерживаемые UI-виджеты Android: Supported Android UI-elements
+          Доступные классы Matcher, Action и Assertion: View matchers, actions and assertions
+          Kautomator. Обертка над UI Automator: Kautomator. Wrapper over UI Automator
+          Взаимодействие с ОС Android. Класс Device: Working with Android OS
+          Выполнение команд adb: Executing adb commands
           Screenshot tests: Screenshot tests
           Kaspresso configuration: Kaspresso configuration
-          Working with Android OS: Working with Android OS
           Kaspresso with Robolectric: Kaspresso with Robolectric
           Kaspresso with Allure: Kaspresso with Allure
           Jetpack Compose in Kaspresso: Jetpack Compose in Kaspresso
@@ -171,10 +171,10 @@ nav:
       - Supported Android UI-elements: Wiki/Supported_Android_UI_elements.md
       - View matchers, actions and assertions: Wiki/Matchers_actions_assertions.md
       - Kautomator. Wrapper over UI Automator: Wiki/Kautomator-wrapper_over_UI_Automator.md
+      - Working with Android OS: Wiki/Working_with_Android_OS.md
       - Executing adb commands: Wiki/Executing_adb_commands.md
       - Screenshot tests: Wiki/Screenshot_tests.md
       - Kaspresso configuration: Wiki/Kaspresso_configuration.md
-      - Working with Android OS: Wiki/Working_with_Android_OS.md
       - Kaspresso with Robolectric: Wiki/Kaspresso_Robolectric.md
       - Kaspresso with Allure: Wiki/Kaspresso_Allure.md
       - Jetpack Compose in Kaspresso: Wiki/Jetpack_Compose.md

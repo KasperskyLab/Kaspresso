@@ -1,7 +1,7 @@
 # Executing adb commands
 
 ## Description
-As you remember from the [previous part devoted to Device interface](./05_Device.md), Device interface contains the following things under the hood:
+As you remember from the [previous part devoted to Device interface](https://kasperskylab.github.io/Kaspresso/Wiki/Working_with_Android_OS/), Device interface contains the following things under the hood:
 - Espresso
 - UI Automator
 - ADB
@@ -9,16 +9,18 @@ As you remember from the [previous part devoted to Device interface](./05_Device
 An attentive reader could notice that ADB is not available in Espresso tests. But using some other frameworks, like Appium, you can execute ADB commands. So we decided to add this important functionality too.<br>
 We've developed a special Autotest's AdbServer to compensate lack of this feature.
 The main idea of the tool is similar to the idea in Appium. We just built a simple client-server system which contains two parts: <br>
+
 - Device that starts up a test acts as client
 - Desktop sends ADB commands to be executed on the device.
   Also, the system uses a port forwarding to be able to organize a socket tunnel between Device and Desktop through any kind of connection (Wi-Fi, Bluetooth, USB and etc.).
 
 ## Usage
 The algorithm how to use Autotest AdbServer:
+
 1. Run the Desktop part on your work station. <br>
    Execute the following command: `java -jar <path/to/kaspresso>/artifacts/adbserver-desktop.jar` in the terminal
 2. Run the Device part. <br>
-   Build and start [adbserver-sample module](../samples/adbserver-sample). You should see the following screen:
+   Build and start [adbserver-sample module](https://github.com/KasperskyLab/Kaspresso/tree/master/samples/adbserver-sample). You should see the following screen:
    <img src="https://habrastorage.org/webt/zq/rt/ia/zqrtiaglx5a1zc4ned-qykl0t_g.png" width="432" height="768"/>
 
 For example, type `shell input text abc` in the app's EditText and click *Execute* button. As result you will get `shell input text abcabc`
@@ -57,6 +59,7 @@ Also, don't forget to grant necessary permission:
 You can also use a few special flags when he starts `adbserver-desktop.jar`. <br>
 For example,  `java -jar adbserver-desktop.jar -e emulator-5554,emulator-5556 -p 5041 -l VERBOSE`. <br>
 Flags:
+
 - `e`, `--emulators` - the list of emulators that can be captured by `adbserver-desktop.jar` (by default, `adbserver-desktop.jar` captures all available emulators)
 - `p`, `--port` - the adb server port number (the default value is 5037)
 - `l`, `--logs` - what type of logs show (the default value is INFO).
@@ -185,5 +188,5 @@ Now the logs looks like:
 ```
 
 ## Development
-The source code of AdbServer is available in [adb-server](../adb-server) module. <br>
+The source code of AdbServer is available in [adb-server](https://github.com/KasperskyLab/Kaspresso/tree/master/adb-server) module. <br>
 If you want to build `adbserver-desktop.jar` manually, just execute `./gradlew :adb-server:adbserver-desktop:assemble`.

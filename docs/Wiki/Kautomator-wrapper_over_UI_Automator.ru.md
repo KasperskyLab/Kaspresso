@@ -1,12 +1,13 @@
-# Kautomator: wrapper over UI Automator
+# Kautomator: оболочка над UI Automator
 
-**Kautomator** - Nice and simple DSL for UI Automator in Kotlin that allows to accelerate UI Automator to amazing. <br>
-Inspired by [Kakao](https://github.com/KakaoCup/Kakao) and [russian talk about UI Automator](https://youtu.be/bqNguUHK3SM) (thanks to Svetlana Smelchakova).
+**Kautomator** — Хороший и простой DSL для UI Automator в Kotlin.<br>
+Вдохновлено [Kakao](https://github.com/KakaoCup/Kakao) и [выступлением о UI Automator](https://youtu.be/bqNguUHK3SM) (спасибо Светлане Смельчаковой).
 
-### Introduction
-Tests written with UI Automator are so complex, non-readble and hard to maintain especially for testers.
-Have a look at a typical piece of code written with UI Automator:
-```Kotlin
+### Введение
+Тесты, написанные с помощью UI Automator, такие сложные, нечитаемые и сложные в обслуживании, особенно для тестировщиков.
+Взгляните на типичный фрагмент кода, написанный с помощью UI Automator:
+
+```kotlin
 val instrumentation: Instrumentation = InstrumentationRegistry.getInstrumentation()
 val uiDevice = UiDevice.getInstance(instrumentation)
 
@@ -23,9 +24,9 @@ val uiObject = uiDevice.wait(
 uiObject.text = "Kaspresso"
 assertEquals(uiObject.text, "Kaspresso")
 ```
-This is an example just to input and check the text. Because we have a successful experience of Kakao using we decided to wrap UI Automator over in the same manner and called it **Kautomator**:
+Это пример только для ввода и проверки текста. Поскольку у нас есть успешный опыт использования Kakao, мы решили таким же образом обернуть UI Automator и назвали его **Kautomator**:
 ```kotlin
-MainScreen {
+mainScreen {
     simpleEditText {
         replaceText("Kaspresso")
         hasText("Kaspresso")
@@ -33,39 +34,41 @@ MainScreen {
 }
 ```
 
-Another big advantage of **Kautomator** is a possibility to accelerate UI Automator. <br>
-Have a glance at video below:
+Еще одним большим преимуществом **Kautomator** является возможность ускорения UI Automator.<br>
+Взгляните на видео ниже:
 
 ![](https://habrastorage.org/webt/ti/kv/ki/tikvkij1vjesnacrxqm-lk0coly.gif) <br>
-The left video is boosted UI Automator, the right video is default UI Automator.
+Левое видео — это улучшенный UI Automator, правое видео — это UI Automator по умолчанию.
 
-Why is it possible? The details are [available a little bit later](./02_Wrapper_over_UiAutomator.md#accelerate-ui-automator).
+Почему это возможно? Подробности [доступны немного позже](./02_Wrapper_over_UiAutomator.md#accelerate-ui-automator).
 
-#### Benefits
-- Readability
-- Reusability
-- Extensible DSL
-- Amazing speed!
+#### Преимущества
+- Читабельность
+- Повторное использование
+- Расширяемый DSL
+- Удивительная скорость!
 
-### How to use it
-#### Create Screen
-Create your entity `UiScreen` where you will add the views involved in the interactions of the tests:
-```Kotlin
+### Как это использовать
+#### Создать экран
+Создайте свой объект `UiScreen`, куда вы добавите UI-элементы, участвующие во взаимодействии тестов:
+```kotlin
 class FormScreen : UiScreen<FormScreen>()
 ```
-`UiScreen` can represent the whole user interface or a portion of UI.
-If you are using [Page Object pattern](https://martinfowler.com/bliki/PageObject.html) you can put the interactions of Kautomator inside the Page Objects.
+`UiScreen` может представлять весь пользовательский интерфейс или его часть.
+Если вы используете [шаблон Page Object](https://martinfowler.com/bliki/PageObject.html), вы можете поместить взаимодействия с Kautomator внутри Page Objects.
 
-#### Create UiView
-`UiScreen` contains `UiView`, these are the Android Framework views where you want to do the interactions:
-```Kotlin
-class FormScreen : UiScreen<FormScreen>() {
+#### Создание UiView
+`UiScreen` содержит различные `UiView`. Внутри UiScreen описываются все UI-элементы, с которыми будет взаимодействовать тест:
+
+```kotlin
+class FormScreen: UiScreen<FormScreen>() {
     val phone = UiView { withId(this@FormScreen.packageName, "phone") }
     val email = UiEditText { withId(this@FormScreen.packageName, "email_edit") }
     val submit = UiButton { withId(this@FormScreen.packageName, "submit_button") }
 }
 ```
-Kautomator provides different types depending on the type of view:
+Kautomator предоставляет различные типы в зависимости от типа UI-элемента:
+
 * `UiView`
 * `UiEditText`
 * `UiTextView`
@@ -74,32 +77,30 @@ Kautomator provides different types depending on the type of view:
 * `UiChipGroup`
 * `UiSwitchView`
 * `UiScrollView`
-* <b>and more</b>
+* <b>и многое другое</b>
 
 
-Every `UiView` contains matchers to retrieve the view involved in the `ViewInteraction`. Some examples of matchers provided
-by Kakao:
+Каждый `UiView` содержит Matcher-ы для получения экземпляра `ViewInteraction-а`. Некоторые примеры Matcher-ов из Kakao:
 
 * `withId`
 * `withText`
 * `withPackage`
 * `withContentDescription`
 * `textStartsWith`
-* <b>and more</b>
+* <b>и многое другое</b>
 
-Like in Ui Automator you can combine different matchers:
-```Kotlin
+Как и в Ui Automator, вы можете комбинировать разные Matcher-ы:
+```kotlin
 val email = UiEditText {
     withId(this@FormScreen.packageName, "email")
     withText(this@FormScreen.packageName, "matsyuk@kaspresso.com")
 }
 ```
 
-#### Write the interaction
+#### Реализация взаимодействия
 
-The syntax of the test with Kautomator is very easy, once you have the `UiScreen` and the `UiView` defined, you only have to apply
-the actions or assertions like in UI Automator:
-```Kotlin
+Синтаксис теста с Kautomator очень прост, как только вы определили `UiScreen` и `UiView`, вам нужно только выполнить action или assertion, как в UI Automator:
+```kotlin
 FormScreen {
     phone {
        hasText("971201771")
@@ -110,62 +111,50 @@ FormScreen {
 }
 ```
 
-#### The difference from Kakao-Espresso
+#### Отличие от Kakao-Espresso
 
-In Espresso, all interaction with a `View` is processing through `ViewInteraction` that has two main methods:
-`onCheck` and `onPerform` which take `ViewAction` and `ViewAssertion` as arguments. Kakao was written based on this architecture.
+В Espresso все взаимодействие с `View` обрабатывается через `ViewInteraction`, который имеет два основных метода: `onCheck` и `onPerform`, которые принимают `ViewAction` и `ViewAssertion` в качестве аргументов. Kakao был написан на основе этой архитектуры.
 
-So, we have set a goal to write Kautomator which would be like Kakao as much as possible. That's why we have introduced an additional layer over UiObject2 and UiDevice and that is so similar to `ViewInteraction`. This layer is represented by `UiObjectInteraction` and `UiDeviceInteraction` that have two methods: `onCheck` and `onPerform` taking UiObjectAssertion and UiObjectAction or UiDeviceAssertion and UiDeviceAction as arguments.
+Итак, мы поставили перед собой цель написать Kautomator, максимально похожий на Kakao. Вот почему мы ввели дополнительный слой поверх UiObject2 и UiDevice, который так похож на `ViewInteraction`. Этот уровень представлен `UiObjectInteraction` и `UiDeviceInteraction`, которые имеют два метода: `onCheck` и `onPerform`, принимающие UiObjectAssertion и UiObjectAction или UiDeviceAssertion и UiDeviceAction в качестве аргументов.
 
-`UiObjectInteraction` is designed to work with concrete `View` like `ViewInteraction`. `UiDeviceInteraction` has been created because UI Automator has a featureallowing you to do some system things like a click on Home button or on hard Back button, open Quick Setttings, open Notifications and so on. All such things are hidden by `UiSystem` class.
+`UiObjectInteraction` предназначен для работы с конкретным `View`, таким как `ViewInteraction`. `UiDeviceInteraction` был создан, потому что UI Automator имеет функцию, позволяющую вам выполнять некоторые системные действия, такие как нажатие кнопки «Домой» или кнопки «Назад», открытие быстрых настроек, открытие уведомлений и так далее. Все подобные вещи скрыты классом `UiSystem`.
 
-So, enjoy it =)
+Так что, наслаждайтесь =)
 
-#### Advanced
+### Кастомные UI-элементы
 
-##### Custom UiView
+Если у вас есть нестандартные (кастомные) UI-элементы в ваших тестах и вы хотите создать свой собственный `UiView`, у нас есть `UiBaseView`. Просто унаследуйте этот класс и реализуйте столько дополнительных интерфейсов Action/Assertion, сколько хотите.
+Вам также необходимо переопределить конструкторы, которые вам нужны.
 
-If you have custom Views in your tests and you want to create your own `UiView`, we have `UiBaseView`. Just extend
-this class and implement as much additional Action/Assertion interfaces as you want.
-You also need to override constructors that you need.
-
-```Kotlin
+```kotlin
 class UiMyView : UiBaseView<KView>, UiMyActions, UiMyAssertions {
     constructor(selector: UiViewSelector) : super(selector)
     constructor(builder: UiViewBuilder.() -> Unit) : super(builder)
 }
 ```
 
-##### Intercepting
+### Работа interceptor-ов
 
-If you need to add custom logic during the `Kautomator -> UI Automator` call chain (for example, logging) or
-if you need to completely change the `UiAssertion` or `UiAction` that are being sent to UI Automator
-during runtime in some cases, you can use the intercepting mechanism.
+Если вам нужно добавить свою логику во время цепочки вызовов `Kautomator -> UI Automator` (например, ведение журнала) или если вам нужно полностью изменить `UiAssertion` или `UiAction`, которые отправляются в UI Automator во время выполнения, в некоторых случаях можно использовать механизм перехвата.
 
-Interceptors are lambdas that you pass to a configuration DSL that will be invoked before real calls
-inside `UiObject2` and `UiDevice` classes in UI Automator.
+Перехватчики — это лямбда-выражения, которые вы передаете конфигурационному DSL, которые будут вызываться перед реальными вызовами внутри классов `UiObject2` и `UiDevice` в UI Automator.
 
-You have the ability to provide interceptors at 3 different levels: Kautomator runtime, your 'UiScreen' classes
-and any individual `UiView` instance.
+У вас есть возможность предоставлять перехватчики на 3 разных уровнях: время выполнения Kautomator, на уровне ваших классов 'UiScreen' и на уровне отдельного экземпляр `UiView`.
 
-On each invocation of UI Automator function that can be intercepted, Kautomator will aggregate all available interceptors
-for this particular call and invoke them in descending order: `UiView interceptor -> Active Screens interceptors ->
-Kautomator interceptor`.
+При каждом вызове функции UI Automator, которую можно перехватить, Kautomator агрегирует все доступные перехватчики для этого конкретного вызова и вызывает их в следующем порядке: `UiView interceptor -> Active Screens interceptors -> Kautomator interceptor`.
 
-Each of the interceptors in the chain can break the chain call by setting `isOverride` to true during configuration.
-In that case Kautomator will not only stop invoking remaining interceptors in the chain, **but will not perform the UI Automator
-call**. It means that in such case, the responsibility to actually invoke Kautomator lies on the shoulders
-of the developer.
+Каждый из перехватчиков может разорвать вызов цепочки, установив `isOverride`в true во время настройки.
+В этом случае Kautomator не только перестанет вызывать оставшиеся перехватчики в цепочке, но и не будет выполнять вызовы UI Automator. Это означает, что в таком случае ответственность за фактический вызов Kautomator лежит на плечах разработчика.
 
-Here's the examples of intercepting configurations:
-```Kotlin
+Вот примеры конфигураций:
+```kotlin
 class SomeTest {
     @Before
     fun setup() {
         KautomatorConfigurator { // Kautomator runtime
             intercept {
-                onUiInteraction { // Intercepting calls on UiInteraction classes across whole runtime
-                    onPerform { uiInteraction, uiAction -> // Intercept perform() call
+                onUiInteraction { // Перехват вызовов классов UiInteraction во время выполнения
+                    onPerform { uiInteraction, uiAction -> // Перехватываем вызов execute()
                         testLogger.i("KautomatorIntercept", "interaction=$uiInteraction, action=$uiAction")
                     }
                 }
@@ -177,19 +166,19 @@ class SomeTest {
     fun test() {
         MyScreen {
             intercept {
-                onUiInteraction { // Intercepting calls on UiInteraction classes while in the context of MyScreen
-                    onCheck { uiInteraction, uiAssert -> // Intercept check() call
+                onUiInteraction { // Перехват вызовов классов UiInteraction в контексте MyScreen
+                    onCheck { uiInteraction, uiAssert -> // Перехват вызова check()
                         testLogger.i("KautomatorIntercept", "interaction=$uiInteraction, assert=$uiAssert")
                     }
                 }
             }
 
             myView {
-                intercept { // Intercepting ViewInteraction calls on this individual view
-                    onPerform(true) { uiInteraction, uiAction -> // Intercept perform() call and overriding the chain
-                        // When performing actions on this view, Kautomator level interceptor will not be called
-                        // and we have to manually call UI Automator now.
-                        Log.d("KAUTOMATOR_VIEW", "$uiInteraction is performing $uiAction")
+                intercept { // Перехват вызовов ViewInteraction для этого отдельного UI-элемента
+                    onPerform(true) { uiInteraction, uiAction -> // Перехватываем вызов execute() и переопределяем цепочку
+                        // При выполнении действий над этим представлением не будет вызываться перехватчик уровня Kautomator
+                        // и теперь нам нужно вручную вызывать UI Automator.
+                        Log.d("KAUTOMATOR_VIEW", "$uiInteraction выполняет $uiAction")
                         uiInteraction.perform(uiAction)
                     }
                 }
@@ -198,18 +187,17 @@ class SomeTest {
     }
 }
 ```
-For more detailed info please refer to the documentation.
 
-### Accelerate UI Automator
-As you remember we told about the possible acceleration of UI Automator. How does it become a reality? <br>
-UI Automator has an inner mechanism to prevent potential flakiness. Under the hood, the library listens and gives commands through AccessibilityManagerService. AccessibilityManagerService is a single point for all accessibility events in the system. At one moment, creators of UI Automator faced with the flakiness problem. One of the most popular reasons for such undetermined behavior is a big count of events processing in the System at the current moment. But UI Automator has a connection with AccessibilityManagerService. Such a connection gives an opportunity to listen to all accessibility events in the System and to wait for a calm state when there are no actions. The calm state leads to determined system behavior and decreases the possibility of flakiness. <br>
-All of this pushed UI Automator authors to introduce the following algorithm: UI Automator waits 500ms (`waitForIdleTimeout` and `waitForSelectorTimeout` in `androidx.test.uiautomator.Configurator`) window during 10 seconds for **each action**. EACH ACTION.
+### Ускорияем UI Automator
+Как вы помните, мы рассказывали о возможном ускорении UI Automator. Как это становится возможным? <br>
+UI Automator имеет внутренний механизм для предотвращения потенциальной нестабильности. Под капотом библиотека слушает и отдает команды через AccessibilityManagerService. AccessibilityManagerService — это единая точка для всех событий доступности в системе. В какой-то момент создатели UI Automator столкнулись с проблемой ненадёжности. Одной из самых популярных причин такого неопределенного поведения является большое количество обрабатываемых в системе событий в текущий момент. Но UI Automator имеет связь с AccessibilityManagerService. Такое подключение дает возможность прослушивать все события доступности в системе и ждать спокойного состояния, когда нет никаких действий. Спокойное состояние приводит к детерминированному поведению системы и снижает вероятность нестабильности. <br>
+Все это подтолкнуло авторов UI Automator к внедрению следующего алгоритма: UI Automator ожидает 500 мс (`waitForIdleTimeout` и `waitForSelectorTimeout` в окне `androidx.test.uiautomator.Configurator`») в течение 10 секунд для **каждого действия**. КАЖДОЕ ДЕЙСТВИЕ.
 
-Perhaps, described solution made UI Automator more stable. But, the speed crashed, no doubts.
+Возможно, описанное решение сделало UI Automator более стабильным. Но скорость упала, спору нет.
 
-Kautomator is a DSL over UI Automator that provides a [mechanism of interceptors](../wiki/03_Kaspresso_configurator.md#kaspresso-interceptors-based-on-kakaokautomator-interceptors). Kaspresso offers a big set of default interceptors which eliminates any potential flaky action. So, Kaspresso + Kautomator helps UI Automator to struggle with flakiness.
+Kautomator — это DSL поверх UI Automator, который предоставляет [механизм перехватчиков](../wiki/03_Kaspresso_configurator.md#kaspresso-interceptors-based-on-kakaokautomator-interceptors). Kaspresso предлагает большой набор перехватчиков по умолчанию, что устраняет любые потенциальные нестабильные действия. Итак, Kaspresso + Kautomator помогает UI Automator бороться с ненадёжностью.
 
-After some time, we thought why we need to save artificial timeouts inside UI Automator while Kaspresso + Kautomator does the same work. Have a look at the measure example:
+Через какое-то время мы подумали, зачем нам сохранять искусственные таймауты внутри UI Automator, в то время как Kaspresso + Kautomator делает ту же работу. Взгляните на пример измерения:
 ```kotlin
 @RunWith(AndroidJUnit4::class)
 class KautomatorMeasureTest : TestCase(
@@ -236,7 +224,7 @@ class KautomatorMeasureTest : TestCase(
         before {
             activityTestRule.launchActivity(null)
         }.after { }.run {
-    
+
     ======> UI Automator:        0 minutes, 1 seconds and 252 millis
     ======> UI Automator boost:  0 minutes, 0 seconds and 310 millis
             step("MainScreen. Click on `measure fragment` button") {
@@ -247,7 +235,7 @@ class KautomatorMeasureTest : TestCase(
                     }
                 }
             }
-    
+
     ======> UI Automator:        0 minutes, 11 seconds and 725 millis
     ======> UI Automator boost:  0 minutes, 1 seconds and 50 millis
             step("Measure screen. Button_1 clicks comparing") {
@@ -319,14 +307,14 @@ class KautomatorMeasureTest : TestCase(
         }
 }
 ```
-It's a great deal!
+Отлично!
 
-Also, there are cases when UI Automator can't catch 500ms window. For example, when one element is updating too fast (one update in 100 ms). Just have a look at [this test](../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/idlingwait_tests/WaitForIdleTest.kt). Only `KautomatorWaitForIdleSettings.boost()` allows to pass the test.
+Также бывают случаи, когда UI Automator не может поймать окно 500 мс. Например, когда один элемент обновляется слишком быстро (одно обновление за 100 мс). Просто взгляните на [этот тест](../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/idlingwait_tests/WaitForIdleTest.kt). Только `KautomatorWaitForIdleSettings.boost()` позволяет пройти тест.
 
-As you see, we have introduced a special `kautomatorWaitForIdleSettings` property in Kaspresso configurator. By default, this property is **not** boost. Why? Because:
-1. You can have tests where you use UI Automator directly. But mentioned timeouts are global parameters. Resetting of these timeouts can lead to an undetermined state.
-2. We want to take time collecting data from the world and then to analyze potential problems of our solutions (but, we believe it's a stable and brilliant solution).
+Как видите, мы добавили в конфигуратор Kaspresso специальное свойство `kautomatorWaitForIdleSettings`. По умолчанию это свойство **не** повышает производительность. Почему? Потому что:
+1. У вас могут быть тесты, в которых вы напрямую используете UI Automator. Но указанные таймауты являются глобальными параметрами. Сброс этих тайм-аутов может привести к неопределенному состоянию.
+2. Мы хотим потратить время на сбор данных со всего мира, а затем проанализировать потенциальные проблемы наших решений (но мы считаем, что это стабильное и блестящее решение).
 
-Another important remark is about `kaspressoBuilder = Kaspresso.Builder.simple` configuration. This configuration is faster than `advanced` because of each step's screenshots interceptor absence. If you need, add them manually.
+Еще одно важное замечание касается конфигурации `kaspressoBuilder = Kaspresso.Builder.simple`. Эта конфигурация быстрее, чем `advanced`, из-за отсутствия перехватчика скриншотов на каждом шаге. При необходимости добавьте их вручную.
 
-Anyway, it's a small change for a developer, but it's a big step for the world =)
+В любом случае, это небольшое изменение для разработчика, но большой шаг для всех нас =)

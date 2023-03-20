@@ -1,25 +1,28 @@
-#Matchers, Actions and Assertions
+# Доступные классы Matcher, Action и Assertion
 
-As you all know Kaspresso is based on Espresso (if you're not familiar with Espresso, check out the [official docs](https://developer.android.com/training/testing/espresso)).
-<br>According to [official docs](https://developer.android.com/training/testing/espresso/basics) the main components of Espresso include the following:
-<br>* `Espresso` – Entry point to interactions with views (via `onView()` and `onData()`). Also exposes APIs that are not necessarily tied to any view, such as `pressBack()`.
-<br>* `ViewMatchers` – A collection of objects that implement the `Matcher<? super View>` interface. You can pass one or more of these to the `onView()` method to locate a view within the current view hierarchy.
-<br>* `ViewActions` – A collection of ViewAction objects that can be passed to the `ViewInteraction.perform()` method, such as `click()`.
-<br>* `ViewAssertions` – A collection of ViewAssertion objects that can be passed the `ViewInteraction.check()` method. Most of the time, you will use the matches assertion, which uses a View matcher to assert the state of the currently selected view.
+Kaspresso основан на Espresso (если вы не знакомы с Espresso, ознакомьтесь с [официальной документацией](https://developer.android.com/training/testing/espresso)).
+В [официальной документации](https://developer.android.com/training/testing/espresso/basics) указаны следующие основные компоненты:
+
+<ol>
+    <li>* `Espresso` – точка входа для взаимодействия с view (через `onView()` и `onData()`). Также предоставляет API, которые не обязательно привязаны к какому-либо элементу интерфейса, например, `pressBack()`.</li>
+    <li>* `ViewMatchers` – набор объектов, реализующих интерфейс `Matcher<? super View>`. Вы можете передать один или несколько из них методу `onView()`, чтобы найти нужный элемент в текущей иерархии экрана.</li>
+    <li>* `ViewActions` – коллекция объектов ViewAction, которые можно передать методу `ViewInteraction.perform()`, например, `click()`. Набор действий, которые могут быть выполнены с UI-элементами.</li>
+    <li>* `ViewAssertions` – коллекция объектов ViewAssertion, которые можно передать методу `ViewInteraction.check()`. Набор проверок, которые могут быть выполнены для различных UI-элементов. В большинстве случаев используют проверки, которые принимают Matcher-ы, для проверки состояния view.</li>
+</ol>
 
 ```kotlin
-// withId(R.id.my_view) is a ViewMatcher
-// click() is a ViewAction
-// matches(isDisplayed()) is a ViewAssertion
+// withId(R.id.my_view) является ViewMatcher
+// click() является ViewAction
+// matches(isDisplayed()) является ViewAssertion
 onView(withId(R.id.my_view))
     .perform(click())
     .check(matches(isDisplayed()))
 ```
-Most available instances of Matcher, ViewActions and ViewAssertions can be found in the [Google cheat-sheet](https://developer.android.com/training/testing/espresso/cheat-sheet)
-<img src="../Images/Matchers_actions_assertions/Espresso_cheat_sheet.png" alt="Espresso cheat sheet"/>
 
-The results of calling `onView()` methods (`ViewInteractors`) can be cashed. In (Kakao)[https://github.com/KakaoCup/Kakao] you can get references to ViewInteractors and reuse them in your code. This makes your code in tests more readable and understandable.
-<br>This framework also allows you to separate the search for an element and actions on it. Kakao has introduced KView and various implementations for the most available Android widgets. This KView implements the BaseAssertions and BaseActions interfaces with some additional methods. Every inheritor of KView implements its own interfaces for assertions and actions for some widget-specific methods.
-<br>As a result, you can get a reference to specific views from your test code and make the necessary assertions and actions on it in the view block.
+Наиболее востребованные экземпляры Matcher, ViewActions и ViewAssertions можно найти в [шпаргалке Google](https://developer.android.com/training/testing/espresso/cheat-sheet).
+<img src="../Images/Matchers_actions_assertions/Espresso_cheat_sheet.png" alt="Шпаргалка по эспрессо"/>
 
-<br>Since Kasresso inherits all the best from these two frameworks, everything described above is available to you.
+Результаты вызова метода `onView()` (`ViewInteractors`) могут быть кэшированы. В [Kakao](https://github.com/KakaoCup/Kakao) вы можете получить ссылку на ViewInteractor и повторно использовать ее в своем коде. Это делает ваш код в тестах более читабельным и понятным.
+Паттерн PageObject позволяет разделить поиск элемента и действия над ним. Kakao представила KView и различные реализации для самых доступных виджетов Android. Этот KView реализует интерфейсы BaseAssertions и BaseActions с некоторыми дополнительными методами. Каждый наследник KView реализует свои собственные интерфейсы для некоторых методов, специфичных для виджета.
+
+<br>Поскольку Kaspresso наследует все лучшее от этих двух фреймворков, вам доступно все, что описано выше.

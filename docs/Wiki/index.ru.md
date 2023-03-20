@@ -1,4 +1,4 @@
-# Kaspresso Wiki
+# Kaspresso Вики
 
-Here you can find detailed information about all the Kaspresso features.
+Здесь вы можете найти подробную информацию обо всех возможностях Kaspresso.
 
