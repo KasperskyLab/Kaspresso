@@ -1,4 +1,4 @@
-# Jetpack Compose support [Early access]
+# Jetpack Compose support 
 
 **Keep in mind it's early access that may contain bugs. Also, API can be changed, but we are going to avoid it. Be free to create relative issues if you've encountered with any kind of problem.**
 
@@ -207,7 +207,7 @@ Run `ComposeSimpleFlakyTest` (from "kaspresso-sample" module) on the JVM right n
 ```
 ./gradlew :samples:kaspresso-compose-support-sample:testDebugUnitTest --info --tests "com.kaspersky.kaspresso.composesupport.sample.test.ComposeSimpleFlakyTest"  
 ```
-All information about Robolectric support is available [here](./08_Kaspresso-Robolectric.md).
+All information about Robolectric support is available [here](https://kasperskylab.github.io/Kaspresso/Wiki/Kaspresso_Robolectric/).
 
 ### Compose is compatible with all sweet Kaspresso extensions
 Sweet Kaspresso extensions means using of the such constructions as

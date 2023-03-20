@@ -1,51 +1,49 @@
-# Jetpack Compose support [Early access]
+# Поддержка Jetpack Compose
 
-**Keep in mind it's early access that may contain bugs. Also, API can be changed, but we are going to avoid it. Be free to create relative issues if you've encountered with any kind of problem.**
+Поддержка Jetpack Compose состоит из двух частей: [библиотека Kakao Compose](https://github.com/KakaoCup/Compose) и механизм Kaspresso Interceptors.
 
-Jetpack Compose support consists of two parts: [Kakao Compose library](https://github.com/KakaoCup/Compose) and Kaspresso Interceptors mechanism.
+## Библиотека Kakao Compose
+Вся подробная информация доступна в [README](https://github.com/KakaoCup/Compose) библиотеки.
 
-## Kakao Compose library
-All detailed information is available in the [README](https://github.com/KakaoCup/Compose) of the library.
+Поддержка Jetpack Compose обеспечивается отдельным модулем, чтобы не заставлять разработчиков обновлять версию minSDK до 21.
 
-Jetpack Compose support is provided by a separate module to not force developers to up their minSDK version to 21.
-
-So, first of all, add a dependency to `build.gradle`:
+Итак, прежде всего, добавьте зависимость в build.gradle:
 ```groovy
 dependencies {
     androidTestImplementation "com.kaspersky.android-components:kaspresso-compose-support:<latest_version>"
 }
 ```
 
-In a nutshell, let's see at how Kakao Compose DSL looks like:
+Вкратце, давайте посмотрим, как выглядит Kakao Compose DSL:
 ```kotlin
 // Screen class
 class ComposeMainScreen(semanticsProvider: SemanticsNodeInteractionsProvider) :
     ComposeScreen<ComposeMainScreen>(
         semanticsProvider = semanticsProvider,
-        // Screen in Kakao Compose can be a Node too due to 'viewBuilderAction' param.
-        // 'viewBuilderAction' param is nullable.
-        viewBuilderAction = { hasTestTag("ComposeMainScreen") }
+        // Экран в Kakao Compose тоже может быть Node-ой из-за параметра viewBuilderAction.
+        // Параметр 'viewBuilderAction' может принимать значение NULL.
+        viewBuilderAction = { hasTestTag ("ComposeMainScreen") }
 ) {
 
-    // You can set clear parent-child relationship due to 'child' extension
-    // Here, 'simpleFlakyButton' is a child of 'ComposeMainScreen' (that is Node too)
+    // Вы можете установить четкие отношения родитель-потомок благодаря расширению 'child'
+    // Здесь 'simpleFlakyButton' является дочерним элементом 'ComposeMainScreen' (это тоже Node)
     val simpleFlakyButton: KNode = child {
         hasTestTag("main_screen_simple_flaky_button")
     }
 }
 
-// This annotation is here to make the test is appropriate for JVM environment (with Robolectric)
+// Эта аннотация предназначена для того, чтобы тест подходил для среды JVM (с Robolectric)
 @RunWith(AndroidJUnit4::class)
-// Test class declaration
+// Объявление тестового класса
 class ComposeSimpleFlakyTest : TestCase(
     kaspressoBuilder = Kaspresso.Builder.withComposeSupport()
 ) {
 
-    // Special rule for Compose tests
+    // Специальный класс Rule для тестов Compose
     @get:Rule
     val composeTestRule = createAndroidComposeRule<JetpackComposeActivity>()
 
-    // Test DSL. It's so similar to Kakao or Kautomator DSL
+    // Проверка DSL. Это так похоже на Kakao или Kautomator DSL.
     @Test
     fun test() = run {
         step("Open Flaky screen") {
@@ -65,35 +63,31 @@ class ComposeSimpleFlakyTest : TestCase(
                 }
             }
         }
-        
+
         // ...
     }
 }
 ```
-Again, all related to DSL information is available in [the docs](https://github.com/KakaoCup/Compose).
+Опять же, вся информация, связанная с DSL, доступна в [документации](https://github.com/KakaoCup/Compose).
 
-## Kaspresso Interceptors mechanism
-Interceptors are one of the main advantages and powers of Kaspresso library.<br>
-How interceptors work is described
-at the [article](https://proandroiddev.com/kaspresso-the-autotest-framework-that-you-have-been-looking-forward-to-part-i-e102ed384d11) (look the chapter *"Flaky tests and logging"*).
+## Механизм Kaspresso Interceptors
+Перехватчики — одно из главных преимуществ и возможностей библиотеки Kaspresso.<br>
+Перечислим дефолтные перехватчики, которые по умолчанию работают под капотом, когда вы пишете тесты с Kaspresso.
 
-The same principles are using in Kaspresso for Jetpack Compose.
-Let's enumerate default interceptors that work under the hood by default when you write tests with Kaspresso.
-
-### Behavior interceptors
+### Behavior interceptors (Поведенческие перехватчики)
 1. `FailureLoggingSemanticsBehaviorInterceptor`<br>
-   Build the clear and undestandable exception in case of the test failure.
+   Создайте ясное и понятное исключение в случае сбоя теста.
 2. `FlakySafeSemanticsBehaviorInterceptor`<br>
-   Tries to repeat the failed action or assertion during defined timeout. All params for this interceptor are at `FlakySafetyParams`.
+   Пытается повторить неудачное действие или утверждение в течение заданного времени ожидания. Все параметры этого перехватчика находятся в `FlakySafetyParams`.
 3. `SystemDialogSafetySemanticsBehaviorInterceptor`<br>
-   Eliminates various system dialogs that prevent correct execution of a test.
+   Устраняет различные системные диалоги, мешающие корректному выполнению теста.
 4. `AutoScrollSemanticsBehaviorInterceptor`<br>
-   Performs autoscrolling to an element if the element is not visible on the screen.
+   Выполняет автопрокрутку к элементу, если элемент не виден на экране.
 5. `ElementLoaderSemanticsBehaviorInterceptor`<br>
-   Requests the related `SemanticNodeInteraction` using saved `Matcher` when the element is not found.
+   Запрашивает связанный `SemanticNodeInteraction`, используя сохраненный `Matcher`, когда элемент не найден.
 
-### Watcher interceptors
-`LoggingSemanticsWatcherInterceptor`. The Interceptor produces human-readable logs. The example:
+### Watcher interceptors (Перехватчики-наблюдатели)
+`LoggingSemanticsWatcherInterceptor`. Interceptor создает удобочитаемые журналы. Пример:
 ```
 I/KASPRESSO: TEST STEP: "1. Open Flaky screen" in ComposeSimpleFlakyTest SUCCEED. It took 0 minutes, 0 seconds and 212 millis. 
 I/KASPRESSO: ___________________________________________________________________________
@@ -117,25 +111,25 @@ I/KASPRESSO: ___________________________________________________________________
 I/KASPRESSO: TEST STEP: "3. Click on the Second button" in ComposeSimpleFlakyTest
 ```
 
-## Caveats
-Remember, that Jetpack Compose and all relative tools are developing.
-It means Jetpack Compose is not learned very well and some things can be unexpected after "Old fashioned View World" experience.
-Let me show the interesting case.
+## Предостережения
+Помните, что Jetpack Compose и все сопутствующие инструменты находятся в стадии разработки.
+Это означает, что Jetpack Compose изучен не очень хорошо, и некоторые вещи могут быть неожиданными после опыта «Old fashioned View World».
+Покажу интересный случай.
 
-For example, this code
+Например, этот код
 ```kotlin
-composeSimpleFlakyScreen(composeTestRule) {
+composeSimpleFlakyScreen (composeTestRule) {
     firstButton {
         performClick()
     }
 }
 ``` 
-can be the source of flakiness behavior if `firstButton` is located in non visible for a user area
-(you just need to scroll to see the element).
+может быть источником ненадежного поведения, если `firstButton` расположен в области, невидимой для пользователя
+(вам просто нужно прокрутить, чтобы увидеть элемент).
 
-But, this code will always work stably:
+Но, этот код всегда будет стабильно работать:
 ```kotlin
-composeSimpleFlakyScreen(composeTestRule) {
+composeSimpleFlakyScreen (composeTestRule) {
     firstButton {
         assertIsDisplayed()
         performClick()
@@ -143,21 +137,20 @@ composeSimpleFlakyScreen(composeTestRule) {
 }
 ``` 
 
-The explanation is in the nature of SemanticsNode Tree and Jetpack Compose. `firstButton` is a Node and presented in the Tree.
-It means that `performClick()` may work and nothing bad doesn't happen. But, `firstButton` is not visible physically and a real click doesn't occur.
-Such behavior causes the crash of a test a little bit later.<br>
-But, `assertIsDisplayed()` check doesn't pass on the first try (we don't see the element on the screen) and
-launches work of all Interceptors including Autoscroll interceptor which scrolls the Screen to the desired element.
+Объяснение кроется в природе SemanticsNode Tree и Jetpack Compose. Элемент firstButton — это узел, представленный в дереве.
+Это означает, что `performClick()` может сработать и ничего страшного не произойдет. Но `firstButton` физически не виден, и настоящий клик не происходит.
+Такое поведение приводит к падению теста чуть позже.<br>
+Но проверка `assertIsDisplayed()` не проходит с первой попытки (мы не видим элемент на экране) и запускает работу всех перехватчиков, включая перехватчик Autoscroll, который прокручивает экран до нужного элемента.
 
-Please, [share your experience](https://github.com/KasperskyLab/Kaspresso/issues/new) to help other developers.
+Пожалуйста, [поделитесь своим опытом](https://github.com/KasperskyLab/Kaspresso/issues/new), чтобы помочь другим разработчикам.
 
-## What else
+## Что еще
 
-### Configuration
-Jetpack Compose support is fully configurable. Have a look at various options to configure:
+### Конфигурация
+Поддержка Jetpack Compose полностью настраивается. Взгляните на различные параметры для настройки:
 ```kotlin
-// We edit only semanticsBehaviorInterceptors
-// Now, semanticsBehaviorInterceptors contains only FailureLoggingSemanticsBehaviorInterceptor
+// Редактируем только semanticsBehaviorInterceptors
+// Теперь semanticsBehaviorInterceptors содержит только FailureLoggingSemanticsBehaviorInterceptor
 class ComposeCustomizeTest : TestCase(
     kaspressoBuilder = Kaspresso.Builder.withComposeSupport { composeBuilder ->
         composeBuilder.semanticsBehaviorInterceptors = composeBuilder.semanticsBehaviorInterceptors.filter {
@@ -166,12 +159,12 @@ class ComposeCustomizeTest : TestCase(
     }
 )
 
-// We edit flakySafetyParams and semanticsBehaviorInterceptors
-// Also, we change semanticsBehaviorInterceptors where we exclude SystemDialogSafetySemanticsBehaviorInterceptor
+// Редактируем flakySafetyParams и semanticsBehaviorInterceptors
+// Также мы меняем semanticsBehaviorInterceptors, исключая SystemDialogSafetySemanticsBehaviorInterceptor
 class ComposeCustomizeTest : TestCase(
     kaspressoBuilder = Kaspresso.Builder.withComposeSupport(
-        // It's very important to change flakySafetyParams in customize section
-        // Otherwise, all interceptors will use a default version of flakySafetyParams
+        // Очень важно изменить flakySafetyParams в разделе настройки
+        // В противном случае все перехватчики будут использовать версию flakySafetyParams по умолчанию
         customize = {
             flakySafetyParams = FlakySafetyParams.custom(timeoutMs = 5000, intervalMs = 1000)
         },
@@ -181,13 +174,13 @@ class ComposeCustomizeTest : TestCase(
             }.toMutableList()
         }
     ).apply {
-        // Remember, It's better to customize ComposeSupport only after Kaspresso customizing
-        // Because ComposeSupport interceptors can be dependent on some Kaspresso entities
-        // For example, changing flakySafetyParams in this section will not affect ComposeSupport interceptors
+        // Помните, лучше настраивать ComposeSupport только после настройки Kaspresso
+        // Поскольку перехватчики ComposeSupport могут зависеть от некоторых сущностей Kaspresso
+        // Например, изменение flakySafetyParams в этом разделе не повлияет на перехватчики ComposeSupport
     }
 )
 
-// There is another way to do exactly the same
+// Есть еще один способ сделать то же самое
 class ComposeCustomizeTest : TestCase(
     kaspressoBuilder = Kaspresso.Builder.simple {
         flakySafetyParams = FlakySafetyParams.custom(timeoutMs = 5000, intervalMs = 1000)
@@ -201,18 +194,18 @@ class ComposeCustomizeTest : TestCase(
 )
 ```
 
-### Robolectric support
-You can run your Compose tests on the JVM environment with Robolectric.<br>
-Run `ComposeSimpleFlakyTest` (from "kaspresso-sample" module) on the JVM right now:
+### Поддержка Robolectric 
+Вы можете запускать тесты Compose в среде JVM с помощью Robolectric.<br>
+Запустите ComposeSimpleFlakyTest (из модуля `kaspresso-sample`) на JVM прямо сейчас:
 ```
 ./gradlew :samples:kaspresso-compose-support-sample:testDebugUnitTest --info --tests "com.kaspersky.kaspresso.composesupport.sample.test.ComposeSimpleFlakyTest"  
 ```
-All information about Robolectric support is available [here](./08_Kaspresso-Robolectric.md).
+Вся информация о поддержке Robolectric доступна [здесь](https://kasperskylab.github.io/Kaspresso/ru/Wiki/Kaspresso_Robolectric/).
 
-### Compose is compatible with all sweet Kaspresso extensions
-Sweet Kaspresso extensions means using of the such constructions as
+### Compose совместим со всеми расширениями Kaspresso.
+Расширения Kaspresso подразумевают использование таких конструкций, как
 - `flakySafely`
 - `continuously`
 
-The support of some constructions is in progress: [issue-317](https://github.com/KasperskyLab/Kaspresso/issues/317).
+Идет поддержка некоторых конструкций: [issue-317](https://github.com/KasperskyLab/Kaspresso/issues/317).
 

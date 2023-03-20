@@ -126,20 +126,20 @@ plugins:
           10. Работа с Android permissions: 10. Работа с Android permissions
           11. RecyclerView: 11. RecyclerView
           12. Логирование и скриншоты: 12. Логирование и скриншоты
-          Wiki: Wiki
-          Введение: Introduction
-          Паттерн PageObject в Kaspresso: PageObject in Kaspresso
-          Espresso как основа: Espresso as the basis
-          Поддерживаемые UI-виджеты Android: Supported Android UI-elements
-          Доступные классы Matcher, Action и Assertion: View matchers, actions and assertions
-          Kautomator. Обертка над UI Automator: Kautomator. Wrapper over UI Automator
-          Взаимодействие с ОС Android. Класс Device: Working with Android OS
-          Выполнение команд adb: Executing adb commands
+          Wiki: Вики
+          Введение: Введение
+          Паттерн PageObject в Kaspresso: Паттерн PageObject в Kaspresso
+          Espresso как основа: Espresso как основа
+          Поддерживаемые UI-виджеты Android: Поддерживаемые UI-виджеты Android
+          Доступные классы Matcher, Action и Assertion: Доступные классы Matcher, Action и Assertion
+          Kautomator. Обертка над UI Automator: Kautomator. Обертка над UI Automator
+          Взаимодействие с ОС Android. Класс Device: Взаимодействие с ОС Android. Класс Device
+          Выполнение команд adb: Выполнение команд adb
           Screenshot tests: Screenshot tests
           Kaspresso configuration: Kaspresso configuration
           Kaspresso with Robolectric: Kaspresso with Robolectric
           Kaspresso with Allure: Kaspresso with Allure
-          Jetpack Compose in Kaspresso: Jetpack Compose in Kaspresso
+          Jetpack Compose в Kaspresso: Jetpack Compose в Kaspresso
           Issues: Issues
           Found an issue?: Found an issue?
           Storage issues: Storage issues
