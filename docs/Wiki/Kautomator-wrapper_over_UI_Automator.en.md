@@ -39,7 +39,7 @@ Have a glance at video below:
 ![](https://habrastorage.org/webt/ti/kv/ki/tikvkij1vjesnacrxqm-lk0coly.gif) <br>
 The left video is boosted UI Automator, the right video is default UI Automator.
 
-Why is it possible? The details are [available a little bit later](./02_Wrapper_over_UiAutomator.md#accelerate-ui-automator).
+Why is it possible? The details are [available a little bit later](https://kasperskylab.github.io/Kaspresso/en/Wiki/Kautomator-wrapper_over_UI_Automator/#accelerate-ui-automator).
 
 #### Benefits
 - Readability
@@ -146,7 +146,7 @@ during runtime in some cases, you can use the intercepting mechanism.
 Interceptors are lambdas that you pass to a configuration DSL that will be invoked before real calls
 inside `UiObject2` and `UiDevice` classes in UI Automator.
 
-You have the ability to provide interceptors at 3 different levels: Kautomator runtime, your 'UiScreen' classes
+You have the ability to provide interceptors at 3 different levels: Kautomator runtime, your `UiScreen` classes
 and any individual `UiView` instance.
 
 On each invocation of UI Automator function that can be intercepted, Kautomator will aggregate all available interceptors
