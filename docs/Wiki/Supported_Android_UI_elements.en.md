@@ -31,7 +31,7 @@ All the supported Android UI widgets in Kakao can be found as [inheritors](https
 <br>* `KButton`
 <br>* `KSnackbar`
 <br>* `KTextView`
-<br> `KToolbar`
+<br>* `KToolbar`
 
 ## Via KAutomator
 If you extend the `UiScreen` abstract class then the following views are available for you:
@@ -43,4 +43,4 @@ If you extend the `UiScreen` abstract class then the following views are availab
 <br>* `UiChipGroup`
 <br>* `UiSwitchView`
 <br>* `UiScrollView`
-<br> `UiBottomNavigationView`
+<br>* `UiBottomNavigationView`
