@@ -106,14 +106,14 @@ plugins:
           Found an issue?: Found an issue?
           Storage issues: Storage issues
         ru:
-          Home: Home
+          Home: Главная
           About Kaspresso: О Kaspresso
           Kaspresso in articles: Kaspresso в статьях
           Kasspresso in videos: Kaspresso в видео
           Our users: Наши пользователи
           Breaking changes: Breaking changes
           Contribution guide: Инструкция для разработчиков
-          Tutorial: Tutorial
+          Tutorial: Туториал
           1. Введение: 1. Введение
           2. Скачиваем проект и Android studio: 2. Скачиваем проект и Android studio
           3. Writing your first Kaspresso test: 3. Пишем первый автотест с Kaspresso
@@ -127,20 +127,20 @@ plugins:
           11. RecyclerView: 11. RecyclerView
           12. Логирование и скриншоты: 12. Логирование и скриншоты
           Wiki: Вики
-          Введение: Введение
-          Паттерн PageObject в Kaspresso: Паттерн PageObject в Kaspresso
-          Espresso как основа: Espresso как основа
-          Поддерживаемые UI-виджеты Android: Поддерживаемые UI-виджеты Android
-          Доступные классы Matcher, Action и Assertion: Доступные классы Matcher, Action и Assertion
-          Kautomator. Обертка над UI Automator: Kautomator. Обертка над UI Automator
-          Взаимодействие с ОС Android. Класс Device: Взаимодействие с ОС Android. Класс Device
-          Выполнение команд adb: Выполнение команд adb
+          Introduction: Введение
+          PageObject in Kaspresso: Паттерн PageObject в Kaspresso
+          Espresso as the basis: Espresso как основа
+          Supported Android UI-elements: Поддерживаемые UI-виджеты Android
+          View matchers, actions and assertions: Доступные классы Matcher, Action и Assertion
+          Kautomator. Wrapper over UI Automator: Kautomator. Обертка над UI Automator
+          Working with Android OS. Class Device: Взаимодействие с ОС Android. Класс Device
+          Executing adb commands: Выполнение команд adb
           Screenshot tests: Screenshot tests
           Kaspresso configuration: Kaspresso configuration
           Kaspresso with Robolectric: Kaspresso with Robolectric
           Kaspresso with Allure: Kaspresso with Allure
-          Jetpack Compose в Kaspresso: Jetpack Compose в Kaspresso
-          Issues: Issues
+          Jetpack Compose in Kaspresso: Jetpack Compose в Kaspresso
+          Issues: Известные проблемы
           Found an issue?: Found an issue?
           Storage issues: Storage issues
 nav:
