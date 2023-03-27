@@ -31,7 +31,9 @@ class DevicePermissionsSampleTest : TestCase() {
         assumeTrue(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
 
         before {
-            adbServer.performShell("pm revoke ${device.targetContext.packageName} ${Manifest.permission.READ_CALL_LOG}")
+            device.uiDevice.executeShellCommand(
+                "pm revoke ${device.targetContext.packageName} ${Manifest.permission.READ_CALL_LOG}"
+            )
         }.after {
         }.run {
 
