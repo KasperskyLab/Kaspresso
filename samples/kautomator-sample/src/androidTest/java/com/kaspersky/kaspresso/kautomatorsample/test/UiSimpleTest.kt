@@ -30,6 +30,14 @@ class UiSimpleTest : TestCase() {
                     }
                 }
             }
+            step("Type more text and check it") {
+                MainScreen {
+                    simpleEditText {
+                        typeText(" is super useful")
+                        hasText("Kaspresso is super useful")
+                    }
+                }
+            }
             step("Click button") {
                 MainScreen {
                     simpleButton {
