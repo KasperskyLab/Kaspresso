@@ -19,6 +19,8 @@ publish {
 }
 
 dependencies {
+    api(libs.bundles.allure)
+
     implementation(projects.kaspresso)
 
     implementation(libs.kotlinStdlib)
@@ -27,7 +29,6 @@ dependencies {
     implementation(libs.androidXTestRunner)
     implementation(libs.uiAutomator)
     implementation(libs.androidXTestExtJunitKtx)
-    implementation(libs.bundles.allure)
 
     testImplementation(libs.junit)
 
