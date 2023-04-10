@@ -18,7 +18,7 @@ interface UiEditableActions : UiBaseActions {
         view.perform(
             UiEditableActionType.TYPE_TEXT,
             "typeText(text=$text)"
-        ) { this.text = this.text ?: "" + text }
+        ) { this.text = (this.text ?: "") + text }
     }
 
     /**
