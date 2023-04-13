@@ -1,4 +1,4 @@
-﻿﻿This file contains information about dependencies which are used in the Kaspresso/kautomator.
+﻿﻿This file contains information about dependencies which are used in the Kaspresso/kautomator. This file is made for Kaspresso release 1.5.1
 
 
 androidx.annotation:annotation 1.2.0
