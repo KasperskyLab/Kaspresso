@@ -206,23 +206,24 @@ This method wraps your View interface and returns a proxy on it.
 The proxy guarantees that all the methods of the View interface you called, will be invoked on the main thread.
 There is also `getUiSafeProxyFromImplementation` which wraps an implementation rather than an interface.
 
-For full example, check [AdvancedScreenshotSampleTest](../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/docloc_tests/advanced/AdvancedScreenshotSampleTest.kt) class.
+For full example, check [AdvancedScreenshotSampleTest](https://github.com/KasperskyLab/Kaspresso/blob/master/samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/docloc_tests/advanced/AdvancedScreenshotSampleTest.kt) class.
 
 ## Modifying screenshots path and name
 
 By default, all screenshots are stored at: <br>
 ```/sdcard/screenshots/<locale>/<full qualified test class name>/<method name>.``` <br>
 You can change this behavior by providing custom
-[ResourcesRootDirsProvider](../kaspresso/src/main/kotlin/com/kaspersky/kaspresso/files/resources/ResourcesRootDirsProvider.kt),
-[ResourcesDirsProvider](../kaspresso/src/main/kotlin/com/kaspersky/kaspresso/files/resources/ResourcesDirsProvider.kt),
-[ResourceFileNamesProvider](../kaspresso/src/main/kotlin/com/kaspersky/kaspresso/files/resources/ResourceFileNamesProvider.kt) and  
-[ResourcesDirNameProvider](../kaspresso/src/main/kotlin/com/kaspersky/kaspresso/files/resources/ResourcesDirNameProvider.kt) implementations.
-Find out details [here](../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/docloc_tests/customdirectory/CustomDirectoryScreenshotSampleTest.kt).
+[ResourcesRootDirsProvider](https://github.com/KasperskyLab/Kaspresso/blob/master/kaspresso/src/main/kotlin/com/kaspersky/kaspresso/files/resources/ResourcesRootDirsProvider.kt),
+[ResourcesDirsProvider](https://github.com/KasperskyLab/Kaspresso/blob/master/kaspresso/src/main/kotlin/com/kaspersky/kaspresso/files/resources/ResourcesDirsProvider.kt),
+[ResourceFileNamesProvider](https://github.com/KasperskyLab/Kaspresso/blob/master/kaspresso/src/main/kotlin/com/kaspersky/kaspresso/files/resources/ResourceFileNamesProvider.kt) and
+[ResourcesDirNameProvider](https://github.com/KasperskyLab/Kaspresso/blob/master/kaspresso/src/main/kotlin/com/kaspersky/kaspresso/files/resources/ResourcesDirNameProvider.kt) implementations.
+
+Find out details [here](https://github.com/KasperskyLab/Kaspresso/blob/master/samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/docloc_tests/customdirectory/CustomDirectoryScreenshotSampleTest.kt).
 
 ## Changes
 
 We have been forced to redesign our resource providing system to support Allure.
-That's why we changed the primary constructor of [DocLocScreenshotTestCase](../kaspresso/src/main/kotlin/com/kaspersky/kaspresso/testcases/api/testcase/DocLocScreenshotTestCase.kt).
+That's why we changed the primary constructor of [DocLocScreenshotTestCase](https://github.com/KasperskyLab/Kaspresso/blob/master/kaspresso/src/main/kotlin/com/kaspersky/kaspresso/testcases/api/testcase/DocLocScreenshotTestCase.kt).
 But, we've kept the old option of using `DocLocScreenshotTestCase` with old resource providing system as a secondary constructor.
 You can view the secondary constructor as an example of migration from old system to new system.
 Also, we've retained tests using old resource providing system in samples to ensure that nothing is broken.

@@ -1,17 +1,14 @@
-# Screenshot tests
+# Скриншот тесты
 
-## Main purpose
+## Основная цель
 
-Sometimes when developing new features, there is a need to check if the application works properly in all supported languages. Manual locale setting changes could take a long time and require the efforts of developers, QA engineers, and etc. Also, it could increase the duration of the localization process.
+Иногда при разработке новых функций возникает необходимость проверить, корректно ли работает приложение на всех поддерживаемых языках. Ручное изменение настроек локали может занять много времени и потребовать усилий разработчиков, QA-инженеров и т. д. Кроме того, это может увеличить продолжительность процесса локализации.
 
-In order to avoid that, Kaspresso provides ```DocLocScreenshotTestCase```
-which allows taking screenshots in all locales you specified. `DocLocScreenshotTestCase` extends
-default Kaspresso `TestCase` and offers the opportunity to make screenshots out the box by
-calling `DocLocScreenshotTestCase#captureScreenshot(String)` method.
+Чтобы избежать этого, Kaspresso предоставляет класс ```DocLocScreenshotTestCase```, что позволяет делать скриншоты во всех указанных вами локалях. `DocLocScreenshotTestCase` расширяется класс `TestCase` и предлагает возможность делать скриншоты из коробки, вызывая метод `DocLocScreenshotTestCase#captureScreenshot(String)`.
 
-## Usage
+## Использование
 
-To create a single test, you should extend `DocLocScreenshotTestCase` class as shown below:
+Чтобы создать скриншот тест, вы должны расширить класс `DocLocScreenshotTestCase`, как показано ниже:
 
 ```kotlin
 @RunWith(AndroidJUnit4::class)
@@ -40,41 +37,37 @@ class ScreenshotSampleTest : DocLocScreenshotTestCase(
 }
 ```
 
-There is one parameter passed in the base constructor:
-- locales - comma-separated string with locales to run test with.
-  Captured screenshots will be available in the device's storage at the path "/sdcard/screenshots/".
+В базовый конструктор передается один параметр: `locales` - строка с разделенными запятыми локалями для запуска теста. Сделанные скриншоты будут доступны в памяти устройства по пути `/sdcard/screenshots/`.
 
-For full example, check the [ScreenshotSampleTest](../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/docloc_tests/ScreenshotSampleTest.kt).
+Полный пример см. в [ScreenshotSampleTest](https://github.com/KasperskyLab/Kaspresso/blob/1c1fc42f704ea6baa08e5c0e4e0269ded9243986/samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/docloc_tests/ScreenshotSampleTest.kt).
 
-Notice, that the test is marked with `@ScreenShooterTest` annotation. This is intended to filter only screenshooter tests to be run. For example, you could pass the
-annotation to default `AndroidJUnitRunner` with command:
+Обратите внимание, что тест помечен аннотацией `@ScreenShooterTest`. Эта аннотация предназначена для фильтрации скриншот тестов от всех остальных для запуска. Например, вы можете передать эту аннотацию стандартному `AndroidJUnitRunner` при помощи команды:
 
 ```
 adb shell am instrument -w -e annotation com.kaspersky.kaspresso.annotations.ScreenShooterTest your.package.name/android.support.test.runner.AndroidJUnitRunner
 ```
 
-**Screenshot files location**
+## Расположение файлов скриншотов
 
-All screenshot files are stored in "screenshots" directory by default.
-They are sorted by locale and test name:
+Все файлы снимков экрана хранятся по умолчанию в каталоге `screenshots`.
+Они отсортированы по локали и названию теста:
 
 `<base directory>/<test class canonical name>/<locale>/<your tag>.png`
 
-For the sample test case, the files tree should be like:
+Для тестового кейса из примера дерево файлов должно выглядеть так:
 
     - screenshots
-        -  com.kaspersky.kaspressample.tests.docloc.ScreenshotSampleTest
+        - com.kaspersky.kaspressample.tests.docloc.ScreenshotSampleTest
             - en
-                // screenshot files
+                // файлы скриншотов
             - ru
-                // screenshot files
+                // файлы скриншотов
 
-So, in order to save screenshots at external storage, the test application requires
-`android.permission.WRITE_EXTERNAL_STORAGE` permission.
+Итак, для сохранения скриншотов на внешнее хранилище тестовому приложению требуется разрешение `android.permission.WRITE_EXTERNAL_STORAGE`.
 
-**Screenshot's additional meta-info**
+## Дополнительная метаинформация скриншота
 
-When a developer calls ```captureScreenshot("la-la-la")``` method then Kaspresso creates not only a screenshot but also a special xml file. This xml file contains data about all ui elements with their id located on the screen. Example:
+Когда разработчик вызывает метод  `captureScreenshot("la-la-la")` , Kaspresso создает не только снимок экрана, но и специальный xml-файл. Этот xml-файл содержит данные обо всех элементах пользовательского интерфейса с их идентификаторами, расположенными на экране. Пример:
 ```
 <Metadata>
     <Window Left="0" Top="0" Width="1440" Height="2560">
@@ -86,12 +79,12 @@ When a developer calls ```captureScreenshot("la-la-la")``` method then Kaspresso
     </Window>
 </Metadata>
 ```
-Similar data may be useful for different systems automating the process of localization of an application. The automating system saves xml for each screen and compares it with new versions received by new screenshot's runs. If some difference were revealed the system gives a signal to prepare and send a portion of new words to translate server.
+Подобные данные могут быть полезны для разных систем, автоматизирующих процесс локализации приложения. Система автоматизации сохраняет файл xml для каждого экрана и сравнивает его с новыми версиями, полученными при прогонах новых скриншотов. При обнаружении каких-либо отличий система дает сигнал подготовить и отправить порцию новых слов на сервер перевода.
 
-**Screenshots of system dialogs/windows**
+## Скриншоты системных диалогов/окон
 
-Sometimes you want to take screenshots of Android system dialogs or windows. That's why you have to change the language for the entire system. For this purpose, there is additional param in ```DocLocScreenshotTestCase``` constructor - ```changeSystemLocale```. Pay your attention to the fact that ```changeSystemLocale``` defined in true demands ```Manifest.permission.CHANGE_CONFIGURATION```. <br>
-Have a look at the code below:
+Иногда вам нужно сделать скриншоты системных диалогов или окон. Вот почему вы должны изменить язык для всей системы. Для этого в конструкторе `DocLocScreenshotTestCase` есть дополнительный параметр - `changeSystemLocale`. Обратите внимание на то, что `changeSystemLocale`, определенный в true, требует системного разрешения `Manifest.permission.CHANGE_CONFIGURATION`. <br>
+Взгляните на код ниже:
 ```kotlin
 @RunWith(AndroidJUnit4::class)
 class ChangeSysLanguageTestCase : DocLocScreenshotTestCase(
@@ -120,19 +113,14 @@ class ChangeSysLanguageTestCase : DocLocScreenshotTestCase(
     }        
 }
 ```
-The full example is located at [ChangeSysLanguageTestCase](../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/docloc_tests/ChangeSysLanguageTestCase.kt).
+Полный пример находится по адресу [ChangeSysLanguageTestCase](https://github.com/KasperskyLab/Kaspresso/blob/1c1fc42f704ea6baa08e5c0e4e0269ded9243986/samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/docloc_tests/ChangeSysLanguageTestCase.kt).
 
-## Important note
+## Расширенное использование
 
-Please keep the strategy "one docloc test == one screen". If you will seek to capture screenshots from more than one screen during one test consequences may be unpredictable. Be aware.
+В большинстве случаев нет необходимости запускать какую-то Activity, делать много шагов, прежде чем добраться до необходимого функционала. Часто показа фрагментов будет достаточно, чтобы сделать нужные скриншоты.
+Кроме того, когда вы используете архитектурный шаблон Model-View-Presenter, вы можете управлять состоянием пользовательского интерфейса непосредственно через интерфейс View. Таким образом, нет необходимости взаимодействовать с интерфейсом приложения и ждать изменений.
 
-## Advanced usage
-
-In most cases, there is no need to launch certain activity, do a lot of steps before reaching necessary functionality. Often showing fragments will be sufficient to make required screenshots.
-Also, when you use Model-View-Presenter architectural pattern, you are able to control UI state
-directly through the View interface. So, there is no need to interact with the application interface and wait for changes.
-
-First create a base test activity with `setFragment(Fragment)` method in your application:
+Сначала создайте базовую тестовую Activity с методом `setFragment(Fragment)` в вашем приложении:
 
 ```kotlin
 class FragmentTestActivity : AppCompatActivity() {
@@ -144,7 +132,7 @@ class FragmentTestActivity : AppCompatActivity() {
 }
 ```
 
-Then add a base product screenshot test case:
+Затем добавьте тестовый пример скриншота базового продукта:
 
  ```kotlin
 open class ProductDocLocScreenshotTestCase : DocLocScreenshotTestCase(
@@ -160,8 +148,8 @@ open class ProductDocLocScreenshotTestCase : DocLocScreenshotTestCase(
 }
 ```  
 
-This test case would run your `FragmentTestActivity` on startup. Now you are able to write your screenshooter tests.
-For example, create a new test class which extends `ProductDocLocScreenshotTestCase`:
+Этот тестовый пример будет запускать вашу `FragmentTestActivity` при запуске. Теперь вы можете писать тесты для скриншотов.
+Например, создайте новый тестовый класс, который расширяет `ProductDocLocScreenshotTestCase`:
 
 ```kotlin
 @RunWith(AndroidJUnit4::class)
@@ -194,36 +182,35 @@ class AdvancedScreenshotSampleTest : ProductDocLocScreenshotTestCase() {
                 // ... [view] calls
                 captureScreenshot("Step 3")
             }
-            
-            // ... other steps
+
+            // ... другие шаги
         }
     }
 }
 ```
 
-As you might notice, the `getUiSafeProxy` method called to get an instance of `FeatureView`.
-This method wraps your View interface and returns a proxy on it.
-The proxy guarantees that all the methods of the View interface you called, will be invoked on the main thread.
-There is also `getUiSafeProxyFromImplementation` which wraps an implementation rather than an interface.
+Как вы могли заметить, метод `getUiSafeProxy` вызывается для получения экземпляра `FeatureView`.
+Этот метод обертывает ваш интерфейс View и возвращает на него прокси.
+Прокси гарантирует, что все методы интерфейса `View`, которые вы вызвали, будут вызываться в основном потоке.
+Существует также `getUiSafeProxyFromImplementation`, который оборачивает реализацию, а не интерфейс.
 
-For full example, check [AdvancedScreenshotSampleTest](../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/docloc_tests/advanced/AdvancedScreenshotSampleTest.kt) class.
+Полный пример см. в классе [AdvancedScreenshotSampleTest](https://github.com/KasperskyLab/Kaspresso/blob/master/samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/docloc_tests/advanced/AdvancedScreenshotSampleTest.kt).
 
-## Modifying screenshots path and name
+## Изменение пути и имени скриншотов
 
-By default, all screenshots are stored at: <br>
+По умолчанию все скриншоты хранятся по адресу: <br>
 ```/sdcard/screenshots/<locale>/<full qualified test class name>/<method name>.``` <br>
-You can change this behavior by providing custom
-[ResourcesRootDirsProvider](../kaspresso/src/main/kotlin/com/kaspersky/kaspresso/files/resources/ResourcesRootDirsProvider.kt),
-[ResourcesDirsProvider](../kaspresso/src/main/kotlin/com/kaspersky/kaspresso/files/resources/ResourcesDirsProvider.kt),
-[ResourceFileNamesProvider](../kaspresso/src/main/kotlin/com/kaspersky/kaspresso/files/resources/ResourceFileNamesProvider.kt) and  
-[ResourcesDirNameProvider](../kaspresso/src/main/kotlin/com/kaspersky/kaspresso/files/resources/ResourcesDirNameProvider.kt) implementations.
-Find out details [here](../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/docloc_tests/customdirectory/CustomDirectoryScreenshotSampleTest.kt).
+Вы можете изменить это поведение, предоставив свою реализацию интерфейсов
+[ResourcesRootDirsProvider](https://github.com/KasperskyLab/Kaspresso/blob/master/kaspresso/src/main/kotlin/com/kaspersky/kaspresso/files/resources/ResourcesRootDirsProvider.kt),
+[ResourcesDirsProvider](https://github.com/KasperskyLab/Kaspresso/blob/master/kaspresso/src/main/kotlin/com/kaspersky/kaspresso/files/resources/ResourcesDirsProvider.kt),
+[ResourceFileNamesProvider](https://github.com/KasperskyLab/Kaspresso/blob/master/kaspresso/src/main/kotlin/com/kaspersky/kaspresso/files/resources/ResourceFileNamesProvider.kt) и [ResourcesDirNameProvider](https://github.com/KasperskyLab/Kaspresso/blob/master/kaspresso/src/main/kotlin/com/kaspersky/kaspresso/files/resources/ResourcesDirNameProvider.kt).
+Узнайте подробности [здесь](https://github.com/KasperskyLab/Kaspresso/blob/master/samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/docloc_tests/customdirectory/CustomDirectoryScreenshotSampleTest.kt).
 
-## Changes
+## Изменения
 
-We have been forced to redesign our resource providing system to support Allure.
-That's why we changed the primary constructor of [DocLocScreenshotTestCase](../kaspresso/src/main/kotlin/com/kaspersky/kaspresso/testcases/api/testcase/DocLocScreenshotTestCase.kt).
-But, we've kept the old option of using `DocLocScreenshotTestCase` with old resource providing system as a secondary constructor.
-You can view the secondary constructor as an example of migration from old system to new system.
-Also, we've retained tests using old resource providing system in samples to ensure that nothing is broken.
+Мы были вынуждены изменить нашу систему предоставления ресурсов для поддержки Allure.
+Изменения затронули основной конструктор [DocLocScreenshotTestCase](https://github.com/KasperskyLab/Kaspresso/blob/master/kaspresso/src/main/kotlin/com/kaspersky/kaspresso/testcases/api/testcase/DocLocScreenshotTestCase.kt).
+Но мы сохранили старый вариант использования `DocLocScreenshotTestCase` со старой системой предоставления ресурсов в качестве вторичного конструктора.
+Вы можете просмотреть вторичный конструктор как пример миграции со старой системы на новую.
+Кроме того, мы сохранили тесты с использованием старой системы предоставления ресурсов в примерах, чтобы убедиться, что ничего не сломано.
 
