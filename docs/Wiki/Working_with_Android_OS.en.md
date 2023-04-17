@@ -29,7 +29,7 @@ All examples are located in [device_tests](https://github.com/KasperskyLab/Kaspr
 
 Also **Device** provides application and test contexts - `targetContext` and `context`.
 
-### **Usage**
+### Usage
 
 Device instance is available in `BaseTestContext` scope and `BaseTestCase` via ```device``` property.
 ```kotlin
@@ -51,7 +51,7 @@ fun test() =
 }
 ```
 
-### **Restrictions**
+### Restrictions
 
 Most of the features that **Device** provides use of adb commands and requires AdbServer to be run.
 Some of them, such as call emulation or SMS receiving, could be executed only on emulator. All such methods are marked by annotation ```@RequiresAdbServer```.
