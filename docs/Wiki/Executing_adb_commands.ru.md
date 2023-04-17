@@ -1,23 +1,25 @@
 # Выполнение команд adb
 
 ## Описание
-Как вы помните из [предыдущей части, посвященной интерфейсу устройства](https://kasperskylab.github.io/Kaspresso/ru/Wiki/Working_with_Android_OS/), под капотом интерфейса устройства находятся следующие сущности:
-- Espresso
-- UI Automator
-- ADB
+Как вы помните из [предыдущей части, посвященной интерфейсу Device](https://kasperskylab.github.io/Kaspresso/ru/Wiki/Working_with_Android_OS/), под капотом интерфейса устройства находятся следующие сущности:
+<ul>
+    <li>Espresso</li>
+    <li>UI Automator</li>
+    <li>ADB</li>
+</ul>
 
 Внимательный читатель мог заметить, что ADB недоступен в тестах Espresso. Но используя некоторые другие фреймворки, такие как Appium, вы можете выполнять команды ADB. Поэтому мы решили добавить и эту важную функцию.<br>
 Мы разработали специальный AdbServer для автотестов, чтобы компенсировать отсутствие этой функции.
 Основная идея инструмента аналогична идее в Appium. Мы создали простую клиент-серверную систему, состоящую из двух частей: <br>
 
 - Устройство, которое запускает тест, действует как клиент
-- Десктоп отправляет команды ADB для выполнения на устройстве.
+- Desktop отправляет команды ADB для выполнения на устройстве.
   Также в системе используется переадресация портов, чтобы можно было организовать сокет-туннель между Устройством и Десктопом через любой вид соединения (Wi-Fi, Bluetooth, USB и т.д.).
 
 ## Использование
 Алгоритм использования AdbServer:
 
-1. Запустите часть рабочего стола на своей рабочей станции. <br>
+1. Запустите Desktop-часть на своей рабочей станции. <br>
    Выполните следующую команду: `java -jar <path/to/kaspresso>/artifacts/adbserver-desktop.jar` в терминале
 2. Запустите часть устройства. <br>
    Соберите и запустите [модуль adbserver-sample](https://github.com/KasperskyLab/Kaspresso/ru/tree/master/samples/adbserver-sample). Вы должны увидеть следующий экран:
@@ -89,7 +91,7 @@ INFO 10/09/2020 11:37:20.185  desktop=Desktop-25920 device=emulator-5554   messa
 INFO 10/09/2020 11:44:47.810  desktop=Desktop-25920 device=emulator-5554   message: The received command to execute: AdbCommand(body=shell input text abc)
 INFO 10/09/2020 11:44:49.115  desktop=Desktop-25920 device=emulator-5554   message: The executed command: AdbCommand(body=shell input text abc). The result: CommandResult(status=SUCCESS, description=exitCode=0, message=, serviceInfo=The command was executed on desktop=Desktop-25920)
 ```
-Также Десктоп печатает имя эмулятора, в котором была выполнена конкретная команда (эта информация доступна на рабочей станции и на устройстве).
+Также Desktop печатает имя эмулятора, в котором была выполнена конкретная команда (эта информация доступна на рабочей станции и на устройстве).
 Это может быть очень полезно при отладке. Взгляните на поле `serviceInfo` в конце:
 ```
 INFO 10/09/2020 11:44:49.115  desktop=Desktop-25920 device=emulator-5554   message: The executed command: AdbCommand(body=shell input text abc). The result: CommandResult(status=SUCCESS, description=exitCode=0, message=, serviceInfo=The command was executed on desktop=Desktop-25920)
@@ -167,7 +169,7 @@ DEBUG 10/09/2020 12:11:44.064  desktop=Desktop-30548 device=emulator-5554 tag=Co
 Все журналы печатаются с тегом KASPRESSO_ADBSERVER с уровнем журнала WARN. <br>
 Если вы хотите отладить код, вы можете установить уровень журнала `VERBOSE`:
 ```kotlin
-класс DeviceNetworkSampleTest: TestCase(
+class DeviceNetworkSampleTest: TestCase(
     kaspressoBuilder = Kaspresso.Builder.simple {
         libLogger = UiTestLoggerImpl(Kaspresso.DEFAULT_LIB_LOGGER_TAG)
         adbServer = AdbServerImpl(LogLevel.VERBOSE, libLogger)

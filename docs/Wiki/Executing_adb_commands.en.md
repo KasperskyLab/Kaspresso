@@ -2,9 +2,11 @@
 
 ## Description
 As you remember from the [previous part devoted to Device interface](https://kasperskylab.github.io/Kaspresso/Wiki/Working_with_Android_OS/), Device interface contains the following things under the hood:
-- Espresso
-- UI Automator
-- ADB
+<ul>
+    <li>Espresso</li>
+    <li>UI Automator</li>
+    <li>ADB</li>
+</ul>
 
 An attentive reader could notice that ADB is not available in Espresso tests. But using some other frameworks, like Appium, you can execute ADB commands. So we decided to add this important functionality too.<br>
 We've developed a special Autotest's AdbServer to compensate lack of this feature.
