@@ -133,7 +133,7 @@ plugins:
           Supported Android UI-elements: Поддерживаемые UI-виджеты Android
           View matchers, actions and assertions: Доступные классы Matcher, Action и Assertion
           Kautomator. Wrapper over UI Automator: Kautomator. Обертка над UI Automator
-          Working with Android OS. Class Device: Взаимодействие
+          Working with Android OS. Class Device: Взаимодействие с ОС Android. Класс Device
           Executing adb commands: Выполнение команд adb
           Screenshot tests: Скриншот тесты
           Kaspresso configuration: Конфигуратор Kaspresso
