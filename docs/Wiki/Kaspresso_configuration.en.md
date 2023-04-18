@@ -23,24 +23,27 @@ class SomeTest : TestCase(
 **Kaspresso** configuration contains: <br>
 
 #### Loggers
+Kaspresso provides two loggers: `libLogger` and `testLogger`.
 ```libLogger``` - inner Kaspresso logger <br>
 ```testLogger``` - logger that is available for developers in tests. <br>
-It's accessible by ```testLogger``` property in test sections (```before, after, init, transform, run```) in the test dsl (by ```TestContext``` class). <br>
+The last one is accessible by ```testLogger``` property in test sections (```before, after, init, transform, run```) in the test DSL (by ```TestContext``` class). <br>
 Also, it is available while setting ```Kaspresso.Builder``` if you want to add it to your custom interceptors, for example.
 
 #### Kaspresso interceptors based on Kakao/Kautomator Interceptors.
-These interceptors were introduced to simplify and uniform using of [Kakao interceptors](https://github.com/KakaoCup/Kakao#intercepting) and [Kautomator interceptors](./02_Wrapper_over_UiAutomator.md#intercepting).
+These interceptors were introduced to simplify and uniform using of [Kakao interceptors](https://github.com/KakaoCup/Kakao#intercepting) and [Kautomator interceptors](https://kasperskylab.github.io/Kaspresso/en/Wiki/Kautomator-wrapper_over_UI_Automator/#intercepting).
 
 _**Important moment**_ about a mixing of Kaspresso interceptors and Kakao/Kautomator interceptors. <br>
 Kaspresso interceptors will not work if you set your custom Kakao interceptors by calling of ```Kakao.intercept``` method in the test or set your custom Kautomator interceptors by calling of ```Kautomator.intercept``` in the test. <br>
 If you set your custom Kakao interceptors for concrete ```Screen``` or ```KView``` and set argument ```isOverride``` in true then Kaspresso interceptors will not work for concrete ```Screen``` or ```KView``` fully. The same statement is right for Kautomator where a developer interacts with ```UiScreen``` and ```UiBaseView```.
 
-Kaspresso interceptors can be divided into two types: <br>
+Kaspresso interceptors can be divided into two types:
+
 1. ```Behavior Interceptors``` - are intercepting calls to ```ViewInteraction```, ```DataInteraction```, ```WebInteraction```, ```UiObjectInteraction```, ```UiDeviceInteraction```  and do some stuff. <br>
    **Attention**, we are going to consider some important notes about ```Behavior Interceptors``` at the end of this document.
 2. ```Watcher Interceptors``` - are intercepting calls to ```ViewAction```, ```ViewAssertion```, ```Atom```, ```WebAssertion```, ```UiObjectAssertion```, ```UiObjectAction```, ```UiDeviceAssertion```, ```UiDeviceAction```  and do some stuff.
 
-Let's expand mentioned Kaspresso interceptors types: <br>
+Let's expand mentioned Kaspresso interceptors types:
+
 1. ```Behavior Interceptors```
     1. ```viewBehaviorInterceptors``` - intercept calls to ```ViewInteraction#perform``` and ```ViewInteraction#check```
     2. ```dataBehaviorInterceptors``` - intercept calls to ```DataInteraction#check```
@@ -59,6 +62,7 @@ Let's expand mentioned Kaspresso interceptors types: <br>
 
 #### Special Kaspresso interceptors
 These interceptors are not based on some lib. Short description:
+
 1. ```stepWatcherInterceptors``` - an interceptor of **Step** lifecycle actions
 2. ```testRunWatcherInterceptors``` - an interceptor of entire **Test** lifecycle actions
 
@@ -208,6 +212,7 @@ So, all features described above are available thanks to these interceptors.
 Any lib for ui-tests is flaky. It's a hard truth of life. Any action/assert in your test may fail for some undefined reason.
 
 What general kinds of flaky errors exist:
+
 1. Common flaky errors that happened because Espresso/UI Automator was in a bad mood =) <br>
    That's why Kaspresso wraps **all** actions/assertions of Kakao/Kautomator and handles set of potential flaky exceptions.
    If an exception happened then Kaspresso attempts to repeat failed actions/assert for 10 seconds. Such handling rescues developers of any flaky action/assert.<br>
@@ -220,7 +225,8 @@ What general kinds of flaky errors exist:
 These handlings are possible thanks to ```BehaviorInterceptors```. Also, you can set your custom processing by ```Kaspresso.Builder```. But remember, the order of ```BehaviorInterceptors``` is significant: the first item will be at the lowest level of intercepting chain, and the last item will be at the highest level.
 
 Let's consider the work principle of ```BehaviorInterceptors``` over Kakao interceptors. The first item actually wraps the ```androidx.test.espresso.ViewInteraction.perform``` call, the second item wraps the first item, and so on. <br>
-Have a glance at the order of ```BehaviorInterceptors``` enabled by default in Kaspresso over Kakao. It's: <br>
+Have a glance at the order of ```BehaviorInterceptors``` enabled by default in Kaspresso over Kakao. It's:
+
 1. ```AutoScrollViewBehaviorInterceptor```
 2. ```SystemDialogSafetyViewBehaviorInterceptor```
 3. ```FlakySafeViewBehaviorInterceptor```
