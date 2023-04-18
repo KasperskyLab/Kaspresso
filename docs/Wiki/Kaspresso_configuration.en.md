@@ -20,7 +20,7 @@ class SomeTest : TestCase(
 
 ### Structure
 
-**Kaspresso** configuration contains: <br>
+**Kaspresso** configuration contains:
 
 #### Loggers
 Kaspresso provides two loggers: `libLogger` and `testLogger`.
@@ -82,8 +82,8 @@ I/KASPRESSO: #AllureStepsInfoJson#: [{"attachments":[],"name":"My step 1","param
 ```
 
 This logs should be processed by your test orchestrator (e.g. [Marathon](https://github.com/Malinskiy/marathon)).
-If you use [Marathon](https://github.com/Malinskiy/marathon) you should know that the [latest version](https://github.com/Malinskiy/marathon/releases/tag/0.5.0)
-requires some additional modifications to support processing this logs and doesn't work as expected at the current moment. But we are working hard on it.
+If you use [Marathon](https://github.com/Malinskiy/marathon) you should know that the it [requires](https://github.com/Malinskiy/marathon/releases/tag/0.5.0) 
+some additional modifications to support processing this logs and doesn't work as expected at the current moment. But we are working hard on it.
 
 #### Default actions in before/after sections
 Sometimes, a developer wishes to put some actions repeating in all tests before/after into a single place to simplify the maintenance of tests. <br>
@@ -111,24 +111,24 @@ beforeEachTest(override = true, action = {
 ```afterEachTest``` is similar to ```beforeEachTest```. <br>
 If you set ```override``` in ```false``` then the final beforeAction will be beforeAction of the parent TestCase plus current ```action```. Otherwise, final beforeAction will be only current ```action```.
 How it's work and how to override (or just extend) default action, please,
-observe the [example](../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/configurator_tests/defaultaction_tests).
+observe the [example](https://github.com/KasperskyLab/Kaspresso/tree/master/samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/configurator_tests/defaultaction_tests).
 
 #### Device
-```Device``` instance. Detailed info is at [Device wiki](./05_Device.md)
+```Device``` instance. Detailed info is at [Device wiki](https://kasperskylab.github.io/Kaspresso/en/Wiki/Working_with_Android_OS/).
 
 #### AdbServer
-```AdbServer``` instance. Detailed info is at [AdbServer wiki](./06_AdbServer.md)
+```AdbServer``` instance. Detailed info is at [AdbServer wiki](https://kasperskylab.github.io/Kaspresso/en/Wiki/Executing_adb_commands/).
 
 ### Kaspresso configuring and Kaspresso interceptors example
 
-The example of how to configure Kaspresso and how to use Kaspresso interceptors is in [here](../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/configurator_tests).
+The example of how to configure Kaspresso and how to use Kaspresso interceptors is in [here](https://github.com/KasperskyLab/Kaspresso/tree/master/samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/configurator_tests).
 
 ### Default Kaspresso settings
 ```BaseTestCase```, ```TestCase```, ```BaseTestCaseRule```, ```TestCaseRule``` are using default customized **Kaspresso** (```Kaspresso.Builder.simple``` builder). <br>
 Most valuable features of default customized **Kaspresso** are below.
 
 #### Logging
-Just start [SimpleTest](../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/simple_tests/SimpleTest.kt). Next, you will see those logs:
+Just start [SimpleTest](https://github.com/KasperskyLab/Kaspresso/blob/master/samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/simple_tests/SimpleTest.kt). Next, you will see those logs:
 ```
 I/KASPRESSO: ---------------------------------------------------------------------------
 I/KASPRESSO: BEFORE TEST SECTION
@@ -201,6 +201,7 @@ More detailed info about some ways of defense is [below](./03_Kaspresso_configur
 
 #### Interceptors
 Interceptors turned by default:
+
 1. Watcher interceptors
 2. Behavior interceptors
 3. Kaspresso interceptors
@@ -216,11 +217,11 @@ What general kinds of flaky errors exist:
 1. Common flaky errors that happened because Espresso/UI Automator was in a bad mood =) <br>
    That's why Kaspresso wraps **all** actions/assertions of Kakao/Kautomator and handles set of potential flaky exceptions.
    If an exception happened then Kaspresso attempts to repeat failed actions/assert for 10 seconds. Such handling rescues developers of any flaky action/assert.<br>
-   The details are available at [flakysafety](../kaspresso/src/main/kotlin/com/kaspersky/kaspresso/flakysafety) and examples are [here](../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/flaky_tests).
+   The details are available at [flakysafety](https://github.com/KasperskyLab/Kaspresso/tree/master/kaspresso/src/main/kotlin/com/kaspersky/kaspresso/flakysafety) and examples are [here](https://github.com/KasperskyLab/Kaspresso/tree/master/samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/flaky_tests).
 2. The reason of a failure is non visibility of a View. In most cases you just need to scroll a parent layout to make the View visible. So, Kaspresso tries to perform it in auto mode. <br>
-   The details are available at [autoscroll](../kaspresso/src/main/kotlin/com/kaspersky/kaspresso/autoscroll).
+   The details are available at [autoscroll](https://github.com/KasperskyLab/Kaspresso/tree/master/kaspresso/src/main/kotlin/com/kaspersky/kaspresso/autoscroll).
 3. Also, Kaspresso attempts to remove all system dialogs if it prevents the test execution. <br>
-   The details are available at [systemsafety](../kaspresso/src/main/kotlin/com/kaspersky/kaspresso/systemsafety).
+   The details are available at [systemsafety](https://github.com/KasperskyLab/Kaspresso/tree/master/kaspresso/src/main/kotlin/com/kaspersky/kaspresso/systemsafety).
 
 These handlings are possible thanks to ```BehaviorInterceptors```. Also, you can set your custom processing by ```Kaspresso.Builder```. But remember, the order of ```BehaviorInterceptors``` is significant: the first item will be at the lowest level of intercepting chain, and the last item will be at the highest level.
 
@@ -247,7 +248,6 @@ All you need to do is:
 
 ```kotlin
 class LoggingMainSectionEnricher : MainSectionEnricher<TestCaseData> {
-
     ...
 
 }

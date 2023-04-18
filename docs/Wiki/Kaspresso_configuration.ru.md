@@ -1,8 +1,8 @@
-# Kaspresso configurator
+# Конфигуратор Kaspresso 
 
-**Kaspresso** class - is a single point to set Kaspresso parameters. <br>
-A developer can customize **Kaspresso** by setting ```Kaspresso.Builder``` at constructors of ```TestCase```, ```BaseTestCase```, ```TestCaseRule```, ```BaseTestCaseRule```.<br>
-The example:
+Класс **Kaspresso** — это единственная точка для установки параметров Kaspresso. <br>
+Разработчик может настроить **Kaspresso**, установив ```Kaspresso.Builder``` в конструкторах ```TestCase```, ```BaseTestCase```, ```TestCaseRule```, ``` BaseTestCaseRule```.<br>
+Пример:
 ```kotlin
 class SomeTest : TestCase(
     kaspressoBuilder = Kaspresso.Builder.simple {
@@ -14,61 +14,65 @@ class SomeTest : TestCase(
         }
     }
 ) {
-    // your test
+    // ваш тест
 }
 ```
 
-### Structure
+### Структура
 
-**Kaspresso** configuration contains: <br>
+Конфигурация **Kaspresso** содержит:
 
-#### Loggers
-```libLogger``` - inner Kaspresso logger <br>
-```testLogger``` - logger that is available for developers in tests. <br>
-It's accessible by ```testLogger``` property in test sections (```before, after, init, transform, run```) in the test dsl (by ```TestContext``` class). <br>
-Also, it is available while setting ```Kaspresso.Builder``` if you want to add it to your custom interceptors, for example.
+#### Логгеры
+Kaspresso предоставляет два вида логгеров: `libLogger` и `testLogger`.
+```libLogger``` - внутренний логгер Kaspresso <br>
+```testLogger``` - логгер, который доступен разработчикам в тестах. <br>
+Последний доступен через свойство ```testLogger``` в тестовых разделах (```before, after, init, transform, run```) в тестовом DSL (из класса ```TestContext```). <br>
+Кроме того, он доступен при настройке ```Kaspresso.Builder```, если вы хотите добавить его, например, в свои пользовательские перехватчики.
 
-#### Kaspresso interceptors based on Kakao/Kautomator Interceptors.
-These interceptors were introduced to simplify and uniform using of [Kakao interceptors](https://github.com/KakaoCup/Kakao#intercepting) and [Kautomator interceptors](./02_Wrapper_over_UiAutomator.md#intercepting).
+#### Перехватчики Kaspresso на базе перехватчиков Kakao/Kautomator.
+Эти перехватчики были введены для упрощения и единообразия использования [перехватчиков Kakao](https://github.com/KakaoCup/Kakao#intercepting) и [перехватчиков Kautomator](https://kasperskylab.github.io/Kaspresso/ru/Wiki/Kautomator-wrapper_over_UI_Automator/#interceptor-).
 
-_**Important moment**_ about a mixing of Kaspresso interceptors and Kakao/Kautomator interceptors. <br>
-Kaspresso interceptors will not work if you set your custom Kakao interceptors by calling of ```Kakao.intercept``` method in the test or set your custom Kautomator interceptors by calling of ```Kautomator.intercept``` in the test. <br>
-If you set your custom Kakao interceptors for concrete ```Screen``` or ```KView``` and set argument ```isOverride``` in true then Kaspresso interceptors will not work for concrete ```Screen``` or ```KView``` fully. The same statement is right for Kautomator where a developer interacts with ```UiScreen``` and ```UiBaseView```.
+_**Важный момент**_ о смешении перехватчиков Kaspresso и перехватчиков Kakao/Kautomator. <br>
+Перехватчики Kaspresso не будут работать, если вы установите свои собственные перехватчики Kakao, вызвав метод ```Kakao.intercept``` в тесте, или установите свои пользовательские перехватчики Kautomator, вызвав ```Kautomator.intercept``` в тесте. <br>
+Если вы установите свои пользовательские перехватчики Kakao для конкретного экрана или KView и установите для аргумента isOverride значение true, то перехватчики Kaspresso не будут работать для конкретного экрана или ```KView```. То же самое верно и для Kautomator, где разработчик взаимодействует с ```UiScreen``` и ```UiBaseView```.
 
-Kaspresso interceptors can be divided into two types: <br>
-1. ```Behavior Interceptors``` - are intercepting calls to ```ViewInteraction```, ```DataInteraction```, ```WebInteraction```, ```UiObjectInteraction```, ```UiDeviceInteraction```  and do some stuff. <br>
-   **Attention**, we are going to consider some important notes about ```Behavior Interceptors``` at the end of this document.
-2. ```Watcher Interceptors``` - are intercepting calls to ```ViewAction```, ```ViewAssertion```, ```Atom```, ```WebAssertion```, ```UiObjectAssertion```, ```UiObjectAction```, ```UiDeviceAssertion```, ```UiDeviceAction```  and do some stuff.
+Перехватчики Kaspresso можно разделить на два типа: <br>
 
-Let's expand mentioned Kaspresso interceptors types: <br>
+1. ```Behavior Interceptors``` - перехватывают вызовы ```ViewInteraction```, ```DataInteraction```, ```WebInteraction```, ```UiObjectInteraction```, ``` UiDeviceInteraction``` и выполняют свою логику. <br>
+   **Внимание**, мы собираемся рассмотреть некоторые важные примечания о ```перехватчиках поведения``` в конце этого документа.
+2. ```Watcher Interceptors``` - перехватывают вызовы ```ViewAction```, ```ViewAssertion```, ```Atom```, ```WebAssertion```, ``` UiObjectAssertion```, ```UiObjectAction```, ```UiDeviceAssertion```, ```UiDeviceAction``` и еще кое-что.
+
+Расширим упомянутые типы перехватчиков Kaspresso:
+
 1. ```Behavior Interceptors```
-    1. ```viewBehaviorInterceptors``` - intercept calls to ```ViewInteraction#perform``` and ```ViewInteraction#check```
-    2. ```dataBehaviorInterceptors``` - intercept calls to ```DataInteraction#check```
-    3. ```webBehaviorInterceptors``` - intercept calls to ```Web.WebInteraction<R>#perform``` and ```Web.WebInteraction<R>#check```
-    4. ```objectBehaviorInterceptors``` - intercept calls to ```UiObjectInteraction#perform``` and ```UiObjectInteraction#check```
-    5. ```deviceBehaviorInterceptors``` - intercept calls to ```UiDeviceInteraction#perform``` and ```UiDeviceInteraction#check```
+    1. ```viewBehaviorInterceptors``` - перехватывают вызовы ```ViewInteraction#perform``` и ```ViewInteraction#check```
+    2. ```dataBehaviorInterceptors``` - перехватывают вызовы ```DataInteraction#check```
+    3. ```webBehaviorInterceptors``` - перехватывают вызовы ```Web.WebInteraction<R>#perform``` и ```Web.WebInteraction<R>#check```
+    4. ```objectBehaviorInterceptors``` - перехватывают вызовы ```UiObjectInteraction#perform``` и ```UiObjectInteraction#check```
+    5. ```deviceBehaviorInterceptors``` - перехватывают вызовы ```UiDeviceInteraction#perform``` и ```UiDeviceInteraction#check```
 2. ```Watcher Interceptors```
-    1. ```viewActionWatcherInterceptors``` - do some stuff before ```android.support.test.espresso.ViewAction.perform``` is actually called
-    2. ```viewAssertionWatcherInterceptors``` - do some stuff before ```android.support.test.espresso.ViewAssertion.check``` is actually called
-    3. ```atomWatcherInterceptors``` - do some stuff before ```android.support.test.espresso.web.model.Atom.transform``` is actually called
-    4. ```webAssertionWatcherInterceptors``` - do some stuff before ```android.support.test.espresso.web.assertion.WebAssertion.checkResult``` is actually called
-    5. ```objectWatcherInterceptors``` - do some stuff before ```UiObjectInteraction.perform``` or ```UiObjectInteraction.check``` is actually called
-    6. ```deviceWatcherInterceptors``` - do some stuff before ```UiDeviceInteraction.perform``` or ```UiDeviceInteraction.check``` is actually called
+    1. ```viewActionWatcherInterceptors``` – выполняют какие-то действия до того, как будет вызван ```android.support.test.espresso.ViewAction.perform```
+    2. ```viewAssertionWatcherInterceptors``` – выполняют какие-то действия до того, как будет вызван ```android.support.test.espresso.ViewAssertion.check```
+    3. ```atomWatcherInterceptors``` – выполняют какие-то действия до того, как будет вызван ```android.support.test.espresso.web.model.Atom.transform```
+    4. ```webAssertionWatcherInterceptors``` — выполняют какие-то действия до того, как будет вызван ```android.support.test.espresso.web.assertion.WebAssertion.checkResult```
+    5. ```objectWatcherInterceptors``` - выполняют какие-то действия до того, как будет вызван ```UiObjectInteraction.perform``` или ```UiObjectInteraction.check```
+    6. ```deviceWatcherInterceptors``` - выполняют какие-то действия до того, как будет вызван ```UiDeviceInteraction.perform``` или ```UiDeviceInteraction.check```
 
-**Please, remember! Behavior and watcher interceptors work under the hood in every action and assertion of every View of Kakao and Kautomator by default in Kaspresso.**
+**Пожалуйста, помните! Перехватчики поведения и наблюдателя работают под капотом в каждом действии (actions) и утверждении (assertions) каждого графического элемента (View) Kakao и Kautomator по умолчанию в Kaspresso.**
 
-#### Special Kaspresso interceptors
-These interceptors are not based on some lib. Short description:
-1. ```stepWatcherInterceptors``` - an interceptor of **Step** lifecycle actions
-2. ```testRunWatcherInterceptors``` - an interceptor of entire **Test** lifecycle actions
+#### Специальные перехватчики Kaspresso
+Эти перехватчики не основаны на какой-то lib. Краткое описание:
 
-As you noticed these interceptors are a part of ```Watcher Interceptors```, also.
+1. ```stepWatcherInterceptors``` - перехватчик действий жизненного цикла **Step**
+2. ```testRunWatcherInterceptors``` - перехватчик всех действий жизненного цикла **Test**.
+
+Как вы заметили, эти перехватчики также являются частью Watcher Interceptors.
 
 #### BuildStepReportWatcherInterceptor
 
-This ```watcher interceptor``` by default is included into ```Kaspresso configurator``` to collect your tests steps information for further processing in tests orchestrator. <br>
-By default this interceptor is based on ```AllureReportWriter``` (if you don't know what [Allure](http://allure.qatools.ru/) is you should really check on it). <br>
-This report writer works with each ```TestInfo``` after test finishing, converts its steps information into [Allure's steps info](https://docs.qameta.io/allure/#_steps) JSON, and then prints JSON into LogCat in the following format:
+Этот ```watcher interceptor``` по умолчанию включен в ```Kaspresso configurator``` для сбора информации о шагах ваших тестов для дальнейшей обработки в оркестраторе тестов. <br>
+Этот перехватчик основан на ```AllureReportWriter``` (подробнее про [Allure](http://allure.qatools.ru/)). <br>
+Этот генератор отчетов работает с каждым ```TestInfo``` после завершения теста, преобразует информацию о шагах в [информацию о шагах Allure](https://docs.qameta.io/allure/#_steps) JSON, а затем печатает JSON в LogCat в следующем формате:
 
 ```
 I/KASPRESSO: ---------------------------------------------------------------------------
@@ -77,15 +81,15 @@ I/KASPRESSO: -------------------------------------------------------------------
 I/KASPRESSO: #AllureStepsInfoJson#: [{"attachments":[],"name":"My step 1","parameters":[],"stage":"finished","start":1568790287246,"status":"passed", "steps":[],"stop":1568790288184}]
 ```
 
-This logs should be processed by your test orchestrator (e.g. [Marathon](https://github.com/Malinskiy/marathon)).
-If you use [Marathon](https://github.com/Malinskiy/marathon) you should know that the [latest version](https://github.com/Malinskiy/marathon/releases/tag/0.5.0)
-requires some additional modifications to support processing this logs and doesn't work as expected at the current moment. But we are working hard on it.
+Эти журналы должны обрабатываться вашим тестовым оркестратором (например, [Marathon](https://github.com/Malinskiy/marathon)).
+Если вы используете [Marathon](https://github.com/Malinskiy/marathon), вы должны знать, что он [требует](https://github.com/Malinskiy/marathon/releases/tag/0.5.0)
+некоторых дополнительных модификаций для поддержки обработки этих журналов и в настоящий момент не работает должным образом. Но мы усердно работаем над этим.
 
-#### Default actions in before/after sections
-Sometimes, a developer wishes to put some actions repeating in all tests before/after into a single place to simplify the maintenance of tests. <br>
-You can make a remark that there are ```@beforeTest/@afterTest``` annotations to resolve mentioned tasks. But the developer doesn't have an access to ```BaseTestContext``` in those methods.
-That's why we have introduced special default actions that you can set in constructor by ```Kaspresso.Builder```. <br>
-The example how to implement default actions in ```Kaspresso.Builder``` is: <br>
+#### Действия по умолчанию в разделах до/после
+Иногда разработчик хочет поместить некоторые действия, повторяющиеся во всех тестах до/после, в одно место, чтобы упростить поддержку тестов. <br>
+Существуют аннотации ```@beforeTest/@afterTest``` для решения указанных задач. Но у разработчика нет доступа к ```BaseTestContext``` в этих методах.
+Вот почему мы ввели специальные действия по умолчанию, которые вы можете установить в конструкторе с помощью ```Kaspresso.Builder```. <br>
+Пример реализации действий по умолчанию в ```Kaspresso.Builder```: <br>
 ```kotlin
 open class YourTestCase : TestCase(
     kaspressoBuilder = Kaspresso.Builder.simple {
@@ -98,33 +102,33 @@ open class YourTestCase : TestCase(
     }
 )
 ```
-The full signature of ```beforeEachTest``` is:
+Полная сигнатура метода ```beforeEachTest```:
 ```kotlin
 beforeEachTest(override = true, action = {
     testLogger.i("beforeTestFirstAction")
 })
 ```
-```afterEachTest``` is similar to ```beforeEachTest```. <br>
-If you set ```override``` in ```false``` then the final beforeAction will be beforeAction of the parent TestCase plus current ```action```. Otherwise, final beforeAction will be only current ```action```.
-How it's work and how to override (or just extend) default action, please,
-observe the [example](../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/configurator_tests/defaultaction_tests).
+```afterEachTest``` аналогичен ```beforeEachTest```. <br>
+Если вы установите ```override``` в ```false```, то последнее `beforeAction` будет относиться к родительскому TestCase плюс текущий  ```action```. В противном случае последний `beforeAction` будет только текущим  ```action```.
+Чтобы понять, как это работает и как переопределить (или просто расширить) действие по умолчанию, пожалуйста,
+обратите внимание на [пример](https://github.com/KasperskyLab/Kaspresso/tree/master/samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/configurator_tests/defaultaction_tests).
 
 #### Device
-```Device``` instance. Detailed info is at [Device wiki](./05_Device.md)
+Экземпляр ```Device```. Подробная информация находится на [этой странице](https://kasperskylab.github.io/Kaspresso/ru/Wiki/Working_with_Android_OS/) в разделе Вики.
 
 #### AdbServer
-```AdbServer``` instance. Detailed info is at [AdbServer wiki](./06_AdbServer.md)
+Экземпляр ```AdbServer```. Подробная информация находится на [этой странице](https://kasperskylab.github.io/Kaspresso/en/Wiki/Executing_adb_commands/) в разделе Вики.
 
-### Kaspresso configuring and Kaspresso interceptors example
+### Настройка Kaspresso и пример перехватчиков Kaspresso
 
-The example of how to configure Kaspresso and how to use Kaspresso interceptors is in [here](../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/configurator_tests).
+Пример того, как настроить Kaspresso и как использовать перехватчики Kaspresso, находится [здесь](https://github.com/KasperskyLab/Kaspresso/tree/master/samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/configurator_tests).
 
-### Default Kaspresso settings
-```BaseTestCase```, ```TestCase```, ```BaseTestCaseRule```, ```TestCaseRule``` are using default customized **Kaspresso** (```Kaspresso.Builder.simple``` builder). <br>
-Most valuable features of default customized **Kaspresso** are below.
+### Настройки Kaspresso по умолчанию
+`BaseTestCase`, `TestCase`, `BaseTestCaseRule`, `TestCaseRule` используют настроенный по умолчанию **Kaspresso** (```Kaspresso.Builder.simple конфигуратор``` ). <br>
+Ниже приведены наиболее ценные функции настроенного по умолчанию **Kaspresso**.
 
-#### Logging
-Just start [SimpleTest](../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/simple_tests/SimpleTest.kt). Next, you will see those logs:
+#### Ведение журнала
+Просто запустите [SimpleTest](https://github.com/KasperskyLab/Kaspresso/blob/master/samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/simple_tests/SimpleTest.kt). Далее вы увидите эти логи:
 ```
 I/KASPRESSO: ---------------------------------------------------------------------------
 I/KASPRESSO: BEFORE TEST SECTION
@@ -188,68 +192,68 @@ I/KASPRESSO: -------------------------------------------------------------------
 I/KASPRESSO: #AllureStepsInfoJson#: [{"attachments":[],"name":"My step 1","parameters":[],"stage":"finished","start":1568790287246,"status":"passed", "steps":[],"stop":1568790288184}]
 I/KASPRESSO: ---------------------------------------------------------------------------
 ```
-Pretty good.
+Довольно хорошо.
 
-#### Defense from flaky tests
-If a failure occurs then Kaspresso tries to fix it using a big set of diverse ways. <br>
-**This defense works for every action and assertion of each View of Kakao and Kautomator!** You just need to extend your test class from ```TestCase``` (```BaseTestCase```) or to set ```TestCaseRule```(```BaseTestCaseRule```) in your test. <br>
-More detailed info about some ways of defense is [below](./03_Kaspresso_configurator.md#some-words-about-behavior-interceptors)
+#### Защита от flaky тестов
+Если происходит сбой, Kaspresso пытается исправить его, используя большой набор разнообразных способов. <br>
+**Эта защита работает для каждого действия и проверки каждого View Kakao и Kautomator!** Вам просто нужно расширить свой тестовый класс из ```TestCase``` (```BaseTestCase```) или установить `TestCaseRule` (```BaseTestCaseRule```) в вашем тесте. <br>
 
-#### Interceptors
-Interceptors turned by default:
+#### Перехватчики
+Включенные по умолчанию перехватчики:
+
 1. Watcher interceptors
 2. Behavior interceptors
 3. Kaspresso interceptors
 4. BuildStepReportWatcherInterceptor
 
-So, all features described above are available thanks to these interceptors.
+Все описанные выше возможности доступны благодаря этим перехватчикам.
 
-### Some words about Behavior Interceptors
-Any lib for ui-tests is flaky. It's a hard truth of life. Any action/assert in your test may fail for some undefined reason.
+### Несколько слов о `Behavior Interceptors`
+Любая библиотека для UI-тестов нестабильна. Это суровая правда жизни. Любое действие/проверка в вашем тесте может завершиться ошибкой по какой-то неопределенной причине.
 
-What general kinds of flaky errors exist:
-1. Common flaky errors that happened because Espresso/UI Automator was in a bad mood =) <br>
-   That's why Kaspresso wraps **all** actions/assertions of Kakao/Kautomator and handles set of potential flaky exceptions.
-   If an exception happened then Kaspresso attempts to repeat failed actions/assert for 10 seconds. Such handling rescues developers of any flaky action/assert.<br>
-   The details are available at [flakysafety](../kaspresso/src/main/kotlin/com/kaspersky/kaspresso/flakysafety) and examples are [here](../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/flaky_tests).
-2. The reason of a failure is non visibility of a View. In most cases you just need to scroll a parent layout to make the View visible. So, Kaspresso tries to perform it in auto mode. <br>
-   The details are available at [autoscroll](../kaspresso/src/main/kotlin/com/kaspersky/kaspresso/autoscroll).
-3. Also, Kaspresso attempts to remove all system dialogs if it prevents the test execution. <br>
-   The details are available at [systemsafety](../kaspresso/src/main/kotlin/com/kaspersky/kaspresso/systemsafety).
+Какие общие виды флакающих ошибок существуют:
+1. Распространенные плавающие ошибки (флаки), возникающие из-за того, что Espresso/UI Automator был в плохом настроении =) <br>
+   Вот почему Kaspresso оборачивает **все** действия/проверки (actions/assertions) Kakao/Kautomator и обрабатывает набор потенциально плавающих исключений.
+   Если произошло исключение, Kaspresso пытается повторить неудачные действия/проверку в течение 10 секунд. Такая обработка избавляет разработчиков от любых ненадежных действий/проверок.<br>
+   Подробности доступны по ссылке [flakysafety](https://github.com/KasperskyLab/Kaspresso/tree/master/kaspresso/src/main/kotlin/com/kaspersky/kaspresso/flakysafety), а примеры — [здесь](https://github.com/KasperskyLab/Kaspresso/tree/master/samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/flaky_tests).
+2. Невидимость View. В большинстве случаев вам просто нужно прокрутить экран вниз, чтобы View стало видимым. Итак, Kaspresso пытается выполнить это в автоматическом режиме. <br>
+   Подробности доступны на странице [autoscroll](https://github.com/KasperskyLab/Kaspresso/tree/master/kaspresso/src/main/kotlin/com/kaspersky/kaspresso/autoscroll).
+3. Также Kaspresso пытается закрыть все системные диалоги, если это препятствует выполнению теста. <br>
+   Подробности доступны на странице [systemsafety](https://github.com/KasperskyLab/Kaspresso/tree/master/kaspresso/src/main/kotlin/com/kaspersky/kaspresso/systemsafety).
 
-These handlings are possible thanks to ```BehaviorInterceptors```. Also, you can set your custom processing by ```Kaspresso.Builder```. But remember, the order of ```BehaviorInterceptors``` is significant: the first item will be at the lowest level of intercepting chain, and the last item will be at the highest level.
+Эти обработки возможны благодаря ```BehaviorInterceptors```. Кроме того, вы можете установить собственную обработку с помощью ```Kaspresso.Builder```. Но помните, порядок ```BehaviorInterceptors``` имеет значение: первый элемент будет на самом низком уровне цепочки перехвата, а последний элемент будет на самом высоком уровне.
 
-Let's consider the work principle of ```BehaviorInterceptors``` over Kakao interceptors. The first item actually wraps the ```androidx.test.espresso.ViewInteraction.perform``` call, the second item wraps the first item, and so on. <br>
-Have a glance at the order of ```BehaviorInterceptors``` enabled by default in Kaspresso over Kakao. It's: <br>
+Рассмотрим принцип работы ```BehaviorInterceptors```над перехватчиками Kakao. Первый элемент фактически является оболочкой для вызова ```androidx.test.espresso.ViewInteraction.perform```, второй элемент является оболочкой для первого элемента и так далее. <br>
+Взгляните на порядок включения ```BehaviorInterceptors``` по умолчанию в Kaspresso поверх Kakao. Это:
+
 1. ```AutoScrollViewBehaviorInterceptor```
 2. ```SystemDialogSafetyViewBehaviorInterceptor```
 3. ```FlakySafeViewBehaviorInterceptor```
 
-Under the hood, all Kakao actions and assertions first of all call ```FlakySafeViewBehaviorInterceptor``` that calls ```SystemDialogSafetyViewBehaviorInterceptor``` and that calls ```AutoScrollViewBehaviorInterceptor```. <br>
-If a result of ```AutoScrollViewBehaviorInterceptor``` handling is an error then ```SystemDialogSafetyViewBehaviorInterceptor``` attempts to handle received error. If a result of ```SystemDialogSafetyViewBehaviorInterceptor``` handling is an error too then ```FlakySafeViewBehaviorInterceptor``` attempts to handle received the error. <br>
-To simplify the discussed topic we have drawn a picture:
+Под капотом все действия и проверки Kakao в первую очередь вызывают `FlakySafeViewBehaviorInterceptor`, который вызывает `SystemDialogSafetyViewBehaviorInterceptor`, а тот вызывает ```AutoScrollViewBehaviorInterceptor```. <br>
+Если результатом обработки `AutoScrollViewBehaviorInterceptor` является ошибка, то `SystemDialogSafetyViewBehaviorInterceptor` пытается обработать полученную ошибку. Если результатом обработки ```SystemDialogSafetyViewBehaviorInterceptor``` также является ошибка, тогда ```FlakySafeViewBehaviorInterceptor``` попытается обработать полученную ошибку. <br>
+Для упрощения обсуждаемой темы нарисовали картинку:
 
 ![](https://habrastorage.org/webt/pw/86/73/pw8673a4w4xnnq5nwpy8idfuoue.png)
 
-### Main section enrichers
-Developer also can extends parametrized tests functionality by providing ```MainSectionEnricher``` in ```BaseTestCase``` or ```BaseTestCaseRule```.
-The main idea of enrichers - allow adding additional test case's steps before and after the main section's ```run``` block.
+### Дополнения основной секции
+Разработчик также может расширить функциональность параметризованных тестов, предоставив ```MainSectionEnricher``` в ```BaseTestCase``` или ```BaseTestCaseRule```.
+Основная идея - позволить добавить дополнительные шаги тест-кейса до и после главной секции `run`.
 
-All you need to do is:
+Все, что вам нужно сделать, это:
 
-1. Define your enricher implementation for ```MainSectionEnricher``` interface;
+1. Определите свою реализацию для интерфейса ```MainSectionEnricher```;
 
 ```kotlin
 class LoggingMainSectionEnricher : MainSectionEnricher<TestCaseData> {
-
     ...
 
 }
 ```
 
-Here, ```TestCaseData``` is the same data type as in your ```BaseTestCase``` implementation.
+Здесь ```TestCaseData``` - это тот же тип данных, что и в вашей реализации ```BaseTestCase```.
 
-2. Override ```beforeMainSectionRun``` or/and ```afterMainSectionRun``` methods to add your before/after actions;
+2. Переопределите методы ``beforeMainSectionRun`` и/или ```afterMainSectionRun```, чтобы добавить свои действия до/после;
 
 ```kotlin
 class LoggingMainSectionEnricher : MainSectionEnricher<TestCaseData> {
@@ -271,10 +275,9 @@ class LoggingMainSectionEnricher : MainSectionEnricher<TestCaseData> {
 }
 ```
 
-In ```beforeMainSectionRun``` and ```afterMainSectionRun``` methods you have full access to ```TestContext<TestCaseData``` properties and methods,
-so you can use logger, add test case's steps and so on. Also, this methods received ```TestInfo``` parameter.
+В методах ``beforeMainSectionRun`` и ```afterMainSectionRun``` у вас есть полный доступ к свойствам и методам ```TestContext<TestCaseData```,  так что вы можете использовать логгер, добавлять тестовые шаги и так далее. Также, эти методы получили параметр ```TestInfo```.
 
-3. Add your enrichers into your ```BaseTestCase``` implementation.
+3. Добавьте написанные классы в свою реализацию ```BaseTestCase```.
 
 ```kotlin
 class EnricherBaseTestCase : BaseTestCase<TestCaseDsl, TestCaseData>(
@@ -287,4 +290,4 @@ class EnricherBaseTestCase : BaseTestCase<TestCaseDsl, TestCaseData>(
 )
 ```
 
-After this manipulations your described actions will be executed before or after main section's ```run``` block.
+После того, как это будет сделано, описанные вами действия будут выполняться до или после блока ```run``` основной секции.
