@@ -7,7 +7,12 @@ gitMessage=$(cat $gitMessageFile)
 gitMessagePattern="^(Revert|Merge|ISSUE-\d+:|TECH:).*"
 currentBranch="$(git rev-parse --abbrev-ref HEAD)"
 
-if ! grep -qP "$gitMessagePattern" "$gitMessageFile"; then
+case $(uname) in
+  Darwin*) grepFlag=-qE;;
+  *)  grepFlag=-qP
+esac
+
+if ! grep $grepFlag "$gitMessagePattern" "$gitMessageFile"; then
   echo >&2 "ERROR: commit-msg git hook failed."
   echo >&2 "Commit message must match the branch name prefix and:"
   echo >&2 "- start with the issue id: \"ISSUE-1234: git commit message\""
