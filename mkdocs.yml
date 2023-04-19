@@ -137,7 +137,7 @@ plugins:
           Executing adb commands: Выполнение команд adb
           Screenshot tests: Скриншот тесты
           Kaspresso configuration: Конфигуратор Kaspresso
-          Kaspresso with Robolectric: Kaspresso with Robolectric
+          Kaspresso with Robolectric: Запуск тестов Kaspresso на JVM с помощью Robolectric
           Kaspresso with Allure: Kaspresso with Allure
           Jetpack Compose in Kaspresso: Jetpack Compose в Kaspresso
           Issues: Известные проблемы

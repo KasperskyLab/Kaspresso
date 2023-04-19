@@ -1,11 +1,11 @@
-# Kaspresso tests running on the JVM with Robolectric
+# Запуск тестов Kaspresso на JVM с помощью Robolectric
 
-## Main purpose
+## Основная цель
 
-Since Robolectric 4.0, we can also run Espresso-like tests also on the JVM with Robolectric.
-That is part of the [Project nitrogen from Google](https://www.youtube.com/watch?v=-_kZC29sWAo) (which became Unified Test Platform), where they want to allow developers to write UI test once, and run them everywhere.
+Начиная с Robolectric 4.0, мы также можем запускать тесты, подобные Espresso, также на JVM с помощью Robolectric.
+Это часть [проекта Nitrogen от Google](https://www.youtube.com/watch?v=-_kZC29sWAo) (стала унифицированной тестовой платформой), с помощью которой разработчики могут один раз написать тест пользовательского интерфейса и запускать их везде.
 
-However, before Kaspresso 1.3.0, if you tried to run Kaspresso-like test extending TestCase on the JVM with Robolectric, you got the following error:
+Однако до Kaspresso 1.3.0, если вы пытались запустить тест, подобный Kaspresso, расширяющий TestCase на JVM с помощью Robolectric, вы получали следующую ошибку:
 ```
 java.lang.NullPointerException
 	at androidx.test.uiautomator.QueryController.<init>(QueryController.java:95)
@@ -15,62 +15,63 @@ java.lang.NullPointerException
 	at com.kaspersky.kaspresso.kaspresso.Kaspresso$Builder$Companion.simple(Kaspresso.kt:215)
 	...
 ```
-That is because Robolectric is just compatible with Espresso and not with uiAutomator.
+Это потому, что Robolectric совместим с Espresso, но не совместим с UI Automator.
 
-Now, all Kaspresso tests are allowed to be executed correctly on the JVM with Robolectric with the following restrictions:
-1. Easy configuration of your project according to [Robolectric guideline](http://robolectric.org/blog/2018/10/25/robolectric-4-0/).
-2. Not possible to use adb-server because there is no a term like "Desktop" on the JVM environment. Tests that use adb-server will crash on the JVM with Robolectric with very explaining error message.
-3. Not possible to work with `UiDevice` and `UiAutomation` classes. That's why a lot of (not all!) implementations in `Device` will crash on the JVM with Robolectric with `NotSupportedInstrumentalTestException`.
-4. Non working Kautomator. Mentioned problem with `UiDevice` and `UiAutomation` classes affect the entire Kautomator. So, tests using Kautomator will crash on the JVM with Robolectric with `KautomatorInUnitTestException`.
-5. Interceptors that use `UiDevice`, `UiAutomation` or adb-server are turning off on the JVM with Robolectric automatically.
-6. `DocLocScreenshotTestCase` will crash on the JVM with Robolectric with `DocLocInUnitTestException`.
+Теперь все тесты Kaspresso могут корректно выполняться на JVM с Robolectric со следующими ограничениями:
 
-## Usage
-To create a test that can run on a device/emulator and on the JVM, we recommend to create a `sharedTest` folder, and configure `sourceSets` in gradle accordingly, similar to what you can see under the `build.gradle.kts` :samples:kaspresso-sample
+1. Простая настройка вашего проекта в соответствии с [руководством Robolectric](http://robolectric.org/blog/2018/10/25/robolectric-4-0/).
+2. Невозможно использовать adb-сервер, потому что в среде JVM нет такого термина, как «Рабочий стол». Тесты, использующие adb-server, будут падать на JVM с Robolectric с поясняющим сообщением об ошибке.
+3. Невозможно работать с классами `UiDevice` и `UiAutomation`. Вот почему многие (не все!) реализации в `Device` будут падать на JVM с Robolectric с `NotSupportedInstrumentalTestException`.
+4. Нерабочий Kautomator. Упомянутая проблема с классами `UiDevice` и `UiAutomation` затрагивает весь Kautomator. Таким образом, тесты с использованием Kaautomator будут аварийно завершать работу на JVM с Robolectric с `KautomatorInUnitTestException`.
+5. Перехватчики, использующие UiDevice, UiAutomation или adb-server, автоматически отключаются на JVM с Robolectric.
+6. `DocLocScreenshotTestCase` будет аварийно завершать работу на JVM с Robolectric с `DocLocInUnitTestException`.
+
+## Использование
+Чтобы создать тест, который может работать на устройстве/эмуляторе и на JVM, мы рекомендуем создать папку `sharedTest` и соответствующим образом настроить `sourceSets` в gradle.
 
 ```kotlin
 sourceSets {
    ...
-   //configure shared test folder
+   //настраиваем общую тестовую папку
    val sharedTestFolder = "src/sharedTest/kotlin"
    val androidTest by getting {
-       java.srcDirs("src/androidTest/java", sharedTestFolder )
+       java.srcDirs("src/androidTest/java", sharedTestFolder)
    }
    val test by getting {
-       java.srcDirs("src/test/java", sharedTestFolder )
+       java.srcDirs("src/test/java", sharedTestFolder)
    }
 }
 ```
 
-It is also important that such tests use ``@RunWith(AndroidJUnit4::class)``, since it is required by Robolectric.
+Также важно, чтобы такие тесты использовали ``@RunWith(AndroidJUnit4::class)``, так как это требуется Robolectric.
 
-In order to run your shared tests as Unit Tests on the JVM, you need to run a command looking like this:
+Чтобы запустить ваши общие тесты как модульные тесты на JVM, вам нужно запустить команду, выглядящую следующим образом:
 ```
 ./gradlew :MODULE:testVARIANTUnitTest --info --tests "PACKAGE.CLASS"
 ```
 
-For example, to run the sample RobolectricTest on the JVM you need to run:
+Например, чтобы запустить RobolectricTest на JVM, вам нужно выполнить:
 ```
 ./gradlew :samples:kaspresso-sample:testDebugUnitTest --info --tests "com.kaspersky.kaspressample.sharedtest.SharedSimpleFlakyTest"
 ```
 
-To run them on a device/emulator, the command to run would look like this:
+Чтобы запустить их на устройстве/эмуляторе, команда для запуска будет выглядеть так:
 ```
 ./gradlew :MODULE:connectedVARIANTAndroidTest -Pandroid.testInstrumentationRunnerArguments.class=PACKAGE.CLASS
 ```
 
-For instance, to run the sample SharedTest on a device/emulator, you need to run:
+Например, чтобы запустить SharedTest на устройстве/эмуляторе, вам нужно выполнить:
 ```
 ./gradlew :samples:kaspresso-sample:connectedAndroidTest -Pandroid.testInstrumentationRunnerArguments.class=com.kaspersky.kaspressample.sharedtest.SharedSimpleFlakyTest
 ```
 
-## Accommodation of tests to work on the JVM (with Robolectric) environment
+## Адаптация тестов для работы в среде JVM (с Robolectric)
 
-We've prepared a bunch of tools and advices to accommodate your tests for the JVM (with Robolectric) environment.
+Мы подготовили набор инструментов и советов, чтобы приспособить ваши тесты к среде JVM (с Robolectric).
 
-Let's consider the most popular problem when a test uses a class containing calls to `UiDevice`/`UiAutomation`/`AdbServer` or other not working in JVM environment things.
+Рассмотрим наиболее популярную проблему, когда в тесте используется класс, содержащий вызовы `UiDevice`/`UiAutomation`/`AdbServer` или другие не работающие в среде JVM вещи.
 
-For example, your test looks like below:
+Например, ваш тест выглядит следующим образом:
 ```kotlin
 @RunWith(AndroidJUnit4::class)
 class FailingSharedTest : TestCase() {
@@ -95,41 +96,42 @@ class FailingSharedTest : TestCase() {
 }
 ```
 
-`device.exploit.pressHome()` calls `UiDevice` under the hood and it leads to a crash the JVM environment.
+`device.exploit.pressHome()` вызывает `UiDevice` под капотом, что приводит к сбою среды JVM.
 
-There is following possible solution:
+Существует следующее возможное решение:
 ``` kotlin
-// change an implementation of Exploit class
+// изменить реализацию класса Exploit
 @RunWith(AndroidJUnit4::class)
 class FailingSharedTest : TestCase(
     kaspressoBuilder = Kaspresso.Builder.simple {
         exploit = 
-            if (isAndroidRuntime) ExploitImpl() // old implementation
-            else ExploitUnit() // new implementation without UiDevice
+            if (isAndroidRuntime) ExploitImpl() // старая реализация
+            else ExploitUnit() // новая реализация без UiDevice
     }
 ) { ... }
 
-// isAndroidRuntime property is available in Kaspresso.Builder.
+// свойство isAndroidRuntime доступно в Kaspresso.Builder.
 ``` 
 
-Also, if your custom Interceptor uses `UiDevice`/`UiAutomation`/`AdbServer` then you can turn off this Interceptor for JVM. The example:
+Кроме того, если ваш пользовательский перехватчик использует `UiDevice`/`UiAutomation`/`AdbServer`, вы можете отключить этот перехватчик для JVM. Пример:
 ```kotlin
 class KaspressoConfiguringTest : TestCase(
     kaspressoBuilder = Kaspresso.Builder.simple {
         viewBehaviorInterceptors = if (isAndroidRuntime) mutableListOf(
-           YourCustomInterceptor()
-           FlakySafeViewBehaviorInterceptor(flakySafetyParams, libLogger)
+           YourCustomInterceptor(),
+           FlakySafeViewBehaviorInterceptor (flakySafetyParams, libLogger)
        ) else mutableListOf(
-           FlakySafeViewBehaviorInterceptor(flakySafetyParams, libLogger)
+           FlakySafeViewBehaviorInterceptor (flakySafetyParams, libLogger)
        )
     }
 ) { ... }
 ``` 
 
-Of course, there is a very obvious last option. Just don't include the test in a set of Unit tests.
+Конечно, есть очень очевидный последний вариант. Просто не включайте тест в набор модульных тестов.
 
-**Further remarks**
+**Дополнительные замечания**
 
-As of Robolectric 4.8.1, there are some limitations to sharedTest: those tests run flawless on an emulator/device, but fail on the JVM
-1) Robolectric-Espresso supports Idling resources, but [doesn't support posting delayed messages to the looper](https://github.com/robolectric/robolectric/issues/4807#issuecomment-1075863097)
-2) Robolectric-Espresso will not support [tests that start new activities](https://github.com/robolectric/robolectric/issues/5104)(i.e. activity jumping)
+Начиная с Robolectric 4.8.1, у sharedTest есть некоторые ограничения: эти тесты работают безупречно на эмуляторе/устройстве, но не работают на JVM. 
+
+1. Robolectric-Espresso поддерживает Idling, но [не поддерживает публикацию отложенных сообщений в Looper](https://github.com/robolectric/robolectric/issues/4807#issuecomment-1075863097)
+2. Robolectric-Espresso не будет поддерживать [тесты, которые запускают новые activity](https://github.com/robolectric/robolectric/issues/5104)
