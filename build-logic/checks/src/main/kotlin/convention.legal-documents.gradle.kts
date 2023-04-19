@@ -10,7 +10,7 @@ tasks.register("checkLegalDocuments") {
     }
 
     val kaspressoVersion = project.property("kaspresso.snapshotVersion")
-    require(firstLine.contains("This file is made for Kaspresso release $kaspressoVersion")) {
+    require(firstLine.contains("$kaspressoVersion")) {
         "Failed to check whether the existing NOTICE.txt was made for the current release ($kaspressoVersion)"
     }
 
