@@ -1,18 +1,19 @@
-# Kaspresso-allure support
+# Поддержка Allure в Kaspresso
 
-## _What's new_
-In the new **1.3.0** Kaspresso release the [**allure-framework**](https://github.com/allure-framework/allure-kotlin) support was added. Now it is very easy to generate pretty test reports using both Kaspresso and Allure frameworks.
+## Что нового
+В версии **1.3.0** Kaspresso была добавлена поддержка [**allure-framework**](https://github.com/allure-framework/allure-kotlin). Теперь очень легко создавать красивые тестовые отчеты, используя фреймворки Kaspresso и Allure.
 
-In this release, the file-managing classes family that is responsible for providing files for screenshots and logs has been refactored for better usage and extensibility. This change has affected the old classes that are deprecated now (see package com.kaspersky.kaspresso.files). Usage example: [**CustomizedSimpleTest**](../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/simple_tests/CustomizedSimpleTest.kt).
+В этом выпуске семейство классов управления файлами, отвечающее за предоставление файлов для снимков экрана и журналов, было реорганизовано для лучшего использования и расширяемости. Это изменение затронуло старые классы, которые сейчас помечены как устаревшие (см. пакет com.kaspersky.kaspresso.files). Пример использования: [**CustomizedSimpleTest**](../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/simple_tests/CustomizedSimpleTest.kt).
 
-Also, the following interceptors were added:
-1. [**VideoRecordingInterceptor**](../kaspresso/src/main/kotlin/com/kaspersky/kaspresso/interceptors/watcher/testcase/impl/video/VideoRecordingInterceptor.kt). Tests video recording interceptor (please not that it was fully tested on emulators with android api 29 and older).
-2. [**DumpViewsInterceptor**](../kaspresso/src/main/kotlin/com/kaspersky/kaspresso/interceptors/watcher/testcase/impl/views/DumpViewsInterceptor.kt). Interceptor that dumps XML-representation of view hierarchy in case of a test failure.
+Также были добавлены следующие перехватчики:
 
-In the package [**com.kaspersky.components.alluresupport.interceptors**](../allure-support/src/main/kotlin/com/kaspersky/components/alluresupport/interceptors), there are special Kaspresso interceptors helping to link and process files for Allure-report.
+1. [**VideoRecordingInterceptor**](https://github.com/KasperskyLab/Kaspresso/tree/master/kaspresso/src/main/kotlin/com/kaspersky/kaspresso/interceptors/watcher/testcase/impl/video/VideoRecordingInterceptor.kt) - перехватчик записи видео.
+2. [**DumpViewsInterceptor**](https://github.com/KasperskyLab/Kaspresso/tree/master/kaspresso/src/main/kotlin/com/kaspersky/kaspresso/interceptors/watcher/testcase/impl/views/DumpViewsInterceptor.kt) - перехватчик, который предоставляет XML-представление иерархии View в случае сбоя теста.
 
-## _How to use_
-First of all, add the following Gradle dependency and Allure runner to your project's gradle file to include **allure-support** Kaspresso module:
+В пакете [**com.kaspersky.components.alluresupport.interceptors**](https://github.com/KasperskyLab/Kaspresso/tree/master/allure-support/src/main/kotlin/com/kaspersky/components/alluresupport/interceptors) есть специальные перехватчики Kaspresso, помогающие связать и обработать файлы для Allure-отчета.
+
+## Как использовать
+Прежде всего, добавьте следующую зависимость Gradle и Allure runner в файл gradle вашего проекта, чтобы включить модуль **allure-support** Kaspresso:
 ```groovy
 android {
     defaultConfig {
@@ -24,16 +25,18 @@ android {
 
 dependencies {
     //...
-    androidTestImplementation "com.kaspersky.android-components:kaspresso-allure-support:<latest_version>"
+    androidTestImplementation "com.kaspersky.android-components:kaspresso-allure-support:<последняя_версия>"
 }
 ```
-Next, use special [**withAllureSupport**](../allure-support/src/main/kotlin/com/kaspersky/components/alluresupport/AllureSupportKaspressoBuilder.kt) function in your TestCase constructor or in your TestCaseRule to turn on all available Allure-supporting interceptors:
+Затем используйте специальную функцию [**withAllureSupport**](https://github.com/KasperskyLab/Kaspresso/tree/master/allure-support/src/main/kotlin/com/kaspersky/components/alluresupport/AllureSupportKaspressoBuilder.kt) в вашем конструкторе TestCase или в вашем TestCaseRule, чтобы включить все доступные перехватчики, поддерживающие Allure:
 ```kotlin
 class AllureSupportTest : TestCase(
     kaspressoBuilder = Kaspresso.Builder.withAllureSupport()
 ) {
+    
+}
 ```
-If you want to specify the parameters or add more interceptors you can use [**addAllureSupport**](../allure-support/src/main/kotlin/com/kaspersky/components/alluresupport/AllureSupportKaspressoBuilder.kt) function:
+Если вы хотите указать параметры или добавить больше перехватчиков, вы можете использовать функцию [**addAllureSupport**](https://github.com/KasperskyLab/Kaspresso/tree/master/allure-support/src/main/kotlin/com/kaspersky/components/alluresupport/AllureSupportKaspressoBuilder.kt):
 ```kotlin
 class AllureSupportCustomizeTest : TestCase(
     kaspressoBuilder = Kaspresso.Builder.simple(
@@ -51,10 +54,10 @@ class AllureSupportCustomizeTest : TestCase(
         }
     }
 ) {
-...
+
 }
 ```
-If you don't need all of these interceptors providing by [**withAllureSupport**](../allure-support/src/main/kotlin/com/kaspersky/components/alluresupport/AllureSupportKaspressoBuilder.kt) and [**addAllureSupport**](../allure-support/src/main/kotlin/com/kaspersky/components/alluresupport/AllureSupportKaspressoBuilder.kt) functions then you may add only interceptors that you prefer. But please note that [**AllureMapperStepInterceptor.kt**](../allure-support/src/main/kotlin/com/kaspersky/components/alluresupport/interceptors/step/AllureMapperStepInterceptor.kt) is mandatory for Allure support work. For example, if you don't need videos and view hierarchies after test failures then you can do something like:
+Если вам не нужны все эти перехватчики, предоставляемые [**withAllureSupport**](https://github.com/KasperskyLab/Kaspresso/tree/master/allure-support/src/main/kotlin/com/kaspersky/components/alluresupport/AllureSupportKaspressoBuilder.kt) и [**addAllureSupport **](../allure-support/src/main/kotlin/com/kaspersky/components/alluresupport/AllureSupportKaspressoBuilder.kt), то вы можете добавить только те перехватчики, которые вам нравятся. Но обратите внимание, что [**AllureMapperStepInterceptor.kt**](../allure-support/src/main/kotlin/com/kaspersky/components/alluresupport/interceptors/step/AllureMapperStepInterceptor.kt) является обязательным для работы службы поддержки Allure. Например, если вам не нужны видеоролики и просмотр иерархий после неудачных тестов, вы можете сделать что-то вроде:
 ```kotlin
 class AllureSupportCustomizeTest : TestCase(
     kaspressoBuilder = Kaspresso.Builder.simple().apply {
@@ -75,62 +78,62 @@ class AllureSupportCustomizeTest : TestCase(
 ...
 }
 ```
-[**kaspresso-allure-support-sample**](../samples/kaspresso-allure-support-sample/src/androidTest/kotlin/com/kaspersky/kaspresso/alluresupport/sample) is available to watch, to launch and to experiment with all of this staff.
+Для просмотра, запуска и экспериментирования со всем этим функционалом вам доступен [**kaspresso-allure-support-sample**](https://github.com/KasperskyLab/Kaspresso/tree/master/samples/kaspresso-allure-support-sample/src/androidTest/kotlin/com/kaspersky/kaspresso/alluresupport/sample).
 
-## _Watch result_
-So you added the list of needed Allure-supporting interceptors to your Kaspresso configuration and launched the test. After the test finishes there will be **sdcard/allure-results** dir created on the device with all the files processed to be included to Allure-report.
+## Посмотреть результат
+Итак, вы добавили в свою конфигурацию Kaspresso список необходимых перехватчиков, поддерживающих Allure, и запустили тест. После завершения теста на устройстве будет создан каталог **sdcard/allure-results** со всеми обработанными файлами, которые будут включены в отчет Allure.
 
-This dir should be moved from the device to the host machine which will do generate the report.
+Этот каталог следует переместить с устройства на хост-компьютер, который будет генерировать отчет.
 
-For example, you can use **adb pull** command on your host for this. Let say you want to locate the data for the report at **/Users/username/Desktop/allure-results**, so you call:
+Например, вы можете использовать для этого команду **adb pull** на своем хосте. Допустим, вы хотите найти данные для отчета в **/Users/username/Desktop/allure-results**, поэтому вы вызываете:
 ```
 adb pull /sdcard/allure-results /Users/username/Desktop
 ```
-If there are few devices connected to yout host you should specify the needed device id. To watch the list of connected devices you can call:
+Если к вашему хосту подключено несколько устройств, вы должны указать нужный идентификатор устройства. Для просмотра списка подключенных устройств вы можете выполнить:
 ```
 adb devices
 ```
-The output will be something like:
+Вывод будет примерно таким:
 ```
 List of devices attached
 CLCDU18508004769	device
 emulator-5554	device
 ```
-Select the needed device and call:
+Выберите необходимое устройство и вызовите:
 ```
 adb -s emulator-5554 pull /sdcard/allure-results /Users/username/Desktop
 ```
-And that's it, the **allure-results** dir with all the test resources is now at **/Users/username/Desktop**.
+Вот и все, директория **allure-results** со всеми тестовыми ресурсами теперь находится по адресу **/Users/username/Desktop**.
 
-Now, we want to generate and watch the report. The Allure server must be installed on our machine for this. To find out how to do it with all the details please follow the [**Allure docs**](https://docs.qameta.io/allure/).
+Теперь мы хотим создать и просмотреть отчет. Для этого на нашей машине должен быть установлен сервер Allure. Чтобы узнать, как это сделать со всеми подробностями, следуйте [**документации Allure**](https://docs.qameta.io/allure/).
 
-For example to install Allure server on MacOS we can use the following command:
+Например, чтобы установить сервер Allure на MacOS, мы можем использовать следующую команду:
 ```
 brew install allure
 ```
-Now we are ready to generate and watch the report, just call:
+Теперь мы готовы сгенерировать и посмотреть отчет, просто вызовите:
 ```
 allure serve /Users/username/Desktop/allure-results
 ```
-Next, the Allure server generates the html-page representing the report and puts it to temp dir in your system. You will see the report opening in the new tab in your browser (the tab is opening automatically).
+Затем сервер Allure создает html-страницу, представляющую отчет, и помещает ее во временный каталог в вашей системе. Вы увидите, что отчет открывается в новой вкладке вашего браузера (вкладка открывается автоматически).
 
-If you want to save the generated html-report to a specific dir for future use you can just call:
+Если вы хотите сохранить сгенерированный html-отчет в определенном каталоге для использования в будущем, вы можете просто вызвать:
 ```
 allure generate -o ~/kaspresso-allure-report /Users/username/Desktop/allure-results
 ```
-And to watch it then in your browser you just call:
+Чтобы посмотреть его, в своем браузере вы просто вызываете:
 ```
 allure open ~/kaspresso-allure-report
 ```
-After all of this actions you see something like:
+После всех этих шагов вы увидите что-то вроде:
 ![](https://habrastorage.org/webt/9e/i1/ks/9ei1ks9txbqzquyk5egywvqxj6k.png)
 
-Details for succeeded test:
+Детали успешного теста:
 ![](https://habrastorage.org/webt/tq/t7/ch/tqt7chcdczrgduhoukqhx1ertfc.png)
 
-Details for failed test:
+Сведения о неудачном тесте:
 ![](https://habrastorage.org/webt/z_/ml/bj/z_mlbjspdd8uvkw4t3cafh6-g6k.png)
 
-## _Details that you need to know_
-By default, Kaspresso-Allure introduces additional timeouts to assure the correctness of a Video recording as much as possible. To summarize, these timeouts increase a test execution time by 5 seconds.
-You are free to change these values by customizing `videoParams` in `Kaspresso.Builder`. See the example above.
+## Детали, которые вам нужно знать
+По умолчанию, Kaspresso-Allure вводит дополнительные тайм-ауты, чтобы максимально гарантировать правильность видеозаписи. Эти тайм-ауты увеличивают время выполнения теста на 5 секунд.
+Вы можете изменить эти значения, настроив `videoParams` в `Kaspresso.Builder`. См. пример выше.

@@ -138,7 +138,7 @@ plugins:
           Screenshot tests: Скриншот тесты
           Kaspresso configuration: Конфигуратор Kaspresso
           Kaspresso with Robolectric: Запуск тестов Kaspresso на JVM с помощью Robolectric
-          Kaspresso with Allure: Kaspresso with Allure
+          Kaspresso with Allure: Поддержка Allure в Kaspresso
           Jetpack Compose in Kaspresso: Jetpack Compose в Kaspresso
           Issues: Известные проблемы
           Found an issue?: Found an issue?
