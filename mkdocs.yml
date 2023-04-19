@@ -101,7 +101,7 @@ plugins:
           Kaspresso configuration: Kaspresso configuration
           Kaspresso with Robolectric: Kaspresso with Robolectric
           Kaspresso with Allure: Kaspresso with Allure
-          Jetpack Compose in Kaspresso: Jetpack Compose in Kaspresso
+          Jetpack Compose in Kaspresso: Compose support in Kaspresso
           Issues: Issues
           Found an issue?: Found an issue?
           Storage issues: Storage issues
@@ -139,7 +139,7 @@ plugins:
           Kaspresso configuration: Конфигуратор Kaspresso
           Kaspresso with Robolectric: Запуск тестов Kaspresso на JVM с помощью Robolectric
           Kaspresso with Allure: Поддержка Allure в Kaspresso
-          Jetpack Compose in Kaspresso: Jetpack Compose в Kaspresso
+          Jetpack Compose in Kaspresso: Поддержка Compose в Kaspresso
           Issues: Известные проблемы
           Found an issue?: Found an issue?
           Storage issues: Storage issues

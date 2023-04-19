@@ -1,5 +1,4 @@
-# Поддержка Jetpack Compose
-
+# Поддержка Compose в Kaspresso
 Поддержка Jetpack Compose состоит из двух частей: [библиотека Kakao Compose](https://github.com/KakaoCup/Compose) и механизм Kaspresso Interceptors.
 
 ## Библиотека Kakao Compose
@@ -43,7 +42,7 @@ class ComposeSimpleFlakyTest : TestCase(
     @get:Rule
     val composeTestRule = createAndroidComposeRule<JetpackComposeActivity>()
 
-    // Проверка DSL. Это так похоже на Kakao или Kautomator DSL.
+    // Тест с DSL. Это так похоже на Kakao или Kautomator DSL.
     @Test
     fun test() = run {
         step("Open Flaky screen") {
@@ -113,7 +112,7 @@ I/KASPRESSO: TEST STEP: "3. Click on the Second button" in ComposeSimpleFlakyTes
 
 ## Предостережения
 Помните, что Jetpack Compose и все сопутствующие инструменты находятся в стадии разработки.
-Это означает, что Jetpack Compose изучен не очень хорошо, и некоторые вещи могут быть неожиданными после опыта «Old fashioned View World».
+Это означает, что Jetpack Compose изучен не очень хорошо, и некоторые вещи могут быть неожиданными.
 Покажу интересный случай.
 
 Например, этот код
@@ -196,16 +195,17 @@ class ComposeCustomizeTest : TestCase(
 
 ### Поддержка Robolectric 
 Вы можете запускать тесты Compose в среде JVM с помощью Robolectric.<br>
-Запустите ComposeSimpleFlakyTest (из модуля `kaspresso-sample`) на JVM прямо сейчас:
+В качестве примера можно запустить тест ComposeSimpleFlakyTest (из модуля `kaspresso-sample`) на JVM прямо сейчас:
 ```
 ./gradlew :samples:kaspresso-compose-support-sample:testDebugUnitTest --info --tests "com.kaspersky.kaspresso.composesupport.sample.test.ComposeSimpleFlakyTest"  
 ```
 Вся информация о поддержке Robolectric доступна [здесь](https://kasperskylab.github.io/Kaspresso/ru/Wiki/Kaspresso_Robolectric/).
 
 ### Compose совместим со всеми расширениями Kaspresso.
-Расширения Kaspresso подразумевают использование таких конструкций, как
-- `flakySafely`
-- `continuously`
+Расширения Kaspresso подразумевают использование таких конструкций, как:
+
+1. `flakySafely`
+2. `continuously`
 
 Идет поддержка некоторых конструкций: [issue-317](https://github.com/KasperskyLab/Kaspresso/issues/317).
 

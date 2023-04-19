@@ -1,7 +1,4 @@
-# Jetpack Compose support 
-
-**Keep in mind it's early access that may contain bugs. Also, API can be changed, but we are going to avoid it. Be free to create relative issues if you've encountered with any kind of problem.**
-
+# Compose support
 Jetpack Compose support consists of two parts: [Kakao Compose library](https://github.com/KakaoCup/Compose) and Kaspresso Interceptors mechanism.
 
 ## Kakao Compose library
@@ -210,9 +207,10 @@ Run `ComposeSimpleFlakyTest` (from "kaspresso-sample" module) on the JVM right n
 All information about Robolectric support is available [here](https://kasperskylab.github.io/Kaspresso/Wiki/Kaspresso_Robolectric/).
 
 ### Compose is compatible with all sweet Kaspresso extensions
-Sweet Kaspresso extensions means using of the such constructions as
-- `flakySafely`
-- `continuously`
+Sweet Kaspresso extensions means using of the such constructions as:
+
+1. `flakySafely`
+2. `continuously`
 
 The support of some constructions is in progress: [issue-317](https://github.com/KasperskyLab/Kaspresso/issues/317).
 
