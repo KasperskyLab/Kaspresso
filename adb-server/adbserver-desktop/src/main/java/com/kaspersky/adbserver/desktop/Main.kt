@@ -55,7 +55,8 @@ internal fun main(args: Array<String>) {
         cmdCommandPerformer = cmdCommandPerformer,
         presetEmulators = emulators,
         adbServerPort = port,
-        logger = desktopLogger
+        logger = desktopLogger,
+        adbPath = adbPath
     )
     desktop.startDevicesObserving()
 }
