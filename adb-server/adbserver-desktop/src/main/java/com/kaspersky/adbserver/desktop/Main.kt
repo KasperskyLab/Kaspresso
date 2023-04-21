@@ -9,6 +9,8 @@ import kotlinx.cli.delimiter
 import java.lang.management.ManagementFactory
 
 private const val DESKTOP = "Desktop-"
+// It is assumed that adb is preinstall and available by "adb" keyword
+private const val DEFAULT_ADB_PATH = "adb"
 
 internal fun main(args: Array<String>) {
     val parser = ArgParser("Adb Server")
@@ -34,12 +36,19 @@ internal fun main(args: Array<String>) {
         description = "Logs Level"
     ).default(LogLevel.INFO)
 
+    val adbPath by parser.option(
+        type = ArgType.String,
+        shortName = "a",
+        fullName = "adb_path",
+        description = "Path to custom adb"
+    ).default(DEFAULT_ADB_PATH)
+
     parser.parse(args)
 
     val desktopName = getDesktopName()
     val desktopLogger = LoggerFactory.getDesktopLogger(logLevel, desktopName)
 
-    desktopLogger.i("Desktop started with arguments: emulators=$emulators, adbServerPort=$port")
+    desktopLogger.i("Desktop started with arguments: emulators=$emulators, adbServerPort=$port, adbPath=$adbPath")
 
     val cmdCommandPerformer = CmdCommandPerformer(desktopName)
     val desktop = Desktop(
