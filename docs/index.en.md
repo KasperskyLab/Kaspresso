@@ -16,11 +16,11 @@ Automator](https://developer.android.com/training/testing/ui-automator), Kaspres
 * Jetpack Compose support **[Early access]**.
 * Significantly faster execution of UI Automator commands. With Kaspresso, some UI Automator commands run **10 times faster**!
 * Excellent readability due to human DSL.
-* Incredible mechanism of interceptors that allows you to catch all actions and assertions in one place.
+* Useful interceptor mechanism to catch all actions and assertions in one place.
 * Full logging.
 * Ability to call ADB commands.
-* UI tests writing philosophy, implemented with DSL.
-* Features screenshotting.
+* UI tests writing philosophy implemented with DSL.
+* Ability to take screenshots.
 * Robolectric support.
 * Allure support.
 
@@ -28,7 +28,6 @@ And many more!
 
 <img src="kaspresso.png" alt="Kaspresso"/>
 [//]: # (![Kaspresso]&#40;https://habrastorage.org/webt/dw/jh/9k/dwjh9kypjl637kxj8tiaxwjvtp0.png&#41;)
-
 
 ## Integration
 
@@ -66,7 +65,7 @@ dependencies {
 ```
 
 ## Tutorial *NEW*
-See [our website](https://kasperskylab.github.io/Kaspresso/Tutorial/) for a step by step guide. 
+To make it easier to learn the framework, a step-by-step tutorial is available on [our website](https://kasperskylab.github.io/Kaspresso/Tutorial/). 
 
 ## Capabilities of Kaspresso
 
@@ -125,11 +124,9 @@ MainScreen {
     }
 }
 ```
-Since Kakao and Kautomator provide almost identical APIs, you don’t have to care about what is under the hood of your tests, either Espresso or UI Automator. With Kaspresso, 
-you write the same tests for both.
+Since Kakao and Kautomator provide almost identical APIs, you don’t have to care about what is under the hood of your tests, either Espresso or UI Automator. With Kaspresso, you write tests in the same style for both.
 
-However, Kakao and Kautomator themselves don't help you to see the relation between the test and the corresponding test case. Also, a long test often becomes a giant piece of 
-code that is impossible to split into smaller parts.
+However, Kakao and Kautomator themselves don't help you to see the relation between the test and the corresponding test case. Also, a long test often becomes a giant piece of code that is impossible to split into smaller parts.
 That's why we have created an additional Kotlin DSL that allows you to read your test more easily. 
 
 See the example below:
@@ -184,8 +181,7 @@ fun shouldPassOnNoInternetScanTest() =
 
 Sometimes your UI test passes ten times, then breaks on the eleventh attempt for some mysterious reason. It’s called *flakiness*. 
 
-The most popular reason for flakiness is the instability of the UI tests libraries, such as Espresso and UI Automator. To eliminate this instability, Kaspresso uses DSL 
-wrappers and [interceptors](#Interceptors). 
+The most popular reason for flakiness is the instability of the UI tests libraries, such as Espresso and UI Automator. To eliminate this instability, Kaspresso uses DSL wrappers and [interceptors](#Interceptors). 
 
 ### UI test libraries acceleration
 
@@ -195,15 +191,15 @@ Let’s watch some short video that shows the difference between the original UI
 
 Here is [a short explanation](https://kasperskylab.github.io/Kaspresso/Wiki/Kautomator-wrapper_over_UI_Automator/#accelerate-ui-automator) of why it is possible.
 
-<a name="Interceptors"></a>
 ### Interceptors
 
 We developed [Kaspresso behavior interceptors](https://kasperskylab.github.io/Kaspresso/Wiki/Kaspresso_configuration/#some-words-about-behavior-interceptors) on the base of [Kakao/Kautomator 
 Interceptors](https://kasperskylab.github.io/Kaspresso/Wiki/Kaspresso_configuration/#kaspresso-interceptors-based-on-kakaokautomator-interceptors) to catch failures.
 
 Thanks to interceptors, you can do a lot of useful things, such as:
-* add custom actions to each library operation like writing a log or taking a screenshot;
-* overcome flaky library operations by re-running failed actions, scrolling the parent layout or removing the android system dialog;
+
+* add custom actions to each framework operation like writing a log or taking a screenshot;
+* overcome flaky operations by re-running failed actions, scrolling the parent layout or closing the android system dialog;
 
 and many more (see [the manual](https://kasperskylab.github.io/Kaspresso/Wiki/Kaspresso_configuration/#kaspresso-interceptors-based-on-kakaokautomator-interceptors)).
 
@@ -215,13 +211,14 @@ Kaspresso writes its own logs, detailed and readable:
 
 ### Ability to call ADB commands
 
-Espresso and UI Automator don't allow to call ADB commands from inside a test. To fix this problem, we developed Autotest AdbServer (see the [wiki](https://kasperskylab.github.io/Kaspresso/Wiki/Executing_adb_commands/)).
+Espresso and UI Automator don't allow to call ADB commands from inside a test. To fix this problem, we developed AdbServer (see the [wiki](https://kasperskylab.github.io/Kaspresso/Wiki/Executing_adb_commands/)).
 
 ### Ability to work with Android System
 
 You can use Kaspresso classes to work with Android System.
 
 For example, with the ```Device``` class you can:
+
 * push/pull files,
 * enable/disable network,
 * give permissions like a user does,
@@ -235,17 +232,15 @@ For example, with the ```Device``` class you can:
 
 (see more about the [Device class](https://kasperskylab.github.io/Kaspresso/Wiki/Working_with_Android_OS/)).
 
-### Features screenshotting
+### Ability to take screenshots
 
-If you develop an application that is available across the world, you have to *localize* it into different languages. When UI is localized, it’s important for the translator 
-to see the context of a word or a phrase, that is the specific screen. 
+If you develop an application that is available across the world, you have to *localize* it into different languages. When UI is localized, it’s important for the translator to see the context of a word or a phrase, that is the specific screen. 
 
-With Kaspresso, translators can automatically take a screenshot of any screen. It’s incredibly fast, even for legacy screens, and you don't have to refactor or mock anything 
-(see [the manual](https://kasperskylab.github.io/Kaspresso/Wiki/Screenshot_tests/)).
+With Kaspresso, translators can automatically take a screenshot of any screen. It’s incredibly fast, even for legacy screens, and you don't have to refactor or mock anything (see [the manual](https://kasperskylab.github.io/Kaspresso/Wiki/Screenshot_tests/)).
 
 ### Configurability
 
-You can tune any part of Kaspresso (read [more](https://kasperskylab.github.io/Kaspresso/Wiki/Kaspresso_configuration/))
+You can tune any part of Kaspresso (read [more](https://kasperskylab.github.io/Kaspresso/Wiki/Kaspresso_configuration/)).
 
 ### Robolectric support
 
@@ -273,13 +268,13 @@ The tool itself, even the perfect one, can not solve all the problems in writing
 Our team has great experience in introducing autotests in different companies. We shared our knowledge on [Wiki](https://kasperskylab.github.io/Kaspresso/Wiki/).
 
 ## Wiki
-
 For all information check [Kaspresso wiki](https://kasperskylab.github.io/Kaspresso/Wiki/)
 
 ## Samples
 All samples are available in the [samples](https://github.com/KasperskyLab/Kaspresso/tree/issue-372/tutorial/samples) folder. 
 
 Most of the samples require AdbServer. To start AdbServer you should do the following steps:
+
 1. Go to the `Kaspresso` folder
 ```
 cd ~/Workspace/Kaspresso
@@ -290,14 +285,13 @@ java -jar artifacts/adbserver-desktop.jar
 ```
 
 ## Existing issues
-All existing issues in Kaspresso can be found [here](https://kasperskylab.github.io/Kaspresso/Issues/Storage_issue/)
+All existing issues in Kaspresso can be found [here](https://kasperskylab.github.io/Kaspresso/Issues/).
 
 ## Breaking changes 
 Breaking changes can be found [here](https://kasperskylab.github.io/Kaspresso/Home/Breaking-changes/)
 
 ## Contribution
-Kaspresso is an open source project, so you are welcome to contribute (see the [Contribution 
-Guidelines](https://kasperskylab.github.io/Kaspresso/Home/Contribution_guide/)).
+Kaspresso is an open source project, so you are welcome to contribute (see the [Contribution Guidelines](https://kasperskylab.github.io/Kaspresso/Home/Contribution_guide/)).
 
 ## License
 Kaspresso is available under the [Apache License, Version 2.0](https://github.com/KasperskyLab/Kaspresso/blob/master/LICENSE).
