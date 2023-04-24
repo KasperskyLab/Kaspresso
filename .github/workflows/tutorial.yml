@@ -2,7 +2,7 @@ name: tutorial
 on:
   push:
     branches:
-      - ISSUE-372-tutorial
+      - master
 jobs:
   deploy:
     runs-on: ubuntu-latest
