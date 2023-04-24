@@ -1,9 +1,13 @@
-## Breaking changes
-### 1.2.0
-- We've totally reworked AdbServer and Kaspresso 1.2.0 works only with new `artifacts/adbserver-desktop.jar`<br>
-  The old version `artifacts/desktop_1_1_0.jar` is also available for use with older versions of Kaspresso.
-- If you use `device.logcat` in your tests, you should call `device.logcat.disableChatty` in the `before` section of your test.
-  In previous version of Kaspresso, `device.logcat.disableChatty` was called automatically during initialization. This resulted in the need to always run AdbServer before tests.
-### 1.2.1
-- Kaspresso migrated to a new version of Kakao which has `io.github.kakaocup.kakao` package name. Replace all imports using command
-  `find . -type f \( -name "*.kt" -o -name "*.java" \) -print0 | xargs -0 sed -i '' -e 's/com.agoda/io.github.kakaocup/g'` or using global replacement tool in IDE.
+## 1.2.0
+- Мы полностью переработали AdbServer. Kaspresso 1.2.0 и выше работает только с новым артефактом `artifacts/adbserver-desktop.jar`<br>
+  Старая версия `artifacts/desktop_1_1_0.jar` также доступна для ранних версий Kaspresso.
+- Если вы использовали метод `device.logcat` в ваших тестах, вам следует использовать метод `device.logcat.disableChatty` в секции `before`.
+  В предыдущей версии Kaspresso `device.logcat.disableChatty` вызывался автоматически во время инициализации. Как результат, всегда приходилось перезапускать AdbServer перед каждым тестом.
+## 1.2.1
+- Kaspresso мигрировал на новую версию Kakao с новым именем пакета `io.github.kakaocup.kakao`. Замените все импорты с помощью комманды
+  `find . -type f \( -name "*.kt" -o -name "*.java" \) -print0 | xargs -0 sed -i '' -e 's/com.agoda/io.github.kakaocup/g'` или с помощью утилиты среды разработки для глобальной замены импортов.
+## 1.5.0
+- Из-за системных ограничений на доступ к памяти артифакты сохраняются в папку `/sdcard/Documents`.
+  Для записи видео необходимо использовать новый Kaspresso builder: `Kaspresso.Builder.withForcedAllureSupport()` и заменить test runner (`io.qameta.allure.android.runners.AllureAndroidJUnitRunner`) на `com.kaspersky.kaspresso.runner.KaspressoRunner`.
+  TestFailRule устарел. Поправили падающие скриншот-тесты.
+  Улучшено автоматическое закрытие системных окон. Посмотреть изменения можно [здесь](https://github.com/KasperskyLab/Kaspresso/pull/460/files).
