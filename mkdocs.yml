@@ -141,8 +141,8 @@ plugins:
           Kaspresso with Allure: Поддержка Allure в Kaspresso
           Jetpack Compose in Kaspresso: Поддержка Compose в Kaspresso
           Issues: Известные проблемы
-          Found an issue?: Found an issue?
-          Storage issues: Storage issues
+          Found an issue?: Нашли проблему?
+          Storage issues: Работа с файлами
 nav:
   - Home:
       - About Kaspresso: index.md

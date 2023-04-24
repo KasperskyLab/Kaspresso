@@ -1,12 +1,15 @@
 
-## Storage issues
-Kaspresso can use external storage to save various data about executed tests. The example of such data is screenshots, xml dumps, logs, video and anymore.
-But, new Android OS provides absolutely new way to work with external storage - Scoped Storage. Currently, we are working on the support of Scoped Storage.
-While Scoped Storage support is on the way, there is an option to request different permissions to make an access to saved data possible on any Android OS.
-Here, it's a detailed instruction:
-1. AndroidManifest.xml (in your debug build variant to keep production manifest without any changes)
+!!! info
+    Описанная ниже проблема актуальна для версий Kaspresso ниже 1.5.0. Начиная с этой версии Kaspresso полноценно поддерживает новый формат работы с системной памятью.
+
+Kaspresso может использовать память девайса для сохранения различных артефактов выполняемых тестов. Например, это могут быть скриншоты, дампы xml, журналы событий, видео и многое другое.
+Однако, новые версии Android предполагают абсолютно новый способ взаимодействия с памятью - Scoped storage.
+На версиях Kaspresso до 1.5.0 поддерживается работа с Scoped storage только через запрос различных разрешений.
+Ниже предоставлена инструкция:
+
+1. AndroidManifest.xml (эти изменения нужно внести только в debug версию сборки, чтобы изменения не затронули основной проектный файл)
 ```xml
-# Please, add these permissions
+# Пожалуйста, добавьте эти разрешения
 <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"/>
@@ -17,7 +20,7 @@ Here, it's a detailed instruction:
     ...
 </application>             
 ```
-2. Your test class:
+2. В вашем тестовом классе добавьте:
 ```kotlin
 class SampleTest : TestCase(
     kaspressoBuilder = Kaspresso.Builder.simple( // simple/advanced - it doesn't matter
@@ -42,5 +45,5 @@ class SampleTest : TestCase(
     //...
 }    
 ```
-Remember, it's a temporary working solution.
-A little bit later, Kaspresso will use external storage only through Scoped Storage and you will not be forced to request all mentioned permissions.
+
+Это временное решение. Мы рекомендуем мигрировать на свежую версию Kaspresso (1.5.0 и выше) для избежания этих проблем.

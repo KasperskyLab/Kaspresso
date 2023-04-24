@@ -1,9 +1,12 @@
 
-## Storage issues
+!!! info
+    The problem described below is relevant for versions of Kaspresso below 1.5.0. Starting with this version, Kaspresso fully supports the new format of working with system storage.
+
 Kaspresso can use external storage to save various data about executed tests. The example of such data is screenshots, xml dumps, logs, video and anymore.
 But, new Android OS provides absolutely new way to work with external storage - Scoped Storage. Currently, we are working on the support of Scoped Storage.
-While Scoped Storage support is on the way, there is an option to request different permissions to make an access to saved data possible on any Android OS.
+On versions of Kaspresso prior to 1.5.0, work with Scoped storage is supported only by requesting various permissions.
 Here, it's a detailed instruction:
+
 1. AndroidManifest.xml (in your debug build variant to keep production manifest without any changes)
 ```xml
 # Please, add these permissions
@@ -42,5 +45,5 @@ class SampleTest : TestCase(
     //...
 }    
 ```
-Remember, it's a temporary working solution.
-A little bit later, Kaspresso will use external storage only through Scoped Storage and you will not be forced to request all mentioned permissions.
+
+This is a temporary solution. We recommend migrating to the latest version of Kaspresso (1.5.0 and above) to avoid these problems.
