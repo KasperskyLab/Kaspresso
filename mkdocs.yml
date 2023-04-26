@@ -71,7 +71,7 @@ plugins:
           Home: Home
           About Kaspresso: About Kaspresso
           Kaspresso in articles: Kaspresso in articles
-          Kasspresso in videos: Kasspresso in videos
+          Kaspresso in videos: Kaspresso in videos
           Our users: Our users
           Breaking changes: Breaking changes
           Contribution guide: Contribution guide
@@ -109,7 +109,7 @@ plugins:
           Home: Главная
           About Kaspresso: О Kaspresso
           Kaspresso in articles: Kaspresso в статьях
-          Kasspresso in videos: Kaspresso в видео
+          Kaspresso in videos: Kaspresso в видео
           Our users: Наши пользователи
           Breaking changes: Критические изменения
           Contribution guide: Инструкция для разработчиков
@@ -147,7 +147,7 @@ nav:
   - Home:
       - About Kaspresso: index.md
       - Kaspresso in articles: Home/Kaspresso-in-articles.md
-      - Kasspresso in videos: Home/Kaspresso-in-videos.md
+      - Kaspresso in videos: Home/Kaspresso-in-videos.md
       - Our users: Home/Kaspresso users.md
       - Breaking changes: Home/Breaking-changes.md
       - Contribution guide: Home/Contribution_guide.md
