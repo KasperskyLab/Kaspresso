@@ -10,4 +10,4 @@
 - In order to support the system storage restrictions artifacts are saved under `/sdcard/Documents` folder.
   Video recording in the allure tests requires using new kaspresso builder: Kaspresso.Builder.withForcedAllureSupport() and replacing the test runner (io.qameta.allure.android.runners.AllureAndroidJUnitRunner) with com.kaspersky.kaspresso.runner.KaspressoRunner
   Deprecated TestFailRule. Fixed fail test screenshotting
-  Fixed an automatic system dialogs closing. See this diff
+  Fixed an automatic system dialogs closing. See this [diff](https://github.com/KasperskyLab/Kaspresso/pull/460/files).

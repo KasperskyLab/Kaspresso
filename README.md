@@ -19,7 +19,7 @@ Automator](https://developer.android.com/training/testing/ui-automator), Kaspres
 * Full logging.
 * Ability to call ADB commands.
 * UI tests writing philosophy implemented with DSL.
-* Ability to take screenshots.
+* Features screenshotting.
 * Robolectric support.
 * Allure support.
 
@@ -230,7 +230,7 @@ For example, with the ```Device``` class you can:
 
 (see more about the [Device class](https://kasperskylab.github.io/Kaspresso/Wiki/Working_with_Android_OS/)).
 
-### Ability to take screenshots
+### Features screenshotting
 
 If you develop an application that is available across the world, you have to *localize* it into different languages. When UI is localized, it’s important for the translator to see the context of a word or a phrase, that is the specific screen.
 
