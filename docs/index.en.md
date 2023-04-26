@@ -13,14 +13,14 @@ Kaspresso is a framework for Android UI testing. Based on [Espresso](https://dev
 Automator](https://developer.android.com/training/testing/ui-automator), Kaspresso provides a wide range of additional features, such as:
 
 * 100% stability, no flakiness.
-* Jetpack Compose support **[Early access]**.
+* Jetpack Compose support.
 * Significantly faster execution of UI Automator commands. With Kaspresso, some UI Automator commands run **10 times faster**!
 * Excellent readability due to human DSL.
 * Useful interceptor mechanism to catch all actions and assertions in one place.
 * Full logging.
 * Ability to call ADB commands.
 * UI tests writing philosophy implemented with DSL.
-* Ability to take screenshots.
+* Features screenshotting.
 * Robolectric support.
 * Allure support.
 
@@ -232,7 +232,7 @@ For example, with the ```Device``` class you can:
 
 (see more about the [Device class](https://kasperskylab.github.io/Kaspresso/Wiki/Working_with_Android_OS/)).
 
-### Ability to take screenshots
+### Features screenshotting
 
 If you develop an application that is available across the world, you have to *localize* it into different languages. When UI is localized, it’s important for the translator to see the context of a word or a phrase, that is the specific screen. 
 
@@ -253,7 +253,7 @@ Kaspresso can generate very detailed Allure-reports for each test:
 ![](https://habrastorage.org/webt/tq/t7/ch/tqt7chcdczrgduhoukqhx1ertfc.png)
 More information is available [here](https://kasperskylab.github.io/Kaspresso/Wiki/Kaspresso_Allure/). 
 
-### Jetpack Compose support (Early access)
+### Jetpack Compose support
 
 Now, you can write your Kaspresso tests for Jetpack Compose screens! DSL and all principles are the same. 
 So, you will not see any difference between tests for View screens and for Compose screens.
