@@ -65,6 +65,10 @@
             android:label="@string/device_sample_title"/>
 
         <activity
+            android:name=".devicefull.DeviceFullWindowSampleActivity"
+            android:label="@string/device_full_title"/>
+
+        <activity
             android:name=".upgrade.UpgradeTestActivity"
             android:label="@string/upgrade_title"/>
 
@@ -79,6 +83,10 @@
         <activity
             android:name=".sharedtest.SharedTestActivity"
             android:label="@string/main_screen_shared_test"/>
+
+        <activity
+            android:name=".systemlanguage.ChangeLocaleActivity"
+            android:label="@string/main_screen_change_language_mid_test_button"/>
 
         <service
             android:name=".device.DeviceSampleAccessibilityService"

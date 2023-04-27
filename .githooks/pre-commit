@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# https://git-scm.com/docs/githooks#_pre_commit
+set -eo pipefail
+
+currentBranch="$(git rev-parse --abbrev-ref HEAD)"
+branchNamePattern="^(ISSUE-\d+(-[^\W_]+)*|TECH(-[^\W_]+)+|HEAD)$"
+
+case $(uname) in
+  Darwin*) grepFlag=-qE;;
+  *)  grepFlag=-qP
+esac
+
+if ! echo "$currentBranch" | grep "$branchNamePattern" $grepFlag; then
+  echo >&2 "ERROR: pre-commit git hook failed."
+  echo >&2 "Branch name must:"
+  echo >&2 "- start with the issue id: \"ISSUE-1234{-optional-description}\""
+  echo >&2 "- or match the pattern: \"TECH-required-description\""
+  echo >&2 "Your branch name:"
+  echo >&2 "$currentBranch"
+  exit 1
+fi

@@ -12,6 +12,9 @@
     <string name="main_screen_measure_sample_button">Measure пример</string>
     <string name="main_screen_jetpack_compose_button">Jetpack Compose примеры</string>
     <string name="main_screen_shared_test">Shared Test with Robolectric пример</string>
+    <string name="main_screen_device_button">Device пример</string>
+    <string name="main_screen_full_device_button">Full Window Device пример</string>
+    <string name="main_screen_change_language_mid_test_button">Сменить локаль во время теста</string>
 
     <!-- Auto scroll fallback screen -->
     <string name="autoscroll_scrollview_with_padding_title">Auto scroll ScrollView with padding</string>
@@ -28,4 +31,13 @@
     <string name="change_color_to_black">Сделать фон чёрным</string>
     <string name="change_color_to_red">Сделать фон красным</string>
     <string name="counter_value">Текущее значение: %d</string>
+
+    <!-- Device Full Activity -->
+    <string name="device_full_title">Полный скриншот</string>
+    <string name="device_full_start">НАЧАЛО</string>
+    <string name="device_full_end">КОНЕЦ</string>
+    <string name="device_full_show_dialog">ПОКАЗАТЬ ДИАЛОГ</string>
+
+    <!--  Change locale fragment  -->
+    <string name="change_locale_screen_text">Для ру локали значение 321</string>
 </resources>

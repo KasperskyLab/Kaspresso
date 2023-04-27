@@ -33,6 +33,18 @@ internal class DocLocScreenshotCapturer(
     }
 
     /**
+     * Captures a screenshot and save it with metadata to [screenshotRootDir].
+     * @param screenshotName name of screenshot. Must match [a-zA-Z0-9_-]+
+     */
+    fun captureFullWindowScreenshot(screenshotName: String) {
+        wait(timeoutMs = SCREENSHOT_CAPTURE_DELAY_MS, logger = logger) {
+            val screenshotFile = resourceFilesProvider.provideScreenshotFile(screenshotName)
+            screenshotMaker.takeFullWindowScreenshot(screenshotFile)
+            metadataSaver.saveScreenshotMetadata(screenshotFile.parentFile, screenshotName)
+        }
+    }
+
+    /**
      * Captures a screenshot and save it to [screenshotRootDir]/fails.
      * @param screenshotName name of screenshot. Must match [a-zA-Z0-9_-]+
      */

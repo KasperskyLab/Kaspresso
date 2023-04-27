@@ -7,7 +7,7 @@ object UpdateManager {
     private const val MAIN_APP_PACKAGE_ID = "com.kaspersky.kaspressample"
     private const val OLD_VERSION_FILE = "artifacts/upgrade_test_v1.apk"
     private const val NEW_VERSION_FILE = "artifacts/upgrade_test_v2.apk"
-    private const val TIMEOUT = 5_000L
+    private const val TIMEOUT = 15_000L
 
     fun BaseTestContext.installAndLaunchMainApp() {
         device.apps.install(OLD_VERSION_FILE)

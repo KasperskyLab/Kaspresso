@@ -1,567 +1,602 @@
-﻿This file contains information about dependencies which are used in the Kaspresso.
+﻿This file contains information about dependencies which are used in the Kaspresso/kaspresso 1.5.2.
 
 androidx.activity:activity 1.2.3
 Copyright (C) The Android Open Source Project
------
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
 androidx.annotation:annotation 1.2.0
 The Android Open Source Project
------
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
 androidx.annotation:annotation-experimental 1.3.0
 Copyright 2019 The Android Open Source Project
------
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
 androidx.appcompat:appcompat 1.3.0
 The Android Open Source Project
------
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
 androidx.appcompat:appcompat-resources 1.3.0
 The Android Open Source Project
------
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
 androidx.arch.core:core-common 2.1.0
 
------
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
 androidx.arch.core:core-runtime 2.1.0
 
------
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
 androidx.cardview:cardview 1.0.0
 The Android Open Source Project
------
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
 androidx.collection:collection 1.1.0
 
------
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
-androidx.concurrent:concurrent-futures 1.0.0
-The Android Open Source Project
------
+androidx.concurrent:concurrent-futures 1.1.0
+Copyright 2018 The Android Open Source Project
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
 androidx.constraintlayout:constraintlayout 2.0.1
 The Android Open Source Project
------
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
 androidx.constraintlayout:constraintlayout-solver 2.0.1
 Copyright (C) The Android Open Source Project
------
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
 androidx.coordinatorlayout:coordinatorlayout 1.1.0
 The Android Open Source Project
------
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
 androidx.core:core 1.9.0
 Copyright (C) 2014 The Android Open Source Project
------
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
 androidx.cursoradapter:cursoradapter 1.0.0
 The Android Open Source Project
------
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
-androidx.customview:customview 1.0.0
+androidx.customview:customview 1.1.0
 The Android Open Source Project
------
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
 androidx.documentfile:documentfile 1.0.0
 The Android Open Source Project
------
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
-androidx.drawerlayout:drawerlayout 1.0.0
-The Android Open Source Project
------
+androidx.drawerlayout:drawerlayout 1.1.1
+Copyright (C) The Android Open Source Project
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
 androidx.dynamicanimation:dynamicanimation 1.0.0
 The Android Open Source Project
------
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
 androidx.fragment:fragment 1.3.4
 Copyright (C) The Android Open Source Project
------
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
 androidx.interpolator:interpolator 1.0.0
 The Android Open Source Project
------
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
 androidx.legacy:legacy-support-core-utils 1.0.0
 The Android Open Source Project
------
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
 androidx.lifecycle:lifecycle-common 2.3.1
 Copyright (C) The Android Open Source Project
------
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
 androidx.lifecycle:lifecycle-livedata 2.0.0
 Copyright (C) The Android Open Source Project
------
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
 androidx.lifecycle:lifecycle-livedata-core 2.3.1
 Copyright (C) The Android Open Source Project
------
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
 androidx.lifecycle:lifecycle-runtime 2.3.1
 Copyright (C) The Android Open Source Project
------
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
 androidx.lifecycle:lifecycle-viewmodel 2.3.1
 Copyright (C) The Android Open Source Project
------
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
 androidx.lifecycle:lifecycle-viewmodel-savedstate 2.3.1
 Copyright (C) The Android Open Source Project
------
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
 androidx.loader:loader 1.0.0
 The Android Open Source Project
------
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
 androidx.localbroadcastmanager:localbroadcastmanager 1.0.0
 The Android Open Source Project
------
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
 androidx.multidex:multidex 2.0.1
 The Android Open Source Project
------
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
 androidx.print:print 1.0.0
 The Android Open Source Project
------
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
-androidx.recyclerview:recyclerview 1.2.0
-Copyright (C) The Android Open Source Project
------
+androidx.recyclerview:recyclerview 1.2.1
+The Android Open Source Project
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
 androidx.savedstate:savedstate 1.1.0
 Copyright (C) The Android Open Source Project
------
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
 androidx.swiperefreshlayout:swiperefreshlayout 1.1.0
 The Android Open Source Project
------
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
-androidx.test.espresso:espresso-contrib 3.4.0
-The Android Open Source Project
------
+androidx.test.espresso:espresso-contrib 3.5.1
+Copyright (C) The Android Open Source Project
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
-androidx.test.espresso:espresso-core 3.4.0
-The Android Open Source Project
------
+androidx.test.espresso:espresso-core 3.5.1
+Copyright (C) The Android Open Source Project
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
-androidx.test.espresso:espresso-idling-resource 3.4.0
-The Android Open Source Project
------
+androidx.test.espresso:espresso-idling-resource 3.5.1
+Copyright (C) The Android Open Source Project
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
-androidx.test.espresso:espresso-intents 3.4.0
-The Android Open Source Project
------
+androidx.test.espresso:espresso-intents 3.5.1
+Copyright (C) The Android Open Source Project
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
-androidx.test.espresso:espresso-web 3.4.0
-The Android Open Source Project
------
+androidx.test.espresso:espresso-web 3.5.1
+Copyright (C) The Android Open Source Project
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
-androidx.test.services:storage 1.4.1
-Copyright (C) 2020 The Android Open Source Project
------
+androidx.test.services:storage 1.4.2
+Copyright (C) The Android Open Source Project
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
 androidx.test.uiautomator:uiautomator 2.2.0
 The Android Open Source Project
------
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
-androidx.test:annotation 1.0.0
-Copyright (C) 2021 The Android Open Source Project
------
+androidx.test:annotation 1.0.1
+Copyright (C) 2015 The Android Open Source Project
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
-androidx.test:core 1.4.0
-The Android Open Source Project
------
+androidx.test:core 1.5.0
+Copyright (C) The Android Open Source Project
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
-androidx.test:monitor 1.5.0
-Copyright (C) 2017 The Android Open Source Project
------
+androidx.test:monitor 1.6.1
+Copyright (C) The Android Open Source Project
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
-androidx.test:rules 1.4.0
-The Android Open Source Project
------
+androidx.test:rules 1.5.0
+Copyright (C) The Android Open Source Project
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
-androidx.test:runner 1.4.0
-The Android Open Source Project
------
+androidx.test:runner 1.5.2
+Copyright (C) The Android Open Source Project
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
 androidx.tracing:tracing 1.0.0
 Copyright (C) The Android Open Source Project
------
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
 androidx.transition:transition 1.2.0
 https://developer.android.com/jetpack/androidx/migrate/artifact-mappings
------
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
 androidx.vectordrawable:vectordrawable 1.1.0
 The Android Open Source Project
------
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
 androidx.vectordrawable:vectordrawable-animated 1.1.0
 The Android Open Source Project
------
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
 androidx.versionedparcelable:versionedparcelable 1.1.1
 The Android Open Source Project
------
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
 androidx.viewpager2:viewpager2 1.0.0
 https://developer.android.com/jetpack/androidx/releases/viewpager2
------
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
 androidx.viewpager:viewpager 1.0.0
 The Android Open Source Project
------
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
 com.google.android.apps.common.testing.accessibility.framework:accessibility-test-framework 4.0.0
 Copyright (C) 2017 Google Inc.
------
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
-com.google.android.material:material 1.3.0
+com.google.android.material:material 1.4.0
 The Android Open Source Project
------
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
 com.google.auto.value:auto-value-annotations 1.8.1
 Copyright 2012 Google LLC
------
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
 com.google.code.findbugs:jsr305 3.0.2
 https://repo1.maven.org/maven2/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar
------
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
 com.google.code.gson:gson 2.9.1
 Copyright 2008-2011 Google Inc.
------
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
 com.google.errorprone:error_prone_annotations 2.14.0
 Copyright 2015 The Error Prone Authors.
------
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
 com.google.guava:failureaccess 1.0.1
 Copyright (C) 2018 The Guava Authors
------
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
 com.google.guava:guava 31.0.1-android
 Copyright (C) 2010 The Guava Authors
------
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
 com.google.guava:listenablefuture 9999.0-empty-to-avoid-conflict-with-guava
 Copyright (C) 2009 The Guava Authors
------
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
 com.google.j2objc:j2objc-annotations 1.3
 
------
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
 com.google.truth:truth 1.1.3
 Copyright (c) 2014 Google, Inc.
------
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
 com.squareup:javawriter 2.1.1
 Copyright 2013 Square, Inc.
------
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
-io.github.kakaocup:kakao 3.1.0
+io.github.kakaocup:kakao 3.2.3
 https://github.com/KakaoCup/Kakao
------
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
 javax.inject:javax.inject 1
 Copyright (C) 2009 The JSR-330 Expert Group
------
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
-org.ccil.cowan.tagsoup:tagsoup 1.2
-http://vrici.lojban.org/~cowan/tagsoup/
------
+org.ccil.cowan.tagsoup:tagsoup 1.2.1
+Copyright 2002-2008 by John Cowan
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
-org.jetbrains.kotlin:kotlin-stdlib 1.7.10
- * Copyright 2010-2020 JetBrains s.r.o. and Kotlin Programming Language contributors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
------
+org.jetbrains.kotlin:kotlin-stdlib 1.7.21
+Copyright 2010-2020 JetBrains s.r.o. and Kotlin Programming Language contributors
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
-The following modules contain third-party code and are incorporated into the Kotlin compiler and/or the Kotlin IntelliJ IDEA plugin:
+-----------------------------------------------------------------------
+The Apache 2 license applies to all code in this repository which is copyright
+by JetBrains. The following sections of the repository contain third-party code, to which different licenses
+may apply:
 
-Path: libraries/stdlib/src/kotlin/collections
+## Kotlin Compiler
 
-License: Apache 2 (license/third_party/gwt_license.txt)
-Origin: Derived from GWT, (C) 2007-08 Google Inc.
+The following modules contain third-party code and are incorporated into the Kotlin compiler and/or
+the Kotlin IntelliJ IDEA plugin:
 
-Path: libraries/stdlib/unsigned/src/kotlin/UnsignedUtils.kt
+ - Path: libraries/stdlib/src/kotlin/collections
+      - License: Apache 2 ([license/third_party/gwt_license.txt][gwt])
+      - Origin: Derived from GWT, (C) 2007-08 Google Inc.
 
-License: Apache 2 (license/third_party/guava_license.txt)
-Origin: Derived from Guava's UnsignedLongs, (C) 2011 The Guava Authors
+ - Path: libraries/stdlib/unsigned/src/kotlin/UnsignedUtils.kt
+      - License: Apache 2 ([license/third_party/guava_license.txt][guava])
+      - Origin: Derived from Guava's UnsignedLongs, (C) 2011 The Guava Authors
 
-Path: libraries/stdlib/jvm/src/kotlin/util/MathJVM.kt
+ - Path: libraries/stdlib/jvm/src/kotlin/util/MathJVM.kt
+      - License: Boost Software License 1.0 ([license/third_party/boost_LICENSE.txt][boost])
+      - Origin: Derived from boost special math functions, Copyright Eric Ford & Hubert Holin 2001.
 
-License: Boost Software License 1.0 (license/third_party/boost_LICENSE.txt)
-Origin: Derived from boost special math functions, Copyright Eric Ford & Hubert Holin 2001.
+ - Path: libraries/stdlib/js/src/kotlin/collections
+      - License: Apache 2 ([license/third_party/gwt_license.txt][gwt])
+      - Origin: Derived from GWT, (C) 2007-08 Google Inc.
 
-Path: libraries/stdlib/js/src/kotlin/collections
+ - Path: libraries/stdlib/native-wasm/src/kotlin/collections
+      - License: Apache 2 ([license/third_party/gwt_license.txt][gwt])
+      - Origin: Derived from GWT, (C) 2007-08 Google Inc.
 
-License: Apache 2 (license/third_party/gwt_license.txt)
-Origin: Derived from GWT, (C) 2007-08 Google Inc.
+ - Path: libraries/stdlib/js-v1/src/js/long.js
+      - License: Apache 2 ([license/third_party/closure-compiler_LICENSE.txt][closure-compiler])
+      - Origin: Google Closure Library, Copyright 2009 The Closure Library Authors
 
-Path: libraries/stdlib/native-wasm/src/kotlin/collections
+ - Path: libraries/stdlib/js-v1/src/js/polyfills.js
+      - License: Boost Software License 1.0 ([license/third_party/boost_LICENSE.txt][boost])
+      - Origin: Derived from boost special math functions, Copyright Eric Ford & Hubert Holin 2001.
 
-License: Apache 2 (license/third_party/gwt_license.txt)
-Origin: Derived from GWT, (C) 2007-08 Google Inc.
+ - Path: libraries/stdlib/js/src/kotlin/js/math.polyfills.kt
+      - License: Boost Software License 1.0 ([license/third_party/boost_LICENSE.txt][boost])
+      - Origin: Derived from boost special math functions, Copyright Eric Ford & Hubert Holin 2001.
 
-Path: libraries/stdlib/js-v1/src/js/long.js
+ - Path: libraries/stdlib/wasm/internal/kotlin/wasm/internal/Number2String.kt
+      - License: Apache 2 ([third_party/assemblyscript_license.txt][assemblyscript])
+      - Origin: Derived from assemblyscript standard library
 
-License: Apache 2 (license/third_party/closure-compiler_LICENSE.txt)
-Origin: Google Closure Library, Copyright 2009 The Closure Library Authors
+ - Path: libraries/stdlib/wasm/src/kotlin/text/FloatingPointConverter.kt
+   - License: MIT ([license/third_party/asmble_license.txt][asmble])
+   - Origin: Copyright (C) 2018 Chad Retz
 
-Path: libraries/stdlib/js-v1/src/js/polyfills.js
+ - Path: libraries/stdlib/wasm/src/kotlin/math/fdlibm/
+   - License: SUN ([license/third_party/sun_license.txt][sun])
+   - Origin: Copyright (C) 1993 by Sun Microsystems, Inc.
 
-License: Boost Software License 1.0 (license/third_party/boost_LICENSE.txt)
-Origin: Derived from boost special math functions, Copyright Eric Ford & Hubert Holin 2001.
+Boost Software License - Version 1.0 - August 17th, 2003
 
-Path: libraries/stdlib/js/src/kotlin/js/math.polyfills.kt
+Permission is hereby granted, free of charge, to any person or organization
+obtaining a copy of the software and accompanying documentation covered by
+this license (the "Software") to use, reproduce, display, distribute,
+execute, and transmit the Software, and to prepare derivative works of the
+Software, and to permit third-parties to whom the Software is furnished to
+do so, all subject to the following:
 
-License: Boost Software License 1.0 (license/third_party/boost_LICENSE.txt)
-Origin: Derived from boost special math functions, Copyright Eric Ford & Hubert Holin 2001.
+The copyright notices in the Software and this entire statement, including
+the above license grant, this restriction and the following disclaimer,
+must be included in all copies of the Software, in whole or in part, and
+all derivative works of the Software, unless such copies or derivative
+works are solely in the form of machine-executable object code generated by
+a source language processor.
 
-Path: libraries/stdlib/wasm/internal/kotlin/wasm/internal/Number2String.kt
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE, TITLE AND NON-INFRINGEMENT. IN NO EVENT
+SHALL THE COPYRIGHT HOLDERS OR ANYONE DISTRIBUTING THE SOFTWARE BE LIABLE
+FOR ANY DAMAGES OR OTHER LIABILITY, WHETHER IN CONTRACT, TORT OR OTHERWISE,
+ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+DEALINGS IN THE SOFTWARE.
 
-License: Apache 2 (third_party/assemblyscript_license.txt)
-Origin: Derived from assemblyscript standard library
+MIT License
 
-Path: libraries/stdlib/wasm/src/kotlin/text/FloatingPointConverter.kt
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-License: MIT ([license/third_party/asmble_license.txt][asmble])
-Origin: Copyright (C) 2018 Chad Retz
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-Path: libraries/stdlib/wasm/src/kotlin/math/fdlibm/
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 
-License: SUN ([license/third_party/sun_license.txt][sun])
-Origin: Copyright (C) 1993 by Sun Microsystems, Inc.
+Sun License
 
-org.jetbrains.kotlin:kotlin-stdlib-common 1.7.10
-Copyright 2010-2022 JetBrains s.r.o. and Kotlin Programming Language contributors.
------
+Developed at SunSoft, a Sun Microsystems, Inc. business.
+Permission to use, copy, modify, and distribute this
+software is freely granted, provided that this notice 
+is preserved.
+
+org.jetbrains.kotlin:kotlin-stdlib-common 1.7.21
+Copyright 2010-2020 JetBrains s.r.o. and Kotlin Programming Language contributors
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
 org.jetbrains:annotations 13.0
@@ -578,9 +613,9 @@ Copyright 2000-2016 JetBrains s.r.o.
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
------
+-----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
------
+-----------------------------------------------------------------------
 
 
 Apache License
@@ -612,52 +647,53 @@ TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
 9. Accepting Warranty or Additional Liability. While redistributing the Work or Derivative Works thereof, You may choose to offer, and charge a fee for, acceptance of support, warranty, indemnity, or other liability obligations and/or rights consistent with this License. However, in accepting such obligations, You may act only on Your own behalf and on Your sole responsibility, not on behalf of any other Contributor, and only if You agree to indemnify, defend, and hold each Contributor harmless for any liability incurred by, or claims asserted against, such Contributor by reason of your accepting any such warranty or additional liability.
 END OF TERMS AND CONDITIONS
 
+
 com.google.protobuf:protobuf-javalite 3.19.1
 Copyright 2008 Google Inc.  All rights reserved.
------
+-----------------------------------------------------------------------
 Distributed under the terms of the BSD License (three-clause)
------
+-----------------------------------------------------------------------
 
 
 org.hamcrest:hamcrest 2.2
 Copyright (c) 2000-2015 www.hamcrest.org
 All rights reserved.
------
+-----------------------------------------------------------------------
 Distributed under the terms of the BSD License (three-clause)
------
+-----------------------------------------------------------------------
 
 
 org.hamcrest:hamcrest-core 2.2
 Copyright (c) 2000-2015 www.hamcrest.org
 All rights reserved.
 
------
+-----------------------------------------------------------------------
 Distributed under the terms of the BSD License (three-clause)
------
+-----------------------------------------------------------------------
 
 
 org.hamcrest:hamcrest-integration 1.3
 Copyright (c) 2000-2006, www.hamcrest.org
 All rights reserved.
------
+-----------------------------------------------------------------------
 Distributed under the terms of the BSD License (three-clause)
------
+-----------------------------------------------------------------------
 
 
 org.hamcrest:hamcrest-library 2.2
 Copyright (c) 2000-2015 www.hamcrest.org
 All rights reserved.
------
+-----------------------------------------------------------------------
 Distributed under the terms of the BSD License (three-clause)
------
+-----------------------------------------------------------------------
 
 
 org.ow2.asm:asm 9.1
 Copyright (c) 2000-2011 INRIA, France Telecom
 All rights reserved.
------
+-----------------------------------------------------------------------
 Distributed under the terms of the BSD License (three-clause)
------
+-----------------------------------------------------------------------
 
 
 ==
@@ -669,9 +705,10 @@ Redistribution and use in source and binary forms, with or without modification,
 3. Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+
 junit:junit 4.13.2
 Copyright (C) The JUnit Team
------
+-----------------------------------------------------------------------
 THE ACCOMPANYING PROGRAM IS PROVIDED UNDER THE TERMS OF THIS ECLIPSE PUBLIC LICENSE ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THE PROGRAM CONSTITUTES RECIPIENT'S ACCEPTANCE OF THIS AGREEMENT.
 1. DEFINITIONS
 "Contribution" means:
@@ -715,15 +752,15 @@ If Recipient institutes patent litigation against any entity (including a cross-
 All Recipient's rights under this Agreement shall terminate if it fails to comply with any of the material terms or conditions of this Agreement and does not cure such failure in a reasonable period of time after becoming aware of such noncompliance. If all Recipient's rights under this Agreement terminate, Recipient agrees to cease use and distribution of the Program as soon as reasonably practicable. However, Recipient's obligations under this Agreement and any licenses granted by Recipient relating to the Program shall continue and survive.
 Everyone is permitted to copy and distribute copies of this Agreement, but in order to avoid inconsistency the Agreement is copyrighted and may only be modified in the following manner. The Agreement Steward reserves the right to publish new versions (including revisions) of this Agreement from time to time. No one other than the Agreement Steward has the right to modify this Agreement. The Eclipse Foundation is the initial Agreement Steward. The Eclipse Foundation may assign the responsibility to serve as the Agreement Steward to a suitable separate entity. Each new version of the Agreement will be given a distinguishing version number. The Program (including Contributions) may always be distributed subject to the version of the Agreement under which it was received. In addition, after a new version of the Agreement is published, Contributor may elect to distribute the Program (including its Contributions) under the new version. Except as expressly stated in Sections 2(a) and 2(b) above, Recipient receives no rights or licenses to the intellectual property of any Contributor under this Agreement, whether expressly, by implication, estoppel or otherwise. All rights in the Program not expressly granted under this Agreement are reserved.
 This Agreement is governed by the laws of the State of New York and the intellectual property laws of the United States of America. No party to this Agreement will bring a legal action under this Agreement more than one year after the cause of action arose. Each party waives its rights to a jury trial in any resulting litigation.
------
+-----------------------------------------------------------------------
 
 
 org.checkerframework.checker.nullness.qual 2.5.5
 Checker Framework qualifiers
 Copyright 2004-present by the Checker Framework developers
------
+-----------------------------------------------------------------------
 Distributed under the terms of the MIT License
------
+-----------------------------------------------------------------------
 The annotations are licensed under the MIT License. More specifically, all the parts of the Checker
    Framework that you might want to include with your own program use the
    MIT License.  This is the checker-qual.jar file and all the files that
@@ -756,16 +793,16 @@ the same license as the unannotated version of the library.
 org.checkerframework:checker-qual 3.22.1
 Checker Framework qualifiers
 Copyright 2004-present by the Checker Framework developers
------
+-----------------------------------------------------------------------
 Distributed under the terms of the MIT License
------
+-----------------------------------------------------------------------
 
 
 org.jsoup:jsoup 1.15.1
 Copyright (c) 2009-2022 Jonathan Hedley <https://jsoup.org/>
------
+-----------------------------------------------------------------------
 Distributed under the terms of the MIT License
------
+-----------------------------------------------------------------------
 
 
 ==

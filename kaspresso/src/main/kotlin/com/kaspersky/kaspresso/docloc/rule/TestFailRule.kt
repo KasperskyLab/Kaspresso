@@ -7,6 +7,16 @@ import org.junit.runner.Description
 /**
  * The test rule to capture a screenshot in case of unexpected docloc screenshot test failure.
  */
+@Deprecated(
+    "Current implementation isn't suited for doc loc tests error capturing because it's triggered after test is finished. It leads to capturing screenshots of home screen",
+    replaceWith = ReplaceWith(
+        """
+    Kaspresso.Builder.simple().apply {
+        testRunWatcherInterceptors.add(TestRunnerScreenshotWatcherInterceptor(screenshots))
+    }
+"""
+    )
+)
 class TestFailRule internal constructor() : TestWatcher() {
 
     internal lateinit var screenshotCapturer: DocLocScreenshotCapturer

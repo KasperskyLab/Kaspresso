@@ -1,0 +1,197 @@
+site_name: "Kaspresso"
+repo_url: https://github.com/KasperskyLab/Kaspresso
+repo_name: Kaspresso
+edit_uri: tree/main/docs/content
+docs_dir: 'docs'
+remote_branch: gh-pages
+language: en
+
+theme:
+  favicon: kaspresso.png
+  logo: kaspresso.png
+  icon:
+    logo: fontawesome/brands/android
+
+  palette:
+    - scheme: default
+      primary: teal
+      accent: light blue
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to dark mode
+    - scheme: slate
+      primary: black
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode
+
+
+  name: 'material'
+  #  custom_dir: ../mkdocs-material/material
+
+  # 404 page
+  static_templates:
+    - ../mkdocs-material/material/404.html
+
+  # Necessary for search to work properly
+  include_search_page: false
+  search_index_only: true
+
+  # Default values, taken from mkdocs_theme.yml
+  language: ru
+  font:
+    text: Roboto
+    code: Roboto Mono
+  # favicon: assets/favicon.png
+
+  features:
+    - tabs
+    - navigation.tabs
+    - content.code.annotate
+    - navigation.tabs.sticky
+    - navigation.instant
+    - navigation.tracking
+    - navigation.top
+    - search.suggest
+    - search.highlight
+
+plugins:
+  - i18n:
+      default_language: en
+      docs_structure: suffix
+      languages:
+        ru:
+          name: Russian
+          build: true
+        en:
+          name: English
+          build: true
+      nav_translations:
+        en:
+          Home: Home
+          About Kaspresso: About Kaspresso
+          Kaspresso in articles: Kaspresso in articles
+          Kaspresso in videos: Kaspresso in videos
+          Our users: Our users
+          Breaking changes: Breaking changes
+          Contribution guide: Contribution guide
+          Tutorial: Tutorial
+          1. Введение: 1. Introduction
+          2. Скачиваем проект и Android studio: 2. Download Kaspresso project and Android studio
+          3. Writing your first Kaspresso test: 3. Writing your first Kaspresso test
+          4. Working with adb: 4. Working with adb
+          5. Wifi_sample_test: 5. Testing the Internet connection and working with the Device class
+          6. Steps and sections: 6. Steps and sections
+          7. Reduce duplicate steps the Scenario: 7. Reduce duplicate steps the Scenario
+          8. UiAutomator. Тестирование за рамками приложения: 8. Kautomator. Third Party Application Testing
+          9. flakySafely: 9. flakySafely
+          10. Работа с Android permissions: 10. Working with Android permissions
+          11. RecyclerView: 11. RecyclerView. Testing list of elements
+          12. Логирование и скриншоты: 12. Logger and screenshots
+          Wiki: Wiki
+          Introduction: Introduction
+          PageObject in Kaspresso: PageObject in Kaspresso
+          Espresso as the basis: Espresso as the basis
+          Supported Android UI-elements: Supported Android UI-elements
+          View matchers, actions and assertions: View matchers, actions and assertions
+          Kautomator. Wrapper over UI Automator: Kautomator. Wrapper over UI Automator
+          Working with Android OS. Class Device: Working with Android OS
+          Executing adb commands: Executing adb commands
+          Screenshot tests: Screenshot tests
+          Kaspresso configuration: Kaspresso configuration
+          Kaspresso with Robolectric: Kaspresso with Robolectric
+          Kaspresso with Allure: Kaspresso with Allure
+          Jetpack Compose in Kaspresso: Compose support in Kaspresso
+          Issues: Issues
+          Found an issue?: Found an issue?
+          Storage issues: Storage issues
+        ru:
+          Home: Главная
+          About Kaspresso: О Kaspresso
+          Kaspresso in articles: Kaspresso в статьях
+          Kaspresso in videos: Kaspresso в видео
+          Our users: Наши пользователи
+          Breaking changes: Критические изменения
+          Contribution guide: Инструкция для разработчиков
+          Tutorial: Туториал
+          1. Введение: 1. Введение
+          2. Скачиваем проект и Android studio: 2. Скачиваем проект и Android studio
+          3. Writing your first Kaspresso test: 3. Пишем первый автотест с Kaspresso
+          4. Working with adb: 4. Выполнение adb-команд
+          5. Wifi_sample_test: 5. Тестирование интернет-соединения и работа с классом Device
+          6. Steps and sections: 6. Steps and sections
+          7. Reduce duplicate steps the Scenario: 7. Вынесение дублирующихся шагов в Scenario
+          8. UiAutomator. Тестирование за рамками приложения: 8. UiAutomator. Тестирование за рамками приложения
+          9. flakySafely: 9. flakySafely
+          10. Работа с Android permissions: 10. Работа с Android permissions
+          11. RecyclerView: 11. RecyclerView
+          12. Логирование и скриншоты: 12. Логирование и скриншоты
+          Wiki: Вики
+          Introduction: Введение
+          PageObject in Kaspresso: Паттерн PageObject в Kaspresso
+          Espresso as the basis: Espresso как основа
+          Supported Android UI-elements: Поддерживаемые UI-виджеты Android
+          View matchers, actions and assertions: Доступные классы Matcher, Action и Assertion
+          Kautomator. Wrapper over UI Automator: Kautomator. Обертка над UI Automator
+          Working with Android OS. Class Device: Взаимодействие с ОС Android. Класс Device
+          Executing adb commands: Выполнение команд adb
+          Screenshot tests: Скриншот тесты
+          Kaspresso configuration: Конфигуратор Kaspresso
+          Kaspresso with Robolectric: Запуск тестов Kaspresso на JVM с помощью Robolectric
+          Kaspresso with Allure: Поддержка Allure в Kaspresso
+          Jetpack Compose in Kaspresso: Поддержка Compose в Kaspresso
+          Issues: Известные проблемы
+          Found an issue?: Нашли проблему?
+          Storage issues: Работа с файлами
+nav:
+  - Home:
+      - About Kaspresso: index.md
+      - Kaspresso in articles: Home/Kaspresso-in-articles.md
+      - Kaspresso in videos: Home/Kaspresso-in-videos.md
+      - Our users: Home/Kaspresso users.md
+      - Breaking changes: Home/Breaking-changes.md
+      - Contribution guide: Home/Contribution_guide.md
+  - Tutorial:
+      - 1. Введение: Tutorial/index.md
+      - 2. Скачиваем проект и Android studio: Tutorial/Download_Kaspresso_project_and_Android_studio.md
+      - 3. Writing your first Kaspresso test: Tutorial/Writing_simple_test.md
+      - 4. Working with adb: Tutorial/Working_with_adb.md
+      - 5. Wifi_sample_test: Tutorial/Wifi_sample_test.md
+      - 6. Steps and sections: Tutorial/Steps_and_sections.md
+      - 7. Reduce duplicate steps the Scenario: Tutorial/Scenario.md
+      - 8. UiAutomator. Тестирование за рамками приложения: Tutorial/UiAutomator.md
+      - 9. flakySafely: Tutorial/FlakySafely.md
+      - 10. Работа с Android permissions: Tutorial/Android_permissions.md
+      - 11. RecyclerView: Tutorial/Recyclerview.md
+      - 12. Логирование и скриншоты: Tutorial/Logger_and_screenshots.md
+  - Wiki:
+      - Introduction: Wiki/index.md
+      - PageObject in Kaspresso: Wiki/Page_object_in_Kaspresso.md
+      - Espresso as the basis: Wiki/Espresso_as_the_basis.md
+      - Supported Android UI-elements: Wiki/Supported_Android_UI_elements.md
+      - View matchers, actions and assertions: Wiki/Matchers_actions_assertions.md
+      - Kautomator. Wrapper over UI Automator: Wiki/Kautomator-wrapper_over_UI_Automator.md
+      - Working with Android OS. Class Device: Wiki/Working_with_Android_OS.md
+      - Executing adb commands: Wiki/Executing_adb_commands.md
+      - Screenshot tests: Wiki/Screenshot_tests.md
+      - Kaspresso configuration: Wiki/Kaspresso_configuration.md
+      - Kaspresso with Robolectric: Wiki/Kaspresso_Robolectric.md
+      - Kaspresso with Allure: Wiki/Kaspresso_Allure.md
+      - Jetpack Compose in Kaspresso: Wiki/Jetpack_Compose.md
+  - Issues:
+      - Found an issue?: Issues/index.md
+      - Storage issues: Issues/Storage_issue.md
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+
+extra:
+  alternate:
+    - name: English
+      link: /Kaspresso/en/
+      lang: en
+    - name: Русский
+      link: /Kaspresso/ru/
+      lang: ru

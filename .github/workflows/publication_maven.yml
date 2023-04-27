@@ -1,11 +1,23 @@
 name: Publication to MavenCentral
 
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      releaseType:
+        description: 'Release type'
+        required: true
+        type: choice
+        options:
+          - SonatypeReleases
+          - SonatypeSnapshots
+      version:
+        description: 'Version (for example 1.4.2-SNAPSHOT)'
+        required: true
+        type: string
 
 jobs:
   publication:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/master'
     steps:
       - uses: actions/checkout@v2
       - uses: actions/cache@v1
@@ -27,14 +39,14 @@ jobs:
         env:
           OSSRH_USER: ${{ secrets.ossrh_user }}
           OSSRH_PASSWORD: ${{ secrets.ossrh_password }}
-          OSSRH_STAGING_PROFILE_ID: ${{ secrets.ossrh_staging_profile_id }}
           PGP_KEYID: ${{ secrets.pgp_keyid }}
           PGP_KEY: ${{ secrets.pgp_key }}
           PGP_PASSWORD: ${{ secrets.pgp_password }}
         run: >
-          ./gradlew publishRelease -Pkaspresso.ossrh.user=${OSSRH_USER}
+          ./gradlew publishAllPublicationsTo${{ inputs.releaseType }}Repository
+          -Pkaspresso.version=${{ inputs.version }}
+          -Pkaspresso.ossrh.user=${OSSRH_USER}
           -Pkaspresso.ossrh.password=${OSSRH_PASSWORD}
-          -Pkaspresso.ossrh.stagingProfileId=${OSSRH_STAGING_PROFILE_ID}
           -Pkaspresso.pgp.keyid=${PGP_KEYID}
           -Pkaspresso.pgp.key=${PGP_KEY}
           -Pkaspresso.pgp.password=${PGP_PASSWORD}

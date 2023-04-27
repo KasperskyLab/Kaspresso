@@ -1,7 +1,7 @@
 package com.kaspersky.kaspressample.device_tests
 
-import androidx.test.ext.junit.rules.activityScenarioRule
 import android.os.Build
+import androidx.test.ext.junit.rules.activityScenarioRule
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspresso.device.logcat.LogcatBufferSize
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
@@ -18,6 +18,11 @@ class DeviceLogcatSampleTest : TestCase() {
 
     @Test
     fun logcatTest() {
+        Assume.assumeTrue(
+            "Logcat can't connect to 'default' buffer on API < 24",
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.N
+        )
+
         Assume.assumeTrue(
             "Due to Android 8 bug 'logcat -c' fails. To run this test please use another device",
             Build.VERSION.SDK_INT != Build.VERSION_CODES.O

@@ -76,9 +76,11 @@ class UpgradeTestSample : TestCase() {
             }
 
             step("Click on upgrade scenario button") {
-                MainScreen {
-                    upgradeButton {
-                        click()
+                flakySafely(timeoutMs = 60_000) {
+                    MainScreen {
+                        upgradeButton {
+                            click()
+                        }
                     }
                 }
             }

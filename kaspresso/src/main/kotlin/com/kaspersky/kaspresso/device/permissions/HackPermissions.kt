@@ -10,4 +10,6 @@ interface HackPermissions {
      */
     @Deprecated("Private API usage is forbidden when targeting API 30 and above")
     fun grant(packageName: String, permission: String): Boolean
+
+    fun grantThroughAdb(packageName: String, permission: String)
 }

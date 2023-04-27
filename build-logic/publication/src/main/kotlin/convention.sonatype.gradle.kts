@@ -1,69 +1,31 @@
-import com.kaspersky.kaspresso.publication.CreateStagingRepositoryTask
-
 plugins {
-    id("convention.publication-base")
+    `maven-publish`
     signing
 }
 
-val ossrhUsername: Provider<String> = providers.gradleProperty("kaspresso.ossrh.user")
-    .forUseAtConfigurationTime()
+val ossrhUsername = findProperty("kaspresso.ossrh.user")?.toString()
+val ossrhPassword = findProperty("kaspresso.ossrh.password")?.toString()
 
-val ossrhPassword: Provider<String> = providers.gradleProperty("kaspresso.ossrh.password")
-    .forUseAtConfigurationTime()
-
-val ossrhStagingProfileId: Provider<String> = providers.gradleProperty("kaspresso.ossrh.stagingProfileId")
-    .forUseAtConfigurationTime()
-
-val sonatypeRepoName = "SonatypeReleases"
-
-val repositoryUrlOutputFilePath: Provider<RegularFile> = rootProject.layout.buildDirectory.file("sonatype-repo.id")
-
-val createStagingRepositoryTask: TaskProvider<CreateStagingRepositoryTask> = with(rootProject.tasks) {
-    val createStagingTaskName = "createSonatypeStagingRepository"
-
-    try {
-        @Suppress("UNCHECKED_CAST")
-        named(createStagingTaskName) as TaskProvider<CreateStagingRepositoryTask>
-    } catch (e: UnknownTaskException) {
-        register<CreateStagingRepositoryTask>(createStagingTaskName) {
-            group = "publication"
-
-            stagingProfileId.set(ossrhStagingProfileId)
-            user.set(ossrhUsername)
-            password.set(ossrhPassword)
-            repositoryDescription.set("Release v.$version")
-            repositoryIdFile.set(repositoryUrlOutputFilePath)
-        }
-    }
-}
-
-tasks.withType<PublishToMavenRepository>().configureEach {
-
-    // https://docs.gradle.org/current/userguide/publishing_customization.html#sec:configuring_publishing_tasks
-    if (name.contains(sonatypeRepoName)) {
-        doFirst {
-
-            // no direct task access, because "cannot be cast to class CreateStagingRepositoryTask" for some reason
-            val repositoryUrl = repositoryUrlOutputFilePath.get().asFile.readText()
-            repository = repository.apply { setUrl(repositoryUrl) }
-        }
-        dependsOn(createStagingRepositoryTask)
-    }
-}
-
-val publishTask = tasks.register<Task>("publishToSonatype") {
-    group = "publication"
-
-    dependsOn(tasks.named("publishAllPublicationsTo${sonatypeRepoName}Repository"))
-}
+val sonatypeReleasesRepoName = "SonatypeReleases"
+val sonatypeSnapshotsRepoName = "SonatypeSnapshots"
 
 publishing {
     repositories {
         maven {
-            name = sonatypeRepoName
+            name = sonatypeReleasesRepoName
+            setUrl("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
             credentials {
-                username = ossrhUsername.orNull
-                password = ossrhPassword.orNull
+                username = ossrhUsername
+                password = ossrhPassword
+            }
+        }
+
+        maven {
+            name = sonatypeSnapshotsRepoName
+            setUrl("https://s01.oss.sonatype.org/content/repositories/snapshots/")
+            credentials {
+                username = ossrhUsername
+                password = ossrhPassword
             }
         }
     }
@@ -72,23 +34,17 @@ publishing {
 signing {
     sign(publishing.publications)
 
-    val signingKeyId = providers.gradleProperty("kaspresso.pgp.keyid")
-        .forUseAtConfigurationTime()
-        .orNull
-    val signingKey = providers.gradleProperty("kaspresso.pgp.key")
-        .forUseAtConfigurationTime()
-        .orNull
-    val signingPassword = providers.gradleProperty("kaspresso.pgp.password")
-        .forUseAtConfigurationTime()
-        .orNull
+    val signingKeyId = findProperty("kaspresso.pgp.keyid")?.toString()
+    val signingKey = findProperty("kaspresso.pgp.key")?.toString()
+    val signingPassword = findProperty("kaspresso.pgp.password")?.toString()
 
     useInMemoryPgpKeys(signingKeyId, signingKey, signingPassword)
 }
 
 tasks.withType<Sign>().configureEach {
     onlyIf {
-        gradle.taskGraph.hasTask(publishTask.get())
+        val isReleaseQueued = gradle.taskGraph.hasTask("publishAllPublicationsTo${sonatypeReleasesRepoName}Repository")
+        val isSnapshotQueued = gradle.taskGraph.hasTask("publishAllPublicationsTo${sonatypeSnapshotsRepoName}Repository")
+        isReleaseQueued || isSnapshotQueued
     }
 }
-
-fun String?.toFile() = if (this.isNullOrBlank()) null else File(this)
