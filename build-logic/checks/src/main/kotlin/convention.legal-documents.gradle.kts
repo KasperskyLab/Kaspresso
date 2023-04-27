@@ -9,8 +9,8 @@ tasks.register("checkLegalDocuments") {
         "Legal document doesn't contain module name (${project.name}). Document path: $file"
     }
 
-    val kaspressoVersion = project.property("kaspresso.snapshotVersion")
-    require(firstLine.contains("$kaspressoVersion")) {
+    val kaspressoVersion = project.property("kaspresso.snapshotVersion").toString().split("-SNAPSHOT").first()
+    require(firstLine.contains(kaspressoVersion)) {
         "Failed to check whether the existing NOTICE.txt was made for the current release ($kaspressoVersion)"
     }
 
