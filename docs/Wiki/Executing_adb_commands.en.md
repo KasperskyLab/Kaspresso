@@ -65,7 +65,8 @@ Flags:
 - `e`, `--emulators` - the list of emulators that can be captured by `adbserver-desktop.jar` (by default, `adbserver-desktop.jar` captures all available emulators)
 - `p`, `--port` - the adb server port number (the default value is 5037)
 - `l`, `--logs` - what type of logs show (the default value is INFO).
-  For more information, you can run `java -jar adbserver-desktop.jar --help`
+- `a`, `--adb_path` - path to custom adb instance (by default, `adbserver-desktop.jar` uses `adb` from environment).
+For more information, you can run `java -jar adbserver-desktop.jar --help`
 
 Consider available types of logs:
 1. ERROR <br>

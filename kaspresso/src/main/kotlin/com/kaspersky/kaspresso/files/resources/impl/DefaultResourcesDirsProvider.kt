@@ -1,8 +1,8 @@
 package com.kaspersky.kaspresso.files.resources.impl
 
 import com.kaspersky.kaspresso.files.dirs.DirsProvider
-import com.kaspersky.kaspresso.files.models.TestMethod
 import com.kaspersky.kaspresso.files.extensions.findTestMethod
+import com.kaspersky.kaspresso.files.models.TestMethod
 import com.kaspersky.kaspresso.files.resources.ResourcesDirNameProvider
 import com.kaspersky.kaspresso.files.resources.ResourcesDirsProvider
 import java.io.File

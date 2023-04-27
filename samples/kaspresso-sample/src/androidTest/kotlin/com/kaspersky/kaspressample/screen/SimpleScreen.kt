@@ -1,10 +1,10 @@
 package com.kaspersky.kaspressample.screen
 
-import io.github.kakaocup.kakao.edit.KEditText
-import io.github.kakaocup.kakao.text.KButton
 import com.kaspersky.kaspressample.R
 import com.kaspersky.kaspressample.simple.SimpleActivity
 import com.kaspersky.kaspresso.screens.KScreen
+import io.github.kakaocup.kakao.edit.KEditText
+import io.github.kakaocup.kakao.text.KButton
 
 object SimpleScreen : KScreen<SimpleScreen>() {
 
