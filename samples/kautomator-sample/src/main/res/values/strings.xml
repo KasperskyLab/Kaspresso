@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">sample_uiautomator_dsl</string>
     <string name="main_activity_text">Sample of UiAutomator dsl</string>
+    <string name="main_activity_text_start">Kaspresso is</string>
+    <string name="main_activity_text_end"> super useful</string>
+    <string name="main_activity_image_description">What are you looking at?</string>
     <string name="simple_button">Button</string>
     <string name="simple_checkbox">CheckBox</string>
 
