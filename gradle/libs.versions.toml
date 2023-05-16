@@ -29,7 +29,7 @@ detektCli = { module = "io.gitlab.arturbosch.detekt:detekt-cli", version.ref = "
 detektFormatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
 
 androidXCore = "androidx.core:core:1.9.0"
-appcompat = "androidx.appcompat:appcompat:1.5.1"
+appcompat = "androidx.appcompat:appcompat:1.6.0"
 material = "com.google.android.material:material:1.6.1"
 constraint = "androidx.constraintlayout:constraintlayout:2.1.4"
 multidex = "androidx.multidex:multidex:2.0.1"
