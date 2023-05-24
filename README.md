@@ -360,5 +360,8 @@ Kaspresso is available under the [Apache License, Version 2.0](https://github.co
         <td>
             <a href="https://alohabrowser.com"><img src="./users/aloha.png" width="140" alt="alohabrowser.com"></a>
         </td>
+        <td>
+            <a href="https://dmtech.team"><img src="./users/dmtech.svg" width="140" alt="dmtech.team"></a>
+        </td>
     </tr>
 </table>
