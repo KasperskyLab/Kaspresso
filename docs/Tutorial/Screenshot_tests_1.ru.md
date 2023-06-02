@@ -12,6 +12,8 @@
 
 Чтобы узнать, зачем нужны скриншот-тесты, разберем небольшой пример. Представим, что наше приложение должно быть локализовано на французский язык. Для этого в проекте были добавлены переводы в файл `strings.xml` в папку `values-fr`.
 
+<img src="../images/screenshot_tests_1/french.png" alt="French resources" width="300"/>
+
 Давайте установим на устройстве французский язык
 
 <img src="../images/screenshot_tests_1/fr_locale.png" alt="Install french locale" width="300"/>
