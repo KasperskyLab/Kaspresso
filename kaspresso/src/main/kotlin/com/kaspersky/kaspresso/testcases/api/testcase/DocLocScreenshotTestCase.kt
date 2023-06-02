@@ -14,6 +14,7 @@ import com.kaspersky.kaspresso.device.screenshots.screenshotmaker.InternalScreen
 import com.kaspersky.kaspresso.docloc.DocLocScreenshotCapturer
 import com.kaspersky.kaspresso.docloc.MetadataSaver
 import com.kaspersky.kaspresso.docloc.rule.LocaleRule
+import com.kaspersky.kaspresso.docloc.rule.ThemeRule
 import com.kaspersky.kaspresso.files.dirs.DefaultDirsProvider
 import com.kaspersky.kaspresso.files.resources.ResourceFileNamesProvider
 import com.kaspersky.kaspresso.files.resources.ResourcesDirsProvider
@@ -67,6 +68,7 @@ abstract class DocLocScreenshotTestCase(
             addTimestamps = false
         ),
     private val changeSystemLocale: Boolean = false,
+    private val changeAppTheme: Boolean = false,
     private val screenshotParams: ScreenshotParams = ScreenshotParams(),
     locales: String?,
     kaspressoBuilder: Kaspresso.Builder = Kaspresso.Builder.simple().apply {
@@ -126,6 +128,12 @@ abstract class DocLocScreenshotTestCase(
         locales = locales?.let { confLocales.parseLocales(it) } ?: confLocales.getSupportedLocales(),
         changeSystemLocale = changeSystemLocale,
         device = kaspresso.device,
+        logger = kaspresso.libLogger
+    )
+
+    @get:Rule
+    val themeRule = ThemeRule(
+        changeAppTheme = changeAppTheme,
         logger = kaspresso.libLogger
     )
 
