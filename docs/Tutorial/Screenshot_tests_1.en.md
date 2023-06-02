@@ -12,11 +12,15 @@
 
 Чтобы узнать, зачем нужны скриншот-тесты, разберем небольшой пример. Представим, что наше приложение должно быть локализовано на французский язык. Для этого в проекте были добавлены переводы в файл `strings.xml` в папку `values-fr`.
 
+<img src="../images/screenshot_tests_1/french.png" alt="French resources" width="300"/>
+
 Давайте установим на устройстве французский язык
 
 <img src="../images/screenshot_tests_1/fr_locale.png" alt="Install french locale" width="300"/>
 
 и запустим LoginActivityTest.
+
+<img src="../images/screenshot_tests_1/success_tests.png" alt="Tests completed successfully" width="300"/>
 
 Тест пройден успешно, значит теоретически это приложение рабочее, и его можно раскатывать на пользователей. Но давайте откроем `LoginActivity` вручную (французский язык должен быть установлен на устройстве) и посмотрим, как выглядит этот экран.
 

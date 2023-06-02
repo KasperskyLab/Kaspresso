@@ -20,6 +20,8 @@
 
 и запустим LoginActivityTest.
 
+<img src="../images/screenshot_tests_1/success_tests.png" alt="Tests completed successfully" width="300"/>
+
 Тест пройден успешно, значит теоретически это приложение рабочее, и его можно раскатывать на пользователей. Но давайте откроем `LoginActivity` вручную (французский язык должен быть установлен на устройстве) и посмотрим, как выглядит этот экран.
 
 <img src="../images/screenshot_tests_1/todo_on_screen.png" alt="Todo instead of strings" width="300"/>
