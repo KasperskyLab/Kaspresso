@@ -17,7 +17,7 @@ class ToggleNightModeRule internal constructor(
     override fun apply(base: Statement, description: Description): Statement {
         return object : Statement() {
             override fun evaluate() {
-                logger.i("DocLoc: NightModeRule started")
+                logger.i("DocLoc: ToggleNightModeRule started")
                 try {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                     isNightMode = false
