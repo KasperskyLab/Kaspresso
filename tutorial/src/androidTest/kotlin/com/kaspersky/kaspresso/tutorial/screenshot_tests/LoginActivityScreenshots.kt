@@ -7,7 +7,7 @@ import com.kaspersky.kaspresso.tutorial.screen.LoginScreen
 import org.junit.Rule
 import org.junit.Test
 
-class LoginActivityScreenshots : DocLocScreenshotTestCase(locales = "fr,en", changeSystemLocale = true) {
+class LoginActivityScreenshots : DocLocScreenshotTestCase(locales = "en, fr", changeSystemLocale = true) {
 
     @get:Rule
     val activityRule = activityScenarioRule<LoginActivity>()
