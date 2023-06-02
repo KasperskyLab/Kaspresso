@@ -222,9 +222,9 @@ class LoginActivityScreenshots : DocLocScreenshotTestCase(locales = "en, fr") {
 
 <img src="../images/screenshot_tests_1/screenshot_test.png" alt="Screenshot test results"/>
 
-<img src="../images/screenshot_tests_1/initial_state_en.png" alt="Initial state en" width="300"/>
+<img src="../images/screenshot_tests_1/initial_en.png" alt="Initial state en" width="300"/>
 
-<img src="../images/screenshot_tests_1/initial_state_fr.png" alt="Initial state fr" width="300"/>
+<img src="../images/screenshot_tests_1/initial_fr.png" alt="Initial state fr" width="300"/>
 
 
 Теперь, просмотрев скриншоты, можно увидеть проблему в приложении, что не все строки были добавлены корректно, и разработчик может исправить ошибку, добавив необходимые значения в файл `values-fr/strings.xml`.
