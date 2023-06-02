@@ -10,7 +10,7 @@ import com.kaspersky.kaspresso.testcases.api.testcase.DocLocScreenshotTestCase
 import org.junit.Rule
 import org.junit.Test
 
-class ScreenshotDialogSampleTest : DocLocScreenshotTestCase(locales = "en,ru", changeAppTheme = true) {
+class ScreenshotDialogSampleTest : DocLocScreenshotTestCase(locales = "en,ru", toggleNightMode = true) {
 
     @get:Rule
     val runtimePermissionRule: GrantPermissionRule = GrantPermissionRule.grant(

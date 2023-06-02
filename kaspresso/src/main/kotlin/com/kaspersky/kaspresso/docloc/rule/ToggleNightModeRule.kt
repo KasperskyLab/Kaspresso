@@ -6,25 +6,30 @@ import org.junit.rules.TestRule
 import org.junit.runner.Description
 import org.junit.runners.model.Statement
 
-class ThemeRule internal constructor(
-    private val changeAppTheme: Boolean,
+class ToggleNightModeRule internal constructor(
+    private val toggleNightMode: Boolean,
     private val logger: UiTestLogger
 ) : TestRule {
 
+    var isNightMode: Boolean = false
+        private set
 
     override fun apply(base: Statement, description: Description): Statement {
         return object : Statement() {
             override fun evaluate() {
-                logger.i("DocLoc: changeAppThemeRule started")
+                logger.i("DocLoc: NightModeRule started")
                 try {
-                    if (changeAppTheme) {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                    isNightMode = false
+                    base.evaluate()
+                    if (toggleNightMode) {
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                        base.evaluate()
-                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                        isNightMode = true
                         base.evaluate()
                     }
                 } finally {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_UNSPECIFIED)
+                    isNightMode = false
                 }
             }
         }
