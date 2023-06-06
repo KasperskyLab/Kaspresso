@@ -38,6 +38,7 @@ fun Kaspresso.Builder.Companion.withAllureSupport(
  * If a test is executing on the JVM (with Robolectric) environment then mentioned above interceptors are not including to prevent crashes.
  * Allure reports don't have any sense in non Instrumental environment.
  */
+@Deprecated("This builder doesn't support storage system restrictions", ReplaceWith("Kaspresso.Builder.withForcedAllureSupport()"))
 fun Kaspresso.Builder.addAllureSupport(): Kaspresso.Builder = apply {
     if (isAndroidRuntime) {
         stepWatcherInterceptors.addAll(
