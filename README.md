@@ -275,7 +275,7 @@ java -jar artifacts/adbserver-desktop.jar
 ```
 
 ## Runner
-If you looking for a Runner to execute your UI tests we strongly recommend to use [Marathon](https://github.com/MarathonLabs/marathon).
+If you looking for a Runner to execute your UI tests we strongly recommend to use [Marathon](https://github.com/MarathonLabs/marathon). [Marathon](https://github.com/MarathonLabs/marathon) is a fast, platform-independent test runner focused on performance and stability. It offers easy to use platform implementations for Android and iOS as well as an API for use with custom hardware farms and more techstacks.
 <img src="marathon-banner.svg" alt="Marathon"/>
 
 ## Existing issues
