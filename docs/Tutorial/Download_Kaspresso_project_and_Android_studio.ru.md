@@ -7,7 +7,7 @@ Android Studio используется для разработки програ
 <br>Если у вас уже установлена Android Studio, то пропустите этот шаг. Если нет, то переходим по [ссылке](https://developer.android.com/studio) и нажимаем Download Android Studio.
 
 <br>Запускаем скачанный файл и проходим все шаги первичной настройки студии. Можно воспользоваться [официальной инструкцией](https://developer.android.com/studio/install) или [официальной инструкцией в формате codelabs](https://developer.android.com/codelabs/basic-android-kotlin-compose-install-android-studio#0) в случае возникновения проблем.
-<br>После того как Android Studio будет скачена, запускаем ее.
+<br>После того как Android Studio будет скачана, запускаем ее.
 
 ## Скачиваем проект Kaspresso
 
@@ -29,7 +29,7 @@ Android Studio используется для разработки програ
 
 <img src="../images/Download_Kaspresso_project_and_Android_studio/new_project_from_vcs.png" alt="Get Project from VCS"/>
 
-В открывшемся окне введите скопированный URL проекта, выберите папку, в которой будет размещен Kaspresso и нажмите clone.
+В открывшемся окне введите скопированный URL проекта, выберите папку, в которой будет размещен Kaspresso, и нажмите clone.
 
 <img src="../images/Download_Kaspresso_project_and_Android_studio/clone_project.png" alt="Clone Project"/>
 
@@ -39,7 +39,7 @@ Android Studio используется для разработки програ
 
 <img src="../images/Download_Kaspresso_project_and_Android_studio/Tools_Device_Manager.png" alt="Tools Device Manager"/>
 
-На экране появися вкладка управления эмуляторами и реальными устройствами. Нажимаем 'Create Device':
+На экране появится вкладка управления эмуляторами и реальными устройствами. Нажимаем 'Create Device':
 
 <img src="../images/Download_Kaspresso_project_and_Android_studio/Create_device.png" alt="Create Device"/>
 
@@ -55,19 +55,19 @@ Android Studio используется для разработки програ
 
 <img src="../images/Download_Kaspresso_project_and_Android_studio/SDK_component_isntaller.png" alt="SDK_component_isntaller"/>
 
-Когда процесс установки будет окончен нажимаем кнопку 'Finish':
+Когда процесс установки будет окончен, нажимаем кнопку 'Finish':
 
 <img src="../images/Download_Kaspresso_project_and_Android_studio/SDK_component_installer_finish.png" alt="SDK_component_isntaller_finish"/>
 
-Выбираем установленную версию 'R' и нажимает 'Next':
+Выбираем установленную версию 'R' и нажимаем 'Next':
 
 <img src="../images/Download_Kaspresso_project_and_Android_studio/SDK_component_installer_next.png" alt="SDK_component_installer_next"/>
 
-На экране ниже можно сменить название создаваеого эмулятора, чтоб их было легко отличать между собой. Дефолтное значение для наших целей подходит. Нажимаем 'Finish'.
+На экране ниже можно сменить название создаваемого эмулятора, чтоб их было легко отличать между собой. Дефолтное значение для наших целей подходит. Нажимаем 'Finish'.
 
 <img src="../images/Download_Kaspresso_project_and_Android_studio/Device_name.png" alt="Device_name"/>
 
-Устройство настроено и готово к работе. Запускаем его по иконке 'Play' правее названия девайса:
+Устройство настроено и готово к работе. Запускаем его по иконке 'Play' справа от названия девайса:
 
 <img src="../images/Download_Kaspresso_project_and_Android_studio/Launch_device.png" alt="Launch_device"/>
 

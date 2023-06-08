@@ -1,6 +1,6 @@
 ﻿# Working with adb
 
-In the last lesson, we wrote the first test on Kaspresso, and at this stage, our test can interact with the elements of the application interface, can somehow influence them (approx. click on the button) and check their state (visibility, clickability and etc.).
+In the last lesson, we wrote the first test on Kaspresso, and at this stage, our test can interact with the elements of the application interface, can somehow influence them (e.g. click on the button) and check their state (visibility, clickability and etc.).
 
 But often it is not enough to use only the capabilities of our application for testing. For example, during a test, we might want to test the operation of the application in various external states:
 
@@ -16,7 +16,7 @@ In all of the above scenarios, the test must control the device and execute comm
 
 `ADB` is a command line tool that allows you to interact with your device through various commands. They can help you perform actions such as installing and removing programs, getting a list of installed applications, starting a specific Activity, turning off your Internet connection, and much more.
 
-We can execute all adb commands ourselves through the command line, while the Kaspresso library supports working with adb and can execute them automatically. Adb-server needs to be started so that tests that work with adb can run.
+We can execute all adb commands ourselves through the command line, but the Kaspresso library supports working with adb and can execute them automatically. Adb-server needs to be started so that tests that work with adb can run.
 
 ## Check java and adb
 
@@ -24,7 +24,7 @@ The process of launching adb-server is very simple, if the paths to java and adb
 
 Open a command prompt.
 
-On Windows - the key combination `Win + R`, in the window that opens, enter `cmd` and press `Enter`.
+On Windows the key combination is `Win + R`, in the window that opens, enter `cmd` and press `Enter`.
 
 <img src="../images/adb_lesson/windows_cmd_open_1.png" alt="Open cmd on windows 1"/>
 
@@ -32,7 +32,7 @@ On Windows - the key combination `Win + R`, in the window that opens, enter `cmd
 
 First, we check that the path to java is correct. To do this, we write `java -version`.
 
-If everything is fine, then you will see version of installed Java.
+If everything is fine, then you will see the installed version of Java.
 
 <img src="../images/adb_lesson/java_version_success.png" alt="Java version showed"/>
 
@@ -54,19 +54,19 @@ If everything works for you on both points, then you can skip the next step.
 
 ## Setting up java and adb
 
-The solution to the problems may differ depending on your operating system and some other factors, so we will present here the most popular solution for OS Windows. If you have a different OS, or for some reason this solution does not help you, then search the Internet for information on how to do the steps below in your situation. Without solving these problems, you will not be able to start adb-server and the tests will not work.
+The solution to these problems may differ depending on your operating system and some other factors, so we will present here the most popular solution for OS Windows. If you have a different OS, or for some reason this solution does not help you, then search the Internet for information on how to do the steps below in your situation. Without solving these problems, you will not be able to start adb-server and the tests will not work.
 
 If you have reached this lesson, then you have successfully launched the application from Android Studio on the emulator, which means that java and adb are installed on your computer. The system simply does not know where to look for these programs. What needs to be done is to find the location of these programs and register the paths to them in the system.
 
 We are looking for the path to java, usually it is located in the `jre\bin` folder (in some versions it will be located in `jbr\bin`). It can often be found at `C:\Program Files\Java\jre1.8.0\bin`.
 
-If found - copy this path, if not - open Android Studio. Go to `File` -> `Settings` -> `Build, Execution, Deployment` -> `Build Tools` -> `Gradle`.
+If it is there, copy this path, if not, open Android Studio. Go to `File` -> `Settings` -> `Build, Execution, Deployment` -> `Build Tools` -> `Gradle`.
 
 <img src="../images/adb_lesson/jdk_in_android_studio.png" alt="Show jsdk path in android studio"/>
 
-The path to the desired folder will be written here - copy it.
+The path to the desired folder will be written here, and you can copy it.
 
-Now it needs to be registered in the environment variables, for this we click `win + x` -> select `System` -> `Advanced System Settings` -> `Advanced` -> `Environment Variables`.
+Now it needs to be registered in the environment variables, for this press `win + x` -> select `System` -> `Advanced System Settings` -> `Advanced` -> `Environment Variables`.
 
 <img src="../images/adb_lesson/system_variables.png" alt="Show system variables" />
 
@@ -94,13 +94,13 @@ Now we can start running adb-server. If the `java` and `adb` commands still do n
 
 ## Try different commands
 
-Before running the tests, let's see what adb can do, let's look at a few commands.
+Before running the tests, let's see what adb can do and look at a few commands.
 
 First, we can see what devices are currently connected to adb. To do this, enter the command `adb devices`.
 
 <img src="../images/adb_lesson/empty_devices_list.png" alt="Empty devices list"/>
 
-Now we have not connected any device to adb, so the list is empty, let's run the application on the emulator and run the command again.
+So far we have not connected any devices to adb, so the list is empty. Let's run the application on the emulator and run the command again.
 
 <img src="../images/adb_lesson/devices_list.png" alt="Devices list"/>
 
@@ -110,8 +110,8 @@ With adb commands we can:
 
 <ul>
     <li>Reboot device</li>
-    <li>Install some application</li>
-    <li>Remove some application</li>
+    <li>Install an application</li>
+    <li>Remove an application</li>
     <li>Upload files from/to a phone</li>
     <li>etc.</li>
 </ul>
@@ -134,7 +134,7 @@ Please note that we first started the shell-console, and then wrote commands, al
 
 <img src="../images/adb_lesson/exit_shell_console.png" alt="Exit shell console"/>
 
-At the same time, you can execute shell-commands without opening a shell-console, for this it is enough to specify the full name of the command along with `adb shell`. For example, let's try to take a screenshot and save it to the device. In Android Studio, you can open File Explorer, which displays all the files and folders on the device.
+At the same time, you can execute shell-commands without opening a shell-console. To do this, specify the full name of the command along with `adb shell`. For example, let's try to take a screenshot and save it to the device. In Android Studio, you can open File Explorer, which displays all the files and folders on the device.
 
 <img src="../images/adb_lesson/device_file_explorer.png" alt="Device file explorer"/>
 
@@ -158,7 +158,7 @@ In order for the tests to be able to execute adb commands, we need to run adb-se
 java -jar <path/to/file>/adbserver-desktop.jar
 ````
 
-In order for the path to the file to be correctly written in the console, it is enough to write the `java -jar ` command and simply drag the `adbserver-desctop.jar` file to the console, the path to the file will be substituted automatically.
+In order for the path to the file to be correctly written in the console, it is enough to write the `java -jar ` command and simply drag the `adbserver-desctop.jar` file to the console, the path to the file will be inserted automatically.
 
 <img src="../images/adb_lesson/drag_server.png" alt="Drag server"/>
 
@@ -179,7 +179,7 @@ class AdbTest : TestCase() {
 }
 ```
 
-Kaspresso has a special abstraction `AdbServer` for working with adb. An instance of this class is available in `BaseTestContext` and in `BaseTestCase`, of which our `AdbTest` class is a child.
+Kaspresso has a special abstraction `AdbServer` for working with adb. An instance of this class is available in `BaseTestContext` and in `BaseTestCase`, which our `AdbTest` class inherits.
 
 Earlier in the console, we ran the `adb devices` command, which displayed a list of connected devices. Let's run the same command with a test. Create a `test()` method and annotate it with `@Test`.
 
@@ -201,8 +201,8 @@ class AdbTest : TestCase() {
 To execute an adb command, we can access the `adbServer` field directly and call one of the methods - `performAdb`, `performCmd` or `performShell`. The names of the methods should make it clear what they do.
 
 <ul>
-    <li>`performAdb` execute adb command</li>
-    <li>`performShell` executes the shell command</li>
+    <li>`performAdb` executes an adb command</li>
+    <li>`performShell` executes a shell command</li>
     <li>`performCmd` executes a command line</li>
 </ul>
 
@@ -226,17 +226,17 @@ class AdbTest : TestCase() {
 Run the test. Test completed successfully. Please note that in order to run this test, you must meet 2 conditions:
 
 <ol>
-    <li>running adb-server</li>
+    <li>adb-server is running</li>
     <li>the application you are testing must have permission to use the Internet in the manifest</li>
 </ol>
 
-We dealt with the first point earlier, now let's deal with the second. Every application that interacts with the Internet must contain permission to use the Internet. It is written in the manifest.
+We dealt with the first point earlier, now let's deal with the second. Every application that interacts with the Internet must contain a permission to use the Internet. It is written in the manifest.
 
 <img src="../images/adb_lesson/manifest_location.png" alt="Manifest Location"/>
 
 If you forget to specify this permission, the test will not work.
 
-Now the test runs the adb command, but does not check the result of its execution. This `adb devices` command returns a list of result strings (type `List<String>`). At the moment, this collection (list of strings) contains only one line like this: `exitCode=0, message=List of devices attached emulator-5555 device`. Let's add a check that the first (and only) element of this collection contains the word "emulator". Just to practice and make sure we get the output of the adb command correctly.
+Now the test runs the adb command, but does not check the result of its execution. This `adb devices` command returns a list of resulting strings (type `List<String>`). At the moment, this collection (list of strings) contains only one line like this: `exitCode=0, message=List of devices attached emulator-5555 device`. Let's add a check that the first (and only) element of this collection contains the word "emulator", just to practice and make sure we get the output of the adb command correctly.
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -250,8 +250,8 @@ class AdbTest : TestCase() {
     @Test
     fun test() {
         val result = adbServer.performAdb("devices")
-        Assert.assertTrue( // Для проверки на то, что какое-то условие выполняется, можно воспользоваться методом Assert.assertTrue(), обратите внимание на импорты
-            Assert.assertTrue("emulator" in result.first()) //тут метод in проверяет, что в ответе (первый элемент из списка result) содержит слово "emulator"
+        Assert.assertTrue( // Method Assert.assertTrue() can be used to check if some condition is met, pay attention to the imports
+            Assert.assertTrue("emulator" in result.first()) // method 'in' checks that the first element of the result list contains the word "emulator"
         ) 
     }
 }
@@ -266,7 +266,7 @@ Now let's try to execute a non-existent adb command. First, let's see how its ex
 
 <img src="../images/adb_lesson/undefined_command.png" alt="Undefined command"/>
 
-When executing this command inside the test, we will throw an `AdbServerException` exception and the message field will contain a string with the text that we saw in the console `unknown command undefined_command`. To prevent the test from failing, we need to handle this exception in a `try catch` block, and inside the `catch` block, we can add a check that the error message really contains the text specified above.
+When executing this command inside the test, it will throw an `AdbServerException` exception and the message field will contain a string with the text that we saw in the console: `unknown command undefined_command`. To prevent the test from failing, we need to handle this exception in a `try catch` block, and inside the `catch` block, we can add a check that the error message really contains the text specified above.
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -304,7 +304,7 @@ Assert.assertTrue("com.kaspersky.kaspresso.tutorial" in packages.first())
 
 Note that if we call a shell command with `performShell`, then we don't need to write `adb shell`.
 
-Now we have hardcoded the name of the application package, but there is a much more convenient way, inside the tests we can interact with the Device object, get some information about the device, the current application, and much more. From this object, we can get the package name of the current application. To do this, you need to access the `targetContext` property of the `device` object and get `packageName` from the `context`. The test code in this case will change to this:
+Now we have hardcoded the name of the application package, but there is a much more convenient way. Inside the tests we can interact with the Device object, get some information about the device, the current application, and much more. From this object, we can get the package name of the current application. To do this, you need to access the `targetContext` property of the `device` object and get `packageName` from the `context`. The test code in this case will change to this:
 
 ```kotlin
 ...
@@ -315,7 +315,7 @@ Assert.assertTrue(device.targetContext.packageName in packages.first())
 
 Let's launch the test. It passed successfully.
 
-The last type of commands that we will look at in this lesson are ]cmd commands]. These are the commands that we write in the console. For example, to run an adb command, we write `adb command_name` in the console. Now, if we call `performCmd` instead of `performAdb` in the test, then we will need to write the entire command:
+The last type of commands that we will look at in this lesson are [cmd commands]. These are the commands that we write in the console. For example, to run an adb command, we write `adb command_name` in the console. Now, if we call `performCmd` instead of `performAdb` in the test, then we will need to write the entire command:
 
 ```kotlin
 val result = adbServer.performCmd("adb devices")
@@ -337,14 +337,14 @@ Assert.assertTrue(hostname.isNotEmpty())
 
 Let's launch the test. It passed successfully.
 
-One of the tests we have added checks if there is an emulator in the list of connected devices.
+One of the tests we have previously written checks if there is an emulator in the list of connected devices.
 
 ```kotlin
 val result = adbServer.performCmd("adb devices")
 Assert.assertTrue("emulator" in result.first())
 ```
 
-We added it just for reference purposes, and to practice with different commands. Real tests can be run both on emulators and on real devices, and tests should not crash because of this, so we will delete this test. The resulting `AdbTest` code will look like this:
+We added it just for reference purposes, and to practice different commands. Real tests can be run both on emulators and on real devices, and tests should not crash because of this, so we will delete this test. The resulting `AdbTest` code will look like this:
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial

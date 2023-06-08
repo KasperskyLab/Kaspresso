@@ -32,11 +32,11 @@ The state is determined correctly. One last check - let's flip the device over a
 
 <img src="../images/wifi_test/wifi_disabled_portrait.png" alt="Wifi disabled landscape"/>
 
-The text is saved successfully, all tests passed. Now we need to achieve such a result that all the same checks are performed automatically. 
+The text is saved successfully, all tests passed. Now we need to achieve the same result with all the checks performed automatically. 
 
 ## Writing autotests
 
-Now during the test, you will need to automatically turn the Internet on and off, as well as change the orientation of the device to landscape. This is beyond the responsibility of our application, which means that we will have to use adb commands for tests. This requires the ADB server to be running. We discussed this point in the [previous lesson](https://kasperskylab.github.io/Kaspresso/en/Tutorial/%D0%92%D1%8B%D0%BF%D0%BE%D0%BB%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5%20adb-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4/). If you suddenly forgot how to do it, review it.
+During the test, you will need to automatically turn the Internet on and off, as well as change the orientation of the device to landscape. This is beyond the responsibility of our application, which means that we will have to use adb commands for tests. This requires the ADB server to be running. We discussed this point in the [previous lesson](https://kasperskylab.github.io/Kaspresso/en/Tutorial/%D0%92%D1%8B%D0%BF%D0%BE%D0%BB%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5%20adb-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4/). If you forgot how to do it, you can review it again.
 
 Now in our test, you will need to click on the `Internet Availability` button on the main screen. This means that it is necessary to modify the Page Object of the main screen by adding one more button there:
 
@@ -72,7 +72,7 @@ class WifiSampleTest: TestCase() {
 To check the Internet availability screen, you need to go to it. To do this, we will follow the same steps as in [tutorial](https://kasperskylab.github.io/Kaspresso/Tutorial/Writing_simple_test/), in which we wrote our first autotest:
 
 <ol>
-    <li>Let's add an activityRule so that when the test starts, we open MainActivity</li>
+    <li>Add an activityRule so that when the test starts, we open MainActivity</li>
     <li>Check that the button to go to the Internet check screen is visible and clickable</li>
     <li>Click on the "Internet Availability" button</li>
 </ol>
@@ -108,7 +108,7 @@ Let's launch the test. It passed successfully. The Wifi test screen starts. Now 
 
 To fully test this screen, we will need to change the Wifi connection state, as well as change the orientation of the device. To do this, in the `BaseTestCase` class (from which our `WifiSampleTest` class is inherited) there is an instance of the `Device` class, which is called `device`. We already encountered it in the previous lesson when we got the packageName of our application.
 
-This object has many useful methods, which you can read in detail [here](https://kasperskylab.github.io/Kaspresso/Wiki/Working_with_Android_OS/).
+This object has many useful methods, which you can read about in detail [here](https://kasperskylab.github.io/Kaspresso/Wiki/Working_with_Android_OS/).
 
 First of all, we are interested in a method that enables / disables the Internet. The `network` object, which is in the `Device` class, is responsible for working with the network.
 
@@ -116,16 +116,16 @@ If we want to change the Wifi state, we can do it like this:
 
 ```kotlin
 /**
-* As a parameter, we pass the boolean type, false if we want to turn off WIFI, true - if we want to turn it on
+* As a parameter, we pass the boolean type, false if we want to turn Wifi off, true if we want to turn it on
 */
 device.network.toggleWiFi(false)
 ```
 
-In addition to WIFI, we can also manage the mobile network, as well as the Internet connection on the device as a whole (Wifi + mobile network). In order to see all the available methods, you can go to the documentation above, but there is an easier way - put a dot after the name of the object and see which methods can be called on this object. By their name it is usually clear what they do.
+In addition to Wifi, we can also manage the mobile network, as well as the Internet connection on the device as a whole (Wifi + mobile network). In order to see all the available methods, you can go to the documentation above, but there is an easier way - put a dot after the name of the object and see which methods can be called on this object. It is usually clear what they do from their names.
 
 <img src="../images/wifi_test/available_methods.png" alt="Available methods"/>
 
-Let's write a test that performs all the necessary checks, except for flipping the device - we'll deal with flipping a bit later. The first step is to create a Page Object for the `WifiScreen` internet connection test screen. Add it in the `com.kaspersky.kaspresso.tutorial.screen` package
+Let's write a test that performs all the necessary checks, except for flipping the device - we'll deal with flipping a bit later. The first step is to create a Page Object for the internet connection test screen `WifiScreen`. Add it to the `com.kaspersky.kaspresso.tutorial.screen` package
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial.screen
@@ -154,7 +154,7 @@ Now add steps:
     <li>Checking that the title text is "enabled"</li>
     <li>Disable Wifi</li>
     <li>Click on the button</li>
-    <li>Checking that the text in the header is "disabled"</li>
+    <li>Checking that the title text is "disabled"</li>
 </ol>
 
 ```kotlin
@@ -196,7 +196,7 @@ class WifiSampleTest : TestCase() {
 }
 ```
 
-We remember that it is not worth using hardcoded strings, it is better to use string resources instead.
+We remember that it is not recommended to use hardcoded strings, it is better to use string resources instead.
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -236,23 +236,23 @@ class WifiSampleTest : TestCase() {
 }
 ```
 !!! info
-    Do not forget to turn on Wifi on the device before starting the test, because after each launch, it will be turned off for you and the test will fail on the second run.
+    Do not forget to enable Wifi on the device before starting the test, because after each launch it will be turned off for you and the test will fail on the second run.
 
-Now we need to learn how to flip the device in order to perform the rest of the checks. The `exploit` object from the `Device` class is responsible for flipping the device, about which you can also read more in [documentation](https://kasperskylab.github.io/Kaspresso/Wiki/Working_with_Android_OS/).
+Now we need to learn how to flip the device in order to perform the rest of the checks. The `exploit` object from the `Device` class is responsible for flipping the device, which you can also read more about in [documentation](https://kasperskylab.github.io/Kaspresso/Wiki/Working_with_Android_OS/).
 
 The whole test process will now look like this:
 
 <ol>
     <li>Set device to portrait orientation</li>
-    <li>Checking that the button is visible and clickable</li>
-    <li>Checking that the title does not contain text</li>
+    <li>Check that the button is visible and clickable</li>
+    <li>Check that the title does not contain text</li>
     <li>Click on the button</li>
-    <li>Checking that the title text is "enabled"</li>
+    <li>Check that the title text is "enabled"</li>
     <li>Disable Wifi</li>
     <li>Click on the button</li>
-    <li>Checking that the text in the header is "disabled"</li>
+    <li>Check that the title text is "disabled"</li>
     <li>Flip the device</li>
-    <li>Check that the text on the button is still "disabled"</li>
+    <li>Check that the title text is still "disabled"</li>
 </ol>
 
 ```kotlin
@@ -300,7 +300,7 @@ Let's launch the test. It passed successfully.
 
 # Summary
 
-So, in this lesson we practiced with the `device` object, learned how to change the status of the Internet connection and the screen orientation from the test class. Test passed and all checks completed successfully, but there are several serious problems in our code:
+In this lesson we practiced with the `device` object, learned how to change the status of the Internet connection and the screen orientation from the test code. Test passed and all checks completed successfully, but there are several serious problems in our code:
 
 <ul>
     <li>The test is not broken into steps. As a result, we have a large canvas of code, which is quite difficult to understand</li>

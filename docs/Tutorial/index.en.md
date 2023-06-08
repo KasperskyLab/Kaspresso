@@ -1,7 +1,7 @@
 ﻿# Introduction
 
 Hi everyone!
-<br>If you're here, it means you're interested in Android autotests. Kaspresso is a great solution that can help you. You can get more information about our framework [here](https://kasperskylab.github.io/Kaspresso/).
+<br>If you're here, it means you're interested in Android autotests. Kaspresso is a great solution that can help you. You can find more information about our framework [here](https://kasperskylab.github.io/Kaspresso/).
 <br>The Kaspresso team prepared Tutorial in codelabs format. This Tutorial is designed to help you get started with Kaspresso and familiarize yourself with its main features.
 
 ## Tutorial structure
@@ -19,7 +19,7 @@ We are not trying to teach you autotests from scratch. At the same time, we do n
 ## Feedback
 
 If you find a typo, error or inaccuracy in the material, want to suggest an improvement or add new lessons to the Tutorial, you can [create an Issue](https://github.com/KasperskyLab/Kaspresso/issues/new) in the Kaspresso project or open a Pull request (materials from the Tutorial are in the public domain in the [docs](https://github.com/KasperskyLab/Kaspresso/tree/master/docs) folder).
-<br>If the Tutorial did not solve your question, you can search the [Wiki](https://kasperskylab.github.io/Kaspresso/Wiki/Page%20object%20in%20Kaspresso/) section or the [Kaspresso in articles](https://kasperskylab.github.io/Kaspresso/Home/Kaspresso-in-articles/) and [Kaspresso in video](https://kasperskylab.github.io/Kaspresso/Home/Kaspresso-in-videos).
+<br>If the Tutorial did not answer your question, you can search the [Wiki](https://kasperskylab.github.io/Kaspresso/Wiki/Page%20object%20in%20Kaspresso/) section or the [Kaspresso in articles](https://kasperskylab.github.io/Kaspresso/Home/Kaspresso-in-articles/) and [Kaspresso in video](https://kasperskylab.github.io/Kaspresso/Home/Kaspresso-in-videos).
 <br>You can also join our Telegram channels [ru](https://t.me/kaspresso) and [en](https://t.me/kaspresso_en) and ask your question there.
 
 ## Give thanks
