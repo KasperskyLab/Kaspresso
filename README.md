@@ -271,6 +271,10 @@ cd ~/Workspace/Kaspresso
 java -jar artifacts/adbserver-desktop.jar
 ```
 
+## Runner
+If you looking for a Runner to execute your UI tests we strongly recommend to use [Marathon](https://github.com/MarathonLabs/marathon).
+<img src="marathon-banner.svg" alt="Marathon"/>
+
 ## Existing issues
 All existing issues in Kaspresso can be found [here](https://kasperskylab.github.io/Kaspresso/Issues/).
 
