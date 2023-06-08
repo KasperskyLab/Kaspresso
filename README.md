@@ -260,14 +260,6 @@ More information is available [here](https://kasperskylab.github.io/Kaspresso/Wi
 **Keep in mind it's early access that may contain bugs. Also, API can be changed, but we are going to avoid it. Be free to create relative issues if you've encountered with
 any kind of problem.**
 
-## Philosophy
-
-The tool itself, even the perfect one, can not solve all the problems in writing UI tests. It’s important to know how to write tests and how to organize the entire process.
-Our team has great experience in introducing autotests in different companies. We shared our knowledge on [Wiki](https://kasperskylab.github.io/Kaspresso/Wiki/).
-
-## Wiki
-For all information check [Kaspresso wiki](https://kasperskylab.github.io/Kaspresso/Wiki/)
-
 ## Samples
 All samples are available in the [samples](https://github.com/KasperskyLab/Kaspresso/tree/issue-372/tutorial/samples) folder.
 
