@@ -64,6 +64,10 @@
         <activity
             android:name=".lists.NoteListActivity"
             android:exported="true" />
+
+        <activity
+            android:name=".user.LoadUserActivity"
+            android:exported="true" />
     </application>
 
 </manifest>
