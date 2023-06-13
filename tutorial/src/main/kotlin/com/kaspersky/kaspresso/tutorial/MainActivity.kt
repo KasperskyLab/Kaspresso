@@ -10,6 +10,7 @@ import com.kaspersky.kaspresso.tutorial.login.LoginActivity
 import com.kaspersky.kaspresso.tutorial.notification.NotificationActivity
 import com.kaspersky.kaspresso.tutorial.permission.MakeCallActivity
 import com.kaspersky.kaspresso.tutorial.simple.SimpleActivity
+import com.kaspersky.kaspresso.tutorial.user.LoadUserActivity
 import com.kaspersky.kaspresso.tutorial.wifi.WiFiActivity
 
 class MainActivity : AppCompatActivity() {
@@ -44,6 +45,12 @@ class MainActivity : AppCompatActivity() {
         }
         binding.listActivityBtn.setOnClickListener {
             startActivity(Intent(this, NoteListActivity::class.java))
+        }
+        binding.mvvmSampleActivityBtn.setOnClickListener {
+            startActivity(LoadUserActivity.newIntentMvvm(this))
+        }
+        binding.mvpSampleActivityBtn.setOnClickListener {
+            startActivity(LoadUserActivity.newIntentMvp(this))
         }
     }
 }

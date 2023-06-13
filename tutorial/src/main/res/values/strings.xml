@@ -33,4 +33,8 @@
     <string name="text_3">Text 3</string>
     <string name="text_4">Text 4</string>
     <string name="text_5">Text 5</string>
+
+    <!-- Screenshot sample-->
+    <string name="something_went_wrong">Something went wrong</string>
+    <string name="load_user">Load User</string>
 </resources>
