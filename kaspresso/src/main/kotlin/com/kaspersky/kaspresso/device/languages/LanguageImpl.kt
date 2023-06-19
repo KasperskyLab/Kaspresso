@@ -42,11 +42,11 @@ class LanguageImpl(
         We need to change locale in tested app so AppCompatDelegate must use it's context.
         But method setAppContext is private so we need to use reflection
         */
-        AppCompatDelegate::class.java.getDeclaredField("sAppContext").apply {
-            isAccessible = true
-            set(null, context.applicationContext)
-        }
-
-        AppCompatDelegate.setApplicationLocales(LocaleListCompat.create(locale))
+//        AppCompatDelegate::class.java.getDeclaredField("sAppContext").apply {
+//            isAccessible = true
+//            set(null, context.applicationContext)
+//        }
+//
+//        AppCompatDelegate.setApplicationLocales(LocaleListCompat.create(locale))
     }
 }
