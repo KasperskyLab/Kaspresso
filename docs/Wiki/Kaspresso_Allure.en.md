@@ -18,7 +18,7 @@ First of all, add the following Gradle dependency and Allure runner to your proj
 android {
     defaultConfig {
         //...    
-        testInstrumentationRunner "io.qameta.allure.android.runners.AllureAndroidJUnitRunner"
+        testInstrumentationRunner "com.kaspersky.kaspresso.runner.KaspressoRunner"
     }
     //...
 }
@@ -28,10 +28,10 @@ dependencies {
     androidTestImplementation "com.kaspersky.android-components:kaspresso-allure-support:<latest_version>"
 }
 ```
-Next, use special [**withAllureSupport**](https://github.com/KasperskyLab/Kaspresso/tree/master/allure-support/src/main/kotlin/com/kaspersky/components/alluresupport/AllureSupportKaspressoBuilder.kt) function in your TestCase constructor or in your TestCaseRule to turn on all available Allure-supporting interceptors:
+Next, use special [**withForcedAllureSupport**](https://github.com/KasperskyLab/Kaspresso/tree/master/allure-support/src/main/kotlin/com/kaspersky/components/alluresupport/AllureSupportKaspressoBuilder.kt) function in your TestCase constructor or in your TestCaseRule to turn on all available Allure-supporting interceptors:
 ```kotlin
 class AllureSupportTest : TestCase(
-    kaspressoBuilder = Kaspresso.Builder.withAllureSupport()
+    kaspressoBuilder = Kaspresso.Builder.withForcedAllureSupport()
 ) {
     
 }
@@ -57,7 +57,7 @@ class AllureSupportCustomizeTest : TestCase(
 ...
 }
 ```
-If you don't need all of these interceptors providing by [**withAllureSupport**](https://github.com/KasperskyLab/Kaspresso/tree/master/allure-support/src/main/kotlin/com/kaspersky/components/alluresupport/AllureSupportKaspressoBuilder.kt) and [**addAllureSupport**](../allure-support/src/main/kotlin/com/kaspersky/components/alluresupport/AllureSupportKaspressoBuilder.kt) functions then you may add only interceptors that you prefer. But please note that [**AllureMapperStepInterceptor.kt**](../allure-support/src/main/kotlin/com/kaspersky/components/alluresupport/interceptors/step/AllureMapperStepInterceptor.kt) is mandatory for Allure support work. For example, if you don't need videos and view hierarchies after test failures then you can do something like:
+If you don't need all of these interceptors providing by [**withForcedAllureSupport**](https://github.com/KasperskyLab/Kaspresso/tree/master/allure-support/src/main/kotlin/com/kaspersky/components/alluresupport/AllureSupportKaspressoBuilder.kt) and [**addAllureSupport**](../allure-support/src/main/kotlin/com/kaspersky/components/alluresupport/AllureSupportKaspressoBuilder.kt) functions then you may add only interceptors that you prefer. But please note that [**AllureMapperStepInterceptor.kt**](../allure-support/src/main/kotlin/com/kaspersky/components/alluresupport/interceptors/step/AllureMapperStepInterceptor.kt) is mandatory for Allure support work. For example, if you don't need videos and view hierarchies after test failures then you can do something like:
 ```kotlin
 class AllureSupportCustomizeTest : TestCase(
     kaspressoBuilder = Kaspresso.Builder.simple().apply {

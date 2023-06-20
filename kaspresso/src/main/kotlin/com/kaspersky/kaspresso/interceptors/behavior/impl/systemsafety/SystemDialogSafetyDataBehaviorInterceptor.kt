@@ -5,6 +5,7 @@ import com.kaspersky.kaspresso.device.server.AdbServer
 import com.kaspersky.kaspresso.instrumental.InstrumentalDependencyProvider
 import com.kaspersky.kaspresso.interceptors.behavior.DataBehaviorInterceptor
 import com.kaspersky.kaspresso.logger.UiTestLogger
+import com.kaspersky.kaspresso.params.SystemDialogsSafetyParams
 import com.kaspersky.kaspresso.systemsafety.SystemDialogSafetyProvider
 import com.kaspersky.kaspresso.systemsafety.SystemDialogSafetyProviderImpl
 
@@ -15,9 +16,10 @@ import com.kaspersky.kaspresso.systemsafety.SystemDialogSafetyProviderImpl
 class SystemDialogSafetyDataBehaviorInterceptor(
     logger: UiTestLogger,
     instrumentalDependencyProvider: InstrumentalDependencyProvider,
-    adbServer: AdbServer
+    adbServer: AdbServer,
+    systemDialogsSafetyParams: SystemDialogsSafetyParams
 ) : DataBehaviorInterceptor,
-    SystemDialogSafetyProvider by SystemDialogSafetyProviderImpl(logger, instrumentalDependencyProvider, adbServer) {
+    SystemDialogSafetyProvider by SystemDialogSafetyProviderImpl(logger, instrumentalDependencyProvider, adbServer, systemDialogsSafetyParams) {
 
     /**
      * Wraps the given [action] invocation with the system dialog safety.

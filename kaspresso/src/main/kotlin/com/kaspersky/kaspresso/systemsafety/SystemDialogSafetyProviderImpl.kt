@@ -8,6 +8,7 @@ import androidx.test.uiautomator.Until
 import com.kaspersky.kaspresso.device.server.AdbServer
 import com.kaspersky.kaspresso.instrumental.InstrumentalDependencyProvider
 import com.kaspersky.kaspresso.logger.UiTestLogger
+import com.kaspersky.kaspresso.params.SystemDialogsSafetyParams
 import java.util.concurrent.TimeUnit
 import java.util.regex.Pattern
 
@@ -17,7 +18,8 @@ import java.util.regex.Pattern
 class SystemDialogSafetyProviderImpl(
     private val logger: UiTestLogger,
     private val instrumentalDependencyProvider: InstrumentalDependencyProvider,
-    private val adbServer: AdbServer
+    private val adbServer: AdbServer,
+    private val systemDialogsSafetyParams: SystemDialogsSafetyParams
 ) : SystemDialogSafetyProvider {
 
     companion object {
@@ -106,7 +108,14 @@ class SystemDialogSafetyProviderImpl(
      */
     private fun isAndroidSystemDetected(): Boolean {
         with(uiDevice) {
-            if (isVisible(By.pkg(Pattern.compile("\\S*google.android\\S*")).clazz(FrameLayout::class.java))) {
+            var isSystemDialogVisible = isVisible(By.pkg(Pattern.compile("\\S*google.android\\S*")).clazz(FrameLayout::class.java))
+
+            if (systemDialogsSafetyParams.shouldIgnoreKeyboard) {
+                val isKeyboardVisible = isVisible(By.pkg(Pattern.compile("\\S*google.android.inputmethod\\S*")).clazz(FrameLayout::class.java))
+                isSystemDialogVisible = isSystemDialogVisible && !isKeyboardVisible
+            }
+
+            if (isSystemDialogVisible) {
                 logger.i("The android system dialog/window was detected")
                 return true
             }
