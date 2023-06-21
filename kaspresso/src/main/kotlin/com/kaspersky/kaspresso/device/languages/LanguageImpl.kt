@@ -28,15 +28,13 @@ class LanguageImpl(
         try {
             applyCurrentLocaleToContext(locale = locale)
             logger.i("Switch the language in the Application to $locale: success")
-        }
-        catch (reflectiveException: NoSuchFieldException) {
+        } catch (reflectiveException: NoSuchFieldException) {
             val message = """
                 For in-app switching language you should use at least 1.6.0 version of appcompat library.
                 Please find this dependency and increase version to androidx.appcompat:appcompat:1.6.0 or higher
                 """.trimIndent()
             throw RuntimeException(message)
-        }
-        catch (error: Throwable) {
+        } catch (error: Throwable) {
             logger.e("Switch the language in the Application to $locale: failed with the error: $error")
             throw error
         }
