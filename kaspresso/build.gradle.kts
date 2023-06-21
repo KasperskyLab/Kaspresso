@@ -30,7 +30,11 @@ dependencies {
     implementation(libs.kotlinStdlib)
     implementation(libs.gson)
     implementation(projects.adbServer.adbserverDevice)
-    implementation(libs.appcompat)
+    implementation(libs.appcompat) {
+        version {
+            require("1.6.0")
+        }
+    }
 
     testImplementation(libs.junit)
     testImplementation(libs.truth)
