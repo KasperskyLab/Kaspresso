@@ -1,24 +1,30 @@
 package com.kaspersky.kaspressample.docloc
 
 import android.graphics.Color
+import java.lang.ref.WeakReference
 
-class ScreenshotSamplePresenter(private val view: ScreenshotSampleView) {
+class ScreenshotSamplePresenter(view: ScreenshotSampleView) {
     var value = 0
 
+    private val viewRef: WeakReference<ScreenshotSampleView>
+    init {
+        viewRef = WeakReference(view)
+    }
+
     fun init() {
-        view.setCounterValue(value)
-        view.setBackgroundColor(Color.WHITE)
+        viewRef.get()?.setCounterValue(value)
+        viewRef.get()?.setBackgroundColor(Color.WHITE)
     }
 
     fun increment() {
-        view.setCounterValue(++value)
+        viewRef.get()?.setCounterValue(++value)
     }
 
     fun decrement() {
-        view.setCounterValue(--value)
+        viewRef.get()?.setCounterValue(--value)
     }
 
     fun setBackgroundColor(color: Int) {
-        view.setBackgroundColor(color)
+        viewRef.get()?.setBackgroundColor(color)
     }
 }

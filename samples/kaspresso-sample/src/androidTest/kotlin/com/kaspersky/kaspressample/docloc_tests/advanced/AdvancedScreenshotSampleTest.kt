@@ -7,6 +7,7 @@ import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspressample.docloc.ScreenshotSampleFragment
 import com.kaspersky.kaspressample.docloc.ScreenshotSampleView
 import com.kaspersky.kaspresso.annotations.ScreenShooterTest
+import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.testcases.api.testcase.DocLocScreenshotTestCase
 import org.junit.Rule
 import org.junit.Test
@@ -15,7 +16,8 @@ import org.junit.Test
  * An example of advanced [DocLocScreenshotTestCase] usage.
  * For more information see DocLoc wiki page.
  */
-class AdvancedScreenshotSampleTest : DocLocScreenshotTestCase(locales = "en,ru") {
+class AdvancedScreenshotSampleTest : DocLocScreenshotTestCase(locales = "en,ru",
+kaspressoBuilder = Kaspresso.Builder.advanced()) {
     private lateinit var view: ScreenshotSampleView
 
     @get:Rule
@@ -28,6 +30,7 @@ class AdvancedScreenshotSampleTest : DocLocScreenshotTestCase(locales = "en,ru")
     @Test
     fun test() = before {
         val scenario = launchFragmentInContainer<ScreenshotSampleFragment>()
+        Thread.sleep(1000L)
         scenario.onFragment {
             view = getUiSafeProxy(it as ScreenshotSampleView)
         }
