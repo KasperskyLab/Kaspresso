@@ -2,7 +2,7 @@
 In this lesson, we will download the Kaspresso project, install Android studio and set up the emulator.
 
 ## Download Android Studio
-Android Studio is used for program development. We will need it to write and run autotests.
+Android Studio is used for software development. We will need it to write and run autotests.
 <br>If you already have Android Studio installed, skip this step. If not, then follow [the link](https://developer.android.com/studio) and click Download Android Studio.
 
 <br>Run the downloaded file and go through all the steps of the initial setup of the studio. You can use [the official manual](https://developer.android.com/studio/install) or [the official codelabs manual](https://developer.android.com/codelabs/basic-android-kotlin-compose-install-android-studio#0) in case of problems.
@@ -44,11 +44,11 @@ We will see the following screen:
 
 <img src="../images/Download_Kaspresso_project_and_Android_studio/Select_hardware.png" alt="Select hardware"/>
 
-On this screen, you can set the characteristics of the hardware you want to emulate. In section "1" you can select phone, tablet, TV and so on. We are interested in the phone. In section "2" - a specific model. Within the scope of this guide, it makes no difference which one to choose. Choose 'Pixel 6'. Click 'Next' and get to the operating system image selection window:
+On this screen, you can set the characteristics of the hardware you want to emulate. In section "1" you can select phone, tablet, TV and so on. For the purposes of this tutorial we will be working with the "phone" type. In section "2" you can select a specific model. Within the scope of this guide, it makes no difference which one to choose. Choose 'Pixel 6'. Click 'Next' and get to the operating system image selection window:
 
 <img src="../images/Download_Kaspresso_project_and_Android_studio/System_Image.png" alt="System image"/>
 
-This screen is more important in regular work - here we choose which version of Android to install on the emulator. Let's choose 'R'. Click on the download icon to the right of the letter 'R', go through the installation process and wait.
+This screen is more important for regular work and lets you choose which version of Android to install on the emulator. Let's choose 'R'. Click on the download icon to the right of the letter 'R', go through the installation process and wait.
 
 <img src="../images/Download_Kaspresso_project_and_Android_studio/SDK_component_isntaller.png" alt="SDK_component_isntaller"/>
 

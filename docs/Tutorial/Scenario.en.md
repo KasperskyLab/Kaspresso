@@ -1,6 +1,6 @@
-# Reduce duplicate steps the Scenario
+# Reduce duplicate steps with Scenario
 
-In this lesson, we will learn what scenarios are (the `Scenario` class from the Kaspresso library), find out what they are for, when they should be used, and when it is better to avoid them.
+In this lesson, we will learn what scenarios are (the `Scenario` class from the Kaspresso library), find out what their purpose is, when they should be used, and when it is better to avoid them.
 
 Open the tutorial application and click on the `Login Acitivity` button.
 
@@ -16,7 +16,7 @@ If the data is filled in correctly, then the authorization is successful and the
 
 <img src="../images/scenario/screen_after_login.png" alt="Screen After Login" width="300"/>
 
-It turns out that in order to check the `AfterLoginActivity` screen, the user must be authorized in the application. Therefore, let's first test the authorization - `LoginActivity`.
+It turns out that in order to check the `AfterLoginActivity` screen, the user must be authorized in the application. Therefore, let's first test the authorization screen `LoginActivity`.
 
 ## Test LoginActivity
 
@@ -62,7 +62,7 @@ object LoginScreen : KScreen<LoginScreen>() {
 
 ```
 
-We can create a `LoginActivityTest` test. Let's add a step - opening the target screen `LoginActivity`
+We can create a `LoginActivityTest` test. Let's add a step: opening the target screen `LoginActivity`.
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -96,7 +96,7 @@ When the target screen is open, we can test it. At the current stage, we will on
 <ol>
   <li>All elements are visible and the button is clickable</li>
   <li>Input fields contain appropriate hints</li>
-  <li>If the input fields contain valid data, then the transition to the next screen</li>
+  <li>If the input fields contain valid data, then transition to the next screen is performed</li>
 </ol>
 
 In order to check which activity is currently open, you can use the method: `device.activities.isCurrent(LoginActivity::class.java)`.
@@ -175,9 +175,9 @@ class LoginActivityTest : TestCase() {
 
 Let's start the test. Test passed successfully.
 
-Now let's add checks for a negative scenario - if the user entered a login or password that is less than the allowed length. 
+Now let's add checks for a negative scenario when the user entered a login or password that is less than the allowed minimum length. 
 
-Here you need to follow the rule - each test-case has its own test method. That is, we will not check for behavior when entering an incorrect login and password in the same method, but we will create separate ones in the same `LoginActivityTest` class.
+Here you need to follow the rule: each test-case has its own test method. That is, we will not test entering both an incorrect login and incorrect password in the same method, but we will create separate ones in the same `LoginActivityTest` class.
 
 ```kotlin
 @Test
@@ -232,7 +232,7 @@ fun loginUnsuccessfulIfUsernameIncorrect() {
 
 ```
 
-And the same test that the login is correct and the password is wrong.
+Then we add a test for the case when the login is correct and the password is not.
 
 ```kotlin
 @Test
@@ -287,7 +287,7 @@ fun loginUnsuccessfulIfPasswordIncorrect() {
 
 ```
 
-Let's rename the first test so that by its name it is clear that we are checking for successful authorization.
+Let's rename the first test so that it is clear by its name that we are checking for successful authorization.
 
 ```kotlin
 @Test
@@ -301,22 +301,22 @@ Change to:
 fun loginSuccessfulIfUsernameAndPasswordCorrect()
 ```
 
-We run the tests - they are all passed successfully.
+We run the tests. They all passed successfully.
 
-Take a look at the code we're using inside these tests. For each test we do the following:
+Take a look at the code we're using in these tests. For each test we do the following:
 <ol>
-    <li>We declare the variables `username` and `password`, assigning different values to them depending on the check we will perform</li>
-    <li>Opening the login screen</li>
-    <li>Checking the visibility of elements</li>
-    <li>Enter your login and password in the appropriate fields and click on the "Login" button</li>
-    <li>Checking that we have the desired screen</li>
+    <li>Declare the variables `username` and `password`, assigning different values to them depending on the check we will perform</li>
+    <li>Open the login screen</li>
+    <li>Check the visibility of elements</li>
+    <li>Enter the login and password created in step (1) in the appropriate fields and click on the "Login" button</li>
+    <li>Check that we have the desired screen</li>
 </ol>
 
 Depending on what we check in each specific test, we have different first and last steps. In the first step we assign different values to the `username` and `password` variables, in the last step we make different checks to see if the screen is `LoginActivity` or `AfterLoginActivity`.
 
-At the same time, steps from the second to the fourth are absolutely the same for all tests. This is one of the cases where we can use the Scenario class.
+At the same time, steps from the second to the fourth are exactly the same for all tests. This is one of the cases where we can use the Scenario class.
 
-## Create Scenario
+## Create a Scenario
 
 Scenarios are classes that allow you to combine several steps into one. For example, in this case, we can create an authorization script that will go through the entire process from starting the main screen to clicking on the `Login` button after entering the login and password.
 
@@ -333,9 +333,9 @@ class LoginScenario : Scenario() {
 
 ```
 
-There is an error here, because the Scenario class is abstract, and it needs to override one `steps` method, in which we must list all the steps of this scenario. 
+There is an error here, because the Scenario class is abstract, and its child needs to override the `steps` property, in which we must list all the steps of this scenario. 
 
-Press the key combination `ctrl + i`, select the method you want to override and press `OK`.
+Press the key combination `ctrl + i`, select the property you want to override and press `OK`.
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -413,7 +413,7 @@ class LoginScenario : Scenario() {
 
 Now we have an authorization script in which we open the login screen, check the visibility of all elements, enter the login and password values and click on the `Login` button. 
 
-But there is one problem - in this class there are no `username` and `password` variables that need to be entered in the input fields. We could declare them right here inside the test, as we did in the `LoginActivityTest` class, 
+But there is one problem: in this class there are no `username` and `password` variables that need to be entered in the input fields. We could declare them right here inside the test, as we did in the `LoginActivityTest` class, 
 
 ```kotlin
 override val steps: TestContext<Unit>.() -> Unit = {
@@ -446,7 +446,7 @@ class LoginScenario(
 
 ```
 
-Now, inside the test, we do not create a login and password, but use those that were passed to us as a parameter to the constructor:
+Now, inside the test, we do not create a login and password, but use those that were passed to us as a constructor parameter:
 
 ```kotlin
 step("Try to login") {
@@ -525,13 +525,13 @@ class LoginScenario(
 
 ## Using Scenario
 
-The Scenario is ready, we can use it in tests. Let's first use the Scenario in the first test method, and then by analogy we will do it in the rest:
+The Scenario is ready, we can use it in tests. Let's first use the Scenario in the first test method, and then we will do it in the rest the same way:
 
 <ol>
   <li>Create a step in which we try to log in with the correct data</li>
-  <li>Calling the `scenario` function</li>
-  <li>We pass the LoginScenario object as a parameter to this function</li>
-  <li>We pass the correct login and password to the LoginScenario constructor</li>
+  <li>Call the `scenario` function</li>
+  <li>Pass the LoginScenario object as a parameter to this function</li>
+  <li>Pass the correct login and password to the LoginScenario constructor</li>
   <li>Add a step in which we check that the `AfterLoginActivity` screen opens after login</li>
 </ol>
 
@@ -554,7 +554,7 @@ fun loginSuccessfulIfUsernameAndPasswordCorrect() {
 }
 ```
 
-For the rest of the tests, we do by analogy:
+For the rest of the tests, we modify them the same way:
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -625,7 +625,7 @@ class LoginActivityTest : TestCase() {
 
 ```
 
-We have considered one case when Scenario are convenient to use - when the same steps are used in different tests within the framework of testing one screen. But this is not their only purpose. 
+We have considered one case when Scenarios are convenient to use: when the same steps are used in different tests within the framework of testing one screen. But this is not their only purpose. 
 
 An application can have multiple screens that can only be accessed by being logged in. In this case, for each such screen, you will have to re-describe all the authorization steps. But when using Scenario, this becomes a very simple task.
 
@@ -640,7 +640,7 @@ import com.kaspersky.kaspresso.screens.KScreen
 import com.kaspersky.kaspresso.tutorial.R
 import io.github.kakaocup.kakao.edit.KEditText
 
-object AfterLoginScreen : KScreen<LoginScreen>() {
+object AfterLoginScreen : KScreen<AfterLoginScreen>() {
 
     override val layoutId: Int? = null
     override val viewClass: Class<*>? = null
@@ -650,7 +650,7 @@ object AfterLoginScreen : KScreen<LoginScreen>() {
 
 ```
 
-Adding a test:
+Add a test:
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -673,7 +673,7 @@ class AfterLoginActivityTest : TestCase() {
 
 ```
 
-In order to get to this screen, we need to go through the authorization process. Without the use of Scenario, we would have to repeat all the steps - launch the main screen, click on the button, then enter the username and password and click on the button again. But now this whole process comes down to using `LoginScenario`:
+In order to get to this screen, we need to go through the authorization process. Without the use of Scenario, we would have to repeat all the steps: launch the main screen, click on the button, then enter the username and password and click on the button again. But now this whole process comes down to using `LoginScenario`:
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -722,13 +722,13 @@ Scenario is very handy if you use it correctly.
 
 <ul>
     <li>If you have to follow the same steps to run different tests, then this is the case when it is worth creating a Scenario. Examples: screens for authorization, payment for purchases, etc.</li>
-    <li>You shouldn't use one Scenario inside another - this code can become very confusing, making it harder to reuse, impair readability, and you lose all the benefits of scripting.</li>
+    <li>You shouldn't use one Scenario inside another because this code can become very confusing, making it harder to read and reuse it, and in the end you lose all benefits of Scenarios.</li>
     <li>Use Scenario only when needed. You should not create them just because sometime in the future these steps may be used in other tests. If you see that the steps are repeated in different tests, then you can create a `Scenario`, if not, you should not do this. Their number in the project should be minimal.</li>
 </ul>
 
 ## Summary
 
-In this lesson, we learned what Scenario are, how to create them, use them, and pass parameters to their constructor. We also considered cases when their use benefits the project, and when, on the contrary, it worsens the readability of the code, increases its coherence and complicates reuse.
+In this lesson, we learned what Scenarios are, how to create them, use them, and pass parameters to their constructor. We also considered cases when their use benefits the project, and when, on the contrary, it worsens the readability of the code, increases its coupling and complicates reuse.
 
 <br>
 
