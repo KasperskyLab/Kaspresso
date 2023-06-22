@@ -32,6 +32,7 @@ class AdvancedScreenshotSampleTestLegacy : DocLocScreenshotTestCase(
     @Test
     fun test() = before {
         val scenario = launchFragmentInContainer<ScreenshotSampleFragment>()
+        Thread.sleep(5000L)
         scenario.onFragment {
             view = getUiSafeProxy(it as ScreenshotSampleView)
         }

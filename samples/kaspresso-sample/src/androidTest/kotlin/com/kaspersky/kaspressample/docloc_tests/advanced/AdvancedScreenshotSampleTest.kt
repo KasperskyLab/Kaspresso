@@ -30,7 +30,7 @@ kaspressoBuilder = Kaspresso.Builder.advanced()) {
     @Test
     fun test() = before {
         val scenario = launchFragmentInContainer<ScreenshotSampleFragment>()
-        Thread.sleep(1000L)
+        Thread.sleep(5000L)
         scenario.onFragment {
             view = getUiSafeProxy(it as ScreenshotSampleView)
         }
