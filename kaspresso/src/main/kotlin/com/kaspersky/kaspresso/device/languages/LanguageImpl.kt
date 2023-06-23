@@ -1,6 +1,9 @@
 package com.kaspersky.kaspresso.device.languages
 
+import android.app.LocaleManager
 import android.content.Context
+import android.os.Build
+import android.os.LocaleList
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.ConfigurationCompat
 import androidx.core.os.LocaleListCompat
@@ -28,7 +31,7 @@ class LanguageImpl(
         try {
             applyCurrentLocaleToContext(locale = locale)
             logger.i("Switch the language in the Application to $locale: success")
-        } catch (reflectiveException: NoSuchFieldException) {
+        } catch (e: Throwable) {
             val message = """
                 For in-app switching language you should use at least 1.6.0 version of appcompat library.
                 Please find this dependency and increase version to androidx.appcompat:appcompat:1.6.0 or higher
@@ -44,15 +47,11 @@ class LanguageImpl(
         ConfigurationCompat.getLocales(context.resources.configuration).get(0)
 
     private fun applyCurrentLocaleToContext(locale: Locale) {
-        /*
-        We need to change locale in tested app so AppCompatDelegate must use it's context.
-        But method setAppContext is private so we need to use reflection
-        */
-        AppCompatDelegate::class.java.getDeclaredField("sAppContext").apply {
-            isAccessible = true
-            set(null, context.applicationContext)
+        if (Build.VERSION.SDK_INT >= 33) {
+            val localeManager = context.getSystemService(Context.LOCALE_SERVICE) as LocaleManager
+            localeManager.applicationLocales = LocaleList.forLanguageTags(locale.toLanguageTag())
+        } else {
+            AppCompatDelegate.setApplicationLocales(LocaleListCompat.create(locale))
         }
-
-        AppCompatDelegate.setApplicationLocales(LocaleListCompat.create(locale))
     }
 }
