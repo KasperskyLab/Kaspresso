@@ -47,7 +47,7 @@ class LanguageImpl(
         ConfigurationCompat.getLocales(context.resources.configuration).get(0)
 
     private fun applyCurrentLocaleToContext(locale: Locale) {
-        if (Build.VERSION.SDK_INT >= 33) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             val localeManager = context.getSystemService(Context.LOCALE_SERVICE) as LocaleManager
             localeManager.applicationLocales = LocaleList.forLanguageTags(locale.toLanguageTag())
         } else {
