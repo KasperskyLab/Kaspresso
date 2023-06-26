@@ -34,7 +34,7 @@ class LanguageImpl(
         } catch (e: NoSuchMethodError) {
             val message = """
                 For in-app switching language you should use at least 1.6.0 version of appcompat library.
-                Please find this dependency and increase version to androidx.appcompat:appcompat:1.6.0 or higher
+                Please find this dependency and increase version to androidx.appcompat:appcompat:1.6.0 or higher.
                 """.trimIndent()
             throw RuntimeException(message)
         } catch (error: Throwable) {
