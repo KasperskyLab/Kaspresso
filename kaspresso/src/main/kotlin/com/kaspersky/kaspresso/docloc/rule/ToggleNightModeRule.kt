@@ -17,8 +17,7 @@ class ToggleNightModeRule internal constructor(
     var isNightMode: Boolean = false
         private set
 
-    private fun turnNightMode(turnOn: Boolean) {
-        val mode = if (turnOn) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
+    private fun setNightMode(@AppCompatDelegate.NightMode mode: Int) {
         Handler(device.targetContext.mainLooper).post {
             AppCompatDelegate.setDefaultNightMode(mode)
         }
@@ -29,16 +28,16 @@ class ToggleNightModeRule internal constructor(
             override fun evaluate() {
                 logger.i("DocLoc: ToggleNightModeRule started")
                 try {
-                    turnNightMode(false)
+                    setNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                     isNightMode = false
                     base.evaluate()
                     if (toggleNightMode) {
-                        turnNightMode(true)
+                        setNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                         isNightMode = true
                         base.evaluate()
                     }
                 } finally {
-                    turnNightMode(false)
+                    setNightMode(AppCompatDelegate.MODE_NIGHT_UNSPECIFIED)
                     isNightMode = false
                 }
             }
