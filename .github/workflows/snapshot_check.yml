@@ -1,0 +1,32 @@
+# This workflow is triggered manually before release
+
+name: Snapshot Checks
+
+on:
+  workflow_dispatch:
+    inputs:
+      kaspressoVersion:
+        description: 'Kaspresso Version (for example 1.5.1-SNAPSHOT)'
+        required: true
+        type: string
+
+jobs:
+  snapshot-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v1
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: 11
+      - name: Assemble projects
+        run: ./gradlew -Pkaspresso.snapshotVersion=${{ inputs.kaspressoVersion }} assembleDebugAndroidTest
+      - name: Check legal documents
+        run: ./gradlew -Pkaspresso.snapshotVersion=${{ inputs.kaspressoVersion }} checkLegalDocuments

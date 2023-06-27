@@ -14,6 +14,7 @@ import com.kaspersky.kaspresso.device.screenshots.screenshotmaker.InternalScreen
 import com.kaspersky.kaspresso.docloc.DocLocScreenshotCapturer
 import com.kaspersky.kaspresso.docloc.MetadataSaver
 import com.kaspersky.kaspresso.docloc.rule.LocaleRule
+import com.kaspersky.kaspresso.docloc.rule.ToggleNightModeRule
 import com.kaspersky.kaspresso.files.dirs.DefaultDirsProvider
 import com.kaspersky.kaspresso.files.resources.ResourceFileNamesProvider
 import com.kaspersky.kaspresso.files.resources.ResourcesDirsProvider
@@ -51,6 +52,7 @@ import java.lang.reflect.Proxy
  *  @param changeSystemLocale change the system language, i.e. system dialogs (e.g. runtime permissions) will also be localized.
  *      Need permission in manifest file for a target app android.permission.CHANGE_CONFIGURATION
  *  @param locales comma-separated string with locales to run test with.
+ *  @param toggleNightMode used to capture screenshots with night mode enabled
  */
 abstract class DocLocScreenshotTestCase(
     private val resourcesRootDirsProvider: ResourcesRootDirsProvider =
@@ -67,6 +69,7 @@ abstract class DocLocScreenshotTestCase(
             addTimestamps = false
         ),
     private val changeSystemLocale: Boolean = false,
+    private val toggleNightMode: Boolean = false,
     private val screenshotParams: ScreenshotParams = ScreenshotParams(),
     locales: String?,
     kaspressoBuilder: Kaspresso.Builder = Kaspresso.Builder.simple().apply {
@@ -86,6 +89,7 @@ abstract class DocLocScreenshotTestCase(
         screenshotDirectoryProvider: ScreenshotDirectoryProvider = DefaultScreenshotDirectoryProvider(groupByRunNumbers = false),
         screenshotNameProvider: ScreenshotNameProvider = DefaultScreenshotNameProvider(addTimestamps = false),
         changeSystemLocale: Boolean = false,
+        toggleNightMode: Boolean = false,
         locales: String?,
         screenshotParams: ScreenshotParams = ScreenshotParams(),
         kaspressoBuilder: Kaspresso.Builder = Kaspresso.Builder.simple().apply {
@@ -110,6 +114,7 @@ abstract class DocLocScreenshotTestCase(
         },
         screenshotParams = screenshotParams,
         changeSystemLocale = changeSystemLocale,
+        toggleNightMode = toggleNightMode,
         locales = locales,
         kaspressoBuilder = kaspressoBuilder
     )
@@ -130,6 +135,12 @@ abstract class DocLocScreenshotTestCase(
     )
 
     @get:Rule
+    val nightModeRule = ToggleNightModeRule(
+        toggleNightMode = toggleNightMode,
+        logger = kaspresso.libLogger
+    )
+
+    @get:Rule
     val storagePermissionRule = GrantPermissionRule.grant(Manifest.permission.WRITE_EXTERNAL_STORAGE)!!
 
     @Before
@@ -141,7 +152,15 @@ abstract class DocLocScreenshotTestCase(
         val localedResourcesRootDirsProvider: ResourcesRootDirsProvider =
             object : ResourcesRootDirsProvider by resourcesRootDirsProvider {
                 override val screenshotsRootDir: File =
-                    resourcesRootDirsProvider.screenshotsRootDir.resolve(localeRule.currentLocaleName)
+                    resourcesRootDirsProvider.screenshotsRootDir.resolve(
+                        if (!toggleNightMode) {
+                            SCREENSHOTS_DIR_DEFAULT
+                        } else if (nightModeRule.isNightMode) {
+                            SCREENSHOTS_DIR_DARK
+                        } else {
+                            SCREENSHOTS_DIR_LIGHT
+                        }
+                    ).resolve(localeRule.currentLocaleName)
             }
 
         screenshotCapturer = DocLocScreenshotCapturer(
@@ -215,5 +234,11 @@ abstract class DocLocScreenshotTestCase(
             T::class.java.getAllInterfaces(),
             UiInvocationHandler(view as Any, logger)
         ) as T
+    }
+
+    private companion object {
+        const val SCREENSHOTS_DIR_LIGHT = "light"
+        const val SCREENSHOTS_DIR_DARK = "dark"
+        const val SCREENSHOTS_DIR_DEFAULT = ""
     }
 }

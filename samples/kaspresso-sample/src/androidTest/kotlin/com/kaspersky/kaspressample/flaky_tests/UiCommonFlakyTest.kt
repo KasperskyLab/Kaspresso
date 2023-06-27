@@ -1,6 +1,8 @@
 package com.kaspersky.kaspressample.flaky_tests
 
+import android.Manifest
 import androidx.test.ext.junit.rules.activityScenarioRule
+import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.R
 import com.kaspersky.kaspressample.external_screens.UiCommonFlakyScreen
@@ -10,6 +12,12 @@ import org.junit.Rule
 import org.junit.Test
 
 class UiCommonFlakyTest : TestCase() {
+
+    @get:Rule
+    val runtimePermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
+        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        Manifest.permission.READ_EXTERNAL_STORAGE
+    )
 
     @get:Rule
     val activityRule = activityScenarioRule<MainActivity>()
@@ -39,7 +47,7 @@ class UiCommonFlakyTest : TestCase() {
                     // even UiAutomator is using under the hood =)
                     // the text is changing during 3 seconds
                     // the default value of flaky safety timeout = 10 seconds
-                    hasText(device.targetContext.getString(R.string.common_flaky_final_button).uppercase())
+                    hasText(device.targetContext.getString(R.string.common_flaky_final_button))
                 }
             }
         }

@@ -1,11 +1,20 @@
 package com.kaspersky.kaspressample.device_tests
 
+import android.Manifest
+import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspresso.internal.exceptions.AdbServerException
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.junit.Assert.assertTrue
+import org.junit.Rule
 import org.junit.Test
 
 class DeviceServerSampleTest : TestCase() {
+
+    @get:Rule
+    val runtimePermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
+        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        Manifest.permission.READ_EXTERNAL_STORAGE
+    )
 
     @Test
     fun serverSampleTest() {

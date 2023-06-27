@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -8,42 +7,46 @@
     android:padding="16dp"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/activity_main_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="@string/main_screen_title"
-        android:textSize="18pt" />
-
-    <Button
-        android:id="@+id/activity_main_auto_scroll_scrollView_with_padding_button"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/activity_main_title"
-        android:text="@string/autoscroll_scrollview_with_padding_title" />
+        android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/activity_main_simple_sample_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/activity_main_auto_scroll_scrollView_with_padding_button"
-        android:text="@string/main_screen_simple_fragment_button" />
+        <TextView
+            android:id="@+id/activity_main_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:text="@string/main_screen_title"
+            android:textSize="18pt" />
 
-    <Button
-        android:id="@+id/activity_main_webview_sample_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/activity_main_simple_sample_button"
-        android:text="@string/main_screen_webview_button" />
+        <Button
+            android:id="@+id/activity_main_auto_scroll_scrollView_with_padding_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/activity_main_title"
+            android:text="@string/autoscroll_scrollview_with_padding_title" />
 
-    <Button
-        android:id="@+id/activity_main_flaky_sample_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/activity_main_webview_sample_button"
-        android:text="@string/main_screen_scroll_view_sample_button" />
+        <Button
+            android:id="@+id/activity_main_simple_sample_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/activity_main_auto_scroll_scrollView_with_padding_button"
+            android:text="@string/main_screen_simple_fragment_button" />
+
+        <Button
+            android:id="@+id/activity_main_webview_sample_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/activity_main_simple_sample_button"
+            android:text="@string/main_screen_webview_button" />
+
+        <Button
+            android:id="@+id/activity_main_flaky_sample_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/activity_main_webview_sample_button"
+            android:text="@string/main_screen_scroll_view_sample_button" />
 
     <Button
         android:id="@+id/activity_main_system_dialogs_button"
@@ -56,43 +59,43 @@
         android:id="@+id/activity_main_continuously_sample_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/activity_main_system_dialogs_button"
+        android:layout_below="@+id/activity_main_flaky_sample_button"
         android:text="@string/main_screen_continuously_sample_button" />
 
-    <Button
-        android:id="@+id/activity_main_upgrade_scenario_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/activity_main_continuously_sample_button"
-        android:text="@string/upgrade_title" />
+        <Button
+            android:id="@+id/activity_main_upgrade_scenario_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/activity_main_continuously_sample_button"
+            android:text="@string/upgrade_title" />
 
-    <Button
-        android:id="@+id/activity_main_complex_compose_sample_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/activity_main_upgrade_scenario_button"
-        android:text="@string/main_screen_complex_compose_sample_button" />
+        <Button
+            android:id="@+id/activity_main_complex_compose_sample_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/activity_main_upgrade_scenario_button"
+            android:text="@string/main_screen_complex_compose_sample_button" />
 
-    <Button
-        android:id="@+id/activity_main_idlewaiting_sample_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/activity_main_complex_compose_sample_button"
-        android:text="@string/main_screen_idlewaiting_sample_button" />
+        <Button
+            android:id="@+id/activity_main_idlewaiting_sample_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/activity_main_complex_compose_sample_button"
+            android:text="@string/main_screen_idlewaiting_sample_button" />
 
-    <Button
-        android:id="@+id/activity_main_measure_sample_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/activity_main_idlewaiting_sample_button"
-        android:text="@string/main_screen_measure_sample_button" />
+        <Button
+            android:id="@+id/activity_main_measure_sample_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/activity_main_idlewaiting_sample_button"
+            android:text="@string/main_screen_measure_sample_button" />
 
-    <Button
-        android:id="@+id/activity_main_device_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/activity_main_measure_sample_button"
-        android:text="@string/main_screen_device_button" />
+        <Button
+            android:id="@+id/activity_main_device_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/activity_main_measure_sample_button"
+            android:text="@string/main_screen_device_button" />
 
     <Button
         android:id="@+id/activity_main_device_full_button"
@@ -101,11 +104,20 @@
         android:layout_below="@id/activity_main_device_button"
         android:text="@string/main_screen_full_device_button" />
 
-    <TextView
-        android:id="@+id/activity_main_description_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/activity_main_device_full_button"
-        android:text="@string/main_screen_title" />
 
-</RelativeLayout>
+        <Button
+            android:id="@+id/activity_main_change_locale_mid_test_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/activity_main_device_full_button"
+            android:text="@string/main_screen_change_language_mid_test_button" />
+
+        <TextView
+            android:id="@+id/activity_main_description_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/activity_main_change_locale_mid_test_button"
+            android:text="@string/main_screen_title" />
+    </RelativeLayout>
+
+</ScrollView>

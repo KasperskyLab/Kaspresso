@@ -2,6 +2,7 @@ plugins {
     id("convention.android-library")
     id("convention.publication-android-lib")
     id("convention.third-party-report")
+    id("convention.legal-documents")
 }
 
 // TODO: move to publishing convention
@@ -19,6 +20,8 @@ publish {
 }
 
 dependencies {
+    api(libs.bundles.allure)
+
     implementation(projects.kaspresso)
 
     implementation(libs.kotlinStdlib)
@@ -27,7 +30,6 @@ dependencies {
     implementation(libs.androidXTestRunner)
     implementation(libs.uiAutomator)
     implementation(libs.androidXTestExtJunitKtx)
-    implementation(libs.bundles.allure)
 
     testImplementation(libs.junit)
 

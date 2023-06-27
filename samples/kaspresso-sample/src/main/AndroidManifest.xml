@@ -87,6 +87,10 @@
         <activity android:name=".systemdialogs.SystemDialogsActivity"
             android:label="@string/system_dialogs_sanity"/>
 
+        <activity
+            android:name=".systemlanguage.ChangeLocaleActivity"
+            android:label="@string/main_screen_change_language_mid_test_button"/>
+
         <service
             android:name=".device.DeviceSampleAccessibilityService"
             android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"

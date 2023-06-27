@@ -9,7 +9,8 @@ internal class Desktop(
     private val cmdCommandPerformer: CmdCommandPerformer,
     private val presetEmulators: List<String>,
     private val adbServerPort: String?,
-    private val logger: DesktopLogger
+    private val logger: DesktopLogger,
+    private val adbPath: String
 ) {
 
     companion object {
@@ -30,7 +31,8 @@ internal class Desktop(
                             cmdCommandPerformer,
                             deviceName,
                             adbServerPort,
-                            LoggerFactory.getDesktopLoggerReflectingDevice(logger, deviceName)
+                            LoggerFactory.getDesktopLoggerReflectingDevice(logger, deviceName),
+                            adbPath
                         )
                     deviceMirror.startConnectionToDevice()
                     devices += deviceMirror
@@ -51,7 +53,7 @@ internal class Desktop(
 
     private fun getAttachedDevicesByAdb(): List<String> {
         val pattern = Pattern.compile("^([a-zA-Z0-9\\-:.]+)(\\s+)(device)")
-        val commandResult = cmdCommandPerformer.perform("adb devices")
+        val commandResult = cmdCommandPerformer.perform("$adbPath devices")
         if (commandResult.status != ExecutorResultStatus.SUCCESS) {
             return emptyList()
         }

@@ -1,9 +1,9 @@
 package com.kaspersky.kaspressample.screen
 
-import io.github.kakaocup.kakao.web.KWebView
 import com.kaspersky.kaspressample.R
 import com.kaspersky.kaspressample.web.WebViewActivity
 import com.kaspersky.kaspresso.screens.KScreen
+import io.github.kakaocup.kakao.web.KWebView
 
 object WebViewScreen : KScreen<WebViewScreen>() {
 

@@ -119,6 +119,7 @@ import com.kaspersky.kaspresso.params.FlakySafetyParams
 import com.kaspersky.kaspresso.params.Params
 import com.kaspersky.kaspresso.params.ScreenshotParams
 import com.kaspersky.kaspresso.params.StepParams
+import com.kaspersky.kaspresso.params.SystemDialogsSafetyParams
 import com.kaspersky.kaspresso.params.VideoParams
 import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
 import io.github.kakaocup.kakao.Kakao
@@ -435,6 +436,8 @@ data class Kaspresso(
          */
         lateinit var flakySafetyParams: FlakySafetyParams
 
+        lateinit var systemDialogsSafetyParams: SystemDialogsSafetyParams
+
         /**
          * Holds the [ContinuouslyParams] for [com.kaspersky.kaspresso.flakysafety.ContinuouslyProvider]'s usage.
          * If it was not specified, the default implementation is used.
@@ -714,7 +717,8 @@ data class Kaspresso(
             )
             if (!::hackPermissions.isInitialized) hackPermissions = HackPermissionsImpl(
                 libLogger,
-                instrumentalDependencyProviderFactory.getComponentProvider<HackPermissionsImpl>(instrumentation)
+                instrumentalDependencyProviderFactory.getComponentProvider<HackPermissionsImpl>(instrumentation),
+                adbServer
             )
             if (!::exploit.isInitialized) exploit = ExploitImpl(
                 libLogger,
@@ -726,6 +730,7 @@ data class Kaspresso(
             if (!::logcat.isInitialized) logcat = LogcatImpl(libLogger, adbServer)
 
             if (!::flakySafetyParams.isInitialized) flakySafetyParams = FlakySafetyParams.default()
+            if (!::systemDialogsSafetyParams.isInitialized) systemDialogsSafetyParams = SystemDialogsSafetyParams.default()
             if (!::continuouslyParams.isInitialized) continuouslyParams = ContinuouslyParams.default()
             if (!::autoScrollParams.isInitialized) autoScrollParams = AutoScrollParams.default()
             if (!::stepParams.isInitialized) stepParams = StepParams()
@@ -754,7 +759,8 @@ data class Kaspresso(
                     videoRecorder = VideoRecorderImpl(
                         instrumentalDependencyProviderFactory.getComponentProvider<VideoRecorderImpl>(instrumentation),
                         libLogger,
-                        videoParams
+                        videoParams,
+                        instrumentation
                     )
                 )
             }
@@ -826,7 +832,8 @@ data class Kaspresso(
                     SystemDialogSafetyViewBehaviorInterceptor(
                         libLogger,
                         instrumentalDependencyProviderFactory.getInterceptorProvider<SystemDialogSafetyViewBehaviorInterceptor>(instrumentation),
-                        adbServer
+                        adbServer,
+                        systemDialogsSafetyParams
                     ),
                     FlakySafeViewBehaviorInterceptor(flakySafetyParams, libLogger)
                 ) else mutableListOf(
@@ -839,7 +846,8 @@ data class Kaspresso(
                     SystemDialogSafetyDataBehaviorInterceptor(
                         libLogger,
                         instrumentalDependencyProviderFactory.getInterceptorProvider<SystemDialogSafetyViewBehaviorInterceptor>(instrumentation),
-                        adbServer
+                        adbServer,
+                        systemDialogsSafetyParams
                     ),
                     FlakySafeDataBehaviorInterceptor(flakySafetyParams, libLogger)
                 ) else mutableListOf(
@@ -853,7 +861,8 @@ data class Kaspresso(
                         SystemDialogSafetyWebBehaviorInterceptor(
                             libLogger,
                             instrumentalDependencyProviderFactory.getInterceptorProvider<SystemDialogSafetyViewBehaviorInterceptor>(instrumentation),
-                            adbServer
+                            adbServer,
+                            systemDialogsSafetyParams
                         ),
                         FlakySafeWebBehaviorInterceptor(flakySafetyParams, libLogger)
                     )
@@ -869,7 +878,8 @@ data class Kaspresso(
                 SystemDialogSafetyObjectBehaviorInterceptor(
                     libLogger,
                     instrumentalDependencyProviderFactory.getInterceptorProvider<SystemDialogSafetyViewBehaviorInterceptor>(instrumentation),
-                    adbServer
+                    adbServer,
+                    systemDialogsSafetyParams
                 ),
                 ElementLoaderObjectBehaviorInterceptor(libLogger, elementLoaderParams),
                 FlakySafeObjectBehaviorInterceptor(flakySafetyParams, libLogger)
@@ -879,7 +889,8 @@ data class Kaspresso(
                 SystemDialogSafetyDeviceBehaviorInterceptor(
                     libLogger,
                     instrumentalDependencyProviderFactory.getInterceptorProvider<SystemDialogSafetyViewBehaviorInterceptor>(instrumentation),
-                    adbServer
+                    adbServer,
+                    systemDialogsSafetyParams
                 ),
                 FlakySafeDeviceBehaviorInterceptor(flakySafetyParams, libLogger)
             )
@@ -941,6 +952,7 @@ data class Kaspresso(
                     screenshotParams = screenshotParams,
                     videoParams = videoParams,
                     elementLoaderParams = elementLoaderParams,
+                    systemDialogsSafetyParams = systemDialogsSafetyParams
                 ),
 
                 viewActionWatcherInterceptors = viewActionWatcherInterceptors,

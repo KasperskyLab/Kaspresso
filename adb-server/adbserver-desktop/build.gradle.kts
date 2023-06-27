@@ -1,6 +1,7 @@
 plugins {
     id("convention.kotlin-app")
     id("convention.third-party-report")
+    id("convention.legal-documents")
 }
 
 dependencies {
@@ -23,4 +24,5 @@ tasks.withType<Jar>().configureEach {
     }) {
         exclude("META-INF/**/**/module-info.class")
     }
+    exclude("NOTICE.txt")
 }

@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Build
 import androidx.test.ext.junit.rules.activityScenarioRule
+import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspressample.device.DeviceSampleActivity
 import com.kaspersky.kaspressample.screen.DeviceSampleScreen
 import com.kaspersky.kaspressample.utils.SafeAssert.assertTrueSafely
@@ -14,6 +15,12 @@ import org.junit.Rule
 import org.junit.Test
 
 class DevicePermissionsSampleTest : TestCase() {
+
+    @get:Rule
+    val runtimePermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
+        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        Manifest.permission.READ_EXTERNAL_STORAGE
+    )
 
     @get:Rule
     val activityRule = activityScenarioRule<DeviceSampleActivity>()

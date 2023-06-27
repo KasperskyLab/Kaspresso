@@ -40,14 +40,23 @@ dependencies {
     implementation(libs.androidXLifecycleRuntimeKtx)
 
     androidTestImplementation(libs.junit)
-    androidTestImplementation(projects.kaspresso)
+
+    // kaspresso
+    if (hasProperty("kaspresso.snapshotVersion")) {
+        val kaspressoVersion = property("kaspresso.snapshotVersion")
+        testImplementation("com.kaspersky.android-components:kaspresso:$kaspressoVersion")
+        androidTestImplementation("com.kaspersky.android-components:kaspresso:$kaspressoVersion")
+    } else {
+        androidTestImplementation(projects.kaspresso)
+        testImplementation(projects.kaspresso)
+    }
+
     androidTestImplementation(libs.androidXTestRunner)
     androidTestImplementation(libs.androidXTestRules)
     androidTestImplementation(libs.androidXTestExtJunitKtx)
     androidTestImplementation(libs.androidXTestExtJunit)
 
     testImplementation(libs.junit)
-    testImplementation(projects.kaspresso)
     testImplementation(libs.androidXTestRunner)
     testImplementation(libs.androidXTestRules)
     testImplementation(libs.androidXTestExtJunitKtx)

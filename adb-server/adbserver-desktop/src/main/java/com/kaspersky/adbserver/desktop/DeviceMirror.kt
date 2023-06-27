@@ -24,7 +24,8 @@ internal class DeviceMirror private constructor(
             cmdCommandPerformer: CmdCommandPerformer,
             deviceName: String,
             adbServerPort: String?,
-            logger: Logger
+            logger: Logger,
+            adbPath: String
         ): DeviceMirror {
             val desktopDeviceSocketConnection =
                 DesktopDeviceSocketConnectionFactory.getSockets(DesktopDeviceSocketConnectionType.FORWARD)
@@ -32,7 +33,8 @@ internal class DeviceMirror private constructor(
                 cmdCommandPerformer,
                 deviceName,
                 adbServerPort,
-                logger
+                logger,
+                adbPath
             )
             val connectionServerLifecycle = object : ConnectionServerLifecycle {
                 override fun onReceivedTask(command: Command) {

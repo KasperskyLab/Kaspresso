@@ -1,11 +1,14 @@
 package com.kaspersky.kaspressample.docloc_tests.advanced
 
+import android.Manifest
 import android.graphics.Color
 import androidx.fragment.app.testing.launchFragmentInContainer
+import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspressample.docloc.ScreenshotSampleFragment
 import com.kaspersky.kaspressample.docloc.ScreenshotSampleView
 import com.kaspersky.kaspresso.annotations.ScreenShooterTest
 import com.kaspersky.kaspresso.testcases.api.testcase.DocLocScreenshotTestCase
+import org.junit.Rule
 import org.junit.Test
 import java.io.File
 
@@ -18,6 +21,12 @@ class AdvancedScreenshotSampleTestLegacy : DocLocScreenshotTestCase(
     locales = "en,ru"
 ) {
     private lateinit var view: ScreenshotSampleView
+
+    @get:Rule
+    val runtimePermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
+        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        Manifest.permission.READ_EXTERNAL_STORAGE
+    )
 
     @ScreenShooterTest
     @Test
