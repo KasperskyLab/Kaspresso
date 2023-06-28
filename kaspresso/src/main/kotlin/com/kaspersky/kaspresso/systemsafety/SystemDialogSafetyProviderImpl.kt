@@ -38,7 +38,8 @@ class SystemDialogSafetyProviderImpl(
         { uiDevice, _ -> uiDevice.wait(Until.findObject(By.res("android:id/button1")), DEFAULT_TIMEOUT).click() },
         { uiDevice, _ -> uiDevice.wait(Until.findObject(By.res("android:id/closeButton")), DEFAULT_TIMEOUT).click() },
         { uiDevice, _ -> uiDevice.wait(Until.findObject(By.res("com.android.internal:id/aerr_close")), DEFAULT_TIMEOUT).click() },
-        { uiDevice, _ -> uiDevice.pressBack() }
+        { uiDevice, _ -> uiDevice.pressBack() },
+        { uiDevice, _ -> uiDevice.wait(Until.findObject(By.res("com.android.packageinstaller:id/permission_deny_button")), DEFAULT_TIMEOUT).click() }
     )
 
     /**
@@ -108,7 +109,7 @@ class SystemDialogSafetyProviderImpl(
      */
     private fun isAndroidSystemDetected(): Boolean {
         with(uiDevice) {
-            var isSystemDialogVisible = isVisible(By.pkg(Pattern.compile("\\S*google.android\\S*")).clazz(FrameLayout::class.java))
+            var isSystemDialogVisible = SystemSafetyPattern.values().any { isVisible(By.pkg(it.pattern).clazz(FrameLayout::class.java)) }
 
             if (systemDialogsSafetyParams.shouldIgnoreKeyboard) {
                 val isKeyboardVisible = isVisible(By.pkg(Pattern.compile("\\S*google.android.inputmethod\\S*")).clazz(FrameLayout::class.java))
