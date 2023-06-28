@@ -37,7 +37,6 @@ class SystemDialogSafetyViewDisabledSanityTest : TestCase(
                 }
             }
         }
-
         step("Check ScrollView screen is displayed") {
             SystemDialogsScreen {
                 btn2 {
