@@ -137,7 +137,8 @@ abstract class DocLocScreenshotTestCase(
     @get:Rule
     val nightModeRule = ToggleNightModeRule(
         toggleNightMode = toggleNightMode,
-        logger = kaspresso.libLogger
+        logger = kaspresso.libLogger,
+        device = kaspresso.device
     )
 
     @get:Rule
