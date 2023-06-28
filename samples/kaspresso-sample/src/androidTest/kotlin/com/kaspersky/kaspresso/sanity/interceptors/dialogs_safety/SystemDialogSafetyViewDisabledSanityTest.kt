@@ -33,17 +33,18 @@ class SystemDialogSafetyViewDisabledSanityTest : TestCase(
         step("Check ScrollView screen is displayed") {
             SystemDialogsScreen {
                 btn1 {
-                    click()
+                    doubleClick()
                 }
             }
         }
+        Thread.sleep(1000L)
         step("Check ScrollView screen is displayed") {
             SystemDialogsScreen {
                 btn2 {
-                  Assert.assertThrows(null, NoActivityResumedException::class.java) {
-                      isDisplayed()
-                      click()
-                  }
+                    Assert.assertThrows(null, NoActivityResumedException::class.java) {
+                        isDisplayed()
+                        click()
+                    }
                 }
             }
         }
