@@ -165,7 +165,7 @@ nav:
       - 9. flakySafely: Tutorial/FlakySafely.md
       - 10. Работа с Android permissions: Tutorial/Android_permissions.md
       - 11. RecyclerView: Tutorial/Recyclerview.md
-      - 12. Логирование и скриншоты: Tutorial/Logger_and_screenshots.md
+      - 12. Логирование и скриншоты: Tutorial/Logger_and_screenshot.md
       - 13. Screenshot-тесты. Часть 1. Простой screenshot тест: Tutorial/Screenshot_tests_1.md
   - Wiki:
       - Introduction: Wiki/index.md
