@@ -84,6 +84,7 @@ class LoginActivityTest : TestCase() {
         }
     }
 }
+
 ```
 
 In this test, we ourselves create a username and password with which we will log in. But there are times when we get the data for the test from some external system. For example, a project may have some kind of service that generates a login and password for logging in, returns it to us, and we use them for testing.
