@@ -3,6 +3,7 @@ check_android_30_task:
   env:
     DISPLAY: :99
   only_if: $CIRRUS_PR != '' && $CIRRUS_BASE_BRANCH == 'master'
+  skip: "!changesInclude('.cirrus.yml', '**.{kt,kts,java,toml}')"
 
   container:
     image: cirrusci/android-sdk:33
