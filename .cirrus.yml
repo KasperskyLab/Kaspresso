@@ -3,7 +3,7 @@ check_android_30_task:
   env:
     DISPLAY: :99
   only_if: $CIRRUS_PR != '' && $CIRRUS_BASE_BRANCH == 'master'
-  skip: "changesInclude('NOTICE.txt', 'LICENSE.txt', '**.{md,html}')"
+  skip: "changesIncludeOnly('NOTICE.txt', 'LICENSE.txt', '**.{md,html}')"
 
   container:
     image: cirrusci/android-sdk:33
@@ -71,7 +71,7 @@ check_android_33_task:
   env:
     DISPLAY: :99
   only_if: $CIRRUS_PR != '' && $CIRRUS_BASE_BRANCH == 'master'
-  skip: "changesInclude('NOTICE.txt', 'LICENSE.txt', '**.{md,html}')"
+  skip: "changesIncludeOnly('NOTICE.txt', 'LICENSE.txt', '**.{md,html}')"
 
   container:
     image: cirrusci/android-sdk:33
@@ -135,7 +135,7 @@ check_android_21_task:
   env:
     DISPLAY: :99
   only_if: $CIRRUS_PR != '' && $CIRRUS_BASE_BRANCH == 'master'
-  skip: "changesInclude('NOTICE.txt', 'LICENSE.txt', '**.{md,html}')"
+  skip: "changesIncludeOnly('NOTICE.txt', 'LICENSE.txt', '**.{md,html}')"
 
   container:
     image: cirrusci/android-sdk:33
