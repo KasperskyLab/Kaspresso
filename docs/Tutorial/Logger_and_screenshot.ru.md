@@ -87,7 +87,7 @@ class LoginActivityTest : TestCase() {
 
 ```
 
-В этом тесте мы сами создаем логин и пароль, с которыми будем авторизоваться. Но бывают случаи, когда данные для теста мы получаем из какой-то внешней системы. Например, в проекте может быть какой-то сервис, который генерирует логин и пароль для входа, возвращает нам, и мы их используем для тестирования.
+В этом тесте мы сами создаем логин и пароль, с которыми будем авторизоваться. Но довольно распространенной является ситуация, когда данные для теста мы получаем из какой-то внешней системы. Например, для целей тестирования в проекте может быть поднят REST-API сервис, который генерирует данные для авторизациии, которые мы будем использовать.
 
 Давайте смоделируем эту ситуацию. Создадим класс, который возвращает данные для входа – логин и пароль.
 
@@ -101,9 +101,9 @@ class LoginActivityTest : TestCase() {
 
 <img src="../images/logs/create_class.png" alt="Create class"/>
 
-Как мы уже говорили ранее – здесь мы будем только моделировать ситуацию, когда данные для теста получаем из внешней системы. В созданном классе у нас будет два метода: один из них возвращает логин, другой – пароль. В реальных проектах эти данные мы бы запрашивали с сервера, и менять внутреннюю реализацию возможности у нас бы не было. То есть сейчас мы сами укажем, какие логин и пароль вернет система, но представляем, что для нас это «черный ящик», и мы не знаем, какие значения будут получены.
+Как мы уже говорили ранее – здесь мы будем только моделировать ситуацию, когда данные для теста получаем из внешней системы. В созданном классе у нас будет два метода: один из них возвращает логин, другой – пароль. В реальных проектах эти данные мы бы запрашивали с сервера. Сейчас мы сами укажем, какие логин и пароль вернет система, но представляем, что для нас это «черный ящик», и мы не знаем, какие значения будут получены.
 
-Добавляем в этом классе два метода и пусть они возвращают корректные логин и пароль:
+Добавляем в этом классе два метода. Пусть они возвращают корректные логин и пароль:
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial.data
@@ -191,7 +191,7 @@ class LoginActivityGeneratedDataTest : TestCase() {
 ```
 Запускаем. Тест пройден успешно.
 
-## Анализ проваленных тестов
+## Анализ упавших тестов
 
 Мы проверили, что, если система возвращает корректные данные, то тест проходит успешно. Давайте внесем изменения в класс `TestData`, чтобы он возвращал неверные значения
 
@@ -212,15 +212,139 @@ object TestData {
 
 <img src="../images/logs/logcat.png" alt="Test failed"/>
 
-Что мы отсюда видим? Попытка залогиниться прошла успешно, а проверка на то, что после успешного логина открыт нужный экран – провалилась.
+Что мы отсюда видим? 'LoginScenario' выполнен успешно, а проверка на то, что после успешного логина открыт нужный экран – провалилась.
 
 При этом, отсюда совершенно неясно, почему проблема возникла. Мы не видим, с какими данными была попытка залогиниться, действительно ли они корректные, и непонятно, как решать возникшую проблему. Результат был бы более понятный, если бы в логах содержалась информация – какие конкретно логин и пароль были использованы во время тестирования. 
 
 ## Добавление логов
 
-Если нам нужно добавить какую-то свою информацию в логи, то можем использовать объект `testLogger`, у которого необходимо вызвать метод `i` (от слова `info)`, и в качестве параметра передать текст, который нужно залогировать.
+Для того чтобы выводить различную информацию в Logcat, мы можем воспользоваться классом 'Log' из пакета 'android.util'. Для этого у класса 'Log' необходимо вызвать один из публичных статических методов: i (info), d (debug), w (warning), e (error). Все эти методы по сути делают одно и то же - выводят сообщение в журнал, но среди них есть отличие. Для того чтобы упростить поиск и чтение логов, их делят на несколько уровней:
 
-Логин и пароль у нас генерируются перед шагом ` step("Try to login with correct username and password")` можем в этом месте вывести в лог сообщение о том, какие именно данные были сгенерированы
+<ul>
+<li>Debug — сообщения для отладки программы</li>
+<li>Error — серьезные ошибки, возникшие во время работы программы</li>
+<li>Warning — предупреждения. Программа может продолжать работу, но рекомендуется обратить внимание на какую-то проблему</li>
+<li>Info — простые сообщения, содержащие различного рода информацию. Система работает нормально</li>
+</ul>
+
+В зависимости от типа сообщения, которое вы хотите вывести в журнал, необходимо вызвать метод с соответствующим уровнем логирования. 
+
+!!! info
+    Более подробную информацию про уровни логирования и вывод сообщений в Logcat можно почитать в [официальной документации]("https://developer.android.com/studio/debug/logcat")
+
+Например, в нашем случае мы хотим в журнале показать данные, которые использовались при авторизации - это простое информационное сообщение, которое не говорит об ошибках в работе программы или каких-то предупреждениях, а также не используется для отладки, поэтому нам подойдет уровень логирования 'info' - метод 'Log.i()'.
+
+В качестве параметра этому методу нужно передать два аргумента типа String - две строчки: 
+
+<ul>
+<li>Первая - тэг. По этому тэгу мы будем искать нужное нам сообщение в журнале.</li>
+<li>Вторая - текст сообщения</li>
+</ul>
+
+Раньше необходимые сообщения в журнале мы искали по тэгу "KASPRESSO", можем указать его в качестве тэга, а в качестве сообщения выведем данные, использованные при авторизации.
+
+Логин и пароль у нас генерируются перед шагом `step("Try to login with correct username and password")` можем в этом месте вывести в лог сообщение о том, какие именно данные были сгенерированы
+
+```kotlin
+package com.kaspersky.kaspresso.tutorial
+
+import android.util.Log
+import androidx.test.ext.junit.rules.activityScenarioRule
+import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
+import com.kaspersky.kaspresso.tutorial.afterlogin.AfterLoginActivity
+import com.kaspersky.kaspresso.tutorial.data.TestData
+import org.junit.Rule
+import org.junit.Test
+
+class LoginActivityGeneratedDataTest : TestCase() {
+
+    @get:Rule
+    val activityRule = activityScenarioRule<MainActivity>()
+
+    @Test
+    fun loginSuccessfulIfUsernameAndPasswordCorrect() {
+        run {
+            val username = TestData.generateUsername()
+            val password = TestData.generatePassword()
+
+            Log.i("KASPRESSO","Generated data. Username: $username, Password: $password")
+
+            step("Try to login with correct username and password") {
+                scenario(
+                    LoginScenario(
+                        username = username,
+                        password = password
+                    )
+                )
+            }
+            step("Check current screen") {
+                device.activities.isCurrent(AfterLoginActivity::class.java)
+            }
+        }
+    }
+}
+
+```
+
+В этой строчке `Log.i("Generated data. Username: $username, Password: $password")` мы вызываем метод `i` (уровень логирования info) у класса `Log`, в качестве тэга передаем "KASPRESSO", а в качестве сообщения передаем строку `"Generated data. Username: $username, Password: $password")`, где вместо `$username` и `$password` будут подставлены значения переменных логин и пароль.
+
+!!! info
+    Подробнее о том, как формировать строку с использованием переменных и методов, можно почитать в [документации]( https://kotlinlang.org/docs/strings.html#string-templates)
+
+Давайте запустим тест еще раз и посмотрим логи:
+
+<img src="../images/logs/custom_log.png" alt="Custom Log"/>
+
+После `TEST SECTION` видно наш лог, который выводится с тэгом `KASPRESSO`. В этом логе видно, что сгенерированные данные некорректные (пароль слишком короткий), а значит тест падает из-за внешней системы, и решать проблему нужно именно в ней.
+
+Если вы не хотите смотреть полностью весь лог, и вас интересуют только сообщения, добавленные вами, то вы можете использовать любой другой тэг. Для таких ситуаций удобно использовать тэг "KASPRESSO_TEST", тогда ваши логи будут отображаться в общем журнале вместе с другими сообщениями, если отфильтровать их по тэгу "KASPRESSO", при этом вы в любой момент сможете оставить только ваши сообщения, отфильтровав их по тэгу "KASPRESSO_TEST"
+
+```kotlin
+package com.kaspersky.kaspresso.tutorial
+
+import android.util.Log
+import androidx.test.ext.junit.rules.activityScenarioRule
+import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
+import com.kaspersky.kaspresso.tutorial.afterlogin.AfterLoginActivity
+import com.kaspersky.kaspresso.tutorial.data.TestData
+import org.junit.Rule
+import org.junit.Test
+
+class LoginActivityGeneratedDataTest : TestCase() {
+
+    @get:Rule
+    val activityRule = activityScenarioRule<MainActivity>()
+
+    @Test
+    fun loginSuccessfulIfUsernameAndPasswordCorrect() {
+        run {
+            val username = TestData.generateUsername()
+            val password = TestData.generatePassword()
+
+            Log.i("KASPRESSO_TEST","Generated data. Username: $username, Password: $password")
+
+            step("Try to login with correct username and password") {
+                scenario(
+                    LoginScenario(
+                        username = username,
+                        password = password
+                    )
+                )
+            }
+            step("Check current screen") {
+                device.activities.isCurrent(AfterLoginActivity::class.java)
+            }
+        }
+    }
+}
+
+```
+
+<img src="../images/logs/custom_log_test.png" alt="Custom Log"/>
+
+Добавление собственных логов используется очень часто на практике, поэтому для удобства в Kaspresso был добавлен класс `UiTestLogger`, в котором вывод сообщений в лог с тэгом "KASPRESSO_TEST" реализован под капотом. В самих тестах вам достаточно обратиться к объекту `testLogger`, вызвав метод с необходимым уровнем логирования.
+
+В нашем случае логирование выглядело бы следующим образом:
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -242,9 +366,9 @@ class LoginActivityGeneratedDataTest : TestCase() {
         run {
             val username = TestData.generateUsername()
             val password = TestData.generatePassword()
-            
+
             testLogger.i("Generated data. Username: $username, Password: $password")
-            
+
             step("Try to login with correct username and password") {
                 scenario(
                     LoginScenario(
@@ -262,21 +386,7 @@ class LoginActivityGeneratedDataTest : TestCase() {
 
 ```
 
-В этой строчке `testLogger.i("Generated data. Username: $username, Password: $password")
-` мы вызываем метод `i` у объекта `testLogger`, в качестве параметра передаем строку `"Generated data. Username: $username, Password: $password")`, где вместо `$username` и `$password` будут подставлены значения переменных логин и пароль.
-
-!!! info
-    Подробнее о том, как формировать строку с использованием переменных и методов, можно почитать в [документации]( https://kotlinlang.org/docs/strings.html#string-templates)
-
-Давайте запустим тест еще раз и посмотрим логи:
-
-<img src="../images/logs/custom_log.png" alt="Custom Log"/>
-
-После `TEST SECTION` видно наш лог, который выводится с тэгом `KASPRESSO_TEST`. В этом логе видно, что сгенерированные данные некорректные (пароль слишком короткий), а значит тест падает из-за внешней системы, и решать проблему нужно именно в ней. 
-
-Если вы не хотите смотреть полностью весь лог, и вас интересуют только сообщения, добавленные вами, то можете отфильтровать журнал по тэгу `KASPRESSO_TEST`
-
-<img src="../images/logs/kaspresso_test_tag.png" alt="Kaspresso test tag"/>
+Теперь указывать тэг вручную не нужно, по умолчанию будет использован "KASPRESSO_TEST".
 
 ## Скриншоты
 
