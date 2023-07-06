@@ -17,7 +17,7 @@ Automator](https://developer.android.com/training/testing/ui-automator), Kaspres
 * Significantly faster execution of UI Automator commands. With Kaspresso, some UI Automator commands run **10 times faster**!
 * Excellent readability due to human DSL.
 * Useful interceptor mechanism to catch all actions and assertions in one place.
-* Full logging.
+* Full logging.asdsa
 * Ability to call ADB commands.
 * UI tests writing philosophy implemented with DSL.
 * Features screenshotting.
