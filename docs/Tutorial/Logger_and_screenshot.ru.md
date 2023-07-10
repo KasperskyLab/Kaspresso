@@ -659,11 +659,15 @@ class LoginActivityGeneratedDataTest : TestCase(
 
 В данном случае мы получаем все `Interceptor`-ы, которые перехватывают событие выполнения шагов (`step`) 
 
-<code>stepWatcherInterceptors</code>
+```kotlin
+   stepWatcherInterceptors
+```
 
 и добавляем туда `ScreenshotStepWatcherInterceptor`. 
 
-<code>stepWatcherInterceptors.add(ScreenshotStepWatcherInterceptor(...))</code>
+```kotlin
+   stepWatcherInterceptors.add(ScreenshotStepWatcherInterceptor(...))
+```
 
 Этому `interseptor`-у в качестве параметра конструктора нужно передать реализацию интерфейса `Screenshots`, то есть экземпляр класса, который реализует данный интерфейс и, соответственно, умеет делать скриншоты. Такой объект уже есть в `Kaspresso.Builder`, называется он `screenshots`. Мы вызвали функцию `apply` у `Kaspresso.Builder`, поэтому, находясь внутри этой функции, мы можем напрямую обращаться к переменным и методам данного `builder`-а. Обращаемся к переменной `screenshots`, передавая ее в качестве параметра. 
 
