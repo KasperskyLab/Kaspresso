@@ -647,7 +647,33 @@ class LoginActivityGeneratedDataTest : TestCase(
     }
 )
 ```
-Здесь мы сначала получаем builder по умолчанию, вызываем у него метод `apply` и в фигурных скобках добавляем все необходимые настройки. В данном случае мы получаем все `Interceptor`-ы, которые перехватывают событие выполнения шагов (`step`) и добавляем туда `ScreenshotStepWatcherInterceptor`. Этому `interseptor`-у в качестве параметра конструктора нужно передать реализацию интерфейса `Screenshots`, то есть экземпляр класса, который реализует данный интерфейс и, соответственно, умеет делать скриншоты. Такой объект уже есть в `Kaspresso.Builder`, называется он `screenshots`. Мы вызвали функцию `apply` у `Kaspresso.Builder`, поэтому, находясь внутри этой функции, мы можем напрямую обращаться к переменным и методам данного `builder`-а. Обращаемся к переменной `screenshots`, передавая ее в качестве параметра. 
+Здесь мы сначала получаем builder по умолчанию `Kaspresso.Builder.simple()`, вызываем у него метод `apply` 
+
+```kotlin
+    kaspressoBuilder = Kaspresso.Builder.simple().apply {
+        
+    }
+```
+
+и в фигурных скобках добавляем все необходимые настройки. 
+
+В данном случае мы получаем все `Interceptor`-ы, которые перехватывают событие выполнения шагов (`step`) 
+
+<code>stepWatcherInterceptors</code>
+
+и добавляем туда `ScreenshotStepWatcherInterceptor`. 
+
+<code>stepWatcherInterceptors.add(ScreenshotStepWatcherInterceptor(...))</code>
+
+Этому `interseptor`-у в качестве параметра конструктора нужно передать реализацию интерфейса `Screenshots`, то есть экземпляр класса, который реализует данный интерфейс и, соответственно, умеет делать скриншоты. Такой объект уже есть в `Kaspresso.Builder`, называется он `screenshots`. Мы вызвали функцию `apply` у `Kaspresso.Builder`, поэтому, находясь внутри этой функции, мы можем напрямую обращаться к переменным и методам данного `builder`-а. Обращаемся к переменной `screenshots`, передавая ее в качестве параметра. 
+
+```kotlin
+class LoginActivityGeneratedDataTest : TestCase(
+    kaspressoBuilder = Kaspresso.Builder.simple().apply {
+        stepWatcherInterceptors.add(ScreenshotStepWatcherInterceptor(screenshots))
+    }
+)
+```
 
 Теперь, когда мы добавили данный `Interceptor`, после каждого шага теста, независимо от результата его выполнения, на устройстве будут сохранены скриншоты.
 
