@@ -128,7 +128,7 @@ class LoginActivityScreenshots : DocLocScreenshotTestCase(locales = "en, fr") {
 
     @Test
     fun takeScreenshots() = run {
-        step("Take screenshots initial state") {
+        step("Take initial state screenshots") {
 
         }
     }
@@ -136,7 +136,7 @@ class LoginActivityScreenshots : DocLocScreenshotTestCase(locales = "en, fr") {
 
 ```
 
-Для того чтобы сделать скриншоты, и чтобы эти скриншоты были сохранены в правильные папки на устройстве, необходимо вызвать метод `captureScreenshot`. В качестве параметра методу необходимо передать название файла, это может быть любая строка – по этому имени вы сможете найти скриншот на устройстве.
+Чтобы сделать скриншоты и сохранить их в правильные папки на устройстве, необходимо вызвать метод `captureScreenshot`. В качестве параметра методу необходимо передать название файла, это может быть любая строка – по этому имени вы сможете найти скриншот на устройстве.
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial.screenshot_tests
@@ -154,7 +154,7 @@ class LoginActivityScreenshots : DocLocScreenshotTestCase(locales = "en, fr") {
 
     @Test
     fun takeScreenshots() = run {
-        step("Take screenshots initial state") {
+        step("Take initial state screenshots") {
             captureScreenshot("Initial state")
         }
     }
@@ -162,7 +162,7 @@ class LoginActivityScreenshots : DocLocScreenshotTestCase(locales = "en, fr") {
 
 ```
 
-Разрешение на доступ к файлам здесь давать не нужно, это реализовано «под капотом». На данном этапе мы сделали все, что нужно, чтобы получить скриншоты экрана и посмотреть, как выглядит приложение на разных локалях, но желательно сделать еще одно изменение.
+Разрешение на доступ к файлам здесь давать не нужно, это реализовано «под капотом». На данном этапе мы сделали все необходимое, чтобы получить скриншоты экрана и посмотреть, как выглядит приложение на разных локалях, но желательно сделать еще одно изменение.
 
 Сейчас у нас открывается нужный экран, и сразу делается скриншот, поэтому есть вероятность, что какие-то данные на экране не успеют загрузиться, и снимок будет сделан до того, как мы увидим нужные нам элементы.
 
@@ -214,7 +214,7 @@ class LoginActivityScreenshots : DocLocScreenshotTestCase(locales = "en, fr") {
 
     @Test
     fun takeScreenshots() = run {
-        step("Take screenshots initial state") {
+        step("Take initial state screenshots") {
             LoginScreen {
                 waitForScreen()
                 captureScreenshot("Initial state")
@@ -224,7 +224,7 @@ class LoginActivityScreenshots : DocLocScreenshotTestCase(locales = "en, fr") {
 }
 ```
 
-Запускаем тест. Тест пройден успешно, и в `Device File Explorer` в папке `sdcard/Documents/screenshots` вы сможете найти все скриншоты, при этом для каждой локали была создана своя папка и вы сможете просмотреть, как выглядит ваше приложение на разных языках.
+Запускаем тест. Тест пройден успешно. В `Device File Explorer` в папке `sdcard/Documents/screenshots` вы сможете найти все скриншоты, при этом для каждой локали была создана своя папка, и вы сможете просмотреть, как выглядит ваше приложение на разных языках.
 
 <img src="../images/screenshot_tests_1/screenshot_test.png" alt="Screenshot test results"/>
 
@@ -232,8 +232,7 @@ class LoginActivityScreenshots : DocLocScreenshotTestCase(locales = "en, fr") {
 
 <img src="../images/screenshot_tests_1/initial_fr.png" alt="Initial state fr" width="300"/>
 
-
-Теперь, просмотрев скриншоты, можно увидеть проблему в приложении, что не все строки были добавлены корректно, и разработчик может исправить ошибку, добавив необходимые значения в файл `values-fr/strings.xml`.
+Теперь, просмотрев скриншоты, можно увидеть проблему в приложении из-за отсутствия необходимых переводов строк и исправить ошибку, добавив необходимые значения в файл `values-fr/strings.xml`.
 
 !!! info 
     Возможно, на некоторых устройствах при смене локали у вас возникнет проблема с заголовком экрана – весь контент на экране будет корректно переведен на необходимый язык, а заголовок останется прежним. Проблема связана с [багом в библиотеке Google]( https://issuetracker.google.com/issues/246092030). Его уже пофиксили, как только опубликуют соответствующий релиз, внесем изменения в Kaspresso.
@@ -243,7 +242,7 @@ class LoginActivityScreenshots : DocLocScreenshotTestCase(locales = "en, fr") {
 
 В данном уроке мы рассмотрели: зачем нужны скриншот-тесты, как их писать и где смотреть результаты выполнения тестов.
 
-Тема screenshot-тестов довольно обширная, и для более комфортного освоения мы ее разбили на несколько частей. Для более углубленного изучения переходите к следующему уроку
+Тема screenshot-тестов довольно обширная, и для более комфортного освоения мы ее разбили на несколько частей. В следующем уроке мы более подробно разберем тему стейтов, как их правильно устанавливать, и что нужно учитывать при разработке приложения, чтобы его можно было покрыть тестами.
 
 
 
