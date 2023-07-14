@@ -13,7 +13,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.kaspersky.kaspresso.tutorial.databinding.FragmentLoadUserBinding
 import kotlinx.coroutines.launch
 
-class LoadUserMvvmFragment : Fragment() {
+class LoadUserFragment : Fragment() {
 
     private var _binding: FragmentLoadUserBinding? = null
     private val binding: FragmentLoadUserBinding
@@ -80,13 +80,13 @@ class LoadUserMvvmFragment : Fragment() {
 
         private const val EXTRA_FOR_SCREENSHOTS = "for_screenshots"
 
-        fun newInstance(): LoadUserMvvmFragment = LoadUserMvvmFragment().apply {
+        fun newInstance(): LoadUserFragment = LoadUserFragment().apply {
             arguments = Bundle().apply {
                 putBoolean(EXTRA_FOR_SCREENSHOTS, false)
             }
         }
 
-        fun newTestInstance(mockedViewModel: LoadUserViewModel): LoadUserMvvmFragment = LoadUserMvvmFragment().apply {
+        fun newTestInstance(mockedViewModel: LoadUserViewModel): LoadUserFragment = LoadUserFragment().apply {
             arguments = Bundle().apply {
                 putBoolean(EXTRA_FOR_SCREENSHOTS, true)
             }

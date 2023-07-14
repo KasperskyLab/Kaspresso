@@ -70,17 +70,10 @@
             android:text="List activity" />
 
         <Button
-            android:id="@+id/mvvm_sample_activity_btn"
+            android:id="@+id/load_user_activity_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Mvvm sample activity" />
-
-        <Button
-            android:id="@+id/mvp_sample_activity_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Mvp sample activity" />
+            android:text="Load user activity" />
     </LinearLayout>
 </ScrollView>
