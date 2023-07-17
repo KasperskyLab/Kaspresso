@@ -28,12 +28,9 @@ class LoadUserFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val forScreenshotTest = requireArguments().getBoolean(EXTRA_FOR_SCREENSHOTS, false)
-        if (!forScreenshotTest) {
-            viewModel = ViewModelProvider(this)[LoadUserViewModel::class.java]
-            binding.loadingButton.setOnClickListener {
-                viewModel.loadUser()
-            }
+        viewModel = ViewModelProvider(this)[LoadUserViewModel::class.java]
+        binding.loadingButton.setOnClickListener {
+            viewModel.loadUser()
         }
         observeViewModel()
     }
@@ -43,6 +40,12 @@ class LoadUserFragment : Fragment() {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.state.collect { state ->
                     when (state) {
+                        State.Initial -> {
+                            binding.progressBarLoading.isVisible = false
+                            binding.loadingButton.isEnabled = true
+                            binding.error.isVisible = false
+                            binding.username.isVisible = false
+                        }
                         is State.Content -> {
                             binding.progressBarLoading.isVisible = false
                             binding.loadingButton.isEnabled = true
@@ -64,7 +67,6 @@ class LoadUserFragment : Fragment() {
                             binding.error.isVisible = false
                             binding.username.isVisible = false
                         }
-                        State.Initial -> {}
                     }
                 }
             }
@@ -78,19 +80,6 @@ class LoadUserFragment : Fragment() {
 
     companion object {
 
-        private const val EXTRA_FOR_SCREENSHOTS = "for_screenshots"
-
-        fun newInstance(): LoadUserFragment = LoadUserFragment().apply {
-            arguments = Bundle().apply {
-                putBoolean(EXTRA_FOR_SCREENSHOTS, false)
-            }
-        }
-
-        fun newTestInstance(mockedViewModel: LoadUserViewModel): LoadUserFragment = LoadUserFragment().apply {
-            arguments = Bundle().apply {
-                putBoolean(EXTRA_FOR_SCREENSHOTS, true)
-            }
-            viewModel = mockedViewModel
-        }
+        fun newInstance(): LoadUserFragment = LoadUserFragment()
     }
 }
