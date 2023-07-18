@@ -89,6 +89,7 @@ plugins:
           11. RecyclerView: 11. RecyclerView. Testing list of elements
           12. Логирование и скриншоты: 12. Logger and screenshots
           13. Screenshot-тесты. Часть 1. Простой screenshot тест: 13. Screenshot-тесты. Часть 1. Простой screenshot тест
+          14. Screenshot-тесты. Часть 2. Установка стейтов и работа с ViewModel: 14. Screenshot-тесты. Часть 2. Установка стейтов и работа с ViewModel
           Wiki: Wiki
           Introduction: Introduction
           PageObject in Kaspresso: PageObject in Kaspresso
@@ -128,6 +129,7 @@ plugins:
           11. RecyclerView: 11. RecyclerView
           12. Логирование и скриншоты: 12. Логирование и скриншоты
           13. Screenshot-тесты. Часть 1. Простой screenshot тест: 13. Screenshot-тесты. Часть 1. Простой screenshot тест
+          14. Screenshot-тесты. Часть 2. Установка стейтов и работа с ViewModel: 14. Screenshot-тесты. Часть 2. Установка стейтов и работа с ViewModel
           Wiki: Вики
           Introduction: Введение
           PageObject in Kaspresso: Паттерн PageObject в Kaspresso
@@ -167,6 +169,7 @@ nav:
       - 11. RecyclerView: Tutorial/Recyclerview.md
       - 12. Логирование и скриншоты: Tutorial/Logger_and_screenshot.md
       - 13. Screenshot-тесты. Часть 1. Простой screenshot тест: Tutorial/Screenshot_tests_1.md
+      - 14. Screenshot-тесты. Часть 2. Установка стейтов и работа с ViewModel: Tutorial/Screenshot_tests_2.md
   - Wiki:
       - Introduction: Wiki/index.md
       - PageObject in Kaspresso: Wiki/Page_object_in_Kaspresso.md
