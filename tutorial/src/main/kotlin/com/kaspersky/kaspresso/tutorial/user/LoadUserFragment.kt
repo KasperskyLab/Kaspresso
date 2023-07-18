@@ -61,7 +61,7 @@ class LoadUserFragment : Fragment() {
                             binding.error.isVisible = true
                             binding.username.isVisible = false
                         }
-                        State.Loading -> {
+                        State.Progress -> {
                             binding.progressBarLoading.isVisible = true
                             binding.loadingButton.isEnabled = false
                             binding.error.isVisible = false

@@ -4,10 +4,16 @@ plugins {
 
 android {
     defaultConfig {
+        minSdk = 21
 
         applicationId = "com.kaspersky.kaspresso.tutorial"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         testInstrumentationRunnerArguments["clearPackageData"] = "true"
+    }
+
+    packagingOptions {
+        exclude("META-INF/LICENSE.md")
+        exclude("META-INF/LICENSE-notice.md")
     }
 
     testOptions {
