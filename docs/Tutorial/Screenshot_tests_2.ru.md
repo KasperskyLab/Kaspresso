@@ -8,12 +8,10 @@
 
 Если вы ранее не разрабатывали приложения под Android, то сегодняшний урок может быть сложным для понимания. Поэтому мы настоятельно рекомендуем перед прохождением данного урока ознакомиться со следующими темами:
 
-<ul>
-<li>[Фрагменты](https://developer.android.com/guide/fragments) – что это, и как с ними работать</li>
-<li>[ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) и шаблон проектирования MVVM</li>
-<li>[StateFlow](https://developer.android.com/kotlin/flow/stateflow-and-sharedflow)</li>
-<li>[Библиотека Mockk](https://mockk.io/)</li>
-</ul>
+1. [Фрагменты](https://developer.android.com/guide/fragments) – что это, и как с ними работать
+2. [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) и шаблон проектирования MVVM
+3. [StateFlow](https://developer.android.com/kotlin/flow/stateflow-and-sharedflow)
+4. [Библиотека Mockk](https://mockk.io/)
 
 ## Обзор тестируемого приложения
 
@@ -53,7 +51,7 @@
 
 В пакете `screenshot_tests` создаем класс `LoadUserScreenshots`
 
-<img src="../images/screenshot_tests_2/create_class.png" alt="Create class" width="300"/>
+<img src="../images/screenshot_tests_2/create_class.png" alt="Create class"/>
 
 Наследуемся от `DocLocScreenshotTestCase` и передаем список языков в качестве параметра конструктору, сделаем скриншоты для английской и французской локалей
 
@@ -87,12 +85,12 @@ class LoadUserScreenshots : DocLocScreenshotTestCase(locales = "en, fr") {
 
 Для того чтобы получить все состояния экрана мы будем, как и раньше, имитировать действия пользователя – кликать по кнопке и ждать получения результата. Создаем `PageObject` этого экрана. В пакете `com.kaspersky.kaspresso.tutorial.screen` добавляем класс `LoadUserScreen`, тип `Object`
 
-<img src="../images/screenshot_tests_2/page_object.png" alt="Create page object" width="300"/>
+<img src="../images/screenshot_tests_2/page_object.png" alt="Create page object"/>
 
 Наследумся от `KScreen` и добавляем все необходимые UI-элементы: кнопка загрузки, ProgressBar, TextView с именем пользователя и TextView с текстом ошибки
 
 
- ```kotlin
+```kotlin
 package com.kaspersky.kaspresso.tutorial.screen
 
 import com.kaspersky.kaspresso.screens.KScreen
@@ -111,7 +109,6 @@ object LoadUserScreen : KScreen<LoadUserScreen>() {
     val username = KTextView { withId(R.id.username) }
     val error = KTextView { withId(R.id.error) }
 }
-
 ```
 Можем создавать скриншот-тест. Добавляем метод `takeScreenshots`
 
@@ -266,6 +263,9 @@ class LoadUserScreenshots : DocLocScreenshotTestCase(locales = "en, fr") {
 }
 
 ```
+
+## Проблемы текущего подхода
+
 Таким образом, мы смогли написать скриншот тест, в котором получили все необходимые состояния экрана, имитируя действия пользователя – кликая по кнопке и ожидая результата выполнения запроса
 Но давайте подумаем, насколько эта реализация подойдет для реальных приложений.
 
@@ -385,7 +385,7 @@ class LoadUserScreenshots : DocLocScreenshotTestCase(locales = "en, fr") {
 Теперь в эту ViewModel внутри тестового метода мы будем устанавливать новый стейт. Давайте попробуем установить какое-то новое значение в переменную `state`.
 
 !!! info
-Далее мы будем работать с объектами StateFlow и MutableStateFlow, если вы не знаете, что это, и как с ними работать, обязательно прочитайте [документацию]( https://developer.android.com/kotlin/flow/stateflow-and-sharedflow)
+    Далее мы будем работать с объектами StateFlow и MutableStateFlow, если вы не знаете, что это, и как с ними работать, обязательно прочитайте [документацию]( https://developer.android.com/kotlin/flow/stateflow-and-sharedflow)
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial.screenshot_tests
@@ -476,7 +476,7 @@ androidTestImplementation("io.mockk:mockk-android:1.13.3")
 ```
 
 !!! info
-Если после синхронизации и запуска проекта у вас возникают ошибки, следуйте инструкциям в журнале ошибок. В случае, если разобраться не получилось, переключитесь на ветку `TECH-tutorial-results` и сверьте файл `build.gradle` из этой ветки с вашим
+    Если после синхронизации и запуска проекта у вас возникают ошибки, следуйте инструкциям в журнале ошибок. В случае, если разобраться не получилось, переключитесь на ветку `TECH-tutorial-results` и сверьте файл `build.gradle` из этой ветки с вашим
 
 Теперь внутренняя реализация ViewModel нас не интересует. Все, что нам нужно – чтобы фрагмент подписывался на `state` из ViewModel, а ему возвращался тот объект, который мы создали внутри тестового класса. Делается это следующим образом:
 
