@@ -20,6 +20,7 @@ class LoadUserFragment : Fragment() {
         get() = _binding ?: throw IllegalStateException("FragmentLoadUserBinding is null")
 
     private lateinit var viewModel: LoadUserViewModel
+    private var isForScreenshots = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentLoadUserBinding.inflate(inflater, container, false)
@@ -28,8 +29,7 @@ class LoadUserFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val forScreenshotTest = requireArguments().getBoolean(EXTRA_FOR_SCREENSHOTS, false)
-        if (!forScreenshotTest) {
+        if (!isForScreenshots) {
             viewModel = ViewModelProvider(this)[LoadUserViewModel::class.java]
             binding.loadingButton.setOnClickListener {
                 viewModel.loadUser()
@@ -58,13 +58,18 @@ class LoadUserFragment : Fragment() {
                             binding.error.isVisible = true
                             binding.username.isVisible = false
                         }
-                        State.Loading -> {
+                        State.Progress -> {
                             binding.progressBarLoading.isVisible = true
                             binding.loadingButton.isEnabled = false
                             binding.error.isVisible = false
                             binding.username.isVisible = false
                         }
-                        State.Initial -> {}
+                        State.Initial -> {
+                            binding.progressBarLoading.isVisible = false
+                            binding.loadingButton.isEnabled = true
+                            binding.error.isVisible = false
+                            binding.username.isVisible = false
+                        }
                     }
                 }
             }
@@ -78,19 +83,13 @@ class LoadUserFragment : Fragment() {
 
     companion object {
 
-        private const val EXTRA_FOR_SCREENSHOTS = "for_screenshots"
+        fun newInstance(): LoadUserFragment = LoadUserFragment()
 
-        fun newInstance(): LoadUserFragment = LoadUserFragment().apply {
-            arguments = Bundle().apply {
-                putBoolean(EXTRA_FOR_SCREENSHOTS, false)
-            }
-        }
-
-        fun newTestInstance(mockedViewModel: LoadUserViewModel): LoadUserFragment = LoadUserFragment().apply {
-            arguments = Bundle().apply {
-                putBoolean(EXTRA_FOR_SCREENSHOTS, true)
-            }
+        fun newTestInstance(
+            mockedViewModel: LoadUserViewModel
+        ): LoadUserFragment = LoadUserFragment().apply {
             viewModel = mockedViewModel
+            isForScreenshots = true
         }
     }
 }
