@@ -27,5 +27,7 @@ object MainScreen : KScreen<MainScreen>() {
 
     val changeLocaleButton = KButton { withId(R.id.activity_main_change_locale_mid_test_button) }
 
+    val withToolbarButton = KButton { withId(R.id.activity_with_toolbar_button) }
+
     val descriptionText = KTextView { withId(R.id.activity_main_title) }
 }

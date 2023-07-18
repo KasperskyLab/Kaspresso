@@ -105,6 +105,13 @@
             android:layout_below="@id/activity_main_device_full_button"
             android:text="@string/main_screen_change_language_mid_test_button" />
 
+        <Button
+            android:id="@+id/activity_with_toolbar_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/activity_main_change_locale_mid_test_button"
+            android:text="@string/main_screen_activity_with_toolbar_button" />
+
         <TextView
             android:id="@+id/activity_main_description_textview"
             android:layout_width="wrap_content"
