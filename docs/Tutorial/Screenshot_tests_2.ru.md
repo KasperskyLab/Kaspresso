@@ -836,7 +836,7 @@ class LoadUserScreenshots : DocLocScreenshotTestCase(locales = "en, fr") {
 
 Данная проблема решается очень просто – в качестве параметра в метод `launchFragmentInContainer` можно передать стиль, который должен использоваться внутри фрагмента, его можно найти в манифесте приложения
 
-<img src="../images/screenshot_tests_2/style.png" alt="Style"
+<img src="../images/screenshot_tests_2/style.png" alt="Style"/>
 
 Передать этот стиль в метод `launchFragmentInContainer` можно следующим образом:
 
