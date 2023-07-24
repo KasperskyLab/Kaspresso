@@ -22,6 +22,7 @@ publish {
 dependencies {
     api(projects.kautomator)
     api(libs.kakao)
+    api(libs.kakaoExtClicks)
     api(libs.bundles.espresso)
     api(libs.uiAutomator)
     api(libs.androidXCore)
