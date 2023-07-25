@@ -8,11 +8,6 @@ import com.kaspersky.kaspresso.kautomatorsample.databinding.ActivityFlakyBinding
 
 class FlakyActivity : AppCompatActivity() {
 
-    companion object {
-        private const val FIRST_DELAY = 2_000L
-        private const val SECOND_DELAY = 15_000L
-    }
-
     private lateinit var binding: ActivityFlakyBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,16 +21,20 @@ class FlakyActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        startAsync(FIRST_DELAY, SECOND_DELAY)
+        startAsync(FIRST_DELAY)
     }
 
     @Suppress("SameParameterValue")
-    private fun startAsync(firstDelayMs: Long, secondDelayMs: Long) {
+    private fun startAsync(firstDelayMs: Long) {
         Handler(mainLooper).apply {
             postDelayed(
                 { binding.flakyButton1.text = getString(R.string.menu_item_2) },
                 firstDelayMs
             )
         }
+    }
+
+    companion object {
+        private const val FIRST_DELAY = 3_500L
     }
 }
