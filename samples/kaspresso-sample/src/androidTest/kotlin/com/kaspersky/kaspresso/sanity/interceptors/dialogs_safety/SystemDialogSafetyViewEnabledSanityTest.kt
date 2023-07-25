@@ -33,11 +33,11 @@ class SystemDialogSafetyViewEnabledSanityTest : TestCase() {
         step("Display Permission Window") {
             SystemDialogsScreen {
                 btn1 {
-                    click()
+                    doubleClick()
                 }
             }
         }
-
+        Thread.sleep(1000L)
         step("Try to click second button") {
             SystemDialogsScreen {
                 btn2 {

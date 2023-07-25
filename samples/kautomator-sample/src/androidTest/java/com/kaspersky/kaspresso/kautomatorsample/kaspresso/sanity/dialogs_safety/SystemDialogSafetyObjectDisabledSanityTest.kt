@@ -32,11 +32,11 @@ class SystemDialogSafetyObjectDisabledSanityTest : TestCase(
         step("Click first button") {
             SystemDialogsScreen {
                 btn1 {
-                    doubleClick()
+                    click()
                 }
             }
         }
-        Thread.sleep(1000L)
+
         step("Click second button") {
             SystemDialogsScreen {
                 btn2 {
