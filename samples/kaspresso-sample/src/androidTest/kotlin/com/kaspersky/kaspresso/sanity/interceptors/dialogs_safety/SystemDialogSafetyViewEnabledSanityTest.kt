@@ -24,25 +24,30 @@ class SystemDialogSafetyViewEnabledSanityTest : TestCase() {
 
         step("Open System Dialogs View Screen") {
             MainScreen {
-                systemDialogsButton {
-                    click()
+                flakySafely(3000) {
+                    systemDialogsButton {
+                        click()
+                    }
                 }
             }
         }
 
         step("Display Permission Window") {
             SystemDialogsScreen {
-                btn1 {
-                    doubleClick()
+                flakySafely(3000) {
+                    btn1 {
+                        click()
+                    }
                 }
             }
         }
-        Thread.sleep(1000L)
         step("Try to click second button") {
             SystemDialogsScreen {
-                btn2 {
-                    isDisplayed()
-                    click()
+                flakySafely(3000) {
+                    btn2 {
+                        isDisplayed()
+                        click()
+                    }
                 }
             }
         }

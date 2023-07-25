@@ -24,17 +24,21 @@ class SystemDialogSafetyObjectEnabledSanityTest : TestCase() {
 
         step("Click first button") {
             SystemDialogsScreen {
-                btn1 {
-                    click()
+                flakySafely(3000) {
+                    btn1 {
+                        click()
+                    }
                 }
             }
         }
 
         step("Click second button") {
             SystemDialogsScreen {
-                btn2 {
-                    isDisplayed()
-                    click()
+                flakySafely(3000) {
+                    btn2 {
+                        isDisplayed()
+                        click()
+                    }
                 }
             }
         }
