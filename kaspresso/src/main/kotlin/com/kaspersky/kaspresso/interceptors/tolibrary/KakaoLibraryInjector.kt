@@ -18,8 +18,9 @@ import com.kaspersky.kaspresso.interceptors.watcher.view.AtomWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.view.ViewActionWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.view.ViewAssertionWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.view.WebAssertionWatcherInterceptor
+import com.kaspersky.kaspresso.params.ClickParams
 
-internal object LibraryInterceptorsInjector {
+internal object KakaoLibraryInjector {
 
     @Suppress("LongParameterList")
     fun injectKaspressoInKakao(
@@ -29,7 +30,8 @@ internal object LibraryInterceptorsInjector {
         viewActionWatcherInterceptors: List<ViewActionWatcherInterceptor>,
         viewAssertionWatcherInterceptors: List<ViewAssertionWatcherInterceptor>,
         atomWatcherInterceptors: List<AtomWatcherInterceptor>,
-        webAssertionWatcherInterceptors: List<WebAssertionWatcherInterceptor>
+        webAssertionWatcherInterceptors: List<WebAssertionWatcherInterceptor>,
+        clickParams: ClickParams
     ) {
         val viewInterceptor =
             KakaoViewInterceptor(
@@ -61,6 +63,12 @@ internal object LibraryInterceptorsInjector {
                 onCheck(isOverride = true, interceptor = webInterceptor::interceptCheck)
                 onPerform(isOverride = true, interceptor = webInterceptor::interceptPerform)
             }
+        }
+
+        Kakao {
+            singleClickAction = clickParams.singleClickAction
+            doubleClickAction = clickParams.doubleClickAction
+            longClickAction = clickParams.longClickAction
         }
     }
 

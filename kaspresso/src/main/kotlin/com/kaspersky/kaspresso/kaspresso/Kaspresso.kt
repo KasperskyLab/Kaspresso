@@ -84,8 +84,8 @@ import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.flakysafety.
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.flakysafety.FlakySafeObjectBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.systemsafety.SystemDialogSafetyDeviceBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.systemsafety.SystemDialogSafetyObjectBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.tolibrary.LibraryInterceptorsInjector.injectKaspressoInKakao
-import com.kaspersky.kaspresso.interceptors.tolibrary.LibraryInterceptorsInjector.injectKaspressoInKautomator
+import com.kaspersky.kaspresso.interceptors.tolibrary.KakaoLibraryInjector.injectKaspressoInKakao
+import com.kaspersky.kaspresso.interceptors.tolibrary.KakaoLibraryInjector.injectKaspressoInKautomator
 import com.kaspersky.kaspresso.interceptors.tolibrary.kautomator.KautomatorDeviceInterceptor
 import com.kaspersky.kaspresso.interceptors.tolibrary.kautomator.KautomatorObjectInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.kautomator.DeviceWatcherInterceptor
@@ -113,6 +113,7 @@ import com.kaspersky.kaspresso.interceptors.watcher.view.impl.logging.LoggingWeb
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.logger.UiTestLoggerImpl
 import com.kaspersky.kaspresso.params.AutoScrollParams
+import com.kaspersky.kaspresso.params.ClickParams
 import com.kaspersky.kaspresso.params.ContinuouslyParams
 import com.kaspersky.kaspresso.params.ElementLoaderParams
 import com.kaspersky.kaspresso.params.FlakySafetyParams
@@ -476,6 +477,11 @@ data class Kaspresso(
         lateinit var elementLoaderParams: ElementLoaderParams
 
         /**
+         * Holds the [ClickParams].
+         * If it was not specified, the default implementation is used.
+         */
+        lateinit var clickParams: ClickParams
+        /**
          * Holds an implementation of [DirsProvider] interface. If it was not specified, the default implementation is used.
          */
         lateinit var dirsProvider: DirsProvider
@@ -737,6 +743,7 @@ data class Kaspresso(
             if (!::screenshotParams.isInitialized) screenshotParams = ScreenshotParams()
             if (!::videoParams.isInitialized) videoParams = VideoParams()
             if (!::elementLoaderParams.isInitialized) elementLoaderParams = ElementLoaderParams()
+            if (!::clickParams.isInitialized) clickParams = ClickParams.default()
 
             if (!::screenshots.isInitialized) {
                 screenshots = ScreenshotsImpl(
@@ -952,7 +959,8 @@ data class Kaspresso(
                     screenshotParams = screenshotParams,
                     videoParams = videoParams,
                     elementLoaderParams = elementLoaderParams,
-                    systemDialogsSafetyParams = systemDialogsSafetyParams
+                    systemDialogsSafetyParams = systemDialogsSafetyParams,
+                    clickParams = clickParams
                 ),
 
                 viewActionWatcherInterceptors = viewActionWatcherInterceptors,
@@ -984,7 +992,8 @@ data class Kaspresso(
                 kaspresso.viewActionWatcherInterceptors,
                 kaspresso.viewAssertionWatcherInterceptors,
                 kaspresso.atomWatcherInterceptors,
-                kaspresso.webAssertionWatcherInterceptors
+                kaspresso.webAssertionWatcherInterceptors,
+                kaspresso.params.clickParams
             )
 
             injectKaspressoInKautomator(
