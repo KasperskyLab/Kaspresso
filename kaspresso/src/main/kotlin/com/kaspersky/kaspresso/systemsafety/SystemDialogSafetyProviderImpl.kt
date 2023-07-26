@@ -30,16 +30,17 @@ class SystemDialogSafetyProviderImpl(
         get() = instrumentalDependencyProvider.uiDevice
 
     private val attemptsToSuppress: List<(UiDevice, AdbServer) -> Unit> = listOf(
+        { uiDevice, _ -> uiDevice.wait(Until.findObject(By.res("android:id/button1")), DEFAULT_TIMEOUT).click() },
+        { uiDevice, _ -> uiDevice.wait(Until.findObject(By.res("android:id/closeButton")), DEFAULT_TIMEOUT).click() },
+        { uiDevice, _ -> uiDevice.wait(Until.findObject(By.res("com.android.internal:id/aerr_close")), DEFAULT_TIMEOUT).click() },
+        { uiDevice, _ -> uiDevice.wait(Until.findObject(By.res("com.android.packageinstaller:id/permission_deny_button")), DEFAULT_TIMEOUT).click() },
+        { uiDevice, _ -> uiDevice.wait(Until.findObject(By.res("com.android.permissioncontroller:id/permission_deny_button")), DEFAULT_TIMEOUT).click() },
         { _, adbServer ->
             adbServer.performShell("input keyevent KEYCODE_BACK")
             adbServer.performShell("input keyevent KEYCODE_ENTER")
             adbServer.performShell("input keyevent KEYCODE_ENTER")
         },
-        { uiDevice, _ -> uiDevice.wait(Until.findObject(By.res("android:id/button1")), DEFAULT_TIMEOUT).click() },
-        { uiDevice, _ -> uiDevice.wait(Until.findObject(By.res("android:id/closeButton")), DEFAULT_TIMEOUT).click() },
-        { uiDevice, _ -> uiDevice.wait(Until.findObject(By.res("com.android.internal:id/aerr_close")), DEFAULT_TIMEOUT).click() },
-        { uiDevice, _ -> uiDevice.pressBack() },
-        { uiDevice, _ -> uiDevice.wait(Until.findObject(By.res("com.android.packageinstaller:id/permission_deny_button")), DEFAULT_TIMEOUT).click() }
+        { uiDevice, _ -> uiDevice.pressBack() }
     )
 
     /**
