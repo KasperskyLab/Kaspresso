@@ -17,7 +17,7 @@ class SystemDialogsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         binding = ActivitySystemDialogsBinding.inflate(layoutInflater)
         setContentView(binding.root)
     }
@@ -29,5 +29,10 @@ class SystemDialogsActivity : AppCompatActivity() {
                 arrayOf(Manifest.permission.READ_CALL_LOG),
                 RESULT_CODE)
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
     }
 }

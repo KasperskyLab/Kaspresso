@@ -32,7 +32,9 @@ class SystemDialogSafetyObjectDisabledSanityTest : TestCase(
         step("Click first button") {
             SystemDialogsScreen {
                 btn1 {
-                    click()
+                    flakySafely(3000) {
+                        click()
+                    }
                 }
             }
         }
@@ -40,9 +42,11 @@ class SystemDialogSafetyObjectDisabledSanityTest : TestCase(
         step("Click second button") {
             SystemDialogsScreen {
                 btn2 {
-                    Assert.assertThrows(null, StaleObjectException::class.java) {
-                        isDisplayed()
-                        click()
+                    flakySafely(3000) {
+                        Assert.assertThrows(null, StaleObjectException::class.java) {
+                            isDisplayed()
+                            click()
+                        }
                     }
                 }
             }

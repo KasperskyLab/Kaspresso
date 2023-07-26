@@ -2,6 +2,7 @@ package com.kaspersky.kaspresso.kautomatorsample.systemdialogs
 
 import android.Manifest
 import android.os.Bundle
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.kaspersky.kaspresso.kautomatorsample.databinding.ActivitySystemDialogsBinding
@@ -16,6 +17,7 @@ class SystemDialogsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         binding = ActivitySystemDialogsBinding.inflate(layoutInflater)
         setContentView(binding.root)
     }
@@ -27,5 +29,10 @@ class SystemDialogsActivity : AppCompatActivity() {
                 arrayOf(Manifest.permission.READ_CALL_LOG),
                 RESULT_CODE)
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
     }
 }
