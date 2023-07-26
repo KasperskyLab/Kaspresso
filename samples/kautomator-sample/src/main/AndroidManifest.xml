@@ -26,6 +26,7 @@
         <activity android:name=".ComponentsActivity" />
         <activity android:name=".recycler.RecyclerActivity" />
         <activity android:name=".scroll.ScrollActivity" />
+        <activity android:name=".scroll.NestedScrollViewsActivity" />
     </application>
 
 </manifest>
