@@ -26,12 +26,12 @@ class SystemDialogSafetyObjectEnabledSanityTest : TestCase() {
             SystemDialogsScreen {
                 flakySafely(3000) {
                     btn1 {
-                        click()
+                        doubleClick()
                     }
                 }
             }
         }
-
+        Thread.sleep(3000L)
         step("Click second button") {
             SystemDialogsScreen {
                 flakySafely(3000) {
