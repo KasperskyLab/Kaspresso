@@ -23,12 +23,12 @@ class SomeTest : TestCase(
 Конфигурация **Kaspresso** содержит:
 
 #### Kakao clicks
-Kaspresso предоставляет возможность переопределить стандартные клики Espresso.
+Kaspresso предоставляет возможность переопределить кастомные клики Espresso.
 Kakao библиотека предоставляет набор подготовленных имплементаций кликов, которые улучшают стабильность тестов на девайсах, находящихся под большой нагрузкой.
 
 Все детали о проблеме и решениях описано в [Kakao документации](https://github.com/KakaoCup/Kakao/tree/master/kakao-ext-clicks).
 
-Пример, как заиспользовать кастомные клики в вашем тесте представлено в [ClickTest](../../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/click_tests/ClickTest.kt).
+Пример, как заиспользовать кастомные клики в вашем тесте, представлен в [CustomClickTest](../../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/customclick_tests/CustomClickTest.kt).
 ```kotlin
 class ClickTest : TestCase(
     kaspressoBuilder = Kaspresso.Builder.simple(

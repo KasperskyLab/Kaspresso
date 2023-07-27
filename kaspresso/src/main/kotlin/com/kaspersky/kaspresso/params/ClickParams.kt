@@ -13,7 +13,7 @@ import io.github.kakaocup.kakao.ext.clicks.visualization.VisualClicksConfig
  * This class provides the possibility to override default espresso clicks.
  * All details are described in https://github.com/KakaoCup/Kakao/tree/master/kakao-ext-clicks
  */
-data class ClickParams (
+data class ClickParams(
     val singleClickAction: ClickAction,
     val doubleClickAction: ClickAction,
     val longClickAction: ClickAction,

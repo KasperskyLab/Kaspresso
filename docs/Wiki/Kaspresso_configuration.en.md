@@ -23,12 +23,12 @@ class SomeTest : TestCase(
 **Kaspresso** configuration contains:
 
 #### Kakao clicks
-Kaspresso provides the possibility to override custom Espresso clicks by custom clicks.
-Kakao library provides a set of prepared custom clicks which improves the stability of tests especially on devices under the high load.
+Kaspresso provides the possibility to override Espresso custom clicks.
+Kakao library provides a set of prepared custom clicks which improves the stability of the tests especially on the devices under high load.
 
 All details about the problem and solutions are described in [Kakao documentation](https://github.com/KakaoCup/Kakao/tree/master/kakao-ext-clicks).
 
-The example of how to apply the custom clicks in your test is presented in [ClickTest](../../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/click_tests/ClickTest.kt).
+The example of how to apply the custom clicks in your test is presented in [ClickTest](../../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/customclick_tests/ClickTest.kt).
 ```kotlin
 class ClickTest : TestCase(
     kaspressoBuilder = Kaspresso.Builder.simple(

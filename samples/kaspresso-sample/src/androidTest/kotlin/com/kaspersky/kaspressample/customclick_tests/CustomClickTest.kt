@@ -1,6 +1,7 @@
-package com.kaspersky.kaspressample.click_tests
+package com.kaspersky.kaspressample.customclick_tests
 
 import android.Manifest
+import android.os.Build
 import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspressample.MainActivity
@@ -11,13 +12,14 @@ import com.kaspersky.kaspressample.simple_tests.CheckEditScenario
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.params.ClickParams
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
+import org.junit.Assume
 import org.junit.Rule
 import org.junit.Test
 
 /**
  * The example of how to apply kakao custom clicks in Kaspresso
  */
-class ClickTest : TestCase(
+class CustomClickTest : TestCase(
     kaspressoBuilder = Kaspresso.Builder.simple(
         customize = {
             clickParams = ClickParams.kakaoVisual()
@@ -35,7 +37,13 @@ class ClickTest : TestCase(
     val activityRule = activityScenarioRule<MainActivity>()
 
     @Test
-    fun test() = run {
+    fun test() = before {
+        Assume.assumeTrue(
+            "Click visualization supported only on Android M+",
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
+        )
+    }.after {
+    }.run {
         step("Open Simple Screen") {
             testLogger.i("I am testLogger")
             device.screenshots.take("Additional_screenshot")
