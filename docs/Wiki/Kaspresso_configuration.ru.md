@@ -41,6 +41,11 @@ class ClickTest : TestCase(
 }
 ```
 
+Kaspresso предоставляет следующие подготовленные опции для кастомизации кликов:
+1. `ClickParams.kakaoVisual()' - Kakao clicks с визуализацией.
+2. `ClickParams.kakao()' - Kakao clicks.
+3. `ClickParams.default()' - Espresso clicks. Используются по умолчанию.
+
 #### Логгеры
 Kaspresso предоставляет два вида логгеров: `libLogger` и `testLogger`.
 ```libLogger``` - внутренний логгер Kaspresso <br>
