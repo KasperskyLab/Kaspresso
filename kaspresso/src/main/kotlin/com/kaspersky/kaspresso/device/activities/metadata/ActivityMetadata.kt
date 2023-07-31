@@ -49,38 +49,30 @@ internal class ActivityMetadata(
     }
 
     private fun getLocalizedStrings(decorView: View): List<LocalizedString> {
-        val localizedStrings = TreeIterables.depthFirstViewTraversal(decorView)
+        return TreeIterables.depthFirstViewTraversal(decorView)
             .filter { it.visibility == View.VISIBLE }
-            .filter { it is TextView }
-            .map { it as TextView }
+            .filter { it is TextView || it is CollapsingToolbarLayout }
             .map { v ->
-                LocalizedString(
-                    v.text.toString(),
-                    getEntryName(decorView.resources, v),
-                    v.left,
-                    v.top,
-                    v.width,
-                    v.height
-                )
+                if (v is TextView) {
+                    LocalizedString(
+                        v.text.toString(),
+                        getEntryName(decorView.resources, v),
+                        v.left,
+                        v.top,
+                        v.width,
+                        v.height
+                    )
+                } else {
+                    LocalizedString(
+                        (v as CollapsingToolbarLayout).title.toString(),
+                        getEntryNameFromLayout(decorView.resources, v),
+                        v.left,
+                        v.top,
+                        v.width,
+                        v.height
+                    )
+                }
             }.toMutableList()
-
-        val stringsFromToolbarLayouts = TreeIterables.depthFirstViewTraversal(decorView)
-            .filter { it.visibility == View.VISIBLE }
-            .filter { it is CollapsingToolbarLayout }
-            .map { it as CollapsingToolbarLayout }
-            .map { v ->
-                LocalizedString(
-                    v.title.toString(),
-                    getEntryNameFromLayout(decorView.resources, v),
-                    v.left,
-                    v.top,
-                    v.width,
-                    v.height
-                )
-            }
-
-        localizedStrings.addAll(stringsFromToolbarLayouts)
-        return localizedStrings
     }
 
     private fun getEntryName(resources: Resources, v: TextView): String {
@@ -95,8 +87,7 @@ internal class ActivityMetadata(
     private fun getEntryNameFromLayout(resources: Resources, layout: CollapsingToolbarLayout): String {
         return try {
             resources.getResourceEntryName(layout.id)
-        }
-        catch (ex: Resources.NotFoundException) {
+        } catch (ex: Resources.NotFoundException) {
             logger.e("Entry ${layout.id} not found")
             "[id:${Integer.toHexString(layout.id)}]"
         }

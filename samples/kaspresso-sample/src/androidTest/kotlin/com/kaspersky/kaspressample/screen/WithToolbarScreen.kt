@@ -8,5 +8,5 @@ object WithToolbarScreen : KScreen<WithToolbarScreen>() {
     override val layoutId: Int? = null
     override val viewClass: Class<*>? = null
 
-    val collapsingToolbar = KToolbar { withId(R.id.collapsing_toolbar)}
+    val collapsingToolbar = KToolbar { withId(R.id.collapsing_toolbar) }
 }

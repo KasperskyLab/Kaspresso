@@ -9,7 +9,7 @@ import com.kaspersky.kaspresso.testcases.api.testcase.DocLocScreenshotTestCase
 import org.junit.Rule
 import org.junit.Test
 
-class ScreenshotActivityWithToolbarTest : DocLocScreenshotTestCase(locales="en") {
+class ScreenshotActivityWithToolbarTest : DocLocScreenshotTestCase(locales = "en") {
 
     @get:Rule
     val activityRule = activityScenarioRule<MainActivity>()
