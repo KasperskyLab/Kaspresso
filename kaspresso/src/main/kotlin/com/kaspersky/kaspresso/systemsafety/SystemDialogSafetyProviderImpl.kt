@@ -110,7 +110,7 @@ class SystemDialogSafetyProviderImpl(
      */
     private fun isAndroidSystemDetected(): Boolean {
         with(uiDevice) {
-            var isSystemDialogVisible = SystemSafetyPattern.values().any { isVisible(By.pkg(it.pattern).clazz(FrameLayout::class.java)) }
+            var isSystemDialogVisible = SystemDialogSafetyPattern.values().any { isVisible(By.pkg(it.pattern).clazz(FrameLayout::class.java)) }
 
             if (systemDialogsSafetyParams.shouldIgnoreKeyboard) {
                 val isKeyboardVisible = isVisible(By.pkg(Pattern.compile("\\S*google.android.inputmethod\\S*")).clazz(FrameLayout::class.java))
