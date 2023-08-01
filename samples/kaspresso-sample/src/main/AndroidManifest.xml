@@ -88,6 +88,11 @@
             android:name=".systemlanguage.ChangeLocaleActivity"
             android:label="@string/main_screen_change_language_mid_test_button"/>
 
+        <activity
+            android:name=".withtoolbar.WithToolbarActivity"
+            android:theme="@style/ToolbarTheme"
+            android:label="@string/main_screen_activity_with_toolbar_button"/>
+
         <service
             android:name=".device.DeviceSampleAccessibilityService"
             android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"

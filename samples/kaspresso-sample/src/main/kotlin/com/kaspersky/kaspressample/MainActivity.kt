@@ -16,6 +16,7 @@ import com.kaspersky.kaspressample.simple.SimpleActivity
 import com.kaspersky.kaspressample.systemlanguage.ChangeLocaleActivity
 import com.kaspersky.kaspressample.upgrade.UpgradeTestActivity
 import com.kaspersky.kaspressample.web.WebViewActivity
+import com.kaspersky.kaspressample.withtoolbar.WithToolbarActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -71,6 +72,10 @@ class MainActivity : AppCompatActivity() {
 
         binding.activityMainChangeLocaleMidTestButton.setOnClickListener {
             startActivity(Intent(this, ChangeLocaleActivity::class.java))
+        }
+
+        binding.activityWithToolbarButton.setOnClickListener {
+            startActivity(Intent(this, WithToolbarActivity::class.java))
         }
 
         setContentView(binding.root)

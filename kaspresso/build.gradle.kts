@@ -32,6 +32,7 @@ dependencies {
     implementation(libs.gson)
     implementation(projects.adbServer.adbserverDevice)
     implementation(libs.appcompat)
+    implementation(libs.material)
 
     testImplementation(libs.junit)
     testImplementation(libs.truth)
