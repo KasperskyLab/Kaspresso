@@ -14,6 +14,7 @@ import org.junit.Test
 /**
  * An example of [DocLocScreenshotTestCase] usage.
  * For more information see DocLoc wiki page.
+ * .
  */
 class ScreenshotSampleTest : DocLocScreenshotTestCase(locales = "en,ru") {
 
@@ -66,4 +67,3 @@ class ScreenshotSampleTest : DocLocScreenshotTestCase(locales = "en,ru") {
         }
     }
 }
-
