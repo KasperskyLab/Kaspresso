@@ -10,9 +10,9 @@
 
 <img src="../images/scenario/login_activity.png" alt="Login activity"  width="300"/>
 
-Если поле `username` будет содержать менее трех символов или поле `password` менее шести символов, то при клике на кнопку `LOGIN` ничего не произойдет.
+Если поле `username` будет содержать менее трех символов или поле `password` - менее шести символов, то при клике на кнопку `LOGIN` ничего не произойдет.
 
-Если же данные заполнены корректно, то авторизация проходит успешно и у нас открывается экран `AfterLoginActivity`
+Если же данные заполнены корректно, то авторизация проходит успешно и у нас открывается экран `AfterLoginActivity`.
 
 <img src="../images/scenario/screen_after_login.png" alt="Screen After Login" width="300"/>
 
@@ -20,7 +20,7 @@
 
 ## Тестирование LoginActivity
 
-Для проверки `LoginActivity` необходимо внутри PageObject главного экрана объявить еще одну кнопку - кнопка для перехода в экран авторизации.
+Для проверки `LoginActivity` необходимо внутри PageObject главного экрана объявить еще одну кнопку для перехода в экран авторизации.
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial.screen
@@ -62,7 +62,7 @@ object LoginScreen : KScreen<LoginScreen>() {
 
 ```
 
-Можем создавать тест `LoginActivityTest`. Добавляем шаг – открытие целевого экрана `LoginActivity`
+Можем создавать тест `LoginActivityTest`. Добавляем шаг – открытие целевого экрана `LoginActivity`.
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -99,7 +99,7 @@ class LoginActivityTest : TestCase() {
   <li>Если поля ввода содержат валидные данные, то происходит переход на следующий экран</li>
 </ol>
 
-Для того, чтобы проверить, какая активити сейчас открыта можно воспользоваться методом: `device.activities.isCurrent(LoginActivity::class.java)`.
+Для того, чтобы проверить, какая активити сейчас открыта, можно воспользоваться методом: `device.activities.isCurrent(LoginActivity::class.java)`.
 
 Тогда общий код тестового класса будет выглядеть так:
 
@@ -320,7 +320,7 @@ fun loginSuccessfulIfUsernameAndPasswordCorrect()
 
 Сценарии – это классы, которые позволяют объединить в себе несколько step-ов. Например, в данном случае мы можем создать сценарий авторизации, в котором будет пройден весь процесс от старта главного экрана до клика по кнопке `Login` после ввода логина и пароля.
 
-В пакете со всеми тестами `com.kaspersky.kaspresso.tutorial` создаем новый класс `LoginScenario` и наследуемся от класса `Scenario` из пакета `com.kaspersky.kaspresso.testcases.api.scenario`
+В пакете со всеми тестами `com.kaspersky.kaspresso.tutorial` создаем новый класс `LoginScenario` и наследуемся от класса `Scenario` из пакета `com.kaspersky.kaspresso.testcases.api.scenario`.
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -333,9 +333,9 @@ class LoginScenario : Scenario() {
 
 ```
 
-Здесь возникает ошибка, поскольку класс Scenario является абстрактным, и у него нужно переопределить один метод `steps`, в котором мы должны перечислить все шаги данного сценария. 
+Здесь возникает ошибка, поскольку класс Scenario является абстрактным, и у него нужно переопределить свойство `steps`, в котором мы должны перечислить все шаги данного сценария. 
 
-Нажимаем комбинацию клавиш `ctrl + i`, выбираем метод, который нужно переопределить и нажимаем `OK`.
+Нажимаем комбинацию клавиш `ctrl + i`, выбираем свойство, которое нужно переопределить, и нажимаем `OK`.
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial
@@ -640,7 +640,7 @@ import com.kaspersky.kaspresso.screens.KScreen
 import com.kaspersky.kaspresso.tutorial.R
 import io.github.kakaocup.kakao.edit.KEditText
 
-object AfterLoginScreen : KScreen<LoginScreen>() {
+object AfterLoginScreen : KScreen<AfterLoginScreen>() {
 
     override val layoutId: Int? = null
     override val viewClass: Class<*>? = null
@@ -673,7 +673,7 @@ class AfterLoginActivityTest : TestCase() {
 
 ```
 
-Для того чтобы попасть на этот экран нам нужно пройти процесс авторизации. Без использования сценариев нам бы пришлось заново выполнять все шаги – запускать главный экран, кликать на кнопку, затем вводить логин и пароль и снова кликать на кнопку. Но сейчас весь этот процесс сводится к использованию `LoginScenario`:
+Для того чтобы попасть на этот экран, нам нужно пройти процесс авторизации. Без использования сценариев нам бы пришлось заново выполнять все шаги – запускать главный экран, кликать на кнопку, затем вводить логин и пароль и снова кликать на кнопку. Но сейчас весь этот процесс сводится к использованию `LoginScenario`:
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial

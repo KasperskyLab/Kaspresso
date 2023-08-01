@@ -19,8 +19,8 @@ interface KaspressoLateRunListener : KaspressoRunListener {
      * @param cache - callbacks that were called before KaspressoLateRunListener was added to runner
      */
     fun lateInit(cache: Cache) {
-        testRunStarted(cache.testRunStartedDescription)
-        testStarted(cache.firstTestStartedDescription)
+        cache.testRunStartedDescription?.let { testRunStarted(it) }
+        cache.firstTestStartedDescription?.let { testStarted(it) }
     }
 
     /**
@@ -29,20 +29,20 @@ interface KaspressoLateRunListener : KaspressoRunListener {
      * to pass them into late listeners later
      */
     class Cache {
-        lateinit var testRunStartedDescription: Description
+        var testRunStartedDescription: Description? = null
             private set
 
-        lateinit var firstTestStartedDescription: Description
+        var firstTestStartedDescription: Description? = null
             private set
 
         fun testRunStarted(description: Description) {
-            if (!::testRunStartedDescription.isInitialized) {
+            if (testRunStartedDescription == null) {
                 testRunStartedDescription = description
             }
         }
 
         fun testStarted(description: Description) {
-            if (!::firstTestStartedDescription.isInitialized) {
+            if (firstTestStartedDescription == null) {
                 firstTestStartedDescription = description
             }
         }

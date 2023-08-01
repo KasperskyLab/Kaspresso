@@ -18,7 +18,7 @@
 android {
     defaultConfig {
         //...    
-        testInstrumentationRunner "io.qameta.allure.android.runners.AllureAndroidJUnitRunner"
+        testInstrumentationRunner "com.kaspersky.kaspresso.runner.KaspressoRunner"
     }
     //...
 }
@@ -28,10 +28,10 @@ dependencies {
     androidTestImplementation "com.kaspersky.android-components:kaspresso-allure-support:<последняя_версия>"
 }
 ```
-Затем используйте специальную функцию [**withAllureSupport**](https://github.com/KasperskyLab/Kaspresso/tree/master/allure-support/src/main/kotlin/com/kaspersky/components/alluresupport/AllureSupportKaspressoBuilder.kt) в вашем конструкторе TestCase или в вашем TestCaseRule, чтобы включить все доступные перехватчики, поддерживающие Allure:
+Затем используйте специальную функцию [**withForcedAllureSupport**](https://github.com/KasperskyLab/Kaspresso/tree/master/allure-support/src/main/kotlin/com/kaspersky/components/alluresupport/AllureSupportKaspressoBuilder.kt) в вашем конструкторе TestCase или в вашем TestCaseRule, чтобы включить все доступные перехватчики, поддерживающие Allure:
 ```kotlin
 class AllureSupportTest : TestCase(
-    kaspressoBuilder = Kaspresso.Builder.withAllureSupport()
+    kaspressoBuilder = Kaspresso.Builder.withForcedAllureSupport()
 ) {
     
 }
@@ -57,7 +57,7 @@ class AllureSupportCustomizeTest : TestCase(
 
 }
 ```
-Если вам не нужны все эти перехватчики, предоставляемые [**withAllureSupport**](https://github.com/KasperskyLab/Kaspresso/tree/master/allure-support/src/main/kotlin/com/kaspersky/components/alluresupport/AllureSupportKaspressoBuilder.kt) и [**addAllureSupport **](../allure-support/src/main/kotlin/com/kaspersky/components/alluresupport/AllureSupportKaspressoBuilder.kt), то вы можете добавить только те перехватчики, которые вам нравятся. Но обратите внимание, что [**AllureMapperStepInterceptor.kt**](../allure-support/src/main/kotlin/com/kaspersky/components/alluresupport/interceptors/step/AllureMapperStepInterceptor.kt) является обязательным для работы службы поддержки Allure. Например, если вам не нужны видеоролики и просмотр иерархий после неудачных тестов, вы можете сделать что-то вроде:
+Если вам не нужны все эти перехватчики, предоставляемые [**withForcedAllureSupport**](https://github.com/KasperskyLab/Kaspresso/tree/master/allure-support/src/main/kotlin/com/kaspersky/components/alluresupport/AllureSupportKaspressoBuilder.kt) и [**addAllureSupport **](../allure-support/src/main/kotlin/com/kaspersky/components/alluresupport/AllureSupportKaspressoBuilder.kt), то вы можете добавить только те перехватчики, которые вам нравятся. Но обратите внимание, что [**AllureMapperStepInterceptor.kt**](../allure-support/src/main/kotlin/com/kaspersky/components/alluresupport/interceptors/step/AllureMapperStepInterceptor.kt) является обязательным для работы службы поддержки Allure. Например, если вам не нужны видеоролики и просмотр иерархий после неудачных тестов, вы можете сделать что-то вроде:
 ```kotlin
 class AllureSupportCustomizeTest : TestCase(
     kaspressoBuilder = Kaspresso.Builder.simple().apply {

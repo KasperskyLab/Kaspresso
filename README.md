@@ -257,17 +257,6 @@ Now, you can write your Kaspresso tests for Jetpack Compose screens! DSL and all
 So, you will not see any difference between tests for View screens and for Compose screens.
 More information is available [here](https://kasperskylab.github.io/Kaspresso/Wiki/Jetpack_Compose/).
 
-**Keep in mind it's early access that may contain bugs. Also, API can be changed, but we are going to avoid it. Be free to create relative issues if you've encountered with
-any kind of problem.**
-
-## Philosophy
-
-The tool itself, even the perfect one, can not solve all the problems in writing UI tests. It’s important to know how to write tests and how to organize the entire process.
-Our team has great experience in introducing autotests in different companies. We shared our knowledge on [Wiki](https://kasperskylab.github.io/Kaspresso/Wiki/).
-
-## Wiki
-For all information check [Kaspresso wiki](https://kasperskylab.github.io/Kaspresso/Wiki/)
-
 ## Samples
 All samples are available in the [samples](https://github.com/KasperskyLab/Kaspresso/tree/issue-372/tutorial/samples) folder.
 
@@ -281,6 +270,10 @@ cd ~/Workspace/Kaspresso
 ```
 java -jar artifacts/adbserver-desktop.jar
 ```
+
+## Runner
+If you looking for a Runner to execute your UI tests we strongly recommend to use [Marathon](https://github.com/MarathonLabs/marathon). [Marathon](https://github.com/MarathonLabs/marathon) is a fast, platform-independent test runner focused on performance and stability. It offers easy to use platform implementations for Android and iOS as well as an API for use with custom hardware farms and more techstacks.
+<img src="marathon-banner.svg" alt="Marathon"/>
 
 ## Existing issues
 All existing issues in Kaspresso can be found [here](https://kasperskylab.github.io/Kaspresso/Issues/).

@@ -69,8 +69,8 @@ abstract class DocLocScreenshotTestCase(
             addTimestamps = false
         ),
     private val changeSystemLocale: Boolean = false,
-    private val screenshotParams: ScreenshotParams = ScreenshotParams(),
     private val toggleNightMode: Boolean = false,
+    private val screenshotParams: ScreenshotParams = ScreenshotParams(),
     locales: String?,
     kaspressoBuilder: Kaspresso.Builder = Kaspresso.Builder.simple().apply {
         testRunWatcherInterceptors.add(TestRunnerScreenshotWatcherInterceptor(screenshots))
@@ -89,6 +89,7 @@ abstract class DocLocScreenshotTestCase(
         screenshotDirectoryProvider: ScreenshotDirectoryProvider = DefaultScreenshotDirectoryProvider(groupByRunNumbers = false),
         screenshotNameProvider: ScreenshotNameProvider = DefaultScreenshotNameProvider(addTimestamps = false),
         changeSystemLocale: Boolean = false,
+        toggleNightMode: Boolean = false,
         locales: String?,
         screenshotParams: ScreenshotParams = ScreenshotParams(),
         kaspressoBuilder: Kaspresso.Builder = Kaspresso.Builder.simple().apply {
@@ -113,6 +114,7 @@ abstract class DocLocScreenshotTestCase(
         },
         screenshotParams = screenshotParams,
         changeSystemLocale = changeSystemLocale,
+        toggleNightMode = toggleNightMode,
         locales = locales,
         kaspressoBuilder = kaspressoBuilder
     )
@@ -135,7 +137,8 @@ abstract class DocLocScreenshotTestCase(
     @get:Rule
     val nightModeRule = ToggleNightModeRule(
         toggleNightMode = toggleNightMode,
-        logger = kaspresso.libLogger
+        logger = kaspresso.libLogger,
+        device = kaspresso.device
     )
 
     @get:Rule
