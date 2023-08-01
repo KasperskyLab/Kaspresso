@@ -66,3 +66,4 @@ class ScreenshotSampleTest : DocLocScreenshotTestCase(locales = "en,ru") {
         }
     }
 }
+
