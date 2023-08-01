@@ -85,4 +85,9 @@
             <a href="https://www.superjob.ru"><img src="../../users/superjob.png" width="140" alt="superjob.ru"></a>
         </td>
     </tr>
+    <tr>
+        <td>
+            <a href="https://dmtech.team"><img src="../../users/dmtech.svg" width="140" height="140" alt="dmtech.team"></a>
+        </td>
+    </tr>
 </table>

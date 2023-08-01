@@ -11,4 +11,6 @@ data class Params(
     val screenshotParams: ScreenshotParams,
     val videoParams: VideoParams,
     val elementLoaderParams: ElementLoaderParams,
+    val systemDialogsSafetyParams: SystemDialogsSafetyParams,
+    val clickParams: ClickParams
 )
