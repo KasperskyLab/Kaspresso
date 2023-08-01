@@ -10,7 +10,7 @@ android {
 }
 
 dependencies {
-    implementation(libs.appcompat)
+    implementation(libs.material)
     implementation(libs.multidex)
 
     androidTestImplementation(projects.kaspresso)
