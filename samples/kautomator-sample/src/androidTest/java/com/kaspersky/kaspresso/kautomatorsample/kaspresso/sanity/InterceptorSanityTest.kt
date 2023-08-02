@@ -1,4 +1,4 @@
-package com.kaspersky.kaspresso.kautomatorsample.test
+package com.kaspersky.kaspresso.kautomatorsample.kaspresso.sanity
 
 import androidx.test.ext.junit.rules.activityScenarioRule
 import com.kaspersky.components.kautomator.KautomatorConfigurator

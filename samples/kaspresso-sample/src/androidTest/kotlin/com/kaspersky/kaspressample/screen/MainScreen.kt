@@ -25,6 +25,8 @@ object MainScreen : KScreen<MainScreen>() {
 
     val idleWaitingButton = KButton { withId(R.id.activity_main_idlewaiting_sample_button) }
 
+    val systemDialogsButton = KButton { withId(R.id.activity_main_system_dialogs_button) }
+
     val changeLocaleButton = KButton { withId(R.id.activity_main_change_locale_mid_test_button) }
 
     val withToolbarButton = KButton { withId(R.id.activity_with_toolbar_button) }

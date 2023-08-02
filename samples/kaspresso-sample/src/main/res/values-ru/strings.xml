@@ -12,8 +12,10 @@
     <string name="main_screen_measure_sample_button">Measure пример</string>
     <string name="main_screen_jetpack_compose_button">Jetpack Compose примеры</string>
     <string name="main_screen_shared_test">Shared Test with Robolectric пример</string>
+    <string name="system_dialogs_sanity">System dialogs sanity</string>
     <string name="main_screen_device_button">Device пример</string>
     <string name="main_screen_full_device_button">Full Window Device пример</string>
+    <string name="main_screen_system_dialogs_button">System Dialogs пример</string>
     <string name="main_screen_change_language_mid_test_button">Сменить локаль во время теста</string>
     <string name="main_screen_activity_with_toolbar_button">Пример с toolbar</string>
 

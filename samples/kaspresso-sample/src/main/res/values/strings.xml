@@ -12,8 +12,10 @@
     <string name="main_screen_measure_sample_button">Measure sample</string>
     <string name="main_screen_jetpack_compose_button">Jetpack Compose samples</string>
     <string name="main_screen_shared_test">Shared Test with Robolectric sample</string>
+    <string name="system_dialogs_sanity">System dialogs sanity</string>
     <string name="main_screen_device_button">Device Sample</string>
     <string name="main_screen_full_device_button">Full Window Device Sample</string>
+    <string name="main_screen_system_dialogs_button">System Dialogs Sample</string>
     <string name="main_screen_change_language_mid_test_button">Change locale mid-test</string>
     <string name="main_screen_activity_with_toolbar_button">Activity with toolbar</string>
 

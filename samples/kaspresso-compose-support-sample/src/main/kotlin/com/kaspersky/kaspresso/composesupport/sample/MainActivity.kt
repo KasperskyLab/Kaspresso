@@ -11,11 +11,15 @@ import androidx.navigation.compose.rememberNavController
 import com.kaspersky.kaspresso.composesupport.sample.features.flaky.SimpleFlakyScreen
 import com.kaspersky.kaspresso.composesupport.sample.features.flaky.SimpleFlakyViewModel
 import com.kaspersky.kaspresso.composesupport.sample.features.main.MainScreen
+import com.kaspersky.kaspresso.composesupport.sample.features.sanityflaky.SanityFlakyScreen
+import com.kaspersky.kaspresso.composesupport.sample.features.sanityflaky.SanityFlakyViewModel
+import com.kaspersky.kaspresso.composesupport.sample.features.scroll.ScrollScreen
 import com.kaspersky.kaspresso.composesupport.sample.resources.C
 
 class MainActivity : AppCompatActivity() {
 
     private val simpleFlakyViewModel: SimpleFlakyViewModel by viewModels()
+    private val sanityFlakyViewModel: SanityFlakyViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +34,9 @@ class MainActivity : AppCompatActivity() {
         NavHost(navController = navController, startDestination = C.Screen.main_screen) {
             composable(C.Screen.main_screen) {
                 MainScreen(
-                    simpleFlakyClick = { navController.navigate(C.Screen.simple_flaky_screen) }
+                    simpleFlakyClick = { navController.navigate(C.Screen.simple_flaky_screen) },
+                    sanityFlakyClick = { navController.navigate(C.Screen.sanity_flaky_screen) },
+                    scrollClick = { navController.navigate(C.Screen.scroll_screen) }
                 )
             }
 
@@ -41,6 +47,15 @@ class MainActivity : AppCompatActivity() {
                     secondButtonClick = { simpleFlakyViewModel.secondButtonClick() },
                     editTextChange = { simpleFlakyViewModel.editTextChange(it) }
                 )
+            }
+
+            composable(C.Screen.scroll_screen) {
+                ScrollScreen()
+            }
+
+            composable(C.Screen.sanity_flaky_screen) {
+                SanityFlakyScreen(sanityFlakyStateLiveData =
+                    sanityFlakyViewModel.sanityFlakyStateLiveData, firstButtonClick = { sanityFlakyViewModel.firstButtonClick() })
             }
         }
     }

@@ -13,6 +13,7 @@ import com.kaspersky.kaspressample.flaky.CommonFlakyActivity
 import com.kaspersky.kaspressample.idlingwait.WaitForIdleActivity
 import com.kaspersky.kaspressample.measure.MeasureActivity
 import com.kaspersky.kaspressample.simple.SimpleActivity
+import com.kaspersky.kaspressample.systemdialogs.SystemDialogsActivity
 import com.kaspersky.kaspressample.systemlanguage.ChangeLocaleActivity
 import com.kaspersky.kaspressample.upgrade.UpgradeTestActivity
 import com.kaspersky.kaspressample.web.WebViewActivity
@@ -68,6 +69,10 @@ class MainActivity : AppCompatActivity() {
 
         binding.activityMainDeviceFullButton.setOnClickListener {
             startActivity(Intent(this, DeviceFullWindowSampleActivity::class.java))
+        }
+
+        binding.activityMainSystemDialogsButton.setOnClickListener {
+            startActivity(Intent(this, SystemDialogsActivity::class.java))
         }
 
         binding.activityMainChangeLocaleMidTestButton.setOnClickListener {

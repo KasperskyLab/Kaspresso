@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="16dp"
     tools:context=".MainActivity">
@@ -48,6 +48,7 @@
             android:layout_below="@+id/activity_main_webview_sample_button"
             android:text="@string/main_screen_scroll_view_sample_button" />
 
+
         <Button
             android:id="@+id/activity_main_continuously_sample_button"
             android:layout_width="match_parent"
@@ -56,10 +57,17 @@
             android:text="@string/main_screen_continuously_sample_button" />
 
         <Button
-            android:id="@+id/activity_main_upgrade_scenario_button"
+            android:id="@+id/activity_main_system_dialogs_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/activity_main_continuously_sample_button"
+            android:text="@string/main_screen_system_dialogs_button" />
+
+        <Button
+            android:id="@+id/activity_main_upgrade_scenario_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/activity_main_system_dialogs_button"
             android:text="@string/upgrade_title" />
 
         <Button
@@ -90,13 +98,13 @@
             android:layout_below="@id/activity_main_measure_sample_button"
             android:text="@string/main_screen_device_button" />
 
+    <Button
+        android:id="@+id/activity_main_device_full_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/activity_main_device_button"
+        android:text="@string/main_screen_full_device_button" />
 
-        <Button
-            android:id="@+id/activity_main_device_full_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/activity_main_device_button"
-            android:text="@string/main_screen_full_device_button" />
 
         <Button
             android:id="@+id/activity_main_change_locale_mid_test_button"
