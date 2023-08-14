@@ -53,6 +53,14 @@ dependencies {
 }
 ```
 
+Чтобы интегрировать наиболее свежую версию Kaspresso до официального релиза, добавьте постфикс "-SNAPSHOT" к версии:
+
+```groovy
+dependencies {
+    androidTestImplementation 'com.kaspersky.android-components:kaspresso:<latest_version>-SNAPSHOT'
+}
+```
+
 Если вы все еще используете старые библиотеки поддержки Android, мы настоятельно рекомендуем перейти на AndroidX.
 
 Последняя версия с библиотеками поддержки Android:
