@@ -10,6 +10,7 @@
 2. [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) и шаблон проектирования MVVM
 3. [StateFlow](https://developer.android.com/kotlin/flow/stateflow-and-sharedflow)
 4. [Библиотека Mockk](https://mockk.io/)
+5. [Kotlin coroutines](https://kotlinlang.org/docs/coroutines-overview.html)
 
 ## Обзор тестируемого приложения
 
