@@ -52,7 +52,7 @@ dependencies {
 }
 ```
 
-To try out the cutting edge kaspresso updates before oficial release add "-SNAPHOT" postfix to the latest Kaspresso version e.g.
+To try out the cutting edge kaspresso updates before an oficial release add a "-SNAPHOT" postfix to the latest Kaspresso version e.g.
 ```groovy
 dependencies {
     androidTestImplementation 'com.kaspersky.android-components:kaspresso:<latest_version>-SNAPSHOT'
