@@ -166,36 +166,7 @@ class LoginActivityScreenshots : DocLocScreenshotTestCase(locales = "en, fr") {
 
 Сейчас у нас открывается нужный экран, и сразу делается скриншот, поэтому есть вероятность, что какие-то данные на экране не успеют загрузиться, и снимок будет сделан до того, как мы увидим нужные нам элементы.
 
-Чтобы решить эту проблему, давайте в Page Object `Login Screen` мы добавим метод, который дождется загрузки всех необходимых элементов интерфейса. В этом методе мы просто для всех объектов сделаем проверку на `isVisible`. Это проверка в своей реализации использует `flakySafely`, поэтому даже если данные мгновенно загружены не будут, то тест будет ждать, пока условие не выполнится в течение нескольких секунд.
-
-Добавляем метод, назовем его `waitForScreen`:
-
-```kotlin
-package com.kaspersky.kaspresso.tutorial.screen
-
-import com.kaspersky.kaspresso.screens.KScreen
-import com.kaspersky.kaspresso.tutorial.R
-import io.github.kakaocup.kakao.edit.KEditText
-import io.github.kakaocup.kakao.text.KButton
-
-object LoginScreen : KScreen<LoginScreen>() {
-
-    override val layoutId: Int? = null
-    override val viewClass: Class<*>? = null
-
-    val inputUsername = KEditText { withId(R.id.input_username) }
-    val inputPassword = KEditText { withId(R.id.input_password) }
-    val loginButton = KButton { withId(R.id.login_btn) }
-
-    fun waitForScreen() {
-        inputUsername.isVisible()
-        inputPassword.isVisible()
-        loginButton.isVisible()
-    }
-}
-
-```
-В тестовом классе можем вызвать этот метод перед тем, как сделать скриншот:
+Чтобы решить эту проблему, перед тем, как делать скриншот, мы дождемся загрузки всех необходимых элементов интерфейса. Для всех объектов `LoginScreen` мы сделаем проверку на `isVisible`. Это проверка в своей реализации использует `flakySafely`, поэтому даже если данные мгновенно загружены не будут, то тест будет ждать, пока условие не выполнится в течение нескольких секунд.
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial.screenshot_tests
@@ -216,7 +187,9 @@ class LoginActivityScreenshots : DocLocScreenshotTestCase(locales = "en, fr") {
     fun takeScreenshots() = run {
         step("Take initial state screenshots") {
             LoginScreen {
-                waitForScreen()
+                inputUsername.isVisible()
+                inputPassword.isVisible()
+                loginButton.isVisible()
                 captureScreenshot("Initial state")
             }
         }
