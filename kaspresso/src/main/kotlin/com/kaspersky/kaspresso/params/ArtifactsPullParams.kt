@@ -2,7 +2,7 @@ package com.kaspersky.kaspresso.params
 
 data class ArtifactsPullParams(
     /**
-     * Whether Kaspresso should pull the artifacts after a test run
+     * Whether Kaspresso should pull the artifacts after a test run. Needs an ADB server to work
      */
     val enabled: Boolean = false,
 
