@@ -135,3 +135,22 @@ As of Robolectric 4.8.1, there are some limitations to sharedTest: those tests r
 
 1. Robolectric-Espresso supports Idling resources, but [doesn't support posting delayed messages to the Looper](https://github.com/robolectric/robolectric/issues/4807#issuecomment-1075863097)
 2. Robolectric-Espresso will not support [tests that start new activities](https://github.com/robolectric/robolectric/issues/5104) (i.e. activity jumping)
+
+#### Pulling the artifacts from the device to the host
+
+Depending on your test configuration, useful artifacts may remain on the device after test finish: screenshots, reports, videos, etc.
+In order to pull them off the device special scripts are programmed, which are executed after the completion of the test run on CI. With Kaspresso, 
+you can simplify this process. To do this, you need to configure the `artifactsPullParams` variable in the Kaspresso Builder. Example:
+
+```kotlin
+class SomeTest : TestCase(
+    kaspressoBuilder = Kaspresso.Builder.simple {
+        artifactsPullParams = ArtifactsPullParams(enabled = true, destinationPath = "artifacts/", artifactsRegex = Regex("(screenshots)|(videos)"))
+    }
+) {
+    ...
+}
+```
+
+For this mechanism to work, you need to start the ADB server before running the test. After the test is completed, the artifacts will be located by the path specified in the `destinationPath` 
+argument relative to the working directory from which the ADB server was launched.
