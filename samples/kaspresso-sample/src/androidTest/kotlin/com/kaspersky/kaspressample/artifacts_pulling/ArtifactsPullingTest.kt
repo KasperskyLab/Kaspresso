@@ -14,7 +14,6 @@ import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.junit.Rule
 import org.junit.Test
 
-
 class ArtifactsPullingTest : TestCase(kaspressoBuilder = Kaspresso.Builder.simple {
     artifactsPullParams = ArtifactsPullParams(enabled = true, artifactsRegex = Regex("screenshots"))
 }) {
