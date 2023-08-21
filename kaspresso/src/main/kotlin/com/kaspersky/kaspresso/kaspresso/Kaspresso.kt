@@ -753,7 +753,7 @@ data class Kaspresso(
             if (!::videoParams.isInitialized) videoParams = VideoParams()
             if (!::elementLoaderParams.isInitialized) elementLoaderParams = ElementLoaderParams()
             if (!::clickParams.isInitialized) clickParams = ClickParams.default()
-            if (!::artifactsPullParams.isInitialized) artifactsPullParams = ArtifactsPullParams()
+            if (!::artifactsPullParams.isInitialized) artifactsPullParams = ArtifactsPullParams(enabled = false)
 
             if (!::screenshots.isInitialized) {
                 screenshots = ScreenshotsImpl(

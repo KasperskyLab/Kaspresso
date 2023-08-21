@@ -14,8 +14,11 @@ import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.junit.Rule
 import org.junit.Test
 
+/**
+ * After test completes screenshots directory would be pulled into provided destination path ob the host machine
+ */
 class ArtifactsPullingTest : TestCase(kaspressoBuilder = Kaspresso.Builder.simple {
-    artifactsPullParams = ArtifactsPullParams(enabled = true, artifactsRegex = Regex("screenshots"))
+    artifactsPullParams = ArtifactsPullParams(artifactsRegex = Regex("screenshots"), destinationPath = "../../output/artifacts")
 }) {
 
     @get:Rule
