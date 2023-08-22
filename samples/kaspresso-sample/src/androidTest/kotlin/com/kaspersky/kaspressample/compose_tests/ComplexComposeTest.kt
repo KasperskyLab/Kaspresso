@@ -43,7 +43,7 @@ class ComplexComposeTest : TestCase() {
         }
 
         step("Handle potential unexpected behavior") {
-            compose {
+            compose(timeoutMs = 60_000L) {
                 // the first potential branch when ComplexComposeScreen.stage1Button is visible
                 or(ComplexComposeScreen.stage1Button) {
                     isVisible()
