@@ -30,7 +30,7 @@ dependencies {
 
     implementation(libs.kotlinStdlib)
     implementation(libs.gson)
-    implementation(projects.adbServer.adbserverDevice)
+    implementation(projects.adbServer.adbServerDevice)
     implementation(libs.appcompat)
     implementation(libs.material)
 
