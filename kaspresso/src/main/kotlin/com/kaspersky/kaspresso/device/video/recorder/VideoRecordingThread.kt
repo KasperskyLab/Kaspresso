@@ -2,8 +2,10 @@ package com.kaspersky.kaspresso.device.video.recorder
 
 import android.app.Instrumentation
 import android.content.Context
+import android.hardware.display.DisplayManager
 import android.media.MediaCodecList
 import android.os.Build
+import android.view.Display
 import android.view.WindowManager
 import androidx.annotation.RequiresApi
 import androidx.test.uiautomator.UiDevice
@@ -49,7 +51,9 @@ class VideoRecordingThread(
             val codecWidth = videoCapabilities.supportedHeights.upper
 
             val display = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                instrumentation.targetContext.display!!
+                instrumentation.targetContext
+                    .getSystemService(DisplayManager::class.java)
+                    .getDisplay(Display.DEFAULT_DISPLAY)
             } else {
                 (instrumentation.targetContext.getSystemService(Context.WINDOW_SERVICE) as WindowManager?)?.defaultDisplay!!
             }

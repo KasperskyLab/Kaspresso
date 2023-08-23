@@ -52,6 +52,13 @@ dependencies {
 }
 ```
 
+To try out the cutting edge kaspresso updates before an oficial release add a "-SNAPHOT" postfix to the latest Kaspresso version e.g.
+```groovy
+dependencies {
+    androidTestImplementation 'com.kaspersky.android-components:kaspresso:<latest_version>-SNAPSHOT'
+}
+```
+
 If you are still using the old Android Support libraries, we strongly recommend to migrate to AndroidX.
 
 The last version with Android Support libraries is:

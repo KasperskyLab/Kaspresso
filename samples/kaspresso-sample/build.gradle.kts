@@ -5,7 +5,7 @@ plugins {
 android {
     defaultConfig {
         applicationId = "com.kaspersky.kaspressample"
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.kaspersky.kaspresso.runner.KaspressoRunner"
         testInstrumentationRunnerArguments["clearPackageData"] = "true"
     }
 
