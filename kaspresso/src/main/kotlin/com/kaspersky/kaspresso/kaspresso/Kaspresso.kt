@@ -110,8 +110,10 @@ import com.kaspersky.kaspresso.interceptors.watcher.view.impl.logging.LoggingAto
 import com.kaspersky.kaspresso.interceptors.watcher.view.impl.logging.LoggingViewActionWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.view.impl.logging.LoggingViewAssertionWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.view.impl.logging.LoggingWebAssertionWatcherInterceptor
+import com.kaspersky.kaspresso.internal.runlisteners.artifactspull.ArtifactsPullRunListener
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.logger.UiTestLoggerImpl
+import com.kaspersky.kaspresso.params.ArtifactsPullParams
 import com.kaspersky.kaspresso.params.AutoScrollParams
 import com.kaspersky.kaspresso.params.ClickParams
 import com.kaspersky.kaspresso.params.ContinuouslyParams
@@ -122,6 +124,7 @@ import com.kaspersky.kaspresso.params.ScreenshotParams
 import com.kaspersky.kaspresso.params.StepParams
 import com.kaspersky.kaspresso.params.SystemDialogsSafetyParams
 import com.kaspersky.kaspresso.params.VideoParams
+import com.kaspersky.kaspresso.runner.listener.addUniqueListener
 import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
 import io.github.kakaocup.kakao.Kakao
 
@@ -481,6 +484,12 @@ data class Kaspresso(
          * If it was not specified, the default implementation is used.
          */
         lateinit var clickParams: ClickParams
+
+        /**
+         * Holds the [ArtifactsPullParams].
+         * If it was not specified, the default implementation is used.
+         */
+        lateinit var artifactsPullParams: ArtifactsPullParams
         /**
          * Holds an implementation of [DirsProvider] interface. If it was not specified, the default implementation is used.
          */
@@ -744,6 +753,7 @@ data class Kaspresso(
             if (!::videoParams.isInitialized) videoParams = VideoParams()
             if (!::elementLoaderParams.isInitialized) elementLoaderParams = ElementLoaderParams()
             if (!::clickParams.isInitialized) clickParams = ClickParams.default()
+            if (!::artifactsPullParams.isInitialized) artifactsPullParams = ArtifactsPullParams(enabled = false)
 
             if (!::screenshots.isInitialized) {
                 screenshots = ScreenshotsImpl(
@@ -910,6 +920,12 @@ data class Kaspresso(
                 TestRunLoggerWatcherInterceptor(libLogger),
                 defaultsTestRunWatcherInterceptor
             )
+
+            if (artifactsPullParams.enabled) {
+                instrumentalDependencyProviderFactory.getComponentProvider<Kaspresso>(instrumentation).runNotifier.addUniqueListener {
+                    ArtifactsPullRunListener(params = artifactsPullParams, files = files, logger = libLogger)
+                }
+            }
         }
 
         /**
