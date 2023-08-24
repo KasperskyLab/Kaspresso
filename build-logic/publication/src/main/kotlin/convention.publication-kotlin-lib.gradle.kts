@@ -2,6 +2,7 @@ import com.kaspersky.kaspresso.publication.KotlinLibraryPublishExtension
 
 plugins {
     id("convention.publication-base")
+    `java-library`
 }
 
 plugins.withId("kotlin") {
@@ -22,6 +23,16 @@ publishing {
             afterEvaluate {
                 artifactId = publishExtension.artifactId.get()
             }
+        }
+    }
+}
+
+sourceSets {
+    main {
+        resources {
+            srcDirs(".", "$rootDir")
+            include("NOTICE.txt")
+            include("LICENSE.txt")
         }
     }
 }

@@ -2,6 +2,7 @@ import com.android.build.gradle.LibraryExtension
 import com.kaspersky.kaspresso.publication.KotlinLibraryPublishExtension
 
 plugins {
+    id("com.android.library")
     id("convention.publication-base")
 }
 
@@ -23,6 +24,15 @@ publishing {
                 from(components["release"])
                 artifactId = publishExtension.artifactId.get()
             }
+        }
+    }
+}
+
+android {
+    libraryVariants.configureEach {
+        packageLibraryProvider.configure {
+            from("$rootDir/LICENSE.txt")
+            from("NOTICE.txt")
         }
     }
 }
