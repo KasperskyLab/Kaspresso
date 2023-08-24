@@ -5,16 +5,6 @@ plugins {
     id("convention.legal-documents")
 }
 
-// TODO: move to publishing convention
-android {
-    libraryVariants.configureEach {
-        packageLibraryProvider.configure {
-            from("$rootDir/LICENSE.txt")
-            from("NOTICE.txt")
-        }
-    }
-}
-
 publish {
     artifactId.set("kaspresso")
 }
