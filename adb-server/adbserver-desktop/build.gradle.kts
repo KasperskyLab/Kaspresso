@@ -1,16 +1,15 @@
 plugins {
     id("convention.kotlin-app")
     id("convention.third-party-report")
-    id("convention.legal-documents")
 }
 
 dependencies {
     implementation(libs.kotlinStdlib)
     implementation(libs.kotlinCli)
-    implementation(projects.adbServer.adbserverCommon)
-    implementation(projects.adbServer.adbserverCommandTypes)
-    implementation(projects.adbServer.adbserverConnection)
-    implementation(projects.adbServer.adbserverDesktopDeviceConnection)
+    implementation(projects.adbServer.adbServerCommon)
+    implementation(projects.adbServer.adbServerCommandTypes)
+    implementation(projects.adbServer.adbServerConnection)
+    implementation(projects.adbServer.adbServerDesktopDeviceConnection)
 }
 
 setProperty("mainClassName", "com.kaspersky.adbserver.desktop.MainKt")
@@ -25,4 +24,5 @@ tasks.withType<Jar>().configureEach {
         exclude("META-INF/**/**/module-info.class")
     }
     exclude("NOTICE.txt")
+    exclude("LICENSE.txt")
 }

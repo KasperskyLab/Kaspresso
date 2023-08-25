@@ -11,8 +11,8 @@ publish {
 
 dependencies {
     implementation(libs.kotlinStdlib)
-    api(projects.adbServer.adbserverCommon)
-    api(projects.adbServer.adbserverCommandTypes)
-    api(projects.adbServer.adbserverConnection)
-    api(projects.adbServer.adbserverDesktopDeviceConnection)
+    api(projects.adbServer.adbServerCommon)
+    api(projects.adbServer.adbServerCommandTypes)
+    api(projects.adbServer.adbServerConnection)
+    api(projects.adbServer.adbServerDesktopDeviceConnection)
 }
