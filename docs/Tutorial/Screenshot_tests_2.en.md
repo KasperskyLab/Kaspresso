@@ -478,6 +478,8 @@ class LoadUserScreenshots : DocLocScreenshotTestCase(locales = "en, fr") {
 androidTestImplementation("io.mockk:mockk-android:1.13.3")
 ```
 
+<img src="../images/screenshot_tests_2/gradle2.png" alt="Gradle"/>
+
 !!! info
     Если после синхронизации и запуска проекта у вас возникают ошибки, следуйте инструкциям в журнале ошибок. В случае, если разобраться не получилось, переключитесь на ветку `TECH-tutorial-results` и сверьте файл `build.gradle` из этой ветки с вашим
 
@@ -594,17 +596,17 @@ package com.kaspersky.kaspresso.tutorial.user
 
 class LoadUserFragment : Fragment() {
 
-    …
+…
 
     private lateinit var viewModel: LoadUserViewModel
 
-    …
+…
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this)[LoadUserViewModel::class.java]
-        …
-    }
+…
+}
 
 ```
 Обратите внимание, что в этом классе есть приватная переменная `viewModel`, а в методе `onViewCreated` мы этой переменной присваиваем значение, создавая объект при помощи `ViewModelProvider`. Нам необходимо добиться такого поведения, чтобы при обычном использовании фрагмента вьюмодель создавалась через `ViewModelProvider`, а если этот фрагмент используется в screenshot-тестах, то должна быть возможность передать замоканную вьюмодель в качестве параметра.

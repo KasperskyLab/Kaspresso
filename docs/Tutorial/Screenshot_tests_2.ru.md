@@ -478,6 +478,8 @@ class LoadUserScreenshots : DocLocScreenshotTestCase(locales = "en, fr") {
 androidTestImplementation("io.mockk:mockk-android:1.13.3")
 ```
 
+<img src="../images/screenshot_tests_2/gradle2.png" alt="Gradle"/>
+
 !!! info
     Если после синхронизации и запуска проекта у вас возникают ошибки, следуйте инструкциям в журнале ошибок. В случае, если разобраться не получилось, переключитесь на ветку `TECH-tutorial-results` и сверьте файл `build.gradle` из этой ветки с вашим
 
