@@ -57,55 +57,96 @@ theme:
 
 plugins:
   - i18n:
+      default_language: en
       docs_structure: suffix
       languages:
-        - locale: ru
-          default: true
+        ru:
           name: Russian
           build: true
-        - locale: en
+        en:
           name: English
           build: true
       nav_translations:
-        Home: Home
-        About Kaspresso: About Kaspresso
-        Kaspresso in articles: Kaspresso in articles
-        Kaspresso in videos: Kaspresso in videos
-        Our users: Our users
-        Breaking changes: Breaking changes
-        Contribution guide: Contribution guide
-        Tutorial: Tutorial
-        1. Введение: 1. Introduction
-        2. Скачиваем проект и Android studio: 2. Download Kaspresso project and Android studio
-        3. Writing your first Kaspresso test: 3. Writing your first Kaspresso test
-        4. Working with adb: 4. Working with adb
-        5. Wifi_sample_test: 5. Testing the Internet connection and working with the Device class
-        6. Steps and sections: 6. Steps and sections
-        7. Reduce duplicate steps the Scenario: 7. Reduce duplicate steps the Scenario
-        8. UiAutomator. Тестирование за рамками приложения: 8. Kautomator. Third Party Application Testing
-        9. flakySafely: 9. flakySafely
-        10. Работа с Android permissions: 10. Working with Android permissions
-        11. RecyclerView: 11. RecyclerView. Testing list of elements
-        12. Логирование и скриншоты: 12. Logger and screenshots
-        13. Screenshot-тесты. Часть 1. Простой screenshot тест: 13. Screenshot-tests. Part 1. Simple screenshot-test
-        14. Screenshot-тесты. Часть 2. Установка стейтов и работа с ViewModel: 14. Screenshot-tests. Part 2. Working with ViewModel and setting states
-        Wiki: Wiki
-        Introduction: Introduction
-        PageObject in Kaspresso: PageObject in Kaspresso
-        Espresso as the basis: Espresso as the basis
-        Supported Android UI-elements: Supported Android UI-elements
-        View matchers, actions and assertions: View matchers, actions and assertions
-        Kautomator. Wrapper over UI Automator: Kautomator. Wrapper over UI Automator
-        Working with Android OS. Class Device: Working with Android OS
-        Executing adb commands: Executing adb commands
-        Screenshot tests: Screenshot tests
-        Kaspresso configuration: Kaspresso configuration
-        Kaspresso with Robolectric: Kaspresso with Robolectric
-        Kaspresso with Allure: Kaspresso with Allure
-        Jetpack Compose in Kaspresso: Compose support in Kaspresso
-        Issues: Issues
-        Found an issue?: Found an issue?
-        Storage issues: Storage issues
+        en:
+          Home: Home
+          About Kaspresso: About Kaspresso
+          Kaspresso in articles: Kaspresso in articles
+          Kaspresso in videos: Kaspresso in videos
+          Our users: Our users
+          Breaking changes: Breaking changes
+          Contribution guide: Contribution guide
+          Tutorial: Tutorial
+          1. Введение: 1. Introduction
+          2. Скачиваем проект и Android studio: 2. Download Kaspresso project and Android studio
+          3. Writing your first Kaspresso test: 3. Writing your first Kaspresso test
+          4. Working with adb: 4. Working with adb
+          5. Wifi_sample_test: 5. Testing the Internet connection and working with the Device class
+          6. Steps and sections: 6. Steps and sections
+          7. Reduce duplicate steps the Scenario: 7. Reduce duplicate steps the Scenario
+          8. UiAutomator. Тестирование за рамками приложения: 8. Kautomator. Third Party Application Testing
+          9. flakySafely: 9. flakySafely
+          10. Работа с Android permissions: 10. Working with Android permissions
+          11. RecyclerView: 11. RecyclerView. Testing list of elements
+          12. Логирование и скриншоты: 12. Logger and screenshots
+          13. Screenshot-тесты. Часть 1. Простой screenshot тест: 13. Screenshot-tests. Part 1. Simple screenshot-test
+          14. Screenshot-тесты. Часть 2. Установка стейтов и работа с ViewModel: 14. Screenshot-tests. Part 2. Working with ViewModel and setting states
+          Wiki: Wiki
+          Introduction: Introduction
+          PageObject in Kaspresso: PageObject in Kaspresso
+          Espresso as the basis: Espresso as the basis
+          Supported Android UI-elements: Supported Android UI-elements
+          View matchers, actions and assertions: View matchers, actions and assertions
+          Kautomator. Wrapper over UI Automator: Kautomator. Wrapper over UI Automator
+          Working with Android OS. Class Device: Working with Android OS
+          Executing adb commands: Executing adb commands
+          Screenshot tests: Screenshot tests
+          Kaspresso configuration: Kaspresso configuration
+          Kaspresso with Robolectric: Kaspresso with Robolectric
+          Kaspresso with Allure: Kaspresso with Allure
+          Jetpack Compose in Kaspresso: Compose support in Kaspresso
+          Issues: Issues
+          Found an issue?: Found an issue?
+          Storage issues: Storage issues
+        ru:
+          Home: Главная
+          About Kaspresso: О Kaspresso
+          Kaspresso in articles: Kaspresso в статьях
+          Kaspresso in videos: Kaspresso в видео
+          Our users: Наши пользователи
+          Breaking changes: Критические изменения
+          Contribution guide: Инструкция для разработчиков
+          Tutorial: Туториал
+          1. Введение: 1. Введение
+          2. Скачиваем проект и Android studio: 2. Скачиваем проект и Android studio
+          3. Writing your first Kaspresso test: 3. Пишем первый автотест с Kaspresso
+          4. Working with adb: 4. Выполнение adb-команд
+          5. Wifi_sample_test: 5. Тестирование интернет-соединения и работа с классом Device
+          6. Steps and sections: 6. Steps and sections
+          7. Reduce duplicate steps the Scenario: 7. Вынесение дублирующихся шагов в Scenario
+          8. UiAutomator. Тестирование за рамками приложения: 8. UiAutomator. Тестирование за рамками приложения
+          9. flakySafely: 9. flakySafely
+          10. Работа с Android permissions: 10. Работа с Android permissions
+          11. RecyclerView: 11. RecyclerView
+          12. Логирование и скриншоты: 12. Логирование и скриншоты
+          13. Screenshot-тесты. Часть 1. Простой screenshot тест: 13. Screenshot-тесты. Часть 1. Простой screenshot тест
+          14. Screenshot-тесты. Часть 2. Установка стейтов и работа с ViewModel: 14. Screenshot-тесты. Часть 2. Установка стейтов и работа с ViewModel
+          Wiki: Вики
+          Introduction: Введение
+          PageObject in Kaspresso: Паттерн PageObject в Kaspresso
+          Espresso as the basis: Espresso как основа
+          Supported Android UI-elements: Поддерживаемые UI-виджеты Android
+          View matchers, actions and assertions: Доступные классы Matcher, Action и Assertion
+          Kautomator. Wrapper over UI Automator: Kautomator. Обертка над UI Automator
+          Working with Android OS. Class Device: Взаимодействие с ОС Android. Класс Device
+          Executing adb commands: Выполнение команд adb
+          Screenshot tests: Скриншот тесты
+          Kaspresso configuration: Конфигуратор Kaspresso
+          Kaspresso with Robolectric: Запуск тестов Kaspresso на JVM с помощью Robolectric
+          Kaspresso with Allure: Поддержка Allure в Kaspresso
+          Jetpack Compose in Kaspresso: Поддержка Compose в Kaspresso
+          Issues: Известные проблемы
+          Found an issue?: Нашли проблему?
+          Storage issues: Работа с файлами
 nav:
   - Home:
       - About Kaspresso: index.md
