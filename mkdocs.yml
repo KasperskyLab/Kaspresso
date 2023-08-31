@@ -57,10 +57,10 @@ theme:
 
 plugins:
   - i18n:
-      default_language: en
       docs_structure: suffix
       languages:
         ru:
+          default: true
           name: Russian
           build: true
         en:
