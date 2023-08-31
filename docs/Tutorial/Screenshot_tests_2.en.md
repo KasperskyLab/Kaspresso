@@ -381,14 +381,14 @@ class LoadUserScreenshots : DocLocScreenshotTestCase(locales = "en, fr") {
 
     val viewModel = LoadUserViewModel()
 
-…
+    …
 }
 
 ```
 Теперь в эту ViewModel внутри тестового метода мы будем устанавливать новый стейт. Давайте попробуем установить какое-то новое значение в переменную `state`.
 
 !!! info
-Далее мы будем работать с объектами StateFlow и MutableStateFlow, если вы не знаете, что это, и как с ними работать, обязательно прочитайте [документацию]( https://developer.android.com/kotlin/flow/stateflow-and-sharedflow)
+    Далее мы будем работать с объектами StateFlow и MutableStateFlow, если вы не знаете, что это, и как с ними работать, обязательно прочитайте [документацию]( https://developer.android.com/kotlin/flow/stateflow-and-sharedflow)
 
 ```kotlin
 package com.kaspersky.kaspresso.tutorial.screenshot_tests
@@ -479,7 +479,7 @@ androidTestImplementation("io.mockk:mockk-android:1.13.3")
 ```
 
 !!! info
-Если после синхронизации и запуска проекта у вас возникают ошибки, следуйте инструкциям в журнале ошибок. В случае, если разобраться не получилось, переключитесь на ветку `TECH-tutorial-results` и сверьте файл `build.gradle` из этой ветки с вашим
+    Если после синхронизации и запуска проекта у вас возникают ошибки, следуйте инструкциям в журнале ошибок. В случае, если разобраться не получилось, переключитесь на ветку `TECH-tutorial-results` и сверьте файл `build.gradle` из этой ветки с вашим
 
 Теперь внутренняя реализация ViewModel нас не интересует. Все, что нам нужно – чтобы фрагмент подписывался на `state` из ViewModel, а ему возвращался тот объект, который мы создали внутри тестового класса. Делается это следующим образом:
 
@@ -594,17 +594,17 @@ package com.kaspersky.kaspresso.tutorial.user
 
 class LoadUserFragment : Fragment() {
 
-…
+    …
 
     private lateinit var viewModel: LoadUserViewModel
 
-…
+    …
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this)[LoadUserViewModel::class.java]
-…
-}
+        …
+    }
 
 ```
 Обратите внимание, что в этом классе есть приватная переменная `viewModel`, а в методе `onViewCreated` мы этой переменной присваиваем значение, создавая объект при помощи `ViewModelProvider`. Нам необходимо добиться такого поведения, чтобы при обычном использовании фрагмента вьюмодель создавалась через `ViewModelProvider`, а если этот фрагмент используется в screenshot-тестах, то должна быть возможность передать замоканную вьюмодель в качестве параметра.
@@ -654,12 +654,12 @@ package com.kaspersky.kaspresso.tutorial.user
 
 class LoadUserFragment : Fragment() {
 
-…
+    …
 
     private lateinit var viewModel: LoadUserViewModel
     private var isForScreenshots = false
 
-…
+    …
     companion object {
 
         fun newInstance(): LoadUserFragment = LoadUserFragment()
