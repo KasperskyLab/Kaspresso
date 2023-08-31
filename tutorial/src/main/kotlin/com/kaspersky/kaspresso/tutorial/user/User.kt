@@ -1,6 +1,8 @@
 package com.kaspersky.kaspresso.tutorial.user
 
+import com.google.gson.annotations.SerializedName
+
 data class User(
-    val name: String,
-    val lastName: String
+    @SerializedName("first_name") val name: String,
+    @SerializedName("last_name") val lastName: String
 )
