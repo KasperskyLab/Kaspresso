@@ -4,6 +4,7 @@ import android.widget.FrameLayout
 import androidx.test.uiautomator.By
 import androidx.test.uiautomator.BySelector
 import androidx.test.uiautomator.UiDevice
+import androidx.test.uiautomator.UiObject2
 import androidx.test.uiautomator.Until
 import com.kaspersky.kaspresso.device.server.AdbServer
 import com.kaspersky.kaspresso.instrumental.InstrumentalDependencyProvider
@@ -114,6 +115,7 @@ class SystemDialogSafetyProviderImpl(
 
             if (systemDialogsSafetyParams.shouldIgnoreKeyboard) {
                 val isKeyboardVisible = isVisible(By.pkg(Pattern.compile("\\S*google.android.inputmethod\\S*")).clazz(FrameLayout::class.java))
+                logger.i("Found keyboard")
                 isSystemDialogVisible = isSystemDialogVisible && !isKeyboardVisible
             }
 
@@ -133,6 +135,33 @@ class SystemDialogSafetyProviderImpl(
         timeMs: Long = TimeUnit.SECONDS.toMillis(1)
     ): Boolean {
         wait(Until.findObject(selector), timeMs)
-        return findObject(selector) != null
+        val uiObject = findObject(selector)?.also {
+            logger.i("Found system view: ${getUiObjectDescription(it)}")
+        }
+
+        return uiObject != null
+    }
+
+    @Suppress("detekt.ComplexMethod")
+    private fun getUiObjectDescription(uiObject: UiObject2): String {
+        val sb = StringBuilder()
+        with(uiObject) {
+            this.resourceName?.let { sb.append(" resourceName=", it) }
+            this.applicationPackage?.let { sb.append(" applicationPackage=", it) }
+            this.className?.let { sb.append(" className=", it) }
+            this.contentDescription?.let { sb.append(" contentDescription=", it) }
+            this.text?.let { sb.append(" text=", it) }
+            this.childCount.let { sb.append(" childCount=", it) }
+            this.isCheckable.let { sb.append(" isCheckable=", it) }
+            this.isChecked.let { sb.append(" isChecked=", it) }
+            this.isClickable.let { sb.append(" isClickable=", it) }
+            this.isLongClickable.let { sb.append(" isLongClickable=", it) }
+            this.isEnabled.let { sb.append(" isEnabled=", it) }
+            this.isFocusable.let { sb.append(" isFocusable=", it) }
+            this.isFocused.let { sb.append(" isFocused=", it) }
+            this.isScrollable.let { sb.append(" isScrollable=", it) }
+        }
+
+        return sb.toString()
     }
 }
