@@ -115,7 +115,6 @@ class SystemDialogSafetyProviderImpl(
 
             if (systemDialogsSafetyParams.shouldIgnoreKeyboard) {
                 val isKeyboardVisible = isVisible(By.pkg(Pattern.compile("\\S*google.android.inputmethod\\S*")).clazz(FrameLayout::class.java))
-                logger.i("Found keyboard")
                 isSystemDialogVisible = isSystemDialogVisible && !isKeyboardVisible
             }
 
