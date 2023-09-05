@@ -6,6 +6,7 @@ import androidx.test.espresso.FailureHandler
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.Configurator
 import com.kaspersky.adbserver.common.log.logger.LogLevel
+import com.kaspersky.components.kautomator.KautomatorConfigurator
 import com.kaspersky.components.kautomator.intercept.interaction.UiDeviceInteraction
 import com.kaspersky.components.kautomator.intercept.interaction.UiObjectInteraction
 import com.kaspersky.kaspresso.device.Device
@@ -1025,5 +1026,8 @@ data class Kaspresso(
         }
     }
 
-    internal fun reset(): Unit = Kakao.reset()
+    internal fun reset() {
+        Kakao.reset()
+        KautomatorConfigurator.reset()
+    }
 }
