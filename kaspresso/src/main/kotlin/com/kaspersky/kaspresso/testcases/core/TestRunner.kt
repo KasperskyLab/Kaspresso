@@ -2,7 +2,6 @@ package com.kaspersky.kaspresso.testcases.core
 
 import com.kaspersky.kaspresso.enricher.MainSectionEnricher
 import com.kaspersky.kaspresso.enricher.impl.composite.CompositeMainSectionEnricher
-import com.kaspersky.kaspresso.interceptors.tolibrary.KakaoLibraryInjector
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.TestRunWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.composite.TestRunCompositeWatcherInterceptor
 import com.kaspersky.kaspresso.internal.extensions.other.getException
@@ -27,8 +26,7 @@ internal class TestRunner<InitData, Data>(
          * So we should set it up before launching test because in some cases one test is launching several times
          * e.g. Screenshot tests with several locales
          */
-        injectKaspressoInKakao()
-        injectKaspressoInKautomator()
+        kaspresso.injectInKakaoAndKautomator()
 
         val exceptions: MutableList<Throwable> = mutableListOf()
         val resultException: Throwable?
@@ -101,28 +99,6 @@ internal class TestRunner<InitData, Data>(
         }
 
         resultException?.let { throw it }
-    }
-
-    private fun injectKaspressoInKakao() {
-        KakaoLibraryInjector.injectKaspressoInKakao(
-            kaspresso.viewBehaviorInterceptors,
-            kaspresso.dataBehaviorInterceptors,
-            kaspresso.webBehaviorInterceptors,
-            kaspresso.viewActionWatcherInterceptors,
-            kaspresso.viewAssertionWatcherInterceptors,
-            kaspresso.atomWatcherInterceptors,
-            kaspresso.webAssertionWatcherInterceptors,
-            kaspresso.params.clickParams
-        )
-    }
-
-    private fun injectKaspressoInKautomator() {
-        KakaoLibraryInjector.injectKaspressoInKautomator(
-            kaspresso.objectBehaviorInterceptors,
-            kaspresso.deviceBehaviorInterceptors,
-            kaspresso.objectWatcherInterceptors,
-            kaspresso.deviceWatcherInterceptors
-        )
     }
 
     @Suppress("LongParameterList")

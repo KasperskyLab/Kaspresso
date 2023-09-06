@@ -1002,28 +1002,32 @@ data class Kaspresso(
             configurator.waitForIdleTimeout = kautomatorWaitForIdleSettings.waitForIdleTimeout
             configurator.waitForSelectorTimeout = kautomatorWaitForIdleSettings.waitForSelectorTimeout
 
-            injectKaspressoInKakao(
-                kaspresso.viewBehaviorInterceptors,
-                kaspresso.dataBehaviorInterceptors,
-                kaspresso.webBehaviorInterceptors,
-                kaspresso.viewActionWatcherInterceptors,
-                kaspresso.viewAssertionWatcherInterceptors,
-                kaspresso.atomWatcherInterceptors,
-                kaspresso.webAssertionWatcherInterceptors,
-                kaspresso.params.clickParams
-            )
-
-            injectKaspressoInKautomator(
-                kaspresso.objectBehaviorInterceptors,
-                kaspresso.deviceBehaviorInterceptors,
-                kaspresso.objectWatcherInterceptors,
-                kaspresso.deviceWatcherInterceptors
-            )
+            kaspresso.injectInKakaoAndKautomator()
 
             failureHandler?.let { Espresso.setFailureHandler(it) }
 
             return kaspresso
         }
+    }
+
+    internal fun injectInKakaoAndKautomator() {
+        injectKaspressoInKakao(
+            viewBehaviorInterceptors,
+            dataBehaviorInterceptors,
+            webBehaviorInterceptors,
+            viewActionWatcherInterceptors,
+            viewAssertionWatcherInterceptors,
+            atomWatcherInterceptors,
+            webAssertionWatcherInterceptors,
+            params.clickParams
+        )
+
+        injectKaspressoInKautomator(
+            objectBehaviorInterceptors,
+            deviceBehaviorInterceptors,
+            objectWatcherInterceptors,
+            deviceWatcherInterceptors
+        )
     }
 
     internal fun reset() {
