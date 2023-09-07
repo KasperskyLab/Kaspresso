@@ -6,10 +6,11 @@ plugins {
 }
 
 publish {
-    artifactId.set("adb-server-command-types")
+    artifactId.set("adb-server-desktop-device-connection")
 }
 
 dependencies {
     implementation(libs.kotlinStdlib)
-    implementation(projects.adbServer.adbserverCommon)
+    implementation(projects.adbServer.adbServerCommon)
+    implementation(projects.adbServer.adbServerCommandTypes)
 }

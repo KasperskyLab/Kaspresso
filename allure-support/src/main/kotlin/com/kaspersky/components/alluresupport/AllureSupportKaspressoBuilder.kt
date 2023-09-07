@@ -71,7 +71,7 @@ fun Kaspresso.Builder.Companion.withForcedAllureSupport(
     val instrumentalDependencyProvider = instrumentalDependencyProviderFactory.getComponentProvider<Kaspresso>(instrumentation)
     forceAllureSupportFileProviders(instrumentalDependencyProvider)
     addRunListenersIfNeeded(instrumentalDependencyProvider)
-}.apply(::addAllureSupportInterceptors)
+}.apply(::postInitAllure)
 
 private fun Kaspresso.Builder.forceAllureSupportFileProviders(provider: InstrumentalDependencyProvider) {
     resourcesDirNameProvider = DefaultResourcesDirNameProvider()
@@ -107,7 +107,7 @@ private fun Kaspresso.Builder.addRunListenersIfNeeded(provider: InstrumentalDepe
     }
 }
 
-private fun addAllureSupportInterceptors(builder: Kaspresso.Builder): Unit = with(builder) {
+private fun postInitAllure(builder: Kaspresso.Builder): Unit = with(builder) {
     if (!isAndroidRuntime) {
         return@with
     }

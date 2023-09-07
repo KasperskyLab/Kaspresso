@@ -5,16 +5,6 @@ plugins {
     id("convention.legal-documents")
 }
 
-// TODO: move to publishing convention
-android {
-    libraryVariants.configureEach {
-        packageLibraryProvider.configure {
-            from("$rootDir/LICENSE.txt")
-            from("NOTICE.txt")
-        }
-    }
-}
-
 publish {
     artifactId.set("kaspresso")
 }
@@ -30,7 +20,7 @@ dependencies {
 
     implementation(libs.kotlinStdlib)
     implementation(libs.gson)
-    implementation(projects.adbServer.adbserverDevice)
+    implementation(projects.adbServer.adbServerDevice)
     implementation(libs.appcompat)
     implementation(libs.material)
 
