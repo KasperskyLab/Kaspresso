@@ -2,6 +2,7 @@ package com.kaspersky.kaspressample.docloc_tests.advanced
 
 import android.Manifest
 import android.graphics.Color
+import android.os.Build
 import androidx.fragment.app.testing.FragmentScenario
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.test.rule.GrantPermissionRule
@@ -9,6 +10,7 @@ import com.kaspersky.kaspressample.docloc.ScreenshotSampleFragment
 import com.kaspersky.kaspressample.docloc.ScreenshotSampleView
 import com.kaspersky.kaspresso.annotations.ScreenShooterTest
 import com.kaspersky.kaspresso.testcases.api.testcase.DocLocScreenshotTestCase
+import org.junit.Assume
 import org.junit.Rule
 import org.junit.Test
 import java.io.File
@@ -32,7 +34,8 @@ class AdvancedScreenshotSampleTestLegacy : DocLocScreenshotTestCase(
     @ScreenShooterTest
     @Test
     fun test() = before {
-        scenario = launchFragmentInContainer<ScreenshotSampleFragment>()
+        Assume.assumeTrue("launchFragmentInContainer blocks UI manipulation while onFragment is open", Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP)
+        scenario = launchFragmentInContainer()
     }.after {
     }.run {
         scenario.onFragment {
