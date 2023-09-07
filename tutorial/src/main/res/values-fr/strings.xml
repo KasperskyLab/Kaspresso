@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Tutoriel</string>
+
+    <!-- Simple Activity screen -->
+    <string name="simple_activity_default_title">Titre par défaut</string>
+    <string name="simple_activity_input_hint">Texte d\'entrée</string>
+    <string name="simple_activity_change_title_button">Modifier le titre</string>
+
+    <!-- Wifi Activity screen -->
+    <string name="enabled_status">permettre</string>
+    <string name="disabled_status">désactivée</string>
+
+    <!-- Notification Activity screen -->
+    <string name="show_notification_button">afficher la notification</string>
+    <string name="notification_title">Titre de la Notification</string>
+    <string name="notification_content">Contenu de la Notification</string>
+
+    <!-- Login Activity screen -->
+    <string name="login_activity_hint_username">TODO: add french locale</string>
+    <string name="login_activity_hint_password">TODO: add french locale</string>
+    <string name="login_activity_button_login">TODO: add french locale</string>
+
+    <!-- After Login screens -->
+    <string name="screen_after_login">Écran après autorisation</string>
+
+    <!-- Make call screen-->
+    <string name="phone_number_hint">Numéro de téléphone:</string>
+    <string name="make_call_btn">Passer un Appel</string>
+
+    <!-- Flaky Screen -->
+    <string name="text_1">Texte 1</string>
+    <string name="text_2">Texte 2</string>
+    <string name="text_3">Texte 3</string>
+    <string name="text_4">Texte 4</string>
+    <string name="text_5">Texte 5</string>
+
+    <!-- Screenshot sample-->
+    <string name="something_went_wrong">Quelque chose s\'est mal passé</string>
+    <string name="load_user">Charger l\'utilisateur</string>
+</resources>
