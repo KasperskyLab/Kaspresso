@@ -68,6 +68,10 @@
         <activity
             android:name=".user.LoadUserActivity"
             android:exported="true" />
+
+        <activity
+            android:name=".lists2.ExampleListActivity"
+            android:exported="true" />
     </application>
 
 </manifest>

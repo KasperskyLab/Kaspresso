@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.kaspersky.kaspresso.tutorial.databinding.ActivityMainBinding
 import com.kaspersky.kaspresso.tutorial.flaky.FlakyActivity
+import com.kaspersky.kaspresso.tutorial.lists2.ExampleListActivity
 import com.kaspersky.kaspresso.tutorial.lists.NoteListActivity
 import com.kaspersky.kaspresso.tutorial.login.LoginActivity
 import com.kaspersky.kaspresso.tutorial.notification.NotificationActivity
@@ -48,6 +49,9 @@ class MainActivity : AppCompatActivity() {
         }
         binding.loadUserActivityBtn.setOnClickListener {
             startActivity(Intent(this, LoadUserActivity::class.java))
+        }
+        binding.listActivity2Btn.setOnClickListener {
+            startActivity(Intent(this, ExampleListActivity::class.java))
         }
     }
 }

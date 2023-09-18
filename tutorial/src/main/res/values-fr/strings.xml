@@ -38,4 +38,7 @@
     <!-- Screenshot sample-->
     <string name="something_went_wrong">Quelque chose s\'est mal passé</string>
     <string name="load_user">Charger l\'utilisateur</string>
+
+    <!-- List sample-->
+    <string name="fallback_title">Repli</string>
 </resources>

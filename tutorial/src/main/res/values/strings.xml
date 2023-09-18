@@ -37,4 +37,7 @@
     <!-- Screenshot sample-->
     <string name="something_went_wrong">Something went wrong</string>
     <string name="load_user">Load User</string>
+
+    <!-- List sample-->
+    <string name="fallback_title">Fallback</string>
 </resources>
