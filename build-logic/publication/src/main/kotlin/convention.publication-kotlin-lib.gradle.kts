@@ -27,12 +27,11 @@ publishing {
     }
 }
 
-sourceSets {
-    main {
-        resources {
-            srcDirs(".", "$rootDir")
-            include("NOTICE.txt")
-            include("LICENSE.txt")
-        }
+tasks.withType<Jar>().configureEach {
+    from(projectDir) {
+        include("NOTICE.txt")
+    }
+    from(rootDir) {
+        include("LICENSE.txt")
     }
 }
