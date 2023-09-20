@@ -321,7 +321,7 @@ class UiViewBuilder {
      * @param function ViewBuilder which will result in child matcher
      */
     fun withChild(function: UiViewBuilder.() -> Unit) =
-        addSelector { hasDescendant(UiViewBuilder().apply(function).build().bySelector) }
+        addSelector { hasChild(UiViewBuilder().apply(function).build().bySelector) }
 
     /**
      * Matches the view which class matches given name
