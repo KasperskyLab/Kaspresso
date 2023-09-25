@@ -70,7 +70,7 @@
             android:exported="true" />
 
         <activity
-            android:name=".lists2.ExampleListActivity"
+            android:name=".differenttypes.DifferentTypesListActivity"
             android:exported="true" />
     </application>
 

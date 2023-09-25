@@ -1,7 +1,8 @@
-package com.kaspersky.kaspresso.tutorial.lists2.list
+package com.kaspersky.kaspresso.tutorial.differenttypes.list
 
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.view.ViewTreeObserver
 import androidx.recyclerview.widget.RecyclerView
 import com.kaspersky.kaspresso.tutorial.databinding.ActionItemBinding
 import com.kaspersky.kaspresso.tutorial.lists.Note
@@ -27,14 +28,28 @@ internal class ActionViewHolder(
             noteContainer.setBackgroundResource(bgColor)
             // binding.root.setCardBackgroundColor(bgColor)
 
+            //if (isOpen) {
             if (isOpen) {
                 // binding.noteContainer.visibility = GONE
                 binding.noteContainer2.visibility = VISIBLE
-                binding.noteContainer.translationX = -binding.tvNoteText222.x
+                // binding.cardView.translationX = -binding.tvNoteText222.x
+                // binding.noteContainer.marginLeft= binding.noteContainer
+
+//                binding.tvNoteText222.doOnPreDraw {
+//                    binding.cardView.translationX = -it.width.toFloat()
+//                }
+                binding.tvNoteTextExpanded.viewTreeObserver.addOnGlobalLayoutListener(
+                    object : ViewTreeObserver.OnGlobalLayoutListener {
+                        override fun onGlobalLayout() {
+                            binding.tvNoteTextExpanded.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                            binding.cardView.translationX = -binding.tvNoteTextExpanded.width.toFloat()
+                        }
+                    }
+                )
             } else {
                 // binding.noteContainer.visibility = VISIBLE
                 binding.noteContainer2.visibility = GONE
-                binding.noteContainer.translationX = 0F
+                binding.cardView.translationX = 0F
             }
         }
     }

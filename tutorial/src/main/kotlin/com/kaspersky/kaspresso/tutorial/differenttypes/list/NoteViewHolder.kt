@@ -1,4 +1,4 @@
-package com.kaspersky.kaspresso.tutorial.lists2.list
+package com.kaspersky.kaspresso.tutorial.differenttypes.list
 
 import androidx.recyclerview.widget.RecyclerView
 import com.kaspersky.kaspresso.tutorial.databinding.NoteItemBinding

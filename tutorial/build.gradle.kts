@@ -30,5 +30,13 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.google.code.gson:gson:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("androidx.activity:activity-ktx:1.6.1")
     androidTestImplementation("androidx.test.ext:junit-ktx:1.1.4")
+//    debugImplementation("androidx.fragment:fragment-testing-manifest:1.6.0"){
+//        isTransitive = false
+//    }
+//    androidTestImplementation("androidx.fragment:fragment-testing:1.6.0")
+    androidTestImplementation("io.mockk:mockk-android:1.13.3")
+    androidTestImplementation("com.kaspersky.android-components:kaspresso:1.5.3")
+    androidTestUtil("androidx.test:orchestrator:1.4.2")
 }

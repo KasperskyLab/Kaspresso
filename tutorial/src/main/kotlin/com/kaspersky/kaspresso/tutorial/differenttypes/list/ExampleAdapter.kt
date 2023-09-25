@@ -1,4 +1,4 @@
-package com.kaspersky.kaspresso.tutorial.lists2.list
+package com.kaspersky.kaspresso.tutorial.differenttypes.list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.kaspersky.kaspresso.tutorial.databinding.ActionItemBinding
 import com.kaspersky.kaspresso.tutorial.databinding.FallbackItemBinding
 import com.kaspersky.kaspresso.tutorial.databinding.NoteItemBinding
-import com.kaspersky.kaspresso.tutorial.lists2.ExampleView.ListModel
+import com.kaspersky.kaspresso.tutorial.differenttypes.DifferentTypesListView.ListModel
 
 internal class ExampleAdapter : RecyclerView.Adapter<ViewHolder>() {
     private val items: MutableList<ListModel> = mutableListOf()

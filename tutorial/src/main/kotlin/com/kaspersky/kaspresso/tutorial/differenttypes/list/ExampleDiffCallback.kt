@@ -1,7 +1,7 @@
-package com.kaspersky.kaspresso.tutorial.lists2.list
+package com.kaspersky.kaspresso.tutorial.differenttypes.list
 
 import androidx.recyclerview.widget.DiffUtil
-import com.kaspersky.kaspresso.tutorial.lists2.ExampleView.ListModel
+import com.kaspersky.kaspresso.tutorial.differenttypes.DifferentTypesListView.ListModel
 
 internal class ExampleDiffCallback(
     private val oldList: List<ListModel>,

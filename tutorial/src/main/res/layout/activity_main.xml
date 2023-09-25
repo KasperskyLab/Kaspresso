@@ -77,10 +77,10 @@
             android:text="Load user activity" />
 
         <Button
-            android:id="@+id/list_activity_2_btn"
+            android:id="@+id/different_types_list_activity_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="List 2 activity" />
+            android:text="List Different Types" />
     </LinearLayout>
 </ScrollView>

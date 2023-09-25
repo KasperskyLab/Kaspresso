@@ -1,8 +1,8 @@
-package com.kaspersky.kaspresso.tutorial.lists2
+package com.kaspersky.kaspresso.tutorial.differenttypes
 
 import com.kaspersky.kaspresso.tutorial.lists.Note
 
-internal interface ExampleView {
+internal interface DifferentTypesListView {
 
     data class UiState(
         val list: List<ListModel> = emptyList(),
