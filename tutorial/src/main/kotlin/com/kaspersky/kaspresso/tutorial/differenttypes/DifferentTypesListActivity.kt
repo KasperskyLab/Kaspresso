@@ -10,26 +10,26 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.kaspersky.kaspresso.tutorial.databinding.ActivityDifferentTypesListBinding
-import com.kaspersky.kaspresso.tutorial.differenttypes.list.ExampleAdapter
+import com.kaspersky.kaspresso.tutorial.differenttypes.list.DifferentTypesAdapter
 import kotlinx.coroutines.launch
 
 class DifferentTypesListActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDifferentTypesListBinding
     private val viewModel: DifferentTypesListViewModel by viewModels()
-    private val exampleAdapter = ExampleAdapter()
+    private val differentTypesAdapter = DifferentTypesAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDifferentTypesListBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.rvNotes.adapter = exampleAdapter
+        binding.rvNotes.adapter = differentTypesAdapter
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiState.collect { state ->
-                    exampleAdapter.submitList(state.list)
+                    differentTypesAdapter.submitList(state.list)
                 }
             }
         }
@@ -67,7 +67,7 @@ class DifferentTypesListActivity : AppCompatActivity() {
 
         val itemTouchCallback = object : ItemTouchHelper.SimpleCallback(
             0,
-            ItemTouchHelper.LEFT and ItemTouchHelper.RIGHT,
+            ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT,
         ) {
             override fun onChildDraw(c: Canvas, recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, dX: Float, dY: Float, actionState: Int, isCurrentlyActive: Boolean) {
 
@@ -83,18 +83,18 @@ class DifferentTypesListActivity : AppCompatActivity() {
             }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val item = exampleAdapter.getItemByIndexOrNull(viewHolder.adapterPosition)
+                val item = differentTypesAdapter.getItemByIndexOrNull(viewHolder.adapterPosition)
 
                 //ItemTouchHelper.LEFT
 
                 when (item) {
                     is DifferentTypesListView.ListModel.Action -> {
                         viewModel.openMenu(item)
-                        exampleAdapter.notifyItemChanged(viewHolder.adapterPosition)
+                        differentTypesAdapter.notifyItemChanged(viewHolder.adapterPosition)
                     }
 
                     is DifferentTypesListView.ListModel.Notes -> viewModel.remove(item)
-                    null -> exampleAdapter.notifyItemChanged(viewHolder.adapterPosition)
+                    null -> differentTypesAdapter.notifyItemChanged(viewHolder.adapterPosition)
                 }
 
 //                if (direction == ItemTouchHelper.LEFT){

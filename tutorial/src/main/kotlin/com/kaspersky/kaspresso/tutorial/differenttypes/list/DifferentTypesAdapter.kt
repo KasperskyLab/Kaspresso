@@ -10,7 +10,7 @@ import com.kaspersky.kaspresso.tutorial.databinding.FallbackItemBinding
 import com.kaspersky.kaspresso.tutorial.databinding.NoteItemBinding
 import com.kaspersky.kaspresso.tutorial.differenttypes.DifferentTypesListView.ListModel
 
-internal class ExampleAdapter : RecyclerView.Adapter<ViewHolder>() {
+internal class DifferentTypesAdapter : RecyclerView.Adapter<ViewHolder>() {
     private val items: MutableList<ListModel> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -60,7 +60,7 @@ internal class ExampleAdapter : RecyclerView.Adapter<ViewHolder>() {
     }
 
     fun submitList(newItems: List<ListModel>) {
-        val diffCallback = ExampleDiffCallback(
+        val diffCallback = DifferentTypesDiffCallback(
             oldList = items,
             newList = newItems,
         )

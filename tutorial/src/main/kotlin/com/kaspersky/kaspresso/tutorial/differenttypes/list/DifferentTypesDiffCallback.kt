@@ -3,7 +3,7 @@ package com.kaspersky.kaspresso.tutorial.differenttypes.list
 import androidx.recyclerview.widget.DiffUtil
 import com.kaspersky.kaspresso.tutorial.differenttypes.DifferentTypesListView.ListModel
 
-internal class ExampleDiffCallback(
+internal class DifferentTypesDiffCallback(
     private val oldList: List<ListModel>,
     private val newList: List<ListModel>,
 ) : DiffUtil.Callback() {
