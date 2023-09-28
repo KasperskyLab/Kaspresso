@@ -22,7 +22,7 @@ internal class DifferentTypesListViewModel : ViewModel() {
                     val item = if (n < 5) {
                         DifferentTypesListView.ListModel.Notes(note)
                     } else {
-                        DifferentTypesListView.ListModel.Action(note, false)
+                        DifferentTypesListView.ListModel.Action(note)
                     }
                     add(item)
                 }
@@ -43,18 +43,6 @@ internal class DifferentTypesListViewModel : ViewModel() {
 
                     else -> true
                 }
-            }
-            state.copy(list = list)
-        }
-    }
-
-    fun openMenu(item: DifferentTypesListView.ListModel.Action) {
-        _uiState.update { state ->
-            val list = state.list.map { model ->
-                if (model is DifferentTypesListView.ListModel.Action
-                    && model.note.id == item.note.id
-                ) model.copy(isOpen = true)
-                else model
             }
             state.copy(list = list)
         }

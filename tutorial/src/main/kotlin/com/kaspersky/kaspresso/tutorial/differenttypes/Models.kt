@@ -10,9 +10,6 @@ internal interface DifferentTypesListView {
 
     sealed interface ListModel {
         data class Notes(val note: Note) : ListModel
-        data class Action(
-            val note: Note,
-            val isOpen: Boolean,
-        ) : ListModel
+        data class Action(val note: Note) : ListModel
     }
 }

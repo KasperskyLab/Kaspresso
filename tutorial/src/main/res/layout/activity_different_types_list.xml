@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <androidx.recyclerview.widget.RecyclerView
+    <com.kaspersky.kaspresso.tutorial.differenttypes.view.SwipeMenuRecyclerView
         android:id="@+id/rv_notes"
         android:layout_width="match_parent"
         android:layout_height="0dp"

@@ -2,13 +2,13 @@ package com.kaspersky.kaspresso.tutorial.differenttypes.list
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.kaspersky.kaspresso.tutorial.databinding.NoteItemBinding
+import com.kaspersky.kaspresso.tutorial.databinding.MenuItemBinding
 import com.kaspersky.kaspresso.tutorial.differenttypes.view.SwipeLayout
 import com.kaspersky.kaspresso.tutorial.lists.Note
 import com.kaspersky.kaspresso.tutorial.lists.Priority
 
-internal class NoteViewHolder(
-    private val binding: NoteItemBinding,
+internal class MenuViewHolder(
+    private val binding: MenuItemBinding,
 ) : RecyclerView.ViewHolder(binding.root) {
 
     init {
@@ -21,7 +21,9 @@ internal class NoteViewHolder(
         })
     }
 
-    fun bind(model: Note) {
+    fun bind(
+        model: Note,
+    ) {
         val bgColor = when (model.priority) {
             Priority.LOW -> android.R.color.holo_green_light
             Priority.MEDIUM -> android.R.color.holo_orange_light

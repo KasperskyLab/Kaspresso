@@ -1,9 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.kaspersky.kaspresso.tutorial.differenttypes.view.SwipeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:id="@+id/root"
+    android:layout_height="wrap_content"
+    app:autoClose="true"
+    app:preview="right">
+
+    <TextView
+        android:id="@+id/tv_note_text_expanded"
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:layout_marginTop="16dp"
+        android:layout_gravity="end"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:text="Note text" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view"
@@ -53,28 +68,4 @@
 
     </androidx.cardview.widget.CardView>
 
-    <LinearLayout
-        android:id="@+id/note_container2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/tv_note_text_expanded"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:textColor="@color/black"
-            android:text="Note text" />
-
-    </LinearLayout>
-
-</FrameLayout>
+</com.kaspersky.kaspresso.tutorial.differenttypes.view.SwipeLayout>

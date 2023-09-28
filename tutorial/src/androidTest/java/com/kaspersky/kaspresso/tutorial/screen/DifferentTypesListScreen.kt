@@ -1,6 +1,7 @@
 package com.kaspersky.kaspresso.tutorial.screen
 
 import android.view.View
+import androidx.test.espresso.action.ViewActions
 import com.kaspersky.kaspresso.screens.KScreen
 import com.kaspersky.kaspresso.tutorial.R
 import io.github.kakaocup.kakao.common.views.KView
@@ -18,7 +19,7 @@ object DifferentTypesListScreen : KScreen<DifferentTypesListScreen>() {
         builder = { withId(R.id.rv_notes) },
         itemTypeBuilder = {
             itemType(::NoteItemScreen)
-            itemType(::ActionItemScreen)
+            itemType(::MenuItemScreen)
         }
     )
 
@@ -28,13 +29,22 @@ object DifferentTypesListScreen : KScreen<DifferentTypesListScreen>() {
         val noteContainer = KView(matcher) { withId(R.id.note_container) }
         val tvNoteId = KTextView(matcher) { withId(R.id.tv_note_id) }
         val tvNoteText = KTextView(matcher) { withId(R.id.tv_note_text) }
+
+        fun swipeLeft() {
+            view.perform(ViewActions.swipeLeft())
+        }
     }
 
-    class ActionItemScreen(
+    class MenuItemScreen(
         matcher: Matcher<View>,
-    ) : KRecyclerItem<ActionItemScreen>(matcher) {
+    ) : KRecyclerItem<MenuItemScreen>(matcher) {
         val noteContainer = KView(matcher) { withId(R.id.note_container) }
         val tvNoteId = KTextView(matcher) { withId(R.id.tv_note_id) }
         val tvNoteText = KTextView(matcher) { withId(R.id.tv_note_text) }
+        val tvNoteTextExpanded = KTextView(matcher) { withId(R.id.tv_note_text_expanded) }
+
+        fun swipeLeft() {
+            view.perform(ViewActions.swipeLeft())
+        }
     }
 }

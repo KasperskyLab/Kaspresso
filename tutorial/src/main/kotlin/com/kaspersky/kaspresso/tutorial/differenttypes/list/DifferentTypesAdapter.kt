@@ -5,8 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.kaspersky.kaspresso.tutorial.databinding.ActionItemBinding
 import com.kaspersky.kaspresso.tutorial.databinding.FallbackItemBinding
+import com.kaspersky.kaspresso.tutorial.databinding.MenuItemBinding
 import com.kaspersky.kaspresso.tutorial.databinding.NoteItemBinding
 import com.kaspersky.kaspresso.tutorial.differenttypes.DifferentTypesListView.ListModel
 
@@ -23,8 +23,8 @@ internal class DifferentTypesAdapter : RecyclerView.Adapter<ViewHolder>() {
                 )
             )
 
-            ACTION_VIEW_TYPE -> ActionViewHolder(
-                ActionItemBinding.inflate(
+            ACTION_VIEW_TYPE -> MenuViewHolder(
+                MenuItemBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false,
@@ -46,7 +46,7 @@ internal class DifferentTypesAdapter : RecyclerView.Adapter<ViewHolder>() {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         when (val item = items.getOrNull(position)) {
             is ListModel.Notes -> (holder as? NoteViewHolder)?.bind(item.note)
-            is ListModel.Action -> (holder as? ActionViewHolder)?.bind(item.note, item.isOpen)
+            is ListModel.Action -> (holder as? MenuViewHolder)?.bind(item.note)
             else -> {}
         }
     }

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SwipeLayout">
+        <attr name="preview" format="enum">
+            <enum name="none" value="0" />
+            <enum name="left" value="1" />
+            <enum name="right" value="2" />
+            <enum name="start" value="3" />
+            <enum name="end" value="4" />
+        </attr>
+        <attr name="autoClose" format="boolean" />
+        <attr name="designer" format="string" />
+    </declare-styleable>
+</resources>
