@@ -2,10 +2,16 @@
 <com.kaspersky.kaspresso.tutorial.differenttypes.view.SwipeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="8dp"
-    app:cardUseCompatPadding="true">
+    app:autoClose="true"
+    app:preview="right">
+
+    <Space
+        android:layout_width="48dp"
+        android:layout_gravity="end"
+        android:layout_height="match_parent" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"

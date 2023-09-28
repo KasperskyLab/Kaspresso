@@ -10,7 +10,9 @@ import com.kaspersky.kaspresso.tutorial.databinding.MenuItemBinding
 import com.kaspersky.kaspresso.tutorial.databinding.NoteItemBinding
 import com.kaspersky.kaspresso.tutorial.differenttypes.DifferentTypesListView.ListModel
 
-internal class DifferentTypesAdapter : RecyclerView.Adapter<ViewHolder>() {
+internal class DifferentTypesAdapter(
+    private val onRemove: (ListModel) -> Unit,
+) : RecyclerView.Adapter<ViewHolder>() {
     private val items: MutableList<ListModel> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -20,7 +22,7 @@ internal class DifferentTypesAdapter : RecyclerView.Adapter<ViewHolder>() {
                     LayoutInflater.from(parent.context),
                     parent,
                     false,
-                )
+                ),
             )
 
             ACTION_VIEW_TYPE -> MenuViewHolder(
@@ -45,10 +47,18 @@ internal class DifferentTypesAdapter : RecyclerView.Adapter<ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         when (val item = items.getOrNull(position)) {
-            is ListModel.Notes -> (holder as? NoteViewHolder)?.bind(item.note)
+            is ListModel.Notes -> (holder as? NoteViewHolder)?.bind(
+                model = item.note,
+                onRemove = { onRemove(item) }
+            )
+
             is ListModel.Action -> (holder as? MenuViewHolder)?.bind(item.note)
             else -> {}
         }
+    }
+
+    override fun onViewRecycled(holder: ViewHolder) {
+        (holder as? RecycledViewHolder)?.onRecycle()
     }
 
     override fun getItemViewType(position: Int): Int {

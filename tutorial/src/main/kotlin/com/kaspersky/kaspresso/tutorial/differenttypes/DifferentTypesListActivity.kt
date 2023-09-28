@@ -14,7 +14,13 @@ class DifferentTypesListActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDifferentTypesListBinding
     private val viewModel: DifferentTypesListViewModel by viewModels()
-    private val differentTypesAdapter = DifferentTypesAdapter()
+    private val differentTypesAdapter by lazy {
+        DifferentTypesAdapter(
+            onRemove = {
+                viewModel.remove(it)
+            }
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

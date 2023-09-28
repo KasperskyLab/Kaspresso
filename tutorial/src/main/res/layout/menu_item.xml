@@ -2,8 +2,8 @@
 <com.kaspersky.kaspresso.tutorial.differenttypes.view.SwipeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:id="@+id/root"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:autoClose="true"
     app:preview="right">
@@ -12,13 +12,13 @@
         android:id="@+id/tv_note_text_expanded"
         android:layout_width="100dp"
         android:layout_height="match_parent"
-        android:layout_marginTop="16dp"
         android:layout_gravity="end"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:textColor="@color/black"
         android:gravity="center"
-        android:text="Note text" />
+        android:text="Note text"
+        android:textColor="@color/black" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view"
@@ -55,16 +55,16 @@
         </LinearLayout>
 
         <FrameLayout
-            android:background="@android:color/holo_red_light"
             android:layout_width="4dp"
+            android:layout_height="match_parent"
             android:layout_gravity="start"
-            android:layout_height="match_parent" />
+            android:background="@android:color/holo_red_light" />
 
         <FrameLayout
-            android:background="@android:color/holo_red_light"
             android:layout_width="4dp"
+            android:layout_height="match_parent"
             android:layout_gravity="end"
-            android:layout_height="match_parent" />
+            android:background="@android:color/holo_red_light" />
 
     </androidx.cardview.widget.CardView>
 
