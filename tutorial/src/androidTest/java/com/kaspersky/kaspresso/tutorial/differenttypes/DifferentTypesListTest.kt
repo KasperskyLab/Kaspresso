@@ -156,12 +156,12 @@ class DifferentTypesListTest : TestCase() {
                         ivbDelete.click()
                     }
 
-                    Assert.assertEquals(9, getSize())
+                    Assert.assertEquals(8, getSize())
 
                     childAt<DifferentTypesListScreen.NoteItemScreen>(5) {
-                        noteContainer.hasBackgroundColor(android.R.color.holo_green_light)
-                        tvNoteId.hasText("6")
-                        tvNoteText.hasText("Note number 6")
+                        noteContainer.hasBackgroundColor(android.R.color.holo_orange_light)
+                        tvNoteId.hasText("7")
+                        tvNoteText.hasText("Note number 7")
                     }
                 }
             }
