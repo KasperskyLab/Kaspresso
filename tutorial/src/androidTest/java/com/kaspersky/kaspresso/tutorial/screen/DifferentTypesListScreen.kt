@@ -41,10 +41,15 @@ object DifferentTypesListScreen : KScreen<DifferentTypesListScreen>() {
         val noteContainer = KView(matcher) { withId(R.id.note_container) }
         val tvNoteId = KTextView(matcher) { withId(R.id.tv_note_id) }
         val tvNoteText = KTextView(matcher) { withId(R.id.tv_note_text) }
-        val tvNoteTextExpanded = KTextView(matcher) { withId(R.id.tv_note_text_expanded) }
+        val ivbDelete = KView(matcher) { withId(R.id.ivb_delete) }
+        val ivbClose = KView(matcher) { withId(R.id.ivb_close) }
 
         fun swipeLeft() {
             view.perform(ViewActions.swipeLeft())
+        }
+
+        fun swipeRight() {
+            view.perform(ViewActions.swipeRight())
         }
     }
 }

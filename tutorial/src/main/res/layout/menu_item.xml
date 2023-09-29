@@ -15,7 +15,7 @@
         android:orientation="horizontal">
 
         <ImageButton
-            android:id="@+id/iv_delete"
+            android:id="@+id/ivb_delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -27,7 +27,7 @@
             app:tint="@android:color/holo_red_dark" />
 
         <ImageButton
-            android:id="@+id/iv_close"
+            android:id="@+id/ivb_close"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

@@ -62,6 +62,11 @@ class DifferentTypesListTest : TestCase() {
                         tvNoteId.hasText("2")
                         tvNoteText.hasText("Note number 2")
                     }
+                    childAt<DifferentTypesListScreen.MenuItemScreen>(5) {
+                        noteContainer.hasBackgroundColor(android.R.color.holo_red_light)
+                        tvNoteId.hasText("5")
+                        tvNoteText.hasText("Note number 5")
+                    }
                 }
             }
         }
@@ -89,22 +94,77 @@ class DifferentTypesListTest : TestCase() {
                 }
             }
         }
-        step("Check Swipe Menu") {
+        step("Check Swipe Menu Visibility #1") {
             DifferentTypesListScreen {
                 rvNotes {
                     childAt<DifferentTypesListScreen.MenuItemScreen>(5) {
-                        tvNoteTextExpanded.isInvisible()
+                        ivbDelete.isInvisible()
+                        ivbClose.isInvisible()
                     }
                     childAt<DifferentTypesListScreen.MenuItemScreen>(5) {
                         swipeLeft()
                         device.uiDevice.waitForIdle()
                     }
                     childAt<DifferentTypesListScreen.MenuItemScreen>(5) {
-                        tvNoteTextExpanded.isVisible()
+                        ivbDelete.isVisible()
+                        ivbClose.isVisible()
+                    }
+                    childAt<DifferentTypesListScreen.MenuItemScreen>(5) {
+                        swipeRight()
+                        device.uiDevice.waitForIdle()
+                    }
+                    childAt<DifferentTypesListScreen.MenuItemScreen>(5) {
+                        ivbDelete.isInvisible()
+                        ivbClose.isInvisible()
+                    }
+                }
+            }
+        }
+        step("Check Swipe Menu Visibility #2") {
+            DifferentTypesListScreen {
+                rvNotes {
+                    childAt<DifferentTypesListScreen.MenuItemScreen>(5) {
+                        ivbDelete.isInvisible()
+                        ivbClose.isInvisible()
+                    }
+                    childAt<DifferentTypesListScreen.MenuItemScreen>(5) {
+                        swipeLeft()
+                        device.uiDevice.waitForIdle()
+                    }
+                    childAt<DifferentTypesListScreen.MenuItemScreen>(5) {
+                        ivbDelete.isVisible()
+                        ivbClose.isVisible()
+                    }
+                    childAt<DifferentTypesListScreen.MenuItemScreen>(5) {
+                        ivbClose.click()
+                    }
+                    childAt<DifferentTypesListScreen.MenuItemScreen>(5) {
+                        ivbDelete.isInvisible()
+                        ivbClose.isInvisible()
+                    }
+                }
+            }
+        }
+        step("Check Delete via Swipe Menu") {
+            DifferentTypesListScreen {
+                rvNotes {
+                    childAt<DifferentTypesListScreen.MenuItemScreen>(5) {
+                        swipeLeft()
+                        device.uiDevice.waitForIdle()
+                    }
+                    childAt<DifferentTypesListScreen.MenuItemScreen>(5) {
+                        ivbDelete.click()
+                    }
+
+                    Assert.assertEquals(9, getSize())
+
+                    childAt<DifferentTypesListScreen.NoteItemScreen>(5) {
+                        noteContainer.hasBackgroundColor(android.R.color.holo_green_light)
+                        tvNoteId.hasText("6")
+                        tvNoteText.hasText("Note number 6")
                     }
                 }
             }
         }
     }
-
 }

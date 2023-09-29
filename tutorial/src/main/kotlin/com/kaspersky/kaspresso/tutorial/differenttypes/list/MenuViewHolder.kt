@@ -36,8 +36,8 @@ internal class MenuViewHolder(
             tvNoteText.text = model.text
             noteContainer.setBackgroundResource(bgColor)
 
-            ivDelete.setOnClickListener { onRemoveClicked() }
-            ivClose.setOnClickListener { binding.root.closeMenu() }
+            ivbDelete.setOnClickListener { onRemoveClicked() }
+            ivbClose.setOnClickListener { binding.root.closeMenu() }
         }
     }
 }
