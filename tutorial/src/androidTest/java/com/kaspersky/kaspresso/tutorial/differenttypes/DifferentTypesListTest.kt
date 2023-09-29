@@ -18,7 +18,7 @@ class DifferentTypesListTest : TestCase() {
     fun checkExampleScreen() = run {
         step("Open note list screen") {
             MainScreen {
-                listActivity2Button {
+                differentTypesListActivityButton {
                     isVisible()
                     isClickable()
                     click()
