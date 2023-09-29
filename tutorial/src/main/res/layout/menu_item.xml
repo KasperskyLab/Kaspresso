@@ -8,17 +8,36 @@
     app:autoClose="true"
     app:preview="right">
 
-    <TextView
-        android:id="@+id/tv_note_text_expanded"
-        android:layout_width="100dp"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_gravity="end"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:gravity="center"
-        android:text="Note text"
-        android:textColor="@color/black" />
+        android:layout_gravity="center|end"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/iv_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="10dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="@null"
+            android:padding="6dp"
+            android:src="@android:drawable/ic_menu_delete"
+            app:tint="@android:color/holo_red_dark" />
+
+        <ImageButton
+            android:id="@+id/iv_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginEnd="10dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="@null"
+            android:padding="6dp"
+            android:src="@android:drawable/ic_menu_close_clear_cancel"
+            app:tint="@android:color/holo_blue_dark" />
+    </LinearLayout>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view"
@@ -54,17 +73,15 @@
                 tools:text="Note text" />
         </LinearLayout>
 
-        <FrameLayout
-            android:layout_width="4dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            android:background="@android:color/holo_red_light" />
-
-        <FrameLayout
-            android:layout_width="4dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="end"
-            android:background="@android:color/holo_red_light" />
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center|end"
+            android:layout_marginEnd="8dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="@null"
+            android:src="@android:drawable/ic_input_get"
+            app:tint="@android:color/black" />
 
     </androidx.cardview.widget.CardView>
 

@@ -49,10 +49,14 @@ internal class DifferentTypesAdapter(
         when (val item = items.getOrNull(position)) {
             is ListModel.Notes -> (holder as? NoteViewHolder)?.bind(
                 model = item.note,
-                onRemove = { onRemove(item) }
+                onRemoveClicked = { onRemove(item) },
             )
 
-            is ListModel.Action -> (holder as? MenuViewHolder)?.bind(item.note)
+            is ListModel.Action -> (holder as? MenuViewHolder)?.bind(
+                model = item.note,
+                onRemoveClicked = { onRemove(item) },
+            )
+
             else -> {}
         }
     }

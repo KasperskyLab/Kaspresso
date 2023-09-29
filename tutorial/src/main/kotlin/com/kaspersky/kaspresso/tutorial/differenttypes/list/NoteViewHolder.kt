@@ -27,12 +27,12 @@ internal class NoteViewHolder(
 
     fun bind(
         model: Note,
-        onRemove: () -> Unit,
+        onRemoveClicked: () -> Unit,
     ) {
         binding.root.addListener(
             object : SwipeLayout.Listener {
                 override fun onSwipe(menuView: View, swipeOffset: Float) {
-                    onRemove()
+                    onRemoveClicked()
                 }
             }.also { listener = it }
         )

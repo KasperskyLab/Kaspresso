@@ -23,6 +23,7 @@ internal class MenuViewHolder(
 
     fun bind(
         model: Note,
+        onRemoveClicked: () -> Unit,
     ) {
         val bgColor = when (model.priority) {
             Priority.LOW -> android.R.color.holo_green_light
@@ -34,6 +35,9 @@ internal class MenuViewHolder(
             tvNoteId.text = model.id.toString()
             tvNoteText.text = model.text
             noteContainer.setBackgroundResource(bgColor)
+
+            ivDelete.setOnClickListener { onRemoveClicked() }
+            ivClose.setOnClickListener { binding.root.closeMenu() }
         }
     }
 }
