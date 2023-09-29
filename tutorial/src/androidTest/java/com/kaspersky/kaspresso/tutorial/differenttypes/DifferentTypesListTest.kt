@@ -41,6 +41,14 @@ class DifferentTypesListTest : TestCase() {
                         tvNoteId.hasAnyText()
                         tvNoteText.hasAnyText()
                     }
+                    children<DifferentTypesListScreen.MenuItemScreen> {
+                        tvNoteId.isVisible()
+                        tvNoteText.isVisible()
+                        noteContainer.isVisible()
+
+                        tvNoteId.hasAnyText()
+                        tvNoteText.hasAnyText()
+                    }
                 }
             }
         }
