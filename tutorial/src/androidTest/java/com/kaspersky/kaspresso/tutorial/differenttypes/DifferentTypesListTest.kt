@@ -15,7 +15,7 @@ class DifferentTypesListTest : TestCase() {
     val activityRule = ActivityScenarioRule(MainActivity::class.java)
 
     @Test
-    fun checkExampleScreen() = run {
+    fun checkDifferentTypesScreen() = run {
         step("Open note list screen") {
             MainScreen {
                 differentTypesListActivityButton {
