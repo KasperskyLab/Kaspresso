@@ -1,13 +1,14 @@
 package com.kaspersky.kaspresso.tutorial.screen
 
 import com.kaspersky.kaspresso.screens.KScreen
+import com.kaspersky.kaspresso.tutorial.MainActivity
 import com.kaspersky.kaspresso.tutorial.R
 import io.github.kakaocup.kakao.text.KButton
 
 object MainScreen : KScreen<MainScreen>() {
 
-    override val layoutId: Int? = null
-    override val viewClass: Class<*>? = null
+    override val layoutId: Int = R.layout.activity_main
+    override val viewClass: Class<*> = MainActivity::class.java
 
     val differentTypesListActivityButton = KButton { withId(R.id.different_types_list_activity_btn) }
 }

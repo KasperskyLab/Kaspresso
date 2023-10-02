@@ -4,6 +4,7 @@ import android.view.View
 import androidx.test.espresso.action.ViewActions
 import com.kaspersky.kaspresso.screens.KScreen
 import com.kaspersky.kaspresso.tutorial.R
+import com.kaspersky.kaspresso.tutorial.differenttypes.DifferentTypesListActivity
 import io.github.kakaocup.kakao.common.views.KView
 import io.github.kakaocup.kakao.recycler.KRecyclerItem
 import io.github.kakaocup.kakao.recycler.KRecyclerView
@@ -12,8 +13,8 @@ import org.hamcrest.Matcher
 
 object DifferentTypesListScreen : KScreen<DifferentTypesListScreen>() {
 
-    override val layoutId: Int? = null
-    override val viewClass: Class<*>? = null
+    override val layoutId: Int = R.layout.activity_different_types_list
+    override val viewClass: Class<*> = DifferentTypesListActivity::class.java
 
     val rvNotes = KRecyclerView(
         builder = { withId(R.id.rv_notes) },
