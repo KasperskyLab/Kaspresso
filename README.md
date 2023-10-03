@@ -88,7 +88,7 @@ To make it easier to learn the framework, a step-by-step tutorial is available o
 <details><summary>Details</summary>
 
 ### Readability
-
+<details><summary>Details</summary>
 We like the syntax that [Kakao](https://github.com/KakaoCup/Kakao) applies to write UI tests. This wrapper over Espresso uses the Kotlin DSL approach, that makes the code
 significantly shorter and more readable. See the difference:
 
@@ -195,11 +195,17 @@ fun shouldPassOnNoInternetScanTest() =
     }
 ```
 
+</details>
+<details><summary>Details</summary>
+
 ### Stability
 
 Sometimes your UI test passes ten times, then breaks on the eleventh attempt for some mysterious reason. It’s called *flakiness*.
 
 The most popular reason for flakiness is the instability of the UI tests libraries, such as Espresso and UI Automator. To eliminate this instability, Kaspresso uses DSL wrappers and [interceptors](#Interceptors).
+
+</details>
+<details><summary>Details</summary>
 
 ### UI test libraries acceleration
 
@@ -208,6 +214,9 @@ Let’s watch some short video that shows the difference between the original UI
 ![](https://habrastorage.org/webt/ti/kv/ki/tikvkij1vjesnacrxqm-lk0coly.gif)
 
 Here is [a short explanation](https://kasperskylab.github.io/Kaspresso/Wiki/Kautomator-wrapper_over_UI_Automator/#accelerate-ui-automator) of why it is possible.
+
+</details>
+<details><summary>Details</summary>
 
 ### Interceptors
 
@@ -221,15 +230,24 @@ Thanks to interceptors, you can do a lot of useful things, such as:
 
 and many more (see [the manual](https://kasperskylab.github.io/Kaspresso/Wiki/Kaspresso_configuration/#kaspresso-interceptors-based-on-kakaokautomator-interceptors)).
 
+</details>
+<details><summary>Details</summary>
+
 ### Writing readable logs
 Kaspresso writes its own logs, detailed and readable:
 
 <img src="https://habrastorage.org/webt/03/nn/qg/03nnqgupdqnwa_i4jwyz1uqq6r0.png" />
 <img src="https://habrastorage.org/webt/tq/az/3v/tqaz3vjsgpw0-ivylrfbnuqyiqa.png" />
 
+</details>
+<details><summary>Details</summary>
+
 ### Ability to call ADB commands
 
 Espresso and UI Automator don't allow to call ADB commands from inside a test. To fix this problem, we developed AdbServer (see the [wiki](https://kasperskylab.github.io/Kaspresso/Wiki/Executing_adb_commands/)).
+
+</details>
+<details><summary>Details</summary>
 
 ### Ability to work with Android System
 
@@ -250,20 +268,32 @@ For example, with the ```Device``` class you can:
 
 (see more about the [Device class](https://kasperskylab.github.io/Kaspresso/Wiki/Working_with_Android_OS/)).
 
+</details>
+<details><summary>Details</summary>
+
 ### Features screenshotting
 
 If you develop an application that is available across the world, you have to *localize* it into different languages. When UI is localized, it’s important for the translator to see the context of a word or a phrase, that is the specific screen.
 
 With Kaspresso, translators can automatically take a screenshot of any screen. It’s incredibly fast, even for legacy screens, and you don't have to refactor or mock anything (see [the manual](https://kasperskylab.github.io/Kaspresso/Wiki/Screenshot_tests/)).
 
+</details>
+<details><summary>Details</summary>
+
 ### Configurability
 
 You can tune any part of Kaspresso (read [more](https://kasperskylab.github.io/Kaspresso/Wiki/Kaspresso_configuration/)).
+
+</details>
+<details><summary>Details</summary>
 
 ### Robolectric support
 
 You can run your UI-tests on the JVM environment. Additionally, almost all interceptors improving stability, readability and other will work.
 Read [more](https://kasperskylab.github.io/Kaspresso/Wiki/Kaspresso_Robolectric/).
+
+</details>
+<details><summary>Details</summary>
 
 ### Allure support
 
@@ -271,14 +301,20 @@ Kaspresso can generate very detailed Allure-reports for each test:
 ![](https://habrastorage.org/webt/tq/t7/ch/tqt7chcdczrgduhoukqhx1ertfc.png)
 More information is available [here](https://kasperskylab.github.io/Kaspresso/Wiki/Kaspresso_Allure/).
 
+</details>
+<details><summary>Details</summary>
+
 ### Jetpack Compose support
 
 Now, you can write your Kaspresso tests for Jetpack Compose screens! DSL and all principles are the same.
 So, you will not see any difference between tests for View screens and for Compose screens.
 More information is available [here](https://kasperskylab.github.io/Kaspresso/Wiki/Jetpack_Compose/).
 
+</details>
+</details>
+
 ## Samples
-All samples are available in the [samples](https://github.com/KasperskyLab/Kaspresso/tree/issue-372/tutorial/samples) folder.
+All samples are available in the [samples](https://github.com/KasperskyLab/Kaspresso/tree/master/samples) folder.
 
 Most of the samples require AdbServer. To start AdbServer you should do the following steps:
 
@@ -290,7 +326,6 @@ cd ~/Workspace/Kaspresso
 ```
 java -jar artifacts/adbserver-desktop.jar
 ```
-</details>
 
 ## Existing issues
 All existing issues in Kaspresso can be found [here](https://kasperskylab.github.io/Kaspresso/Issues/).
