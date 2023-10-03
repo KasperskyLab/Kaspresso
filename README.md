@@ -246,9 +246,10 @@ Kaspresso writes its own logs, detailed and readable:
 <img src="https://habrastorage.org/webt/tq/az/3v/tqaz3vjsgpw0-ivylrfbnuqyiqa.png" />
 
 </details>
-<details><summary>Details</summary>
 
 ### Ability to call ADB commands
+
+<details><summary>Details</summary>
 
 Espresso and UI Automator don't allow to call ADB commands from inside a test. To fix this problem, we developed AdbServer (see the [wiki](https://kasperskylab.github.io/Kaspresso/Wiki/Executing_adb_commands/)).
 
