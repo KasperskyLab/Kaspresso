@@ -11,23 +11,28 @@
 Kaspresso is a framework for Android UI testing. Based on [Espresso](https://developer.android.com/training/testing/espresso) and [UI
 Automator](https://developer.android.com/training/testing/ui-automator), Kaspresso provides a wide range of additional features, such as:
 
-* 100% stability, no flakiness.
-* Jetpack Compose support.
+* Built-in protection against flaky tests
+* Jetpack Compose support
+* Screenshot testing with native approach (with dark mode support)
+* Declarative approach for writing tests
+* Ability to interact with other applications and system elements and interfaces
+* Human readability with Kotlin DSL wrappers over UiAutomator and Espresso
+* Detailed logs and reports (logs, view hierarchy, screenshots, video etc.)
+* ADB support
+* Allure support
+* Robolectric support
+* Easy migration from Espresso
+* Flexible configuration options
+* Automatic artifacts pulling after tests execution
 * Significantly faster execution of UI Automator commands. With Kaspresso, some UI Automator commands run **10 times faster**!
-* Excellent readability due to human DSL.
-* Useful interceptor mechanism to catch all actions and assertions in one place.
-* Full logging.
-* Ability to call ADB commands.
-* UI tests writing philosophy implemented with DSL.
-* Features screenshotting.
-* Robolectric support.
-* Allure support.
+* Page object pattern from the box
 
 And many more!
 
 <img src="kaspresso.png" alt="Kaspresso"/>
 
 ## Integration
+<details><summary>Details</summary>
 
 To integrate Kaspresso into your project:
 1. If the `mavenCentral` repository does not exist, include it to your root `build.gradle` file:
@@ -52,7 +57,7 @@ dependencies {
 }
 ```
 
-To try out the cutting edge kaspresso updates before an oficial release add a "-SNAPHOT" postfix to the latest Kaspresso version e.g.
+To try out the cutting edge kaspresso updates before an official release add a "-SNAPHOT" postfix to the latest Kaspresso version e.g.
 ```groovy
 dependencies {
     androidTestImplementation 'com.kaspersky.android-components:kaspresso:<latest_version>-SNAPSHOT'
@@ -69,10 +74,18 @@ dependencies {
 }
 ```
 
+</details>
+
+## FAQ
+[See our website.](https://kasperskylab.github.io/Kaspresso/en/)
+You can also reach out to us on [Discord](https://kas.pr/gh_discord).
+
 ## Tutorial *NEW*
 To make it easier to learn the framework, a step-by-step tutorial is available on [our website](https://kasperskylab.github.io/Kaspresso/Tutorial/).
 
 ## Capabilities of Kaspresso
+
+<details><summary>Details</summary>
 
 ### Readability
 
@@ -277,10 +290,7 @@ cd ~/Workspace/Kaspresso
 ```
 java -jar artifacts/adbserver-desktop.jar
 ```
-
-## Runner
-If you looking for a Runner to execute your UI tests we strongly recommend to use [Marathon](https://github.com/MarathonLabs/marathon). [Marathon](https://github.com/MarathonLabs/marathon) is a fast, platform-independent test runner focused on performance and stability. It offers easy to use platform implementations for Android and iOS as well as an API for use with custom hardware farms and more techstacks.
-<img src="marathon-banner.svg" alt="Marathon"/>
+</details>
 
 ## Existing issues
 All existing issues in Kaspresso can be found [here](https://kasperskylab.github.io/Kaspresso/Issues/).
@@ -293,3 +303,7 @@ Kaspresso is an open source project, so you are welcome to contribute (see the [
 
 ## License
 Kaspresso is available under the [Apache License, Version 2.0](https://github.com/KasperskyLab/Kaspresso/blob/master/LICENSE).
+
+## Runner
+If you looking for a Runner to execute your UI tests we strongly recommend to use [Marathon](https://github.com/MarathonLabs/marathon). [Marathon](https://github.com/MarathonLabs/marathon) is a fast, platform-independent test runner focused on performance and stability. It offers easy to use platform implementations for Android and iOS as well as an API for use with custom hardware farms and more techstacks.
+<img src="marathon-banner.svg" alt="Marathon"/>
