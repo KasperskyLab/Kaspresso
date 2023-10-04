@@ -2,7 +2,7 @@
 
 In this lesson, we will learn what scenarios are (the `Scenario` class from the Kaspresso library), find out what their purpose is, when they should be used, and when it is better to avoid them.
 
-Open the tutorial application and click on the `Login Acitivity` button.
+Open the tutorial application and click on the `Login Activity` button.
 
 <img src="../images/scenario/main_screen_login_button.png" alt="Main Screen login button" width="300"/>
 
