@@ -13,6 +13,7 @@
 [EN] [Danil Perevalov - Leak detection into UI tests](https://proandroiddev.com/leak-detection-into-ui-tests-952c598dcfe0) <br>
 [EN] [Christina Rozenkova - Kaspresso Tutorials. Part 1. Launching the First Test](https://proandroiddev.com/kaspresso-tutorials-part-1-launching-the-first-test-731d489ea1ae) <br>
 [EN] [Evgenii Matsiuk (Eugene Matsyuk) - Autotests on Android. The entire picture](https://proandroiddev.com/where-to-write-android-ui-tests-part-2-cb45033f3ddf) <br>
+[EN] [Senchurin Nick - Kaspresso and ADB server](https://proandroiddev.com/kaspresso-and-adb-server-7c35a80d8978) <br>
 
 > Хочешь попасть в этот список? Все просто! Напиши статью про Kaspresso, пришли нам ссылку, и мы добавим её в этот список!
 <br/>
