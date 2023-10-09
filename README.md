@@ -33,7 +33,12 @@ And many more!
 <img src="kaspresso.png" alt="Kaspresso"/>
 
 
-<details> ## <summary>Test1</summary>
+<details> 
+<summary>
+
+## Test1
+
+</summary>
 </details>
 ## <details><summary>Test2</summary>
 </details>
