@@ -21,6 +21,13 @@ internal class TestRunner<InitData, Data>(
     private val kaspresso: Kaspresso
 ) {
     fun run(testBody: TestBody<InitData, Data>) {
+        /**
+         * We reset Kakao and Kautomator settings after each test.
+         * So we should set it up before launching test because in some cases one test is launching several times
+         * e.g. Screenshot tests with several locales
+         */
+        kaspresso.injectInKakaoAndKautomator()
+
         val exceptions: MutableList<Throwable> = mutableListOf()
         val resultException: Throwable?
         val baseTestContext = BaseTestContext(kaspresso)
