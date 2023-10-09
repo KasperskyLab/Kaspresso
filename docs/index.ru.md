@@ -34,11 +34,7 @@ Kaspresso — это фреймворк для тестирования поль
 <img src="kaspresso.png" alt="Kaspresso"/>
 [//]: # (![Kaspresso]&#40;https://habrastorage.org/webt/dw/jh/9k/dwjh9kypjl637kxj8tiaxwjvtp0.png&#41;)
 
-<details>
-<summary>
-
 ## Интеграция
-</summary>
 
 Чтобы интегрировать Kaspresso в свой проект:
 1. Включите репозиторий mavenCentral в корневой файл `build.gradle`:
@@ -81,24 +77,16 @@ dependencies {
 }
 ```
 
-</details>
-
 ## FAQ
 Вы можете задать любые вопросы в нашем чате поддержки в [Telegram](https://t.me/kaspresso).
 
 ## Туториал *Новое*
 Чтобы упростить изучение фреймворка, доступно пошаговое руководство на [нашем веб-сайте](https://kasperskylab.github.io/Kaspresso/ru/Tutorial/).
 
-<details>
-<summary> 
-
 ## Возможности Kaspresso
-</summary>
-<details>
-<summary>
 
 ### Читаемость
-</summary>
+
 Нам нравится синтаксис, который [Kakao](https://github.com/KakaoCup/Kakao) применяет для написания тестов пользовательского интерфейса. Эта оболочка над Espresso использует подход Kotlin DSL, что делает код 
 значительно короче и читабельнее. Можно увидеть разницу:
 
@@ -205,25 +193,13 @@ fun shouldPassOnNoInternetScanTest() =
     }
 ```
 
-</details>
-
-<details>
-<summary>
-
 ### Стабильность 
-</summary>
 
 Иногда ваш тест может выполняться успешно десять раз, а затем ломается на одиннадцатой попытке по какой-то загадочной причине. Это называется *флак(flakiness)*. 
 
 Самая популярная причина ненадёжности — нестабильность библиотек UI-тестов, таких как Espresso и UI Automator. Чтобы устранить эту нестабильность, Kaspresso использует DSL обертки и [перехватчики](#Interceptors). 
 
-</details>
-
-<details>
-<summary>
-
 ### Ускорение библиотек тестов пользовательского интерфейса
-</summary>
 
 Давайте посмотрим короткое видео, показывающее разницу между оригинальным UI Automator (справа) и ускоренным (слева).
 
@@ -231,13 +207,7 @@ fun shouldPassOnNoInternetScanTest() =
 
 Здесь предоставлено [краткое объяснение](https://kasperskylab.github.io/Kaspresso/ru/Wiki/Kautomator-wrapper_over_UI_Automator/#ui-automator), почему это возможно.
 
-</details>
-
-<details>
-<summary>
-
 ### Перехватчики
-</summary>
 
 Мы разработали [перехватчики поведения Kaspresso](https://kasperskylab.github.io/Kaspresso/ru/Wiki/Kaspresso_configuration/#behavior-interceptors) (Kaspresso behavior interceptors) на основе [перехватчиков Kakao/Kautomator](https://kasperskylab.github.io/Kaspresso/ru/Wiki/Kaspresso_configuration/#kaspresso-kakaokautomator) для обработки сбоев.
 
@@ -248,36 +218,18 @@ fun shouldPassOnNoInternetScanTest() =
 
 и многое другое (см. [руководство](https://kasperskylab.github.io/Kaspresso/ru/Wiki/Kaspresso_configuration/#kaspresso-kakaokautomator)).
 
-</details>
-
-<details>
-<summary>
-
 ### Запись читаемых логов
-</summary>
 
 Kaspresso пишет собственные сообщения в журнал, подробные и читабельные:
 
 <img src="https://habrastorage.org/webt/03/nn/qg/03nnqgupdqnwa_i4jwyz1uqq6r0.png" />
 <img src="https://habrastorage.org/webt/tq/az/3v/tqaz3vjsgpw0-ivylrfbnuqyiqa.png" />
 
-</details>
-
-<details>
-<summary>
-
 ### Возможность вызова команд ADB
-</summary>
 
 Espresso и UI Automator не позволяют вызывать команды ADB из теста. Чтобы решить эту проблему, мы разработали AdbServer (см. [вики](https://kasperskylab.github.io/Kaspresso/Wiki/Executing_adb_commands/)).
 
-</details>
-
-<details>
-<summary>
-
 ### Возможность работы с системой Android
-</summary>
 
 Вы можете использовать классы Kaspresso для работы с системой Android.
 
@@ -296,66 +248,34 @@ Espresso и UI Automator не позволяют вызывать команды
 
 (подробнее о [Device class](https://kasperskylab.github.io/Kaspresso/ru/Wiki/Working_with_Android_OS/)).
 
-</details>
-
-<details>
-<summary>
-
 ### Предоставляет возможность скриншотинга
-</summary>
 
 Если вы разрабатываете приложение, доступное по всему миру, вам необходимо *локализировать* его на разные языки. Когда интерфейс локализован, для переводчика важно увидеть контекст слова или фразы на конкретном экране. 
 
 С Kaspresso переводчики могут автоматически делать скриншот любого экрана. Это невероятно быстро, даже для устаревших экранов, и не требует дополнительного рефакторинга (см. [руководство](https://kasperskylab.github.io/Kaspresso/Wiki/Screenshot_tests/)).
 
-</details>
-
-<details>
-<summary>
-
 ### Конфигурируемость
-</summary>
 
 Вы можете настроить любую часть Kaspresso ([подробнее](https://kasperskylab.github.io/Kaspresso/ru/Wiki/Kaspresso_configuration/)).
 
-</details>
-<details>
-<summary>
-
 ### Поддержка Robolectric 
-</summary>
 
 Вы можете запускать свои UI-тесты в среде JVM. Кроме того, почти все перехватчики, улучшающие стабильность, читабельность и другие, будут работать. 
-Читать [подробнее](https://kasperskylab.github.io/Kaspresso/ru/Wiki/Kaspresso_Robolectric/). 
-
-</details>
-
-<details>
-<summary>
+Читать [подробнее](https://kasperskylab.github.io/Kaspresso/ru/Wiki/Kaspresso_Robolectric/).
 
 ### Поддержка Allure
-</summary>
 
 Kaspresso может генерировать очень подробные Allure-отчеты для каждого теста:
 ![](https://habrastorage.org/webt/tq/t7/ch/tqt7chcdczrgduhoukqhx1ertfc.png)
 Более подробная информация доступна [здесь](https://kasperskylab.github.io/Kaspresso/ru/Wiki/Kaspresso_Allure/). 
 
-</details>
-
-<details>
-<summary>
-
 ### Поддержка Jetpack Compose (ранний доступ)
-</summary>
 
 Теперь вы можете писать свои тесты Kaspresso для экранов Jetpack Compose! DSL и все принципы одинаковы. 
 Таким образом, вы не увидите никакой разницы между тестами для View и для экранов Compose.
 Более подробная информация доступна [здесь](https://kasperskylab.github.io/Kaspresso/ru/Wiki/Jetpack_Compose/).
 
 ** Имейте в виду, что это ранний доступ, который может содержать ошибки. Также возможно изменение API, но мы будем стараться этого не делать. Не стесняйтесь сообщать о багах в разделе issue, если вы столкнулись с какой-либо проблемой.**
-
-</details>
-</details>
 
 ## Примеры
 Все примеры доступны в папке [samples](https://github.com/KasperskyLab/Kaspresso/tree/issue-372/tutorial/samples).
