@@ -60,12 +60,12 @@ plugins:
       default_language: en
       docs_structure: suffix
       languages:
-        - ru:
-            name: Russian
-            build: true
-        - en:
-            name: English
-            build: true
+        ru:
+          name: Russian
+          build: true
+        en:
+          name: English
+          build: true
       nav_translations:
         en:
           Home: Home
