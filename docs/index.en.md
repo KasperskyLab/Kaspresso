@@ -33,8 +33,7 @@ And many more!
 
 <img src="kaspresso.png" alt="Kaspresso"/>
 
-## Integration
-<details><summary>Details</summary>
+<details><summary>## Integration</summary>
 
 To integrate Kaspresso into your project:
 1. If the `mavenCentral` repository does not exist, include it to your root `build.gradle` file:

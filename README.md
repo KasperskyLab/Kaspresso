@@ -32,8 +32,7 @@ And many more!
 
 <img src="kaspresso.png" alt="Kaspresso"/>
 
-## Integration
-<details><summary>Details</summary>
+<details><summary>## Integration</summary>
 
 To integrate Kaspresso into your project:
 1. If the `mavenCentral` repository does not exist, include it to your root `build.gradle` file:
@@ -314,9 +313,10 @@ Kaspresso can generate very detailed Allure-reports for each test:
 More information is available [here](https://kasperskylab.github.io/Kaspresso/Wiki/Kaspresso_Allure/).
 
 </details>
-<details><summary>Details</summary>
 
 ### Jetpack Compose support
+
+<details><summary>Details</summary>
 
 Now, you can write your Kaspresso tests for Jetpack Compose screens! DSL and all principles are the same.
 So, you will not see any difference between tests for View screens and for Compose screens.
