@@ -1,10 +1,10 @@
 site_name: "Kaspresso"
 repo_url: https://github.com/KasperskyLab/Kaspresso
 repo_name: Kaspresso
+site_url: https://kasperskylab.github.io/Kaspresso/
 edit_uri: tree/main/docs/content
 docs_dir: 'docs'
 remote_branch: gh-pages
-language: en
 
 theme:
   favicon: kaspresso.png
@@ -38,7 +38,6 @@ theme:
   search_index_only: true
 
   # Default values, taken from mkdocs_theme.yml
-  language: ru
   font:
     text: Roboto
     code: Roboto Mono
