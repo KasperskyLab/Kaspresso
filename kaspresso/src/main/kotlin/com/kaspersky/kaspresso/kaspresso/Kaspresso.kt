@@ -6,6 +6,7 @@ import androidx.test.espresso.FailureHandler
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.Configurator
 import com.kaspersky.adbserver.common.log.logger.LogLevel
+import com.kaspersky.components.kautomator.KautomatorConfigurator
 import com.kaspersky.components.kautomator.intercept.interaction.UiDeviceInteraction
 import com.kaspersky.components.kautomator.intercept.interaction.UiObjectInteraction
 import com.kaspersky.kaspresso.device.Device
@@ -1001,23 +1002,7 @@ data class Kaspresso(
             configurator.waitForIdleTimeout = kautomatorWaitForIdleSettings.waitForIdleTimeout
             configurator.waitForSelectorTimeout = kautomatorWaitForIdleSettings.waitForSelectorTimeout
 
-            injectKaspressoInKakao(
-                kaspresso.viewBehaviorInterceptors,
-                kaspresso.dataBehaviorInterceptors,
-                kaspresso.webBehaviorInterceptors,
-                kaspresso.viewActionWatcherInterceptors,
-                kaspresso.viewAssertionWatcherInterceptors,
-                kaspresso.atomWatcherInterceptors,
-                kaspresso.webAssertionWatcherInterceptors,
-                kaspresso.params.clickParams
-            )
-
-            injectKaspressoInKautomator(
-                kaspresso.objectBehaviorInterceptors,
-                kaspresso.deviceBehaviorInterceptors,
-                kaspresso.objectWatcherInterceptors,
-                kaspresso.deviceWatcherInterceptors
-            )
+            kaspresso.injectInKakaoAndKautomator()
 
             failureHandler?.let { Espresso.setFailureHandler(it) }
 
@@ -1025,5 +1010,28 @@ data class Kaspresso(
         }
     }
 
-    internal fun reset(): Unit = Kakao.reset()
+    internal fun injectInKakaoAndKautomator() {
+        injectKaspressoInKakao(
+            viewBehaviorInterceptors,
+            dataBehaviorInterceptors,
+            webBehaviorInterceptors,
+            viewActionWatcherInterceptors,
+            viewAssertionWatcherInterceptors,
+            atomWatcherInterceptors,
+            webAssertionWatcherInterceptors,
+            params.clickParams
+        )
+
+        injectKaspressoInKautomator(
+            objectBehaviorInterceptors,
+            deviceBehaviorInterceptors,
+            objectWatcherInterceptors,
+            deviceWatcherInterceptors
+        )
+    }
+
+    internal fun reset() {
+        Kakao.reset()
+        KautomatorConfigurator.reset()
+    }
 }

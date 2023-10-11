@@ -6,28 +6,32 @@
 ![Build and Deploy](https://github.com/KasperskyLab/Kaspresso/workflows/Build%20and%20Deploy/badge.svg)
 [![Telegram](https://img.shields.io/static/v1?label=Telegram&message=RU&color=0088CC)](https://t.me/kaspresso)
 [![Telegram](https://img.shields.io/static/v1?label=Telegram&message=EN&color=0088CC)](https://t.me/kaspresso_en)
+[![Discord](https://img.shields.io/discord/1152145101825527839?label=discord&labelColor=7289da&style=flat)](https://discord.com/invite/hFMC5NQU)
 
 # Kaspresso
 
-Kaspresso is a framework for Android UI testing. Based on [Espresso](https://developer.android.com/training/testing/espresso) and [UI 
+Kaspresso is a framework for Android UI testing. Based on [Espresso](https://developer.android.com/training/testing/espresso) and [UI
 Automator](https://developer.android.com/training/testing/ui-automator), Kaspresso provides a wide range of additional features, such as:
 
-* 100% stability, no flakiness.
-* Jetpack Compose support.
+* Built-in protection against flaky tests
+* Jetpack Compose support
+* Screenshot testing with native approach (with dark mode support)
+* Declarative approach for writing tests
+* Ability to interact with other applications and system elements and interfaces
+* Human readability with Kotlin DSL wrappers over UiAutomator and Espresso
+* Detailed logs and reports (logs, view hierarchy, screenshots, video etc.)
+* ADB support
+* Allure support
+* Robolectric support
+* Easy migration from Espresso
+* Flexible configuration options
+* Automatic artifacts pulling after tests execution
 * Significantly faster execution of UI Automator commands. With Kaspresso, some UI Automator commands run **10 times faster**!
-* Excellent readability due to human DSL.
-* Useful interceptor mechanism to catch all actions and assertions in one place.
-* Full logging.
-* Ability to call ADB commands.
-* UI tests writing philosophy implemented with DSL.
-* Features screenshotting.
-* Robolectric support.
-* Allure support.
+* Page object pattern from the box
 
 And many more!
 
 <img src="kaspresso.png" alt="Kaspresso"/>
-[//]: # (![Kaspresso]&#40;https://habrastorage.org/webt/dw/jh/9k/dwjh9kypjl637kxj8tiaxwjvtp0.png&#41;)
 
 ## Integration
 
@@ -54,7 +58,7 @@ dependencies {
 }
 ```
 
-To try out the cutting edge kaspresso updates before an oficial release add a "-SNAPHOT" postfix to the latest Kaspresso version e.g.
+To try out the cutting edge kaspresso updates before an official release add a "-SNAPHOT" postfix to the latest Kaspresso version e.g.
 ```groovy
 dependencies {
     androidTestImplementation 'com.kaspersky.android-components:kaspresso:<latest_version>-SNAPSHOT'
@@ -71,14 +75,17 @@ dependencies {
 }
 ```
 
+## FAQ
+For all questions you can reach out to us on [Discord](https://kas.pr/gh_discord).
+
 ## Tutorial *NEW*
-To make it easier to learn the framework, a step-by-step tutorial is available on [our website](https://kasperskylab.github.io/Kaspresso/Tutorial/). 
+To make it easier to learn the framework, a step-by-step tutorial is available on [our website](https://kasperskylab.github.io/Kaspresso/Tutorial/).
 
 ## Capabilities of Kaspresso
 
 ### Readability
 
-We like the syntax that [Kakao](https://github.com/KakaoCup/Kakao) applies to write UI tests. This wrapper over Espresso uses the Kotlin DSL approach, that makes the code 
+We like the syntax that [Kakao](https://github.com/KakaoCup/Kakao) applies to write UI tests. This wrapper over Espresso uses the Kotlin DSL approach, that makes the code
 significantly shorter and more readable. See the difference:
 
 **Espresso**:
@@ -134,7 +141,7 @@ MainScreen {
 Since Kakao and Kautomator provide almost identical APIs, you don’t have to care about what is under the hood of your tests, either Espresso or UI Automator. With Kaspresso, you write tests in the same style for both.
 
 However, Kakao and Kautomator themselves don't help you to see the relation between the test and the corresponding test case. Also, a long test often becomes a giant piece of code that is impossible to split into smaller parts.
-That's why we have created an additional Kotlin DSL that allows you to read your test more easily. 
+That's why we have created an additional Kotlin DSL that allows you to read your test more easily.
 
 See the example below:
 
@@ -184,11 +191,11 @@ fun shouldPassOnNoInternetScanTest() =
     }
 ```
 
-### Stability 
+### Stability
 
-Sometimes your UI test passes ten times, then breaks on the eleventh attempt for some mysterious reason. It’s called *flakiness*. 
+Sometimes your UI test passes ten times, then breaks on the eleventh attempt for some mysterious reason. It’s called *flakiness*.
 
-The most popular reason for flakiness is the instability of the UI tests libraries, such as Espresso and UI Automator. To eliminate this instability, Kaspresso uses DSL wrappers and [interceptors](#Interceptors). 
+The most popular reason for flakiness is the instability of the UI tests libraries, such as Espresso and UI Automator. To eliminate this instability, Kaspresso uses DSL wrappers and [interceptors](#Interceptors).
 
 ### UI test libraries acceleration
 
@@ -200,7 +207,7 @@ Here is [a short explanation](https://kasperskylab.github.io/Kaspresso/Wiki/Kaut
 
 ### Interceptors
 
-We developed [Kaspresso behavior interceptors](https://kasperskylab.github.io/Kaspresso/Wiki/Kaspresso_configuration/#some-words-about-behavior-interceptors) on the base of [Kakao/Kautomator 
+We developed [Kaspresso behavior interceptors](https://kasperskylab.github.io/Kaspresso/Wiki/Kaspresso_configuration/#some-words-about-behavior-interceptors) on the base of [Kakao/Kautomator
 Interceptors](https://kasperskylab.github.io/Kaspresso/Wiki/Kaspresso_configuration/#kaspresso-interceptors-based-on-kakaokautomator-interceptors) to catch failures.
 
 Thanks to interceptors, you can do a lot of useful things, such as:
@@ -211,6 +218,7 @@ Thanks to interceptors, you can do a lot of useful things, such as:
 and many more (see [the manual](https://kasperskylab.github.io/Kaspresso/Wiki/Kaspresso_configuration/#kaspresso-interceptors-based-on-kakaokautomator-interceptors)).
 
 ### Writing readable logs
+
 Kaspresso writes its own logs, detailed and readable:
 
 <img src="https://habrastorage.org/webt/03/nn/qg/03nnqgupdqnwa_i4jwyz1uqq6r0.png" />
@@ -241,7 +249,7 @@ For example, with the ```Device``` class you can:
 
 ### Features screenshotting
 
-If you develop an application that is available across the world, you have to *localize* it into different languages. When UI is localized, it’s important for the translator to see the context of a word or a phrase, that is the specific screen. 
+If you develop an application that is available across the world, you have to *localize* it into different languages. When UI is localized, it’s important for the translator to see the context of a word or a phrase, that is the specific screen.
 
 With Kaspresso, translators can automatically take a screenshot of any screen. It’s incredibly fast, even for legacy screens, and you don't have to refactor or mock anything (see [the manual](https://kasperskylab.github.io/Kaspresso/Wiki/Screenshot_tests/)).
 
@@ -251,34 +259,23 @@ You can tune any part of Kaspresso (read [more](https://kasperskylab.github.io/K
 
 ### Robolectric support
 
-You can run your UI-tests on the JVM environment. Additionally, almost all interceptors improving stability, readability and other will work. 
-Read [more](https://kasperskylab.github.io/Kaspresso/Wiki/Kaspresso_Robolectric/). 
+You can run your UI-tests on the JVM environment. Additionally, almost all interceptors improving stability, readability and other will work.
+Read [more](https://kasperskylab.github.io/Kaspresso/Wiki/Kaspresso_Robolectric/).
 
 ### Allure support
 
 Kaspresso can generate very detailed Allure-reports for each test:
 ![](https://habrastorage.org/webt/tq/t7/ch/tqt7chcdczrgduhoukqhx1ertfc.png)
-More information is available [here](https://kasperskylab.github.io/Kaspresso/Wiki/Kaspresso_Allure/). 
+More information is available [here](https://kasperskylab.github.io/Kaspresso/Wiki/Kaspresso_Allure/).
 
 ### Jetpack Compose support
 
-Now, you can write your Kaspresso tests for Jetpack Compose screens! DSL and all principles are the same. 
+Now, you can write your Kaspresso tests for Jetpack Compose screens! DSL and all principles are the same.
 So, you will not see any difference between tests for View screens and for Compose screens.
 More information is available [here](https://kasperskylab.github.io/Kaspresso/Wiki/Jetpack_Compose/).
 
-**Keep in mind it's early access that may contain bugs. Also, API can be changed, but we are going to avoid it. Be free to create relative issues if you've encountered with 
-any kind of problem.**
-
-## Philosophy
-
-The tool itself, even the perfect one, can not solve all the problems in writing UI tests. It’s important to know how to write tests and how to organize the entire process. 
-Our team has great experience in introducing autotests in different companies. We shared our knowledge on [Wiki](https://kasperskylab.github.io/Kaspresso/Wiki/).
-
-## Wiki
-For all information check [Kaspresso wiki](https://kasperskylab.github.io/Kaspresso/Wiki/)
-
 ## Samples
-All samples are available in the [samples](https://github.com/KasperskyLab/Kaspresso/tree/issue-372/tutorial/samples) folder. 
+All samples are available in the [samples](https://github.com/KasperskyLab/Kaspresso/tree/master/samples) folder.
 
 Most of the samples require AdbServer. To start AdbServer you should do the following steps:
 
@@ -294,7 +291,7 @@ java -jar artifacts/adbserver-desktop.jar
 ## Existing issues
 All existing issues in Kaspresso can be found [here](https://kasperskylab.github.io/Kaspresso/Issues/).
 
-## Breaking changes 
+## Breaking changes
 Breaking changes can be found [here](https://kasperskylab.github.io/Kaspresso/Home/Breaking-changes/)
 
 ## Contribution
@@ -302,3 +299,7 @@ Kaspresso is an open source project, so you are welcome to contribute (see the [
 
 ## License
 Kaspresso is available under the [Apache License, Version 2.0](https://github.com/KasperskyLab/Kaspresso/blob/master/LICENSE).
+
+## Runner
+If you looking for a Runner to execute your UI tests we strongly recommend to use [Marathon](https://github.com/MarathonLabs/marathon). [Marathon](https://github.com/MarathonLabs/marathon) is a fast, platform-independent test runner focused on performance and stability. It offers easy to use platform implementations for Android and iOS as well as an API for use with custom hardware farms and more techstacks.
+<img src="marathon-banner.svg" alt="Marathon"/>

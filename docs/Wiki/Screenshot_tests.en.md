@@ -42,7 +42,7 @@ class ScreenshotSampleTest : DocLocScreenshotTestCase(
 
 There is one parameter passed in the base constructor:
 - locales - comma-separated string with locales to run test with.
-  Captured screenshots will be available in the device's storage at the path "/sdcard/screenshots/".
+  Captured screenshots will be available in the device's storage at the path "/sdcard/documents/screenshots/".
 
 For full example, check the [ScreenshotSampleTest](../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/docloc_tests/ScreenshotSampleTest.kt).
 
@@ -211,7 +211,7 @@ For full example, check [AdvancedScreenshotSampleTest](https://github.com/Kasper
 ## Modifying screenshots path and name
 
 By default, all screenshots are stored at: <br>
-```/sdcard/screenshots/<locale>/<full qualified test class name>/<method name>.``` <br>
+```/sdcard/documents/screenshots/<locale>/<full qualified test class name>/<method name>.``` <br>
 You can change this behavior by providing custom
 [ResourcesRootDirsProvider](https://github.com/KasperskyLab/Kaspresso/blob/master/kaspresso/src/main/kotlin/com/kaspersky/kaspresso/files/resources/ResourcesRootDirsProvider.kt),
 [ResourcesDirsProvider](https://github.com/KasperskyLab/Kaspresso/blob/master/kaspresso/src/main/kotlin/com/kaspersky/kaspresso/files/resources/ResourcesDirsProvider.kt),

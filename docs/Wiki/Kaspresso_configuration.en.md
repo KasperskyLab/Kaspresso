@@ -318,3 +318,22 @@ class EnricherBaseTestCase : BaseTestCase<TestCaseDsl, TestCaseData>(
 ```
 
 After this manipulations your described actions will be executed before or after main section's ```run``` block.
+
+#### Pulling the artifacts from the device to the host
+
+Depending on your test configuration, useful artifacts may remain on the device after test finish: screenshots, reports, videos, etc.
+In order to pull them off the device you could program a script, which would be executed after the completion of the test run on CI. With Kaspresso,
+you can simplify this process. To do this, you need to configure the `artifactsPullParams` variable in the Kaspresso Builder. Example:
+
+```kotlin
+class SomeTest : TestCase(
+    kaspressoBuilder = Kaspresso.Builder.simple {
+        artifactsPullParams = ArtifactsPullParams(enabled = true, destinationPath = "artifacts/", artifactsRegex = Regex("(screenshots)|(videos)"))
+    }
+) {
+    ...
+}
+```
+
+To make this work, you need to start the ADB server before running the test. After the test is completed, the artifacts will be located by the path specified in the `destinationPath`
+argument relative to the working directory from which the ADB server was launched.
