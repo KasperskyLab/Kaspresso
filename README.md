@@ -5,7 +5,7 @@
 ![Build and Deploy](https://github.com/KasperskyLab/Kaspresso/workflows/Build%20and%20Deploy/badge.svg)
 [![Telegram](https://img.shields.io/static/v1?label=Telegram&message=RU&color=0088CC)](https://t.me/kaspresso)
 [![Telegram](https://img.shields.io/static/v1?label=Telegram&message=EN&color=0088CC)](https://t.me/kaspresso_en)
-[![Discord](https://img.shields.io/discord/1152145101825527839?label=discord&labelColor=7289da&style=flat)](https://discord.com/invite/hFMC5NQU)
+[![Discord](https://img.shields.io/discord/1152145101825527839?label=discord&labelColor=7289da&style=flat)](https://kas.pr/gh_discord)
 
 # Kaspresso
 
