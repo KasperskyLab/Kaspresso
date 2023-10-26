@@ -1,8 +1,10 @@
 package com.kaspersky.kaspresso.device.languages
 
+import android.app.Instrumentation
 import android.app.LocaleManager
 import android.content.Context
 import android.os.Build
+import android.os.Handler
 import android.os.LocaleList
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.ConfigurationCompat
@@ -15,7 +17,7 @@ import java.util.Locale
  */
 class LanguageImpl(
     private val logger: UiTestLogger,
-    private val context: Context
+    private val instrumentation: Instrumentation,
 ) : Language {
 
     override fun switchInApp(locale: Locale) {
@@ -44,14 +46,16 @@ class LanguageImpl(
     }
 
     private fun getCurrentLocale(): Locale? =
-        ConfigurationCompat.getLocales(context.resources.configuration).get(0)
+        ConfigurationCompat.getLocales(instrumentation.targetContext.resources.configuration).get(0)
 
     private fun applyCurrentLocaleToContext(locale: Locale) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            val localeManager = context.getSystemService(Context.LOCALE_SERVICE) as LocaleManager
+            val localeManager = instrumentation.targetContext.getSystemService(Context.LOCALE_SERVICE) as LocaleManager
             localeManager.applicationLocales = LocaleList.forLanguageTags(locale.toLanguageTag())
         } else {
-            AppCompatDelegate.setApplicationLocales(LocaleListCompat.create(locale))
+            Handler(instrumentation.targetContext.mainLooper).post {
+                AppCompatDelegate.setApplicationLocales(LocaleListCompat.create(locale))
+            }
         }
     }
 }
