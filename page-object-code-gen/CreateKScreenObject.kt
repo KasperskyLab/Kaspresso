@@ -2,7 +2,7 @@ import java.io.File
 
 object CreateKScreenObject{
 
-    fun generateFile(screenElements: List<View>): String {
+    fun generateFile(screenElements: List<View>, className: String, filePackage: String): String {
 
         val packages = screenElements[0].packages
         val elements = createElements(screenElements)
@@ -10,11 +10,13 @@ object CreateKScreenObject{
 
         val screenClassTemplate =
             """
+$filePackage
+
 import $packages.R
 import com.screen.common.KScreen
 $imports
 
-object screenClass : KScreen<screenClass>() {
+object $className : KScreen<$className>() {
 
     override val layoutId: Int? = TODO("Need To Implement")
     override val viewClass: Class<*>? = TODO("Need To Implement")
