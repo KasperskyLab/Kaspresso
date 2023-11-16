@@ -30,58 +30,41 @@ class AdbServerImpl(
             return AdbTerminal
         }
 
-    /**
-     * Executes shell commands blocking current thread.
-     * Please be aware! If any command that is in @param commands failed then AdbServerException will be thrown
-     *
-     * Required Permissions: INTERNET.
-     *
-     * @param commands commands to execute.
-     * @throws AdbServerException if a result status of any command in @param commands is Failed
-     * @return list of answers of commands' execution
-     */
     override fun performCmd(vararg commands: String): List<String> {
         return perform(commands) {
             adbTerminal.executeCmd(it)
         }
     }
 
-    /**
-     * Performs adb commands blocking current thread.
-     * Please be aware! If any command that is in @param commands failed then AdbServerException will be thrown
-     *
-     * Required Permissions: INTERNET.
-     *
-     * @param commands commands to execute.
-     * @throws AdbServerException if a result status of any command in @param commands is Failed
-     * @return list of answers of commands' execution
-     */
+    override fun performCmd(command: List<String>): String {
+        return performComplex(command, adbTerminal::executeCmd)
+    }
+
     override fun performAdb(vararg commands: String): List<String> {
         return perform(commands) {
             adbTerminal.executeAdb(it)
         }
     }
 
-    /**
-     * Performs shell commands blocking current thread.
-     * Please be aware! If any command that is in @param commands failed then AdbServerException will be thrown
-     *
-     * Required Permissions: INTERNET.
-     *
-     * @param commands commands to execute.
-     * @throws AdbServerException if a result status of any command in @param commands is Failed
-     * @return list of answers of commands' execution
-     */
+    override fun performAdb(command: List<String>): String {
+        return performComplex(command, adbTerminal::executeAdb)
+    }
+
     override fun performShell(vararg commands: String): List<String> {
         return perform(commands) {
             adbTerminal.executeAdb("shell $it")
         }
     }
 
-    /**
-     * Disconnect from AdbServer.
-     * The method is called by Kaspresso after each test.
-     */
+    override fun performShell(command: List<String>): String {
+        return performComplex(command) { complexCommand: List<String> ->
+            adbTerminal.executeAdb(buildList {
+                add("shell")
+                addAll(complexCommand)
+            })
+        }
+    }
+
     override fun disconnectServer() {
         if (connected) {
             adbTerminal.disconnect()
@@ -95,16 +78,27 @@ class AdbServerImpl(
                 logger.i("AdbServer. The command to execute=$command")
             }
             .map { command -> command to executor.invoke(command) }
-            .onEach { (command, result) ->
-                logger.i("AdbServer. The command=$command was performed with result=$result")
-            }
-            .onEach { (command, result) ->
-                if (result.status == ExecutorResultStatus.FAILURE) {
-                    throw AdbServerException("AdbServer. The command=$command was performed with failed result=$result")
-                }
-                if (result.status == ExecutorResultStatus.TIMEOUT) {
-                    throw AdbServerException(
-                        """
+            .onEach { (command, result) -> logCommandResult(command, result) }
+            .map { (_, result) -> result.description }
+            .toList()
+    }
+
+    private fun performComplex(command: List<String>, executor: (List<String>) -> CommandResult): String {
+        logger.i("AdbServer. The complex command to execute=$command")
+        val result = executor.invoke(command)
+        logCommandResult(command.toString(), result)
+
+        return result.description
+    }
+
+    private fun logCommandResult(command: String, result: CommandResult) {
+        logger.i("AdbServer. The command=$command was performed with result=$result")
+        if (result.status == ExecutorResultStatus.FAILURE) {
+            throw AdbServerException("AdbServer. The command=$command was performed with failed result=$result")
+        }
+        if (result.status == ExecutorResultStatus.TIMEOUT) {
+            throw AdbServerException(
+                """
 
                             AdbServer. The command=$command was performed with timeout exception.
                             There are two possible reasons:
@@ -122,10 +116,7 @@ class AdbServerImpl(
                                 c. Start 'adbserver-desktop.jar' with the command in Terminal - 'java -jar /Users/yuri.gagarin/Desktop/adbserver-desktop.jar
 
                         """.trimIndent()
-                    )
-                }
-            }
-            .map { (_, result) -> result.description }
-            .toList()
+            )
+        }
     }
 }

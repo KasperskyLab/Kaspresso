@@ -27,6 +27,20 @@ interface AdbServer {
     fun performCmd(vararg commands: String): List<String>
 
     /**
+     * Performs shell commands blocking current thread. Allows more control over how arguments are parsed.
+     * Each list element is used as is. Refer to the https://docs.oracle.com/javase/8/docs/api/java/lang/ProcessBuilder.html.
+     *
+     * Please be aware! If any command that is in @param commands failed then AdbServerException will be thrown
+     *
+     * Required Permissions: INTERNET.
+     *
+     * @param commands commands to execute.
+     * @throws AdbServerException if a result status of any command in @param commands is Failed
+     * @return list of answers of commands' execution
+     */
+    fun performCmd(command: List<String>): String
+
+    /**
      * Performs adb commands blocking current thread.
      * Please be aware! If any command that is in @param commands failed then AdbServerException will be thrown
      *
@@ -39,6 +53,20 @@ interface AdbServer {
     fun performAdb(vararg commands: String): List<String>
 
     /**
+     * Performs adb commands blocking current thread. Allows more control over how arguments are parsed.
+     * Each list element is used as is. Refer to the https://docs.oracle.com/javase/8/docs/api/java/lang/ProcessBuilder.html.
+     *
+     * Please be aware! If any command that is in @param commands failed then AdbServerException will be thrown
+     *
+     * Required Permissions: INTERNET.
+     *
+     * @param commands commands to execute.
+     * @throws AdbServerException if a result status of any command in @param commands is Failed
+     * @return list of answers of commands' execution
+     */
+    fun performAdb(command: List<String>): String
+
+    /**
      * Performs shell commands blocking current thread.
      * Please be aware! If any command that is in @param commands failed then AdbServerException will be thrown
      *
@@ -49,6 +77,20 @@ interface AdbServer {
      * @return list of answers of commands' execution
      */
     fun performShell(vararg commands: String): List<String>
+
+    /**
+     * Performs shell commands blocking current thread. Allows more control over how arguments are parsed.
+     * Each list element is used as is. Refer to the https://docs.oracle.com/javase/8/docs/api/java/lang/ProcessBuilder.html.
+     *
+     * Please be aware! If any command that is in @param commands failed then AdbServerException will be thrown
+     *
+     * Required Permissions: INTERNET.
+     *
+     * @param commands commands to execute.
+     * @throws AdbServerException if a result status of any command in @param commands is Failed
+     * @return list of answers of commands' execution
+     */
+    fun performShell(command: List<String>): String
 
     /**
      * Disconnect from AdbServer.
