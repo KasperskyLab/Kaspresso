@@ -38,7 +38,7 @@ interface AdbServer {
      * @throws AdbServerException if a result status of any command in @param commands is Failed
      * @return list of answers of commands' execution
      */
-    fun performCmd(command: List<String>): String
+    fun performCmd(command: String, arguments: List<String>): String
 
     /**
      * Performs adb commands blocking current thread.
@@ -64,7 +64,7 @@ interface AdbServer {
      * @throws AdbServerException if a result status of any command in @param commands is Failed
      * @return list of answers of commands' execution
      */
-    fun performAdb(command: List<String>): String
+    fun performAdb(command: String, arguments: List<String>): String
 
     /**
      * Performs shell commands blocking current thread.
@@ -90,7 +90,7 @@ interface AdbServer {
      * @throws AdbServerException if a result status of any command in @param commands is Failed
      * @return list of answers of commands' execution
      */
-    fun performShell(command: List<String>): String
+    fun performShell(command: String, arguments: List<String>): String
 
     /**
      * Disconnect from AdbServer.

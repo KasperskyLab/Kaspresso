@@ -15,44 +15,19 @@ internal class CmdCommandPerformer(
     /**
      * Be aware it's a synchronous method
      */
-    fun perform(command: String): CommandResult {
+    fun perform(command: String, arguments: List<String> = emptyList()): CommandResult {
         val serviceInfo = "The command was executed on desktop=$desktopName"
-        val process = Runtime.getRuntime().exec(command)
-        try {
-            if (process.waitFor(EXECUTION_TIMEOUT_SECONDS, TimeUnit.SECONDS)) {
-                val exitCode = process.exitValue()
-                return if (exitCode != 0) {
-                    val error = "exitCode=$exitCode, message=${process.errorStream.bufferedReader().readText()}"
-                    CommandResult(
-                        status = ExecutorResultStatus.FAILURE,
-                        description = error,
-                        serviceInfo = serviceInfo
-                    )
-                } else {
-                    val success = "exitCode=$exitCode, message=${process.inputStream.bufferedReader().readText()}"
-                    CommandResult(
-                        status = ExecutorResultStatus.SUCCESS,
-                        description = success,
-                        serviceInfo = serviceInfo
-                    )
-                }
-            }
-            return CommandResult(
-                status = ExecutorResultStatus.TIMEOUT,
-                description = "Command execution timeout ($EXECUTION_TIMEOUT_SECONDS sec) overhead",
-                serviceInfo = serviceInfo
-            )
-        } finally {
-            process.destroy()
-        }
-    }
+        val process = if (arguments.isEmpty()) {
+            Runtime.getRuntime().exec(command)
+        } else {
+            val fullCommand = buildList {
+                add(command)
+                addAll(arguments)
+            }.toTypedArray()
 
-    /**
-     * Be aware it's a synchronous method
-     */
-    fun perform(command: List<String>): CommandResult {
-        val serviceInfo = "The command was executed on desktop=$desktopName"
-        val process = ProcessBuilder(command).start()
+            Runtime.getRuntime().exec(fullCommand)
+        }
+
         try {
             if (process.waitFor(EXECUTION_TIMEOUT_SECONDS, TimeUnit.SECONDS)) {
                 val exitCode = process.exitValue()

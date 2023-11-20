@@ -36,18 +36,10 @@ class AdbServerImpl(
         }
     }
 
-    override fun performCmd(command: List<String>): String {
-        return performComplex(command, adbTerminal::executeCmd)
-    }
-
     override fun performAdb(vararg commands: String): List<String> {
         return perform(commands) {
             adbTerminal.executeAdb(it)
         }
-    }
-
-    override fun performAdb(command: List<String>): String {
-        return performComplex(command, adbTerminal::executeAdb)
     }
 
     override fun performShell(vararg commands: String): List<String> {
@@ -56,13 +48,16 @@ class AdbServerImpl(
         }
     }
 
-    override fun performShell(command: List<String>): String {
-        return performComplex(command) { complexCommand: List<String> ->
-            adbTerminal.executeAdb(buildList {
-                add("shell")
-                addAll(complexCommand)
-            })
-        }
+    override fun performCmd(command: String, arguments: List<String>): String {
+        return performComplex(command, arguments, adbTerminal::executeCmd)
+    }
+
+    override fun performAdb(command: String, arguments: List<String>): String {
+        return performComplex(command, arguments, adbTerminal::executeAdb)
+    }
+
+    override fun performShell(command: String, arguments: List<String>): String {
+        return performComplex("shell $command", arguments, adbTerminal::executeAdb)
     }
 
     override fun disconnectServer() {
@@ -83,16 +78,16 @@ class AdbServerImpl(
             .toList()
     }
 
-    private fun performComplex(command: List<String>, executor: (List<String>) -> CommandResult): String {
+    private fun performComplex(command: String, arguments: List<String>, executor: (String, List<String>) -> CommandResult): String {
         logger.i("AdbServer. The complex command to execute=$command")
-        val result = executor.invoke(command)
-        logCommandResult(command.toString(), result)
+        val result = executor.invoke(command, arguments)
+        logCommandResult(command, result)
 
         return result.description
     }
 
-    private fun logCommandResult(command: String, result: CommandResult) {
-        logger.i("AdbServer. The command=$command was performed with result=$result")
+    private fun logCommandResult(command: String, result: CommandResult, arguments: List<String> = emptyList()) {
+        logger.i("AdbServer. The command=$command with arguments=$arguments was performed with result=$result")
         if (result.status == ExecutorResultStatus.FAILURE) {
             throw AdbServerException("AdbServer. The command=$command was performed with failed result=$result")
         }

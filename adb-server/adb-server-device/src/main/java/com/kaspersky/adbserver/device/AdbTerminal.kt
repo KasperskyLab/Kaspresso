@@ -1,10 +1,8 @@
 package com.kaspersky.adbserver.device
 
-import com.kaspersky.adbserver.common.api.CommandResult
 import com.kaspersky.adbserver.commandtypes.AdbCommand
 import com.kaspersky.adbserver.commandtypes.CmdCommand
-import com.kaspersky.adbserver.commandtypes.ComplexAdbCommand
-import com.kaspersky.adbserver.commandtypes.ComplexCmdCommand
+import com.kaspersky.adbserver.common.api.CommandResult
 import com.kaspersky.adbserver.common.log.LoggerFactory
 import com.kaspersky.adbserver.common.log.logger.LogLevel
 import com.kaspersky.adbserver.common.log.logger.Logger
@@ -30,14 +28,14 @@ object AdbTerminal {
     ) ?: throw IllegalStateException("Please first of all call [connect] method to establish a connection")
 
     /**
-     * Allows more control over how arguments are parsed. Each list element is a command or an argument used as is.
-     * Refer to the https://docs.oracle.com/javase/8/docs/api/java/lang/ProcessBuilder.html
+     * Allows more control over how arguments are parsed. Each element in the [arguments] list
+     * is used as is without tokenizing.
+     * Refer to the Runtime::exec(String[] cmdarray)
      *
-     * @param command the list of the commands and arguments
      * Please first of all call [connect] method to establish a connection
      */
-    fun executeAdb(command: List<String>): CommandResult = device?.fulfill(
-        ComplexAdbCommand(command)
+    fun executeAdb(command: String, arguments: List<String>): CommandResult = device?.fulfill(
+        AdbCommand(command, arguments)
     ) ?: throw IllegalStateException("Please first of all call [connect] method to establish a connection")
 
     /**
@@ -48,13 +46,13 @@ object AdbTerminal {
     ) ?: throw IllegalStateException("Please first of all call [connect] method to establish a connection")
 
     /**
-     * Allows more control over how arguments are parsed. Each list element is a command or an argument used as is.
-     * Refer to the https://docs.oracle.com/javase/8/docs/api/java/lang/ProcessBuilder.html
+     * Allows more control over how arguments are parsed. Each element in the [arguments] list
+     * is used as is without tokenizing.
+     * Refer to the Runtime::exec(String[] cmdarray)
      *
-     * @param command the list of the commands and arguments
      * Please first of all call [connect] method to establish a connection
      */
-    fun executeCmd(command: List<String>): CommandResult = device?.fulfill(
-        ComplexCmdCommand(command)
+    fun executeCmd(command: String, arguments: List<String>): CommandResult = device?.fulfill(
+        CmdCommand(command, arguments)
     ) ?: throw IllegalStateException("Please first of all call [connect] method to establish a connection")
 }
