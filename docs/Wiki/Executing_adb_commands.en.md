@@ -190,6 +190,14 @@ Now the logs looks like:
 2020-09-10 12:24:27.427 10349-10378/com.kaspersky.kaspressample I/KASPRESSO_ADBSERVER: The result of command=AdbCommand(body=shell su 0 svc data disable) => CommandResult(status=SUCCESS, description=exitCode=0, message=, serviceInfo=The command was executed on desktop=Desktop-30548)
 ```
 
+## Complex commands
+There're two kinds of ADB server methods signatures: `preformCmd(vararg commands: String)` and `performsCmd(command: String, arguments: List<String>)`. The first executes multiple
+commands one by one. The latter allows you to gain more control over the commands parsing - ADB server would execute commands "as is" without trying to split command into tokens. This allows you to execute
+commands with whitespaces in their arguments and use piping. Example:
+```kotlin
+ adbServer.performCmd("bash", arguments = listOf("-c", "grep adb \"~/Documents/test file.txt\" > \"~/Documents/out file.txt\""))
+```
+
 ## Development
 The source code of AdbServer is available in [adb-server](https://github.com/KasperskyLab/Kaspresso/tree/master/adb-server) module. <br>
 If you want to build `adbserver-desktop.jar` manually, just execute `./gradlew :adb-server:adbserver-desktop:assemble`.

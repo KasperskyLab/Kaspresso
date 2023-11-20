@@ -189,6 +189,14 @@ class DeviceNetworkSampleTest: TestCase(
 2020-09-10 12:24:27.427 10349-10378/com.kaspersky.kaspressample I/KASPRESSO_ADBSERVER: The result of command=AdbCommand(body=shell su 0 svc data disable) => CommandResult(status=SUCCESS, description=exitCode=0, message=, serviceInfo=The command was executed on desktop=Desktop-30548)
 ```
 
+## Сложные команды
+Есть 2 типа сигнатур методов ADB server'а: `preformCmd(vararg commands: String)` и `performsCmd(command: String, arguments: List<String>)`. Первый выполняет несколько 
+команд одна за одной. Последний дает вам контроль над тем, как происходит парсинг комманды - ADB server выполнит их в таком виде, в каком вы их передали, не пытаясь разбить их на токены. Это позволяет
+выполнять команды с пробелами в аргументах и использовать пайпинг. Пример:
+```kotlin
+ adbServer.performCmd("bash", arguments = listOf("-c", "grep adb \"~/Documents/test file.txt\" > \"~/Documents/out file.txt\""))
+```
+
 ## Разработка
 Исходный код AdbServer доступен в модуле [adb-server](https://github.com/KasperskyLab/Kaspresso/ru/tree/master/adb-server). <br>
 Если вы хотите собрать `adbserver-desktop.jar` вручную, просто выполните `./gradlew :adb-server:adbserver-desktop:assemble`.
