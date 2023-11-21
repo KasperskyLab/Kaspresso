@@ -15,25 +15,15 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
-
-      - uses: MarathonLabs/setup-marathon-cloud@1.0.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          MARATHON_TOKEN: ${{ secrets.marathon_github_token }}
-        with:
-          version: "latest"
       - name: Assemble android tests
         run: ./gradlew -PCI=true assembleDebugAndroidTest assembleDebug
       - name: Print
         run: find -name "*.apk"
-      - name: Run tests on android 33
-        run: |
-          marathon-cloud -app samples/kaspresso-sample/build/outputs/apk/debug/kaspresso-sample-debug.apk \
-            -testapp samples/kaspresso-sample/build/outputs/apk/androidTest/debug/kaspresso-sample-debug-androidTest.apk \
-            -platform Android \
-            -api-key $MARATHON_TOKEN \
-            -os-version 13 \
-            -system-image google_apis
-            
-         
-
+      - name: run tests on android 33
+      - uses: MarathonLabs/action-test@0.3.0
+        with:
+          apiKey: ${{ secrets.marathon_github_token }}
+          application: samples/kaspresso-sample/build/outputs/apk/debug/kaspresso-sample-debug.apk
+          testApplication: samples/kaspresso-sample/build/outputs/apk/androidTest/debug/kaspresso-sample-debug-androidTest.apk
+          platform: Android
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
