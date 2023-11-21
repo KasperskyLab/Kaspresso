@@ -20,7 +20,7 @@ jobs:
       - name: Print
         run: find -name "*.apk"
       - name: run tests on android 33
-      - uses: MarathonLabs/action-test@0.3.0
+      - uses: MarathonLabs/action-test@0.3.3
         with:
           apiKey: ${{ secrets.marathon_github_token }}
           application: samples/kaspresso-sample/build/outputs/apk/debug/kaspresso-sample-debug.apk
