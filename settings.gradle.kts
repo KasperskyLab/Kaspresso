@@ -33,6 +33,8 @@ include(
     ":adb-server:adb-server-desktop-device-connection",
     ":adb-server:adb-server-device",
 
+    ":page-object-code-gen",
+
     ":kaspresso",
     ":kautomator",
     ":allure-support",
@@ -45,5 +47,5 @@ include(
     ":samples:kaspresso-allure-support-sample",
     ":samples:kaspresso-compose-support-sample",
 
-    ":tutorial"
+    ":tutorial",
 )

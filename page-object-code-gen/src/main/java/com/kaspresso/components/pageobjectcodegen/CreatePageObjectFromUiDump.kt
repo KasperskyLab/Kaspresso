@@ -1,7 +1,9 @@
+package com.kaspresso.components.pageobjectcodegen
+
 import org.w3c.dom.Document
 import java.io.File
+import java.nio.charset.Charset
 import javax.xml.parsers.DocumentBuilderFactory
-import java.lang.Runtime
 
 /**
  * inputs:
@@ -9,41 +11,39 @@ import java.lang.Runtime
  * 2. Name of generated class
  * 3. Path for generated file
  * output:
- * Kotlin file with screen code in the same derictory as jar execute
+ * Kotlin file with screen code in the same directory as jar execute
  */
 fun main(vararg args: String) {
-
     lateinit var inputFilePath: String
     lateinit var className: String
-    lateinit var outputFilePath: String
 
-    try{
+    try {
         inputFilePath = args[0]
-    } catch (e: Exception){
+    } catch (e: Exception) {
         throw Exception("No file path")
     }
 
     if (!File(inputFilePath).isFile) {
-        throw Exception("File is not exist or derictory")
+        throw Exception("File is not exist or directory")
     }
 
-    try{
-        className = args[1]
-    } catch (e: Exception){
+    className = try {
+        args[1]
+    } catch (e: Exception) {
         println("You put empty class name, we change it to \"TestClass\"")
-        className = "TestClass"
+        "TestClass"
     }
 
-    if(!className.contains(Regex("^[A-Z]\\S{0,}$"))){
+    if (!className.contains(Regex("^[A-Z]\\S*$"))) {
         println("You put incorrect class name, we change it to \"TestClass\"")
         className = "TestClass"
     }
 
-    try{
-        outputFilePath = args[2]+"/${className}.kt"
-    } catch (e: Exception){
-        println("Output file will be locate in directory where you ran this script with name ${className}.kt")
-        outputFilePath = "${className}.kt"
+    val outputFilePath: String = try {
+        args[2] + "/$className.kt"
+    } catch (e: Exception) {
+        println("Output file will be locate in directory where you ran this script with name $className.kt")
+        "$className.kt"
     }
 
     val filePackage = outputFilePath.findPackage()
@@ -54,20 +54,18 @@ fun main(vararg args: String) {
 
     val screenElements: List<View> = findAllViewInDump(doc)
 
-    val kscreencode = CreateKScreenObject.generateFile(screenElements, className, filePackage)
-    CreateKScreenObject.writeToFile(outputFilePath, kscreencode)
+    PageObjectGenerator(screenElements, filePackage, className).writeToFile(outputFilePath)
 }
-
 
 fun findAllViewInDump(document: Document): List<View> {
     val collectableElements = listOf("android.widget.Button", "android.widget.TextView", "android.widget.ImageView")
-    val screenElements: MutableList<View> = mutableListOf<View>()
+    val screenElements: MutableList<View> = mutableListOf()
     val bookNodeList = document.getElementsByTagName("node")
 
-    for (i in 0..bookNodeList.length - 1) {
+    for (i in 0 until bookNodeList.length) {
         val bookNodeAttr = bookNodeList.item(i).attributes
         if (bookNodeAttr.getNamedItem("class").nodeValue in collectableElements) {
-            val elem: View = View(
+            val elem = View(
                 bookNodeAttr.getNamedItem("resource-id").nodeValue.substringAfterLast("/"),
                 bookNodeAttr.getNamedItem("class").nodeValue.substringAfterLast("."),
                 bookNodeAttr.getNamedItem("package").nodeValue,
@@ -80,18 +78,30 @@ fun findAllViewInDump(document: Document): List<View> {
 }
 
 fun String.findPackage(): String {
-    var tmp = split("/").toMutableList()
+    val tmp = split("/").toMutableList()
     tmp.removeLast()
     var afterCom = false
     var res = ""
-    for(i in tmp){
-        if(afterCom){
-            res+=".${i}"
+    for (i in tmp) {
+        if (afterCom) {
+            res += ".$i"
         }
-        if(i=="com"){
-            res+="com"
-            afterCom=true
+        if (i == "com") {
+            res += "com"
+            afterCom = true
         }
     }
     return res
+}
+
+fun Generator.writeToFile(filePath: String) {
+    val writer = TextWriter()
+    generate(writer)
+    val file = File(filePath)
+    val printWriter = file.printWriter(Charset.forName("UTF-8"))
+    try {
+        printWriter.print(writer.toString())
+    } finally {
+        printWriter.close()
+    }
 }

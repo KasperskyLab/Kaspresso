@@ -1,4 +1,4 @@
-package com.test.test1
+package com.kaspresso.components.pageobjectcodegen
 
 import com.kms.free.R
 import com.screen.common.KScreen
@@ -7,7 +7,7 @@ import io.guthub.kakaocup.kakao.text.KTextView
 import io.guthub.kakaocup.kakao.text.KButton
 
 
-object TestClass1 : KScreen<TestClass1>() {
+object TestCase1 : KScreen<TestCase1>() {
 
     override val layoutId: Int? = TODO("Need To Implement")
     override val viewClass: Class<*>? = TODO("Need To Implement")

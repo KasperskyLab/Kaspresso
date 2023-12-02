@@ -13,6 +13,13 @@ androidXTest = "1.5.0"
 testOrchestrator = "1.4.2"
 lifecycle = "2.5.1"
 thirdPartyReport = "0.18.956"
+agp = "7.2.2"
+org-jetbrains-kotlin-android = "1.9.0"
+core-ktx = "1.9.0"
+junit = "4.13.2"
+androidx-test-ext-junit = "1.1.5"
+appcompat = "1.6.1"
+material = "1.8.0"
 
 [libraries]
 # plugins
@@ -54,6 +61,7 @@ kakaoCompose = { module = "io.github.kakaocup:compose", version.ref = "kakaoComp
 kakaoExtClicks = { module = "io.github.kakaocup:kakao-ext-clicks", version.ref = "kakaoExtClicks" }
 junit = "junit:junit:4.13.2"
 junitJupiter = "org.junit.jupiter:junit-jupiter:5.9.0"
+junitJupiterParams = "org.junit.jupiter:junit-jupiter-params:5.9.0"
 truth = "com.google.truth:truth:1.1.3"
 
 androidXTestCore = { module = "androidx.test:core", version.ref = "androidXTest" }
@@ -80,8 +88,15 @@ allureKotlinModel = { module = "io.qameta.allure:allure-kotlin-model", version.r
 allureKotlinCommons = { module = "io.qameta.allure:allure-kotlin-commons", version.ref = "allure" }
 allureKotlinJunit4 = { module = "io.qameta.allure:allure-kotlin-junit4", version.ref = "allure" }
 allureKotlinAndroid = { module = "io.qameta.allure:allure-kotlin-android", version.ref = "allure" }
-
+core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
+junit-junit = { group = "junit", name = "junit", version.ref = "junit" }
+androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidx-test-ext-junit" }
+androidx-appcompat-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+com-google-android-material-material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 [bundles]
 espresso = ["espressoCore", "espressoWeb", "accessibilityFramework"]
 allure = ["allureKotlinModel", "allureKotlinCommons", "allureKotlinJunit4", "allureKotlinAndroid"]
 compose = ["composeActivity", "composeUiTooling", "composeMaterial", "composeTestManifest", "composeCompiler"]
+[plugins]
+com-android-library = { id = "com.android.library", version.ref = "agp" }
+org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "org-jetbrains-kotlin-android" }
