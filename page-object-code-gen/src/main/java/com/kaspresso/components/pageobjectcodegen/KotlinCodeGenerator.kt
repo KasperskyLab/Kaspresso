@@ -14,7 +14,7 @@ abstract class KotlinCodeGenerator(val elements: List<View>, val filePackage: St
     }
 
     private fun createImports(screenElements: List<View>): Set<String> {
-        val importsList = mutableSetOf<String>()
+        val importsList = mutableSetOf("import com.screen.common.KScreen", "import ${screenElements.first().packages}.R")
 
         for (element in screenElements) {
             when (element.viewType) {

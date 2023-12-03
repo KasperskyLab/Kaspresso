@@ -78,7 +78,7 @@ fun findAllViewInDump(document: Document): List<View> {
 }
 
 fun String.findPackage(): String {
-    return split("/").toMutableList().dropLast(1)
+    return split("/").toMutableList()
         .dropWhile { it != "com" }.joinToString(separator = ".")
 }
 

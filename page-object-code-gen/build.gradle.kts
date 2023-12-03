@@ -11,8 +11,9 @@ publish {
 
 dependencies {
     implementation(libs.kotlinStdlib)
-    implementation(libs.truth)
     implementation(libs.androidXTestCore)
     implementation(libs.uiAutomator)
-    implementation(libs.junitJupiterParams)
+    testImplementation(libs.junit)
+    testImplementation(libs.truth)
+    testImplementation(libs.assertj)
 }

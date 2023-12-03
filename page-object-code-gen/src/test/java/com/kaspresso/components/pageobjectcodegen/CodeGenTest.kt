@@ -1,21 +1,38 @@
 package com.kaspresso.components.pageobjectcodegen
 
-import org.junit.jupiter.api.Assertions
-import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.CsvSource
+import com.google.common.io.Resources.getResource
+import org.assertj.core.api.Assertions.assertThat
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.junit.runners.Parameterized
 import java.io.File
 import java.lang.Runtime
-import java.nio.file.Files
 
-class CodeGenTest {
+@RunWith(Parameterized::class)
+class CodeGenTest(
+    private val inputPath: String,
+    private val outputDirectory: String,
+    private val className: String,
+    private val resultFile: String,
+) {
 
-    @ParameterizedTest(name = "Check code gen. Input: {0}. Output: {2}")
-    @CsvSource(value = ["source1.xml, page-object-code-gen/src/test/java/com/kaspresso/components/pageobjectcodegen, TestClass1"])
-    fun checkCodeGen(inputPath: String, outputDirectory: String, className: String) {
-        Runtime.getRuntime().exec("java -jar createKtFromDump.jar $inputPath $className $outputDirectory")
-        Assertions.assertEquals(
-            Files.readAllLines(File("Result1.kt").toPath()),
-            Files.readAllLines(File("$outputDirectory/$className.kt").toPath()),
-        )
+    @Test
+    fun checkCodeGen() {
+        val jarFile = File(getResource("createKtfromDump.jar").toURI())
+        val inputFile = File(getResource(inputPath).toURI())
+        Runtime.getRuntime().exec("java -jar $jarFile $inputFile $className $outputDirectory")
+        Thread.sleep(5000)
+        val actualFile = File("$outputDirectory/$className.kt")
+        val expectedFile = File(getResource("$resultFile.txt").toURI())
+        assertThat(actualFile).hasSameContentAs(expectedFile)
+    }
+    companion object {
+        @JvmStatic
+        @Parameterized.Parameters
+        fun data(): Collection<Array<Any>> {
+            return listOf(
+                arrayOf("source1.xml", "build/generated/res/com/kaspresso/components/pageobjectcodegen", "TestClass1", "Result1"),
+            )
+        }
     }
 }

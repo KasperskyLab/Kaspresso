@@ -4,8 +4,8 @@ import java.lang.StringBuilder
 
 class TextWriter(private val indentation: Int = 0) {
 
-    val line = StringBuilder()
-    val lines = mutableListOf<Any>()
+    private val line = StringBuilder()
+    private val lines = mutableListOf<Any>()
 
     init {
         append(" ".repeat(indentation), 0)
@@ -24,7 +24,11 @@ class TextWriter(private val indentation: Int = 0) {
     }
 
     private fun commitLine() {
-        lines.add(line.toString())
+        if (!line.all { it == ' ' }) {
+            lines.add(line.toString())
+        } else {
+            lines.add("")
+        }
     }
 
     private fun initNewLine() {
@@ -32,7 +36,7 @@ class TextWriter(private val indentation: Int = 0) {
         line.append(" ".repeat(indentation))
     }
 
-    fun withIncreasedIndentation(): TextWriter {
+    private fun withIncreasedIndentation(): TextWriter {
         val writer = TextWriter(indentation + INDENTATION_STEP)
         lines.add(writer)
         return writer
