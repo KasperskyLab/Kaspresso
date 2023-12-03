@@ -39,12 +39,18 @@ fun main(vararg args: String) {
         className = "TestClass"
     }
 
-    val outputFilePath: String = try {
-        args[2] + "/$className.kt"
+    var outputFilePath: String = try {
+        args[2]
     } catch (e: Exception) {
         println("Output file will be locate in directory where you ran this script with name $className.kt")
-        "$className.kt"
+        ""
     }
+
+    if (!File(outputFilePath).exists() && outputFilePath.isNotEmpty()) {
+        File(outputFilePath).mkdir()
+    }
+
+    outputFilePath = args[2] + "/$className.kt"
 
     val filePackage = outputFilePath.findPackage()
 

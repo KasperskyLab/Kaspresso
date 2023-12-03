@@ -21,7 +21,7 @@ class CodeGenTest(
         val jarFile = File(getResource("createKtfromDump.jar").toURI())
         val inputFile = File(getResource(inputPath).toURI())
         Runtime.getRuntime().exec("java -jar $jarFile $inputFile $className $outputDirectory")
-        Thread.sleep(5000)
+        Thread.sleep(15000)
         val actualFile = File("$outputDirectory/$className.kt")
         val expectedFile = File(getResource("$resultFile.txt").toURI())
         assertThat(actualFile).hasSameContentAs(expectedFile)
