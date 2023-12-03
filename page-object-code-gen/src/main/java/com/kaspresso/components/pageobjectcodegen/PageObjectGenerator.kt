@@ -5,18 +5,16 @@ class PageObjectGenerator(elements: List<View>, filePackage: String, val classNa
     override fun generate(writer: TextWriter) {
         super.generate(writer)
         with(writer) {
-            codeBlock("object $className : KScreen<$className>()") {
-                appendLine(LAYOUT)
-                appendLine(VIEWCLASS)
-                nextLine()
+            codeBlock("object $className : KScreen<$className>()", countOfLinesAfterEnd = 0) {
+                append(LAYOUT)
+                append(VIEWCLASS, 2)
                 createElements(elements).forEach {
-                    appendLine(it)
+                    append(it)
                 }
                 nextLine()
-                codeBlock("override fun BaseTestContext.waitForScreen()") {
-                    append(TODO)
+                codeBlock("override fun BaseTestContext.waitForScreen()", 1) {
+                    append(TODO, 0)
                 }
-                nextLine()
             }
         }
     }

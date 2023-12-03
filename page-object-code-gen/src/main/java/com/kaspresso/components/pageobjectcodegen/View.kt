@@ -6,5 +6,5 @@ data class View(val resourceId: String, val viewType: String, val packages: Stri
         return "val ${resourceId.toCamelCase()} = K$viewType{ withId(R.id.$resourceId) }"
     }
 
-    private fun String.toCamelCase() = split('_', '-', ' ').joinToString("") { it.uppercase() }
+    private fun String.toCamelCase() = split('_', '-', ' ').joinToString("") { it.replaceFirstChar(Char::titlecase) }
 }

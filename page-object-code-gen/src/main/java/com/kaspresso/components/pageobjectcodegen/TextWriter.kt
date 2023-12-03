@@ -4,16 +4,17 @@ import java.lang.StringBuilder
 
 class TextWriter(private val indentation: Int = 0) {
 
-    private val line = StringBuilder()
-    private val lines = mutableListOf<Any>()
+    val line = StringBuilder()
+    val lines = mutableListOf<Any>()
 
     init {
-        line.append(" ".repeat(indentation))
+        append(" ".repeat(indentation), 0)
     }
 
-    fun append(append: String): TextWriter = apply { line.append(append) }
-
-    fun appendLine(append: String): TextWriter = apply { nextLine().append(append) }
+    fun append(text: String, countOfLinesAfterText: Int = 1): TextWriter = apply {
+        line.append(text)
+        nextLine(countOfLinesAfterText)
+    }
 
     fun nextLine(count: Int = 1): TextWriter = apply {
         for (i in 0 until count) {
@@ -31,8 +32,7 @@ class TextWriter(private val indentation: Int = 0) {
         line.append(" ".repeat(indentation))
     }
 
-    private fun withIncreasedIndentation(): TextWriter {
-        nextLine()
+    fun withIncreasedIndentation(): TextWriter {
         val writer = TextWriter(indentation + INDENTATION_STEP)
         lines.add(writer)
         return writer
@@ -43,12 +43,12 @@ class TextWriter(private val indentation: Int = 0) {
         return lines.joinToString("\n")
     }
 
-    fun codeBlock(header: String, block: TextWriter.() -> Unit) {
-        appendLine("$header {")
+    fun codeBlock(header: String, countOfLinesAfterBegin: Int = 2, countOfLinesAfterEnd: Int = 1, block: TextWriter.() -> Unit) {
+        append("$header {", countOfLinesAfterBegin)
         with(withIncreasedIndentation()) {
             block()
         }
-        append("}")
+        append("}", countOfLinesAfterEnd)
     }
 
     companion object Constants {

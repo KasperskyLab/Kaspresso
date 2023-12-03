@@ -3,12 +3,11 @@ package com.kaspresso.components.pageobjectcodegen
 abstract class KotlinCodeGenerator(val elements: List<View>, val filePackage: String) : Generator {
     override fun generate(writer: TextWriter) {
         with(writer) {
-            if (filePackage.isNotEmpty()) {
-                append("package $filePackage").nextLine(2)
+            if (!filePackage.isEmpty()) {
+                append("package $filePackage", 2)
             }
             createImports(elements).forEach {
                 append(it)
-                nextLine()
             }
             nextLine()
         }
@@ -27,7 +26,6 @@ abstract class KotlinCodeGenerator(val elements: List<View>, val filePackage: St
                 "EditText" -> importsList.add("import io.guthub.kakaocup.kakao.edit.KEditText")
             }
         }
-
         return importsList
     }
 }

@@ -78,20 +78,8 @@ fun findAllViewInDump(document: Document): List<View> {
 }
 
 fun String.findPackage(): String {
-    val tmp = split("/").toMutableList()
-    tmp.removeLast()
-    var afterCom = false
-    var res = ""
-    for (i in tmp) {
-        if (afterCom) {
-            res += ".$i"
-        }
-        if (i == "com") {
-            res += "com"
-            afterCom = true
-        }
-    }
-    return res
+    return split("/").toMutableList().dropLast(1)
+        .dropWhile { it != "com" }.joinToString(separator = ".")
 }
 
 fun Generator.writeToFile(filePath: String) {
