@@ -17,6 +17,7 @@ dependencies {
     api(libs.uiAutomator)
     api(libs.androidXCore)
     api(libs.androidXTestRules)
+    api(libs.leakCanary)
 
     implementation(libs.kotlinStdlib)
     implementation(libs.gson)

@@ -48,6 +48,7 @@ espressoWeb = { module = "androidx.test.espresso:espresso-web", version.ref = "e
 # Workaround for https://github.com/android/android-test/issues/861
 accessibilityFramework = "com.google.android.apps.common.testing.accessibility.framework:accessibility-test-framework:4.0.0"
 uiAutomator = "androidx.test.uiautomator:uiautomator:2.2.0"
+leakCanary = "com.squareup.leakcanary:leakcanary-android-instrumentation:2.12"
 robolectric = "org.robolectric:robolectric:4.8.2"
 kakao = { module = "io.github.kakaocup:kakao", version.ref = "kakao" }
 kakaoCompose = { module = "io.github.kakaocup:compose", version.ref = "kakaoCompose" }
