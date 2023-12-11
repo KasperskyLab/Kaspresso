@@ -1,6 +1,6 @@
 package com.kaspresso.components.pageobjectcodegen
 
-abstract class KotlinCodeGenerator(val elements: List<View>, val filePackage: String) : Generator {
+abstract class KotlinCodeGenerator(val elements: List<BaseView>, val filePackage: String) : Generator {
     override fun generate(writer: TextWriter) {
         with(writer) {
             if (!filePackage.isEmpty()) {
@@ -13,7 +13,7 @@ abstract class KotlinCodeGenerator(val elements: List<View>, val filePackage: St
         }
     }
 
-    private fun createImports(screenElements: List<View>): Set<String> {
+    private fun createImports(screenElements: List<BaseView>): Set<String> {
         val importsList = mutableSetOf("import com.screen.common.KScreen", "import ${screenElements.first().packages}.R")
 
         for (element in screenElements) {
@@ -21,8 +21,7 @@ abstract class KotlinCodeGenerator(val elements: List<View>, val filePackage: St
                 "ImageView" -> importsList.add("import io.guthub.kakaocup.kakao.image.KImageView")
                 "Button" -> importsList.add("import io.guthub.kakaocup.kakao.text.KButton")
                 "TextView" -> importsList.add("import io.guthub.kakaocup.kakao.text.KTextView")
-                "RecyclerView" -> importsList.add("import io.guthub.kakaocup.kakao.recycler.KRecyclerView")
-                "RecyclerItem" -> importsList.add("import io.guthub.kakaocup.kakao.recycler.KRecyclerItem")
+                "RecyclerView" -> importsList.addAll(mutableSetOf("import io.guthub.kakaocup.kakao.recycler.KRecyclerView", "import io.guthub.kakaocup.kakao.recycler.KRecyclerItem"))
                 "EditText" -> importsList.add("import io.guthub.kakaocup.kakao.edit.KEditText")
             }
         }

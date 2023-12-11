@@ -32,6 +32,7 @@ class CodeGenTest(
         fun data(): Collection<Array<Any>> {
             return listOf(
                 arrayOf("source1.xml", "build/generated/res/com/kaspresso/components/pageobjectcodegen", "TestClass1", "Result1"),
+                arrayOf("source_recycler_view.xml", "build/generated/res/com/kaspresso/components/pageobjectcodegen", "TestClass2", "ResultRecyclerView"),
             )
         }
     }

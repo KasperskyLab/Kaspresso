@@ -1,6 +1,6 @@
 package com.kaspresso.components.pageobjectcodegen
 
-class PageObjectGenerator(elements: List<View>, filePackage: String, val className: String) :
+class PageObjectGenerator(elements: List<BaseView>, filePackage: String, val className: String) :
     KotlinCodeGenerator(elements, filePackage) {
     override fun generate(writer: TextWriter) {
         super.generate(writer)
@@ -19,7 +19,7 @@ class PageObjectGenerator(elements: List<View>, filePackage: String, val classNa
         }
     }
 
-    private fun createElements(screenElements: List<View>): List<String> {
+    private fun createElements(screenElements: List<BaseView>): List<String> {
         return screenElements.map { it.toKaspressoExpression() }
     }
 

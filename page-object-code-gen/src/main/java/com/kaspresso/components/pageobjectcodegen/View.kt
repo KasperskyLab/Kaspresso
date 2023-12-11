@@ -1,10 +1,34 @@
 package com.kaspresso.components.pageobjectcodegen
 
-data class View(val resourceId: String, val viewType: String, val packages: String) {
+data class View(
+    override val resourceId: String,
+    override val viewType: String,
+    override val packages: String,
+) : BaseView {
 
-    fun toKaspressoExpression(): String {
+    override fun toKaspressoExpression(): String {
         return "val ${resourceId.toCamelCase()} = K$viewType { withId(R.id.$resourceId) }"
     }
+}
 
-    private fun String.toCamelCase() = replace("_[a-z]".toRegex()) { it.value.last().uppercase() }
+data class RecyclerView(
+    override val resourceId: String,
+    override val viewType: String = "RecyclerView",
+    override val packages: String,
+    val childResourceId: Map<String, String>,
+) : BaseView {
+
+    override fun toKaspressoExpression(): String {
+        return ""
+    }
+}
+
+interface BaseView {
+
+    val resourceId: String
+    val viewType: String
+    val packages: String
+    fun toKaspressoExpression(): String
+
+    fun String.toCamelCase() = replace("_[a-z]".toRegex()) { it.value.last().uppercase() }
 }

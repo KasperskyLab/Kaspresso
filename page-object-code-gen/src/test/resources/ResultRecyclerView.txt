@@ -1,0 +1,20 @@
+package com.kaspresso.components.pageobjectcodegen
+
+import com.kms.free.R
+import com.screen.common.KScreen
+import io.guthub.kakaocup.kakao.text.KButton
+import io.guthub.kakaocup.kakao.text.KTextView
+
+object TestClass2 : KScreen<TestClass2>() {
+
+    override val layoutId: Int? = TODO("Need To Implement")
+    override val viewClass: Class<*>? = TODO("Need To Implement")
+
+    val dialogTitle = KTextView { withId(R.id.dialog_title) }
+    val settingsText = KTextView { withId(R.id.settings_text) }
+    val cancelButton = KButton { withId(R.id.cancel_button) }
+
+    override fun BaseTestContext.waitForScreen() {
+        TODO("Need To Implement")
+    }
+}

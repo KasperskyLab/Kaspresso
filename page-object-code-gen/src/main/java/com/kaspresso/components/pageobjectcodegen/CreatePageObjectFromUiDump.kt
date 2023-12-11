@@ -58,14 +58,14 @@ fun main(vararg args: String) {
     val documentBuilder = documentBuilderFactory.newDocumentBuilder()
     val doc = documentBuilder.parse(inputFilePath)
 
-    val screenElements: List<View> = findAllViewInDump(doc)
+    val screenElements: List<BaseView> = findAllViewInDump(doc)
 
     PageObjectGenerator(screenElements, filePackage, className).writeToFile(outputFilePath)
 }
 
-fun findAllViewInDump(document: Document): List<View> {
+fun findAllViewInDump(document: Document): List<BaseView> {
     val collectableElements = listOf("android.widget.Button", "android.widget.TextView", "android.widget.ImageView")
-    val screenElements: MutableList<View> = mutableListOf()
+    val screenElements: MutableList<BaseView> = mutableListOf()
     val bookNodeList = document.getElementsByTagName("node")
 
     for (i in 0 until bookNodeList.length) {
