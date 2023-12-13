@@ -32,6 +32,10 @@
 ## Использование в Kaspresso
 В Kaspresso мы оборачиваем AdbTerminal в специальный интерфейс AdbServer.
 Экземпляр `AdbServer` доступен в области `BaseTestContext` и `BaseTestCase` со свойством `adbServer`: <br>
+У AdbServer два типа сигнатур методов:
+
+`fun perform(vararg commands: String): List<String>` и `perform(command: String, arguments: List<String>): String` с важными различиями между ними.
+Первая сигнатура принимает одну или более комманду и исполняет их одну за одной. Пример далее:
 ```kotlin
 @Test
 fun test() =
@@ -50,6 +54,23 @@ fun test() =
         // ....
 }
 ```
+Этот метод передает каждую команду среде выполнения java, которая разбивает ее по пробелам. Это может быть не самым лучшим вариантом. Он не может использоваться для команд с
+пробелами в их аргументах (например, `adb pull "path/with whitespace/file"`) и не допускает пайпинга комманд (например, `cat $BUILD_DIR/report.txt | grep filte > filtered.txt`).
+Вот почему существует второй тип сигнатур методов AdbServer.
+
+Он выполняет одну команду и позволяет вам передавать список аргументов. Он не разбивает вашу команду или аргументы, они используются в том виде, в 
+котором вы их передали. Это позволяет вам использовать пайпинг и сложные аргументы.
+Смотрите пример ниже (да, команда может быть аргументом для другой команды):
+```kotlin
+@Test
+fun test() = before{
+      adbServer.performCmd("bash", listOf("-c", "adb shell dumpsys deviceidle | grep mForceIdle"))
+   }.after {
+   }.run {
+       // ...
+   }
+```
+
 Также не забудьте предоставить необходимое разрешение:
 ```
 <uses-permission android:name="android.permission.INTERNET" />
@@ -187,14 +208,6 @@ class DeviceNetworkSampleTest: TestCase(
 2020-09-10 12:24:27.427 10349-10406/com.kaspersky.kaspressample D/KASPRESSO_ADBSERVER: class=ConnectionClientImplBySocket$handleMessages$1 method=invoke message: Received resultMessage=ResultMessage(command=AdbCommand(body=shell su 0 svc data disable), data=CommandResult(status=SUCCESS, description=exitCode=0, message=, serviceInfo=The command was executed on desktop=Desktop-30548))
 2020-09-10 12:24:27.427 10349-10378/com.kaspersky.kaspressample D/KASPRESSO_ADBSERVER: class=ConnectionClientImplBySocket method=executeCommand message: Command=AdbCommand(body=shell su 0 svc data disable) completed with commandResult=CommandResult(status=SUCCESS, description=exitCode=0, message=, serviceInfo=The command was executed on desktop=Desktop-30548)
 2020-09-10 12:24:27.427 10349-10378/com.kaspersky.kaspressample I/KASPRESSO_ADBSERVER: The result of command=AdbCommand(body=shell su 0 svc data disable) => CommandResult(status=SUCCESS, description=exitCode=0, message=, serviceInfo=The command was executed on desktop=Desktop-30548)
-```
-
-## Сложные команды
-Есть 2 типа сигнатур методов ADB server'а: `preformCmd(vararg commands: String)` и `performsCmd(command: String, arguments: List<String>)`. Первый выполняет несколько 
-команд одна за одной. Последний дает вам контроль над тем, как происходит парсинг комманды - ADB server выполнит их в таком виде, в каком вы их передали, не пытаясь разбить их на токены. Это позволяет
-выполнять команды с пробелами в аргументах и использовать пайпинг. Пример:
-```kotlin
- adbServer.performCmd("bash", arguments = listOf("-c", "grep adb \"~/Documents/test file.txt\" > \"~/Documents/out file.txt\""))
 ```
 
 ## Разработка

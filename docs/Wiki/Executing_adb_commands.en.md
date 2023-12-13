@@ -32,6 +32,10 @@ You can notice that the app uses `AdbTerminal` class to execute ADB commands.
 ## Usage in Kaspresso
 In Kaspresso, we wrap `AdbTerminal` into a special interface `AdbServer`.
 `AdbServer`'s instance is available in `BaseTestContext` scope and `BaseTestCase` with `adbServer` property: <br>
+There're two types of AbdServer methods signatures: 
+
+`fun perform(vararg commands: String): List<String>` and `perform(command: String, arguments: List<String>): String` with an important difference.
+First signature accept one or more commands and execute them one by one. Example below:
 ```kotlin
 @Test
 fun test() =
@@ -50,6 +54,23 @@ fun test() =
         // ....
 }
 ```
+This method passes each command to the java runtime which tokenizes it by whitespaces. It could be not ideal. It can't be used for the commands with
+the whitespaces in their arguments (e.g. `adb pull "path/with whitespace/file"`) and it doesn't allow piping (e.g. `cat $BUILD_DIR/report.txt | grep filte > filtered.txt`).
+That's why there's a second AdbServer methods signature type.
+
+It executes a single command and allows you to pass a list of arguments. It doesn't tokenize your command or arguments, they are used "as is".
+This allows you to use piping and complex arguments
+See example below (yes, a command could be an argument for another command):
+```kotlin
+@Test
+fun test() = before{
+      adbServer.performCmd("bash", listOf("-c", "adb shell dumpsys deviceidle | grep mForceIdle"))
+   }.after {
+   }.run {
+       // ...
+   }
+```
+
 Also, don't forget to grant necessary permission:
 ```
 <uses-permission android:name="android.permission.INTERNET" />
@@ -188,14 +209,6 @@ Now the logs looks like:
 2020-09-10 12:24:27.427 10349-10406/com.kaspersky.kaspressample D/KASPRESSO_ADBSERVER: class=ConnectionClientImplBySocket$handleMessages$1 method=invoke message: Received resultMessage=ResultMessage(command=AdbCommand(body=shell su 0 svc data disable), data=CommandResult(status=SUCCESS, description=exitCode=0, message=, serviceInfo=The command was executed on desktop=Desktop-30548))
 2020-09-10 12:24:27.427 10349-10378/com.kaspersky.kaspressample D/KASPRESSO_ADBSERVER: class=ConnectionClientImplBySocket method=executeCommand message: Command=AdbCommand(body=shell su 0 svc data disable) completed with commandResult=CommandResult(status=SUCCESS, description=exitCode=0, message=, serviceInfo=The command was executed on desktop=Desktop-30548)
 2020-09-10 12:24:27.427 10349-10378/com.kaspersky.kaspressample I/KASPRESSO_ADBSERVER: The result of command=AdbCommand(body=shell su 0 svc data disable) => CommandResult(status=SUCCESS, description=exitCode=0, message=, serviceInfo=The command was executed on desktop=Desktop-30548)
-```
-
-## Complex commands
-There're two kinds of ADB server methods signatures: `preformCmd(vararg commands: String)` and `performsCmd(command: String, arguments: List<String>)`. The first executes multiple
-commands one by one. The latter allows you to gain more control over the commands parsing - ADB server would execute commands "as is" without trying to split command into tokens. This allows you to execute
-commands with whitespaces in their arguments and use piping. Example:
-```kotlin
- adbServer.performCmd("bash", arguments = listOf("-c", "grep adb \"~/Documents/test file.txt\" > \"~/Documents/out file.txt\""))
 ```
 
 ## Development
