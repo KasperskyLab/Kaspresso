@@ -24,6 +24,13 @@ interface AdbServer {
      * @throws AdbServerException if a result status of any command in @param commands is Failed
      * @return list of answers of commands' execution
      */
+    @Deprecated("This method doesn't work for the commands with the complex arguments containing " +
+            "whitespaces (e.g. 'adb pull \"path/with whitespace/file\") and doesn't allow commands piping like" +
+            "adbServer.performCmd(\"bash\", listOf(\"-c\", \"adb shell dumpsys deviceidle | grep mForceIdle\"))" +
+            "which the AdbServer.performCmd(String, List<String>) does. " +
+            "For more details, please check out https://github.com/KasperskyLab/Kaspresso/blob/master/docs/Wiki/Executing_adb_commands.en.md",
+        ReplaceWith("adbServer.performCmd(*commands, emptyList())")
+    )
     fun performCmd(vararg commands: String): List<String>
 
     /**
@@ -50,6 +57,13 @@ interface AdbServer {
      * @throws AdbServerException if a result status of any command in @param commands is Failed
      * @return list of answers of commands' execution
      */
+    @Deprecated("This method doesn't work for the commands with the complex arguments containing " +
+            "whitespaces (e.g. 'adb pull \"path/with whitespace/file\") and doesn't allow commands piping like" +
+            "adbServer.performCmd(\"bash\", listOf(\"-c\", \"adb shell dumpsys deviceidle | grep mForceIdle\"))" +
+            "which the AdbServer.performCmd(String, List<String>) does " +
+            "For more details, please check out https://github.com/KasperskyLab/Kaspresso/blob/master/docs/Wiki/Executing_adb_commands.en.md",
+        ReplaceWith("adbServer.performAdb(*commands, emptyList())")
+    )
     fun performAdb(vararg commands: String): List<String>
 
     /**
@@ -76,6 +90,13 @@ interface AdbServer {
      * @throws AdbServerException if a result status of any command in @param commands is Failed
      * @return list of answers of commands' execution
      */
+    @Deprecated("This method doesn't work for the commands with the complex arguments containing " +
+            "whitespaces (e.g. 'adb pull \"path/with whitespace/file\") and doesn't allow commands piping like" +
+            "adbServer.performCmd(\"bash\", listOf(\"-c\", \"adb shell dumpsys deviceidle | grep mForceIdle\"))" +
+            "which the AdbServer.performCmd(String, List<String>) does " +
+            "For more details, please check out https://github.com/KasperskyLab/Kaspresso/blob/master/docs/Wiki/Executing_adb_commands.en.md",
+        ReplaceWith("adbServer.performShell(*commands, emptyList())")
+    )
     fun performShell(vararg commands: String): List<String>
 
     /**

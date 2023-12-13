@@ -30,6 +30,13 @@ class AdbServerImpl(
             return AdbTerminal
         }
 
+    @Deprecated("This method doesn't work for the commands with the complex arguments containing " +
+            "whitespaces (e.g. 'adb pull \"path/with whitespace/file\") and doesn't allow commands piping like" +
+            "adbServer.performCmd(\"bash\", listOf(\"-c\", \"adb shell dumpsys deviceidle | grep mForceIdle\"))" +
+            "which the AdbServer.performCmd(String, List<String>) does. " +
+            "For more details, please check out https://github.com/KasperskyLab/Kaspresso/blob/master/docs/Wiki/Executing_adb_commands.en.md",
+        ReplaceWith("adbServer.performCmd(*commands, emptyList())")
+    )
     override fun performCmd(vararg commands: String): List<String> {
         return commands.map { command ->
             perform(command, emptyList()) { command, _ ->
@@ -38,6 +45,13 @@ class AdbServerImpl(
         }
     }
 
+    @Deprecated("This method doesn't work for the commands with the complex arguments containing " +
+            "whitespaces (e.g. 'adb pull \"path/with whitespace/file\") and doesn't allow commands piping like" +
+            "adbServer.performCmd(\"bash\", listOf(\"-c\", \"adb shell dumpsys deviceidle | grep mForceIdle\"))" +
+            "which the AdbServer.performCmd(String, List<String>) does " +
+            "For more details, please check out https://github.com/KasperskyLab/Kaspresso/blob/master/docs/Wiki/Executing_adb_commands.en.md",
+        ReplaceWith("adbServer.performAdb(*commands, emptyList())")
+    )
     override fun performAdb(vararg commands: String): List<String> {
         return commands.map { command ->
             perform(command, emptyList()) { command, _ ->
@@ -46,6 +60,13 @@ class AdbServerImpl(
         }
     }
 
+    @Deprecated("This method doesn't work for the commands with the complex arguments containing " +
+            "whitespaces (e.g. 'adb pull \"path/with whitespace/file\") and doesn't allow commands piping like" +
+            "adbServer.performCmd(\"bash\", listOf(\"-c\", \"adb shell dumpsys deviceidle | grep mForceIdle\"))" +
+            "which the AdbServer.performCmd(String, List<String>) does " +
+            "For more details, please check out https://github.com/KasperskyLab/Kaspresso/blob/master/docs/Wiki/Executing_adb_commands.en.md",
+        ReplaceWith("adbServer.performShell(*commands, emptyList())")
+    )
     override fun performShell(vararg commands: String): List<String> {
         return commands.map { command ->
             perform(command, emptyList()) { command, _ ->
