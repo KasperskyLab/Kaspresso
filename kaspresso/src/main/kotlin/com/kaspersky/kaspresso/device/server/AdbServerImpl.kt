@@ -31,33 +31,39 @@ class AdbServerImpl(
         }
 
     override fun performCmd(vararg commands: String): List<String> {
-        return perform(commands) {
-            adbTerminal.executeCmd(it)
+        return commands.map { command ->
+            perform(command, emptyList()) { command, _ ->
+                adbTerminal.executeCmd(command)
+            }
         }
     }
 
     override fun performAdb(vararg commands: String): List<String> {
-        return perform(commands) {
-            adbTerminal.executeAdb(it)
+        return commands.map { command ->
+            perform(command, emptyList()) { command, _ ->
+                adbTerminal.executeAdb(command)
+            }
         }
     }
 
     override fun performShell(vararg commands: String): List<String> {
-        return perform(commands) {
-            adbTerminal.executeAdb("shell $it")
+        return commands.map { command ->
+            perform(command, emptyList()) { command, _ ->
+                adbTerminal.executeAdb("shell $command")
+            }
         }
     }
 
     override fun performCmd(command: String, arguments: List<String>): String {
-        return performComplex(command, arguments, adbTerminal::executeCmd)
+        return perform(command, arguments, adbTerminal::executeCmd)
     }
 
     override fun performAdb(command: String, arguments: List<String>): String {
-        return performComplex(command, arguments, adbTerminal::executeAdb)
+        return perform(command, arguments, adbTerminal::executeAdb)
     }
 
     override fun performShell(command: String, arguments: List<String>): String {
-        return performComplex("shell $command", arguments, adbTerminal::executeAdb)
+        return perform("shell $command", arguments, adbTerminal::executeAdb)
     }
 
     override fun disconnectServer() {
@@ -67,19 +73,8 @@ class AdbServerImpl(
         }
     }
 
-    private fun perform(commands: Array<out String>, executor: (String) -> CommandResult): List<String> {
-        return commands.asSequence()
-            .onEach { command ->
-                logger.i("AdbServer. The command to execute=$command")
-            }
-            .map { command -> command to executor.invoke(command) }
-            .onEach { (command, result) -> logCommandResult(command, result) }
-            .map { (_, result) -> result.description }
-            .toList()
-    }
-
-    private fun performComplex(command: String, arguments: List<String>, executor: (String, List<String>) -> CommandResult): String {
-        logger.i("AdbServer. The complex command to execute=$command")
+    private fun perform(command: String, arguments: List<String>, executor: (String, List<String>) -> CommandResult): String {
+        logger.i("AdbServer. The command to execute=$command, arguments=$arguments")
         val result = executor.invoke(command, arguments)
         logCommandResult(command, result)
 
@@ -95,20 +90,20 @@ class AdbServerImpl(
             throw AdbServerException(
                 """
 
-                            AdbServer. The command=$command was performed with timeout exception.
-                            There are two possible reasons:
+                    AdbServer. The command=$command was performed with timeout exception.
+                    There are two possible reasons:
 
-                            1. The test is executing on the JVM (with Robolectric) environment and the test uses AdbServer. But, Unit tests can't use this implementation of AdbServer.
-                            Possible solutions:
-                                a. Rewrite the test and replace/remove a peace of code where AdbServer is called.
-                                b. Write another implementation of AdbServer.
-                                c. Don't use this test like a JVM(Unit)-test.
+                    1. The test is executing on the JVM (with Robolectric) environment and the test uses AdbServer. But, Unit tests can't use this implementation of AdbServer.
+                    Possible solutions:
+                        a. Rewrite the test and replace/remove a peace of code where AdbServer is called.
+                        b. Write another implementation of AdbServer.
+                        c. Don't use this test like a JVM(Unit)-test.
 
-                            2. The second reason is absence of started 'adbserver-desktop.jar'.
-                            Please, follow the instruction to resolve this issue:
-                                a. Find the last 'adbserver-desktop.jar' here - https://github.com/KasperskyLab/Kaspresso/tree/master/artifacts.
-                                b. Copy 'adbserver-desktop.jar' to your machine. For example, /Users/yuri.gagarin/Desktop/adbserver-desktop.jar.
-                                c. Start 'adbserver-desktop.jar' with the command in Terminal - 'java -jar /Users/yuri.gagarin/Desktop/adbserver-desktop.jar
+                    2. The second reason is absence of started 'adbserver-desktop.jar'.
+                    Please, follow the instruction to resolve this issue:
+                        a. Find the last 'adbserver-desktop.jar' here - https://github.com/KasperskyLab/Kaspresso/tree/master/artifacts.
+                        b. Copy 'adbserver-desktop.jar' to your machine. For example, /Users/yuri.gagarin/Desktop/adbserver-desktop.jar.
+                        c. Start 'adbserver-desktop.jar' with the command in Terminal - 'java -jar /Users/yuri.gagarin/Desktop/adbserver-desktop.jar
 
                         """.trimIndent()
             )
