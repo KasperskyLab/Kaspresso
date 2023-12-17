@@ -52,7 +52,7 @@ class ActionsOnElementsPack {
     fun <Type> or(element: Type, action: Type.() -> Unit): ComplexComposeBranchBuilder<Type>
             where Type : NodeActions, Type : NodeAssertions,
                   Type : ComposeInterceptable {
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN_MR2 ) {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN_MR2) {
             return ComplexComposeBranchBuilder(element) { action.invoke(element) }
                 .also { complexComposeBranchBuilders += it }
         } else {
