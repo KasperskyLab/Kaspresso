@@ -1,5 +1,6 @@
 package com.kaspersky.kaspresso.compose.pack
 
+import android.annotation.SuppressLint
 import androidx.test.espresso.ViewAction
 import androidx.test.espresso.ViewAssertion
 import androidx.test.espresso.ViewInteraction
@@ -17,6 +18,7 @@ import com.kaspersky.kaspresso.compose.pack.branch.ComplexComposeBranchBuilder
 import io.github.kakaocup.compose.intercept.delegate.ComposeInterceptable
 import io.github.kakaocup.compose.node.action.NodeActions
 import io.github.kakaocup.compose.node.assertion.NodeAssertions
+import java.lang.UnsupportedOperationException
 
 /**
  * The builder class for parameters of [com.kaspersky.kaspresso.compose.ComposeProvider.compose] method.
@@ -46,11 +48,16 @@ class ActionsOnElementsPack {
      * @param element the interacted node.
      * @param action actions or assertions on the interacted node.
      */
+    @SuppressLint("ObsoleteSdkInt")
     fun <Type> or(element: Type, action: Type.() -> Unit): ComplexComposeBranchBuilder<Type>
             where Type : NodeActions, Type : NodeAssertions,
                   Type : ComposeInterceptable {
-        return ComplexComposeBranchBuilder(element) { action.invoke(element) }
-            .also { complexComposeBranchBuilders += it }
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN_MR2 ) {
+            return ComplexComposeBranchBuilder(element) { action.invoke(element) }
+                .also { complexComposeBranchBuilders += it }
+        } else {
+            throw UnsupportedOperationException("Min SDK need to be equal or higher than 21")
+        }
     }
 
     /**
