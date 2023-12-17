@@ -1,6 +1,5 @@
 package com.kaspersky.kaspresso.compose.pack
 
-import android.annotation.SuppressLint
 import androidx.test.espresso.ViewAction
 import androidx.test.espresso.ViewAssertion
 import androidx.test.espresso.ViewInteraction
