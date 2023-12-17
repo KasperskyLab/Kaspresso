@@ -6,6 +6,6 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
 
-    <uses-sdk tools:overrideLibrary="io.github.kakaocup.compose, androidx.compose.ui.test.junit4"/>
+    <uses-sdk tools:overrideLibrary="io.github.kakaocup.compose, androidx.compose.ui.test.junit4, androidx.activity.compose"/>
 
 </manifest>
