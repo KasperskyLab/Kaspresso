@@ -48,11 +48,10 @@ class ActionsOnElementsPack {
      * @param element the interacted node.
      * @param action actions or assertions on the interacted node.
      */
-    @SuppressLint("ObsoleteSdkInt")
     fun <Type> or(element: Type, action: Type.() -> Unit): ComplexComposeBranchBuilder<Type>
             where Type : NodeActions, Type : NodeAssertions,
                   Type : ComposeInterceptable {
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN_MR2) {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
             return ComplexComposeBranchBuilder(element) { action.invoke(element) }
                 .also { complexComposeBranchBuilders += it }
         } else {
