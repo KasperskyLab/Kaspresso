@@ -14,6 +14,9 @@ import com.kaspersky.components.kautomator.intercept.operation.UiObjectAction
 import com.kaspersky.components.kautomator.intercept.operation.UiObjectAssertion
 import com.kaspersky.kaspresso.compose.pack.branch.ComplexComposeBranch
 import com.kaspersky.kaspresso.compose.pack.branch.ComplexComposeBranchBuilder
+import io.github.kakaocup.compose.intercept.delegate.ComposeInterceptable
+import io.github.kakaocup.compose.node.action.NodeActions
+import io.github.kakaocup.compose.node.assertion.NodeAssertions
 
 /**
  * The builder class for parameters of [com.kaspersky.kaspresso.compose.ComposeProvider.compose] method.
@@ -32,7 +35,21 @@ class ActionsOnElementsPack {
     fun <Type> or(element: Type, action: Type.() -> Unit): ComplexComposeBranchBuilder<Type>
             where Type : BaseActions, Type : BaseAssertions,
                   Type : Interceptable<ViewInteraction, ViewAssertion, ViewAction> {
-        return ComplexComposeBranchBuilder(element, { action.invoke(element) })
+        return ComplexComposeBranchBuilder(element) { action.invoke(element) }
+            .also { complexComposeBranchBuilders += it }
+    }
+
+    /**
+     * Adds the [element] of type [Type] and the [action] to [complexComposeBranchBuilders] and [action] for future composing
+     * where [Type] is bounding by KNode (Kakao Compose)
+     *
+     * @param element the interacted node.
+     * @param action actions or assertions on the interacted node.
+     */
+    fun <Type> or(element: Type, action: Type.() -> Unit): ComplexComposeBranchBuilder<Type>
+            where Type : NodeActions, Type : NodeAssertions,
+                  Type : ComposeInterceptable {
+        return ComplexComposeBranchBuilder(element) { action.invoke(element) }
             .also { complexComposeBranchBuilders += it }
     }
 
@@ -46,7 +63,7 @@ class ActionsOnElementsPack {
     fun <Type> or(element: Type, action: Type.() -> Unit): ComplexComposeBranchBuilder<Type>
             where Type : UiBaseActions, Type : UiBaseAssertions,
                   Type : UiInterceptable<UiObjectInteraction, UiObjectAssertion, UiObjectAction> {
-        return ComplexComposeBranchBuilder(element, { action.invoke(element) })
+        return ComplexComposeBranchBuilder(element) { action.invoke(element) }
             .also { complexComposeBranchBuilders += it }
     }
 

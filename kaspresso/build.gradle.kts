@@ -15,6 +15,7 @@ dependencies {
     api(libs.kakaoExtClicks)
     api(libs.bundles.espresso)
     api(libs.uiAutomator)
+    api(libs.kakaoCompose)
     api(libs.androidXCore)
     api(libs.androidXTestRules)
 
