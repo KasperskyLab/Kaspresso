@@ -29,7 +29,8 @@ internal class DesktopServerHolder(private val logger: Logger) {
             adbCommandPerformer = adbCommandPerformer,
             presetEmulators = emptyList(),
             adbServerPort = null,
-            logger = logger
+            logger = logger,
+            adbPath = adbPath.toString()
         )
             .apply { startDevicesObservingAsync() }
     }
