@@ -2,16 +2,7 @@ plugins {
     id("convention.android-library")
     id("convention.publication-android-lib")
     id("convention.third-party-report")
-}
-
-// TODO: move to publishing convention
-android {
-    libraryVariants.configureEach {
-        packageLibraryProvider.configure {
-            from("$rootDir/LICENSE.txt")
-            from("NOTICE.txt")
-        }
-    }
+    id("convention.legal-documents")
 }
 
 publish {

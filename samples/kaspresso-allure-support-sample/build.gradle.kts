@@ -6,8 +6,7 @@ plugins {
 android {
     defaultConfig {
         applicationId = "com.kaspersky.kaspresso.alluresupport.sample"
-        // AllureAndroidJUnitRunner must be used as testInstrumentationRunner
-        testInstrumentationRunner = "io.qameta.allure.android.runners.AllureAndroidJUnitRunner"
+        testInstrumentationRunner = "com.kaspersky.kaspresso.runner.KaspressoRunner"
         testInstrumentationRunnerArguments["clearPackageData"] = "true"
     }
 
@@ -22,8 +21,15 @@ dependencies {
     implementation(libs.constraint)
     implementation(libs.multidex)
 
-    androidTestImplementation("com.kaspersky.android-components:kaspresso")
-    androidTestImplementation("com.kaspersky.android-components:kaspresso-allure-support")
+    // kaspresso
+    if (hasProperty("kaspresso.snapshotVersion")) {
+        val kaspressoVersion = property("kaspresso.snapshotVersion")
+        androidTestImplementation("com.kaspersky.android-components:kaspresso:$kaspressoVersion")
+        androidTestImplementation("com.kaspersky.android-components:kaspresso-allure-support:$kaspressoVersion")
+    } else {
+        androidTestImplementation(projects.kaspresso)
+        androidTestImplementation(projects.allureSupport)
+    }
 
     androidTestImplementation(libs.androidXTestExtJunitKtx)
     androidTestImplementation(libs.androidXTestExtJunit)

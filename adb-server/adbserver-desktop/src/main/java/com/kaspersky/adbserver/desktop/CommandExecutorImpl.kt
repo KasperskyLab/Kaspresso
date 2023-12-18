@@ -13,7 +13,8 @@ internal class CommandExecutorImpl(
     private val adbCommandPerformer: AdbCommandPerformer,
     private val deviceName: String,
     private val adbServerPort: String?,
-    private val logger: Logger
+    private val logger: Logger,
+    private val adbPath: String
 ) : CommandExecutor {
 
     override fun execute(command: Command): CommandResult {

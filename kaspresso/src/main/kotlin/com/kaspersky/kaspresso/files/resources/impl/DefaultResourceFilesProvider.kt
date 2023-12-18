@@ -5,14 +5,13 @@ import com.kaspersky.kaspresso.files.resources.ResourceFileNamesProvider
 import com.kaspersky.kaspresso.files.resources.ResourceFilesProvider
 import com.kaspersky.kaspresso.files.resources.ResourcesDirsProvider
 import com.kaspersky.kaspresso.files.resources.ResourcesRootDirsProvider
-import com.kaspersky.kaspresso.internal.extensions.other.createDirIfNeeded
 import com.kaspersky.kaspresso.internal.extensions.other.createFileIfNeeded
 import java.io.File
 
 class DefaultResourceFilesProvider(
     private val resourcesRootDirsProvider: ResourcesRootDirsProvider,
     private val resourcesDirsProvider: ResourcesDirsProvider,
-    private val resourceFileNamesProvider: ResourceFileNamesProvider,
+    private val resourceFileNamesProvider: ResourceFileNamesProvider
 ) : ResourceFilesProvider {
 
     override fun provideLogcatFile(tag: String, subDir: String?): File {
@@ -42,8 +41,8 @@ class DefaultResourceFilesProvider(
             tag,
             FileExtension.MP4.toString()
         )
-        val resourceDir = resourcesDirsProvider.provide(resourcesRootDirsProvider.videoRootDir, subDir)
-        return resourceDir.createDirIfNeeded()
+
+        return resourcesDirsProvider.provide(resourcesRootDirsProvider.videoRootDir, subDir)
             .resolve(resFileName)
             .createFileIfNeeded()
     }

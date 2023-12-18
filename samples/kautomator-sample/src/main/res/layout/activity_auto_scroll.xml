@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scroll_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingVertical="20dp"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:ignore="HardcodedText">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <HorizontalScrollView
+            android:id="@+id/hscrollView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:paddingHorizontal="20dp"
+            tools:ignore="HardcodedText">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/hvText1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:paddingHorizontal="10dp"
+                    android:text="HItem 1"
+                    android:textSize="32sp" />
+
+                <Button
+                    android:id="@+id/hvText2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:paddingHorizontal="10dp"
+                    android:text="HItem 2"
+                    android:textSize="32sp" />
+
+                <Button
+                    android:id="@+id/hvText3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:paddingHorizontal="10dp"
+                    android:text="HItem 3"
+                    android:textSize="32sp" />
+
+                <Button
+                    android:id="@+id/hvText4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:paddingHorizontal="10dp"
+                    android:text="HItem 4"
+                    android:textSize="32sp" />
+
+                <Button
+                    android:id="@+id/hvText5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:paddingHorizontal="10dp"
+                    android:text="HItem 5"
+                    android:textSize="32sp" />
+
+                <Button
+                    android:id="@+id/hvText6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:paddingHorizontal="10dp"
+                    android:text="HItem 6"
+                    android:textSize="32sp" />
+
+                <Button
+                    android:id="@+id/hvText7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:paddingHorizontal="10dp"
+                    android:text="HItem 7"
+                    android:textSize="32sp" />
+
+            </LinearLayout>
+
+        </HorizontalScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/tvText1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:text="Item 1"
+                android:textSize="32sp" />
+
+            <Button
+                android:id="@+id/tvText2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:text="Item 2"
+                android:textSize="32sp" />
+
+            <Button
+                android:id="@+id/tvText3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:text="Item 3"
+                android:textSize="32sp" />
+
+            <Button
+                android:id="@+id/tvText4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:text="Item 4"
+                android:textSize="32sp" />
+
+            <Button
+                android:id="@+id/tvText5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:text="Item 5"
+                android:textSize="32sp" />
+
+            <Button
+                android:id="@+id/tvText6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:text="Item 6"
+                android:textSize="32sp" />
+
+            <Button
+                android:id="@+id/tvText7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:text="Item 7"
+                android:textSize="32sp" />
+
+            <Button
+                android:id="@+id/tvText8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:text="Item 8"
+                android:textSize="32sp" />
+
+            <Button
+                android:id="@+id/tvText9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:text="Item 9"
+                android:textSize="32sp" />
+
+            <Button
+                android:id="@+id/tvText10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:text="Item 10"
+                android:textSize="32sp" />
+
+            <Button
+                android:id="@+id/tvText11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:text="Item 11"
+                android:textSize="32sp" />
+
+            <Button
+                android:id="@+id/tvText12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:text="Item 12"
+                android:textSize="32sp" />
+
+            <Button
+                android:id="@+id/tvText13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:text="Item 13"
+                android:textSize="32sp" />
+
+            <Button
+                android:id="@+id/tvText14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:text="Item 14"
+                android:textSize="32sp" />
+
+            <Button
+                android:id="@+id/tvText15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:text="Item 15"
+                android:textSize="32sp" />
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/ntvText1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="4dp"
+                        android:layout_gravity="center_horizontal"
+                        android:text="NItem 1"
+                        android:textSize="32sp" />
+
+                    <HorizontalScrollView
+                        android:id="@+id/nnHscrollView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:paddingHorizontal="20dp"
+                        tools:ignore="HardcodedText">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <Button
+                                android:id="@+id/nnHtvText1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:layout_marginBottom="4dp"
+                                android:layout_marginHorizontal="4dp"
+                                android:paddingHorizontal="10dp"
+                                android:layout_gravity="center_horizontal"
+                                android:text="NNHItem 1"
+                                android:textSize="32sp" />
+
+                            <Button
+                                android:id="@+id/nnHtvText2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:layout_marginBottom="4dp"
+                                android:layout_marginHorizontal="4dp"
+                                android:paddingHorizontal="10dp"
+                                android:layout_gravity="center_horizontal"
+                                android:text="NNHItem 2"
+                                android:textSize="32sp" />
+
+                            <Button
+                                android:id="@+id/nnHtvText3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:layout_marginBottom="4dp"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginHorizontal="4dp"
+                                android:paddingHorizontal="10dp"
+                                android:text="NNHItem 3"
+                                android:textSize="32sp" />
+
+                            <Button
+                                android:id="@+id/nnHtvText4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:layout_marginBottom="4dp"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginHorizontal="4dp"
+                                android:paddingHorizontal="10dp"
+                                android:text="NNHItem 4"
+                                android:textSize="32sp" />
+
+                            <Button
+                                android:id="@+id/nnHtvText5"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:layout_marginBottom="4dp"
+                                android:layout_marginHorizontal="4dp"
+                                android:paddingHorizontal="10dp"
+                                android:layout_gravity="center_horizontal"
+                                android:text="NNHItem 5"
+                                android:textSize="32sp" />
+                        </LinearLayout>
+
+                    </HorizontalScrollView>
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
+
+            <Button
+                android:id="@+id/tvText16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:text="Item 16"
+                android:textSize="32sp" />
+
+            <Button
+                android:id="@+id/tvText17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:text="Item 17"
+                android:textSize="32sp" />
+
+            <Button
+                android:id="@+id/tvText18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:text="Item 18"
+                android:textSize="32sp" />
+
+            <Button
+                android:id="@+id/tvText19"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:text="Item 19"
+                android:textSize="32sp" />
+
+            <Button
+                android:id="@+id/tvText20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:text="Item 20"
+                android:textSize="32sp" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
+
+

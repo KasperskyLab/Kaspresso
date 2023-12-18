@@ -1,15 +1,15 @@
 package com.kaspersky.kaspressample.screen
 
-import io.github.kakaocup.kakao.scroll.KScrollView
-import io.github.kakaocup.kakao.text.KButton
 import com.kaspersky.kaspressample.R
 import com.kaspersky.kaspressample.flaky.CommonFlakyActivity
 import com.kaspersky.kaspresso.screens.KScreen
+import io.github.kakaocup.kakao.scroll.KScrollView
+import io.github.kakaocup.kakao.text.KButton
 
 object CommonFlakyScreen : KScreen<CommonFlakyScreen>() {
 
-    override val layoutId: Int? = R.layout.activity_common_flaky
-    override val viewClass: Class<*>? = CommonFlakyActivity::class.java
+    override val layoutId: Int = R.layout.activity_common_flaky
+    override val viewClass: Class<*> = CommonFlakyActivity::class.java
 
     val scrollView = KScrollView { withId(R.id.scroll_view) }
 

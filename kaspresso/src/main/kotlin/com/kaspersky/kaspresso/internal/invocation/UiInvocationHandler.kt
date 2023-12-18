@@ -1,5 +1,6 @@
 package com.kaspersky.kaspresso.internal.invocation
 
+import android.annotation.SuppressLint
 import android.util.Log
 import androidx.test.internal.runner.junit4.statement.UiThreadStatement
 import com.kaspersky.kaspresso.logger.UiTestLogger
@@ -17,6 +18,7 @@ internal class UiInvocationHandler(
     private val logger: UiTestLogger
 ) : InvocationHandler {
 
+    @SuppressLint("RestrictedApi")
     override fun invoke(proxy: Any, method: Method, args: Array<Any>?): Any? {
         var result: Any? = null
         val latch = CountDownLatch(1)

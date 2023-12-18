@@ -12,7 +12,8 @@ class Desktop(
     private val adbCommandPerformer: AdbCommandPerformer,
     private val presetEmulators: List<String>,
     private val adbServerPort: String?,
-    private val logger: DesktopLogger
+    private val logger: DesktopLogger,
+    private val adbPath: String
 ) {
 
     companion object {
@@ -65,7 +66,8 @@ class Desktop(
                             adbCommandPerformer,
                             deviceName,
                             adbServerPort,
-                            LoggerFactory.getDesktopLoggerReflectingDevice(logger, deviceName)
+                            LoggerFactory.getDesktopLoggerReflectingDevice(logger, deviceName),
+                            adbPath
                         )
                     deviceMirror.startConnectionToDevice()
                     devices += deviceMirror

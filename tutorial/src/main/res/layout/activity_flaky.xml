@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root_scroll_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/text_1"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/text_1"
+            app:layout_constraintEnd_toEndOf="@id/text_1"
+            app:layout_constraintStart_toStartOf="@id/text_1"
+            app:layout_constraintTop_toTopOf="@id/text_1" />
+
+        <TextView
+            android:id="@+id/text_2"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintTop_toBottomOf="@id/text_1" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/text_2"
+            app:layout_constraintEnd_toEndOf="@id/text_2"
+            app:layout_constraintStart_toStartOf="@id/text_2"
+            app:layout_constraintTop_toTopOf="@id/text_2" />
+
+        <TextView
+            android:id="@+id/text_3"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintTop_toBottomOf="@id/text_2" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/text_3"
+            app:layout_constraintEnd_toEndOf="@id/text_3"
+            app:layout_constraintStart_toStartOf="@id/text_3"
+            app:layout_constraintTop_toTopOf="@id/text_3" />
+
+        <TextView
+            android:id="@+id/text_4"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintTop_toBottomOf="@id/text_3" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/text_4"
+            app:layout_constraintEnd_toEndOf="@id/text_4"
+            app:layout_constraintStart_toStartOf="@id/text_4"
+            app:layout_constraintTop_toTopOf="@id/text_4" />
+
+        <TextView
+            android:id="@+id/text_5"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintTop_toBottomOf="@id/text_4" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/text_5"
+            app:layout_constraintEnd_toEndOf="@id/text_5"
+            app:layout_constraintStart_toStartOf="@id/text_5"
+            app:layout_constraintTop_toTopOf="@id/text_5" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+# https://git-scm.com/docs/githooks#_commit_msg
+set -eo pipefail
+
+gitMessageFile="$1"
+gitMessage=$(cat $gitMessageFile)
+gitMessagePattern="^(Revert|Merge|ISSUE-\d+:|TECH:).*"
+currentBranch="$(git rev-parse --abbrev-ref HEAD)"
+
+case $(uname) in
+  Darwin*) grepFlag=-qE;;
+  *)  grepFlag=-qP
+esac
+
+if ! grep $grepFlag "$gitMessagePattern" "$gitMessageFile"; then
+  echo >&2 "ERROR: commit-msg git hook failed."
+  echo >&2 "Commit message must match the branch name prefix and:"
+  echo >&2 "- start with the issue id: \"ISSUE-1234: git commit message\""
+  echo >&2 "- or match the pattern: \"TECH: git commit message\""
+  echo >&2 "Your commit message: $gitMessage"
+  exit 1
+fi
+
+if [ $currentBranch = "HEAD" ]; then
+  exit 0
+fi
+
+techPrefix="TECH"
+messagePrefix=$(echo $gitMessage | cut -f 1 -d ':')
+branchPrefix=$(echo $currentBranch | cut -f 1 -d '-')
+
+if [ $branchPrefix != $techPrefix ]; then
+  branchPrefix=$(echo $currentBranch | cut -f 1,2 -d '-')
+fi
+
+if [ $branchPrefix != $messagePrefix ]; then
+  echo >&2 "ERROR: commit-msg git hook failed."
+  echo >&2 "Branch name prefix and commit message prefix don't match."
+  echo >&2 "Your branch name: $currentBranch"
+  echo >&2 "Your commit message: $gitMessage"
+  exit 1
+fi

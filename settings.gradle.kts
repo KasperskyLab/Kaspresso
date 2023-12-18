@@ -18,18 +18,19 @@ dependencyResolutionManagement {
         mavenLocal()
         google()
         maven { url = uri("https://kotlin.bintray.com/kotlinx") }
+        maven { url = uri("https://s01.oss.sonatype.org/content/repositories/snapshots") }
     }
 }
 
 includeBuild("build-logic")
 
 include(
-    ":adb-server:adbserver-command-types",
-    ":adb-server:adbserver-common",
-    ":adb-server:adbserver-connection",
+    ":adb-server:adb-server-command-types",
+    ":adb-server:adb-server-common",
+    ":adb-server:adb-server-connection",
     ":adb-server:adbserver-desktop",
-    ":adb-server:adbserver-desktop-device-connection",
-    ":adb-server:adbserver-device",
+    ":adb-server:adb-server-desktop-device-connection",
+    ":adb-server:adb-server-device",
 
     ":kaspresso",
     ":kautomator",

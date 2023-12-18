@@ -1,6 +1,7 @@
 package com.kaspersky.kaspressample.measure_tests
 
 import android.Manifest
+import android.os.Build
 import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspressample.MainActivity
@@ -10,6 +11,7 @@ import com.kaspersky.kaspressample.external_screens.UiMeasureScreen
 import com.kaspersky.kaspresso.idlewaiting.KautomatorWaitForIdleSettings
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
+import org.junit.Assume
 import org.junit.Rule
 import org.junit.Test
 
@@ -33,7 +35,9 @@ class KautomatorMeasureTest : TestCase(
     val activityRule = activityScenarioRule<MainActivity>()
 
     @Test
-    fun test() = run {
+    fun test() = before {
+        Assume.assumeTrue(" KautomatorWaitForIdleSettings.boost() works incorrectly on Android 5", Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP)
+    }.after { }.run {
         step("MainScreen. Click on `measure fragment` button") {
             UiMainScreen {
                 measureButton {
@@ -48,7 +52,7 @@ class KautomatorMeasureTest : TestCase(
                 RANGE.forEach { _ ->
                     button1 {
                         click()
-                        hasText(device.targetContext.getString(R.string.measure_fragment_text_button_1).uppercase())
+                        hasText(device.targetContext.getString(R.string.measure_fragment_text_button_1))
                     }
                 }
             }
@@ -59,7 +63,7 @@ class KautomatorMeasureTest : TestCase(
                 RANGE.forEach { index ->
                     button2 {
                         click()
-                        hasText(device.targetContext.getString(R.string.measure_fragment_text_button_2).uppercase())
+                        hasText(device.targetContext.getString(R.string.measure_fragment_text_button_2))
                     }
                     textView {
                         hasText(

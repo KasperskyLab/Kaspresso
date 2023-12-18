@@ -53,14 +53,24 @@ dependencies {
     implementation(libs.lifecycleViewModelComposeKtx)
     implementation(libs.composeRuntimeLiveData)
 
-    androidTestImplementation("com.kaspersky.android-components:kaspresso")
-    androidTestImplementation("com.kaspersky.android-components:kaspresso-compose-support")
+    // kaspresso
+    if (hasProperty("kaspresso.snapshotVersion")) {
+        val kaspressoVersion = property("kaspresso.snapshotVersion")
+        testImplementation("com.kaspersky.android-components:kaspresso:$kaspressoVersion")
+        testImplementation("com.kaspersky.android-components:kaspresso-compose-support:$kaspressoVersion")
+        androidTestImplementation("com.kaspersky.android-components:kaspresso:$kaspressoVersion")
+        androidTestImplementation("com.kaspersky.android-components:kaspresso-compose-support:$kaspressoVersion")
+    } else {
+        testImplementation(projects.kaspresso)
+        testImplementation(projects.composeSupport)
+        androidTestImplementation(projects.kaspresso)
+        androidTestImplementation(projects.composeSupport)
+    }
+
     androidTestImplementation(libs.androidXTestRunner)
     androidTestImplementation(libs.junit)
     androidTestImplementation(libs.composeUiTestJunit)
 
-    testImplementation("com.kaspersky.android-components:kaspresso")
-    testImplementation("com.kaspersky.android-components:kaspresso-compose-support")
     testImplementation(libs.androidXTestRunner)
     testImplementation(libs.junit)
     testImplementation(libs.composeUiTestJunit)

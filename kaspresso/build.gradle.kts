@@ -2,16 +2,7 @@ plugins {
     id("convention.android-library")
     id("convention.publication-android-lib")
     id("convention.third-party-report")
-}
-
-// TODO: move to publishing convention
-android {
-    libraryVariants.configureEach {
-        packageLibraryProvider.configure {
-            from("$rootDir/LICENSE.txt")
-            from("NOTICE.txt")
-        }
-    }
+    id("convention.legal-documents")
 }
 
 publish {
@@ -21,6 +12,7 @@ publish {
 dependencies {
     api(projects.kautomator)
     api(libs.kakao)
+    api(libs.kakaoExtClicks)
     api(libs.bundles.espresso)
     api(libs.uiAutomator)
     api(libs.androidXCore)
@@ -28,7 +20,9 @@ dependencies {
 
     implementation(libs.kotlinStdlib)
     implementation(libs.gson)
-    implementation(projects.adbServer.adbserverDevice)
+    implementation(projects.adbServer.adbServerDevice)
+    implementation(libs.appcompat)
+    implementation(libs.material)
 
     testImplementation(libs.junit)
     testImplementation(libs.truth)

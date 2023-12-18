@@ -1,9 +1,14 @@
 @file:Suppress("unused")
 package com.kaspersky.components.kautomator.component.common.builders
 
+import androidx.annotation.IdRes
+import androidx.annotation.StringRes
+import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.BySelector
 import androidx.test.uiautomator.BySelectorHack
 import com.google.common.truth.Truth.assertThat
+import com.kaspersky.components.kautomator.common.resources.KId
+import com.kaspersky.components.kautomator.common.resources.KString
 import com.kaspersky.components.kautomator.component.common.KautomatorMarker
 import java.util.regex.Pattern
 
@@ -36,6 +41,16 @@ class UiViewBuilder {
      * @param resourceId id to match
      */
     fun withId(packageName: String, resourceId: String) = withResourceName(packageName, resourceId)
+
+    /**
+     * Matches the view with given resource id
+     * @param resourceId id to match
+     */
+    fun withId(@IdRes resourceId: Int) {
+        val packageName = InstrumentationRegistry.getInstrumentation().targetContext.packageName
+        val resName = KId.resolveResName(packageName, resourceId)
+        return withResourceName(packageName, resName)
+    }
 
     /**
      * Matches the view with given package name
@@ -140,6 +155,13 @@ class UiViewBuilder {
     /**
      * Matches the view with given content description
      *
+     * @param contentDescriptionRes Content description to match
+     */
+    fun withContentDescription(@StringRes contentDescriptionRes: Int) = addSelector { desc(KString.getString(contentDescriptionRes)) }
+
+    /**
+     * Matches the view with given content description
+     *
      * @param contentDescription Content description to match
      */
     fun withContentDescription(contentDescription: Pattern) =
@@ -151,6 +173,13 @@ class UiViewBuilder {
      * @param text Text to match
      */
     fun withText(text: String) = addSelector { text(text) }
+
+    /**
+     * Matches the view with given text
+     *
+     * @param textRes Text to match
+     */
+    fun withText(@StringRes textRes: Int) = addSelector { text(KString.getString(textRes)) }
 
     /**
      * Matches the view with given text
@@ -168,6 +197,13 @@ class UiViewBuilder {
         addSelector { text(Regex("^((?!$text).)*\$").toPattern()) }
 
     /**
+     * Matches if the view does not have a given text
+     *
+     * @param textRes Text to be matched
+     */
+    fun withoutText(@StringRes textRes: Int) = addSelector { text(Regex("^((?!${KString.getString(textRes)}).)*\$").toPattern()) }
+
+    /**
      * Matches the view which contains any text
      */
     fun withAnyText() = addSelector { text(Regex("^.*\$").toPattern()) }
@@ -180,6 +216,13 @@ class UiViewBuilder {
     fun containsText(text: String) = addSelector { textContains(text) }
 
     /**
+     * Matches the view which contain given text
+     *
+     * @param textRes Text to search
+     */
+    fun containsText(@StringRes textRes: Int) = addSelector { textContains(KString.getString(textRes)) }
+
+    /**
      * Matches if the view which text starts with given text
      *
      * @param text Text to be matched
@@ -187,11 +230,25 @@ class UiViewBuilder {
     fun textStartsWith(text: String) = addSelector { textStartsWith(text) }
 
     /**
+     * Matches if the view which text starts with given text
+     *
+     * @param textRes Text to be matched
+     */
+    fun textStartsWith(@StringRes textRes: Int) = addSelector { textStartsWith(KString.getString(textRes)) }
+
+    /**
      * Matches if the view which text ends with given text
      *
      * @param text Text to be matched
      */
     fun textEndsWith(text: String) = addSelector { textEndsWith(text) }
+
+    /**
+     * Matches if the view which text ends with given text
+     *
+     * @param textRes Text to be matched
+     */
+    fun textEndsWith(@StringRes textRes: Int) = addSelector { textEndsWith(KString.getString(textRes)) }
 
     /**
      * Matches the view with given resource name
@@ -264,7 +321,7 @@ class UiViewBuilder {
      * @param function ViewBuilder which will result in child matcher
      */
     fun withChild(function: UiViewBuilder.() -> Unit) =
-        addSelector { hasDescendant(UiViewBuilder().apply(function).build().bySelector) }
+        addSelector { hasChild(UiViewBuilder().apply(function).build().bySelector) }
 
     /**
      * Matches the view which class matches given name

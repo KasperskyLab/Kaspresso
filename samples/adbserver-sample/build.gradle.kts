@@ -11,6 +11,6 @@ android {
 dependencies {
     implementation(libs.kotlinStdlib)
     implementation(libs.appcompat)
-    implementation("com.kaspersky.android-components:adbserver-device")
+    implementation(projects.adbServer.adbServerDevice)
     implementation(libs.multidex)
 }

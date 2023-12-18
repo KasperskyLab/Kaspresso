@@ -8,6 +8,8 @@ import androidx.test.uiautomator.UiDevice
 import com.kaspersky.components.kautomator.common.Environment
 import com.kaspersky.components.kautomator.common.environment
 import com.kaspersky.kaspresso.instrumental.exception.NotSupportedInstrumentalTestException
+import com.kaspersky.kaspresso.runner.listener.KaspressoRunNotifier
+import com.kaspersky.kaspresso.runner.listener.getKaspressoRunNotifier
 
 class InstrumentalDependencyProviderImpl(
     private val location: InstrumentalUsage,
@@ -35,6 +37,9 @@ class InstrumentalDependencyProviderImpl(
         get() =
             if (isAndroidRuntime) instrumentation.uiAutomation
             else throw NotSupportedInstrumentalTestException(location, "UiAutomation")
+
+    override val runNotifier: KaspressoRunNotifier
+        get() = instrumentation.getKaspressoRunNotifier()
 }
 
 sealed class InstrumentalUsage {

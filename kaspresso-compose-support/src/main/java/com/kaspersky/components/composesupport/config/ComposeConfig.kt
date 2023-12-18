@@ -38,7 +38,8 @@ class ComposeConfig {
                         SystemDialogSafetySemanticsBehaviorInterceptor(
                             libLogger,
                             instrumentalDependencyProviderFactory.getInterceptorProvider<SystemDialogSafetySemanticsBehaviorInterceptor>(instrumentation),
-                            adbServer
+                            adbServer,
+                            systemDialogsSafetyParams
                         ),
                         ElementLoaderSemanticsBehaviorInterceptor(libLogger, elementLoaderParams),
                         FlakySafeSemanticsBehaviorInterceptor(flakySafetyParams, libLogger)

@@ -1,13 +1,40 @@
 <resources>
     <string name="app_name">Tutorial</string>
 
-    <!-- Main Activity -->
-    <string name="main_screen_title">Main Screen</string>
-    <string name="main_screen_simple_fragment_button">Simple fragment</string>
+    <!-- Simple Activity screen -->
+    <string name="simple_activity_default_title">Default title</string>
+    <string name="simple_activity_input_hint">input text</string>
+    <string name="simple_activity_change_title_button">Change title</string>
 
-    <!-- Simple fragment screen -->
-    <string name="simple_fragment_title">Simple Fragment</string>
-    <string name="simple_fragment_text_button_1">Button 1</string>
-    <string name="simple_fragment_text_button_2">Button 2</string>
-    <string name="simple_fragment_text_edittext">Some text</string>
+    <!-- Wifi Activity screen -->
+    <string name="enabled_status">enabled</string>
+    <string name="disabled_status">disabled</string>
+
+    <!-- Notification Activity screen -->
+    <string name="show_notification_button">show notification</string>
+    <string name="notification_title">Notification Title</string>
+    <string name="notification_content">Notification Content</string>
+
+    <!-- Login Activity screen -->
+    <string name="login_activity_hint_username">Username:</string>
+    <string name="login_activity_hint_password">Password:</string>
+    <string name="login_activity_button_login">Login</string>
+
+    <!-- After Login screens -->
+    <string name="screen_after_login">Screen after authorization</string>
+
+    <!-- Make call screen-->
+    <string name="phone_number_hint">Phone number:</string>
+    <string name="make_call_btn">Make Call</string>
+
+    <!-- Flaky Screen -->
+    <string name="text_1">Text 1</string>
+    <string name="text_2">Text 2</string>
+    <string name="text_3">Text 3</string>
+    <string name="text_4">Text 4</string>
+    <string name="text_5">Text 5</string>
+
+    <!-- Screenshot sample-->
+    <string name="something_went_wrong">Something went wrong</string>
+    <string name="load_user">Load User</string>
 </resources>

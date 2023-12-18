@@ -8,12 +8,13 @@ import com.kaspersky.kaspresso.device.screenshots.screenshotfiles.DefaultScreens
 import com.kaspersky.kaspresso.device.screenshots.screenshotfiles.DefaultScreenshotNameProvider
 import com.kaspersky.kaspresso.device.screenshots.screenshotfiles.ScreenshotDirectoryProvider
 import com.kaspersky.kaspresso.device.screenshots.screenshotfiles.ScreenshotNameProvider
-import com.kaspersky.kaspresso.device.screenshots.screenshotmaker.CombinedScreenshotMaker
+import com.kaspersky.kaspresso.device.screenshots.screenshotmaker.DocLocScreenshotMaker
 import com.kaspersky.kaspresso.device.screenshots.screenshotmaker.ExternalScreenshotMaker
 import com.kaspersky.kaspresso.device.screenshots.screenshotmaker.InternalScreenshotMaker
 import com.kaspersky.kaspresso.docloc.DocLocScreenshotCapturer
 import com.kaspersky.kaspresso.docloc.MetadataSaver
 import com.kaspersky.kaspresso.docloc.rule.LocaleRule
+import com.kaspersky.kaspresso.docloc.rule.ToggleNightModeRule
 import com.kaspersky.kaspresso.files.dirs.DefaultDirsProvider
 import com.kaspersky.kaspresso.files.resources.ResourceFileNamesProvider
 import com.kaspersky.kaspresso.files.resources.ResourcesDirsProvider
@@ -24,6 +25,7 @@ import com.kaspersky.kaspresso.files.resources.impl.DefaultResourcesDirNameProvi
 import com.kaspersky.kaspresso.files.resources.impl.DefaultResourcesDirsProvider
 import com.kaspersky.kaspresso.files.resources.impl.DefaultResourcesRootDirsProvider
 import com.kaspersky.kaspresso.files.resources.impl.SupportLegacyResourcesDirNameProvider
+import com.kaspersky.kaspresso.instrumental.InstrumentalDependencyProviderFactory
 import com.kaspersky.kaspresso.instrumental.exception.DocLocInUnitTestException
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.screenshot.ScreenshotStepWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.testcase.impl.screenshot.TestRunnerScreenshotWatcherInterceptor
@@ -50,13 +52,16 @@ import java.lang.reflect.Proxy
  *  @param changeSystemLocale change the system language, i.e. system dialogs (e.g. runtime permissions) will also be localized.
  *      Need permission in manifest file for a target app android.permission.CHANGE_CONFIGURATION
  *  @param locales comma-separated string with locales to run test with.
+ *  @param toggleNightMode used to capture screenshots with night mode enabled
  */
 abstract class DocLocScreenshotTestCase(
     private val resourcesRootDirsProvider: ResourcesRootDirsProvider =
         DefaultResourcesRootDirsProvider(),
     private val resourcesDirsProvider: ResourcesDirsProvider =
         DefaultResourcesDirsProvider(
-            dirsProvider = DefaultDirsProvider(InstrumentationRegistry.getInstrumentation()),
+            dirsProvider = DefaultDirsProvider(
+                InstrumentalDependencyProviderFactory().getComponentProvider<Kaspresso>(InstrumentationRegistry.getInstrumentation())
+            ),
             resourcesDirNameProvider = DefaultResourcesDirNameProvider()
         ),
     private val resourceFileNamesProvider: ResourceFileNamesProvider =
@@ -64,6 +69,7 @@ abstract class DocLocScreenshotTestCase(
             addTimestamps = false
         ),
     private val changeSystemLocale: Boolean = false,
+    private val toggleNightMode: Boolean = false,
     private val screenshotParams: ScreenshotParams = ScreenshotParams(),
     locales: String?,
     kaspressoBuilder: Kaspresso.Builder = Kaspresso.Builder.simple().apply {
@@ -83,6 +89,7 @@ abstract class DocLocScreenshotTestCase(
         screenshotDirectoryProvider: ScreenshotDirectoryProvider = DefaultScreenshotDirectoryProvider(groupByRunNumbers = false),
         screenshotNameProvider: ScreenshotNameProvider = DefaultScreenshotNameProvider(addTimestamps = false),
         changeSystemLocale: Boolean = false,
+        toggleNightMode: Boolean = false,
         locales: String?,
         screenshotParams: ScreenshotParams = ScreenshotParams(),
         kaspressoBuilder: Kaspresso.Builder = Kaspresso.Builder.simple().apply {
@@ -96,7 +103,9 @@ abstract class DocLocScreenshotTestCase(
             override val viewHierarchy: File = File("view_hierarchy")
         },
         resourcesDirsProvider = DefaultResourcesDirsProvider(
-            dirsProvider = DefaultDirsProvider(InstrumentationRegistry.getInstrumentation()),
+            dirsProvider = DefaultDirsProvider(
+                InstrumentalDependencyProviderFactory().getComponentProvider<Kaspresso>(InstrumentationRegistry.getInstrumentation())
+            ),
             resourcesDirNameProvider = SupportLegacyResourcesDirNameProvider(screenshotDirectoryProvider)
         ),
         resourceFileNamesProvider = object : ResourceFileNamesProvider {
@@ -105,6 +114,7 @@ abstract class DocLocScreenshotTestCase(
         },
         screenshotParams = screenshotParams,
         changeSystemLocale = changeSystemLocale,
+        toggleNightMode = toggleNightMode,
         locales = locales,
         kaspressoBuilder = kaspressoBuilder
     )
@@ -125,6 +135,13 @@ abstract class DocLocScreenshotTestCase(
     )
 
     @get:Rule
+    val nightModeRule = ToggleNightModeRule(
+        toggleNightMode = toggleNightMode,
+        logger = kaspresso.libLogger,
+        device = kaspresso.device
+    )
+
+    @get:Rule
     val storagePermissionRule = GrantPermissionRule.grant(Manifest.permission.WRITE_EXTERNAL_STORAGE)!!
 
     @Before
@@ -136,7 +153,15 @@ abstract class DocLocScreenshotTestCase(
         val localedResourcesRootDirsProvider: ResourcesRootDirsProvider =
             object : ResourcesRootDirsProvider by resourcesRootDirsProvider {
                 override val screenshotsRootDir: File =
-                    resourcesRootDirsProvider.screenshotsRootDir.resolve(localeRule.currentLocaleName)
+                    resourcesRootDirsProvider.screenshotsRootDir.resolve(
+                        if (!toggleNightMode) {
+                            SCREENSHOTS_DIR_DEFAULT
+                        } else if (nightModeRule.isNightMode) {
+                            SCREENSHOTS_DIR_DARK
+                        } else {
+                            SCREENSHOTS_DIR_LIGHT
+                        }
+                    ).resolve(localeRule.currentLocaleName)
             }
 
         screenshotCapturer = DocLocScreenshotCapturer(
@@ -146,12 +171,12 @@ abstract class DocLocScreenshotTestCase(
                 resourcesDirsProvider,
                 resourceFileNamesProvider
             ),
-            screenshotMaker = CombinedScreenshotMaker(
-                preferredScreenshotMaker = InternalScreenshotMaker(kaspresso.device.activities, screenshotParams),
-                fallbackScreenshotMaker = ExternalScreenshotMaker(
+            screenshotMaker = DocLocScreenshotMaker(
+                screenshotMaker = ExternalScreenshotMaker(
                     kaspresso.instrumentalDependencyProvider,
                     screenshotParams
-                )
+                ),
+                fullWindowScreenshotMaker = InternalScreenshotMaker(kaspresso.device.activities, screenshotParams)
             ),
             metadataSaver = MetadataSaver(kaspresso.device.activities, kaspresso.device.apps, logger)
         )
@@ -210,5 +235,11 @@ abstract class DocLocScreenshotTestCase(
             T::class.java.getAllInterfaces(),
             UiInvocationHandler(view as Any, logger)
         ) as T
+    }
+
+    private companion object {
+        const val SCREENSHOTS_DIR_LIGHT = "light"
+        const val SCREENSHOTS_DIR_DARK = "dark"
+        const val SCREENSHOTS_DIR_DEFAULT = ""
     }
 }

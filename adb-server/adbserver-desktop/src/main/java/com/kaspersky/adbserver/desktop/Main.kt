@@ -14,6 +14,9 @@ import kotlin.system.exitProcess
 private const val DESKTOP = "Desktop-"
 private const val ERROR_EXIT_CODE = -1
 
+// It is assumed that adb is preinstall and available by "adb" keyword
+private const val DEFAULT_ADB_PATH = "adb"
+
 internal fun main(args: Array<String>) {
     val parser = ArgParser("Adb Server")
 
@@ -38,34 +41,29 @@ internal fun main(args: Array<String>) {
         description = "Logs Level"
     ).default(LogLevel.INFO)
 
-    val adbPathFromArguments by parser.option(
+    val adbPath by parser.option(
         type = ArgType.String,
-        fullName = "adbPath",
-        description = "Path to adb binary, if not set when use 'adb' from process environment"
-    )
+        shortName = "a",
+        fullName = "adb_path",
+        description = "Path to custom adb"
+    ).default(DEFAULT_ADB_PATH)
 
     parser.parse(args)
 
     val desktopName = getDesktopName()
     val desktopLogger = LoggerFactory.getDesktopLogger(logLevel, desktopName)
 
-    val adbPath = adbPathFromArguments?.let { Path.of(it) } ?: findAdbAtPath()
-
-    if (adbPath == null) {
-        desktopLogger.e("Adb path not passed via arguments. Adb not found at path variable. Aborting...")
-        exitProcess(ERROR_EXIT_CODE)
-    }
-
     desktopLogger.i("Desktop started with arguments: emulators=$emulators, adbServerPort=$port, adbPath=$adbPath")
 
     val cmdCommandPerformer = CmdCommandPerformer(desktopName)
-    val adbCommandPerformer = AdbCommandPerformer(adbPath, cmdCommandPerformer)
+    val adbCommandPerformer = AdbCommandPerformer(Path.of(adbPath), cmdCommandPerformer)
     val desktop = Desktop(
         cmdCommandPerformer = cmdCommandPerformer,
         adbCommandPerformer = adbCommandPerformer,
         presetEmulators = emulators,
         adbServerPort = port,
-        logger = desktopLogger
+        logger = desktopLogger,
+        adbPath = adbPath
     )
     desktop.startDevicesObservingSync()
 }
@@ -76,14 +74,3 @@ private fun getDesktopName(): String {
     return DESKTOP + pid
 }
 
-/**
- * Search for adb executable at environment PATH variable
- */
-private fun findAdbAtPath(): Path? {
-    return System.getenv("PATH")
-        .split(":")
-        .asSequence()
-        .map { File(it) }
-        .flatMap { it.listFiles()?.toList() ?: emptyList() }
-        .firstOrNull { it.nameWithoutExtension == "adb" }?.toPath()
-}

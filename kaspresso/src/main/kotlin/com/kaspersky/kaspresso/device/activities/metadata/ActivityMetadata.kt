@@ -5,6 +5,7 @@ import android.content.res.Resources
 import android.view.View
 import android.widget.TextView
 import androidx.test.espresso.util.TreeIterables
+import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.kaspersky.kaspresso.logger.UiTestLogger
 
 /**
@@ -50,18 +51,28 @@ internal class ActivityMetadata(
     private fun getLocalizedStrings(decorView: View): List<LocalizedString> {
         return TreeIterables.depthFirstViewTraversal(decorView)
             .filter { it.visibility == View.VISIBLE }
-            .filter { it is TextView }
-            .map { it as TextView }
+            .filter { it is TextView || it is CollapsingToolbarLayout }
             .map { v ->
-                LocalizedString(
-                    v.text.toString(),
-                    getEntryName(decorView.resources, v),
-                    v.left,
-                    v.top,
-                    v.width,
-                    v.height
-                )
-            }
+                if (v is TextView) {
+                    LocalizedString(
+                        v.text.toString(),
+                        getEntryName(decorView.resources, v),
+                        v.left,
+                        v.top,
+                        v.width,
+                        v.height
+                    )
+                } else {
+                    LocalizedString(
+                        (v as CollapsingToolbarLayout).title.toString(),
+                        getEntryNameFromLayout(decorView.resources, v),
+                        v.left,
+                        v.top,
+                        v.width,
+                        v.height
+                    )
+                }
+            }.toMutableList()
     }
 
     private fun getEntryName(resources: Resources, v: TextView): String {
@@ -70,6 +81,15 @@ internal class ActivityMetadata(
         } catch (ex: Resources.NotFoundException) {
             logger.e("Entry ${v.id} not found for TextView with text ${v.text}")
             "[id:${Integer.toHexString(v.id)}]"
+        }
+    }
+
+    private fun getEntryNameFromLayout(resources: Resources, layout: CollapsingToolbarLayout): String {
+        return try {
+            resources.getResourceEntryName(layout.id)
+        } catch (ex: Resources.NotFoundException) {
+            logger.e("Entry ${layout.id} not found")
+            "[id:${Integer.toHexString(layout.id)}]"
         }
     }
 

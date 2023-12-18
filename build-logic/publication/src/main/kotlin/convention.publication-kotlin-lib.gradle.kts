@@ -1,12 +1,11 @@
 import com.kaspersky.kaspresso.publication.KotlinLibraryPublishExtension
 
 plugins {
-    id("convention.publication-release")
+    id("convention.publication-base")
+    `java-library`
 }
 
 plugins.withId("kotlin") {
-
-    @Suppress("UnstableApiUsage")
     extensions.getByType<JavaPluginExtension>().run {
         withSourcesJar()
         withJavadocJar()
@@ -14,6 +13,7 @@ plugins.withId("kotlin") {
 }
 
 val publishExtension = extensions.create<KotlinLibraryPublishExtension>("publish")
+publishExtension.artifactId.convention(project.name)
 
 publishing {
     publications {
@@ -21,8 +21,17 @@ publishing {
             from(components["java"])
 
             afterEvaluate {
-                artifactId = publishExtension.artifactId.getOrElse(project.name)
+                artifactId = publishExtension.artifactId.get()
             }
         }
+    }
+}
+
+tasks.withType<Jar>().configureEach {
+    from(projectDir) {
+        include("NOTICE.txt")
+    }
+    from(rootDir) {
+        include("LICENSE.txt")
     }
 }

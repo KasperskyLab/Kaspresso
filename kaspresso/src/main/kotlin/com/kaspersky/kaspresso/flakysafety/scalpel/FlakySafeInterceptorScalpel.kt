@@ -10,8 +10,8 @@ import com.kaspersky.kaspresso.interceptors.behaviorkautomator.DeviceBehaviorInt
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.ObjectBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.flakysafety.FlakySafeDeviceBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.flakysafety.FlakySafeObjectBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.tolibrary.LibraryInterceptorsInjector.injectKaspressoInKakao
-import com.kaspersky.kaspresso.interceptors.tolibrary.LibraryInterceptorsInjector.injectKaspressoInKautomator
+import com.kaspersky.kaspresso.interceptors.tolibrary.KakaoLibraryInjector.injectKaspressoInKakao
+import com.kaspersky.kaspresso.interceptors.tolibrary.KakaoLibraryInjector.injectKaspressoInKautomator
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 
 /**
@@ -62,7 +62,8 @@ internal class FlakySafeInterceptorScalpel(
             kaspresso.viewActionWatcherInterceptors,
             kaspresso.viewAssertionWatcherInterceptors,
             kaspresso.atomWatcherInterceptors,
-            kaspresso.webAssertionWatcherInterceptors
+            kaspresso.webAssertionWatcherInterceptors,
+            kaspresso.params.clickParams
         )
     }
 
@@ -93,7 +94,8 @@ internal class FlakySafeInterceptorScalpel(
                 kaspresso.viewActionWatcherInterceptors,
                 kaspresso.viewAssertionWatcherInterceptors,
                 kaspresso.atomWatcherInterceptors,
-                kaspresso.webAssertionWatcherInterceptors
+                kaspresso.webAssertionWatcherInterceptors,
+                kaspresso.params.clickParams
             )
 
             injectKaspressoInKautomator(

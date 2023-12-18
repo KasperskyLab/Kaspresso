@@ -1,6 +1,7 @@
 package com.kaspersky.kaspressample.device_tests
 
 import android.Manifest
+import android.content.Context
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
@@ -15,9 +16,11 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertTrue
+import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 
+@Ignore("There's a bug in AVD images that makes geolocation change non-possible in AVD launched with '-no-window' flag")
 class DeviceLocationSampleTest : TestCase() {
 
     companion object {
@@ -54,7 +57,7 @@ class DeviceLocationSampleTest : TestCase() {
     fun locationSampleTest() {
         before {
             device.location.enableGps()
-            manager = device.targetContext.getSystemService(LocationManager::class.java)
+            manager = device.targetContext.getSystemService(Context.LOCATION_SERVICE) as LocationManager
         }.after {
             device.location.enableGps()
         }.run {
