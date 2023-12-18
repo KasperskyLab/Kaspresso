@@ -6,7 +6,7 @@ plugins {
 
 dependencies {
     implementation(libs.androidPlugin)
-    implementation(projects.adbServer.adbserverCommon)
+    implementation(projects.adbServer.adbServerCommon)
     implementation(projects.adbServer.adbserverDesktop)
 }
 
