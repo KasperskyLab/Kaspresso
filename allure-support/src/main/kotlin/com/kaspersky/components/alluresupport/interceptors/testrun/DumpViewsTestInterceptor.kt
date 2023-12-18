@@ -1,10 +1,5 @@
 package com.kaspersky.components.alluresupport.interceptors.testrun
 
-import com.kaspersky.kaspresso.interceptors.watcher.testcase.TestRunWatcherInterceptor
-import com.kaspersky.kaspresso.testcases.models.info.TestInfo
-import com.kaspersky.components.alluresupport.files.attachViewHierarchyToAllureReport
-import com.kaspersky.kaspresso.device.viewhierarchy.ViewHierarchyDumper
-
 class DumpViewsTestInterceptor(
     private val viewHierarchyDumper: ViewHierarchyDumper
 ) : TestRunWatcherInterceptor {

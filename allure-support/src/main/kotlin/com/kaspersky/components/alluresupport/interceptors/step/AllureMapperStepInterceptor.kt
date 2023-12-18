@@ -1,13 +1,5 @@
 package com.kaspersky.components.alluresupport.interceptors.step
 
-import com.kaspersky.kaspresso.interceptors.watcher.testcase.StepWatcherInterceptor
-import com.kaspersky.kaspresso.testcases.models.info.StepInfo
-import io.qameta.allure.kotlin.Allure
-import io.qameta.allure.kotlin.model.Status
-import io.qameta.allure.kotlin.model.StepResult
-import java.util.Stack
-import java.util.UUID
-
 class AllureMapperStepInterceptor : StepWatcherInterceptor {
 
     private val lifecycle = Allure.lifecycle

@@ -1,10 +1,5 @@
 package com.kaspersky.components.alluresupport.interceptors.step
 
-import com.kaspersky.components.alluresupport.files.attachScreenshotToAllureReport
-import com.kaspersky.kaspresso.device.screenshots.Screenshots
-import com.kaspersky.kaspresso.interceptors.watcher.testcase.StepWatcherInterceptor
-import com.kaspersky.kaspresso.testcases.models.info.StepInfo
-
 class ScreenshotStepInterceptor(
     private val screenshots: Screenshots
 ) : StepWatcherInterceptor {
