@@ -6,10 +6,8 @@ import kotlinx.cli.ArgParser
 import kotlinx.cli.ArgType
 import kotlinx.cli.default
 import kotlinx.cli.delimiter
-import java.io.File
 import java.lang.management.ManagementFactory
 import java.nio.file.Path
-import kotlin.system.exitProcess
 
 private const val DESKTOP = "Desktop-"
 private const val ERROR_EXIT_CODE = -1
@@ -73,4 +71,3 @@ private fun getDesktopName(): String {
     val pid = processName.split("@".toRegex()).toTypedArray()[0].toLong()
     return DESKTOP + pid
 }
-
