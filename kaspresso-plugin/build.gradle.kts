@@ -13,15 +13,16 @@ dependencies {
 group = "com.kaspersky.kaspresso"
 version = "1.0"
 gradlePlugin {
-    website.set("https://kasperskylab.github.io/Kaspresso/en/")
-    vcsUrl.set("https://github.com/KasperskyLab/Kaspresso/")
+    // TODO: fix for tests on API 30 and uncomment
+    // website.set("https://kasperskylab.github.io/Kaspresso/en/")
+    // vcsUrl.set("https://github.com/KasperskyLab/Kaspresso/")
 
     plugins {
         create("AdbServerPlugin") {
             id = "com.kaspersky.kaspresso-adb-server-plugin"
             displayName = "Kaspresso ADB-server plugin"
             description = "Run Kaspresso ADB server for Android UI tests"
-            tags.set(listOf("testing", "UI tests", "test automation", "android", "kasresso", "adb server"))
+            // tags.set(listOf("testing", "UI tests", "test automation", "android", "kasresso", "adb server"))
             implementationClass = "com.kaspersky.kaspresso.plugin.KaspressoPlugin"
         }
     }
