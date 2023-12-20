@@ -48,8 +48,8 @@ dependencies {
         testImplementation("com.kaspersky.android-components:kaspresso:$kaspressoVersion")
         androidTestImplementation("com.kaspersky.android-components:kaspresso:$kaspressoVersion")
     } else {
-        androidTestImplementation(projects.kaspresso)
-        testImplementation(projects.kaspresso)
+        androidTestImplementation("com.kaspersky.android-components:kaspresso")
+        testImplementation("com.kaspersky.android-components:kaspresso")
     }
 
     androidTestImplementation(libs.androidXTestRunner)
