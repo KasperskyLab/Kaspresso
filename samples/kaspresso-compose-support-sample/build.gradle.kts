@@ -1,6 +1,6 @@
 plugins {
     id("convention.android-app")
-    id("com.kaspersky.kaspresso")
+    id("com.kaspersky.kaspresso-adb-server-plugin")
 }
 
 android {
