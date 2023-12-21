@@ -1,5 +1,6 @@
 plugins {
     id("convention.android-app")
+    id("com.kaspersky.kaspresso-adb-server-plugin")
 }
 
 android {
@@ -14,5 +15,5 @@ dependencies {
     implementation(libs.material)
     implementation(libs.multidex)
 
-    androidTestImplementation(projects.kaspresso)
+    androidTestImplementation("com.kaspersky.android-components:kaspresso")
 }

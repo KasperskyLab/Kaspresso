@@ -1,5 +1,6 @@
 plugins {
     id("convention.android-app")
+    id("com.kaspersky.kaspresso-adb-server-plugin")
 }
 
 android {
@@ -26,8 +27,8 @@ dependencies {
         androidTestImplementation("com.kaspersky.android-components:kaspresso:$kaspressoVersion")
         androidTestImplementation("com.kaspersky.android-components:kaspresso-allure-support:$kaspressoVersion")
     } else {
-        androidTestImplementation(projects.kaspresso)
-        androidTestImplementation(projects.allureSupport)
+        androidTestImplementation("com.kaspersky.android-components:kaspresso")
+        androidTestImplementation("com.kaspersky.android-components:kaspresso-allure-support")
     }
 
     androidTestImplementation(libs.androidXTestExtJunitKtx)

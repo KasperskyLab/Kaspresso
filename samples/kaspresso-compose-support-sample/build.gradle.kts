@@ -1,5 +1,6 @@
 plugins {
     id("convention.android-app")
+    id("com.kaspersky.kaspresso-adb-server-plugin")
 }
 
 android {
@@ -60,10 +61,10 @@ dependencies {
         androidTestImplementation("com.kaspersky.android-components:kaspresso:$kaspressoVersion")
         androidTestImplementation("com.kaspersky.android-components:kaspresso-compose-support:$kaspressoVersion")
     } else {
-        testImplementation(projects.kaspresso)
-        testImplementation(projects.composeSupport)
-        androidTestImplementation(projects.kaspresso)
-        androidTestImplementation(projects.composeSupport)
+        testImplementation("com.kaspersky.android-components:kaspresso")
+        testImplementation("com.kaspersky.android-components:kaspresso-compose-support")
+        androidTestImplementation("com.kaspersky.android-components:kaspresso")
+        androidTestImplementation("com.kaspersky.android-components:kaspresso-compose-support")
     }
 
     androidTestImplementation(libs.androidXTestRunner)
