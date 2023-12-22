@@ -84,7 +84,11 @@ class AdbServerImpl(
     }
 
     override fun performShell(command: String, arguments: List<String>): String {
-        return perform("shell $command", arguments, adbTerminal::executeAdb)
+        val args = buildList {
+            add(command)
+            addAll(arguments)
+        }
+        return perform("shell", args, adbTerminal::executeAdb)
     }
 
     override fun disconnectServer() {

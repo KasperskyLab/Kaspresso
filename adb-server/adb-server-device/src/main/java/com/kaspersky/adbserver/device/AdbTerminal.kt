@@ -30,7 +30,7 @@ object AdbTerminal {
     /**
      * Allows more control over how arguments are parsed. Each element in the [arguments] list
      * is used as is without tokenizing.
-     * Refer to the Runtime::exec(String[] cmdarray)
+     * Refer to the https://docs.oracle.com/javase/7/docs/api/java/lang/Runtime.html#exec(java.lang.String[])
      *
      * Please first of all call [connect] method to establish a connection
      */
@@ -48,7 +48,7 @@ object AdbTerminal {
     /**
      * Allows more control over how arguments are parsed. Each element in the [arguments] list
      * is used as is without tokenizing.
-     * Refer to the Runtime::exec(String[] cmdarray)
+     * Refer to the https://docs.oracle.com/javase/7/docs/api/java/lang/Runtime.html#exec(java.lang.String[])
      *
      * Please first of all call [connect] method to establish a connection
      */

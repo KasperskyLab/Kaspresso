@@ -55,7 +55,7 @@ fun test() =
 }
 ```
 This method passes each command to the java runtime which tokenizes it by whitespaces. It could be not ideal. It can't be used for the commands with
-the whitespaces in their arguments (e.g. `adb pull "path/with whitespace/file"`) and it doesn't allow piping (e.g. `cat $BUILD_DIR/report.txt | grep filte > filtered.txt`).
+the whitespaces in their arguments (e.g. `adb pull "/sdcard/Documents/path_with whitespace to/file.txt"`) and it doesn't allow piping (e.g. `cat $BUILD_DIR/report.txt | grep filte > filtered.txt`).
 That's why there's a second AdbServer methods signature type.
 
 It executes a single command and allows you to pass a list of arguments. It doesn't tokenize your command or arguments, they are used "as is".

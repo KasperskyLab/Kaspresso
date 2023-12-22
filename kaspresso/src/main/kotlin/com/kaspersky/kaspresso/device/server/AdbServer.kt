@@ -1,5 +1,7 @@
 package com.kaspersky.kaspresso.device.server
 
+import android.annotation.SuppressLint
+
 /**
  * This is a comfortable wrapper to work with AdbServer repository.
  *
@@ -20,12 +22,14 @@ interface AdbServer {
      *
      * Required Permissions: INTERNET.
      *
+     * @see <a href="https://github.com/KasperskyLab/Kaspresso/blob/master/docs/Wiki/Executing_adb_commands.en.md">AdbServer documentation</a>
      * @param commands commands to execute.
      * @throws AdbServerException if a result status of any command in @param commands is Failed
      * @return list of answers of commands' execution
      */
+    @SuppressLint("SdCardPath")
     @Deprecated("This method doesn't work for the commands with the complex arguments containing " +
-            "whitespaces (e.g. 'adb pull \"path/with whitespace/file\") and doesn't allow commands piping like" +
+            "whitespaces (e.g. 'adb pull \"/sdcard/Documents/path_with whitespace to/file.txt\") and doesn't allow commands piping like" +
             "adbServer.performCmd(\"bash\", listOf(\"-c\", \"adb shell dumpsys deviceidle | grep mForceIdle\"))" +
             "which the AdbServer.performCmd(String, List<String>) does. " +
             "For more details, please check out https://github.com/KasperskyLab/Kaspresso/blob/master/docs/Wiki/Executing_adb_commands.en.md",
@@ -41,6 +45,7 @@ interface AdbServer {
      *
      * Required Permissions: INTERNET.
      *
+     * @see <a href="https://github.com/KasperskyLab/Kaspresso/blob/master/docs/Wiki/Executing_adb_commands.en.md">AdbServer documentation</a>
      * @param commands commands to execute.
      * @throws AdbServerException if a result status of any command in @param commands is Failed
      * @return list of answers of commands' execution
@@ -53,14 +58,16 @@ interface AdbServer {
      *
      * Required Permissions: INTERNET.
      *
+     * @see <a href="https://github.com/KasperskyLab/Kaspresso/blob/master/docs/Wiki/Executing_adb_commands.en.md">AdbServer documentation</a>
      * @param commands commands to execute.
      * @throws AdbServerException if a result status of any command in @param commands is Failed
      * @return list of answers of commands' execution
      */
+    @SuppressLint("SdCardPath")
     @Deprecated("This method doesn't work for the commands with the complex arguments containing " +
-            "whitespaces (e.g. 'adb pull \"path/with whitespace/file\") and doesn't allow commands piping like" +
+            "whitespaces (e.g. 'adb pull \"/sdcard/Documents/path_with whitespace to/file.txt\") and doesn't allow commands piping like" +
             "adbServer.performCmd(\"bash\", listOf(\"-c\", \"adb shell dumpsys deviceidle | grep mForceIdle\"))" +
-            "which the AdbServer.performCmd(String, List<String>) does " +
+            "which the AdbServer.performAdb(String, List<String>) does " +
             "For more details, please check out https://github.com/KasperskyLab/Kaspresso/blob/master/docs/Wiki/Executing_adb_commands.en.md",
         ReplaceWith("adbServer.performAdb(*commands, emptyList())")
     )
@@ -74,6 +81,7 @@ interface AdbServer {
      *
      * Required Permissions: INTERNET.
      *
+     * @see <a href="https://github.com/KasperskyLab/Kaspresso/blob/master/docs/Wiki/Executing_adb_commands.en.md">AdbServer documentation</a>
      * @param commands commands to execute.
      * @throws AdbServerException if a result status of any command in @param commands is Failed
      * @return list of answers of commands' execution
@@ -86,14 +94,16 @@ interface AdbServer {
      *
      * Required Permissions: INTERNET.
      *
+     * @see <a href="https://github.com/KasperskyLab/Kaspresso/blob/master/docs/Wiki/Executing_adb_commands.en.md">AdbServer documentation</a>
      * @param commands commands to execute.
      * @throws AdbServerException if a result status of any command in @param commands is Failed
      * @return list of answers of commands' execution
      */
+    @SuppressLint("SdCardPath")
     @Deprecated("This method doesn't work for the commands with the complex arguments containing " +
-            "whitespaces (e.g. 'adb pull \"path/with whitespace/file\") and doesn't allow commands piping like" +
+            "whitespaces (e.g. 'adb pull \"/sdcard/Documents/path_with whitespace to/file.txt\") and doesn't allow commands piping like" +
             "adbServer.performCmd(\"bash\", listOf(\"-c\", \"adb shell dumpsys deviceidle | grep mForceIdle\"))" +
-            "which the AdbServer.performCmd(String, List<String>) does " +
+            "which the AdbServer.performShell(String, List<String>) does " +
             "For more details, please check out https://github.com/KasperskyLab/Kaspresso/blob/master/docs/Wiki/Executing_adb_commands.en.md",
         ReplaceWith("adbServer.performShell(*commands, emptyList())")
     )
@@ -107,6 +117,7 @@ interface AdbServer {
      *
      * Required Permissions: INTERNET.
      *
+     * @see <a href="https://github.com/KasperskyLab/Kaspresso/blob/master/docs/Wiki/Executing_adb_commands.en.md">AdbServer documentation</a>
      * @param commands commands to execute.
      * @throws AdbServerException if a result status of any command in @param commands is Failed
      * @return list of answers of commands' execution
