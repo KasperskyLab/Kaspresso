@@ -19,12 +19,16 @@ data class RecyclerView(
 ) : BaseView {
 
     val childClassNames = List(childView.size) { if (it == 0) "RecyclerViewItem" else "RecyclerViewItem$it" }
-    private val AMOUNT_OF_TABS = 7
+
     override fun toKaspressoExpression(): String {
         return """val ${resourceId.toCamelCase()} = KRecyclerView(
         builder = { withId(R.id.$resourceId) },
         itemTypeBuilder = { ${childClassNames.joinToString(separator = ",\n" + "\t".repeat(AMOUNT_OF_TABS)) { "itemType(::$it)" }} },
     )"""
+    }
+
+    companion object {
+        private const val AMOUNT_OF_TABS = 7
     }
 }
 
