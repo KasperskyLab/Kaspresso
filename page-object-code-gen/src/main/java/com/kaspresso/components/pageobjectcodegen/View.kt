@@ -13,13 +13,18 @@ data class View(
 
 data class RecyclerView(
     override val resourceId: String,
-    override val viewType: String = "RecyclerView",
+    override val viewType: String,
     override val packages: String,
-    val childResourceId: Map<String, String>,
+    val childView: Set<List<BaseView>>,
 ) : BaseView {
 
+    val childClassNames = List(childView.size) { if (it == 0) "RecyclerViewItem" else "RecyclerViewItem$it" }
+
     override fun toKaspressoExpression(): String {
-        return ""
+        return """val ${resourceId.toCamelCase()} = KRecyclerView(
+        builder = { withId(R.id.$resourceId) },
+        itemTypeBuilder = { ${childClassNames.joinToString(separator = ",\n" + "\t".repeat(7)) { "itemType(::$it)" }} },
+    )"""
     }
 }
 

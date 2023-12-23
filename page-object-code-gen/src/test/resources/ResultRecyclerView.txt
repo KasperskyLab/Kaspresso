@@ -2,6 +2,9 @@ package com.kaspresso.components.pageobjectcodegen
 
 import com.kms.free.R
 import com.screen.common.KScreen
+import io.guthub.kakaocup.kakao.image.KImageView
+import io.guthub.kakaocup.kakao.recycler.KRecyclerItem
+import io.guthub.kakaocup.kakao.recycler.KRecyclerView
 import io.guthub.kakaocup.kakao.text.KButton
 import io.guthub.kakaocup.kakao.text.KTextView
 
@@ -12,7 +15,18 @@ object TestClass2 : KScreen<TestClass2>() {
 
     val dialogTitle = KTextView { withId(R.id.dialog_title) }
     val settingsText = KTextView { withId(R.id.settings_text) }
+    val choicesList = KRecyclerView(
+        builder = { withId(R.id.choices_list) },
+        itemTypeBuilder = { itemType(::RecyclerViewItem) },
+    )
     val cancelButton = KButton { withId(R.id.cancel_button) }
+
+    class RecyclerViewItem(matcher: Matcher<View>) : KRecyclerItem<RecyclerViewItem>(matcher) {
+
+        val icon = KImageView { withId(R.id.icon) }
+        val title = KTextView { withId(R.id.title) }
+        val subtitle = KTextView { withId(R.id.subtitle) }
+    }
 
     override fun BaseTestContext.waitForScreen() {
         TODO("Need To Implement")

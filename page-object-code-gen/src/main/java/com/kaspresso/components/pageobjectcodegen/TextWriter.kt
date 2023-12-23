@@ -11,7 +11,8 @@ class TextWriter(private val indentation: Int = 0) {
         append(" ".repeat(indentation), 0)
     }
 
-    fun append(text: String, countOfLinesAfterText: Int = 1): TextWriter = apply {
+    fun append(text: String, countOfLinesAfterText: Int = 1, countOfLinesBeforeText: Int = 0): TextWriter = apply {
+        nextLine(countOfLinesBeforeText)
         line.append(text)
         nextLine(countOfLinesAfterText)
     }
@@ -47,7 +48,7 @@ class TextWriter(private val indentation: Int = 0) {
         return lines.joinToString("\n")
     }
 
-    fun codeBlock(header: String, countOfLinesAfterBegin: Int = 2, countOfLinesAfterEnd: Int = 1, block: TextWriter.() -> Unit) {
+    fun codeBlock(header: String, countOfLinesAfterBegin: Int = 2, countOfLinesAfterEnd: Int = 0, block: TextWriter.() -> Unit) {
         append("$header {", countOfLinesAfterBegin)
         with(withIncreasedIndentation()) {
             block()

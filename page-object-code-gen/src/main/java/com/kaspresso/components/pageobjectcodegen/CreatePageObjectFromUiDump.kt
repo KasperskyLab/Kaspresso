@@ -1,6 +1,6 @@
 package com.kaspresso.components.pageobjectcodegen
 
-import org.w3c.dom.Document
+import org.w3c.dom.Node
 import java.io.File
 import java.nio.charset.Charset
 import javax.xml.parsers.DocumentBuilderFactory
@@ -47,10 +47,14 @@ fun main(vararg args: String) {
     }
 
     if (!File(outputFilePath).exists() && outputFilePath.isNotEmpty()) {
-        File(outputFilePath).mkdir()
+        File(outputFilePath).mkdirs()
     }
 
-    outputFilePath = args[2] + "/$className.kt"
+    outputFilePath = if (outputFilePath.isNotEmpty()) {
+        "$outputFilePath/$className.kt"
+    } else {
+        "$className.kt"
+    }
 
     val filePackage = outputFilePath.findPackage()
 
@@ -58,34 +62,60 @@ fun main(vararg args: String) {
     val documentBuilder = documentBuilderFactory.newDocumentBuilder()
     val doc = documentBuilder.parse(inputFilePath)
 
-    val screenElements: List<BaseView> = findAllViewInDump(doc)
+    val screenElements: List<BaseView> = findAllViewInDump(doc.firstChild.firstChild)
+    print(screenElements)
 
     PageObjectGenerator(screenElements, filePackage, className).writeToFile(outputFilePath)
 }
 
-fun findAllViewInDump(document: Document): List<BaseView> {
-    val collectableElements = listOf("android.widget.Button", "android.widget.TextView", "android.widget.ImageView")
-    val screenElements: MutableList<BaseView> = mutableListOf()
-    val bookNodeList = document.getElementsByTagName("node")
-
-    for (i in 0 until bookNodeList.length) {
-        val bookNodeAttr = bookNodeList.item(i).attributes
-        if (bookNodeAttr.getNamedItem("class").nodeValue in collectableElements) {
-            val elem = View(
-                bookNodeAttr.getNamedItem("resource-id").nodeValue.substringAfterLast("/"),
-                bookNodeAttr.getNamedItem("class").nodeValue.substringAfterLast("."),
-                bookNodeAttr.getNamedItem("package").nodeValue,
-            )
-            screenElements.add(elem)
+fun findAllViewInDump(root: Node, goToSiblings: Boolean = true): MutableList<BaseView> {
+    val result = mutableListOf<BaseView>()
+    if (root.nodeName == "node") {
+        if (root.attributes.getNamedItem("class").nodeValue in collectableElements) {
+            result.add(getViewFromNode(root))
+        }
+        if (root.attributes.getNamedItem("class").nodeValue in elementsWithChild) {
+            val res = mutableSetOf<List<BaseView>>()
+            val children = root.childNodes
+            for (i in 0 until children.length) {
+                if (children.item(i).nodeName == "node") {
+                    res.add(findAllViewInDump(children.item(i), false))
+                }
+            }
+            result.add(getViewWithChildrenFromNode(root, res))
+        }
+        if (root.hasChildNodes() && root.attributes.getNamedItem("class").nodeValue !in elementsWithChild) {
+            result.addAll(findAllViewInDump(root.firstChild))
         }
     }
+    if (root.nextSibling != null && goToSiblings) {
+        result.addAll(findAllViewInDump(root.nextSibling))
+    }
+    return result
+}
 
-    return screenElements
+fun getViewWithChildrenFromNode(node: Node, childViews: Set<List<BaseView>>): RecyclerView {
+    val attr = node.attributes
+    return RecyclerView(
+        attr.getNamedItem("resource-id").nodeValue.substringAfterLast("/"),
+        attr.getNamedItem("class").nodeValue.substringAfterLast("."),
+        attr.getNamedItem("package").nodeValue,
+        childViews,
+    )
+}
+
+fun getViewFromNode(node: Node): View {
+    val attr = node.attributes
+    return View(
+        attr.getNamedItem("resource-id").nodeValue.substringAfterLast("/"),
+        attr.getNamedItem("class").nodeValue.substringAfterLast("."),
+        attr.getNamedItem("package").nodeValue,
+    )
 }
 
 fun String.findPackage(): String {
     return split("/").toMutableList()
-        .dropWhile { it != "com" }.joinToString(separator = ".")
+        .dropWhile { it != "com" }.dropLast(1).joinToString(separator = ".")
 }
 
 fun Generator.writeToFile(filePath: String) {
@@ -99,3 +129,6 @@ fun Generator.writeToFile(filePath: String) {
         printWriter.close()
     }
 }
+
+val collectableElements = listOf("android.widget.Button", "android.widget.TextView", "android.widget.ImageView")
+val elementsWithChild = listOf("androidx.recyclerview.widget.RecyclerView")
