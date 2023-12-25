@@ -7,11 +7,8 @@ import kotlinx.cli.ArgType
 import kotlinx.cli.default
 import kotlinx.cli.delimiter
 import java.lang.management.ManagementFactory
-import java.nio.file.Path
 
 private const val DESKTOP = "Desktop-"
-private const val ERROR_EXIT_CODE = -1
-
 // It is assumed that adb is preinstall and available by "adb" keyword
 private const val DEFAULT_ADB_PATH = "adb"
 
@@ -54,16 +51,14 @@ internal fun main(args: Array<String>) {
     desktopLogger.i("Desktop started with arguments: emulators=$emulators, adbServerPort=$port, adbPath=$adbPath")
 
     val cmdCommandPerformer = CmdCommandPerformer(desktopName)
-    val adbCommandPerformer = AdbCommandPerformer(Path.of(adbPath), cmdCommandPerformer)
     val desktop = Desktop(
         cmdCommandPerformer = cmdCommandPerformer,
-        adbCommandPerformer = adbCommandPerformer,
         presetEmulators = emulators,
         adbServerPort = port,
         logger = desktopLogger,
         adbPath = adbPath
     )
-    desktop.startDevicesObservingSync()
+    desktop.startDevicesObserving()
 }
 
 private fun getDesktopName(): String {

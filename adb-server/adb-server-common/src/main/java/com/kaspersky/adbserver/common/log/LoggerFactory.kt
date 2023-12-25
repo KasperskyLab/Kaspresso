@@ -1,7 +1,6 @@
 package com.kaspersky.adbserver.common.log
 
 import com.kaspersky.adbserver.common.log.filterlog.FullLoggerOptimiser
-import com.kaspersky.adbserver.common.log.fulllogger.FullLogger
 import com.kaspersky.adbserver.common.log.fulllogger.FullLoggerSystemImpl
 import com.kaspersky.adbserver.common.log.logger.DesktopLogger
 import com.kaspersky.adbserver.common.log.logger.LogLevel
@@ -13,12 +12,8 @@ import com.kaspersky.adbserver.common.log.logger.LoggerImpl
  */
 object LoggerFactory {
 
-    fun getDesktopLogger(
-        logLevel: LogLevel,
-        desktopName: String,
-        fullLogger: FullLogger = FullLoggerSystemImpl(logLevel, desktopName, null)
-    ): DesktopLogger {
-        val logger = getCommonLogger(logLevel, desktopName, fullLogger = fullLogger)
+    fun getDesktopLogger(logLevel: LogLevel, desktopName: String): DesktopLogger {
+        val logger = getCommonLogger(logLevel, desktopName)
         return DesktopLogger(logger, logLevel, desktopName)
     }
 
@@ -31,12 +26,8 @@ object LoggerFactory {
     fun getDeviceLogger(logLevel: LogLevel): Logger =
         getCommonLogger(logLevel)
 
-    private fun getCommonLogger(
-        logLevel: LogLevel,
-        desktopName: String? = null,
-        deviceName: String? = null,
-        fullLogger: FullLogger = FullLoggerSystemImpl(logLevel, desktopName, deviceName)
-    ): Logger {
+    private fun getCommonLogger(logLevel: LogLevel, desktopName: String? = null, deviceName: String? = null): Logger {
+        val fullLogger = FullLoggerSystemImpl(logLevel, desktopName, deviceName)
         val fullLoggerWrapper =
             if (logLevel == LogLevel.DEBUG) FullLoggerOptimiser(originalFullLogger = fullLogger, generateLogs = true) else fullLogger
         return LoggerImpl(fullLoggerWrapper)
