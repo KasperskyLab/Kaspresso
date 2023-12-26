@@ -2,7 +2,7 @@ package com.kaspersky.adbserver.common.log.fulllogger
 
 import com.kaspersky.adbserver.common.log.logger.LogLevel
 
-interface FullLogger {
+internal interface FullLogger {
 
     fun log(
         logLevel: LogLevel? = null,

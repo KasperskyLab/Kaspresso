@@ -10,7 +10,6 @@ import java.lang.UnsupportedOperationException
 
 internal class CommandExecutorImpl(
     private val cmdCommandPerformer: CmdCommandPerformer,
-    private val adbCommandPerformer: AdbCommandPerformer,
     private val deviceName: String,
     private val adbServerPort: String?,
     private val logger: Logger,
@@ -21,9 +20,9 @@ internal class CommandExecutorImpl(
         return when (command) {
             is CmdCommand -> cmdCommandPerformer.perform(command.body)
             is AdbCommand -> {
-                val adbCommand = "${ adbServerPort?.let { "-P $adbServerPort " } ?: "" }-s $deviceName ${command.body}"
-                logger.d("The created adbCommand=adb $adbCommand")
-                adbCommandPerformer.perform(adbCommand)
+                val adbCommand = "$adbPath ${ adbServerPort?.let { "-P $adbServerPort " } ?: "" }-s $deviceName ${command.body}"
+                logger.d("The created adbCommand=$adbCommand")
+                cmdCommandPerformer.perform(adbCommand)
             }
             else -> throw UnsupportedOperationException("The command=$command is unsupported command")
         }

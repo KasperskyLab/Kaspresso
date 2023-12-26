@@ -1,5 +1,6 @@
 rootProject.name = "kaspresso-framework"
 
+enableFeaturePreview("VERSION_CATALOGS")
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
@@ -34,9 +35,15 @@ include(
 
     ":kaspresso",
     ":kautomator",
-    ":kaspresso-allure-support",
-    ":kaspresso-compose-support",
-    ":kaspresso-plugin",
+    ":allure-support",
+    ":compose-support",
+
+    ":samples:adbserver-sample",
+    ":samples:kaspresso-sample",
+    ":samples:kautomator-sample",
+    ":samples:kautomator-sample-app-upgrade",
+    ":samples:kaspresso-allure-support-sample",
+    ":samples:kaspresso-compose-support-sample",
 
     ":tutorial"
 )
