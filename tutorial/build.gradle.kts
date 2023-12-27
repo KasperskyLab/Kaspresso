@@ -3,6 +3,7 @@ plugins {
 }
 
 android {
+    namespace = "com.kaspersky.kaspresso.tutorial"
     defaultConfig {
         minSdk = 21
 

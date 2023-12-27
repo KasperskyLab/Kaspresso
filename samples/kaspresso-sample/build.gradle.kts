@@ -3,6 +3,7 @@ plugins {
 }
 
 android {
+    namespace = "com.kaspersky.kaspressample"
     defaultConfig {
         applicationId = "com.kaspersky.kaspressample"
         testInstrumentationRunner = "com.kaspersky.kaspresso.runner.KaspressoRunner"
