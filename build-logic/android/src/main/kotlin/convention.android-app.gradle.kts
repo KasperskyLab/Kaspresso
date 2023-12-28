@@ -29,7 +29,7 @@ android {
         viewBinding = true // for the samples
     }
 
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    kotlin {
+        jvmToolchain(JavaVersion.VERSION_17.majorVersion.toInt())
     }
 }
