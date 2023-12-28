@@ -3,7 +3,7 @@ import com.android.build.gradle.BaseExtension
 @Suppress("MagicNumber")
 configure<BaseExtension> {
 
-    compileSdkVersion(33)
+    compileSdkVersion(34)
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -16,7 +16,7 @@ configure<BaseExtension> {
     }
 
     packagingOptions {
-        resources { 
+        resources {
             merges.add("META-INF/LGPL2.1")
             merges.add("META-INF/AL2.0")
         }
