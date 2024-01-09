@@ -5,6 +5,10 @@ plugins {
     id("convention.legal-documents")
 }
 
+android {
+    namespace = "com.kaspersky.kaspresso"
+}
+
 publish {
     artifactId.set("kaspresso")
 }
