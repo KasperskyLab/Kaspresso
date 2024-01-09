@@ -1,11 +1,11 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-val kotlinLanguageVersion = "1.7"
+val kotlinLanguageVersion = "1.9"
 
 tasks.withType<KotlinCompile>().configureEach {
     kotlinOptions {
 
-        jvmTarget = JavaVersion.VERSION_1_8.toString()
+        jvmTarget = JavaVersion.VERSION_17.toString()
 
 //        TODO: fix all warnings before
 //        allWarningsAsErrors = true

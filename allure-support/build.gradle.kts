@@ -5,6 +5,10 @@ plugins {
     id("convention.legal-documents")
 }
 
+android {
+    namespace = "com.kaspersky.components.alluresupport"
+}
+
 publish {
     artifactId.set("kaspresso-allure-support")
 }
