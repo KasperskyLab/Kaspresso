@@ -73,7 +73,7 @@ dependencies {
 
 ```groovy
 dependencies {
-    androidTestImplementation 'com.kaspersky.android-components:kaspresso:1.0.1-support'
+    androidTestImplementation 'com.kaspersky.android-components:kaspresso:1.5.3'
 }
 ```
 
