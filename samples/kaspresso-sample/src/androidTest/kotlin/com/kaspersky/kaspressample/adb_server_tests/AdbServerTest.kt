@@ -26,13 +26,13 @@ class AdbServerTest : TestCase() {
 
     @Test
     fun commandWithArgumentsTest() = run {
-        adbServer.performShell("mkdir", listOf("-p", "\"/sdcard/Documents/path with whitespace/dir\""))
+        adbServer.performShell("mkdir", arguments = listOf("-p", "\"/sdcard/Documents/path with whitespace/dir\""))
         adbServer.performShell("touch", arguments = listOf("\"/sdcard/Documents/path with whitespace/dir/myfile.txt\""))
         adbServer.performShell("rm", arguments = listOf("\"/sdcard/Documents/path with whitespace/dir/myfile.txt\""))
     }
 
     @Test
     fun commandWithAnotherCommandAsArgumentsTest() = run {
-        adbServer.performCmd("sh", listOf("-c", "adb shell dumpsys deviceidle | grep mForceIdle"))
+        adbServer.performCmd("sh", arguments = listOf("-c", "adb shell dumpsys deviceidle | grep mForceIdle"))
     }
 }
