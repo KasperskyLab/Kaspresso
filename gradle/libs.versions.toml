@@ -9,9 +9,9 @@ allure = "2.4.0"
 compose = "1.5.4"
 composeCompiler = "1.5.4"
 activityCompose = "1.4.0"
-androidXTest = "1.5.0"
+androidXTest = "1.5.2"
 testOrchestrator = "1.4.2"
-lifecycle = "2.5.1"
+lifecycle = "2.6.2"
 thirdPartyReport = "0.18.956"
 
 [libraries]
@@ -29,9 +29,9 @@ kotlinCli = "org.jetbrains.kotlinx:kotlinx-cli:0.3.5"
 detektCli = { module = "io.gitlab.arturbosch.detekt:detekt-cli", version.ref = "detekt" }
 detektFormatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
 
-androidXCore = "androidx.core:core:1.9.0"
-appcompat = "androidx.appcompat:appcompat:1.6.0"
-material = "com.google.android.material:material:1.6.1"
+androidXCore = "androidx.core:core:1.12.0"
+appcompat = "androidx.appcompat:appcompat:1.6.1"
+material = "com.google.android.material:material:1.11.0"
 constraint = "androidx.constraintlayout:constraintlayout:2.1.4"
 multidex = "androidx.multidex:multidex:2.0.1"
 
@@ -45,8 +45,6 @@ kotson = "com.github.salomonbrys.kotson:kotson:2.5.0"
 
 espressoCore = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso" }
 espressoWeb = { module = "androidx.test.espresso:espresso-web", version.ref = "espresso" }
-# Workaround for https://github.com/android/android-test/issues/861
-accessibilityFramework = "com.google.android.apps.common.testing.accessibility.framework:accessibility-test-framework:4.0.0"
 uiAutomator = "androidx.test.uiautomator:uiautomator:2.2.0"
 robolectric = "org.robolectric:robolectric:4.8.2"
 kakao = { module = "io.github.kakaocup:kakao", version.ref = "kakao" }
@@ -59,11 +57,11 @@ truth = "com.google.truth:truth:1.1.3"
 androidXTestCore = { module = "androidx.test:core", version.ref = "androidXTest" }
 androidXTestRules = { module = "androidx.test:rules", version.ref = "androidXTest" }
 androidXTestRunner = { module = "androidx.test:runner", version.ref = "androidXTest" }
-androidXTestFragmentTesting = "androidx.fragment:fragment-testing:1.5.4"
+androidXTestFragmentTesting = "androidx.fragment:fragment-testing:1.6.2"
 androidXTestOrchestrator = { module = "androidx.test:orchestrator", version.ref = "testOrchestrator" }
-androidXTestExtJunit = "androidx.test.ext:junit:1.1.4"
-androidXTestExtJunitKtx = "androidx.test.ext:junit-ktx:1.1.4"
-androidXLifecycleRuntimeKtx = "androidx.lifecycle:lifecycle-runtime-ktx:2.5.1"
+androidXTestExtJunit = "androidx.test.ext:junit:1.1.5"
+androidXTestExtJunitKtx = "androidx.test.ext:junit-ktx:1.1.5"
+androidXLifecycleRuntimeKtx = "androidx.lifecycle:lifecycle-runtime-ktx:2.6.2"
 
 composeCompiler = { module = "androidx.compose.compiler:compiler", version.ref = "composeCompiler" }
 composeActivity = "androidx.activity:activity-compose:1.5.1"
@@ -82,6 +80,6 @@ allureKotlinJunit4 = { module = "io.qameta.allure:allure-kotlin-junit4", version
 allureKotlinAndroid = { module = "io.qameta.allure:allure-kotlin-android", version.ref = "allure" }
 
 [bundles]
-espresso = ["espressoCore", "espressoWeb", "accessibilityFramework"]
+espresso = ["espressoCore", "espressoWeb"]
 allure = ["allureKotlinModel", "allureKotlinCommons", "allureKotlinJunit4", "allureKotlinAndroid"]
 compose = ["composeActivity", "composeUiTooling", "composeMaterial", "composeTestManifest", "composeCompiler"]
