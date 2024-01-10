@@ -81,13 +81,19 @@ class AllureSupportCustomizeTest : TestCase(
 [**kaspresso-allure-support-sample**](https://github.com/KasperskyLab/Kaspresso/tree/master/samples/kaspresso-allure-support-sample/src/androidTest/kotlin/com/kaspersky/kaspresso/alluresupport/sample) is available to watch, to launch and to experiment with all of this staff.
 
 ## Watch result
-So you added the list of needed Allure-supporting interceptors to your Kaspresso configuration and launched the test. After the test finishes there will be **sdcard/allure-results** dir created on the device with all the files processed to be included to Allure-report.
-
+So you added the list of needed Allure-supporting interceptors to your Kaspresso configuration and launched the test. After the test finishes there will be **/data/data/(your package)/files/allure-results** dir created on the device with all the files processed to be included to Allure-report.
+If your tests are configured to clear app data with Orchestrator and you want to avoid your results directory getting cleared alongside, or you want a shorter path:
+- Add `androidTestUtil("androidx.test:orchestrator:VERSION}` to your dependencies
+- Create **resources** (not **res**) folder under **androidTest**, there create a file named **allure.properties** and put this line in the file:
+```
+allure.results.useTestStorage=true
+```
+Now your tests are saved under **/sdcard/googletest/test_outputfiles/allure-results**
 This dir should be moved from the device to the host machine which will do generate the report.
 
 For example, you can use **adb pull** command on your host for this. Let say you want to locate the data for the report at **/Users/username/Desktop/allure-results**, so you call:
 ```
-adb pull /sdcard/allure-results /Users/username/Desktop
+adb pull /sdcard/googletest/test_outputfiles/allure-results /Users/username/Desktop
 ```
 If there are few devices connected to yout host you should specify the needed device id. To watch the list of connected devices you can call:
 ```
@@ -101,7 +107,7 @@ emulator-5554	device
 ```
 Select the needed device and call:
 ```
-adb -s emulator-5554 pull /sdcard/allure-results /Users/username/Desktop
+adb -s emulator-5554 pull /sdcard/googletest/test_outputfiles/allure-results /Users/username/Desktop
 ```
 And that's it, the **allure-results** dir with all the test resources is now at **/Users/username/Desktop**.
 

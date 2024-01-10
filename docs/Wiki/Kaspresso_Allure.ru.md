@@ -81,13 +81,21 @@ class AllureSupportCustomizeTest : TestCase(
 Для просмотра, запуска и экспериментирования со всем этим функционалом вам доступен [**kaspresso-allure-support-sample**](https://github.com/KasperskyLab/Kaspresso/tree/master/samples/kaspresso-allure-support-sample/src/androidTest/kotlin/com/kaspersky/kaspresso/alluresupport/sample).
 
 ## Посмотреть результат
-Итак, вы добавили в свою конфигурацию Kaspresso список необходимых перехватчиков, поддерживающих Allure, и запустили тест. После завершения теста на устройстве будет создан каталог **sdcard/allure-results** со всеми обработанными файлами, которые будут включены в отчет Allure.
+Итак, вы добавили в свою конфигурацию Kaspresso список необходимых перехватчиков, поддерживающих Allure, и запустили тест. После завершения теста на устройстве будет создан каталог **data/data/(ваш пакет)/files/allure-results** со всеми обработанными файлами, которые будут включены в отчет Allure.
+Если в ваших тестах вы настроили очищение app data при помощи Orchestrator и не хотите, чтобы результаты тестов очищались вместе с данными приложения или просто хотите путь короче:
+
+- Добавьте `androidTestUtil("androidx.test:orchestrator:VERSION}` к вашим зависимостям
+- Создайте папку **resources** (не **res**) в папке **androidTest**, в новой папке создайте файл с названием **allure.properties** и измените его содержимое следующим образом:
+```
+allure.results.useTestStorage=true
+```
+Теперь результаты тестов будут храниться в **/sdcard/googletest/test_outputfiles/allure-results**
 
 Этот каталог следует переместить с устройства на хост-компьютер, который будет генерировать отчет.
 
 Например, вы можете использовать для этого команду **adb pull** на своем хосте. Допустим, вы хотите найти данные для отчета в **/Users/username/Desktop/allure-results**, поэтому вы вызываете:
 ```
-adb pull /sdcard/allure-results /Users/username/Desktop
+adb pull /sdcard/googletest/test_outputfiles/allure-results /Users/username/Desktop
 ```
 Если к вашему хосту подключено несколько устройств, вы должны указать нужный идентификатор устройства. Для просмотра списка подключенных устройств вы можете выполнить:
 ```
@@ -101,7 +109,7 @@ emulator-5554	device
 ```
 Выберите необходимое устройство и вызовите:
 ```
-adb -s emulator-5554 pull /sdcard/allure-results /Users/username/Desktop
+adb -s emulator-5554 pull /sdcard/googletest/test_outputfiles/allure-results /Users/username/Desktop
 ```
 Вот и все, директория **allure-results** со всеми тестовыми ресурсами теперь находится по адресу **/Users/username/Desktop**.
 
