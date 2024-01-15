@@ -8,7 +8,7 @@ import io.guthub.kakaocup.kakao.recycler.KRecyclerView
 import io.guthub.kakaocup.kakao.text.KButton
 import io.guthub.kakaocup.kakao.text.KTextView
 
-object TestClass2 : KScreen<TestClass2>() {
+object RecyclerView : KScreen<RecyclerView>() {
 
     override val layoutId: Int? = TODO("Need To Implement")
     override val viewClass: Class<*>? = TODO("Need To Implement")

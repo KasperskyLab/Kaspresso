@@ -1,5 +1,7 @@
 package com.kaspresso.components.pageobjectcodegen
 
+import com.kaspresso.components.pageobjectcodegen.SupportedViews.collectableElements
+import com.kaspresso.components.pageobjectcodegen.SupportedViews.elementsWithChild
 import org.w3c.dom.Node
 import java.io.File
 import java.nio.charset.Charset
@@ -129,6 +131,3 @@ fun Generator.writeToFile(filePath: String) {
         printWriter.close()
     }
 }
-
-val collectableElements = listOf("android.widget.Button", "android.widget.TextView", "android.widget.ImageView")
-val elementsWithChild = listOf("androidx.recyclerview.widget.RecyclerView")

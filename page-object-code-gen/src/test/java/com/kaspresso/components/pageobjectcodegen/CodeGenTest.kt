@@ -1,6 +1,5 @@
 package com.kaspresso.components.pageobjectcodegen
 
-import com.google.common.io.Resources.getResource
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -18,13 +17,13 @@ class CodeGenTest(
 
     @Test
     fun checkCodeGen() {
-        val jarFile = File(getResource("createKtfromDump.jar").toURI())
-        val inputFile = File(getResource(inputPath).toURI())
+        val jarFile = File("src/main/java/com/kaspresso/components/pageobjectcodegen/createKtfromDump.jar")
+        val inputFile = File("src/test/resources/$inputPath")
         Runtime.getRuntime().exec("java -jar $jarFile $inputFile $className $outputDirectory")
         Thread.sleep(15000)
         val actualFile = File("$outputDirectory/$className.kt")
-        val expectedFile = File(getResource("$resultFile.txt").toURI())
-        assertThat(actualFile).hasSameContentAs(expectedFile)
+        val expectedFile1 = File("src/test/resources/$resultFile.txt")
+        assertThat(actualFile).hasSameContentAs(expectedFile1)
     }
     companion object {
         @JvmStatic
@@ -32,7 +31,8 @@ class CodeGenTest(
         fun data(): Collection<Array<Any>> {
             return listOf(
                 arrayOf("source1.xml", "build/generated/res/com/kaspresso/components/pageobjectcodegen", "TestClass1", "Result1"),
-                arrayOf("source_recycler_view.xml", "build/generated/res/com/kaspresso/components/pageobjectcodegen", "TestClass2", "ResultRecyclerView"),
+                arrayOf("source_recycler_view.xml", "build/generated/res/com/kaspresso/components/pageobjectcodegen", "RecyclerView", "ResultRecyclerView"),
+                arrayOf("source2.xml", "build/generated/res/com/kaspresso/components/pageobjectcodegen", "TestClass2", "Result2"),
             )
         }
     }
