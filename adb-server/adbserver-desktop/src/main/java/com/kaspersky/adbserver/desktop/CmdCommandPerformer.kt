@@ -3,7 +3,6 @@ package com.kaspersky.adbserver.desktop
 import com.kaspersky.adbserver.common.api.CommandResult
 import com.kaspersky.adbserver.common.api.ExecutorResultStatus
 import com.kaspersky.adbserver.common.log.logger.Logger
-import java.util.Arrays
 import java.util.concurrent.TimeUnit
 
 internal class CmdCommandPerformer(
