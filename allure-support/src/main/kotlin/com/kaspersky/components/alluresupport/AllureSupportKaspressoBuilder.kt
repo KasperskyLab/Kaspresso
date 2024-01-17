@@ -28,6 +28,7 @@ import com.kaspersky.kaspresso.runner.listener.getUniqueListener
  * If a test is executing on the JVM (with Robolectric) environment then mentioned above interceptors are not including to prevent crashes.
  * Allure reports don't have any sense in non Instrumental environment.
  */
+@Deprecated("This builder doesn't support storage system restrictions", ReplaceWith("Kaspresso.Builder.withForcedAllureSupport()"))
 fun Kaspresso.Builder.Companion.withAllureSupport(
     customize: Kaspresso.Builder.() -> Unit = {}
 ): Kaspresso.Builder = simple(customize).addAllureSupport()
@@ -62,6 +63,7 @@ fun Kaspresso.Builder.addAllureSupport(): Kaspresso.Builder = apply {
  * Forces file providers needed for fixed allure support
  */
 fun Kaspresso.Builder.Companion.withForcedAllureSupport(
+    shouldRecordVideo: Boolean = true,
     customize: Kaspresso.Builder.() -> Unit = {}
 ): Kaspresso.Builder = simple {
     if (!isAndroidRuntime) {
@@ -71,7 +73,9 @@ fun Kaspresso.Builder.Companion.withForcedAllureSupport(
     val instrumentalDependencyProvider = instrumentalDependencyProviderFactory.getComponentProvider<Kaspresso>(instrumentation)
     forceAllureSupportFileProviders(instrumentalDependencyProvider)
     addRunListenersIfNeeded(instrumentalDependencyProvider)
-}.apply(::postInitAllure)
+}.apply {
+    postInitAllure(shouldRecordVideo, builder = this)
+}
 
 private fun Kaspresso.Builder.forceAllureSupportFileProviders(provider: InstrumentalDependencyProvider) {
     resourcesDirNameProvider = DefaultResourcesDirNameProvider()
@@ -107,12 +111,10 @@ private fun Kaspresso.Builder.addRunListenersIfNeeded(provider: InstrumentalDepe
     }
 }
 
-private fun postInitAllure(builder: Kaspresso.Builder): Unit = with(builder) {
+private fun postInitAllure(shouldRecordVideo: Boolean, builder: Kaspresso.Builder): Unit = with(builder) {
     if (!isAndroidRuntime) {
         return@with
     }
-    val provider = instrumentalDependencyProviderFactory.getComponentProvider<Kaspresso>(instrumentation)
-    val allureResourcesFilesProvider = resourceFilesProvider as AllureResourceFilesProvider
     stepWatcherInterceptors.addAll(
         listOf(
             ScreenshotStepInterceptor(screenshots),
@@ -124,7 +126,13 @@ private fun postInitAllure(builder: Kaspresso.Builder): Unit = with(builder) {
             DumpLogcatTestInterceptor(logcatDumper),
             ScreenshotTestInterceptor(screenshots),
             DumpViewsTestInterceptor(viewHierarchyDumper),
-            HackyVideoRecordingTestInterceptor(videos, allureResourcesFilesProvider, provider.runNotifier.getUniqueListener())
         )
     )
+    if (shouldRecordVideo) {
+        val provider = instrumentalDependencyProviderFactory.getComponentProvider<Kaspresso>(instrumentation)
+        val allureResourcesFilesProvider = resourceFilesProvider as AllureResourceFilesProvider
+        testRunWatcherInterceptors.add(
+            HackyVideoRecordingTestInterceptor(videos, allureResourcesFilesProvider, provider.runNotifier.getUniqueListener())
+        )
+    }
 }

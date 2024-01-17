@@ -35,16 +35,17 @@ class AllureResultsHack(
     }
 
     override fun testRunFinished(result: Result) {
-        if (videosToInject.isEmpty()) {
-            return
-        }
         val allureResultsInjector = AllureResultInjector(
             parser = AllureResultJsonParser(),
             uiDevice = uiDevice,
             resultsDir = allureResultsTargetDir
         )
+
         allureResultsSourceDir.copyRecursively(allureResultsTargetDir)
-        allureResultsInjector.injectVideos(allureResultsTargetDir, videosToInject)
+        if (videosToInject.isNotEmpty()) {
+            allureResultsInjector.injectVideos(allureResultsTargetDir, videosToInject)
+        }
+
         allureResultsSourceDir.deleteRecursively()
         stubVideosDir.deleteRecursively()
     }

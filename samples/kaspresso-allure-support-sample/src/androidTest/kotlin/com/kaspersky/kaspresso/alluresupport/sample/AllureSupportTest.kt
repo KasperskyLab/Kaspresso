@@ -2,6 +2,7 @@ package com.kaspersky.kaspresso.alluresupport.sample
 
 import androidx.test.ext.junit.rules.activityScenarioRule
 import com.kaspersky.components.alluresupport.withAllureSupport
+import com.kaspersky.components.alluresupport.withForcedAllureSupport
 import com.kaspersky.kaspresso.alluresupport.sample.screen.MainScreen
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
@@ -12,7 +13,7 @@ import org.junit.Test
  * Use [withAllureSupport] function to add the all available allure interceptors.
  */
 class AllureSupportTest : TestCase(
-    kaspressoBuilder = Kaspresso.Builder.withAllureSupport()
+    kaspressoBuilder = Kaspresso.Builder.withForcedAllureSupport()
 ) {
 
     @get:Rule
