@@ -1,3 +1,4 @@
+
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 val kotlinLanguageVersion = "1.9"
@@ -5,7 +6,7 @@ val kotlinLanguageVersion = "1.9"
 tasks.withType<KotlinCompile>().configureEach {
     kotlinOptions {
 
-        jvmTarget = JavaVersion.VERSION_17.toString()
+        jvmTarget = JavaVersion.VERSION_11.toString()
 
 //        TODO: fix all warnings before
 //        allWarningsAsErrors = true
@@ -17,4 +18,9 @@ tasks.withType<KotlinCompile>().configureEach {
                 "-opt-in=kotlin.RequiresOptIn" +
                 "-progressive"
     }
+}
+
+tasks.withType<JavaCompile>().configureEach {
+    sourceCompatibility = JavaVersion.VERSION_11.toString()
+    targetCompatibility = JavaVersion.VERSION_11.toString()
 }

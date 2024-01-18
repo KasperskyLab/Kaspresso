@@ -2,6 +2,7 @@ package com.kaspersky.kaspressample.adb_server_tests
 
 import android.Manifest
 import androidx.test.ext.junit.rules.activityScenarioRule
+import androidx.test.filters.SdkSuppress
 import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
@@ -31,6 +32,7 @@ class AdbServerTest : TestCase() {
         adbServer.performShell("rm", arguments = listOf("\"/sdcard/Documents/path with whitespace/dir/myfile.txt\""))
     }
 
+    @SdkSuppress(minSdkVersion = 23)
     @Test
     fun commandWithAnotherCommandAsArgumentsTest() = run {
         adbServer.performCmd("sh", arguments = listOf("-c", "adb shell dumpsys deviceidle | grep mForceIdle"))
