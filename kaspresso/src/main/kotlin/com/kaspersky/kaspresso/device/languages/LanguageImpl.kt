@@ -49,6 +49,24 @@ class LanguageImpl(
         ConfigurationCompat.getLocales(instrumentation.targetContext.resources.configuration).get(0)
 
     private fun applyCurrentLocaleToContext(locale: Locale) {
+        // For issue DocLocScreenshotTestCase does not change locale to sr-Latn-RS: https://github.com/KasperskyLab/Kaspresso/issues/389
+        // added hotfix. For next releases we will find more correct solution.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            if (locale.country.equals("Latn", true) &&
+                locale.language.equals("sr", true)
+            ) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    val localeManager = instrumentation.targetContext.getSystemService(Context.LOCALE_SERVICE) as LocaleManager
+                    localeManager.applicationLocales = LocaleList.forLanguageTags(Locale.Builder().setLanguage("sr").setScript("Latn").build().toLanguageTag())
+                } else {
+                    Handler(instrumentation.targetContext.mainLooper).post {
+                        AppCompatDelegate.setApplicationLocales(LocaleListCompat.create(Locale.Builder().setLanguage("sr").setScript("Latn").build()))
+                    }
+                }
+                return
+            }
+        }
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             val localeManager = instrumentation.targetContext.getSystemService(Context.LOCALE_SERVICE) as LocaleManager
             localeManager.applicationLocales = LocaleList.forLanguageTags(locale.toLanguageTag())
