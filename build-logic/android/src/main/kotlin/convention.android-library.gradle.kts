@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     id("com.android.library")
     id("convention.kotlin-base")
@@ -16,5 +18,16 @@ android {
         if (name != "release") {
             ignore = true
         }
+    }
+
+    compileOptions {
+        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_17
+    }
+}
+
+tasks.withType<KotlinCompile>().configureEach {
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_17.toString()
     }
 }

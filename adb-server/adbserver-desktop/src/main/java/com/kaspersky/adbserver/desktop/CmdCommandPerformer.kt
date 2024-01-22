@@ -2,10 +2,12 @@ package com.kaspersky.adbserver.desktop
 
 import com.kaspersky.adbserver.common.api.CommandResult
 import com.kaspersky.adbserver.common.api.ExecutorResultStatus
+import com.kaspersky.adbserver.common.log.logger.Logger
 import java.util.concurrent.TimeUnit
 
 internal class CmdCommandPerformer(
-    private val desktopName: String
+    private val desktopName: String,
+    private val logger: Logger,
 ) {
 
     companion object {
@@ -15,9 +17,24 @@ internal class CmdCommandPerformer(
     /**
      * Be aware it's a synchronous method
      */
-    fun perform(command: String): CommandResult {
+    fun perform(command: String, arguments: List<String> = emptyList()): CommandResult {
         val serviceInfo = "The command was executed on desktop=$desktopName"
-        val process = Runtime.getRuntime().exec(command)
+
+        val process = try {
+            if (arguments.isEmpty()) {
+                Runtime.getRuntime().exec(command)
+            } else {
+                val fullCommand = buildList {
+                    add(command)
+                    addAll(arguments)
+                }.toTypedArray()
+                Runtime.getRuntime().exec(fullCommand)
+            }
+        } catch (ex: Throwable) {
+            logger.e(ex.stackTraceToString())
+            return CommandResult(ExecutorResultStatus.FAILURE, "failed to start process. See exception in AdbServer logs")
+        }
+
         try {
             if (process.waitFor(EXECUTION_TIMEOUT_SECONDS, TimeUnit.SECONDS)) {
                 val exitCode = process.exitValue()
@@ -43,7 +60,7 @@ internal class CmdCommandPerformer(
                 serviceInfo = serviceInfo
             )
         } finally {
-            process.destroy()
+            process?.destroy()
         }
     }
 }
