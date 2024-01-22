@@ -2,7 +2,7 @@
 kotlin = "1.9.20"
 detekt = "1.21.0"
 espresso = "3.5.1"
-kakao = "3.4.1"
+kakao = "3.5.1"
 kakaoCompose = "0.2.3"
 kakaoExtClicks = "1.0.0"
 allure = "2.4.0"
