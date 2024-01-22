@@ -3,6 +3,7 @@ plugins {
 }
 
 android {
+    namespace = "com.kaspersky.kaspressample"
     defaultConfig {
         applicationId = "com.kaspersky.kaspressample"
         testInstrumentationRunner = "com.kaspersky.kaspresso.runner.KaspressoRunner"
@@ -63,9 +64,7 @@ dependencies {
     testImplementation(libs.androidXTestExtJunit)
     testImplementation(libs.robolectric)
 
-    debugImplementation(libs.androidXTestFragmentTesting) {
-        isTransitive = false // Disable transitive dependencies here to avoid runtime crash caused by presence of different versions of the same libs
-    }
+    debugImplementation(libs.androidXTestFragmentTesting)
 
     androidTestUtil(libs.androidXTestOrchestrator)
 }
