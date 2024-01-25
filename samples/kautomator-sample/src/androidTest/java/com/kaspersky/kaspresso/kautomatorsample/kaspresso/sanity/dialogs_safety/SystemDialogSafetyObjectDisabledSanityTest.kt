@@ -3,6 +3,7 @@ package com.kaspersky.kaspresso.kautomatorsample.kaspresso.sanity.dialogs_safety
 import android.os.Build
 import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.uiautomator.StaleObjectException
+import com.kaspersky.components.kautomator.intercept.exception.UnfoundedUiObjectException
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.kautomatorsample.screen.SystemDialogsScreen
 import com.kaspersky.kaspresso.kautomatorsample.systemdialogs.SystemDialogsActivity
@@ -43,13 +44,21 @@ class SystemDialogSafetyObjectDisabledSanityTest : TestCase(
             SystemDialogsScreen {
                 btn2 {
                     flakySafely(3000) {
-                        Assert.assertThrows(null, StaleObjectException::class.java) {
-                            isDisplayed()
-                            click()
+                        Assert.assertThrows(SampleException::class.java) {
+                            try {
+                                isDisplayed()
+                                click()
+                            } catch (ex: StaleObjectException) {
+                                throw SampleException()
+                            } catch (ex: UnfoundedUiObjectException) {
+                                throw SampleException()
+                            }
                         }
                     }
                 }
             }
         }
     }
+
+    class SampleException : Throwable()
 }
