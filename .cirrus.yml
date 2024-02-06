@@ -107,7 +107,7 @@ check_android_33_task:
     -no-snapshot
     -no-window
   assemble_instrumented_tests_script:
-    ./gradlew -PCI=true assembleDebugAndroidTest
+    cd samples && ./gradlew -PCI=true assembleDebugAndroidTest
   wait_for_avd_script:
     adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 3; done; input keyevent 82'
   configure_avd_script: |
@@ -120,7 +120,7 @@ check_android_33_task:
   start_logcat_background_script:
     adb logcat > log.log
   run_tests_script:
-    ./gradlew -PCI=true connectedDebugAndroidTest
+    cd samples && ./gradlew -PCI=true connectedDebugAndroidTest
   always:
     stop_logcat_script: |
       if [[ $(adb devices | awk 'NR>1 {print $1}') =~ "emulator.*" ]]; then
@@ -175,7 +175,7 @@ check_android_21_task:
     -no-snapshot
     -no-window
   assemble_instrumented_tests_script:
-    ./gradlew -PCI=true assembleDebugAndroidTest
+    cd samples && ./gradlew -PCI=true assembleDebugAndroidTest
   wait_for_avd_script:
     adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 3; done; input keyevent 82'
   configure_avd_script: |
@@ -187,7 +187,7 @@ check_android_21_task:
   start_logcat_background_script:
     adb logcat > log.log
   run_tests_script:
-    ./gradlew -PCI=true connectedDebugAndroidTest
+    cd samples && ./gradlew -PCI=true connectedDebugAndroidTest
   always:
     stop_logcat_script: |
       if [[ $(adb devices | awk 'NR>1 {print $1}') =~ "emulator.*" ]]; then
