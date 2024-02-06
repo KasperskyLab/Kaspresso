@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit
 /**
  * @param workingDir - working directory used to execute any cmd command if null when use default process working directory
  */
-internal class CmdCommandPerformer(
+class CmdCommandPerformer(
     private val desktopName: String,
     private val logger: Logger,
     private val workingDir: Path? = null
