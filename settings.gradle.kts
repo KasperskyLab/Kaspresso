@@ -34,15 +34,9 @@ include(
 
     ":kaspresso",
     ":kautomator",
-    ":allure-support",
-    ":compose-support",
-
-    ":samples:adbserver-sample",
-    ":samples:kaspresso-sample",
-    ":samples:kautomator-sample",
-    ":samples:kautomator-sample-app-upgrade",
-    ":samples:kaspresso-allure-support-sample",
-    ":samples:kaspresso-compose-support-sample",
+    ":kaspresso-allure-support",
+    ":kaspresso-compose-support",
+    ":kaspresso-plugin",
 
     ":tutorial"
 )

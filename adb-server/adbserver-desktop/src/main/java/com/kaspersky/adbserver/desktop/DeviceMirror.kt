@@ -22,6 +22,7 @@ internal class DeviceMirror private constructor(
 
         fun create(
             cmdCommandPerformer: CmdCommandPerformer,
+            adbCommandPerformer: AdbCommandPerformer,
             deviceName: String,
             adbServerPort: String?,
             logger: Logger,
@@ -31,6 +32,7 @@ internal class DeviceMirror private constructor(
                 DesktopDeviceSocketConnectionFactory.getSockets(DesktopDeviceSocketConnectionType.FORWARD)
             val commandExecutor = CommandExecutorImpl(
                 cmdCommandPerformer,
+                adbCommandPerformer,
                 deviceName,
                 adbServerPort,
                 logger,

@@ -10,6 +10,7 @@ import java.lang.UnsupportedOperationException
 
 internal class CommandExecutorImpl(
     private val cmdCommandPerformer: CmdCommandPerformer,
+    private val adbCommandPerformer: AdbCommandPerformer,
     private val deviceName: String,
     private val adbServerPort: String?,
     private val logger: Logger,
@@ -25,7 +26,7 @@ internal class CommandExecutorImpl(
                 val adbArguments: List<String>
 
                 if (command.arguments.isEmpty()) {
-                    adbCommand = "$adbPath ${adbServerPort?.let { "-P $adbServerPort " } ?: ""}-s $deviceName ${command.command}"
+                    adbCommand = "${adbServerPort?.let { "-P $adbServerPort " } ?: ""}-s $deviceName ${command.command}"
                     adbArguments = emptyList()
                 } else {
                     adbCommand = adbPath

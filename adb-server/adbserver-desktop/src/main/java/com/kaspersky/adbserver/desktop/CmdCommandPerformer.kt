@@ -3,11 +3,17 @@ package com.kaspersky.adbserver.desktop
 import com.kaspersky.adbserver.common.api.CommandResult
 import com.kaspersky.adbserver.common.api.ExecutorResultStatus
 import com.kaspersky.adbserver.common.log.logger.Logger
+import java.io.File
+import java.nio.file.Path
 import java.util.concurrent.TimeUnit
 
-internal class CmdCommandPerformer(
+/**
+ * @param workingDir - working directory used to execute any cmd command if null when use default process working directory
+ */
+class CmdCommandPerformer(
     private val desktopName: String,
     private val logger: Logger,
+    private val workingDir: Path? = null
 ) {
 
     companion object {
@@ -19,16 +25,17 @@ internal class CmdCommandPerformer(
      */
     fun perform(command: String, arguments: List<String> = emptyList()): CommandResult {
         val serviceInfo = "The command was executed on desktop=$desktopName"
+        val workingDir = workingDir?.toFile() ?: File(".")
 
         val process = try {
             if (arguments.isEmpty()) {
-                Runtime.getRuntime().exec(command)
+                Runtime.getRuntime().exec(command, emptyArray(), workingDir)
             } else {
                 val fullCommand = buildList {
                     add(command)
                     addAll(arguments)
                 }.toTypedArray()
-                Runtime.getRuntime().exec(fullCommand)
+                Runtime.getRuntime().exec(fullCommand, emptyArray(), workingDir)
             }
         } catch (ex: Throwable) {
             logger.e(ex.stackTraceToString())
