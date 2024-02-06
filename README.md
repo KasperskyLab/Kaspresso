@@ -62,7 +62,15 @@ dependencies {
 }
 ```
 
-To try out the cutting edge kaspresso updates before an official release add a "-SNAPHOT" postfix to the latest Kaspresso version e.g.
+To try out the cutting edge kaspresso updates before an official release add a snapshot repository to your `build.gradle`
+```groovy
+dependencyResolutionManagement {
+    repositories {
+        maven { url = uri("https://s01.oss.sonatype.org/content/repositories/snapshots") }
+    }
+}
+```
+To use a snapshot version of a Kaspresso add a "-SNAPHOT" postfix to the latest Kaspresso version e.g.
 ```groovy
 dependencies {
     androidTestImplementation 'com.kaspersky.android-components:kaspresso:<latest_version>-SNAPSHOT'
@@ -75,7 +83,7 @@ The last version with Android Support libraries is:
 
 ```groovy
 dependencies {
-    androidTestImplementation 'com.kaspersky.android-components:kaspresso:1.0.1-support'
+    androidTestImplementation 'com.kaspersky.android-components:kaspresso:1.5.3'
 }
 ```
 

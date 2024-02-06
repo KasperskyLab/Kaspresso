@@ -33,7 +33,7 @@ interface UiScrollableActions : UiBaseActions {
             } while (scrollable.scrollForward())
             do {
                 if (findObject(to.view.interaction.selector.bySelector) != null)
-                return@perform
+                    return@perform
             } while (scrollable.scrollBackward())
             to.isDisplayed()
         }

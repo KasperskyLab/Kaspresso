@@ -32,6 +32,10 @@ You can notice that the app uses `AdbTerminal` class to execute ADB commands.
 ## Usage in Kaspresso
 In Kaspresso, we wrap `AdbTerminal` into a special interface `AdbServer`.
 `AdbServer`'s instance is available in `BaseTestContext` scope and `BaseTestCase` with `adbServer` property: <br>
+There're two types of AbdServer methods signatures: 
+
+`fun perform(vararg commands: String): List<String>` and `perform(command: String, arguments: List<String>): String` with an important difference.
+First signature accept one or more commands and execute them one by one. Example below:
 ```kotlin
 @Test
 fun test() =
@@ -50,6 +54,23 @@ fun test() =
         // ....
 }
 ```
+This method passes each command to the java runtime which tokenizes it by whitespaces. It could be not ideal. It can't be used for the commands with
+the whitespaces in their arguments (e.g. `adb pull "/sdcard/Documents/path_with whitespace to/file.txt"`) and it doesn't allow piping (e.g. `cat $BUILD_DIR/report.txt | grep filte > filtered.txt`).
+That's why there's a second AdbServer methods signature type.
+
+It executes a single command and allows you to pass a list of arguments. It doesn't tokenize your command or arguments, they are used "as is".
+This allows you to use piping and complex arguments
+See example below (yes, a command could be an argument for another command):
+```kotlin
+@Test
+fun test() = before{
+      adbServer.performCmd("bash", listOf("-c", "adb shell dumpsys deviceidle | grep mForceIdle"))
+   }.after {
+   }.run {
+       // ...
+   }
+```
+
 Also, don't forget to grant necessary permission:
 ```
 <uses-permission android:name="android.permission.INTERNET" />

@@ -3,6 +3,7 @@ plugins {
 }
 
 android {
+    namespace = "com.kaspersky.adbserver.sample"
     defaultConfig {
         applicationId = "com.kaspersky.adbserver.sample"
     }

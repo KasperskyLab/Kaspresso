@@ -4,6 +4,7 @@ plugins {
 }
 
 android {
+    namespace = "com.kaspersky.kaspresso.kautomatorsample"
     defaultConfig {
         applicationId = "com.kaspersky.kaspresso.kautomatorsample"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
