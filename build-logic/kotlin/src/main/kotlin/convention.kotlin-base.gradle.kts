@@ -1,7 +1,7 @@
 
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-val kotlinLanguageVersion = "1.9"
+val kotlinLanguageVersion = "1.8"
 
 tasks.withType<KotlinCompile>().configureEach {
     kotlinOptions {
