@@ -5,7 +5,8 @@ tasks.register<Exec>("installGitHooks") {
     commandLine("git")
     args("config", "core.hooksPath", ".githooks")
 
-    onlyIf { !project.hasProperty("CI") }
+    val isCi = project.hasProperty("CI")
+    onlyIf { !isCi }
 }
 
 val initialTaskNames: List<String> = project.gradle.startParameter.taskNames
