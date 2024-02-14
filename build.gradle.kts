@@ -37,11 +37,3 @@ val detektAll = tasks.register<Detekt>("detektAll") {
         html.required.set(false)
     }
 }
-
-tasks.withType<Sign>().configureEach {
-    onlyIf {
-        val isReleaseQueued = gradle.taskGraph.hasTask("publishAllPublicationsTo${sonatypeReleasesRepoName}Repository")
-        val isSnapshotQueued = gradle.taskGraph.hasTask("publishAllPublicationsTo${sonatypeSnapshotsRepoName}Repository")
-        isReleaseQueued || isSnapshotQueued
-    }
-}
