@@ -8,7 +8,7 @@ android {
         minSdk = 21
 
         applicationId = "com.kaspersky.kaspresso.tutorial"
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.kaspersky.kaspresso.runner.KaspressoRunner"
         testInstrumentationRunnerArguments["clearPackageData"] = "true"
     }
     packaging {
@@ -32,5 +32,9 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.google.code.gson:gson:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("androidx.activity:activity-ktx:1.7.1")
     androidTestImplementation("androidx.test.ext:junit-ktx:1.1.4")
+    androidTestImplementation("com.kaspersky.android-components:kaspresso:1.5.1")
+    androidTestImplementation("com.kaspersky.android-components:kaspresso-allure-support:1.5.1")
+    androidTestUtil("androidx.test:orchestrator:1.4.2")
 }

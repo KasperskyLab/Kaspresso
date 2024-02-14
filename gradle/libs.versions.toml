@@ -17,7 +17,7 @@ thirdPartyReport = "0.19.1035"
 [libraries]
 # plugins
 kotlinPlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
-androidPlugin = "com.android.tools.build:gradle:8.1.4"
+androidPlugin = "com.android.tools.build:gradle:8.2.2"
 versionsPlugin = "com.github.ben-manes:gradle-versions-plugin:0.50.0"
 thirdPartyReportPlugin = { module = "com.kaspersky.gradle:third-party-report", version.ref = "thirdPartyReport" }
 airPlugin = { module = "com.kaspersky.gradle:air", version.ref = "thirdPartyReport" }
