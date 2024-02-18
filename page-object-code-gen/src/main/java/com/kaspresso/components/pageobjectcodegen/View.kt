@@ -2,7 +2,7 @@ package com.kaspresso.components.pageobjectcodegen
 
 data class View(
     override val resourceId: String,
-    override val viewType: String,
+    override val viewType: ViewType,
     override val packages: String,
 ) : BaseView {
 
@@ -13,7 +13,7 @@ data class View(
 
 data class RecyclerView(
     override val resourceId: String,
-    override val viewType: String,
+    override val viewType: ViewType,
     override val packages: String,
     val childView: Set<List<BaseView>>,
 ) : BaseView {
@@ -35,7 +35,7 @@ data class RecyclerView(
 interface BaseView {
 
     val resourceId: String
-    val viewType: String
+    val viewType: ViewType
     val packages: String
     fun toKaspressoExpression(): String
 

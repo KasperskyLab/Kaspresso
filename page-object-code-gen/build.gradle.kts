@@ -3,17 +3,21 @@ plugins {
     id("convention.publication-android-lib")
     id("convention.third-party-report")
     id("convention.legal-documents")
-}
-
-publish {
-    artifactId.set("page-object-code-gen")
+    id("com.github.johnrengelman.shadow") version "6.0.0"
 }
 
 dependencies {
-    implementation(libs.kotlinStdlib)
-    implementation(libs.androidXTestCore)
-    implementation(libs.uiAutomator)
+    api(libs.kotlinStdlib)
+    api(libs.androidXTestCore)
+    api(libs.uiAutomator)
+    api(libs.kakao)
     testImplementation(libs.junit)
     testImplementation(libs.truth)
     testImplementation(libs.assertj)
+}
+
+tasks.withType<Jar>() {
+    manifest {
+        attributes["Main-Class"] = "com.kaspersky.components.pageobjectcodegen.CreatePageObjectFromUiDumpKt"
+    }
 }

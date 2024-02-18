@@ -1,7 +1,7 @@
 package com.kaspresso.components.pageobjectcodegen
 
-import com.kaspresso.components.pageobjectcodegen.SupportedViews.collectableElements
-import com.kaspresso.components.pageobjectcodegen.SupportedViews.elementsWithChild
+import com.kaspresso.components.pageobjectcodegen.ViewType.Companion.collectableElements
+import com.kaspresso.components.pageobjectcodegen.ViewType.Companion.elementsWithChild
 import org.w3c.dom.Node
 import java.io.File
 import java.nio.charset.Charset
@@ -24,7 +24,6 @@ fun main(vararg args: String) {
     } catch (e: Exception) {
         throw Exception("No file path")
     }
-
     if (!File(inputFilePath).isFile) {
         throw Exception("File is not exist or directory")
     }
@@ -65,7 +64,6 @@ fun main(vararg args: String) {
     val doc = documentBuilder.parse(inputFilePath)
 
     val screenElements: List<BaseView> = findAllViewInDump(doc.firstChild.firstChild)
-    print(screenElements)
 
     PageObjectGenerator(screenElements, filePackage, className).writeToFile(outputFilePath)
 }
@@ -73,10 +71,11 @@ fun main(vararg args: String) {
 fun findAllViewInDump(root: Node, goToSiblings: Boolean = true): MutableList<BaseView> {
     val result = mutableListOf<BaseView>()
     if (root.nodeName == "node") {
-        if (root.attributes.getNamedItem("class").nodeValue in collectableElements) {
+        val attr = root.attributes
+        if (attr.getNamedItem("class").nodeValue in collectableElements && attr.getNamedItem("resource-id").nodeValue != "") {
             result.add(getViewFromNode(root))
         }
-        if (root.attributes.getNamedItem("class").nodeValue in elementsWithChild) {
+        if (attr.getNamedItem("class").nodeValue in elementsWithChild) {
             val res = mutableSetOf<List<BaseView>>()
             val children = root.childNodes
             for (i in 0 until children.length) {
@@ -86,7 +85,7 @@ fun findAllViewInDump(root: Node, goToSiblings: Boolean = true): MutableList<Bas
             }
             result.add(getViewWithChildrenFromNode(root, res))
         }
-        if (root.hasChildNodes() && root.attributes.getNamedItem("class").nodeValue !in elementsWithChild) {
+        if (root.hasChildNodes() && attr.getNamedItem("class").nodeValue !in elementsWithChild) {
             result.addAll(findAllViewInDump(root.firstChild))
         }
     }
@@ -98,9 +97,11 @@ fun findAllViewInDump(root: Node, goToSiblings: Boolean = true): MutableList<Bas
 
 fun getViewWithChildrenFromNode(node: Node, childViews: Set<List<BaseView>>): RecyclerView {
     val attr = node.attributes
+    val viewType = attr.getNamedItem("class").nodeValue.substringAfterLast(".")
+    println(viewType)
     return RecyclerView(
         attr.getNamedItem("resource-id").nodeValue.substringAfterLast("/"),
-        attr.getNamedItem("class").nodeValue.substringAfterLast("."),
+        ViewType.valueOf(viewType),
         attr.getNamedItem("package").nodeValue,
         childViews,
     )
@@ -108,9 +109,11 @@ fun getViewWithChildrenFromNode(node: Node, childViews: Set<List<BaseView>>): Re
 
 fun getViewFromNode(node: Node): View {
     val attr = node.attributes
+    val viewType = attr.getNamedItem("class").nodeValue.substringAfterLast(".")
+    println(viewType)
     return View(
         attr.getNamedItem("resource-id").nodeValue.substringAfterLast("/"),
-        attr.getNamedItem("class").nodeValue.substringAfterLast("."),
+        ViewType.valueOf(viewType),
         attr.getNamedItem("package").nodeValue,
     )
 }
