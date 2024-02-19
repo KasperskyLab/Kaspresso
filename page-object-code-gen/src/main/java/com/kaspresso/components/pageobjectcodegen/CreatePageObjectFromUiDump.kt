@@ -98,7 +98,6 @@ fun findAllViewInDump(root: Node, goToSiblings: Boolean = true): MutableList<Bas
 fun getViewWithChildrenFromNode(node: Node, childViews: Set<List<BaseView>>): RecyclerView {
     val attr = node.attributes
     val viewType = attr.getNamedItem("class").nodeValue.substringAfterLast(".")
-    println(viewType)
     return RecyclerView(
         attr.getNamedItem("resource-id").nodeValue.substringAfterLast("/"),
         ViewType.valueOf(viewType),
@@ -110,7 +109,6 @@ fun getViewWithChildrenFromNode(node: Node, childViews: Set<List<BaseView>>): Re
 fun getViewFromNode(node: Node): View {
     val attr = node.attributes
     val viewType = attr.getNamedItem("class").nodeValue.substringAfterLast(".")
-    println(viewType)
     return View(
         attr.getNamedItem("resource-id").nodeValue.substringAfterLast("/"),
         ViewType.valueOf(viewType),
