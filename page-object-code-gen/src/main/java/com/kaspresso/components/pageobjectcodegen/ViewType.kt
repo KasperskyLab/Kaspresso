@@ -1,16 +1,13 @@
 package com.kaspresso.components.pageobjectcodegen
 
-import io.github.kakaocup.kakao.text.KTextView
-
 enum class ViewType {
     TextView {
         override fun getClass(): List<String> {
-            return listOf(KTextView::class.qualifiedName!!)
+            return listOf("import io.github.kakaocup.kakao.text.KTextView")
         }
     },
     ImageView {
         override fun getClass(): List<String> {
-            // return KImageView::class.qualifiedName!!
             return listOf("import io.github.kakaocup.kakao.image.KImageView")
         }
     },

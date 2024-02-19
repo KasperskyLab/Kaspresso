@@ -17,7 +17,7 @@ class CodeGenTest(
 
     @Test
     fun checkCodeGen() {
-        val jarFile = File("src/main/java/com/kaspresso/components/pageobjectcodegen/createKtfromDump.jar")
+        val jarFile = File("/Users/ovsyannikov_m/AndroidStudioProjects/Kaspresso/artifacts/page-object-code-gen.jar")
         val inputFile = File("src/test/resources/$inputPath")
         Runtime.getRuntime().exec("java -jar $jarFile $inputFile $className $outputDirectory")
         Thread.sleep(15000)
