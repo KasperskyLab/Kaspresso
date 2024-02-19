@@ -37,7 +37,7 @@ class ScreenshotSampleTest : DocLocScreenshotTestCase(
 }
 ```
 
-В базовый конструктор передается один параметр: `locales` - строка с разделенными запятыми локалями для запуска теста. Сделанные скриншоты будут доступны в памяти устройства по пути `/sdcard/screenshots/`.
+В базовый конструктор передается один параметр: `locales` - строка с разделенными запятыми локалями для запуска теста. Сделанные скриншоты будут доступны в памяти устройства по пути `/sdcard/documents/screenshots/`.
 
 Полный пример см. в [ScreenshotSampleTest](https://github.com/KasperskyLab/Kaspresso/blob/1c1fc42f704ea6baa08e5c0e4e0269ded9243986/samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/docloc_tests/ScreenshotSampleTest.kt).
 
@@ -199,7 +199,7 @@ class AdvancedScreenshotSampleTest : ProductDocLocScreenshotTestCase() {
 ## Изменение пути и имени скриншотов
 
 По умолчанию все скриншоты хранятся по адресу: <br>
-```/sdcard/screenshots/<locale>/<full qualified test class name>/<method name>.``` <br>
+```/sdcard/documents/screenshots/<locale>/<full qualified test class name>/<method name>.``` <br>
 Вы можете изменить это поведение, предоставив свою реализацию интерфейсов
 [ResourcesRootDirsProvider](https://github.com/KasperskyLab/Kaspresso/blob/master/kaspresso/src/main/kotlin/com/kaspersky/kaspresso/files/resources/ResourcesRootDirsProvider.kt),
 [ResourcesDirsProvider](https://github.com/KasperskyLab/Kaspresso/blob/master/kaspresso/src/main/kotlin/com/kaspersky/kaspresso/files/resources/ResourcesDirsProvider.kt),

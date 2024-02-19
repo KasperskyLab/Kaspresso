@@ -18,12 +18,32 @@ internal class CommandExecutorImpl(
 
     override fun execute(command: Command): CommandResult {
         return when (command) {
-            is CmdCommand -> cmdCommandPerformer.perform(command.body)
+            is CmdCommand -> cmdCommandPerformer.perform(command.command, command.arguments)
+
             is AdbCommand -> {
-                val adbCommand = "$adbPath ${ adbServerPort?.let { "-P $adbServerPort " } ?: "" }-s $deviceName ${command.body}"
-                logger.d("The created adbCommand=$adbCommand")
-                cmdCommandPerformer.perform(adbCommand)
+                val adbCommand: String
+                val adbArguments: List<String>
+
+                if (command.arguments.isEmpty()) {
+                    adbCommand = "$adbPath ${adbServerPort?.let { "-P $adbServerPort " } ?: ""}-s $deviceName ${command.command}"
+                    adbArguments = emptyList()
+                } else {
+                    adbCommand = adbPath
+                    adbArguments = buildList {
+                        adbServerPort?.let {
+                            add("-P")
+                            add(adbServerPort)
+                        }
+                        add("-s")
+                        add(deviceName)
+                        add(command.command)
+                        addAll(command.arguments)
+                    }
+                }
+                logger.d("The created adbCommand=$adbCommand, arguments=$adbArguments")
+                cmdCommandPerformer.perform(adbCommand, adbArguments)
             }
+
             else -> throw UnsupportedOperationException("The command=$command is unsupported command")
         }
     }

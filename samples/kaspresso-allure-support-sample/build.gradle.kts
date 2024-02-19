@@ -3,6 +3,7 @@ plugins {
 }
 
 android {
+    namespace = "com.kaspersky.kaspresso.alluresupport.sample"
     defaultConfig {
         applicationId = "com.kaspersky.kaspresso.alluresupport.sample"
         testInstrumentationRunner = "com.kaspersky.kaspresso.runner.KaspressoRunner"

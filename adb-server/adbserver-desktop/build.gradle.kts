@@ -25,4 +25,11 @@ tasks.withType<Jar>().configureEach {
     }
     exclude("NOTICE.txt")
     exclude("LICENSE.txt")
+
+    mustRunAfter(
+        ":adb-server:adb-server-desktop-device-connection:jar",
+        ":adb-server:adb-server-command-types:jar",
+        ":adb-server:adb-server-connection:jar",
+        ":adb-server:adb-server-common:jar"
+    )
 }

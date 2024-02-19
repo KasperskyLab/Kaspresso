@@ -2,7 +2,7 @@
 
 В этом уроке мы познакомимся со сценариями (класс `Scenario` из библиотеки Kaspresso), узнаем, что это, для чего они нужны, когда их стоит использовать, а когда лучше избегать.
 
-Открываем приложение tutorial и кликаем по кнопке `Login Acitivity`.
+Открываем приложение tutorial и кликаем по кнопке `Login Activity`.
 
 <img src="../images/scenario/main_screen_login_button.png" alt="Main Screen login button" width="300"/>
 

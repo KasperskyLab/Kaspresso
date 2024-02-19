@@ -30,8 +30,7 @@ class KeyboardImpl(
          * Splits the text into characters and type them one by one
          * to prevent missing characters in the input field caused by very fast typing speed
          */
-        text.map { char -> "input text $char" }
-            .forEach { command -> adbServer.performShell(command) }
+        text.forEach { char -> adbServer.performShell("input text $char") }
     }
 
     /**

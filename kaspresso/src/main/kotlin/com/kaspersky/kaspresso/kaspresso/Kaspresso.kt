@@ -742,7 +742,7 @@ data class Kaspresso(
                 instrumentalDependencyProviderFactory.getComponentProvider<ExploitImpl>(instrumentation),
                 adbServer
             )
-            if (!::language.isInitialized) language = LanguageImpl(libLogger, instrumentation.targetContext)
+            if (!::language.isInitialized) language = LanguageImpl(libLogger, instrumentation)
             if (!::logcat.isInitialized) logcat = LogcatImpl(libLogger, adbServer)
 
             if (!::flakySafetyParams.isInitialized) flakySafetyParams = FlakySafetyParams.default()

@@ -1,13 +1,13 @@
 [versions]
-kotlin = "1.7.10"
+kotlin = "1.8.22"
 detekt = "1.21.0"
 espresso = "3.5.1"
-kakao = "3.4.1"
+kakao = "3.5.1"
 kakaoCompose = "0.2.3"
 kakaoExtClicks = "1.0.0"
 allure = "2.4.0"
-compose = "1.3.1"
-composeCompiler = "1.3.1"
+compose = "1.5.4"
+composeCompiler = "1.4.8"
 activityCompose = "1.4.0"
 androidXTest = "1.5.0"
 testOrchestrator = "1.4.2"
@@ -24,8 +24,8 @@ material = "1.8.0"
 [libraries]
 # plugins
 kotlinPlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
-androidPlugin = "com.android.tools.build:gradle:7.2.2"
-versionsPlugin = "com.github.ben-manes:gradle-versions-plugin:0.39.0"
+androidPlugin = "com.android.tools.build:gradle:8.1.4"
+versionsPlugin = "com.github.ben-manes:gradle-versions-plugin:0.50.0"
 thirdPartyReportPlugin = { module = "com.kaspersky.gradle:third-party-report", version.ref = "thirdPartyReport" }
 airPlugin = { module = "com.kaspersky.gradle:air", version.ref = "thirdPartyReport" }
 
@@ -36,9 +36,9 @@ kotlinCli = "org.jetbrains.kotlinx:kotlinx-cli:0.3.5"
 detektCli = { module = "io.gitlab.arturbosch.detekt:detekt-cli", version.ref = "detekt" }
 detektFormatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
 
-androidXCore = "androidx.core:core:1.9.0"
-appcompat = "androidx.appcompat:appcompat:1.6.0"
-material = "com.google.android.material:material:1.6.1"
+androidXCore = "androidx.core:core:1.12.0"
+appcompat = "androidx.appcompat:appcompat:1.6.1"
+material = "com.google.android.material:material:1.11.0"
 constraint = "androidx.constraintlayout:constraintlayout:2.1.4"
 multidex = "androidx.multidex:multidex:2.0.1"
 
@@ -52,8 +52,6 @@ kotson = "com.github.salomonbrys.kotson:kotson:2.5.0"
 
 espressoCore = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso" }
 espressoWeb = { module = "androidx.test.espresso:espresso-web", version.ref = "espresso" }
-# Workaround for https://github.com/android/android-test/issues/861
-accessibilityFramework = "com.google.android.apps.common.testing.accessibility.framework:accessibility-test-framework:4.0.0"
 uiAutomator = "androidx.test.uiautomator:uiautomator:2.2.0"
 robolectric = "org.robolectric:robolectric:4.8.2"
 kakao = { module = "io.github.kakaocup:kakao", version.ref = "kakao" }
@@ -67,11 +65,11 @@ truth = "com.google.truth:truth:1.3.0"
 androidXTestCore = { module = "androidx.test:core", version.ref = "androidXTest" }
 androidXTestRules = { module = "androidx.test:rules", version.ref = "androidXTest" }
 androidXTestRunner = { module = "androidx.test:runner", version.ref = "androidXTest" }
-androidXTestFragmentTesting = "androidx.fragment:fragment-testing:1.5.4"
+androidXTestFragmentTesting = "androidx.fragment:fragment-testing:1.6.2"
 androidXTestOrchestrator = { module = "androidx.test:orchestrator", version.ref = "testOrchestrator" }
-androidXTestExtJunit = "androidx.test.ext:junit:1.1.4"
-androidXTestExtJunitKtx = "androidx.test.ext:junit-ktx:1.1.4"
-androidXLifecycleRuntimeKtx = "androidx.lifecycle:lifecycle-runtime-ktx:2.5.1"
+androidXTestExtJunit = "androidx.test.ext:junit:1.1.5"
+androidXTestExtJunitKtx = "androidx.test.ext:junit-ktx:1.1.5"
+androidXLifecycleRuntimeKtx = "androidx.lifecycle:lifecycle-runtime-ktx:2.6.2"
 
 composeCompiler = { module = "androidx.compose.compiler:compiler", version.ref = "composeCompiler" }
 composeActivity = "androidx.activity:activity-compose:1.5.1"
@@ -94,7 +92,7 @@ androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version
 androidx-appcompat-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 com-google-android-material-material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 [bundles]
-espresso = ["espressoCore", "espressoWeb", "accessibilityFramework"]
+espresso = ["espressoCore", "espressoWeb"]
 allure = ["allureKotlinModel", "allureKotlinCommons", "allureKotlinJunit4", "allureKotlinAndroid"]
 compose = ["composeActivity", "composeUiTooling", "composeMaterial", "composeTestManifest", "composeCompiler"]
 [plugins]

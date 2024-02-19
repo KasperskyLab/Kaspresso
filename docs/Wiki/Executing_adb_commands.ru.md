@@ -32,6 +32,10 @@
 ## Использование в Kaspresso
 В Kaspresso мы оборачиваем AdbTerminal в специальный интерфейс AdbServer.
 Экземпляр `AdbServer` доступен в области `BaseTestContext` и `BaseTestCase` со свойством `adbServer`: <br>
+У AdbServer два типа сигнатур методов:
+
+`fun perform(vararg commands: String): List<String>` и `perform(command: String, arguments: List<String>): String` с важными различиями между ними.
+Первая сигнатура принимает одну или более комманду и исполняет их одну за одной. Пример далее:
 ```kotlin
 @Test
 fun test() =
@@ -50,6 +54,23 @@ fun test() =
         // ....
 }
 ```
+Этот метод передает каждую команду среде выполнения java, которая разбивает ее по пробелам. Это может быть не самым лучшим вариантом. Он не может использоваться для команд с
+пробелами в их аргументах (например, `adb pull "/sdcard/Documents/path_with whitespace to/file.txt"`) и не допускает пайпинга комманд (например, `cat $BUILD_DIR/report.txt | grep filte > filtered.txt`).
+Вот почему существует второй тип сигнатур методов AdbServer.
+
+Он выполняет одну команду и позволяет вам передавать список аргументов. Он не разбивает вашу команду или аргументы, они используются в том виде, в 
+котором вы их передали. Это позволяет вам использовать пайпинг и сложные аргументы.
+Смотрите пример ниже (да, команда может быть аргументом для другой команды):
+```kotlin
+@Test
+fun test() = before{
+      adbServer.performCmd("bash", listOf("-c", "adb shell dumpsys deviceidle | grep mForceIdle"))
+   }.after {
+   }.run {
+       // ...
+   }
+```
+
 Также не забудьте предоставить необходимое разрешение:
 ```
 <uses-permission android:name="android.permission.INTERNET" />

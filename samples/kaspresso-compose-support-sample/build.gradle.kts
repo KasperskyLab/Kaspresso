@@ -3,6 +3,7 @@ plugins {
 }
 
 android {
+    namespace = "com.kaspersky.kaspresso.composesupport.sample"
     defaultConfig {
         minSdk = 21
 

@@ -137,10 +137,7 @@ class NetworkImpl(
             mobileDataSwitch.click()
         }
         NotificationsMobileDataScreen {
-            when (enable) {
-                true -> mobileDataSwitch.setChecked(true)
-                false -> mobileDataSwitch.setChecked(false)
-            }
+            mobileDataSwitch.setChecked(enable)
         }
         UiSystem {
             drag(width / 2, height, width / 2, 0, 50)
