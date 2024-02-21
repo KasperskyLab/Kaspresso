@@ -21,6 +21,12 @@ android {
     testOptions {
         execution = "ANDROIDX_TEST_ORCHESTRATOR"
     }
+
+    java {
+        toolchain {
+            implementation.set(JvmImplementation.J9)
+        }
+    }
 }
 
 dependencies {
