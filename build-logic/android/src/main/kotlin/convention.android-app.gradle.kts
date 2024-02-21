@@ -37,7 +37,9 @@ android {
     }
 
     kotlin {
-        jvmToolchain(JavaVersion.VERSION_1_8.majorVersion.toInt())
+        (this as JavaToolchainSpec).languageVersion.set(JavaLanguageVersion.of(8))
+
+//        jvmToolchain(JavaVersion.VERSION_1_8.majorVersion.toInt())
     }
 }
 
