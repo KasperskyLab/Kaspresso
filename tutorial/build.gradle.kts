@@ -1,5 +1,3 @@
-import gradle.kotlin.dsl.accessors._47545ee4044af277c92cdb30c1d58315.java
-
 plugins {
     id("convention.android-app")
 }
@@ -22,12 +20,6 @@ android {
 
     testOptions {
         execution = "ANDROIDX_TEST_ORCHESTRATOR"
-    }
-
-    java {
-        toolchain {
-            languageVersion.set(JavaLanguageVersion.of(8))
-        }
     }
 }
 
