@@ -6,7 +6,7 @@ val kotlinLanguageVersion = "1.8"
 tasks.withType<KotlinCompile>().configureEach {
     kotlinOptions {
 
-        jvmTarget = JavaVersion.VERSION_11.toString()
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
 
 //        TODO: fix all warnings before
 //        allWarningsAsErrors = true
