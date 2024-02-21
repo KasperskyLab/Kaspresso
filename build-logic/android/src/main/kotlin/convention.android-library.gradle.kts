@@ -19,15 +19,4 @@ android {
             ignore = true
         }
     }
-
-    compileOptions {
-        targetCompatibility = JavaVersion.VERSION_17
-        sourceCompatibility = JavaVersion.VERSION_17
-    }
-}
-
-tasks.withType<KotlinCompile>().configureEach {
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
-    }
 }

@@ -8,11 +8,6 @@ plugins {
 }
 
 android {
-    compileOptions {
-        targetCompatibility = JavaVersion.VERSION_17
-        sourceCompatibility = JavaVersion.VERSION_17
-    }
-
     testBuildType = "debug"
 
     defaultConfig {
@@ -38,11 +33,5 @@ android {
 
     kotlin {
         jvmToolchain(JavaVersion.VERSION_17.majorVersion.toInt())
-    }
-}
-
-tasks.withType<KotlinCompile>().configureEach {
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
     }
 }

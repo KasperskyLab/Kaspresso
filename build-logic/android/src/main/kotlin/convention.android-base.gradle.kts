@@ -5,11 +5,6 @@ configure<BaseExtension> {
 
     compileSdkVersion(34)
 
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-
     defaultConfig {
         minSdk = 18
         targetSdk = 30
