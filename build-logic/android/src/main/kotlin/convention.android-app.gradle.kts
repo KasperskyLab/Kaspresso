@@ -9,8 +9,8 @@ plugins {
 
 android {
     compileOptions {
-        targetCompatibility = JavaVersion.VERSION_1_8
-        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_11
     }
 
     testBuildType = "debug"
@@ -37,12 +37,12 @@ android {
     }
 
     kotlin {
-        jvmToolchain(JavaVersion.VERSION_1_8.majorVersion.toInt())
+        jvmToolchain(JavaVersion.VERSION_11.majorVersion.toInt())
     }
 }
 
 tasks.withType<KotlinCompile>().configureEach {
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8.toString()
+        jvmTarget = JavaVersion.VERSION_11.toString()
     }
 }
