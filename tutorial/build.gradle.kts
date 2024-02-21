@@ -24,7 +24,7 @@ android {
 
     java {
         toolchain {
-            implementation.set(JvmImplementation.J9)
+            implementation.set(JvmImplementation.VENDOR_SPECIFIC)
         }
     }
 }
