@@ -37,12 +37,12 @@ android {
     }
 
     kotlin {
-        jvmToolchain(JavaVersion.VERSION_1_8.majorVersion.toInt())
+        jvmToolchain(JavaVersion.VERSION_17.majorVersion.toInt())
     }
 }
 
 tasks.withType<KotlinCompile>().configureEach {
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8.toString()
+        jvmTarget = JavaVersion.VERSION_17.toString()
     }
 }
