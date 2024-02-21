@@ -24,7 +24,7 @@ android {
 
     java {
         toolchain {
-            languageVersion.set(JavaLanguageVersion.of(9))
+            languageVersion.set(JavaLanguageVersion.of(8))
         }
     }
 }
