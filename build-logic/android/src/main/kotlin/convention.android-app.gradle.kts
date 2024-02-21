@@ -36,16 +36,16 @@ android {
         viewBinding = true // for the samples
     }
 
-    kotlin {
-//        (this as JavaToolchainSpec).languageVersion.set(JavaLanguageVersion.of(8))
-
-        jvmToolchain(JavaVersion.VERSION_1_8.majorVersion.toInt())
-    }
-    java {
-        toolchain {
-            languageVersion.set(JavaLanguageVersion.of(8))
-        }
-    }
+//    kotlin {
+////        (this as JavaToolchainSpec).languageVersion.set(JavaLanguageVersion.of(8))
+//
+//        jvmToolchain(JavaVersion.VERSION_1_8.majorVersion.toInt())
+//    }
+//    java {
+//        toolchain {
+//            languageVersion.set(JavaLanguageVersion.of(8))
+//        }
+//    }
 }
 
 tasks.withType<KotlinCompile>().configureEach {
