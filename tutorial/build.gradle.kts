@@ -1,3 +1,5 @@
+import gradle.kotlin.dsl.accessors._47545ee4044af277c92cdb30c1d58315.java
+
 plugins {
     id("convention.android-app")
 }
@@ -24,7 +26,7 @@ android {
 
     java {
         toolchain {
-            implementation.set(JvmImplementation.VENDOR_SPECIFIC)
+            languageVersion.set(JavaLanguageVersion.of(8))
         }
     }
 }
