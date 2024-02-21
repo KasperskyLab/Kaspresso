@@ -25,7 +25,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           distribution: 'adopt'
-          java-version: 17
+          java-version: 11
       - name: Assemble projects
         run: ./gradlew -Pkaspresso.snapshotVersion=${{ inputs.kaspressoVersion }} assembleDebugAndroidTest
       - name: Check legal documents
