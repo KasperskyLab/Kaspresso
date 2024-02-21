@@ -29,6 +29,12 @@ publishing {
 }
 
 android {
+
+    compileOptions {
+        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+    }
+
     libraryVariants.configureEach {
         packageLibraryProvider.configure {
             from("$rootDir/LICENSE.txt")
