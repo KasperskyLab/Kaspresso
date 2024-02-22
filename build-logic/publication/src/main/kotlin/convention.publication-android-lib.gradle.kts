@@ -29,7 +29,6 @@ publishing {
 }
 
 android {
-
     libraryVariants.configureEach {
         packageLibraryProvider.configure {
             from("$rootDir/LICENSE.txt")
