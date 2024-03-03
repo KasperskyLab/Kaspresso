@@ -11,6 +11,11 @@ jobs:
       - uses: actions/setup-python@v2
         with:
           python-version: 3.x
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: 17
       - run: pip install mkdocs-material
       - run: pip install mkdocs-static-i18n==0.56
       - run: mkdocs gh-deploy --force
