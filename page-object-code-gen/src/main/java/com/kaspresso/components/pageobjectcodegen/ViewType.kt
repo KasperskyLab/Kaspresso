@@ -1,29 +1,41 @@
 package com.kaspresso.components.pageobjectcodegen
 
-enum class ViewType {
-    TextView {
+import io.github.kakaocup.kakao.edit.KEditText
+import io.github.kakaocup.kakao.image.KImageView
+import io.github.kakaocup.kakao.recycler.KRecyclerItem
+import io.github.kakaocup.kakao.recycler.KRecyclerView
+import io.github.kakaocup.kakao.text.KButton
+import io.github.kakaocup.kakao.text.KTextView
+
+enum class ViewType(val androidName: String) {
+    TextView("android.widget.TextView") {
         override fun getClass(): List<String> {
-            return listOf("import io.github.kakaocup.kakao.text.KTextView")
+            return listOf("import ${KTextView::class.qualifiedName}")
         }
     },
-    ImageView {
+    ImageView("android.widget.ImageView") {
         override fun getClass(): List<String> {
-            return listOf("import io.github.kakaocup.kakao.image.KImageView")
+            return listOf("import ${KImageView::class.qualifiedName}")
         }
     },
-    Button {
+    Button("android.widget.Button") {
         override fun getClass(): List<String> {
-            return listOf("import io.github.kakaocup.kakao.text.KButton")
+            return listOf("import ${KButton::class.qualifiedName}")
         }
     },
-    RecyclerView {
+    EditText("android.widget.EditText") {
         override fun getClass(): List<String> {
-            return listOf("import io.github.kakaocup.kakao.recycler.KRecyclerItem", "import io.github.kakaocup.kakao.recycler.KRecyclerView")
+            return listOf("import ${KEditText::class.qualifiedName}")
+        }
+    },
+    RecyclerView("androidx.recyclerview.widget.RecyclerView") {
+        override fun getClass(): List<String> {
+            return listOf("import ${KRecyclerItem::class.qualifiedName}", "import i${KRecyclerView::class.qualifiedName}")
         }
     }, ;
     abstract fun getClass(): List<String>
     companion object {
-        val collectableElements = listOf("android.widget.Button", "android.widget.TextView", "android.widget.ImageView")
-        val elementsWithChild = listOf("androidx.recyclerview.widget.RecyclerView")
+        val collectableElements = ViewType.values().map { it.androidName }.filter { it !in elementsWithChild }
+        val elementsWithChild = listOf(RecyclerView.androidName)
     }
 }

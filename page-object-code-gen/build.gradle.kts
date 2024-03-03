@@ -1,16 +1,12 @@
 plugins {
     id("convention.kotlin-app")
     id("convention.third-party-report")
-//    id("convention.android-library")
-//    id("convention.publication-android-lib")
-//    id("convention.third-party-report")
-//    id("convention.legal-documents")
 }
 
 dependencies {
     implementation(libs.kotlinStdlib)
     implementation(libs.kotlinCli)
-    // api(libs.kakao)
+    implementation(files("src/libs/kakao.jar"))
     testImplementation(libs.junit)
     testImplementation(libs.assertj)
 }
@@ -33,7 +29,7 @@ tasks.withType<Jar>() {
     doLast {
         copy {
             from("build/libs/page-object-code-gen.jar")
-            into("/Users/ovsyannikov_m/AndroidStudioProjects/Kaspresso/artifacts")
+            into("Kaspresso/artifacts")
         }
     }
 }
