@@ -17,7 +17,7 @@ class CodeGenTest(
 
     @Test
     fun checkCodeGen() {
-        val jarFile = File("/Users/ovsyannikov_m/AndroidStudioProjects/Kaspresso/artifacts/page-object-code-gen.jar")
+        val jarFile = File("build/libs/page-object-code-gen.jar")
         val inputFile = File("src/test/resources/$inputPath")
         Runtime.getRuntime().exec("java -jar $jarFile $inputFile $className $outputDirectory")
         Thread.sleep(15000)
@@ -33,6 +33,7 @@ class CodeGenTest(
                 arrayOf("source1.xml", "build/generated/res/com/kaspresso/components/pageobjectcodegen", "TestClass1", "Result1"),
                 arrayOf("source_recycler_view.xml", "build/generated/res/com/kaspresso/components/pageobjectcodegen", "RecyclerView", "ResultRecyclerView"),
                 arrayOf("source2.xml", "build/generated/res/com/kaspresso/components/pageobjectcodegen", "TestClass2", "Result2"),
+                arrayOf("source3.xml", "build/generated/res/com/kaspresso/components/pageobjectcodegen", "TestClass3", "Result3"),
             )
         }
     }

@@ -26,10 +26,4 @@ tasks.withType<Jar>() {
     }
     exclude("NOTICE.txt")
     exclude("LICENSE.txt")
-    doLast {
-        copy {
-            from("build/libs/page-object-code-gen.jar")
-            into("Kaspresso/artifacts")
-        }
-    }
 }

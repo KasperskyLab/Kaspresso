@@ -30,12 +30,12 @@ enum class ViewType(val androidName: String) {
     },
     RecyclerView("androidx.recyclerview.widget.RecyclerView") {
         override fun getClass(): List<String> {
-            return listOf("import ${KRecyclerItem::class.qualifiedName}", "import i${KRecyclerView::class.qualifiedName}")
+            return listOf("import ${KRecyclerItem::class.qualifiedName}", "import ${KRecyclerView::class.qualifiedName}")
         }
     }, ;
     abstract fun getClass(): List<String>
     companion object {
-        val collectableElements = ViewType.values().map { it.androidName }.filter { it !in elementsWithChild }
         val elementsWithChild = listOf(RecyclerView.androidName)
+        val collectableElements = ViewType.values().map { it.androidName }.filter { it !in elementsWithChild }
     }
 }

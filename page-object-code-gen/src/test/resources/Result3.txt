@@ -1,0 +1,23 @@
+package com.kaspresso.components.pageobjectcodegen
+
+import com.kms.free.R
+import com.screens.common.KScreen
+import io.github.kakaocup.kakao.edit.KEditText
+import io.github.kakaocup.kakao.text.KButton
+import io.github.kakaocup.kakao.text.KTextView
+
+object TestClass3 : KScreen<TestClass3>() {
+
+    override val layoutId: Int? = TODO("Need To Implement")
+    override val viewClass: Class<*>? = TODO("Need To Implement")
+
+    val title = KTextView { withId(R.id.title) }
+    val subtitle = KTextView { withId(R.id.subtitle) }
+    val addFromContacts = KTextView { withId(R.id.add_from_contacts) }
+    val phoneNumberEditText = KEditText { withId(R.id.phone_number_edit_text) }
+    val checkForLeaks = KButton { withId(R.id.check_for_leaks) }
+
+    override fun BaseTestContext.waitForScreen() {
+        TODO("Need To Implement")
+    }
+}
