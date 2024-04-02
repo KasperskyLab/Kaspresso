@@ -45,7 +45,7 @@ kotson = "com.github.salomonbrys.kotson:kotson:2.5.0"
 
 espressoCore = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso" }
 espressoWeb = { module = "androidx.test.espresso:espresso-web", version.ref = "espresso" }
-uiAutomator = "androidx.test.uiautomator:uiautomator:2.2.0"
+uiAutomator = "androidx.test.uiautomator:uiautomator:2.3.0"
 robolectric = "org.robolectric:robolectric:4.8.2"
 kakao = { module = "io.github.kakaocup:kakao", version.ref = "kakao" }
 kakaoCompose = { module = "io.github.kakaocup:compose", version.ref = "kakaoCompose" }
