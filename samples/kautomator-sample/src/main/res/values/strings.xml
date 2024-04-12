@@ -13,4 +13,7 @@
     <string name="chip_2">Chip 2</string>
     <string name="chip_3">Chip 3</string>
     <string name="dialog">Dialog</string>
+
+    <string name="parent_search_value1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor </string>
+    <string name="parent_search_value2">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium</string>
 </resources>
