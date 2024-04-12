@@ -29,6 +29,7 @@
         <activity android:name=".autoscroll.AutoScrollActivity" />
         <activity android:name=".flaky.FlakyActivity" />
         <activity android:name=".systemdialogs.SystemDialogsActivity" />
+        <activity android:name=".ParentSearchActivity" />
     </application>
 
 </manifest>
