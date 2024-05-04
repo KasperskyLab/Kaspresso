@@ -26,4 +26,11 @@ tasks.withType<Jar>() {
     }
     exclude("NOTICE.txt")
     exclude("LICENSE.txt")
+    doLast{
+        copy{
+            from("$buildDir/libs/page-object-code-gen.jar")
+            into("$rootDir/artifacts")
+            duplicatesStrategy = DuplicatesStrategy.INCLUDE
+        }
+    }
 }
