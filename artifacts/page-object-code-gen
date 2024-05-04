@@ -1,7 +1,6 @@
 #!/bin/bash
 echo "Make ui damp and pull it"
 pathToUiDump=$(adb shell uiautomator dump | grep -oE '/.*?xml')
-echo "$pathToUiDump"
 adb pull "$pathToUiDump"
 echo "Create page object"
 java -jar page-object-code-gen.jar window_dump.xml "$1" "$2"
