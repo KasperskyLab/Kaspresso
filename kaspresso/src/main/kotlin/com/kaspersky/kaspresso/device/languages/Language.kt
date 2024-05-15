@@ -18,4 +18,14 @@ interface Language {
      */
     @MainThread
     fun switchInApp(locale: Locale)
+
+    /**
+     * Changes locale for Android OS Settings.
+     * Under the hood grants CHANGE_CONFIGURATION permission
+     *     (without this permission, it's impossible to change system language)
+     *
+     * @throws Throwable if something went wrong
+     */
+    @MainThread
+    fun switchInSystem(locale: Locale)
 }
