@@ -42,4 +42,8 @@ interface Screenshots {
      * @param tag a unique tag to further identify the screenshot. Must match [a-zA-Z0-9_-]+.
      */
     fun takeFullWindowAndApply(tag: String, block: File.() -> Unit)
+
+    fun assert(tag: String, isFullWindow: Boolean)
+
+    fun assertAndApply(tag: String, isFullWindow: Boolean, block: File.() -> Unit)
 }

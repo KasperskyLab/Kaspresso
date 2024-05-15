@@ -8,7 +8,7 @@ import com.kaspersky.kaspresso.logger.UiTestLogger
  */
 class FilesImpl(
     private val logger: UiTestLogger,
-    private val adbServer: AdbServer
+    private val adbServer: AdbServer,
 ) : Files {
 
     /**
@@ -20,7 +20,7 @@ class FilesImpl(
      * @param devicePath a path to copy.
      */
     override fun push(serverPath: String, devicePath: String) {
-        adbServer.performAdb("push $serverPath $devicePath")
+        adbServer.performAdb("push", listOf(serverPath, devicePath))
         logger.i("Push file from $serverPath to $devicePath")
     }
 
@@ -32,7 +32,7 @@ class FilesImpl(
      * @param path a path to remove
      */
     override fun remove(path: String) {
-        adbServer.performShell("rm -f $path")
+        adbServer.performShell("rm", listOf("-rf", path))
         logger.i("Remove file from $path")
     }
 
@@ -45,8 +45,8 @@ class FilesImpl(
      * @param serverPath a path to copy. (If empty - pulls in adbServer directory (folder with file "adbserver-desktop.jar"))
      */
     override fun pull(devicePath: String, serverPath: String) {
-        adbServer.performCmd("mkdir -p $serverPath")
-        adbServer.performAdb("pull $devicePath $serverPath")
+        adbServer.performCmd("mkdir", listOf("-p", serverPath))
+        adbServer.performAdb("pull", listOf(devicePath, serverPath))
         logger.i("Pull file from $devicePath to $serverPath")
     }
 }
