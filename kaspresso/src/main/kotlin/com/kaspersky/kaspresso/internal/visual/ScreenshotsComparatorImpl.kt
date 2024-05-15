@@ -1,0 +1,108 @@
+package com.kaspersky.kaspresso.internal.visual
+
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
+import com.kaspersky.kaspresso.visual.ScreenshotsComparator
+import java.io.File
+import java.io.FileOutputStream
+import kotlin.math.abs
+import kotlin.math.roundToInt
+
+/**
+ * На разных видеокартах градиенты могут незначительно отличаться.
+ * Больше информации можно прочитать тут https://habr.com/ru/articles/754730/
+ * Данное значение толерантности допускает расхождение каждой состовляющей цвета (r,g,b) на каждый пиксель.
+ */
+private const val COLOR_TOLERANCE = 1
+private const val TOLERANCE = 0.3f
+private val diffScreenshotsDeviceDir = File("/sdcard/Documents/diff")
+private const val REPORT_ATTACHMENT_SCALE_FACTOR = 0.33f
+
+class ScreenshotsComparatorImpl : ScreenshotsComparator {
+    override fun compare(originalScreenshot: File, newScreenshot: File): Boolean {
+        val decodeOptions = BitmapFactory.Options().apply {
+            inMutable = true
+        }
+        val screenshot = BitmapFactory.decodeFile(newScreenshot.absolutePath, decodeOptions)
+        val original = BitmapFactory.decodeFile(originalScreenshot.absolutePath, decodeOptions)
+        val paint = Paint()
+
+        paint.color = Color.BLACK
+
+        val screenshotsSame = original.sameAs(screenshot)
+        if (screenshotsSame) {
+            return true
+        }
+
+        val width: Int = original.width
+        val height: Int = original.height
+        val pixelsCount = width * height
+        val screenshotPixels = IntArray(pixelsCount)
+        val originalPixels = IntArray(pixelsCount)
+        val binaryDiffPixels = IntArray(pixelsCount)
+        val contrastDiffPixels = IntArray(pixelsCount)
+
+        screenshot.getPixels(screenshotPixels, 0, width, 0, 0, width, height)
+        original.getPixels(originalPixels, 0, width, 0, 0, width, height)
+
+        var totalDelta = 0
+        for (pixelIndex in 0 until pixelsCount) {
+            val pixelDiffIsCorrect = verifyPixelDiff(screenshotPixels[pixelIndex], originalPixels[pixelIndex])
+            if (pixelDiffIsCorrect) {
+                binaryDiffPixels[pixelIndex] = Color.BLACK
+                contrastDiffPixels[pixelIndex] = originalPixels[pixelIndex]
+            } else {
+                totalDelta++
+                binaryDiffPixels[pixelIndex] = Color.WHITE
+                contrastDiffPixels[pixelIndex] = Color.MAGENTA
+            }
+        }
+
+        val diff = totalDelta * 100.0f / (width * height)
+        if (diff > TOLERANCE) {
+            val name = originalScreenshot.name
+            processScreenshotDiff(original, binaryDiffPixels, "binary_diff_$name")
+            processScreenshotDiff(original, contrastDiffPixels, "contrast_diff_$name")
+            return false
+        }
+
+        return true
+    }
+
+    private fun verifyPixelDiff(rgb1: Int, rgb2: Int): Boolean {
+        val r1 = Color.red(rgb1)
+        val g1 = Color.green(rgb1)
+        val b1 = Color.blue(rgb1)
+        val r2 = Color.red(rgb2)
+        val g2 = Color.green(rgb2)
+        val b2 = Color.blue(rgb2)
+        return abs(r1 - r2) <= COLOR_TOLERANCE &&
+                abs(g1 - g2) <= COLOR_TOLERANCE &&
+                abs(b1 - b2) <= COLOR_TOLERANCE
+    }
+
+    private fun processScreenshotDiff(original: Bitmap, diffPixels: IntArray, diffName: String) {
+        val width = original.width
+        val height = original.height
+        val diffBitmap = Bitmap.createBitmap(width, height, original.config)
+        diffBitmap.setPixels(diffPixels, 0, width, 0, 0, width, height)
+        val screenshotDiff = File(diffScreenshotsDeviceDir, diffName)
+        val scaledBitmap = Bitmap.createScaledBitmap(
+            diffBitmap,
+            (width * REPORT_ATTACHMENT_SCALE_FACTOR).roundToInt(),
+            (height * REPORT_ATTACHMENT_SCALE_FACTOR).roundToInt(),
+            false,
+        )
+        assert(
+            scaledBitmap.compress(
+                Bitmap.CompressFormat.PNG,
+                100,
+                FileOutputStream(screenshotDiff),
+            )
+        )
+        screenshotDiff.delete()
+    }
+}
