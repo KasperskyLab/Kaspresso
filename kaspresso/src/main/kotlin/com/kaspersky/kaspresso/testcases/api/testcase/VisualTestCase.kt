@@ -19,6 +19,8 @@ import android.graphics.Paint
 import android.graphics.Rect
 import android.os.Environment
 import android.os.SystemClock
+import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
+import com.kaspersky.kaspresso.testcases.core.testcontext.TestContext
 
 private const val ORIGINAL_SCREENSHOTS_DEVICE_DIR = "zen_original_screenshots"
 private const val DIFF_SCREENSHOTS_DIR = "zen_diff_screenshots"
@@ -54,57 +56,20 @@ private const val STATUS_BAR_HEIGHT = 65
  */
 abstract class VisualTestCase(
     kaspressoBuilder: Kaspresso.Builder = Kaspresso.Builder.simple(),
-    private val idleBeforeAssert: Long = DEFAULT_IDLE_BEFORE_ASSERT,
 ) : TestCase(kaspressoBuilder) {
-
-    /**
-     * Название скриншота по умолчанию, автоматически инкриминируется по мере теста
-     * @see assertScreenshot
-     */
-    private var screenshotId: Long = 0
-
-    /**
-     * Допустимое расхождение скриншота полученного во время теста с эталоном в %
-     * Например, для скриншота 100x100 (10_000 пикселей) [tolerance] равный 0.5% означает, что 5 пикселей нового
-     * скриншота могут отличаться от эталона
-     */
-    protected open val tolerance = Tolerance.FEATURE.pixelTolerance
-
-    private val originalScreenshotsDeviceDir by lazy {
-        File(Environment.getExternalStorageDirectory(), ORIGINAL_SCREENSHOTS_DEVICE_DIR)
-    }
-
-    private val originalScreenshotsProjectDir by lazy {
-        "${TestArgumentsHolder.originalScreenShotsProjectRootDir}/${this::class.qualifiedName?.replace('.', '/')}"
-    }
-
-    private val diffScreenshotsDeviceDir by lazy {
-        File(
-            Environment.getExternalStorageDirectory().absolutePath,
-            DIFF_SCREENSHOTS_DIR,
-        )
-    }
-
     fun runScreenshotTest(
-        files: List<String> = emptyList(),
         before: (BaseTestContext.() -> Unit)? = null,
         after: (BaseTestContext.() -> Unit)? = null,
-        test: TestContext<Unit>.(env: TestEnvironment) -> Unit,
-    ) = runTest(
-        env = env,
-        files = files,
-        before = {
-            prepare(env)
-            before?.invoke(this)
-        },
-        after = {
-            clean(env)
-            after?.invoke(this)
-        },
-        test = test,
-    )
+        test: TestContext<Unit>.() -> Unit,
+    ) = before {
+        prepare()
+        before?.invoke(this)
+    }.after {
+        clean()
+        after?.invoke(this)
+    }.run(test)
 
-    protected fun prepare(env: TestEnvironment) {
+    protected fun prepare() {
         if (env.screenshotTestMode == ScreenshotTestMode.Verify) {
             measureTime("Push screenshot files from project to device") {
                 originalScreenshotsDeviceDir.mkdirs()
