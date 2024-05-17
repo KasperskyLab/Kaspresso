@@ -9,15 +9,17 @@ import android.os.LocaleList
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.ConfigurationCompat
 import androidx.core.os.LocaleListCompat
+import com.kaspersky.kaspresso.docloc.SystemLanguage
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import java.util.Locale
 
 /**
  * The implementation of [Language]
  */
-class LanguageImpl(
+internal class LanguageImpl(
     private val logger: UiTestLogger,
     private val instrumentation: Instrumentation,
+    private val systemLanguage: SystemLanguage,
 ) : Language {
 
     override fun switchInApp(locale: Locale) {
@@ -44,6 +46,8 @@ class LanguageImpl(
             throw error
         }
     }
+
+    override fun switchInSystem(locale: Locale) = systemLanguage.switch(locale)
 
     private fun getCurrentLocale(): Locale? =
         ConfigurationCompat.getLocales(instrumentation.targetContext.resources.configuration).get(0)
