@@ -5,23 +5,19 @@ import android.graphics.BitmapFactory
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
+import com.kaspersky.kaspresso.logger.Logger
 import com.kaspersky.kaspresso.visual.ScreenshotsComparator
+import com.kaspersky.kaspresso.visual.VisualTestParams
 import java.io.File
 import java.io.FileOutputStream
 import kotlin.math.abs
 import kotlin.math.roundToInt
 
-/**
- * На разных видеокартах градиенты могут незначительно отличаться.
- * Больше информации можно прочитать тут https://habr.com/ru/articles/754730/
- * Данное значение толерантности допускает расхождение каждой состовляющей цвета (r,g,b) на каждый пиксель.
- */
-private const val COLOR_TOLERANCE = 1
-private const val TOLERANCE = 0.3f
-private val diffScreenshotsDeviceDir = File("/sdcard/Documents/diff")
-private const val REPORT_ATTACHMENT_SCALE_FACTOR = 0.33f
 
-class ScreenshotsComparatorImpl : ScreenshotsComparator {
+class ScreenshotsComparatorImpl(
+    private val visualTestParams: VisualTestParams,
+    private val logger: Logger,
+) : ScreenshotsComparator {
     override fun compare(originalScreenshot: File, newScreenshot: File): Boolean {
         val decodeOptions = BitmapFactory.Options().apply {
             inMutable = true
@@ -62,7 +58,8 @@ class ScreenshotsComparatorImpl : ScreenshotsComparator {
         }
 
         val diff = totalDelta * 100.0f / (width * height)
-        if (diff > TOLERANCE) {
+        logger.i("${originalScreenshot.absolutePath} diff is $diff")
+        if (diff > visualTestParams.tolerance) {
             val name = originalScreenshot.name
             processScreenshotDiff(original, binaryDiffPixels, "binary_diff_$name")
             processScreenshotDiff(original, contrastDiffPixels, "contrast_diff_$name")
@@ -73,15 +70,16 @@ class ScreenshotsComparatorImpl : ScreenshotsComparator {
     }
 
     private fun verifyPixelDiff(rgb1: Int, rgb2: Int): Boolean {
+        val colorTolerance = visualTestParams.colorTolerance
         val r1 = Color.red(rgb1)
         val g1 = Color.green(rgb1)
         val b1 = Color.blue(rgb1)
         val r2 = Color.red(rgb2)
         val g2 = Color.green(rgb2)
         val b2 = Color.blue(rgb2)
-        return abs(r1 - r2) <= COLOR_TOLERANCE &&
-                abs(g1 - g2) <= COLOR_TOLERANCE &&
-                abs(b1 - b2) <= COLOR_TOLERANCE
+        return abs(r1 - r2) <= colorTolerance &&
+                abs(g1 - g2) <= colorTolerance &&
+                abs(b1 - b2) <= colorTolerance
     }
 
     private fun processScreenshotDiff(original: Bitmap, diffPixels: IntArray, diffName: String) {
@@ -89,11 +87,11 @@ class ScreenshotsComparatorImpl : ScreenshotsComparator {
         val height = original.height
         val diffBitmap = Bitmap.createBitmap(width, height, original.config)
         diffBitmap.setPixels(diffPixels, 0, width, 0, 0, width, height)
-        val screenshotDiff = File(diffScreenshotsDeviceDir, diffName)
+        val screenshotDiff = File(visualTestParams.diffScreenshotsDeviceDir, diffName)
         val scaledBitmap = Bitmap.createScaledBitmap(
             diffBitmap,
-            (width * REPORT_ATTACHMENT_SCALE_FACTOR).roundToInt(),
-            (height * REPORT_ATTACHMENT_SCALE_FACTOR).roundToInt(),
+            width,
+            height,
             false,
         )
         assert(
@@ -103,6 +101,6 @@ class ScreenshotsComparatorImpl : ScreenshotsComparator {
                 FileOutputStream(screenshotDiff),
             )
         )
-        screenshotDiff.delete()
+//        screenshotDiff.delete()
     }
 }
