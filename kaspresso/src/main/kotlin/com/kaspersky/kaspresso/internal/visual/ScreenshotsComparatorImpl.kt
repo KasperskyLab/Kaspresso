@@ -2,21 +2,23 @@ package com.kaspersky.kaspresso.internal.visual
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
+import com.kaspersky.kaspresso.files.dirs.DirsProvider
+import com.kaspersky.kaspresso.files.resources.ResourcesRootDirsProvider
 import com.kaspersky.kaspresso.logger.Logger
 import com.kaspersky.kaspresso.visual.ScreenshotsComparator
 import com.kaspersky.kaspresso.visual.VisualTestParams
 import java.io.File
 import java.io.FileOutputStream
 import kotlin.math.abs
-import kotlin.math.roundToInt
 
 
 class ScreenshotsComparatorImpl(
     private val visualTestParams: VisualTestParams,
     private val logger: Logger,
+    private val dirsProvider: DirsProvider,
+    private val resourcesRootDirsProvider: ResourcesRootDirsProvider,
 ) : ScreenshotsComparator {
     override fun compare(originalScreenshot: File, newScreenshot: File): Boolean {
         val decodeOptions = BitmapFactory.Options().apply {
@@ -87,7 +89,8 @@ class ScreenshotsComparatorImpl(
         val height = original.height
         val diffBitmap = Bitmap.createBitmap(width, height, original.config)
         diffBitmap.setPixels(diffPixels, 0, width, 0, 0, width, height)
-        val screenshotDiff = File(visualTestParams.diffScreenshotsDeviceDir, diffName)
+        val diffDir = dirsProvider.provideNew(resourcesRootDirsProvider.screenshotsDiffRootDir)
+        val screenshotDiff = File(diffDir, diffName)
         val scaledBitmap = Bitmap.createScaledBitmap(
             diffBitmap,
             width,

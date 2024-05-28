@@ -768,7 +768,7 @@ data class Kaspresso(
             if (!::elementLoaderParams.isInitialized) elementLoaderParams = ElementLoaderParams()
             if (!::clickParams.isInitialized) clickParams = ClickParams.default()
             if (!::artifactsPullParams.isInitialized) artifactsPullParams = ArtifactsPullParams(enabled = false)
-            if (!::visualTestParams.isInitialized) visualTestParams = VisualTestParams(testType = VisualTestType.valueOf(BuildConfig.VISUAL_TEST_TYPE))
+            if (!::visualTestParams.isInitialized) visualTestParams = VisualTestParams(testType = VisualTestType.valueOf(BuildConfig.VISUAL_TEST_TYPE),)
 
             if (!::screenshots.isInitialized) {
                 screenshots = ScreenshotsImpl(
@@ -783,11 +783,9 @@ data class Kaspresso(
                     ),
                     visualTestParams = visualTestParams,
                     adbServer = adbServer,
-                    screenshotsComparator = ScreenshotsComparatorImpl(visualTestParams, testLogger),
-                    resourcesRootDirsProvider = resourcesRootDirsProvider,
+                    screenshotsComparator = ScreenshotsComparatorImpl(visualTestParams, testLogger, dirsProvider, resourcesRootDirsProvider),
                     dirsProvider = dirsProvider,
                     files = files,
-                    resourcesDirsProvider = resourcesDirsProvider
                 )
             }
 
@@ -1018,7 +1016,7 @@ data class Kaspresso(
 
                 stepWatcherInterceptors = stepWatcherInterceptors,
                 testRunWatcherInterceptors = testRunWatcherInterceptors,
-                visualTestWatcher = VisualTestWatcherImpl(visualTestParams, libLogger, dirsProvider, resourcesRootDirsProvider, resourcesDirsProvider, files),
+                visualTestWatcher = VisualTestWatcherImpl(visualTestParams, libLogger, dirsProvider, resourcesRootDirsProvider, files),
             )
 
             configurator.waitForIdleTimeout = kautomatorWaitForIdleSettings.waitForIdleTimeout

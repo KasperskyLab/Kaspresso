@@ -24,8 +24,6 @@ class ScreenshotsImpl(
     private val screenshotMaker: ScreenshotMaker,
     private val screenshotsComparator: ScreenshotsComparator,
     private val visualTestParams: VisualTestParams,
-    private val resourcesRootDirsProvider: ResourcesRootDirsProvider,
-    private val resourcesDirsProvider: ResourcesDirsProvider,
     private val dirsProvider: DirsProvider,
     private val adbServer: AdbServer,
     private val files: Files,
