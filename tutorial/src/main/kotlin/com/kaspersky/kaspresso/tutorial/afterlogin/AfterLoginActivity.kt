@@ -1,6 +1,6 @@
 package com.kaspersky.kaspresso.tutorial.afterlogin
 
-import android.os.Bundle
+import android.os.*
 import androidx.appcompat.app.AppCompatActivity
 import com.kaspersky.kaspresso.tutorial.databinding.ActivityAfterLoginBinding
 
