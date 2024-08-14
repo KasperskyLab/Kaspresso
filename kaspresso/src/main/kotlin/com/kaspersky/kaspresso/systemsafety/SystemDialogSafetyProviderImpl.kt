@@ -32,9 +32,9 @@ class SystemDialogSafetyProviderImpl(
 
     private val attemptsToSuppress: List<(UiDevice, AdbServer) -> Unit> = listOf(
         { _, adbServer ->
-            adbServer.performShell("input keyevent KEYCODE_BACK")
-            adbServer.performShell("input keyevent KEYCODE_ENTER")
-            adbServer.performShell("input keyevent KEYCODE_ENTER")
+            adbServer.performShell("input", listOf("keyevent", "KEYCODE_BACK"))
+            adbServer.performShell("input", listOf("keyevent", "KEYCODE_ENTER"))
+            adbServer.performShell("input", listOf("keyevent", "KEYCODE_ENTER"))
         },
         { uiDevice, _ -> uiDevice.wait(Until.findObject(By.res("android:id/button1")), DEFAULT_TIMEOUT).click() },
         { uiDevice, _ -> uiDevice.wait(Until.findObject(By.res("android:id/closeButton")), DEFAULT_TIMEOUT).click() },
@@ -111,7 +111,11 @@ class SystemDialogSafetyProviderImpl(
      */
     private fun isAndroidSystemDetected(): Boolean {
         with(uiDevice) {
-            var isSystemDialogVisible = SystemDialogSafetyPattern.values().any { isVisible(By.pkg(it.pattern).clazz(FrameLayout::class.java)) }
+            var isSystemDialogVisible = if (systemDialogsSafetyParams.shouldIgnorePermissionController) {
+                SystemDialogSafetyPattern.values().filter { it != SystemDialogSafetyPattern.PERMISSION_API30 }.any { isVisible(By.pkg(it.pattern).clazz(FrameLayout::class.java)) }
+            } else {
+                SystemDialogSafetyPattern.values().any { isVisible(By.pkg(it.pattern).clazz(FrameLayout::class.java)) }
+            }
 
             if (systemDialogsSafetyParams.shouldIgnoreKeyboard) {
                 val isKeyboardVisible = isVisible(By.pkg(Pattern.compile("\\S*google.android.inputmethod\\S*")).clazz(FrameLayout::class.java))
