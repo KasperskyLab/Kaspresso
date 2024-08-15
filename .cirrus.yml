@@ -6,7 +6,7 @@ check_android_30_task:
   skip: "changesIncludeOnly('NOTICE.txt', 'LICENSE.txt', '**.{md,html}')"
 
   container:
-    image: ghcr.io/cirruslabs/flutter:latest
+    image: ghcr.io/cirruslabs/android-sdk:34
     kvm: true
     cpu: 8
     memory: 24G
@@ -14,8 +14,9 @@ check_android_30_task:
     java -jar artifacts/adbserver-desktop.jar || true
   accept_licenses_script:
     echo yes | sdkmanager --licenses
-  install_emulator_script:
+  install_emulator_script: |
     # x86_64 somehow affect the "call" test
+    sdkmanager "emulator"
     sdkmanager --install "system-images;android-30;google_apis;x86"
   create_avd_script: |
     echo no | avdmanager create avd --force -n emulator -k "system-images;android-30;google_apis;x86"
@@ -74,7 +75,7 @@ check_android_33_task:
   skip: "changesIncludeOnly('NOTICE.txt', 'LICENSE.txt', '**.{md,html}')"
 
   container:
-    image: ghcr.io/cirruslabs/flutter:latest
+    image: ghcr.io/cirruslabs/android-sdk:34
     kvm: true
     cpu: 8
     memory: 24G
@@ -82,7 +83,8 @@ check_android_33_task:
     java -jar artifacts/adbserver-desktop.jar || true
   accept_licenses_script:
     echo yes | sdkmanager --licenses
-  install_emulator_script:
+  install_emulator_script: |
+    sdkmanager "emulator"
     sdkmanager --install "system-images;android-33;google_apis;x86_64"
   create_avd_script: |
     echo no | avdmanager create avd --force -n emulator -k "system-images;android-33;google_apis;x86_64"
@@ -138,7 +140,7 @@ check_android_21_task:
   skip: "changesIncludeOnly('NOTICE.txt', 'LICENSE.txt', '**.{md,html}')"
 
   container:
-    image: ghcr.io/cirruslabs/flutter:latest
+    image: ghcr.io/cirruslabs/android-sdk:34
     kvm: true
     cpu: 8
     memory: 24G
