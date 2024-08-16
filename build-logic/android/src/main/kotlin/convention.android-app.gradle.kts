@@ -35,6 +35,13 @@ android {
     buildFeatures {
         viewBinding = true // for the samples
     }
+
+    configurations.configureEach {
+        resolutionStrategy {
+            force("androidx.test:core:1.6.1")
+            // or force libs.test.core
+        }
+    }
 }
 
 tasks.withType<KotlinCompile>().configureEach {
