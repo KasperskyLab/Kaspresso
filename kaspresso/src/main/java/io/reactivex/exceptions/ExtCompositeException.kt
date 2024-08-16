@@ -20,7 +20,6 @@ package io.reactivex.exceptions
 
 import java.io.PrintStream
 import java.io.PrintWriter
-import java.util.Arrays
 import java.util.Collections
 
 /**
@@ -97,6 +96,7 @@ class ExtCompositeException(errors: Iterable<Throwable?>) : RuntimeException() {
      *
      * @throws IllegalArgumentException if `exceptions` is empty.
      */
+    @Suppress("SpreadOperator")
     constructor(vararg exceptions: Throwable) : this(listOf<Throwable>(*exceptions))
 
     /**
@@ -154,7 +154,7 @@ class ExtCompositeException(errors: Iterable<Throwable?>) : RuntimeException() {
      * stream to print to
      */
     private fun printStackTrace(s: PrintStreamOrWriter) {
-        val b = StringBuilder(128)
+        val b = StringBuilder()
         b.append(this).append('\n')
         for (myStackElement in stackTrace) {
             b.append("\tat ").append(myStackElement).append('\n')
@@ -179,21 +179,21 @@ class ExtCompositeException(errors: Iterable<Throwable?>) : RuntimeException() {
         }
     }
 
-    internal abstract class PrintStreamOrWriter {
+    internal interface PrintStreamOrWriter {
         /** Prints the specified string as a line on this StreamOrWriter.  */
-        abstract fun println(o: Any?)
+        fun println(o: Any?)
     }
 
     /**
      * Same abstraction and implementation as in JDK to allow PrintStream and PrintWriter to share implementation.
      */
-    internal class WrappedPrintStream(private val printStream: PrintStream) : PrintStreamOrWriter() {
+    internal class WrappedPrintStream(private val printStream: PrintStream) : PrintStreamOrWriter {
         override fun println(o: Any?) {
             printStream.println(o)
         }
     }
 
-    internal class WrappedPrintWriter(private val printWriter: PrintWriter) : PrintStreamOrWriter() {
+    internal class WrappedPrintWriter(private val printWriter: PrintWriter) : PrintStreamOrWriter {
         override fun println(o: Any?) {
             printWriter.println(o)
         }
