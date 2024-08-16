@@ -29,6 +29,8 @@ interface Permissions {
         ALLOW,
         ALLOW_ALWAYS,
         ALLOW_FOREGROUND,
+        ALLOW_ALL,
+        ALLOW_SELECTED,
         DENY
     }
 }

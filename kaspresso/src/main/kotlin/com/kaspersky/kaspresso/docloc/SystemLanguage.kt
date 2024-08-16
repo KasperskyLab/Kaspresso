@@ -10,7 +10,7 @@ import com.kaspersky.kaspresso.device.permissions.HackPermissions
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import java.util.Locale
 
-class SystemLanguage(
+internal class SystemLanguage(
     private val context: Context,
     private val logger: UiTestLogger,
     private val hackPermissions: HackPermissions
@@ -40,7 +40,7 @@ class SystemLanguage(
                 Failed to change system locale due to API restrictions. To fix this execute one of the following commands.
                 For Android 10 (API level 29) or higher:
                     "adb shell settings put global hidden_api_policy 1"
-                For Android 9 (API level 28): 
+                For Android 9 (API level 28):
                     "adb shell settings put global hidden_api_policy_pre_p_apps 1"
                     "adb shell settings put global hidden_api_policy_p_apps 1"
                 To rollback these settings execute
@@ -62,6 +62,7 @@ class SystemLanguage(
      * Try to grant permission CHANGE_CONFIGURATION if the permission was not granted
      * @throws DocLocException In case of a failure to grant one
      */
+    @Suppress("DEPRECATION")
     private fun grantPermissionsIfNeed() {
         val permissionStateAtTheBeginning = context.checkPermission(Manifest.permission.CHANGE_CONFIGURATION, Process.myPid(), Process.myUid())
         if (permissionStateAtTheBeginning == PackageManager.PERMISSION_GRANTED) {

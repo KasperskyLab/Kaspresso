@@ -6,7 +6,6 @@ import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.screen.ChangeLocaleScreen
 import com.kaspersky.kaspressample.screen.MainScreen
-import com.kaspersky.kaspresso.docloc.SystemLanguage
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.junit.Rule
 import org.junit.Test
@@ -24,20 +23,19 @@ class ChangeSystemLanguageMidTestCase : TestCase() {
 
     @Test
     fun checkLocaleChangeMidTest() = run {
-        val systemLanguage = SystemLanguage(device.targetContext, testLogger, device.hackPermissions)
         step("Open change locale screen") {
             MainScreen {
                 changeLocaleButton { click() }
             }
         }
         step("Check EN locale text") {
-            systemLanguage.switch(Locale.ENGLISH)
+            device.language.switchInSystem(Locale.ENGLISH)
             ChangeLocaleScreen {
                 text { containsText("123") }
             }
         }
         step("Check RU locale text") {
-            systemLanguage.switch(Locale.forLanguageTag("RU"))
+            device.language.switchInSystem(Locale.forLanguageTag("RU"))
             ChangeLocaleScreen {
                 text { containsText("321") }
             }

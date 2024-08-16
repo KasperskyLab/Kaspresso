@@ -1,7 +1,9 @@
 @file:Suppress("unused")
 package com.kaspersky.components.kautomator.component.common.builders
 
+import android.os.Build
 import androidx.annotation.IdRes
+import androidx.annotation.RequiresApi
 import androidx.annotation.StringRes
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.BySelector
@@ -314,6 +316,41 @@ class UiViewBuilder {
      * @param max Maximal depth
      */
     fun withMaxDepth(max: Int) = addSelector { maxDepth(max) }
+
+    /**
+     * Matches the view being on the display with the provided id
+     */
+    @RequiresApi(Build.VERSION_CODES.R)
+    fun withDisplayId(id: Int) = addSelector { displayId(id) }
+
+    /**
+     * Matches the view that has parent which fits the given matcher
+     */
+    fun withParent(function: UiViewBuilder.() -> Unit) = addSelector { hasParent(UiViewBuilder().apply(function).build().bySelector) }
+
+    /**
+     * Matches the view with given hint
+     *
+     * @param text Text to match
+     */
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun withHint(text: String) = addSelector { hint(text) }
+
+    /**
+     * Matches the view with given hint
+     *
+     * @param textRes Text to match
+     */
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun withHint(@StringRes textRes: Int) = addSelector { hint(KString.getString(textRes)) }
+
+    /**
+     * Matches the view with given hint
+     *
+     * @param text Text to match
+     */
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun withHint(text: Pattern) = addSelector { hint(text) }
 
     /**
      * Matches the view which has child of given matcher

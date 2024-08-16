@@ -51,6 +51,7 @@ import com.kaspersky.kaspresso.device.video.VideosImpl
 import com.kaspersky.kaspresso.device.video.recorder.VideoRecorderImpl
 import com.kaspersky.kaspresso.device.viewhierarchy.ViewHierarchyDumper
 import com.kaspersky.kaspresso.device.viewhierarchy.ViewHierarchyDumperImpl
+import com.kaspersky.kaspresso.docloc.SystemLanguage
 import com.kaspersky.kaspresso.failure.LoggingFailureHandler
 import com.kaspersky.kaspresso.files.dirs.DefaultDirsProvider
 import com.kaspersky.kaspresso.files.dirs.DirsProvider
@@ -761,7 +762,10 @@ data class Kaspresso(
                 instrumentalDependencyProviderFactory.getComponentProvider<ExploitImpl>(instrumentation),
                 adbServer
             )
-            if (!::language.isInitialized) language = LanguageImpl(libLogger, instrumentation)
+            if (!::language.isInitialized) {
+                val systemLanguage = SystemLanguage(instrumentation.targetContext, testLogger, hackPermissions)
+                language = LanguageImpl(libLogger, instrumentation, systemLanguage)
+            }
             if (!::logcat.isInitialized) logcat = LogcatImpl(libLogger, adbServer)
 
             if (!::flakySafetyParams.isInitialized) flakySafetyParams = FlakySafetyParams.default()
