@@ -17,7 +17,6 @@ import com.kaspersky.components.alluresupport.runlisteners.AllureRunListener
 import com.kaspersky.components.alluresupport.visual.AllureScreenshotsComparator
 import com.kaspersky.components.alluresupport.visual.AllureVisualTestWatcher
 import com.kaspersky.kaspresso.BuildConfig
-import com.kaspersky.kaspresso.device.Device
 import com.kaspersky.kaspresso.device.files.FilesImpl
 import com.kaspersky.kaspresso.device.server.AdbServerImpl
 import com.kaspersky.kaspresso.files.dirs.DefaultDirsProvider
