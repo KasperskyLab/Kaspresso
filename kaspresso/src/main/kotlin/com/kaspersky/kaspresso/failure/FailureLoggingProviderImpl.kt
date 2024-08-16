@@ -77,7 +77,7 @@ class FailureLoggingProviderImpl(
      * @return transformed [error].
      */
     private fun Throwable.describedWith(viewMatcher: Matcher<View>?): Throwable {
-        return when {
+        val newError = when {
             this is PerformException -> {
                 PerformException.Builder()
                     .from(this)
@@ -93,7 +93,11 @@ class FailureLoggingProviderImpl(
                 RuntimeException(message.toString())
             }
             else -> this
-        }.apply { stackTrace = Thread.currentThread().stackTrace }
+        }
+        newError.stackTrace = Thread.currentThread().stackTrace
+        newError.addSuppressed(this)
+
+        return newError
     }
 
     private fun isWebViewException(throwable: Throwable): Boolean {
