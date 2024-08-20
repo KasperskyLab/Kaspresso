@@ -31,3 +31,7 @@ tasks.withType<KotlinCompile>().configureEach {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 }
+
+kotlin {
+    jvmToolchain(8)
+}
