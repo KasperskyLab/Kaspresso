@@ -112,7 +112,7 @@ class SystemDialogSafetyProviderImpl(
     private fun isAndroidSystemDetected(): Boolean {
         with(uiDevice) {
             var isSystemDialogVisible = if (systemDialogsSafetyParams.shouldIgnorePermissionDialogs) {
-                SystemDialogSafetyPattern.values().filter { it != SystemDialogSafetyPattern.PERMISSION_API30 && it != SystemDialogSafetyPattern.PERMISSION_API23}
+                SystemDialogSafetyPattern.values().filter { it != SystemDialogSafetyPattern.PERMISSION_API30 && it != SystemDialogSafetyPattern.PERMISSION_API23 }
                     .any { isVisible(By.pkg(it.pattern).clazz(FrameLayout::class.java)) }
             } else {
                 SystemDialogSafetyPattern.values().any { isVisible(By.pkg(it.pattern).clazz(FrameLayout::class.java)) }
