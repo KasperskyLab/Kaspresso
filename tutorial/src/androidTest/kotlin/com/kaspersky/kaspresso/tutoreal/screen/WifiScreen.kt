@@ -3,12 +3,13 @@ package com.kaspersky.kaspresso.tutoreal.screen
 import com.kaspersky.kaspresso.screens.KScreen
 import com.kaspersky.kaspresso.tutorial.R
 import io.github.kakaocup.kakao.text.KButton
+import io.github.kakaocup.kakao.text.KTextView
 
-object MainSceen: KScreen<MainSceen>() {
+object WifiScreen : KScreen<WifiScreen>() {
 
     override val layoutId: Int? = null
     override val viewClass: Class<*>? = null
 
-    val simpleActivityButton = KButton {withId(R.id.simple_activity_btn)}
-    val wifiActivityButton = KButton {withId(R.id.wifi_activity_btn)}
+    val checkWifiButton = KButton {withId(R.id.check_wifi_btn)}
+    val wifiStatus = KTextView {withId(R.id.wifi_status)}
 }

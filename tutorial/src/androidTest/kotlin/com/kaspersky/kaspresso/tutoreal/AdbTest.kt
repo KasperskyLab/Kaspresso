@@ -19,7 +19,7 @@ class AdbTest : TestCase() {
         }
 
         //* Не запускается, скорее проблема в версии ADB */
-//        val packages = adbServer.performShell("pm list packages")
+        //val packages = adbServer.performAdb(" adb shell pm list packages")
 //            Assert.assertTrue(device.targetContext.packageName in packages.first())
 
 
