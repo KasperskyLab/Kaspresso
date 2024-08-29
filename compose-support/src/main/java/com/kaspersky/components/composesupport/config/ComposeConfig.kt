@@ -1,5 +1,6 @@
 package com.kaspersky.components.composesupport.config
 
+import com.kaspersky.components.composesupport.flakysafety.ComposeFlakySafetyScalper
 import com.kaspersky.components.composesupport.interceptors.behavior.SemanticsBehaviorInterceptor
 import com.kaspersky.components.composesupport.interceptors.behavior.impl.autoscroll.AutoScrollSemanticsBehaviorInterceptor
 import com.kaspersky.components.composesupport.interceptors.behavior.impl.elementloader.ElementLoaderSemanticsBehaviorInterceptor
@@ -51,6 +52,9 @@ class ComposeConfig {
                         FlakySafeSemanticsBehaviorInterceptor(flakySafetyParams, libLogger)
                     )
                 }
+
+            val composeFlakySafetyScalper = ComposeFlakySafetyScalper(semanticsBehaviorInterceptors, semanticsWatcherInterceptors)
+            externalFlakySafetyScalperNotifier.addScalper(composeFlakySafetyScalper)
         }
 
         fun build() {
