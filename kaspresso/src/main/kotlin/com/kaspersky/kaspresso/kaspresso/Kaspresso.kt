@@ -653,6 +653,11 @@ data class Kaspresso(
          */
         lateinit var testRunWatcherInterceptors: MutableList<TestRunWatcherInterceptor>
 
+        /**
+         * Holds a reference to the custom "external" flaky safety scalpers that are not set in the kaspresso by default
+         * @see com.kaspersky.kaspresso.flakysafety.scalpel.FlakySafeInterceptorScalpel
+         * @see com.kaspersky.kaspresso.flakysafety.scalpel.external.ExternalFlakySafetyScalper
+         */
         lateinit var externalFlakySafetyScalperNotifier: ExternalFlakySafetyScalperNotifier
 
         /**

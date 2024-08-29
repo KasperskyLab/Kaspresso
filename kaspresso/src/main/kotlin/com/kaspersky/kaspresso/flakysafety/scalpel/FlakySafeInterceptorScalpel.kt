@@ -14,7 +14,7 @@ import com.kaspersky.kaspresso.interceptors.tolibrary.KakaoLibraryInjector
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 
 /**
- * The special class that removes all interceptors related to FlakySafety from Kautomator settings
+ * The special class that removes all interceptors related to FlakySafety from kakao settings
  * and restore them by demand
  */
 internal class FlakySafeInterceptorScalpel(
