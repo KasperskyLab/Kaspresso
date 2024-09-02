@@ -30,4 +30,5 @@ dependencies {
 
     testImplementation(libs.junit)
     testImplementation(libs.truth)
+    testImplementation(libs.mockk)
 }
