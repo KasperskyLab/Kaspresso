@@ -2,6 +2,7 @@ package com.kaspersky.adbserver.device
 
 import com.kaspersky.adbserver.commandtypes.AdbCommand
 import com.kaspersky.adbserver.commandtypes.CmdCommand
+import com.kaspersky.adbserver.commandtypes.ComplexAdbCommand
 import com.kaspersky.adbserver.common.api.CommandResult
 import com.kaspersky.adbserver.common.log.LoggerFactory
 import com.kaspersky.adbserver.common.log.logger.LogLevel
@@ -35,7 +36,7 @@ object AdbTerminal {
      * Please first of all call [connect] method to establish a connection
      */
     fun executeAdb(command: String, arguments: List<String>): CommandResult = device?.fulfill(
-        AdbCommand(command, arguments)
+        ComplexAdbCommand(command, arguments)
     ) ?: throw IllegalStateException("Please first of all call [connect] method to establish a connection")
 
     /**
