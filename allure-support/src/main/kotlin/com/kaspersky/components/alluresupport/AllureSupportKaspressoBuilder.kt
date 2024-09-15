@@ -18,6 +18,7 @@ import com.kaspersky.kaspresso.files.resources.impl.DefaultResourceFilesProvider
 import com.kaspersky.kaspresso.files.resources.impl.DefaultResourcesDirNameProvider
 import com.kaspersky.kaspresso.files.resources.impl.DefaultResourcesDirsProvider
 import com.kaspersky.kaspresso.instrumental.InstrumentalDependencyProvider
+import com.kaspersky.kaspresso.interceptors.watcher.testcase.StepWatcherInterceptor
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.runner.listener.addUniqueListener
 import com.kaspersky.kaspresso.runner.listener.getUniqueListener
@@ -74,7 +75,23 @@ fun Kaspresso.Builder.Companion.withForcedAllureSupport(
     forceAllureSupportFileProviders(instrumentalDependencyProvider)
     addRunListenersIfNeeded(instrumentalDependencyProvider)
 }.apply {
-    postInitAllure(shouldRecordVideo, builder = this)
+    postInitAllure(shouldRecordVideo, true, builder = this)
+}
+
+fun Kaspresso.Builder.Companion.withForcedAllureSupport(
+    shouldRecordVideo: Boolean = true,
+    shouldCaptureScreenShots: Boolean = true,
+    customize: Kaspresso.Builder.() -> Unit = {}
+): Kaspresso.Builder = simple {
+    if (!isAndroidRuntime) {
+        return@simple
+    }
+    customize.invoke(this)
+    val instrumentalDependencyProvider = instrumentalDependencyProviderFactory.getComponentProvider<Kaspresso>(instrumentation)
+    forceAllureSupportFileProviders(instrumentalDependencyProvider)
+    addRunListenersIfNeeded(instrumentalDependencyProvider)
+}.apply {
+    postInitAllure(shouldRecordVideo, shouldCaptureScreenShots, builder = this)
 }
 
 private fun Kaspresso.Builder.forceAllureSupportFileProviders(provider: InstrumentalDependencyProvider) {
@@ -111,22 +128,28 @@ private fun Kaspresso.Builder.addRunListenersIfNeeded(provider: InstrumentalDepe
     }
 }
 
-private fun postInitAllure(shouldRecordVideo: Boolean, builder: Kaspresso.Builder): Unit = with(builder) {
+private fun postInitAllure(shouldRecordVideo: Boolean, shouldCaptureScreenShots: Boolean, builder: Kaspresso.Builder): Unit = with(builder) {
     if (!isAndroidRuntime) {
         return@with
     }
     stepWatcherInterceptors.addAll(
-        listOf(
-            ScreenshotStepInterceptor(screenshots),
+        mutableListOf<StepWatcherInterceptor>(
             AllureMapperStepInterceptor()
-        )
+        ).apply {
+            if (shouldCaptureScreenShots) {
+                add(ScreenshotStepInterceptor(screenshots))
+            }
+        }
     )
     testRunWatcherInterceptors.addAll(
-        listOf(
+        mutableListOf(
             DumpLogcatTestInterceptor(logcatDumper),
-            ScreenshotTestInterceptor(screenshots),
             DumpViewsTestInterceptor(viewHierarchyDumper),
-        )
+        ).apply {
+            if (shouldCaptureScreenShots) {
+                add(ScreenshotTestInterceptor(screenshots))
+            }
+        }
     )
     if (shouldRecordVideo) {
         val provider = instrumentalDependencyProviderFactory.getComponentProvider<Kaspresso>(instrumentation)
