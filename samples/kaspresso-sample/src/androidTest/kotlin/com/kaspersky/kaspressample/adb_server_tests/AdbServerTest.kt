@@ -21,6 +21,12 @@ class AdbServerTest : TestCase() {
 
     @Test
     fun singleCommandTest() = run {
+        val devices = adbServer.performAdb("devices")
+        assert(devices.isNotEmpty())
+    }
+
+    @Test
+    fun singleComplexCommandTest() = run {
         val devices = adbServer.performAdb("devices", arguments = emptyList())
         assert(devices.isNotEmpty())
     }
