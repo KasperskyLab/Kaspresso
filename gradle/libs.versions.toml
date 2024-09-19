@@ -53,6 +53,7 @@ kakaoExtClicks = { module = "io.github.kakaocup:kakao-ext-clicks", version.ref =
 junit = "junit:junit:4.13.2"
 junitJupiter = "org.junit.jupiter:junit-jupiter:5.9.0"
 truth = "com.google.truth:truth:1.3.0"
+mockk = "io.mockk:mockk:1.13.12"
 
 androidXTestCore = { module = "androidx.test:core", version.ref = "androidXTest" }
 androidXTestRules = { module = "androidx.test:rules", version.ref = "androidXTest" }
