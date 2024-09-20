@@ -7,11 +7,11 @@ android {
     defaultConfig {
         applicationId = "com.kaspersky.kaspresso.alluresupport.sample"
         testInstrumentationRunner = "com.kaspersky.kaspresso.runner.KaspressoRunner"
-        testInstrumentationRunnerArguments["clearPackageData"] = "true"
+        testInstrumentationRunnerArguments["clearPackageData"] = "false"
     }
 
     testOptions {
-        execution = "ANDROIDX_TEST_ORCHESTRATOR"
+//        execution = "ANDROIDX_TEST_ORCHESTRATOR"
     }
 }
 
