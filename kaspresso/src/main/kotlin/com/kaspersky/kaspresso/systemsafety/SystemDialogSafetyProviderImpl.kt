@@ -118,6 +118,10 @@ class SystemDialogSafetyProviderImpl(
                 isSystemDialogVisible = isSystemDialogVisible && !isKeyboardVisible
             }
 
+            if (!systemDialogsSafetyParams.shouldIgnoreCrashes) {
+                isSystemDialogVisible = isSystemDialogVisible || listOf("aerr_close", "aerr_close_app").any { isVisible(By.res("android", it)) }
+            }
+
             if (isSystemDialogVisible) {
                 logger.i("The android system dialog/window was detected")
                 return true
