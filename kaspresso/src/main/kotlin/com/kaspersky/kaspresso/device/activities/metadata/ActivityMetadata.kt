@@ -51,10 +51,9 @@ internal class ActivityMetadata(
     private fun getLocalizedStrings(decorView: View): List<LocalizedString> {
         return TreeIterables.depthFirstViewTraversal(decorView)
             .filter { it.visibility == View.VISIBLE }
-            .filter { it is TextView || it is CollapsingToolbarLayout }
-            .map { v ->
-                if (v is TextView) {
-                    LocalizedString(
+            .mapNotNull { v ->
+                when (v) {
+                    is TextView -> LocalizedString(
                         v.text.toString(),
                         getEntryName(decorView.resources, v),
                         v.left,
@@ -62,17 +61,17 @@ internal class ActivityMetadata(
                         v.width,
                         v.height
                     )
-                } else {
-                    LocalizedString(
-                        (v as CollapsingToolbarLayout).title.toString(),
+                    is CollapsingToolbarLayout -> LocalizedString(
+                        v.title.toString(),
                         getEntryNameFromLayout(decorView.resources, v),
                         v.left,
                         v.top,
                         v.width,
                         v.height
                     )
+                    else -> null
                 }
-            }.toMutableList()
+            }
     }
 
     private fun getEntryName(resources: Resources, v: TextView): String {
