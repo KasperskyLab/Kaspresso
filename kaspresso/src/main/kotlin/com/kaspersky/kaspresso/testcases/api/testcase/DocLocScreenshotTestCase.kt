@@ -100,7 +100,7 @@ abstract class DocLocScreenshotTestCase(
             override val logcatRootDir: File = File("logcat")
             override val screenshotsRootDir = screenshotsDirectory
             override val originalScreenshotsRootDir = File("original_screenshots")
-            override val screenshotsDiffRootDir: File = File("diff")
+            override val screenshotsDiffRootDir: File = File("screenshot_diffs")
             override val videoRootDir: File = File("video")
             override val viewHierarchy: File = File("view_hierarchy")
         },

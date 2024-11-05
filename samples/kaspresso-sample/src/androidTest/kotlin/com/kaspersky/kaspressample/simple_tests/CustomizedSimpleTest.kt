@@ -45,7 +45,7 @@ class CustomizedSimpleTest : TestCase(
                 override val logcatRootDir = File("custom_logcat")
                 override val screenshotsRootDir = File("custom_screenshots")
                 override val originalScreenshotsRootDir = File("custom_original_screenshots")
-                override val screenshotsDiffRootDir = File("custom_diff")
+                override val screenshotsDiffRootDir = File("custom_screenshot_diffs")
                 override val videoRootDir = File("custom_video")
                 override val viewHierarchy = File("custom_view_hierarchy")
             }

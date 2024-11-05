@@ -20,16 +20,17 @@ class AllureVisualTest : AllureVisualTestCase(failEarly = false) {
 
     @Test
     fun counter() = runScreenshotTest {
-        step("Launch the app") {
-
-            MainScreen {
-                incrementButton.isDisplayed()
-                decrementButton.isDisplayed()
-                clearButton.isDisplayed()
-                valueText.isDisplayed()
-            }
-
+        step("Assert screenshot") {
             assertScreenshot("some_tag")
+        }
+
+        step("Usual checks") {
+            MainScreen {
+                incrementButton { isDisplayed() }
+                decrementButton { isDisplayed() }
+                clearButton { isDisplayed() }
+                valueText { isDisplayed() }
+            }
         }
     }
 }
