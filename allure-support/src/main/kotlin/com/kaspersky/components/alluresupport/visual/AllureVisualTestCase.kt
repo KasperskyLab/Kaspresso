@@ -18,7 +18,11 @@ abstract class AllureVisualTestCase(
         try {
             device.screenshots.assert(tag, isFullWindow)
         } catch (ex: ScreenshotsImpl.ScreenshotDoesntMatchException) {
-            if (failEarly) { throw ex }
+            if (failEarly) {
+                // Wrap with assertion error so test would be marked as FAILED instead of BROKEN
+                // See https://github.com/allure-framework/allure-kotlin allure-kotlin-commons/src/main/kotlin/io/qameta/allure/kotlin/util/ResultsUtils.kt
+                throw AssertionError(ex)
+            }
 
             Allure.lifecycle.updateStep {
                 it.status = Status.FAILED

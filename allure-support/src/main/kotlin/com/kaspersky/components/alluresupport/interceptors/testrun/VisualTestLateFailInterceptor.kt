@@ -8,7 +8,9 @@ import com.kaspersky.kaspresso.testcases.models.info.TestInfo
 class VisualTestLateFailInterceptor : TestRunWatcherInterceptor {
     override fun onAfterSectionStarted(testInfo: TestInfo) {
         if (AllureVisualTestFlag.shouldFailLate.get()) {
-            throw ScreenshotsImpl.ScreenshotDoesntMatchException("There were failed screenshot comparisons. Check the allure report")
+            // Wrap with assertion error so test would be marked as FAILED instead of BROKEN
+            // See https://github.com/allure-framework/allure-kotlin allure-kotlin-commons/src/main/kotlin/io/qameta/allure/kotlin/util/ResultsUtils.kt
+            throw AssertionError(ScreenshotsImpl.ScreenshotDoesntMatchException("There were failed screenshot comparisons. Check the allure report"))
         }
     }
 }
