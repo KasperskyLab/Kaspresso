@@ -10,7 +10,7 @@ import com.kaspersky.kaspresso.device.permissions.HackPermissions
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import java.util.Locale
 
-internal class SystemLanguage(
+open class SystemLanguage(
     private val context: Context,
     private val logger: UiTestLogger,
     private val hackPermissions: HackPermissions
