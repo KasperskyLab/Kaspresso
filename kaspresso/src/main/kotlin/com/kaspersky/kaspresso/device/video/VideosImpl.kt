@@ -12,7 +12,10 @@ class VideosImpl(
 ) : Videos {
 
     override fun record(tag: String) {
-        val videoFile: File = resourceFilesProvider.provideVideoFile(tag)
+        val sanitizedVideoName = tag
+            .replace("[/:\"*?<>|]+".toRegex(), "")
+            .replace(' ', '_')
+        val videoFile: File = resourceFilesProvider.provideVideoFile(sanitizedVideoName)
         videoRecorder.start(videoFile)
     }
 
