@@ -797,6 +797,7 @@ data class Kaspresso(
                     screenshotsComparator = screenshotsComparator,
                     dirsProvider = dirsProvider,
                     resourceFileNamesProvider = resourceFileNamesProvider,
+                    resourcesDirsProvider = resourcesDirsProvider,
                 )
             }
 

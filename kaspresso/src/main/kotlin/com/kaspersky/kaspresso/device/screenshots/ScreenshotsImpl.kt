@@ -6,6 +6,8 @@ import com.kaspersky.kaspresso.files.dirs.DirsProvider
 import com.kaspersky.kaspresso.files.extensions.FileExtension
 import com.kaspersky.kaspresso.files.resources.ResourceFileNamesProvider
 import com.kaspersky.kaspresso.files.resources.ResourceFilesProvider
+import com.kaspersky.kaspresso.files.resources.ResourcesDirNameProvider
+import com.kaspersky.kaspresso.files.resources.ResourcesDirsProvider
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.visual.ScreenshotsComparator
 import com.kaspersky.kaspresso.visual.VisualTestParams
@@ -23,6 +25,7 @@ class ScreenshotsImpl(
     private val visualTestParams: VisualTestParams,
     private val dirsProvider: DirsProvider,
     private val resourceFileNamesProvider: ResourceFileNamesProvider,
+    private val resourcesDirsProvider: ResourcesDirsProvider,
 ) : Screenshots {
 
     private val originalScreenshotsDir: File
@@ -59,7 +62,7 @@ class ScreenshotsImpl(
             null
         } else {
             originalScreenshotsDir.mkdirs()
-            File(originalScreenshotsDir, resourceFileNamesProvider.getFileName(tag, FileExtension.PNG.toString()))
+            resourcesDirsProvider.provide(originalScreenshotsDir).resolve(resourceFileNamesProvider.getFileName(tag, FileExtension.PNG.toString()))
         }
         doTakeAndApply(tag = tag, isFull = isFullWindow, targetPath) { screenshot = this }
 
@@ -72,10 +75,11 @@ class ScreenshotsImpl(
 
     private fun File.compare() {
         logger.i("Comparing screenshot ${this.absolutePath}")
-        val originalScreenshot = File(originalScreenshotsDir, name)
+        val originalScreenshot = resourcesDirsProvider.provide(originalScreenshotsDir, provideCleared = false)
+            .resolve(resourceFileNamesProvider.getFileName(nameWithoutExtension, FileExtension.PNG.toString()))
         assert(originalScreenshot.exists()) {
             "Tried to assert screenshot $absolutePath, but failed to find matching " +
-                    "original screenshot by the path: ${originalScreenshotsDir.absolutePath}/$name"
+                    "original screenshot by the path: ${originalScreenshot.absolutePath}/$name"
         }
         val doesMatch = screenshotsComparator.compare(originalScreenshot, this)
         logger.i("Does screenshot $name matches the original one: $doesMatch")

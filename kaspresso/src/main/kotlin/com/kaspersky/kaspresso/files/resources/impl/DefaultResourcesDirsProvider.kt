@@ -5,6 +5,7 @@ import com.kaspersky.kaspresso.files.extensions.findTestMethod
 import com.kaspersky.kaspresso.files.models.TestMethod
 import com.kaspersky.kaspresso.files.resources.ResourcesDirNameProvider
 import com.kaspersky.kaspresso.files.resources.ResourcesDirsProvider
+import com.kaspersky.kaspresso.internal.extensions.other.createDirIfNeeded
 import java.io.File
 
 class DefaultResourcesDirsProvider(
@@ -13,10 +14,14 @@ class DefaultResourcesDirsProvider(
     private val testThread: Thread = Thread.currentThread()
 ) : ResourcesDirsProvider {
 
-    override fun provide(dest: File, subDir: String?): File {
+    override fun provide(dest: File, subDir: String?, provideCleared: Boolean): File {
         val rootDir: File = dirsProvider.provideNew(dest)
         val resourcesDest: File = resolveResourcesDirDest(rootDir, subDir)
-        return dirsProvider.provideCleared(resourcesDest)
+        return if (provideCleared) {
+            dirsProvider.provideCleared(resourcesDest)
+        } else {
+            resourcesDest.createDirIfNeeded()
+        }
     }
 
     private fun resolveResourcesDirDest(rootDir: File, subDir: String? = null): File {

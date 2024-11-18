@@ -3,6 +3,7 @@ package com.kaspersky.kaspresso.internal.visual
 import com.kaspersky.kaspresso.device.files.Files
 import com.kaspersky.kaspresso.files.dirs.DirsProvider
 import com.kaspersky.kaspresso.files.resources.ResourcesRootDirsProvider
+import com.kaspersky.kaspresso.internal.exceptions.AdbServerException
 import com.kaspersky.kaspresso.logger.Logger
 import com.kaspersky.kaspresso.visual.VisualTestParams
 import com.kaspersky.kaspresso.visual.VisualTestType
@@ -32,7 +33,11 @@ internal class DefaultVisualTestWatcher(
             dirsProvider.provideCleared(diffDir)
 
             dirsProvider.provideCleared(originalScreenshotsTargetDir)
-            files.push(params.hostScreenshotsDir, dirsProvider.provideNew(File("")).absolutePath)
+            try {
+                files.push(params.hostScreenshotsDir, dirsProvider.provideNew(File("")).absolutePath)
+            } catch (ex: AdbServerException) {
+                throw RuntimeException("Failed to push screenshots. Please, check that they exist by the path: ${params.hostScreenshotsDir} (relatively to the ADB server executable", ex)
+            }
             logger.i("Done pushing the screenshots unto the device")
         }
     }
