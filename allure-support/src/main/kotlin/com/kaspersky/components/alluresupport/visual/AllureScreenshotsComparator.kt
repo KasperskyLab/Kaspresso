@@ -2,7 +2,8 @@ package com.kaspersky.components.alluresupport.visual
 
 import android.graphics.Bitmap
 import com.kaspersky.components.alluresupport.files.attachScreenshotToAllureReport
-import com.kaspersky.kaspresso.files.dirs.DirsProvider
+import com.kaspersky.kaspresso.files.resources.ResourceFileNamesProvider
+import com.kaspersky.kaspresso.files.resources.ResourcesDirsProvider
 import com.kaspersky.kaspresso.files.resources.ResourcesRootDirsProvider
 import com.kaspersky.kaspresso.internal.visual.DefaultScreenshotsComparator
 import com.kaspersky.kaspresso.logger.Logger
@@ -12,9 +13,10 @@ import java.io.File
 class AllureScreenshotsComparator(
     visualTestParams: VisualTestParams,
     logger: Logger,
-    dirsProvider: DirsProvider,
     resourcesRootDirsProvider: ResourcesRootDirsProvider,
-) : DefaultScreenshotsComparator(visualTestParams, logger, dirsProvider, resourcesRootDirsProvider) {
+    resourcesDirsProvider: ResourcesDirsProvider,
+    resourceFileNamesProvider: ResourceFileNamesProvider,
+) : DefaultScreenshotsComparator(visualTestParams, logger, resourcesRootDirsProvider, resourcesDirsProvider, resourceFileNamesProvider) {
     override fun compare(originalScreenshot: File, newScreenshot: File): Boolean {
         val doScreenshotsMatch = super.compare(originalScreenshot, newScreenshot)
         if (!doScreenshotsMatch) {

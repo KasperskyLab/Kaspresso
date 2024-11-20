@@ -115,7 +115,13 @@ private fun Kaspresso.Builder.initVisualTestParams(visualParams: VisualTestParam
     testLogger = UiTestLoggerImpl(Kaspresso.DEFAULT_TEST_LOGGER_TAG)
     libLogger = UiTestLoggerImpl(Kaspresso.DEFAULT_LIB_LOGGER_TAG)
 
-    screenshotsComparator = AllureScreenshotsComparator(visualTestParams, testLogger, dirsProvider, resourcesRootDirsProvider)
+    screenshotsComparator = AllureScreenshotsComparator(
+        visualTestParams,
+        testLogger,
+        resourcesRootDirsProvider,
+        resourcesDirsProvider,
+        resourceFileNamesProvider,
+    )
     adbServer = AdbServerImpl(LogLevel.WARN, libLogger)
     files = FilesImpl(libLogger, adbServer)
     visualTestWatcher = AllureVisualTestWatcher(visualTestParams, testLogger, (dirsProvider as AllureDirsProvider), resourcesRootDirsProvider, files)

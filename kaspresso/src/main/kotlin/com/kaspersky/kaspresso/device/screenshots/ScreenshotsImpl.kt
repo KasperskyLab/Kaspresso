@@ -6,7 +6,6 @@ import com.kaspersky.kaspresso.files.dirs.DirsProvider
 import com.kaspersky.kaspresso.files.extensions.FileExtension
 import com.kaspersky.kaspresso.files.resources.ResourceFileNamesProvider
 import com.kaspersky.kaspresso.files.resources.ResourceFilesProvider
-import com.kaspersky.kaspresso.files.resources.ResourcesDirNameProvider
 import com.kaspersky.kaspresso.files.resources.ResourcesDirsProvider
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.visual.ScreenshotsComparator

@@ -3,7 +3,9 @@ package com.kaspersky.kaspresso.internal.visual
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
-import com.kaspersky.kaspresso.files.dirs.DirsProvider
+import com.kaspersky.kaspresso.files.extensions.FileExtension
+import com.kaspersky.kaspresso.files.resources.ResourceFileNamesProvider
+import com.kaspersky.kaspresso.files.resources.ResourcesDirsProvider
 import com.kaspersky.kaspresso.files.resources.ResourcesRootDirsProvider
 import com.kaspersky.kaspresso.logger.Logger
 import com.kaspersky.kaspresso.visual.ScreenshotsComparator
@@ -15,8 +17,9 @@ import kotlin.math.abs
 open class DefaultScreenshotsComparator(
     private val visualTestParams: VisualTestParams,
     private val logger: Logger,
-    private val dirsProvider: DirsProvider,
     private val resourcesRootDirsProvider: ResourcesRootDirsProvider,
+    private val resourcesDirsProvider: ResourcesDirsProvider,
+    private val resourceFileNamesProvider: ResourceFileNamesProvider,
 ) : ScreenshotsComparator {
 
     @Suppress("MagicNumber")
@@ -79,20 +82,20 @@ open class DefaultScreenshotsComparator(
         val height = original.height
         val diffBitmap = Bitmap.createBitmap(width, height, original.config)
         diffBitmap.setPixels(diffPixels, 0, width, 0, 0, width, height)
-        val diffDir = dirsProvider.provideNew(resourcesRootDirsProvider.screenshotsDiffRootDir)
-        val screenshotDiff = File(diffDir, diffName)
         val scaledBitmap = Bitmap.createScaledBitmap(
             diffBitmap,
             width,
             height,
             false,
         )
-        assert(
-            scaledBitmap.compress(
-                Bitmap.CompressFormat.PNG,
-                QUALITY,
-                FileOutputStream(screenshotDiff),
-            )
+
+        val screenshotDiff = resourcesDirsProvider.provide(resourcesRootDirsProvider.screenshotsDiffRootDir)
+            .resolve(resourceFileNamesProvider.getFileName(diffName, FileExtension.PNG.toString()))
+
+        scaledBitmap.compress(
+            Bitmap.CompressFormat.PNG,
+            QUALITY,
+            FileOutputStream(screenshotDiff),
         )
 
         return screenshotDiff

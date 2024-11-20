@@ -779,7 +779,13 @@ data class Kaspresso(
             if (!::clickParams.isInitialized) clickParams = ClickParams.default()
             if (!::artifactsPullParams.isInitialized) artifactsPullParams = ArtifactsPullParams(enabled = false)
             if (!::visualTestParams.isInitialized) visualTestParams = VisualTestParams(testType = VisualTestType.valueOf(BuildConfig.VISUAL_TEST_TYPE))
-            if (!::screenshotsComparator.isInitialized) screenshotsComparator = DefaultScreenshotsComparator(visualTestParams, testLogger, dirsProvider, resourcesRootDirsProvider)
+            if (!::screenshotsComparator.isInitialized) screenshotsComparator = DefaultScreenshotsComparator(
+                visualTestParams,
+                testLogger,
+                resourcesRootDirsProvider,
+                resourcesDirsProvider,
+                resourceFileNamesProvider
+            )
             if (!::visualTestWatcher.isInitialized) visualTestWatcher = DefaultVisualTestWatcher(visualTestParams, libLogger, dirsProvider, resourcesRootDirsProvider, files)
 
             if (!::screenshots.isInitialized) {
