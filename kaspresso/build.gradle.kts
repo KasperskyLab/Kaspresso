@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         buildConfigField("String", "VISUAL_TEST_TYPE", System.getenv("VISUAL_TEST_TYPE")
-            ?: property("kaspresso.visualTestType")?.toString() ?: "Record") // [Record, Compare]
+            ?: findProperty("kaspresso.visualTestType")?.toString() ?: "\"Record\"") // [Record, Compare]
     }
 }
 
