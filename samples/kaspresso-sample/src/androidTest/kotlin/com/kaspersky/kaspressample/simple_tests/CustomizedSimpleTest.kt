@@ -54,7 +54,7 @@ class CustomizedSimpleTest : TestCase(
                 dirsProvider = dirsProvider,
                 resourcesDirNameProvider = resourcesDirNameProvider
             ) {
-                override fun provide(dest: File, subDir: String?): File =
+                override fun provide(dest: File, subDir: String?, provideCleared: Boolean): File =
                     dirsProvider.provideCleared(dirsProvider.provideNew(dest))
             }
 
