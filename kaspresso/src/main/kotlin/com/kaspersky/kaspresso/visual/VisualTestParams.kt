@@ -1,11 +1,8 @@
 package com.kaspersky.kaspresso.visual
 
-import android.annotation.SuppressLint
-
 /**
  * @see com.kaspersky.kaspresso.internal.visual.DefaultScreenshotsComparator
  */
-@SuppressLint("SdCardPath")
 data class VisualTestParams(
     /**
      * Controls whether to take the new reference screenshots and save them or use the old ones and compare them to the ones being taken during the test
