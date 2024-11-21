@@ -16,6 +16,8 @@ import com.kaspersky.kaspresso.device.activities.Activities
 import com.kaspersky.kaspresso.device.activities.ActivitiesImpl
 import com.kaspersky.kaspresso.device.apps.Apps
 import com.kaspersky.kaspresso.device.apps.AppsImpl
+import com.kaspersky.kaspresso.device.bluetooth.Bluetooth
+import com.kaspersky.kaspresso.device.bluetooth.BluetoothImpl
 import com.kaspersky.kaspresso.device.exploit.Exploit
 import com.kaspersky.kaspresso.device.exploit.ExploitImpl
 import com.kaspersky.kaspresso.device.files.Files
@@ -360,6 +362,11 @@ data class Kaspresso(
          * Holds an implementation of [Activities] interface. If it was not specified, the default implementation is used.
          */
         lateinit var activities: Activities
+
+        /**
+         * Holds an implementation of [Bluetooth] interface. If it was not specified, the default implementation is used.
+         */
+        lateinit var bluetooth: Bluetooth
 
         /**
          * Holds an implementation of [Files] interface. If it was not specified, the default implementation is used.
@@ -715,6 +722,11 @@ data class Kaspresso(
                 adbServer
             )
             if (!::activities.isInitialized) activities = ActivitiesImpl(libLogger, instrumentation)
+            if (!::bluetooth.isInitialized) bluetooth = BluetoothImpl(
+                libLogger,
+                instrumentation.targetContext,
+                adbServer
+            )
             if (!::files.isInitialized) files = FilesImpl(libLogger, adbServer)
             if (!::network.isInitialized) network = NetworkImpl(
                 libLogger,
@@ -953,6 +965,7 @@ data class Kaspresso(
                 device = Device(
                     apps = apps,
                     activities = activities,
+                    bluetooth = bluetooth,
                     files = files,
                     network = network,
                     phone = phone,

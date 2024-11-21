@@ -6,6 +6,7 @@ import androidx.test.uiautomator.UiDevice
 import com.kaspersky.kaspresso.device.accessibility.Accessibility
 import com.kaspersky.kaspresso.device.activities.Activities
 import com.kaspersky.kaspresso.device.apps.Apps
+import com.kaspersky.kaspresso.device.bluetooth.Bluetooth
 import com.kaspersky.kaspresso.device.exploit.Exploit
 import com.kaspersky.kaspresso.device.files.Files
 import com.kaspersky.kaspresso.device.keyboard.Keyboard
@@ -37,6 +38,15 @@ data class Device(
      * Holds the reference to the implementation of [Activities] interface.
      */
     val activities: Activities,
+
+    /**
+     * Holds the reference to the implementation of [Bluetooth] interface.
+     *
+     * Required: Started AdbServer
+     *     1. Download a file "kaspresso/artifacts/adbserver-desktop.jar"
+     *     2. Start AdbServer => input in cmd "java jar path_to_file/adbserver-desktop.jar"
+     */
+    val bluetooth: Bluetooth,
 
     /**
      * Holds the reference to the implementation of [Files] interface.
