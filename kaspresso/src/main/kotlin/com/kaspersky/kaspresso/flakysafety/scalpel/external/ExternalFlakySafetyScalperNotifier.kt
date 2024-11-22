@@ -17,7 +17,11 @@ internal class ExternalFlakySafetyScalperNotifierImpl : ExternalFlakySafetyScalp
         }
     }
 
-    override fun isAnyExternalFlakySafetyInterceptorPresent(): Boolean = scalpers.any { it.isFlakySafetyInterceptorPresent() }
+    override fun isAnyExternalFlakySafetyInterceptorPresent(): Boolean {
+        synchronized(this) {
+            return scalpers.any { it.isFlakySafetyInterceptorPresent() }
+        }
+    }
 
     override fun scalpFlakySafety() = scalpers.forEach {
         it.scalpFlakySafety()
