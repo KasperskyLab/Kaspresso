@@ -12,9 +12,10 @@ class VideosImpl(
 ) : Videos {
 
     override fun record(tag: String) {
-        val sanitizedVideoName = tag
-            .replace("[/:\"*?<>|]+".toRegex(), "")
-            .replace(' ', '_')
+        val sanitizedVideoName = tag.replace("[/:\"*?<>|]+".toRegex(), "_")
+        if (tag != sanitizedVideoName) {
+            logger.d("Can't record video with name $tag since it contains one of the following special characters [/:\"*?<>|]. Changing the name to $sanitizedVideoName")
+        }
         val videoFile: File = resourceFilesProvider.provideVideoFile(sanitizedVideoName)
         videoRecorder.start(videoFile)
     }
