@@ -1,5 +1,6 @@
 package com.kaspersky.kaspresso.device.bluetooth
 
+import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothManager
 import android.content.Context
 import com.kaspersky.components.kautomator.system.UiSystem
@@ -40,10 +41,12 @@ class BluetoothImpl(
         )
 
     override fun enable() {
+        logger.i("Enable bluetooth")
         toggleBluetooth(enable = true)
     }
 
     override fun disable() {
+        logger.i("Disable bluetooth")
         toggleBluetooth(enable = false)
     }
 
@@ -57,12 +60,15 @@ class BluetoothImpl(
             logger.i("Bluetooth is not supported")
             return
         }
-        logger.i("${if (enable) "En" else "Dis"}able bluetooth")
         if (!changeBluetoothStateUsingAdbServer(enable, BLUETOOTH_STATE_CHANGE_ROOT_CMD) &&
             !changeBluetoothStateUsingAdbServer(enable, BLUETOOTH_STATE_CHANGE_CMD)
         ) {
              toggleBluetoothUsingAndroidSettings(enable)
-             logger.i("Bluetooth ${if (enable) "en" else "dis"}abled")
+        }
+        if (isBluetoothEnabled()) {
+            logger.i("Bluetooth enabled")
+        } else {
+            logger.i("Bluetooth disabled")
         }
     }
 
@@ -91,25 +97,36 @@ class BluetoothImpl(
         val height = targetContext.resources.displayMetrics.heightPixels
         val width = targetContext.resources.displayMetrics.widthPixels
 
+        // Swipe down on the screen to open the Quick Access Menu
         UiSystem {
             drag(width / 2, 0, width / 2, (height * 0.67).toInt(), 50)
         }
+        // Swipe down again for more options. This is necessary because sometimes the bluetooth switch is located in additional settings
         UiSystem {
             drag(width / 2, 0, width / 2, (height * 0.67).toInt(), 50)
         }
+        // Turn Bluetooth off or on via Quick Access Menu
         NotificationsFullScreen {
             bluetoothSwitch.setChecked(enable)
         }
+        // Swipe up to close additional settings
         UiSystem {
             drag(width / 2, height, width / 2, 0, 50)
         }
+        // Swipe up again to close Quick Access Menu
         UiSystem {
             drag(width / 2, height, width / 2, 0, 50)
         }
     }
 
     private fun isBluetoothNotSupported(): Boolean =
-        (this.targetContext.getSystemService(Context.BLUETOOTH_SERVICE) as? BluetoothManager)?.adapter == null
+        getBluetoothAdapter() == null
+
+    private fun isBluetoothEnabled(): Boolean =
+        getBluetoothAdapter()?.isEnabled ?: false
+
+    private fun getBluetoothAdapter(): BluetoothAdapter? =
+        (this.targetContext.getSystemService(Context.BLUETOOTH_SERVICE) as? BluetoothManager)?.adapter
 
     private fun parseAdbResponse(response: List<String>): String? {
         val result = response.firstOrNull()?.lineSequence()?.first() ?: return null
