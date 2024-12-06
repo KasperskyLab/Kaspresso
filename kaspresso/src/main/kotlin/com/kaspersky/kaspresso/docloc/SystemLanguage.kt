@@ -24,7 +24,7 @@ open class SystemLanguage(
      * @throws Throwable if something went wrong
      */
     @SuppressLint("PrivateApi", "DiscouragedPrivateApi")
-    fun switch(locale: Locale) {
+    open fun switch(locale: Locale) {
         logger.i("SystemLanguage: Installing new system language=$locale started")
         grantPermissionsIfNeed()
         try {
