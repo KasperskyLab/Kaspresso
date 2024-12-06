@@ -44,6 +44,8 @@ class CustomizedSimpleTest : TestCase(
             resourcesRootDirsProvider = object : ResourcesRootDirsProvider {
                 override val logcatRootDir = File("custom_logcat")
                 override val screenshotsRootDir = File("custom_screenshots")
+                override val originalScreenshotsRootDir = File("custom_original_screenshots")
+                override val screenshotsDiffRootDir = File("custom_screenshot_diffs")
                 override val videoRootDir = File("custom_video")
                 override val viewHierarchy = File("custom_view_hierarchy")
             }
@@ -52,7 +54,7 @@ class CustomizedSimpleTest : TestCase(
                 dirsProvider = dirsProvider,
                 resourcesDirNameProvider = resourcesDirNameProvider
             ) {
-                override fun provide(dest: File, subDir: String?): File =
+                override fun provide(dest: File, subDir: String?, provideCleared: Boolean): File =
                     dirsProvider.provideCleared(dirsProvider.provideNew(dest))
             }
 
