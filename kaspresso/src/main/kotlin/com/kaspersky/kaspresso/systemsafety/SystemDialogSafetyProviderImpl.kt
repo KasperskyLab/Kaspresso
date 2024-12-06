@@ -32,9 +32,9 @@ class SystemDialogSafetyProviderImpl(
 
     private val attemptsToSuppress: List<(UiDevice, AdbServer) -> Unit> = listOf(
         { _, adbServer ->
-            adbServer.performShell("input keyevent KEYCODE_BACK")
-            adbServer.performShell("input keyevent KEYCODE_ENTER")
-            adbServer.performShell("input keyevent KEYCODE_ENTER")
+            adbServer.performShell("input", listOf("keyevent", "KEYCODE_BACK"))
+            adbServer.performShell("input", listOf("keyevent", "KEYCODE_ENTER"))
+            adbServer.performShell("input", listOf("keyevent", "KEYCODE_ENTER"))
         },
         { uiDevice, _ -> uiDevice.wait(Until.findObject(By.res("android:id/button1")), DEFAULT_TIMEOUT).click() },
         { uiDevice, _ -> uiDevice.wait(Until.findObject(By.res("android:id/closeButton")), DEFAULT_TIMEOUT).click() },

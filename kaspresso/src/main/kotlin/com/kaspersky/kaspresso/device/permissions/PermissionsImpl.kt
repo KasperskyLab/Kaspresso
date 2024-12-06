@@ -42,12 +42,12 @@ class PermissionsImpl(
     /**
      * Waits for 1 sec, passes the permission-requesting permissions dialog and allows permissions.
      */
-    override fun allowViaDialog() {
+    override fun allowViaDialog(button: Permissions.Button) {
         wait(
             timeoutMs = DIALOG_TIMEOUT_MS,
             logger = logger
         ) {
-            handlePermissionRequest(Permissions.Button.ALLOW)
+            handlePermissionRequest(button)
         }
         logger.i("Allow permission via dialog")
     }

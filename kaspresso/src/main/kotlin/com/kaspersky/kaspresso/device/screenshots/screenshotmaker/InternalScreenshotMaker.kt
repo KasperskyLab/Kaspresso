@@ -4,6 +4,7 @@ import android.app.Activity
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.os.Looper
+import android.util.Log
 import android.view.View
 import com.kaspersky.kaspresso.device.activities.Activities
 import com.kaspersky.kaspresso.params.ScreenshotParams
@@ -82,7 +83,7 @@ class InternalScreenshotMaker(
     private fun drawBitmap(view: View): Bitmap {
         view.layout(0, 0, view.measuredWidth, view.measuredHeight)
         val bitmap = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
-        val bitmapHolder = Canvas(bitmap!!)
+        val bitmapHolder = Canvas(bitmap)
         view.draw(bitmapHolder)
         return bitmap
     }
@@ -97,6 +98,8 @@ class InternalScreenshotMaker(
         activity.runOnUiThread {
             try {
                 activity.drawToBitmap(bitmap)
+            } catch (e: Exception) {
+                Log.e("InternalScreenshotMaker", "Unable to get screenshot ${file.absolutePath}")
             } finally {
                 latch.countDown()
             }
