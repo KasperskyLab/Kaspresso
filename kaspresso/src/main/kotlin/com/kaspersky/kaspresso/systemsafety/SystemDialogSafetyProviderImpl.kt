@@ -1,5 +1,6 @@
 package com.kaspersky.kaspresso.systemsafety
 
+import android.os.Build
 import android.widget.FrameLayout
 import androidx.test.uiautomator.By
 import androidx.test.uiautomator.BySelector
@@ -10,7 +11,6 @@ import com.kaspersky.kaspresso.device.server.AdbServer
 import com.kaspersky.kaspresso.instrumental.InstrumentalDependencyProvider
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.params.SystemDialogsSafetyParams
-import java.util.concurrent.TimeUnit
 import java.util.regex.Pattern
 
 /**
@@ -20,7 +20,7 @@ class SystemDialogSafetyProviderImpl(
     private val logger: UiTestLogger,
     private val instrumentalDependencyProvider: InstrumentalDependencyProvider,
     private val adbServer: AdbServer,
-    private val systemDialogsSafetyParams: SystemDialogsSafetyParams
+    private val systemDialogsSafetyParams: SystemDialogsSafetyParams,
 ) : SystemDialogSafetyProvider {
 
     companion object {
@@ -110,35 +110,74 @@ class SystemDialogSafetyProviderImpl(
      * internal use Pattern.match() method, so we need regex that will match full string, not part.
      */
     private fun isAndroidSystemDetected(): Boolean {
-        with(uiDevice) {
-            var isSystemDialogVisible = if (systemDialogsSafetyParams.shouldIgnorePermissionDialogs) {
-                SystemDialogSafetyPattern.values().filter { it != SystemDialogSafetyPattern.PERMISSION_API30 && it != SystemDialogSafetyPattern.PERMISSION_API23 }
-                    .any { isVisible(By.pkg(it.pattern).clazz(FrameLayout::class.java)) }
-            } else {
-                SystemDialogSafetyPattern.values().any { isVisible(By.pkg(it.pattern).clazz(FrameLayout::class.java)) }
-            }
+        var isSystemDialogVisible = uiDevice.isDefaultSystemDialogVisible()
+        // Keyboard could be detected alongside with the "default" system dialogs
+        if (systemDialogsSafetyParams.shouldIgnoreKeyboard) {
+            isSystemDialogVisible = isSystemDialogVisible && !uiDevice.isKeyboardVisible()
+        }
+        if (isSystemDialogVisible) { // return earlier to avoid spending time on the crash dialogs check
+            return true
+        }
 
-            if (systemDialogsSafetyParams.shouldIgnoreKeyboard) {
-                val isKeyboardVisible = isVisible(By.pkg(Pattern.compile("\\S*google.android.inputmethod\\S*")).clazz(FrameLayout::class.java))
-                isSystemDialogVisible = isSystemDialogVisible && !isKeyboardVisible
-            }
-
-            if (isSystemDialogVisible) {
-                logger.i("The android system dialog/window was detected")
+        if (!systemDialogsSafetyParams.shouldIgnorePermissionDialogs) {
+            if (uiDevice.isPermissionDialogVisible()) {
                 return true
             }
         }
+
+        if (!systemDialogsSafetyParams.shouldIgnoreCrashes) {
+            return uiDevice.isCrashDialogVisible()
+        }
+
         return false
+    }
+
+    private fun UiDevice.isCrashDialogVisible(): Boolean {
+        val isCrashDialogVisible = listOf("aerr_close", "aerr_close_app").any {
+            isVisible(By.res("android", it))
+        }
+        if (isCrashDialogVisible) {
+            logger.i("System dialogs safety: the crash dialog detected")
+        }
+        return isCrashDialogVisible
+    }
+
+    private fun UiDevice.isPermissionDialogVisible(): Boolean {
+        val dialogPattern = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            SystemDialogSafetyPattern.PERMISSION_API30
+        } else {
+            SystemDialogSafetyPattern.PERMISSION_API23
+        }
+        val isVisible = isVisible(By.pkg(dialogPattern.pattern).clazz(FrameLayout::class.java))
+        if (isVisible) {
+            logger.i("System dialogs safety: permission dialog detected")
+        }
+
+        return isVisible
+    }
+
+    private fun UiDevice.isDefaultSystemDialogVisible(): Boolean {
+        val isVisible = isVisible(By.pkg(SystemDialogSafetyPattern.OTHER.pattern).clazz(FrameLayout::class.java))
+        if (isVisible) {
+            logger.i("System dialogs safety: the android system dialog/window was detected")
+        }
+
+        return isVisible
+    }
+
+    private fun UiDevice.isKeyboardVisible(): Boolean {
+        val isKeyboardVisible = isVisible(By.pkg(Pattern.compile("\\S*google.android.inputmethod\\S*")).clazz(FrameLayout::class.java))
+        if (isKeyboardVisible) {
+            logger.i("System dialogs safety: the keyboard detected")
+        }
+        return isKeyboardVisible
     }
 
     /**
      * The "isVisible" method with waiting for non-app's elements.
      */
-    private fun UiDevice.isVisible(
-        selector: BySelector,
-        timeMs: Long = TimeUnit.SECONDS.toMillis(1)
-    ): Boolean {
-        wait(Until.findObject(selector), timeMs)
+    private fun UiDevice.isVisible(selector: BySelector): Boolean {
+        wait(Until.findObject(selector), systemDialogsSafetyParams.waitTimeout)
         val uiObject = findObject(selector)?.also {
             logger.i("Found system view: ${getUiObjectDescription(it)}")
         }
