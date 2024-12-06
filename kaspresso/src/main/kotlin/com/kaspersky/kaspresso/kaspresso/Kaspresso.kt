@@ -427,6 +427,11 @@ data class Kaspresso(
         lateinit var exploit: Exploit
 
         /**
+         * Holds an implementation of [SystemLanguage] interface. If it was not specified, the default implementation is used.
+         */
+        lateinit var systemLanguage: SystemLanguage
+
+        /**
          * Holds an implementation of [Language] interface. If it was not specified, the default implementation is used.
          */
         lateinit var language: Language
@@ -743,10 +748,10 @@ data class Kaspresso(
                 instrumentalDependencyProviderFactory.getComponentProvider<ExploitImpl>(instrumentation),
                 adbServer
             )
-            if (!::language.isInitialized) {
-                val systemLanguage = SystemLanguage(instrumentation.targetContext, testLogger, hackPermissions)
-                language = LanguageImpl(libLogger, instrumentation, systemLanguage)
-            }
+
+            if (!::systemLanguage.isInitialized) systemLanguage = SystemLanguage(instrumentation.targetContext, testLogger, hackPermissions)
+            if (!::language.isInitialized) language = LanguageImpl(libLogger, instrumentation, systemLanguage)
+
             if (!::logcat.isInitialized) logcat = LogcatImpl(libLogger, adbServer)
 
             if (!::flakySafetyParams.isInitialized) flakySafetyParams = FlakySafetyParams.default()

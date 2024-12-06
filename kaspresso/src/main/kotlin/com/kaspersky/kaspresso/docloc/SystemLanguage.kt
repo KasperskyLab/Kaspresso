@@ -10,7 +10,7 @@ import com.kaspersky.kaspresso.device.permissions.HackPermissions
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import java.util.Locale
 
-internal class SystemLanguage(
+open class SystemLanguage(
     private val context: Context,
     private val logger: UiTestLogger,
     private val hackPermissions: HackPermissions
@@ -24,7 +24,7 @@ internal class SystemLanguage(
      * @throws Throwable if something went wrong
      */
     @SuppressLint("PrivateApi", "DiscouragedPrivateApi")
-    fun switch(locale: Locale) {
+    open fun switch(locale: Locale) {
         logger.i("SystemLanguage: Installing new system language=$locale started")
         grantPermissionsIfNeed()
         try {

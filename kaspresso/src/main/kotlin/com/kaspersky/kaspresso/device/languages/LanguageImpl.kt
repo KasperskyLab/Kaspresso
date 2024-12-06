@@ -16,7 +16,7 @@ import java.util.Locale
 /**
  * The implementation of [Language]
  */
-internal class LanguageImpl(
+open class LanguageImpl(
     private val logger: UiTestLogger,
     private val instrumentation: Instrumentation,
     private val systemLanguage: SystemLanguage,
