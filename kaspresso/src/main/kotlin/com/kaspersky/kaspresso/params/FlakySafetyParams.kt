@@ -4,6 +4,7 @@ import androidx.test.espresso.NoMatchingViewException
 import androidx.test.espresso.PerformException
 import androidx.test.uiautomator.StaleObjectException
 import com.kaspersky.components.kautomator.intercept.exception.UnfoundedUiObjectException
+import com.kaspersky.kaspresso.internal.exceptions.RootViewWithoutFocusWrapperException
 import junit.framework.AssertionFailedError
 
 /**
@@ -29,7 +30,8 @@ class FlakySafetyParams(
             AssertionFailedError::class.java,
             UnfoundedUiObjectException::class.java,
             StaleObjectException::class.java,
-            IllegalStateException::class.java
+            IllegalStateException::class.java,
+            RootViewWithoutFocusWrapperException::class.java,
         )
 
         fun default() = FlakySafetyParams(
