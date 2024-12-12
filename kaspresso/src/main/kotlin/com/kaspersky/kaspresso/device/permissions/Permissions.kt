@@ -7,8 +7,11 @@ interface Permissions {
 
     /**
      * Passes the permission-requesting permissions dialog and allows permissions.
+     *
+     * @param button - the button which would be pressed. Changing the default value may be useful in android 11+ cases
+     * @see (https://developer.android.com/about/versions/11/privacy/location and https://developer.android.com/about/versions/14/changes/partial-photo-video-access)
      */
-    fun allowViaDialog()
+    fun allowViaDialog(button: Button = Button.ALLOW)
 
     /**
      * Passes the permission-requesting permissions dialog and denies permissions.

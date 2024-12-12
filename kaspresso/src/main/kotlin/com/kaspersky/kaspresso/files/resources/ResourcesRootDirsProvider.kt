@@ -8,6 +8,8 @@ import java.io.File
 interface ResourcesRootDirsProvider {
     val logcatRootDir: File
     val screenshotsRootDir: File
+    val originalScreenshotsRootDir: File
+    val screenshotsDiffRootDir: File
     val videoRootDir: File
     val viewHierarchy: File
 }

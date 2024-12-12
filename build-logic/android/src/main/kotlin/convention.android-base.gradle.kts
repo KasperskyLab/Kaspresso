@@ -32,5 +32,6 @@ configure<BaseExtension> {
         resValues = false
         shaders = false
         viewBinding = false
+        buildConfig = true
     }
 }

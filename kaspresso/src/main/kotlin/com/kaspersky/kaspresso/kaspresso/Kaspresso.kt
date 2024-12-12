@@ -9,6 +9,7 @@ import com.kaspersky.adbserver.common.log.logger.LogLevel
 import com.kaspersky.components.kautomator.KautomatorConfigurator
 import com.kaspersky.components.kautomator.intercept.interaction.UiDeviceInteraction
 import com.kaspersky.components.kautomator.intercept.interaction.UiObjectInteraction
+import com.kaspersky.kaspresso.BuildConfig
 import com.kaspersky.kaspresso.device.Device
 import com.kaspersky.kaspresso.device.accessibility.Accessibility
 import com.kaspersky.kaspresso.device.accessibility.AccessibilityImpl
@@ -115,6 +116,8 @@ import com.kaspersky.kaspresso.interceptors.watcher.view.impl.logging.LoggingVie
 import com.kaspersky.kaspresso.interceptors.watcher.view.impl.logging.LoggingViewAssertionWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.view.impl.logging.LoggingWebAssertionWatcherInterceptor
 import com.kaspersky.kaspresso.internal.runlisteners.artifactspull.ArtifactsPullRunListener
+import com.kaspersky.kaspresso.internal.visual.DefaultScreenshotsComparator
+import com.kaspersky.kaspresso.internal.visual.DefaultVisualTestWatcher
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.logger.UiTestLoggerImpl
 import com.kaspersky.kaspresso.params.ArtifactsPullParams
@@ -130,6 +133,10 @@ import com.kaspersky.kaspresso.params.SystemDialogsSafetyParams
 import com.kaspersky.kaspresso.params.VideoParams
 import com.kaspersky.kaspresso.runner.listener.addUniqueListener
 import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
+import com.kaspersky.kaspresso.visual.ScreenshotsComparator
+import com.kaspersky.kaspresso.visual.VisualTestParams
+import com.kaspersky.kaspresso.visual.VisualTestType
+import com.kaspersky.kaspresso.visual.VisualTestWatcher
 import io.github.kakaocup.kakao.Kakao
 
 /**
@@ -156,7 +163,8 @@ data class Kaspresso(
     internal val stepWatcherInterceptors: List<StepWatcherInterceptor>,
     internal val testRunWatcherInterceptors: List<TestRunWatcherInterceptor>,
     internal val resourceFilesProvider: ResourceFilesProvider,
-    internal val externalFlakySafetyScalperNotifier: ExternalFlakySafetyScalperNotifier
+    internal val visualTestWatcher: VisualTestWatcher,
+    internal val externalFlakySafetyScalperNotifier: ExternalFlakySafetyScalperNotifier,
 ) {
 
     companion object {
@@ -430,6 +438,11 @@ data class Kaspresso(
         lateinit var exploit: Exploit
 
         /**
+         * Holds an implementation of [SystemLanguage] interface. If it was not specified, the default implementation is used.
+         */
+        lateinit var systemLanguage: SystemLanguage
+
+        /**
          * Holds an implementation of [Language] interface. If it was not specified, the default implementation is used.
          */
         lateinit var language: Language
@@ -495,6 +508,17 @@ data class Kaspresso(
          * If it was not specified, the default implementation is used.
          */
         lateinit var artifactsPullParams: ArtifactsPullParams
+
+        /**
+         * Holds the [VisualTestParams].
+         * If it was not specified, the default implementation is used.
+         */
+        lateinit var visualTestParams: VisualTestParams
+
+        lateinit var screenshotsComparator: ScreenshotsComparator
+
+        lateinit var visualTestWatcher: VisualTestWatcher
+
         /**
          * Holds an implementation of [DirsProvider] interface. If it was not specified, the default implementation is used.
          */
@@ -753,10 +777,10 @@ data class Kaspresso(
                 instrumentalDependencyProviderFactory.getComponentProvider<ExploitImpl>(instrumentation),
                 adbServer
             )
-            if (!::language.isInitialized) {
-                val systemLanguage = SystemLanguage(instrumentation.targetContext, testLogger, hackPermissions)
-                language = LanguageImpl(libLogger, instrumentation, systemLanguage)
-            }
+
+            if (!::systemLanguage.isInitialized) systemLanguage = SystemLanguage(instrumentation.targetContext, testLogger, hackPermissions)
+            if (!::language.isInitialized) language = LanguageImpl(libLogger, instrumentation, systemLanguage)
+
             if (!::logcat.isInitialized) logcat = LogcatImpl(libLogger, adbServer)
 
             if (!::flakySafetyParams.isInitialized) flakySafetyParams = FlakySafetyParams.default()
@@ -769,6 +793,15 @@ data class Kaspresso(
             if (!::elementLoaderParams.isInitialized) elementLoaderParams = ElementLoaderParams()
             if (!::clickParams.isInitialized) clickParams = ClickParams.default()
             if (!::artifactsPullParams.isInitialized) artifactsPullParams = ArtifactsPullParams(enabled = false)
+            if (!::visualTestParams.isInitialized) visualTestParams = VisualTestParams(testType = VisualTestType.valueOf(BuildConfig.VISUAL_TEST_TYPE))
+            if (!::screenshotsComparator.isInitialized) screenshotsComparator = DefaultScreenshotsComparator(
+                visualTestParams,
+                testLogger,
+                resourcesRootDirsProvider,
+                resourcesDirsProvider,
+                resourceFileNamesProvider
+            )
+            if (!::visualTestWatcher.isInitialized) visualTestWatcher = DefaultVisualTestWatcher(visualTestParams, libLogger, dirsProvider, resourcesRootDirsProvider, files)
 
             if (!::screenshots.isInitialized) {
                 screenshots = ScreenshotsImpl(
@@ -780,7 +813,12 @@ data class Kaspresso(
                             instrumentalDependencyProviderFactory.getComponentProvider<ExternalScreenshotMaker>(instrumentation),
                             screenshotParams
                         )
-                    )
+                    ),
+                    visualTestParams = visualTestParams,
+                    screenshotsComparator = screenshotsComparator,
+                    dirsProvider = dirsProvider,
+                    resourceFileNamesProvider = resourceFileNamesProvider,
+                    resourcesDirsProvider = resourcesDirsProvider,
                 )
             }
 
@@ -993,7 +1031,8 @@ data class Kaspresso(
                     videoParams = videoParams,
                     elementLoaderParams = elementLoaderParams,
                     systemDialogsSafetyParams = systemDialogsSafetyParams,
-                    clickParams = clickParams
+                    clickParams = clickParams,
+                    visualTestParams = visualTestParams,
                 ),
 
                 viewActionWatcherInterceptors = viewActionWatcherInterceptors,
@@ -1013,7 +1052,8 @@ data class Kaspresso(
 
                 stepWatcherInterceptors = stepWatcherInterceptors,
                 testRunWatcherInterceptors = testRunWatcherInterceptors,
-                externalFlakySafetyScalperNotifier = externalFlakySafetyScalperNotifier
+                externalFlakySafetyScalperNotifier = externalFlakySafetyScalperNotifier,
+                visualTestWatcher = visualTestWatcher,
             )
 
             configurator.waitForIdleTimeout = kautomatorWaitForIdleSettings.waitForIdleTimeout

@@ -6,5 +6,5 @@ import java.io.File
  * Provides directories for resources
  */
 interface ResourcesDirsProvider {
-    fun provide(dest: File, subDir: String? = null): File
+    fun provide(dest: File, subDir: String? = null, provideCleared: Boolean = true): File
 }
