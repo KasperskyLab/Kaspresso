@@ -10,7 +10,7 @@ import com.kaspersky.kaspresso.flakysafety.scalpel.external.ExternalFlakySafetyS
  * Removes and restores compose flaky safety interceptor so the `flakySafely` expression works correctly
  * @see com.kaspersky.kaspresso.flakysafety.scalpel.FlakySafeInterceptorScalpel
  */
-class ComposeFlakySafetyScalper(
+internal class ComposeFlakySafetyScalper(
     private val semanticsBehaviorInterceptors: MutableList<SemanticsBehaviorInterceptor>,
     private val semanticsWatcherInterceptors: MutableList<SemanticsWatcherInterceptor>,
 ) : ExternalFlakySafetyScalper {
