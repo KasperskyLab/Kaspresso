@@ -17,6 +17,7 @@ dependencies {
     api(libs.bundles.allure)
 
     implementation(projects.kaspresso)
+    implementation(projects.adbServer.adbServerCommon)
 
     implementation(libs.kotlinStdlib)
     implementation(libs.truth)

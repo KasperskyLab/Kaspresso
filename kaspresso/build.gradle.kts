@@ -7,6 +7,11 @@ plugins {
 
 android {
     namespace = "com.kaspersky.kaspresso"
+
+    defaultConfig {
+        buildConfigField("String", "VISUAL_TEST_TYPE", System.getenv("VISUAL_TEST_TYPE")
+            ?: findProperty("kaspresso.visualTestType")?.toString() ?: "\"Record\"") // [Record, Compare]
+    }
 }
 
 publish {

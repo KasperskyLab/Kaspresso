@@ -6,14 +6,17 @@ import com.kaspersky.components.alluresupport.files.dirs.AllureDirsProvider
 import com.kaspersky.components.alluresupport.files.resources.AllureResourcesRootDirsProvider
 import com.kaspersky.components.alluresupport.files.resources.impl.AllureResourceFilesProvider
 import com.kaspersky.kaspresso.runner.listener.KaspressoRunListener
+import com.kaspersky.kaspresso.visual.VisualTestParams
+import com.kaspersky.kaspresso.visual.VisualTestType
 import io.qameta.allure.kotlin.Allure
 import org.junit.runner.Result
 import java.io.File
 
 class AllureResultsHack(
     private val uiDevice: UiDevice,
+    private val visualTestParams: VisualTestParams,
     resourcesRootDirsProvider: AllureResourcesRootDirsProvider,
-    dirsProvider: AllureDirsProvider,
+    private val dirsProvider: AllureDirsProvider,
 ) : KaspressoRunListener {
 
     private val allureResultsSourceDir: File =
@@ -48,6 +51,13 @@ class AllureResultsHack(
 
         allureResultsSourceDir.deleteRecursively()
         stubVideosDir.deleteRecursively()
+
+        if (visualTestParams.testType == VisualTestType.Record) {
+            val rootDir = dirsProvider.provideNew(File("")).absolutePath
+            val newScreenshotsDir = File(rootDir, File(visualTestParams.hostScreenshotsDir).name)
+            val targetScreenshotsDir = dirsProvider.provideNewOnSdCard(File(visualTestParams.hostScreenshotsDir))
+            newScreenshotsDir.copyRecursively(targetScreenshotsDir)
+        }
     }
 
     data class VideoBinding(
