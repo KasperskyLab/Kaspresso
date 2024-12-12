@@ -65,6 +65,8 @@ import com.kaspersky.kaspresso.files.resources.impl.DefaultResourceFilesProvider
 import com.kaspersky.kaspresso.files.resources.impl.DefaultResourcesDirNameProvider
 import com.kaspersky.kaspresso.files.resources.impl.DefaultResourcesDirsProvider
 import com.kaspersky.kaspresso.files.resources.impl.DefaultResourcesRootDirsProvider
+import com.kaspersky.kaspresso.flakysafety.scalpel.external.ExternalFlakySafetyScalperNotifier
+import com.kaspersky.kaspresso.flakysafety.scalpel.external.ExternalFlakySafetyScalperNotifierImpl
 import com.kaspersky.kaspresso.idlewaiting.KautomatorWaitForIdleSettings
 import com.kaspersky.kaspresso.instrumental.InstrumentalDependencyProvider
 import com.kaspersky.kaspresso.instrumental.InstrumentalDependencyProviderFactory
@@ -162,6 +164,7 @@ data class Kaspresso(
     internal val testRunWatcherInterceptors: List<TestRunWatcherInterceptor>,
     internal val resourceFilesProvider: ResourceFilesProvider,
     internal val visualTestWatcher: VisualTestWatcher,
+    internal val externalFlakySafetyScalperNotifier: ExternalFlakySafetyScalperNotifier,
 ) {
 
     companion object {
@@ -675,6 +678,13 @@ data class Kaspresso(
         lateinit var testRunWatcherInterceptors: MutableList<TestRunWatcherInterceptor>
 
         /**
+         * Holds a reference to the custom "external" flaky safety scalpers that are not set in the kaspresso by default
+         * @see com.kaspersky.kaspresso.flakysafety.scalpel.FlakySafeInterceptorScalpel
+         * @see com.kaspersky.kaspresso.flakysafety.scalpel.external.ExternalFlakySafetyScalper
+         */
+        lateinit var externalFlakySafetyScalperNotifier: ExternalFlakySafetyScalperNotifier
+
+        /**
          * Holds the implementation of the [androidx.test.espresso.FailureHandler] interface, that is called on every
          * failure.
          */
@@ -964,6 +974,8 @@ data class Kaspresso(
                 defaultsTestRunWatcherInterceptor
             )
 
+            if (!::externalFlakySafetyScalperNotifier.isInitialized) externalFlakySafetyScalperNotifier = ExternalFlakySafetyScalperNotifierImpl()
+
             if (artifactsPullParams.enabled) {
                 instrumentalDependencyProviderFactory.getComponentProvider<Kaspresso>(instrumentation).runNotifier.addUniqueListener {
                     ArtifactsPullRunListener(params = artifactsPullParams, files = files, logger = libLogger)
@@ -1040,6 +1052,7 @@ data class Kaspresso(
 
                 stepWatcherInterceptors = stepWatcherInterceptors,
                 testRunWatcherInterceptors = testRunWatcherInterceptors,
+                externalFlakySafetyScalperNotifier = externalFlakySafetyScalperNotifier,
                 visualTestWatcher = visualTestWatcher,
             )
 

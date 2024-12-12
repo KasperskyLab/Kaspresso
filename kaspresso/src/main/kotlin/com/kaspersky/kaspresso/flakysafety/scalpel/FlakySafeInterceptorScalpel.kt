@@ -10,13 +10,12 @@ import com.kaspersky.kaspresso.interceptors.behaviorkautomator.DeviceBehaviorInt
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.ObjectBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.flakysafety.FlakySafeDeviceBehaviorInterceptor
 import com.kaspersky.kaspresso.interceptors.behaviorkautomator.impl.flakysafety.FlakySafeObjectBehaviorInterceptor
-import com.kaspersky.kaspresso.interceptors.tolibrary.KakaoLibraryInjector.injectKaspressoInKakao
-import com.kaspersky.kaspresso.interceptors.tolibrary.KakaoLibraryInjector.injectKaspressoInKautomator
+import com.kaspersky.kaspresso.interceptors.tolibrary.KakaoLibraryInjector
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import java.util.concurrent.atomic.AtomicInteger
 
 /**
- * The special class that removes all interceptors related to FlakySafety from Kautomator settings
+ * The special class that removes all interceptors related to FlakySafety from kakao settings
  * and restore them by demand
  */
 internal class FlakySafeInterceptorScalpel(
@@ -26,15 +25,14 @@ internal class FlakySafeInterceptorScalpel(
     private val entriesCount = AtomicInteger()
 
     fun scalpFromLibs() {
-        if (entriesCount.getAndIncrement() == 0) {
-            scalpelSwitcher.attemptTakeScalp(
-                actionToDetermineScalp = { determineScalpExistingInKaspresso() },
-                actionToTakeScalp = {
-                    scalpKakaoInterceptors()
-                    scalpKautomatorInterceptors()
-                }
-            )
-        }
+        if (entriesCount.getAndIncrement() == 0) {scalpelSwitcher.attemptTakeScalp(
+            actionToDetermineScalp = { determineScalpExistingInKaspresso() },
+            actionToTakeScalp = {
+                scalpKakaoInterceptors()
+                scalpKautomatorInterceptors()
+                kaspresso.externalFlakySafetyScalperNotifier.scalpFlakySafety()
+            }
+        )}
     }
 
     private fun determineScalpExistingInKaspresso() =
@@ -42,7 +40,8 @@ internal class FlakySafeInterceptorScalpel(
                 kaspresso.dataBehaviorInterceptors.filterIsInstance<FlakySafeDataBehaviorInterceptor>().isNotEmpty() ||
                 kaspresso.webBehaviorInterceptors.filterIsInstance<FlakySafeWebBehaviorInterceptor>().isNotEmpty() ||
                 kaspresso.objectBehaviorInterceptors.filterIsInstance<FlakySafeObjectBehaviorInterceptor>().isNotEmpty() ||
-                kaspresso.deviceBehaviorInterceptors.filterIsInstance<FlakySafeDeviceBehaviorInterceptor>().isNotEmpty()
+                kaspresso.deviceBehaviorInterceptors.filterIsInstance<FlakySafeDeviceBehaviorInterceptor>().isNotEmpty() ||
+                kaspresso.externalFlakySafetyScalperNotifier.isAnyExternalFlakySafetyInterceptorPresent()
 
     private fun scalpKakaoInterceptors() {
         val scalpedViewBehaviorInterceptors: List<ViewBehaviorInterceptor> =
@@ -58,7 +57,7 @@ internal class FlakySafeInterceptorScalpel(
                 it !is FlakySafeWebBehaviorInterceptor
             }
 
-        injectKaspressoInKakao(
+        KakaoLibraryInjector.injectKaspressoInKakao(
             scalpedViewBehaviorInterceptors,
             scalpedDataBehaviorInterceptors,
             scalpedWebBehaviorInterceptors,
@@ -80,7 +79,7 @@ internal class FlakySafeInterceptorScalpel(
                 it !is FlakySafeDeviceBehaviorInterceptor
             }
 
-        injectKaspressoInKautomator(
+        KakaoLibraryInjector.injectKaspressoInKautomator(
             scalpedObjectBehaviorInterceptors,
             scalpedDeviceBehaviorInterceptors,
             kaspresso.objectWatcherInterceptors,
@@ -92,7 +91,7 @@ internal class FlakySafeInterceptorScalpel(
         val nestingDepth = entriesCount.decrementAndGet()
         if (nestingDepth <= 0) { // prevent restoring the interceptors in case if a "flakySafely" block is nested in an another "flakySafely"
             scalpelSwitcher.attemptRestoreScalp {
-                injectKaspressoInKakao(
+                KakaoLibraryInjector.injectKaspressoInKakao(
                     kaspresso.viewBehaviorInterceptors,
                     kaspresso.dataBehaviorInterceptors,
                     kaspresso.webBehaviorInterceptors,
@@ -109,6 +108,8 @@ internal class FlakySafeInterceptorScalpel(
                     kaspresso.objectWatcherInterceptors,
                     kaspresso.deviceWatcherInterceptors
                 )
+
+                kaspresso.externalFlakySafetyScalperNotifier.restoreFlakySafety()
             }
         }
     }
