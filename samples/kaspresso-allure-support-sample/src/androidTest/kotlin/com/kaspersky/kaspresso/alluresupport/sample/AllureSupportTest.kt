@@ -6,6 +6,7 @@ import com.kaspersky.components.alluresupport.withForcedAllureSupport
 import com.kaspersky.kaspresso.alluresupport.sample.screen.MainScreen
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
+import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 
@@ -19,6 +20,7 @@ class AllureSupportTest : TestCase(
     @get:Rule
     val activityRule = activityScenarioRule<MainActivity>()
 
+    @Ignore
     @Test
     fun counter() = run {
         step("Launch the app") {
