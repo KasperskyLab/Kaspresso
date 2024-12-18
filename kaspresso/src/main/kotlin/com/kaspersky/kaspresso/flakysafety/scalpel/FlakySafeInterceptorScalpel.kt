@@ -102,7 +102,7 @@ internal class FlakySafeInterceptorScalpel(
                     kaspresso.params.clickParams
                 )
 
-                injectKaspressoInKautomator(
+                KakaoLibraryInjector.injectKaspressoInKautomator(
                     kaspresso.objectBehaviorInterceptors,
                     kaspresso.deviceBehaviorInterceptors,
                     kaspresso.objectWatcherInterceptors,
