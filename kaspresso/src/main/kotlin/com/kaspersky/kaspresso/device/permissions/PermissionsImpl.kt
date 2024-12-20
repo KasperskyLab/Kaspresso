@@ -36,7 +36,8 @@ class PermissionsImpl(
         Permissions.Button.ALLOW_FOREGROUND to getResIdWithPackageName("permission_allow_foreground_only_button"),
         Permissions.Button.ALLOW_ALL to getResIdWithPackageName("permission_allow_all_button"),
         Permissions.Button.ALLOW_SELECTED to getResIdWithPackageName("permission_allow_selected_button"),
-        Permissions.Button.DENY to getResIdWithPackageName("permission_deny_button")
+        Permissions.Button.DENY to getResIdWithPackageName("permission_deny_button"),
+        Permissions.Button.DENY_AND_DONT_ASK to getResIdWithPackageName("permission_deny_and_dont_ask_again_button")
     )
 
     /**

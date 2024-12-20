@@ -34,6 +34,7 @@ interface Permissions {
         ALLOW_FOREGROUND,
         ALLOW_ALL,
         ALLOW_SELECTED,
-        DENY
+        DENY,
+        DENY_AND_DONT_ASK,
     }
 }
