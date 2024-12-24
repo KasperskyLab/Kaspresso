@@ -25,14 +25,14 @@ internal class FlakySafeInterceptorScalpel(
     private val entriesCount = AtomicInteger()
 
     fun scalpFromLibs() {
-        if (entriesCount.getAndIncrement() == 0) {scalpelSwitcher.attemptTakeScalp(
+        if (entriesCount.getAndIncrement() == 0) { scalpelSwitcher.attemptTakeScalp(
             actionToDetermineScalp = { determineScalpExistingInKaspresso() },
             actionToTakeScalp = {
                 scalpKakaoInterceptors()
                 scalpKautomatorInterceptors()
                 kaspresso.externalFlakySafetyScalperNotifier.scalpFlakySafety()
             }
-        )}
+        ) }
     }
 
     private fun determineScalpExistingInKaspresso() =
