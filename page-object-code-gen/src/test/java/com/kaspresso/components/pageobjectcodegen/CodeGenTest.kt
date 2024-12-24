@@ -17,7 +17,7 @@ class CodeGenTest(
 
     @Test
     fun checkCodeGen() {
-        val jarFile = File("build/libs/page-object-code-gen.jar")
+        val jarFile = File("../artifacts/page-object-code-gen.jar")
         val inputFile = File("src/test/resources/$inputPath")
         Runtime.getRuntime().exec("java -jar $jarFile $inputFile $className $outputDirectory")
         Thread.sleep(15000)
