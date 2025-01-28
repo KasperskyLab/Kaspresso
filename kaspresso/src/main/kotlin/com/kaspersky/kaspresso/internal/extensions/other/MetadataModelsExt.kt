@@ -1,8 +1,8 @@
 package com.kaspersky.kaspresso.internal.extensions.other
 
 import android.text.TextUtils.htmlEncode
-import com.kaspersky.kaspresso.device.activities.metadata.LocalizedString
-import com.kaspersky.kaspresso.device.activities.metadata.Metadata
+import com.kaspersky.kaspresso.docloc.metadata.LocalizedString
+import com.kaspersky.kaspresso.docloc.metadata.Metadata
 
 /**
  * Transforms [Metadata] object to an xml string.

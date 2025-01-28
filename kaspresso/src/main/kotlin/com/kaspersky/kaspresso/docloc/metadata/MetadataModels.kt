@@ -1,4 +1,4 @@
-package com.kaspersky.kaspresso.device.activities.metadata
+package com.kaspersky.kaspresso.docloc.metadata
 
 internal data class Metadata(val window: Window)
 
