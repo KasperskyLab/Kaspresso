@@ -2,15 +2,18 @@ package com.kaspersky.kaspresso.docloc.metadata.extractor
 
 import android.app.Activity
 import androidx.test.uiautomator.By
+import androidx.test.uiautomator.StaleObjectException
 import androidx.test.uiautomator.UiDevice
 import com.kaspersky.kaspresso.device.activities.Activities
 import com.kaspersky.kaspresso.docloc.metadata.LocalizedString
 import com.kaspersky.kaspresso.docloc.metadata.Metadata
 import com.kaspersky.kaspresso.docloc.metadata.Window
+import com.kaspersky.kaspresso.logger.UiTestLogger
 
 internal class UiMetadataExtractor(
     private val uiDevice: UiDevice,
     private val activities: Activities,
+    private val logger: UiTestLogger,
 ) : MetadataExtractor {
 
     private val metadataExtractorHelper = MetadataExtractorHelper()
@@ -37,19 +40,57 @@ internal class UiMetadataExtractor(
     }
 
     private fun getLocalizedStrings(): List<LocalizedString> {
-        return uiDevice.findObjects(By.enabled(true))
+        uiDevice.setCompressedLayoutHierarchy(false)
+        val objectsWithText = uiDevice.findObjects(By.enabled(true))
             .filterNotNull()
-            .filter { !it.text.isNullOrBlank() }
-            .map {
-                val coords = it.visibleBounds
-                LocalizedString(
-                    text = it.text,
-                    locValueDescription = it.resourceName,
-                    left = coords.left,
-                    top = coords.top,
-                    width = coords.width(),
-                    height = coords.height(),
-                )
+            .filter {
+                try {
+                    (it.resourceName != null && it.children.any { !it.text.isNullOrBlank() }) ||
+                            (!it.text.isNullOrBlank() && it.resourceName != null)
+                } catch (ex: StaleObjectException) {
+                    logger.e("UiMetadataExtractor::getLocalizedStrings() - Error while loading object")
+                    false
+                }
             }
+
+        val localizedStrings = mutableListOf<LocalizedString>()
+        for (obj in objectsWithText) {
+            try {
+                val resName = obj.resourceName ?: continue
+                if (!obj.text.isNullOrBlank()) {
+                    val coords = obj.visibleBounds
+                    localizedStrings.add(
+                        LocalizedString(
+                            text = obj.text,
+                            locValueDescription = resName,
+                            left = coords.left,
+                            top = coords.top,
+                            width = coords.width(),
+                            height = coords.height(),
+                        )
+                    )
+                } else {
+                    obj.children
+                        .filter { !it.text.isNullOrBlank() }
+                        .forEach {
+                            val coords = obj.visibleBounds
+                            localizedStrings.add(
+                                LocalizedString(
+                                    text = it.text,
+                                    locValueDescription = resName,
+                                    left = coords.left,
+                                    top = coords.top,
+                                    width = coords.width(),
+                                    height = coords.height(),
+                                )
+                            )
+                        }
+                }
+            } catch (ex: StaleObjectException) {
+                logger.e("UiMetadataExtractor::getLocalizedStrings() - error while processing found objects")
+            }
+        }
+
+        return localizedStrings
     }
 }

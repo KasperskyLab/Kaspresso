@@ -189,7 +189,7 @@ abstract class DocLocScreenshotTestCase(
                 logger,
                 metadataExtractor = when (screenshotParams.metadataExtractor) {
                     MetadataExtractors.Default -> ActivityMetadataExtractor(logger, kaspresso.device.activities)
-                    MetadataExtractors.UiAutomator -> UiMetadataExtractor(kaspresso.device.uiDevice, kaspresso.device.activities)
+                    MetadataExtractors.UiAutomator -> UiMetadataExtractor(kaspresso.device.uiDevice, kaspresso.device.activities, logger)
                 }
             )
         )
