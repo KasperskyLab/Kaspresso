@@ -54,26 +54,20 @@ internal class UiMetadataExtractor(
             }
 
         val localizedStrings = mutableListOf<LocalizedString>()
+        /*
+         There might be a case when the text itself won't have an ID, but rather the text container will.
+         For example if we set an id to the button, Ui automator will see it as a container with an id and a child - text view without an id
+
+         Probably buggy. Need better solution.
+         */
         for (obj in objectsWithText) {
             try {
                 val resName = obj.resourceName ?: continue
-                if (!obj.text.isNullOrBlank()) {
-                    val coords = obj.visibleBounds
-                    localizedStrings.add(
-                        LocalizedString(
-                            text = obj.text,
-                            locValueDescription = resName,
-                            left = coords.left,
-                            top = coords.top,
-                            width = coords.width(),
-                            height = coords.height(),
-                        )
-                    )
-                } else {
+                if (obj.text.isNullOrBlank()) { // the text container
                     obj.children
                         .filter { !it.text.isNullOrBlank() }
                         .forEach {
-                            val coords = obj.visibleBounds
+                            val coords = it.visibleBounds
                             localizedStrings.add(
                                 LocalizedString(
                                     text = it.text,
@@ -85,6 +79,18 @@ internal class UiMetadataExtractor(
                                 )
                             )
                         }
+                } else { // the text itself
+                    val coords = obj.visibleBounds
+                    localizedStrings.add(
+                        LocalizedString(
+                            text = obj.text,
+                            locValueDescription = resName,
+                            left = coords.left,
+                            top = coords.top,
+                            width = coords.width(),
+                            height = coords.height(),
+                        )
+                    )
                 }
             } catch (ex: StaleObjectException) {
                 logger.e("UiMetadataExtractor::getLocalizedStrings() - error while processing found objects")
