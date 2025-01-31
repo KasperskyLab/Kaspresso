@@ -12,7 +12,9 @@ import com.kaspersky.kaspresso.device.screenshots.screenshotmaker.DocLocScreensh
 import com.kaspersky.kaspresso.device.screenshots.screenshotmaker.ExternalScreenshotMaker
 import com.kaspersky.kaspresso.device.screenshots.screenshotmaker.InternalScreenshotMaker
 import com.kaspersky.kaspresso.docloc.DocLocScreenshotCapturer
-import com.kaspersky.kaspresso.docloc.MetadataSaver
+import com.kaspersky.kaspresso.docloc.metadata.extractor.ActivityMetadataExtractor
+import com.kaspersky.kaspresso.docloc.metadata.extractor.UiMetadataExtractor
+import com.kaspersky.kaspresso.docloc.metadata.saver.DefaultMetadataSaver
 import com.kaspersky.kaspresso.docloc.rule.LocaleRule
 import com.kaspersky.kaspresso.docloc.rule.ToggleNightModeRule
 import com.kaspersky.kaspresso.files.dirs.DefaultDirsProvider
@@ -33,6 +35,7 @@ import com.kaspersky.kaspresso.internal.extensions.other.getAllInterfaces
 import com.kaspersky.kaspresso.internal.invocation.UiInvocationHandler
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.logger.UiTestLogger
+import com.kaspersky.kaspresso.params.MetadataExtractors
 import com.kaspersky.kaspresso.params.ScreenshotParams
 import org.junit.Before
 import org.junit.Rule
@@ -180,7 +183,15 @@ abstract class DocLocScreenshotTestCase(
                 ),
                 fullWindowScreenshotMaker = InternalScreenshotMaker(kaspresso.device.activities, screenshotParams)
             ),
-            metadataSaver = MetadataSaver(kaspresso.device.activities, kaspresso.device.apps, logger)
+            metadataSaver = DefaultMetadataSaver(
+                kaspresso.device.activities,
+                kaspresso.device.apps,
+                logger,
+                metadataExtractor = when (screenshotParams.metadataExtractor) {
+                    MetadataExtractors.Default -> ActivityMetadataExtractor(logger, kaspresso.device.activities)
+                    MetadataExtractors.UiAutomator -> UiMetadataExtractor(kaspresso.device.uiDevice, kaspresso.device.activities, logger)
+                }
+            )
         )
     }
 

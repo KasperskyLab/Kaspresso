@@ -1,6 +1,7 @@
 package com.kaspersky.kaspresso.docloc
 
 import com.kaspersky.kaspresso.device.screenshots.screenshotmaker.ScreenshotMaker
+import com.kaspersky.kaspresso.docloc.metadata.saver.MetadataSaver
 import com.kaspersky.kaspresso.files.resources.ResourceFilesProvider
 import com.kaspersky.kaspresso.internal.wait.wait
 import com.kaspersky.kaspresso.logger.UiTestLogger

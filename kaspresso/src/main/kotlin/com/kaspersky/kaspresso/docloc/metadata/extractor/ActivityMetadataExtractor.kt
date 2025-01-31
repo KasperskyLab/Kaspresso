@@ -1,4 +1,4 @@
-package com.kaspersky.kaspresso.device.activities.metadata
+package com.kaspersky.kaspresso.docloc.metadata.extractor
 
 import android.app.Activity
 import android.content.res.Resources
@@ -6,17 +6,25 @@ import android.view.View
 import android.widget.TextView
 import androidx.test.espresso.util.TreeIterables
 import com.google.android.material.appbar.CollapsingToolbarLayout
+import com.kaspersky.kaspresso.device.activities.Activities
+import com.kaspersky.kaspresso.docloc.metadata.LocalizedString
+import com.kaspersky.kaspresso.docloc.metadata.Metadata
+import com.kaspersky.kaspresso.docloc.metadata.Window
 import com.kaspersky.kaspresso.logger.UiTestLogger
 
 /**
  * The utility class to collect metadata from a window.
  */
-internal class ActivityMetadata(
-    private val logger: UiTestLogger
-) {
+internal class ActivityMetadataExtractor(
+    private val logger: UiTestLogger,
+    private val activities: Activities,
+) : MetadataExtractor {
 
-    companion object {
-        private const val INDEX_SEPARATOR = '_'
+    private val metadataExtractorHelper = MetadataExtractorHelper()
+
+    override fun getMetadata(): Metadata {
+        val activity = activities.getResumed() ?: throw RuntimeException("Failed to get current activity")
+        return getFromActivity(activity)
     }
 
     /**
@@ -27,16 +35,15 @@ internal class ActivityMetadata(
      * @param activity activity to collect metadata from.
      * @return Metadata for the activity.
      */
-    internal fun getFromActivity(activity: Activity): Metadata {
-        return getMetadata(activity)
+    private fun getFromActivity(activity: Activity): Metadata {
+        return createMetadata(activity)
     }
 
-    private fun getMetadata(activity: Activity): Metadata {
+    private fun createMetadata(activity: Activity): Metadata {
         with(activity.window.decorView) {
-            val localizedStrings =
-                resolveAmbiguous(
-                    getLocalizedStrings(this)
-                )
+            val localizedStrings = metadataExtractorHelper.resolveAmbiguous(
+                getLocalizedStrings(this)
+            )
             val window = Window(
                 left,
                 top,
@@ -89,22 +96,6 @@ internal class ActivityMetadata(
         } catch (ex: Resources.NotFoundException) {
             logger.e("Entry ${layout.id} not found")
             "[id:${Integer.toHexString(layout.id)}]"
-        }
-    }
-
-    private fun resolveAmbiguous(localizedStrings: List<LocalizedString>): List<LocalizedString> {
-        return localizedStrings.groupBy { it.locValueDescription }
-            .values
-            .flatMap { groupedById ->
-                if (groupedById.size == 1) groupedById else addIndexes(
-                    groupedById
-                )
-            }
-    }
-
-    private fun addIndexes(groupedById: List<LocalizedString>): List<LocalizedString> {
-        return groupedById.mapIndexed { index, locString ->
-            locString.copy(locValueDescription = "${locString.locValueDescription}$INDEX_SEPARATOR${index + 1}")
         }
     }
 }
