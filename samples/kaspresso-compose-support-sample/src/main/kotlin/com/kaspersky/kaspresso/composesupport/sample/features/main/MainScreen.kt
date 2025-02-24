@@ -23,7 +23,8 @@ import com.kaspersky.kaspresso.composesupport.sample.resources.C
 fun MainScreen(
     simpleFlakyClick: () -> Unit,
     sanityFlakyClick: () -> Unit,
-    scrollClick: () -> Unit
+    scrollClick: () -> Unit,
+    lazyListClick: () -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -62,6 +63,16 @@ fun MainScreen(
             },
             onClick = scrollClick,
         )
+
+        Button(
+            modifier = Modifier
+                .fillMaxWidth()
+                .semantics { testTag = C.Tag.main_screen_lazy_list_button },
+            content = {
+                Text(text = stringResource(id = R.string.main_screen_lazy_list_button))
+            },
+            onClick = lazyListClick,
+        )
     }
 }
 
@@ -72,7 +83,8 @@ private fun MainScreenPreview() {
         MainScreen(
             simpleFlakyClick = { },
             sanityFlakyClick = { },
-            scrollClick = { }
+            scrollClick = { },
+            lazyListClick = { }
         )
     }
 }
