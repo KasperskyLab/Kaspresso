@@ -17,11 +17,10 @@ class UiSimpleTest : TestCase() {
     val activityRule = activityScenarioRule<MainActivity>()
 
     @Test
-    fun upgradeTest() {
+    fun uiSimpleTest() {
         before {
         }.after {
         }.run {
-
             step("Input text in EditText and check it") {
                 MainScreen {
                     simpleEditText {
