@@ -40,6 +40,11 @@ class NetworkImpl(
         private const val WIFI_STATE_CHECK_CMD = "settings get global wifi_on"
         private const val WIFI_STATE_CHECK_RESULT_ENABLED = "1"
         private const val WIFI_STATE_CHECK_RESULT_DISABLED = "0"
+        private const val AIRPLANE_MODE_CHANGE_CMD = "cmd connectivity airplane-mode"
+        private const val AIRPLANE_MODE_CHANGE_ROOT_CMD = "su 0 cmd connectivity airplane-mode"
+        private const val AIRPLANE_MODE_STATE_CHECK_CMD = "settings get global airplane_mode_on"
+        private const val AIRPLANE_MODE_STATE_CHECK_RESULT_ENABLED = "1"
+        private const val AIRPLANE_MODE_STATE_CHECK_RESULT_DISABLED = "0"
         private val ADB_RESULT_REGEX = Regex("exitCode=(\\d+), message=(.+)")
     }
 
@@ -218,6 +223,31 @@ class NetworkImpl(
                 false -> disableWifi()
             }
             close(targetContext)
+        }
+    }
+
+    override fun toggleAirplaneMode(enable: Boolean) {
+        if (!toggleAirplaneModeUsingAdb(enable, AIRPLANE_MODE_CHANGE_CMD) &&
+            !toggleAirplaneModeUsingAdb(enable, AIRPLANE_MODE_CHANGE_ROOT_CMD)
+        ) {
+            logger.i("Airplane mode ${if (enable) "en" else "dis"}abled")
+        }
+    }
+
+    private fun toggleAirplaneModeUsingAdb(isEnabled: Boolean, changeCommand: String): Boolean {
+        try {
+            val (state, expectedResult) = when (isEnabled) {
+                true -> CMD_STATE_ENABLE to AIRPLANE_MODE_STATE_CHECK_RESULT_ENABLED
+                false -> CMD_STATE_DISABLE to AIRPLANE_MODE_STATE_CHECK_RESULT_DISABLED
+            }
+            adbServer.performShell("$changeCommand $state")
+            flakySafetyAlgorithm.invokeFlakySafely(flakySafetyParams) {
+                val result = adbServer.performShell(AIRPLANE_MODE_STATE_CHECK_CMD)
+                if (parseAdbResponse(result)?.trim() == expectedResult) true else
+                    throw AdbServerException("Failed to change airplane mode state using ABD")
+            }
+        } catch (e: AdbServerException) {
+            false
         }
     }
 
