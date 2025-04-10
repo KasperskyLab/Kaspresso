@@ -22,12 +22,17 @@ interface Network {
     fun disable()
 
     /**
-     * Toggles only mobile data. Note: it works only if flight mode is off.
+     * Toggles only mobile data. Note: it works only if airplane mode is off.
      */
     fun toggleMobileData(enable: Boolean)
 
     /**
-     * Toggles only wi-fi. Note: it works only if flight mode is off.
+     * Toggles only wi-fi. Note: it works only if airplane mode is off.
      */
     fun toggleWiFi(enable: Boolean)
+
+    /**
+     * Toggles airplane mode
+     */
+    fun toggleAirplaneMode(enable: Boolean)
 }
