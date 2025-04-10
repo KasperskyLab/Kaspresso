@@ -10,6 +10,7 @@ import com.kaspersky.components.kautomator.system.UiSystem
 import com.kaspersky.kaspresso.device.server.AdbServer
 import com.kaspersky.kaspresso.flakysafety.algorithm.FlakySafetyAlgorithm
 import com.kaspersky.kaspresso.internal.exceptions.AdbServerException
+import com.kaspersky.kaspresso.internal.systemscreen.AirplaneModeSettingsScreen
 import com.kaspersky.kaspresso.internal.systemscreen.DataUsageSettingsScreen
 import com.kaspersky.kaspresso.internal.systemscreen.NotificationsFullScreen
 import com.kaspersky.kaspresso.internal.systemscreen.NotificationsMobileDataScreen
@@ -88,8 +89,8 @@ class NetworkImpl(
             !toggleMobileDataUsingAdbServer(enable, NETWORK_STATE_CHANGE_CMD)
         ) {
             toggleMobileDataUsingAndroidSettings(enable)
-            logger.i("Mobile data ${if (enable) "en" else "dis"}abled")
         }
+        logger.i("Mobile data ${if (enable) "en" else "dis"}abled")
     }
 
     private fun toggleMobileDataUsingAdbServer(enable: Boolean, changeCommand: String): Boolean =
@@ -162,8 +163,8 @@ class NetworkImpl(
             !changeWiFiStateUsingAdbServer(enable, WIFI_STATE_CHANGE_CMD)
         ) {
             changeWifiStateUsingAndroidSettings(enable)
-            logger.i("Wi-fi ${if (enable) "en" else "dis"}abled")
         }
+        logger.i("Wi-fi ${if (enable) "en" else "dis"}abled")
     }
 
     /**
@@ -230,11 +231,12 @@ class NetworkImpl(
         if (!toggleAirplaneModeUsingAdb(enable, AIRPLANE_MODE_CHANGE_CMD) &&
             !toggleAirplaneModeUsingAdb(enable, AIRPLANE_MODE_CHANGE_ROOT_CMD)
         ) {
-            logger.i("Airplane mode ${if (enable) "en" else "dis"}abled")
+            toggleAirplaneModeAndroidSettings(enable)
         }
+        logger.i("Airplane mode ${if (enable) "en" else "dis"}abled")
     }
 
-    private fun toggleAirplaneModeUsingAdb(isEnabled: Boolean, changeCommand: String): Boolean {
+    private fun toggleAirplaneModeUsingAdb(isEnabled: Boolean, changeCommand: String) =
         try {
             val (state, expectedResult) = when (isEnabled) {
                 true -> CMD_STATE_ENABLE to AIRPLANE_MODE_STATE_CHECK_RESULT_ENABLED
@@ -248,6 +250,13 @@ class NetworkImpl(
             }
         } catch (e: AdbServerException) {
             false
+        }
+
+    private fun toggleAirplaneModeAndroidSettings(isEnabled: Boolean) {
+        AirplaneModeSettingsScreen {
+            open(targetContext)
+            airplaneModeSwitch.setChecked(isEnabled)
+            close(targetContext)
         }
     }
 
