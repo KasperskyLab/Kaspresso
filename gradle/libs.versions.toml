@@ -38,7 +38,7 @@ detektFormatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", v
 
 androidXCore = "androidx.core:core:1.12.0"
 appcompat = "androidx.appcompat:appcompat:1.6.1"
-material = "com.google.android.material:material:1.11.0"
+material = { module = "com.google.android.material:material", version.ref = "material" }
 constraint = "androidx.constraintlayout:constraintlayout:2.1.4"
 multidex = "androidx.multidex:multidex:2.0.1"
 
