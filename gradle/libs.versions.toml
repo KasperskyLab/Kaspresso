@@ -1,13 +1,13 @@
 [versions]
-kotlin = "1.8.22"
+kotlin = "2.0.0"
 detekt = "1.21.0"
 espresso = "3.6.1"
 kakao = "3.6.2"
-kakaoCompose = "0.2.3"
+kakaoCompose = "1.0.0"
 kakaoExtClicks = "1.0.0"
 allure = "2.4.0"
-compose = "1.5.4"
-composeCompiler = "1.4.8"
+compose = "1.7.8"
+composeCompiler = "1.5.15"
 activityCompose = "1.4.0"
 androidXTest = "1.6.1"
 testOrchestrator = "1.4.2"
@@ -56,6 +56,9 @@ uiAutomator = "androidx.test.uiautomator:uiautomator:2.3.0"
 robolectric = "org.robolectric:robolectric:4.8.2"
 kakao = { module = "io.github.kakaocup:kakao", version.ref = "kakao" }
 kakaoCompose = { module = "io.github.kakaocup:compose", version.ref = "kakaoCompose" }
+kakaoTest = { module = "io.github.kakaocup:compose-test", version.ref = "kakaoCompose" }
+kakaoUi = { module = "io.github.kakaocup:compose-ui", version.ref = "kakaoCompose" }
+kakaoSemantics = { module = "io.github.kakaocup:compose-semantics", version.ref = "kakaoCompose" }
 kakaoExtClicks = { module = "io.github.kakaocup:kakao-ext-clicks", version.ref = "kakaoExtClicks" }
 junit = "junit:junit:4.13.2"
 junitJupiter = "org.junit.jupiter:junit-jupiter:5.9.0"
@@ -72,7 +75,6 @@ androidXTestExtJunit = "androidx.test.ext:junit:1.1.5"
 androidXTestExtJunitKtx = "androidx.test.ext:junit-ktx:1.1.5"
 androidXLifecycleRuntimeKtx = "androidx.lifecycle:lifecycle-runtime-ktx:2.6.2"
 
-composeCompiler = { module = "androidx.compose.compiler:compiler", version.ref = "composeCompiler" }
 composeActivity = "androidx.activity:activity-compose:1.5.1"
 composeUiTooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
 composeMaterial = { module = "androidx.compose.material:material", version.ref = "compose" }
@@ -95,7 +97,8 @@ com-google-android-material-material = { group = "com.google.android.material", 
 [bundles]
 espresso = ["espressoCore", "espressoWeb"]
 allure = ["allureKotlinModel", "allureKotlinCommons", "allureKotlinJunit4", "allureKotlinAndroid"]
-compose = ["composeActivity", "composeUiTooling", "composeMaterial", "composeTestManifest", "composeCompiler"]
+compose = ["composeActivity", "composeUiTooling", "composeMaterial", "composeTestManifest"]
 [plugins]
 com-android-library = { id = "com.android.library", version.ref = "agp" }
 org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "org-jetbrains-kotlin-android" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
