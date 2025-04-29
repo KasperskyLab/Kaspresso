@@ -17,7 +17,6 @@ android {
         compose = true
     }
 
-
     sourceSets {
         // configure shared test folder
         val sharedTestFolder = "src/sharedTest/kotlin"
