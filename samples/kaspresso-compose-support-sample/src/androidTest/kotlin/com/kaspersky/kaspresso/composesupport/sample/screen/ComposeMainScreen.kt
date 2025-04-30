@@ -22,4 +22,8 @@ class ComposeMainScreen(semanticsProvider: SemanticsNodeInteractionsProvider) :
     val scrollButton: KNode = child {
         hasTestTag(C.Tag.main_screen_scroll_button)
     }
+
+    val lazyListButton: KNode = child {
+        hasTestTag(C.Tag.main_screen_lazy_list_button)
+    }
 }

@@ -10,6 +10,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.kaspersky.kaspresso.composesupport.sample.features.flaky.SimpleFlakyScreen
 import com.kaspersky.kaspresso.composesupport.sample.features.flaky.SimpleFlakyViewModel
+import com.kaspersky.kaspresso.composesupport.sample.features.lazylist.LazyListScreen
 import com.kaspersky.kaspresso.composesupport.sample.features.main.MainScreen
 import com.kaspersky.kaspresso.composesupport.sample.features.sanityflaky.SanityFlakyScreen
 import com.kaspersky.kaspresso.composesupport.sample.features.sanityflaky.SanityFlakyViewModel
@@ -36,7 +37,8 @@ class MainActivity : AppCompatActivity() {
                 MainScreen(
                     simpleFlakyClick = { navController.navigate(C.Screen.simple_flaky_screen) },
                     sanityFlakyClick = { navController.navigate(C.Screen.sanity_flaky_screen) },
-                    scrollClick = { navController.navigate(C.Screen.scroll_screen) }
+                    scrollClick = { navController.navigate(C.Screen.scroll_screen) },
+                    lazyListClick = { navController.navigate(C.Screen.lazy_list) }
                 )
             }
 
@@ -56,6 +58,9 @@ class MainActivity : AppCompatActivity() {
             composable(C.Screen.sanity_flaky_screen) {
                 SanityFlakyScreen(sanityFlakyStateLiveData =
                     sanityFlakyViewModel.sanityFlakyStateLiveData, firstButtonClick = { sanityFlakyViewModel.firstButtonClick() })
+            }
+            composable(C.Screen.lazy_list) {
+                LazyListScreen()
             }
         }
     }
