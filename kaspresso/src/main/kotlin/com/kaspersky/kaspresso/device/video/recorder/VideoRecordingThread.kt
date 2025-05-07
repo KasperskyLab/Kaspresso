@@ -10,6 +10,7 @@ import android.view.WindowManager
 import androidx.annotation.RequiresApi
 import androidx.test.uiautomator.UiDevice
 import com.kaspersky.kaspresso.logger.UiTestLogger
+import com.kaspersky.kaspresso.params.Resolution
 import com.kaspersky.kaspresso.params.VideoParams
 import java.io.File
 import kotlin.math.min
@@ -42,30 +43,9 @@ class VideoRecordingThread(
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     private fun startVideoRecordingWithRespectToCodecCapabilities() {
         try {
-            val codecInfo = MediaCodecList(MediaCodecList.ALL_CODECS).codecInfos
-                .filter { it.isEncoder }
-                .find { it.name.contains("h264") }!!
-            val videoCapabilities = codecInfo.getCapabilitiesForType(codecInfo.supportedTypes.find { it.contains("avc") }).videoCapabilities
-            // codec width and heights are for landscape mode
-            val codecHeight = videoCapabilities.supportedWidths.upper
-            val codecWidth = videoCapabilities.supportedHeights.upper
-
-            val display = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                instrumentation.targetContext
-                    .getSystemService(DisplayManager::class.java)
-                    .getDisplay(Display.DEFAULT_DISPLAY)
-            } else {
-                (instrumentation.targetContext.getSystemService(Context.WINDOW_SERVICE) as WindowManager?)?.defaultDisplay!!
-            }
-            val displayWidth = display.width
-            val displayHeight = display.height
-
-            val width = min(displayWidth, codecWidth)
-            val height = min(displayHeight, codecHeight)
-
-            logger.d("Display resolution: ${displayWidth}x$displayHeight; supported codec resolution: ${codecWidth}x$codecHeight")
-            logger.d("Starting video recording with resolution ${width}x$height")
-            execShellCommand("screenrecord --bit-rate ${params.bitRate} --size ${width}x$height --bugreport ${file.absolutePath}")
+            val resolution = getResolution()
+            logger.d("Starting video recording with resolution ${resolution.width}x${resolution.height}")
+            execShellCommand("screenrecord --bit-rate ${params.bitRate} --size ${resolution.width}x${resolution.height} --bugreport ${file.absolutePath}")
         } catch (ex: Throwable) {
             logger.e(
                 "Failed to start video recording with respect to resolution supported by codec. Using native resolution. " +
@@ -76,6 +56,38 @@ class VideoRecordingThread(
 
             startVideoRecordingWithNativeResolution()
         }
+    }
+
+    private fun getResolution(): Resolution {
+        if (params.resolutionOverride != null) {
+            logger.d("Using video resolution override=${params.resolutionOverride}")
+            return params.resolutionOverride
+        }
+
+        val codecInfo = MediaCodecList(MediaCodecList.ALL_CODECS).codecInfos
+            .filter { it.isEncoder }
+            .find { it.name.contains("h264") }!!
+        val videoCapabilities = codecInfo.getCapabilitiesForType(codecInfo.supportedTypes.find { it.contains("avc") }).videoCapabilities
+        // codec width and heights are for landscape mode
+        val codecHeight = videoCapabilities.supportedWidths.upper
+        val codecWidth = videoCapabilities.supportedHeights.upper
+
+        val display = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            instrumentation.targetContext
+                .getSystemService(DisplayManager::class.java)
+                .getDisplay(Display.DEFAULT_DISPLAY)
+        } else {
+            (instrumentation.targetContext.getSystemService(Context.WINDOW_SERVICE) as WindowManager?)?.defaultDisplay!!
+        }
+        val displayWidth = display.width
+        val displayHeight = display.height
+
+        val width = min(displayWidth, codecWidth)
+        val height = min(displayHeight, codecHeight)
+
+        logger.d("Display resolution: ${displayWidth}x$displayHeight; supported codec resolution: ${codecWidth}x$codecHeight")
+
+        return Resolution(width = width, height = height)
     }
 
     fun killRecordingProcess() {
