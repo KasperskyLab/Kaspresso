@@ -1,5 +1,6 @@
 package com.kaspersky.components.kautomator.intercept.interaction
 
+import androidx.test.uiautomator.BySelector
 import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.UiObject2
 import com.kaspersky.components.kautomator.component.common.builders.UiViewSelector
@@ -20,7 +21,11 @@ class UiObjectInteraction(
         private set
 
     private fun calculateUiObject(): UiObject2? {
-        val uiObjects = device.findObjects(selector.bySelector)
+        return selector.selectors.firstNotNullOfOrNull { getUiObject2OrNull(it) }
+    }
+
+    private fun getUiObject2OrNull(bySelector: BySelector): UiObject2? {
+        val uiObjects = device.findObjects(bySelector)
         if (uiObjects.isNotEmpty() && selector.index < uiObjects.size) {
             return uiObjects[selector.index]
         }

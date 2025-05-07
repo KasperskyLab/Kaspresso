@@ -28,12 +28,12 @@ interface UiScrollableActions : UiBaseActions {
         view.perform(UiScrollableActionType.SCROLL_TO_VIEW) {
             val scrollable = UiScrollable(UiSelector().resourceId(resourceName))
             do {
-                if (findObject(to.view.interaction.selector.bySelector) != null)
-                    return@perform
+                to.view.interaction.reFindUiObject()
+                if (to.view.interaction.uiObject2 != null) return@perform
             } while (scrollable.scrollForward())
             do {
-                if (findObject(to.view.interaction.selector.bySelector) != null)
-                    return@perform
+                to.view.interaction.reFindUiObject()
+                if (to.view.interaction.uiObject2 != null) return@perform
             } while (scrollable.scrollBackward())
             to.isDisplayed()
         }

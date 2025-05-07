@@ -1,4 +1,5 @@
 @file:Suppress("unused")
+
 package com.kaspersky.components.kautomator.component.common.builders
 
 import android.os.Build
@@ -8,7 +9,6 @@ import androidx.annotation.StringRes
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.BySelector
 import androidx.test.uiautomator.BySelectorHack
-import com.google.common.truth.Truth.assertThat
 import com.kaspersky.components.kautomator.common.resources.KId
 import com.kaspersky.components.kautomator.common.resources.KString
 import com.kaspersky.components.kautomator.component.common.KautomatorMarker
@@ -26,6 +26,7 @@ class UiViewBuilder {
 
     private var index: Int = 0
     private var selector: BySelector? = null
+    private val selectors: MutableList<BySelector> = mutableListOf()
 
     /**
      * Matches only view at given [index], if there are multiple views that matches
@@ -280,7 +281,7 @@ class UiViewBuilder {
      * @param function ViewBuilder which will result in descendant matcher
      */
     fun withDescendant(function: UiViewBuilder.() -> Unit) =
-        addSelector { hasDescendant(UiViewBuilder().apply(function).build().bySelector) }
+        addSelector { hasDescendant(UiViewBuilder().apply(function).build().selectors.first()) }
 
     /**
      * Matches the view which has descendant of given matcher with the maximum depth under the
@@ -290,7 +291,7 @@ class UiViewBuilder {
      * @param maxDepth The maximum depth under the element to search the descendant
      */
     fun withDescendant(maxDepth: Int, function: UiViewBuilder.() -> Unit) =
-        addSelector { hasDescendant(UiViewBuilder().apply(function).build().bySelector, maxDepth) }
+        addSelector { hasDescendant(UiViewBuilder().apply(function).build().selectors.first(), maxDepth) }
 
     /**
      * Matches the view that is at a certain depth
@@ -326,7 +327,8 @@ class UiViewBuilder {
     /**
      * Matches the view that has parent which fits the given matcher
      */
-    fun withParent(function: UiViewBuilder.() -> Unit) = addSelector { hasParent(UiViewBuilder().apply(function).build().bySelector) }
+    fun withParent(function: UiViewBuilder.() -> Unit) =
+        addSelector { hasParent(UiViewBuilder().apply(function).build().selectors.first()) }
 
     /**
      * Matches the view with given hint
@@ -358,7 +360,7 @@ class UiViewBuilder {
      * @param function ViewBuilder which will result in child matcher
      */
     fun withChild(function: UiViewBuilder.() -> Unit) =
-        addSelector { hasChild(UiViewBuilder().apply(function).build().bySelector) }
+        addSelector { hasChild(UiViewBuilder().apply(function).build().selectors.first()) }
 
     /**
      * Matches the view which class matches given name
@@ -396,11 +398,30 @@ class UiViewBuilder {
     fun withSelector(selector: BySelector.() -> BySelector) = addSelector(selector)
 
     /**
-     * Returns combined [BySelector] with all passed conditions
+     * Gives the ability to find the first matched view by several [BySelector]'s (logical OR combiner).
+     * Multiple OR blocks are possible, but all of them must be declared in the end of the [UiViewBuilder] block.
+     */
+    fun or(function: UiViewBuilder.() -> Unit) {
+        checkAndAddSelector()
+        selector = null
+        function()
+    }
+
+    /**
+     * @return [UiViewSelector] with index of the needed element and the list of [BySelector]'s.
+     * Each [BySelector] could contain multiple AND conditions by itself.
+     * The list is used to combine [BySelector]'s with logical OR condition.
      */
     fun build(): UiViewSelector {
-        assertThat(selector).isNotNull()
-        return UiViewSelector(index, selector as BySelector)
+        checkAndAddSelector()
+        return UiViewSelector(index, selectors)
+    }
+
+    private fun checkAndAddSelector() {
+        with(selector) {
+            if (this == null) throw IllegalStateException("BySelector wasn't initialized")
+            selectors.add(this)
+        }
     }
 
     private fun addSelector(condition: BySelector.() -> BySelector) {

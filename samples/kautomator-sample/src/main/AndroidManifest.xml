@@ -30,6 +30,7 @@
         <activity android:name=".flaky.FlakyActivity" />
         <activity android:name=".systemdialogs.SystemDialogsActivity" />
         <activity android:name=".ParentSearchActivity" />
+        <activity android:name=".AmbiguousActivity" />
     </application>
 
 </manifest>

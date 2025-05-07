@@ -4,5 +4,10 @@ import androidx.test.uiautomator.BySelector
 
 data class UiViewSelector(
     val index: Int,
-    val bySelector: BySelector
-)
+    val selectors: List<BySelector>,
+) {
+    constructor(
+        index: Int,
+        selector: BySelector
+    ) : this(index, listOf(selector))
+}
