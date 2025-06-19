@@ -24,14 +24,8 @@ val environment: Environment by lazy {
     }
 }
 
-private fun hasClass(className: String): Boolean {
-    return try {
-        Class.forName(className)
-        true
-    } catch (e: ClassNotFoundException) {
-        false
-    }
-}
+private fun hasClass(className: String): Boolean =
+    runCatching { Class.forName(className) }.isSuccess
 
 sealed class Environment {
     object AndroidRuntime : Environment()
