@@ -25,7 +25,7 @@ class VisualTest : VisualTestCase() {
 }
 ```
 
-В тестовом метое вместо привычного вызова before{}.after{}.run{} необходимо воспользоваться методом `runScreenshotTest`:
+Для описания теста вместо вызова before{}.after{}.run{} необходимо воспользоваться методом `runScreenshotTest`:
 ```kotlin
 @Test
 fun test() = runScreenshotTest {
@@ -104,8 +104,8 @@ kaspresso.visualTestType="Record"
 класса `VisualTestParams`, то пиксель считается отличным. Имейте ввиду, что значение в канале лежат в диапазоне [0, 255].
 
 ## Конфигурация тестов
-Для более тонкой настройки сравнения скриншотов служит класс `VisualTestParams`. Задавать значения его полей необходимо
-в Kaspresso builder:
+Для более тонкой настройки сравнения скриншотов служит класс `VisualTestParams`. 
+Инициализировать его необходимо в Kaspresso builder:
 ```kotlin
 class VisualTestSample : VisualTestCase(kaspressoBuilder = Kaspresso.Builder.simple {
     visualTestParams = VisualTestParams(
