@@ -38,7 +38,7 @@ detektFormatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", v
 
 androidXCore = "androidx.core:core:1.12.0"
 appcompat = "androidx.appcompat:appcompat:1.6.1"
-material = "com.google.android.material:material:1.11.0"
+material = "com.google.android.material:material:1.12.0"
 constraint = "androidx.constraintlayout:constraintlayout:2.1.4"
 multidex = "androidx.multidex:multidex:2.0.1"
 
@@ -63,7 +63,7 @@ kakaoExtClicks = { module = "io.github.kakaocup:kakao-ext-clicks", version.ref =
 junit = "junit:junit:4.13.2"
 junitJupiter = "org.junit.jupiter:junit-jupiter:5.9.0"
 assertj = "org.assertj:assertj-core:3.11.1"
-truth = "com.google.truth:truth:1.3.0"
+truth = "com.google.truth:truth:1.4.4"
 mockk = "io.mockk:mockk:1.13.12"
 
 androidXTestCore = { module = "androidx.test:core", version.ref = "androidXTest" }
