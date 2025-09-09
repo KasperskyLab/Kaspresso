@@ -6,10 +6,10 @@ check_android_30_task:
   skip: "changesIncludeOnly('NOTICE.txt', 'LICENSE.txt', '**.{md,html}')"
 
   container:
-    image: ghcr.io/cirruslabs/android-sdk:34
+    image: ghcr.io/cirruslabs/android-sdk:35
     kvm: true
-    cpu: 8
-    memory: 24G
+    cpu: 4
+    memory: 16G
   start_adb_server_background_script:
     java -jar artifacts/adbserver-desktop.jar || true
   accept_licenses_script:
@@ -68,26 +68,26 @@ check_android_30_task:
       path: "samples/kaspresso-allure-support-sample/build/reports/androidTests/connected/**/*"
 
 check_android_33_task:
-  name: Run Android instrumented tests on API 33
+  name: Run Android instrumented tests on API 35
   env:
     DISPLAY: :99
   only_if: $CIRRUS_PR != '' && $CIRRUS_BASE_BRANCH == 'master'
   skip: "changesIncludeOnly('NOTICE.txt', 'LICENSE.txt', '**.{md,html}')"
 
   container:
-    image: ghcr.io/cirruslabs/android-sdk:34
+    image: ghcr.io/cirruslabs/android-sdk:35
     kvm: true
-    cpu: 8
-    memory: 24G
+    cpu: 4
+    memory: 16G
   start_adb_server_background_script:
     java -jar artifacts/adbserver-desktop.jar || true
   accept_licenses_script:
     echo yes | sdkmanager --licenses
   install_emulator_script: |
     sdkmanager "emulator"
-    sdkmanager --install "system-images;android-33;google_apis;x86_64"
+    sdkmanager --install "system-images;android-35;google_apis;x86_64"
   create_avd_script: |
-    echo no | avdmanager create avd --force -n emulator -k "system-images;android-33;google_apis;x86_64"
+    echo no | avdmanager create avd --force -n emulator -k "system-images;android-35;google_apis;x86_64"
     echo 'hw.ramSize=2048MB' >> ~/.android/avd/emulator.avd/config.ini
   start_avd_background_script:
     $ANDROID_HOME/emulator/emulator
@@ -133,17 +133,17 @@ check_android_33_task:
       path: "samples/kaspresso-allure-support-sample/build/reports/androidTests/connected/**/*"
 
 check_android_21_task:
-  name: Run Android instrumented tests on API 21
+  name: Run Android instrumented tests on API 24
   env:
     DISPLAY: :99
   only_if: $CIRRUS_PR != '' && $CIRRUS_BASE_BRANCH == 'master'
   skip: "changesIncludeOnly('NOTICE.txt', 'LICENSE.txt', '**.{md,html}')"
 
   container:
-    image: ghcr.io/cirruslabs/android-sdk:34
+    image: ghcr.io/cirruslabs/android-sdk:35
     kvm: true
-    cpu: 8
-    memory: 24G
+    cpu: 4
+    memory: 16G
   start_adb_server_background_script:
     java -jar artifacts/adbserver-desktop.jar || true
   accept_licenses_script:
@@ -151,12 +151,12 @@ check_android_21_task:
   install_emulator_script: |
     # x86_64 somehow affect the "call" test
     sdkmanager emulator
-    sdkmanager --install "system-images;android-21;default;x86"
+    sdkmanager --install "system-images;android-24;default;x86"
   create_avd_script:
     echo no | avdmanager create avd --force
     -c 1024M
     -n emulator
-    -k "system-images;android-21;default;x86"
+    -k "system-images;android-24;default;x86"
   start_avd_background_script:
     $ANDROID_HOME/emulator/emulator
     -avd emulator
