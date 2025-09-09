@@ -15,6 +15,9 @@ publish {
 
 dependencies {
     api(libs.kakaoCompose)
+    api(libs.kakaoTest)
+    api(libs.kakaoUi)
+    api(libs.kakaoSemantics)
     api(libs.composeUiTest)
 
     implementation(projects.kaspresso)
