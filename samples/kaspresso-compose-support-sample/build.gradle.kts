@@ -1,11 +1,12 @@
 plugins {
     id("convention.android-app")
+    alias(libs.plugins.compose.compiler)
 }
 
 android {
     namespace = "com.kaspersky.kaspresso.composesupport.sample"
     defaultConfig {
-        minSdk = 21
+        minSdk = 24
 
         applicationId = "com.kaspersky.kaspresso.composesupport.sample"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -14,10 +15,6 @@ android {
 
     buildFeatures {
         compose = true
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
     }
 
     sourceSets {
