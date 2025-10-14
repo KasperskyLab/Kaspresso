@@ -7,9 +7,11 @@ include("publication")
 include("third-party-report")
 
 pluginManagement {
+    val kasperskyRepoUrl: String? by settings
     repositories {
         gradlePluginPortal()
         google()
+        kasperskyRepoUrl?.let { maven { setUrl(it) } }
     }
 }
 
