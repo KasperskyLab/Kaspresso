@@ -9,9 +9,9 @@ include("third-party-report")
 pluginManagement {
     val kasperskyRepoUrl: String? by settings
     repositories {
+        kasperskyRepoUrl?.let { maven { setUrl(it) } }
         gradlePluginPortal()
         google()
-        kasperskyRepoUrl?.let { maven { setUrl(it) } }
     }
 }
 
@@ -25,9 +25,9 @@ dependencyResolutionManagement {
 
     val kasperskyRepoUrl: String? by settings
     repositories {
+        kasperskyRepoUrl?.let { maven { setUrl(it) } }
         google()
         gradlePluginPortal()
         mavenCentral()
-        kasperskyRepoUrl?.let { maven { setUrl(it) } }
     }
 }

@@ -2,18 +2,21 @@ rootProject.name = "kaspresso-framework"
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
+
 pluginManagement {
     val kasperskyRepoUrl: String? by settings
     repositories {
+        kasperskyRepoUrl?.let { maven { setUrl(it) } }
         gradlePluginPortal()
         google()
-        kasperskyRepoUrl?.let { maven { setUrl(it) } }
     }
 }
 
 dependencyResolutionManagement {
+    val kasperskyRepoUrl: String? by settings
     @Suppress("UnstableApiUsage")
     repositories {
+        kasperskyRepoUrl?.let { maven { setUrl(it) } }
         mavenCentral()
         mavenLocal()
         google()
