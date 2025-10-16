@@ -13,11 +13,12 @@ class AllureVisualTestWatcher(
     private val params: VisualTestParams,
     private val logger: Logger,
     private val dirsProvider: AllureDirsProvider,
-    resourcesRootDirsProvider: ResourcesRootDirsProvider,
+    private val resourcesRootDirsProvider: ResourcesRootDirsProvider,
     private val files: Files,
 ) : VisualTestWatcher {
 
-    private val diffDir = dirsProvider.provideNew(resourcesRootDirsProvider.screenshotsDiffRootDir)
+    private val diffDir
+        get() = dirsProvider.provideNew(resourcesRootDirsProvider.screenshotsDiffRootDir)
     private val originalScreenshotsTargetDir: File
         get() {
             val rootDir = dirsProvider.provideNewOnSdCard(File("")).absolutePath
