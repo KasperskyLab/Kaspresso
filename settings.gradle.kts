@@ -6,9 +6,11 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 pluginManagement {
     val kasperskyRepoUrl: String? by settings
     val kasperskyMirrorRepoUrl: String? by settings
+    val kasperskyLibsRepoUrl: String? by settings
     repositories {
         kasperskyRepoUrl?.let { maven { setUrl(it) } }
         kasperskyMirrorRepoUrl?.let { maven { setUrl(it) } }
+        kasperskyLibsRepoUrl?.let { maven { setUrl(it) } }
         gradlePluginPortal()
         google()
     }
@@ -17,10 +19,12 @@ pluginManagement {
 dependencyResolutionManagement {
     val kasperskyRepoUrl: String? by settings
     val kasperskyMirrorRepoUrl: String? by settings
+    val kasperskyLibsRepoUrl: String? by settings
     @Suppress("UnstableApiUsage")
     repositories {
         kasperskyRepoUrl?.let { maven { setUrl(it) } }
         kasperskyMirrorRepoUrl?.let { maven { setUrl(it) } }
+        kasperskyLibsRepoUrl?.let { maven { setUrl(it) } }
         mavenCentral()
         mavenLocal()
         google()
