@@ -8,7 +8,6 @@ import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.screen.MainScreen
 import com.kaspersky.kaspresso.testcases.api.testcase.VisualTestCase
 import org.junit.Assume
-import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 
@@ -24,7 +23,7 @@ class VisualTestSample : VisualTestCase() {
     val activityRule = activityScenarioRule<MainActivity>()
 
     @Test
-    fun test() = runScreenshotTest{
+    fun test() = runScreenshotTest {
         Assume.assumeTrue(
             "Granting READ_MEDIA_IMAGES fails on the lower APIs",
             Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU
