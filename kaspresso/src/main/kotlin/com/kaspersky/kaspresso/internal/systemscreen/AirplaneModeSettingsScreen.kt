@@ -29,5 +29,4 @@ object AirplaneModeSettingsScreen : UiScreen<AirplaneModeSettingsScreen>() {
         pressBack()
         waitForWindowUpdate(context.packageName, TIMEOUT)
     }
-
 }
