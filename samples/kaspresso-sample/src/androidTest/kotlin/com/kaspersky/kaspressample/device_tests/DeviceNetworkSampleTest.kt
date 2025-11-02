@@ -69,6 +69,13 @@ class DeviceNetworkSampleTest : TestCase() {
                 device.network.toggleMobileData(true)
                 assertTrueSafely { isDataConnected() }
             }
+
+            step("Toggle Airplane mode") {
+                device.network.toggleAirplaneMode(true)
+                assertFalseSafely { isDataConnected() }
+                device.network.toggleAirplaneMode(false)
+                assertTrueSafely { isDataConnected() }
+            }
         }
     }
 
