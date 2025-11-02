@@ -55,6 +55,10 @@ class AllureResultsHack(
         if (visualTestParams.testType == VisualTestType.Record) {
             val rootDir = dirsProvider.provideNew(File("")).absolutePath
             val newScreenshotsDir = File(rootDir, File(visualTestParams.hostScreenshotsDir).name)
+
+            if (!newScreenshotsDir.exists()) {
+                return
+            }
             val targetScreenshotsDir = dirsProvider.provideNewOnSdCard(File(visualTestParams.hostScreenshotsDir))
             newScreenshotsDir.copyRecursively(targetScreenshotsDir)
         }
