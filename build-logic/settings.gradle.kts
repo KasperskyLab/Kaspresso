@@ -11,9 +11,18 @@ pluginManagement {
     val kasperskyMirrorRepoUrl: String? by settings
     val kasperskyLibsRepoUrl: String? by settings
     repositories {
-        kasperskyRepoUrl?.let { maven { setUrl(it) } }
-        kasperskyMirrorRepoUrl?.let { maven { setUrl(it) } }
-        kasperskyLibsRepoUrl?.let { maven { setUrl(it) } }
+        kasperskyRepoUrl?.let {
+            println("Got kasperskyRepoUrl: $it")
+            maven { setUrl(it) }
+        }
+        kasperskyMirrorRepoUrl?.let {
+            println("Got kasperskyMirrorRepoUrl: $it")
+            maven { setUrl(it) }
+        }
+        kasperskyLibsRepoUrl?.let {
+            println("Got kasperskyLibsRepoUrl: $it")
+            maven { setUrl(it) }
+        }
         gradlePluginPortal()
         google()
     }
