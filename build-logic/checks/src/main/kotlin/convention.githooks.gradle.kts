@@ -1,4 +1,4 @@
-//tasks.register<Exec>("installGitHooks") {
+// tasks.register<Exec>("installGitHooks") {
 //    description = "Install local git hooks"
 //    group = "Build Setup"
 //
@@ -7,7 +7,7 @@
 //
 //    val isCi = project.hasProperty("CI")
 //    onlyIf { !isCi }
-//}
+// }
 //
-//val initialTaskNames: List<String> = project.gradle.startParameter.taskNames
-//project.gradle.startParameter.setTaskNames(initialTaskNames + listOf("installGitHooks"))
+// val initialTaskNames: List<String> = project.gradle.startParameter.taskNames
+// project.gradle.startParameter.setTaskNames(initialTaskNames + listOf("installGitHooks"))
