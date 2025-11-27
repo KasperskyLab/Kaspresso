@@ -1,0 +1,98 @@
+import groovy.xml.MarkupBuilder
+
+def hlaLink = properties.get("pHlaLink") ?: ""
+def analysisDir = "${project.rootDir}/static-analysis"
+def reportsDir = "$analysisDir/reports"
+def htmlReportsDir = "$reportsDir/html/"
+
+task generateSdlArtifacts {
+    doLast {
+        println("Create SdlArtifactsGenerator for project '${project.name}' ")
+        new SdlArtifactsGenerator(file(analysisDir), hlaLink)
+                .addAnalyzer("detekt", libs.versions.detekt.get(), [file("config/detekt/config.yml")], getDetektReportFiles(file(htmlReportsDir)))
+                .generate()
+    }
+}
+
+static List<File> getDetektReportFiles(File baseDir) {
+    def result = []
+    baseDir.eachFileRecurse { file ->
+        if (file.name.startsWith("detekt_")) {
+            result.add(file)
+        }
+    }
+    return result
+}
+
+class SdlArtifactsGenerator {
+    private File sdlFile
+    private File directoryWhereToSave
+    private String hlaLink
+    private List<StaticAnalyzer> staticAnalyzers = new ArrayList<>()
+
+    SdlArtifactsGenerator(File directoryWhereToSave, String hlaLink) {
+        this.directoryWhereToSave = directoryWhereToSave
+        this.hlaLink = hlaLink
+        sdlFile = new File("$directoryWhereToSave/sdl.xml")
+    }
+
+    SdlArtifactsGenerator addAnalyzer(String type, String version, List<File> configs, List<File> reports) {
+        def analyzer = new StaticAnalyzer()
+        analyzer.type = type
+        analyzer.version = version
+        analyzer.configs = configs
+        analyzer.reports = reports
+        staticAnalyzers.add(analyzer)
+        return this
+    }
+
+    def generate() {
+        sdlFile.withWriter("utf-8") { writer ->
+            MarkupBuilder xmlMarkup = new MarkupBuilder(writer)
+            xmlMarkup.SDL() {
+                this.buildStaticAnalyzers(xmlMarkup)
+                this.buildDynamicAnalyzers(xmlMarkup)
+                this.buildCodeReview(xmlMarkup)
+                xmlMarkup.hla(link: hlaLink)
+            }
+        }
+    }
+
+    Closure<MarkupBuilder> buildStaticAnalyzers = { MarkupBuilder builder ->
+        builder.static_analysis {
+            staticAnalyzers.each { storedAnalyzer ->
+                builder.analyzer(name: storedAnalyzer.type, type: storedAnalyzer.type, version: storedAnalyzer.version) {
+                    storedAnalyzer.configs.each { analyzerConfig ->
+                        builder.config(name: analyzerConfig.name, link: getRelativePathToFile(directoryWhereToSave, analyzerConfig))
+                    }
+                    storedAnalyzer.reports.each { analyzerReport ->
+                        builder.log(name: analyzerReport.name, link: getRelativePathToFile(directoryWhereToSave, analyzerReport))
+                    }
+                }
+            }
+        }
+    }
+
+    Closure<MarkupBuilder> buildDynamicAnalyzers = { MarkupBuilder builder ->
+        builder.dynamic_analysis {
+            builder.analyzer(name: "not_applicable", type: "", version: "", description: "Неприменимо к Android приложениям")
+        }
+    }
+
+    Closure<MarkupBuilder> buildCodeReview = { MarkupBuilder builder ->
+        builder.code_reviews {
+            builder.code_review(type: "git", link: "https://hqrndtfs.avp.ru/tfs/DefaultCollection/KL-GitHub/_git/Kaspresso?path=%2F&version=GBmaster&_a=contents")
+        }
+    }
+
+    static private URI getRelativePathToFile(File root, File target) {
+        return root.absoluteFile.toURI().relativize(target.absoluteFile.toURI())
+    }
+
+    private static class StaticAnalyzer {
+        String version
+        String type
+        List<File> configs
+        List<File> reports
+    }
+}

@@ -9,6 +9,10 @@ plugins {
     alias(libs.plugins.compose.compiler) apply false
 }
 
+apply {
+    from("static-analysis/quality.gradle")
+}
+
 buildscript {
     dependencies {
         classpath(libs.kotlinPlugin)
@@ -35,6 +39,7 @@ val detektAll = tasks.register<Detekt>("detektAll") {
     exclude("**/build/**")
     reports {
         xml.required.set(false)
-        html.required.set(false)
+        html.required.set(true)
+        html.outputLocation.set(File("static-analysis/reports/html/checkstyle.html"))
     }
 }
