@@ -17,9 +17,7 @@ task generateSdlArtifacts {
 static List<File> getDetektReportFiles(File baseDir) {
     def result = []
     baseDir.eachFileRecurse { file ->
-        if (file.name.startsWith("detekt_")) {
-            result.add(file)
-        }
+        result.add(file)
     }
     return result
 }

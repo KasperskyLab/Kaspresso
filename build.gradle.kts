@@ -40,6 +40,6 @@ val detektAll = tasks.register<Detekt>("detektAll") {
     reports {
         xml.required.set(false)
         html.required.set(true)
-        html.outputLocation.set(File("static-analysis/reports/html/checkstyle.html"))
+        html.outputLocation.set(File("static-analysis/reports/html/detekt.html"))
     }
 }
