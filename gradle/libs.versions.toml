@@ -1,8 +1,8 @@
 [versions]
 kotlin = "2.0.0"
 detekt = "1.21.0"
-espresso = "3.6.1"
-kakao = "3.6.2"
+espresso = "3.7.0"
+kakao = "3.7.0"
 kakaoCompose = "1.0.0"
 kakaoExtClicks = "1.0.0"
 allure = "2.4.0"
@@ -12,7 +12,7 @@ activityCompose = "1.4.0"
 androidXTest = "1.6.1"
 testOrchestrator = "1.4.2"
 lifecycle = "2.6.2"
-thirdPartyReport = "0.19.1296"
+thirdPartyReport = "0.19.1450"
 agp = "7.2.2"
 org-jetbrains-kotlin-android = "1.9.0"
 core-ktx = "1.9.0"
@@ -24,7 +24,7 @@ material = "1.8.0"
 [libraries]
 # plugins
 kotlinPlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
-androidPlugin = "com.android.tools.build:gradle:8.4.2"
+androidPlugin = "com.android.tools.build:gradle:8.5.1"
 versionsPlugin = "com.github.ben-manes:gradle-versions-plugin:0.50.0"
 thirdPartyReportPlugin = { module = "com.kaspersky.gradle:third-party-report", version.ref = "thirdPartyReport" }
 airPlugin = { module = "com.kaspersky.gradle:air", version.ref = "thirdPartyReport" }
