@@ -1,5 +1,5 @@
 [versions]
-kotlin = "2.0.0"
+kotlin = "2.1.0"
 detekt = "1.21.0"
 espresso = "3.7.0"
 kakao = "3.7.0"
