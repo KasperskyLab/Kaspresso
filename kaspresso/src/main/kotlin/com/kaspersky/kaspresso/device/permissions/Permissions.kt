@@ -16,7 +16,7 @@ interface Permissions {
     /**
      * Passes the permission-requesting permissions dialog and denies permissions.
      */
-    fun denyViaDialog()
+    fun denyViaDialog(button: Button = Button.DENY)
 
     /**
      * Check the permission-requesting permissions dialog is visible.
@@ -34,6 +34,7 @@ interface Permissions {
         ALLOW_FOREGROUND,
         ALLOW_ALL,
         ALLOW_SELECTED,
-        DENY
+        DENY,
+        DENY_AND_DONT_ASK_AGAIN
     }
 }
