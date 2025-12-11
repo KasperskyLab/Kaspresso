@@ -17,7 +17,7 @@ class UiSimpleTest : TestCase() {
     val activityRule = activityScenarioRule<MainActivity>()
 
     @Test
-    fun uiSimpleTest() {
+    fun test() {
         before {
         }.after {
         }.run {
