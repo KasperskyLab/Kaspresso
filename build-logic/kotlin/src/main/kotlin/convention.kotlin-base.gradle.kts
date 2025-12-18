@@ -10,7 +10,6 @@ tasks.withType<KotlinCompile>().configureEach {
 //        TODO: fix all warnings before
 //        allWarningsAsErrors = true
 
-
         freeCompilerArgs = freeCompilerArgs +
                 "-opt-in=kotlin.RequiresOptIn" +
                 "-progressive"

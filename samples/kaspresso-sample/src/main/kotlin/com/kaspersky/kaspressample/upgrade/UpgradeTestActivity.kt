@@ -16,7 +16,7 @@ class UpgradeTestActivity : AppCompatActivity() {
     }
 
     private val appVersion: String
-        get() = packageManager.getPackageInfo(packageName, 0).versionName
+        get() = packageManager.getPackageInfo(packageName, 0).versionName ?: ""
 
     private lateinit var binding: ActivityUpgradeTestBinding
     private lateinit var prefs: SharedPreferences
