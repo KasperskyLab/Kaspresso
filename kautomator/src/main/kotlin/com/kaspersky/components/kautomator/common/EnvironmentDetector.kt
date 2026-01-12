@@ -12,7 +12,7 @@ private const val ANDROID_RUNTIME = "android"
 val environment: Environment by lazy {
     val runtimeProperty = System.getProperty(JAVA_RUNTIME_PROPERTY)
     when {
-        runtimeProperty?.toLowerCase(Locale.ROOT)?.contains(ANDROID_RUNTIME) == true -> Environment.AndroidRuntime
+        runtimeProperty?.lowercase(Locale.ROOT)?.contains(ANDROID_RUNTIME) == true -> Environment.AndroidRuntime
         hasClass(ROBOLECTRIC_TEST_RUNNER) -> Environment.Robolectric
         else -> throw RuntimeException(
             """
