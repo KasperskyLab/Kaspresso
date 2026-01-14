@@ -1,6 +1,7 @@
 package com.kaspersky.kaspresso.internal.systemscreen
 
 import com.kaspersky.components.kautomator.component.common.views.UiView
+import com.kaspersky.components.kautomator.component.switch.UiSwitch
 import com.kaspersky.components.kautomator.screen.UiScreen
 import java.util.regex.Pattern
 
@@ -10,5 +11,9 @@ object NotificationsFullScreen : UiScreen<NotificationsFullScreen>() {
 
     val mobileDataSwitch: UiView = UiView {
         withContentDescription(Pattern.compile(".*Mobile Phone.*"))
+    }
+
+    val bluetoothSwitch: UiSwitch = UiSwitch {
+        withContentDescription(Pattern.compile(".*Bluetooth.*"))
     }
 }
