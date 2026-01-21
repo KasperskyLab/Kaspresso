@@ -19,6 +19,15 @@ class AdbServerTest : TestCase() {
     @get:Rule
     val activityRule = activityScenarioRule<MainActivity>()
 
+    private fun isWindows(): Boolean {
+        try {
+            val res = adbServer.performCmd("cmd", arguments = listOf("/c", "ver"))
+            return res.contains("Windows")
+        } catch (_: Exception) {
+            return false
+        }
+    }
+
     @Test
     fun singleCommandTest() = run {
         val devices = adbServer.performAdb("devices")
@@ -41,6 +50,10 @@ class AdbServerTest : TestCase() {
     @SdkSuppress(minSdkVersion = 23)
     @Test
     fun commandWithAnotherCommandAsArgumentsTest() = run {
-        adbServer.performCmd("sh", arguments = listOf("-c", "adb shell dumpsys deviceidle | grep mForceIdle"))
+        if (isWindows()) {
+            adbServer.performCmd("cmd", arguments = listOf("/c", "adb shell dumpsys deviceidle | findstr mForceIdle"))
+        } else {
+            adbServer.performCmd("sh", arguments = listOf("-c", "adb shell dumpsys deviceidle | grep mForceIdle"))
+        }
     }
 }

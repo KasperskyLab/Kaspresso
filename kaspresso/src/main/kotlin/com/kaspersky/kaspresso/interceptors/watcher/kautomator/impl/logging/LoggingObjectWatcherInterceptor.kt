@@ -24,7 +24,7 @@ class LoggingObjectWatcherInterceptor(
         logger.i(
             "The object: ${interaction.description}. " +
                     "The operation: Check=${assertion.type}(description={${assertion.description}}. " +
-                    "Additional info: the object was found by selector=${interaction.selector.bySelector}"
+                    "Additional info: the object was found by selectors=${interaction.selector.selectors} and index=${interaction.selector.selectors}"
         )
     }
 
@@ -38,7 +38,7 @@ class LoggingObjectWatcherInterceptor(
         logger.i(
             "The object: ${interaction.description}. " +
                     "The operation: Action=${action.type}(description={${action.description}}. " +
-                    "Additional info: the object was found by selector=${interaction.selector.bySelector}"
+                    "Additional info: the object was found by selectors=${interaction.selector.selectors} and index=${interaction.selector.selectors}"
         )
     }
 }

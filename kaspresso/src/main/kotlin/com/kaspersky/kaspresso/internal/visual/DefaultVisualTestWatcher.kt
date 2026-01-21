@@ -14,10 +14,11 @@ internal class DefaultVisualTestWatcher(
     private val params: VisualTestParams,
     private val logger: Logger,
     private val dirsProvider: DirsProvider,
-    resourcesRootDirsProvider: ResourcesRootDirsProvider,
+    private val resourcesRootDirsProvider: ResourcesRootDirsProvider,
     private val files: Files,
 ) : VisualTestWatcher {
-    private val diffDir = dirsProvider.provideNew(resourcesRootDirsProvider.screenshotsDiffRootDir)
+    private val diffDir
+        get() = dirsProvider.provideNew(resourcesRootDirsProvider.screenshotsDiffRootDir)
     private val originalScreenshotsTargetDir: File
         get() {
             val rootDir = dirsProvider.provideNew(File("")).absolutePath

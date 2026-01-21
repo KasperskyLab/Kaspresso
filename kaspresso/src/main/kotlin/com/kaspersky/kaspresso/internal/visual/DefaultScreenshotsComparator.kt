@@ -1,5 +1,6 @@
 package com.kaspersky.kaspresso.internal.visual
 
+import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
@@ -77,10 +78,13 @@ open class DefaultScreenshotsComparator(
                 abs(b1 - b2) <= colorTolerance
     }
 
+    @SuppressLint("UseKtx")
     protected open fun processScreenshotDiff(original: Bitmap, diffPixels: IntArray, diffName: String): File {
         val width = original.width
         val height = original.height
-        val diffBitmap = Bitmap.createBitmap(width, height, original.config)
+        val config = requireNotNull(original.config) { "Error processing screenshot diff" }
+
+        val diffBitmap = Bitmap.createBitmap(width, height, config)
         diffBitmap.setPixels(diffPixels, 0, width, 0, 0, width, height)
         val scaledBitmap = Bitmap.createScaledBitmap(
             diffBitmap,
