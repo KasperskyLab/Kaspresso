@@ -9,7 +9,7 @@ task generateSdlArtifacts {
     doLast {
         println("Create SdlArtifactsGenerator for project '${project.name}' ")
         new SdlArtifactsGenerator(file(analysisDir), hlaLink)
-                .addAnalyzer("detekt", libs.versions.detekt.get(), [file("config/detekt/config.yml")], getDetektReportFiles(file(htmlReportsDir)))
+                .addAnalyzer("detekt", libs.versions.detekt.get(), [file("${analysisDir}/config/detekt/config.yml")], getDetektReportFiles(file(htmlReportsDir)))
                 .generate()
     }
 }
