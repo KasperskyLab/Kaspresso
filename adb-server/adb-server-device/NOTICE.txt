@@ -1,14 +1,8 @@
-﻿This file contains information about dependencies which are used in Kaspresso/Adbserver-device 1.6.0
-
-org.jetbrains.kotlin:kotlin-stdlib 1.8.22
-Copyright 2010-2023 JetBrains s.r.o. and Kotlin Programming Language contributors.
------------------------------------------------------------------------
-Distributed under the terms of the Apache License Version 2.0
------------------------------------------------------------------------
+﻿﻿This file contains information about dependencies which are used in the Kaspresso/Adbserver-device.
 
 
-org.jetbrains.kotlin:kotlin-stdlib-common 1.8.22
-Copyright 2010-2022 JetBrains s.r.o. and Kotlin Programming Language contributors.
+org.jetbrains.kotlin:kotlin-stdlib 2.1.0
+Copyright 2010-2024 JetBrains s.r.o. and Kotlin Programming Language contributors.
 -----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
 -----------------------------------------------------------------------

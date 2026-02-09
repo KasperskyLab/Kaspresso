@@ -1,42 +1,8 @@
-﻿This file contains information about dependencies which are used in Kaspresso/Adbserver-desktop 1.6.0
-
-org.jetbrains.kotlin:kotlin-stdlib 1.8.22
-Copyright 2010-2023 JetBrains s.r.o. and Kotlin Programming Language contributors.
------------------------------------------------------------------------
-Distributed under the terms of the Apache License Version 2.0
------------------------------------------------------------------------
+﻿This file contains information about dependencies which are used in the Kaspresso/Adbserver-desktop
 
 
-org.jetbrains.kotlin:kotlin-stdlib-common 1.8.22
-Copyright 2010-2022 JetBrains s.r.o. and Kotlin Programming Language contributors.
------------------------------------------------------------------------
-Distributed under the terms of the Apache License Version 2.0
------------------------------------------------------------------------
-
-
-org.jetbrains.kotlin:kotlin-stdlib-jdk7 1.8.22
-Copyright 2010-2020 JetBrains s.r.o. and Kotlin Programming Language contributors.
------------------------------------------------------------------------
-Distributed under the terms of the Apache License Version 2.0
------------------------------------------------------------------------
-
-
-org.jetbrains.kotlin:kotlin-stdlib-jdk8 1.8.22
-Copyright 2010-2021 JetBrains s.r.o. and Kotlin Programming Language contributors.
------------------------------------------------------------------------
-Distributed under the terms of the Apache License Version 2.0
------------------------------------------------------------------------
-
-
-org.jetbrains.kotlinx:kotlinx-cli 0.3.5
-Copyright 2010-2019 JetBrains s.r.o.
------------------------------------------------------------------------
-Distributed under the terms of the Apache License Version 2.0
------------------------------------------------------------------------
-
-
-org.jetbrains.kotlinx:kotlinx-cli-jvm 0.3.5
-Copyright 2010-2019 JetBrains s.r.o.
+org.jetbrains.kotlin:kotlin-stdlib 2.1.0
+Copyright 2010-2024 JetBrains s.r.o. and Kotlin Programming Language contributors.
 -----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
 -----------------------------------------------------------------------
@@ -56,6 +22,41 @@ Copyright 2000-2016 JetBrains s.r.o.
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
+-----------------------------------------------------------------------
+Distributed under the terms of the Apache License Version 2.0
+-----------------------------------------------------------------------
+
+
+org.jetbrains.kotlin:kotlin-stdlib-common 2.1.0
+Copyright 2010-2024 JetBrains s.r.o. and Kotlin Programming Language contributors.
+-----------------------------------------------------------------------
+Distributed under the terms of the Apache License Version 2.0
+-----------------------------------------------------------------------
+
+
+org.jetbrains.kotlin:kotlin-stdlib-jdk8 1.8.0
+Copyright 2010-2022 JetBrains s.r.o. and Kotlin Programming Language contributors.
+-----------------------------------------------------------------------
+Distributed under the terms of the Apache License Version 2.0
+-----------------------------------------------------------------------
+
+
+org.jetbrains.kotlin:kotlin-stdlib-jdk7 1.8.0
+Copyright 2010-2022 JetBrains s.r.o. and Kotlin Programming Language contributors.
+-----------------------------------------------------------------------
+Distributed under the terms of the Apache License Version 2.0
+-----------------------------------------------------------------------
+
+
+org.jetbrains.kotlinx:kotlinx-cli 0.3.5
+Copyright 2010-2019 JetBrains s.r.o.
+-----------------------------------------------------------------------
+Distributed under the terms of the Apache License Version 2.0
+-----------------------------------------------------------------------
+
+
+org.jetbrains.kotlinx:kotlinx-cli-jvm 0.3.5
+Copyright 2010-2019 JetBrains s.r.o.
 -----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
 -----------------------------------------------------------------------
