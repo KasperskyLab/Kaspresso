@@ -6,7 +6,7 @@ check_android_30_task:
   skip: "changesIncludeOnly('NOTICE.txt', 'LICENSE.txt', '**.{md,html}')"
 
   container:
-    image: ghcr.io/cirruslabs/android-sdk:34
+    image: ghcr.io/cirruslabs/android-sdk:36
     kvm: true
     cpu: 8
     memory: 24G
@@ -75,7 +75,7 @@ check_android_33_task:
   skip: "changesIncludeOnly('NOTICE.txt', 'LICENSE.txt', '**.{md,html}')"
 
   container:
-    image: ghcr.io/cirruslabs/android-sdk:34
+    image: ghcr.io/cirruslabs/android-sdk:36
     kvm: true
     cpu: 8
     memory: 24G
@@ -140,7 +140,7 @@ check_android_21_task:
   skip: "changesIncludeOnly('NOTICE.txt', 'LICENSE.txt', '**.{md,html}')"
 
   container:
-    image: ghcr.io/cirruslabs/android-sdk:34
+    image: ghcr.io/cirruslabs/android-sdk:36
     kvm: true
     cpu: 8
     memory: 24G
