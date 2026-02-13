@@ -1,0 +1,2388 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://kasperskylab.github.io/Kaspresso/en/Tutorial/UiAutomator/">
+      
+      
+        <link rel="prev" href="../Scenario/">
+      
+      
+        <link rel="next" href="../FlakySafely/">
+      
+      
+        
+          <link rel="alternate" href="/Kaspresso/en/" hreflang="en">
+        
+          <link rel="alternate" href="/Kaspresso/ru/" hreflang="ru">
+        
+      
+      
+      <link rel="icon" href="../../../kaspresso.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>8. Kautomator. Third Party Application Testing - Kaspresso</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="light-blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#kautomator-third-party-application-testing" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../" title="Kaspresso" class="md-header__button md-logo" aria-label="Kaspresso" data-md-component="logo">
+      
+  <img src="../../../kaspresso.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Kaspresso
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              8. Kautomator. Third Party Application Testing
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="light-blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="Select language">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="/Kaspresso/en/" hreflang="en" class="md-select__link">
+              English
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/Kaspresso/ru/" hreflang="ru" class="md-select__link">
+              Русский
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/KasperskyLab/Kaspresso" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Kaspresso
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+  Home
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  Tutorial
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Wiki/" class="md-tabs__link">
+          
+  
+  
+  Wiki
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Issues/" class="md-tabs__link">
+          
+  
+  
+  Issues
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../" title="Kaspresso" class="md-nav__button md-logo" aria-label="Kaspresso" data-md-component="logo">
+      
+  <img src="../../../kaspresso.png" alt="logo">
+
+    </a>
+    Kaspresso
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/KasperskyLab/Kaspresso" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Kaspresso
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Home
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About Kaspresso
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Home/Kaspresso-in-articles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kaspresso in articles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Home/Kaspresso-in-videos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kaspresso in videos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Home/Kaspresso%20users/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Our users
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Home/Breaking-changes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Breaking changes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Home/Contribution_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contribution guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tutorial
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Download_Kaspresso_project_and_Android_studio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Download Kaspresso project and Android studio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Writing_simple_test/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Writing your first Kaspresso test
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Working_with_adb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Working with adb
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Wifi_sample_test/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Testing the Internet connection and working with the Device class
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Steps_and_sections/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Steps and sections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Scenario/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. Reduce duplicate steps the Scenario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. Kautomator. Third Party Application Testing
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. Kautomator. Third Party Application Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#autotest-for-google-play-functionality" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Autotest for Google Play functionality
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tools-for-working-with-other-applications" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tools for working with other applications
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tools for working with other applications">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#uiautomator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        UIAutomator
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#developer-assistant" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Developer Assistant
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dump" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dump
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#writing-a-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Writing a test
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing-the-system-ui" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testing the system UI
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../FlakySafely/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9. flakySafely
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Android_permissions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10. Working with Android permissions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Recyclerview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11. RecyclerView. Testing list of elements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Logger_and_screenshot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12. Logger and screenshots
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Screenshot_tests_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    13. Screenshot-tests. Part 1. Simple screenshot-test
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Screenshot_tests_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    14. Screenshot-tests. Part 2. Working with ViewModel and setting states
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Wiki
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Wiki
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Page_object_in_Kaspresso/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PageObject in Kaspresso
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Espresso_as_the_basis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Espresso as the basis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Supported_Android_UI_elements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Supported Android UI-elements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Matchers_actions_assertions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    View matchers, actions and assertions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Kautomator-wrapper_over_UI_Automator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kautomator. Wrapper over UI Automator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Working_with_Android_OS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Working with Android OS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Executing_adb_commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Executing adb commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Screenshot_tests/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Screenshot tests
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Kaspresso_configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kaspresso configuration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Kaspresso_Robolectric/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kaspresso with Robolectric
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Kaspresso_Allure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kaspresso with Allure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Jetpack_Compose/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compose support in Kaspresso
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Issues
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Issues
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Found an issue?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Issues/Storage_issue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Storage issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#autotest-for-google-play-functionality" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Autotest for Google Play functionality
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tools-for-working-with-other-applications" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tools for working with other applications
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tools for working with other applications">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#uiautomator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        UIAutomator
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#developer-assistant" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Developer Assistant
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dump" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dump
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#writing-a-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Writing a test
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing-the-system-ui" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testing the system UI
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="kautomator-third-party-application-testing">Kautomator. Third Party Application Testing</h1>
+<p>In previous lessons, we learned how to write tests for user interface elements that are located in our application. But there are often cases when this is not enough for full-fledged testing, and in addition to our application, we need to perform some actions outside of it.</p>
+<p>As an example, let's check the start screen of the Google Play app in an unauthorized state.</p>
+<ol>
+    <li>Open Google Play</li>
+    <li>Check that there is a `Sign In` button on the screen</li>
+</ol>
+
+<p><img src="../images/uiautomator/google_play_unauth.png" alt="Google play unauthorized" width="300"/></p>
+<p>Do not forget to log out before starting the test.</p>
+<h2 id="autotest-for-google-play-functionality">Autotest for Google Play functionality</h2>
+<p>Let's start writing a test - create a class <code>GooglePlayTest</code> and inherit it from <code>TestCase</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.testcases.api.testcase.TestCase</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nc">GooglePlayTest</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">TestCase</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="p">}</span>
+</code></pre></div>
+<p>Add a test method:</p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.testcases.api.testcase.TestCase</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Test</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nc">GooglePlayTest</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">TestCase</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">testNotSignIn</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">run</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>The first step we need to take is to launch the Google Play application, for this we need the name of its package. Google Play's package name is <code>com.android.vending</code>, later we will show where you can find this information.</p>
+<p>We will use this package name in the test several times, therefore, in order not to duplicate the code, we will create a constant where we will put this name:</p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.testcases.api.testcase.TestCase</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Test</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nc">GooglePlayTest</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">TestCase</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">testNotSignIn</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">run</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">companion</span><span class="w"> </span><span class="kd">object</span><span class="w"> </span><span class="err">{</span>
+
+<span class="w">        </span><span class="kd">private</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">GOOGLE_PLAY_PACKAGE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;com.android.vending&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>To launch any screen in Android, we need an <code>Intent</code> object. To get the required Intent we will use the following code:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">val</span><span class="w"> </span><span class="nv">intent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">device</span><span class="p">.</span><span class="na">targetContext</span><span class="p">.</span><span class="na">packageManager</span><span class="p">.</span><span class="na">getLaunchIntentForPackage</span><span class="p">(</span><span class="n">GOOGLE_PLAY_PACKAGE</span><span class="p">)</span>
+</code></pre></div>
+<p>Here several objects that may be unfamiliar to you are used at once: <a href="https://developer.android.com/reference/android/content/Context">Context</a>, <a href="https://developer.android.com/reference/android/content/pm/PackageManager">PackageManager</a> and <a href="https://developer.android.com/reference/android/content/Intent">Intent</a>. You can read more about them in the documentation.</p>
+<p>In short, Context provides access to various application resources and allows you to perform many actions, including opening screens using Intents. The Intent contains information about the screen we want to open, and the PackageManager in this case allows you to get an Intent to open the start screen of a particular application by its package name.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>To get the <code>Context</code>, you can use the <code>targetContext</code> and <code>context</code> methods of the <code>device</code> object. They have one significant difference.
+When we want to check the operation of some application and run an autotest, in fact, two applications are installed on the device: the one that we are testing (in this case, the tutorial) and the second, which runs all the test scripts.
+When we call the <code>targetContext</code> method, we refer to the application under test (tutorial), and if we call the <code>context</code> method, then the call will be to the second application that runs the tests.</p>
+</div>
+<div class="highlight"><pre><span></span><code><span class="kd">val</span><span class="w"> </span><span class="nv">intent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">device</span><span class="p">.</span><span class="na">targetContext</span><span class="p">.</span><span class="na">packageManager</span><span class="p">.</span><span class="na">getLaunchIntentForPackage</span><span class="p">(</span><span class="n">GOOGLE_PLAY_PACKAGE</span><span class="p">)</span>
+</code></pre></div>
+<p>In the above code we first get the <code>targetContext</code> from the <code>device</code> object, like we already did in one of the previous lessons. Then, from <code>targetContext</code> we get <code>packageManager</code>, from which we can get the <code>Intent</code> to launch the Google Play screen using the <code>getLaunchIntentForPackage</code> method.</p>
+<p>This method returns an <code>Intent</code> to launch the start screen of the application whose package was passed as a parameter. To do this, we pass the package name of the application we want to run, in this case, Google Play.</p>
+<p>We got <code>Intent</code>, now we use it to launch the screen. To do this, call the <code>startActivity</code> method on the <code>targetContext</code> object and pass intent as a parameter:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">val</span><span class="w"> </span><span class="nv">intent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">device</span><span class="p">.</span><span class="na">targetContext</span><span class="p">.</span><span class="na">packageManager</span><span class="p">.</span><span class="na">getLaunchIntentForPackage</span><span class="p">(</span><span class="n">GOOGLE_PLAY_PACKAGE</span><span class="p">)</span>
+<span class="n">device</span><span class="p">.</span><span class="na">targetContext</span><span class="p">.</span><span class="na">startActivity</span><span class="p">(</span><span class="n">intent</span><span class="p">)</span>
+</code></pre></div>
+<p>In this code, we get the <code>targetContext</code> twice from the <code>device</code> object. In order not to duplicate code, you can shorten this entry by using the <code>with</code> function</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>You can read more about <code>with</code> and other scope functions in <a href="https://kotlinlang.ru/docs/scope-functions.html">documentation</a>.</p>
+</div>
+<p>Then the test code will look like this:</p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.testcases.api.testcase.TestCase</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Test</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nc">GooglePlayTest</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">TestCase</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">testNotSignIn</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">run</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Open Google Play&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">with</span><span class="p">(</span><span class="n">device</span><span class="p">.</span><span class="na">targetContext</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="kd">val</span><span class="w"> </span><span class="nv">intent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">packageManager</span><span class="p">.</span><span class="na">getLaunchIntentForPackage</span><span class="p">(</span><span class="n">GOOGLE_PLAY_PACKAGE</span><span class="p">)</span>
+<span class="w">                </span><span class="n">startActivity</span><span class="p">(</span><span class="n">intent</span><span class="p">)</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">companion</span><span class="w"> </span><span class="kd">object</span><span class="w"> </span><span class="err">{</span>
+
+<span class="w">        </span><span class="kd">private</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">GOOGLE_PLAY_PACKAGE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;com.android.vending&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>If you are not familiar with the <code>with</code>, <code>apply</code>, and other scope functions, you can rewrite code without them, in which case the test code will look like this:</p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.testcases.api.testcase.TestCase</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Test</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nc">GooglePlayTest</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">TestCase</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">testNotSignIn</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">run</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Open Google Play&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kd">val</span><span class="w"> </span><span class="nv">intent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">device</span><span class="p">.</span><span class="na">targetContext</span><span class="p">.</span><span class="na">packageManager</span><span class="p">.</span><span class="na">getLaunchIntentForPackage</span><span class="p">(</span><span class="n">GOOGLE_PLAY_PACKAGE</span><span class="p">)</span>
+<span class="w">            </span><span class="n">device</span><span class="p">.</span><span class="na">targetContext</span><span class="p">.</span><span class="na">startActivity</span><span class="p">(</span><span class="n">intent</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">companion</span><span class="w"> </span><span class="kd">object</span><span class="w"> </span><span class="err">{</span>
+
+<span class="w">        </span><span class="kd">private</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">GOOGLE_PLAY_PACKAGE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;com.android.vending&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Let's launch the test. Test passed successfully, the Google Play app opens on the device.</p>
+<p>Now we need to check that there is a button with the text <code>Sign in</code> on the opened screen. This is not our application, we do not have access to the source code, so getting the button id through the Layout Inspector will not work. You need to use other tools.</p>
+<h2 id="tools-for-working-with-other-applications">Tools for working with other applications</h2>
+<h3 id="uiautomator">UIAutomator</h3>
+<p>UI Automator is a library for finding components on the screen and emulating user actions (clicks, swipes, text input, etc.). It allows you to manage the application the way the user would do it, i.e. to interact with any of its elements.</p>
+<p>Thanks to this library, we can test any applications and perform various actions in them, despite the fact that we do not have access to their source code.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>You can read more about UiAutomator and its capabilities in <a href="https://developer.android.com/training/testing/other-components/ui-automator">documentation</a>.</p>
+</div>
+<p>The Android SDK also includes the Ui Automator Viewer. It allows us to find the IDs of the elements we want to interact with, their position and other useful attributes.</p>
+<p>In order to launch Ui Automator Viewer, you need to open a command line in the <code>../Android/sdk/tools/bin</code> folder and execute the command <code>uiautomatorviewer</code>.</p>
+<p>You should have a window like this:</p>
+<p><img src="../images/uiautomator/uiautomatorviewer_1.png" alt="UiAutomatorViewer first launch"/></p>
+<p>If this did not happen and some error was displayed in the console, then you should google the error text.</p>
+<p>The most common problem is that the Java version is not compatible with uiautomatorviewer. In this case, you should install Java 8 (use only released by Oracle) and set the path to it in environment variables. How to do this, we discussed in the lesson <a href="https://kasperskylab.github.io/Kaspresso/Tutorial/%D0%92%D1%8B%D0%BF%D0%BE%D0%BB%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5%20adb-%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4/#java-adb">Executing adb commands</a>.</p>
+<p>Let's get back to writing the test. We will check the Google Play application, and in order to interact with it from the Ui Automator Viewer, you need to run it on the emulator and click on the <code>Device Screenshot</code> button:</p>
+<p><img src="../images/uiautomator/uiautomatorviewer_2.png" alt="UiAutomatorViewer create screenshot"/></p>
+<p>On some OS versions, these icons are initially hidden, so if you don't see them, just stretch the program window.</p>
+<p>On the right side, you can see all the information about the user interface elements. Now we are interested in the <code>Sign in</code> button. We click on this element and look at the information about the button:</p>
+<p><img src="../images/uiautomator/uiautomator_button.png" alt="UiAutomatorViewer button info"/></p>
+<p>Here you can see some useful information:</p>
+<ol>
+    <li>Package is the name of the application package that we specified in the test. One way to find it out is through this program</li>
+    <li>Resource-id is the element id you can use to search for the button and interact with it from the test. In our case, it is not possible, because the id value indicates that the resource name has been obfuscated, that is, encrypted. Therefore, it is not possible to search for an element by id for this screen</li>
+    <li>Text - one way to find an element on the screen is by the text that is displayed on it. It turns out that we can find the button on this screen by the text attribute</li>
+</ol>
+
+<h3 id="developer-assistant">Developer Assistant</h3>
+<p>If for some reason you are not comfortable using the Ui Automator Viewer, or you are unable to launch it, then you can use the Developer Assistant application. It can be <a href="https://play.google.com/store/apps/details?id=com.appsisle.developerassistant">downloaded</a> on Google Play.</p>
+<p>After installing and launching Developer Assistant, you need to select it in the settings as the default assistant application. To do this, click on the <code>Choose</code> button and follow the instructions:</p>
+<p><img src="../images/uiautomator/da_1_settings.png" alt="Developer Assistant Settings" width="300"/></p>
+<p><img src="../images/uiautomator/da_2_settings.png" alt="Developer Assistant Settings" width="300"/></p>
+<p><img src="../images/uiautomator/da_3_settings.png" alt="Developer Assistant Settings" width="300"/></p>
+<p><img src="../images/uiautomator/da_4_settings.png" alt="Developer Assistant Settings" width="300"/></p>
+<p><img src="../images/uiautomator/da_5_settings.png" alt="Developer Assistant Settings" width="300"/></p>
+<p><img src="../images/uiautomator/da_6_settings.png" alt="Developer Assistant Settings" width="300"/></p>
+<p>Once configured, you can run application analysis. Open the Google Play app and long press the <code>Home</code> button:</p>
+<p><img src="../images/uiautomator/da_gplay_1.png" alt="Developer Assistant Google play" width="300"/></p>
+<p>You will see a window with information about the application, which you can move or expand if necessary. The <code>App</code> tab contains information about the application: package name, currently running Activity, etc.</p>
+<p><img src="../images/uiautomator/da_gplay_2.png" alt="Developer Assistant Google play" width="300"></p>
+<p>The <code>Element</code> tab allows you to explore the user interface elements.</p>
+<p><img src="../images/uiautomator/da_gplay_3.png" alt="Developer Assistant Google play" width="300"/></p>
+<p>The <code>Sign in</code> button has all the same attributes that we saw in <code>Ui Automator Viewer</code>.</p>
+<h3 id="dump">Dump</h3>
+<p>In some cases, which we'll talk about later in this tutorial, you won't be able to use the Developer Assistant because it can't display information about the system UI (notifications, dialogs, etc.). If you find yourself in such a situation that the Developer Assistant capabilities are not enough, and the Ui Automator Viewer failed to start, then there is a third option: run the adb shell command <code>uiautomator dump</code>.</p>
+<p>To do this, on the emulator, open the screen that you need to get information about (in this case, Google Play). Open the console and run the command:</p>
+<div class="highlight"><pre><span></span><code>adb shell uiautomator dump
+</code></pre></div>
+<p><img src="../images/uiautomator/dump_1.png" alt="Uiautomator Dump"/></p>
+<p>A <code>window_dump.xml</code> file should have appeared on your emulator, which can be found through the <code>Device Explorer</code>. If it is not displayed for you, then select the <code>sdcard</code> folder and click <code>Synchronize</code>:</p>
+<p><img src="../images/uiautomator/dump_2.png" alt="Uiautomator Dump"/></p>
+<p>If after these steps the file still does not appear, then run one more command in the console:</p>
+<div class="highlight"><pre><span></span><code>adb pull /sdcard/window_dump.xml
+</code></pre></div>
+<p>After that find the file on your computer via <code>Device File Explorer</code> and open it in Android Studio:</p>
+<p><img src="../images/uiautomator/dump_3.png" alt="Uiautomator Dump"/></p>
+<p>This file is a description of the screen in xml format. Here you can also find all the necessary objects, their properties and IDs. If you have it displayed in one line, then you should auto-format the file to make it easier to read the code. To do this, press the key combination <code>ctrl + alt + L</code> on Windows or <code>cmd + option + L</code> on Mac.</p>
+<p><img src="../images/uiautomator/dump_4.png" alt="Uiautomator Dump"/></p>
+<p>You can find the login button and see all its attributes. To do this, press the key combination <code>ctrl + F</code> (or <code>cmd + F</code> on Mac) and enter the text that is set on the "Sign in" button.</p>
+<p><img src="../images/uiautomator/dump_5.png" alt="Uiautomator Dump"/></p>
+<h2 id="writing-a-test">Writing a test</h2>
+<p>We have found the interface elements we need, and now we can start testing. As usual, we'll start by creating a Page Object for the Google Play screen.</p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screen</span>
+
+<span class="kd">object</span><span class="w"> </span><span class="nc">GooglePlayScreen</span><span class="w"> </span><span class="p">{</span>
+
+<span class="p">}</span>
+</code></pre></div>
+<p>Previously, we inherited all Page Objects from the <code>KScreen</code> class. In this case, we needed to override two properties: <code>layoutId</code> and <code>viewClass</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">override</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">layoutId</span><span class="p">:</span><span class="w"> </span><span class="kt">Int?</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span>
+<span class="kd">override</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">viewClass</span><span class="p">:</span><span class="w"> </span><span class="n">Class</span><span class="o">&lt;*&gt;?</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span>
+</code></pre></div>
+<p>We did this because we were testing the screen that is inside our application, we had access to the source code, the layout and the Activity we are working with. But now we want to test the screen from a third-party application, so it is impossible to search for some elements in it, click on buttons and perform any other actions with it the way that we did in previous lessons.</p>
+<p>For these purposes, Kaspresso has the Kautomator component - a wrapper over the well-known UiAutomator tool. Kautomator makes writing tests much easier, and also adds a number of advantages compared to UiAutomator, which you can read about in detail in the <a href="https://kasperskylab.github.io/Kaspresso/Wiki/Kautomator-wrapper_over_UI_Automator/">Wiki</a>.</p>
+<p>Page objects for screens of third-party applications should not inherit from <code>KScreen</code>, but from <code>UiScreen</code>. Additionally, you need to override the <code>packageName</code> property so that it returns the package name of the application under test:</p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screen</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.components.kautomator.screen.UiScreen</span>
+
+<span class="kd">object</span><span class="w"> </span><span class="nc">GooglePlayScreen</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">UiScreen</span><span class="o">&lt;</span><span class="n">GooglePlayScreen</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">packageName</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;com.android.vending&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Further, all user interface elements will be instances of classes with the prefix <code>Ui</code> (<code>UiButton</code>, <code>UiTextView</code>, <code>UiEditText</code>...), and not <code>K</code> (<code>KButton</code>, <code>KTextView</code>, <code>KEditText</code>. ..) as it was before. The point is that we are currently testing another application and we need the functionality available in the Kautomator components.</p>
+<p>On this screen, we are interested in the <code>signIn</code> button, add it:</p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screen</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.components.kautomator.component.text.UiButton</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.components.kautomator.screen.UiScreen</span>
+
+<span class="kd">object</span><span class="w"> </span><span class="nc">GooglePlayScreen</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">UiScreen</span><span class="o">&lt;</span><span class="n">GooglePlayScreen</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">packageName</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;com.android.vending&quot;</span>
+
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">signInButton</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UiButton</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>In curly brackets <code>UiButton {...}</code> we need to use some kind of matcher, thanks to which we will find the element on the screen. Previously, we used only <code>withId</code>, but now the id of the button is not available and we will have to use some other option.</p>
+<p>To see all available matchers, you can go to the <code>UiButton</code> definition (hold <code>ctrl</code> and left-click on the class name). Inside it you will see the class <code>UiViewBuilder</code>.</p>
+<p><img src="../images/uiautomator/ui_button.png" alt="UI Button"/></p>
+<p>The <code>UiViewBuilder</code> class contains many matchers that you can use. By going to its definition (holding <code>ctrl</code>, left-clicking on the class name), you can see the full up-to-date list:</p>
+<p><img src="../images/uiautomator/matchers.png" alt="Matchers"/></p>
+<p>For example, you can use <code>withText</code> to find the element containing specific text, or use <code>withClassName</code> to find an instance of some class.</p>
+<p>Let's find the button by the text that is displayed on it.</p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screen</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.components.kautomator.component.text.UiButton</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.components.kautomator.screen.UiScreen</span>
+
+<span class="kd">object</span><span class="w"> </span><span class="nc">GooglePlayScreen</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">UiScreen</span><span class="o">&lt;</span><span class="n">GooglePlayScreen</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">packageName</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;com.android.vending&quot;</span>
+
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">signInButton</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UiButton</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">withText</span><span class="p">(</span><span class="s">&quot;Sign in&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>We can add a test. Let's check that the login button is displayed on the Google Play screen:</p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.testcases.api.testcase.TestCase</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screen.GooglePlayScreen</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Test</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nc">GooglePlayTest</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">TestCase</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">testNotSignIn</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">run</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Open Google Play&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">with</span><span class="p">(</span><span class="n">device</span><span class="p">.</span><span class="na">targetContext</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="kd">val</span><span class="w"> </span><span class="nv">intent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">packageManager</span><span class="p">.</span><span class="na">getLaunchIntentForPackage</span><span class="p">(</span><span class="n">GOOGLE_PLAY_PACKAGE</span><span class="p">)</span>
+<span class="w">                </span><span class="n">startActivity</span><span class="p">(</span><span class="n">intent</span><span class="p">)</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Check sign in button visibility&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">GooglePlayScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">signInButton</span><span class="p">.</span><span class="na">isDisplayed</span><span class="p">()</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">companion</span><span class="w"> </span><span class="kd">object</span><span class="w"> </span><span class="err">{</span>
+
+<span class="w">        </span><span class="kd">private</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">GOOGLE_PLAY_PACKAGE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;com.android.vending&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Let's launch the test. It passed successfully.</p>
+<h2 id="testing-the-system-ui">Testing the system UI</h2>
+<p>We have considered one option when we need to use the UI automator for testing: if we are interacting with a third-party application. But this is not the only case when it should be used.</p>
+<p>Let's open our <code>tutorial</code> application and go to the <code>Notification Activity</code> screen:</p>
+<p><img src="../images/uiautomator/notification_activity_btn.png" alt="Notification Activity Button" width="300"/></p>
+<p>Click on the “Show notification” button - a notification is displayed on top.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>You can read more about notifications in Android <a href="https://developer.android.com/develop/ui/views/notifications">here</a>.</p>
+</div>
+<p><img src="../images/uiautomator/notification.png" alt="Notification Shown" width="300"/></p>
+<p>Let's try to test this screen.</p>
+<p>First, let's create a Page Object for the screen with the "Show Notification" button. This screen is in our application, so we can inherit from <code>KScreen</code>. Button id can be found through the Layout Inspector:</p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screen</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.screens.KScreen</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.R</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">io.github.kakaocup.kakao.text.KButton</span>
+
+<span class="kd">object</span><span class="w"> </span><span class="nc">NotificationActivityScreen</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">KScreen</span><span class="o">&lt;</span><span class="n">NotificationActivityScreen</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">layoutId</span><span class="p">:</span><span class="w"> </span><span class="kt">Int?</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span>
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">viewClass</span><span class="p">:</span><span class="w"> </span><span class="n">Class</span><span class="o">&lt;*&gt;?</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span>
+
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">showNotificationButton</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">KButton</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">withId</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">show_notification_button</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>In the Page Object of the main screen, add a button to open <code>NotificationActivity</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screen</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.screens.KScreen</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.R</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">io.github.kakaocup.kakao.text.KButton</span>
+
+<span class="kd">object</span><span class="w"> </span><span class="nc">MainScreen</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">KScreen</span><span class="o">&lt;</span><span class="n">MainScreen</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">layoutId</span><span class="p">:</span><span class="w"> </span><span class="kt">Int?</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span>
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">viewClass</span><span class="p">:</span><span class="w"> </span><span class="n">Class</span><span class="o">&lt;*&gt;?</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span>
+
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">simpleActivityButton</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">KButton</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">withId</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">simple_activity_btn</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">wifiActivityButton</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">KButton</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">withId</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">wifi_activity_btn</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">loginActivityButton</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">KButton</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">withId</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">login_activity_btn</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">notificationActivityButton</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">KButton</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">withId</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">notification_activity_btn</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>You can create a test, first just show a notification by clicking on the button on the main screen:</p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">androidx.test.ext.junit.rules.activityScenarioRule</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.testcases.api.testcase.TestCase</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screen.MainScreen</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screen.NotificationActivityScreen</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Rule</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Test</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nc">NotificationActivityTest</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">TestCase</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@get</span><span class="p">:</span><span class="n">Rule</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">activityRule</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">activityScenarioRule</span><span class="o">&lt;</span><span class="n">MainActivity</span><span class="o">&gt;</span><span class="p">()</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">checkNotification</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">run</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Open notification activity&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">MainScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">notificationActivityButton</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">isVisible</span><span class="p">()</span>
+<span class="w">                    </span><span class="n">isClickable</span><span class="p">()</span>
+<span class="w">                    </span><span class="n">click</span><span class="p">()</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Show notification&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">NotificationActivityScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">showNotificationButton</span><span class="p">.</span><span class="na">isVisible</span><span class="p">()</span>
+<span class="w">                </span><span class="n">showNotificationButton</span><span class="p">.</span><span class="na">isClickable</span><span class="p">()</span>
+<span class="w">                </span><span class="n">showNotificationButton</span><span class="p">.</span><span class="na">click</span><span class="p">()</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Let's launch the test. It passed successfully, notification is displayed.</p>
+<p>Now let's check that the title and content of the notification contain the required text.</p>
+<p>Finding the id of the elements using the <code>Layout Inspector</code> or <code>Developer Assistant</code> will not work, because display of notifications belongs to the system UI. In this case, we will have to use one of two options: launch the Ui Automator Viewer and look through it, or run the <code>adb shell uiautomator dump</code> command.</p>
+<p>Next, we will show the solution through the <code>Ui Automator Viewer</code>, and also attach a screenshot of where to find the View elements in the <code>window_dump.xml</code> file</p>
+<p>Open the list of notifications and take a screenshot:</p>
+<p><img src="../images/uiautomator/uiautomator_notification.png" alt="Ui automator notification"/></p>
+<p>Using the <code>dump</code> command, the necessary elements can be found as follows</p>
+<p><img src="../images/uiautomator/dump_6.png" alt="Dump "/></p>
+<p><img src="../images/uiautomator/dump_7.png" alt="Dump"/></p>
+<p>Here, by the package name, you can see that the notification drawer does not belong to our application, so for testing it is necessary to inherit from the UiScreen class and use Kautomator.</p>
+<p>Create a Page Object of the notification screen:</p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screen</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.components.kautomator.screen.UiScreen</span>
+
+<span class="kd">object</span><span class="w"> </span><span class="nc">NotificationScreen</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">UiScreen</span><span class="o">&lt;</span><span class="n">NotificationScreen</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">packageName</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;com.android.systemui&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><code>packageName</code> was set to the value obtained by <code>dump</code> or <code>Ui Automator Viewer</code>.</p>
+<p>We declare the elements with which we will interact.</p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screen</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.components.kautomator.component.text.UiTextView</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.components.kautomator.screen.UiScreen</span>
+
+<span class="kd">object</span><span class="w"> </span><span class="nc">NotificationScreen</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">UiScreen</span><span class="o">&lt;</span><span class="n">NotificationScreen</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">packageName</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;com.android.systemui&quot;</span>
+
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UiTextView</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">content</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UiTextView</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>You can find elements by different criteria, for example, by text or by id. Let's find an element by its id. Call matcher <code>withId</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screen</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.components.kautomator.component.text.UiTextView</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.components.kautomator.screen.UiScreen</span>
+
+<span class="kd">object</span><span class="w"> </span><span class="nc">NotificationScreen</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">UiScreen</span><span class="o">&lt;</span><span class="n">NotificationScreen</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">packageName</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;com.android.systemui&quot;</span>
+
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UiTextView</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">withId</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">content</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UiTextView</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">withId</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>The first parameter to pass is the package name of the application in whose resources the element will be searched. We could pass the previously obtained <code>packageName</code> and <code>resource_id</code> values:</p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screen</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.components.kautomator.component.text.UiTextView</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.components.kautomator.screen.UiScreen</span>
+
+<span class="kd">object</span><span class="w"> </span><span class="nc">NotificationScreen</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">UiScreen</span><span class="o">&lt;</span><span class="n">NotificationScreen</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">packageName</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;com.android.systemui&quot;</span>
+
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UiTextView</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">withId</span><span class="p">(</span><span class="k">this</span><span class="nd">@NotificationScreen.packageName</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;android:id/title&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">content</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UiTextView</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">withId</span><span class="p">(</span><span class="k">this</span><span class="nd">@NotificationScreen.packageName</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;android:id/text&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>But in this case, the elements will not be found. The <code>id</code> scheme of the element we are looking for on the screen of another application looks like this: <code>package_name:id/resource_id</code>. This string will be formed from the two parameters that we passed to the <code>withId</code> method. Instead of <code>package_name</code> the package name <code>com.android.systemui</code> will be substituted, instead of <code>resource_id</code> the identifier <code>android:id/title</code> will be substituted. The resulting resource_id will look like this: <code>com.android.systemui:id/android:id/title</code>. It turns out that the characters <code>:id/</code> will be added for us, and we only need to pass what is to the right of the slash, which will be the correct identifier:</p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screen</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.components.kautomator.component.text.UiTextView</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.components.kautomator.screen.UiScreen</span>
+
+<span class="kd">object</span><span class="w"> </span><span class="nc">NotificationScreen</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">UiScreen</span><span class="o">&lt;</span><span class="n">NotificationScreen</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">packageName</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;com.android.systemui&quot;</span>
+
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UiTextView</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">withId</span><span class="p">(</span><span class="k">this</span><span class="nd">@NotificationScreen.packageName</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;title&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">content</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UiTextView</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">withId</span><span class="p">(</span><span class="k">this</span><span class="nd">@NotificationScreen.packageName</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;text&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Now the full <code>resource_id</code> looks like this: <code>com.android.systemui:id/title</code> and <code>com.android.systemui:id/text</code>.</p>
+<p>Please note that the first part (<code>package_name</code>) is different from what is specified in the <code>Ui Automator Viewer</code>, we specified the package name <code>com.android.systemui</code>, and the program says <code>android</code>.</p>
+<p><img src="../images/uiautomator/uiautomator_package.png" alt="Ui automator package" /></p>
+<p>The reason is that each application can have its own resources, in which case the first part of the resource identifier will contain the package name of the application where the resource was created, and the application can also use the resources of the Android system. They are shared between different applications and contain the package name <code>android</code>.</p>
+<p>This is exactly the case, so we specify <code>android</code> as the first parameter.</p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screen</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.components.kautomator.component.text.UiTextView</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.components.kautomator.screen.UiScreen</span>
+
+<span class="kd">object</span><span class="w"> </span><span class="nc">NotificationScreen</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">UiScreen</span><span class="o">&lt;</span><span class="n">NotificationScreen</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">packageName</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;com.android.systemui&quot;</span>
+
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UiTextView</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">withId</span><span class="p">(</span><span class="s">&quot;android&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;title&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">content</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UiTextView</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">withId</span><span class="p">(</span><span class="s">&quot;android&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;text&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Now we can add checks to this screen. Let's make sure that the correct texts are set in the title and in the body of the notification:</p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">androidx.test.ext.junit.rules.activityScenarioRule</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.testcases.api.testcase.TestCase</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screen.MainScreen</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screen.NotificationActivityScreen</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screen.NotificationScreen</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Rule</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Test</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nc">NotificationActivityTest</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">TestCase</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@get</span><span class="p">:</span><span class="n">Rule</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">activityRule</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">activityScenarioRule</span><span class="o">&lt;</span><span class="n">MainActivity</span><span class="o">&gt;</span><span class="p">()</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">checkNotification</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">run</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Open notification activity&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">MainScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">notificationActivityButton</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">isVisible</span><span class="p">()</span>
+<span class="w">                    </span><span class="n">isClickable</span><span class="p">()</span>
+<span class="w">                    </span><span class="n">click</span><span class="p">()</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Show notification&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">NotificationActivityScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">showNotificationButton</span><span class="p">.</span><span class="na">isVisible</span><span class="p">()</span>
+<span class="w">                </span><span class="n">showNotificationButton</span><span class="p">.</span><span class="na">isClickable</span><span class="p">()</span>
+<span class="w">                </span><span class="n">showNotificationButton</span><span class="p">.</span><span class="na">click</span><span class="p">()</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Check notification texts&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">NotificationScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">title</span><span class="p">.</span><span class="na">isDisplayed</span><span class="p">()</span>
+<span class="w">                </span><span class="n">title</span><span class="p">.</span><span class="na">hasText</span><span class="p">(</span><span class="s">&quot;Notification Title&quot;</span><span class="p">)</span>
+<span class="w">                </span><span class="n">content</span><span class="p">.</span><span class="na">isDisplayed</span><span class="p">()</span>
+<span class="w">                </span><span class="n">content</span><span class="p">.</span><span class="na">hasText</span><span class="p">(</span><span class="s">&quot;Notification Content&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Let's launch the test. It passed successfully.</p>
+<h2 id="summary">Summary</h2>
+<p>In this lesson, we learned how to run tests for third-party applications, and also learned how you can test the system UI using <code>UiAutomator</code>, or rather its wrapper <code>Kautomator</code>. In addition, we got to know the programs that allow us to analyze the UI of applications, even if we do not have access to their source code: these are <code>Ui Automator Viewer</code>, <code>Developer Assistant</code> and <code>UiAutomator Dump</code>.</p>
+<p><br></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["tabs", "navigation.tabs", "content.code.annotate", "navigation.tabs.sticky", "navigation.instant", "navigation.tracking", "navigation.top", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

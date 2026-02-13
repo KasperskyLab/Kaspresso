@@ -1,0 +1,2497 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://kasperskylab.github.io/Kaspresso/Tutorial/Recyclerview/">
+      
+      
+        <link rel="prev" href="../Android_permissions/">
+      
+      
+        <link rel="next" href="../Logger_and_screenshot/">
+      
+      
+        
+          <link rel="alternate" href="/Kaspresso/en/" hreflang="en">
+        
+          <link rel="alternate" href="/Kaspresso/ru/" hreflang="ru">
+        
+      
+      
+      <link rel="icon" href="../../kaspresso.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>11. RecyclerView. Testing list of elements - Kaspresso</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="light-blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#recyclerview-testing-list-of-elements" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Kaspresso" class="md-header__button md-logo" aria-label="Kaspresso" data-md-component="logo">
+      
+  <img src="../../kaspresso.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Kaspresso
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              11. RecyclerView. Testing list of elements
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="light-blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="Select language">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="/Kaspresso/en/" hreflang="en" class="md-select__link">
+              English
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/Kaspresso/ru/" hreflang="ru" class="md-select__link">
+              Русский
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/KasperskyLab/Kaspresso" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Kaspresso
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../.." class="md-tabs__link">
+          
+  
+  
+  Home
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  Tutorial
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Wiki/" class="md-tabs__link">
+          
+  
+  
+  Wiki
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Issues/" class="md-tabs__link">
+          
+  
+  
+  Issues
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Kaspresso" class="md-nav__button md-logo" aria-label="Kaspresso" data-md-component="logo">
+      
+  <img src="../../kaspresso.png" alt="logo">
+
+    </a>
+    Kaspresso
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/KasperskyLab/Kaspresso" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Kaspresso
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Home
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About Kaspresso
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Home/Kaspresso-in-articles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kaspresso in articles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Home/Kaspresso-in-videos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kaspresso in videos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Home/Kaspresso%20users/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Our users
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Home/Breaking-changes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Breaking changes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Home/Contribution_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contribution guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tutorial
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Download_Kaspresso_project_and_Android_studio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Download Kaspresso project and Android studio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Writing_simple_test/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Writing your first Kaspresso test
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Working_with_adb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Working with adb
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Wifi_sample_test/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Testing the Internet connection and working with the Device class
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Steps_and_sections/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Steps and sections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Scenario/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. Reduce duplicate steps the Scenario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UiAutomator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. Kautomator. Third Party Application Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../FlakySafely/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9. flakySafely
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Android_permissions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10. Working with Android permissions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11. RecyclerView. Testing list of elements
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11. RecyclerView. Testing list of elements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#testing-notelistscreen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testing NoteListScreen
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swipe-check" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Swipe check
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wait-for-idle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Wait for idle
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#extract-methods-to-page-object" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Extract methods to Page Object
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Logger_and_screenshot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12. Logger and screenshots
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Screenshot_tests_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    13. Screenshot-tests. Part 1. Simple screenshot-test
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Screenshot_tests_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    14. Screenshot-tests. Part 2. Working with ViewModel and setting states
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Wiki
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Wiki
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Page_object_in_Kaspresso/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PageObject in Kaspresso
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Espresso_as_the_basis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Espresso as the basis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Supported_Android_UI_elements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Supported Android UI-elements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Matchers_actions_assertions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    View matchers, actions and assertions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Kautomator-wrapper_over_UI_Automator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kautomator. Wrapper over UI Automator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Working_with_Android_OS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Working with Android OS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Executing_adb_commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Executing adb commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Screenshot_tests/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Screenshot tests
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Kaspresso_configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kaspresso configuration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Kaspresso_Robolectric/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kaspresso with Robolectric
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Kaspresso_Allure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kaspresso with Allure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Jetpack_Compose/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compose support in Kaspresso
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Issues
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Issues
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Found an issue?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Issues/Storage_issue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Storage issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#testing-notelistscreen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testing NoteListScreen
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swipe-check" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Swipe check
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wait-for-idle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Wait for idle
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#extract-methods-to-page-object" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Extract methods to Page Object
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="recyclerview-testing-list-of-elements">RecyclerView. Testing list of elements</h1>
+<p>In practice, we often have to work with screens that contain lists of elements, and these lists are dynamic, and their size and content can change. When testing such screens, there are some peculiarities. We will talk about them in this lesson.</p>
+<p>Open the <code>tutorial</code> application and click on the <code>List Activity</code> button.</p>
+<p><img src="../images/recycler_view/main_screen.png" alt="Main Screen" width="300"/></p>
+<p>You will see the following screen:</p>
+<p><img src="../images/recycler_view/todo_list.png" alt="Todo List " width="300"/></p>
+<p>It displays the user's to-do list. Each element of the list has a serial number, text and color, which is set depending on the priority. If the priority is low, then the background color is green, if medium, then orange, if high, then red.</p>
+<p>It is also possible to delete list items with a swipe action.</p>
+<p><img src="../images/recycler_view/swiped.png" alt="Swipe element" width="300"/></p>
+<p><img src="../images/recycler_view/removed.png" alt="Remove element" width="300"/></p>
+<p>Let's write tests for this screen. We need the IDs of the list elements, we will use the LayoutInspector to find them.</p>
+<p><img src="../images/recycler_view/layout_inspector.png" alt="Layout Inspector"/></p>
+<p>Note that all list items are inside RecyclerView with id rv_notes. The recycler has three objects that have the same IDs: <code>note_container</code>, <code>tv_note_id</code> and <code>tv_note_text</code>.</p>
+<p>It turns out that we will not be able to test the screen in the usual way, since all elements have the same ID, instead we use a different approach. The PageObject of the screen with the list of notes will contain only one element - <code>RecyclerView</code>, and the elements of the list will be separate PageObjects, whose content we will check.</p>
+<p>Let's start writing a test. First of all let's add PageObject <code>NoteListScreen</code>.</p>
+<p><div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screen</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.screens.KScreen</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.R</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">io.github.kakaocup.kakao.recycler.KRecyclerView</span>
+
+<span class="kd">object</span><span class="w"> </span><span class="nc">NoteListScreen</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">KScreen</span><span class="o">&lt;</span><span class="n">NoteListScreen</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">layoutId</span><span class="p">:</span><span class="w"> </span><span class="kt">Int?</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span>
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">viewClass</span><span class="p">:</span><span class="w"> </span><span class="n">Class</span><span class="o">&lt;*&gt;?</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span>
+
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">rvNotes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">KRecyclerView</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">withId</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">rv_notes</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+If we write such code, then we will have some errors. The fact is that if you are testing a <code>RecyclerView</code>, then it is assumed that you will be checking the elements of the list, and not the container with these elements. Therefore, when creating an instance of <code>KRecyclerView</code>, it is not enough to pass only the matcher by which the object will be found, you must pass the second parameter, which is called <code>itemTypeBuilder</code>.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>If you want to know what parameters to pass to a particular method or constructor, you can press the key combination <code>ctrl + P</code> (<code>cmd + P</code> on Mac OS), and you will see a tooltip that will indicate the necessary arguments.</p>
+</div>
+<p>We have already said earlier that we will need a Page Object for each list item, so we need to create an appropriate class, we will pass an instance of this class to <code>itemTypeBuilder</code>.</p>
+<p>In the same file, add the <code>NoteItemScreen</code> class, this time we inherit not from <code>KScreen</code>, but from <code>KRecyclerViewItem</code>, since now it is not a regular Page Object, but a list item <code>RecyclerView</code></p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screen</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.screens.KScreen</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.R</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">io.github.kakaocup.kakao.recycler.KRecyclerItem</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">io.github.kakaocup.kakao.recycler.KRecyclerView</span>
+
+<span class="kd">object</span><span class="w"> </span><span class="nc">NoteListScreen</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">KScreen</span><span class="o">&lt;</span><span class="n">NoteListScreen</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">layoutId</span><span class="p">:</span><span class="w"> </span><span class="kt">Int?</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span>
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">viewClass</span><span class="p">:</span><span class="w"> </span><span class="n">Class</span><span class="o">&lt;*&gt;?</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span>
+
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">rvNotes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">KRecyclerView</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">withId</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">rv_notes</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">class</span><span class="w"> </span><span class="nc">NoteItemScreen</span><span class="p">:</span><span class="w"> </span><span class="n">KRecyclerItem</span><span class="o">&lt;</span><span class="n">NoteItemScreen</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Please note that earlier when creating the Page Object we wrote the <code>object</code> keyword, but here we need to write <code>class</code>. The reason is that all the tested screens so far have been in a single instance, and here we will have several list elements, each of which will be a Page Object, so we create a class, and for each element we will receive an instance of this class.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>You can read more about <a href="https://kotlinlang.org/docs/classes.html">classes</a> and <a href="https://kotlinlang.org/docs/object-declarations.html">objects</a> in the official Kotlin documentation.</p>
+</div>
+<p>In the notes, we will need the root <code>note_container</code> and two <code>TextView</code>. If we try to find them on the screen by id, then an error will occur, since there are several such elements on the screen and it is not clear which one we need. </p>
+<p>This problem is solved as follows - each note is a separate View instance and we will search for elements not on the entire screen, but only inside these same View (notes). To implement such logic, the <code>matcher</code> object must be passed as a parameter to the <code>KRecyclerViewItem</code> constructor. During testing, a <code>matcher</code> will be passed for each object, in which we will find the necessary View elements.</p>
+<p>Therefore, we pass <code>matcher</code> as a parameter:</p>
+<p><div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screen</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">android.view.View</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.screens.KScreen</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.R</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">io.github.kakaocup.kakao.recycler.KRecyclerItem</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">io.github.kakaocup.kakao.recycler.KRecyclerView</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.hamcrest.Matcher</span>
+
+<span class="kd">object</span><span class="w"> </span><span class="nc">NoteListScreen</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">KScreen</span><span class="o">&lt;</span><span class="n">NoteListScreen</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">layoutId</span><span class="p">:</span><span class="w"> </span><span class="kt">Int?</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span>
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">viewClass</span><span class="p">:</span><span class="w"> </span><span class="n">Class</span><span class="o">&lt;*&gt;?</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span>
+
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">rvNotes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">KRecyclerView</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">withId</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">rv_notes</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">class</span><span class="w"> </span><span class="nc">NoteItemScreen</span><span class="p">(</span><span class="n">matcher</span><span class="p">:</span><span class="w"> </span><span class="n">Matcher</span><span class="o">&lt;</span><span class="n">View</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">KRecyclerItem</span><span class="o">&lt;</span><span class="n">NoteItemScreen</span><span class="o">&gt;</span><span class="p">(</span><span class="n">matcher</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+We can add interface elements to NoteItemScreen that we will test.</p>
+<p><div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screen</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">android.view.View</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.screens.KScreen</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.R</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">io.github.kakaocup.kakao.common.views.KView</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">io.github.kakaocup.kakao.recycler.KRecyclerItem</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">io.github.kakaocup.kakao.recycler.KRecyclerView</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">io.github.kakaocup.kakao.text.KTextView</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.hamcrest.Matcher</span>
+
+<span class="kd">object</span><span class="w"> </span><span class="nc">NoteListScreen</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">KScreen</span><span class="o">&lt;</span><span class="n">NoteListScreen</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">layoutId</span><span class="p">:</span><span class="w"> </span><span class="kt">Int?</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span>
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">viewClass</span><span class="p">:</span><span class="w"> </span><span class="n">Class</span><span class="o">&lt;*&gt;?</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span>
+
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">rvNotes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">KRecyclerView</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">withId</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">rv_notes</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">class</span><span class="w"> </span><span class="nc">NoteItemScreen</span><span class="p">(</span><span class="n">matcher</span><span class="p">:</span><span class="w"> </span><span class="n">Matcher</span><span class="o">&lt;</span><span class="n">View</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">KRecyclerItem</span><span class="o">&lt;</span><span class="n">NoteItemScreen</span><span class="o">&gt;</span><span class="p">(</span><span class="n">matcher</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">noteContainer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">KView</span><span class="p">(</span><span class="n">matcher</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">withId</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">note_container</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">tvNoteId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">KTextView</span><span class="p">(</span><span class="n">matcher</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">withId</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">tv_note_id</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">tvNoteText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">KTextView</span><span class="p">(</span><span class="n">matcher</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">withId</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">tv_note_text</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+Pay attention to two important points:</p>
+<p>First, it is now necessary to pass a matcher to the View-element constructor, in which we will search for the required object. If this is not done, the test will fail.</p>
+<p>Secondly, if we check some specific behavior of the UI element, then we specify a specific inheritor of <code>KView</code> (<code>KTextView</code>, <code>KEditText</code>, <code>KButton</code>...). For example, if we want to check for text, we create a <code>KTextView</code> that has the ability to get the text. </p>
+<p>And if we are checking some common things that are available in all interface elements (background color, size, visibility, etc.), then we can use the parent <code>KView</code>. In this case, we will check the texts of <code>tvNoteId</code> and <code>tvNoteText</code>, so we specified the type <code>KTextView</code>. And the container in which these <code>TextView</code> are located is an instance of <code>CardView</code>, we will only check the background color for it, it does not need to check any specific things, so we specified the parent type as <code>KView</code></p>
+<p>When the PageObject of the list item is ready, you can create an instance of <code>KRecyclerView</code>, for this we pass two parameters: </p>
+<p>The first is <code>builder</code>, in which we will find <code>RecyclerView</code> by its id:</p>
+<p><div class="highlight"><pre><span></span><code><span class="kd">val</span><span class="w"> </span><span class="nv">rvNotes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">KRecyclerView</span><span class="p">(</span>
+<span class="w">    </span><span class="n">builder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">withId</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">rv_notes</span><span class="p">)</span><span class="w"> </span><span class="p">},</span>
+<span class="p">)</span>
+</code></pre></div>
+The second is <code>itemTypeBuilder</code>, here you need to call the <code>itemType</code> function and to create an instance of <code>NoteItemScreen</code> here:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">val</span><span class="w"> </span><span class="nv">rvNotes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">KRecyclerView</span><span class="p">(</span>
+<span class="w">    </span><span class="n">builder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">withId</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">rv_notes</span><span class="p">)</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="n">itemTypeBuilder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">itemType</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">NoteItemScreen</span><span class="p">(</span><span class="nb">it</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">)</span>
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>You can read more about lambda expressions <a href="https://kotlinlang.org/docs/lambdas.html">here</a>.</p>
+</div>
+<p>This entry can be shortened using <a href="https://docs.oracle.com/javase/tutorial/java/javaOO/methodreferences.html">Method Reference</a>, then the final version of the class will look like this:</p>
+<p><div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screen</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">android.view.View</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.screens.KScreen</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.R</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">io.github.kakaocup.kakao.common.views.KView</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">io.github.kakaocup.kakao.recycler.KRecyclerItem</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">io.github.kakaocup.kakao.recycler.KRecyclerView</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">io.github.kakaocup.kakao.text.KTextView</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.hamcrest.Matcher</span>
+
+<span class="kd">object</span><span class="w"> </span><span class="nc">NoteListScreen</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">KScreen</span><span class="o">&lt;</span><span class="n">NoteListScreen</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">layoutId</span><span class="p">:</span><span class="w"> </span><span class="kt">Int?</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span>
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">viewClass</span><span class="p">:</span><span class="w"> </span><span class="n">Class</span><span class="o">&lt;*&gt;?</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span>
+
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">rvNotes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">KRecyclerView</span><span class="p">(</span>
+<span class="w">        </span><span class="n">builder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">withId</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">rv_notes</span><span class="p">)</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="n">itemTypeBuilder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">itemType</span><span class="p">(</span><span class="o">::</span><span class="n">NoteItemScreen</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="p">)</span>
+
+<span class="w">    </span><span class="kd">class</span><span class="w"> </span><span class="nc">NoteItemScreen</span><span class="p">(</span><span class="n">matcher</span><span class="p">:</span><span class="w"> </span><span class="n">Matcher</span><span class="o">&lt;</span><span class="n">View</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">KRecyclerItem</span><span class="o">&lt;</span><span class="n">NoteItemScreen</span><span class="o">&gt;</span><span class="p">(</span><span class="n">matcher</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">noteContainer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">KView</span><span class="p">(</span><span class="n">matcher</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">withId</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">note_container</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">tvNoteId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">KTextView</span><span class="p">(</span><span class="n">matcher</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">withId</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">tv_note_id</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">tvNoteText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">KTextView</span><span class="p">(</span><span class="n">matcher</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">withId</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">tv_note_text</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+Now let's add a button to go to this screen in Page Object <code>Main Screen</code></p>
+<p><div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screen</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.screens.KScreen</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.R</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">io.github.kakaocup.kakao.text.KButton</span>
+
+<span class="kd">object</span><span class="w"> </span><span class="nc">MainScreen</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">KScreen</span><span class="o">&lt;</span><span class="n">MainScreen</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">layoutId</span><span class="p">:</span><span class="w"> </span><span class="kt">Int?</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span>
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">viewClass</span><span class="p">:</span><span class="w"> </span><span class="n">Class</span><span class="o">&lt;*&gt;?</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span>
+
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">simpleActivityButton</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">KButton</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">withId</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">simple_activity_btn</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">wifiActivityButton</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">KButton</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">withId</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">wifi_activity_btn</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">loginActivityButton</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">KButton</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">withId</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">login_activity_btn</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">notificationActivityButton</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">KButton</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">withId</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">notification_activity_btn</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">makeCallActivityButton</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">KButton</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">withId</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">make_call_activity_btn</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">flakyActivityButton</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">KButton</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">withId</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">flaky_activity_btn</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">listActivityButton</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">KButton</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">withId</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">list_activity_btn</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+Now you can start checking the screen with a list of notes</p>
+<h2 id="testing-notelistscreen">Testing NoteListScreen</h2>
+<p>We create a class for testing, and, as usual, add a transition to this screen:</p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">androidx.test.ext.junit.rules.activityScenarioRule</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.testcases.api.testcase.TestCase</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screen.MainScreen</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Rule</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Test</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nc">NoteListTest</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">TestCase</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@get</span><span class="p">:</span><span class="n">Rule</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">activityRule</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">activityScenarioRule</span><span class="o">&lt;</span><span class="n">MainActivity</span><span class="o">&gt;</span><span class="p">()</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">checkNotesScreen</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">run</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Open note list screen&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">MainScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">listActivityButton</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">isVisible</span><span class="p">()</span>
+<span class="w">                    </span><span class="n">isClickable</span><span class="p">()</span>
+<span class="w">                    </span><span class="n">click</span><span class="p">()</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Now let's check that three items are displayed on the screen with the list of notes, for this we can call the <code>getSize</code> method on <code>KRecyclerView</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">androidx.test.ext.junit.rules.activityScenarioRule</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.testcases.api.testcase.TestCase</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screen.MainScreen</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screen.NoteListScreen</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Assert</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Rule</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Test</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nc">NoteListTest</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">TestCase</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@get</span><span class="p">:</span><span class="n">Rule</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">activityRule</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">activityScenarioRule</span><span class="o">&lt;</span><span class="n">MainActivity</span><span class="o">&gt;</span><span class="p">()</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">checkNotesScreen</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">run</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Open note list screen&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">MainScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">listActivityButton</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">isVisible</span><span class="p">()</span>
+<span class="w">                    </span><span class="n">isClickable</span><span class="p">()</span>
+<span class="w">                    </span><span class="n">click</span><span class="p">()</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Check notes count&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">NoteListScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">Assert</span><span class="p">.</span><span class="na">assertEquals</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">rvNotes</span><span class="p">.</span><span class="na">getSize</span><span class="p">())</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><code>KRecyclerView</code> has many useful methods, you can put a dot after the object name and see all the possibilities. For example, using <code>firstChild</code> or <code>lastChild</code> you can get the first or last element of <code>NoteItemScreen</code> respectively. You can also find an element by its position, or perform checks on absolutely all notes using the <code>children</code> method. To use them in angle brackets, you need to specify the type <code>KRecyclerViewItem</code>, in our case it is <code>NoteItemScreen</code>.</p>
+<p>Let's check the visibility of all elements and that they all contain some text:</p>
+<p><div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">androidx.test.ext.junit.rules.activityScenarioRule</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.testcases.api.testcase.TestCase</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screen.MainScreen</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screen.NoteListScreen</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Assert</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Rule</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Test</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nc">NoteListTest</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">TestCase</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@get</span><span class="p">:</span><span class="n">Rule</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">activityRule</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">activityScenarioRule</span><span class="o">&lt;</span><span class="n">MainActivity</span><span class="o">&gt;</span><span class="p">()</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">checkNotesScreen</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">run</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Open note list screen&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">MainScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">listActivityButton</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">isVisible</span><span class="p">()</span>
+<span class="w">                    </span><span class="n">isClickable</span><span class="p">()</span>
+<span class="w">                    </span><span class="n">click</span><span class="p">()</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Check notes count&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">NoteListScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">Assert</span><span class="p">.</span><span class="na">assertEquals</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">rvNotes</span><span class="p">.</span><span class="na">getSize</span><span class="p">())</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Check elements visibility&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">NoteListScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">rvNotes</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">children</span><span class="o">&lt;</span><span class="n">NoteListScreen</span><span class="p">.</span><span class="na">NoteItemScreen</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="n">tvNoteId</span><span class="p">.</span><span class="na">isVisible</span><span class="p">()</span>
+<span class="w">                        </span><span class="n">tvNoteText</span><span class="p">.</span><span class="na">isVisible</span><span class="p">()</span>
+<span class="w">                        </span><span class="n">noteContainer</span><span class="p">.</span><span class="na">isVisible</span><span class="p">()</span>
+
+<span class="w">                        </span><span class="n">tvNoteId</span><span class="p">.</span><span class="na">hasAnyText</span><span class="p">()</span>
+<span class="w">                        </span><span class="n">tvNoteText</span><span class="p">.</span><span class="na">hasAnyText</span><span class="p">()</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+We can also test each element separately. Let's check that each note contains the correct texts and background colors:</p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">androidx.test.ext.junit.rules.activityScenarioRule</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.testcases.api.testcase.TestCase</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screen.MainScreen</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screen.NoteListScreen</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Assert</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Rule</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Test</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nc">NoteListTest</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">TestCase</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@get</span><span class="p">:</span><span class="n">Rule</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">activityRule</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">activityScenarioRule</span><span class="o">&lt;</span><span class="n">MainActivity</span><span class="o">&gt;</span><span class="p">()</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">checkNotesScreen</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">run</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Open note list screen&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">MainScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">listActivityButton</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">isVisible</span><span class="p">()</span>
+<span class="w">                    </span><span class="n">isClickable</span><span class="p">()</span>
+<span class="w">                    </span><span class="n">click</span><span class="p">()</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Check notes count&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">NoteListScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">Assert</span><span class="p">.</span><span class="na">assertEquals</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">rvNotes</span><span class="p">.</span><span class="na">getSize</span><span class="p">())</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Check elements visibility&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">NoteListScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">rvNotes</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">children</span><span class="o">&lt;</span><span class="n">NoteListScreen</span><span class="p">.</span><span class="na">NoteItemScreen</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="n">tvNoteId</span><span class="p">.</span><span class="na">isVisible</span><span class="p">()</span>
+<span class="w">                        </span><span class="n">tvNoteText</span><span class="p">.</span><span class="na">isVisible</span><span class="p">()</span>
+<span class="w">                        </span><span class="n">noteContainer</span><span class="p">.</span><span class="na">isVisible</span><span class="p">()</span>
+
+<span class="w">                        </span><span class="n">tvNoteId</span><span class="p">.</span><span class="na">hasAnyText</span><span class="p">()</span>
+<span class="w">                        </span><span class="n">tvNoteText</span><span class="p">.</span><span class="na">hasAnyText</span><span class="p">()</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Check elements content&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">NoteListScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">rvNotes</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">childAt</span><span class="o">&lt;</span><span class="n">NoteListScreen</span><span class="p">.</span><span class="na">NoteItemScreen</span><span class="o">&gt;</span><span class="p">(</span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="n">noteContainer</span><span class="p">.</span><span class="na">hasBackgroundColor</span><span class="p">(</span><span class="n">android</span><span class="p">.</span><span class="na">R</span><span class="p">.</span><span class="na">color</span><span class="p">.</span><span class="na">holo_green_light</span><span class="p">)</span>
+<span class="w">                        </span><span class="n">tvNoteId</span><span class="p">.</span><span class="na">hasText</span><span class="p">(</span><span class="s">&quot;0&quot;</span><span class="p">)</span>
+<span class="w">                        </span><span class="n">tvNoteText</span><span class="p">.</span><span class="na">hasText</span><span class="p">(</span><span class="s">&quot;Note number 0&quot;</span><span class="p">)</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                    </span><span class="n">childAt</span><span class="o">&lt;</span><span class="n">NoteListScreen</span><span class="p">.</span><span class="na">NoteItemScreen</span><span class="o">&gt;</span><span class="p">(</span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="n">noteContainer</span><span class="p">.</span><span class="na">hasBackgroundColor</span><span class="p">(</span><span class="n">android</span><span class="p">.</span><span class="na">R</span><span class="p">.</span><span class="na">color</span><span class="p">.</span><span class="na">holo_orange_light</span><span class="p">)</span>
+<span class="w">                        </span><span class="n">tvNoteId</span><span class="p">.</span><span class="na">hasText</span><span class="p">(</span><span class="s">&quot;1&quot;</span><span class="p">)</span>
+<span class="w">                        </span><span class="n">tvNoteText</span><span class="p">.</span><span class="na">hasText</span><span class="p">(</span><span class="s">&quot;Note number 1&quot;</span><span class="p">)</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                    </span><span class="n">childAt</span><span class="o">&lt;</span><span class="n">NoteListScreen</span><span class="p">.</span><span class="na">NoteItemScreen</span><span class="o">&gt;</span><span class="p">(</span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="n">noteContainer</span><span class="p">.</span><span class="na">hasBackgroundColor</span><span class="p">(</span><span class="n">android</span><span class="p">.</span><span class="na">R</span><span class="p">.</span><span class="na">color</span><span class="p">.</span><span class="na">holo_red_light</span><span class="p">)</span>
+<span class="w">                        </span><span class="n">tvNoteId</span><span class="p">.</span><span class="na">hasText</span><span class="p">(</span><span class="s">&quot;2&quot;</span><span class="p">)</span>
+<span class="w">                        </span><span class="n">tvNoteText</span><span class="p">.</span><span class="na">hasText</span><span class="p">(</span><span class="s">&quot;Note number 2&quot;</span><span class="p">)</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="swipe-check">Swipe check</h2>
+<p>The application has the ability to delete notes with a swipe action. Let's check this point - remove the first note and make sure that two elements with the corresponding content remain on the screen.</p>
+<p>To perform some actions with View elements, we can get the <code>view</code> object and call its <code>perform</code> method as a parameter, passing the desired action. In this case, we swipe to the left, then the code will look like this:</p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">androidx.test.espresso.action.ViewActions</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">androidx.test.ext.junit.rules.activityScenarioRule</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.testcases.api.testcase.TestCase</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screen.MainScreen</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screen.NoteListScreen</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Assert</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Rule</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Test</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nc">NoteListTest</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">TestCase</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@get</span><span class="p">:</span><span class="n">Rule</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">activityRule</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">activityScenarioRule</span><span class="o">&lt;</span><span class="n">MainActivity</span><span class="o">&gt;</span><span class="p">()</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">checkNotesScreen</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">run</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Open note list screen&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">MainScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">listActivityButton</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">isVisible</span><span class="p">()</span>
+<span class="w">                    </span><span class="n">isClickable</span><span class="p">()</span>
+<span class="w">                    </span><span class="n">click</span><span class="p">()</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Check notes count&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">NoteListScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">Assert</span><span class="p">.</span><span class="na">assertEquals</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">rvNotes</span><span class="p">.</span><span class="na">getSize</span><span class="p">())</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Check elements visibility&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">NoteListScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">rvNotes</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">children</span><span class="o">&lt;</span><span class="n">NoteListScreen</span><span class="p">.</span><span class="na">NoteItemScreen</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="n">tvNoteId</span><span class="p">.</span><span class="na">isVisible</span><span class="p">()</span>
+<span class="w">                        </span><span class="n">tvNoteText</span><span class="p">.</span><span class="na">isVisible</span><span class="p">()</span>
+<span class="w">                        </span><span class="n">noteContainer</span><span class="p">.</span><span class="na">isVisible</span><span class="p">()</span>
+
+<span class="w">                        </span><span class="n">tvNoteId</span><span class="p">.</span><span class="na">hasAnyText</span><span class="p">()</span>
+<span class="w">                        </span><span class="n">tvNoteText</span><span class="p">.</span><span class="na">hasAnyText</span><span class="p">()</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Check elements content&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">NoteListScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">rvNotes</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">childAt</span><span class="o">&lt;</span><span class="n">NoteListScreen</span><span class="p">.</span><span class="na">NoteItemScreen</span><span class="o">&gt;</span><span class="p">(</span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="n">noteContainer</span><span class="p">.</span><span class="na">hasBackgroundColor</span><span class="p">(</span><span class="n">android</span><span class="p">.</span><span class="na">R</span><span class="p">.</span><span class="na">color</span><span class="p">.</span><span class="na">holo_green_light</span><span class="p">)</span>
+<span class="w">                        </span><span class="n">tvNoteId</span><span class="p">.</span><span class="na">hasText</span><span class="p">(</span><span class="s">&quot;0&quot;</span><span class="p">)</span>
+<span class="w">                        </span><span class="n">tvNoteText</span><span class="p">.</span><span class="na">hasText</span><span class="p">(</span><span class="s">&quot;Note number 0&quot;</span><span class="p">)</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                    </span><span class="n">childAt</span><span class="o">&lt;</span><span class="n">NoteListScreen</span><span class="p">.</span><span class="na">NoteItemScreen</span><span class="o">&gt;</span><span class="p">(</span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="n">noteContainer</span><span class="p">.</span><span class="na">hasBackgroundColor</span><span class="p">(</span><span class="n">android</span><span class="p">.</span><span class="na">R</span><span class="p">.</span><span class="na">color</span><span class="p">.</span><span class="na">holo_orange_light</span><span class="p">)</span>
+<span class="w">                        </span><span class="n">tvNoteId</span><span class="p">.</span><span class="na">hasText</span><span class="p">(</span><span class="s">&quot;1&quot;</span><span class="p">)</span>
+<span class="w">                        </span><span class="n">tvNoteText</span><span class="p">.</span><span class="na">hasText</span><span class="p">(</span><span class="s">&quot;Note number 1&quot;</span><span class="p">)</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                    </span><span class="n">childAt</span><span class="o">&lt;</span><span class="n">NoteListScreen</span><span class="p">.</span><span class="na">NoteItemScreen</span><span class="o">&gt;</span><span class="p">(</span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="n">noteContainer</span><span class="p">.</span><span class="na">hasBackgroundColor</span><span class="p">(</span><span class="n">android</span><span class="p">.</span><span class="na">R</span><span class="p">.</span><span class="na">color</span><span class="p">.</span><span class="na">holo_red_light</span><span class="p">)</span>
+<span class="w">                        </span><span class="n">tvNoteId</span><span class="p">.</span><span class="na">hasText</span><span class="p">(</span><span class="s">&quot;2&quot;</span><span class="p">)</span>
+<span class="w">                        </span><span class="n">tvNoteText</span><span class="p">.</span><span class="na">hasText</span><span class="p">(</span><span class="s">&quot;Note number 2&quot;</span><span class="p">)</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Check swipe to dismiss action&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">NoteListScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">rvNotes</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">childAt</span><span class="o">&lt;</span><span class="n">NoteListScreen</span><span class="p">.</span><span class="na">NoteItemScreen</span><span class="o">&gt;</span><span class="p">(</span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="n">view</span><span class="p">.</span><span class="na">perform</span><span class="p">(</span><span class="n">ViewActions</span><span class="p">.</span><span class="na">swipeLeft</span><span class="p">())</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                    </span><span class="n">childAt</span><span class="o">&lt;</span><span class="n">NoteListScreen</span><span class="p">.</span><span class="na">NoteItemScreen</span><span class="o">&gt;</span><span class="p">(</span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="n">noteContainer</span><span class="p">.</span><span class="na">hasBackgroundColor</span><span class="p">(</span><span class="n">android</span><span class="p">.</span><span class="na">R</span><span class="p">.</span><span class="na">color</span><span class="p">.</span><span class="na">holo_orange_light</span><span class="p">)</span>
+<span class="w">                        </span><span class="n">tvNoteId</span><span class="p">.</span><span class="na">hasText</span><span class="p">(</span><span class="s">&quot;1&quot;</span><span class="p">)</span>
+<span class="w">                        </span><span class="n">tvNoteText</span><span class="p">.</span><span class="na">hasText</span><span class="p">(</span><span class="s">&quot;Note number 1&quot;</span><span class="p">)</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                    </span><span class="n">childAt</span><span class="o">&lt;</span><span class="n">NoteListScreen</span><span class="p">.</span><span class="na">NoteItemScreen</span><span class="o">&gt;</span><span class="p">(</span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="n">noteContainer</span><span class="p">.</span><span class="na">hasBackgroundColor</span><span class="p">(</span><span class="n">android</span><span class="p">.</span><span class="na">R</span><span class="p">.</span><span class="na">color</span><span class="p">.</span><span class="na">holo_red_light</span><span class="p">)</span>
+<span class="w">                        </span><span class="n">tvNoteId</span><span class="p">.</span><span class="na">hasText</span><span class="p">(</span><span class="s">&quot;2&quot;</span><span class="p">)</span>
+<span class="w">                        </span><span class="n">tvNoteText</span><span class="p">.</span><span class="na">hasText</span><span class="p">(</span><span class="s">&quot;Note number 2&quot;</span><span class="p">)</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>In the last step, we remove the element at index 0 and check that “Note number 1” now lies at this index.</p>
+<h2 id="wait-for-idle">Wait for idle</h2>
+<p>You may have noticed that all checks are performed immediately after the swipe, without even waiting for the animation to complete. Now the test passes successfully, but sometimes it can lead to errors. </p>
+<p>Therefore, in cases where some action is performed with animation and it takes time to complete, you can call the <code>device.uiDevice.waitForIdle</code> method. This method will stop the test execution until the screen enters the idle state - when no action is taking place and no animations are being performed.</p>
+<p>We add this line to the test after the swipe, and check that the number of elements has become two:</p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">androidx.test.espresso.action.ViewActions</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">androidx.test.ext.junit.rules.activityScenarioRule</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.testcases.api.testcase.TestCase</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screen.MainScreen</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screen.NoteListScreen</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Assert</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Rule</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Test</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nc">NoteListTest</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">TestCase</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@get</span><span class="p">:</span><span class="n">Rule</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">activityRule</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">activityScenarioRule</span><span class="o">&lt;</span><span class="n">MainActivity</span><span class="o">&gt;</span><span class="p">()</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">checkNotesScreen</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">run</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Open note list screen&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">MainScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">listActivityButton</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">isVisible</span><span class="p">()</span>
+<span class="w">                    </span><span class="n">isClickable</span><span class="p">()</span>
+<span class="w">                    </span><span class="n">click</span><span class="p">()</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Check notes count&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">NoteListScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">Assert</span><span class="p">.</span><span class="na">assertEquals</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">rvNotes</span><span class="p">.</span><span class="na">getSize</span><span class="p">())</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Check elements visibility&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">NoteListScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">rvNotes</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">children</span><span class="o">&lt;</span><span class="n">NoteListScreen</span><span class="p">.</span><span class="na">NoteItemScreen</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="n">tvNoteId</span><span class="p">.</span><span class="na">isVisible</span><span class="p">()</span>
+<span class="w">                        </span><span class="n">tvNoteText</span><span class="p">.</span><span class="na">isVisible</span><span class="p">()</span>
+<span class="w">                        </span><span class="n">noteContainer</span><span class="p">.</span><span class="na">isVisible</span><span class="p">()</span>
+
+<span class="w">                        </span><span class="n">tvNoteId</span><span class="p">.</span><span class="na">hasAnyText</span><span class="p">()</span>
+<span class="w">                        </span><span class="n">tvNoteText</span><span class="p">.</span><span class="na">hasAnyText</span><span class="p">()</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Check elements content&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">NoteListScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">rvNotes</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">childAt</span><span class="o">&lt;</span><span class="n">NoteListScreen</span><span class="p">.</span><span class="na">NoteItemScreen</span><span class="o">&gt;</span><span class="p">(</span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="n">noteContainer</span><span class="p">.</span><span class="na">hasBackgroundColor</span><span class="p">(</span><span class="n">android</span><span class="p">.</span><span class="na">R</span><span class="p">.</span><span class="na">color</span><span class="p">.</span><span class="na">holo_green_light</span><span class="p">)</span>
+<span class="w">                        </span><span class="n">tvNoteId</span><span class="p">.</span><span class="na">hasText</span><span class="p">(</span><span class="s">&quot;0&quot;</span><span class="p">)</span>
+<span class="w">                        </span><span class="n">tvNoteText</span><span class="p">.</span><span class="na">hasText</span><span class="p">(</span><span class="s">&quot;Note number 0&quot;</span><span class="p">)</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                    </span><span class="n">childAt</span><span class="o">&lt;</span><span class="n">NoteListScreen</span><span class="p">.</span><span class="na">NoteItemScreen</span><span class="o">&gt;</span><span class="p">(</span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="n">noteContainer</span><span class="p">.</span><span class="na">hasBackgroundColor</span><span class="p">(</span><span class="n">android</span><span class="p">.</span><span class="na">R</span><span class="p">.</span><span class="na">color</span><span class="p">.</span><span class="na">holo_orange_light</span><span class="p">)</span>
+<span class="w">                        </span><span class="n">tvNoteId</span><span class="p">.</span><span class="na">hasText</span><span class="p">(</span><span class="s">&quot;1&quot;</span><span class="p">)</span>
+<span class="w">                        </span><span class="n">tvNoteText</span><span class="p">.</span><span class="na">hasText</span><span class="p">(</span><span class="s">&quot;Note number 1&quot;</span><span class="p">)</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                    </span><span class="n">childAt</span><span class="o">&lt;</span><span class="n">NoteListScreen</span><span class="p">.</span><span class="na">NoteItemScreen</span><span class="o">&gt;</span><span class="p">(</span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="n">noteContainer</span><span class="p">.</span><span class="na">hasBackgroundColor</span><span class="p">(</span><span class="n">android</span><span class="p">.</span><span class="na">R</span><span class="p">.</span><span class="na">color</span><span class="p">.</span><span class="na">holo_red_light</span><span class="p">)</span>
+<span class="w">                        </span><span class="n">tvNoteId</span><span class="p">.</span><span class="na">hasText</span><span class="p">(</span><span class="s">&quot;2&quot;</span><span class="p">)</span>
+<span class="w">                        </span><span class="n">tvNoteText</span><span class="p">.</span><span class="na">hasText</span><span class="p">(</span><span class="s">&quot;Note number 2&quot;</span><span class="p">)</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Check swipe to dismiss action&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">NoteListScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">rvNotes</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">childAt</span><span class="o">&lt;</span><span class="n">NoteListScreen</span><span class="p">.</span><span class="na">NoteItemScreen</span><span class="o">&gt;</span><span class="p">(</span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="n">view</span><span class="p">.</span><span class="na">perform</span><span class="p">(</span><span class="n">ViewActions</span><span class="p">.</span><span class="na">swipeLeft</span><span class="p">())</span>
+<span class="w">                        </span><span class="n">device</span><span class="p">.</span><span class="na">uiDevice</span><span class="p">.</span><span class="na">waitForIdle</span><span class="p">()</span>
+<span class="w">                    </span><span class="p">}</span>
+
+<span class="w">                    </span><span class="n">Assert</span><span class="p">.</span><span class="na">assertEquals</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">getSize</span><span class="p">())</span>
+
+<span class="w">                    </span><span class="n">childAt</span><span class="o">&lt;</span><span class="n">NoteListScreen</span><span class="p">.</span><span class="na">NoteItemScreen</span><span class="o">&gt;</span><span class="p">(</span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="n">noteContainer</span><span class="p">.</span><span class="na">hasBackgroundColor</span><span class="p">(</span><span class="n">android</span><span class="p">.</span><span class="na">R</span><span class="p">.</span><span class="na">color</span><span class="p">.</span><span class="na">holo_orange_light</span><span class="p">)</span>
+<span class="w">                        </span><span class="n">tvNoteId</span><span class="p">.</span><span class="na">hasText</span><span class="p">(</span><span class="s">&quot;1&quot;</span><span class="p">)</span>
+<span class="w">                        </span><span class="n">tvNoteText</span><span class="p">.</span><span class="na">hasText</span><span class="p">(</span><span class="s">&quot;Note number 1&quot;</span><span class="p">)</span>
+<span class="w">                    </span><span class="p">}</span>
+
+<span class="w">                    </span><span class="n">childAt</span><span class="o">&lt;</span><span class="n">NoteListScreen</span><span class="p">.</span><span class="na">NoteItemScreen</span><span class="o">&gt;</span><span class="p">(</span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="n">noteContainer</span><span class="p">.</span><span class="na">hasBackgroundColor</span><span class="p">(</span><span class="n">android</span><span class="p">.</span><span class="na">R</span><span class="p">.</span><span class="na">color</span><span class="p">.</span><span class="na">holo_red_light</span><span class="p">)</span>
+<span class="w">                        </span><span class="n">tvNoteId</span><span class="p">.</span><span class="na">hasText</span><span class="p">(</span><span class="s">&quot;2&quot;</span><span class="p">)</span>
+<span class="w">                        </span><span class="n">tvNoteText</span><span class="p">.</span><span class="na">hasText</span><span class="p">(</span><span class="s">&quot;Note number 2&quot;</span><span class="p">)</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="extract-methods-to-page-object">Extract methods to Page Object</h2>
+<p>There is one more point that we will consider in this lesson. </p>
+<p>There are times when you need to add some behavior to the Page Object. For example, now you can swipe through the elements of the list. In the test, this is done with this line of code <code>view.perform(ViewActions.swipeLeft())</code>.</p>
+<p>Every time we need to swipe, we will have to perform the same actions - get the <code>view</code> object, call the method passing the parameter. Instead, we can add the necessary functionality in the Page Object class and then use it where necessary.</p>
+<p>Add a method to the NoteItemScreen class, let's call it swipeLeft:</p>
+<p><div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nc">NoteItemScreen</span><span class="p">(</span><span class="n">matcher</span><span class="p">:</span><span class="w"> </span><span class="n">Matcher</span><span class="o">&lt;</span><span class="n">View</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">KRecyclerItem</span><span class="o">&lt;</span><span class="n">NoteItemScreen</span><span class="o">&gt;</span><span class="p">(</span><span class="n">matcher</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">noteContainer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">KView</span><span class="p">(</span><span class="n">matcher</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">withId</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">note_container</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">tvNoteId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">KTextView</span><span class="p">(</span><span class="n">matcher</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">withId</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">tv_note_id</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">tvNoteText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">KTextView</span><span class="p">(</span><span class="n">matcher</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">withId</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">tv_note_text</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">swipeLeft</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">view</span><span class="p">.</span><span class="na">perform</span><span class="p">(</span><span class="n">ViewActions</span><span class="p">.</span><span class="na">swipeLeft</span><span class="p">())</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+Now, in any place where we need to make a swipe, we simply call the method we created on the <code>NoteItemScreen</code> object:</p>
+<p><div class="highlight"><pre><span></span><code><span class="n">childAt</span><span class="o">&lt;</span><span class="n">NoteListScreen</span><span class="p">.</span><span class="na">NoteItemScreen</span><span class="o">&gt;</span><span class="p">(</span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">swipeLeft</span><span class="p">()</span>
+<span class="w">    </span><span class="n">device</span><span class="p">.</span><span class="na">uiDevice</span><span class="p">.</span><span class="na">waitForIdle</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div>
+Then the whole test code will look like this:</p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">androidx.test.ext.junit.rules.activityScenarioRule</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.testcases.api.testcase.TestCase</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screen.MainScreen</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screen.NoteListScreen</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Assert</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Rule</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Test</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nc">NoteListTest</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">TestCase</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@get</span><span class="p">:</span><span class="n">Rule</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">activityRule</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">activityScenarioRule</span><span class="o">&lt;</span><span class="n">MainActivity</span><span class="o">&gt;</span><span class="p">()</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">checkNotesScreen</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">run</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Open note list screen&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">MainScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">listActivityButton</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">isVisible</span><span class="p">()</span>
+<span class="w">                    </span><span class="n">isClickable</span><span class="p">()</span>
+<span class="w">                    </span><span class="n">click</span><span class="p">()</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Check notes count&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">NoteListScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">Assert</span><span class="p">.</span><span class="na">assertEquals</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">rvNotes</span><span class="p">.</span><span class="na">getSize</span><span class="p">())</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Check elements visibility&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">NoteListScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">rvNotes</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">children</span><span class="o">&lt;</span><span class="n">NoteListScreen</span><span class="p">.</span><span class="na">NoteItemScreen</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="n">tvNoteId</span><span class="p">.</span><span class="na">isVisible</span><span class="p">()</span>
+<span class="w">                        </span><span class="n">tvNoteText</span><span class="p">.</span><span class="na">isVisible</span><span class="p">()</span>
+<span class="w">                        </span><span class="n">noteContainer</span><span class="p">.</span><span class="na">isVisible</span><span class="p">()</span>
+
+<span class="w">                        </span><span class="n">tvNoteId</span><span class="p">.</span><span class="na">hasAnyText</span><span class="p">()</span>
+<span class="w">                        </span><span class="n">tvNoteText</span><span class="p">.</span><span class="na">hasAnyText</span><span class="p">()</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Check elements content&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">NoteListScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">rvNotes</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">childAt</span><span class="o">&lt;</span><span class="n">NoteListScreen</span><span class="p">.</span><span class="na">NoteItemScreen</span><span class="o">&gt;</span><span class="p">(</span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="n">noteContainer</span><span class="p">.</span><span class="na">hasBackgroundColor</span><span class="p">(</span><span class="n">android</span><span class="p">.</span><span class="na">R</span><span class="p">.</span><span class="na">color</span><span class="p">.</span><span class="na">holo_green_light</span><span class="p">)</span>
+<span class="w">                        </span><span class="n">tvNoteId</span><span class="p">.</span><span class="na">hasText</span><span class="p">(</span><span class="s">&quot;0&quot;</span><span class="p">)</span>
+<span class="w">                        </span><span class="n">tvNoteText</span><span class="p">.</span><span class="na">hasText</span><span class="p">(</span><span class="s">&quot;Note number 0&quot;</span><span class="p">)</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                    </span><span class="n">childAt</span><span class="o">&lt;</span><span class="n">NoteListScreen</span><span class="p">.</span><span class="na">NoteItemScreen</span><span class="o">&gt;</span><span class="p">(</span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="n">noteContainer</span><span class="p">.</span><span class="na">hasBackgroundColor</span><span class="p">(</span><span class="n">android</span><span class="p">.</span><span class="na">R</span><span class="p">.</span><span class="na">color</span><span class="p">.</span><span class="na">holo_orange_light</span><span class="p">)</span>
+<span class="w">                        </span><span class="n">tvNoteId</span><span class="p">.</span><span class="na">hasText</span><span class="p">(</span><span class="s">&quot;1&quot;</span><span class="p">)</span>
+<span class="w">                        </span><span class="n">tvNoteText</span><span class="p">.</span><span class="na">hasText</span><span class="p">(</span><span class="s">&quot;Note number 1&quot;</span><span class="p">)</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                    </span><span class="n">childAt</span><span class="o">&lt;</span><span class="n">NoteListScreen</span><span class="p">.</span><span class="na">NoteItemScreen</span><span class="o">&gt;</span><span class="p">(</span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="n">noteContainer</span><span class="p">.</span><span class="na">hasBackgroundColor</span><span class="p">(</span><span class="n">android</span><span class="p">.</span><span class="na">R</span><span class="p">.</span><span class="na">color</span><span class="p">.</span><span class="na">holo_red_light</span><span class="p">)</span>
+<span class="w">                        </span><span class="n">tvNoteId</span><span class="p">.</span><span class="na">hasText</span><span class="p">(</span><span class="s">&quot;2&quot;</span><span class="p">)</span>
+<span class="w">                        </span><span class="n">tvNoteText</span><span class="p">.</span><span class="na">hasText</span><span class="p">(</span><span class="s">&quot;Note number 2&quot;</span><span class="p">)</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Check swipe to dismiss action&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">NoteListScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">rvNotes</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">childAt</span><span class="o">&lt;</span><span class="n">NoteListScreen</span><span class="p">.</span><span class="na">NoteItemScreen</span><span class="o">&gt;</span><span class="p">(</span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="n">swipeLeft</span><span class="p">()</span>
+<span class="w">                        </span><span class="n">device</span><span class="p">.</span><span class="na">uiDevice</span><span class="p">.</span><span class="na">waitForIdle</span><span class="p">()</span>
+<span class="w">                    </span><span class="p">}</span>
+
+<span class="w">                    </span><span class="n">Assert</span><span class="p">.</span><span class="na">assertEquals</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">getSize</span><span class="p">())</span>
+
+<span class="w">                    </span><span class="n">childAt</span><span class="o">&lt;</span><span class="n">NoteListScreen</span><span class="p">.</span><span class="na">NoteItemScreen</span><span class="o">&gt;</span><span class="p">(</span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="n">noteContainer</span><span class="p">.</span><span class="na">hasBackgroundColor</span><span class="p">(</span><span class="n">android</span><span class="p">.</span><span class="na">R</span><span class="p">.</span><span class="na">color</span><span class="p">.</span><span class="na">holo_orange_light</span><span class="p">)</span>
+<span class="w">                        </span><span class="n">tvNoteId</span><span class="p">.</span><span class="na">hasText</span><span class="p">(</span><span class="s">&quot;1&quot;</span><span class="p">)</span>
+<span class="w">                        </span><span class="n">tvNoteText</span><span class="p">.</span><span class="na">hasText</span><span class="p">(</span><span class="s">&quot;Note number 1&quot;</span><span class="p">)</span>
+<span class="w">                    </span><span class="p">}</span>
+
+<span class="w">                    </span><span class="n">childAt</span><span class="o">&lt;</span><span class="n">NoteListScreen</span><span class="p">.</span><span class="na">NoteItemScreen</span><span class="o">&gt;</span><span class="p">(</span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="n">noteContainer</span><span class="p">.</span><span class="na">hasBackgroundColor</span><span class="p">(</span><span class="n">android</span><span class="p">.</span><span class="na">R</span><span class="p">.</span><span class="na">color</span><span class="p">.</span><span class="na">holo_red_light</span><span class="p">)</span>
+<span class="w">                        </span><span class="n">tvNoteId</span><span class="p">.</span><span class="na">hasText</span><span class="p">(</span><span class="s">&quot;2&quot;</span><span class="p">)</span>
+<span class="w">                        </span><span class="n">tvNoteText</span><span class="p">.</span><span class="na">hasText</span><span class="p">(</span><span class="s">&quot;Note number 2&quot;</span><span class="p">)</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Note that no business logic needs to be added to the Page Object. You can give these objects certain properties, add functionality, but you should not add complex logic. The Page Object should remain a screen model with described interface elements and functions for interacting with these elements.</p>
+</div>
+<h2 id="summary">Summary</h2>
+<p>In this tutorial, we learned how to test lists of items set in RecyclerView. We learned how to find elements, how to interact with them and check their behavior for compliance with the expected result.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["tabs", "navigation.tabs", "content.code.annotate", "navigation.tabs.sticky", "navigation.instant", "navigation.tracking", "navigation.top", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

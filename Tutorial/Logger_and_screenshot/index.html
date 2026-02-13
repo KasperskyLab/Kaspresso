@@ -1,0 +1,2325 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://kasperskylab.github.io/Kaspresso/Tutorial/Logger_and_screenshot/">
+      
+      
+        <link rel="prev" href="../Recyclerview/">
+      
+      
+        <link rel="next" href="../Screenshot_tests_1/">
+      
+      
+        
+          <link rel="alternate" href="/Kaspresso/en/" hreflang="en">
+        
+          <link rel="alternate" href="/Kaspresso/ru/" hreflang="ru">
+        
+      
+      
+      <link rel="icon" href="../../kaspresso.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>12. Logger and screenshots - Kaspresso</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="light-blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#logging-and-screenshots" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Kaspresso" class="md-header__button md-logo" aria-label="Kaspresso" data-md-component="logo">
+      
+  <img src="../../kaspresso.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Kaspresso
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              12. Logger and screenshots
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="light-blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="Select language">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="/Kaspresso/en/" hreflang="en" class="md-select__link">
+              English
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/Kaspresso/ru/" hreflang="ru" class="md-select__link">
+              Русский
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/KasperskyLab/Kaspresso" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Kaspresso
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../.." class="md-tabs__link">
+          
+  
+  
+  Home
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  Tutorial
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Wiki/" class="md-tabs__link">
+          
+  
+  
+  Wiki
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Issues/" class="md-tabs__link">
+          
+  
+  
+  Issues
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Kaspresso" class="md-nav__button md-logo" aria-label="Kaspresso" data-md-component="logo">
+      
+  <img src="../../kaspresso.png" alt="logo">
+
+    </a>
+    Kaspresso
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/KasperskyLab/Kaspresso" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Kaspresso
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Home
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About Kaspresso
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Home/Kaspresso-in-articles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kaspresso in articles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Home/Kaspresso-in-videos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kaspresso in videos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Home/Kaspresso%20users/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Our users
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Home/Breaking-changes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Breaking changes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Home/Contribution_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contribution guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tutorial
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Download_Kaspresso_project_and_Android_studio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Download Kaspresso project and Android studio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Writing_simple_test/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Writing your first Kaspresso test
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Working_with_adb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Working with adb
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Wifi_sample_test/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Testing the Internet connection and working with the Device class
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Steps_and_sections/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Steps and sections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Scenario/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. Reduce duplicate steps the Scenario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UiAutomator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. Kautomator. Third Party Application Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../FlakySafely/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9. flakySafely
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Android_permissions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10. Working with Android permissions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Recyclerview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11. RecyclerView. Testing list of elements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12. Logger and screenshots
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12. Logger and screenshots
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#external-system-for-test-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        External system for test data
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#analysis-of-failed-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Analysis of failed tests
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adding-logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Adding logs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#screenshots" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Screenshots
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setting-up-kaspressobuilder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Setting up Kaspresso.Builder
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#interceptors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interceptors
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Screenshot_tests_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    13. Screenshot-tests. Part 1. Simple screenshot-test
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Screenshot_tests_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    14. Screenshot-tests. Part 2. Working with ViewModel and setting states
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Wiki
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Wiki
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Page_object_in_Kaspresso/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PageObject in Kaspresso
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Espresso_as_the_basis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Espresso as the basis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Supported_Android_UI_elements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Supported Android UI-elements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Matchers_actions_assertions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    View matchers, actions and assertions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Kautomator-wrapper_over_UI_Automator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kautomator. Wrapper over UI Automator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Working_with_Android_OS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Working with Android OS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Executing_adb_commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Executing adb commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Screenshot_tests/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Screenshot tests
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Kaspresso_configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kaspresso configuration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Kaspresso_Robolectric/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kaspresso with Robolectric
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Kaspresso_Allure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kaspresso with Allure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Jetpack_Compose/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compose support in Kaspresso
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Issues
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Issues
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Found an issue?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Issues/Storage_issue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Storage issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#external-system-for-test-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        External system for test data
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#analysis-of-failed-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Analysis of failed tests
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adding-logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Adding logs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#screenshots" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Screenshots
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setting-up-kaspressobuilder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Setting up Kaspresso.Builder
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#interceptors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interceptors
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="logging-and-screenshots">Logging and screenshots</h1>
+<p>In this tutorial, we will learn how to identify the causes of failing tests by adding additional logs and screenshots.</p>
+<p>Let's recall an example that was already used in one of the previous lessons. Opening the tutorial app </p>
+<p><img src="../images/logs/main_screen.png" alt="Tutorial main screen" width="300"/></p>
+<p>and click on the <code>Login Activity</code> button</p>
+<p><img src="../images/logs/login_activity.png" alt="Login Activity" width="300"/></p>
+<p>On this screen, you can enter your login and password, and if they are correct, the screen after authorization will open. In this case, the following are considered correct: a login with a length of three characters, a password - from six.</p>
+<p><img src="../images/logs/after_auth.png" alt="Screen after auth" width="300"/></p>
+<h2 id="external-system-for-test-data">External system for test data</h2>
+<p>We have already written tests for this screen, they are in the class <code>LoginActivityTest</code></p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">androidx.test.ext.junit.rules.activityScenarioRule</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.testcases.api.testcase.TestCase</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.afterlogin.AfterLoginActivity</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.login.LoginActivity</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Rule</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Test</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nc">LoginActivityTest</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">TestCase</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@get</span><span class="p">:</span><span class="n">Rule</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">activityRule</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">activityScenarioRule</span><span class="o">&lt;</span><span class="n">MainActivity</span><span class="o">&gt;</span><span class="p">()</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">loginSuccessfulIfUsernameAndPasswordCorrect</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">run</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Try to login with correct username and password&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">scenario</span><span class="p">(</span>
+<span class="w">                    </span><span class="n">LoginScenario</span><span class="p">(</span>
+<span class="w">                        </span><span class="n">username</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;123456&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="n">password</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;123456&quot;</span>
+<span class="w">                    </span><span class="p">)</span>
+<span class="w">                </span><span class="p">)</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Check current screen&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">device</span><span class="p">.</span><span class="na">activities</span><span class="p">.</span><span class="na">isCurrent</span><span class="p">(</span><span class="n">AfterLoginActivity</span><span class="o">::</span><span class="n">class</span><span class="p">.</span><span class="na">java</span><span class="p">)</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">loginUnsuccessfulIfUsernameIncorrect</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">run</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Try to login with incorrect username&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">scenario</span><span class="p">(</span>
+<span class="w">                    </span><span class="n">LoginScenario</span><span class="p">(</span>
+<span class="w">                        </span><span class="n">username</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;12&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="n">password</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;123456&quot;</span>
+<span class="w">                    </span><span class="p">)</span>
+<span class="w">                </span><span class="p">)</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Check current screen&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">device</span><span class="p">.</span><span class="na">activities</span><span class="p">.</span><span class="na">isCurrent</span><span class="p">(</span><span class="n">LoginActivity</span><span class="o">::</span><span class="n">class</span><span class="p">.</span><span class="na">java</span><span class="p">)</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">loginUnsuccessfulIfPasswordIncorrect</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">run</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Try to login with incorrect password&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">scenario</span><span class="p">(</span>
+<span class="w">                    </span><span class="n">LoginScenario</span><span class="p">(</span>
+<span class="w">                        </span><span class="n">username</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;123456&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="n">password</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;12345&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="p">)</span>
+<span class="w">                </span><span class="p">)</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Check current screen&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">device</span><span class="p">.</span><span class="na">activities</span><span class="p">.</span><span class="na">isCurrent</span><span class="p">(</span><span class="n">LoginActivity</span><span class="o">::</span><span class="n">class</span><span class="p">.</span><span class="na">java</span><span class="p">)</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>In this test, we ourselves create a username and password with which we will log in. But there are times when we get the data for the test from some external system. For example, a project may have some kind of service that generates a login and password for logging in, returns it to us, and we use them for testing.</p>
+<p>Let's simulate this situation. Let's create a class that returns login data - login and password.</p>
+<p>Let's create another package <code>data</code> in the <code>com.kaspersky.kaspresso.tutorial</code> package</p>
+<p><img src="../images/logs/create_package.png" alt="Create package 1"/></p>
+<p><img src="../images/logs/create_package_2.png" alt="Create package 2"/></p>
+<p>In the created package, add the <code>TestData</code> class, select the type <code>Object</code></p>
+<p><img src="../images/logs/create_class.png" alt="Create class"/></p>
+<p>As we said earlier, here we will only simulate the situation when we receive data for the test from an external system. In the created class, we will have two methods: one of them returns the login, the other returns the password. In real projects, we would request this data from the server, and we would not have been able to change the internal implementation of the possibility. That is, now we ourselves will indicate which login and password the system will return, but we imagine that this is a “black box” for us, and we do not know what values will be received.</p>
+<p>We add two methods in this class and let them return the correct login and password:</p>
+<p><div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.data</span>
+
+<span class="kd">object</span><span class="w"> </span><span class="nc">TestData</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">generateUsername</span><span class="p">():</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Admin&quot;</span>
+
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">generatePassword</span><span class="p">():</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;123456&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+Now let's create a separate test class in which we will check for a successful login using the data received from the <code>TestData</code> class. Let's call the test class <code>LoginActivityGeneratedDataTest</code>. We can copy the successful login test from the <code>LoginActivityTest</code> class</p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">androidx.test.ext.junit.rules.activityScenarioRule</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.testcases.api.testcase.TestCase</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.afterlogin.AfterLoginActivity</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Rule</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Test</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nc">LoginActivityGeneratedDataTest</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">TestCase</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@get</span><span class="p">:</span><span class="n">Rule</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">activityRule</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">activityScenarioRule</span><span class="o">&lt;</span><span class="n">MainActivity</span><span class="o">&gt;</span><span class="p">()</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">loginSuccessfulIfUsernameAndPasswordCorrect</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">run</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Try to login with correct username and password&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">scenario</span><span class="p">(</span>
+<span class="w">                    </span><span class="n">LoginScenario</span><span class="p">(</span>
+<span class="w">                        </span><span class="n">username</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;123456&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="n">password</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;123456&quot;</span>
+<span class="w">                    </span><span class="p">)</span>
+<span class="w">                </span><span class="p">)</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Check current screen&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">device</span><span class="p">.</span><span class="na">activities</span><span class="p">.</span><span class="na">isCurrent</span><span class="p">(</span><span class="n">AfterLoginActivity</span><span class="o">::</span><span class="n">class</span><span class="p">.</span><span class="na">java</span><span class="p">)</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Here we use a hardcoded username and password, let's get them from the <code>TestData</code> class</p>
+<p><div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">androidx.test.ext.junit.rules.activityScenarioRule</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.testcases.api.testcase.TestCase</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.afterlogin.AfterLoginActivity</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.data.TestData</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Rule</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Test</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nc">LoginActivityGeneratedDataTest</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">TestCase</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@get</span><span class="p">:</span><span class="n">Rule</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">activityRule</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">activityScenarioRule</span><span class="o">&lt;</span><span class="n">MainActivity</span><span class="o">&gt;</span><span class="p">()</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">loginSuccessfulIfUsernameAndPasswordCorrect</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">run</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kd">val</span><span class="w"> </span><span class="nv">username</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TestData</span><span class="p">.</span><span class="na">generateUsername</span><span class="p">()</span>
+<span class="w">            </span><span class="kd">val</span><span class="w"> </span><span class="nv">password</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TestData</span><span class="p">.</span><span class="na">generatePassword</span><span class="p">()</span>
+<span class="w">            </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Try to login with correct username and password&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">scenario</span><span class="p">(</span>
+<span class="w">                    </span><span class="n">LoginScenario</span><span class="p">(</span>
+<span class="w">                        </span><span class="n">username</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">username</span><span class="p">,</span>
+<span class="w">                        </span><span class="n">password</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">password</span>
+<span class="w">                    </span><span class="p">)</span>
+<span class="w">                </span><span class="p">)</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Check current screen&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">device</span><span class="p">.</span><span class="na">activities</span><span class="p">.</span><span class="na">isCurrent</span><span class="p">(</span><span class="n">AfterLoginActivity</span><span class="o">::</span><span class="n">class</span><span class="p">.</span><span class="na">java</span><span class="p">)</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+We launch. Test passed successfully.</p>
+<h2 id="analysis-of-failed-tests">Analysis of failed tests</h2>
+<p>We checked that if the system returns correct data, then the test passes. Let's change the <code>TestData</code> class so that it returns incorrect values</p>
+<p><div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.data</span>
+
+<span class="kd">object</span><span class="w"> </span><span class="nc">TestData</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">generateUsername</span><span class="p">():</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Adm&quot;</span>
+
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">generatePassword</span><span class="p">():</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;123&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+Let's run the test again. This time the test fails. </p>
+<p>We have already said that in real projects we cannot influence the external system, and sometimes it can return incorrect data, which will cause the test to fail. If the test fails, then you need to analyze and determine what the problem was: in the tests, in a malfunctioning application, or in an external system. Let's try to determine this from the logs. Open Logcat and filter the log by tag <code>KASPRESSO</code></p>
+<p><img src="../images/logs/logcat.png" alt="Test failed"/></p>
+<p>What do we see from here? The attempt to log in was successful, but the check that the correct screen was opened after a successful login failed.</p>
+<p>At the same time, it is completely unclear from here why the problem arose. We do not see what data was used to log in, whether they are really correct, and it is not clear how to solve the problem that has arisen. The result would be more understandable if the logs contained information - which particular login and password were used during testing. </p>
+<h2 id="adding-logs">Adding logs</h2>
+<p>If we need to add some of our information to the logs, we can use the <code>testLogger</code> object, on which we need to call the <code>i</code> method (from the word <code>info)</code>, and pass the text to be logged as a parameter.</p>
+<p>Our login and password are generated before the step <code>step("Try to login with correct username and password")</code> we can display a message in the log at this point about what data was generated</p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">androidx.test.ext.junit.rules.activityScenarioRule</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.testcases.api.testcase.TestCase</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.afterlogin.AfterLoginActivity</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.data.TestData</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Rule</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Test</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nc">LoginActivityGeneratedDataTest</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">TestCase</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@get</span><span class="p">:</span><span class="n">Rule</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">activityRule</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">activityScenarioRule</span><span class="o">&lt;</span><span class="n">MainActivity</span><span class="o">&gt;</span><span class="p">()</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">loginSuccessfulIfUsernameAndPasswordCorrect</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">run</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kd">val</span><span class="w"> </span><span class="nv">username</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TestData</span><span class="p">.</span><span class="na">generateUsername</span><span class="p">()</span>
+<span class="w">            </span><span class="kd">val</span><span class="w"> </span><span class="nv">password</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TestData</span><span class="p">.</span><span class="na">generatePassword</span><span class="p">()</span>
+
+<span class="w">            </span><span class="n">testLogger</span><span class="p">.</span><span class="na">i</span><span class="p">(</span><span class="s">&quot;Generated data. Username: </span><span class="si">$</span><span class="n">username</span><span class="s">, Password: </span><span class="si">$</span><span class="n">password</span><span class="s">&quot;</span><span class="p">)</span>
+
+<span class="w">            </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Try to login with correct username and password&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">scenario</span><span class="p">(</span>
+<span class="w">                    </span><span class="n">LoginScenario</span><span class="p">(</span>
+<span class="w">                        </span><span class="n">username</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">username</span><span class="p">,</span>
+<span class="w">                        </span><span class="n">password</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">password</span>
+<span class="w">                    </span><span class="p">)</span>
+<span class="w">                </span><span class="p">)</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Check current screen&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">device</span><span class="p">.</span><span class="na">activities</span><span class="p">.</span><span class="na">isCurrent</span><span class="p">(</span><span class="n">AfterLoginActivity</span><span class="o">::</span><span class="n">class</span><span class="p">.</span><span class="na">java</span><span class="p">)</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>In this line <code>testLogger.i("Generated data. Username: $username, Password: $password")</code> we call the <code>i</code> method on the <code>testLogger</code> object, passing the string <code>"Generated data. Username: $username, Password: $password")</code> as a parameter, where instead of <code>$username</code> and <code>$password</code> the values will be substituted login and password variables.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>You can read more about how to form a string using variables and methods in <a href="https://kotlinlang.org/docs/strings.html#string-templates">documentation</a></p>
+</div>
+<p>Let's run the test again and see the logs:</p>
+<p><img src="../images/logs/custom_log.png" alt="Custom Log"/></p>
+<p>After <code>TEST SECTION</code> you can see our log, which is displayed with the <code>KASPRESSO_TEST</code> tag. This log shows that the generated data is incorrect (the password is too short), which means that the test fails due to an external system, and the problem needs to be solved in it. </p>
+<p>If you don't want to watch the entire log, and you are only interested in messages added by you, you can filter the log by the tag <code>KASPRESSO_TEST</code></p>
+<p><img src="../images/logs/kaspresso_test_tag.png" alt="Kaspresso test tag"/></p>
+<h2 id="screenshots">Screenshots</h2>
+<p>Logs are really very useful when analyzing tests and finding bugs, but there are times when it's much easier to find a problem from screenshots. If during the test a screenshot was saved at each step, and then we could look at them in some folder, then finding errors would be much easier.</p>
+<p>In Kaspresso, it is possible to take screenshots at any step during the test, for this it is enough to call the <code>device.screenshots.take("file_name")</code> method. Instead of <code>file_name</code>, you need to specify the name of the screenshot file, by which you can find it. Let's add screenshots to each <code>LoginScenario</code> step so that we can analyze everything that happened on the screen later.</p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.testcases.api.scenario.Scenario</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.testcases.core.testcontext.TestContext</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screen.LoginScreen</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screen.MainScreen</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nc">LoginScenario</span><span class="p">(</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">username</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">,</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">password</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span>
+<span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Scenario</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">steps</span><span class="p">:</span><span class="w"> </span><span class="n">TestContext</span><span class="o">&lt;</span><span class="kt">Unit</span><span class="o">&gt;</span><span class="p">.()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kt">Unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Open login screen&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">device</span><span class="p">.</span><span class="na">screenshots</span><span class="p">.</span><span class="na">take</span><span class="p">(</span><span class="s">&quot;before_open_login_screen&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="n">MainScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">loginActivityButton</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">isVisible</span><span class="p">()</span>
+<span class="w">                    </span><span class="n">isClickable</span><span class="p">()</span>
+<span class="w">                    </span><span class="n">click</span><span class="p">()</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="n">device</span><span class="p">.</span><span class="na">screenshots</span><span class="p">.</span><span class="na">take</span><span class="p">(</span><span class="s">&quot;after_open_login_screen&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Check elements visibility&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">device</span><span class="p">.</span><span class="na">screenshots</span><span class="p">.</span><span class="na">take</span><span class="p">(</span><span class="s">&quot;check_elements_visibility&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="n">LoginScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">inputUsername</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">isVisible</span><span class="p">()</span>
+<span class="w">                    </span><span class="n">hasHint</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">string</span><span class="p">.</span><span class="na">login_activity_hint_username</span><span class="p">)</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">                </span><span class="n">inputPassword</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">isVisible</span><span class="p">()</span>
+<span class="w">                    </span><span class="n">hasHint</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">string</span><span class="p">.</span><span class="na">login_activity_hint_password</span><span class="p">)</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">                </span><span class="n">loginButton</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">isVisible</span><span class="p">()</span>
+<span class="w">                    </span><span class="n">isClickable</span><span class="p">()</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Try to login&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">LoginScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">inputUsername</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">replaceText</span><span class="p">(</span><span class="n">username</span><span class="p">)</span>
+<span class="w">                    </span><span class="n">device</span><span class="p">.</span><span class="na">screenshots</span><span class="p">.</span><span class="na">take</span><span class="p">(</span><span class="s">&quot;setup_username&quot;</span><span class="p">)</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">                </span><span class="n">inputPassword</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">replaceText</span><span class="p">(</span><span class="n">password</span><span class="p">)</span>
+<span class="w">                    </span><span class="n">device</span><span class="p">.</span><span class="na">screenshots</span><span class="p">.</span><span class="na">take</span><span class="p">(</span><span class="s">&quot;setup_password&quot;</span><span class="p">)</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">                </span><span class="n">loginButton</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">click</span><span class="p">()</span>
+<span class="w">                    </span><span class="n">device</span><span class="p">.</span><span class="na">screenshots</span><span class="p">.</span><span class="na">take</span><span class="p">(</span><span class="s">&quot;after_click_login&quot;</span><span class="p">)</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>In order for screenshots to be saved on the device, the application must have permission to read and write to the smartphone's file system. Therefore, in the test class, we will give the appropriate permission through <code>GrantPermissionRule</code></p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">androidx.test.ext.junit.rules.activityScenarioRule</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">androidx.test.rule.GrantPermissionRule</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.testcases.api.testcase.TestCase</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.afterlogin.AfterLoginActivity</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.data.TestData</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Rule</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Test</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nc">LoginActivityGeneratedDataTest</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">TestCase</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@get</span><span class="p">:</span><span class="n">Rule</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">activityRule</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">activityScenarioRule</span><span class="o">&lt;</span><span class="n">MainActivity</span><span class="o">&gt;</span><span class="p">()</span>
+
+<span class="w">    </span><span class="nd">@get</span><span class="p">:</span><span class="n">Rule</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">permissionRule</span><span class="p">:</span><span class="w"> </span><span class="n">GrantPermissionRule</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GrantPermissionRule</span><span class="p">.</span><span class="na">grant</span><span class="p">(</span>
+<span class="w">        </span><span class="n">android</span><span class="p">.</span><span class="na">Manifest</span><span class="p">.</span><span class="na">permission</span><span class="p">.</span><span class="na">READ_EXTERNAL_STORAGE</span><span class="p">,</span>
+<span class="w">        </span><span class="n">android</span><span class="p">.</span><span class="na">Manifest</span><span class="p">.</span><span class="na">permission</span><span class="p">.</span><span class="na">WRITE_EXTERNAL_STORAGE</span>
+<span class="w">    </span><span class="p">)</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">loginSuccessfulIfUsernameAndPasswordCorrect</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">run</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kd">val</span><span class="w"> </span><span class="nv">username</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TestData</span><span class="p">.</span><span class="na">generateUsername</span><span class="p">()</span>
+<span class="w">            </span><span class="kd">val</span><span class="w"> </span><span class="nv">password</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TestData</span><span class="p">.</span><span class="na">generatePassword</span><span class="p">()</span>
+
+<span class="w">            </span><span class="n">testLogger</span><span class="p">.</span><span class="na">i</span><span class="p">(</span><span class="s">&quot;Generated data. Username: </span><span class="si">$</span><span class="n">username</span><span class="s">, Password: </span><span class="si">$</span><span class="n">password</span><span class="s">&quot;</span><span class="p">)</span>
+
+<span class="w">            </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Try to login with correct username and password&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">scenario</span><span class="p">(</span>
+<span class="w">                    </span><span class="n">LoginScenario</span><span class="p">(</span>
+<span class="w">                        </span><span class="n">username</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">username</span><span class="p">,</span>
+<span class="w">                        </span><span class="n">password</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">password</span>
+<span class="w">                    </span><span class="p">)</span>
+<span class="w">                </span><span class="p">)</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Check current screen&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">device</span><span class="p">.</span><span class="na">activities</span><span class="p">.</span><span class="na">isCurrent</span><span class="p">(</span><span class="n">AfterLoginActivity</span><span class="o">::</span><span class="n">class</span><span class="p">.</span><span class="na">java</span><span class="p">)</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Let's run the test again.</p>
+<p>After running the test, go to <code>Device File Explorer</code> and open the <code>sdcard/Documents/screenshots</code> folder. If it is not displayed for you, then right-click on the <code>sdcard</code> folder and click <code>Synchronize</code></p>
+<p><img src="../images/logs/screenshots.png" alt="Screenshots"/></p>
+<p>Here, from the screenshots, you can determine what the problem is - at the stage of setting the password, the number of characters entered is 3</p>
+<p><img src="../images/logs/setup_password.png" alt="Setup password"/></p>
+<p>So, after analyzing the screenshots, you can determine which error occurred at the time of the tests.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>One way to take a screenshot is to call the <code>device.uiDevice.takeScreenshot</code> method. This is a method from the <code>uiautomator</code> library and should never be used directly. </p>
+<p>Firstly, a screenshot taken with Kaspresso (<code>device.screenshots.take</code>) will be in the correct folder, which is easy to find by the name of the test, and the files for each test and step will be in their own folders with understandable names, and in the case of <code>uiautomator</code>, finding the right screenshots will be problematic. </p>
+<p>Secondly, Kaspresso has made a lot of convenient improvements for working with screenshots, such as scaling, photo quality settings, full-screen screenshots (when all the content does not fit on the screen), and so on. </p>
+<p>Therefore, for screenshots, always use only the Kaspresso <code>device.screenshots</code> objects.</p>
+</div>
+<h2 id="setting-up-kaspressobuilder">Setting up Kaspresso.Builder</h2>
+<p>Theoretically, all tests you write can fail. In such cases, I would like to always be able to look at screenshots to understand what went wrong. How to achieve this? As an option, add a method call that takes a screenshot to all steps of all tests, but this is not very convenient.</p>
+<p>Therefore, Kaspresso has added the ability to configure test parameters when creating a test class. To do this, you can pass the <code>Kaspresso.Builder</code> object to the <code>TestCase</code> constructor, which by default takes the value <code>Kaspresso.Builder.simple()</code>.</p>
+<p><img src="../images/logs/test_case_params.png" alt="Test Case Params"/></p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>To see the parameters a method or constructor takes, you can left-click inside the parentheses and press <code>ctrl + P</code> (or <code>cmd + P</code> on Mac)</p>
+</div>
+<p>We can add many different settings, you can read more about them in the <a href="https://kasperskylab.github.io/Kaspresso/Wiki/Kaspresso_configuration/">Wiki</a>.</p>
+<p>Now we are interested in adding screenshots if the tests have failed. The easiest way to do this is to use <code>advanced</code> builder instead of <code>simple</code>. This is done as follows:</p>
+<p><div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nc">LoginActivityGeneratedDataTest</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">TestCase</span><span class="p">(</span>
+<span class="w">    </span><span class="n">kaspressoBuilder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kaspresso</span><span class="p">.</span><span class="na">Builder</span><span class="p">.</span><span class="na">advanced</span><span class="p">()</span>
+<span class="p">)</span>
+</code></pre></div>
+In this case, the call to methods that take screenshots can be removed, they will be saved automatically if the test fails.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Please note that permissions to access the file system are required, without them screenshots will not be saved.</p>
+</div>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.testcases.api.scenario.Scenario</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.testcases.core.testcontext.TestContext</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screen.LoginScreen</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screen.MainScreen</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nc">LoginScenario</span><span class="p">(</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">username</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">,</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">password</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span>
+<span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Scenario</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">steps</span><span class="p">:</span><span class="w"> </span><span class="n">TestContext</span><span class="o">&lt;</span><span class="kt">Unit</span><span class="o">&gt;</span><span class="p">.()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kt">Unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Open login screen&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">MainScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">loginActivityButton</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">isVisible</span><span class="p">()</span>
+<span class="w">                    </span><span class="n">isClickable</span><span class="p">()</span>
+<span class="w">                    </span><span class="n">click</span><span class="p">()</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Check elements visibility&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">LoginScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">inputUsername</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">isVisible</span><span class="p">()</span>
+<span class="w">                    </span><span class="n">hasHint</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">string</span><span class="p">.</span><span class="na">login_activity_hint_username</span><span class="p">)</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">                </span><span class="n">inputPassword</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">isVisible</span><span class="p">()</span>
+<span class="w">                    </span><span class="n">hasHint</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">string</span><span class="p">.</span><span class="na">login_activity_hint_password</span><span class="p">)</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">                </span><span class="n">loginButton</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">isVisible</span><span class="p">()</span>
+<span class="w">                    </span><span class="n">isClickable</span><span class="p">()</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Try to login&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">LoginScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">inputUsername</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">replaceText</span><span class="p">(</span><span class="n">username</span><span class="p">)</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">                </span><span class="n">inputPassword</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">replaceText</span><span class="p">(</span><span class="n">password</span><span class="p">)</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">                </span><span class="n">loginButton</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">click</span><span class="p">()</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Let's start the test. Tests failed and screenshots appeared on the device (don't forget to press <code>Synchronize</code>):</p>
+<p><img src="../images/logs/advanced_builder.png" alt="Advanced Builder"/></p>
+<p>When using the <code>advanced</code> builder, there are a few more changes. In addition to screenshots, files with logs, the View hierarchy, and more are also added.</p>
+<p>If you do not need all these changes, then you can only change certain settings of a simple builder. </p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>If you're not a developer, customizing the default builder can be quite tricky. In case it was not possible to figure out the setting, use the <code>advanced</code> builder to get screenshots</p>
+</div>
+<h2 id="interceptors">Interceptors</h2>
+<p>You should remember that in the previous tests, in addition to executing our methods, there were many additional actions “under the hood”: writing logs for each step, implicitly calling flakySafely, automatically scrolling to the element if the check was unsuccessful, and so on.</p>
+<p>All this worked thanks to <code>Interceptors</code>. <code>Interceptors</code> are classes that intercept the actions we call and add some functionality to them. There are a lot of such classes in Kaspresso, you can read more about them in <a href="https://kasperskylab.github.io/Kaspresso/Wiki/Kaspresso_configuration/">documentation</a></p>
+<p>We are interested in adding screenshots, the <code>ScreenshotStepWatcherInterceptor</code>, <code>ScreenshotFailStepWatcherInterceptor</code> and <code>TestRunnerScreenshotWatcherInterceptor</code> classes are responsible for this.</p>
+<ul>
+<li>ScreenshotStepWatcherInterceptor - adds screenshots whether the step failed or not
+</li>
+<li>ScreenshotFailStepWatcherInterceptor - adds a screenshot of only the step that failed
+</li>
+<li>TestRunnerScreenshotWatcherInterceptor - adds a screenshot if an error occurs in the `before` or `after` section
+</li>
+</ul>
+
+<p>If the test fails, it is convenient to look not only at the step at which the error occurred, but also at the previous ones - this way it is much easier to figure out the problem. Therefore, we will add the first <code>Interceptor</code> option, which will screenshot all the steps, regardless of the result. This is done as follows:</p>
+<p><div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nc">LoginActivityGeneratedDataTest</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">TestCase</span><span class="p">(</span>
+<span class="w">    </span><span class="n">kaspressoBuilder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kaspresso</span><span class="p">.</span><span class="na">Builder</span><span class="p">.</span><span class="na">simple</span><span class="p">().</span><span class="na">apply</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">stepWatcherInterceptors</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">ScreenshotStepWatcherInterceptor</span><span class="p">(</span><span class="n">screenshots</span><span class="p">))</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">)</span>
+</code></pre></div>
+Here we first get the default builder, call its <code>apply</code> method, and add all the necessary settings in curly braces. In this case, we get all the <code>Interceptors</code> that intercept the step event (<code>step</code>) and add a <code>ScreenshotStepWatcherInterceptor</code> there, passing the <code>screenshots</code> object to the constructor.</p>
+<p>Now that we have added this <code>Interceptor</code>, after each test step, regardless of the result of its execution, screenshots will be saved on the device.</p>
+<p>We launch. The test failed and screenshots were saved to the device</p>
+<p><img src="../images/logs/customized_builder.png" alt="Customized Builder"/></p>
+<p>Let's return the correct implementation of the <code>TestData</code> class</p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.data</span>
+
+<span class="kd">object</span><span class="w"> </span><span class="nc">TestData</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">generateUsername</span><span class="p">():</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Admin&quot;</span>
+
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">generatePassword</span><span class="p">():</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;123456&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Let's run the test again. The test passed successfully and all screenshots are saved on the device.</p>
+<h2 id="summary">Summary</h2>
+<p>In this tutorial, we learned how to add logging and screenshots to our tests. We found out when standard logs are not enough, learned how to customize <code>Kaspresso.Builder</code> by adding various <code>Interceptors</code> to it.
+We also looked at ways to create screenshots manually, and how this process can be automated. </p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["tabs", "navigation.tabs", "content.code.annotate", "navigation.tabs.sticky", "navigation.instant", "navigation.tracking", "navigation.top", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

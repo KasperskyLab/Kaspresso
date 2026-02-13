@@ -1,0 +1,2239 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://kasperskylab.github.io/Kaspresso/en/Tutorial/Writing_simple_test/">
+      
+      
+        <link rel="prev" href="../Download_Kaspresso_project_and_Android_studio/">
+      
+      
+        <link rel="next" href="../Working_with_adb/">
+      
+      
+        
+          <link rel="alternate" href="/Kaspresso/en/" hreflang="en">
+        
+          <link rel="alternate" href="/Kaspresso/ru/" hreflang="ru">
+        
+      
+      
+      <link rel="icon" href="../../../kaspresso.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>3. Writing your first Kaspresso test - Kaspresso</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="light-blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#writing-your-first-kaspresso-test" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../" title="Kaspresso" class="md-header__button md-logo" aria-label="Kaspresso" data-md-component="logo">
+      
+  <img src="../../../kaspresso.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Kaspresso
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              3. Writing your first Kaspresso test
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="light-blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="Select language">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="/Kaspresso/en/" hreflang="en" class="md-select__link">
+              English
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/Kaspresso/ru/" hreflang="ru" class="md-select__link">
+              Русский
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/KasperskyLab/Kaspresso" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Kaspresso
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+  Home
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  Tutorial
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Wiki/" class="md-tabs__link">
+          
+  
+  
+  Wiki
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Issues/" class="md-tabs__link">
+          
+  
+  
+  Issues
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../" title="Kaspresso" class="md-nav__button md-logo" aria-label="Kaspresso" data-md-component="logo">
+      
+  <img src="../../../kaspresso.png" alt="logo">
+
+    </a>
+    Kaspresso
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/KasperskyLab/Kaspresso" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Kaspresso
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Home
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About Kaspresso
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Home/Kaspresso-in-articles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kaspresso in articles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Home/Kaspresso-in-videos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kaspresso in videos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Home/Kaspresso%20users/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Our users
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Home/Breaking-changes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Breaking changes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Home/Contribution_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contribution guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tutorial
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Download_Kaspresso_project_and_Android_studio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Download Kaspresso project and Android studio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Writing your first Kaspresso test
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Writing your first Kaspresso test
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#switch-to-the-desired-branch-in-git" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Switch to the desired branch in GIT
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#manual-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Manual testing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#automatic-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Automatic testing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#including-kaspresso-in-the-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Including Kaspresso in the project
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lets-start-writing-the-test-by-creating-a-page-object-for-the-current-screen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Let's start writing the test by creating a Page object for the current screen
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#add-simpleactivitytest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Add SimpleActivityTest
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Working_with_adb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Working with adb
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Wifi_sample_test/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Testing the Internet connection and working with the Device class
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Steps_and_sections/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Steps and sections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Scenario/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. Reduce duplicate steps the Scenario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UiAutomator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. Kautomator. Third Party Application Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../FlakySafely/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9. flakySafely
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Android_permissions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10. Working with Android permissions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Recyclerview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11. RecyclerView. Testing list of elements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Logger_and_screenshot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12. Logger and screenshots
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Screenshot_tests_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    13. Screenshot-tests. Part 1. Simple screenshot-test
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Screenshot_tests_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    14. Screenshot-tests. Part 2. Working with ViewModel and setting states
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Wiki
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Wiki
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Page_object_in_Kaspresso/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PageObject in Kaspresso
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Espresso_as_the_basis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Espresso as the basis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Supported_Android_UI_elements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Supported Android UI-elements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Matchers_actions_assertions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    View matchers, actions and assertions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Kautomator-wrapper_over_UI_Automator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kautomator. Wrapper over UI Automator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Working_with_Android_OS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Working with Android OS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Executing_adb_commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Executing adb commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Screenshot_tests/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Screenshot tests
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Kaspresso_configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kaspresso configuration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Kaspresso_Robolectric/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kaspresso with Robolectric
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Kaspresso_Allure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kaspresso with Allure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Jetpack_Compose/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compose support in Kaspresso
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Issues
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Issues
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Found an issue?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Issues/Storage_issue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Storage issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#switch-to-the-desired-branch-in-git" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Switch to the desired branch in GIT
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#manual-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Manual testing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#automatic-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Automatic testing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#including-kaspresso-in-the-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Including Kaspresso in the project
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lets-start-writing-the-test-by-creating-a-page-object-for-the-current-screen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Let's start writing the test by creating a Page object for the current screen
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#add-simpleactivitytest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Add SimpleActivityTest
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="writing-your-first-kaspresso-test">Writing your first Kaspresso test</h1>
+<h2 id="switch-to-the-desired-branch-in-git">Switch to the desired branch in GIT</h2>
+<p>In Android Studio you can switch between branches and thus see different versions of a project. Initially, after downloading Kaspresso, you will be in the <code>master</code> branch.</p>
+<p><img src="../images/simple_test/master_branch.png" alt="Master branch"/></p>
+<p>This branch contains the source code of the application, which we will cover with tests. In the current and subsequent lessons, step-by-step instructions for writing autotests will be given in codelabs format. The final result with all written tests is available in the <code>TECH-tutorial-results</code> branch, you can switch to it at any time and see the solution.</p>
+<p>To do this, click on the name of the branch you are on, and in the search, enter the name of the branch you are interested in.</p>
+<p><img src="../images/simple_test/switch_to_results.png" alt="Switch to results"/></p>
+<h2 id="manual-testing">Manual testing</h2>
+<p>Before we start writing a test, let's take a closer look at the functionality that we will cover with autotests. To do this, switch to the 'master' branch.</p>
+<p>Open configuration selection (1) and select tutorial (2):</p>
+<p><img src="../images/simple_test/Select_tutorial.png" alt="Select tutorial"/></p>
+<p>Check that the desired device is selected (1) and run the application (2):</p>
+<p><img src="../images/simple_test/Launch_tutorial.png" alt="Launch tutorial"/></p>
+<p>After successfully launching the application, we will see the main screen of the Tutorial application.</p>
+<p><img src="../images/simple_test/Tutorial_main.png" alt="Tutorial main" width="200"/></p>
+<p>Click on the button with the text "Simple test" and see the following screen:</p>
+<p><img src="../images/simple_test/First_tutorial_screen.png" alt="Page object example" width="200"/></p>
+<p>The screen consists of:</p>
+<ol>
+<li>
+<p><em>Header <code>TextView</code></em></p>
+</li>
+<li>
+<p><em>EditText input fields</em></p>
+</li>
+<li>
+<p><em>Buttons</em></p>
+</li>
+</ol>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>A full list of widgets in Android with detailed information can be found <a href="https://developer.android.com/reference/android/widget/package-summary">here</a>.</p>
+</div>
+<p>When you click on the button, the text in the header changes to the one entered in the input field.</p>
+<h2 id="automatic-testing">Automatic testing</h2>
+<p>We manually checked that the result of the application meets the expectations:</p>
+<ol>
+    <li>On the main screen there is a button to go to the `SimpleTest` screen (the rest of the elements on this screen do not interest us for now)</li>
+    <li>This button is visible</li>
+    <li>This button is clickable</li>
+    <li>Clicking on it takes us to the SimpleTest screen</li>
+    <li>`SimpleTest` screen has three UI elements: title, input field and button</li>
+    <li>All these elements are visible</li>
+    <li>Header contains default text</li>
+    <li>If you enter some text in the input field and click on the button, then the text in the title changes to the entered one</li>
+</ol>
+
+<p>Now we need to write all the same checks in the code so that they are performed automatically.</p>
+<p>To cover the application with Kaspresso tests, you need to start by including the Kaspresso library in the project dependencies.</p>
+<h2 id="including-kaspresso-in-the-project">Including Kaspresso in the project</h2>
+<p>Switch the display of the project files to Project (1) and add the dependency to the existing <code>dependencies</code> section in the <code>build.gradle</code> file of the <code>Tutorial</code> module:</p>
+<p><img src="../images/simple_test/Tutorial_build_gradle.png" alt="Tutorial build gradle"/></p>
+<div class="highlight"><pre><span></span><code><span class="n">dependencies</span><span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="n">androidTestImplementation</span><span class="o">(</span><span class="s2">&quot;com.kaspersky.android-components:kaspresso:1.5.1&quot;</span><span class="o">)</span>
+<span class="w">    </span><span class="n">androidTestUtil</span><span class="o">(</span><span class="s2">&quot;androidx.test:orchestrator:1.4.2&quot;</span><span class="o">)</span>
+<span class="o">}</span>
+</code></pre></div>
+<h2 id="lets-start-writing-the-test-by-creating-a-page-object-for-the-current-screen">Let's start writing the test by creating a Page object for the current screen</h2>
+<p>We can start writing the code of our test. To do this, it is necessary to create a model (class) for each screen that participates in the test and, inside this model, declare all the interface elements (buttons, text fields, etc.) that make up the screen that the test will interact with. This approach is called <code>Page Object</code> and you can read more about it in the <a href="https://kasperskylab.github.io/Kaspresso/Wiki/Page_object_in_Kaspresso/">documentation</a>.</p>
+<p>In the first four steps of the test, we are interacting with the main screen, so the first step is to create a Page Object for the main screen.</p>
+<p>We will work in the <code>androidTest</code> folder of the tutorial module. If you do not have this folder, then you need to create it by right-clicking on the <code>src</code> folder and selecting <code>New</code> -&gt; <code>Directory</code>.</p>
+<p><img src="../images/simple_test/create_directory.png" alt="Create directory"/></p>
+<p>Select the item <code>androidTest/kotlin</code>:</p>
+<p><img src="../images/simple_test/name_android_test.png" alt="Name directory androidTest"/></p>
+<p>Inside the <code>kotlin</code> folder, let's create a separate package in which we will store all Page Objects:</p>
+<p><img src="../images/simple_test/create_package.png" alt="Create package"/></p>
+<p>Creating a separate package does not affect the functionality, we do it just for convenience, so that all screen models are in one place. You can give the package any name (with a few exceptions), but it's common for tests to use the same name as the application itself. We can go to the MainActivity file and the package name will be listed at the top.</p>
+<p><img src="../images/simple_test/package_name_main_activity.png" alt="MainActivity Package name"/></p>
+<p>Copy this name and paste it into the package name. Specifically, in this package we will store only screen models (Page Objects), so let's add <code>.screen</code> at the end.</p>
+<p><img src="../images/simple_test/package_name_screen.png" alt="Screen Package name"/></p>
+<p>When we add other classes to the folder with tests, we will put them in other packages, but the first part of their name will be the same: <code>com.kaspersky.kaspresso.tutorial</code>.</p>
+<p>Now in the created package we add a screen model (class):</p>
+<p><img src="../images/simple_test/create_class.png" alt="Create class"/></p>
+<p>Choose the type Object and name it MainScreen.</p>
+<p><img src="../images/simple_test/create_main_screen.png" alt="Create MainScreen"/></p>
+<p>MainScreen is a model of the main screen. In order for this model to be used in autotests, it is necessary to inherit from the KScreen class and specify the name of this class in angle brackets.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Specifying the type in angle brackets in Java and Kotlin is called Generics. You can read more about this in <a href="https://docs.oracle.com/javase/tutorial/java/generics/types.html">Java</a> and <a href="https://kotlinlang.org/docs/generics.html">Kotlin</a> documentation.</p>
+</div>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screen</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.screens.KScreen</span>
+
+<span class="kd">object</span><span class="w"> </span><span class="nc">MainScreen</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">KScreen</span><span class="o">&lt;</span><span class="n">MainScreen</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>An error occurred because the KScreen class contains two members that need to be redefined when inheriting. In order to do this quickly in Android Studio, we can press the key combination <code>ctrl + i</code> and select the elements that we want to override.</p>
+<p><img src="../images/simple_test/override.png" alt="Override methods"/></p>
+<p>Holding <code>ctrl</code>, select all items and press <code>OK</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screen</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.screens.KScreen</span>
+
+<span class="kd">object</span><span class="w"> </span><span class="nc">MainScreen</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">KScreen</span><span class="o">&lt;</span><span class="n">MainScreen</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">layoutId</span><span class="p">:</span><span class="w"> </span><span class="kt">Int?</span>
+<span class="w">        </span><span class="k">get</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TODO</span><span class="p">(</span><span class="s">&quot;Not yet implemented&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">viewClass</span><span class="p">:</span><span class="w"> </span><span class="n">Class</span><span class="o">&lt;*&gt;?</span>
+<span class="w">        </span><span class="k">get</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TODO</span><span class="p">(</span><span class="s">&quot;Not yet implemented&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>New lines of code appeared in the file. Instead of <code>TODO</code>, you need to write the correct implementation: the id of the layout (<code>layoutId</code>) that is set on the screen, and the name of the class (<code>viewClass</code>). This is necessary to associate the test with a specific layout file and activity class. This binding will make further support and refinement of the test more convenient, but for now we are faced with the task of writing the first test, so we will leave the <code>null</code> value.</p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screen</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.screens.KScreen</span>
+
+<span class="kd">object</span><span class="w"> </span><span class="nc">MainScreen</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">KScreen</span><span class="o">&lt;</span><span class="n">MainScreen</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">layoutId</span><span class="p">:</span><span class="w"> </span><span class="kt">Int?</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span>
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">viewClass</span><span class="p">:</span><span class="w"> </span><span class="n">Class</span><span class="o">&lt;*&gt;?</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Now inside the MainScreen class we will declare all the user interface elements with which the test will interact. In our case, we are only interested in the <code>SimpleTest</code> button on the main screen.</p>
+<p><img src="../images/simple_test/simple_test_button.png" alt="Override methods" width="300"/></p>
+<p>In order for the test to interact with it, you need to know the id by which this button can be found on the screen. These identifiers are assigned by a developer when writing the application.</p>
+<p>To find out what id has been assigned to some interface element, you can use the <code>LayoutInspector</code> tool built into Android Studio.</p>
+<ol>
+    <li>Launch the application</li>
+    <li>In the bottom right corner of Android Studio select Layout Inspector <img src="../images/simple_test/bottom_layout_inspector.png" alt="Find bottom layout inspector"/></li>
+    <li>Wait for the screen to load <img src="../images/simple_test/loaded_inspector.png" alt="Layout inspector loaded"/></li>
+    <li>If the screen does not load, then check that you have the desired process selected <img src="../images/simple_test/choose_process.png" alt="Choose process"/></li>
+</ol>
+
+<p>Select an item on the screen and look for its id. This is the identifier that interests us.</p>
+<p><img src="../images/simple_test/button_id_search.png" alt="Search for button id"/></p>
+<p>It is also important to understand what UI element we are working with. To do this, you can go to the layout where the element was declared and see all the information about it.</p>
+<p><img src="../images/simple_test/find_layout.png" alt="Find layout"/></p>
+<p>In this case, it's a Button element with id <code>simple_activity_btn</code></p>
+<p><img src="../images/simple_test/button_in_layout.png" alt="Find button in layout"/></p>
+<p>We can add this button to the <code>MainScreen</code>. Usually the name of the variable matches the element's id, but is written without underscores and each word except the first one is capitalized (this is called camelCase)</p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screen</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.screens.KScreen</span>
+
+<span class="kd">object</span><span class="w"> </span><span class="nc">MainScreen</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">KScreen</span><span class="o">&lt;</span><span class="n">MainScreen</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">layoutId</span><span class="p">:</span><span class="w"> </span><span class="kt">Int?</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span>
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">viewClass</span><span class="p">:</span><span class="w"> </span><span class="n">Class</span><span class="o">&lt;*&gt;?</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span>
+
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">simpleActivityButton</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+<span class="p">}</span>
+</code></pre></div>
+<p>The simpleActivityButton variable needs to be assigned a value. It represents a button that can be tested, and the class KButton is responsible for this. This is how setting the value to this variable will look like, now we will analyze in detail what this code does.</p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screen</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.screens.KScreen</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.R</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">io.github.kakaocup.kakao.text.KButton</span>
+
+<span class="kd">object</span><span class="w"> </span><span class="nc">MainScreen</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">KScreen</span><span class="o">&lt;</span><span class="n">MainScreen</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">layoutId</span><span class="p">:</span><span class="w"> </span><span class="kt">Int?</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span>
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">viewClass</span><span class="p">:</span><span class="w"> </span><span class="n">Class</span><span class="o">&lt;*&gt;?</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span>
+
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">simpleActivityButton</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">KButton</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">withId</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">simple_activity_btn</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>First, let's jump into the definition of KButton and see what it is. To do this, holding <code>ctrl</code>, click on the name of the KButton class with the left mouse button.</p>
+<p><img src="../images/simple_test/show_kbutton_source.png" alt="Find source of KButton"/></p>
+<p>We see that this is a class that inherits from KBaseView and implements the TextViewAssertions interface. We can go to the definition of KBaseView and see all the inheritors of this class, there are quite a lot of them.</p>
+<p><img src="../images/simple_test/kbaseview_children.png" alt="Find kbaseview children"/></p>
+<p>Why are they all needed?</p>
+<p>The reason is that each element of the user interface can be tested in different ways. For example, in a TextView we can check what text is currently set in it, we can set a new text, while the ProgressBar does not contain any text and it makes no sense to check what text is set in it.</p>
+<p>Therefore, depending on which interface element we are testing, we need to choose the correct implementation of KBaseView. Now we are testing a button, so we chose KButton. On the next screen, we will test the title (TextView) and input field (EditText) and select the appropriate KBaseView implementations.</p>
+<p><img src="../images/simple_test/needed_children.png" alt="Show children which we need"/></p>
+<p>Next, the test should find this button on the screen according to some criterion. In this case, we will search for an element by id, so we use the <code>withId</code> matcher, where we pass the button ID as a parameter, which we found thanks to the <code>Layout Inpector</code>.</p>
+<p>In order to specify this id, we used the R.id... syntax, where <code>R</code> is the class with all the resources of the application. Thanks to it, you can find the id of interface elements, lines that are in the project, pictures, etc. When you enter the name of this class, Android Studio should import it automatically, but sometimes this does not happen, then you need to enter this import manually.</p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.R</span>
+</code></pre></div>
+<p>That's it, now we have a model of the main screen and this model contains a button that can be tested. We can start writing the test itself.</p>
+<h2 id="add-simpleactivitytest">Add SimpleActivityTest</h2>
+<p>In the folder <code>androidTest</code> -&gt; <code>kotlin</code>, in the package we created, add the class <code>SimpleActivityTest</code>.</p>
+<p><img src="../images/simple_test/create_test_1.png" alt="Creating Test First part"/></p>
+<p><img src="../images/simple_test/create_test_2.png" alt="Creating Test Second part"/></p>
+<p>The new class was placed in the <code>screen</code> package, but we would like it to contain only screen models, so we will move the created test to the root of the <code>com.kaspersky.kaspresso.tutorial</code> package. In order to do this, right-click on the class name and select <code>Refactor</code> -&gt; <code>Move</code></p>
+<p><img src="../images/simple_test/move_to_package.png" alt="Move to another package"/></p>
+<p>And remove the last part <code>.screen</code> from the package name.</p>
+<p><img src="../images/simple_test/change_package.png" alt="Change package name"/></p>
+<p>The test class must be inherited from the <code>TestCase</code> class. Pay attention to imports, the TestCase class must be imported from the <code>import com.kaspersky.kaspresso.testcases.api.testcase.TestCase</code> package.</p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.testcases.api.testcase.TestCase</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nc">SimpleActivityTest</span><span class="p">:</span><span class="w"> </span><span class="n">TestCase</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Then we add the <code>test()</code> method, in which we will check the operation of the application. It can have any name, not necessarily "test", but it needs to be annotated with <code>@Test</code> (<code>import org.junit.Test</code>).</p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.testcases.api.testcase.TestCase</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Test</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nc">SimpleActivityTest</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">TestCase</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">test</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>The <code>SimpleActivityTest</code> test can be run. Information on how to run tests in Android Studio can be found in the <a href="https://kasperskylab.github.io/Kaspresso/Tutorial/Running_the_first_test/">previous tutorial</a>.</p>
+<p><img src="../images/simple_test/success_1.png" alt="Success passed test"/></p>
+<p>For now this test does nothing, so it succeeds. Let's add logic to it and test the MainScreen.</p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.testcases.api.testcase.TestCase</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Test</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screen.MainScreen</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nc">SimpleActivityTest</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">TestCase</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">test</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">MainScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">simpleActivityButton</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">isVisible</span><span class="p">()</span>
+<span class="w">                </span><span class="n">isClickable</span><span class="p">()</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Inside the test method, we get the MainScreen object, open the curly brackets and refer to the button that we will test, then open the curly brackets again and write all the checks here. Now, thanks to the <code>isVisible()</code> and <code>isClickable()</code> methods, we check that the button is visible and clickable. Let's launch the test. It falls.</p>
+<p><img src="../images/simple_test/test_failed_1.png" alt="Feailed test"/></p>
+<p>The probleem is that Page Object <code>MainScreen</code> refers to <code>MainActivity</code> (this is the activity that the user sees when he launches the application) and, in order for the elements to be displayed on the screen, this activity must be launched before the test is executed. In order for some kind of activity to be launched before the test, you can add the following lines:</p>
+<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="nd">@get</span><span class="p">:</span><span class="n">Rule</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">activityRule</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">activityScenarioRule</span><span class="o">&lt;</span><span class="n">MainActivity</span><span class="o">&gt;</span><span class="p">()</span>
+</code></pre></div>
+<p>This test will launch the specified <code>MainActivity</code> activity before running the test and close it after the test runs.</p>
+<p>You can read more about <code>activityScenarioRule</code> <a href="https://developer.android.com/reference/androidx/test/ext/junit/rules/ActivityScenarioRule">here</a>.</p>
+<p>Then the entire test code will look like this:</p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">androidx.test.ext.junit.rules.activityScenarioRule</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.testcases.api.testcase.TestCase</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.MainActivity</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Rule</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Test</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screen.MainScreen</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nc">SimpleActivityTest</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">TestCase</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@get</span><span class="p">:</span><span class="n">Rule</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">activityRule</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">activityScenarioRule</span><span class="o">&lt;</span><span class="n">MainActivity</span><span class="o">&gt;</span><span class="p">()</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">test</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">MainScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">simpleActivityButton</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">isVisible</span><span class="p">()</span>
+<span class="w">                </span><span class="n">isClickable</span><span class="p">()</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Launch it. Everything is fine, our test is successful, and you can see on the device that during the test the activity we need opens and closes after the run.</p>
+<p><img src="../images/simple_test/sucess_2.png" alt="Success test"/></p>
+<p>It's good practice when writing tests to make sure that the test not only passes, but also fails if the condition is not met. This way you eliminate the situation when the tests are "green", but in reality, due to some error in the code, the tests were not performed at all. Let's do this by checking that the button contains incorrect text.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nc">SimpleActivityTest</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">TestCase</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@get</span><span class="p">:</span><span class="n">Rule</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">activityRule</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">activityScenarioRule</span><span class="o">&lt;</span><span class="n">MainActivity</span><span class="o">&gt;</span><span class="p">()</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">test</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">MainScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">simpleActivityButton</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">isVisible</span><span class="p">()</span>
+<span class="w">                </span><span class="n">isClickable</span><span class="p">()</span>
+<span class="w">                </span><span class="n">containsText</span><span class="p">(</span><span class="s">&quot;Incorrect text&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>The test fails, let's change the text to the correct one.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nc">SimpleActivityTest</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">TestCase</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@get</span><span class="p">:</span><span class="n">Rule</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">activityRule</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">activityScenarioRule</span><span class="o">&lt;</span><span class="n">MainActivity</span><span class="o">&gt;</span><span class="p">()</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">test</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">MainScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">simpleActivityButton</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">isVisible</span><span class="p">()</span>
+<span class="w">                </span><span class="n">isClickable</span><span class="p">()</span>
+<span class="w">                </span><span class="n">containsText</span><span class="p">(</span><span class="s">&quot;Simple test&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>The test is successful.</p>
+<p>Now we need to test the <code>SimpleActivity</code>. We do it the same way as <code>MainScreen</code>: first, create a Page Object.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">object</span><span class="w"> </span><span class="nc">SimpleActivityScreen</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">KScreen</span><span class="o">&lt;</span><span class="n">SimpleActivityScreen</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">layoutId</span><span class="p">:</span><span class="w"> </span><span class="kt">Int?</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span>
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">viewClass</span><span class="p">:</span><span class="w"> </span><span class="n">Class</span><span class="o">&lt;*&gt;?</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Then look for id elements through the <code>Layout Inspector</code>:</p>
+<p><img src="../images/simple_test/title_inspect.png" alt="Title id in inspector"/></p>
+<p><img src="../images/simple_test/input_inspect.png" alt="Input id in inspector"/></p>
+<p><img src="../images/simple_test/button_inspect.png" alt="Button id in inspector"/></p>
+<p>Do not forget to specify correct View types: KTextView for the title, KEditText for the input field, and KButton for the button.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">object</span><span class="w"> </span><span class="nc">SimpleActivityScreen</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">KScreen</span><span class="o">&lt;</span><span class="n">SimpleActivityScreen</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">layoutId</span><span class="p">:</span><span class="w"> </span><span class="kt">Int?</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span>
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">viewClass</span><span class="p">:</span><span class="w"> </span><span class="n">Class</span><span class="o">&lt;*&gt;?</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span>
+
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">simpleTitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">KTextView</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">withId</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">simple_title</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">inputText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">KEditText</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">withId</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">input_text</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">changeTitleButton</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">KButton</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">withId</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">change_title_btn</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>And now we can test this screen. In order to go to it, on the main screen you need to click on the "Simple Test" button, so we call <code>click()</code> in the code.</p>
+<p>Add checks for this screen:</p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">androidx.test.ext.junit.rules.activityScenarioRule</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.testcases.api.testcase.TestCase</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.MainActivity</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Rule</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Test</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screen.MainScreen</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screen.SimpleActivityScreen</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nc">SimpleActivityTest</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">TestCase</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@get</span><span class="p">:</span><span class="n">Rule</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">activityRule</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">activityScenarioRule</span><span class="o">&lt;</span><span class="n">MainActivity</span><span class="o">&gt;</span><span class="p">()</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">test</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">MainScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">simpleActivityButton</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">isVisible</span><span class="p">()</span>
+<span class="w">                </span><span class="n">isClickable</span><span class="p">()</span>
+<span class="w">                </span><span class="n">click</span><span class="p">()</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">SimpleActivityScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">simpleTitle</span><span class="p">.</span><span class="na">isVisible</span><span class="p">()</span>
+<span class="w">            </span><span class="n">changeTitleButton</span><span class="p">.</span><span class="na">isClickable</span><span class="p">()</span>
+<span class="w">            </span><span class="n">simpleTitle</span><span class="p">.</span><span class="na">hasText</span><span class="p">(</span><span class="s">&quot;Default title&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="n">inputText</span><span class="p">.</span><span class="na">replaceText</span><span class="p">(</span><span class="s">&quot;new title&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="n">changeTitleButton</span><span class="p">.</span><span class="na">click</span><span class="p">()</span>
+<span class="w">            </span><span class="n">simpleTitle</span><span class="p">.</span><span class="na">hasText</span><span class="p">(</span><span class="s">&quot;new title&quot;</span><span class="p">)</span>
+
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Our first test is almost ready. The only change worth making is that we're using the hardcoded "Default title" text here. For now, the test passes successfully, but if the application is suddenly localized into different languages, then when the test is launched with the English locale, the test can pass successfully, but if we run it on a device with the Russian locale, the test will fail.</p>
+<p>So instead of hardcoding the string, we'll take it from the application's resources. In the activity's layout, we can see which line was used in this TextView.</p>
+<p><img src="../images/simple_test/find_string_in_layout.png" alt="Find string in layout"/></p>
+<p>Go to string resources (file <code>values/strings.xml</code>) and copy the string id.</p>
+<p><img src="../images/simple_test/string_in_values.png" alt="Find string in values folder"/></p>
+<p>Now in the hasText method, instead of using the "Default title" string, we use its id <code>R.string.simple_activity_default_title</code>.</p>
+<p>Don't forget to import the R resource class <code>import com.kaspersky.kaspresso.tutorial.R</code>.</p>
+<p>The final test code looks like this:</p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">androidx.test.ext.junit.rules.activityScenarioRule</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.testcases.api.testcase.TestCase</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.MainActivity</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.R</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Rule</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Test</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screen.MainScreen</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screen.SimpleActivityScreen</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nc">SimpleActivityTest</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">TestCase</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@get</span><span class="p">:</span><span class="n">Rule</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">activityRule</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">activityScenarioRule</span><span class="o">&lt;</span><span class="n">MainActivity</span><span class="o">&gt;</span><span class="p">()</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">test</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">MainScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">simpleActivityButton</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">isVisible</span><span class="p">()</span>
+<span class="w">                </span><span class="n">isClickable</span><span class="p">()</span>
+<span class="w">                </span><span class="n">click</span><span class="p">()</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">SimpleActivityScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">simpleTitle</span><span class="p">.</span><span class="na">isVisible</span><span class="p">()</span>
+<span class="w">            </span><span class="n">changeTitleButton</span><span class="p">.</span><span class="na">isClickable</span><span class="p">()</span>
+<span class="w">            </span><span class="n">simpleTitle</span><span class="p">.</span><span class="na">hasText</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">string</span><span class="p">.</span><span class="na">simple_activity_default_title</span><span class="p">)</span>
+<span class="w">            </span><span class="n">inputText</span><span class="p">.</span><span class="na">replaceText</span><span class="p">(</span><span class="s">&quot;new title&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="n">changeTitleButton</span><span class="p">.</span><span class="na">click</span><span class="p">()</span>
+<span class="w">            </span><span class="n">simpleTitle</span><span class="p">.</span><span class="na">hasText</span><span class="p">(</span><span class="s">&quot;new title&quot;</span><span class="p">)</span>
+
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h1 id="summary">Summary</h1>
+<p>In this tutorial, we have written our first Kaspresso test. In practice, we got acquainted with the PageObject approach. We learned how to get interface element IDs using the <code>Layout inspector</code>.</p>
+<p><br></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["tabs", "navigation.tabs", "content.code.annotate", "navigation.tabs.sticky", "navigation.instant", "navigation.tracking", "navigation.top", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

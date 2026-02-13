@@ -1,0 +1,2048 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://kasperskylab.github.io/Kaspresso/ru/Tutorial/Working_with_adb/">
+      
+      
+        <link rel="prev" href="../Writing_simple_test/">
+      
+      
+        <link rel="next" href="../Wifi_sample_test/">
+      
+      
+        
+          <link rel="alternate" href="/Kaspresso/en/" hreflang="en">
+        
+          <link rel="alternate" href="/Kaspresso/ru/" hreflang="ru">
+        
+      
+      
+      <link rel="icon" href="../../../kaspresso.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>4. Выполнение adb-команд - Kaspresso</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="light-blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#adb" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../" title="Kaspresso" class="md-header__button md-logo" aria-label="Kaspresso" data-md-component="logo">
+      
+  <img src="../../../kaspresso.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Kaspresso
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              4. Выполнение adb-команд
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="light-blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="Select language">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="/Kaspresso/en/" hreflang="en" class="md-select__link">
+              English
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/Kaspresso/ru/" hreflang="ru" class="md-select__link">
+              Русский
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/KasperskyLab/Kaspresso" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Kaspresso
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+  Главная
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  Туториал
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Wiki/" class="md-tabs__link">
+          
+  
+  
+  Вики
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Issues/" class="md-tabs__link">
+          
+  
+  
+  Известные проблемы
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../" title="Kaspresso" class="md-nav__button md-logo" aria-label="Kaspresso" data-md-component="logo">
+      
+  <img src="../../../kaspresso.png" alt="logo">
+
+    </a>
+    Kaspresso
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/KasperskyLab/Kaspresso" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Kaspresso
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Главная
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Главная
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    О Kaspresso
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Home/Kaspresso-in-articles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kaspresso в статьях
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Home/Kaspresso-in-videos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kaspresso в видео
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Home/Kaspresso%20users/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Наши пользователи
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Home/Breaking-changes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Критические изменения
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Home/Contribution_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Инструкция для разработчиков
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Туториал
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Туториал
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Введение
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Download_Kaspresso_project_and_Android_studio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Скачиваем проект и Android studio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Writing_simple_test/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Пишем первый автотест с Kaspresso
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Выполнение adb-команд
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Выполнение adb-команд
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#java-adb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Проверка java и adb
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#java-adb_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Настройка java и adb
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Пробуем различные команды
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adb_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Работаем с adb в автотестах
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Wifi_sample_test/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Тестирование интернет-соединения и работа с классом Device
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Steps_and_sections/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Steps and sections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Scenario/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. Вынесение дублирующихся шагов в Scenario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UiAutomator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. UiAutomator. Тестирование за рамками приложения
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../FlakySafely/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9. flakySafely
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Android_permissions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10. Работа с Android permissions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Recyclerview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11. RecyclerView
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Logger_and_screenshot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12. Логирование и скриншоты
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Screenshot_tests_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    13. Screenshot-тесты. Часть 1. Простой screenshot тест
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Screenshot_tests_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    14. Screenshot-тесты. Часть 2. Установка стейтов и работа с ViewModel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Вики
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Вики
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Введение
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Page_object_in_Kaspresso/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Паттерн PageObject в Kaspresso
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Espresso_as_the_basis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Espresso как основа
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Supported_Android_UI_elements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Поддерживаемые UI-виджеты Android
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Matchers_actions_assertions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Доступные классы Matcher, Action и Assertion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Kautomator-wrapper_over_UI_Automator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kautomator. Обертка над UI Automator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Working_with_Android_OS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Взаимодействие с ОС Android. Класс Device
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Executing_adb_commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Выполнение команд adb
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Screenshot_tests/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Скриншот тесты
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Kaspresso_configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Конфигуратор Kaspresso
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Kaspresso_Robolectric/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Запуск тестов Kaspresso на JVM с помощью Robolectric
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Kaspresso_Allure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Поддержка Allure в Kaspresso
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Jetpack_Compose/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Поддержка Compose в Kaspresso
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Известные проблемы
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Известные проблемы
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Нашли проблему?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Issues/Storage_issue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Работа с файлами
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#java-adb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Проверка java и adb
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#java-adb_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Настройка java и adb
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Пробуем различные команды
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adb_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Работаем с adb в автотестах
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="adb">Выполнение комманд adb</h1>
+<p>В прошлом уроке мы написали первый тест на Kaspresso, и на данном этапе наш тест умеет взаимодействовать с элементами интерфейса приложения, может на них каким-то образом воздействовать (например, клик по кнопке) и проверять их состояние (видимость, кликабельность и т.д.).</p>
+<p>Но часто бывают случаи, когда для тестирования недостаточно использовать возможности только нашего приложения. Например, проверить работу приложения в различных внешних состояниях:</p>
+<ul>
+    <li>При отсутствии интернета</li>
+    <li>Во время входящего звонка</li>
+    <li>При низком уровне заряда телефона</li>
+    <li>При смене ориентации устройства</li>
+    <li>И т.д.</li>
+</ul>
+
+<p>Во всех перечисленных сценариях тест должен управлять устройством и выполнять команды, которые находятся вне зоны ответственности приложения, которое мы тестируем. В этих случаях мы можем использовать возможности <code>Android Debug Bridge</code> (<code>ADB</code>).</p>
+<p><code>ADB</code> - это инструмент командной строки, который позволяет взаимодействовать с девайсом посредством различных команд. С их помощью вы можете выполнять такие действия, как установка и удаление программ, получение списка установленных приложений, запуск определенной Activity, отключение интернет-соединения и многое другое. </p>
+<p>Все adb команды мы можем выполнять сами через командную строку, при этом библиотека Kaspresso поддерживает работу с adb и может выполнять их в автоматическом режиме. Для того, чтобы тесты, которые работают с adb, могли выполняться, необходимо запустить adb-server.</p>
+<h2 id="java-adb">Проверка java и adb</h2>
+<p>Процесс запуска adb-server очень простой, если на вашем компьютере корректно прописаны пути к java и adb. Но если пути не прописаны, то придется их прописывать. Поэтому первое, что мы сделаем - проверим, требуется ли какая-то дополнительная работа или у вас и так все готово для запуска adb-server.</p>
+<p>Откройте командную строку. </p>
+<p>На Windows - комбинация клавиш <code>Win + R</code>, в открывшемся окне вводим <code>cmd</code> и нажимаем <code>Enter</code>.</p>
+<p><img src="../images/adb_lesson/windows_cmd_open_1.png" alt="Open cmd on windows 1"/></p>
+<p><img src="../images/adb_lesson/windows_cmd_open_2.png" alt="Open cmd on windows 2"/></p>
+<p>Сначала проверяем, что путь к java прописан корректно. Для этого пишем <code>java -version</code>.</p>
+<p>Если все хорошо, то вы увидите вашу версию Java.</p>
+<p><img src="../images/adb_lesson/java_version_success.png" alt="Java version showed"/></p>
+<p>Если же пути прописаны некорректно, то вы увидите что-то похожее на это:</p>
+<p><img src="../images/adb_lesson/java_version_failed.png" alt="Java version failed"/></p>
+<p>Теперь делаем такую же проверку для adb. Печатаем в консоли <code>adb version</code>.</p>
+<p>Если все хорошо, то вы увидите вашу версию ADB.</p>
+<p><img src="../images/adb_lesson/adb_version_success.png" alt="Adb version success"/></p>
+<p>В противном случае вы увидите примерно вот такую ошибку:</p>
+<p><img src="../images/adb_lesson/adb_version_failed.png" alt="Adb version failed"/></p>
+<p>Если по обоим пунктам у вас все работает, то следующий шаг можете пропустить.</p>
+<h2 id="java-adb_1">Настройка java и adb</h2>
+<p>Решение возникших проблем может отличаться в зависимости от вашей операционной системы и некоторых других факторов, поэтому мы здесь приведем самый популярный вариант решения для OS Windows. Если у вас другая ОС либо по какой-то причине данное решение вам не поможет, то поищите информацию в интернете, как сделать приведенные ниже действия в вашей ситуации. Не решив этих проблем, запустить adb-server не получится и тесты работать не будут.</p>
+<p>Если вы дошли до этого урока, значит успешно запустили приложение из Android Studio на эмуляторе, а это значит, что java и adb на вашем компьютере установлены. Просто система не знает, где искать эти программы. Что нужно сделать - найти расположение этих программ и прописать в системе пути к ним.</p>
+<p>Ищем путь к java, обычно она находится в папке <code>jre\bin</code> (в некоторых версиях она будет находится в <code>jbr\bin</code>). Часто ее можно найти по пути <code>C:\Program Files\Java\jre1.8.0\bin</code>. </p>
+<p>Если нашли - копируйте этот путь, если нет - открывайте Android Studio. Переходите в <code>File</code> -&gt; <code>Settings</code> -&gt; <code>Build, Execution, Deployment</code> -&gt; <code>Build Tools</code> -&gt; <code>Gradle</code>.</p>
+<p><img src="../images/adb_lesson/jdk_in_android_studio.png" alt="Show jsdk path in android studio"/></p>
+<p>Тут будет прописан путь к нужной папке - скопируйте его.</p>
+<p>Теперь его нужно прописать в переменных среды, для этого кликаем <code>win + x</code> -&gt; выбираем <code>System</code> -&gt; <code>Advanced System Settings</code> -&gt; <code>Advanced</code> -&gt; <code>Environment Variables</code>.</p>
+<p><img src="../images/adb_lesson/system_variables.png" alt="Show system variables" /></p>
+<p>В разделе <code>System Variables</code> выбираем <code>Path</code> и нажимаем <code>Edit</code> -&gt; <code>New</code> -&gt; Вставляем скопированный путь к папке с <code>java</code> -&gt; Нажимаем <code>OK</code>.</p>
+<p><img src="../images/adb_lesson/bin_path.png" alt="Java bin path"/>                                                      </p>
+<p>Перезапускаем компьютер, чтобы изменения вступили в силу и снова проверяем команду <code>java -version</code>.</p>
+<p><img src="../images/adb_lesson/java_version_success.png" alt="Java version success"/>     </p>
+<p>Нам осталось проделать все то же самое для adb. Ищем путь к папке <code>platform-tools</code>, в которой лежит <code>adb</code>.</p>
+<p>Открываем <code>Android Studio</code> -&gt; <code>Tools</code> -&gt; <code>SDK Manager</code>. В поле <code>Android SDK Location</code> указан путь к папке <code>Sdk</code>, в которой находится <code>platform-tools</code>.</p>
+<p>Копируем этот путь и добавляем в <code>System Variables</code>, как мы это делали ранее с <code>java</code>.</p>
+<p><img src="../images/adb_lesson/adb_path.png" alt="Adb path"/>     </p>
+<p>Перезапускаем компьютер и проверяем команду <code>adb version</code>.</p>
+<p><img src="../images/adb_lesson/adb_version_success.png" alt="Adb version success"/>   </p>
+<p>Теперь можем приступить к запуску adb-server. Если у вас все еще команды <code>java</code> и <code>adb</code> не работают, то погуглите, вариантов решения проблемы достаточно много. Все, что нужно сделать - найти путь к java и adb и прописать их в переменные среды.</p>
+<h2 id="_1">Пробуем различные команды</h2>
+<p>Перед запуском тестов, давайте посмотрим, что можно сделать с помощью adb, рассмотрим несколько команд.</p>
+<p>Во-первых, можем посмотреть, какие устройства сейчас подключены к adb. Для этого вводим команду <code>adb devices</code>.</p>
+<p><img src="../images/adb_lesson/empty_devices_list.png" alt="Empty devices list"/>   </p>
+<p>Сейчас мы не подключили никакое устройство к adb, поэтому список пустой, давайте запустим приложение на эмуляторе и выполним команду еще раз.</p>
+<p><img src="../images/adb_lesson/devices_list.png" alt="Devices list"/>   </p>
+<p>Теперь в списке устройств отображается наш эмулятор.</p>
+<p>С помощью adb-команд мы можем:</p>
+<ul>
+    <li>Перезагрузить устройство</li>
+    <li>Установить какое-то приложение</li>
+    <li>Удалить приложение</li>
+    <li>Загрузить файлы с телефона/на телефон</li>
+    <li>И многое другое</li>
+</ul>
+
+<p>Для практики давайте удалим приложение tutorial, которое мы только что запустили. Это делается при помощи команды <code>adb uninstall package_name</code></p>
+<p><img src="../images/adb_lesson/uninstall_app.png" alt="Uninstall app"/>   </p>
+<p>Наиболее интересные задачи можно выполнять, если запустить команду <code>adb shell</code>. Она вызывает консоль Android (<code>shell</code>) для выполнения Linux-команд на устройстве. </p>
+<p><img src="../images/adb_lesson/open_shell_console.png" alt="Open shell console"/>   </p>
+<p>Приведем несколько примеров таких команд.</p>
+<p>Получение списка всех установленных приложений <code>pm list packages</code>.</p>
+<p><img src="../images/adb_lesson/list_packages.png" alt="List packages"/>   </p>
+<p>Обратите внимание, что мы сначала запустили shell-консоль, а потом писали команды, уже находясь в ней. Поэтому на текущем этапе другие adb команды у вас работать не будут, пока вы не закроете shell-консоль через команду exit.</p>
+<p><img src="../images/adb_lesson/exit_shell_console.png" alt="Exit shell console"/> </p>
+<p>При этом выполнять shell-команды можно и не открывая shell-консоль, для этого достаточно указывать полное наименование команды вместе с <code>adb shell</code>. Например, давайте попробуем сделать скриншот и сохраним его на устройстве. В Android Studio можно открыть File Explorer, в котором отображаются все файлы и папки на девайсе. </p>
+<p><img src="../images/adb_lesson/device_file_explorer.png" alt="Device file explorer"/> </p>
+<p>Обычно скришоты сохраняют на sdcard, мы поступим так же. </p>
+<p>Для создания скриншота используется команда <code>adb shell screencap /{pathToFile}/{name_of_image.png}</code>. В нашем случае она будет выглядеть так: <code>adb shell screencap /sdcard/my_screen.png</code>.</p>
+<p><img src="../images/adb_lesson/create_screenshot.png" alt="Create screenshot"/> </p>
+<p>В <code>Device File Explorer</code> кликаем правой кнопкой мыши и нажимаем <code>Synchronize</code>, после чего в папке отобразится созданный нами скриншот.</p>
+<p><img src="../images/adb_lesson/success_screen.png" alt="Success screenshot"/> </p>
+<h2 id="adb_1">Работаем с adb в автотестах</h2>
+<p>Итак, мы немного попрактиковались в работе с adb, теперь нам нужно научиться работать с ним во время прогона теста. То есть тест, который мы создадим, должен уметь запускать adb-команды и проверять работу приложения после выполнения этих команд.</p>
+<p>Для того чтобы тесты могли выполнять adb-команды, необходимо на нашем компьютере запустить adb-server. Сперва нужно скачать файл <code>adbserver-desktop.jar</code> на официальном гитхабе <a href="https://github.com/KasperskyLab/Kaspresso/blob/master/artifacts/adbserver-desktop.jar">Kaspresso</a> и выполнить следующую команду в терминале:</p>
+<div class="highlight"><pre><span></span><code><span class="n">java</span><span class="w"> </span><span class="o">-</span><span class="n">jar</span><span class="w"> </span><span class="o">&lt;</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">file</span><span class="o">&gt;/</span><span class="n">adbserver</span><span class="o">-</span><span class="n">desktop</span><span class="p">.</span><span class="na">jar</span>
+</code></pre></div>
+<p>Для того, чтобы в консоли был корректно прописан путь к файлу, достаточно написать команду <code>java -jar</code> и просто перетянуть файл <code>adbserver-desctop.jar</code> в консоль, путь к файлу будет подставлен автоматически.</p>
+<p><img src="../images/adb_lesson/drag_server.png" alt="Drag server"/> </p>
+<p>После ввода команды, нажмите <code>Enter</code>. Запустится AdbServer. При запуске теста девайс сообщит десктопу необходимые для выполнения теста adb команды.</p>
+<p><img src="../images/adb_lesson/launch_server.png" alt="Launch Server"/> </p>
+<p>Можем приступить к созданию автотеста. </p>
+<p>В пакете <code>com.kaspersky.kaspresso.tutorial</code> создаем новый класс <code>AdbTest</code> и наследуемся от класса <code>TestCase</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.testcases.api.testcase.TestCase</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nc">AdbTest</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">TestCase</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>В Kaspresso для работы с adb есть специальная абстракция <code>AdbServer</code>. Экземпляр этого класса доступен в <code>BaseTestContext</code> и в <code>BaseTestCase</code>, наследником которого является наш класс <code>AdbTest</code>.</p>
+<p>Ранее в консоли мы запускали команду <code>adb devices</code>, которая выводила список подключенных устройств. Давайте запустим эту же команду при помощи теста. Создаем метод <code>test()</code> и помечаем аннотацией <code>@Test</code>.</p>
+<p><div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.testcases.api.testcase.TestCase</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Test</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nc">AdbTest</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">TestCase</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">test</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+Чтобы выполнить adb-команду, мы можем напрямую обратиться к полю <code>adbServer</code> и вызвать один из методов - <code>performAdb</code>, <code>performCmd</code> или <code>performShell</code>. По названиям методов должно быть понятно, что они делают.</p>
+<ul>
+    <li>`performAdb` выполняет команду adb</li>
+    <li>`performShell` выполняет команду shell</li>
+    <li>`performCmd` выполняет команду командной строки</li>
+</ul>
+
+<p>Сейчас мы хотим вызвать adb команду <code>devices</code>, вызываем соответствующий метод <code>adbServer.performAdb("devices")</code>.</p>
+<p><div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.testcases.api.testcase.TestCase</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Test</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nc">AdbTest</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">TestCase</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">test</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">adbServer</span><span class="p">.</span><span class="na">performAdb</span><span class="p">(</span><span class="s">&quot;devices&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+Запускаем тест. Тест выполнен успешно. Обращаем ваше внимание, что для запуска этого теста у вас должны быть выполнены 2 условия:</p>
+<ol>
+    <li>Запущен adb-server</li>
+    <li>В манифесте приложения, которое вы тестируете, должно быть выдано разрешение на использование интернета</li>
+</ol>
+
+<p>С первым пунктом мы разобрались раньше, сейчас давайте разберемся со вторым. Каждое приложение, которое взаимодействует с интернетом, должно содержать разрешение на использование интернета. Оно прописывается в манифесте.</p>
+<p><img src="../images/adb_lesson/manifest_location.png" alt="Manifest Location"/> </p>
+<p>Если вы забудете указать это разрешение, тест работать не будет.</p>
+<p>Сейчас тест запускает adb-команду, но не проверяет результат ее выполнения. Данная команда <code>adb devices</code> возвращает список строк с результатом (тип <code>List&lt;String&gt;</code>). На данный момент эта коллекция (список строк) содержит всего одну строку вот такого вида: <code>exitCode=0, message=List of devices attached  emulator-5555 device</code>. Давайте добавим проверку, что первый (и единственный) элемент этой коллекции содержит слово "emulator". Просто для того, чтобы попрактиковаться и убедиться, что мы корректно получаем результат выполнения команды adb.</p>
+<p><div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.testcases.api.testcase.TestCase</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Assert</span><span class="w"> </span><span class="c1">// Этот класс нужно импортировать</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Test</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nc">AdbTest</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">TestCase</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">test</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">adbServer</span><span class="p">.</span><span class="na">performAdb</span><span class="p">(</span><span class="s">&quot;devices&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="n">Assert</span><span class="p">.</span><span class="na">assertTrue</span><span class="p">(</span><span class="w"> </span><span class="c1">// Для проверки на то, что какое-то условие выполняется, можно воспользоваться методом Assert.assertTrue(), обратите внимание на импорты</span>
+<span class="w">            </span><span class="n">Assert</span><span class="p">.</span><span class="na">assertTrue</span><span class="p">(</span><span class="s">&quot;emulator&quot;</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="na">first</span><span class="p">())</span><span class="w"> </span><span class="c1">//тут метод in проверяет, что в ответе (первый элемент из списка result) содержит слово &quot;emulator&quot;</span>
+<span class="w">        </span><span class="p">)</span><span class="w"> </span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+Запускаем. Тест проходит успешно.</p>
+<p>Теперь давайте попробуем выполнить несуществующую adb команду. Сначала посмотрим, как ее выполнение выглядит в терминале. Выполним <code>adb undefined_command</code>.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Обращаем ваше внимание, что в терминале сейчас запущен adb-server, если мы хотим работать с командной строкой, пока запущен сервер, нужно запустить еще одно окно терминала и работать в нем</p>
+</div>
+<p><img src="../images/adb_lesson/undefined_command.png" alt="Undefined command"/> </p>
+<p>При выполнении этой команды внутри теста у нас будет брошено исключение <code>AdbServerException</code> и в поле message будет содержаться строка с текстом, который мы видели в консоли: <code>unknown command undefined_command</code>. Чтобы тест не завершился с ошибкой, нам нужно обработать это исключение в блоке <code>try catch</code> и внутри блока <code>catch</code> можем добавить проверку, что сообщение об ошибке действительно содержит текст, указанный выше.</p>
+<p><div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.internal.exceptions.AdbServerException</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.testcases.api.testcase.TestCase</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Assert</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Test</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nc">AdbTest</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">TestCase</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">test</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">adbServer</span><span class="p">.</span><span class="na">performAdb</span><span class="p">(</span><span class="s">&quot;devices&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="n">Assert</span><span class="p">.</span><span class="na">assertTrue</span><span class="p">(</span><span class="s">&quot;emulator&quot;</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="na">first</span><span class="p">())</span>
+
+<span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">command</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;undefined_command&quot;</span>
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">adbServer</span><span class="p">.</span><span class="na">performAdb</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">e</span><span class="p">:</span><span class="w"> </span><span class="n">AdbServerException</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">Assert</span><span class="p">.</span><span class="na">assertTrue</span><span class="p">(</span><span class="s">&quot;unknown command </span><span class="si">$</span><span class="n">command</span><span class="s">&quot;</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="na">message</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+Запускаем. Тест пройден успешно.</p>
+<p>Мы научились запускать adb-команды внутри тестов. Давайте попрактикуемся в adb shell командах. Ранее мы получали список установленных приложений при помощи запроса вида <code>adb shell pm list packages</code>. Сейчас мы выполним его внутри теста и проверим, что наше приложение находится в списке установленных.</p>
+<p><div class="highlight"><pre><span></span><code><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">packages</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">adbServer</span><span class="p">.</span><span class="na">performShell</span><span class="p">(</span><span class="s">&quot;pm list packages&quot;</span><span class="p">)</span>
+<span class="w"> </span><span class="n">Assert</span><span class="p">.</span><span class="na">assertTrue</span><span class="p">(</span><span class="s">&quot;com.kaspersky.kaspresso.tutorial&quot;</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">packages</span><span class="p">.</span><span class="na">first</span><span class="p">())</span>
+</code></pre></div>
+Обратите внимание, что если мы вызываем shell-команду при помощи <code>performShell</code>, то писать <code>adb shell</code> не нужно.</p>
+<p>Сейчас мы захардкодили имя пакета приложения, но есть способ гораздо удобнее, внутри тестов мы можем взаимодействовать с объектом Device, получать какую-то информацию об устройстве, текущем приложении и многое другое. Из этого объекта мы можем получить название пакета текущего приложения. Для этого у объекта <code>device</code> нужно обратиться к свойству <code>targetContext</code> и у контекста получить <code>packageName</code>. Код теста в этом случае изменится на такой:</p>
+<p><div class="highlight"><pre><span></span><code><span class="p">...</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">packages</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">adbServer</span><span class="p">.</span><span class="na">performShell</span><span class="p">(</span><span class="s">&quot;pm list packages&quot;</span><span class="p">)</span>
+<span class="n">Assert</span><span class="p">.</span><span class="na">assertTrue</span><span class="p">(</span><span class="n">device</span><span class="p">.</span><span class="na">targetContext</span><span class="p">.</span><span class="na">packageName</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">packages</span><span class="p">.</span><span class="na">first</span><span class="p">())</span>
+<span class="p">...</span>
+</code></pre></div>
+Запускаем. Тест пройден успешно.</p>
+<p>Последний тип команд, которые мы рассмотрим в этом уроке - команды cmd. Это те команды, которые мы пишем в консоли. Например, чтобы запустить adb-команду, мы в консоли пишем <code>adb command_name</code>. Теперь, если мы в тесте вместо <code>performAdb</code> вызовем <code>performCmd</code>, то нам нужно будет написать команду целиком:</p>
+<p><div class="highlight"><pre><span></span><code><span class="kd">val</span><span class="w"> </span><span class="nv">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">adbServer</span><span class="p">.</span><span class="na">performCmd</span><span class="p">(</span><span class="s">&quot;adb devices&quot;</span><span class="p">)</span>
+<span class="n">Assert</span><span class="p">.</span><span class="na">assertTrue</span><span class="p">(</span><span class="s">&quot;emulator&quot;</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="na">first</span><span class="p">())</span>
+</code></pre></div>
+В этом случае результат работы программы не изменится. </p>
+<p>Для практики можем выполнить какую-нибудь cmd-команду. Например, <code>hostname</code> выводит название хоста (вашего компьютера). Если мы запустим ее в консоли, то результат будет примерно следующим:</p>
+<p><img src="../images/adb_lesson/hostname.png" alt="Hostname"/> </p>
+<p>Давайте эту же команду выполним внутри теста и проверим, что результат не пустой.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">val</span><span class="w"> </span><span class="nv">hostname</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">adbServer</span><span class="p">.</span><span class="na">performCmd</span><span class="p">(</span><span class="s">&quot;hostname&quot;</span><span class="p">)</span>
+<span class="n">Assert</span><span class="p">.</span><span class="na">assertTrue</span><span class="p">(</span><span class="n">hostname</span><span class="p">.</span><span class="na">isNotEmpty</span><span class="p">())</span>
+</code></pre></div>
+<p>Запускаем. Тест пройден успешно.</p>
+<p>Один из тестов, который мы добавили, проверяет, что в списке подключенных устройств есть эмулятор.</p>
+<p><div class="highlight"><pre><span></span><code><span class="kd">val</span><span class="w"> </span><span class="nv">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">adbServer</span><span class="p">.</span><span class="na">performCmd</span><span class="p">(</span><span class="s">&quot;adb devices&quot;</span><span class="p">)</span>
+<span class="n">Assert</span><span class="p">.</span><span class="na">assertTrue</span><span class="p">(</span><span class="s">&quot;emulator&quot;</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="na">first</span><span class="p">())</span>
+</code></pre></div>
+Мы его добавили только в целях ознакомления, и чтобы попрактиковаться с различными командами. Реальные тесты могут запускаться как на эмуляторах, так и на реальных устройствах, и тесты не должны из-за этого падать, поэтому данный тест мы удалим. Итоговый код <code>AdbTest</code> будет выглядеть следующим образом:</p>
+<p><div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.internal.exceptions.AdbServerException</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.testcases.api.testcase.TestCase</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Assert</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Test</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nc">AdbTest</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">TestCase</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">test</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">command</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;undefined_command&quot;</span>
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">adbServer</span><span class="p">.</span><span class="na">performAdb</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">e</span><span class="p">:</span><span class="w"> </span><span class="n">AdbServerException</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">Assert</span><span class="p">.</span><span class="na">assertTrue</span><span class="p">(</span><span class="s">&quot;unknown command </span><span class="si">$</span><span class="n">command</span><span class="s">&quot;</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="na">message</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">packages</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">adbServer</span><span class="p">.</span><span class="na">performShell</span><span class="p">(</span><span class="s">&quot;pm list packages&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="n">Assert</span><span class="p">.</span><span class="na">assertTrue</span><span class="p">(</span><span class="n">device</span><span class="p">.</span><span class="na">targetContext</span><span class="p">.</span><span class="na">packageName</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">packages</span><span class="p">.</span><span class="na">first</span><span class="p">())</span>
+
+<span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">hostname</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">adbServer</span><span class="p">.</span><span class="na">performCmd</span><span class="p">(</span><span class="s">&quot;hostname&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="n">Assert</span><span class="p">.</span><span class="na">assertTrue</span><span class="p">(</span><span class="n">hostname</span><span class="p">.</span><span class="na">isNotEmpty</span><span class="p">())</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<br>
+<br></p>
+<h1 id="_2">Итог</h1>
+<p>В этом уроке мы узнали, что такое <code>adb</code>, настроили работу <code>adb-server</code>, научились выполнять различные типы команд (<code>cmd</code>, <code>adb</code>, <code>shell</code>) в консоли и в автотестах, а также узнали про объект <code>Device</code>, у которого мы можем получать различную информацию об устройстве и приложении, которое мы тестируем.
+<br>
+<br></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["tabs", "navigation.tabs", "content.code.annotate", "navigation.tabs.sticky", "navigation.instant", "navigation.tracking", "navigation.top", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

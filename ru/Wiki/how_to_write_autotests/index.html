@@ -1,0 +1,2249 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://kasperskylab.github.io/Kaspresso/ru/Wiki/how_to_write_autotests/">
+      
+      
+      
+      
+        
+          <link rel="alternate" href="/Kaspresso/en/" hreflang="en">
+        
+          <link rel="alternate" href="/Kaspresso/ru/" hreflang="ru">
+        
+      
+      
+      <link rel="icon" href="../../../kaspresso.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>How to write autotests - Kaspresso</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="light-blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#how-to-write-autotests" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../" title="Kaspresso" class="md-header__button md-logo" aria-label="Kaspresso" data-md-component="logo">
+      
+  <img src="../../../kaspresso.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Kaspresso
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              How to write autotests
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="light-blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="Select language">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="/Kaspresso/en/" hreflang="en" class="md-select__link">
+              English
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/Kaspresso/ru/" hreflang="ru" class="md-select__link">
+              Русский
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/KasperskyLab/Kaspresso" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Kaspresso
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+  Главная
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Tutorial/" class="md-tabs__link">
+          
+  
+  
+  Туториал
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  Вики
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Issues/" class="md-tabs__link">
+          
+  
+  
+  Известные проблемы
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../" title="Kaspresso" class="md-nav__button md-logo" aria-label="Kaspresso" data-md-component="logo">
+      
+  <img src="../../../kaspresso.png" alt="logo">
+
+    </a>
+    Kaspresso
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/KasperskyLab/Kaspresso" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Kaspresso
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Главная
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Главная
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    О Kaspresso
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Home/Kaspresso-in-articles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kaspresso в статьях
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Home/Kaspresso-in-videos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kaspresso в видео
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Home/Kaspresso%20users/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Наши пользователи
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Home/Breaking-changes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Критические изменения
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Home/Contribution_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Инструкция для разработчиков
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Туториал
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Туториал
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tutorial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Введение
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tutorial/Download_Kaspresso_project_and_Android_studio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Скачиваем проект и Android studio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tutorial/Writing_simple_test/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Пишем первый автотест с Kaspresso
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tutorial/Working_with_adb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Выполнение adb-команд
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tutorial/Wifi_sample_test/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Тестирование интернет-соединения и работа с классом Device
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tutorial/Steps_and_sections/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Steps and sections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tutorial/Scenario/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. Вынесение дублирующихся шагов в Scenario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tutorial/UiAutomator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. UiAutomator. Тестирование за рамками приложения
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tutorial/FlakySafely/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9. flakySafely
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tutorial/Android_permissions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10. Работа с Android permissions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tutorial/Recyclerview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11. RecyclerView
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tutorial/Logger_and_screenshot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12. Логирование и скриншоты
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tutorial/Screenshot_tests_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    13. Screenshot-тесты. Часть 1. Простой screenshot тест
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tutorial/Screenshot_tests_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    14. Screenshot-тесты. Часть 2. Установка стейтов и работа с ViewModel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Вики
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Вики
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Введение
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Page_object_in_Kaspresso/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Паттерн PageObject в Kaspresso
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Espresso_as_the_basis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Espresso как основа
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Supported_Android_UI_elements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Поддерживаемые UI-виджеты Android
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Matchers_actions_assertions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Доступные классы Matcher, Action и Assertion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Kautomator-wrapper_over_UI_Automator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kautomator. Обертка над UI Automator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Working_with_Android_OS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Взаимодействие с ОС Android. Класс Device
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Executing_adb_commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Выполнение команд adb
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Screenshot_tests/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Скриншот тесты
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Kaspresso_configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Конфигуратор Kaspresso
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Kaspresso_Robolectric/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Запуск тестов Kaspresso на JVM с помощью Robolectric
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Kaspresso_Allure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Поддержка Allure в Kaspresso
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Jetpack_Compose/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Поддержка Compose в Kaspresso
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Известные проблемы
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Известные проблемы
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Нашли проблему?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Issues/Storage_issue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Работа с файлами
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#abstractions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Abstractions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Abstractions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-many-abstractions-can-you-have-in-your-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How many abstractions can you have in your tests?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-determine-whether-view-fragment-dialog-anything-in-the-project-has-its-description-in-some-kakao-screen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to determine whether View (fragment, dialog, anything) in the project has its description in some Kakao Screen?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#is-it-ok-that-your-po-contains-helper-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Is it ok that your PO contains helper methods?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#can-screen-contain-inner-state-or-logic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Can Screen contain inner state or logic?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#assert-help-methods-inside-of-po-is-it-ok" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assert help methods inside of PO. Is it ok?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#test-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Test structure
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Test structure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#test-and-test-case-correlation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Test and Test-case correlation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#beforeafter-state-of-a-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Before/after state of a test
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-structure_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Test structure
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-data-for-the-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Test data for the test
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#available-test-dsl-forms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Available Test DSL forms
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sweet-additional-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sweet additional features
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Sweet additional features">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#some-words-about-basetestcontext-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Some words about BaseTestContext method
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flakysafely" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        flakySafely
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#continuously" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        continuously
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        compose
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="compose">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        data
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testassistants" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        testAssistants
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="how-to-write-autotests">How to write autotests</h1>
+<p>Anyone who starts to write UI-tests is facing with a problem of how to write UI-tests correctly.
+At the beginning of our great way, we had three absolutely different UI-test code styles from four developers. It was amazing.
+At that moment, we decided to do something to prevent it. <br>
+That's why we have created rules on how to write UI-tests and we have tried to make Kaspresso helping to follow these rules. All rules are divided into two groups: abstractions and structure. Also, we have added a third part containing convenient things resolving the most common problems.</p>
+<h3 id="abstractions">Abstractions</h3>
+<h4 id="how-many-abstractions-can-you-have-in-your-tests">How many abstractions can you have in your tests?</h4>
+<p>Only one! It's a page object (PO), the term explained well by Martin Fowler in <a href="https://martinfowler.com/bliki/PageObject.html">this article</a>. <br>
+In Kakao a <code>Screen</code> class (in Kautomator a <code>UiScreen</code>) is the implementation of PO. Each screen visible by the user even a simple dialog is a separate PO. <br>
+Yes, there are cases when you need new abstraction and it's ok. But our advice is to think well before you introduce new abstraction.</p>
+<h4 id="how-to-determine-whether-view-fragment-dialog-anything-in-the-project-has-its-description-in-some-kakao-screen">How to determine whether View (fragment, dialog, anything) in the project has its description in some Kakao <code>Screen</code>?</h4>
+<p>In a big project with a lot of UI-tests, it's not an easy challenge.
+That's why we have implemented an extended version of the Kakao <code>Screen</code> - <code>KScreen</code> (<a href="../kaspresso/src/main/kotlin/com/kaspersky/kaspresso/screens/KScreen.kt">KScreen</a>). In <code>KScreen</code> you have to implement two properties: <code>layoutId</code> and <code>viewClass</code>. So your search if the View has its description in some Kakao <code>Screen</code> becomes easier. <br>
+In Kautomator, there is general <code>UiScreen</code>(<a href="../kautomator/src/main/kotlin/com/kaspersky/components/kautomator/screen/UiScreen.kt">UiScreen</a>) that has an obligatory field - <code>packageName</code>.</p>
+<h4 id="is-it-ok-that-your-po-contains-helper-methods">Is it ok that your PO contains helper methods?</h4>
+<p>If these methods help to understand what the test is doing then it's ok. <br>
+For example, compare two parts of code:
+<div class="highlight"><pre><span></span><code><span class="n">MainScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">shieldView</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">click</span><span class="p">()</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+and
+<div class="highlight"><pre><span></span><code><span class="n">MainScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">navigateToTasksScreen</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="kd">object</span><span class="w"> </span><span class="nc">MainScreen</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">KScreen</span><span class="o">&lt;</span><span class="n">MainScreen</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//...</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">navigateToTasksScreen</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">shieldView</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">click</span><span class="p">()</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">//...</span>
+<span class="p">}</span>
+</code></pre></div>
+I am sure that method <code>navigateToTasksScreen()</code> is more "talking" than the simple click on some <code>shieldView</code>. <br></p>
+<h4 id="can-screen-contain-inner-state-or-logic">Can <code>Screen</code> contain inner state or logic?</h4>
+<p>No! PO doesn't have any inner state or logic. It's only a description of the UI of concrete View.</p>
+<h4 id="assert-help-methods-inside-of-po-is-it-ok">Assert help methods inside of PO. Is it ok?</h4>
+<p>We think it's ok because it simplifies the code and puts all info that is about Screen into one class.
+The chosen approach doesn't lead to an uncontrolled grow of class size because even a dialog is a separate <code>Screen</code>, so we don't have a huge <code>Screen</code> describing half of all UI in the app. <br>
+Just compare three parts of code executing the same thing:
+<div class="highlight"><pre><span></span><code><span class="n">ReportsScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">assertQuarantinedDetectsCountAfterScan</span><span class="p">(</span><span class="m">0</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">ReportsScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">reportsListView</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">childAt</span><span class="o">&lt;</span><span class="n">ReportsScreen</span><span class="p">.</span><span class="na">ReportsItem</span><span class="o">&gt;</span><span class="p">(</span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">body</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">containsText</span><span class="p">(</span><span class="s">&quot;Detected: 0&quot;</span><span class="p">)</span>
+<span class="w">                </span><span class="n">containsText</span><span class="p">(</span><span class="s">&quot;Quarantined: 0&quot;</span><span class="p">)</span>
+<span class="w">                </span><span class="n">containsText</span><span class="p">(</span><span class="s">&quot;Deleted: 0&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">ReportsScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">detectsCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getDetectsCountAfterScan</span><span class="p">()</span>
+<span class="w">    </span><span class="n">ReportsScreenAssertions</span><span class="p">.</span><span class="na">assertQuarantinedDetectsCountAfterScan</span><span class="p">(</span>
+<span class="w">        </span><span class="n">detectsCount</span>
+<span class="w">    </span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+We prefer the first variant. But we follow the next naming convention of such methods: <code>assert&lt;YourCheckName&gt;</code>.</p>
+<h3 id="test-structure">Test structure</h3>
+<h4 id="test-and-test-case-correlation">Test and Test-case correlation</h4>
+<p>First of all, let's consider the above-mentioned terms. <br>
+<strong>Test-case</strong> is a scenario written in human language by a tester to check some feature. <br>
+<strong>Test</strong> is an implementation of <strong>Test-case</strong> written in program language by developer/autotester. <br>
+Terms were learned. Let's observe some test:
+<div class="highlight"><pre><span></span><code><span class="nd">@Test</span>
+<span class="kd">fun</span><span class="w"> </span><span class="nf">test</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">MainScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">nextButton</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">isVisible</span><span class="p">()</span>
+<span class="w">            </span><span class="n">click</span><span class="p">()</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">SimpleScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">button1</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">click</span><span class="p">()</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">button2</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">isVisible</span><span class="p">()</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">SimpleScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">button2</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">click</span><span class="p">()</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">edit</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">attempt</span><span class="p">(</span><span class="n">timeoutMs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">7000</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">isVisible</span><span class="p">()</span><span class="w"> </span><span class="p">}</span>
+<span class="w">            </span><span class="n">hasText</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">string</span><span class="p">.</span><span class="na">text_edit_text</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+Not bad. But can you correlate this code with the test-case easy?
+No, you need to read the code of the test and the text of the test-case very attentively. It's not comfortable. <br>
+So we want to have a structure of the test that would suggest what step of the test-case we are looking at in the particular area of the test.</p>
+<h4 id="beforeafter-state-of-a-test">Before/after state of a test</h4>
+<p>Sometimes you have to change the state of a device (edit contacts, phones, put files into storage and more) while you are running a test. <br>
+What to do with a changed state? There are two variants:
+1. Create a universal method that sets a device to a consistent state.
+2. Clean the state after each test.</p>
+<p>The first approach doesn't look like a safe case because you need to remember about all the tests in one huge method. <br>
+That's why we prefer the second approach. But it would be nice if the structure of a test forced us to remember about a state.</p>
+<h4 id="test-structure_1">Test structure</h4>
+<p>All of the above mentioned inspired us to create the test's structure like below:
+<div class="highlight"><pre><span></span><code><span class="nd">@Test</span>
+<span class="kd">fun</span><span class="w"> </span><span class="nf">shouldPassOnNoInternetScanTest</span><span class="p">()</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span><span class="n">before</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">activityTestRule</span><span class="p">.</span><span class="na">launchActivity</span><span class="p">(</span><span class="kc">null</span><span class="p">)</span>
+<span class="w">        </span><span class="c1">// some things with the state</span>
+<span class="w">    </span><span class="p">}.</span><span class="na">after</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// some things with the state</span>
+<span class="w">    </span><span class="p">}.</span><span class="na">run</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Open Simple Screen&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">MainScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">nextButton</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">isVisible</span><span class="p">()</span>
+<span class="w">                    </span><span class="n">click</span><span class="p">()</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Click button_1 and check button_2&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">SimpleScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">button1</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">click</span><span class="p">()</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">                </span><span class="n">button2</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">isVisible</span><span class="p">()</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Click button_2 and check edit&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">SimpleScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">button2</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">click</span><span class="p">()</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">                </span><span class="n">edit</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">attempt</span><span class="p">(</span><span class="n">timeoutMs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">7000</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">isVisible</span><span class="p">()</span><span class="w"> </span><span class="p">}</span>
+<span class="w">                    </span><span class="n">hasText</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">string</span><span class="p">.</span><span class="na">text_edit_text</span><span class="p">)</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Check all possibilities of edit&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">scenario</span><span class="p">(</span>
+<span class="w">                </span><span class="n">CheckEditScenario</span><span class="p">()</span>
+<span class="w">            </span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div>
+Let's describe the structure: <br>
+1. <code>before - after - run</code> <br>
+   In the beginning, we think about a state. After the state, we begin to consider the test body.
+2. <code>step</code> <br>
+   <code>step</code> in the test is similar to <em>step</em> in the test-case. That's why test reading is easier and understandable.
+3. <code>scenario</code> <br>
+   There are cases when some sentences of steps are absolutely identical and occur very often in tests.
+   For these sentences we have introduced a <code>scenario</code> where you can replace your sequences of steps.</p>
+<p>How is this API enabled? <br>
+Let's look at <a href="../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/simple_tests/SimpleTest.kt">SimpleTest</a> and
+<a href="../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/simple_tests/SimpleTestWithRule.kt">SimpleTestWithRule</a>. <br>
+In the first example we inherit <code>SimpleTest</code> from <code>TestCase</code>. In the second example we use <code>TestCaseRule</code> field.
+Also you can use <code>BaseTestCase</code> and <code>BaseTestCaseRule</code>. <br></p>
+<h4 id="test-data-for-the-test">Test data for the test</h4>
+<p>A developer, while he is writing a test, needs to prepare some data for the test. It's a common case. Where do you locate test data preparing?
+Usually, it's the beginning of the test. <br>
+But, first, we want to divide test data preparing and test data usage. Second, we want to guarantee that test data were prepared <strong>before</strong> the test.
+That's why we decided to introduce a special DSL to help and to highlight the work with test data preparing. <br>
+Please look at the example - <a href="../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/dsl_tests/InitTransformDataTest.kt">InitTransformDataTest</a>. <br>
+Updated DSL looks like:
+<div class="highlight"><pre><span></span><code><span class="n">before</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// ...</span>
+<span class="p">}.</span><span class="na">after</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="c1">// ...</span>
+<span class="p">}.</span><span class="na">init</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">company</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Microsoft&quot;</span>
+<span class="w">        </span><span class="n">city</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Redmond&quot;</span>
+<span class="w">        </span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;USA&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">company</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Google&quot;</span>
+<span class="w">        </span><span class="n">city</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Mountain View&quot;</span>
+<span class="w">        </span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;USA&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">owner</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">firstName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Satya&quot;</span>
+<span class="w">        </span><span class="n">secondName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Nadella&quot;</span>
+<span class="w">        </span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;India&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">owner</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">firstName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Sundar&quot;</span>
+<span class="w">        </span><span class="n">secondName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Pichai&quot;</span>
+<span class="w">        </span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;India&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}.</span><span class="na">transform</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">makeOwner</span><span class="p">(</span><span class="n">ownerSurname</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Nadella&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">companyName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Microsoft&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">makeOwner</span><span class="p">(</span><span class="n">ownerSurname</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Pichai&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">companyName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Google&quot;</span><span class="p">)</span>
+<span class="p">}.</span><span class="na">run</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// ...</span>
+<span class="p">}</span>
+</code></pre></div>
+1. <code>init</code> <br>
+   Here, you prepare only sets of data without any transforms and connections. Also, you can make requests to your test server, for example. <br>
+   It's an optional block.
+2. <code>transform</code> <br>
+   This construction is for transforming of our test data. In our example we join the <em>owner</em> and <em>company</em>. <br>
+   It's an optional block. The block is enabled only after the <code>init</code> block.</p>
+<p>Alexander Blinov wrote a good article about <em>init-transform</em> DSL in <a href="https://habr.com/ru/company/hh/blog/455042/">russian article</a> where he explains all DSL details very well. You are welcome!</p>
+<h4 id="available-test-dsl-forms">Available Test DSL forms</h4>
+<p>Finally, let's look at all available Test DSL in Kaspresso:
+1. <code>before-after-init-transform-run</code>
+1. <code>before-after-init-transform-transform-run</code>. It's possible to add multiple <em>transform</em> blocks.
+2. <code>before-after-init-run</code>
+3. <code>before-after-run</code>
+4. <code>init-transform-run</code>
+5. <code>init-transform-transform-run</code>. It's possible to add multiple <em>transform</em> blocks.
+6. <code>init-run</code>
+7. <code>run</code></p>
+<h4 id="examples">Examples</h4>
+<p>You can have a look at examples of how to <a href="../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/configurator_tests">use and configure Kaspresso</a>
+and how to <a href="../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/dsl_tests">use different forms of DSL</a>.</p>
+<h3 id="sweet-additional-features">Sweet additional features</h3>
+<h4 id="some-words-about-basetestcontext-method">Some words about <em>BaseTestContext</em> method</h4>
+<p>You can notice an existing of some <code>BaseTestContext</code> in <code>before</code>, <code>after</code> and <code>run</code> methods. <code>BaseTestContext</code> gives you access to all Kaspresso's entities that a developer can need during the test. Also, <code>BaseTestContext</code> gives you insurance that all of these entities were created correctly for the current session and with actual Kaspresso configurator. <br>
+So, let's consider what <code>BaseTestContext</code> offers.</p>
+<h4 id="flakysafely">flakySafely</h4>
+<p>It's a method that receives a lambda and invokes it in the same manner as FlakySafeInterceptors group. <br>
+If you disabled this interceptor or if you want to set some special flaky safety params for any view, you can use this method. The most common case is when the default timeout (10 seconds) for flakySafety is not enough, because, for example, the appearance of a view is blocked by long background operation.
+<div class="highlight"><pre><span></span><code><span class="n">step</span><span class="p">(</span><span class="s">&quot;Check tv6&#39;s text&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">CommonFlakyScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">tv6</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">flakySafely</span><span class="p">(</span><span class="n">timeoutMs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">16</span><span class="n">_000</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">hasText</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">string</span><span class="p">.</span><span class="na">common_flaky_final_textview</span><span class="p">)</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+More detailed examples are <a href="../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/flaky_tests">here</a>. Please, observe a <a href="../kaspresso/src/main/kotlin/com/kaspersky/kaspresso/flakysafety/FlakySafetyProviderGlobalImpl.kt">documentation</a> about implementation details.</p>
+<h3 id="continuously">continuously</h3>
+<p>This function is similar to what <code>flakySafely</code> does, but for negative scenarios, where you need all the time to check that something does not happen.
+<div class="highlight"><pre><span></span><code><span class="n">ContinuouslyDialogScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">continuously</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">dialogTitle</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">doesNotExist</span><span class="p">()</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+The example is <a href="../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/continuously_tests">here</a>.</p>
+<h3 id="compose">compose</h3>
+<p>This is a method to make a composed action from multiple actions or assertions, and this action succeeds if at least one of its components succeeds.
+<code>compose</code> is useful in cases when we don't know an accurate sequence of events and can't influence it. Such cases are possible when a test is performed outside the application.
+When a test is performed inside the application we strongly recommend to make your test linear and don't put any conditions in tests that are possible thanks to <code>compose</code>. <br>
+It is available as an extension function for any <code>KView</code>, <code>UiBaseView</code> and as just a regular method (in this case it can take actions on different views as well). <br></p>
+<p>The key words using in compose:
+- <code>compose</code> - marks the beginning of "compose", turn on all needed logic
+- <code>or</code> - marks the possible branches. The lambda after <code>or</code> has a context of concrete element. Just have a look at the simple below.
+- <code>thenContinue</code> - is an action that will be executed if a branch (the code into lambda of <code>or</code>) is completed successfully. The context of a lambda after <code>thenContinue</code> is a context of concrete element described in <code>or</code> section.
+- <code>then</code> - is almost the same construction as <code>thenContinue</code> excepting the context after <code>then</code>. The context after <code>then</code> is not restricted.</p>
+<p>Have a glance at the example below:
+<div class="highlight"><pre><span></span><code><span class="n">step</span><span class="p">(</span><span class="s">&quot;Handle potential unexpected behavior&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// simple compose</span>
+<span class="w">    </span><span class="n">CommonFlakyScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">btn5</span><span class="p">.</span><span class="na">compose</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">or</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">// the context of this lambda is `btn5`</span>
+<span class="w">                </span><span class="n">hasText</span><span class="p">(</span><span class="s">&quot;Something wrong&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="n">thenContinue</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">// here, the context of this lambda is a context of KButton(btn5),</span>
+<span class="w">                </span><span class="c1">// that&#39;s why we can call KButton&#39;s methods inside the lambda directly</span>
+<span class="w">                </span><span class="n">click</span><span class="p">()</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="n">or</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">// the context of this lambda is `btn5`</span>
+<span class="w">                </span><span class="n">hasText</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">string</span><span class="p">.</span><span class="na">common_flaky_final_button</span><span class="p">)</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="n">then</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">// here, there is not any special context of this lambda</span>
+<span class="w">                </span><span class="c1">// that&#39;s why we can&#39;t call KButton&#39;s methods inside the lambda directly</span>
+<span class="w">                </span><span class="n">btn5</span><span class="p">.</span><span class="na">click</span><span class="p">()</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// complex compose</span>
+<span class="w">    </span><span class="n">compose</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// the first potential branch when ComplexComposeScreen.stage1Button is visible</span>
+<span class="w">        </span><span class="n">or</span><span class="p">(</span><span class="n">ComplexComposeScreen</span><span class="p">.</span><span class="na">stage1Button</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// the context of this lambda is `ComplexComposeScreen.stage1Button`</span>
+<span class="w">            </span><span class="n">isVisible</span><span class="p">()</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="n">then</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// if the first branch was succeed then we execute some special flow</span>
+<span class="w">            </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Flow is over the product&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">ComplexComposeScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">stage1Button</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="n">click</span><span class="p">()</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                    </span><span class="n">stage2Button</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="n">isVisible</span><span class="p">()</span>
+<span class="w">                        </span><span class="n">click</span><span class="p">()</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="c1">// the second potential branch when UiComposeDialog1.title is visible</span>
+<span class="w">        </span><span class="c1">// just imagine that is some unexpected system or product behavior and we cannot fix it now</span>
+<span class="w">        </span><span class="n">or</span><span class="p">(</span><span class="n">UiComposeDialog1</span><span class="p">.</span><span class="na">title</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// the context of this lambda is `UiComposeDialog1.title`</span>
+<span class="w">            </span><span class="n">isDisplayed</span><span class="p">()</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="n">then</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// if the second branch was succeed then we execute some special flow</span>
+<span class="w">            </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Flow is over dialogs&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">UiComposeDialog1</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">okButton</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="n">isDisplayed</span><span class="p">()</span>
+<span class="w">                        </span><span class="n">click</span><span class="p">()</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">                </span><span class="n">UiComposeDialog2</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">title</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="n">isDisplayed</span><span class="p">()</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                    </span><span class="n">okButton</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="n">isDisplayed</span><span class="p">()</span>
+<span class="w">                        </span><span class="n">click</span><span class="p">()</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+The example is <a href="../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/compose_tests">here</a>. <br>
+Please, observe additional opportunities and documentation: <a href="../kaspresso/src/main/kotlin/com/kaspersky/kaspresso/compose">common info</a>, <a href="../kaspresso/src/main/kotlin/com/kaspersky/kaspresso/compose/ComposeProvider.kt">ComposeProvider</a> and <a href="../kaspresso/src/main/kotlin/com/kaspersky/kaspresso/compose/WebComposeProvider.kt">WebComposeProvider</a>.</p>
+<h4 id="data">data</h4>
+<p>If you set your test data by <code>init-transform</code> methods then this test data is available by a <code>data</code> field.</p>
+<h4 id="testassistants">testAssistants</h4>
+<p>Special assistants to write tests. Pay attention to the fact that these assistants are available in <code>BaseTestCase</code> also. <br>
+1. <code>testLogger</code> <br>
+   It's a logger for tests allowed to output logs by a more appropriate and readable form.
+2. <code>device</code> <br>
+   An instance of <code>Device</code> class is available in this context. It's a special interface given beautiful possibilities to do a lot of useful things at the test. <br>
+   More detailed info about <code>Device</code> is <a href="./05_Device.md">here</a>.
+3. <code>adbServer</code> <br>
+   You have access to AdbServer instance used in <code>Device</code>'s interfaces via <code>adbServer</code> property. <br>
+   More detailed info about <code>AdbServer</code> is <a href="./06_AdbServer.md">here</a>.
+4. <code>params</code> <br>
+   <code>Params</code> is the facade class for all Kaspresso parameters. <br>
+   Please, observe the <a href="../kaspresso/src/main/kotlin/com/kaspersky/kaspresso/params/Params.kt">source code</a>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["tabs", "navigation.tabs", "content.code.annotate", "navigation.tabs.sticky", "navigation.instant", "navigation.tracking", "navigation.top", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,2271 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://kasperskylab.github.io/Kaspresso/Wiki/Kautomator-wrapper_over_UI_Automator/">
+      
+      
+        <link rel="prev" href="../Matchers_actions_assertions/">
+      
+      
+        <link rel="next" href="../Working_with_Android_OS/">
+      
+      
+        
+          <link rel="alternate" href="/Kaspresso/en/" hreflang="en">
+        
+          <link rel="alternate" href="/Kaspresso/ru/" hreflang="ru">
+        
+      
+      
+      <link rel="icon" href="../../kaspresso.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Kautomator. Wrapper over UI Automator - Kaspresso</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="light-blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#kautomator-wrapper-over-ui-automator" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Kaspresso" class="md-header__button md-logo" aria-label="Kaspresso" data-md-component="logo">
+      
+  <img src="../../kaspresso.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Kaspresso
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Kautomator. Wrapper over UI Automator
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="light-blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="Select language">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="/Kaspresso/en/" hreflang="en" class="md-select__link">
+              English
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/Kaspresso/ru/" hreflang="ru" class="md-select__link">
+              Русский
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/KasperskyLab/Kaspresso" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Kaspresso
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../.." class="md-tabs__link">
+          
+  
+  
+  Home
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Tutorial/" class="md-tabs__link">
+          
+  
+  
+  Tutorial
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  Wiki
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Issues/" class="md-tabs__link">
+          
+  
+  
+  Issues
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Kaspresso" class="md-nav__button md-logo" aria-label="Kaspresso" data-md-component="logo">
+      
+  <img src="../../kaspresso.png" alt="logo">
+
+    </a>
+    Kaspresso
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/KasperskyLab/Kaspresso" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Kaspresso
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Home
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About Kaspresso
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Home/Kaspresso-in-articles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kaspresso in articles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Home/Kaspresso-in-videos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kaspresso in videos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Home/Kaspresso%20users/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Our users
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Home/Breaking-changes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Breaking changes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Home/Contribution_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contribution guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tutorial
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tutorial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tutorial/Download_Kaspresso_project_and_Android_studio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Download Kaspresso project and Android studio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tutorial/Writing_simple_test/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Writing your first Kaspresso test
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tutorial/Working_with_adb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Working with adb
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tutorial/Wifi_sample_test/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Testing the Internet connection and working with the Device class
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tutorial/Steps_and_sections/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Steps and sections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tutorial/Scenario/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. Reduce duplicate steps the Scenario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tutorial/UiAutomator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. Kautomator. Third Party Application Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tutorial/FlakySafely/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9. flakySafely
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tutorial/Android_permissions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10. Working with Android permissions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tutorial/Recyclerview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11. RecyclerView. Testing list of elements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tutorial/Logger_and_screenshot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12. Logger and screenshots
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tutorial/Screenshot_tests_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    13. Screenshot-tests. Part 1. Simple screenshot-test
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tutorial/Screenshot_tests_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    14. Screenshot-tests. Part 2. Working with ViewModel and setting states
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Wiki
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Wiki
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Page_object_in_Kaspresso/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PageObject in Kaspresso
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Espresso_as_the_basis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Espresso as the basis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Supported_Android_UI_elements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Supported Android UI-elements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Matchers_actions_assertions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    View matchers, actions and assertions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kautomator. Wrapper over UI Automator
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kautomator. Wrapper over UI Automator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introduction
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Introduction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#benefits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Benefits
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-use-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to use it
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How to use it">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-screen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create Screen
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-uiview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create UiView
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#write-the-interaction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Write the interaction
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-difference-from-kakao-espresso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The difference from Kakao-Espresso
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#advanced" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Advanced
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Advanced">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#custom-uiview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Custom UiView
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#intercepting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Intercepting
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#accelerate-ui-automator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Accelerate UI Automator
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Working_with_Android_OS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Working with Android OS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Executing_adb_commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Executing adb commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Screenshot_tests/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Screenshot tests
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Kaspresso_configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kaspresso configuration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Kaspresso_Robolectric/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kaspresso with Robolectric
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Kaspresso_Allure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kaspresso with Allure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Jetpack_Compose/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compose support in Kaspresso
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Issues
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Issues
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Found an issue?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Issues/Storage_issue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Storage issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introduction
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Introduction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#benefits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Benefits
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-use-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to use it
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How to use it">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-screen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create Screen
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-uiview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create UiView
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#write-the-interaction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Write the interaction
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-difference-from-kakao-espresso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The difference from Kakao-Espresso
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#advanced" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Advanced
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Advanced">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#custom-uiview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Custom UiView
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#intercepting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Intercepting
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#accelerate-ui-automator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Accelerate UI Automator
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="kautomator-wrapper-over-ui-automator">Kautomator: wrapper over UI Automator</h1>
+<p><strong>Kautomator</strong> - Nice and simple DSL for UI Automator in Kotlin that allows to accelerate UI Automator to amazing. <br>
+Inspired by <a href="https://github.com/KakaoCup/Kakao">Kakao</a> and <a href="https://youtu.be/bqNguUHK3SM">russian talk about UI Automator</a> (thanks to Svetlana Smelchakova).</p>
+<h3 id="introduction">Introduction</h3>
+<p>Tests written with UI Automator are so complex, non-readble and hard to maintain especially for testers.
+Have a look at a typical piece of code written with UI Automator:
+<div class="highlight"><pre><span></span><code><span class="kd">val</span><span class="w"> </span><span class="nv">instrumentation</span><span class="p">:</span><span class="w"> </span><span class="n">Instrumentation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">InstrumentationRegistry</span><span class="p">.</span><span class="na">getInstrumentation</span><span class="p">()</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">uiDevice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UiDevice</span><span class="p">.</span><span class="na">getInstance</span><span class="p">(</span><span class="n">instrumentation</span><span class="p">)</span>
+
+<span class="kd">val</span><span class="w"> </span><span class="nv">uiObject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">uiDevice</span><span class="p">.</span><span class="na">wait</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Until</span><span class="p">.</span><span class="na">findObject</span><span class="p">(</span>
+<span class="w">        </span><span class="n">By</span><span class="p">.</span><span class="na">res</span><span class="p">(</span>
+<span class="w">            </span><span class="s">&quot;com.kaspersky.kaspresso.sample_kautomator&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s">&quot;editText&quot;</span>
+<span class="w">        </span><span class="p">)</span>
+<span class="w">    </span><span class="p">),</span>
+<span class="w">    </span><span class="m">2</span><span class="n">_000</span>
+<span class="p">)</span>
+
+<span class="n">uiObject</span><span class="p">.</span><span class="na">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Kaspresso&quot;</span>
+<span class="n">assertEquals</span><span class="p">(</span><span class="n">uiObject</span><span class="p">.</span><span class="na">text</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Kaspresso&quot;</span><span class="p">)</span>
+</code></pre></div>
+This is an example just to input and check the text. Because we have a successful experience of Kakao using we decided to wrap UI Automator over in the same manner and called it <strong>Kautomator</strong>:
+<div class="highlight"><pre><span></span><code><span class="n">MainScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">simpleEditText</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">replaceText</span><span class="p">(</span><span class="s">&quot;Kaspresso&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="n">hasText</span><span class="p">(</span><span class="s">&quot;Kaspresso&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<p>Another big advantage of <strong>Kautomator</strong> is a possibility to accelerate UI Automator. <br>
+Have a glance at video below:</p>
+<p><img alt="" src="https://habrastorage.org/webt/ti/kv/ki/tikvkij1vjesnacrxqm-lk0coly.gif" /> <br>
+The left video is boosted UI Automator, the right video is default UI Automator.</p>
+<p>Why is it possible? The details are <a href="https://kasperskylab.github.io/Kaspresso/en/Wiki/Kautomator-wrapper_over_UI_Automator/#accelerate-ui-automator">available a little bit later</a>.</p>
+<h4 id="benefits">Benefits</h4>
+<ul>
+<li>Readability</li>
+<li>Reusability</li>
+<li>Extensible DSL</li>
+<li>Amazing speed!</li>
+</ul>
+<h3 id="how-to-use-it">How to use it</h3>
+<h4 id="create-screen">Create Screen</h4>
+<p>Create your entity <code>UiScreen</code> where you will add the views involved in the interactions of the tests:
+<div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nc">FormScreen</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">UiScreen</span><span class="o">&lt;</span><span class="n">FormScreen</span><span class="o">&gt;</span><span class="p">()</span>
+</code></pre></div>
+<code>UiScreen</code> can represent the whole user interface or a portion of UI.
+If you are using <a href="https://martinfowler.com/bliki/PageObject.html">Page Object pattern</a> you can put the interactions of Kautomator inside the Page Objects.</p>
+<h4 id="create-uiview">Create UiView</h4>
+<p><code>UiScreen</code> contains <code>UiView</code>, these are the Android Framework views where you want to do the interactions:
+<div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nc">FormScreen</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">UiScreen</span><span class="o">&lt;</span><span class="n">FormScreen</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">phone</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UiView</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">withId</span><span class="p">(</span><span class="k">this</span><span class="nd">@FormScreen.packageName</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;phone&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">email</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UiEditText</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">withId</span><span class="p">(</span><span class="k">this</span><span class="nd">@FormScreen.packageName</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;email_edit&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">submit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UiButton</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">withId</span><span class="p">(</span><span class="k">this</span><span class="nd">@FormScreen.packageName</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;submit_button&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+Kautomator provides different types depending on the type of view:</p>
+<ul>
+<li><code>UiView</code></li>
+<li><code>UiEditText</code></li>
+<li><code>UiTextView</code></li>
+<li><code>UiButton</code></li>
+<li><code>UiCheckbox</code></li>
+<li><code>UiChipGroup</code></li>
+<li><code>UiSwitchView</code></li>
+<li><code>UiScrollView</code></li>
+<li><b>and more</b></li>
+</ul>
+<p>Every <code>UiView</code> contains matchers to retrieve the view involved in the <code>ViewInteraction</code>. Some examples of matchers provided
+by Kakao:</p>
+<ul>
+<li><code>withId</code></li>
+<li><code>withText</code></li>
+<li><code>withPackage</code></li>
+<li><code>withContentDescription</code></li>
+<li><code>textStartsWith</code></li>
+<li><b>and more</b></li>
+</ul>
+<p>Like in Ui Automator you can combine different matchers:
+<div class="highlight"><pre><span></span><code><span class="kd">val</span><span class="w"> </span><span class="nv">email</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UiEditText</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">withId</span><span class="p">(</span><span class="k">this</span><span class="nd">@FormScreen.packageName</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;email&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">withText</span><span class="p">(</span><span class="k">this</span><span class="nd">@FormScreen.packageName</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;matsyuk@kaspresso.com&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<h4 id="write-the-interaction">Write the interaction</h4>
+<p>The syntax of the test with Kautomator is very easy, once you have the <code>UiScreen</code> and the <code>UiView</code> defined, you only have to apply
+the actions or assertions like in UI Automator:
+<div class="highlight"><pre><span></span><code><span class="n">FormScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">phone</span><span class="w"> </span><span class="p">{</span>
+<span class="w">       </span><span class="n">hasText</span><span class="p">(</span><span class="s">&quot;971201771&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">button</span><span class="w"> </span><span class="p">{</span>
+<span class="w">       </span><span class="n">click</span><span class="p">()</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<h4 id="the-difference-from-kakao-espresso">The difference from Kakao-Espresso</h4>
+<p>In Espresso, all interaction with a <code>View</code> is processing through <code>ViewInteraction</code> that has two main methods:
+<code>onCheck</code> and <code>onPerform</code> which take <code>ViewAction</code> and <code>ViewAssertion</code> as arguments. Kakao was written based on this architecture.</p>
+<p>So, we have set a goal to write Kautomator which would be like Kakao as much as possible. That's why we have introduced an additional layer over UiObject2 and UiDevice and that is so similar to <code>ViewInteraction</code>. This layer is represented by <code>UiObjectInteraction</code> and <code>UiDeviceInteraction</code> that have two methods: <code>onCheck</code> and <code>onPerform</code> taking UiObjectAssertion and UiObjectAction or UiDeviceAssertion and UiDeviceAction as arguments.</p>
+<p><code>UiObjectInteraction</code> is designed to work with concrete <code>View</code> like <code>ViewInteraction</code>. <code>UiDeviceInteraction</code> has been created because UI Automator has a featureallowing you to do some system things like a click on Home button or on hard Back button, open Quick Setttings, open Notifications and so on. All such things are hidden by <code>UiSystem</code> class.</p>
+<p>So, enjoy it =)</p>
+<h4 id="advanced">Advanced</h4>
+<h5 id="custom-uiview">Custom UiView</h5>
+<p>If you have custom Views in your tests and you want to create your own <code>UiView</code>, we have <code>UiBaseView</code>. Just extend
+this class and implement as much additional Action/Assertion interfaces as you want.
+You also need to override constructors that you need.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nc">UiMyView</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">UiBaseView</span><span class="o">&lt;</span><span class="n">KView</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">UiMyActions</span><span class="p">,</span><span class="w"> </span><span class="n">UiMyAssertions</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">constructor</span><span class="p">(</span><span class="n">selector</span><span class="p">:</span><span class="w"> </span><span class="n">UiViewSelector</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="k">super</span><span class="p">(</span><span class="n">selector</span><span class="p">)</span>
+<span class="w">    </span><span class="k">constructor</span><span class="p">(</span><span class="n">builder</span><span class="p">:</span><span class="w"> </span><span class="n">UiViewBuilder</span><span class="p">.()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kt">Unit</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="k">super</span><span class="p">(</span><span class="n">builder</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<h5 id="intercepting">Intercepting</h5>
+<p>If you need to add custom logic during the <code>Kautomator -&gt; UI Automator</code> call chain (for example, logging) or
+if you need to completely change the <code>UiAssertion</code> or <code>UiAction</code> that are being sent to UI Automator
+during runtime in some cases, you can use the intercepting mechanism.</p>
+<p>Interceptors are lambdas that you pass to a configuration DSL that will be invoked before real calls
+inside <code>UiObject2</code> and <code>UiDevice</code> classes in UI Automator.</p>
+<p>You have the ability to provide interceptors at 3 different levels: Kautomator runtime, your <code>UiScreen</code> classes
+and any individual <code>UiView</code> instance.</p>
+<p>On each invocation of UI Automator function that can be intercepted, Kautomator will aggregate all available interceptors
+for this particular call and invoke them in descending order: <code>UiView interceptor -&gt; Active Screens interceptors -&gt;
+Kautomator interceptor</code>.</p>
+<p>Each of the interceptors in the chain can break the chain call by setting <code>isOverride</code> to true during configuration.
+In that case Kautomator will not only stop invoking remaining interceptors in the chain, <strong>but will not perform the UI Automator
+call</strong>. It means that in such case, the responsibility to actually invoke Kautomator lies on the shoulders
+of the developer.</p>
+<p>Here's the examples of intercepting configurations:
+<div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nc">SomeTest</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Before</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">setup</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">KautomatorConfigurator</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// Kautomator runtime</span>
+<span class="w">            </span><span class="n">intercept</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">onUiInteraction</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// Intercepting calls on UiInteraction classes across whole runtime</span>
+<span class="w">                    </span><span class="n">onPerform</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">uiInteraction</span><span class="p">,</span><span class="w"> </span><span class="n">uiAction</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="c1">// Intercept perform() call</span>
+<span class="w">                        </span><span class="n">testLogger</span><span class="p">.</span><span class="na">i</span><span class="p">(</span><span class="s">&quot;KautomatorIntercept&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;interaction=</span><span class="si">$</span><span class="n">uiInteraction</span><span class="s">, action=</span><span class="si">$</span><span class="n">uiAction</span><span class="s">&quot;</span><span class="p">)</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">test</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">MyScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">intercept</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">onUiInteraction</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// Intercepting calls on UiInteraction classes while in the context of MyScreen</span>
+<span class="w">                    </span><span class="n">onCheck</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">uiInteraction</span><span class="p">,</span><span class="w"> </span><span class="n">uiAssert</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="c1">// Intercept check() call</span>
+<span class="w">                        </span><span class="n">testLogger</span><span class="p">.</span><span class="na">i</span><span class="p">(</span><span class="s">&quot;KautomatorIntercept&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;interaction=</span><span class="si">$</span><span class="n">uiInteraction</span><span class="s">, assert=</span><span class="si">$</span><span class="n">uiAssert</span><span class="s">&quot;</span><span class="p">)</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+
+<span class="w">            </span><span class="n">myView</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">intercept</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// Intercepting ViewInteraction calls on this individual view</span>
+<span class="w">                    </span><span class="n">onPerform</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">uiInteraction</span><span class="p">,</span><span class="w"> </span><span class="n">uiAction</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="c1">// Intercept perform() call and overriding the chain</span>
+<span class="w">                        </span><span class="c1">// When performing actions on this view, Kautomator level interceptor will not be called</span>
+<span class="w">                        </span><span class="c1">// and we have to manually call UI Automator now.</span>
+<span class="w">                        </span><span class="n">Log</span><span class="p">.</span><span class="na">d</span><span class="p">(</span><span class="s">&quot;KAUTOMATOR_VIEW&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;</span><span class="si">$</span><span class="n">uiInteraction</span><span class="s"> is performing </span><span class="si">$</span><span class="n">uiAction</span><span class="s">&quot;</span><span class="p">)</span>
+<span class="w">                        </span><span class="n">uiInteraction</span><span class="p">.</span><span class="na">perform</span><span class="p">(</span><span class="n">uiAction</span><span class="p">)</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<h3 id="accelerate-ui-automator">Accelerate UI Automator</h3>
+<p>As you remember we told about the possible acceleration of UI Automator. How does it become a reality? <br>
+UI Automator has an inner mechanism to prevent potential flakiness. Under the hood, the library listens and gives commands through AccessibilityManagerService. AccessibilityManagerService is a single point for all accessibility events in the system. At one moment, creators of UI Automator faced with the flakiness problem. One of the most popular reasons for such undetermined behavior is a big count of events processing in the System at the current moment. But UI Automator has a connection with AccessibilityManagerService. Such a connection gives an opportunity to listen to all accessibility events in the System and to wait for a calm state when there are no actions. The calm state leads to determined system behavior and decreases the possibility of flakiness. <br>
+All of this pushed UI Automator authors to introduce the following algorithm: UI Automator waits 500ms (<code>waitForIdleTimeout</code> and <code>waitForSelectorTimeout</code> in <code>androidx.test.uiautomator.Configurator</code>) window during 10 seconds for <strong>each action</strong>. EACH ACTION.</p>
+<p>Perhaps, described solution made UI Automator more stable. But, the speed crashed, no doubts.</p>
+<p>Kautomator is a DSL over UI Automator that provides a <a href="../wiki/03_Kaspresso_configurator.md#kaspresso-interceptors-based-on-kakaokautomator-interceptors">mechanism of interceptors</a>. Kaspresso offers a big set of default interceptors which eliminates any potential flaky action. So, Kaspresso + Kautomator helps UI Automator to struggle with flakiness.</p>
+<p>After some time, we thought why we need to save artificial timeouts inside UI Automator while Kaspresso + Kautomator does the same work. Have a look at the measure example:
+<div class="highlight"><pre><span></span><code><span class="nd">@RunWith</span><span class="p">(</span><span class="n">AndroidJUnit4</span><span class="o">::</span><span class="n">class</span><span class="p">)</span>
+<span class="kd">class</span><span class="w"> </span><span class="nc">KautomatorMeasureTest</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">TestCase</span><span class="p">(</span>
+<span class="w">    </span><span class="n">kaspressoBuilder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kaspresso</span><span class="p">.</span><span class="na">Builder</span><span class="p">.</span><span class="na">simple</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">kautomatorWaitForIdleSettings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">KautomatorWaitForIdleSettings</span><span class="p">.</span><span class="na">boost</span><span class="p">()</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">companion</span><span class="w"> </span><span class="kd">object</span><span class="w"> </span><span class="err">{</span>
+<span class="w">        </span><span class="kd">private</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">RANGE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.</span><span class="p">.</span><span class="m">20</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@get</span><span class="p">:</span><span class="n">Rule</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">runtimePermissionRule</span><span class="p">:</span><span class="w"> </span><span class="n">GrantPermissionRule</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GrantPermissionRule</span><span class="p">.</span><span class="na">grant</span><span class="p">(</span>
+<span class="w">        </span><span class="n">Manifest</span><span class="p">.</span><span class="na">permission</span><span class="p">.</span><span class="na">WRITE_EXTERNAL_STORAGE</span><span class="p">,</span>
+<span class="w">        </span><span class="n">Manifest</span><span class="p">.</span><span class="na">permission</span><span class="p">.</span><span class="na">READ_EXTERNAL_STORAGE</span>
+<span class="w">    </span><span class="p">)</span>
+
+<span class="w">    </span><span class="nd">@get</span><span class="p">:</span><span class="n">Rule</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">activityTestRule</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ActivityTestRule</span><span class="p">(</span><span class="n">MainActivity</span><span class="o">::</span><span class="n">class</span><span class="p">.</span><span class="na">java</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">)</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">test</span><span class="p">()</span><span class="w"> </span><span class="o">=</span>
+<span class="w">        </span><span class="n">before</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">activityTestRule</span><span class="p">.</span><span class="na">launchActivity</span><span class="p">(</span><span class="kc">null</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}.</span><span class="na">after</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}.</span><span class="na">run</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="o">======&gt;</span><span class="w"> </span><span class="n">UI</span><span class="w"> </span><span class="n">Automator</span><span class="p">:</span><span class="w">        </span><span class="m">0</span><span class="w"> </span><span class="n">minutes</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">seconds</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="m">252</span><span class="w"> </span><span class="n">millis</span>
+<span class="w">    </span><span class="o">======&gt;</span><span class="w"> </span><span class="n">UI</span><span class="w"> </span><span class="n">Automator</span><span class="w"> </span><span class="n">boost</span><span class="p">:</span><span class="w">  </span><span class="m">0</span><span class="w"> </span><span class="n">minutes</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="n">seconds</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="m">310</span><span class="w"> </span><span class="n">millis</span>
+<span class="w">            </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;MainScreen. Click on `measure fragment` button&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">UiMainScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">measureButton</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="n">isDisplayed</span><span class="p">()</span>
+<span class="w">                        </span><span class="n">click</span><span class="p">()</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+
+<span class="w">    </span><span class="o">======&gt;</span><span class="w"> </span><span class="n">UI</span><span class="w"> </span><span class="n">Automator</span><span class="p">:</span><span class="w">        </span><span class="m">0</span><span class="w"> </span><span class="n">minutes</span><span class="p">,</span><span class="w"> </span><span class="m">11</span><span class="w"> </span><span class="n">seconds</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="m">725</span><span class="w"> </span><span class="n">millis</span>
+<span class="w">    </span><span class="o">======&gt;</span><span class="w"> </span><span class="n">UI</span><span class="w"> </span><span class="n">Automator</span><span class="w"> </span><span class="n">boost</span><span class="p">:</span><span class="w">  </span><span class="m">0</span><span class="w"> </span><span class="n">minutes</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">seconds</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="m">50</span><span class="w"> </span><span class="n">millis</span>
+<span class="w">            </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Measure screen. Button_1 clicks comparing&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">UiMeasureScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">RANGE</span><span class="p">.</span><span class="na">forEach</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="o">-&gt;</span>
+<span class="w">                        </span><span class="n">button1</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                            </span><span class="n">click</span><span class="p">()</span>
+<span class="w">                            </span><span class="n">hasText</span><span class="p">(</span><span class="n">device</span><span class="p">.</span><span class="na">targetContext</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">string</span><span class="p">.</span><span class="na">measure_fragment_text_button_1</span><span class="p">).</span><span class="na">toUpperCase</span><span class="p">())</span>
+<span class="w">                        </span><span class="p">}</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+
+<span class="w">    </span><span class="o">======&gt;</span><span class="w"> </span><span class="n">UI</span><span class="w"> </span><span class="n">Automator</span><span class="p">:</span><span class="w">        </span><span class="m">0</span><span class="w"> </span><span class="n">minutes</span><span class="p">,</span><span class="w"> </span><span class="m">11</span><span class="w"> </span><span class="n">seconds</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="m">789</span><span class="w"> </span><span class="n">millis</span>
+<span class="w">    </span><span class="o">======&gt;</span><span class="w"> </span><span class="n">UI</span><span class="w"> </span><span class="n">Automator</span><span class="w"> </span><span class="n">boost</span><span class="p">:</span><span class="w">  </span><span class="m">0</span><span class="w"> </span><span class="n">minutes</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">seconds</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="m">482</span><span class="w"> </span><span class="n">millis</span>
+<span class="w">            </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Measure screen. Button_2 clicks and TextView changes comparing&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">UiMeasureScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">RANGE</span><span class="p">.</span><span class="na">forEach</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">-&gt;</span>
+<span class="w">                        </span><span class="n">button2</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                            </span><span class="n">click</span><span class="p">()</span>
+<span class="w">                            </span><span class="n">hasText</span><span class="p">(</span><span class="n">device</span><span class="p">.</span><span class="na">targetContext</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">string</span><span class="p">.</span><span class="na">measure_fragment_text_button_2</span><span class="p">).</span><span class="na">toUpperCase</span><span class="p">())</span>
+<span class="w">                        </span><span class="p">}</span>
+<span class="w">                        </span><span class="n">textView</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                            </span><span class="n">hasText</span><span class="p">(</span>
+<span class="w">                                </span><span class="s">&quot;</span><span class="si">${</span><span class="n">device</span><span class="p">.</span><span class="na">targetContext</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">string</span><span class="p">.</span><span class="na">measure_fragment_text_textview</span><span class="p">)</span><span class="si">}${</span><span class="n">index</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="si">}</span><span class="s">&quot;</span>
+<span class="w">                            </span><span class="p">)</span>
+<span class="w">                        </span><span class="p">}</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+
+<span class="w">    </span><span class="o">======&gt;</span><span class="w"> </span><span class="n">UI</span><span class="w"> </span><span class="n">Automator</span><span class="p">:</span><span class="w">        </span><span class="m">0</span><span class="w"> </span><span class="n">minutes</span><span class="p">,</span><span class="w"> </span><span class="m">45</span><span class="w"> </span><span class="n">seconds</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="m">903</span><span class="w"> </span><span class="n">millis</span>
+<span class="w">    </span><span class="o">======&gt;</span><span class="w"> </span><span class="n">UI</span><span class="w"> </span><span class="n">Automator</span><span class="w"> </span><span class="n">boost</span><span class="p">:</span><span class="w">  </span><span class="m">0</span><span class="w"> </span><span class="n">minutes</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="n">seconds</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="m">967</span><span class="w"> </span><span class="n">millis</span>
+<span class="w">            </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Measure fragment. EditText updates comparing&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">UiMeasureScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">edit</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="n">isDisplayed</span><span class="p">()</span>
+<span class="w">                        </span><span class="n">hasText</span><span class="p">(</span><span class="n">device</span><span class="p">.</span><span class="na">targetContext</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">string</span><span class="p">.</span><span class="na">measure_fragment_text_edittext</span><span class="p">))</span>
+<span class="w">                        </span><span class="n">RANGE</span><span class="p">.</span><span class="na">forEach</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="o">-&gt;</span>
+<span class="w">                            </span><span class="n">clearText</span><span class="p">()</span>
+<span class="w">                            </span><span class="n">typeText</span><span class="p">(</span><span class="s">&quot;bla-bla-bla&quot;</span><span class="p">)</span>
+<span class="w">                            </span><span class="n">hasText</span><span class="p">(</span><span class="s">&quot;bla-bla-bla&quot;</span><span class="p">)</span>
+<span class="w">                            </span><span class="n">clearText</span><span class="p">()</span>
+<span class="w">                            </span><span class="n">typeText</span><span class="p">(</span><span class="s">&quot;mo-mo-mo&quot;</span><span class="p">)</span>
+<span class="w">                            </span><span class="n">hasText</span><span class="p">(</span><span class="s">&quot;mo-mo-mo&quot;</span><span class="p">)</span>
+<span class="w">                            </span><span class="n">clearText</span><span class="p">()</span>
+<span class="w">                        </span><span class="p">}</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+
+<span class="w">    </span><span class="o">======&gt;</span><span class="w"> </span><span class="n">UI</span><span class="w"> </span><span class="n">Automator</span><span class="p">:</span><span class="w">        </span><span class="m">0</span><span class="w"> </span><span class="n">minutes</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="n">seconds</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="m">901</span><span class="w"> </span><span class="n">millis</span>
+<span class="w">    </span><span class="o">======&gt;</span><span class="w"> </span><span class="n">UI</span><span class="w"> </span><span class="n">Automator</span><span class="w"> </span><span class="n">boost</span><span class="p">:</span><span class="w">  </span><span class="m">0</span><span class="w"> </span><span class="n">minutes</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="n">seconds</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="m">23</span><span class="w"> </span><span class="n">millis</span>
+<span class="w">            </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Measure fragment. Checkbox clicks comparing&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">UiMeasureScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">RANGE</span><span class="p">.</span><span class="na">forEach</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">-&gt;</span>
+<span class="w">                        </span><span class="n">checkBox</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">index</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                                </span><span class="n">setChecked</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+<span class="w">                                </span><span class="n">isChecked</span><span class="p">()</span>
+<span class="w">                            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                                </span><span class="n">setChecked</span><span class="p">(</span><span class="kc">false</span><span class="p">)</span>
+<span class="w">                                </span><span class="n">isNotChecked</span><span class="p">()</span>
+<span class="w">                            </span><span class="p">}</span>
+<span class="w">                        </span><span class="p">}</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+It's a great deal!</p>
+<p>Also, there are cases when UI Automator can't catch 500ms window. For example, when one element is updating too fast (one update in 100 ms). Just have a look at <a href="https://github.com/KasperskyLab/Kaspresso/blob/master/samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/idlingwait_tests/WaitForIdleTest.kt">this test</a>. Only <code>KautomatorWaitForIdleSettings.boost()</code> allows to pass the test.</p>
+<p>As you see, we have introduced a special <code>kautomatorWaitForIdleSettings</code> property in Kaspresso configurator. By default, this property is <strong>not</strong> boost. Why? Because:
+1. You can have tests where you use UI Automator directly. But mentioned timeouts are global parameters. Resetting of these timeouts can lead to an undetermined state.
+2. We want to take time collecting data from the world and then to analyze potential problems of our solutions (but, we believe it's a stable and brilliant solution).</p>
+<p>Another important remark is about <code>kaspressoBuilder = Kaspresso.Builder.simple</code> configuration. This configuration is faster than <code>advanced</code> because of each step's screenshots interceptor absence. If you need, add them manually.</p>
+<p>Anyway, it's a small change for a developer, but it's a big step for the world =)</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["tabs", "navigation.tabs", "content.code.annotate", "navigation.tabs.sticky", "navigation.instant", "navigation.tracking", "navigation.top", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,2656 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://kasperskylab.github.io/Kaspresso/ru/Tutorial/Screenshot_tests_2/">
+      
+      
+        <link rel="prev" href="../Screenshot_tests_1/">
+      
+      
+        <link rel="next" href="../../Wiki/">
+      
+      
+        
+          <link rel="alternate" href="/Kaspresso/en/" hreflang="en">
+        
+          <link rel="alternate" href="/Kaspresso/ru/" hreflang="ru">
+        
+      
+      
+      <link rel="icon" href="../../../kaspresso.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>14. Screenshot-тесты. Часть 2. Установка стейтов и работа с ViewModel - Kaspresso</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="light-blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#screenshot-2-viewmodel" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../" title="Kaspresso" class="md-header__button md-logo" aria-label="Kaspresso" data-md-component="logo">
+      
+  <img src="../../../kaspresso.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Kaspresso
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              14. Screenshot-тесты. Часть 2. Установка стейтов и работа с ViewModel
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="light-blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="Select language">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="/Kaspresso/en/" hreflang="en" class="md-select__link">
+              English
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/Kaspresso/ru/" hreflang="ru" class="md-select__link">
+              Русский
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/KasperskyLab/Kaspresso" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Kaspresso
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+  Главная
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  Туториал
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Wiki/" class="md-tabs__link">
+          
+  
+  
+  Вики
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Issues/" class="md-tabs__link">
+          
+  
+  
+  Известные проблемы
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../" title="Kaspresso" class="md-nav__button md-logo" aria-label="Kaspresso" data-md-component="logo">
+      
+  <img src="../../../kaspresso.png" alt="logo">
+
+    </a>
+    Kaspresso
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/KasperskyLab/Kaspresso" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Kaspresso
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Главная
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Главная
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    О Kaspresso
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Home/Kaspresso-in-articles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kaspresso в статьях
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Home/Kaspresso-in-videos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kaspresso в видео
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Home/Kaspresso%20users/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Наши пользователи
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Home/Breaking-changes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Критические изменения
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Home/Contribution_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Инструкция для разработчиков
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Туториал
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Туториал
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Введение
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Download_Kaspresso_project_and_Android_studio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Скачиваем проект и Android studio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Writing_simple_test/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Пишем первый автотест с Kaspresso
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Working_with_adb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Выполнение adb-команд
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Wifi_sample_test/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Тестирование интернет-соединения и работа с классом Device
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Steps_and_sections/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Steps and sections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Scenario/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. Вынесение дублирующихся шагов в Scenario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UiAutomator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. UiAutomator. Тестирование за рамками приложения
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../FlakySafely/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9. flakySafely
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Android_permissions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10. Работа с Android permissions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Recyclerview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11. RecyclerView
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Logger_and_screenshot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12. Логирование и скриншоты
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Screenshot_tests_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    13. Screenshot-тесты. Часть 1. Простой screenshot тест
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    14. Screenshot-тесты. Часть 2. Установка стейтов и работа с ViewModel
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    14. Screenshot-тесты. Часть 2. Установка стейтов и работа с ViewModel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Предварительные знания
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Обзор тестируемого приложения
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#screenshot-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Простой Screenshot-тест
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Проблемы текущего подхода
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#view-viewmodel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Взаимодействие View и ViewModel
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#viewmodel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Мокирование ViewModel
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Дорабатываем код фрагмента
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Тестирование фрагментов
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Меняем стиль
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Итог
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Вики
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Вики
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Введение
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Page_object_in_Kaspresso/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Паттерн PageObject в Kaspresso
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Espresso_as_the_basis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Espresso как основа
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Supported_Android_UI_elements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Поддерживаемые UI-виджеты Android
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Matchers_actions_assertions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Доступные классы Matcher, Action и Assertion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Kautomator-wrapper_over_UI_Automator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kautomator. Обертка над UI Automator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Working_with_Android_OS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Взаимодействие с ОС Android. Класс Device
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Executing_adb_commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Выполнение команд adb
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Screenshot_tests/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Скриншот тесты
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Kaspresso_configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Конфигуратор Kaspresso
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Kaspresso_Robolectric/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Запуск тестов Kaspresso на JVM с помощью Robolectric
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Kaspresso_Allure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Поддержка Allure в Kaspresso
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wiki/Jetpack_Compose/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Поддержка Compose в Kaspresso
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Известные проблемы
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Известные проблемы
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Нашли проблему?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Issues/Storage_issue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Работа с файлами
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Предварительные знания
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Обзор тестируемого приложения
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#screenshot-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Простой Screenshot-тест
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Проблемы текущего подхода
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#view-viewmodel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Взаимодействие View и ViewModel
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#viewmodel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Мокирование ViewModel
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Дорабатываем код фрагмента
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Тестирование фрагментов
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Меняем стиль
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Итог
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="screenshot-2-viewmodel">Screenshot-тесты. Часть 2. Установка стейтов и работа с ViewModel.</h1>
+<p>Если в вашем приложении планируется использование screenshot-тестов, то этот момент нужно учитывать не только при написании тестов, но также при разработке приложения. В сегодняшнем уроке мы поближе познакомимся с установкой стейтов, внесем изменения в код приложения, чтобы его можно было покрыть тестами, и напишем первый скриншот тест, в котором будет работа с ViewModel.</p>
+<h2 id="_1">Предварительные знания</h2>
+<p>Если вы ранее не разрабатывали приложения под Android, то сегодняшний урок может быть сложным для понимания. Поэтому мы настоятельно рекомендуем перед прохождением данного урока ознакомиться со следующими темами:</p>
+<ol>
+<li><a href="https://developer.android.com/guide/fragments">Фрагменты</a> – что это, и как с ними работать</li>
+<li><a href="https://developer.android.com/topic/libraries/architecture/viewmodel">ViewModel</a> и шаблон проектирования MVVM</li>
+<li><a href="https://developer.android.com/kotlin/flow/stateflow-and-sharedflow">StateFlow</a></li>
+<li><a href="https://mockk.io/">Библиотека Mockk</a></li>
+<li><a href="https://kotlinlang.org/docs/coroutines-overview.html">Kotlin coroutines</a></li>
+</ol>
+<h2 id="_2">Обзор тестируемого приложения</h2>
+<p>В приложении, которое мы сегодня будем покрывать тестами, имитируется загрузка данных. При клике на кнопку начинается загрузка, отображается прогресс бар, после окончания загрузки, в зависимости от результата, мы увидим либо загруженные данные, либо сообщение об ошибке.</p>
+<p>Откройте приложение tutorial и кликнете по кнопке «Load User Activity»</p>
+<p><img src="../images/screenshot_tests_2/example_1.png" alt="Tutorial app" width="300"/></p>
+<p>Давайте сразу начнем разбираться, что такое стейты. После перехода по кнопке у вас откроется экран, на котором располагается одна кнопка и больше ничего нет.</p>
+<p><img src="../images/screenshot_tests_2/example_2.png" alt="Initial state" width="300"/></p>
+<p>При клике на данную кнопку внешний вид экрана изменится, то есть изменится его состояние или, как его часто называют, стейт. Сейчас мы видим исходный стейт экрана, назовем его <code>Initial</code>.</p>
+<p>Кликнете по этой кнопке и обратите внимание, как изменится стейт экрана.</p>
+<p><img src="../images/screenshot_tests_2/example_3.png" alt="Progress state" width="300"/></p>
+<p>Кнопка стала неактивной, то есть по ней больше нельзя кликать, и на экране появился Progress Bar, который показывает, что идет процесс загрузки. Этот стейт отличается от исходного, назовем этот стейт <code>Progress</code>.</p>
+<p>Через несколько секунд загрузка будет завершена, и вы увидите на экране загруженные данные пользователя (его имя и фамилию).</p>
+<p><img src="../images/screenshot_tests_2/example_4.png" alt="Content state" width="300"/></p>
+<p>Это третий стейт экрана. В таком состоянии кнопка снова становится активной, прогресс бар скрывается, и на экране отображаются имя и фамилия пользователя. Назовем такой стейт <code>Content</code>.</p>
+<p>В данном случае мы имитируем загрузку данных, в реальных приложениях работа с интернетом может завершиться с ошибкой. Такие ошибки нужно каким-то образом обрабатывать, к примеру, показывать уведомление пользователю. В нашем тестовом приложении мы сымитировали подобное поведение. Если вы попытаетесь загрузить пользователя несколько раз, то какая-то из этих попыток завершится с ошибкой и вы увидите следующее состояние экрана:</p>
+<p><img src="../images/screenshot_tests_2/example_5.png" alt="Error state" width="300"/></p>
+<p>Это четвертый и последний стейт экрана, который показывает состояние ошибки, назовем его <code>Error</code>.</p>
+<h2 id="screenshot-">Простой Screenshot-тест</h2>
+<p>Перед тем, как мы изучим правильный способ покрытия тестами данного экрана, давайте напишем тесты тем способом, который мы уже знаем. Это нужно для того, чтобы вы понимали, почему так делать не стоит, и зачем нам вносить изменения в уже написанный код.</p>
+<p>В пакете <code>screenshot_tests</code> создаем класс <code>LoadUserScreenshots</code></p>
+<p><img src="../images/screenshot_tests_2/create_class.png" alt="Create class"/></p>
+<p>Наследуемся от <code>DocLocScreenshotTestCase</code> и передаем список языков в качестве параметра конструктору, сделаем скриншоты для английской и французской локалей</p>
+<p><div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screenshot_tests</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.testcases.api.testcase.DocLocScreenshotTestCase</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nc">LoadUserScreenshots</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">DocLocScreenshotTestCase</span><span class="p">(</span><span class="n">locales</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;en, fr&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="p">}</span>
+</code></pre></div>
+Как мы говорили ранее – screenshot-тесты должны быть максимально легковесными, чтобы их прохождение занимало как можно меньше времени, поэтому вместо открытия главного экрана и перехода на экран загрузки данных пользователя, мы сразу будем открывать <code>LoadUserActivity</code>, создаем соответствующее правило.</p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screenshot_tests</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">androidx.test.ext.junit.rules.activityScenarioRule</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.testcases.api.testcase.DocLocScreenshotTestCase</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.user.LoadUserActivity</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Rule</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nc">LoadUserScreenshots</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">DocLocScreenshotTestCase</span><span class="p">(</span><span class="n">locales</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;en, fr&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@get</span><span class="p">:</span><span class="n">Rule</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">activityRule</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">activityScenarioRule</span><span class="o">&lt;</span><span class="n">LoadUserActivity</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Для того чтобы получить все состояния экрана мы будем, как и раньше, имитировать действия пользователя – кликать по кнопке и ждать получения результата. Создаем <code>PageObject</code> этого экрана. В пакете <code>com.kaspersky.kaspresso.tutorial.screen</code> добавляем класс <code>LoadUserScreen</code>, тип <code>Object</code></p>
+<p><img src="../images/screenshot_tests_2/page_object.png" alt="Create page object"/></p>
+<p>Наследумся от <code>KScreen</code> и добавляем все необходимые UI-элементы: кнопка загрузки, ProgressBar, TextView с именем пользователя и TextView с текстом ошибки</p>
+<p><div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screen</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.screens.KScreen</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.R</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">io.github.kakaocup.kakao.progress.KProgressBar</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">io.github.kakaocup.kakao.text.KButton</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">io.github.kakaocup.kakao.text.KTextView</span>
+
+<span class="kd">object</span><span class="w"> </span><span class="nc">LoadUserScreen</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">KScreen</span><span class="o">&lt;</span><span class="n">LoadUserScreen</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">layoutId</span><span class="p">:</span><span class="w"> </span><span class="kt">Int?</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span>
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">viewClass</span><span class="p">:</span><span class="w"> </span><span class="n">Class</span><span class="o">&lt;*&gt;?</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span>
+
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">loadingButton</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">KButton</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">withId</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">loading_button</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">progressBarLoading</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">KProgressBar</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">withId</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">progress_bar_loading</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">username</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">KTextView</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">withId</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">username</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">KTextView</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">withId</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">error</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+Можем создавать скриншот-тест. Добавляем метод <code>takeScreenshots</code></p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screenshot_tests</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">androidx.test.ext.junit.rules.activityScenarioRule</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.testcases.api.testcase.DocLocScreenshotTestCase</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.user.LoadUserActivity</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Rule</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Test</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nc">LoadUserScreenshots</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">DocLocScreenshotTestCase</span><span class="p">(</span><span class="n">locales</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;en, fr&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@get</span><span class="p">:</span><span class="n">Rule</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">activityRule</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">activityScenarioRule</span><span class="o">&lt;</span><span class="n">LoadUserActivity</span><span class="o">&gt;</span><span class="p">()</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">takeScreenshots</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Первым делом давайте дождемся, пока кнопка отобразится на экране и сделаем первый скриншот исходного состояния экрана</p>
+<p><div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screenshot_tests</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">androidx.test.ext.junit.rules.activityScenarioRule</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.testcases.api.testcase.DocLocScreenshotTestCase</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screen.LoadUserScreen</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.user.LoadUserActivity</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Rule</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Test</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nc">LoadUserScreenshots</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">DocLocScreenshotTestCase</span><span class="p">(</span><span class="n">locales</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;en, fr&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@get</span><span class="p">:</span><span class="n">Rule</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">activityRule</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">activityScenarioRule</span><span class="o">&lt;</span><span class="n">LoadUserActivity</span><span class="o">&gt;</span><span class="p">()</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">takeScreenshots</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">LoadUserScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">loadingButton</span><span class="p">.</span><span class="na">isVisible</span><span class="p">()</span>
+<span class="w">            </span><span class="n">captureScreenshot</span><span class="p">(</span><span class="s">&quot;Initial state&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+Далее необходимо кликнуть по кнопке и сохранить снимок экрана в состоянии загрузки</p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screenshot_tests</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">androidx.test.ext.junit.rules.activityScenarioRule</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.testcases.api.testcase.DocLocScreenshotTestCase</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screen.LoadUserScreen</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.user.LoadUserActivity</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Rule</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Test</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nc">LoadUserScreenshots</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">DocLocScreenshotTestCase</span><span class="p">(</span><span class="n">locales</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;en, fr&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@get</span><span class="p">:</span><span class="n">Rule</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">activityRule</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">activityScenarioRule</span><span class="o">&lt;</span><span class="n">LoadUserActivity</span><span class="o">&gt;</span><span class="p">()</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">takeScreenshots</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">LoadUserScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">loadingButton</span><span class="p">.</span><span class="na">isVisible</span><span class="p">()</span>
+<span class="w">            </span><span class="n">captureScreenshot</span><span class="p">(</span><span class="s">&quot;Initial state&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="n">loadingButton</span><span class="p">.</span><span class="na">click</span><span class="p">()</span>
+<span class="w">            </span><span class="n">progressBarLoading</span><span class="p">.</span><span class="na">isVisible</span><span class="p">()</span>
+<span class="w">            </span><span class="n">captureScreenshot</span><span class="p">(</span><span class="s">&quot;Progress state&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>На этом этапе уже можно видеть одну проблему - мы загружаем данные из сети, в зависимости от скорости интернета и от работоспособности сервера скорость загрузки может меняться. Есть большая вероятность, что данные о пользователе будут загружены почти мгновенно, и состояние загрузки вы вообще не увидите, оно не будет сохранено на скриншотах, и тест упадет, потому что проверка на <code>progressBarLoading.isVisible</code> никогда не вернет значение true. Решение этой проблемы мы разберем далее в этом уроке.</p>
+<p>Следующий этап – отображение данных о пользователе (стейт Content)</p>
+<p><div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screenshot_tests</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">androidx.test.ext.junit.rules.activityScenarioRule</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.testcases.api.testcase.DocLocScreenshotTestCase</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screen.LoadUserScreen</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.user.LoadUserActivity</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Rule</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Test</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nc">LoadUserScreenshots</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">DocLocScreenshotTestCase</span><span class="p">(</span><span class="n">locales</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;en, fr&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@get</span><span class="p">:</span><span class="n">Rule</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">activityRule</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">activityScenarioRule</span><span class="o">&lt;</span><span class="n">LoadUserActivity</span><span class="o">&gt;</span><span class="p">()</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">takeScreenshots</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">LoadUserScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">loadingButton</span><span class="p">.</span><span class="na">isVisible</span><span class="p">()</span>
+<span class="w">            </span><span class="n">captureScreenshot</span><span class="p">(</span><span class="s">&quot;Initial state&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="n">loadingButton</span><span class="p">.</span><span class="na">click</span><span class="p">()</span>
+<span class="w">            </span><span class="n">progressBarLoading</span><span class="p">.</span><span class="na">isVisible</span><span class="p">()</span>
+<span class="w">            </span><span class="n">captureScreenshot</span><span class="p">(</span><span class="s">&quot;Progress state&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="n">username</span><span class="p">.</span><span class="na">isVisible</span><span class="p">()</span>
+<span class="w">            </span><span class="n">captureScreenshot</span><span class="p">(</span><span class="s">&quot;Content state&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+Теперь нам нужно получить состояние ошибки. Как вариант, мы можем отключить интернет на устройстве, затем кликнуть по кнопке и увидеть сообщение об ошибке. Тогда нужно не забывать перед проведением тестирования, а также после него включать интернет, чтобы наш тест всегда запускался в необходимых условиях, а также не влиял на другие тесты. После включения и выключения теста добавим небольшой таймаут, чтобы быть уверенным, что интернет-подключение перешло в нужное нам состояние.</p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screenshot_tests</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">androidx.test.ext.junit.rules.activityScenarioRule</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.testcases.api.testcase.DocLocScreenshotTestCase</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screen.LoadUserScreen</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.user.LoadUserActivity</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Rule</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Test</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nc">LoadUserScreenshots</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">DocLocScreenshotTestCase</span><span class="p">(</span><span class="n">locales</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;en, fr&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@get</span><span class="p">:</span><span class="n">Rule</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">activityRule</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">activityScenarioRule</span><span class="o">&lt;</span><span class="n">LoadUserActivity</span><span class="o">&gt;</span><span class="p">()</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">takeScreenshots</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">LoadUserScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">device</span><span class="p">.</span><span class="na">network</span><span class="p">.</span><span class="na">enable</span><span class="p">()</span>
+<span class="w">            </span><span class="n">Thread</span><span class="p">.</span><span class="na">sleep</span><span class="p">(</span><span class="m">5000</span><span class="p">)</span>
+<span class="w">            </span><span class="n">loadingButton</span><span class="p">.</span><span class="na">isVisible</span><span class="p">()</span>
+<span class="w">            </span><span class="n">captureScreenshot</span><span class="p">(</span><span class="s">&quot;Initial state&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="n">loadingButton</span><span class="p">.</span><span class="na">click</span><span class="p">()</span>
+<span class="w">            </span><span class="n">progressBarLoading</span><span class="p">.</span><span class="na">isVisible</span><span class="p">()</span>
+<span class="w">            </span><span class="n">captureScreenshot</span><span class="p">(</span><span class="s">&quot;Progress state&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="n">username</span><span class="p">.</span><span class="na">isVisible</span><span class="p">()</span>
+<span class="w">            </span><span class="n">captureScreenshot</span><span class="p">(</span><span class="s">&quot;Content state&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="n">device</span><span class="p">.</span><span class="na">network</span><span class="p">.</span><span class="na">disable</span><span class="p">()</span>
+<span class="w">            </span><span class="n">Thread</span><span class="p">.</span><span class="na">sleep</span><span class="p">(</span><span class="m">3000</span><span class="p">)</span>
+<span class="w">            </span><span class="n">loadingButton</span><span class="p">.</span><span class="na">click</span><span class="p">()</span>
+<span class="w">            </span><span class="n">error</span><span class="p">.</span><span class="na">isVisible</span><span class="p">()</span>
+<span class="w">            </span><span class="n">captureScreenshot</span><span class="p">(</span><span class="s">&quot;Error state&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="n">device</span><span class="p">.</span><span class="na">network</span><span class="p">.</span><span class="na">enable</span><span class="p">()</span>
+<span class="w">            </span><span class="n">Thread</span><span class="p">.</span><span class="na">sleep</span><span class="p">(</span><span class="m">5000</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="_3">Проблемы текущего подхода</h2>
+<p>Таким образом, мы смогли написать скриншот тест, в котором получили все необходимые состояния экрана, имитируя действия пользователя – кликая по кнопке и ожидая результата выполнения запроса. Но давайте подумаем, насколько эта реализация подойдет для реальных приложений.</p>
+<ol>
+<li>
+<p>Состояние прогресса зависит от скорости интернет-соединения и от работоспособности сервера. Если ответ вернется очень быстро, то состояние прогресса мы никогда не получим, и наш тест завершится неудачно.</p>
+</li>
+<li>
+<p>Для получения состояния ошибки мы отключаем интернет на устройстве, но в реальных приложениях часто бывает ситуация, когда в зависимости от типа ошибки поведение приложения должно отличаться. Например, если на устройстве нет интернета, то нужно показать сообщение пользователю, чтобы он включил интернет, а если сервер вернул какую-то ошибку, то отобразить соответствующий диалог. В этом случае сымитировать состояние ошибки в приложении становится очень сложной задачей.</p>
+</li>
+<li>
+<p>Цель «скриншотилки» - сделать снимки всех возможных состояний экрана, а не проверить работоспособность приложения. Тем не менее, если в момент проведения теста будут какие-то проблемы с интернетом, или сервер не будет отвечать на запросы, то при такой реализации тест завершится неудачно, и никаких снимков мы не получим.</p>
+</li>
+</ol>
+<p>Так мы приходим к следующему выводу: получить все необходимые стейты, имитируя действия пользователя, для скриншот-тестов нецелесообразно.</p>
+<p>Во-первых, некоторые состояние экрана получить очень сложно или даже невозможно.</p>
+<p>Во-вторых, такие тесты начинают зависеть от многих факторов, таких как скорость интернета и работоспособность сервера, следовательно вероятность того, что эти тесты завершатся неудачно, возрастает.</p>
+<h2 id="view-viewmodel">Взаимодействие View и ViewModel</h2>
+<p>По причинам, рассмотренным выше, в скриншот-тестах стейты устанавливают другим способом. Имитировать действия пользователя мы не будем.</p>
+<p>На этом этапе важно понимать паттерн MVVM (Model-View-ViewModel). Если говорить кратко, то согласно этому паттерну в приложении логика отделяется от видимой части.</p>
+<p>Видимая часть, или можно сказать экраны (Activity и Fragments) отвечают за отображение элементов интерфейса и взаимодействия с пользователем. То есть они показывают вам какие-то элементы (кнопки, поля ввода и т.д.) и реагируют на действия пользователя (клики, свайпы и т.д). В паттерне MVVM эта часть называется View.</p>
+<p>ViewModel в этом паттерне отвечает за логику.</p>
+<p>Их взаимодействие выглядит следующим образом: ViewModel у себя хранит стейт экрана, она определяет, что следует показать пользователю. View получает этот стейт из ViewModel, и, в зависимости от полученного значения, отрисовывает нужные элементы. Если пользователь выполняет какие-то действия, то View вызывает соответствующий метод из ViewModel.</p>
+<p>Давайте посмотрим пример из нашего приложения. На экране есть кнопка загрузки, пользователь кликнул по ней, View вызывает метод загрузки данных из ViewModel.</p>
+<p>Откройте класс <code>LoadUserFragment</code> из пакета <code>com.kaspersky.kaspresso.tutorial.user</code>. Этот фрагмент в паттерне MVVM представляет собой View. В следующем фрагменте кода мы устанавливаем слушатель клика на кнопку и говорим, чтобы при клике на нее был вызван метод <code>loadUser</code> из ViewModel</p>
+<div class="highlight"><pre><span></span><code><span class="n">binding</span><span class="p">.</span><span class="na">loadingButton</span><span class="p">.</span><span class="na">setOnClickListener</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">viewModel</span><span class="p">.</span><span class="na">loadUser</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Логика загрузки реализована внутри ViewModel. Откройте класс <code>LoadUserViewModel</code> из пакета <code>com.kaspersky.kaspresso.tutorial.user</code>.</p>
+<p>При вызове этого метода ViewModel меняет стейт экрана: при старте загрузки устанавливает стейт Progress, после окончания загрузки в зависимости от результата она устанавливает стейт Error или Content.</p>
+<p><div class="highlight"><pre><span></span><code><span class="kd">fun</span><span class="w"> </span><span class="nf">loadUser</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">viewModelScope</span><span class="p">.</span><span class="na">launch</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">_state</span><span class="p">.</span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">State</span><span class="p">.</span><span class="na">Progress</span>
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kd">val</span><span class="w"> </span><span class="nv">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">repository</span><span class="p">.</span><span class="na">loadUser</span><span class="p">()</span>
+<span class="w">            </span><span class="n">_state</span><span class="p">.</span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">State</span><span class="p">.</span><span class="na">Content</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">e</span><span class="p">:</span><span class="w"> </span><span class="n">Exception</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">_state</span><span class="p">.</span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">State</span><span class="p">.</span><span class="na">Error</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+View (в данном случае фрагмент <code>LoadUserFragment</code>) подписывается на стейт из ViewModel и в зависимости от полученного значения меняет содержимое экрана. Происходит это в методе <code>observeViewModel</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">private</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">observeViewModel</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">viewLifecycleOwner</span><span class="p">.</span><span class="na">lifecycleScope</span><span class="p">.</span><span class="na">launch</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">repeatOnLifecycle</span><span class="p">(</span><span class="n">Lifecycle</span><span class="p">.</span><span class="na">State</span><span class="p">.</span><span class="na">STARTED</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">viewModel</span><span class="p">.</span><span class="na">state</span><span class="p">.</span><span class="na">collect</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">state</span><span class="w"> </span><span class="o">-&gt;</span>
+<span class="w">                </span><span class="k">when</span><span class="w"> </span><span class="p">(</span><span class="n">state</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="k">is</span><span class="w"> </span><span class="n">State</span><span class="p">.</span><span class="na">Content</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="n">binding</span><span class="p">.</span><span class="na">progressBarLoading</span><span class="p">.</span><span class="na">isVisible</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">                        </span><span class="n">binding</span><span class="p">.</span><span class="na">loadingButton</span><span class="p">.</span><span class="na">isEnabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">                        </span><span class="n">binding</span><span class="p">.</span><span class="na">error</span><span class="p">.</span><span class="na">isVisible</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">                        </span><span class="n">binding</span><span class="p">.</span><span class="na">username</span><span class="p">.</span><span class="na">isVisible</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+
+<span class="w">                        </span><span class="kd">val</span><span class="w"> </span><span class="nv">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">state</span><span class="p">.</span><span class="na">user</span>
+<span class="w">                        </span><span class="n">binding</span><span class="p">.</span><span class="na">username</span><span class="p">.</span><span class="na">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;</span><span class="si">${</span><span class="n">user</span><span class="p">.</span><span class="na">name</span><span class="si">}</span><span class="s"> </span><span class="si">${</span><span class="n">user</span><span class="p">.</span><span class="na">lastName</span><span class="si">}</span><span class="s">&quot;</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                    </span><span class="n">State</span><span class="p">.</span><span class="na">Error</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="n">binding</span><span class="p">.</span><span class="na">progressBarLoading</span><span class="p">.</span><span class="na">isVisible</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">                        </span><span class="n">binding</span><span class="p">.</span><span class="na">loadingButton</span><span class="p">.</span><span class="na">isEnabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">                        </span><span class="n">binding</span><span class="p">.</span><span class="na">error</span><span class="p">.</span><span class="na">isVisible</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">                        </span><span class="n">binding</span><span class="p">.</span><span class="na">username</span><span class="p">.</span><span class="na">isVisible</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                    </span><span class="n">State</span><span class="p">.</span><span class="na">Progress</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="n">binding</span><span class="p">.</span><span class="na">progressBarLoading</span><span class="p">.</span><span class="na">isVisible</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">                        </span><span class="n">binding</span><span class="p">.</span><span class="na">loadingButton</span><span class="p">.</span><span class="na">isEnabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">                        </span><span class="n">binding</span><span class="p">.</span><span class="na">error</span><span class="p">.</span><span class="na">isVisible</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">                        </span><span class="n">binding</span><span class="p">.</span><span class="na">username</span><span class="p">.</span><span class="na">isVisible</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                    </span><span class="n">State</span><span class="p">.</span><span class="na">Initial</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="n">binding</span><span class="p">.</span><span class="na">progressBarLoading</span><span class="p">.</span><span class="na">isVisible</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">                        </span><span class="n">binding</span><span class="p">.</span><span class="na">loadingButton</span><span class="p">.</span><span class="na">isEnabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">                        </span><span class="n">binding</span><span class="p">.</span><span class="na">error</span><span class="p">.</span><span class="na">isVisible</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">                        </span><span class="n">binding</span><span class="p">.</span><span class="na">username</span><span class="p">.</span><span class="na">isVisible</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Таким образом происходит взаимодействие View и ViewModel. ViewModel хранит стейт экрана, а View отображает его. При этом если пользователь совершил какие-то действия, то View сообщает об этом ViewModel и ViewModel меняет стейт экрана.</p>
+<p>Получается, что если мы хотим изменить состояние экрана, то можно изменить значение стейта внутри ViewModel, View отреагирует на это и отрисует то, что нам нужно. Именно этим мы и будем заниматься при написании скриншот-тестов.</p>
+<h2 id="viewmodel">Мокирование ViewModel</h2>
+<p>Давайте внутри тестового класса создадим объект ViewModel, у которого будем устанавливать стейт</p>
+<p><div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nc">LoadUserScreenshots</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">DocLocScreenshotTestCase</span><span class="p">(</span><span class="n">locales</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;en, fr&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">viewModel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LoadUserViewModel</span><span class="p">()</span>
+
+<span class="err">…</span>
+<span class="p">}</span>
+</code></pre></div>
+Теперь в эту ViewModel внутри тестового метода мы будем устанавливать новый стейт. Давайте попробуем установить какое-то новое значение в переменную <code>state</code>.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Далее мы будем работать с объектами StateFlow и MutableStateFlow, если вы не знаете, что это, и как с ними работать, обязательно прочитайте <a href="https://developer.android.com/kotlin/flow/stateflow-and-sharedflow">документацию</a></p>
+</div>
+<p><div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screenshot_tests</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">androidx.test.ext.junit.rules.activityScenarioRule</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.testcases.api.testcase.DocLocScreenshotTestCase</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screen.LoadUserScreen</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.user.LoadUserActivity</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.user.LoadUserViewModel</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.user.State</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Rule</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Test</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nc">LoadUserScreenshots</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">DocLocScreenshotTestCase</span><span class="p">(</span><span class="n">locales</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;en, fr&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">viewModel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LoadUserViewModel</span><span class="p">()</span>
+
+<span class="w">    </span><span class="nd">@get</span><span class="p">:</span><span class="n">Rule</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">activityRule</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">activityScenarioRule</span><span class="o">&lt;</span><span class="n">LoadUserActivity</span><span class="o">&gt;</span><span class="p">()</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">takeScreenshots</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">LoadUserScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">viewModel</span><span class="p">.</span><span class="na">state</span><span class="p">.</span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">State</span><span class="p">.</span><span class="na">Initial</span>
+<span class="w">            </span><span class="err">…</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+У нас возникает ошибка. Дело в том, что переменная <code>state</code> внутри ViewModel имеет тип <code>StateFlow</code>, который является неизменяемым. То есть установить новый стейт в этот объект не получится. Если вы посмотрите в код <code>LoadUserViewModel</code>, то увидите, что все новые значения стейта устанавливаются в переменную с нижним подчеркиванием <code>_state</code>, у которой тип <code>MutableStateFlow</code></p>
+<p><div class="highlight"><pre><span></span><code><span class="n">viewModelScope</span><span class="p">.</span><span class="na">launch</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">_state</span><span class="p">.</span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">State</span><span class="p">.</span><span class="na">Progress</span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">repository</span><span class="p">.</span><span class="na">loadUser</span><span class="p">()</span>
+<span class="w">        </span><span class="n">_state</span><span class="p">.</span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">State</span><span class="p">.</span><span class="na">Content</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">e</span><span class="p">:</span><span class="w"> </span><span class="n">Exception</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">_state</span><span class="p">.</span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">State</span><span class="p">.</span><span class="na">Error</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+Эта переменная с нижним подчеркиванием является изменяемым объектом, в который можно устанавливать новые значения, но она имеет модификатор доступа <code>private</code>, то есть снаружи обратиться к ней не получится.</p>
+<p>Как быть в этом случае? Нам необходимо добиться такого поведения, чтобы мы внутри тестового метода устанавливали новые значения стейта, а фрагмент на эти изменения реагировал. При этом фрагмент подписывается на <code>viewModel.state</code> без нижнего подчеркивания.</p>
+<p>Можно пойти другим путем – внутри тестового класса мы создадим свой объект state, который будет изменяемый, и в который мы сможем устанавливать любые значения.</p>
+<p><div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screenshot_tests</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">androidx.test.ext.junit.rules.activityScenarioRule</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.testcases.api.testcase.DocLocScreenshotTestCase</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screen.LoadUserScreen</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.user.LoadUserActivity</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.user.LoadUserViewModel</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.user.State</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">kotlinx.coroutines.flow.MutableStateFlow</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Rule</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Test</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nc">LoadUserScreenshots</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">DocLocScreenshotTestCase</span><span class="p">(</span><span class="n">locales</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;en, fr&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">_state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MutableStateFlow</span><span class="o">&lt;</span><span class="n">State</span><span class="o">&gt;</span><span class="p">(</span><span class="n">State</span><span class="p">.</span><span class="na">Initial</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">viewModel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LoadUserViewModel</span><span class="p">()</span>
+
+<span class="w">    </span><span class="nd">@get</span><span class="p">:</span><span class="n">Rule</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">activityRule</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">activityScenarioRule</span><span class="o">&lt;</span><span class="n">LoadUserActivity</span><span class="o">&gt;</span><span class="p">()</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">takeScreenshots</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">LoadUserScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">_state</span><span class="p">.</span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">State</span><span class="p">.</span><span class="na">Initial</span>
+<span class="w">            </span><span class="err">…</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+Теперь нужно сделать так, чтобы в тот момент, когда фрагмент подписывается на <code>viewModel.state</code> вместо настоящей реализации подставлялся наш только что созданный объект. Сделать это можно при помощи библиотеки Mockk. Если вы не работали с этой библиотекой ранее, советуем почитать <a href="https://mockk.io">официальную документацию</a>
+Для использования данной библиотеки необходимо добавить зависимости в файл <code>build.gradle</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">androidTestImplementation</span><span class="p">(</span><span class="s">&quot;io.mockk:mockk-android:1.13.3&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p><img src="../images/screenshot_tests_2/gradle2.png" alt="Gradle"/></p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Если после синхронизации и запуска проекта у вас возникают ошибки, следуйте инструкциям в журнале ошибок. В случае, если разобраться не получилось, переключитесь на ветку <code>TECH-tutorial-results</code> и сверьте файл <code>build.gradle</code> из этой ветки с вашим</p>
+</div>
+<p>Теперь внутренняя реализация ViewModel нас не интересует. Все, что нам нужно – чтобы фрагмент подписывался на <code>state</code> из ViewModel, а ему возвращался тот объект, который мы создали внутри тестового класса. Делается это следующим образом:</p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screenshot_tests</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">androidx.test.ext.junit.rules.activityScenarioRule</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.testcases.api.testcase.DocLocScreenshotTestCase</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screen.LoadUserScreen</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.user.LoadUserActivity</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.user.LoadUserViewModel</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.user.State</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">io.mockk.every</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">io.mockk.mockk</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">kotlinx.coroutines.flow.MutableStateFlow</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Rule</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Test</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nc">LoadUserScreenshots</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">DocLocScreenshotTestCase</span><span class="p">(</span><span class="n">locales</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;en, fr&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">_state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MutableStateFlow</span><span class="o">&lt;</span><span class="n">State</span><span class="o">&gt;</span><span class="p">(</span><span class="n">State</span><span class="p">.</span><span class="na">Initial</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">viewModel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mockk</span><span class="o">&lt;</span><span class="n">LoadUserViewModel</span><span class="o">&gt;</span><span class="p">(</span><span class="n">relaxed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">){</span>
+<span class="w">        </span><span class="n">every</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">state</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="n">returns</span><span class="w"> </span><span class="n">_state</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="err">…</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>То, что мы сделали, называется мокированием. Мы «замокали» ViewModel таким образом, что если кто-то будет работать с ней и обратится к ее полю <code>state</code>, то ему вернется созданный нами объект <code>_state</code>. Настоящая реализация <code>LoadUserViewModel</code> в тестах использоваться не будет.</p>
+<p>Теперь нам не нужно имитировать действия пользователя для получения различных состояний экрана. Вместо этого, мы будем устанавливать стейт в переменную <code>_state</code> и затем делать скриншот.</p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screenshot_tests</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">androidx.test.ext.junit.rules.activityScenarioRule</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.testcases.api.testcase.DocLocScreenshotTestCase</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screen.LoadUserScreen</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.user.LoadUserActivity</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.user.LoadUserViewModel</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.user.State</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.user.User</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">io.mockk.every</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">io.mockk.mockk</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">kotlinx.coroutines.flow.MutableStateFlow</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Rule</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Test</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nc">LoadUserScreenshots</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">DocLocScreenshotTestCase</span><span class="p">(</span><span class="n">locales</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;en, fr&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">_state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MutableStateFlow</span><span class="o">&lt;</span><span class="n">State</span><span class="o">&gt;</span><span class="p">(</span><span class="n">State</span><span class="p">.</span><span class="na">Initial</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">viewModel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mockk</span><span class="o">&lt;</span><span class="n">LoadUserViewModel</span><span class="o">&gt;</span><span class="p">(</span><span class="n">relaxed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">every</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">state</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="n">returns</span><span class="w"> </span><span class="n">_state</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@get</span><span class="p">:</span><span class="n">Rule</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">activityRule</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">activityScenarioRule</span><span class="o">&lt;</span><span class="n">LoadUserActivity</span><span class="o">&gt;</span><span class="p">()</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">takeScreenshots</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">LoadUserScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">_state</span><span class="p">.</span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">State</span><span class="p">.</span><span class="na">Initial</span>
+<span class="w">            </span><span class="n">captureScreenshot</span><span class="p">(</span><span class="s">&quot;Initial state&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="n">_state</span><span class="p">.</span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">State</span><span class="p">.</span><span class="na">Progress</span>
+<span class="w">            </span><span class="n">captureScreenshot</span><span class="p">(</span><span class="s">&quot;Progress state&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="n">_state</span><span class="p">.</span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">State</span><span class="p">.</span><span class="na">Content</span><span class="p">(</span><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Test&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lastName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Test&quot;</span><span class="p">))</span>
+<span class="w">            </span><span class="n">captureScreenshot</span><span class="p">(</span><span class="s">&quot;Content state&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="n">_state</span><span class="p">.</span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">State</span><span class="p">.</span><span class="na">Error</span>
+<span class="w">            </span><span class="n">captureScreenshot</span><span class="p">(</span><span class="s">&quot;Error state&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="_4">Дорабатываем код фрагмента</h2>
+<p>Если мы запустим тест в таком виде, то работать он будет неправильно, никакой смены состояний экрана происходить не будет. Дело в том, что мы создали объект <code>viewModel</code>, но нигде его не используем.</p>
+<p>Давайте посмотрим, как происходит взаимодействие экрана и ViewModel, и какие изменения нужно внести в код, чтобы экран взаимодействовал не с настоящей ViewModel, а с замоканной.</p>
+<p>Для открытия экрана мы запускаем <code>LoadUserActivity</code></p>
+<p><div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.user</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">android.os.Bundle</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">androidx.appcompat.app.AppCompatActivity</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.R</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nc">LoadUserActivity</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">AppCompatActivity</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span><span class="w"> </span><span class="n">Bundle?)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">super</span><span class="p">.</span><span class="na">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">)</span>
+<span class="w">        </span><span class="n">setContentView</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">activity_load_user</span><span class="p">)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">savedInstanceState</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">supportFragmentManager</span><span class="p">.</span><span class="na">beginTransaction</span><span class="p">()</span>
+<span class="w">                </span><span class="p">.</span><span class="na">replace</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">fragment_container</span><span class="p">,</span><span class="w"> </span><span class="n">LoadUserFragment</span><span class="p">.</span><span class="na">newInstance</span><span class="p">())</span>
+<span class="w">                </span><span class="p">.</span><span class="na">commit</span><span class="p">()</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+В этой Activity почти нет кода. Дело в том, что в последнее время большинство приложений используют подход <a href="https://developer.android.com/guide/navigation/migrate#move">Single Activity</a>. При таком подходе все экраны создаются на фрагментах, а активити служит лишь контейнером для них. Если вы хотите узнать больше о преимуществах этого подхода, то мы советуем почитать документацию. Что нужно понимать сейчас – внешний вид экрана и взаимодействие с ViewModel реализовано внутри <code>LoadUserFragment</code>, а <code>LoadUserActivity</code> представляет собой контейнер, в который мы этот фрагмент установили. Следовательно, изменения нужно делать именно внутри фрагмента.</p>
+<p>Открываем <code>LoadUserFragment</code></p>
+<p><div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.user</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nc">LoadUserFragment</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Fragment</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="err">…</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">lateinit</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">viewModel</span><span class="p">:</span><span class="w"> </span><span class="n">LoadUserViewModel</span>
+
+<span class="err">…</span>
+
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">onViewCreated</span><span class="p">(</span><span class="n">view</span><span class="p">:</span><span class="w"> </span><span class="n">View</span><span class="p">,</span><span class="w"> </span><span class="n">savedInstanceState</span><span class="p">:</span><span class="w"> </span><span class="n">Bundle?)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">super</span><span class="p">.</span><span class="na">onViewCreated</span><span class="p">(</span><span class="n">view</span><span class="p">,</span><span class="w"> </span><span class="n">savedInstanceState</span><span class="p">)</span>
+<span class="w">        </span><span class="n">viewModel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ViewModelProvider</span><span class="p">(</span><span class="k">this</span><span class="p">)</span><span class="o">[</span><span class="n">LoadUserViewModel</span><span class="o">::</span><span class="n">class</span><span class="p">.</span><span class="na">java</span><span class="o">]</span>
+<span class="err">…</span>
+<span class="p">}</span>
+</code></pre></div>
+Обратите внимание, что в этом классе есть приватная переменная <code>viewModel</code>, а в методе <code>onViewCreated</code> мы этой переменной присваиваем значение, создавая объект при помощи <code>ViewModelProvider</code>. Нам необходимо добиться такого поведения, чтобы при обычном использовании фрагмента вьюмодель создавалась через <code>ViewModelProvider</code>, а если этот фрагмент используется в screenshot-тестах, то должна быть возможность передать замоканную вьюмодель в качестве параметра.</p>
+<p>Для создания экземпляра фрагмента мы используем фабричный метод <code>newInstance</code></p>
+<p><div class="highlight"><pre><span></span><code><span class="kd">companion</span><span class="w"> </span><span class="kd">object</span><span class="w"> </span><span class="err">{</span>
+
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">newInstance</span><span class="p">():</span><span class="w"> </span><span class="n">LoadUserFragment</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LoadUserFragment</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div>
+В этом методе мы просто создаем объект <code>LoadUserFragment</code>. Давайте добавим еще один метод, который будет принимать в качестве параметра замоканную вьюмодель и устанавливать это значение в поле фрагмента. Этот метод мы будем использовать в тестах, поэтому давайте назовем его <code>newTestInstance</code></p>
+<p><div class="highlight"><pre><span></span><code><span class="kd">companion</span><span class="w"> </span><span class="kd">object</span><span class="w"> </span><span class="err">{</span>
+
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">newInstance</span><span class="p">():</span><span class="w"> </span><span class="n">LoadUserFragment</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LoadUserFragment</span><span class="p">()</span>
+
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">newTestInstance</span><span class="p">(</span>
+<span class="w">        </span><span class="n">mockedViewModel</span><span class="p">:</span><span class="w"> </span><span class="n">LoadUserViewModel</span>
+<span class="w">    </span><span class="p">):</span><span class="w"> </span><span class="n">LoadUserFragment</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LoadUserFragment</span><span class="p">().</span><span class="na">apply</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">viewModel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mockedViewModel</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+Теперь для создания фрагмента в активити мы будем вызывать метод <code>newInstance</code>, что мы сейчас и делаем</p>
+<p><div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">savedInstanceState</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">supportFragmentManager</span><span class="p">.</span><span class="na">beginTransaction</span><span class="p">()</span>
+<span class="w">        </span><span class="p">.</span><span class="na">replace</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">fragment_container</span><span class="p">,</span><span class="w"> </span><span class="n">LoadUserFragment</span><span class="p">.</span><span class="na">newInstance</span><span class="p">())</span>
+<span class="w">        </span><span class="p">.</span><span class="na">commit</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div>
+А для создания фрагмента внутри скриншот-тестов будем вызывать метод <code>newTestInstance</code>.</p>
+<p>На данном этапе в методе <code>onViewCreated</code> мы присваиваем значение переменной <code>viewModel</code> независимо от того, используется этот фрагмент для скриншот-тестов или нет. Давайте это исправим, добавим поле <code>isForScreenshots</code> типа <code>Boolean</code>, по умолчанию установим значение <code>false</code>, а в методе <code>newTestInstance</code> установим значение <code>true</code>.</p>
+<p><div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.user</span>
+
+<span class="err">…</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nc">LoadUserFragment</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Fragment</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="err">…</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">lateinit</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">viewModel</span><span class="p">:</span><span class="w"> </span><span class="n">LoadUserViewModel</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">isForScreenshots</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
+
+<span class="err">…</span>
+<span class="w">    </span><span class="kd">companion</span><span class="w"> </span><span class="kd">object</span><span class="w"> </span><span class="err">{</span>
+
+<span class="w">        </span><span class="kd">fun</span><span class="w"> </span><span class="nf">newInstance</span><span class="p">():</span><span class="w"> </span><span class="n">LoadUserFragment</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LoadUserFragment</span><span class="p">()</span>
+
+<span class="w">        </span><span class="kd">fun</span><span class="w"> </span><span class="nf">newTestInstance</span><span class="p">(</span>
+<span class="w">            </span><span class="n">mockedViewModel</span><span class="p">:</span><span class="w"> </span><span class="n">LoadUserViewModel</span>
+<span class="w">        </span><span class="p">):</span><span class="w"> </span><span class="n">LoadUserFragment</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LoadUserFragment</span><span class="p">().</span><span class="na">apply</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">viewModel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mockedViewModel</span>
+<span class="w">            </span><span class="n">isForScreenshots</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+В методе <code>onViewCreated</code> мы будем создавать вьюмодель через <code>ViewModelProvider</code> только в том случае, если <code>isForScreenshots</code> равен <code>false</code></p>
+<p><div class="highlight"><pre><span></span><code><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">onViewCreated</span><span class="p">(</span><span class="n">view</span><span class="p">:</span><span class="w"> </span><span class="n">View</span><span class="p">,</span><span class="w"> </span><span class="n">savedInstanceState</span><span class="p">:</span><span class="w"> </span><span class="n">Bundle?)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">super</span><span class="p">.</span><span class="na">onViewCreated</span><span class="p">(</span><span class="n">view</span><span class="p">,</span><span class="w"> </span><span class="n">savedInstanceState</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">isForScreenshots</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">viewModel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ViewModelProvider</span><span class="p">(</span><span class="k">this</span><span class="p">)</span><span class="o">[</span><span class="n">LoadUserViewModel</span><span class="o">::</span><span class="n">class</span><span class="p">.</span><span class="na">java</span><span class="o">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">binding</span><span class="p">.</span><span class="na">loadingButton</span><span class="p">.</span><span class="na">setOnClickListener</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">viewModel</span><span class="p">.</span><span class="na">loadUser</span><span class="p">()</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">observeViewModel</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div>
+После создания вьюмодели мы устанавливаем слушатель клика на кнопку загрузки и в этом слушателе вызываем метод вьюмодели. В случае, если мы передали замоканный вариант ViewModel, вызов этого метода <code>viewModel.loadUser()</code> приведет к падению теста, так как у нее данный метод не реализован. Поэтому вызов любых методов вьюмодели мы также будем выполнять только в том случае, если этот фрагмент используется не для скриншот-тестов:</p>
+<p><div class="highlight"><pre><span></span><code><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">onViewCreated</span><span class="p">(</span><span class="n">view</span><span class="p">:</span><span class="w"> </span><span class="n">View</span><span class="p">,</span><span class="w"> </span><span class="n">savedInstanceState</span><span class="p">:</span><span class="w"> </span><span class="n">Bundle?)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">super</span><span class="p">.</span><span class="na">onViewCreated</span><span class="p">(</span><span class="n">view</span><span class="p">,</span><span class="w"> </span><span class="n">savedInstanceState</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">isForScreenshots</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">viewModel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ViewModelProvider</span><span class="p">(</span><span class="k">this</span><span class="p">)</span><span class="o">[</span><span class="n">LoadUserViewModel</span><span class="o">::</span><span class="n">class</span><span class="p">.</span><span class="na">java</span><span class="o">]</span>
+<span class="w">        </span><span class="n">binding</span><span class="p">.</span><span class="na">loadingButton</span><span class="p">.</span><span class="na">setOnClickListener</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">viewModel</span><span class="p">.</span><span class="na">loadUser</span><span class="p">()</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">observeViewModel</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div>
+Как вы должны помнить, в тестах мы замокали значение переменной <code>state</code> из вьюмодели</p>
+<p><div class="highlight"><pre><span></span><code><span class="kd">val</span><span class="w"> </span><span class="nv">_state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MutableStateFlow</span><span class="o">&lt;</span><span class="n">State</span><span class="o">&gt;</span><span class="p">(</span><span class="n">State</span><span class="p">.</span><span class="na">Initial</span><span class="p">)</span>
+<span class="kd">val</span><span class="w"> </span><span class="nv">viewModel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mockk</span><span class="o">&lt;</span><span class="n">LoadUserViewModel</span><span class="o">&gt;</span><span class="p">(</span><span class="n">relaxed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">every</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">state</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="n">returns</span><span class="w"> </span><span class="n">_state</span>
+<span class="p">}</span>
+</code></pre></div>
+Поэтому, когда мы обратимся к полю <code>viewModel.state</code> из фрагмента в методе <code>observeViewModel</code></p>
+<p><div class="highlight"><pre><span></span><code><span class="n">viewModel</span><span class="p">.</span><span class="na">state</span><span class="p">.</span><span class="na">collect</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">state</span><span class="w"> </span><span class="o">-&gt;</span>
+<span class="w">    </span><span class="k">when</span><span class="w"> </span><span class="p">(</span><span class="n">state</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">is</span><span class="w"> </span><span class="n">State</span><span class="p">.</span><span class="na">Content</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="err">…</span>
+</code></pre></div>
+то ошибки не будет, вместо настоящей реализации будет использовано значение из переменной <code>_state</code>, созданной внутри теста.</p>
+<h2 id="_5">Тестирование фрагментов</h2>
+<p>Теперь, для того чтобы написать скриншот тест, нам нужно внутри этого теста создать экземпляр фрагмента, передав ему замоканную вьюмодель в качестве параметра. Но если вы посмотрите на текущий код, то увидите, что мы вообще не создаем здесь никаких фрагментов</p>
+<p><div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screenshot_tests</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">androidx.test.ext.junit.rules.activityScenarioRule</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.testcases.api.testcase.DocLocScreenshotTestCase</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screen.LoadUserScreen</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.user.LoadUserActivity</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.user.LoadUserViewModel</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.user.State</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.user.User</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">io.mockk.every</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">io.mockk.mockk</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">kotlinx.coroutines.flow.MutableStateFlow</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Rule</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Test</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nc">LoadUserScreenshots</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">DocLocScreenshotTestCase</span><span class="p">(</span><span class="n">locales</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;en, fr&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">_state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MutableStateFlow</span><span class="o">&lt;</span><span class="n">State</span><span class="o">&gt;</span><span class="p">(</span><span class="n">State</span><span class="p">.</span><span class="na">Initial</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">viewModel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mockk</span><span class="o">&lt;</span><span class="n">LoadUserViewModel</span><span class="o">&gt;</span><span class="p">(</span><span class="n">relaxed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">every</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">state</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="n">returns</span><span class="w"> </span><span class="n">_state</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@get</span><span class="p">:</span><span class="n">Rule</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">activityRule</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">activityScenarioRule</span><span class="o">&lt;</span><span class="n">LoadUserActivity</span><span class="o">&gt;</span><span class="p">()</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">takeScreenshots</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">LoadUserScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">_state</span><span class="p">.</span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">State</span><span class="p">.</span><span class="na">Initial</span>
+<span class="w">            </span><span class="n">captureScreenshot</span><span class="p">(</span><span class="s">&quot;Initial state&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="n">_state</span><span class="p">.</span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">State</span><span class="p">.</span><span class="na">Progress</span>
+<span class="w">            </span><span class="n">captureScreenshot</span><span class="p">(</span><span class="s">&quot;Progress state&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="n">_state</span><span class="p">.</span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">State</span><span class="p">.</span><span class="na">Content</span><span class="p">(</span><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Test&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lastName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Test&quot;</span><span class="p">))</span>
+<span class="w">            </span><span class="n">captureScreenshot</span><span class="p">(</span><span class="s">&quot;Content state&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="n">_state</span><span class="p">.</span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">State</span><span class="p">.</span><span class="na">Error</span>
+<span class="w">            </span><span class="n">captureScreenshot</span><span class="p">(</span><span class="s">&quot;Error state&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+У нас открывается <code>LoadUserActivity</code>, а внутри этой активити создается фрагмент, поэтому передать в тот фрагмент никакие параметры мы не можем.</p>
+<p>Если мы тестируем фрагменты, то запускать активити, в которой этот фрагмент лежит, не нужно. Мы можем напрямую тестировать фрагменты. Для того чтобы у нас была такая возможность, необходимо добавить следующие зависимости в build.gradle</p>
+<p><img src="../images/screenshot_tests_2/gradle.png" alt="Gradle"/></p>
+<div class="highlight"><pre><span></span><code><span class="n">debugImplementation</span><span class="p">(</span><span class="s">&quot;androidx.fragment:fragment-testing-manifest:1.6.0&quot;</span><span class="p">){</span>
+<span class="w">    </span><span class="n">isTransitive</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
+<span class="p">}</span>
+<span class="n">androidTestImplementation</span><span class="p">(</span><span class="s">&quot;androidx.fragment:fragment-testing:1.6.0&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>После синхронизации проекта открываем класс <code>LoadUserScreenshots</code> и удаляем из него <code>activityRule</code>, запускать активити нам больше не нужно.</p>
+<p>Для того чтобы запустить фрагмент, необходимо вызвать метод <code>launchFragmentInContainer</code> и в фигурных скобках создать фрагмент, который нужно отобразить
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screenshot_tests</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">androidx.fragment.app.testing.launchFragmentInContainer</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.testcases.api.testcase.DocLocScreenshotTestCase</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screen.LoadUserScreen</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.user.LoadUserFragment</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.user.LoadUserViewModel</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.user.State</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.user.User</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">io.mockk.every</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">io.mockk.mockk</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">kotlinx.coroutines.flow.MutableStateFlow</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Test</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nc">LoadUserScreenshots</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">DocLocScreenshotTestCase</span><span class="p">(</span><span class="n">locales</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;en, fr&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">_state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MutableStateFlow</span><span class="o">&lt;</span><span class="n">State</span><span class="o">&gt;</span><span class="p">(</span><span class="n">State</span><span class="p">.</span><span class="na">Initial</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">viewModel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mockk</span><span class="o">&lt;</span><span class="n">LoadUserViewModel</span><span class="o">&gt;</span><span class="p">(</span><span class="n">relaxed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">every</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">state</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="n">returns</span><span class="w"> </span><span class="n">_state</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">takeScreenshots</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">LoadUserScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">launchFragmentInContainer</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">LoadUserFragment</span><span class="p">.</span><span class="na">newTestInstance</span><span class="p">(</span><span class="n">mockedViewModel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">viewModel</span><span class="p">)</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="n">_state</span><span class="p">.</span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">State</span><span class="p">.</span><span class="na">Initial</span>
+<span class="w">            </span><span class="n">captureScreenshot</span><span class="p">(</span><span class="s">&quot;Initial state&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="n">_state</span><span class="p">.</span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">State</span><span class="p">.</span><span class="na">Progress</span>
+<span class="w">            </span><span class="n">captureScreenshot</span><span class="p">(</span><span class="s">&quot;Progress state&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="n">_state</span><span class="p">.</span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">State</span><span class="p">.</span><span class="na">Content</span><span class="p">(</span><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Test&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lastName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Test&quot;</span><span class="p">))</span>
+<span class="w">            </span><span class="n">captureScreenshot</span><span class="p">(</span><span class="s">&quot;Content state&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="n">_state</span><span class="p">.</span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">State</span><span class="p">.</span><span class="na">Error</span>
+<span class="w">            </span><span class="n">captureScreenshot</span><span class="p">(</span><span class="s">&quot;Error state&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<p>Итак, давайте обсудим, что здесь происходит. Внутри метода <code>takeScreenshots</code> мы запускаем фрагмент <code>LoadUserFragment</code>. Для создания фрагмента мы воспользовались методом <code>newTestInstance</code>, передавая созданный в тестовом классе вариант вьюмодели.</p>
+<p>Теперь фрагмент работает не с настоящей вьюмоделью, а с замоканной. Фрагмент отрисовывает стейт, который лежит внутри вьюмодели, но так как мы подменили (замокали) объект <code>state</code>, то фрагмент покажет то состояние, которое мы установим в тестовом классе.</p>
+<p>С этого момента нам не нужно имитировать действия пользователя, мы просто устанавливаем необходимое состояние, фрагмент его отрисовывает, и мы делаем скриншот.</p>
+<p>Если вы сейчас запустите тест, то увидите, что скриншоты всех состояний успешно сохраняются в папку на устройстве, и это происходит гораздо быстрее, чем в предыдущем варианте теста.</p>
+<h2 id="_6">Меняем стиль</h2>
+<p>Вы могли обратить внимание, что внешний вид экрана в приложении отличается от того, который мы получили в результате выполнения теста. Проблема заключается в использовании <a href="https://developer.android.com/develop/ui/views/theming/themes">стилей</a>. Во время теста под капотом создается активити, которая является контейнером для нашего фрагмента. Стиль этой активити может отличаться от того, который используется у нас в приложении.</p>
+<p>Данная проблема решается очень просто – в качестве параметра в метод <code>launchFragmentInContainer</code> можно передать стиль, который должен использоваться внутри фрагмента, его можно найти в манифесте приложения</p>
+<p><img src="../images/screenshot_tests_2/style.png" alt="Style"/></p>
+<p>Передать этот стиль в метод <code>launchFragmentInContainer</code> можно следующим образом:</p>
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screenshot_tests</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">androidx.fragment.app.testing.launchFragmentInContainer</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.testcases.api.testcase.DocLocScreenshotTestCase</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.R</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.screen.LoadUserScreen</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.user.LoadUserFragment</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.user.LoadUserViewModel</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.user.State</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">com.kaspersky.kaspresso.tutorial.user.User</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">io.mockk.every</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">io.mockk.mockk</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">kotlinx.coroutines.flow.MutableStateFlow</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.junit.Test</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nc">LoadUserScreenshots</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">DocLocScreenshotTestCase</span><span class="p">(</span><span class="n">locales</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;en, fr&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">_state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MutableStateFlow</span><span class="o">&lt;</span><span class="n">State</span><span class="o">&gt;</span><span class="p">(</span><span class="n">State</span><span class="p">.</span><span class="na">Initial</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">viewModel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mockk</span><span class="o">&lt;</span><span class="n">LoadUserViewModel</span><span class="o">&gt;</span><span class="p">(</span><span class="n">relaxed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">every</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">state</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="n">returns</span><span class="w"> </span><span class="n">_state</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">takeScreenshots</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">LoadUserScreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">launchFragmentInContainer</span><span class="p">(</span>
+<span class="w">                </span><span class="n">themeResId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">R</span><span class="p">.</span><span class="na">style</span><span class="p">.</span><span class="na">Theme_Kaspresso</span>
+<span class="w">            </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">LoadUserFragment</span><span class="p">.</span><span class="na">newTestInstance</span><span class="p">(</span><span class="n">mockedViewModel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">viewModel</span><span class="p">)</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="n">_state</span><span class="p">.</span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">State</span><span class="p">.</span><span class="na">Initial</span>
+<span class="w">            </span><span class="n">captureScreenshot</span><span class="p">(</span><span class="s">&quot;Initial state&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="n">_state</span><span class="p">.</span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">State</span><span class="p">.</span><span class="na">Progress</span>
+<span class="w">            </span><span class="n">captureScreenshot</span><span class="p">(</span><span class="s">&quot;Progress state&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="n">_state</span><span class="p">.</span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">State</span><span class="p">.</span><span class="na">Content</span><span class="p">(</span><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Test&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lastName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Test&quot;</span><span class="p">))</span>
+<span class="w">            </span><span class="n">captureScreenshot</span><span class="p">(</span><span class="s">&quot;Content state&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="n">_state</span><span class="p">.</span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">State</span><span class="p">.</span><span class="na">Error</span>
+<span class="w">            </span><span class="n">captureScreenshot</span><span class="p">(</span><span class="s">&quot;Error state&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="_7">Итог</h2>
+<p>Это был очень насыщенный урок, в котором мы научились правильно устанавливать стейты во вьюмодель, тестировать фрагменты, использовать бибилотеку Mockk для мокирования сущностей, а также дорабатывать код приложения, чтобы его можно было покрыть screenshot-тестами.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["tabs", "navigation.tabs", "content.code.annotate", "navigation.tabs.sticky", "navigation.instant", "navigation.tracking", "navigation.top", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

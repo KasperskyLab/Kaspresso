@@ -1,0 +1,2404 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://kasperskylab.github.io/Kaspresso/ru/Wiki/Kaspresso_configuration/">
+      
+      
+        <link rel="prev" href="../Screenshot_tests/">
+      
+      
+        <link rel="next" href="../Kaspresso_Robolectric/">
+      
+      
+        
+          <link rel="alternate" href="/Kaspresso/en/" hreflang="en">
+        
+          <link rel="alternate" href="/Kaspresso/ru/" hreflang="ru">
+        
+      
+      
+      <link rel="icon" href="../../../kaspresso.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Конфигуратор Kaspresso - Kaspresso</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="light-blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#kaspresso" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../" title="Kaspresso" class="md-header__button md-logo" aria-label="Kaspresso" data-md-component="logo">
+      
+  <img src="../../../kaspresso.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Kaspresso
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Конфигуратор Kaspresso
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="light-blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="Select language">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="/Kaspresso/en/" hreflang="en" class="md-select__link">
+              English
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/Kaspresso/ru/" hreflang="ru" class="md-select__link">
+              Русский
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/KasperskyLab/Kaspresso" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Kaspresso
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+  Главная
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Tutorial/" class="md-tabs__link">
+          
+  
+  
+  Туториал
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  Вики
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Issues/" class="md-tabs__link">
+          
+  
+  
+  Известные проблемы
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../" title="Kaspresso" class="md-nav__button md-logo" aria-label="Kaspresso" data-md-component="logo">
+      
+  <img src="../../../kaspresso.png" alt="logo">
+
+    </a>
+    Kaspresso
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/KasperskyLab/Kaspresso" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Kaspresso
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Главная
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Главная
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    О Kaspresso
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Home/Kaspresso-in-articles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kaspresso в статьях
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Home/Kaspresso-in-videos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kaspresso в видео
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Home/Kaspresso%20users/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Наши пользователи
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Home/Breaking-changes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Критические изменения
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Home/Contribution_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Инструкция для разработчиков
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Туториал
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Туториал
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tutorial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Введение
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tutorial/Download_Kaspresso_project_and_Android_studio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Скачиваем проект и Android studio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tutorial/Writing_simple_test/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Пишем первый автотест с Kaspresso
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tutorial/Working_with_adb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Выполнение adb-команд
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tutorial/Wifi_sample_test/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Тестирование интернет-соединения и работа с классом Device
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tutorial/Steps_and_sections/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Steps and sections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tutorial/Scenario/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. Вынесение дублирующихся шагов в Scenario
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tutorial/UiAutomator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. UiAutomator. Тестирование за рамками приложения
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tutorial/FlakySafely/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9. flakySafely
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tutorial/Android_permissions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10. Работа с Android permissions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tutorial/Recyclerview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11. RecyclerView
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tutorial/Logger_and_screenshot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12. Логирование и скриншоты
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tutorial/Screenshot_tests_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    13. Screenshot-тесты. Часть 1. Простой screenshot тест
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tutorial/Screenshot_tests_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    14. Screenshot-тесты. Часть 2. Установка стейтов и работа с ViewModel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Вики
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Вики
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Введение
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Page_object_in_Kaspresso/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Паттерн PageObject в Kaspresso
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Espresso_as_the_basis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Espresso как основа
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Supported_Android_UI_elements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Поддерживаемые UI-виджеты Android
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Matchers_actions_assertions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Доступные классы Matcher, Action и Assertion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Kautomator-wrapper_over_UI_Automator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kautomator. Обертка над UI Automator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Working_with_Android_OS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Взаимодействие с ОС Android. Класс Device
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Executing_adb_commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Выполнение команд adb
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Screenshot_tests/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Скриншот тесты
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Конфигуратор Kaspresso
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Конфигуратор Kaspresso
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Структура
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Структура">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kakao-clicks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kakao clicks
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Логгеры
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kaspresso-kakaokautomator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Перехватчики Kaspresso на базе перехватчиков Kakao/Kautomator.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kaspresso_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Специальные перехватчики Kaspresso
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#buildstepreportwatcherinterceptor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BuildStepReportWatcherInterceptor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Действия по умолчанию в разделах до/после
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#device" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Device
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adbserver" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AdbServer
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kaspresso-kaspresso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Настройка Kaspresso и пример перехватчиков Kaspresso
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kaspresso_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Настройки Kaspresso по умолчанию
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Настройки Kaspresso по умолчанию">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ведение журнала
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flaky" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Защита от flaky тестов
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Перехватчики
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#behavior-interceptors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Несколько слов о Behavior Interceptors
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Дополнения основной секции
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Дополнения основной секции">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Стягивание артефактов с устройства на хост
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Kaspresso_Robolectric/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Запуск тестов Kaspresso на JVM с помощью Robolectric
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Kaspresso_Allure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Поддержка Allure в Kaspresso
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Jetpack_Compose/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Поддержка Compose в Kaspresso
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Известные проблемы
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Известные проблемы
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Нашли проблему?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Issues/Storage_issue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Работа с файлами
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Структура
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Структура">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kakao-clicks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kakao clicks
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Логгеры
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kaspresso-kakaokautomator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Перехватчики Kaspresso на базе перехватчиков Kakao/Kautomator.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kaspresso_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Специальные перехватчики Kaspresso
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#buildstepreportwatcherinterceptor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BuildStepReportWatcherInterceptor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Действия по умолчанию в разделах до/после
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#device" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Device
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adbserver" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AdbServer
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kaspresso-kaspresso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Настройка Kaspresso и пример перехватчиков Kaspresso
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kaspresso_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Настройки Kaspresso по умолчанию
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Настройки Kaspresso по умолчанию">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ведение журнала
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flaky" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Защита от flaky тестов
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Перехватчики
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#behavior-interceptors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Несколько слов о Behavior Interceptors
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Дополнения основной секции
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Дополнения основной секции">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Стягивание артефактов с устройства на хост
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="kaspresso">Конфигуратор Kaspresso</h1>
+<p>Класс <strong>Kaspresso</strong> — это единственная точка для установки параметров Kaspresso. <br>
+Разработчик может настроить <strong>Kaspresso</strong>, установив <code>Kaspresso.Builder</code> в конструкторах <code>TestCase</code>, <code>BaseTestCase</code>, <code>TestCaseRule</code>, <code>BaseTestCaseRule</code>.<br>
+Пример:
+<div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nc">SomeTest</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">TestCase</span><span class="p">(</span>
+<span class="w">    </span><span class="n">kaspressoBuilder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kaspresso</span><span class="p">.</span><span class="na">Builder</span><span class="p">.</span><span class="na">simple</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">beforeEachTest</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">testLogger</span><span class="p">.</span><span class="na">i</span><span class="p">(</span><span class="s">&quot;The beginning&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">afterEachTest</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">testLogger</span><span class="p">.</span><span class="na">i</span><span class="p">(</span><span class="s">&quot;The end&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// ваш тест</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<h3 id="_1">Структура</h3>
+<p>Конфигурация <strong>Kaspresso</strong> содержит:</p>
+<h4 id="kakao-clicks">Kakao clicks</h4>
+<p>Kaspresso предоставляет возможность переопределить кастомные клики Espresso.
+Kakao библиотека предоставляет набор подготовленных имплементаций кликов, которые улучшают стабильность тестов на девайсах, находящихся под большой нагрузкой.</p>
+<p>Все детали о проблеме и решениях описано в <a href="https://github.com/KakaoCup/Kakao/tree/master/kakao-ext-clicks">Kakao документации</a>.</p>
+<p>Пример, как заиспользовать кастомные клики в вашем тесте, представлен в <a href="../../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/customclick_tests/CustomClickTest.kt">CustomClickTest</a>.
+<div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nc">ClickTest</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">TestCase</span><span class="p">(</span>
+<span class="w">    </span><span class="n">kaspressoBuilder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kaspresso</span><span class="p">.</span><span class="na">Builder</span><span class="p">.</span><span class="na">simple</span><span class="p">(</span>
+<span class="w">        </span><span class="n">customize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">clickParams</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ClickParams</span><span class="p">.</span><span class="na">kakaoVisual</span><span class="p">()</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">)</span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// your test</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<p>Kaspresso предоставляет следующие подготовленные опции для кастомизации кликов:
+1. <code>ClickParams.kakaoVisual()' - Kakao clicks с визуализацией.
+2.</code>ClickParams.kakao()' - Kakao clicks.
+3. `ClickParams.default()' - Espresso clicks. Используются по умолчанию.</p>
+<h4 id="_2">Логгеры</h4>
+<p>Kaspresso предоставляет два вида логгеров: <code>libLogger</code> и <code>testLogger</code>.
+<code>libLogger</code> - внутренний логгер Kaspresso <br>
+<code>testLogger</code> - логгер, который доступен разработчикам в тестах. <br>
+Последний доступен через свойство <code>testLogger</code> в тестовых разделах (<code>before, after, init, transform, run</code>) в тестовом DSL (из класса <code>TestContext</code>). <br>
+Кроме того, он доступен при настройке <code>Kaspresso.Builder</code>, если вы хотите добавить его, например, в свои пользовательские перехватчики.</p>
+<h4 id="kaspresso-kakaokautomator">Перехватчики Kaspresso на базе перехватчиков Kakao/Kautomator.</h4>
+<p>Эти перехватчики были введены для упрощения и единообразия использования <a href="https://github.com/KakaoCup/Kakao#intercepting">перехватчиков Kakao</a> и <a href="https://kasperskylab.github.io/Kaspresso/ru/Wiki/Kautomator-wrapper_over_UI_Automator/#interceptor-">перехватчиков Kautomator</a>.</p>
+<p><em><strong>Важный момент</strong></em> о смешении перехватчиков Kaspresso и перехватчиков Kakao/Kautomator. <br>
+Перехватчики Kaspresso не будут работать, если вы установите свои собственные перехватчики Kakao, вызвав метод <code>Kakao.intercept</code> в тесте, или установите свои пользовательские перехватчики Kautomator, вызвав <code>Kautomator.intercept</code> в тесте. <br>
+Если вы установите свои пользовательские перехватчики Kakao для конкретного экрана или KView и установите для аргумента isOverride значение true, то перехватчики Kaspresso не будут работать для конкретного экрана или <code>KView</code>. То же самое верно и для Kautomator, где разработчик взаимодействует с <code>UiScreen</code> и <code>UiBaseView</code>.</p>
+<p>Перехватчики Kaspresso можно разделить на два типа: <br></p>
+<ol>
+<li><code>Behavior Interceptors</code> - перехватывают вызовы <code>ViewInteraction</code>, <code>DataInteraction</code>, <code>WebInteraction</code>, <code>UiObjectInteraction</code>, <code>UiDeviceInteraction</code> и выполняют свою логику. <br>
+   <strong>Внимание</strong>, мы собираемся рассмотреть некоторые важные примечания о <code>перехватчиках поведения</code> в конце этого документа.</li>
+<li><code>Watcher Interceptors</code> - перехватывают вызовы <code>ViewAction</code>, <code>ViewAssertion</code>, <code>Atom</code>, <code>WebAssertion</code>, <code>UiObjectAssertion</code>, <code>UiObjectAction</code>, <code>UiDeviceAssertion</code>, <code>UiDeviceAction</code> и еще кое-что.</li>
+</ol>
+<p>Расширим упомянутые типы перехватчиков Kaspresso:</p>
+<ol>
+<li><code>Behavior Interceptors</code><ol>
+<li><code>viewBehaviorInterceptors</code> - перехватывают вызовы <code>ViewInteraction#perform</code> и <code>ViewInteraction#check</code></li>
+<li><code>dataBehaviorInterceptors</code> - перехватывают вызовы <code>DataInteraction#check</code></li>
+<li><code>webBehaviorInterceptors</code> - перехватывают вызовы <code>Web.WebInteraction&lt;R&gt;#perform</code> и <code>Web.WebInteraction&lt;R&gt;#check</code></li>
+<li><code>objectBehaviorInterceptors</code> - перехватывают вызовы <code>UiObjectInteraction#perform</code> и <code>UiObjectInteraction#check</code></li>
+<li><code>deviceBehaviorInterceptors</code> - перехватывают вызовы <code>UiDeviceInteraction#perform</code> и <code>UiDeviceInteraction#check</code></li>
+</ol>
+</li>
+<li><code>Watcher Interceptors</code><ol>
+<li><code>viewActionWatcherInterceptors</code> – выполняют какие-то действия до того, как будет вызван <code>android.support.test.espresso.ViewAction.perform</code></li>
+<li><code>viewAssertionWatcherInterceptors</code> – выполняют какие-то действия до того, как будет вызван <code>android.support.test.espresso.ViewAssertion.check</code></li>
+<li><code>atomWatcherInterceptors</code> – выполняют какие-то действия до того, как будет вызван <code>android.support.test.espresso.web.model.Atom.transform</code></li>
+<li><code>webAssertionWatcherInterceptors</code> — выполняют какие-то действия до того, как будет вызван <code>android.support.test.espresso.web.assertion.WebAssertion.checkResult</code></li>
+<li><code>objectWatcherInterceptors</code> - выполняют какие-то действия до того, как будет вызван <code>UiObjectInteraction.perform</code> или <code>UiObjectInteraction.check</code></li>
+<li><code>deviceWatcherInterceptors</code> - выполняют какие-то действия до того, как будет вызван <code>UiDeviceInteraction.perform</code> или <code>UiDeviceInteraction.check</code></li>
+</ol>
+</li>
+</ol>
+<p><strong>Пожалуйста, помните! Перехватчики поведения и наблюдателя работают под капотом в каждом действии (actions) и утверждении (assertions) каждого графического элемента (View) Kakao и Kautomator по умолчанию в Kaspresso.</strong></p>
+<h4 id="kaspresso_1">Специальные перехватчики Kaspresso</h4>
+<p>Эти перехватчики не основаны на какой-то lib. Краткое описание:</p>
+<ol>
+<li><code>stepWatcherInterceptors</code> - перехватчик действий жизненного цикла <strong>Step</strong></li>
+<li><code>testRunWatcherInterceptors</code> - перехватчик всех действий жизненного цикла <strong>Test</strong>.</li>
+</ol>
+<p>Как вы заметили, эти перехватчики также являются частью Watcher Interceptors.</p>
+<h4 id="buildstepreportwatcherinterceptor">BuildStepReportWatcherInterceptor</h4>
+<p>Этот <code>watcher interceptor</code> по умолчанию включен в <code>Kaspresso configurator</code> для сбора информации о шагах ваших тестов для дальнейшей обработки в оркестраторе тестов. <br>
+Этот перехватчик основан на <code>AllureReportWriter</code> (подробнее про <a href="http://allure.qatools.ru/">Allure</a>). <br>
+Этот генератор отчетов работает с каждым <code>TestInfo</code> после завершения теста, преобразует информацию о шагах в <a href="https://docs.qameta.io/allure/#_steps">информацию о шагах Allure</a> JSON, а затем печатает JSON в LogCat в следующем формате:</p>
+<div class="highlight"><pre><span></span><code>I/KASPRESSO: ---------------------------------------------------------------------------
+I/KASPRESSO: TEST PASSED
+I/KASPRESSO: ---------------------------------------------------------------------------
+I/KASPRESSO: #AllureStepsInfoJson#: [{&quot;attachments&quot;:[],&quot;name&quot;:&quot;My step 1&quot;,&quot;parameters&quot;:[],&quot;stage&quot;:&quot;finished&quot;,&quot;start&quot;:1568790287246,&quot;status&quot;:&quot;passed&quot;, &quot;steps&quot;:[],&quot;stop&quot;:1568790288184}]
+</code></pre></div>
+<p>Эти журналы должны обрабатываться вашим тестовым оркестратором (например, <a href="https://github.com/Malinskiy/marathon">Marathon</a>).
+Если вы используете <a href="https://github.com/Malinskiy/marathon">Marathon</a>, вы должны знать, что он <a href="https://github.com/Malinskiy/marathon/releases/tag/0.5.0">требует</a>
+некоторых дополнительных модификаций для поддержки обработки этих журналов и в настоящий момент не работает должным образом. Но мы усердно работаем над этим.</p>
+<h4 id="_3">Действия по умолчанию в разделах до/после</h4>
+<p>Иногда разработчик хочет поместить некоторые действия, повторяющиеся во всех тестах до/после, в одно место, чтобы упростить поддержку тестов. <br>
+Существуют аннотации <code>@beforeTest/@afterTest</code> для решения указанных задач. Но у разработчика нет доступа к <code>BaseTestContext</code> в этих методах.
+Вот почему мы ввели специальные действия по умолчанию, которые вы можете установить в конструкторе с помощью <code>Kaspresso.Builder</code>. <br>
+Пример реализации действий по умолчанию в <code>Kaspresso.Builder</code>: <br>
+<div class="highlight"><pre><span></span><code><span class="kd">open</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">YourTestCase</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">TestCase</span><span class="p">(</span>
+<span class="w">    </span><span class="n">kaspressoBuilder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kaspresso</span><span class="p">.</span><span class="na">Builder</span><span class="p">.</span><span class="na">simple</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">beforeEachTest</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">testLogger</span><span class="p">.</span><span class="na">i</span><span class="p">(</span><span class="s">&quot;beforeTestFirstAction&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">afterEachTest</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">testLogger</span><span class="p">.</span><span class="na">i</span><span class="p">(</span><span class="s">&quot;afterTestFirstAction&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">)</span>
+</code></pre></div>
+Полная сигнатура метода <code>beforeEachTest</code>:
+<div class="highlight"><pre><span></span><code><span class="n">beforeEachTest</span><span class="p">(</span><span class="n">override</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="n">action</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">testLogger</span><span class="p">.</span><span class="na">i</span><span class="p">(</span><span class="s">&quot;beforeTestFirstAction&quot;</span><span class="p">)</span>
+<span class="p">})</span>
+</code></pre></div>
+<code>afterEachTest</code> аналогичен <code>beforeEachTest</code>. <br>
+Если вы установите <code>override</code> в <code>false</code>, то последнее <code>beforeAction</code> будет относиться к родительскому TestCase плюс текущий  <code>action</code>. В противном случае последний <code>beforeAction</code> будет только текущим  <code>action</code>.
+Чтобы понять, как это работает и как переопределить (или просто расширить) действие по умолчанию, пожалуйста,
+обратите внимание на <a href="https://github.com/KasperskyLab/Kaspresso/tree/master/samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/configurator_tests/defaultaction_tests">пример</a>.</p>
+<h4 id="device">Device</h4>
+<p>Экземпляр <code>Device</code>. Подробная информация находится на <a href="https://kasperskylab.github.io/Kaspresso/ru/Wiki/Working_with_Android_OS/">этой странице</a> в разделе Вики.</p>
+<h4 id="adbserver">AdbServer</h4>
+<p>Экземпляр <code>AdbServer</code>. Подробная информация находится на <a href="https://kasperskylab.github.io/Kaspresso/en/Wiki/Executing_adb_commands/">этой странице</a> в разделе Вики.</p>
+<h3 id="kaspresso-kaspresso">Настройка Kaspresso и пример перехватчиков Kaspresso</h3>
+<p>Пример того, как настроить Kaspresso и как использовать перехватчики Kaspresso, находится <a href="https://github.com/KasperskyLab/Kaspresso/tree/master/samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/configurator_tests">здесь</a>.</p>
+<h3 id="kaspresso_2">Настройки Kaspresso по умолчанию</h3>
+<p><code>BaseTestCase</code>, <code>TestCase</code>, <code>BaseTestCaseRule</code>, <code>TestCaseRule</code> используют настроенный по умолчанию <strong>Kaspresso</strong> (<code>Kaspresso.Builder.simple конфигуратор</code> ). <br>
+Ниже приведены наиболее ценные функции настроенного по умолчанию <strong>Kaspresso</strong>.</p>
+<h4 id="_4">Ведение журнала</h4>
+<p>Просто запустите <a href="https://github.com/KasperskyLab/Kaspresso/blob/master/samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/simple_tests/SimpleTest.kt">SimpleTest</a>. Далее вы увидите эти логи:
+<div class="highlight"><pre><span></span><code>I/KASPRESSO: ---------------------------------------------------------------------------
+I/KASPRESSO: BEFORE TEST SECTION
+I/KASPRESSO: ---------------------------------------------------------------------------
+I/KASPRESSO: ---------------------------------------------------------------------------
+I/KASPRESSO: TEST SECTION
+I/KASPRESSO: ---------------------------------------------------------------------------
+I/KASPRESSO: ___________________________________________________________________________
+I/KASPRESSO: TEST STEP: &quot;1. Open Simple Screen&quot; in SimpleTest
+I/KASPRESSO_SPECIAL: I am kLogger
+I/ViewInteraction: Checking &#39;com.kaspersky.kaspresso.proxy.ViewAssertionProxy@95afab5&#39; assertion on view (with id: com.kaspersky.kaspressample:id/activity_main_button_next)
+I/KASPRESSO: Check view has effective visibility=VISIBLE on AppCompatButton(id=activity_main_button_next;text=Next;)
+I/KASPRESSO: single click on AppCompatButton(id=activity_main_button_next;text=Next;)
+I/KASPRESSO: TEST STEP: &quot;1. Open Simple Screen&quot; in SimpleTest SUCCEED. It took 0 minutes, 0 seconds and 618 millis. 
+I/KASPRESSO: ___________________________________________________________________________
+I/KASPRESSO: ___________________________________________________________________________
+I/KASPRESSO: TEST STEP: &quot;2. Click button_1 and check button_2&quot; in SimpleTest
+I/KASPRESSO: single click on AppCompatButton(id=button_1;text=Button 1;)
+I/ViewInteraction: Checking &#39;com.kaspersky.kaspresso.proxy.ViewAssertionProxy@9f38781&#39; assertion on view (with id: com.kaspersky.kaspressample:id/button_2)
+I/KASPRESSO: Check view has effective visibility=VISIBLE on AppCompatButton(id=button_2;text=Button 2;)
+I/KASPRESSO: TEST STEP: &quot;2. Click button_1 and check button_2&quot; in SimpleTest SUCCEED. It took 0 minutes, 0 seconds and 301 millis. 
+I/KASPRESSO: ___________________________________________________________________________
+I/KASPRESSO: ___________________________________________________________________________
+I/KASPRESSO: TEST STEP: &quot;3. Click button_2 and check edit&quot; in SimpleTest
+I/KASPRESSO: single click on AppCompatButton(id=button_2;text=Button 2;)
+I/ViewInteraction: Checking &#39;com.kaspersky.kaspresso.proxy.ViewAssertionProxy@ad01abd&#39; assertion on view (with id: com.kaspersky.kaspressample:id/edit)
+I/KASPRESSO: Check view has effective visibility=VISIBLE on AppCompatEditText(id=edit;text=Some text;)
+E/KASPRESSO: Failed to interact with view matching: (with id: com.kaspersky.kaspressample:id/edit) because of AssertionFailedError
+I/ViewInteraction: Checking &#39;com.kaspersky.kaspresso.proxy.ViewAssertionProxy@d0f1c0a&#39; assertion on view (with id: com.kaspersky.kaspressample:id/edit)
+I/KASPRESSO: Check view has effective visibility=VISIBLE on AppCompatEditText(id=edit;text=Some text;)
+I/ViewInteraction: Checking &#39;com.kaspersky.kaspresso.proxy.ViewAssertionProxy@3b62c7b&#39; assertion on view (with id: com.kaspersky.kaspressample:id/edit)
+I/KASPRESSO: Check with string from resource id: &lt;2131558461&gt; on AppCompatEditText(id=edit;text=Some text;)
+I/KASPRESSO: TEST STEP: &quot;3. Click button_2 and check edit&quot; in SimpleTest SUCCEED. It took 0 minutes, 2 seconds and 138 millis. 
+I/KASPRESSO: ___________________________________________________________________________
+I/KASPRESSO: ___________________________________________________________________________
+I/KASPRESSO: TEST STEP: &quot;4. Check all possibilities of edit&quot; in SimpleTest
+I/KASPRESSO: ___________________________________________________________________________
+I/KASPRESSO: TEST STEP: &quot;4.1. Change the text in edit and check it&quot; in SimpleTest
+I/KASPRESSO: replace text on AppCompatEditText(id=edit;text=Some text;)
+I/KASPRESSO: type text(111) on AppCompatEditText(id=edit;)
+I/ViewInteraction: Checking &#39;com.kaspersky.kaspresso.proxy.ViewAssertionProxy@dbd9c8&#39; assertion on view (with id: com.kaspersky.kaspressample:id/edit)
+I/KASPRESSO: Check with text: is &quot;111&quot; on AppCompatEditText(id=edit;text=111;)
+I/KASPRESSO: TEST STEP: &quot;4.1. Change the text in edit and check it&quot; in SimpleTest SUCCEED. It took 0 minutes, 0 seconds and 621 millis. 
+I/KASPRESSO: ___________________________________________________________________________
+I/KASPRESSO: ___________________________________________________________________________
+I/KASPRESSO: TEST STEP: &quot;4.2. Change the text in edit and check it. Second check&quot; in SimpleTest
+I/KASPRESSO: replace text on AppCompatEditText(id=edit;text=111;)
+I/KASPRESSO: type text(222) on AppCompatEditText(id=edit;)
+I/ViewInteraction: Checking &#39;com.kaspersky.kaspresso.proxy.ViewAssertionProxy@b8ca74&#39; assertion on view (with id: com.kaspersky.kaspressample:id/edit)
+I/KASPRESSO: Check with text: is &quot;222&quot; on AppCompatEditText(id=edit;text=222;)
+I/KASPRESSO: TEST STEP: &quot;4.2. Change the text in edit and check it. Second check&quot; in SimpleTest SUCCEED. It took 0 minutes, 0 seconds and 403 millis. 
+I/KASPRESSO: ___________________________________________________________________________
+I/KASPRESSO: TEST STEP: &quot;4. Check all possibilities of edit&quot; in SimpleTest SUCCEED. It took 0 minutes, 1 seconds and 488 millis. 
+I/KASPRESSO: ___________________________________________________________________________
+I/KASPRESSO: ---------------------------------------------------------------------------
+I/KASPRESSO: AFTER TEST SECTION
+I/KASPRESSO: ---------------------------------------------------------------------------
+I/KASPRESSO: ---------------------------------------------------------------------------
+I/KASPRESSO: TEST PASSED
+I/KASPRESSO: ---------------------------------------------------------------------------
+I/KASPRESSO: #AllureStepsInfoJson#: [{&quot;attachments&quot;:[],&quot;name&quot;:&quot;My step 1&quot;,&quot;parameters&quot;:[],&quot;stage&quot;:&quot;finished&quot;,&quot;start&quot;:1568790287246,&quot;status&quot;:&quot;passed&quot;, &quot;steps&quot;:[],&quot;stop&quot;:1568790288184}]
+I/KASPRESSO: ---------------------------------------------------------------------------
+</code></pre></div>
+Довольно хорошо.</p>
+<h4 id="flaky">Защита от flaky тестов</h4>
+<p>Если происходит сбой, Kaspresso пытается исправить его, используя большой набор разнообразных способов. <br>
+<strong>Эта защита работает для каждого действия и проверки каждого View Kakao и Kautomator!</strong> Вам просто нужно расширить свой тестовый класс из <code>TestCase</code> (<code>BaseTestCase</code>) или установить <code>TestCaseRule</code> (<code>BaseTestCaseRule</code>) в вашем тесте. <br></p>
+<h4 id="_5">Перехватчики</h4>
+<p>Включенные по умолчанию перехватчики:</p>
+<ol>
+<li>Watcher interceptors</li>
+<li>Behavior interceptors</li>
+<li>Kaspresso interceptors</li>
+<li>BuildStepReportWatcherInterceptor</li>
+</ol>
+<p>Все описанные выше возможности доступны благодаря этим перехватчикам.</p>
+<h3 id="behavior-interceptors">Несколько слов о <code>Behavior Interceptors</code></h3>
+<p>Любая библиотека для UI-тестов нестабильна. Это суровая правда жизни. Любое действие/проверка в вашем тесте может завершиться ошибкой по какой-то неопределенной причине.</p>
+<p>Какие общие виды флакающих ошибок существуют:
+1. Распространенные плавающие ошибки (флаки), возникающие из-за того, что Espresso/UI Automator был в плохом настроении =) <br>
+   Вот почему Kaspresso оборачивает <strong>все</strong> действия/проверки (actions/assertions) Kakao/Kautomator и обрабатывает набор потенциально плавающих исключений.
+   Если произошло исключение, Kaspresso пытается повторить неудачные действия/проверку в течение 10 секунд. Такая обработка избавляет разработчиков от любых ненадежных действий/проверок.<br>
+   Подробности доступны по ссылке <a href="https://github.com/KasperskyLab/Kaspresso/tree/master/kaspresso/src/main/kotlin/com/kaspersky/kaspresso/flakysafety">flakysafety</a>, а примеры — <a href="https://github.com/KasperskyLab/Kaspresso/tree/master/samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/flaky_tests">здесь</a>.
+2. Невидимость View. В большинстве случаев вам просто нужно прокрутить экран вниз, чтобы View стало видимым. Итак, Kaspresso пытается выполнить это в автоматическом режиме. <br>
+   Подробности доступны на странице <a href="https://github.com/KasperskyLab/Kaspresso/tree/master/kaspresso/src/main/kotlin/com/kaspersky/kaspresso/autoscroll">autoscroll</a>.
+3. Также Kaspresso пытается закрыть все системные диалоги, если это препятствует выполнению теста. <br>
+   Подробности доступны на странице <a href="https://github.com/KasperskyLab/Kaspresso/tree/master/kaspresso/src/main/kotlin/com/kaspersky/kaspresso/systemsafety">systemsafety</a>.</p>
+<p>Эти обработки возможны благодаря <code>BehaviorInterceptors</code>. Кроме того, вы можете установить собственную обработку с помощью <code>Kaspresso.Builder</code>. Но помните, порядок <code>BehaviorInterceptors</code> имеет значение: первый элемент будет на самом низком уровне цепочки перехвата, а последний элемент будет на самом высоком уровне.</p>
+<p>Рассмотрим принцип работы <code>BehaviorInterceptors</code>над перехватчиками Kakao. Первый элемент фактически является оболочкой для вызова <code>androidx.test.espresso.ViewInteraction.perform</code>, второй элемент является оболочкой для первого элемента и так далее. <br>
+Взгляните на порядок включения <code>BehaviorInterceptors</code> по умолчанию в Kaspresso поверх Kakao. Это:</p>
+<ol>
+<li><code>AutoScrollViewBehaviorInterceptor</code></li>
+<li><code>SystemDialogSafetyViewBehaviorInterceptor</code></li>
+<li><code>FlakySafeViewBehaviorInterceptor</code></li>
+</ol>
+<p>Под капотом все действия и проверки Kakao в первую очередь вызывают <code>FlakySafeViewBehaviorInterceptor</code>, который вызывает <code>SystemDialogSafetyViewBehaviorInterceptor</code>, а тот вызывает <code>AutoScrollViewBehaviorInterceptor</code>. <br>
+Если результатом обработки <code>AutoScrollViewBehaviorInterceptor</code> является ошибка, то <code>SystemDialogSafetyViewBehaviorInterceptor</code> пытается обработать полученную ошибку. Если результатом обработки <code>SystemDialogSafetyViewBehaviorInterceptor</code> также является ошибка, тогда <code>FlakySafeViewBehaviorInterceptor</code> попытается обработать полученную ошибку. <br>
+Для упрощения обсуждаемой темы нарисовали картинку:</p>
+<p><img alt="" src="https://habrastorage.org/webt/pw/86/73/pw8673a4w4xnnq5nwpy8idfuoue.png" /></p>
+<h3 id="_6">Дополнения основной секции</h3>
+<p>Разработчик также может расширить функциональность параметризованных тестов, предоставив <code>MainSectionEnricher</code> в <code>BaseTestCase</code> или <code>BaseTestCaseRule</code>.
+Основная идея - позволить добавить дополнительные шаги тест-кейса до и после главной секции <code>run</code>.</p>
+<p>Все, что вам нужно сделать, это:</p>
+<ol>
+<li>Определите свою реализацию для интерфейса <code>MainSectionEnricher</code>;</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nc">LoggingMainSectionEnricher</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">MainSectionEnricher</span><span class="o">&lt;</span><span class="n">TestCaseData</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">...</span>
+
+<span class="p">}</span>
+</code></pre></div>
+<p>Здесь <code>TestCaseData</code> - это тот же тип данных, что и в вашей реализации <code>BaseTestCase</code>.</p>
+<ol>
+<li>Переопределите методы <code>beforeMainSectionRun</code> и/или <code>afterMainSectionRun</code>, чтобы добавить свои действия до/после;</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nc">LoggingMainSectionEnricher</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">MainSectionEnricher</span><span class="o">&lt;</span><span class="n">TestCaseData</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">TestContext</span><span class="o">&lt;</span><span class="n">TestCaseData</span><span class="o">&gt;</span><span class="p">.</span><span class="na">beforeMainSectionRun</span><span class="p">(</span><span class="n">testInfo</span><span class="p">:</span><span class="w"> </span><span class="n">TestInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">testLogger</span><span class="p">.</span><span class="na">d</span><span class="p">(</span><span class="s">&quot;Before main section run... | </span><span class="si">${</span><span class="n">testInfo</span><span class="p">.</span><span class="na">testName</span><span class="si">}</span><span class="s">&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Check users count...&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">testLogger</span><span class="p">.</span><span class="na">d</span><span class="p">(</span><span class="s">&quot;Check users count: </span><span class="si">${</span><span class="n">data</span><span class="p">.</span><span class="na">users</span><span class="p">.</span><span class="na">size</span><span class="si">}</span><span class="s">&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">TestContext</span><span class="o">&lt;</span><span class="n">TestCaseData</span><span class="o">&gt;</span><span class="p">.</span><span class="na">afterMainSectionRun</span><span class="p">(</span><span class="n">testInfo</span><span class="p">:</span><span class="w"> </span><span class="n">TestInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">testLogger</span><span class="p">.</span><span class="na">d</span><span class="p">(</span><span class="s">&quot;After main section run... | </span><span class="si">${</span><span class="n">testInfo</span><span class="p">.</span><span class="na">testName</span><span class="si">}</span><span class="s">&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="n">step</span><span class="p">(</span><span class="s">&quot;Check posts count...&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">testLogger</span><span class="p">.</span><span class="na">d</span><span class="p">(</span><span class="s">&quot;Check posts count: </span><span class="si">${</span><span class="n">data</span><span class="p">.</span><span class="na">posts</span><span class="p">.</span><span class="na">size</span><span class="si">}</span><span class="s">&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div>
+<p>В методах <code>beforeMainSectionRun</code> и <code>afterMainSectionRun</code> у вас есть полный доступ к свойствам и методам <code>TestContext&lt;TestCaseData</code>,  так что вы можете использовать логгер, добавлять тестовые шаги и так далее. Также, эти методы получили параметр <code>TestInfo</code>.</p>
+<ol>
+<li>Добавьте написанные классы в свою реализацию <code>BaseTestCase</code>.</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nc">EnricherBaseTestCase</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">BaseTestCase</span><span class="o">&lt;</span><span class="n">TestCaseDsl</span><span class="p">,</span><span class="w"> </span><span class="n">TestCaseData</span><span class="o">&gt;</span><span class="p">(</span>
+<span class="w">    </span><span class="n">kaspresso</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kaspresso</span><span class="p">.</span><span class="na">Builder</span><span class="p">.</span><span class="na">default</span><span class="p">(),</span>
+<span class="w">    </span><span class="n">dataProducer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">action</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">TestCaseDataCreator</span><span class="p">.</span><span class="na">initData</span><span class="p">(</span><span class="n">action</span><span class="p">)</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="n">mainSectionEnrichers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">listOf</span><span class="p">(</span>
+<span class="w">        </span><span class="n">LoggingMainSectionEnricher</span><span class="p">(),</span>
+<span class="w">        </span><span class="n">AnalyticsMainSectionEnricher</span><span class="p">()</span>
+<span class="w">    </span><span class="p">)</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>После того, как это будет сделано, описанные вами действия будут выполняться до или после блока <code>run</code> основной секции.</p>
+<h4 id="_7">Стягивание артефактов с устройства на хост</h4>
+<p>В зависимости от вашей конфигурации тестов, после выполнения последних на устройстве могут оставаться полезные артефакты: скриншоты, отчеты, видео и т.д.
+Для того, чтобы стянуть их с устройства, как правило, программируют специальные скрипты, которые выполняют после завершения тестового прогона на CI. С Kaspresso
+вы можете упростить этот процесс. Для этого в Kaspresso Builder'e необходимо сконфигурировать переменную <code>artifactsPullParams</code>. Пример:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nc">SomeTest</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">TestCase</span><span class="p">(</span>
+<span class="w">    </span><span class="n">kaspressoBuilder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kaspresso</span><span class="p">.</span><span class="na">Builder</span><span class="p">.</span><span class="na">simple</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">artifactsPullParams</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ArtifactsPullParams</span><span class="p">(</span><span class="n">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="n">destinationPath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;artifacts/&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">artifactsRegex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Regex</span><span class="p">(</span><span class="s">&quot;(screenshots)|(videos)&quot;</span><span class="p">))</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Для работы этого механизма перед выполнением теста необходимо запустить ADB server. После завершения теста артефакты будут лежать по указанному в аргументе <code>destinationPath</code> пути относительно
+рабочей директории, из которой был запущен ADB server.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["tabs", "navigation.tabs", "content.code.annotate", "navigation.tabs.sticky", "navigation.instant", "navigation.tracking", "navigation.top", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
