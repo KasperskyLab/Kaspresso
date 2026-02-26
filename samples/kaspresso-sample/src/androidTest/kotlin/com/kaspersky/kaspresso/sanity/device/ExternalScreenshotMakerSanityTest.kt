@@ -1,6 +1,7 @@
 package com.kaspersky.kaspresso.sanity.device
 
 import androidx.test.ext.junit.rules.activityScenarioRule
+import androidx.test.uiautomator.UiDevice
 import com.kaspersky.kaspressample.device.DeviceSampleActivity
 import com.kaspersky.kaspresso.device.screenshots.screenshotmaker.ExternalScreenshotMaker
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
@@ -12,7 +13,7 @@ import java.io.File
 
 class ExternalScreenshotMakerSanityTest : TestCase(
     kaspressoBuilder = Kaspresso.Builder.advanced {
-        screenshotMaker = ExternalScreenshotMaker(instrumentation)
+        screenshotMaker = ExternalScreenshotMaker(UiDevice.getInstance(instrumentation))
     }
 ) {
 

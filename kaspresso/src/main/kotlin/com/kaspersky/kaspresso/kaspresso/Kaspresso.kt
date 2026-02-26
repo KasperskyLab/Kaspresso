@@ -495,7 +495,7 @@ data class Kaspresso(
          * UiDevice-based capture which includes popup windows like ModalBottomSheet:
          * ```
          * Kaspresso.Builder.simple {
-         *     screenshotMaker = ExternalScreenshotMaker(instrumentation)
+         *     screenshotMaker = ExternalScreenshotMaker(UiDevice.getInstance(instrumentation))
          * }
          * ```
          */

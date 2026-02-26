@@ -1,6 +1,5 @@
 package com.kaspersky.kaspresso.device.screenshots.screenshotmaker
 
-import android.app.Instrumentation
 import androidx.test.uiautomator.UiDevice
 import com.kaspersky.kaspresso.instrumental.InstrumentalDependencyProvider
 import com.kaspersky.kaspresso.params.ScreenshotParams
@@ -19,19 +18,28 @@ class ExternalScreenshotMaker(
 ) : ScreenshotMaker {
 
     /**
-     * Creates an [ExternalScreenshotMaker] from an [Instrumentation] instance.
+     * Creates an [ExternalScreenshotMaker] from a [UiDevice] instance.
      *
      * This is a convenience constructor for use in [com.kaspersky.kaspresso.kaspresso.Kaspresso.Builder]:
      * ```
      * Kaspresso.Builder.simple {
-     *     screenshotMaker = ExternalScreenshotMaker(instrumentation)
+     *     screenshotMaker = ExternalScreenshotMaker(UiDevice.getInstance(instrumentation))
      * }
      * ```
      */
     constructor(
-        instrumentation: Instrumentation,
+        uiDevice: UiDevice,
         params: ScreenshotParams = ScreenshotParams()
-    ) : this(SimpleUiDeviceProvider(instrumentation), params)
+    ) : this(
+        object : InstrumentalDependencyProvider {
+            override val isAndroidRuntime = true
+            override val uiDevice get() = uiDevice
+            override val uiAutomation get() = throw UnsupportedOperationException()
+            override val runNotifier get() = throw UnsupportedOperationException()
+            override fun getUiAutomation(flags: Int) = throw UnsupportedOperationException()
+        },
+        params
+    )
 
     private val device: UiDevice
         get() = instrumentalDependencyProvider.uiDevice
@@ -45,18 +53,4 @@ class ExternalScreenshotMaker(
     }
 
     override fun takeFullWindowScreenshot(file: File) = takeScreenshot(file)
-
-    /**
-     * Minimal [InstrumentalDependencyProvider] that only provides [UiDevice].
-     * Used by the [Instrumentation]-based constructor to avoid depending on the full provider implementation.
-     */
-    private class SimpleUiDeviceProvider(
-        private val instrumentation: Instrumentation
-    ) : InstrumentalDependencyProvider {
-        override val isAndroidRuntime: Boolean = true
-        override val uiDevice: UiDevice get() = UiDevice.getInstance(instrumentation)
-        override val uiAutomation get() = instrumentation.uiAutomation
-        override val runNotifier get() = throw UnsupportedOperationException()
-        override fun getUiAutomation(flags: Int) = instrumentation.getUiAutomation(flags)
-    }
 }
