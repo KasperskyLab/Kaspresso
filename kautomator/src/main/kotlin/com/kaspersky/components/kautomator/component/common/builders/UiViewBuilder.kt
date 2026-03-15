@@ -9,7 +9,6 @@ import androidx.annotation.StringRes
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.BySelector
 import androidx.test.uiautomator.BySelectorHack
-import com.kaspersky.components.kautomator.common.resources.KId
 import com.kaspersky.components.kautomator.common.resources.KString
 import com.kaspersky.components.kautomator.component.common.KautomatorMarker
 import java.util.regex.Pattern
@@ -50,8 +49,10 @@ class UiViewBuilder {
      * @param resourceId id to match
      */
     fun withId(@IdRes resourceId: Int) {
-        val packageName = InstrumentationRegistry.getInstrumentation().targetContext.packageName
-        val resName = KId.resolveResName(packageName, resourceId)
+        val fullName = InstrumentationRegistry.getInstrumentation()
+            .targetContext.resources.getResourceName(resourceId)
+        val packageName = fullName.substringBefore(":")
+        val resName = fullName.substringAfterLast("/")
         return withResourceName(packageName, resName)
     }
 
