@@ -32,10 +32,6 @@ class VisualTestSample : VisualTestCase() {
 
     @Test
     fun test() = runScreenshotTest {
-        Assume.assumeTrue(
-            "Granting READ_MEDIA_IMAGES fails on the lower APIs",
-            Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU
-        )
         step("Open Simple Screen") {
             MainScreen {
                 simpleButton {
