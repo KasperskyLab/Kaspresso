@@ -84,6 +84,49 @@ _**Важный момент**_ о смешении перехватчиков K
 
 **Пожалуйста, помните! Перехватчики поведения и наблюдателя работают под капотом в каждом действии (actions) и утверждении (assertions) каждого графического элемента (View) Kakao и Kautomator по умолчанию в Kaspresso.**
 
+#### Удаление перехватчиков
+
+Иногда нужно отключить один или несколько перехватчиков для конкретного теста. Без вспомогательного метода это требует вызова `removeIf` на каждом списке по отдельности:
+
+```kotlin
+kaspressoBuilder = Kaspresso.Builder.simple().apply {
+    viewBehaviorInterceptors.removeIf { it is SystemDialogSafetyProvider }
+    dataBehaviorInterceptors.removeIf { it is SystemDialogSafetyProvider }
+    webBehaviorInterceptors.removeIf { it is SystemDialogSafetyProvider }
+    objectBehaviorInterceptors.removeIf { it is SystemDialogSafetyProvider }
+    deviceBehaviorInterceptors.removeIf { it is SystemDialogSafetyProvider }
+}
+```
+
+Kaspresso предоставляет расширение `removeInterceptors<T>()` для `Kaspresso.Builder`, которое удаляет все перехватчики, реализующие интерфейс `T`, сразу из всех списков перехватчиков:
+
+```kotlin
+kaspressoBuilder = Kaspresso.Builder.simple().apply {
+    removeInterceptors<SystemDialogSafetyProvider>()
+}
+```
+
+Также доступна перегрузка на основе предиката для более сложных случаев:
+
+```kotlin
+kaspressoBuilder = Kaspresso.Builder.simple().apply {
+    removeInterceptors { it is SystemDialogSafetyProvider || it is FlakySafetyProvider }
+}
+```
+
+Обе перегрузки охватывают все 13 списков перехватчиков (behavior и watcher).
+
+Наиболее часто используемые интерфейсы-провайдеры и эффект от их отключения:
+
+| Провайдер | Что произойдёт при отключении |
+|---|---|
+| `FlakySafetyProvider` | Действия и проверки больше не будут повторяться при ошибке — тест упадёт сразу при первом сбое, вместо того чтобы повторять попытки до 10 секунд. |
+| `SystemDialogSafetyProvider` | Системные диалоги (запросы разрешений, диалоги об ошибках и т.д.) больше не будут закрываться автоматически — они заблокируют выполнение теста и приведут к его падению. |
+| `AutoScrollProvider` | Элементы за пределами экрана больше не будут прокручиваться автоматически — тест упадёт, если целевой элемент не виден на экране. |
+| `ElementLoaderProvider` | Устаревшие элементы Kautomator больше не будут перезагружаться автоматически — если ссылка на элемент устарела, тест упадёт без попытки найти элемент заново. |
+
+Рабочий пример доступен в [RemoveInterceptorsTest](../../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/configurator_tests/interceptor_tests/RemoveInterceptorsTest.kt).
+
 #### Специальные перехватчики Kaspresso
 Эти перехватчики не основаны на какой-то lib. Краткое описание:
 
