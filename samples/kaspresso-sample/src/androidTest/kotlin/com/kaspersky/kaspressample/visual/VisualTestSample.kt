@@ -12,12 +12,20 @@ import org.junit.Rule
 import org.junit.Test
 
 class VisualTestSample : VisualTestCase() {
+
     @get:Rule
-    val runtimePermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
-        Manifest.permission.WRITE_EXTERNAL_STORAGE,
-        Manifest.permission.READ_EXTERNAL_STORAGE,
-        Manifest.permission.READ_MEDIA_IMAGES,
-    )
+    val runtimePermissionRule: GrantPermissionRule = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        GrantPermissionRule.grant(
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.READ_MEDIA_IMAGES,
+        )
+    } else {
+        GrantPermissionRule.grant(
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+        )
+    }
 
     @get:Rule
     val activityRule = activityScenarioRule<MainActivity>()
