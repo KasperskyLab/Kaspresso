@@ -7,11 +7,39 @@ import java.io.File
 
 /**
  * Captures spoon-compatible screenshots by uiautomator.
+ *
+ * Unlike [InternalScreenshotMaker] which only captures the main activity window,
+ * this maker uses [UiDevice.takeScreenshot] to capture the full device screen,
+ * including popup windows such as Material ModalBottomSheet.
  */
 class ExternalScreenshotMaker(
     private val instrumentalDependencyProvider: InstrumentalDependencyProvider,
     private val params: ScreenshotParams = ScreenshotParams()
 ) : ScreenshotMaker {
+
+    /**
+     * Creates an [ExternalScreenshotMaker] from a [UiDevice] instance.
+     *
+     * This is a convenience constructor for use in [com.kaspersky.kaspresso.kaspresso.Kaspresso.Builder]:
+     * ```
+     * Kaspresso.Builder.simple {
+     *     screenshotMaker = ExternalScreenshotMaker(UiDevice.getInstance(instrumentation))
+     * }
+     * ```
+     */
+    constructor(
+        uiDevice: UiDevice,
+        params: ScreenshotParams = ScreenshotParams()
+    ) : this(
+        object : InstrumentalDependencyProvider {
+            override val isAndroidRuntime = true
+            override val uiDevice get() = uiDevice
+            override val uiAutomation get() = throw UnsupportedOperationException()
+            override val runNotifier get() = throw UnsupportedOperationException()
+            override fun getUiAutomation(flags: Int) = throw UnsupportedOperationException()
+        },
+        params
+    )
 
     private val device: UiDevice
         get() = instrumentalDependencyProvider.uiDevice
@@ -24,7 +52,5 @@ class ExternalScreenshotMaker(
         device.takeScreenshot(file, scale, params.quality)
     }
 
-    override fun takeFullWindowScreenshot(file: File) {
-        TODO("External Full Window Screenshot not yet implemented")
-    }
+    override fun takeFullWindowScreenshot(file: File) = takeScreenshot(file)
 }
