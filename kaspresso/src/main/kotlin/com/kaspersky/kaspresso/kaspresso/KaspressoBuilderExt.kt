@@ -4,19 +4,26 @@ package com.kaspersky.kaspresso.kaspresso
  * Removes all interceptors matching [predicate] from every interceptor list in this [Kaspresso.Builder].
  */
 fun Kaspresso.Builder.removeInterceptors(predicate: (Any) -> Boolean) {
-    viewBehaviorInterceptors.removeIf(predicate)
-    dataBehaviorInterceptors.removeIf(predicate)
-    webBehaviorInterceptors.removeIf(predicate)
-    objectBehaviorInterceptors.removeIf(predicate)
-    deviceBehaviorInterceptors.removeIf(predicate)
-    viewActionWatcherInterceptors.removeIf(predicate)
-    viewAssertionWatcherInterceptors.removeIf(predicate)
-    atomWatcherInterceptors.removeIf(predicate)
-    webAssertionWatcherInterceptors.removeIf(predicate)
-    objectWatcherInterceptors.removeIf(predicate)
-    deviceWatcherInterceptors.removeIf(predicate)
-    stepWatcherInterceptors.removeIf(predicate)
-    testRunWatcherInterceptors.removeIf(predicate)
+    listOf(
+        viewBehaviorInterceptors,
+        dataBehaviorInterceptors,
+        webBehaviorInterceptors,
+        objectBehaviorInterceptors,
+        deviceBehaviorInterceptors,
+        viewActionWatcherInterceptors,
+        viewAssertionWatcherInterceptors,
+        atomWatcherInterceptors,
+        webAssertionWatcherInterceptors,
+        objectWatcherInterceptors,
+        deviceWatcherInterceptors,
+        stepWatcherInterceptors,
+        testRunWatcherInterceptors,
+    ).forEach { list ->
+        val iterator = list.iterator()
+        while (iterator.hasNext()) {
+            if (predicate(iterator.next())) iterator.remove()
+        }
+    }
 }
 
 /**
