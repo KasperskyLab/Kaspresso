@@ -21,9 +21,7 @@ import androidx.test.platform.app.InstrumentationRegistry
  * specific language governing permissions and limitations
  * under the License.
  */
-
-internal object KString : ResourceNameProvider() {
-    override val rClassName = "R\$string"
-
-    fun getString(@StringRes resId: Int): String = InstrumentationRegistry.getInstrumentation().targetContext.getString(resId)
+internal object KString {
+    fun getString(@StringRes resId: Int): String =
+        InstrumentationRegistry.getInstrumentation().targetContext.getString(resId)
 }
