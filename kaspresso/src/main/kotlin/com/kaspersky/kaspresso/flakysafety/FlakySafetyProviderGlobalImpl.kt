@@ -58,14 +58,15 @@ class FlakySafetyProviderGlobalImpl(
     override fun <T> flakySafely(action: () -> T): T {
         flakySafeInterceptorScalpel.scalpFromLibs()
 
-        val result = flakySafetyAlgorithm.invokeFlakySafely(
-            params = getParams(),
-            action = action
-        )
-
-        flakySafeInterceptorScalpel.restoreScalpToLibs()
-
-        return result
+        return try {
+            flakySafetyAlgorithm.invokeFlakySafely(
+                params = getParams(),
+                action = action
+            )
+        } catch (ex: Throwable) {
+            flakySafeInterceptorScalpel.restoreScalpToLibs()
+            throw ex
+        }
     }
 
     /**
