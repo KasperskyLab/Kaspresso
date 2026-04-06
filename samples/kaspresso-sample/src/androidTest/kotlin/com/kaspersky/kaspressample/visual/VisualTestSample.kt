@@ -7,7 +7,6 @@ import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspressample.MainActivity
 import com.kaspersky.kaspressample.screen.MainScreen
 import com.kaspersky.kaspresso.testcases.api.testcase.VisualTestCase
-import org.junit.Assume
 import org.junit.Rule
 import org.junit.Test
 
