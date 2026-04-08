@@ -66,7 +66,7 @@ To try out the cutting edge kaspresso updates before an official release add a s
 ```groovy
 dependencyResolutionManagement {
     repositories {
-        maven { url = uri("https://s01.oss.sonatype.org/content/repositories/snapshots") }
+        maven { url = uri("https://central.sonatype.com/repository/maven-snapshots/") }
     }
 }
 ```
