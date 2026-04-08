@@ -75,10 +75,10 @@ Let's expand mentioned Kaspresso interceptors types:
     4. ```objectBehaviorInterceptors``` - intercept calls to ```UiObjectInteraction#perform``` and ```UiObjectInteraction#check```
     5. ```deviceBehaviorInterceptors``` - intercept calls to ```UiDeviceInteraction#perform``` and ```UiDeviceInteraction#check```
 2. ```Watcher Interceptors```
-    1. ```viewActionWatcherInterceptors``` - do some stuff before ```android.support.test.espresso.ViewAction.perform``` is actually called
-    2. ```viewAssertionWatcherInterceptors``` - do some stuff before ```android.support.test.espresso.ViewAssertion.check``` is actually called
-    3. ```atomWatcherInterceptors``` - do some stuff before ```android.support.test.espresso.web.model.Atom.transform``` is actually called
-    4. ```webAssertionWatcherInterceptors``` - do some stuff before ```android.support.test.espresso.web.assertion.WebAssertion.checkResult``` is actually called
+    1. ```viewActionWatcherInterceptors``` - do some stuff before ```androidx.test.espresso.ViewAction.perform``` is actually called
+    2. ```viewAssertionWatcherInterceptors``` - do some stuff before ```androidx.test.espresso.ViewAssertion.check``` is actually called
+    3. ```atomWatcherInterceptors``` - do some stuff before ```androidx.test.espresso.web.model.Atom.transform``` is actually called
+    4. ```webAssertionWatcherInterceptors``` - do some stuff before ```androidx.test.espresso.web.assertion.WebAssertion.checkResult``` is actually called
     5. ```objectWatcherInterceptors``` - do some stuff before ```UiObjectInteraction.perform``` or ```UiObjectInteraction.check``` is actually called
     6. ```deviceWatcherInterceptors``` - do some stuff before ```UiDeviceInteraction.perform``` or ```UiDeviceInteraction.check``` is actually called
 

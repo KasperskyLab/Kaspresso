@@ -75,10 +75,10 @@ _**Важный момент**_ о смешении перехватчиков K
     4. ```objectBehaviorInterceptors``` - перехватывают вызовы ```UiObjectInteraction#perform``` и ```UiObjectInteraction#check```
     5. ```deviceBehaviorInterceptors``` - перехватывают вызовы ```UiDeviceInteraction#perform``` и ```UiDeviceInteraction#check```
 2. ```Watcher Interceptors```
-    1. ```viewActionWatcherInterceptors``` – выполняют какие-то действия до того, как будет вызван ```android.support.test.espresso.ViewAction.perform```
-    2. ```viewAssertionWatcherInterceptors``` – выполняют какие-то действия до того, как будет вызван ```android.support.test.espresso.ViewAssertion.check```
-    3. ```atomWatcherInterceptors``` – выполняют какие-то действия до того, как будет вызван ```android.support.test.espresso.web.model.Atom.transform```
-    4. ```webAssertionWatcherInterceptors``` — выполняют какие-то действия до того, как будет вызван ```android.support.test.espresso.web.assertion.WebAssertion.checkResult```
+    1. ```viewActionWatcherInterceptors``` – выполняют какие-то действия до того, как будет вызван ```androidx.test.espresso.ViewAction.perform```
+    2. ```viewAssertionWatcherInterceptors``` – выполняют какие-то действия до того, как будет вызван ```androidx.test.espresso.ViewAssertion.check```
+    3. ```atomWatcherInterceptors``` – выполняют какие-то действия до того, как будет вызван ```androidx.test.espresso.web.model.Atom.transform```
+    4. ```webAssertionWatcherInterceptors``` — выполняют какие-то действия до того, как будет вызван ```androidx.test.espresso.web.assertion.WebAssertion.checkResult```
     5. ```objectWatcherInterceptors``` - выполняют какие-то действия до того, как будет вызван ```UiObjectInteraction.perform``` или ```UiObjectInteraction.check```
     6. ```deviceWatcherInterceptors``` - выполняют какие-то действия до того, как будет вызван ```UiDeviceInteraction.perform``` или ```UiDeviceInteraction.check```
 

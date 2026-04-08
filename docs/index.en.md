@@ -36,32 +36,40 @@ And many more!
 ## Integration
 
 To integrate Kaspresso into your project:
-1. If the `mavenCentral` repository does not exist, include it to your root `build.gradle` file:
+1. If the `mavenCentral` repository does not exist, add it to your `settings.gradle.kts` file:
 
-```groovy
-allprojects {
+```kotlin
+dependencyResolutionManagement {
     repositories {
         mavenCentral()
     }
 }
 ```
 
-2. Add a dependency to `build.gradle`:
+2. Add a dependency to `build.gradle.kts`:
 
-```groovy
+```kotlin
 dependencies {
-    androidTestImplementation 'com.kaspersky.android-components:kaspresso:<latest_version>'
+    androidTestImplementation("com.kaspersky.android-components:kaspresso:<latest_version>")
     // Allure support
-    androidTestImplementation "com.kaspersky.android-components:kaspresso-allure-support:<latest_version>"
+    androidTestImplementation("com.kaspersky.android-components:kaspresso-allure-support:<latest_version>")
     // Jetpack Compose support
-    androidTestImplementation "com.kaspersky.android-components:kaspresso-compose-support:<latest_version>"
+    androidTestImplementation("com.kaspersky.android-components:kaspresso-compose-support:<latest_version>")
 }
 ```
 
-To try out the cutting edge kaspresso updates before an official release add a "-SNAPHOT" postfix to the latest Kaspresso version e.g.
-```groovy
+To try out the cutting edge Kaspresso updates before an official release, add a snapshot repository to your `settings.gradle.kts`:
+```kotlin
+dependencyResolutionManagement {
+    repositories {
+        maven { url = uri("https://central.sonatype.com/repository/maven-snapshots/") }
+    }
+}
+```
+Then use a `-SNAPSHOT` version in `build.gradle.kts`:
+```kotlin
 dependencies {
-    androidTestImplementation 'com.kaspersky.android-components:kaspresso:<latest_version>-SNAPSHOT'
+    androidTestImplementation("com.kaspersky.android-components:kaspresso:<latest_version>-SNAPSHOT")
 }
 ```
 
@@ -69,16 +77,16 @@ If you are still using the old Android Support libraries, we strongly recommend 
 
 The last version with Android Support libraries is:
 
-```groovy
+```kotlin
 dependencies {
-    androidTestImplementation 'com.kaspersky.android-components:kaspresso:1.5.3'
+    androidTestImplementation("com.kaspersky.android-components:kaspresso:1.6.1")
 }
 ```
 
 ## FAQ
 For all questions you can reach out to us on [Discord](https://kas.pr/gh_discord).
 
-## Tutorial *NEW*
+## Tutorial
 To make it easier to learn the framework, a step-by-step tutorial is available on [our website](https://kasperskylab.github.io/Kaspresso/Tutorial/).
 
 ## Capabilities of Kaspresso

@@ -6,10 +6,10 @@ All detailed information is available in the [README](https://github.com/KakaoCu
 
 Jetpack Compose support is provided by a separate module to not force developers to up their minSDK version to 21.
 
-So, first of all, add a dependency to `build.gradle`:
-```groovy
+So, first of all, add a dependency to `build.gradle.kts`:
+```kotlin
 dependencies {
-    androidTestImplementation "com.kaspersky.android-components:kaspresso-compose-support:<latest_version>"
+    androidTestImplementation("com.kaspersky.android-components:kaspresso-compose-support:<latest_version>")
 }
 ```
 

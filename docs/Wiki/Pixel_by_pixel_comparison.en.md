@@ -70,8 +70,8 @@ class VisualTestSample : VisualTestCase(
 )
 ```
 2) Set the Gradle property:
-```groovy
-kaspresso.visualTestType="Record"
+```properties
+kaspresso.visualTestType=Record
 ```
 
 **Important** - before running the test, you need to start the adb server. You can find out how to do this [here](Executing_adb_commands.en.md)

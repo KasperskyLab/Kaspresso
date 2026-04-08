@@ -63,13 +63,13 @@
 
 ## Подключаем Kaspresso к проекту
 
-Переключаем отображение файлов проекта как Project (1) и добавляем зависимость в существующую секцию `dependencies` в файле `build.gradle` модуля `Tutorial`:
+Переключаем отображение файлов проекта как Project (1) и добавляем зависимость в существующую секцию `dependencies` в файле `build.gradle.kts` модуля `Tutorial`:
 
 <img src="../images/simple_test/Tutorial_build_gradle.png" alt="Tutorial build gradle"/>
 
-```groovy
+```kotlin
 dependencies {
-    androidTestImplementation("com.kaspersky.android-components:kaspresso:1.5.1")
+    androidTestImplementation("com.kaspersky.android-components:kaspresso:1.6.1")
     androidTestUtil("androidx.test:orchestrator:1.4.2")
 }
 ```

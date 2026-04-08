@@ -13,19 +13,19 @@
 В пакете [**com.kaspersky.components.alluresupport.interceptors**](https://github.com/KasperskyLab/Kaspresso/tree/master/allure-support/src/main/kotlin/com/kaspersky/components/alluresupport/interceptors) есть специальные перехватчики Kaspresso, помогающие связать и обработать файлы для Allure-отчета.
 
 ## Как использовать
-Прежде всего, добавьте следующую зависимость Gradle и Allure runner в файл gradle вашего проекта, чтобы включить модуль **allure-support** Kaspresso:
-```groovy
+Прежде всего, добавьте следующую зависимость Gradle и Allure runner в `build.gradle.kts` вашего проекта, чтобы включить модуль **allure-support** Kaspresso:
+```kotlin
 android {
     defaultConfig {
-        //...    
-        testInstrumentationRunner "com.kaspersky.kaspresso.runner.KaspressoRunner"
+        //...
+        testInstrumentationRunner = "com.kaspersky.kaspresso.runner.KaspressoRunner"
     }
     //...
 }
 
 dependencies {
     //...
-    androidTestImplementation "com.kaspersky.android-components:kaspresso-allure-support:<последняя_версия>"
+    androidTestImplementation("com.kaspersky.android-components:kaspresso-allure-support:<последняя_версия>")
 }
 ```
 Затем используйте специальную функцию [**withForcedAllureSupport**](https://github.com/KasperskyLab/Kaspresso/tree/master/allure-support/src/main/kotlin/com/kaspersky/components/alluresupport/AllureSupportKaspressoBuilder.kt) в вашем конструкторе TestCase или в вашем TestCaseRule, чтобы включить все доступные перехватчики, поддерживающие Allure:

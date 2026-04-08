@@ -34,7 +34,9 @@ interface Activities {
     fun getResumed(): Activity?
 
     /**
-     * Checks if passed activity is resumed.
+     * Checks if the passed activity class is the currently resumed activity.
+     *
+     * @param clazz the activity class to check.
      */
     fun isCurrent(clazz: Class<out Activity>)
 }

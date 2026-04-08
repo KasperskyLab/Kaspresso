@@ -33,7 +33,7 @@ class AllureResourceFilesProvider(
 ) : ResourceFilesProvider by defaultResourceFilesProvider {
     /**
      * Used for allure report video attachment workaround. Creates stub video file in package private directory so allure could attach it to report
-     * @param actualVideoFile vide file saved by screen recorder
+     * @param actualVideoFile video file saved by screen recorder
      * @return stub video file under /data/data
      */
     fun provideStubVideoFile(actualVideoFile: File): File {

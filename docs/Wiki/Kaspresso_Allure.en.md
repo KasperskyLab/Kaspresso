@@ -13,19 +13,19 @@ Also, the following interceptors were added:
 In the package [**com.kaspersky.components.alluresupport.interceptors**](https://github.com/KasperskyLab/Kaspresso/tree/master/allure-support/src/main/kotlin/com/kaspersky/components/alluresupport/interceptors), there are special Kaspresso interceptors helping to link and process files for Allure-report.
 
 ## How to use
-First of all, add the following Gradle dependency and Allure runner to your project's gradle file to include **allure-support** Kaspresso module:
-```groovy
+First of all, add the following Gradle dependency and Allure runner to your project's `build.gradle.kts` to include **allure-support** Kaspresso module:
+```kotlin
 android {
     defaultConfig {
-        //...    
-        testInstrumentationRunner "com.kaspersky.kaspresso.runner.KaspressoRunner"
+        //...
+        testInstrumentationRunner = "com.kaspersky.kaspresso.runner.KaspressoRunner"
     }
     //...
 }
 
 dependencies {
     //...
-    androidTestImplementation "com.kaspersky.android-components:kaspresso-allure-support:<latest_version>"
+    androidTestImplementation("com.kaspersky.android-components:kaspresso-allure-support:<latest_version>")
 }
 ```
 Next, use special [**withForcedAllureSupport**](https://github.com/KasperskyLab/Kaspresso/tree/master/allure-support/src/main/kotlin/com/kaspersky/components/alluresupport/AllureSupportKaspressoBuilder.kt) function in your TestCase constructor or in your TestCaseRule to turn on all available Allure-supporting interceptors:

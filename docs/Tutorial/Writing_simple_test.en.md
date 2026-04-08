@@ -66,13 +66,13 @@ To cover the application with Kaspresso tests, you need to start by including th
 
 ## Including Kaspresso in the project
 
-Switch the display of the project files to Project (1) and add the dependency to the existing `dependencies` section in the `build.gradle` file of the `Tutorial` module:
+Switch the display of the project files to Project (1) and add the dependency to the existing `dependencies` section in the `build.gradle.kts` file of the `Tutorial` module:
 
 <img src="../images/simple_test/Tutorial_build_gradle.png" alt="Tutorial build gradle"/>
 
-```groovy
+```kotlin
 dependencies {
-    androidTestImplementation("com.kaspersky.android-components:kaspresso:1.5.1")
+    androidTestImplementation("com.kaspersky.android-components:kaspresso:1.6.1")
     androidTestUtil("androidx.test:orchestrator:1.4.2")
 }
 ```
