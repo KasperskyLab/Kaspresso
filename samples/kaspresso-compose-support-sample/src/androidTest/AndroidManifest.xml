@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Hack to support 21 API in Sample App-->
+    <uses-sdk
+        tools:overrideLibrary="androidx.*" />
+
+</manifest>

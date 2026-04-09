@@ -6,7 +6,7 @@ plugins {
 android {
     namespace = "com.kaspersky.kaspresso.composesupport.sample"
     defaultConfig {
-        minSdk = 24
+        minSdk = 21
 
         applicationId = "com.kaspersky.kaspresso.composesupport.sample"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"

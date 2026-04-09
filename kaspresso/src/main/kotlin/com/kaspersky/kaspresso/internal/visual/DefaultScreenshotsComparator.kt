@@ -1,5 +1,6 @@
 package com.kaspersky.kaspresso.internal.visual
 
+import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
@@ -13,6 +14,25 @@ import com.kaspersky.kaspresso.visual.VisualTestParams
 import java.io.File
 import java.io.FileOutputStream
 import kotlin.math.abs
+
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
 
 open class DefaultScreenshotsComparator(
     private val visualTestParams: VisualTestParams,
@@ -77,10 +97,13 @@ open class DefaultScreenshotsComparator(
                 abs(b1 - b2) <= colorTolerance
     }
 
+    @SuppressLint("UseKtx")
     protected open fun processScreenshotDiff(original: Bitmap, diffPixels: IntArray, diffName: String): File {
         val width = original.width
         val height = original.height
-        val diffBitmap = Bitmap.createBitmap(width, height, original.config)
+        val config = requireNotNull(original.config) { "Error processing screenshot diff" }
+
+        val diffBitmap = Bitmap.createBitmap(width, height, config)
         diffBitmap.setPixels(diffPixels, 0, width, 0, 0, width, height)
         val scaledBitmap = Bitmap.createScaledBitmap(
             diffBitmap,

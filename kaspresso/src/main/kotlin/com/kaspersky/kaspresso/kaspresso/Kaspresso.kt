@@ -44,6 +44,7 @@ import com.kaspersky.kaspresso.device.screenshots.ScreenshotsImpl
 import com.kaspersky.kaspresso.device.screenshots.screenshotmaker.CombinedScreenshotMaker
 import com.kaspersky.kaspresso.device.screenshots.screenshotmaker.ExternalScreenshotMaker
 import com.kaspersky.kaspresso.device.screenshots.screenshotmaker.InternalScreenshotMaker
+import com.kaspersky.kaspresso.device.screenshots.screenshotmaker.ScreenshotMaker
 import com.kaspersky.kaspresso.device.server.AdbServer
 import com.kaspersky.kaspresso.device.server.AdbServerImpl
 import com.kaspersky.kaspresso.device.video.Videos
@@ -138,6 +139,25 @@ import com.kaspersky.kaspresso.visual.VisualTestParams
 import com.kaspersky.kaspresso.visual.VisualTestType
 import com.kaspersky.kaspresso.visual.VisualTestWatcher
 import io.github.kakaocup.kakao.Kakao
+
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
 
 /**
  * The storage of all Kaspresso preferences and entities, such as [AdbServer], [Device] and different interceptors.
@@ -486,6 +506,21 @@ data class Kaspresso(
         lateinit var screenshotParams: ScreenshotParams
 
         /**
+         * Holds an implementation of [ScreenshotMaker] for capturing screenshots.
+         * If it was not specified, a [CombinedScreenshotMaker] using internal (Activity.decorView)
+         * and external (UiDevice) capture is used.
+         *
+         * Override this to control how screenshots are captured — for example, to always use
+         * UiDevice-based capture which includes popup windows like ModalBottomSheet:
+         * ```
+         * Kaspresso.Builder.simple {
+         *     screenshotMaker = ExternalScreenshotMaker(UiDevice.getInstance(instrumentation))
+         * }
+         * ```
+         */
+        lateinit var screenshotMaker: ScreenshotMaker
+
+        /**
          * Holds the [VideoParams] for [com.kaspersky.kaspresso.device.video.recorder.VideoRecorder]'s usage.
          * If it was not specified, the default implementation is used.
          */
@@ -803,17 +838,21 @@ data class Kaspresso(
             )
             if (!::visualTestWatcher.isInitialized) visualTestWatcher = DefaultVisualTestWatcher(visualTestParams, libLogger, dirsProvider, resourcesRootDirsProvider, files)
 
+            if (!::screenshotMaker.isInitialized) {
+                screenshotMaker = CombinedScreenshotMaker(
+                    preferredScreenshotMaker = InternalScreenshotMaker(activities, screenshotParams),
+                    fallbackScreenshotMaker = ExternalScreenshotMaker(
+                        instrumentalDependencyProviderFactory.getComponentProvider<ExternalScreenshotMaker>(instrumentation),
+                        screenshotParams
+                    )
+                )
+            }
+
             if (!::screenshots.isInitialized) {
                 screenshots = ScreenshotsImpl(
                     logger = libLogger,
                     resourceFilesProvider = resourceFilesProvider,
-                    screenshotMaker = CombinedScreenshotMaker(
-                        preferredScreenshotMaker = InternalScreenshotMaker(activities, screenshotParams),
-                        fallbackScreenshotMaker = ExternalScreenshotMaker(
-                            instrumentalDependencyProviderFactory.getComponentProvider<ExternalScreenshotMaker>(instrumentation),
-                            screenshotParams
-                        )
-                    ),
+                    screenshotMaker = screenshotMaker,
                     visualTestParams = visualTestParams,
                     screenshotsComparator = screenshotsComparator,
                     dirsProvider = dirsProvider,

@@ -13,7 +13,7 @@ publishing {
     repositories {
         maven {
             name = sonatypeReleasesRepoName
-            setUrl("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
+            setUrl("https://ossrh-staging-api.central.sonatype.com/service/local/staging/deploy/maven2/")
             credentials {
                 username = ossrhUsername
                 password = ossrhPassword
@@ -22,7 +22,7 @@ publishing {
 
         maven {
             name = sonatypeSnapshotsRepoName
-            setUrl("https://s01.oss.sonatype.org/content/repositories/snapshots/")
+            setUrl("https://central.sonatype.com/repository/maven-snapshots/")
             credentials {
                 username = ossrhUsername
                 password = ossrhPassword

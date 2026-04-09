@@ -84,6 +84,49 @@ Let's expand mentioned Kaspresso interceptors types:
 
 **Please, remember! Behavior and watcher interceptors work under the hood in every action and assertion of every View of Kakao and Kautomator by default in Kaspresso.**
 
+#### Removing interceptors
+
+Sometimes you need to disable one or more interceptors for a specific test. Without a helper, this requires calling `removeIf` on every list individually:
+
+```kotlin
+kaspressoBuilder = Kaspresso.Builder.simple().apply {
+    viewBehaviorInterceptors.removeIf { it is SystemDialogSafetyProvider }
+    dataBehaviorInterceptors.removeIf { it is SystemDialogSafetyProvider }
+    webBehaviorInterceptors.removeIf { it is SystemDialogSafetyProvider }
+    objectBehaviorInterceptors.removeIf { it is SystemDialogSafetyProvider }
+    deviceBehaviorInterceptors.removeIf { it is SystemDialogSafetyProvider }
+}
+```
+
+Kaspresso provides a `removeInterceptors<T>()` extension on `Kaspresso.Builder` that removes all interceptors implementing interface `T` from every interceptor list at once:
+
+```kotlin
+kaspressoBuilder = Kaspresso.Builder.simple().apply {
+    removeInterceptors<SystemDialogSafetyProvider>()
+}
+```
+
+A predicate-based overload is also available for more complex cases:
+
+```kotlin
+kaspressoBuilder = Kaspresso.Builder.simple().apply {
+    removeInterceptors { it is SystemDialogSafetyProvider || it is FlakySafetyProvider }
+}
+```
+
+Both overloads cover all 13 interceptor lists (behavior and watcher).
+
+The most commonly used provider interfaces and the effect of disabling them:
+
+| Provider | Effect when disabled |
+|---|---|
+| `FlakySafetyProvider` | Actions and assertions no longer retry on failure — the test fails immediately on the first error instead of retrying for up to 10 seconds. |
+| `SystemDialogSafetyProvider` | System dialogs (permission requests, crash dialogs, etc.) are no longer dismissed automatically — they will block test execution and cause it to fail. |
+| `AutoScrollProvider` | Views that are off-screen are no longer scrolled to automatically — the test fails if the target view is not already visible. |
+| `ElementLoaderProvider` | Stale Kautomator elements are no longer reloaded automatically — if an element reference becomes outdated, the test fails without attempting to re-find the element. |
+
+A working example is available in [RemoveInterceptorsTest](../../samples/kaspresso-sample/src/androidTest/kotlin/com/kaspersky/kaspressample/configurator_tests/interceptor_tests/RemoveInterceptorsTest.kt).
+
 #### Special Kaspresso interceptors
 These interceptors are not based on some lib. Short description:
 
