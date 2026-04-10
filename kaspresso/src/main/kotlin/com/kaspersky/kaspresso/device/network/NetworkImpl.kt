@@ -50,16 +50,19 @@ class NetworkImpl(
     companion object {
         private const val CMD_STATE_ENABLE = "enable"
         private const val CMD_STATE_DISABLE = "disable"
+
         private const val NETWORK_STATE_CHANGE_CMD = "svc data"
         private const val NETWORK_STATE_CHANGE_ROOT_CMD = "su 0 svc data"
         private const val NETWORK_STATE_CHECK_CMD = "settings get global mobile_data"
         private const val NETWORK_STATE_CHECK_RESULT_ENABLED = "1"
         private const val NETWORK_STATE_CHECK_RESULT_DISABLED = "0"
+
         private const val WIFI_STATE_CHANGE_CMD = "svc wifi"
         private const val WIFI_STATE_CHANGE_ROOT_CMD = "su 0 svc wifi"
         private const val WIFI_STATE_CHECK_CMD = "settings get global wifi_on"
         private const val WIFI_STATE_CHECK_RESULT_ENABLED = "1"
         private const val WIFI_STATE_CHECK_RESULT_DISABLED = "0"
+
         private const val AIRPLANE_MODE_CHANGE_CMD = "cmd connectivity airplane-mode"
         private const val AIRPLANE_MODE_CHANGE_ROOT_CMD = "su 0 cmd connectivity airplane-mode"
         private const val AIRPLANE_MODE_STATE_CHECK_CMD = "settings get global airplane_mode_on"
@@ -247,16 +250,24 @@ class NetworkImpl(
     }
 
     override fun toggleAirplaneMode(enable: Boolean) {
-        if (!toggleAirplaneModeUsingAdb(enable, AIRPLANE_MODE_CHANGE_CMD) &&
-            !toggleAirplaneModeUsingAdb(enable, AIRPLANE_MODE_CHANGE_ROOT_CMD)
-        ) {
-            toggleAirplaneModeAndroidSettings(enable)
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.M) {
+            toggleAirplaneModeUsingAdbOnOdlerApi(enable)
+        } else {
+            if (!toggleAirplaneModeUsingAdb(enable, AIRPLANE_MODE_CHANGE_CMD)
+                && !toggleAirplaneModeUsingAdb(enable, AIRPLANE_MODE_CHANGE_ROOT_CMD)) {
+                toggleAirplaneModeAndroidSettings(enable)
+            }
         }
-        logger.i("Airplane mode ${if (enable) "en" else "dis"}abled")
+
+        if (enable) {
+            logger.i("Airplane mode enabled")
+        } else {
+            logger.i("Airplane mode disabled")
+        }
     }
 
-    private fun toggleAirplaneModeUsingAdb(isEnabled: Boolean, changeCommand: String) =
-        try {
+    private fun toggleAirplaneModeUsingAdb(isEnabled: Boolean, changeCommand: String): Boolean {
+        return try {
             val (state, expectedResult) = when (isEnabled) {
                 true -> CMD_STATE_ENABLE to AIRPLANE_MODE_STATE_CHECK_RESULT_ENABLED
                 false -> CMD_STATE_DISABLE to AIRPLANE_MODE_STATE_CHECK_RESULT_DISABLED
@@ -267,9 +278,16 @@ class NetworkImpl(
                 if (parseAdbResponse(result)?.trim() == expectedResult) true else
                     throw AdbServerException("Failed to change airplane mode state using ABD")
             }
-        } catch (e: AdbServerException) {
+        } catch (_: AdbServerException) {
             false
         }
+    }
+
+    private fun toggleAirplaneModeUsingAdbOnOdlerApi(isEnabled: Boolean) {
+        val state = if (isEnabled) "1" else "0"
+        adbServer.performShell("settings", listOf("put", "global", "airplane_mode_on", state,
+            "&&", "am", "broadcast", "-a", "android.intent.action.AIRPLANE_MODE"))
+    }
 
     private fun toggleAirplaneModeAndroidSettings(isEnabled: Boolean) {
         AirplaneModeSettingsScreen {
