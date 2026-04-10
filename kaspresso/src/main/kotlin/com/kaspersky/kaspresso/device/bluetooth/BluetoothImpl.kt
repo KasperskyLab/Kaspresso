@@ -1,21 +1,26 @@
 package com.kaspersky.kaspresso.device.bluetooth
 
+import android.Manifest
+import android.annotation.SuppressLint
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothManager
 import android.content.Context
+import android.content.pm.PackageManager
+import android.os.Build
+import androidx.core.content.ContextCompat
+import android.view.KeyEvent
 import com.kaspersky.components.kautomator.system.UiSystem
 import com.kaspersky.kaspresso.device.server.AdbServer
 import com.kaspersky.kaspresso.flakysafety.algorithm.FlakySafetyAlgorithm
 import com.kaspersky.kaspresso.internal.exceptions.AdbServerException
 import com.kaspersky.kaspresso.internal.systemscreen.NotificationsFullScreen
-
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.params.FlakySafetyParams
 
 /**
  * The implementation of the [Bluetooth] interface.
  */
-class BluetoothImpl(
+internal class BluetoothImpl(
     private val logger: UiTestLogger,
     private val targetContext: Context,
     private val adbServer: AdbServer
@@ -51,25 +56,62 @@ class BluetoothImpl(
     }
 
     /**
-     * Toggles Bluetooth state
-     * Tries, first and foremost, to send ADB command. If this attempt fails,
-     * opens Android Settings screen and tries to switch Bluetooth setting thumb.
+     * Toggles Bluetooth state.
+     * Tries in order:
+     * 1. Android API — requires [Manifest.permission.BLUETOOTH_ADMIN] below API 31,
+     *    [Manifest.permission.BLUETOOTH_CONNECT] on API 31–32. Restricted for third-party
+     *    apps on [Build.VERSION_CODES.TIRAMISU]+.
+     * 2. ADB `svc bluetooth` command via AdbServer (available since API 17).
+     * 3. Android Settings UI as a last resort.
      */
     private fun toggleBluetooth(enable: Boolean) {
         if (isBluetoothNotSupported()) {
             logger.i("Bluetooth is not supported")
             return
         }
-        if (!changeBluetoothStateUsingAdbServer(enable, BLUETOOTH_STATE_CHANGE_ROOT_CMD) &&
-            !changeBluetoothStateUsingAdbServer(enable, BLUETOOTH_STATE_CHANGE_CMD)
-        ) {
-             toggleBluetoothUsingAndroidSettings(enable)
+
+        if (enable == isBluetoothEnabled()) {
+            logger.i("Bluetooth already in a needed state")
+            return
         }
+
+        if (!changeBluetoothStateUsingAndroidApi(enable) &&
+            !changeBluetoothStateUsingAdbServer(enable, BLUETOOTH_STATE_CHANGE_CMD) &&
+            !changeBluetoothStateUsingAdbServer(enable, BLUETOOTH_STATE_CHANGE_ROOT_CMD)
+        ) {
+            toggleBluetoothUsingAndroidSettings(enable)
+        }
+
         if (isBluetoothEnabled()) {
             logger.i("Bluetooth enabled")
         } else {
             logger.i("Bluetooth disabled")
         }
+    }
+
+    /**
+     * Tries to change Bluetooth state using Android API.
+     * Works only if API level is below [Build.VERSION_CODES.TIRAMISU] and the required
+     * permission ([Manifest.permission.BLUETOOTH_CONNECT] on API >= [Build.VERSION_CODES.S],
+     * [Manifest.permission.BLUETOOTH_ADMIN] on lower APIs) is granted.
+     * @return true if Bluetooth state changed or false otherwise
+     */
+    @SuppressLint("MissingPermission")
+    @Suppress("DEPRECATION")
+    private fun changeBluetoothStateUsingAndroidApi(isEnabled: Boolean): Boolean {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) return false
+
+        val requiredPermission = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            Manifest.permission.BLUETOOTH_CONNECT
+        } else {
+            Manifest.permission.BLUETOOTH_ADMIN
+        }
+        if (ContextCompat.checkSelfPermission(targetContext, requiredPermission) == PackageManager.PERMISSION_DENIED) return false
+
+        val adapter = getBluetoothAdapter() ?: return false
+        if (adapter.isEnabled == isEnabled) return true
+
+        return if (isEnabled) adapter.enable() else adapter.disable()
     }
 
     /**
@@ -92,8 +134,26 @@ class BluetoothImpl(
             false
         }
 
-    @Suppress("MagicNumber")
     private fun toggleBluetoothUsingAndroidSettings(enable: Boolean) {
+        if (enable) {
+            enableBluetoothViaDialog()
+        } else {
+            disableBluetoothViaQuickSettings()
+        }
+    }
+
+    private fun enableBluetoothViaDialog() {
+        // Opening a dialog with the permission to turn on bluetooth
+        adbServer.performShell("am", listOf("start -a android.bluetooth.adapter.action.REQUEST_ENABLE"))
+        // Move cursor to "Allow" button
+        adbServer.performShell("input", listOf("keyevent ${KeyEvent.KEYCODE_DPAD_RIGHT}"))
+        adbServer.performShell("input", listOf("keyevent ${KeyEvent.KEYCODE_DPAD_RIGHT}"))
+        // Clicking the "Allow" button
+        adbServer.performShell("input", listOf("keyevent ${KeyEvent.KEYCODE_ENTER}"))
+    }
+
+    @Suppress("MagicNumber")
+    private fun disableBluetoothViaQuickSettings() {
         val height = targetContext.resources.displayMetrics.heightPixels
         val width = targetContext.resources.displayMetrics.widthPixels
 
@@ -105,9 +165,9 @@ class BluetoothImpl(
         UiSystem {
             drag(width / 2, 0, width / 2, (height * 0.67).toInt(), 50)
         }
-        // Turn Bluetooth off or on via Quick Access Menu
+        // Turn Bluetooth off via Quick Access Menu
         NotificationsFullScreen {
-            bluetoothSwitch.setChecked(enable)
+            bluetoothSwitch.setChecked(false)
         }
         // Swipe up to close additional settings
         UiSystem {
