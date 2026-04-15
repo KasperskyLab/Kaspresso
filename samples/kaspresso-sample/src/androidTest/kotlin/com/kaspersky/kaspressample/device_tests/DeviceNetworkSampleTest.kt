@@ -9,8 +9,6 @@ import android.net.NetworkCapabilities
 import android.net.NetworkRequest
 import android.net.wifi.WifiManager
 import android.os.Build
-import android.provider.Settings
-import android.telephony.TelephonyManager
 import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspressample.device.DeviceSampleActivity

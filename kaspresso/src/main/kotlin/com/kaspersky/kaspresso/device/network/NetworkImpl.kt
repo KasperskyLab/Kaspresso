@@ -253,8 +253,8 @@ class NetworkImpl(
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.M) {
             toggleAirplaneModeUsingAdbOnOdlerApi(enable)
         } else {
-            if (!toggleAirplaneModeUsingAdb(enable, AIRPLANE_MODE_CHANGE_CMD)
-                && !toggleAirplaneModeUsingAdb(enable, AIRPLANE_MODE_CHANGE_ROOT_CMD)) {
+            if (!toggleAirplaneModeUsingAdb(enable, AIRPLANE_MODE_CHANGE_CMD) &&
+                !toggleAirplaneModeUsingAdb(enable, AIRPLANE_MODE_CHANGE_ROOT_CMD)) {
                 toggleAirplaneModeAndroidSettings(enable)
             }
         }
