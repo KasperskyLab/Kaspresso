@@ -1,5 +1,6 @@
 plugins {
     id("convention.android-app")
+    alias(libs.plugins.compose.compiler)
 }
 
 android {
@@ -14,10 +15,6 @@ android {
 
     buildFeatures {
         compose = true
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
     }
 
     sourceSets {

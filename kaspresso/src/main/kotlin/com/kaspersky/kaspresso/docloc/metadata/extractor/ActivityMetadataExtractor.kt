@@ -1,4 +1,4 @@
-package com.kaspersky.kaspresso.device.activities.metadata
+package com.kaspersky.kaspresso.docloc.metadata.extractor
 
 import android.app.Activity
 import android.content.res.Resources
@@ -6,17 +6,44 @@ import android.view.View
 import android.widget.TextView
 import androidx.test.espresso.util.TreeIterables
 import com.google.android.material.appbar.CollapsingToolbarLayout
+import com.kaspersky.kaspresso.device.activities.Activities
+import com.kaspersky.kaspresso.docloc.metadata.LocalizedString
+import com.kaspersky.kaspresso.docloc.metadata.Metadata
+import com.kaspersky.kaspresso.docloc.metadata.Window
 import com.kaspersky.kaspresso.logger.UiTestLogger
+
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
 
 /**
  * The utility class to collect metadata from a window.
  */
-internal class ActivityMetadata(
-    private val logger: UiTestLogger
-) {
+internal class ActivityMetadataExtractor(
+    private val logger: UiTestLogger,
+    private val activities: Activities,
+) : MetadataExtractor {
 
-    companion object {
-        private const val INDEX_SEPARATOR = '_'
+    private val metadataExtractorHelper = MetadataExtractorHelper()
+
+    override fun getMetadata(): Metadata {
+        val activity = activities.getResumed() ?: throw RuntimeException("Failed to get current activity")
+        return getFromActivity(activity)
     }
 
     /**
@@ -27,16 +54,15 @@ internal class ActivityMetadata(
      * @param activity activity to collect metadata from.
      * @return Metadata for the activity.
      */
-    internal fun getFromActivity(activity: Activity): Metadata {
-        return getMetadata(activity)
+    private fun getFromActivity(activity: Activity): Metadata {
+        return createMetadata(activity)
     }
 
-    private fun getMetadata(activity: Activity): Metadata {
+    private fun createMetadata(activity: Activity): Metadata {
         with(activity.window.decorView) {
-            val localizedStrings =
-                resolveAmbiguous(
-                    getLocalizedStrings(this)
-                )
+            val localizedStrings = metadataExtractorHelper.resolveAmbiguous(
+                getLocalizedStrings(this)
+            )
             val window = Window(
                 left,
                 top,
@@ -51,10 +77,9 @@ internal class ActivityMetadata(
     private fun getLocalizedStrings(decorView: View): List<LocalizedString> {
         return TreeIterables.depthFirstViewTraversal(decorView)
             .filter { it.visibility == View.VISIBLE }
-            .filter { it is TextView || it is CollapsingToolbarLayout }
-            .map { v ->
-                if (v is TextView) {
-                    LocalizedString(
+            .mapNotNull { v ->
+                when (v) {
+                    is TextView -> LocalizedString(
                         v.text.toString(),
                         getEntryName(decorView.resources, v),
                         v.left,
@@ -62,17 +87,17 @@ internal class ActivityMetadata(
                         v.width,
                         v.height
                     )
-                } else {
-                    LocalizedString(
-                        (v as CollapsingToolbarLayout).title.toString(),
+                    is CollapsingToolbarLayout -> LocalizedString(
+                        v.title.toString(),
                         getEntryNameFromLayout(decorView.resources, v),
                         v.left,
                         v.top,
                         v.width,
                         v.height
                     )
+                    else -> null
                 }
-            }.toMutableList()
+            }
     }
 
     private fun getEntryName(resources: Resources, v: TextView): String {
@@ -90,22 +115,6 @@ internal class ActivityMetadata(
         } catch (ex: Resources.NotFoundException) {
             logger.e("Entry ${layout.id} not found")
             "[id:${Integer.toHexString(layout.id)}]"
-        }
-    }
-
-    private fun resolveAmbiguous(localizedStrings: List<LocalizedString>): List<LocalizedString> {
-        return localizedStrings.groupBy { it.locValueDescription }
-            .values
-            .flatMap { groupedById ->
-                if (groupedById.size == 1) groupedById else addIndexes(
-                    groupedById
-                )
-            }
-    }
-
-    private fun addIndexes(groupedById: List<LocalizedString>): List<LocalizedString> {
-        return groupedById.mapIndexed { index, locString ->
-            locString.copy(locValueDescription = "${locString.locValueDescription}$INDEX_SEPARATOR${index + 1}")
         }
     }
 }

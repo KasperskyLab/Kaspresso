@@ -10,6 +10,25 @@ import com.kaspersky.kaspresso.instrumental.InstrumentalDependencyProvider
 import com.kaspersky.kaspresso.internal.wait.wait
 import com.kaspersky.kaspresso.logger.UiTestLogger
 
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+
 /**
  * The implementation of the [Permissions] interface.
  */
@@ -36,18 +55,19 @@ class PermissionsImpl(
         Permissions.Button.ALLOW_FOREGROUND to getResIdWithPackageName("permission_allow_foreground_only_button"),
         Permissions.Button.ALLOW_ALL to getResIdWithPackageName("permission_allow_all_button"),
         Permissions.Button.ALLOW_SELECTED to getResIdWithPackageName("permission_allow_selected_button"),
-        Permissions.Button.DENY to getResIdWithPackageName("permission_deny_button")
+        Permissions.Button.DENY to getResIdWithPackageName("permission_deny_button"),
+        Permissions.Button.DENY_AND_DONT_ASK_AGAIN to getResIdWithPackageName("permission_deny_and_dont_ask_again_button")
     )
 
     /**
      * Waits for 1 sec, passes the permission-requesting permissions dialog and allows permissions.
      */
-    override fun allowViaDialog() {
+    override fun allowViaDialog(button: Permissions.Button) {
         wait(
             timeoutMs = DIALOG_TIMEOUT_MS,
             logger = logger
         ) {
-            handlePermissionRequest(Permissions.Button.ALLOW)
+            handlePermissionRequest(button)
         }
         logger.i("Allow permission via dialog")
     }
@@ -55,12 +75,12 @@ class PermissionsImpl(
     /**
      * Waits for 1 sec, passes the permission-requesting permissions dialog and denies permissions.
      */
-    override fun denyViaDialog() {
+    override fun denyViaDialog(button: Permissions.Button) {
         wait(
             timeoutMs = DIALOG_TIMEOUT_MS,
             logger = logger
         ) {
-            handlePermissionRequest(Permissions.Button.DENY)
+            handlePermissionRequest(button)
         }
         logger.i("Deny permission via dialog")
     }

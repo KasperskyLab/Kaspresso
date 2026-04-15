@@ -7,6 +7,11 @@ plugins {
 
 android {
     namespace = "com.kaspersky.kaspresso"
+
+    defaultConfig {
+        buildConfigField("String", "VISUAL_TEST_TYPE", System.getenv("VISUAL_TEST_TYPE")
+            ?: findProperty("kaspresso.visualTestType")?.toString() ?: "\"Record\"") // [Record, Compare]
+    }
 }
 
 publish {
@@ -15,6 +20,7 @@ publish {
 
 dependencies {
     api(projects.kautomator)
+    api(libs.kakao)
     api(libs.kakao)
     api(libs.kakaoExtClicks)
     api(libs.bundles.espresso)
@@ -30,4 +36,5 @@ dependencies {
 
     testImplementation(libs.junit)
     testImplementation(libs.truth)
+    testImplementation(libs.mockk)
 }

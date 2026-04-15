@@ -1,7 +1,14 @@
-﻿This file contains information about dependencies which are used in the Kaspresso/adb-server-command-types 1.5.4.
+﻿This file contains information about dependencies which are used in Kaspresso/Adbserver-command-types 1.6.0
 
-org.jetbrains.kotlin:kotlin-stdlib 1.9.20
-Copyright 2010-2018 JetBrains s.r.o. and Kotlin Programming Language contributors.
+org.jetbrains.kotlin:kotlin-stdlib 1.8.22
+Copyright 2010-2023 JetBrains s.r.o. and Kotlin Programming Language contributors.
+-----------------------------------------------------------------------
+Distributed under the terms of the Apache License Version 2.0
+-----------------------------------------------------------------------
+
+
+org.jetbrains.kotlin:kotlin-stdlib-common 1.8.22
+Copyright 2010-2022 JetBrains s.r.o. and Kotlin Programming Language contributors.
 -----------------------------------------------------------------------
 Distributed under the terms of the Apache License Version 2.0
 -----------------------------------------------------------------------

@@ -22,7 +22,7 @@ dependencyResolutionManagement {
         mavenLocal()
         google()
         maven { url = uri("https://kotlin.bintray.com/kotlinx") }
-        maven { url = uri("https://s01.oss.sonatype.org/content/repositories/snapshots") }
+        maven { url = uri("https://central.sonatype.com/repository/maven-snapshots/") }
     }
 }
 
@@ -36,6 +36,8 @@ include(
     ":adb-server:adb-server-desktop-device-connection",
     ":adb-server:adb-server-device",
 
+    ":page-object-code-gen",
+
     ":kaspresso",
     ":kautomator",
     ":allure-support",
@@ -44,9 +46,10 @@ include(
     ":samples:adbserver-sample",
     ":samples:kaspresso-sample",
     ":samples:kautomator-sample",
+    ":samples:kautomator-sample:kautomator-compiletime-r-sanity",
     ":samples:kautomator-sample-app-upgrade",
     ":samples:kaspresso-allure-support-sample",
     ":samples:kaspresso-compose-support-sample",
 
-    ":tutorial"
+    ":tutorial",
 )

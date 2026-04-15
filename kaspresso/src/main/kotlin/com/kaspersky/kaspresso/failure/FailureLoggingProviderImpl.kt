@@ -9,6 +9,25 @@ import io.reactivex.exceptions.ExtCompositeException
 import junit.framework.AssertionFailedError
 import org.hamcrest.Matcher
 
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+
 /**
  * The implementation of the [FailureLoggingProvider] interface.
  */
@@ -66,7 +85,7 @@ class FailureLoggingProviderImpl(
                     error?.let { " because of ${error.javaClass.simpleName}" }
         )
 
-        error?.let { throw it.describedWith(viewMatcher) }
+        error?.let { throw describeError(it, viewMatcher) }
     }
 
     /**
@@ -76,28 +95,27 @@ class FailureLoggingProviderImpl(
      *
      * @return transformed [error].
      */
-    private fun Throwable.describedWith(viewMatcher: Matcher<View>?): Throwable {
-        val newError = when {
-            this is PerformException -> {
+    private fun describeError(originalError: Throwable, viewMatcher: Matcher<View>?): Throwable {
+        return when {
+            originalError is PerformException -> {
                 PerformException.Builder()
-                    .from(this)
+                    .from(originalError)
                     .apply { viewMatcher?.let { withViewDescription(it.toString()) } }
                     .build()
+                    .apply { addSuppressed(originalError) }
             }
-            this is AssertionError -> {
-                AssertionFailedError(message).initCause(this)
+            originalError is AssertionError -> {
+                AssertionFailedError(originalError.message)
+                    .initCause(originalError)
+                    .apply { addSuppressed(originalError) }
             }
-            isWebViewException(this) -> {
+            isWebViewException(originalError) -> {
                 val message = StringBuilder("Failed to interact with web view! Usually it means that desired element is not found or JavaScript is disabled in web view")
                 viewMatcher?.let { message.append("\nView description: ${it.describe()}") }
-                RuntimeException(message.toString())
+                RuntimeException(message.toString()).apply { addSuppressed(originalError) }
             }
-            else -> this
+            else -> originalError.apply { addSuppressed(RuntimeException()) }
         }
-        newError.stackTrace = Thread.currentThread().stackTrace
-        newError.addSuppressed(this)
-
-        return newError
     }
 
     private fun isWebViewException(throwable: Throwable): Boolean {

@@ -6,6 +6,7 @@ plugins {
     id("convention.dependency-updates")
     id("io.gitlab.arturbosch.detekt") version "1.21.0"
     id("convention.air")
+    alias(libs.plugins.compose.compiler) apply false
 }
 
 buildscript {

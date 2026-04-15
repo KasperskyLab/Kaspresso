@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/cache@v1
+      - uses: actions/cache@v3
         with:
           path: ~/.gradle/caches
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
@@ -51,3 +51,13 @@ jobs:
           -Pkaspresso.pgp.key=${PGP_KEY}
           -Pkaspresso.pgp.password=${PGP_PASSWORD}
           --no-parallel
+      - name: Finalize release on Sonatype Central
+        if: ${{ inputs.releaseType == 'SonatypeReleases' }}
+        env:
+          OSSRH_USER: ${{ secrets.ossrh_user }}
+          OSSRH_PASSWORD: ${{ secrets.ossrh_password }}
+        run: >
+          curl --fail --request POST
+          --user "${OSSRH_USER}:${OSSRH_PASSWORD}"
+          https://ossrh-staging-api.central.sonatype.com/manual/upload/defaultRepository/com.kaspersky
+

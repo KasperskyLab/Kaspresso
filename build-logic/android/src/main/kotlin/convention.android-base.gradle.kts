@@ -3,11 +3,11 @@ import com.android.build.gradle.BaseExtension
 @Suppress("MagicNumber")
 configure<BaseExtension> {
 
-    compileSdkVersion(34)
+    compileSdkVersion(35)
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 
     defaultConfig {
@@ -32,5 +32,6 @@ configure<BaseExtension> {
         resValues = false
         shaders = false
         viewBinding = false
+        buildConfig = true
     }
 }

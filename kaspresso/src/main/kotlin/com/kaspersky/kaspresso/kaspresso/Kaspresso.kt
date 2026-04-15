@@ -9,6 +9,7 @@ import com.kaspersky.adbserver.common.log.logger.LogLevel
 import com.kaspersky.components.kautomator.KautomatorConfigurator
 import com.kaspersky.components.kautomator.intercept.interaction.UiDeviceInteraction
 import com.kaspersky.components.kautomator.intercept.interaction.UiObjectInteraction
+import com.kaspersky.kaspresso.BuildConfig
 import com.kaspersky.kaspresso.device.Device
 import com.kaspersky.kaspresso.device.accessibility.Accessibility
 import com.kaspersky.kaspresso.device.accessibility.AccessibilityImpl
@@ -45,6 +46,7 @@ import com.kaspersky.kaspresso.device.screenshots.ScreenshotsImpl
 import com.kaspersky.kaspresso.device.screenshots.screenshotmaker.CombinedScreenshotMaker
 import com.kaspersky.kaspresso.device.screenshots.screenshotmaker.ExternalScreenshotMaker
 import com.kaspersky.kaspresso.device.screenshots.screenshotmaker.InternalScreenshotMaker
+import com.kaspersky.kaspresso.device.screenshots.screenshotmaker.ScreenshotMaker
 import com.kaspersky.kaspresso.device.server.AdbServer
 import com.kaspersky.kaspresso.device.server.AdbServerImpl
 import com.kaspersky.kaspresso.device.video.Videos
@@ -66,6 +68,8 @@ import com.kaspersky.kaspresso.files.resources.impl.DefaultResourceFilesProvider
 import com.kaspersky.kaspresso.files.resources.impl.DefaultResourcesDirNameProvider
 import com.kaspersky.kaspresso.files.resources.impl.DefaultResourcesDirsProvider
 import com.kaspersky.kaspresso.files.resources.impl.DefaultResourcesRootDirsProvider
+import com.kaspersky.kaspresso.flakysafety.scalpel.external.ExternalFlakySafetyScalperNotifier
+import com.kaspersky.kaspresso.flakysafety.scalpel.external.ExternalFlakySafetyScalperNotifierImpl
 import com.kaspersky.kaspresso.idlewaiting.KautomatorWaitForIdleSettings
 import com.kaspersky.kaspresso.instrumental.InstrumentalDependencyProvider
 import com.kaspersky.kaspresso.instrumental.InstrumentalDependencyProviderFactory
@@ -115,6 +119,8 @@ import com.kaspersky.kaspresso.interceptors.watcher.view.impl.logging.LoggingVie
 import com.kaspersky.kaspresso.interceptors.watcher.view.impl.logging.LoggingViewAssertionWatcherInterceptor
 import com.kaspersky.kaspresso.interceptors.watcher.view.impl.logging.LoggingWebAssertionWatcherInterceptor
 import com.kaspersky.kaspresso.internal.runlisteners.artifactspull.ArtifactsPullRunListener
+import com.kaspersky.kaspresso.internal.visual.DefaultScreenshotsComparator
+import com.kaspersky.kaspresso.internal.visual.DefaultVisualTestWatcher
 import com.kaspersky.kaspresso.logger.UiTestLogger
 import com.kaspersky.kaspresso.logger.UiTestLoggerImpl
 import com.kaspersky.kaspresso.params.ArtifactsPullParams
@@ -130,7 +136,30 @@ import com.kaspersky.kaspresso.params.SystemDialogsSafetyParams
 import com.kaspersky.kaspresso.params.VideoParams
 import com.kaspersky.kaspresso.runner.listener.addUniqueListener
 import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
+import com.kaspersky.kaspresso.visual.ScreenshotsComparator
+import com.kaspersky.kaspresso.visual.VisualTestParams
+import com.kaspersky.kaspresso.visual.VisualTestType
+import com.kaspersky.kaspresso.visual.VisualTestWatcher
 import io.github.kakaocup.kakao.Kakao
+
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
 
 /**
  * The storage of all Kaspresso preferences and entities, such as [AdbServer], [Device] and different interceptors.
@@ -155,7 +184,9 @@ data class Kaspresso(
     internal val deviceBehaviorInterceptors: List<DeviceBehaviorInterceptor>,
     internal val stepWatcherInterceptors: List<StepWatcherInterceptor>,
     internal val testRunWatcherInterceptors: List<TestRunWatcherInterceptor>,
-    internal val resourceFilesProvider: ResourceFilesProvider
+    internal val resourceFilesProvider: ResourceFilesProvider,
+    internal val visualTestWatcher: VisualTestWatcher,
+    internal val externalFlakySafetyScalperNotifier: ExternalFlakySafetyScalperNotifier,
 ) {
 
     companion object {
@@ -434,6 +465,11 @@ data class Kaspresso(
         lateinit var exploit: Exploit
 
         /**
+         * Holds an implementation of [SystemLanguage] interface. If it was not specified, the default implementation is used.
+         */
+        lateinit var systemLanguage: SystemLanguage
+
+        /**
          * Holds an implementation of [Language] interface. If it was not specified, the default implementation is used.
          */
         lateinit var language: Language
@@ -477,6 +513,21 @@ data class Kaspresso(
         lateinit var screenshotParams: ScreenshotParams
 
         /**
+         * Holds an implementation of [ScreenshotMaker] for capturing screenshots.
+         * If it was not specified, a [CombinedScreenshotMaker] using internal (Activity.decorView)
+         * and external (UiDevice) capture is used.
+         *
+         * Override this to control how screenshots are captured — for example, to always use
+         * UiDevice-based capture which includes popup windows like ModalBottomSheet:
+         * ```
+         * Kaspresso.Builder.simple {
+         *     screenshotMaker = ExternalScreenshotMaker(UiDevice.getInstance(instrumentation))
+         * }
+         * ```
+         */
+        lateinit var screenshotMaker: ScreenshotMaker
+
+        /**
          * Holds the [VideoParams] for [com.kaspersky.kaspresso.device.video.recorder.VideoRecorder]'s usage.
          * If it was not specified, the default implementation is used.
          */
@@ -499,6 +550,17 @@ data class Kaspresso(
          * If it was not specified, the default implementation is used.
          */
         lateinit var artifactsPullParams: ArtifactsPullParams
+
+        /**
+         * Holds the [VisualTestParams].
+         * If it was not specified, the default implementation is used.
+         */
+        lateinit var visualTestParams: VisualTestParams
+
+        lateinit var screenshotsComparator: ScreenshotsComparator
+
+        lateinit var visualTestWatcher: VisualTestWatcher
+
         /**
          * Holds an implementation of [DirsProvider] interface. If it was not specified, the default implementation is used.
          */
@@ -658,6 +720,13 @@ data class Kaspresso(
         lateinit var testRunWatcherInterceptors: MutableList<TestRunWatcherInterceptor>
 
         /**
+         * Holds a reference to the custom "external" flaky safety scalpers that are not set in the kaspresso by default
+         * @see com.kaspersky.kaspresso.flakysafety.scalpel.FlakySafeInterceptorScalpel
+         * @see com.kaspersky.kaspresso.flakysafety.scalpel.external.ExternalFlakySafetyScalper
+         */
+        lateinit var externalFlakySafetyScalperNotifier: ExternalFlakySafetyScalperNotifier
+
+        /**
          * Holds the implementation of the [androidx.test.espresso.FailureHandler] interface, that is called on every
          * failure.
          */
@@ -755,10 +824,10 @@ data class Kaspresso(
                 instrumentalDependencyProviderFactory.getComponentProvider<ExploitImpl>(instrumentation),
                 adbServer
             )
-            if (!::language.isInitialized) {
-                val systemLanguage = SystemLanguage(instrumentation.targetContext, testLogger, hackPermissions)
-                language = LanguageImpl(libLogger, instrumentation, systemLanguage)
-            }
+
+            if (!::systemLanguage.isInitialized) systemLanguage = SystemLanguage(instrumentation.targetContext, testLogger, hackPermissions)
+            if (!::language.isInitialized) language = LanguageImpl(libLogger, instrumentation, systemLanguage)
+
             if (!::logcat.isInitialized) logcat = LogcatImpl(libLogger, adbServer)
 
             if (!::flakySafetyParams.isInitialized) flakySafetyParams = FlakySafetyParams.default()
@@ -771,18 +840,36 @@ data class Kaspresso(
             if (!::elementLoaderParams.isInitialized) elementLoaderParams = ElementLoaderParams()
             if (!::clickParams.isInitialized) clickParams = ClickParams.default()
             if (!::artifactsPullParams.isInitialized) artifactsPullParams = ArtifactsPullParams(enabled = false)
+            if (!::visualTestParams.isInitialized) visualTestParams = VisualTestParams(testType = VisualTestType.valueOf(BuildConfig.VISUAL_TEST_TYPE))
+            if (!::screenshotsComparator.isInitialized) screenshotsComparator = DefaultScreenshotsComparator(
+                visualTestParams,
+                testLogger,
+                resourcesRootDirsProvider,
+                resourcesDirsProvider,
+                resourceFileNamesProvider
+            )
+            if (!::visualTestWatcher.isInitialized) visualTestWatcher = DefaultVisualTestWatcher(visualTestParams, libLogger, dirsProvider, resourcesRootDirsProvider, files)
+
+            if (!::screenshotMaker.isInitialized) {
+                screenshotMaker = CombinedScreenshotMaker(
+                    preferredScreenshotMaker = InternalScreenshotMaker(activities, screenshotParams),
+                    fallbackScreenshotMaker = ExternalScreenshotMaker(
+                        instrumentalDependencyProviderFactory.getComponentProvider<ExternalScreenshotMaker>(instrumentation),
+                        screenshotParams
+                    )
+                )
+            }
 
             if (!::screenshots.isInitialized) {
                 screenshots = ScreenshotsImpl(
                     logger = libLogger,
                     resourceFilesProvider = resourceFilesProvider,
-                    screenshotMaker = CombinedScreenshotMaker(
-                        preferredScreenshotMaker = InternalScreenshotMaker(activities, screenshotParams),
-                        fallbackScreenshotMaker = ExternalScreenshotMaker(
-                            instrumentalDependencyProviderFactory.getComponentProvider<ExternalScreenshotMaker>(instrumentation),
-                            screenshotParams
-                        )
-                    )
+                    screenshotMaker = screenshotMaker,
+                    visualTestParams = visualTestParams,
+                    screenshotsComparator = screenshotsComparator,
+                    dirsProvider = dirsProvider,
+                    resourceFileNamesProvider = resourceFileNamesProvider,
+                    resourcesDirsProvider = resourcesDirsProvider,
                 )
             }
 
@@ -938,6 +1025,8 @@ data class Kaspresso(
                 defaultsTestRunWatcherInterceptor
             )
 
+            if (!::externalFlakySafetyScalperNotifier.isInitialized) externalFlakySafetyScalperNotifier = ExternalFlakySafetyScalperNotifierImpl()
+
             if (artifactsPullParams.enabled) {
                 instrumentalDependencyProviderFactory.getComponentProvider<Kaspresso>(instrumentation).runNotifier.addUniqueListener {
                     ArtifactsPullRunListener(params = artifactsPullParams, files = files, logger = libLogger)
@@ -994,7 +1083,8 @@ data class Kaspresso(
                     videoParams = videoParams,
                     elementLoaderParams = elementLoaderParams,
                     systemDialogsSafetyParams = systemDialogsSafetyParams,
-                    clickParams = clickParams
+                    clickParams = clickParams,
+                    visualTestParams = visualTestParams,
                 ),
 
                 viewActionWatcherInterceptors = viewActionWatcherInterceptors,
@@ -1014,6 +1104,8 @@ data class Kaspresso(
 
                 stepWatcherInterceptors = stepWatcherInterceptors,
                 testRunWatcherInterceptors = testRunWatcherInterceptors,
+                externalFlakySafetyScalperNotifier = externalFlakySafetyScalperNotifier,
+                visualTestWatcher = visualTestWatcher,
             )
 
             configurator.waitForIdleTimeout = kautomatorWaitForIdleSettings.waitForIdleTimeout
