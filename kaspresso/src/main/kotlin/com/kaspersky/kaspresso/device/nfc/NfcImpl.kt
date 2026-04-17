@@ -85,6 +85,7 @@ internal class NfcImpl(
      * Tries `svc nfc enable|disable` via AdbServer.
      * @return `true` if the state changed to the desired value, `false` on any failure.
      */
+    @Suppress("MagicNumber")
     private fun changeNfcStateUsingAdbServer(enable: Boolean): Boolean {
         val cmd = if (enable) "enable" else "disable"
         return try {
