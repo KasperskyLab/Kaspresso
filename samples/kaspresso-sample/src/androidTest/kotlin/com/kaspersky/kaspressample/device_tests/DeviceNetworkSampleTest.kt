@@ -9,8 +9,6 @@ import android.net.NetworkCapabilities
 import android.net.NetworkRequest
 import android.net.wifi.WifiManager
 import android.os.Build
-import android.provider.Settings
-import android.telephony.TelephonyManager
 import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspressample.device.DeviceSampleActivity
@@ -88,6 +86,13 @@ class DeviceNetworkSampleTest : TestCase() {
                 device.network.toggleMobileData(true)
                 assertTrueSafely { isDataConnected() }
             }
+
+            step("Toggle Airplane mode") {
+                device.network.toggleAirplaneMode(true)
+                assertFalseSafely { isDataConnected() }
+                device.network.toggleAirplaneMode(false)
+                assertTrueSafely { isDataConnected() }
+            }
         }
     }
 
@@ -125,12 +130,10 @@ class DeviceNetworkSampleTest : TestCase() {
     }
 
     private fun BaseTestContext.isDataConnectedInLowAndroid(): Boolean {
-        val telephonyManager: TelephonyManager? =
-            device.context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager?
-        if (telephonyManager?.simState != TelephonyManager.SIM_STATE_READY) {
-            return false
-        }
-        return Settings.Global.getInt(device.context.contentResolver, "mobile_data", 0) == 1
+        val connectivityManager = device.context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val networkInfo = connectivityManager.activeNetworkInfo
+
+        return networkInfo?.isConnected ?: false
     }
 
     private fun BaseTestContext.checkWifi(shouldBeEnabled: Boolean) {
