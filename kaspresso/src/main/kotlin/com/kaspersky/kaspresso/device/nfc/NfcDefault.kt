@@ -3,7 +3,9 @@ package com.kaspersky.kaspresso.device.nfc
 import android.content.Context
 import android.content.Intent
 import android.nfc.NfcAdapter
+import android.nfc.NfcManager
 import androidx.test.uiautomator.By
+import androidx.test.uiautomator.BySelector
 import androidx.test.uiautomator.Until
 import com.kaspersky.kaspresso.device.server.AdbServer
 import com.kaspersky.kaspresso.instrumental.InstrumentalDependencyProvider
@@ -23,17 +25,18 @@ import com.kaspersky.kaspresso.logger.UiTestLogger
  * @param instrumentalDependencyProvider provides [androidx.test.uiautomator.UiDevice]
  *   for Settings UI interaction fallback.
  * @param adbServer AdbServer instance to run shell commands.
+ * @param uiSelectorsOverride optional override for default UI selectors used in Settings UI interaction.
  */
-internal class NfcImpl(
+open class NfcDefault(
     private val logger: UiTestLogger,
     private val targetContext: Context,
     private val instrumentalDependencyProvider: InstrumentalDependencyProvider,
-    private val adbServer: AdbServer
+    private val adbServer: AdbServer,
+    private val uiSelectorsOverride: List<BySelector>? = null,
 ) : Nfc {
 
     companion object {
         private const val NFC_STATE_CHECK_CMD = "settings get global nfc_adapter_state"
-        private const val NFC_STATE_ENABLED = "3"
         private const val NFC_STATE_CHANGE_CMD = "svc nfc"
         private const val NFC_SETTINGS_ACTION = "android.settings.NFC_SETTINGS"
         private const val SETTINGS_TIMEOUT_MS = 3_000L
@@ -51,12 +54,11 @@ internal class NfcImpl(
 
     override fun isEnabled(): Boolean {
         if (!isNfcHardwarePresent()) return false
-        return try {
-            val result = adbServer.performShell(NFC_STATE_CHECK_CMD)
-            parseAdbResult(result)?.trim() == NFC_STATE_ENABLED
-        } catch (e: AdbServerException) {
-            NfcAdapter.getDefaultAdapter(targetContext)?.isEnabled ?: false
-        }
+
+        val manager = targetContext.getSystemService(Context.NFC_SERVICE) as NfcManager
+        val adapter = manager.defaultAdapter ?: return false
+
+        return adapter.isEnabled
     }
 
     /**
@@ -113,13 +115,16 @@ internal class NfcImpl(
         targetContext.startActivity(intent)
 
         // Try to find an NFC toggle by common resource-id patterns across OEMs
-        val toggle = uiDevice.wait(
-            Until.findObject(By.checkable(true).textContains("NFC")),
-            SETTINGS_TIMEOUT_MS
-        ) ?: uiDevice.wait(
-            Until.findObject(By.checkable(true).descContains("NFC")),
-            SETTINGS_TIMEOUT_MS
+        val toggleSelectors = uiSelectorsOverride ?: listOf(
+            By.checkable(true).res("android:id/switch_widget").pkg("com.android.settings"),
+            By.checkable(true).res("com.android.settings:id/switchWidget"),
+            By.checkable(true).res("com.android.settings:id/sesl_switchbar_switch"), // samsung
+            By.checkable(true).res("com.android.settings:id/settingslib_main_switch_bar"), // xiaomi
         )
+
+        val toggle = toggleSelectors.firstNotNullOfOrNull { selector ->
+            uiDevice.wait(Until.findObject(selector), SETTINGS_TIMEOUT_MS)
+        }
 
         if (toggle != null) {
             if (toggle.isChecked != enable) {

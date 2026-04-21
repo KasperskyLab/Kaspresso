@@ -34,7 +34,7 @@ import com.kaspersky.kaspresso.device.logcat.dumper.LogcatDumperImpl
 import com.kaspersky.kaspresso.device.network.Network
 import com.kaspersky.kaspresso.device.network.NetworkImpl
 import com.kaspersky.kaspresso.device.nfc.Nfc
-import com.kaspersky.kaspresso.device.nfc.NfcImpl
+import com.kaspersky.kaspresso.device.nfc.NfcDefault
 import com.kaspersky.kaspresso.device.permissions.HackPermissions
 import com.kaspersky.kaspresso.device.permissions.HackPermissionsImpl
 import com.kaspersky.kaspresso.device.permissions.Permissions
@@ -800,10 +800,10 @@ data class Kaspresso(
                 instrumentation.targetContext,
                 adbServer
             )
-            if (!::nfc.isInitialized) nfc = NfcImpl(
+            if (!::nfc.isInitialized) nfc = NfcDefault(
                 libLogger,
                 instrumentation.targetContext,
-                instrumentalDependencyProviderFactory.getComponentProvider<NfcImpl>(instrumentation),
+                instrumentalDependencyProviderFactory.getComponentProvider<NfcDefault>(instrumentation),
                 adbServer
             )
             if (!::phone.isInitialized) phone = PhoneImpl(libLogger, adbServer)
