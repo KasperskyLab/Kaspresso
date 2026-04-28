@@ -7,6 +7,7 @@ import com.kaspersky.adbserver.common.log.logger.LogLevel
 import com.kaspersky.adbserver.common.log.logger.Logger
 import com.kaspersky.kaspresso.internal.exceptions.AdbServerException
 import com.kaspersky.kaspresso.logger.UiTestLogger
+import java.util.concurrent.TimeUnit
 
 /*
  * Licensed to the Apache Software Foundation (ASF) under one
@@ -34,7 +35,8 @@ import com.kaspersky.kaspresso.logger.UiTestLogger
  */
 class AdbServerImpl(
     logLevel: LogLevel,
-    private val logger: UiTestLogger
+    private val logger: UiTestLogger,
+    private val commandTimeoutSeconds: Long = TimeUnit.MINUTES.toSeconds(3)
 ) : AdbServer {
 
     private val adbServerLogger: Logger = AdbServerLoggerKaspressoImpl(logLevel, logger)
@@ -43,7 +45,7 @@ class AdbServerImpl(
     private val adbTerminal: AdbTerminal
         get() {
             if (!connected) {
-                AdbTerminal.connect(logger = adbServerLogger)
+                AdbTerminal.connect(logger = adbServerLogger, commandTimeoutSeconds = commandTimeoutSeconds)
                 connected = true
             }
             return AdbTerminal

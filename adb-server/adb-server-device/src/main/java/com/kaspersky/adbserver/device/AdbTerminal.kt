@@ -7,6 +7,7 @@ import com.kaspersky.adbserver.common.api.CommandResult
 import com.kaspersky.adbserver.common.log.LoggerFactory
 import com.kaspersky.adbserver.common.log.logger.LogLevel
 import com.kaspersky.adbserver.common.log.logger.Logger
+import java.util.concurrent.TimeUnit
 
 /*
  * Licensed to the Apache Software Foundation (ASF) under one
@@ -31,8 +32,11 @@ object AdbTerminal {
 
     private var device: Device? = null
 
-    fun connect(logger: Logger = LoggerFactory.getDeviceLogger(LogLevel.INFO)) {
-        if (device == null) device = Device.create(logger)
+    fun connect(
+        logger: Logger = LoggerFactory.getDeviceLogger(LogLevel.INFO),
+        commandTimeoutSeconds: Long = TimeUnit.MINUTES.toSeconds(3)
+    ) {
+        if (device == null) device = Device.create(logger, commandTimeoutSeconds)
         device?.startConnectionToDesktop()
     }
 

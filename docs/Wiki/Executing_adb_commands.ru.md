@@ -210,6 +210,16 @@ class DeviceNetworkSampleTest: TestCase(
 2020-09-10 12:24:27.427 10349-10378/com.kaspersky.kaspressample I/KASPRESSO_ADBSERVER: The result of command=AdbCommand(body=shell su 0 svc data disable) => CommandResult(status=SUCCESS, description=exitCode=0, message=, serviceInfo=The command was executed on desktop=Desktop-30548)
 ```
 
+На стороне устройства есть таймаут, определяющий, как долго оно ждёт ответа от сервера. Его можно изменить, 
+установив значение AdbServerParams в Kaspresso builder:
+```kotlin
+class DeviceNetworkSampleTest : TestCase(
+    kaspressoBuilder = Kaspresso.Builder.simple {
+        adbServerParams = AdbServerParams(commandTimeoutSeconds = 360L)
+    }
+) {...}
+```
+
 ## Разработка
 Исходный код AdbServer доступен в модуле [adb-server](https://github.com/KasperskyLab/Kaspresso/ru/tree/master/adb-server). <br>
 Если вы хотите собрать `adbserver-desktop.jar` вручную, просто выполните `./gradlew :adb-server:adbserver-desktop:assemble`.

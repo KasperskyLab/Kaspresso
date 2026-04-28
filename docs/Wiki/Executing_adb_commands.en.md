@@ -87,6 +87,7 @@ Flags:
 - `p`, `--port` - the adb server port number (the default value is 5037)
 - `l`, `--logs` - what type of logs show (the default value is INFO).
 - `a`, `--adb_path` - path to custom adb instance (by default, `adbserver-desktop.jar` uses `adb` from environment).
+- `t`, `--timeout` - timeout for adb commands execution.
 For more information, you can run `java -jar adbserver-desktop.jar --help`
 
 Consider available types of logs:
@@ -209,6 +210,16 @@ Now the logs looks like:
 2020-09-10 12:24:27.427 10349-10406/com.kaspersky.kaspressample D/KASPRESSO_ADBSERVER: class=ConnectionClientImplBySocket$handleMessages$1 method=invoke message: Received resultMessage=ResultMessage(command=AdbCommand(body=shell su 0 svc data disable), data=CommandResult(status=SUCCESS, description=exitCode=0, message=, serviceInfo=The command was executed on desktop=Desktop-30548))
 2020-09-10 12:24:27.427 10349-10378/com.kaspersky.kaspressample D/KASPRESSO_ADBSERVER: class=ConnectionClientImplBySocket method=executeCommand message: Command=AdbCommand(body=shell su 0 svc data disable) completed with commandResult=CommandResult(status=SUCCESS, description=exitCode=0, message=, serviceInfo=The command was executed on desktop=Desktop-30548)
 2020-09-10 12:24:27.427 10349-10378/com.kaspersky.kaspressample I/KASPRESSO_ADBSERVER: The result of command=AdbCommand(body=shell su 0 svc data disable) => CommandResult(status=SUCCESS, description=exitCode=0, message=, serviceInfo=The command was executed on desktop=Desktop-30548)
+```
+
+There's a timeout for how long the device waits for the response from the server. It can be changed by 
+setting `AdbServerParams` value in the Kaspresso builder:
+```kotlin
+class DeviceNetworkSampleTest : TestCase(
+    kaspressoBuilder = Kaspresso.Builder.simple {
+        adbServerParams = AdbServerParams(commandTimeoutSeconds = 360L)
+    }
+) {...}
 ```
 
 ## Development

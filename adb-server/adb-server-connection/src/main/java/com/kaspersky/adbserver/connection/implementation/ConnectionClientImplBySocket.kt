@@ -37,12 +37,9 @@ import java.util.concurrent.TimeUnit
 internal class ConnectionClientImplBySocket(
     private val socketCreation: () -> Socket,
     private val logger: Logger,
-    private val connectionClientLifecycle: ConnectionClientLifecycle
+    private val connectionClientLifecycle: ConnectionClientLifecycle,
+    private val commandTimeoutSeconds: Long = TimeUnit.MINUTES.toSeconds(3)
 ) : ConnectionClient {
-
-    companion object {
-        private val COMMAND_TIMEOUT_MIN = TimeUnit.MINUTES.toSeconds(3)
-    }
 
     private var _socket: Socket? = null
     private val socket: Socket
@@ -157,7 +154,7 @@ internal class ConnectionClientImplBySocket(
 
         val resultMessage: ResultMessage<CommandResult>?
         try {
-            resultMessage = resultWaiter.waitResult(COMMAND_TIMEOUT_MIN, TimeUnit.SECONDS)
+            resultMessage = resultWaiter.waitResult(commandTimeoutSeconds, TimeUnit.SECONDS)
         } catch (exception: InterruptedException) {
             val failedCommandResult = CommandResult(
                 ExecutorResultStatus.FAILURE,
