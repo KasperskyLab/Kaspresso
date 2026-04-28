@@ -27,6 +27,7 @@ import java.util.concurrent.TimeUnit
  * @param commandTimeoutSeconds how long the device waits for a command result from the desktop
  *        server before declaring a timeout. Defaults to 3 minutes.
  */
+@Suppress("MagicNumber")
 data class AdbServerParams(
     val commandTimeoutSeconds: Long = TimeUnit.MINUTES.toSeconds(3)
 )

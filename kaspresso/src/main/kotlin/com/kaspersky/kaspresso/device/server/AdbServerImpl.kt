@@ -33,6 +33,7 @@ import java.util.concurrent.TimeUnit
  * Please, pay attention to the field [AdbServerLogsType] that provides several types to show logs from adb-server (device part).
  * More details are available in [AdbServerLogsType].
  */
+@Suppress("MagicNumber")
 class AdbServerImpl(
     logLevel: LogLevel,
     private val logger: UiTestLogger,

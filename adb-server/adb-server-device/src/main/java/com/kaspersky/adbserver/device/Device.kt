@@ -40,6 +40,7 @@ internal class Device private constructor(
         private const val CONNECTION_ESTABLISH_TIMEOUT_SEC = 5L
         private const val CONNECTION_WAIT_MS = 200L
 
+        @Suppress("MagicNumber")
         fun create(logger: Logger, commandTimeoutSeconds: Long = TimeUnit.MINUTES.toSeconds(3)): Device {
             val desktopDeviceSocketConnection =
                 DesktopDeviceSocketConnectionFactory.getSockets(

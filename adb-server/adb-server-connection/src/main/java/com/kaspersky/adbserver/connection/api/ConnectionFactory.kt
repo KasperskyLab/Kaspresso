@@ -44,6 +44,7 @@ object ConnectionFactory {
             connectionServerLifecycle
         )
 
+    @Suppress("MagicNumber")
     fun createClient(
         socketCreation: () -> Socket,
         logger: Logger,

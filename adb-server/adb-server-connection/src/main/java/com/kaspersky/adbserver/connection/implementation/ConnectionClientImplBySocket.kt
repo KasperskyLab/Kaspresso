@@ -34,6 +34,7 @@ import java.util.concurrent.TimeUnit
  * under the License.
  */
 
+@Suppress("MagicNumber")
 internal class ConnectionClientImplBySocket(
     private val socketCreation: () -> Socket,
     private val logger: Logger,

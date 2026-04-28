@@ -24,6 +24,7 @@ import java.util.concurrent.TimeUnit
  * under the License.
  */
 
+@Suppress("MagicNumber")
 internal class CmdCommandPerformer(
     private val desktopName: String,
     private val logger: Logger,

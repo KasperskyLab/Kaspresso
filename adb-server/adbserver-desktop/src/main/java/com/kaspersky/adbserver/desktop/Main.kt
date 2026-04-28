@@ -31,6 +31,7 @@ private const val DESKTOP = "Desktop-"
 // It is assumed that adb is preinstall and available by "adb" keyword
 private const val DEFAULT_ADB_PATH = "adb"
 
+@Suppress("MagicNumber")
 internal fun main(args: Array<String>) {
     val parser = ArgParser("Adb Server")
 

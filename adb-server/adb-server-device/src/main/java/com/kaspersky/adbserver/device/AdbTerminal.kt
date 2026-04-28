@@ -32,6 +32,7 @@ object AdbTerminal {
 
     private var device: Device? = null
 
+    @Suppress("MagicNumber")
     fun connect(
         logger: Logger = LoggerFactory.getDeviceLogger(LogLevel.INFO),
         commandTimeoutSeconds: Long = TimeUnit.MINUTES.toSeconds(3)
