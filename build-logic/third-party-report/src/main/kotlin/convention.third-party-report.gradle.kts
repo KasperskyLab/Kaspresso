@@ -11,15 +11,15 @@ thirdPartyReport {
 
 thirdPartyReportInclude {
     includeCve(
-        name = "org.jsoup:jsoup",
-        parentId = "CVE-2021-37714",
+        parentId = "org.jsoup:jsoup",
+        name = "CVE-2021-37714",
         action = CveAction.NotApplicable,
         description = "CVE про denial of service вэб страниц. Kaspresso - это фреймворк для UI тестирования Android приложений. " +
                 "В рамках его функциональности не используется парсинг html страниц. В production коде Kaspresso не может использоваться"
     )
     includeCve(
-        name = "org.jsoup:jsoup",
-        parentId = "CVE-2022-36033",
+        parentId = "org.jsoup:jsoup",
+        name = "CVE-2022-36033",
         action = CveAction.NotApplicable,
         description = "Согласно описанию CVE есть риск атаки XSS. В случае мобильных приложений это возможно только в случае тестирования элементов WebView. " +
                 "Однако, библиотеку org.jsoup:jsoup.1.15.1 использует Accessibility Test Framework for Android https://github.com/google/Accessibility-Test-Framework-for-Android. " +
