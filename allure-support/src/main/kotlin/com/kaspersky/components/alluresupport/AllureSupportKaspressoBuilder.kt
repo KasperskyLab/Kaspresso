@@ -141,7 +141,7 @@ private fun Kaspresso.Builder.initVisualTestParams(visualParams: VisualTestParam
         resourcesDirsProvider,
         resourceFileNamesProvider,
     )
-    adbServer = AdbServerImpl(LogLevel.WARN, libLogger)
+    adbServer = AdbServerImpl(LogLevel.WARN, libLogger, adbServerParams.commandTimeoutSeconds)
     files = FilesImpl(libLogger, adbServer)
     visualTestWatcher = AllureVisualTestWatcher(visualTestParams, testLogger, (dirsProvider as AllureDirsProvider), resourcesRootDirsProvider, files)
 }

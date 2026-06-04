@@ -49,6 +49,7 @@ import com.kaspersky.kaspresso.device.screenshots.screenshotmaker.InternalScreen
 import com.kaspersky.kaspresso.device.screenshots.screenshotmaker.ScreenshotMaker
 import com.kaspersky.kaspresso.device.server.AdbServer
 import com.kaspersky.kaspresso.device.server.AdbServerImpl
+import com.kaspersky.kaspresso.device.server.AdbServerParams
 import com.kaspersky.kaspresso.device.video.Videos
 import com.kaspersky.kaspresso.device.video.VideosImpl
 import com.kaspersky.kaspresso.device.video.recorder.VideoRecorderImpl
@@ -383,6 +384,12 @@ data class Kaspresso(
          * Holds an implementation of [AdbServer] interface. If it was not specified, the default implementation is used.
          */
         lateinit var adbServer: AdbServer
+
+        /**
+         * Configuration parameters for the ADB server device-side connection.
+         * Used only when [adbServer] is not set explicitly.
+         */
+        var adbServerParams: AdbServerParams = AdbServerParams()
 
         /**
          * Holds an implementation of [Apps] interface. If it was not specified, the default implementation is used.
@@ -783,7 +790,7 @@ data class Kaspresso(
                 )
             }
 
-            if (!::adbServer.isInitialized) adbServer = AdbServerImpl(LogLevel.WARN, libLogger)
+            if (!::adbServer.isInitialized) adbServer = AdbServerImpl(LogLevel.WARN, libLogger, adbServerParams.commandTimeoutSeconds)
             if (!::apps.isInitialized) apps = AppsImpl(
                 libLogger,
                 instrumentation.context,

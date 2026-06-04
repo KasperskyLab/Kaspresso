@@ -31,6 +31,7 @@ private const val DESKTOP = "Desktop-"
 // It is assumed that adb is preinstall and available by "adb" keyword
 private const val DEFAULT_ADB_PATH = "adb"
 
+@Suppress("MagicNumber")
 internal fun main(args: Array<String>) {
     val parser = ArgParser("Adb Server")
 
@@ -62,14 +63,21 @@ internal fun main(args: Array<String>) {
         description = "Path to custom adb"
     ).default(DEFAULT_ADB_PATH)
 
+    val timeout by parser.option(
+        type = ArgType.Int,
+        shortName = "t",
+        fullName = "timeout",
+        description = "Operation execution timeout in seconds (default: 120)"
+    ).default(120)
+
     parser.parse(args)
 
     val desktopName = getDesktopName()
     val desktopLogger = LoggerFactory.getDesktopLogger(logLevel, desktopName)
 
-    desktopLogger.i("Desktop started with arguments: emulators=$emulators, adbServerPort=$port, adbPath=$adbPath")
+    desktopLogger.i("Desktop started with arguments: emulators=$emulators, adbServerPort=$port, adbPath=$adbPath, timeout=${timeout}s")
 
-    val cmdCommandPerformer = CmdCommandPerformer(desktopName, desktopLogger)
+    val cmdCommandPerformer = CmdCommandPerformer(desktopName, desktopLogger, timeout.toLong())
     val desktop = Desktop(
         cmdCommandPerformer = cmdCommandPerformer,
         presetEmulators = emulators,

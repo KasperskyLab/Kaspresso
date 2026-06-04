@@ -5,6 +5,7 @@ import com.kaspersky.adbserver.connection.implementation.ConnectionClientImplByS
 import com.kaspersky.adbserver.connection.implementation.ConnectionServerImplBySocket
 import com.kaspersky.adbserver.common.log.logger.Logger
 import java.net.Socket
+import java.util.concurrent.TimeUnit
 
 /*
  * Licensed to the Apache Software Foundation (ASF) under one
@@ -43,10 +44,12 @@ object ConnectionFactory {
             connectionServerLifecycle
         )
 
+    @Suppress("MagicNumber")
     fun createClient(
         socketCreation: () -> Socket,
         logger: Logger,
-        connectionClientLifecycle: ConnectionClientLifecycle
+        connectionClientLifecycle: ConnectionClientLifecycle,
+        commandTimeoutSeconds: Long = TimeUnit.MINUTES.toSeconds(3)
     ): ConnectionClient =
-        ConnectionClientImplBySocket(socketCreation, logger, connectionClientLifecycle)
+        ConnectionClientImplBySocket(socketCreation, logger, connectionClientLifecycle, commandTimeoutSeconds)
 }
