@@ -10,6 +10,13 @@ dependencies {
     implementation(projects.adbServer.adbServerCommandTypes)
     implementation(projects.adbServer.adbServerConnection)
     implementation(projects.adbServer.adbServerDesktopDeviceConnection)
+
+    testImplementation(libs.junitJupiter)
+    testImplementation(libs.truth)
+}
+
+tasks.test {
+    useJUnitPlatform()
 }
 
 setProperty("mainClassName", "com.kaspersky.adbserver.desktop.MainKt")
