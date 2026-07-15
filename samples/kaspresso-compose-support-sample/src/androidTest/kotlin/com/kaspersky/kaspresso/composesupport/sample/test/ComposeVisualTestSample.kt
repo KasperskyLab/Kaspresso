@@ -1,12 +1,16 @@
-package com.kaspersky.kaspressample.visual
+package com.kaspersky.kaspresso.composesupport.sample.test
 
 import android.Manifest
 import android.os.Build
-import androidx.test.ext.junit.rules.activityScenarioRule
+import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.test.rule.GrantPermissionRule
-import com.kaspersky.kaspressample.MainActivity
-import com.kaspersky.kaspressample.screen.MainScreen
+import com.kaspersky.components.composesupport.config.withComposeSupport
+import com.kaspersky.components.composesupport.core.assertions.assertScreenshot
+import com.kaspersky.kaspresso.composesupport.sample.MainActivity
+import com.kaspersky.kaspresso.composesupport.sample.screen.ComposeMainScreen
+import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.testcases.api.testcase.VisualTestCase
+import io.github.kakaocup.compose.node.element.ComposeScreen.Companion.onComposeScreen
 import org.junit.Rule
 import org.junit.Test
 
@@ -29,7 +33,9 @@ import org.junit.Test
  * under the License.
  */
 
-class VisualTestSample : VisualTestCase() {
+class ComposeVisualTestSample : VisualTestCase(
+    kaspressoBuilder = Kaspresso.Builder.withComposeSupport()
+) {
 
     @get:Rule
     val runtimePermissionRule: GrantPermissionRule = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -46,15 +52,15 @@ class VisualTestSample : VisualTestCase() {
     }
 
     @get:Rule
-    val activityRule = activityScenarioRule<MainActivity>()
+    val composeTestRule = createAndroidComposeRule<MainActivity>()
 
     @Test
-    fun viewScreenshotTest() = runScreenshotTest {
-        step("Assert view screenshot") {
-            MainScreen {
-                simpleButton {
-                    isVisible()
-                    assertScreenshot("simple_button")
+    fun composeNodeScreenshotTest() = runScreenshotTest {
+        step("Assert compose node screenshot") {
+            onComposeScreen<ComposeMainScreen>(composeTestRule) {
+                simpleFlakyButton {
+                    assertIsDisplayed()
+                    assertScreenshot("simple_flaky_button", device.screenshots)
                 }
             }
         }

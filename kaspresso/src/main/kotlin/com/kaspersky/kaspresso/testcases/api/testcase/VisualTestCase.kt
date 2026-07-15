@@ -1,8 +1,13 @@
 package com.kaspersky.kaspresso.testcases.api.testcase
 
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import androidx.test.espresso.ViewAssertion
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.testcases.core.testcontext.BaseTestContext
 import com.kaspersky.kaspresso.testcases.core.testcontext.TestContext
+import io.github.kakaocup.kakao.common.assertions.BaseAssertions
+import androidx.core.graphics.createBitmap
 
 /*
  * Licensed to the Apache Software Foundation (ASF) under one
@@ -41,5 +46,26 @@ abstract class VisualTestCase(
 
     open fun assertScreenshot(tag: String, isFullWindow: Boolean = false) {
         device.screenshots.assert(tag, isFullWindow)
+    }
+
+    fun BaseAssertions.assertScreenshot(tag: String) {
+        assert { createScreenshotAssertion(tag) }
+    }
+
+    private fun createScreenshotAssertion(tag: String): ViewAssertion {
+        return ViewAssertion { view, noViewFoundException ->
+            if (view == null) {
+                throw noViewFoundException ?: AssertionError("Target view is null")
+            }
+
+            check(view.width > 0 && view.height > 0) {
+                "Target view should have non-zero size, but was ${view.width}x${view.height}"
+            }
+
+            val bitmap = createBitmap(view.width, view.height)
+            val canvas = Canvas(bitmap)
+            view.draw(canvas)
+            device.screenshots.assert(tag, bitmap)
+        }
     }
 }

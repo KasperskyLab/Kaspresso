@@ -1,5 +1,6 @@
 package com.kaspersky.kaspresso.device.screenshots
 
+import android.graphics.Bitmap
 import android.util.Log
 import com.kaspersky.kaspresso.device.screenshots.screenshotmaker.ScreenshotMaker
 import com.kaspersky.kaspresso.files.dirs.DirsProvider
@@ -12,6 +13,7 @@ import com.kaspersky.kaspresso.visual.ScreenshotsComparator
 import com.kaspersky.kaspresso.visual.VisualTestParams
 import com.kaspersky.kaspresso.visual.VisualTestType
 import java.io.File
+import java.io.FileOutputStream
 
 /*
  * Licensed to the Apache Software Foundation (ASF) under one
@@ -71,7 +73,11 @@ class ScreenshotsImpl(
 
     override fun assert(tag: String, isFullWindow: Boolean) = assertImpl(tag, isFullWindow, block = null)
 
+    override fun assert(tag: String, bitmap: Bitmap) = assertImpl(tag, bitmap, block = null)
+
     override fun assertAndApply(tag: String, isFullWindow: Boolean, block: File.() -> Unit) = assertImpl(tag, isFullWindow, block)
+
+    override fun assertAndApply(tag: String, bitmap: Bitmap, block: File.() -> Unit) = assertImpl(tag, bitmap, block)
 
     private fun assertImpl(tag: String, isFullWindow: Boolean, block: (File.() -> Unit)?) {
         logger.i("Assert screenshot with tag: $tag")
@@ -89,6 +95,37 @@ class ScreenshotsImpl(
         }
 
         block?.invoke(screenshot)
+    }
+
+    private fun assertImpl(tag: String, bitmap: Bitmap, block: (File.() -> Unit)?) {
+        logger.i("Assert screenshot with tag: $tag")
+        val screenshot = provideScreenshotFileForAssert(tag)
+        saveBitmap(bitmap, screenshot)
+
+        if (visualTestParams.testType == VisualTestType.Compare) {
+            screenshot.compare()
+        }
+
+        block?.invoke(screenshot)
+    }
+
+    private fun provideScreenshotFileForAssert(tag: String): File {
+        return if (visualTestParams.testType == VisualTestType.Compare) {
+            resourceFilesProvider.provideScreenshotFile(tag)
+        } else {
+            originalScreenshotsDir.mkdirs()
+            resourcesDirsProvider.provide(originalScreenshotsDir)
+                .resolve(resourceFileNamesProvider.getFileName(tag, FileExtension.PNG.toString()))
+        }
+    }
+
+    private fun saveBitmap(bitmap: Bitmap, screenshotFile: File) {
+        screenshotFile.parentFile?.mkdirs()
+        FileOutputStream(screenshotFile).use { outputStream ->
+            val isSaved = bitmap.compress(Bitmap.CompressFormat.PNG, QUALITY, outputStream)
+            check(isSaved) { "Failed to save bitmap screenshot to ${screenshotFile.absolutePath}" }
+        }
+        logger.i("Screenshot saved to $screenshotFile")
     }
 
     private fun File.compare() {
@@ -122,4 +159,8 @@ class ScreenshotsImpl(
     }
 
     class ScreenshotDoesntMatchException(message: String) : Exception(message)
+
+    companion object {
+        private const val QUALITY = 100
+    }
 }

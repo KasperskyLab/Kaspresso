@@ -1,5 +1,6 @@
 package com.kaspersky.kaspresso.device.screenshots
 
+import android.graphics.Bitmap
 import java.io.File
 
 /*
@@ -64,5 +65,21 @@ interface Screenshots {
 
     fun assert(tag: String, isFullWindow: Boolean)
 
+    /**
+     * Saves the provided [bitmap] as a screenshot and asserts it against the reference screenshot
+     * if visual tests are in compare mode.
+     *
+     * @param tag a unique tag to further identify the screenshot. Must match [a-zA-Z0-9_-]+.
+     */
+    fun assert(tag: String, bitmap: Bitmap)
+
     fun assertAndApply(tag: String, isFullWindow: Boolean, block: File.() -> Unit)
+
+    /**
+     * Saves the provided [bitmap] as a screenshot, asserts it against the reference screenshot
+     * if visual tests are in compare mode, and applies a function on the file.
+     *
+     * @param tag a unique tag to further identify the screenshot. Must match [a-zA-Z0-9_-]+.
+     */
+    fun assertAndApply(tag: String, bitmap: Bitmap, block: File.() -> Unit)
 }
