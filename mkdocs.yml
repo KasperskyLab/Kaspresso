@@ -183,6 +183,7 @@ nav:
       - Kaspresso with Robolectric: Wiki/Kaspresso_Robolectric.md
       - Kaspresso with Allure: Wiki/Kaspresso_Allure.md
       - Jetpack Compose in Kaspresso: Wiki/Jetpack_Compose.md
+      - Screenshots comparison: Wiki/Pixel_by_pixel_comparison
   - Issues:
       - Found an issue?: Issues/index.md
       - Storage issues: Issues/Storage_issue.md
