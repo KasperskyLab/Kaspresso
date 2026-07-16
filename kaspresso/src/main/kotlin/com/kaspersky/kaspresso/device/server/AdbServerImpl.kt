@@ -137,7 +137,7 @@ class AdbServerImpl(
             throw AdbServerException(
                 """
 
-                    AdbServer. The command=$command was performed with timeout exception.
+                    AdbServer. The command=$command was performed with timeout exception. The result=$result
                     There are two possible reasons:
 
                     1. The test is executing on the JVM (with Robolectric) environment and the test uses AdbServer. But, Unit tests can't use this implementation of AdbServer.
