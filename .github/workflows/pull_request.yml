@@ -8,17 +8,17 @@ jobs:
   pull-request-checks:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/cache@v3
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v4
         with:
           path: ~/.gradle/caches
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
       - name: Set up JDK
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v4
         with:
-          distribution: 'adopt'
+          distribution: 'temurin'
           java-version: 17
       - name: Run static analysis
         run: make static_analysis
@@ -26,3 +26,97 @@ jobs:
         run: make unit_tests
       - name: Build project
         run: make compile_all
+
+  build-sample-test-apks:
+    needs: [ pull-request-checks ]
+    name: Build sample test APKs
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v4
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: 17
+      - name: Build sample APKs
+        run: |
+          ./gradlew \
+            :samples:kaspresso-sample:assembleDebug \
+            :samples:kaspresso-sample:assembleDebugAndroidTest \
+            :samples:kautomator-sample:assembleDebug \
+            :samples:kautomator-sample:assembleDebugAndroidTest \
+            :samples:kautomator-sample:kautomator-compiletime-r-sanity:assembleDebug \
+            :samples:kautomator-sample:kautomator-compiletime-r-sanity:assembleDebugAndroidTest \
+            :samples:kautomator-sample-app-upgrade:assembleDebug \
+            :samples:kautomator-sample-app-upgrade:assembleDebugAndroidTest \
+            :samples:kaspresso-allure-support-sample:assembleDebug \
+            :samples:kaspresso-allure-support-sample:assembleDebugAndroidTest \
+            :samples:kaspresso-compose-support-sample:assembleDebug \
+            :samples:kaspresso-compose-support-sample:assembleDebugAndroidTest
+      - name: Upload sample APKs
+        uses: actions/upload-artifact@v4
+        with:
+          name: sample-test-apks
+          retention-days: 1
+          if-no-files-found: error
+          path: |
+            samples/kaspresso-sample/build/outputs/apk/debug/kaspresso-sample-debug.apk
+            samples/kaspresso-sample/build/outputs/apk/androidTest/debug/kaspresso-sample-debug-androidTest.apk
+            samples/kautomator-sample/build/outputs/apk/debug/kautomator-sample-debug.apk
+            samples/kautomator-sample/build/outputs/apk/androidTest/debug/kautomator-sample-debug-androidTest.apk
+            samples/kautomator-sample/kautomator-compiletime-r-sanity/build/outputs/apk/debug/kautomator-compiletime-r-sanity-debug.apk
+            samples/kautomator-sample/kautomator-compiletime-r-sanity/build/outputs/apk/androidTest/debug/kautomator-compiletime-r-sanity-debug-androidTest.apk
+            samples/kautomator-sample-app-upgrade/build/outputs/apk/debug/kautomator-sample-app-upgrade-debug.apk
+            samples/kautomator-sample-app-upgrade/build/outputs/apk/androidTest/debug/kautomator-sample-app-upgrade-debug-androidTest.apk
+            samples/kaspresso-allure-support-sample/build/outputs/apk/debug/kaspresso-allure-support-sample-debug.apk
+            samples/kaspresso-allure-support-sample/build/outputs/apk/androidTest/debug/kaspresso-allure-support-sample-debug-androidTest.apk
+            samples/kaspresso-compose-support-sample/build/outputs/apk/debug/kaspresso-compose-support-sample-debug.apk
+            samples/kaspresso-compose-support-sample/build/outputs/apk/androidTest/debug/kaspresso-compose-support-sample-debug-androidTest.apk
+
+  firebase-lab-test:
+    needs: [ build-sample-test-apks ]
+    name: Firebase Test Lab (${{ matrix.sample.name }}, API ${{ matrix.api }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        api: [ 21, 30, 36 ]
+        sample:
+          - name: kaspresso-sample
+            app: samples/kaspresso-sample/build/outputs/apk/debug/kaspresso-sample-debug.apk
+            test: samples/kaspresso-sample/build/outputs/apk/androidTest/debug/kaspresso-sample-debug-androidTest.apk
+          - name: kautomator-sample
+            app: samples/kautomator-sample/build/outputs/apk/debug/kautomator-sample-debug.apk
+            test: samples/kautomator-sample/build/outputs/apk/androidTest/debug/kautomator-sample-debug-androidTest.apk
+          - name: kautomator-compiletime-r-sanity
+            app: samples/kautomator-sample/kautomator-compiletime-r-sanity/build/outputs/apk/debug/kautomator-compiletime-r-sanity-debug.apk
+            test: samples/kautomator-sample/kautomator-compiletime-r-sanity/build/outputs/apk/androidTest/debug/kautomator-compiletime-r-sanity-debug-androidTest.apk
+          - name: kautomator-sample-app-upgrade
+            app: samples/kautomator-sample-app-upgrade/build/outputs/apk/debug/kautomator-sample-app-upgrade-debug.apk
+            test: samples/kautomator-sample-app-upgrade/build/outputs/apk/androidTest/debug/kautomator-sample-app-upgrade-debug-androidTest.apk
+          - name: kaspresso-allure-support-sample
+            app: samples/kaspresso-allure-support-sample/build/outputs/apk/debug/kaspresso-allure-support-sample-debug.apk
+            test: samples/kaspresso-allure-support-sample/build/outputs/apk/androidTest/debug/kaspresso-allure-support-sample-debug-androidTest.apk
+          - name: kaspresso-compose-support-sample
+            app: samples/kaspresso-compose-support-sample/build/outputs/apk/debug/kaspresso-compose-support-sample-debug.apk
+            test: samples/kaspresso-compose-support-sample/build/outputs/apk/androidTest/debug/kaspresso-compose-support-sample-debug-androidTest.apk
+    steps:
+      - name: Download sample APKs
+        uses: actions/download-artifact@v4
+        with:
+          name: sample-test-apks
+      - name: Run ${{ matrix.sample.name }} tests on Firebase Test Lab API ${{ matrix.api }}
+        uses: vacxe/firebase-test-lab-action@0.0.6
+        with:
+          service-account: ${{ secrets.FIREBASE_TESTLAB_JSON }}
+          app: ${{ matrix.sample.app }}
+          test: ${{ matrix.sample.test }}
+          device-id: MediumPhone.arm
+          os-version-id: ${{ matrix.api }}
+          num-flaky-test-attempts: 4
