@@ -35,6 +35,8 @@ import com.kaspersky.kaspresso.device.logcat.dumper.LogcatDumper
 import com.kaspersky.kaspresso.device.logcat.dumper.LogcatDumperImpl
 import com.kaspersky.kaspresso.device.network.Network
 import com.kaspersky.kaspresso.device.network.NetworkImpl
+import com.kaspersky.kaspresso.device.nfc.Nfc
+import com.kaspersky.kaspresso.device.nfc.NfcDefault
 import com.kaspersky.kaspresso.device.permissions.HackPermissions
 import com.kaspersky.kaspresso.device.permissions.HackPermissionsImpl
 import com.kaspersky.kaspresso.device.permissions.Permissions
@@ -415,6 +417,14 @@ data class Kaspresso(
          * Holds an implementation of [Network] interface. If it was not specified, the default implementation is used.
          */
         lateinit var network: Network
+
+        /**
+         * Holds an implementation of [Nfc] interface. If it was not specified, the default implementation is used.
+         *
+         * **Important:** The default implementation works only on physical devices.
+         * Android emulators do not have NFC hardware.
+         */
+        lateinit var nfc: Nfc
 
         /**
          * Holds an implementation of [Phone] interface. If it was not specified, the default implementation is used.
@@ -809,6 +819,12 @@ data class Kaspresso(
                 instrumentation.targetContext,
                 adbServer
             )
+            if (!::nfc.isInitialized) nfc = NfcDefault(
+                libLogger,
+                instrumentation.targetContext,
+                instrumentalDependencyProviderFactory.getComponentProvider<NfcDefault>(instrumentation),
+                adbServer
+            )
             if (!::phone.isInitialized) phone = PhoneImpl(libLogger, adbServer)
             if (!::location.isInitialized) location = LocationImpl(libLogger, adbServer)
             if (!::keyboard.isInitialized) keyboard = KeyboardImpl(libLogger, adbServer)
@@ -1064,6 +1080,7 @@ data class Kaspresso(
                     bluetooth = bluetooth,
                     files = files,
                     network = network,
+                    nfc = nfc,
                     phone = phone,
                     location = location,
                     keyboard = keyboard,

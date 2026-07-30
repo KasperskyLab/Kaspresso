@@ -14,6 +14,7 @@ import com.kaspersky.kaspresso.device.languages.Language
 import com.kaspersky.kaspresso.device.location.Location
 import com.kaspersky.kaspresso.device.logcat.Logcat
 import com.kaspersky.kaspresso.device.network.Network
+import com.kaspersky.kaspresso.device.nfc.Nfc
 import com.kaspersky.kaspresso.device.permissions.HackPermissions
 import com.kaspersky.kaspresso.device.permissions.Permissions
 import com.kaspersky.kaspresso.device.phone.Phone
@@ -84,6 +85,17 @@ data class Device(
      *     2. Start AdbServer => input in cmd "java jar path_to_file/adbserver-desktop.jar"
      */
     val network: Network,
+
+    /**
+     * Holds the reference to the implementation of [Nfc] interface.
+     *
+     * **Important:** Works only on physical devices. Android emulators do not have NFC hardware.
+     *
+     * Required: Started AdbServer (for the primary toggle strategy)
+     *     1. Download a file "kaspresso/artifacts/adbserver-desktop.jar"
+     *     2. Start AdbServer => input in cmd "java -jar path_to_file/adbserver-desktop.jar"
+     */
+    val nfc: Nfc,
 
     /**
      * Holds the reference to the implementation of [Phone] interface.
