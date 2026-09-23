@@ -3,6 +3,8 @@ package com.kaspersky.adbserver.desktop
 import com.kaspersky.adbserver.common.api.CommandResult
 import com.kaspersky.adbserver.common.api.ExecutorResultStatus
 import com.kaspersky.adbserver.common.log.logger.Logger
+import java.io.InputStream
+import java.util.concurrent.CompletableFuture
 import java.util.concurrent.TimeUnit
 
 /*
@@ -52,18 +54,23 @@ internal class CmdCommandPerformer(
             return CommandResult(ExecutorResultStatus.FAILURE, "failed to start process. See exception in AdbServer logs")
         }
 
+        val stdoutFuture = readStreamAsync(process.inputStream)
+        val stderrFuture = readStreamAsync(process.errorStream)
+
         try {
             if (process.waitFor(executionTimeoutSeconds, TimeUnit.SECONDS)) {
                 val exitCode = process.exitValue()
+                val stdout = stdoutFuture.get()
+                val stderr = stderrFuture.get()
                 return if (exitCode != 0) {
-                    val error = "exitCode=$exitCode, message=${process.errorStream.bufferedReader().readText()}"
+                    val error = "exitCode=$exitCode, message=$stderr"
                     CommandResult(
                         status = ExecutorResultStatus.FAILURE,
                         description = error,
                         serviceInfo = serviceInfo
                     )
                 } else {
-                    val success = "exitCode=$exitCode, message=${process.inputStream.bufferedReader().readText()}"
+                    val success = "exitCode=$exitCode, message=$stdout"
                     CommandResult(
                         status = ExecutorResultStatus.SUCCESS,
                         description = success,
@@ -71,13 +78,21 @@ internal class CmdCommandPerformer(
                     )
                 }
             }
+            stdoutFuture.cancel(true)
+            stderrFuture.cancel(true)
             return CommandResult(
                 status = ExecutorResultStatus.TIMEOUT,
                 description = "Command execution timeout ($executionTimeoutSeconds sec) overhead",
                 serviceInfo = serviceInfo
             )
         } finally {
-            process?.destroy()
+            process.destroyForcibly()
+        }
+    }
+
+    private fun readStreamAsync(inputStream: InputStream): CompletableFuture<String> {
+        return CompletableFuture.supplyAsync {
+            inputStream.bufferedReader().use { it.readText() }
         }
     }
 }
