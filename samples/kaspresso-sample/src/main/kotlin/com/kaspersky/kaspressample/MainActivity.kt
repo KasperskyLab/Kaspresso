@@ -12,6 +12,7 @@ import com.kaspersky.kaspressample.devicefull.DeviceFullWindowSampleActivity
 import com.kaspersky.kaspressample.flaky.CommonFlakyActivity
 import com.kaspersky.kaspressample.idlingwait.WaitForIdleActivity
 import com.kaspersky.kaspressample.measure.MeasureActivity
+import com.kaspersky.kaspressample.localization.LocalizationExerciseActivity
 import com.kaspersky.kaspressample.simple.SimpleActivity
 import com.kaspersky.kaspressample.systemdialogs.SystemDialogsActivity
 import com.kaspersky.kaspressample.systemlanguage.ChangeLocaleActivity
@@ -100,6 +101,10 @@ class MainActivity : AppCompatActivity() {
 
         binding.activityWithToolbarButton.setOnClickListener {
             startActivity(Intent(this, WithToolbarActivity::class.java))
+        }
+
+        binding.activityMainLocalizationExerciseButton.setOnClickListener {
+            startActivity(Intent(this, LocalizationExerciseActivity::class.java))
         }
 
         setContentView(binding.root)

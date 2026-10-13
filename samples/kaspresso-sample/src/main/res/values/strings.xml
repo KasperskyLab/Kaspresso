@@ -18,6 +18,19 @@
     <string name="main_screen_system_dialogs_button">System Dialogs Sample</string>
     <string name="main_screen_change_language_mid_test_button">Change locale mid-test</string>
     <string name="main_screen_activity_with_toolbar_button">Activity with toolbar</string>
+    <string name="main_screen_localization_exercise_button">Localization exercise</string>
+
+    <!-- Localization exercise screen -->
+    <string name="localization_screen_title">Profile settings</string>
+    <string name="localization_screen_heading">Your profile</string>
+    <string name="localization_screen_description">Add your details to personalize your experience.</string>
+    <string name="localization_screen_name_label">Full name</string>
+    <string name="localization_screen_name_hint">Enter your name</string>
+    <string name="localization_screen_email_label">Email address</string>
+    <string name="localization_screen_email_hint">Enter your email</string>
+    <string name="localization_screen_save_button">Save changes</string>
+    <string name="localization_screen_cancel_button">Cancel</string>
+    <string name="localization_screen_saved_message">Your profile has been saved.</string>
 
     <!-- Auto scroll fallback screen -->
     <string name="autoscroll_scrollview_with_padding_title">Auto scroll ScrollView with padding</string>
