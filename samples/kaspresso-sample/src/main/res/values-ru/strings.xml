@@ -18,6 +18,19 @@
     <string name="main_screen_system_dialogs_button">System Dialogs пример</string>
     <string name="main_screen_change_language_mid_test_button">Сменить локаль во время теста</string>
     <string name="main_screen_activity_with_toolbar_button">Пример с toolbar</string>
+    <string name="main_screen_localization_exercise_button">Упражнение по локализации</string>
+
+    <!-- Localization exercise screen -->
+    <string name="localization_screen_title">Настройки профиля</string>
+    <string name="localization_screen_heading">Ваш профиль</string>
+    <string name="localization_screen_description">Добавьте данные, чтобы настроить приложение под себя.</string>
+    <string name="localization_screen_name_label">Имя и фамилия</string>
+    <string name="localization_screen_name_hint">Введите имя</string>
+    <string name="localization_screen_email_label">Адрес электронной почты</string>
+    <string name="localization_screen_email_hint">Введите адрес электронной почты</string>
+    <string name="localization_screen_save_button">Сохранить изменения</string>
+    <string name="localization_screen_cancel_button">Отмена</string>
+    <string name="localization_screen_saved_message">Профиль сохранён.</string>
 
     <!-- Auto scroll fallback screen -->
     <string name="autoscroll_scrollview_with_padding_title">Auto scroll ScrollView with padding</string>

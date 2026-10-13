@@ -7,7 +7,7 @@ import com.kaspersky.kaspresso.testcases.api.testcase.DocLocScreenshotTestCase
 import org.junit.Rule
 import org.junit.Test
 
-class LocalizationExerciseScreenshotTest : DocLocScreenshotTestCase(locales = "en") {
+class LocalizationExerciseScreenshotTest : DocLocScreenshotTestCase(locales = "en,ru") {
 
     @get:Rule
     val activityRule = activityScenarioRule<LocalizationExerciseActivity>()
